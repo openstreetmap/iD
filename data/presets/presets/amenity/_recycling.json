@@ -1,0 +1,27 @@
+{
+    "icon": "maki-recycling",
+    "fields": [
+        "recycling_type",
+        "recycling_accepts",
+        "collection_times"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bin",
+        "can",
+        "bottle",
+        "glass",
+        "garbage",
+        "rubbish",
+        "scrap",
+        "trash"
+    ],
+    "tags": {
+        "amenity": "recycling"
+    },
+    "name": "Recycling",
+    "searchable": false
+}

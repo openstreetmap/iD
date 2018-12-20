@@ -153,7 +153,7 @@ describe('iD.Difference', function () {
 
     describe('#summary', function () {
         var base = iD.Graph([
-            iD.Node({id: 'a', tags: {crossing: 'zebra'}}),
+            iD.Node({id: 'a', tags: {crossing: 'marked'}}),
             iD.Node({id: 'b'}),
             iD.Node({id: 'v'}),
             iD.Way({id: '-', nodes: ['a', 'b']})
@@ -315,7 +315,7 @@ describe('iD.Difference', function () {
         });
 
         it('reports a vertex as created when it has tags', function() {
-            var vertex = iD.Node({id: 'c', tags: {crossing: 'zebra'}}),
+            var vertex = iD.Node({id: 'c', tags: {crossing: 'marked'}}),
                 way = base.entity('-').addNode('c'),
                 head = base.replace(way).replace(vertex),
                 diff = iD.Difference(base, head);

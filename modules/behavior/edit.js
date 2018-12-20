@@ -1,16 +1,15 @@
 export function behaviorEdit(context) {
 
-    function edit() {
+    function behavior() {
         context.map()
             .minzoom(context.minEditableZoom());
     }
 
 
-    edit.off = function() {
+    behavior.off = function() {
         context.map()
             .minzoom(0);
     };
 
-
-    return edit;
+    return behavior;
 }

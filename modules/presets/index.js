@@ -3,6 +3,8 @@ import _forEach from 'lodash-es/forEach';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
 
+import { json as d3_json } from 'd3-request';
+
 import { data } from '../../data/index';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -35,42 +37,43 @@ export function presetIndex() {
     };
 
     all.match = function(entity, resolver) {
-        var geometry = entity.geometry(resolver);
-        var address;
+        return resolver.transient(entity, 'presetMatch', function() {
+            var geometry = entity.geometry(resolver);
+            var address;
 
-        // Treat entities on addr:interpolation lines as points, not vertices - #3241
-        if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
-            geometry = 'point';
-        }
-
-        var geometryMatches = _index[geometry];
-        var best = -1;
-        var match;
-
-        for (var k in entity.tags) {
-            // If any part of an address is present,
-            // allow fallback to "Address" preset - #4353
-            if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
-                address = geometryMatches['addr:*'][0];
+            // Treat entities on addr:interpolation lines as points, not vertices - #3241
+            if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
+                geometry = 'point';
             }
 
-            var keyMatches = geometryMatches[k];
-            if (!keyMatches) continue;
+            var geometryMatches = _index[geometry];
+            var best = -1;
+            var match;
 
-            for (var i = 0; i < keyMatches.length; i++) {
-                var score = keyMatches[i].matchScore(entity);
-                if (score > best) {
-                    best = score;
-                    match = keyMatches[i];
+            for (var k in entity.tags) {
+                // If any part of an address is present,
+                // allow fallback to "Address" preset - #4353
+                if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
+                    address = geometryMatches['addr:*'][0];
+                }
+
+                var keyMatches = geometryMatches[k];
+                if (!keyMatches) continue;
+
+                for (var i = 0; i < keyMatches.length; i++) {
+                    var score = keyMatches[i].matchScore(entity);
+                    if (score > best) {
+                        best = score;
+                        match = keyMatches[i];
+                    }
                 }
             }
-        }
 
-        if (address && (!match || match.isFallback())) {
-            match = address;
-        }
-
-        return match || all.item(geometry);
+            if (address && (!match || match.isFallback())) {
+                match = address;
+            }
+            return match || all.item(geometry);
+        });
     };
 
 
@@ -118,16 +121,7 @@ export function presetIndex() {
         return areaKeys;
     };
 
-
-    all.init = function() {
-        var d = data.presets;
-
-        all.collection = [];
-        _recent.collection = [];
-        _fields = {};
-        _universal = [];
-        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
+    all.build = function(d, visible) {
         if (d.fields) {
             _forEach(d.fields, function(d, id) {
                 _fields[id] = presetField(id, d);
@@ -137,15 +131,29 @@ export function presetIndex() {
             });
         }
 
+        // move the wikidata field to directly follow the wikipedia field
+        _universal.splice(_universal.indexOf(_fields.wikidata), 1);
+        _universal.splice(_universal.indexOf(_fields.wikipedia)+1, 0, _fields.wikidata);
+
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields));
+                var existing = all.index(id);
+                if (existing !== -1) {
+                    all.collection[existing] = presetPreset(id, d, _fields, visible);
+                } else {
+                    all.collection.push(presetPreset(id, d, _fields, visible));
+                }
             });
         }
 
         if (d.categories) {
             _forEach(d.categories, function(d, id) {
-                all.collection.push(presetCategory(id, d, all));
+                var existing = all.index(id);
+                if (existing !== -1) {
+                    all.collection[existing] = presetCategory(id, d, all);
+                } else {
+                    all.collection.push(presetCategory(id, d, all));
+                }
             });
         }
 
@@ -171,8 +179,50 @@ export function presetIndex() {
                 }
             }
         }
+        return all;
+    };
+
+    all.init = function() {
+        all.collection = [];
+        _recent.collection = [];
+        _fields = {};
+        _universal = [];
+        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+
+        return all.build(data.presets, true);
+    };
+
+
+    all.reset = function() {
+        all.collection = [];
+        _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
+        _fields = {};
+        _universal = [];
+        _recent = presetCollection([]);
+
+        // Index of presets by (geometry, tag key).
+        _index = {
+            point: {},
+            vertex: {},
+            line: {},
+            area: {},
+            relation: {}
+        };
 
         return all;
+    };
+
+    all.fromExternal = function(external, done) {
+        all.reset();
+        d3_json(external, function(err, externalPresets) {
+            if (err) {
+                all.init();
+            } else {
+                all.build(data.presets, false); // make default presets hidden to begin
+                all.build(externalPresets, true); // make the external visible
+            }
+            done(all);
+        });
     };
 
     all.field = function(id) {
@@ -190,7 +240,9 @@ export function presetIndex() {
     };
 
     all.choose = function(preset) {
-        _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        if (preset.searchable !== false) {
+            _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        }
         return all;
     };
 

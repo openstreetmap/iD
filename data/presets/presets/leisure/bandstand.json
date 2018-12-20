@@ -1,0 +1,16 @@
+{
+    "icon": "maki-music",
+    "fields": [
+        "name",
+        "building_area",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "bandstand"
+    },
+    "name": "Bandstand"
+}

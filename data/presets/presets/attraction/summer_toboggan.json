@@ -1,0 +1,18 @@
+{
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "alpine slide",
+        "mountain coaster"
+    ],
+    "tags": {
+        "attraction": "summer_toboggan"
+    },
+    "name": "Summer Toboggan"
+}

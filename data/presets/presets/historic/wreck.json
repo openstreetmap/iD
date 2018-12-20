@@ -1,0 +1,35 @@
+{
+    "icon": "temaki-ruins",
+    "fields": [
+        "name",
+        "access_simple",
+        "seamark/wreck/category",
+        "historic/wreck/date_sunk",
+        "historic/wreck/visible_at_low_tide",
+        "historic/wreck/visible_at_high_tide"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "wreck"
+    },
+    "addTags": {
+    	"historic": "wreck",
+        "seamark:type": "wreck"
+    },
+    "removeTags": {
+    	"historic": "wreck",
+        "seamark:type": "wreck"
+    },
+    "terms": [
+        "hull",
+        "mast",
+        "maritime",
+        "remains",
+        "ship",
+        "boat"
+    ],
+    "name": "Shipwreck"
+}

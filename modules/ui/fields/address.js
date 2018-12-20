@@ -5,43 +5,35 @@ import _uniqBy from 'lodash-es/uniqBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { dataAddressFormats } from '../../../data';
-
-import {
-    geoExtent,
-    geoChooseEdge,
-    geoSphericalDistance
-} from '../../geo';
-
+import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldAddress(field, context) {
-    var dispatch = d3_dispatch('init', 'change'),
-        nominatim = services.geocoder,
-        wrap = d3_select(null),
-        isInitialized = false,
-        entity;
+    var dispatch = d3_dispatch('init', 'change');
+    var nominatim = services.geocoder;
+    var wrap = d3_select(null);
+    var _isInitialized = false;
+    var _entity;
 
     function getNearStreets() {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var streets = context.intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 var loc = context.projection([
                     (extent[0][0] + extent[1][0]) / 2,
-                    (extent[0][1] + extent[1][1]) / 2]),
-                    choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
+                    (extent[0][1] + extent[1][1]) / 2
+                ]);
+                var choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
+
                 return {
                     title: d.tags.name,
                     value: d.tags.name,
@@ -61,9 +53,9 @@ export function uiFieldAddress(field, context) {
 
 
     function getNearCities() {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var cities = context.intersects(box)
             .filter(isAddressable)
@@ -99,14 +91,12 @@ export function uiFieldAddress(field, context) {
     }
 
     function getNearValues(key) {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) {
-                return d.tags[key];
-            })
+            .filter(function hasTag(d) { return d.tags[key]; })
             .map(function(d) {
                 return {
                     title: d.tags[key],
@@ -122,12 +112,18 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function initCallback(err, countryCode) {
+    function countryCallback(err, countryCode) {
         if (err) return;
 
         var addressFormat = _find(dataAddressFormats, function (a) {
             return a && a.countryCodes && _includes(a.countryCodes, countryCode.toLowerCase());
         }) || dataAddressFormats[0];
+
+        var dropdowns = addressFormat.dropdowns || [
+            'city', 'county', 'country', 'district', 'hamlet',
+            'neighbourhood', 'place', 'postcode', 'province',
+            'quarter', 'state', 'street', 'subdistrict', 'suburb'
+        ];
 
         var widths = addressFormat.widths || {
             housenumber: 1/3, street: 2/3,
@@ -136,19 +132,19 @@ export function uiFieldAddress(field, context) {
 
         function row(r) {
             // Normalize widths.
-            var total = _reduce(r, function(sum, field) {
-                return sum + (widths[field] || 0.5);
+            var total = _reduce(r, function(sum, key) {
+                return sum + (widths[key] || 0.5);
             }, 0);
 
-            return r.map(function (field) {
+            return r.map(function(key) {
                 return {
-                    id: field,
-                    width: (widths[field] || 0.5) / total
+                    id: key,
+                    width: (widths[key] || 0.5) / total
                 };
             });
         }
 
-        wrap.selectAll('div.addr-row')
+        wrap.selectAll('.addr-row')
             .data(addressFormat.format)
             .enter()
             .append('div')
@@ -159,38 +155,31 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .attr('placeholder', function (d) {
-                var localkey = d.id + '!' + countryCode.toLowerCase(),
-                    tkey = field.strings.placeholders[localkey] ? localkey : d.id;
+                var localkey = d.id + '!' + countryCode.toLowerCase();
+                var tkey = field.strings.placeholders[localkey] ? localkey : d.id;
                 return field.t('placeholders.' + tkey);
             })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
+            .each(addDropdown)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
-        // Update
 
-        // setup dropdowns for common address tags
-        var dropdowns = addressFormat.dropdowns || [
-            'city', 'county', 'country', 'district', 'hamlet',
-            'neighbourhood', 'place', 'postcode', 'province',
-            'quarter', 'state', 'street', 'subdistrict', 'suburb'
-        ];
+        function addDropdown(d) {
+            if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
 
-        // If fields exist for any of these tags, create dropdowns to pick nearby values..
-        dropdowns.forEach(function(tag) {
-            var nearValues = (tag === 'street') ? getNearStreets
-                    : (tag === 'city') ? getNearCities
-                    : getNearValues;
+            var nearValues = (d.id === 'street') ? getNearStreets
+                : (d.id === 'city') ? getNearCities
+                : getNearValues;
 
-            wrap.selectAll('input.addr-' + tag)
-                .call(d3_combobox()
-                    .container(context.container())
+            d3_select(this)
+                .call(uiCombobox(context, 'address-' + d.id)
                     .minItems(1)
                     .fetcher(function(value, callback) {
-                        callback(nearValues('addr:' + tag));
+                        callback(nearValues('addr:' + d.id));
                     })
                 );
-        });
+        }
 
         wrap.selectAll('input')
             .on('blur', change())
@@ -200,24 +189,24 @@ export function uiFieldAddress(field, context) {
             .on('input', change(true));
 
         dispatch.call('init');
-        isInitialized = true;
+        _isInitialized = true;
     }
 
 
     function address(selection) {
-        isInitialized = false;
+        _isInitialized = false;
 
-        wrap = selection.selectAll('.preset-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        if (nominatim && entity) {
-            var center = entity.extent(context.graph()).center();
-            nominatim.countryCode(center, initCallback);
+        if (nominatim && _entity) {
+            var center = _entity.extent(context.graph()).center();
+            nominatim.countryCode(center, countryCallback);
         }
     }
 
@@ -243,15 +232,15 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    address.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    address.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return address;
     };
 
 
     address.tags = function(tags) {
-        if (isInitialized) {
+        if (_isInitialized) {
             updateTags(tags);
         } else {
             dispatch.on('init', function () {

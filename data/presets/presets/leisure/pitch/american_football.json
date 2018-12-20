@@ -1,5 +1,5 @@
 {
-    "icon": "maki-america-football",
+    "icon": "maki-american-football",
     "fields": [
         "name",
         "surface",
@@ -17,6 +17,9 @@
         "key": "sport",
         "value": "american_football"
     },
-    "terms": [],
+    "terms": [
+        "football",
+        "gridiron"
+    ],
     "name": "American Football Field"
 }

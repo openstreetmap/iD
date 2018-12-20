@@ -1,0 +1,18 @@
+{
+    "icon": "fas-fish",
+    "fields": [
+        "name",
+        "access_simple"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fishing"
+    },
+    "terms": [
+        "angler"
+    ],
+    "name": "Fishing Spot"
+}

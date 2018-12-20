@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 const requireESM = require('esm')(module);
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
-const _extend = requireESM('lodash-es/extend').default;
 const _forEach = requireESM('lodash-es/forEach').default;
+const _intersection = requireESM('lodash-es/intersection').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
@@ -18,13 +18,13 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
-const suggestions = require('name-suggestion-index/name-suggestions.json');
+const suggestions = require('name-suggestion-index').names;
 
 // fontawesome icons
-const fontawesome = require('@fortawesome/fontawesome');
-const fas = require('@fortawesome/fontawesome-free-solid').default;
-const far = require('@fortawesome/fontawesome-free-regular').default;
-const fab = require('@fortawesome/fontawesome-free-brands').default;
+const fontawesome = require('@fortawesome/fontawesome-svg-core');
+const fas = require('@fortawesome/free-solid-svg-icons').fas;
+const far = require('@fortawesome/free-regular-svg-icons').far;
+const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
 
@@ -46,9 +46,7 @@ module.exports = function buildData() {
 
         for (var target of Object.keys(symlinks)) {
             if (!shell.test('-L', target)) {
-                console.log(
-                    `Creating symlink:  ${target} -> ${symlinks[target]}`
-                );
+                console.log(`Creating symlink:  ${target} -> ${symlinks[target]}`);
                 shell.ln('-sf', symlinks[target], target);
             }
         }
@@ -191,64 +189,40 @@ function generateFields(tstrings, faIcons) {
 
 
 function suggestionsToPresets(presets) {
-    var existing = {};
 
     for (var key in suggestions) {
         for (var value in suggestions[key]) {
             for (var name in suggestions[key][value]) {
-                var item = key + '/' + value + '/' + name;
-                var tags = {};
-                var count = suggestions[key][value][name].count;
-
-                if (existing[name] && count > existing[name].count) {
-                    delete presets[existing[name].category];
-                    delete existing[name];
-                }
-                if (!existing[name]) {
-                    tags = _extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
-                    addSuggestion(item, tags, name.replace(/"/g, ''), count);
-                }
+                addSuggestion(key, value, name);
             }
         }
     }
 
 
-    function addSuggestion(category, tags, name, count) {
-        var tag = category.split('/');
-        var parent = presets[tag[0] + '/' + tag[1]];
-
-        // Hacky code to add healthcare tagging not yet present in name-suggestion-index
-        // This will be fixed by https://github.com/osmlab/name-suggestion-index/issues/57
-        if (tag[0] === 'amenity') {
-            var healthcareTags = {
-                clinic: 'clinic',
-                dentist: 'dentist',
-                doctors: 'doctor',
-                hospital: 'hospital',
-                pharmacy: 'pharmacy'
-            };
-            if (healthcareTags.hasOwnProperty(tag[1])) {
-                tags.healthcare = healthcareTags[tag[1]];
-            }
-        }
-
-        if (!parent) {
-            console.log('WARN: no preset for suggestion = ' + tag);
+    function addSuggestion(key, value, name) {
+        var presetID = key + '/' + value;
+        var preset = presets[presetID];
+        if (!preset) {
+            console.log('Warning:  No preset "' + presetID + '" for name-suggestion "' + name + '"');
             return;
         }
 
-        presets[category.replace(/"/g, '')] = {
-            tags: parent.tags ? _merge(tags, parent.tags) : tags,
-            name: name,
-            icon: parent.icon,
-            geometry: parent.geometry,
-            fields: parent.fields,
-            suggestion: true
-        };
+        var suggestionID = key + '/' + value + '/' + name;
+        var suggestion = suggestions[key][value][name];
+        var wikidataTag = { 'brand:wikidata': suggestion.tags['brand:wikidata'] };
 
-        existing[name] = {
-            category: category,
-            count: count
+        presets[suggestionID] = {
+            name: name,
+            icon: preset.icon,
+            fields: preset.fields,
+            moreFields: preset.moreFields,
+            geometry: preset.geometry,
+            tags: _merge({}, preset.tags, wikidataTag),
+            addTags: suggestion.tags,
+            removeTags: suggestion.tags,
+            reference: preset.reference,
+            matchScore: 2,
+            suggestion: true
         };
     }
 
@@ -367,7 +341,8 @@ function generateTaginfo(presets, fields) {
             tag.value = preset.tags[last];
         }
         if (preset.name) {
-            tag.description = [ preset.name ];
+            var legacy = (preset.searchable === false) ? ' (unsearchable)' : '';
+            tag.description = [ '🄿 ' + preset.name + legacy ];
         }
         if (preset.geometry) {
             setObjectType(tag, preset);
@@ -401,14 +376,14 @@ function generateTaginfo(presets, fields) {
                     if (value === 'undefined' || value === '*' || value === '') return;
                     var tag = { key: key, value: value };
                     if (field.label) {
-                        tag.description = [ field.label ];
+                        tag.description = [ '🄵 ' + field.label ];
                     }
                     coalesceTags(taginfo, tag);
                 });
             } else {
                 var tag = { key: key };
                 if (field.label) {
-                    tag.description = [ field.label ];
+                    tag.description = [ '🄵 ' + field.label ];
                 }
                 coalesceTags(taginfo, tag);
             }
@@ -488,10 +463,23 @@ function validatePresetFields(presets, fields) {
         if (preset.fields) {
             preset.fields.forEach(function(field) {
                 if (fields[field] === undefined) {
-                    console.error('Unknown preset field: ' + field + ' in preset ' + preset.name);
+                    console.error('Unknown preset field "' + field + '" in "fields" array of preset ' + preset.name);
                     process.exit(1);
                 }
             });
+        }
+        if (preset.moreFields) {
+            preset.moreFields.forEach(function(field) {
+                if (fields[field] === undefined) {
+                    console.error('Unknown preset field "' + field + '" in "moreFields" array of preset ' + preset.name);
+                    process.exit(1);
+                }
+            });
+        }
+        var fieldsIntersection = _intersection(preset.fields, preset.moreFields);
+        if (fieldsIntersection.length > 0) {
+            console.error('Preset field "' + fieldsIntersection[0] + '" in both "fields" and "moreFields" arrays of preset ' + preset.name);
+            process.exit(1);
         }
     });
 }

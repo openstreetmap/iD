@@ -10,12 +10,20 @@ import {
 
 
 export function uiFieldTextarea(field) {
-    var dispatch = d3_dispatch('change'),
-        input = d3_select(null);
+    var dispatch = d3_dispatch('change');
+    var input = d3_select(null);
 
 
     function textarea(selection) {
-        input = selection.selectAll('textarea')
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+        input = wrap.selectAll('textarea')
             .data([0]);
 
         input = input.enter()

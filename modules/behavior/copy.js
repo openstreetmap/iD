@@ -2,18 +2,11 @@ import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _map from 'lodash-es/map';
 
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { event as d3_event } from 'd3-selection';
 import { uiCmd } from '../ui';
 
 
 export function behaviorCopy(context) {
-    var keybinding = d3_keybinding('copy');
-
 
     function groupEntities(ids, graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
@@ -23,8 +16,8 @@ export function behaviorCopy(context) {
 
 
     function getDescendants(id, graph, descendants) {
-        var entity = graph.entity(id),
-            i, children;
+        var entity = graph.entity(id);
+        var children;
 
         descendants = descendants || {};
 
@@ -36,7 +29,7 @@ export function behaviorCopy(context) {
             children = [];
         }
 
-        for (i = 0; i < children.length; i++) {
+        for (var i = 0; i < children.length; i++) {
             if (!descendants[children[i]]) {
                 descendants[children[i]] = true;
                 descendants = getDescendants(children[i], graph, descendants);
@@ -47,14 +40,22 @@ export function behaviorCopy(context) {
     }
 
 
-    function doCopy() {
-        if (!getSelectionText()) d3_event.preventDefault();
+    function getSelectionText() {
+        return window.getSelection().toString();
+    }
 
-        var graph = context.graph(),
-            selected = groupEntities(context.selectedIDs(), graph),
-            canCopy = [],
-            skip = {},
-            i, entity;
+
+    function doCopy() {
+        if (!getSelectionText()) {
+            d3_event.preventDefault();
+        }
+
+        var graph = context.graph();
+        var selected = groupEntities(context.selectedIDs(), graph);
+        var canCopy = [];
+        var skip = {};
+        var entity;
+        var i;
 
         for (i = 0; i < selected.relation.length; i++) {
             entity = selected.relation[i];
@@ -81,20 +82,15 @@ export function behaviorCopy(context) {
     }
 
 
-    function copy() {
-        keybinding.on(uiCmd('⌘C'), doCopy);
-        d3_select(document).call(keybinding);
-        return copy;
+    function behavior() {
+        context.keybinding().on(uiCmd('⌘C'), doCopy);
+        return behavior;
     }
 
-    function getSelectionText() {
-        return window.getSelection().toString();
-    }
-
-    copy.off = function() {
-        d3_select(document).call(keybinding.off);
+    behavior.off = function() {
+        context.keybinding().off(uiCmd('⌘C'));
     };
 
 
-    return copy;
+    return behavior;
 }

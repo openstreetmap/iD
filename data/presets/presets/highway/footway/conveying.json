@@ -1,0 +1,27 @@
+{
+    "icon": "iD-highway-footway",
+    "fields": [
+        "name",
+        "conveying",
+        "access_simple",
+        "lit",
+        "width"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "moving sidewalk",
+        "autwalk",
+        "skywalk",
+        "travolator",
+        "travelator",
+        "travellator",
+        "conveyor"
+    ],
+    "tags": {
+        "highway": "footway",
+        "conveying": "*"
+    },
+    "name": "Moving Walkway"
+}

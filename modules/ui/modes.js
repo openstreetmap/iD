@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     modeAddArea,
@@ -15,7 +14,6 @@ import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
-
 export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
@@ -23,7 +21,6 @@ export function uiModes(context) {
         modeAddArea(context),
         modeAddNote(context)
     ];
-
 
     function editable() {
         var mode = context.mode();
@@ -40,7 +37,6 @@ export function uiModes(context) {
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
-
     return function(selection) {
         context
             .on('enter.editor', function(entered) {
@@ -56,10 +52,8 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        var keybinding = d3_keybinding('mode-buttons');
-
         modes.forEach(function(mode) {
-            keybinding.on(mode.key, function() {
+            context.keybinding().on(mode.key, function() {
                 if (mode.id === 'add-note' && !(notesEnabled() && notesEditable())) return;
                 if (mode.id !== 'add-note' && !editable()) return;
 
@@ -70,9 +64,6 @@ export function uiModes(context) {
                 }
             });
         });
-
-        d3_select(document)
-            .call(keybinding);
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
@@ -90,10 +81,6 @@ export function uiModes(context) {
         function update() {
             var showNotes = notesEnabled();
             var data = showNotes ? modes : modes.slice(0, 3);
-
-            selection
-                .classed('col3', !showNotes)  // 25%
-                .classed('col4', showNotes);  // 33%
 
             var buttons = selection.selectAll('button.add-button')
                 .data(data, function(d) { return d.id; });
@@ -129,7 +116,7 @@ export function uiModes(context) {
             buttonsEnter
                 .each(function(d) {
                     d3_select(this)
-                        .call(svgIcon('#iD-icon-' + d.button, 'pre-text'));
+                        .call(svgIcon('#iD-icon-' + d.button));
                 });
 
             buttonsEnter
@@ -137,11 +124,14 @@ export function uiModes(context) {
                 .attr('class', 'label')
                 .text(function(mode) { return mode.title; });
 
+            // if we are adding/removing the buttons, check if toolbar has overflowed
+            if (buttons.enter().size() || buttons.exit().size()) {
+                context.ui().checkOverflow('#bar', true);
+            }
+
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('col3', showNotes)    // 25%
-                .classed('col4', !showNotes)   // 33%
                 .property('disabled', function(d) {
                     return d.id === 'add-note' ? !notesEditable() : !editable();
                 });

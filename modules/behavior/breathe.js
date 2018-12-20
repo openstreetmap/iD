@@ -11,14 +11,14 @@ import { timer as d3_timer } from 'd3-timer';
 
 
 export function behaviorBreathe() {
-    var duration = 800,
-        steps = 4,
-        selector = '.selected.shadow, .selected .shadow',
-        selected = d3_select(null),
-        classed = '',
-        params = {},
-        done = false,
-        timer;
+    var duration = 800;
+    var steps = 4;
+    var selector = '.selected.shadow, .selected .shadow';
+    var _selected = d3_select(null);
+    var _classed = '';
+    var _params = {};
+    var _done = false;
+    var _timer;
 
 
     function ratchetyInterpolator(a, b, steps, units) {
@@ -49,30 +49,30 @@ export function behaviorBreathe() {
         transition
             .styleTween('stroke-opacity', function(d) {
                 return ratchetyInterpolator(
-                    params[d.id][toFrom].opacity,
-                    params[d.id][fromTo].opacity,
+                    _params[d.id][toFrom].opacity,
+                    _params[d.id][fromTo].opacity,
                     steps
                 );
             })
             .styleTween('stroke-width', function(d) {
                 return ratchetyInterpolator(
-                    params[d.id][toFrom].width,
-                    params[d.id][fromTo].width,
+                    _params[d.id][toFrom].width,
+                    _params[d.id][fromTo].width,
                     steps,
                     'px'
                 );
             })
             .styleTween('fill-opacity', function(d) {
                 return ratchetyInterpolator(
-                    params[d.id][toFrom].opacity,
-                    params[d.id][fromTo].opacity,
+                    _params[d.id][toFrom].opacity,
+                    _params[d.id][fromTo].opacity,
                     steps
                 );
             })
             .styleTween('r', function(d) {
                 return ratchetyInterpolator(
-                    params[d.id][toFrom].width,
-                    params[d.id][fromTo].width,
+                    _params[d.id][toFrom].width,
+                    _params[d.id][fromTo].width,
                     steps,
                     'px'
                 );
@@ -84,10 +84,11 @@ export function behaviorBreathe() {
         selection
             .call(reset)
             .each(function(d) {
-                var s = d3_select(this),
-                    tag = s.node().tagName,
-                    p = {'from': {}, 'to': {}},
-                    opacity, width;
+                var s = d3_select(this);
+                var tag = s.node().tagName;
+                var p = {'from': {}, 'to': {}};
+                var opacity;
+                var width;
 
                 // determine base opacity and width
                 if (tag === 'circle') {
@@ -104,28 +105,28 @@ export function behaviorBreathe() {
                 p.to.opacity = opacity * 1.25;
                 p.from.width = width * 0.7;
                 p.to.width = width * (tag === 'circle' ? 1.5 : 1);
-                params[d.id] = p;
+                _params[d.id] = p;
             });
     }
 
 
     function run(surface, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to' : 'from'),
-            currSelected = surface.selectAll(selector),
-            currClassed = surface.attr('class');
+        var toFrom = (fromTo === 'from' ? 'to' : 'from');
+        var currSelected = surface.selectAll(selector);
+        var currClassed = surface.attr('class');
 
-        if (done || currSelected.empty()) {
-            selected.call(reset);
+        if (_done || currSelected.empty()) {
+            _selected.call(reset);
             return;
         }
 
-        if (!_isEqual(currSelected.data(), selected.data()) || currClassed !== classed) {
-            selected.call(reset);
-            classed = currClassed;
-            selected = currSelected.call(calcAnimationParams);
+        if (!_isEqual(currSelected.data(), _selected.data()) || currClassed !== _classed) {
+            _selected.call(reset);
+            _classed = currClassed;
+            _selected = currSelected.call(calcAnimationParams);
         }
 
-        selected
+        _selected
             .transition()
             .duration(duration)
             .call(setAnimationParams, fromTo)
@@ -135,31 +136,31 @@ export function behaviorBreathe() {
     }
 
 
-    var breathe = function(surface) {
-        done = false;
-        timer = d3_timer(function() {
+    function behavior(surface) {
+        _done = false;
+        _timer = d3_timer(function() {
             // wait for elements to actually become selected
             if (surface.selectAll(selector).empty()) {
                 return false;
             }
 
             surface.call(run, 'from');
-            timer.stop();
+            _timer.stop();
             return true;
         }, 20);
-    };
+    }
 
 
-    breathe.off = function() {
-        done = true;
-        if (timer) {
-            timer.stop();
+    behavior.off = function() {
+        _done = true;
+        if (_timer) {
+            _timer.stop();
         }
-        selected
+        _selected
             .interrupt()
             .call(reset);
     };
 
 
-    return breathe;
+    return behavior;
 }

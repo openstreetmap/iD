@@ -22,6 +22,7 @@
         "building",
         "building/house",
         "building/apartments",
+        "building/garage",
         "building/retail",
         "building/commercial",
         "building/industrial",
@@ -100,8 +101,8 @@
       "geometry": "line",
       "name": "Path Features",
       "members": [
-        "footway/crosswalk",
-        "footway/sidewalk",
+        "highway/footway/marked",
+        "highway/footway/sidewalk",
         "highway/steps",
         "highway/path",
         "highway/footway",
@@ -184,6 +185,17 @@
         "type/route/detour",
         "type/route_master",
         "type/route"
+      ]
+    },
+    "category-utility": {
+      "icon": "iD-category-utility",
+      "geometry": "line",
+      "name": "Utility Features",
+      "members": [
+        "power/line",
+        "power/minor_line",
+        "man_made/pipeline",
+        "power/cable/underground"
       ]
     },
     "category-water-area": {

@@ -1,11 +1,10 @@
 import _find from 'lodash-es/find';
+import _intersection from 'lodash-es/intersection';
 
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { t } from '../util/locale';
 
@@ -33,6 +32,8 @@ import {
 import { modeBrowse, modeSelect } from './index';
 import { osmJoinWays, osmNode } from '../osm';
 import { uiFlash } from '../ui';
+import { utilKeybinding } from '../util';
+
 
 
 export function modeDragNode(context) {
@@ -75,8 +76,23 @@ export function modeDragNode(context) {
     }
 
 
-    function connectAnnotation(entity) {
-        return t('operations.connect.annotation.' + entity.geometry(context.graph()));
+    function connectAnnotation(nodeEntity, targetEntity) {
+        var nodeGeometry = nodeEntity.geometry(context.graph());
+        var targetGeometry = targetEntity.geometry(context.graph());
+        if (nodeGeometry === 'vertex' && targetGeometry === 'vertex') {
+            var nodeParentWayIDs = context.graph().parentWays(nodeEntity);
+            var targetParentWayIDs = context.graph().parentWays(targetEntity);
+            var sharedParentWays = _intersection(nodeParentWayIDs, targetParentWayIDs);
+            // if both vertices are part of the same way
+            if (sharedParentWays.length !== 0) {
+                // if the nodes are next to each other, they are merged
+                if (sharedParentWays[0].areAdjacent(nodeEntity.id, targetEntity.id)) {
+                    return t('operations.connect.annotation.from_vertex.to_adjacent_vertex');
+                }
+                return t('operations.connect.annotation.from_vertex.to_sibling_vertex');
+            }
+        }
+        return t('operations.connect.annotation.from_' + nodeGeometry + '.to_' + targetGeometry);
     }
 
 
@@ -86,7 +102,7 @@ export function modeDragNode(context) {
 
 
     function keydown() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope')) {
                 context.surface()
                     .classed('nope-suppressed', true);
@@ -99,7 +115,7 @@ export function modeDragNode(context) {
 
 
     function keyup() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope-suppressed')) {
                 context.surface()
                     .classed('nope', true);
@@ -359,13 +375,13 @@ export function modeDragNode(context) {
                     loc: choice.loc,
                     edge: [target.nodes[choice.index - 1], target.nodes[choice.index]]
                 }, entity),
-                connectAnnotation(target)
+                connectAnnotation(entity, target)
             );
 
         } else if (target && target.type === 'node') {
             context.replace(
                 actionConnect([target.id, entity.id]),
-                connectAnnotation(target)
+                connectAnnotation(entity, target)
             );
 
         } else if (_wasMidpoint) {
@@ -413,7 +429,7 @@ export function modeDragNode(context) {
 
 
     var drag = behaviorDrag()
-        .selector('.layer-points-targets .target')
+        .selector('.layer-touch.points .target')
         .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)

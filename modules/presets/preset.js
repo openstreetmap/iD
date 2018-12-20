@@ -1,18 +1,19 @@
 import _clone from 'lodash-es/clone';
-import _keys from 'lodash-es/keys';
 import _omit from 'lodash-es/omit';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
-export function presetPreset(id, preset, fields) {
+export function presetPreset(id, preset, fields, visible) {
     preset = _clone(preset);
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
+    preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
 
+    visible = visible || false;
 
     function getFields(f) {
         return fields[f];
@@ -28,8 +29,8 @@ export function presetPreset(id, preset, fields) {
 
 
     preset.matchScore = function(entity) {
-        var tags = preset.tags,
-            score = 0;
+        var tags = preset.tags;
+        var score = 0;
 
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
@@ -71,6 +72,12 @@ export function presetPreset(id, preset, fields) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
+    preset.visible = function(_) {
+        if (!arguments.length) return visible;
+        visible = _;
+        return visible;
+    };
+
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
@@ -94,9 +101,9 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var removeTags = preset.removeTags || preset.tags || {};
-    preset.removeTags = function(tags, geometry) {
-        tags = _omit(tags, _keys(removeTags));
+    preset.removeTags = preset.removeTags || preset.tags || {};
+    preset.unsetTags = function(tags, geometry) {
+        tags = _omit(tags, Object.keys(preset.removeTags));
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
@@ -110,17 +117,18 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var applyTags = preset.addTags || preset.tags || {};
-    preset.applyTags = function(tags, geometry) {
+    preset.addTags = preset.addTags || preset.tags || {};
+    preset.setTags = function(tags, geometry) {
+        var addTags = preset.addTags;
         var k;
 
         tags = _clone(tags);
 
-        for (k in applyTags) {
-            if (applyTags[k] === '*') {
+        for (k in addTags) {
+            if (addTags[k] === '*') {
                 tags[k] = 'yes';
             } else {
-                tags[k] = applyTags[k];
+                tags[k] = addTags[k];
             }
         }
 
@@ -128,12 +136,12 @@ export function presetPreset(id, preset, fields) {
         // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
         // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
         // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
-        if (!applyTags.hasOwnProperty('area')) {
+        if (!addTags.hasOwnProperty('area')) {
             delete tags.area;
             if (geometry === 'area') {
                 var needsAreaTag = true;
                 if (preset.geometry.indexOf('line') === -1) {
-                    for (k in applyTags) {
+                    for (k in addTags) {
                         if (k in areaKeys) {
                             needsAreaTag = false;
                             break;

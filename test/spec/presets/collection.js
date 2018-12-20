@@ -84,6 +84,15 @@ describe('iD.presetCollection', function() {
         });
     });
 
+    describe('#index', function() {
+        it('returns preset position in the collection', function() {
+            expect(c.index('point')).to.equal(0);
+        });
+        it('return -1 when given id for preset not in the collection', function() {
+            expect(c.index('foobar')).to.equal(-1);
+        });
+    });
+
     describe('#matchGeometry', function() {
         it('returns a new collection only containing presets matching a geometry', function() {
             expect(c.matchGeometry('area').collection).to.include.members(

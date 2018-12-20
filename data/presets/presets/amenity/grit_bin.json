@@ -1,5 +1,6 @@
 {
-    "fields": [
+    "icon": "fas-box",
+        "fields": [
         "access_simple"
     ],
     "geometry": [

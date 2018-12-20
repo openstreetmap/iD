@@ -1,9 +1,28 @@
 {
-  "geometry": [
-    "area"
-  ],
-  "tags": {
-    "man_made": "bridge"
-  },
-  "name": "Bridge"
+    "icon": "maki-bridge",
+    "fields": [
+        "name",
+        "bridge",
+        "layer",
+        "maxweight"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "man_made": "bridge"
+    },
+    "addTags": {
+        "man_made": "bridge",
+        "layer": "1"
+    },
+    "removeTags": {
+        "man_made": "bridge",
+        "layer": "*"
+    },
+    "reference": {
+        "key": "man_made",
+        "value": "bridge"
+    },
+    "name": "Bridge"
 }

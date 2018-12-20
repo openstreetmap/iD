@@ -1,0 +1,35 @@
+{
+    "icon": "maki-communications-tower",
+    "fields": [
+        "tower/type",
+        "tower/construction",
+        "height",
+        "communication_multi"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "antenna",
+        "cell mast",
+        "cell phone mast",
+        "cell phone tower",
+        "cell tower",
+        "communication mast",
+        "communication tower",
+        "guyed tower",
+        "mobile phone tower",
+        "transmission mast",
+        "transmission tower"
+    ],
+    "tags": {
+        "man_made": "mast",
+        "tower:type": "communication",
+        "communication:mobile_phone": "yes"
+    },
+    "reference": {
+        "key": "communication:mobile_phone",
+        "value": "yes"
+    },
+    "name": "Mobile Phone Mast"
+}

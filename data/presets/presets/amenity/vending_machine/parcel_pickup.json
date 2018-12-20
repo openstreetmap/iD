@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-vending_machine",
+    "fields": [
+        "vending",
+        "operator"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "amazon",
+        "locker",
+        "mail",
+        "parcel",
+        "pickup"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "parcel_pickup"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "parcel_pickup"
+    },
+    "name": "Parcel Pickup Locker"
+}

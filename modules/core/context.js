@@ -10,38 +10,19 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
 
-import {
-    t,
-    currentLocale,
-    addTranslation,
-    setLocale
-} from '../util/locale';
+import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
-
-import {
-    dataLocales,
-    dataEn
-} from '../../data';
-
+import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { presetIndex } from '../presets';
-
-import {
-    rendererBackground,
-    rendererFeatures,
-    rendererMap
-} from '../renderer';
-
+import { rendererBackground, rendererFeatures, rendererMap } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
+import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
 
-import {
-    utilCallWhenIdle,
-    utilRebind
-} from '../util';
 
 
 export var areaKeys = {};
@@ -53,7 +34,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.11.0';
+    context.version = '2.12.2';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -104,9 +85,17 @@ export function coreContext() {
     };
 
 
-    /* Straight accessors. Avoid using these if you can. */
-    var ui, connection, history;
+    /* User interface and keybinding */
+    var ui;
     context.ui = function() { return ui; };
+
+    var keybinding = utilKeybinding('context');
+    context.keybinding = function() { return keybinding; };
+    d3_select(document).call(keybinding);
+
+
+    /* Straight accessors. Avoid using these if you can. */
+    var connection, history;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
 
@@ -489,6 +478,18 @@ export function coreContext() {
     features = rendererFeatures(context);
     presets = presetIndex();
 
+    if (services.maprules && utilStringQs(window.location.hash).validations) {
+        var validations = utilStringQs(window.location.hash).validations;
+        d3_json(validations, function (err, mapcss) {
+            if (err) return;
+            services.maprules.init(context.presets().areaKeys());
+            _each(mapcss, function(mapcssSelector) {
+                return services.maprules.addRule(mapcssSelector);
+            });
+            context.validationRules = true;
+        });
+    }
+
     map = rendererMap(context);
     context.mouse = map.mouse;
     context.extent = map.extent;
@@ -507,9 +508,16 @@ export function coreContext() {
 
     background.init();
     features.init();
-    presets.init();
-    areaKeys = presets.areaKeys();
-
+    if (utilStringQs(window.location.hash).presets) {
+        var external = utilStringQs(window.location.hash).presets;
+        presets.fromExternal(external, function(externalPresets) {
+            context.presets = function() { return externalPresets; }; // default + external presets...
+            areaKeys = presets.areaKeys();
+        });
+    } else {
+        presets.init();
+        areaKeys = presets.areaKeys();
+    }
 
     return utilRebind(context, dispatch, 'on');
 }

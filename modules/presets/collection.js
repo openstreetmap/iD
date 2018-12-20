@@ -1,5 +1,6 @@
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
+import _findIndex from 'lodash-es/findIndex';
 import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 import _values from 'lodash-es/values';
@@ -9,8 +10,8 @@ import { utilEditDistance } from '../util/index';
 
 
 export function presetCollection(collection) {
-    var maxSearchResults = 50,
-        maxSuggestionResults = 10;
+    var maxSearchResults = 50;
+    var maxSuggestionResults = 10;
 
     var presets = {
 
@@ -23,6 +24,11 @@ export function presetCollection(collection) {
             });
         },
 
+        index: function(id) {
+            return _findIndex(this.collection, function(d) {
+                return d.id === id;
+            });
+        },
 
         matchGeometry: function(geometry) {
             return presetCollection(this.collection.filter(function(d) {
@@ -51,20 +57,20 @@ export function presetCollection(collection) {
             value = value.toLowerCase();
 
             var searchable = _filter(this.collection, function(a) {
-                    return a.searchable !== false && a.suggestion !== true;
-                }),
-                suggestions = _filter(this.collection, function(a) {
-                    return a.suggestion === true;
-                });
+                return a.searchable !== false && a.suggestion !== true;
+            });
+            var suggestions = _filter(this.collection, function(a) {
+                return a.suggestion === true;
+            });
 
 
             // matches value to preset.name
             var leading_name = _filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var aCompare = a.name().toLowerCase(),
-                        bCompare = b.name().toLowerCase(),
-                        i;
+                    var aCompare = a.name().toLowerCase();
+                    var bCompare = b.name().toLowerCase();
+                    var i;
 
                     // priority if search string matches preset name exactly - #4325
                     if (value === aCompare) return -1;
@@ -84,21 +90,19 @@ export function presetCollection(collection) {
 
             // matches value to preset.terms values
             var leading_terms = _filter(searchable, function(a) {
-                    return _some(a.terms() || [], leading);
-                });
+                return _some(a.terms() || [], leading);
+            });
 
             // matches value to preset.tags values
             var leading_tag_values = _filter(searchable, function(a) {
-                    return _some(_without(_values(a.tags || {}), '*'), leading);
-                });
+                return _some(_without(_values(a.tags || {}), '*'), leading);
+            });
 
 
             // finds close matches to value in preset.name
-            var similar_name = searchable.map(function(a) {
-                    return {
-                        preset: a,
-                        dist: utilEditDistance(value, a.name())
-                    };
+            var similar_name = searchable
+                .map(function(a) {
+                    return { preset: a, dist: utilEditDistance(value, a.name()) };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
                 }).sort(function(a, b) {
@@ -125,10 +129,7 @@ export function presetCollection(collection) {
                 });
 
             var similar_suggestions = suggestions.map(function(a) {
-                    return {
-                        preset: a,
-                        dist: utilEditDistance(value, suggestionName(a.name()))
-                    };
+                    return { preset: a, dist: utilEditDistance(value, suggestionName(a.name())) };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - suggestionName(a.preset.name()).length, 0) < 1;
                 }).sort(function(a, b) {
@@ -140,13 +141,13 @@ export function presetCollection(collection) {
             var other = presets.item(geometry);
 
             var results = leading_name.concat(
-                    leading_terms,
-                    leading_tag_values,
-                    leading_suggestions.slice(0, maxSuggestionResults + 5),
-                    similar_name,
-                    similar_terms,
-                    similar_suggestions.slice(0, maxSuggestionResults)
-                ).slice(0, maxSearchResults - 1);
+                leading_terms,
+                leading_tag_values,
+                leading_suggestions.slice(0, maxSuggestionResults + 5),
+                similar_name,
+                similar_terms,
+                similar_suggestions.slice(0, maxSuggestionResults)
+            ).slice(0, maxSearchResults - 1);
 
             return presetCollection(_uniq(results.concat(other)));
         }

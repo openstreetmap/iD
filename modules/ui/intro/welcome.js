@@ -9,8 +9,8 @@ import { utilRebind } from '../../util/rebind';
 
 
 export function uiIntroWelcome(context, reveal) {
-    var dispatch = d3_dispatch('done'),
-        listener = clickListener();
+    var dispatch = d3_dispatch('done');
+    var listener = clickListener();
 
     var chapter = {
         title: 'intro.welcome.title'
@@ -49,8 +49,8 @@ export function uiIntroWelcome(context, reveal) {
 
 
     function leftClick() {
-        var counter = 0,
-            times = 5;
+        var counter = 0;
+        var times = 5;
 
         var tooltip = reveal('.intro-nav-wrap .chapter-welcome',
             t('intro.welcome.leftclick', { num: times }),
@@ -90,8 +90,8 @@ export function uiIntroWelcome(context, reveal) {
 
 
     function rightClick() {
-        var counter = 0,
-            times = 5;
+        var counter = 0;
+        var times = 5;
 
         var tooltip = reveal('.intro-nav-wrap .chapter-welcome',
             t('intro.welcome.rightclick', { num: times }),
@@ -163,10 +163,10 @@ export function uiIntroWelcome(context, reveal) {
 
 
 function clickListener() {
-    var dispatch = d3_dispatch('click'),
-        minTime = 120,
-        tooltip = d3_select(null),
-        down = {};
+    var dispatch = d3_dispatch('click');
+    var minTime = 120;
+    var tooltip = d3_select(null);
+    var down = {};
 
     // `down` keeps track of which buttons/keys are down.
     // Setting a property in `down` happens immediately.
@@ -187,9 +187,9 @@ function clickListener() {
         if (d3_event.keyCode === 93)  {   // context menu
             d3_event.preventDefault();
             d3_event.stopPropagation();
-            var endTime = d3_event.timeStamp,
-                startTime = down.menu || endTime,
-                delay = (endTime - startTime < minTime) ? minTime : 0;
+            var endTime = d3_event.timeStamp;
+            var startTime = down.menu || endTime;
+            var delay = (endTime - startTime < minTime) ? minTime : 0;
 
             window.setTimeout(function() {
                 tooltip.classed('rightclick', false);
@@ -213,10 +213,10 @@ function clickListener() {
 
 
     function mouseup() {
-        var button = d3_event.button,
-            endTime = d3_event.timeStamp,
-            startTime = down[button] || endTime,
-            delay = (endTime - startTime < minTime) ? minTime : 0;
+        var button = d3_event.button;
+        var endTime = d3_event.timeStamp;
+        var startTime = down[button] || endTime;
+        var delay = (endTime - startTime < minTime) ? minTime : 0;
 
         if (button === 0 && !d3_event.ctrlKey) {
             window.setTimeout(function() {

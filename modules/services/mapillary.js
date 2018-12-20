@@ -1,13 +1,9 @@
 /* global Mapillary:false */
 import _find from 'lodash-es/find';
-import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
-import _isEmpty from 'lodash-es/isEmpty';
-import _map from 'lodash-es/map';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
 
-import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 import {
@@ -111,6 +107,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 var loc = feature.geometry.coordinates;
                 var d;
 
+                // An image (shown as a green dot on the map) is a single street photo with extra
+                // information such as location, camera angle (CA), camera model, and so on.
+                // Each image feature is a GeoJSON Point
                 if (which === 'images') {
                     d = {
                         loc: loc,
@@ -120,17 +119,44 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_by: feature.properties.username,
                         pano: feature.properties.pano
                     };
+
                     cache.forImageKey[d.key] = d;     // cache imageKey -> image
 
+                // Mapillary organizes images as sequences. A sequence of images are continuously captured
+                // by a user at a give time. Sequences are shown on the map as green lines.
+                // Each sequence feature is a GeoJSON LineString
                 } else if (which === 'sequences') {
                     var sequenceKey = feature.properties.key;
                     cache.lineString[sequenceKey] = feature;           // cache sequenceKey -> lineString
                     feature.properties.coordinateProperties.image_keys.forEach(function(imageKey) {
                         cache.forImageKey[imageKey] = sequenceKey;     // cache imageKey -> sequenceKey
                     });
-                    return false;  // because no `d` data worth loading into an rbush
+                    return false;    // because no `d` data worth loading into an rbush
 
-                } else if (which === 'objects') {
+                // An image detection is a semantic pixel area on an image. The area could indicate
+                // sky, trees, sidewalk in the image. A detection can be a polygon, a bounding box, or a point.
+                // Each image_detection feature is a GeoJSON Point (located where the image was taken)
+                } else if (which === 'image_detections') {
+                    d = {
+                        key: feature.properties.key,
+                        image_key: feature.properties.image_key,
+                        value: feature.properties.value,
+                        package: feature.properties.package,
+                        shape: feature.properties.shape
+                    };
+
+                    // cache imageKey -> image_detections
+                    if (!cache.forImageKey[d.image_key]) {
+                        cache.forImageKey[d.image_key] = [];
+                    }
+                    cache.forImageKey[d.image_key].push(d);
+                    return false;    // because no `d` data worth loading into an rbush
+
+
+                // A map feature is a real world object that can be shown on a map. It could be any object
+                // recognized from images, manually added in images, or added on the map.
+                // Each map feature is a GeoJSON Point (located where the feature is)
+                } else if (which === 'map_features') {
                     d = {
                         loc: loc,
                         key: feature.properties.key,
@@ -138,18 +164,6 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         package: feature.properties.package,
                         detections: feature.properties.detections
                     };
-
-                    // cache imageKey -> detectionKey
-                    feature.properties.detections.forEach(function(detection) {
-                        var imageKey = detection.image_key;
-                        var detectionKey = detection.detection_key;
-                        if (!_mlyCache.detections[imageKey]) {
-                            _mlyCache.detections[imageKey] = {};
-                        }
-                        if (!_mlyCache.detections[imageKey][detectionKey]) {
-                            _mlyCache.detections[imageKey][detectionKey] = {};
-                        }
-                    });
                 }
 
                 return {
@@ -158,11 +172,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
             }).filter(Boolean);
 
-            cache.rtree.load(features);
+            if (cache.rtree && features) {
+                cache.rtree.load(features);
+            }
 
             if (which === 'images' || which === 'sequences') {
                 dispatch.call('loadedImages');
-            } else if (which === 'objects') {
+            } else if (which === 'map_features') {
                 dispatch.call('loadedSigns');
             }
 
@@ -194,57 +210,29 @@ function parsePagination(links) {
 }
 
 
-// partition viewport into `psize` x `psize` regions
-function partitionViewport(psize, projection) {
-    var dimensions = projection.clipExtent()[1];
-    psize = psize || 16;
-    var cols = d3_range(0, dimensions[0], psize);
-    var rows = d3_range(0, dimensions[1], psize);
-    var partitions = [];
+// partition viewport into higher zoom tiles
+function partitionViewport(projection) {
+    var z = geoScaleToZoom(projection.scale());
+    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    var tiler = utilTiler().zoomExtent([z2, z2]);
 
-    rows.forEach(function(y) {
-        cols.forEach(function(x) {
-            var min = [x, y + psize];
-            var max = [x + psize, y];
-            partitions.push(
-                geoExtent(projection.invert(min), projection.invert(max)));
-        });
-    });
-
-    return partitions;
+    return tiler.getTiles(projection)
+        .map(function(tile) { return tile.extent; });
 }
 
 
 // no more than `limit` results per partition.
-function searchLimited(psize, limit, projection, rtree) {
-    limit = limit || 3;
+function searchLimited(limit, projection, rtree) {
+    limit = limit || 5;
 
-    var partitions = partitionViewport(psize, projection);
-    var results;
+    return partitionViewport(projection)
+        .reduce(function(result, extent) {
+            var found = rtree.search(extent.bbox())
+                .slice(0, limit)
+                .map(function(d) { return d.data; });
 
-    // console.time('previous');
-    results =  _flatten(_map(partitions, function(extent) {
-        return rtree.search(extent.bbox())
-            .slice(0, limit)
-            .map(function(d) { return d.data; });
-    }));
-    // console.timeEnd('previous');
-
-    // console.time('new');
-    // results = partitions.reduce(function(result, extent) {
-    //     var found = rtree.search(extent.bbox())
-    //         .map(function(d) { return d.data; })
-    //         .sort(function(a, b) {
-    //             return a.loc[1] - b.loc[1];
-    //             // return a.key.localeCompare(b.key);
-    //         })
-    //         .slice(0, limit);
-
-    //     return (found.length ? result.concat(found) : result);
-    // }, []);
-    // console.timeEnd('new');
-
-    return results;
+            return (found.length ? result.concat(found) : result);
+        }, []);
 }
 
 
@@ -266,8 +254,11 @@ export default {
             if (cache.images && cache.images.inflight) {
                 _forEach(cache.images.inflight, abortRequest);
             }
-            if (cache.objects && cache.objects.inflight) {
-                _forEach(cache.objects.inflight, abortRequest);
+            if (cache.image_detections && cache.image_detections.inflight) {
+                _forEach(cache.image_detections.inflight, abortRequest);
+            }
+            if (cache.map_features && cache.map_features.inflight) {
+                _forEach(cache.map_features.inflight, abortRequest);
             }
             if (cache.sequences && cache.sequences.inflight) {
                 _forEach(cache.sequences.inflight, abortRequest);
@@ -276,9 +267,9 @@ export default {
 
         _mlyCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
-            objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} },
-            detections: {}
+            image_detections: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, forImageKey: {} },
+            map_features: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} }
         };
 
         _mlySelectedImage = null;
@@ -287,14 +278,14 @@ export default {
 
 
     images: function(projection) {
-        var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.images.rtree);
+        var limit = 5;
+        return searchLimited(limit, projection, _mlyCache.images.rtree);
     },
 
 
     signs: function(projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.objects.rtree);
+        var limit = 5;
+        return searchLimited(limit, projection, _mlyCache.map_features.rtree);
     },
 
 
@@ -335,7 +326,8 @@ export default {
     loadSigns: function(context, projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
-        loadTiles('objects', apibase + 'objects?', projection);
+        loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=1&', projection);
+        loadTiles('image_detections', apibase + 'image_detections?layers=trafficsigns&', projection);
     },
 
 
@@ -372,7 +364,7 @@ export default {
         defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
 
         // Register viewer resize handler
-        context.ui().on('photoviewerResize', function() {
+        context.ui().photoviewer.on('resize', function() {
             if (_mlyViewer) {
                 _mlyViewer.resize();
             }
@@ -537,6 +529,7 @@ export default {
 
         this.setStyles(null, true);
 
+        // if signs signs are shown, highlight the ones that appear in this image
         d3_selectAll('.layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) {
                 return _some(d.detections, function(detection) {
@@ -620,63 +613,32 @@ export default {
         if (!_mlyViewer || _mlyFallback) return;
 
         var imageKey = d && d.key;
-        var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
+        if (!imageKey) return;
 
-        _forEach(detections, function(data, k) {
-            if (_isEmpty(data)) {
-                loadDetection(k);
-            } else {
-                var tag = makeTag(data);
-                if (tag) {
-                    var tagComponent = _mlyViewer.getComponent('tag');
-                    tagComponent.add([tag]);
-                }
+        var detections = _mlyCache.image_detections.forImageKey[imageKey] || [];
+        detections.forEach(function(data) {
+            var tag = makeTag(data);
+            if (tag) {
+                var tagComponent = _mlyViewer.getComponent('tag');
+                tagComponent.add([tag]);
             }
         });
 
-
-        function loadDetection(detectionKey) {
-            var url = apibase + 'detections/' +
-                    detectionKey + '?' + utilQsString({ client_id: clientId });
-
-            d3_request(url)
-                .mimeType('application/json')
-                .response(function(xhr) {
-                    return JSON.parse(xhr.responseText);
-                })
-                .get(function(err, data) {
-                    if (!data || !data.properties) return;
-
-                    var imageKey = data.properties.image_key;
-                    _mlyCache.detections[imageKey][detectionKey] = data;
-
-                    var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
-                    if (imageKey === selectedKey) {
-                        var tag = makeTag(data);
-                        if (tag) {
-                            var tagComponent = _mlyViewer.getComponent('tag');
-                            tagComponent.add([tag]);
-                        }
-                    }
-                });
-        }
-
-
         function makeTag(data) {
-            var valueParts = data.properties.value.split('--');
+            var valueParts = data.value.split('--');
             if (valueParts.length !== 3) return;
 
             var text = valueParts[1].replace(/-/g, ' ');
             var tag;
 
             // Currently only two shapes <Polygon|Point>
-            if (data.properties.shape.type === 'Polygon') {
+            if (data.shape.type === 'Polygon') {
                 var polygonGeometry = new Mapillary
                     .TagComponent
-                    .PolygonGeometry(data.properties.shape.coordinates[0]);
+                    .PolygonGeometry(data.shape.coordinates[0]);
 
                 tag = new Mapillary.TagComponent.OutlineTag(
-                    data.properties.key,
+                    data.key,
                     polygonGeometry,
                     {
                         text: text,
@@ -688,13 +650,13 @@ export default {
                     }
                 );
 
-            } else if (data.properties.shape.type === 'Point') {
+            } else if (data.shape.type === 'Point') {
                 var pointGeometry = new Mapillary
                     .TagComponent
-                    .PointGeometry(data.properties.shape.coordinates[0]);
+                    .PointGeometry(data.shape.coordinates[0]);
 
                 tag = new Mapillary.TagComponent.SpotTag(
-                    data.properties.key,
+                    data.key,
                     pointGeometry,
                     {
                         text: text,

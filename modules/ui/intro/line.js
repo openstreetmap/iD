@@ -15,29 +15,29 @@ import { icon, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroLine(context, reveal) {
-    var dispatch = d3_dispatch('done'),
-        timeouts = [],
-        tulipRoadId = null,
-        flowerRoadId = 'w646',
-        tulipRoadStart = [-85.6297754121684, 41.95805253325314],
-        tulipRoadMidpoint = [-85.62975395449628, 41.95787501510204],
-        tulipRoadIntersection = [-85.62974496187628, 41.95742515554585],
-        roadCategory = context.presets().item('category-road'),
-        residentialPreset = context.presets().item('highway/residential'),
-        woodRoadId = 'w525',
-        woodRoadEndId = 'n2862',
-        woodRoadAddNode = [-85.62390110349587, 41.95397111462291],
-        woodRoadDragEndpoint = [-85.623867390213, 41.95466987786487],
-        woodRoadDragMidpoint = [-85.62386254803509, 41.95430395953872],
-        washingtonStreetId = 'w522',
-        twelfthAvenueId = 'w1',
-        eleventhAvenueEndId = 'n3550',
-        twelfthAvenueEndId = 'n5',
-        washingtonSegmentId = null,
-        eleventhAvenueEnd = context.entity(eleventhAvenueEndId).loc,
-        twelfthAvenueEnd = context.entity(twelfthAvenueEndId).loc,
-        deleteLinesLoc = [-85.6219395542764, 41.95228033922477],
-        twelfthAvenue = [-85.62219310052491, 41.952505413152956];
+    var dispatch = d3_dispatch('done');
+    var timeouts = [];
+    var _tulipRoadID = null;
+    var flowerRoadID = 'w646';
+    var tulipRoadStart = [-85.6297754121684, 41.95805253325314];
+    var tulipRoadMidpoint = [-85.62975395449628, 41.95787501510204];
+    var tulipRoadIntersection = [-85.62974496187628, 41.95742515554585];
+    var roadCategory = context.presets().item('category-road');
+    var residentialPreset = context.presets().item('highway/residential');
+    var woodRoadID = 'w525';
+    var woodRoadEndID = 'n2862';
+    var woodRoadAddNode = [-85.62390110349587, 41.95397111462291];
+    var woodRoadDragEndpoint = [-85.623867390213, 41.95466987786487];
+    var woodRoadDragMidpoint = [-85.62386254803509, 41.95430395953872];
+    var washingtonStreetID = 'w522';
+    var twelfthAvenueID = 'w1';
+    var eleventhAvenueEndID = 'n3550';
+    var twelfthAvenueEndID = 'n5';
+    var _washingtonSegmentID = null;
+    var eleventhAvenueEnd = context.entity(eleventhAvenueEndID).loc;
+    var twelfthAvenueEnd = context.entity(twelfthAvenueEndID).loc;
+    var deleteLinesLoc = [-85.6219395542764, 41.95228033922477];
+    var twelfthAvenue = [-85.62219310052491, 41.952505413152956];
 
 
     var chapter = {
@@ -106,11 +106,9 @@ export function uiIntroLine(context, reveal) {
 
 
     function startLine() {
-        if (context.mode().id !== 'add-line') {
-            return chapter.restart();
-        }
+        if (context.mode().id !== 'add-line') return chapter.restart();
 
-        tulipRoadId = null;
+        _tulipRoadID = null;
 
         var padding = 70 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(tulipRoadStart, padding, context);
@@ -138,11 +136,9 @@ export function uiIntroLine(context, reveal) {
 
 
     function drawLine() {
-        if (context.mode().id !== 'draw-line') {
-            return chapter.restart();
-        }
+        if (context.mode().id !== 'draw-line') return chapter.restart();
 
-        tulipRoadId = context.mode().selectedIDs()[0];
+        _tulipRoadID = context.mode().selectedIDs()[0];
         context.map().centerEase(tulipRoadMidpoint, 500);
 
         timeout(function() {
@@ -165,23 +161,20 @@ export function uiIntroLine(context, reveal) {
         }, 550);  // after easing..
 
         context.history().on('change.intro', function() {
-            var entity = tulipRoadId && context.hasEntity(tulipRoadId);
-            if (!entity) return chapter.restart();
-
             if (isLineConnected()) {
                 continueTo(continueLine);
             }
         });
 
         context.on('enter.intro', function(mode) {
-            if (mode.id === 'draw-line')
+            if (mode.id === 'draw-line') {
                 return;
-            else if (mode.id === 'select') {
+            } else if (mode.id === 'select') {
                 continueTo(retryIntersect);
                 return;
-            }
-            else
+            } else {
                 return chapter.restart();
+            }
         });
 
         function continueTo(nextStep) {
@@ -194,13 +187,13 @@ export function uiIntroLine(context, reveal) {
 
 
     function isLineConnected() {
-        var entity = tulipRoadId && context.hasEntity(tulipRoadId);
+        var entity = _tulipRoadID && context.hasEntity(_tulipRoadID);
         if (!entity) return false;
 
         var drawNodes = context.graph().childNodes(entity);
         return _some(drawNodes, function(node) {
             return _some(context.graph().parentWays(node), function(parent) {
-                return parent.id === flowerRoadId;
+                return parent.id === flowerRoadID;
             });
         });
     }
@@ -220,7 +213,7 @@ export function uiIntroLine(context, reveal) {
 
     function continueLine() {
         if (context.mode().id !== 'draw-line') return chapter.restart();
-        var entity = tulipRoadId && context.hasEntity(tulipRoadId);
+        var entity = _tulipRoadID && context.hasEntity(_tulipRoadID);
         if (!entity) return chapter.restart();
 
         context.map().centerEase(tulipRoadIntersection, 500);
@@ -244,9 +237,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function chooseCategoryRoad() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
-        }
+        if (context.mode().id !== 'select') return chapter.restart();
 
         context.on('exit.intro', function() {
             return chapter.restart();
@@ -282,9 +273,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function choosePresetResidential() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
-        }
+        if (context.mode().id !== 'select') return chapter.restart();
 
         context.on('exit.intro', function() {
             return chapter.restart();
@@ -320,9 +309,7 @@ export function uiIntroLine(context, reveal) {
 
     // selected wrong road type
     function retryPresetResidential() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
-        }
+        if (context.mode().id !== 'select') return chapter.restart();
 
         context.on('exit.intro', function() {
             return chapter.restart();
@@ -390,7 +377,7 @@ export function uiIntroLine(context, reveal) {
 
     function updateLine() {
         context.history().reset('doneAddLine');
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return chapter.restart();
         }
 
@@ -425,7 +412,7 @@ export function uiIntroLine(context, reveal) {
 
     function addNode() {
         context.history().reset('doneAddLine');
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return chapter.restart();
         }
 
@@ -440,7 +427,7 @@ export function uiIntroLine(context, reveal) {
         });
 
         context.history().on('change.intro', function(changed) {
-            if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+            if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
                 return continueTo(updateLine);
             }
             if (changed.created().length === 1) {
@@ -464,7 +451,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function startDragEndpoint() {
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return continueTo(updateLine);
         }
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
@@ -472,14 +459,14 @@ export function uiIntroLine(context, reveal) {
         reveal(box, t('intro.lines.start_drag_endpoint'));
 
         context.map().on('move.intro drawn.intro', function() {
-            if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+            if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
                 return continueTo(updateLine);
             }
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             reveal(box, t('intro.lines.start_drag_endpoint'), { duration: 0 });
 
-            var entity = context.entity(woodRoadEndId);
+            var entity = context.entity(woodRoadEndID);
             if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) <= 4) {
                 continueTo(finishDragEndpoint);
             }
@@ -493,7 +480,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function finishDragEndpoint() {
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return continueTo(updateLine);
         }
 
@@ -502,14 +489,14 @@ export function uiIntroLine(context, reveal) {
         reveal(box, t('intro.lines.finish_drag_endpoint'));
 
         context.map().on('move.intro drawn.intro', function() {
-            if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+            if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
                 return continueTo(updateLine);
             }
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             reveal(box, t('intro.lines.finish_drag_endpoint'), { duration: 0 });
 
-            var entity = context.entity(woodRoadEndId);
+            var entity = context.entity(woodRoadEndID);
             if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) > 4) {
                 continueTo(startDragEndpoint);
             }
@@ -528,11 +515,11 @@ export function uiIntroLine(context, reveal) {
 
 
     function startDragMidpoint() {
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return continueTo(updateLine);
         }
-        if (context.selectedIDs().indexOf(woodRoadId) === -1) {
-            context.enter(modeSelect(context, [woodRoadId]));
+        if (context.selectedIDs().indexOf(woodRoadID) === -1) {
+            context.enter(modeSelect(context, [woodRoadID]));
         }
 
         var padding = 80 * Math.pow(2, context.map().zoom() - 19);
@@ -540,7 +527,7 @@ export function uiIntroLine(context, reveal) {
         reveal(box, t('intro.lines.start_drag_midpoint'));
 
         context.map().on('move.intro drawn.intro', function() {
-            if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+            if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
                 return continueTo(updateLine);
             }
             var padding = 80 * Math.pow(2, context.map().zoom() - 19);
@@ -557,7 +544,7 @@ export function uiIntroLine(context, reveal) {
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') {
                 // keep Wood Road selected so midpoint triangles are drawn..
-                context.enter(modeSelect(context, [woodRoadId]));
+                context.enter(modeSelect(context, [woodRoadID]));
             }
         });
 
@@ -571,7 +558,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function continueDragMidpoint() {
-        if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+        if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
             return continueTo(updateLine);
         }
 
@@ -589,7 +576,7 @@ export function uiIntroLine(context, reveal) {
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
+            if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
                 return continueTo(updateLine);
             }
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
@@ -611,9 +598,9 @@ export function uiIntroLine(context, reveal) {
         context.history().reset('doneUpdateLine');
         context.enter(modeBrowse(context));
 
-        if (!context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return chapter.restart();
         }
 
@@ -683,7 +670,7 @@ export function uiIntroLine(context, reveal) {
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'select') return;
                 var ids = context.selectedIDs();
-                if (ids.length !== 1 || ids[0] !== eleventhAvenueEndId) return;
+                if (ids.length !== 1 || ids[0] !== eleventhAvenueEndID) return;
 
                 timeout(function() {
                     var node = selectMenuItem('split').node();
@@ -710,9 +697,9 @@ export function uiIntroLine(context, reveal) {
 
 
     function splitIntersection() {
-        if (!context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return continueTo(deleteLines);
         }
 
@@ -721,7 +708,7 @@ export function uiIntroLine(context, reveal) {
 
         var wasChanged = false;
         var menuCoords = context.map().mouseCoordinates();
-        washingtonSegmentId = null;
+        _washingtonSegmentID = null;
 
         revealEditMenu(menuCoords, t('intro.lines.split_intersection',
             { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') })
@@ -741,10 +728,10 @@ export function uiIntroLine(context, reveal) {
             wasChanged = true;
             timeout(function() {
                 if (context.history().undoAnnotation() === t('operations.split.annotation.line')) {
-                    washingtonSegmentId = changed.created()[0].id;
+                    _washingtonSegmentID = changed.created()[0].id;
                     continueTo(didSplit);
                 } else {
-                    washingtonSegmentId = null;
+                    _washingtonSegmentID = null;
                     continueTo(retrySplit);
                 }
             }, 300);  // after any transition (e.g. if user deleted intersection)
@@ -785,11 +772,11 @@ export function uiIntroLine(context, reveal) {
 
 
     function didSplit() {
-        if (!washingtonSegmentId ||
-            !context.hasEntity(washingtonSegmentId) ||
-            !context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!_washingtonSegmentID ||
+            !context.hasEntity(_washingtonSegmentID) ||
+            !context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return continueTo(rightClickIntersection);
         }
 
@@ -819,17 +806,17 @@ export function uiIntroLine(context, reveal) {
 
         context.on('enter.intro', function() {
             var ids = context.selectedIDs();
-            if (ids.length === 1 && ids[0] === washingtonSegmentId) {
+            if (ids.length === 1 && ids[0] === _washingtonSegmentID) {
                 continueTo(multiSelect);
             }
         });
 
         context.history().on('change.intro', function() {
-            if (!washingtonSegmentId ||
-                !context.hasEntity(washingtonSegmentId) ||
-                !context.hasEntity(washingtonStreetId) ||
-                !context.hasEntity(twelfthAvenueId) ||
-                !context.hasEntity(eleventhAvenueEndId)) {
+            if (!_washingtonSegmentID ||
+                !context.hasEntity(_washingtonSegmentID) ||
+                !context.hasEntity(washingtonStreetID) ||
+                !context.hasEntity(twelfthAvenueID) ||
+                !context.hasEntity(eleventhAvenueEndID)) {
                 return continueTo(rightClickIntersection);
             }
         });
@@ -844,17 +831,17 @@ export function uiIntroLine(context, reveal) {
 
 
     function multiSelect() {
-        if (!washingtonSegmentId ||
-            !context.hasEntity(washingtonSegmentId) ||
-            !context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!_washingtonSegmentID ||
+            !context.hasEntity(_washingtonSegmentID) ||
+            !context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return continueTo(rightClickIntersection);
         }
 
         var ids = context.selectedIDs();
-        var hasWashington = ids.indexOf(washingtonSegmentId) !== -1;
-        var hasTwelfth = ids.indexOf(twelfthAvenueId) !== -1;
+        var hasWashington = ids.indexOf(_washingtonSegmentID) !== -1;
+        var hasTwelfth = ids.indexOf(twelfthAvenueID) !== -1;
 
         if (hasWashington && hasTwelfth) {
             return continueTo(multiRightClick);
@@ -910,11 +897,11 @@ export function uiIntroLine(context, reveal) {
             });
 
             context.history().on('change.intro', function() {
-                if (!washingtonSegmentId ||
-                    !context.hasEntity(washingtonSegmentId) ||
-                    !context.hasEntity(washingtonStreetId) ||
-                    !context.hasEntity(twelfthAvenueId) ||
-                    !context.hasEntity(eleventhAvenueEndId)) {
+                if (!_washingtonSegmentID ||
+                    !context.hasEntity(_washingtonSegmentID) ||
+                    !context.hasEntity(washingtonStreetID) ||
+                    !context.hasEntity(twelfthAvenueID) ||
+                    !context.hasEntity(eleventhAvenueEndID)) {
                     return continueTo(rightClickIntersection);
                 }
             });
@@ -930,11 +917,11 @@ export function uiIntroLine(context, reveal) {
 
 
     function multiRightClick() {
-        if (!washingtonSegmentId ||
-            !context.hasEntity(washingtonSegmentId) ||
-            !context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!_washingtonSegmentID ||
+            !context.hasEntity(_washingtonSegmentID) ||
+            !context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return continueTo(rightClickIntersection);
         }
 
@@ -952,13 +939,13 @@ export function uiIntroLine(context, reveal) {
             timeout(function() {
                 var ids = context.selectedIDs();
                 if (ids.length === 2 &&
-                    ids.indexOf(twelfthAvenueId) !== -1 &&
-                    ids.indexOf(washingtonSegmentId) !== -1) {
+                    ids.indexOf(twelfthAvenueID) !== -1 &&
+                    ids.indexOf(_washingtonSegmentID) !== -1) {
                         var node = selectMenuItem('delete').node();
                         if (!node) return;
                         continueTo(multiDelete);
                 } else if (ids.length === 1 &&
-                    ids.indexOf(washingtonSegmentId) !== -1) {
+                    ids.indexOf(_washingtonSegmentID) !== -1) {
                     return continueTo(multiSelect);
                 } else {
                     return continueTo(didSplit);
@@ -967,11 +954,11 @@ export function uiIntroLine(context, reveal) {
         }, true);
 
         context.history().on('change.intro', function() {
-            if (!washingtonSegmentId ||
-                !context.hasEntity(washingtonSegmentId) ||
-                !context.hasEntity(washingtonStreetId) ||
-                !context.hasEntity(twelfthAvenueId) ||
-                !context.hasEntity(eleventhAvenueEndId)) {
+            if (!_washingtonSegmentID ||
+                !context.hasEntity(_washingtonSegmentID) ||
+                !context.hasEntity(washingtonStreetID) ||
+                !context.hasEntity(twelfthAvenueID) ||
+                !context.hasEntity(eleventhAvenueEndID)) {
                 return continueTo(rightClickIntersection);
             }
         });
@@ -986,11 +973,11 @@ export function uiIntroLine(context, reveal) {
 
 
     function multiDelete() {
-        if (!washingtonSegmentId ||
-            !context.hasEntity(washingtonSegmentId) ||
-            !context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
+        if (!_washingtonSegmentID ||
+            !context.hasEntity(_washingtonSegmentID) ||
+            !context.hasEntity(washingtonStreetID) ||
+            !context.hasEntity(twelfthAvenueID) ||
+            !context.hasEntity(eleventhAvenueEndID)) {
             return continueTo(rightClickIntersection);
         }
 
@@ -1010,13 +997,13 @@ export function uiIntroLine(context, reveal) {
         });
 
         context.on('exit.intro', function() {
-            if (context.hasEntity(washingtonSegmentId) || context.hasEntity(twelfthAvenueId)) {
+            if (context.hasEntity(_washingtonSegmentID) || context.hasEntity(twelfthAvenueID)) {
                 return continueTo(multiSelect);  // left select mode but roads still exist
             }
         });
 
         context.history().on('change.intro', function() {
-            if (context.hasEntity(washingtonSegmentId) || context.hasEntity(twelfthAvenueId)) {
+            if (context.hasEntity(_washingtonSegmentID) || context.hasEntity(twelfthAvenueID)) {
                 continueTo(retryDelete);         // changed something but roads still exist
             } else {
                 continueTo(play);

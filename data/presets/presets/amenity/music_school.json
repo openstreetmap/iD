@@ -3,7 +3,9 @@
     "fields": [
         "name",
         "operator",
-        "address"
+        "address",
+        "building_area",
+        "opening_hours"
     ],
     "geometry": [
         "point",

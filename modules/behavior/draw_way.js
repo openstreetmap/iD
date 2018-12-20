@@ -5,8 +5,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     actionAddMidpoint,
     actionMoveNode,
@@ -17,6 +15,7 @@ import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
+import { utilKeybinding } from '../util';
 
 
 export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
@@ -41,9 +40,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     _tempEdits++;
 
 
-
     function keydown() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope')) {
                 context.surface()
                     .classed('nope-suppressed', true);
@@ -56,7 +54,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     function keyup() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope-suppressed')) {
                 context.surface()
                     .classed('nope', true);
@@ -120,7 +118,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
             var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
-            
+
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
                     nodes.splice(-2, 1);

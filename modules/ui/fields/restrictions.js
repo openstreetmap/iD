@@ -66,6 +66,8 @@ export function uiFieldRestrictions(field, context) {
     var _intersection;
     var _fromWayID;
 
+    var _lastXPos;
+
 
     function restrictions(selection) {
         _parent = selection;
@@ -102,12 +104,12 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
         var container = wrap.selectAll('.restriction-container')
@@ -235,7 +237,14 @@ export function uiFieldRestrictions(field, context) {
         var filter = utilFunctor(true);
         var projection = geoRawMercator();
 
-        var d = utilGetDimensions(selection);
+        // Reflow warning: `utilGetDimensions` calls `getBoundingClientRect`
+        // Instead of asking the restriction-container for its dimensions,
+        //  we can ask the #sidebar, which can have its dimensions cached.
+        // width: calc as sidebar - padding
+        // height: hardcoded (from `80_app.css`)
+        // var d = utilGetDimensions(selection);
+        var sdims = utilGetDimensions(d3_select('#sidebar'));
+        var d = [ sdims[0] - 50, 370 ];
         var c = geoVecScale(d, 0.5);
         var z = 22;
 
@@ -268,7 +277,7 @@ export function uiFieldRestrictions(field, context) {
             .translate(geoVecSubtract(c, extentCenter))
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
+        var drawLayers = svgLayers(projection, context).only(['osm','touch']).dimensions(d);
         var drawVertices = svgVertices(projection, context);
         var drawLines = svgLines(projection, context);
         var drawTurns = svgTurns(projection, context);
@@ -286,14 +295,7 @@ export function uiFieldRestrictions(field, context) {
 
             surface
                 .call(breathe);
-
-            d3_select(window)
-                .on('resize.restrictions', function() {
-                    utilSetDimensions(_container, null);
-                    redraw();
-                });
         }
-
 
         // This can happen if we've lowered the detail while a FROM way
         // is selected, and that way is no longer part of the intersection.
@@ -327,6 +329,11 @@ export function uiFieldRestrictions(field, context) {
                 .classed('selected', true)
                 .classed('related', true);
         }
+
+        document.addEventListener('resizeWindow', function () {
+            utilSetDimensions(_container, null);
+            redraw(1);
+        }, false);
 
         updateHints(null);
 
@@ -428,10 +435,20 @@ export function uiFieldRestrictions(field, context) {
             updateHints(datum);
         }
 
+        _lastXPos = _lastXPos || sdims[0];
 
-        function redraw() {
-            if (context.hasEntity(_vertexID)) {
-                _container.call(renderViewer);
+        function redraw(minChange) {
+            var xPos = -1;
+
+            if (minChange) {
+                xPos = utilGetDimensions(d3_select('#sidebar'))[0];
+            }
+
+            if (!minChange || (minChange && Math.abs(xPos - _lastXPos) >= minChange)) {
+                if (context.hasEntity(_vertexID)) {
+                    _lastXPos = xPos;
+                    _container.call(renderViewer);
+                }
             }
         }
 

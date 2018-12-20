@@ -176,8 +176,8 @@ export function uiFieldHelp(context, fieldName) {
 
 
     fieldHelp.body = function(selection) {
-        // This control expects the field to have a preset-input-wrap div
-        _wrap = selection.selectAll('.preset-input-wrap');
+        // This control expects the field to have a form-field-input-wrap div
+        _wrap = selection.selectAll('.form-field-input-wrap');
         if (_wrap.empty()) return;
 
         // absolute position relative to the inspector, so it "floats" above the fields

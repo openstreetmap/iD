@@ -1,0 +1,11 @@
+{
+    "key": "piste:grooming",
+    "type": "combo",
+    "label": "Grooming",
+    "strings": {
+        "options": {
+            "classic": "Classic - Winter Hiking",
+            "backcountry": "Backcountry - Snowshoeing"
+        }
+    }
+}

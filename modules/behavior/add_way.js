@@ -6,29 +6,29 @@ import { utilRebind } from '../util/rebind';
 
 
 export function behaviorAddWay(context) {
-    var dispatch = d3_dispatch('start', 'startFromWay', 'startFromNode'),
-        draw = behaviorDraw(context);
+    var dispatch = d3_dispatch('start', 'startFromWay', 'startFromNode');
+    var draw = behaviorDraw(context);
 
-    var addWay = function(surface) {
+    function behavior(surface) {
         draw.on('click', function() { dispatch.apply('start', this, arguments); })
             .on('clickWay', function() { dispatch.apply('startFromWay', this, arguments); })
             .on('clickNode', function() { dispatch.apply('startFromNode', this, arguments); })
-            .on('cancel', addWay.cancel)
-            .on('finish', addWay.cancel);
+            .on('cancel', behavior.cancel)
+            .on('finish', behavior.cancel);
 
         context.map()
             .dblclickEnable(false);
 
         surface.call(draw);
-    };
+    }
 
 
-    addWay.off = function(surface) {
+    behavior.off = function(surface) {
         surface.call(draw.off);
     };
 
 
-    addWay.cancel = function() {
+    behavior.cancel = function() {
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
         }, 1000);
@@ -37,11 +37,11 @@ export function behaviorAddWay(context) {
     };
 
 
-    addWay.tail = function(text) {
+    behavior.tail = function(text) {
         draw.tail(text);
-        return addWay;
+        return behavior;
     };
 
 
-    return utilRebind(addWay, dispatch, 'on');
+    return utilRebind(behavior, dispatch, 'on');
 }

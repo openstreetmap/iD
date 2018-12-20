@@ -4,6 +4,7 @@
         "name",
         "operator",
         "address",
+        "building_area",
         "opening_hours",
         "dance/style"
     ],

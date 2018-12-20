@@ -14,20 +14,20 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 
 export function uiFieldRadio(field, context) {
-    var dispatch = d3_dispatch('change'),
-        placeholder = d3_select(null),
-        wrap = d3_select(null),
-        labels = d3_select(null),
-        radios = d3_select(null),
-        radioData = _clone(field.options || field.keys),
-        typeField,
-        layerField,
-        oldType = {},
-        entity;
+    var dispatch = d3_dispatch('change');
+    var placeholder = d3_select(null);
+    var wrap = d3_select(null);
+    var labels = d3_select(null);
+    var radios = d3_select(null);
+    var radioData = _clone(field.options || field.keys);
+    var typeField;
+    var layerField;
+    var _oldType = {};
+    var _entity;
 
 
     function selectedKey() {
-        var node = wrap.selectAll('.toggle-list label.active input');
+        var node = wrap.selectAll('.form-field-input-radio label.active input');
         return !node.empty() && node.datum();
     }
 
@@ -35,12 +35,12 @@ export function uiFieldRadio(field, context) {
     function radio(selection) {
         selection.classed('preset-radio', true);
 
-        wrap = selection.selectAll('.preset-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         var enter = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap toggle-list');
+            .attr('class', 'form-field-input-wrap form-field-input-radio');
 
         enter
             .append('span')
@@ -79,10 +79,10 @@ export function uiFieldRadio(field, context) {
 
 
     function structureExtras(selection, tags) {
-        var selected = selectedKey(),
-            type = context.presets().field(selected),
-            layer = context.presets().field('layer'),
-            showLayer = (selected === 'bridge' || selected === 'tunnel');
+        var selected = selectedKey();
+        var type = context.presets().field(selected);
+        var layer = context.presets().field('layer');
+        var showLayer = (selected === 'bridge' || selected === 'tunnel');
 
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
@@ -101,13 +101,14 @@ export function uiFieldRadio(field, context) {
 
         list = list.enter()
             .append('ul')
+            .attr('class', 'labeled-inputs')
             .merge(list);
 
 
         // Type
         if (type) {
             if (!typeField || typeField.id !== selected) {
-                typeField = uiField(context, type, entity, { wrap: false })
+                typeField = uiField(context, type, _entity, { wrap: false })
                     .on('change', changeType);
             }
             typeField.tags(tags);
@@ -125,17 +126,17 @@ export function uiFieldRadio(field, context) {
         // Enter
         var typeEnter = typeItem.enter()
             .insert('li', ':first-child')
-            .attr('class', 'cf structure-type-item');
+            .attr('class', 'structure-type-item');
 
         typeEnter
             .append('span')
-            .attr('class', 'col6 label structure-label-type')
+            .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
             .text(t('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
-            .attr('class', 'col6 structure-input-type-wrap');
+            .attr('class', 'structure-input-type-wrap');
 
         // Update
         typeItem = typeItem
@@ -150,7 +151,7 @@ export function uiFieldRadio(field, context) {
         // Layer
         if (layer && showLayer) {
             if (!layerField) {
-                layerField = uiField(context, layer, entity, { wrap: false })
+                layerField = uiField(context, layer, _entity, { wrap: false })
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
@@ -170,17 +171,17 @@ export function uiFieldRadio(field, context) {
         // Enter
         var layerEnter = layerItem.enter()
             .append('li')
-            .attr('class', 'cf structure-layer-item');
+            .attr('class', 'structure-layer-item');
 
         layerEnter
             .append('span')
-            .attr('class', 'col6 label structure-label-layer')
+            .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
             .text(t('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
-            .attr('class', 'col6 structure-input-layer-wrap');
+            .attr('class', 'structure-input-layer-wrap');
 
         // Update
         layerItem = layerItem
@@ -199,7 +200,7 @@ export function uiFieldRadio(field, context) {
 
         var val = t[key];
         if (val !== 'no') {
-            oldType[key] = val;
+            _oldType[key] = val;
         }
 
         if (field.type === 'structureRadio') {
@@ -233,8 +234,8 @@ export function uiFieldRadio(field, context) {
 
 
     function changeRadio() {
-        var t = {},
-            activeKey;
+        var t = {};
+        var activeKey;
 
         if (field.key) {
             t[field.key] = undefined;
@@ -247,7 +248,7 @@ export function uiFieldRadio(field, context) {
             if (field.key) {
                 if (active) t[field.key] = d;
             } else {
-                var val = oldType[activeKey] || 'yes';
+                var val = _oldType[activeKey] || 'yes';
                 t[d] = active ? val : undefined;
             }
         });
@@ -284,14 +285,14 @@ export function uiFieldRadio(field, context) {
             placeholder.text(t('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));
-            oldType[selection.datum()] = tags[selection.datum()];
+            _oldType[selection.datum()] = tags[selection.datum()];
         }
 
         if (field.type === 'structureRadio') {
             // For waterways without a tunnel tag, set 'culvert' as
-            // the oldType to default to if the user picks 'tunnel'
-            if (!!tags.waterway && !oldType.tunnel) {
-                oldType.tunnel = 'culvert';
+            // the _oldType to default to if the user picks 'tunnel'
+            if (!!tags.waterway && !_oldType.tunnel) {
+                _oldType.tunnel = 'culvert';
             }
 
             wrap.call(structureExtras, tags);
@@ -304,10 +305,10 @@ export function uiFieldRadio(field, context) {
     };
 
 
-    radio.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
-        oldType = {};
+    radio.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
+        _oldType = {};
         return radio;
     };
 

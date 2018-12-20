@@ -135,14 +135,6 @@
             "delete_member": {
                 "annotation": "Inalis ang kasapi o miyembro ng relation."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Dinugtong ang isang \"way\" sa isang punto o tuldok.",
-                    "vertex": "Dinugtong ang isang \"way\" sa isa pang \"way\".",
-                    "line": "Dinugtong ang isang \"way\" sa isang linya.",
-                    "area": "Dinugtong ang isang \"way\" sa isang area o poligon."
-                }
-            },
             "disconnect": {
                 "title": "Alisin ang pagkakadugtong",
                 "description": "Alisin sa pagkakadugtong ang mga linya / poligon.",
@@ -286,7 +278,6 @@
         "browser_notice": "Ang editor na ito compatible lamang sa bagong version Firefox, Chrome, Safari, Opera, and Internet Explorer 11. Magupgrade ng browser o gamitin ang Potlatch 2 para makapag-edit.",
         "translate": {
             "translate": "I-salin",
-            "localized_translation_label": "Multilingual name",
             "localized_translation_language": "Pumili ng wika",
             "localized_translation_name": "Pangalan"
         },

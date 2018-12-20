@@ -316,10 +316,9 @@ export function svgData(projection, context, dispatch) {
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var lastDotIndex = fileName.lastIndexOf('.');
-        if (lastDotIndex < 0) return;
-
-        return fileName.substr(lastDotIndex);
+        var re = /\.(gpx|kml|(geo)?json)$/i;
+        var match = fileName.toLowerCase().match(re);
+        return match && match.length && match[0];
     }
 
 
@@ -471,15 +470,16 @@ export function svgData(projection, context, dispatch) {
     };
 
 
-    drawData.url = function(url) {
+    drawData.url = function(url, defaultExtension) {
         _template = null;
         _fileList = null;
         _geojson = null;
         _src = null;
 
-        var extension = getExtension(url);
-        var re = /\.(gpx|kml|(geo)?json)$/i;
-        if (re.test(extension)) {
+        // strip off any querystring/hash from the url before checking extension
+        var testUrl = url.split(/[?#]/)[0];
+        var extension = getExtension(testUrl) || defaultExtension;
+        if (extension) {
             _template = null;
             d3_text(url, function(err, data) {
                 if (err) return;

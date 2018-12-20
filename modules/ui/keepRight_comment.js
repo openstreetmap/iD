@@ -1,4 +1,7 @@
 import { t } from '../util/locale';
+import { svgIcon } from '../svg';
+import { services } from '../services';
+import { utilDetect } from '../util/detect';
 
 
 export function uiKeepRightComment() {
@@ -23,9 +26,9 @@ export function uiKeepRightComment() {
             .text(_error.comment);
     }
 
-    keepRightComment.error = function(_) {
+    keepRightComment.error = function(val) {
         if (!arguments.length) return _error;
-        _error = _;
+        _error = val;
         return keepRightComment;
     };
 

@@ -16,10 +16,10 @@ body {
         sans-serif;
     margin: 0;
     padding: 0;
-    min-width: 768px;
     color: #333;
     overflow: hidden;
     -ms-user-select: none;
+    -ms-content-zooming: none;
 }
 
 .unsupported {
@@ -32,7 +32,6 @@ body {
 .id-container {
     height: 100%;
     width: 100%;
-    min-width: 768px;
 }
 
 #content {
@@ -55,65 +54,12 @@ body {
     transition-duration: 200ms;
 }
 
-/* Firefox has its own ideas about fixed positioning when a css filter is active - #4348 */
-/* https://stackoverflow.com/questions/37949942/firefox-position-bug-by-parent-with-filter */
-@-moz-document url-prefix() {
-    #content > #bar {
-        width: 100vw;
-    }
-    #content.inactive > #bar > .spacer.col4 {
-        width: 0px;
-    }
-    #content.active > #bar > .spacer.col4 {
-        width: 33.3333%;
-        transition-duration: 200ms;
-        transition-timing-function: step-end;
-    }
-}
-
 #defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;
     width: 0;
     height: 0;
 }
-
-.spacer {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.limiter {
-    position: relative;
-    max-width: 1200px;
-}
-
-.spinner {
-    opacity: .5;
-    float: right;
-}
-[dir='rtl'] .spinner {
-    float: left;
-}
-
-.spinner img {
-    height: 40px;
-    width: 40px;
-    border-radius: 4px;
-    margin-right: 10px;
-    background: black;
-}
-[dir='rtl'] .spinner img {
-    margin-left: 10px;
-    margin-right: auto;
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-}
-
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
@@ -126,9 +72,12 @@ a, button, input, textarea {
     -webkit-touch-callout: none;
 }
 
+ul li {
+    list-style: none;
+}
+
 a,
 button,
-.checkselect label:hover,
 .radial-menu-item {
     cursor: pointer;
 }
@@ -150,7 +99,6 @@ h3 {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 h4, h5 {
     font-size: 12px;
     font-weight: bold;
@@ -178,23 +126,18 @@ p {
     margin: 0;
     padding: 0;
 }
-
 p:last-child {
     padding-bottom: 0;
 }
-
 em {
     font-style: italic;
 }
-
 strong {
     font-weight: bold;
 }
-
 a:visited, a {
     color: #7092ff;
 }
-
 a:hover {
     color: #597be7;
 }
@@ -221,7 +164,6 @@ input[type=email] {
     border: 1px solid #ccc;
     padding: 5px 20px 5px 10px;
     height: 30px;
-    width: 100%;
     border-radius: 4px;
     text-overflow: ellipsis;
 }
@@ -237,7 +179,14 @@ input[type=email] {
 
 textarea:focus,
 input:focus {
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
+}
+
+textarea.disabled,
+input.disabled {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
 }
 
 input[type="checkbox"],
@@ -247,6 +196,7 @@ input[type="radio"] {
     height: 14px;
     margin-right: 5px;
     margin-top: 3px;
+    cursor: pointer;
 }
 [dir='rtl'] input[type="checkbox"],
 [dir='rtl'] input[type="radio"] {
@@ -255,26 +205,16 @@ input[type="radio"] {
     margin-right: 0;
 }
 
-/* remove bottom border radius when combobox is open */
-.combobox + * textarea:focus,
-.combobox + * input:focus {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
 /* tables */
-
 table {
     background-color: #fff;
     border-collapse: collapse;
     width: 100%;
     border-spacing: 0;
 }
-
 table th {
     text-align: left;
 }
-
 table.tags, table.tags td, table.tags th {
     border: 1px solid #ccc;
     padding: 4px;
@@ -286,56 +226,9 @@ table.tags, table.tags td, table.tags th {
 
 /* Grid
 ------------------------------------------------------- */
-.col0    { float: left; width: 04.1666%; }
-.col1    { float: left; width: 08.3333%; }
-.col2    { float: left; width: 16.6666%; }
-.col3    { float: left; width: 25.0000%; max-width: 300px; }
-.col4    { float: left; width: 33.3333%; max-width: 400px; }
-.col5    { float: left; width: 41.6666%; max-width: 500px; }
-.col6    { float: left; width: 50.0000%; max-width: 600px; }
-.col7    { float: left; width: 58.3333%; }
-.col8    { float: left; width: 66.6666%; }
-.col9    { float: left; width: 75.0000%; }
-.col10   { float: left; width: 83.3333%; }
-.col11   { float: left; width: 91.6666%; }
-.col12   { float: left; width: 100.0000%; }
-
-/* UI Lists
-------------------------------------------------------- */
-ul li { list-style: none;}
-
-.toggle-list > label {
-    position: relative;
-    padding: 5px 10px;
-    display: block;
-    height: 30px;
-    background-color: #fff;
-    color: #7092ff;
-    cursor: pointer;
-}
-
-.toggle-list > label:hover {
-    background-color: #ececec;
-}
-
-.toggle-list > label:not(:last-child) {
-    border-bottom: 1px solid #ccc;
-}
-
-.toggle-list > label:last-child {
-    border-radius: 0 0 3px 3px;
-}
-
-.toggle-list label > span {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.toggle-list > label.active {
-    background: #E8EBFF;
-}
+.col6  { float: left; width: 50.0000%; max-width: 600px; }
+.col8  { float: left; width: 66.6666%; }
+.col12 { float: left; width: 100.0000%; }
 
 
 /* Utility Classes
@@ -378,11 +271,9 @@ li.hide {
 .deemphasize {
     color: #a9a9a9;
 }
-
 .content {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
 }
-
 .loading {
     background: url(img/loader_bg.gif);
     background-size: 5px 5px;
@@ -408,55 +299,13 @@ button:focus,
 button:hover {
     background-color: #ececec;
 }
-
-button[disabled],
-button.disabled {
-    background-color: rgba(255,255,255,.25);
-    color: rgba(0,0,0,.4);
-    cursor: auto;
-}
-
 button.active {
     background: #7092ff;
 }
-
-button.minor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 10%;
-    border-radius: 0;
-    background-color: #fafafa;
-}
-[dir='rtl'] button.minor {
-    right: auto;
-}
-
-button.minor .icon {
-    opacity: .5;
-}
-
-button.minor:hover {
-    background-color: #f1f1f1;
-}
-
-.button-wrap {
-    display: inline-block;
-    padding-right: 10px;
-    margin: 0;
-}
-
-.button-wrap button:only-child {
-    width: 100%;
-}
-
-.button-wrap:last-of-type {
-    padding-right: 0;
-}
-[dir='rtl'] .button-wrap:last-of-type {
-    padding-left: 0;
-    padding-right: 10px;
+button.disabled {
+    background-color: rgba(255,255,255,.25);
+    color: rgba(0,0,0,.4);
+    cursor: not-allowed;
 }
 
 .joined button {
@@ -471,14 +320,12 @@ button.minor:hover {
 .fillL .joined button {
     border-right: 1px solid #fff;
 }
-
 .joined button:first-child {
     border-radius: 4px 0 0 4px;
 }
 [dir='rtl'] .joined button:first-child {
     border-radius: 0 4px 4px 0;
 }
-
 .joined button:last-child {
     border-right-width: 0;
     border-radius: 0 4px 4px 0;
@@ -487,97 +334,29 @@ button.minor:hover {
     border-radius: 4px 0 0 4px;
 }
 
+
+/* Action buttons */
 button.action {
     background: #7092ff;
     color: #fff;
+}
+button.action:focus,
+button.action:hover {
+    background: #597be7;
+}
+button.secondary-action {
+    background: #ececec;
+}
+button.secondary-action:focus,
+button.secondary-action:hover {
+    background: #cccccc;
 }
 
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;
     color: #888;
-}
-
-button.action:focus,
-button.action:hover {
-    background: #597BE7;
-}
-
-button.secondary-action {
-    background: #ececec;
-}
-
-button.secondary-action:focus,
-button.secondary-action:hover {
-    background: #cccccc;
-}
-
-button.save .count {
-    display: none;
-}
-
-button.save.has-count .count {
-    display: block;
-    position: absolute;
-    top: 5px;
-    background: #fff;
-    border-color: #fff;
-    opacity: 0.5;
-    color: #333;
-    padding: 10px;
-    height: 30px;
-    line-height: 12px;
-    border-radius: 4px;
-    margin: auto;
-    margin-left: 9.3333%;
-}
-[dir='rtl'] button.save.has-count .count {
-    margin-left: auto;
-    margin-right: 8%;
-}
-
-button.save.has-count .count::before {
-    content: "";
-    margin: auto;
-    width: 0;
-    height: 0;
-    position: absolute;
-    left: -6px;
-    top: 0;
-    bottom: 0;
-    border-top:    6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right-width: 6px;
-    border-right-style: solid;
-    border-right-color: inherit;
-}
-[dir='rtl'] button.save.has-count .count::before {
-    border-left: 6px solid rgba(255,255,255,.5);
-    border-right: none;
-    left: auto;
-    right: -6px;
-}
-
-.help-wrap svg.icon.pre-text.add-note,
-button.add-note svg.icon {
-    height: 15px;
-    width: 15px;
-    color: rgba(0,0,0,0.25);
-    stroke: #333;
-    stroke-width: 60px;
-    margin-top: 3px;
-}
-button.add-note svg.icon {
-    margin-left: unset;
-    margin-right: 7px;
-}
-[dir='rtl'] button.add-note svg.icon {
-    margin-left: 7px;
-    margin-right: unset;
-}
-.help-wrap svg.icon.pre-text.add-note {
-    margin-left: 3px;
-    margin-right: 3px;
+    cursor: not-allowed;
 }
 
 
@@ -612,15 +391,12 @@ button.add-note svg.icon {
 .icon.light {
     color: #fff;
 }
-
 .icon.created {
     color: #00ca07;
 }
-
 .icon.modified {
     color: #666;
 }
-
 .icon.deleted {
     color: #ea0000;
 }
@@ -637,20 +413,143 @@ button.add-note svg.icon {
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 #bar {
-    position: fixed;
-    padding: 10px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    position: absolute;
+    padding: 10px;
     left: 0;
     top: 0;
     right: 0;
     height: 60px;
     z-index: 9;
-    min-width: 768px;
 }
 
-[dir='rtl'] #bar .spacer,
-[dir='rtl'] #bar .button-wrap,
-[dir='rtl'] #bar .button-wrap button {
-    float: right;
+.tool-group {
+    display: flex;
+    flex: 0 1 auto;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+.tool-group.leading-area {
+    flex-shrink: 2;
+    justify-content: flex-start;
+}
+.tool-group.center-area {
+    justify-content: center;
+}
+.tool-group.trailing-area {
+    justify-content: flex-start;
+}
+
+.tool-group > div {
+    display: flex;
+    margin: 0 5px;
+}
+.tool-group button {
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 0 10px;
+    min-width: 30px;
+}
+.tool-group button .icon {
+    flex: 0 0 20px;
+}
+.tool-group button .label {
+    flex: 0 1 auto;
+    padding: 0 5px;
+}
+
+button.save .count {
+    display: inline-block;
+    border: 0px solid #ccc;
+    border-left-width: 1px;
+    padding: 0px 0px 0px 8px;
+    min-width: 32px;
+    text-align: center;
+}
+[dir='rtl'] button.save .count {
+    border-left-width: 0px;
+    border-right-width: 1px;
+    padding: 0px 8px 0px 0px;
+}
+button.save.disabled .count {
+    border: 0px solid rgba(0,0,0,0.25);
+    border-left-width: 1px;
+}
+[dir='rtl'] button.save.disabled .count {
+    border-left-width: 0px;
+    border-right-width: 1px;
+    padding: 0px 8px 0px 0px;
+}
+#bar.narrow button.save .count {
+    padding: 0px;
+}
+
+button.save .label {
+    margin-right: 3px;
+    margin-left: 0;
+}
+[dir='rtl'] button.save .label {
+    margin-left: 3px;
+    margin-right: 0;
+}
+
+.help-wrap svg.icon.pre-text.add-note,
+button.add-note svg.icon {
+    height: 15px;
+    width: 15px;
+    color: rgba(0,0,0,0.25);
+    stroke: #333;
+    stroke-width: 60px;
+    margin-top: 3px;
+}
+button.add-note svg.icon {
+    margin-left: unset;
+    margin-right: 4px;
+}
+[dir='rtl'] button.add-note svg.icon {
+    margin-left: 4px;
+    margin-right: unset;
+}
+.help-wrap svg.icon.pre-text.add-note {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.spinner {
+    opacity: .5;
+    display: flex;
+    flex-shrink: 2;
+    justify-content: flex-end;
+}
+.spinner img {
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+    background: black;
+}
+[dir='rtl'] .spinner img {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+
+#bar.narrow .tool-group {
+    width: unset;
+}
+#bar.narrow .spinner,
+#bar.narrow button .label {
+    display: none;
+}
+#bar.narrow button .count {
+    border-left-width: 0;
+    border-right-width: 0;
 }
 
 
@@ -738,7 +637,7 @@ button.add-note svg.icon {
     margin: 0;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
-    background-color: #fafafa;
+    background-color: #f6f6f6;
     width: 100%;
     z-index: 1;
     flex-wrap: wrap;
@@ -751,14 +650,19 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
-.sidebar-component .body {
-    width: 100%;
-    overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
+.header-container {
+    display: flex;
+    justify-content: space-between;
 }
 
+.header-block-outer {
+    width: 20%;
+}
+
+.header-block-close {
+    display: flex;
+    justify-content: flex-end;
+}
 
 /* Hide/Toggle collapsable sections (aka Disclosure)
 ------------------------------------------------------- */
@@ -788,13 +692,38 @@ a.hide-toggle {
     position: relative;
     float: left;
     height: 100%;
-    overflow: hidden;
     z-index: 10;
     background: #f6f6f6;
     -ms-user-select: element;
+    border: 0px solid #ccc;
+    border-right-width: 1px;
 }
 [dir='rtl'] #sidebar {
     float: right;
+    border-right-width: 0px;
+    border-left-width: 1px;
+}
+
+#sidebar-resizer {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+}
+[dir='rtl'] #sidebar-resizer {
+    right: auto;
+    left: -6px;
+}
+
+#sidebar.collapsed #sidebar-resizer {
+    /* make target wider to avoid the user accidentally resizing window */
+    width: 10px;
+    right: -10px;
+}
+[dir='rtl'] #sidebar.collapsed #sidebar-resizer {
+    left: -10px;
 }
 
 .sidebar-component {
@@ -803,6 +732,14 @@ a.hide-toggle {
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+.sidebar-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
 }
 
 .panewrap {
@@ -830,6 +767,8 @@ a.hide-toggle {
 .inspector-wrap {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .inspector-hidden {
@@ -845,15 +784,15 @@ a.hide-toggle {
     bottom: 0;
 }
 
-.feature-list-pane .inspector-body {
-    top: 120px;
+.inspector-border {
+    border-bottom: 1px solid #ccc
 }
+
+.feature-list-pane .inspector-body,
 .preset-list-pane .inspector-body {
     top: 120px;
 }
-.entity-editor-pane .inspector-body {
-    top: 60px;
-}
+.entity-editor-pane .inspector-body,
 .selection-list-pane .inspector-body {
     top: 60px;
 }
@@ -904,21 +843,30 @@ a.hide-toggle {
     border-radius: 0;
 }
 
+.geocode-item {
+    width: 50%;
+    background-color: #ccc;
+    left: 25%;
+    margin-top: 30px;
+    border-radius: 2px;
+}
+
+.geocode-item:hover {
+    background-color: #aaa;
+}
+
 .feature-list-item {
     background-color: #fff;
     font-weight: bold;
     height: 40px;
     line-height: 20px;
 }
-
 .feature-list-item:hover {
     background-color: #ececec;
 }
-
 .feature-list-item button {
     background: transparent;
 }
-
 .feature-list-item .label {
     text-align: left;
     padding: 10px 10px;
@@ -934,24 +882,19 @@ a.hide-toggle {
 .feature-list-item .label .icon {
     opacity: .5;
 }
-
 .feature-list-item .close {
     float: right;
     padding: 10px;
 }
-
 .feature-list-item .close .icon {
     opacity: 1;
 }
-
 .feature-list-item .entity-type {
     color: #7092ff;
 }
-
 .feature-list-item:hover .entity-type {
     color: #597be7;
 }
-
 .feature-list-item .entity-name {
     font-weight: normal;
     color: #666;
@@ -1095,6 +1038,9 @@ a.hide-toggle {
 }
 
 .preset-list-button .label {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
     background-color: #f6f6f6;
     text-align: left;
     position: absolute;
@@ -1103,10 +1049,6 @@ a.hide-toggle {
     right: 0;
     padding: 5px 10px;
     left: 60px;
-    line-height: 50px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
     border-radius: 0 3px 3px 0;
 }
@@ -1119,7 +1061,23 @@ a.hide-toggle {
     border-radius: 3px 0 0 3px;
 }
 
-.preset-list-button:hover .label {
+.preset-list-button .label-inner {
+    width: 100%;
+}
+.preset-list-button .label-inner .namepart {
+    height: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 30px;
+}
+[dir='rtl'] .preset-list-button .label-inner .namepart {
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+.preset-list-button:hover .label,
+.preset-list-button:focus .label {
     background-color: #ececec;
 }
 
@@ -1131,7 +1089,7 @@ a.hide-toggle {
     top: 0;
     right: 0;
     width: 32px;
-    background: #fafafa;
+    background: #f6f6f6;
 }
 [dir='rtl'] .preset-list-item button.tag-reference-button {
     left: 0;
@@ -1146,9 +1104,20 @@ a.hide-toggle {
     opacity: .5;
 }
 
+img.tag-reference-wiki-image {
+    float: right;
+    width: 33.3333%;
+    width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
+    border-radius: 4px;
+    max-height: 200px;
+    margin: 10px 5px 15px 20px;
+}
+
+
 .current .preset-list-button,
 .current .preset-list-button .label {
-    background-color: #E8EBFF;
+    background-color: #e8ebff;
 }
 
 .category .preset-list-button:after,
@@ -1209,7 +1178,30 @@ a.hide-toggle {
     margin-bottom: 0;
 }
 
+/*
+    The parts of a field:
+    - `.form-field` is a `div` wraps the entire thing
+    - `.form-field-label` is a `label` that wraps the top part, it contains;
+       - `span` classed `label-text`
+       - 0..n buttons for "remove", "modified", "tag reference"
+    - `.form-field-input-wrap` is a `label` or `div` that wraps the bottom part, it contains;
+       - usually an `input`
+       - sometimes some buttons (translate, increment, decrement)
+       - or could just be a `div` with anything really
+    - `.tag-reference-body` at the bottom (usually hidden)
+
+   .------------------.                             -
+   |  Name        | i |  <- .form-field-label        |
+   +------------------+                               |
+   |  Starbucks   | + |  <- .form-field-input-wrap     >  .form-field
+   '------------------'                               |
+     tag reference       <- .tag-reference-body      |
+                                                    -
+*/
+
 .form-field {
+    display: flex;
+    flex-flow: row wrap;
     margin-bottom: 10px;
     width: 100%;
     -webkit-transition: margin-bottom 200ms;
@@ -1223,350 +1215,201 @@ a.hide-toggle {
     margin-bottom: 0;
 }
 
-.form-label {
+/* A `label` element that wraps the top section */
+.form-field-label {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1 100%;
+    height: 30px;
     position: relative;
     font-weight: bold;
-    border: 1px solid #cfcfcf;
-    padding: 5px 0 5px 10px;
+    color: #333;
     background: #f6f6f6;
-    display: block;
+    border: 1px solid #ccc;
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
-[dir='rtl'] .form-label {
+.form-field-label .label-text {
+    flex: 1 1 auto;
+    padding: 5px 0 5px 10px;
+}
+[dir='rtl'] .form-field-label .label-text {
     padding: 5px 10px 5px 0;
 }
 
-.form-label-button-wrap {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    background: transparent;
-    text-align: right;
-}
-[dir='rtl'] .form-label-button-wrap {
-    text-align: left;
-}
-
-.form-label-button-wrap .tag-reference-button {
-    border-radius: 0 3px 0 0;
-}
-
-.form-label-button-wrap .icon {
-    opacity: .5;
-}
-
-.form-label button {
+.form-field-label button {
+    flex: 0 0 32px;
     border-left: 1px solid #ccc;
     width: 32px;
     height: 100%;
     border-radius: 0;
     background: #f6f6f6;
 }
-[dir='rtl'] .form-label button {
+[dir='rtl'] .form-field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
-    border-radius: 4px 0 0 0;
-    width: 31px;
 }
-.form-label button:hover {
+.form-field-label button:hover {
     background: #f1f1f1;
 }
-
-.form-label .modified-icon,
-.form-field .remove-icon {
-    display: none;
+.form-field-label .icon {
+    opacity: .5;
 }
 
-.modified .form-label .modified-icon,
-.present .form-label .remove-icon {
+.form-field-label .modified-icon,
+.form-field-label .remove-icon {
+    display: none;
+}
+.modified .form-field-label .modified-icon,
+.present .form-field-label .remove-icon {
     display: inline-block;
 }
 
-.form-field > input,
-.form-field > textarea,
-.form-field .preset-input-wrap {
-    border: 1px solid #ccc;
+/* A `div` element that wraps the bottom section */
+.form-field-input-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1 100%;
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
+}
+.nowrap .form-field-input-wrap {
+    border-radius: 0;
+}
+
+
+.form-field-input-wrap > input,
+.form-field-input-wrap > label,
+.form-field-input-wrap > textarea,
+.form-field-input-wrap > ul.chiplist {
+    flex: 1 1 auto;
+    min-height: 30px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0;
     overflow: hidden;
     position: relative;
 }
-
-.form-field textarea {
+.form-field-input-wrap > textarea {
     height: 65px;
+    border-radius: 0 0 4px 4px;
 }
 
-.inspector-border {
-    border-bottom: 1px solid #ccc
-}
-
-/* Inspector (hover styles)
-------------------------------------------------------- */
-.inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap .label,
-.inspector-hover .form-field-multicombo,
-.inspector-hover .structure-extras-wrap,
-.inspector-hover .comments-container .comment,
-.inspector-hover input,
-.inspector-hover textarea,
-.inspector-hover label {
-    background: #ececec;
-}
-
-.inspector-hover a,
-.inspector-hover .form-field-multicombo .chips,
-.inspector-hover .checkselect label:last-of-type {
-    color: #666;
-}
-
-.inspector-hover .form-field-multicombo .chips {
-    background: #eee;
+/* Buttons inside fields */
+.form-field-button {
+    flex: 0 0 32px;
+    height: 30px;
+    width: 32px;
+    position: relative;
+    background-color: #fff;
     border: 1px solid #ccc;
+    border-radius: 0;
+    border-top-width: 0;
+    border-left-width: 0;
+    vertical-align: top;
+}
+[dir='rtl'] .form-field-button {
+    border-left-width: 1px;
+    border-right-width: 0;
+}
+.form-field-button:hover {
+    background-color: #f1f1f1;
+}
+.form-field-button .icon {
+    fill: #333;
+    opacity: .5;
 }
 
-/* no scrollbars */
-.inspector-hover div {
-    overflow-x: hidden;
-    overflow-y: hidden;
+
+/* round corners of first/last child elements */
+.form-field-input-wrap > button:last-of-type {
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .form-field-input-wrap > button:last-of-type {
+    border-bottom-left-radius: 4px;
 }
 
-/* hide and remove from layout */
-.inspector-hidden,
-.inspector-hover label input[type="checkbox"],
-.inspector-hover label input[type="radio"],
-.inspector-hover .toggle-list label,
-.inspector-hover .toggle-list label span,
-.inspector-hover .inspector-inner .add-tag,
-.inspector-hover .inspector-inner .add-relation,
-.inspector-hover .form-field-multicombo .combobox-input,
-.inspector-hover .toggle-list label.remove .icon {
-    height: 0;
-    width: 0;
+
+/* Field - Access, Cycleway
+------------------------------------------------------- */
+.form-field-input-access,
+.form-field-input-cycleway {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* Field - lists with labeled input items
+------------------------------------------------------- */
+.form-field ul.labeled-inputs {
+    flex: 1 1 auto;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
     overflow: hidden;
-    opacity: 0 !important;
-    border-width: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* hide but preserve in layout */
-.inspector-hover .entity-editor-pane button.minor,
-.inspector-hover .combobox-caret,
-.inspector-hover .header button,
-.inspector-hover .spin-control,
-.inspector-hover .form-field-multicombo .chips .remove,
-.inspector-hover .hide-toggle:before,
-.inspector-hover .more-fields,
-.inspector-hover .form-label-button-wrap,
-.inspector-hover .tag-reference-button,
-.inspector-hover .footer * {
-    opacity: 0;
-}
-
-/* Styles for raw tag inspector on hover */
-.inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .form-field.input-wrap-position {
-    width: 50%;
-}
-.inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .input-wrap-position {
-    height: 31px;
-}
-
-.inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 0;
-    border-top-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 4px;
-}
-
-.inspector-hover .more-fields {
-    max-height: 0;
-    margin-bottom: -10px;
-}
-
-/* Unstyle button fields */
-.inspector-hover .toggle-list label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
-    opacity: 1;
-    background-color: transparent;
-    color: #666;
-    padding-left: 0;
-    border-width: 0;
-}
-
-.inspector-hover .toggle-list button.active {
-    padding-left: 10px;
-}
-
-/* Add placeholder only on hover for radio buttons */
-.inspector-hover .toggle-list .placeholder {
-    color: #a9a9a9;
-    padding: 5px 10px;
-    opacity: 1;
-    line-height: 20px;
     width: 100%;
 }
-
-/* Hide placeholder for radio buttons if another is active, or not in hover state */
-.toggle-list label.active ~ .placeholder,
-.toggle-list .placeholder {
-    padding: 0;
-    opacity: 0;
-    width: 0;
-    line-height: 0;
-    display: block;
-    overflow: hidden;
-}
-
-/* More Fields dropdown
-------------------------------------------------------- */
-.more-fields {
-    padding: 0 20px 20px 20px;
-    font-weight: bold;
-}
-.changeset-editor .more-fields {
-    padding: 15px 20px 0 20px;
-}
-
-.more-fields label {
+.form-field ul.labeled-inputs li {
+    border-top: 1px solid #ccc;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
 }
-
-.more-fields input {
-    margin-left: 10px;
-    flex: 1 1 50%;
+.form-field ul.labeled-inputs li:first-child {
+    border-top: 0;
 }
-[dir='rtl'] .more-fields input {
-    margin-left: auto;
-    margin-right: 10px;
-}
-
-.preset-input-wrap .label {
-    height: 30px;
-    background: #F6F6F6;
-    padding: 5px 10px;
-}
-
-[dir='rtl'] .preset-input-wrap .col6 {
-    float: right;
-}
-
-
-/* Field - Access, Cycleway, Structure
-------------------------------------------------------- */
-.structure-extras-wrap li,
-.form-field-cycleway .preset-input-wrap li,
-.form-field-access .preset-input-wrap li {
-    border-bottom: 1px solid #ccc;
-}
-.structure-extras-wrap li:last-child,
-.form-field-cycleway .preset-input-wrap li:last-child,
-.form-field-access .preset-input-wrap li:last-child {
-    border-bottom: 0;
-}
-.structure-input-type-wrap input,
-.structure-input-layer-wrap input,
-.preset-input-cycleway-wrap input,
-.preset-input-access-wrap input {
+.form-field ul.labeled-inputs li > span,
+.form-field ul.labeled-inputs li > div {
+    flex: 1 1 auto;
+    width: 100%;
     border-radius: 0;
+}
+.form-field ul.labeled-inputs li input {
+    border-radius: 0;
+    width: 100%;
+}
+.form-field ul.labeled-inputs li input,
+.form-field ul.labeled-inputs li button {
     border-width: 0;
     border-left-width: 1px;
 }
-[dir='rtl'] .structure-input-type-wrap input,
-[dir='rtl'] .structure-input-layer-wrap input,
-[dir='rtl'] .preset-input-cycleway-wrap input,
-[dir='rtl'] .preset-input-access-wrap input {
+[dir='rtl'] .form-field ul.labeled-inputs li input,
+[dir='rtl'] .form-field ul.labeled-inputs li button {
     border-left-width: 0;
     border-right-width: 1px;
 }
 
-.preset-input-wrap li:last-child input {
-    border-bottom-right-radius: 4px;
-}
 
+/* Field - Structure
+------------------------------------------------------- */
 .structure-extras-wrap {
+    width: 100%;
     padding: 10px 10px;
     background: #fff;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    border-radius: 0 0 4px 4px;
 }
-.structure-extras-wrap ul {
+.structure-extras-wrap > ul.labeled-inputs {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.structure-extras-wrap li:first-child span {
-    border-top-left-radius: 4px;
-}
-.structure-extras-wrap li:first-child input {
-    border-top-right-radius: 4px;
-}
-.structure-extras-wrap li:last-child span {
-    border-bottom-left-radius: 4px;
-}
-.structure-extras-wrap li:last-child input {
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:first-child span {
-    border-top-left-radius: 0;
-    border-top-right-radius: 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:first-child input {
-    border-top-right-radius: 0;
-    border-top-left-radius: 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:last-child span {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:last-child input {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
-}
 
 
-/* Field - Multicombo
+/* Field - Combo / Multicombo
 ------------------------------------------------------- */
-.form-field-multicombo {
-    border: 1px solid #cfcfcf;
-    border-top: 0px;
+.form-field-input-combo > input:only-of-type {
+    border-radius: 0 0 4px 4px;
+}
+
+.form-field-input-multicombo ul.chiplist {
     padding: 5px 0 5px 10px;
     background: #fff;
     display: block;
     border-radius: 0 0 4px 4px;
-    overflow: hidden;
-}
-.form-field-multicombo:focus {
-    border-bottom: 0px;
-}
-.form-field-multicombo.active {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
 }
 
-.form-field-multicombo li {
+.form-field-input-multicombo li.chips {
     display: inline-flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -1578,7 +1421,7 @@ a.hide-toggle {
     margin: 3px;
 }
 
-.form-field-multicombo a {
+.form-field-input-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     line-height: 24px;
@@ -1589,82 +1432,58 @@ a.hide-toggle {
     color: #a6b4ce;
 }
 
-.form-field-multicombo input {
+.form-field-input-multicombo input {
     border: 1px solid #ddd;
     width: 100px;
     margin: 3px;
     height: 31px;
 }
 
-.form-field-multicombo .combobox-caret {
+.form-field-input-multicombo .combobox-caret {
     margin: 3px 3px 3px -30px;
 }
 
-.form-field-multicombo input:focus {
+.form-field-input-multicombo input:focus {
     border-radius: 4px !important;
 }
 
 
-/* Field - Numeric
+/* Field - Text / Numeric
 ------------------------------------------------------- */
-input[type=number] {
-    position: relative;
-    padding-right: 20%;
+.form-field-input-text > input:only-of-type,
+.form-field-input-tel > input:only-of-type,
+.form-field-input-email > input:only-of-type,
+.form-field-input-url > input:only-of-type {
+    border-radius: 0 0 4px 4px;
+}
+.form-field-input-number > input:only-of-type {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-number > input:only-of-type {
+    border-radius: 0 0 4px 0;
+}
+.form-field-input-number > button:last-of-type {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .form-field-input-number > button:last-of-type {
+    border-radius: 0 0 0 4px;
 }
 
-.spin-control {
-    width: 64px;
-    height: 30px;
-    display: inline-block;
-    margin-left: -64px;
-    margin-bottom: -11px;
-    position: relative;
-}
-[dir='rtl'] .spin-control{
-    margin-left: 0;
-    margin-right: -64px;
-}
-
-.spin-control button {
-    right: 1px;
-    position: relative;
-    float: left;
-    height: 100%;
-    width: 32px;
-    border-left: 1px solid #ccc;
-    border-radius: 0;
-    background: rgba(0, 0, 0, 0);
-}
-[dir='rtl'] .spin-control button{
-    border-left: 0;
-    border-right: 1px solid #ccc;
-}
-
-.spin-control button.decrement {
-    border-bottom-right-radius: 3px;
-}
-[dir='rtl'] .spin-control button.decrement {
-    border-bottom-right-radius: 0;
-}
-[dir='rtl'] .spin-control button.increment {
-    border-bottom-left-radius: 3px;
-    right: 0;
-}
-
-.spin-control button.decrement::after,
-.spin-control button.increment::after {
-    content:"";
+/* draw the up/down on the buttons */
+.form-field-input-number button.decrement::after,
+.form-field-input-number button.increment::after {
+    content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
     margin: auto;
 }
-.spin-control button.decrement::after {
+.form-field-input-number button.decrement::after {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-.spin-control button.increment::after {
+.form-field-input-number button.increment::after {
     border-bottom: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1673,135 +1492,155 @@ input[type=number] {
 
 /* Field - Checkbox
 ------------------------------------------------------- */
-.checkselect label:last-of-type {
-    display: block;
+.form-field-input-check {
+    display: flex;
+    align-items: end;
     background: #fff;
     padding: 5px 10px;
     color: #7092ff;
+    border: 1px solid #ccc;
+    border-top: 0;
+    cursor: pointer;
 }
-.checkselect label:hover {
-    background: #f1f1f1;
+.form-field-input-check > input[type="checkbox"] {
+    flex: 0 1 auto;
+    min-height: 20px;
+    width: 20px;
 }
-.checkselect .set {
-    color: inherit;
+.form-field-input-check > span {
+    flex: 1 1 auto;
 }
-.checkselect label:not(.set) input[type="checkbox"] {
-    opacity: .5;
-}
-.checkselect .reverser.button {
-    display: block;
-    float: right;
+.form-field-input-check > .reverser.button {
+    flex: 0 1 auto;
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
 }
-[dir='rtl'] .checkselect .reverser.button {
-    float: left;
-}
-.checkselect .reverser.button.hide {
+.form-field-input-check > .reverser.button.hide {
     display: none;
+}
+
+.form-field-input-check:hover {
+    background: #f1f1f1;
+}
+.form-field-input-check .set {
+    color: inherit;
+}
+.form-field-input-check label:not(.set) input[type="checkbox"] {
+    opacity: .5;
 }
 
 
 /* Field - Radio button
 ------------------------------------------------------- */
-.toggle-list button.remove {
-    border-radius: 0 0 3px 3px;
+.form-field-input-radio {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row wrap;
 }
-.toggle-list button.remove .icon {
-    position: absolute;
-    left: 5px;
+.form-field-input-radio > label {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    padding: 5px 10px;
+    height: 30px;
+    background-color: #fff;
+    color: #7092ff;
+    cursor: pointer;
 }
-.toggle-list button.remove::before {
-    content: none;
+.form-field-input-radio > label:last-child {
+    border-radius: 0 0 4px 4px;
+}
+.form-field-input-radio > label:hover {
+    background-color: #ececec;
+}
+.form-field-input-radio > label.active {
+    background-color: #e8ebff;
+}
+.form-field-input-radio > label:not(:last-of-type) {
+    border-bottom: 1px solid #ccc;
+}
+.form-field-input-radio > label > input[type="radio"] {
+    flex: 0 1 auto;
+    width: 20px;
+}
+.form-field-input-radio > label > span {
+    flex: 1 1 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Hide placeholder for radio buttons if another is active, or not in hover state */
+.form-field-input-radio label.active ~ .placeholder,
+.form-field-input-radio .placeholder {
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    line-height: 0;
+    display: block;
+    overflow: hidden;
 }
 
 
 /* Field - Maxspeed
 ------------------------------------------------------- */
-#preset-input-maxspeed_advisory,
-#preset-input-maxspeed {
-    border-right: none;
+.form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 0 4px;
-    width: 80%;
 }
-[dir='rtl'] #preset-input-maxspeed_advisory,
-[dir='rtl'] #preset-input-maxspeed {
-    border-right: 1px solid #ccc;
+[dir='rtl'] .form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-
-.form-field .maxspeed-unit {
+.form-field-input-maxspeed > input:last-of-type {  /* unit field */
+    flex: 0 1 80px;
+    width: 80px;
+    border-left: 0;
     border-radius: 0 0 4px 0;
-    width: 20%;
 }
-[dir='rtl'] .form-field .maxspeed-unit {
+[dir='rtl'] .form-field-input-maxspeed > input:last-of-type {
     border-right: 0;
     border-radius: 0 0 0 4px;
 }
 
 
-/* Field - Wikipedia
-------------------------------------------------------- */
-.form-field .wiki-lang {
-    border-radius: 0;
-}
-.form-field .wiki-title {
-    padding-right: 20%;
-}
-[dir='rtl'] .form-field .wiki-title {
-    padding-left: 20%;
-    padding-right: 10px;
-}
-
-.form-field .wiki-title ~ .combobox-caret {
-    right: 32px;
-}
-[dir='rtl'] .form-field .wiki-title ~ .combobox-caret {
-    right: auto;
-    left: 32px;
-}
-
-
 /* Field - Localized Name
 ------------------------------------------------------- */
-.form-field .localized-main {
-    padding-right: 12%;
+.form-field-input-localized > input.localized-main {
+    border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .form-field .localized-main {
-    padding-left: 12%;
-    padding-right: 10px;
-}
-
-.form-field .button-input-action {
-    position: relative;
-    right: 1px;
-    width: 32px;
-    margin-left: -32px;
-    border: 1px solid #ccc;
-    border-top-width: 0;
-    border-right-width: 0;
+[dir='rtl'] .form-field-input-localized > input.localized-main {
     border-radius: 0 0 4px 0;
-    height: 30px;
-    vertical-align: top;
 }
-[dir='rtl'] .form-field .button-input-action {
-    margin-left: 0;
-    margin-right: -32px;
-    border-right-width: 1px;
+.form-field-input-localized > button.localized-add {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .form-field-input-localized > button.localized-add {
     border-radius: 0 0 0 4px;
 }
 
-.form-field .localized-wrap {
-    padding: 0 10px;
+.form-field-input-localized button.localized-add.disabled,
+.form-field-input-localized input.localized-main.disabled,
+.form-field-input-localized input.localized-lang.disabled,
+.form-field-input-localized input.localized-value.disabled {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
 }
-.form-field .localized-wrap .entry {
+
+/* nested subfields for name in different languages */
+.localized-multilingual {
+    padding: 0 10px;
+    flex-basis: 100%;
+}
+.localized-multilingual .entry {
     position: relative;
     overflow: hidden;
 }
 
-.form-field .localized-wrap .entry::before {
+/* draws a little line connecting the multilingual field up to the name field */
+.localized-multilingual .entry::before {
     content: "";
     display: block;
     position: absolute;
@@ -1814,22 +1653,38 @@ input[type=number] {
     margin: auto;
 }
 
-.form-field .localized-wrap .entry .localized-lang {
+.localized-multilingual .entry .localized-lang {
     border-radius: 0;
     border-top-width: 0;
+    width: 100%;
 }
-.form-field .localized-wrap .entry .localized-value {
+.localized-multilingual .entry .localized-value {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
-}
-.form-field .localized-wrap .form-label button {
-    border-top-right-radius: 3px;
+    width: 100%;
 }
 
 
 /* Field - Address
 ------------------------------------------------------- */
-.addr-row input {
+.form-field-input-address {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid #ccc;
+    border-top: 0px;
+}
+
+.addr-row {
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+    min-height: 30px;
+}
+
+.addr-row > input {
+    flex: 1 1 auto;
+    border-radius: 0;
     border-right: 0;
     border-bottom: 0;
 }
@@ -1841,25 +1696,18 @@ input[type=number] {
 .addr-row:first-of-type input {
     border-top: 0;
 }
-
 .addr-row input:first-of-type {
     border-left: 0;
 }
 [dir='rtl'] .addr-row input:first-of-type {
     border-right: 0;
 }
-
-.addr-row input {
-    border-radius: 0;
-}
-
 .addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 0 4px;
 }
 [dir='rtl'] .addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-
 .addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 4px 0;
 }
@@ -1868,13 +1716,57 @@ input[type=number] {
 }
 
 
+/* Field - Wikipedia
+------------------------------------------------------- */
+.form-field-input-wikipedia {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
+}
+
+.wiki-lang-container,
+.wiki-title-container {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.wiki-lang-container > input.wiki-lang,
+.wiki-title-container > input.wiki-title {
+    flex: 1 1 auto;
+    border-top: 0;
+    border-radius: 0;
+}
+.wiki-title-container > input.wiki-title {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .wiki-title-container > input.wiki-title {
+    border-radius: 0 0 4px 0;
+}
+.wiki-title-container > button.wiki-link {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .wiki-title-container > button.wiki-link {
+    border-radius: 0 0 0 4px;
+}
+
+
 /* Field - Restriction Editor
 ------------------------------------------------------- */
-.form-field-restrictions .restriction-controls-container {
+.form-field-input-restrictions {
+    display: block;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.form-field-input-restrictions .restriction-controls-container {
     background-color: #fff;
-    border-top: 1px solid #ccc;
     width: 100%;
     padding: 5px;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
 }
 
 .restriction-controls-container .restriction-controls {
@@ -1909,16 +1801,16 @@ input[type=number] {
     vertical-align: middle;
 }
 
-.form-field-restrictions .restriction-container {
+.form-field-input-restrictions .restriction-container {
     position: relative;
     height: 370px;
 }
 /* zero width space, so container takes up space */
-.form-field-restrictions .restriction-container:after {
+.form-field-input-restrictions .restriction-container:after {
     content: '\200b';
 }
 
-.form-field-restrictions svg.surface {
+.form-field-input-restrictions svg.surface {
     width: 100%;
     height: 100%;
 }
@@ -1965,19 +1857,10 @@ input[type=number] {
 .form-field-comment:not(.present) #preset-input-comment {
     border-color: rgb(230, 100, 100);
 }
-
-.form-field-comment:not(.present) .form-label {
+.form-field-comment:not(.present) .form-field-label {
     border-color: rgb(230, 100, 100);
     background: rgba(230, 100, 100, 0.2);
 }
-
-.form-field-comment:not(.present) .form-label {
-}
-
-.form-field-comment:not(.present) .form-label-button-wrap {
-    border-color: rgb(230, 100, 100);
-}
-
 .form-field-comment:not(.present) button {
     border-color: rgb(230, 100, 100);
 }
@@ -2024,6 +1907,7 @@ div.combobox {
     width: 30px;
     margin-left: -30px;
     vertical-align: top;
+    cursor: pointer;
 }
 [dir='rtl'] .combobox-caret {
   margin-left: 0;
@@ -2039,6 +1923,14 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
+}
+
+/* Remove the field's bottom border radius when combobox is open */
+/* For some reason this stops the combobox from overlapping the bottom of the field */
+.combobox + * textarea:focus,
+.combobox + * input:focus {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 
@@ -2084,6 +1976,7 @@ div.combobox {
 }
 .field-help-nav-item.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .field-help-nav-item:hover {
     color: #597be7;
@@ -2143,23 +2036,64 @@ div.combobox {
 }
 
 
+/* More Fields dropdown
+------------------------------------------------------- */
+.more-fields {
+    padding: 0 20px 20px 20px;
+    font-weight: bold;
+}
+.changeset-editor .more-fields {
+    padding: 15px 20px 0 20px;
+}
+
+.more-fields label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more-fields input {
+    margin-left: 10px;
+    flex: 1 1 50%;
+}
+[dir='rtl'] .more-fields input {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.form-field-input-wrap .label {
+    height: 30px;
+    background: #f6f6f6;
+    padding: 5px 10px;
+}
+
+
 /* Raw Tag Editor
 ------------------------------------------------------- */
 .tag-list {
     padding-top: 10px;
 }
-
 .tag-row {
     width: 100%;
     position: relative;
-    clear: both;
+}
+.tag-row .inner-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    position: relative;
+}
+.tag-row .key-wrap,
+.tag-row .value-wrap {
+    flex: 1 1 auto;
 }
 
 .tag-row.readonly,
 .tag-row.readonly input.key,
 .tag-row.readonly input.value,
 .tag-row.readonly button.remove {
-    color: #777777;
+    color: #777;
     background-color: #eee;
     cursor: not-allowed;
 }
@@ -2170,22 +2104,13 @@ div.combobox {
     border-radius: 0;
     border-bottom: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    width: 100%;
 }
 [dir='rtl'] .tag-row input {
     border-left: none;
     border-right: 1px solid #ccc;
 }
 
-.tag-row .key-wrap,
-.tag-row .input-wrap-position {
-    width: 40%;
-    float: left;
-    height: 30px;
-}
-[dir='rtl'] .tag-row .key-wrap,
-[dir='rtl'] .tag-row .input-wrap-position {
-    float: right;
-}
 
 .tag-row input.key {
     font-weight: bold;
@@ -2211,17 +2136,15 @@ div.combobox {
 .tag-row:first-child input.value {
     border-top: 1px solid #ccc;
 }
-
 .tag-row button {
-    position: absolute;
+    flex: 0 0 32px;
     height: 31px;
-    right: 10%;
+    width: 32px;
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
 }
 [dir='rtl'] .tag-row button {
-    left: 10%;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2229,11 +2152,9 @@ div.combobox {
 .tag-row button:hover {
     background: #f1f1f1;
 }
-
 .tag-row button .icon {
     opacity: .5;
 }
-
 .tag-row:first-child button {
     border-top-width: 1px;
 }
@@ -2255,16 +2176,9 @@ div.combobox {
 }
 
 .tag-row .tag-reference-button {
-    right: 0;
     border-radius: 0;
-    width: 10%;
-    top: 0;
-    background: #fafafa;
 }
 [dir='rtl'] .tag-row .tag-reference-button {
-    left: auto;
-    right: auto;
-    margin-right: 35px;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2277,38 +2191,34 @@ div.combobox {
     background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
-
+.raw-tag-editor .add-tag:focus,
 .raw-tag-editor .add-tag:hover {
     background: rgba(0,0,0,.8);
 }
-
 .raw-tag-editor .add-tag .label {
     display: none;
 }
 
 /* Tag reference */
-button.minor.tag-reference-loading {
+.tag-reference-loading {
     background-color: #f5f5f5;
 }
-
 .tag-reference-loading .icon {
     background-image: url(img/mini-loader.gif);
     background-position: 0 0;
 }
 
 .tag-reference-body {
+    flex: 1 1 auto;
+    width: 100%;
     overflow: hidden;
-    clear: both;
 }
-
 .tag-reference-body .tag-reference-description {
     margin: 10px 5px 0 5px;
 }
-
 .tag-reference-body a {
     display: block;
 }
-
 .tag-reference-body .tag-reference-description:last-child,
 .tag-reference-body a:last-child {
     margin-bottom: 15px;
@@ -2318,33 +2228,18 @@ button.minor.tag-reference-loading {
     position: relative;
     width: 100%;
 }
-
 .raw-tag-editor .tag-reference-body {
-    float: left;
     width: 100%;
 }
-
 .raw-tag-editor .tag-row.readonly .tag-reference-body {
     background: #f6f6f6;
     color: #333;
 }
-
-.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body {
+.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
     border-bottom: 1px solid #ccc;
 }
-
 .raw-tag-editor .tag-row.readonly .tag-reference-body.expanded {
     border-top: 1px solid #ccc;
-}
-
-img.tag-reference-wiki-image {
-    float: right;
-    width: 33.3333%;
-    width: -webkit-calc(33.3333% - 10px);
-    width: calc(33.3333% - 10px);
-    border-radius: 4px;
-    max-height: 200px;
-    margin: 10px 5px 15px 20px;
 }
 
 
@@ -2354,16 +2249,22 @@ img.tag-reference-wiki-image {
 .raw-membership-editor .member-list li:first-child {
     padding-top: 10px;
 }
-
-.raw-member-editor .member-row,
-.raw-membership-editor .member-row {
-    position: relative;
-}
-
 .raw-member-editor .member-row .member-entity-name,
 .raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
+}
+
+.form-field-input-member > input.member-role {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-member > input.member-role {
+    border-radius: 0 0 4px 0;
+}
+
+.member-incomplete .form-field-input-member > input.member-role,
+[dir='rtl'] .member-incomplete .form-field-input-member > input.member-role {
+    border-radius: 0 0 4px 4px;
 }
 
 .member-incomplete .member-delete {
@@ -2371,8 +2272,9 @@ img.tag-reference-wiki-image {
 }
 
 .member-row-new .member-entity-input {
+    flex: 1 1 100%;
     border-radius: 4px 4px 0 0;
-    border: 1px solid #cfcfcf;
+    border: 0;
 }
 
 .add-relation {
@@ -2382,9 +2284,14 @@ img.tag-reference-wiki-image {
     border-radius: 4px;
     margin-top: 10px;
 }
-
+.add-relation:focus,
 .add-relation:hover {
     background: rgba(0,0,0,.8);
+}
+
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.raw-membership-editor.inspector-inner {
+    margin-bottom: 150px;
 }
 
 /* hidden field to prevent user from tabbing out of the sidebar */
@@ -2396,7 +2303,135 @@ input.key-trap {
 }
 
 
-/* OSM Note & QA Error Editor
+/* Inspector (hover styles)
+------------------------------------------------------- */
+.inspector-hover .form-field-input-wrap .label,
+.inspector-hover .form-field-input-multicombo .chiplist,
+.inspector-hover .form-field-button,
+.inspector-hover .structure-extras-wrap,
+.inspector-hover .comments-container .comment,
+.inspector-hover button,
+.inspector-hover input,
+.inspector-hover textarea,
+.inspector-hover label {
+    background: #ececec;
+}
+.inspector-hover .preset-list-button,
+.inspector-hover .tag-row input {
+    background: #f6f6f6;
+}
+
+.inspector-hover a,
+.inspector-hover .form-field-input-multicombo .chips,
+.inspector-hover .form-field-input-check span {
+    color: #666;
+}
+
+.inspector-hover .form-field-input-multicombo .chips {
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+/* no scrollbars */
+.inspector-hover div {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* hide and remove from layout */
+.inspector-hidden,
+.inspector-hover .preset-list-button-wrap .tag-reference-button,
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
+.inspector-hover .form-field-input-multicombo .combobox-input,
+.inspector-hover .form-field-input-radio label,
+.inspector-hover .form-field-input-radio label span,
+.inspector-hover .form-field-input-radio label.remove .icon,
+.inspector-hover .inspector-inner .add-tag,
+.inspector-hover .inspector-inner .add-relation {
+    display: none;
+}
+
+/* hide but preserve in layout */
+.inspector-hover .combobox-caret,
+.inspector-hover .header button,
+.inspector-hover .form-field-input-multicombo .chips .remove,
+.inspector-hover .hide-toggle:before,
+.inspector-hover .more-fields,
+.inspector-hover .form-field-label button,
+.inspector-hover .tag-row button,
+.inspector-hover .footer * {
+    opacity: 0;
+}
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .value-wrap {
+    height: 31px;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .more-fields {
+    max-height: 0;
+    margin-bottom: -10px;
+}
+
+/* Unstyle button fields */
+.inspector-hover .form-field-input-radio label.active,
+.inspector-hover .entity-editor-pane a.hide-toggle {
+    opacity: 1;
+    background-color: transparent;
+    color: #666;
+    padding-left: 0;
+    border-width: 0;
+}
+.inspector-hover .form-field-input-radio button.active {
+    padding-left: 10px;
+}
+
+/* Show placeholder on hover for radio buttons */
+.inspector-hover .form-field-input-radio {
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+.inspector-hover .form-field-input-radio .placeholder {
+    opacity: 1;
+    color: #666;
+    padding: 5px 10px;
+    line-height: 20px;
+    width: 100%;
+    border: 0;
+}
+.inspector-hover .form-field-input-radio .structure-extras-wrap {
+    border: 0;
+}
+
+
+/* OSM Note Editor
 ------------------------------------------------------- */
 .note-header,
 .kr_error-header {
@@ -2756,7 +2791,7 @@ input.key-trap {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
-.data-editor.raw-tag-editor .tag-row .input-wrap-position {
+.data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
 }
 
@@ -2794,9 +2829,10 @@ input.key-trap {
 /* Fullscreen Button (disabled)
 ------------------------------------------------------- */
 div.full-screen {
-    float: right;
+    display: inline-block;
     width: 40px;
     margin-right: 10px;
+    display: none;
 }
 
 div.full-screen .tooltip {
@@ -3145,6 +3181,8 @@ div.full-screen > button:hover {
     top: 60px;
     bottom: 30px;
     right: 0;
+    width: 33.3333%;
+    max-width: 400px;
     padding-bottom: 50px;
     overflow: hidden;
     z-index: -1;
@@ -3152,6 +3190,11 @@ div.full-screen > button:hover {
 [dir='rtl'] .map-pane {
     left: 0;
     right: auto !important;
+}
+
+.map-pane.help-wrap {
+    width: 50.0000%;
+    max-width: 600px;
 }
 
 .pane-heading {
@@ -3952,6 +3995,10 @@ img.tile-debug {
     text-align: center;
 }
 
+.modal-section.buttons button {
+    min-width: 130px;
+}
+
 .modal-section.buttons .action {
     display: inline-block;
     margin: 0 10px;
@@ -4151,6 +4198,7 @@ img.tile-debug {
 }
 .modal-shortcuts .tab.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .modal-shortcuts .tab:hover {
     color: #597be7;
@@ -4227,9 +4275,7 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
-}
-.settings-modal .buttons .button.col3 {
-    float: none;   /* undo float left */
+    width: 100%;
 }
 
 .settings-custom-background .instructions-template {
@@ -4308,6 +4354,10 @@ svg.mouseclick use.right {
 
 .mode-save .warning-section {
     background: #ffb;
+}
+
+.mode-save .error-section {
+    background: #ffa5a5;
 }
 
 .mode-save .warning-section .changeset-list button {
@@ -4436,6 +4486,7 @@ svg.mouseclick use.right {
     display: none;
     color: #333;
     font-size: 12px;
+    white-space: initial;
 }
 
 .tooltip.in {
@@ -4634,19 +4685,12 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.add-point .tooltip {
-    left: 33.3333% !important;
+button.sidebar-toggle .tooltip .tooltip-arrow {
+    left: 32px;
 }
-[dir='rtl'] .add-point .tooltip {
-    left: inherit !important;
-}
-
-.add-point .tooltip .tooltip-arrow {
-    left: 60px;
-}
-[dir='rtl'] .add-point .tooltip .tooltip-arrow {
+[dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
-    right: 60px;
+    right: 32px;
 }
 
 li:first-of-type .badge .tooltip,
@@ -4760,23 +4804,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     stroke-width: 1;
     stroke-opacity: 1;
     stroke-dasharray: 5, 5;
-}
-
-
-/* Media Queries
-------------------------------------------------------- */
-@media only screen and (max-width: 840px) {
-    /* override hide for save button */
-    #bar .save .label { display: block;}
-}
-@media screen and (max-width: 1200px) {
-    .user-list { display: none !important; }
-}
-@media screen and (max-width: 1000px) {
-    #userLink { display: none !important; }
-}
-@media screen and (max-width: 900px) {
-    #scale-block { display: none !important; }
 }
 
 
@@ -4972,5 +4999,3 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092ff;
 }
-
-

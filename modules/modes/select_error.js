@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     behaviorBreathe,
     behaviorHover,
@@ -13,8 +11,9 @@ import {
 } from '../behavior';
 
 import { services } from '../services';
-import { modeBrowse } from './browse';
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { uiKeepRightEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectError(context, selectedErrorID) {
@@ -24,7 +23,7 @@ export function modeSelectError(context, selectedErrorID) {
     };
 
     var keepRight = services.keepRight;
-    var keybinding = d3_keybinding('select-error');
+    var keybinding = utilKeybinding('select-error');
     var keepRightEditor = uiKeepRightEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
@@ -39,6 +38,8 @@ export function modeSelectError(context, selectedErrorID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
+        modeDragNode(context).behavior,
+        modeDragNote(context).behavior
     ];
 
 
@@ -50,6 +51,7 @@ export function modeSelectError(context, selectedErrorID) {
         }
         return error;
     }
+
 
     mode.enter = function() {
 
@@ -76,48 +78,45 @@ export function modeSelectError(context, selectedErrorID) {
         }
 
         function esc() {
+            if (d3_select('.combobox').size()) return;
             context.enter(modeBrowse(context));
         }
 
         var error = checkSelectedID();
         if (!error) return;
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
-
-        keybinding
-            .on('⎋', esc, true);
+        behaviors.forEach(context.install);
+        keybinding.on('⎋', esc, true);
 
         d3_select(document)
             .call(keybinding);
 
         selectError();
 
-        context.ui().sidebar
-            .show(keepRightEditor.error(error));
+        var sidebar = context.ui().sidebar;
+        sidebar.show(keepRightEditor.error(error));
 
         context.map()
-            .on('drawn.select', selectError);
+            .on('drawn.select-error', selectError);
     };
 
 
     mode.exit = function() {
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
+        behaviors.forEach(context.uninstall);
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.kr_error.selected')
             .classed('selected hover', false);
 
         context.map()
-            .on('drawn.select', null);
+            .on('drawn.select-error', null);
 
         context.ui().sidebar
             .hide();
+
         context.selectedErrorID(null);
     };
 

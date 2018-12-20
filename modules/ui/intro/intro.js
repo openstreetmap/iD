@@ -75,6 +75,11 @@ export function uiIntro(context) {
         var baseEntities = context.history().graph().base().entities;
         var countryCode = services.geocoder.countryCode;
 
+        // Show sidebar and disable the sidebar resizing button
+        // (this needs to be before `context.inIntro(true)`)
+        context.ui().sidebar.expand();
+        d3_selectAll('button.sidebar-toggle').classed('disabled', true);
+
         // Block saving
         context.inIntro(true);
 
@@ -84,14 +89,24 @@ export function uiIntro(context) {
         context.history().merge(_values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
 
+        // Setup imagery
         var imagery = context.background().findSource(INTRO_IMAGERY);
         if (imagery) {
             context.background().baseLayerSource(imagery);
         } else {
             context.background().bing();
         }
-        overlays.forEach(function (d) {
+        overlays.forEach(function(d) {
             context.background().toggleOverlayLayer(d);
+        });
+
+        // Setup data layers (only OSM)
+        var layers = context.layers();
+        layers.all().forEach(function(item) {
+            // if the layer has the function `enabled`
+            if (typeof item.layer.enabled === 'function') {
+                item.layer.enabled(item.id === 'osm');
+            }
         });
 
         // Mock geocoder
@@ -99,15 +114,16 @@ export function uiIntro(context) {
             callback(null, t('intro.graph.countrycode'));
         };
 
+
         d3_selectAll('#map .layer-background').style('opacity', 1);
 
         var curtain = uiCurtain();
         selection.call(curtain);
 
-        // store that the user started the walkthrough..
+        // Store that the user started the walkthrough..
         context.storage('walkthrough_started', 'yes');
 
-        // restore previous walkthrough progress..
+        // Restore previous walkthrough progress..
         var storedProgress = context.storage('walkthrough_progress') || '';
         var progress = storedProgress.split(';').filter(Boolean);
 
@@ -126,7 +142,7 @@ export function uiIntro(context) {
                             .classed('next', true);
                     }
 
-                    // store walkthrough progress..
+                    // Store walkthrough progress..
                     progress.push(chapter);
                     context.storage('walkthrough_progress', _uniq(progress).join(';'));
                 });
@@ -134,11 +150,11 @@ export function uiIntro(context) {
         });
 
         chapters[chapters.length - 1].on('startEditing', function() {
-            // store walkthrough progress..
+            // Store walkthrough progress..
             progress.push('startEditing');
             context.storage('walkthrough_progress', _uniq(progress).join(';'));
 
-            // store if walkthrough is completed..
+            // Store if walkthrough is completed..
             var incomplete = _difference(chapterFlow, progress);
             if (!incomplete.length) {
                 context.storage('walkthrough_completed', 'yes');
@@ -147,10 +163,11 @@ export function uiIntro(context) {
             curtain.remove();
             navwrap.remove();
             d3_selectAll('#map .layer-background').style('opacity', opacity);
+            d3_selectAll('button.sidebar-toggle').classed('disabled', false);
             if (osm) { osm.toggle(true).reset().caches(caches); }
             context.history().reset().merge(_values(baseEntities));
             context.background().baseLayerSource(background);
-            overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
+            overlays.forEach(function(d) { context.background().toggleOverlayLayer(d); });
             if (history) { context.history().fromJSON(history, false); }
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);

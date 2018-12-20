@@ -46,7 +46,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc'}
+                {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'title':'amenity', 'value':'amenity'}]
@@ -131,7 +131,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc'}
+                {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'title':'recycling:glass', 'value':'recycling:glass'}]
@@ -183,7 +183,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc'}
+                {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'value':'parking','title':'A place for parking cars'}]
@@ -206,7 +206,7 @@ describe('iD.serviceTaginfo', function() {
             );
         });
 
-        it('does not get values for extremely popular keys', function() {
+        it('does not get values for extremely unpopular keys', function() {
             var callback = sinon.spy();
             taginfo.values({key: 'name', query: 'ste'}, callback);
 
@@ -218,23 +218,6 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(callback).to.have.been.calledWith(null, []);
-        });
-
-        it('includes unpopular values with a wiki page', function() {
-            var callback = sinon.spy();
-            taginfo.values({key: 'amenity', query: 'par'}, callback);
-
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},' +
-                            '{"value":"party","description":"A place for partying", "fraction":0.0, "in_wiki": true}]}']
-            );
-            server.respond();
-
-            expect(callback).to.have.been.calledWith(null, [
-                {'value':'parking','title':'A place for parking cars'},
-                {'value':'party','title':'A place for partying'}
-            ]);
         });
 
         it('excludes values with capital letters and some punctuation', function() {
@@ -338,7 +321,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc'}
+                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(null, [
                 {'value': 'stop', 'title': 'stop'},

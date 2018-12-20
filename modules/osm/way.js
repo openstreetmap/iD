@@ -7,7 +7,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmOneWayTags } from './tags';
+import { osmOneWayTags, osmRightSideIsInsideTags } from './tags';
 import { areaKeys } from '../core/context';
 
 
@@ -129,6 +129,34 @@ _extend(osmWay.prototype, {
         return false;
     },
 
+    // Some identifier for tag that implies that this way is "sided",
+    // i.e. the right side is the 'inside' (e.g. the right side of a
+    // natural=cliff is lower).
+    sidednessIdentifier: function() {
+        for (var key in this.tags) {
+            var value = this.tags[key];
+            if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
+                if (osmRightSideIsInsideTags[key][value] === true) {
+                    return key;
+                } else {
+                    // if the map's value is something other than a
+                    // literal true, we should use it so we can
+                    // special case some keys (e.g. natural=coastline
+                    // is handled differently to other naturals).
+                    return osmRightSideIsInsideTags[key][value];
+                }
+            }
+        }
+
+        return null;
+    },
+    isSided: function() {
+        if (this.tags.two_sided === 'yes') {
+            return false;
+        }
+
+        return this.sidednessIdentifier() != null;
+    },
 
     lanes: function() {
         return osmLanes(this);

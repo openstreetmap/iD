@@ -1,0 +1,28 @@
+{
+    "icon": "iD-highway-footway",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "marked"
+    },
+    "reference": {
+        "key": "footway",
+        "value": "crossing"
+    },
+    "terms": [
+        "zebra crossing",
+        "marked crossing",
+        "crosswalk"
+    ],
+    "name": "Marked Crosswalk"
+}

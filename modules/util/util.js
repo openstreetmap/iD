@@ -34,6 +34,32 @@ export function utilEntityOrMemberSelector(ids, graph) {
 }
 
 
+export function utilEntityOrDeepMemberSelector(ids, graph) {
+    var seen = {};
+    var allIDs = [];
+    function addEntityAndMembersIfNotYetSeen(id) {
+        // avoid infinite recursion for circular relations by skipping seen entities
+        if (seen[id]) return;
+        // mark the entity as seen
+        seen[id] = true;
+        // add the id;
+        allIDs.push(id);
+        if (graph.hasEntity(id)) {
+            var entity = graph.entity(id);
+            if (entity.type === 'relation' && entity.members) {
+                entity.members.forEach(function(member){
+                    addEntityAndMembersIfNotYetSeen(member.id);
+                });
+            }
+        }
+    }
+    ids.forEach(function(id) {
+        addEntityAndMembersIfNotYetSeen(id);
+    });
+    return utilEntitySelector(allIDs);
+}
+
+
 export function utilGetAllNodes(ids, graph) {
     var seen = {};
     var nodes = [];
@@ -276,6 +302,13 @@ export function utilNoAuto(selection) {
         .attr('spellcheck', isText ? 'true' : 'false');
 }
 
+export function utilExternalPresets() {
+    return utilStringQs(window.location.hash).hasOwnProperty('presets');
+}
+
+export function utilExternalValidationRules() {
+    return utilStringQs(window.location.hash).hasOwnProperty('validations');
+}
 
 // https://stackoverflow.com/questions/194846/is-there-any-kind-of-hash-code-function-in-javascript
 // https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
@@ -290,4 +323,11 @@ export function utilHashcode(str) {
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
+}
+
+// Adds or removes highlight styling for the specified entity's SVG elements in the map.
+export function utilHighlightEntity(id, highlighted, context) {
+    context.surface()
+        .selectAll(utilEntityOrDeepMemberSelector([id], context.graph()))
+        .classed('highlighted', highlighted);
 }

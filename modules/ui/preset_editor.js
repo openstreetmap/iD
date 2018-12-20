@@ -53,8 +53,16 @@ export function uiPresetEditor(context) {
                 );
             }
 
-            presets.universal().forEach(function(field) {
+            _preset.moreFields.forEach(function(field) {
                 if (_preset.fields.indexOf(field) === -1) {
+                    _fieldsArr.push(
+                        uiField(context, field, entity, { show: false })
+                    );
+                }
+            });
+
+            presets.universal().forEach(function(field) {
+                if (_preset.fields.indexOf(field) === -1 && _preset.moreFields.indexOf(field) === -1) {
                     _fieldsArr.push(
                         uiField(context, field, entity, { show: false })
                     );
@@ -77,7 +85,10 @@ export function uiPresetEditor(context) {
 
 
         selection
-            .call(formFields.fieldsArr(_fieldsArr), 'inspector-inner fillL3');
+            .call(formFields
+                .fieldsArr(_fieldsArr)
+                .state(_state),
+            'inspector-inner fillL3');
 
 
         selection.selectAll('.wrap-form-field input')
@@ -109,6 +120,7 @@ export function uiPresetEditor(context) {
     presetEditor.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
+        formFields.tagsChanged();
         // Don't reset _fieldsArr here.
         return presetEditor;
     };

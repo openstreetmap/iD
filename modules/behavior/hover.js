@@ -5,13 +5,9 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-import {
-    osmEntity,
-    osmNote,
-    krError
-} from '../osm';
-import { utilRebind } from '../util/rebind';
+
+import { osmEntity, osmNote, krError } from '../osm';
+import { utilKeybinding, utilRebind } from '../util';
 
 
 /*
@@ -33,7 +29,7 @@ export function behaviorHover(context) {
 
 
     function keydown() {
-        if (_altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -47,7 +43,7 @@ export function behaviorHover(context) {
 
 
     function keyup() {
-        if (_altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -60,7 +56,7 @@ export function behaviorHover(context) {
     }
 
 
-    var hover = function(selection) {
+    function behavior(selection) {
         _selection = selection;
         _newId = null;
 
@@ -117,7 +113,7 @@ export function behaviorHover(context) {
                 entity = datum;
                 selector = '.data' + datum.__featurehash__;
 
-            } else if (datum instanceof osmNote) {
+            } else if (datum instanceof osmNote || datum instanceof krError) {
                 entity = datum;
                 selector = '.note-' + datum.id;
 
@@ -159,10 +155,10 @@ export function behaviorHover(context) {
                 dispatch.call('hover', this, null);
             }
         }
-    };
+    }
 
 
-    hover.off = function(selection) {
+    behavior.off = function(selection) {
         selection.selectAll('.hover')
             .classed('hover', false);
         selection.selectAll('.hover-suppressed')
@@ -181,12 +177,12 @@ export function behaviorHover(context) {
     };
 
 
-    hover.altDisables = function(_) {
+    behavior.altDisables = function(val) {
         if (!arguments.length) return _altDisables;
-        _altDisables = _;
-        return hover;
+        _altDisables = val;
+        return behavior;
     };
 
 
-    return utilRebind(hover, dispatch, 'on');
+    return utilRebind(behavior, dispatch, 'on');
 }

@@ -15,7 +15,6 @@ const blacklist = {
     'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
     'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
     'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
-    'OpenTopoMap': true,                  // 'OpenTopoMap'
 
     'hike_n_bike': true,                  // 'Hike & Bike'
     'landsat': true,                      // 'Landsat'
