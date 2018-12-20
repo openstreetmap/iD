@@ -1,6 +1,7 @@
 export { validationDeprecatedTag } from './deprecated_tag';
 export { validationDisconnectedHighway } from './disconnected_highway';
 export { validationHighwayCrossingOtherWays } from './crossing_ways';
+export { validationHighwayAlmostJunction } from './highway_almost_junction';
 export { ValidationIssueType, ValidationIssueSeverity } from './validation_issue';
 export { validationManyDeletions } from './many_deletions';
 export { validationMapCSSChecks } from './mapcss_checks';

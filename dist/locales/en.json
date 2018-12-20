@@ -1117,6 +1117,10 @@
                 "message": "Crossing ways without connection",
                 "tooltip": "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
             },
+            "highway_almost_junction": {
+                "message": "Almost junction",
+                "tooltip": "This node is very close but not connected to way {wid}."
+            },
             "fix": {
                 "delete_feature": {
                     "title": "Delete this feature"
