@@ -1,4 +1,5 @@
 import _clone from 'lodash-es/clone';
+import _map from 'lodash-es/map';
 import { geoExtent, geoLineIntersection } from '../geo';
 import { set as d3_set } from 'd3-collection';
 import { utilDisplayLabel } from '../util';
@@ -41,16 +42,19 @@ export function validationHighwayCrossingOtherWays(context) {
         return n1 > nA ? n1 + n2 + nA + nB : nA + nB + n1 + n2;
     }
 
-    function getWayAndParentRelationTags(way, graph) {
-        var tags = _clone(way.tags);
-        var parentRels = graph.parentRelations(way);
-        for (var i = 0; i < parentRels.length; i++) {
-            var rel = parentRels[i];
-            for (var k in rel.tags) {
-                if (!tags[k]) tags[k] = rel.tags[k];
+    // returns the way or its parent relation, whichever has a useful feature type
+    function getFeatureWithFeatureTypeTagsForWay(way, graph) {
+        if (getFeatureTypeForTags(way.tags) === null) {
+            // if the way doesn't match a feature type, check is parent relations
+            var parentRels = graph.parentRelations(way);
+            for (var i = 0; i < parentRels.length; i++) {
+                var rel = parentRels[i];
+                if (getFeatureTypeForTags(rel.tags) !== null) {
+                    return rel;
+                }
             }
         }
-        return tags;
+        return way;
     }
 
     function hasTag(tags, key) {
@@ -58,7 +62,11 @@ export function validationHighwayCrossingOtherWays(context) {
     }
 
     function getFeatureTypeForCrossingCheck(way, graph) {
-        var tags = getWayAndParentRelationTags(way, graph);
+        var tags = getFeatureWithFeatureTypeTagsForWay(way, graph).tags;
+        return getFeatureTypeForTags(tags);
+    }
+
+    function getFeatureTypeForTags(tags) {
         if (hasTag(tags, 'highway')) return 'highway';
         if (hasTag(tags, 'building')) return 'building';
         if (hasTag(tags, 'railway')) return 'railway';
@@ -75,8 +83,8 @@ export function validationHighwayCrossingOtherWays(context) {
     }
 
     function isLegitCrossing(way1, featureType1, way2, featureType2, graph) {
-        var tags1 = getWayAndParentRelationTags(way1, graph),
-            tags2 = getWayAndParentRelationTags(way2, graph);
+        var tags1 = _clone(getFeatureWithFeatureTypeTagsForWay(way1, graph).tags),
+            tags2 = _clone(getFeatureWithFeatureTypeTagsForWay(way2, graph).tags);
         tags1 = extendTagsByInferredLayer(tags1, way1);
         tags2 = extendTagsByInferredLayer(tags2, way2);
 
@@ -191,22 +199,27 @@ export function validationHighwayCrossingOtherWays(context) {
             for (var j = 0; j < crosses.length; j++) {
                 var crossing = crosses[j];
 
+                // use the entities with the tags that define the feature type
+                var entities = _map(crossing.ways, function(way) {
+                    return getFeatureWithFeatureTypeTagsForWay(way, graph);
+                });
+
                 var crossingTypeID = crossing.featureTypes.sort().join('-') + '_crossing';
 
                 var messageDict = {};
-                messageDict[crossing.featureTypes[0]] = utilDisplayLabel(crossing.ways[0], context);
+                messageDict[crossing.featureTypes[0]] = utilDisplayLabel(entities[0], context);
                 var key2 = crossing.featureTypes[1];
                 if (crossing.featureTypes[0] === crossing.featureTypes[1]) {
                     key2 += '2';
                 }
-                messageDict[key2] = utilDisplayLabel(crossing.ways[1], context);
+                messageDict[key2] = utilDisplayLabel(entities[1], context);
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
                     severity: ValidationIssueSeverity.error,
                     message: t('issues.'+crossingTypeID+'.message', messageDict),
                     tooltip: t('issues.'+crossingTypeID+'.tooltip'),
-                    entities: crossing.ways,
+                    entities: entities,
                     coordinates: crossing.cross_point,
                 }));
             }
