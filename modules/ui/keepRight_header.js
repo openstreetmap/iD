@@ -1,10 +1,8 @@
 import { t } from '../util/locale';
-import { utilEntityRoot } from '../util';
-import { clickLink } from '../util/keepRight';
 import { svgIcon } from '../svg';
 
 
-export function uiKeepRightHeader(context) {
+export function uiKeepRightHeader() {
     var _error;
 
 
@@ -32,17 +30,12 @@ export function uiKeepRightHeader(context) {
             .attr('class', function(d) {
                 return 'preset-icon-28 kr_error kr_error-' + d.id + ' kr_error_type_' + d.error_type;
             })
-
             .call(svgIcon('#iD-icon-bolt', 'kr_error-fill'));
 
         headerEnter
             .append('div')
             .attr('class', 'kr_error-header-label')
-            .text(function(d) { return t('QA.keepRight.entities.' + d.object_type) + ' '; })
-            .append('span')
-            .append('a')
-            .text(function(d) { return d.object_id; })
-            .on('click', function(d) { clickLink(context, (utilEntityRoot(d.object_type) + d.object_id)); });
+            .text(function(d) { return t('QA.keepRight.entities.' + d.object_type, { id: d.object_id }); });
     }
 
 

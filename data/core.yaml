@@ -481,7 +481,7 @@ en:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
       keepRight:
-        tooltip: Quality Assurance data from keepright.at
+        tooltip: Automatically detected map issues from keepright.at
         title: KeepRight Issues
       custom:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
@@ -649,9 +649,7 @@ en:
   full_screen: Toggle Full Screen
   QA:
     keepRight:
-      tooltip: automatically detected errors from keepright.at
-      description: Keep Right
-      title: Edit KeepRight Error
+      title: KeepRight Error
       detail_title: Error
       detail_description: Description
       comment_header: Comment
@@ -659,22 +657,20 @@ en:
       updateInputPlaceholder: Update the comment above to share with other users.
       newComment: New Comment
       updateComment: Update Comment
-      upload_explanation: Your comments will be publicly visible to all keepRight.at users.
-      upload_explanation_with_user: "Your comments as {user} will be publicly visible to all keepRight.at users."
+      upload_explanation: Your comments will be publicly visible on KeepRight.
+      upload_explanation_with_user: "Your comments as {user} will be publicly visible on KeepRight."
       resolve_comment: Comment and Resolve
       ignore_comment: Comment and Ignore
       resolve: Resolve
       ignore: Ignore
-      toggle-on: All on
-      toggle-off: All off
       entities:
-        node: node
-        way: way
-        relation: relation
-        highway: highway
-        cycleway: cycleway
-        waterway: waterway
-        riverbank: riverbank
+        node: "Node {id}"
+        way: "Way {id}"
+        relation: "Relation {id}"
+        highway: "Highway {id}"
+        cycleway: "Cycleway {id}"
+        waterway: "Waterway {id}"
+        riverbank: "Riverbank {id}"
       errorTypes:
         errors:
           _30:

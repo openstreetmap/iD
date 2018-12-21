@@ -1,7 +1,7 @@
-import { t } from '../util/locale';
-import { parseErrorDescriptions, errorTypes } from '../util';
+import { event as d3_event } from 'd3-selection';
 
-import { clickLink } from '../util/keepRight';
+import { errorTypes } from '../../data/keepRight.json';
+import { t } from '../util/locale';
 
 
 export function uiKeepRightDetails(context) {
@@ -97,12 +97,18 @@ export function uiKeepRightDetails(context) {
             .append('div')
             .attr('class', 'kr_error-details-description-text')
             .html(function(d) {
-                return t(_titleBase + _templateErrorType + '.description', parseErrorDescriptions(d));
+                return t(_titleBase + _templateErrorType + '.description', d.replacements);
             });
 
         description.selectAll('.kr_error_description-id')
             .on('click', function() { clickLink(context, this.text); });
 
+
+        function clickLink(context, id) {
+            d3_event.preventDefault();
+            context.layers().layer('osm').enabled(true);
+            context.zoomToEntity(id);
+        }
     }
 
 

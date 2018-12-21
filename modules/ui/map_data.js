@@ -1,11 +1,9 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
 import { svgIcon } from '../svg';
-import { errorTypes } from '../util';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
@@ -18,8 +16,6 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiMapData(context) {
-    var dispatch = d3_dispatch('change');
-
     var key = t('map_data.key');
     var features = context.features().keys();
     var layers = context.layers();
@@ -482,46 +478,6 @@ export function uiMapData(context) {
         } else if (d && d.fileList) {
             dataLayer.fileList(d.fileList);
         }
-    }
-
-
-    function drawQAButtons(selection) {
-        var QAButtons = d3_select('.layer-QA').selectAll('li').select('label').select('input');
-        var buttonSection = selection.selectAll('.QA-buttons')
-            .data([0]);
-
-    //     var buttonSection = selection.selectAll('.QA-buttons')
-    //         .data([0]);
-
-    //     // exit
-    //     buttonSection.exit()
-    //         .remove();
-
-    //     // enter
-    //     var buttonEnter = buttonSection.enter()
-    //         .append('div')
-    //         .attr('class', 'QA-buttons');
-
-    //     buttonEnter
-    //         .append('button')
-    //         .attr('class', 'button QA-toggle-on action')
-    //         .text(t('QA.keepRight.toggle-on'))
-    //         .on('click', function() {
-    //             QAButtons.property('checked', true);
-    //             dispatch.call('change');
-    //         });
-
-    //     buttonEnter
-    //         .append('button')
-    //         .attr('class', 'button QA-toggle-off action')
-    //         .text(t('QA.keepRight.toggle-off'))
-    //         .on('click', function() {
-    //             QAButtons.property('checked', false);
-    //             dispatch.call('change');
-    //         });
-
-    //     buttonSection = buttonSection
-    //         .merge(buttonEnter);
     }
 
 
