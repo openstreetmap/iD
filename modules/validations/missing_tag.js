@@ -7,7 +7,12 @@ import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
+    validationIssueFix
 } from './validation_issue';
+import { operationDelete } from '../operations/index';
+import {
+    select as d3_select
+} from 'd3-selection';
 
 export function validationMissingTag(context) {
 
@@ -33,6 +38,20 @@ export function validationMissingTag(context) {
                     message: t('issues.untagged_feature.message', {feature: entityLabel}),
                     tooltip: t('issues.untagged_feature.tooltip'),
                     entities: [change],
+                    fixes: [
+                        new validationIssueFix({
+                            title: t('issues.fix.delete_feature.title'),
+                            action: function() {
+                                operationDelete([change.id], context)();
+                            }
+                        }),
+                        new validationIssueFix({
+                            title: t('issues.fix.select_preset.title'),
+                            action: function() {
+                                context.ui().sidebar.showPresetList();
+                            }
+                        })
+                    ]
                 }));
             }
         }

@@ -900,6 +900,13 @@ en:
     crossing_ways:
       message: Crossing ways without connection
       tooltip: "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
+    fix:
+      delete_feature:
+        title: Delete this feature
+      select_preset:
+        title: Select a feature type
+      ignore_temporarily:
+        title: Ignore for now
   intro:
     done: done
     ok: OK

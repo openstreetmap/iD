@@ -45,3 +45,10 @@ export function validationIssue(attrs) {
     this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
 }
+
+export function validationIssueFix(attrs) {
+
+    this.title = attrs.title;
+    this.action = attrs.action;
+
+}
