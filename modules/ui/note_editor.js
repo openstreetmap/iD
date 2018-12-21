@@ -46,6 +46,12 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('button')
+            .attr('class', 'fl note-editor-settings')
+            .on('click', context.layers().layer('notes').editSettings) // TODO: cleaner function call
+            .call(svgIcon('#iD-icon-more'));
+
+        headerEnter
+            .append('button')
             .attr('class', 'fr note-editor-close')
             .on('click', function() {
                 context.enter(modeBrowse(context));

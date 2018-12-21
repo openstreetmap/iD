@@ -12,7 +12,6 @@ import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiSettingsCustomData } from './settings/custom_data';
-import { uiSettingsNotesData } from './settings/notes_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -23,9 +22,6 @@ export function uiMapData(context) {
     var fills = ['wireframe', 'partial', 'full'];
 
     var settingsCustomData = uiSettingsCustomData(context)
-        .on('change', customChanged);
-
-    var settingsNotesData = uiSettingsNotesData(context)
         .on('change', customChanged);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
@@ -188,7 +184,7 @@ export function uiMapData(context) {
                 .title(function(d) { return t('settings.' + d.id + '_data.tooltip'); })
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
-            .on('click', editNotes) // TODO: WARNING: dynamically call settings (possibly move edit function to svg)
+            .on('click', function(d) { return d.editSettings; }) // TODO: WARNING: dynamically call settings (possibly move edit function to svg)
             .call(svgIcon('#iD-icon-more'));
 
         var labelEnter = liEnter
@@ -411,12 +407,6 @@ export function uiMapData(context) {
         d3_event.preventDefault();
         context.container()
             .call(settingsCustomData);
-    }
-
-    function editNotes() {
-        d3_event.preventDefault();
-        context.container()
-            .call(settingsNotesData);
     }
 
 

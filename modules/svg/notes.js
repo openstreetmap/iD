@@ -2,12 +2,16 @@ import _throttle from 'lodash-es/throttle';
 import _filter from 'lodash-es/filter';
 import _cloneDeep from 'lodash-es/cloneDeep';
 
-import { select as d3_select } from 'd3-selection';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
+import { uiSettingsNotesData } from '../ui/settings/notes_data';
 
 
 export function svgNotes(projection, context, dispatch) {
@@ -28,6 +32,9 @@ export function svgNotes(projection, context, dispatch) {
 
     var _contribution = 'all';
     var _contributionOptions = ['all', 'self', 'others'];
+
+    var settingsNotesData = uiSettingsNotesData(context);
+
 
     function formatDate(date) {
         var d = new Date(date),
@@ -312,6 +319,12 @@ export function svgNotes(projection, context, dispatch) {
 
         dispatch.call('change');
         return this;
+    };
+
+    drawNotes.editSettings = function() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsNotesData);
     };
 
     drawNotes.status = function(status) {
