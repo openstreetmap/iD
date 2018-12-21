@@ -42,7 +42,8 @@ export function validationMissingTag(context) {
                         new validationIssueFix({
                             title: t('issues.fix.delete_feature.title'),
                             action: function() {
-                                operationDelete([change.id], context)();
+                                var id = this.issue.entities[0].id;
+                                operationDelete([id], context)();
                             }
                         }),
                         new validationIssueFix({

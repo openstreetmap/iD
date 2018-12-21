@@ -44,6 +44,13 @@ export function validationIssue(attrs) {
     this.entities = attrs.entities;  // expect an array of entities
     this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
+
+    if (this.fixes) {
+        for (var i=0; i<this.fixes.length; i++) {
+            // add a reference in the fix to the issue for use in fix actions
+            this.fixes[i].issue = this;
+        }
+    }
 }
 
 export function validationIssueFix(attrs) {
@@ -51,4 +58,6 @@ export function validationIssueFix(attrs) {
     this.title = attrs.title;
     this.action = attrs.action;
 
+    // the issue this fix is for
+    this.issue = null;
 }

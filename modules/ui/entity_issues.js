@@ -104,7 +104,7 @@ export function uiEntityIssues(context) {
                     .text(function(d) {
                         return d.title;
                     })
-                    .on('click', function(d){
+                    .on('click', function(d) {
                         d.action()
                     });
             }
