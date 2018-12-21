@@ -216,7 +216,7 @@ export function validationHighwayCrossingOtherWays(context) {
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
-                    severity: ValidationIssueSeverity.error,
+                    severity: ValidationIssueSeverity.warning,
                     message: t('issues.'+crossingTypeID+'.message', messageDict),
                     tooltip: t('issues.'+crossingTypeID+'.tooltip'),
                     entities: entities,
