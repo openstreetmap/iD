@@ -10,9 +10,6 @@ import {
     validationIssueFix
 } from './validation_issue';
 import { operationDelete } from '../operations/index';
-import {
-    select as d3_select
-} from 'd3-selection';
 
 export function validationMissingTag(context) {
 

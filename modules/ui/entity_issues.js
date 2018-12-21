@@ -105,10 +105,10 @@ export function uiEntityIssues(context) {
                         return d.title;
                     })
                     .on('click', function(d) {
-                        d.action()
+                        d.action();
                     });
             }
-        })
+        });
 
         // Update
         items = items

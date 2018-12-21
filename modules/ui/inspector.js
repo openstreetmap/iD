@@ -78,8 +78,7 @@ export function uiInspector(context) {
 
             presetPane
                 .call(presetList.preset(preset).autofocus(true));
-        }
-
+        };
 
         inspector.setPreset = function(preset) {
             wrap.transition()
@@ -87,12 +86,12 @@ export function uiInspector(context) {
 
             editorPane
                 .call(entityEditor.preset(preset));
-        }
+        };
     }
 
     inspector.showList = function() {};
     inspector.setPreset = function() {};
-    
+
     inspector.state = function(_) {
         if (!arguments.length) return _state;
         _state = _;
