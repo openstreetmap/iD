@@ -1,3 +1,6 @@
+
+import { utilDetect } from './detect';
+
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
@@ -70,4 +73,15 @@ export function t(s, o, loc) {
 
 export function setTextDirection(dir) {
     textDirection = dir;
+}
+
+
+export function utilLocaleDateString(s) {
+  if (!s) return null;
+  var detected = utilDetect();
+  var options = { day: 'numeric', month: 'short', year: 'numeric' };
+  s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
+  var d = new Date(s);
+  if (isNaN(d.getTime())) return null;
+  return d.toLocaleDateString(detected.locale, options);
 }

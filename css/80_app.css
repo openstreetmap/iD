@@ -4104,6 +4104,9 @@ svg.mouseclick use.right {
     margin-bottom: 20px;
 }
 
+.note-statusDateRange-list > li {
+    height: 60px;
+}
 
 /* Save Mode
 ------------------------------------------------------- */
@@ -4451,30 +4454,35 @@ svg.mouseclick use.right {
 /* Exceptions for tooltip layouts */
 
 /* make tooltips in panels dark */
+.settings-modal .tooltip-arrow,
 .map-pane .tooltip.top .tooltip-arrow,
 .entity-editor-pane .tooltip.top .tooltip-arrow,
 .warning-section .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
+.settings-modal .tooltip-arrow,
 .map-pane .tooltip.bottom .tooltip-arrow,
 .entity-editor-pane .tooltip.bottom .tooltip-arrow,
 .warning-section .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 
+.settings-modal .tooltip-arrow,
 .map-pane .tooltip.left .tooltip-arrow,
 .entity-editor-pane .tooltip.left .tooltip-arrow,
 .warning-section .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
+.settings-modal .tooltip-arrow,
 .map-pane .tooltip.right .tooltip-arrow,
 .entity-editor-pane .tooltip.right .tooltip-arrow,
 .warning-section .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
+.settings-modal .tooltip-inner,
 .map-pane .tooltip-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,

@@ -552,6 +552,61 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
+    osm_data:
+      tooltip: Edit osm layer
+      header: OSM Data Settings
+    notes_data:
+      tooltip: Edit notes layer
+      header: Notes Data Settings
+      summary: "Custom settings for the notes layer, including filtering."
+      filters:
+        title: "Filters"
+        status:
+          title: "Status"
+          all:
+            description: 'All'
+            tooltip: 'Show both open and closed notes'
+          open:
+            description: 'Open'
+            tooltip: 'Show only open notes'
+          closed:
+            description: 'Closed'
+            tooltip: 'Show only closed notes'
+        toggleDateRange:
+          all:
+            description: "All"
+            tooltip: "Set note opened and closed date range"
+          opened:
+            description: "Opened"
+            tooltip: "Set note opened date range"
+          closed:
+            description: "Closed"
+            tooltip: "Set note closed date range"
+        statusDateRange:
+          title: "Status Date Range"
+          min:
+            description: 'Minimum'
+            tooltip: 'Set the minimum note {status} date'
+          max:
+            description: 'Maximum'
+            tooltip: 'Set the maximum note {status} date'
+          open:
+            description: 'Open'
+            tooltip: 'Show only open notes'
+          closed:
+            description: 'Closed'
+            tooltip: 'Show only closed notes'
+        contribution:
+          title: "Contribution"
+          all:
+            description: 'All'
+            tooltip: 'Show notes that have been created by everyone'
+          self:
+            description: 'Self'
+            tooltip: 'Show notes that only I have created or contributed to'
+          others:
+            description: 'Others'
+            tooltip: 'Show only notes that only others have created or contributed to'
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"

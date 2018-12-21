@@ -3,8 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { services } from '../services';
-import { utilDetect } from '../util/detect';
-
+import { utilLocaleDateString } from '../util';
 
 export function uiNoteComments() {
     var _note;
@@ -62,7 +61,7 @@ export function uiNoteComments() {
             .append('div')
             .attr('class', 'comment-date')
             .text(function(d) {
-                return t('note.status.' + d.action, { when: localeDateString(d.date) });
+                return t('note.status.' + d.action, { when: utilLocaleDateString(d.date) });
             });
 
         mainEnter
@@ -96,17 +95,6 @@ export function uiNoteComments() {
                     .attr('alt', user.display_name);
             });
         });
-    }
-
-
-    function localeDateString(s) {
-        if (!s) return null;
-        var detected = utilDetect();
-        var options = { day: 'numeric', month: 'short', year: 'numeric' };
-        s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
-        var d = new Date(s);
-        if (isNaN(d.getTime())) return null;
-        return d.toLocaleDateString(detected.locale, options);
     }
 
 

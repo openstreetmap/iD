@@ -19,6 +19,7 @@ export { utilHashcode } from './util';
 export { utilHighlightEntity } from './util';
 export { utilIdleWorker } from './idle_worker';
 export { utilKeybinding } from './keybinding';
+export { utilLocaleDateString } from './locale';
 export { utilNoAuto } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';

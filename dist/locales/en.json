@@ -679,6 +679,81 @@
                     "instructions": "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
                     "placeholder": "Enter a url"
                 }
+            },
+            "osm_data": {
+                "tooltip": "Edit osm layer",
+                "header": "OSM Data Settings"
+            },
+            "notes_data": {
+                "tooltip": "Edit notes layer",
+                "header": "Notes Data Settings",
+                "summary": "Custom settings for the notes layer, including filtering.",
+                "filters": {
+                    "title": "Filters",
+                    "status": {
+                        "title": "Status",
+                        "all": {
+                            "description": "All",
+                            "tooltip": "Show both open and closed notes"
+                        },
+                        "open": {
+                            "description": "Open",
+                            "tooltip": "Show only open notes"
+                        },
+                        "closed": {
+                            "description": "Closed",
+                            "tooltip": "Show only closed notes"
+                        }
+                    },
+                    "toggleDateRange": {
+                        "all": {
+                            "description": "All",
+                            "tooltip": "Set note opened and closed date range"
+                        },
+                        "opened": {
+                            "description": "Opened",
+                            "tooltip": "Set note opened date range"
+                        },
+                        "closed": {
+                            "description": "Closed",
+                            "tooltip": "Set note closed date range"
+                        }
+                    },
+                    "statusDateRange": {
+                        "title": "Status Date Range",
+                        "min": {
+                            "description": "Minimum",
+                            "tooltip": "Set the minimum note {status} date"
+                        },
+                        "max": {
+                            "description": "Maximum",
+                            "tooltip": "Set the maximum note {status} date"
+                        },
+                        "open": {
+                            "description": "Open",
+                            "tooltip": "Show only open notes"
+                        },
+                        "closed": {
+                            "description": "Closed",
+                            "tooltip": "Show only closed notes"
+                        }
+                    },
+                    "contribution": {
+                        "title": "Contribution",
+                        "all": {
+                            "description": "All",
+                            "tooltip": "Show notes that have been created by everyone"
+                        },
+                        "self": {
+                            "description": "Self",
+                            "tooltip": "Show notes that only I have created or contributed to"
+                        },
+                        "others": {
+                            "description": "Others",
+                            "tooltip": "Show only notes that only others have created or contributed to"
+                        }
+                    }
+                }
             }
         },
         "restore": {
@@ -7568,9 +7643,6 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7578,6 +7650,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -7594,6 +7670,12 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -7679,11 +7761,33 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
-            "hike_n_bike": {
+            "helsingborg-orto": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© Helsingborg municipality"
                 },
-                "name": "Hike & Bike"
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -7705,6 +7809,20 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topographic map of Sweden 1:50 000",
+                "name": "Lantmäteriet Topographic Map"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Orthophotos from the municipality of Linköping 2010, open data",
+                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -7769,6 +7887,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {

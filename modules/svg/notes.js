@@ -1,4 +1,6 @@
 import _throttle from 'lodash-es/throttle';
+import _filter from 'lodash-es/filter';
+import _cloneDeep from 'lodash-es/cloneDeep';
 
 import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -14,6 +16,31 @@ export function svgNotes(projection, context, dispatch) {
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
+
+    var _status = 'open';
+    var _statusOptions = ['all', 'open', 'closed'];
+
+    var _toggleDateRange = 'opened';
+    var _toggleDateRangeOptions = ['all', 'opened', 'closed'];
+
+    var _statusDateRangeOptions = [formatDate(new Date('2010-01-01')), formatDate(new Date())];
+    var _statusDateRange = _cloneDeep(_statusDateRangeOptions);
+
+    var _contribution = 'all';
+    var _contributionOptions = ['all', 'self', 'others'];
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
 
     function markerPath(selection, klass) {
         selection
@@ -84,10 +111,100 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
+    // TODO: handle newly added notes; make sure they show up too
+    // TODO: handle closing / opening a note that disappears given settings (update settings)
+    function _selfNote(d) {
+        return _notes.userDetails(function(_undefined, res) {
+            var ids = d.comments.map(function(comment) {
+                return comment.uid;
+            });
+            return ids.includes(res.id);
+        });
+    }
+
+    function _hasBeenClosedDate(d) {
+        if (d.date_closed) {
+            return d.date_closed;
+        }
+        var closedDates = d.comments.map(function(comment) {
+            if (comment.action === 'closed') {
+                return formatDate(new Date(comment.date));
+            }
+            return;
+        });
+        return closedDates.filter(function(el) { return el; }).sort().slice(-1)[0];
+    }
+
+
+    function _filterData(data, settings) {
+        // filter status
+        if (settings._status !== 'all') {
+            data = _filter(data, function(d) {
+                return d.status === settings._status;
+            });
+        }
+
+        // filter date
+        data = _filter(data, function(d) {
+            // TODO: Simplify this...
+            if (settings._toggleDateRange === 'all') {
+                return (settings._statusDateRange[0] <= formatDate(new Date(d.date_created)) &&
+                    formatDate(new Date(d.date_created)) <= settings._statusDateRange[1]) ||
+                    (settings._statusDateRange[0] <= formatDate(new Date(_hasBeenClosedDate(d))) &&
+                    formatDate(new Date(_hasBeenClosedDate(d))) <= settings._statusDateRange[1]);
+
+            } else if (settings._toggleDateRange === 'opened') {
+                return settings._statusDateRange[0] <= formatDate(new Date(d.date_created)) &&
+                    formatDate(new Date(d.date_created)) <= settings._statusDateRange[1];
+            } else if (settings._toggleDateRange === 'closed') {
+                return settings._statusDateRange[0] <= formatDate(new Date(_hasBeenClosedDate(d))) &&
+                    formatDate(new Date(_hasBeenClosedDate(d))) <= settings._statusDateRange[1];
+            }
+        });
+
+        // filter contribution
+        if (settings._contribution !== 'all') {
+            if (_notes.authenticated()) {
+                switch (settings._contribution) {
+                    case 'self':
+                        data = _filter(data, function(d) { return _selfNote(d); });
+                        break;
+                    case 'others':
+                        data = _filter(data, function(d) { return !_selfNote(d); });
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // TODO: handle non-authenticated case
+        }
+
+        return data;
+    }
+
+
     function update() {
         var service = getService();
         var selectedID = context.selectedNoteID();
+
         var data = (service ? service.notes(projection) : []);
+
+        // TODO: remove these settings & reference global
+        var settings = {
+            _contribution: _contribution,
+            _status: _status,
+            _statusDateRange: _statusDateRange,
+            _toggleDateRange: _toggleDateRange
+        };
+        // filter data
+        data = _filterData(data, settings);
+
+        // TODO: possibly find better way to exit select_note mode
+        var dataIDs = data.map(function(note) { return note.id; });
+        if (context.selectedNoteID() && !dataIDs.includes(context.selectedNoteID())) {
+            context.enter(modeBrowse(context));
+        }
+
         var transform = svgPointTransform(projection);
         var notes = layer.selectAll('.note')
             .data(data, function(d) { return d.status + d.id; });
@@ -192,6 +309,78 @@ export function svgNotes(projection, context, dispatch) {
                 context.enter(modeBrowse(context));
             }
         }
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.status = function(status) {
+        if (!arguments.length) return _status;
+
+        _status = status;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.statusOptions = function(statusOptions) {
+        if (!arguments.length) return _statusOptions;
+
+        _statusOptions = statusOptions;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.toggleDateRange = function(toggleDateRange) {
+        if (!arguments.length) return _toggleDateRange;
+
+        _toggleDateRange = toggleDateRange;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.toggleDateRangeOptions = function(toggleDateRangeOptions) {
+        if (!arguments.length) return _toggleDateRangeOptions;
+
+        _toggleDateRangeOptions = toggleDateRangeOptions;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.statusDateRange = function(statusDateRange) {
+        if (!arguments.length) return _statusDateRange;
+
+        _statusDateRange = statusDateRange;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.statusDateRangeOptions = function(statusDateRangeOptions) {
+        if (!arguments.length) return _statusDateRangeOptions;
+
+        _statusDateRangeOptions = statusDateRangeOptions;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.contribution = function(contribution) {
+        if (!arguments.length) return _contribution;
+
+        _contribution = contribution;
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawNotes.contributionOptions = function(contributionOptions) {
+        if (!arguments.length) return _contributionOptions;
+
+        _contributionOptions = contributionOptions;
 
         dispatch.call('change');
         return this;
