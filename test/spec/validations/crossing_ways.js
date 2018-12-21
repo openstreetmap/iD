@@ -262,7 +262,7 @@ describe('iD.validations.crossing_ways', function () {
             iD.actionAddEntity(n6),
             iD.actionAddEntity(w2),
             iD.actionAddEntity(w3),
-            iD.actionAddEntity(r1),
+            iD.actionAddEntity(r1)
         );
     }
 

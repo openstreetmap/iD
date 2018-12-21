@@ -883,20 +883,50 @@ en:
       error: error
       warning: warning
     disconnected_highway:
-      message: "{highway} is disconnected from other highways"
+      message: "{highway} is disconnected from other highways."
       tooltip: "Roads should be connected to other roads or building entrances."
     old_multipolygon:
       message: Multipolygon tags on outer way
       tooltip: "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
     untagged_feature:
-      message: "{feature} has no tags"
+      message: "{feature} has no tags."
       tooltip: "Select a feature type that describes what this is."
     many_deletions:
       message: "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area:
-      message: "The tag {tag} suggests line should be area, but it is not an area"
+      message: "The tag {tag} suggests line should be area, but it is not an area."
     deprecated_tags:
       message: "Deprecated tags: {tags}"
+    building-building_crossing:
+      message: "{building} intersect {building1} on the same layer."
+      tooltip: "Buildings should not intersect except on separate layers."
+    building-highway_crossing:
+      message: "{highway} crosses {building} without a bridge, tunnel, or entrance."
+      tooltip: "Highways crossing buildings should be connected with an entrance or use separate layers."
+    building-railway_crossing:
+      message: "{railway} crosses {building} without a bridge or tunnel."
+      tooltip: "Railways crossing buildings should use separate layers."
+    building-water_crossing:
+      message: "{water} crosses {building} without a culvert."
+      tooltip: "Waterways crossing buildings should use separate layers."
+    highway-highway_crossing:
+      message: "{highway} crosses {highway2} without a bridge, tunnel, or intersection."
+      tooltip: "Crossing highways should be connected or use separate layers."
+    highway-railway_crossing:
+      message: "{highway} crosses {railway} without a bridge, tunnel, or level crossing."
+      tooltip: "Highways crossing railways should be connected or use separate layers."
+    highway-water_crossing:
+      message: "{highway} crosses {water} without a bridge, tunnel, or ford."
+      tooltip: "Highways crossing waterways should be connected with a ford or use separate layers."
+    railway-railway_crossing:
+      message: "{railway} crosses {railway2} without a bridge, tunnel, or connection."
+      tooltip: "Crossing railways should be connected or use separate layers."
+    railway-water_crossing:
+      message: "{railway} crosses {water} without a bridge or tunnel."
+      tooltip: "Railways crossing waterways should use separate layers."
+    water-water_crossing:
+      message: "{water} crosses {water2} without a culvert or connection."
+      tooltip: "Crossing waterways should be connected or use separate layers."
     crossing_ways:
       message: Crossing ways without connection
       tooltip: "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."

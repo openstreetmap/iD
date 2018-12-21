@@ -1,6 +1,7 @@
 import _clone from 'lodash-es/clone';
 import { geoExtent, geoLineIntersection } from '../geo';
 import { set as d3_set } from 'd3-collection';
+import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import {
     ValidationIssueType,
@@ -9,7 +10,7 @@ import {
 } from './validation_issue';
 
 
-export function validationHighwayCrossingOtherWays() {
+export function validationHighwayCrossingOtherWays(context) {
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the corss point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited) {
@@ -45,7 +46,7 @@ export function validationHighwayCrossingOtherWays() {
         var parentRels = graph.parentRelations(way);
         for (var i = 0; i < parentRels.length; i++) {
             var rel = parentRels[i];
-            for (k in rel.tags) {
+            for (var k in rel.tags) {
                 if (!tags[k]) tags[k] = rel.tags[k];
             }
         }
@@ -171,6 +172,7 @@ export function validationHighwayCrossingOtherWays() {
                 for (var k = 0; k < crossCoords.length; k++) {
                     edgeCrossInfos.push({
                         ways: [entity, way],
+                        featureTypes: [entFeatureType, wayFeatureType],
                         cross_point: crossCoords[k],
                     });
                 }
@@ -187,13 +189,25 @@ export function validationHighwayCrossingOtherWays() {
         for (var i = 0; i < edited.length; i++) {
             var crosses = findCrossingsByWay(edited[i], graph, tree, edgePairsVisited);
             for (var j = 0; j < crosses.length; j++) {
+                var crossing = crosses[j];
+
+                var crossingTypeID = crossing.featureTypes.sort().join('-') + '_crossing';
+
+                var messageDict = {};
+                messageDict[crossing.featureTypes[0]] = utilDisplayLabel(crossing.ways[0], context);
+                var key2 = crossing.featureTypes[1];
+                if (crossing.featureTypes[0] === crossing.featureTypes[1]) {
+                    key2 += '2';
+                }
+                messageDict[key2] = utilDisplayLabel(crossing.ways[1], context);
+
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
                     severity: ValidationIssueSeverity.error,
-                    message: t('issues.crossing_ways.message'),
-                    tooltip: t('issues.crossing_ways.tooltip'),
-                    entities: crosses[j].ways,
-                    coordinates: crosses[j].cross_point,
+                    message: t('issues.'+crossingTypeID+'.message', messageDict),
+                    tooltip: t('issues.'+crossingTypeID+'.tooltip'),
+                    entities: crossing.ways,
+                    coordinates: crossing.cross_point,
                 }));
             }
         }
