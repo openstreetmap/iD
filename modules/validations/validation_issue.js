@@ -1,4 +1,5 @@
 import _isObject from 'lodash-es/isObject';
+import _map from 'lodash-es/map';
 import { osmEntity } from '../osm';
 
 var ValidationIssueType = Object.freeze({
@@ -25,7 +26,10 @@ export { ValidationIssueType, ValidationIssueSeverity };
 export function validationIssue(attrs) {
 
     this.id = function () {
-        return this.type + osmEntity.key(this.entities[0]);
+        var entityKeys = _map(this.entities, function(entity) {
+            return osmEntity.key(entity);
+        });
+        return this.type + entityKeys.join();
     };
 
     if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
