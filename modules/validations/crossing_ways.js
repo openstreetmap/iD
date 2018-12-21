@@ -8,7 +8,11 @@ import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
+    validationIssueFix
 } from './validation_issue';
+import { osmNode } from '../osm';
+import { actionAddMidpoint } from '../actions';
+import { geoChooseEdge } from '../geo';
 
 
 export function validationHighwayCrossingOtherWays(context) {
@@ -220,7 +224,38 @@ export function validationHighwayCrossingOtherWays(context) {
                     message: t('issues.'+crossingTypeID+'.message', messageDict),
                     tooltip: t('issues.'+crossingTypeID+'.tooltip'),
                     entities: entities,
+                    info: {'ways': crossing.ways},
                     coordinates: crossing.cross_point,
+                    fixes: [
+                        new validationIssueFix({
+                            title: t('issues.fix.add_connection_vertex.title'),
+                            action: function() {
+                                var loc = this.issue.coordinates;
+                                var ways = this.issue.info.ways;
+
+                                context.perform(
+                                    function actionConnectCrossingWays(graph) {
+
+                                        var node = osmNode();
+                                        graph = graph.replace(node);
+
+                                        var way0 = ways[0];
+                                        var choice0 = geoChooseEdge(context.childNodes(way0), loc, context.projection);
+                                        var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
+                                        graph = actionAddMidpoint({loc: choice0.loc, edge: edge0}, node)(graph);
+
+                                        var way1 = ways[1];
+                                        var choice1 = geoChooseEdge(context.childNodes(way1), loc, context.projection);
+                                        var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
+                                        graph = actionAddMidpoint({loc: choice1.loc, edge: edge1}, node)(graph);
+
+                                        return graph;
+                                    },
+                                    t('issues.fix.add_connection_vertex.undo_redo')
+                                );
+                            }
+                        })
+                    ]
                 }));
             }
         }

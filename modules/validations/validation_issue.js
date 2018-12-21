@@ -47,6 +47,7 @@ export function validationIssue(attrs) {
     this.tooltip = attrs.tooltip;
     this.entities = attrs.entities;  // expect an array of entities
     this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
+    this.info = attrs.info; // an object containing arbitrary extra information 
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
 
     if (this.fixes) {

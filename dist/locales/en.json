@@ -1126,6 +1126,10 @@
                 },
                 "ignore_temporarily": {
                     "title": "Ignore for now"
+                },
+                "add_connection_vertex": {
+                    "title": "Connect the features",
+                    "undo_redo": "Connected crossing features."
                 }
             }
         },

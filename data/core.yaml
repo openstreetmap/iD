@@ -937,6 +937,9 @@ en:
         title: Select a feature type
       ignore_temporarily:
         title: Ignore for now
+      add_connection_vertex:
+        title: Connect the features
+        undo_redo: Connected crossing features.
   intro:
     done: done
     ok: OK
