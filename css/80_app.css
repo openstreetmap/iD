@@ -2899,7 +2899,7 @@ div.full-screen > button:hover {
 }
 .entity-issues .issue ul.fixes li:first-child {
     border-top-style: solid;
-    border-top-width: 3px;
+    border-top-width: 2px;
 }
 .entity-issues .issue ul.fixes li:not(:last-of-type) {
     border-bottom-style: solid;
