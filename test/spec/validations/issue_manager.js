@@ -1,4 +1,4 @@
-describe('iD.validations.missing_tag', function () {
+describe('iD.validations.IssueManager', function () {
     var context;
 
     beforeEach(function() {
@@ -18,20 +18,20 @@ describe('iD.validations.missing_tag', function () {
         );
     }
 
-    function validate() {
-        var validator = iD.validationMissingTag(context);
-        var changes = context.history().changes();
-        return validator(changes, context.graph());
-    }
-
-    it('has no errors on init', function() {
-        var issues = validate();
+    it('has no issues on init', function() {
+        var issueManager = new iD.IssueManager(context);
+        var issues = issueManager.getIssues();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('finds missing tags', function() {
+    it('populates issues on validate', function() {
         createInvalidWay();
-        var issues = validate();
+        var issueManager = new iD.IssueManager(context);
+        var issues = issueManager.getIssues();
+        expect(issues).to.have.lengthOf(0);
+
+        issueManager.validate();
+        issues = issueManager.getIssues();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.missing_tag);

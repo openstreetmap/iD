@@ -19,6 +19,7 @@ export * from './ui/settings/index';
 export * from './ui/index';
 export * from './util/index';
 export * from './validations/index';
+export { IssueManager } from './validations/issue_manager';
 
 /* export some legacy symbols: */
 import { services } from './services/index';
