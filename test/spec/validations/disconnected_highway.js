@@ -56,6 +56,7 @@ describe('iD.validations.disconnected_highway', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.disconnected_highway);
+        expect(issue.severity).to.eql(iD.ValidationIssueSeverity.warning);
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });
