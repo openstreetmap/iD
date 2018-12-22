@@ -4674,11 +4674,6 @@ en:
         # leisure=resort
         name: Resort
         terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
-      leisure/running_track:
-        # 'leisure=track, sport=running'
-        name: Racetrack (Running)
-        # 'terms: race*,running,sprint,track'
-        terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
       leisure/sauna:
         # leisure=sauna
         name: Sauna
@@ -4711,6 +4706,16 @@ en:
         name: Racetrack (Non-Motorsport)
         # 'terms: cycle,dog,greyhound,horse,race*,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Non-Motorsport)'', separated by commas>'
+      leisure/track/horse_racing:
+        # 'leisure=track, sport=horse_racing'
+        name: Racetrack (Horse Racing)
+        # 'terms: race*,horse,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Horse Racing)'', separated by commas>'
+      leisure/track/running:
+        # 'leisure=track, sport=running'
+        name: Racetrack (Running)
+        # 'terms: race*,running,sprint,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
       leisure/water_park:
         # leisure=water_park
         name: Water Park

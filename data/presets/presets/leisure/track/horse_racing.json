@@ -1,0 +1,25 @@
+{
+    "icon": "maki-horse-riding",
+    "fields": [
+        "surface",
+        "sport_racing_nonmotor",
+        "lit",
+        "width",
+        "lanes"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "leisure": "track",
+        "sport": "horse_racing"
+    },
+    "terms": [
+        "race*",
+        "horse",
+        "track"
+    ],
+    "name": "Racetrack (Horse Racing)"
+}

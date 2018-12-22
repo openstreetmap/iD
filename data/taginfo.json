@@ -3877,13 +3877,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/lodging-15.svg?sanitize=true"
     },
     {
-      "key": "sport",
-      "value": "running",
-      "description": "🄿 Racetrack (Running)",
-      "object_types": ["node", "way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
-    },
-    {
       "key": "leisure",
       "value": "sauna",
       "description": "🄿 Sauna",
@@ -3931,6 +3924,20 @@
       "description": "🄿 Racetrack (Non-Motorsport)",
       "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-road.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "horse_racing",
+      "description": "🄿 Racetrack (Horse Racing)",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/horse-riding-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "running",
+      "description": "🄿 Racetrack (Running)",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
