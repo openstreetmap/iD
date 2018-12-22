@@ -1,0 +1,24 @@
+{
+    "icon": "maki-shop",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "fireplace",
+        "stove",
+        "masonry heater"
+    ],
+    "tags": {
+        "shop": "fireplace"
+    },
+    "name": "Fireplace Store"
+}

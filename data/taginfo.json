@@ -5752,6 +5752,20 @@
     },
     {
       "key": "shop",
+      "value": "fireplace",
+      "description": "🄿 Fireplace Store",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "fishing",
+      "description": "🄿 Fishing Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "florist",
       "description": "🄿 Florist",
       "object_types": ["node", "area"],
@@ -5861,6 +5875,13 @@
       "description": "🄿 Houseware Store",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-blender.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "hunting",
+      "description": "🄿 Hunting Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -6265,6 +6286,13 @@
       "key": "shop",
       "value": "water_sports",
       "description": "🄿 Watersport/Swim Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "water",
+      "description": "🄿 Drinking Water Shop",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
