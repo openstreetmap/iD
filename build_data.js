@@ -537,7 +537,7 @@ function writeFaIcons(faIcons) {
             writeFileProm('svg/fontawesome/' + key + '.svg', fontawesome.icon(def).html);
         } catch (error) {
             console.error('Error: No FontAwesome icon for ' + key);
-            throw(error);
+            throw (error);
         }
     }
 }
