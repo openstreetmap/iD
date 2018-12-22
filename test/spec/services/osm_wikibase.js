@@ -245,6 +245,12 @@ describe('iD.serviceOsmWikibase', function () {
     }
   };
 
+
+  var localeData = {
+    id: 'Q7792',
+    sitelinks: {wiki: {site: 'wiki', title: 'Locale:fr'}}
+  };
+
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', function () {
       var callback = sinon.spy();
@@ -254,7 +260,8 @@ describe('iD.serviceOsmWikibase', function () {
         [200, {'Content-Type': 'application/json'}, JSON.stringify({
           entities: {
             Q61: keyData,
-            Q4904: tagData
+            Q4904: tagData,
+            Q7792: localeData,
           },
           success: 1
         })]
@@ -268,7 +275,7 @@ describe('iD.serviceOsmWikibase', function () {
           languages: 'en|fr',
           origin: '*',
           sites: 'wiki',
-          titles: 'Key:amenity|Tag:amenity=parking',
+          titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
         }
       );
       expect(callback).to.have.been.calledWith(null, {key: keyData, tag: tagData});
@@ -287,6 +294,8 @@ describe('iD.serviceOsmWikibase', function () {
   });
 
   it('gets correct value from entity', function () {
+    wikibase.addLocale('de', 'Q6994');
+    wikibase.addLocale('fr', 'Q7792');
     expect(wikibase.claimToValue(tagData, 'P4', 'en')).to.eql('Primary image.jpg');
     expect(wikibase.claimToValue(keyData, 'P6', 'en')).to.eql('Q15');
     expect(wikibase.claimToValue(keyData, 'P6', 'fr')).to.eql('Q15');

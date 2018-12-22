@@ -9,6 +9,7 @@ import { utilQsString } from '../util';
 var apibase = 'https://wiki.openstreetmap.org/w/api.php';
 var _inflight = {};
 var _wikibaseCache = {};
+var _localeIds = {};
 
 
 var debouncedRequest = _debounce(request, 500, { leading: false });
@@ -28,27 +29,13 @@ export default {
     init: function() {
         _inflight = {};
         _wikibaseCache = {};
+        _localeIds = {};
     },
 
 
     reset: function() {
         _forEach(_inflight, function(req) { req.abort(); });
         _inflight = {};
-    },
-
-
-    /** List of data items representing language regions.
-     *  To regenerate, use Sophox query:  http://tinyurl.com/y6v9ne2c (every instance of Q6999)
-     *  A less accurate list can be seen here (everything that links to Q6999):
-     *  https://wiki.openstreetmap.org/w/index.php?title=Special%3AWhatLinksHere&target=Item%3AQ6999&namespace=120
-     */
-    regionCodes: {
-        ar: 'Q7780', az: 'Q7781', bg: 'Q7782', bn: 'Q7783', ca: 'Q7784', cs: 'Q7785', da: 'Q7786',
-        de: 'Q6994', el: 'Q7787', es: 'Q7788', et: 'Q7789', fa: 'Q7790', fi: 'Q7791', fr: 'Q7792',
-        gl: 'Q7793', hr: 'Q7794', ht: 'Q7795', hu: 'Q7796', id: 'Q7797', it: 'Q7798', ja: 'Q7799',
-        ko: 'Q7800', lt: 'Q7801', lv: 'Q7802', ms: 'Q7803', nl: 'Q7804', no: 'Q7805', pl: 'Q7806',
-        pt: 'Q7807', ro: 'Q7808', ru: 'Q7809', sk: 'Q7810', sq: 'Q7811', sv: 'Q7812', tr: 'Q7813',
-        uk: 'Q7814', vi: 'Q7815', yue: 'Q7816', 'zh-hans': 'Q7817', 'zh-hant': 'Q7818',
     },
 
 
@@ -60,19 +47,21 @@ export default {
      */
     claimToValue: function(entity, property, langCode) {
         if (!entity.claims[property]) return undefined;
-        var region = this.regionCodes[langCode];
-        var preferredPick, regionPick;
+        var locale = _localeIds[langCode];
+        var preferredPick, localePick;
         _forEach(entity.claims[property], function(stmt) {
-            // If exists, use value limited to the needed language (has a qualifier P26 = region)
+            // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
             if (!preferredPick && stmt.rank === 'preferred') {
                 preferredPick = stmt;
             }
-            if (stmt.qualifiers && stmt.qualifiers.P26 && stmt.qualifiers.P26[0].datavalue.value.id === region) {
-                regionPick = stmt;
+            if (locale && stmt.qualifiers && stmt.qualifiers.P26 &&
+                stmt.qualifiers.P26[0].datavalue.value.id === locale
+            ) {
+                localePick = stmt;
             }
         });
-        var result = regionPick || preferredPick;
+        var result = localePick || preferredPick;
 
         if (result) {
             var datavalue = result.mainsnak.datavalue;
@@ -106,15 +95,23 @@ export default {
 
     getEntity: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
-
+        var self = this;
         var titles = [];
         var languages = ['en'];
         var result = {};
         var keySitelink = this.toSitelink(params.key);
         var tagSitelink = params.value ? this.toSitelink(params.key, params.value) : false;
+        var localeSitelink;
 
         if (params.langCode && params.langCode !== 'en') {
             languages.push(params.langCode);
+            if (!_localeIds[params.langCode]) {
+                // This is the first time we are asking about this locale
+                // Fetch corresponding entity (if it exists), and cache it.
+                // If there is no such entry, cache `true` to avoid re-requesting it.
+                localeSitelink = ('Locale:' + params.langCode).replace(/_/g, ' ').trim();
+                titles.push(localeSitelink);
+            }
         }
 
         if (_wikibaseCache[keySitelink]) {
@@ -155,6 +152,7 @@ export default {
             } else if (!d.success || d.error) {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
+                var localeId = true;
                 _forEach(d.entities, function(res) {
                     if (res.missing !== '') {
                         var title = res.sitelinks.wiki.title;
@@ -164,17 +162,29 @@ export default {
                         } else if (title === tagSitelink) {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
+                        } else if (title === localeSitelink) {
+                            localeId = res.id;
                         } else {
                             console.log('Unexpected title ' + title);
                         }
                     }
                 });
 
+                if (localeSitelink) {
+                    // If locale ID is not found, set cache to true to prevent repeated queries
+                    self.addLocale(params.langCode, localeId);
+                }
+
                 callback(null, result);
             }
         });
     },
 
+
+    addLocale: function(langCode, qid) {
+        // Makes it easier to unit test
+        _localeIds[langCode] = qid;
+    },
 
     apibase: function(_) {
         if (!arguments.length) return apibase;
