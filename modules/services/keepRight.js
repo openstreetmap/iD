@@ -23,7 +23,13 @@ var dispatch = d3_dispatch('loaded');
 var _krCache;
 var _krZoom = 14;
 var apibase = 'https://www.keepright.at/';
-var defaultRuleset = [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413];
+var defaultRuleset = [
+    0, 30, 40, 50, 70, 90, 100, 110, 120, 130, 150, 160, 170, 180,
+    191, 192, 193, 194, 195, 196, 197, 198, 201, 202, 203, 204, 205,
+    206, 207, 208, 210, 220, 231, 232, 270, 281, 282, 283, 284, 285,
+    291, 292 ,293, 294, 295, 296, 297, 298, 311, 312, 313, 320, 350,
+    370, 380, 401, 402, 411, 412, 413
+];
 
 
 function abortRequest(i) {
@@ -62,45 +68,34 @@ function updateRtree(item, replace) {
 }
 
 
-function tokenReplacements(datum) {
-    if (!(datum instanceof krError)) return;
+function tokenReplacements(d) {
+    if (!(d instanceof krError)) return;
 
     var replacements = {};
     var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
-    var commonEntities = ['node', 'way', 'relation', 'highway', 'cycleway', 'waterway', 'riverbank'];
 
-    var errorType;
-    var errorTemplate;
-    var errorDescription;
-    var errorRegex;
-    var errorMatch;
-
-    // find the matching template from the error schema
-    errorType = '_' + datum.error_type;
-    errorTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
+    var errorTemplate = errorTypes[d.error_type];
     if (!errorTemplate) return;
 
     // some descriptions are just fixed text
-    if (!('regex' in errorTemplate)) return;
+    if (!errorTemplate.regex) return;
 
     // regex pattern should match description with variable details captured as groups
-    errorDescription = datum.description;
-    errorRegex = new RegExp(errorTemplate.description);
-    errorMatch = errorRegex.exec(errorDescription);
+    var errorDescription = d.description;
+    var errorRegex = new RegExp(errorTemplate.description);
+    var errorMatch = errorRegex.exec(errorDescription);
     if (!errorMatch) {
         // TODO: Remove, for regex dev testing
-        console.log('Unmatched:', errorType, errorDescription, errorRegex);
+        console.log('Unmatched:', d.error_type, d.description, errorRegex);
         return;
     }
 
-    errorMatch.forEach(function(group, index) {
+    for (var i = 1; i < errorMatch.length; i++) {   // skip first
+        var group = errorMatch[i];
         var idType;
 
-        // index 0 is the whole match, skip it
-        if (!index) return;
-
         // link IDs if present in the group
-        idType = 'IDs' in errorTemplate ? errorTemplate.IDs[index-1] : '';
+        idType = 'IDs' in errorTemplate ? errorTemplate.IDs[i-1] : '';
         if (idType && group) {
             group = parseError(group, idType);
         } else if (html_re.test(group)) {
@@ -108,13 +103,8 @@ function tokenReplacements(datum) {
             group = '\\' +  group + '\\';
         }
 
-        // translate common words (e.g. node, way, relation)
-        if (commonEntities.includes(group)) {
-            group = t('QA.keepRight.entities.' + group);
-        }
-
-        replacements['var' + index] = group;
-    });
+        replacements[i-1] = group;
+    }
 
     return replacements;
 }
@@ -122,7 +112,9 @@ function tokenReplacements(datum) {
 
 function parseError(group, idType) {
 
-    function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
+    function fillPlaceholder(d) {
+        return '<span><a class="kr_error_description-id">' + d + '</a></span>';
+    }
 
     // arbitrary node list of form: #ID, #ID, #ID...
     function parseError211(list) {

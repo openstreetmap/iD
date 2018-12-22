@@ -1,424 +1,501 @@
-
 {
-    "errorTypes": {
-        "errors": {
-            "_30": {
-                "title": "non-closed_areas",
-                "description": "This way is tagged with ''([\\w:]+)=(\\w+)''and should be closed-loop",
-                "regex": true
-            },
-            "_40": {
-                "title": "dead-ended one-ways",
-                "description": "The first node \\(id (\\d+)\\) of this one-way is not connected to any other way",
-                "IDs": ["n"],
-                "regex": true
-            },
-            "_41": {
-                "title": "",
-                "description": "The last node \\(id (\\d+)\\) of this one-way is not connected to any other way",
-                "IDs": ["n"],
-                "regex": true
-            },
-            "_42": {
-                "title": "",
-                "description": "This node cannot be reached because one-ways only lead away from here"
-            },
-            "_43": {
-                "title": "",
-                "description": "You cannot escape from this node because one-ways only lead to here"
-            },
-            "_50": {
-                "title": "almost-junctions",
-                "description": "This node is very close but not connected to way #(\\d+)",
-                "IDs": ["w"],
-                "regex": true
-            },
-            "_70": {
-                "title": "missing tags",
-                "description": ""
-            },
-            "_71": {
-                "title": "",
-                "description": "This way has no tags"
-            },
-            "_72": {
-                "title": "",
-                "description": "This node is not member of any way and does not have any tags"
-            },
-            "_73": {
-                "title": "",
-                "description": "This way has a tracktype tag but no highway tag"
-            },
-            "_74": {
-                "title": "missing tags",
-                "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;",
-                "regex": true
-            },
-            "_75": {
-                "description": "This (node|way|relation) has a name \\((.+)\\) but no other tag",
-                "regex": true
-            },
-            "_90": {
-                "title": "motorways without ref",
-                "description": "This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag"
-            },
-            "_100": {
-                "title": "places of worship without religion",
-                "description": "This (node|way|relation) is tagged as place of worship and therefore needs a religion tag",
-                "regex": true
-            },
-            "_110": {
-                "title": "point of interest without name",
-                "description": "This node is tagged as ([\\w:]+) and therefore needs a name tag",
-                "regex": true
-            },
-            "_120": {
-                "title": "ways without nodes",
-                "description": "This way has just one single node"
-            },
-            "_130": {
-                "title": "floating islands",
-                "description": "This way is not connected to the rest of the map"
-            },
-            "_150": {
-                "title": "railway crossing without tag",
-                "description": "This crossing of a highway and a railway needs to be tagged as railway=crossing or railway=level_crossing"
-            },
-            "_160": {
-                "title": "wrongly used railway tag",
-                "description": "There are ways in different layers coming together in this railway crossing. There are ways tagged as tunnel or bridge coming together in this railway crossing"
-            },
-            "_170": {
-                "title": "FIXME tagged items",
-                "description": "(.*)",
-                "regex": true
-            },
-            "_180": {
-                "title": "relations without type",
-                "description": "This relation has no type tag which is mandatory for relations"
-            },
-            "_190": {
-                "title": "intersections without junctions",
-                "description": "Finds way crossings on same layer without common node as a junction"
-            },
-            "_191": {
-                "title": "highway-highway",
-                "description": "This (highway) intersects the (highway) #(\\d+) but there is no junction node",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_192": {
-                "title": "highway-waterway",
-                "description": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_193": {
-                "title": "highway-riverbank",
-                "description": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_194": {
-                "title": "waterway-waterway",
-                "description": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_195": {
-                "title": "cycleway-cycleway",
-                "description": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_196": {
-                "title": "highway-cycleway",
-                "description": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_197": {
-                "title": "cycleway-waterway",
-                "description": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_198": {
-                "title": "cycleway-riverbank",
-                "description": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_200": {
-                "title": "overlapping ways",
-                "description": "Finds overlapping ways on same layer"
-            },
-            "_201": {
-                "title": "highway-highway",
-                "description": "This (highway) overlaps the (highway) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_202": {
-                "title": "highway-waterway",
-                "description": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_203": {
-                "title": "highway-riverbank",
-                "description": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_204": {
-                "title": "waterway-waterway",
-                "description": "This (waterway) overlaps the (waterway) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_205": {
-                "title": "cycleway-cycleway",
-                "description": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_206": {
-                "title": "highway-cycleway",
-                "description": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_207": {
-                "title": "cycleway-waterway",
-                "description": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_208": {
-                "title": "cycleway-riverbank",
-                "description": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)",
-                "IDs": ["", "", "w"],
-                "regex": true
-            },
-            "_210": {
-                "title": "loopings",
-                "description": "These errors contain self intersecting ways"
-            },
-            "_211": {
-                "title": "",
-                "description": "This way contains more than one node at least twice\\. Nodes are ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
-                "IDs": ["211"],
-                "regex": true
-            },
-            "_212": {
-                "title": "",
-                "description": "This way has only two different nodes and contains one of them more than once"
-            },
-            "_220": {
-                "title": "misspelled tags",
-                "description": "This (node|way|relation) is tagged '([\\w]+)(:([\\w]+))?=(.+)' where &quot;(\\2|\\3|\\4|\\5)&quot; looks like &quot;([\\w\\s]+)&quot;",
-                "regex": true
-            },
-            "_221": {
-                "title": "",
-                "description": "The key of this (node|way|relation)''s tag is ''key'': key=(.+)",
-                "regex": true
-            },
-            "_230": {
-                "title": "layer conflicts",
-                "description": "Connected ways should be on the same layer. Crossings on intermediate nodes of ways on different layers are obviously wrong. Junctions on end-nodes of ways on different layers are also deprecated, but common practice. So you may ignore this part of the check and switch them off separately. Please note that bridges are set to layer +1, and tunnels to -1, anything else to layer 0 implicitly if no layer tag is present."
-            },
-            "_231": {
-                "title": "mixed layers intersection",
-                "description": "This node is a junction of ways on different layers: ((?:#\\d+\\(-?\\d+\\),?)+)",
-                "IDs": ["231"],
-                "regex": true
-            },
-            "_232": {
-                "title": "strange layers",
-                "description": "This (bridge|tunnel) is tagged with layer (-?\\d+)\\. This need not be an error but it looks strange",
-                "regex": true
-            },
-            "_270": {
-                "title": "motorways connected directly",
-                "description": "This node is a junction of a motorway and a highway other than motorway, motorway_link, trunk, rest_area or construction. Service or unclassified is only valid if it has access=no/private or it leads to a motorway service area or if it is a service=parking_aisle."
-            },
-            "_280": {
-                "title": "boundaries",
-                "description": "Administrative Boundaries can be expressed either by tagging ways or by adding them to a relation. They should be closed-loop sequences of ways, they must not self-intersect or split and they must have a name and an admin_level."
-            },
-            "_281": {
-                "title": "missing name",
-                "description": "This boundary has no name"
-            },
-            "_282": {
-                "title": "missing admin level",
-                "description": "The boundary of (.+) has no (?:valid numeric )?admin_level\\..*",
-                "regex": true
-            },
-            "_283": {
-                "title": "no closed loop",
-                "description": "The boundary of (.+) is not closed-loop",
-                "regex": true
-            },
-            "_284": {
-                "title": "splitting boundary",
-                "description": "The boundary of (.+) splits here",
-                "regex": true
-            },
-            "_285": {
-                "title": "admin_level too high",
-                "description": "This boundary-way has admin_level (-?\\d+) but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations",
-                "regex": true
-            },
-            "_290": {
-                "title": "restrictions",
-                "description": "Analyses all relations tagged type=restriction or following variations type=restriction:hgv type=restriction:caravan type=restriction:motorcar type=restriction:bus type=restriction:agricultural type=restriction:motorcycle type=restriction:bicycle and type=restriction:hazmat"
-            },
-            "_291": {
-                "title": "missing type",
-                "description": "This turn-restriction has no (?:known )?restriction type",
-                "regex": true
-            },
-            "_292": {
-                "title": "missing from way",
-                "description": "A turn-restriction needs exactly one from member\\. This one has (\\d+)",
-                "regex": true
-            },
-            "_293": {
-                "title": "missing to way",
-                "description": "A turn-restriction needs exactly one to member\\. This one has (\\d+)",
-                "regex": true
-            },
-            "_294": {
-                "title": "from or to not a way",
-                "description": "From- and To-members of turn restrictions need to be ways\\. ((?:(?:from|to) (?:node|relation) #\\d+,?)+)",
-                "IDs": ["294"],
-                "regex": true
-            },
-            "_295": {
-                "title": "via is not on the way ends",
-                "description": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)",
-                "IDs": ["n", "w"],
-                "regex": true
-            },
-            "_296": {
-                "title": "wrong restriction angle",
-                "description": "restriction type is (\\w+) but angle is (\\d+) degrees. Maybe the restriction type is not appropriate?",
-                "regex": true
-            },
-            "_297": {
-                "title": "wrong direction of to member",
-                "description": "wrong direction of to way (\\d+)",
-                "IDs": ["w"],
-                "regex": true
-            },
-            "_298": {
-                "title": "already restricted by oneway",
-                "description": "entry already prohibited by oneway tag on (\\d+)",
-                "IDs": ["w"],
-                "regex": true
-            },
-            "_310": {
-                "title": "roundabouts",
-                "description": "Analyses ways with tag junction=roundabout. More then one way can form a roundabout. It supports tag oneway=-1"
-            },
-            "_311": {
-                "title": "not closed loop",
-                "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)"
-            },
-            "_312": {
-                "title": "wrong direction",
-                "description": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around",
-                "regex": true
-            },
-            "_313": {
-                "title": "faintly connected",
-                "description": "This roundabout has only (\\d) other roads connected. Roundabouts typically have three",
-                "regex": true
-            },
-            "_320": {
-                "title": "*_link connections",
-                "description": "This way is tagged as highway=(\\w+)_link but doesn't have a connection to any other \\1 or \\1_link",
-                "regex": true
-            },
-            "_350": {
-                "title": "bridge-tags",
-                "description": "This bridge does not have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: (.+)",
-                "NOTE": "Group can be arbitrary list of form: key=value,key=value,key=value...",
-                "regex": true
-            },
-            "_370": {
-                "title": "doubled places",
-                "description": "This node has tags in common with the surrounding way #(\\d+) ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
-                "IDs": ["w"],
-                "regex": true
-            },
-            "_380": {
-                "title": "non-physical use of sport-tag",
-                "description": "This way is tagged sport=(\\w+) but has no physical tag like e.g. leisure, building, amenity or highway",
-                "regex": true
-            },
-            "_400": {
-                "title": "geometry glitches",
-                "description": ""
-            },
-            "_401": {
-                "title": "missing turn restriction",
-                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning( from way (\\1|\\2) to (\\1|\\2))?",
-                "IDs": ["w", "w", "w", "w"],
-                "regex": true
-            },
-            "_402": {
-                "title": "impossible angles",
-                "description": "this way bends in a very sharp angle here"
-            },
-            "_410": {
-                "title": "website",
-                "description": "Web pages are analyzed. Web page is defined by any of the following tags website=* url=* website:mobile=* contact:website=* contact:url=* image=* source:website=* or source:url=*"
-            },
-            "_411": {
-                "title": "http error",
-                "description": "The URL \\(<a target=_blank href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
-                "regex": true
-            },
-            "_412": {
-                "title": "domain hijacking",
-                "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''",
-                "regex": true
-            },
-            "_413": {
-                "title": "non-match",
-                "description": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)",
-                "regex": true
-            }
-        },
-        "warnings": {
-            "_20": {
-                "title": "multiple nodes on the same spot",
-                "description": "There is more than one node in this spot\\. Offending node IDs: ((?:#\\d+,?)+)",
-                "IDs": ["20"],
-                "regex": true
-            },
-            "_60": {
-                "title": "depreciated tags",
-                "description": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead!",
-                "regex": true
-            },
-            "_300": {
-                "title": "missing maxspeed",
-                "description": "missing maxspeed tag"
-            },
-            "_360": {
-                "title": "language unknown",
-                "description": "It would be nice if this (node|way|relation) had an additional tag 'name:XX=(.+)' where XX shows the language of its name '\\2'",
-                "regex": true
-            },
-            "_390": {
-                "title": "missing tracktype",
-                "description": "This track doesn''t have a tracktype"
-            }
-        }
+  "errorTypes": {
+    "20": {
+      "title": "multiple nodes on the same spot",
+      "severity": "warning",
+      "description": "There is more than one node in this spot\\. Offending node IDs: ((?:#\\d+,?)+)",
+      "IDs": ["20"],
+      "regex": true
+    },
+    "30": {
+      "title": "non-closed_areas",
+      "severity": "error",
+      "description": "This way is tagged with ''([\\w:]+)=(\\w+)''and should be closed-loop",
+      "regex": true
+    },
+    "40": {
+      "title": "dead-ended one-ways",
+      "severity": "error",
+      "description": "The first node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+      "IDs": ["n"],
+      "regex": true
+    },
+    "41": {
+      "title": "",
+      "severity": "error",
+      "description": "The last node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+      "IDs": ["n"],
+      "regex": true
+    },
+    "42": {
+      "title": "",
+      "severity": "error",
+      "description": "This node cannot be reached because one-ways only lead away from here"
+    },
+    "43": {
+      "title": "",
+      "severity": "error",
+      "description": "You cannot escape from this node because one-ways only lead to here"
+    },
+    "50": {
+      "title": "almost-junctions",
+      "severity": "error",
+      "description": "This node is very close but not connected to way #(\\d+)",
+      "IDs": ["w"],
+      "regex": true
+    },
+    "60": {
+      "title": "depreciated tags",
+      "severity": "warning",
+      "description": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead!",
+      "regex": true
+    },
+    "70": {
+      "title": "missing tags",
+      "severity": "error",
+      "description": ""
+    },
+    "71": {
+      "title": "",
+      "severity": "error",
+      "description": "This way has no tags"
+    },
+    "72": {
+      "title": "",
+      "severity": "error",
+      "description": "This node is not member of any way and does not have any tags"
+    },
+    "73": {
+      "title": "",
+      "severity": "error",
+      "description": "This way has a tracktype tag but no highway tag"
+    },
+    "74": {
+      "title": "missing tags",
+      "severity": "error",
+      "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;",
+      "regex": true
+    },
+    "75": {
+      "description": "This (node|way|relation) has a name \\((.+)\\) but no other tag",
+      "regex": true
+    },
+    "90": {
+      "title": "motorways without ref",
+      "severity": "error",
+      "description": "This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag"
+    },
+    "100": {
+      "title": "places of worship without religion",
+      "severity": "error",
+      "description": "This (node|way|relation) is tagged as place of worship and therefore needs a religion tag",
+      "regex": true
+    },
+    "110": {
+      "title": "point of interest without name",
+      "severity": "error",
+      "description": "This node is tagged as ([\\w:]+) and therefore needs a name tag",
+      "regex": true
+    },
+    "120": {
+      "title": "ways without nodes",
+      "severity": "error",
+      "description": "This way has just one single node"
+    },
+    "130": {
+      "title": "floating islands",
+      "severity": "error",
+      "description": "This way is not connected to the rest of the map"
+    },
+    "150": {
+      "title": "railway crossing without tag",
+      "severity": "error",
+      "description": "This crossing of a highway and a railway needs to be tagged as railway=crossing or railway=level_crossing"
+    },
+    "160": {
+      "title": "wrongly used railway tag",
+      "severity": "error",
+      "description": "There are ways in different layers coming together in this railway crossing. There are ways tagged as tunnel or bridge coming together in this railway crossing"
+    },
+    "170": {
+      "title": "FIXME tagged items",
+      "severity": "error",
+      "description": "(.*)",
+      "regex": true
+    },
+    "180": {
+      "title": "relations without type",
+      "severity": "error",
+      "description": "This relation has no type tag which is mandatory for relations"
+    },
+    "190": {
+      "title": "intersections without junctions",
+      "severity": "error",
+      "description": "Finds way crossings on same layer without common node as a junction"
+    },
+    "191": {
+      "title": "highway-highway",
+      "severity": "error",
+      "description": "This (highway) intersects the (highway) #(\\d+) but there is no junction node",
+      "IDs": ["", "", "w"],
+      "regex": true
+    },
+    "192": {
+      "title": "highway-waterway",
+      "severity": "error",
+      "description": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)",
+      "IDs": ["", "", "w"],
+      "regex": true
+    },
+    "193": {
+      "title": "highway-riverbank",
+      "severity": "error",
+      "description": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)",
+      "IDs": ["", "", "w"],
+      "regex": true
+    },
+    "194": {
+      "title": "waterway-waterway",
+      "severity": "error",
+      "description": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "195": {
+      "title": "cycleway-cycleway",
+      "severity": "error",
+      "description": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "196": {
+      "title": "highway-cycleway",
+      "severity": "error",
+      "description": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "197": {
+      "title": "cycleway-waterway",
+      "severity": "error",
+      "description": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "198": {
+      "title": "cycleway-riverbank",
+      "severity": "error",
+      "description": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "200": {
+      "title": "overlapping ways",
+      "severity": "error",
+      "description": "Finds overlapping ways on same layer"
+    },
+    "201": {
+      "title": "highway-highway",
+      "severity": "error",
+      "description": "This (highway) overlaps the (highway) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "202": {
+      "title": "highway-waterway",
+      "severity": "error",
+      "description": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "203": {
+      "title": "highway-riverbank",
+      "severity": "error",
+      "description": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "204": {
+      "title": "waterway-waterway",
+      "severity": "error",
+      "description": "This (waterway) overlaps the (waterway) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "205": {
+      "title": "cycleway-cycleway",
+      "severity": "error",
+      "description": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "206": {
+      "title": "highway-cycleway",
+      "severity": "error",
+      "description": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "207": {
+      "title": "cycleway-waterway",
+      "severity": "error",
+      "description": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "208": {
+      "title": "cycleway-riverbank",
+      "severity": "error",
+      "description": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)",
+      "IDs": ["", "","w"],
+      "regex": true
+    },
+    "210": {
+      "title": "loopings",
+      "severity": "error",
+      "description": "These errors contain self intersecting ways"
+    },
+    "211": {
+      "title": "",
+      "severity": "error",
+      "description": "This way contains more than one node at least twice\\. Nodes are ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
+      "IDs": ["211"],
+      "regex": true
+    },
+    "212": {
+      "title": "",
+      "severity": "error",
+      "description": "This way has only two different nodes and contains one of them more than once"
+    },
+    "220": {
+      "title": "misspelled tags",
+      "severity": "error",
+      "description": "This (node|way|relation) is tagged '([\\w]+)(:([\\w]+))?=(.+)' where &quot;(\\2|\\3|\\4|\\5)&quot; looks like &quot;([\\w\\s]+)&quot;",
+      "regex": true
+    },
+    "221": {
+      "title": "",
+      "severity": "error",
+      "description": "The key of this (node|way|relation)''s tag is ''key'': key=(.+)",
+      "regex": true
+    },
+    "230": {
+      "title": "layer conflicts",
+      "severity": "error",
+      "description": "Connected ways should be on the same layer. Crossings on intermediate nodes of ways on different layers are obviously wrong. Junctions on end-nodes of ways on different layers are also deprecated, but common practice. So you may ignore this part of the check and switch them off separately. Please note that bridges are set to layer +1, and tunnels to -1, anything else to layer 0 implicitly if no layer tag is present."
+    },
+    "231": {
+      "title": "mixed layers intersection",
+      "severity": "error",
+      "description": "This node is a junction of ways on different layers: ((?:#\\d+\\(-?\\d+\\),?)+)",
+      "IDs": ["231"],
+      "regex": true
+    },
+    "232": {
+      "title": "strange layers",
+      "severity": "error",
+      "description": "This (bridge|tunnel) is tagged with layer (-?\\d+)\\. This need not be an error but it looks strange",
+      "regex": true
+    },
+    "270": {
+      "title": "motorways connected directly",
+      "severity": "error",
+      "description": "This node is a junction of a motorway and a highway other than motorway, motorway_link, trunk, rest_area or construction. Service or unclassified is only valid if it has access=no/private or it leads to a motorway service area or if it is a service=parking_aisle."
+    },
+    "280": {
+      "title": "boundaries",
+      "severity": "error",
+      "description": "Administrative Boundaries can be expressed either by tagging ways or by adding them to a relation. They should be closed-loop sequences of ways, they must not self-intersect or split and they must have a name and an admin_level."
+    },
+    "281": {
+      "title": "missing name",
+      "severity": "error",
+      "description": "This boundary has no name"
+    },
+    "282": {
+      "title": "missing admin level",
+      "severity": "error",
+      "description": "The boundary of (.+) has no (?:valid numeric )?admin_level\\..*",
+      "regex": true
+    },
+    "283": {
+      "title": "no closed loop",
+      "severity": "error",
+      "description": "The boundary of (.+) is not closed-loop",
+      "regex": true
+    },
+    "284": {
+      "title": "splitting boundary",
+      "severity": "error",
+      "description": "The boundary of (.+) splits here",
+      "regex": true
+    },
+    "285": {
+      "title": "admin_level too high",
+      "severity": "error",
+      "description": "This boundary-way has admin_level (-?\\d+) but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations",
+      "regex": true
+    },
+    "290": {
+      "title": "restrictions",
+      "severity": "error",
+      "description": "Analyses all relations tagged type=restriction or following variations type=restriction:hgv type=restriction:caravan type=restriction:motorcar type=restriction:bus type=restriction:agricultural type=restriction:motorcycle type=restriction:bicycle and type=restriction:hazmat"
+    },
+    "291": {
+      "title": "missing type",
+      "severity": "error",
+      "description": "This turn-restriction has no (?:known )?restriction type",
+      "regex": true
+    },
+    "292": {
+      "title": "missing from way",
+      "severity": "error",
+      "description": "A turn-restriction needs exactly one from member\\. This one has (\\d+)",
+      "regex": true
+    },
+    "293": {
+      "title": "missing to way",
+      "severity": "error",
+      "description": "A turn-restriction needs exactly one to member\\. This one has (\\d+)",
+      "regex": true
+    },
+    "294": {
+      "title": "from or to not a way",
+      "severity": "error",
+      "description": "From- and To-members of turn restrictions need to be ways\\. ((?:(?:from|to) (?:node|relation) #\\d+,?)+)",
+      "IDs": ["294"],
+      "regex": true
+    },
+    "295": {
+      "title": "via is not on the way ends",
+      "severity": "error",
+      "description": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)",
+      "IDs": ["n","w"],
+      "regex": true
+    },
+    "296": {
+      "title": "wrong restriction angle",
+      "severity": "error",
+      "description": "restriction type is (\\w+) but angle is (\\d+) degrees. Maybe the restriction type is not appropriate?",
+      "regex": true
+    },
+    "297": {
+      "title": "wrong direction of to member",
+      "severity": "error",
+      "description": "wrong direction of to way (\\d+)",
+      "IDs": ["w"],
+      "regex": true
+    },
+    "298": {
+      "title": "already restricted by oneway",
+      "severity": "error",
+      "description": "entry already prohibited by oneway tag on (\\d+)",
+      "IDs": ["w"],
+      "regex": true
+    },
+    "300": {
+      "title": "missing maxspeed",
+      "severity": "warning",
+      "description": "missing maxspeed tag"
+    },
+    "310": {
+      "title": "roundabouts",
+      "severity": "error",
+      "description": "Analyses ways with tag junction=roundabout. More then one way can form a roundabout. It supports tag oneway=-1"
+    },
+    "311": {
+      "title": "not closed loop",
+      "severity": "error",
+      "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)"
+    },
+    "312": {
+      "title": "wrong direction",
+      "severity": "error",
+      "description": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around",
+      "regex": true
+    },
+    "313": {
+      "title": "faintly connected",
+      "severity": "error",
+      "description": "This roundabout has only (\\d) other roads connected. Roundabouts typically have three",
+      "regex": true
+    },
+    "320": {
+      "title": "*_link connections",
+      "severity": "error",
+      "description": "This way is tagged as highway=(\\w+)_link but doesn't have a connection to any other \\1 or \\1_link",
+      "regex": true
+    },
+    "350": {
+      "title": "bridge-tags",
+      "severity": "error",
+      "description": "This bridge does not have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: (.+)",
+      "NOTE": "Group can be arbitrary list of form: key=value,key=value,key=value...",
+      "regex": true
+    },
+    "360": {
+      "title": "language unknown",
+      "severity": "warning",
+      "description": "It would be nice if this (node|way|relation) had an additional tag 'name:XX=(.+)' where XX shows the language of its name '\\2'",
+      "regex": true
+    },
+    "370": {
+      "title": "doubled places",
+      "severity": "error",
+      "description": "This node has tags in common with the surrounding way #(\\d+) ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
+      "IDs": ["w"],
+      "regex": true
+    },
+    "380": {
+      "title": "non-physical use of sport-tag",
+      "severity": "error",
+      "description": "This way is tagged sport=(\\w+) but has no physical tag like e.g. leisure, building, amenity or highway",
+      "regex": true
+    },
+    "390": {
+      "title": "missing tracktype",
+      "severity": "warning",
+      "description": "This track doesn''t have a tracktype"
+    },
+    "400": {
+      "title": "geometry glitches",
+      "severity": "error",
+      "description": ""
+    },
+    "401": {
+      "title": "missing turn restriction",
+      "severity": "error",
+      "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning( from way (\\1|\\2) to (\\1|\\2))?",
+      "IDs": ["w", "w", "w", "w"],
+      "regex": true
+    },
+    "402": {
+      "title": "impossible angles",
+      "severity": "error",
+      "description": "this way bends in a very sharp angle here"
+    },
+    "410": {
+      "title": "website",
+      "severity": "error",
+      "description": "Web pages are analyzed. Web page is defined by any of the following tags website=* url=* website:mobile=* contact:website=* contact:url=* image=* source:website=* or source:url=*"
+    },
+    "411": {
+      "title": "http error",
+      "severity": "error",
+      "description": "The URL \\(<a target=_blank href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
+      "regex": true
+    },
+    "412": {
+      "title": "domain hijacking",
+      "severity": "error",
+      "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''",
+      "regex": true
+    },
+    "413": {
+      "title": "non-match",
+      "severity": "error",
+      "description": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)",
+      "regex": true
     }
+  }
 }

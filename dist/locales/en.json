@@ -806,349 +806,260 @@
                 "entities": {
                     "node": "Node {id}",
                     "way": "Way {id}",
-                    "relation": "Relation {id}",
-                    "highway": "Highway {id}",
-                    "cycleway": "Cycleway {id}",
-                    "waterway": "Waterway {id}",
-                    "riverbank": "Riverbank {id}"
+                    "relation": "Relation {id}"
                 },
                 "errorTypes": {
-                    "errors": {
-                        "_30": {
-                            "title": "non-closed_areas",
-                            "description": "This way is tagged with {var1}={var2} and should be closed-loop."
-                        },
-                        "_40": {
-                            "title": "dead-ended one-ways",
-                            "description": "The first node (id {var1}) of this one-way is not connected to any other way."
-                        },
-                        "_41": {
-                            "title": "",
-                            "description": "The last node (id {var1}) of this one-way is not connected to any other way."
-                        },
-                        "_42": {
-                            "title": "",
-                            "description": "This node cannot be reached because one-ways only lead away from here."
-                        },
-                        "_43": {
-                            "title": "",
-                            "description": "You cannot escape from this node because one-ways only lead to here."
-                        },
-                        "_50": {
-                            "title": "almost-junctions",
-                            "description": "This node is very close but not connected to way #{var1}."
-                        },
-                        "_70": {
-                            "title": "missing tags",
-                            "description": "This {var1} has an empty tag: \"{var2}\"."
-                        },
-                        "_71": {
-                            "title": "way without tags",
-                            "description": "This way has no tags."
-                        },
-                        "_72": {
-                            "title": "node without tags",
-                            "description": "This node is not member of any way and doesn't have any tags."
-                        },
-                        "_73": {
-                            "title": "tracktype with no highway tag",
-                            "description": "This way has a \"tracktype\" tag but no \"highway\" tag."
-                        },
-                        "_74": {
-                            "title": "empty tag",
-                            "description": "This {var1} has an empty tag: \"{var2}\"."
-                        },
-                        "_75": {
-                            "title": "name without tags",
-                            "description": "This {var1} has a name (\"{var2}\") but no other tags."
-                        },
-                        "_90": {
-                            "title": "motorways without ref",
-                            "description": "This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag."
-                        },
-                        "_100": {
-                            "title": "places of worship without religion",
-                            "description": "This {var1} is tagged as place of worship and therefore needs a religion tag."
-                        },
-                        "_110": {
-                            "title": "point of interest without name",
-                            "description": "This node is tagged as {var1} and therefore needs a name tag."
-                        },
-                        "_120": {
-                            "title": "ways without nodes",
-                            "description": "This way has just one single node."
-                        },
-                        "_130": {
-                            "title": "floating islands",
-                            "description": "This way is not connected to the rest of the map."
-                        },
-                        "_150": {
-                            "title": "railway crossing without tag",
-                            "description": "This crossing of a highway and a railway needs to be tagged as railway=crossing or railway=level_crossing."
-                        },
-                        "_160": {
-                            "title": "wrongly used railway tag",
-                            "description": "There are ways in different layers coming together in this railway crossing. There are ways tagged as tunnel or bridge coming together in this railway crossing."
-                        },
-                        "_170": {
-                            "title": "FIXME tagged items",
-                            "description": "{var1}"
-                        },
-                        "_180": {
-                            "title": "relations without type",
-                            "description": "This relation has no type tag which is mandatory for relations."
-                        },
-                        "_190": {
-                            "title": "intersections without junctions",
-                            "description": "Finds way crossings on same layer without common node as a junction."
-                        },
-                        "_191": {
-                            "title": "highway-highway",
-                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
-                        },
-                        "_192": {
-                            "title": "highway-waterway",
-                            "description": "This {var1} intersects the {var2} #{var3}."
-                        },
-                        "_193": {
-                            "title": "highway-riverbank",
-                            "description": "This {var1} intersects the {var2} #{var3}."
-                        },
-                        "_194": {
-                            "title": "waterway-waterway",
-                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
-                        },
-                        "_195": {
-                            "title": "cycleway-cycleway",
-                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
-                        },
-                        "_196": {
-                            "title": "highway-cycleway",
-                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
-                        },
-                        "_197": {
-                            "title": "cycleway-waterway",
-                            "description": "This {var1} intersects the {var2} #{var3}."
-                        },
-                        "_198": {
-                            "title": "cycleway-riverbank",
-                            "description": "This {var1} intersects the {var2} #{var3}."
-                        },
-                        "_200": {
-                            "title": "overlapping ways",
-                            "description": "Finds overlapping ways on same layer."
-                        },
-                        "_201": {
-                            "title": "highway-highway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_202": {
-                            "title": "highway-waterway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_203": {
-                            "title": "highway-riverbank",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_204": {
-                            "title": "waterway-waterway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_205": {
-                            "title": "cycleway-cycleway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_206": {
-                            "title": "highway-cycleway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_207": {
-                            "title": "cycleway-waterway",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_208": {
-                            "title": "cycleway-riverbank",
-                            "description": "This {var1} overlaps the {var2} #{var3}."
-                        },
-                        "_210": {
-                            "title": "loopings",
-                            "description": "These errors contain self intersecting ways."
-                        },
-                        "_211": {
-                            "title": "",
-                            "description": "This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error."
-                        },
-                        "_212": {
-                            "title": "",
-                            "description": "This way has only two different nodes and contains one of them more than once."
-                        },
-                        "_220": {
-                            "title": "misspelled tags",
-                            "description": "This {var1} is tagged \"{var2}\"=\"{var3}\" where \"{var4}\" looks like \"{var5}\"."
-                        },
-                        "_221": {
-                            "title": "",
-                            "description": "This {var1} has a tag with key \"key\"=\"{var2}\"."
-                        },
-                        "_230": {
-                            "title": "layer conflicts",
-                            "description": ""
-                        },
-                        "_231": {
-                            "title": "mixed layers intersection",
-                            "description": "This node is a junction of ways on different layers: {var1}."
-                        },
-                        "_232": {
-                            "title": "strange layers",
-                            "description": "This {var1} is tagged with layer {var2}. This need not be an error but it looks strange."
-                        },
-                        "_270": {
-                            "title": "motorways connected directly",
-                            "description": "This node is a junction of a motorway and a highway other than motorway, motorway_link, trunk, rest_area or construction. Service or unclassified is only valid if it has access=no/private or it leads to a motorway service area or if it is a service=parking_aisle."
-                        },
-                        "_280": {
-                            "title": "boundaries",
-                            "description": ""
-                        },
-                        "_281": {
-                            "title": "missing name",
-                            "description": "This boundary has no name."
-                        },
-                        "_282": {
-                            "title": "missing admin level",
-                            "description": "The boundary of {var1} has no valid numeric admin_level. Please do not use admin levels like for example 6;7. Always tag the lowest admin_level of all boundaries."
-                        },
-                        "_283": {
-                            "title": "no closed loop",
-                            "description": "The boundary of {var1} is not closed-loop."
-                        },
-                        "_284": {
-                            "title": "splitting boundary",
-                            "description": "The boundary of {var1} splits here."
-                        },
-                        "_285": {
-                            "title": "admin_level too high",
-                            "description": "This boundary-way has admin_level {var1} but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations."
-                        },
-                        "_290": {
-                            "title": "restrictions",
-                            "description": "Analyses all relations tagged type=restriction or following variations type=restriction:hgv type=restriction:caravan type=restriction:motorcar type=restriction:bus type=restriction:agricultural type=restriction:motorcycle type=restriction:bicycle and type=restriction:hazmat."
-                        },
-                        "_291": {
-                            "title": "missing type",
-                            "description": "This turn-restriction has no known restriction type."
-                        },
-                        "_292": {
-                            "title": "missing from way",
-                            "description": "A turn-restriction needs exactly one \"from\" member. This one has {var1}."
-                        },
-                        "_293": {
-                            "title": "missing to way",
-                            "description": "A turn-restriction needs exactly one \"to\" member. This one has {var1}."
-                        },
-                        "_294": {
-                            "title": "from or to not a way",
-                            "description": "\"from\" and \"to\" members of turn restrictions need to be ways. {var1}."
-                        },
-                        "_295": {
-                            "title": "via is not on the way ends",
-                            "description": "\"via\" (node #{var1}) is not the first or the last member of \"from\" (way #{var2})."
-                        },
-                        "_296": {
-                            "title": "wrong restriction angle",
-                            "description": "restriction type is {var1} but angle is {var2} degrees. Maybe the restriction type is not appropriate?"
-                        },
-                        "_297": {
-                            "title": "wrong direction of to member",
-                            "description": "wrong direction of to way {var1}."
-                        },
-                        "_298": {
-                            "title": "already restricted by oneway",
-                            "description": "entry already prohibited by oneway tag on {var1}."
-                        },
-                        "_310": {
-                            "title": "roundabouts",
-                            "description": "Analyses ways with tag junction=roundabout. More then one way can form a roundabout. It supports tag oneway=-1."
-                        },
-                        "_311": {
-                            "title": "not closed loop",
-                            "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)."
-                        },
-                        "_312": {
-                            "title": "wrong direction",
-                            "description": "If this {var1} is in a country with {var2}-hand traffic then its orientation goes the wrong way around"
-                        },
-                        "_313": {
-                            "title": "faintly connected",
-                            "description": "This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more."
-                        },
-                        "_320": {
-                            "title": "*_link connections",
-                            "description": "This way is tagged as highway={var1}_link but doesn't have a connection to any other {var1} or {var1}_link."
-                        },
-                        "_350": {
-                            "title": "bridge-tags",
-                            "description": "This bridge doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}."
-                        },
-                        "_370": {
-                            "title": "doubled places",
-                            "description": "This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant."
-                        },
-                        "_380": {
-                            "title": "non-physical use of sport-tag",
-                            "description": "This way is tagged \"sport\"=\"{var1}\" but has no physical tag like e.g. leisure, building, amenity or highway."
-                        },
-                        "_400": {
-                            "title": "geometry glitches",
-                            "description": ""
-                        },
-                        "_401": {
-                            "title": "missing turn restriction",
-                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}.",
-                            "addition": " from way {var3} to {var4}."
-                        },
-                        "_402": {
-                            "title": "impossible angles",
-                            "description": "this way bends in a very sharp angle here."
-                        },
-                        "_410": {
-                            "title": "website",
-                            "description": "Web pages are analyzed. Web page is defined by any of the following tags website=* url=* website:mobile=* contact:website=* contact:url=* image=* source:website=* or source:url=*."
-                        },
-                        "_411": {
-                            "title": "http error",
-                            "description": "The URL cannot be opened (HTTP status code {var2})."
-                        },
-                        "_412": {
-                            "title": "domain hijacking",
-                            "description": "Possible domain squatting: The URL has Suspicious text: \"{var2}\"."
-                        },
-                        "_413": {
-                            "title": "non-match",
-                            "description": "Content of the URL did not contain these keywords: ({var2})."
-                        }
+                    "20": {
+                        "title": "Multiple nodes on the same spot",
+                        "description": "There is more than one node in this spot. Node IDs: {0}."
                     },
-                    "warnings": {
-                        "_20": {
-                            "title": "multiple nodes on the same spot",
-                            "description": "There is more than one node in this spot. Offending node IDs: {var1}."
-                        },
-                        "_60": {
-                            "title": "depreciated tags",
-                            "description": "This {var1} uses deprecated tag \"{var2}\"=\"{var3}\". Please use {var4} instead!"
-                        },
-                        "_300": {
-                            "title": "missing maxspeed",
-                            "description": "missing maxspeed tag."
-                        },
-                        "_360": {
-                            "title": "language unknown",
-                            "description": "It would be nice if this {var1} had an additional tag \"name:XX\"=\"{var2}\" where XX shows the language of its name \"{var2}\"."
-                        },
-                        "_390": {
-                            "title": "missing tracktype",
-                            "description": "This track doesn't have a tracktype."
-                        }
+                    "30": {
+                        "title": "Non-closed areas",
+                        "description": "This way is tagged with \"{0}={1}\" and should be a closed loop."
+                    },
+                    "40": {
+                        "title": "Impossible oneways",
+                        "description": "The first node ({0}) of this oneway is not connected to any other way."
+                    },
+                    "41": {
+                        "description": "The last node ({0}) of this oneway is not connected to any other way."
+                    },
+                    "42": {
+                        "description": "You cannot reach this node because all ways leading from it are oneway."
+                    },
+                    "43": {
+                        "description": "You cannot escape from this node because all ways leading to it are oneway."
+                    },
+                    "50": {
+                        "title": "Almost-junctions",
+                        "description": "This node is very close but not connected to way {0}."
+                    },
+                    "60": {
+                        "title": "Deprecated tags",
+                        "description": "This {0} uses deprecated tag \"{1}={2}\". Please use \"{3}\" instead."
+                    },
+                    "70": {
+                        "title": "Missing tags",
+                        "description": "This {0} has an empty tag: \"{1}\"."
+                    },
+                    "71": {
+                        "description": "This way has no tags."
+                    },
+                    "72": {
+                        "description": "This node is not member of any way and doesn't have any tags."
+                    },
+                    "73": {
+                        "description": "This way has a \"tracktype\" tag but no \"highway\" tag."
+                    },
+                    "74": {
+                        "description": "This {0} has an empty tag: \"{1}\"."
+                    },
+                    "75": {
+                        "description": "This {0} has a name \"{1}\" but no other tags."
+                    },
+                    "90": {
+                        "title": "Motorway without ref tag",
+                        "description": "This way is tagged as motorway and therefore needs a \"ref\", \"nat_ref\", or \"int_ref\" tag."
+                    },
+                    "100": {
+                        "title": "Place of worship without religion",
+                        "description": "This {0} is tagged as place of worship and therefore needs a \"religion\" tag."
+                    },
+                    "110": {
+                        "title": "Point of interest without name",
+                        "description": "This node is tagged as {0} and therefore needs a name tag."
+                    },
+                    "120": {
+                        "title": "Way without nodes",
+                        "description": "This way has just one single node."
+                    },
+                    "130": {
+                        "title": "Disconnected way",
+                        "description": "This way is not connected to the rest of the map."
+                    },
+                    "150": {
+                        "title": "Railway crossing without tag",
+                        "description": "This crossing of a highway and a railway needs to be tagged as \"railway=crossing\" or \"railway=level_crossing\"."
+                    },
+                    "160": {
+                        "title": "Wrongly used railway tag",
+                        "description": "There are ways in different layers (e.g. tunnel or bridge) meeting at this railway crossing."
+                    },
+                    "170": {
+                        "title": "FIXME tagged items",
+                        "description": "{0}"
+                    },
+                    "180": {
+                        "title": "Relation without type",
+                        "description": "This relation is missing a \"type\" tag."
+                    },
+                    "190": {
+                        "title": "Intersection without junctions",
+                        "description": "This {0} intersects the {1} {2} but there is no junction node."
+                    },
+                    "200": {
+                        "title": "Overlapping ways",
+                        "description": "This {0} overlaps the {1} {2}."
+                    },
+                    "210": {
+                        "title": "Self-intersecting ways",
+                        "description": "These errors contain self intersecting ways."
+                    },
+                    "211": {
+                        "description": "This way contains more than one node multiple times. Nodes are {0}. This may or may not be an error."
+                    },
+                    "212": {
+                        "description": "This way has only two different nodes and contains one of them more than once."
+                    },
+                    "220": {
+                        "title": "Misspelled tag",
+                        "description": "This {0} is tagged \"{1}={2}\" where \"{3}\" looks like \"{4}\"."
+                    },
+                    "221": {
+                        "description": "This {0} has a tag with key \"{1}\"."
+                    },
+                    "230": {
+                        "title": "Layer Conflict",
+                        "description": "This node is a junction of ways on different layers."
+                    },
+                    "231": {
+                        "description": "This node is a junction of ways on different layers: {0}."
+                    },
+                    "232": {
+                        "description": "This {0} is tagged with \"layer={1}\". This need not be an error but it looks strange."
+                    },
+                    "270": {
+                        "title": "Unusual motorway connection",
+                        "description": "This node is a junction of a motorway and a highway other than \"motorway\", \"motorway_link\", \"trunk\", \"rest_area\", or \"construction\". Connection to \"service\" or \"unclassified\" is only valid if it has \"access=no/private\", or it leads to a motorway service area, or if it is a \"service=parking_aisle\"."
+                    },
+                    "280": {
+                        "title": "Boundary issue",
+                        "description": "There is an unspecified issue with this boundary."
+                    },
+                    "281": {
+                        "title": "Boundary missing name",
+                        "description": "This boundary has no name."
+                    },
+                    "282": {
+                        "title": "Boundary missing admin level",
+                        "description": "The boundary of {0} has no valid numeric admin_level. Please do not mix admin levels (e.g. \"6;7\"). Always tag the lowest admin_level of all boundaries."
+                    },
+                    "283": {
+                        "title": "Boundary not a closed loop",
+                        "description": "The boundary of {0} is not a closed loop."
+                    },
+                    "284": {
+                        "title": "Boundary is split",
+                        "description": "The boundary of {0} splits here."
+                    },
+                    "285": {
+                        "title": "Boundary admin_level too high",
+                        "description": "This boundary way has \"admin_level={0}\" but belongs to a relation with lower \"admin_level\" (e.g. higher priority); it should have the lowest \"admin_level\" of all relations."
+                    },
+                    "290": {
+                        "title": "Restriction issue",
+                        "description": "There is an unspecified issue with this restriction."
+                    },
+                    "291": {
+                        "title": "Restriction missing type",
+                        "description": "This turn restriction has no known restriction type."
+                    },
+                    "292": {
+                        "title": "Restriction missing \"from\" way",
+                        "description": "A turn restriction needs exactly one \"from\" member. This one has {0}."
+                    },
+                    "293": {
+                        "title": "Restriction missing \"to\" way",
+                        "description": "A turn restriction needs exactly one \"to\" member. This one has {0}."
+                    },
+                    "294": {
+                        "title": "Restriction \"from\" or \"to\" is not a way",
+                        "description": "\"from\" and \"to\" members of turn restrictions need to be ways. {0}."
+                    },
+                    "295": {
+                        "title": "Restriction \"via\" is not on the way ends",
+                        "description": "\"via\" (node #{0}) is not the first or the last member of \"from\" (way #{1})."
+                    },
+                    "296": {
+                        "title": "Wrong restriction angle",
+                        "description": "Restriction type is \"{0}\" but angle is {1} degrees. Maybe the restriction type is not appropriate?"
+                    },
+                    "297": {
+                        "title": "Wrong direction of to member",
+                        "description": "Wrong direction of \"to\" way {0}."
+                    },
+                    "298": {
+                        "title": "Redundant restriction - oneway",
+                        "description": "Entry already prohibited by \"oneway\" tag on {0}."
+                    },
+                    "300": {
+                        "title": "Missing maxspeed",
+                        "description": "Missing maxspeed tag."
+                    },
+                    "310": {
+                        "title": "Roundabout issue",
+                        "description": "There is an unspecified issue with this roundabout."
+                    },
+                    "311": {
+                        "title": "Roundabout not closed loop",
+                        "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)."
+                    },
+                    "312": {
+                        "title": "Roundabout wrong direction",
+                        "description": "If this {0} is in a country with {1}-hand traffic then its orientation goes the wrong way around"
+                    },
+                    "313": {
+                        "title": "Roundabout weakly connected",
+                        "description": "This roundabout has only {0} other road(s) connected. Roundabouts typically have 3 or more."
+                    },
+                    "320": {
+                        "title": "Improper link connection",
+                        "description": "This way is tagged as \"highway={0}_link\" but doesn't have a connection to any other \"{1}\" or \"{2}_link\"."
+                    },
+                    "350": {
+                        "title": "Improper bridge tags",
+                        "description": "This bridge doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {0}."
+                    },
+                    "360": {
+                        "title": "Language unknown",
+                        "description": "It would be nice if this {0} had an additional tag \"name:XX\"=\"{1}\" where XX shows the language of its name \"{1}\"."
+                    },
+                    "370": {
+                        "title": "Doubled places",
+                        "description": "This node has tags in common with the surrounding way #{0} {1} and seems to be redundant."
+                    },
+                    "380": {
+                        "title": "Non-physical use of sport tag",
+                        "description": "This way is tagged \"sport={0}\" but has no physical tag (e.g. \"leisure\", \"building\", \"amenity\", or \"highway\"."
+                    },
+                    "390": {
+                        "title": "Missing tracktype",
+                        "description": "This track doesn't have a \"tracktype\" tag."
+                    },
+                    "400": {
+                        "title": "Geometry issue",
+                        "description": "There is an unspecified issue with the geometry here."
+                    },
+                    "401": {
+                        "title": "Missing turn restriction",
+                        "description": "Ways {0} and {1} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {2} to {3}."
+                    },
+                    "402": {
+                        "title": "Impossible angles",
+                        "description": "This way bends in a very sharp angle here."
+                    },
+                    "410": {
+                        "title": "Website issue",
+                        "description": "There is an unspecified issue with a contact website or URL."
+                    },
+                    "411": {
+                        "description": "The URL cannot be opened (HTTP status code {0})."
+                    },
+                    "412": {
+                        "description": "Possible domain squatting: The URL has suspicious text: \"{0}\"."
+                    },
+                    "413": {
+                        "description": "Possible non-match.  Content of the URL did not contain these keywords: ({0})."
                     }
                 }
             }

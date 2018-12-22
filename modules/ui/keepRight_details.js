@@ -5,43 +5,22 @@ import { t } from '../util/locale';
 
 
 export function uiKeepRightDetails(context) {
+    var stringBase = 'QA.keepRight.errorTypes.';
     var _error;
-    var _template;
-    var _templateErrorType;
-    var _category;
-    var _categoryElements;
-    var _parent_error_type;
-    var _titleBase;
-
-
-    function initDetails() {
-        _parent_error_type = '';
-        if (errorTypes.errors['_' + _error.error_type]) {
-            _templateErrorType = '_' + _error.error_type;
-            _template = errorTypes.errors[_templateErrorType];
-            _category = 'errors';
-        } else if (errorTypes.warnings[_templateErrorType]) {
-            _template = errorTypes.warnings[_templateErrorType];
-            _category = 'warnings';
-        } else { return; }
-
-        // if there is a parent, save it's error type
-        _categoryElements = errorTypes[_category];
-        var base_error_type = (Math.round(_error.error_type / 10) * 10).toString();
-        if ((_categoryElements['_' + base_error_type]) && (base_error_type !== _error.error_type) ) {
-            _parent_error_type = '_' + base_error_type;
-        }
-
-        _titleBase = 'QA.keepRight.errorTypes.' + _category + '.';
-
-    }
-
 
     function keepRightDetails(selection) {
-        if (!_error || !_error.error_type) return;
+        if (!_error) return;
 
-        initDetails();
-        if (!_template) return;
+        var errorType = _error.error_type;
+        var template = errorTypes[errorType];
+        if (!template) return;
+
+        // if there is a parent, save its error type e.g.:
+        //  Error 191 = "highway-highway"
+        //  Error 190 = "intersections without junctions"  (parent)
+        var parentErrorType = (Math.floor(errorType / 10) * 10).toString();
+        var parentTemplate = errorTypes[parentErrorType];
+        if (!parentTemplate) return;
 
 
         var details = selection.selectAll('.kr_error-details')
@@ -57,30 +36,24 @@ export function uiKeepRightDetails(context) {
             .append('div')
             .attr('class', 'kr_error-details kr_error-details-container');
 
-
-        // title
-        var title = detailsEnter
+        var titleEnter = detailsEnter
             .append('div')
             .attr('class', 'kr_error-details-title');
 
-        title.append('h4')
+        titleEnter
+            .append('h4')
             .text(function() { return t('QA.keepRight.detail_title'); });
 
-        title.append('div')
+        titleEnter
+            .append('div')
             .text(function() {
-                var title = '';
-
-                // if this is a subtype, append it's parent title
-                if (_parent_error_type) {
-                    title = t(_titleBase + _parent_error_type + '.title') + ': \n';
+                var result;
+                try {
+                    result = t(stringBase + errorType + '.title');
+                } catch (e) {
+                    result = t(stringBase + parentErrorType + '.title');
                 }
-
-                // append title
-                if (_error.error_type) {
-                    title += t(_titleBase + _templateErrorType + '.title');
-                }
-
-                return title;
+                return result;
             });
 
 
@@ -97,17 +70,23 @@ export function uiKeepRightDetails(context) {
             .append('div')
             .attr('class', 'kr_error-details-description-text')
             .html(function(d) {
-                return t(_titleBase + _templateErrorType + '.description', d.replacements);
+                var result;
+                try {
+                    result = t(stringBase + errorType + '.description', d.replacements);
+                } catch (e) {
+                    result = t(stringBase + parentErrorType + '.description');
+                }
+                return result;
             });
 
         description.selectAll('.kr_error_description-id')
             .on('click', function() { clickLink(context, this.text); });
 
 
-        function clickLink(context, id) {
+        function clickLink(context, entityID) {
             d3_event.preventDefault();
             context.layers().layer('osm').enabled(true);
-            context.zoomToEntity(id);
+            context.zoomToEntity(entityID);
         }
     }
 
