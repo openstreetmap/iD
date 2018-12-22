@@ -108,7 +108,7 @@ export function uiTagReference(tag) {
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
-                .text(t('inspector.reference'));
+                .text(t('inspector.edit_reference'));
 
             // Add link to info about "good changeset comments" - #2923
             if (param.key === 'comment') {
