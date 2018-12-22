@@ -49,10 +49,10 @@
     "wmf-sitematrix": "0.1.4"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~1.2.9",
-    "@fortawesome/free-brands-svg-icons": "~5.6.0",
-    "@fortawesome/free-regular-svg-icons": "~5.6.0",
-    "@fortawesome/free-solid-svg-icons": "~5.6.0",
+    "@fortawesome/fontawesome-svg-core": "~1.2.12",
+    "@fortawesome/free-brands-svg-icons": "~5.6.3",
+    "@fortawesome/free-regular-svg-icons": "~5.6.3",
+    "@fortawesome/free-solid-svg-icons": "~5.6.3",
     "@mapbox/maki": "^6.0.0",
     "chai": "^4.1.0",
     "colors": "^1.1.2",

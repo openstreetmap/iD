@@ -6039,6 +6039,10 @@
                     "name": "Downhill Piste/Ski Run",
                     "terms": "ski,alpine,snowboard,downhill,piste"
                 },
+                "piste/downhill/halfpipe": {
+                    "name": "Halfpipe",
+                    "terms": "ski,alpine,halfpipe,half pipe,snowboard,downhill,piste"
+                },
                 "piste/hike": {
                     "name": "Snowshoeing or Winter Hiking Trail",
                     "terms": "hike,winter hiking,snowshoe,snowshoeing,piste,ski"

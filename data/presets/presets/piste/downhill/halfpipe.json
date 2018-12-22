@@ -1,5 +1,5 @@
 {
-    "icon": "fas-skiing",
+    "icon": "fas-snowboarding",
     "fields": [
         "name",
         "piste/type",
@@ -15,12 +15,15 @@
     "terms": [
         "ski",
         "alpine",
+        "halfpipe",
+        "half pipe",
         "snowboard",
         "downhill",
         "piste"
     ],
     "tags": {
-        "piste:type": "downhill"
+        "piste:type": "downhill",
+        "man_made": "piste:halfpipe"
     },
-    "name": "Downhill Piste/Ski Run"
+    "name": "Halfpipe"
 }

@@ -5254,6 +5254,11 @@ en:
         name: Downhill Piste/Ski Run
         # 'terms: ski,alpine,snowboard,downhill,piste'
         terms: '<translate with synonyms or related terms for ''Downhill Piste/Ski Run'', separated by commas>'
+      piste/downhill/halfpipe:
+        # 'piste:type=downhill, man_made=piste:halfpipe'
+        name: Halfpipe
+        # 'terms: ski,alpine,halfpipe,half pipe,snowboard,downhill,piste'
+        terms: '<translate with synonyms or related terms for ''Halfpipe'', separated by commas>'
       piste/hike:
         # 'piste:type=hike'
         name: Snowshoeing or Winter Hiking Trail

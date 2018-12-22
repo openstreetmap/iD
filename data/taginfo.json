@@ -3678,7 +3678,7 @@
       "value": "ice_rink",
       "description": "🄿 Ice Rink",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -4717,41 +4717,48 @@
       "value": "downhill",
       "description": "🄿 Downhill Piste/Ski Run, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing.svg?sanitize=true"
+    },
+    {
+      "key": "man_made",
+      "value": "piste:halfpipe",
+      "description": "🄿 Halfpipe",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowboarding.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "hike",
       "description": "🄿 Snowshoeing or Winter Hiking Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "ice_skate",
       "description": "🄿 Ice Skating Piste, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "nordic",
       "description": "🄿 Nordic or Crosscountry Piste/Ski Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing-nordic.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "description": "🄿 Winter Sport Trails",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "skitour",
       "description": "🄿 Ski Touring Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing-nordic.svg?sanitize=true"
     },
     {
       "key": "piste:type",
@@ -4765,7 +4772,7 @@
       "value": "sleigh",
       "description": "🄿 Sleigh Piste, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-sleigh.svg?sanitize=true"
     },
     {
       "key": "place",
