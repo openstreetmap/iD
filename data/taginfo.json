@@ -8011,7 +8011,7 @@
       "value": "both",
       "description": "🄵 Direction"
     },
-    {"key": "traffic_signals", "description": "🄵 Type"},
+    {"key": "traffic_signals", "description": "🄵 Pedestrian Signals, 🄵 Type"},
     {
       "key": "traffic_signals:direction",
       "value": "forward",

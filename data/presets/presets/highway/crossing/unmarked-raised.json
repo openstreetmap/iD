@@ -1,6 +1,7 @@
 {
     "fields": [
         "crossing",
+        "traffic_signals_crossing",
         "kerb",
         "tactile_paving"
     ],

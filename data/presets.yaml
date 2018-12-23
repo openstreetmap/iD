@@ -1909,6 +1909,9 @@ en:
           both: Both / All
           # 'traffic_signals:direction=forward'
           forward: Forward
+      traffic_signals_crossing:
+        # traffic_signals=*
+        label: Pedestrian Signals
       trail_visibility:
         # trail_visibility=*
         label: Trail Visibility

@@ -1,5 +1,8 @@
 {
     "icon": "temaki-pedestrian",
+    "fields": [
+        "traffic_signals_crossing"
+    ],
     "geometry": [
         "vertex"
     ],

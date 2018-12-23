@@ -3068,6 +3068,9 @@
                         "both": "Both / All"
                     }
                 },
+                "traffic_signals_crossing": {
+                    "label": "Pedestrian Signals"
+                },
                 "traffic_signals": {
                     "label": "Type"
                 },

@@ -2,6 +2,7 @@
     "fields": [
         "crossing",
         "access",
+        "traffic_signals_crossing",
         "surface",
         "kerb",
         "tactile_paving"
