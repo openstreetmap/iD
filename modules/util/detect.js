@@ -9,7 +9,8 @@ export function utilDetect(force) {
     detected = {};
 
     var ua = navigator.userAgent,
-        m = null;
+        m = null,
+        q = utilStringQs(window.location.hash.substring(1));
 
     m = ua.match(/(edge)\/?\s*(\.?\d+(\.\d+)*)/i);   // Edge
     if (m !== null) {
@@ -60,7 +61,6 @@ export function utilDetect(force) {
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
     // Set locale based on url param (format 'en-US') or browser lang (default)
-    var q = utilStringQs(window.location.hash.substring(1));
     if (q.hasOwnProperty('locale')) {
         detected.locale = q.locale;
         detected.language = q.locale.split('-')[0];
@@ -97,7 +97,6 @@ export function utilDetect(force) {
     }
 
     // detect text direction
-    var q = utilStringQs(window.location.hash.substring(1));
     var lang = dataLocales[detected.locale];
     if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';
