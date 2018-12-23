@@ -28,7 +28,7 @@ export function uiTagReference(tag) {
 
         var result = {
             title: entity.title,
-            description: wikibase.getDescription(entity),
+            description: entity.description,
         };
 
         if (entity.claims) {

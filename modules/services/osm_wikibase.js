@@ -9,7 +9,7 @@ import { utilQsString } from '../util';
 var apibase = 'https://wiki.openstreetmap.org/w/api.php';
 var _inflight = {};
 var _wikibaseCache = {};
-var _localeIds = {};
+var _localeIds = { en: false };
 
 
 var debouncedRequest = _debounce(request, 500, { leading: false });
@@ -21,6 +21,22 @@ function request(url, callback) {
         delete _inflight[url];
         callback(err, data);
     });
+}
+
+
+/**
+ * Get the best string value from the descriptions/labels result
+ * Note that if mediawiki doesn't recognize language code, it will return all values.
+ * In that case, fallback to use English.
+ * @param values object - either descriptions or labels
+ * @param langCode String
+ * @returns localized string
+ */
+function localizedToString(values, langCode) {
+    if (values) {
+        values = values[langCode] || values.en;
+    }
+    return values ? values.value : '';
 }
 
 
@@ -72,21 +88,6 @@ export default {
     },
 
 
-    getDescription: function(entity) {
-        if (entity.descriptions) {
-            // Assume that there will be at most two languages because of
-            // how we request it: English + possibly another one.
-            // Pick non-English description if available (if we have more than one)
-            var langs = Object.keys(entity.descriptions);
-            if (langs.length) {
-                var lng = langs.length > 1 && langs[0] === 'en' ? langs[1] : langs[0];
-                return entity.descriptions[lng].value;
-            }
-        }
-        return undefined;
-    },
-
-
     toSitelink: function(key, value) {
         var result = value ? 'Tag:' + key + '=' + value : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
@@ -97,21 +98,17 @@ export default {
         var doRequest = params.debounce ? debouncedRequest : request;
         var self = this;
         var titles = [];
-        var languages = ['en'];
         var result = {};
         var keySitelink = this.toSitelink(params.key);
         var tagSitelink = params.value ? this.toSitelink(params.key, params.value) : false;
         var localeSitelink;
 
-        if (params.langCode && params.langCode !== 'en') {
-            languages.push(params.langCode);
-            if (!_localeIds[params.langCode]) {
-                // This is the first time we are asking about this locale
-                // Fetch corresponding entity (if it exists), and cache it.
-                // If there is no such entry, cache `true` to avoid re-requesting it.
-                localeSitelink = ('Locale:' + params.langCode).replace(/_/g, ' ').trim();
-                titles.push(localeSitelink);
-            }
+        if (params.langCode && _localeIds[params.langCode] === undefined) {
+            // If this is the first time we are asking about this locale,
+            // fetch corresponding entity (if it exists), and cache it.
+            // If there is no such entry, cache `false` value to avoid re-requesting it.
+            localeSitelink = ('Locale:' + params.langCode).replace(/_/g, ' ').trim();
+            titles.push(localeSitelink);
         }
 
         if (_wikibaseCache[keySitelink]) {
@@ -122,7 +119,7 @@ export default {
 
         if (tagSitelink) {
             if (_wikibaseCache[tagSitelink]) {
-                result.key = _wikibaseCache[tagSitelink];
+                result.tag = _wikibaseCache[tagSitelink];
             } else {
                 titles.push(tagSitelink);
             }
@@ -133,11 +130,17 @@ export default {
             return callback(null, result);
         }
 
+        // Requesting just the user language code
+        // If backend recognizes the code, it will perform proper fallbacks,
+        // and the result will contain the requested code. If not, all values are returned:
+        // {"zh-tw":{"value":"...","language":"zh-tw","source-language":"zh-hant"}
+        // {"pt-br":{"value":"...","language":"pt","for-language":"pt-br"}}
         var obj = {
             action: 'wbgetentities',
             sites: 'wiki',
             titles: titles.join('|'),
-            languages: languages.join('|'),
+            languages: params.langCode,
+            languagefallback: 1,
             origin: '*',
             format: 'json',
             // There is an MW Wikibase API bug https://phabricator.wikimedia.org/T212069
@@ -152,10 +155,13 @@ export default {
             } else if (!d.success || d.error) {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
-                var localeId = true;
+                var localeId = false;
                 _forEach(d.entities, function(res) {
                     if (res.missing !== '') {
                         var title = res.sitelinks.wiki.title;
+                        // Simplify access to the localized values
+                        res.description = localizedToString(res.descriptions, params.langCode);
+                        res.label = localizedToString(res.labels, params.langCode);
                         if (title === keySitelink) {
                             _wikibaseCache[keySitelink] = res;
                             result.key = res;
@@ -171,7 +177,7 @@ export default {
                 });
 
                 if (localeSitelink) {
-                    // If locale ID is not found, set cache to true to prevent repeated queries
+                    // If locale ID is not found, store false to prevent repeated queries
                     self.addLocale(params.langCode, localeId);
                 }
 
