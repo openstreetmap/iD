@@ -5780,6 +5780,13 @@
     },
     {
       "key": "shop",
+      "value": "fuel",
+      "description": "🄿 Fuel Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "funeral_directors",
       "description": "🄿 Funeral Home",
       "object_types": ["node", "area"],
