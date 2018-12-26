@@ -405,7 +405,6 @@ en:
   inspector:
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
-    documentation_redirect: This documentation has been redirected to a new page
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     all_fields: All fields
@@ -418,6 +417,7 @@ en:
     choose: Select feature type
     results: "{n} results for {search}"
     reference: View on OpenStreetMap Wiki
+    edit_reference: Edit or translate on OSM Wiki
     back_tooltip: Change feature
     remove: Remove
     search: Search
