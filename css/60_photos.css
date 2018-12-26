@@ -350,3 +350,43 @@ label.streetside-hires {
     background: rgba(0,0,0,0.85);
     color: #fff;
 }
+
+.streetview-filter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 11
+}
+
+.streetview-filter button,
+.streetview-filter button:focus {
+    height: 18px;
+    width: 18px;
+    background: rgba(0,0,0,0.65);
+    color: #eee;
+}
+
+.streetview-filter button:hover,
+.streetview-fitler button:active {
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+}
+
+.streetside-filter-context {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    z-index: 11;
+}
+
+.streetside-filter-context input {
+    padding-left: 10px;
+    border: none;
+    border-radius: 4px;
+    width: 100px;
+}
+
+.streetside-filter-context input,
+.streetside-filter-context div {
+    height: 20px;
+}

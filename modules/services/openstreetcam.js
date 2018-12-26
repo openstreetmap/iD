@@ -1,5 +1,6 @@
 import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
+import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -28,6 +29,9 @@ import {
     utilTiler
 } from '../util';
 
+import { tooltip } from '../util/tooltip';
+
+import { uiCombobox } from '../ui';
 
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;
@@ -41,6 +45,8 @@ var imgZoom = d3_zoom()
     .on('zoom', zoomPan);
 var _oscCache;
 var _oscSelectedImage;
+
+var filterCombo; 
 
 
 function abortRequest(i) {
@@ -193,6 +199,10 @@ function zoomPan() {
         .call(utilSetTransform, t.x, t.y, t.k);
 }
 
+function usersComboValues(d) {
+    return { value: d, title: d };
+}
+
 
 export default {
 
@@ -215,7 +225,8 @@ export default {
 
         _oscCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
-            sequences: {}
+            sequences: {},
+            users: []
         };
 
         _oscSelectedImage = null;
@@ -224,7 +235,13 @@ export default {
 
     images: function(projection) {
         var limit = 5;
-        return searchLimited(limit, projection, _oscCache.images.rtree);
+        var images = searchLimited(limit, projection, _oscCache.images.rtree);
+        _oscCache.users = _reduce(images, function(users, image) {
+            var capturedBy = image.captured_by;
+            if (!users.indexOf(capturedBy)) users.push(capturedBy)
+            return users;
+        }, []);
+        return images;
     },
 
 
@@ -266,6 +283,9 @@ export default {
     loadViewer: function(context) {
         var that = this;
 
+        filterCombo = uiCombobox(context, 'osc-combo')
+            .data(_oscCache.users.map(usersComboValues))
+        
         // add osc-wrapper
         var wrap = d3_select('#photoviewer').selectAll('.osc-wrapper')
             .data([0]);
@@ -277,10 +297,12 @@ export default {
             .call(imgZoom)
             .on('dblclick.zoom', null);
 
+
         wrapEnter
             .append('div')
             .attr('class', 'photo-attribution fillD');
 
+        
         var controlsEnter = wrapEnter
             .append('div')
             .attr('class', 'photo-controls-wrap')
@@ -306,6 +328,32 @@ export default {
             .append('button')
             .on('click.forward', step(1))
             .text('►');
+
+        var filter = wrapEnter
+            .append('div')
+            .attr('class', 'streetview-filter');
+        
+        filter
+            .append('button')
+            .on('click', function() {
+                var filterContext = d3_select('.streetside-filter-context');
+                filterContext.classed('hide', !filterContext.classed('hide'));
+            })
+            .call(tooltip()
+                .title('filter images by user') 
+                .placement('top')
+            );
+
+        var filterContext = wrapEnter
+            .append('div')
+            .attr('class', 'streetside-filter-context')
+            .classed('hide', true);
+
+
+        filterContext
+            .append('input')
+            .call(filterCombo)
+            .on('change', function() { console.log(d3_select(this).property('value')); });
 
         wrapEnter
             .append('div')
@@ -413,6 +461,7 @@ export default {
         var wrap = d3_select('#photoviewer .osc-wrapper');
         var imageWrap = wrap.selectAll('.osc-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').html('');
+        var filterInput = wrap.selectAll('.streetview-filter .streetview-filter-context input');
 
         wrap
             .transition()
@@ -426,6 +475,9 @@ export default {
         if (d) {
             var sequence = _oscCache.sequences[d.sequence_id];
             var r = (sequence && sequence.rotation) || 0;
+
+            // update list of users each time...
+            filterCombo.value(_oscCache.users)
 
             imageWrap
                 .append('img')
@@ -444,6 +496,8 @@ export default {
                 attribution
                     .append('span')
                     .text('|');
+
+                filterInput.property('value', d.captured_by);
             }
 
             if (d.captured_at) {
