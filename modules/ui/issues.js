@@ -403,18 +403,42 @@ export function uiIssues(context) {
             }
             if (c.url) {
                 context.issueManager().setCustomUrl(c.url);
-                d3_json(c.url, function (err, mapcss) {
+                d3_json(c.url, function (err, rules) {
                     if (err) return;
                     services.maprules.init(context.presets().areaKeys());
-                    _each(mapcss, function(mapcssSelector) {
-                        return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
-                    });
-                    context.validationRules = true;
+                    addJsonRules(rules);
                 });
             } else if (c.fileList) {
-                //console.log(c.fileList);
+                var f = c.fileList[0];
+                var extension = getExtension(f.name);
+                var reader = new FileReader();
+                reader.onload = (function() {
+                    return function(e) {
+                        if(extension === '.json'){
+                            addJsonRules(JSON.parse(e.target.result));
+                       }
+                    };
+                })(f);
+
+                reader.readAsText(f);
+
             }
         }
+    }
+
+    function addJsonRules(rules) {
+        _each(rules, function(mapcssSelector) {
+            return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
+        });
+        context.validationRules = true;
+    }
+
+    function getExtension(fileName) {
+        if (!fileName) return;
+
+        var re = /\.(mapcss|json)$/i;
+        var match = fileName.toLowerCase().match(re);
+        return match && match.length && match[0];
     }
 
 
