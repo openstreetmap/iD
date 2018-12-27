@@ -7955,23 +7955,47 @@
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "OpenStreetMap India forum",
+                "description": "OpenStreetMap India web forum"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap India GitHub",
+                "description": "Code with us: {url}"
+            },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap India Mailinglist",
                 "description": "Talk-in is the official Mailinglist for Indian Community"
             },
-            "OSM-India-Puducherry-Mailing-List": {
-                "name": "Free Software Hardware Movement - Mailing List",
-                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
-                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
+            "osm-india-telegram": {
+                "name": "OpenStreetMap India Telegram",
+                "description": "Join our family: {url}"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter",
                 "description": "We are just a tweet away: {url}"
             },
+            "osm-india-website": {
+                "name": "OpenStreetMap India",
+                "description": "Mappers and OpenStreetMap users in India"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject India",
+                "description": "Everything you need to know about mapping in India: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap India Youtube",
+                "description": "Subscribe to our channel: {url}"
+            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook",
                 "description": "FSHM Facebook page to know about community events, activities",
                 "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap. Its FB page is the best way to keep in contact with its events."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - Mailing List",
+                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
+                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "Free Software Hardware Movement - Matrix",
@@ -8137,11 +8161,6 @@
             "be-mailinglist": {
                 "name": "Talk-be Mailing List",
                 "description": "Talk-be is the official mailing list for the Belgian OSM community"
-            },
-            "be-maptime": {
-                "name": "Maptime Belgium",
-                "description": "Social events organized around mapping - beginners most welcome!",
-                "extendedDescription": "Maptime is an open learning environment for all levels and degrees of knowledge, offering intentional educational support for the beginner. Maptime is simultaneously flexible and structured, creating space for mapping tutorials, workshops, ongoing projects with a shared goal, and independent/collaborative work time."
             },
             "be-matrix": {
                 "name": "OpenStreetMap BE Matrix channel",
