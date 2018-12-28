@@ -1638,6 +1638,9 @@ en:
       shop:
         # shop=*
         label: Type
+      sidewalk:
+        # sidewalk=*
+        label: Sidewalk
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose

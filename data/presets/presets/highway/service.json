@@ -6,6 +6,7 @@
         "oneway",
         "maxspeed",
         "surface",
+        "sidewalk",
         "structure",
         "maxheight",
         "access"

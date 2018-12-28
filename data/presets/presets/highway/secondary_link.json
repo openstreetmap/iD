@@ -11,6 +11,7 @@
         "maxheight",
         "ref_road_number",
         "cycleway",
+        "sidewalk",
         "access"
     ],
     "geometry": [

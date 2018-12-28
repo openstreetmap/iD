@@ -10,6 +10,7 @@
         "maxheight",
         "ref_road_number",
         "cycleway",
+        "sidewalk",
         "structure",
         "access"
     ],

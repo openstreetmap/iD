@@ -2852,6 +2852,9 @@
                 "shop": {
                     "label": "Type"
                 },
+                "sidewalk": {
+                    "label": "Sidewalk"
+                },
                 "siren/purpose": {
                     "label": "Purpose"
                 },

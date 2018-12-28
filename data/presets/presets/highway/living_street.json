@@ -9,7 +9,8 @@
         "structure",
         "maxheight",
         "access",
-        "cycleway"
+        "cycleway",
+        "sidewalk"
     ],
     "geometry": [
         "line"

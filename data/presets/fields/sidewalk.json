@@ -1,0 +1,7 @@
+{
+    "key": "sidewalk",
+    "type": "combo",
+    "geometry": "line",
+    "label": "Sidewalk",
+    "options": ["no", "left", "right", "both", "separate"]
+}
