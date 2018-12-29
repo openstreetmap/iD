@@ -1,5 +1,6 @@
 import { event as d3_event } from 'd3-selection';
 
+import { dataEn } from '../../data';
 import { errorTypes } from '../../data/keepRight.json';
 import { t } from '../util/locale';
 
@@ -47,13 +48,16 @@ export function uiKeepRightDetails(context) {
         titleEnter
             .append('div')
             .text(function() {
-                var result;
-                try {
-                    result = t(stringBase + errorType + '.title');
-                } catch (e) {
-                    result = t(stringBase + parentErrorType + '.title');
+                var et = dataEn.QA.keepRight.errorTypes[errorType];
+                var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
+
+                if (et && et.title) {
+                    return t(stringBase + errorType + '.title');
+                } else if (pt && pt.title) {
+                    return t(stringBase + parentErrorType + '.title');
+                } else {
+                    return t('inspector.unknown');
                 }
-                return result;
             });
 
 
@@ -70,13 +74,16 @@ export function uiKeepRightDetails(context) {
             .append('div')
             .attr('class', 'kr_error-details-description-text')
             .html(function(d) {
-                var result;
-                try {
-                    result = t(stringBase + errorType + '.description', d.replacements);
-                } catch (e) {
-                    result = t(stringBase + parentErrorType + '.description');
+                var et = dataEn.QA.keepRight.errorTypes[errorType];
+                var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
+
+                if (et && et.description) {
+                    return t(stringBase + errorType + '.description', d.replacements);
+                } else if (pt && pt.description) {
+                    return t(stringBase + parentErrorType + '.description', d.replacements);
+                } else {
+                    return t('inspector.unknown');
                 }
-                return result;
             });
 
         description.selectAll('.kr_error_description-id')

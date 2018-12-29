@@ -103,7 +103,7 @@ function tokenReplacements(d) {
             group = '\\' +  group + '\\';
         }
 
-        replacements[i-1] = group;
+        replacements['var' + i] = group;
     }
 
     return replacements;
