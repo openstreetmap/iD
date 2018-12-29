@@ -819,10 +819,10 @@
                     },
                     "40": {
                         "title": "Impossible oneways",
-                        "description": "The first node ({var1}) of this oneway is not connected to any other way."
+                        "description": "The first node {var1} of this oneway is not connected to any other way."
                     },
                     "41": {
-                        "description": "The last node ({var1}) of this oneway is not connected to any other way."
+                        "description": "The last node {var1} of this oneway is not connected to any other way."
                     },
                     "42": {
                         "description": "You cannot reach this node because all ways leading from it are oneway."
@@ -831,7 +831,7 @@
                         "description": "You cannot escape from this node because all ways leading to it are oneway."
                     },
                     "50": {
-                        "title": "Almost-junctions",
+                        "title": "Almost junctions",
                         "description": "This node is very close but not connected to way {var1}."
                     },
                     "60": {
@@ -978,7 +978,7 @@
                     },
                     "295": {
                         "title": "Restriction \"via\" is not on the way ends",
-                        "description": "\"via\" (node #{var1}) is not the first or the last member of \"from\" (way #{var2})."
+                        "description": "\"via\" (node {var1}) is not the first or the last member of \"from\" (way {var2})."
                     },
                     "296": {
                         "title": "Wrong restriction angle",
@@ -1026,7 +1026,7 @@
                     },
                     "370": {
                         "title": "Doubled places",
-                        "description": "This node has tags in common with the surrounding way #{var1} {var2} and seems to be redundant."
+                        "description": "This node has tags in common with the surrounding way {var1} {var2} and seems to be redundant."
                     },
                     "380": {
                         "title": "Non-physical use of sport tag",

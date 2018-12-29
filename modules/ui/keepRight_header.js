@@ -1,20 +1,53 @@
-import { t } from '../util/locale';
+import { dataEn } from '../../data';
+import { errorTypes } from '../../data/keepRight.json';
 import { svgIcon } from '../svg';
+import { t } from '../util/locale';
 
 
 export function uiKeepRightHeader() {
     var _error;
 
 
+    function errorTitle(d) {
+        var unknown = t('inspector.unknown');
+
+        if (!d) return unknown;
+        var errorType = d.error_type;
+
+        var template = errorTypes[errorType];
+        if (!template) return unknown;
+
+        // if there is a parent, save its error type e.g.:
+        //  Error 191 = "highway-highway"
+        //  Error 190 = "intersections without junctions"  (parent)
+        var parentErrorType = (Math.floor(errorType / 10) * 10).toString();
+        var parentTemplate = errorTypes[parentErrorType];
+        if (!parentTemplate) return unknown;
+
+        var et = dataEn.QA.keepRight.errorTypes[errorType];
+        var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
+
+        if (et && et.title) {
+            return t('QA.keepRight.errorTypes.' + errorType + '.title');
+        } else if (pt && pt.title) {
+            return t('QA.keepRight.errorTypes.' + parentErrorType + '.title');
+        } else {
+            return unknown;
+        }
+    }
+
+
     function keepRightHeader(selection) {
         var header = selection.selectAll('.kr_error-header')
             .data(
                 (_error ? [_error] : []),
-                function(d) { return d.id; }
+                function(d) { return d.status + d.id; }
             );
 
         header.exit()
             .remove();
+
+
 
         var headerEnter = header.enter()
             .append('div')
@@ -35,7 +68,7 @@ export function uiKeepRightHeader() {
         headerEnter
             .append('div')
             .attr('class', 'kr_error-header-label')
-            .text(function(d) { return t('QA.keepRight.entities.' + d.object_type, { id: d.object_id }); });
+            .text(errorTitle);
     }
 
 
