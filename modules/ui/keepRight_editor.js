@@ -8,23 +8,12 @@ import { t } from '../util/locale';
 import { services } from '../services';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
-
-import {
-    uiKeepRightComment,
-    uiKeepRightDetails,
-    uiKeepRightHeader,
-    uiViewOnKeepRight,
-} from './index';
-
-import {
-    utilNoAuto,
-    utilRebind
-} from '../util';
+import { uiKeepRightDetails, uiKeepRightHeader, uiViewOnKeepRight } from './index';
+import { utilNoAuto, utilRebind } from '../util';
 
 
 export function uiKeepRightEditor(context) {
     var dispatch = d3_dispatch('change');
-    var keepRightComment = uiKeepRightComment();
     var keepRightDetails = uiKeepRightDetails(context);
     var keepRightHeader = uiKeepRightHeader(context);
 
@@ -69,8 +58,7 @@ export function uiKeepRightEditor(context) {
             .merge(editor)
             .call(keepRightHeader.error(_error))
             .call(keepRightDetails.error(_error))
-            .call(keepRightComment.error(_error))
-            .call(errorSaveSection);
+            .call(keepRightSaveSection);
 
 
         var footer = selection.selectAll('.footer')
@@ -84,44 +72,40 @@ export function uiKeepRightEditor(context) {
     }
 
 
-    function errorSaveSection(selection) {
+    function keepRightSaveSection(selection) {
         var isSelected = (_error && _error.id === context.selectedErrorID());
-        var errorSave = selection.selectAll('.error-save')
+        var saveSection = selection.selectAll('.error-save')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
 
         // exit
-        errorSave.exit()
+        saveSection.exit()
             .remove();
 
         // enter
-        var errorSaveEnter = errorSave.enter()
+        var saveSectionEnter = saveSection.enter()
             .append('div')
             .attr('class', 'keepRight-save save-section cf');
 
-        errorSaveEnter
+        saveSectionEnter
             .append('h4')
             .attr('class', '.error-save-header')
-            .text(function(d) {
-                return d.comment ? t('QA.keepRight.updateComment') : t('QA.keepRight.newComment');
-            });
+            .text(t('QA.keepRight.comment'));
 
-        errorSaveEnter
+        saveSectionEnter
             .append('textarea')
             .attr('class', 'new-comment-input')
-            .attr('placeholder', function(d) {
-                return d.comment ? t('QA.keepRight.updateInputPlaceholder') : t('QA.keepRight.newInputPlaceholder');
-            })
+            .attr('placeholder', t('QA.keepRight.comment_placeholder'))
             .attr('maxlength', 1000)
-            .property('value', function(d) { return d.newComment; })
+            .property('value', function(d) { return d.comment; })
             .call(utilNoAuto)
             .on('input', changeInput)
             .on('blur', changeInput);
 
         // update
-        errorSave = errorSaveEnter
-            .merge(errorSave)
+        saveSection = saveSectionEnter
+            .merge(saveSection)
             .call(userDetails)
-            .call(errorSaveButtons);
+            .call(keepRightSaveButtons);
 
 
         function changeInput() {
@@ -129,15 +113,15 @@ export function uiKeepRightEditor(context) {
             var val = input.property('value').trim() || undefined;
 
             // store the unsaved comment with the error itself
-            _error = _error.update({ newComment: val });
+            _error = _error.update({ newComment: val, comment: val });
 
             var keepRight = services.keepRight;
             if (keepRight) {
                 keepRight.replaceError(_error);  // update keepright cache
             }
 
-            errorSave
-                .call(errorSaveButtons);
+            saveSection
+                .call(keepRightSaveButtons);
         }
     }
 
@@ -232,7 +216,7 @@ export function uiKeepRightEditor(context) {
     }
 
 
-    function errorSaveButtons(selection) {
+    function keepRightSaveButtons(selection) {
         var osm = services.osm;
         var hasAuth = osm && osm.authenticated();
 
