@@ -685,7 +685,14 @@
             },
             "osm_data": {
                 "tooltip": "Edit osm layer",
-                "header": "OSM Data Settings"
+                "header": "OSM Data Settings",
+                "summary": "Custom settings for the osm layer, including filtering.",
+                "filters": {
+                    "title": "Filters",
+                    "features": {
+                        "title": "Map Features"
+                    }
+                }
             },
             "notes_data": {
                 "tooltip": "Edit notes layer",

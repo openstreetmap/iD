@@ -11,6 +11,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
+import { uiSettingsNotesData } from '../ui/settings/notes_data';
 
 
 export function svgNotes(projection, context, dispatch) {
@@ -35,6 +36,7 @@ export function svgNotes(projection, context, dispatch) {
     var _contribution = 'all';
     var _contributionOptions = ['all', 'self', 'others'];
 
+    var settingsNotesData = uiSettingsNotesData(context);
 
     function formatDate(date) {
         var d = new Date(date),
@@ -391,6 +393,12 @@ export function svgNotes(projection, context, dispatch) {
 
         dispatch.call('change');
         return this;
+    };
+
+    drawNotes.editSettings = function() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsNotesData);
     };
 
     drawNotes.data = function() { return _data; };

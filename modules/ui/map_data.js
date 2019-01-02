@@ -12,32 +12,26 @@ import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiSettingsCustomData } from './settings/custom_data';
-import { uiSettingsNotesData } from './settings/notes_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiMapData(context) {
     var key = t('map_data.key');
-    var features = context.features().keys();
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
-    var settingsNotesData = uiSettingsNotesData(context)
-        .on('change', customChanged);
-
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
-    var _featureList = d3_select(null);
 
 
-    function showsFeature(d) {
-        return context.features().enabled(d);
-    }
+    // function showsFeature(d) {
+    //     return context.features().enabled(d);
+    // }
 
 
     function autoHiddenFeature(d) {
@@ -45,10 +39,10 @@ export function uiMapData(context) {
     }
 
 
-    function clickFeature(d) {
-        context.features().toggle(d);
-        update();
-    }
+    // function clickFeature(d) {
+    //     context.features().toggle(d);
+    //     update();
+    // }
 
 
     function showsFill(d) {
@@ -181,14 +175,13 @@ export function uiMapData(context) {
             .append('li')
             .attr('class', function(d) { return 'list-item list-item-' + d.id; });
 
-        // TODO: either remove settings button for osm data, or add settings
         liEnter
             .append('button')
             .call(tooltip()
                 .title(function(d) { return t('settings.' + d.id + '_data.tooltip'); })
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
-            .on('click', editNotes) // TODO: WARNING: dynamically call settings (possibly move edit function to svg)
+            .on('click', function(d) { return d.layer.editSettings(); })
             .call(svgIcon('#iD-icon-more'));
 
         var labelEnter = liEnter
@@ -413,12 +406,6 @@ export function uiMapData(context) {
             .call(settingsCustomData);
     }
 
-    function editNotes() {
-        d3_event.preventDefault();
-        context.container()
-            .call(settingsNotesData);
-    }
-
 
     function customChanged(d) {
         var dataLayer = layers.layer('data');
@@ -507,15 +494,15 @@ export function uiMapData(context) {
     }
 
 
-    function renderFeatureList(selection) {
-        var container = selection.selectAll('.layer-feature-list')
-            .data([0]);
+    // function renderFeatureList(selection) {
+    //     var container = selection.selectAll('.layer-feature-list')
+    //         .data([0]);
 
-        _featureList = container.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-feature-list')
-            .merge(container);
-    }
+    //     _featureList = container.enter()
+    //         .append('ul')
+    //         .attr('class', 'layer-list layer-feature-list')
+    //         .merge(container);
+    // }
 
 
     function update() {
@@ -528,8 +515,8 @@ export function uiMapData(context) {
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
 
-        _featureList
-            .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+        // _featureList
+        //     .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
     }
 
 
@@ -647,14 +634,14 @@ export function uiMapData(context) {
                 .content(renderFillList)
             );
 
-        // feature filters
-        content
-            .append('div')
-            .attr('class', 'map-data-feature-filters')
-            .call(uiDisclosure(context, 'map_features', false)
-                .title(t('map_data.map_features'))
-                .content(renderFeatureList)
-            );
+        // // feature filters
+        // content
+        //     .append('div')
+        //     .attr('class', 'map-data-feature-filters')
+        //     .call(uiDisclosure(context, 'map_features', false)
+        //         .title(t('map_data.map_features'))
+        //         .content(renderFeatureList)
+        //     );
 
 
         // add listeners

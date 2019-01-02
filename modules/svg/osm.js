@@ -1,5 +1,10 @@
+import { event as d3_event } from 'd3-selection';
+import { uiSettingsOsmData } from '../ui/settings/osm_data';
+
 export function svgOsm(projection, context, dispatch) {
     var enabled = true;
+
+    var settingsOsmData = uiSettingsOsmData(context);
 
 
     function drawOsm(selection) {
@@ -60,6 +65,13 @@ export function svgOsm(projection, context, dispatch) {
 
         dispatch.call('change');
         return this;
+    };
+
+
+    drawOsm.editSettings = function() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsOsmData);
     };
 
 
