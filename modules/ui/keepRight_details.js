@@ -14,16 +14,7 @@ export function uiKeepRightDetails(context) {
 
         if (!d) return unknown;
         var errorType = d.error_type;
-
-        var template = errorTypes[errorType];
-        if (!template) return unknown;
-
-        // if there is a parent, save its error type e.g.:
-        //  Error 191 = "highway-highway"
-        //  Error 190 = "intersections without junctions"  (parent)
-        var parentErrorType = (Math.floor(errorType / 10) * 10).toString();
-        var parentTemplate = errorTypes[parentErrorType];
-        if (!parentTemplate) return unknown;
+        var parentErrorType = d.parent_error_type
 
         var et = dataEn.QA.keepRight.errorTypes[errorType];
         var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];

@@ -815,7 +815,7 @@
                     },
                     "30": {
                         "title": "Non-closed areas",
-                        "description": "This way is tagged with \"{var1}={var2}\" and should be a closed loop."
+                        "description": "This way is tagged with \"{var1}\" and should be a closed loop."
                     },
                     "40": {
                         "title": "Impossible oneways",
@@ -836,7 +836,7 @@
                     },
                     "60": {
                         "title": "Deprecated tags",
-                        "description": "This {var1} uses deprecated tag \"{var2}={var3}\". Please use \"{var4}\" instead."
+                        "description": "This {var1} uses deprecated tag \"{var2}\". Please use \"{var3}\" instead."
                     },
                     "70": {
                         "title": "Missing tags",
@@ -923,7 +923,8 @@
                         "description": "This node is a junction of ways on different layers."
                     },
                     "231": {
-                        "description": "This node is a junction of ways on different layers: {var1}."
+                        "description": "This node is a junction of ways on different layers: {var1}.",
+                        "layer": "(layer: {layer})"
                     },
                     "232": {
                         "description": "This {var1} is tagged with \"layer={var2}\". This need not be an error but it looks strange."
@@ -978,7 +979,7 @@
                     },
                     "295": {
                         "title": "Restriction \"via\" is not on the way ends",
-                        "description": "\"via\" (node {var1}) is not the first or the last member of \"from\" (way {var2})."
+                        "description": "\"via\" (node {var1}) is not the first or the last member of \"{var2}\" (way {var3})."
                     },
                     "296": {
                         "title": "Wrong restriction angle",

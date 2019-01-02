@@ -10,8 +10,8 @@
     "30": {
       "title": "non-closed_areas",
       "severity": "error",
-      "description": "This way is tagged with '$1=$2' and should be closed-loop.",
-      "regex": "'([\\w:]+)=(\\w+)'"
+      "description": "This way is tagged with '$1' and should be closed-loop.",
+      "regex": "'(.+)'"
     },
     "40": {
       "title": "dead-ended one-ways",
@@ -47,8 +47,8 @@
     "60": {
       "title": "depreciated tags",
       "severity": "warning",
-      "description": "This $1 uses deprecated tag $2 = $3. Please use $4 instead!",
-      "regex": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead"
+      "description": "This $1 uses deprecated tag $2. Please use $3 instead!",
+      "regex": "This (node|way|relation) uses deprecated tag '(.+)'\\. Please use &quot;(.+)&quot;"
     },
     "70": {
       "title": "missing tags",
@@ -74,11 +74,11 @@
       "title": "missing tags",
       "severity": "error",
       "description": "This $1 has an empty tag: $2",
-      "regex": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;"
+      "regex": "This (node|way|relation) has an empty tag: &quot;(.+)=&quot;"
     },
     "75": {
       "description": "This (node|way|relation) has a name \\((.+)\\) but no other tag",
-      "regex": "This (node|way|relation) has a name \\((.+)\\) but no other tag"
+      "regex": "This (node|way|relation) has a name \\((.+)\\)"
     },
     "90": {
       "title": "motorways without ref",
@@ -95,7 +95,7 @@
       "title": "point of interest without name",
       "severity": "error",
       "description": "This node is tagged as $1 and therefore needs a name tag",
-      "regex": "as ([\\w:]+) and"
+      "regex": "as (.+) and"
     },
     "120": {
       "title": "ways without nodes",
@@ -131,124 +131,16 @@
     "190": {
       "title": "intersections without junctions",
       "severity": "error",
-      "description": "Finds way crossings on same layer without common node as a junction"
-    },
-    "191": {
-      "title": "highway-highway",
-      "severity": "error",
-      "description": "This (highway) intersects the (highway) #(\\d+) but there is no junction node",
+      "description": "This $1 intersects the $2 #$3 but there is no junction node",
       "IDs": ["", "", "w"],
-      "regex": "This (highway) intersects the (highway) #(\\d+) but"
-    },
-    "192": {
-      "title": "highway-waterway",
-      "severity": "error",
-      "description": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)",
-      "IDs": ["", "", "w"],
-      "regex": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)"
-    },
-    "193": {
-      "title": "highway-riverbank",
-      "severity": "error",
-      "description": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)",
-      "IDs": ["", "", "w"],
-      "regex": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)"
-    },
-    "194": {
-      "title": "waterway-waterway",
-      "severity": "error",
-      "description": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node",
-      "IDs": ["", "","w"],
-      "regex": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node"
-    },
-    "195": {
-      "title": "cycleway-cycleway",
-      "severity": "error",
-      "description": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node",
-      "IDs": ["", "","w"],
-      "regex": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node"
-    },
-    "196": {
-      "title": "highway-cycleway",
-      "severity": "error",
-      "description": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node",
-      "IDs": ["", "","w"],
-      "regex": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node"
-    },
-    "197": {
-      "title": "cycleway-waterway",
-      "severity": "error",
-      "description": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)"
-    },
-    "198": {
-      "title": "cycleway-riverbank",
-      "severity": "error",
-      "description": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)"
+      "regex": "This (.+) intersects the (.+) #(\\d+)"
     },
     "200": {
       "title": "overlapping ways",
       "severity": "error",
-      "description": "Finds overlapping ways on same layer"
-    },
-    "201": {
-      "title": "highway-highway",
-      "severity": "error",
-      "description": "This (highway) overlaps the (highway) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": "This (highway) overlaps the (highway) #(\\d+)"
-    },
-    "202": {
-      "title": "highway-waterway",
-      "severity": "error",
-      "description": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)"
-    },
-    "203": {
-      "title": "highway-riverbank",
-      "severity": "error",
-      "description": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)"
-    },
-    "204": {
-      "title": "waterway-waterway",
-      "severity": "error",
-      "description": "This (waterway) overlaps the (waterway) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (waterway) overlaps the (waterway) #(\\d+)"
-    },
-    "205": {
-      "title": "cycleway-cycleway",
-      "severity": "error",
-      "description": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)"
-    },
-    "206": {
-      "title": "highway-cycleway",
-      "severity": "error",
-      "description": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)"
-    },
-    "207": {
-      "title": "cycleway-waterway",
-      "severity": "error",
-      "description": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)"
-    },
-    "208": {
-      "title": "cycleway-riverbank",
-      "severity": "error",
-      "description": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)",
-      "IDs": ["", "","w"],
-      "regex": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)"
+      "description": "This $1 overlaps the $2 #$3",
+      "regex": "This (.+) overlaps the (.+) #(\\d+)"
     },
     "210": {
       "title": "loopings",
@@ -289,7 +181,7 @@
       "severity": "error",
       "description": "This node is a junction of ways on different layers: $1",
       "IDs": ["231"],
-      "regex": "layers: ((?:#\\d+\\(-?\\d+\\),?)+)"
+      "regex": "layers: (.+)"
     },
     "232": {
       "title": "strange layers",
@@ -369,9 +261,9 @@
     "295": {
       "title": "via is not on the way ends",
       "severity": "error",
-      "description": "via (node #$1) is not the first or the last member of from (way #$2)",
+      "description": "via (node #$1) is not the first or the last member of (from|to) (way #$3)",
       "IDs": ["n","w"],
-      "regex": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)"
+      "regex": "via \\(node #(\\d+)\\) is not the first or the last member of (from|to) \\(way #(\\d+)\\)"
     },
     "296": {
       "title": "wrong restriction angle",
@@ -412,7 +304,7 @@
       "title": "wrong direction",
       "severity": "error",
       "description": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around",
-      "regex": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around"
+      "regex": "this ((?:mini_)?roundabout) is in a country with (left|right)-hand"
     },
     "313": {
       "title": "faintly connected",

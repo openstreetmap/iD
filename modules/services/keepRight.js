@@ -120,7 +120,7 @@ function tokenReplacements(d) {
 
 function parseError(group, idType) {
 
-    function fillPlaceholder(d) {
+    function linkEntity(d) {
         return '<span><a class="kr_error_description-id">' + d + '</a></span>';
     }
 
@@ -131,7 +131,7 @@ function parseError(group, idType) {
 
         items.forEach(function(item) {
             // ID has # at the front
-            var id = fillPlaceholder('n' + item.slice(1));
+            var id = linkEntity('n' + item.slice(1));
             newList.push(id);
         });
 
@@ -141,24 +141,16 @@ function parseError(group, idType) {
     // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
     function parseError231(list) {
         var newList = [];
-        var items = list.split(',');
+        // unfortunately 'layer' can itself contain commas, so we split on '),'
+        var items = list.split('),');
 
         items.forEach(function(item) {
-            var id;
-            var layer;
-
-            // item of form "#ID(layer)"
-            item = item.split('(');
-
-            // ID has # at the front
-            id = item[0].slice(1);
-            id = fillPlaceholder('w' + id);
-
-            // layer has trailing )
-            layer = item[1].slice(0,-1);
-
-            // TODO: translation
-            newList.push(id + ' (layer: ' + layer + ')');
+            var match = item.match(/\#(\d+)\((.+)\)?/);
+            if (match !== null && match.length > 2) {
+                newList.push(linkEntity('w' + match[1])
+                    + t('QA.keepRight.errorTypes.231.layer', { layer: match[2] })
+                );
+            }
         });
 
         return newList.join(', ');
@@ -185,7 +177,7 @@ function parseError(group, idType) {
 
             // ID has # at the front
             id = item[2].slice(1);
-            id = fillPlaceholder(idType + id);
+            id = linkEntity(idType + id);
 
             item = [role, item[1], id].join(' ');
             newList.push(item);
@@ -201,7 +193,7 @@ function parseError(group, idType) {
 
         items.forEach(function(item) {
             // ID has # at the front
-            var id = fillPlaceholder('n' + item.slice(1));
+            var id = linkEntity('n' + item.slice(1));
             newList.push(id);
         });
 
@@ -213,7 +205,7 @@ function parseError(group, idType) {
         case 'n':
         case 'w':
         case 'r':
-            group = fillPlaceholder(idType + group);
+            group = linkEntity(idType + group);
             break;
         // some errors have more complex ID lists/variance
         case '211':

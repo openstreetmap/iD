@@ -673,7 +673,7 @@ en:
           description: 'There is more than one node in this spot. Node IDs: {var1}.'
         30:
           title: 'Non-closed areas'
-          description: 'This way is tagged with "{var1}={var2}" and should be a closed loop.'
+          description: 'This way is tagged with "{var1}" and should be a closed loop.'
         40:
           title: 'Impossible oneways'
           description: 'The first node {var1} of this oneway is not connected to any other way.'
@@ -688,7 +688,7 @@ en:
           description: 'This node is very close but not connected to way {var1}.'
         60:
           title: 'Deprecated tags'
-          description: 'This {var1} uses deprecated tag "{var2}={var3}". Please use "{var4}" instead.'
+          description: 'This {var1} uses deprecated tag "{var2}". Please use "{var3}" instead.'
         70:
           title: 'Missing tags'
           description: 'This {var1} has an empty tag: "{var2}".'
@@ -752,6 +752,7 @@ en:
           description: 'This node is a junction of ways on different layers.'
         231:
           description: 'This node is a junction of ways on different layers: {var1}.'
+          layer: '(layer: {layer})'
         232:
           description: 'This {var1} is tagged with "layer={var2}". This need not be an error but it looks strange.'
         270:
@@ -792,7 +793,7 @@ en:
           description: '"from" and "to" members of turn restrictions need to be ways. {var1}.'
         295:
           title: 'Restriction "via" is not on the way ends'
-          description: '"via" (node {var1}) is not the first or the last member of "from" (way {var2}).'
+          description: '"via" (node {var1}) is not the first or the last member of "{var2}" (way {var3}).'
         296:
           title: 'Wrong restriction angle'
           description: 'Restriction type is "{var1}" but angle is {var2} degrees. Maybe the restriction type is not appropriate?'
