@@ -704,13 +704,13 @@ en:
           description: 'This {var1} has a name "{var2}" but no other tags.'
         90:
           title: 'Motorway without ref tag'
-          description: 'This way is tagged as motorway and therefore needs a "ref", "nat_ref", or "int_ref" tag.'
+          description: 'This way is tagged as a motorway and therefore needs a "ref", "nat_ref", or "int_ref" tag.'
         100:
           title: 'Place of worship without religion'
-          description: 'This {var1} is tagged as place of worship and therefore needs a "religion" tag.'
+          description: 'This {var1} is tagged as a place of worship and therefore needs a religion tag.'
         110:
           title: 'Point of interest without name'
-          description: 'This node is tagged as {var1} and therefore needs a name tag.'
+          description: 'This node is tagged as a "{var1}" and therefore needs a name tag.'
         120:
           title: 'Way without nodes'
           description: 'This way has just one single node.'
@@ -731,20 +731,20 @@ en:
           description: 'This relation is missing a "type" tag.'
         190:
           title: 'Intersection without junctions'
-          description: 'This {var1} intersects the {var2} {var3} but there is no junction node.'
+          description: 'This {var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel.'
         200:
           title: 'Overlapping ways'
           description: 'This {var1} overlaps the {var2} {var3}.'
         210:
           title: 'Self-intersecting ways'
-          description: 'These errors contain self intersecting ways.'
+          description: 'There is an unspecified issue with self intersecting ways.'
         211:
           description: 'This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error.'
         212:
           description: 'This way has only two different nodes and contains one of them more than once.'
         220:
           title: 'Misspelled tag'
-          description: 'This {var1} is tagged "{var2}={var3}" where "{var4}" looks like "{var5}".'
+          description: 'This {var1} is tagged "{var2}" where "{var3}" looks like "{var4}".'
         221:
           description: 'This {var1} has a tag with key "{var2}".'
         230:
@@ -840,7 +840,7 @@ en:
           description: 'There is an unspecified issue with the geometry here.'
         401:
           title: 'Missing turn restriction'
-          description: 'Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}.'
+          description: 'Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning.'
         402:
           title: 'Impossible angles'
           description: 'This way bends in a very sharp angle here.'
@@ -848,7 +848,7 @@ en:
           title: 'Website issue'
           description: 'There is an unspecified issue with a contact website or URL.'
         411:
-          description: 'The URL cannot be opened (HTTP status code {var1}).'
+          description: 'The URL {var1} cannot be opened (HTTP status code {var2}).'
         412:
           description: 'Possible domain squatting: The URL has suspicious text: "{var1}".'
         413:

@@ -3,29 +3,29 @@
     "20": {
       "title": "multiple nodes on the same spot",
       "severity": "warning",
-      "description": "There is more than one node in this spot\\. Offending node IDs: ((?:#\\d+,?)+)",
+      "description": "There is more than one node in this spot. Offending node IDs: $1",
       "IDs": ["20"],
-      "regex": true
+      "regex": "IDs: ((?:#\\d+,?)+)"
     },
     "30": {
       "title": "non-closed_areas",
       "severity": "error",
-      "description": "This way is tagged with ''([\\w:]+)=(\\w+)''and should be closed-loop",
-      "regex": true
+      "description": "This way is tagged with '$1=$2' and should be closed-loop.",
+      "regex": "'([\\w:]+)=(\\w+)'"
     },
     "40": {
       "title": "dead-ended one-ways",
       "severity": "error",
-      "description": "The first node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+      "description": "The first node (id $1) of this one-way is not connected to any other way",
       "IDs": ["n"],
-      "regex": true
+      "regex": "\\(id (\\d+)\\)"
     },
     "41": {
       "title": "",
       "severity": "error",
-      "description": "The last node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+      "description": "The last node (id $1) of this one-way is not connected to any other way",
       "IDs": ["n"],
-      "regex": true
+      "regex": "\\(id (\\d+)\\)"
     },
     "42": {
       "title": "",
@@ -40,15 +40,15 @@
     "50": {
       "title": "almost-junctions",
       "severity": "error",
-      "description": "This node is very close but not connected to way #(\\d+)",
+      "description": "This node is very close but not connected to way #$1",
       "IDs": ["w"],
-      "regex": true
+      "regex": "way #(\\d+)"
     },
     "60": {
       "title": "depreciated tags",
       "severity": "warning",
-      "description": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead!",
-      "regex": true
+      "description": "This $1 uses deprecated tag $2 = $3. Please use $4 instead!",
+      "regex": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead"
     },
     "70": {
       "title": "missing tags",
@@ -73,12 +73,12 @@
     "74": {
       "title": "missing tags",
       "severity": "error",
-      "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;",
-      "regex": true
+      "description": "This $1 has an empty tag: $2",
+      "regex": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;"
     },
     "75": {
       "description": "This (node|way|relation) has a name \\((.+)\\) but no other tag",
-      "regex": true
+      "regex": "This (node|way|relation) has a name \\((.+)\\) but no other tag"
     },
     "90": {
       "title": "motorways without ref",
@@ -88,14 +88,14 @@
     "100": {
       "title": "places of worship without religion",
       "severity": "error",
-      "description": "This (node|way|relation) is tagged as place of worship and therefore needs a religion tag",
-      "regex": true
+      "description": "This $1 is tagged as place of worship and therefore needs a religion tag",
+      "regex": "This (node|way|relation) is"
     },
     "110": {
       "title": "point of interest without name",
       "severity": "error",
-      "description": "This node is tagged as ([\\w:]+) and therefore needs a name tag",
-      "regex": true
+      "description": "This node is tagged as $1 and therefore needs a name tag",
+      "regex": "as ([\\w:]+) and"
     },
     "120": {
       "title": "ways without nodes",
@@ -121,7 +121,7 @@
       "title": "FIXME tagged items",
       "severity": "error",
       "description": "(.*)",
-      "regex": true
+      "regex": "(.*)"
     },
     "180": {
       "title": "relations without type",
@@ -138,56 +138,56 @@
       "severity": "error",
       "description": "This (highway) intersects the (highway) #(\\d+) but there is no junction node",
       "IDs": ["", "", "w"],
-      "regex": true
+      "regex": "This (highway) intersects the (highway) #(\\d+) but"
     },
     "192": {
       "title": "highway-waterway",
       "severity": "error",
       "description": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)",
       "IDs": ["", "", "w"],
-      "regex": true
+      "regex": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)"
     },
     "193": {
       "title": "highway-riverbank",
       "severity": "error",
       "description": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)",
       "IDs": ["", "", "w"],
-      "regex": true
+      "regex": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)"
     },
     "194": {
       "title": "waterway-waterway",
       "severity": "error",
       "description": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node"
     },
     "195": {
       "title": "cycleway-cycleway",
       "severity": "error",
       "description": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node"
     },
     "196": {
       "title": "highway-cycleway",
       "severity": "error",
       "description": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node"
     },
     "197": {
       "title": "cycleway-waterway",
       "severity": "error",
       "description": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)"
     },
     "198": {
       "title": "cycleway-riverbank",
       "severity": "error",
       "description": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)"
     },
     "200": {
       "title": "overlapping ways",
@@ -199,56 +199,56 @@
       "severity": "error",
       "description": "This (highway) overlaps the (highway) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (highway) overlaps the (highway) #(\\d+)"
     },
     "202": {
       "title": "highway-waterway",
       "severity": "error",
       "description": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)"
     },
     "203": {
       "title": "highway-riverbank",
       "severity": "error",
       "description": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)"
     },
     "204": {
       "title": "waterway-waterway",
       "severity": "error",
       "description": "This (waterway) overlaps the (waterway) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (waterway) overlaps the (waterway) #(\\d+)"
     },
     "205": {
       "title": "cycleway-cycleway",
       "severity": "error",
       "description": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)"
     },
     "206": {
       "title": "highway-cycleway",
       "severity": "error",
       "description": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)"
     },
     "207": {
       "title": "cycleway-waterway",
       "severity": "error",
       "description": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)"
     },
     "208": {
       "title": "cycleway-riverbank",
       "severity": "error",
       "description": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)",
       "IDs": ["", "","w"],
-      "regex": true
+      "regex": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)"
     },
     "210": {
       "title": "loopings",
@@ -258,9 +258,9 @@
     "211": {
       "title": "",
       "severity": "error",
-      "description": "This way contains more than one node at least twice\\. Nodes are ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
+      "description": "This way contains more than one node at least twice. Nodes are $1.",
       "IDs": ["211"],
-      "regex": true
+      "regex": "Nodes are ((?:#\\d+(?:, )?)+)\\."
     },
     "212": {
       "title": "",
@@ -270,14 +270,14 @@
     "220": {
       "title": "misspelled tags",
       "severity": "error",
-      "description": "This (node|way|relation) is tagged '([\\w]+)(:([\\w]+))?=(.+)' where &quot;(\\2|\\3|\\4|\\5)&quot; looks like &quot;([\\w\\s]+)&quot;",
-      "regex": true
+      "description": "This $1 is tagged '$2' where $3 looks like $4",
+      "regex": "This (node|way|relation) is tagged '(.+)' where &quot;(.+)&quot; looks like &quot;(.+)&quot;"
     },
     "221": {
       "title": "",
       "severity": "error",
-      "description": "The key of this (node|way|relation)''s tag is ''key'': key=(.+)",
-      "regex": true
+      "description": "The key of this $1's tag is 'key': $2",
+      "regex": "this (node|way|relation)''s tag is ''key'': key=(.+)"
     },
     "230": {
       "title": "layer conflicts",
@@ -287,15 +287,15 @@
     "231": {
       "title": "mixed layers intersection",
       "severity": "error",
-      "description": "This node is a junction of ways on different layers: ((?:#\\d+\\(-?\\d+\\),?)+)",
+      "description": "This node is a junction of ways on different layers: $1",
       "IDs": ["231"],
-      "regex": true
+      "regex": "layers: ((?:#\\d+\\(-?\\d+\\),?)+)"
     },
     "232": {
       "title": "strange layers",
       "severity": "error",
-      "description": "This (bridge|tunnel) is tagged with layer (-?\\d+)\\. This need not be an error but it looks strange",
-      "regex": true
+      "description": "This $1 is tagged with layer $2. This need not be an error, but it looks strange",
+      "regex": "This (bridge|tunnel) is tagged with layer (-?\\d+)\\."
     },
     "270": {
       "title": "motorways connected directly",
@@ -315,26 +315,26 @@
     "282": {
       "title": "missing admin level",
       "severity": "error",
-      "description": "The boundary of (.+) has no (?:valid numeric )?admin_level\\..*",
-      "regex": true
+      "description": "The boundary of $1 has no (?:valid numeric)?admin_level",
+      "regex": "of (.+) has"
     },
     "283": {
       "title": "no closed loop",
       "severity": "error",
-      "description": "The boundary of (.+) is not closed-loop",
-      "regex": true
+      "description": "The boundary of $1 is not closed-loop",
+      "regex": "boundary of (.+)"
     },
     "284": {
       "title": "splitting boundary",
       "severity": "error",
-      "description": "The boundary of (.+) splits here",
-      "regex": true
+      "description": "The boundary of $1 splits here",
+      "regex": "boundary of (.+)"
     },
     "285": {
       "title": "admin_level too high",
       "severity": "error",
-      "description": "This boundary-way has admin_level (-?\\d+) but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations",
-      "regex": true
+      "description": "This boundary-way has admin_level $1 but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations",
+      "regex": "admin_level (-?\\d+) but"
     },
     "290": {
       "title": "restrictions",
@@ -345,53 +345,53 @@
       "title": "missing type",
       "severity": "error",
       "description": "This turn-restriction has no (?:known )?restriction type",
-      "regex": true
+      "regex": "This turn-restriction has no (?:known )?restriction type"
     },
     "292": {
       "title": "missing from way",
       "severity": "error",
-      "description": "A turn-restriction needs exactly one from member\\. This one has (\\d+)",
-      "regex": true
+      "description": "A turn-restriction needs exactly one from member. This one has $1",
+      "regex": "has (\\d+)"
     },
     "293": {
       "title": "missing to way",
       "severity": "error",
-      "description": "A turn-restriction needs exactly one to member\\. This one has (\\d+)",
-      "regex": true
+      "description": "A turn-restriction needs exactly one to member. This one has $1",
+      "regex": "has (\\d+)"
     },
     "294": {
       "title": "from or to not a way",
       "severity": "error",
-      "description": "From- and To-members of turn restrictions need to be ways\\. ((?:(?:from|to) (?:node|relation) #\\d+,?)+)",
+      "description": "From- and To-members of turn restrictions need to be ways. $1",
       "IDs": ["294"],
-      "regex": true
+      "regex": "ways\\. ((?:(?:from|to) (?:node|relation) #\\d+,?)+)"
     },
     "295": {
       "title": "via is not on the way ends",
       "severity": "error",
-      "description": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)",
+      "description": "via (node #$1) is not the first or the last member of from (way #$2)",
       "IDs": ["n","w"],
-      "regex": true
+      "regex": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)"
     },
     "296": {
       "title": "wrong restriction angle",
       "severity": "error",
-      "description": "restriction type is (\\w+) but angle is (\\d+) degrees. Maybe the restriction type is not appropriate?",
-      "regex": true
+      "description": "restriction type is $1, but angle is $2 degrees. Maybe the restriction type is not appropriate?",
+      "regex": "is (\\w+), but angle is (-?\\d+) degrees"
     },
     "297": {
       "title": "wrong direction of to member",
       "severity": "error",
-      "description": "wrong direction of to way (\\d+)",
+      "description": "wrong direction of to way $1",
       "IDs": ["w"],
-      "regex": true
+      "regex": "way (\\d+)"
     },
     "298": {
       "title": "already restricted by oneway",
       "severity": "error",
-      "description": "entry already prohibited by oneway tag on (\\d+)",
+      "description": "entry already prohibited by oneway tag on $1",
       "IDs": ["w"],
-      "regex": true
+      "regex": "on (\\d+)"
     },
     "300": {
       "title": "missing maxspeed",
@@ -412,45 +412,45 @@
       "title": "wrong direction",
       "severity": "error",
       "description": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around",
-      "regex": true
+      "regex": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around"
     },
     "313": {
       "title": "faintly connected",
       "severity": "error",
-      "description": "This roundabout has only (\\d) other roads connected. Roundabouts typically have three",
-      "regex": true
+      "description": "This roundabout has only $1 other roads connected. Roundabouts typically have three",
+      "regex": "only (\\d) other"
     },
     "320": {
       "title": "*_link connections",
       "severity": "error",
-      "description": "This way is tagged as highway=(\\w+)_link but doesn't have a connection to any other \\1 or \\1_link",
-      "regex": true
+      "description": "This way is tagged as highway=$1_link but doesn't have a connection to any other $1 or $1_link",
+      "regex": "highway=(\\w+)_link"
     },
     "350": {
       "title": "bridge-tags",
       "severity": "error",
       "description": "This bridge does not have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: (.+)",
       "NOTE": "Group can be arbitrary list of form: key=value,key=value,key=value...",
-      "regex": true
+      "regex": "these tags: (.+)"
     },
     "360": {
       "title": "language unknown",
       "severity": "warning",
       "description": "It would be nice if this (node|way|relation) had an additional tag 'name:XX=(.+)' where XX shows the language of its name '\\2'",
-      "regex": true
+      "regex": "this (node|way|relation) had an additional tag 'name:XX=(.+)' where XX shows the language of its name '\\2'"
     },
     "370": {
       "title": "doubled places",
       "severity": "error",
-      "description": "This node has tags in common with the surrounding way #(\\d+) ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
+      "description": "This node has tags in common with the surrounding way #$1 ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
       "IDs": ["w"],
-      "regex": true
+      "regex": "way #(\\d+) ((?:\\(including the name '.+'\\) )?)and"
     },
     "380": {
       "title": "non-physical use of sport-tag",
       "severity": "error",
-      "description": "This way is tagged sport=(\\w+) but has no physical tag like e.g. leisure, building, amenity or highway",
-      "regex": true
+      "description": "This way is tagged sport=$1 but has no physical tag like e.g. leisure, building, amenity or highway",
+      "regex": "sport=(\\w+) but"
     },
     "390": {
       "title": "missing tracktype",
@@ -465,9 +465,9 @@
     "401": {
       "title": "missing turn restriction",
       "severity": "error",
-      "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning( from way (\\1|\\2) to (\\1|\\2))?",
-      "IDs": ["w", "w", "w", "w"],
-      "regex": true
+      "description": "ways $1 and $2 join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning( from way (\\1|\\2) to (\\1|\\2))?",
+      "IDs": ["w", "w"],
+      "regex": "ways (\\d+) and (\\d+) join"
     },
     "402": {
       "title": "impossible angles",
@@ -482,20 +482,20 @@
     "411": {
       "title": "http error",
       "severity": "error",
-      "description": "The URL \\(<a target=_blank href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
-      "regex": true
+      "description": "The URL (<a target=\"_blank\" href=\"$1\">$1</a>) cannot be opened (HTTP status code $2)",
+      "regex": "href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)"
     },
     "412": {
       "title": "domain hijacking",
       "severity": "error",
-      "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''",
-      "regex": true
+      "description": "Possible domain squatting: <a target=\"_blank\" href=\"$1\">$1</a>. Suspicious text is: \"$2\"",
+      "regex": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''"
     },
     "413": {
       "title": "non-match",
       "severity": "error",
-      "description": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)",
-      "regex": true
+      "description": "Content of the URL (<a target=\"_blank\" href=\"$1\">$1</a>) did not contain these keywords: ($2)",
+      "regex": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)"
     }
   }
 }

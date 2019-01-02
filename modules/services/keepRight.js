@@ -74,19 +74,27 @@ function tokenReplacements(d) {
     var replacements = {};
     var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
 
-    var errorTemplate = errorTypes[d.error_type];
-    if (!errorTemplate) return;
+    var errorTemplate = errorTypes[d.which_type];
+    if (!errorTemplate) {
+        /* eslint-disable no-console */
+        console.log('No Template: ', d.error_type);
+        console.log('  ', d.description);
+        /* eslint-enable no-console */
+        return;
+    }
 
     // some descriptions are just fixed text
     if (!errorTemplate.regex) return;
 
     // regex pattern should match description with variable details captured as groups
-    var errorDescription = d.description;
-    var errorRegex = new RegExp(errorTemplate.description);
-    var errorMatch = errorRegex.exec(errorDescription);
+    var errorRegex = new RegExp(errorTemplate.regex, 'i');
+    var errorMatch = errorRegex.exec(d.description);
     if (!errorMatch) {
-        // TODO: Remove, for regex dev testing
-        console.log('Unmatched:', d.error_type, d.description, errorRegex);
+        /* eslint-disable no-console */
+        console.log('Unmatched: ', d.error_type);
+        console.log('  ', d.description);
+        console.log('  ', errorRegex);
+        /* eslint-enable no-console */
         return;
     }
 
@@ -186,8 +194,6 @@ function parseError(group, idType) {
         return newList.join(', ');
     }
 
-    // TODO: Handle error 401 template addition
-
     // arbitrary node list of form: #ID,#ID,#ID...
     function parseWarning20(list) {
         var newList = [];
@@ -278,6 +284,16 @@ export default {
                         var loc = feature.geometry.coordinates;
                         var props = feature.properties;
 
+                        // if there is a parent, save its error type e.g.:
+                        //  Error 191 = "highway-highway"
+                        //  Error 190 = "intersections without junctions"  (parent)
+                        var errorType = props.error_type;
+                        var errorTemplate = errorTypes[errorType];
+                        var parentErrorType = (Math.floor(errorType / 10) * 10).toString();
+
+                        // try to handle error type directly, fallback to parent error type.
+                        var whichType = errorTemplate ? errorType : parentErrorType;
+
                         // - move markers slightly so it doesn't obscure the geometry,
                         // - then move markers away from other coincident markers
                         var coincident = false;
@@ -295,7 +311,9 @@ export default {
                             comment: props.comment || null,
                             description: props.description || '',
                             error_id: props.error_id,
-                            error_type: props.error_type,
+                            which_type: whichType,
+                            error_type: errorType,
+                            parent_error_type: parentErrorType,
                             object_id: props.object_id,
                             object_type: props.object_type,
                             schema: props.schema,
