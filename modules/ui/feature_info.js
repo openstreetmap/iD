@@ -1,5 +1,6 @@
 import _compact from 'lodash-es/compact';
 import _map from 'lodash-es/map';
+import _difference from 'lodash-es/difference';
 
 import { event as d3_event } from 'd3-selection';
 
@@ -18,22 +19,44 @@ export function uiFeatureInfo(context) {
                     count += stats[k];
                     return String(stats[k]) + ' ' + t('feature.' + k + '.description');
                 }
-            }));
+            })),
+            hiddenNotesList = [];
+
+
+        var notes = context.layers().layer('notes');
+
+        if (notes.enabled()) {
+            hiddenNotesList = _difference(notes.data(), notes.filteredData());
+        }
 
         selection.html('');
 
-        if (hiddenList.length) {
+        if (hiddenList.length || hiddenNotesList.length) {
+            var hiddenItems = hiddenList.join('<br/>');
+            if (hiddenNotesList) {
+                if (hiddenList.length) { hiddenItems += '<br/>'; }
+                hiddenItems += hiddenNotesList.length + t('feature_info.notes');
+            }
+
             var tooltipBehavior = tooltip()
                 .placement('top')
                 .html(true)
                 .title(function() {
-                    return uiTooltipHtml(hiddenList.join('<br/>'));
+                    return uiTooltipHtml(hiddenItems);
                 });
 
             var warning = selection.append('a')
                 .attr('href', '#')
                 .attr('tabindex', -1)
-                .html(t('feature_info.hidden_warning', { count: count }))
+                .html(function () {
+                    var warning = '';
+
+                    if (hiddenList.length) { warning += t('feature_info.hidden_warning', { count: count }); }
+                    if (hiddenList.length && hiddenNotesList.length) { warning += t('feature_info.both_hidden'); }
+                    if (hiddenNotesList.length) { warning += t('feature_info.hidden_note_warning', { count: hiddenNotesList.length }); }
+
+                    return warning;
+                })
                 .call(tooltipBehavior)
                 .on('click', function() {
                     tooltipBehavior.hide(warning);
@@ -43,7 +66,7 @@ export function uiFeatureInfo(context) {
         }
 
         selection
-            .classed('hide', !hiddenList.length);
+            .classed('hide', !hiddenList.length && !hiddenNotesList.length);
     }
 
 

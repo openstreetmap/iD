@@ -11,7 +11,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
-import { uiSettingsNotesData } from '../ui/settings/notes_data';
 
 
 export function svgNotes(projection, context, dispatch) {
@@ -20,6 +19,9 @@ export function svgNotes(projection, context, dispatch) {
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
+
+    var _data = [];
+    var _filteredData = [];
 
     var _status = 'open';
     var _statusOptions = ['all', 'open', 'closed'];
@@ -32,8 +34,6 @@ export function svgNotes(projection, context, dispatch) {
 
     var _contribution = 'all';
     var _contributionOptions = ['all', 'self', 'others'];
-
-    var settingsNotesData = uiSettingsNotesData(context);
 
 
     function formatDate(date) {
@@ -194,7 +194,7 @@ export function svgNotes(projection, context, dispatch) {
         var service = getService();
         var selectedID = context.selectedNoteID();
 
-        var data = (service ? service.notes(projection) : []);
+        _data = (service ? service.notes(projection) : []);
 
         // TODO: remove these settings & reference global
         var settings = {
@@ -204,17 +204,17 @@ export function svgNotes(projection, context, dispatch) {
             _toggleDateRange: _toggleDateRange
         };
         // filter data
-        data = _filterData(data, settings);
+        _filteredData = _filterData(_data, settings);
 
         // TODO: possibly find better way to exit select_note mode
-        var dataIDs = data.map(function(note) { return note.id; });
+        var dataIDs = _filteredData.map(function(note) { return note.id; });
         if (context.selectedNoteID() && !dataIDs.includes(context.selectedNoteID())) {
             context.enter(modeBrowse(context));
         }
 
         var transform = svgPointTransform(projection);
         var notes = layer.selectAll('.note')
-            .data(data, function(d) { return d.status + d.id; });
+            .data(_filteredData, function(d) { return d.status + d.id; });
 
         // exit
         notes.exit()
@@ -321,12 +321,6 @@ export function svgNotes(projection, context, dispatch) {
         return this;
     };
 
-    drawNotes.editSettings = function() {
-        d3_event.preventDefault();
-        context.container()
-            .call(settingsNotesData);
-    };
-
     drawNotes.status = function(status) {
         if (!arguments.length) return _status;
 
@@ -398,6 +392,10 @@ export function svgNotes(projection, context, dispatch) {
         dispatch.call('change');
         return this;
     };
+
+    drawNotes.data = function() { return _data; };
+
+    drawNotes.filteredData = function() { return _filteredData; };
 
     init();
     return drawNotes;

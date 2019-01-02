@@ -391,6 +391,9 @@
         },
         "feature_info": {
             "hidden_warning": "{count} hidden features",
+            "hidden_note_warning": "{count} hidden notes",
+            "notes": " notes",
+            "both_hidden": " & ",
             "hidden_details": "These features are currently hidden: {details}"
         },
         "status": {

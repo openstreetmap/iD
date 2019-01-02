@@ -44,11 +44,11 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'header fillL');
 
-        headerEnter
-            .append('button')
-            .attr('class', 'fl note-editor-settings')
-            .on('click', context.layers().layer('notes').editSettings) // TODO: cleaner function call
-            .call(svgIcon('#iD-icon-more'));
+        // headerEnter
+        //     .append('button')
+        //     .attr('class', 'fl note-editor-settings')
+        //     .on('click', context.layers().layer('notes').editSettings) // TODO: cleaner function call
+        //     .call(svgIcon('#iD-icon-more'));
 
         headerEnter
             .append('button')
