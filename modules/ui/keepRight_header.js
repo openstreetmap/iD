@@ -1,5 +1,4 @@
 import { dataEn } from '../../data';
-import { errorTypes } from '../../data/keepRight.json';
 import { svgIcon } from '../svg';
 import { t } from '../util/locale';
 
@@ -13,7 +12,7 @@ export function uiKeepRightHeader() {
 
         if (!d) return unknown;
         var errorType = d.error_type;
-        var parentErrorType = d.parent_error_type
+        var parentErrorType = d.parent_error_type;
 
         var et = dataEn.QA.keepRight.errorTypes[errorType];
         var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];

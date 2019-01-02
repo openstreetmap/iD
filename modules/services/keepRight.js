@@ -147,8 +147,8 @@ function parseError(group, idType) {
         items.forEach(function(item) {
             var match = item.match(/\#(\d+)\((.+)\)?/);
             if (match !== null && match.length > 2) {
-                newList.push(linkEntity('w' + match[1])
-                    + t('QA.keepRight.errorTypes.231.layer', { layer: match[2] })
+                newList.push(linkEntity('w' + match[1]) + ' ' +
+                    t('QA.keepRight.errorTypes.231.layer', { layer: match[2] })
                 );
             }
         });

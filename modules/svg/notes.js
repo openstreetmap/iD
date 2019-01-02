@@ -165,14 +165,10 @@ export function svgNotes(projection, context, dispatch) {
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
-        function dimensions() {
-            return [window.innerWidth, window.innerHeight];
-        }
-
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                service.loadNotes(projection, dimensions());
+                service.loadNotes(projection);
                 update();
             } else {
                 editOff();

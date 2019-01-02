@@ -2544,13 +2544,15 @@ input.key-trap {
     padding: 10px;
 }
 
-.note-save #new-comment-input {
+.keepRight-save .new-comment-input,
+.note-save .new-comment-input {
     width: 100%;
     height: 100px;
     max-height: 300px;
     min-height: 100px;
 }
 
+.keepRight-save .detail-section,
 .note-save .detail-section {
     margin: 10px 0;
 }
@@ -2568,56 +2570,56 @@ input.key-trap {
     stroke-width: 1.3px; /* NOTE: likely a better way to scale the icon stroke */
 }
 
-.kr_error_type_40,
+.kr_error_type_40,     /* impossible oneways */
 .kr_error_type_41,
 .kr_error_type_42,
 .kr_error_type_43 {
     color: #fd007f;
 }
 
-.kr_error_type_50 {
+.kr_error_type_50 {    /* almost junctions */
     color: #c827fe;
 }
 
-.kr_error_type_70,
+.kr_error_type_70,     /* missing tags */
 .kr_error_type_71,
 .kr_error_type_72 {
     color: #74aeaf;
 }
 
-.kr_error_type_90 {
+.kr_error_type_90 {    /* motorway without ref */
     color: #3124af;
 }
 
-.kr_error_type_100 {
+.kr_error_type_100 {   /* place of worship without religion */
     color: #a80000;
 }
 
-.kr_error_type_110 {
+.kr_error_type_110 {   /* poi without name */
     color: #44650b;
 }
 
-.kr_error_type_120 {
+.kr_error_type_120 {   /* way without nodes */
     color: #99274d;
 }
 
-.kr_error_type_130 {
+.kr_error_type_130 {   /* disconnected way */
     color: #eb7310;
 }
 
-.kr_error_type_150 {
+.kr_error_type_150 {   /* railway crossing without tag */
     color: #7218c1;
 }
 
-.kr_error_type_160 {
+.kr_error_type_160 {   /* wrong railway tag */
     color: #c903ae;
 }
 
-.kr_error_type_170 {
+.kr_error_type_170 {   /* FIXME tag */
     color: #07d40b;
 }
 
-.kr_error_type_180 {
+.kr_error_type_180 {   /* relation without type */
     color: #01ff0a;
 }
 
@@ -2629,7 +2631,7 @@ input.key-trap {
 .kr_error_type_195,
 .kr_error_type_196,
 .kr_error_type_197,
-.kr_error_type_198 {
+.kr_error_type_198 {  /* intersection without junction */
     color: #e6fcb0;
 }
 
@@ -2641,32 +2643,32 @@ input.key-trap {
 .kr_error_type_205,
 .kr_error_type_206,
 .kr_error_type_207,
-.kr_error_type_208 {
+.kr_error_type_208 {  /* overlapping ways */
     color: #fdbf6f;
 }
 
 .kr_error_type_210,
 .kr_error_type_211,
-.kr_error_type_212 {
+.kr_error_type_212 {  /* self intersecting ways */
     color: #4a7601;
 }
 
 .kr_error_type_220,
-.kr_error_type_221 {
+.kr_error_type_221 {  /* misspelled tag */
     color: #ef7cf2;
 }
 
 .kr_error_type_230,
 .kr_error_type_231,
-.kr_error_type_232 {
+.kr_error_type_232 {  /* layer conflict */
     color: #b15928;
 }
 
-.kr_error_type_270 {
+.kr_error_type_270 {  /* unusual motorway connection */
     color: #2aaf92;
 }
 
-.kr_error_type_280,
+.kr_error_type_280,   /* boundary issue */
 .kr_error_type_281,
 .kr_error_type_282,
 .kr_error_type_283,
@@ -2675,7 +2677,7 @@ input.key-trap {
     color: #5f47a0;
 }
 
-.kr_error_type_290,
+.kr_error_type_290,   /* restriction issue */
 .kr_error_type_291,
 .kr_error_type_292,
 .kr_error_type_293,
@@ -2687,50 +2689,40 @@ input.key-trap {
     color: #a6cee3;
 }
 
-.kr_error_type_310,
+.kr_error_type_310,    /* roundabout issue */
 .kr_error_type_311,
 .kr_error_type_312,
 .kr_error_type_313 {
     color: #0550e8;
 }
 
-.kr_error_type_320 {
+.kr_error_type_320 {   /* improper _link */
     color: #28d9bb;
 }
 
-.kr_error_type_350 {
+.kr_error_type_350 {   /* improper bridge tag */
     color: #ffff99;
 }
 
-.kr_error_type_370 {
+.kr_error_type_370 {   /* doubled places */
     color: #ff8fdf;
 }
 
-.kr_error_type_380 {
+.kr_error_type_380 {   /* non-physical sport tag */
     color: #b3b465;
 }
 
-.kr_error_type_400,
+.kr_error_type_400,    /* geometry / turn angles */
 .kr_error_type_401,
 .kr_error_type_402 {
     color: #b64f69;
 }
 
-.kr_error_type_410,
+.kr_error_type_410,    /* website issue */
 .kr_error_type_411,
 .kr_error_type_412,
 .kr_error_type_413 {
     color: #b07f7e;
-}
-
-.kr_error-details-title {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.kr_error-details-description {
-    text-align: left;
-    margin-bottom: 10px;
 }
 
 

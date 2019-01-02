@@ -82,39 +82,13 @@ export function svgKeepRight(projection, context, dispatch) {
     }
 
 
-    function click(d) {
-        var service = getService();
-        if (!service) return;
-
-        context.map().centerEase(d.loc);
-
-        var selected = service.getSelectedImage();
-        var selectedImageKey = selected && selected.key;
-        var imageKey;
-
-        // Pick one of the images the sign was detected in,
-        // preference given to an image already selected.
-        d.detections.forEach(function(detection) {
-            if (!imageKey || selectedImageKey === detection.image_key) {
-                imageKey = detection.image_key;
-            }
-        });
-
-        service
-            .selectImage(null, imageKey)
-            .updateViewer(imageKey, context)
-            .showViewer();
-    }
-
-
     function update() {
         var service = getService();
-        var selectedID = context.selectedNoteID(); // TODO: update with selectedErrorID
+        var selectedID = context.selectedErrorID();
         var data = (service ? service.getErrors(projection) : []);
-        var visibleData =  data; // getVisible(data); // TODO: only show sub-layers that are toggled on
         var transform = svgPointTransform(projection);
         var kr_errors = layer.selectAll('.kr_error')
-            .data(visibleData, function(d) { return d.id; });
+            .data(data, function(d) { return d.id; });
 
         // exit
         kr_errors.exit()
@@ -124,8 +98,8 @@ export function svgKeepRight(projection, context, dispatch) {
         var kr_errorsEnter = kr_errors.enter()
             .append('g')
             .attr('class', function(d) {
-                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.error_type; })
-            .classed('new', function(d) { return d.id < 0; });
+                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.error_type; }
+            );
 
         kr_errorsEnter
             .append('ellipse')
