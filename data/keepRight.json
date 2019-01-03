@@ -45,7 +45,7 @@
       "regex": "way #(\\d+)"
     },
     "60": {
-      "title": "depreciated tags",
+      "title": "deprecated tags",
       "severity": "warning",
       "description": "This $1 uses deprecated tag $2. Please use $3 instead!",
       "regex": "This (node|way|relation) uses deprecated tag '(.+)'\\. Please use &quot;(.+)&quot;"

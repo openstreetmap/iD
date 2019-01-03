@@ -717,7 +717,7 @@ en:
           title: 'Railway crossing without tag'
           description: 'This crossing of a highway and a railway needs to be tagged as "railway=crossing" or "railway=level_crossing".'
         160:
-          title: 'Wrongly used railway tag'
+          title: 'Railway layer conflict'
           description: 'There are ways in different layers (e.g. tunnel or bridge) meeting at this railway crossing.'
         170:
           title: 'FIXME tagged items'
@@ -744,7 +744,7 @@ en:
         221:
           description: 'This {var1} has a tag with key "{var2}".'
         230:
-          title: 'Layer Conflict'
+          title: 'Layer conflict'
           description: 'This node is a junction of ways on different layers.'
         231:
           description: 'This node is a junction of ways on different layers: {var1}.'
@@ -777,7 +777,7 @@ en:
           description: 'There is an unspecified issue with this restriction.'
         291:
           title: 'Restriction missing type'
-          description: 'This turn restriction has no known restriction type.'
+          description: 'This turn restriction has an unrecognized restriction type.'
         292:
           title: 'Restriction missing "from" way'
           description: 'A turn restriction needs exactly one "from" member. This one has {var1}.'
@@ -788,10 +788,10 @@ en:
           title: 'Restriction "from" or "to" is not a way'
           description: '"from" and "to" members of turn restrictions need to be ways. {var1}.'
         295:
-          title: 'Restriction "via" is not on the way ends'
+          title: 'Restriction "via" is not an endpoint'
           description: '"via" (node {var1}) is not the first or the last member of "{var2}" (way {var3}).'
         296:
-          title: 'Wrong restriction angle'
+          title: 'Unusual restriction angle'
           description: 'Restriction type is "{var1}" but angle is {var2} degrees. Maybe the restriction type is not appropriate?'
         297:
           title: 'Wrong direction of to member'
@@ -801,16 +801,16 @@ en:
           description: 'Entry already prohibited by "oneway" tag on {var1}.'
         300:
           title: 'Missing maxspeed'
-          description: 'Missing maxspeed tag.'
+          description: 'This road is missing a "maxspeed" tag and is tagged as motorway, trunk, primary, or secondary.'
         310:
           title: 'Roundabout issue'
           description: 'There is an unspecified issue with this roundabout.'
         311:
           title: 'Roundabout not closed loop'
-          description: 'This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout).'
+          description: 'This way is part of a roundabout but is not closed-loop. (Split carriageways approaching a roundabout should not be tagged as roundabout).'
         312:
           title: 'Roundabout wrong direction'
-          description: 'If this {var1} is in a country with {var2}-hand traffic then its orientation goes the wrong way around'
+          description: 'If this {var1} is in a country with {var2}-hand traffic then its orientation goes the wrong way around.'
         313:
           title: 'Roundabout weakly connected'
           description: 'This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more.'
@@ -849,7 +849,7 @@ en:
         412:
           description: 'Possible domain squatting: The URL has suspicious text: "{var1}".'
         413:
-          description: 'Possible non-match.  Content of the URL did not contain these keywords: ({var1}).'
+          description: 'Possible non-match. Content of the URL did not contain these keywords: ({var1}).'
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"

@@ -97,7 +97,7 @@ export function svgKeepRight(projection, context, dispatch) {
         var kr_errorsEnter = kr_errors.enter()
             .append('g')
             .attr('class', function(d) {
-                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.error_type; }
+                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type; }
             );
 
         kr_errorsEnter
