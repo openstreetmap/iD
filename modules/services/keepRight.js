@@ -324,34 +324,40 @@ export default {
     },
 
 
-    postKeepRightUpdate: function(update, callback) {
-        if (_krCache.inflight[update.id]) {
-            return callback({ message: 'Error update already inflight', status: -2 }, update);
+    postKeepRightUpdate: function(d, callback) {
+        if (_krCache.inflight[d.id]) {
+            return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
-        var path = apibase + 'comment.php?';
-        if (update.state) {
-            path += '&st=' + update.state;
+        var that = this;
+        var params = { schema: d.schema, id: d.error_id };
+
+        if (d.state) {
+            params.st = d.state;
         }
-        if (update.newComment !== undefined) {
-            path += '&' + utilQsString({ co: update.newComment });
+        if (d.newComment !== undefined) {
+            params.co = d.newComment;
         }
 
-        path += '&schema=' + update.schema + '&id=' + update.error_id;
+        // NOTE: This throws a CORS err, but it seems successful.
+        // We don't care too much about the response, so this is fine.
+        var url = apibase + 'comment.php?' + utilQsString(params);
+        _krCache.inflight[d.id] = d3_request(url)
+            .post(function(err) {
+                delete _krCache.inflight[d.id];
+                if (d.state === 'ignore' || d.state === 'ignore_t') {
+                    that.removeError(d);
+                } else {
+                    d = that.replaceError(d.update({
+                        comment: d.newComment,
+                        newComment: undefined,
+                        state: undefined
+                    }));
+                }
 
-        _krCache.inflight[update.id] = d3_request(path)
-            .mimeType('application/json')
-            .response(function(xhr) {
-                return JSON.parse(xhr.responseText);
-            })
-            .post(function(err, data) {
-                delete _krCache.inflight[update.id];
-                if (err) { return callback(err); }
-
-                console.log('data ', data);
+                return callback(err, d);
             });
 
-        // NOTE: This throws a CORS error, but it seems successful?
     },
 
 

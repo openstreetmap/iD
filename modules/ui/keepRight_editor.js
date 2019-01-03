@@ -174,7 +174,6 @@ export function uiKeepRightEditor(context) {
 
         buttonSection.select('.close-button')   // select and propagate data
             .text(function(d) {
-                // NOTE: no state is available because keepRight export only exports open errors
                 var andComment = (d.newComment !== undefined ? '_comment' : '');
                 return t('QA.keepRight.close' + andComment);
             })
@@ -182,8 +181,7 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-
-                    d.state = d.state === 'ignore_t' ? '' : 'ignore_t';
+                    d.state = 'ignore_t';   // ignore temporarily (error fixed)
                     keepRight.postKeepRightUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });
@@ -199,7 +197,7 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    d.state = d.state === 'ignore' ? '' : 'ignore';
+                    d.state = 'ignore';   // ignore permanently (false positive)
                     keepRight.postKeepRightUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });
