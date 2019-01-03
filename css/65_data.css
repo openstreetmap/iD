@@ -88,7 +88,6 @@
 .kr_error_type_110,    /* poi without name */
 .kr_error_type_150,    /* railway crossing without tag */
 .kr_error_type_220,    /* misspelled tag */
-.kr_error_type_300,    /* missing maxspeed */
 .kr_error_type_380,    /* non-physical sport tag */
 .kr_error_type_390 {   /* missing tracktype */
     color: #5d0;
@@ -122,6 +121,10 @@
 .kr_error_type_180,    /* relation without type */
 .kr_error_type_290 {   /* turn restriction issues */
     color: #ace;
+}
+
+.kr_error_type_300 {   /* missing maxspeed */
+    color: #090;
 }
 
 .kr_error_type_360,    /* language unknown */
