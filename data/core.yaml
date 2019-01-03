@@ -654,12 +654,11 @@ en:
       detail_description: Description
       comment: Comment
       comment_placeholder: Enter a comment to share with other users.
-      upload_explanation: Your comments will be publicly visible on KeepRight.
-      upload_explanation_with_user: "Your comments as {user} will be publicly visible on KeepRight."
-      resolve_comment: Comment and Resolve
-      ignore_comment: Comment and Ignore
-      resolve: Resolve
-      ignore: Ignore
+      close: Close (Error Fixed)
+      ignore: Ignore (Not an Error)
+      save_comment: Save Comment
+      close_comment: Close and Comment
+      ignore_comment: Ignore and Comment
       entities:
         node: "Node {id}"
         way: "Way {id}"

@@ -1,8 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
@@ -96,7 +93,7 @@ export function uiKeepRightEditor(context) {
             .attr('class', 'new-comment-input')
             .attr('placeholder', t('QA.keepRight.comment_placeholder'))
             .attr('maxlength', 1000)
-            .property('value', function(d) { return d.comment; })
+            .property('value', function(d) { return d.newComment || d.comment; })
             .call(utilNoAuto)
             .on('input', changeInput)
             .on('blur', changeInput);
@@ -104,16 +101,19 @@ export function uiKeepRightEditor(context) {
         // update
         saveSection = saveSectionEnter
             .merge(saveSection)
-            .call(userDetails)
             .call(keepRightSaveButtons);
 
 
         function changeInput() {
             var input = d3_select(this);
-            var val = input.property('value').trim() || undefined;
+            var val = input.property('value').trim();
+
+            if (val === _error.comment) {
+                val = undefined;
+            }
 
             // store the unsaved comment with the error itself
-            _error = _error.update({ newComment: val, comment: val });
+            _error = _error.update({ newComment: val });
 
             var keepRight = services.keepRight;
             if (keepRight) {
@@ -126,100 +126,7 @@ export function uiKeepRightEditor(context) {
     }
 
 
-    function userDetails(selection) {
-        var detailSection = selection.selectAll('.detail-section')
-            .data([0]);
-
-        detailSection = detailSection.enter()
-            .append('div')
-            .attr('class', 'detail-section')
-            .merge(detailSection);
-
-        var osm = services.osm;
-        if (!osm) return;
-
-        // Add warning if user is not logged in
-        var hasAuth = osm.authenticated();
-        var authWarning = detailSection.selectAll('.auth-warning')
-            .data(hasAuth ? [] : [0]);
-
-        authWarning.exit()
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
-
-        var authEnter = authWarning.enter()
-            .insert('div', '.tag-reference-body')
-            .attr('class', 'field-warning auth-warning')
-            .style('opacity', 0);
-
-        authEnter
-            .call(svgIcon('#iD-icon-alert', 'inline'));
-
-        authEnter
-            .append('span')
-            .text(t('note.login'));
-
-        authEnter
-            .append('a')
-            .attr('target', '_blank')
-            .call(svgIcon('#iD-icon-out-link', 'inline'))
-            .append('span')
-            .text(t('login'))
-            .on('click.error-login', function() {
-                d3_event.preventDefault();
-                osm.authenticate();
-            });
-
-        authEnter
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
-
-
-        var prose = detailSection.selectAll('.error-save-prose')
-            .data(hasAuth ? [0] : []);
-
-        prose.exit()
-            .remove();
-
-        prose = prose.enter()
-            .append('p')
-            .attr('class', 'error-save-prose')
-            .text(t('QA.keepRight.upload_explanation'))
-            .merge(prose);
-
-        osm.userDetails(function(err, user) {
-            if (err) return;
-
-            var userLink = d3_select(document.createElement('div'));
-
-            if (user.image_url) {
-                userLink
-                    .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon pre-text user-icon');
-            }
-
-            userLink
-                .append('a')
-                .attr('class', 'user-info')
-                .text(user.display_name)
-                .attr('href', osm.userURL(user.display_name))
-                .attr('tabindex', -1)
-                .attr('target', '_blank');
-
-            prose
-                .html(t('QA.keepRight.upload_explanation_with_user', { user: userLink.html() }));
-        });
-    }
-
-
     function keepRightSaveButtons(selection) {
-        var osm = services.osm;
-        var hasAuth = osm && osm.authenticated();
-
         var isSelected = (_error && _error.id === context.selectedErrorID());
         var buttonSection = selection.selectAll('.buttons')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
@@ -235,41 +142,43 @@ export function uiKeepRightEditor(context) {
 
         buttonEnter
             .append('button')
-            .attr('class', 'button resolve-button action');
+            .attr('class', 'button comment-button action')
+            .text(t('QA.keepRight.save_comment'));
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button close-button action');
 
         buttonEnter
             .append('button')
             .attr('class', 'button ignore-button action');
-
-        buttonEnter
-            .append('button')
-            .attr('class', 'button comment-button action')
-            .text(t('note.comment'));
 
 
         // update
         buttonSection = buttonSection
             .merge(buttonEnter);
 
-        buttonSection.select('.cancel-button')   // select and propagate data
-            .on('click.cancel', function(d) {
+        buttonSection.select('.comment-button')   // select and propagate data
+            .attr('disabled', function(d) {
+                return d.newComment === undefined ? true : null;
+            })
+            .on('click.comment', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    keepRight.removeError(d);
+                    keepRight.postKeepRightUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
                 }
-                context.enter(modeBrowse(context));
-                dispatch.call('change');
             });
 
-        buttonSection.select('.resolve-button')   // select and propagate data
-            .attr('disabled', (hasAuth ? null : true))
+        buttonSection.select('.close-button')   // select and propagate data
             .text(function(d) {
                 // NOTE: no state is available because keepRight export only exports open errors
-                var andComment = (d.newComment ? '_comment' : '');
-                return t('QA.keepRight.resolve' + andComment);
+                var andComment = (d.newComment !== undefined ? '_comment' : '');
+                return t('QA.keepRight.close' + andComment);
             })
-            .on('click.state', function(d) {
+            .on('click.close', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
@@ -282,30 +191,15 @@ export function uiKeepRightEditor(context) {
             });
 
         buttonSection.select('.ignore-button')   // select and propagate data
-            .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
-                var andComment = (d.newComment ? '_comment' : '');
+                var andComment = (d.newComment !== undefined ? '_comment' : '');
                 return t('QA.keepRight.ignore' + andComment);
             })
-            .on('click.state', function(d) {
+            .on('click.ignore', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
                     d.state = d.state === 'ignore' ? '' : 'ignore';
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-
-        buttonSection.select('.comment-button')   // select and propagate data
-            .attr('disabled', function(d) {
-                return (hasAuth && d.newComment) ? null : true;
-            })
-            .on('click.comment', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var keepRight = services.keepRight;
-                if (keepRight) {
                     keepRight.postKeepRightUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });

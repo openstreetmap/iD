@@ -10,7 +10,6 @@ import { request as d3_request } from 'd3-request';
 
 import { geoExtent, geoVecAdd } from '../geo';
 import { krError } from '../osm';
-import { services } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -326,19 +325,15 @@ export default {
 
 
     postKeepRightUpdate: function(update, callback) {
-        if (!services.osm.authenticated()) {
-            return callback({ message: 'Not Authenticated', status: -3 }, update);
-        }
         if (_krCache.inflight[update.id]) {
-            return callback(
-                { message: 'Error update already inflight', status: -2 }, update);
+            return callback({ message: 'Error update already inflight', status: -2 }, update);
         }
 
         var path = apibase + 'comment.php?';
         if (update.state) {
             path += '&st=' + update.state;
         }
-        if (update.newComment) {
+        if (update.newComment !== undefined) {
             path += '&' + utilQsString({ co: update.newComment });
         }
 
@@ -372,10 +367,12 @@ export default {
         });
     },
 
+
     // get a single error from the cache
     getError: function(id) {
         return _krCache.keepRight[id];
     },
+
 
     // replace a single error in the cache
     replaceError: function(error) {
@@ -385,6 +382,7 @@ export default {
         updateRtree(encodeErrorRtree(error), true); // true = replace
         return error;
     },
+
 
     // remove a single error from the cache
     removeError: function(error) {
