@@ -396,5 +396,11 @@ export default {
 
         delete _krCache.keepRight[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove
+    },
+
+
+    errorURL: function(error) {
+        return apibase + 'report_map.php?schema=' + error.schema + '&error=' + error.id;
     }
+
 };

@@ -425,9 +425,9 @@ export function uiNoteEditor(context) {
     }
 
 
-    noteEditor.note = function(_) {
+    noteEditor.note = function(val) {
         if (!arguments.length) return _note;
-        _note = _;
+        _note = val;
         return noteEditor;
     };
 

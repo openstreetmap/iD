@@ -24,7 +24,6 @@ export function svgKeepRight(projection, context, dispatch) {
         if (svgKeepRight.initialized) return;  // run once
         svgKeepRight.enabled = false;
         svgKeepRight.initialized = true;
-        svgKeepRight.visibleErrors = [30];
     }
 
 
@@ -182,20 +181,6 @@ export function svgKeepRight(projection, context, dispatch) {
     drawKeepRight.supported = function() {
         return !!getService();
     };
-
-
-    drawKeepRight.visibleErrors = function(_) {
-        if (!arguments.length) return svgKeepRight.visibleErrors;
-        svgKeepRight.visibleErrors.push(_);
-        if (svgKeepRight.visibleErrors) {
-            showLayer();
-        } else {
-            hideLayer();
-        }
-        dispatch.call('change');
-        return this;
-    };
-
 
 
     init();

@@ -1,21 +1,21 @@
 import { t } from '../util/locale';
+import { services } from '../services';
 import { svgIcon } from '../svg';
 import { krError } from '../osm';
 
 
-export function uiViewOnKeepRight(context) {
+export function uiViewOnKeepRight() {
     var _error;   // a keepright error
 
 
     function viewOnKeepRight(selection) {
         var url;
-        if (_error instanceof krError) {
-            url = context.connection().keepRightURL(_error);
+        if (services.keepRight && (_error instanceof krError)) {
+            url = services.keepRight.errorURL(_error);
         }
 
-        var data = ((!_error) ? [] : [_error]);
         var link = selection.selectAll('.view-on-keepRight')
-            .data(data, function(d) { return d.id; });
+            .data(url ? [url] : []);
 
         // exit
         link.exit()
@@ -26,7 +26,7 @@ export function uiViewOnKeepRight(context) {
             .append('a')
             .attr('class', 'view-on-keepRight')
             .attr('target', '_blank')
-            .attr('href', url)
+            .attr('href', function(d) { return d; })
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
         linkEnter
@@ -35,9 +35,9 @@ export function uiViewOnKeepRight(context) {
     }
 
 
-    viewOnKeepRight.what = function(_) {
+    viewOnKeepRight.what = function(val) {
         if (!arguments.length) return _error;
-        _error = _;
+        _error = val;
         return viewOnKeepRight;
     };
 

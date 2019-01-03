@@ -71,8 +71,12 @@ export function uiKeepRightEditor(context) {
 
     function keepRightSaveSection(selection) {
         var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isShown = (_error && (isSelected || _error.newComment || _error.comment));
         var saveSection = selection.selectAll('.error-save')
-            .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
+            .data(
+                (isShown ? [_error] : []),
+                function(d) { return d.id + '-' + (d.status || 0); }
+            );
 
         // exit
         saveSection.exit()
@@ -206,9 +210,9 @@ export function uiKeepRightEditor(context) {
     }
 
 
-    keepRightEditor.error = function(_) {
+    keepRightEditor.error = function(val) {
         if (!arguments.length) return _error;
-        _error = _;
+        _error = val;
         return keepRightEditor;
     };
 

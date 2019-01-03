@@ -431,8 +431,9 @@ export default {
         return urlroot + '/note/' + note.id;
     },
 
-    keepRightURL: function(error) {
-        return 'https://www.keepright.at/report_map.php?schema=' + error.schema + '&error=' + error.id;
+
+    noteReportURL: function(note) {
+        return urlroot + '/reports/new?reportable_type=Note&reportable_id=' + note.id;
     },
 
 

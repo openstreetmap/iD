@@ -32,7 +32,7 @@ export function uiKeepRightDetails(context) {
         var details = selection.selectAll('.kr_error-details')
             .data(
                 (_error ? [_error] : []),
-                function(d) { return d.status + d.id; }
+                function(d) { return d.id + '-' + (d.status || 0); }
             );
 
         details.exit()
@@ -69,9 +69,9 @@ export function uiKeepRightDetails(context) {
     }
 
 
-    keepRightDetails.error = function(_) {
+    keepRightDetails.error = function(val) {
         if (!arguments.length) return _error;
-        _error = _;
+        _error = val;
         return keepRightDetails;
     };
 

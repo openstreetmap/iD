@@ -31,13 +31,11 @@ export function uiKeepRightHeader() {
         var header = selection.selectAll('.kr_error-header')
             .data(
                 (_error ? [_error] : []),
-                function(d) { return d.status + d.id; }
+                function(d) { return d.id + '-' + (d.status || 0); }
             );
 
         header.exit()
             .remove();
-
-
 
         var headerEnter = header.enter()
             .append('div')
@@ -62,9 +60,9 @@ export function uiKeepRightHeader() {
     }
 
 
-    keepRightHeader.error = function(_) {
+    keepRightHeader.error = function(val) {
         if (!arguments.length) return _error;
-        _error = _;
+        _error = val;
         return keepRightHeader;
     };
 

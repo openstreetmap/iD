@@ -10,6 +10,7 @@ import {
 } from 'd3-selection';
 
 import { osmEntity, osmNote, krError } from '../osm';
+import { services } from '../services';
 import { uiDataEditor, uiFeatureList, uiInspector, uiNoteEditor, uiKeepRightEditor } from './index';
 import { textDirection } from '../util/locale';
 
@@ -22,7 +23,7 @@ export function uiSidebar(context) {
     var _current;
     var _wasData = false;
     var _wasNote = false;
-    var _was_krError = false;
+    var _wasKRError = false;
 
 
     function sidebar(selection) {
@@ -119,6 +120,11 @@ export function uiSidebar(context) {
                 if (context.mode().id === 'drag-note') return;
                 _wasNote = true;
 
+                var osm = services.osm;
+                if (osm) {
+                    datum = osm.getNote(datum.id);   // marker may contain stale data - get latest
+                }
+
                 sidebar
                     .show(noteEditor.note(datum));
 
@@ -126,10 +132,15 @@ export function uiSidebar(context) {
                     .classed('inspector-hover', true);
 
             } else if (datum instanceof krError) {
-                _was_krError = true;
-                var kr_errors = d3_selectAll('.kr_error');
-                kr_errors
-                    .classed('hover', function(d) { return d === datum; });
+                _wasKRError = true;
+
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    datum = keepRight.getError(datum.id);   // marker may contain stale data - get latest
+                }
+
+                d3_selectAll('.kr_error')
+                    .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar
                     .show(keepRightEditor.error(datum));
@@ -162,14 +173,12 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
 
-            } else if (_wasData || _wasNote) {
+            } else if (_wasData || _wasNote || _wasKRError) {
                 _wasNote = false;
                 _wasData = false;
+                _wasKRError = false;
                 d3_selectAll('.note').classed('hover', false);
-                sidebar.hide();
-            } else if (_was_krError) {
-                d3_selectAll('.kr_error')
-                    .classed('hover', false);
+                d3_selectAll('.kr_error').classed('hover', false);
                 sidebar.hide();
             }
         }
