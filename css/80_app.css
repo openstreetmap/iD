@@ -2431,9 +2431,10 @@ input.key-trap {
 }
 
 
-/* OSM Note Editor
+/* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
-.note-header {
+.note-header,
+.kr_error-header {
     background-color: #f6f6f6;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -2442,7 +2443,8 @@ input.key-trap {
     align-items: center;
 }
 
-.note-header-icon {
+.note-header-icon,
+.kr_error-header-icon {
     background-color: #fff;
     padding: 10px;
     flex: 0 0 62px;
@@ -2452,18 +2454,21 @@ input.key-trap {
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
-[dir='rtl'] .note-header-icon {
+[dir='rtl'] .note-header-icon,
+[dir='rtl'] .kr_error-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
-.note-header-icon .icon-wrap {
+.note-header-icon .icon-wrap,
+.kr_error-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
-.note-header-label {
+.note-header-label,
+.kr_error-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
     flex: 1 1 100%;
@@ -2471,7 +2476,8 @@ input.key-trap {
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
-[dir='rtl'] .note-header-label {
+[dir='rtl'] .note-header-label,
+[dir='rtl'] .kr_error-header-label {
     border-radius: 5px 0 0 5px;
 }
 
@@ -2561,168 +2567,16 @@ input.key-trap {
     float: right;
 }
 
-
-/* Keep Right Errors
-------------------------------------------------------- */
-.kr_error-header-icon .kr_error .kr_error-fill,
-.layer-keepRight .kr_error .kr_error-fill {
-    stroke: #333;
-    stroke-width: 1.3px; /* NOTE: likely a better way to scale the icon stroke */
+.kr_error-details-container {
+    background: #ececec;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-.kr_error_type_40,     /* impossible oneways */
-.kr_error_type_41,
-.kr_error_type_42,
-.kr_error_type_43 {
-    color: #fd007f;
-}
-
-.kr_error_type_50 {    /* almost junctions */
-    color: #c827fe;
-}
-
-.kr_error_type_70,     /* missing tags */
-.kr_error_type_71,
-.kr_error_type_72 {
-    color: #74aeaf;
-}
-
-.kr_error_type_90 {    /* motorway without ref */
-    color: #3124af;
-}
-
-.kr_error_type_100 {   /* place of worship without religion */
-    color: #a80000;
-}
-
-.kr_error_type_110 {   /* poi without name */
-    color: #44650b;
-}
-
-.kr_error_type_120 {   /* way without nodes */
-    color: #99274d;
-}
-
-.kr_error_type_130 {   /* disconnected way */
-    color: #eb7310;
-}
-
-.kr_error_type_150 {   /* railway crossing without tag */
-    color: #7218c1;
-}
-
-.kr_error_type_160 {   /* wrong railway tag */
-    color: #c903ae;
-}
-
-.kr_error_type_170 {   /* FIXME tag */
-    color: #07d40b;
-}
-
-.kr_error_type_180 {   /* relation without type */
-    color: #01ff0a;
-}
-
-.kr_error_type_190,
-.kr_error_type_191,
-.kr_error_type_192,
-.kr_error_type_193,
-.kr_error_type_194,
-.kr_error_type_195,
-.kr_error_type_196,
-.kr_error_type_197,
-.kr_error_type_198 {  /* intersection without junction */
-    color: #e6fcb0;
-}
-
-.kr_error_type_200,
-.kr_error_type_201,
-.kr_error_type_202,
-.kr_error_type_203,
-.kr_error_type_204,
-.kr_error_type_205,
-.kr_error_type_206,
-.kr_error_type_207,
-.kr_error_type_208 {  /* overlapping ways */
-    color: #fdbf6f;
-}
-
-.kr_error_type_210,
-.kr_error_type_211,
-.kr_error_type_212 {  /* self intersecting ways */
-    color: #4a7601;
-}
-
-.kr_error_type_220,
-.kr_error_type_221 {  /* misspelled tag */
-    color: #ef7cf2;
-}
-
-.kr_error_type_230,
-.kr_error_type_231,
-.kr_error_type_232 {  /* layer conflict */
-    color: #b15928;
-}
-
-.kr_error_type_270 {  /* unusual motorway connection */
-    color: #2aaf92;
-}
-
-.kr_error_type_280,   /* boundary issue */
-.kr_error_type_281,
-.kr_error_type_282,
-.kr_error_type_283,
-.kr_error_type_284,
-.kr_error_type_285 {
-    color: #5f47a0;
-}
-
-.kr_error_type_290,   /* restriction issue */
-.kr_error_type_291,
-.kr_error_type_292,
-.kr_error_type_293,
-.kr_error_type_294,
-.kr_error_type_295,
-.kr_error_type_296,
-.kr_error_type_297,
-.kr_error_type_298 {
-    color: #a6cee3;
-}
-
-.kr_error_type_310,    /* roundabout issue */
-.kr_error_type_311,
-.kr_error_type_312,
-.kr_error_type_313 {
-    color: #0550e8;
-}
-
-.kr_error_type_320 {   /* improper _link */
-    color: #28d9bb;
-}
-
-.kr_error_type_350 {   /* improper bridge tag */
-    color: #ffff99;
-}
-
-.kr_error_type_370 {   /* doubled places */
-    color: #ff8fdf;
-}
-
-.kr_error_type_380 {   /* non-physical sport tag */
-    color: #b3b465;
-}
-
-.kr_error_type_400,    /* geometry / turn angles */
-.kr_error_type_401,
-.kr_error_type_402 {
-    color: #b64f69;
-}
-
-.kr_error_type_410,    /* website issue */
-.kr_error_type_411,
-.kr_error_type_412,
-.kr_error_type_413 {
-    color: #b07f7e;
+.kr_error-details-description {
+    margin-bottom: 10px;
 }
 
 
