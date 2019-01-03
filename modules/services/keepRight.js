@@ -21,7 +21,39 @@ var dispatch = d3_dispatch('loaded');
 
 var _krCache;
 var _krZoom = 14;
-var apibase = 'https://www.keepright.at/';
+var _krUrlRoot = 'https://www.keepright.at/';
+var _krLocalize = {
+    node: 'node',
+    way: 'way',
+    relation: 'relation',
+    highway: 'highway',
+    railway: 'railway',
+    waterway: 'waterway',
+    cycleway: 'cycleway',
+    footpath: 'footpath',
+    'cycleway/footpath': 'cycleway_footpath',
+    riverbank: 'riverbank',
+    bridge: 'bridge',
+    tunnel: 'tunnel',
+    place_of_worship: 'place_of_worship',
+    pub: 'pub',
+    restaurant: 'restaurant',
+    school: 'school',
+    university: 'university',
+    hospital: 'hospital',
+    library: 'library',
+    theatre: 'theatre',
+    courthouse: 'courthouse',
+    bank: 'bank',
+    cinema: 'cinema',
+    pharmacy: 'pharmacy',
+    cafe: 'cafe',
+    fast_food: 'fast_food',
+    fuel: 'fuel',
+    from: 'from',
+    to: 'to'
+};
+
 var defaultRuleset = [
     // no 20 - multiple node on same spot - these are mostly boundaries overlapping roads
     30, 40, 50, 60, 70, 90, 100, 110, 120, 130, 150, 160, 170, 180,
@@ -72,13 +104,13 @@ function updateRtree(item, replace) {
 function tokenReplacements(d) {
     if (!(d instanceof krError)) return;
 
+    var htmlRegex = new RegExp(/<\/[a-z][\s\S]*>/);
     var replacements = {};
-    var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
 
     var errorTemplate = errorTypes[d.which_type];
     if (!errorTemplate) {
         /* eslint-disable no-console */
-        console.log('No Template: ', d.error_type);
+        console.log('No Template: ', d.which_type);
         console.log('  ', d.description);
         /* eslint-enable no-console */
         return;
@@ -92,7 +124,7 @@ function tokenReplacements(d) {
     var errorMatch = errorRegex.exec(d.description);
     if (!errorMatch) {
         /* eslint-disable no-console */
-        console.log('Unmatched: ', d.error_type);
+        console.log('Unmatched: ', d.which_type);
         console.log('  ', d.description);
         console.log('  ', errorRegex);
         /* eslint-enable no-console */
@@ -103,13 +135,13 @@ function tokenReplacements(d) {
         var group = errorMatch[i];
         var idType;
 
-        // link IDs if present in the group
         idType = 'IDs' in errorTemplate ? errorTemplate.IDs[i-1] : '';
-        if (idType && group) {
+        if (idType && group) {   // link IDs if present in the group
             group = parseError(group, idType);
-        } else if (html_re.test(group)) {
-            // escape any html in non-IDs
+        } else if (htmlRegex.test(group)) {   // escape any html in non-IDs
             group = '\\' +  group + '\\';
+        } else if (_krLocalize[group]) {   // some replacement strings can be localized
+            group = t('QA.keepRight.error_parts.' + _krLocalize[group]);
         }
 
         replacements['var' + i] = group;
@@ -126,9 +158,9 @@ function parseError(group, idType) {
     }
 
     // arbitrary node list of form: #ID, #ID, #ID...
-    function parseError211(list) {
+    function parseError211(capture) {
         var newList = [];
-        var items = list.split(', ');
+        var items = capture.split(', ');
 
         items.forEach(function(item) {
             // ID has # at the front
@@ -140,10 +172,10 @@ function parseError(group, idType) {
     }
 
     // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
-    function parseError231(list) {
+    function parseError231(capture) {
         var newList = [];
         // unfortunately 'layer' can itself contain commas, so we split on '),'
-        var items = list.split('),');
+        var items = capture.split('),');
 
         items.forEach(function(item) {
             var match = item.match(/\#(\d+)\((.+)\)?/);
@@ -158,9 +190,9 @@ function parseError(group, idType) {
     }
 
     // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
-    function parseError294(list) {
+    function parseError294(capture) {
         var newList = [];
-        var items = list.split(',');
+        var items = capture.split(',');
 
         items.forEach(function(item) {
             var role;
@@ -187,10 +219,21 @@ function parseError(group, idType) {
         return newList.join(', ');
     }
 
+    // may or may not include the string "(including the name 'name')"
+    function parseError370(capture) {
+        if (!capture) return '';
+
+        var match = capture.match(/\(including the name (\'.+\')\)/);
+        if (match !== null && match.length) {
+            return t('QA.keepRight.errorTypes.370.including_the_name', { name: match[1] });
+        }
+        return '';
+    }
+
     // arbitrary node list of form: #ID,#ID,#ID...
-    function parseWarning20(list) {
+    function parseWarning20(capture) {
         var newList = [];
-        var items = list.split(',');
+        var items = capture.split(',');
 
         items.forEach(function(item) {
             // ID has # at the front
@@ -217,6 +260,9 @@ function parseError(group, idType) {
             break;
         case '294':
             group = parseError294(group);
+            break;
+        case '370':
+            group = parseError370(group);
             break;
         case '20':
             group = parseWarning20(group);
@@ -262,7 +308,7 @@ export default {
 
             var rect = tile.extent.rectangle();
             var params = _extend({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
-            var url = apibase + 'export.php?' + utilQsString(params) + '&ch=' + rules;
+            var url = _krUrlRoot + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
             _krCache.inflight[tile.id] = d3_json(url,
                 function(err, data) {
@@ -343,7 +389,7 @@ export default {
 
         // NOTE: This throws a CORS err, but it seems successful.
         // We don't care too much about the response, so this is fine.
-        var url = apibase + 'comment.php?' + utilQsString(params);
+        var url = _krUrlRoot + 'comment.php?' + utilQsString(params);
         _krCache.inflight[d.id] = d3_request(url)
             .post(function(err) {
                 delete _krCache.inflight[d.id];
@@ -402,7 +448,7 @@ export default {
 
 
     errorURL: function(error) {
-        return apibase + 'report_map.php?schema=' + error.schema + '&error=' + error.id;
+        return _krUrlRoot + 'report_map.php?schema=' + error.schema + '&error=' + error.id;
     }
 
 };

@@ -659,19 +659,44 @@ en:
       save_comment: Save Comment
       close_comment: Close and Comment
       ignore_comment: Ignore and Comment
-      entities:
-        node: "Node {id}"
-        way: "Way {id}"
-        relation: "Relation {id}"
+      error_parts:
+        node: node
+        way: way
+        relation: relation
+        highway: highway
+        railway: railway
+        waterway: waterway
+        cycleway: cycleway
+        cycleway_footpath: 'cycleway/footpath'
+        riverbank: riverbank
+        bridge: bridge
+        tunnel: tunnel
+        place_of_worship: 'place of worship'
+        pub: pub
+        restaurant: restaurant
+        school: school
+        university: university
+        hospital: hospital
+        library: library
+        theatre: theatre
+        courthouse: courthouse
+        bank: bank
+        cinema: cinema
+        pharmacy: pharmacy
+        cafe: cafe
+        fast_food: 'fast food'
+        fuel: fuel
+        from: from
+        to: to
       errorTypes:
         20:
           title: 'Multiple nodes on the same spot'
           description: 'There is more than one node in this spot. Node IDs: {var1}.'
         30:
-          title: 'Non-closed areas'
+          title: 'Non-closed area'
           description: 'This way is tagged with "{var1}" and should be a closed loop.'
         40:
-          title: 'Impossible oneways'
+          title: 'Impossible oneway'
           description: 'The first node {var1} of this oneway is not connected to any other way.'
         41:
           description: 'The last node {var1} of this oneway is not connected to any other way.'
@@ -680,13 +705,13 @@ en:
         43:
           description: 'You cannot escape from this node because all ways leading to it are oneway.'
         50:
-          title: 'Almost junctions'
+          title: 'Almost junction'
           description: 'This node is very close but not connected to way {var1}.'
         60:
-          title: 'Deprecated tags'
+          title: 'Deprecated tag'
           description: 'This {var1} uses deprecated tag "{var2}". Please use "{var3}" instead.'
         70:
-          title: 'Missing tags'
+          title: 'Missing tag'
           description: 'This {var1} has an empty tag: "{var2}".'
         71:
           description: 'This way has no tags.'
@@ -720,19 +745,19 @@ en:
           title: 'Railway layer conflict'
           description: 'There are ways in different layers (e.g. tunnel or bridge) meeting at this railway crossing.'
         170:
-          title: 'FIXME tagged items'
+          title: 'FIXME tagged item'
           description: '{var1}'
         180:
           title: 'Relation without type'
           description: 'This relation is missing a "type" tag.'
         190:
-          title: 'Intersection without junctions'
+          title: 'Intersection without junction'
           description: 'This {var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel.'
         200:
           title: 'Overlapping ways'
           description: 'This {var1} overlaps the {var2} {var3}.'
         210:
-          title: 'Self-intersecting ways'
+          title: 'Self-intersecting way'
           description: 'There is an unspecified issue with self intersecting ways.'
         211:
           description: 'This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error.'
@@ -742,7 +767,7 @@ en:
           title: 'Misspelled tag'
           description: 'This {var1} is tagged "{var2}" where "{var3}" looks like "{var4}".'
         221:
-          description: 'This {var1} has a tag with key "{var2}".'
+          description: 'This {var1} has a suspicious tag "{var2}".'
         230:
           title: 'Layer conflict'
           description: 'This node is a junction of ways on different layers.'
@@ -816,19 +841,20 @@ en:
           description: 'This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more.'
         320:
           title: 'Improper link connection'
-          description: 'This way is tagged as "highway={var1}_link" but doesn''t have a connection to any other "{var2}" or "{var3}_link".'
+          description: 'This way is tagged as "{var1}" but doesn''t have a connection to any other "{var2}" or "{var3}".'
         350:
-          title: 'Improper bridge tags'
+          title: 'Improper bridge tag'
           description: 'This bridge doesn''t have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}.'
         360:
-          title: 'Language unknown'
-          description: 'It would be nice if this {var1} had an additional tag "name:XX"="{var2}" where XX shows the language of its name "{var2}".'
+          title: 'Missing local name tag'
+          description: 'It would be nice if this {var1} had a local name tag "name:XX={var2}" where XX shows the language of its common name "{var2}".'
         370:
           title: 'Doubled places'
           description: 'This node has tags in common with the surrounding way {var1} {var2} and seems to be redundant.'
+          including_the_name: "(including the name {name})"
         380:
           title: 'Non-physical use of sport tag'
-          description: 'This way is tagged "sport={var1}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway".'
+          description: 'This way is tagged "{var1}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway".'
         390:
           title: 'Missing tracktype'
           description: This track doesn't have a "tracktype" tag.
@@ -839,7 +865,7 @@ en:
           title: 'Missing turn restriction'
           description: 'Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning.'
         402:
-          title: 'Impossible angles'
+          title: 'Impossible angle'
           description: 'This way bends in a very sharp angle here.'
         410:
           title: 'Website issue'

@@ -169,7 +169,7 @@
       "title": "",
       "severity": "error",
       "description": "The key of this $1's tag is 'key': $2",
-      "regex": "this (node|way|relation)''s tag is ''key'': key=(.+)"
+      "regex": "this (node|way|relation)\\'s tag is \\'key\\': (.+)"
     },
     "230": {
       "title": "layer conflicts",
@@ -214,13 +214,13 @@
       "title": "no closed loop",
       "severity": "error",
       "description": "The boundary of $1 is not closed-loop",
-      "regex": "boundary of (.+)"
+      "regex": "boundary of (.+) is"
     },
     "284": {
       "title": "splitting boundary",
       "severity": "error",
       "description": "The boundary of $1 splits here",
-      "regex": "boundary of (.+)"
+      "regex": "boundary of (.+) splits"
     },
     "285": {
       "title": "admin_level too high",
@@ -262,7 +262,7 @@
       "title": "via is not on the way ends",
       "severity": "error",
       "description": "via (node #$1) is not the first or the last member of (from|to) (way #$3)",
-      "IDs": ["n","w"],
+      "IDs": ["n", "", "w"],
       "regex": "via \\(node #(\\d+)\\) is not the first or the last member of (from|to) \\(way #(\\d+)\\)"
     },
     "296": {
@@ -316,7 +316,7 @@
       "title": "*_link connections",
       "severity": "error",
       "description": "This way is tagged as highway=$1_link but doesn't have a connection to any other $1 or $1_link",
-      "regex": "highway=(\\w+)_link"
+      "regex": "(highway=.+) but doesn't have a connection to any other (.+) or (.+)"
     },
     "350": {
       "title": "bridge-tags",
@@ -335,14 +335,14 @@
       "title": "doubled places",
       "severity": "error",
       "description": "This node has tags in common with the surrounding way #$1 ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
-      "IDs": ["w"],
+      "IDs": ["w","370"],
       "regex": "way #(\\d+) ((?:\\(including the name '.+'\\) )?)and"
     },
     "380": {
       "title": "non-physical use of sport-tag",
       "severity": "error",
       "description": "This way is tagged sport=$1 but has no physical tag like e.g. leisure, building, amenity or highway",
-      "regex": "sport=(\\w+) but"
+      "regex": "(sport=.+) but"
     },
     "390": {
       "title": "missing tracktype",
@@ -381,7 +381,7 @@
       "title": "domain hijacking",
       "severity": "error",
       "description": "Possible domain squatting: <a target=\"_blank\" href=\"$1\">$1</a>. Suspicious text is: \"$2\"",
-      "regex": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''"
+      "regex": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: &quot;(.+)&quot;"
     },
     "413": {
       "title": "non-match",
