@@ -351,7 +351,7 @@ export function rendererMap(context) {
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
-        surface.selectAll('.layer-touch *').remove();
+        surface.selectAll('.layer-touch:not(.markers) *').remove();
 
         var mode = context.mode();
         if (mode && mode.id !== 'save' && mode.id !== 'select-note' &&

@@ -72,6 +72,7 @@ export function modeSelectNote(context, selectedNoteID) {
         } else {
             selection
                 .classed('selected', true);
+
             context.selectedNoteID(selectedNoteID);
         }
     }

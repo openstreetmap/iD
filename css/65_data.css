@@ -1,28 +1,5 @@
 
 /* OSM Notes and KeepRight Layers */
-.layer-keepRight,
-.layer-notes {
-    pointer-events: none;
-}
-.layer-keepRight .kr_error,
-.layer-notes .note * {
-    pointer-events: none;
-}
-.mode-browse .layer-notes .note .note-fill,
-.mode-select .layer-notes .note .note-fill,
-.mode-select-data .layer-notes .note .note-fill,
-.mode-select-note .layer-notes .note .note-fill,
-.layer-keepRight .kr_error .kr_error-fill,
-.layer-notes .note .note-fill {
-    pointer-events: visible;
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-point.png), pointer; /* FF */
-}
-
-.note-header-icon .note-shadow,
-.layer-notes .note .note-shadow {
-    color: #000;
-}
 
 .kr_error-header-icon .kr_error-fill,
 .layer-keepRight .kr_error .kr_error-fill {
@@ -32,19 +9,19 @@
 
 .note-header-icon .note-fill,
 .layer-notes .note .note-fill {
-    color: #ff3300;
+    color: #f30;
     stroke: #333;
     stroke-width: 40px;
 }
 .note-header-icon.new .note-fill,
 .layer-notes .note.new .note-fill {
-    color: #ffee00;
+    color: #fe0;
     stroke: #333;
     stroke-width: 40px;
 }
 .note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
-    color: #55dd00;
+    color: #5d0;
     stroke: #333;
     stroke-width: 40px;
 }
@@ -88,7 +65,7 @@
 .kr_error_type_110,    /* poi without name */
 .kr_error_type_150,    /* railway crossing without tag */
 .kr_error_type_220,    /* misspelled tag */
-.kr_error_type_380 {    /* non-physical sport tag */
+.kr_error_type_380 {   /* non-physical sport tag */
     color: #5d0;
 }
 
