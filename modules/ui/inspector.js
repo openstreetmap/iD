@@ -18,12 +18,12 @@ export function uiInspector(context) {
         presetList
             .entityID(_entityID)
             .autofocus(_newFeature)
-            .on('choose', setPreset);
+            .on('choose', inspector.setPreset);
 
         entityEditor
             .state(_state)
             .entityID(_entityID)
-            .on('choose', showList);
+            .on('choose', inspector.showList);
 
         var wrap = selection.selectAll('.panewrap')
             .data([0]);
@@ -72,25 +72,25 @@ export function uiInspector(context) {
                 .what(context.hasEntity(_entityID))
             );
 
-
-        function showList(preset) {
+        inspector.showList = function(preset) {
             wrap.transition()
                 .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
 
             presetPane
                 .call(presetList.preset(preset).autofocus(true));
-        }
+        };
 
-
-        function setPreset(preset) {
+        inspector.setPreset = function(preset) {
             wrap.transition()
                 .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
             editorPane
                 .call(entityEditor.preset(preset));
-        }
+        };
     }
 
+    inspector.showList = function() {};
+    inspector.setPreset = function() {};
 
     inspector.state = function(_) {
         if (!arguments.length) return _state;

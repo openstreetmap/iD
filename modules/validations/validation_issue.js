@@ -1,4 +1,5 @@
 import _isObject from 'lodash-es/isObject';
+import _map from 'lodash-es/map';
 import { osmEntity } from '../osm';
 
 var ValidationIssueType = Object.freeze({
@@ -25,7 +26,10 @@ export { ValidationIssueType, ValidationIssueSeverity };
 export function validationIssue(attrs) {
 
     this.id = function () {
-        return this.type + osmEntity.key(this.entities[0]);
+        var entityKeys = _map(this.entities, function(entity) {
+            return osmEntity.key(entity);
+        });
+        return this.type + entityKeys.join();
     };
 
     if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
@@ -43,6 +47,23 @@ export function validationIssue(attrs) {
     this.tooltip = attrs.tooltip;
     this.entities = attrs.entities;  // expect an array of entities
     this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
+    this.info = attrs.info; // an object containing arbitrary extra information 
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
+
+    if (this.fixes) {
+        for (var i=0; i<this.fixes.length; i++) {
+            // add a reference in the fix to the issue for use in fix actions
+            this.fixes[i].issue = this;
+        }
+    }
     this.source = attrs.source;
+}
+
+export function validationIssueFix(attrs) {
+
+    this.title = attrs.title;
+    this.action = attrs.action;
+
+    // the issue this fix is for
+    this.issue = null;
 }

@@ -166,7 +166,6 @@ export function uiSidebar(context) {
             }
         }
 
-
         sidebar.hover = _throttle(hover, 200);
 
 
@@ -183,9 +182,9 @@ export function uiSidebar(context) {
             sidebar.hide();
 
             if (id) {
+                var entity = context.entity(id);
                 // uncollapse the sidebar
                 if (selection.classed('collapsed')) {
-                    var entity = context.entity(id);
                     var extent = entity.extent(context.graph());
                     sidebar.expand(sidebar.intersects(extent));
                 }
@@ -206,6 +205,10 @@ export function uiSidebar(context) {
                     inspectorWrap
                         .call(inspector, newFeature);
                 }
+
+                sidebar.showPresetList = function() {
+                    inspector.showList(context.presets().match(entity, context.graph()));
+                };
 
             } else {
                 inspector
@@ -310,7 +313,7 @@ export function uiSidebar(context) {
         resizer.on('dblclick', sidebar.toggle);
     }
 
-
+    sidebar.showPresetList = function() {};
     sidebar.hover = function() {};
     sidebar.hover.cancel = function() {};
     sidebar.intersects = function() {};
