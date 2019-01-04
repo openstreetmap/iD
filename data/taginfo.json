@@ -794,7 +794,7 @@
     {
       "key": "amenity",
       "value": "pharmacy",
-      "description": "🄿 Pharmacy",
+      "description": "🄿 Pharmacy Counter",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pharmacy-15.svg?sanitize=true"
     },

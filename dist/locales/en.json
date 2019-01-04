@@ -3688,7 +3688,7 @@
                     "terms": "interactive kiosk,ekiosk,atm,bill pay,tax pay,phone pay,finance,cash,money transfer,card"
                 },
                 "amenity/pharmacy": {
-                    "name": "Pharmacy",
+                    "name": "Pharmacy Counter",
                     "terms": "apothecary,drug*,med*,prescription"
                 },
                 "amenity/place_of_worship": {

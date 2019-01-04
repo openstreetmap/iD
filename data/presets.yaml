@@ -2553,9 +2553,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Payment Terminal'', separated by commas>'
       amenity/pharmacy:
         # amenity=pharmacy
-        name: Pharmacy
+        name: Pharmacy Counter
         # 'terms: apothecary,drug*,med*,prescription'
-        terms: '<translate with synonyms or related terms for ''Pharmacy'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Pharmacy Counter'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
         name: Place of Worship
