@@ -88,8 +88,7 @@
 .kr_error_type_110,    /* poi without name */
 .kr_error_type_150,    /* railway crossing without tag */
 .kr_error_type_220,    /* misspelled tag */
-.kr_error_type_380,    /* non-physical sport tag */
-.kr_error_type_390 {   /* missing tracktype */
+.kr_error_type_380 {    /* non-physical sport tag */
     color: #5d0;
 }
 
@@ -123,7 +122,8 @@
     color: #ace;
 }
 
-.kr_error_type_300 {   /* missing maxspeed */
+.kr_error_type_300,    /* missing maxspeed */
+.kr_error_type_390 {   /* missing tracktype */
     color: #090;
 }
 
