@@ -24,8 +24,6 @@ import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
 import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
 
-
-
 export var areaKeys = {};
 
 export function setAreaKeys(value) {
@@ -304,6 +302,9 @@ export function coreContext() {
     var presets;
     context.presets = function() { return presets; };
 
+    /* Validation Rules */
+    var rules = [];
+    context.rules = function() { return rules; }
 
     /* Map */
     var map;
@@ -496,12 +497,12 @@ export function coreContext() {
         }
 
         if (context.validationRules){
+            services.maprules.init(context.presets().areaKeys());
             context.issueManager().setCustomName(customRuleName);
             context.issueManager().setCustomUrl(customRuleUrl);
 
             d3_json(customRuleUrl, function (err, mapcss) {
                 if (err) return;
-                services.maprules.init(context.presets().areaKeys());
                 _each(mapcss, function(mapcssSelector) {
                     return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
                 });

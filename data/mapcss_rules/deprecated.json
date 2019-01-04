@@ -1,0 +1,53 @@
+[
+	{
+        "geometry": "node",
+        "equals": {
+            "highway": "ford"
+        },
+        "warning": "'highway=ford' is deprecated, use 'highway=*' + 'ford=yes' instead"
+    },
+	{
+        "geometry": "way",
+        "equals": {
+            "highway": "ford"
+        },
+        "warning": "'highway=ford' is deprecated, use 'highway=*' + 'ford=yes' instead"
+    },
+    {
+        "geometry": "way",
+        "equals": {
+            "type": "palm"
+        },
+        "warning": "'type=palm' is deprecated, use 'leaf_type' or 'trees' or 'species' instead"
+    },
+    {
+        "geometry": "node",
+        "equals": {
+            "type": "palm"
+        },
+        "warning": "'type=palm' is deprecated, use 'leaf_type' or 'trees' or 'species' instead"
+    },
+    {
+        "geometry": "way",
+        "presence": "type",
+        "equals": {
+            "man_made": "pipeline"
+        },
+        "warning": "'type' is deprecated, use 'substance' instead"
+    },
+    {
+        "geometry": "node",
+        "presence": "type",
+        "equals": {
+            "pipeline": "marker"
+        },
+        "warning": "'type' is deprecated, use 'substance' instead"
+    },
+    {
+        "geometry": "way",
+        "equals": {
+            "sidewalk": "yes"
+        },
+        "warning": "'sidewalk=yes' is unspecific. Please replace 'yes' with ''left'', ''right'' or ''both''."
+    }
+]

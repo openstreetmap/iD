@@ -1,0 +1,17 @@
+[
+    {
+        "geometry": "way",
+        "equals": {
+            "power": "transformer"
+        },
+        "warning": "Power Transformers should always be on a node"
+    },
+    {
+        "geometry": "node",
+        "equals": {
+            "power": "transformer"
+        },
+        "presence": "voltage",
+        "warning": "On Power Transformers use 'voltage:primary=* and 'voltage:secondary=*' in place of 'voltage'"
+    }
+]

@@ -1094,6 +1094,35 @@
                 "tooltip": "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
             },
             "rules": {
+                "validation": {
+                    "header": "Validation Rules",
+                    "validators": {
+                        "deprecated": {
+                            "title": "Deprecated Tagging",
+                            "tooltip": "Checks for deprecated tags"
+                        },
+                        "multiple": {
+                            "title": "Multiple values",
+                            "tooltip": "Checks for wrong multiple values"
+                        },
+                        "relation": {
+                            "title": "Relations",
+                            "tooltip": "Checks for errors on relations"
+                        },
+                        "religion": {
+                            "title": "Religion",
+                            "tooltip": "Checks for errors on religious objects"
+                        },
+                        "unnecessary": {
+                            "title": "Unncessary tags",
+                            "tooltip": "Checks for unnecessary tags"
+                        },
+                        "power": {
+                            "title": "Power (Osmose-QA)",
+                            "tooltip": "Checks Power Transformers"
+                        }
+                    }
+                },
                 "custom": {
                     "header": "Custom Validation Rules",
                     "tooltip": "Drag and drop a data file onto the page, or click the button to setup",

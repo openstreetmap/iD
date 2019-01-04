@@ -1,0 +1,20 @@
+[
+    {
+        "geometry": "way",
+        "presence": "waterway",
+        "equals": {
+            "oneway": "-1"
+        },
+        "warning": "'oneway' is unnecessary for 'waterway'. The flow direction is defined by the way direction."
+    },
+    {
+        "geometry": "node",
+        "equals": {
+            "emergency": "fire_hydrant"
+        },
+        "notEquals": {
+            "fire_hydrant:count": "1"
+        },
+        "warning": "'fire_hydrant:count=1' is unnecessary for 'emergency=fire_hydrant'"
+    }
+]

@@ -18,6 +18,7 @@ import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiSettingsCustomRule } from './settings/custom_rule';
 import { uiTooltipHtml } from './tooltipHtml';
+import { mapcss } from '../../data/mapcss_rules'
 
 export function uiIssues(context) {
     var key = t('issues.key');
@@ -26,6 +27,7 @@ export function uiIssues(context) {
     var settingsCustomRule = uiSettingsCustomRule(context)
         .on('change', customChanged);
     var _shown = false;
+    var _validationContainer = d3_select(null);
     var _customRulesContainer = d3_select(null);
     var customRuleName = context.storage('settings-custom-rule-name') ? context.storage('settings-custom-rule-name') : t('issues.rules.custom.title');
 
@@ -105,7 +107,6 @@ export function uiIssues(context) {
     }
 
     function drawIssuesList(selection) {
-
         var issues = context.issueManager().getIssues();
 
         /*validations = _reduce(issues, function(validations, val) {
@@ -197,6 +198,9 @@ export function uiIssues(context) {
 
         _issuesList
             .call(drawIssuesList);
+
+        _validationContainer
+            .call(drawValidationRules);
 
         _customRulesContainer
             .call(drawCustomRulesItems);
@@ -300,6 +304,15 @@ export function uiIssues(context) {
 
         content
             .append('div')
+            .attr('class', 'issues-validation-rules')
+            .call(uiDisclosure(context, 'validation_rules', true)
+                .title(t('issues.rules.validation.header'))
+                .content(renderValidationRules)
+            );
+
+
+        content
+            .append('div')
             .attr('class', 'issues-custom-rules')
             .call(uiDisclosure(context, 'custom_rules', true)
                 .title(t('issues.rules.custom.header'))
@@ -314,6 +327,78 @@ export function uiIssues(context) {
         uiIssues.hidePane = hidePane;
         uiIssues.togglePane = togglePane;
         uiIssues.setVisible = setVisible;
+    }
+
+    function renderValidationRules(selection) {
+        var container = selection.selectAll('.validation-container')
+            .data([0]);
+
+        _validationContainer = container.enter()
+            .append('div')
+            .attr('class', 'validation-container')
+            .merge(container);
+    }
+
+    function drawValidationRules(selection) {
+        var validationRules = Object.keys(mapcss.rules);
+
+        var ul = selection
+            .selectAll('.rule-list')
+            .data([0]);
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list rule-list')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item')
+            .data(validationRules);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', function(d) {
+                return 'list-item list-item-' + d;
+            });
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this)
+                    .call(tooltip()
+                        .title(t('issues.rules.validation.validators.' + d + '.tooltip'))
+                        .placement('bottom')
+                    );
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function(d) {
+                if (d3_select(this).property('checked')){
+                    context.issueManager().removeSourceIgnore(d);
+                } else {
+                    context.issueManager().ignoreSource(d);
+                }
+            });
+
+        labelEnter
+            .append('span')
+            .text(function(d) {
+                return t('issues.rules.validation.validators.' + d + '.title');
+            });
+
+        li
+            .merge(liEnter)
+            .classed('active', function(d) {
+                return !context.issueManager().ignoreIncludes(d);
+            })
+            .selectAll('input')
+            .property('checked', function(d) {
+                return !context.issueManager().ignoreIncludes(d);
+            });
     }
 
     function renderCustomRules(selection) {

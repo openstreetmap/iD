@@ -2,6 +2,8 @@ import _isMatch from 'lodash-es/isMatch';
 import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
+import { mapcss } from '../../data/mapcss_rules';
+import _each from 'lodash-es/each';
 
 import {
     ValidationIssueType,
@@ -103,9 +105,15 @@ var buildLineKeys = function() {
 export default {
     init: function(areaKeys) {
         this._ruleChecks  = buildRuleChecks();
-        this._validationRules = [];
         this._areaKeys = areaKeys;
         this._lineKeys = buildLineKeys();
+        this._validationRules = [];
+        $scope = this;
+        Object.keys(mapcss.rules).forEach(function(name) {
+             _each(mapcss.rules[name].default, function(mapcssSelector) {
+                $scope.addRule(mapcssSelector, name);
+            });
+        });
     },
     // list of rules only relevant to tag checks...
     filterRuleChecks: function(selector) {
