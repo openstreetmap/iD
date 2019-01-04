@@ -3689,7 +3689,7 @@
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy Counter",
-                    "terms": "apothecary,drug*,med*,prescription"
+                    "terms": "apothecary,drug store,drugstore,med*,prescription"
                 },
                 "amenity/place_of_worship": {
                     "name": "Place of Worship",
@@ -6669,7 +6669,7 @@
                 },
                 "shop/chemist": {
                     "name": "Drugstore",
-                    "terms": "apothecary,med*,drug*,gift"
+                    "terms": "apothecary,beauty,drug store,drugstore,gift,hair,med*,pharmacy,prescription,tooth"
                 },
                 "shop/chocolate": {
                     "name": "Chocolate Store",

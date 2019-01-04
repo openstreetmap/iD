@@ -17,9 +17,15 @@
     },
     "terms": [
         "apothecary",
+        "beauty",
+        "drug store",
+        "drugstore",
+        "gift",
+        "hair",
         "med*",
-        "drug*",
-        "gift"
+        "pharmacy",
+        "prescription",
+        "tooth"
     ],
     "name": "Drugstore"
 }
