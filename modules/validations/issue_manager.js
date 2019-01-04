@@ -81,7 +81,7 @@ export function IssueManager(context) {
 
     self.ignoreIncludes = function(src) {
         return ignore.includes(src);
-    }
+    };
 
     self.validate = function() {
         var changes = context.history().changes();

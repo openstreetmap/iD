@@ -108,7 +108,7 @@ export default {
         this._areaKeys = areaKeys;
         this._lineKeys = buildLineKeys();
         this._validationRules = [];
-        $scope = this;
+        var $scope = this;
         Object.keys(mapcss.rules).forEach(function(name) {
              _each(mapcss.rules[name].default, function(mapcssSelector) {
                 $scope.addRule(mapcssSelector, name);

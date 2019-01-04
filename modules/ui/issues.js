@@ -18,7 +18,7 @@ import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiSettingsCustomRule } from './settings/custom_rule';
 import { uiTooltipHtml } from './tooltipHtml';
-import { mapcss } from '../../data/mapcss_rules'
+import { mapcss } from '../../data/mapcss_rules';
 
 export function uiIssues(context) {
     var key = t('issues.key');
@@ -499,7 +499,7 @@ export function uiIssues(context) {
                 var reader = new FileReader();
                 reader.onload = (function() {
                     return function(e) {
-                        if(extension === '.json'){
+                        if (extension === '.json') {
                             addJsonRules(JSON.parse(e.target.result));
                        }
                     };

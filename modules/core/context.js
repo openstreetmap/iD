@@ -302,10 +302,6 @@ export function coreContext() {
     var presets;
     context.presets = function() { return presets; };
 
-    /* Validation Rules */
-    var rules = [];
-    context.rules = function() { return rules; }
-
     /* Map */
     var map;
     context.map = function() { return map; };
