@@ -854,7 +854,7 @@ en:
           including_the_name: "(including the name {name})"
         380:
           title: 'Non-physical use of sport tag'
-          description: 'This way is tagged "{var1}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway".'
+          description: 'This way is tagged "{var1}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway").'
         390:
           title: 'Missing tracktype'
           description: This track doesn't have a "tracktype" tag.
