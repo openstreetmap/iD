@@ -18,13 +18,15 @@ export function uiKeepRightDetails(context) {
         var et = dataEn.QA.keepRight.errorTypes[errorType];
         var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
 
+        var detail;
         if (et && et.description) {
-            return t('QA.keepRight.errorTypes.' + errorType + '.description', d.replacements);
+            detail = t('QA.keepRight.errorTypes.' + errorType + '.description', d.replacements);
         } else if (pt && pt.description) {
-            return t('QA.keepRight.errorTypes.' + parentErrorType + '.description', d.replacements);
+            detail = t('QA.keepRight.errorTypes.' + parentErrorType + '.description', d.replacements);
         } else {
-            return unknown;
+            detail = unknown;
         }
+        return detail.substr(0, 1).toUpperCase() + detail.substr(1);
     }
 
 
