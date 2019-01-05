@@ -1,27 +1,13 @@
 [
 	{
-        "geometry": "node",
-        "equals": {
-            "highway": "ford"
-        },
-        "warning": "'highway=ford' is deprecated, use 'highway=*' + 'ford=yes' instead"
-    },
-	{
-        "geometry": "way",
+        "geometry": ["node", "way"],
         "equals": {
             "highway": "ford"
         },
         "warning": "'highway=ford' is deprecated, use 'highway=*' + 'ford=yes' instead"
     },
     {
-        "geometry": "way",
-        "equals": {
-            "type": "palm"
-        },
-        "warning": "'type=palm' is deprecated, use 'leaf_type' or 'trees' or 'species' instead"
-    },
-    {
-        "geometry": "node",
+        "geometry": ["node","way"],
         "equals": {
             "type": "palm"
         },
