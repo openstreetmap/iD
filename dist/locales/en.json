@@ -501,6 +501,7 @@
             "no_documentation_key": "There is no documentation available for this key",
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
+            "view_on_keepRight": "View on keepright.at",
             "all_fields": "All fields",
             "all_tags": "All tags",
             "all_members": "All members",
@@ -581,6 +582,10 @@
                 "notes": {
                     "tooltip": "Note data from OpenStreetMap",
                     "title": "OpenStreetMap notes"
+                },
+                "keepRight": {
+                    "tooltip": "Automatically detected map issues from keepright.at",
+                    "title": "KeepRight Issues"
                 },
                 "custom": {
                     "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
@@ -782,6 +787,306 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
+        "QA": {
+            "keepRight": {
+                "title": "KeepRight Error",
+                "detail_title": "Error",
+                "detail_description": "Description",
+                "comment": "Comment",
+                "comment_placeholder": "Enter a comment to share with other users.",
+                "close": "Close (Error Fixed)",
+                "ignore": "Ignore (Not an Error)",
+                "save_comment": "Save Comment",
+                "close_comment": "Close and Comment",
+                "ignore_comment": "Ignore and Comment",
+                "error_parts": {
+                    "node": "node",
+                    "way": "way",
+                    "relation": "relation",
+                    "highway": "highway",
+                    "railway": "railway",
+                    "waterway": "waterway",
+                    "cycleway": "cycleway",
+                    "cycleway_footpath": "cycleway/footpath",
+                    "riverbank": "riverbank",
+                    "bridge": "bridge",
+                    "tunnel": "tunnel",
+                    "place_of_worship": "place of worship",
+                    "pub": "pub",
+                    "restaurant": "restaurant",
+                    "school": "school",
+                    "university": "university",
+                    "hospital": "hospital",
+                    "library": "library",
+                    "theatre": "theatre",
+                    "courthouse": "courthouse",
+                    "bank": "bank",
+                    "cinema": "cinema",
+                    "pharmacy": "pharmacy",
+                    "cafe": "cafe",
+                    "fast_food": "fast food",
+                    "fuel": "fuel",
+                    "from": "from",
+                    "to": "to"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "Multiple nodes on the same spot",
+                        "description": "There is more than one node in this spot. Node IDs: {var1}."
+                    },
+                    "30": {
+                        "title": "Non-closed area",
+                        "description": "This way is tagged with \"{var1}\" and should be a closed loop."
+                    },
+                    "40": {
+                        "title": "Impossible oneway",
+                        "description": "The first node {var1} of this oneway is not connected to any other way."
+                    },
+                    "41": {
+                        "description": "The last node {var1} of this oneway is not connected to any other way."
+                    },
+                    "42": {
+                        "description": "You cannot reach this node because all ways leading from it are oneway."
+                    },
+                    "43": {
+                        "description": "You cannot escape from this node because all ways leading to it are oneway."
+                    },
+                    "50": {
+                        "title": "Almost junction",
+                        "description": "This node is very close but not connected to way {var1}."
+                    },
+                    "60": {
+                        "title": "Deprecated tag",
+                        "description": "This {var1} uses deprecated tag \"{var2}\". Please use \"{var3}\" instead."
+                    },
+                    "70": {
+                        "title": "Missing tag",
+                        "description": "This {var1} has an empty tag: \"{var2}\"."
+                    },
+                    "71": {
+                        "description": "This way has no tags."
+                    },
+                    "72": {
+                        "description": "This node is not member of any way and doesn't have any tags."
+                    },
+                    "73": {
+                        "description": "This way has a \"{var1}\" tag but no \"highway\" tag."
+                    },
+                    "74": {
+                        "description": "This {var1} has an empty tag: \"{var2}\"."
+                    },
+                    "75": {
+                        "description": "This {var1} has a name \"{var2}\" but no other tags."
+                    },
+                    "90": {
+                        "title": "Motorway without ref tag",
+                        "description": "This way is tagged as a motorway and therefore needs a \"ref\", \"nat_ref\", or \"int_ref\" tag."
+                    },
+                    "100": {
+                        "title": "Place of worship without religion",
+                        "description": "This {var1} is tagged as a place of worship and therefore needs a religion tag."
+                    },
+                    "110": {
+                        "title": "Point of interest without name",
+                        "description": "This node is tagged as a \"{var1}\" and therefore needs a name tag."
+                    },
+                    "120": {
+                        "title": "Way without nodes",
+                        "description": "This way has just one single node."
+                    },
+                    "130": {
+                        "title": "Disconnected way",
+                        "description": "This way is not connected to the rest of the map."
+                    },
+                    "150": {
+                        "title": "Railway crossing without tag",
+                        "description": "This crossing of a highway and a railway needs to be tagged as \"railway=crossing\" or \"railway=level_crossing\"."
+                    },
+                    "160": {
+                        "title": "Railway layer conflict",
+                        "description": "There are ways in different layers (e.g. tunnel or bridge) meeting at this railway crossing."
+                    },
+                    "170": {
+                        "title": "FIXME tagged item",
+                        "description": "{var1}"
+                    },
+                    "180": {
+                        "title": "Relation without type",
+                        "description": "This relation is missing a \"type\" tag."
+                    },
+                    "190": {
+                        "title": "Intersection without junction",
+                        "description": "This {var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel."
+                    },
+                    "200": {
+                        "title": "Overlapping ways",
+                        "description": "This {var1} overlaps the {var2} {var3}."
+                    },
+                    "210": {
+                        "title": "Self-intersecting way",
+                        "description": "There is an unspecified issue with self intersecting ways."
+                    },
+                    "211": {
+                        "description": "This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error."
+                    },
+                    "212": {
+                        "description": "This way has only two different nodes and contains one of them more than once."
+                    },
+                    "220": {
+                        "title": "Misspelled tag",
+                        "description": "This {var1} is tagged \"{var2}\" where \"{var3}\" looks like \"{var4}\"."
+                    },
+                    "221": {
+                        "description": "This {var1} has a suspicious tag \"{var2}\"."
+                    },
+                    "230": {
+                        "title": "Layer conflict",
+                        "description": "This node is a junction of ways on different layers."
+                    },
+                    "231": {
+                        "description": "This node is a junction of ways on different layers: {var1}.",
+                        "layer": "(layer: {layer})"
+                    },
+                    "232": {
+                        "description": "This {var1} is tagged with \"layer={var2}\". This need not be an error but it looks strange."
+                    },
+                    "270": {
+                        "title": "Unusual motorway connection",
+                        "description": "This node is a junction of a motorway and a highway other than \"motorway\", \"motorway_link\", \"trunk\", \"rest_area\", or \"construction\". Connection to \"service\" or \"unclassified\" is only valid if it has \"access=no/private\", or it leads to a motorway service area, or if it is a \"service=parking_aisle\"."
+                    },
+                    "280": {
+                        "title": "Boundary issue",
+                        "description": "There is an unspecified issue with this boundary."
+                    },
+                    "281": {
+                        "title": "Boundary missing name",
+                        "description": "This boundary has no name."
+                    },
+                    "282": {
+                        "title": "Boundary missing admin level",
+                        "description": "The boundary of {var1} has no valid numeric admin_level. Please do not mix admin levels (e.g. \"6;7\"). Always tag the lowest admin_level of all boundaries."
+                    },
+                    "283": {
+                        "title": "Boundary not a closed loop",
+                        "description": "The boundary of {var1} is not a closed loop."
+                    },
+                    "284": {
+                        "title": "Boundary is split",
+                        "description": "The boundary of {var1} splits here."
+                    },
+                    "285": {
+                        "title": "Boundary admin_level too high",
+                        "description": "This boundary way has \"admin_level={var1}\" but belongs to a relation with lower \"admin_level\" (e.g. higher priority); it should have the lowest \"admin_level\" of all relations."
+                    },
+                    "290": {
+                        "title": "Restriction issue",
+                        "description": "There is an unspecified issue with this restriction."
+                    },
+                    "291": {
+                        "title": "Restriction missing type",
+                        "description": "This turn restriction has an unrecognized restriction type."
+                    },
+                    "292": {
+                        "title": "Restriction missing \"from\" way",
+                        "description": "A turn restriction needs exactly one \"from\" member. This one has {var1}."
+                    },
+                    "293": {
+                        "title": "Restriction missing \"to\" way",
+                        "description": "A turn restriction needs exactly one \"to\" member. This one has {var1}."
+                    },
+                    "294": {
+                        "title": "Restriction \"from\" or \"to\" is not a way",
+                        "description": "\"from\" and \"to\" members of turn restrictions need to be ways. {var1}."
+                    },
+                    "295": {
+                        "title": "Restriction \"via\" is not an endpoint",
+                        "description": "\"via\" (node {var1}) is not the first or the last member of \"{var2}\" (way {var3})."
+                    },
+                    "296": {
+                        "title": "Unusual restriction angle",
+                        "description": "Restriction type is \"{var1}\" but angle is {var2} degrees. Maybe the restriction type is not appropriate?"
+                    },
+                    "297": {
+                        "title": "Wrong direction of to member",
+                        "description": "Wrong direction of \"to\" way {var1}."
+                    },
+                    "298": {
+                        "title": "Redundant restriction - oneway",
+                        "description": "Entry already prohibited by \"oneway\" tag on {var1}."
+                    },
+                    "300": {
+                        "title": "Missing maxspeed",
+                        "description": "This road is missing a \"maxspeed\" tag and is tagged as motorway, trunk, primary, or secondary."
+                    },
+                    "310": {
+                        "title": "Roundabout issue",
+                        "description": "There is an unspecified issue with this roundabout."
+                    },
+                    "311": {
+                        "title": "Roundabout not closed loop",
+                        "description": "This way is part of a roundabout but is not closed-loop. (Split carriageways approaching a roundabout should not be tagged as roundabout)."
+                    },
+                    "312": {
+                        "title": "Roundabout wrong direction",
+                        "description": "If this {var1} is in a country with {var2}-hand traffic then its orientation goes the wrong way around."
+                    },
+                    "313": {
+                        "title": "Roundabout weakly connected",
+                        "description": "This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more."
+                    },
+                    "320": {
+                        "title": "Improper link connection",
+                        "description": "This way is tagged as \"{var1}\" but doesn't have a connection to any other \"{var2}\" or \"{var3}\"."
+                    },
+                    "350": {
+                        "title": "Improper bridge tag",
+                        "description": "This bridge doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}."
+                    },
+                    "360": {
+                        "title": "Missing local name tag",
+                        "description": "It would be nice if this {var1} had a local name tag \"name:XX={var2}\" where XX shows the language of its common name \"{var2}\"."
+                    },
+                    "370": {
+                        "title": "Doubled places",
+                        "description": "This node has tags in common with the surrounding way {var1} {var2} and seems to be redundant.",
+                        "including_the_name": "(including the name {name})"
+                    },
+                    "380": {
+                        "title": "Non-physical use of sport tag",
+                        "description": "This way is tagged \"{var1}\" but has no physical tag (e.g. \"leisure\", \"building\", \"amenity\", or \"highway\"."
+                    },
+                    "390": {
+                        "title": "Missing tracktype",
+                        "description": "This track doesn't have a \"tracktype\" tag."
+                    },
+                    "400": {
+                        "title": "Geometry issue",
+                        "description": "There is an unspecified issue with the geometry here."
+                    },
+                    "401": {
+                        "title": "Missing turn restriction",
+                        "description": "Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning."
+                    },
+                    "402": {
+                        "title": "Impossible angle",
+                        "description": "This way bends in a very sharp angle here."
+                    },
+                    "410": {
+                        "title": "Website issue",
+                        "description": "There is an unspecified issue with a contact website or URL."
+                    },
+                    "411": {
+                        "description": "The URL {var1} cannot be opened (HTTP status code {var2})."
+                    },
+                    "412": {
+                        "description": "Possible domain squatting: The URL has suspicious text: \"{var1}\"."
+                    },
+                    "413": {
+                        "description": "Possible non-match. Content of the URL did not contain these keywords: ({var1})."
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
             "title": "Photo Overlay (Bing Streetside)",
@@ -1008,6 +1313,14 @@
                 "using": "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data.",
                 "tracing": "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add.",
                 "upload": "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
+            },
+            "qa": {
+                "title": "Quality Assurance",
+                "intro": "*Quality Assurance* (Q/A) 3rd party tools help lead to better quality of OSM data. They list automatically deteted bugs, conflics, and issues with the data, which mappers can then go and fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer.",
+                "tools_h": "Tools",
+                "tools": "The following tools are currently supported: [KeepRight](https://www.keepright.at/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), and more Q/A tools in the future.",
+                "issues_h": "Handling Issues",
+                "issues": "Handling Q/A issues is similar to handling notes. Clicking an existing Q/A issue populates the sidebar with details on the issue type and related features. Each tool has its own capabilities, but generally you can comment and/or close an issue. Expect iD to support a 'fix me' button to automatically fix simple issues in the future."
             },
             "field": {
                 "restrictions": {

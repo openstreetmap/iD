@@ -121,6 +121,15 @@ export function utilDisplayType(id) {
 }
 
 
+export function utilEntityRoot(entityType) {
+    return {
+        node: 'n',
+        way: 'w',
+        relation: 'r'
+    }[entityType];
+}
+
+
 export function utilStringQs(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');

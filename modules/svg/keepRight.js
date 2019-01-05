@@ -1,72 +1,68 @@
 import _throttle from 'lodash-es/throttle';
-
 import { select as d3_select } from 'd3-selection';
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
+var _keepRightEnabled = false;
+var _keepRightService;
 
-var _notesEnabled = false;
-var _osmService;
 
-
-export function svgNotes(projection, context, dispatch) {
-    if (!dispatch) { dispatch = d3_dispatch('change'); }
+export function svgKeepRight(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var touchLayer = d3_select(null);
     var drawLayer = d3_select(null);
-    var _notesVisible = false;
+    var _keepRightVisible = false;
 
 
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-8, -22)')
-            .attr('d', 'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z');
+            .attr('transform', 'translate(-4, -24)')
+            .attr('d', 'M11.6,6.2H7.1l1.4-5.1C8.6,0.6,8.1,0,7.5,0H2.2C1.7,0,1.3,0.3,1.3,0.8L0,10.2c-0.1,0.6,0.4,1.1,0.9,1.1h4.6l-1.8,7.6C3.6,19.4,4.1,20,4.7,20c0.3,0,0.6-0.2,0.8-0.5l6.9-11.9C12.7,7,12.3,6.2,11.6,6.2z');
     }
 
 
-    // Loosely-coupled osm service for fetching notes.
+    // Loosely-coupled keepRight service for fetching errors.
     function getService() {
-        if (services.osm && !_osmService) {
-            _osmService = services.osm;
-            _osmService.on('loadedNotes', throttledRedraw);
-        } else if (!services.osm && _osmService) {
-            _osmService = null;
+        if (services.keepRight && !_keepRightService) {
+            _keepRightService = services.keepRight;
+            _keepRightService.on('loaded', throttledRedraw);
+        } else if (!services.keepRight && _keepRightService) {
+            _keepRightService = null;
         }
 
-        return _osmService;
+        return _keepRightService;
     }
 
 
-    // Show the notes
+    // Show the errors
     function editOn() {
-        if (!_notesVisible) {
-            _notesVisible = true;
+        if (!_keepRightVisible) {
+            _keepRightVisible = true;
             drawLayer
                 .style('display', 'block');
         }
     }
 
 
-    // Immediately remove the notes and their touch targets
+    // Immediately remove the errors and their touch targets
     function editOff() {
-        if (_notesVisible) {
-            _notesVisible = false;
+        if (_keepRightVisible) {
+            _keepRightVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.note')
+            drawLayer.selectAll('.kr_error')
                 .remove();
-            touchLayer.selectAll('.note')
+            touchLayer.selectAll('.kr_error')
                 .remove();
         }
     }
 
 
-    // Enable the layer.  This shows the notes and transitions them to visible.
+    // Enable the layer.  This shows the errors and transitions them to visible.
     function layerOn() {
         editOn();
 
@@ -81,11 +77,11 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    // Disable the layer.  This transitions the layer invisible and then hides the notes.
+    // Disable the layer.  This transitions the layer invisible and then hides the errors.
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.note')
+        touchLayer.selectAll('.kr_error')
             .remove();
 
         drawLayer
@@ -99,30 +95,31 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    // Update the note markers
+    // Update the error markers
     function updateMarkers() {
-        if (!_notesVisible || !_notesEnabled) return;
+        if (!_keepRightVisible || !_keepRightEnabled) return;
 
         var service = getService();
-        var selectedID = context.selectedNoteID();
-        var data = (service ? service.notes(projection) : []);
+        var selectedID = context.selectedErrorID();
+        var data = (service ? service.getErrors(projection) : []);
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var notes = drawLayer.selectAll('.note')
-            .data(data, function(d) { return d.status + d.id; });
+        var markers = drawLayer.selectAll('.kr_error')
+            .data(data, function(d) { return d.id; });
 
         // exit
-        notes.exit()
+        markers.exit()
             .remove();
 
         // enter
-        var notesEnter = notes.enter()
+        var markersEnter = markers.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
-            .classed('new', function(d) { return d.id < 0; });
+            .attr('class', function(d) {
+                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type; }
+            );
 
-        notesEnter
+        markersEnter
             .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
@@ -130,41 +127,24 @@ export function svgNotes(projection, context, dispatch) {
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        notesEnter
+        markersEnter
             .append('path')
             .call(markerPath, 'shadow');
 
-        notesEnter
+        markersEnter
             .append('use')
-            .attr('class', 'note-fill')
+            .attr('class', 'kr_error-fill')
             .attr('width', '20px')
             .attr('height', '20px')
             .attr('x', '-8px')
             .attr('y', '-22px')
-            .attr('xlink:href', '#iD-icon-note');
-
-        notesEnter.selectAll('.note-annotation')
-            .data(function(d) { return [d]; })
-            .enter()
-            .append('use')
-            .attr('class', 'note-annotation')
-            .attr('width', '10px')
-            .attr('height', '10px')
-            .attr('x', '-3px')
-            .attr('y', '-19px')
-            .attr('xlink:href', function(d) {
-                return '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
-            });
+            .attr('xlink:href', '#iD-icon-bolt');
 
         // update
-        notes
-            .merge(notesEnter)
+        markers
+            .merge(markersEnter)
             .sort(sortY)
-            .classed('selected', function(d) {
-                var mode = context.mode();
-                var isMoving = mode && mode.id === 'drag-note';  // no shadows when dragging
-                return !isMoving && d.id === selectedID;
-            })
+            .classed('selected', function(d) { return d.id === selectedID; })
             .attr('transform', getTransform);
 
 
@@ -172,7 +152,7 @@ export function svgNotes(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.note')
+        var targets = touchLayer.selectAll('.kr_error')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -189,8 +169,7 @@ export function svgNotes(projection, context, dispatch) {
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
-                var newClass = (d.id < 0 ? 'new' : '');
-                return 'note target note-' + d.id + ' ' + fillClass + newClass;
+                return 'kr_error target kr_error-' + d.id + ' ' + fillClass;
             })
             .attr('transform', getTransform);
 
@@ -201,8 +180,8 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    // Draw the notes layer and schedule loading notes and updating markers.
-    function drawNotes(selection) {
+    // Draw the keepRight layer and schedule loading errors and updating markers.
+    function drawKeepRight(selection) {
         var service = getService();
 
         var surface = context.surface();
@@ -210,7 +189,7 @@ export function svgNotes(projection, context, dispatch) {
             touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
         }
 
-        drawLayer = selection.selectAll('.layer-notes')
+        drawLayer = selection.selectAll('.layer-keepRight')
             .data(service ? [0] : []);
 
         drawLayer.exit()
@@ -218,14 +197,14 @@ export function svgNotes(projection, context, dispatch) {
 
         drawLayer = drawLayer.enter()
             .append('g')
-            .attr('class', 'layer-notes')
-            .style('display', _notesEnabled ? 'block' : 'none')
+            .attr('class', 'layer-keepRight')
+            .style('display', _keepRightEnabled ? 'block' : 'none')
             .merge(drawLayer);
 
-        if (_notesEnabled) {
+        if (_keepRightEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                service.loadNotes(projection);
+                service.loadErrors(projection);
                 updateMarkers();
             } else {
                 editOff();
@@ -235,15 +214,15 @@ export function svgNotes(projection, context, dispatch) {
 
 
     // Toggles the layer on and off
-    drawNotes.enabled = function(val) {
-        if (!arguments.length) return _notesEnabled;
+    drawKeepRight.enabled = function(val) {
+        if (!arguments.length) return _keepRightEnabled;
 
-        _notesEnabled = val;
-        if (_notesEnabled) {
+        _keepRightEnabled = val;
+        if (_keepRightEnabled) {
             layerOn();
         } else {
             layerOff();
-            if (context.selectedNoteID()) {
+            if (context.selectedErrorID()) {
                 context.enter(modeBrowse(context));
             }
         }
@@ -253,5 +232,10 @@ export function svgNotes(projection, context, dispatch) {
     };
 
 
-    return drawNotes;
+    drawKeepRight.supported = function() {
+        return !!getService();
+    };
+
+
+    return drawKeepRight;
 }

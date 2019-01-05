@@ -432,6 +432,11 @@ export default {
     },
 
 
+    noteReportURL: function(note) {
+        return urlroot + '/reports/new?reportable_type=Note&reportable_id=' + note.id;
+    },
+
+
     // Generic method to load data from the OSM API
     // Can handle either auth or unauth calls.
     loadFromAPI: function(path, callback, options) {

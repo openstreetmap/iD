@@ -263,6 +263,13 @@ export function coreContext() {
         return context;
     };
 
+    var _selectedErrorID;
+    context.selectedErrorID = function(errorID) {
+        if (!arguments.length) return _selectedErrorID;
+        _selectedErrorID = errorID;
+        return context;
+    };
+
 
     /* Behaviors */
     context.install = function(behavior) {

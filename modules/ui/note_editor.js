@@ -155,7 +155,7 @@ export function uiNoteEditor(context) {
 
         noteSaveEnter
             .append('textarea')
-            .attr('id', 'new-comment-input')
+            .attr('class', 'new-comment-input')
             .attr('placeholder', t('note.inputPlaceholder'))
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
@@ -425,9 +425,9 @@ export function uiNoteEditor(context) {
     }
 
 
-    noteEditor.note = function(_) {
+    noteEditor.note = function(val) {
         if (!arguments.length) return _note;
-        _note = _;
+        _note = val;
         return noteEditor;
     };
 
