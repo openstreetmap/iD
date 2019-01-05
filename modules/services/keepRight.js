@@ -338,7 +338,7 @@ export default {
                         var coincident = false;
                         do {
                             // first time, move marker up. after that, move marker right.
-                            var delta = coincident ? [0.00001, 0] : [0, 0.000005];
+                            var delta = coincident ? [0.00002, 0] : [0, 0.00002];
                             loc = geoVecAdd(loc, delta);
                             var bbox = geoExtent(loc).bbox();
                             coincident = _krCache.rtree.search(bbox).length;
