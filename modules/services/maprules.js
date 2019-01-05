@@ -214,7 +214,7 @@ export default {
             inferredGeometry: this.inferGeometry(this.buildTagMap(selector), this._areaKeys),
             geometryMatches: function(entity, graph) {
                 if (entity.type === 'node' || entity.type === 'relation') {
-                    return selector.geometry.includes(entity.type);
+                    return selector.geometry.includes(entity.type) || selector.geometry === '*';
                 } else if (entity.type === 'way') {
                     return this.inferredGeometry === entity.geometry(graph);
                 }
