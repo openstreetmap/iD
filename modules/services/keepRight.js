@@ -54,7 +54,7 @@ var _krLocalize = {
     to: 'to'
 };
 
-var defaultRuleset = [
+var _krRuleset = [
     // no 20 - multiple node on same spot - these are mostly boundaries overlapping roads
     30, 40, 50, 60, 70, 90, 100, 110, 120, 130, 150, 160, 170, 180,
     190, 191, 192, 193, 194, 195, 196, 197, 198,
@@ -290,9 +290,9 @@ export default {
 
 
     // KeepRight API:  http://osm.mueschelsoft.de/keepright/interfacing.php
-    loadErrors: function(context, projection) {
+    loadErrors: function(projection) {
         var options = { format: 'geojson' };
-        var rules = defaultRuleset.join();
+        var rules = _krRuleset.join();
 
         // determine the needed tiles to cover the view
         var tiles = tiler

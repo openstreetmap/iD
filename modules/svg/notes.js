@@ -216,10 +216,11 @@ export function svgNotes(projection, context, dispatch) {
         drawLayer.exit()
             .remove();
 
-        drawLayer.enter()
+        drawLayer = drawLayer.enter()
             .append('g')
             .attr('class', 'layer-notes')
-            .style('display', _notesEnabled ? 'block' : 'none');
+            .style('display', _notesEnabled ? 'block' : 'none')
+            .merge(drawLayer);
 
         if (_notesEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {

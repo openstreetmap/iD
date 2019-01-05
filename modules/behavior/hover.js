@@ -114,7 +114,7 @@ export function behaviorHover(context) {
 
             } else if (datum instanceof krError) {
                 entity = datum;
-                selector = '.error-' + datum.id;
+                selector = '.kr_error-' + datum.id;
 
             } else if (datum instanceof osmNote) {
                 entity = datum;

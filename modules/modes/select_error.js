@@ -73,6 +73,7 @@ export function modeSelectError(context, selectedErrorID) {
             } else {
                 selection
                     .classed('selected', true);
+
                 context.selectedErrorID(selectedErrorID);
             }
         }

@@ -44,6 +44,7 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
+.kr_error.target,
 .note.target,
 .node.target,
 .turn .target {

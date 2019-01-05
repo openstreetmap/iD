@@ -5,12 +5,17 @@ import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
+var _keepRightEnabled = false;
+var _keepRightService;
+
 
 export function svgKeepRight(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
-    var layer = d3_select(null);
-    var _keepRight;
+    var touchLayer = d3_select(null);
+    var drawLayer = d3_select(null);
+    var _keepRightVisible = false;
+
 
     function markerPath(selection, klass) {
         selection
@@ -20,31 +25,48 @@ export function svgKeepRight(projection, context, dispatch) {
     }
 
 
-    function init() {
-        if (svgKeepRight.initialized) return;  // run once
-        svgKeepRight.enabled = false;
-        svgKeepRight.initialized = true;
-    }
-
-
+    // Loosely-coupled keepRight service for fetching errors.
     function getService() {
-        if (services.keepRight && !_keepRight) {
-            _keepRight = services.keepRight;
-            _keepRight.event.on('loaded', throttledRedraw);
-        } else if (!services.keepRight && _keepRight) {
-            _keepRight = null;
+        if (services.keepRight && !_keepRightService) {
+            _keepRightService = services.keepRight;
+            _keepRightService.on('loaded', throttledRedraw);
+        } else if (!services.keepRight && _keepRightService) {
+            _keepRightService = null;
         }
-        return _keepRight;
+
+        return _keepRightService;
     }
 
 
-    function showLayer() {
-        var service = getService();
-        if (!service) return;
+    // Show the errors
+    function editOn() {
+        if (!_keepRightVisible) {
+            _keepRightVisible = true;
+            drawLayer
+                .style('display', 'block');
+        }
+    }
+
+
+    // Immediately remove the errors and their touch targets
+    function editOff() {
+        if (_keepRightVisible) {
+            _keepRightVisible = false;
+            drawLayer
+                .style('display', 'none');
+            drawLayer.selectAll('.kr_error')
+                .remove();
+            touchLayer.selectAll('.kr_error')
+                .remove();
+        }
+    }
+
+
+    // Enable the layer.  This shows the errors and transitions them to visible.
+    function layerOn() {
         editOn();
 
-        layer
-            .classed('disabled', false)
+        drawLayer
             .style('opacity', 0)
             .transition()
             .duration(250)
@@ -55,52 +77,49 @@ export function svgKeepRight(projection, context, dispatch) {
     }
 
 
-    function hideLayer() {
+    // Disable the layer.  This transitions the layer invisible and then hides the errors.
+    function layerOff() {
         throttledRedraw.cancel();
-        editOff();
+        drawLayer.interrupt();
+        touchLayer.selectAll('.kr_error')
+            .remove();
 
-        layer
+        drawLayer
             .transition()
             .duration(250)
             .style('opacity', 0)
             .on('end interrupt', function () {
-                layer.classed('disabled', true);
+                editOff();
                 dispatch.call('change');
             });
     }
 
 
-    function editOn() {
-        layer.style('display', 'block');
-    }
+    // Update the error markers
+    function updateMarkers() {
+        if (!_keepRightVisible || !_keepRightEnabled) return;
 
-
-    function editOff() {
-        layer.selectAll('.kr_error').remove();
-        layer.style('display', 'none');
-    }
-
-
-    function update() {
         var service = getService();
         var selectedID = context.selectedErrorID();
         var data = (service ? service.getErrors(projection) : []);
-        var transform = svgPointTransform(projection);
-        var kr_errors = layer.selectAll('.kr_error')
+        var getTransform = svgPointTransform(projection);
+
+        // Draw markers..
+        var markers = drawLayer.selectAll('.kr_error')
             .data(data, function(d) { return d.id; });
 
         // exit
-        kr_errors.exit()
+        markers.exit()
             .remove();
 
         // enter
-        var kr_errorsEnter = kr_errors.enter()
+        var markersEnter = markers.enter()
             .append('g')
             .attr('class', function(d) {
                 return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type; }
             );
 
-        kr_errorsEnter
+        markersEnter
             .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
@@ -108,11 +127,11 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        kr_errorsEnter
+        markersEnter
             .append('path')
             .call(markerPath, 'shadow');
 
-        kr_errorsEnter
+        markersEnter
             .append('use')
             .attr('class', 'kr_error-fill')
             .attr('width', '20px')
@@ -122,39 +141,71 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('xlink:href', '#iD-icon-bolt');
 
         // update
-        kr_errors
-            .merge(kr_errorsEnter)
-            .sort(function(a, b) {
-                return (a.id === selectedID) ? 1
-                    : (b.id === selectedID) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
-            })
+        markers
+            .merge(markersEnter)
+            .sort(sortY)
             .classed('selected', function(d) { return d.id === selectedID; })
-            .attr('transform', transform);
+            .attr('transform', getTransform);
+
+
+        // Draw targets..
+        if (touchLayer.empty()) return;
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+
+        var targets = touchLayer.selectAll('.kr_error')
+            .data(data, function(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('rect')
+            .attr('width', '20px')
+            .attr('height', '20px')
+            .attr('x', '-8px')
+            .attr('y', '-22px')
+            .merge(targets)
+            .sort(sortY)
+            .attr('class', function(d) {
+                return 'kr_error target kr_error-' + d.id + ' ' + fillClass;
+            })
+            .attr('transform', getTransform);
+
+
+        function sortY(a, b) {
+            return (a.id === selectedID) ? 1 : (b.id === selectedID) ? -1 : b.loc[1] - a.loc[1];
+        }
     }
 
 
+    // Draw the keepRight layer and schedule loading errors and updating markers.
     function drawKeepRight(selection) {
-        var enabled = svgKeepRight.enabled;
         var service = getService();
 
-        layer = selection.selectAll('.layer-keepRight')
+        var surface = context.surface();
+        if (surface && !surface.empty()) {
+            touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
+        }
+
+        drawLayer = selection.selectAll('.layer-keepRight')
             .data(service ? [0] : []);
 
-        layer.exit()
+        drawLayer.exit()
             .remove();
 
-        layer = layer.enter()
+        drawLayer = drawLayer.enter()
             .append('g')
             .attr('class', 'layer-keepRight')
-            .style('display', enabled ? 'block' : 'none')
-            .merge(layer);
+            .style('display', _keepRightEnabled ? 'block' : 'none')
+            .merge(drawLayer);
 
-        if (enabled) {
+        if (_keepRightEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                update();
-                service.loadErrors(context, projection);
+                service.loadErrors(projection);
+                updateMarkers();
             } else {
                 editOff();
             }
@@ -162,17 +213,20 @@ export function svgKeepRight(projection, context, dispatch) {
     }
 
 
-    drawKeepRight.enabled = function(_) {
-        if (!arguments.length) return svgKeepRight.enabled;
-        svgKeepRight.enabled = _;
-        if (svgKeepRight.enabled) {
-            showLayer();
+    // Toggles the layer on and off
+    drawKeepRight.enabled = function(val) {
+        if (!arguments.length) return _keepRightEnabled;
+
+        _keepRightEnabled = val;
+        if (_keepRightEnabled) {
+            layerOn();
         } else {
-            hideLayer();
+            layerOff();
             if (context.selectedErrorID()) {
                 context.enter(modeBrowse(context));
             }
         }
+
         dispatch.call('change');
         return this;
     };
@@ -183,6 +237,5 @@ export function svgKeepRight(projection, context, dispatch) {
     };
 
 
-    init();
     return drawKeepRight;
 }
