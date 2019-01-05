@@ -718,7 +718,7 @@ en:
         72:
           description: 'This node is not member of any way and doesn''t have any tags.'
         73:
-          description: 'This way has a "tracktype" tag but no "highway" tag.'
+          description: 'This way has a "{var1}" tag but no "highway" tag.'
         74:
           description: 'This {var1} has an empty tag: "{var2}".'
         75:

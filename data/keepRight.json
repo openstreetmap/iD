@@ -68,7 +68,8 @@
     "73": {
       "title": "",
       "severity": "error",
-      "description": "This way has a tracktype tag but no highway tag"
+      "description": "This way has a $1 tag but no highway tag",
+      "regex": "has a (.+) tag"
     },
     "74": {
       "title": "missing tags",
