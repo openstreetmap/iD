@@ -1,3 +1,5 @@
+import _uniq from 'lodash-es/uniq';
+
 import {
     select as d3_select,
     selectAll as d3_selectAll
@@ -177,6 +179,8 @@ export function uiShortcuts(context) {
                     arr = ['Y'];
                 } else if (detected.os !== 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
                     arr = ['F11'];
+                } else if (d.text === 'shortcuts.browsing.display_options.sidebar') {
+                    arr = _uniq([t('sidebar.key'), '`', '²']);   // #5663
                 }
 
                 return arr.map(function(s) {
