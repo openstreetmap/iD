@@ -2568,9 +2568,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Buddhist Temple'', separated by commas>'
       amenity/place_of_worship/christian:
         # 'amenity=place_of_worship, religion=christian'
-        name: Church
+        name: Christian Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
-        terms: '<translate with synonyms or related terms for ''Church'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Christian Church'', separated by commas>'
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
@@ -2578,14 +2578,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
-        name: Synagogue
+        name: Jewish Synagogue
         # 'terms: jewish'
-        terms: '<translate with synonyms or related terms for ''Synagogue'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Jewish Synagogue'', separated by commas>'
       amenity/place_of_worship/muslim:
         # 'amenity=place_of_worship, religion=muslim'
-        name: Mosque
+        name: Muslim Mosque
         # 'terms: muslim'
-        terms: '<translate with synonyms or related terms for ''Mosque'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Muslim Mosque'', separated by commas>'
       amenity/place_of_worship/shinto:
         # 'amenity=place_of_worship, religion=shinto'
         name: Shinto Shrine

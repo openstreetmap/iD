@@ -815,7 +815,7 @@
     {
       "key": "religion",
       "value": "christian",
-      "description": "🄿 Church",
+      "description": "🄿 Christian Church",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-christian-15.svg?sanitize=true"
     },
@@ -829,14 +829,14 @@
     {
       "key": "religion",
       "value": "jewish",
-      "description": "🄿 Synagogue",
+      "description": "🄿 Jewish Synagogue",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-jewish-15.svg?sanitize=true"
     },
     {
       "key": "religion",
       "value": "muslim",
-      "description": "🄿 Mosque",
+      "description": "🄿 Muslim Mosque",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-muslim-15.svg?sanitize=true"
     },

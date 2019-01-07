@@ -4013,7 +4013,7 @@
                     "terms": "stupa,vihara,monastery,temple,pagoda,zendo,dojo"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "Church",
+                    "name": "Christian Church",
                     "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
                 "amenity/place_of_worship/hindu": {
@@ -4021,11 +4021,11 @@
                     "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "Synagogue",
+                    "name": "Jewish Synagogue",
                     "terms": "jewish"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "Mosque",
+                    "name": "Muslim Mosque",
                     "terms": "muslim"
                 },
                 "amenity/place_of_worship/shinto": {
