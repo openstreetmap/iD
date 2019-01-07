@@ -13,7 +13,7 @@ import { krError } from '../osm';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
-import { errorTypes } from '../../data/keepRight.json';
+import { errorTypes, localizeStrings } from '../../data/keepRight.json';
 
 
 var tiler = utilTiler();
@@ -22,37 +22,6 @@ var dispatch = d3_dispatch('loaded');
 var _krCache;
 var _krZoom = 14;
 var _krUrlRoot = 'https://www.keepright.at/';
-var _krLocalize = {
-    node: 'node',
-    way: 'way',
-    relation: 'relation',
-    highway: 'highway',
-    railway: 'railway',
-    waterway: 'waterway',
-    cycleway: 'cycleway',
-    footpath: 'footpath',
-    'cycleway/footpath': 'cycleway_footpath',
-    riverbank: 'riverbank',
-    bridge: 'bridge',
-    tunnel: 'tunnel',
-    place_of_worship: 'place_of_worship',
-    pub: 'pub',
-    restaurant: 'restaurant',
-    school: 'school',
-    university: 'university',
-    hospital: 'hospital',
-    library: 'library',
-    theatre: 'theatre',
-    courthouse: 'courthouse',
-    bank: 'bank',
-    cinema: 'cinema',
-    pharmacy: 'pharmacy',
-    cafe: 'cafe',
-    fast_food: 'fast_food',
-    fuel: 'fuel',
-    from: 'from',
-    to: 'to'
-};
 
 var _krRuleset = [
     // no 20 - multiple node on same spot - these are mostly boundaries overlapping roads
@@ -119,7 +88,7 @@ function tokenReplacements(d) {
     // some descriptions are just fixed text
     if (!errorTemplate.regex) return;
 
-    // regex pattern should match description with variable details captured as groups
+    // regex pattern should match description with variable details captured
     var errorRegex = new RegExp(errorTemplate.regex, 'i');
     var errorMatch = errorRegex.exec(d.description);
     if (!errorMatch) {
@@ -132,33 +101,62 @@ function tokenReplacements(d) {
     }
 
     for (var i = 1; i < errorMatch.length; i++) {   // skip first
-        var group = errorMatch[i];
+        var capture = errorMatch[i];
         var idType;
 
         idType = 'IDs' in errorTemplate ? errorTemplate.IDs[i-1] : '';
-        if (idType && group) {   // link IDs if present in the group
-            group = parseError(group, idType);
-        } else if (htmlRegex.test(group)) {   // escape any html in non-IDs
-            group = '\\' +  group + '\\';
-        } else if (_krLocalize[group]) {   // some replacement strings can be localized
-            group = t('QA.keepRight.error_parts.' + _krLocalize[group]);
+        if (idType && capture) {   // link IDs if present in the capture
+            capture = parseError(capture, idType);
+        } else if (htmlRegex.test(capture)) {   // escape any html in non-IDs
+            capture = '\\' +  capture + '\\';
+        } else if (localizeStrings[capture]) {  // some replacement strings can be localized
+            capture = t('QA.keepRight.error_parts.' + localizeStrings[capture]);
         }
 
-        replacements['var' + i] = group;
+        replacements['var' + i] = capture;
     }
 
     return replacements;
 }
 
 
-function parseError(group, idType) {
+function parseError(capture, idType) {
+
+    switch (idType) {
+        // simple case just needs a linking span
+        case 'n':
+        case 'w':
+        case 'r':
+            capture = linkEntity(idType + capture);
+            break;
+
+        // some errors have more complex ID lists/variance
+        case '20':
+            capture = parse20(capture);
+            break;
+        case '211':
+            capture = parse211(capture);
+            break;
+        case '231':
+            capture = parse231(capture);
+            break;
+        case '294':
+            capture = parse294(capture);
+            break;
+        case '370':
+            capture = parse370(capture);
+            break;
+    }
+
+    return capture;
+
 
     function linkEntity(d) {
-        return '<span><a class="kr_error_description-id">' + d + '</a></span>';
+        return '<a class="kr_error_entity_link">' + d + '</a>';
     }
 
     // arbitrary node list of form: #ID, #ID, #ID...
-    function parseError211(capture) {
+    function parse211(capture) {
         var newList = [];
         var items = capture.split(', ');
 
@@ -172,7 +170,7 @@ function parseError(group, idType) {
     }
 
     // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
-    function parseError231(capture) {
+    function parse231(capture) {
         var newList = [];
         // unfortunately 'layer' can itself contain commas, so we split on '),'
         var items = capture.split('),');
@@ -190,7 +188,7 @@ function parseError(group, idType) {
     }
 
     // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
-    function parseError294(capture) {
+    function parse294(capture) {
         var newList = [];
         var items = capture.split(',');
 
@@ -220,7 +218,7 @@ function parseError(group, idType) {
     }
 
     // may or may not include the string "(including the name 'name')"
-    function parseError370(capture) {
+    function parse370(capture) {
         if (!capture) return '';
 
         var match = capture.match(/\(including the name (\'.+\')\)/);
@@ -231,7 +229,7 @@ function parseError(group, idType) {
     }
 
     // arbitrary node list of form: #ID,#ID,#ID...
-    function parseWarning20(capture) {
+    function parse20(capture) {
         var newList = [];
         var items = capture.split(',');
 
@@ -243,32 +241,6 @@ function parseError(group, idType) {
 
         return newList.join(', ');
     }
-
-    switch (idType) {
-        // simple case just needs a linking span
-        case 'n':
-        case 'w':
-        case 'r':
-            group = linkEntity(idType + group);
-            break;
-        // some errors have more complex ID lists/variance
-        case '211':
-            group = parseError211(group);
-            break;
-        case '231':
-            group = parseError231(group);
-            break;
-        case '294':
-            group = parseError294(group);
-            break;
-        case '370':
-            group = parseError370(group);
-            break;
-        case '20':
-            group = parseWarning20(group);
-    }
-
-    return group;
 }
 
 
@@ -338,7 +310,7 @@ export default {
                         var coincident = false;
                         do {
                             // first time, move marker up. after that, move marker right.
-                            var delta = coincident ? [0.00002, 0] : [0, 0.00002];
+                            var delta = coincident ? [0.00001, 0] : [0, 0.00001];
                             loc = geoVecAdd(loc, delta);
                             var bbox = geoExtent(loc).bbox();
                             coincident = _krCache.rtree.search(bbox).length;
