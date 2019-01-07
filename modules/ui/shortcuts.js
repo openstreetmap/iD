@@ -21,7 +21,7 @@ export function uiShortcuts(context) {
 
 
     context.keybinding()
-        .on(t('shortcuts.toggle.key'), function () {
+        .on([t('shortcuts.toggle.key'), '?'], function () {
             if (d3_selectAll('.modal-shortcuts').size()) {  // already showing
                 if (_modalSelection) {
                     _modalSelection.close();

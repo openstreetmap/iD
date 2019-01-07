@@ -41,7 +41,7 @@
               "text": "shortcuts.browsing.help.help"
             },
             {
-              "shortcuts": ["shortcuts.toggle.key"],
+              "shortcuts": ["shortcuts.toggle.key", "?"],
               "text": "shortcuts.browsing.help.keyboard"
             },
             {
