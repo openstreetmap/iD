@@ -62,12 +62,12 @@
               "text": "shortcuts.browsing.display_options.map_data"
             },
             {
-              "modifiers": ["⌃","⌘"],
+              "modifiers": ["⌃", "⌘"],
               "shortcuts": ["F", "F11"],
               "text": "shortcuts.browsing.display_options.fullscreen"
             },
             {
-              "shortcuts": ["sidebar.key"],
+              "shortcuts": ["sidebar.key", "`", "²"],
               "text": "shortcuts.browsing.display_options.sidebar"
             },
             {
@@ -127,19 +127,19 @@
               "text": "shortcuts.browsing.vertex_selected.previous"
             },
             {
-              "shortcuts": ["]","↘"],
+              "shortcuts": ["]", "↘"],
               "text": "shortcuts.browsing.vertex_selected.next"
             },
             {
-              "shortcuts": ["{","⇞"],
+              "shortcuts": ["{", "⇞"],
               "text": "shortcuts.browsing.vertex_selected.first"
             },
             {
-              "shortcuts": ["}","⇟"],
+              "shortcuts": ["}", "⇟"],
               "text": "shortcuts.browsing.vertex_selected.last"
             },
             {
-              "shortcuts": ["\\","shortcuts.key.pause"],
+              "shortcuts": ["\\", "shortcuts.key.pause"],
               "text": "shortcuts.browsing.vertex_selected.change_parent"
             }
           ]
@@ -173,7 +173,7 @@
               "text": "shortcuts.editing.drawing.add_note"
             },
             {
-              "shortcuts": ["Left-click","shortcuts.key.space"],
+              "shortcuts": ["Left-click", "shortcuts.key.space"],
               "text": "shortcuts.editing.drawing.place_point"
             },
             {
@@ -181,7 +181,7 @@
               "text": "shortcuts.editing.drawing.disable_snap"
             },
             {
-              "shortcuts": ["↵","⎋"],
+              "shortcuts": ["↵", "⎋"],
               "text": "shortcuts.editing.drawing.stop_line"
             },
             {
@@ -204,7 +204,7 @@
               "text": "shortcuts.editing.commands.undo"
             },
             {
-              "modifiers": ["⌘","⇧"],
+              "modifiers": ["⌘", "⇧"],
               "shortcuts": ["Z"],
               "text": "shortcuts.editing.commands.redo"
             },
@@ -294,22 +294,22 @@
               "text": "shortcuts.tools.info.all"
             },
             {
-              "modifiers": ["⌘","⇧"],
+              "modifiers": ["⌘", "⇧"],
               "shortcuts": ["info_panels.background.key"],
               "text": "shortcuts.tools.info.background"
             },
             {
-              "modifiers": ["⌘","⇧"],
+              "modifiers": ["⌘", "⇧"],
               "shortcuts": ["info_panels.history.key"],
               "text": "shortcuts.tools.info.history"
             },
             {
-              "modifiers": ["⌘","⇧"],
+              "modifiers": ["⌘", "⇧"],
               "shortcuts": ["info_panels.location.key"],
               "text": "shortcuts.tools.info.location"
             },
             {
-              "modifiers": ["⌘","⇧"],
+              "modifiers": ["⌘", "⇧"],
               "shortcuts": ["info_panels.measurement.key"],
               "text": "shortcuts.tools.info.measurement"
             }

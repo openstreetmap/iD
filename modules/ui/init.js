@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import {
     event as d3_event,
     select as d3_select
@@ -300,10 +298,9 @@ export function uiInit(context) {
 
 
         var panPixels = 80;
-        var sidebarKeys = _uniq([t('sidebar.key'), '`', '²']);  // #5663
         context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
-            .on(sidebarKeys, ui.sidebar.toggle)
+            .on([t('sidebar.key'), '`', '²'], ui.sidebar.toggle)   // #5663 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))

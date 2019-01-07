@@ -179,11 +179,14 @@ export function uiShortcuts(context) {
                     arr = ['Y'];
                 } else if (detected.os !== 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
                     arr = ['F11'];
-                } else if (d.text === 'shortcuts.browsing.display_options.sidebar') {
-                    arr = _uniq([t('sidebar.key'), '`', '²']);   // #5663
                 }
 
-                return arr.map(function(s) {
+                // replace translations
+                arr = arr.map(function(s) {
+                    return uiCmd.display(s.indexOf('.') !== -1 ? t(s) : s);
+                });
+
+                return _uniq(arr).map(function(s) {
                     return {
                         shortcut: s,
                         separator: d.separator
@@ -195,17 +198,14 @@ export function uiShortcuts(context) {
                 var selection = d3_select(this);
                 var click = d.shortcut.toLowerCase().match(/(.*).click/);
 
-                if (click && click[1]) {
+                if (click && click[1]) {   // replace "left_click", "right_click" with mouse icon
                     selection
                         .call(svgIcon('#iD-walkthrough-mouse', 'mouseclick', click[1]));
                 } else {
                     selection
                         .append('kbd')
                         .attr('class', 'shortcut')
-                        .text(function (d) {
-                            var key = d.shortcut;
-                            return key.indexOf('.') !== -1 ? uiCmd.display(t(key)) : uiCmd.display(key);
-                        });
+                        .text(function (d) { return d.shortcut; });
                 }
 
                 if (i < nodes.length - 1) {
