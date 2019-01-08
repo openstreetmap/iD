@@ -9,7 +9,7 @@ import { utilQsString } from '../util';
 var apibase = 'https://wiki.openstreetmap.org/w/api.php';
 var _inflight = {};
 var _wikibaseCache = {};
-var _localeIds = { en: false };
+var _localeIDs = { en: false };
 
 
 var debouncedRequest = _debounce(request, 500, { leading: false });
@@ -45,7 +45,7 @@ export default {
     init: function() {
         _inflight = {};
         _wikibaseCache = {};
-        _localeIds = {};
+        _localeIDs = {};
     },
 
 
@@ -63,7 +63,7 @@ export default {
      */
     claimToValue: function(entity, property, langCode) {
         if (!entity.claims[property]) return undefined;
-        var locale = _localeIds[langCode];
+        var locale = _localeIDs[langCode];
         var preferredPick, localePick;
         _forEach(entity.claims[property], function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
@@ -103,7 +103,7 @@ export default {
         var tagSitelink = params.value ? this.toSitelink(params.key, params.value) : false;
         var localeSitelink;
 
-        if (params.langCode && _localeIds[params.langCode] === undefined) {
+        if (params.langCode && _localeIDs[params.langCode] === undefined) {
             // If this is the first time we are asking about this locale,
             // fetch corresponding entity (if it exists), and cache it.
             // If there is no such entry, cache `false` value to avoid re-requesting it.
@@ -155,7 +155,7 @@ export default {
             } else if (!d.success || d.error) {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
-                var localeId = false;
+                var localeID = false;
                 _forEach(d.entities, function(res) {
                     if (res.missing !== '') {
                         var title = res.sitelinks.wiki.title;
@@ -169,16 +169,16 @@ export default {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
                         } else if (title === localeSitelink) {
-                            localeId = res.id;
+                            localeID = res.id;
                         } else {
-                            console.log('Unexpected title ' + title);
+                            console.log('Unexpected title ' + title);  // eslint-disable-line no-console
                         }
                     }
                 });
 
                 if (localeSitelink) {
                     // If locale ID is not found, store false to prevent repeated queries
-                    self.addLocale(params.langCode, localeId);
+                    self.addLocale(params.langCode, localeID);
                 }
 
                 callback(null, result);
@@ -189,12 +189,12 @@ export default {
 
     addLocale: function(langCode, qid) {
         // Makes it easier to unit test
-        _localeIds[langCode] = qid;
+        _localeIDs[langCode] = qid;
     },
 
-    apibase: function(_) {
+    apibase: function(val) {
         if (!arguments.length) return apibase;
-        apibase = _;
+        apibase = val;
         return this;
     }
 
