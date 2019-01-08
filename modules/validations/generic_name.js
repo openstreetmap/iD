@@ -7,16 +7,20 @@ export function validationGenericName() {
         var name = entity.tags.name;
         if (!name) return false;
 
-        if (entity.tags.amenity === name ||
-            entity.tags.leisure === name ||
-            entity.tags.shop === name ||
-            entity.tags.man_made === name ||
-            entity.tags.tourism === name) {
-            return name;
+        var i, re;
+
+        // test if the name is just the tag value (e.g. "park")
+        var keys = ['amenity', 'leisure', 'shop', 'man_made', 'tourism'];
+        for (i = 0; i < keys.length; i++) {
+            var val = entity.tags[keys[i]];
+            if (val && val.replace(/\_/g, ' ').toLowerCase() === name.toLowerCase()) {
+                return name;
+            }
         }
 
-        for (var i = 0; i < discardNames.length; i++) {
-            var re = new RegExp(discardNames[i], 'i');
+        // test if the name is a generic name (e.g. "pizzaria")
+        for (i = 0; i < discardNames.length; i++) {
+            re = new RegExp(discardNames[i], 'i');
             if (re.test(name)) {
                 return name;
             }
