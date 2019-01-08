@@ -767,6 +767,8 @@
         "validations": {
             "disconnected_highway": "Disconnected highway",
             "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
+            "generic_name": "Possible generic name",
+            "generic_name_tooltip": "This feature seems to have a generic name \"{name}\". Please only use the name field to record the official name of a feature.",
             "old_multipolygon": "Multipolygon tags on outer way",
             "old_multipolygon_tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way.",
             "untagged_point": "Untagged point",

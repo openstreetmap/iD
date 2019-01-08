@@ -16,5 +16,6 @@
     "tags": {
         "shop": "fuel"
     },
-    "name": "Fuel Shop"
+    "name": "Fuel Shop",
+    "matchScore": 0.5
 }
