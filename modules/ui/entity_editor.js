@@ -47,28 +47,28 @@ export function uiEntityEditor(context) {
             .data([0]);
 
         // Enter
-        var enter = header.enter()
+        var headerEnter = header.enter()
             .append('div')
             .attr('class', 'header fillL cf');
 
-        enter
+        headerEnter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
             .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
 
-        enter
+        headerEnter
             .append('button')
             .attr('class', 'fr preset-close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
-        enter
+        headerEnter
             .append('h3')
             .text(t('inspector.edit'));
 
         // Update
         header = header
-            .merge(enter);
+            .merge(headerEnter);
 
         header.selectAll('.preset-reset')
             .on('click', function() {
@@ -81,11 +81,11 @@ export function uiEntityEditor(context) {
             .data([0]);
 
         // Enter
-        enter = body.enter()
+        var bodyEnter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
 
-        enter
+        bodyEnter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')
             .append('div')
@@ -98,23 +98,23 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'label-inner');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border preset-editor');
+            .attr('class', 'preset-editor');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border raw-tag-editor inspector-inner');
+            .attr('class', 'raw-tag-editor inspector-inner');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border raw-member-editor inspector-inner');
+            .attr('class', 'raw-member-editor inspector-inner');
 
-        enter
+        bodyEnter
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
-        enter
+        bodyEnter
             .append('input')
             .attr('type', 'text')
             .attr('class', 'key-trap');
@@ -122,7 +122,7 @@ export function uiEntityEditor(context) {
 
         // Update
         body = body
-            .merge(enter);
+            .merge(bodyEnter);
 
         if (_tagReference) {
             body.selectAll('.preset-list-button-wrap')

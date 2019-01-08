@@ -57,7 +57,7 @@ export function uiDataEditor(context) {
 
         rte.enter()
             .append('div')
-            .attr('class', 'inspector-border raw-tag-editor inspector-inner data-editor')
+            .attr('class', 'raw-tag-editor inspector-inner data-editor')
             .merge(rte)
             .call(rawTagEditor
                 .expanded(true)

@@ -784,10 +784,6 @@ a.hide-toggle {
     bottom: 0;
 }
 
-.inspector-border {
-    border-bottom: 1px solid #ccc
-}
-
 .feature-list-pane .inspector-body,
 .preset-list-pane .inspector-body {
     top: 120px;
@@ -1161,7 +1157,7 @@ img.tag-reference-wiki-image {
 ------------------------------------------------------- */
 .preset-editor {
     overflow: hidden;
-    padding-bottom: 10px;
+    padding: 20px 0 10px 0;
 }
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
