@@ -51,9 +51,6 @@ export function coreHistory(context) {
             annotation = actions.pop();
         }
 
-        _stack[_index].transform = context.projection.transform();
-        _stack[_index].selectedIDs = context.selectedIDs();
-
         var graph = _stack[_index].graph;
         for (var i = 0; i < actions.length; i++) {
             graph = actions[i](graph, t);
@@ -62,7 +59,9 @@ export function coreHistory(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imageryUsed: _imageryUsed
+            imageryUsed: _imageryUsed,
+            transform: context.projection.transform(),
+            selectedIDs: context.selectedIDs()
         };
     }
 
@@ -401,7 +400,8 @@ export function coreHistory(context) {
             var base = _stack[0];
 
             var s = _stack.map(function(i) {
-                var modified = [], deleted = [];
+                var modified = [];
+                var deleted = [];
 
                 _forEach(i.graph.entities, function(entity, id) {
                     if (entity) {
@@ -431,6 +431,8 @@ export function coreHistory(context) {
                 if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
+                if (i.transform) x.transform = i.transform;
+                if (i.selectedIDs) x.selectedIDs = i.selectedIDs;
 
                 return x;
             });
@@ -528,7 +530,9 @@ export function coreHistory(context) {
                     return {
                         graph: coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
-                        imageryUsed: d.imageryUsed
+                        imageryUsed: d.imageryUsed,
+                        transform: d.transform,
+                        selectedIDs: d.selectedIDs
                     };
                 });
 
@@ -544,6 +548,11 @@ export function coreHistory(context) {
                     d.graph = coreGraph(_stack[0].graph).load(entities);
                     return d;
                 });
+            }
+
+            var transform = _stack[_index].transform;
+            if (transform) {
+                context.map().transformEase(transform, 0);   // 0 = immediate, no easing
             }
 
             if (loadComplete) {
