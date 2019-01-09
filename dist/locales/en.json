@@ -1137,10 +1137,6 @@
                 "validation": {
                     "header": "Validation Rules",
                     "validators": {
-                        "deprecated": {
-                            "title": "Deprecated Tagging",
-                            "tooltip": "Checks for deprecated tags"
-                        },
                         "multiple": {
                             "title": "Multiple values",
                             "tooltip": "Checks for wrong multiple values"
