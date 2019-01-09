@@ -1,13 +1,13 @@
 [
     {
-        "geometry": "way",
+        "geometry": ["way"],
         "equals": {
             "power": "transformer"
         },
         "warning": "Power Transformers should always be on a node"
     },
     {
-        "geometry": "node",
+        "geometry": ["node"],
         "equals": {
             "power": "transformer"
         },
