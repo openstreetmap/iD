@@ -6,7 +6,7 @@ import {
 import { dataEn } from '../../data';
 import { modeSelect } from '../modes';
 import { t } from '../util/locale';
-import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
+import { utilDisplayName, utilEntityOrMemberSelector, utilEntityRoot } from '../util';
 
 
 export function uiKeepRightDetails(context) {
@@ -31,7 +31,8 @@ export function uiKeepRightDetails(context) {
         } else {
             detail = unknown;
         }
-        return detail.substr(0, 1).toUpperCase() + detail.substr(1);
+
+        return detail;
     }
 
 
@@ -65,10 +66,13 @@ export function uiKeepRightDetails(context) {
             .html(errorDetail);
 
         // If there are entity links in the error message..
-        descriptionEnter.selectAll('.kr_error_entity_link')
+        descriptionEnter.selectAll('.kr_error_entity_link, .kr_error_object_link')
             .each(function() {
                 var link = d3_select(this);
-                var entityID = this.innerText;
+                var isObjectLink = link.classed('kr_error_object_link');
+                var entityID = isObjectLink ?
+                    (utilEntityRoot(_error.object_type) + _error.object_id)
+                    : this.textContent;
                 var entity = context.hasEntity(entityID);
 
                 // Add click handler
@@ -87,15 +91,24 @@ export function uiKeepRightDetails(context) {
                         if (!osmlayer.enabled()) {
                             osmlayer.enabled(true);
                         }
+
                         context.map().centerZoom(_error.loc, 20);
-                        context.enter(modeSelect(context, [entityID]));
+
+                        if (entity) {
+                            context.enter(modeSelect(context, [entityID]));
+                        } else {
+                            context.loadEntity(entityID, function() {
+                                context.enter(modeSelect(context, [entityID]));
+                            });
+                        }
                     });
 
                 // Replace with friendly name if possible
                 // (The entity may not yet be loaded into the graph)
                 if (entity) {
                     var name = utilDisplayName(entity);  // try to use common name
-                    if (!name) {
+
+                    if (!name && !isObjectLink) {
                         var preset = context.presets().match(entity, context.graph());
                         name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
                     }

@@ -109,8 +109,11 @@ function tokenReplacements(d) {
             capture = parseError(capture, idType);
         } else if (htmlRegex.test(capture)) {   // escape any html in non-IDs
             capture = '\\' +  capture + '\\';
-        } else if (localizeStrings[capture]) {  // some replacement strings can be localized
-            capture = t('QA.keepRight.error_parts.' + localizeStrings[capture]);
+        } else {
+            var compare = capture.toLowerCase();
+            if (localizeStrings[compare]) {   // some replacement strings can be localized
+                capture = t('QA.keepRight.error_parts.' + localizeStrings[compare]);
+            }
         }
 
         replacements['var' + i] = capture;
@@ -121,9 +124,18 @@ function tokenReplacements(d) {
 
 
 function parseError(capture, idType) {
+    var compare = capture.toLowerCase();
+    if (localizeStrings[compare]) {   // some replacement strings can be localized
+        capture = t('QA.keepRight.error_parts.' + localizeStrings[compare]);
+    }
 
     switch (idType) {
-        // simple case just needs a linking span
+        // link a string like "this node"
+        case 'this':
+            capture = linkErrorObject(capture);
+            break;
+
+        // link an entity ID
         case 'n':
         case 'w':
         case 'r':
@@ -150,6 +162,10 @@ function parseError(capture, idType) {
 
     return capture;
 
+
+    function linkErrorObject(d) {
+        return '<a class="kr_error_object_link">' + d + '</a>';
+    }
 
     function linkEntity(d) {
         return '<a class="kr_error_entity_link">' + d + '</a>';
@@ -304,6 +320,28 @@ export default {
 
                         // try to handle error type directly, fallback to parent error type.
                         var whichType = errorTemplate ? errorType : parentErrorType;
+
+                        // Rewrite a few of the errors at this point..
+                        // This is done to make them easier to linkify and translate.
+                        switch (whichType) {
+                            case '170':
+                                props.description = 'This feature has a FIXME tag: ' + props.description;
+                                break;
+                            case '292':
+                            case '293':
+                                props.description = props.description.replace('A turn-', 'This turn-');
+                                break;
+                            case '294':
+                            case '295':
+                            case '296':
+                            case '297':
+                            case '298':
+                                props.description = 'This turn-restriction~' + props.description;
+                                break;
+                            case '300':
+                                props.description = 'This highway is missing a maxspeed tag';
+                                break;
+                        }
 
                         // - move markers slightly so it doesn't obscure the geometry,
                         // - then move markers away from other coincident markers
