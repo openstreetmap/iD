@@ -107,6 +107,7 @@ export function modeSelectNote(context, selectedNoteID) {
         if (!note) return;
 
         behaviors.forEach(context.install);
+
         keybinding
             .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
             .on('⎋', esc, true);

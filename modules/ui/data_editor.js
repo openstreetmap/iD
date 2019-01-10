@@ -4,17 +4,33 @@ import { svgIcon } from '../svg';
 
 import {
     uiDataHeader,
-    uiRawTagEditor
+    uiQuickLinks,
+    uiRawTagEditor,
+    uiTooltipHtml
 } from './index';
 
 
 export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
+    var quickLinks = uiQuickLinks();
     var rawTagEditor = uiRawTagEditor(context);
     var _datum;
 
 
     function dataEditor(selection) {
+        // quick links
+        var choices = [{
+            id: 'zoom_to',
+            label: 'inspector.zoom_to.title',
+            tooltip: function() {
+                return uiTooltipHtml(t('inspector.zoom_to.tooltip_data'), t('inspector.zoom_to.key'));
+            },
+            click: function zoomTo() {
+                context.mode().zoomToSelected();
+            }
+        }];
+
+
         var header = selection.selectAll('.header')
             .data([0]);
 
@@ -50,7 +66,8 @@ export function uiDataEditor(context) {
             .append('div')
             .attr('class', 'modal-section data-editor')
             .merge(editor)
-            .call(dataHeader.datum(_datum));
+            .call(dataHeader.datum(_datum))
+            .call(quickLinks.choices(choices));
 
         var rte = body.selectAll('.raw-tag-editor')
             .data([0]);

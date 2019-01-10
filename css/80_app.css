@@ -1165,6 +1165,7 @@ img.tag-reference-wiki-image {
     margin: 0 5px;
 }
 
+.data-editor .quick-links,
 .note-editor .quick-links {
     padding: 5px 0 0 0;
 }
