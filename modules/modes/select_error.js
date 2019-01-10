@@ -10,6 +10,7 @@ import {
     behaviorSelect
 } from '../behavior';
 
+import { t } from '../util/locale';
 import { services } from '../services';
 import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { uiKeepRightEditor } from '../ui';
@@ -53,7 +54,35 @@ export function modeSelectError(context, selectedErrorID) {
     }
 
 
+    mode.zoomToSelected = function() {
+        if (!keepRight) return;
+        var error = keepRight.getError(selectedErrorID);
+        if (error) {
+            context.map().centerZoom(error.loc, 20);
+        }
+    };
+
+
     mode.enter = function() {
+        var error = checkSelectedID();
+        if (!error) return;
+
+        behaviors.forEach(context.install);
+        keybinding
+            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on('⎋', esc, true);
+
+        d3_select(document)
+            .call(keybinding);
+
+        selectError();
+
+        var sidebar = context.ui().sidebar;
+        sidebar.show(keepRightEditor.error(error));
+
+        context.map()
+            .on('drawn.select-error', selectError);
+
 
         // class the error as selected, or return to browse mode if the error is gone
         function selectError(drawn) {
@@ -82,23 +111,6 @@ export function modeSelectError(context, selectedErrorID) {
             if (d3_select('.combobox').size()) return;
             context.enter(modeBrowse(context));
         }
-
-        var error = checkSelectedID();
-        if (!error) return;
-
-        behaviors.forEach(context.install);
-        keybinding.on('⎋', esc, true);
-
-        d3_select(document)
-            .call(keybinding);
-
-        selectError();
-
-        var sidebar = context.ui().sidebar;
-        sidebar.show(keepRightEditor.error(error));
-
-        context.map()
-            .on('drawn.select-error', selectError);
     };
 
 
