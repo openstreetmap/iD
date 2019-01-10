@@ -10,6 +10,8 @@ import {
     behaviorSelect
 } from '../behavior';
 
+import { t } from '../util/locale';
+
 import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { services } from '../services';
 import { uiNoteEditor } from '../ui';
@@ -84,9 +86,18 @@ export function modeSelectNote(context, selectedNoteID) {
     }
 
 
-    mode.newFeature = function(_) {
+    mode.zoomToSelected = function() {
+        if (!osm) return;
+        var note = osm.getNote(selectedNoteID);
+        if (note) {
+            context.map().centerZoom(note.loc, 20);
+        }
+    };
+
+
+    mode.newFeature = function(val) {
         if (!arguments.length) return newFeature;
-        newFeature = _;
+        newFeature = val;
         return mode;
     };
 
@@ -96,7 +107,9 @@ export function modeSelectNote(context, selectedNoteID) {
         if (!note) return;
 
         behaviors.forEach(context.install);
-        keybinding.on('⎋', esc, true);
+        keybinding
+            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on('⎋', esc, true);
 
         d3_select(document)
             .call(keybinding);

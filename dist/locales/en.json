@@ -1683,7 +1683,7 @@
                 "with_selected": {
                     "title": "With feature selected",
                     "edit_menu": "Toggle edit menu",
-                    "zoom_to": "Zoom in on selected feature"
+                    "zoom_to": "Zoom to selected feature"
                 },
                 "vertex_selected": {
                     "title": "With node selected",

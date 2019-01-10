@@ -16,6 +16,8 @@ import {
     uiNoteComments,
     uiNoteHeader,
     uiNoteReport,
+    uiQuickLinks,
+    uiTooltipHtml,
     uiViewOnOSM,
 } from './index';
 
@@ -27,6 +29,7 @@ import {
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change');
+    var quickLinks = uiQuickLinks();
     var noteComments = uiNoteComments();
     var noteHeader = uiNoteHeader();
 
@@ -37,6 +40,19 @@ export function uiNoteEditor(context) {
 
 
     function noteEditor(selection) {
+        // quick links
+        var choices = [{
+            id: 'zoom_to',
+            label: 'inspector.zoom_to.title',
+            tooltip: function() {
+                return uiTooltipHtml(t('inspector.zoom_to.tooltip_note'), t('inspector.zoom_to.key'));
+            },
+            click: function zoomTo() {
+                context.mode().zoomToSelected();
+            }
+        }];
+
+
         var header = selection.selectAll('.header')
             .data([0]);
 
@@ -73,6 +89,7 @@ export function uiNoteEditor(context) {
             .attr('class', 'modal-section note-editor')
             .merge(editor)
             .call(noteHeader.note(_note))
+            .call(quickLinks.choices(choices))
             .call(noteComments.note(_note))
             .call(noteSaveSection);
 

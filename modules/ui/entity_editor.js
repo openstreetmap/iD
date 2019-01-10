@@ -174,11 +174,6 @@ export function uiEntityEditor(context) {
             },
             click: function zoomTo() {
                 context.mode().zoomToSelected();
-                // d3_event.preventDefault();
-                // var entity = context.hasEntity(_entityID);
-                // if (entity) {
-                //     context.map().zoomTo(entity)
-                // }
             }
         }];
 
