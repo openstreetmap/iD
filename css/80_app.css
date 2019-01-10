@@ -794,7 +794,7 @@ a.hide-toggle {
 }
 
 .inspector-inner {
-    padding: 20px;
+    padding: 20px 20px 5px 20px;
     position: relative;
 }
 
@@ -1153,11 +1153,24 @@ img.tag-reference-wiki-image {
 }
 
 
+/* Quick links
+------------------------------------------------------- */
+.quick-links {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+.quick-link {
+    margin: 0 5px;
+}
+
+
 /* Entity/Preset Editor
 ------------------------------------------------------- */
 .preset-editor {
     overflow: hidden;
-    padding: 20px 0 10px 0;
+    padding: 10px 0px 5px 0px;
 }
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
@@ -2352,6 +2365,7 @@ input.key-trap {
 /* hide but preserve in layout */
 .inspector-hover .combobox-caret,
 .inspector-hover .header button,
+.inspector-hover .quick-links,
 .inspector-hover .form-field-input-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
@@ -4321,29 +4335,24 @@ svg.mouseclick use.right {
     font-size: 12px;
     white-space: initial;
 }
-
 .tooltip.in {
     opacity: 0.9;
     z-index: 1030;
     height: auto;
     display: block;
 }
-
 .tooltip.top {
     margin-top: -20px;
     text-align: center;
 }
-
 .tooltip.right {
     margin-left: 20px;
     text-align: left;
 }
-
 .tooltip.bottom {
     margin-top: 20px;
     text-align: center;
 }
-
 .tooltip.left {
     margin-left: -20px;
     text-align: right;
@@ -4368,7 +4377,6 @@ svg.mouseclick use.right {
     position: absolute;
     background: transparent;
 }
-
 .tail::after {
     content: "";
     position: absolute;
@@ -4415,7 +4423,6 @@ svg.mouseclick use.right {
     border-color: transparent;
     border-style: solid;
 }
-
 .tooltip.top .tooltip-arrow {
     bottom: -5px;
     left: 50%;
@@ -4423,7 +4430,6 @@ svg.mouseclick use.right {
     border-top-color: #fff;
     border-width: 5px 5px 0;
 }
-
 .tooltip.right .tooltip-arrow {
     top: 50%;
     left: -5px;
@@ -4431,7 +4437,6 @@ svg.mouseclick use.right {
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-
 .tooltip.left .tooltip-arrow {
     top: 50%;
     right: -5px;
@@ -4439,7 +4444,6 @@ svg.mouseclick use.right {
     border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
-
 .tooltip.bottom .tooltip-arrow {
     top: -5px;
     left: 50%;
@@ -4450,7 +4454,7 @@ svg.mouseclick use.right {
 
 .tooltip-heading {
     font-weight: bold;
-    background: #F6F6F6;
+    background: #f6f6f6;
     padding: 10px;
     margin: -10px -10px 10px -10px;
     border-radius: 3px 3px 0 0;
@@ -4458,52 +4462,46 @@ svg.mouseclick use.right {
 }
 
 .keyhint-wrap {
-    background: #F6F6F6;
+    background: #f6f6f6;
     padding: 10px;
     margin: 10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
-
 .tooltip-inner .keyhint {
     font-weight: bold;
     margin-left: 5px;
 }
 
-/* Exceptions for tooltip layouts */
 
-/* make tooltips in panels dark */
+/* dark tooltips for sidebar / panels */
 .map-pane .tooltip.top .tooltip-arrow,
-.entity-editor-pane .tooltip.top .tooltip-arrow,
-.warning-section .tooltip.top .tooltip-arrow {
+#sidebar .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
-
 .map-pane .tooltip.bottom .tooltip-arrow,
-.entity-editor-pane .tooltip.bottom .tooltip-arrow,
-.warning-section .tooltip.bottom .tooltip-arrow {
+#sidebar .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
-
 .map-pane .tooltip.left .tooltip-arrow,
-.entity-editor-pane .tooltip.left .tooltip-arrow,
-.warning-section .tooltip.left .tooltip-arrow {
+#sidebar .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
-
 .map-pane .tooltip.right .tooltip-arrow,
-.entity-editor-pane .tooltip.right .tooltip-arrow,
-.warning-section .tooltip.right .tooltip-arrow {
+#sidebar .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
-
 .map-pane .tooltip-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,
-.entity-editor-pane .tooltip-inner,
-.warning-section .tooltip-inner {
+#sidebar .tooltip-inner,
+#sidebar .tooltip-heading,
+#sidebar .keyhint-wrap {
     background: #000;
     color: #ccc;
 }
+
+/* Exceptions for tooltip layouts */
+
 /* commit warning tooltips need to be closer */
 .warning-section .tooltip.top {
     margin-top: -5px;
@@ -4519,11 +4517,11 @@ svg.mouseclick use.right {
 
 /* Move over tooltips that are near the edge of screen */
 button.sidebar-toggle .tooltip .tooltip-arrow {
-    left: 32px;
+    left: 36px;
 }
 [dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
-    right: 32px;
+    right: 36px;
 }
 
 li:first-of-type .badge .tooltip,

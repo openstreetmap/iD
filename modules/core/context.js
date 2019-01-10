@@ -145,7 +145,9 @@ export function coreContext() {
             this.loadEntity(entityID, function(err, result) {
                 if (err) return;
                 var entity = _find(result.data, function(e) { return e.id === entityID; });
-                if (entity) { map.zoomTo(entity); }
+                if (entity) {
+                    map.zoomTo(entity);
+                }
             });
         }
 

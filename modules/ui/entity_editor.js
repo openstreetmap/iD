@@ -14,12 +14,14 @@ import { tooltip } from '../util/tooltip';
 import { actionChangeTags } from '../actions';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
+import { uiPresetEditor } from './preset_editor';
 import { uiPresetIcon } from './preset_icon';
+import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
-import { uiPresetEditor } from './preset_editor';
+import { uiTooltipHtml } from './tooltipHtml';
 import { utilCleanTags, utilRebind } from '../util';
 
 
@@ -33,6 +35,7 @@ export function uiEntityEditor(context) {
     var _activePreset;
     var _tagReference;
 
+    var quickLinks = uiQuickLinks();
     var presetEditor = uiPresetEditor(context).on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
@@ -100,6 +103,10 @@ export function uiEntityEditor(context) {
 
         bodyEnter
             .append('div')
+            .attr('class', 'preset-quick-links');
+
+        bodyEnter
+            .append('div')
             .attr('class', 'preset-editor');
 
         bodyEnter
@@ -124,6 +131,7 @@ export function uiEntityEditor(context) {
         body = body
             .merge(bodyEnter);
 
+        // update header
         if (_tagReference) {
             body.selectAll('.preset-list-button-wrap')
                 .call(_tagReference.button);
@@ -143,7 +151,6 @@ export function uiEntityEditor(context) {
                 .preset(_activePreset)
             );
 
-
         var label = body.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
             .data(_activePreset.name().split(' - '), function(d) { return d; });
@@ -158,6 +165,28 @@ export function uiEntityEditor(context) {
             .text(function(d) { return d; });
 
 
+        // update quick links
+        var choices = [{
+            id: 'zoom_to',
+            label: 'inspector.zoom_to.title',
+            tooltip: function() {
+                return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
+            },
+            click: function zoomTo() {
+                context.mode().zoomToSelected();
+                // d3_event.preventDefault();
+                // var entity = context.hasEntity(_entityID);
+                // if (entity) {
+                //     context.map().zoomTo(entity)
+                // }
+            }
+        }];
+
+        body.select('.preset-quick-links')
+            .call(quickLinks.choices(choices));
+
+
+        // update editor sections
         body.select('.preset-editor')
             .call(presetEditor
                 .preset(_activePreset)
@@ -256,25 +285,25 @@ export function uiEntityEditor(context) {
     }
 
 
-    entityEditor.modified = function(_) {
+    entityEditor.modified = function(val) {
         if (!arguments.length) return _modified;
-        _modified = _;
+        _modified = val;
         d3_selectAll('button.preset-close use')
             .attr('xlink:href', (_modified ? '#iD-icon-apply' : '#iD-icon-close'));
         return entityEditor;
     };
 
 
-    entityEditor.state = function(_) {
+    entityEditor.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         return entityEditor;
     };
 
 
-    entityEditor.entityID = function(_) {
+    entityEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
 
@@ -292,10 +321,10 @@ export function uiEntityEditor(context) {
     };
 
 
-    entityEditor.preset = function(_) {
+    entityEditor.preset = function(val) {
         if (!arguments.length) return _activePreset;
-        if (_ !== _activePreset) {
-            _activePreset = _;
+        if (val !== _activePreset) {
+            _activePreset = val;
             _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
         }

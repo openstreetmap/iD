@@ -403,6 +403,13 @@ en:
     title: Show My Location
     locating: "Locating, please wait..."
   inspector:
+    zoom_to:
+      key: Z
+      title: Zoom to this
+      tooltip_feature: "Center and zoom the map to focus on this feature."
+      tooltip_note: "Center and zoom the map to focus on this note."
+      tooltip_data: "Center and zoom the map to focus on this data."
+      tooltip_issue: "Center and zoom the map to focus on this issue."
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
@@ -1419,6 +1426,7 @@ en:
       with_selected:
         title: "With feature selected"
         edit_menu: "Toggle edit menu"
+        zoom_to: "Zoom to selected feature"
       vertex_selected:
         title: "With node selected"
         previous: "Jump to previous node"

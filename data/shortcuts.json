@@ -115,8 +115,8 @@
               "text": "shortcuts.browsing.with_selected.edit_menu"
             },
             {
-              "shortcuts": [],
-              "text": ""
+              "shortcuts": ["inspector.zoom_to.key"],
+              "text": "shortcuts.browsing.with_selected.zoom_to"
             },
             {
               "section": "vertex_selected",

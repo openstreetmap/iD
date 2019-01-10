@@ -496,10 +496,8 @@ export function uiMapData(context) {
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip'),
-                        key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
-
-
+                    var tip = t(name + '.' + d + '.tooltip');
+                    var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d)) {
                         var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
                         tip += '<div>' + msg + '</div>';
