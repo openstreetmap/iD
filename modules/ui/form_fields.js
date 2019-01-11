@@ -7,25 +7,25 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 export function uiFormFields(context) {
     var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
+    var _selection = d3_select(null);
+    var _fieldsArr = [];
     var _state = '';
-    var _fieldsArr;
+    var _klass = '';
 
 
-    function formFields(selection, klass) {
-        render(selection, klass);
+    function formFields(selection) {
+        _selection = selection
+            .call(render);
     }
 
+    formFields.tagsChanged = function() {
+        _selection
+            .call(render);
+    };
 
-    formFields.tagsChanged = function() {};
 
-    function render(selection, klass) {
-
-        formFields.tagsChanged = function() {
-            render(selection, klass);
-        };
-
+    function render(selection) {
         var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
-
         var shown = allowedFields.filter(function(field) { return field.isShown(); });
         var notShown = allowedFields.filter(function(field) { return !field.isShown(); });
 
@@ -34,7 +34,7 @@ export function uiFormFields(context) {
 
         container = container.enter()
             .append('div')
-            .attr('class', 'form-fields-container ' + (klass || ''))
+            .attr('class', 'form-fields-container ' + (_klass || ''))
             .merge(container);
 
 
@@ -122,13 +122,19 @@ export function uiFormFields(context) {
 
     formFields.fieldsArr = function(val) {
         if (!arguments.length) return _fieldsArr;
-        _fieldsArr = val;
+        _fieldsArr = val || [];
         return formFields;
     };
 
     formFields.state = function(val) {
         if (!arguments.length) return _state;
         _state = val;
+        return formFields;
+    };
+
+    formFields.klass = function(val) {
+        if (!arguments.length) return _klass;
+        _klass = val;
         return formFields;
     };
 

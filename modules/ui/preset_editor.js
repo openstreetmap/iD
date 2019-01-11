@@ -87,8 +87,9 @@ export function uiPresetEditor(context) {
         selection
             .call(formFields
                 .fieldsArr(_fieldsArr)
-                .state(_state),
-            'inspector-inner fillL3');
+                .state(_state)
+                .klass('inspector-inner fillL3')
+            );
 
 
         selection.selectAll('.wrap-form-field input')
