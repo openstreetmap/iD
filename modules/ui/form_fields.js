@@ -7,24 +7,12 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 export function uiFormFields(context) {
     var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
-    var _selection = d3_select(null);
     var _fieldsArr = [];
     var _state = '';
     var _klass = '';
 
 
     function formFields(selection) {
-        _selection = selection
-            .call(render);
-    }
-
-    formFields.tagsChanged = function() {
-        _selection
-            .call(render);
-    };
-
-
-    function render(selection) {
         var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
         var shown = allowedFields.filter(function(field) { return field.isShown(); });
         var notShown = allowedFields.filter(function(field) { return !field.isShown(); });
@@ -111,7 +99,7 @@ export function uiFormFields(context) {
                 .on('accept', function (d) {
                     var field = d.field;
                     field.show();
-                    render(selection);
+                    selection.call(formFields);  // rerender
                     if (field.type !== 'semiCombo' && field.type !== 'multiCombo') {
                         field.focus();
                     }
