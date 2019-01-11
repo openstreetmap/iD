@@ -2561,7 +2561,9 @@ input.key-trap {
 }
 
 .note-save,
-.keepRight-save,
+.keepRight-save {
+    padding-top: 20px;
+}
 .kr_error-details,
 .kr_error-comment-container {
     padding: 10px;
