@@ -847,6 +847,10 @@ a.hide-toggle {
     border-radius: 2px;
 }
 
+[dir='rtl'] .geocode-item {
+    left: -25%;
+}
+
 .geocode-item:hover {
     background-color: #aaa;
 }
