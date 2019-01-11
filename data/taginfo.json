@@ -5563,6 +5563,13 @@
     },
     {
       "key": "shop",
+      "value": "caravan",
+      "description": "🄿 RV Dealership",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "carpet",
       "description": "🄿 Carpet Store",
       "object_types": ["node", "area"],

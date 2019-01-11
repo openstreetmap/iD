@@ -6986,6 +6986,10 @@
                     "name": "Car Dealership",
                     "terms": "auto"
                 },
+                "shop/caravan": {
+                    "name": "RV Dealership",
+                    "terms": "auto"
+                },
                 "shop/carpet": {
                     "name": "Carpet Store",
                     "terms": "rug"

@@ -5961,6 +5961,11 @@ en:
         name: Car Repair Shop
         # 'terms: auto,garage,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
+      shop/caravan:
+        # shop=caravan
+        name: RV Dealership
+        # 'terms: auto'
+        terms: '<translate with synonyms or related terms for ''RV Dealership'', separated by commas>'
       shop/carpet:
         # shop=carpet
         name: Carpet Store
