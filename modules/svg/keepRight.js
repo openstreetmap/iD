@@ -175,7 +175,11 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
         function sortY(a, b) {
-            return (a.id === selectedID) ? 1 : (b.id === selectedID) ? -1 : b.loc[1] - a.loc[1];
+            return (a.id === selectedID) ? 1
+                : (b.id === selectedID) ? -1
+                : (a.severity === 'error' && b.severity !== 'error') ? 1
+                : (b.severity === 'error' && a.severity !== 'error') ? -1
+                : b.loc[1] - a.loc[1];
         }
     }
 

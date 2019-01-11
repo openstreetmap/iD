@@ -328,6 +328,7 @@ export default {
 
                         // try to handle error type directly, fallback to parent error type.
                         var whichType = errorTemplate ? errorType : parentErrorType;
+                        var whichTemplate = errorTypes[whichType];
 
                         // Rewrite a few of the errors at this point..
                         // This is done to make them easier to linkify and translate.
@@ -376,6 +377,7 @@ export default {
                             which_type: whichType,
                             error_type: errorType,
                             parent_error_type: parentErrorType,
+                            severity: whichTemplate.severity || 'error',
                             object_id: props.object_id,
                             object_type: props.object_type,
                             schema: props.schema,
