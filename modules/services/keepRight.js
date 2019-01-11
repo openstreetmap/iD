@@ -135,6 +135,10 @@ function parseError(capture, idType) {
             capture = linkErrorObject(capture);
             break;
 
+        case 'url':
+            capture = linkURL(capture);
+            break;
+
         // link an entity ID
         case 'n':
         case 'w':
@@ -169,6 +173,10 @@ function parseError(capture, idType) {
 
     function linkEntity(d) {
         return '<a class="kr_error_entity_link">' + d + '</a>';
+    }
+
+    function linkURL(d) {
+        return '<a class="kr_external_link" target="_blank" href="' + d + '">' + d + '</a>';
     }
 
     // arbitrary node list of form: #ID, #ID, #ID...
@@ -340,6 +348,11 @@ export default {
                                 break;
                             case '300':
                                 props.description = 'This highway is missing a maxspeed tag';
+                                break;
+                            case '411':
+                            case '412':
+                            case '413':
+                                props.description = 'This feature~' + props.description;
                                 break;
                         }
 

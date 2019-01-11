@@ -475,20 +475,23 @@
     "411": {
       "title": "http error",
       "severity": "error",
-      "description": "The URL (<a target=\"_blank\" href=\"$1\">$1</a>) cannot be opened (HTTP status code $2)",
-      "regex": "href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)"
+      "description": "The URL (<a target=_blank href=$1>$1</a>) cannot be opened (HTTP status code $2)",
+      "IDs": ["this", "url", ""],
+      "regex": "(this feature)~.+ href=([^>]+)>.+ code (\\d+)\\)"
     },
     "412": {
       "title": "domain hijacking",
       "severity": "error",
-      "description": "Possible domain squatting: <a target=\"_blank\" href=\"$1\">$1</a>. Suspicious text is: \"$2\"",
-      "regex": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: &quot;(.+)&quot;"
+      "description": "Possible domain squatting: <a target=_blank href=$1>$1</a>. Suspicious text is: \"$2\"",
+      "IDs": ["this", "url", ""],
+      "regex": "(this feature)~.+ href=([^>]+)>.+ is: &quot;(.+)&quot;"
     },
     "413": {
       "title": "non-match",
       "severity": "error",
-      "description": "Content of the URL (<a target=\"_blank\" href=\"$1\">$1</a>) did not contain these keywords: ($2)",
-      "regex": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)"
+      "description": "Content of the URL (<a target=_blank href=$1>$1</a>) did not contain these keywords: ($2)",
+      "IDs": ["this", "url", ""],
+      "regex": "(this feature)~.+ href=([^>]+)>.+ keywords: \\((.+)\\)"
     }
   }
 }

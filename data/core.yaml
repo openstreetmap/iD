@@ -891,11 +891,11 @@ en:
           title: 'Website issue'
           description: 'There is an unspecified issue with a contact website or URL.'
         411:
-          description: 'The URL {var1} cannot be opened (HTTP status code {var2}).'
+          description: '{var1} may have an outdated URL: {var2} returned HTTP status code {var3}.'
         412:
-          description: 'Possible domain squatting: The URL has suspicious text: "{var1}".'
+          description: '{var1} may have an outdated URL: {var2} contained suspicious text "{var3}".'
         413:
-          description: 'Possible non-match. Content of the URL did not contain these keywords: ({var1}).'
+          description: '{var1} may have an outdated URL: {var2} did not contain keywords "{var3}".'
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"
