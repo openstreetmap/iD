@@ -47,7 +47,7 @@ var oauth = osmAuth({
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { loaded: {}, inflight: {}, seen: {} };
-var _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, rtree: rbush() };
+var _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 
@@ -385,7 +385,7 @@ export default {
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };
-        _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, rtree: rbush() };
+        _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
         _userCache = { toLoad: {}, user: {} };
         _changeset = {};
 
@@ -956,6 +956,13 @@ export default {
             // we get the updated note back, remove from caches and reparse..
             this.removeNote(note);
 
+            // update closed note cache - used to populate `closed:note` changeset tag
+            if (action === 'close') {
+                _noteCache.closed[note.id] = true;
+            } else if (action === 'reopen') {
+                delete _noteCache.closed[note.id];
+            }
+
             var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
                 if (err) {
@@ -1118,6 +1125,13 @@ export default {
         _noteCache.note[note.id] = note;
         updateRtree(encodeNoteRtree(note), true);  // true = replace
         return note;
+    },
+
+
+    // Get an array of note IDs closed during this session.
+    // Used to populate `closed:note` changeset tag
+    getClosedIDs: function() {
+        return Object.keys(_noteCache.closed).sort();
     }
 
 };

@@ -64,6 +64,8 @@ export function uiCommit(context) {
         }
 
         var tags;
+        // Initialize changeset if one does not exist yet.
+        // Also pull values from local storage.
         if (!_changeset) {
             var detected = utilDetect();
             tags = {
@@ -82,13 +84,9 @@ export function uiCommit(context) {
                 tags.hashtags = hashtags;
             }
 
-            // iD 2.8.1 could write a literal 'undefined' here.. see #5021
-            // (old source values expire after 2 days, so 'undefined' checks can go away in v2.9)
             var source = context.storage('source');
-            if (source && source !== 'undefined') {
+            if (source) {
                 tags.source = source;
-            } else if (source === 'undefined') {
-                context.storage('source', null);
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -101,6 +99,10 @@ export function uiCommit(context) {
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
+        var osmClosed = osm.getClosedIDs();
+        if (osmClosed.length) {
+            tags['closed:note'] = osmClosed.join(';').substr(0, 255);
+        }
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
