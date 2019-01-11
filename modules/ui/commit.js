@@ -8,6 +8,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
+import { services } from '../services';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
@@ -95,8 +96,18 @@ export function uiCommit(context) {
 
         tags = _clone(_changeset.tags);
 
+        // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
         tags.imagery_used = imageryUsed || 'None';
+
+        // assign tags for closed issues and notes
+        if (services.keepRight) {
+            var krClosed = services.keepRight.getClosedIDs();
+            if (krClosed.length) {
+                tags['closed:keepright'] = krClosed.join(';').substr(0, 255);
+            }
+        }
+
         _changeset = _changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
@@ -109,17 +120,17 @@ export function uiCommit(context) {
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer');
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block')
             .append('h3')
             .text(t('commit.title'));
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer header-block-close')
-            .append('button') 
+            .append('button')
             .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon('#iD-icon-close'));

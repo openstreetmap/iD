@@ -281,7 +281,13 @@ export default {
         if (_krCache) {
             _forEach(_krCache.inflight, abortRequest);
         }
-        _krCache = { loaded: {}, inflight: {}, keepRight: {}, rtree: rbush() };
+        _krCache = {
+            data: {},
+            loaded: {},
+            inflight: {},
+            closed: {},
+            rtree: rbush()
+        };
     },
 
 
@@ -386,7 +392,7 @@ export default {
 
                         d.replacements = tokenReplacements(d);
 
-                        _krCache.keepRight[d.id] = d;
+                        _krCache.data[d.id] = d;
                         _krCache.rtree.insert(encodeErrorRtree(d));
                     });
 
@@ -418,8 +424,14 @@ export default {
         _krCache.inflight[d.id] = d3_request(url)
             .post(function(err) {
                 delete _krCache.inflight[d.id];
-                if (d.state === 'ignore' || d.state === 'ignore_t') {
+
+                if (d.state === 'ignore') {   // ignore permanently (false positive)
                     that.removeError(d);
+
+                } else if (d.state === 'ignore_t') {  // ignore temporarily (error fixed)
+                    that.removeError(d);
+                    _krCache.closed[d.schema + ':' + d.error_id] = true;
+
                 } else {
                     d = that.replaceError(d.update({
                         comment: d.newComment,
@@ -449,7 +461,7 @@ export default {
 
     // get a single error from the cache
     getError: function(id) {
-        return _krCache.keepRight[id];
+        return _krCache.data[id];
     },
 
 
@@ -457,7 +469,7 @@ export default {
     replaceError: function(error) {
         if (!(error instanceof krError) || !error.id) return;
 
-        _krCache.keepRight[error.id] = error;
+        _krCache.data[error.id] = error;
         updateRtree(encodeErrorRtree(error), true); // true = replace
         return error;
     },
@@ -467,13 +479,20 @@ export default {
     removeError: function(error) {
         if (!(error instanceof krError) || !error.id) return;
 
-        delete _krCache.keepRight[error.id];
+        delete _krCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove
     },
 
 
     errorURL: function(error) {
         return _krUrlRoot + 'report_map.php?schema=' + error.schema + '&error=' + error.id;
+    },
+
+
+    // Get an array of errors closed during this session.
+    // Used to populate `closed:keepright` changeset tag
+    getClosedIDs: function() {
+        return Object.keys(_krCache.closed).sort();
     }
 
 };
