@@ -4487,6 +4487,10 @@ svg.mouseclick use.right {
     margin-left: 5px;
 }
 
+[dir='rtl'] .tooltip-inner .keyhint {
+    margin-left: 0;
+    margin-right: 5px;
+}
 
 /* dark tooltips for sidebar / panels */
 .map-pane .tooltip.top .tooltip-arrow,
