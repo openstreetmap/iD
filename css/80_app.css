@@ -2275,6 +2275,12 @@ div.combobox {
     padding-left: 10px;
 }
 
+[dir='rtl'] .raw-member-editor .member-row .member-entity-name,
+[dir='rtl'] .raw-membership-editor .member-row .member-entity-name {
+    padding-left:0;
+    padding-right: 10px;
+}
+
 .form-field-input-member > input.member-role {
     border-radius: 0 0 0 4px;
 }
