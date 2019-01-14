@@ -77,7 +77,7 @@ export function uiRawMembershipEditor(context) {
                 t('operations.add.annotation.relation')
             );
 
-            context.enter(modeSelect(context, [relation.id]));
+            context.enter(modeSelect(context, [relation.id]).newFeature(true));
         }
     }
 
