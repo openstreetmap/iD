@@ -8,6 +8,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
+import { services } from '../services';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
@@ -63,6 +64,8 @@ export function uiCommit(context) {
         }
 
         var tags;
+        // Initialize changeset if one does not exist yet.
+        // Also pull values from local storage.
         if (!_changeset) {
             var detected = utilDetect();
             tags = {
@@ -81,13 +84,9 @@ export function uiCommit(context) {
                 tags.hashtags = hashtags;
             }
 
-            // iD 2.8.1 could write a literal 'undefined' here.. see #5021
-            // (old source values expire after 2 days, so 'undefined' checks can go away in v2.9)
             var source = context.storage('source');
-            if (source && source !== 'undefined') {
+            if (source) {
                 tags.source = source;
-            } else if (source === 'undefined') {
-                context.storage('source', null);
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -95,8 +94,22 @@ export function uiCommit(context) {
 
         tags = _clone(_changeset.tags);
 
+        // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
         tags.imagery_used = imageryUsed || 'None';
+
+        // assign tags for closed issues and notes
+        var osmClosed = osm.getClosedIDs();
+        if (osmClosed.length) {
+            tags['closed:note'] = osmClosed.join(';').substr(0, 255);
+        }
+        if (services.keepRight) {
+            var krClosed = services.keepRight.getClosedIDs();
+            if (krClosed.length) {
+                tags['closed:keepright'] = krClosed.join(';').substr(0, 255);
+            }
+        }
+
         _changeset = _changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
@@ -109,17 +122,17 @@ export function uiCommit(context) {
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer');
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block')
             .append('h3')
             .text(t('commit.title'));
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer header-block-close')
-            .append('button') 
+            .append('button')
             .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon('#iD-icon-close'));

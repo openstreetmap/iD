@@ -15,12 +15,14 @@ import { actionChangeTags } from '../actions';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
 import { uiPresetIcon } from './preset_icon';
+import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
+import { uiTooltipHtml } from './tooltipHtml';
 import { utilCleanTags, utilRebind } from '../util';
 
 
@@ -35,6 +37,7 @@ export function uiEntityEditor(context) {
     var _tagReference;
 
     var entityIssues = uiEntityIssues(context);
+    var quickLinks = uiQuickLinks();
     var presetEditor = uiPresetEditor(context).on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
@@ -49,28 +52,28 @@ export function uiEntityEditor(context) {
             .data([0]);
 
         // Enter
-        var enter = header.enter()
+        var headerEnter = header.enter()
             .append('div')
             .attr('class', 'header fillL cf');
 
-        enter
+        headerEnter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
             .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
 
-        enter
+        headerEnter
             .append('button')
             .attr('class', 'fr preset-close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
-        enter
+        headerEnter
             .append('h3')
             .text(t('inspector.edit'));
 
         // Update
         header = header
-            .merge(enter);
+            .merge(headerEnter);
 
         header.selectAll('.preset-reset')
             .on('click', function() {
@@ -83,11 +86,11 @@ export function uiEntityEditor(context) {
             .data([0]);
 
         // Enter
-        enter = body.enter()
+        var bodyEnter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
 
-        enter
+        bodyEnter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')
             .append('div')
@@ -100,27 +103,31 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'label-inner');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border entity-issues');
+            .attr('class', 'preset-quick-links');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border preset-editor');
+            .attr('class', 'entity-issues');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border raw-tag-editor inspector-inner');
+            .attr('class', 'preset-editor');
 
-        enter
+        bodyEnter
             .append('div')
-            .attr('class', 'inspector-border raw-member-editor inspector-inner');
+            .attr('class', 'raw-tag-editor inspector-inner');
 
-        enter
+        bodyEnter
+            .append('div')
+            .attr('class', 'raw-member-editor inspector-inner');
+
+        bodyEnter
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
-        enter
+        bodyEnter
             .append('input')
             .attr('type', 'text')
             .attr('class', 'key-trap');
@@ -128,8 +135,9 @@ export function uiEntityEditor(context) {
 
         // Update
         body = body
-            .merge(enter);
+            .merge(bodyEnter);
 
+        // update header
         if (_tagReference) {
             body.selectAll('.preset-list-button-wrap')
                 .call(_tagReference.button);
@@ -149,7 +157,6 @@ export function uiEntityEditor(context) {
                 .preset(_activePreset)
             );
 
-
         var label = body.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
             .data(_activePreset.name().split(' - '), function(d) { return d; });
@@ -168,6 +175,23 @@ export function uiEntityEditor(context) {
                 .entityID(_entityID)
             );
 
+        // update quick links
+        var choices = [{
+            id: 'zoom_to',
+            label: 'inspector.zoom_to.title',
+            tooltip: function() {
+                return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
+            },
+            click: function zoomTo() {
+                context.mode().zoomToSelected();
+            }
+        }];
+
+        body.select('.preset-quick-links')
+            .call(quickLinks.choices(choices));
+
+
+        // update editor sections
         body.select('.preset-editor')
             .call(presetEditor
                 .preset(_activePreset)
@@ -274,25 +298,25 @@ export function uiEntityEditor(context) {
     }
 
 
-    entityEditor.modified = function(_) {
+    entityEditor.modified = function(val) {
         if (!arguments.length) return _modified;
-        _modified = _;
+        _modified = val;
         d3_selectAll('button.preset-close use')
             .attr('xlink:href', (_modified ? '#iD-icon-apply' : '#iD-icon-close'));
         return entityEditor;
     };
 
 
-    entityEditor.state = function(_) {
+    entityEditor.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         return entityEditor;
     };
 
 
-    entityEditor.entityID = function(_) {
+    entityEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
 
@@ -310,10 +334,10 @@ export function uiEntityEditor(context) {
     };
 
 
-    entityEditor.preset = function(_) {
+    entityEditor.preset = function(val) {
         if (!arguments.length) return _activePreset;
-        if (_ !== _activePreset) {
-            _activePreset = _;
+        if (val !== _activePreset) {
+            _activePreset = val;
             _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
         }

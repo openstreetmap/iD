@@ -794,7 +794,7 @@
     {
       "key": "amenity",
       "value": "pharmacy",
-      "description": "🄿 Pharmacy",
+      "description": "🄿 Pharmacy Counter",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pharmacy-15.svg?sanitize=true"
     },
@@ -815,7 +815,7 @@
     {
       "key": "religion",
       "value": "christian",
-      "description": "🄿 Church",
+      "description": "🄿 Christian Church",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-christian-15.svg?sanitize=true"
     },
@@ -829,14 +829,14 @@
     {
       "key": "religion",
       "value": "jewish",
-      "description": "🄿 Synagogue",
+      "description": "🄿 Jewish Synagogue",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-jewish-15.svg?sanitize=true"
     },
     {
       "key": "religion",
       "value": "muslim",
-      "description": "🄿 Mosque",
+      "description": "🄿 Muslim Mosque",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-muslim-15.svg?sanitize=true"
     },
@@ -3678,7 +3678,7 @@
       "value": "ice_rink",
       "description": "🄿 Ice Rink",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -3877,13 +3877,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/lodging-15.svg?sanitize=true"
     },
     {
-      "key": "sport",
-      "value": "running",
-      "description": "🄿 Racetrack (Running)",
-      "object_types": ["node", "way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
-    },
-    {
       "key": "leisure",
       "value": "sauna",
       "description": "🄿 Sauna",
@@ -3931,6 +3924,20 @@
       "description": "🄿 Racetrack (Non-Motorsport)",
       "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-road.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "horse_racing",
+      "description": "🄿 Racetrack (Horse Racing)",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/horse-riding-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "running",
+      "description": "🄿 Racetrack (Running)",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -4710,41 +4717,48 @@
       "value": "downhill",
       "description": "🄿 Downhill Piste/Ski Run, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing.svg?sanitize=true"
+    },
+    {
+      "key": "man_made",
+      "value": "piste:halfpipe",
+      "description": "🄿 Halfpipe",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowboarding.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "hike",
       "description": "🄿 Snowshoeing or Winter Hiking Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "ice_skate",
       "description": "🄿 Ice Skating Piste, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skating.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "nordic",
       "description": "🄿 Nordic or Crosscountry Piste/Ski Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing-nordic.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "description": "🄿 Winter Sport Trails",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing.svg?sanitize=true"
     },
     {
       "key": "piste:type",
       "value": "skitour",
       "description": "🄿 Ski Touring Trail, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-skiing-nordic.svg?sanitize=true"
     },
     {
       "key": "piste:type",
@@ -4758,7 +4772,7 @@
       "value": "sleigh",
       "description": "🄿 Sleigh Piste, 🄵 Type",
       "object_types": ["way", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-sleigh.svg?sanitize=true"
     },
     {
       "key": "place",
@@ -5549,6 +5563,13 @@
     },
     {
       "key": "shop",
+      "value": "caravan",
+      "description": "🄿 RV Dealership",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "carpet",
       "description": "🄿 Carpet Store",
       "object_types": ["node", "area"],
@@ -5738,6 +5759,20 @@
     },
     {
       "key": "shop",
+      "value": "fireplace",
+      "description": "🄿 Fireplace Store",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "fishing",
+      "description": "🄿 Fishing Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "florist",
       "description": "🄿 Florist",
       "object_types": ["node", "area"],
@@ -5747,6 +5782,13 @@
       "key": "shop",
       "value": "frame",
       "description": "🄿 Framing Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "fuel",
+      "description": "🄿 Fuel Shop",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
@@ -5847,6 +5889,13 @@
       "description": "🄿 Houseware Store",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-blender.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "hunting",
+      "description": "🄿 Hunting Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -6251,6 +6300,13 @@
       "key": "shop",
       "value": "water_sports",
       "description": "🄿 Watersport/Swim Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "water",
+      "description": "🄿 Drinking Water Shop",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },

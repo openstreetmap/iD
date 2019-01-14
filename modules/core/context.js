@@ -146,7 +146,9 @@ export function coreContext() {
             this.loadEntity(entityID, function(err, result) {
                 if (err) return;
                 var entity = _find(result.data, function(e) { return e.id === entityID; });
-                if (entity) { map.zoomTo(entity); }
+                if (entity) {
+                    map.zoomTo(entity);
+                }
             });
         }
 
@@ -261,6 +263,13 @@ export function coreContext() {
     context.selectedNoteID = function(noteID) {
         if (!arguments.length) return _selectedNoteID;
         _selectedNoteID = noteID;
+        return context;
+    };
+
+    var _selectedErrorID;
+    context.selectedErrorID = function(errorID) {
+        if (!arguments.length) return _selectedErrorID;
+        _selectedErrorID = errorID;
         return context;
     };
 

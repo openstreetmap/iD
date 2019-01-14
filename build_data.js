@@ -533,7 +533,12 @@ function writeFaIcons(faIcons) {
         var prefix = key.substring(0, 3);   // `fas`, `far`, `fab`
         var name = key.substring(4);
         var def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
-        writeFileProm('svg/fontawesome/' + key + '.svg', fontawesome.icon(def).html);
+        try {
+            writeFileProm('svg/fontawesome/' + key + '.svg', fontawesome.icon(def).html);
+        } catch (error) {
+            console.error('Error: No FontAwesome icon for ' + key);
+            throw (error);
+        }
     }
 }
 

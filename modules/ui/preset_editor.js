@@ -87,8 +87,9 @@ export function uiPresetEditor(context) {
         selection
             .call(formFields
                 .fieldsArr(_fieldsArr)
-                .state(_state),
-            'inspector-inner fillL3');
+                .state(_state)
+                .klass('inspector-inner fillL3')
+            );
 
 
         selection.selectAll('.wrap-form-field input')
@@ -120,7 +121,6 @@ export function uiPresetEditor(context) {
     presetEditor.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
-        formFields.tagsChanged();
         // Don't reset _fieldsArr here.
         return presetEditor;
     };

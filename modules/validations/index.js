@@ -3,6 +3,7 @@ export { validationDisconnectedHighway } from './disconnected_highway';
 export { validationHighwayCrossingOtherWays } from './crossing_ways';
 export { validationHighwayAlmostJunction } from './highway_almost_junction';
 export { ValidationIssueType, ValidationIssueSeverity } from './validation_issue';
+export { validationGenericName } from './generic_name.js';
 export { validationManyDeletions } from './many_deletions';
 export { validationMapCSSChecks } from './mapcss_checks';
 export { validationMissingTag } from './missing_tag';

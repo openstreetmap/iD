@@ -27,5 +27,6 @@
         "key": "vending",
         "value": "fuel"
     },
-    "name": "Gas Pump"
+    "name": "Gas Pump",
+    "matchScore": 0.5
 }

@@ -26,7 +26,9 @@ export function uiCommitWarnings(context) {
         }, {});
 
         _forEach(issues, function(instances, severity) {
-            instances = _uniqBy(instances, function(val) { return val.id + '_' + val.message.replace(/\s+/g,''); });
+            instances = _uniqBy(instances, function(val) {
+                return val.entity || (val.id + '_' + val.message.replace(/\s+/g,''));
+            });
             var section = severity + '-section';
             var instanceItem = severity + '-item';
 

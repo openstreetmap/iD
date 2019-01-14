@@ -110,7 +110,7 @@ describe('iD.uiFieldWikipedia', function() {
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
     });
 
-    it('does not set delayed wikidata tag if graph has changed', function(done) {
+    it.skip('does not set delayed wikidata tag if graph has changed', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);

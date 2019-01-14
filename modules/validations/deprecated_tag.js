@@ -14,8 +14,8 @@ export function validationDeprecatedTag() {
     var validation = function(changes) {
         var issues = [];
         for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i],
-                deprecatedTags = change.deprecatedTags();
+            var change = changes.created[i];
+            var deprecatedTags = change.deprecatedTags();
 
             if (!_isEmpty(deprecatedTags)) {
                 var tags = utilTagText({ tags: deprecatedTags });

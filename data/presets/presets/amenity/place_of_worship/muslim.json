@@ -2,6 +2,7 @@
     "icon": "maki-religious-muslim",
     "fields": [
         "name",
+        "religion",
         "denomination",
         "building_area",
         "address",
@@ -22,5 +23,5 @@
         "key": "amenity",
         "value": "place_of_worship"
     },
-    "name": "Mosque"
+    "name": "Muslim Mosque"
 }

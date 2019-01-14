@@ -96,7 +96,12 @@
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
 
+.mode-browse .note,
+.mode-browse .kr_error,
+.mode-select .note,
+.mode-select .kr_error,
 .turn rect,
 .turn circle {
     cursor: pointer;
 }
+

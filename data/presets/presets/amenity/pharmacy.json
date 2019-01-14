@@ -31,9 +31,10 @@
     },
     "terms": [
         "apothecary",
-        "drug*",
+        "drug store",
+        "drugstore",
         "med*",
         "prescription"
     ],
-    "name": "Pharmacy"
+    "name": "Pharmacy Counter"
 }
