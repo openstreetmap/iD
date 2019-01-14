@@ -5,9 +5,7 @@
         "operator",
         "address",
         "building_area",
-        "service/vehicle",
-        "opening_hours",
-        "payment_multi"
+        "service/vehicle"
     ],
     "geometry": [
         "point",

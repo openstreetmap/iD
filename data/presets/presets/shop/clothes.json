@@ -1,13 +1,8 @@
 {
     "icon": "maki-clothing-store",
     "fields": [
-        "name",
-        "clothes",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi"
+        "{inherit}",
+        "clothes"
     ],
     "geometry": [
         "point",

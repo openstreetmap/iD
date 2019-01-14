@@ -258,8 +258,39 @@ function generatePresets(tstrings, faIcons) {
             faIcons[preset.icon] = {};
         }
     });
-
+    presets = resolvePresetFieldInheritance(presets);
     presets = _merge(presets, suggestionsToPresets(presets));
+    return presets;
+}
+
+// For presets without fields, use the fields of the parent preset.
+// Replace "{inherit}" placeholders with the fields of the parent preset.
+function resolvePresetFieldInheritance(presets) {
+    for (var id in presets) {
+        var endIndex = id.lastIndexOf('/');
+        if (endIndex < 0) {
+            continue;
+        }
+        var parentID = id.substring(0, endIndex);
+        var parentPreset = presets[parentID];
+        if (!parentPreset) {
+            continue;
+        }
+        var preset = presets[id];
+        ['fields', 'moreFields'].forEach(function(fieldsKey) {
+            if (parentPreset[fieldsKey]) {
+                if (preset[fieldsKey]) {
+                    var inheritIndex = preset[fieldsKey].indexOf('{inherit}');
+                    if (inheritIndex >= 0) {
+                        // replace the {inherit} placeholder with the parent preset's fields for the key
+                        preset[fieldsKey].splice.apply(preset[fieldsKey], [inheritIndex, 1].concat(parentPreset[fieldsKey]));
+                    }
+                } else {
+                    preset[fieldsKey] = parentPreset[fieldsKey];
+                }
+            }
+        });
+    }
     return presets;
 }
 

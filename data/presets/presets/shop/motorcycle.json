@@ -5,9 +5,7 @@
         "brand",
         "operator",
         "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi"
+        "building_area"
     ],
     "geometry": [
         "point",
