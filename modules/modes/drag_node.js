@@ -210,8 +210,7 @@ export function modeDragNode(context) {
         }
 
         context.replace(
-            actionMoveNode(entity.id, loc),
-            moveAnnotation(entity)
+            actionMoveNode(entity.id, loc)
         );
 
         // Below here: validations

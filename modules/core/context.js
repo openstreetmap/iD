@@ -459,10 +459,10 @@ export function coreContext() {
 
     issueManager = IssueManager(context);
 
-    var debouncedValidate = _debounce(issueManager.validate, 1000);
-    history.on('change', function(difference) {
+    // re-run validation upon a significant graph change
+    history.on('annotatedChange', function(difference) {
         if (difference) {
-            debouncedValidate();
+            issueManager.validate();
         }
     });
 

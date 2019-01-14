@@ -32,7 +32,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'undone', 'redone');
+    var dispatch = d3_dispatch('change', 'annotatedChange', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
@@ -71,9 +71,10 @@ export function coreHistory(context) {
     function _perform(args, t) {
         var previous = _stack[_index].graph;
         _stack = _stack.slice(0, _index + 1);
-        _stack.push(_act(args, t));
+        var actionResult = _act(args, t);
+        _stack.push(actionResult);
         _index++;
-        return change(previous);
+        return change(previous, actionResult.annotation);
     }
 
 
@@ -81,8 +82,9 @@ export function coreHistory(context) {
     function _replace(args, t) {
         var previous = _stack[_index].graph;
         // assert(_index == _stack.length - 1)
-        _stack[_index] = _act(args, t);
-        return change(previous);
+        var actionResult = _act(args, t);
+        _stack[_index] = actionResult;
+        return change(previous, actionResult.annotation);
     }
 
 
@@ -94,16 +96,22 @@ export function coreHistory(context) {
             _stack.pop();
         }
         _stack = _stack.slice(0, _index + 1);
-        _stack.push(_act(args, t));
+        var actionResult = _act(args, t);
+        _stack.push(actionResult);
         _index++;
-        return change(previous);
+        return change(previous, actionResult.annotation);
     }
 
 
     // determine diffrence and dispatch a change event
-    function change(previous) {
+    function change(previous, isAnnotated) {
         var difference = coreDifference(previous, history.graph());
         dispatch.call('change', this, difference);
+        if (isAnnotated) {
+            // actions like dragging a node can fire lots of changes,
+            // so use 'annotatedChange' to listen for grouped undo/redo changes
+            dispatch.call('annotatedChange', this, difference);
+        }
         return difference;
     }
 
@@ -214,7 +222,7 @@ export function coreHistory(context) {
             }
 
             dispatch.call('undone', this, _stack[_index]);
-            return change(previous);
+            return change(previous, true);
         },
 
 
@@ -233,7 +241,7 @@ export function coreHistory(context) {
                 }
             }
 
-            return change(previous);
+            return change(previous, true);
         },
 
 
