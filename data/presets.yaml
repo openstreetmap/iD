@@ -4197,7 +4197,6 @@ en:
       landuse/basin:
         # landuse=basin
         name: Basin
-        terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
       landuse/brownfield:
         # landuse=brownfield
         name: Brownfield
@@ -4350,6 +4349,9 @@ en:
         name: Plant Nursery
         # 'terms: flower,garden,grow,vivero'
         terms: '<translate with synonyms or related terms for ''Plant Nursery'', separated by commas>'
+      landuse/pond:
+        # landuse=pond
+        name: Pond
       landuse/quarry:
         # landuse=quarry
         name: Quarry
@@ -4368,6 +4370,9 @@ en:
         # landuse=religious
         name: Religious Area
         terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
+      landuse/reservoir:
+        # landuse=reservoir
+        name: Reservoir
       landuse/residential:
         # landuse=residential
         name: Residential Area
@@ -5040,6 +5045,10 @@ en:
         # natural=water
         name: Water
         terms: '<translate with synonyms or related terms for ''Water'', separated by commas>'
+      natural/water/canal:
+        # 'natural=water, water=canal'
+        name: Canal
+        terms: '<translate with synonyms or related terms for ''Canal'', separated by commas>'
       natural/water/lake:
         # 'natural=water, water=lake'
         name: Lake
@@ -5054,6 +5063,16 @@ en:
         # 'natural=water, water=reservoir'
         name: Reservoir
         terms: '<translate with synonyms or related terms for ''Reservoir'', separated by commas>'
+      natural/water/river:
+        # 'natural=water, water=river'
+        name: River
+        # 'terms: beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse'
+        terms: '<translate with synonyms or related terms for ''River'', separated by commas>'
+      natural/water/stream:
+        # 'natural=water, water=stream'
+        name: Stream
+        # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
+        terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
       natural/wetland:
         # natural=wetland
         name: Wetland
@@ -6854,7 +6873,6 @@ en:
       waterway/riverbank:
         # waterway=riverbank
         name: Riverbank
-        terms: '<translate with synonyms or related terms for ''Riverbank'', separated by commas>'
       waterway/sanitary_dump_station:
         # waterway=sanitary_dump_station
         name: Marine Toilet Disposal

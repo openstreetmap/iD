@@ -12,8 +12,8 @@
         "water": "pond"
     },
     "reference": {
-        "key": "natural",
-        "value": "water"
+        "key": "water",
+        "value": "pond"
     },
     "terms": [
         "lakelet",

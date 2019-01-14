@@ -1,17 +1,16 @@
 {
-    "icon": "maki-farm",
+    "icon": "maki-water",
     "fields": [
         "name",
-        "operator",
-        "crop"
+        "basin",
+        "intermittent_yes"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
-        "landuse": "farm"
+        "landuse": "basin"
     },
-    "name": "Farmland",
+    "name": "Basin",
     "searchable": false
 }
