@@ -3157,10 +3157,31 @@
     },
     {
       "key": "landuse",
+      "value": "basin",
+      "description": "🄿 Basin (unsearchable)",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "landuse",
       "value": "farm",
       "description": "🄿 Farmland (unsearchable)",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/farm-15.svg?sanitize=true"
+    },
+    {
+      "key": "landuse",
+      "value": "pond",
+      "description": "🄿 Pond (unsearchable)",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "landuse",
+      "value": "reservoir",
+      "description": "🄿 Reservoir (unsearchable)",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
     },
     {
       "key": "landuse",
@@ -3175,13 +3196,6 @@
       "description": "🄿 Aquaculture",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/aquarium-15.svg?sanitize=true"
-    },
-    {
-      "key": "landuse",
-      "value": "basin",
-      "description": "🄿 Basin",
-      "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
     },
     {
       "key": "landuse",
@@ -4386,6 +4400,13 @@
     },
     {
       "key": "water",
+      "value": "canal",
+      "description": "🄿 Canal",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "water",
       "value": "lake",
       "description": "🄿 Lake",
       "object_types": ["area"],
@@ -4402,6 +4423,20 @@
       "key": "water",
       "value": "reservoir",
       "description": "🄿 Reservoir",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "water",
+      "value": "river",
+      "description": "🄿 River",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "water",
+      "value": "stream",
+      "description": "🄿 Stream",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
     },
@@ -6834,6 +6869,13 @@
     },
     {
       "key": "waterway",
+      "value": "riverbank",
+      "description": "🄿 Riverbank (unsearchable)",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+    },
+    {
+      "key": "waterway",
       "value": "boatyard",
       "description": "🄿 Boatyard",
       "object_types": ["area", "node"],
@@ -6894,13 +6936,6 @@
       "description": "🄿 River",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/waterway-river.svg?sanitize=true"
-    },
-    {
-      "key": "waterway",
-      "value": "riverbank",
-      "description": "🄿 Riverbank",
-      "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
     },
     {
       "key": "waterway",

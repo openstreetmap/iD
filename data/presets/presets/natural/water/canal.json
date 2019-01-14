@@ -9,11 +9,11 @@
     ],
     "tags": {
         "natural": "water",
-        "water": "reservoir"
+        "water": "canal"
     },
     "reference": {
         "key": "water",
-        "value": "reservoir"
+        "value": "canal"
     },
-    "name": "Reservoir"
+    "name": "Canal"
 }

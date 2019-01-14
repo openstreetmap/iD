@@ -5452,8 +5452,20 @@
                     "name": "Land Use",
                     "terms": ""
                 },
+                "landuse/basin": {
+                    "name": "Basin",
+                    "terms": ""
+                },
                 "landuse/farm": {
                     "name": "Farmland",
+                    "terms": ""
+                },
+                "landuse/pond": {
+                    "name": "Pond",
+                    "terms": ""
+                },
+                "landuse/reservoir": {
+                    "name": "Reservoir",
                     "terms": ""
                 },
                 "landuse/allotments": {
@@ -5463,10 +5475,6 @@
                 "landuse/aquaculture": {
                     "name": "Aquaculture",
                     "terms": "fish farm,crustacean,algae,aquafarming,shrimp farm,oyster farm,mariculture,algaculture"
-                },
-                "landuse/basin": {
-                    "name": "Basin",
-                    "terms": ""
                 },
                 "landuse/brownfield": {
                     "name": "Brownfield",
@@ -6188,6 +6196,10 @@
                     "name": "Water",
                     "terms": ""
                 },
+                "natural/water/canal": {
+                    "name": "Canal",
+                    "terms": ""
+                },
                 "natural/water/lake": {
                     "name": "Lake",
                     "terms": "lakelet,loch,mere"
@@ -6199,6 +6211,14 @@
                 "natural/water/reservoir": {
                     "name": "Reservoir",
                     "terms": ""
+                },
+                "natural/water/river": {
+                    "name": "River",
+                    "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
+                },
+                "natural/water/stream": {
+                    "name": "Stream",
+                    "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
                 },
                 "natural/wetland": {
                     "name": "Wetland",
@@ -7748,6 +7768,10 @@
                     "name": "Other",
                     "terms": ""
                 },
+                "waterway/riverbank": {
+                    "name": "Riverbank",
+                    "terms": ""
+                },
                 "waterway/boatyard": {
                     "name": "Boatyard",
                     "terms": ""
@@ -7783,10 +7807,6 @@
                 "waterway/river": {
                     "name": "River",
                     "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
-                },
-                "waterway/riverbank": {
-                    "name": "Riverbank",
-                    "terms": ""
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Marine Toilet Disposal",
