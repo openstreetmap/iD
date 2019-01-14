@@ -1111,11 +1111,11 @@ en:
       upload: "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
     qa:
       title: Quality Assurance
-      intro: "*Quality Assurance* (Q/A) 3rd party tools help lead to better quality of OSM data. They list automatically deteted bugs, conflics, and issues with the data, which mappers can then go and fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
+      intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
       tools_h: "Tools"
       tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), and more Q/A tools in the future."
       issues_h: "Handling Issues"
-      issues: "Handling Q/A issues is similar to handling notes. Clicking an existing Q/A issue populates the sidebar with details on the issue type and related features. Each tool has its own capabilities, but generally you can comment and/or close an issue. Expect iD to support a 'fix me' button to automatically fix simple issues in the future."
+      issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
       restrictions:
         title: Turn Restrictions Help
