@@ -104,7 +104,7 @@ export function uiEditMenu(context, operations) {
             .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })
             .attr('xlink:href', function (d) { return '#iD-operation-' + d.id; });
 
-        tooltip = d3_select(document.body)
+        tooltip = d3_select('#id-container')
             .append('div')
             .attr('class', 'tooltip-inner edit-menu-tooltip');
 
