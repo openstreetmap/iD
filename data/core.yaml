@@ -651,26 +651,32 @@ en:
       close_comment: Close and Comment
       ignore_comment: Ignore and Comment
       error_parts:
-        node: 'this node'
-        way: 'this way'
-        relation: 'this relation'
-        oneway: 'this oneway'
-        highway: 'this highway'
-        railway: 'this railway'
-        waterway: 'this waterway'
-        cycleway: 'this cycleway'
-        cycleway_footpath: 'this cycleway/footpath'
-        riverbank: 'this riverbank'
-        crossing: 'this crossing'
-        railway_crossing: 'this railway crossing'
-        bridge: 'this bridge'
-        tunnel: 'this tunnel'
-        boundary: 'this boundary'
-        turn_restriction: 'this turn restriction'
-        roundabout: 'this roundabout'
-        mini_roundabout: 'this mini-roundabout'
-        track: 'this track'
-        feature: 'this feature'
+        this_node: 'this node'
+        this_way: 'this way'
+        this_relation: 'this relation'
+        this_oneway: 'this oneway'
+        this_highway: 'this highway'
+        this_railway: 'this railway'
+        this_waterway: 'this waterway'
+        this_cycleway: 'this cycleway'
+        this_cycleway_footpath: 'this cycleway/footpath'
+        this_riverbank: 'this riverbank'
+        this_crossing: 'this crossing'
+        this_railway_crossing: 'this railway crossing'
+        this_bridge: 'this bridge'
+        this_tunnel: 'this tunnel'
+        this_boundary: 'this boundary'
+        this_turn_restriction: 'this turn restriction'
+        this_roundabout: 'this roundabout'
+        this_mini_roundabout: 'this mini-roundabout'
+        this_track: 'this track'
+        this_feature: 'this feature'
+        highway: 'highway'
+        railway: 'railway'
+        waterway: 'waterway'
+        cycleway: 'cycleway'
+        cycleway_footpath: 'cycleway/footpath'
+        riverbank: 'riverbank'
         place_of_worship: 'place of worship'
         pub: 'pub'
         restaurant: 'restaurant'
@@ -1087,11 +1093,11 @@ en:
       upload: "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
     qa:
       title: Quality Assurance
-      intro: "*Quality Assurance* (Q/A) 3rd party tools help lead to better quality of OSM data. They list automatically deteted bugs, conflics, and issues with the data, which mappers can then go and fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
+      intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
       tools_h: "Tools"
       tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), and more Q/A tools in the future."
       issues_h: "Handling Issues"
-      issues: "Handling Q/A issues is similar to handling notes. Clicking an existing Q/A issue populates the sidebar with details on the issue type and related features. Each tool has its own capabilities, but generally you can comment and/or close an issue. Expect iD to support a 'fix me' button to automatically fix simple issues in the future."
+      issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
       restrictions:
         title: Turn Restrictions Help

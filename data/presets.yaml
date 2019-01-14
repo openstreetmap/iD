@@ -4233,9 +4233,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Farmyard'', separated by commas>'
       landuse/forest:
         # landuse=forest
-        name: Forest
+        name: Managed Forest
         # 'terms: cut,forest,lumber,tree'
-        terms: '<translate with synonyms or related terms for ''Forest'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Managed Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
         name: Garage Landuse
