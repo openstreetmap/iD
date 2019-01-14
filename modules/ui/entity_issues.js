@@ -16,6 +16,13 @@ export function uiEntityIssues(context) {
     var dispatch = d3_dispatch('change');
     var _entityID;
 
+    context.issueManager().on('reload.entity_issues', update);
+
+    function update() {
+        var selection = d3_select('.entity-issues .disclosure-wrap');
+        render(selection);
+    }
+
     function entityIssues(selection) {
         selection.call(uiDisclosure(context, 'entity_issues', true)
             .title(t('issues.title'))
@@ -25,7 +32,17 @@ export function uiEntityIssues(context) {
 
 
     function render(selection) {
+
         var issues = context.issueManager().getIssuesForEntityWithID(_entityID);
+
+        if (issues.length > 0) {
+            d3_select('.entity-issues')
+                .style('display', 'block');
+        } else {
+            d3_select('.entity-issues')
+                .style('display', 'none');
+            return;
+        }
 
         var items = selection.selectAll('.issue')
             .data(issues, function(d) { return d.id(); });

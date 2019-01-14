@@ -20,7 +20,7 @@ export function uiIssues(context) {
     var _issuesList = d3_select(null);
     var _shown = false;
 
-    context.issueManager().on('reload', update);
+    context.issueManager().on('reload.issues_pane', update);
 
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')

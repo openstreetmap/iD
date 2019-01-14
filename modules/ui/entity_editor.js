@@ -219,14 +219,6 @@ export function uiEntityEditor(context) {
                 .style('display', 'none');
         }
 
-        if (context.issueManager().getIssuesForEntityWithID(_entityID).length > 0) {
-            body.select('.entity-issues')
-                .style('display', 'block');
-        } else {
-            body.select('.entity-issues')
-                .style('display', 'none');
-        }
-
         body.select('.raw-membership-editor')
             .call(rawMembershipEditor
                 .entityID(_entityID)
