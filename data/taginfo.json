@@ -3234,7 +3234,7 @@
     {
       "key": "landuse",
       "value": "forest",
-      "description": "🄿 Forest",
+      "description": "🄿 Managed Forest",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-alt1-15.svg?sanitize=true"
     },

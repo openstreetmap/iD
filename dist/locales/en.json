@@ -5497,7 +5497,7 @@
                     "terms": "crop,grow,plant"
                 },
                 "landuse/forest": {
-                    "name": "Forest",
+                    "name": "Managed Forest",
                     "terms": "cut,forest,lumber,tree"
                 },
                 "landuse/garages": {

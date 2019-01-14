@@ -484,7 +484,7 @@
     "landuse/construction": {"icon": "temaki-tools", "fields": ["name", "construction", "operator"], "geometry": ["area"], "tags": {"landuse": "construction"}, "terms": [], "name": "Construction"},
     "landuse/farmland": {"icon": "maki-farm", "fields": ["name", "operator", "crop", "produce"], "geometry": ["area"], "tags": {"landuse": "farmland"}, "terms": ["crop", "grow", "plant"], "name": "Farmland"},
     "landuse/farmyard": {"icon": "maki-farm", "fields": ["name", "operator", "crop"], "geometry": ["area"], "tags": {"landuse": "farmyard"}, "terms": ["crop", "grow", "plant"], "name": "Farmyard"},
-    "landuse/forest": {"icon": "maki-park-alt1", "fields": ["name", "leaf_type", "leaf_cycle", "produce"], "geometry": ["area"], "tags": {"landuse": "forest"}, "terms": ["cut", "forest", "lumber", "tree"], "name": "Forest"},
+    "landuse/forest": {"icon": "maki-park-alt1", "fields": ["name", "leaf_type", "leaf_cycle", "produce"], "geometry": ["area"], "tags": {"landuse": "forest"}, "terms": ["cut", "forest", "lumber", "tree"], "name": "Managed Forest"},
     "landuse/garages": {"icon": "fas-warehouse", "geometry": ["area"], "fields": ["name"], "tags": {"landuse": "garages"}, "terms": [], "name": "Garage Landuse"},
     "landuse/grass": {"geometry": ["area"], "tags": {"landuse": "grass"}, "terms": [], "name": "Grass"},
     "landuse/greenfield": {"geometry": ["area"], "fields": ["name"], "tags": {"landuse": "greenfield"}, "terms": [], "matchScore": 0.9, "name": "Greenfield"},
