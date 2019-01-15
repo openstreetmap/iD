@@ -7,6 +7,7 @@
         "maxweight"
     ],
     "moreFields": [
+        "material",
         "seamark/type"
     ],
     "geometry": [

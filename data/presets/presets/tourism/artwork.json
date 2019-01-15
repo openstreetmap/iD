@@ -5,6 +5,9 @@
         "artwork_type",
         "artist"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -1,5 +1,8 @@
 {
     "icon": "maki-barrier",
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "line"
     ],

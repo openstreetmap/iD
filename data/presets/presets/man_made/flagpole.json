@@ -7,6 +7,9 @@
         "lit",
         "height"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex"

@@ -4,6 +4,9 @@
         "name",
         "inscription"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",

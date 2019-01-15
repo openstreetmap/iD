@@ -11,6 +11,9 @@
     "fields": [
         "power"
     ],
+    "moreFields": [
+        "material"
+    ],
     "searchable": false,
     "name": "Power"
 }

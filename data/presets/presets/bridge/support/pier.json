@@ -4,6 +4,7 @@
         "bridge/support"
     ],
     "moreFields": [
+        "material",
         "seamark/type"
     ],
     "geometry": [
