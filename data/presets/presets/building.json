@@ -8,7 +8,8 @@
         "address"
     ],
     "moreFields": [
-        "building/material"
+        "building/material",
+        "smoking"
     ],
     "geometry": [
         "point",
