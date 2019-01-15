@@ -2,7 +2,8 @@
 /* OSM Notes and KeepRight Layers */
 
 .kr_error-header-icon .kr_error-fill,
-.layer-keepRight .kr_error .kr_error-fill {
+.layer-keepRight .kr_error .kr_error-fill,
+.layer-improveOSM .iOSM_error .iOSM_error-fill {
     stroke: #333;
     stroke-width: 1.3px;  /* NOTE: likely a better way to scale the icon stroke */
 }
@@ -115,6 +116,20 @@
     color: #c35;
 }
 
+/* ImproveOSM Errors
+------------------------------------------------------- */
+
+.iOSM_error_type_ow {   /* missing one way */
+    color: #EE7600;
+}
+
+.iOSM_error_type_mr {   /* missing road */
+    color: #B0171F;
+}
+
+.iOSM_error_type_tr {   /* missing turn restriction */
+    color: #1E90FF;
+}
 
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
 .layer-mapdata {

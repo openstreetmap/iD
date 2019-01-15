@@ -98,8 +98,10 @@
 
 .mode-browse .note,
 .mode-browse .kr_error,
+.mode-browse .iOSM_error,
 .mode-select .note,
 .mode-select .kr_error,
+.mode-select .iOSM_error,
 .turn rect,
 .turn circle {
     cursor: pointer;

@@ -596,6 +596,10 @@
                     "tooltip": "Automatically detected map issues from keepright.at",
                     "title": "KeepRight Issues"
                 },
+                "improveOSM": {
+                    "tooltip": "Missing data automatically detected by improveosm.org",
+                    "title": "ImproveOSM Issues"
+                },
                 "custom": {
                     "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
                     "title": "Custom Map Data",
