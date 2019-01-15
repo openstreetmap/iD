@@ -3,6 +3,9 @@
     "fields": [
         "access"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -5,6 +5,9 @@
         "access_simple",
         "fee"
     ],
+    "moreFields": [
+        "seamark/type"
+    ],
     "geometry": [
         "point",
         "vertex",

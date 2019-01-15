@@ -6,6 +6,9 @@
         "operator",
         "ref"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex"

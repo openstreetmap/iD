@@ -8,6 +8,9 @@
         "historic/wreck/visible_at_low_tide",
         "historic/wreck/visible_at_high_tide"
     ],
+    "moreFields": [
+        "seamark/type"
+    ],
     "geometry": [
         "point",
         "area"

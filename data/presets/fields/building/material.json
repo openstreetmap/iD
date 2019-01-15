@@ -1,5 +1,5 @@
 {
-    "key": "material",
+    "key": "building:material",
     "type": "combo",
     "label": "Material"
 }

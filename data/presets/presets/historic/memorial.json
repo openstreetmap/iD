@@ -5,6 +5,9 @@
         "memorial",
         "inscription"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",
