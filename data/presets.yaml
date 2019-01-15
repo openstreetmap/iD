@@ -1640,7 +1640,7 @@ en:
         label: Type
       shop:
         # shop=*
-        label: Shop Type
+        label: Type
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose

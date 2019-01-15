@@ -5403,7 +5403,7 @@
     },
     {
       "key": "shop",
-      "description": "🄿 Shop, 🄵 Shop Type",
+      "description": "🄿 Shop, 🄵 Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },

@@ -88,6 +88,9 @@ If `fields` or `moreFields` are not defined, the values of the preset's "parent"
 preset are used. For example, `shop/convenience` automatically uses the same
 fields as `shop`.
 
+In both explicit and implicit inheritance, fields for keys that define the
+preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.  
+
 ##### `searchable`
 
 Deprecated or generic presets can include the property `"searchable": false`.

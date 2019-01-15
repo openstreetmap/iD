@@ -23,6 +23,18 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     // For a preset without fields, use the fields of the parent preset.
     // Replace {preset} placeholders with the fields of the specified presets.
     function resolveFieldInheritance() {
+
+        function filterTargetFields(targetFieldIDs) {
+            // only inherit `fields` that don't define this preset
+            return _filter(targetFieldIDs, function(targetFieldID) {
+                var targetField = fields[targetFieldID];
+                if (targetField.key) {
+                    return preset.tags[targetField.key] === undefined;
+                }
+                return true;
+            });
+        }
+
         var betweenBracketsRegex = /([^{]*?)(?=\})/;
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
@@ -33,10 +45,13 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 });
                 wrappedTargetPresets.forEach(function(wrappedTargetPresetID) {
                     var targetPresetID = betweenBracketsRegex.exec(wrappedTargetPresetID)[0];
-                    var targetPreset = rawPresets[targetPresetID];
+                    var targetFields = rawPresets[targetPresetID][fieldsKey];
+                    if (fieldsKey === 'fields') {
+                        targetFields = filterTargetFields(targetFields);
+                    }
                     var targetIndex = preset[fieldsKey].indexOf(wrappedTargetPresetID);
                     // replace the {preset} placeholder with the target preset's fields
-                    preset[fieldsKey].splice.apply(preset[fieldsKey], [targetIndex, 1].concat(targetPreset[fieldsKey]));
+                    preset[fieldsKey].splice.apply(preset[fieldsKey], [targetIndex, 1].concat(targetFields));
                 });
                 // remove duplicates
                 preset[fieldsKey] = _union(preset[fieldsKey]);
@@ -44,7 +59,11 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 // there are no fields defined, so use the parent's if possible
                 var parentPreset = rawPresets[preset.parentPresetID()];
                 if (parentPreset && parentPreset[fieldsKey]) {
-                    preset[fieldsKey] = parentPreset[fieldsKey];
+                    var parentFields = parentPreset[fieldsKey];
+                    if (fieldsKey === 'fields') {
+                        parentFields = filterTargetFields(parentFields);
+                    }
+                    preset[fieldsKey] = parentFields;
                 }
             }
             // update the raw object to allow for multiple levels of inheritance
