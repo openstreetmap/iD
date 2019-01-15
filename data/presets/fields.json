@@ -22,6 +22,7 @@
     "artist": {"key": "artist_name", "type": "text", "label": "Artist"},
     "artwork_type": {"key": "artwork_type", "type": "combo", "label": "Type"},
     "atm": {"key": "atm", "type": "check", "label": "ATM"},
+    "attraction": {"key": "attraction", "type": "typeCombo", "label": "Type"},
     "backrest": {"key": "backrest", "type": "check", "label": "Backrest"},
     "barrier": {"key": "barrier", "type": "typeCombo", "label": "Type"},
     "basin": {"key": "basin", "type": "combo", "label": "Type"},

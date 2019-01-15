@@ -1,10 +1,5 @@
 {
     "icon": "maki-rail-metro",
-    "fields": [
-        "name",
-        "operator",
-        "opening_hours"
-    ],
     "geometry": [
         "point",
         "line",

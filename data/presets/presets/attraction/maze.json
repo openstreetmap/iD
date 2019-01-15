@@ -1,9 +1,5 @@
 {
     "icon": "maki-amusement-park",
-    "fields": [
-        "name",
-        "operator"
-    ],
     "geometry": [
         "point",
         "area"

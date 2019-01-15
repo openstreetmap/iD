@@ -199,6 +199,9 @@ en:
       atm:
         # atm=*
         label: ATM
+      attraction:
+        # attraction=*
+        label: Type
       backrest:
         # backrest=*
         label: Backrest
@@ -3014,6 +3017,9 @@ en:
         # 'area:highway=*'
         name: Road Surface
         terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
+      attraction:
+        # attraction=*
+        name: Attraction
       attraction/amusement_ride:
         # attraction=amusement_ride
         name: Amusement Ride

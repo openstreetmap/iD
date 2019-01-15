@@ -27,6 +27,12 @@
       "object_types": ["node", "area"]
     },
     {
+      "key": "attraction",
+      "description": "🄿 Attraction (unsearchable), 🄵 Type",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/star-15.svg?sanitize=true"
+    },
+    {
       "key": "junction",
       "value": "circular",
       "description": "🄿 Traffic Circle (unsearchable)",

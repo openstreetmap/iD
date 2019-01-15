@@ -1990,6 +1990,9 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "Type"
+                },
                 "backrest": {
                     "label": "Backrest"
                 },
@@ -3573,6 +3576,10 @@
                 },
                 "amenity": {
                     "name": "Amenity",
+                    "terms": ""
+                },
+                "attraction": {
+                    "name": "Attraction",
                     "terms": ""
                 },
                 "circular": {
