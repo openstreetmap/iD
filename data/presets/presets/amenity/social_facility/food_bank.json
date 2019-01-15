@@ -1,14 +1,5 @@
 {
     "icon": "temaki-social_facility",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "social_facility",
-        "social_facility_for",
-        "opening_hours"
-    ],
     "geometry": [
         "point",
         "area"
