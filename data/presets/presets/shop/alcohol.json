@@ -1,12 +1,7 @@
 {
     "icon": "maki-alcohol-shop",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi",
+        "{shop}",
         "drive_through"
     ],
     "geometry": [

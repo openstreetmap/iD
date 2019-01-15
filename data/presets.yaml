@@ -226,7 +226,7 @@ en:
           onsen: Japanese Onsen
       beauty:
         # beauty=*
-        label: Shop Type
+        label: Beauty Specialty
       bench:
         # bench=*
         label: Bench

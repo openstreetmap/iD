@@ -1,13 +1,5 @@
 {
     "icon": "temaki-window",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi"
-    ],
     "geometry": [
         "point",
         "area"
