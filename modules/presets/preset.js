@@ -119,9 +119,9 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     var origName = preset.name || '';
     preset.name = function() {
         if (preset.suggestion) {
-            id = id.split('/');
-            id = id[0] + '/' + id[1];
-            return origName + ' - ' + t('presets.presets.' + id + '.name');
+            var path = id.split('/');
+            path.pop();  // remove brand name
+            return origName + ' - ' + t('presets.presets.' + path.join('/') + '.name');
         }
         return preset.t('name', { 'default': origName });
     };
