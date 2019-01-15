@@ -58,7 +58,34 @@ The complete JSON schema for presets can be found in [`data/presets/schema/prese
 
 #### Preset Properties
 
-##### searchable
+##### `fields`/`moreFields`
+
+Both these properties are arrays of field paths (e.g. `description` or `generator/type`).
+`fields` are shown by default and `moreFields` are shown if manually added by the
+user or if a matching tag is present. Note that some fields have a `prerequisiteTag`
+property that limits when they will be shown.
+
+A preset can inherit the fields of its "parent" preset if it has one. For example,
+`shop/convenience` doesn't define its own fields, but instead uses the same `fields`
+and `moreFields` as `shop`. The special placeholder `{inherit}` can be used in either
+array to reference and append to the parent preset's fields:
+
+```javascript
+"fields": [
+    "{inherit}",
+    "internet_access"
+],
+"moreFields": [
+    "{inherit}",
+    "internet_access/fee",
+    "internet_access/ssid"
+],
+"tags": {
+    "shop": "books"
+}
+```
+
+##### `searchable`
 
 Deprecated or generic presets can include the property `"searchable": false`.
 This means that they will be recognized by iD when editing existing data,
