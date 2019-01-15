@@ -285,26 +285,7 @@ export function uiMapInMap(context) {
                             };
                 var nodes = [];
 
-                if (classList.includes('area')) {
-                    feature.geometry.type = 'Polygon';
-                    nodes = obj.__data__.nodes;
-                    feature.geometry.coordinates.push([]);
-                    nodes.forEach(function(n) {
-                        feature.geometry.coordinates[0].push(context.graph().hasEntity(n).loc);
-                    });
-                } else if (classList.includes('line')) {
-                    feature.geometry.type = 'LineString';
-                    nodes = obj.__data__.nodes;
-                    nodes.forEach(function(n) {
-                        feature.geometry.coordinates.push(context.graph().hasEntity(n).loc);
-                    });
-                } else if (/point|vertex/.test(classList)) {
-                    if (!obj.__data__.loc) return;
-                    feature.geometry.type = 'Point';
-                    feature.geometry.coordinates = obj.__data__.loc;
-                } else {
-                    return;
-                }
+                feature.geometry = obj.__data__.asGeoJSON(context.graph());
 
                 geojson.features.push(feature);
             });
