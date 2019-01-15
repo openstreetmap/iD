@@ -199,22 +199,40 @@ function suggestionsToPresets(presets) {
 
 
     function addSuggestion(key, value, name) {
-        var presetID = key + '/' + value;
-        var preset = presets[presetID];
+        var suggestion = suggestions[key][value][name];
+        var presetID, preset;
+
+        // sometimes we can find a more specific preset then key/value..
+        if (suggestion.tags.cuisine) {
+            presetID = key + '/' + value + '/' + suggestion.tags.cuisine;
+            preset = presets[presetID];
+        } else if (suggestion.tags.vending) {
+            if (suggestion.tags.vending === 'parcel_pickup;parcel_mail_in') {
+                presetID = key + '/' + value + '/parcel_pickup_dropoff';
+            } else {
+                presetID = key + '/' + value + '/' + suggestion.tags.vending;
+            }
+            preset = presets[presetID];
+        }
+
+        // fallback to key/value
+        if (!preset) {
+            presetID = key + '/' + value;
+            preset = presets[presetID];
+        }
+
+        // still no match?
         if (!preset) {
             console.log('Warning:  No preset "' + presetID + '" for name-suggestion "' + name + '"');
             return;
         }
 
-        var suggestionID = key + '/' + value + '/' + name;
-        var suggestion = suggestions[key][value][name];
         var wikidataTag = { 'brand:wikidata': suggestion.tags['brand:wikidata'] };
+        var suggestionID = presetID + '/' + name;
 
         presets[suggestionID] = {
             name: name,
             icon: preset.icon,
-            fields: preset.fields,
-            moreFields: preset.moreFields,
             geometry: preset.geometry,
             tags: _merge({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
