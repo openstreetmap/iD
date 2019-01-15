@@ -1,9 +1,5 @@
 {
     "icon": "maki-baseball",
-    "fields": [
-        "name",
-        "lit"
-    ],
     "geometry": [
         "point",
         "area"
