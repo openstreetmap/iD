@@ -5,7 +5,8 @@
         "seamark/buoy_lateral/colour",
         "seamark/buoy_lateral/category",
         "seamark/buoy_lateral/shape",
-        "seamark/buoy_lateral/system"
+        "seamark/buoy_lateral/system",
+        "seamark/type"
     ],
     "geometry": [
         "point",

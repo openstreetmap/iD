@@ -268,7 +268,7 @@
     "seamark/buoy_lateral/shape": {"key": "seamark:buoy_lateral:shape", "type": "combo", "label": "Shape"},
     "seamark/buoy_lateral/system": {"key": "seamark:buoy_lateral:system", "type": "combo", "label": "System", "strings": {"options": {"iala-a": "IALA A", "iala-b": "IALA B", "cevni": "CEVNI", "other": "Other"}}},
     "seamark/mooring/category": {"key": "seamark:mooring:category", "type": "combo", "label": "Category"},
-    "seamark/type": {"key": "seamark:type", "type": "combo", "universal": true, "label": "Seamark"},
+    "seamark/type": {"key": "seamark:type", "type": "combo", "label": "Seamark"},
     "seamark/wreck/category": {"key": "seamark:wreck:category", "type": "combo", "label": "Category"},
     "seasonal": {"key": "seasonal", "type": "check", "label": "Seasonal"},
     "seats": {"key": "seats", "type": "number", "minValue": 0, "label": "Seats", "placeholder": "2, 4, 6..."},
