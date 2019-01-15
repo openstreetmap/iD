@@ -1,8 +1,9 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "{inherit}",
-        "trade"
+        "name",
+        "trade",
+        "{inherit}"
     ],
     "geometry": [
         "point",

@@ -2,7 +2,6 @@
 const requireESM = require('esm')(module);
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _forEach = requireESM('lodash-es/forEach').default;
-const _intersection = requireESM('lodash-es/intersection').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
@@ -258,39 +257,8 @@ function generatePresets(tstrings, faIcons) {
             faIcons[preset.icon] = {};
         }
     });
-    presets = resolvePresetFieldInheritance(presets);
-    presets = _merge(presets, suggestionsToPresets(presets));
-    return presets;
-}
 
-// For presets without fields, use the fields of the parent preset.
-// Replace "{inherit}" placeholders with the fields of the parent preset.
-function resolvePresetFieldInheritance(presets) {
-    for (var id in presets) {
-        var endIndex = id.lastIndexOf('/');
-        if (endIndex < 0) {
-            continue;
-        }
-        var parentID = id.substring(0, endIndex);
-        var parentPreset = presets[parentID];
-        if (!parentPreset) {
-            continue;
-        }
-        var preset = presets[id];
-        ['fields', 'moreFields'].forEach(function(fieldsKey) {
-            if (parentPreset[fieldsKey]) {
-                if (preset[fieldsKey]) {
-                    var inheritIndex = preset[fieldsKey].indexOf('{inherit}');
-                    if (inheritIndex >= 0) {
-                        // replace the {inherit} placeholder with the parent preset's fields for the key
-                        preset[fieldsKey].splice.apply(preset[fieldsKey], [inheritIndex, 1].concat(parentPreset[fieldsKey]));
-                    }
-                } else {
-                    preset[fieldsKey] = parentPreset[fieldsKey];
-                }
-            }
-        });
-    }
+    presets = _merge(presets, suggestionsToPresets(presets));
     return presets;
 }
 
@@ -493,7 +461,7 @@ function validatePresetFields(presets, fields) {
     _forEach(presets, function(preset) {
         if (preset.fields) {
             preset.fields.forEach(function(field) {
-                if (fields[field] === undefined) {
+                if (field !== '{inherit}' && fields[field] === undefined) {
                     console.error('Unknown preset field "' + field + '" in "fields" array of preset ' + preset.name);
                     process.exit(1);
                 }
@@ -501,16 +469,11 @@ function validatePresetFields(presets, fields) {
         }
         if (preset.moreFields) {
             preset.moreFields.forEach(function(field) {
-                if (fields[field] === undefined) {
+                if (field !== '{inherit}' && fields[field] === undefined) {
                     console.error('Unknown preset field "' + field + '" in "moreFields" array of preset ' + preset.name);
                     process.exit(1);
                 }
             });
-        }
-        var fieldsIntersection = _intersection(preset.fields, preset.moreFields);
-        if (fieldsIntersection.length > 0) {
-            console.error('Preset field "' + fieldsIntersection[0] + '" in both "fields" and "moreFields" arrays of preset ' + preset.name);
-            process.exit(1);
         }
     });
 }

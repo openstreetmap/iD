@@ -1,9 +1,7 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "name",
-        "operator",
-        "address",
+        "{inherit}",
     	"fuel_multi",
         "building_area"
     ],

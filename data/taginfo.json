@@ -5403,7 +5403,7 @@
     },
     {
       "key": "shop",
-      "description": "🄿 Shop, 🄵 Type",
+      "description": "🄿 Shop, 🄵 Shop Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
@@ -7133,7 +7133,7 @@
     {"key": "bath:type", "value": "onsen", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "foot_bath", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "hot_spring", "description": "🄵 Specialty"},
-    {"key": "beauty", "description": "🄵 Shop Type"},
+    {"key": "beauty", "description": "🄵 Beauty Specialty"},
     {"key": "bench", "description": "🄵 Bench"},
     {"key": "bicycle_parking", "description": "🄵 Type"},
     {"key": "bin", "description": "🄵 Waste Bin"},

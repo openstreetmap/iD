@@ -3,9 +3,7 @@
     "fields": [
         "name",
         "clothes",
-        "operator",
-        "address",
-        "building_area"
+        "{inherit}"
     ],
     "geometry": [
         "point",

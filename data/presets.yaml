@@ -226,7 +226,7 @@ en:
           onsen: Japanese Onsen
       beauty:
         # beauty=*
-        label: Shop Type
+        label: Beauty Specialty
       bench:
         # bench=*
         label: Bench
@@ -1637,7 +1637,7 @@ en:
         label: Type
       shop:
         # shop=*
-        label: Type
+        label: Shop Type
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose

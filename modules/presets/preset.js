@@ -1,14 +1,55 @@
 import _clone from 'lodash-es/clone';
 import _omit from 'lodash-es/omit';
+import _union from 'lodash-es/union';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
-export function presetPreset(id, preset, fields, visible) {
+export function presetPreset(id, preset, fields, visible, rawPresets) {
     preset = _clone(preset);
 
     preset.id = id;
+
+    preset.parentPresetID = function() {
+        var endIndex = preset.id.lastIndexOf('/');
+        if (endIndex < 0) {
+            return null;
+        }
+        return preset.id.substring(0, endIndex);
+    };
+
+    // For a preset without fields, use the fields of the parent preset.
+    // Replace "{inherit}" placeholders with the fields of the parent preset.
+    function resolveFieldInheritance() {
+        var parentPreset = rawPresets[preset.parentPresetID()];
+        if (parentPreset) {
+            // the property keys that contain arrays of field ids
+            var fieldKeys = ['fields', 'moreFields'];
+            fieldKeys.forEach(function(fieldsKey) {
+                if (parentPreset[fieldsKey]) {
+                    if (preset[fieldsKey]) {
+                        var inheritIndex = preset[fieldsKey].indexOf('{inherit}');
+                        if (inheritIndex >= 0) {
+                            // replace the {inherit} placeholder with the parent preset's fields
+                            preset[fieldsKey].splice.apply(preset[fieldsKey], [inheritIndex, 1].concat(parentPreset[fieldsKey]));
+                            // remove duplicates
+                            preset[fieldsKey] = _union(preset[fieldsKey]);
+                        }
+                    } else {
+                        // there are no fields defined, so use the parent's
+                        preset[fieldsKey] = parentPreset[fieldsKey];
+                    }
+                    // update the raw object to allow for multiple levels of inheritance
+                    rawPresets[preset.id][fieldsKey] = preset[fieldsKey];
+                }
+            });
+        }
+    }
+    if (rawPresets) {
+        resolveFieldInheritance();
+    }
+
     preset.fields = (preset.fields || []).map(getFields);
     preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);

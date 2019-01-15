@@ -2014,7 +2014,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Shop Type"
+                    "label": "Beauty Specialty"
                 },
                 "bench": {
                     "label": "Bench"
@@ -3191,7 +3191,7 @@
                     "label": "Shelter"
                 },
                 "shop": {
-                    "label": "Type"
+                    "label": "Shop Type"
                 },
                 "siren/purpose": {
                     "label": "Purpose"

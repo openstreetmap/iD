@@ -1,8 +1,9 @@
 {
     "icon": "maki-clothing-store",
     "fields": [
-        "{inherit}",
-        "clothes"
+        "name",
+        "clothes",
+        "{inherit}"
     ],
     "geometry": [
         "point",
