@@ -250,7 +250,7 @@
     "boundary/administrative": {"name": "Administrative Boundary", "geometry": ["line"], "tags": {"boundary": "administrative"}, "fields": ["name", "admin_level"]},
     "bridge/support": {"icon": "fas-archway", "fields": ["bridge/support"], "moreFields": ["material", "seamark/type"], "geometry": ["point", "vertex", "area"], "tags": {"bridge:support": "*"}, "name": "Bridge Support"},
     "bridge/support/pier": {"icon": "fas-archway", "fields": ["bridge/support"], "moreFields": ["material", "seamark/type"], "geometry": ["point", "vertex", "area"], "tags": {"bridge:support": "pier"}, "name": "Bridge Pier"},
-    "building": {"icon": "maki-home", "fields": ["name", "building", "levels", "height", "address"], "geometry": ["point", "area"], "tags": {"building": "*"}, "matchScore": 0.6, "terms": [], "name": "Building"},
+    "building": {"icon": "maki-home", "fields": ["name", "building", "levels", "height", "address"], "moreFields": ["building/material"], "geometry": ["point", "area"], "tags": {"building": "*"}, "matchScore": 0.6, "terms": [], "name": "Building"},
     "building/bunker": {"fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "bunker"}, "matchScore": 0.5, "name": "Bunker", "searchable": false},
     "building/entrance": {"icon": "maki-entrance-alt1", "geometry": ["vertex"], "tags": {"building": "entrance"}, "name": "Entrance/Exit", "searchable": false},
     "building/train_station": {"icon": "maki-building", "fields": ["name", "address", "levels", "height"], "geometry": ["point", "vertex", "area"], "tags": {"building": "train_station"}, "matchScore": 0.5, "name": "Train Station", "searchable": false},

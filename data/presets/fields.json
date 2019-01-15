@@ -43,6 +43,7 @@
     "bridge/support": {"key": "bridge:support", "type": "combo", "label": "Type"},
     "building_area": {"key": "building", "type": "combo", "default": "yes", "geometry": "area", "label": "Building"},
     "building": {"key": "building", "type": "combo", "label": "Building"},
+    "building/material": {"key": "building:material", "type": "combo", "label": "Material"},
     "bunker_type": {"key": "bunker_type", "type": "combo", "label": "Type"},
     "cables": {"key": "cables", "type": "number", "minValue": 1, "label": "Cables", "placeholder": "1, 2, 3..."},
     "camera/direction": {"key": "camera:direction", "type": "number", "label": "Direction (Degrees Clockwise)", "placeholder": "45, 90, 180, 270"},

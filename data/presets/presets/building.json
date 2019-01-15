@@ -7,6 +7,9 @@
         "height",
         "address"
     ],
+    "moreFields": [
+        "building/material"
+    ],
     "geometry": [
         "point",
         "area"

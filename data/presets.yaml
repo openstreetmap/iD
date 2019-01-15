@@ -277,6 +277,9 @@ en:
       building:
         # building=*
         label: Building
+      building/material:
+        # 'building:material=*'
+        label: Material
       building_area:
         # building=*
         label: Building

@@ -2065,6 +2065,9 @@
                 "building": {
                     "label": "Building"
                 },
+                "building/material": {
+                    "label": "Material"
+                },
                 "bunker_type": {
                     "label": "Type"
                 },
