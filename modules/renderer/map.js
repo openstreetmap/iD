@@ -498,14 +498,10 @@ export function rendererMap(context) {
             // - `ctrlKey = false`
             // - `deltaX`,`deltaY` are round integer pixels
             } else if (detected.os === 'mac' && !source.ctrlKey && isInteger(dX) && isInteger(dY)) {
-                // Firefox will set `mozInputSource = 1` if the event was generated
-                // by an actual mouse wheel.  If we detect this, don't pan..
-                if (source.mozInputSource === undefined || source.mozInputSource !== 1) {
-                    p1 = projection.translate();
-                    x2 = p1[0] - dX;
-                    y2 = p1[1] - dY;
-                    k2 = projection.scale();
-                }
+                p1 = projection.translate();
+                x2 = p1[0] - dX;
+                y2 = p1[1] - dY;
+                k2 = projection.scale();
             }
 
             // something changed - replace the event transform
