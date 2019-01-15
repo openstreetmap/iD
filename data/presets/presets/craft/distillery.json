@@ -1,11 +1,7 @@
 {
     "icon": "temaki-storage_tank",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
+        "{craft}",
         "product"
     ],
     "geometry": [

@@ -1,12 +1,5 @@
 {
     "icon": "temaki-tools",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
     "geometry": [
         "point",
         "area"
