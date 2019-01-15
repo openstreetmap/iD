@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "clothes",
-        "{inherit}"
+        "{shop}"
     ],
     "geometry": [
         "point",

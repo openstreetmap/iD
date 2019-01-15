@@ -1,11 +1,11 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "internet_access"
     ],
     "moreFields": [
-        "{inherit}",
+        "{shop}",
         "internet_access/fee",
         "internet_access/ssid"
     ],

@@ -458,23 +458,29 @@ function validateCategoryPresets(categories, presets) {
 }
 
 function validatePresetFields(presets, fields) {
+    var betweenBracketsRegex = /([^{]*?)(?=\})/;
     _forEach(presets, function(preset) {
-        if (preset.fields) {
-            preset.fields.forEach(function(field) {
-                if (field !== '{inherit}' && fields[field] === undefined) {
-                    console.error('Unknown preset field "' + field + '" in "fields" array of preset ' + preset.name);
-                    process.exit(1);
-                }
-            });
-        }
-        if (preset.moreFields) {
-            preset.moreFields.forEach(function(field) {
-                if (field !== '{inherit}' && fields[field] === undefined) {
-                    console.error('Unknown preset field "' + field + '" in "moreFields" array of preset ' + preset.name);
-                    process.exit(1);
-                }
-            });
-        }
+        // the keys for properties that contain arrays of field ids
+        var fieldKeys = ['fields', 'moreFields'];
+        fieldKeys.forEach(function(fieldsKey) {
+            if (preset[fieldsKey]) {
+                preset[fieldsKey].forEach(function(field) {
+                    if (fields[field] === undefined) {
+                        var regexResult = betweenBracketsRegex.exec(field);
+                        if (regexResult) {
+                            var foreignPresetID = regexResult[0];
+                            if (presets[foreignPresetID] === undefined) {
+                                console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+                                process.exit(1);
+                            }
+                        } else {
+                            console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+                            process.exit(1);
+                        }
+                    }
+                });
+            }
+        });
     });
 }
 

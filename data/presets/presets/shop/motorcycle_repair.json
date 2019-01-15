@@ -1,7 +1,7 @@
 {
     "icon": "fas-motorcycle",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "service/vehicle"
     ],
     "geometry": [

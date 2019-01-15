@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "brand",
-        "{inherit}",
+        "{shop}",
         "second_hand",
         "service/vehicle"
     ],

@@ -1,6 +1,7 @@
 import _clone from 'lodash-es/clone';
 import _omit from 'lodash-es/omit';
 import _union from 'lodash-es/union';
+import _filter from 'lodash-es/filter';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
@@ -20,31 +21,35 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
     // For a preset without fields, use the fields of the parent preset.
-    // Replace "{inherit}" placeholders with the fields of the parent preset.
+    // Replace {preset} placeholders with the fields of the specified presets.
     function resolveFieldInheritance() {
-        var parentPreset = rawPresets[preset.parentPresetID()];
-        if (parentPreset) {
-            // the property keys that contain arrays of field ids
-            var fieldKeys = ['fields', 'moreFields'];
-            fieldKeys.forEach(function(fieldsKey) {
-                if (parentPreset[fieldsKey]) {
-                    if (preset[fieldsKey]) {
-                        var inheritIndex = preset[fieldsKey].indexOf('{inherit}');
-                        if (inheritIndex >= 0) {
-                            // replace the {inherit} placeholder with the parent preset's fields
-                            preset[fieldsKey].splice.apply(preset[fieldsKey], [inheritIndex, 1].concat(parentPreset[fieldsKey]));
-                            // remove duplicates
-                            preset[fieldsKey] = _union(preset[fieldsKey]);
-                        }
-                    } else {
-                        // there are no fields defined, so use the parent's
-                        preset[fieldsKey] = parentPreset[fieldsKey];
-                    }
-                    // update the raw object to allow for multiple levels of inheritance
-                    rawPresets[preset.id][fieldsKey] = preset[fieldsKey];
+        var betweenBracketsRegex = /([^{]*?)(?=\})/;
+        // the keys for properties that contain arrays of field ids
+        var fieldKeys = ['fields', 'moreFields'];
+        fieldKeys.forEach(function(fieldsKey) {
+            if (preset[fieldsKey]) {
+                var wrappedTargetPresets = _filter(preset[fieldsKey], function(fieldID) {
+                    return fieldID.indexOf('{') > -1;
+                });
+                wrappedTargetPresets.forEach(function(wrappedTargetPresetID) {
+                    var targetPresetID = betweenBracketsRegex.exec(wrappedTargetPresetID)[0];
+                    var targetPreset = rawPresets[targetPresetID];
+                    var targetIndex = preset[fieldsKey].indexOf(wrappedTargetPresetID);
+                    // replace the {preset} placeholder with the target preset's fields
+                    preset[fieldsKey].splice.apply(preset[fieldsKey], [targetIndex, 1].concat(targetPreset[fieldsKey]));
+                });
+                // remove duplicates
+                preset[fieldsKey] = _union(preset[fieldsKey]);
+            } else {
+                // there are no fields defined, so use the parent's if possible
+                var parentPreset = rawPresets[preset.parentPresetID()];
+                if (parentPreset && parentPreset[fieldsKey]) {
+                    preset[fieldsKey] = parentPreset[fieldsKey];
                 }
-            });
-        }
+            }
+            // update the raw object to allow for multiple levels of inheritance
+            rawPresets[preset.id][fieldsKey] = preset[fieldsKey];
+        });
     }
     if (rawPresets) {
         resolveFieldInheritance();

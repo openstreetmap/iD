@@ -1,7 +1,7 @@
 {
     "icon": "maki-bicycle",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "service/bicycle"
     ],
     "geometry": [

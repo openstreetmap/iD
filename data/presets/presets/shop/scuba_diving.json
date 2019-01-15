@@ -1,7 +1,7 @@
 {
     "icon": "maki-swimming",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "scuba_diving"
     ],
     "geometry": [

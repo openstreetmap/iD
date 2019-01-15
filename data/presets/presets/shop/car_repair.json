@@ -1,7 +1,7 @@
 {
     "icon": "maki-car-repair",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "service/vehicle"
     ],
     "geometry": [

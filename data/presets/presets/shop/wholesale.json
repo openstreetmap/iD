@@ -1,7 +1,7 @@
 {
     "icon": "maki-warehouse",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "wholesale"
     ],
     "geometry": [

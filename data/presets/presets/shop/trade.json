@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "trade",
-        "{inherit}"
+        "{shop}"
     ],
     "geometry": [
         "point",

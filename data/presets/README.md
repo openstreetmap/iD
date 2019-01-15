@@ -65,18 +65,17 @@ Both these properties are arrays of field paths (e.g. `description` or `generato
 user or if a matching tag is present. Note that some fields have a `prerequisiteTag`
 property that limits when they will be shown.
 
-A preset can inherit the fields of its "parent" preset if it has one. For example,
-`shop/convenience` doesn't define its own fields, but instead uses the same `fields`
-and `moreFields` as `shop`. The special placeholder `{inherit}` can be used in either
-array to reference and append to the parent preset's fields:
+A preset can reference the fields of another by using that preset's name contained in
+brackets, like `{preset}`. For example, `shop/books` references and extends the fields
+of `shop`:
 
 ```javascript
 "fields": [
-    "{inherit}",
+    "{shop}",
     "internet_access"
 ],
 "moreFields": [
-    "{inherit}",
+    "{shop}",
     "internet_access/fee",
     "internet_access/ssid"
 ],
@@ -84,6 +83,10 @@ array to reference and append to the parent preset's fields:
     "shop": "books"
 }
 ```
+
+If `fields` or `moreFields` are not defined, the values of the preset's "parent"
+preset are used. For example, `shop/convenience` automatically uses the same
+fields as `shop`.
 
 ##### `searchable`
 

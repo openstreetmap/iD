@@ -1,7 +1,7 @@
 {
     "icon": "maki-alcohol-shop",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "drive_through"
     ],
     "geometry": [

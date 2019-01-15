@@ -1,7 +1,7 @@
 {
     "icon": "maki-bank",
     "fields": [
-        "{inherit}",
+        "{shop}",
         "currency_multi"
     ],
     "geometry": [
