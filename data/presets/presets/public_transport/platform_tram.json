@@ -1,15 +1,10 @@
 {
     "icon": "temaki-tram",
     "fields": [
-        "name",
-        "ref_platform",
-        "network",
-        "operator",
-        "surface",
-        "lit",
-        "bench",
-        "shelter",
-        "passenger_information_display"
+        "{public_transport/platform}"
+    ],
+    "moreFields": [
+        "{public_transport/platform}"
     ],
     "geometry": [
         "point",

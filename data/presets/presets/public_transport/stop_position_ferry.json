@@ -1,10 +1,10 @@
 {
     "icon": "maki-ferry",
     "fields": [
-        "name",
-        "ref_stop_position",
-        "network",
-        "operator"
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
     ],
     "geometry": [
         "vertex"

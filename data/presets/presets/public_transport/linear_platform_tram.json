@@ -1,15 +1,10 @@
 {
     "icon": "iD-highway-footway",
     "fields": [
-        "name",
-        "ref_platform",
-        "network",
-        "operator",
-        "surface",
-        "lit",
-        "bench",
-        "shelter",
-        "passenger_information_display"
+        "{public_transport/linear_platform}"
+    ],
+    "moreFields": [
+        "{public_transport/linear_platform}"
     ],
     "geometry": [
         "line"

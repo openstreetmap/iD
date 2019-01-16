@@ -5,10 +5,13 @@
         "ref_platform",
         "network",
         "operator",
-        "surface",
+        "surface"
+    ],
+    "moreFields": [
         "lit",
         "bench",
-        "shelter"
+        "shelter",
+        "passenger_information_display"
     ],
     "geometry": [
         "point",
