@@ -1,6 +1,5 @@
 import _debounce from 'lodash-es/debounce';
 import _forEach from 'lodash-es/forEach';
-import _map from 'lodash-es/map';
 
 import { json as d3_json } from 'd3-request';
 
