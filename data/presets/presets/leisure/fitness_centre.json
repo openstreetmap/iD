@@ -4,8 +4,11 @@
         "name",
         "sport",
         "address",
-        "building_area",
-        "opening_hours"
+        "building_area"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

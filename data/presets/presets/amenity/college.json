@@ -4,15 +4,21 @@
         "name",
         "operator",
         "address",
-        "internet_access",
-        "internet_access/ssid"
+        "website",
+        "internet_access"
+    ],
+    "moreFields": [
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "university"
+        "university",
+        "undergraduate school"
     ],
     "tags": {
         "amenity": "college"

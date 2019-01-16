@@ -2,7 +2,9 @@
     "icon": "maki-pitch",
     "fields": [
         "fitness_station",
-        "ref",
+        "ref"
+    ],
+    "moreFields": [
         "opening_hours"
     ],
     "geometry": [

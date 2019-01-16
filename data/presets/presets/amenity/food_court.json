@@ -5,11 +5,12 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours",
-        "smoking",
-        "outdoor_seating"
+        "opening_hours"
     ],
     "moreFields": [
+        "smoking",
+        "outdoor_seating",
+        "capacity",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
@@ -29,4 +30,3 @@
     },
     "name": "Food Court"
 }
-

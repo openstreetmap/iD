@@ -5,10 +5,13 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours",
-        "smoking",
         "outdoor_seating",
         "brewery"
+    ],
+    "moreFields": [
+        "smoking",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

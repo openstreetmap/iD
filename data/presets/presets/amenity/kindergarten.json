@@ -5,6 +5,10 @@
         "operator",
         "address"
     ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

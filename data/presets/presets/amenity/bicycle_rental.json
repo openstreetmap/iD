@@ -4,7 +4,11 @@
         "capacity",
         "network",
         "operator",
+        "fee",
         "payment_multi"
+    ],
+    "moreFields": [
+        "opening_hours"
     ],
     "geometry": [
         "point",

@@ -4,7 +4,11 @@
         "name",
         "operator",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "fee"
+    ],
+    "moreFields": [
+        "payment_multi"
     ],
     "geometry": [
         "point",

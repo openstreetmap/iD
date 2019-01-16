@@ -7,6 +7,9 @@
         "opening_hours",
         "payment_multi"
     ],
+    "moreFields": [
+        "currency_multi"
+    ],
     "geometry": [
         "point"
     ],

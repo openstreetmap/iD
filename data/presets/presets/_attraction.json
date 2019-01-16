@@ -9,7 +9,8 @@
     "moreFields": [
         "address",
         "opening_hours",
-        "fee"
+        "fee",
+        "payment_multi"
     ],
     "geometry": [
         "point",

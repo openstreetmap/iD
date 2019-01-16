@@ -1,5 +1,10 @@
 {
     "icon": "maki-dog-park",
+    "fields": [
+        "name",
+        "address",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"

@@ -6,6 +6,10 @@
         "seats",
         "colour"
     ],
+    "moreFields": [
+        "lit",
+        "access_simple"
+    ],
     "geometry": [
         "point",
         "vertex",

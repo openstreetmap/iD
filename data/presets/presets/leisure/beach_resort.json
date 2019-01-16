@@ -5,6 +5,11 @@
         "address",
         "fee"
     ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi",
+        "smoking"
+    ],
     "geometry": [
         "point",
         "area"

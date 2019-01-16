@@ -2,6 +2,7 @@
     "fields": [
         "name",
         "operator",
+        "fee",
         "payment_multi"
     ],
     "geometry": [

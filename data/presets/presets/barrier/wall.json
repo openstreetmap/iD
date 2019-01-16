@@ -2,9 +2,7 @@
     "icon": "maki-barrier",
     "fields": [
         "wall",
-        "height"
-    ],
-    "moreFields": [
+        "height",
         "material"
     ],
     "geometry": [

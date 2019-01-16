@@ -7,6 +7,11 @@
         "opening_hours",
         "fuel_multi"
     ],
+    "moreFields": [
+        "payment_multi",
+        "brand",
+        "seamark/type"
+    ],
     "geometry": [
         "point",
         "area"

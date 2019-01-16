@@ -4,10 +4,13 @@
         "name",
         "address",
         "building",
-        "opening_hours",
         "smoking",
         "outdoor_seating",
         "brewery"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,9 @@
 {
     "icon": "maki-drinking-water",
+    "fields": [
+        "operator",
+        "fee"
+    ],
     "geometry": [
         "point"
     ],

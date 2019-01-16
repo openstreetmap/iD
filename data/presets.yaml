@@ -2338,7 +2338,7 @@ en:
       amenity/college:
         # amenity=college
         name: College Grounds
-        # 'terms: university'
+        # 'terms: university,undergraduate school'
         terms: '<translate with synonyms or related terms for ''College Grounds'', separated by commas>'
       amenity/community_centre:
         # amenity=community_centre
@@ -2872,7 +2872,7 @@ en:
       amenity/university:
         # amenity=university
         name: University Grounds
-        # 'terms: college'
+        # 'terms: college,graduate school,PhD program,master''s degree program'
         terms: '<translate with synonyms or related terms for ''University Grounds'', separated by commas>'
       amenity/vehicle_inspection:
         # amenity=vehicle_inspection
@@ -4479,7 +4479,7 @@ en:
       leisure/fitness_centre/yoga:
         # 'leisure=fitness_centre, sport=yoga'
         name: Yoga Studio
-        # 'terms: studio'
+        # 'terms: studio,asanas,modern yoga,meditation'
         terms: '<translate with synonyms or related terms for ''Yoga Studio'', separated by commas>'
       leisure/fitness_station:
         # leisure=fitness_station

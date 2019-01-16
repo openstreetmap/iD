@@ -1,5 +1,9 @@
 {
     "icon": "maki-car",
+    "fields": [
+        "operator",
+        "fee"
+    ],
     "geometry": [
         "point",
         "area"

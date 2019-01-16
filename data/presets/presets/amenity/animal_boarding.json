@@ -8,6 +8,9 @@
         "opening_hours",
         "animal_boarding"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

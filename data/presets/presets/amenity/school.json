@@ -5,7 +5,12 @@
         "operator",
         "address",
         "religion",
-        "denomination"
+        "denomination",
+        "website"
+    ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

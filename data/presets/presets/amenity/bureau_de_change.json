@@ -2,10 +2,13 @@
     "icon": "maki-bank",
     "fields": [
         "name",
-        "currency_multi",
         "operator",
+        "payment_multi",
+        "currency_multi",
         "address",
-        "building_area",
+        "building_area"
+    ],
+    "moreFields": [
         "opening_hours"
     ],
     "geometry": [

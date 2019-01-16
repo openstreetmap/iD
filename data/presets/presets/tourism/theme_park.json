@@ -6,6 +6,9 @@
         "address",
         "opening_hours"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

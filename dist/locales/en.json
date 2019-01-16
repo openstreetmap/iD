@@ -3860,7 +3860,7 @@
                 },
                 "amenity/college": {
                     "name": "College Grounds",
-                    "terms": "university"
+                    "terms": "university,undergraduate school"
                 },
                 "amenity/community_centre": {
                     "name": "Community Center",
@@ -4284,7 +4284,7 @@
                 },
                 "amenity/university": {
                     "name": "University Grounds",
-                    "terms": "college"
+                    "terms": "college,graduate school,PhD program,master's degree program"
                 },
                 "amenity/vehicle_inspection": {
                     "name": "Vehicle Inspection",
@@ -5712,7 +5712,7 @@
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yoga Studio",
-                    "terms": "studio"
+                    "terms": "studio,asanas,modern yoga,meditation"
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",

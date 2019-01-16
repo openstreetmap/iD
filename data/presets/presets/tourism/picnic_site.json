@@ -5,8 +5,12 @@
         "operator",
         "address",
         "access_simple",
-        "capacity",
-        "smoking"
+        "capacity"
+    ],
+    "moreFields": [
+        "smoking",
+        "fee",
+        "payment_multi"
     ],
     "geometry": [
         "point",

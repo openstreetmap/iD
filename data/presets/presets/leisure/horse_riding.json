@@ -7,6 +7,10 @@
         "address",
         "building"
     ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

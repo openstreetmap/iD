@@ -8,6 +8,9 @@
         "access_simple",
         "fee"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

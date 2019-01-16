@@ -8,6 +8,9 @@
         "building_area",
         "access_simple"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "vertex",

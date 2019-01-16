@@ -2,7 +2,9 @@
     "icon": "fas-charging-station",
     "fields": [
         "operator",
-        "capacity"
+        "capacity",
+        "fee",
+        "payment_multi"
     ],
     "geometry": [
         "point"

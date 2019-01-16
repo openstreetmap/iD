@@ -4,7 +4,8 @@
         "name",
         "operator",
         "capacity",
-        "website"
+        "website",
+        "lit"
     ],
     "geometry": [
         "point",

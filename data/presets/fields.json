@@ -210,7 +210,7 @@
     "park_ride": {"key": "park_ride", "type": "check", "label": "Park and Ride"},
     "parking": {"key": "parking", "type": "combo", "label": "Type", "strings": {"options": {"surface": "Surface", "multi-storey": "Multilevel", "underground": "Underground", "sheds": "Sheds", "carports": "Carports", "garage_boxes": "Garage Boxes", "lane": "Roadside Lane"}}},
     "passenger_information_display": {"key": "passenger_information_display", "type": "check", "label": "Passenger information display"},
-    "payment_multi": {"key": "payment:", "type": "multiCombo", "label": "Payment Types", "universal": true},
+    "payment_multi": {"key": "payment:", "type": "multiCombo", "label": "Payment Types"},
     "phases": {"key": "phases", "type": "number", "minValue": 1, "label": "Phases", "placeholder": "1, 2, 3..."},
     "phone": {"key": "phone", "type": "tel", "icon": "maki-telephone", "universal": true, "label": "Telephone", "placeholder": "+31 42 123 4567"},
     "piste/difficulty_downhill": {"key": "piste:difficulty", "type": "combo", "label": "Difficulty", "placeholder": "Easy, Intermediate, Advanced...", "strings": {"options": {"novice": "Novice (instructional)", "easy": "Easy (green circle)", "intermediate": "Intermediate (blue square)", "advanced": "Advanced (black diamond)", "expert": "Expert (double black diamond)", "freeride": "Freeride (off-piste)", "extreme": "Extreme (climbing equipment required)"}}},

@@ -7,6 +7,13 @@
         "address",
         "emergency"
     ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone"
+    ],
     "geometry": [
         "point",
         "area"

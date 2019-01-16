@@ -6,9 +6,11 @@
         "address",
         "building_area",
         "internet_access",
-        "internet_access/fee"
+        "fee"
     ],
     "moreFields" : [
+        "payment_multi",
+        "internet_access/fee",
         "internet_access/ssid"
     ],
     "geometry": [

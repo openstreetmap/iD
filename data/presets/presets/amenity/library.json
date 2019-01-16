@@ -5,13 +5,14 @@
         "operator",
         "building_area",
         "address",
-        "opening_hours",
-        "internet_access",
-        "internet_access/fee",
         "ref/isil"
     ],
     "moreFields" : [
-        "internet_access/ssid"
+        "opening_hours",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi"
     ],
     "geometry": [
         "point",

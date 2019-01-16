@@ -8,6 +8,11 @@
         "opening_hours",
         "language_multi"
     ],
+    "moreFields": [
+        "payment_multi",
+        "website",
+        "phone"
+    ],
     "geometry": [
         "point",
         "area"

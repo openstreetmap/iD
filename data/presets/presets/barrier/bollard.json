@@ -1,9 +1,7 @@
 {
     "icon": "maki-roadblock",
     "fields": [
-        "access"
-    ],
-    "moreFields": [
+        "access",
         "material"
     ],
     "geometry": [

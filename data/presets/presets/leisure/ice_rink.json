@@ -6,8 +6,11 @@
         "sport_ice",
         "operator",
         "address",
-        "building",
-        "opening_hours"
+        "building"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

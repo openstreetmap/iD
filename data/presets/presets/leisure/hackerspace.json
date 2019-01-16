@@ -7,6 +7,10 @@
         "opening_hours",
         "website"
     ],
+    "moreFields": [
+        "payment_multi",
+        "smoking"
+    ],
     "geometry": [
         "point",
         "area"

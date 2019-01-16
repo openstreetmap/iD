@@ -5,9 +5,12 @@
         "phone",
         "fee",
         "payment_multi",
+        "booth"
+    ],
+    "moreFields": [
         "covered",
         "indoor",
-        "booth"
+        "lit"
     ],
     "geometry": [
         "point",

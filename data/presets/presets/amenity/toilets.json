@@ -9,6 +9,9 @@
         "fee",
         "diaper"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -6,10 +6,10 @@
         "address",
         "building_area",
         "social_facility",
-        "social_facility_for",
-        "opening_hours"
+        "social_facility_for"
     ],
     "moreFields": [
+        "opening_hours",
         "wheelchair",
         "internet_access",
         "internet_access/fee",
