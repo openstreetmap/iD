@@ -320,7 +320,6 @@
     "toilets/disposal": {"key": "toilets:disposal", "type": "combo", "label": "Disposal", "strings": {"options": {"flush": "Flush", "pitlatrine": "Pit/Latrine", "chemical": "Chemical", "bucket": "Bucket"}}},
     "toll": {"key": "toll", "type": "check", "label": "Toll"},
     "tomb": {"key": "tomb", "type": "typeCombo", "label": "Type"},
-    "tourism_attraction": {"key": "tourism", "default": "attraction", "type": "typeCombo", "universal": true, "label": "Tourism"},
     "tourism": {"key": "tourism", "type": "typeCombo", "label": "Type"},
     "tower/construction": {"key": "tower:construction", "type": "combo", "label": "Construction", "placeholder": "Guyed, Lattice, Concealed, ..."},
     "tower/type": {"key": "tower:type", "type": "combo", "label": "Type"},

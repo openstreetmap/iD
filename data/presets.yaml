@@ -1856,9 +1856,6 @@ en:
       tourism:
         # tourism=*
         label: Type
-      tourism_attraction:
-        # tourism=*
-        label: Tourism
       tower/construction:
         # 'tower:construction=*'
         label: Construction

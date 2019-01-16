@@ -6388,7 +6388,7 @@
     },
     {
       "key": "tourism",
-      "description": "🄿 Tourism, 🄵 Tourism, 🄵 Type",
+      "description": "🄿 Tourism, 🄵 Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/attraction-15.svg?sanitize=true"
     },
