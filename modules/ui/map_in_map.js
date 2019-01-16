@@ -2,8 +2,7 @@ import { geoPath as d3_geoPath } from 'd3-geo';
 
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import {
@@ -26,7 +25,6 @@ import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilEntityOrMemberSelector } from '../util';
 
 
 export function uiMapInMap(context) {
