@@ -1,5 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 import _forEach from 'lodash-es/forEach';
+import _ from 'lodash-es';
 
 import { json as d3_json } from 'd3-request';
 
@@ -85,6 +86,21 @@ export default {
         } else {
             return undefined;
         }
+    },
+
+
+    /**
+     * Convert monolingual property into a key-value object (language -> value)
+     * @param entity object from wikibase
+     * @param property string e.g. 'P31' for monolingual wiki page title
+     */
+    monolingualClaimToValueObj: function(entity, property) {
+        if (!entity.claims[property]) return undefined;
+        return _
+          .chain(entity.claims[property])
+          .keyBy(function (o) { return o.mainsnak.datavalue.value.language; })
+          .mapValues(function (o) { return o.mainsnak.datavalue.value.text; })
+          .value();
     },
 
 

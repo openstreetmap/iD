@@ -8,6 +8,7 @@ import { utilDetect } from '../util/detect';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { utilQsString } from '../util';
+import _findKey from 'lodash-es/findKey';
 
 
 export function uiTagReference(tag) {
@@ -48,6 +49,30 @@ export function uiTagReference(tag) {
                     url: url,
                     title: 'Special:Redirect/file/' + image
                 };
+            }
+            var wiki = wikibase.monolingualClaimToValueObj(entity, 'P31');
+            if (wiki) {
+                if (wiki[langCode]) {
+                    result.wiki = {title: wiki[langCode], text: 'wiki_reference'};
+                } else {
+                    // If exact language code was not found, try to find the first portion
+                    // BUG: in some cases, a more elaborate fallback logic might be needed
+                    var prefix = langCode.split('-', 2)[0];
+                    if (wiki[prefix]) {
+                        result.wiki = {title: wiki[prefix], text: 'wiki_reference'};
+                    } else if (wiki.en) {
+                        result.wiki = {title: wiki.en, text: 'wiki_en_reference'};
+                    }
+                }
+                if (result.wiki) {
+                    result.wiki.text = t('inspector.' + result.wiki.text);
+                } else {
+                    // When neither local nor EN are there, use first available
+                    var lng = _findKey(wiki);
+                    if (lng) {
+                      result.wiki = {title: wiki[lng], text: t('inspector.wiki_lng_reference', {lng: lng})};
+                    }
+                }
             }
         }
 
@@ -109,6 +134,18 @@ export function uiTagReference(tag) {
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.edit_reference'));
+
+            if (docs.wiki) {
+                _body
+                  .append('a')
+                  .attr('class', 'tag-reference-link')
+                  .attr('target', '_blank')
+                  .attr('tabindex', -1)
+                  .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.wiki.title)
+                  .call(svgIcon('#iD-icon-out-link', 'inline'))
+                  .append('span')
+                  .text(docs.wiki.text);
+            }
 
             // Add link to info about "good changeset comments" - #2923
             if (param.key === 'comment') {
