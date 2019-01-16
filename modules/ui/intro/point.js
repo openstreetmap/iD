@@ -60,7 +60,7 @@ export function uiIntroPoint(context, reveal) {
 
         var msec = transitionTime(intersection, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().zoom(19).centerEase(intersection, msec);
+        context.map().centerZoomEase(intersection, 19, msec);
 
         timeout(function() {
             var tooltip = reveal('button.add-point',

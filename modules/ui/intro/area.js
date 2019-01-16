@@ -55,7 +55,7 @@ export function uiIntroArea(context, reveal) {
 
         var msec = transitionTime(playground, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().zoom(19).centerEase(playground, msec);
+        context.map().centerZoomEase(playground, 19, msec);
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
