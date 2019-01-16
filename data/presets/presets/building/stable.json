@@ -1,11 +1,5 @@
 {
     "icon": "maki-horse-riding",
-    "fields": [
-        "name",
-        "address",
-        "levels",
-        "height"
-    ],
     "geometry": [
         "area"
     ],

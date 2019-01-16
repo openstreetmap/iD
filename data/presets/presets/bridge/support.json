@@ -3,6 +3,10 @@
     "fields": [
         "bridge/support"
     ],
+    "moreFields": [
+        "material",
+        "seamark/type"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -1,11 +1,5 @@
 {
     "icon": "temaki-ruins",
-    "fields": [
-        "name",
-        "address",
-        "levels",
-        "height"
-    ],
     "geometry": [
         "area"
     ],

@@ -27,6 +27,12 @@
       "object_types": ["node", "area"]
     },
     {
+      "key": "attraction",
+      "description": "🄿 Attraction (unsearchable), 🄵 Type",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/star-15.svg?sanitize=true"
+    },
+    {
       "key": "junction",
       "value": "circular",
       "description": "🄿 Traffic Circle (unsearchable)",
@@ -2056,6 +2062,13 @@
     {
       "key": "club",
       "description": "🄿 Club, 🄵 Type",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/heart-15.svg?sanitize=true"
+    },
+    {
+      "key": "club",
+      "value": "sport",
+      "description": "🄿 Sports Club",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/heart-15.svg?sanitize=true"
     },
@@ -7133,7 +7146,7 @@
     {"key": "bath:type", "value": "onsen", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "foot_bath", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "hot_spring", "description": "🄵 Specialty"},
-    {"key": "beauty", "description": "🄵 Shop Type"},
+    {"key": "beauty", "description": "🄵 Beauty Specialty"},
     {"key": "bench", "description": "🄵 Bench"},
     {"key": "bicycle_parking", "description": "🄵 Type"},
     {"key": "bin", "description": "🄵 Waste Bin"},
@@ -7156,6 +7169,7 @@
     {"key": "brand", "description": "🄵 Brand"},
     {"key": "brewery", "description": "🄵 Draft Beers"},
     {"key": "bridge", "description": "🄵 Type"},
+    {"key": "building:material", "description": "🄵 Material"},
     {"key": "bunker_type", "description": "🄵 Type"},
     {"key": "cables", "description": "🄵 Cables"},
     {

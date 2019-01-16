@@ -2,7 +2,6 @@
 const requireESM = require('esm')(module);
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _forEach = requireESM('lodash-es/forEach').default;
-const _intersection = requireESM('lodash-es/intersection').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
@@ -200,22 +199,40 @@ function suggestionsToPresets(presets) {
 
 
     function addSuggestion(key, value, name) {
-        var presetID = key + '/' + value;
-        var preset = presets[presetID];
+        var suggestion = suggestions[key][value][name];
+        var presetID, preset;
+
+        // sometimes we can find a more specific preset then key/value..
+        if (suggestion.tags.cuisine) {
+            presetID = key + '/' + value + '/' + suggestion.tags.cuisine;
+            preset = presets[presetID];
+        } else if (suggestion.tags.vending) {
+            if (suggestion.tags.vending === 'parcel_pickup;parcel_mail_in') {
+                presetID = key + '/' + value + '/parcel_pickup_dropoff';
+            } else {
+                presetID = key + '/' + value + '/' + suggestion.tags.vending;
+            }
+            preset = presets[presetID];
+        }
+
+        // fallback to key/value
+        if (!preset) {
+            presetID = key + '/' + value;
+            preset = presets[presetID];
+        }
+
+        // still no match?
         if (!preset) {
             console.log('Warning:  No preset "' + presetID + '" for name-suggestion "' + name + '"');
             return;
         }
 
-        var suggestionID = key + '/' + value + '/' + name;
-        var suggestion = suggestions[key][value][name];
         var wikidataTag = { 'brand:wikidata': suggestion.tags['brand:wikidata'] };
+        var suggestionID = presetID + '/' + name;
 
         presets[suggestionID] = {
             name: name,
             icon: preset.icon,
-            fields: preset.fields,
-            moreFields: preset.moreFields,
             geometry: preset.geometry,
             tags: _merge({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
@@ -459,28 +476,29 @@ function validateCategoryPresets(categories, presets) {
 }
 
 function validatePresetFields(presets, fields) {
+    var betweenBracketsRegex = /([^{]*?)(?=\})/;
     _forEach(presets, function(preset) {
-        if (preset.fields) {
-            preset.fields.forEach(function(field) {
-                if (fields[field] === undefined) {
-                    console.error('Unknown preset field "' + field + '" in "fields" array of preset ' + preset.name);
-                    process.exit(1);
-                }
-            });
-        }
-        if (preset.moreFields) {
-            preset.moreFields.forEach(function(field) {
-                if (fields[field] === undefined) {
-                    console.error('Unknown preset field "' + field + '" in "moreFields" array of preset ' + preset.name);
-                    process.exit(1);
-                }
-            });
-        }
-        var fieldsIntersection = _intersection(preset.fields, preset.moreFields);
-        if (fieldsIntersection.length > 0) {
-            console.error('Preset field "' + fieldsIntersection[0] + '" in both "fields" and "moreFields" arrays of preset ' + preset.name);
-            process.exit(1);
-        }
+        // the keys for properties that contain arrays of field ids
+        var fieldKeys = ['fields', 'moreFields'];
+        fieldKeys.forEach(function(fieldsKey) {
+            if (preset[fieldsKey]) {
+                preset[fieldsKey].forEach(function(field) {
+                    if (fields[field] === undefined) {
+                        var regexResult = betweenBracketsRegex.exec(field);
+                        if (regexResult) {
+                            var foreignPresetID = regexResult[0];
+                            if (presets[foreignPresetID] === undefined) {
+                                console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+                                process.exit(1);
+                            }
+                        } else {
+                            console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+                            process.exit(1);
+                        }
+                    }
+                });
+            }
+        });
     });
 }
 

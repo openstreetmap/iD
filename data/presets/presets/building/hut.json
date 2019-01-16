@@ -1,10 +1,10 @@
 {
     "icon": "maki-home",
-    "geometry": [
-        "area"
-    ],
     "fields": [
         "name"
+    ],
+    "geometry": [
+        "area"
     ],
     "tags": {
         "building": "hut"

@@ -2,6 +2,9 @@
     "fields": [
         "height"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "line",
         "area"

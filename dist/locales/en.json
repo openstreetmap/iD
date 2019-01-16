@@ -2077,6 +2077,9 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "Type"
+                },
                 "backrest": {
                     "label": "Backrest"
                 },
@@ -2101,7 +2104,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Shop Type"
+                    "label": "Beauty Specialty"
                 },
                 "bench": {
                     "label": "Bench"
@@ -2151,6 +2154,9 @@
                 },
                 "building": {
                     "label": "Building"
+                },
+                "building/material": {
+                    "label": "Material"
                 },
                 "bunker_type": {
                     "label": "Type"
@@ -3659,6 +3665,10 @@
                     "name": "Amenity",
                     "terms": ""
                 },
+                "attraction": {
+                    "name": "Attraction",
+                    "terms": ""
+                },
                 "circular": {
                     "name": "Traffic Circle",
                     "terms": ""
@@ -4854,6 +4864,10 @@
                 "club": {
                     "name": "Club",
                     "terms": "social"
+                },
+                "club/sport": {
+                    "name": "Sports Club",
+                    "terms": "athletics club,sporting club,sports association,sports society"
                 },
                 "craft": {
                     "name": "Craft",

@@ -4,6 +4,9 @@
         "name",
         "man_made"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",

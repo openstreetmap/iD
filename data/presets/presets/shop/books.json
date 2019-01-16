@@ -1,13 +1,11 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi",
-        "internet_access",
+        "{shop}",
+        "internet_access"
+    ],
+    "moreFields": [
+        "{shop}",
         "internet_access/fee",
         "internet_access/ssid"
     ],

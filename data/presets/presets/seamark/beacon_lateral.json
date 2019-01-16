@@ -5,7 +5,8 @@
         "seamark/beacon_lateral/colour",
         "seamark/beacon_lateral/category",
         "seamark/beacon_lateral/shape",
-        "seamark/beacon_lateral/system"
+        "seamark/beacon_lateral/system",
+        "seamark/type"
     ],
     "geometry": [
         "point",

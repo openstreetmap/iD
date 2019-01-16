@@ -5,8 +5,11 @@
         "office",
         "address",
         "building_area",
-        "opening_hours",
-        "smoking"
+        "opening_hours"
+    ],
+    "moreFields": [
+        "smoking",
+        "operator"
     ],
     "geometry": [
         "point",

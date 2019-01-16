@@ -5,9 +5,12 @@
         "shop",
         "operator",
         "address",
-        "building_area",
+        "building_area"
+    ],
+    "moreFields": [
         "opening_hours",
-        "payment_multi"
+        "payment_multi",
+        "brand"
     ],
     "geometry": [
         "point",

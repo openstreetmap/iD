@@ -1,11 +1,5 @@
 {
     "icon": "maki-fuel",
-    "fields": [
-        "vending",
-        "operator",
-        "payment_multi",
-        "currency_multi"
-    ],
     "geometry": [
         "point"
     ],

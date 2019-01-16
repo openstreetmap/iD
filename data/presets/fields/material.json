@@ -1,6 +1,5 @@
 {
     "key": "material",
     "type": "combo",
-    "universal": true,
     "label": "Material"
 }

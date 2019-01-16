@@ -8,6 +8,9 @@
         "building_area",
         "opening_hours"
     ],
+    "moreFields": [
+        "product"    
+    ],
     "geometry": [
         "point",
         "area"

@@ -199,6 +199,9 @@ en:
       atm:
         # atm=*
         label: ATM
+      attraction:
+        # attraction=*
+        label: Type
       backrest:
         # backrest=*
         label: Backrest
@@ -226,7 +229,7 @@ en:
           onsen: Japanese Onsen
       beauty:
         # beauty=*
-        label: Shop Type
+        label: Beauty Specialty
       bench:
         # bench=*
         label: Bench
@@ -277,6 +280,9 @@ en:
       building:
         # building=*
         label: Building
+      building/material:
+        # 'building:material=*'
+        label: Material
       building_area:
         # building=*
         label: Building
@@ -3011,6 +3017,9 @@ en:
         # 'area:highway=*'
         name: Road Surface
         terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
+      attraction:
+        # attraction=*
+        name: Attraction
       attraction/amusement_ride:
         # attraction=amusement_ride
         name: Amusement Ride
@@ -3415,6 +3424,11 @@ en:
         name: Club
         # 'terms: social'
         terms: '<translate with synonyms or related terms for ''Club'', separated by commas>'
+      club/sport:
+        # club=sport
+        name: Sports Club
+        # 'terms: athletics club,sporting club,sports association,sports society'
+        terms: '<translate with synonyms or related terms for ''Sports Club'', separated by commas>'
       craft:
         # craft=*
         name: Craft

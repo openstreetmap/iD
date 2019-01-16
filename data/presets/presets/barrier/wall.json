@@ -4,6 +4,9 @@
         "wall",
         "height"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "line",
         "area"

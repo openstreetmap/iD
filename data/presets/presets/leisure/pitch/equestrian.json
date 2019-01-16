@@ -1,9 +1,7 @@
 {
     "icon": "maki-horse-riding",
     "fields": [
-        "name",
-        "surface",
-        "lit",
+        "{leisure/pitch}",
         "building"
     ],
     "geometry": [

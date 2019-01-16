@@ -3,9 +3,7 @@
     "fields": [
         "name",
         "government",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{office}"
     ],
     "geometry": [
         "point",

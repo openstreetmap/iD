@@ -1,9 +1,4 @@
 {
-    "fields": [
-        "name",
-        "operator",
-        "opening_hours"
-    ],
     "geometry": [
         "line"
     ],

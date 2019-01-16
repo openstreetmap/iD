@@ -4,6 +4,9 @@
         "fence_type",
         "height"
     ],
+    "moreFields": [
+        "material"
+    ],
     "geometry": [
         "line"
     ],

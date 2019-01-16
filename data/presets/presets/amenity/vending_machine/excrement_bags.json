@@ -1,8 +1,7 @@
 {
     "icon": "temaki-vending_machine",
     "fields": [
-        "vending",
-        "operator",
+        "{amenity/vending_machine}",
         "fee",
         "payment_multi",
         "currency_multi"
