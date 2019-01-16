@@ -51,7 +51,7 @@ export function uiRawMemberEditor(context) {
         var mapExtent = context.map().extent();
         if (!entity.intersects(mapExtent, context.graph())) {
             // zoom to the entity if its extent is not visible now
-            context.map().zoomTo(entity);
+            context.map().zoomToEase(entity);
         }
 
         context.enter(modeSelect(context, [d.id]));

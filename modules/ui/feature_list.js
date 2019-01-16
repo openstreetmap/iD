@@ -316,7 +316,7 @@ export function uiFeatureList(context) {
         function click(d) {
             d3_event.preventDefault();
             if (d.location) {
-                context.map().centerZoom([d.location[1], d.location[0]], 19);
+                context.map().centerZoomEase([d.location[1], d.location[0]], 19);
             }
             else if (d.entity) {
                 if (d.entity.type === 'node') {

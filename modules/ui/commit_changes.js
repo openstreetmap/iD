@@ -150,7 +150,7 @@ export function uiCommitChanges(context) {
             } else {
                 var entity = change.entity;
                 _entityID = change.entity.id;
-                context.map().zoomTo(entity);
+                context.map().zoomToEase(entity);
                 context.surface().selectAll(utilEntityOrMemberSelector([_entityID], context.graph()))
                     .classed('hover', true);
             }

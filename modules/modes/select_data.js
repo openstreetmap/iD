@@ -64,7 +64,7 @@ export function modeSelectData(context, selectedDatum) {
 
     mode.zoomToSelected = function() {
         var extent = geoExtent(d3_geoBounds(selectedDatum));
-        context.map().centerZoom(extent.center(), context.map().trimmedExtentZoom(extent));
+        context.map().centerZoomEase(extent.center(), context.map().trimmedExtentZoom(extent));
     };
 
 

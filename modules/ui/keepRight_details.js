@@ -92,7 +92,7 @@ export function uiKeepRightDetails(context) {
                             osmlayer.enabled(true);
                         }
 
-                        context.map().centerZoom(_error.loc, 20);
+                        context.map().centerZoomEase(_error.loc, 20);
 
                         if (entity) {
                             context.enter(modeSelect(context, [entityID]));

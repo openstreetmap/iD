@@ -58,7 +58,7 @@ export function modeSelectError(context, selectedErrorID) {
         if (!keepRight) return;
         var error = keepRight.getError(selectedErrorID);
         if (error) {
-            context.map().centerZoom(error.loc, 20);
+            context.map().centerZoomEase(error.loc, 20);
         }
     };
 
