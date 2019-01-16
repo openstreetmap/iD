@@ -1,6 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 import _forEach from 'lodash-es/forEach';
-import _ from 'lodash-es';
+import _map from 'lodash-es/map';
 
 import { json as d3_json } from 'd3-request';
 
@@ -95,12 +95,12 @@ export default {
      * @param property string e.g. 'P31' for monolingual wiki page title
      */
     monolingualClaimToValueObj: function(entity, property) {
-        if (!entity.claims[property]) return undefined;
-        return _
-          .chain(entity.claims[property])
-          .keyBy(function (o) { return o.mainsnak.datavalue.value.language; })
-          .mapValues(function (o) { return o.mainsnak.datavalue.value.text; })
-          .value();
+        if (!entity || !entity.claims[property]) return undefined;
+        return entity.claims[property].reduce(function(acc, obj) {
+            var value = obj.mainsnak.datavalue.value;
+            acc[value.language] = value.text;
+            return acc;
+        }, {});
     },
 
 

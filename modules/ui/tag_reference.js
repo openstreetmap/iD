@@ -50,31 +50,42 @@ export function uiTagReference(tag) {
                     title: 'Special:Redirect/file/' + image
                 };
             }
-            var wiki = wikibase.monolingualClaimToValueObj(entity, 'P31');
-            if (wiki) {
-                if (wiki[langCode]) {
-                    result.wiki = {title: wiki[langCode], text: 'wiki_reference'};
-                } else {
-                    // If exact language code was not found, try to find the first portion
-                    // BUG: in some cases, a more elaborate fallback logic might be needed
-                    var prefix = langCode.split('-', 2)[0];
-                    if (wiki[prefix]) {
-                        result.wiki = {title: wiki[prefix], text: 'wiki_reference'};
-                    } else if (wiki.en) {
-                        result.wiki = {title: wiki.en, text: 'wiki_en_reference'};
-                    }
-                }
-                if (result.wiki) {
-                    result.wiki.text = t('inspector.' + result.wiki.text);
-                } else {
-                    // When neither local nor EN are there, use first available
-                    var lng = _findKey(wiki);
-                    if (lng) {
-                      result.wiki = {title: wiki[lng], text: t('inspector.wiki_lng_reference', {lng: lng})};
-                    }
-                }
+        }
+
+        // Helper method to get wiki info if a given language exists
+        function getWikiInfo(wiki, langCode, msg) {
+            if (wiki && wiki[langCode]) {
+                return {title: wiki[langCode], text: t(msg)};
             }
         }
+
+        function getAnyWikiInfo(wiki) {
+            if (!wiki) return;
+            var lng = _findKey(wiki);
+            if (lng) {
+                return {title: wiki[lng], text: t('inspector.wiki_lng_reference', {lng: lng})};
+            }
+        }
+
+        // Try to get a wiki page from tag data item first, followed by the corresponding key data item.
+        // If neither tag nor key data item contain a wiki page in the needed language nor English,
+        // get the first found wiki page from either the tag or the key item.
+        var tagWiki = wikibase.monolingualClaimToValueObj(data.tag, 'P31');
+        var keyWiki = wikibase.monolingualClaimToValueObj(data.key, 'P31');
+
+        // If exact language code does not exist, try to find the first part before the '-'
+        // BUG: in some cases, a more elaborate fallback logic might be needed
+        var langPrefix = langCode.split('-', 2)[0];
+
+        result.wiki =
+          getWikiInfo(tagWiki, langCode, 'inspector.wiki_reference') ||
+          getWikiInfo(tagWiki, langPrefix, 'inspector.wiki_reference') ||
+          getWikiInfo(tagWiki, 'en', 'inspector.wiki_en_reference') ||
+          getWikiInfo(keyWiki, langCode, 'inspector.wiki_reference') ||
+          getWikiInfo(keyWiki, langPrefix, 'inspector.wiki_reference') ||
+          getWikiInfo(keyWiki, 'en', 'inspector.wiki_en_reference') ||
+          getAnyWikiInfo(tagWiki) ||
+          getAnyWikiInfo(keyWiki);
 
         return result;
     }
