@@ -264,31 +264,21 @@ export function uiMapInMap(context) {
 
             var getPath = d3_geoPath(projection);
 
-            var selected = getSelectedElements();
-
             var geojson = { 'name':'Minimap Features',
                             'type': 'FeatureCollection',
                             'features': []
                         };
 
-            selected.forEach(function(obj) {
-                var classList = obj.classList.value;
-                var feature = { 'type': 'Feature',
-                                'geometry': {
-                                    'type': '',
-                                    'coordinates': []
-                                },
-                                'properties': {
-                                    'id': obj.__data__.id,
-                                    'classList': classList
-                                }
-                            };
-                var nodes = [];
+            context.selectedIDs()
+                .map(context.entity)
+                .forEach(function(obj) {
+                    var feature = { 'type': 'Feature'
+                                };
 
-                feature.geometry = obj.__data__.asGeoJSON(context.graph());
+                    feature.geometry = obj.asGeoJSON(context.graph());
 
-                geojson.features.push(feature);
-            });
+                    geojson.features.push(feature);
+                });
 
             var path = viewport.select('#map-in-map-features').selectAll('.map-in-map-selection')
                 .data(geojson.features);
@@ -300,13 +290,14 @@ export function uiMapInMap(context) {
                 .append('path')
                 .merge(path)
                 .attr('d', getPath)
-                .attr('class', function(d) {
-                    return d.properties.classList;
-                })
                 .classed('map-in-map-selection', true)
                 .style('fill', function(d) {
-                    return (d.geometry.type === 'Point' || d.properties.classList.includes('fill')) ? '#f00' : 'none';
-                });
+                    return (d.geometry.type === 'Point' || d.geometry.type === 'Polygon') ? '#f90' : 'none';
+                })
+                .style('stroke-width', function(d) {
+                    return (d.geometry.type === 'LineString') ? 5 : 3;
+                })
+                .style('stroke', '#f60');
 
             path
                 .exit()
@@ -367,28 +358,6 @@ export function uiMapInMap(context) {
                         redraw();
                     });
             }
-        }
-
-        function getSelectedElements() {
-            var query_selector = utilEntityOrMemberSelector(context.selectedIDs(), context.graph())
-                                    .split(',')
-                                    .map(function(s) {
-                                        return '#map ' + s;
-                                    })
-                                    .join(', ');
-
-            var selected = Array.from(d3_selectAll(query_selector)._groups[0]);
-
-            for (var i = 0; i < selected.length; i++) {
-                if (selected[i].__data__.members) {
-                    selected.concat(selected[i].__data__.members);
-                    selected[i] = null;
-                }
-            }
-
-            return selected.filter(function(s) {
-                return s !== null;
-            });
         }
 
 
