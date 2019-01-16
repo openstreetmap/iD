@@ -428,7 +428,7 @@ en:
     edit_reference: Edit or translate description
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
-    wiki_lng_reference: View documentation in [{lng}]
+    wiki_lng_reference: View documentation in {lng}
     back_tooltip: Change feature
     remove: Remove
     search: Search

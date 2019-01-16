@@ -9,6 +9,8 @@ import { services } from '../services';
 import { svgIcon } from '../svg';
 import { utilQsString } from '../util';
 import _findKey from 'lodash-es/findKey';
+import _find from 'lodash-es/find';
+import {dataWikipedia} from '../../data';
 
 
 export function uiTagReference(tag) {
@@ -59,11 +61,18 @@ export function uiTagReference(tag) {
             }
         }
 
-        function getAnyWikiInfo(wiki) {
+        function getAnyWikiInfo(wiki, langCode, langPrefix) {
             if (!wiki) return;
             var lng = _findKey(wiki);
             if (lng) {
-                return {title: wiki[lng], text: t('inspector.wiki_lng_reference', {lng: lng})};
+                // TODO: This code should use proper CLDR country names in the current language, not this hack
+                var lngName = _find(dataWikipedia, function(d) {
+                    return d[2] === langCode || d[2] === langPrefix;
+                });
+
+                return {title: wiki[lng], text: t('inspector.wiki_lng_reference', {
+                    lng: lngName ? lngName[0] : '[' + lng + ']'
+                })};
             }
         }
 
@@ -84,8 +93,8 @@ export function uiTagReference(tag) {
           getWikiInfo(keyWiki, langCode, 'inspector.wiki_reference') ||
           getWikiInfo(keyWiki, langPrefix, 'inspector.wiki_reference') ||
           getWikiInfo(keyWiki, 'en', 'inspector.wiki_en_reference') ||
-          getAnyWikiInfo(tagWiki) ||
-          getAnyWikiInfo(keyWiki);
+          getAnyWikiInfo(tagWiki, langCode, langPrefix) ||
+          getAnyWikiInfo(keyWiki, langCode, langPrefix);
 
         return result;
     }
