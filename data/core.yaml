@@ -426,9 +426,9 @@ en:
     results: "{n} results for {search}"
     reference: View on OpenStreetMap Wiki
     edit_reference: Edit or translate description
-    wiki_reference: View wiki page
-    wiki_en_reference: View wiki page in English
-    wiki_lng_reference: View wiki page in [{lng}]
+    wiki_reference: View documentation
+    wiki_en_reference: View documentation in English
+    wiki_lng_reference: View documentation in [{lng}]
     back_tooltip: Change feature
     remove: Remove
     search: Search
