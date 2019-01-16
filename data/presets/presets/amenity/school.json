@@ -10,7 +10,10 @@
     ],
     "moreFields": [
         "internet_access",
-        "internet_access/ssid"
+        "internet_access/ssid",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

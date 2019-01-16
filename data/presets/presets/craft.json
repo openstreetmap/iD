@@ -9,7 +9,11 @@
         "opening_hours"
     ],
     "moreFields": [
-        "product"    
+        "product",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

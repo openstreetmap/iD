@@ -14,7 +14,11 @@
         "payment_multi",
         "internet_access/fee",
         "internet_access/ssid",
-        "stars"
+        "stars",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

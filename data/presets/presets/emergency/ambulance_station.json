@@ -6,6 +6,12 @@
         "building_area",
         "address"
     ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

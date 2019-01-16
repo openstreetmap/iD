@@ -15,7 +15,11 @@
         "internet_access/fee",
         "internet_access/ssid",
         "diet_multi",
-        "payment_multi"
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

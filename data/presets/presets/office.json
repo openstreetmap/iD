@@ -9,7 +9,11 @@
     ],
     "moreFields": [
         "smoking",
-        "operator"
+        "operator",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

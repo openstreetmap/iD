@@ -12,7 +12,9 @@
         "internet_access/fee",
         "internet_access/ssid",
         "website",
-        "phone"
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

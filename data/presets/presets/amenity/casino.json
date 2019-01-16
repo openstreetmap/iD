@@ -9,6 +9,12 @@
         "payment_multi",
         "smoking"
     ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

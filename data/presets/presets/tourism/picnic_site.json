@@ -10,7 +10,8 @@
     "moreFields": [
         "smoking",
         "fee",
-        "payment_multi"
+        "payment_multi",
+        "website"
     ],
     "geometry": [
         "point",

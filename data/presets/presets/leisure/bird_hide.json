@@ -6,6 +6,9 @@
         "address",
         "opening_hours"
     ],
+    "moreFields": [
+        "website" 
+    ],
     "geometry": [
         "point",
         "area"

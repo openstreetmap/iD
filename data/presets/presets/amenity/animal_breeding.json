@@ -8,6 +8,12 @@
         "opening_hours",
         "animal_breeding"
     ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

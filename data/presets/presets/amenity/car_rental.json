@@ -5,6 +5,14 @@
         "operator",
         "payment_multi"
     ],
+    "moreFields": [
+        "brand",
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

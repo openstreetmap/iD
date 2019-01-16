@@ -5,6 +5,13 @@
         "fee",
         "payment_multi"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

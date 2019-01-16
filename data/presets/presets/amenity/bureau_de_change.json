@@ -9,7 +9,11 @@
         "building_area"
     ],
     "moreFields": [
-        "opening_hours"
+        "opening_hours",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

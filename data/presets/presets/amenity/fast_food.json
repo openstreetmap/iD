@@ -19,7 +19,11 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "payment_multi"
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

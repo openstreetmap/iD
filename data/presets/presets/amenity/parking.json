@@ -15,7 +15,10 @@
         "maxstay",
         "payment_multi",
         "address",
-        "website"
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

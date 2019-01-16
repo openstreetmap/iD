@@ -10,7 +10,11 @@
     ],
     "moreFields": [
         "opening_hours",
-        "brand"
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

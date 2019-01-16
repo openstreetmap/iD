@@ -11,7 +11,9 @@
         "opening_hours",
         "payment_multi",
         "website",
-        "phone"
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

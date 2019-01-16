@@ -12,6 +12,10 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
         "payment_multi"
     ],
     "geometry": [

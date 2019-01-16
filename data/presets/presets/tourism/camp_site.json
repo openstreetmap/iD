@@ -14,7 +14,11 @@
         "internet_access/fee",
         "internet_access/ssid",
         "sanitary_dump_station",
-        "power_supply"
+        "power_supply",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

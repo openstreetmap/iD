@@ -9,7 +9,13 @@
     ],
     "moreFields": [
         "payment_multi",
-        "smoking"
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "smoking",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

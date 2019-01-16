@@ -8,7 +8,11 @@
         "fee"
     ],
     "moreFields": [
-        "payment_multi"
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

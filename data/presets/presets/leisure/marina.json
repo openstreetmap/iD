@@ -14,7 +14,11 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "seamark/type"
+        "seamark/type",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
