@@ -1456,8 +1456,8 @@
                 "tooltip": "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
             },
             "highway_almost_junction": {
-                "message": "Almost junction",
-                "tooltip": "This node is very close but not connected to way {wid}."
+                "message": "{highway} is very close but not connected to {highway2}.",
+                "tooltip": "Intersecting highways must share a junction vertex."
             },
             "fix": {
                 "delete_feature": {
@@ -1472,6 +1472,10 @@
                 "add_connection_vertex": {
                     "title": "Connect the features",
                     "undo_redo": "Connected crossing features."
+                },
+                "tag_as_disconnected": {
+                    "title": "Tag as disconnected",
+                    "undo_redo": "Tagged nearby features as disconnected."
                 }
             }
         },

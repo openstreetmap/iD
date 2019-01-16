@@ -6,22 +6,29 @@ import {
     geoSphericalDistance,
     geoVecInterp,
 } from '../geo';
-import { set as d3_set } from 'd3-collection';
+import {
+    utilDisplayLabel
+} from '../util';
+import { actionChangeTags } from '../actions';
 import { t } from '../util/locale';
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
+    validationIssueFix
 } from './validation_issue';
 
 
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationHighwayAlmostJunction() {
+export function validationHighwayAlmostJunction(context) {
 
     function isHighway(entity) {
-        return entity.type === 'way' && entity.tags.highway;
+        return entity.type === 'way' && entity.tags.highway && entity.tags.highway !== 'no';
+    }
+    function isNoexit(node) {
+        return node.tags.noexit && node.tags.noexit === 'yes';
     }
 
     function findConnectableEndNodesByExtension(way, graph, tree) {
@@ -32,7 +39,7 @@ export function validationHighwayAlmostJunction() {
             nodeLast = graph.entity(nidLast);
 
         if (nidFirst === nidLast) return results;
-        if (!nodeFirst.tags.noexit && graph.parentWays(nodeFirst).length === 1) {
+        if (!isNoexit(nodeFirst) && graph.parentWays(nodeFirst).length === 1) {
             var widNearFirst = canConnectByExtend(way, 0, graph, tree);
             if (widNearFirst !== null) {
               results.push({
@@ -41,7 +48,7 @@ export function validationHighwayAlmostJunction() {
               });
             }
         }
-        if (!nodeLast.tags.noexit && graph.parentWays(nodeLast).length === 1) {
+        if (!isNoexit(nodeLast) && graph.parentWays(nodeLast).length === 1) {
             var widNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
             if (widNearLast !== null) {
               results.push({
@@ -96,13 +103,35 @@ export function validationHighwayAlmostJunction() {
             if (!isHighway(edited[i])) continue;
             var extendableNodes = findConnectableEndNodesByExtension(edited[i], graph, tree);
             for (var j = 0; j < extendableNodes.length; j++) {
+                var endHighway = edited[i];
+                var node = extendableNodes[j].node;
+                var edgeHighway = graph.entity(extendableNodes[j].wid);
+
+                var fixes = [];
+                if (Object.keys(node.tags).length === 0) {
+                    // node has no tags, suggest noexit fix
+                    fixes.push(new validationIssueFix({
+                        title: t('issues.fix.tag_as_disconnected.title'),
+                        action: function() {
+                            var nodeID = this.issue.entities[1].id;
+                            context.perform(
+                                actionChangeTags(nodeID, {noexit: 'yes'}),
+                                t('issues.fix.tag_as_disconnected.undo_redo')
+                            );
+                        }
+                    }));
+                }
                 issues.push(new validationIssue({
                     type: ValidationIssueType.highway_almost_junction,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('issues.highway_almost_junction.message'),
-                    tooltip: t('issues.highway_almost_junction.tooltip', {wid: extendableNodes[j].wid}),
-                    entities: [extendableNodes[j].node, graph.entity(extendableNodes[j].wid)],
+                    message: t('issues.highway_almost_junction.message', {
+                        highway: utilDisplayLabel(endHighway, context),
+                        highway2: utilDisplayLabel(edgeHighway, context)
+                    }),
+                    tooltip: t('issues.highway_almost_junction.tooltip'),
+                    entities: [endHighway, node, edgeHighway],
                     coordinates: extendableNodes[j].node.loc,
+                    fixes: fixes
                 }));
             }
         }
