@@ -9,6 +9,9 @@
         "structure",
         "access"
     ],
+    "moreFields": [
+        "wheelchair"
+    ],
     "geometry": [
         "line"
     ],

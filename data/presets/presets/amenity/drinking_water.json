@@ -2,7 +2,12 @@
     "icon": "maki-drinking-water",
     "fields": [
         "operator",
-        "fee"
+        "access_simple",
+        "fee",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "lit"
     ],
     "geometry": [
         "point"

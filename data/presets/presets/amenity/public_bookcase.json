@@ -7,6 +7,9 @@
         "website",
         "lit"
     ],
+    "moreFields": [
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

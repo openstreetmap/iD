@@ -14,7 +14,8 @@
         "internet_access/ssid",
         "phone",
         "email",
-        "fax"
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

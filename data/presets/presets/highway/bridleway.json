@@ -6,6 +6,9 @@
         "structure",
         "access"
     ],
+    "moreFields": [
+        "wheelchair"
+    ],
     "icon": "iD-highway-bridleway",
     "geometry": [
         "line"

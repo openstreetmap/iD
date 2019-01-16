@@ -351,7 +351,7 @@
     "waterway": {"key": "waterway", "type": "typeCombo", "label": "Type"},
     "website": {"key": "website", "type": "url", "icon": "website", "placeholder": "http://example.com/", "label": "Website"},
     "wetland": {"key": "wetland", "type": "combo", "label": "Type"},
-    "wheelchair": {"key": "wheelchair", "type": "radio", "options": ["yes", "limited", "no"], "icon": "maki-wheelchair", "universal": true, "label": "Wheelchair Access"},
+    "wheelchair": {"key": "wheelchair", "type": "radio", "options": ["yes", "limited", "no"], "icon": "maki-wheelchair", "label": "Wheelchair Access"},
     "wholesale": {"key": "wholesale", "type": "typeCombo", "label": "Wholesale"},
     "width": {"key": "width", "type": "number", "minValue": 0, "label": "Width (Meters)"},
     "wikidata": {"key": "wikidata", "type": "wikidata", "icon": "wikipedia", "universal": true, "label": "Wikidata"},

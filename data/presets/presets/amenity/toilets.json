@@ -2,14 +2,15 @@
     "icon": "maki-toilet",
     "fields": [
         "toilets/disposal",
-        "operator",
         "building_area",
         "access_simple",
         "gender",
-        "fee",
-        "diaper"
+        "diaper",
+        "wheelchair"
     ],
     "moreFields": [
+        "operator",
+        "fee",
         "payment_multi"
     ],
     "geometry": [

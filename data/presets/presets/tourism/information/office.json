@@ -6,6 +6,16 @@
         "address",
         "building_area"
     ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "vertex",

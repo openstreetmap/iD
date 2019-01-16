@@ -9,7 +9,8 @@
     ],
     "moreFields": [
         "building/material",
-        "smoking"
+        "smoking",
+        "wheelchair"
     ],
     "geometry": [
         "point",

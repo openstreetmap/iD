@@ -1,19 +1,10 @@
 {
     "icon": "maki-casino",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area"
+        "{amenity/casino}"
     ],
     "moreFields": [
-        "opening_hours",
-        "payment_multi",
-        "smoking",
-        "website",
-        "phone",
-        "email",
-        "fax"
+        "{amenity/casino}"
     ],
     "geometry": [
         "point",

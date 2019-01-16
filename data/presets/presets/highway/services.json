@@ -1,7 +1,10 @@
 {
     "icon": "maki-car",
     "fields": [
-        "name"
+        "{highway/rest_area}"
+    ],
+    "moreFields": [
+        "{highway/rest_area}"
     ],
     "geometry": [
         "point",

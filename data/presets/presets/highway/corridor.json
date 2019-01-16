@@ -4,7 +4,8 @@
         "name",
         "width",
         "level",
-        "access_simple"
+        "access_simple",
+        "wheelchair"
     ],
     "geometry": [
         "line"

@@ -9,7 +9,8 @@
         "fireplace"
     ],
     "moreFields": [
-        "payment_multi"
+        "payment_multi",
+        "wheelchair"
     ],
     "geometry": [
         "point",

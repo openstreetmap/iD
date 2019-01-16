@@ -12,7 +12,8 @@
         "website",
         "phone",
         "email",
-        "fax"
+        "fax",
+        "wheelchair"
     ],
     "geometry" : [
         "point",

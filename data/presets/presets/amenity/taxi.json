@@ -5,6 +5,11 @@
         "operator",
         "capacity"
     ],
+    "moreFields": [
+        "address",
+        "opening_hours",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -11,7 +11,8 @@
         "lit",
         "bench",
         "shelter",
-        "passenger_information_display"
+        "passenger_information_display",
+        "wheelchair"
     ],
     "geometry": [
         "point",

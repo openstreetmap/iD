@@ -6,6 +6,9 @@
         "drive_through",
         "ref"
     ],
+    "moreFields": [
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "vertex"

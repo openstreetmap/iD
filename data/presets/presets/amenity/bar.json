@@ -2,7 +2,6 @@
     "icon": "maki-bar",
     "fields": [
         "name",
-        "operator",
         "address",
         "building_area",
         "outdoor_seating",
@@ -15,7 +14,8 @@
         "website",
         "phone",
         "email",
-        "fax"
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

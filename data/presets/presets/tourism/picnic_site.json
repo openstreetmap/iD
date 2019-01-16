@@ -11,7 +11,8 @@
         "smoking",
         "fee",
         "payment_multi",
-        "website"
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
