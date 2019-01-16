@@ -8,9 +8,6 @@ import { utilDetect } from '../util/detect';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { utilQsString } from '../util';
-import _findKey from 'lodash-es/findKey';
-import _find from 'lodash-es/find';
-import {dataWikipedia} from '../../data';
 
 
 export function uiTagReference(tag) {
@@ -61,21 +58,6 @@ export function uiTagReference(tag) {
             }
         }
 
-        function getAnyWikiInfo(wiki, langCode, langPrefix) {
-            if (!wiki) return;
-            var lng = _findKey(wiki);
-            if (lng) {
-                // TODO: This code should use proper CLDR country names in the current language, not this hack
-                var lngName = _find(dataWikipedia, function(d) {
-                    return d[2] === langCode || d[2] === langPrefix;
-                });
-
-                return {title: wiki[lng], text: t('inspector.wiki_lng_reference', {
-                    lng: lngName ? lngName[0] : '[' + lng + ']'
-                })};
-            }
-        }
-
         // Try to get a wiki page from tag data item first, followed by the corresponding key data item.
         // If neither tag nor key data item contain a wiki page in the needed language nor English,
         // get the first found wiki page from either the tag or the key item.
@@ -92,9 +74,7 @@ export function uiTagReference(tag) {
           getWikiInfo(tagWiki, 'en', 'inspector.wiki_en_reference') ||
           getWikiInfo(keyWiki, langCode, 'inspector.wiki_reference') ||
           getWikiInfo(keyWiki, langPrefix, 'inspector.wiki_reference') ||
-          getWikiInfo(keyWiki, 'en', 'inspector.wiki_en_reference') ||
-          getAnyWikiInfo(tagWiki, langCode, langPrefix) ||
-          getAnyWikiInfo(keyWiki, langCode, langPrefix);
+          getWikiInfo(keyWiki, 'en', 'inspector.wiki_en_reference');
 
         return result;
     }
