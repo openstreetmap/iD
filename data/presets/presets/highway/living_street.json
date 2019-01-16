@@ -7,9 +7,12 @@
         "lanes",
         "surface",
         "structure",
+        "access"
+    ],
+    "moreFields": [
+        "cycleway",
         "maxheight",
-        "access",
-        "cycleway"
+        "covered"
     ],
     "geometry": [
         "line"

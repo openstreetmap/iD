@@ -2388,6 +2388,9 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
+                "frequency_electrified": {
+                    "label": "Operating Frequency"
+                },
                 "frequency": {
                     "label": "Operating Frequency"
                 },
@@ -3492,6 +3495,9 @@
                         "shield": "Shield",
                         "scoria": "Scoria"
                     }
+                },
+                "voltage_electrified": {
+                    "label": "Voltage"
                 },
                 "voltage": {
                     "label": "Voltage"

@@ -10,7 +10,9 @@
     ],
     "moreFields": [
         "wheelchair",
-        "lit"
+        "lit",
+        "smoothness",
+        "covered"
     ],
     "geometry": [
         "line"

@@ -1,19 +1,21 @@
 {
     "icon": "temaki-power",
     "fields": [
-        "transformer",
+        "ref",
         "operator",
+        "transformer",
         "location",
         "rating",
         "devices",
-        "phases",
+        "phases"
+    ],
+    "moreFields": [
         "frequency",
         "voltage/primary",
         "voltage/secondary",
         "voltage/tertiary",
         "windings",
-        "windings/configuration",
-        "ref"
+        "windings/configuration"
     ],
     "geometry": [
         "point",

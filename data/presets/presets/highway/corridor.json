@@ -7,6 +7,9 @@
         "access_simple",
         "wheelchair"
     ],
+    "moreFields": [
+        "maxheight"
+    ],
     "geometry": [
         "line"
     ],

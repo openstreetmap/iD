@@ -4,13 +4,17 @@
         "name",
         "oneway",
         "surface",
-        "lit",
         "width",
         "structure",
-        "access"
+        "access",
+        "incline"
     ],
     "moreFields": [
-        "wheelchair"
+        "wheelchair",
+        "lit",
+        "smoothness",
+        "maxspeed",
+        "covered"
     ],
     "geometry": [
         "line"

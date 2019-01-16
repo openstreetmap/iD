@@ -7,11 +7,14 @@
         "maxspeed/advisory",
         "lanes",
         "surface",
-        "maxheight",
-        "ref_road_number",
-        "cycleway",
         "structure",
+        "ref_road_number",
         "access"
+    ],
+    "moreFields": [
+        "cycleway",
+        "maxheight",
+        "covered"
     ],
     "geometry": [
         "line"

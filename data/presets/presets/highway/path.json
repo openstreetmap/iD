@@ -11,12 +11,14 @@
     "moreFields": [
         "wheelchair",
         "lit",
+        "smoothness",
         "trail_visibility",
         "sac_scale",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
         "horse_scale",
+        "covered",
         "ref"
     ],
     "geometry": [

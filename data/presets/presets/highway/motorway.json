@@ -8,9 +8,13 @@
         "lanes",
         "surface",
         "structure",
+        "access"
+    ],
+    "moreFields": [
         "maxheight",
         "toll",
-        "access"
+        "covered",
+        "maxspeed/advisory"
     ],
     "geometry": [
         "line"

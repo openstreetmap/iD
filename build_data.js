@@ -477,12 +477,26 @@ function validateCategoryPresets(categories, presets) {
 
 function validatePresetFields(presets, fields) {
     var betweenBracketsRegex = /([^{]*?)(?=\})/;
-    _forEach(presets, function(preset) {
+    var maxFieldsBeforeError = 12;
+    var maxFieldsBeforeWarning = 9;
+    for (var presetID in presets) {
+        var preset = presets[presetID];
+        if (preset.fields) {
+            // since `moreFields` is available, check that `fields` doesn't get too cluttered 
+            var fieldCount = Object.keys(preset.fields).length;
+            if (fieldCount > maxFieldsBeforeError) {
+                console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
+                process.exit(1);
+            }
+            else if (fieldCount > maxFieldsBeforeWarning) {
+                console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
+            }
+        }
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
-        fieldKeys.forEach(function(fieldsKey) {
+        for (var fieldsKey in fieldKeys) {
             if (preset[fieldsKey]) {
-                preset[fieldsKey].forEach(function(field) {
+                for (var field in preset[fieldsKey]) {
                     if (fields[field] === undefined) {
                         var regexResult = betweenBracketsRegex.exec(field);
                         if (regexResult) {
@@ -496,10 +510,10 @@ function validatePresetFields(presets, fields) {
                             process.exit(1);
                         }
                     }
-                });
+                }
             }
-        });
-    });
+        }
+    }
 }
 
 function validateDefaults (defaults, categories, presets) {

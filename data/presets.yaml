@@ -650,6 +650,9 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
+      frequency_electrified:
+        # frequency=*
+        label: Operating Frequency
       from:
         # from=*
         label: From
@@ -2019,6 +2022,9 @@ en:
       voltage/tertiary:
         # 'voltage:tertiary=*'
         label: Tertiary Voltage
+      voltage_electrified:
+        # voltage=*
+        label: Voltage
       wall:
         # wall=*
         label: Type

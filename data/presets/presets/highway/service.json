@@ -7,8 +7,12 @@
         "maxspeed",
         "surface",
         "structure",
-        "maxheight",
         "access"
+    ],
+    "moreFields": [
+        "maxheight",
+        "covered",
+        "maxspeed/advisory"
     ],
     "geometry": [
         "line"
