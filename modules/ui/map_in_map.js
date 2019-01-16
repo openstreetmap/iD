@@ -289,13 +289,9 @@ export function uiMapInMap(context) {
                 .merge(path)
                 .attr('d', getPath)
                 .classed('map-in-map-selection', true)
-                .style('fill', function(d) {
-                    return (d.geometry.type === 'Point' || d.geometry.type === 'Polygon') ? '#f90' : 'none';
-                })
-                .style('stroke-width', function(d) {
-                    return (d.geometry.type === 'LineString') ? 5 : 3;
-                })
-                .style('stroke', '#f60');
+                .classed('line', function(d) {
+                    return (d.geometry.type === 'LineString') ? true : false;
+                });
 
             path
                 .exit()

@@ -3259,6 +3259,17 @@ img.tile-debug {
     stroke-width: 5;
 }
 
+.map-in-map-selection {
+    stroke: #f60;
+    fill: #f90;
+    stroke-width: 3;
+}
+
+.map-in-map-selection.line {
+    fill: none;
+    stroke-width: 5;
+}
+
 
 /* Debug Data
 ------------------------------------------------------- */
