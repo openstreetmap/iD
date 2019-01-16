@@ -4778,6 +4778,10 @@
                     "name": "Club",
                     "terms": "social"
                 },
+                "club/sport": {
+                    "name": "Sports Club",
+                    "terms": "athletics club,sporting club,sports association,sports society"
+                },
                 "craft": {
                     "name": "Craft",
                     "terms": ""

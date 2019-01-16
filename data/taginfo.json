@@ -2066,6 +2066,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/heart-15.svg?sanitize=true"
     },
     {
+      "key": "club",
+      "value": "sport",
+      "description": "🄿 Sports Club",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/heart-15.svg?sanitize=true"
+    },
+    {
       "key": "craft",
       "description": "🄿 Craft, 🄵 Type",
       "object_types": ["node", "area"],

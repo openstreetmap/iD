@@ -3424,6 +3424,11 @@ en:
         name: Club
         # 'terms: social'
         terms: '<translate with synonyms or related terms for ''Club'', separated by commas>'
+      club/sport:
+        # club=sport
+        name: Sports Club
+        # 'terms: athletics club,sporting club,sports association,sports society'
+        terms: '<translate with synonyms or related terms for ''Sports Club'', separated by commas>'
       craft:
         # craft=*
         name: Craft

@@ -303,6 +303,7 @@
     "building/warehouse": {"icon": "maki-warehouse", "geometry": ["area"], "tags": {"building": "warehouse"}, "matchScore": 0.5, "name": "Warehouse"},
     "camp_site/camp_pitch": {"icon": "maki-campsite", "fields": ["name", "ref"], "geometry": ["point", "area"], "terms": ["tent", "rv"], "tags": {"camp_site": "camp_pitch"}, "name": "Camp Pitch"},
     "club": {"icon": "maki-heart", "fields": ["name", "club", "operator", "address", "building_area", "opening_hours"], "geometry": ["point", "area"], "tags": {"club": "*"}, "terms": ["social"], "name": "Club"},
+    "club/sport": {"icon": "maki-heart", "fields": ["name", "sport", "{club}"], "geometry": ["point", "area"], "tags": {"club": "sport"}, "terms": ["athletics club", "sporting club", "sports association", "sports society"], "name": "Sports Club"},
     "craft": {"icon": "temaki-tools", "fields": ["name", "craft", "operator", "address", "building_area", "opening_hours"], "moreFields": ["product"], "geometry": ["point", "area"], "tags": {"craft": "*"}, "terms": [], "name": "Craft"},
     "craft/jeweler": {"icon": "maki-marker-stroked", "geometry": ["point", "area"], "tags": {"craft": "jeweler"}, "reference": {"key": "shop", "value": "jewelry"}, "name": "Jeweler", "searchable": false},
     "craft/locksmith": {"icon": "maki-marker-stroked", "geometry": ["point", "area"], "tags": {"craft": "locksmith"}, "reference": {"key": "shop", "value": "locksmith"}, "name": "Locksmith", "searchable": false},
