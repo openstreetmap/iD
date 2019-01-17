@@ -1,8 +1,5 @@
 {
     "icon": "iD-restriction-no-left-turn",
-    "fields": [
-        "except"
-    ],
     "geometry": [
         "relation"
     ],
