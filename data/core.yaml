@@ -1210,6 +1210,9 @@ en:
       tag_as_disconnected:
         title: Tag as disconnected
         undo_redo: Tagged nearby features as disconnected.
+      connect_almost_junction:
+        title: Connect the features
+        undo_redo: Connected two features that were really close.
   intro:
     done: done
     ok: OK

@@ -127,7 +127,7 @@ describe('iD.validations.highway_almost_junction', function () {
     }
 
     function validate() {
-        var validator = iD.validationHighwayAlmostJunction();
+        var validator = iD.validationHighwayAlmostJunction(context);
         var changes = context.history().changes();
         return validator(changes, context.graph(), context.history().tree());
     }
@@ -143,13 +143,27 @@ describe('iD.validations.highway_almost_junction', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.highway_almost_junction);
-        expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('n-1');
-        expect(issue.entities[1].id).to.eql('w-2');
+        expect(issue.entities).to.have.lengthOf(3);
+        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entities[1].id).to.eql('n-1');
+        expect(issue.entities[2].id).to.eql('w-2');
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(22.42357);
         expect(issue.coordinates[1]).to.eql(0);
+
+        expect(issue.info.edge).to.have.lengthOf(2);
+        expect(issue.info.edge[0]).to.eql('n-3');
+        expect(issue.info.edge[1]).to.eql('n-4');
+
+        expect(issue.info.cross_loc).to.have.lengthOf(2);
+        expect(issue.info.cross_loc[0]).to.eql(22.42356);
+        expect(issue.info.cross_loc[1]).to.eql(0);
+
+        expect(issue.fixes).to.have.lengthOf(2);
+        issue.fixes[0].action();
+        issues = validate();
+        expect(issues).to.have.lengthOf(0);
     });
 
     it('horizontal and tilted road, closer than threshold', function() {
@@ -158,13 +172,27 @@ describe('iD.validations.highway_almost_junction', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.highway_almost_junction);
-        expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('n-1');
-        expect(issue.entities[1].id).to.eql('w-2');
+        expect(issue.entities).to.have.lengthOf(3);
+        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entities[1].id).to.eql('n-1');
+        expect(issue.entities[2].id).to.eql('w-2');
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(22.42357);
         expect(issue.coordinates[1]).to.eql(0);
+
+        expect(issue.info.edge).to.have.lengthOf(2);
+        expect(issue.info.edge[0]).to.eql('n-3');
+        expect(issue.info.edge[1]).to.eql('n-4');
+
+        expect(issue.info.cross_loc).to.have.lengthOf(2);
+        expect(issue.info.cross_loc[0]).to.eql(22.42356);
+        expect(issue.info.cross_loc[1]).to.eql(0);
+
+        expect(issue.fixes).to.have.lengthOf(2);
+        issue.fixes[1].action();
+        issues = validate();
+        expect(issues).to.have.lengthOf(0);
     });
 
     it('horizontal and vertical road, further than threshold', function() {
