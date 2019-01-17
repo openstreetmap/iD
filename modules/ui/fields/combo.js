@@ -323,6 +323,16 @@ export function uiFieldCombo(field, context) {
             .on('change', change)
             .on('blur', change);
 
+        input
+            .on('keydown.field', function() {
+                switch (d3_event.keyCode) {
+                    case 13: // ↩ Return
+                        input.node().blur(); // blurring also enters the value
+                        d3_event.stopPropagation();
+                        break;
+                }
+            });
+
         if (isMulti || isSemi) {
             combobox
                 .on('accept', function() {
