@@ -5165,6 +5165,7 @@ en:
       office/estate_agent:
         # office=estate_agent
         name: Real Estate Office
+        # 'terms: real estate'
         terms: '<translate with synonyms or related terms for ''Real Estate Office'', separated by commas>'
       office/financial:
         # office=financial
