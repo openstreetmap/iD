@@ -1,19 +1,10 @@
 {
     "icon": "iD-highway-road",
     "fields": [
-        "name",
-        "oneway",
-        "maxspeed",
-        "lanes",
-        "surface",
-        "structure",
-        "access"
+        "{highway/unclassified}"
     ],
     "moreFields": [
-        "cycleway",
-        "maxheight",
-        "covered",
-        "maxspeed/advisory"
+        "{highway/unclassified}"
     ],
     "geometry": [
         "line"

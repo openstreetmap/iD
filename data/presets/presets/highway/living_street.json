@@ -12,7 +12,10 @@
     "moreFields": [
         "cycleway",
         "maxheight",
-        "covered"
+        "covered",
+        "lit",
+        "smoothness",
+        "oneway/bicycle"
     ],
     "geometry": [
         "line"

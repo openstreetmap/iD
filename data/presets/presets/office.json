@@ -8,8 +8,8 @@
         "opening_hours"
     ],
     "moreFields": [
-        "smoking",
         "operator",
+        "smoking",
         "website",
         "phone",
         "email",

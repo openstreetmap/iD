@@ -5,16 +5,19 @@
         "ref_road_number",
         "oneway",
         "maxspeed",
-        "maxspeed/advisory",
         "lanes",
         "surface",
         "structure",
         "access"
     ],
     "moreFields": [
-        "maxheight",
+        "destination",
+        "maxspeed/advisory",
         "toll",
-        "covered"
+        "maxheight",
+        "covered",
+        "lit",
+        "smoothness"
     ],
     "geometry": [
         "line"

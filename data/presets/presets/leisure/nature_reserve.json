@@ -11,6 +11,7 @@
         "opening_hours"
     ],
     "moreFields": [
+        "dog",
         "website",
         "phone",
         "email",

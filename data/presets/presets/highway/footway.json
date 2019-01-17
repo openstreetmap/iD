@@ -12,7 +12,8 @@
         "wheelchair",
         "lit",
         "smoothness",
-        "covered"
+        "covered",
+        "dog"
     ],
     "geometry": [
         "line"

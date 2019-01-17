@@ -12,7 +12,9 @@
     "moreFields": [
         "maxheight",
         "covered",
-        "maxspeed/advisory"
+        "lit",
+        "maxspeed/advisory",
+        "oneway/bicycle"
     ],
     "geometry": [
         "line"

@@ -469,6 +469,9 @@ en:
       design:
         # design=*
         label: Design
+      destination:
+        # destination=*
+        label: Destination
       devices:
         # devices=*
         label: Devices
@@ -551,6 +554,16 @@ en:
       dock:
         # dock=*
         label: Type
+      dog:
+        # dog=*
+        label: Dogs
+        options:
+          # dog=leashed
+          leashed: Leashed Only
+          # dog=no
+          'no': Not Allowed
+          # dog=yes
+          'yes': Allowed
       drive_through:
         # drive_through=*
         label: Drive-Through
@@ -981,6 +994,11 @@ en:
       memorial:
         # memorial=*
         label: Type
+      minspeed:
+        # minspeed=*
+        label: Minimum Speed Limit
+        # minspeed field placeholder
+        placeholder: '20, 30, 40...'
       monitoring_multi:
         # 'monitoring:=*'
         label: Monitoring
@@ -1114,6 +1132,9 @@ en:
           undefined: Assumed to be No
           # oneway=yes
           'yes': 'Yes'
+      oneway/bicycle:
+        # 'oneway:bicycle=*'
+        label: One Way (Bicycles)
       oneway_yes:
         # oneway=*
         label: One Way

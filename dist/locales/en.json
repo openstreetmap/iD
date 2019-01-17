@@ -2244,6 +2244,9 @@
                 "design": {
                     "label": "Design"
                 },
+                "destination": {
+                    "label": "Destination"
+                },
                 "devices": {
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
@@ -2305,6 +2308,14 @@
                 },
                 "dock": {
                     "label": "Type"
+                },
+                "dog": {
+                    "label": "Dogs",
+                    "options": {
+                        "yes": "Allowed",
+                        "leashed": "Leashed Only",
+                        "no": "Not Allowed"
+                    }
                 },
                 "drive_through": {
                     "label": "Drive-Through"
@@ -2683,6 +2694,10 @@
                 "memorial": {
                     "label": "Type"
                 },
+                "minspeed": {
+                    "label": "Minimum Speed Limit",
+                    "placeholder": "20, 30, 40..."
+                },
                 "monitoring_multi": {
                     "label": "Monitoring"
                 },
@@ -2790,6 +2805,9 @@
                         "reversible": "Reversible",
                         "alternating": "Alternating"
                     }
+                },
+                "oneway/bicycle": {
+                    "label": "One Way (Bicycles)"
                 },
                 "opening_date": {
                     "label": "Expected Opening Date"

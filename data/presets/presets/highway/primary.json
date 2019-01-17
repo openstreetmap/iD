@@ -14,7 +14,10 @@
         "cycleway",
         "maxheight",
         "covered",
-        "maxspeed/advisory"
+        "lit",
+        "smoothness",
+        "maxspeed/advisory",
+        "oneway/bicycle"
     ],
     "geometry": [
         "line"

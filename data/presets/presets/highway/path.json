@@ -19,7 +19,8 @@
         "mtb/scale/imba",
         "horse_scale",
         "covered",
-        "ref"
+        "ref",
+        "dog"
     ],
     "geometry": [
         "line"

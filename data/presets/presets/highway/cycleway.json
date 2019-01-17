@@ -14,7 +14,8 @@
         "lit",
         "smoothness",
         "maxspeed",
-        "covered"
+        "covered",
+        "dog"
     ],
     "geometry": [
         "line"

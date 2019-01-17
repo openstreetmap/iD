@@ -11,10 +11,12 @@
         "access"
     ],
     "moreFields": [
-        "maxheight",
         "toll",
+        "maxheight",
         "covered",
-        "maxspeed/advisory"
+        "lit",
+        "smoothness",
+        "minspeed"
     ],
     "geometry": [
         "line"

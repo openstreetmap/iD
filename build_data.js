@@ -485,7 +485,7 @@ function validateCategoryPresets(categories, presets) {
 function validatePresetFields(presets, fields) {
     var betweenBracketsRegex = /([^{]*?)(?=\})/;
     var maxFieldsBeforeError = 12;
-    var maxFieldsBeforeWarning = 9;
+    var maxFieldsBeforeWarning = 8;
     for (var presetID in presets) {
         var preset = presets[presetID];
         if (preset.fields) {
