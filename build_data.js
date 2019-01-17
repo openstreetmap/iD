@@ -385,9 +385,10 @@ function generateTaginfo(presets, fields) {
 
     _forEach(fields, function(field) {
         var keys = field.keys || [ field.key ] || [];
+        var isRadio = (field.type === 'radio' || field.type === 'structureRadio');
 
         keys.forEach(function(key) {
-            if (field.strings && field.strings.options) {
+            if (field.strings && field.strings.options && !isRadio) {
                 var values = Object.keys(field.strings.options);
                 values.forEach(function(value) {
                     if (value === 'undefined' || value === '*' || value === '') return;
@@ -482,7 +483,7 @@ function validatePresetFields(presets, fields) {
     for (var presetID in presets) {
         var preset = presets[presetID];
         if (preset.fields) {
-            // since `moreFields` is available, check that `fields` doesn't get too cluttered 
+            // since `moreFields` is available, check that `fields` doesn't get too cluttered
             var fieldCount = Object.keys(preset.fields).length;
             if (fieldCount > maxFieldsBeforeError) {
                 console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
