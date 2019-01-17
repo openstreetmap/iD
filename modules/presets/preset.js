@@ -1,7 +1,6 @@
 import _clone from 'lodash-es/clone';
 import _omit from 'lodash-es/omit';
-import _union from 'lodash-es/union';
-import _filter from 'lodash-es/filter';
+import _uniq from 'lodash-es/uniq';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
@@ -14,62 +13,72 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.parentPresetID = function() {
         var endIndex = preset.id.lastIndexOf('/');
-        if (endIndex < 0) {
-            return null;
-        }
+        if (endIndex < 0) return null;
+
         return preset.id.substring(0, endIndex);
     };
+
 
     // For a preset without fields, use the fields of the parent preset.
     // Replace {preset} placeholders with the fields of the specified presets.
     function resolveFieldInheritance() {
 
-        function filterTargetFields(targetFieldIDs) {
-            // only inherit `fields` that don't define this preset
-            return _filter(targetFieldIDs, function(targetFieldID) {
-                var targetField = fields[targetFieldID];
-                if (targetField.key) {
-                    return preset.tags[targetField.key] === undefined;
-                }
-                return true;
-            });
+        // Skip `fields` for the keys which define the preset.
+        // These are usually `typeCombo` fields like `shop=*`
+        function withoutKeyFields(fieldID) {
+            var f = fields[fieldID];
+            if (f.key) {
+                return preset.tags[f.key] === undefined;
+            }
+            return true;
         }
 
-        var betweenBracketsRegex = /([^{]*?)(?=\})/;
-        // the keys for properties that contain arrays of field ids
-        var fieldKeys = ['fields', 'moreFields'];
-        fieldKeys.forEach(function(fieldsKey) {
-            if (preset[fieldsKey]) {
-                var wrappedTargetPresets = _filter(preset[fieldsKey], function(fieldID) {
-                    return fieldID.indexOf('{') > -1;
-                });
-                wrappedTargetPresets.forEach(function(wrappedTargetPresetID) {
-                    var targetPresetID = betweenBracketsRegex.exec(wrappedTargetPresetID)[0];
-                    var targetFields = rawPresets[targetPresetID][fieldsKey];
-                    if (fieldsKey === 'fields') {
-                        targetFields = filterTargetFields(targetFields);
-                    }
-                    var targetIndex = preset[fieldsKey].indexOf(wrappedTargetPresetID);
-                    // replace the {preset} placeholder with the target preset's fields
-                    preset[fieldsKey].splice.apply(preset[fieldsKey], [targetIndex, 1].concat(targetFields));
-                });
-                // remove duplicates
-                preset[fieldsKey] = _union(preset[fieldsKey]);
-            } else {
-                // there are no fields defined, so use the parent's if possible
-                var parentPreset = rawPresets[preset.parentPresetID()];
-                if (parentPreset && parentPreset[fieldsKey]) {
-                    var parentFields = parentPreset[fieldsKey];
-                    if (fieldsKey === 'fields') {
-                        parentFields = filterTargetFields(parentFields);
-                    }
-                    preset[fieldsKey] = parentFields;
-                }
+        // returns an array of field IDs to inherit from the given presetID
+        function inheritedFieldIDs(presetID, prop) {
+            if (!presetID) return [];
+
+            var inheritPreset = rawPresets[presetID];
+            if (!inheritPreset) return [];
+
+            var inheritFieldIDs = inheritPreset[prop] || [];
+
+            if (prop === 'fields') {
+                inheritFieldIDs = inheritFieldIDs.filter(withoutKeyFields);
             }
+
+            return inheritFieldIDs;
+        }
+
+
+        ['fields', 'moreFields'].forEach(function(prop) {
+            var fieldIDs = [];
+            if (preset[prop] && preset[prop].length) {    // fields were defined
+                preset[prop].forEach(function(fieldID) {
+                    var match = fieldID.match(/\{(.*)\}/);
+                    if (match !== null) {        // presetID wrapped in braces {}
+                        var inheritIDs = inheritedFieldIDs(match[1], prop);
+                        if (inheritIDs.length) {
+                            fieldIDs = fieldIDs.concat(inheritIDs);
+                        } else {
+                            /* eslint-disable no-console */
+                            console.log('Can not resolve presetID ' + match[0] +
+                                ' found in ' + preset.id + ' ' + prop);
+                            /* eslint-enable no-console */
+                        }
+                    } else {
+                        fieldIDs.push(fieldID);  // no braces - just a normal field
+                    }
+                });
+
+            } else {  // no fields defined, so use the parent's if possible
+                fieldIDs = inheritedFieldIDs(preset.parentPresetID(), prop);
+            }
+
             // update the raw object to allow for multiple levels of inheritance
-            rawPresets[preset.id][fieldsKey] = preset[fieldsKey];
+            rawPresets[preset.id][prop] = _uniq(fieldIDs);
         });
     }
+
     if (rawPresets) {
         resolveFieldInheritance();
     }
@@ -137,9 +146,9 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
-    preset.visible = function(_) {
+    preset.visible = function(val) {
         if (!arguments.length) return visible;
-        visible = _;
+        visible = val;
         return visible;
     };
 
