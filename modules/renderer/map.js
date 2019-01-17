@@ -330,9 +330,16 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
         surface.selectAll('.layer-touch:not(.markers) *').remove();
 
+        var allowed = {
+            'browse': true,
+            'save': true,
+            'select-note': true,
+            'select-data': true,
+            'select-error': true
+        };
+
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select-note' &&
-            mode.id !== 'select-data' && mode.id !== 'select-error') {
+        if (mode && !allowed[mode.id]) {
             context.enter(modeBrowse(context));
         }
 
