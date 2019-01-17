@@ -24,15 +24,25 @@ export function svgTagClasses() {
     var tagClasses = function(selection) {
         selection.each(function tagClassesEach(entity) {
             var value = this.className;
-            var classes, primary, status;
+            var primary, status;
 
-            if (value.baseVal !== undefined) value = value.baseVal;
+            if (value.baseVal !== undefined) {
+                value = value.baseVal;
+            }
 
-            classes = value.trim().split(/\s+/).filter(function(name) {
-                return name.length && !tagClassRe.test(name);
-            }).join(' ');
+            var t = _tags(entity);
+            var isMultiPolygon = (t.type === 'multipolygon');
+            var i, k, v;
 
-            var t = _tags(entity), i, k, v;
+            // keep only base classes (nothing with `tag-`)
+            var classes = value.trim().split(/\s+/)
+                .filter(function(klass) {
+                    return klass.length && !tagClassRe.test(klass);
+                })
+                .map(function(klass) {  // style multipolygon inner/outers as areas not lines
+                    return (isMultiPolygon && klass === 'line') ? 'area' : klass;
+                })
+                .join(' ');
 
             // pick at most one primary classification tag..
             for (i = 0; i < primaries.length; i++) {
@@ -109,9 +119,9 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.tags = function(_) {
+    tagClasses.tags = function(val) {
         if (!arguments.length) return _tags;
-        _tags = _;
+        _tags = val;
         return tagClasses;
     };
 
