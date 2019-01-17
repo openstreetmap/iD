@@ -97,8 +97,14 @@ module.exports = function buildData() {
                 'data/presets/presets.json',
                 prettyStringify({ presets: presets }, { maxLength: 9999 })
             ),
-            writeFileProm('data/presets.yaml', translationsToYAML(translations)),
-            writeFileProm('data/taginfo.json', prettyStringify(taginfo), { maxLength: 9999 }),
+            writeFileProm(
+                'data/presets.yaml',
+                translationsToYAML(translations)
+            ),
+            writeFileProm(
+                'data/taginfo.json',
+                prettyStringify(taginfo, { maxLength: 9999 })
+            ),
             writeEnJson(tstrings),
             writeFaIcons(faIcons)
         ];
