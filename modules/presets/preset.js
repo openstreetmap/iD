@@ -33,12 +33,12 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
             return true;
         }
 
-        // returns an array of field IDs to inherit from the given presetID
+        // returns an array of field IDs to inherit from the given presetID, if found
         function inheritedFieldIDs(presetID, prop) {
-            if (!presetID) return [];
+            if (!presetID) return null;
 
             var inheritPreset = rawPresets[presetID];
-            if (!inheritPreset) return [];
+            if (!inheritPreset) return null;
 
             var inheritFieldIDs = inheritPreset[prop] || [];
 
@@ -57,7 +57,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                     var match = fieldID.match(/\{(.*)\}/);
                     if (match !== null) {        // presetID wrapped in braces {}
                         var inheritIDs = inheritedFieldIDs(match[1], prop);
-                        if (inheritIDs.length) {
+                        if (inheritIDs !== null) {
                             fieldIDs = fieldIDs.concat(inheritIDs);
                         } else {
                             /* eslint-disable no-console */
