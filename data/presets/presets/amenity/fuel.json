@@ -10,6 +10,7 @@
     "moreFields": [
         "opening_hours",
         "payment_multi",
+        "building",
         "website",
         "phone",
         "email",
