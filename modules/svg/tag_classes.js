@@ -17,7 +17,6 @@ export function svgTagClasses() {
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking'
     ];
-    var tagClassRe = /^tag-/;
     var _tags = function(entity) { return entity.tags; };
 
 
@@ -34,15 +33,15 @@ export function svgTagClasses() {
             var isMultiPolygon = (t.type === 'multipolygon');
             var i, k, v;
 
-            // keep only base classes (nothing with `tag-`)
+            // preserve base classes (nothing with `tag-`)
             var classes = value.trim().split(/\s+/)
                 .filter(function(klass) {
-                    return klass.length && !tagClassRe.test(klass);
+                    return klass.length && !/^tag-/.test(klass);
                 })
                 .map(function(klass) {  // style multipolygon inner/outers as areas not lines
                     return (isMultiPolygon && klass === 'line') ? 'area' : klass;
-                })
-                .join(' ');
+                });
+
 
             // pick at most one primary classification tag..
             for (i = 0; i < primaries.length; i++) {
@@ -53,9 +52,10 @@ export function svgTagClasses() {
                 primary = k;
                 if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
                     status = v;
-                    classes += ' tag-' + k;
+                    classes.push('tag-' + k);
                 } else {
-                    classes += ' tag-' + k + ' tag-' + k + '-' + v;
+                    classes.push('tag-' + k);
+                    classes.push('tag-' + k + '-' + v);
                 }
 
                 break;
@@ -76,7 +76,7 @@ export function svgTagClasses() {
                     } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
                         status = k;
                         primary = v;
-                        classes += ' tag-' + v;
+                        classes.push('tag-' + v);
                     }  // else ignore e.g.  `highway=path + abandoned=railway`
 
                     if (status) break;
@@ -84,15 +84,17 @@ export function svgTagClasses() {
             }
 
             if (status) {
-                classes += ' tag-status tag-status-' + status;
+                classes.push('tag-status');
+                classes.push('tag-status-' + status);
             }
 
-            // add any secondary (structure) tags
+            // add any secondary tags
             for (i = 0; i < secondaries.length; i++) {
                 k = secondaries[i];
                 v = t[k];
                 if (!v || v === 'no') continue;
-                classes += ' tag-' + k + ' tag-' + k + '-' + v;
+                classes.push('tag-' + k);
+                classes.push('tag-' + k + '-' + v);
             }
 
             // For highways, look for surface tagging..
@@ -106,14 +108,14 @@ export function svgTagClasses() {
                     }
                 }
                 if (!paved) {
-                    classes += ' tag-unpaved';
+                    classes.push('tag-unpaved');
                 }
             }
 
-            classes = classes.trim();
 
-            if (classes !== value) {
-                d3_select(this).attr('class', classes);
+            var computed = classes.join(' ').trim();
+            if (computed !== value) {
+                d3_select(this).attr('class', computed);
             }
         });
     };
