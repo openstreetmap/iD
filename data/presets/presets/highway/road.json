@@ -1,10 +1,10 @@
 {
     "icon": "iD-highway-road",
     "fields": [
-        "{highway/unclassified}"
+        "{highway/residential}"
     ],
     "moreFields": [
-        "{highway/unclassified}"
+        "{highway/residential}"
     ],
     "geometry": [
         "line"

@@ -11,13 +11,13 @@
         "access"
     ],
     "moreFields": [
-        "cycleway",
-        "maxheight",
         "covered",
+        "cycleway",
         "lit",
-        "smoothness",
+        "oneway/bicycle",
+        "maxheight",
         "maxspeed/advisory",
-        "oneway/bicycle"
+        "smoothness"
     ],
     "geometry": [
         "line"
