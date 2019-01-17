@@ -1,23 +1,28 @@
 {
     "icon": "iD-highway-primary-link",
     "fields": [
-        "name",
+        "destination_oneway",
+        "destination/ref_oneway",
         "oneway",
         "maxspeed",
         "lanes",
         "surface",
         "structure",
-        "ref_road_number",
         "access"
     ],
     "moreFields": [
-        "maxspeed/advisory",
-        "cycleway",
-        "maxheight",
         "covered",
+        "cycleway",
+        "destination/symbol_oneway",
+        "junction/ref_oneway",
         "lit",
+        "maxheight",
+        "maxspeed/advisory",
+        "name",
+        "oneway/bicycle",
+        "ref_road_number",
         "smoothness",
-        "oneway/bicycle"
+        "toll"
     ],
     "geometry": [
         "line"

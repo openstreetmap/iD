@@ -469,9 +469,15 @@ en:
       design:
         # design=*
         label: Design
-      destination:
+      destination/ref_oneway:
+        # 'destination:ref=*'
+        label: Destination Road Numbers
+      destination/symbol_oneway:
+        # 'destination:symbol=*'
+        label: Destination Symbols
+      destination_oneway:
         # destination=*
-        label: Destination
+        label: Destinations
       devices:
         # devices=*
         label: Devices
@@ -852,6 +858,9 @@ en:
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: SSID (Network Name)
+      junction/ref_oneway:
+        # 'junction:ref=*'
+        label: Junction Number
       kerb:
         # kerb=*
         label: Curb

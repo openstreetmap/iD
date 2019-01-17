@@ -2244,8 +2244,14 @@
                 "design": {
                     "label": "Design"
                 },
-                "destination": {
-                    "label": "Destination"
+                "destination_oneway": {
+                    "label": "Destinations"
+                },
+                "destination/ref_oneway": {
+                    "label": "Destination Road Numbers"
+                },
+                "destination/symbol_oneway": {
+                    "label": "Destination Symbols"
                 },
                 "devices": {
                     "label": "Devices",
@@ -2571,6 +2577,9 @@
                 },
                 "internet_access/ssid": {
                     "label": "SSID (Network Name)"
+                },
+                "junction/ref_oneway": {
+                    "label": "Junction Number"
                 },
                 "kerb": {
                     "label": "Curb"

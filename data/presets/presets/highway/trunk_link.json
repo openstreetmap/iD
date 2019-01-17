@@ -1,23 +1,10 @@
 {
     "icon": "iD-highway-trunk-link",
     "fields": [
-        "name",
-        "ref_road_number",
-        "oneway",
-        "maxspeed",
-        "lanes",
-        "surface",
-        "structure",
-        "access"
+        "{highway/motorway_link}"
     ],
     "moreFields": [
-        "destination",
-        "maxspeed/advisory",
-        "toll",
-        "maxheight",
-        "covered",
-        "lit",
-        "smoothness"
+        "{highway/motorway_link}"
     ],
     "geometry": [
         "line"
