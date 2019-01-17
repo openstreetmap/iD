@@ -61,7 +61,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                             fieldIDs = fieldIDs.concat(inheritIDs);
                         } else {
                             /* eslint-disable no-console */
-                            console.log('Can not resolve presetID ' + match[0] +
+                            console.log('Cannot resolve presetID ' + match[0] +
                                 ' found in ' + preset.id + ' ' + prop);
                             /* eslint-enable no-console */
                         }
@@ -73,9 +73,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
             } else {  // no fields defined, so use the parent's if possible
                 fieldIDs = inheritedFieldIDs(preset.parentPresetID(), prop);
             }
+            // resolve duplicate fields
+            fieldIDs = _uniq(fieldIDs);
+
+            // update this preset with the results
+            preset[prop] = fieldIDs;
 
             // update the raw object to allow for multiple levels of inheritance
-            rawPresets[preset.id][prop] = _uniq(fieldIDs);
+            rawPresets[preset.id][prop] = fieldIDs;
         });
     }
 
