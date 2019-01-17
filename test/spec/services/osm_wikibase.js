@@ -246,7 +246,15 @@ describe('iD.serviceOsmWikibase', function () {
             type: 'statement',
             rank: 'normal'
           }
-        ]
+        ],
+        P31: [
+          {mainsnak: {datavalue: {value: {text: 'Cs:Key:bridge:movable', language: 'cs'}}}},
+          {mainsnak: {datavalue: {value: {text: 'DE:Key:bridge:movable', language: 'de'}}}},
+          {mainsnak: {datavalue: {value: {text: 'FR:Key:bridge:movable', language: 'fr'}}}},
+          {mainsnak: {datavalue: {value: {text: 'JA:Key:bridge:movable', language: 'ja'}}}},
+          {mainsnak: {datavalue: {value: {text: 'Pl:Key:bridge:movable', language: 'pl'}}}},
+          {mainsnak: {datavalue: {value: {text: 'Key:bridge:movable', language: 'en'}}}},
+        ],
       },
       sitelinks: {
         wiki: {
@@ -317,6 +325,17 @@ describe('iD.serviceOsmWikibase', function () {
     expect(wikibase.claimToValue(keyData(), 'P6', 'en')).to.eql('Q15');
     expect(wikibase.claimToValue(keyData(), 'P6', 'fr')).to.eql('Q15');
     expect(wikibase.claimToValue(keyData(), 'P6', 'de')).to.eql('Q14');
+  });
+
+  it('gets monolingual value from entity as an object', function () {
+    expect(wikibase.monolingualClaimToValueObj(tagData(), 'P31')).to.eql({
+      cs: 'Cs:Key:bridge:movable',
+      de: 'DE:Key:bridge:movable',
+      fr: 'FR:Key:bridge:movable',
+      ja: 'JA:Key:bridge:movable',
+      pl: 'Pl:Key:bridge:movable',
+      en: 'Key:bridge:movable',
+    });
   });
 
 });

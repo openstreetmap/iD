@@ -88,6 +88,21 @@ export default {
     },
 
 
+    /**
+     * Convert monolingual property into a key-value object (language -> value)
+     * @param entity object from wikibase
+     * @param property string e.g. 'P31' for monolingual wiki page title
+     */
+    monolingualClaimToValueObj: function(entity, property) {
+        if (!entity || !entity.claims[property]) return undefined;
+        return entity.claims[property].reduce(function(acc, obj) {
+            var value = obj.mainsnak.datavalue.value;
+            acc[value.language] = value.text;
+            return acc;
+        }, {});
+    },
+
+
     toSitelink: function(key, value) {
         var result = value ? 'Tag:' + key + '=' + value : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
