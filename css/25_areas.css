@@ -119,6 +119,8 @@ path.fill.tag-natural-water {
 
 /* Yellow things */
 path.stroke.tag-leisure-pitch.tag-sport-beachvolleyball,
+path.stroke.tag-leisure-pitch.tag-sport-baseball,
+path.stroke.tag-leisure-pitch.tag-sport-softball,
 path.stroke.tag-leisure-track,
 path.stroke.tag-natural-beach,
 path.stroke.tag-natural-sand,
@@ -131,6 +133,8 @@ path.stroke.tag-amenity-university {
     stroke: rgba(255, 255, 148, 0.75);
 }
 path.fill.tag-leisure-pitch.tag-sport-beachvolleyball,
+path.fill.tag-leisure-pitch.tag-sport-baseball,
+path.fill.tag-leisure-pitch.tag-sport-softball,
 path.fill.tag-leisure-track,
 path.fill.tag-natural-beach,
 path.fill.tag-natural-sand,
@@ -144,6 +148,8 @@ path.fill.tag-amenity-university {
     fill: rgba(255, 255, 148, 0.25);
 }
 .preset-icon-fill-area.tag-leisure-pitch.tag-sport-beachvolleyball,
+.preset-icon-fill-area.tag-leisure-pitch.tag-sport-baseball,
+.preset-icon-fill-area.tag-leisure-pitch.tag-sport-softball,
 .preset-icon-fill-area.tag-leisure-track,
 .preset-icon-fill-area.tag-natural-beach,
 .preset-icon-fill-area.tag-natural-sand,
