@@ -191,6 +191,15 @@ export function uiFieldCombo(field, context) {
                 });
             }
 
+            if (data.length === 0) {
+                // hide the caret if there are no suggestions
+                container.select('.combobox-caret')
+                    .style('display', 'none');
+            } else {
+                container.select('.combobox-caret')
+                    .style('display', null);
+            }
+
             _comboData = _map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
