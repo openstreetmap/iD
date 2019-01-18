@@ -2128,7 +2128,7 @@ div.combobox {
 }
 .tag-row .key-wrap,
 .tag-row .value-wrap {
-    flex: 1 1 auto;
+    flex: 1 1 50%;
 }
 
 .tag-row.readonly,
@@ -2225,22 +2225,6 @@ div.combobox {
     border-right-width: 0;
 }
 
-/* Adding form fields to tag editor */
-.raw-tag-editor .add-tag {
-    width: 40%;
-    height: 30px;
-    border-top: 0;
-    background: rgba(0,0,0,.5);
-    border-radius: 0 0 4px 4px;
-}
-.raw-tag-editor .add-tag:focus,
-.raw-tag-editor .add-tag:hover {
-    background: rgba(0,0,0,.8);
-}
-.raw-tag-editor .add-tag .label {
-    display: none;
-}
-
 /* Tag reference */
 .tag-reference-loading {
     background-color: #f5f5f5;
@@ -2325,18 +2309,6 @@ div.combobox {
     border: 0;
 }
 
-.add-relation {
-    width: 40%;
-    height: 30px;
-    background: rgba(0,0,0,.5);
-    border-radius: 4px;
-    margin-top: 10px;
-}
-.add-relation:focus,
-.add-relation:hover {
-    background: rgba(0,0,0,.8);
-}
-
 /* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
 .raw-membership-editor.inspector-inner {
     margin-bottom: 150px;
@@ -2348,6 +2320,38 @@ input.key-trap {
     width: 0px;
     padding: 0px;
     border: 1px solid rgba(0,0,0,0);
+}
+
+
+/* add tag, add relation buttons */
+.add-row {
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+}
+.add-row .add-tag,
+.add-row .add-relation,
+.add-row .space-value {
+    flex: 1 1 50%;
+}
+.add-row .space-buttons {
+    flex: 0 0 62px;
+}
+.add-row button {
+    height: 30px;
+    background: rgba(0,0,0,.5);
+}
+.add-row button:focus,
+.add-row button:hover {
+    background: rgba(0,0,0,.8);
+}
+
+.add-tag {
+    border-radius: 0 0 4px 4px;
+}
+.add-relation {
+    margin-top: 10px;
+    border-radius: 4px;
 }
 
 
@@ -2395,8 +2399,7 @@ input.key-trap {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-tag,
-.inspector-hover .inspector-inner .add-relation {
+.inspector-hover .inspector-inner .add-row {
     display: none;
 }
 

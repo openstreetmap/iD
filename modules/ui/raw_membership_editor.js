@@ -187,12 +187,13 @@ export function uiRawMembershipEditor(context) {
 
             itemsEnter.each(function(d){
                 // highlight the relation in the map while hovering on the list item
-                d3_select(this).on('mouseover', function() {
-                    utilHighlightEntity(d.relation.id, true, context);
-                });
-                d3_select(this).on('mouseout', function() {
-                    utilHighlightEntity(d.relation.id, false, context);
-                });
+                d3_select(this)
+                    .on('mouseover', function() {
+                        utilHighlightEntity(d.relation.id, true, context);
+                    })
+                    .on('mouseout', function() {
+                        utilHighlightEntity(d.relation.id, false, context);
+                    });
             });
 
             var labelEnter = itemsEnter
@@ -281,11 +282,11 @@ export function uiRawMembershipEditor(context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove form-field-button member-delete')
+                .call(svgIcon('#iD-operation-delete'))
                 .on('click', function() {
                     list.selectAll('.member-row-new')
                         .remove();
-                })
-                .call(svgIcon('#iD-operation-delete'));
+                });
 
             // Update
             newMembership = newMembership
@@ -301,18 +302,33 @@ export function uiRawMembershipEditor(context) {
                 );
 
 
-            var addrel = selection.selectAll('.add-relation')
+            // Container for the Add button
+            var addRow = selection.selectAll('.add-row')
                 .data([0]);
 
-            // Enter
-            var addrelEnter = addrel.enter()
-                .append('button')
-                .attr('class', 'add-relation');
+            // enter
+            var addRowEnter = addRow.enter()
+                .append('div')
+                .attr('class', 'add-row');
 
-            // Update
-            addrel
-                .merge(addrelEnter)
-                .call(svgIcon('#iD-icon-plus', 'light'))
+            addRowEnter
+                .append('button')
+                .attr('class', 'add-relation')
+                .call(svgIcon('#iD-icon-plus', 'light'));
+
+            addRowEnter
+                .append('div')
+                .attr('class', 'space-value');   // preserve space
+
+            addRowEnter
+                .append('div')
+                .attr('class', 'space-buttons');  // preserve space
+
+            // update
+            addRow = addRow
+                .merge(addRowEnter);
+
+            addRow.select('.add-relation')
                 .on('click', function() {
                     _showBlank = true;
                     content(selection);
