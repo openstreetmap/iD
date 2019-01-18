@@ -29,6 +29,7 @@ export function uiRawMembershipEditor(context) {
     var nearbyCombo = uiCombobox(context, 'parent-relation')
         .minItems(1)
         .fetcher(fetchNearbyRelations);
+    var _inChange = false;
     var _entityID;
     var _showBlank;
 
@@ -44,16 +45,20 @@ export function uiRawMembershipEditor(context) {
 
 
     function changeRole(d) {
-        if (d === 0) return;   // called on newrow (shoudn't happen)
+        if (d === 0) return;    // called on newrow (shoudn't happen)
+        if (_inChange) return;  // avoid accidental recursive call #5731
+
         var oldRole = d.member.role;
         var newRole = d3_select(this).property('value');
 
         if (oldRole !== newRole) {
+            _inChange = true;
             context.perform(
                 actionChangeMember(d.relation.id, _extend({}, d.member, { role: newRole }), d.index),
                 t('operations.change_role.annotation')
             );
         }
+        _inChange = false;
     }
 
 
@@ -383,9 +388,9 @@ export function uiRawMembershipEditor(context) {
     }
 
 
-    rawMembershipEditor.entityID = function(_) {
+    rawMembershipEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         _showBlank = false;
         return rawMembershipEditor;
     };
