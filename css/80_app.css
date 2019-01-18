@@ -1422,48 +1422,60 @@ img.tag-reference-wiki-image {
 }
 
 .form-field-input-multicombo ul.chiplist {
-    padding: 5px 0 5px 10px;
+    padding: 5px 7px 5px 7px;
     background: #fff;
     display: block;
     border-radius: 0 0 4px 4px;
 }
 
 .form-field-input-multicombo li.chips {
+    background-color: #eff2f7;
+    border: 1px solid #ccd5e3;
+    line-height: 25px;
+    padding: 2px 0px 2px 5px;
+}
+.form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: #eff2f7;
-    border: 1px solid #ccd5e3;
-    border-radius: 4px;
-    line-height: 25px;
-    padding: 2px 5px;
     margin: 3px;
+    border-radius: 4px;
 }
 
 .form-field-input-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
-    line-height: 24px;
+    line-height: 22px;
     float: right;
-    margin: 1px 0 0 5px;
-    padding: 0;
+    padding: 0px 5px 0px 5px;
+    margin: 0;
     cursor: pointer;
     color: #a6b4ce;
 }
 
-.form-field-input-multicombo input {
+.form-field-input-multicombo .input-wrap {
     border: 1px solid #ddd;
     width: 100px;
-    margin: 3px;
     height: 31px;
+    overflow: hidden;
 }
-
-.form-field-input-multicombo .combobox-caret {
-    margin: 3px 3px 3px -30px;
+.form-field-input-multicombo input {
+    border: none;
+    width: 100%;
 }
 
 .form-field-input-multicombo input:focus {
     border-radius: 4px !important;
+}
+
+.form-field-input-multicombo .full-line-chips li {
+    display: block;
+}
+.form-field-input-multicombo .full-line-chips li:not(:last-child) {
+    margin-bottom: 6px;
+}
+.form-field-input-multicombo .full-line-chips .input-wrap {
+    width: auto;
 }
 
 

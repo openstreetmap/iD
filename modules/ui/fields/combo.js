@@ -42,6 +42,7 @@ export function uiFieldCombo(field, context) {
         .caseSensitive(caseSensitive)
         .minItems(isMulti || isSemi ? 1 : 2);
     var container = d3_select(null);
+    var inputWrap = d3_select(null);
     var input = d3_select(null);
     var _comboData = [];
     var _multiData = [];
@@ -292,17 +293,37 @@ export function uiFieldCombo(field, context) {
             container = container.selectAll('.chiplist')
                 .data([0]);
 
+            var listClass = 'chiplist';
+            
+            // Use a separate line for each value in the Destinations field
+            // to mimic highway exit signs
+            if (field.id === 'destination_oneway') {
+                listClass += ' full-line-chips';
+            }
+
             container = container.enter()
                 .append('ul')
-                .attr('class', 'chiplist')
+                .attr('class', listClass)
                 .on('click', function() {
                     window.setTimeout(function() { input.node().focus(); }, 10);
                 })
                 .merge(container);
-        }
 
-        input = container.selectAll('input')
-            .data([0]);
+
+            inputWrap = container.selectAll('.input-wrap')
+                .data([0]);
+
+            inputWrap = inputWrap.enter()
+                .append('li')
+                .attr('class', 'input-wrap')
+                .merge(inputWrap);
+
+            input = inputWrap.selectAll('input')
+                .data([0]);
+        } else {
+            input = container.selectAll('input')
+                .data([0]);
+        }
 
         input = input.enter()
             .append('input')
@@ -395,7 +416,7 @@ export function uiFieldCombo(field, context) {
                 .remove();
 
             var enter = chips.enter()
-                .insert('li', 'input')
+                .insert('li', '.input-wrap')
                 .attr('class', 'chips');
 
             enter.append('span');
