@@ -1462,6 +1462,7 @@ img.tag-reference-wiki-image {
 .form-field-input-multicombo input {
     border: none;
     width: 100%;
+    height: 100%;
 }
 
 .form-field-input-multicombo input:focus {
@@ -2381,7 +2382,7 @@ input.key-trap {
 .inspector-hover .preset-list-button-wrap .tag-reference-button,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],
-.inspector-hover .form-field-input-multicombo .combobox-input,
+.inspector-hover .form-field-input-multicombo .input-wrap,
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
