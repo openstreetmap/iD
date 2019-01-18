@@ -1036,7 +1036,7 @@
                         "description": "{var1} has a restriction type \"{var2}\" but the angle is {var3} degrees. Maybe the restriction type is not appropriate?"
                     },
                     "297": {
-                        "title": "Wrong direction of to member",
+                        "title": "Wrong direction of \"to\" way",
                         "description": "{var1} does not match the direction of \"to\" way {var2}."
                     },
                     "298": {
