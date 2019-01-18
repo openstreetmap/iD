@@ -5,6 +5,7 @@ const _forEach = requireESM('lodash-es/forEach').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
+const _filter = requireESM('lodash-es/filter').default;
 
 const colors = require('colors/safe');
 const fs = require('fs');
@@ -488,17 +489,6 @@ function validatePresetFields(presets, fields) {
     var maxFieldsBeforeWarning = 8;
     for (var presetID in presets) {
         var preset = presets[presetID];
-        if (preset.fields) {
-            // since `moreFields` is available, check that `fields` doesn't get too cluttered
-            var fieldCount = Object.keys(preset.fields).length;
-            if (fieldCount > maxFieldsBeforeError) {
-                console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
-                process.exit(1);
-            }
-            else if (fieldCount > maxFieldsBeforeWarning) {
-                console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
-            }
-        }
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
         for (var fieldsKey in fieldKeys) {
@@ -518,6 +508,30 @@ function validatePresetFields(presets, fields) {
                         }
                     }
                 }
+            }
+        }
+
+        if (preset.fields) {
+            // since `moreFields` is available, check that `fields` doesn't get too cluttered
+            var fieldCount = preset.fields.length;
+
+            if (fieldCount > maxFieldsBeforeWarning) {
+                // Fields with `prerequisiteTag` probably won't show up initially,
+                // so don't count them against the limits.
+                var fieldsWithoutPrerequisites = _filter(preset.fields, function(fieldID) {
+                    if (fields[fieldID] && fields[fieldID].prerequisiteTag) {
+                        return false;
+                    }
+                    return true;
+                });
+                fieldCount = fieldsWithoutPrerequisites.length;
+            }
+            if (fieldCount > maxFieldsBeforeError) {
+                console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
+                process.exit(1);
+            }
+            else if (fieldCount > maxFieldsBeforeWarning) {
+                console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
             }
         }
     }

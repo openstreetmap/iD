@@ -3,6 +3,7 @@
     "fields": [
         "destination_oneway",
         "destination/ref_oneway",
+        "junction/ref_oneway",
         "oneway",
         "maxspeed",
         "lanes",
@@ -13,7 +14,6 @@
     "moreFields": [
         "covered",
         "destination/symbol_oneway",
-        "junction/ref_oneway",
         "lit",
         "maxheight",
         "maxspeed/advisory",
