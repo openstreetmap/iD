@@ -1420,6 +1420,15 @@ img.tag-reference-wiki-image {
 .form-field-input-combo > input:only-of-type {
     border-radius: 0 0 4px 4px;
 }
+.form-field-input-combo.empty-combobox input,
+.form-field-input-multicombo .empty-combobox input {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.form-field-input-combo.empty-combobox .combobox-caret,
+.form-field-input-multicombo .empty-combobox .combobox-caret {
+    display: none;
+}
 
 .form-field-input-multicombo ul.chiplist {
     padding: 5px 7px 5px 7px;
