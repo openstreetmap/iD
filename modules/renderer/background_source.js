@@ -124,13 +124,33 @@ export function rendererBackgroundSource(data) {
                 }
             }).bind(this);
 
+            var tileSize = this.tileSize;
+            var projection = this.projection;
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
-            return template
-                .replace('{width}', this.tileSize)
-                .replace('{height}', this.tileSize)
-                .replace('{proj}', this.projection)
-                .replace('{bbox}', minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y);
+            return template.replace(/\{(\w+)\}/g, function (token, key) {
+              switch (key) {
+                case 'width':
+                case 'height':
+                  return tileSize;
+                case 'proj':
+                  return projection;
+                case 'wkid':
+                  return projection.replace(/^EPSG:/, '');
+                case 'bbox':
+                  return minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y;
+                case 'w':
+                  return minXmaxY.x;
+                case 's':
+                  return maxXminY.y;
+                case 'n':
+                  return maxXminY.x;
+                case 'e':
+                  return minXmaxY.y;
+                default:
+                  return token;
+              }
+            });
         }
         return template
             .replace('{x}', coord[0])
