@@ -18,17 +18,19 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 //       value:  'display text'
 //   }, ...]
 
-var _comboTimerID;
+var _comboHideTimerID;
 
 export function uiCombobox(context, klass) {
     var dispatch = d3_dispatch('accept', 'cancel');
     var container = context.container();
+
     var _suggestions = [];
     var _values = [];
     var _choice = null;
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _minItems = 2;
+    var _tDown = 0;
 
     var _fetcher = function(val, cb) {
         cb(_values.filter(function(d) {
@@ -44,12 +46,12 @@ export function uiCombobox(context, klass) {
 
         input
             .classed('combobox-input', true)
-            .on('focus.typeahead', focus)
-            .on('blur.typeahead', blur)
-            .on('keydown.typeahead', keydown)
-            .on('keyup.typeahead', keyup)
-            .on('input.typeahead', change)
-            .on('mousedown', mousedown)
+            .on('focus.combobox', focus)
+            .on('blur.combobox', blur)
+            .on('keydown.combobox', keydown)
+            .on('keyup.combobox', keyup)
+            .on('input.combobox', change)
+            .on('mousedown.combobox', mousedown)
             .each(addCaret);
 
         function addCaret() {
@@ -72,7 +74,7 @@ export function uiCombobox(context, klass) {
 
 
         function blur() {
-            _comboTimerID = window.setTimeout(hide, 150);
+            _comboHideTimerID = window.setTimeout(hide, 150);
         }
 
 
@@ -86,7 +88,7 @@ export function uiCombobox(context, klass) {
                 .style('position', 'absolute')
                 .style('display', 'block')
                 .style('left', '0px')
-                .on('mousedown', function () {
+                .on('mousedown.combobox', function () {
                     // prevent moving focus out of the input field
                     d3_event.preventDefault();
                 });
@@ -97,9 +99,9 @@ export function uiCombobox(context, klass) {
 
 
         function hide() {
-            if (_comboTimerID) {
-                window.clearTimeout(_comboTimerID);
-                _comboTimerID = undefined;
+            if (_comboHideTimerID) {
+                window.clearTimeout(_comboHideTimerID);
+                _comboHideTimerID = undefined;
             }
 
             container.selectAll('.combobox')
@@ -120,10 +122,10 @@ export function uiCombobox(context, klass) {
                     d3_event.stopPropagation();
                     _choice = null;
                     render();
-                    input.on('input.typeahead', function() {
+                    input.on('input.combobox', function() {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
-                        input.on('input.typeahead', change);
+                        input.on('input.combobox', change);
                     });
                     break;
 
@@ -187,20 +189,43 @@ export function uiCombobox(context, klass) {
 
 
         function mousedown() {
-            // prevent the form element from blurring. it blurs on mousedown
-            d3_event.stopPropagation();
-            d3_event.preventDefault();
+            if (d3_event.button !== 0) return;    // left click only
+
+            var start = input.property('selectionStart');
+            var end = input.property('selectionEnd');
+            if (start !== end) return;  // exit if user is deselecting
+
+            _tDown = +new Date();
+            input.on('mouseup.combobox', mouseup);
+        }
+
+
+        function mouseup() {
+            input.on('mouseup.combobox', null);
+
+            if (d3_event.button !== 0) return;    // left click only
+
+            var start = input.property('selectionStart');
+            var end = input.property('selectionEnd');
+            if (start !== end) return;  // exit if user is selecting
+
             var combo = container.selectAll('.combobox');
-            if (combo.empty()) {
-                input.node().focus();
-                fetch('', function() {
-                    show();
-                    render();
-                });
+            if (combo.empty()) {   // not showing - try to show it.
+                var tOrig = _tDown;
+                window.setTimeout(function() {
+                    if (tOrig !== _tDown) return;   // exit if user double clicked
+                    input.node().focus();
+                    fetch('', function() {
+                        show();
+                        render();
+                    });
+                }, 150);
+
             } else {
                 hide();
             }
         }
+
 
         function nav(dir) {
             if (!_suggestions.length) return;
@@ -323,7 +348,7 @@ export function uiCombobox(context, klass) {
                 .merge(options)
                 .attr('title', function(d) { return d.title; })
                 .classed('selected', function(d) { return d === _choice; })
-                .on('click', accept)
+                .on('click.combobox', accept)
                 .order();
 
             var node = attachTo ? attachTo.node() : input.node();
@@ -394,16 +419,14 @@ export function uiCombobox(context, klass) {
 
 uiCombobox.off = function(input) {
     input
-        .on('focus.typeahead', null)
-        .on('blur.typeahead', null)
-        .on('keydown.typeahead', null)
-        .on('keyup.typeahead', null)
-        .on('input.typeahead', null)
-        .each(function() {
-            d3_select(this.parentNode).selectAll('.combobox-caret')
-                .filter(function(d) { return d === input.node(); })
-                .on('mousedown', null);
-        });
+        .on('focus.combobox', null)
+        .on('blur.combobox', null)
+        .on('keydown.combobox', null)
+        .on('keyup.combobox', null)
+        .on('input.combobox', null)
+        .on('mousedown.combobox', null)
+        .on('mouseup.combobox', null);
+
 
     d3_select('body')
         .on('scroll.combobox', null);
