@@ -61,13 +61,13 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        var id_safe = source.id.replace('.', '<TX_DOT>');
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.name', { default: name });
     };
 
 
     source.description = function() {
-        var id_safe = source.id.replace('.', '<TX_DOT>');
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.description', { default: description });
     };
 
