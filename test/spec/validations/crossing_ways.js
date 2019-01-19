@@ -76,18 +76,18 @@ describe('iD.validations.crossing_ways', function () {
     }
 
     function validate() {
-        var validator = iD.validationHighwayCrossingOtherWays();
+        var validator = iD.validationHighwayCrossingOtherWays(context);
         var changes = context.history().changes();
         return validator(changes, context.graph(), context.history().tree());
     }
 
-    function verifySingleCrossingIssue(issues) {
+    function verifySingleCrossingIssue(issues, crossEid) {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.crossing_ways);
         expect(issue.entities).to.have.lengthOf(2);
         expect(issue.entities[0].id).to.eql('w-1');
-        expect(issue.entities[1].id).to.eql('w-2');
+        expect(issue.entities[1].id).to.eql(crossEid);
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(1.5);
@@ -163,52 +163,52 @@ describe('iD.validations.crossing_ways', function () {
     // warning crossing cases between ways
     it('one cross point between highway and highway', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'residential' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between highway and railway', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { railway: 'rail' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between highway and waterway', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { waterway: 'river' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between highway and building', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between railway and railway', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { railway: 'rail' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between railway and waterway', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { waterway: 'river' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between railway and building', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { building: 'yes' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between waterway and waterway', function() {
         createWaysWithOneCrossingPoint({ waterway: 'canal' }, { waterway: 'river' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between waterway and building', function() {
         createWaysWithOneCrossingPoint({ waterway: 'river' }, { building: 'yes' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between building and building', function() {
         createWaysWithOneCrossingPoint({ building: 'yes' }, { building: 'yes' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('two cross points between two highways', function() {
@@ -269,11 +269,11 @@ describe('iD.validations.crossing_ways', function () {
     // warning crossing cases between way and relation
     it('one cross point between highway and water relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { natural: 'water' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'r-1');
     });
 
     it('one cross point between railway and building relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
-        verifySingleCrossingIssue(validate());
+        verifySingleCrossingIssue(validate(), 'r-1');
     });
 });
