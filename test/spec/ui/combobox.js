@@ -113,13 +113,6 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
     });
 
-    it('is initially shown with no selection', function() {
-        input.call(combobox.data(data));
-        focusTypeahead(input);
-        simulateKeypress('↓');
-        expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
-    });
-
     it('selects the first option that matches the input', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
