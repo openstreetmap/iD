@@ -116,7 +116,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         var markersEnter = markers.enter()
             .append('g')
             .attr('class', function(d) {
-                return 'iOSM_error iOSM_error-' + d.id + ' iOSM_error_type_' + d.parent_error_type; }
+                return 'iOSM_error iOSM_error-' + d.id + ' iOSM_error_type_' + d.error_type; }
             );
 
         markersEnter

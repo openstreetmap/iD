@@ -124,7 +124,7 @@ export default {
             _forEach(_impOsmUrls, function(v, k) {
                 var url = v + '/search?' + utilQsString(params);
 
-                if (k == 'mr' || k == 'tr') return
+                if (k == 'mr') return
 
                 requests[k] = d3_json(url,
                     function(err, data) {
@@ -148,11 +148,9 @@ export default {
 
                                 var d = new impOsmError({
                                     loc: [loc.lon, loc.lat],
-                                    comment: null,
-                                    description: '',
-                                    error_type: feature.type,
-                                    parent_error_type: k,
-                                    title: 'Missing One-way'
+                                    comments: null,
+                                    error_type: k,
+                                    road_type: feature.type
                                 });
 
                                 _erCache.data[d.id] = d;
@@ -170,10 +168,8 @@ export default {
                         //         var d = new impOsmError({
                         //             loc: [feature.x, feature.y],
                         //             comment: null,
-                        //             description: desc || '',
-                        //             error_type: feature.type,
-                        //             parent_error_type: k,
-                        //             title: 'Missing Roads'
+                        //             error_type: k,
+                        //             geometry_type: feature.type
                         //         });
 
                         //         _erCache.data[d.id] = d;
@@ -181,24 +177,22 @@ export default {
                         //     })
                         // }
 
+                        // Entities at high zoom == turn restrictions
+                        if (data.entities) {
+                            data.entities.forEach(function(feature) {
+                                var loc = feature.point;
 
-                        // if (data.entities) {
-                        //     data.entities.forEach(function(feature) {
-                        //         var loc = feature.point;
+                                var d = new impOsmError({
+                                    loc: [loc.lon, loc.lat],
+                                    comments: null,
+                                    error_type: k,
+                                    turn_type: feature.turnType
+                                });
 
-                        //         var d = new impOsmError({
-                        //             loc: [loc.lat, loc.lon],
-                        //             comment: null,
-                        //             description: desc || '',
-                        //             error_type: feature.turnType,
-                        //             parent_error_type: k,
-                        //             title: 'Missing Turn Restriction'
-                        //         });
-
-                        //         _erCache.data[d.id] = d;
-                        //         _erCache.rtree.insert(encodeErrorRtree(d));
-                        //     })
-                        // }
+                                _erCache.data[d.id] = d;
+                                _erCache.rtree.insert(encodeErrorRtree(d));
+                            })
+                        }
                     }
                 );
             });

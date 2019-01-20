@@ -11,7 +11,7 @@ export function uiImproveOsmHeader() {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
-        var errorType = d.parent_error_type;
+        var errorType = d.error_type;
         var et = dataEn.QA.improveOSM.error_types[errorType];
 
         if (et && et.title) {
@@ -44,7 +44,7 @@ export function uiImproveOsmHeader() {
         iconEnter
             .append('div')
             .attr('class', function(d) {
-                return 'preset-icon-28 iOSM_error iOSM_error-' + d.id + ' iOSM_error_type_' + d.parent_error_type;
+                return 'preset-icon-28 iOSM_error iOSM_error-' + d.id + ' iOSM_error_type_' + d.error_type;
             })
             .call(svgIcon('#iD-icon-bolt', 'iOSM_error-fill'));
 
