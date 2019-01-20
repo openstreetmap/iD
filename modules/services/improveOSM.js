@@ -83,7 +83,34 @@ function pointAverage(points) {
     x /= points.length;
     y /= points.length;
 
-    return [x, y]
+    return [x, y];
+}
+
+function relativeBearing(p1, p2) {
+    var angle = Math.atan2(p2.lon - p1.lon, p2.lat - p1.lat);
+    if (angle < 0) {
+        angle += 2 * Math.PI;
+    }
+
+    // Return degrees
+    return angle * 180 / Math.PI;
+}
+
+// Assuming range [0,360)
+function cardinalDirection(bearing) {
+    var dir = 45 * Math.round(bearing / 45);
+    var compass = {
+        0: 'north',
+        45: 'northeast',
+        90: 'east',
+        135: 'southeast',
+        180: 'south',
+        225: 'southwest',
+        270: 'west',
+        315: 'northwest'
+    };
+
+    return t('QA.improveOSM.directions.' + compass[dir]);
 }
 
 export default {
@@ -214,6 +241,11 @@ export default {
                                 var via_node = ids[3];
                                 var to_way = ids[2].split(':')[1];
 
+                                var p1 = feature.segments[0].points[0];
+                                var p2 = feature.segments[0].points[1];
+
+                                var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
+
                                 var d = new impOsmError({
                                     loc: [loc.lon, loc.lat],
                                     comments: null,
@@ -224,13 +256,13 @@ export default {
                                 });
 
                                 // Variables used in the description
-                                //TODO: Add direction of travel
                                 d.replacements = {
                                     num_passed: feature.numberOfPasses,
                                     num_trips: feature.segments[0].numberOfTrips,
                                     turn_restriction: feature.turnType.toLowerCase(),
                                     from_way: linkEntity('w' + from_way),
-                                    to_way: linkEntity('w' + to_way)
+                                    to_way: linkEntity('w' + to_way),
+                                    travel_direction: dir_of_travel
                                 };
 
                                 _erCache.data[d.id] = d;
