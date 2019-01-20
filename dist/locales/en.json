@@ -805,10 +805,11 @@
         "QA": {
             "improveOSM": {
                 "title": "ImproveOSM Error",
-                "error_parts": {
-                    "path": "path",
-                    "parking_area": "parking area",
-                    "road": "road"
+                "geometry_types": {
+                    "path": "paths",
+                    "parking": "parking areas",
+                    "road": "roads",
+                    "both": "roads and parking"
                 },
                 "error_types": {
                     "ow": {
@@ -817,7 +818,7 @@
                     },
                     "mr": {
                         "title": "Missing Geometry",
-                        "description": "Aggregate data suggests there may be an unmapped {var1} here."
+                        "description": "{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here."
                     },
                     "tr": {
                         "title": "Missing Turn Restriction",

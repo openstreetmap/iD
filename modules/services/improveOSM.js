@@ -26,14 +26,6 @@ var _impOsmUrls = {
     tr: 'http://turnrestrictionservice.skobbler.net/turnRestrictionService'
 };
 
-var _missingTypes = {
-    PARKING: 'Unmapped parking',
-    ROAD: 'Unmapped road(s)',
-    BOTH: 'Unmapped road(s) and parking',
-    PATH: 'Unmapped path(s)',
-    WATER: 'Unmapped water feature' // ?
-};
-
 function abortRequest(i) {
     _forEach(i, function(v) {
         if (v) {
@@ -77,6 +69,21 @@ function linkErrorObject(d) {
 
 function linkEntity(d) {
     return '<a class="kr_error_entity_link">' + d + '</a>';
+}
+
+function pointAverage(points) {
+    var x = 0;
+    var y = 0;
+
+    _forEach(points, function(v) {
+        x += v.lon;
+        y += v.lat;
+    });
+
+    x /= points.length;
+    y /= points.length;
+
+    return [x, y]
 }
 
 export default {
@@ -132,8 +139,6 @@ export default {
             _forEach(_impOsmUrls, function(v, k) {
                 var url = v + '/search?' + utilQsString(params);
 
-                if (k == 'mr') return
-
                 requests[k] = d3_json(url,
                     function(err, data) {
                         delete _erCache.inflight[tile.id];
@@ -152,11 +157,8 @@ export default {
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
-                                // todo: make this take midpoint?
-                                var loc = feature.points[0];
-
                                 var d = new impOsmError({
-                                    loc: [loc.lon, loc.lat],
+                                    loc: pointAverage(feature.points), // TODO: This isn't great for curved roads, would be better to find actual midpoint of segment
                                     comments: null,
                                     error_type: k,
                                     object_id: feature.wayId,
@@ -177,23 +179,24 @@ export default {
                         }
 
                         // Tiles at high zoom == missing roads
-                        // if (data.tiles) {
-                        //     data.tiles.forEach(function(feature) {
-                        //         // Get description based on type
-                        //         var desc = _missingTypes[feature.type];
+                        if (data.tiles) {
+                            data.tiles.forEach(function(feature) {
+                                var d = new impOsmError({
+                                    loc: pointAverage(feature.points),
+                                    comments: null,
+                                    error_type: k,
+                                    geometry_type: feature.type
+                                });
 
+                                d.replacements = {
+                                    num_trips: feature.numberOfTrips,
+                                    geometry_type: t('QA.improveOSM.geometry_types.' + feature.type.toLowerCase())
+                                };
 
-                        //         var d = new impOsmError({
-                        //             loc: [feature.x, feature.y],
-                        //             comment: null,
-                        //             error_type: k,
-                        //             geometry_type: feature.type
-                        //         });
-
-                        //         _erCache.data[d.id] = d;
-                        //         _erCache.rtree.insert(encodeErrorRtree(d));
-                        //     })
-                        // }
+                                _erCache.data[d.id] = d;
+                                _erCache.rtree.insert(encodeErrorRtree(d));
+                            })
+                        }
 
                         // Entities at high zoom == turn restrictions
                         if (data.entities) {
@@ -216,6 +219,7 @@ export default {
                                 });
 
                                 // Variables used in the description
+                                //TODO: Add direction of travel
                                 d.replacements = {
                                     num_passed: feature.numberOfPasses,
                                     num_trips: feature.segments[0].numberOfTrips,
