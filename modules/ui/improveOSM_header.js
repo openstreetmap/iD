@@ -44,9 +44,9 @@ export function uiImproveOsmHeader() {
         iconEnter
             .append('div')
             .attr('class', function(d) {
-                return 'preset-icon-28 iOSM_error iOSM_error-' + d.id + ' iOSM_error_type_' + d.error_type + d.error_subtype;
+                return 'preset-icon-28 qa_error ' + d.source + ' error_id-' + d.id + ' error_type-' + d.error_type + '-' + d.error_subtype;
             })
-            .call(svgIcon('#iD-icon-bolt', 'iOSM_error-fill'));
+            .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
 
         headerEnter
             .append('div')

@@ -27,7 +27,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
 
     var errorService, errorEditor;
     switch (selectedErrorSource) {
-        case 'ImproveOSM':
+        case 'iOSM':
             errorService = services.improveOSM;
             errorEditor = uiImproveOsmEditor(context)
             .on('change', function() {
@@ -38,7 +38,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
                     .show(errorEditor.error(error));
             });
             break;
-        case 'KeepRight':
+        case 'kr':
             errorService = services.keepRight;
             errorEditor = uiKeepRightEditor(context)
             .on('change', function() {
@@ -107,7 +107,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
             if (!checkSelectedID()) return;
 
             var selection = context.surface()
-                .selectAll('.kr_error-' + selectedErrorID);
+                .selectAll('.error_id-' + selectedErrorID + '.' + selectedErrorSource);
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
@@ -139,7 +139,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
             .call(keybinding.unbind);
 
         context.surface()
-            .selectAll('.kr_error.selected')
+            .selectAll('.qa_error.selected')
             .classed('selected hover', false);
 
         context.map()

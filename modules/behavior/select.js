@@ -174,11 +174,11 @@ export function behaviorSelect(context) {
         } else if (datum instanceof impOsmError & !isMultiselect) {  // clicked an improveOSM error
             context
                 .selectedErrorID(datum.id)
-                .enter(modeSelectError(context, datum.id, 'ImproveOSM'));
+                .enter(modeSelectError(context, datum.id, datum.source));
         } else if (datum instanceof krError & !isMultiselect) {     // clicked a krError error
             context
                 .selectedErrorID(datum.id)
-                .enter(modeSelectError(context, datum.id, 'KeepRight'));
+                .enter(modeSelectError(context, datum.id, datum.source));
         } else {    // clicked nothing..
             context.selectedNoteID(null);
             context.selectedErrorID(null);

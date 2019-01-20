@@ -216,7 +216,7 @@ export default {
                                 var d = new impOsmError({
                                     loc: pointAverage(feature.points),
                                     comments: null,
-                                    error_subtype: '_' + geoType,
+                                    error_subtype: geoType,
                                     error_type: k
                                 });
 

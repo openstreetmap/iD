@@ -112,13 +112,12 @@ export function behaviorHover(context) {
                 entity = datum;
                 selector = '.data' + datum.__featurehash__;
 
-            } else if (datum instanceof impOsmError) {
+            } else if (
+                datum instanceof impOsmError ||
+                datum instanceof krError
+            ) {
                 entity = datum;
-                selector = '.iOSM_error-' + datum.id;
-
-            } else if (datum instanceof krError) {
-                entity = datum;
-                selector = '.kr_error-' + datum.id;
+                selector = '.' + datum.source + '.error_id-' + datum.id;
 
             } else if (datum instanceof osmNote) {
                 entity = datum;

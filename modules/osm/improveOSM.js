@@ -22,6 +22,7 @@ impOsmError.id.next = -1;
 _extend(impOsmError.prototype, {
 
     type: 'impOsmError',
+    source: 'iOSM',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {

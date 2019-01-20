@@ -665,7 +665,7 @@ en:
       title: ImproveOSM Error
       geometry_types:
         path: paths
-        parking: parking areas
+        parking: parking
         road: roads
         both: roads and parking
       directions:

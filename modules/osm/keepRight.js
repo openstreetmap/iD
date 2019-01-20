@@ -21,6 +21,7 @@ krError.id.next = -1;
 _extend(krError.prototype, {
 
     type: 'krError',
+    source: 'kr',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
