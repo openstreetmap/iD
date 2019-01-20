@@ -13,26 +13,44 @@ import {
 import { t } from '../util/locale';
 import { services } from '../services';
 import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
-import { uiKeepRightEditor } from '../ui';
+import { uiImproveOsmEditor, uiKeepRightEditor } from '../ui';
 import { utilKeybinding } from '../util';
 
 
-export function modeSelectError(context, selectedErrorID) {
+export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
     var mode = {
         id: 'select-error',
         button: 'browse'
     };
 
-    var keepRight = services.keepRight;
     var keybinding = utilKeybinding('select-error');
-    var keepRightEditor = uiKeepRightEditor(context)
-        .on('change', function() {
-            context.map().pan([0,0]);  // trigger a redraw
-            var error = checkSelectedID();
-            if (!error) return;
-            context.ui().sidebar
-                .show(keepRightEditor.error(error));
-        });
+
+    var errorService, errorEditor;
+    switch (selectedErrorSource) {
+        case 'ImproveOSM':
+            errorService = services.improveOSM;
+            errorEditor = uiImproveOsmEditor(context)
+            .on('change', function() {
+                context.map().pan([0,0]);  // trigger a redraw
+                var error = checkSelectedID();
+                if (!error) return;
+                context.ui().sidebar
+                    .show(errorEditor.error(error));
+            });
+            break;
+        case 'KeepRight':
+            errorService = services.keepRight;
+            errorEditor = uiKeepRightEditor(context)
+            .on('change', function() {
+                context.map().pan([0,0]);  // trigger a redraw
+                var error = checkSelectedID();
+                if (!error) return;
+                context.ui().sidebar
+                    .show(errorEditor.error(error));
+            });
+            break;
+    }
+
 
     var behaviors = [
         behaviorBreathe(context),
@@ -45,8 +63,8 @@ export function modeSelectError(context, selectedErrorID) {
 
 
     function checkSelectedID() {
-        if (!keepRight) return;
-        var error = keepRight.getError(selectedErrorID);
+        if (!errorService) return;
+        var error = errorService.getError(selectedErrorID);
         if (!error) {
             context.enter(modeBrowse(context));
         }
@@ -55,8 +73,8 @@ export function modeSelectError(context, selectedErrorID) {
 
 
     mode.zoomToSelected = function() {
-        if (!keepRight) return;
-        var error = keepRight.getError(selectedErrorID);
+        if (!errorService) return;
+        var error = errorService.getError(selectedErrorID);
         if (error) {
             context.map().centerZoomEase(error.loc, 20);
         }
@@ -78,7 +96,7 @@ export function modeSelectError(context, selectedErrorID) {
         selectError();
 
         var sidebar = context.ui().sidebar;
-        sidebar.show(keepRightEditor.error(error));
+        sidebar.show(errorEditor.error(error));
 
         context.map()
             .on('drawn.select-error', selectError);

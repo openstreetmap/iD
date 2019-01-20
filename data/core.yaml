@@ -661,6 +661,18 @@ en:
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   QA:
+    improveOSM:
+      title: ImproveOSM Error
+      error_types:
+        ow:
+          title: Missing One-way
+          description: Aggregate data suggests {var1} may be missing a "oneway" tag. Please confirm via imagery or survey before mapping.
+        mr:
+          title: Missing Road
+          description: Aggregate data suggests there may be an unmapped road here. Please confirm via imagery or survey before mapping.
+        tr:
+          title: Missing Turn Restriction
+          description: Aggregate data suggests this junction may be missing a turn restriction. Please confirm via imagery or survey before mapping.
     keepRight:
       title: KeepRight Error
       detail_title: Error

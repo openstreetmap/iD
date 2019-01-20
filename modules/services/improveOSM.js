@@ -218,5 +218,27 @@ export default {
         return _erCache.rtree.search(bbox).map(function(d) {
             return d.data;
         });
+    },
+
+    // get a single error from the cache
+    getError: function(id) {
+        return _erCache.data[id];
+    },
+
+    // replace a single error in the cache
+    replaceError: function(error) {
+        if (!(error instanceof impOsmError) || !error.id) return;
+
+        _erCache.data[error.id] = error;
+        updateRtree(encodeErrorRtree(error), true); // true = replace
+        return error;
+    },
+
+    // remove a single error from the cache
+    removeError: function(error) {
+        if (!(error instanceof impOsmError) || !error.id) return;
+
+        delete _erCache.data[error.id];
+        updateRtree(encodeErrorRtree(error), false); // false = remove
     }
 };
