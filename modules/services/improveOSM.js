@@ -160,11 +160,14 @@ export default {
                                 var d = new impOsmError({
                                     loc: pointAverage(feature.points), // TODO: This isn't great for curved roads, would be better to find actual midpoint of segment
                                     comments: null,
+                                    error_subtype: '',
                                     error_type: k,
                                     object_id: feature.wayId,
-                                    object_type: 'way',
-                                    road_type: feature.type
+                                    object_type: 'way'
                                 });
+
+                                //TODO include road type in description?
+                                // feature.type
 
                                 // Variables used in the description
                                 d.replacements = {
@@ -181,16 +184,18 @@ export default {
                         // Tiles at high zoom == missing roads
                         if (data.tiles) {
                             data.tiles.forEach(function(feature) {
+                                var geoType = feature.type.toLowerCase();
+
                                 var d = new impOsmError({
                                     loc: pointAverage(feature.points),
                                     comments: null,
-                                    error_type: k,
-                                    geometry_type: feature.type
+                                    error_subtype: '_' + geoType,
+                                    error_type: k
                                 });
 
                                 d.replacements = {
                                     num_trips: feature.numberOfTrips,
-                                    geometry_type: t('QA.improveOSM.geometry_types.' + feature.type.toLowerCase())
+                                    geometry_type: t('QA.improveOSM.geometry_types.' + geoType)
                                 };
 
                                 _erCache.data[d.id] = d;
@@ -212,10 +217,10 @@ export default {
                                 var d = new impOsmError({
                                     loc: [loc.lon, loc.lat],
                                     comments: null,
+                                    error_subtype: '',
                                     error_type: k,
                                     object_id: via_node,
-                                    object_type: 'node',
-                                    turn_type: feature.turnType
+                                    object_type: 'node'
                                 });
 
                                 // Variables used in the description

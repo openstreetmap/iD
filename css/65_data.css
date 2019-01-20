@@ -123,8 +123,17 @@
     color: #EE7600;
 }
 
-.iOSM_error_type_mr {   /* missing road */
+.iOSM_error_type_mr_road {   /* missing road */
     color: #B0171F;
+}
+.iOSM_error_type_mr_path {   /* missing path */
+    color: #A0522D;
+}
+.iOSM_error_type_mr_parking {   /* missing parking */
+    color: #EEEE00;
+}
+.iOSM_error_type_mr_both {   /* missing road+parking */
+    color: #FFA500;
 }
 
 .iOSM_error_type_tr {   /* missing turn restriction */
