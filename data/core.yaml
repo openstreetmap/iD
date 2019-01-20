@@ -663,16 +663,20 @@ en:
   QA:
     improveOSM:
       title: ImproveOSM Error
+      error_parts:
+        path: path
+        parking_area: parking area
+        road: road
       error_types:
         ow:
           title: Missing One-way
-          description: Aggregate data suggests {var1} may be missing a "oneway" tag. Please confirm via imagery or survey before mapping.
+          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel in the same direction. There may be missing a "oneway" tag.'
         mr:
-          title: Missing Road
-          description: Aggregate data suggests there may be an unmapped road here. Please confirm via imagery or survey before mapping.
+          title: Missing Geometry
+          description: Aggregate data suggests there may be an unmapped {var1} here.
         tr:
           title: Missing Turn Restriction
-          description: Aggregate data suggests this junction may be missing a turn restriction. Please confirm via imagery or survey before mapping.
+          description: '{num_passed} of {num_trips} recorded trips make a turn from {from_way} to {to_way}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
       title: KeepRight Error
       detail_title: Error

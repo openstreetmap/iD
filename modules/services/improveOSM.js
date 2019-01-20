@@ -71,6 +71,14 @@ function updateRtree(item, replace) {
     }
 }
 
+function linkErrorObject(d) {
+    return '<a class="kr_error_object_link">' + d + '</a>';
+}
+
+function linkEntity(d) {
+    return '<a class="kr_error_entity_link">' + d + '</a>';
+}
+
 export default {
     init: function() {
         if (!_erCache) {
@@ -144,14 +152,24 @@ export default {
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
+                                // todo: make this take midpoint?
                                 var loc = feature.points[0];
 
                                 var d = new impOsmError({
                                     loc: [loc.lon, loc.lat],
                                     comments: null,
                                     error_type: k,
+                                    object_id: feature.wayId,
+                                    object_type: 'way',
                                     road_type: feature.type
                                 });
+
+                                // Variables used in the description
+                                d.replacements = {
+                                    percentage: feature.percentOfTrips,
+                                    num_trips: feature.numberOfTrips,
+                                    highway: linkErrorObject(t('QA.keepRight.error_parts.highway'))
+                                };
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
@@ -182,12 +200,29 @@ export default {
                             data.entities.forEach(function(feature) {
                                 var loc = feature.point;
 
+                                // Elements are presented in a strange way
+                                var ids = feature.id.split(',');
+                                var from_way = ids[0];
+                                var via_node = ids[3];
+                                var to_way = ids[2].split(':')[1];
+
                                 var d = new impOsmError({
                                     loc: [loc.lon, loc.lat],
                                     comments: null,
                                     error_type: k,
+                                    object_id: via_node,
+                                    object_type: 'node',
                                     turn_type: feature.turnType
                                 });
+
+                                // Variables used in the description
+                                d.replacements = {
+                                    num_passed: feature.numberOfPasses,
+                                    num_trips: feature.segments[0].numberOfTrips,
+                                    turn_restriction: feature.turnType.toLowerCase(),
+                                    from_way: linkEntity('w' + from_way),
+                                    to_way: linkEntity('w' + to_way)
+                                };
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));

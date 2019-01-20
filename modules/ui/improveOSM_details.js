@@ -22,7 +22,7 @@ export function uiImproveOsmDetails(context) {
 
         var detail;
         if (et && et.description) {
-            detail = t('QA.improveOSM.error_types.' + errorType + '.description');
+            detail = t('QA.improveOSM.error_types.' + errorType + '.description', d.replacements);
         } else {
             detail = unknown;
         }
