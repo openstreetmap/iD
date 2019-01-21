@@ -28,6 +28,8 @@ import { tooltip } from '../util/tooltip';
 export function uiBackground(context) {
     var key = t('background.key');
 
+    var pane = d3_select(null);
+
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
     var _shown = false;
@@ -282,8 +284,13 @@ export function uiBackground(context) {
 
     function update() {
 
-        updateBackgroundList();
-        updateOverlayList();
+        if (!pane.select('.disclosure-wrap-background_list').classed('hide')) {
+            updateBackgroundList();
+        }
+
+        if (!pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
+            updateOverlayList();
+        }
 
         _displayOptionsContainer
             .call(backgroundDisplayOptions);
@@ -348,7 +355,7 @@ export function uiBackground(context) {
         }
 
 
-        var pane = selection
+        pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 

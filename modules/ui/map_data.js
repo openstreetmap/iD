@@ -24,6 +24,8 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    var pane = d3_select(null);
+
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
@@ -593,9 +595,15 @@ export function uiMapData(context) {
 
     function update() {
 
-        updateDataLayers();
-        updateFillList();
-        updateFeatureList();
+        if (!pane.select('.disclosure-wrap-data_layers').classed('hide')) {
+            updateDataLayers();
+        }
+        if (!pane.select('.disclosure-wrap-fill_area').classed('hide')) {
+            updateFillList();
+        }
+        if (!pane.select('.disclosure-wrap-map_features').classed('hide')) {
+            updateFeatureList();
+        }
 
         _QAList
             .call(drawListItems, ['keep-right'], 'checkbox', 'QA', function(d) { toggleLayer(d); }, showsQA);
@@ -663,7 +671,7 @@ export function uiMapData(context) {
         }
 
 
-        var pane = selection
+        pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 
