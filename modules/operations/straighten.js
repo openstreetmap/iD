@@ -48,9 +48,8 @@ export function operationStraighten(selectedIDs, context) {
             _difference(endNodes, startNodes).length !== 1) return false;
 
         // Ensure both selected nodes lie on the selected path
-        if (!selectedNodes.every(function(n) {
-            return nodes.includes(n);
-        })) return false;
+        if (selectedNodes.length && (!nodes.includes(selectedNodes[0]) ||
+            !nodes.includes(selectedNodes[1]))) return false;
 
         return true;
     };
