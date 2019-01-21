@@ -212,7 +212,7 @@ export default {
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
-                            })
+                            });
                         }
 
                         // Tiles at high zoom == missing roads
@@ -225,10 +225,7 @@ export default {
                                     comments: null,
                                     error_subtype: geoType,
                                     error_type: k,
-                                    identifier: {
-                                        x: feature.x,
-                                        y: feature.y
-                                    },
+                                    identifier: { x: feature.x, y: feature.y },
                                     status: feature.status
                                 });
 
@@ -239,7 +236,7 @@ export default {
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
-                            })
+                            });
                         }
 
                         // Entities at high zoom == turn restrictions
@@ -281,7 +278,7 @@ export default {
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
-                            })
+                            });
                         }
                     }
                 );
@@ -289,7 +286,7 @@ export default {
 
             _erCache.inflight[tile.id] = requests;
             dispatch.call('loaded');
-        })
+        });
     },
 
     postUpdate: function(d, callback) {
