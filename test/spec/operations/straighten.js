@@ -92,5 +92,20 @@ describe('iD.operationStraighten', function () {
             var result = iD.operationStraighten(['n2', 'n7', 'w4', 'w1', 'w3', 'w2'], fakeContext.graph()).available();
             expect(result).to.be.ok;
         });
+
+        it('is not available for nodes not on selected ways', function () {
+            var result = iD.operationStraighten(['w5', 'n4', 'n11'], fakeContext.graph()).available();
+            expect(result).to.be.not.ok;
+        });
+
+        it('is not available for one selected node', function () {
+            var result = iD.operationStraighten(['w5', 'n9'], fakeContext.graph()).available();
+            expect(result).to.be.not.ok;
+        });
+
+        it('is not available for more than two selected nodes', function () {
+            var result = iD.operationStraighten(['w5', 'n9', 'n11', 'n12'], fakeContext.graph()).available();
+            expect(result).to.be.not.ok;
+        });
     });
 });

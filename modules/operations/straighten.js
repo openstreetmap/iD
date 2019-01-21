@@ -41,7 +41,7 @@ export function operationStraighten(selectedIDs, context) {
             endNodes.push(entity.nodes[entity.nodes.length-1]);
         }
 
-        if (_uniq(nodes).length <= 2 || selectedNodes.length > 2) return false;
+        if (_uniq(nodes).length <= 2 || ![0,2].includes(selectedNodes.length)) return false;
 
         // Ensure all ways are connected (i.e. only one unique start point and one unique end point)
         if (_difference(startNodes, endNodes).length !== 1 ||
