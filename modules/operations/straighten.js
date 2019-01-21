@@ -18,12 +18,18 @@ export function operationStraighten(selectedIDs, context) {
     operation.available = function() {
         var nodes = [],
             startNodes = [],
-            endNodes = [];
+            endNodes = [],
+            selectedNodes = [];
 
         for (var i = 0; i < selectedIDs.length; i++) {
             if (!context.hasEntity(selectedIDs[i])) return false;
 
             var entity = context.entity(selectedIDs[i]);
+
+            if (entity.type === 'node') {
+                selectedNodes.push(entity.id);
+                continue;
+            }
 
             if (entity.type !== 'way' ||
                 entity.isClosed()) {
@@ -35,11 +41,16 @@ export function operationStraighten(selectedIDs, context) {
             endNodes.push(entity.nodes[entity.nodes.length-1]);
         }
 
-        if (_uniq(nodes).length <= 2) return false;
+        if (_uniq(nodes).length <= 2 || selectedNodes.length > 2) return false;
 
         // Ensure all ways are connected (i.e. only one unique start point and one unique end point)
         if (_difference(startNodes, endNodes).length !== 1 ||
             _difference(endNodes, startNodes).length !== 1) return false;
+
+        // Ensure both selected nodes lie on the selected path
+        if (!selectedNodes.every(function(n) {
+            return nodes.includes(n);
+        })) return false;
 
         return true;
     };
