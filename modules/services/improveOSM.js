@@ -185,6 +185,11 @@ export default {
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
+                                var p1 = feature.points[0];
+                                var p2 = feature.points[1];
+
+                                var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
+
                                 var d = new impOsmError({
                                     loc: pointAverage(feature.points), // TODO: This isn't great for curved roads, would be better to find actual midpoint of segment
                                     comments: null,
@@ -207,7 +212,8 @@ export default {
                                 d.replacements = {
                                     percentage: feature.percentOfTrips,
                                     num_trips: feature.numberOfTrips,
-                                    highway: linkErrorObject(t('QA.keepRight.error_parts.highway'))
+                                    highway: linkErrorObject(t('QA.keepRight.error_parts.highway')),
+                                    travel_direction: dir_of_travel
                                 };
 
                                 _erCache.data[d.id] = d;
