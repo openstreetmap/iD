@@ -331,7 +331,14 @@ export function uiIntroArea(context, reveal) {
 
                 d3_select('.more-fields .combobox-input')
                     .on('click.intro', function() {
-                        continueTo(chooseDescriptionField);
+                        // Watch for the combobox to appear...
+                        var watcher;
+                        watcher = window.setInterval(function() {
+                            if (!d3_select('div.combobox').empty()) {
+                                window.clearInterval(watcher);
+                                continueTo(chooseDescriptionField);
+                            }
+                        }, 300);
                     });
             }, 300);  // after "Add Field" visible
 
