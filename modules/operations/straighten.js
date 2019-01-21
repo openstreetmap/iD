@@ -1,4 +1,5 @@
 import _uniq from 'lodash-es/uniq';
+import _difference from 'lodash-es/difference';
 
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
@@ -6,8 +7,7 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationStraighten(selectedIDs, context) {
-    var entityId = selectedIDs[0],
-        action = actionStraighten(entityId, context.projection);
+    var action = actionStraighten(selectedIDs, context.projection);
 
 
     function operation() {
@@ -16,18 +16,41 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.available = function() {
-        var entity = context.entity(entityId);
-        return selectedIDs.length === 1 &&
-            entity.type === 'way' &&
-            !entity.isClosed() &&
-            _uniq(entity.nodes).length > 2;
+        var nodes = [],
+            startNodes = [],
+            endNodes = [];
+
+        for (var i = 0; i < selectedIDs.length; i++) {
+            if (!context.hasEntity(selectedIDs[i])) return false;
+
+            var entity = context.entity(selectedIDs[i]);
+
+            if (entity.type !== 'way' ||
+                entity.isClosed()) {
+                return false;
+            }
+
+            nodes = nodes.concat(entity.nodes);
+            startNodes.push(entity.nodes[0]);
+            endNodes.push(entity.nodes[entity.nodes.length-1]);
+        }
+
+        if (_uniq(nodes).length <= 2) return false;
+
+        // Ensure all ways are connected (i.e. only one unique start point and one unique end point)
+        if (_difference(startNodes, endNodes).length !== 1 ||
+            _difference(endNodes, startNodes).length !== 1) return false;
+
+        return true;
     };
 
 
     operation.disabled = function() {
         var reason;
-        if (context.hasHiddenConnections(entityId)) {
-            reason = 'connected_to_hidden';
+        for (var i = 0; i < selectedIDs.length; i++) {
+            if (context.hasHiddenConnections(selectedIDs[i])) {
+                reason = 'connected_to_hidden';
+            }
         }
         return action.disabled(context.graph()) || reason;
     };
