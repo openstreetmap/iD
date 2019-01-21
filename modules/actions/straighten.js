@@ -55,7 +55,7 @@ export function actionStraighten(selectedIDs, projection) {
                 endNodeIdx = nodes.indexOf(graph.entity(selectedNodes[1])),
                 sortedStartEnd = [startNodeIdx, endNodeIdx];
 
-                sortedStartEnd.sort(function(a,b) {
+                sortedStartEnd.sort(function(a, b) {
                     return a - b;
                 });
             
