@@ -24,11 +24,12 @@ describe('iD.operationStraighten', function () {
                 iD.osmNode({ id: 'n8', type: 'node' }),
                 iD.osmNode({ id: 'n9', type: 'node' }),
                 iD.osmNode({ id: 'n10', type: 'node' }),
+                iD.osmNode({ id: 'n11', type: 'node' }),
                 iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'] }),
                 iD.osmWay({ id: 'w2', nodes: ['n2', 'n3', 'n4'] }),
                 iD.osmWay({ id: 'w3', nodes: ['n4', 'n5', 'n6'] }),
-                iD.osmWay({ id: 'w4', nodes: ['n7', 'n8', 'n9'] }),
-                iD.osmWay({ id: 'w5', nodes: ['n2', 'n10'] })
+                iD.osmWay({ id: 'w4', nodes: ['n7', 'n8', 'n9', 'n10'] }),
+                iD.osmWay({ id: 'w5', nodes: ['n2', 'n11'] })
             ]);
         });
 
@@ -69,6 +70,21 @@ describe('iD.operationStraighten', function () {
 
         it('is available for selected, un-ordered, continuous ways', function () {
             var result = iD.operationStraighten(['w1', 'w3', 'w2'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
+        });
+
+        it('is available for 2 selected nodes in the same way, more than one node apart', function () {
+            var result = iD.operationStraighten(['n8', 'n10'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
+        });
+
+        it('is available for 2 selected nodes in adjacent ways, more than one node apart', function () {
+            var result = iD.operationStraighten(['n5', 'n3'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
+        });
+
+        it('is available for 2 selected nodes in non-adjacent ways, providing inbetween ways are selected', function () {
+            var result = iD.operationStraighten(['n9', 'n1', 'w3', 'w2'], fakeContext.graph()).available();
             expect(result).to.be.ok;
         });
     });
