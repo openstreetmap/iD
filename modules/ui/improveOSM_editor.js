@@ -76,7 +76,113 @@ export function uiImproveOsmEditor(context) {
             .merge(editor)
             .call(errorHeader.error(_error))
             .call(quickLinks.choices(choices))
-            .call(errorDetails.error(_error));
+            .call(errorDetails.error(_error))
+            .call(improveOsmSaveSection);
+    }
+
+    function improveOsmSaveSection(selection) {
+        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isShown = (_error && (isSelected || _error.newComment || _error.comment));
+        var saveSection = selection.selectAll('.error-save')
+            .data(
+                (isShown ? [_error] : []),
+                function(d) { return d.id + '-' + (d.status || 0); }
+            );
+
+        // exit
+        saveSection.exit()
+            .remove();
+
+        // enter
+        var saveSectionEnter = saveSection.enter()
+            .append('div')
+            .attr('class', 'keepRight-save save-section cf');
+
+        // update
+        saveSection = saveSectionEnter
+            .merge(saveSection)
+            .call(errorSaveButtons);
+    }
+
+    function errorSaveButtons(selection) {
+        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var buttonSection = selection.selectAll('.buttons')
+            .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
+
+        // exit
+        buttonSection.exit()
+            .remove();
+
+        // enter
+        var buttonEnter = buttonSection.enter()
+            .append('div')
+            .attr('class', 'buttons');
+
+        // Comments don't currently work
+        // buttonEnter
+        //     .append('button')
+        //     .attr('class', 'button comment-button action')
+        //     .text(t('QA.keepRight.save_comment'));
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button close-button action');
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button ignore-button action');
+
+
+        // update
+        buttonSection = buttonSection
+            .merge(buttonEnter);
+
+        // Comments don't currently work
+        // buttonSection.select('.comment-button')
+        //     .attr('disabled', function(d) {
+        //         return d.newComment === undefined ? true : null;
+        //     })
+        //     .on('click.comment', function(d) {
+        //         this.blur();    // avoid keeping focus on the button - #4641
+        //         var errorService = services.improveOSM;
+        //         if (errorService) {
+        //             errorService.postUpdate(d, function(err, error) {
+        //                 dispatch.call('change', error);
+        //             });
+        //         }
+        //     });
+
+        buttonSection.select('.close-button')
+            .text(function(d) {
+                var andComment = (d.newComment !== undefined ? '_comment' : '');
+                return t('QA.keepRight.close' + andComment);
+            })
+            .on('click.close', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var errorService = services.improveOSM;
+                if (errorService) {
+                    d.newStatus = 'SOLVED';
+                    errorService.postUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
+                }
+            });
+
+        buttonSection.select('.ignore-button')
+            .text(function(d) {
+                var andComment = (d.newComment !== undefined ? '_comment' : '');
+                return t('QA.keepRight.ignore' + andComment);
+            })
+            .on('click.ignore', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var errorService = services.improveOSM;
+                if (errorService) {
+                    d.newStatus = 'INVALID';
+                    errorService.postUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
+                }
+            });
     }
 
     improveOsmEditor.error = function(val) {

@@ -10,6 +10,7 @@ import { request as d3_request } from 'd3-request';
 
 import { geoExtent } from '../geo';
 import { impOsmError } from '../osm';
+import { services } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -189,8 +190,14 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
+                                    identifier: { // this is used to post changes to the error
+                                        wayId: feature.wayId,
+                                        fromNodeId: feature.fromNodeId,
+                                        toNodeId: feature.toNodeId
+                                    },
                                     object_id: feature.wayId,
-                                    object_type: 'way'
+                                    object_type: 'way',
+                                    status: feature.status
                                 });
 
                                 //TODO include road type in description?
@@ -217,7 +224,12 @@ export default {
                                     loc: pointAverage(feature.points),
                                     comments: null,
                                     error_subtype: geoType,
-                                    error_type: k
+                                    error_type: k,
+                                    identifier: {
+                                        x: feature.x,
+                                        y: feature.y
+                                    },
+                                    status: feature.status
                                 });
 
                                 d.replacements = {
@@ -251,8 +263,10 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
+                                    identifier: feature.id,
                                     object_id: via_node,
-                                    object_type: 'node'
+                                    object_type: 'node',
+                                    status: feature.status
                                 });
 
                                 // Variables used in the description
@@ -276,6 +290,73 @@ export default {
             _erCache.inflight[tile.id] = requests;
             dispatch.call('loaded');
         })
+    },
+
+    postUpdate: function(d, callback) {
+        if (!services.osm.authenticated()) { // Username required in payload
+            return callback({ message: 'Not Authenticated', status: -3}, d);
+        }
+        if (_erCache.inflight[d.id]) {
+            return callback({ message: 'Error update already inflight', status: -2 }, d);
+        }
+
+        var username = services.osm.userDetails(function(err, user) {
+            if (err) return '';
+
+            return user.display_name;
+        });
+
+        var that = this;
+        var type = d.error_type;
+        var payload = {};
+
+        payload.username = username;
+
+        // Each error type has different data for identification
+        if (type === 'ow') {
+            payload.roadSegments = [ d.identifier ];
+        } else if (type === 'mr') {
+            payload.tiles = [ d.identifier ];
+        } else if (type === 'tr') {
+            payload.targetIds = [ d.identifier ];
+        }
+
+        // Separate requests required to comment and change status
+        var url = _impOsmUrls[type] + '/comment';
+
+        // Comments don't currently work
+        // if (d.newComment !== undefined) {
+        //     payload.text = d.newComment;
+
+        //     _krCache.inflight[d.id] = d3_request(url)
+        //         .header('Content-Type', 'application/json')
+        //         .post(payload, function(back) {
+        //             console.log(back);
+        //         });
+        // }
+
+        if (d.newStatus !== d.status) {
+            payload.status = d.newStatus;
+            payload.text = 'status changed';
+
+            _erCache.inflight[d.id] = [d3_request(url)
+                .header('Content-Type', 'application/json')
+                .post(JSON.stringify(payload), function(err) {
+                    delete _erCache.inflight[d.id];
+
+                    if (d.newStatus === 'INVALID') {
+                        that.removeError(d);
+                    } else if (d.newStatus === 'SOLVED') {
+                        that.removeError(d);
+
+                        //TODO the identifiers are ugly and can't be used frontend, use error position instead?
+                        // or perhaps don't track this at all?
+                        //_erCache.closed[d.error_type + ':' + d.identifier] = true;
+                    }
+
+                    return callback(err, d);
+                })];
+        }
     },
 
     // get all cached errors covering the viewport
