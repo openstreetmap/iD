@@ -140,10 +140,10 @@ export default {
     loadErrors: function(projection) {
         var options = {
             client: 'iD',
-            confidenceLevel: 'C1', // most confident cases only for now
+            confidenceLevel: 'C1', // most confident only, still have false positives
             status: 'OPEN',
-            type: 'PARKING,ROAD,BOTH,PATH', // exclude WATER
-            zoom: '19'
+            type: 'PARKING,ROAD,BOTH,PATH', // exclude WATER as it doesn't seem useful
+            zoom: '19' // Use a high zoom so that clusters aren't returned
         };
 
         // determine the needed tiles to cover the view
@@ -174,14 +174,6 @@ export default {
                         if (err) return;
                         _erCache.loaded[tile.id] = true;
 
-                        // Clusters are returned at low zoom
-                        // if (data.clusters) {
-                        //     data.clusters.forEach(function(feature) {
-                        //         var loc = feature.point;
-                        //         var size = feature.size;
-                        //     });
-                        // }
-
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
@@ -204,9 +196,6 @@ export default {
                                     object_type: 'way',
                                     status: feature.status
                                 });
-
-                                //TODO include road type in description?
-                                // feature.type
 
                                 // Variables used in the description
                                 d.replacements = {
@@ -303,7 +292,7 @@ export default {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
-        var username = services.osm.userDetails(function(err, user) {
+        var osmUsername = services.osm.userDetails(function(err, user) {
             if (err) return '';
 
             return user.display_name;
@@ -311,9 +300,9 @@ export default {
 
         var that = this;
         var type = d.error_type;
-        var payload = {};
-
-        payload.username = username;
+        var payload = {
+            username: osmUsername
+        };
 
         // Each error type has different data for identification
         if (type === 'ow') {
