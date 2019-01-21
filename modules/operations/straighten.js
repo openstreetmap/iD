@@ -1,5 +1,6 @@
 import _uniq from 'lodash-es/uniq';
 import _difference from 'lodash-es/difference';
+import _includes from 'lodash-es/includes';
 
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
@@ -41,15 +42,15 @@ export function operationStraighten(selectedIDs, context) {
             endNodes.push(entity.nodes[entity.nodes.length-1]);
         }
 
-        if (_uniq(nodes).length <= 2 || ![0,2].includes(selectedNodes.length)) return false;
+        if (_uniq(nodes).length <= 2 || !_includes([0,2], selectedNodes.length)) return false;
 
         // Ensure all ways are connected (i.e. only one unique start point and one unique end point)
         if (_difference(startNodes, endNodes).length !== 1 ||
             _difference(endNodes, startNodes).length !== 1) return false;
 
         // Ensure both selected nodes lie on the selected path
-        if (selectedNodes.length && (!nodes.includes(selectedNodes[0]) ||
-            !nodes.includes(selectedNodes[1]))) return false;
+        if (selectedNodes.length && (!_includes(nodes, selectedNodes[0]) ||
+            !_includes(nodes, selectedNodes[1]))) return false;
 
         return true;
     };
