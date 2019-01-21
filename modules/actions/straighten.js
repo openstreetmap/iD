@@ -10,7 +10,7 @@ import {
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-export function actionStraighten(wayIds, projection) {
+export function actionStraighten(selectedIDs, projection) {
 
     function positionAlongWay(n, s, e) {
         return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1])) /
@@ -18,14 +18,20 @@ export function actionStraighten(wayIds, projection) {
     }
 
     // Return all ways as a continuous, ordered array of nodes
-    var getAllNodes = function(graph) {
+    var allNodes = function(graph) {
         var nodes = [],
             startNodes = [],
             endNodes = [],
-            ways = {};
+            ways = {},
+            selectedWays = selectedIDs.filter(function(w) {
+                return graph.entity(w).type === 'way';
+            }),
+            selectedNodes = selectedIDs.filter(function(n) {
+                return graph.entity(n).type === 'node';
+            });
 
-        for (var i = 0; i < wayIds.length; i++) {
-            var way = graph.entity(wayIds[i]);
+        for (var i = 0; i < selectedWays.length; i++) {
+            var way = graph.entity(selectedWays[i]);
                 nodes = graph.childNodes(way);
                 ways[nodes[0].id] = nodes;
                 startNodes.push(nodes[0]);
@@ -37,9 +43,16 @@ export function actionStraighten(wayIds, projection) {
 
         nodes = ways[startNode.id];
 
+        // Add nodes to end of array, until endNode matches end of array
         while (nodes[nodes.length-1] !== endNode) {
-            var lastNode = nodes[nodes.length-1];
-                nodes = nodes.concat(ways[lastNode.id]);
+            var currEndNode = nodes[nodes.length-1];
+                nodes = nodes.concat(ways[currEndNode.id]);
+        }
+
+        // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
+        if (selectedNodes.length) {
+            var startEndPoints = [nodes.indexOf(graph.entity(selectedNodes[0])), nodes.indexOf(graph.entity(selectedNodes[1]))].sort();
+            nodes = nodes.slice(startEndPoints[0], startEndPoints[1]+1);
         }
 
         return nodes;
@@ -50,7 +63,7 @@ export function actionStraighten(wayIds, projection) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var nodes = getAllNodes(graph),
+        var nodes = allNodes(graph),
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
@@ -92,7 +105,7 @@ export function actionStraighten(wayIds, projection) {
 
     action.disabled = function(graph) {
         // check way isn't too bendy
-        var nodes = getAllNodes(graph),
+        var nodes = allNodes(graph),
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
