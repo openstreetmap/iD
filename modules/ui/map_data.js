@@ -542,6 +542,8 @@ export function uiMapData(context) {
             .append('div')
             .attr('class', 'data-layer-container')
             .merge(container);
+
+        updateDataLayers();
     }
 
 
@@ -553,6 +555,8 @@ export function uiMapData(context) {
             .append('ul')
             .attr('class', 'layer-list layer-fill-list')
             .merge(container);
+
+        updateFillList();
     }
 
 
@@ -564,22 +568,34 @@ export function uiMapData(context) {
             .append('ul')
             .attr('class', 'layer-list layer-feature-list')
             .merge(container);
+
+        updateFeatureList();
     }
 
-
-    function update() {
+    function updateDataLayers() {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawQAItems)
             .call(drawPhotoItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
+    }
 
+    function updateFillList() {
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
+    }
 
+    function updateFeatureList() {
         _featureList
             .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+    }
+
+    function update() {
+
+        updateDataLayers();
+        updateFillList();
+        updateFeatureList();
 
         _QAList
             .call(drawListItems, ['keep-right'], 'checkbox', 'QA', function(d) { toggleLayer(d); }, showsQA);

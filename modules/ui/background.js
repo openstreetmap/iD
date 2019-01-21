@@ -251,6 +251,8 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
+
+        updateBackgroundList();
     }
 
 
@@ -263,15 +265,25 @@ export function uiBackground(context) {
             .attr('class', 'layer-list layer-overlay-list')
             .attr('dir', 'auto')
             .merge(container);
+
+        updateOverlayList();
+    }
+
+    function updateBackgroundList() {
+        _backgroundList
+            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
+    }
+
+    function updateOverlayList() {
+        _overlayList
+            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
 
 
     function update() {
-        _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
 
-        _overlayList
-            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
+        updateBackgroundList();
+        updateOverlayList();
 
         _displayOptionsContainer
             .call(backgroundDisplayOptions);
