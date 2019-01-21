@@ -1,4 +1,5 @@
 import { actionDeleteNode } from './delete_node';
+import _difference from 'lodash-es/difference';
 
 import {
     geoVecInterp,
@@ -9,20 +10,47 @@ import {
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-export function actionStraighten(wayId, projection) {
+export function actionStraighten(wayIds, projection) {
 
     function positionAlongWay(n, s, e) {
         return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1])) /
                 (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
     }
 
+    // Return all ways as a continuous, ordered array of nodes
+    var getAllNodes = function(graph) {
+        var nodes = [],
+            startNodes = [],
+            endNodes = [],
+            ways = {};
+
+        for (var i = 0; i < wayIds.length; i++) {
+            var way = graph.entity(wayIds[i]);
+                nodes = graph.childNodes(way);
+                ways[nodes[0].id] = nodes;
+                startNodes.push(nodes[0]);
+                endNodes.push(nodes[nodes.length-1]);
+        }
+
+        var startNode = _difference(startNodes, endNodes)[0],
+            endNode = _difference(endNodes, startNodes)[0];
+
+        nodes = ways[startNode.id];
+
+        while (nodes[nodes.length-1] !== endNode) {
+            var lastNode = nodes[nodes.length-1];
+                nodes = nodes.concat(ways[lastNode.id]);
+        }
+
+        return nodes;
+    };
+
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
+        var nodes = getAllNodes(graph),
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
@@ -64,8 +92,7 @@ export function actionStraighten(wayId, projection) {
 
     action.disabled = function(graph) {
         // check way isn't too bendy
-        var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
+        var nodes = getAllNodes(graph),
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
