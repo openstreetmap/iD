@@ -23,10 +23,12 @@ describe('iD.operationStraighten', function () {
                 iD.osmNode({ id: 'n7', type: 'node' }),
                 iD.osmNode({ id: 'n8', type: 'node' }),
                 iD.osmNode({ id: 'n9', type: 'node' }),
+                iD.osmNode({ id: 'n10', type: 'node' }),
                 iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'] }),
                 iD.osmWay({ id: 'w2', nodes: ['n2', 'n3', 'n4'] }),
                 iD.osmWay({ id: 'w3', nodes: ['n4', 'n5', 'n6'] }),
-                iD.osmWay({ id: 'w4', nodes: ['n7', 'n8', 'n9'] })
+                iD.osmWay({ id: 'w4', nodes: ['n7', 'n8', 'n9'] }),
+                iD.osmWay({ id: 'w5', nodes: ['n2', 'n10'] })
             ]);
         });
 
@@ -38,6 +40,11 @@ describe('iD.operationStraighten', function () {
         it('is not available for way with only 2 nodes', function () {
             var result = iD.operationStraighten(['w1'], fakeContext.graph()).available();
             expect(result).to.be.not.ok;
+        });
+
+        it('is available for way with only 2 nodes connected to another 2-node way', function () {
+            var result = iD.operationStraighten(['w1', 'w5'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
         });
 
         it('is not available for unknown selected id', function () {
