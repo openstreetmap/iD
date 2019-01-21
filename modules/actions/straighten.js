@@ -51,8 +51,11 @@ export function actionStraighten(selectedIDs, projection) {
 
         // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
         if (selectedNodes.length) {
-            var startEndPoints = [nodes.indexOf(graph.entity(selectedNodes[0])), nodes.indexOf(graph.entity(selectedNodes[1]))].sort();
-            nodes = nodes.slice(startEndPoints[0], startEndPoints[1]+1);
+            startNode = nodes.indexOf(graph.entity(selectedNodes[0]));
+            endNode = nodes.indexOf(graph.entity(selectedNodes[1]));
+            var sortedStartEnd = [startNode, endNode].sort();
+            
+            nodes = nodes.slice(sortedStartEnd[0], sortedStartEnd[1]+1);
         }
 
         return nodes;
