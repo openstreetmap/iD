@@ -1466,7 +1466,6 @@ img.tag-reference-wiki-image {
     border: 1px solid #ddd;
     width: 100px;
     height: 31px;
-    overflow: hidden;
 }
 .form-field-input-multicombo input {
     border: none;
