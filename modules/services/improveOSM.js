@@ -108,7 +108,8 @@ function cardinalDirection(bearing) {
         180: 'south',
         225: 'southwest',
         270: 'west',
-        315: 'northwest'
+        315: 'northwest',
+        360: 'north'
     };
 
     return t('QA.improveOSM.directions.' + compass[dir]);
@@ -163,7 +164,6 @@ export default {
             // 3 separate requests to store for each tile
             var requests = {};
 
-            // TODO: Just implement TRs and One-ways for now, much more simple
             _forEach(_impOsmUrls, function(v, k) {
                 var url = v + '/search?' + utilQsString(params);
 
