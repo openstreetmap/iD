@@ -3,6 +3,7 @@ import _groupBy from 'lodash-es/groupBy';
 
 import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag, osmJoinWays } from '../osm';
+import { geoPathHasIntersections } from '../geo';
 
 
 // Join ways at the end node they share.
@@ -69,6 +70,20 @@ export function actionJoin(ids) {
         var joined = osmJoinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
+
+        // Loop through all combinations of path-pairs to check potential intersections
+        //  between all pairs
+        for (var i = 0; i < ids.length-1; i++) {
+            for (var j = i+1; j < ids.length; j++) {
+                var path1 = graph.childNodes(graph.entity(ids[0])).map(function(e) {
+                    return e.loc;
+                });
+                var path2 = graph.childNodes(graph.entity(ids[1])).map(function(e) {
+                    return e.loc;
+                });
+                if (geoPathHasIntersections(path1, path2)) return 'paths_intersect';
+            }
+        }
 
         var nodeIds = joined[0].nodes.map(function(n) { return n.id; }).slice(1, -1);
         var relation;
