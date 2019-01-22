@@ -120,11 +120,11 @@
 ------------------------------------------------------- */
 
 .iOSM.error_type-ow- {   /* missing one way */
-    color: #EE7600;
+    color: #1E90FF;
 }
 
 .iOSM.error_type-mr-road {   /* missing road */
-    color: #B0171F;
+    color: #B452CD;
 }
 .iOSM.error_type-mr-path {   /* missing path */
     color: #A0522D;
@@ -137,7 +137,7 @@
 }
 
 .iOSM.error_type-tr- {   /* missing turn restriction */
-    color: #1E90FF;
+    color: #B0171F;
 }
 
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
