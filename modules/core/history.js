@@ -417,6 +417,14 @@ export function coreHistory(context) {
                     if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
                     }
+                    if (entity && entity.nodes) {
+                        // get originals of pre-existing child nodes
+                        _forEach(entity.nodes, function(nodeId) {
+                            if (nodeId in base.graph.entities) {
+                                baseEntities[nodeId] = base.graph.entities[nodeId];
+                            }
+                        });
+                    }
                     // get originals of parent entities too
                     _forEach(base.graph._parentWays[id], function(parentId) {
                         if (parentId in base.graph.entities) {
