@@ -76,10 +76,10 @@ export function actionJoin(ids) {
         //  between all pairs
         for (var i = 0; i < ids.length-1; i++) {
             for (var j = i+1; j < ids.length; j++) {
-                var path1 = graph.childNodes(graph.entity(ids[0])).map(function(e) {
+                var path1 = graph.childNodes(graph.entity(ids[i])).map(function(e) {
                     return e.loc;
                 });
-                var path2 = graph.childNodes(graph.entity(ids[1])).map(function(e) {
+                var path2 = graph.childNodes(graph.entity(ids[j])).map(function(e) {
                     return e.loc;
                 });
                 var intersections = geoPathIntersections(path1, path2);
