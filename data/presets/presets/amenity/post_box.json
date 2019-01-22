@@ -1,5 +1,5 @@
 {
-    "icon": "maki-post",
+    "icon": "temaki-post_box",
     "fields": [
         "operator",
         "collection_times",

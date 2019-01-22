@@ -6349,7 +6349,7 @@ en:
       shop/outdoor:
         # shop=outdoor
         name: Outdoors Store
-        # 'terms: camping,climbing,hiking'
+        # 'terms: camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies'
         terms: '<translate with synonyms or related terms for ''Outdoors Store'', separated by commas>'
       shop/paint:
         # shop=paint
