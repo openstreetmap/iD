@@ -452,6 +452,7 @@ button[disabled].action:hover {
     align-items: center;
     padding: 0 10px;
     min-width: 30px;
+    white-space: nowrap;
 }
 .tool-group button .icon {
     flex: 0 0 20px;
