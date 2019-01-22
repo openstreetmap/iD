@@ -39,7 +39,7 @@ export function svgTagClasses() {
                     return klass.length && !/^tag-/.test(klass);
                 })
                 .map(function(klass) {  // style multipolygon inner/outers as areas not lines
-                    return (isMultiPolygon && klass === 'line') ? 'area' : klass;
+                    return (isMultiPolygon && klass === 'line' && !entity.hasInterestingTags()) ? 'area' : klass;
                 });
 
 
