@@ -89,7 +89,7 @@ export function actionJoin(ids) {
                 if (_intersection(
                         joined[0].nodes.map(function(n) { return n.loc.toString(); }),
                         intersections.map(function(n) { return n.toString(); })
-                    ).length != intersections.length) return 'paths_intersect';
+                    ).length !== intersections.length) return 'paths_intersect';
             }
         }
 
