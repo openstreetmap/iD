@@ -38,6 +38,8 @@ in the hash portion of the URL:
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
+* __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Must be one of the [supported locales](https://github.com/openstreetmap/iD/tree/master/dist/locales). The default locale is set by the browser.<br/>
+  _Example:_ `locale=de`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`walkthrough=true`__ - Start the walkthrough automatically
 
