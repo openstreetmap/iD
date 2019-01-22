@@ -31,6 +31,8 @@ export function svgTagClasses() {
 
             var t = _tags(entity);
             var isMultiPolygon = (t.type === 'multipolygon');
+            var shouldRenderLineAsArea = isMultiPolygon && !entity.hasInterestingTags();
+
             var i, k, v;
 
             // preserve base classes (nothing with `tag-`)
@@ -39,7 +41,7 @@ export function svgTagClasses() {
                     return klass.length && !/^tag-/.test(klass);
                 })
                 .map(function(klass) {  // style multipolygon inner/outers as areas not lines
-                    return (isMultiPolygon && klass === 'line' && !entity.hasInterestingTags()) ? 'area' : klass;
+                    return (klass === 'line' && shouldRenderLineAsArea) ? 'area' : klass;
                 });
 
 
