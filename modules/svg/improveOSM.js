@@ -17,11 +17,12 @@ export function svgImproveOSM(projection, context, dispatch) {
     var _improveOsmVisible = false;
 
 
+    // TODO this is just reusing the path from the svg, probably some way to make that automatic (and therefore general)
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-4, -24)')
-            .attr('d', 'M11.6,6.2H7.1l1.4-5.1C8.6,0.6,8.1,0,7.5,0H2.2C1.7,0,1.3,0.3,1.3,0.8L0,10.2c-0.1,0.6,0.4,1.1,0.9,1.1h4.6l-1.8,7.6C3.6,19.4,4.1,20,4.7,20c0.3,0,0.6-0.2,0.8-0.5l6.9-11.9C12.7,7,12.3,6.2,11.6,6.2z');
+            .attr('transform', 'translate(-9, -20)')
+            .attr('d', 'M15,6.5h-4.2l1.3-4.7c0.1-0.5-0.4-1-0.9-1H6.2C5.8,0.7,5.4,1,5.4,1.5l-1.2,8.7c-0.1,0.6,0.4,1,0.8,1h4.3l-1.7,7.1c-0.1,0.5,0.4,1,0.9,1c0.3,0,0.6-0.2,0.7-0.5l6.4-11C16,7.2,15.6,6.5,15,6.5z');
     }
 
 
@@ -126,10 +127,10 @@ export function svgImproveOSM(projection, context, dispatch) {
 
         markersEnter
             .append('ellipse')
-            .attr('cx', 0.5)
-            .attr('cy', 1)
-            .attr('rx', 6.5)
-            .attr('ry', 3)
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('rx', 5)
+            .attr('ry', 2)
             .attr('class', 'stroke');
 
         markersEnter
@@ -141,8 +142,8 @@ export function svgImproveOSM(projection, context, dispatch) {
             .attr('class', 'qa_error-fill')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-8px')
-            .attr('y', '-22px')
+            .attr('x', '-9px') // point of bolt is not perfectly centered
+            .attr('y', '-20px')
             .attr('xlink:href', '#iD-icon-bolt');
 
         // update
@@ -169,8 +170,8 @@ export function svgImproveOSM(projection, context, dispatch) {
             .append('rect')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-8px')
-            .attr('y', '-22px')
+            .attr('x', '-9px')
+            .attr('y', '-20px')
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
