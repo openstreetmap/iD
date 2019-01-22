@@ -132,6 +132,7 @@ export default {
             data: {},
             loaded: {},
             inflight: {},
+            outflight: {},
             closed: {},
             rtree: rbush()
         };
@@ -288,7 +289,7 @@ export default {
         if (!services.osm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
         }
-        if (_erCache.inflight[d.id]) {
+        if (_erCache.outflight[d.id]) {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
@@ -319,22 +320,16 @@ export default {
         // Comments don't currently work
         // if (d.newComment !== undefined) {
         //     payload.text = d.newComment;
-
-        //     _krCache.inflight[d.id] = d3_request(url)
-        //         .header('Content-Type', 'application/json')
-        //         .post(payload, function(back) {
-        //             console.log(back);
-        //         });
         // }
 
         if (d.newStatus !== d.status) {
             payload.status = d.newStatus;
             payload.text = 'status changed';
 
-            _erCache.inflight[d.id] = [d3_request(url)
+            _erCache.outflight[d.id] = d3_request(url)
                 .header('Content-Type', 'application/json')
                 .post(JSON.stringify(payload), function(err) {
-                    delete _erCache.inflight[d.id];
+                    delete _erCache.outflight[d.id];
 
                     if (d.newStatus === 'INVALID') {
                         that.removeError(d);
@@ -347,7 +342,7 @@ export default {
                     }
 
                     return callback(err, d);
-                })];
+                });
         }
     },
 
