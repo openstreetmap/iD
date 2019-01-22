@@ -290,7 +290,7 @@ export function uiMapInMap(context) {
                 .attr('d', getPath)
                 .classed('map-in-map-selection', true)
                 .classed('line', function(d) {
-                    return (d.geometry.type === 'LineString') ? true : false;
+                    return d.geometry.type === 'LineString';
                 });
 
             path
