@@ -954,7 +954,7 @@
     "shop/sports": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "sports"}, "name": "Sporting Goods Store"},
     "shop/stationery": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["card", "paper"], "tags": {"shop": "stationery"}, "name": "Stationery Store"},
     "shop/storage_rental": {"icon": "fas-warehouse", "geometry": ["point", "area"], "tags": {"shop": "storage_rental"}, "name": "Storage Rental"},
-    "shop/supermarket": {"icon": "maki-grocery", "geometry": ["point", "area"], "terms": ["grocery", "store", "shop"], "tags": {"shop": "supermarket"}, "name": "Supermarket"},
+    "shop/supermarket": {"icon": "maki-grocery", "moreFields": ["diet_multi", "{shop}"], "geometry": ["point", "area"], "terms": ["grocery", "store", "shop"], "tags": {"shop": "supermarket"}, "name": "Supermarket"},
     "shop/tailor": {"icon": "maki-clothing-store", "geometry": ["point", "area"], "terms": ["clothes", "suit"], "tags": {"shop": "tailor"}, "name": "Tailor"},
     "shop/tattoo": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "tattoo"}, "name": "Tattoo Parlor"},
     "shop/tea": {"icon": "maki-teahouse", "geometry": ["point", "area"], "tags": {"shop": "tea"}, "name": "Tea Store"},
