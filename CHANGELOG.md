@@ -33,9 +33,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :mega: Release Highlights
 
-* :zap: [KeepRight](https://wiki.openstreetmap.org/wiki/Keep_Right) data quality issues can now be browsed and resolved directly within iD. Many thanks to Thomas Hervey ([@thomas-hervey]) for his work on this!<br/>
+* :zap: You can now browse and fix [KeepRight](https://wiki.openstreetmap.org/wiki/Keep_Right) data quality issues directly within iD. Many thanks to Thomas Hervey ([@thomas-hervey]) for his work on this!<br/>
 _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "KeepRight Issues" to view and fix map issues._
-* :triangular_ruler: [MapRules](https://github.com/radiant-maxar/maprules) <br/>
+* :triangular_ruler: We've added support for [MapRules](https://github.com/radiant-maxar/maprules), an API service and web interface for creating and sharing reusable presets and validation rules.<br/>
+_Check out the [maprules repo](https://github.com/radiant-maxar/maprules) for more info or watch Clarisse and Max's talk at SOTM-US [here](https://2018.stateofthemap.us/program/grossman-maprules.html)_
 * :mag: You can now quickly center and zoom the map on any feature, note, or data issue!<br/>
 _Click the new "zoom to" link on the sidebar under the preset icon, or press <kbd>Z</kbd> keyboard shortcut to focus on the selected feature._
 
@@ -45,6 +46,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 
 * Integrate with Keep Right QA tools ([#3452], [#5201], thanks [@thomas-hervey])
 * Show the location when geolocating the user ([#5587], [#5629], thanks [@maxgrossman])
+* Add MapRules service and parameters to use it ([#5617], thanks [@maxgrossman])
 * Add button to zoom to the selected feature ([#5169])
 * Display some preset fields conditionally based on tags ([#5581], [#5583])
 * Add validation check for generic feature names ([#5590])
@@ -55,6 +57,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 [#5590]: https://github.com/openstreetmap/iD/issues/5590
 [#5169]: https://github.com/openstreetmap/iD/issues/5169
 [#5738]: https://github.com/openstreetmap/iD/issues/5738
+[#5617]: https://github.com/openstreetmap/iD/issues/5617
 [#5581]: https://github.com/openstreetmap/iD/issues/5581
 [#5583]: https://github.com/openstreetmap/iD/issues/5583
 [#5587]: https://github.com/openstreetmap/iD/issues/5587

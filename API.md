@@ -27,8 +27,12 @@ in the hash portion of the URL:
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
+* __`maprules`__ - connect to a [MapRules](https://github.com/radiant-maxar/maprules) service for enhanced tag validation.<br/>
+  _Example:_ `maprules=https://path/to/file.json`
 * __`offset`__ - imagery offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
+* __`presets`__ - load an external presets file.<br/>
+  _Example:_ `presets=https://path/to/presets.json`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
@@ -55,7 +59,9 @@ are available as regular URL query parameters:
 * __`background`__ - same as standalone
 * __`disable_features`__ - same as standalone
 * __`gpx`__ - same as standalone
+* __`maprules`__ - same as standalone
 * __`offset`__ - same as standalone
+* __`presets`__ - same as standalone
 * __`comment`__ - same as standalone
 * __`source`__ - same as standalone
 * __`hashtags`__ - same as standalone
