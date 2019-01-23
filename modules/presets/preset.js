@@ -135,7 +135,8 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         if (preset.suggestion) {
             var path = id.split('/');
             path.pop();  // remove brand name
-            return origName + ' - ' + t('presets.presets.' + path.join('/') + '.name');
+            // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            return origName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
         }
         return preset.t('name', { 'default': origName });
     };

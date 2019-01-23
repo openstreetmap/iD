@@ -219,9 +219,12 @@ export function uiFieldLocalized(field, context) {
 
 
         function cancelBrand() {
-            // user hit escape, remove whatever is after the ' - '
+            // user hit escape, remove whatever is after the last ' – '
+            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
             var name = utilGetSetValue(input);
-            name = name.split(' - ', 2)[0].trim();
+            var parts = name.split(' – ');
+            parts.pop();
+            name = parts.join(' – ');
             utilGetSetValue(input, name);
             dispatch.call('change', this, { name: name });
         }
