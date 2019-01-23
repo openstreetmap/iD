@@ -76,6 +76,8 @@ _Turn on KeepRight Issues in the Map Data pane._
 * Animate simultaneous zooming and positioning of the map in various cases ([#3967])
 * Enforce stricter rules for line vs. area styles ([#5602])
 * Don't style the active drawing vertex as a large endpoint when styling lines ([#5711])
+* Render baseball fields, softball fields, and non-motorsport tracks in yellow
+* Style multipolygons as areas instead of lines
 
 [#5730]: https://github.com/openstreetmap/iD/issues/5730 
 [#5729]: https://github.com/openstreetmap/iD/issues/5729 
@@ -141,15 +143,22 @@ _Turn on KeepRight Issues in the Map Data pane._
 * Add Racetrack (Horse Racing) preset ([#5620])
 * Add Enforcement relation preset ([#5610])
 * Add Netball Court and Australian Football Field presets ([#5604], [#5605])
+* Add RV Dealership preset
 * Change tags of Reservoir, replace Riverbank with River area preset, and add Canal and Stream area presets ([#5591])
 * Add Destinations, Destination Road Numbers, Junction Number, and Destination Symbols fields to Link highways ([#4178])
 * Add Diet Types field to Restaurant, Cafe, Fast Food, and Supermarket ([#5580])
+* Add Minimum Speed Limit field to Motorway and Trunk Road
+* Add Dogs field to Footway, Park, and more to specify if dogs are allowed
+* Add One Way (Bicycle) field to roads to specify if bikes are exempt from one way restrictions 
 * Embed name of religion in all Place of Worship labels ([#5611])
 * Rename Forest to Managed Forest ([#5709])
+* Update icons for Chair Lift, Plumber, Car Wash, Real Estate Agent, and more ([via `scottdejonge/map-icons`], thanks [@scottdejonge])
 * Add "real estate" as a search term for Estate Agent ([#5724], thanks [@CloCkWeRX])
 * Let presets inherit fields from other presets ([#5710], [#5712])
 * Reduce the use of universal fields ([#5719])
+* Add more fields to the `Add field:` dropdown of various presets
 
+[via `scottdejonge/map-icons`]: https://github.com/bhousel/temaki/issues/2
 [#5709]: https://github.com/openstreetmap/iD/issues/5709
 [#5620]: https://github.com/openstreetmap/iD/issues/5620
 [#5611]: https://github.com/openstreetmap/iD/issues/5611
@@ -165,6 +174,7 @@ _Turn on KeepRight Issues in the Map Data pane._
 [#4178]: https://github.com/openstreetmap/iD/issues/4178
 [#5604]: https://github.com/openstreetmap/iD/issues/5604
 [#5605]: https://github.com/openstreetmap/iD/issues/5605
+[@scottdejonge]: https://github.com/scottdejonge
 [@hikemaniac]: https://github.com/hikemaniac
 [@CloCkWeRX]: https://github.com/CloCkWeRX
 
