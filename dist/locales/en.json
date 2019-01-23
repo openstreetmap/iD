@@ -7186,6 +7186,10 @@
                     "name": "Framing Shop",
                     "terms": "art*,paint*,photo*,frame"
                 },
+                "shop/frozen_food": {
+                    "name": "Frozen Food",
+                    "terms": ""
+                },
                 "shop/fuel": {
                     "name": "Fuel Shop",
                     "terms": ""

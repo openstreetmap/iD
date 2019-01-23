@@ -850,6 +850,7 @@
     {"key": "shop", "value": "fishing", "description": "🄿 Fishing Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "florist", "description": "🄿 Florist", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/florist-15.svg?sanitize=true"},
     {"key": "shop", "value": "frame", "description": "🄿 Framing Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
+    {"key": "shop", "value": "frozen_food", "description": "🄿 Frozen Food", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "fuel", "description": "🄿 Fuel Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "funeral_directors", "description": "🄿 Funeral Home", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/cemetery-15.svg?sanitize=true"},
     {"key": "shop", "value": "furniture", "description": "🄿 Furniture Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-couch.svg?sanitize=true"},
