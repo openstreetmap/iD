@@ -29,18 +29,18 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.13.0
-##### Planned: 2019-Jan-23
+##### 2019-Jan-23
 
 #### :mega: Release Highlights
 
 * :zap: [KeepRight](https://wiki.openstreetmap.org/wiki/Keep_Right) data quality issues can now be browsed and resolved directly within iD. Many thanks to Thomas Hervey ([@thomas-hervey]) for his work on this!<br/>
 _Turn on KeepRight Issues in the Map Data pane._
 * :triangular_ruler: [MapRules](https://github.com/radiant-maxar/maprules) <br/>
-* :motorway: Highway link destination fields<br/>
+* :mag: You can now quickly center and zoom the map on any feature, note, or data issue!<br/>
+_Click the new "zoom to" link on the sidebar under the preset icon, or press <kbd>Z</kbd> keyboard shortcut to focus on the selected feature._
 
 [@thomas-hervey]: https://github.com/thomas-hervey
 
-#### :boom: Breaking Changes
 #### :tada: New Features
 
 * Integrate with Keep Right QA tools ([#3452], [#5201], thanks [@thomas-hervey])
@@ -65,7 +65,7 @@ _Turn on KeepRight Issues in the Map Data pane._
 
 #### :sparkles: Usability
 
-* Open the combobox when clicking anywhere in the text field ([#5596, #5636], thanks [@maxgrossman])
+* Open the combobox when clicking anywhere in the text field ([#5596], [#5636], thanks [@maxgrossman])
 * Add close buttom to the save sidebar ([#5614], [#5622], thanks [@maxgrossman])
 * Render reservoirs and fountains with the water fill pattern ([#5606], thanks [@RudyTheDev])
 * Render marine barriers with a blue stroke ([#5606], thanks [@RudyTheDev])
@@ -78,14 +78,15 @@ _Turn on KeepRight Issues in the Map Data pane._
 * Don't style the active drawing vertex as a large endpoint when styling lines ([#5711])
 * Render baseball fields, softball fields, and non-motorsport tracks in yellow
 * Style multipolygons as areas instead of lines
+* Style the icons of building-like presets like buildings
 
-[#5730]: https://github.com/openstreetmap/iD/issues/5730 
-[#5729]: https://github.com/openstreetmap/iD/issues/5729 
-[#5725]: https://github.com/openstreetmap/iD/issues/5725 
-[#5711]: https://github.com/openstreetmap/iD/issues/5711 
-[#5602]: https://github.com/openstreetmap/iD/issues/5602 
-[#5596]: https://github.com/openstreetmap/iD/issues/5596 
-[#5636]: https://github.com/openstreetmap/iD/issues/5636 
+[#5730]: https://github.com/openstreetmap/iD/issues/5730
+[#5729]: https://github.com/openstreetmap/iD/issues/5729
+[#5725]: https://github.com/openstreetmap/iD/issues/5725
+[#5711]: https://github.com/openstreetmap/iD/issues/5711
+[#5602]: https://github.com/openstreetmap/iD/issues/5602
+[#5596]: https://github.com/openstreetmap/iD/issues/5596
+[#5636]: https://github.com/openstreetmap/iD/issues/5636
 [#5622]: https://github.com/openstreetmap/iD/issues/5622
 [#5614]: https://github.com/openstreetmap/iD/issues/5614
 [#5606]: https://github.com/openstreetmap/iD/issues/5606
@@ -136,25 +137,24 @@ _Turn on KeepRight Issues in the Map Data pane._
 
 * Don't update closed sections of the Map Data and Background panes
 
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 
+* Add Frozen Food preset for `shop=frozen_food`
 * Add Fuel, Fireplace, Fishing, Hunting, and Drinking Water Shop presets ([#5651], [#5653], thanks [@hikemaniac])
 * Add Racetrack (Horse Racing) preset ([#5620])
 * Add Enforcement relation preset ([#5610])
 * Add Netball Court and Australian Football Field presets ([#5604], [#5605])
-* Add RV Dealership preset
+* Add RV Dealership preset for `shop=caravan`
 * Change tags of Reservoir, replace Riverbank with River area preset, and add Canal and Stream area presets ([#5591])
 * Add Destinations, Destination Road Numbers, Junction Number, and Destination Symbols fields to Link highways ([#4178])
 * Add Diet Types field to Restaurant, Cafe, Fast Food, and Supermarket ([#5580])
 * Add Minimum Speed Limit field to Motorway and Trunk Road
 * Add Dogs field to Foot Path, Park, and more to specify if dogs are allowed
-* Add One Way (Bicycle) field to roads to specify if bikes are exempt from one way restrictions 
+* Add One Way (Bicycle) field to roads to specify if bikes are exempt from one way restrictions
 * Add Incline and Smoothness fields to Foot Path, Cycle Path, and more
 * Embed name of religion in all Place of Worship labels ([#5611])
 * Rename Forest to Managed Forest ([#5709])
 * Update icons for Chair Lift, Plumber, Car Wash, Real Estate Agent, and more ([via `scottdejonge/map-icons`], thanks [@scottdejonge])
-* Style the icons of building-like presets like buildings
 * Add "real estate" as a search term for Estate Agent ([#5724], thanks [@CloCkWeRX])
 * Let presets inherit fields from other presets ([#5710], [#5712])
 * Reduce the use of universal fields ([#5719])
@@ -179,6 +179,7 @@ _Turn on KeepRight Issues in the Map Data pane._
 [@scottdejonge]: https://github.com/scottdejonge
 [@hikemaniac]: https://github.com/hikemaniac
 [@CloCkWeRX]: https://github.com/CloCkWeRX
+
 
 # 2.12.2
 ##### 2018-Dec-13
