@@ -34,7 +34,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :mega: Release Highlights
 
 * :zap: [KeepRight](https://wiki.openstreetmap.org/wiki/Keep_Right) data quality issues can now be browsed and resolved directly within iD. Many thanks to Thomas Hervey ([@thomas-hervey]) for his work on this!<br/>
-_Turn on KeepRight Issues in the Map Data pane._
+_Open the Map Data pane (shortcut <kbd>F</kbd>) and select "KeepRight Issues" to view and fix map issues._
 * :triangular_ruler: [MapRules](https://github.com/radiant-maxar/maprules) <br/>
 * :mag: You can now quickly center and zoom the map on any feature, note, or data issue!<br/>
 _Click the new "zoom to" link on the sidebar under the preset icon, or press <kbd>Z</kbd> keyboard shortcut to focus on the selected feature._
@@ -634,7 +634,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 
 #### :mega: Release Highlights
 * :1234: We've rolled out support for vector tiles in iD! This work was done as part of [Princi Vershwal's 2018 Google Summer of Code project](https://medium.com/@vershwal/vector-tile-support-for-openstreetmaps-id-editor-40b1cb77f63b). Thanks [@vershwal]!<br/>
-_Opening the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to add a vector tile source._
+_Open the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to add a vector tile source._
 * :trophy: To get ready for [State of the Map US](https://2018.stateofthemap.us/), let's make Detroit, USA the [best mapped city in the world](https://www.openstreetmap.us/2018/07/detroit-mapping-challenge-sotmus2018/)!  iD includes 3 vector tile layers of public data, built by [@jonahadkins], to support the Detroit Mapping Challenge.  More info is available on the [osmus/detroid-mapping-challenge repository](https://github.com/osmus/detroit-mapping-challenge).<br/>
 _When mapping around Detroit, try out the special Detroit vector tile layers on the Map Data pane (shortcut <kbd>F</kbd>)_
 
