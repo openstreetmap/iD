@@ -130,6 +130,7 @@ export function uiIssues(context) {
                 .placement('bottom')
             )
             .on('click', function(d) {
+                context.map().centerZoomEase(d.loc(), Math.max(context.map().zoom(), 18));
                 if (d.entities) {
                     context.enter(modeSelect(
                         context,

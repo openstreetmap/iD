@@ -101,6 +101,7 @@ export function uiEntityIssues(context) {
 
                 issue.select('.label')
                     .on('click', function() {
+                        context.map().centerZoomEase(d.loc(), Math.max(context.map().zoom(), 18));
                         if (list.style('display') === 'none') {
                             list.style('display', 'block');
                         } else {

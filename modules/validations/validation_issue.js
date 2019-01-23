@@ -51,6 +51,17 @@ export function validationIssue(attrs) {
     this.info = attrs.info; // an object containing arbitrary extra information
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
 
+    this.loc = function() {
+        if (this.coordinates && Array.isArray(this.coordinates) && this.coordinates.length === 2) {
+            return this.coordinates;
+        }
+        if (this.entities.length > 0) {
+            if (this.entities[0].loc) {
+                return this.entities[0].loc;
+            }
+        }
+    };
+
     if (this.fixes) {
         for (var i=0; i<this.fixes.length; i++) {
             // add a reference in the fix to the issue for use in fix actions
