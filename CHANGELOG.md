@@ -148,11 +148,13 @@ _Turn on KeepRight Issues in the Map Data pane._
 * Add Destinations, Destination Road Numbers, Junction Number, and Destination Symbols fields to Link highways ([#4178])
 * Add Diet Types field to Restaurant, Cafe, Fast Food, and Supermarket ([#5580])
 * Add Minimum Speed Limit field to Motorway and Trunk Road
-* Add Dogs field to Footway, Park, and more to specify if dogs are allowed
+* Add Dogs field to Foot Path, Park, and more to specify if dogs are allowed
 * Add One Way (Bicycle) field to roads to specify if bikes are exempt from one way restrictions 
+* Add Incline and Smoothness fields to Foot Path, Cycle Path, and more
 * Embed name of religion in all Place of Worship labels ([#5611])
 * Rename Forest to Managed Forest ([#5709])
 * Update icons for Chair Lift, Plumber, Car Wash, Real Estate Agent, and more ([via `scottdejonge/map-icons`], thanks [@scottdejonge])
+* Style the icons of building-like presets like buildings
 * Add "real estate" as a search term for Estate Agent ([#5724], thanks [@CloCkWeRX])
 * Let presets inherit fields from other presets ([#5710], [#5712])
 * Reduce the use of universal fields ([#5719])
