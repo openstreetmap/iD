@@ -147,25 +147,8 @@ export function uiFieldLocalized(field, context) {
                     input
                         .call(brandCombo
                             .fetcher(fetchBrandNames(preset, allSuggestions))
-                            .on('accept', function(d) {
-                                var entity = context.entity(_entity.id);  // get latest
-                                var tags = entity.tags;
-                                var geometry = entity.geometry(context.graph());
-                                var removed = preset.unsetTags(tags, geometry);
-                                for (var k in tags) {
-                                    tags[k] = removed[k];  // set removed tags to `undefined`
-                                }
-                                tags = d.suggestion.setTags(tags, geometry);
-                                utilGetSetValue(input, tags.name);
-                                dispatch.call('change', this, tags);
-                            })
-                            .on('cancel', function() {
-                                // user hit escape, remove whatever is after the '-'
-                                var name = utilGetSetValue(input);
-                                name = name.split('-', 2)[0].trim();
-                                utilGetSetValue(input, name);
-                                dispatch.call('change', this, { name: name });
-                            })
+                            .on('accept', acceptBrand)
+                            .on('cancel', cancelBrand)
                         );
                 }
             }
@@ -214,6 +197,34 @@ export function uiFieldLocalized(field, context) {
             .classed('disabled', !!_isLocked)
             .attr('readonly', _isLocked || null);
 
+
+
+        function acceptBrand(d) {
+            if (!d) {
+                cancelBrand();
+                return;
+            }
+
+            var entity = context.entity(_entity.id);  // get latest
+            var tags = entity.tags;
+            var geometry = entity.geometry(context.graph());
+            var removed = preset.unsetTags(tags, geometry);
+            for (var k in tags) {
+                tags[k] = removed[k];  // set removed tags to `undefined`
+            }
+            tags = d.suggestion.setTags(tags, geometry);
+            utilGetSetValue(input, tags.name);
+            dispatch.call('change', this, tags);
+        }
+
+
+        function cancelBrand() {
+            // user hit escape, remove whatever is after the ' - '
+            var name = utilGetSetValue(input);
+            name = name.split(' - ', 2)[0].trim();
+            utilGetSetValue(input, name);
+            dispatch.call('change', this, { name: name });
+        }
 
 
         function fetchBrandNames(preset, suggestions) {

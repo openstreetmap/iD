@@ -400,6 +400,7 @@ export function uiCombobox(context, klass) {
         // Then hides the combobox.
         function accept(d) {
             _cancelFetch = true;
+            var thiz = input.node();
 
             if (d) {   // user clicked on a suggestion
                 utilGetSetValue(input, d.value);    // replace field contents
@@ -408,10 +409,10 @@ export function uiCombobox(context, klass) {
 
             // clear (and keep) selection
             var val = utilGetSetValue(input);
-            input.node().setSelectionRange(val.length, val.length);
+            thiz.setSelectionRange(val.length, val.length);
 
             d = datum(val);
-            dispatch.call('accept', this, d, val);
+            dispatch.call('accept', thiz, d, val);
             hide();
         }
 
@@ -420,6 +421,7 @@ export function uiCombobox(context, klass) {
         // Then hides the combobox.
         function cancel() {
             _cancelFetch = true;
+            var thiz = input.node();
 
             // clear (and remove) selection, and replace field contents
             var val = utilGetSetValue(input);
@@ -427,9 +429,9 @@ export function uiCombobox(context, klass) {
             var end = input.property('selectionEnd');
             val = val.slice(0, start) + val.slice(end);
             utilGetSetValue(input, val);
-            input.node().setSelectionRange(val.length, val.length);
+            thiz.setSelectionRange(val.length, val.length);
 
-            dispatch.call('cancel', this);
+            dispatch.call('cancel', thiz);
             hide();
         }
 

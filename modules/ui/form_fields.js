@@ -97,6 +97,7 @@ export function uiFormFields(context) {
             .call(moreCombo
                 .data(notShown)
                 .on('accept', function (d) {
+                    if (!d) return;  // user entered something that was not matched
                     var field = d.field;
                     field.show();
                     selection.call(formFields);  // rerender

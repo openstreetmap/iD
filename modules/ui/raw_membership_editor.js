@@ -299,11 +299,8 @@ export function uiRawMembershipEditor(context) {
 
             newMembership.selectAll('.member-entity-input')
                 .call(nearbyCombo
-                    .on('accept', function (d) {
-                        var role = list.selectAll('.member-row-new .member-role').property('value');
-                        addMembership(d, role);
-                    })
-                    .on('cancel', function() { delete this.value; })
+                    .on('accept', acceptEntity)
+                    .on('cancel', cancelEntity)
                 );
 
 
@@ -339,6 +336,23 @@ export function uiRawMembershipEditor(context) {
                     content(selection);
                     list.selectAll('.member-entity-input').node().focus();
                 });
+
+
+
+            function acceptEntity(d) {
+                if (!d) {
+                    cancelEntity();
+                    return;
+                }
+                var role = list.selectAll('.member-row-new .member-role').property('value');
+                addMembership(d, role);
+            }
+
+
+            function cancelEntity() {
+                var input = newMembership.selectAll('.member-entity-input');
+                input.property('value', '');
+            }
 
 
             function bindTypeahead(d) {
