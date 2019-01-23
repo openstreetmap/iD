@@ -119,8 +119,8 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fetch multilingual tag descriptions and images from the OSM Wikibase ([#5647], thanks [@nyurik])
 * Set the localization via a URL parameter ([#5644], [#5650], thanks [@tordans])
 * Fix misaligned labels in the right-to-left layout ([#5687], [#5692], [#5699], [#5705], thanks [@iriman])
-* Use `²` key to toggle the sidebar on AZERTY keboards ([#5663])
-* Use `?` key to toggle the help pane regardless of the localization ([#5663])
+* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keboards ([#5663])
+* Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
 * Display translated names and descriptions of more background sources ([#5737])
 
 [#5737]: https://github.com/openstreetmap/iD/issues/5737
