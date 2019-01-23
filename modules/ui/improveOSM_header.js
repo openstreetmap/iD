@@ -41,12 +41,36 @@ export function uiImproveOsmHeader() {
             .attr('class', 'kr_error-header-icon')
             .classed('new', function(d) { return d.id < 0; });
 
-        iconEnter
-            .append('div')
+        var svgEnter = iconEnter
+            .append('svg')
+            .attr('width', '20px')
+            .attr('height', '30px')
+            .attr('viewbox', '0 0 20 30')
             .attr('class', function(d) {
                 return 'preset-icon-28 qa_error ' + d.source + ' error_id-' + d.id + ' error_type-' + d.error_type + '-' + d.error_subtype;
-            })
-            .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
+            });
+
+        svgEnter
+            .append('polygon')
+            .attr('fill', 'currentColor')
+            .attr('class', 'qa_error-fill')
+            .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
+
+        svgEnter
+            .append('use')
+            .attr('width', '11px')
+            .attr('height', '11px')
+            .attr('transform', 'translate(4.5, 7)')
+            .attr('xlink:href', function(d) {
+                var picon = d.icon;
+
+                if (!picon) {
+                    return '';
+                } else {
+                    var isMaki = /^maki-/.test(picon);
+                    return '#' + picon + (isMaki ? '-11' : '');
+                }
+            });
 
         headerEnter
             .append('div')

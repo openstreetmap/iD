@@ -42,6 +42,18 @@
     height: 15px;
 }
 
+/* adjustment for error icon */
+
+.kr_error-header-icon .preset-icon-28 {
+    top: auto;
+    left: auto;
+}
+
+.kr_error-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Keep Right Errors
 ------------------------------------------------------- */

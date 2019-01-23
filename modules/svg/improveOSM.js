@@ -19,8 +19,8 @@ export function svgImproveOSM(projection, context, dispatch) {
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-8, -23)')
-            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
+            .attr('transform', 'translate(-10, -28)')
+            .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
     }
 
 
@@ -124,25 +124,25 @@ export function svgImproveOSM(projection, context, dispatch) {
             });
 
         markersEnter
-            .append('path')
+            .append('polygon')
             .call(markerPath, 'shadow');
 
         markersEnter
             .append('ellipse')
-            .attr('cx', 0.5)
-            .attr('cy', 1)
-            .attr('rx', 6.5)
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('rx', 4.5)
             .attr('ry', 2)
             .attr('class', 'stroke');
 
         markersEnter
-            .append('path')
+            .append('polygon')
             .attr('fill', 'currentColor')
             .call(markerPath, 'qa_error-fill');
 
         markersEnter
             .append('use')
-            .attr('transform', 'translate(-5, -19)')
+            .attr('transform', 'translate(-5.5, -21)')
             .attr('class', 'icon')
             .attr('width', '11px')
             .attr('height', '11px')
@@ -182,7 +182,7 @@ export function svgImproveOSM(projection, context, dispatch) {
             .attr('width', '20px')
             .attr('height', '30px')
             .attr('x', '-10px')
-            .attr('y', '-26px')
+            .attr('y', '-28px')
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
