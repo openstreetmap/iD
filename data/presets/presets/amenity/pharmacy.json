@@ -6,9 +6,16 @@
         "address",
         "building_area",
         "drive_through",
+        "dispensing"
+    ],
+    "moreFields": [
         "opening_hours",
         "payment_multi",
-        "dispensing"
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

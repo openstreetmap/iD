@@ -13,6 +13,10 @@
         "operator",
         "building_area"
     ],
+    "moreFields": [
+        "wheelchair",
+        "smoking"
+    ],
     "tags": {
         "aeroway": "terminal"
     },

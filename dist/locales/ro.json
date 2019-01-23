@@ -299,7 +299,6 @@
         "inspector": {
             "no_documentation_combination": "Nu este documentație disponibilă pentru combinația de tag-uri (cuvinte cheie)",
             "no_documentation_key": "Nu este documentație pentru această cheie.",
-            "documentation_redirect": "Această documentare a fost redirecționată la o nouă pagină",
             "show_more": "Arată mai mult",
             "view_on_osm": "Vezi pe openstreetmap.org",
             "all_fields": "Toate câmpurile",
@@ -891,9 +890,6 @@
                         "hot_spring": "Izvor cald"
                     }
                 },
-                "beauty": {
-                    "label": "Tip de Magazin"
-                },
                 "bench": {
                     "label": "Bancă"
                 },
@@ -1100,19 +1096,8 @@
                 "fence_type": {
                     "label": "Tip"
                 },
-                "fire_hydrant/position": {
-                    "label": "Poziție",
-                    "options": {
-                        "green": "Verde",
-                        "lane": "Bandă",
-                        "parking_lot": "Loc de Parcare",
-                        "sidewalk": "Pietoni"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tip",
                     "options": {
-                        "pond": "Iaz",
                         "wall": "Zid"
                     }
                 },
@@ -1777,26 +1762,14 @@
                 "amenity/parking_space": {
                     "name": "Loc de Parcare"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmacie"
-                },
                 "amenity/place_of_worship": {
                     "name": "Loc de Rugăciune"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Templu Budist"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Biserică"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Templu Hinduist"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagogă"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moschee"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Altar Shinto"
@@ -2223,9 +2196,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Curte Agricolă"
-                },
-                "landuse/forest": {
-                    "name": "Pădure"
                 },
                 "landuse/grass": {
                     "name": "Iarbă"

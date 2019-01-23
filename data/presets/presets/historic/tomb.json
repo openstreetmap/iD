@@ -4,7 +4,8 @@
         "name",
         "tomb",
         "building_area",
-        "inscription"
+        "inscription",
+        "access_simple"
     ],
     "geometry": [
         "point",

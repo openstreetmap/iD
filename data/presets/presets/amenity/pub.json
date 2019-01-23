@@ -6,14 +6,20 @@
         "building_area",
         "opening_hours",
         "smoking",
-        "outdoor_seating",
         "brewery"
     ],
     "moreFields": [
+        "outdoor_seating",
+        "diet_multi",
+        "payment_multi",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "diet_multi"
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

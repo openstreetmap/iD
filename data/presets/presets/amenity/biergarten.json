@@ -4,10 +4,11 @@
         "name",
         "address",
         "building",
-        "opening_hours",
-        "smoking",
         "outdoor_seating",
         "brewery"
+    ],
+    "moreFields": [
+        "{amenity/bar}"
     ],
     "geometry": [
         "point",

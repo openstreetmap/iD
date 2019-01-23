@@ -3,6 +3,9 @@
     "fields": [
         "name"
     ],
+    "moreFields": [
+        "website"
+    ],
     "geometry": [
         "point",
         "area"

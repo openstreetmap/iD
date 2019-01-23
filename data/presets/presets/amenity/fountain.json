@@ -1,7 +1,9 @@
 {
     "icon": "temaki-fountain",
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "lit"
     ],
     "geometry": [
         "point",

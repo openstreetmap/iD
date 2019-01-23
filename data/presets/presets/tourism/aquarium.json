@@ -7,6 +7,16 @@
         "building_area",
         "opening_hours"
     ],
+    "moreFields": [
+        "fee",
+        "payment_multi",
+        "smoking",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

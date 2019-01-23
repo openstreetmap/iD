@@ -1,16 +1,12 @@
 {
     "icon": "maki-aerialway",
     "fields": [
-        "name",
-        "network",
-        "operator",
+        "{public_transport/station}",
         "aerialway/access",
-        "aerialway/summer/access",
-        "elevation",
-        "building_area",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid"
+        "aerialway/summer/access"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
     ],
     "geometry": [
         "point",

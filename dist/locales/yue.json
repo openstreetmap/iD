@@ -778,9 +778,6 @@
                         "onsen": "日本溫泉"
                     }
                 },
-                "beauty": {
-                    "label": "舖類"
-                },
                 "bench": {
                     "label": "長凳"
                 },
@@ -1020,10 +1017,8 @@
                     "label": "類"
                 },
                 "fire_hydrant/type": {
-                    "label": "類",
                     "options": {
                         "pillar": "柱／地上",
-                        "pond": "塘",
                         "underground": "地底",
                         "wall": "牆"
                     }
@@ -1822,10 +1817,6 @@
                     "name": "街市",
                     "terms": "Marketplace,市場,菜市場,街市"
                 },
-                "amenity/pharmacy": {
-                    "name": "藥房",
-                    "terms": "Pharmacy,葯局,葯店,葯房,葯舖,藥局,藥店,藥房,藥舖"
-                },
                 "amenity/place_of_worship": {
                     "name": "拜神之所",
                     "terms": "Place of Worship,Worship,宗教祟拜場所,宗教禮拜處,崇拜處,拜神之所,禮拜場所"
@@ -1833,18 +1824,6 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "佛寺",
                     "terms": "Buddhist Temple,佛堂,佛寺,佛廟,和尚寺,寶殿,寺,寺廟,尼姑庵,尼庵,庵堂,廟,精舍,閣,靜院"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "敎堂",
-                    "terms": "Christian,Church,基督敎堂,基督教堂,天主堂,天主敎堂,天主教堂,敎堂,教堂,聖堂"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "猶太廟",
-                    "terms": "Synagogue,jewish,猶太寺,猶太廟,猶太教堂"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "囘敎寺",
-                    "terms": "Mosque,Muslim,囘敎寺,囘教寺,回敎寺,回教寺,清真寺"
                 },
                 "amenity/police": {
                     "name": "差館",
@@ -2227,8 +2206,7 @@
                     "name": "水產"
                 },
                 "landuse/basin": {
-                    "name": "盆地",
-                    "terms": "Basin,水池,盆地"
+                    "name": "盆地"
                 },
                 "landuse/cemetery": {
                     "name": "墳場",
@@ -2250,10 +2228,6 @@
                 "landuse/farmyard": {
                     "name": "地堂",
                     "terms": "Farmyard,地堂,農莊"
-                },
-                "landuse/forest": {
-                    "name": "森",
-                    "terms": "Forest,森,森林"
                 },
                 "landuse/grass": {
                     "name": "草地",
@@ -3083,8 +3057,7 @@
                     "terms": "River,江,江河,河,河流"
                 },
                 "waterway/riverbank": {
-                    "name": "江岸",
-                    "terms": "Riverbank,江岸,河堤,河床,河牀"
+                    "name": "江岸"
                 },
                 "waterway/stream": {
                     "name": "涌",

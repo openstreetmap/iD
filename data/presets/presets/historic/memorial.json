@@ -6,7 +6,8 @@
         "inscription"
     ],
     "moreFields": [
-        "material"
+        "material",
+        "website"
     ],
     "geometry": [
         "point",

@@ -3,11 +3,11 @@ var translations = Object.create(null);
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
 
-export function setLocale(_) {
-    if (translations[_] !== undefined) {
-        currentLocale = _;
-    } else if (translations[_.split('-')[0]]) {
-        currentLocale = _.split('-')[0];
+export function setLocale(val) {
+    if (translations[val] !== undefined) {
+        currentLocale = val;
+    } else if (translations[val.split('-')[0]]) {
+        currentLocale = val.split('-')[0];
     }
 }
 
@@ -30,7 +30,7 @@ export function t(s, o, loc) {
 
     var path = s
         .split('.')
-        .map(function (s) { return s.replace('<TX_DOT>', '.'); })
+        .map(function (s) { return s.replace(/<TX_DOT>/g, '.'); })
         .reverse();
 
     var rep = translations[loc];

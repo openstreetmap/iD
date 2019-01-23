@@ -8,6 +8,14 @@
         "opening_hours",
         "animal_boarding"
     ],
+    "moreFields": [
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

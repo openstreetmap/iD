@@ -743,9 +743,6 @@
                         "onsen": "Hapones na mainit na batis"
                     }
                 },
-                "beauty": {
-                    "label": "uri ng tindahan"
-                },
                 "bench": {
                     "label": "bangko"
                 },
@@ -973,15 +970,7 @@
                 "fence_type": {
                     "label": "Uri"
                 },
-                "fire_hydrant/position": {
-                    "label": "posisyon",
-                    "options": {
-                        "green": "berde",
-                        "lane": "linya"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Uri",
                     "options": {
                         "wall": "Pader"
                     }

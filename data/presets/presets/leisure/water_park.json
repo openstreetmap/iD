@@ -1,18 +1,26 @@
 {
     "icon": "maki-swimming",
     "fields": [
-      "name",
-      "operator",
-      "address"
+        "name",
+        "operator",
+        "address"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-      "swim",
-      "pool",
-      "dive"
+        "swim",
+        "pool",
+        "dive"
     ],
     "tags": {
         "leisure": "water_park"

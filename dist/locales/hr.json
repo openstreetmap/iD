@@ -465,7 +465,6 @@
         "inspector": {
             "no_documentation_combination": "Ne postoji dokumentacija za ovu kombinaciju oznaka",
             "no_documentation_key": "Ne postoji dokumentacija za ovaj ključ.",
-            "documentation_redirect": "Ova dokumentacija je preusmjerena na novu stranicu",
             "show_more": "Prikaži više",
             "view_on_osm": "Pogledaj na openstreetmap.org",
             "all_fields": "Sva polja",
@@ -1571,10 +1570,8 @@
                     "label": "Plaćanje"
                 },
                 "fire_hydrant/type": {
-                    "label": "Vrsta",
                     "options": {
                         "pillar": "Stub/nadzemni",
-                        "pond": "Jezerce",
                         "underground": "Podzemni",
                         "wall": "Zid"
                     }
@@ -2012,9 +2009,6 @@
                 "tourism": {
                     "label": "Vrsta"
                 },
-                "tourism_attraction": {
-                    "label": "Turizam"
-                },
                 "tracktype": {
                     "label": "Vrsta poljskog ili šumskog puta",
                     "options": {
@@ -2302,10 +2296,6 @@
                 "amenity/parking_space": {
                     "name": "Parkirališno mjesto"
                 },
-                "amenity/pharmacy": {
-                    "name": "Ljekarna",
-                    "terms": "ljekarna,apoteka,farmacija"
-                },
                 "amenity/place_of_worship": {
                     "name": "Vjerski objekt",
                     "terms": "crkva,svetište,mjesto za molitvu,katedrala,kapela,džamija,sinagoga,hram,božja kuća,bogomolja"
@@ -2313,18 +2303,6 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Budistički hram",
                     "terms": "budistički hram,hram,mjesto za molitvu,bogomolja"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Crkva",
-                    "terms": "crkva,katedrala,kapela,župa"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "sinagoga,mjesto za molitvu,židovski hram,bogomolja"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Džamija",
-                    "terms": "džamija,mjesto za molitvu,minaret,bogomolja,mesdžid,džemat"
                 },
                 "amenity/police": {
                     "name": "Policija",
@@ -2968,10 +2946,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Gospodarsko imanje"
-                },
-                "landuse/forest": {
-                    "name": "Šuma",
-                    "terms": "šuma,održavana šuma,šuma nasada,upravljana šuma"
                 },
                 "landuse/grass": {
                     "name": "Travnjak"
@@ -3979,8 +3953,7 @@
                     "name": "Rijeka"
                 },
                 "waterway/riverbank": {
-                    "name": "Riječna obala",
-                    "terms": "riječna obala,obala rijeke,rijeka"
+                    "name": "Riječna obala"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Stanica za pražnjenje brodskog spremnika fekalija"

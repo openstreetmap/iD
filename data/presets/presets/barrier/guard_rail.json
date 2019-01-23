@@ -1,6 +1,6 @@
 {
-    "icon": "maki-barrier",
-    "moreFields": [
+    "icon": "temaki-guard_rail",
+    "fields": [
         "material"
     ],
     "geometry": [

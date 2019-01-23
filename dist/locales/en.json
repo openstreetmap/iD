@@ -520,7 +520,9 @@
             "choose": "Select feature type",
             "results": "{n} results for {search}",
             "reference": "View on OpenStreetMap Wiki",
-            "edit_reference": "Edit or translate on OSM Wiki",
+            "edit_reference": "Edit or translate description",
+            "wiki_reference": "View documentation",
+            "wiki_en_reference": "View documentation in English",
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
@@ -1015,7 +1017,7 @@
                         "description": "{var1} has a restriction type \"{var2}\" but the angle is {var3} degrees. Maybe the restriction type is not appropriate?"
                     },
                     "297": {
-                        "title": "Wrong direction of to member",
+                        "title": "Wrong direction of \"to\" way",
                         "description": "{var1} does not match the direction of \"to\" way {var2}."
                     },
                     "298": {
@@ -2333,6 +2335,15 @@
                 "design": {
                     "label": "Design"
                 },
+                "destination_oneway": {
+                    "label": "Destinations"
+                },
+                "destination/ref_oneway": {
+                    "label": "Destination Road Numbers"
+                },
+                "destination/symbol_oneway": {
+                    "label": "Destination Symbols"
+                },
                 "devices": {
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
@@ -2394,6 +2405,14 @@
                 },
                 "dock": {
                     "label": "Type"
+                },
+                "dog": {
+                    "label": "Dogs",
+                    "options": {
+                        "yes": "Allowed",
+                        "leashed": "Leashed Only",
+                        "no": "Not Allowed"
+                    }
                 },
                 "drive_through": {
                     "label": "Drive-Through"
@@ -2478,6 +2497,9 @@
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "frequency_electrified": {
+                    "label": "Operating Frequency"
                 },
                 "frequency": {
                     "label": "Operating Frequency"
@@ -2647,6 +2669,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (Network Name)"
                 },
+                "junction/ref_oneway": {
+                    "label": "Junction Number"
+                },
                 "kerb": {
                     "label": "Curb"
                 },
@@ -2769,6 +2794,10 @@
                 "memorial": {
                     "label": "Type"
                 },
+                "minspeed": {
+                    "label": "Minimum Speed Limit",
+                    "placeholder": "20, 30, 40..."
+                },
                 "monitoring_multi": {
                     "label": "Monitoring"
                 },
@@ -2876,6 +2905,9 @@
                         "reversible": "Reversible",
                         "alternating": "Alternating"
                     }
+                },
+                "oneway/bicycle": {
+                    "label": "One Way (Bicycles)"
                 },
                 "opening_date": {
                     "label": "Expected Opening Date"
@@ -3465,9 +3497,6 @@
                 "tomb": {
                     "label": "Type"
                 },
-                "tourism_attraction": {
-                    "label": "Tourism"
-                },
                 "tourism": {
                     "label": "Type"
                 },
@@ -3586,6 +3615,9 @@
                         "shield": "Shield",
                         "scoria": "Scoria"
                     }
+                },
+                "voltage_electrified": {
+                    "label": "Voltage"
                 },
                 "voltage": {
                     "label": "Voltage"
@@ -3951,7 +3983,7 @@
                 },
                 "amenity/college": {
                     "name": "College Grounds",
-                    "terms": "university"
+                    "terms": "university,undergraduate school"
                 },
                 "amenity/community_centre": {
                     "name": "Community Center",
@@ -4375,7 +4407,7 @@
                 },
                 "amenity/university": {
                     "name": "University Grounds",
-                    "terms": "college"
+                    "terms": "college,graduate school,PhD program,master's degree program"
                 },
                 "amenity/vehicle_inspection": {
                     "name": "Vehicle Inspection",
@@ -5803,7 +5835,7 @@
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yoga Studio",
-                    "terms": "studio"
+                    "terms": "studio,asanas,modern yoga,meditation"
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
@@ -6399,7 +6431,7 @@
                 },
                 "office/estate_agent": {
                     "name": "Real Estate Office",
-                    "terms": ""
+                    "terms": "real estate"
                 },
                 "office/financial": {
                     "name": "Financial Office",
@@ -7245,6 +7277,10 @@
                     "name": "Framing Shop",
                     "terms": "art*,paint*,photo*,frame"
                 },
+                "shop/frozen_food": {
+                    "name": "Frozen Food",
+                    "terms": ""
+                },
                 "shop/fuel": {
                     "name": "Fuel Shop",
                     "terms": ""
@@ -7395,7 +7431,7 @@
                 },
                 "shop/outdoor": {
                     "name": "Outdoors Store",
-                    "terms": "camping,climbing,hiking"
+                    "terms": "camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies"
                 },
                 "shop/paint": {
                     "name": "Paint Store",
@@ -8177,6 +8213,13 @@
                 "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
                 "name": "Japan GSI ortho Imagery"
             },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
+                "name": "Japan GSI airphoto Imagery"
+            },
             "gsi.go.jp_std_map": {
                 "attribution": {
                     "text": "GSI Japan"
@@ -8477,6 +8520,20 @@
                 "description": "Improve OpenStreetMap in Indonesia",
                 "extendedDescription": "Mapping in Indonesia? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
             },
+            "osm-iran-aparat": {
+                "name": "OpenStreetMap Iran Aparat",
+                "description": "Subscribe to our channel at {url}",
+                "extendedDescription": "A good resource of videos about anything related to OpenStreetMap. Mainly in Persian."
+            },
+            "osm-iran-forum": {
+                "name": "OpenStreetMap Iran web forum",
+                "description": "OpenStreetMap Iran web forum",
+                "extendedDescription": "A web forum for OpenStreetMap users in Iran. Feel free to ask questions and discuss with others!"
+            },
+            "osm-iran-telegram": {
+                "name": "OpenStreetMap Iran Telegram",
+                "description": "You're welcome to join our Telegram channel at {url}. We also have a supergroup of many OSMers interested in Iran. Find its link in bio of channel."
+            },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japan Community",
                 "description": "Mappers and OpenStreetMap users in Japan"
@@ -8492,10 +8549,6 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap Japan",
                 "description": "Mappers and OpenStreetMap users in Japan"
-            },
-            "OSM-korea-telegram": {
-                "name": "OSM Korea Telegram Channel",
-                "description": "Unofficial Channnel for OpenStreetMap contributors, communities and users in Korea to share and discuss."
             },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaysia on Facebook",
@@ -8524,6 +8577,14 @@
                 "description": "Improve OpenStreetMap in Nepal",
                 "extendedDescription": "Mapping in Nepal? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
             },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap Asia Mailinglist",
+                "description": "Talk-asia is the official Mailinglist for Asian Community"
+            },
+            "osm-asia-telegram": {
+                "name": "OpenStreetMap Asia Telegram",
+                "description": "Join our family: {url}"
+            },
             "OSM-PH-facebook": {
                 "name": "OpenStreetMap PH Facebook",
                 "description": "Welcome to OpenStreetMap Philippines, where we encourage all fellow Filipinos to contribute to the OpenStreetMap project."
@@ -8548,7 +8609,11 @@
                 "name": "OpenStreetMap RU telegram",
                 "description": "OpenStreetMap Russia telegram chat"
             },
-            "OSM-LKA-facebook": {
+            "OSM-south-korea-telegram": {
+                "name": "OSM South Korea Telegram",
+                "description": "Unofficial Channnel for OpenStreetMap contributors, communities, and users in South Korea to share and discuss."
+            },
+            "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
                 "description": "Improve OpenStreetMap in Sri Lanka",
                 "extendedDescription": "Mapping in Sri Lanka? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
@@ -8835,6 +8900,10 @@
             "no-mailinglist": {
                 "name": "OpenStreetMap Norway mailing list",
                 "description": "Mailing list for mappers and OpenStreetMap users, developers and enthusiasts in Norway"
+            },
+            "no-telegram": {
+                "name": "@OSM_no on Telegram",
+                "description": "OpenStreetMap Norway Telegram chat"
             },
             "OSM-PL-facebook-group": {
                 "name": "OpenStreetMap Poland Facebook group",

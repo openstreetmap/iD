@@ -3,7 +3,17 @@
     "fields": [
         "name",
         "operator",
+        "address",
+        "opening_hours",
         "payment_multi"
+    ],
+    "moreFields": [
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

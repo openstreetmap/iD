@@ -5,8 +5,16 @@
         "brand",
         "address",
         "building_area",
-        "opening_hours",
+        "payment_multi",
         "currency_multi"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

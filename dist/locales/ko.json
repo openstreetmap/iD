@@ -4,7 +4,9 @@
             "download": "다운로드",
             "information": "정보",
             "remove": "제거",
-            "undo": "실행 취소"
+            "undo": "실행 취소",
+            "copy": "복사",
+            "open_wikidata": "wikidata.org에서 열기"
         },
         "modes": {
             "add_area": {
@@ -122,7 +124,7 @@
                 },
                 "annotation": {
                     "point": "점을 삭제했습니다.",
-                    "vertex": "길에서 노드를 삭제했습니다.",
+                    "vertex": "길에서 점을 삭제했습니다.",
                     "line": "선을 삭제했습니다.",
                     "area": "공간을 삭제했습니다.",
                     "relation": "관계를 삭제했습니다.",
@@ -193,7 +195,7 @@
                 "key": "M",
                 "annotation": {
                     "point": "점을 이동했습니다.",
-                    "vertex": "길에서 노드를 이동했습니다.",
+                    "vertex": "길에서 점을 이동했습니다.",
                     "line": "선을 이동했습니다.",
                     "area": "공간을 이동했습니다.",
                     "multiple": "다중 지물을 이동했습니다."
@@ -392,6 +394,7 @@
             "cancel": "취소",
             "changes": "{count}번 바뀜",
             "download_changes": "osmChange 파일 다운로드",
+            "errors": "오류",
             "warnings": "경고",
             "modified": "수정됨",
             "deleted": "삭제됨",
@@ -482,9 +485,9 @@
         "inspector": {
             "no_documentation_combination": "이 태그 조합에 사용할 수 있는 설명문이 없습니다",
             "no_documentation_key": "이 키에 사용할 수 있는 설명문이 없습니다",
-            "documentation_redirect": "이 설명 문서은 다른 창으로 넘겨주기 됩니다",
             "show_more": "더 보기",
             "view_on_osm": "openstreetmap.org에서 보기",
+            "view_on_keepRight": "keepright.at에서 보기",
             "all_fields": "모든 필드",
             "all_tags": "모든 태그",
             "all_members": "모든 구성원",
@@ -560,6 +563,10 @@
                 "notes": {
                     "tooltip": "OpenStreetMap의 참고 데이터",
                     "title": "OpenStreetMap 참고"
+                },
+                "keepRight": {
+                    "tooltip": "keepright.at에서 자동으로 감지한 지도 문제점",
+                    "title": "KeepRight 문제점"
                 },
                 "custom": {
                     "tooltip": "페이지에 데이터 파일을 끌어놓거나 버튼을 눌러 시작하세요",
@@ -760,6 +767,257 @@
         },
         "cannot_zoom": "현재 모드에서 더 축소할 수 없습니다.",
         "full_screen": "전체 화면 전환",
+        "QA": {
+            "keepRight": {
+                "title": "KeepRight 오류",
+                "detail_title": "오류",
+                "detail_description": "설명",
+                "comment": "댓글",
+                "close": "닫기(오류 수정됨)",
+                "ignore": "무시(오류가 아님)",
+                "save_comment": "댓글 저장",
+                "error_parts": {
+                    "this_node": "이 노드",
+                    "this_way": "이 길",
+                    "this_relation": "이 관계",
+                    "this_highway": "이 도로",
+                    "this_railway": "이 철도",
+                    "this_waterway": "이 수로",
+                    "this_cycleway": "이 자전거 도로",
+                    "this_cycleway_footpath": "이 자전거 도로/보도",
+                    "this_riverbank": "이 강둑",
+                    "this_crossing": "이 건널목",
+                    "this_railway_crossing": "이 철도 건널목",
+                    "this_bridge": "이 다리",
+                    "this_tunnel": "이 터널",
+                    "this_boundary": "이 경계",
+                    "this_turn_restriction": "이 회전 제한",
+                    "this_roundabout": "이 회전 교차로",
+                    "this_mini_roundabout": "이 소형 회전 교차로",
+                    "this_feature": "이 지물",
+                    "highway": "도로",
+                    "railway": "철도",
+                    "waterway": "수로",
+                    "cycleway": "자전거 도로",
+                    "cycleway_footpath": "자전거 도로/보도",
+                    "riverbank": "강둑",
+                    "place_of_worship": "종교 시설",
+                    "pub": "주점",
+                    "restaurant": "음식점",
+                    "school": "학교",
+                    "university": "대학",
+                    "hospital": "병원",
+                    "library": "도서관",
+                    "theatre": "극장",
+                    "courthouse": "법원",
+                    "bank": "은행",
+                    "cinema": "영화관",
+                    "pharmacy": "약국",
+                    "cafe": "카페",
+                    "fast_food": "패스트푸드"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "동일한 위치의 복수 노드",
+                        "description": "이 위치에 한 개보다 많은 노드가 있습니다. 노드 ID: {var1}."
+                    },
+                    "30": {
+                        "title": "열린 공간",
+                        "description": "{var1}은(는) \"{var2}\"(으)로 태그되어 있으며 닫힌 공간이어야 합니다."
+                    },
+                    "40": {
+                        "title": "불가능한 일방통행",
+                        "description": "{var2}의 첫 번째 노드 {var1}이(가) 다른 길과 연결되어 있지 않습니다."
+                    },
+                    "41": {
+                        "description": "{var2}의 마지막 노드 {var1}이(가) 다른 길과 연결되어 있지 않습니다."
+                    },
+                    "42": {
+                        "description": "{var1}(으)로부터 나오는 모든 길이 일방통행이기 때문에 {var1}에 도달할 수 없습니다."
+                    },
+                    "43": {
+                        "description": "{var1}(으)로 향하는 모든 길이 일방통행이기 때문에 {var1}에서 나올 수 없습니다."
+                    },
+                    "50": {
+                        "title": "거의 교차하는 길",
+                        "description": "{var1}은(는) 길 {var2}과(와) 매우 가깝지만 연결되어 있지 않습니다."
+                    },
+                    "60": {
+                        "title": "사용하지 않는 태그",
+                        "description": "{var1}은(는) 사용하지 않는 태그 \"{var2}\"을(를) 사용하고 있습니다. \"{var3}\"을(를) 대신 사용하세요."
+                    },
+                    "70": {
+                        "title": "태그 없음",
+                        "description": "{var1}은(는) 빈 태그가 있습니다: \"{var2}\"."
+                    },
+                    "71": {
+                        "description": "{var1}은(는) 태그가 없습니다."
+                    },
+                    "72": {
+                        "description": "{var1}은(는) 어떤 길에도 포함되지 않으며 태그가 없습니다."
+                    },
+                    "73": {
+                        "description": "{var1}은(는) \"{var2}\" 태그가 있지만 \"highway\" 태그가 없습니다."
+                    },
+                    "74": {
+                        "description": "{var1}은(는) 빈 태그가 있습니다: \"{var2}\"."
+                    },
+                    "75": {
+                        "description": "{var1}은(는) 이름 \"{var2}\"이(가) 있지만 다른 태그가 없습니다."
+                    },
+                    "90": {
+                        "title": "ref 태그 없는 고속 도로",
+                        "description": "{var1}은(는) 고속 도로로 태그되어 있기 때문에 \"ref\", \"nat_ref\" 또는 \"int_ref\" 태그가 필요합니다."
+                    },
+                    "100": {
+                        "title": "종교 없는 종교 시설",
+                        "description": "{var1}은(는) 종교 시설로 태그되어 있기 때문에 종교 태그가 필요합니다."
+                    },
+                    "110": {
+                        "title": "이름 없는 관심 지점",
+                        "description": "{var1}은(는) \"{var2}\"(으)로 태그되어 있기 때문에 이름 태그가 필요합니다."
+                    },
+                    "120": {
+                        "title": "노드 없는 길",
+                        "description": "{var1}은(는) 하나의 노드만을 가집니다."
+                    },
+                    "130": {
+                        "title": "단절된 길",
+                        "description": "{var1}은(는) 나머지 지도와 연결되어 있지 않습니다."
+                    },
+                    "150": {
+                        "title": "태그 없는 철도 건널목",
+                        "description": "도로와 철도의 {var1}은(는) \"railway=crossing\" 또는 \"railway=level_crossing\"으로 태그되어야 합니다."
+                    },
+                    "160": {
+                        "title": "철도 레이어 충돌",
+                        "description": "{var1}에서 서로 다른 레이어(터널 또는 다리 등)의 길이 만납니다."
+                    },
+                    "170": {
+                        "title": "FIXME 태그된 항목",
+                        "description": "{var1}에 FIXME 태그가 있습니다: {var2}"
+                    },
+                    "180": {
+                        "title": "유형 없는 관계",
+                        "description": "{var1}은(는) \"type\" 태그가 없습니다."
+                    },
+                    "190": {
+                        "title": "교차점 없는 교차",
+                        "description": "{var1}은(는) {var2} {var3}과(와) 교차하지만 교차점, 다리 또는 터널이 없습니다."
+                    },
+                    "200": {
+                        "title": "겹친 길",
+                        "description": "{var1}은(는) {var2} {var3}과(와) 겹칩니다."
+                    },
+                    "211": {
+                        "description": "{var1}은(는) 하나의 노드를 여러 번 포함합니다. 해당하는 노드는 {var2}입니다. 이는 오류일 수도 아닐 수도 있습니다."
+                    },
+                    "212": {
+                        "description": "{var1}은(는) 두 개의 노드만을 가지며 그 중 하나를 여러 번 포함합니다."
+                    },
+                    "220": {
+                        "title": "철자 틀린 태그"
+                    },
+                    "221": {
+                        "description": "{var1}은(는) 의심스러운 태그 \"{var2}\"을(를) 가집니다."
+                    },
+                    "230": {
+                        "title": "레이어 충돌",
+                        "description": "{var1}은(는) 서로 다른 레이어의 길들의 교차점입니다."
+                    },
+                    "231": {
+                        "description": "{var1}은(는) 서로 다른 레이어의 길들의 교차점입니다: {var2}.",
+                        "layer": "(레이어: {layer})"
+                    },
+                    "232": {
+                        "description": "{var1}은(는) \"layer={var2}\"(으)로 태그되어 있습니다. 이는 반드시 오류는 아니지만 이상해 보입니다."
+                    },
+                    "270": {
+                        "title": "드문 고속 도로 연결"
+                    },
+                    "280": {
+                        "title": "경계 문제점",
+                        "description": "이 경계에 명시되지 않은 문제점이 있습니다."
+                    },
+                    "281": {
+                        "title": "이름 없는 경계",
+                        "description": "{var1}은(는) 이름이 없습니다."
+                    },
+                    "283": {
+                        "title": "열린 경계",
+                        "description": "{var1}의 경계는 닫힌 고리가 아닙니다."
+                    },
+                    "284": {
+                        "title": "찢어진 경계",
+                        "description": "{var1}의 경계가 여기서 찢어집니다."
+                    },
+                    "290": {
+                        "title": "제한 문제점",
+                        "description": "이 제한에 명시되지 않은 문제점이 있습니다."
+                    },
+                    "291": {
+                        "title": "유형 없는 제한",
+                        "description": "{var1}은(는) 인식할 수 없는 제한 유형을 가집니다."
+                    },
+                    "296": {
+                        "title": "드문 제한 각도",
+                        "description": "{var1}은(는) 제한 유형 \"{var2}\"을(를) 갖지만 각도가 {var3}도 입니다. 제한 유형이 부적절한 것은 아닐까요?"
+                    },
+                    "298": {
+                        "title": "불필요한 제한 ― 일방통행",
+                        "description": "{var1}은(는) 불필요할 수 있습니다. {var2}의 \"oneway\" 태그에 의해 이미 진입이 금지되어 있습니다."
+                    },
+                    "300": {
+                        "title": "제한 속도 없음",
+                        "description": "{var1}은(는) \"maxspeed\" 태그가 없으며 고속 도로, 고속화 도로, 1차 도로 또는 2차 도로로 태그되어 있습니다."
+                    },
+                    "310": {
+                        "title": "회전 교차로 문제점",
+                        "description": "이 회전 교차로에 명시되지 않은 문제점이 있습니다."
+                    },
+                    "350": {
+                        "title": "부적절한 다리 태그"
+                    },
+                    "360": {
+                        "title": "현지 이름 태그 없음",
+                        "description": "만약 {var1}에 현지 이름 태그 \"name:XX={var2}\"이(가) 있어서 XX가 일반적 이름 \"{var2}\"의 언어를 나타낸다면 좋을 것 같습니다."
+                    },
+                    "370": {
+                        "title": "중복된 장소",
+                        "description": "{var1}은(는) 주위의 길 {var2} {var3}과(와) 공통된 태그를 가지며 불필요해 보입니다.",
+                        "including_the_name": "(이름 {name} 포함)"
+                    },
+                    "390": {
+                        "description": "{var1}은(는) \"tracktype\" 태그가 없습니다."
+                    },
+                    "400": {
+                        "title": "기하 문제점",
+                        "description": "여기 기하에 명시되지 않은 문제점이 있습니다."
+                    },
+                    "401": {
+                        "title": "회전 제한 없음",
+                        "description": "길 {var1}과(와) {var2}은(는) 여기서 매우 큰 각도로 만나며 회전을 막는 일방통행 태그 또는 회전 제한이 없습니다."
+                    },
+                    "402": {
+                        "title": "불가능한 각도",
+                        "description": "{var1}은(는) 여기서 매우 큰 각도로 휘어집니다."
+                    },
+                    "410": {
+                        "title": "웹사이트 문제점",
+                        "description": "웹사이트 또는 URL에 명시되지 않은 문제점이 있습니다."
+                    },
+                    "411": {
+                        "description": "{var1}은(는) 잘못된 URL을 가지고 있을 수 있습니다: {var2}이(가) HTTP 상태 코드 {var3}을(를) 반환했습니다."
+                    },
+                    "412": {
+                        "description": "{var1}은(는) 잘못된 URL을 가지고 있을 수 있습니다: {var2}이(가) 의심스러운 텍스트 {var3}을(를) 포함하고 있습니다."
+                    },
+                    "413": {
+                        "description": "{var1}은(는) 잘못된 URL을 가지고 있을 수 있습니다: {var2}이(가) 키워드 {var3}을(를) 포함하고 있지 않습니다."
+                    }
+                }
+            }
+        },
         "streetside": {
             "title": "사진 겹치기 (Bing Streetside)",
             "view_on_bing": "Bing 지도에서 보기",
@@ -787,6 +1045,7 @@
             "note": "참고",
             "title": "참고 편집",
             "anonymous": "익명",
+            "closed": "(닫힘)",
             "commentTitle": "댓글",
             "status": {
                 "opened": "{when} 활성화",
@@ -801,6 +1060,7 @@
             "comment": "댓글",
             "close_comment": "비활성화 및 댓글 남기기",
             "open_comment": "재활성화 및 댓글 남기기",
+            "report": "신고",
             "new": "새 참고",
             "save": "참고 저장",
             "login": "이 참고를 수정하거나 참고에 댓글을 남기려면 로그인해야 합니다."
@@ -978,6 +1238,9 @@
                     "title": "회전 제한 도움말",
                     "about": {
                         "title": "정보"
+                    },
+                    "tips": {
+                        "title": "정보"
                     }
                 }
             }
@@ -992,7 +1255,7 @@
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
-                "postcode": "11906",
+                "postcode": "49093",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
@@ -1281,10 +1544,28 @@
             }
         },
         "units": {
+            "feet": "{quantity}ft",
+            "miles": "{quantity}mi",
+            "meters": "{quantity}m",
+            "kilometers": "{quantity}km",
+            "square_meters": "{quantity}m²",
+            "square_kilometers": "{quantity}km²",
+            "hectares": "{quantity}ha",
+            "area_pair": "{area1}({area2})",
+            "arcdegrees": "{quantity}도",
+            "arcminutes": "{quantity}분",
+            "arcseconds": "{quantity}초",
             "north": "북",
             "south": "남",
             "east": "동",
-            "west": "서"
+            "west": "서",
+            "coordinate": "{direction} {coordinate}",
+            "coordinate_pair": "{latitude}도, {longitude}도"
+        },
+        "wikidata": {
+            "identifier": "식별명",
+            "label": "이름표",
+            "description": "설명"
         },
         "presets": {
             "categories": {
@@ -1319,16 +1600,19 @@
                     "name": "제한형 지물"
                 },
                 "category-road": {
-                    "name": "차로형 지물"
+                    "name": "도로형 지물"
                 },
                 "category-route": {
                     "name": "노선형 지물"
+                },
+                "category-utility": {
+                    "name": "공익사업형 지물"
                 },
                 "category-water-area": {
                     "name": "수역형 지물"
                 },
                 "category-water-line": {
-                    "name": "수역형 지물"
+                    "name": "수로형 지물"
                 }
             },
             "fields": {
@@ -1385,7 +1669,7 @@
                     "placeholders": {
                         "block_number": "번지",
                         "block_number!jp": "번지",
-                        "city": "시",
+                        "city": "행정시·행정구·구역",
                         "city!jp": "시/정/촌/도쿄 특별구",
                         "city!vn": "시/읍",
                         "conscriptionnumber": "123",
@@ -1411,7 +1695,7 @@
                         "street": "도로명",
                         "subdistrict": "하위 지구",
                         "subdistrict!vn": "방/사/시진",
-                        "suburb": "교외",
+                        "suburb": "근교",
                         "suburb!jp": "구"
                     }
                 },
@@ -1485,10 +1769,16 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "종류"
+                },
                 "backrest": {
                     "label": "등받이"
                 },
                 "barrier": {
+                    "label": "유형"
+                },
+                "basin": {
                     "label": "유형"
                 },
                 "bath/open_air": {
@@ -1504,9 +1794,6 @@
                         "hot_spring": "온천",
                         "onsen": "일본식 온천"
                     }
-                },
-                "beauty": {
-                    "label": "상점 유형"
                 },
                 "bench": {
                     "label": "좌석"
@@ -1580,8 +1867,14 @@
                     "label": "수용량",
                     "placeholder": "50, 100, 200..."
                 },
+                "cash_in": {
+                    "label": "입금"
+                },
                 "castle_type": {
                     "label": "유형"
+                },
+                "check_date": {
+                    "label": "마지막으로 확인한 날짜"
                 },
                 "clothes": {
                     "label": "옷"
@@ -1615,11 +1908,16 @@
                 "conveying": {
                     "label": "이동 방향",
                     "options": {
+                        "backward": "역방향",
+                        "forward": "순방향",
                         "reversible": "가변"
                     }
                 },
                 "country": {
                     "label": "국가"
+                },
+                "couplings": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "covered": {
                     "label": "덮어짐"
@@ -1766,6 +2064,13 @@
                 "dock": {
                     "label": "유형"
                 },
+                "dog": {
+                    "options": {
+                        "leashed": "애완동물 목줄 착용 필수",
+                        "no": "허용되지 않음",
+                        "yes": "허용됨"
+                    }
+                },
                 "drive_through": {
                     "label": "차량 탑승 중 이용 가능"
                 },
@@ -1797,6 +2102,9 @@
                 "emergency": {
                     "label": "긴급"
                 },
+                "enforcement": {
+                    "label": "유형"
+                },
                 "entrance": {
                     "label": "유형"
                 },
@@ -1813,20 +2121,16 @@
                 "fence_type": {
                     "label": "유형"
                 },
-                "fire_hydrant/position": {
-                    "label": "위치",
-                    "options": {
-                        "green": "초록색",
-                        "lane": "차선",
-                        "parking_lot": "주차장",
-                        "sidewalk": "인도"
-                    }
+                "fire_hydrant/diameter": {
+                    "label": "지름(mm, in 또는 글자)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "압력(바)"
                 },
                 "fire_hydrant/type": {
-                    "label": "유형",
+                    "label": "모양",
                     "options": {
                         "pillar": "기둥/지상",
-                        "pond": "연못",
                         "underground": "지하",
                         "wall": "벽"
                     }
@@ -1848,6 +2152,9 @@
                     "placeholder": "기본값"
                 },
                 "frequency": {
+                    "label": "동작 주파수"
+                },
+                "frequency_electrified": {
                     "label": "동작 주파수"
                 },
                 "fuel": {
@@ -1944,7 +2251,10 @@
                     }
                 },
                 "horse_scale": {
-                    "label": "승마 난이도"
+                    "label": "승마 난이도",
+                    "options": {
+                        "common": "쉬움: 운행하는 데 아무 문제나 어려움이 없다. (기본값)"
+                    }
                 },
                 "horse_stables": {
                     "options": {
@@ -1981,6 +2291,9 @@
                     "label": "비문"
                 },
                 "intermittent": {
+                    "label": "간헐적"
+                },
+                "intermittent_yes": {
                     "label": "간헐적"
                 },
                 "internet_access": {
@@ -2121,11 +2434,15 @@
                 "memorial": {
                     "label": "유형"
                 },
+                "minspeed": {
+                    "label": "최저 제한 속도",
+                    "placeholder": "20, 30, 40..."
+                },
                 "monitoring_multi": {
                     "label": "관측 대상"
                 },
                 "mtb/scale": {
-                    "label": "산악 자전거 난이도",
+                    "label": "산악자전거 난이도",
                     "options": {
                         "0": "0: 자갈/단단한 흙,  장애물이 없고 커브가 넓음",
                         "1": "1: 약간의 물렁한 표면, 장애물이 약간 있고 커브가 넒음.",
@@ -2138,7 +2455,7 @@
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "mtb/scale/imba": {
-                    "label": "산악자전거 트레일 난이도",
+                    "label": "IMBA 산길 난이도",
                     "options": {
                         "0": "매우 쉬움 (하얀 동그라미)",
                         "1": "쉬움 (초록 동그라미)",
@@ -2149,7 +2466,7 @@
                     "placeholder": "쉬움, 중간, 어려움..."
                 },
                 "mtb/scale/uphill": {
-                    "label": "산악 자전거 오르막 난이도",
+                    "label": "산악자전거 오르막 난이도",
                     "options": {
                         "0": "0: 평균 경사가 10 % 미만, 자갈 / 포장된 지면, 장애물 없음",
                         "1": "1: 평균 경사가 15 % 미만, 자갈 / 포장된 지면, 몇 개의 작은 물체",
@@ -2162,7 +2479,7 @@
                 },
                 "name": {
                     "label": "이름",
-                    "placeholder": "일반적인 이름 (있으면)"
+                    "placeholder": "일반 이름(있는 경우)"
                 },
                 "natural": {
                     "label": "자연"
@@ -2219,6 +2536,9 @@
                         "yes": "예"
                     }
                 },
+                "oneway/bicycle": {
+                    "label": "자전거 일방통행"
+                },
                 "oneway_yes": {
                     "label": "일방통행",
                     "options": {
@@ -2229,11 +2549,14 @@
                         "yes": "예"
                     }
                 },
+                "opening_date": {
+                    "label": "예상개업일"
+                },
                 "opening_hours": {
-                    "label": "이용할 수 있는 시간"
+                    "label": "영업시간"
                 },
                 "operator": {
-                    "label": "운영자"
+                    "label": "운영"
                 },
                 "outdoor_seating": {
                     "label": "야외 좌석"
@@ -2264,7 +2587,7 @@
                     "label": "결제 종류"
                 },
                 "phases": {
-                    "label": "상 수",
+                    "label": "상수",
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
@@ -2320,7 +2643,7 @@
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "playground/baby": {
-                    "label": "아기 좌석"
+                    "label": "유아석"
                 },
                 "playground/max_age": {
                     "label": "최대 나이 제한"
@@ -2362,13 +2685,15 @@
                     "label": "정격 용량"
                 },
                 "recycling_accepts": {
-                    "label": "수락"
+                    "label": "종류"
                 },
                 "recycling_type": {
                     "label": "유형",
                     "options": {
-                        "centre": "센터"
-                    }
+                        "centre": "센터",
+                        "container": "용기"
+                    },
+                    "placeholder": "용기, 센터"
                 },
                 "ref": {
                     "label": "참조"
@@ -2446,22 +2771,61 @@
                     "label": "모양"
                 },
                 "seamark/beacon_lateral/category": {
-                    "label": "분류"
+                    "label": "분류",
+                    "options": {
+                        "port": "좌현",
+                        "starboard": "우현",
+                        "waterway_left": "좌측 항로",
+                        "waterway_right": "우측 항로"
+                    }
                 },
                 "seamark/beacon_lateral/colour": {
-                    "label": "색"
+                    "label": "색",
+                    "options": {
+                        "green": "녹색",
+                        "grey": "회색",
+                        "red": "적색"
+                    }
                 },
                 "seamark/beacon_lateral/shape": {
                     "label": "모양"
                 },
+                "seamark/beacon_lateral/system": {
+                    "options": {
+                        "iala-a": " IALA 해상부표식 A지역",
+                        "iala-b": " IALA 해상부표식 B지역",
+                        "other": "기타"
+                    }
+                },
                 "seamark/buoy_lateral/category": {
-                    "label": "분류"
+                    "label": "분류",
+                    "options": {
+                        "channel_left": "좌측 해협",
+                        "channel_right": "우측 해협"
+                    }
                 },
                 "seamark/buoy_lateral/colour": {
-                    "label": "색"
+                    "label": "색",
+                    "options": {
+                        "green": "녹색",
+                        "green;red;green": "녹색-적색-녹색",
+                        "green;white;green;white": "녹색-흰색-녹색-흰색",
+                        "red": "적색",
+                        "red;green;red": "적색-녹색-적색",
+                        "red;white;red;white": "적색-흰색-적색-흰색",
+                        "white": "흰색",
+                        "yellow": "황색"
+                    }
                 },
                 "seamark/buoy_lateral/shape": {
                     "label": "모양"
+                },
+                "seamark/buoy_lateral/system": {
+                    "options": {
+                        "iala-a": " IALA 해상부표식 A지역",
+                        "iala-b": " IALA 해상부표식 B지역",
+                        "other": "기타"
+                    }
                 },
                 "seamark/mooring/category": {
                     "label": "분류"
@@ -2529,11 +2893,11 @@
                 "smoking": {
                     "label": "흡연",
                     "options": {
-                        "dedicated": "흡연자 전용 (예: 흡연자 클럽)",
-                        "isolated": "흡연 구역이고, 격리됨",
+                        "dedicated": "흡연자 전용(예: 흡연자 동호회)",
+                        "isolated": "격리된 흡연구역",
                         "no": "전 지역 금연",
-                        "outside": "밖에서 허용",
-                        "separated": "흡연 구역이나, 격리되지 않음",
+                        "outside": "외부 허용",
+                        "separated": "격리되지 않은 흡연구역",
                         "yes": "어디서나 허용"
                     },
                     "placeholder": "아니오, 분리됨, 예..."
@@ -2639,6 +3003,9 @@
                 "surveillance/zone": {
                     "label": "감시 구역"
                 },
+                "survey/date": {
+                    "label": "마지막으로 확인한 날짜"
+                },
                 "swimming_pool": {
                     "label": "유형"
                 },
@@ -2680,9 +3047,6 @@
                 },
                 "tourism": {
                     "label": "유형"
-                },
-                "tourism_attraction": {
-                    "label": "관광"
                 },
                 "tower/construction": {
                     "label": "건축 형태",
@@ -2807,6 +3171,9 @@
                 "voltage/tertiary": {
                     "label": "3차 전압"
                 },
+                "voltage_electrified": {
+                    "label": "전압"
+                },
                 "wall": {
                     "label": "유형"
                 },
@@ -2815,6 +3182,12 @@
                 },
                 "water_point": {
                     "label": "급수장"
+                },
+                "water_source": {
+                    "label": "수원"
+                },
+                "water_volume": {
+                    "label": "물 저장량(m³)"
                 },
                 "waterway": {
                     "label": "유형"
@@ -2829,8 +3202,14 @@
                 "wheelchair": {
                     "label": "휠체어 접근여부"
                 },
+                "wholesale": {
+                    "label": "도매"
+                },
                 "width": {
-                    "label": "폭 (미터)"
+                    "label": "폭(미터)"
+                },
+                "wikidata": {
+                    "label": "위키데이터"
                 },
                 "wikipedia": {
                     "label": "위키백과"
@@ -2981,8 +3360,8 @@
                     "terms": "은행"
                 },
                 "amenity/bar": {
-                    "name": "주점",
-                    "terms": "바"
+                    "name": "바",
+                    "terms": "주점,술집"
                 },
                 "amenity/bbq": {
                     "name": "바비큐/그릴",
@@ -3097,6 +3476,10 @@
                     "name": "치과 의원",
                     "terms": "치과 의원, 치과"
                 },
+                "amenity/dive_centre": {
+                    "name": "다이브 센터",
+                    "terms": "다이브 센터"
+                },
                 "amenity/doctors": {
                     "name": "의원",
                     "terms": "의원"
@@ -3204,6 +3587,9 @@
                 "amenity/monastery": {
                     "name": "수도원 부지"
                 },
+                "amenity/money_transfer": {
+                    "name": "환전소"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "오토바이 주차장",
                     "terms": "모터사이클 주차장"
@@ -3233,8 +3619,7 @@
                     "terms": "주차 공간"
                 },
                 "amenity/pharmacy": {
-                    "name": "약국",
-                    "terms": "약국"
+                    "name": "약국"
                 },
                 "amenity/place_of_worship": {
                     "name": "종교 시설",
@@ -3245,20 +3630,18 @@
                     "terms": "사찰, 절"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "교회",
-                    "terms": "교회"
+                    "name": "기독교 교회",
+                    "terms": "성당"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "힌두교 사원",
                     "terms": "만디르"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "시나고그",
-                    "terms": "유대교 회당"
+                    "name": "유대교 시너고그"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "모스크",
-                    "terms": "모스크"
+                    "name": "이슬람교 모스크"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "신사",
@@ -3366,6 +3749,9 @@
                 "amenity/restaurant/seafood": {
                     "name": "해산물 음식점"
                 },
+                "amenity/restaurant/steakhouse": {
+                    "name": "스테이크하우스"
+                },
                 "amenity/restaurant/sushi": {
                     "name": "초밥 음식점"
                 },
@@ -3406,7 +3792,7 @@
                     "name": "흡연 구역"
                 },
                 "amenity/social_facility": {
-                    "name": "사회시설",
+                    "name": "사회 복지 시설",
                     "terms": "사회시설"
                 },
                 "amenity/social_facility/food_bank": {
@@ -3418,7 +3804,7 @@
                     "terms": "경로당, 양로원"
                 },
                 "amenity/social_facility/homeless_shelter": {
-                    "name": "이재민 대피소",
+                    "name": "노숙인 보호 시설",
                     "terms": "이재민 대피소, 이재민 피난소"
                 },
                 "amenity/social_facility/nursing_home": {
@@ -3459,6 +3845,10 @@
                     "name": "대학 부지",
                     "terms": "대학교 부지"
                 },
+                "amenity/vehicle_inspection": {
+                    "name": "차량 점검",
+                    "terms": "자동차 점검"
+                },
                 "amenity/vending_machine": {
                     "name": "자동판매기",
                     "terms": "자판기"
@@ -3480,6 +3870,9 @@
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "전자 제품 자판기"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "기념품 동전 자판기"
                 },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "쓰레기 봉투 자판기",
@@ -3522,6 +3915,9 @@
                 "amenity/veterinary": {
                     "name": "동물병원",
                     "terms": "수의사"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "개 배설물 쓰레기통"
                 },
                 "amenity/waste_basket": {
                     "name": "휴지통",
@@ -3641,6 +4037,9 @@
                     "name": "울타리",
                     "terms": "울타리"
                 },
+                "barrier/fence/railing": {
+                    "name": "난간"
+                },
                 "barrier/gate": {
                     "name": "문",
                     "terms": "문"
@@ -3651,6 +4050,15 @@
                 "barrier/hedge": {
                     "name": "산 울타리",
                     "terms": "산울타리"
+                },
+                "barrier/kerb": {
+                    "name": "연석"
+                },
+                "barrier/kerb/flush": {
+                    "name": "턱 없는 연석"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "턱 낮은 연석"
                 },
                 "barrier/kissing_gate": {
                     "name": "목장 문",
@@ -3680,12 +4088,19 @@
                     "name": "행정 경계",
                     "terms": "행정 경계"
                 },
+                "bridge/support": {
+                    "name": "교량 지지물"
+                },
                 "bridge/support/pier": {
                     "name": "교각"
                 },
                 "building": {
                     "name": "건물",
                     "terms": "빌딩"
+                },
+                "building/apartments": {
+                    "name": "아파트 건물",
+                    "terms": "아파트, 아파트먼트"
                 },
                 "building/barn": {
                     "name": "외양간",
@@ -3875,7 +4290,7 @@
                     "terms": "공작소"
                 },
                 "craft/basket_maker": {
-                    "name": "바구니 제조기",
+                    "name": "바구니 세공사",
                     "terms": "바구니 제조기"
                 },
                 "craft/beekeeper": {
@@ -3891,11 +4306,11 @@
                     "terms": "보트 제조소"
                 },
                 "craft/bookbinder": {
-                    "name": "책바인더",
+                    "name": "제본공",
                     "terms": "바인더"
                 },
                 "craft/brewery": {
-                    "name": "주조공",
+                    "name": "맥주 양조장",
                     "terms": "양조공, 양조장"
                 },
                 "craft/carpenter": {
@@ -3918,7 +4333,7 @@
                     "terms": "시계 제작자"
                 },
                 "craft/confectionery": {
-                    "name": "사탕 제조기",
+                    "name": "제과 공장",
                     "terms": "사탕 제조기"
                 },
                 "craft/distillery": {
@@ -3926,7 +4341,7 @@
                     "terms": "증류소"
                 },
                 "craft/dressmaker": {
-                    "name": "양재사",
+                    "name": "여성복 재단사",
                     "terms": "양장점"
                 },
                 "craft/electrician": {
@@ -3958,7 +4373,7 @@
                     "terms": "절연체"
                 },
                 "craft/jeweler": {
-                    "name": "보석 상점"
+                    "name": "보석 공예"
                 },
                 "craft/key_cutter": {
                     "name": "열쇠 따는 사람",
@@ -3979,7 +4394,7 @@
                     "terms": "화가"
                 },
                 "craft/photographer": {
-                    "name": "사진 작가",
+                    "name": "사진가",
                     "terms": "사진작가"
                 },
                 "craft/photographic_laboratory": {
@@ -3987,16 +4402,16 @@
                     "terms": "현상소"
                 },
                 "craft/plasterer": {
-                    "name": "벽토 제조자",
-                    "terms": "벽토 제조자"
+                    "name": "미장공",
+                    "terms": "도벽사"
                 },
                 "craft/plumber": {
                     "name": "배관공",
                     "terms": "배관공"
                 },
                 "craft/pottery": {
-                    "name": "요업가",
-                    "terms": "공예가"
+                    "name": "도예가",
+                    "terms": "도자기공"
                 },
                 "craft/rigger": {
                     "name": "의장자",
@@ -4019,7 +4434,7 @@
                     "terms": "제재소"
                 },
                 "craft/scaffolder": {
-                    "name": "비계 설치자",
+                    "name": "비계공",
                     "terms": "비계 설치자"
                 },
                 "craft/sculptor": {
@@ -4027,7 +4442,7 @@
                     "terms": "조각사,조공"
                 },
                 "craft/shoemaker": {
-                    "name": "구두공",
+                    "name": "제화공",
                     "terms": "화공"
                 },
                 "craft/stonemason": {
@@ -4035,7 +4450,7 @@
                     "terms": "석공"
                 },
                 "craft/tailor": {
-                    "name": "재단사"
+                    "name": "남성복 재단사"
                 },
                 "craft/tiler": {
                     "name": "타일 시공자",
@@ -4236,6 +4651,9 @@
                 "highway/bus_stop": {
                     "name": "버스 정류장"
                 },
+                "highway/construction": {
+                    "name": "폐쇄된 도로"
+                },
                 "highway/corridor": {
                     "name": "실내 복도",
                     "terms": "복도"
@@ -4344,7 +4762,7 @@
                     "terms": "1차 도로 연결로"
                 },
                 "highway/raceway": {
-                    "name": "경기트렉 (모터 스포츠)",
+                    "name": "경주로(모터스포츠)",
                     "terms": "경주로 (모터 스포즈)"
                 },
                 "highway/residential": {
@@ -4517,8 +4935,7 @@
                     "terms": "양어장,갑각류,조류,새우,굴"
                 },
                 "landuse/basin": {
-                    "name": "웅덩이",
-                    "terms": "웅덩이, 분지"
+                    "name": "웅덩이"
                 },
                 "landuse/brownfield": {
                     "name": "재개발 부지"
@@ -4549,10 +4966,6 @@
                 "landuse/farmyard": {
                     "name": "농지",
                     "terms": "농지"
-                },
-                "landuse/forest": {
-                    "name": "숲",
-                    "terms": "삼림,산림,나무"
                 },
                 "landuse/garages": {
                     "name": "차고 부지"
@@ -4609,7 +5022,7 @@
                     "terms": "군사 벙커"
                 },
                 "landuse/military/checkpoint": {
-                    "name": "체크포인트",
+                    "name": "검문소",
                     "terms": "체크포인트"
                 },
                 "landuse/military/danger_area": {
@@ -4629,7 +5042,7 @@
                     "terms": "장애물 코스"
                 },
                 "landuse/military/office": {
-                    "name": "군사 사무실",
+                    "name": "군사 사무소",
                     "terms": "군사 사무실"
                 },
                 "landuse/military/range": {
@@ -4648,6 +5061,9 @@
                     "name": "식물 양식장",
                     "terms": "식물 종묘장"
                 },
+                "landuse/pond": {
+                    "name": "연못"
+                },
                 "landuse/quarry": {
                     "name": "채석장",
                     "terms": "채석장"
@@ -4661,11 +5077,18 @@
                     "terms": "레크리에이션 지역"
                 },
                 "landuse/religious": {
-                    "name": "종교 부지"
+                    "name": "종교 지역"
+                },
+                "landuse/reservoir": {
+                    "name": "저수지"
                 },
                 "landuse/residential": {
                     "name": "주거 지역",
                     "terms": "주거 지역"
+                },
+                "landuse/residential/apartments": {
+                    "name": "아파트 단지",
+                    "terms": "아파트 단지, 아파트먼트 단지"
                 },
                 "landuse/retail": {
                     "name": "소매 지역",
@@ -4800,7 +5223,7 @@
                     "terms": "운동장"
                 },
                 "leisure/pitch/american_football": {
-                    "name": "미식 축구장",
+                    "name": "미식축구 경기장",
                     "terms": "미식 축구장"
                 },
                 "leisure/pitch/badminton": {
@@ -4832,6 +5255,9 @@
                 "leisure/pitch/equestrian": {
                     "name": "승마 경기장",
                     "terms": "승마 경기장"
+                },
+                "leisure/pitch/netball": {
+                    "name": "네트볼 코트"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "프로 럭비장 부지",
@@ -4872,10 +5298,6 @@
                     "name": "리조트",
                     "terms": "리조트"
                 },
-                "leisure/running_track": {
-                    "name": "육상 트랙 (달리기)",
-                    "terms": "육상 트랙 (달리기)"
-                },
                 "leisure/sauna": {
                     "name": "사우나"
                 },
@@ -4900,8 +5322,14 @@
                     "terms": "수영장"
                 },
                 "leisure/track": {
-                    "name": "경마장 (비 자동차 스포츠)",
+                    "name": "경주로(비모터스포츠)",
                     "terms": "경마장 (비 자동차 스포츠)"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "경주로(경마)"
+                },
+                "leisure/track/running": {
+                    "name": "육상 트랙(달리기)"
                 },
                 "leisure/water_park": {
                     "name": "워터파크",
@@ -4934,6 +5362,9 @@
                     "name": "굴뚝",
                     "terms": "굴뚝"
                 },
+                "man_made/clearcut": {
+                    "name": "개벌지"
+                },
                 "man_made/crane": {
                     "name": "크레인",
                     "terms": "기중기"
@@ -4964,6 +5395,12 @@
                 "man_made/mast": {
                     "name": "안테나 기둥",
                     "terms": "안테나,방송탑,송신탑,기지국"
+                },
+                "man_made/mast/communication/radio": {
+                    "name": "라디오 송신탑"
+                },
+                "man_made/mast/communication/television": {
+                    "name": "텔레비전 송신탑"
                 },
                 "man_made/monitoring_station": {
                     "name": "관측소",
@@ -5012,8 +5449,14 @@
                     "name": "탑",
                     "terms": "타워"
                 },
+                "man_made/tower/communication": {
+                    "name": "통신 탑"
+                },
+                "man_made/tower/observation": {
+                    "name": "관측 탑"
+                },
                 "man_made/wastewater_plant": {
-                    "name": "하수처리 시설",
+                    "name": "하수 처리장",
                     "terms": "하수처리 시설"
                 },
                 "man_made/water_tower": {
@@ -5145,6 +5588,9 @@
                     "name": "물",
                     "terms": "물"
                 },
+                "natural/water/canal": {
+                    "name": "운하"
+                },
                 "natural/water/lake": {
                     "name": "호수",
                     "terms": "호수"
@@ -5156,6 +5602,12 @@
                 "natural/water/reservoir": {
                     "name": "저수지",
                     "terms": "저수지"
+                },
+                "natural/water/river": {
+                    "name": "강"
+                },
+                "natural/water/stream": {
+                    "name": "개울"
                 },
                 "natural/wetland": {
                     "name": "습지",
@@ -5348,6 +5800,9 @@
                     "name": "동",
                     "terms": "동"
                 },
+                "place/plot": {
+                    "name": "필지"
+                },
                 "place/quarter": {
                     "name": "하위 자치구 / 지구",
                     "terms": "하위 자치구 / 지구"
@@ -5357,15 +5812,15 @@
                     "terms": "광장"
                 },
                 "place/suburb": {
-                    "name": "자치구 / 교외",
+                    "name": "자치구 / 근교",
                     "terms": "자치구 / 교외"
                 },
                 "place/town": {
-                    "name": "읍",
+                    "name": "읍·면·동·로동자구",
                     "terms": "마을"
                 },
                 "place/village": {
-                    "name": "읍/면/동",
+                    "name": "리·통",
                     "terms": "촌"
                 },
                 "playground/balance_beam": {
@@ -5744,7 +6199,7 @@
                     "terms": "농기계,씨앗,종자,농약,살충제,비료,농기구"
                 },
                 "shop/alcohol": {
-                    "name": "주류 상점",
+                    "name": "주류상",
                     "terms": "알코올,술,맥주,와인,포도주"
                 },
                 "shop/anime": {
@@ -5835,6 +6290,9 @@
                     "name": "자동차 수리점",
                     "terms": "자동차 정비소"
                 },
+                "shop/caravan": {
+                    "name": "RV 대리점"
+                },
                 "shop/carpet": {
                     "name": "카펫 가게",
                     "terms": "융단,양탄자,깔개"
@@ -5848,7 +6306,7 @@
                     "terms": "치즈 가게"
                 },
                 "shop/chemist": {
-                    "name": "약국",
+                    "name": "드러그스토어",
                     "terms": "약국"
                 },
                 "shop/chocolate": {
@@ -5860,7 +6318,7 @@
                     "terms": "옷 가게"
                 },
                 "shop/coffee": {
-                    "name": "커피 전문점",
+                    "name": "커피 가게",
                     "terms": "커피 전문점"
                 },
                 "shop/computer": {
@@ -5908,7 +6366,7 @@
                     "terms": "DIY 상점"
                 },
                 "shop/dry_cleaning": {
-                    "name": "세탁소",
+                    "name": "드라이클리닝",
                     "terms": "세탁소"
                 },
                 "shop/e-cigarette": {
@@ -5935,6 +6393,12 @@
                     "name": "패션 가게",
                     "terms": "패션 가게"
                 },
+                "shop/fireplace": {
+                    "name": "벽난로 가게"
+                },
+                "shop/fishing": {
+                    "name": "낚시 가게"
+                },
                 "shop/fishmonger": {
                     "name": "생선 가게"
                 },
@@ -5943,15 +6407,18 @@
                     "terms": "꽃집"
                 },
                 "shop/frame": {
-                    "name": "프레이밍 가게",
+                    "name": "액자 가게",
                     "terms": "프레이밍 가게"
+                },
+                "shop/fuel": {
+                    "name": "연료 가게"
                 },
                 "shop/funeral_directors": {
                     "name": "장례식장",
                     "terms": "장의사"
                 },
                 "shop/furnace": {
-                    "name": "퍼니스 스토어"
+                    "name": "벽난로 가게"
                 },
                 "shop/furniture": {
                     "name": "가구점",
@@ -5977,6 +6444,9 @@
                     "name": "미용실",
                     "terms": "이발소,미장원"
                 },
+                "shop/hairdresser_supply": {
+                    "name": "미용실 용품 가게"
+                },
                 "shop/hardware": {
                     "name": "철물점",
                     "terms": "철물점"
@@ -5995,13 +6465,16 @@
                     "terms": "스테레오,비디오"
                 },
                 "shop/houseware": {
-                    "name": "가정 용품 매장"
+                    "name": "가정용품 가게"
+                },
+                "shop/hunting": {
+                    "name": "사냥 가게"
                 },
                 "shop/interior_decoration": {
                     "name": "실내장식 가게"
                 },
                 "shop/jewelry": {
-                    "name": "보석 상점",
+                    "name": "보석상",
                     "terms": "다이아몬드,보석,귀금속,반지"
                 },
                 "shop/kiosk": {
@@ -6060,7 +6533,7 @@
                     "name": "신문/잡지 가게"
                 },
                 "shop/nutrition_supplements": {
-                    "name": "영양 보조 식품 쇼핑몰"
+                    "name": "영양 보조 식품 가게"
                 },
                 "shop/optician": {
                     "name": "안경점",
@@ -6076,6 +6549,9 @@
                 "shop/paint": {
                     "name": "페인트 가게"
                 },
+                "shop/party": {
+                    "name": "파티 용품 가게"
+                },
                 "shop/pastry": {
                     "name": "과자 가게"
                 },
@@ -6088,6 +6564,9 @@
                 "shop/pet": {
                     "name": "애완동물 가게",
                     "terms": "동물,고양이,개,물고기,강아지,파충류"
+                },
+                "shop/pet_grooming": {
+                    "name": "애완동물 용품 가게"
                 },
                 "shop/photo": {
                     "name": "사진 가게",
@@ -6149,7 +6628,7 @@
                     "name": "타일 가게"
                 },
                 "shop/tobacco": {
-                    "name": "담배상점",
+                    "name": "담배 가게",
                     "terms": "담배 판매업소"
                 },
                 "shop/toys": {
@@ -6170,7 +6649,7 @@
                     "name": "빈 가게"
                 },
                 "shop/vacuum_cleaner": {
-                    "name": "진공 청소기 가게"
+                    "name": "진공청소기 가게"
                 },
                 "shop/variety_store": {
                     "name": "잡화점"
@@ -6185,11 +6664,14 @@
                 "shop/watches": {
                     "name": "손목시계 가게"
                 },
+                "shop/water": {
+                    "name": "식수 가게"
+                },
                 "shop/water_sports": {
                     "name": "수상 스포츠/수영 가게"
                 },
                 "shop/weapons": {
-                    "name": "무기상점",
+                    "name": "무기 가게",
                     "terms": "탄약,총,칼,나이프"
                 },
                 "shop/wholesale": {
@@ -6249,7 +6731,7 @@
                 },
                 "tourism/guest_house": {
                     "name": "민박",
-                    "terms": "B&B"
+                    "terms": "B&B,게스트하우스"
                 },
                 "tourism/hostel": {
                     "name": "호스텔"
@@ -6357,6 +6839,9 @@
                 "type/boundary/administrative": {
                     "name": "행정 경계",
                     "terms": "행정 경계"
+                },
+                "type/enforcement": {
+                    "name": "단속"
                 },
                 "type/multipolygon": {
                     "name": "다중 다각형"
@@ -6502,15 +6987,14 @@
                     "terms": "강"
                 },
                 "waterway/riverbank": {
-                    "name": "강둑",
-                    "terms": "강둑"
+                    "name": "강둑"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "해양 화장실 처리장",
                     "terms": "해양 화장실 처리"
                 },
                 "waterway/stream": {
-                    "name": "하천",
+                    "name": "개울",
                     "terms": "개천,시내,하천,물줄기"
                 },
                 "waterway/stream_intermittent": {
@@ -6533,8 +7017,8 @@
         },
         "imagery": {
             "Bing": {
-                "description": "위성 및 항공 이미지",
-                "name": "Bing 항공 이미지"
+                "description": "위성 및 항공 영상",
+                "name": "Bing 항공 영상"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
@@ -6723,64 +7207,523 @@
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Maps © Thunderforest, 데이터 © OpenStreetMap 기여자"
+                    "text": "지도 © Thunderforest, 자료 © 오픈스트리트맵 기여자"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Maps © Thunderforest, 데이터 © OpenStreetMap 기여자"
+                    "text": "지도 © Thunderforest, 자료 © 오픈스트리트맵 기여자"
                 },
                 "name": "Thunderforest 풍경"
             }
         },
         "community": {
+            "bw-facebook": {
+                "description": "보츠와나의 오픈스트리트맵 문서"
+            },
+            "bw-twitter": {
+                "description": "보츠와나의 오픈스트리트맵 트위터"
+            },
             "cape-coast-youthmappers": {
                 "description": "트위터에서 팔로우하기: {url}"
             },
             "osm-gh-facebook": {
+                "name": "오픈스트리트맵 가나 페이스북",
                 "description": "OpenStreetMap에 관심 있는 사람들을 위한 Facebook 그룹."
             },
             "osm-gh-twitter": {
+                "name": "오픈스트리트맵 가나 트위터",
                 "description": "트위터에서 팔로우하기: {url}"
             },
+            "talk-gh": {
+                "name": "Talk-gh 메일링리스트",
+                "description": "Talk-gh는 가나 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "osm-mg-facebook": {
+                "name": "오픈스트리트맵 마다가스카르 페이스북 그룹",
+                "description": "오픈스트리트맵에 관심있는 사람들을 위한 마다가스카르 페이스북 그룹"
+            },
+            "talk-mg": {
+                "name": "Talk-mg 메일링리스트",
+                "description": "마다가스카르 내 오픈스트리트맵 기여자와 공동체, 사용자가 공유하고 논의하기 위한 장소."
+            },
+            "OSM-BGD-facebook": {
+                "name": "오픈스트리트맵 방글라데시",
+                "description": "방글라데시 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-India-facebook": {
+                "description": "인도 내 오픈스트리트맵 개선하기",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "스테이트오브더맵 2018",
+                        "description": "인도 내 스테이트오브맵 아시아에서 2018년 오픈스트리트맵 전 지방 행사에 참여하세요"
+                    }
+                }
+            },
+            "osm-india-github": {
+                "name": "오픈스트리트맵 인도 깃허브"
+            },
+            "OSM-india-mailinglist": {
+                "name": "오픈스트리트맵 인도 메일링리스트",
+                "description": "Talk-in은 인도 공동체의 공식 메일링리스트입니다."
+            },
+            "osm-india-telegram": {
+                "name": "오픈스트리트맵 인도 텔레그램",
+                "description": "우리의 가족이 되세요: {url}"
+            },
+            "OSM-india-twitter": {
+                "name": "오픈스트리트맵 인도 트위터"
+            },
+            "osm-india-website": {
+                "name": "오픈스트리트맵 인도"
+            },
+            "osm-india-wiki": {
+                "name": "오픈스트리트맵 위키프로젝트 인도"
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "자유 소프트웨어 하드웨어 운동 메일링리스트"
+            },
             "OSM-IDN-facebook": {
-                "name": "OpenStreetMap 인도네시아"
+                "name": "오픈스트리트맵 인도네시아",
+                "description": "인도네시아 내 오픈스트리트맵 개선하기"
             },
             "OSM-japan-facebook": {
-                "name": "OpenStreetMap 일본 커뮤니티",
-                "description": "일본의 OpenStreetMap 사용자와 맵퍼들"
+                "name": "오픈스트리트맵 일본 공동체",
+                "description": "일본 거주 오픈스트리트맵 사용자 및 맵퍼"
             },
             "OSM-japan-mailinglist": {
-                "name": "OpenStreetMap 일본 메일링리스트",
-                "description": "Talk-ja는 일본 커뮤니티의 공식 메일링리스트입니다."
+                "name": "오픈스트리트맵 일본 메일링리스트",
+                "description": "Talk-ja는 일본 공동체의 공식 메일링리스트입니다."
             },
             "OSM-japan-twitter": {
-                "name": "OpenStreetMap 일본 트위터"
+                "name": "오픈스트리트맵 일본 트위터",
+                "description": "트위터 해시태그: {url}"
             },
             "OSM-japan-website": {
-                "name": "OpenStreetMap 일본",
-                "description": "일본의 OpenStreetMap 사용자와 맵퍼들"
+                "name": "오픈스트리트맵 일본",
+                "description": "일본 거주 오픈스트리트맵 사용자 및 맵퍼"
             },
-            "OSM-korea-telegram": {
-                "name": "OSM 한국 텔레그램 채널",
-                "description": "OpenStreetMap 한국 사용자들이 정보를 공유하고 토론하는 비공식 채널입니다."
+            "OSM-MY-facebook": {
+                "name": "오픈스트리트맵 말레이시아 페이스북"
+            },
+            "OSM-MNG-facebook": {
+                "name": "오픈스트리트맵 몽골",
+                "description": "몽골  내 오픈스트리트맵 개선하기"
+            },
+            "OSM-MMR-facebook": {
+                "name": "오픈스트리트맵 미얀마",
+                "description": "미얀마 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "오픈스트리트맵 네팔",
+                "description": "네팔 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph 메일링리스트"
+            },
+            "OSM-PH-telegram": {
+                "name": "오픈스트리트맵 필리핀 텔레그램",
+                "description": "필리핀 내 오픈스트리트맵 기여자 및 후원자의 비공식 텔레그램 지역 공동체"
+            },
+            "OSM-RU-telegram": {
+                "name": "오픈스트리트맵 러시아 텔레그램",
+                "description": "오픈스트리트맵 러시아 텔레그램 대화방"
+            },
+            "OSM-TW-facebook": {
+                "name": "오픈스트리트맵 타이완 공동체"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "오픈스트리트맵 타이완 메일링리스트",
+                "description": "Talk-tw는 타이완 관련 문제를 논의할 수 있는 공동체의 공식 메일링리스트입니다."
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "오픈스트리트맵 치앙마이 모임"
+            },
+            "OSM-TH-facebook": {
+                "name": "오픈스트리트맵 타이 페이스북 그룹",
+                "description": "타이 내 오픈스트리트맵 페이스북 그룹"
+            },
+            "al-telegram": {
+                "name": "오픈스트리트맵 알바니아 텔레그램 채널",
+                "description": "오픈스트리트맵 알바니아 텔레그램 채널"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at 메일링리스트",
+                "description": "Talk-at는 오스트리아 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "at-twitter": {
+                "name": "오픈스트리트맵 오스트리아 트위터",
+                "description": "오픈스트리트맵 오스트리아 트위터: {url}"
+            },
+            "osm-at": {
+                "name": "오픈스트리트맵 오스트리아"
+            },
+            "byosm": {
+                "description": "오픈스트리트맵 벨라루스 텔레그램 대화방"
+            },
+            "be-facebook": {
+                "name": "오픈스트리트맵 벨기에 공동체"
+            },
+            "be-irc": {
+                "name": "오픈스트리트맵 벨기에 IRC",
+                "description": "irc.oftc.net(6667 포트)의 #osmbe 대화방에 참여하세요",
+                "extendedDescription": "irc.oftc.net(6667 포트)의 #osmbe 대화방에 참여하면 매트릭스 대화 채널과 이어지게 됩니다"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be 메일링리스트",
+                "description": "Talk-be는 벨기에 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "be-twitter": {
+                "description": "오픈스트리트맵 벨기에 트위터: @osm_be"
+            },
+            "hr-facebook": {
+                "name": "오픈스트리트맵 크로아티아 페이스북 그룹",
+                "description": "오픈스트리트맵 크로아티아 페이스북 그룹"
+            },
+            "hr-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-hr 대화방에 참여하세요"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr 메일링리스트",
+                "description": "Talk-hr 메일링리스트"
+            },
+            "osmcz-facebook": {
+                "name": "오픈스트리트맵 체코 페이스북"
+            },
+            "talk-cz-mailinglist": {
+                "name": "체코 메일링리스트(talk-cz)",
+                "description": "talk-cz는 체코 공동체의 공식 메일링리스트입니다."
+            },
+            "dk-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-dk 대화방에 참여하세요"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk 메일링리스트"
+            },
+            "fi-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-fi 대화방에 참여하세요"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi 메일링리스트",
+                "description": "Talk-fi는 핀란드 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "fr-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-fr 대화방에 참여하세요"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr 메일링리스트",
+                "description": "Talk-fr 메일링리스트"
+            },
+            "fr-twitter": {
+                "name": "오픈스트리트맵 프랑스 트위터",
+                "description": "오픈스트리트맵 프랑스 트위터: {url}"
+            },
+            "de-berlin-mailinglist": {
+                "name": "베를린 메일링리스트",
+                "description": "베를린 오픈스트리트맵 공동체의 메일링리스트입니다."
+            },
+            "de-berlin-telegram": {
+                "name": "텔레그램 @osmberlin",
+                "description": "오픈스트리트맵 베를린 텔레그램 대화방"
+            },
+            "de-berlin-twitter": {
+                "description": "트위터에서 팔로우하기: {url}"
+            },
+            "de-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-de 대화방에 참여하세요"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de 메일링리스트",
+                "description": "Talk-de는 독일 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "OWL 메일링리스트"
+            },
+            "de-telegram": {
+                "name": "오픈스트리트맵 독일 텔레그램",
+                "description": "{url}에서 오픈스트리트맵 독일 텔레그램 슈퍼그룹에 참여하세요"
+            },
+            "hu-facebook": {
+                "name": "오픈스트리트맵 헝가리 페이스북"
+            },
+            "is-facebook": {
+                "name": "오픈스트리트맵 아이슬란드 페이스북"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is 메일링리스트",
+                "description": "Talk-is는 아이슬란드 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "it-facebook": {
+                "description": "페이스북의 오픈스트리트맵 이탈리아 공동체에 참여하세요."
+            },
+            "it-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-it 대화방에 참여하세요"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it 메일링리스트",
+                "description": "Talk-it는 이탈리아 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "it-telegram": {
+                "name": "텔레그램 @OpenStreetMapItalia",
+                "description": "오픈스트리트맵 이탈리아 텔레그램 대화방"
+            },
+            "it-twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-Rome-meetup": {
+                "description": "로마 지역 내 오픈스트리트맵 개선하기"
+            },
+            "talk-it-lazio": {
+                "extendedDescription": "로마·라치오의 메일링리스트"
+            },
+            "Trentino-Mailing-List": {
+                "name": "트렌토의 오픈스트리트맵 메일링리스트"
+            },
+            "kosovo-telegram": {
+                "name": "오픈스트리트맵 코소보 텔레그램"
+            },
+            "no-mailinglist": {
+                "name": "오픈스트리트맵 노르웨이 메일링리스트"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "오픈스트리트맵 폴란드 페이스북 그룹"
+            },
+            "si-mailinglist": {
+                "name": "오픈스트리트맵 슬로베니아 메일링리스트",
+                "description": "슬로베니아 내 오픈스트리트맵 공동체의 메일링리스트"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es 메일링리스트"
+            },
+            "OSM-ES-telegram": {
+                "name": "텔레그램 @OSMes",
+                "description": "오픈스트리트맵 에스파냐 텔레그램 대화방"
+            },
+            "se-facebook": {
+                "description": "오픈스트리트맵 스웨덴 페이스북"
+            },
+            "se-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-se 대화방에 참여하세요"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se 메일링리스트"
+            },
+            "se-twitter": {
+                "name": "오픈스트리트맵 스웨덴 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 메일링리스트"
+            },
+            "gb-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-gb 대화방에 참여하세요"
+            },
+            "OSM-CU-telegram": {
+                "name": "오픈스트리트맵 쿠바 텔레그램",
+                "description": "오픈스트리트맵 쿠바 텔레그램 대화방"
+            },
+            "OSM-NI-telegram": {
+                "name": "오픈스트리트맵 니카라과 텔레그램",
+                "description": "오픈스트리트맵 니카라과 텔레그램 대화방"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "description": "베이에어리어 내 오픈스트리트맵 개선하기"
+            },
+            "Mapping-DC-meetup": {
+                "description": "워싱턴 지역 내 오픈스트리트맵 개선하기"
+            },
+            "MaptimeHRVA-twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts 메일링리스트"
+            },
+            "OpenCleveland-meetup": {
+                "description": "클리블랜드 지역 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-Boston": {
+                "name": "오픈스트리트맵 보스턴"
+            },
+            "OSM-Seattle": {
+                "name": "오픈스트리트맵 시애틀"
+            },
+            "OSM-US-Slack": {
+                "name": "오픈스트리트맵 미국 슬랙"
+            },
+            "OSM-US": {
+                "name": "오픈스트리트맵 미국",
+                "description": "우리는 미국 내 오픈스트리트맵을 성장 및 개선하도록 돕습니다.",
+                "events": {
+                    "sotmus2018": {
+                        "where": "미시간 디트로이트"
+                    }
+                }
+            },
+            "OSM-Utah": {
+                "name": "오픈스트리트맵 유타"
+            },
+            "OSM-Wyoming": {
+                "name": "오픈스트리트맵 와이오밍"
+            },
+            "PHXGeo-twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "talk-au": {
+                "name": "Talk-au 메일링리스트"
+            },
+            "OSM-AR-facebook": {
+                "name": "오픈스트리트맵 아르헨티나 페이스북",
+                "description": "페이스북의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            },
+            "OSM-AR-irc": {
+                "name": "오픈스트리트맵 아르헨티나 IRC",
+                "description": "irc.oftc.net(6667 포트)의 #osm-ar 대화방에 참여하세요"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar 메일링리스트"
+            },
+            "OSM-AR-telegram": {
+                "name": "오픈스트리트맵 아르헨티나 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            },
+            "OSM-AR-twitter": {
+                "name": "오픈스트리트맵 아르헨티나 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo 메일링리스트",
+                "description": "Talk-bo는 볼리비아 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "Bahia-telegram": {
+                "description": "텔레그램의 오픈스트리트맵 바이아 공동체에 참여하세요"
+            },
+            "DF-telegram": {
+                "name": "오픈스트리트맵 브라질리아 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 브라질리아 공동체에 참여하세요"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br 메일링리스트"
+            },
+            "OSM-br-telegram": {
+                "name": "오픈스트리트맵 브라질 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 브라질 공동체에 참여하세요"
+            },
+            "OSM-br-twitter": {
+                "name": "오픈스트리트맵 브라질 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "RS-telegram": {
+                "name": "오픈스트리트맵 히우그란지두술 텔레그램 그룹",
+                "description": "텔레그램의 오픈스트리트맵 히우그란지두술 공동체에 참여하세요"
+            },
+            "OSM-CL-facebook": {
+                "name": "오픈스트리트맵 칠레 페이스북",
+                "description": "페이스북의 오픈스트리트맵 칠레 공동체에 참여하세요"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl 메일링리스트"
+            },
+            "OSM-CL-telegram": {
+                "name": "오픈스트리트맵 칠레 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 칠레 공동체에 참여하세요"
+            },
+            "OSM-CL-twitter": {
+                "name": "오픈스트리트맵 칠레 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-CO-facebook": {
+                "name": "오픈스트리트맵 콜롬비아 페이스북",
+                "description": "페이스북의 오픈스트리트맵 콜롬비아 공동체에 참여하세요"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co 메일링리스트"
+            },
+            "OSM-CO-telegram": {
+                "name": "오픈스트리트맵 콜롬비아 텔레그램",
+                "description": "오픈스트리트맵 콜롬비아 텔레그램 대화방"
+            },
+            "OSM-CO-twitter": {
+                "name": "오픈스트리트맵 콜롬비아 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-CO": {
+                "name": "오픈스트리트맵 콜롬비아"
+            },
+            "OSM-EC-telegram": {
+                "name": "오픈스트리트맵 에콰도르 텔레그램",
+                "description": "오픈스트리트맵 에콰도르 텔레그램 대화방"
+            },
+            "OSM-PY-telegram": {
+                "name": "오픈스트리트맵 파라과이 텔레그램",
+                "description": "오픈스트리트맵 파라과이 텔레그램 대화방"
+            },
+            "OSM-PE-facebook": {
+                "name": "오픈스트리트맵 페루 페이스북",
+                "description": "페이스북의 오픈스트리트맵 페루 공동체에 참여하세요"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe 메일링리스트",
+                "description": "오픈스트리트맵 페루 공동체의 공식 메일링리스트"
+            },
+            "OSM-PE-telegram": {
+                "name": "오픈스트리트맵 페루 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 페루 공동체에 참여하세요"
+            },
+            "OSM-PE-twitter": {
+                "name": "오픈스트리트맵 페루 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-PE": {
+                "name": "오픈스트리트맵 페루"
+            },
+            "LATAM-Telegram": {
+                "description": "라틴 아메리카의 오픈스트리트맵 텔레그램"
+            },
+            "LATAM-Twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "osm-latam": {
+                "events": {
+                    "sotm-latam-2018": {
+                        "where": "아르헨티나 부에노스아이레스"
+                    }
+                }
+            },
+            "OSM-Discord": {
+                "name": "오픈스트리트맵 디스코드"
             },
             "OSM-Facebook": {
-                "name": "OpenStreetMap 페이스북"
+                "name": "오픈스트리트맵 페이스북"
+            },
+            "OSM-help": {
+                "name": "오픈스트리트맵 도움말"
+            },
+            "OSM-IRC": {
+                "name": "오픈스트리트맵 IRC",
+                "description": "irc.oftc.net(6667 포트)의 #osm 대화방에 참여하세요"
             },
             "OSM-Reddit": {
-                "description": "/r/openstreetmap/ 은 OpenStreetMap에 대해서 물어보기에 가장 좋은 곳입니다. 무엇이든지 물어보세요!"
+                "name": "레딧 내 오픈스트리트맵",
+                "description": "/r/openstreetmap/은 오픈스트리트맵을 배워가기 가장 좋은 곳입니다. 무엇이든지 물어보세요!"
             },
             "OSM-Telegram": {
-                "name": "OpenStreetMap 텔레그램"
+                "name": "오픈스트리트맵 텔레그램",
+                "description": "{url}에서 오픈스트리트맵 텔레그램 전세계 슈퍼그룹에 참여하세요"
             },
             "OSM-Twitter": {
-                "name": "OpenStreetMap 트위터"
+                "name": "오픈스트리트맵 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
             },
             "OSMF": {
-                "name": "OpenStreetMap 재단",
-                "description": "OSMF는 OpenStreetMap을 운영하는 영국 기반의 비영리 재단입니다."
+                "name": "오픈스트리트맵 재단",
+                "description": "OSMF는 오픈스트리트맵 프로젝트를 지원하는 영국에 기반을 둔 비영리 재단입니다.",
+                "events": {
+                    "sotm2018": {
+                        "name": "스테이트오브더맵 2018",
+                        "where": "이탈리아 밀라노"
+                    }
+                }
             }
         }
     }

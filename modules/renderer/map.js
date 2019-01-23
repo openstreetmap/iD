@@ -34,6 +34,10 @@ var TILESIZE = 256;
 var kMin = geoZoomToScale(2, TILESIZE);
 var kMax = geoZoomToScale(24, TILESIZE);
 
+function clamp(num, min, max) {
+    return Math.max(min, Math.min(num, max));
+}
+
 
 export function rendererMap(context) {
     var dispatch = d3_dispatch('move', 'drawn');
@@ -52,16 +56,16 @@ export function rendererMap(context) {
     var wrapper = d3_select(null);
     var surface = d3_select(null);
 
-    var dimensions = [1, 1];
+    var _dimensions = [1, 1];
     var _dblClickEnabled = true;
     var _redrawEnabled = true;
     var _gestureTransformStart;
     var _transformStart = projection.transform();
     var _transformLast;
-    var _transformed = false;
-    var minzoom = 0;
-    var mouse;
-    var mousemove;
+    var _isTransformed = false;
+    var _minzoom = 0;
+    var _getMouseCoords;
+    var _mouseEvent;
 
     var zoom = d3_zoom()
         .scaleExtent([kMin, kMax])
@@ -170,17 +174,17 @@ export function rendererMap(context) {
                 }
             })
             .on('mousemove.map', function() {
-                mousemove = d3_event;
+                _mouseEvent = d3_event;
             })
             .on('mouseover.vertices', function() {
-                if (map.editable() && !_transformed) {
+                if (map.editable() && !_isTransformed) {
                     var hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             })
             .on('mouseout.vertices', function() {
-                if (map.editable() && !_transformed) {
+                if (map.editable() && !_isTransformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
@@ -191,7 +195,7 @@ export function rendererMap(context) {
             .call(context.background());
 
         context.on('enter.map',  function() {
-            if (map.editable() && !_transformed) {
+            if (map.editable() && !_isTransformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -263,7 +267,7 @@ export function rendererMap(context) {
 
 
     function pxCenter() {
-        return [dimensions[0] / 2, dimensions[1] / 2];
+        return [_dimensions[0] / 2, _dimensions[1] / 2];
     }
 
 
@@ -285,7 +289,7 @@ export function rendererMap(context) {
         } else {
             // force a full redraw if gatherStats detects that a feature
             // should be auto-hidden (e.g. points or buildings)..
-            if (features.gatherStats(all, graph, dimensions)) {
+            if (features.gatherStats(all, graph, _dimensions)) {
                 extent = undefined;
             }
 
@@ -314,7 +318,7 @@ export function rendererMap(context) {
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
-            .call(drawLabels, graph, data, filter, dimensions, fullRedraw)
+            .call(drawLabels, graph, data, filter, _dimensions, fullRedraw)
             .call(drawPoints, graph, data, filter);
 
         dispatch.call('drawn', this, {full: true});
@@ -326,9 +330,16 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
         surface.selectAll('.layer-touch:not(.markers) *').remove();
 
+        var allowed = {
+            'browse': true,
+            'save': true,
+            'select-note': true,
+            'select-data': true,
+            'select-error': true
+        };
+
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select-note' &&
-            mode.id !== 'select-data' && mode.id !== 'select-error') {
+        if (mode && !allowed[mode.id]) {
             context.enter(modeBrowse(context));
         }
 
@@ -422,8 +433,8 @@ export function rendererMap(context) {
                 }
 
                 // recalculate x2,y2,k2
-                t0 = _transformed ? _transformLast : _transformStart;
-                p0 = mouse(source);
+                t0 = _isTransformed ? _transformLast : _transformStart;
+                p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
                 x2 = p0[0] - p1[0] * k2;
@@ -434,7 +445,7 @@ export function rendererMap(context) {
             } else if (source._scale) {
                 // recalculate x2,y2,k2
                 t0 = _gestureTransformStart;
-                p0 = mouse(source);
+                p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * source._scale;
                 x2 = p0[0] - p1[0] * k2;
@@ -448,8 +459,8 @@ export function rendererMap(context) {
                 dY *= 6;   // slightly scale up whatever the browser gave us
 
                 // recalculate x2,y2,k2
-                t0 = _transformed ? _transformLast : _transformStart;
-                p0 = mouse(source);
+                t0 = _isTransformed ? _transformLast : _transformStart;
+                p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
                 x2 = p0[0] - p1[0] * k2;
@@ -458,8 +469,8 @@ export function rendererMap(context) {
             // Trackpad scroll zooming with shift or alt/option key down
             } else if ((source.altKey || source.shiftKey) && isInteger(dY)) {
                 // recalculate x2,y2,k2
-                t0 = _transformed ? _transformLast : _transformStart;
-                p0 = mouse(source);
+                t0 = _isTransformed ? _transformLast : _transformStart;
+                p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
                 x2 = p0[0] - p1[0] * k2;
@@ -487,7 +498,7 @@ export function rendererMap(context) {
 
         }
 
-        if (geoScaleToZoom(k, TILESIZE) < minzoom) {
+        if (geoScaleToZoom(k, TILESIZE) < _minzoom) {
             surface.interrupt();
             uiFlash().text(t('cannot_zoom'))();
             setCenterZoom(map.center(), context.minEditableZoom(), 0, true);
@@ -510,18 +521,16 @@ export function rendererMap(context) {
             });
         }
 
-        if (source) mousemove = event;
-        _transformed = true;
+        if (source) {
+            _mouseEvent = event;
+        }
+        _isTransformed = true;
         _transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
         scheduleRedraw();
 
         dispatch.call('move', this, map);
 
-
-        function clamp(num, min, max) {
-            return Math.max(min, Math.min(num, max));
-        }
 
         function isInteger(val) {
             return typeof val === 'number' && isFinite(val) && Math.floor(val) === val;
@@ -530,12 +539,12 @@ export function rendererMap(context) {
 
 
     function resetTransform() {
-        if (!_transformed) return false;
+        if (!_isTransformed) return false;
 
         // deprecation warning - Radial Menu to be removed in iD v3
         surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
-        _transformed = false;
+        _isTransformed = false;
         if (context.inIntro()) {
             curtainProjection.transform(projection.transform());
         }
@@ -600,11 +609,11 @@ export function rendererMap(context) {
 
 
     map.mouse = function() {
-        var event = mousemove || d3_event;
+        var event = _mouseEvent || d3_event;
         if (event) {
             var s;
             while ((s = event.sourceEvent)) { event = s; }
-            return mouse(event);
+            return _getMouseCoords(event);
         }
         return null;
     };
@@ -617,22 +626,22 @@ export function rendererMap(context) {
     };
 
 
-    map.dblclickEnable = function(_) {
+    map.dblclickEnable = function(val) {
         if (!arguments.length) return _dblClickEnabled;
-        _dblClickEnabled = _;
+        _dblClickEnabled = val;
         return map;
     };
 
 
-    map.redrawEnable = function(_) {
+    map.redrawEnable = function(val) {
         if (!arguments.length) return _redrawEnabled;
-        _redrawEnabled = _;
+        _redrawEnabled = val;
         return map;
     };
 
 
     map.isTransformed = function() {
-        return _transformed;
+        return _isTransformed;
     };
 
 
@@ -663,7 +672,7 @@ export function rendererMap(context) {
 
         var proj = geoRawMercator().transform(projection.transform());  // copy projection
 
-        var k2 = Math.max(kMin, Math.min(kMax, geoZoomToScale(z2, TILESIZE)));
+        var k2 = clamp(geoZoomToScale(z2, TILESIZE), kMin, kMax);
         proj.scale(k2);
 
         var t = proj.translate();
@@ -702,13 +711,14 @@ export function rendererMap(context) {
     };
 
 
-    map.dimensions = function(_) {
-        if (!arguments.length) return dimensions;
-        dimensions = _;
-        drawLayers.dimensions(dimensions);
-        context.background().dimensions(dimensions);
-        projection.clipExtent([[0, 0], dimensions]);
-        mouse = utilFastMouse(supersurface.node());
+    map.dimensions = function(val) {
+        if (!arguments.length) return _dimensions;
+
+        _dimensions = val;
+        drawLayers.dimensions(_dimensions);
+        context.background().dimensions(_dimensions);
+        projection.clipExtent([[0, 0], _dimensions]);
+        _getMouseCoords = utilFastMouse(supersurface.node());
 
         scheduleRedraw();
         return map;
@@ -749,7 +759,7 @@ export function rendererMap(context) {
             return Math.max(geoScaleToZoom(projection.scale(), TILESIZE), 0);
         }
 
-        if (z2 < minzoom) {
+        if (z2 < _minzoom) {
             surface.interrupt();
             uiFlash().text(t('cannot_zoom'))();
             z2 = context.minEditableZoom();
@@ -764,16 +774,6 @@ export function rendererMap(context) {
     };
 
 
-    map.zoomTo = function(entity, zoomLimits) {
-        var extent = entity.extent(context.graph());
-        if (!isFinite(extent.area())) return;
-
-        var z2 = map.trimmedExtentZoom(extent);
-        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
-        map.centerZoom(extent.center(), Math.min(Math.max(z2, zoomLimits[0]), zoomLimits[1]));
-    };
-
-
     map.centerZoom = function(loc2, z2) {
         if (setCenterZoom(loc2, z2)) {
             dispatch.call('move', this, map);
@@ -781,6 +781,15 @@ export function rendererMap(context) {
 
         scheduleRedraw();
         return map;
+    };
+
+
+    map.zoomTo = function(entity) {
+        var extent = entity.extent(context.graph());
+        if (!isFinite(extent.area())) return map;
+
+        var z2 = clamp(map.trimmedExtentZoom(extent), context.minEditableZoom(), 20);
+        return map.centerZoom(extent.center(), z2);
     };
 
 
@@ -812,6 +821,15 @@ export function rendererMap(context) {
     };
 
 
+    map.zoomToEase = function(entity, duration) {
+        var extent = entity.extent(context.graph());
+        if (!isFinite(extent.area())) return map;
+
+        var z2 = clamp(map.trimmedExtentZoom(extent), context.minEditableZoom(), 20);
+        return map.centerZoomEase(extent.center(), z2, duration);
+    };
+
+
     map.startEase = function() {
         utilBindOnce(surface, 'mousedown.ease', function() {
             map.cancelEase();
@@ -826,36 +844,36 @@ export function rendererMap(context) {
     };
 
 
-    map.extent = function(_) {
+    map.extent = function(val) {
         if (!arguments.length) {
             return new geoExtent(
-                projection.invert([0, dimensions[1]]),
-                projection.invert([dimensions[0], 0])
+                projection.invert([0, _dimensions[1]]),
+                projection.invert([_dimensions[0], 0])
             );
         } else {
-            var extent = geoExtent(_);
+            var extent = geoExtent(val);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
 
 
-    map.trimmedExtent = function(_) {
+    map.trimmedExtent = function(val) {
         if (!arguments.length) {
             var headerY = 60;
             var footerY = 30;
             var pad = 10;
             return new geoExtent(
-                projection.invert([pad, dimensions[1] - footerY - pad]),
-                projection.invert([dimensions[0] - pad, headerY + pad])
+                projection.invert([pad, _dimensions[1] - footerY - pad]),
+                projection.invert([_dimensions[0] - pad, headerY + pad])
             );
         } else {
-            var extent = geoExtent(_);
+            var extent = geoExtent(val);
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
     };
 
 
-    function calcZoom(extent, dim) {
+    function calcExtentZoom(extent, dim) {
         var tl = projection([extent[0][0], extent[1][1]]);
         var br = projection([extent[1][0], extent[0][1]]);
 
@@ -870,16 +888,16 @@ export function rendererMap(context) {
     }
 
 
-    map.extentZoom = function(_) {
-        return calcZoom(geoExtent(_), dimensions);
+    map.extentZoom = function(val) {
+        return calcExtentZoom(geoExtent(val), _dimensions);
     };
 
 
-    map.trimmedExtentZoom = function(_) {
+    map.trimmedExtentZoom = function(val) {
         var trimY = 120;
         var trimX = 40;
-        var trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
-        return calcZoom(geoExtent(_), trimmed);
+        var trimmed = [_dimensions[0] - trimX, _dimensions[1] - trimY];
+        return calcExtentZoom(geoExtent(val), trimmed);
     };
 
 
@@ -899,9 +917,9 @@ export function rendererMap(context) {
     };
 
 
-    map.minzoom = function(_) {
-        if (!arguments.length) return minzoom;
-        minzoom = _;
+    map.minzoom = function(val) {
+        if (!arguments.length) return _minzoom;
+        _minzoom = val;
         return map;
     };
 

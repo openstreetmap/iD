@@ -7,6 +7,9 @@
         "fee",
         "service/bicycle"
     ],
+    "moreFields": [
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "vertex"

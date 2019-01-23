@@ -7,8 +7,15 @@
         "maxspeed",
         "surface",
         "structure",
-        "maxheight",
         "access"
+    ],
+    "moreFields": [
+        "covered",
+        "lanes",
+        "lit",
+        "maxheight",
+        "maxspeed/advisory",
+        "oneway/bicycle"
     ],
     "geometry": [
         "line"

@@ -688,9 +688,6 @@
                 "entrance": {
                     "label": "Տեսակ"
                 },
-                "fire_hydrant/type": {
-                    "label": "Տեսակ"
-                },
                 "gender": {
                     "placeholder": "Անյայտ"
                 },

@@ -3,7 +3,9 @@
     "fields": [
         "name",
         "operator",
-        "oneway"
+        "oneway",
+        "structure",
+        "covered"
     ],
     "geometry": [
         "line"

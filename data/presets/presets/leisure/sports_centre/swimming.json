@@ -1,12 +1,5 @@
 {
     "icon": "maki-swimming",
-    "fields": [
-        "name",
-        "access_simple",
-        "operator",
-        "address",
-        "building"
-    ],
     "geometry": [
         "point",
         "area"

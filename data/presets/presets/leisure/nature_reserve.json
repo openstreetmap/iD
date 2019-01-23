@@ -5,7 +5,17 @@
         "area"
     ],
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "dog",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "tags": {
         "leisure": "nature_reserve"

@@ -2,8 +2,7 @@
     "icon": "maki-shop",
     "fields": [
         "{shop}",
-    	"fuel_multi",
-        "building_area"
+        "fuel_multi"
     ],
     "geometry": [
         "point",

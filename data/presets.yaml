@@ -469,6 +469,15 @@ en:
       design:
         # design=*
         label: Design
+      destination/ref_oneway:
+        # 'destination:ref=*'
+        label: Destination Road Numbers
+      destination/symbol_oneway:
+        # 'destination:symbol=*'
+        label: Destination Symbols
+      destination_oneway:
+        # destination=*
+        label: Destinations
       devices:
         # devices=*
         label: Devices
@@ -551,6 +560,16 @@ en:
       dock:
         # dock=*
         label: Type
+      dog:
+        # dog=*
+        label: Dogs
+        options:
+          # dog=leashed
+          leashed: Leashed Only
+          # dog=no
+          'no': Not Allowed
+          # dog=yes
+          'yes': Allowed
       drive_through:
         # drive_through=*
         label: Drive-Through
@@ -648,6 +667,9 @@ en:
         # ford field placeholder
         placeholder: Default
       frequency:
+        # frequency=*
+        label: Operating Frequency
+      frequency_electrified:
         # frequency=*
         label: Operating Frequency
       from:
@@ -836,6 +858,9 @@ en:
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: SSID (Network Name)
+      junction/ref_oneway:
+        # 'junction:ref=*'
+        label: Junction Number
       kerb:
         # kerb=*
         label: Curb
@@ -978,6 +1003,11 @@ en:
       memorial:
         # memorial=*
         label: Type
+      minspeed:
+        # minspeed=*
+        label: Minimum Speed Limit
+        # minspeed field placeholder
+        placeholder: '20, 30, 40...'
       monitoring_multi:
         # 'monitoring:=*'
         label: Monitoring
@@ -1111,6 +1141,9 @@ en:
           undefined: Assumed to be No
           # oneway=yes
           'yes': 'Yes'
+      oneway/bicycle:
+        # 'oneway:bicycle=*'
+        label: One Way (Bicycles)
       oneway_yes:
         # oneway=*
         label: One Way
@@ -1856,9 +1889,6 @@ en:
       tourism:
         # tourism=*
         label: Type
-      tourism_attraction:
-        # tourism=*
-        label: Tourism
       tower/construction:
         # 'tower:construction=*'
         label: Construction
@@ -2022,6 +2052,9 @@ en:
       voltage/tertiary:
         # 'voltage:tertiary=*'
         label: Tertiary Voltage
+      voltage_electrified:
+        # voltage=*
+        label: Voltage
       wall:
         # wall=*
         label: Type
@@ -2338,7 +2371,7 @@ en:
       amenity/college:
         # amenity=college
         name: College Grounds
-        # 'terms: university'
+        # 'terms: university,undergraduate school'
         terms: '<translate with synonyms or related terms for ''College Grounds'', separated by commas>'
       amenity/community_centre:
         # amenity=community_centre
@@ -2872,7 +2905,7 @@ en:
       amenity/university:
         # amenity=university
         name: University Grounds
-        # 'terms: college'
+        # 'terms: college,graduate school,PhD program,master''s degree program'
         terms: '<translate with synonyms or related terms for ''University Grounds'', separated by commas>'
       amenity/vehicle_inspection:
         # amenity=vehicle_inspection
@@ -4479,7 +4512,7 @@ en:
       leisure/fitness_centre/yoga:
         # 'leisure=fitness_centre, sport=yoga'
         name: Yoga Studio
-        # 'terms: studio'
+        # 'terms: studio,asanas,modern yoga,meditation'
         terms: '<translate with synonyms or related terms for ''Yoga Studio'', separated by commas>'
       leisure/fitness_station:
         # leisure=fitness_station
@@ -5162,6 +5195,7 @@ en:
       office/estate_agent:
         # office=estate_agent
         name: Real Estate Office
+        # 'terms: real estate'
         terms: '<translate with synonyms or related terms for ''Real Estate Office'', separated by commas>'
       office/financial:
         # office=financial
@@ -6142,6 +6176,10 @@ en:
         name: Framing Shop
         # 'terms: art*,paint*,photo*,frame'
         terms: '<translate with synonyms or related terms for ''Framing Shop'', separated by commas>'
+      shop/frozen_food:
+        # shop=frozen_food
+        name: Frozen Food
+        terms: '<translate with synonyms or related terms for ''Frozen Food'', separated by commas>'
       shop/fuel:
         # shop=fuel
         name: Fuel Shop
@@ -6315,7 +6353,7 @@ en:
       shop/outdoor:
         # shop=outdoor
         name: Outdoors Store
-        # 'terms: camping,climbing,hiking'
+        # 'terms: camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies'
         terms: '<translate with synonyms or related terms for ''Outdoors Store'', separated by commas>'
       shop/paint:
         # shop=paint

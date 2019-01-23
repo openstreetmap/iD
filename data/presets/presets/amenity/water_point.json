@@ -1,5 +1,10 @@
 {
     "icon": "maki-drinking-water",
+    "fields": [
+        "operator",
+        "fee",
+        "payment_multi"
+    ],
     "geometry": [
         "area",
         "vertex",

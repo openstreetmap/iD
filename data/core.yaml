@@ -425,7 +425,9 @@ en:
     choose: Select feature type
     results: "{n} results for {search}"
     reference: View on OpenStreetMap Wiki
-    edit_reference: Edit or translate on OSM Wiki
+    edit_reference: Edit or translate description
+    wiki_reference: View documentation
+    wiki_en_reference: View documentation in English
     back_tooltip: Change feature
     remove: Remove
     search: Search
@@ -827,7 +829,7 @@ en:
           title: 'Unusual restriction angle'
           description: '{var1} has a restriction type "{var2}" but the angle is {var3} degrees. Maybe the restriction type is not appropriate?'
         297:
-          title: 'Wrong direction of to member'
+          title: 'Wrong direction of "to" way'
           description: '{var1} does not match the direction of "to" way {var2}.'
         298:
           title: 'Redundant restriction - oneway'

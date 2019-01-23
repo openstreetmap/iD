@@ -1,14 +1,10 @@
 {
     "icon": "temaki-trolleybus",
     "fields": [
-        "name",
-        "ref_platform",
-        "network",
-        "operator",
-        "surface",
-        "lit",
-        "bench",
-        "shelter"
+        "{public_transport/platform}"
+    ],
+    "moreFields": [
+        "{public_transport/platform}"
     ],
     "geometry": [
         "point",

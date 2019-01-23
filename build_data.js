@@ -5,6 +5,7 @@ const _forEach = requireESM('lodash-es/forEach').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
+const _filter = requireESM('lodash-es/filter').default;
 
 const colors = require('colors/safe');
 const fs = require('fs');
@@ -97,8 +98,14 @@ module.exports = function buildData() {
                 'data/presets/presets.json',
                 prettyStringify({ presets: presets }, { maxLength: 9999 })
             ),
-            writeFileProm('data/presets.yaml', translationsToYAML(translations)),
-            writeFileProm('data/taginfo.json', prettyStringify(taginfo), { maxLength: 9999 }),
+            writeFileProm(
+                'data/presets.yaml',
+                translationsToYAML(translations)
+            ),
+            writeFileProm(
+                'data/taginfo.json',
+                prettyStringify(taginfo, { maxLength: 9999 })
+            ),
             writeEnJson(tstrings),
             writeFaIcons(faIcons)
         ];
@@ -385,9 +392,10 @@ function generateTaginfo(presets, fields) {
 
     _forEach(fields, function(field) {
         var keys = field.keys || [ field.key ] || [];
+        var isRadio = (field.type === 'radio' || field.type === 'structureRadio');
 
         keys.forEach(function(key) {
-            if (field.strings && field.strings.options) {
+            if (field.strings && field.strings.options && !isRadio) {
                 var values = Object.keys(field.strings.options);
                 values.forEach(function(value) {
                     if (value === 'undefined' || value === '*' || value === '') return;
@@ -477,12 +485,15 @@ function validateCategoryPresets(categories, presets) {
 
 function validatePresetFields(presets, fields) {
     var betweenBracketsRegex = /([^{]*?)(?=\})/;
-    _forEach(presets, function(preset) {
+    var maxFieldsBeforeError = 12;
+    var maxFieldsBeforeWarning = 8;
+    for (var presetID in presets) {
+        var preset = presets[presetID];
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
-        fieldKeys.forEach(function(fieldsKey) {
+        for (var fieldsKey in fieldKeys) {
             if (preset[fieldsKey]) {
-                preset[fieldsKey].forEach(function(field) {
+                for (var field in preset[fieldsKey]) {
                     if (fields[field] === undefined) {
                         var regexResult = betweenBracketsRegex.exec(field);
                         if (regexResult) {
@@ -496,10 +507,34 @@ function validatePresetFields(presets, fields) {
                             process.exit(1);
                         }
                     }
-                });
+                }
             }
-        });
-    });
+        }
+
+        if (preset.fields) {
+            // since `moreFields` is available, check that `fields` doesn't get too cluttered
+            var fieldCount = preset.fields.length;
+
+            if (fieldCount > maxFieldsBeforeWarning) {
+                // Fields with `prerequisiteTag` probably won't show up initially,
+                // so don't count them against the limits.
+                var fieldsWithoutPrerequisites = _filter(preset.fields, function(fieldID) {
+                    if (fields[fieldID] && fields[fieldID].prerequisiteTag) {
+                        return false;
+                    }
+                    return true;
+                });
+                fieldCount = fieldsWithoutPrerequisites.length;
+            }
+            if (fieldCount > maxFieldsBeforeError) {
+                console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
+                process.exit(1);
+            }
+            else if (fieldCount > maxFieldsBeforeWarning) {
+                console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
+            }
+        }
+    }
 }
 
 function validateDefaults (defaults, categories, presets) {

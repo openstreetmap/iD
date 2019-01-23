@@ -310,7 +310,7 @@ export function uiConflicts(context) {
             if (extent) {
                 context.map().trimmedExtent(extent);
             } else {
-                context.map().zoomTo(entity);
+                context.map().zoomToEase(entity);
             }
             context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);

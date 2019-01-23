@@ -252,7 +252,6 @@
         "inspector": {
             "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tag ini",
             "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
-            "documentation_redirect": "Dokumen ini telah diarahkan ke halaman baru",
             "show_more": "Tampilkan Lainnya",
             "view_on_osm": "Lihat di openstreetmap.org",
             "all_fields": "Semua wilayah",
@@ -692,9 +691,7 @@
                     "label": "Biaya"
                 },
                 "fire_hydrant/type": {
-                    "label": "Tipe",
                     "options": {
-                        "pond": "Kolam",
                         "underground": "Bawah tanah",
                         "wall": "Tembok"
                     }
@@ -1188,10 +1185,6 @@
                 "amenity/parking_entrance": {
                     "name": "Pintu Masuk/Keluar Area Parkir"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apotek",
-                    "terms": "Farmasi"
-                },
                 "amenity/place_of_worship": {
                     "name": "Tempat Beribadah",
                     "terms": "Rumah Ibadah"
@@ -1199,17 +1192,6 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Kuil Buddha",
                     "terms": "Wihara"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Gereja"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "Yahudi"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Masjid",
-                    "terms": "Mesjid,Mushola,Langgar"
                 },
                 "amenity/police": {
                     "name": "Polisi",
@@ -1693,8 +1675,7 @@
                     "terms": "Guna Lahan"
                 },
                 "landuse/basin": {
-                    "name": "Cekungan",
-                    "terms": "Daerah Aliran Sungai"
+                    "name": "Cekungan"
                 },
                 "landuse/cemetery": {
                     "name": "Pemakaman",
@@ -1721,10 +1702,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Peternakan"
-                },
-                "landuse/forest": {
-                    "name": "Hutan",
-                    "terms": "Hutan Produksi"
                 },
                 "landuse/grass": {
                     "name": "Rumput",
@@ -2560,8 +2537,7 @@
                     "terms": "Kali"
                 },
                 "waterway/riverbank": {
-                    "name": "Tepi Sungai",
-                    "terms": "Pinggir Kali"
+                    "name": "Tepi Sungai"
                 },
                 "waterway/stream": {
                     "name": "Aliran"

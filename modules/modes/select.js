@@ -195,7 +195,7 @@ export function modeSelect(context, selectedIDs) {
     mode.zoomToSelected = function() {
         var entity = singular();
         if (entity) {
-            context.map().zoomTo(entity);
+            context.map().zoomToEase(entity);
         }
     };
 

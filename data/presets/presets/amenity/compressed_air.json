@@ -1,5 +1,11 @@
 {
     "icon": "maki-car",
+    "fields": [
+        "operator",
+        "fee",
+        "payment_multi",
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"

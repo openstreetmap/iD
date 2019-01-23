@@ -25,6 +25,8 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    var pane = d3_select(null);
+
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
@@ -543,6 +545,8 @@ export function uiMapData(context) {
             .append('div')
             .attr('class', 'data-layer-container')
             .merge(container);
+
+        updateDataLayers();
     }
 
 
@@ -554,6 +558,8 @@ export function uiMapData(context) {
             .append('ul')
             .attr('class', 'layer-list layer-fill-list')
             .merge(container);
+
+        updateFillList();
     }
 
 
@@ -565,22 +571,40 @@ export function uiMapData(context) {
             .append('ul')
             .attr('class', 'layer-list layer-feature-list')
             .merge(container);
+
+        updateFeatureList();
     }
 
-
-    function update() {
+    function updateDataLayers() {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawQAItems)
             .call(drawPhotoItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
+    }
 
+    function updateFillList() {
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
+    }
 
+    function updateFeatureList() {
         _featureList
             .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+    }
+
+    function update() {
+
+        if (!pane.select('.disclosure-wrap-data_layers').classed('hide')) {
+            updateDataLayers();
+        }
+        if (!pane.select('.disclosure-wrap-fill_area').classed('hide')) {
+            updateFillList();
+        }
+        if (!pane.select('.disclosure-wrap-map_features').classed('hide')) {
+            updateFeatureList();
+        }
 
         _QAList
             .call(drawListItems, ['keep-right'], 'checkbox', 'QA', function(d) { toggleLayer(d); }, showsQA);
@@ -649,7 +673,7 @@ export function uiMapData(context) {
         }
 
 
-        var pane = selection
+        pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 

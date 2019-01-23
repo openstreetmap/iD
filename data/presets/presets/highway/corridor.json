@@ -4,7 +4,11 @@
         "name",
         "width",
         "level",
-        "access_simple"
+        "access_simple",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "maxheight"
     ],
     "geometry": [
         "line"

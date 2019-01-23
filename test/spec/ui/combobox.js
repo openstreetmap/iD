@@ -18,7 +18,7 @@ describe('uiCombobox', function() {
         iD.d3.customEvent(happen.makeEvent({
             type: 'keydown',
             keyCode: keyCode
-        }), input.on('keydown.typeahead'));
+        }), input.on('keydown.combobox'));
 
         switch (key) {
             case '⇥':
@@ -80,7 +80,7 @@ describe('uiCombobox', function() {
 
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(happen.makeEvent('focus'), input.on('focus.typeahead'));
+        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combobox'));
     }
 
     it('adds the combobox-input class', function() {
@@ -90,7 +90,8 @@ describe('uiCombobox', function() {
 
     it('adds combobox under container', function() {
         input.call(combobox.data(data));
-        body.selectAll('.combobox-input').dispatch('mousedown');
+        focusTypeahead(input);
+        simulateKeypress('↓');
         expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
     });
 
@@ -106,15 +107,10 @@ describe('uiCombobox', function() {
 
     it('shows all entries when clicking on the caret', function() {
         input.property('value', 'foobar').call(combobox.data(data));
-        body.selectAll('.combobox-input').dispatch('mousedown');
+        focusTypeahead(input);
+        simulateKeypress('↓');
         expect(body.selectAll('.combobox-option').size()).to.equal(5);
         expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
-    });
-
-    it('is initially shown with no selection', function() {
-        input.call(combobox.data(data));
-        body.selectAll('.combobox-input').dispatch('mousedown');
-        expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
     it('selects the first option that matches the input', function() {
@@ -261,15 +257,15 @@ describe('uiCombobox', function() {
         simulateKeypress('↩');
     });
 
-    it('emits cancel event with selected datum on ⎋', function(done) {
-        combobox.on('cancel', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            done();
-        });
+    it('emits cancel event on ⎋', function() {
+        var spy = sinon.spy();
+        combobox.on('cancel', spy);
+
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⎋');
+        expect(spy).to.have.been.calledOnce;
     });
 
     it('hides on ↩', function() {

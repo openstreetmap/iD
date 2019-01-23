@@ -7,6 +7,11 @@
         "height"
     ],
     "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
         "seamark/type"
     ],
     "geometry": [

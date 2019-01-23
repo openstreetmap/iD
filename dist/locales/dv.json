@@ -255,11 +255,6 @@
                 "denomination": {
                     "label": "ދީން"
                 },
-                "fire_hydrant/type": {
-                    "options": {
-                        "pond": "ފެންގަނޑު"
-                    }
-                },
                 "generator/source": {
                     "label": "ޗާޓަށް މައުލޫމާތު ދިން ފަރާތް"
                 },
@@ -365,9 +360,6 @@
                 "amenity/place_of_worship": {
                     "name": "އަޅުކަންކުރާ ތަންތަން"
                 },
-                "amenity/place_of_worship/muslim": {
-                    "name": "މިސްކިތް"
-                },
                 "amenity/restaurant": {
                     "name": "ރެސްޓޯރަންޓް"
                 },
@@ -439,9 +431,6 @@
                 },
                 "landuse/farmland": {
                     "name": "ދަނޑުވެރި ސަރަޙައްދުތައް"
-                },
-                "landuse/forest": {
-                    "name": "ޖަންގަލި"
                 },
                 "landuse/grass": {
                     "name": "ވިނަގަނޑު"

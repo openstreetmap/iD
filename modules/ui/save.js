@@ -12,57 +12,61 @@ import { tooltip } from '../util/tooltip';
 export function uiSave(context) {
     var history = context.history();
     var key = uiCmd('⌘S');
-
-
-    function saving() {
-        var mode = context.mode();
-        return mode && mode.id === 'save';
-    }
-
-
-    function save() {
-        d3_event.preventDefault();
-        if (!context.inIntro() && !saving() && history.hasChanges()) {
-            context.enter(modeSave(context));
-        }
-    }
-
-
-    function getBackground(numChanges) {
-        var step;
-        if (numChanges === 0) {
-            return null;
-        } else if (numChanges <= 50) {
-            step = numChanges / 50;
-            return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
-        } else {
-            step = Math.min((numChanges - 50) / 50, 1.0);
-            return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
-        }
-    }
+    var _numChanges = 0;
 
 
     return function(selection) {
-        var numChanges = 0;
+
+
+        function isSaving() {
+            var mode = context.mode();
+            return mode && mode.id === 'save';
+        }
+
+
+        function isDisabled() {
+            return _numChanges === 0 || isSaving();
+        }
+
+
+        function save() {
+            d3_event.preventDefault();
+            if (!context.inIntro() && !isSaving() && history.hasChanges()) {
+                context.enter(modeSave(context));
+            }
+        }
+
+
+        function bgColor() {
+            var step;
+            if (_numChanges === 0) {
+                return null;
+            } else if (_numChanges <= 50) {
+                step = _numChanges / 50;
+                return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
+            } else {
+                step = Math.min((_numChanges - 50) / 50, 1.0);
+                return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
+            }
+        }
+
 
         function updateCount() {
-            var _ = history.difference().summary().length;
-            if (_ === numChanges) return;
-            numChanges = _;
+            var val = history.difference().summary().length;
+            if (val === _numChanges) return;
+            _numChanges = val;
 
             tooltipBehavior
                 .title(uiTooltipHtml(
-                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key)
+                    t(_numChanges > 0 ? 'save.help' : 'save.no_changes'), key)
                 );
 
-            var background = getBackground(numChanges);
-
             button
-                .classed('disabled', numChanges === 0)
-                .style('background', background);
+                .classed('disabled', isDisabled())
+                .style('background', bgColor(_numChanges));
 
             button.select('span.count')
-                .text(numChanges);
+                .text(_numChanges);
         }
 
 
@@ -102,8 +106,12 @@ export function uiSave(context) {
 
         context
             .on('enter.save', function() {
-                button.property('disabled', saving());
-                if (saving()) button.call(tooltipBehavior.hide);
+                button
+                    .classed('disabled', isDisabled());
+
+                if (isSaving()) {
+                    button.call(tooltipBehavior.hide);
+                }
             });
     };
 }

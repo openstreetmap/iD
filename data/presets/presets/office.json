@@ -8,8 +8,13 @@
         "opening_hours"
     ],
     "moreFields": [
+        "operator",
         "smoking",
-        "operator"
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -5,12 +5,20 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours",
         "internet_access",
         "internet_access/fee",
-        "internet_access/ssid",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "opening_hours",
         "smoking",
-        "outdoor_seating"
+        "outdoor_seating",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

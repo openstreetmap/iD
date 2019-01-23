@@ -157,9 +157,10 @@ export function uiEntityEditor(context) {
                 .preset(_activePreset)
             );
 
+        // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
         var label = body.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(_activePreset.name().split(' - '), function(d) { return d; });
+            .data(_activePreset.name().split(' – '), function(d) { return d; });
 
         nameparts.exit()
             .remove();

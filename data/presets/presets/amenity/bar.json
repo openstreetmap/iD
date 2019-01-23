@@ -2,13 +2,20 @@
     "icon": "maki-bar",
     "fields": [
         "name",
-        "operator",
         "address",
         "building_area",
-        "opening_hours",
-        "smoking",
         "outdoor_seating",
         "brewery"
+    ],
+    "moreFields": [
+        "smoking",
+        "opening_hours",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

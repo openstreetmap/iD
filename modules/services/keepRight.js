@@ -41,13 +41,13 @@ function abortRequest(i) {
 }
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflight, function(v, k) {
+    _forEach(cache.inflightTile, function(v, k) {
         var wanted = _find(tiles, function(tile) {
             return k === tile.id;
         });
         if (!wanted) {
             abortRequest(v);
-            delete cache.inflight[k];
+            delete cache.inflightTile[k];
         }
     });
 }
@@ -279,12 +279,13 @@ export default {
 
     reset: function() {
         if (_krCache) {
-            _forEach(_krCache.inflight, abortRequest);
+            _forEach(_krCache.inflightTile, abortRequest);
         }
         _krCache = {
             data: {},
-            loaded: {},
-            inflight: {},
+            loadedTile: {},
+            inflightTile: {},
+            inflightPost: {},
             closed: {},
             rtree: rbush()
         };
@@ -306,18 +307,18 @@ export default {
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (_krCache.loaded[tile.id] || _krCache.inflight[tile.id]) return;
+            if (_krCache.loadedTile[tile.id] || _krCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle();
             var params = _extend({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
             var url = _krUrlRoot + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
-            _krCache.inflight[tile.id] = d3_json(url,
+            _krCache.inflightTile[tile.id] = d3_json(url,
                 function(err, data) {
-                    delete _krCache.inflight[tile.id];
+                    delete _krCache.inflightTile[tile.id];
 
                     if (err) return;
-                    _krCache.loaded[tile.id] = true;
+                    _krCache.loadedTile[tile.id] = true;
 
                     if (!data.features || !data.features.length) return;
 
@@ -404,7 +405,7 @@ export default {
 
 
     postKeepRightUpdate: function(d, callback) {
-        if (_krCache.inflight[d.id]) {
+        if (_krCache.inflightPost[d.id]) {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
@@ -421,9 +422,9 @@ export default {
         // NOTE: This throws a CORS err, but it seems successful.
         // We don't care too much about the response, so this is fine.
         var url = _krUrlRoot + 'comment.php?' + utilQsString(params);
-        _krCache.inflight[d.id] = d3_request(url)
+        _krCache.inflightPost[d.id] = d3_request(url)
             .post(function(err) {
-                delete _krCache.inflight[d.id];
+                delete _krCache.inflightPost[d.id];
 
                 if (d.state === 'ignore') {   // ignore permanently (false positive)
                     that.removeError(d);

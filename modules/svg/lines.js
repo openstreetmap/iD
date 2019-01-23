@@ -210,14 +210,16 @@ export function svgLines(projection, context) {
                 function shouldReverse(entity) { return entity.tags.oneway === '-1'; },
                 function bothDirections(entity) {
                     return entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating';
-                });
+                }
+            );
             onewaydata[k] = _flatten(_map(onewayArr, onewaySegments));
 
             var sidedArr = _filter(v, function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
                 projection, graph, 30,
                 function shouldReverse() { return false; },
-                function bothDirections() { return false; });
+                function bothDirections() { return false; }
+            );
             sideddata[k] = _flatten(_map(sidedArr, sidedSegments));
         });
 
@@ -261,10 +263,11 @@ export function svgLines(projection, context) {
 
             addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#oneway-marker)');
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
-                       function marker(d) {
-                           var category = graph.entity(d.id).sidednessIdentifier();
-                           return 'url(#sided-marker-' + category + ')';
-                       });
+                function marker(d) {
+                    var category = graph.entity(d.id).sidednessIdentifier();
+                    return 'url(#sided-marker-' + category + ')';
+                }
+            );
         });
 
         // Draw touch targets..

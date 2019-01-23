@@ -5,7 +5,9 @@
             "information": "מידע",
             "remove": "הסרה",
             "undo": "ביטול",
-            "zoom_to": "התקרבות"
+            "zoom_to": "התקרבות",
+            "copy": "עותק",
+            "open_wikidata": "פתח בwikidata.org"
         },
         "modes": {
             "add_area": {
@@ -153,6 +155,22 @@
                 "annotation": "חבר הוסר מהיחס."
             },
             "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "מחובר לנקודה.",
+                        "to_vertex": "חיבור דרך לאחר",
+                        "to_line": "חיבור לקו",
+                        "to_area": "חיבור לשטח",
+                        "to_adjacent_vertex": "חיבור נקודות לדרך",
+                        "to_sibling_vertex": "דרך מחובר לעצמו"
+                    },
+                    "from_point": {
+                        "to_point": "חיבור קו לאחר",
+                        "to_vertex": "חיבור נקודה לנקודה על דרך",
+                        "to_line": "חיבור נקודה לקו",
+                        "to_area": "חבור קו לשטח"
+                    }
+                },
                 "relation": "לא ניתן לחבר תכונות אלה כיוון שיש להן תפקידים סותרים ביחס.",
                 "restriction": "לא ניתן לחבר תכונות אלה כיוון שזה עשוי להרוס יחס מסוג „{relation}”."
             },
@@ -357,6 +375,7 @@
         "browser_notice": "עורך זה נתמך ב־Firefox,‏ Chrome,‏ Safari,‏ Opera ו־Internet Explorer 11 ומעלה. נא לשדרג את הדפדפן שלך או להשתמש ב־Potlatch 2 כדי לערוך את המפה.",
         "translate": {
             "translate": "תרגום",
+            "localized_translation_label": "שם רב־לשוני",
             "localized_translation_language": "בחירת שפה",
             "localized_translation_name": "שם"
         },
@@ -366,6 +385,10 @@
         "loading_auth": "מתבצעת התחברות ל־OpenStreetMap…",
         "report_a_bug": "דיווח על תקלה",
         "help_translate": "עזרה בתרגום",
+        "sidebar": {
+            "key": "  ",
+            "tooltip": "פתיחה/סגירה של חלונית צד."
+        },
         "feature_info": {
             "hidden_warning": "{count} תכונות נסתרות",
             "hidden_details": "התכונות האלו מוסתרות כרגע: {details}"
@@ -385,6 +408,7 @@
             "cancel": "ביטול",
             "changes": "{count} שינויים",
             "download_changes": "הורדת קובץ osmChange",
+            "errors": "שגיאות",
             "warnings": "אזהרות",
             "modified": "השתנה",
             "deleted": "נמחק",
@@ -473,20 +497,32 @@
             "locating": "בטעינה, נא להמתין…"
         },
         "inspector": {
+            "zoom_to": {
+                "key": "ק",
+                "title": "התקרבות לזה",
+                "tooltip_feature": "יש למרכז ולהתקרב למפה כדי להתמקד על התכונה הזו.",
+                "tooltip_note": "יש למרכז ולהתקרב למפה כדי להתמקד על הפתק הזה.",
+                "tooltip_data": "יש למרכז ולהתקרב למפה כדי להתמקד על הנתונים האלה.",
+                "tooltip_issue": "יש למרכז ולהתקרב למפה כדי להתמקד על התקלה הזו."
+            },
             "no_documentation_combination": "אין תיעוד זמין לצירוף תגיות זה",
             "no_documentation_key": "אין תיעוד זמין למפתח זה",
-            "documentation_redirect": "תיעוד זה הופנה לעמוד חדש",
             "show_more": "הצגת עוד",
             "view_on_osm": "הצגה ב־openstreetmap.org",
+            "view_on_keepRight": "הצגה ב־keepright.at",
             "all_fields": "כל השדות",
             "all_tags": "כל התגיות",
             "all_members": "כל החברים",
             "all_relations": "כל היחסים",
             "new_relation": "יחס חדש…",
+            "choose_relation": "בחר יחס-על",
             "role": "תפקיד",
             "choose": "בחירת סוג תכונה",
             "results": "{n} תוצאות לחיפוש {search}",
             "reference": "הצגה בוויקי של OpenStreetMap",
+            "edit_reference": "עריכה או תרגום התיאור",
+            "wiki_reference": "הצגת התיעוד",
+            "wiki_en_reference": "הצגת התיעוד באנגלית",
             "back_tooltip": "שינוי תכונה",
             "remove": "הסרה",
             "search": "חיפוש",
@@ -513,7 +549,10 @@
             "way": "דרך",
             "relation": "יחס",
             "location": "מיקום",
-            "add_fields": "הוספת שדה:"
+            "add_fields": "הוספת שדה:",
+            "lock": {
+                "suggestion": "ה \"{label}\" הוא ערך נעול כי יש תג Wikidata. אתה יכול למחוק או לערוך את התג ב\"All tags\" "
+            }
         },
         "background": {
             "title": "רקע",
@@ -553,6 +592,10 @@
                 "notes": {
                     "tooltip": "נתוני הערה מ־OpenStreetMap",
                     "title": "הערות OpenStreetMap"
+                },
+                "keepRight": {
+                    "tooltip": "התגלו תקלות מפה אוטומטית דרך keepright.at",
+                    "title": "תקלות KeepRight"
                 },
                 "custom": {
                     "tooltip": "ניתן לגרור ולהשליך קובץ נתונים לעמוד או ללחוץ על הכפתור כדי להגדיר",
@@ -734,6 +777,8 @@
         "validations": {
             "disconnected_highway": "דרך ראשית מנותקת",
             "disconnected_highway_tooltip": "דרכים אמורות להיות מחוברות לדרכים אחרות או לכניסות לבניינים.",
+            "generic_name": "שם גנרי אפשרי",
+            "generic_name_tooltip": "נראה כי לתכונה זו יש שם גנרי „{name}”. נא להשתמש בשדה השם כדי לתעד את השם הרשמי של התכונה.",
             "old_multipolygon": "תגיות מסוג רב־מצולע בדרך החיצונית",
             "old_multipolygon_tooltip": "השימוש בסגנון רב־מצולע זה הופסק. נא להקצות את התג לרב־מצולע ההורה במקום לדרך החיצונית.",
             "untagged_point": "נקודה ללא תיוג",
@@ -754,6 +799,85 @@
         },
         "cannot_zoom": "לא ניתן להתקרב יותר במצב הנוכחי.",
         "full_screen": "החלפת מצב מסך מלא",
+        "QA": {
+            "keepRight": {
+                "title": "שגיאת KeepRight",
+                "detail_title": "שגיאה",
+                "detail_description": "תיאור",
+                "comment": "תגובה",
+                "comment_placeholder": "נא להקליד תגובה לשיתוף עם משתמשים אחרים.",
+                "close": "סגירה (השגיאה תוקנה)",
+                "ignore": "התעלמות (לא שגיאה)",
+                "save_comment": "שמירת תגובה",
+                "close_comment": "סגירה והוספת תגובה",
+                "ignore_comment": "התעלמות והוספת תגובה",
+                "error_parts": {
+                    "highway": "כביש בין־עירוני",
+                    "railway": "מסילת רכבת",
+                    "waterway": "נתיב מים",
+                    "riverbank": "גדות נהר",
+                    "place_of_worship": "בית תפילה",
+                    "pub": "פאב",
+                    "restaurant": "מסעדה",
+                    "school": "בית ספר",
+                    "university": "אוניברסיטה",
+                    "hospital": "בית חולים",
+                    "library": "ספרייה",
+                    "theatre": "תיאטרון",
+                    "courthouse": "בית משפט",
+                    "bank": "בנק",
+                    "cinema": "קולנוע",
+                    "pharmacy": "בית מרקחת",
+                    "cafe": "בית קפה",
+                    "fast_food": "מזון מהיר",
+                    "fuel": "דלק",
+                    "left_hand": "מצד שמאל",
+                    "right_hand": "מצד ימין"
+                },
+                "errorTypes": {
+                    "130": {
+                        "title": "דרך מנותקת",
+                        "description": "{var1} אינה מחוברת לשאר המפה."
+                    },
+                    "180": {
+                        "title": "יחס ללא סוג",
+                        "description": "ל־{var1} חסרה תגית „סוג” (type)."
+                    },
+                    "190": {
+                        "title": "מפגש ללא צומת"
+                    },
+                    "312": {
+                        "title": "כיוון הכיכר שגוי",
+                        "description": "אם {var1} היא מדינה עם תנועה לכיוון {var2} אז הכיוון שלה הוא הפוך."
+                    },
+                    "313": {
+                        "title": "חיבור הכיכר תלוש מעט",
+                        "description": "ל־{var1} יש רק {var2} דרכים אחרות מחוברות. לכיכרות יש בדרך כלל 3 או יותר."
+                    },
+                    "401": {
+                        "title": "חסרה הגבלת פנייה",
+                        "description": "הדרכים {var1} ו{var2} מצטרפות בזווית חדה מאוד בנקודה הזו ואין תגית חד־כיווניות או הגבלת פנייה שמונעת פנייה ביניהן."
+                    },
+                    "402": {
+                        "title": "זווית בלתי אפשרית",
+                        "description": "{var1} מתכופף בזווית חדה מאוד בנקודה הזו."
+                    },
+                    "410": {
+                        "title": "תקלה באתר",
+                        "description": "יש תקלה בלתי מוסברת עם אתר או כתובת ליצירת קשר."
+                    },
+                    "411": {
+                        "description": "ל־{var1} יש כתובת שתוקפה פג: {var2} החזירה את קוד מצב HTTP הבא: {var3}."
+                    },
+                    "412": {
+                        "description": "ל־{var1} יש כתובת שתוקפה פג: {var2} הכילה טקסט חשוד „{var3}”."
+                    },
+                    "413": {
+                        "description": "ל־{var1} יש כתובת שתוקפה פג: {var2} לא הכילה את מילות המפתח „{var3}’."
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "תמונות של Streetside מבית Microsoft",
             "title": "שכבת תמונות (Bing Streetside)",
@@ -980,6 +1104,10 @@
                 "using": "כדי להשתמש בעקבות GPS לטובת מיפוי, יש לגרור ולשחרר את קובץ הנתונים לעורך המפות. אם הקובץ יזוהה, הוא יצויר על המפה בקו סגול בהיר. יש ללחוץ על חלונית {data} **נתוני המפה** לצד המפה כדי להפעיל, להשבית או לקרב את התצוגה אל נתוני ה־GPS שלך.",
                 "tracing": "מסלול ה־GPS לא נשלח אל OpenStreetMap - הדרך הטובה ביותר להשתמש בו היא לצייר על המפה, תוך שימוש במסלול כהנחיה להוספת תכונות חדשות.",
                 "upload": "באפשרותך [להעלות את נתוני ה־GPS שלך ל־OpenStreetMap](https://www.openstreetmap.org/trace/create) לטובת משתמשים אחרים."
+            },
+            "qa": {
+                "title": "אבטחת איכות",
+                "tools_h": "כלים"
             },
             "field": {
                 "restrictions": {
@@ -1318,6 +1446,7 @@
                     "background_switch": "חזרה לרקע האחרון",
                     "map_data": "הצגת אפשרויות נתוני מפה",
                     "fullscreen": "כניסה למצב מסך מלא",
+                    "sidebar": "פתיחה/סגירה של חלונית צד",
                     "wireframe": "החלפת מצב גבול דקיק",
                     "minimap": "החלפת תצוגת מפה מוקטנת"
                 },
@@ -1411,6 +1540,11 @@
             "west": "מע׳",
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "identifier": "מזהה",
+            "label": "תווית",
+            "description": "תיאור"
         },
         "presets": {
             "categories": {
@@ -1615,10 +1749,16 @@
                 "atm": {
                     "label": "כספומט"
                 },
+                "attraction": {
+                    "label": "סוג"
+                },
                 "backrest": {
                     "label": "משענת"
                 },
                 "barrier": {
+                    "label": "סוג"
+                },
+                "basin": {
                     "label": "סוג"
                 },
                 "bath/open_air": {
@@ -1636,7 +1776,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "סוג החנות"
+                    "label": "התמחות יופי"
                 },
                 "bench": {
                     "label": "ספסל"
@@ -1684,6 +1824,9 @@
                 "building": {
                     "label": "בניין"
                 },
+                "building/material": {
+                    "label": "חומר"
+                },
                 "building_area": {
                     "label": "בניין"
                 },
@@ -1718,6 +1861,9 @@
                 },
                 "castle_type": {
                     "label": "סוג"
+                },
+                "check_date": {
+                    "label": "תאריך הבדיקה האחרונה"
                 },
                 "clothes": {
                     "label": "ביגוד"
@@ -1758,6 +1904,10 @@
                 },
                 "country": {
                     "label": "מדינה"
+                },
+                "couplings": {
+                    "label": "מחברים",
+                    "placeholder": "1, 2, 3…"
                 },
                 "covered": {
                     "label": "מכוסה"
@@ -1851,12 +2001,24 @@
                 "design": {
                     "label": "עיצוב"
                 },
+                "destination/ref_oneway": {
+                    "label": "מספרי כבישי יעד"
+                },
+                "destination/symbol_oneway": {
+                    "label": "סימוני יעד"
+                },
+                "destination_oneway": {
+                    "label": "יעדים"
+                },
                 "devices": {
                     "label": "התקנים",
                     "placeholder": "1, 2, 3…"
                 },
                 "diaper": {
                     "label": "יש החלפת חיתולים"
+                },
+                "diet_multi": {
+                    "label": "סוגי תזונה"
                 },
                 "direction": {
                     "label": "כיוון (מעלות עם כיוון השעון)",
@@ -1910,6 +2072,14 @@
                 "dock": {
                     "label": "סוג"
                 },
+                "dog": {
+                    "label": "כלבים",
+                    "options": {
+                        "leashed": "עם רצועה בלבד",
+                        "no": "אסור",
+                        "yes": "מותר"
+                    }
+                },
                 "drive_through": {
                     "label": "הזמנה-דרך-אשנב"
                 },
@@ -1941,6 +2111,9 @@
                 "emergency": {
                     "label": "חירום"
                 },
+                "enforcement": {
+                    "label": "סוג"
+                },
                 "entrance": {
                     "label": "סוג"
                 },
@@ -1960,20 +2133,17 @@
                 "fence_type": {
                     "label": "סוג"
                 },
-                "fire_hydrant/position": {
-                    "label": "מיקום",
-                    "options": {
-                        "green": "ירוק",
-                        "lane": "נתיב",
-                        "parking_lot": "מגרש חנייה",
-                        "sidewalk": "מדרכה"
-                    }
+                "fire_hydrant/diameter": {
+                    "label": "קוטר (מ״מ, אינ׳ או אותיות)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "לחץ (בר)"
                 },
                 "fire_hydrant/type": {
-                    "label": "סוג",
+                    "label": "צורה",
                     "options": {
                         "pillar": "עמוד/מעל האדמה",
-                        "pond": "בריכת דגים/נוי",
+                        "pipe": "צינור אטום",
                         "underground": "תת־קרקעי",
                         "wall": "קיר"
                     }
@@ -1995,6 +2165,9 @@
                     "placeholder": "בררת מחדל"
                 },
                 "frequency": {
+                    "label": "תדירות הפעלה"
+                },
+                "frequency_electrified": {
                     "label": "תדירות הפעלה"
                 },
                 "fuel": {
@@ -2140,6 +2313,9 @@
                 "intermittent": {
                     "label": "תקופתי"
                 },
+                "intermittent_yes": {
+                    "label": "לסירוגין"
+                },
                 "internet_access": {
                     "label": "גישה לאינטרנט",
                     "options": {
@@ -2155,6 +2331,9 @@
                 },
                 "internet_access/ssid": {
                     "label": "SSID (שם הרשת)"
+                },
+                "junction/ref_oneway": {
+                    "label": "מספר צומת"
                 },
                 "kerb": {
                     "label": "שפת מדרכה"
@@ -2225,7 +2404,7 @@
                     "label": "רמה"
                 },
                 "levels": {
-                    "label": "רמות",
+                    "label": "קומות",
                     "placeholder": "2, 4, 6"
                 },
                 "lit": {
@@ -2277,6 +2456,10 @@
                 },
                 "memorial": {
                     "label": "סוג"
+                },
+                "minspeed": {
+                    "label": "מגבלת מהירות מזערית",
+                    "placeholder": "20, 30, 40…"
                 },
                 "monitoring_multi": {
                     "label": "פיקוח"
@@ -2376,6 +2559,9 @@
                         "yes": "כן"
                     }
                 },
+                "oneway/bicycle": {
+                    "label": "חד־סטרי (אופניים)"
+                },
                 "oneway_yes": {
                     "label": "חד־סטרי",
                     "options": {
@@ -2385,6 +2571,9 @@
                         "undefined": "כנראה שכן",
                         "yes": "כן"
                     }
+                },
+                "opening_date": {
+                    "label": "מועד הפתיחה הצפוי"
                 },
                 "opening_hours": {
                     "label": "שעות"
@@ -2664,6 +2853,9 @@
                 "sanitary_dump_station": {
                     "label": "תחנת סילוק"
                 },
+                "scuba_diving": {
+                    "label": "שירותים"
+                },
                 "seamark/beacon_isolated_danger/shape": {
                     "label": "צורה"
                 },
@@ -2923,6 +3115,9 @@
                 "surveillance/zone": {
                     "label": "אזור מעקב"
                 },
+                "survey/date": {
+                    "label": "תאריך התשאול האחרון"
+                },
                 "swimming_pool": {
                     "label": "סוג"
                 },
@@ -2964,9 +3159,6 @@
                 },
                 "tourism": {
                     "label": "סוג"
-                },
-                "tourism_attraction": {
-                    "label": "תיירות"
                 },
                 "tower/construction": {
                     "label": "בנייה",
@@ -3096,6 +3288,9 @@
                 "voltage/tertiary": {
                     "label": "מתח גיבוי"
                 },
+                "voltage_electrified": {
+                    "label": "מתח"
+                },
                 "wall": {
                     "label": "סוג"
                 },
@@ -3104,6 +3299,12 @@
                 },
                 "water_point": {
                     "label": "נקודת מים"
+                },
+                "water_source": {
+                    "label": "מקור מים"
+                },
+                "water_volume": {
+                    "label": "נפח מצבור מים (מ״ק)"
                 },
                 "waterway": {
                     "label": "סוג"
@@ -3123,6 +3324,9 @@
                 },
                 "width": {
                     "label": "רוחב (מטרים)"
+                },
+                "wikidata": {
+                    "label": "ויקינתונים"
                 },
                 "wikipedia": {
                     "label": "ויקיפדיה"
@@ -3391,6 +3595,10 @@
                     "name": "מרפאת שיניים",
                     "terms": "רופא שיניים, רופאת שיניים"
                 },
+                "amenity/dive_centre": {
+                    "name": "מרכז צלילה",
+                    "terms": "צלילה,צוללנים,מועדון צלילה"
+                },
                 "amenity/doctors": {
                     "name": "רופא",
                     "terms": "רופאה"
@@ -3414,6 +3622,28 @@
                 "amenity/fast_food": {
                     "name": "מזון מהיר",
                     "terms": "פאסט פוד"
+                },
+                "amenity/fast_food/burger": {
+                    "name": "מזון מהיר המבורגר"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "מזון מהיר עוף"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "מזון מהיר פיש אנד צ׳יפס",
+                    "terms": "אוכל בריטי,אוכל אנגלי,מטוגן,מטוגנים,דגים,טוגנים,צ׳יפס,תפוח אדמה,תפוד,תפו״ד,תפו\"ד"
+                },
+                "amenity/fast_food/kebab": {
+                    "name": "מזון מהיר קבב",
+                    "terms": "שווארמה,קבב,שיפודים,על האש,מנגל,בשרים"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "מזון מהיר פיצה",
+                    "terms": "פיצה,איטלקי,גבינה,עגבניות,קראסט,חתיכה"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "מזון מהיר סנדוויץ׳",
+                    "terms": "כריך,סנדוויץ׳,סנדוויץ'"
                 },
                 "amenity/ferry_terminal": {
                     "name": "מסוף מעבורת"
@@ -3482,6 +3712,9 @@
                     "name": "מתחם מנזר",
                     "terms": "גני מנזר,שטחי מנזר"
                 },
+                "amenity/money_transfer": {
+                    "name": "תחנת העברת כספים"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "חניית אופנועים",
                     "terms": "חניית אופנועים"
@@ -3513,9 +3746,14 @@
                     "name": "אזור חניה",
                     "terms": "אזור חניה"
                 },
+                "amenity/payment_centre": {
+                    "name": "מרכז תשלום"
+                },
+                "amenity/payment_terminal": {
+                    "name": "מסוף תשלום"
+                },
                 "amenity/pharmacy": {
-                    "name": "בית מרקחת",
-                    "terms": "סופר פארם, פארמה, ניופארם"
+                    "name": "דלפק בית מרקחת"
                 },
                 "amenity/place_of_worship": {
                     "name": "בית תפילה",
@@ -3526,20 +3764,19 @@
                     "terms": "מקדש בודהיסטי"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "כנסייה",
-                    "terms": "כנסייה"
+                    "name": "כנסייה נוצרית"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "מקדש הינדו",
                     "terms": "מקדש  הינדואיסטי"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "בית כנסת",
-                    "terms": "בית כנסת"
+                    "name": "בית כנסת יהודי",
+                    "terms": "בית כנסת,מדרש,ארון קודש,יהדות"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "מסגד",
-                    "terms": "מסגד"
+                    "name": "מסגד מוסלמי",
+                    "terms": "מואזין"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "מקדש שינטו",
@@ -3606,6 +3843,62 @@
                 "amenity/restaurant": {
                     "name": "מסעדה",
                     "terms": "מסעדה"
+                },
+                "amenity/restaurant/american": {
+                    "name": "מסעדה אמריקאית",
+                    "terms": "דיינר,גריל,פנקייק"
+                },
+                "amenity/restaurant/asian": {
+                    "name": "מסעדה אסייתית",
+                    "terms": "מסעדה אסיאתית,מסעדה אסיתית,מסעדה סינית,מסעדה יפנית,סושי,פאד תאי,מוקפץ"
+                },
+                "amenity/restaurant/chinese": {
+                    "name": "מסעדה סינית"
+                },
+                "amenity/restaurant/french": {
+                    "name": "מסעדה צרפתית"
+                },
+                "amenity/restaurant/german": {
+                    "name": "מסעדה גרמנית"
+                },
+                "amenity/restaurant/greek": {
+                    "name": "מסעדה יוונית"
+                },
+                "amenity/restaurant/indian": {
+                    "name": "מסעדה הודית"
+                },
+                "amenity/restaurant/italian": {
+                    "name": "מסעדה איטלקית"
+                },
+                "amenity/restaurant/japanese": {
+                    "name": "מסעדה יפנית"
+                },
+                "amenity/restaurant/mexican": {
+                    "name": "מסעדה מקסיקנית"
+                },
+                "amenity/restaurant/noodle": {
+                    "name": "מסעדת אטריות"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "מסעדת פיצה"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "מסעדת פרות ים"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "בית סטייק"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "מסעדת סושי"
+                },
+                "amenity/restaurant/thai": {
+                    "name": "מסעדה תאילנדית"
+                },
+                "amenity/restaurant/turkish": {
+                    "name": "מסעדת טורקית"
+                },
+                "amenity/restaurant/vietnamese": {
+                    "name": "מסעדה וייטנאמית"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "תחנת סילוק שפכים מקרוונים",
@@ -3700,6 +3993,9 @@
                 "amenity/university": {
                     "name": "מתחם אוניברסיטה",
                     "terms": "שטחי אוניברסיטה,מרחב אוניברסיטה,אזור אוניברסיטה"
+                },
+                "amenity/vehicle_inspection": {
+                    "name": "בדיקת כלי רכב"
                 },
                 "amenity/vending_machine": {
                     "name": "מכונת ממכר",
@@ -3816,6 +4112,9 @@
                     "name": "משטח כביש",
                     "terms": "משטח כביש"
                 },
+                "attraction": {
+                    "name": "אטרקציה"
+                },
                 "attraction/amusement_ride": {
                     "name": "מתקן שעשועים",
                     "terms": "מתקן שעשועים"
@@ -3864,6 +4163,9 @@
                     "name": "רכבת הרים",
                     "terms": "רכבת הרים"
                 },
+                "attraction/summer_toboggan": {
+                    "name": "מגלשת הרים"
+                },
                 "attraction/train": {
                     "name": "רכבת תיירים",
                     "terms": "רכבת תיירים"
@@ -3911,9 +4213,15 @@
                     "name": "גדר",
                     "terms": "גדר"
                 },
+                "barrier/fence/railing": {
+                    "name": "מעקה"
+                },
                 "barrier/gate": {
                     "name": "שער",
                     "terms": "שער"
+                },
+                "barrier/guard_rail": {
+                    "name": "מעקה בטיחות"
                 },
                 "barrier/hedge": {
                     "name": "גדר חיה",
@@ -3922,6 +4230,9 @@
                 "barrier/kerb": {
                     "name": "שפת מדרכה",
                     "terms": "שפת המדרכה,אבני השפה,מדרכה,אבני שפה"
+                },
+                "barrier/kerb/flush": {
+                    "name": "אבן שפה משופעת"
                 },
                 "barrier/kerb/lowered": {
                     "name": "שפת מדרכה מונמכת",
@@ -3966,6 +4277,9 @@
                 "building": {
                     "name": "בניין",
                     "terms": "בניין"
+                },
+                "building/apartments": {
+                    "name": "בניין דירות"
                 },
                 "building/barn": {
                     "name": "אסם",
@@ -4166,6 +4480,9 @@
                 "club": {
                     "name": "מועדון",
                     "terms": "מועדון"
+                },
+                "club/sport": {
+                    "name": "מועדון ספורט"
                 },
                 "craft": {
                     "name": "מלאכה",
@@ -4550,6 +4867,9 @@
                 "highway/bus_stop": {
                     "name": "תחנת אוטובוס / רציף"
                 },
+                "highway/construction": {
+                    "name": "כביש סגור"
+                },
                 "highway/corridor": {
                     "name": "מסדרון",
                     "terms": "מסדרון"
@@ -4847,8 +5167,7 @@
                     "terms": "דיג,דגה,דייגים"
                 },
                 "landuse/basin": {
-                    "name": "מאגר",
-                    "terms": "מקווה"
+                    "name": "מאגר"
                 },
                 "landuse/brownfield": {
                     "name": "קרקע מזוהמת",
@@ -4882,8 +5201,7 @@
                     "terms": "חצר חקלאית"
                 },
                 "landuse/forest": {
-                    "name": "יער נטוע",
-                    "terms": "יער"
+                    "name": "יער מנוהל"
                 },
                 "landuse/garages": {
                     "name": "אזור אחסון",
@@ -4981,6 +5299,9 @@
                     "name": "משתלה",
                     "terms": "משתלה"
                 },
+                "landuse/pond": {
+                    "name": "בריכת דגים/נוי"
+                },
                 "landuse/quarry": {
                     "name": "מחצבה",
                     "terms": "מחצבה"
@@ -4997,9 +5318,15 @@
                     "name": "אזור דתי",
                     "terms": "אזור דתי,שטח דתי,מתחם דת"
                 },
+                "landuse/reservoir": {
+                    "name": "מאגר"
+                },
                 "landuse/residential": {
                     "name": " אזור מגורים",
                     "terms": "אזור מגורים"
+                },
+                "landuse/residential/apartments": {
+                    "name": "מתחם דירות"
                 },
                 "landuse/retail": {
                     "name": "אזור מסחרי",
@@ -5060,6 +5387,9 @@
                 "leisure/firepit": {
                     "name": "שוחה למדורה",
                     "terms": "מדורה,אש,להבה,קומזיץ"
+                },
+                "leisure/fishing": {
+                    "name": "נקודת דיג"
                 },
                 "leisure/fitness_centre": {
                     "name": "מכון כושר",
@@ -5169,6 +5499,9 @@
                     "name": "מגרש פוטבול",
                     "terms": "מגרש פוטבול"
                 },
+                "leisure/pitch/australian_football": {
+                    "name": "מגרש פוטבול אוסטרלי"
+                },
                 "leisure/pitch/badminton": {
                     "name": "מגרש בדמינטון",
                     "terms": "בדמינטון,כדור נוצה"
@@ -5200,6 +5533,9 @@
                 "leisure/pitch/equestrian": {
                     "name": "זירת רכיבה",
                     "terms": "מתחם רכיבה"
+                },
+                "leisure/pitch/netball": {
+                    "name": "מגרש נטבול"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "מגרש ליגת רוגבי",
@@ -5241,10 +5577,6 @@
                     "name": "אתר נופש",
                     "terms": "נווה נופש,מלון תיירות,תיירות"
                 },
-                "leisure/running_track": {
-                    "name": "מסלול ריצה",
-                    "terms": "מסלול תחרויות ריצה"
-                },
                 "leisure/sauna": {
                     "name": "סאונה",
                     "terms": "סאונה"
@@ -5272,6 +5604,12 @@
                 "leisure/track": {
                     "name": "מסלול מרוצים (לבלתי ממונעים)",
                     "terms": "מסלול מרוצים (לא מונע)"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "מסלול מרוצים (לסוסים)"
+                },
+                "leisure/track/running": {
+                    "name": "מסלול ריצה"
                 },
                 "leisure/water_park": {
                     "name": "פארק מים",
@@ -5344,6 +5682,18 @@
                     "name": "תורן",
                     "terms": "תורן"
                 },
+                "man_made/mast/communication": {
+                    "name": "תורן תקשורת"
+                },
+                "man_made/mast/communication/mobile_phone": {
+                    "name": "תורן אנטנה סלולרית"
+                },
+                "man_made/mast/communication/radio": {
+                    "name": "תורן שידורי רדיו"
+                },
+                "man_made/mast/communication/television": {
+                    "name": "תורן שידורי טלוויזיה"
+                },
                 "man_made/monitoring_station": {
                     "name": "תחנת ניטור",
                     "terms": "תחנת ניטור"
@@ -5380,6 +5730,9 @@
                     "name": "מעקב",
                     "terms": "מעקב"
                 },
+                "man_made/surveillance/camera": {
+                    "name": "מצלמת מעקב"
+                },
                 "man_made/survey_point": {
                     "name": "נקודת גבול",
                     "terms": "נקודת מדד,נקודת מדידה"
@@ -5387,6 +5740,12 @@
                 "man_made/tower": {
                     "name": "מגדל",
                     "terms": "מגדל"
+                },
+                "man_made/tower/communication": {
+                    "name": "מגדל תקשורת"
+                },
+                "man_made/tower/observation": {
+                    "name": "מגדל תצפית"
                 },
                 "man_made/wastewater_plant": {
                     "name": "מפעל טיפול בשפכים",
@@ -5524,6 +5883,9 @@
                     "name": "מים",
                     "terms": "מים"
                 },
+                "natural/water/canal": {
+                    "name": "תעלת מים"
+                },
                 "natural/water/lake": {
                     "name": "אגם",
                     "terms": "אגם"
@@ -5535,6 +5897,12 @@
                 "natural/water/reservoir": {
                     "name": "מאגר",
                     "terms": "מאגר"
+                },
+                "natural/water/river": {
+                    "name": "נהר"
+                },
+                "natural/water/stream": {
+                    "name": "נחל"
                 },
                 "natural/wetland": {
                     "name": "ביצה",
@@ -5677,6 +6045,9 @@
                     "name": "משרד ארגון חצי לא ממשלתי",
                     "terms": "משרד ארגון חצי לא ממשלתי"
                 },
+                "office/religion": {
+                    "name": "משרד לנושאי דת"
+                },
                 "office/research": {
                     "name": "משרד מחקר",
                     "terms": "משרד מחקר"
@@ -5707,6 +6078,9 @@
                 "piste/downhill": {
                     "name": "סקי אלפיני",
                     "terms": "גלישת מורד,סקי ראן,דאונהיל,אלפיני"
+                },
+                "piste/downhill/halfpipe": {
+                    "name": "חצי צינור"
                 },
                 "piste/hike": {
                     "name": "שביל חורף",
@@ -5742,6 +6116,9 @@
                 "place/city": {
                     "name": "עיר",
                     "terms": "עיר"
+                },
+                "place/city_block": {
+                    "name": "מבנן עירוני"
                 },
                 "place/farm": {
                     "name": "חווה"
@@ -6309,6 +6686,9 @@
                     "name": "מוסך",
                     "terms": "מוסך"
                 },
+                "shop/caravan": {
+                    "name": "סוכנות קרוואנים"
+                },
                 "shop/carpet": {
                     "name": "חנות שטיחים",
                     "terms": "חנות שטיחים"
@@ -6356,6 +6736,10 @@
                 "shop/cosmetics": {
                     "name": "חנות קוסמטיקה",
                     "terms": "חנות קוסמטיקה"
+                },
+                "shop/country_store": {
+                    "name": "חנות למטיילים",
+                    "terms": "למטייל,ריקושט,ציוד טיולים,שקי שינה,מחנאות,אוהלים,חוץ"
                 },
                 "shop/craft": {
                     "name": "חנות חפצי אומנות",
@@ -6409,6 +6793,12 @@
                     "name": "חנות אופנה",
                     "terms": "חנות אופנה"
                 },
+                "shop/fireplace": {
+                    "name": "חנות חימום"
+                },
+                "shop/fishing": {
+                    "name": "חנות דיג"
+                },
                 "shop/fishmonger": {
                     "name": "דוכן דגים"
                 },
@@ -6419,6 +6809,9 @@
                 "shop/frame": {
                     "name": "חנות חקלאות",
                     "terms": "חנות חקלאות"
+                },
+                "shop/fuel": {
+                    "name": "חנות נוחות"
                 },
                 "shop/funeral_directors": {
                     "name": "קברן",
@@ -6451,6 +6844,9 @@
                     "name": "מעצב שיער",
                     "terms": "מעצב שער"
                 },
+                "shop/hairdresser_supply": {
+                    "name": "חנות ציוד לספרים"
+                },
                 "shop/hardware": {
                     "name": "חנות אספקה טכנית",
                     "terms": "חנות כלי חומרה"
@@ -6474,6 +6870,9 @@
                 "shop/houseware": {
                     "name": "חנות כלי בית",
                     "terms": "חנות כלי בית"
+                },
+                "shop/hunting": {
+                    "name": "חנות ציד"
                 },
                 "shop/interior_decoration": {
                     "name": "חנות עיצוב פנים",
@@ -6566,6 +6965,9 @@
                 "shop/paint": {
                     "name": "חנות צבע",
                     "terms": "חנות צבע"
+                },
+                "shop/party": {
+                    "name": "חנות ציוד למסיבות"
                 },
                 "shop/pastry": {
                     "name": "בית מאפה",
@@ -6701,6 +7103,9 @@
                 "shop/watches": {
                     "name": "שען",
                     "terms": "שענית"
+                },
+                "shop/water": {
+                    "name": "חנות מי שתייה"
                 },
                 "shop/water_sports": {
                     "name": "חנות שחייה",
@@ -6910,6 +7315,10 @@
                     "name": "גבול ניהולי",
                     "terms": "גבול ניהולי"
                 },
+                "type/enforcement": {
+                    "name": "אכיפה",
+                    "terms": "שיטור,רגולציה,חוק"
+                },
                 "type/multipolygon": {
                     "name": "רב־מצולעים"
                 },
@@ -7069,8 +7478,7 @@
                     "terms": "נהר"
                 },
                 "waterway/riverbank": {
-                    "name": "גדות נהר",
-                    "terms": "גדות נהר"
+                    "name": "גדות נהר"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "סילוק פסולת ימי",
@@ -7233,6 +7641,10 @@
                 "description": "צהוב = מידע ציבורי מממשלת ארה\"ב\nאדום = מידע שלא נמצא בOSM",
                 "name": "מידע טופולוגי ארה\"ב  2017"
             },
+            "US-TIGER-Roads-2018": {
+                "description": "צהוב = מידע ציבורי לפי מפקד אוכלוסין. אדום = מידע שלא נמצא בOSM",
+                "name": "TIGER Roads 2018"
+            },
             "US_Forest_Service_roads_overlay": {
                 "description": "כביש מהיר: תחימה ירוקה = ללא סיווג. תחימה חומה = מסלול. פני שטח: חצץ = מילוי חום בהיר, אספלט = שחור, מרוצף = אפור, אדמה =לבן, בטון = כחול, דשא = ירוק. עונתי = פסים לבנים",
                 "name": "שכבת דרכי יערות בארה״ב"
@@ -7248,6 +7660,12 @@
                     "text": "מומש ע\"י Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "מומש ע\"י Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -7340,6 +7758,27 @@
                 "description": "אורטופוטו ממחוז הלסינגבורג 2015, CC0 רישיון",
                 "name": "אורטופוטו הלסינגבורג"
             },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Kalmar אורטופוטו חוף צפוני 2018",
+                "name": "Kalmar אורטופוטו צפוני 2018"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Kalmar אורטופוטו חוף דרומי 2018",
+                "name": "Kalmar אורטופוטו דרומי 2018"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Kalmar אורטופוטו עירוני2018",
+                "name": "Kalmar אורטופוטו עירוני2018"
+            },
             "kelkkareitit": {
                 "attribution": {
                     "text": "‎© Kelkkareitit.fi"
@@ -7360,6 +7799,13 @@
                 },
                 "description": "פסיפס של אורטופוטו שוודי מ1970-1980, עדיין בבניה.",
                 "name": "סריקה של מפה כלכלית 1960"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "מפה טופוגרפית של שוודיה 1:50000 ",
+                "name": "מפה טופוגרפית Lantmäteriet"
             },
             "linkoping-orto": {
                 "attribution": {
@@ -7546,18 +7992,47 @@
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "OpenStreetMap פורום הודו",
+                "description": "OpenStreetMap פורום הודו"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap גיטהאב הודו",
+                "description": "תפתח קוד איתנו ב{url}"
+            },
             "OSM-india-mailinglist": {
                 "name": "קבוצת הדיוור של OpenStreetMap הודו",
                 "description": "Talk-in היא קבוצת הדיוור הרשמית של הקהילה ההודית"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap הודו טלגרם",
+                "description": "תצטרף למשפחתנו {url}"
             },
             "OSM-india-twitter": {
                 "name": "הטוויטר של OpenStreetMap הודו",
                 "description": "אנחנו במרחק ציוץ: {url}"
             },
+            "osm-india-website": {
+                "name": "OpenStreetMap הודו",
+                "description": "ממפים ומשתמשים בOpenStreetMap"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject הודו",
+                "description": "כל מה שאתה צריך לדעת על מיפוי בהודו {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap הודו יוטוב",
+                "description": "תצטרף לערוץ שלנו ב {url}"
+            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "תנועת החומרה והתכנה החופשית - פייסבוק",
                 "description": "עמוד הפייסבוק של FSHM נועד לעדכון על אירועים ופעילויות של הקהילה",
                 "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap. עמוד הפייסבוק הוא הדרך הטוב ביותר לשמור על קשר בנוגע לאירועים."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - רשימת תפוצה",
+                "description": "קבוצת הדיוור פודוצ׳רי של FSHM לדיונים על מיפוי בפודוצ׳רי ונושאים נוספים.",
+                "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap."
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "תנועת החומרה והתכנה החופשית - Matrix",
@@ -7584,10 +8059,6 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap יפן",
                 "description": "ממפים ומשתמשים OpenStreetMap ביפן"
-            },
-            "OSM-korea-telegram": {
-                "name": "ערוץ הטלגרם של OSM קוריאה",
-                "description": "ערוץ בלתי רשמי לקהילות, משתמשי ותורמי OpenStreetMap בקוריאה לטובת שיתוף ודיונים."
             },
             "OSM-MY-facebook": {
                 "name": "הפייסבוק של OpenStreetMap מלזיה",
@@ -7616,6 +8087,14 @@
                 "description": "שיפור OpenStreetMap בנפאל",
                 "extendedDescription": "מעניין אותך מיפוי בנפאל? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap אסיה רשימת תפוצה",
+                "description": "Talk-asia היא קבוצת הדיוור הרשמית של הקהילה האסיאתית"
+            },
+            "osm-asia-telegram": {
+                "name": "OSM אסיה טלגרם",
+                "description": "תצטרף למשפחתנו {url}"
+            },
             "OSM-PH-facebook": {
                 "name": "הפייסבוק של OpenStreetMap PH (הפיליפינים)",
                 "description": "ברוך בואך ל־OpenStreetMap הפיליפינים, פה אנו מעודדים את כל הפיליפינים באשר הם לתרום למיזם OpenStreetMap."
@@ -7640,7 +8119,11 @@
                 "name": "הטלגרם של OpenStreetMap רוסיה",
                 "description": "קבוצת הטלגרם של OpenStreetMap רוסיה"
             },
-            "OSM-LKA-facebook": {
+            "OSM-south-korea-telegram": {
+                "name": "ערוץ הטלגרם של OSM דרום קוריאה",
+                "description": "ערוץ בלתי רשמי לקהילות, משתמשי ותורמי OpenStreetMap בדרום קוריאה לטובת שיתוף ודיונים."
+            },
+            "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap סרי לנקה",
                 "description": "שיפור OpenStreetMap בסרי לנקה",
                 "extendedDescription": "מעניין אותך מיפוי בסרי לנקה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
@@ -7912,6 +8395,10 @@
                 "name": "קבוצת הדיוור של OpenStreetMap טרנטינו",
                 "description": "קבוצת הדיונים האזורית של OpenStreetMap איטליה לאזור טרנטינו"
             },
+            "kosovo-telegram": {
+                "name": "OpenStreetMap קוסובו בטלגרם",
+                "description": "קבוצת טלגרם ציבורית חצי רשמית לכלל קוסובו. אנו מזמינים את כל הממפים מכל מקום ובכל שפה."
+            },
             "no-forum": {
                 "name": "הפורום המקוון של OpenStreetMap נורווגיה",
                 "description": "הפורום המקוון של OpenStreetMap נורווגיה"
@@ -8044,6 +8531,10 @@
                 "name": "MaptimeME",
                 "description": "ממפים ומשתמשי OpenStreetMap סביב פורטלנד, מיין",
                 "extendedDescription": "Maptime כשמו כן הוא, זמן ליצירת מפות. המטרה שלנו היא לפתוח את הדלת לאפשרויות מגוונות ליצירת מפות לכל מי שמעוניין על ידי יצירת מקום ללמידה שיתופית, חקירה ויצירת מפות באמצעות כלים וטכנולוגיות למיפוי."
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA טוייטר",
+                "description": "עקוב אחרינו בטוייטר {url}"
             },
             "us-ma-mailinglist": {
                 "name": "קבוצת הדיוור Talk-us-massachusetts",

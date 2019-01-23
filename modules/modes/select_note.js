@@ -90,7 +90,7 @@ export function modeSelectNote(context, selectedNoteID) {
         if (!osm) return;
         var note = osm.getNote(selectedNoteID);
         if (note) {
-            context.map().centerZoom(note.loc, 20);
+            context.map().centerZoomEase(note.loc, 20);
         }
     };
 

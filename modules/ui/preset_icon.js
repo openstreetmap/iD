@@ -36,16 +36,18 @@ export function uiPresetIcon() {
         var isPOI = isMaki || isTemaki || isFa;
         var isFramed = (geom === 'area' || geom === 'vertex');
 
-
-        function tag_classes(p) {
-            var s = '';
-            for (var i in p.tags) {
-                s += ' tag-' + i;
-                if (p.tags[i] !== '*') {
-                    s += ' tag-' + i + '-' + p.tags[i];
-                }
+        var tagClasses = '';
+        for (var k in p.tags) {
+            var v = p.tags[k];
+            tagClasses += ' tag-' + k;
+            if (v !== '*') {
+                tagClasses += ' tag-' + k + '-' + v;
             }
-            return s;
+        }
+
+        // if the preset includes a `building_area` field, class it as a building
+        if (p.fields && p.fields.filter(function(d) { return d.id === 'building_area'; }).length) {
+            tagClasses += ' tag-building';
         }
 
 
@@ -58,7 +60,7 @@ export function uiPresetIcon() {
 
         fill
             .attr('class', function() {
-                return 'preset-icon-fill preset-icon-fill-' + geom + tag_classes(p);
+                return 'preset-icon-fill preset-icon-fill-' + geom + tagClasses;
             });
 
 
@@ -90,7 +92,7 @@ export function uiPresetIcon() {
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isPOI ? '' : tag_classes(p));
+                return 'icon ' + picon + (isPOI ? '' : tagClasses);
             });
 
         icon.selectAll('use')
@@ -98,16 +100,16 @@ export function uiPresetIcon() {
     }
 
 
-    presetIcon.preset = function(_) {
+    presetIcon.preset = function(val) {
         if (!arguments.length) return preset;
-        preset = utilFunctor(_);
+        preset = utilFunctor(val);
         return presetIcon;
     };
 
 
-    presetIcon.geometry = function(_) {
+    presetIcon.geometry = function(val) {
         if (!arguments.length) return geometry;
-        geometry = utilFunctor(_);
+        geometry = utilFunctor(val);
         return presetIcon;
     };
 

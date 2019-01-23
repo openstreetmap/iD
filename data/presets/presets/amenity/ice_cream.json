@@ -5,15 +5,22 @@
         "address",
         "building_area",
         "opening_hours",
-        "takeaway",
-        "delivery",
         "outdoor_seating"
     ],
     "moreFields": [
+        "takeaway",
+        "delivery",
+        "drive_through",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "diet_multi"
+        "diet_multi",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

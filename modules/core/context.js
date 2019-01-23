@@ -35,7 +35,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.12.2';
+    context.version = '2.13.0';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -491,15 +491,14 @@ export function coreContext() {
     features = rendererFeatures(context);
     presets = presetIndex();
 
-    if (services.maprules && utilStringQs(window.location.hash).validations) {
-        var validations = utilStringQs(window.location.hash).validations;
-        d3_json(validations, function (err, mapcss) {
+    if (services.maprules && utilStringQs(window.location.hash).maprules) {
+        var maprules = utilStringQs(window.location.hash).maprules;
+        d3_json(maprules, function (err, mapcss) {
             if (err) return;
             services.maprules.init(context.presets().areaKeys());
             _each(mapcss, function(mapcssSelector) {
                 return services.maprules.addRule(mapcssSelector);
             });
-            context.validationRules = true;
         });
     }
 

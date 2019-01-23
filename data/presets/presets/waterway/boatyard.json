@@ -4,6 +4,14 @@
         "name",
         "operator"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "area",
         "vertex",

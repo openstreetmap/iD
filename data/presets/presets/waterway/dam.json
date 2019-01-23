@@ -6,6 +6,9 @@
         "line",
         "area"
     ],
+    "moreFields": [
+        "website"
+    ],
     "fields": [
         "name"
     ],
