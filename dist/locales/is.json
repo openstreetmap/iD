@@ -322,7 +322,7 @@
                 "title": "Losa",
                 "key": "E",
                 "description": "Losa þennan hnút frá þessum línum/svæðum.",
-                "annotation": "Losaði hnút frá yfirliggjandi línum/svæðum.",
+                "annotation": "Losaði hnút frá yfirlínum/yfirsvæðum.",
                 "restriction": "Ekki er hægt að losa þetta atriði því það myndi skemma \"{relation}\" vensl.",
                 "connected_to_hidden": "Ekki er hægt að losa þetta atriði þar sem það er tengt földu eigindi."
             }
@@ -498,7 +498,6 @@
         "inspector": {
             "no_documentation_combination": "Það eru ekki til nein hjálparskjöl fyrir þessar samsettu merkingar",
             "no_documentation_key": "Það eru ekki til nein hjálparskjöl fyrir þennan efnislykil",
-            "documentation_redirect": "Þessu hjálparskjali hefur verið endurbeint á nýja síðu",
             "show_more": "Sýna meira",
             "view_on_osm": "Skoða á openstreetmap.org",
             "all_fields": "Öll gagnasvið",
@@ -506,6 +505,7 @@
             "all_members": "Allir meðlimir",
             "all_relations": "Öll vensl",
             "new_relation": "Ný vensl...",
+            "choose_relation": "Veldu yfirvensl",
             "role": "Hlutverk",
             "choose": "Veldu gerð eiginda",
             "results": "{n} niðurstöður fyrir {leit}",
@@ -761,7 +761,7 @@
             "disconnected_highway": "Aftengdur þjóðvegur",
             "disconnected_highway_tooltip": "Vegir ættu að vera tengdir í aðra vegi eða í innaganga í byggingar.",
             "old_multipolygon": "Fjölhyrningamerki á ytri leið",
-            "old_multipolygon_tooltip": "Þessi stíll fjölhyrnings er úreltur. Úthlutaðu merkjunum á forvera-fjölhyrninginn (parent) í stað ytri ferilsins.",
+            "old_multipolygon_tooltip": "Þessi stíll fjölhyrnings er úreltur. Úthlutaðu merkjunum á yfirfjölhyrninginn (parent) í stað ytri ferilsins.",
             "untagged_point": "Ómerktur punktur",
             "untagged_point_tooltip": "Veldu tegund eiginda sem lýsir því hvað þessi punktur er.",
             "untagged_line": "Ómerkt lína",
@@ -1365,7 +1365,7 @@
                     "next": "Hoppa í næsta hnút",
                     "first": "Hoppa í fyrsta hnút",
                     "last": "Hoppa í síðasta hnút",
-                    "change_parent": "Skipta í yfilrleið (parent)"
+                    "change_parent": "Skipta í yfirleið (parent)"
                 }
             },
             "editing": {
@@ -1385,7 +1385,7 @@
                     "continue_line": "Halda áfram með línu við valinn hnút",
                     "merge": "Sameina (setja saman) valdar fitjur",
                     "disconnect": "Aftengja fitjur við valinn hnút",
-                    "detach_node": "Losa hnút frá yfirliggjandi línum/svæðum",
+                    "detach_node": "Losa valinn hnút frá yfirlínum/yfirsvæðum",
                     "split": "Aðskilja línu í tvennt við valinn hnút",
                     "reverse": "Snúa við línu",
                     "move": "Færa valdar fitjur",
@@ -1666,9 +1666,6 @@
                         "hot_spring": "Heit uppspretta",
                         "onsen": "Japanskt Onsen"
                     }
-                },
-                "beauty": {
-                    "label": "Tegund verslunar"
                 },
                 "bench": {
                     "label": "Bekkur"
@@ -1983,20 +1980,9 @@
                 "fence_type": {
                     "label": "Tegund"
                 },
-                "fire_hydrant/position": {
-                    "label": "Staðsetning",
-                    "options": {
-                        "green": "Grænt",
-                        "lane": "Akrein",
-                        "parking_lot": "Bílastæðasvæði",
-                        "sidewalk": "Gangstétt"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tegund",
                     "options": {
                         "pillar": "Stöpull/Ofanjarðar",
-                        "pond": "Tjörn",
                         "underground": "Neðanjarðar",
                         "wall": "Veggur"
                     }
@@ -2984,9 +2970,6 @@
                 "tourism": {
                     "label": "Tegund"
                 },
-                "tourism_attraction": {
-                    "label": "Ferðaþjónusta"
-                },
                 "tower/construction": {
                     "label": "Uppbygging",
                     "placeholder": "Stagaður, Grind, Lokaður..."
@@ -3467,9 +3450,6 @@
                 "amenity/parking_space": {
                     "name": "Bílastæðarými"
                 },
-                "amenity/pharmacy": {
-                    "name": "Lyfjaverslun"
-                },
                 "amenity/place_of_worship": {
                     "name": "Tilbeiðsluhús",
                     "terms": "musteri, kirkja, kapella, bænahús"
@@ -3477,18 +3457,8 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Búddistamusteri"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kirkja"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindú-musteri"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Bænahús gyðinga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moska",
-                    "terms": "bænahús múslima"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shinto-skrín"
@@ -4541,9 +4511,6 @@
                 "landuse/farmyard": {
                     "name": "Bóndabýli"
                 },
-                "landuse/forest": {
-                    "name": "Skógur"
-                },
                 "landuse/garages": {
                     "name": "Landnotkun fyrir verkstæði"
                 },
@@ -4810,9 +4777,6 @@
                 },
                 "leisure/resort": {
                     "name": "Afþreyingarþorp"
-                },
-                "leisure/running_track": {
-                    "name": "Keppnisbraut (hlaup)"
                 },
                 "leisure/sauna": {
                     "name": "Gufubað"

@@ -424,9 +424,6 @@
                 "entrance": {
                     "label": "రకం"
                 },
-                "fire_hydrant/type": {
-                    "label": "రకం"
-                },
                 "generator/type": {
                     "label": "రకం"
                 },
@@ -556,19 +553,8 @@
                 "amenity/library": {
                     "name": "గ్రంథాలయం"
                 },
-                "amenity/pharmacy": {
-                    "name": "మందుల షాపు"
-                },
                 "amenity/place_of_worship/buddhist": {
                     "name": "బౌద్ధ ఆలయం"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "చర్చి",
-                    "terms": "చర్చి, చర్చ్"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "మసీదు",
-                    "terms": "మసీదు, మాస్క్"
                 },
                 "amenity/police": {
                     "name": "పోలీసు"
@@ -620,9 +606,6 @@
                 },
                 "historic": {
                     "name": "చారిత్రక ప్రదేశం"
-                },
-                "landuse/forest": {
-                    "name": "అడవి"
                 },
                 "landuse/grass": {
                     "name": "పచ్చిక"

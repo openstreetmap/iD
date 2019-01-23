@@ -1,9 +1,13 @@
 {
     "da": {
         "icons": {
+            "download": "download",
             "information": "info",
             "remove": "fjern",
-            "undo": "fortryd"
+            "undo": "fortryd",
+            "zoom_to": "zoom til",
+            "copy": "kopier",
+            "open_wikidata": "åben på wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -20,6 +24,11 @@
                 "title": "Punkt",
                 "description": "Tilføj restauranter, monumenter, postkasser eller andre punkter til kortet.",
                 "tail": "Klik på kortet for at tilføje et punkt."
+            },
+            "add_note": {
+                "title": "Bemærkning",
+                "description": "Fundet en fejl? Læg en bemærkning til andre bidragsydere.",
+                "tail": "Klik på kortet for at tilføje en bemærkning."
             },
             "browse": {
                 "title": "Gennemse",
@@ -40,7 +49,8 @@
                 "annotation": {
                     "point": "Tilføjede et punkt.",
                     "vertex": "Tilføjede et punkt til en vej.",
-                    "relation": "Tilføjede en relation."
+                    "relation": "Tilføjede en relation.",
+                    "note": "Tilføjede en bemærkning."
                 }
             },
             "start": {
@@ -145,6 +155,22 @@
                 "annotation": "Fjernede et medlem fra en relation."
             },
             "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Forbandt en vej til et punkt.",
+                        "to_vertex": "Forbandt en vej til en anden.",
+                        "to_line": "Forbandt en vej til en linje.",
+                        "to_area": "Forbandt en vej til et område.",
+                        "to_adjacent_vertex": "Sammenflettede nærtliggende punkter i en vej.",
+                        "to_sibling_vertex": "Forbandt en vej til sig selv."
+                    },
+                    "from_point": {
+                        "to_point": "Sammenflettede et punkt med et andet.",
+                        "to_vertex": "Sammenflettede et punkt med et punkt på en vej.",
+                        "to_line": "Flyttede et punkt til en linje.",
+                        "to_area": "Flyttede et punkt til et område."
+                    }
+                },
                 "relation": "Disse kortobjekter kan ikke forbindes, da deres relationsroller er i konflikt. ",
                 "restriction": "Disse kortobjekter kan ikke forbindes, da det ville skade en \"{relation}\"-relation."
             },
@@ -294,6 +320,7 @@
             },
             "detach_node": {
                 "title": "Afkobl",
+                "key": "E",
                 "description": "Afkobl denne node fra disse linjer/områder.",
                 "annotation": "Afkoblede en node fra overordnede linjer/områder.",
                 "restriction": "Denne node kan ikke afkobles, da det ville ødelægge en \"{relation}\"-relation.",
@@ -348,6 +375,7 @@
         "browser_notice": "Dette redigeringsværktøj er understøttet af Firefox, Chrome, Safari, Opera og Internet Explorer 11 og højere. Opgrader din browser eller brug Potlatch 2 for at redigere.",
         "translate": {
             "translate": "Oversæt",
+            "localized_translation_label": "Flersprogligt navn",
             "localized_translation_language": "Vælg sprog",
             "localized_translation_name": "Navn"
         },
@@ -357,6 +385,10 @@
         "loading_auth": "Forbinder til OpenStreetMap...",
         "report_a_bug": "Rapporterer en fejl",
         "help_translate": "Hjælp med at oversætte",
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Skift tilstand for sidebaren"
+        },
         "feature_info": {
             "hidden_warning": "{count} skjulte objekter",
             "hidden_details": "Disse objekter er for øjeblikket skjulte: {details}"
@@ -376,6 +408,7 @@
             "cancel": "Annuller",
             "changes": "{count} ændringer",
             "download_changes": "Download osmChange fil",
+            "errors": "Fejl",
             "warnings": "Advarsler",
             "modified": "Ændret",
             "deleted": "Slettet",
@@ -416,7 +449,12 @@
                 "edited_by": "Ændret af",
                 "changeset": "Ændringssæt",
                 "unknown": "Ukendt",
-                "link_text": "Historik på openstreetmap.org"
+                "link_text": "Historik på openstreetmap.org",
+                "note_no_history": "Ingen historik (ny bemærkning)",
+                "note_comments": "Kommentarer",
+                "note_created_date": "Oprettelsesdato",
+                "note_created_user": "Oprettet af",
+                "note_link_text": "Bemærkning på openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -446,7 +484,8 @@
             "vertex": "hjørne",
             "line": "linje",
             "area": "område",
-            "relation": "relation"
+            "relation": "relation",
+            "note": "bemærkning"
         },
         "geocoder": {
             "search": "Søg i hele verden...",
@@ -458,16 +497,25 @@
             "locating": "Lokaliserer, vent venligst..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z",
+                "title": "Zoom hertil",
+                "tooltip_feature": "Centrer kortet på og zoom ind til dette kortobjekt.",
+                "tooltip_note": "Centrer kortet på og zoom ind til denne bemærkning.",
+                "tooltip_data": "Centrer kortet på og zoom ind til dette data.",
+                "tooltip_issue": "Centrer kortet på og zoom ind til dette problem."
+            },
             "no_documentation_combination": "Der er ingen tilgængelig dokumentation for denne kombination af tags",
             "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
-            "documentation_redirect": "Denne dokumentation er blevet redirigeret til en ny side",
             "show_more": "Vis mere",
             "view_on_osm": "Se på openstreetmap.org",
+            "view_on_keepRight": "Vis på keepright.at",
             "all_fields": "Alle felter",
             "all_tags": "Alle tags",
             "all_members": "Alle medlemmer",
             "all_relations": "Alle relationer",
             "new_relation": "Ny relation...",
+            "choose_relation": "Vælg den overordnede relation",
             "role": "Rolle",
             "choose": "Vælg objekttype",
             "results": "{n} resultater for {search}",
@@ -498,7 +546,10 @@
             "way": "Vej",
             "relation": "Relation",
             "location": "Sted",
-            "add_fields": "Tilføj felt:"
+            "add_fields": "Tilføj felt:",
+            "lock": {
+                "suggestion": "Feltet \"{label}\" er låst fordi der er et Wikidata-tag. Du kan slette dette eller redigere egenskaben i \"Alle tags\"-afsnittet."
+            }
         },
         "background": {
             "title": "Baggrund",
@@ -538,6 +589,15 @@
                 "notes": {
                     "tooltip": "Bemærkningsdata fra OpenStreetMap",
                     "title": "OpenStreetMap-bemærkninger"
+                },
+                "keepRight": {
+                    "tooltip": "Automatiskt detekterede kortproblemer fra keepright.at",
+                    "title": "KeepRight-problemer"
+                },
+                "custom": {
+                    "tooltip": "Træk og slip en datafil ind på siden, eller klik på knappen for opsætning",
+                    "title": "Brugerdefineret kortdata",
+                    "zoom": "Zoom til data"
                 }
             },
             "fill_area": "Udfyldning af områder",
@@ -608,6 +668,29 @@
             "full": {
                 "description": "Helt udfyldt",
                 "tooltip": "Områder vises helt udfyldt."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Rediger brugerdefineret baggrund",
+                "header": "Indstillinger for brugerdefineret baggrund",
+                "instructions": "Indtast en flise-URL-skabelon. Gyldige erstatninger er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y-fliseskema\n   {-y} or {ty} for spejlede Y-koordinater i TMS-stil\n   {u} for quadfliseskema\n   {switch:a,b,c} for DNS-server multiplexing\n\nEksempel:\n{example}",
+                "template": {
+                    "placeholder": "Indtast en URL-skabelon"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Rediger brugerdefineret datalag",
+                "header": "Indstillinger for brugerdefineret kortdata",
+                "file": {
+                    "instructions": "Vælg en lokal datafil. Understøttede typer er:\n .gpx, .kml, .geojson, .json",
+                    "label": "Udvælg fil"
+                },
+                "or": "Eller",
+                "url": {
+                    "instructions": "Indtast en datafil-URL eller vektorflise-URL-skabelon. Gyldige erstatninger er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y-fliseskema",
+                    "placeholder": "Indtast en URL"
+                }
             }
         },
         "restore": {
@@ -691,6 +774,8 @@
         "validations": {
             "disconnected_highway": "Ej forbundet vejsegment",
             "disconnected_highway_tooltip": "Veje skal forbindes til andre veje eller indgange til bygninger.",
+            "generic_name": "Muligt generaliseret navn",
+            "generic_name_tooltip": "Dette kortobjekt lader til at have et generaliseret navn \"{name}\". Brug kun navne-feltet til kortobjektets specifikke og officielle navn.",
             "old_multipolygon": "Multipolygon har tags på den ydre vej",
             "old_multipolygon_tooltip": "Denne måde at tagge multipolygoner på er ikke længere understøttet. Vær venlig at tilføje tags på multipolygonen hvori den ydre vej indgår, i stedet for på selve vejen.",
             "untagged_point": "Punkt uden tags",
@@ -711,6 +796,138 @@
         },
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
+        "QA": {
+            "keepRight": {
+                "title": "KeepRight-Fejl",
+                "detail_title": "Fejl",
+                "detail_description": "Beskrivelse",
+                "comment": "Kommentar",
+                "comment_placeholder": "Indtast en kommentar der deles med andre brugere.",
+                "close": "Lukket (fejl rettet)",
+                "ignore": "Ignorer (ikke en fejl)",
+                "save_comment": "Gem kommentar",
+                "close_comment": "Luk og Kommentér",
+                "ignore_comment": "Ignorer og Kommentér",
+                "error_parts": {
+                    "place_of_worship": "tilbedelsessted",
+                    "pub": "bodega",
+                    "restaurant": "restaurant",
+                    "school": "skole",
+                    "university": "universitet",
+                    "hospital": "hospital",
+                    "library": "bibliotek",
+                    "theatre": "teater",
+                    "courthouse": "retsbygning",
+                    "bank": "bank",
+                    "cinema": "biograf",
+                    "pharmacy": "apotek",
+                    "cafe": "café",
+                    "fuel": "brændstof",
+                    "from": "fra",
+                    "to": "til",
+                    "left_hand": "venstrehånds",
+                    "right_hand": "højrehånds"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "Flere noder på samme sted",
+                        "description": "Der er mere end en node på dette sted. Node ID'er: {var1}."
+                    },
+                    "30": {
+                        "title": "Ikke-lukket område",
+                        "description": "{var1} er markeret med \"{var2}\" og burde dermed danne et forbundet objekt."
+                    },
+                    "40": {
+                        "title": "Umulig ensrettet vej",
+                        "description": "Den første node {var1} i {var2} er ikke forbundet til nogen anden vej."
+                    },
+                    "41": {
+                        "description": "Den sidste node {var1} i {var2} er ikke forbundet til nogen anden vej."
+                    },
+                    "42": {
+                        "description": "Adgang til {var1} er umulig, da alle veje der leder dertil er ensrettede."
+                    },
+                    "43": {
+                        "description": "Ingen kan forlade {var1}, da alle veje der leder dertil er ensrettede."
+                    },
+                    "50": {
+                        "title": "Næsten en krydsning",
+                        "description": "{var1} er meget tæt på, men ikke forbundet til vej {var2}."
+                    },
+                    "60": {
+                        "title": "Udgået tag",
+                        "description": "{var1} bruger det udgåede tag \"{var2}\". Brug venligst \"{var3}\" istedet."
+                    },
+                    "70": {
+                        "title": "Manglende tag",
+                        "description": "{var1} har et tomt tag: \"{var2}\""
+                    },
+                    "71": {
+                        "description": "{var1} har ingen tags."
+                    },
+                    "72": {
+                        "description": "{var1} er ikke indeholdt i nogen vej og har ingen tags."
+                    },
+                    "73": {
+                        "description": "{var1} har et \"{var2}\"-tag men intet \"highway\"-tag."
+                    },
+                    "74": {
+                        "description": "{var1} har et tomt tag: \"{var2}\"."
+                    },
+                    "75": {
+                        "description": "{var1} har navnet \"{var2}\", men ingen andre tags."
+                    },
+                    "90": {
+                        "title": "Motorvej uden et ref-tag",
+                        "description": "{var1} er markeret som en motorvej og skal derfor have et \"ref\", \"nat_ref\" eller \"int_ref\"-tag."
+                    },
+                    "100": {
+                        "title": "Tilbedelsessted uden religion",
+                        "description": "{var1} er markeret som et tilbedelsessted og skal derfor have et \"religion\"-tag."
+                    },
+                    "110": {
+                        "title": "Interessepunkt uden navn",
+                        "description": "{var1} er markeret som \"{var2}\" og skal derfor have et \"name\"-tag."
+                    },
+                    "120": {
+                        "title": "Vej uden noder",
+                        "description": "{var1} har kun en enkelt node."
+                    },
+                    "130": {
+                        "title": "Ikke-forbundet vej",
+                        "description": "{var1} er ikke forbundet til resten af kortet."
+                    },
+                    "150": {
+                        "title": "Jernbaneoverskæring uden tag",
+                        "description": "{var1} mellem en vej og en jernbane skal tagges med enten \"railway=crossing\" eller \"railway=level_crossing\"."
+                    },
+                    "160": {
+                        "title": "Lag-konflikt i jernbane",
+                        "description": "Veje i forskellige lag (f.eks. tunnel eller bro) mødes ved {var1}."
+                    },
+                    "170": {
+                        "title": "Objekt markeret med FIXME",
+                        "description": "{var1} har et FIXME-tag: {var2}"
+                    },
+                    "180": {
+                        "title": "Relation uden type",
+                        "description": "{var1} mangler et \"type\"-tag."
+                    },
+                    "190": {
+                        "title": "Skæring af veje uden markeret krydsning",
+                        "description": "{var1} skæres med {var2} {var3}, men der er ikke noder markeret som hverken \"junction\", \"bridge\" eller \"tunnel\"."
+                    },
+                    "200": {
+                        "title": "Veje overlapper",
+                        "description": "{var1} overlapper {var2} {var3}."
+                    },
+                    "210": {
+                        "title": "Selvkrydsende vej",
+                        "description": "Der er et ikke nærmere specificeret problem med selvkrydsende veje."
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "Gadefotos fra Microsoft",
             "title": "Foto-overlag (Bing Streetside)",
@@ -742,6 +959,12 @@
             "anonymous": "anonym",
             "closed": "(Lukket)",
             "commentTitle": "Kommentarer",
+            "status": {
+                "opened": "oprettet {when}",
+                "reopened": "genåbnet {when}",
+                "commented": "kommenteret {when}",
+                "closed": "løst {when}"
+            },
             "newComment": "Ny kommentar",
             "inputPlaceholder": "Skriv en kommentar du vil dele med andre brugere.",
             "close": "Luk bemærkning",
@@ -750,6 +973,9 @@
             "close_comment": "Luk og kommentér",
             "open_comment": "Genåben og kommentér",
             "report": "Rapportér",
+            "new": "Ny bemærkning",
+            "newDescription": "Beskriv problemet.",
+            "save": "Gem bemærkning",
             "login": "Du skal logge ind for at ændre eller kommentere denne bemærkning.",
             "upload_explanation": "Dine kommentarer vil blive offentligt tilgængelige for alle OpenStreetMap-brugere.",
             "upload_explanation_with_user": "Dine kommentarer som bruger {user} vil blive offentligt tilgængelige for alle OpenStreetMap-brugere."
@@ -780,7 +1006,7 @@
             "editing": {
                 "title": "Rediger & gem",
                 "select_h": "Vælg",
-                "select_left_click": "{leftclick} Venstre-klik på et kortobjekt for at markere det. Dette vil fremhæve det med en pulserende glød, og i kanten af kortet vises detaljer om objektet, såsom navn og adresse.",
+                "select_left_click": "{leftclick} Venstre-klik på et kortobjekt for at markere det. Dette vil fremhæves med en pulserende glød, og sidebaren i kanten af kortet vil vise detaljer om objektet, såsom navn og adresse.",
                 "select_right_click": "{rightclick} Højreklik på et kortobjekt for at vise redigeringsmenuen, som viser de mulige værktøjer der kan anvendes, såsom rotation, flytning og sletning.",
                 "multiselect_h": "Multi-markering",
                 "multiselect_shift_click": "`{shift}`+{leftclick} venstreklik for at markere flere kortobjekter ad gangen. Dette gør det nemmere at flytte eller slette flere objekter i en operation.",
@@ -798,8 +1024,8 @@
                 "fields_all_fields": "Sektionen \"Alle felter\" indeholder alle de felter objektet kan indeholde, og som du kan redigere. I OpenStreetMap er alle felter valgfri, og det er helt OK at efterlade et felt tomt hvis du er usikker.",
                 "fields_example": "Hver objekttype vil vise forskellige felter. Eksempelvis kan der for en vej vises felter for dens belægning og hastighedsgrænse, mens der for en restaurant kan vises felter for hvilken mad der serveres og dens åbningstider. ",
                 "fields_add_field": "Du kan også klikke på \"Tilføj felt\"-boksen for at tilføje yderligere felter, såsom beskrivelse, Wikipedia-link, kørestolsegnethed og meget mere.",
-                "tags_h": "Tags (attributter)",
-                "tags_all_tags": "Under sektionen med felter kan du udvide \"Alle tags\"-sektionen for at redigere alle OpenStreetMap-*tags* for det markerede kortobjekt. Hvert tag består af en *nøgle* og en *værdi*, dette er dataelementer som definer samtlige de egenskaber som er gemt i OpenStreetMap.",
+                "tags_h": "Tags (mærker)",
+                "tags_all_tags": "Under afsnittet med felter kan du udvide \"Alle tags\"-sektionen for at redigere alle OpenStreetMap-*tags* for det markerede kortobjekt. Hvert tag, eller mærke, består af en *nøgle* og en *værdi*, dette er dataelementer som definer samtlige de egenskaber som er gemt i OpenStreetMap.",
                 "tags_resources": "Redigering af et kortobjekts tags kræver et vist kendskab til OpenStreetMap. Du bør studere ressourcer som [OpenStreetMap-wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for at lære mere om den gængse praksis for OpenStreetMap-tagging."
             },
             "points": {
@@ -1158,6 +1384,7 @@
                     "background_switch": "Skift til forrige anvendte baggrund",
                     "map_data": "Vis kortdata-indstillinger",
                     "fullscreen": "Aktiver fuldskærms-tilstand",
+                    "sidebar": "Skift tilstand for sidebar",
                     "wireframe": "Skift wireframe-tilstand",
                     "minimap": "Åbn/luk minikort"
                 },
@@ -1188,6 +1415,8 @@
                     "add_point": "\"Tilføj punkt\"-tilstand",
                     "add_line": "\"Tilføj linje\"-tilstand",
                     "add_area": "\"Tilføj område\"-tilstand",
+                    "add_note": "'Tilføj bemærkning'-tilstand",
+                    "place_point": "Placer punkt eller bemærkning",
                     "disable_snap": "Undlad at 'klistre' til eksisterende punkt",
                     "stop_line": "Afslut tegning af linje eller område"
                 },
@@ -1249,6 +1478,11 @@
             "west": "V",
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "identifier": "Identificeringsstreng",
+            "label": "Mærke",
+            "description": "Beskrivelse"
         },
         "presets": {
             "categories": {
@@ -1459,9 +1693,6 @@
                         "onsen": "Japansk varmebad"
                     }
                 },
-                "beauty": {
-                    "label": "Butikstype"
-                },
                 "bench": {
                     "label": "Bænk"
                 },
@@ -1560,6 +1791,14 @@
                 "content": {
                     "label": "Indhold"
                 },
+                "conveying": {
+                    "label": "Bevægelsesretning",
+                    "options": {
+                        "backward": "Baglæns",
+                        "forward": "Forlæns",
+                        "reversible": "Reversibel"
+                    }
+                },
                 "country": {
                     "label": "Land"
                 },
@@ -1634,6 +1873,9 @@
                         "cycleway:right": "Højre side"
                     }
                 },
+                "dance/style": {
+                    "label": "Dansestil"
+                },
                 "date": {
                     "label": "Dato"
                 },
@@ -1696,8 +1938,14 @@
                         "forward": "Forlæns"
                     }
                 },
+                "dispensing": {
+                    "label": "Receptpligtig"
+                },
                 "display": {
                     "label": "Display"
+                },
+                "distance": {
+                    "label": "Afstand"
                 },
                 "dock": {
                     "label": "Type"
@@ -1739,6 +1987,9 @@
                 "except": {
                     "label": "Undtagelser"
                 },
+                "faces": {
+                    "label": "Synlige flader"
+                },
                 "fax": {
                     "label": "Fax",
                     "placeholder": "+31 42 123 4567"
@@ -1749,20 +2000,9 @@
                 "fence_type": {
                     "label": "Type"
                 },
-                "fire_hydrant/position": {
-                    "label": "Placering",
-                    "options": {
-                        "green": "Græsplæne",
-                        "lane": "Vejbane",
-                        "parking_lot": "Parkeringsbås",
-                        "sidewalk": "Fortov"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Type",
                     "options": {
                         "pillar": "Søjle/overjordisk",
-                        "pond": "Dam",
                         "underground": "Underjordisk",
                         "wall": "Mur"
                     }
@@ -1773,12 +2013,18 @@
                 "fixme": {
                     "label": "Ret mig"
                 },
+                "flag/type": {
+                    "label": "Flagtype"
+                },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Standard"
                 },
                 "frequency": {
                     "label": "Operationel frekvens"
+                },
+                "from": {
+                    "label": "Fra"
                 },
                 "fuel": {
                     "label": "Brændstof"
@@ -1845,6 +2091,15 @@
                 },
                 "historic/civilization": {
                     "label": "Historisk periode"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Dato sunket"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Synlig ved højvande"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Synlig ved lavvande"
                 },
                 "hoops": {
                     "label": "Kurve",
@@ -2496,9 +2751,6 @@
                 "tourism": {
                     "label": "Type"
                 },
-                "tourism_attraction": {
-                    "label": "Turisme"
-                },
                 "tower/construction": {
                     "label": "Konstruktion",
                     "placeholder": "Udbarduneret, Lattice, Fastspændt, ..."
@@ -2775,7 +3027,7 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Cykelparkering",
-                    "terms": "Cykelparkering"
+                    "terms": "parkering,cyklist"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Cykeludlejning",
@@ -2974,6 +3226,14 @@
                 "amenity/nursing_home": {
                     "name": "Plejehjem"
                 },
+                "amenity/parking": {
+                    "name": "Bilparkering",
+                    "terms": "parkering,parkeringsplads,holdeplads"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Fleretagesparkering",
+                    "terms": "parkeringskælder,kælder,parkeringshus"
+                },
                 "amenity/parking_entrance": {
                     "name": "Parkeringsgarage Indgang/Udgang",
                     "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
@@ -2981,10 +3241,6 @@
                 "amenity/parking_space": {
                     "name": "Parkeringsbås",
                     "terms": "Parkeringsbås"
-                },
-                "amenity/pharmacy": {
-                    "name": "Apotek",
-                    "terms": "Apotek"
                 },
                 "amenity/place_of_worship": {
                     "name": "Tilbedelsessted",
@@ -2994,21 +3250,9 @@
                     "name": "Buddhisttempel",
                     "terms": "Buddisttempel, Buddhisttempel"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kirke",
-                    "terms": "Kirke, Folkekirke"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu-tempel",
                     "terms": "tempel,hindu"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagoge",
-                    "terms": "Synagoge, Jødisk Synagoge"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moské",
-                    "terms": "Moske, Moské"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shinto-tempel",
@@ -3178,7 +3422,7 @@
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parkeringsbilletautomat",
-                    "terms": "Parkeringsbilletautomat"
+                    "terms": "P-autoautomat, automat"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Billetautomat",
@@ -4054,8 +4298,7 @@
                     "terms": "Akvakultur"
                 },
                 "landuse/basin": {
-                    "name": "Bassin",
-                    "terms": "Bassin"
+                    "name": "Bassin"
                 },
                 "landuse/cemetery": {
                     "name": "Gravplads ",
@@ -4083,10 +4326,6 @@
                 "landuse/farmyard": {
                     "name": "Gårdsplads",
                     "terms": "Gård, Bondegård"
-                },
-                "landuse/forest": {
-                    "name": "Skov",
-                    "terms": "Skov, Plantageskov"
                 },
                 "landuse/grass": {
                     "name": "Græs",
@@ -4349,10 +4588,6 @@
                 "leisure/resort": {
                     "name": "Turistresort",
                     "terms": "Turistresort,"
-                },
-                "leisure/running_track": {
-                    "name": "Løbebane (Løb)",
-                    "terms": "Løbebane (Løb)"
                 },
                 "leisure/sauna": {
                     "name": "Sauna",
@@ -5677,8 +5912,7 @@
                     "terms": "Flod, Å"
                 },
                 "waterway/riverbank": {
-                    "name": "Flodbred",
-                    "terms": "Flodbred"
+                    "name": "Flodbred"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Søtoilet funktionsområde",
@@ -5915,6 +6149,12 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Kortlæg Botswana på Facebook"
+            },
+            "bw-twitter": {
+                "name": "Kortlæg Botswana på Twitter"
+            },
             "dk-forum": {
                 "name": "OpenStreetMap Danmark webforum",
                 "description": "Dansk OpenStreetMap webforum"

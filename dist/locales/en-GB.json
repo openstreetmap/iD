@@ -451,7 +451,6 @@
         "inspector": {
             "no_documentation_combination": "There is no documentation available for this tag combination",
             "no_documentation_key": "There is no documentation available for this key",
-            "documentation_redirect": "This documentation has been redirected to a new page",
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
             "all_fields": "All fields",
@@ -1348,6 +1347,9 @@
                 "category-route": {
                     "name": "Route Features"
                 },
+                "category-utility": {
+                    "name": "Utility Features"
+                },
                 "category-water-area": {
                     "name": "Water Features"
                 },
@@ -1360,19 +1362,28 @@
                     "label": "Allowed Access",
                     "options": {
                         "designated": {
+                            "description": "Access allowed according to signs or specific local laws",
                             "title": "Designated"
                         },
                         "destination": {
+                            "description": "Access allowed only to reach a destination",
                             "title": "Destination"
                         },
                         "dismount": {
+                            "description": "Access allowed but rider must dismount",
                             "title": "Dismount"
                         },
                         "no": {
+                            "description": "Access not allowed to the general public",
                             "title": "Prohibited"
                         },
                         "permissive": {
+                            "description": "Access allowed until such time as the owner revokes the permission",
                             "title": "Permissive"
+                        },
+                        "permit": {
+                            "description": "Access allowed only with a valid permit or license",
+                            "title": "Permit"
                         },
                         "private": {
                             "title": "Private"
@@ -1519,9 +1530,6 @@
                         "onsen": "Japanese Onsen"
                     }
                 },
-                "beauty": {
-                    "label": "Shop Type"
-                },
                 "bench": {
                     "label": "Bench"
                 },
@@ -1602,6 +1610,9 @@
                 },
                 "collection_times": {
                     "label": "Collection Times"
+                },
+                "colour": {
+                    "label": "Colour"
                 },
                 "comment": {
                     "label": "Changeset Comment",
@@ -1818,20 +1829,9 @@
                 "fence_type": {
                     "label": "Type"
                 },
-                "fire_hydrant/position": {
-                    "label": "Position",
-                    "options": {
-                        "green": "Green",
-                        "lane": "Lane",
-                        "parking_lot": "Car Park",
-                        "sidewalk": "Pavement"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Type",
                     "options": {
                         "pillar": "Pillar/Aboveground",
-                        "pond": "Pond",
                         "underground": "Underground",
                         "wall": "Wall"
                     }
@@ -2338,6 +2338,12 @@
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
+                "recycling_type": {
+                    "options": {
+                        "centre": "Centre"
+                    },
+                    "placeholder": "Container, Centre"
+                },
                 "ref": {
                     "label": "Reference Code"
                 },
@@ -2409,6 +2415,12 @@
                 },
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Colour"
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Colour"
                 },
                 "seasonal": {
                     "label": "Seasonal"
@@ -2606,9 +2618,6 @@
                 },
                 "tourism": {
                     "label": "Type"
-                },
-                "tourism_attraction": {
-                    "label": "Tourism"
                 },
                 "tower/construction": {
                     "label": "Construction",
@@ -2963,6 +2972,9 @@
                 "amenity/dentist": {
                     "name": "Dentist"
                 },
+                "amenity/dive_centre": {
+                    "name": "Dive Centre"
+                },
                 "amenity/doctors": {
                     "name": "Doctor"
                 },
@@ -3042,14 +3054,20 @@
                 "amenity/nursing_home": {
                     "name": "Nursing Home"
                 },
+                "amenity/parking": {
+                    "name": "Car Park"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Multistory Car Park"
+                },
                 "amenity/parking_entrance": {
                     "name": "Parking Garage Entrance/Exit"
                 },
                 "amenity/parking_space": {
                     "name": "Parking Space"
                 },
-                "amenity/pharmacy": {
-                    "name": "Pharmacy"
+                "amenity/payment_centre": {
+                    "name": "Payment Centre"
                 },
                 "amenity/place_of_worship": {
                     "name": "Place of Worship"
@@ -3057,17 +3075,8 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Buddhist Temple"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Church"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagogue"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mosque"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shinto Shrine"
@@ -3330,6 +3339,15 @@
                 },
                 "barrier/hedge": {
                     "name": "Hedge"
+                },
+                "barrier/kerb": {
+                    "name": "Kerb"
+                },
+                "barrier/kerb/flush": {
+                    "name": "Flush Kerb"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Lowered Kerb"
                 },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate"
@@ -3982,9 +4000,6 @@
                 "landuse/farmyard": {
                     "name": "Farmyard"
                 },
-                "landuse/forest": {
-                    "name": "Forest"
-                },
                 "landuse/garages": {
                     "name": "Garage Landuse"
                 },
@@ -4236,9 +4251,6 @@
                 },
                 "leisure/resort": {
                     "name": "Resort"
-                },
-                "leisure/running_track": {
-                    "name": "Racetrack (Running)"
                 },
                 "leisure/sauna": {
                     "name": "Sauna"

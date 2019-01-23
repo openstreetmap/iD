@@ -558,9 +558,7 @@
                     "label": "মূল্য"
                 },
                 "fire_hydrant/type": {
-                    "label": "ধরন",
                     "options": {
-                        "pond": "পুকুর",
                         "wall": "দেয়াল"
                     }
                 },
@@ -806,20 +804,11 @@
                 "amenity/marketplace": {
                     "name": "বাজার"
                 },
-                "amenity/pharmacy": {
-                    "name": "দাওয়াইখানা"
-                },
                 "amenity/place_of_worship": {
                     "name": "প্রার্থনাস্থল"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "বৌদ্ধ মন্দির"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "গির্জা"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "মসজিদ"
                 },
                 "amenity/police": {
                     "name": "পুলিশ"
@@ -961,9 +950,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "খামার"
-                },
-                "landuse/forest": {
-                    "name": "জঙ্গল"
                 },
                 "landuse/grass": {
                     "name": "ঘাস"

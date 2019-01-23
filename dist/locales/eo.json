@@ -408,6 +408,7 @@
             "cancel": "Nuligi",
             "changes": "{count} ŝanĝoj",
             "download_changes": "Elŝuti dosieron osmChange",
+            "errors": "Eraroj",
             "warnings": "Avertoj",
             "modified": "Ŝanĝita",
             "deleted": "Forigita",
@@ -495,20 +496,32 @@
             "locating": "Trovado de pozicio, bonvolu atendi…"
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z",
+                "title": "Pligrandigi al tio ĉi",
+                "tooltip_feature": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi objekto.",
+                "tooltip_note": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi rimarko.",
+                "tooltip_data": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi datumo.",
+                "tooltip_issue": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi problemo."
+            },
             "no_documentation_combination": "Estas neniu disponebla dokumentaro pri ĉi tiu kombino de etikedoj",
             "no_documentation_key": "Estas neniu disponebla dokumentaro pri ĉi tiu ŝlosilo",
-            "documentation_redirect": "Ĉi tiu dokumentara paĝo estis movita al nova loko",
             "show_more": "Montri pli",
             "view_on_osm": "Montri ĉe openstreetmap.org",
+            "view_on_keepRight": "Montri ĉe keepright.at",
             "all_fields": "Ĉiuj kampoj",
             "all_tags": "Ĉiuj etikedoj",
             "all_members": "Ĉiuj anoj",
             "all_relations": "Ĉiuj rilatoj",
             "new_relation": "Nova rilato…",
+            "choose_relation": "Elektu superan rilaton",
             "role": "Rolo",
             "choose": "Elektu specon de objekto",
             "results": "{n} rezultoj por {search}",
             "reference": "Montri ĉe OpenStreetMap-vikio",
+            "edit_reference": "Redakti aŭ traduki priskribon",
+            "wiki_reference": "Montri dokumentaron",
+            "wiki_en_reference": "Montri dokumenteron en la angla",
             "back_tooltip": "Ŝanĝi objekton",
             "remove": "Forigi",
             "search": "Serĉi",
@@ -578,6 +591,10 @@
                 "notes": {
                     "tooltip": "Rimarkoj el OpenStreetMap",
                     "title": "OpenStreetMap-rimarkoj"
+                },
+                "keepRight": {
+                    "tooltip": "Aŭtomate trovitajn map-erarojn el keepright.at",
+                    "title": "KeepRight-eraroj"
                 },
                 "custom": {
                     "tooltip": "Ŝovu kaj demetu datum-dosieron sur la paĝon, aŭ klaku la butonon por agordi",
@@ -758,6 +775,8 @@
         "validations": {
             "disconnected_highway": "Nekonektita vojo",
             "disconnected_highway_tooltip": "Vojoj devas esti konektitaj al aliaj vojoj aŭ enirejoj de konstruaĵoj",
+            "generic_name": "Ebla misuzo de etikedo “nomo”",
+            "generic_name_tooltip": "Ŝajnas, ke tiu ĉi objekto havas nomon “{name}”, kiu priskribas ĝian specon. Uzu la kampon “nomo” nur por enigi oficialan nomon por la objekto.",
             "old_multipolygon": "Etikedoj de plurangularoj sur ekstera linio",
             "old_multipolygon_tooltip": "Ĉi tiu stilo de plurangularoj estas evitinda. Bonvolu atribui etikedojn al patra plurangularo anstataŭ al ekstera linio.",
             "untagged_point": "Senetikeda punkto",
@@ -778,6 +797,323 @@
         },
         "cannot_zoom": "Ne povas plie plibonigi en nuna reĝimo.",
         "full_screen": "Baskuligi plenekranon",
+        "QA": {
+            "keepRight": {
+                "title": "KeepRight-eraro",
+                "detail_title": "Eraro",
+                "detail_description": "Priskribo",
+                "comment": "Komento",
+                "comment_placeholder": "Skribu komenton por sciigi aliajn uzantojn.",
+                "close": "Fermi (eraro riparita)",
+                "ignore": "Ignori (ne eraro)",
+                "save_comment": "Konservi komenton",
+                "close_comment": "Fermi kaj komenti",
+                "ignore_comment": "Ignori kaj komenti",
+                "error_parts": {
+                    "this_node": "tiu ĉi nodo",
+                    "this_way": "tiu ĉi linio",
+                    "this_relation": "tiu ĉi rilato",
+                    "this_oneway": "tiu ĉi unudirekta vojo",
+                    "this_highway": "tiu ĉi vojo",
+                    "this_railway": "tiu ĉi fervojo",
+                    "this_waterway": "tiu ĉi akvofluo",
+                    "this_cycleway": "tiu ĉi bicikla vojo",
+                    "this_cycleway_footpath": "tiu ĉi bicikla/piedirada vojo",
+                    "this_riverbank": "tiu ĉi riverbordo",
+                    "this_crossing": "tiu ĉi pasejo",
+                    "this_railway_crossing": "tiu ĉi traknivela pasejo",
+                    "this_bridge": "tiu ĉi ponto",
+                    "this_tunnel": "tiu ĉi tunelo",
+                    "this_boundary": "tiu ĉi limo",
+                    "this_turn_restriction": "tiu ĉi turna limigo",
+                    "this_roundabout": "tiu ĉi trafikcirlko",
+                    "this_mini_roundabout": "tiu ĉi eta trafikcirklo",
+                    "this_track": "tiu ĉi vojo kampa",
+                    "this_feature": "tiu ĉi objekto",
+                    "highway": "vojo",
+                    "railway": "fervojo",
+                    "waterway": "akvofluo",
+                    "cycleway": "bicikla vojo",
+                    "cycleway_footpath": "bicikla/piedirada vojo",
+                    "riverbank": "riverbordo",
+                    "place_of_worship": "preĝejo",
+                    "pub": "taverno",
+                    "restaurant": "restoracio",
+                    "school": "lernejo",
+                    "university": "universitato",
+                    "hospital": "malsanulejo",
+                    "library": "biblioteko",
+                    "theatre": "teatrejo",
+                    "courthouse": "juĝdomo",
+                    "bank": "bankejo",
+                    "cinema": "kinejo",
+                    "pharmacy": "apoteko",
+                    "cafe": "kafejo",
+                    "fast_food": "rapidmanĝejo",
+                    "fuel": "benzinejo",
+                    "from": "el",
+                    "to": "al",
+                    "left_hand": "maldekstr-flanka",
+                    "right_hand": "dekstr-flanka"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "Pluraj nodoj en la sama loko",
+                        "description": "Estas pli ol unu nodo en tiu ĉi loko: {var1}."
+                    },
+                    "30": {
+                        "title": "Nefermita areo",
+                        "description": "{var1} havas la etikedon “{var2}” kaj devus esti fermita linio."
+                    },
+                    "40": {
+                        "title": "Malĝusta unudirekta vojo",
+                        "description": "La unua nodo {var1} de tiu ĉi {var2} ne estas konektita al iu ajn alia vojo."
+                    },
+                    "41": {
+                        "description": "La fina nodo {var1} de tiu ĉi {var2} ne estas konektita al iu ajn alia vojo."
+                    },
+                    "42": {
+                        "description": "Vi ne povas aliri al {var1}, ĉar ĉiuj vojoj elirantaj el ĝi estas unudirektaj."
+                    },
+                    "43": {
+                        "description": "Vi ne povas eliri el {var1}, ĉar ĉiuj vojoj kondukantaj al ĝi estas unudirektaj."
+                    },
+                    "50": {
+                        "title": "Preskaŭ vojkruciĝo",
+                        "description": "{var1} estas tre proksima – sed ne kunigita – al la linio {var2}."
+                    },
+                    "60": {
+                        "title": "Evitinda etikedo",
+                        "description": "{var1} uzas evitindan etikedon “{var2}”. Anstataŭ uzu “{var3}”."
+                    },
+                    "70": {
+                        "title": "Mankanta etikedo",
+                        "description": "{var1} havas malplenan etikedon: “{var2}”."
+                    },
+                    "71": {
+                        "description": "{var1} havas neniun etikedon."
+                    },
+                    "72": {
+                        "description": "{var1} estas ano de neniu linio kaj havas neniun etikedon."
+                    },
+                    "73": {
+                        "description": "{var1} havas la etikedon “{var2}”, sed ne havas etikedon “highway”."
+                    },
+                    "74": {
+                        "description": "{var1} havas malplenan etikedon: “{var2}”."
+                    },
+                    "75": {
+                        "description": "{var1} havas nomon “{var2}” sed neniun alian etikedon."
+                    },
+                    "90": {
+                        "title": "Aŭtovojo sen etikedo “ref”",
+                        "description": "{var1} estas etikedita kiel aŭtovojo, do ĝi devas havi etikedon “ref”, “nat_ref” aŭ “int_ref”."
+                    },
+                    "100": {
+                        "title": "Preĝejo sen religio",
+                        "description": "{var1} estas etikedita kiel preĝejo, do ĝi devas havi etikedon de religio."
+                    },
+                    "110": {
+                        "title": "Interesejo sen nomo",
+                        "description": "{var1} }estas etikedita kiel “{var2}”, do ĝi devas havi etikedon de nomo."
+                    },
+                    "120": {
+                        "title": "Linio sen nodoj",
+                        "description": "{var1} estas nur unuopa nodo."
+                    },
+                    "130": {
+                        "title": "Nekonektita vojo",
+                        "description": "{var1} ne estas konektita al la resto de mapo."
+                    },
+                    "150": {
+                        "title": "Traknivela pasejo sen etikedo",
+                        "description": "{var1} de vojo kaj fervojo devas esti etikedita kiel “railway=crossing” (por piedirantoj) aŭ kiel “railway=level_crossing” (por aŭtoj)."
+                    },
+                    "160": {
+                        "title": "Malĝusta tavolo de fervojo",
+                        "description": "Estas vojoj en malsamaj tavoloj (ekz. tunelo aŭ ponto) kruciĝantaj en {var1}."
+                    },
+                    "170": {
+                        "title": "Etikedo “riparu min!”",
+                        "description": "{var1} havas la etikedon “Riparu min!”: {var2}"
+                    },
+                    "180": {
+                        "title": "Rilato sen tipo",
+                        "description": "{var1} ne havas la etikedon “type”."
+                    },
+                    "190": {
+                        "title": "Intersekco sen kruciĝo",
+                        "description": "{var1} intersekcas kun la {var2} {var3}, sed ne estas komuna nodo, aŭ ponto aŭ tunelo."
+                    },
+                    "200": {
+                        "title": "Sinkovrantaj linioj",
+                        "description": "{var1} sinkovras kun la {var2} {var3}."
+                    },
+                    "210": {
+                        "title": "Mem-intersekcanta linio",
+                        "description": "Povas okazi problemo pri mem-intersekcantaj linioj."
+                    },
+                    "211": {
+                        "description": "{var1} enhavas pli ol unu nodo plurfoje: {var2}. Tio ĉi povas esti eraro."
+                    },
+                    "212": {
+                        "description": "{var1} havas nur du malsamaj nodoj kaj unu el ili aperas pli ol unufoje."
+                    },
+                    "220": {
+                        "title": "Misskribita etikedo",
+                        "description": "{var1} estas etikedita kiel “{var2}”, kie “{var3}” ŝajnas esti “{var4}”."
+                    },
+                    "221": {
+                        "description": "{var1} havas ŝajne eraran etikedon “{var2}”."
+                    },
+                    "230": {
+                        "title": "Tavola konflikto",
+                        "description": "{var1} kruciĝas kun linioj sur malsamaj tavoloj."
+                    },
+                    "231": {
+                        "description": "{var1} kruciĝas kun linioj sur malsamaj tavoloj: {var2}.",
+                        "layer": "(tavolo: {layer})"
+                    },
+                    "232": {
+                        "description": "{var1} havas etikedon “layer={var2}”. Tio ĉi povas ne esti eraro, sed aspektas strange."
+                    },
+                    "270": {
+                        "title": "Nekutima aŭtovoja ligilo",
+                        "description": "{var1} kunigas aŭtovojon kun alia vojo, kiu ne estas aŭtovojo «motorway», aŭtovoja ligilo «motorway_link», vojo ekspresa «trunk», servejo de vojaĝantoj «rest_area» aŭ vojo dum konstruado «construction». Kunigo kun vojo alira «service» aŭ kvar-ranga «unclassified» estas ĝusta nur se ĝi havas nenion/privatan aliron «access=no/private» aŭ se ĝi kondukas al servejo de vojaĝantoj aŭ se ĝi estas parkumeja strateto «service=parking_aisle»."
+                    },
+                    "280": {
+                        "title": "Problemo pri limo",
+                        "description": "Povas okazi problemo pri tiu ĉi limo."
+                    },
+                    "281": {
+                        "title": "Mankanta nomo de limo",
+                        "description": "{var1} ne havas nomon."
+                    },
+                    "282": {
+                        "title": "Mankanta nivelo de administra limo",
+                        "description": "Tiu ĉi administra limo de {var1} ne havas la etikedon “admin_level”. Ne miksu administrajn nivelojn (ekz. “6;7”). Ĉiam aldonu la plej malaltan administran nivelon por ĉiuj limoj."
+                    },
+                    "283": {
+                        "title": "Limo ne fermita",
+                        "description": "La limo de {var1} ne estas fermita linio."
+                    },
+                    "284": {
+                        "title": "Limo disduigita",
+                        "description": "Li limo de {var1} disduigas tie ĉi."
+                    },
+                    "285": {
+                        "title": "Administra nivelo de limo tro alta",
+                        "description": "{var1} havas “admin_level={var2}”, sed ĝi apartenas al rilato kun pli malalta administra nivelo «admin_level» (al pli grava); devas esti kiel eble plej malalta administra nivelo por ĉiuj rilatoj."
+                    },
+                    "290": {
+                        "title": "Problemo pri turna limigo",
+                        "description": "Povas okazi problemo pri tiu ĉi turna limigo."
+                    },
+                    "291": {
+                        "title": "Mankanta tipo de limigo",
+                        "description": "{var1} havas nekonatan tipon de limigo."
+                    },
+                    "292": {
+                        "title": "Mankanta EL-vojo de turna limigo",
+                        "description": "{var1} havas {var2} anojn “EL”, sed ĝi devas havi 1."
+                    },
+                    "293": {
+                        "title": "Mankanta AL-vojo de turna limigo",
+                        "description": "{var1} havas {var2} anojn “AL”, sed ĝi devas havi 1."
+                    },
+                    "294": {
+                        "title": "AL aŭ EL de turna limigo ne estas vojo",
+                        "description": "{var1} havas anojn “EL” kaj “AL”, kiuj devas esti linioj. {var2}"
+                    },
+                    "295": {
+                        "title": "Turna limigo “TRA” ne estas fina punkto",
+                        "description": "{var1} havas nodon “TRA” (nodo {var2}), kiu ne estas unua aŭ fina ano de “{var3}” (linio {var4})."
+                    },
+                    "296": {
+                        "title": "Nekutima angulo de turna limigo",
+                        "description": "{var1} havas limigon de tipo “{var2}”, sed la angulo estas {var3}°. Eble la tipo de turna limigo estas malĝusta?"
+                    },
+                    "297": {
+                        "title": "Malĝusta direkto de vojo “AL”.",
+                        "description": "{var1} ne kongruas kun la direkto de vojo “AL” {var2}."
+                    },
+                    "298": {
+                        "title": "Malnecesa limigo - unudirekta vojo",
+                        "description": "{var1} povas esti malnecesa. Enveturo jam estas malpermesata per la etikedo “oneway” (unudirekta) sur {var2}."
+                    },
+                    "300": {
+                        "title": "Mankanta rapidlimo",
+                        "description": "Etikedo “maxspeed” (rapidlimo) mankas por {var1}, kiu estas etikedita kiel aŭtovojo, vojo ekspresa, unu-- aŭ du-ranga."
+                    },
+                    "310": {
+                        "title": "Problemo pri trafikcirklo",
+                        "description": "Povas okazi problemo pri tiu ĉi trafikcirklo."
+                    },
+                    "311": {
+                        "title": "Trafikcirklo ne fermita",
+                        "description": "{var1} estas parto de trafikcirklo, sed ne estas fermita linio. (Enveturejoj kondukantaj al trafikcirklo ne estu etikeditaj kiel trafikcirklo.)"
+                    },
+                    "312": {
+                        "title": "Malĝusta direkto de trafikcirklo",
+                        "description": "Se tiu ĉi {var1} troviĝas en lando kun {var2} trafiko, do ĝia trafik-direkto estas malĝusta."
+                    },
+                    "313": {
+                        "title": "Trafikcirklo malforte konektita",
+                        "description": "{var1} konektas apenaŭ {var2} alia{j}n vojo(j)n. Trafikcirkloj kutime konektas minimume 3 vojojn."
+                    },
+                    "320": {
+                        "title": "Malĝusta konekto de ligilo",
+                        "description": "{var1} estas etikedita kiel “{var2}”, sed ne konektas kun alia “{var3}” aŭ “{var4}”."
+                    },
+                    "350": {
+                        "title": "Malĝusta etikedo de ponto",
+                        "description": "{var1} ne havas la saman etikedon kiel la vojoj apudaj, kiuj priskribus celon de tiu ĉi ponto. Devas esti almenaŭ unu el tiuj etikedoj: {var2}."
+                    },
+                    "360": {
+                        "title": "Mankanta nomo en loka lingvo",
+                        "description": "Estas konsilinde se tiu ĉi {var1} havus lokan etikedon de nomo “name:XX={var2}”, kie XX reprezentus lingvon de tiu ĉi komuna nomo: “{var2}”."
+                    },
+                    "370": {
+                        "title": "Duplikataj  lokoj",
+                        "description": "{var1} havas la samajn etikedojn kiel la ĉirkaŭanta linio {var2} {var3}, do ĝi ŝajnas esti malnecesa.",
+                        "including_the_name": "(inkluzivante la nomon {name})"
+                    },
+                    "380": {
+                        "title": "Ne-fizika uzo de etikedo sporto",
+                        "description": "{var1} estas etikedita kiel “{var2}”, sed ne havas fizikan etikedon (ekz. ripozejo «leisure», konstruaĵo «building», servejo «amenity» aŭ vojo «highway»)."
+                    },
+                    "390": {
+                        "title": "Mankanta kvalito de vojo",
+                        "description": "{var1} ne havas la etikedon “tracktype”."
+                    },
+                    "400": {
+                        "title": "Problemo pri geometrio",
+                        "description": "Tie ĉi povas okazi problemo pri geometrio."
+                    },
+                    "401": {
+                        "title": "Mankanta turna limigo",
+                        "description": "Vojoj {var1} kaj {var2} kuniĝas je tre akuta angulo kaj tie ĉi ne estas etikedo “unudirekta” aŭ turna limigo, kiu malpermesus turnon."
+                    },
+                    "402": {
+                        "title": "Neebla angulo",
+                        "description": "{var1} kurbiĝas je tre akuta angulo tie ĉi."
+                    },
+                    "410": {
+                        "title": "Problemo pri retejo",
+                        "description": "Povas okazi problemo pri tiu ĉi retejo/ligilo."
+                    },
+                    "411": {
+                        "description": "{var1} povas havi neĝisdatan ligilon: {var2} kaŭzis HTTP-stat-kodon {var3}."
+                    },
+                    "412": {
+                        "description": "{var1} povas havi neĝisdatan ligilon: {var2} enhavas strangan tekston: “{var3}”."
+                    },
+                    "413": {
+                        "description": "{var1} povas havi neĝisdatan ligilon: {var2} ne enhavas la vortoj “{var3}”."
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "Strat-nivelaj fotoj de Microsoft",
             "title": "Fotara surtavolo (Bing Streetside)",
@@ -1004,6 +1340,14 @@
                 "using": "Por uzi GPS-spuron por mapigi, ŝovu kaj demetu dosieron en la map-redaktilo. Se ĝi estos legita, ĝi montriĝos sur la mapo kiel hela violkolora linio. Klaku la panelon {data} **map-datumoj** flanke de la mapo por montri, kaŝi aŭ pligrandigi al viaj GPS-datumoj.",
                 "tracing": "La GPS-spuro ne estas sendata al OpenStreetMap – la plej bona maniero por uzi ĝin estas desegni sur la mapo uzante ĝin kiel gvidilon por novaj objektoj por aldoni.",
                 "upload": "Vi ankaŭ povas [alŝuti viajn GPS-datumoj al OpenStreetMap](https://www.openstreetmap.org/trace/create) por ke aliaj uzantoj povu uzi ilin."
+            },
+            "qa": {
+                "title": "Certigo pri kvalito",
+                "intro": "Iloj por certigo pri kvalito povas trovi malĝustajn etikedojn, nekonektitajn vojojn kaj aliajn problemojn pri OpenStreetMap, kiuj mapigistoj povas ripari. Por vidigi ekzistajn problemojn pri kvalito, klaku la panelon {data} **map-datumoj** por vidigi specifan tavolon de problemoj pri kvalito.",
+                "tools_h": "Iloj",
+                "tools": "La jena ilo estas nuntempe subtenata: KeepRight](https://www.keepright.at/). Esperu al iD subteni estontece [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/) kaj pliajn ilojn.",
+                "issues_h": "Pritrakti problemojn",
+                "issues": "Pritrakti problemojn pri kvalito estas simila al pritrakti rimarkojn. Klaku la markon por vidigi detalojn pri la problemo sur la flankbreto. Ĉiu ilo karakterizas per siaj propraj kapabloj, sed ĝenerale vi povas komenti aŭ fermi problemon."
             },
             "field": {
                 "restrictions": {
@@ -1355,7 +1699,8 @@
                 },
                 "with_selected": {
                     "title": "Kun elektita objekto",
-                    "edit_menu": "Baskuli redakt-menuon"
+                    "edit_menu": "Baskuli redakt-menuon",
+                    "zoom_to": "Pligrandigi al elektita objekto"
                 },
                 "vertex_selected": {
                     "title": "Kun elektita nodo",
@@ -1645,6 +1990,9 @@
                 "atm": {
                     "label": "Bankaŭtomato"
                 },
+                "attraction": {
+                    "label": "Speco"
+                },
                 "backrest": {
                     "label": "Seĝodorso"
                 },
@@ -1669,7 +2017,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Servoj"
+                    "label": "Servo(j)"
                 },
                 "bench": {
                     "label": "Benko"
@@ -1717,6 +2065,9 @@
                 "building": {
                     "label": "Konstruaĵo"
                 },
+                "building/material": {
+                    "label": "Materialo"
+                },
                 "building_area": {
                     "label": "Konstruaĵo"
                 },
@@ -1751,6 +2102,9 @@
                 },
                 "castle_type": {
                     "label": "Speco"
+                },
+                "check_date": {
+                    "label": "Antaŭe kontrolita je"
                 },
                 "clothes": {
                     "label": "Vestaĵoj"
@@ -1791,6 +2145,10 @@
                 },
                 "country": {
                     "label": "Lando"
+                },
+                "couplings": {
+                    "label": "Nombro da kunigaĵoj",
+                    "placeholder": "1, 2, 3…"
                 },
                 "covered": {
                     "label": "Kovrita"
@@ -1884,12 +2242,24 @@
                 "design": {
                     "label": "Formo de fosto"
                 },
+                "destination/ref_oneway": {
+                    "label": "Vojaj numeroj de cellokoj"
+                },
+                "destination/symbol_oneway": {
+                    "label": "Simboloj de cellokoj"
+                },
+                "destination_oneway": {
+                    "label": "Cellokoj"
+                },
                 "devices": {
                     "label": "Aparatoj",
                     "placeholder": "1, 2, 3…"
                 },
                 "diaper": {
                     "label": "Tablo por travindotukado"
+                },
+                "diet_multi": {
+                    "label": "Dietoj"
                 },
                 "direction": {
                     "label": "Direkto (horloĝdirekte en gradoj)",
@@ -1943,6 +2313,14 @@
                 "dock": {
                     "label": "Speco"
                 },
+                "dog": {
+                    "label": "Hundoj",
+                    "options": {
+                        "leashed": "Nur en hundorimenoj",
+                        "no": "Malpermesataj",
+                        "yes": "Permesataj"
+                    }
+                },
                 "drive_through": {
                     "label": "Sen-elaŭtiga servo (drive-through)"
                 },
@@ -1974,6 +2352,9 @@
                 "emergency": {
                     "label": "Je danĝero"
                 },
+                "enforcement": {
+                    "label": "Speco"
+                },
                 "entrance": {
                     "label": "Speco"
                 },
@@ -1993,20 +2374,17 @@
                 "fence_type": {
                     "label": "Speco"
                 },
-                "fire_hydrant/position": {
-                    "label": "Pozicio",
-                    "options": {
-                        "green": "Herbotapiŝo",
-                        "lane": "Strato",
-                        "parking_lot": "Parkumejo",
-                        "sidewalk": "Irejo"
-                    }
+                "fire_hydrant/diameter": {
+                    "label": "Diametro (mm, in aŭ literoj)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "Premo (bar)"
                 },
                 "fire_hydrant/type": {
                     "label": "Speco",
                     "options": {
                         "pillar": "Supertera",
-                        "pond": "Lageto",
+                        "pipe": "Riglita tubo",
                         "underground": "Subtera",
                         "wall": "Muro"
                     }
@@ -2028,6 +2406,9 @@
                     "placeholder": "Norma"
                 },
                 "frequency": {
+                    "label": "Frekvenco"
+                },
+                "frequency_electrified": {
                     "label": "Frekvenco"
                 },
                 "from": {
@@ -2195,6 +2576,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (nomo de reto)"
                 },
+                "junction/ref_oneway": {
+                    "label": "Numero de vokruciĝo"
+                },
                 "kerb": {
                     "label": "Trotuar-randaĵo"
                 },
@@ -2317,6 +2701,10 @@
                 "memorial": {
                     "label": "Speco"
                 },
+                "minspeed": {
+                    "label": "Minimuma rapido",
+                    "placeholder": "20, 30, 40…"
+                },
                 "monitoring_multi": {
                     "label": "Observado"
                 },
@@ -2415,6 +2803,9 @@
                         "yes": "Jes"
                     }
                 },
+                "oneway/bicycle": {
+                    "label": "Unudirekta (bicikloj)"
+                },
                 "oneway_yes": {
                     "label": "Unudirekta",
                     "options": {
@@ -2424,6 +2815,9 @@
                         "undefined": "Implicite jes",
                         "yes": "Jes"
                     }
+                },
+                "opening_date": {
+                    "label": "Dato de malfermo (esperata)"
                 },
                 "opening_hours": {
                     "label": "Malfermaj horoj"
@@ -2965,6 +3359,9 @@
                 "surveillance/zone": {
                     "label": "Gardata areo"
                 },
+                "survey/date": {
+                    "label": "Antaŭe mapigita je"
+                },
                 "swimming_pool": {
                     "label": "Speco"
                 },
@@ -3009,9 +3406,6 @@
                 },
                 "tourism": {
                     "label": "Speco"
-                },
-                "tourism_attraction": {
-                    "label": "Turismo"
                 },
                 "tower/construction": {
                     "label": "Konstruaĵo",
@@ -3141,6 +3535,9 @@
                 "voltage/tertiary": {
                     "label": "Tria tensio"
                 },
+                "voltage_electrified": {
+                    "label": "Voltage"
+                },
                 "wall": {
                     "label": "Speco"
                 },
@@ -3149,6 +3546,12 @@
                 },
                 "water_point": {
                     "label": "Trinkejo"
+                },
+                "water_source": {
+                    "label": "Fonto de akvo"
+                },
+                "water_volume": {
+                    "label": "Volumeno da akva rezervujo (m³)"
                 },
                 "waterway": {
                     "label": "Speco"
@@ -3980,6 +4383,9 @@
                     "name": "Vojpavimo",
                     "terms": "pavimo,kovraĵo,surfaco"
                 },
+                "attraction": {
+                    "name": "Amuzo"
+                },
                 "attraction/amusement_ride": {
                     "name": "Allogaĵo amuzparka",
                     "terms": "atrakcio,allogajho,allogajxo,amuzparko"
@@ -4146,6 +4552,10 @@
                 "building": {
                     "name": "Konstruaĵo",
                     "terms": "konstruajho,konstruajxo,konstruo,domo"
+                },
+                "building/apartments": {
+                    "name": "Apartamentaro",
+                    "terms": "apartamento,loĝejaro,plurfamilia domo,multfamilia domo"
                 },
                 "building/barn": {
                     "name": "Garbejo",
@@ -4346,6 +4756,10 @@
                 "club": {
                     "name": "Klubejo",
                     "terms": "klubo,asocio,kulturdomo"
+                },
+                "club/sport": {
+                    "name": "Sporta klubejo",
+                    "terms": "sportoklubo,sporta asocio,sportklubo"
                 },
                 "craft": {
                     "name": "Metiejo",
@@ -4730,6 +5144,10 @@
                 "highway/bus_stop": {
                     "name": "Haltejo aŭtobusa"
                 },
+                "highway/construction": {
+                    "name": "Vojo fermita (dum konstruado)",
+                    "terms": "farmita vojo"
+                },
                 "highway/corridor": {
                     "name": "Koridoro endoma",
                     "terms": "koridoro"
@@ -4811,7 +5229,7 @@
                     "terms": "ŝosea cipo"
                 },
                 "highway/mini_roundabout": {
-                    "name": "Eta trafikcirklo",
+                    "name": "Trafikcirklo eta (traveturebla)",
                     "terms": "trafikcirklo,vojkruciĝo,rondo"
                 },
                 "highway/motorway": {
@@ -5027,8 +5445,7 @@
                     "terms": "akvokultivo,akvokulturo,akvikultivo,fiŝbredado,moluskoj,akvofarmo"
                 },
                 "landuse/basin": {
-                    "name": "Baseno (artefarita lageto)",
-                    "terms": "akvo,akvejo,akvujo,lageto,lago,rezervujo"
+                    "name": "Baseno (artefarita lageto)"
                 },
                 "landuse/brownfield": {
                     "name": "Konstruejo (post industria tereno)",
@@ -5161,6 +5578,9 @@
                     "name": "Arb-plantejo",
                     "terms": "plantejo,arbplantejo,arbokreskejo,arbidejo"
                 },
+                "landuse/pond": {
+                    "name": "Lageto"
+                },
                 "landuse/quarry": {
                     "name": "Minejo subĉiela",
                     "terms": "ŝtonminejo,ŝtonfosejo,ŝtonejo,fosejo"
@@ -5177,9 +5597,16 @@
                     "name": "Religia tereno",
                     "terms": "preĝejo,monaĥejo"
                 },
+                "landuse/reservoir": {
+                    "name": "Lago artefarita"
+                },
                 "landuse/residential": {
                     "name": "Privatdoma tereno",
                     "terms": "loĝejo,domo"
+                },
+                "landuse/residential/apartments": {
+                    "name": "Tereno de apartamentaroj",
+                    "terms": "apartamentaro,domaro,loĝloko"
                 },
                 "landuse/retail": {
                     "name": "Komerca tereno",
@@ -5353,6 +5780,10 @@
                     "name": "Uson-futbala ludkampo",
                     "terms": "futbalo usona,usona futbalo,usona piedpilkado,amerika futbalo"
                 },
+                "leisure/pitch/australian_football": {
+                    "name": "Aŭstrali-futbala ludkampo",
+                    "terms": "aŭstralia futbalo,aŭstralia piedpilkado"
+                },
                 "leisure/pitch/badminton": {
                     "name": "Badmintona ludkampo",
                     "terms": "badmintono,volanludo,teniso"
@@ -5384,6 +5815,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Rajdlernejo",
                     "terms": "ĉevalrajdlernejo,rajdlernejo,rajdejo,rajdadejo,maneĝo,maneĝejo,hipodromo"
+                },
+                "leisure/pitch/netball": {
+                    "name": "Netbala ludkampo",
+                    "terms": "netbalo,korbopilkado"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugbeo-13 ludkampo",
@@ -5425,10 +5860,6 @@
                     "name": "Turisma centro",
                     "terms": "turismejo,kuracejo,feriejo,pensiono"
                 },
-                "leisure/running_track": {
-                    "name": "Kurejo",
-                    "terms": "dromo,kurado"
-                },
                 "leisure/sauna": {
                     "name": "Ŝvitbanejo",
                     "terms": "shvitbanejo,sxvitbanejo,saŭno,sauxno,sauno,naĝejo,baseno"
@@ -5456,6 +5887,14 @@
                 "leisure/track": {
                     "name": "Kurejo/biciklejo/konkursejo (nemotora)",
                     "terms": "dromo,kurado,biciklado,stadiono,konkursejo,areno"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "Kurejo ĉevala",
+                    "terms": "dromo,kurado,ĉevalkurado"
+                },
+                "leisure/track/running": {
+                    "name": "Kurejo",
+                    "terms": "dromo,kurado"
                 },
                 "leisure/water_park": {
                     "name": "Akvoparko",
@@ -5737,6 +6176,10 @@
                     "name": "Akvejo",
                     "terms": "akvo,akvujo,lago,lageto"
                 },
+                "natural/water/canal": {
+                    "name": "Kanalo",
+                    "terms": "akvovojo"
+                },
                 "natural/water/lake": {
                     "name": "Lago",
                     "terms": "akvujo.akvejo,laguno,lageto"
@@ -5748,6 +6191,14 @@
                 "natural/water/reservoir": {
                     "name": "Lago artefarita",
                     "terms": "akvorezervujo,akvujo,akvoenlasejo"
+                },
+                "natural/water/river": {
+                    "name": "Rivero",
+                    "terms": "rivereto,torento,akvofluo"
+                },
+                "natural/water/stream": {
+                    "name": "Rivereto",
+                    "terms": "rivero,akvofluo,torento"
                 },
                 "natural/wetland": {
                     "name": "Malsekejo",
@@ -5924,6 +6375,10 @@
                 "piste/downhill": {
                     "name": "Skivojo alpa (malsuprenira)",
                     "terms": "skivojo,skitrako,alpa skiado"
+                },
+                "piste/downhill/halfpipe": {
+                    "name": "Duontubo",
+                    "terms": "neĝtabulado,neĝparko"
                 },
                 "piste/hike": {
                     "name": "Skivojo marŝada",
@@ -6397,7 +6852,7 @@
                     "terms": "rilato"
                 },
                 "roundabout": {
-                    "name": "Trafikcirklo"
+                    "name": "Trafikcirklo (kun fizika insulo)"
                 },
                 "route/ferry": {
                     "name": "Prama kurso",
@@ -6530,6 +6985,10 @@
                     "name": "Aŭtomobil-riparejo",
                     "terms": "aŭtoriparejo,riparejo,aŭtoservejo,aŭtejo,autoriparejo,auxtoriparejo,meĥanisto,mekanisto,meĥanikisto,mekanikisto"
                 },
+                "shop/caravan": {
+                    "name": "Vendejo de kampad-veturiloj",
+                    "terms": "kampadveturiloj,kampveturiloj,domveturiloj,loĝaŭtoj"
+                },
                 "shop/carpet": {
                     "name": "Tapiŝa vendejo",
                     "terms": "tapiŝoj,tapishoj,tapisxoj,plankoj"
@@ -6634,6 +7093,14 @@
                     "name": "Mod-butiko",
                     "terms": "vestaĵoj,vestovendejo"
                 },
+                "shop/fireplace": {
+                    "name": "Kamen-vendejo",
+                    "terms": "kamenoj,hejtiloj"
+                },
+                "shop/fishing": {
+                    "name": "Fiŝkaptil-vendejo",
+                    "terms": "fiŝhokado,fiŝkaptado,hokfiŝado"
+                },
                 "shop/fishmonger": {
                     "name": "Fiŝa vendejo"
                 },
@@ -6644,6 +7111,10 @@
                 "shop/frame": {
                     "name": "Bild-kadra vendejo",
                     "terms": "kadroj,kadraĵoj,pentraĵkadroj,bildkadroj"
+                },
+                "shop/fuel": {
+                    "name": "Brulaĵ-vendejo",
+                    "terms": "brulaĵo,benzino,fuelo,gaso,gasboteloj,gasujoj,boteloj"
                 },
                 "shop/funeral_directors": {
                     "name": "Tombistejo",
@@ -6703,6 +7174,10 @@
                 "shop/houseware": {
                     "name": "Mastrum-aparata vendejo",
                     "terms": "mastrumado,mastrumaparatoj,mastrumaj aparatoj,potoj,manĝiloj"
+                },
+                "shop/hunting": {
+                    "name": "Ĉasil-vendejo",
+                    "terms": "ĉasado,kaptado,bestoĉasado,armiloj,pafiloj,fusiloj"
                 },
                 "shop/interior_decoration": {
                     "name": "Ensembla (meblara) vendejo",
@@ -6806,7 +7281,7 @@
                 },
                 "shop/pawnbroker": {
                     "name": "Mon-pruntejo (kontraŭ garantiaĵo)",
-                    "terms": "lombardo,monprunto,lombardejo,pruntejo"
+                    "terms": "lombardo,monprunto,lombardejo,pruntejo,brokantejo"
                 },
                 "shop/perfumery": {
                     "name": "Parfuma vendejo",
@@ -6934,6 +7409,10 @@
                 "shop/watches": {
                     "name": "Horloĝa vendejo",
                     "terms": "horloĝoj,horloghoj,horlogxoj,poŝhorloĝoj"
+                },
+                "shop/water": {
+                    "name": "Trinkakv-vendejo",
+                    "terms": "akvo,trinkebla akvo,boteligita akvo,enboteligita akvo"
                 },
                 "shop/water_sports": {
                     "name": "Akvosport-aparata vendejo",
@@ -7143,6 +7622,10 @@
                     "name": "Administra limo",
                     "terms": "limo,landlimo,provinclimo,ŝtatlimo,urblimo"
                 },
+                "type/enforcement": {
+                    "name": "Kontrolo",
+                    "terms": "rapidkontrolo,radaro,kamerao,fotilo,pesilo,pezkontrolo"
+                },
                 "type/multipolygon": {
                     "name": "Plurangularo"
                 },
@@ -7302,8 +7785,7 @@
                     "terms": "rivereto,torento,akvofluo"
                 },
                 "waterway/riverbank": {
-                    "name": "Riverbordo",
-                    "terms": "bordo de rivero,flanko de rivero"
+                    "name": "Riverbordo"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Stacio de forigado de fekaĵoj (por jaĥtoj)",
@@ -7567,7 +8049,14 @@
                     "text": "GSI Japanujo"
                 },
                 "description": "Aera fotaro de GSI Japanujo. Kutime pli akurata ol Bing, sed malpli nova.",
-                "name": "Aera fotaro GSI Japanujo"
+                "name": "Aera fotaro GSI Japanujo (korektita)"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japanujo"
+                },
+                "description": "Aera fotaro de GSI Japanujo. Ne tute geometrie korektita, sed iomete pli aktuala aŭ kovranta aliajn terenojn ol fotaro de GSI.",
+                "name": "Aera fotaro GSI Japanujo (nekorektita)"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
@@ -7856,10 +8345,6 @@
                 "name": "OpenStreetMap Japan",
                 "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Japanujo"
             },
-            "OSM-korea-telegram": {
-                "name": "Telegram-kanalo OSM Korea",
-                "description": "Neoficiala kanalo por kontribuantoj, komunumoj kaj uzantoj de OpenStreetMap en Koreujo por kunhavigi kaj diskuti"
-            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaysia ĉe Facebook",
                 "description": "Por babili pri ĉio rilata al OpenStreetMap!"
@@ -7910,11 +8395,6 @@
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU ĉe Telegram",
                 "description": "Telegram-grupo OpenStreetMap Rusujo"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Sri Lanka",
-                "description": "Plibonigi OpenStreetMap en Srilanko",
-                "extendedDescription": "Ĉu vi mapigas en Srilanko? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Taiwan",

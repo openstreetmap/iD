@@ -5,7 +5,8 @@
             "information": "informacja",
             "remove": "usuń",
             "undo": "Cofnij",
-            "zoom_to": "powiększ do"
+            "zoom_to": "powiększ do",
+            "open_wikidata": "otwórz w wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -406,6 +407,7 @@
             "cancel": "Anuluj",
             "changes": "{count} zmian/zmiany",
             "download_changes": "Pobierz plik zmian na OSM",
+            "errors": "Błędy",
             "warnings": "Ostrzeżenia",
             "modified": "Zmodyfikowano",
             "deleted": "Usunięto",
@@ -494,16 +496,20 @@
             "locating": "Ustalanie położenia, proszę czekać..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z"
+            },
             "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji znaczników",
             "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
-            "documentation_redirect": "Ta dokumentacja została przeniesiona na nową stronę",
             "show_more": "Wyświetl więcej",
             "view_on_osm": "Wyświetl na openstreetmap.org",
+            "view_on_keepRight": "Wyświetl w keepright.at",
             "all_fields": "Wszystkie pola",
             "all_tags": "Wszystkie znaczniki",
             "all_members": "Wszyscy członkowie",
             "all_relations": "Wszystkie relacje",
             "new_relation": "Nowa relacja...",
+            "choose_relation": "Wybierz relację nadrzędną",
             "role": "Rola",
             "choose": "Wybierz rodzaj obiektu",
             "results": "{n} wyników dla {search}",
@@ -758,6 +764,7 @@
         "validations": {
             "disconnected_highway": "Droga odłączona od siatki innych dróg",
             "disconnected_highway_tooltip": "Drogi powinny być połączone z innymi drogami lub wejściami do budynków. ",
+            "generic_name": "Możliwie nazwa ogólne",
             "old_multipolygon": "Znaczniki multipoligonu na linii zewnętrznej",
             "old_multipolygon_tooltip": "Ten sposób oznaczania multipoligonu jest przestarzały. Znaczniki powinny być zapisane w relacji, a nie na zewnętrznej linii.",
             "untagged_point": "Pusty punkt - brak znaczników",
@@ -778,6 +785,18 @@
         },
         "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
         "full_screen": "Tryb pełnoekranowy",
+        "QA": {
+            "keepRight": {
+                "detail_title": "Błąd",
+                "detail_description": "Opis",
+                "comment": "Komentarz",
+                "close": "Zamknij (Błąd został naprawiony)",
+                "ignore": "Ignoruj (To nie jest błąd)",
+                "save_comment": "Zachowaj komentarz",
+                "close_comment": "Rozwiąż i zostaw komentarz",
+                "ignore_comment": "Ignoruj i zostaw komentarz"
+            }
+        },
         "streetside": {
             "tooltip": "Zdjęcia ulic od Microsoftu",
             "title": "Nakładka zdjęciowa (ulice z Bing)",
@@ -1437,6 +1456,9 @@
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
         },
+        "wikidata": {
+            "description": "Opis"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1646,6 +1668,9 @@
                 "barrier": {
                     "label": "Typ"
                 },
+                "basin": {
+                    "label": "Rodzaj"
+                },
                 "bath/open_air": {
                     "label": "Zewnątrz"
                 },
@@ -1659,9 +1684,6 @@
                         "hot_spring": "Gorące źródła",
                         "onsen": "Japoński Onsen"
                     }
-                },
-                "beauty": {
-                    "label": "Typ sklepu"
                 },
                 "bench": {
                     "label": "Ławka"
@@ -1744,6 +1766,9 @@
                 "castle_type": {
                     "label": "Rodzaj"
                 },
+                "check_date": {
+                    "label": "Data ostatniego sprawdzenia"
+                },
                 "clothes": {
                     "label": "Ubrania"
                 },
@@ -1783,6 +1808,10 @@
                 },
                 "country": {
                     "label": "Kraj"
+                },
+                "couplings": {
+                    "label": "złącze",
+                    "placeholder": "1, 2, 3..."
                 },
                 "covered": {
                     "label": "Przykrycie"
@@ -1883,6 +1912,9 @@
                 "diaper": {
                     "label": "Dostępny przewijak dla dzieci"
                 },
+                "diet_multi": {
+                    "label": "Rodzaj diety"
+                },
                 "direction": {
                     "label": "Kierunek (Stopnie)",
                     "placeholder": "45, 90, 180, 270"
@@ -1966,6 +1998,9 @@
                 "emergency": {
                     "label": "W razie niebezpieczeństwa"
                 },
+                "enforcement": {
+                    "label": "Rodzaj"
+                },
                 "entrance": {
                     "label": "Typ"
                 },
@@ -1985,20 +2020,17 @@
                 "fence_type": {
                     "label": "Rodzaj"
                 },
-                "fire_hydrant/position": {
-                    "label": "Lokalizacja",
-                    "options": {
-                        "green": "Zieleń",
-                        "lane": "Jezdnia",
-                        "parking_lot": "Miejsce parkingowe",
-                        "sidewalk": "Chodnik"
-                    }
+                "fire_hydrant/diameter": {
+                    "label": "Średnica (mm, in, lub litery)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "Ciśnienie (bar)"
                 },
                 "fire_hydrant/type": {
-                    "label": "Typ",
+                    "label": "Kształt",
                     "options": {
                         "pillar": "Nadziemny",
-                        "pond": "Staw",
+                        "pipe": "kształt zakończenia rury",
                         "underground": "Podziemny",
                         "wall": "Mur"
                     }
@@ -2167,6 +2199,9 @@
                 },
                 "intermittent": {
                     "label": "Okresowość"
+                },
+                "intermittent_yes": {
+                    "label": "okresowość"
                 },
                 "internet_access": {
                     "label": "Dostęp do internetu",
@@ -2413,6 +2448,9 @@
                         "undefined": "Domyślnie tak",
                         "yes": "Tak"
                     }
+                },
+                "opening_date": {
+                    "label": "Oczekiwana data otwarcia"
                 },
                 "opening_hours": {
                     "label": "Godziny otwarcia w formacie podanym na Wiki"
@@ -2954,6 +2992,9 @@
                 "surveillance/zone": {
                     "label": "Obszar Dozoru"
                 },
+                "survey/date": {
+                    "label": "Data ostatniej kontroli"
+                },
                 "swimming_pool": {
                     "label": "Rodzaj"
                 },
@@ -2998,9 +3039,6 @@
                 },
                 "tourism": {
                     "label": "Typ"
-                },
-                "tourism_attraction": {
-                    "label": "Turystyka"
                 },
                 "tower/construction": {
                     "label": "Typ konstrukcji",
@@ -3139,6 +3177,12 @@
                 "water_point": {
                     "label": "Poidło"
                 },
+                "water_source": {
+                    "label": "Źródło wody"
+                },
+                "water_volume": {
+                    "label": "Objętość zapasu wody (m³)"
+                },
                 "waterway": {
                     "label": "Typ"
                 },
@@ -3157,6 +3201,9 @@
                 },
                 "width": {
                     "label": "Szerokość (w metrach)"
+                },
+                "wikidata": {
+                    "label": "Wikidata"
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
@@ -3560,7 +3607,7 @@
                     "name": "Dom spokojnej starości"
                 },
                 "amenity/parking": {
-                    "name": "Miejsce parkingowe",
+                    "name": "Parking samochodowy",
                     "terms": "samochód,parking"
                 },
                 "amenity/parking/multi-storey": {
@@ -3583,10 +3630,6 @@
                     "name": "Terminal płatniczy",
                     "terms": "infokiosk,ekiosk,bankomat,rachunki,podatki,płatności telefoniczne,finanse,gotówka,przelew,karta"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apteka",
-                    "terms": "apteka,leki"
-                },
                 "amenity/place_of_worship": {
                     "name": "Miejsce odbywania się praktyk religijnych",
                     "terms": "opactwo,bazylika,katedra,prezbiterium,kaplica,kościół,owczarnia,dom Boży,dom modlitwy,tum,misja,meczet,parafia,sanktuarium,świątynia,synagoga,tabernakulum"
@@ -3595,21 +3638,9 @@
                     "name": "Świątynia buddyjska",
                     "terms": "stupa,wihara,klasztor,świątynia,pagoda,zendo,dojo"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kościół",
-                    "terms": "chrześcijaństwo,opactwo,bazylika,katedra,prezbiterium,kaplica,dom Boży,dom modlitwy,misja,oratorium,parafia,sanktuarium,świątynia,tabernakulum"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Świątynia hinduistyczna",
                     "terms": "świątynia hinduistyczna"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagoga",
-                    "terms": "synagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Meczet",
-                    "terms": "meczet"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Sanktuarium shintoistyczne",
@@ -3777,7 +3808,7 @@
                     "terms": "zadaszenie piknikowe,pawilon"
                 },
                 "amenity/shelter/public_transport": {
-                    "name": "Wiata tranzytowa",
+                    "name": "Wiata przystankowa",
                     "terms": "wiata przystankowa,przystanek autobusowy,stacja metra,oczekiwanie"
                 },
                 "amenity/shower": {
@@ -4125,6 +4156,10 @@
                     "name": "Budynek (ogólny)",
                     "terms": "budynek,budowla,dom"
                 },
+                "building/apartments": {
+                    "name": "Budynek mieszkalny wielorodzinny",
+                    "terms": "blok,kamienica"
+                },
                 "building/barn": {
                     "name": "Stodoła",
                     "terms": "stodoła"
@@ -4145,7 +4180,7 @@
                     "terms": "chata, dom letniskowy"
                 },
                 "building/carport": {
-                    "name": "Wiata",
+                    "name": "Wiata garażowa",
                     "terms": "wiata,zadaszone miejsce parkingowe,garaż,samochód,podjazd"
                 },
                 "building/cathedral": {
@@ -4708,6 +4743,9 @@
                 "highway/bus_stop": {
                     "name": "Przystanek autobusowy / platforma"
                 },
+                "highway/construction": {
+                    "name": "Droga zamknięta"
+                },
                 "highway/corridor": {
                     "name": "Korytarz (w budynku)",
                     "terms": "korytarz, hall"
@@ -5005,8 +5043,7 @@
                     "terms": "hodowla ryb"
                 },
                 "landuse/basin": {
-                    "name": "Zbiornik wodny lub suchy",
-                    "terms": "zbiornik,wodny,retencyjny"
+                    "name": "Zbiornik wodny lub suchy"
                 },
                 "landuse/brownfield": {
                     "name": "Teren poprzemysłowy/powyburzeniowy",
@@ -5038,10 +5075,6 @@
                 "landuse/farmyard": {
                     "name": "Teren z zabudowaniami rolniczymi",
                     "terms": "podwórze gospodarskie"
-                },
-                "landuse/forest": {
-                    "name": "Las",
-                    "terms": "las,puszcza"
                 },
                 "landuse/garages": {
                     "name": "Teren z garażami",
@@ -5158,6 +5191,9 @@
                 "landuse/residential": {
                     "name": "Zabudowa mieszkaniowa",
                     "terms": "Teren zamieszkały"
+                },
+                "landuse/residential/apartments": {
+                    "name": "Osiedle mieszkaniowe"
                 },
                 "landuse/retail": {
                     "name": "Teren handlu detalicznego",
@@ -5331,6 +5367,9 @@
                     "name": "Boisko do futbolu amerykańskiego",
                     "terms": "futbol amerykański"
                 },
+                "leisure/pitch/australian_football": {
+                    "name": "Boisko do gry w futbol australijski"
+                },
                 "leisure/pitch/badminton": {
                     "name": "Kort do badmintona",
                     "terms": "badminton,kort,boisko"
@@ -5362,6 +5401,9 @@
                 "leisure/pitch/equestrian": {
                     "name": "Ujeżdżalnia",
                     "terms": "ujeżdżalnia"
+                },
+                "leisure/pitch/netball": {
+                    "name": "Boisko do Netball"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Boisko rugby league",
@@ -5403,10 +5445,6 @@
                     "name": "Ośrodek wczasowy",
                     "terms": "resort, ośrodek wczasowy"
                 },
-                "leisure/running_track": {
-                    "name": "Bieżnia (Bieganie)",
-                    "terms": "bieżnia,tor,bieg"
-                },
                 "leisure/sauna": {
                     "name": "Sauna",
                     "terms": "sauna"
@@ -5434,6 +5472,12 @@
                 "leisure/track": {
                     "name": "Tor wyścigowy (niemotorowy)",
                     "terms": "tor,wyścigowy,kolarstwo,kolarski,konie,konny"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "Hipodrom (Wyścigi konne)"
+                },
+                "leisure/track/running": {
+                    "name": "Bieżnia (Bieganie)"
                 },
                 "leisure/water_park": {
                     "name": "Park wodny",
@@ -6612,6 +6656,9 @@
                     "name": "Sklep odzieżowy",
                     "terms": "moda,butik"
                 },
+                "shop/fishing": {
+                    "name": "Sklep wędkarski"
+                },
                 "shop/fishmonger": {
                     "name": "Sklep rybny"
                 },
@@ -6681,6 +6728,9 @@
                 "shop/houseware": {
                     "name": "Sklep z małymi artykułami gospodarstwa domowego",
                     "terms": "sztućce, garnki, artykuły kuchenne, małe agd"
+                },
+                "shop/hunting": {
+                    "name": "Sklep myśliwski"
                 },
                 "shop/interior_decoration": {
                     "name": "Sklep z dekoracją wnętrz",
@@ -6913,6 +6963,9 @@
                     "name": "Zegarmistrz",
                     "terms": "Zegarmistrz"
                 },
+                "shop/water": {
+                    "name": "Sklep z wodą pitną"
+                },
                 "shop/water_sports": {
                     "name": "Sklep ze sprzętem do sportów wodnych",
                     "terms": "Sklep ze sprzętem do sportów wodnych"
@@ -7121,6 +7174,9 @@
                     "name": "Granica administracyjna",
                     "terms": "Granica administracyjna,"
                 },
+                "type/enforcement": {
+                    "name": "Kontrola"
+                },
                 "type/multipolygon": {
                     "name": "Wielokąt złożony"
                 },
@@ -7280,8 +7336,7 @@
                     "terms": "odpływ,potok,ujście,strumyk,dopływ,ciek wodny"
                 },
                 "waterway/riverbank": {
-                    "name": "Brzeg rzeki",
-                    "terms": "Brzeg rzeki, linia brzegowa"
+                    "name": "Brzeg rzeki"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Miejsce opróżniania toalety (dla łodzi)",
@@ -7834,10 +7889,6 @@
                 "name": "OpenStreetMap Japonia",
                 "description": "Maperzy i użytkownicy OpenStreetMap w Japonii"
             },
-            "OSM-korea-telegram": {
-                "name": "Kanał OSM Korea na Telegramie",
-                "description": "Nieoficjalny kanał twórców, społeczności i użytkowników OpenStreetMap w Korei."
-            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malezja na Facebooku",
                 "description": "Do rozmów o wszystkim powiązanym z OpenStreetMap!"
@@ -7888,11 +7939,6 @@
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU na Telegramie",
                 "description": "Kanał OpenStreetMap Rosja na Telegramie"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Sri Lanka",
-                "description": "Ulepsz OpenStreetMap na Sri Lance",
-                "extendedDescription": "Mapujesz na Sri Lance? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap tajwańska społeczność",

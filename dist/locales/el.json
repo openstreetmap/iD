@@ -421,7 +421,6 @@
         "inspector": {
             "no_documentation_combination": "Δεν υπάρχει διαθέσιμη τεκμηρίωση για αυτόν τον συνδυασμό ετικετών",
             "no_documentation_key": "Δεν υπάρχει διαθέσιμη τεκμηρίωση για αυτό το κλειδί",
-            "documentation_redirect": "Αυτές οι οδηγίες έχουν ανακατευθυνθεί σε μια νέα σελίδα",
             "show_more": "Εμφάνιση Περισσότερων",
             "view_on_osm": "Προβολή στο openstreetmap.org",
             "all_fields": "Όλα τα πεδία",
@@ -1382,9 +1381,6 @@
                         "onsen": "Ιαπωνική Onsen"
                     }
                 },
-                "beauty": {
-                    "label": "Τύπος Καταστήματος"
-                },
                 "bench": {
                     "label": "Παγκάκι"
                 },
@@ -1671,20 +1667,9 @@
                 "fence_type": {
                     "label": "Είδος"
                 },
-                "fire_hydrant/position": {
-                    "label": "Θέση",
-                    "options": {
-                        "green": "Πράσινο",
-                        "lane": "Λωρίδα",
-                        "parking_lot": "Θέση Στάθμευσης",
-                        "sidewalk": "Πεζοδρόμιο"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Τύπος",
                     "options": {
                         "pillar": "Κολώνα/Υπερυψωμένο",
-                        "pond": "Λιμνούλα",
                         "underground": "Υπόγεια",
                         "wall": "Τοίχος"
                     }
@@ -2303,7 +2288,7 @@
                     "label": "Είδος Στοπ",
                     "options": {
                         "all": "'Ολες οι Κατευθύνσεις",
-                        "minor": "Δευτερεύων Δρόμος"
+                        "minor": "Επαρχιακή Οδός"
                     }
                 },
                 "structure": {
@@ -2387,9 +2372,6 @@
                 },
                 "tourism": {
                     "label": "Τύπος"
-                },
-                "tourism_attraction": {
-                    "label": "Τουρισμός"
                 },
                 "tower/construction": {
                     "label": "Κατασκευή"
@@ -2768,10 +2750,6 @@
                 "amenity/parking_space": {
                     "name": "Θέση στάθμευσης"
                 },
-                "amenity/pharmacy": {
-                    "name": "Φαρμακείο",
-                    "terms": "Φαρμακείο, φαρμακοποιός"
-                },
                 "amenity/place_of_worship": {
                     "name": "Χώρος Λατρείας",
                     "terms": "Τόπος λατρείας, Ναός, ιερός ναός, μοναστήρι, ιερά μονή, προσκύνημα, οίκος προσευχής"
@@ -2780,20 +2758,8 @@
                     "name": "Βουδιστικός Ναός",
                     "terms": "Βουδιστικός ναός"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Εκκλησία",
-                    "terms": "Εκκλησία, ξωκλήσι, εκκλησάκι, ναός, ιερός ναός"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Ινδουιστικός Ναός"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Συναγωγή",
-                    "terms": "Συναγωγή"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Τζαμί",
-                    "terms": "Τζαμί"
                 },
                 "amenity/planetarium": {
                     "name": "Πλανητάριο",
@@ -2833,6 +2799,9 @@
                 "amenity/restaurant": {
                     "name": "Εστιατόριο",
                     "terms": "Εστιατόριο, Ταβέρνα, Μεζεδοπωλείο, Μαγειρείο, Οινομαγειρείο, ρεστοράν, κουτούκι, πιτσαρία, σουβλατζίδικο, φαγάδικο, φαγητό"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Πιτσαρία"
                 },
                 "amenity/school": {
                     "name": "Χώρος Σχολείου",
@@ -3264,22 +3233,21 @@
                     "terms": "Μονοπάτι, Διαδρομή πεζού, πεζοδρόμιο, πεζόδρομος, βόλτα"
                 },
                 "highway/living_street": {
-                    "name": "Δρόμος ήπιας κυκλοφορίας",
-                    "terms": "Δρόμος χαμηλής κυκλοφορίας, Δρόμος χαμηλής ταχύτητας"
+                    "name": "Οδός ήπιας κυκλοφορίας"
                 },
                 "highway/mini_roundabout": {
                     "name": "Μικρός Κυκλικός Κόμβος",
                     "terms": "Μικρός κυκλικός κόμβος"
                 },
                 "highway/motorway": {
-                    "name": "Αυτοκινητόδρομος",
+                    "name": "Υπεραστικός αυτοκινητόδρομος",
                     "terms": "Αυτοκινητόδρομος"
                 },
                 "highway/motorway_junction": {
                     "name": "Διασταύρωση Αυτοκινητόδρομου / Έξοδος"
                 },
                 "highway/motorway_link": {
-                    "name": "Σύνδεση Αυτοκινητόδρομου",
+                    "name": "Σύνδεση Υπεραστικού αυτοκινητόδρομου",
                     "terms": "Σύνδεσμος Αυτοκινητόδρομου"
                 },
                 "highway/path": {
@@ -3287,15 +3255,15 @@
                     "terms": "Διαδρομή, μονοπάτι"
                 },
                 "highway/primary": {
-                    "name": "Πρωτεύων Δρόμος",
+                    "name": "Εθνική οδός/Λεωφόρος",
                     "terms": "Κύρια Οδός"
                 },
                 "highway/primary_link": {
-                    "name": "Σύνδεση Πρωτεύοντος",
+                    "name": "Σύνδεση Εθνικής οδού/Οδικού άξονα",
                     "terms": "Σύνδεσμος κύριας οδού"
                 },
                 "highway/residential": {
-                    "name": "Οικιστική Οδός",
+                    "name": "Τοπική οδός κατοικιών",
                     "terms": "Αστική οδός, Τοπική οδός, Οδός εντός αστικού ιστού"
                 },
                 "highway/road": {
@@ -3303,15 +3271,15 @@
                     "terms": "Άγνωστη οδός"
                 },
                 "highway/secondary": {
-                    "name": "Δευτερεύων Δρόμος",
+                    "name": "Επαρχιακή Οδός",
                     "terms": "Δευτερεύουσα Οδός"
                 },
                 "highway/secondary_link": {
-                    "name": "Σύνδεση Δευτερεύοντος",
+                    "name": "Σύνδεση Επαρχιακής οδού",
                     "terms": "Σύνδεσμος δευτερεύουσας οδού"
                 },
                 "highway/service": {
-                    "name": "Δρόμος εξυπηρέτησης",
+                    "name": "Δρόμος υπηρεσιών",
                     "terms": "Δρόμος εξυπηρέτησης, Βοηθητικός δρόμος, βοηθητική οδός"
                 },
                 "highway/service/alley": {
@@ -3340,15 +3308,14 @@
                     "name": "Φανοστάτης"
                 },
                 "highway/tertiary": {
-                    "name": "Τριτεύων Δρόμος"
+                    "name": "Τοπική Οδός"
                 },
                 "highway/tertiary_link": {
-                    "name": "Σύνδεση Τριτεύοντος",
+                    "name": "Σύνδεση Τοπικής οδού",
                     "terms": "Σύνδεσμος τριτεύουσας οδού"
                 },
                 "highway/track": {
-                    "name": "Χωματόδρομος",
-                    "terms": "Καρόδρομος"
+                    "name": "Αγροτικός δρόμος"
                 },
                 "highway/traffic_mirror": {
                     "name": "Οδικός Καθρέπτης"
@@ -3358,10 +3325,10 @@
                     "terms": "Φανάρια κυκλοφορίας, φωτεινός σηματοδότης"
                 },
                 "highway/trunk": {
-                    "name": "Λεωφόρος"
+                    "name": "Οδικός άξονας / Λεωφόρος"
                 },
                 "highway/trunk_link": {
-                    "name": "Σύνδεση λεωφόρου"
+                    "name": "Σύνδεση Εθνικής οδού/Λεωφόρου"
                 },
                 "highway/unclassified": {
                     "name": "Αταξινόμητος Δρόμος",
@@ -3412,8 +3379,7 @@
                     "terms": "Ιχθυοκαλλιέργεια"
                 },
                 "landuse/basin": {
-                    "name": "Κανάλι Αποστράγγισης",
-                    "terms": "Λεκανοπέδιο"
+                    "name": "Κανάλι Αποστράγγισης"
                 },
                 "landuse/cemetery": {
                     "name": "Κοιμητήριο",
@@ -3440,10 +3406,6 @@
                 "landuse/farmyard": {
                     "name": "Αγροτεμάχιο",
                     "terms": "Χωράφι, Αγρός, Καλλιεργήσιμη Έκταση"
-                },
-                "landuse/forest": {
-                    "name": "Δάσος",
-                    "terms": "Δάσος, δασική έκταση"
                 },
                 "landuse/grass": {
                     "name": "Γρασίδι",
@@ -4073,6 +4035,9 @@
                     "name": "Κατάστημα Υπολογιστών",
                     "terms": "Κατάστημα ηλεκτρονικών υπολογιστών"
                 },
+                "shop/confectionery": {
+                    "name": "Ζαχαροπλαστείο"
+                },
                 "shop/convenience": {
                     "name": "Παντοπωλείο",
                     "terms": "Ψιλικατζίδικο, Παντοπωλείο, μίνι μάρκετ"
@@ -4454,8 +4419,7 @@
                     "terms": "Ποτάμι"
                 },
                 "waterway/riverbank": {
-                    "name": "Όχθη Ποταμού",
-                    "terms": "Όχθη Ποταμιού"
+                    "name": "Όχθη Ποταμού"
                 },
                 "waterway/stream": {
                     "name": "Ρέμα",
@@ -4769,9 +4733,6 @@
                 "name": "OpenStreetMap στην Ιαπωνία",
                 "description": "Χαρτογράφοι και χρήστες του OpenStreetMap στην Ιαπωνία"
             },
-            "OSM-korea-telegram": {
-                "description": "Ανεπίσημο κανάλι για τους συνεργάτες του OpenStreetMap, τις κοινότητες και τους χρήστες στην Κορέα για μοίρασμα και συζήτηση."
-            },
             "OSM-MY-facebook": {
                 "name": "Το OpenStreetMap της Μαλαισίας στο Facebook",
                 "description": "Για συνομιλία για οτιδήποτε σχετίζεται με το OpenStreetMap!"
@@ -4811,11 +4772,6 @@
             "OSM-RU-forum": {
                 "name": "RU φόρουμ OpenStreetMap",
                 "description": "Διαδικτυακό φόρουμ OpenStreetMap Ρωσίας"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap στην Σρι Λάνκα",
-                "description": "Βελτιώστε το OpenStreetMap στην Σρι Λάνκα",
-                "extendedDescription": "Χαρτογράφηση στην Σρι Λάνκα; Έχετε ερωτήσεις, θέλετε να συνδεθείτε με την κοινότητα εδώ; Ελάτε μαζί μας στο {url}. Είναι όλοι ευπρόσδεκτοι!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Κοινότητα της Ταϊβάν"

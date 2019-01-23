@@ -393,7 +393,6 @@
         "inspector": {
             "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
             "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
-            "documentation_redirect": "Táto dokumantácia bola presmerovaná na novú stránku",
             "show_more": "Zobraziť viac",
             "view_on_osm": "Zobraziť na openstreetmap.org",
             "all_fields": "Všetky polia",
@@ -1202,9 +1201,6 @@
                         "onsen": "Japonský Onsen"
                     }
                 },
-                "beauty": {
-                    "label": "Typ obchodu"
-                },
                 "bench": {
                     "label": "Lavička"
                 },
@@ -1463,20 +1459,9 @@
                 "fence_type": {
                     "label": "Typ"
                 },
-                "fire_hydrant/position": {
-                    "label": "Pozícia",
-                    "options": {
-                        "green": "Tráva",
-                        "lane": "Vozovka",
-                        "parking_lot": "Parkovisko",
-                        "sidewalk": "Chodník"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Typ",
                     "options": {
                         "pillar": "Stĺpik/Nadzemný",
-                        "pond": "Požiarna nádrž",
                         "underground": "Podzemný",
                         "wall": "Nastenný"
                     }
@@ -2194,9 +2179,6 @@
                 "tourism": {
                     "label": "Typ"
                 },
-                "tourism_attraction": {
-                    "label": "Turizmus"
-                },
                 "tower/construction": {
                     "label": "Konštrukcia veže",
                     "placeholder": "Ukotvená, Mrežovaná, Maskovaná, ..."
@@ -2649,10 +2631,6 @@
                     "name": "Parkovacie miesto",
                     "terms": "parkovisko,miesto na parkovanie"
                 },
-                "amenity/pharmacy": {
-                    "name": "Lekáreň",
-                    "terms": "lekaren,farmácia,farmacia,lieky,výdajňa liekov,vydajna liekov"
-                },
                 "amenity/place_of_worship": {
                     "name": "Náboženské miesto",
                     "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok, oratórium,fara,diecéza,stupa,chram,dom bozi,mesita,synagoga,dom,svatostanok,oratorium,dieceza"
@@ -2661,21 +2639,9 @@
                     "name": "Budhistický chrám",
                     "terms": "stupa,vihara,kláštor,pagoda,zendo,dojo,chrám,klastor,chram"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kostol",
-                    "terms": "kresťanský,kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,dóm,svätostánok, oratórium,fara,diecéza,krestansky,katolícky,katolicky,evanielický,evanielicky,chram,katedrala,dom bozi,dom,svatostanok,oratorium,dieceza"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hinduistický chrám",
                     "terms": "hinduisticky chram"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagóga",
-                    "terms": "Židovský,synagóga,zidovsky,synagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mešita",
-                    "terms": "moslimský,mešita,moslimsky,mesita,minaret,islam"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Šintoistická svätyňa ",
@@ -3529,8 +3495,7 @@
                     "terms": "komunitna zahrada,pestovatelska plocha,poestvateľská plocha"
                 },
                 "landuse/basin": {
-                    "name": "Zadržiavacia nádrž",
-                    "terms": "zadrziavacia nadrz,nadrz,nádrž,voda,jazero,rybnik,rybník"
+                    "name": "Zadržiavacia nádrž"
                 },
                 "landuse/cemetery": {
                     "name": "Cintorín",
@@ -3558,10 +3523,6 @@
                 "landuse/farmyard": {
                     "name": "Farma",
                     "terms": "Družstvo,druztvo,jrd,jzd,kravín,kravin,statok,gazdovstvo"
-                },
-                "landuse/forest": {
-                    "name": "Les",
-                    "terms": "hora,stromy"
                 },
                 "landuse/grass": {
                     "name": "Tráva",
@@ -4762,8 +4723,7 @@
                     "terms": "riečka,potok,potúčik,potocik,bystrina"
                 },
                 "waterway/riverbank": {
-                    "name": "Breh rieky",
-                    "terms": "riečny breh,riecny breh,bok,strana,pobrežie,pobrezie,rieky,bok rieky,strana rieky"
+                    "name": "Breh rieky"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Vyprázdnovanie lodných toaliet",

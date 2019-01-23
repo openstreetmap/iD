@@ -447,9 +447,6 @@
                 "fee": {
                     "label": "Provizija"
                 },
-                "fire_hydrant/type": {
-                    "label": "Vrsta"
-                },
                 "fixme": {
                     "label": "Popravi me"
                 },
@@ -790,10 +787,6 @@
                     "name": "Tržnica",
                     "terms": "tržnica,pijaca"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apoteka",
-                    "terms": "apoteka,ljekarna"
-                },
                 "amenity/place_of_worship": {
                     "name": "Bogomolja",
                     "terms": "Božja kuća,bogomolja,mjesto za molitvu,hram"
@@ -801,18 +794,6 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Budistički hram",
                     "terms": "budistički hram,budistička bogomolja"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Crkva",
-                    "terms": "crkva,kršćanska/hrišćanska bogomolja"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "sinagoga,jevrejska bogomolja"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Džamija",
-                    "terms": "džamija,muslimanska bogomolja"
                 },
                 "amenity/police": {
                     "name": "Policija",
@@ -1240,8 +1221,7 @@
                     "terms": "znamenje kraj puta,kapelica"
                 },
                 "landuse/basin": {
-                    "name": "Sliv",
-                    "terms": "sliv,bazen"
+                    "name": "Sliv"
                 },
                 "landuse/cemetery": {
                     "name": "Groblje",
@@ -1254,10 +1234,6 @@
                 "landuse/farmyard": {
                     "name": "Seosko dvorište",
                     "terms": "seosko dvorište,dvorište imanja"
-                },
-                "landuse/forest": {
-                    "name": "Šuma",
-                    "terms": "šuma,područje pod drvećem"
                 },
                 "landuse/grass": {
                     "name": "Travnjak",
@@ -1992,8 +1968,7 @@
                     "terms": "rijeka,riječni tok"
                 },
                 "waterway/riverbank": {
-                    "name": "Riječno korito",
-                    "terms": "riječno korito,riječni tok"
+                    "name": "Riječno korito"
                 },
                 "waterway/stream": {
                     "name": "Potok",

@@ -374,7 +374,6 @@
         "inspector": {
             "no_documentation_combination": "ಈ ಗುರುತುಪಟ್ಟಿ ಸಂಯೋಜನೆ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿ ಅಥವಾ ದಾಖಲೆ ಇಲ್ಲ.  ",
             "no_documentation_key": "ಈ ಕೀ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿ ಅಥವಾ ದಾಖಲೆ ಇಲ್ಲ.  ",
-            "documentation_redirect": "ಈ ದಾಖಲೆ ಪಟ್ಟಿಯನ್ನು ಹೊಸ ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸಲಾಗಿದೆ ",
             "show_more": "‍ಇನ್ನೂ ತೋರಿಸು",
             "view_on_osm": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್.ಆರ್ಗ್ ನಲ್ಲಿ ನೋಡಿ. ",
             "all_fields": "ಎಲ್ಲ ವರ್ಗಗಳು. ",
@@ -1005,15 +1004,8 @@
                 "fee": {
                     "label": "ಶುಲ್ಕ"
                 },
-                "fire_hydrant/position": {
-                    "options": {
-                        "green": "ಹಸಿರು"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "ವಿಧ",
                     "options": {
-                        "pond": "ಕೊಳ",
                         "underground": "ನೆಲದಡಿಯಲ್ಲಿ",
                         "wall": "ಗೋಡೆ"
                     }
@@ -1469,15 +1461,6 @@
                 "amenity/library": {
                     "name": "ಗ್ರಂಥಾಲಯ"
                 },
-                "amenity/pharmacy": {
-                    "name": "ಔಷಧಾಲಯ"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "ಕ್ರೈಸ್ತ ದೇವಾಲಯ"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "ಮಸೀದಿ"
-                },
                 "amenity/planetarium": {
                     "name": "ತಾರಾಲಯ"
                 },
@@ -1625,9 +1608,6 @@
                 },
                 "landuse/cemetery": {
                     "name": " ಸ್ಮಶಾನ"
-                },
-                "landuse/forest": {
-                    "name": "ಅರಣ್ಯ"
                 },
                 "landuse/grass": {
                     "name": "ಹುಲ್ಲು"

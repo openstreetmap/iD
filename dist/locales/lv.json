@@ -421,7 +421,6 @@
         "inspector": {
             "no_documentation_combination": "Šai apzīmējumu kombinācijai nav piejama dokumentācija",
             "no_documentation_key": "Šai vērtībai nav piejama dokumentācija",
-            "documentation_redirect": "Šī dokumentācija ir pārcelta uz jaunu lapu",
             "show_more": "Rādīt vairāk",
             "view_on_osm": "Apskatīt openstreetmap.org",
             "all_fields": "Visi lauki",
@@ -1059,6 +1058,9 @@
                 "barrier": {
                     "label": "Tips"
                 },
+                "basin": {
+                    "label": "Tips"
+                },
                 "bath/open_air": {
                     "label": "Brīvdabas"
                 },
@@ -1072,9 +1074,6 @@
                         "hot_spring": "Karstais Avots",
                         "onsen": "Japāņu Onsens"
                     }
-                },
-                "beauty": {
-                    "label": "Veikala Veids"
                 },
                 "bench": {
                     "label": "Sols"
@@ -1360,20 +1359,9 @@
                 "fence_type": {
                     "label": "Tips"
                 },
-                "fire_hydrant/position": {
-                    "label": "Novietojums",
-                    "options": {
-                        "green": "Zāle",
-                        "lane": "Ceļš",
-                        "parking_lot": "Stāvvieta",
-                        "sidewalk": "Ietve"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tips",
                     "options": {
                         "pillar": "Stabs / Virszemes",
-                        "pond": "Dīķis",
                         "underground": "Apakšzemes",
                         "wall": "Siena"
                     }
@@ -2059,9 +2047,6 @@
                 "tourism": {
                     "label": "Tips"
                 },
-                "tourism_attraction": {
-                    "label": "Tūrisms"
-                },
                 "tower/construction": {
                     "label": "Būvēšana"
                 },
@@ -2389,10 +2374,6 @@
                     "name": "Daudzlīmeņu Stāvvietas Ieeja/Izeja",
                     "terms": "daudzstāvu stāvvieta, ieeja, izeja, iebrauktuve, izbrauktuve"
                 },
-                "amenity/pharmacy": {
-                    "name": "Aptieka",
-                    "terms": "medicīnas, recepšu"
-                },
                 "amenity/place_of_worship": {
                     "name": "Dievnams",
                     "terms": "baziliks, baznīca, katedrāle, kapella, mošeja, lūgšanas, bazilika"
@@ -2400,17 +2381,8 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Budistu templis"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Baznīca"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Templis"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mošeja"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Sintoistu svētnīca"
@@ -3030,9 +3002,6 @@
                 "landuse/farmyard": {
                     "name": "Lauku sēta"
                 },
-                "landuse/forest": {
-                    "name": "Mežs"
-                },
                 "landuse/garages": {
                     "name": "Garāžu zeme"
                 },
@@ -3275,7 +3244,8 @@
                     "name": "Neapstrādāta zeme"
                 },
                 "natural/heath": {
-                    "name": "Siltums"
+                    "name": "Tīrelis",
+                    "terms": "virsājs, koki, tīrelis, mazs"
                 },
                 "natural/mud": {
                     "name": "Dubļi"
@@ -4416,10 +4386,6 @@
                 "name": "OpenStreetMap Japāna",
                 "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
             },
-            "OSM-korea-telegram": {
-                "name": "OSM Korejas Telegram Kanāls",
-                "description": "Neoficiāls Kanāls priekš OpenStreetMap kartētājiem, kopienām un lietotājiem Korejā, kur dalīties un diskutēt."
-            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaizija Facebookā",
                 "description": "Čatam par jebko, kas ir saistīts ar OpenStreetMap!"
@@ -4470,11 +4436,6 @@
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU telegram",
                 "description": "OpenStreetMap Krievijas telegram čats"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Šrilanka",
-                "description": "Uzlabo OpenStreetMap Šrilankā",
-                "extendedDescription": "Kartē Šrilankā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Taivānas Kopiena",
@@ -4972,6 +4933,10 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Jaunumi un resursi OpenStreetMap Peru kopienai"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discords",
+                "description": "Sazinies ar citiem kartētājiem Discordā"
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap Facebookā.",

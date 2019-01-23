@@ -1,5 +1,10 @@
 {
     "ms": {
+        "icons": {
+            "download": "muat turun",
+            "information": "info",
+            "open_wikidata": "buka di wikidata.org"
+        },
         "modes": {
             "add_area": {
                 "title": "Kawasan",
@@ -15,6 +20,10 @@
                 "title": "Titik",
                 "description": "Tambah restoran-restoran, monumen-monumen, peti-peti surat atau titik-titik lain dalam peta.",
                 "tail": "Klik pada peta untuk menambah suatu titik."
+            },
+            "add_note": {
+                "title": "Nota",
+                "description": "Ada sebarang masalah? Maklumkan terhadap pemeta-pemeta lain."
             },
             "browse": {
                 "title": "Semak imbas",
@@ -277,6 +286,19 @@
                     "create": "Suatu larangan membelok telah ditambah",
                     "delete": "Suatu larangan membelok telah dihapuskan"
                 }
+            },
+            "detach_node": {
+                "key": "E"
+            }
+        },
+        "restriction": {
+            "help": {
+                "from": "DARI",
+                "via": "MELALUI",
+                "to": "KE",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}"
             }
         },
         "undo": {
@@ -298,6 +320,9 @@
         "loading_auth": "Berhubung ke OpenStreetMap...",
         "report_a_bug": "Laporkan suatu pepijat",
         "help_translate": "Bantu penterjemahan",
+        "sidebar": {
+            "key": "`"
+        },
         "feature_info": {
             "hidden_warning": "{count} gambaran yang tersorok",
             "hidden_details": "Gambaran-gambaran ini ialah yang tersorok:  {details}"
@@ -312,9 +337,12 @@
             "title": "Muat naik ke OpenStreetMap",
             "upload_explanation": "Perubahan yang telah anda muat naik akan kelihatan pada semua peta yang menggunakan data OpenStreetMap.",
             "upload_explanation_with_user": "Perubahan yang telah anda muat naik sebagai {user} akan kelihatan pada semua peta yang menggunakan data OpenStreetMap.",
+            "request_review": "Saya mahukan seseorang yang boleh memeriksa suntingan saya.",
             "save": "Muat naik",
             "cancel": "Batal",
             "changes": "{count} Perubahan",
+            "download_changes": "Muat turun fail osmChange",
+            "errors": "Ralat-ralat",
             "warnings": "Amaran",
             "modified": "Diubah suai",
             "deleted": "Dipadam",
@@ -348,7 +376,8 @@
                 "edited_by": "Diedit Oleh",
                 "changeset": "Perubahan",
                 "unknown": "Tidak Diketahui",
-                "link_text": "Sejarah pada openstreetmap.org"
+                "link_text": "Sejarah pada openstreetmap.org",
+                "note_comments": "Komen-komen"
             },
             "location": {
                 "key": "L",
@@ -389,7 +418,6 @@
         "inspector": {
             "no_documentation_combination": "Tiada dokumentasi yang tersedia untuk kombinasi penanda ini",
             "no_documentation_key": "Tiada dokumentasi yang tersedia untuk kunci ini",
-            "documentation_redirect": "Dokumentasi ini telah diarahkan semula ke halaman baru.",
             "show_more": "Tunjukkan Lagi",
             "view_on_osm": "Lihat pada openstreetmap.org",
             "all_fields": "Semua tempat kosong",
@@ -566,7 +594,8 @@
         "success": {
             "just_edited": "Anda baru sahaja telah menyunting OpenStreetMap!",
             "help_link_text": "Butiran",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "like_osm": "Suka OpenStreetMap? Bertemu pemeta-pemeta lain:"
         },
         "confirm": {
             "okay": "OK",
@@ -649,6 +678,7 @@
             },
             "editing": {
                 "title": "Menyunting & Menyimpan",
+                "save_h": "Simpan",
                 "keyboard_h": "Jalan Pintas Papan Kekunci"
             },
             "feature_editor": {
@@ -849,6 +879,27 @@
                 }
             }
         },
+        "units": {
+            "feet": "{quantity} ka",
+            "miles": "{quantity} bt",
+            "square_feet": "{quantity} kp",
+            "square_miles": "{quantity} bp",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "U",
+            "south": "S",
+            "east": "T",
+            "west": "B",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1036,9 +1087,6 @@
                         "hot_spring": "Mata air panas",
                         "onsen": "Onsen Jepun"
                     }
-                },
-                "beauty": {
-                    "label": "Jenis Kedai"
                 },
                 "bench": {
                     "label": "Bangku"
@@ -1244,19 +1292,9 @@
                 "fence_type": {
                     "label": "Jenis"
                 },
-                "fire_hydrant/position": {
-                    "label": "Kedudukan",
-                    "options": {
-                        "green": "Hijau",
-                        "lane": "Lorong",
-                        "parking_lot": "Tempat Letak Kereta"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Jenis",
                     "options": {
                         "pillar": "Tiang/Atas-tanah",
-                        "pond": "Kolam",
                         "underground": "Bawah tanah",
                         "wall": "Dinding"
                     }
@@ -1921,9 +1959,6 @@
                 "tourism": {
                     "label": "Jenis"
                 },
-                "tourism_attraction": {
-                    "label": "Pelancongan"
-                },
                 "tower/construction": {
                     "label": "Pembinaan",
                     "placeholder": "Lelaki, Kekisi, Tersembunyi, ..."
@@ -2075,28 +2110,14 @@
                 "amenity/parking_space": {
                     "name": "Ruang Letak Kenderaan"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmasi"
-                },
                 "amenity/place_of_worship": {
                     "name": "Tempat Ibadat"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Tokong Buddha"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Gereja"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Kuil Hindu"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Saumaah",
-                    "terms": "Sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Masjid",
-                    "terms": "Surau, Musolla, Solat"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Tokong Shinto"
@@ -2660,14 +2681,32 @@
                 "tourism": {
                     "name": "Pelancongan"
                 },
+                "tourism/aquarium": {
+                    "name": "Akuarium"
+                },
+                "tourism/hotel": {
+                    "name": "Hotel"
+                },
+                "tourism/picnic_site": {
+                    "name": "Tapak Perkelahan"
+                },
                 "type/route/road": {
                     "name": "Laluan Jalan"
+                },
+                "waterway": {
+                    "name": "Jalan Air"
+                },
+                "waterway/canal": {
+                    "name": "Terusan"
                 },
                 "waterway/river": {
                     "name": "Sungai"
                 },
                 "waterway/riverbank": {
                     "name": "Tebing sungai"
+                },
+                "waterway/waterfall": {
+                    "name": "Air Terjun"
                 }
             }
         },
@@ -2680,6 +2719,7 @@
                 "attribution": {
                     "text": "Terma & Maklum Balas"
                 },
+                "description": "DigitalGlobe-Premium ialah jubin daripada peta dasar DigitalGlobe bagi rantau-rantau terpilih dengan +Vivid atau kawasan tertentu dengan imejan tersuai, beresolusi 50cm atau lebih baik, dan akan disegar semula dengan lebih kerap melalui kemas kini akan datang.",
                 "name": "Imejan DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -2692,6 +2732,7 @@
                 "attribution": {
                     "text": "Terma & Maklum Balas"
                 },
+                "description": "DigitalGlobe-Standard ialah set imejan terpilih, meliputi 86% jisim bumi, dengan resolusi 30-60cm sekiranya ada, diisi oleh Landsat. Secara purata, imejan ini berusia 2.31 tahun, dengan kawasan-kawasan tertentu dikemas kini 2x setahun.",
                 "name": "Imejan DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -2706,6 +2747,11 @@
                 },
                 "description": "Imejan sejagat Esri.",
                 "name": "Esri World Imagery"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Terma & Maklum Balas"
+                }
             },
             "MAPNIK": {
                 "attribution": {
@@ -2860,6 +2906,17 @@
             }
         },
         "community": {
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia di Facebook",
+                "description": "Segala borak-borak OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Forum OpenStreetMap Malaysia",
+                "description": "Forum rasmi OpenStreetMap Malaysia"
+            },
+            "OSM-MY-matrix": {
+                "name": "Saluran Riot OpenStreetMap Malaysia"
+            },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers Kawasan Teluk",
                 "description": "Perbaiki OpenStreetMap di Kawasan Teluk",

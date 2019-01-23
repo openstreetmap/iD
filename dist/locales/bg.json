@@ -451,7 +451,6 @@
         "inspector": {
             "no_documentation_combination": "Няма налична документация за тази комбинация от тагове",
             "no_documentation_key": "Няма налична документация за този ключ",
-            "documentation_redirect": "Тази документация беше пренасочена към нова страница",
             "show_more": "Покажи още",
             "view_on_osm": "Вижте на openstreetmap.org",
             "all_fields": "Всички полета",
@@ -1018,9 +1017,6 @@
                         "onsen": "Японски Онсен"
                     }
                 },
-                "beauty": {
-                    "label": "Магазин вид"
-                },
                 "bench": {
                     "label": "Пейка"
                 },
@@ -1311,20 +1307,9 @@
                 "fence_type": {
                     "label": "Вид"
                 },
-                "fire_hydrant/position": {
-                    "label": "Местоположение",
-                    "options": {
-                        "green": "В зелени площи",
-                        "lane": "На пътя",
-                        "parking_lot": "В паркинг",
-                        "sidewalk": "На тротоар"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Вид",
                     "options": {
                         "pillar": "Надземен",
-                        "pond": "Резервоар",
                         "underground": "Подземен",
                         "wall": "Стенен"
                     }
@@ -1994,23 +1979,11 @@
                 "amenity/marketplace": {
                     "name": "Пазар"
                 },
-                "amenity/pharmacy": {
-                    "name": "Аптека"
-                },
                 "amenity/place_of_worship": {
                     "name": "Религиозен храм"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Будистки храм"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Църква"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Синагога"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Джамия"
                 },
                 "amenity/police": {
                     "name": "Полиция"
@@ -2236,9 +2209,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Селскостопански двор"
-                },
-                "landuse/forest": {
-                    "name": "Гора"
                 },
                 "landuse/grass": {
                     "name": "Трева"

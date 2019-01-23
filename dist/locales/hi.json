@@ -257,7 +257,6 @@
                 },
                 "fire_hydrant/type": {
                     "options": {
-                        "pond": "तलाब",
                         "wall": "दिवार"
                     }
                 },
@@ -354,9 +353,6 @@
                 },
                 "golf/rough": {
                     "name": "खुरदुरा"
-                },
-                "landuse/forest": {
-                    "name": "जंगल"
                 },
                 "landuse/grass": {
                     "name": "घास"

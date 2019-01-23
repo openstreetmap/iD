@@ -272,7 +272,7 @@
         },
         "translate": {
             "translate": "Përkthe",
-            "localized_translation_language": "Zgjidhni gdjuhën",
+            "localized_translation_language": "Zgjidhni gjuhën",
             "localized_translation_name": "Emër"
         },
         "zoom_in_edit": "Zmadhoni për të edituar",
@@ -556,6 +556,9 @@
             "text": "iD është një mjet familar por i fuqishëm për të kontribuar në hartën e hapur më të mirë në botë. Ky është vesioni {version}. Për më shumë informacion shihni {website} dhe raportoni problematikat në {github}.",
             "start": "Editoni tani"
         },
+        "source_switch": {
+            "live": "drejtpërdrejt"
+        },
         "version": {
             "whats_new": "Çfarë është e re në iD {version}"
         },
@@ -812,7 +815,8 @@
                         "country": "Vendi",
                         "postcode": "Kodi Postar",
                         "province": "Provinca",
-                        "state": "Shteti"
+                        "state": "Shteti",
+                        "street": "rrugë"
                     }
                 },
                 "aerialway/capacity": {
@@ -829,6 +833,9 @@
                 },
                 "bench": {
                     "label": "Stol"
+                },
+                "building": {
+                    "label": "Ndërtesa"
                 },
                 "capacity": {
                     "label": "Kapaciteti",
@@ -964,6 +971,12 @@
                 }
             },
             "presets": {
+                "amenity/bus_station": {
+                    "name": "Stacioni i Autobusave"
+                },
+                "building/college": {
+                    "name": "Ndërtesa e Kollegjit"
+                },
                 "highway": {
                     "name": "Hekurudhë"
                 },
@@ -999,6 +1012,9 @@
                 },
                 "shop/clothes": {
                     "name": "Dyqan Veshjesh"
+                },
+                "shop/copyshop": {
+                    "name": "Fotokopje"
                 },
                 "shop/dry_cleaning": {
                     "name": "Pastrim Kimik"
@@ -1129,10 +1145,6 @@
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal",
                 "description": "Përmirësoni OpenStreetMap në Nepal"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Sri Lanka",
-                "description": "Përmirësoni OpenStreetMap në Sri Lanka"
             },
             "al-forum": {
                 "description": "OpenStreetMap Albania Forum"

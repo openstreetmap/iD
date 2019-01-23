@@ -5,7 +5,9 @@
             "information": "Инфо",
             "remove": "Удалить",
             "undo": "Отменить",
-            "zoom_to": "Приблизить к"
+            "zoom_to": "Приблизить к",
+            "copy": "Копировать",
+            "open_wikidata": "Открыть на wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -101,7 +103,7 @@
                 "key": "S",
                 "annotation": {
                     "line": "У линии спрямлены углы.",
-                    "area": "У полигона спрямлены."
+                    "area": "Углы полигона спрямлены."
                 },
                 "not_squarish": "Спрямить углы нельзя: объект не похож на прямоугольник.",
                 "too_large": "Углы объекта нельзя спрямить, поскольку большая его часть скрыта.",
@@ -153,6 +155,22 @@
                 "annotation": "Из отношения удалён участник."
             },
             "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Линия присоединена к точке.",
+                        "to_vertex": "Линия присоединена к другой.",
+                        "to_line": "Линия соединена с другой линией.",
+                        "to_area": "Линия присоединена к полигону.",
+                        "to_adjacent_vertex": "Смежные точки совмещены с линией.",
+                        "to_sibling_vertex": "Линия соединена с собой."
+                    },
+                    "from_point": {
+                        "to_point": "Точка совмещена с другой.",
+                        "to_vertex": "Точка совмещена с точкой на линии.",
+                        "to_line": "Точка перемещена на линию.",
+                        "to_area": "Точка перемещена на полигон."
+                    }
+                },
                 "relation": "Эти объекты нельзя соединить, потому что у них конфликтуют роли в отношении.",
                 "restriction": "Эти объекты нельзя соединить, потому что это повредит отношение \"{relation}\"."
             },
@@ -357,6 +375,7 @@
         "browser_notice": "Этот редактор поддерживает Firefox, Chrome, Safari, Opera и Internet Explorer 11 или выше. Обновите свой браузер или используйте Potlach 2 для редактирования карты.",
         "translate": {
             "translate": "Перевести",
+            "localized_translation_label": "Многоязычное название",
             "localized_translation_language": "Выберите язык",
             "localized_translation_name": "Название"
         },
@@ -366,6 +385,9 @@
         "loading_auth": "Подключение к OpenStreetMap…",
         "report_a_bug": "Сообщить об ошибке",
         "help_translate": "Помочь перевести",
+        "sidebar": {
+            "tooltip": "Переключить боковую панель."
+        },
         "feature_info": {
             "hidden_warning": "{count} скрытых объектов",
             "hidden_details": "Эти объекты сейчас скрыты: {details}"
@@ -385,6 +407,7 @@
             "cancel": "Отменить",
             "changes": "Правок: {count}",
             "download_changes": "Скачать osmChange файл",
+            "errors": "Ошибки",
             "warnings": "Предупреждения",
             "modified": "Изменён",
             "deleted": "Удалён",
@@ -473,9 +496,11 @@
             "locating": "Загрузка, подождите…"
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z"
+            },
             "no_documentation_combination": "Для этой комбинации ключа и значения нет описания",
             "no_documentation_key": "Для этого ключа нет описания",
-            "documentation_redirect": "Эта документация была перенаправлена на новую страницу",
             "show_more": "Ещё",
             "view_on_osm": "Посмотреть на openstreetmap.org",
             "all_fields": "Все поля",
@@ -483,6 +508,7 @@
             "all_members": "Все участники",
             "all_relations": "Все отношения",
             "new_relation": "Новое отношение…",
+            "choose_relation": "Выберите родительское отношение",
             "role": "Роль",
             "choose": "Что это за объект?",
             "results": "{n} результатов для {search}",
@@ -754,6 +780,39 @@
         },
         "cannot_zoom": "В текущем режиме дальнейшее отдаление невозможно.",
         "full_screen": "Во весь экран",
+        "QA": {
+            "keepRight": {
+                "title": "Ошибка KeepRight",
+                "comment": "Комментарий",
+                "comment_placeholder": "Введите комментарий для других пользователей",
+                "close": "Закрыть (ошибка исправлена)",
+                "ignore": "Игнорировать (ошибки нет)",
+                "save_comment": "Сохранить комментарий",
+                "close_comment": "Закрыть с комментарием",
+                "ignore_comment": "Игнорировать с комментарием",
+                "errorTypes": {
+                    "40": {
+                        "title": "Некорректное указание односторонней дороги"
+                    },
+                    "60": {
+                        "title": "Устаревший тег",
+                        "description": "{var1} использует устаревший тег \"{var2}\". Пожалуйста, используйте \"{var3}\"."
+                    },
+                    "70": {
+                        "title": "Пропущен тег"
+                    },
+                    "220": {
+                        "title": "Опечатка в теге"
+                    },
+                    "298": {
+                        "title": "Избыточное ограничение - односторонняя дорога"
+                    },
+                    "401": {
+                        "title": "Отсутствует запрет манёвра"
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "Уличные фото от Microsoft",
             "title": "Слой с фото (Bing Streetside)",
@@ -862,7 +921,7 @@
                 "fields_add_field": "Вы можете нажать на выпадающий список \"Добавить поле\", чтобы добавить ещё полей, таких, как описание, ссылка на Википедию, доступ маломобильным людям и других.",
                 "tags_h": "Теги",
                 "tags_all_tags": "Ниже области с полями вы можете развернуть область \"Все теги\", чтобы отредактировать *теги* OpenStreetMap для выбранного объекта. Каждый тег состоит из *ключа* и его *значения* (тег — это ключ=значение) — элементов данных, определяющих объекты, хранящиеся в OpenStreetMap.",
-                "tags_resources": "Редактирование тегов объекта требует более серьёзного понимания OpenStreetMap. Вам следует ознакомиться с такими ресурсами как [OpenStreetMap вики](https://wiki.openstreetmap.org/wiki/Main_Page) или [Taginfo](https://taginfo.openstreetmap.org/), чтобы узнать больше о применяемых в OpenStreetMap практиках тегирования."
+                "tags_resources": "Редактирование тегов объекта требует более серьёзного понимания OpenStreetMap. Вам следует ознакомиться с [OpenStreetMap вики](https://wiki.openstreetmap.org/wiki/Main_Page) или [Taginfo](https://taginfo.openstreetmap.org/), чтобы узнать больше о применяемых в OpenStreetMap практиках тегирования."
             },
             "points": {
                 "title": "Точки",
@@ -980,6 +1039,9 @@
                 "using": "Для использование GPS треков с целью картографирования перетащите файл с треком в окно редактора карты. Если файл подходящий, трек будет отображен на карте яркой фиолетовой линией. Нажмите на панель {data} **Данные карты** сбоку от карты, чтобы выключить, выключить или приблизить ваши GPS данные.",
                 "tracing": "GPS трек не передаётся в OpenStreetMap. Лучший способ использовать его — это отрисовать по нему карту, используя его как подсказку для новых объектов, что вы добавляете.",
                 "upload": "Вы также можете [загрузить ваши GPS треки в OpenStreetMap](https://www.openstreetmap.org/trace/create), чтобы и другие участники смогли ими пользоваться."
+            },
+            "qa": {
+                "title": "Контроль качества"
             },
             "field": {
                 "restrictions": {
@@ -1318,8 +1380,9 @@
                     "background_switch": "Вернуть предыдущее фоновое изображение",
                     "map_data": "Показать настройки данных карты",
                     "fullscreen": "Перейти в полноэкранный режим",
+                    "sidebar": "Переключить боковую панель",
                     "wireframe": "Переключить режим заливки полигонов",
-                    "minimap": "Показать / убрать миникарту"
+                    "minimap": "Переключить миникарту"
                 },
                 "selecting": {
                     "title": "Выделение объектов",
@@ -1411,6 +1474,11 @@
             "west": "З",
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "identifier": "Идентификатор",
+            "label": "Название",
+            "description": "Описание"
         },
         "presets": {
             "categories": {
@@ -1618,6 +1686,9 @@
                 "barrier": {
                     "label": "Тип преграды"
                 },
+                "basin": {
+                    "label": "Тип"
+                },
                 "bath/open_air": {
                     "label": "На открытом воздухе"
                 },
@@ -1631,9 +1702,6 @@
                         "hot_spring": "Горячий источник",
                         "onsen": "Японский онсен"
                     }
-                },
-                "beauty": {
-                    "label": "Тип магазина"
                 },
                 "bench": {
                     "label": "Скамейка"
@@ -1716,6 +1784,9 @@
                 "castle_type": {
                     "label": "Тип"
                 },
+                "check_date": {
+                    "label": "Дата последней проверки"
+                },
                 "clothes": {
                     "label": "Одежда"
                 },
@@ -1755,6 +1826,9 @@
                 },
                 "country": {
                     "label": "Страна"
+                },
+                "couplings": {
+                    "placeholder": "1, 2, 3…"
                 },
                 "covered": {
                     "label": "Крытое(-ая)"
@@ -1937,6 +2011,9 @@
                 "emergency": {
                     "label": "Экстренные службы"
                 },
+                "enforcement": {
+                    "label": "Тип"
+                },
                 "entrance": {
                     "label": "Тип входа"
                 },
@@ -1956,20 +2033,10 @@
                 "fence_type": {
                     "label": "Тип"
                 },
-                "fire_hydrant/position": {
-                    "label": "Расположение",
-                    "options": {
-                        "green": "Газон",
-                        "lane": "на проезжей части",
-                        "parking_lot": "на парковке",
-                        "sidewalk": "на тротуаре"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Тип пожарного гидранта",
+                    "label": "Форма",
                     "options": {
                         "pillar": "Наземный",
-                        "pond": "Около пруда",
                         "underground": "Подземный",
                         "wall": "Настенный"
                     }
@@ -2382,6 +2449,9 @@
                         "yes": "Да"
                     }
                 },
+                "opening_date": {
+                    "label": "Предполагаемая дата открытия"
+                },
                 "opening_hours": {
                     "label": "Время работы"
                 },
@@ -2452,6 +2522,9 @@
                 },
                 "piste/difficulty_nordic": {
                     "label": "Сложность",
+                    "options": {
+                        "advanced": "Сложная - Узкая, крутая или с вкраплениями льда, с резким поворотом"
+                    },
                     "placeholder": "Простая, средняя, высокая сложность…"
                 },
                 "piste/difficulty_skitour": {
@@ -2932,9 +3005,6 @@
                 },
                 "tourism": {
                     "label": "Тип"
-                },
-                "tourism_attraction": {
-                    "label": "Туризм"
                 },
                 "tower/construction": {
                     "label": "Тип конструкции",
@@ -3460,6 +3530,14 @@
                 "amenity/nursing_home": {
                     "name": "Дом престарелых/Дом инвалидов (устаревший тег)"
                 },
+                "amenity/parking": {
+                    "name": "Парковка",
+                    "terms": "парковка, стоянка, автостоянка"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Многоуровневая парковка",
+                    "terms": "паркинг, многоуровневый гараж"
+                },
                 "amenity/parking_entrance": {
                     "name": "Въезд/выезд с парковки",
                     "terms": "стоянка, въезд, выезд, автомобиль, машина, парковка, паркинг"
@@ -3467,10 +3545,6 @@
                 "amenity/parking_space": {
                     "name": "Отдельное парковочное место на парковке",
                     "terms": "парковочное место, отдельное парковочное место на стоянке"
-                },
-                "amenity/pharmacy": {
-                    "name": "Аптека",
-                    "terms": "Аптека, аптечный пункт"
                 },
                 "amenity/place_of_worship": {
                     "name": "Место поклонения",
@@ -3480,21 +3554,9 @@
                     "name": "Буддийский храм",
                     "terms": "буддийский храм"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Церковь",
-                    "terms": "храм, часовня, молельня, дом божий, капелла, церковь, кафедрарий, место поклонения, культовое сооружение, святое место, мечеть, собор, синагога"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Индуистский храм",
                     "terms": "индуистский храм, мандир"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Синагога",
-                    "terms": "синагога"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Мечеть",
-                    "terms": "мечеть"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Дзиндзя"
@@ -4468,10 +4530,23 @@
                     "name": "Внутренний коридор",
                     "terms": "проход, коридор"
                 },
-                "highway/crossing/unmarked": {
+                "highway/crossing/marked": {
                     "name": "Пешеходный переход"
                 },
+                "highway/crossing/marked-raised": {
+                    "name": "Пешеходный переход (приподнятый)"
+                },
+                "highway/crossing/unmarked": {
+                    "name": "Неразмеченный переход",
+                    "terms": "народная тропа"
+                },
                 "highway/crossing/unmarked-raised": {
+                    "name": "Неразмеченный переход (приподнятый)"
+                },
+                "highway/crossing/zebra": {
+                    "name": "Пешеходный переход (зебра)"
+                },
+                "highway/crossing/zebra-raised": {
                     "name": "Пешеходный переход (приподнятый)"
                 },
                 "highway/cycleway": {
@@ -4489,13 +4564,25 @@
                     "name": "Траволатор",
                     "terms": "пассажирский конвейер, движущийся тротуар, движущаяся дорожка, бегущая дорожка"
                 },
+                "highway/footway/marked": {
+                    "name": "Пешеходный переход"
+                },
+                "highway/footway/marked-raised": {
+                    "name": "Пешеходный переход (приподнятый)"
+                },
                 "highway/footway/sidewalk": {
                     "name": "Тротуар"
                 },
                 "highway/footway/unmarked": {
-                    "name": "Пешеходный переход"
+                    "name": "Неразмеченный переход"
                 },
                 "highway/footway/unmarked-raised": {
+                    "name": "Неразмеченный переход (приподнятый)"
+                },
+                "highway/footway/zebra": {
+                    "name": "Пешеходный переход (зебра)"
+                },
+                "highway/footway/zebra-raised": {
                     "name": "Пешеходный переход (приподнятый)"
                 },
                 "highway/give_way": {
@@ -4591,7 +4678,7 @@
                     "terms": "Эвакуационный выход, Аварийный выход"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "Между рядами парковки",
+                    "name": "Парковочный проезд",
                     "terms": "парковочный проезд, проезд по парковке"
                 },
                 "highway/services": {
@@ -4720,8 +4807,7 @@
                     "terms": "рыбная ферма, выращивание водных организмов, рыбоводство, ферма моллюсков, креветочная ферма, ферма устриц, устричная ферма"
                 },
                 "landuse/basin": {
-                    "name": "Хранилище сточных вод",
-                    "terms": "Бассейн, Искусственный водоём, Копаный пруд"
+                    "name": "Хранилище сточных вод"
                 },
                 "landuse/brownfield": {
                     "name": "Снос/расчистка территории под строительство",
@@ -4753,10 +4839,6 @@
                 "landuse/farmyard": {
                     "name": "Территория фермы (без полей)",
                     "terms": "ферма, сельхоз, совхоз"
-                },
-                "landuse/forest": {
-                    "name": "Обслуживаемый лес / деревья",
-                    "terms": "лес, лесной массив"
                 },
                 "landuse/garages": {
                     "name": "Территория гаражей"
@@ -5072,10 +5154,6 @@
                 "leisure/resort": {
                     "name": "База отдыха / санаторий / пасионат / детский лагерь",
                     "terms": "база отдыха, санатарий, детский спортивный оздоровительный лагерь, детский оздоровительный лагерь, детский спортивный лагерь, ДСОЛ, ДОЛ, пансионат, туристическая база"
-                },
-                "leisure/running_track": {
-                    "name": "Беговая дорожка",
-                    "terms": "Легкоатлетический стадион"
                 },
                 "leisure/sauna": {
                     "name": "Сауна",
@@ -6753,8 +6831,7 @@
                     "terms": "река"
                 },
                 "waterway/riverbank": {
-                    "name": "Берег реки",
-                    "terms": "Урез берега реки"
+                    "name": "Берег реки"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Морская ассенизационная станция",
@@ -7003,11 +7080,47 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "description": "Страница OpenStreetMap в Ботсване"
+            },
+            "bw-twitter": {
+                "description": "Твиттер OpenStreetMap в Ботсване"
+            },
             "cape-coast-youthmappers": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
             "osm-gh-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "talk-gh": {
+                "name": "Список рассылки Talk-gh"
+            },
+            "talk-mg": {
+                "name": "Список рассылки Talk-mg"
+            },
+            "OSM-MY-facebook": {
+                "description": "Для общения по поводу всего, что связано с OpenStreetMap!"
+            },
+            "OSM-MY-matrix": {
+                "description": "Приглашаются все картографы! Регистрация на {signupUrl}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Монголия",
+                "description": "Улучшите OpenStreetMap в Монголии",
+                "extendedDescription": "Картографируете в Монголии? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Мьянма",
+                "description": "Улучшите OpenStreetMap в Мьянме",
+                "extendedDescription": "Картографируете в Мьянме? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Непал",
+                "description": "Улучшите OpenStreetMap в Непале",
+                "extendedDescription": "Картографируете в Непале? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Список рассылки Talk-ph"
             },
             "OSM-RU-forum": {
                 "name": "Форум русскоязычного сообщества OSM",
@@ -7017,18 +7130,56 @@
                 "name": "Telegram-чат русскоязычного сообщества OSM",
                 "description": "Участники рады ответить на любой вопрос, связанный с использованием или рисованием карт, и готовы обсудить любую важную новость. Да, мы любим аниме и умеем устанавливать KDE на FreeBSD."
             },
+            "at-mailinglist": {
+                "name": "Список рассылки Talk-at"
+            },
             "byosm": {
                 "name": "OpenStreetMap Беларусь",
                 "description": "Telegram-чат OpenStreetMap Беларусь"
             },
+            "be-mailinglist": {
+                "name": "Список рассылки Talk-be"
+            },
+            "hr-mailinglist": {
+                "name": "Список рассылки Talk-hr",
+                "description": "Список рассылки Talk-hr"
+            },
+            "dk-mailinglist": {
+                "name": "Список рассылки Talk-dk"
+            },
+            "fi-mailinglist": {
+                "name": "Список рассылки Talk-fi"
+            },
+            "fr-mailinglist": {
+                "name": "Список рассылки Talk-fr",
+                "description": "список рассылки Talk-gh"
+            },
             "de-berlin-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "de-mailinglist": {
+                "name": "Список рассылки Talk-de"
+            },
+            "is-mailinglist": {
+                "name": "Список рассылки Talk-is"
+            },
+            "it-mailinglist": {
+                "name": "Список рассылки Talk-it"
             },
             "it-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
+            "OSM-ES-mailinglist": {
+                "name": "Список рассылки Talk-es"
+            },
+            "se-mailinglist": {
+                "name": "Список рассылки Talk-se"
+            },
             "se-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "gb-mailinglist": {
+                "name": "Список рассылки Talk-gb"
             },
             "Bay-Area-OpenStreetMappers": {
                 "description": "Улучшить перевод OpenStreetMap в Bay Area"
@@ -7052,17 +7203,38 @@
                 "name": "Slack \"Maptime Australia\"",
                 "description": "Регистрация на {signupUrl}"
             },
+            "talk-au": {
+                "name": "Список рассылки Talk-au"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Список рассылки Talk-ar"
+            },
             "OSM-AR-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Список рассылки Talk-bo"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Список рассылки Talk-br"
             },
             "OSM-br-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
+            "OSM-CL-mailinglist": {
+                "name": "Список рассылки Talk-cl"
+            },
             "OSM-CL-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
+            "OSM-CO-mailinglist": {
+                "name": "Список рассылки Talk-co"
+            },
             "OSM-CO-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Список рассылки Talk-pe"
             },
             "OSM-PE-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"

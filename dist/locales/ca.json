@@ -350,6 +350,7 @@
         "browser_notice": "Aquest editor és compatible a Firefox, Chrome, Safari, Opera i Internet Explorer 11 i superior. Actualitzeu el vostre navegador o bé feu ús del Potlatch 2 per tal d'editar el mapa.",
         "translate": {
             "translate": "Traduïu",
+            "localized_translation_label": "Nom multilingüe",
             "localized_translation_language": "Trieu una llengua",
             "localized_translation_name": "Nom"
         },
@@ -466,7 +467,6 @@
         "inspector": {
             "no_documentation_combination": "No hi ha documentació per a aquesta combinació d'etiquetes",
             "no_documentation_key": "No hi ha documentació per a aquesta clau",
-            "documentation_redirect": "Aquesta documentació ha estat redirigida a una nova pàgina",
             "show_more": "Mostra'n més",
             "view_on_osm": "Mostra-ho a openstreetmap.org",
             "all_fields": "Tots els camps",
@@ -1160,21 +1160,25 @@
                             "title": "Específic"
                         },
                         "destination": {
+                            "description": "Accés permès només per arribar a un destí",
                             "title": "Destinació"
                         },
                         "dismount": {
                             "title": "Baixar del mitjà de transport"
                         },
                         "no": {
+                            "description": "No es permet l'accés al públic en general",
                             "title": "Prohibit"
                         },
                         "permissive": {
+                            "description": "Accés permès provisionalment fins que el propietari el prohibeixi.",
                             "title": "Permissiu"
                         },
                         "private": {
                             "title": "Privat"
                         },
                         "yes": {
+                            "description": "Accés permès per llei: dret de pas",
                             "title": "Permès"
                         }
                     },
@@ -1315,9 +1319,6 @@
                         "hot_spring": "Font Càlida",
                         "onsen": "Onsen japonès"
                     }
-                },
-                "beauty": {
-                    "label": "Tipus de botiga"
                 },
                 "bench": {
                     "label": "Banc per a asseure's"
@@ -1605,20 +1606,9 @@
                 "fence_type": {
                     "label": "Tipus"
                 },
-                "fire_hydrant/position": {
-                    "label": "Posició",
-                    "options": {
-                        "green": "Verd",
-                        "lane": "Carril",
-                        "parking_lot": "Aparcament",
-                        "sidewalk": "Vorera"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tipus",
                     "options": {
                         "pillar": "Pilona/visible",
-                        "pond": "Bassa",
                         "underground": "Subterrani",
                         "wall": "Mur"
                     }
@@ -2256,6 +2246,9 @@
                 "social_facility": {
                     "label": "Tipus"
                 },
+                "social_facility_for": {
+                    "label": "Persones ateses"
+                },
                 "source": {
                     "label": "Fonts"
                 },
@@ -2375,9 +2368,6 @@
                 },
                 "tourism": {
                     "label": "Tipus"
-                },
-                "tourism_attraction": {
-                    "label": "Turisme"
                 },
                 "tower/construction": {
                     "label": "Construcció"
@@ -2833,10 +2823,6 @@
                 "amenity/parking_space": {
                     "name": "Espai d'aparcament"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmàcia",
-                    "terms": "Farmàcia, establiment de venda de medicaments,"
-                },
                 "amenity/place_of_worship": {
                     "name": "Lloc de culte",
                     "terms": "Lloc de culte, Lloc per a la oració, temple de la fe, Punt de trobada religiós, Casa de Déu"
@@ -2846,19 +2832,16 @@
                     "terms": "Temple Budista, Lloc per al culte budista, església budista"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "Església",
-                    "terms": "Temple, església"
+                    "name": "Capella cristiana"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Temple Hindú"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "Sinagoga, temple jueu, església jueva, culte jueu, jueu"
+                    "name": "Sinagoga jueva"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "Mesquita",
-                    "terms": "Mesquita, temple musulmà, espai musulmà, musulmà"
+                    "name": "Mesquita musulmana"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Santuari sintoísta"
@@ -2900,6 +2883,9 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Base d'Agents Rurals"
+                },
+                "amenity/recycling": {
+                    "name": "Reciclatge"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centre de Reciclatge"
@@ -3144,6 +3130,9 @@
                 "building": {
                     "name": "Edifici",
                     "terms": "Edifici, Bloc de pisos, Nau industrial, Centre comercial, Oficines, Bloc, Casa, Barraca"
+                },
+                "building/apartments": {
+                    "name": "Edifici d'apartaments"
                 },
                 "building/barn": {
                     "name": "Graner"
@@ -3706,8 +3695,7 @@
                     "name": "Jardí comunitari"
                 },
                 "landuse/basin": {
-                    "name": "Bassa",
-                    "terms": "Conca"
+                    "name": "Bassa"
                 },
                 "landuse/cemetery": {
                     "name": "Cementiri",
@@ -3732,10 +3720,6 @@
                 "landuse/farmyard": {
                     "name": "Edificis de Granja",
                     "terms": "Granja, Granges, Galliner, Estable, Mas, Masia, Masoveria, Ranxo, Nau, Naus,  Dipòsit, Femta, Fems, Fem, Porc, Porcs, Purí, Purins, Gallina, Gallines, Conill, Conills, Pinso, Tancat, Tanca, Valles, Valla"
-                },
-                "landuse/forest": {
-                    "name": "Bosc",
-                    "terms": "Massa forestal,Bosc,Arbreda"
                 },
                 "landuse/grass": {
                     "name": "Herba",
@@ -3885,6 +3869,9 @@
                 "leisure/pitch/american_football": {
                     "name": "Camp de futbol americà",
                     "terms": "Estadi de futbol americà,Camp de futbol americà"
+                },
+                "leisure/pitch/baseball": {
+                    "name": "Camp de beisbol"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Pista de bàsquet",
@@ -4547,6 +4534,9 @@
                 "shop/jewelry": {
                     "name": "Joieria"
                 },
+                "shop/kiosk": {
+                    "name": "Quiosc"
+                },
                 "shop/kitchen": {
                     "name": "Botiga de disseny de cuines"
                 },
@@ -4935,8 +4925,7 @@
                     "terms": "Riu"
                 },
                 "waterway/riverbank": {
-                    "name": "Banc fluvial",
-                    "terms": "Riba del riu, Ribera"
+                    "name": "Banc fluvial"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Lavabo per a vaixells"
@@ -5091,6 +5080,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Groc = Dades de mapa del domini públic del US Census. Vermell = No es troben dades a OpenStreetMap",
                 "name": "Carreteres TIGER 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Groc = Dades de mapa de domini públic del Cens dels EUA. Vermell = No es troben dades a OpenStreetMap",
+                "name": "Carreteres TIGER 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Carretera: Contorn verd = sense classificar. Contorn marró = pista. Superfície: grava = emplenat marró clar, Asfalt = negre, pavimentat = gris, terra = blanc, ciment = blau, gespa = verd. Estacional = franges blanques",
@@ -5358,6 +5351,10 @@
                 "name": "Twitter de Bèlgica d'OpenStreetMap",
                 "description": "OSM Bèlgica a Twitter: @osm_be"
             },
+            "OSM-ES-mailinglist": {
+                "name": "Llista de correu Talk-es",
+                "description": "Una llista de correu per comentar OpenStreetMap d'Espanya"
+            },
             "OSM-SoCal": {
                 "name": "OpenStreetMap Califòrnia del Sud",
                 "extendedDescription": "OpenStreetMap (OSM) Califòrnia del Sud és per a tothom interessat en el mapatge que s'uneixi a treballar amb OpenStreetMap. OpenStreetMap, la Viquipèdia dels mapes, és un mapa de codi obert gratuït del món sent creat per més de 1000000 de voluntaris al voltant del món. Tothom és benvingut. Si no coneixes OpenStreetMap, t'ensenyarem. Si tens una idea d'un projecte de mapatge o fins i tot una excursió de camp que el grup pot fer, genial!"
@@ -5378,6 +5375,20 @@
             },
             "OSM-CL-twitter": {
                 "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-CO-facebook": {
+                "name": "Facebook de Colòmbia d'OpenStreetMap"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Llista de correu Talk-co",
+                "description": "Una llista de correu per comentar OpenStreetMap de Colòmbia"
+            },
+            "OSM-CO-twitter": {
+                "name": "Twitter de Colòmbia d'OpenStreetMap",
+                "description": "Seguiu-nos a Twitter a [url]"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colòmbia"
             },
             "OSM-PE": {
                 "name": "OpenStreetMap Perú"

@@ -614,20 +614,8 @@
                 "amenity/marketplace": {
                     "name": "市场"
                 },
-                "amenity/pharmacy": {
-                    "name": "药房"
-                },
                 "amenity/place_of_worship": {
                     "name": "礼拜场所"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "教堂"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "犹太教堂"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "清真寺"
                 },
                 "amenity/police": {
                     "name": "警察局"
@@ -847,9 +835,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "农庄"
-                },
-                "landuse/forest": {
-                    "name": "森林"
                 },
                 "landuse/grass": {
                     "name": "草地"
