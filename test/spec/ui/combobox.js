@@ -257,15 +257,15 @@ describe('uiCombobox', function() {
         simulateKeypress('↩');
     });
 
-    it('emits cancel event with selected datum on ⎋', function(done) {
-        combobox.on('cancel', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            done();
-        });
+    it('emits cancel event on ⎋', function() {
+        var spy = sinon.spy();
+        combobox.on('cancel', spy);
+
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⎋');
+        expect(spy).to.have.been.calledOnce;
     });
 
     it('hides on ↩', function() {
