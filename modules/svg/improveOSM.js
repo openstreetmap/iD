@@ -16,13 +16,11 @@ export function svgImproveOSM(projection, context, dispatch) {
     var drawLayer = d3_select(null);
     var _improveOsmVisible = false;
 
-
-    // TODO this is just reusing the path from the svg, probably some way to make that automatic (and therefore general)
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-9, -20)')
-            .attr('d', 'M15,6.5h-4.2l1.3-4.7c0.1-0.5-0.4-1-0.9-1H6.2C5.8,0.7,5.4,1,5.4,1.5l-1.2,8.7c-0.1,0.6,0.4,1,0.8,1h4.3l-1.7,7.1c-0.1,0.5,0.4,1,0.9,1c0.3,0,0.6-0.2,0.7-0.5l6.4-11C16,7.2,15.6,6.5,15,6.5z');
+            .attr('transform', 'translate(-8, -23)')
+            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
 
@@ -126,25 +124,38 @@ export function svgImproveOSM(projection, context, dispatch) {
             });
 
         markersEnter
+            .append('path')
+            .call(markerPath, 'shadow');
+
+        markersEnter
             .append('ellipse')
-            .attr('cx', 0)
-            .attr('cy', 0)
-            .attr('rx', 5)
+            .attr('cx', 0.5)
+            .attr('cy', 1)
+            .attr('rx', 6.5)
             .attr('ry', 2)
             .attr('class', 'stroke');
 
         markersEnter
             .append('path')
-            .call(markerPath, 'shadow');
+            .attr('fill', 'currentColor')
+            .call(markerPath, 'qa_error-fill');
 
         markersEnter
             .append('use')
-            .attr('class', 'qa_error-fill')
-            .attr('width', '20px')
-            .attr('height', '20px')
-            .attr('x', '-9px') // point of bolt is not perfectly centered
-            .attr('y', '-20px')
-            .attr('xlink:href', '#iD-icon-bolt');
+            .attr('transform', 'translate(-5, -19)')
+            .attr('class', 'icon')
+            .attr('width', '11px')
+            .attr('height', '11px')
+            .attr('xlink:href', function(d) {
+                var picon = d.icon;
+
+                if (!picon) {
+                    return '';
+                } else {
+                    var isMaki = /^maki-/.test(picon);
+                    return '#' + picon + (isMaki ? '-11' : '');
+                }
+            });
 
         // update
         markers
@@ -169,9 +180,9 @@ export function svgImproveOSM(projection, context, dispatch) {
         targets.enter()
             .append('rect')
             .attr('width', '20px')
-            .attr('height', '20px')
-            .attr('x', '-9px')
-            .attr('y', '-20px')
+            .attr('height', '30px')
+            .attr('x', '-10px')
+            .attr('y', '-26px')
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {

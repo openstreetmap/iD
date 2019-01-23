@@ -188,6 +188,7 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
+                                    icon: 'fas-arrow-circle-up', //TODO: Change arrow based on direction?
                                     identifier: { // this is used to post changes to the error
                                         wayId: feature.wayId,
                                         fromNodeId: feature.fromNodeId,
@@ -215,12 +216,19 @@ export default {
                         if (data.tiles) {
                             data.tiles.forEach(function(feature) {
                                 var geoType = feature.type.toLowerCase();
+                                var geoIcons = {
+                                    road: 'maki-car',
+                                    parking: 'maki-parking',
+                                    both: 'maki-car',
+                                    path: 'maki-shoe'
+                                };
 
                                 var d = new impOsmError({
                                     loc: pointAverage(feature.points),
                                     comments: null,
                                     error_subtype: geoType,
                                     error_type: k,
+                                    icon: geoIcons[geoType],
                                     identifier: { x: feature.x, y: feature.y },
                                     status: feature.status
                                 });
@@ -256,6 +264,7 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
+                                    icon: 'temaki-junction',
                                     identifier: feature.id,
                                     object_id: via_node,
                                     object_type: 'node',
