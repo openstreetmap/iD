@@ -9,7 +9,10 @@ import {
 import {
     utilDisplayLabel
 } from '../util';
-import { actionChangeTags } from '../actions';
+import {
+    actionAddMidpoint,
+    actionChangeTags
+} from '../actions';
 import { t } from '../util/locale';
 import {
     ValidationIssueType,
@@ -40,21 +43,25 @@ export function validationHighwayAlmostJunction(context) {
 
         if (nidFirst === nidLast) return results;
         if (!isNoexit(nodeFirst) && graph.parentWays(nodeFirst).length === 1) {
-            var widNearFirst = canConnectByExtend(way, 0, graph, tree);
-            if (widNearFirst !== null) {
-              results.push({
-                node: nodeFirst,
-                wid: widNearFirst,
-              });
+            var connNearFirst = canConnectByExtend(way, 0, graph, tree);
+            if (connNearFirst !== null) {
+                results.push({
+                    node: nodeFirst,
+                    wid: connNearFirst.wid,
+                    edge: connNearFirst.edge,
+                    cross_loc: connNearFirst.cross_loc
+                });
             }
         }
         if (!isNoexit(nodeLast) && graph.parentWays(nodeLast).length === 1) {
-            var widNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
-            if (widNearLast !== null) {
-              results.push({
-                node: nodeLast,
-                wid: widNearLast,
-              });
+            var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
+            if (connNearLast !== null) {
+                results.push({
+                    node: nodeLast,
+                    wid: connNearLast.wid,
+                    edge: connNearLast.edge,
+                    cross_loc: connNearLast.cross_loc
+                });
             }
         }
         return results;
@@ -87,9 +94,14 @@ export function validationHighwayAlmostJunction(context) {
             var way2 = intersected[i];
             for (var j = 0; j < way2.nodes.length - 1; j++) {
                 var nA = graph.entity(way2.nodes[j]),
-                    nB = graph.entity(way2.nodes[j + 1]);
-                if (geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc])) {
-                    return way2.id;
+                    nB = graph.entity(way2.nodes[j + 1]),
+                    crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+                if (crossLoc !== null) {
+                    return {
+                        wid: way2.id,
+                        edge: [nA.id, nB.id],
+                        cross_loc: crossLoc
+                    };
                 }
             }
         }
@@ -107,7 +119,20 @@ export function validationHighwayAlmostJunction(context) {
                 var node = extendableNodes[j].node;
                 var edgeHighway = graph.entity(extendableNodes[j].wid);
 
-                var fixes = [];
+                var fixes = [
+                  new validationIssueFix({
+                      title: t('issues.fix.connect_almost_junction.title'),
+                      action: function() {
+                          var endNode = this.issue.entities[1],
+                              targetEdge = this.issue.info.edge,
+                              crossLoc = this.issue.info.cross_loc;
+                          context.perform(
+                              actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
+                              t('issues.fix.connect_almost_junction.undo_redo')
+                          );
+                      }
+                  })
+                ];
                 if (Object.keys(node.tags).length === 0) {
                     // node has no tags, suggest noexit fix
                     fixes.push(new validationIssueFix({
@@ -131,6 +156,10 @@ export function validationHighwayAlmostJunction(context) {
                     tooltip: t('issues.highway_almost_junction.tooltip'),
                     entities: [endHighway, node, edgeHighway],
                     coordinates: extendableNodes[j].node.loc,
+                    info: {
+                        edge: extendableNodes[j].edge,
+                        cross_loc: extendableNodes[j].cross_loc
+                    },
                     fixes: fixes
                 }));
             }
