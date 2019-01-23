@@ -36,13 +36,13 @@ function abortRequest(i) {
 }
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflight, function(v, k) {
+    _forEach(cache.inflightTile, function(v, k) {
         var wanted = _find(tiles, function(tile) {
             return k === tile.id;
         });
         if (!wanted) {
             abortRequest(v);
-            delete cache.inflight[k];
+            delete cache.inflightTile[k];
         }
     });
 }
@@ -126,13 +126,13 @@ export default {
 
     reset: function() {
         if (_erCache) {
-            _forEach(_erCache.inflight, abortRequest);
+            _forEach(_erCache.inflightTile, abortRequest);
         }
         _erCache = {
             data: {},
-            loaded: {},
-            inflight: {},
-            outflight: {},
+            loadedTile: {},
+            inflightTile: {},
+            inflightPost: {},
             closed: {},
             rtree: rbush()
         };
@@ -157,7 +157,7 @@ export default {
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (_erCache.loaded[tile.id] || _erCache.inflight[tile.id]) return;
+            if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle();
             var params = _extend({}, options, { east: rect[0], south: rect[3], west: rect[2], north: rect[1] });
@@ -170,10 +170,10 @@ export default {
 
                 requests[k] = d3_json(url,
                     function(err, data) {
-                        delete _erCache.inflight[tile.id];
+                        delete _erCache.inflightTile[tile.id];
 
                         if (err) return;
-                        _erCache.loaded[tile.id] = true;
+                        _erCache.loadedTile[tile.id] = true;
 
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
@@ -280,7 +280,7 @@ export default {
                 );
             });
 
-            _erCache.inflight[tile.id] = requests;
+            _erCache.inflightTile[tile.id] = requests;
             dispatch.call('loaded');
         });
     },
@@ -289,7 +289,7 @@ export default {
         if (!services.osm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
         }
-        if (_erCache.outflight[d.id]) {
+        if (_erCache.inflightPost[d.id]) {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
@@ -326,10 +326,10 @@ export default {
             payload.status = d.newStatus;
             payload.text = 'status changed';
 
-            _erCache.outflight[d.id] = d3_request(url)
+            _erCache.inflightPost[d.id] = d3_request(url)
                 .header('Content-Type', 'application/json')
                 .post(JSON.stringify(payload), function(err) {
-                    delete _erCache.outflight[d.id];
+                    delete _erCache.inflightPost[d.id];
 
                     if (d.newStatus === 'INVALID') {
                         that.removeError(d);
