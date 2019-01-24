@@ -1,13 +1,15 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import _filter from 'lodash-es/filter';
+import _uniqWith from 'lodash-es/uniqWith';
 
 import { utilRebind } from '../util/rebind';
 
 export function IssueManager(context) {
     var dispatch = d3_dispatch('reload'),
         self = {},
-        issues = [];
+        issues = [],
+        issuesByEntityId = {};
 
     self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -27,21 +29,30 @@ export function IssueManager(context) {
     };
 
     self.getIssuesForEntityWithID = function(entityID) {
-        var issues = self.getIssues();
-        return _filter(issues, function(issue) {
-            for (var i = 0; i < issue.entities.length; i++) {
-                if (issue.entities[i].id === entityID) {
-                    return true;
-                }
-            }
-            return false;
-        });
+        if (!context.hasEntity(entityID)) {
+            return [];
+        }
+        if (!issuesByEntityId[entityID]) {
+            var entity = context.entity(entityID);
+            issuesByEntityId[entityID] = context.history().validate([entity]);
+        }
+        return issuesByEntityId[entityID];
     };
 
     self.validate = function() {
         var changes = context.history().changes();
         var entitiesToCheck = changes.created.concat(changes.modified);
-        issues = context.history().validate(entitiesToCheck);
+        issuesByEntityId = {};
+        issues = [];
+        for (var entityIndex in entitiesToCheck) {
+            var entity = entitiesToCheck[entityIndex];
+            var entityIssues = context.history().validate([entity]);
+            issuesByEntityId[entity.id] = entityIssues;
+            issues = issues.concat(entityIssues);
+        }
+        issues = _uniqWith(issues, function(issue1, issue2) {
+            return issue1.id() === issue2.id();
+        });
         dispatch.call('reload', self, issues);
     };
 

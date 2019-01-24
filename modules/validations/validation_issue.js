@@ -27,11 +27,29 @@ export { ValidationIssueType, ValidationIssueSeverity };
 
 export function validationIssue(attrs) {
 
+    // A unique, deterministic string hash.
+    // Issues with identical id values are considered identical.
     this.id = function () {
+        var id = this.type;
+
+        if (this.hash) {
+            // subclasses can pass in their own differentiator
+            id += this.hash;
+        }
+
+        // issue subclasses set the entity order but it must be deterministic
         var entityKeys = _map(this.entities, function(entity) {
+            // use the key since it factors in the entity's local version
             return osmEntity.key(entity);
         });
-        return this.message + this.type + entityKeys.join();
+        // factor in the entities this issue is for
+        id += entityKeys.join();
+        if (this.coordinates) {
+            // factor in coordinates since two separate issues can have an
+            // idential type and entities, e.g. in crossing_ways
+            id += this.coordinates.join();
+        }
+        return id;
     };
 
     if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
@@ -51,6 +69,8 @@ export function validationIssue(attrs) {
     this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
     this.info = attrs.info; // an object containing arbitrary extra information
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
+
+    this.hash = attrs.hash; // an optional string to further differentiate the issue
 
     this.loc = function() {
         if (this.coordinates && Array.isArray(this.coordinates) && this.coordinates.length === 2) {

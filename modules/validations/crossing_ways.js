@@ -147,7 +147,7 @@ export function validationHighwayCrossingOtherWays(context) {
 
     function findCrossingsByWay(entity, graph, tree, edgePairsVisited) {
         var edgeCrossInfos = [];
-        if (entity.geometry(graph) !== 'line' || entity.type !== 'way') return edgeCrossInfos;
+        if (entity.type !== 'way') return edgeCrossInfos;
 
         var entFeatureType = getFeatureTypeForCrossingCheck(entity, graph);
         if (entFeatureType === null) return edgeCrossInfos;
@@ -205,6 +205,9 @@ export function validationHighwayCrossingOtherWays(context) {
                 // use the entities with the tags that define the feature type
                 var entities = _map(crossing.ways, function(way) {
                     return getFeatureWithFeatureTypeTagsForWay(way, graph);
+                });
+                entities = entities.sort(function(entity1, entity2) {
+                    return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
                 });
 
                 var crossingTypeID = crossing.featureTypes.sort().join('-') + '_crossing';

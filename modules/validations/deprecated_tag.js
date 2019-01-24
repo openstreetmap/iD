@@ -33,6 +33,7 @@ export function validationDeprecatedTag(context) {
                         message: t('issues.deprecated_tags.message', { feature: featureLabel, tags: tagsLabel }),
                         tooltip: t('issues.deprecated_tags.tooltip'),
                         entities: [change],
+                        hash: tagsLabel,
                         info: {
                             oldTags: deprecatedTags.old,
                             replaceTags: deprecatedTags.replace
