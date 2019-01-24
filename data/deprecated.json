@@ -77,12 +77,23 @@
       "replace": {"shop": "optician"}
     },
     {
+      "old": {"drinkable": "*"},
+      "replace": {"drinking_water": "$1"}
+    },
+    {
       "old": {"escalator": "*"},
       "replace": {"highway": "steps", "conveying": "$1"}
     },
     {
+      "old": {"fenced": "yes"},
+      "replace": {"barrier": "fence"}
+    },
+    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
+    },
+    {
+      "old": {"highway": "no"}
     },
     {
       "old": {"highway": "stile"},
@@ -105,12 +116,36 @@
       "replace": {"landuse": "farmland"}
     },
     {
+      "old": {"landuse": "field"},
+      "replace": {"landuse": "farmland"}
+    },
+    {
       "old": {"landuse": "pond"},
       "replace": {"natural": "water", "water": "pond"}
     },
     {
       "old": {"landuse": "wood"},
-      "replace": {"landuse": "forest", "natural": "wood"}
+      "replace": {"natural": "wood"}
+    },
+    {
+      "old": {"leisure": "beach"},
+      "replace": {"natural": "beach"}
+    },
+    {
+      "old": {"leisure": "club"},
+      "replace": {"club": "*"}
+    },
+    {
+      "old": {"man_made": "jetty"},
+      "replace": {"man_made": "pier"}
+    },
+    {
+      "old": {"man_made": "water_tank"},
+      "replace": {"man_made": "storage_tank", "content": "water"}
+    },
+    {
+      "old": {"man_made": "well"},
+      "replace": {"man_made": "water_well"}
     },
     {
       "old": {"natural": "marsh"},
@@ -119,6 +154,14 @@
     {
       "old": {"office": "administrative"},
       "replace": {"office": "government"}
+    },
+    {
+      "old": {"place_name": "*"},
+      "replace": {"name": "$1"}
+    },
+    {
+      "old": {"pole": "transition"},
+      "replace": {"location:transition": "yes"}
     },
     {
       "old": {"power": "sub_station"},
@@ -133,8 +176,16 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"route": "ncn"},
+      "replace": {"route": "bicycle", "network": "ncn"}
+    },
+    {
       "old": {"shop": "organic"},
       "replace": {"shop": "supermarket", "organic": "only"}
+    },
+    {
+      "old": {"shop": "fish"},
+      "replace": {"shop": "seafood"}
     },
     {
       "old": {"shop": "fishmonger"},
@@ -143,6 +194,18 @@
     {
       "old": {"shop": "furnace"},
       "replace": {"shop": "fireplace"}
+    },
+    {
+      "old": {"shop": "gallery"},
+      "replace": {"shop": "art"}
+    },
+    {
+      "old": {"shop": "perfume"},
+      "replace": {"shop": "perfumery"}
+    },
+    {
+      "old": {"tourism": "bed_and_breakfast"},
+      "replace": {"tourism": "guest_house"}
     }
   ]
 }

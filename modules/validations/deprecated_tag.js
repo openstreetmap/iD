@@ -1,4 +1,3 @@
-import _isEmpty from 'lodash-es/isEmpty';
 import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 import {
@@ -19,12 +18,12 @@ import {
 export function validationDeprecatedTag(context) {
 
     var validation = function(changes) {
-        var issues = [];
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i];
+        var edited = changes.created.concat(changes.modified),
+            issues = [];
+        for (var changeIndex in edited) {
+            var change = edited[changeIndex];
             var deprecatedTagsArray = change.deprecatedTags();
-
-            if (!_isEmpty(deprecatedTagsArray)) {
+            if (deprecatedTagsArray.length > 0) {
                 for (var deprecatedTagIndex in deprecatedTagsArray) {
                     var deprecatedTags = deprecatedTagsArray[deprecatedTagIndex];
                     var tagsLabel = utilTagText({ tags: deprecatedTags.old });
