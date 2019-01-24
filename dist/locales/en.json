@@ -1189,7 +1189,7 @@
                 "navigation_zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons along the side of the map. You can also use the `+`, `-` keys on your keyboard.",
                 "features_h": "Map Features",
                 "features": "We use the word *features* to describe things that appear on the map, such as roads, buildings, or points of interest. Anything in the real world can be mapped as a feature on OpenStreetMap. Map features are represented on the map using *points*, *lines*, or *areas*.",
-                "nodes_ways": "In OpenStreetmap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
+                "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
             },
             "editing": {
                 "title": "Editing & Saving",
