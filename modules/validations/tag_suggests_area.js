@@ -29,10 +29,10 @@ export function validationTagSuggestsArea() {
     }
 
 
-    var validation = function(changes, graph) {
+    var validation = function(entitiesToCheck, graph) {
         var issues = [];
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i];
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var change = entitiesToCheck[i];
             var geometry = change.geometry(graph);
             var suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
 

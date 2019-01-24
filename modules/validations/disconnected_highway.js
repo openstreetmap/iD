@@ -30,10 +30,10 @@ export function validationDisconnectedHighway(context) {
     }
 
 
-    var validation = function(changes, graph) {
+    var validation = function(entitiesToCheck, graph) {
         var issues = [];
-        for (var i = 0; i < changes.created.length; i++) {
-            var entity = changes.created[i];
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var entity = entitiesToCheck[i];
             if (isDisconnectedHighway(entity, graph)) {
                 var entityLabel = utilDisplayLabel(entity, context);
                 issues.push(new validationIssue({

@@ -44,11 +44,11 @@ export function validationGenericName(context) {
     }
 
 
-    return function validation(changes) {
+    return function validation(entitiesToCheck) {
         var issues = [];
 
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i];
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var change = entitiesToCheck[i];
             var generic = isGenericName(change);
             if (generic) {
                 var preset = utilPreset(change, context);

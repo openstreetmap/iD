@@ -293,11 +293,11 @@ export function coreHistory(context) {
         },
 
 
-        validate: function(changes) {
+        validate: function(entitiesToCheck) {
             return _flatten(_map(
                 validations,
                 function(fn) {
-                    return fn(context)(changes, _stack[_index].graph, _tree);
+                    return fn(context)(entitiesToCheck, _stack[_index].graph, _tree);
                 }
             ));
         },

@@ -193,13 +193,12 @@ export function validationHighwayCrossingOtherWays(context) {
         return edgeCrossInfos;
     }
 
-    var validation = function(changes, graph, tree) {
+    var validation = function(entitiesToCheck, graph, tree) {
         // create one issue per crossing point
-        var edited = changes.created.concat(changes.modified),
-            edgePairsVisited = d3_set(),
+        var edgePairsVisited = d3_set(),
             issues = [];
-        for (var i = 0; i < edited.length; i++) {
-            var crosses = findCrossingsByWay(edited[i], graph, tree, edgePairsVisited);
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var crosses = findCrossingsByWay(entitiesToCheck[i], graph, tree, edgePairsVisited);
             for (var j = 0; j < crosses.length; j++) {
                 var crossing = crosses[j];
 

@@ -108,14 +108,13 @@ export function validationHighwayAlmostJunction(context) {
         return null;
     }
 
-    var validation = function(changes, graph, tree) {
-        var edited = changes.created.concat(changes.modified),
-            issues = [];
-        for (var i = 0; i < edited.length; i++) {
-            if (!isHighway(edited[i])) continue;
-            var extendableNodes = findConnectableEndNodesByExtension(edited[i], graph, tree);
+    var validation = function(entitiesToCheck, graph, tree) {
+        var issues = [];
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var endHighway = entitiesToCheck[i];
+            if (!isHighway(endHighway)) continue;
+            var extendableNodes = findConnectableEndNodesByExtension(endHighway, graph, tree);
             for (var j = 0; j < extendableNodes.length; j++) {
-                var endHighway = edited[i];
                 var node = extendableNodes[j].node;
                 var edgeHighway = graph.entity(extendableNodes[j].wid);
 

@@ -11,7 +11,7 @@ export function validationManyDeletions() {
     var validation = function(changes, graph) {
         var issues = [];
         var nodes = 0, ways = 0, areas = 0, relations = 0;
-
+/*
         changes.deleted.forEach(function(c) {
             if (c.type === 'node') { nodes++; }
             else if (c.type === 'way' && c.geometry(graph) === 'line') { ways++; }
@@ -28,7 +28,7 @@ export function validationManyDeletions() {
                 ),
             }));
         }
-
+*/
         return issues;
     };
 

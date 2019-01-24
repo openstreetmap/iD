@@ -17,11 +17,10 @@ import {
 
 export function validationDeprecatedTag(context) {
 
-    var validation = function(changes) {
-        var edited = changes.created.concat(changes.modified),
-            issues = [];
-        for (var changeIndex in edited) {
-            var change = edited[changeIndex];
+    var validation = function(entitiesToCheck) {
+        var issues = [];
+        for (var changeIndex in entitiesToCheck) {
+            var change = entitiesToCheck[changeIndex];
             var deprecatedTagsArray = change.deprecatedTags();
             if (deprecatedTagsArray.length > 0) {
                 for (var deprecatedTagIndex in deprecatedTagsArray) {

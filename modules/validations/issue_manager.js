@@ -40,7 +40,8 @@ export function IssueManager(context) {
 
     self.validate = function() {
         var changes = context.history().changes();
-        issues = context.history().validate(changes);
+        var entitiesToCheck = changes.created.concat(changes.modified);
+        issues = context.history().validate(entitiesToCheck);
         dispatch.call('reload', self, issues);
     };
 

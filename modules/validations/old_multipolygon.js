@@ -13,10 +13,10 @@ import {
 
 export function validationOldMultipolygon(context) {
 
-    return function validation(changes, graph) {
+    return function validation(entitiesToCheck, graph) {
         var issues = [];
-        for (var i = 0; i < changes.created.length; i++) {
-            var entity = changes.created[i];
+        for (var i = 0; i < entitiesToCheck.length; i++) {
+            var entity = entitiesToCheck[i];
             var mistaggedMultipolygon = osmIsSimpleMultipolygonOuterMember(entity, graph);
             if (mistaggedMultipolygon) {
                 var multipolygonLabel = utilDisplayLabel(mistaggedMultipolygon, context);
