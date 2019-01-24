@@ -140,7 +140,8 @@ export function uiIssues(context) {
             });
 
         var label = enter
-            .append('label');
+            .append('button')
+            .attr('class', 'label');
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';

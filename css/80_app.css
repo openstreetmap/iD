@@ -2906,17 +2906,29 @@ div.full-screen > button:hover {
     padding-bottom: 10px;
 }
 
-/* Issues List */
-.issues-list label {
+/* Issues */
+
+.issue {
+    overflow: hidden;
+}
+.issue button {
     padding: 5px;
-}
-.issues-list label > span {
-    display: inline;
-    white-space: normal;
-}
-.issues-list li {
     height: auto;
-    color: inherit;
+    width: 100%;
+    font-weight: inherit;
+    border-radius: 0;
+}
+.issue button.label {
+    text-align: inherit;
+    display: flex;
+}
+.issue.severity-warning,
+.issue.severity-warning li {
+    border-color: #FFDF5C;
+}
+.issue.severity-error,
+.issue.severity-error li {
+    border-color: #f5b0ab;
 }
 
 .issue.severity-warning button {
@@ -2941,6 +2953,20 @@ div.full-screen > button:hover {
     color: #DD1400
 }
 
+/* Issues Pane List */
+
+.issues-list label {
+    padding: 5px;
+}
+.issues-list label > span {
+    display: inline;
+    white-space: normal;
+}
+.issues-list li {
+    height: auto;
+    color: inherit;
+}
+
 /* Entity Issues List */
 
 .entity-issues {
@@ -2950,26 +2976,6 @@ div.full-screen > button:hover {
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
-    overflow: hidden;
-}
-.entity-issues .issue button {
-    padding: 5px;
-    height: auto;
-    width: 100%;
-    font-weight: inherit;
-    border-radius: 0;
-}
-.entity-issues .issue button.label {
-    text-align: inherit;
-    display: flex;
-}
-.entity-issues .issue.severity-warning,
-.entity-issues .issue.severity-warning li {
-    border-color: #FFDF5C;
-}
-.entity-issues .issue.severity-error,
-.entity-issues .issue.severity-error li {
-    border-color: #f5b0ab;
 }
 .entity-issues .issue:first-of-type {
     margin-top: 5px;

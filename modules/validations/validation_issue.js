@@ -30,7 +30,7 @@ export function validationIssue(attrs) {
         var entityKeys = _map(this.entities, function(entity) {
             return osmEntity.key(entity);
         });
-        return this.type + entityKeys.join();
+        return this.message + this.type + entityKeys.join();
     };
 
     if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
