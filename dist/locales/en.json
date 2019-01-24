@@ -1397,8 +1397,8 @@
                 "tooltip": "Roads should be connected to other roads or building entrances."
             },
             "old_multipolygon": {
-                "message": "Multipolygon tags on outer way",
-                "tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
+                "message": "{multipolygon} has misplaced tags.",
+                "tooltip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "untagged_feature": {
                 "message": "{feature} has no tags.",
@@ -1490,6 +1490,10 @@
                 "remove_name": {
                     "title": "Remove the name",
                     "undo_redo": "Removed a generic name."
+                },
+                "move_tags": {
+                    "title": "Move the tags",
+                    "undo_redo": "Moved tags."
                 }
             }
         },

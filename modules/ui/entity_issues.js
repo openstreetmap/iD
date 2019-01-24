@@ -101,9 +101,12 @@ export function uiEntityIssues(context) {
 
                 issue.select('.label')
                     .on('click', function() {
-                        context.map().centerZoomEase(d.loc(), Math.max(context.map().zoom(), 18));
                         if (list.style('display') === 'none') {
                             list.style('display', 'block');
+                            var loc = d.loc();
+                            if (loc) {
+                                context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
+                            }
                         } else {
                             list.style('display', 'none');
                         }
