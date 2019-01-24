@@ -1163,6 +1163,9 @@ en:
       message: "The tag {tag} suggests line should be area, but it is not an area."
     deprecated_tags:
       message: "Deprecated tags: {tags}"
+    generic_name:
+      message: '{feature} has the generic name "{name}".'
+      tooltip: 'Names should be the official, on-the-ground titles of features.'
     building-building_crossing:
       message: "{building} intersect {building1} on the same layer."
       tooltip: "Buildings should not intersect except on separate layers."
@@ -1215,6 +1218,9 @@ en:
       connect_almost_junction:
         title: Connect the features
         undo_redo: Connected two features that were really close.
+      remove_name:
+        title: Remove the name
+        undo_redo: Removed a generic name.
   intro:
     done: done
     ok: OK

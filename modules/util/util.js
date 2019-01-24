@@ -129,13 +129,18 @@ export function utilDisplayLabel(entity, context) {
         // use the display name if there is one
         return displayName;
     }
-    var preset = context.presets().match(entity, context.graph());
+    var preset = utilPreset(entity, context);
     if (preset && preset.name()) {
         // use the preset name if there is a match
         return preset.name();
     }
     // fallback to the display type (node/way/relation)
     return utilDisplayType(entity.id);
+}
+
+
+export function utilPreset(entity, context) {
+    return context.presets().match(entity, context.graph());
 }
 
 

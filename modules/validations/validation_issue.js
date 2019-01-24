@@ -12,6 +12,7 @@ var ValidationIssueType = Object.freeze({
     map_rule_issue: 'map_rule_issue',
     crossing_ways: 'crossing_ways',
     highway_almost_junction: 'highway_almost_junction',
+    generic_name: 'generic_name'
 });
 
 
