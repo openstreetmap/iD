@@ -4280,7 +4280,7 @@ en:
       landuse/forest:
         # landuse=forest
         name: Managed Forest
-        # 'terms: cut,forest,lumber,tree'
+        # 'terms: cut,forest,forestry,lumber,silviculture,tree'
         terms: '<translate with synonyms or related terms for ''Managed Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages

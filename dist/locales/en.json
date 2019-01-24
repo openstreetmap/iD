@@ -5552,7 +5552,7 @@
                 },
                 "landuse/forest": {
                     "name": "Managed Forest",
-                    "terms": "cut,forest,lumber,tree"
+                    "terms": "cut,forest,forestry,lumber,silviculture,tree"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
