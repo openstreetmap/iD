@@ -166,14 +166,14 @@ osmEntity.prototype = {
 
     deprecatedTags: function() {
         var tags = _toPairs(this.tags);
-        var deprecated = {};
+        var deprecated = [];
 
         dataDeprecated.forEach(function(d) {
             var match = _toPairs(d.old)[0];
             tags.forEach(function(t) {
                 if (t[0] === match[0] &&
                     (t[1] === match[1] || match[1] === '*')) {
-                    deprecated[t[0]] = t[1];
+                    deprecated.push(d);
                 }
             });
         });

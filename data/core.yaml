@@ -1162,10 +1162,11 @@ en:
     tag_suggests_area:
       message: "The tag {tag} suggests line should be area, but it is not an area."
     deprecated_tags:
-      message: "Deprecated tags: {tags}"
+      message: '{feature} has outdated tags: {tags}'
+      tooltip: Some tags become deprecated over time and should be replaced.
     generic_name:
       message: '{feature} has the generic name "{name}".'
-      tooltip: 'Names should be the official, on-the-ground titles of features.'
+      tooltip: Names should be the official, on-the-ground titles of features.
     building-building_crossing:
       message: "{building} intersect {building1} on the same layer."
       tooltip: "Buildings should not intersect except on separate layers."
@@ -1224,6 +1225,9 @@ en:
       move_tags:
         title: Move the tags
         undo_redo: Moved tags.
+      upgrade_tags:
+        title: Upgrade tags
+        undo_redo: Upgraded tags.
   intro:
     done: done
     ok: OK

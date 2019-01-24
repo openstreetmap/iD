@@ -1411,7 +1411,8 @@
                 "message": "The tag {tag} suggests line should be area, but it is not an area."
             },
             "deprecated_tags": {
-                "message": "Deprecated tags: {tags}"
+                "message": "{feature} has outdated tags: {tags}",
+                "tooltip": "Some tags become deprecated over time and should be replaced."
             },
             "generic_name": {
                 "message": "{feature} has the generic name \"{name}\".",
@@ -1494,6 +1495,10 @@
                 "move_tags": {
                     "title": "Move the tags",
                     "undo_redo": "Moved tags."
+                },
+                "upgrade_tags": {
+                    "title": "Upgrade tags",
+                    "undo_redo": "Upgraded tags."
                 }
             }
         },
