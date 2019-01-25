@@ -225,7 +225,7 @@ export function uiFieldLocalized(field, context) {
             var parts = name.split(' – ');
             if (parts.length > 1) {
                 parts.pop();
-                var name = parts.join(' – ');
+                name = parts.join(' – ');
                 utilGetSetValue(input, name);
                 dispatch.call('change', this, { name: name });
             }

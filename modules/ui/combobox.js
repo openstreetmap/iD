@@ -1,5 +1,3 @@
-import _clone from 'lodash-es/clone';
-
 import {
     dispatch as d3_dispatch
 } from 'd3-dispatch';
