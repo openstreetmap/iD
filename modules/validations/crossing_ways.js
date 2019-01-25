@@ -1,5 +1,6 @@
 import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
+import _flattenDeep from 'lodash-es/flatten';
 import { geoExtent, geoLineIntersection } from '../geo';
 import { set as d3_set } from 'd3-collection';
 import { utilDisplayLabel } from '../util';
@@ -197,8 +198,27 @@ export function validationHighwayCrossingOtherWays(context) {
         // create one issue per crossing point
         var edgePairsVisited = d3_set(),
             issues = [];
-        for (var i = 0; i < entitiesToCheck.length; i++) {
-            var crosses = findCrossingsByWay(entitiesToCheck[i], graph, tree, edgePairsVisited);
+        var waysToCheck = _flattenDeep(_map(entitiesToCheck, function(entity) {
+            if (!getFeatureTypeForTags(entity.tags)) {
+                return [];
+            }
+            if (entity.type === 'way') {
+                return entity;
+            } else if (entity.type === 'relation' && entity.tags.type === 'multipolygon') {
+                return _map(entity.members, function(member) {
+                    if (context.hasEntity(member.id)) {
+                        var entity = context.entity(member.id);
+                        if (entity.type === 'way') {
+                            return entity;
+                        }
+                    }
+                    return [];
+                });
+            }
+            return [];
+        }));
+        for (var i = 0; i < waysToCheck.length; i++) {
+            var crosses = findCrossingsByWay(waysToCheck[i], graph, tree, edgePairsVisited);
             for (var j = 0; j < crosses.length; j++) {
                 var crossing = crosses[j];
 
