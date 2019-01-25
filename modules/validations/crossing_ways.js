@@ -223,28 +223,34 @@ export function validationHighwayCrossingOtherWays(context) {
                 var crossing = crosses[j];
 
                 // use the entities with the tags that define the feature type
-                var entities = _map(crossing.ways, function(way) {
+                var entities = crossing.ways.sort(function(entity1, entity2) {
+                    var type1 = getFeatureTypeForCrossingCheck(entity1, graph);
+                    var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
+                    if (type1 === type2) {
+                        return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
+                    } else if (type1 === 'water') {
+                        return true;
+                    } else if (type2 === 'water') {
+                        return false;
+                    }
+                    return type1 < type2;
+                });
+                entities = _map(entities, function(way) {
                     return getFeatureWithFeatureTypeTagsForWay(way, graph);
                 });
-                entities = entities.sort(function(entity1, entity2) {
-                    return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
-                });
 
-                var crossingTypeID = crossing.featureTypes.sort().join('-') + '_crossing';
+                var crossingTypeID = crossing.featureTypes.sort().join('-');
 
-                var messageDict = {};
-                messageDict[crossing.featureTypes[0]] = utilDisplayLabel(entities[0], context);
-                var key2 = crossing.featureTypes[1];
-                if (crossing.featureTypes[0] === crossing.featureTypes[1]) {
-                    key2 += '2';
-                }
-                messageDict[key2] = utilDisplayLabel(entities[1], context);
+                var messageDict = {
+                    feature: utilDisplayLabel(entities[0], context),
+                    feature2: utilDisplayLabel(entities[1], context)
+                };
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('issues.'+crossingTypeID+'.message', messageDict),
-                    tooltip: t('issues.'+crossingTypeID+'.tooltip'),
+                    message: t('issues.crossing_ways.message', messageDict),
+                    tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
                     entities: entities,
                     info: {'ways': crossing.ways},
                     coordinates: crossing.cross_point,

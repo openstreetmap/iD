@@ -24,7 +24,7 @@ export function validationOldMultipolygon(context) {
                     type: ValidationIssueType.old_multipolygon,
                     severity: ValidationIssueSeverity.warning,
                     message: t('issues.old_multipolygon.message', {multipolygon: multipolygonLabel}),
-                    tooltip: t('issues.old_multipolygon.tooltip'),
+                    tooltip: t('issues.old_multipolygon.tip'),
                     entities: [entity, mistaggedMultipolygon],
                     fixes: [
                         new validationIssueFix({

@@ -56,7 +56,7 @@ export function validationGenericName(context) {
                     type: ValidationIssueType.generic_name,
                     severity: ValidationIssueSeverity.warning,
                     message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
-                    tooltip: t('issues.generic_name.tooltip'),
+                    tooltip: t('issues.generic_name.tip'),
                     entities: [change],
                     fixes: [
                         new validationIssueFix({

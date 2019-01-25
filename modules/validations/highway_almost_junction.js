@@ -152,7 +152,7 @@ export function validationHighwayAlmostJunction(context) {
                         highway: utilDisplayLabel(endHighway, context),
                         highway2: utilDisplayLabel(edgeHighway, context)
                     }),
-                    tooltip: t('issues.highway_almost_junction.tooltip'),
+                    tooltip: t('issues.highway_almost_junction.tip'),
                     entities: [endHighway, node, edgeHighway],
                     coordinates: extendableNodes[j].node.loc,
                     info: {

@@ -48,16 +48,17 @@ export function IssueManager(context) {
 
         var changes = context.history().changes();
         var entitiesToCheck = changes.created.concat(changes.modified);
+        var graph = context.graph();
         entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
             var entities = [entity];
             if (entity.type === 'node') {
                 // validate ways if their nodes have changed
-                entities = entities.concat(context.graph().parentWays(entity));
+                entities = entities.concat(graph.parentWays(entity));
             }
             entities = _map(entities, function(entity) {
                 if (entity.type !== 'relation') {
                     // validate relations if their geometries have changed
-                    return [entity].concat(context.graph().parentRelations(entity));
+                    return [entity].concat(graph.parentRelations(entity));
                 }
                 return entity;
             });

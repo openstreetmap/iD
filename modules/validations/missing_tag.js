@@ -33,20 +33,20 @@ export function validationMissingTag(context) {
                     type: ValidationIssueType.missing_tag,
                     severity: ValidationIssueSeverity.error,
                     message: t('issues.untagged_feature.message', {feature: entityLabel}),
-                    tooltip: t('issues.untagged_feature.tooltip'),
+                    tooltip: t('issues.untagged_feature.tip'),
                     entities: [change],
                     fixes: [
+                        new validationIssueFix({
+                            title: t('issues.fix.select_preset.title'),
+                            action: function() {
+                                context.ui().sidebar.showPresetList();
+                            }
+                        }),
                         new validationIssueFix({
                             title: t('issues.fix.delete_feature.title'),
                             action: function() {
                                 var id = this.issue.entities[0].id;
                                 operationDelete([id], context)();
-                            }
-                        }),
-                        new validationIssueFix({
-                            title: t('issues.fix.select_preset.title'),
-                            action: function() {
-                                context.ui().sidebar.showPresetList();
                             }
                         })
                     ]

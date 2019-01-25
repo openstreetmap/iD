@@ -40,7 +40,7 @@ export function validationDisconnectedHighway(context) {
                     type: ValidationIssueType.disconnected_highway,
                     severity: ValidationIssueSeverity.warning,
                     message: t('issues.disconnected_highway.message', {highway: entityLabel}),
-                    tooltip: t('issues.disconnected_highway.tooltip'),
+                    tooltip: t('issues.disconnected_highway.tip'),
                     entities: [entity],
                 }));
             }
