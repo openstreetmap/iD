@@ -9,8 +9,9 @@
         "wheelchair"
     ],
     "moreFields": [
-        "operator",
         "fee",
+        "opening_hours",
+        "operator",
         "payment_multi"
     ],
     "geometry": [
