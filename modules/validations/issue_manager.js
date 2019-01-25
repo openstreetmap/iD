@@ -1,6 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import _filter from 'lodash-es/filter';
+import _map from 'lodash-es/map';
+import _flattenDeep from 'lodash-es/flattenDeep';
+import _uniq from 'lodash-es/uniq';
 import _uniqWith from 'lodash-es/uniqWith';
 
 import { utilRebind } from '../util/rebind';
@@ -40,10 +42,28 @@ export function IssueManager(context) {
     };
 
     self.validate = function() {
-        var changes = context.history().changes();
-        var entitiesToCheck = changes.created.concat(changes.modified);
+        // clear cached issues
         issuesByEntityId = {};
         issues = [];
+
+        var changes = context.history().changes();
+        var entitiesToCheck = changes.created.concat(changes.modified);
+        entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
+            var entities = [entity];
+            if (entity.type === 'node') {
+                // validate ways if their nodes have changed
+                entities = entities.concat(context.graph().parentWays(entity));
+            }
+            entities = _map(entities, function(entity) {
+                if (entity.type !== 'relation') {
+                    // validate relations if their geometries have changed
+                    return [entity].concat(context.graph().parentRelations(entity));
+                }
+                return entity;
+            });
+            return entities;
+        })));
+
         for (var entityIndex in entitiesToCheck) {
             var entity = entitiesToCheck[entityIndex];
             var entityIssues = context.history().validate([entity]);
