@@ -2081,6 +2081,9 @@
                 "animal_shelter": {
                     "label": "For Animals"
                 },
+                "architect": {
+                    "label": "Architect"
+                },
                 "area/highway": {
                     "label": "Type"
                 },
@@ -3175,6 +3178,9 @@
                 },
                 "restrictions": {
                     "label": "Turn Restrictions"
+                },
+                "roof/colour": {
+                    "label": "Roof Color"
                 },
                 "rooms": {
                     "label": "Rooms"

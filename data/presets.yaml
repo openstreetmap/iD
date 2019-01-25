@@ -187,6 +187,9 @@ en:
       animal_shelter:
         # animal_shelter=*
         label: For Animals
+      architect:
+        # architect=*
+        label: Architect
       area/highway:
         # 'area:highway=*'
         label: Type
@@ -1479,6 +1482,9 @@ en:
         label: Type
       restrictions:
         label: Turn Restrictions
+      roof/colour:
+        # 'roof:colour=*'
+        label: Roof Color
       rooms:
         # rooms=*
         label: Rooms
