@@ -412,7 +412,7 @@ en:
         # cycle_network=*
         label: Network
       cycleway:
-        # 'cycleway:left=*, cycleway:right=*'
+        # 'cycleway=*, cycleway:left=*, cycleway:right=*'
         label: Bike Lanes
         options:
           # lane=yes
