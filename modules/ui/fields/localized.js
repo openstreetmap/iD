@@ -223,10 +223,12 @@ export function uiFieldLocalized(field, context) {
             // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
             var name = utilGetSetValue(input);
             var parts = name.split(' – ');
-            parts.pop();
-            name = parts.join(' – ');
-            utilGetSetValue(input, name);
-            dispatch.call('change', this, { name: name });
+            if (parts.length > 1) {
+                parts.pop();
+                var name = parts.join(' – ');
+                utilGetSetValue(input, name);
+                dispatch.call('change', this, { name: name });
+            }
         }
 
 
