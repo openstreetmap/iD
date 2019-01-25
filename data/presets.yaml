@@ -187,6 +187,9 @@ en:
       animal_shelter:
         # animal_shelter=*
         label: For Animals
+      architect:
+        # architect=*
+        label: Architect
       area/highway:
         # 'area:highway=*'
         label: Type

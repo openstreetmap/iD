@@ -8,6 +8,7 @@
         "address"
     ],
     "moreFields": [
+        "architect",
         "building/material",
         "smoking",
         "wheelchair"

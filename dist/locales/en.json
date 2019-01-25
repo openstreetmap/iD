@@ -1980,6 +1980,9 @@
                 "animal_shelter": {
                     "label": "For Animals"
                 },
+                "architect": {
+                    "label": "Architect"
+                },
                 "area/highway": {
                     "label": "Type"
                 },
