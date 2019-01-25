@@ -3078,6 +3078,9 @@
                 "restrictions": {
                     "label": "Turn Restrictions"
                 },
+                "roof/colour": {
+                    "label": "Roof Color"
+                },
                 "rooms": {
                     "label": "Rooms"
                 },

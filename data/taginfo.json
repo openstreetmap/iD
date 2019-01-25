@@ -1416,6 +1416,7 @@
     {"key": "type", "description": "🄵 Type"},
     {"key": "religion", "description": "🄵 Religion"},
     {"key": "restriction", "description": "🄵 Type"},
+    {"key": "roof:colour", "description": "🄵 Roof Color"},
     {"key": "rooms", "description": "🄵 Rooms"},
     {"key": "route_master", "description": "🄵 Type"},
     {"key": "route", "description": "🄵 Type"},

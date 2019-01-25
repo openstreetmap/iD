@@ -10,6 +10,7 @@
     "moreFields": [
         "architect",
         "building/material",
+        "roof/colour",
         "smoking",
         "wheelchair"
     ],

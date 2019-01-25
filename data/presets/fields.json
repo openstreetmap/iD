@@ -263,6 +263,7 @@
     "religion": {"key": "religion", "type": "combo", "label": "Religion"},
     "restriction": {"key": "restriction", "type": "combo", "label": "Type"},
     "restrictions": {"type": "restrictions", "geometry": "vertex", "icon": "iD-restrictions", "reference": {"rtype": "restriction"}, "label": "Turn Restrictions"},
+    "roof/colour": {"key": "roof:colour", "type": "combo", "label": "Roof Color"},
     "rooms": {"key": "rooms", "type": "number", "minValue": 0, "label": "Rooms"},
     "route_master": {"key": "route_master", "type": "combo", "label": "Type"},
     "route": {"key": "route", "type": "combo", "label": "Type"},

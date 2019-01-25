@@ -1482,6 +1482,9 @@ en:
         label: Type
       restrictions:
         label: Turn Restrictions
+      roof/colour:
+        # 'roof:colour=*'
+        label: Roof Color
       rooms:
         # rooms=*
         label: Rooms
