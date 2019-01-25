@@ -105,7 +105,7 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal('Baz');
     });
 
-    it('shows all entries when clicking on the caret', function() {
+    it('shows all entries when activating the combo', function() {
         input.property('value', 'foobar').call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
@@ -238,6 +238,7 @@ describe('uiCombobox', function() {
     it('emits accepted event with selected datum on ⇥', function(done) {
         combobox.on('accept', function(d) {
             expect(d).to.eql({title: 'bar', value: 'bar'});
+            combobox.on('accept', null);
             done();
         });
         input.call(combobox.data(data));
@@ -249,6 +250,7 @@ describe('uiCombobox', function() {
     it('emits accepted event with selected datum on ↩', function(done) {
         combobox.on('accept', function(d) {
             expect(d).to.eql({title: 'bar', value: 'bar'});
+            combobox.on('accept', null);
             done();
         });
         input.call(combobox.data(data));

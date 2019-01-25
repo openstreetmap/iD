@@ -1,3 +1,5 @@
+import _clone from 'lodash-es/clone';
+
 import {
     dispatch as d3_dispatch
 } from 'd3-dispatch';
@@ -11,11 +13,10 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
-// It is keyed on the `value` of the entry.
-// Data should be an array of objects like:
+// It is keyed on the `value` of the entry. Data should be an array of objects like:
 //   [{
-//       title:  'hover text',
-//       value:  'display text'
+//       value:  'display text',  // required
+//       title:  'hover text'     // optional
 //   }, ...]
 
 var _comboHideTimerID;
@@ -25,7 +26,8 @@ export function uiCombobox(context, klass) {
     var container = context.container();
 
     var _suggestions = [];
-    var _values = [];
+    var _data = [];
+    var _fetched = {};
     var _selected = null;
     var _canAutocomplete = true;
     var _caseSensitive = false;
@@ -34,7 +36,7 @@ export function uiCombobox(context, klass) {
     var _tDown = 0;
 
     var _fetcher = function(val, cb) {
-        cb(_values.filter(function(d) {
+        cb(_data.filter(function(d) {
             return d.value
                 .toString()
                 .toLowerCase()
@@ -114,6 +116,9 @@ export function uiCombobox(context, klass) {
 
 
         function blur() {
+            // Try to dispatch accept here, but no guarantee - see note in `accept`
+            accept(null, true);   // null = datum,  true = onBlur
+
             _comboHideTimerID = window.setTimeout(hide, 75);
         }
 
@@ -213,18 +218,6 @@ export function uiCombobox(context, klass) {
         }
 
 
-        // return the datum for the currently chosen value
-        function datum(val) {
-            for (var i = 0; i < _suggestions.length; i++) {
-                var suggestion = _suggestions[i];
-                if (suggestion.value === val) {
-                    return suggestion;
-                }
-            }
-            return null;
-        }
-
-
         // Called whenever the input value is changed (e.g. on typing)
         function change() {
             fetch(value(), function() {
@@ -237,7 +230,7 @@ export function uiCombobox(context, klass) {
                     }
 
                     if (!_selected) {
-                        _selected = datum(val);
+                        _selected = val;
                     }
                 }
 
@@ -261,7 +254,7 @@ export function uiCombobox(context, klass) {
                 // try to determine previously selected index..
                 var index = -1;
                 for (var i = 0; i < _suggestions.length; i++) {
-                    if (_selected && _suggestions[i].value === _selected.value) {
+                    if (_selected && _suggestions[i].value === _selected) {
                         index = i;
                         break;
                     }
@@ -269,8 +262,8 @@ export function uiCombobox(context, klass) {
 
                 // pick new _selected
                 index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
-                _selected = _suggestions[index];
-                input.property('value', _selected.value);
+                _selected = _suggestions[index].value;
+                input.property('value', _selected);
             }
 
             render();
@@ -316,8 +309,12 @@ export function uiCombobox(context, klass) {
             _cancelFetch = false;
 
             _fetcher.call(input, v, function(results) {
+                // already chose a value, don't overwrite or autocomplete it
                 if (_cancelFetch) return;
+
                 _suggestions = results;
+                results.forEach(function(d) { _fetched[d.value] = d; });
+
                 if (cb) {
                     cb();
                 }
@@ -354,7 +351,7 @@ export function uiCombobox(context, klass) {
                 var bestVal = _suggestions[bestIndex].value;
                 input.property('value', bestVal);
                 input.node().setSelectionRange(val.length, bestVal.length);
-                return _suggestions[bestIndex];
+                return bestVal;
             }
         }
 
@@ -379,10 +376,10 @@ export function uiCombobox(context, klass) {
             options.enter()
                 .append('a')
                 .attr('class', 'combobox-option')
-                .text(function(d) { return d.value; })
-                .merge(options)
                 .attr('title', function(d) { return d.title; })
-                .classed('selected', function(d) { return d === _selected; })
+                .text(function(d) { return d.display || d.value; })
+                .merge(options)
+                .classed('selected', function(d) { return d.value === _selected; })
                 .on('click.combobox', accept)
                 .order();
 
@@ -398,7 +395,7 @@ export function uiCombobox(context, klass) {
 
         // Dispatches an 'accept' event
         // Then hides the combobox.
-        function accept(d) {
+        function accept(d, onBlur) {
             _cancelFetch = true;
             var thiz = input.node();
 
@@ -411,7 +408,18 @@ export function uiCombobox(context, klass) {
             var val = utilGetSetValue(input);
             thiz.setSelectionRange(val.length, val.length);
 
-            d = datum(val);
+            d = _fetched[val];
+
+            // Try to dispatch `accept` onBlur, but only if we matched field to fetched datum.
+            // Surprisingly, this might happen:
+            // - user accepts a value in raw tag editor by pressing 'tab'
+            // - we dispatch `accept`
+            // - value change kicks off an event cascade *which replaces the combo*
+            // - 'tab' takes the user to the next field, blurring the current one
+            // - we get here, but the combo is new and has no datum yet
+            // - so just return because there's no reason to fire another `accept` with no datum
+            if (onBlur && !d) return;
+
             dispatch.call('accept', thiz, d, val);
             hide();
         }
@@ -451,8 +459,8 @@ export function uiCombobox(context, klass) {
     };
 
     combobox.data = function(val) {
-        if (!arguments.length) return _values;
-        _values = val;
+        if (!arguments.length) return _data;
+        _data = val;
         return combobox;
     };
 
