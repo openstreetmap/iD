@@ -1170,7 +1170,7 @@
                 "navigation_zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons along the side of the map. You can also use the `+`, `-` keys on your keyboard.",
                 "features_h": "Map Features",
                 "features": "We use the word *features* to describe things that appear on the map, such as roads, buildings, or points of interest. Anything in the real world can be mapped as a feature on OpenStreetMap. Map features are represented on the map using *points*, *lines*, or *areas*.",
-                "nodes_ways": "In OpenStreetmap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
+                "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
             },
             "editing": {
                 "title": "Editing & Saving",
@@ -1305,7 +1305,7 @@
                 "sources": "By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is chosen as the background image. Depending on where you are editing, other imagery sources will be available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference.",
                 "offsets_h": "Adjusting Imagery Offset",
                 "offset": "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Adjust Imagery Offset\" section at the bottom of the Background Settings pane.",
-                "offset_change": "Click on the small triangles to adjust the imagery offset in small steps, or hold the left mouse button and drag within the gray square to slide the imagery into alignment."
+                "offset_change": "Click on the small triangles to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
             },
             "streetlevel": {
                 "title": "Street Level Photos",
@@ -5664,7 +5664,7 @@
                 },
                 "landuse/forest": {
                     "name": "Managed Forest",
-                    "terms": "cut,forest,lumber,tree"
+                    "terms": "cut,forest,forestry,lumber,silviculture,tree"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
