@@ -1,4 +1,5 @@
 import _without from 'lodash-es/without';
+import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
 import {
     utilDisplayLabel
@@ -13,10 +14,12 @@ import { operationDelete } from '../operations/index';
 
 export function validationMissingTag(context) {
 
-    // Slightly stricter check than Entity#isUsed (#3091)
-    function hasTags(entity, graph) {
-        return _without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
-            graph.parentRelations(entity).length > 0;
+    function hasDescriptiveTags(entity) {
+        var keys = _without(Object.keys(entity.tags), 'area', 'name').filter(osmIsInterestingTag);
+        if (entity.type === 'relation' && keys.length === 1) {
+            return entity.tags.type !== 'multipolygon';
+        }
+        return keys.length > 0;
     }
 
     var validation = function(entitiesToCheck, graph) {
@@ -24,17 +27,18 @@ export function validationMissingTag(context) {
         var issues = [];
 
         for (var i = 0; i < entitiesToCheck.length; i++) {
-            var change = entitiesToCheck[i];
-            var geometry = change.geometry(graph);
-
-            if (types.indexOf(geometry) !== -1 && !hasTags(change, graph)) {
-                var entityLabel = utilDisplayLabel(change, context);
+            var entity = entitiesToCheck[i];
+            var geometry = entity.geometry(graph);
+            // ignore vertex features
+            if (types.indexOf(geometry) !== -1 &&
+                !(hasDescriptiveTags(entity) || entity.hasParentRelations(graph))) {
+                var entityLabel = utilDisplayLabel(entity, context);
                 issues.push(new validationIssue({
                     type: ValidationIssueType.missing_tag,
                     severity: ValidationIssueSeverity.error,
                     message: t('issues.untagged_feature.message', {feature: entityLabel}),
                     tooltip: t('issues.untagged_feature.tip'),
-                    entities: [change],
+                    entities: [entity],
                     fixes: [
                         new validationIssueFix({
                             title: t('issues.fix.select_preset.title'),
