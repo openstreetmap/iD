@@ -1160,7 +1160,8 @@ en:
     many_deletions:
       message: "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area:
-      message: "The tag {tag} suggests line should be area, but it is not an area."
+      message: 'Feature is a line, but the tag "{tag}" suggests it should be an area.'
+      tip: Areas must have connected endpoints.
     deprecated_tags:
       message: '{feature} has outdated tags: {tags}'
       tip: Some tags become deprecated over time and should be replaced.
