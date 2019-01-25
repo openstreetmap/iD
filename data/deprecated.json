@@ -61,6 +61,10 @@
       "replace": {"entrance": "*"}
     },
     {
+      "old": {"building:roof:colour": "*"},
+      "replace": {"roof:colour": "$1"}
+    },
+    {
       "old": {"building:type": "*"},
       "replace": {"building": "$1"}
     },
@@ -174,6 +178,10 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"roof:color": "*"},
+      "replace": {"roof:colour": "$1"}
     },
     {
       "old": {"route": "ncn"},
