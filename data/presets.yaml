@@ -5124,7 +5124,7 @@ en:
       natural/water/river:
         # 'natural=water, water=river'
         name: River
-        # 'terms: beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse'
+        # 'terms: beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse'
         terms: '<translate with synonyms or related terms for ''River'', separated by commas>'
       natural/water/stream:
         # 'natural=water, water=stream'

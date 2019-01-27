@@ -6270,7 +6270,7 @@
                 },
                 "natural/water/river": {
                     "name": "River",
-                    "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
+                    "terms": "beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse"
                 },
                 "natural/water/stream": {
                     "name": "Stream",
