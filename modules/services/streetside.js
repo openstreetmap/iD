@@ -925,9 +925,9 @@ export default {
     },
 
 
-    /**
-     * setStyles().
-     */
+    // Updates the currently highlighted sequence and selected bubble.
+    // Reset is only necessary when interacting with the viewport because
+    // this implicitly changes the currently selected bubble/sequence
     setStyles: function (hovered, reset) {
         if (reset) {  // reset all layers
             d3_selectAll('.viewfield-group')

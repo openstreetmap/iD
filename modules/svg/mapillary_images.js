@@ -205,6 +205,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
+
         function viewfieldPath() {
             var d = this.parentNode.__data__;
             if (d.pano) {

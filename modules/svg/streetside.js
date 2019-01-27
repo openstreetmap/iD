@@ -122,7 +122,7 @@ export function svgStreetside(projection, context, dispatch) {
     function mouseover(d) {
         var service = getService();
         _hoveredBubble = d;
-        if (service) service.setStyles(d, true);
+        if (service) service.setStyles(d);
     }
 
     /**
@@ -131,7 +131,7 @@ export function svgStreetside(projection, context, dispatch) {
     function mouseout() {
         var service = getService();
         _hoveredBubble = null;
-        if (service) service.setStyles(null, true);
+        if (service) service.setStyles(null);
     }
 
     /**
@@ -253,7 +253,7 @@ export function svgStreetside(projection, context, dispatch) {
 
 
         if (service) {
-            service.setStyles(_hoveredBubble, true);
+            service.setStyles(_hoveredBubble);
         }
 
 
