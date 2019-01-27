@@ -6248,6 +6248,10 @@
                     "name": "Water",
                     "terms": ""
                 },
+                "natural/water/basin": {
+                    "name": "Basin",
+                    "terms": "detention,drain,overflow,rain,retention"
+                },
                 "natural/water/canal": {
                     "name": "Canal",
                     "terms": ""

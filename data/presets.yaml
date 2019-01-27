@@ -5098,6 +5098,11 @@ en:
         # natural=water
         name: Water
         terms: '<translate with synonyms or related terms for ''Water'', separated by commas>'
+      natural/water/basin:
+        # 'natural=water, water=basin'
+        name: Basin
+        # 'terms: detention,drain,overflow,rain,retention'
+        terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
       natural/water/canal:
         # 'natural=water, water=canal'
         name: Canal
