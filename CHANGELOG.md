@@ -28,6 +28,56 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.13.1
+##### 2019-Jan-28
+
+#### :sparkles: Usability
+
+* Prevent Chrome and Firefox autofill suggestions from appearing in fields like Address or Email  ([#5818])
+* Restore the pointing hand cursor when hovering over combobox carets ([#5769])
+
+[#5769]: https://github.com/openstreetmap/iD/issues/5769
+[#5818]: https://github.com/openstreetmap/iD/issues/5818
+
+#### :bug: Bugfixes
+
+* Don't erase the Name field when tabbing from it ([#5760])
+* Fix issue where the preset browswer would appear after continuing an existing line ([#5770])
+* Fix issue where optional Cycleway fields would not appear by default when the left and right lane values were equivalent ([#5756])
+* Fix issue where optional `multiCombo` fields like Diet Types or Currency Types would not appear by default even if values existed ([#5764])
+
+[#5756]: https://github.com/openstreetmap/iD/issues/5756
+[#5760]: https://github.com/openstreetmap/iD/issues/5760
+[#5764]: https://github.com/openstreetmap/iD/issues/5764
+[#5770]: https://github.com/openstreetmap/iD/issues/5770
+
+#### :mortar_board: Walkthrough / Help
+
+* Show the left mouse icon where mentioned in the Background Imagery help
+
+#### :rocket: Presets
+
+* Restore the Basin preset ([#5758])
+* Add Architect and Roof Color fields to Building presets
+* Add Hours field to ATM ([#5750])
+* Make the Hours field appear by default for Shop presets ([#5755])
+* Add Hours field to Toilet
+* Add Currency Type field to Shop
+* Prevent the Name field from appearing by default on generic vertex features ([#5812])
+* Make the Covered field appear by default for Drive-Through
+* Add Covered field to various railway and amenity presets
+* Add Building field to Carousel and Dark Ride area presets
+* Add Name and Intermittent fields to Water
+* Add Inscription field to Bench
+* Add "water fountain" and its synonyms as search terms for Drinking Water
+* Add "riverbank" as a search term for the River area preset
+* Add additional search terms to Managed Forest
+
+[#5750]: https://github.com/openstreetmap/iD/issues/5750
+[#5755]: https://github.com/openstreetmap/iD/issues/5755
+[#5758]: https://github.com/openstreetmap/iD/issues/5758
+[#5812]: https://github.com/openstreetmap/iD/issues/5812
+
 # 2.13.0
 ##### 2019-Jan-23
 
