@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-.viewfield-group.selected * {
+.viewfield-group.currentView * {
     fill: #ffee00 !important;
 }
 .viewfield-group.hovered * {
@@ -125,7 +125,7 @@
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.selected circle {
+.viewfield-group.highlighted.currentView circle {
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 1;
@@ -145,12 +145,12 @@
     stroke-width: 1;
     fill-opacity: 0.8;
 }
-.viewfield-group.highlighted.selected .viewfield {
+.viewfield-group.highlighted.currentView .viewfield {
     stroke-width: 1;
     fill-opacity: 0.9;
 }
 
-.viewfield-group.selected .viewfield-scale {
+.viewfield-group.currentView .viewfield-scale {
     transform: scale(2,2);
 }
 
@@ -160,7 +160,7 @@
     stroke-opacity: 0.4;
 }
 .sequence.highlighted,
-.sequence.selected {
+.sequence.currentView {
     stroke-width: 4;
     stroke-opacity: 1;
 }
@@ -204,7 +204,7 @@
     outline: 5px solid #eebb00;
     background-color: #eebb00;
 }
-.layer-mapillary-signs .icon-sign.selected {
+.layer-mapillary-signs .icon-sign.currentView {
     outline: 5px solid #ffee00;
     background-color: #ffee00;
 }

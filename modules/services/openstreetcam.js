@@ -403,7 +403,7 @@ export default {
             .classed('hide', true);
 
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')
-            .classed('selected', false);
+            .classed('currentView', false);
 
         return this.setStyles(null, true);
     },
@@ -476,7 +476,7 @@ export default {
         this.setStyles(null, true);
 
         d3_selectAll('.icon-sign')
-            .classed('selected', false);
+            .classed('currentView', false);
 
         return this;
     },
@@ -500,11 +500,11 @@ export default {
             d3_selectAll('.viewfield-group')
                 .classed('highlighted', false)
                 .classed('hovered', false)
-                .classed('selected', false);
+                .classed('currentView', false);
 
             d3_selectAll('.sequence')
                 .classed('highlighted', false)
-                .classed('selected', false);
+                .classed('currentView', false);
         }
 
         var hoveredImageKey = hovered && hovered.key;
@@ -525,11 +525,11 @@ export default {
         d3_selectAll('.layer-openstreetcam-images .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function(d) { return d.key === hoveredImageKey; })
-            .classed('selected', function(d) { return d.key === selectedImageKey; });
+            .classed('currentView', function(d) { return d.key === selectedImageKey; });
 
         d3_selectAll('.layer-openstreetcam-images .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('selected', function(d) { return d.properties.key === selectedSequenceKey; });
+            .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
 
         // update viewfields if needed
         d3_selectAll('.viewfield-group .viewfield')

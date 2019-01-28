@@ -33,7 +33,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 // e.g. during drags or easing.
                 if (context.map().isTransformed()) return;
 
-                layer.selectAll('.viewfield-group.selected')
+                layer.selectAll('.viewfield-group.currentView')
                     .filter(function(d) {
                         return d.pano;
                     })
@@ -204,7 +204,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .classed('pano', function() { return this.parentNode.__data__.pano; })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
-
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;
