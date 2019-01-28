@@ -1,7 +1,9 @@
 {
     "icon": "maki-water",
     "fields": [
-        "water"
+        "name",
+        "water",
+        "intermittent"
     ],
     "geometry": [
         "area"
