@@ -33,19 +33,23 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :sparkles: Usability
 
+* Activate combobox if user is switching from a different active combobox ([#5752])
 * Prevent Chrome and Firefox autofill suggestions from appearing in fields like Address or Email  ([#5818])
 * Restore the pointing hand cursor when hovering over combobox carets ([#5769])
 
-[#5769]: https://github.com/openstreetmap/iD/issues/5769
 [#5818]: https://github.com/openstreetmap/iD/issues/5818
+[#5769]: https://github.com/openstreetmap/iD/issues/5769
+[#5752]: https://github.com/openstreetmap/iD/issues/5752
 
 #### :bug: Bugfixes
 
+* Fix a few situations where user can leave a combobox but bad data remains ([#5825])
 * Don't erase the Name field when tabbing from it ([#5760])
-* Fix issue where the preset browswer would appear after continuing an existing line ([#5770])
+* Fix issue where the preset browser would appear after continuing an existing line ([#5770])
 * Fix issue where optional Cycleway fields would not appear by default when the left and right lane values were equivalent ([#5756])
 * Fix issue where optional `multiCombo` fields like Diet Types or Currency Types would not appear by default even if values existed ([#5764])
 
+[#5825]: https://github.com/openstreetmap/iD/issues/5825
 [#5756]: https://github.com/openstreetmap/iD/issues/5756
 [#5760]: https://github.com/openstreetmap/iD/issues/5760
 [#5764]: https://github.com/openstreetmap/iD/issues/5764
