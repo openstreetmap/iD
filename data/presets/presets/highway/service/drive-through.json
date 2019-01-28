@@ -1,5 +1,9 @@
 {
     "icon": "iD-highway-service",
+    "fields": [
+        "{highway/service}",
+        "covered"
+    ],
     "geometry": [
         "line"
     ],
