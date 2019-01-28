@@ -120,9 +120,6 @@ export function uiCombobox(context, klass) {
 
 
         function blur() {
-            // Try to dispatch accept here, but no guarantee - see note in `accept`
-            accept(null, true);   // null = datum,  true = onBlur
-
             _comboHideTimerID = window.setTimeout(hide, 75);
         }
 
@@ -399,7 +396,7 @@ export function uiCombobox(context, klass) {
 
         // Dispatches an 'accept' event
         // Then hides the combobox.
-        function accept(d, onBlur) {
+        function accept(d) {
             _cancelFetch = true;
             var thiz = input.node();
 
@@ -413,17 +410,6 @@ export function uiCombobox(context, klass) {
             thiz.setSelectionRange(val.length, val.length);
 
             d = _fetched[val];
-
-            // Try to dispatch `accept` onBlur, but only if we matched field to fetched datum.
-            // Surprisingly, this might happen:
-            // - user accepts a value in raw tag editor by pressing 'tab'
-            // - we dispatch `accept`
-            // - value change kicks off an event cascade *which replaces the combo*
-            // - 'tab' takes the user to the next field, blurring the current one
-            // - we get here, but the combo is new and has no datum yet
-            // - so just return because there's no reason to fire another `accept` with no datum
-            if (onBlur && !d) return;
-
             dispatch.call('accept', thiz, d, val);
             hide();
         }
