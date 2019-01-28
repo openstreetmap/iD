@@ -1,5 +1,9 @@
 {
     "icon": "maki-rail-metro",
+    "fields": [
+        "{attraction}",
+        "building_area"
+    ],
     "geometry": [
         "point",
         "line",
