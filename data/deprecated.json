@@ -214,6 +214,22 @@
     {
       "old": {"tourism": "bed_and_breakfast"},
       "replace": {"tourism": "guest_house"}
+    },
+    {
+      "old": {"water": "intermittent"},
+      "replace": {"natural": "water", "intermittent": "yes"}
+    },
+    {
+      "old": {"water": "riverbank"},
+      "replace": {"natural": "water", "water": "river"}
+    },
+    {
+      "old": {"water": "salt"},
+      "replace": {"natural": "water", "salt": "yes"}
+    },
+    {
+      "old": {"water": "tidal"},
+      "replace": {"natural": "water", "tidal": "yes"}
     }
   ]
 }
