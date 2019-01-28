@@ -2423,7 +2423,7 @@ en:
       amenity/drinking_water:
         # amenity=drinking_water
         name: Drinking Water
-        # 'terms: fountain,potable'
+        # 'terms: potable water source,water fountain,drinking fountain,bubbler,water tap'
         terms: '<translate with synonyms or related terms for ''Drinking Water'', separated by commas>'
       amenity/driving_school:
         # amenity=driving_school

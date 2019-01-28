@@ -12,7 +12,8 @@
         "brand",
         "lit",
         "opening_hours",
-        "wheelchair"
+        "wheelchair",
+        "covered"
     ],
     "geometry": [
         "point",

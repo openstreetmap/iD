@@ -3934,7 +3934,7 @@
                 },
                 "amenity/drinking_water": {
                     "name": "Drinking Water",
-                    "terms": "fountain,potable"
+                    "terms": "potable water source,water fountain,drinking fountain,bubbler,water tap"
                 },
                 "amenity/driving_school": {
                     "name": "Driving School",
