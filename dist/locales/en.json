@@ -4036,7 +4036,7 @@
                 },
                 "amenity/drinking_water": {
                     "name": "Drinking Water",
-                    "terms": "fountain,potable"
+                    "terms": "potable water source,water fountain,drinking fountain,bubbler,water tap"
                 },
                 "amenity/driving_school": {
                     "name": "Driving School",
@@ -6350,6 +6350,10 @@
                     "name": "Water",
                     "terms": ""
                 },
+                "natural/water/basin": {
+                    "name": "Basin",
+                    "terms": "detention,drain,overflow,rain,retention"
+                },
                 "natural/water/canal": {
                     "name": "Canal",
                     "terms": ""
@@ -6368,7 +6372,7 @@
                 },
                 "natural/water/river": {
                     "name": "River",
-                    "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
+                    "terms": "beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse"
                 },
                 "natural/water/stream": {
                     "name": "Stream",

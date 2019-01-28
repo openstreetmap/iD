@@ -1949,7 +1949,6 @@ div.combobox {
     margin-left: -30px;
     vertical-align: top;
     cursor: pointer;
-    pointer-events: none;
 }
 [dir='rtl'] .combobox-caret {
   margin-left: 0;

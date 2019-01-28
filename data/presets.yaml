@@ -2423,7 +2423,7 @@ en:
       amenity/drinking_water:
         # amenity=drinking_water
         name: Drinking Water
-        # 'terms: fountain,potable'
+        # 'terms: potable water source,water fountain,drinking fountain,bubbler,water tap'
         terms: '<translate with synonyms or related terms for ''Drinking Water'', separated by commas>'
       amenity/driving_school:
         # amenity=driving_school
@@ -5098,6 +5098,11 @@ en:
         # natural=water
         name: Water
         terms: '<translate with synonyms or related terms for ''Water'', separated by commas>'
+      natural/water/basin:
+        # 'natural=water, water=basin'
+        name: Basin
+        # 'terms: detention,drain,overflow,rain,retention'
+        terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
       natural/water/canal:
         # 'natural=water, water=canal'
         name: Canal
@@ -5119,7 +5124,7 @@ en:
       natural/water/river:
         # 'natural=water, water=river'
         name: River
-        # 'terms: beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse'
+        # 'terms: beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse'
         terms: '<translate with synonyms or related terms for ''River'', separated by commas>'
       natural/water/stream:
         # 'natural=water, water=stream'

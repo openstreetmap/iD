@@ -326,7 +326,8 @@ export function utilNoAuto(selection) {
     var isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
 
     return selection
-        .attr('autocomplete', 'off')
+        // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
+        .attr('autocomplete', 'new-password')
         .attr('autocorrect', 'off')
         .attr('autocapitalize', 'off')
         .attr('spellcheck', isText ? 'true' : 'false');
