@@ -1324,7 +1324,7 @@
                 "sources": "Theo mặc định, chương trình này hiển thị lớp hình trên không của [Bản đồ Bing](http://www.bing.com/maps/). Tùy theo vị trí đang xem, một số nguồn hình ảnh cũng có sẵn. Vì nhiều khi một trong số nguồn này có thể mới hoặc rõ hơn, bạn nên thử mọi nguồn hình ảnh trước khi sửa đổi.",
                 "offsets_h": "Điều chỉnh Độ lệch của Hình ảnh",
                 "offset": "Hình ảnh đôi khi bị chệch đối với dữ liệu bản đồ vì dịch vụ hình ảnh có lỗi. Nếu bạn nhận thấy nhiều con đường bị chệch đối với hình nền, bạn không nhất thiết phải di chuyển các đường này để trùng hợp với hình ảnh. Thay vì di chuyển các con đường, hãy chỉnh lại hình ảnh để phù hợp với dữ liệu tồn tại bằng cách mở rộng “Chỉnh độ lệch hình ảnh” ở cuối hộp Tùy chọn Hình nền.",
-                "offset_change": "Nhấn chuột vào các mũi tên nhỏ để điều chỉnh hình nền từng tí một, hoặc nhấn chuột trái vào khung màu xám và kéo tới lui cho đến khi hình ảnh phù hợp với các đối tượng."
+                "offset_change": "Nhấn chuột vào các mũi tên nhỏ để điều chỉnh hình nền từng tí một, hoặc nhấn {leftclick} chuột trái vào khung màu xám và kéo tới lui cho đến khi hình ảnh phù hợp với các đối tượng."
             },
             "streetlevel": {
                 "title": "Hình ảnh Cấp phố",
@@ -4475,9 +4475,17 @@
                     "name": "Hàng rào",
                     "terms": "hàng rào, hang rao"
                 },
+                "barrier/fence/railing": {
+                    "name": "Hàng rào Chắn",
+                    "terms": "hàng rào chắn, rào chắn, chắn song, lan can, hang rao chan, rao chan, chan song"
+                },
                 "barrier/gate": {
                     "name": "Cổng",
                     "terms": "cổng, cổng vào, cong, cong vao"
+                },
+                "barrier/guard_rail": {
+                    "name": "Thành Lan can",
+                    "terms": "thành lan can, lan can, thanh chắn giao thông, rào chắn giao thông, thanh lan can, thanh chan giao thong, rao chan giao thong"
                 },
                 "barrier/hedge": {
                     "name": "Hàng rào Cây",
@@ -6362,6 +6370,14 @@
                     "name": "Nửa ống",
                     "terms": "nửa ống, trượt nửa ống, nua ong, truot nua ong"
                 },
+                "piste/hike": {
+                    "name": "Đường mòn Giày tuyết",
+                    "terms": "đường mòn giày tuyết, đường mòn đi bộ giày tuyết, đường mòn mùa đông, duong mon giay tuyet, duong mon di bo giay tuyet, duong mon mua dong"
+                },
+                "piste/piste": {
+                    "name": "Đường mòn Thể thao Mùa đông",
+                    "terms": "đường mòn thể thao mùa đông, trượt tuyết, ski, xki, nordic, băng đồng, việt dã, xuống dốc, an pơ, an-pơ, anpơ, trượt ván trên tuyết, xe trượt tuyết, giày tuyết, trượt băng, duong mon the thao mua dong, truot tuyet, bang dong, viet da, xuong doc, an po, an-po, anpo, truot van tren tuyet, xe truot tuyet, giay tuyet, truot bang"
+                },
                 "place": {
                     "name": "Địa phương"
                 },
@@ -6987,6 +7003,10 @@
                     "name": "Tiệm Mỹ phẩm",
                     "terms": "tiệm mỹ phẩm, tiệm mĩ phẩm, cửa hàng mỹ phẩm, cửa hàng mĩ phẩm, cửa hiệu mỹ phẩm, cửa hiệu mỹ phẩm, quán mỹ phẩm, quán mĩ phẩm, tiem my pham, tiem mi pham, cua hang my pham, cua hang mi pham, cua hieu my pham, cua hieu my pham, quan my pham, quan mi pham"
                 },
+                "shop/country_store": {
+                    "name": "Tiệm Nông thôn",
+                    "terms": "tiệm nông thôn, cửa hàng nông thôn, tiệm tạp hóa, tiệm tạp hoá, cửa hàng tạp hóa, cửa hàng tạp hoá, tiem nong thon, cua hang nong thon, tiem tap hoa, cua hang tap hoa"
+                },
                 "shop/craft": {
                     "name": "Tiệm Bán đồ Thủ công",
                     "terms": "tiệm bán đồ thủ công, cửa hàng bán đồ thủ công, cửa hiệu bán đồ thủ công, thủ công mỹ nghệ, nội thất, sơn, hoa giả, giấy, bút, khắc gỗ, tiem ban do thu cong, cua hang ban do thu cong, cua hieu ban do thu cong, thu cong my nghe, noi that, son, hoa gia, giay, but, khac go"
@@ -7057,6 +7077,10 @@
                 "shop/frame": {
                     "name": "Tiệm Khung Tranh",
                     "terms": "tiệm khung tranh, tiệm đóng khung tranh, cửa hàng khung tranh, cửa hàng đóng khung tranh, cửa hiệu khung tranh, cửa hiệu đóng khung tranh, tiem khung tranh, tiem dong khung tranh, cua hang khung tranh, cua hang dong khung tranh, cua hieu khung tranh, cua hieu dong khung tranh"
+                },
+                "shop/frozen_food": {
+                    "name": "Tiệm Thực phẩm Đông lạnh",
+                    "terms": "tiệm thực phẩm đông lạnh, cửa hàng thực phẩm đông lạnh, tiệm đồ ăn đông lạnh, cửa hàng đồ ăn đông lạnh, tiem thuc pham dong lanh, cua hang thuc pham dong lanh, tiem do an dong lanh, cua hang do an dong lanh"
                 },
                 "shop/fuel": {
                     "name": "Tiệm Nhiên liệu",
@@ -8621,7 +8645,6 @@
                 "description": "talk-is là danh sách thư chính thức của cộng đồng OSM Iceland"
             },
             "is-twitter": {
-                "name": "OSM Iceland tại Twittter",
                 "description": "Twitter OpenStreetMap tại Iceland"
             },
             "it-facebook": {
@@ -8676,6 +8699,10 @@
             "no-mailinglist": {
                 "name": "Danh sách thư OpenStreetMap Na Uy",
                 "description": "Danh sách thư dành cho những người lập bản đồ và những người sử dụng, nhà phát triển, và người hâm mộ OpenStreetMap ở Na Uy"
+            },
+            "no-telegram": {
+                "name": "@OSM_no tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Na Uy"
             },
             "OSM-PL-facebook-group": {
                 "name": "Nhóm Facebook OpenStreetMap Ba Lan",

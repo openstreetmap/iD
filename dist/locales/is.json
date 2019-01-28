@@ -852,8 +852,7 @@
                 "navigation_drag": "Þú getur dregið til kortið með því að ýta á og halda niðri {leftclick} vinstri músarhnappnum og færa síðan til músarbendilinn. Þú getur líka notað `↓`, `↑`, `←`, `→` örvalyklana á lyklaborðinu þínu.",
                 "navigation_zoom": "Þú getur rennt inn eða út á kortinu með því að skruna með músarhjólinu eða snertiplatta, eða með því að smella á {plus} / {minus} hnappana við hlið kortsins. Þú getur líka notað `+`, `-` lyklana á lyklaborðinu þínu.",
                 "features_h": "Fitjur á korti",
-                "features": "Við notum orðin *fitjur* og *eigindi* til að lýsa atriðum sem birtast á kortinu, svo sem vegum, byggingum eða áhugaverðum stöðum. Hvað sem er í raunheimi er hægt að tákna með fitjum/eigindum í OpenStreetMap. Fitjur á korti eru birtar með því að nota *punkta*, *línur*, eða *svæði*.",
-                "nodes_ways": "Í OpenStreetMap eru punktar stundum kallaðir *hnútar*, eins eru línur og svæði stundum kölluð *leiðir*."
+                "features": "Við notum orðin *fitjur* og *eigindi* til að lýsa atriðum sem birtast á kortinu, svo sem vegum, byggingum eða áhugaverðum stöðum. Hvað sem er í raunheimi er hægt að tákna með fitjum/eigindum í OpenStreetMap. Fitjur á korti eru birtar með því að nota *punkta*, *línur*, eða *svæði*."
             },
             "editing": {
                 "title": "Breytingar og vistun",
@@ -987,8 +986,7 @@
                 "choosing": "Til að sjá hvaða myndabankar eru tiltækir til að nota við vinnsluna, smelltu á hnappinn {layers} **Bakgrunnsstillingar** við hlið kortsins.",
                 "sources": "Sjálfgefið er [Bing Maps](https://www.bing.com/maps/) gervihnattalag valið sem bakgrunnsmynd. Það fer eftir því hvar þú ert að vinna hvort aðrir myndabankar séu tiltækir. Sumir þeirra gætu verið með nýrri myndir eða í betri upplausn, þannig að það getur borgað sig að athuga hvaða myndalag sé best til að nota sem viðmiðun í kortagerðinni.",
                 "offsets_h": "Laga hliðrun mynda",
-                "offset": "Mynsednið er einstaka sinnum örlítið hliðrað miðað við nákvæm kortagögnin. Ef þú sérð að margar byggingar og vegir liggja til hliðar við það sem sést á bakgrunnsmyndunum, þá gæti verið að myndirnar séu ekki rétt stilltar og þá ættir þú alls ekki að færa til fitjurnar svo þær passi við bakgrunninn. Í staðinn geturðu lagað bakgrunninn þannig að hann passi sem best við fyrirliggjandi gögn með því að fara í \"Laga hliðrun mynda\" neðst í bakgrunnsstillingaspjaldinu.",
-                "offset_change": "Smelltu á litlu þríhyrningana til að laga hliðrun mynda í litlum þrepum, eða haltu niðri vinstri músarhnappnum og dragðu til innan í gráa ferhyrningnum til að renna myndinni á réttan stað."
+                "offset": "Mynsednið er einstaka sinnum örlítið hliðrað miðað við nákvæm kortagögnin. Ef þú sérð að margar byggingar og vegir liggja til hliðar við það sem sést á bakgrunnsmyndunum, þá gæti verið að myndirnar séu ekki rétt stilltar og þá ættir þú alls ekki að færa til fitjurnar svo þær passi við bakgrunninn. Í staðinn geturðu lagað bakgrunninn þannig að hann passi sem best við fyrirliggjandi gögn með því að fara í \"Laga hliðrun mynda\" neðst í bakgrunnsstillingaspjaldinu."
             },
             "streetlevel": {
                 "title": "Ljósmyndir í götuhæð",

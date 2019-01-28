@@ -1189,7 +1189,7 @@
                 "navigation_zoom": "Pode aproximar ou afastar ao utilizar a roda do seu rato ou do touchpad e ou utilizando os botões {plus} / {minus}  que estão ao lado do mapa. Pode também utilizar as teclas `+`, `-` do seu teclado.",
                 "features_h": "Elementos do mapa",
                 "features": "Utilizamos a palavra *elementos* para descrever as coisas que aparecem no mapa, como estradas, edifícios ou pontos de interesse. Qualquer coisa do mundo real, pode ser mapeada como um elemento no OpenStreetMap. Os elementos do mapa são representados no mapa utilizando *pontos*, * linhas* ou *áreas*.",
-                "nodes_ways": "No OpenStreetMap, os pontos podem por vezes serem chamados de *nós* e as linhas e áreas são por vezes chamadas de *linhas*."
+                "nodes_ways": "No OpenStreetMap, os pontos são por vezes chamado *nós* e as linhas e as áreas são por vezes chamadas *vias*."
             },
             "editing": {
                 "title": "Editar e gravar",
@@ -1324,7 +1324,7 @@
                 "sources": "Por pré-definição, a camada satélite do [Bing Maps](https://www.bing.com/maps/) é escolhida como imagem de fundo. Dependendo de onde está a editar, poderá haver disponibilidade de outras fontes de imagens. Algumas poderão ser mais recentes ou possuírem maior resolução, pelo que é sempre pertinente verificar qual a melhor camada para utilizar como referência para o mapeamento.",
                 "offsets_h": "Ajustar a deslocamento da imagem",
                 "offset": "A imagem por vezes apresenta um deslocamento relativamente aos dados do mapa. Se verificar que existem muitas estradas ou edifícios que estão deslocados em relação à imagem de fundo, é possível que a imagem esteja desfasada. Por isso não desloque os elementos para que fiquem alinhados com o fundo. Para solucionar isto, deve ajustar o fundo para que fique alinhado com os dados existentes ao expandir a secção \"Corrigir o alinhamento da imagem\" no fundo do painel \"Configurar imagem de fundo\".",
-                "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento da imagem em pequenos passos, ou mantenha o botão esquerdo do rato pressionado e arraste dentro do quadrado cinza para mover a imagem para o alinhamento."
+                "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento da imagem em pequenos passos, ou mantenha o {leftclick} botão esquerdo do rato pressionado e arraste dentro do quadrado cinza para mover a imagem para o alinhamento."
             },
             "streetlevel": {
                 "title": "Imagens ao nível de rua",
@@ -1979,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "Para Animais"
+                },
+                "architect": {
+                    "label": "Arquiteto"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -3074,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "Restrições de viragem"
+                },
+                "roof/colour": {
+                    "label": "Cor do telhado"
                 },
                 "rooms": {
                     "label": "Quartos"
@@ -6177,6 +6183,10 @@
                     "name": "Água",
                     "terms": "Water"
                 },
+                "natural/water/basin": {
+                    "name": "Bacia artificial",
+                    "terms": "bacia artificial, bacia, bacia de infiltração, bacia de detenção, bacia de retardamento, bacia de retenção, bacia de drenagem, reservatório"
+                },
                 "natural/water/canal": {
                     "name": "Canal",
                     "terms": "canal, canalete, vala"
@@ -7109,6 +7119,10 @@
                 "shop/frame": {
                     "name": "Loja de molduras",
                     "terms": "Framing Shop, Moldura, Quadro"
+                },
+                "shop/frozen_food": {
+                    "name": "Comida congelada",
+                    "terms": "comida congelada, congelado, congelados, congelada, comida, alimento"
                 },
                 "shop/fuel": {
                     "name": "Loja de Combustíveis",

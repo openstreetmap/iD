@@ -774,8 +774,7 @@
             "overview": {
                 "title": "Pregled",
                 "navigation_h": "Navigacija",
-                "features_h": "Elementi karte",
-                "nodes_ways": "Na OpenStreetMapu, točke se ponekad nazivaju *čvorovi*, a linije i područja su ponekad navedeni kao *putevi*."
+                "features_h": "Elementi karte"
             },
             "editing": {
                 "title": "Uređivanje i spremanje",

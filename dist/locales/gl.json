@@ -660,17 +660,17 @@
         },
         "area_fill": {
             "wireframe": {
-                "description": "Sen recheo (molde)",
+                "description": "Sen recheo (grella)",
                 "tooltip": "Activando o modo en grella faise máis doado ve-las imaxes do fondo. ",
                 "key": "W"
             },
             "partial": {
                 "description": "Recheo parcial",
-                "tooltip": "As áreas debúxanse con recheo só por unha parte interior da súa contorna. Isto recoméndaselle os novos cartógrafos."
+                "tooltip": "As áreas debúxanse co recheo só arredor da súa contorna interior. Isto recoméndaselle ós novos cartógrafos."
             },
             "full": {
                 "description": "Recheo completo",
-                "tooltip": "As áreas móstranse completamente recheas."
+                "tooltip": "As áreas amósanse recheas de xeito completo."
             }
         },
         "settings": {
@@ -889,7 +889,7 @@
                         "description": "{var1} emprega a etiqueta en desuso \"{var2}\". Emprega \"{var3}\" no seu lugar."
                     },
                     "70": {
-                        "title": "Falla etiqueta",
+                        "title": "Falla a etiqueta",
                         "description": "{var1} ten unha etiqueta baleira: \"{var2}\"."
                     },
                     "71": {
@@ -1188,8 +1188,7 @@
                 "navigation_drag": "Pode arrastra-lo mapa premendo e mantendo premido o {leftclick} botón esquerdo do rato e movendo o rato. Tamén se pode emprega-las teclas de frecha `↓`, `↑`, `←`, `→` do teclado.",
                 "navigation_zoom": "Pode achegar ou afastar xirando a roda do rato ou o panel táctil, ou premendo nos botóns {plus} / {minus} á beira do mapa. Tamén se pode emprega-las teclas `+`, `-` do teclado.",
                 "features_h": "Características do mapa",
-                "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa, coma estradas, construcións ou puntos de interese. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap. Os elementos do mapa represéntanse empregando *puntos*, *liñas* ou *áreas*.",
-                "nodes_ways": "No OpenStreetMap, ós puntos ás veces chámaselles *nós*, e as liñas e áreas *vías* ou camiños."
+                "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa, coma estradas, construcións ou puntos de interese. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap. Os elementos do mapa represéntanse empregando *puntos*, *liñas* ou *áreas*."
             },
             "editing": {
                 "title": "Editar e gardar",
@@ -1323,8 +1322,7 @@
                 "choosing": "Para ollar que fontes de imaxes están dispoñíbeis para editar, prema no botón {layers} **Axustes do fondo** no costado do mapa.",
                 "sources": "De xeito predeterminado, escóllese a capa de satélite [Bing Maps](https://www.bing.com/maps/) coma imaxe do fondo. Dependendo de onde esté editando, outras fontes de imaxes estarán dispoñíbeis. Algunhas poden ser máis recentes ou ter unha resolución máis alta, polo que sempre é útil verificar que capa é a mellor para empregar coma referenza do cartografado.",
                 "offsets_h": "Axusta-lo desprazamento das imaxes",
-                "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se olla unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as mova para que coincidan co fondo. No seu lugar, pode axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo.",
-                "offset_change": "Prema nos triángulos pequenos para axusta-lo desprazamento das imaxes en pequenos anacos, ou manteña premido o botón esquerdo do rato e arrastre dentro do cadrado gris para escorrega-las imaxes cara a aliñación."
+                "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se olla unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as mova para que coincidan co fondo. No seu lugar, pode axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo."
             },
             "streetlevel": {
                 "title": "Imaxes ó nivel da rúa",
@@ -3417,7 +3415,7 @@
                     "label": "Tipo"
                 },
                 "tracktype": {
-                    "label": "Tipo de Pista",
+                    "label": "Tipo da pista",
                     "options": {
                         "grade1": "Sólido: superficie pavimentada ou fortemente compactada",
                         "grade2": "Principalmente Sólido: grava/rocha con algún material brando mesturado",
@@ -4890,7 +4888,7 @@
                 },
                 "highway/motorway_link": {
                     "name": "Ligazón da autoestrada",
-                    "terms": "autovía, autopista, enlace, entrada, saída, acceso, autoestrada"
+                    "terms": "autovía, autoestrada, ligazón, enlace, entrada, saída, acceso, autopista"
                 },
                 "highway/path": {
                     "name": "Camiño"
@@ -4970,7 +4968,7 @@
                     "name": "Ligazón da estrada terciaria"
                 },
                 "highway/track": {
-                    "name": "Pista sen mantemento"
+                    "name": "Pista ou camiño rural"
                 },
                 "highway/traffic_mirror": {
                     "name": "Espello de tráfico"
@@ -6566,40 +6564,40 @@
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "name": "Imaxes do DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Límites das imaxes e datas de captura. As etiquetas xorden nun nivel do achegamento de 13 e superior.",
                 "name": "Imaxes antigas do DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "name": "Imaxes do DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Límites das imaxes e datas de captura. As etiquetas xorden  nun nivel do achegamento de 13 e superior.",
                 "name": "Imaxes antigas do DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Imaxes mundiais do Esri.",
                 "name": "Imaxes mundiais do Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Arquivo de imaxes do Esri que pode que sexan máis craras e máis precisas que a súa capa por defecto.",
                 "name": "Imaxes mundiais do Esri (Clarity) Beta"
@@ -6613,7 +6611,7 @@
             },
             "Mapbox": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Imaxes satelitais e aéreas.",
                 "name": "Mapbox Satélite"
@@ -6854,7 +6852,7 @@
             },
             "mapbox_locator_overlay": {
                 "attribution": {
-                    "text": "Termos e comentarios"
+                    "text": "Termos e opinións"
                 },
                 "description": "Amosa os elementos importantes para axudarche a orientarte.",
                 "name": "Sobreposición do localizador"

@@ -1073,7 +1073,7 @@
                     },
                     "360": {
                         "title": "Falta la etiqueta de nombre local",
-                        "description": "Sería bueno si esta {var1} tuviera una etiqueta de nombre local \"name:XX={var2}\" donde XX es el idioma de su nombre común \"{var2}\"."
+                        "description": "Sería bueno si {var1} tuviera una etiqueta de nombre local \"name:XX={var2}\" donde XX es el idioma de su nombre común \"{var2}\"."
                     },
                     "370": {
                         "title": "Lugares duplicados",
@@ -1189,7 +1189,7 @@
                 "navigation_zoom": "Puede acercar o alejar girando la rueda del ratón o el panel táctil, o haciendo clic en los botones {plus} / {minus} al costado del mapa. También se puede usar las teclas `+`, `-` del teclado.",
                 "features_h": "Elementos del mapa",
                 "features": "Usamos la palabra *elementos* para describir las cosas que aparecen en el mapa, como carreteras, edificios o puntos de interés. Cualquier cosa en el mundo real se puede mapear como un elemento en OpenStreetMap. Los elementos del mapa están representadas en el mapa usando *puntos*, *líneas* o *áreas*.",
-                "nodes_ways": "En OpenStreetMap, los puntos a veces se llaman *nodos*, y las líneas y áreas a veces se llaman *vías*. "
+                "nodes_ways": "En OpenStreetMap, los puntos a veces se llaman *nodos*, y las líneas y áreas a veces se llaman *vías*."
             },
             "editing": {
                 "title": "Editar y guardar",
@@ -1324,7 +1324,7 @@
                 "sources": "De forma predeterminada, se elige la capa de satélite [Bing Maps](https://www.bing.com/maps/) como imagen de fondo. Dependiendo de dónde esté editando, otras fuentes de imágenes estarán disponibles. Algunas pueden ser más recientes o tener una resolución más alta, por lo que siempre es útil verificar qué capa es la mejor para usar como referencia de mapeo.",
                 "offsets_h": "Ajuste de desplazamiento de imágenes",
                 "offset": "Las imágenes a veces están ligeramente desplazadas con respecto a los datos precisos del mapa. Si ve una gran cantidad de carreteras o edificios desplazados de las imágenes de fondo, puede ser que las imágenes sean incorrectas, por lo que no las mueva todos para que coincidan con el fondo. En su lugar, puede ajustar el fondo para que coincida con los datos existentes al expandir la sección \"Ajustar desplazamiento de imágenes\" en la parte inferior del panel de Configuración de fondo.",
-                "offset_change": "Haga clic en los triángulos pequeños para ajustar el desplazamiento de imágenes en pequeños pasos, o mantenga presionado el botón izquierdo del ratón y arrastre dentro del cuadrado gris para deslizar las imágenes hacia la alineación."
+                "offset_change": "Haga clic en los triángulos pequeños para ajustar el desplazamiento de imágenes en pequeños pasos, o mantenga presionado el {leftclick} botón izquierdo del ratón y arrastre dentro del cuadrado gris para deslizar las imágenes hasta estar alineadas."
             },
             "streetlevel": {
                 "title": "Fotos a nivel de calle",
@@ -1979,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "Para animales"
+                },
+                "architect": {
+                    "label": "Arquitecto, ta"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -3074,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "Restricciones de giro"
+                },
+                "roof/colour": {
+                    "label": "Color del techo"
                 },
                 "rooms": {
                     "label": "Habitaciones"
@@ -4748,7 +4754,7 @@
                     "terms": "almacén, depósito, bodega, lonja, nave"
                 },
                 "camp_site/camp_pitch": {
-                    "name": "Cancha de acampar",
+                    "name": "Lugar de acampe",
                     "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana,"
                 },
                 "circular": {
@@ -5334,8 +5340,8 @@
                     "terms": "escalera mecánica, escalera móvil"
                 },
                 "highway/stop": {
-                    "name": "Señal de Alto / Stop",
-                    "terms": "señal de detención, señal de parada, señal, stop, detención, parada, señal de stop, cartel"
+                    "name": "Señal de Alto / Pare / Stop",
+                    "terms": "señal, cartel, stop, detenerse, parada, pare, alto, stop"
                 },
                 "highway/street_lamp": {
                     "name": "Farola de alumbrado público",
@@ -6176,6 +6182,10 @@
                 "natural/water": {
                     "name": "Cuerpo de agua",
                     "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa, cuerpo de agua, aguas, lámina de agua, poza de agua, charca"
+                },
+                "natural/water/basin": {
+                    "name": "Cuenca",
+                    "terms": "detención, drenaje, desbordamiento, lluvia, retención"
                 },
                 "natural/water/canal": {
                     "name": "Canal",
@@ -7117,6 +7127,10 @@
                     "name": "Tienda de enmarcación",
                     "terms": "enmarcado, enmarcaciones, encuadrado, encuadre, marcos, cuadro"
                 },
+                "shop/frozen_food": {
+                    "name": "Alimentos congelados",
+                    "terms": "alimentos, comidas, congeladas, congelados"
+                },
                 "shop/fuel": {
                     "name": "Tienda de combustible",
                     "terms": "tienda, gasolina, combustible, carburante"
@@ -7476,7 +7490,7 @@
                     "terms": "punto de interés, interés turístico, atracción turística, atracciones turísticas, atractivos turísticos, lugares turísticos"
                 },
                 "tourism/camp_site": {
-                    "name": "Terreno de acampar",
+                    "name": "Campamento",
                     "terms": "terreno, área, lugar, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana"
                 },
                 "tourism/caravan_site": {

@@ -1187,7 +1187,7 @@
                 "navigation_zoom": "Vi povas pligrandigi aŭ malgrandigi per musa rado aŭ tuŝplato aŭ per klaki la butonojn {plus} / {minus} flanke de la mapo. Vi ankaŭ povas uzi la `+`, `-` klavojn sur via klavaro.",
                 "features_h": "Map-objektoj",
                 "features": "Ni uzas la vorton “objekto” por priskribi ĉiujn aĵojn troviĝantajn sur la mapo, kiel vojojn, konstruaĵojn, aŭ punktojn de intereso. Ĉio en la reala mondo povas esti mapigita kiel objekto en OpenStreetMap. Map-objektoj estas reprezentataj kiel “punktoj”, “linioj” aŭ “areoj”.",
-                "nodes_ways": "En OpenStreetMap punktoj estas iam nomataj kiel “nodoj” kaj linioj kaj areoj kiel “linioj”."
+                "nodes_ways": "En OpenStreetMap punktojn oni iam nomas kiel *nodoj*, kaj liniojn kaj areojn oni nomas kiel *linioj*."
             },
             "editing": {
                 "title": "Redakti kaj konservi",
@@ -1322,7 +1322,7 @@
                 "sources": "Implicite satelita fotaro de [Bing Mapoj](https://www.bing.com/maps/) estas elektita kiel fono. Depende de kie vi mapigas, aliaj fontoj de fotaro povas esti elekteblaj. Iuj povas esti pli aktualaj aŭ pli akurataj, do ĉiam indas kontroli kiu tavolo estas plej taŭga por uzi kiel map-referencon.",
                 "offsets_h": "Ĝustigi fotaran deŝovon",
                 "offset": "Fotaro estas iomete deŝovita rilate al akurataj map-datumoj. Se vi vidas multe da vojoj kaj konstruaĵoj deŝovitaj rilate al la fona fotaro, probable la fotaro estas malĝusta, do ne movu ilin por kongrui al la fono. Anstataŭ tio, vi povas ĝustigi la fonon tiel, kiel ĝi kongruos kun ekzistantaj datumoj per etendi la sekcion “ĝustigi fotaran deŝovon” sube ĉe la panelo “agordoj de fono”.",
-                "offset_change": "Klaku trianguletojn por ĝustigi fotaran deŝovon je etaj paŝoj, aŭ premu la maldekstran mus-butonon kaj trenu ene griza kvadrato por ŝovi la fotaron al datumoj."
+                "offset_change": "Klaku trianguletojn por ĝustigi fotaran deŝovon je etaj paŝoj, aŭ premu la {leftclick} maldekstran mus-butonon kaj trenu ene griza kvadrato por ŝovi la fotaron al datumoj."
             },
             "streetlevel": {
                 "title": "Strat-nivelaj fotoj",
@@ -1977,6 +1977,9 @@
                 },
                 "animal_shelter": {
                     "label": "Por bestoj"
+                },
+                "architect": {
+                    "label": "Arĥitekto"
                 },
                 "area/highway": {
                     "label": "Speco"
@@ -3072,6 +3075,9 @@
                 },
                 "restrictions": {
                     "label": "Turnaj limigoj"
+                },
+                "roof/colour": {
+                    "label": "Koloro de tegmento"
                 },
                 "rooms": {
                     "label": "Ĉambroj"
@@ -6176,6 +6182,10 @@
                     "name": "Akvejo",
                     "terms": "akvo,akvujo,lago,lageto"
                 },
+                "natural/water/basin": {
+                    "name": "Baseno (artefarita lageto)",
+                    "terms": "akvo,akvejo,akvujo,lageto,lago,rezervujo"
+                },
                 "natural/water/canal": {
                     "name": "Kanalo",
                     "terms": "akvovojo"
@@ -7111,6 +7121,10 @@
                 "shop/frame": {
                     "name": "Bild-kadra vendejo",
                     "terms": "kadroj,kadraĵoj,pentraĵkadroj,bildkadroj"
+                },
+                "shop/frozen_food": {
+                    "name": "Frostigit-manĝaĵo vendejo",
+                    "terms": "frostigita manĝaĵo,fridigita manĝaĵo"
                 },
                 "shop/fuel": {
                     "name": "Brulaĵ-vendejo",
@@ -8622,7 +8636,6 @@
                 "description": "Talk-is estas oficiala dissendolisto por la OSM-komunumo en Islando"
             },
             "is-twitter": {
-                "name": "OpenStreetMap Íslandi ĉe Twitter",
                 "description": "Twitter-paĝo pri OpenStreetMap en Islando"
             },
             "it-facebook": {

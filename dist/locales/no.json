@@ -648,8 +648,7 @@
             },
             "overview": {
                 "title": "Oversikt",
-                "navigation_h": "Navigasjon",
-                "nodes_ways": "I OpenStreetMap kaller vi av og til punkter for *noder*, og linjer og områder for *veier*."
+                "navigation_h": "Navigasjon"
             },
             "editing": {
                 "save_h": "Lagre",
