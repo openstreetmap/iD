@@ -6114,6 +6114,10 @@
                     "name": "Tower",
                     "terms": ""
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Bell Tower",
+                    "terms": "belfry,bell gable,campanile,church tower,klockstapel"
+                },
                 "man_made/tower/communication": {
                     "name": "Communication Tower",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"

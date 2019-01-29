@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-tower",
+    "icon": "fas-bell",
     "moreFields": [
         "{man_made/tower}",
         "opening_hours"
@@ -9,16 +9,19 @@
         "area"
     ],
     "terms": [
-        "lookout tower",
-        "fire tower"
+        "belfry",
+        "bell gable",
+        "campanile",
+        "church tower",
+        "klockstapel"
     ],
     "tags": {
         "man_made": "tower",
-        "tower:type": "observation"
+        "tower:type": "bell_tower"
     },
     "reference": {
         "key": "tower:type",
-        "value": "observation"
+        "value": "bell_tower"
     },
-    "name": "Observation Tower"
+    "name": "Bell Tower"
 }

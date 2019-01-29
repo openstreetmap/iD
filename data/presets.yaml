@@ -4941,6 +4941,11 @@ en:
         # man_made=tower
         name: Tower
         terms: '<translate with synonyms or related terms for ''Tower'', separated by commas>'
+      man_made/tower/bell_tower:
+        # 'man_made=tower, tower:type=bell_tower'
+        name: Bell Tower
+        # 'terms: belfry,bell gable,campanile,church tower,klockstapel'
+        terms: '<translate with synonyms or related terms for ''Bell Tower'', separated by commas>'
       man_made/tower/communication:
         # 'man_made=tower, tower:type=communication'
         name: Communication Tower

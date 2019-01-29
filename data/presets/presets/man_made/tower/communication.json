@@ -1,9 +1,7 @@
 {
     "icon": "temaki-tower",
     "fields": [
-        "tower/type",
-        "tower/construction",
-        "height",
+        "{man_made/tower}",
         "communication_multi"
     ],
     "geometry": [
