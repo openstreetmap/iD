@@ -32,7 +32,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'annotatedChange', 'undone', 'redone');
+    var dispatch = d3_dispatch('change', 'annotatedChange', 'merge', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
@@ -144,6 +144,7 @@ export function coreHistory(context) {
             _tree.rebase(entities, false);
 
             dispatch.call('change', this, undefined, extent);
+            dispatch.call('merge', this, entities);
         },
 
 

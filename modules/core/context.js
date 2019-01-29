@@ -465,6 +465,12 @@ export function coreContext() {
             issueManager.validate();
         }
     });
+    // re-run validation upon merging fetched data
+    history.on('merge', function(entities) {
+        if (entities && entities.length > 0) {
+            issueManager.validate();
+        }
+    });
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
