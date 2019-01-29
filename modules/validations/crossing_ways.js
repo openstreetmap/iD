@@ -283,12 +283,21 @@ export function validationHighwayCrossingOtherWays(context) {
                 entities = _map(entities, function(way) {
                     return getFeatureWithFeatureTypeTagsForWay(way, graph);
                 });
+
+                var canConnect = canConnectEntities(entities[0], entities[1]);
+
                 var crossingTypeID;
                 if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
                     crossingTypeID = 'tunnel-tunnel';
+                    if (canConnect) {
+                        crossingTypeID += '_connectable';
+                    }
                 }
                 else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
                     crossingTypeID = 'bridge-bridge';
+                    if (canConnect) {
+                        crossingTypeID += '_connectable';
+                    }
                 }
                 else {
                     crossingTypeID = crossing.featureTypes.sort().join('-');
@@ -300,7 +309,7 @@ export function validationHighwayCrossingOtherWays(context) {
                 };
 
                 var fixes = [];
-                if (canConnectEntities(entities[0], entities[1])) {
+                if (canConnect) {
                     fixes.push(new validationIssueFix({
                         title: t('issues.fix.add_connection_vertex.title'),
                         onClick: function() {

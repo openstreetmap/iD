@@ -1454,8 +1454,14 @@
                 "tunnel-tunnel": {
                     "tip": "Crossing tunnels should use different layers."
                 },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Crossing tunnels should be connected or use different layers."
+                },
                 "bridge-bridge": {
                     "tip": "Crossing bridges should use different layers."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "Crossing bridges should be connected or use different layers."
                 }
             },
             "highway_almost_junction": {
