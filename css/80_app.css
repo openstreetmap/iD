@@ -2364,12 +2364,21 @@ input.key-trap {
 .inspector-hover button,
 .inspector-hover input,
 .inspector-hover textarea,
-.inspector-hover label {
+.inspector-hover label,
+.inspector-hover .entity-issues .issue button {
     background: #ececec;
 }
 .inspector-hover .preset-list-button,
 .inspector-hover .tag-row input {
     background: #f6f6f6;
+}
+
+.inspector-hover .entity-issues .issue,
+.inspector-hover .entity-issues .issue li {
+    border: 1px solid #ccc;
+}
+.inspector-hover .entity-issues .issue .icon {
+    color: #666;
 }
 
 .inspector-hover a,
@@ -2398,7 +2407,8 @@ input.key-trap {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row {
+.inspector-hover .inspector-inner .add-row,
+.inspector-hover .entity-issues .issue ul.fixes {
     display: none;
 }
 
@@ -2990,11 +3000,8 @@ div.full-screen > button:hover {
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
-.entity-issues .issue ul.fixes {
+.entity-issues .issue:not(.fixes-open) ul.fixes {
     display: none;
-}
-.entity-issues .issue.fixes-open ul.fixes {
-    display: block;
 }
 
 /* Background - Display Options Sliders
