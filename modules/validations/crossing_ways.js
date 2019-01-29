@@ -79,6 +79,10 @@ export function validationHighwayCrossingOtherWays(context) {
 
     function getFeatureTypeForTags(tags) {
         if (hasTag(tags, 'building')) return 'building';
+
+        // don't check non-building areas
+        if (hasTag(tags, 'area')) return null;
+
         if (hasTag(tags, 'highway') && !ignoredHighways.has(tags.highway)) return 'highway';
         if (hasTag(tags, 'railway') && !ignoredRailways.has(tags.railway)) return 'railway';
         if (hasTag(tags, 'waterway') && waterways.has(tags.waterway)) return 'waterway';
@@ -152,6 +156,12 @@ export function validationHighwayCrossingOtherWays(context) {
         return false;
     }
 
+    // highway values for which we shouldn't recommend connecting to waterways
+    var highwaysDisallowingFords = new Set([
+        'motorway', 'motorway_link', 'trunk', 'trunk_link',
+        'primary', 'primary_link', 'secondary', 'secondary_link'
+    ]);
+
     function canConnectEntities(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
         var featureType2 = getFeatureTypeForTags(entity2.tags);
@@ -166,6 +176,10 @@ export function validationHighwayCrossingOtherWays(context) {
                     // do not allow fords on structures
                     if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return false;
                     if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return false;
+                    if (highwaysDisallowingFords.has(entity1.tags.highway) ||
+                        highwaysDisallowingFords.has(entity2.tags.highway)) {
+                        return false
+                    }
                     return true;
                 }
                 if (featureTypes.has('building') || featureTypes.has('railway')) return true;
