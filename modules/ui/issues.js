@@ -18,6 +18,7 @@ export function uiIssues(context) {
     var key = t('issues.key');
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
+    var pane = d3_select(null);
     var _shown = false;
 
     context.issueManager().on('reload.issues_pane', update);
@@ -38,6 +39,8 @@ export function uiIssues(context) {
             .append('ul')
             .attr('class', 'layer-list feature-applicability-list')
             .merge(_featureApplicabilityList);
+
+        updateFeatureApplicabilityList();
     }
 
     function renderIssuesList(selection) {
@@ -48,6 +51,8 @@ export function uiIssues(context) {
             .append('ul')
             .attr('class', 'layer-list issues-list')
             .merge(_issuesList);
+
+        updateIssuesList();
     }
 
     function drawListItems(selection, data, type, name, change, active) {
@@ -179,7 +184,7 @@ export function uiIssues(context) {
         update();
     }
 
-    function update() {
+    function updateFeatureApplicabilityList() {
         _featureApplicabilityList
             .call(
                 drawListItems,
@@ -189,9 +194,20 @@ export function uiIssues(context) {
                 setFeatureApplicability,
                 showsFeatureApplicability
             );
+    }
 
+    function updateIssuesList() {
         _issuesList
             .call(drawIssuesList);
+    }
+
+    function update() {
+        if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
+            updateFeatureApplicabilityList();
+        }
+        if (!pane.select('.disclosure-wrap-issues_issues').classed('hide')) {
+            updateIssuesList();
+        }
     }
 
     function issues(selection) {
@@ -237,7 +253,7 @@ export function uiIssues(context) {
             }
         }
 
-        var pane = selection
+        pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 
