@@ -2380,6 +2380,11 @@ en:
         # amenity=clock
         name: Clock
         terms: '<translate with synonyms or related terms for ''Clock'', separated by commas>'
+      amenity/clock/sundial:
+        # 'amenity=clock, display=sundial'
+        name: Sundial
+        # 'terms: gnomon,shadow'
+        terms: '<translate with synonyms or related terms for ''Sundial'', separated by commas>'
       amenity/college:
         # amenity=college
         name: College Grounds

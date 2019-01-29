@@ -3902,6 +3902,10 @@
                     "name": "Clock",
                     "terms": ""
                 },
+                "amenity/clock/sundial": {
+                    "name": "Sundial",
+                    "terms": "gnomon,shadow"
+                },
                 "amenity/college": {
                     "name": "College Grounds",
                     "terms": "university,undergraduate school"

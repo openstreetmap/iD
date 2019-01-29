@@ -76,6 +76,7 @@
     {"key": "healthcare:speciality", "value": "abortion", "description": "🄿 Abortion Clinic", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/hospital-15.svg?sanitize=true"},
     {"key": "healthcare:speciality", "value": "fertility", "description": "🄿 Fertility Clinic", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/hospital-15.svg?sanitize=true"},
     {"key": "amenity", "value": "clock", "description": "🄿 Clock", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/clock.svg?sanitize=true"},
+    {"key": "display", "value": "sundial", "description": "🄿 Sundial", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/far-clock.svg?sanitize=true"},
     {"key": "amenity", "value": "college", "description": "🄿 College Grounds", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/college-15.svg?sanitize=true"},
     {"key": "amenity", "value": "community_centre", "description": "🄿 Community Center", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/town-hall-15.svg?sanitize=true"},
     {"key": "amenity", "value": "compressed_air", "description": "🄿 Compressed Air", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"},
