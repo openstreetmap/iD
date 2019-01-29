@@ -2990,6 +2990,12 @@ div.full-screen > button:hover {
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
+.entity-issues .issue ul.fixes {
+    display: none;
+}
+.entity-issues .issue.fixes-open ul.fixes {
+    display: block;
+}
 
 /* Background - Display Options Sliders
 ------------------------------------------------------- */

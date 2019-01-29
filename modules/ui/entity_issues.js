@@ -45,7 +45,12 @@ export function uiEntityIssues(context) {
         }
 
         var items = selection.selectAll('.issue')
-            .data(issues, function(d) { return d.id(); });
+            .data(issues, function(d) {
+                if (d.id) {
+                    return d.id();
+                }
+                return null;
+            });
 
         // Exit
         items.exit()
@@ -96,19 +101,18 @@ export function uiEntityIssues(context) {
                 list = list.enter()
                     .append('ul')
                     .attr('class', 'fixes')
-                    .style('display', 'none')
                     .merge(list);
 
                 issue.select('.label')
                     .on('click', function() {
-                        if (list.style('display') === 'none') {
-                            list.style('display', 'block');
+                        if (!issue.classed('fixes-open')) {
+                            issue.classed('fixes-open', true);
                             var loc = d.loc();
                             if (loc) {
                                 context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
                             }
                         } else {
-                            list.style('display', 'none');
+                            issue.classed('fixes-open', false);
                         }
                     });
 
@@ -134,6 +138,12 @@ export function uiEntityIssues(context) {
         // Update
         items = items
             .merge(enter);
+
+        // open the fixes for the first issue if no others are already open
+        if (selection.selectAll('.issue.fixes-open').empty()) {
+            selection.select('.issue:first-child').classed('fixes-open', true);
+        }
+
     }
 
     entityIssues.entityID = function(val) {
