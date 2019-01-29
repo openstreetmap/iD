@@ -1482,6 +1482,10 @@
                     "title": "Remove the name",
                     "undo_redo": "Removed a generic name."
                 },
+                "remove_tags": {
+                    "title": "Remove the tags",
+                    "undo_redo": "Removed tags."
+                },
                 "move_tags": {
                     "title": "Move the tags",
                     "undo_redo": "Moved tags."

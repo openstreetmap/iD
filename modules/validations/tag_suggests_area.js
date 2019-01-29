@@ -1,10 +1,18 @@
 import _isEmpty from 'lodash-es/isEmpty';
+import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
+import {
+    utilTagText
+} from '../util';
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
+    validationIssueFix
 } from './validation_issue';
+import {
+    actionChangeTags
+} from '../actions';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
@@ -14,18 +22,21 @@ export function validationTagSuggestsArea(context) {
     function tagSuggestsArea(tags) {
         if (_isEmpty(tags)) return false;
 
-        var presence = ['landuse', 'amenities', 'tourism', 'shop'];
-        for (var i = 0; i < presence.length; i++) {
-            if (tags[presence[i]] !== undefined) {
-                if (presence[i] === 'tourism' && tags[presence[i]] === 'artwork') {
+        var areaKeys = ['area', 'building', 'landuse', 'shop', 'tourism'];
+        for (var i = 0; i < areaKeys.length; i++) {
+            var key = areaKeys[i];
+            if (tags[key] !== undefined && tags[key] !== 'no') {
+                if (key === 'tourism' && tags[key] === 'artwork') {
                     continue;   // exception for tourism=artwork - #5206
                 } else {
-                    return presence[i] + '=' + tags[presence[i]];
+                    var returnTags = {};
+                    returnTags[key] = tags[key];
+                    return returnTags;
                 }
             }
         }
 
-        if (tags.building && tags.building === 'yes') return 'building=yes';
+        return false;
     }
 
 
@@ -34,15 +45,32 @@ export function validationTagSuggestsArea(context) {
         for (var i = 0; i < entitiesToCheck.length; i++) {
             var entity = entitiesToCheck[i];
             var geometry = entity.geometry(graph);
-            var suggestion = (geometry === 'line' ? tagSuggestsArea(entity.tags) : undefined);
+            var suggestingTags = (geometry === 'line' ? tagSuggestsArea(entity.tags) : undefined);
 
-            if (suggestion) {
+            if (suggestingTags) {
+                var tagText = utilTagText({ tags: suggestingTags });
                 issues.push(new validationIssue({
                     type: ValidationIssueType.tag_suggests_area,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('issues.tag_suggests_area.message', { tag: suggestion }),
+                    message: t('issues.tag_suggests_area.message', { tag: tagText }),
                     tooltip: t('issues.tag_suggests_area.tip'),
                     entities: [entity],
+                    fixes: [
+                        new validationIssueFix({
+                            title: t('issues.fix.remove_tags.title'),
+                            action: function() {
+                                var entity = this.issue.entities[0];
+                                var tags = _clone(entity.tags);
+                                for (var key in suggestingTags) {
+                                    delete tags[key];
+                                }
+                                context.perform(
+                                    actionChangeTags(entity.id, tags),
+                                    t('issues.fix.remove_tags.undo_redo')
+                                );
+                            }
+                        })
+                    ]
                 }));
             }
         }
