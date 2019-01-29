@@ -4951,6 +4951,11 @@ en:
         name: Communication Tower
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/minaret:
+        # 'man_made=tower, tower:type=minaret'
+        name: Minaret
+        # 'terms: Islam,mosque,Muezzin,Muslim'
+        terms: '<translate with synonyms or related terms for ''Minaret'', separated by commas>'
       man_made/tower/observation:
         # 'man_made=tower, tower:type=observation'
         name: Observation Tower

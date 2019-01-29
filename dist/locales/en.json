@@ -6122,6 +6122,10 @@
                     "name": "Communication Tower",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
                 },
+                "man_made/tower/minaret": {
+                    "name": "Minaret",
+                    "terms": "Islam,mosque,Muezzin,Muslim"
+                },
                 "man_made/tower/observation": {
                     "name": "Observation Tower",
                     "terms": "lookout tower,fire tower"
