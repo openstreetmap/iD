@@ -1512,6 +1512,9 @@ en:
           mountain_hiking: 'T2: Mountain Hiking'
         # sac_scale field placeholder
         placeholder: 'Mountain Hiking, Alpine Hiking...'
+      salt:
+        # salt=*
+        label: Salt
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
@@ -1871,6 +1874,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      tidal:
+        # tidal=*
+        label: Tidal
       to:
         # to=*
         label: To

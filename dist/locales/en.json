@@ -3102,6 +3102,9 @@
                         "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
                     }
                 },
+                "salt": {
+                    "label": "Salt"
+                },
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
@@ -3393,6 +3396,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "tidal": {
+                    "label": "Tidal"
                 },
                 "to": {
                     "label": "To"

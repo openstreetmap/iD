@@ -1,5 +1,10 @@
 {
     "icon": "maki-water",
+    "fields": [
+        "{natural/water}",
+        "salt",
+        "tidal"
+    ],
     "geometry": [
         "area"
     ],
