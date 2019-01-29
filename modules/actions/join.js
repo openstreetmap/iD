@@ -1,8 +1,10 @@
 import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
+import _intersection from 'lodash-es/intersection';
 
 import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag, osmJoinWays } from '../osm';
+import { geoPathIntersections } from '../geo';
 
 
 // Join ways at the end node they share.
@@ -69,6 +71,27 @@ export function actionJoin(ids) {
         var joined = osmJoinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
+
+        // Loop through all combinations of path-pairs to check potential intersections
+        //  between all pairs
+        for (var i = 0; i < ids.length-1; i++) {
+            for (var j = i+1; j < ids.length; j++) {
+                var path1 = graph.childNodes(graph.entity(ids[i])).map(function(e) {
+                    return e.loc;
+                });
+                var path2 = graph.childNodes(graph.entity(ids[j])).map(function(e) {
+                    return e.loc;
+                });
+                var intersections = geoPathIntersections(path1, path2);
+
+                // Check if intersections are just nodes lying on top of each other/the line,
+                //  as opposed to crossing it
+                if (_intersection(
+                        joined[0].nodes.map(function(n) { return n.loc.toString(); }),
+                        intersections.map(function(n) { return n.toString(); })
+                    ).length !== intersections.length) return 'paths_intersect';
+            }
+        }
 
         var nodeIds = joined[0].nodes.map(function(n) { return n.id; }).slice(1, -1);
         var relation;

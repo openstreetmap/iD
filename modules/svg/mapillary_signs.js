@@ -105,7 +105,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('x', '-12px')
             .attr('y', '-12px')
             .attr('xlink:href', function(d) { return '#' + d.value; })
-            .classed('selected', function(d) {
+            .classed('currentView', function(d) {
                 return _some(d.detections, function(detection) {
                     return detection.image_key === selectedImageKey;
                 });
