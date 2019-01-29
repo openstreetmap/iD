@@ -71,11 +71,17 @@ export function validationHighwayCrossingOtherWays(context) {
         return getFeatureTypeForTags(tags);
     }
 
+    // only validate certain waterway features
+    var waterways = new Set(['canal', 'ditch', 'drain', 'river', 'stream']);
+    // ignore certain highway and railway features
+    var ignoredHighways = new Set(['rest_area', 'services']);
+    var ignoredRailways = new Set(['train_wash']);
+
     function getFeatureTypeForTags(tags) {
-        if (hasTag(tags, 'highway')) return 'highway';
         if (hasTag(tags, 'building')) return 'building';
-        if (hasTag(tags, 'railway')) return 'railway';
-        if (hasTag(tags, 'waterway') || tags.natural === 'water') return 'water';
+        if (hasTag(tags, 'highway') && !ignoredHighways.has(tags.highway)) return 'highway';
+        if (hasTag(tags, 'railway') && !ignoredRailways.has(tags.railway)) return 'railway';
+        if (hasTag(tags, 'waterway') && waterways.has(tags.waterway)) return 'waterway';
 
         return null;
     }
@@ -107,8 +113,8 @@ export function validationHighwayCrossingOtherWays(context) {
             if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
             if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
         }
-        if ((featureType1 === 'highway' && featureType2 === 'water') ||
-            (featureType1 === 'railway' && featureType2 === 'water')) {
+        if ((featureType1 === 'highway' && featureType2 === 'waterway') ||
+            (featureType1 === 'railway' && featureType2 === 'waterway')) {
             // Legit cases:
             // (1) highway/railway is on a bridge
             // (2) only one of the two ways is in a tunnel
@@ -125,7 +131,7 @@ export function validationHighwayCrossingOtherWays(context) {
             // (2) highway/railway has a covered tag
             if (hasTag(tags1, 'bridge') || hasTag(tags1, 'tunnel') || hasTag(tags1, 'covered')) return true;
         }
-        if (featureType1 === 'water' && featureType2 === 'water') {
+        if (featureType1 === 'waterway' && featureType2 === 'waterway') {
             // Legit cases:
             // (1) only one of the water is in a tunnel
             // (2) both are in tunnels but on differnt layers
@@ -133,7 +139,7 @@ export function validationHighwayCrossingOtherWays(context) {
             if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
             if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && tags1.layer !== tags2.layer) return true;
         }
-        if (featureType1 === 'water' && featureType2 === 'building') {
+        if (featureType1 === 'waterway' && featureType2 === 'building') {
             // Legit cases:
             // (1) water is in a tunnel
             // (2) water has a covered tag
@@ -151,13 +157,13 @@ export function validationHighwayCrossingOtherWays(context) {
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') return true;
-            if (featureType1 === 'water') return true;
+            if (featureType1 === 'waterway') return true;
             if (featureType1 === 'railway') return true;
         } else {
             var featureTypes = new Set([featureType1, featureType2]);
             if (featureTypes.has('highway')) {
-                if (featureTypes.has('water')) {
-                    // do not allow adding fords on structures
+                if (featureTypes.has('waterway')) {
+                    // do not allow fords on structures
                     if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return false;
                     if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return false;
                     return true;
@@ -226,7 +232,10 @@ export function validationHighwayCrossingOtherWays(context) {
             }
             if (entity.type === 'way') {
                 return entity;
-            } else if (entity.type === 'relation' && entity.tags.type === 'multipolygon') {
+            } else if (entity.type === 'relation' &&
+                entity.tags.type === 'multipolygon' &&
+                // only check multipolygons if they are buildings
+                hasTag(entity.tags, 'building')) {
                 return _map(entity.members, function(member) {
                     if (context.hasEntity(member.id)) {
                         var entity = context.entity(member.id);
@@ -250,9 +259,9 @@ export function validationHighwayCrossingOtherWays(context) {
                     var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
                     if (type1 === type2) {
                         return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
-                    } else if (type1 === 'water') {
+                    } else if (type1 === 'waterway') {
                         return true;
-                    } else if (type2 === 'water') {
+                    } else if (type2 === 'waterway') {
                         return false;
                     }
                     return type1 < type2;

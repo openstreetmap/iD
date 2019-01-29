@@ -1430,7 +1430,7 @@
                 "building-railway": {
                     "tip": "Railways crossing buildings should use bridges or tunnels."
                 },
-                "building-water": {
+                "building-waterway": {
                     "tip": "Waterways crossing buildings should use tunnels or different layers."
                 },
                 "highway-highway": {
@@ -1439,16 +1439,16 @@
                 "highway-railway": {
                     "tip": "Highways crossing railways should use bridges, tunnels, or level crossings."
                 },
-                "highway-water": {
-                    "tip": "Highways crossing water should use bridges, tunnels, or fords."
+                "highway-waterway": {
+                    "tip": "Highways crossing waterways should use bridges, tunnels, or fords."
                 },
                 "railway-railway": {
                     "tip": "Crossing railways should be connected or use bridges or tunnels."
                 },
-                "railway-water": {
-                    "tip": "Railways crossing water should use bridges or tunnels."
+                "railway-waterway": {
+                    "tip": "Railways crossing waterways should use bridges or tunnels."
                 },
-                "water-water": {
+                "waterway-waterway": {
                     "tip": "Crossing waterways should be connected or use tunnels."
                 },
                 "tunnel-tunnel": {
