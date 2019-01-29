@@ -66,7 +66,7 @@ export function actionReverse(wayID, options) {
 
         // Turn lanes are left/right to key (not way) direction - #5674
         if (turn_lanes.test(key)) {
-            return value
+            return value;
         } else if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
         } else if (options && options.reverseOneway && key === 'oneway') {
