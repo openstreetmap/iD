@@ -190,7 +190,7 @@ export function uiIssues(context) {
                 drawListItems,
                 context.issueManager().featureApplicabilityOptions,
                 'radio',
-                'feature_applicability',
+                'features_to_validate',
                 setFeatureApplicability,
                 showsFeatureApplicability
             );

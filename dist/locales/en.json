@@ -1378,14 +1378,14 @@
             "options": {
                 "title": "Options"
             },
-            "feature_applicability": {
+            "features_to_validate": {
                 "edited": {
                     "description": "Edited features only",
-                    "tooltip": "Only issues for features you change will be flagged"
+                    "tooltip": "Flag issues with created and modified features"
                 },
                 "all": {
                     "description": "All features",
-                    "tooltip": "Issues for all loaded features will be flagged"
+                    "tooltip": "Flag issues with all nearby features"
                 }
             },
             "severity": {
