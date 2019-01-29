@@ -41,7 +41,7 @@ export function validationDeprecatedTag(context) {
                         fixes: [
                             new validationIssueFix({
                                 title: t('issues.fix.upgrade_tags.title'),
-                                action: function() {
+                                onClick: function() {
                                     var entity = this.issue.entities[0];
                                     var tags = _clone(entity.tags);
                                     var replaceTags = this.issue.info.replaceTags;

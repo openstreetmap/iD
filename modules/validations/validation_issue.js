@@ -94,7 +94,7 @@ export function validationIssue(attrs) {
 export function validationIssueFix(attrs) {
 
     this.title = attrs.title;
-    this.action = attrs.action;
+    this.onClick = attrs.onClick;
 
     // the issue this fix is for
     this.issue = null;

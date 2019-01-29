@@ -121,7 +121,7 @@ export function validationHighwayAlmostJunction(context) {
                 var fixes = [
                   new validationIssueFix({
                       title: t('issues.fix.connect_almost_junction.title'),
-                      action: function() {
+                      onClick: function() {
                           var endNode = this.issue.entities[1],
                               targetEdge = this.issue.info.edge,
                               crossLoc = this.issue.info.cross_loc;
@@ -136,7 +136,7 @@ export function validationHighwayAlmostJunction(context) {
                     // node has no tags, suggest noexit fix
                     fixes.push(new validationIssueFix({
                         title: t('issues.fix.tag_as_disconnected.title'),
-                        action: function() {
+                        onClick: function() {
                             var nodeID = this.issue.entities[1].id;
                             context.perform(
                                 actionChangeTags(nodeID, {noexit: 'yes'}),

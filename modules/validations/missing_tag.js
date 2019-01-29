@@ -42,13 +42,13 @@ export function validationMissingTag(context) {
                     fixes: [
                         new validationIssueFix({
                             title: t('issues.fix.select_preset.title'),
-                            action: function() {
+                            onClick: function() {
                                 context.ui().sidebar.showPresetList();
                             }
                         }),
                         new validationIssueFix({
                             title: t('issues.fix.delete_feature.title'),
-                            action: function() {
+                            onClick: function() {
                                 var id = this.issue.entities[0].id;
                                 operationDelete([id], context)();
                             }

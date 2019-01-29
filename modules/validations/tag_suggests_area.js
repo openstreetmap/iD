@@ -58,7 +58,7 @@ export function validationTagSuggestsArea(context) {
                     fixes: [
                         new validationIssueFix({
                             title: t('issues.fix.remove_tags.title'),
-                            action: function() {
+                            onClick: function() {
                                 var entity = this.issue.entities[0];
                                 var tags = _clone(entity.tags);
                                 for (var key in suggestingTags) {

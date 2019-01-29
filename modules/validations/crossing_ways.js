@@ -257,7 +257,7 @@ export function validationHighwayCrossingOtherWays(context) {
                     fixes: [
                         new validationIssueFix({
                             title: t('issues.fix.add_connection_vertex.title'),
-                            action: function() {
+                            onClick: function() {
                                 var loc = this.issue.coordinates;
                                 var ways = this.issue.info.ways;
 

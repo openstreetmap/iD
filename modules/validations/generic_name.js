@@ -61,7 +61,7 @@ export function validationGenericName(context) {
                     fixes: [
                         new validationIssueFix({
                             title: t('issues.fix.remove_generic_name.title'),
-                            action: function() {
+                            onClick: function() {
                                 var entity = this.issue.entities[0];
                                 var tags = _clone(entity.tags);
                                 delete tags.name;
