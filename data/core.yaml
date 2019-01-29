@@ -1171,13 +1171,13 @@ en:
     crossing_ways:
       message: "{feature} crosses {feature2} without enough context."
       building-building:
-        tip: Buildings should not intersect except on separate layers.
+        tip: Buildings should not intersect except on different layers.
       building-highway:
         tip: Highways crossing buildings should use bridges, tunnels, coverings, or entrances.
       building-railway:
         tip: Railways crossing buildings should use bridges or tunnels.
       building-water:
-        tip: Waterways crossing buildings should use tunnels or separate layers.
+        tip: Waterways crossing buildings should use tunnels or different layers.
       highway-highway:
         tip: Crossing highways should use bridges, tunnels, or intersections.
       highway-railway:
@@ -1190,6 +1190,10 @@ en:
         tip: Railways crossing water should use bridges or tunnels.
       water-water:
         tip: Crossing waterways should be connected or use tunnels.
+      tunnel-tunnel:
+        tip: Crossing tunnels should use different layers.
+      bridge-bridge:
+        tip: Crossing bridges should use different layers.
     highway_almost_junction:
       message: "{highway} is very close but not connected to {highway2}."
       tip: Intersecting highways should share a junction vertex.
