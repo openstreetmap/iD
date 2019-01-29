@@ -573,6 +573,7 @@
     {"key": "leisure", "value": "sauna", "description": "🄿 Sauna", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-thermometer-three-quarters.svg?sanitize=true"},
     {"key": "leisure", "value": "slipway", "description": "🄿 Slipway", "object_types": ["node", "way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/slipway-15.svg?sanitize=true"},
     {"key": "leisure", "value": "sports_centre", "description": "🄿 Sports Center / Complex", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"},
+    {"key": "sport", "value": "climbing", "description": "🄿 Climbing Gym", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/abseiling.svg?sanitize=true"},
     {"key": "sport", "value": "swimming", "description": "🄿 Swimming Pool Facility", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/swimming-15.svg?sanitize=true"},
     {"key": "leisure", "value": "stadium", "description": "🄿 Stadium", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"},
     {"key": "leisure", "value": "swimming_pool", "description": "🄿 Swimming Pool", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/swimming-15.svg?sanitize=true"},

@@ -4751,6 +4751,11 @@ en:
         # leisure=sports_centre
         name: Sports Center / Complex
         terms: '<translate with synonyms or related terms for ''Sports Center / Complex'', separated by commas>'
+      leisure/sports_centre/climbing:
+        # 'leisure=sports_centre, sport=climbing'
+        name: Climbing Gym
+        # 'terms: abseiling,artificial climbing wall,belaying,bouldering,rock climbing facility,indoor rock wall,rappeling,rock gym,ropes'
+        terms: '<translate with synonyms or related terms for ''Climbing Gym'', separated by commas>'
       leisure/sports_centre/swimming:
         # 'leisure=sports_centre, sport=swimming'
         name: Swimming Pool Facility

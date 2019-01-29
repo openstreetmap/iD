@@ -5950,6 +5950,10 @@
                     "name": "Sports Center / Complex",
                     "terms": ""
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Climbing Gym",
+                    "terms": "abseiling,artificial climbing wall,belaying,bouldering,rock climbing facility,indoor rock wall,rappeling,rock gym,ropes"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Swimming Pool Facility",
                     "terms": "dive,water"
