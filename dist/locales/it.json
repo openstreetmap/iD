@@ -549,7 +549,10 @@
             "way": "Linea",
             "relation": "Relazione",
             "location": "Posizione",
-            "add_fields": "Aggiungi campo:"
+            "add_fields": "Aggiungi campo:",
+            "lock": {
+                "suggestion": "Il campo \"{label}\" è bloccato perché c'è un tag Wikidata. Puoi cancellarlo o modificare i tag nella sezione \"Tutti i tag\"."
+            }
         },
         "background": {
             "title": "Sfondo",
@@ -1104,7 +1107,7 @@
                 "navigation_zoom": "Puoi ingrandire o diminuire il livello di zoom utilizzando la rotella del mouse, oppure utilizzando i bottoni [più/meno] nella parte destra della schermata. Puoi inoltre utilizzare i tasti '+' ,'-' della tastiera.",
                 "features_h": "Elementi della mappa",
                 "features": "Utilizziamo la parola \"caratteristiche\" per descrivere gli oggetti che compaiono sulla mappa, ne sono esempi: strade, edifici o punti di interesse vari. Tutti gli elementi presenti nel mondo reale possono essere mappati in OpenStreetMap, sotto forma di punti, linee o aree.",
-                "nodes_ways": "In OpenstreetMap i punti sono spesso chiamati \"nodi\", le linee invece \"ways\""
+                "nodes_ways": "In OpenStreetMap i punti sono spesso chiamati *nodi* e le linee invece *vie*."
             },
             "editing": {
                 "title": "Modifica e salvataggio",
@@ -1238,8 +1241,7 @@
                 "choosing": "Per vedere quali fonti per le immagini sono disponibili durante la modifica, clicca il pulsante {layers} **Impostazioni dello sfondo** a lato della mappa.",
                 "sources": "Inizialmente, vengono mostrate come sfondo le immagini satellitari di [Bing Maps](https://www.bing.com/maps/). A seconda di dove stai modificando, saranno disponibili altre fonti per le immagini di sfondo. Alcune potrebbero essere più nuove oppure avere una risoluzione maggiore, quindi è sempre utile dare un'occhiata agli strati disponibili e verificare qual è il migliore da usare come riferimento.",
                 "offsets_h": "Aggiustare l'allineamento delle immagini",
-                "offset": "Le immagini di sfondo sono talvolta leggermente fuori asse rispetto agli accurati dati della mappa. Se ti capita di vedere molte strade ed edifici che sono disallineati rispetto alle immagini di sfondo, è probabile che siano quest'ultime ad essere sbagliate, quindi sarebbe sbagliato spostare tutti gli oggetti per farlo corrispondere allo sfondo. Al contrario, puoi allineare lo sfondo ai dati della mappa andando nella sezione \"Correggi spostamento immagini\" in fondo al pannello \"Impostazioni dello sfondo\".",
-                "offset_change": "Clicca sui piccoli triangoli per correggere l'allineamento delle immagini a piccoli passi, oppure tieni premuto il pulsante sinistro del mouse e trascina all'interno del quadrato grigio per allineare più finemente le immagini di sfondo."
+                "offset": "Le immagini di sfondo sono talvolta leggermente fuori asse rispetto agli accurati dati della mappa. Se ti capita di vedere molte strade ed edifici che sono disallineati rispetto alle immagini di sfondo, è probabile che siano quest'ultime ad essere sbagliate, quindi sarebbe sbagliato spostare tutti gli oggetti per farlo corrispondere allo sfondo. Al contrario, puoi allineare lo sfondo ai dati della mappa andando nella sezione \"Correggi spostamento immagini\" in fondo al pannello \"Impostazioni dello sfondo\"."
             },
             "streetlevel": {
                 "title": "Foto a livello stradale",
@@ -1260,7 +1262,8 @@
             },
             "qa": {
                 "title": "Controllo qualità.",
-                "tools_h": "Strumenti"
+                "tools_h": "Strumenti",
+                "tools": "Sono supportati i seguenti strumenti:: [KeepRight](https://www.keepright.at/). Probabilmente in futuro iD supporterà [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/) e altri strumenti per il mantenimento della qualità in futuro."
             },
             "field": {
                 "restrictions": {
@@ -2796,6 +2799,10 @@
                 },
                 "piste/difficulty_nordic": {
                     "label": "Difficoltà",
+                    "options": {
+                        "easy": "Facile - colline dolci, sezioni con breve dislivello",
+                        "novice": "Principianti - Piatto, nessuno sforzo necessario"
+                    },
                     "placeholder": "Facile, Intermedia, Avanzata..."
                 },
                 "piste/difficulty_skitour": {
@@ -3027,6 +3034,7 @@
                     "label": "Stagionale"
                 },
                 "seats": {
+                    "label": "Posti a sedere",
                     "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
@@ -3221,6 +3229,9 @@
                         "yes": "Sì"
                     },
                     "placeholder": "Sì, no, solo da asporto..."
+                },
+                "to": {
+                    "label": "Verso"
                 },
                 "toilets/disposal": {
                     "label": "Smaltimento",
@@ -3671,6 +3682,9 @@
                     "name": "Dentista",
                     "terms": "dentista,odontoiatra,odontotecnico"
                 },
+                "amenity/dive_centre": {
+                    "name": "Centro subacqueo"
+                },
                 "amenity/doctors": {
                     "name": "Medico di base",
                     "terms": "dottore,medico,studio medico,ambulatorio"
@@ -3694,6 +3708,24 @@
                 "amenity/fast_food": {
                     "name": "Fast Food",
                     "terms": "Fast Food"
+                },
+                "amenity/fast_food/burger": {
+                    "name": "Fast Food di hamburger"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "Fast Food di pollo"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "Fast Food di Fish & Chips"
+                },
+                "amenity/fast_food/kebab": {
+                    "name": "Fast Food i kebab"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "Fast Food di pizza"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "Fast Food di panini"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Stazione / Terminal dei battelli"
@@ -3874,6 +3906,9 @@
                     "name": "Ristorante",
                     "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
                 },
+                "amenity/restaurant/american": {
+                    "name": "Ristorante americano"
+                },
                 "amenity/restaurant/asian": {
                     "name": "Ristorante asiatico"
                 },
@@ -3900,6 +3935,30 @@
                 },
                 "amenity/restaurant/mexican": {
                     "name": "Ristorante messicano"
+                },
+                "amenity/restaurant/noodle": {
+                    "name": "Ristorante noodle"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Pizzeria"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "Ristorante di mare"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "Steakhouse"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "Ristorante di sushi"
+                },
+                "amenity/restaurant/thai": {
+                    "name": "Ristorante thailandese"
+                },
+                "amenity/restaurant/turkish": {
+                    "name": "Ristorante turco"
+                },
+                "amenity/restaurant/vietnamese": {
+                    "name": "Ristorante vietnamita"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "Smaltimento reflui camper",
@@ -3984,6 +4043,9 @@
                 "amenity/university": {
                     "name": "Area universitaria",
                     "terms": "università"
+                },
+                "amenity/vehicle_inspection": {
+                    "name": "Ispezione veicolo"
                 },
                 "amenity/vending_machine": {
                     "name": "Distributore automatico",
@@ -5250,6 +5312,9 @@
                 "leisure/firepit": {
                     "name": "Focolare",
                     "terms": "fuoco,campeggio,griglia,bracere,braciere"
+                },
+                "leisure/fishing": {
+                    "name": "Punto per la pesca"
                 },
                 "leisure/fitness_centre": {
                     "name": "Palestra / Centro Fitness",
@@ -6536,6 +6601,9 @@
                     "name": "Parrucchiere",
                     "terms": "Parrucchiere/Barbiere"
                 },
+                "shop/hairdresser_supply": {
+                    "name": "Negozio di prodotti per parrucchiere"
+                },
                 "shop/hardware": {
                     "name": "Ferramenta",
                     "terms": "Negozio di Ferramenta"
@@ -6654,6 +6722,9 @@
                 "shop/paint": {
                     "name": "Negozio di vernici",
                     "terms": "Colorificio"
+                },
+                "shop/party": {
+                    "name": "Negozio di articoli per le feste"
                 },
                 "shop/pastry": {
                     "name": "Pasticceria",
@@ -7131,6 +7202,9 @@
                 "waterway/fuel": {
                     "name": "Stazione di rifornimento marittima",
                     "terms": "distributore,gas, benzina,diesel,gpl,carburante,benzinaio,gasolio,nafta,barca,barche"
+                },
+                "waterway/milestone": {
+                    "name": "Pietra miliare acquatica"
                 },
                 "waterway/river": {
                     "name": "Fiume",
@@ -8006,7 +8080,7 @@
                 "description": "Talk-is è la mailinglist ufficiale della comunità OSM islandese"
             },
             "is-twitter": {
-                "name": "OSM Islanda su Twitter",
+                "name": "OSM Islansa su Twitter",
                 "description": "Twitter di OpenStreetMap in Islanda"
             },
             "it-facebook": {

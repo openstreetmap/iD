@@ -1184,8 +1184,7 @@
                 "navigation_drag": "Mapu můžete posouvat zmáčknutím a držením {leftclick} levého tlačítka myši a jejím pohybem. Lze také použít šipky `↓`, `↑`, `←`, `→` na klávesnici.",
                 "navigation_zoom": "Zoomovat můžete kolečkem myši, trackpadem či kliknutím na tlačítka {plus} / {minus} na straně mapy. Můžete také použít klávesy `+`, `-` na vaší klávesnici.",
                 "features_h": "Mapové prvky",
-                "features": "Používáme slovo *prvky* pro popis věcí, které se objevují v mapě, jako třeba silnice, budovy nebo body zájmu. Cokoliv v reálném světě může být zmapováno jako prvek v OpenStreetMap. Mapové prvky jsou reprezentovány na mapě pomocí *bodů*, *linií* nebo *ploch*.",
-                "nodes_ways": "V OpenStreetMap jsou body často nazývány *uzly* (anglicky node), a linie i plochy používají termín  *cesta* (anglicky way). Tato terminologie je použita třeba na OSM wiki."
+                "features": "Používáme slovo *prvky* pro popis věcí, které se objevují v mapě, jako třeba silnice, budovy nebo body zájmu. Cokoliv v reálném světě může být zmapováno jako prvek v OpenStreetMap. Mapové prvky jsou reprezentovány na mapě pomocí *bodů*, *linií* nebo *ploch*."
             },
             "editing": {
                 "title": "Úpravy & ukládání",
@@ -7636,9 +7635,6 @@
             },
             "hu-facebook": {
                 "description": "Mapovači a uživatelé OpenStreetMap v Maďarsku"
-            },
-            "is-twitter": {
-                "name": "OSM Island na Twitteru"
             },
             "it-facebook": {
                 "name": "Facebook OpenStreetMap Itálie"

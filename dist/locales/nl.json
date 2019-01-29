@@ -1157,8 +1157,7 @@
                 "navigation_drag": "Je kan de kaart verslepen door er met de muisaanwijzer over te gaan staan, de {leftclick} linkermuisknop in te drukken, de muis te verschuiven, en de knop pas dan los te laten. Je kan ook de `↓`, `↑`, `←`, `→`  pijltjestoetsen gebruiken op je toetsenbord.",
                 "navigation_zoom": "Je kan in- en uitzoomen door te scrollen met het muiswiel of de touchpad, of met de knoppen {plus} en {minus} naast de kaart. Je kunt ook de toetsen `+` en `-` op je toetsenbord gebruiken. ",
                 "features_h": "Kaartobjecten",
-                "features": "We gebruiken het woord *objecten* als we het over dingen op de kaart hebben, zoals wegen, gebouwen en bezienswaardigheden. Alles wat je in de echte wereld ziet, kan gemapt gemapt worden als object in OpenStreetMap. Objecten op de kaart worden gerepresenteerd als *punten*, *lijnen* of *vlakken*.",
-                "nodes_ways": "In de OpenStreetMap-wereld worden punten normaal *nodes* of knopen genoemd. Lijnen en vlakken worden doorgaans *ways* genoemd. In iD wijken we hier van af."
+                "features": "We gebruiken het woord *objecten* als we het over dingen op de kaart hebben, zoals wegen, gebouwen en bezienswaardigheden. Alles wat je in de echte wereld ziet, kan gemapt gemapt worden als object in OpenStreetMap. Objecten op de kaart worden gerepresenteerd als *punten*, *lijnen* of *vlakken*."
             },
             "editing": {
                 "title": "Bewerken & opslaan",
@@ -1292,8 +1291,7 @@
                 "choosing": "Om te zien welke bronnen beschikbaar zijn voor het bewerken, klik je op de knop {layers} **Achtergrondinstellingen** naast de kaart.",
                 "sources": "Standaard wordt een luchtfotolaag gekozen afhankelijk van de locatie op de kaart waar iD opgestart werd. De Bing Maps-satellietfotolaag is wereldwijd de terugvalkeuze. Het is vaak nuttig te kijken welke achtergrond de beste is voor het gebied dat je bewerkt: sommige bronnen kunnen recenter of van hogere resolutie zijn.",
                 "offsets_h": "Verplaatsing van luchtfoto aanpassen",
-                "offset": "Achtergrondbeelden kunnen soms vrij zwaar in positie afwijken van de correcte locatie. Als je veel gebouwen of wegen ziet die verschoven liggen ten opzichte van de achtergrond, kan het zijn dat de achtergrond incorrect is, en niet de kaart. Verplaats dus niet alle objecten om ze te overeen te laten komen met de achtergrond. Verplaats in plaats daarvan de achtergrond, zodat deze overeenkomt met de kaartgegevens. Dit doe je door het gedeelte \"Verplaatsing van luchtfoto aanpassen\" onderin het achtergrondinstellingenpaneel uit te klappen.",
-                "offset_change": "Klik op de kleine driehoeken om de verplaatsing van de achtergrond in kleine stappen aan te passen. Je kan ook de linkermuisknop ingedrukt houden en de achtergrond verslepen in het grijze vlak."
+                "offset": "Achtergrondbeelden kunnen soms vrij zwaar in positie afwijken van de correcte locatie. Als je veel gebouwen of wegen ziet die verschoven liggen ten opzichte van de achtergrond, kan het zijn dat de achtergrond incorrect is, en niet de kaart. Verplaats dus niet alle objecten om ze te overeen te laten komen met de achtergrond. Verplaats in plaats daarvan de achtergrond, zodat deze overeenkomt met de kaartgegevens. Dit doe je door het gedeelte \"Verplaatsing van luchtfoto aanpassen\" onderin het achtergrondinstellingenpaneel uit te klappen."
             },
             "streetlevel": {
                 "title": "Foto's op straatniveau",
@@ -8356,7 +8354,6 @@
                 "description": "Talk-is is de officiële mailinglijst voor de IJslandse OpenStreetMap gemeenschap"
             },
             "is-twitter": {
-                "name": "OSM IJsland op Twittter",
                 "description": "Twitter van OpenStreetMap in IJsland"
             },
             "it-facebook": {

@@ -1129,7 +1129,7 @@
         },
         "mapillary_signs": {
             "tooltip": "Panneaux de signalisation de Mapillary (nécessite la Surcouche Photo)",
-            "title": "Surcouche de signaux routiers (Mapillary)"
+            "title": "Surcouche de signalisation routière (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Voir cette image sur Mapillary"
@@ -1324,7 +1324,7 @@
                 "sources": "Par défaut, une image satellite [Bing Maps](https://www.bing.com/maps/) est affichée en arrière-plan. Selon le lieu que vous modifiez, d'autres images peuvent être disponibles. Certaines peuvent être plus récentes ou avec une meilleure résolution, si bien qu'il est utile de vérifier quelle est la meilleure image à utiliser pour cartographier.",
                 "offsets_h": "Ajustement du fond de carte",
                 "offset": "L'imagerie est parfois légèrement décalée par rapport aux données précises de la carte. Si vous constatez que de nombreuses routes ou de nombreux bâtiments sont décalés par rapport au fond de carte, c'est peut-être que l'imagerie n'est pas correctement alignée. Plutôt que de déplacer à tort les éléments de la carte, vous pouvez ajuster le fond de carte en utilisant la section « Ajuster le décalage du fond de carte » en bas du panneau Paramètres du fond de carte.",
-                "offset_change": "Cliquez sur les petits triangles pour ajuster finement le décalage de l'imagerie, ou maintenez enfoncé le bouton gauche de la souris et faites glisser l'image jusqu'à ce qu'elle soit correctement alignée."
+                "offset_change": "Cliquez sur les petits triangles pour ajuster finement le décalage de l'imagerie, ou maintenez enfoncé le {leftclick} bouton gauche de la souris et faites glisser l'image jusqu'à ce qu'elle soit correctement alignée."
             },
             "streetlevel": {
                 "title": "Photos de la rue",
@@ -1979,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "Pour animaux"
+                },
+                "architect": {
+                    "label": "Architecte"
                 },
                 "area/highway": {
                     "label": "Type"
@@ -3074,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "Interdictions de tourner"
+                },
+                "roof/colour": {
+                    "label": "Couleur du toit"
                 },
                 "rooms": {
                     "label": "Chambres"
@@ -7009,6 +7015,10 @@
                 "shop/frame": {
                     "name": "Magasin d'encadrements",
                     "terms": "Vente de cadres"
+                },
+                "shop/frozen_food": {
+                    "name": "Surgelés",
+                    "terms": "surgelés,nourriture surgelée"
                 },
                 "shop/fuel": {
                     "name": "Revendeur de carburant",

@@ -1189,7 +1189,7 @@
                 "navigation_zoom": "Du kannst durch Scrollen am Mausrad oder am Touchpad oder durch Klicken der  {plus} / {minus} Knöpfe rechts oben neben der Karte hinein- oder herauszoomen. Du kannst auch die `+`, `-` Tasten auf der Tastatur benutzen.",
                 "features_h": "Karten-Objekte",
                 "features": "Wir benutzen das Wort *Objekte* um die Dinge zu beschreiben die auf der Karte angezeigt werden, beispielsweise Straßen, Gebäude oder Sehenswürdigkeiten. Alles in der echten Welt kann als ein Objekt in OpenStreetMap gezeichnet werden. Objekte werden auf der Karte als *Punkte*, *Linien* oder *Flächen* dargestellt.",
-                "nodes_ways": "In OpenStreetMap werden Punkte manchmal *Knoten* genannt, Linien und Flächen werden manchmal *Wege* genannt."
+                "nodes_ways": "In OpenStreetMap werden Punkte manchmal *Knoten* genannt, Linien und Flächen werden manchmal Wege genannt."
             },
             "editing": {
                 "title": "Bearbeiten & Speichern",
@@ -1324,7 +1324,7 @@
                 "sources": "Als Standard sind die [Bing](https://www.bing.com/maps/) Satellitenbilder als Hintergrundbild ausgewählt. Abhängig von der Gegend sind auch andere Bildmaterial-Quellen verfügbar. Sie können neuer sein oder eine höhere Auflösung haben, daher ist es immer sinnvoll zu prüfen, welches Bildmaterial die beste Referenz zum Bearbeiten ist.",
                 "offsets_h": "Bildmaterial-Versatz anpassen",
                 "offset": "Bildmaterial ist manchmal geringfügig zu genauen Kartendaten versetzt. Wenn du feststellst, dass viele Wege oder Gebäude gegenüber dem Hintergrund-Bildmaterial versetzt sind, dann kann es sein, dass das Bildmaterial versetzt ist, also verschiebe nicht alle Objekte damit sie zum Hintergrund passen. Stattdessen kannst du den Hintergrund anpassen, damit es zu den bestehenden Daten passt indem du den Bereich „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen aufklappst.",
-                "offset_change": "Klicke auf die kleinen Dreiecke um den Bildmaterial-Versatz in kleinen Schritten anzupassen oder halte die linke Maustaste gedrückt und ziehe innerhalb des grauen Rechtecks um das Bildmaterial zurechtzurücken."
+                "offset_change": "Klicke auf die kleinen Dreiecke um den Bildversatz in kleinen Schritten zu veränder oder halte den {leftclick} linken Mausknopf und schiebe das graue Quadrat um das Hintergrundbild an die richtige Stelle zu schieben."
             },
             "streetlevel": {
                 "title": "Straßenfotos",
@@ -1979,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "Tierheim"
+                },
+                "architect": {
+                    "label": "Architekt"
                 },
                 "area/highway": {
                     "label": "Typ"
@@ -3074,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "Abbiegebeschränkungen"
+                },
+                "roof/colour": {
+                    "label": "Dachfarbe"
                 },
                 "rooms": {
                     "label": "Räume"
@@ -5109,8 +5115,8 @@
                     "terms": "Beschäftigungstherapeut, Ergotherapeut"
                 },
                 "healthcare/optometrist": {
-                    "name": "Brillenoptiker",
-                    "terms": "Optiker, Brillenoptiker"
+                    "name": "Augenoptiker",
+                    "terms": "Optiker, Augenoptiker"
                 },
                 "healthcare/physiotherapist": {
                     "name": "Physiotherapeut/in",
@@ -6178,6 +6184,10 @@
                     "name": "Gewässer",
                     "terms": "Gewässer, Wasserfläche, See, Teich, Pond, Pfütze"
                 },
+                "natural/water/basin": {
+                    "name": "Rückhaltebecken",
+                    "terms": "Rückhaltebecken, Basin"
+                },
                 "natural/water/canal": {
                     "name": "Kanal",
                     "terms": "Kanal"
@@ -7117,6 +7127,10 @@
                     "name": "Bilderrahmengeschäft",
                     "terms": "Bilderrahmengeschäft"
                 },
+                "shop/frozen_food": {
+                    "name": "Tiefkühllebensmittel",
+                    "terms": "Tiefkühllebensmittel, Tiefkühlkost"
+                },
                 "shop/fuel": {
                     "name": "Treibstoffverkaufsstelle",
                     "terms": "Treibstoffverkaufsstelle"
@@ -7225,7 +7239,7 @@
                     "terms": "Massagesalon,Masseur"
                 },
                 "shop/medical_supply": {
-                    "name": "Medizinbedarfgeschäft",
+                    "name": "Sanitätshaus, Medizinbedarfgeschäft",
                     "terms": "Drogerie,Medizinbedarf"
                 },
                 "shop/mobile_phone": {
@@ -8687,7 +8701,7 @@
                 "description": "Talk-is ist die offizielle Mailing Liste für die isländische OSM Gemeinschaft"
             },
             "is-twitter": {
-                "name": "OSM Island auf Twittter",
+                "name": "OSM Island auf Twitter",
                 "description": "Twitter von OpenStreetMap in Island"
             },
             "it-facebook": {

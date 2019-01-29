@@ -928,7 +928,8 @@
                         "description": "{var1} 沒有連接到地圖其他地方。"
                     },
                     "150": {
-                        "title": "缺少標籤的平交道"
+                        "title": "缺少標籤的平交道",
+                        "description": "道路和鐵路交叉的 {var1} 需要被標為 \"railway=crossing\" 或是 \"railway=level_crossing\"。"
                     },
                     "160": {
                         "title": "鐵路圖層衝突",
@@ -979,7 +980,8 @@
                         "description": "{var1} 被標記為 \"layer={var2}\"。雖其看似怪異但未必是錯誤。"
                     },
                     "270": {
-                        "title": "不尋常的高速公路連結"
+                        "title": "不尋常的高速公路連結",
+                        "description": "{var1} 是高速公路和其他不是 \"motorway\", \"motorway_link\", \"trunk\", \"rest_area\", 或是 \"construction\" 交叉的狀況。連結到 \"service\" 或是 \"unclassified\" 只有在 \"access=no/private\" 狀況才有效，或是連到高速高路服務區，會是有 \"service=parking_aisle\"。"
                     },
                     "280": {
                         "title": "標界問題",
@@ -990,7 +992,8 @@
                         "description": "{var1} 缺少名稱。"
                     },
                     "282": {
-                        "title": "標界缺少邊界等級"
+                        "title": "標界缺少邊界等級",
+                        "description": " {var1} 的標界並沒有效的 admin_level，請不要加混合的層級 (例如 \"6;7\")，請從最低的標界層級 admin_level 下標籤。"
                     },
                     "283": {
                         "title": "標界不是一個閉合形狀",
@@ -1001,7 +1004,8 @@
                         "description": "{var1} 的標界在此處分開。"
                     },
                     "285": {
-                        "title": "邊界 admin_level 太高了"
+                        "title": "邊界 admin_level 太高了",
+                        "description": "{var1} 有 \"admin_level={var2}\"，但屬於比較低的 \"admin_level\"(例如較高的優先)；應該在所有的關聯中有最低的 \"admin_level\"。"
                     },
                     "290": {
                         "title": "限制問題",
@@ -1016,16 +1020,20 @@
                         "description": "{var1} 擁有 {var2} 個 \"from\" 的成員，但該項應只有1個成員。"
                     },
                     "293": {
-                        "title": "道路限制缺少 \"to\" 的路徑。"
+                        "title": "道路限制缺少 \"to\" 的路徑。",
+                        "description": "{var1} 擁有 {var2} 個 \"to\" 的成員，但該項應只有1個成員。"
                     },
                     "294": {
-                        "title": "道路限制的 \"from\" 或 \"to\" 的成員並非路徑。"
+                        "title": "道路限制的 \"from\" 或 \"to\" 的成員並非路徑。",
+                        "description": "{var1} 擁有\"from\" 或 \"to\" 的成員，但該項應為路徑。{var2}。"
                     },
                     "295": {
-                        "title": "道路限制的 \"via\" 的成員並非終點。"
+                        "title": "道路限制的 \"via\" 的成員並非終點。",
+                        "description": "{var1} 擁有 \"via\" (節點 {var2}) 並不是 \"{var3}\" (路徑 {var4}) 第一個或最後一個成員。"
                     },
                     "296": {
-                        "title": "不常見的限制角度"
+                        "title": "不常見的限制角度",
+                        "description": "{var1} 擁有限制類型 \"{var2}\" ，但是角度是 {var3} 度，也許這種限制類型並不洽當？"
                     },
                     "297": {
                         "title": "\"to\" 路徑方向錯誤",
@@ -1036,37 +1044,45 @@
                         "description": "{var1} 可能為冗餘標籤。項目已有 {var2} 的 \"oneway\" 單行道標籤限制進入。"
                     },
                     "300": {
-                        "title": "缺少最高速限"
+                        "title": "缺少最高速限",
+                        "description": "{var1}  缺少「最高速限」的標籤，而且也被標為高速公路、快速道路、主要道路或次要道路。"
                     },
                     "310": {
                         "title": "圓環問題",
                         "description": "這個圓環有未指明的問題。"
                     },
                     "311": {
-                        "title": "圓環並非閉合環狀"
+                        "title": "圓環並非閉合環狀",
+                        "description": "{var1} 屬於圓環的一部分，但是並非封閉的路線。(靠近圓環分離的行車道不應該被標為圓環)。"
                     },
                     "312": {
-                        "title": "圓環行車方向錯誤"
+                        "title": "圓環行車方向錯誤",
+                        "description": "如果 {var1} 在一個有 {var2} 交通規則的國家內，看來交通方向錯了。"
                     },
                     "313": {
                         "title": "圓環有弱的連結",
                         "description": "{var1} 僅有連接 {var2} 條道路。圓環一般而言會與 3 條或以上的道路相連。"
                     },
                     "320": {
-                        "title": "不當的連絡道連接"
+                        "title": "不當的連絡道連接",
+                        "description": "{var1} 被標為 \"{var2}\"，但是並沒有連到其他 \"{var3}\" 或是\"{var4}\"。"
                     },
                     "350": {
-                        "title": "不當的橋樑標籤"
+                        "title": "不當的橋樑標籤",
+                        "description": "{var1} 並沒有像週遭的路徑那樣有共同的標籤，顯示橋樑的目標，應該有標籤： {var2}。"
                     },
                     "360": {
-                        "title": "缺少在地名稱標籤"
+                        "title": "缺少在地名稱標籤",
+                        "description": "{var1} 如果有在地名稱 \"name:XX={var2}\" 會更好，而 XX 顯示是在地名稱 \"{var2}\" 的語言。"
                     },
                     "370": {
                         "title": "重覆地標",
+                        "description": "{var1} 擁有與附近路徑  {var2} {var3} 相同的標籤，而且看來是多餘的。",
                         "including_the_name": "(含有名稱 {name})"
                     },
                     "380": {
-                        "title": "非運動使用的運動標籤"
+                        "title": "非運動使用的運動標籤",
+                        "description": "{var1} 被標為 \"{var2}\"，但沒有實體標籤 (例如 \"leisure\", \"building\", \"amenity\", 或是 \"highway\")。"
                     },
                     "390": {
                         "title": "缺失道路種類",
@@ -1077,7 +1093,8 @@
                         "description": "這個幾何形狀有未指明的問題。"
                     },
                     "401": {
-                        "title": "缺少轉彎限制"
+                        "title": "缺少轉彎限制",
+                        "description": "路徑 {var1} 和 {var2} 用很尖銳的角度連接，而且沒有 oneway 標籤或是轉彎限制防止轉彎。"
                     },
                     "402": {
                         "title": "不合理的角度",
@@ -1307,7 +1324,7 @@
                 "sources": "[Bing 地圖](https://www.bing.com/maps/)影像是預設的背景影像。視你在編輯的地方，還有其他的影像來源，有些影像比較新或有更高的解析度，所以請常常檢查有些可用，選擇那個圖層是最好用的繪製地圖參考來源。",
                 "offsets_h": "調整空拍圖層偏移",
                 "offset": "有時候影像會與既有地圖資料有些偏移狀況，如果你看到道路或是建築相比背景影像有偏移狀況，也許影像並沒有對準，請別移動全部的資料來吻合背景影像。你可以在背景影像設定，藉由\"調整影像偏移\"調整背景來將影像吻合既有的資料。",
-                "offset_change": "點小三角形微幅調整影像，或是按住左鍵在灰色區域拖動，來調整影像。"
+                "offset_change": "點小三角形微幅調整影像，或是按住 {leftclick} 左鍵在灰色區域拖動，來調整影像。"
             },
             "streetlevel": {
                 "title": "街景照片",
@@ -1962,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "動物"
+                },
+                "architect": {
+                    "label": "建築樣式"
                 },
                 "area/highway": {
                     "label": "種類"
@@ -3057,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "轉向限制"
+                },
+                "roof/colour": {
+                    "label": "屋頂顏色"
                 },
                 "rooms": {
                     "label": "房間數"
@@ -6158,6 +6181,10 @@
                     "name": "水",
                     "terms": "水體"
                 },
+                "natural/water/basin": {
+                    "name": "水池",
+                    "terms": "水池"
+                },
                 "natural/water/canal": {
                     "name": "運河",
                     "terms": "運河"
@@ -7094,6 +7121,10 @@
                 "shop/frame": {
                     "name": "表框店",
                     "terms": "表框店, 裱框店"
+                },
+                "shop/frozen_food": {
+                    "name": "冷凍食品",
+                    "terms": "冷凍食品"
                 },
                 "shop/fuel": {
                     "name": "燃料店",

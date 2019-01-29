@@ -3204,6 +3204,9 @@
                         "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
                     }
                 },
+                "salt": {
+                    "label": "Salt"
+                },
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
@@ -3495,6 +3498,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "tidal": {
+                    "label": "Tidal"
                 },
                 "to": {
                     "label": "To"
@@ -3997,6 +4003,10 @@
                 "amenity/clock": {
                     "name": "Clock",
                     "terms": ""
+                },
+                "amenity/clock/sundial": {
+                    "name": "Sundial",
+                    "terms": "gnomon,shadow"
                 },
                 "amenity/college": {
                     "name": "College Grounds",
@@ -6046,6 +6056,10 @@
                     "name": "Sports Center / Complex",
                     "terms": ""
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Climbing Gym",
+                    "terms": "abseiling,artificial climbing wall,belaying,bouldering,rock climbing facility,indoor rock wall,rappeling,rock gym,ropes"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Swimming Pool Facility",
                     "terms": "dive,water"
@@ -6206,9 +6220,17 @@
                     "name": "Tower",
                     "terms": ""
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Bell Tower",
+                    "terms": "belfry,bell gable,campanile,church tower,klockstapel"
+                },
                 "man_made/tower/communication": {
                     "name": "Communication Tower",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
+                },
+                "man_made/tower/minaret": {
+                    "name": "Minaret",
+                    "terms": "Islam,mosque,Muezzin,Muslim"
                 },
                 "man_made/tower/observation": {
                     "name": "Observation Tower",

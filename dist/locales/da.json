@@ -463,7 +463,7 @@
             },
             "measurement": {
                 "key": "M",
-                "title": "Målinger",
+                "title": "Opmåling",
                 "selected": "{n} markeret",
                 "geometry": "Geometri",
                 "closed_line": "lukket linje",
@@ -520,6 +520,9 @@
             "choose": "Vælg objekttype",
             "results": "{n} resultater for {search}",
             "reference": "Se på OpenStreetMap-Wiki",
+            "edit_reference": "Rediger eller oversæt beskrivelse",
+            "wiki_reference": "Vis dokumentation",
+            "wiki_en_reference": "Vis dokumentation på engelsk",
             "back_tooltip": "Ændr objekt",
             "remove": "Fjern",
             "search": "Søg",
@@ -809,6 +812,32 @@
                 "close_comment": "Luk og Kommentér",
                 "ignore_comment": "Ignorer og Kommentér",
                 "error_parts": {
+                    "this_node": "denne node",
+                    "this_way": "denne vej",
+                    "this_relation": "denne relation",
+                    "this_oneway": "denne ensrettede",
+                    "this_highway": "denne vej",
+                    "this_railway": "denne jernbane",
+                    "this_waterway": "denne vandvej",
+                    "this_cycleway": "denne cyklesti",
+                    "this_cycleway_footpath": "denne cykelsti/gangsti",
+                    "this_riverbank": "denne flodbred",
+                    "this_crossing": "dette kryds",
+                    "this_railway_crossing": "denne jernbaneoverskæring",
+                    "this_bridge": "denne bro",
+                    "this_tunnel": "denne tunnel",
+                    "this_boundary": "denne grænse",
+                    "this_turn_restriction": "denne svingbegrænsning",
+                    "this_roundabout": "denne rundkørsel",
+                    "this_mini_roundabout": "denne minirundkørsel",
+                    "this_track": "dette spor",
+                    "this_feature": "denne kortobjekt",
+                    "highway": "vej",
+                    "railway": "jernbane",
+                    "waterway": "vandvej",
+                    "cycleway": "cykelsti",
+                    "cycleway_footpath": "cykelsti/gangsti",
+                    "riverbank": "flodbred",
                     "place_of_worship": "tilbedelsessted",
                     "pub": "bodega",
                     "restaurant": "restaurant",
@@ -822,6 +851,7 @@
                     "cinema": "biograf",
                     "pharmacy": "apotek",
                     "cafe": "café",
+                    "fast_food": "fast food",
                     "fuel": "brændstof",
                     "from": "fra",
                     "to": "til",
@@ -1010,8 +1040,18 @@
                 "select_right_click": "{rightclick} Højreklik på et kortobjekt for at vise redigeringsmenuen, som viser de mulige værktøjer der kan anvendes, såsom rotation, flytning og sletning.",
                 "multiselect_h": "Multi-markering",
                 "multiselect_shift_click": "`{shift}`+{leftclick} venstreklik for at markere flere kortobjekter ad gangen. Dette gør det nemmere at flytte eller slette flere objekter i en operation.",
+                "multiselect_lasso": "En anden måde at vælge flere kortobjekter på er at holde `{shift}`-tasten nedtrykket, dernæst {leftclick} venstreklikke og holde mens musen trækkes på kortet for at tegne en markeringslasso. Alle punkter indenfor lassoens område vil blive markeret. ",
+                "undo_redo_h": "Fortyd & gendan",
+                "undo_redo": "Dine redigeringer lagres lokalt i din browser indtil du vælger at gemme dem til OpenStreetMap-serveren. Du kan fortryde ændringer ved at klikke på {undo} **Fortryd**-knappen og gendanne fortrudte ændringer ved at klikke på {redo} **Gendan**-knappen.",
                 "save_h": "Gem",
-                "upload": "Før du uploader dine ændringer, skal du skrive en [kommentar til ændringssættet](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Dernæst skal du klikke på **Upload** for at sende dine ændringer til OpenStreetMap, hvor de vil blive føjet til kortet og blive offentligt synlige for alle."
+                "save": "Klik {save} **Gem** for at afslutte dine redigeringer og sende dem til OpenStreetMap. Du bør huske at gemme dit arbejde regelmæssigt!",
+                "save_validation": "I gem-dialogen har du chancen for at få et overblik over de ændringer du har foretaget. iD vil også gennemføre nogle basale kontroller af om der mangler data, og kommer måske med nogle hjælpsomme forslag eller advarsler hvis noget virker forkert.",
+                "upload_h": "Upload",
+                "upload": "Før du uploader dine ændringer, skal du skrive en [kommentar til ændringssættet](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Dernæst skal du klikke på **Upload** for at sende dine ændringer til OpenStreetMap, hvor de vil blive føjet til kortet og blive offentligt synlige for alle.",
+                "backups_h": "Automatisk sikkerhedskopi",
+                "backups": "Når du ikke at afslutte redigeringerne, hvis f.eks. din computer går ned eller du kommer til at lukke browservinduet, er ændringerne stadig gemt i din browsers lager. Du kan vende tilbage senere (på den samme computer og med samme browser) og iD vil tilbyde at gendanne dit arbejde.",
+                "keyboard_h": "Tastaturgenveje",
+                "keyboard": "Du kan se en liste over tastaturgenveje ved at trykke på `?`-tasten."
             },
             "feature_editor": {
                 "title": "Redigeringsværktøj til kortobjekter",
@@ -1029,7 +1069,25 @@
                 "tags_resources": "Redigering af et kortobjekts tags kræver et vist kendskab til OpenStreetMap. Du bør studere ressourcer som [OpenStreetMap-wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for at lære mere om den gængse praksis for OpenStreetMap-tagging."
             },
             "points": {
-                "title": "Punkter"
+                "title": "Punkter",
+                "intro": "*Punkter* bruges til at repræsentere ting på kortet såsom forretninger, restauranter og monumenter. De er knyttet til et specifik sted og beskriver hvad der findes der. ",
+                "add_point_h": "Tilføjelse af punkter",
+                "add_point": "For at tilføje et punkt klikkes på {point} **Punkt**-knappen i værktøjslinjen over kortet, eller trykke på genvejstasten `1`. Dette ændrer musemarkøren til et korssymbol.",
+                "add_point_finish": "For at placere det nye punkt på kortet, flyt musemarkøren til der hvor punktet skal være og {leftclick} venstreklik eller tast `Mellemrum`",
+                "move_point_h": "Flytning af punkter",
+                "move_point": "For at flytte et punkt, placer musemarkøren over punktet, tryk og hold {leftclick} venstre musetast mens punktet trækkes til dets nye placering.",
+                "delete_point_h": "Sletning af punkter",
+                "delete_point": "Det er helt fint at slette kortobjekter som ikke eksisterer i virkeligheden. At slette noget fra OpenStreetMap fjerner det fra kortet som alle anvender, så du bør være helt sikker på at objektet virkeligt er væk før du sletter det.",
+                "delete_point_command": "For at slette et punkt, {rightclick} højreklik på punktet for at vælge det og vise redigeringsmenuen, og vælg så {delete} **Slet**-handlingen."
+            },
+            "lines": {
+                "title": "Linjer",
+                "intro": "*Linjer* anvendes til at repræsentere ting såsom veje, jernbaner og floder. Linjer bør tegnes langs centrum af det de repræsenterer.",
+                "add_line_h": "Tilføjelse af linjer",
+                "add_line": "For at tilføje en linje, klik {line} **Linje**-knappen i værktøjslinjen over kortet, eller tryk genvejstasten `2`. Dette ændrer musemarkøren til et korssymbol.",
+                "add_line_draw": "Flyt dernæst musemarkøren hen hvor linjen skal begynde og {leftclick} venstreklik eller tryk `Mellemrum` for at begynde at placere noder langs linjen. Fortsæt med at placere flere noder ved at klikke eller trykke `Mellemrum`. Imens du tegner kan du zoome ind eller ud, eller flytte kortudsnittet for at se mere af omgivelserne. ",
+                "add_line_finish": "For at afslutte en linje, tryk `{return}` eller klik igen på den sidste node. ",
+                "modify_line_h": "Ændring af linjer"
             },
             "areas": {
                 "intro": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder. Områder bør kortlægges langs kanten af det fysiske objekt de repræsenter, eksempelvis for en bygning langs dens fundament."
@@ -1044,8 +1102,7 @@
                 "choosing": "For at se hvilke kilder til luftfoto der er tilgængelige i området, skal du klikke på knappen {layers} **Baggrundsindstillinger** i kortets side.",
                 "sources": "Som standard vises et satellit-lag fra [Bing Maps](https://www.bing.com/maps/) som baggrundsbillede. Afhængigt af hvor i verden du redigerer, kan der være andre luftfoto-kilder tilgængelige. Nogle kan være af nyere dato eller have højere opløsning end Bing, så det er altid smart at se efter hvilket lag der er bedst at bruge til at redigere kortet ud fra.",
                 "offsets_h": "Justering af luftfoto-offset",
-                "offset": "Den registrerede position for et luftfoto er nogle gange ikke helt korrekt i forhold til kortet. Hvis du ser at bygninger og veje generelt er forskudt mellem kort og luftfoto, kan det være luftfotoet der er unøjagtigt, så i stedet for at flytte alle kortobjekter kan du justere baggrunden så den er samstemmende med kortets data ved at åbne \"Juster luftfoto-offset\" i bunden af Baggrundsindstillinger-fanen.",
-                "offset_change": "Klik på de små trekanter for at justere offset i små intervaller, eller hold venstre musetast nede og træk indenfor den grå firkant for at trække luftfotoet på plads."
+                "offset": "Den registrerede position for et luftfoto er nogle gange ikke helt korrekt i forhold til kortet. Hvis du ser at bygninger og veje generelt er forskudt mellem kort og luftfoto, kan det være luftfotoet der er unøjagtigt, så i stedet for at flytte alle kortobjekter kan du justere baggrunden så den er samstemmende med kortets data ved at åbne \"Juster luftfoto-offset\" i bunden af Baggrundsindstillinger-fanen."
             },
             "field": {
                 "restrictions": {
@@ -1380,7 +1437,7 @@
                 },
                 "display_options": {
                     "title": "Visnings-muligheder",
-                    "background": "Åbn baggrunds-indstilliner",
+                    "background": "Åbn baggrundsindstillinger",
                     "background_switch": "Skift til forrige anvendte baggrund",
                     "map_data": "Vis kortdata-indstillinger",
                     "fullscreen": "Aktiver fuldskærms-tilstand",
@@ -1397,15 +1454,16 @@
                 },
                 "with_selected": {
                     "title": "Ved markeret kortobjekt",
-                    "edit_menu": "Åbn/luk redigeringsmenu"
+                    "edit_menu": "Åbn/luk redigeringsmenu",
+                    "zoom_to": "Zoom til valgte kortobjekt"
                 },
                 "vertex_selected": {
                     "title": "Ved markeret node",
-                    "previous": "Spring til forrige node",
-                    "next": "Spring til næste node",
-                    "first": "Spring til første node",
-                    "last": "Spring til sidste node",
-                    "change_parent": "Skift overordnede vej"
+                    "previous": "Spring til forrige node i vej",
+                    "next": "Spring til næste node i vej",
+                    "first": "Spring til første node i vej",
+                    "last": "Spring til sidste node i vej",
+                    "change_parent": "Skift til anden forbunden vej"
                 }
             },
             "editing": {
@@ -1452,8 +1510,8 @@
                     "all": "Åbn/luk alle informationspaneler",
                     "background": "Åbn/luk baggrundspanel",
                     "history": "Åbn/luk historikpanel",
-                    "location": "Åbn/luk baggrundspanel",
-                    "measurement": "Åbn/luk målingspanel"
+                    "location": "Åbn/luk lokationspanel",
+                    "measurement": "Åbn/luk opmålingspanel"
                 }
             }
         },

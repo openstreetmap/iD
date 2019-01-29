@@ -1512,6 +1512,9 @@ en:
           mountain_hiking: 'T2: Mountain Hiking'
         # sac_scale field placeholder
         placeholder: 'Mountain Hiking, Alpine Hiking...'
+      salt:
+        # salt=*
+        label: Salt
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
@@ -1871,6 +1874,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      tidal:
+        # tidal=*
+        label: Tidal
       to:
         # to=*
         label: To
@@ -2374,6 +2380,11 @@ en:
         # amenity=clock
         name: Clock
         terms: '<translate with synonyms or related terms for ''Clock'', separated by commas>'
+      amenity/clock/sundial:
+        # 'amenity=clock, display=sundial'
+        name: Sundial
+        # 'terms: gnomon,shadow'
+        terms: '<translate with synonyms or related terms for ''Sundial'', separated by commas>'
       amenity/college:
         # amenity=college
         name: College Grounds
@@ -4745,6 +4756,11 @@ en:
         # leisure=sports_centre
         name: Sports Center / Complex
         terms: '<translate with synonyms or related terms for ''Sports Center / Complex'', separated by commas>'
+      leisure/sports_centre/climbing:
+        # 'leisure=sports_centre, sport=climbing'
+        name: Climbing Gym
+        # 'terms: abseiling,artificial climbing wall,belaying,bouldering,rock climbing facility,indoor rock wall,rappeling,rock gym,ropes'
+        terms: '<translate with synonyms or related terms for ''Climbing Gym'', separated by commas>'
       leisure/sports_centre/swimming:
         # 'leisure=sports_centre, sport=swimming'
         name: Swimming Pool Facility
@@ -4930,11 +4946,21 @@ en:
         # man_made=tower
         name: Tower
         terms: '<translate with synonyms or related terms for ''Tower'', separated by commas>'
+      man_made/tower/bell_tower:
+        # 'man_made=tower, tower:type=bell_tower'
+        name: Bell Tower
+        # 'terms: belfry,bell gable,campanile,church tower,klockstapel'
+        terms: '<translate with synonyms or related terms for ''Bell Tower'', separated by commas>'
       man_made/tower/communication:
         # 'man_made=tower, tower:type=communication'
         name: Communication Tower
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/minaret:
+        # 'man_made=tower, tower:type=minaret'
+        name: Minaret
+        # 'terms: Islam,mosque,Muezzin,Muslim'
+        terms: '<translate with synonyms or related terms for ''Minaret'', separated by commas>'
       man_made/tower/observation:
         # 'man_made=tower, tower:type=observation'
         name: Observation Tower

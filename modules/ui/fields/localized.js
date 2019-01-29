@@ -145,6 +145,7 @@ export function uiFieldLocalized(field, context) {
                 // Show the suggestions.. If the user picks one, change the tags..
                 if (allSuggestions.length && goodSuggestions.length) {
                     input
+                        .on('blur.localized', checkBrandOnBlur)
                         .call(brandCombo
                             .fetcher(fetchBrandNames(preset, allSuggestions))
                             .on('accept', acceptBrand)
@@ -198,6 +199,27 @@ export function uiFieldLocalized(field, context) {
             .attr('readonly', _isLocked || null);
 
 
+        // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
+        // (This can happen if the user actives the combo, arrows down, and then clicks off to blur)
+        // So compare the current field value against the suggestions one last time.
+        function checkBrandOnBlur() {
+            var latest = context.hasEntity(_entity.id);
+            if (!latest) return;   // deleting the entity blurred the field?
+
+            var preset = context.presets().match(latest, context.graph());
+            if (preset && preset.suggestion) return;   // already accepted
+
+            // note: here we are testing against "decorated" names, i.e. 'Starbucks – Cafe'
+            var name = utilGetSetValue(input).trim();
+            var matched = allSuggestions.filter(function(s) { return name === s.name(); });
+
+            if (matched.length === 1) {
+                acceptBrand({ suggestion: matched[0] });
+            } else {
+                cancelBrand();
+            }
+        }
+
 
         function acceptBrand(d) {
             if (!d) {
@@ -218,17 +240,25 @@ export function uiFieldLocalized(field, context) {
         }
 
 
+        // user hit escape, clean whatever preset name appears after the last ' – '
         function cancelBrand() {
-            // user hit escape, remove whatever is after the last ' – '
-            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
             var name = utilGetSetValue(input);
+            var clean = cleanName(name);
+            if (clean !== name) {
+                utilGetSetValue(input, clean);
+                dispatch.call('change', this, { name: clean });
+            }
+        }
+
+        // Remove whatever is after the last ' – '
+        // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+        function cleanName(name) {
             var parts = name.split(' – ');
             if (parts.length > 1) {
                 parts.pop();
                 name = parts.join(' – ');
-                utilGetSetValue(input, name);
-                dispatch.call('change', this, { name: name });
             }
+            return name;
         }
 
 

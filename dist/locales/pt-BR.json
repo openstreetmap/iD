@@ -1189,7 +1189,7 @@
                 "navigation_zoom": "Você pode aproximar ou afastar o zoom rolando a roda do mouse ou touchpad, ou clicando nos botões {plus} / {minus} na lateral do mapa. Você também pode usar as teclas `+` e `-` no seu teclado.",
                 "features_h": "Elementos do Mapa",
                 "features": "Usamos o termo *elementos* para descrever as coisas que aparecem no mapa, como ruas, prédios, ou pontos de interesse. Qualquer coisa na vida real pode ser mapeado como um elemento no OpenStreetMap. Elementos são representados no mapa usando *pontos*, *linhas*, ou *áreas*.",
-                "nodes_ways": "No OpenStreetmap, pontos às vezes são chamados de *nós*, e linhas e áreas às vezes são chamadas de *caminhos*."
+                "nodes_ways": "No OpenStreetMap, pontos são às vezes chamados de *nós* e linhas e áreas são às vezes chamadas de *caminhos*."
             },
             "editing": {
                 "title": "Editando e Salvando",
@@ -1324,7 +1324,7 @@
                 "sources": "Por padão, a camada satélite do [Bing Maps](https://www.bing.com/maps/) é escolhida como imagem de fundo. Dependendo de onde está a editar, poderá haver disponibilidade de outras fontes de imagens. Algumas poderão ser mais recentes ou possuírem maior resolução, pelo que é sempre pertinente verificar qual a melhor camada para utilizar como referência para o mapeamento.",
                 "offsets_h": "Ajustando o Deslocamento das Imagens de Fundo",
                 "offset": "Às vezes, as imagens são ligeiramente compensadas pelos dados precisos do mapa. Se você vir muitas estradas ou edifícios deslocados das imagens de plano de fundo, pode ser que as imagens estejam incorretas, por isso não mova todas elas para corresponder ao plano de fundo. Em vez disso, você pode ajustar o plano de fundo para que ele corresponda aos dados existentes, expandindo a seção \"Ajustar contorno da imagem\" na parte inferior do painel Configurações do plano de fundo.",
-                "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento de imagens em pequenos passos, ou segure o botão esquerdo do mouse e arraste no quadrado cinzento para deslizar a imagem para o alinhamento."
+                "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento de imagens em pequenos passos, ou segure o {leftclick} botão esquerdo do mouse e arraste no quadrado cinzento para deslizar a imagem para o alinhamento."
             },
             "streetlevel": {
                 "title": "Fotos de Rua",
@@ -2121,7 +2121,7 @@
                     "label": "Cor"
                 },
                 "comment": {
-                    "label": "Comentário do Changeset",
+                    "label": "Comentário do conjunto de alterações",
                     "placeholder": "Breve descrição das suas contribuições (obrigatório)"
                 },
                 "communication_multi": {
@@ -7110,6 +7110,10 @@
                     "name": "Loja de Molduras",
                     "terms": "loja de molduras"
                 },
+                "shop/frozen_food": {
+                    "name": "Alimento congelado",
+                    "terms": "Alimento congelado"
+                },
                 "shop/fuel": {
                     "name": "Loja de Combustível",
                     "terms": "Loja de Combustível"
@@ -8330,7 +8334,12 @@
                 "description": "Tudo o que precisa de saber sobre a cartografia na Índia: {url}"
             },
             "osm-india-youtube": {
-                "name": "Youtube do OpenStreetMap Índia"
+                "name": "Youtube do OpenStreetMap Índia",
+                "description": "Subscreva o nosso canal: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Movimento de Hardware de Software Livre - Facebook",
+                "description": "Página do Facebook da FSHM para saber sobre eventos da comunidade e as atividades"
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "Movimento de Hardware de Software Livre - Matrix"
@@ -8884,6 +8893,10 @@
                     }
                 }
             },
+            "OSM-Discord": {
+                "name": "OpenStreetMap no Discord",
+                "description": "Entre em contato com outros mapeadores via Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap no Facebook",
                 "description": "Curta-nos no Facebook para novidades e atualizações sobre o OpenStreetMap."
@@ -8892,6 +8905,10 @@
                 "name": "Ajuda OpenStreetMap",
                 "description": "Faça uma pergunta e obtenha respostas no site de respostas OSM mantido pela comunidade.",
                 "extendedDescription": "{url} é para todos que precisem de ajuda com o OpenStreetMap.  Se você for iniciante ou tem uma questão técnica, estamos aqui para ajudar!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "Junte-se à #osm no irc.oftc.net (porta 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap no Reddit",

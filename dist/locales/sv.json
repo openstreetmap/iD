@@ -1324,7 +1324,7 @@
                 "sources": "Som standard är satellitelagret [Bing Maps](https://www.bing.com/maps/) valt som bakgrundsbild. Beroende på var du redigerar, finns andra bildkällor tillgängliga. Vissa kan vara nyare eller har bättre upplösning, så det är alltid klokt att kontrollera vilket lager som är bäst som referens vid kartering.",
                 "offsets_h": "Justera bildplacering",
                 "offset": "Bilder är ibland förskjutna lite i förhållande till korrekt kartdata. Om du ser att många vägar eller byggnader är förskjutna i förhållande till bakgrundsbilden kan det vara bakgrundsbilden som är felaktig, så flytta dem inte bara för att matcha bakgrunden. Justera istället bakgrunden så att den matchar med existerande data genom att expandera sektionen \"Justera bildplacering\" längst ned i panelen Bakgrundsinställningar.",
-                "offset_change": "Klicka på de små trianglarna för att justera bildplaceringen i små steg, eller håll ned vänster musknapp och dra i den grå rutan för att dra bilden till korrekt placering."
+                "offset_change": "Klicka på de små trianglarna för att justera bildplaceringen i små steg, eller håll ned {leftclick} vänster musknapp och dra i den grå rutan för att flytta bilden till korrekt position."
             },
             "streetlevel": {
                 "title": "Gatubilder",
@@ -1979,6 +1979,9 @@
                 },
                 "animal_shelter": {
                     "label": "För djur"
+                },
+                "architect": {
+                    "label": "Arkitekt"
                 },
                 "area/highway": {
                     "label": "Typ"
@@ -3074,6 +3077,9 @@
                 },
                 "restrictions": {
                     "label": "Svängrestriktioner "
+                },
+                "roof/colour": {
+                    "label": "Takfärg"
                 },
                 "rooms": {
                     "label": "Rum"
@@ -7093,6 +7099,10 @@
                 "shop/frame": {
                     "name": "Ramaffär",
                     "terms": "Ramaffär, ramar, inramning"
+                },
+                "shop/frozen_food": {
+                    "name": "Fryst mat",
+                    "terms": "Fryst mat, frysmat,  snabbmat, matlådor, fryst, frys, färdigmat, färdigrätt, färdigrätter, mat, lunch"
                 },
                 "shop/fuel": {
                     "name": "Bränsleaffär",

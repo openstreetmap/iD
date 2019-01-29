@@ -749,8 +749,7 @@
                 "navigation_drag": "Haritayı farenin sol tuşuna {leftclick} basılı tutarak ve fareyi etrafında hareket ettirerek çekebiliriniz.  Ayrıca  klavyenizdeki `↓`, `↑`, `←`, `→` yön tuşlarını kullanabilirsiniz.",
                 "navigation_zoom": "Farenin tekeri veya trackpad aracılığıyla ya da haritanın kenarındaki {plus} / {minus} tuşlarına basarak yakınlaştırma ya da uzaklaştırma yapabilirsiniz. Ayrıca klavyenizdeki `+`, `-` tuşlarını kullanabilirsiniz.",
                 "features_h": "Harita Nesneleri",
-                "features": "Biz \"nesneler\" kelimesini haritada görünen yol, bina veya görülecek yerler gibi şeyler için kullanıyoruz. Gerçek dünyadaki her şey OpenStreetMap'te bir nesne olarak haritalanabilir. Harita nesneleri haritada *points*, *lines*, veya *areas* kullanılarak temsil edilir.",
-                "nodes_ways": "OpenStreetmap'te noktalar bazen *nodes* olarak, çizgi ve alanlar ise bazen  *ways* olarak kullanılır."
+                "features": "Biz \"nesneler\" kelimesini haritada görünen yol, bina veya görülecek yerler gibi şeyler için kullanıyoruz. Gerçek dünyadaki her şey OpenStreetMap'te bir nesne olarak haritalanabilir. Harita nesneleri haritada *points*, *lines*, veya *areas* kullanılarak temsil edilir."
             },
             "editing": {
                 "title": "Düzenleme ve Kaydetme",
@@ -5986,6 +5985,9 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "description": "Botswana'daki OpenStreetMap Sayfası"
+            },
             "cape-coast-youthmappers": {
                 "name": "Cape Coast Üniversitesi YouthMappers",
                 "description": "Bizi Twitter'dan takip edin: {url}",
@@ -5993,7 +5995,8 @@
             },
             "osm-gh-facebook": {
                 "name": "OpenStreetMap Gana Facebook'ta",
-                "description": "OpenStreetMap ile ilgilenen kişilerin Faceboo grubu."
+                "description": "OpenStreetMap ile ilgilenen kişilerin Faceboo grubu.",
+                "extendedDescription": "Gana topluluğundaki haritacılar, Gana'daki OpenStreetMap ve Humanitarian OpenStreetMap Team (HOT) projelerini tanıtıyor. Bize katılın."
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Gana Twitter'da",
@@ -6023,17 +6026,42 @@
                 "events": {
                     "sotmasia2018": {
                         "name": "Asya 2018 Haritanın Durumu ",
+                        "description": "Hindistan’daki Harita Asya 2018 OpenStreetMap bölge çapında etkinliğe katılın",
                         "where": "Hint Enstitüsü Yönetimi, Bangalore, Hindistan"
                     }
                 }
+            },
+            "osm-india-forum": {
+                "name": "OpenStreetMap Hindistan forumu",
+                "description": "OpenStreetMap Hindistan internet forumu"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap Hindistan GitHub",
+                "description": "Bizimle birlikte kodlayın: {url}"
             },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap Hindistan Posta Listesi",
                 "description": "Konuşma, Hindistan Topluluğu için resmi Posta Listesi"
             },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap Hindistan Telegram",
+                "description": "Ailemize katılın: {url}"
+            },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap Hindistan Twitter'ı",
                 "description": "Sadece bir tweet uzağındayız: {url}"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap Hindistan",
+                "description": "Hindistan'daki Haritacılar ve OpenStreetMap kullanıcıları"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject Hindistan",
+                "description": "Hindistan'da haritalama hakkında bilmeniz gereken her şey: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap Hindistan Youtube",
+                "description": "Kanalımıza abone olun: {url}"
             },
             "OSM-India-Puducherry-Facebook": {
                 "description": "Topluluk etkinlikleri, aktiviteleri hakkında bilgi edinmek için FSHM Facebook sayfası",
@@ -6047,6 +6075,9 @@
                 "name": "OpenStreetMap Endonezya",
                 "description": "Endonezya'da OpenStreetMap'ı geliştirin",
                 "extendedDescription": "Endonezya'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!"
+            },
+            "osm-iran-aparat": {
+                "description": "{url} adresinden kanalımıza abone olun"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japonya Topluluğu",

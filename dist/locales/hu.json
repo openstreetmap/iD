@@ -1181,7 +1181,7 @@
                 "navigation_zoom": "Nagyítani vagy kicsinyíteni az egér kerekével vagy a tapipaddal görgetve lehet, vagy a térkép szélén található {plus} / {minus} gombra kattintva. A billentyűzeten található `+`, `-` gombokat is használhatod.",
                 "features_h": "Térképszolgáltatások",
                 "features": "A térképen megjelenő dolgokat, úgy mint utak, épületek vagy érdekes helyek, *elemeknek* (features) hívjuk. A való világból bármi felrajzolható az OpenStreetMapre elemként. A térképelemek *pontokként*, *vonalakként* vagy *területekként* jelennek meg.",
-                "nodes_ways": "Az OpenStreetMapben a pontokat angolul *node*-nak („csomópont”), a vonalakat *way*-nek („út”) mondjuk."
+                "nodes_ways": "Az OpenStreetMapben a pontokat *csomópontnak* (node), a vonalakat és területeket pedig *útnak* (way) is szoktuk hívni."
             },
             "editing": {
                 "title": "Szerkesztés és mentés",

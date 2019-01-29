@@ -635,8 +635,7 @@
             },
             "overview": {
                 "navigation_h": "Navigim",
-                "features_h": "Karakteristikat e Hartës",
-                "nodes_ways": "Në OpenStreetMap, pikat ndonjëherë quhen \"nyje\", dhe vijat quhen \"rrugë'."
+                "features_h": "Karakteristikat e Hartës"
             },
             "editing": {
                 "select_h": "Përzgjidhni",

@@ -96,8 +96,9 @@ export function uiCombobox(context, klass) {
             var end = input.property('selectionEnd');
             if (start !== end) return;  // exit if user is selecting
 
+            // not showing or showing for a different field - try to show it.
             var combo = container.selectAll('.combobox');
-            if (combo.empty()) {   // not showing - try to show it.
+            if (combo.empty() || combo.datum() !== input) {
                 var tOrig = _tDown;
                 window.setTimeout(function() {
                     if (tOrig !== _tDown) return;   // exit if user double clicked

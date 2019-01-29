@@ -708,8 +708,7 @@
                 "navigation_drag": "Raha hanakisaka ny sarintany dia tsindrio maharitra ny {leftclick} bokotra havian'ny souris ary akisaho ny souris. Azonao ampiasaina ihany koa ireo bokotra `↓`, `↑`, `←`, `→` an'ny clavier.",
                 "navigation_zoom": "Raha hijery manakaiky na manalavitra dia ampiasao ny bokotra mihodina amin'ny souris na ny trackpad, na ampiasao ireo bokotra {plus} / {minus} etsy amin'ny sarintany. Azonao ampiasaina koa ireo bokotra `+`, `-` eo amin'ny clavier anao.",
                 "features_h": "Singa ao amin'ny Sarintany",
-                "features": "Ampiasaintsika ny teny hoe *singa* mba hilazana ireo zavatra izay miseho eo amin'ny sarintany, toy ny làlana, trano na toerana. Azo ampidirina ho singa ao amin'ny OpenStreetMap avokoa izay zavatra misy rehetra amin'ny tontolo tena izy. Ireo singa ao amin'ny sarintany dia aseho amin'ny alalan'ny *teboka*, *tsipika*, na *faritra*.",
-                "nodes_ways": "Ao amin'ny OpenStreetMap, ny teboka indraindray dia antsoina koa hoe *vona*, ary ny tsipika sy sy ny faritra dia antsoina indraindray hoe *soritra*."
+                "features": "Ampiasaintsika ny teny hoe *singa* mba hilazana ireo zavatra izay miseho eo amin'ny sarintany, toy ny làlana, trano na toerana. Azo ampidirina ho singa ao amin'ny OpenStreetMap avokoa izay zavatra misy rehetra amin'ny tontolo tena izy. Ireo singa ao amin'ny sarintany dia aseho amin'ny alalan'ny *teboka*, *tsipika*, na *faritra*."
             },
             "editing": {
                 "title": "Manova & Mitahiry",

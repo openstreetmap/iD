@@ -762,8 +762,7 @@
                 "navigation_h": "Navegació",
                 "navigation_zoom": "Us podeu acostar o allunyar movent la rodeta del ratolí o del ratolí tàctil o clicant els botons {plus} / {minus} al llarg del costat del mapa. També podeu fer servir les tecles  `+`, `-`  del teclat.",
                 "features_h": "Característiques del mapa",
-                "features": "Utilitzem la paraula *objectes* per descriure les coses que es mostren al mapa, com vies, edificis o punts d'interès. Qualsevol cosa del món real es pot representar al mapa com un objecte a OpenStreetmap. Els objectes del mapa s´hi representen utilitzant *punts*, *línies*, o *àrees*.",
-                "nodes_ways": "A l'OpenStreetMap, els punts de vegades s'anomenen *nodes*, i les línies i àrees de vegades s'anomenen *vies*."
+                "features": "Utilitzem la paraula *objectes* per descriure les coses que es mostren al mapa, com vies, edificis o punts d'interès. Qualsevol cosa del món real es pot representar al mapa com un objecte a OpenStreetmap. Els objectes del mapa s´hi representen utilitzant *punts*, *línies*, o *àrees*."
             },
             "editing": {
                 "title": "Editant i Salvant",
@@ -1157,6 +1156,7 @@
                     "label": "Accés permès",
                     "options": {
                         "designated": {
+                            "description": "Accés garantit seguint les normes de les senyals o les normes locals específiques.",
                             "title": "Específic"
                         },
                         "destination": {
@@ -1164,6 +1164,7 @@
                             "title": "Destinació"
                         },
                         "dismount": {
+                            "description": "Accés garantit però el genet ha de desmuntar",
                             "title": "Baixar del mitjà de transport"
                         },
                         "no": {
@@ -1173,6 +1174,9 @@
                         "permissive": {
                             "description": "Accés permès provisionalment fins que el propietari el prohibeixi.",
                             "title": "Permissiu"
+                        },
+                        "permit": {
+                            "description": "Accés garantit exclusivament amb una autorització o llicència vàlides"
                         },
                         "private": {
                             "title": "Privat"
@@ -1288,6 +1292,9 @@
                 "animal_shelter": {
                     "label": "Per a animals"
                 },
+                "architect": {
+                    "label": "Arquitecte"
+                },
                 "area/highway": {
                     "label": "Tipus"
                 },
@@ -1300,10 +1307,16 @@
                 "atm": {
                     "label": "Caixer automàtic"
                 },
+                "attraction": {
+                    "label": "Tipus"
+                },
                 "backrest": {
                     "label": "Banc públic"
                 },
                 "barrier": {
+                    "label": "Tipus"
+                },
+                "basin": {
                     "label": "Tipus"
                 },
                 "bath/open_air": {
@@ -1354,8 +1367,14 @@
                     "label": "Tipus",
                     "placeholder": "Predeterminat"
                 },
+                "bridge/support": {
+                    "label": "Tipus"
+                },
                 "building": {
                     "label": "Edifici"
+                },
+                "building/material": {
+                    "label": "Material"
                 },
                 "building_area": {
                     "label": "Edifici"

@@ -6,6 +6,7 @@
             "remove": "usuń",
             "undo": "Cofnij",
             "zoom_to": "powiększ do",
+            "copy": "kopiuj",
             "open_wikidata": "otwórz w wikidata.org"
         },
         "modes": {
@@ -497,7 +498,12 @@
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z"
+                "key": "Z",
+                "title": "Przybliż do tego",
+                "tooltip_feature": "Wyśrodkuj i przybliż mapę na ten obiekt.",
+                "tooltip_note": "Wyśrodkuj i przybliż mapę na ten węzeł",
+                "tooltip_data": "Wyśrodkuj i przybliż mapę na ten obiekt.",
+                "tooltip_issue": "Wyśrodkuj i przybliż mapę na ten problem"
             },
             "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji znaczników",
             "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
@@ -514,6 +520,9 @@
             "choose": "Wybierz rodzaj obiektu",
             "results": "{n} wyników dla {search}",
             "reference": "Wyświetl na Wiki OpenStreetMap",
+            "edit_reference": "Edytuj lub tłumacz opis",
+            "wiki_reference": "Przegląd dokumentacji",
+            "wiki_en_reference": "Przegląd dokumentacji w języku angielskim",
             "back_tooltip": "Zmień rodzaj obiektu",
             "remove": "Usuń",
             "search": "Szukaj",
@@ -583,6 +592,10 @@
                 "notes": {
                     "tooltip": "Uwagi z OpenStreetMap",
                     "title": "Uwagi OpenStreetMap"
+                },
+                "keepRight": {
+                    "tooltip": "Problemy na mapie automatycznie znalezione przez keepright.at",
+                    "title": "Problemy KeepRight"
                 },
                 "custom": {
                     "tooltip": "Przeciągnij i upuść plik danych na stronę lub kliknij przycisk, aby ustawić",
@@ -764,7 +777,8 @@
         "validations": {
             "disconnected_highway": "Droga odłączona od siatki innych dróg",
             "disconnected_highway_tooltip": "Drogi powinny być połączone z innymi drogami lub wejściami do budynków. ",
-            "generic_name": "Możliwie nazwa ogólne",
+            "generic_name": "Prawdopodobieństwo nadania zbyt ogólnej nazwy",
+            "generic_name_tooltip": "Zdaje się, że ten obiekt ma zbyt ogólną nazwę: \"{name}\". Proszę zmień nazwę tego obiektu na oficjalną nazwę.",
             "old_multipolygon": "Znaczniki multipoligonu na linii zewnętrznej",
             "old_multipolygon_tooltip": "Ten sposób oznaczania multipoligonu jest przestarzały. Znaczniki powinny być zapisane w relacji, a nie na zewnętrznej linii.",
             "untagged_point": "Pusty punkt - brak znaczników",
@@ -787,14 +801,106 @@
         "full_screen": "Tryb pełnoekranowy",
         "QA": {
             "keepRight": {
+                "title": "Błąd KeepRight",
                 "detail_title": "Błąd",
                 "detail_description": "Opis",
                 "comment": "Komentarz",
+                "comment_placeholder": "Wprowadź komentarz aby podzielić się z innymi użytkownikami",
                 "close": "Zamknij (Błąd został naprawiony)",
                 "ignore": "Ignoruj (To nie jest błąd)",
                 "save_comment": "Zachowaj komentarz",
                 "close_comment": "Rozwiąż i zostaw komentarz",
-                "ignore_comment": "Ignoruj i zostaw komentarz"
+                "ignore_comment": "Ignoruj i zostaw komentarz",
+                "error_parts": {
+                    "this_node": "ten węzeł",
+                    "this_way": "ta ścieżka",
+                    "this_relation": "ta relacja",
+                    "this_oneway": "ta droga jednokierunkowa",
+                    "this_highway": "ta droga",
+                    "this_railway": "ta trakcja kolejowa",
+                    "this_waterway": "ten szlak wodny",
+                    "this_cycleway": "ta droga rowerowa",
+                    "this_cycleway_footpath": "ta droga rowerowa/ścieżka",
+                    "this_riverbank": "ten brzeg rzeki",
+                    "this_crossing": "te przejście",
+                    "this_railway_crossing": "te przejście kolejowe",
+                    "this_bridge": "ten most",
+                    "this_tunnel": "ten tunel",
+                    "this_boundary": "ta granica",
+                    "this_turn_restriction": "ten zakaz zawracania",
+                    "this_roundabout": "te rondo",
+                    "this_track": "ta ścieżka",
+                    "highway": "droga",
+                    "railway": "kolej",
+                    "waterway": "szlak wodny",
+                    "cycleway": "droga rowerowa",
+                    "cycleway_footpath": "droga rowerowa/droga dla pieszych",
+                    "riverbank": "brzeg rzeki",
+                    "place_of_worship": "miejsce kultu",
+                    "pub": "pub",
+                    "restaurant": "restauracja",
+                    "school": "szkoła",
+                    "university": "uniwersytet",
+                    "hospital": "szpital",
+                    "library": "biblioteka",
+                    "theatre": "teatr",
+                    "courthouse": "sąd",
+                    "bank": "bank",
+                    "cinema": "kino",
+                    "pharmacy": "apteka",
+                    "cafe": "kawiarnia",
+                    "fast_food": "fast food",
+                    "fuel": "stacja paliw",
+                    "from": "z",
+                    "to": "do",
+                    "left_hand": "lewo ręczny",
+                    "right_hand": "prawo ręczny"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "Wiele węzłów w tym samym miejscu"
+                    },
+                    "30": {
+                        "title": "Nie zamknięty obszar",
+                        "description": "{var1} oznaczony tagiem \"{var2}\" powinien być zamkniętą pętlą"
+                    },
+                    "50": {
+                        "title": "Blisko położone węzły",
+                        "description": "{var1} jest bardzo blisko ścieżki {var2}, ale nie jest połączony"
+                    },
+                    "60": {
+                        "title": "Przestarzały tag"
+                    },
+                    "70": {
+                        "title": "Brakujący tag"
+                    },
+                    "71": {
+                        "description": "{var1} nie posiada tagu"
+                    },
+                    "170": {
+                        "title": "obiekty oznaczone FIXME",
+                        "description": "{var1} posiada tag FIXME: {var2}"
+                    },
+                    "190": {
+                        "description": "{var1} przecina się z {var2} {var3}, ale brakuje węzła, mostu lub tunelu."
+                    },
+                    "360": {
+                        "description": "Byłoby miło jeśli {var1} posiadał lokalną nazwę w różnych językach. W tym celu utwórz tag \"name:XX=YYY\", gdzie XX to skrót języka np. \"en\" lub \"de\", a YYY to nazwa w danym języku"
+                    },
+                    "400": {
+                        "title": "Problem z geometrią"
+                    },
+                    "401": {
+                        "description": "Drogi {var1} i {var2} łączą się pod bardzo ostrym kątem, ale brakuje tutaj oznaczenia drogi jednokierunkowej lub zakazu zawracania"
+                    },
+                    "402": {
+                        "title": "Kąt niemożliwy do uzyskania",
+                        "description": "{var1} zakręca pod bardzo ostrym kątem tutaj."
+                    },
+                    "410": {
+                        "title": "Problem z stroną www"
+                    }
+                }
             }
         },
         "streetside": {
@@ -869,8 +975,7 @@
                 "navigation_drag": "Możesz przeciągnąć mapę, naciskając i przytrzymując {leftclick} lewym przyciskiem myszy i poruszając myszą. Możesz także użyć klawiszy strzałek `↓ ',` ↑ `,` ← `,` → `na klawiaturze.",
                 "navigation_zoom": "Możesz powiększać i pomniejszać obraz, przewijając kółkiem myszy lub trackpadem, albo klikając przyciski {plus} / {minus} wzdłuż boku mapy. Możesz także użyć klawiszy `+`, `-` na klawiaturze.",
                 "features_h": "Właściwości mapy",
-                "features": "Używamy określenia *obiekty*, aby opisać rzeczy pojawiające się na mapie, jak drogi, budynki, użyteczne miejsca. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w postaci obiektu w OpenStreetMap. Obiekty te są prezentowane na mapie za pomocą *punktów*, *linii* i *obszarów*.",
-                "nodes_ways": "W OpenStreetmap punkty są czasami nazywane * węzłami *, a linie i obszary są czasami nazywane * drogami *."
+                "features": "Używamy określenia *obiekty*, aby opisać rzeczy pojawiające się na mapie, jak drogi, budynki, użyteczne miejsca. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w postaci obiektu w OpenStreetMap. Obiekty te są prezentowane na mapie za pomocą *punktów*, *linii* i *obszarów*."
             },
             "editing": {
                 "title": "Edytowanie i zapisywanie",
@@ -1004,8 +1109,7 @@
                 "choosing": "Aby zobaczyć, jakie warstwy tła są dostępne do użycia, kliknij przycisk {layers} **Ustawienia tła** z boku mapy.",
                 "sources": "Domyślnie, jako tło wybrana jest warstwa satelitarna [Map Bing](https://www.bing.com/maps/). W zależności od miejsca, które edytujesz, mogą być dostępne inne warstawy tła. Niektóre mogą być nowsze lub o wyższej rozdzielczości, więc warto zawsze sprawdzić, która warstwa najlepiej nadaje się do mapowania.",
                 "offsets_h": "Dopasowywanie przesunięcia warstwy tła",
-                "offset": "Warstwa tła może być czasami delikatnie przesunięta względem mapy. Jeżeli zobaczysz, że wiele dróg lub budynków jest przesuniętych w stosunku do zdjęcia, problemem może być samo zdjęcie,  więc nie dopasowuj do niego wszystkich danych. Zamiast tego możesz wyregulować położenie tła, aby pasowało do istniejących danych mapy. Aby to zrobić, rozwiń sekcję \"Dopasuj przesunięcie warstwy tła\" u dołu panelu ustawień tła.",
-                "offset_change": "Klikaj na trójkącikach, aby wyrównać przesunięcie podkładu w małych krokach lub przytrzymaj lewy przycisk myszy i przesuwaj tło w obrębie szarego kwadratu aż do jego dopasowania."
+                "offset": "Warstwa tła może być czasami delikatnie przesunięta względem mapy. Jeżeli zobaczysz, że wiele dróg lub budynków jest przesuniętych w stosunku do zdjęcia, problemem może być samo zdjęcie,  więc nie dopasowuj do niego wszystkich danych. Zamiast tego możesz wyregulować położenie tła, aby pasowało do istniejących danych mapy. Aby to zrobić, rozwiń sekcję \"Dopasuj przesunięcie warstwy tła\" u dołu panelu ustawień tła."
             },
             "streetlevel": {
                 "title": "Zdjęcia uliczne",
@@ -1023,6 +1127,10 @@
                 "using": "By użyć śladu GPS do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli zostanie on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na {data} **Dane mapy** po prawej stronie by włączyć, wyłączyć lub przybliżyć widok twojego śladu GPS.",
                 "tracing": "Ślad GPS nie jest bezpośrednio zapisywany na serwerach OpenStreetMap - najlepszym sposobem na wykorzystanie go jest rysowanie mapy na jego podstawie.",
                 "upload": "Możesz także wysłać [swój ślad GPS na serwery OpenStreetMap](https://www.openstreetmap.org/trace/create), pozwalając tym samym innym użytkownikom na korzystanie z niego."
+            },
+            "qa": {
+                "tools": "Aktualnie wspierane narzędzia: [KeepRight](https://www.keepright.at/). Oczekujące na wsparcie: [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/) oraz planowane więcej narzędzi typu \"Pytanie/Odpowiedź\"",
+                "issues": "Obsługa problemów Q/A jest podobna do obsługi notatek. Kliknij na znaczek, aby wyświetlić szczegóły problemu na pasku bocznym. Każde narzędzie ma swoje własne możliwości, ale zazwyczaj można je komentować i/lub zamykać."
             },
             "field": {
                 "restrictions": {
@@ -7800,7 +7908,7 @@
         },
         "community": {
             "bw-facebook": {
-                "name": "Mapowanie Botswany na Facebooku",
+                "name": "Mapowanie Botswany na Facebook",
                 "description": "Strona OpenStreetMap w Botswanie"
             },
             "bw-twitter": {
@@ -7850,18 +7958,45 @@
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "Hinduskie forum OpenStreetMap",
+                "description": "Hinduskie web forum OpenStreetMap"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap Indie na GitHub",
+                "description": "Rozwijaj kod z nami: {url}"
+            },
             "OSM-india-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Indie",
                 "description": "Talk-in  to oficjalna lista dyskusyjna hinduskiej społeczności OSM"
+            },
+            "osm-india-telegram": {
+                "name": "Hinduskie OpenStreetMap na Telegramie",
+                "description": "Dołącz do naszej rodziny: {url}"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap Indie na Twitterze",
                 "description": "Jesteśmy na Twitterze: {url}"
             },
+            "osm-india-website": {
+                "name": "Hinduskie OpenStreetMap",
+                "description": "Mapowicze i użytkownicy OpenStreetMap w Indiach"
+            },
+            "osm-india-wiki": {
+                "name": "Hinduski OpenStreetMap na Wikiprojekt",
+                "description": "Wszystko co powinieneś wiedzieć o mapowaniu w Iniach: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "Hinduskie OpenStreetMap na Youtube",
+                "description": "Subskrybuj nasz kanał: {url}"
+            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook",
                 "description": "Strona FSHM na Facebooku, aby być na bieżąco z wydarzeniami społeczności",
                 "extendedDescription": "FSHM organizuje wydarzenia związane z wolnym oprogramowaniem/sprzętem, technologią, aktywizmem i OpenStreetMap. Aby być z nimi na bieżąco obserwuj ich stronę na FB."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Ruch Wolnego Oprogramowania i Sprzętu - Lista mailingowa"
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "Free Software Hardware Movement - Matrix",
@@ -7872,6 +8007,20 @@
                 "name": "OpenStreetMap Indonezja",
                 "description": "Ulepsz OpenStreetMap w Indonezji",
                 "extendedDescription": "Mapujesz w Indonezji? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
+            },
+            "osm-iran-aparat": {
+                "name": "OpenStreetMap Iran Aparat",
+                "description": "Subskrybuj nasz kanał: {url}",
+                "extendedDescription": "Dobre źródło wideo o wszystkim powiązanych z OpenStreetMap. Głównie po irańsku."
+            },
+            "osm-iran-forum": {
+                "name": "Irańskie forum OpenStreetMap",
+                "description": "Irańskie forum OpenStreetMap",
+                "extendedDescription": "Forum dla użytkowników OpenStreetMap w Iranie. Możliwość zadawania pytań i dyskusji!"
+            },
+            "osm-iran-telegram": {
+                "name": "Irańskie OpenStreetMap na Telegramie",
+                "description": "Zapraszamy Cię do przyłączenia się do kanału Telegram na {url}. Posiadamy dodatkowo super-grupę wielu mapowiczów skupionych wokół Iranu. Znajdziesz link w kanale bio."
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap japońska społeczność",
@@ -7916,6 +8065,9 @@
                 "description": "Ulepsz OpenStreetMap w Nepalu",
                 "extendedDescription": "Mapujesz w Nepalu? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
             },
+            "osm-asia-telegram": {
+                "description": "Dołącz do naszej rodziny: {url}"
+            },
             "OSM-PH-facebook": {
                 "name": "OpenStreetMap PH na Facebooku",
                 "description": "Witamy w OpenStreetMap Filipiny, gdzie zachęcamy wszystkich Filipińczyków do uczestnictwa w projekcie OpenStreetMap."
@@ -7939,6 +8091,14 @@
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU na Telegramie",
                 "description": "Kanał OpenStreetMap Rosja na Telegramie"
+            },
+            "OSM-south-korea-telegram": {
+                "description": "Nieoficjalny kanał dyskusyjny dla współtwórców, społeczności i użytkowników OpenStreetMap w Korei Południowej"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Ulepsz OpenStreetMap na Sri Lance",
+                "extendedDescription": "Mapujesz na Sri Lance? Masz pytania, chcesz dołączyć do tutejszej społeczności? Dołącz do nas na {Url}. Zapraszamy!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap tajwańska społeczność",
@@ -8166,7 +8326,7 @@
                 "description": "Talk-be to oficjalna lista dyskusyjna islandzkiej społeczności OSM"
             },
             "is-twitter": {
-                "name": "OSM Islandia na Twitterze",
+                "name": "OSM Islandia na Twitter",
                 "description": "OpenStreetMap Islandia na Twitterze"
             },
             "it-facebook": {
@@ -8222,6 +8382,10 @@
             "no-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Norwegia",
                 "description": "Lista dyskusyjna dla mapujących i użytkownków OpenStreetMap w Norwegii"
+            },
+            "no-telegram": {
+                "name": "@OSM_no na Telegram",
+                "description": "OpenStreetMap na norweskim Telegram czacie"
             },
             "OSM-PL-facebook-group": {
                 "name": "OpenStreetMap Polska na Facebooku",

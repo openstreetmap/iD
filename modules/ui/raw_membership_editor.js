@@ -298,6 +298,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(newMembershipEnter);
 
             newMembership.selectAll('.member-entity-input')
+                .on('blur', cancelEntity)   // if it wasn't accepted normally, cancel it
                 .call(nearbyCombo
                     .on('accept', acceptEntity)
                     .on('cancel', cancelEntity)
@@ -336,7 +337,6 @@ export function uiRawMembershipEditor(context) {
                     content(selection);
                     list.selectAll('.member-entity-input').node().focus();
                 });
-
 
 
             function acceptEntity(d) {
