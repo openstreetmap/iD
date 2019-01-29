@@ -60,14 +60,14 @@ export function validationGenericName(context) {
                     entities: [change],
                     fixes: [
                         new validationIssueFix({
-                            title: t('issues.fix.remove_name.title'),
+                            title: t('issues.fix.remove_generic_name.title'),
                             action: function() {
                                 var entity = this.issue.entities[0];
                                 var tags = _clone(entity.tags);
-                                tags.name = undefined;
+                                delete tags.name;
                                 context.perform(
                                     actionChangeTags(entity.id, tags),
-                                    t('issues.fix.remove_name.undo_redo')
+                                    t('issues.fix.remove_generic_name.undo_redo')
                                 );
                             }
                         })

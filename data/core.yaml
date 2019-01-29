@@ -1209,7 +1209,7 @@ en:
       connect_almost_junction:
         title: Connect the features
         undo_redo: Connected two features that were really close.
-      remove_name:
+      remove_generic_name:
         title: Remove the name
         undo_redo: Removed a generic name.
       remove_tags:
