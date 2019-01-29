@@ -193,9 +193,7 @@
                 "restriction": "These features can't be merged because it would damage a \"{relation}\" relation.",
                 "relation": "These features can't be merged because they have conflicting relation roles.",
                 "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded.",
-                "conflicting_tags": "These features can't be merged because some of their tags have conflicting values.",
-                "paths_intersect": "These features can't be merged because the resulting path would intersect itself"
-
+                "conflicting_tags": "These features can't be merged because some of their tags have conflicting values."
             },
             "move": {
                 "title": "Move",
@@ -1471,26 +1469,26 @@
                 "tip": "Intersecting highways should share a junction vertex."
             },
             "fix": {
-                "delete_feature": {
-                    "title": "Delete this feature"
-                },
-                "select_preset": {
-                    "title": "Select a feature type"
-                },
-                "ignore_temporarily": {
-                    "title": "Ignore for now"
-                },
                 "add_connection_vertex": {
                     "title": "Connect the features",
                     "undo_redo": "Connected crossing features."
                 },
-                "tag_as_disconnected": {
-                    "title": "Tag as disconnected",
-                    "undo_redo": "Tagged nearby features as disconnected."
-                },
                 "connect_almost_junction": {
                     "title": "Connect the features",
                     "undo_redo": "Connected two features that were really close."
+                },
+                "continue_feature": {
+                    "title": "Continue this feature"
+                },
+                "delete_feature": {
+                    "title": "Delete this feature"
+                },
+                "ignore_temporarily": {
+                    "title": "Ignore for now"
+                },
+                "move_tags": {
+                    "title": "Move the tags",
+                    "undo_redo": "Moved tags."
                 },
                 "remove_generic_name": {
                     "title": "Remove the name",
@@ -1500,9 +1498,12 @@
                     "title": "Remove the tags",
                     "undo_redo": "Removed tags."
                 },
-                "move_tags": {
-                    "title": "Move the tags",
-                    "undo_redo": "Moved tags."
+                "select_preset": {
+                    "title": "Select a feature type"
+                },
+                "tag_as_disconnected": {
+                    "title": "Tag as disconnected",
+                    "undo_redo": "Tagged nearby features as disconnected."
                 },
                 "upgrade_tags": {
                     "title": "Upgrade tags",

@@ -1202,30 +1202,32 @@ en:
       message: "{highway} is very close but not connected to {highway2}."
       tip: Intersecting highways should share a junction vertex.
     fix:
-      delete_feature:
-        title: Delete this feature
-      select_preset:
-        title: Select a feature type
-      ignore_temporarily:
-        title: Ignore for now
       add_connection_vertex:
         title: Connect the features
         undo_redo: Connected crossing features.
-      tag_as_disconnected:
-        title: Tag as disconnected
-        undo_redo: Tagged nearby features as disconnected.
       connect_almost_junction:
         title: Connect the features
         undo_redo: Connected two features that were really close.
+      continue_feature:
+        title: Continue this feature
+      delete_feature:
+        title: Delete this feature
+      ignore_temporarily:
+        title: Ignore for now
+      move_tags:
+        title: Move the tags
+        undo_redo: Moved tags.
       remove_generic_name:
         title: Remove the name
         undo_redo: Removed a generic name.
       remove_tags:
         title: Remove the tags
         undo_redo: Removed tags.
-      move_tags:
-        title: Move the tags
-        undo_redo: Moved tags.
+      select_preset:
+        title: Select a feature type
+      tag_as_disconnected:
+        title: Tag as disconnected
+        undo_redo: Tagged nearby features as disconnected.
       upgrade_tags:
         title: Upgrade tags
         undo_redo: Upgraded tags.
