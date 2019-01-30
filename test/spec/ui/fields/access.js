@@ -4,7 +4,10 @@ describe('iD.uiFieldAccess', function() {
     beforeEach(function() {
         context = iD.coreContext();
         selection = d3.select(document.createElement('div'));
-        field = context.presets().field('access');
+        field = iD.presetField('access', {
+            keys: ['access', 'foot', 'motor_vehicle', 'bicycle', 'horse'],
+            type: 'access'
+        });
     });
 
     it('creates inputs for a variety of modes of access', function() {
