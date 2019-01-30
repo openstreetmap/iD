@@ -352,6 +352,8 @@ button.secondary-action:hover {
     background: #cccccc;
 }
 
+button.action.disabled,
+button.action.disabled:hover,
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;

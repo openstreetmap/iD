@@ -330,6 +330,8 @@ en:
     modified: Modified
     deleted: Deleted
     created: Created
+    outstanding_errors_message: "Please resolve all errors first. {count} remaining."
+    comment_needed_message: Please add a changeset comment first.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."

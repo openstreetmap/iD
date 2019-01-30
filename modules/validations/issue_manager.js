@@ -30,6 +30,17 @@ export function IssueManager(context) {
         return issues;
     };
 
+    self.getWarnings = function() {
+        return issues.filter(function(issue) {
+            return issue.severity === 'warning';
+        });
+    };
+    self.getErrors = function() {
+        return issues.filter(function(issue) {
+            return issue.severity === 'error'; 
+        });
+    };
+
     self.getIssuesForEntityWithID = function(entityID) {
         if (!context.hasEntity(entityID)) {
             return [];
