@@ -680,7 +680,7 @@ en:
       error_types:
         ow:
           title: Missing One-way
-          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel {travel_direction}. There may be missing a "oneway" tag.'
+          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a "oneway" tag.'
         mr:
           title: Missing Geometry
           description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'

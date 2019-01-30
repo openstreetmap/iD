@@ -178,14 +178,22 @@ export default {
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
-                                // Travel direction along way segment clarifies one-way direction
-                                var p1 = feature.points[0];
-                                var p2 = feature.points[1];
+                                // Position error at the approximate middle of the segment
+                                var points = feature.points;
+                                var mid = points.length / 2;
+                                var loc;
 
-                                var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
+                                // Even number of points, find midpoint of the middle two
+                                // Odd number of points, use position of very middle point
+                                if (mid % 1 == 0) {
+                                    loc = pointAverage([points[mid - 1], points[mid]]);
+                                } else {
+                                    mid = points[Math.floor(mid)];
+                                    loc = [mid.lon, mid.lat];
+                                }
 
                                 var d = new iOsmError({
-                                    loc: pointAverage(feature.points), // TODO: This isn't great for curved roads, would be better to find actual midpoint of segment
+                                    loc: loc,
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
@@ -205,7 +213,8 @@ export default {
                                     percentage: feature.percentOfTrips,
                                     num_trips: feature.numberOfTrips,
                                     highway: linkErrorObject(t('QA.keepRight.error_parts.highway')),
-                                    travel_direction: dir_of_travel
+                                    from_node: linkEntity('n' + feature.fromNodeId),
+                                    to_node: linkEntity('n' + feature.toNodeId)
                                 };
 
                                 _erCache.data[d.id] = d;

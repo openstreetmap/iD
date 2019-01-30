@@ -824,7 +824,7 @@
                 "error_types": {
                     "ow": {
                         "title": "Missing One-way",
-                        "description": "Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel {travel_direction}. There may be missing a \"oneway\" tag."
+                        "description": "Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a \"oneway\" tag."
                     },
                     "mr": {
                         "title": "Missing Geometry",
