@@ -81,7 +81,7 @@ export function uiBackground(context) {
             return context.background().showsLayer(d);
         }
 
-        selection.selectAll('.layer')
+        selection.selectAll('li')
             .classed('active', active)
             .classed('switch', function(d) { return d === _previousBackground; })
             .call(setTooltips)
@@ -136,7 +136,7 @@ export function uiBackground(context) {
             .sources(context.map().extent())
             .filter(filter);
 
-        var layerLinks = layerList.selectAll('li.layer')
+        var layerLinks = layerList.selectAll('li')
             .data(sources, function(d) { return d.name(); });
 
         layerLinks.exit()
@@ -181,9 +181,9 @@ export function uiBackground(context) {
             .text(function(d) { return d.name(); });
 
 
-        layerList.selectAll('li.layer')
+        layerList.selectAll('li')
             .sort(sortSources)
-            .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
 
         layerList
             .call(updateLayerSelections);

@@ -178,7 +178,7 @@ export function validationHighwayCrossingOtherWays(context) {
                     if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return false;
                     if (highwaysDisallowingFords.has(entity1.tags.highway) ||
                         highwaysDisallowingFords.has(entity2.tags.highway)) {
-                        return false
+                        return false;
                     }
                     return true;
                 }
