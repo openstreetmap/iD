@@ -9,7 +9,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { osmEntity, osmNote, impOsmError, krError } from '../osm';
+import { osmEntity, osmNote, iOsmError, krError } from '../osm';
 import { services } from '../services';
 import {
     uiDataEditor,
@@ -140,7 +140,7 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (datum instanceof impOsmError) {
+            } else if (datum instanceof iOsmError) {
                 _wasIOsmError = true;
 
                 var improveOSM = services.improveOSM;

@@ -9,7 +9,7 @@ import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
 import { geoExtent } from '../geo';
-import { impOsmError } from '../osm';
+import { iOsmError } from '../osm';
 import { services } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -183,7 +183,7 @@ export default {
 
                                 var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
 
-                                var d = new impOsmError({
+                                var d = new iOsmError({
                                     loc: pointAverage(feature.points), // TODO: This isn't great for curved roads, would be better to find actual midpoint of segment
                                     comments: null,
                                     error_subtype: '',
@@ -223,7 +223,7 @@ export default {
                                     path: 'maki-shoe'
                                 };
 
-                                var d = new impOsmError({
+                                var d = new iOsmError({
                                     loc: pointAverage(feature.points),
                                     comments: null,
                                     error_subtype: geoType,
@@ -259,7 +259,7 @@ export default {
 
                                 var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
 
-                                var d = new impOsmError({
+                                var d = new iOsmError({
                                     loc: [loc.lon, loc.lat],
                                     comments: null,
                                     error_subtype: '',
@@ -374,7 +374,7 @@ export default {
 
     // replace a single error in the cache
     replaceError: function(error) {
-        if (!(error instanceof impOsmError) || !error.id) return;
+        if (!(error instanceof iOsmError) || !error.id) return;
 
         _erCache.data[error.id] = error;
         updateRtree(encodeErrorRtree(error), true); // true = replace
@@ -383,7 +383,7 @@ export default {
 
     // remove a single error from the cache
     removeError: function(error) {
-        if (!(error instanceof impOsmError) || !error.id) return;
+        if (!(error instanceof iOsmError) || !error.id) return;
 
         delete _erCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove

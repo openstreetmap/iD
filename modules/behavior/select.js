@@ -19,7 +19,7 @@ import {
 import {
     osmEntity,
     osmNote,
-    impOsmError,
+    iOsmError,
     krError
 } from '../osm';
 
@@ -171,7 +171,7 @@ export function behaviorSelect(context) {
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
-        } else if (datum instanceof impOsmError & !isMultiselect) {  // clicked an improveOSM error
+        } else if (datum instanceof iOsmError & !isMultiselect) {  // clicked an improveOSM error
             context
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.source));

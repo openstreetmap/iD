@@ -1,9 +1,9 @@
 import _extend from 'lodash-es/extend';
 
 
-export function impOsmError() {
-    if (!(this instanceof impOsmError)) {
-        return (new impOsmError()).initialize(arguments);
+export function iOsmError() {
+    if (!(this instanceof iOsmError)) {
+        return (new iOsmError()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
@@ -11,17 +11,17 @@ export function impOsmError() {
 
 // ImproveOSM has no error IDs unfortunately
 // So no way to explicitly refer to each error in their DB
-impOsmError.id = function() {
-    return impOsmError.id.next--;
+iOsmError.id = function() {
+    return iOsmError.id.next--;
 };
 
 
-impOsmError.id.next = -1;
+iOsmError.id.next = -1;
 
 
-_extend(impOsmError.prototype, {
+_extend(iOsmError.prototype, {
 
-    type: 'impOsmError',
+    type: 'iOsmError',
     source: 'iOSM',
 
     initialize: function(sources) {
@@ -39,13 +39,13 @@ _extend(impOsmError.prototype, {
         }
 
         if (!this.id) {
-            this.id = impOsmError.id() + '';  // as string
+            this.id = iOsmError.id() + '';  // as string
         }
 
         return this;
     },
 
     update: function(attrs) {
-        return impOsmError(this, attrs); // {v: 1 + (this.v || 0)}
+        return iOsmError(this, attrs); // {v: 1 + (this.v || 0)}
     }
 });
