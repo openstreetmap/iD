@@ -24,7 +24,7 @@ export * from './validations/index';
 import { services } from './services/index';
 var Connection = services.osm;
 export { Connection };
-export { coreContext as Context, setAreaKeys } from './core/context';
+export { coreContext as Context, setAreaKeys, areaKeys } from './core/context';
 export { coreDifference as Difference } from './core/difference';
 export { coreGraph as Graph } from './core/graph';
 export { coreHistory as History } from './core/history';

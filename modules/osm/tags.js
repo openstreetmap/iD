@@ -4,7 +4,6 @@ export function osmIsInterestingTag(key) {
         key !== 'source' &&
         key !== 'odbl' &&
         key.indexOf('tiger:') !== 0;
-
 }
 
 

@@ -1,14 +1,17 @@
 describe('maprules', function() {
-    var _ruleChecks, validationRules;
+    var _ruleChecks, savedAreaKeys, validationRules;
 
     before(function() {
+        savedAreaKeys = iD.areaKeys;
+        iD.setAreaKeys({ building: {}, amenity: {} });
+
         iD.services.maprules = iD.serviceMapRules;
-        var areaKeys = iD.Context().presets().areaKeys();
-        iD.serviceMapRules.init(areaKeys);
+        iD.serviceMapRules.init();
         _ruleChecks = iD.serviceMapRules.ruleChecks();
     });
 
     after(function() {
+        iD.setAreaKeys(savedAreaKeys);
         delete iD.services.maprules;
     });
 
@@ -23,7 +26,7 @@ describe('maprules', function() {
             var filteredChecks = iD.serviceMapRules.filterRuleChecks(selector);
             var equalsCheck = filteredChecks[0];
             var absenceCheck = filteredChecks[1];
-            var entityTags = {amenity: 'marketplace'};
+            var entityTags = { amenity: 'marketplace' };
 
             expect(filteredChecks.length).eql(2);
             expect(equalsCheck(entityTags)).to.be.true;
@@ -146,7 +149,7 @@ describe('maprules', function() {
     });
 
     describe('#addRule', function() {
-        it ('builds a rule from provided selector and adds it to _validationRules', function () {
+        it('builds a rule from provided selector and adds it to _validationRules', function () {
             var selector = {
                 geometry:'node',
                 equals: {amenity:'marketplace'},
@@ -159,7 +162,7 @@ describe('maprules', function() {
         });
     });
     describe('#clearRules', function() {
-        it ('clears _validationRules array', function() {
+        it('clears _validationRules array', function() {
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
             iD.serviceMapRules.clearRules();
             expect(iD.serviceMapRules.validationRules()).to.be.empty;
@@ -184,19 +187,19 @@ describe('maprules', function() {
     describe('_ruleChecks', function () {
         describe('#equals', function() {
             it('is true when two tag maps intersect', function() {
-                var a = { amenity: 'school'};
+                var a = { amenity: 'school' };
                 var b = { amenity: 'school' };
                 expect(_ruleChecks.equals(a)(b)).to.be.true;
             });
             it('is false when two tag maps intersect', function() {
-                var a = { man_made: 'water_tap'};
-                var b = { amenity: 'school'};
+                var a = { man_made: 'water_tap' };
+                var b = { amenity: 'school' };
                 expect(_ruleChecks.equals(a)(b)).to.be.false;
             });
         });
         describe('#notEquals', function() {
             it('is true when two tag maps do not intersect', function() {
-                var a = { man_made: 'water_tap'};
+                var a = { man_made: 'water_tap' };
                 var b = { amenity: 'school' };
                 expect(_ruleChecks.notEquals(a)(b)).to.be.true;
             });
@@ -427,15 +430,15 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.Entity({ type: 'node', tags: { amenity: 'marketplace' }}),
-                    iD.Way({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
-                    iD.Way({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
-                    iD.Way({ tags: { highway: 'residential', structure: 'bridge' }}),
+                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
+                    iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
 
                 iD.serviceMapRules.clearRules();
@@ -454,7 +457,7 @@ describe('maprules', function() {
                     positiveRegex: { structure: ['embarkment', 'bridge'] },
                     error: '\'suburban road\' structure tag cannot be \'bridge\' or \'tunnel\''
                 };
-                var entity = iD.Way({ tags: { highway: 'residential', structure: 'tunnel' }});
+                var entity = iD.osmWay({ tags: { highway: 'residential', structure: 'tunnel' }});
                 iD.serviceMapRules.clearRules();
                 iD.serviceMapRules.addRule(selector);
                 var rule = iD.serviceMapRules.validationRules()[0];
@@ -522,15 +525,15 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.Entity({ type: 'node', tags: { amenity: 'marketplace' }}),
-                    iD.Way({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
-                    iD.Way({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
-                    iD.Way({ tags: { highway: 'residential', structure: 'bridge' }}),
+                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
+                    iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
 
                 var wayNodes = [
@@ -541,7 +544,7 @@ describe('maprules', function() {
                     iD.osmNode({ id: 'e' }),
                     iD.osmNode({ id: 'f' }),
                 ];
-                _graph = iD.Graph(entities.concat(wayNodes));
+                _graph = iD.coreGraph(entities.concat(wayNodes));
                 iD.serviceMapRules.clearRules();
                 selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
                 validationRules = iD.serviceMapRules.validationRules();
