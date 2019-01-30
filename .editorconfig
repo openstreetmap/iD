@@ -8,6 +8,6 @@ insert_final_newline = false
 [*.js]
 end_of_line = lf
 
-[*.{js,css,html}]
+[*.{js,json,css,html}]
 indent_style = space
 indent_size = 4
