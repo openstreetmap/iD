@@ -130,20 +130,25 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
 
-    var origName = preset.name || '';
+    preset.originalName = preset.name || '';
+
+
     preset.name = function() {
         if (preset.suggestion) {
             var path = id.split('/');
             path.pop();  // remove brand name
             // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-            return origName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
+            return preset.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
         }
-        return preset.t('name', { 'default': origName });
+        return preset.t('name', { 'default': preset.originalName });
     };
 
-    var origTerms = (preset.terms || []).join();
+
+    preset.originalTerms = (preset.terms || []).join();
+
+
     preset.terms = function() {
-        return preset.t('terms', { 'default': origTerms }).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
 
@@ -161,8 +166,8 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0],
-            value = reference.value || preset.tags[key];
+        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0];
+        var value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
             if (value in preset.tags) {
