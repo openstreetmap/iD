@@ -359,6 +359,7 @@ export function validationHighwayCrossingOtherWays() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.crossing_ways;
 
     return validation;
 }

@@ -1,5 +1,7 @@
 import { services } from '../services';
-
+import {
+    ValidationIssueType
+} from './validation_issue';
 export function validationMapCSSChecks() {
     var validation = function(entity, context) {
         if (!services.maprules) return [];
@@ -17,6 +19,7 @@ export function validationMapCSSChecks() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.map_rule_issue;
 
     return validation;
 }

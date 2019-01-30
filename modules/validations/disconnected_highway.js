@@ -81,6 +81,7 @@ export function validationDisconnectedHighway() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.disconnected_highway;
 
     return validation;
 }

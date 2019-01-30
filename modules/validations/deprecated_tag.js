@@ -82,6 +82,7 @@ export function validationDeprecatedTag() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.deprecated_tags;
 
     return validation;
 }

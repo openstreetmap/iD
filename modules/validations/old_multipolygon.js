@@ -13,7 +13,7 @@ import {
 
 export function validationOldMultipolygon() {
 
-    return function validation(entity, context) {
+    var validation = function(entity, context) {
         var issues = [];
         var graph = context.graph();
         var mistaggedMultipolygon = osmIsSimpleMultipolygonOuterMember(entity, graph);
@@ -47,4 +47,8 @@ export function validationOldMultipolygon() {
         }
         return issues;
     };
+
+    validation.type = ValidationIssueType.old_multipolygon;
+
+    return validation;
 }

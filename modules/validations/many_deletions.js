@@ -6,6 +6,7 @@ import {
 } from './validation_issue';
 
 export function validationManyDeletions() {
+
     var threshold = 100;
 
     var validation = function(changes, context) {
@@ -34,6 +35,7 @@ export function validationManyDeletions() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.map_rule_issue;
 
     return validation;
 }

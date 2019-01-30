@@ -76,6 +76,7 @@ export function validationTagSuggestsArea() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.tag_suggests_area;
 
     return validation;
 }

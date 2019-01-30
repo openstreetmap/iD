@@ -166,6 +166,7 @@ export function validationHighwayAlmostJunction() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.highway_almost_junction;
 
     return validation;
 }

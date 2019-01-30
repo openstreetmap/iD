@@ -54,25 +54,35 @@ export function IssueManager(context) {
         return issuesByEntityId[entityID];
     };
 
-    var entityValidations = [
+    var genericEntityValidations = [
        validations.validationDeprecatedTag(),
-       validations.validationDisconnectedHighway(),
        validations.validationGenericName(),
-       validations.validationHighwayCrossingOtherWays(),
-       validations.validationHighwayAlmostJunction(),
        validations.validationMapCSSChecks(),
-       validations.validationMissingTag(),
-       validations.validationOldMultipolygon(),
-       validations.validationTagSuggestsArea()
+       validations.validationOldMultipolygon()
     ];
 
     function validateEntity(entity) {
-        return _flatten(_map(
-            entityValidations,
-            function(fn) {
-                return fn(entity, context);
+        var issues = [];
+        // runs validation and appends resulting issues, returning true if validation passed
+        function runValidation(fn) {
+            var typeIssues = fn(entity, context);
+            issues = issues.concat(typeIssues);
+            return typeIssues.length === 0;
+        }
+        // other validations require feature to be tagged
+        if (!runValidation(validations.validationMissingTag())) return issues;
+        if (entity.type === 'way') {
+            if (runValidation(validations.validationHighwayAlmostJunction())) {
+                // only check for disconnected highway if no almost junctions
+                runValidation(validations.validationDisconnectedHighway());
             }
-        ));
+            runValidation(validations.validationHighwayCrossingOtherWays());
+            runValidation(validations.validationTagSuggestsArea());
+        }
+        genericEntityValidations.forEach(function(fn) {
+            runValidation(fn);
+        })
+        return issues;
     }
 
     self.validate = function() {

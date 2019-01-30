@@ -58,6 +58,7 @@ export function validationMissingTag() {
         return issues;
     };
 
+    validation.type = ValidationIssueType.missing_tag;
 
     return validation;
 }

@@ -44,7 +44,7 @@ export function validationGenericName(context) {
     }
 
 
-    return function validation(entity) {
+    var validation = function(entity) {
         var issues = [];
         var generic = isGenericName(entity);
         if (generic) {
@@ -74,4 +74,8 @@ export function validationGenericName(context) {
 
         return issues;
     };
+
+    validation.type = ValidationIssueType.generic_name;
+
+    return validation;
 }
