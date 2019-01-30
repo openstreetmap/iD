@@ -224,17 +224,6 @@ describe('iD.presetIndex', function () {
 
 
     describe('#fromExternal', function () {
-        var origPresets = {
-            presets: {
-                area: { name: 'Area', tags: {}, geometry: ['area'] },
-                line: { name: 'Line', tags: {}, geometry: ['line'] },
-                point: { name: 'Point', tags: {}, geometry: ['point'] },
-                vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
-                relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
-                building: { name: 'Building', tags: { building: 'yes' }, geometry: ['area'] }
-            }
-        };
-
         var morePresets = {
             presets: {
                 '8bc64d6d': {

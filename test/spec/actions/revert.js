@@ -1,25 +1,25 @@
 describe('iD.actionRevert', function() {
     describe('basic', function () {
         it('removes a new entity', function() {
-            var n1 = iD.Node({id: 'n-1'}),
-                graph = iD.Graph().replace(n1);
+            var n1 = iD.osmNode({id: 'n-1'}),
+                graph = iD.coreGraph().replace(n1);
 
             graph = iD.actionRevert('n-1')(graph);
             expect(graph.hasEntity('n-1')).to.be.undefined;
         });
 
         it('reverts an updated entity', function() {
-            var n1 = iD.Node({id: 'n1'}),
+            var n1 = iD.osmNode({id: 'n1'}),
                 n1up = n1.update({}),
-                graph = iD.Graph([n1]).replace(n1up);
+                graph = iD.coreGraph([n1]).replace(n1up);
 
             graph = iD.actionRevert('n1')(graph);
             expect(graph.hasEntity('n1')).to.equal(n1);
         });
 
         it('restores a deleted entity', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                graph = iD.Graph([n1]).remove(n1);
+            var n1 = iD.osmNode({id: 'n1'}),
+                graph = iD.coreGraph([n1]).remove(n1);
 
             graph = iD.actionRevert('n1')(graph);
             expect(graph.hasEntity('n1')).to.equal(n1);
@@ -29,12 +29,12 @@ describe('iD.actionRevert', function() {
     describe('reverting way child nodes', function () {
         it('removes new node, updates parent way nodelist', function() {
             // note: test with a 3 node way so w1 doesnt go degenerate..
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n2'}),
-                n3 = iD.Node({id: 'n-3'}),
-                w1 = iD.Way({id: 'w1', nodes: ['n1', 'n2']}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n2'}),
+                n3 = iD.osmNode({id: 'n-3'}),
+                w1 = iD.osmWay({id: 'w1', nodes: ['n1', 'n2']}),
                 w1up = w1.addNode('n-3', 2),
-                graph = iD.Graph([n1, n2, w1]).replace(n3).replace(w1up);
+                graph = iD.coreGraph([n1, n2, w1]).replace(n3).replace(w1up);
 
             graph = iD.actionRevert('n-3')(graph);
 
@@ -48,11 +48,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('reverts existing node, preserves parent way nodelist', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n2'}),
-                w1 = iD.Way({id: 'w1', nodes: ['n1', 'n2']}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n2'}),
+                w1 = iD.osmWay({id: 'w1', nodes: ['n1', 'n2']}),
                 n1up = n1.update({}),
-                graph = iD.Graph([n1, n2, w1]).replace(n1up);
+                graph = iD.coreGraph([n1, n2, w1]).replace(n1up);
 
             graph = iD.actionRevert('n1')(graph);
 
@@ -67,11 +67,11 @@ describe('iD.actionRevert', function() {
 
     describe('reverting relation members', function () {
         it('removes new node, updates parent relation memberlist', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'n1'}]}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                r1 = iD.osmRelation({id: 'r1', members: [{id: 'n1'}]}),
                 r1up = r1.addMember({id: 'n-2'}, 1),
-                graph = iD.Graph([n1, r1]).replace(n2).replace(r1up);
+                graph = iD.coreGraph([n1, r1]).replace(n2).replace(r1up);
 
             graph = iD.actionRevert('n-2')(graph);
 
@@ -83,11 +83,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('reverts existing node, preserves parent relation memberlist', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n2'}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'n1'}, {id: 'n2'}]}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n2'}),
+                r1 = iD.osmRelation({id: 'r1', members: [{id: 'n1'}, {id: 'n2'}]}),
                 n1up = n1.update({}),
-                graph = iD.Graph([n1, n2, r1]).replace(n1up);
+                graph = iD.coreGraph([n1, n2, r1]).replace(n1up);
 
             graph = iD.actionRevert('n1')(graph);
 
@@ -102,10 +102,10 @@ describe('iD.actionRevert', function() {
 
     describe('reverting parent ways', function () {
         it('removes new way, preserves new and existing child nodes', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                w1 = iD.Way({id: 'w-1', nodes: ['n1', 'n-2']}),
-                graph = iD.Graph([n1]).replace(n2).replace(w1);
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                w1 = iD.osmWay({id: 'w-1', nodes: ['n1', 'n-2']}),
+                graph = iD.coreGraph([n1]).replace(n2).replace(w1);
 
             graph = iD.actionRevert('w-1')(graph);
             expect(graph.hasEntity('w-1'), 'w-1 removed').to.be.undefined;
@@ -116,11 +116,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('reverts an updated way, preserves new and existing child nodes', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                w1 = iD.Way({id: 'w1', nodes: ['n1']}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                w1 = iD.osmWay({id: 'w1', nodes: ['n1']}),
                 w1up = w1.addNode('n-2', 1),
-                graph = iD.Graph([n1, w1]).replace(n2).replace(w1up);
+                graph = iD.coreGraph([n1, w1]).replace(n2).replace(w1up);
 
             graph = iD.actionRevert('w1')(graph);
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
@@ -131,11 +131,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('restores a deleted way, preserves new and existing child nodes', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                w1 = iD.Way({id: 'w1', nodes: ['n1']}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                w1 = iD.osmWay({id: 'w1', nodes: ['n1']}),
                 w1up = w1.addNode('n-2', 1),
-                graph = iD.Graph([n1, w1]).replace(n2).replace(w1up).remove(w1up);
+                graph = iD.coreGraph([n1, w1]).replace(n2).replace(w1up).remove(w1up);
 
             graph = iD.actionRevert('w1')(graph);
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
@@ -148,10 +148,10 @@ describe('iD.actionRevert', function() {
 
     describe('reverting parent relations', function () {
         it('removes new relation, preserves new and existing members', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                r1 = iD.Relation({id: 'r-1', members: [{id: 'n1'}, {id: 'n-2'}]}),
-                graph = iD.Graph([n1]).replace(n2).replace(r1);
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                r1 = iD.osmRelation({id: 'r-1', members: [{id: 'n1'}, {id: 'n-2'}]}),
+                graph = iD.coreGraph([n1]).replace(n2).replace(r1);
 
             graph = iD.actionRevert('r-1')(graph);
             expect(graph.hasEntity('r-1'), 'r-1 removed').to.be.undefined;
@@ -162,11 +162,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('reverts an updated relation, preserves new and existing members', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'n1'}]}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                r1 = iD.osmRelation({id: 'r1', members: [{id: 'n1'}]}),
                 r1up = r1.addMember({id: 'n-2'}, 1),
-                graph = iD.Graph([n1, r1]).replace(n2).replace(r1up);
+                graph = iD.coreGraph([n1, r1]).replace(n2).replace(r1up);
 
             graph = iD.actionRevert('r1')(graph);
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);
@@ -177,11 +177,11 @@ describe('iD.actionRevert', function() {
         });
 
         it('restores a deleted relation, preserves new and existing members', function() {
-            var n1 = iD.Node({id: 'n1'}),
-                n2 = iD.Node({id: 'n-2'}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'n1'}]}),
+            var n1 = iD.osmNode({id: 'n1'}),
+                n2 = iD.osmNode({id: 'n-2'}),
+                r1 = iD.osmRelation({id: 'r1', members: [{id: 'n1'}]}),
                 r1up = r1.addMember({id: 'n-2'}, 1),
-                graph = iD.Graph([n1, r1]).replace(n2).replace(r1up).remove(r1up);
+                graph = iD.coreGraph([n1, r1]).replace(n2).replace(r1up).remove(r1up);
 
             graph = iD.actionRevert('r1')(graph);
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);

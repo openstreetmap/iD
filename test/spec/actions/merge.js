@@ -1,10 +1,10 @@
 describe('iD.actionMerge', function () {
     it('merges multiple points to a line', function () {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', tags: {a: 'a'}}),
-                iD.Node({id: 'b', tags: {b: 'b'}}),
-                iD.Way({id: 'w'}),
-                iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
+        var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', tags: {a: 'a'}}),
+                iD.osmNode({id: 'b', tags: {b: 'b'}}),
+                iD.osmWay({id: 'w'}),
+                iD.osmRelation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
             ]),
             action = iD.actionMerge(['a', 'b', 'w']);
 
@@ -19,11 +19,11 @@ describe('iD.actionMerge', function () {
     });
 
     it('merges multiple points to an area', function () {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', tags: {a: 'a'}}),
-                iD.Node({id: 'b', tags: {b: 'b'}}),
-                iD.Way({id: 'w', tags: {area: 'yes'}}),
-                iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
+        var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', tags: {a: 'a'}}),
+                iD.osmNode({id: 'b', tags: {b: 'b'}}),
+                iD.osmWay({id: 'w', tags: {area: 'yes'}}),
+                iD.osmRelation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
             ]),
             action = iD.actionMerge(['a', 'b', 'w']);
 
@@ -38,11 +38,11 @@ describe('iD.actionMerge', function () {
     });
 
     it('preserves original point if possible', function () {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [1, 0], tags: {a: 'a'}}),
-                iD.Node({id: 'p', loc: [0, 0], tags: {p: 'p'}}),
-                iD.Node({id: 'q', loc: [0, 1]}),
-                iD.Way({id: 'w', nodes: ['p', 'q'], tags: {w: 'w'}})
+        var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 0], tags: {a: 'a'}}),
+                iD.osmNode({id: 'p', loc: [0, 0], tags: {p: 'p'}}),
+                iD.osmNode({id: 'q', loc: [0, 1]}),
+                iD.osmWay({id: 'w', nodes: ['p', 'q'], tags: {w: 'w'}})
             ]),
             action = iD.actionMerge(['a', 'w']);
 

@@ -2,7 +2,7 @@ describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext();
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('test', {key: 'name'});
     });

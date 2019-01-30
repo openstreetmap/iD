@@ -110,7 +110,7 @@ A **line** is a way that is not an area. Elements representing lines have a `.li
 class. Since a line is also a way, they also have a `.way` class.
 
 An **area** is a way that is circular, has certain tags, or lacks certain other
-tags (see `iD.Way#isArea` for the exact definition). Elements representing areas
+tags (see `iD.osmWay#isArea` for the exact definition). Elements representing areas
 have `.area` and `.way` classes.
 
 
@@ -302,7 +302,7 @@ The minimum zoom at which iD enters the edit mode is configured using the `conte
 
 ```js
 
-var id = iD.Context()
+var id = iD.coreContext()
   .minEditableZoom(zoom_level)
 
 ```
