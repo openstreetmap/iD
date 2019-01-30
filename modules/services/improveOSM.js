@@ -292,7 +292,8 @@ export default {
                                     turn_restriction: feature.turnType.toLowerCase(),
                                     from_way: linkEntity('w' + from_way),
                                     to_way: linkEntity('w' + to_way),
-                                    travel_direction: dir_of_travel
+                                    travel_direction: dir_of_travel,
+                                    junction: linkErrorObject(t('QA.keepRight.error_parts.this_node'))
                                 };
 
                                 _erCache.data[d.id] = d;

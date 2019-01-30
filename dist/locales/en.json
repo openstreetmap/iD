@@ -832,7 +832,7 @@
                     },
                     "tr": {
                         "title": "Missing Turn Restriction",
-                        "description": "{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way}. There may be a missing \"{turn_restriction}\" restriction."
+                        "description": "{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing \"{turn_restriction}\" restriction."
                     }
                 }
             },
