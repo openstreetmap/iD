@@ -495,7 +495,6 @@ export function uiMapData(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', 'layer')
             .call(tooltip()
                 .html(true)
                 .title(function(d) {

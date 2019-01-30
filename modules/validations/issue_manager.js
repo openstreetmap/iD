@@ -1,11 +1,13 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import _map from 'lodash-es/map';
+import _flatten from 'lodash-es/flatten';
 import _flattenDeep from 'lodash-es/flattenDeep';
 import _uniq from 'lodash-es/uniq';
 import _uniqWith from 'lodash-es/uniqWith';
 
 import { utilRebind } from '../util/rebind';
+import * as validations from '../validations/index';
 
 export function IssueManager(context) {
     var dispatch = d3_dispatch('reload'),
@@ -37,7 +39,7 @@ export function IssueManager(context) {
     };
     self.getErrors = function() {
         return issues.filter(function(issue) {
-            return issue.severity === 'error'; 
+            return issue.severity === 'error';
         });
     };
 
@@ -47,19 +49,45 @@ export function IssueManager(context) {
         }
         if (!issuesByEntityId[entityID]) {
             var entity = context.entity(entityID);
-            issuesByEntityId[entityID] = context.history().validate([entity]);
+            issuesByEntityId[entityID] = validateEntity(entity);
         }
         return issuesByEntityId[entityID];
     };
+
+    var entityValidations = [
+       validations.validationDeprecatedTag,
+       validations.validationDisconnectedHighway,
+       validations.validationGenericName,
+       validations.validationHighwayCrossingOtherWays,
+       validations.validationHighwayAlmostJunction,
+       validations.validationMapCSSChecks,
+       validations.validationMissingTag,
+       validations.validationOldMultipolygon,
+       validations.validationTagSuggestsArea
+    ];
+
+    function validateEntity(entity) {
+        var history = context.history();
+        return _flatten(_map(
+            entityValidations,
+            function(fn) {
+                return fn(context)([entity], history.graph(), history.tree());
+            }
+        ));
+    }
 
     self.validate = function() {
         // clear cached issues
         issuesByEntityId = {};
         issues = [];
 
-        var changes = context.history().changes();
+        var history = context.history();
+        var changes = history.changes();
         var entitiesToCheck = changes.created.concat(changes.modified);
-        var graph = context.graph();
+        var graph = history.graph();
+
+        issues = issues.concat(validations.validationManyDeletions(context)(changes, graph));
+
         entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
             var entities = [entity];
             if (entity.type === 'node') {
@@ -78,7 +106,7 @@ export function IssueManager(context) {
 
         for (var entityIndex in entitiesToCheck) {
             var entity = entitiesToCheck[entityIndex];
-            var entityIssues = context.history().validate([entity]);
+            var entityIssues = validateEntity(entity);
             issuesByEntityId[entity.id] = entityIssues;
             issues = issues.concat(entityIssues);
         }

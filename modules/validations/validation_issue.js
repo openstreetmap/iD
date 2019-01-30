@@ -76,7 +76,7 @@ export function validationIssue(attrs) {
         if (this.coordinates && Array.isArray(this.coordinates) && this.coordinates.length === 2) {
             return this.coordinates;
         }
-        if (this.entities.length > 0) {
+        if (this.entities && this.entities.length > 0) {
             if (this.entities[0].loc) {
                 return this.entities[0].loc;
             }

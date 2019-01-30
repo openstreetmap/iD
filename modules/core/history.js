@@ -18,7 +18,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
-import * as Validations from '../validations/index';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -40,7 +39,6 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
-    var validations = _filter(Validations, _isFunction);
 
 
     // internal _act, accepts list of actions and eased time
@@ -294,16 +292,6 @@ export function coreHistory(context) {
         },
 
 
-        validate: function(entitiesToCheck) {
-            return _flatten(_map(
-                validations,
-                function(fn) {
-                    return fn(context)(entitiesToCheck, _stack[_index].graph, _tree);
-                }
-            ));
-        },
-
-
         hasChanges: function() {
             return this.difference().length() > 0;
         },
@@ -529,6 +517,7 @@ export function coreHistory(context) {
                                     loading.close();
                                     context.redrawEnable(true);
                                     dispatch.call('change');
+                                    dispatch.call('restore', this);
                                 }
                             };
 
@@ -583,6 +572,7 @@ export function coreHistory(context) {
 
             if (loadComplete) {
                 dispatch.call('change');
+                dispatch.call('restore', this);
             }
 
             return history;
@@ -625,7 +615,6 @@ export function coreHistory(context) {
 
             var json = context.storage(getKey('saved_history'));
             if (json) history.fromJSON(json, true);
-            dispatch.call('restore', this);
         },
 
 

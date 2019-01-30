@@ -144,7 +144,6 @@ export function uiBackground(context) {
 
         var enter = layerLinks.enter()
             .append('li')
-            .attr('class', 'layer')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
@@ -218,7 +217,7 @@ export function uiBackground(context) {
             .append('ul')
             .attr('class', 'layer-list minimap-toggle-list')
             .append('li')
-            .attr('class', 'layer minimap-toggle-item');
+            .attr('class', 'minimap-toggle-item');
 
         var minimapLabelEnter = minimapEnter
             .append('label')

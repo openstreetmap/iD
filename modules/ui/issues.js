@@ -66,7 +66,6 @@ export function uiIssues(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', 'layer')
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
@@ -124,16 +123,8 @@ export function uiIssues(context) {
         var enter = items.enter()
             .append('li')
             .attr('class', function (d) {
-                return 'layer issue severity-' + d.severity;
+                return 'issue severity-' + d.severity;
             })
-            .call(tooltip()
-                .html(true)
-                .title(function(d) {
-                    var tip = d.tooltip ? d.tooltip : '';
-                    return uiTooltipHtml(tip);
-                })
-                .placement('bottom')
-            )
             .on('click', function(d) {
                 var loc = d.loc();
                 if (loc) {
@@ -149,7 +140,15 @@ export function uiIssues(context) {
 
         var label = enter
             .append('button')
-            .attr('class', 'label');
+            .attr('class', 'label')
+            .call(tooltip()
+                .html(true)
+                .title(function(d) {
+                    var tip = d.tooltip ? d.tooltip : '';
+                    return uiTooltipHtml(tip);
+                })
+                .placement('bottom')
+            );
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
