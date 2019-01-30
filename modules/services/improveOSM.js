@@ -8,7 +8,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
-import { geoExtent } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
 import { iOsmError } from '../osm';
 import { services } from './index';
 import { t } from '../util/locale';
@@ -178,6 +178,7 @@ export default {
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
                             data.roadSegments.forEach(function(feature) {
+                                // Travel direction along way segment clarifies one-way direction
                                 var p1 = feature.points[0];
                                 var p2 = feature.points[1];
 
@@ -248,19 +249,23 @@ export default {
                             data.entities.forEach(function(feature) {
                                 var loc = feature.point;
 
+                                // Bump position slightly so junction node is accessible
+                                loc = geoVecAdd([loc.lon, loc.lat], [0, 0.00001]);
+
                                 // Elements are presented in a strange way
                                 var ids = feature.id.split(',');
                                 var from_way = ids[0];
                                 var via_node = ids[3];
                                 var to_way = ids[2].split(':')[1];
 
+                                // Travel direction along from_way clarifies the turn restriction
                                 var p1 = feature.segments[0].points[0];
                                 var p2 = feature.segments[0].points[1];
 
                                 var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
 
                                 var d = new iOsmError({
-                                    loc: [loc.lon, loc.lat],
+                                    loc: loc,
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
