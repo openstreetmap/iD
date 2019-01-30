@@ -505,7 +505,7 @@ export function coreContext() {
         var maprules = utilStringQs(window.location.hash).maprules;
         d3_json(maprules, function (err, mapcss) {
             if (err) return;
-            services.maprules.init(context.presets().areaKeys());
+            services.maprules.init();
             _each(mapcss, function(mapcssSelector) {
                 return services.maprules.addRule(mapcssSelector);
             });

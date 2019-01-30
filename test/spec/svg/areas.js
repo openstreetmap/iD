@@ -1,5 +1,5 @@
 describe('iD.svgAreas', function () {
-    var context, surface;
+    var context, surface, savedAreaKeys;
     var all = function() { return true; };
     var none = function() { return false; };
     var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
@@ -15,12 +15,14 @@ describe('iD.svgAreas', function () {
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
 
-        iD.setAreaKeys({
-            building: {},
-            landuse: {},
-            natural: {}
-        });
+        savedAreaKeys = iD.areaKeys;
+        iD.setAreaKeys({ building: {}, landuse: {}, natural: {} });
     });
+
+    afterEach(function () {
+        iD.setAreaKeys(savedAreaKeys);
+    });
+
 
     it('adds way and area classes', function () {
         var graph = iD.coreGraph([

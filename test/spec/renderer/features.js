@@ -13,7 +13,7 @@ describe('iD.Features', function() {
     }
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());
@@ -63,16 +63,16 @@ describe('iD.Features', function() {
 
     describe('#gatherStats', function() {
         it('counts features', function() {
-            var graph = iD.Graph([
-                    iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-                    iD.Node({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-                    iD.Node({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-                    iD.Node({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                    iD.Node({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
-                    iD.Way({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
-                    iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
-                    iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
-                    iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1})
+            var graph = iD.coreGraph([
+                    iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+                    iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+                    iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+                    iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                    iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                    iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
+                    iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
+                    iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+                    iD.osmWay({id: 'fence', tags: {barrier: 'fence'}, version: 1})
                 ]),
                 all = _values(graph.base().entities),
                 stats;
@@ -96,64 +96,64 @@ describe('iD.Features', function() {
     });
 
     describe('matching', function() {
-        var graph = iD.Graph([
+        var graph = iD.coreGraph([
             // Points
-            iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-            iD.Node({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-            iD.Node({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-            iD.Node({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-            iD.Node({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+            iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+            iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+            iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+            iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+            iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
 
             // Traffic Roads
-            iD.Way({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
-            iD.Way({id: 'motorway_link', tags: {highway: 'motorway_link'}, version: 1}),
-            iD.Way({id: 'trunk', tags: {highway: 'trunk'}, version: 1}),
-            iD.Way({id: 'trunk_link', tags: {highway: 'trunk_link'}, version: 1}),
-            iD.Way({id: 'primary', tags: {highway: 'primary'}, version: 1}),
-            iD.Way({id: 'primary_link', tags: {highway: 'primary_link'}, version: 1}),
-            iD.Way({id: 'secondary', tags: {highway: 'secondary'}, version: 1}),
-            iD.Way({id: 'secondary_link', tags: {highway: 'secondary_link'}, version: 1}),
-            iD.Way({id: 'tertiary', tags: {highway: 'tertiary'}, version: 1}),
-            iD.Way({id: 'tertiary_link', tags: {highway: 'tertiary_link'}, version: 1}),
-            iD.Way({id: 'residential', tags: {highway: 'residential'}, version: 1}),
-            iD.Way({id: 'unclassified', tags: {highway: 'unclassified'}, version: 1}),
-            iD.Way({id: 'living_street', tags: {highway: 'living_street'}, version: 1}),
+            iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
+            iD.osmWay({id: 'motorway_link', tags: {highway: 'motorway_link'}, version: 1}),
+            iD.osmWay({id: 'trunk', tags: {highway: 'trunk'}, version: 1}),
+            iD.osmWay({id: 'trunk_link', tags: {highway: 'trunk_link'}, version: 1}),
+            iD.osmWay({id: 'primary', tags: {highway: 'primary'}, version: 1}),
+            iD.osmWay({id: 'primary_link', tags: {highway: 'primary_link'}, version: 1}),
+            iD.osmWay({id: 'secondary', tags: {highway: 'secondary'}, version: 1}),
+            iD.osmWay({id: 'secondary_link', tags: {highway: 'secondary_link'}, version: 1}),
+            iD.osmWay({id: 'tertiary', tags: {highway: 'tertiary'}, version: 1}),
+            iD.osmWay({id: 'tertiary_link', tags: {highway: 'tertiary_link'}, version: 1}),
+            iD.osmWay({id: 'residential', tags: {highway: 'residential'}, version: 1}),
+            iD.osmWay({id: 'unclassified', tags: {highway: 'unclassified'}, version: 1}),
+            iD.osmWay({id: 'living_street', tags: {highway: 'living_street'}, version: 1}),
 
             // Service Roads
-            iD.Way({id: 'service', tags: {highway: 'service'}, version: 1}),
-            iD.Way({id: 'road', tags: {highway: 'road'}, version: 1}),
-            iD.Way({id: 'track', tags: {highway: 'track'}, version: 1}),
+            iD.osmWay({id: 'service', tags: {highway: 'service'}, version: 1}),
+            iD.osmWay({id: 'road', tags: {highway: 'road'}, version: 1}),
+            iD.osmWay({id: 'track', tags: {highway: 'track'}, version: 1}),
 
             // Paths
-            iD.Way({id: 'path', tags: {highway: 'path'}, version: 1}),
-            iD.Way({id: 'footway', tags: {highway: 'footway'}, version: 1}),
-            iD.Way({id: 'cycleway', tags: {highway: 'cycleway'}, version: 1}),
-            iD.Way({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
-            iD.Way({id: 'steps', tags: {highway: 'steps'}, version: 1}),
-            iD.Way({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
-            iD.Way({id: 'corridor', tags: {highway: 'corridor'}, version: 1}),
+            iD.osmWay({id: 'path', tags: {highway: 'path'}, version: 1}),
+            iD.osmWay({id: 'footway', tags: {highway: 'footway'}, version: 1}),
+            iD.osmWay({id: 'cycleway', tags: {highway: 'cycleway'}, version: 1}),
+            iD.osmWay({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
+            iD.osmWay({id: 'steps', tags: {highway: 'steps'}, version: 1}),
+            iD.osmWay({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
+            iD.osmWay({id: 'corridor', tags: {highway: 'corridor'}, version: 1}),
 
             // Buildings
-            iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
-            iD.Way({id: 'building_no', tags: {area: 'yes', amenity: 'school', building: 'no'}, version: 1}),
-            iD.Way({id: 'building_part', tags: { 'building:part': 'yes'}, version: 1}),
-            iD.Way({id: 'garage1', tags: {area: 'yes', amenity: 'parking', parking: 'multi-storey'}, version: 1}),
-            iD.Way({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
-            iD.Way({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
-            iD.Way({id: 'garage4', tags: {area: 'yes', amenity: 'parking', parking: 'garage_boxes'}, version: 1}),
+            iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
+            iD.osmWay({id: 'building_no', tags: {area: 'yes', amenity: 'school', building: 'no'}, version: 1}),
+            iD.osmWay({id: 'building_part', tags: { 'building:part': 'yes'}, version: 1}),
+            iD.osmWay({id: 'garage1', tags: {area: 'yes', amenity: 'parking', parking: 'multi-storey'}, version: 1}),
+            iD.osmWay({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
+            iD.osmWay({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
+            iD.osmWay({id: 'garage4', tags: {area: 'yes', amenity: 'parking', parking: 'garage_boxes'}, version: 1}),
 
             // Landuse
-            iD.Way({id: 'forest', tags: {area: 'yes', landuse: 'forest'}, version: 1}),
-            iD.Way({id: 'scrub', tags: {area: 'yes', natural: 'scrub'}, version: 1}),
-            iD.Way({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
-            iD.Way({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
+            iD.osmWay({id: 'forest', tags: {area: 'yes', landuse: 'forest'}, version: 1}),
+            iD.osmWay({id: 'scrub', tags: {area: 'yes', natural: 'scrub'}, version: 1}),
+            iD.osmWay({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
+            iD.osmWay({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
 
             // Landuse Multipolygon
-            iD.Way({id: 'outer', version: 1}),
-            iD.Way({id: 'inner1', version: 1}),
-            iD.Way({id: 'inner2', tags: {barrier: 'fence'}, version: 1}),
-            iD.Way({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
-            iD.Relation({id: 'retail', tags: {landuse: 'retail', type: 'multipolygon'},
+            iD.osmWay({id: 'outer', version: 1}),
+            iD.osmWay({id: 'inner1', version: 1}),
+            iD.osmWay({id: 'inner2', tags: {barrier: 'fence'}, version: 1}),
+            iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
+            iD.osmRelation({id: 'retail', tags: {landuse: 'retail', type: 'multipolygon'},
                     members: [
                         {id: 'outer', role: 'outer', type: 'way'},
                         {id: 'inner1', role: 'inner', type: 'way'},
@@ -164,40 +164,40 @@ describe('iD.Features', function() {
                 }),
 
             // Boundaries
-            iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
-            iD.Way({id: 'boundary_road', tags: {boundary: 'administrative', highway: 'primary'}, version: 1}),
+            iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+            iD.osmWay({id: 'boundary_road', tags: {boundary: 'administrative', highway: 'primary'}, version: 1}),
 
             // Water
-            iD.Way({id: 'water', tags: {area: 'yes', natural: 'water'}, version: 1}),
-            iD.Way({id: 'coastline', tags: {natural: 'coastline'}, version: 1}),
-            iD.Way({id: 'bay', tags: {area: 'yes', natural: 'bay'}, version: 1}),
-            iD.Way({id: 'pond', tags: {area: 'yes', landuse: 'pond'}, version: 1}),
-            iD.Way({id: 'basin', tags: {area: 'yes', landuse: 'basin'}, version: 1}),
-            iD.Way({id: 'reservoir', tags: {area: 'yes', landuse: 'reservoir'}, version: 1}),
-            iD.Way({id: 'salt_pond', tags: {area: 'yes', landuse: 'salt_pond'}, version: 1}),
-            iD.Way({id: 'river', tags: {waterway: 'river'}, version: 1}),
+            iD.osmWay({id: 'water', tags: {area: 'yes', natural: 'water'}, version: 1}),
+            iD.osmWay({id: 'coastline', tags: {natural: 'coastline'}, version: 1}),
+            iD.osmWay({id: 'bay', tags: {area: 'yes', natural: 'bay'}, version: 1}),
+            iD.osmWay({id: 'pond', tags: {area: 'yes', landuse: 'pond'}, version: 1}),
+            iD.osmWay({id: 'basin', tags: {area: 'yes', landuse: 'basin'}, version: 1}),
+            iD.osmWay({id: 'reservoir', tags: {area: 'yes', landuse: 'reservoir'}, version: 1}),
+            iD.osmWay({id: 'salt_pond', tags: {area: 'yes', landuse: 'salt_pond'}, version: 1}),
+            iD.osmWay({id: 'river', tags: {waterway: 'river'}, version: 1}),
 
             // Rail
-            iD.Way({id: 'railway', tags: {railway: 'rail'}, version: 1}),
-            iD.Way({id: 'rail_landuse', tags: {area: 'yes', landuse: 'railway'}, version: 1}),
-            iD.Way({id: 'rail_disused', tags: {railway: 'disused'}, version: 1}),
-            iD.Way({id: 'rail_streetcar', tags: {railway: 'tram', highway: 'residential'}, version: 1}),
-            iD.Way({id: 'rail_trail', tags: {railway: 'disused', highway: 'cycleway'}, version: 1}),
+            iD.osmWay({id: 'railway', tags: {railway: 'rail'}, version: 1}),
+            iD.osmWay({id: 'rail_landuse', tags: {area: 'yes', landuse: 'railway'}, version: 1}),
+            iD.osmWay({id: 'rail_disused', tags: {railway: 'disused'}, version: 1}),
+            iD.osmWay({id: 'rail_streetcar', tags: {railway: 'tram', highway: 'residential'}, version: 1}),
+            iD.osmWay({id: 'rail_trail', tags: {railway: 'disused', highway: 'cycleway'}, version: 1}),
 
             // Power
-            iD.Way({id: 'power_line', tags: {power: 'line'}, version: 1}),
+            iD.osmWay({id: 'power_line', tags: {power: 'line'}, version: 1}),
 
             // Past/Future
-            iD.Way({id: 'motorway_construction', tags: {highway: 'construction', construction: 'motorway'}, version: 1}),
-            iD.Way({id: 'cycleway_proposed', tags: {highway: 'proposed', proposed: 'cycleway'}, version: 1}),
-            iD.Way({id: 'landuse_construction', tags: {area: 'yes', landuse: 'construction'}, version: 1}),
+            iD.osmWay({id: 'motorway_construction', tags: {highway: 'construction', construction: 'motorway'}, version: 1}),
+            iD.osmWay({id: 'cycleway_proposed', tags: {highway: 'proposed', proposed: 'cycleway'}, version: 1}),
+            iD.osmWay({id: 'landuse_construction', tags: {area: 'yes', landuse: 'construction'}, version: 1}),
 
             // Others
-            iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1}),
-            iD.Way({id: 'pipeline', tags: {man_made: 'pipeline'}, version: 1}),
+            iD.osmWay({id: 'fence', tags: {barrier: 'fence'}, version: 1}),
+            iD.osmWay({id: 'pipeline', tags: {man_made: 'pipeline'}, version: 1}),
 
             // Site relation
-            iD.Relation({id: 'site', tags: {type: 'site'},
+            iD.osmRelation({id: 'site', tags: {type: 'site'},
                     members: [
                         {id: 'fence', role: 'perimeter'},
                         {id: 'building_yes'}
@@ -435,10 +435,10 @@ describe('iD.Features', function() {
 
     describe('hiding', function() {
         it('hides child vertices on a hidden way', function() {
-            var a = iD.Node({id: 'a', version: 1}),
-                b = iD.Node({id: 'b', version: 1}),
-                w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
-                graph = iD.Graph([a, b, w]),
+            var a = iD.osmNode({id: 'a', version: 1}),
+                b = iD.osmNode({id: 'b', version: 1}),
+                w = iD.osmWay({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
+                graph = iD.coreGraph([a, b, w]),
                 geometry = a.geometry(graph),
                 all = _values(graph.base().entities);
 
@@ -452,11 +452,11 @@ describe('iD.Features', function() {
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
-            var outer = iD.Way({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1}),
-                inner1 = iD.Way({id: 'inner1', tags: {barrier: 'fence'}, version: 1}),
-                inner2 = iD.Way({id: 'inner2', version: 1}),
-                inner3 = iD.Way({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
-                r = iD.Relation({
+            var outer = iD.osmWay({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1}),
+                inner1 = iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1}),
+                inner2 = iD.osmWay({id: 'inner2', version: 1}),
+                inner3 = iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
+                r = iD.osmRelation({
                     id: 'r',
                     tags: {type: 'multipolygon'},
                     members: [
@@ -467,7 +467,7 @@ describe('iD.Features', function() {
                     ],
                     version: 1
                 }),
-                graph = iD.Graph([outer, inner1, inner2, inner3, r]),
+                graph = iD.coreGraph([outer, inner1, inner2, inner3, r]),
                 all = _values(graph.base().entities);
 
             features.disable('landuse');
@@ -480,9 +480,9 @@ describe('iD.Features', function() {
         });
 
         it('hides only versioned entities', function() {
-            var a = iD.Node({id: 'a', version: 1}),
-                b = iD.Node({id: 'b'}),
-                graph = iD.Graph([a, b]),
+            var a = iD.osmNode({id: 'a', version: 1}),
+                b = iD.osmNode({id: 'b'}),
+                graph = iD.coreGraph([a, b]),
                 ageo = a.geometry(graph),
                 bgeo = b.geometry(graph),
                 all = _values(graph.base().entities);
@@ -495,12 +495,12 @@ describe('iD.Features', function() {
         });
 
         it('auto-hides features', function() {
-            var graph = iD.Graph([]),
+            var graph = iD.coreGraph([]),
                 maxPoints = 200,
                 all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
-                graph.rebase([iD.Node({version: 1})], [graph]);
+                graph.rebase([iD.osmNode({version: 1})], [graph]);
             }
 
             all = _values(graph.base().entities);
@@ -512,7 +512,7 @@ describe('iD.Features', function() {
             expect(hidden, msg).to.not.include('points');
             expect(autoHidden, msg).to.not.include('points');
 
-            graph.rebase([iD.Node({version: 1})], [graph]);
+            graph.rebase([iD.osmNode({version: 1})], [graph]);
 
             all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
@@ -525,13 +525,13 @@ describe('iD.Features', function() {
         });
 
         it('doubles auto-hide threshold when doubling viewport size', function() {
-            var graph = iD.Graph([]),
+            var graph = iD.coreGraph([]),
                 maxPoints = 400,
                 dimensions = [2000, 1000],
                 all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
-                graph.rebase([iD.Node({version: 1})], [graph]);
+                graph.rebase([iD.osmNode({version: 1})], [graph]);
             }
 
             all = _values(graph.base().entities);
@@ -543,7 +543,7 @@ describe('iD.Features', function() {
             expect(hidden, msg).to.not.include('points');
             expect(autoHidden, msg).to.not.include('points');
 
-            graph.rebase([iD.Node({version: 1})], [graph]);
+            graph.rebase([iD.osmNode({version: 1})], [graph]);
 
             all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);

@@ -5,26 +5,26 @@ describe('iD.Lanes', function() {
         describe('motorway', function() {
 
             it('returns 2 lanes for highway=motorway', function() {
-                expect(iD.Way({tags: { highway: 'motorway' }}).lanes().metadata.count, 'motorway lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway' }}).lanes().metadata.count, 'motorway lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'motorway', oneway: 'yes' }}).lanes().metadata.count, 'motorway lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway', oneway: 'yes' }}).lanes().metadata.count, 'motorway lanes')
                     .to.eql(2);
             });
 
             it('returns 4 lanes for highway=motorway and oneway=no', function() {
-                expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).lanes().metadata.count, 'motorway lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway', oneway: 'no' }}).lanes().metadata.count, 'motorway lanes')
                     .to.eql(4);
             });
 
             it('returns 2 lanes for highway=motorway_link', function() {
-                expect(iD.Way({tags: { highway: 'motorway_link' }}).lanes().metadata.count, 'motorway_link lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway_link' }}).lanes().metadata.count, 'motorway_link lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().metadata.count, 'motorway_link lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().metadata.count, 'motorway_link lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=motorway_link and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
+                expect(iD.osmWay({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
                     .to.eql(1);
             });
         });
@@ -32,26 +32,26 @@ describe('iD.Lanes', function() {
         describe('trunk', function() {
 
             it('returns 4 lanes for highway=trunk', function() {
-                expect(iD.Way({tags: { highway: 'trunk' }}).lanes().metadata.count, 'trunk lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk' }}).lanes().metadata.count, 'trunk lanes')
                     .to.eql(4);
-                expect(iD.Way({tags: { highway: 'trunk', oneway: 'no' }}).lanes().metadata.count, 'trunk lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk', oneway: 'no' }}).lanes().metadata.count, 'trunk lanes')
                     .to.eql(4);
             });
 
             it('returns 2 lanes for highway=trunk and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'trunk', oneway: 'yes' }}).lanes().metadata.count, 'trunk lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk', oneway: 'yes' }}).lanes().metadata.count, 'trunk lanes')
                     .to.eql(2);
             });
 
             it('returns 2 lanes for highway=trunk_link', function() {
-                expect(iD.Way({tags: { highway: 'trunk_link' }}).lanes().metadata.count, 'trunk_link lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk_link' }}).lanes().metadata.count, 'trunk_link lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'no' }}).lanes().metadata.count, 'trunk_link lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk_link', oneway: 'no' }}).lanes().metadata.count, 'trunk_link lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=trunk_link and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'yes' }}).lanes().metadata.count, 'trunk_link lanes')
+                expect(iD.osmWay({tags: { highway: 'trunk_link', oneway: 'yes' }}).lanes().metadata.count, 'trunk_link lanes')
                     .to.eql(1);
             });
         });
@@ -59,26 +59,26 @@ describe('iD.Lanes', function() {
         describe('primary', function() {
 
             it('returns 2 lanes for highway=primary', function() {
-                expect(iD.Way({tags: { highway: 'primary' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'primary', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=primary and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'primary', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(1);
             });
 
             it('returns 2 lanes for highway=primary_link', function() {
-                expect(iD.Way({tags: { highway: 'primary_link' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary_link' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'primary_link', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary_link', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=primary_link and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'primary_link', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
+                expect(iD.osmWay({tags: { highway: 'primary_link', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
                     .to.eql(1);
             });
         });
@@ -86,26 +86,26 @@ describe('iD.Lanes', function() {
         describe('seconday', function() {
 
             it('returns 2 lanes for highway=secondary', function() {
-                expect(iD.Way({tags: { highway: 'secondary' }}).lanes().metadata.count, 'secondary lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary' }}).lanes().metadata.count, 'secondary lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'secondary', oneway: 'no' }}).lanes().metadata.count, 'secondary lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary', oneway: 'no' }}).lanes().metadata.count, 'secondary lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=secondary and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'secondary', oneway: 'yes' }}).lanes().metadata.count, 'secondary lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary', oneway: 'yes' }}).lanes().metadata.count, 'secondary lanes')
                     .to.eql(1);
             });
 
             it('returns 2 lane for highway=secondary_link', function() {
-                expect(iD.Way({tags: { highway: 'secondary_link' }}).lanes().metadata.count, 'secondary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary_link' }}).lanes().metadata.count, 'secondary_link lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'no' }}).lanes().metadata.count, 'secondary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary_link', oneway: 'no' }}).lanes().metadata.count, 'secondary_link lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=secondary_link and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'yes' }}).lanes().metadata.count, 'secondary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'secondary_link', oneway: 'yes' }}).lanes().metadata.count, 'secondary_link lanes')
                     .to.eql(1);
             });
         });
@@ -113,26 +113,26 @@ describe('iD.Lanes', function() {
         describe('tertiary', function() {
 
             it('returns 2 lanes for highway=tertiary', function() {
-                expect(iD.Way({tags: { highway: 'tertiary' }}).lanes().metadata.count, 'tertiary lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary' }}).lanes().metadata.count, 'tertiary lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'tertiary', oneway: 'no' }}).lanes().metadata.count, 'tertiary lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary', oneway: 'no' }}).lanes().metadata.count, 'tertiary lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=tertiary and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'tertiary', oneway: 'yes' }}).lanes().metadata.count, 'tertiary lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary', oneway: 'yes' }}).lanes().metadata.count, 'tertiary lanes')
                     .to.eql(1);
             });
 
             it('returns 2 lane for highway=tertiary_link', function() {
-                expect(iD.Way({tags: { highway: 'tertiary_link' }}).lanes().metadata.count, 'tertiary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary_link' }}).lanes().metadata.count, 'tertiary_link lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'no' }}).lanes().metadata.count, 'tertiary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary_link', oneway: 'no' }}).lanes().metadata.count, 'tertiary_link lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=tertiary_link and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'yes' }}).lanes().metadata.count, 'tertiary_link lanes')
+                expect(iD.osmWay({tags: { highway: 'tertiary_link', oneway: 'yes' }}).lanes().metadata.count, 'tertiary_link lanes')
                     .to.eql(1);
             });
         });
@@ -140,14 +140,14 @@ describe('iD.Lanes', function() {
         describe('residential', function() {
 
             it('returns 2 lanes for highway=residential', function() {
-                expect(iD.Way({tags: { highway: 'residential' }}).lanes().metadata.count, 'residential lanes')
+                expect(iD.osmWay({tags: { highway: 'residential' }}).lanes().metadata.count, 'residential lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.count, 'residential lanes')
+                expect(iD.osmWay({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.count, 'residential lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=residential and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.count, 'residential lanes')
+                expect(iD.osmWay({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.count, 'residential lanes')
                     .to.eql(1);
             });
         });
@@ -155,14 +155,14 @@ describe('iD.Lanes', function() {
         describe('service', function() {
 
             it('returns 2 lanes for highway=service', function() {
-                expect(iD.Way({tags: { highway: 'service' }}).lanes().metadata.count, 'service lanes')
+                expect(iD.osmWay({tags: { highway: 'service' }}).lanes().metadata.count, 'service lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'service', oneway: 'no' }}).lanes().metadata.count, 'service lanes')
+                expect(iD.osmWay({tags: { highway: 'service', oneway: 'no' }}).lanes().metadata.count, 'service lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=service and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'service', oneway: 'yes' }}).lanes().metadata.count, 'service lanes')
+                expect(iD.osmWay({tags: { highway: 'service', oneway: 'yes' }}).lanes().metadata.count, 'service lanes')
                     .to.eql(1);
             });
         });
@@ -170,14 +170,14 @@ describe('iD.Lanes', function() {
         describe('track', function() {
 
             it('returns 2 lanes for highway=track', function() {
-                expect(iD.Way({tags: { highway: 'track' }}).lanes().metadata.count, 'track lanes')
+                expect(iD.osmWay({tags: { highway: 'track' }}).lanes().metadata.count, 'track lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'track', oneway: 'no' }}).lanes().metadata.count, 'track lanes')
+                expect(iD.osmWay({tags: { highway: 'track', oneway: 'no' }}).lanes().metadata.count, 'track lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=track and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'track', oneway: 'yes' }}).lanes().metadata.count, 'track lanes')
+                expect(iD.osmWay({tags: { highway: 'track', oneway: 'yes' }}).lanes().metadata.count, 'track lanes')
                     .to.eql(1);
             });
         });
@@ -185,14 +185,14 @@ describe('iD.Lanes', function() {
         describe('path', function() {
 
             it('returns 2 lanes for highway=path', function() {
-                expect(iD.Way({tags: { highway: 'path' }}).lanes().metadata.count, 'path lanes')
+                expect(iD.osmWay({tags: { highway: 'path' }}).lanes().metadata.count, 'path lanes')
                     .to.eql(2);
-                expect(iD.Way({tags: { highway: 'path', oneway: 'no' }}).lanes().metadata.count, 'path lanes')
+                expect(iD.osmWay({tags: { highway: 'path', oneway: 'no' }}).lanes().metadata.count, 'path lanes')
                     .to.eql(2);
             });
 
             it('returns 1 lane for highway=path and oneway=yes', function() {
-                expect(iD.Way({tags: { highway: 'path', oneway: 'yes' }}).lanes().metadata.count, 'path lanes')
+                expect(iD.osmWay({tags: { highway: 'path', oneway: 'yes' }}).lanes().metadata.count, 'path lanes')
                     .to.eql(1);
             });
         });
@@ -200,9 +200,9 @@ describe('iD.Lanes', function() {
 
     describe('oneway tags', function() {
         it('returns correctly oneway when tagged as oneway', function() {
-            expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
                 .to.be.true;
-            expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
                 .to.be.false;
         });
     });
@@ -210,7 +210,7 @@ describe('iD.Lanes', function() {
     describe('lane direction', function() {
 
         it('returns correctly the lane:forward and lane:backward count', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 2,
                     oneway: false,
@@ -218,7 +218,7 @@ describe('iD.Lanes', function() {
                     backward: 1,
                     bothways: 0
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:forward': 3, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 4, 'lanes:forward': 3, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 4,
                     oneway: false,
@@ -229,7 +229,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly the count if erroneous values are supplied', function() {
-            expect(iD.Way({tags: { highway: 'trunk', lanes: 2, 'lanes:forward': 3 }}).lanes().metadata, 'trunk lanes')
+            expect(iD.osmWay({tags: { highway: 'trunk', lanes: 2, 'lanes:forward': 3 }}).lanes().metadata, 'trunk lanes')
                 .to.include({
                     count: 2,
                     oneway: false,
@@ -240,7 +240,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly forward count when oneway=yes', function() {
-            expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().metadata, 'trunk lanes')
+            expect(iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().metadata, 'trunk lanes')
                 .to.include({
                     count: 2,
                     oneway: true,
@@ -251,7 +251,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly backward count the when oneway=-1', function() {
-            expect(iD.Way({tags: { highway: 'primary', lanes: 4, oneway: '-1' }}).lanes().metadata, 'primary lanes')
+            expect(iD.osmWay({tags: { highway: 'primary', lanes: 4, oneway: '-1' }}).lanes().metadata, 'primary lanes')
                 .to.include({
                     count: 4,
                     oneway: true,
@@ -262,7 +262,7 @@ describe('iD.Lanes', function() {
         });
 
         it('skips provided lanes:forward value when oneway=yes', function() {
-            expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:forward': 1 }}).lanes().metadata, 'trunk lanes')
+            expect(iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:forward': 1 }}).lanes().metadata, 'trunk lanes')
                 .to.include({
                     count: 2,
                     oneway: true,
@@ -273,7 +273,7 @@ describe('iD.Lanes', function() {
         });
 
         it('skips provided lanes:backward value when oneway=yes', function() {
-            expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:backward': 1 }}).lanes().metadata, 'trunk lanes')
+            expect(iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:backward': 1 }}).lanes().metadata, 'trunk lanes')
                 .to.include({
                     count: 2,
                     oneway: true,
@@ -284,7 +284,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly forward count if only backward is supplied', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 3,
                     oneway: false,
@@ -292,7 +292,7 @@ describe('iD.Lanes', function() {
                     backward: 1,
                     bothways: 0
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:backward': 3, }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 4, 'lanes:backward': 3, }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 4,
                     oneway: false,
@@ -303,7 +303,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly backward count if only forward is supplied', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 3,
                     oneway: false,
@@ -311,7 +311,7 @@ describe('iD.Lanes', function() {
                     backward: 2,
                     bothways: 0
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 2,
                     oneway: false,
@@ -322,7 +322,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly backward count if forward and both_ways are supplied', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 3,
                     oneway: false,
@@ -330,7 +330,7 @@ describe('iD.Lanes', function() {
                     backward: 1,
                     bothways: 1
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 5,
                     oneway: false,
@@ -341,7 +341,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly forward count if backward and both_ways are supplied', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 3,
                     oneway: false,
@@ -349,7 +349,7 @@ describe('iD.Lanes', function() {
                     backward: 1,
                     bothways: 1
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 5,
                     oneway: false,
@@ -360,7 +360,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly the lane:both_ways count as 1', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 2,
                     oneway: false,
@@ -371,7 +371,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when lane:both_ways>1', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 2, 'lanes:backward': 2 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 2, 'lanes:backward': 2 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 5,
                     oneway: false,
@@ -382,7 +382,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when lane:both_ways is 0 or Not a Number', function() {
-            expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 5,
                     oneway: false,
@@ -390,7 +390,7 @@ describe('iD.Lanes', function() {
                     backward: 3,
                     bothways: 0
                 });
-            expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 'none' }}).lanes().metadata, 'residential lanes')
+            expect(iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 'none' }}).lanes().metadata, 'residential lanes')
                 .to.include({
                     count: 2,
                     oneway: false,
@@ -404,7 +404,7 @@ describe('iD.Lanes', function() {
 
     describe.skip('lanes array', function() {
       it('should have correct number of direction elements', function() {
-        var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
+        var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
         var forward = lanes.filter(function(l) {
           return l.direction === 'forward';
         });
@@ -420,7 +420,7 @@ describe('iD.Lanes', function() {
 
       });
       it('should have corrent number of direction elements', function() {
-        var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
+        var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
         var forward = lanes.filter(function(l) {
           return l.direction === 'forward';
         });
@@ -438,7 +438,7 @@ describe('iD.Lanes', function() {
 
     describe('turn lanes', function() {
         it('returns correctly when oneway=yes', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'trunk',
                     oneway: 'yes',
@@ -452,7 +452,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when oneway=yes and lanes=2', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     oneway: 'yes',
@@ -468,7 +468,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when lanes=5 and both_ways=1', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -489,7 +489,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when multiple values are present in a lane and oneway=yes', function() {
-            var lanesData = iD.Way({
+            var lanesData = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -509,7 +509,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when multiple values are present in a lane and oneway=no', function() {
-            var lanesData = iD.Way({
+            var lanesData = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -534,7 +534,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns unknown for every invalid value in turn:lanes', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 3,
@@ -549,7 +549,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns unknown for every invalid value in turn:lanes:forward & turn:lanes:backward', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -570,7 +570,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -586,7 +586,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -608,7 +608,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('clips when turn lane information is more than lane count', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -624,7 +624,7 @@ describe('iD.Lanes', function() {
         });
 
         it('turnLanes is undefined when not present', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -641,7 +641,7 @@ describe('iD.Lanes', function() {
         });
 
         it('turnLanes.forward and turnLanes.backward are both undefined when both are not provided', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -659,7 +659,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses turnLane correctly when lanes:both_ways=1', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -678,7 +678,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses turnLane correctly when lanes:both_ways=1 & lanes:forward < lanes:backward', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -697,7 +697,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes= ||x', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 3,
@@ -711,7 +711,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes= |x|', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -724,7 +724,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes:forward= ||x', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 4,
@@ -743,7 +743,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes:backward= |', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -762,7 +762,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -779,7 +779,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -803,7 +803,7 @@ describe('iD.Lanes', function() {
 
     describe('maxspeed', function() {
         it('should parse maxspeed without any units correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -811,7 +811,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata.maxspeed;
             expect(maxspeed).to.equal(70);
-            maxspeed = iD.Way({
+            maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -822,7 +822,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with km/h correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -833,7 +833,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with kmh correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -844,7 +844,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with kph correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -855,7 +855,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with mph correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -866,7 +866,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with knots correctly', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -877,7 +877,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when incorrect maxspeed unit provided ', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -888,7 +888,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when incorrect maxspeed value provided ', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -899,7 +899,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when maxspeed not provided ', function() {
-            var maxspeed = iD.Way({
+            var maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -912,7 +912,7 @@ describe('iD.Lanes', function() {
     describe('maxspeed:lanes', function() {
 
         it('should parse correctly', function() {
-            var maxspeedLanes = iD.Way({
+            var maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -925,7 +925,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed:lanes:forward/backward correctly', function() {
-            var metadata = iD.Way({
+            var metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -945,7 +945,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse correctly when some values maxspeed:lanes are implied by x||y notation', function() {
-            var maxspeedLanes = iD.Way({
+            var maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 4,
@@ -959,7 +959,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse correctly when some values maxspeed:lanes are implied by x||| notation', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -977,7 +977,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return none for each maxspeed:lanes which equals maxspeed', function() {
-            var maxspeedLanes = iD.Way({
+            var maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -988,7 +988,7 @@ describe('iD.Lanes', function() {
             expect(maxspeedLanes.unspecified).to.deep.equal([
                 30, null, null, null, null
             ]);
-            maxspeedLanes = iD.Way({
+            maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -999,7 +999,7 @@ describe('iD.Lanes', function() {
             expect(maxspeedLanes.unspecified).to.deep.equal([
                 30, 40, 40, 40, 40
             ]);
-            maxspeedLanes = iD.Way({
+            maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1013,7 +1013,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return \'unknown\' for every invalid maxspeed:lane value', function() {
-            var maxspeedLanes = iD.Way({
+            var maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1024,7 +1024,7 @@ describe('iD.Lanes', function() {
             expect(maxspeedLanes.unspecified).to.deep.equal([
                 null, 40, 'unknown', 40, 40
             ]);
-            maxspeedLanes = iD.Way({
+            maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1039,7 +1039,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed when none', function() {
-            var maxspeedLanes = iD.Way({
+            var maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1052,7 +1052,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1071,7 +1071,7 @@ describe('iD.Lanes', function() {
 
     describe('bicycle lanes', function() {
         it('should parse bicycle:lanes correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
@@ -1093,7 +1093,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse bicycle:lanes:forward/backward correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     'lanes:forward': 4,
@@ -1124,7 +1124,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should replace any invalid value with unknown', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
@@ -1147,7 +1147,7 @@ describe('iD.Lanes', function() {
 
     describe('miscellaneous lanes', function() {
         it('should parse psv:lanes correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1166,7 +1166,7 @@ describe('iD.Lanes', function() {
             ]);
         });
         it('should parse psv:lanes:forward/backward correctly', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1195,7 +1195,7 @@ describe('iD.Lanes', function() {
             ]);
         });
         it('should replace any invalid value with unknown', function() {
-            var lanes = iD.Way({
+            var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
