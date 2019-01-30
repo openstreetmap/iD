@@ -44,36 +44,32 @@ export function validationGenericName(context) {
     }
 
 
-    return function validation(entitiesToCheck) {
+    return function validation(entity) {
         var issues = [];
-
-        for (var i = 0; i < entitiesToCheck.length; i++) {
-            var change = entitiesToCheck[i];
-            var generic = isGenericName(change);
-            if (generic) {
-                var preset = utilPreset(change, context);
-                issues.push(new validationIssue({
-                    type: ValidationIssueType.generic_name,
-                    severity: ValidationIssueSeverity.warning,
-                    message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
-                    tooltip: t('issues.generic_name.tip'),
-                    entities: [change],
-                    fixes: [
-                        new validationIssueFix({
-                            title: t('issues.fix.remove_generic_name.title'),
-                            onClick: function() {
-                                var entity = this.issue.entities[0];
-                                var tags = _clone(entity.tags);
-                                delete tags.name;
-                                context.perform(
-                                    actionChangeTags(entity.id, tags),
-                                    t('issues.fix.remove_generic_name.undo_redo')
-                                );
-                            }
-                        })
-                    ]
-                }));
-            }
+        var generic = isGenericName(entity);
+        if (generic) {
+            var preset = utilPreset(entity, context);
+            issues.push(new validationIssue({
+                type: ValidationIssueType.generic_name,
+                severity: ValidationIssueSeverity.warning,
+                message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
+                tooltip: t('issues.generic_name.tip'),
+                entities: [entity],
+                fixes: [
+                    new validationIssueFix({
+                        title: t('issues.fix.remove_generic_name.title'),
+                        onClick: function() {
+                            var entity = this.issue.entities[0];
+                            var tags = _clone(entity.tags);
+                            delete tags.name;
+                            context.perform(
+                                actionChangeTags(entity.id, tags),
+                                t('issues.fix.remove_generic_name.undo_redo')
+                            );
+                        }
+                    })
+                ]
+            }));
         }
 
         return issues;

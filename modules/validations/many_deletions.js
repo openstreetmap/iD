@@ -8,10 +8,10 @@ import {
 export function validationManyDeletions() {
     var threshold = 100;
 
-    var validation = function(changes, graph) {
+    var validation = function(changes, context) {
         var issues = [];
         var nodes = 0, ways = 0, areas = 0, relations = 0;
-
+        var graph = context.graph();
         changes.deleted.forEach(function(c) {
             if (c.type === 'node') { nodes++; }
             else if (c.type === 'way' && c.geometry(graph) === 'line') { ways++; }

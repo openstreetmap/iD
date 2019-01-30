@@ -55,23 +55,22 @@ export function IssueManager(context) {
     };
 
     var entityValidations = [
-       validations.validationDeprecatedTag,
-       validations.validationDisconnectedHighway,
-       validations.validationGenericName,
-       validations.validationHighwayCrossingOtherWays,
-       validations.validationHighwayAlmostJunction,
-       validations.validationMapCSSChecks,
-       validations.validationMissingTag,
-       validations.validationOldMultipolygon,
-       validations.validationTagSuggestsArea
+       validations.validationDeprecatedTag(),
+       validations.validationDisconnectedHighway(),
+       validations.validationGenericName(),
+       validations.validationHighwayCrossingOtherWays(),
+       validations.validationHighwayAlmostJunction(),
+       validations.validationMapCSSChecks(),
+       validations.validationMissingTag(),
+       validations.validationOldMultipolygon(),
+       validations.validationTagSuggestsArea()
     ];
 
     function validateEntity(entity) {
-        var history = context.history();
         return _flatten(_map(
             entityValidations,
             function(fn) {
-                return fn(context)([entity], history.graph(), history.tree());
+                return fn(entity, context);
             }
         ));
     }
@@ -86,7 +85,7 @@ export function IssueManager(context) {
         var entitiesToCheck = changes.created.concat(changes.modified);
         var graph = history.graph();
 
-        issues = issues.concat(validations.validationManyDeletions(context)(changes, graph));
+        issues = issues.concat(validations.validationManyDeletions()(changes, context));
 
         entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
             var entities = [entity];

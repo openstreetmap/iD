@@ -16,7 +16,7 @@ import { actionAddMidpoint } from '../actions';
 import { geoChooseEdge } from '../geo';
 
 
-export function validationHighwayCrossingOtherWays(context) {
+export function validationHighwayCrossingOtherWays() {
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the corss point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited) {
@@ -236,11 +236,14 @@ export function validationHighwayCrossingOtherWays(context) {
         return edgeCrossInfos;
     }
 
-    var validation = function(entitiesToCheck, graph, tree) {
+    var validation = function(entity, context) {
+
+        var graph = context.graph();
+        var tree = context.history().tree();
         // create one issue per crossing point
         var edgePairsVisited = d3_set(),
             issues = [];
-        var waysToCheck = _flattenDeep(_map(entitiesToCheck, function(entity) {
+        var waysToCheck = _flattenDeep(_map([entity], function(entity) {
             if (!getFeatureTypeForTags(entity.tags)) {
                 return [];
             }

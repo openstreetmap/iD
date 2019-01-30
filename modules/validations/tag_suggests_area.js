@@ -17,7 +17,7 @@ import {
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
 // openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
-export function validationTagSuggestsArea(context) {
+export function validationTagSuggestsArea() {
 
     function tagSuggestsArea(tags) {
         if (_isEmpty(tags)) return false;
@@ -40,39 +40,37 @@ export function validationTagSuggestsArea(context) {
     }
 
 
-    var validation = function(entitiesToCheck, graph) {
+    var validation = function(entity, context) {
         var issues = [];
-        for (var i = 0; i < entitiesToCheck.length; i++) {
-            var entity = entitiesToCheck[i];
-            var geometry = entity.geometry(graph);
-            var suggestingTags = (geometry === 'line' ? tagSuggestsArea(entity.tags) : undefined);
+        var graph = context.graph();
+        var geometry = entity.geometry(graph);
+        var suggestingTags = (geometry === 'line' ? tagSuggestsArea(entity.tags) : undefined);
 
-            if (suggestingTags) {
-                var tagText = utilTagText({ tags: suggestingTags });
-                issues.push(new validationIssue({
-                    type: ValidationIssueType.tag_suggests_area,
-                    severity: ValidationIssueSeverity.warning,
-                    message: t('issues.tag_suggests_area.message', { tag: tagText }),
-                    tooltip: t('issues.tag_suggests_area.tip'),
-                    entities: [entity],
-                    fixes: [
-                        new validationIssueFix({
-                            title: t('issues.fix.remove_tags.title'),
-                            onClick: function() {
-                                var entity = this.issue.entities[0];
-                                var tags = _clone(entity.tags);
-                                for (var key in suggestingTags) {
-                                    delete tags[key];
-                                }
-                                context.perform(
-                                    actionChangeTags(entity.id, tags),
-                                    t('issues.fix.remove_tags.undo_redo')
-                                );
+        if (suggestingTags) {
+            var tagText = utilTagText({ tags: suggestingTags });
+            issues.push(new validationIssue({
+                type: ValidationIssueType.tag_suggests_area,
+                severity: ValidationIssueSeverity.warning,
+                message: t('issues.tag_suggests_area.message', { tag: tagText }),
+                tooltip: t('issues.tag_suggests_area.tip'),
+                entities: [entity],
+                fixes: [
+                    new validationIssueFix({
+                        title: t('issues.fix.remove_tags.title'),
+                        onClick: function() {
+                            var entity = this.issue.entities[0];
+                            var tags = _clone(entity.tags);
+                            for (var key in suggestingTags) {
+                                delete tags[key];
                             }
-                        })
-                    ]
-                }));
-            }
+                            context.perform(
+                                actionChangeTags(entity.id, tags),
+                                t('issues.fix.remove_tags.undo_redo')
+                            );
+                        }
+                    })
+                ]
+            }));
         }
 
         return issues;

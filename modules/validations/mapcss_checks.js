@@ -1,17 +1,17 @@
 import { services } from '../services';
 
 export function validationMapCSSChecks() {
-    var validation = function(entitiesToCheck, graph) {
+    var validation = function(entity, context) {
         if (!services.maprules) return [];
+
+        var graph = context.graph();
 
         var rules = services.maprules.validationRules();
         var issues = [];
 
         for (var i = 0; i < rules.length; i++) {
             var rule = rules[i];
-            for (var j = 0; j < entitiesToCheck.length; j++) {
-                rule.findIssues(entitiesToCheck[j], graph, issues);
-            }
+            rule.findIssues(entity, graph, issues);
         }
 
         return issues;

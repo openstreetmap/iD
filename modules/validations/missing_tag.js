@@ -12,7 +12,7 @@ import {
 } from './validation_issue';
 import { operationDelete } from '../operations/index';
 
-export function validationMissingTag(context) {
+export function validationMissingTag() {
 
     function hasDescriptiveTags(entity) {
         var keys = _without(Object.keys(entity.tags), 'area', 'name').filter(osmIsInterestingTag);
@@ -22,40 +22,37 @@ export function validationMissingTag(context) {
         return keys.length > 0;
     }
 
-    var validation = function(entitiesToCheck, graph) {
+    var validation = function(entity, context) {
         var types = ['point', 'line', 'area', 'relation'];
         var issues = [];
-
-        for (var i = 0; i < entitiesToCheck.length; i++) {
-            var entity = entitiesToCheck[i];
-            var geometry = entity.geometry(graph);
-            // ignore vertex features
-            if (types.indexOf(geometry) !== -1 &&
-                !(hasDescriptiveTags(entity) || entity.hasParentRelations(graph))) {
-                var entityLabel = utilDisplayLabel(entity, context);
-                issues.push(new validationIssue({
-                    type: ValidationIssueType.missing_tag,
-                    severity: ValidationIssueSeverity.error,
-                    message: t('issues.untagged_feature.message', {feature: entityLabel}),
-                    tooltip: t('issues.untagged_feature.tip'),
-                    entities: [entity],
-                    fixes: [
-                        new validationIssueFix({
-                            title: t('issues.fix.select_preset.title'),
-                            onClick: function() {
-                                context.ui().sidebar.showPresetList();
-                            }
-                        }),
-                        new validationIssueFix({
-                            title: t('issues.fix.delete_feature.title'),
-                            onClick: function() {
-                                var id = this.issue.entities[0].id;
-                                operationDelete([id], context)();
-                            }
-                        })
-                    ]
-                }));
-            }
+        var graph = context.graph();
+        var geometry = entity.geometry(graph);
+        // ignore vertex features
+        if (types.indexOf(geometry) !== -1 &&
+            !(hasDescriptiveTags(entity) || entity.hasParentRelations(graph))) {
+            var entityLabel = utilDisplayLabel(entity, context);
+            issues.push(new validationIssue({
+                type: ValidationIssueType.missing_tag,
+                severity: ValidationIssueSeverity.error,
+                message: t('issues.untagged_feature.message', {feature: entityLabel}),
+                tooltip: t('issues.untagged_feature.tip'),
+                entities: [entity],
+                fixes: [
+                    new validationIssueFix({
+                        title: t('issues.fix.select_preset.title'),
+                        onClick: function() {
+                            context.ui().sidebar.showPresetList();
+                        }
+                    }),
+                    new validationIssueFix({
+                        title: t('issues.fix.delete_feature.title'),
+                        onClick: function() {
+                            var id = this.issue.entities[0].id;
+                            operationDelete([id], context)();
+                        }
+                    })
+                ]
+            }));
         }
 
         return issues;

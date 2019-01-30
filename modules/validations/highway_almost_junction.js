@@ -25,7 +25,7 @@ import {
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationHighwayAlmostJunction(context) {
+export function validationHighwayAlmostJunction() {
 
     function isHighway(entity) {
         return entity.type === 'way' && entity.tags.highway && entity.tags.highway !== 'no';
@@ -108,60 +108,59 @@ export function validationHighwayAlmostJunction(context) {
         return null;
     }
 
-    var validation = function(entitiesToCheck, graph, tree) {
+    var validation = function(endHighway, context) {
+        var graph = context.graph();
+        var tree = context.history().tree();
         var issues = [];
-        for (var i = 0; i < entitiesToCheck.length; i++) {
-            var endHighway = entitiesToCheck[i];
-            if (!isHighway(endHighway)) continue;
-            var extendableNodes = findConnectableEndNodesByExtension(endHighway, graph, tree);
-            for (var j = 0; j < extendableNodes.length; j++) {
-                var node = extendableNodes[j].node;
-                var edgeHighway = graph.entity(extendableNodes[j].wid);
+        if (!isHighway(endHighway)) return issues;
+        var extendableNodes = findConnectableEndNodesByExtension(endHighway, graph, tree);
+        for (var j = 0; j < extendableNodes.length; j++) {
+            var node = extendableNodes[j].node;
+            var edgeHighway = graph.entity(extendableNodes[j].wid);
 
-                var fixes = [
-                  new validationIssueFix({
-                      title: t('issues.fix.connect_almost_junction.title'),
-                      onClick: function() {
-                          var endNode = this.issue.entities[1],
-                              targetEdge = this.issue.info.edge,
-                              crossLoc = this.issue.info.cross_loc;
-                          context.perform(
-                              actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
-                              t('issues.fix.connect_almost_junction.undo_redo')
-                          );
-                      }
-                  })
-                ];
-                if (Object.keys(node.tags).length === 0) {
-                    // node has no tags, suggest noexit fix
-                    fixes.push(new validationIssueFix({
-                        title: t('issues.fix.tag_as_disconnected.title'),
-                        onClick: function() {
-                            var nodeID = this.issue.entities[1].id;
-                            context.perform(
-                                actionChangeTags(nodeID, {noexit: 'yes'}),
-                                t('issues.fix.tag_as_disconnected.undo_redo')
-                            );
-                        }
-                    }));
-                }
-                issues.push(new validationIssue({
-                    type: ValidationIssueType.highway_almost_junction,
-                    severity: ValidationIssueSeverity.warning,
-                    message: t('issues.highway_almost_junction.message', {
-                        highway: utilDisplayLabel(endHighway, context),
-                        highway2: utilDisplayLabel(edgeHighway, context)
-                    }),
-                    tooltip: t('issues.highway_almost_junction.tip'),
-                    entities: [endHighway, node, edgeHighway],
-                    coordinates: extendableNodes[j].node.loc,
-                    info: {
-                        edge: extendableNodes[j].edge,
-                        cross_loc: extendableNodes[j].cross_loc
-                    },
-                    fixes: fixes
+            var fixes = [
+              new validationIssueFix({
+                  title: t('issues.fix.connect_almost_junction.title'),
+                  onClick: function() {
+                      var endNode = this.issue.entities[1],
+                          targetEdge = this.issue.info.edge,
+                          crossLoc = this.issue.info.cross_loc;
+                      context.perform(
+                          actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
+                          t('issues.fix.connect_almost_junction.undo_redo')
+                      );
+                  }
+              })
+            ];
+            if (Object.keys(node.tags).length === 0) {
+                // node has no tags, suggest noexit fix
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.tag_as_disconnected.title'),
+                    onClick: function() {
+                        var nodeID = this.issue.entities[1].id;
+                        context.perform(
+                            actionChangeTags(nodeID, {noexit: 'yes'}),
+                            t('issues.fix.tag_as_disconnected.undo_redo')
+                        );
+                    }
                 }));
             }
+            issues.push(new validationIssue({
+                type: ValidationIssueType.highway_almost_junction,
+                severity: ValidationIssueSeverity.warning,
+                message: t('issues.highway_almost_junction.message', {
+                    highway: utilDisplayLabel(endHighway, context),
+                    highway2: utilDisplayLabel(edgeHighway, context)
+                }),
+                tooltip: t('issues.highway_almost_junction.tip'),
+                entities: [endHighway, node, edgeHighway],
+                coordinates: extendableNodes[j].node.loc,
+                info: {
+                    edge: extendableNodes[j].edge,
+                    cross_loc: extendableNodes[j].cross_loc
+                },
+                fixes: fixes
+            }));
         }
 
         return issues;
