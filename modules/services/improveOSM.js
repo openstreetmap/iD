@@ -185,7 +185,7 @@ export default {
 
                                 // Even number of points, find midpoint of the middle two
                                 // Odd number of points, use position of very middle point
-                                if (mid % 1 == 0) {
+                                if (mid % 1 === 0) {
                                     loc = pointAverage([points[mid - 1], points[mid]]);
                                 } else {
                                     mid = points[Math.floor(mid)];

@@ -1,5 +1,4 @@
 import { dataEn } from '../../data';
-import { svgIcon } from '../svg';
 import { t } from '../util/locale';
 
 
