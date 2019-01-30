@@ -459,6 +459,10 @@ export function coreContext() {
 
     issueManager = IssueManager(context);
 
+    // run validation upon restoring from page reload
+    history.on('restore', function() {
+        issueManager.validate();
+    });
     // re-run validation upon a significant graph change
     history.on('annotatedChange', function(difference) {
         if (difference) {

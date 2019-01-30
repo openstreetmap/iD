@@ -32,7 +32,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'annotatedChange', 'merge', 'undone', 'redone');
+    var dispatch = d3_dispatch('change', 'annotatedChange', 'merge', 'restore', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
@@ -625,6 +625,7 @@ export function coreHistory(context) {
 
             var json = context.storage(getKey('saved_history'));
             if (json) history.fromJSON(json, true);
+            dispatch.call('restore', this);
         },
 
 
