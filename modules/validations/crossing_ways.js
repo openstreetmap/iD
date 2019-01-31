@@ -321,19 +321,20 @@ export function validationHighwayCrossingOtherWays() {
 
                             context.perform(
                                 function actionConnectCrossingWays(graph) {
+                                    var projection = context.projection;
 
-                                    var node = osmNode();
+                                    var node = osmNode({ loc: loc });
                                     graph = graph.replace(node);
 
                                     var way0 = graph.entity(ways[0].id);
-                                    var choice0 = geoChooseEdge(graph.childNodes(way0), loc, context.projection);
+                                    var choice0 = geoChooseEdge(graph.childNodes(way0), projection(loc), projection);
                                     var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
-                                    graph = actionAddMidpoint({loc: choice0.loc, edge: edge0}, node)(graph);
+                                    graph = actionAddMidpoint({loc: loc, edge: edge0}, node)(graph);
 
                                     var way1 = graph.entity(ways[1].id);
-                                    var choice1 = geoChooseEdge(graph.childNodes(way1), loc, context.projection);
+                                    var choice1 = geoChooseEdge(graph.childNodes(way1), projection(loc), projection);
                                     var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
-                                    graph = actionAddMidpoint({loc: choice1.loc, edge: edge1}, node)(graph);
+                                    graph = actionAddMidpoint({loc: loc, edge: edge1}, node)(graph);
 
                                     return graph;
                                 },
