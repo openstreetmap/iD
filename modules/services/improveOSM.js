@@ -115,6 +115,20 @@ function cardinalDirection(bearing) {
     return t('QA.improveOSM.directions.' + compass[dir]);
 }
 
+// Errors shouldn't obscure eachother
+function preventCoincident(loc, bumpUp) {
+    var coincident = false;
+    do {
+        // first time, move marker up. after that, move marker right.
+        var delta = coincident ? [0.00001, 0] : (bumpUp ? [0, 0.00001] : [0, 0]);
+        loc = geoVecAdd(loc, delta);
+        var bbox = geoExtent(loc).bbox();
+        coincident = _erCache.rtree.search(bbox).length;
+    } while (coincident);
+
+    return loc;
+}
+
 export default {
     init: function() {
         if (!_erCache) {
@@ -192,6 +206,9 @@ export default {
                                     loc = [mid.lon, mid.lat];
                                 }
 
+                                // One-ways can land on same segment in opposite direction
+                                loc = preventCoincident(loc, false);
+
                                 var d = new iOsmError({
                                     loc: loc,
                                     comments: null,
@@ -225,6 +242,13 @@ export default {
                         // Tiles at high zoom == missing roads
                         if (data.tiles) {
                             data.tiles.forEach(function(feature) {
+                                // Average of recorded points should land on the missing geometry
+                                var loc = pointAverage(feature.points);
+
+                                // Missing geometry could happen to land on another error
+                                loc = preventCoincident(loc, false);
+
+
                                 var geoType = feature.type.toLowerCase();
                                 var geoIcons = {
                                     road: 'maki-car',
@@ -234,7 +258,7 @@ export default {
                                 };
 
                                 var d = new iOsmError({
-                                    loc: pointAverage(feature.points),
+                                    loc: loc,
                                     comments: null,
                                     error_subtype: geoType,
                                     error_type: k,
@@ -258,8 +282,9 @@ export default {
                             data.entities.forEach(function(feature) {
                                 var loc = feature.point;
 
-                                // Bump position slightly so junction node is accessible
-                                loc = geoVecAdd([loc.lon, loc.lat], [0, 0.00001]);
+                                // Turn restrictions could be missing at same junction
+                                // We also want to bump the error up so node is accessible
+                                loc = preventCoincident([loc.lon, loc.lat], true);
 
                                 // Elements are presented in a strange way
                                 var ids = feature.id.split(',');
