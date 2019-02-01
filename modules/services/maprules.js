@@ -4,10 +4,7 @@ import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
 import { areaKeys } from '../core/context';
 
-
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue
 } from '../core/validator';
 
@@ -221,10 +218,10 @@ export default {
             findIssues: function (entity, graph, issues) {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
                     var severity = Object.keys(selector).indexOf('error') > -1
-                            ? ValidationIssueSeverity.error
-                            : ValidationIssueSeverity.warning;
+                            ? 'error'
+                            : 'warning';
                     issues.push(new validationIssue({
-                        type: ValidationIssueType.maprules,
+                        type: 'maprules',
                         severity: severity,
                         message: selector[severity],
                         entities: [entity],

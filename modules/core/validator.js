@@ -13,24 +13,6 @@ import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 import * as Validations from '../validations/index';
 
-export var ValidationIssueType = {
-    deprecated_tag: 'deprecated_tag',
-    disconnected_way: 'disconnected_way',
-    many_deletions: 'many_deletions',
-    missing_tag: 'missing_tag',
-    old_multipolygon: 'old_multipolygon',
-    tag_suggests_area: 'tag_suggests_area',
-    maprules: 'maprules',
-    crossing_ways: 'crossing_ways',
-    almost_junction: 'almost_junction',
-    generic_name: 'generic_name'
-};
-
-export var ValidationIssueSeverity = {
-    warning: 'warning',
-    error: 'error',
-};
-
 export function coreValidator(context) {
     var dispatch = d3_dispatch('reload'),
         self = {},
@@ -40,11 +22,23 @@ export function coreValidator(context) {
     var validations = _filter(Validations, _isFunction).reduce(function(obj, validation) {
         var func = validation();
         if (!func.type) {
-            throw new Error('Validation type not found: ' + validation);
+            console.log('Validation rule not found for: ' + validation);
         }
         obj[func.type] = func;
         return obj;
     }, {});
+
+    var entityValidationIds = [],
+        changesValidationIds = [];
+
+    for (var key in validations) {
+        var validation = validations[key];
+        if (validation.inputType && validation.inputType === 'changes') {
+            changesValidationIds.push(key);
+        } else {
+            entityValidationIds.push(key);
+        }
+    }
 
     self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -85,35 +79,35 @@ export function coreValidator(context) {
         return issuesByEntityId[entityID];
     };
 
-    var genericEntityValidations = [
-       ValidationIssueType.deprecated_tag,
-       ValidationIssueType.generic_name,
-       ValidationIssueType.maprules,
-       ValidationIssueType.old_multipolygon
-    ];
-
     function validateEntity(entity) {
         var issues = [];
+        var ranValidations = new Set([]);
         // runs validation and appends resulting issues, returning true if validation passed
         function runValidation(type) {
             var fn = validations[type];
             var typeIssues = fn(entity, context);
             issues = issues.concat(typeIssues);
+            ranValidations.add(type);
             return typeIssues.length === 0;
         }
         // other validations require feature to be tagged
-        if (!runValidation(ValidationIssueType.missing_tag)) return issues;
+        if (!runValidation('missing_tag')) return issues;
         if (entity.type === 'way') {
-            if (runValidation(ValidationIssueType.almost_junction)) {
-                // only check for disconnected highway if no almost junctions
-                runValidation(ValidationIssueType.disconnected_way);
+            // only check for disconnected way if no almost junctions
+            if (runValidation('almost_junction')) {
+                runValidation('disconnected_way');
+            } else {
+                ranValidations.add('disconnected_way');
             }
-            runValidation(ValidationIssueType.crossing_ways);
-            runValidation(ValidationIssueType.tag_suggests_area);
+            runValidation('crossing_ways');
+            runValidation('tag_suggests_area');
         }
-        genericEntityValidations.forEach(function(fn) {
-            runValidation(fn);
-        })
+        // run all validations not yet run manually
+        entityValidationIds.forEach(function(ruleId) {
+            if (!ranValidations.has(ruleId)) {
+                runValidation(ruleId);
+            }
+        });
         return issues;
     }
 
@@ -127,7 +121,10 @@ export function coreValidator(context) {
         var entitiesToCheck = changes.created.concat(changes.modified);
         var graph = history.graph();
 
-        issues = issues.concat(validations.many_deletions(changes, context));
+        issues = _flatten(_map(changesValidationIds, function(ruleId) {
+            var validation = validations[ruleId];
+            return validation(changes, context);
+        }));
 
         entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
             var entities = [entity];
@@ -187,14 +184,8 @@ export function validationIssue(attrs) {
         return id;
     };
 
-    if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
-    if (!attrs.type || !ValidationIssueType.hasOwnProperty(attrs.type)) {
-        throw new Error('Invalid attrs.type: ' + attrs.type);
-    }
-    if (!attrs.severity || !ValidationIssueSeverity.hasOwnProperty(attrs.severity)) {
-        throw new Error('Invalid attrs.severity: ' + attrs.severity);
-    }
-    if (!attrs.message) throw new Error('attrs.message is empty');
+    if (!_isObject(attrs)) console.log('Input attrs is not an object');
+    if (!attrs.message) console.log('attrs.message is empty');
 
     this.type = attrs.type;
     this.severity = attrs.severity;

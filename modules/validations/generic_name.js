@@ -4,8 +4,6 @@ import {
     utilPreset
 } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -50,8 +48,8 @@ export function validationGenericName(context) {
         if (generic) {
             var preset = utilPreset(entity, context);
             issues.push(new validationIssue({
-                type: ValidationIssueType.generic_name,
-                severity: ValidationIssueSeverity.warning,
+                type: 'generic_name',
+                severity: 'warning',
                 message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
                 tooltip: t('issues.generic_name.tip'),
                 entities: [entity],
@@ -75,7 +73,7 @@ export function validationGenericName(context) {
         return issues;
     };
 
-    validation.type = ValidationIssueType.generic_name;
+    validation.type = 'generic_name';
 
     return validation;
 }

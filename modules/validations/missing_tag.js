@@ -5,8 +5,6 @@ import {
     utilDisplayLabel
 } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -32,8 +30,8 @@ export function validationMissingTag() {
             !(hasDescriptiveTags(entity) || entity.hasParentRelations(graph))) {
             var entityLabel = utilDisplayLabel(entity, context);
             issues.push(new validationIssue({
-                type: ValidationIssueType.missing_tag,
-                severity: ValidationIssueSeverity.error,
+                type: 'missing_tag',
+                severity: 'error',
                 message: t('issues.untagged_feature.message', {feature: entityLabel}),
                 tooltip: t('issues.untagged_feature.tip'),
                 entities: [entity],
@@ -58,7 +56,7 @@ export function validationMissingTag() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.missing_tag;
+    validation.type = 'missing_tag';
 
     return validation;
 }

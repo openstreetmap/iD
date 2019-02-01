@@ -3,8 +3,6 @@ import {
     utilDisplayLabel
 } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -39,8 +37,8 @@ export function validationDisconnectedWay() {
             var entityLabel = utilDisplayLabel(entity, context);
 
             issues.push(new validationIssue({
-                type: ValidationIssueType.disconnected_way,
-                severity: ValidationIssueSeverity.warning,
+                type: 'disconnected_way',
+                severity: 'warning',
                 message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
                 tooltip: t('issues.disconnected_way.highway.tip'),
                 entities: [entity],
@@ -81,7 +79,7 @@ export function validationDisconnectedWay() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.disconnected_way;
+    validation.type = 'disconnected_way';
 
     return validation;
 }

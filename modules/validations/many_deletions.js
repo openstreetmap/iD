@@ -1,8 +1,6 @@
 import { t } from '../util/locale';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
-    validationIssue,
+    validationIssue
 } from '../core/validator';
 
 export function validationManyDeletions() {
@@ -21,8 +19,8 @@ export function validationManyDeletions() {
         });
         if (changes.deleted.length > threshold) {
             issues.push(new validationIssue({
-                type: ValidationIssueType.many_deletions,
-                severity: ValidationIssueSeverity.warning,
+                type: 'many_deletions',
+                severity: 'warning',
                 message: t(
                     'issues.many_deletions.message',
                     { n: changes.deleted.length, p: nodes, l: ways, a:areas, r: relations }
@@ -35,7 +33,8 @@ export function validationManyDeletions() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.many_deletions;
+    validation.type = 'many_deletions';
+    validation.inputType = 'changes';
 
     return validation;
 }

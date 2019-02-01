@@ -5,8 +5,6 @@ import {
     utilTagText
 } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -48,8 +46,8 @@ export function validationTagSuggestsArea() {
         if (suggestingTags) {
             var tagText = utilTagText({ tags: suggestingTags });
             issues.push(new validationIssue({
-                type: ValidationIssueType.tag_suggests_area,
-                severity: ValidationIssueSeverity.warning,
+                type: 'tag_suggests_area',
+                severity: 'warning',
                 message: t('issues.tag_suggests_area.message', { tag: tagText }),
                 tooltip: t('issues.tag_suggests_area.tip'),
                 entities: [entity],
@@ -75,7 +73,7 @@ export function validationTagSuggestsArea() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.tag_suggests_area;
+    validation.type = 'tag_suggests_area';
 
     return validation;
 }

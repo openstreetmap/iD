@@ -6,8 +6,6 @@ import { set as d3_set } from 'd3-collection';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -345,8 +343,8 @@ export function validationCrossingWays() {
                 }
 
                 issues.push(new validationIssue({
-                    type: ValidationIssueType.crossing_ways,
-                    severity: ValidationIssueSeverity.warning,
+                    type: 'crossing_ways',
+                    severity: 'warning',
                     message: t('issues.crossing_ways.message', messageDict),
                     tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
                     entities: entities,
@@ -360,7 +358,7 @@ export function validationCrossingWays() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.crossing_ways;
+    validation.type = 'crossing_ways';
 
     return validation;
 }

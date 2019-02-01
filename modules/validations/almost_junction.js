@@ -15,8 +15,6 @@ import {
 } from '../actions';
 import { t } from '../util/locale';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -146,8 +144,8 @@ export function validationAlmostJunction() {
                 }));
             }
             issues.push(new validationIssue({
-                type: ValidationIssueType.almost_junction,
-                severity: ValidationIssueSeverity.warning,
+                type: 'almost_junction',
+                severity: 'warning',
                 message: t('issues.almost_junction.message', {
                     feature: utilDisplayLabel(endHighway, context),
                     feature2: utilDisplayLabel(edgeHighway, context)
@@ -166,7 +164,7 @@ export function validationAlmostJunction() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.almost_junction;
+    validation.type = 'almost_junction';
 
     return validation;
 }

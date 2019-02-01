@@ -2,8 +2,6 @@ import { t } from '../util/locale';
 import { osmIsSimpleMultipolygonOuterMember } from '../osm';
 import { utilDisplayLabel } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -20,8 +18,8 @@ export function validationOldMultipolygon() {
         if (mistaggedMultipolygon) {
             var multipolygonLabel = utilDisplayLabel(mistaggedMultipolygon, context);
             issues.push(new validationIssue({
-                type: ValidationIssueType.old_multipolygon,
-                severity: ValidationIssueSeverity.warning,
+                type: 'old_multipolygon',
+                severity: 'warning',
                 message: t('issues.old_multipolygon.message', {multipolygon: multipolygonLabel}),
                 tooltip: t('issues.old_multipolygon.tip'),
                 entities: [entity, mistaggedMultipolygon],
@@ -48,7 +46,7 @@ export function validationOldMultipolygon() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.old_multipolygon;
+    validation.type = 'old_multipolygon';
 
     return validation;
 }

@@ -1,8 +1,6 @@
 import { services } from '../services';
-import {
-    ValidationIssueType
-} from '../core/validator';
 export function validationMaprules() {
+
     var validation = function(entity, context) {
         if (!services.maprules) return [];
 
@@ -19,7 +17,7 @@ export function validationMaprules() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.maprules;
+    validation.type = 'maprules';
 
     return validation;
 }

@@ -5,8 +5,6 @@ import {
     utilTagText
 } from '../util';
 import {
-    ValidationIssueType,
-    ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
 } from '../core/validator';
@@ -26,8 +24,8 @@ export function validationDeprecatedTag() {
                 var tagsLabel = utilTagText({ tags: deprecatedTags.old });
                 var featureLabel = utilDisplayLabel(change, context);
                 issues.push(new validationIssue({
-                    type: ValidationIssueType.deprecated_tags,
-                    severity: ValidationIssueSeverity.warning,
+                    type: 'deprecated_tags',
+                    severity: 'warning',
                     message: t('issues.deprecated_tags.message', { feature: featureLabel, tags: tagsLabel }),
                     tooltip: t('issues.deprecated_tags.tip'),
                     entities: [change],
@@ -82,7 +80,7 @@ export function validationDeprecatedTag() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.deprecated_tag;
+    validation.type = 'deprecated_tag';
 
     return validation;
 }
