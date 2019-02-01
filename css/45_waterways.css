@@ -12,16 +12,6 @@
     fill: #fff;
 }
 
-path.fill.tag-waterway {
-    stroke: rgba(119, 211, 222, 0.3);
-    fill: rgba(119, 211, 222, 0.3);
-}
-path.line.casing.tag-waterway {
-    stroke: #3d6c71;
-}
-path.line.stroke.tag-waterway {
-    stroke: #77d3de;
-}
 
 /* areas */
 path.area.stroke.tag-waterway-dock,
@@ -43,7 +33,7 @@ path.area.fill.tag-waterway-fuel {
 }
 
 /* lines */
-path.fill.tag-waterway {
+path.line.fill.tag-waterway {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }

@@ -83,8 +83,6 @@ path.stroke.tag-landuse-aquaculture,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-harbour,
 path.stroke.tag-landuse-reservoir,
-path.stroke.tag-man_made-groyne,
-path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
@@ -298,31 +296,41 @@ path.fill.tag-landuse-farmyard {
 
 /* Dark Gray things */
 path.stroke.tag-amenity-parking,
+path.stroke.tag-landuse-railway,
+path.stroke.tag-landuse-quarry,
 path.stroke.tag-leisure-pitch.tag-sport-basketball,
 path.stroke.tag-leisure-pitch.tag-sport-skateboard,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-bare_rock,
 path.stroke.tag-natural-scree,
-path.stroke.tag-landuse-railway,
-path.stroke.tag-landuse-quarry {
+path.stroke.tag-waterway-dam,
+path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
 }
 path.fill.tag-amenity-parking,
+path.fill.tag-landuse-railway,
+path.fill.tag-landuse-quarry,
 path.fill.tag-leisure-pitch.tag-sport-basketball,
 path.fill.tag-leisure-pitch.tag-sport-skateboard,
+path.fill.tag-man_made-groyne,
+path.fill.tag-man_made-breakwater,
 path.fill.tag-natural-bare_rock,
 path.fill.tag-natural-scree,
-path.fill.tag-landuse-railway,
-path.fill.tag-landuse-quarry {
+path.fill.tag-waterway-dam,
+path.fill.tag-waterway-weir {
     stroke: rgba(140, 140, 140, 0.5);
     fill: rgba(140, 140, 140, 0.5);
 }
 .preset-icon-fill-area.tag-amenity-parking,
+.preset-icon-fill-area.tag-landuse-railway,
+.preset-icon-fill-area.tag-landuse-quarry,
 .preset-icon-fill-area.tag-leisure-pitch.tag-sport-basketball,
 .preset-icon-fill-area.tag-leisure-pitch.tag-sport-skateboard,
 .preset-icon-fill-area.tag-natural-bare_rock,
 .preset-icon-fill-area.tag-natural-scree,
-.preset-icon-fill-area.tag-landuse-railway,
-.preset-icon-fill-area.tag-landuse-quarry {
+.preset-icon-fill-area.tag-waterway-dam,
+.preset-icon-fill-area.tag-waterway-weir {
     border-color: rgb(170, 170, 170);
     background-color: rgba(140, 140, 140, 0.5);
 }
