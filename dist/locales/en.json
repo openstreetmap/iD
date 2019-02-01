@@ -6685,46 +6685,6 @@
                     "name": "Transformer",
                     "terms": ""
                 },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Aerialway Stop / Platform",
-                    "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Bus Stop / Platform",
-                    "terms": "bus,platform,public transit,public transportation,transit,transportation"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Ferry Stop / Platform",
-                    "terms": "boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Light Rail Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Monorail Stop / Platform",
-                    "terms": "monorail,platform,public transit,public transportation,rail,transit,transportation"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Subway Stop / Platform",
-                    "terms": "metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Train Stop / Platform",
-                    "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Tram Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Trolleybus Stop / Platform",
-                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Transit Stop / Platform",
-                    "terms": "platform,public transit,public transportation,transit,transportation"
-                },
                 "public_transport/platform_aerialway": {
                     "name": "Aerialway Stop / Platform",
                     "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
