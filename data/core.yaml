@@ -662,7 +662,7 @@ en:
   full_screen: Toggle Full Screen
   QA:
     improveOSM:
-      title: ImproveOSM Error
+      title: ImproveOSM Detection
       geometry_types:
         path: paths
         parking: parking
