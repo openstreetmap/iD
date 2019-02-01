@@ -7,14 +7,6 @@
         "opening_hours",
         "wheelchair"
     ],
-    "moreFields": [
-        "address",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
-    ],
     "geometry": [
         "area",
         "point"
@@ -22,9 +14,6 @@
     "tags": {
         "amenity": "crematorium"
     },
-    "terms": [
-        "cemetery",
-        "funeral"
-    ],
+    "terms": ["cemetery","funeral"],
     "name": "Crematorium"
 }

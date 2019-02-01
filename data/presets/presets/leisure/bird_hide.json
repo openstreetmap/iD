@@ -1,13 +1,7 @@
 {
     "icon": "temaki-binoculars",
     "fields": [
-        "name",
-        "building_area",
-        "address",
-        "opening_hours"
-    ],
-    "moreFields": [
-        "website" 
+        "building_area"
     ],
     "geometry": [
         "point",

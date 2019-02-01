@@ -1,26 +1,16 @@
 {
     "icon": "iD-highway-motorway-link",
     "fields": [
-        "destination_oneway",
-        "destination/ref_oneway",
-        "junction/ref_oneway",
+        "name",
+        "ref_road_number",
         "oneway",
         "maxspeed",
+        "maxspeed/advisory",
         "lanes",
         "surface",
         "structure",
-        "access"
-    ],
-    "moreFields": [
-        "covered",
-        "destination/symbol_oneway",
-        "lit",
         "maxheight",
-        "maxspeed/advisory",
-        "name",
-        "ref_road_number",
-        "smoothness",
-        "toll"
+        "access"
     ],
     "geometry": [
         "line"

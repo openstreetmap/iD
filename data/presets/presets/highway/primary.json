@@ -7,18 +7,10 @@
         "lanes",
         "surface",
         "structure",
-        "ref_road_number",
-        "access"
-    ],
-    "moreFields": [
-        "covered",
-        "cycleway",
-        "lit",
         "maxheight",
-        "maxspeed/advisory",
-        "oneway/bicycle",
-        "smoothness",
-        "toll"
+        "ref_road_number",
+        "cycleway",
+        "access"
     ],
     "geometry": [
         "line"

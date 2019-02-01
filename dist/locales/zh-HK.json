@@ -464,6 +464,7 @@
         "inspector": {
             "no_documentation_combination": "沒有這個標籤組合的相關文件",
             "no_documentation_key": "沒有這個鍵值的相關文件",
+            "documentation_redirect": "這份文件已轉至新一頁",
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "all_fields": "所有資料",
@@ -1337,6 +1338,9 @@
                         "onsen": "日式溫泉"
                     }
                 },
+                "beauty": {
+                    "label": "商店種類"
+                },
                 "bench": {
                     "label": "長椅"
                 },
@@ -1442,8 +1446,7 @@
                     "label": "移動方向",
                     "options": {
                         "backward": "後向",
-                        "forward": "前向",
-                        "reversible": "可變換方向"
+                        "forward": "前向"
                     }
                 },
                 "country": {
@@ -1644,9 +1647,20 @@
                 "fence_type": {
                     "label": "種類"
                 },
+                "fire_hydrant/position": {
+                    "label": "Position",
+                    "options": {
+                        "green": "草地",
+                        "lane": "巷",
+                        "parking_lot": "停車場",
+                        "sidewalk": "行人路"
+                    }
+                },
                 "fire_hydrant/type": {
+                    "label": "種類",
                     "options": {
                         "pillar": "柱狀/地上",
+                        "pond": "池塘",
                         "underground": "地下",
                         "wall": "牆上"
                     }
@@ -1655,7 +1669,7 @@
                     "label": "設備種類"
                 },
                 "fixme": {
-                    "label": "待修正"
+                    "label": "整好我"
                 },
                 "ford": {
                     "label": "類",
@@ -2599,6 +2613,9 @@
                 "tourism": {
                     "label": "種類"
                 },
+                "tourism_attraction": {
+                    "label": "旅遊"
+                },
                 "tower/construction": {
                     "label": "建築物料",
                     "placeholder": "拉線、格狀、隱藏、..."
@@ -3169,6 +3186,10 @@
                     "name": "繳費終端機",
                     "terms": "繳費機,付款機,收費機"
                 },
+                "amenity/pharmacy": {
+                    "name": "藥房",
+                    "terms": "Pharmacy,葯局,葯店,葯房,葯舖,藥局,藥店,藥房,藥舖"
+                },
                 "amenity/place_of_worship": {
                     "name": "祟拜場所",
                     "terms": "Place of Worship,Worship,宗教祟拜場所,宗教禮拜處,崇拜處,拜神之所,禮拜場所,廟,教堂,寺廟,禮拜堂,猶太廟,清真寺"
@@ -3177,9 +3198,21 @@
                     "name": "佛寺",
                     "terms": "Buddhist Temple,佛堂,佛寺,佛廟,和尚寺,寶殿,寺,寺廟,尼姑庵,尼庵,庵堂,廟,精舍,閣,靜院,觀音廟,觀音寺"
                 },
+                "amenity/place_of_worship/christian": {
+                    "name": "敎堂",
+                    "terms": "Christian,Church,基督敎堂,基督教堂,天主堂,天主敎堂,天主教堂,敎堂,教堂,聖堂"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "印度廟",
                     "terms": "Hindu Temple, 印度教廟"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "猶太廟",
+                    "terms": "Synagogue,jewish,猶太寺,猶太廟,猶太教堂"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "清真寺",
+                    "terms": "Mosque,Muslim,回教寺,回教廟,清真廟,清真寺"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "神道廟",
@@ -4143,9 +4176,6 @@
                     "name": "行人徑",
                     "terms": "Foot Path,步行徑,行人徑"
                 },
-                "highway/footway/sidewalk": {
-                    "name": "行人路"
-                },
                 "highway/give_way": {
                     "name": "讓路標誌",
                     "terms": "讓車標誌"
@@ -4355,7 +4385,8 @@
                     "terms": "Aquaculture,水產"
                 },
                 "landuse/basin": {
-                    "name": "盆地"
+                    "name": "盆地",
+                    "terms": "Basin,水池,盆地"
                 },
                 "landuse/brownfield": {
                     "name": "棕地",
@@ -4387,6 +4418,10 @@
                 "landuse/farmyard": {
                     "name": "農莊",
                     "terms": "Farmyard,農莊, 農場"
+                },
+                "landuse/forest": {
+                    "name": "森林",
+                    "terms": "Forest,森,森林"
                 },
                 "landuse/grass": {
                     "name": "草地",
@@ -4667,6 +4702,10 @@
                 "leisure/resort": {
                     "name": "度假勝地",
                     "terms": "Resort, 度假村"
+                },
+                "leisure/running_track": {
+                    "name": "賽道(田徑)",
+                    "terms": "Racetrack (Running), 賽跑道"
                 },
                 "leisure/slipway": {
                     "name": "船台",
@@ -5953,7 +5992,8 @@
                     "terms": "River,江,江河,河,河流,河川"
                 },
                 "waterway/riverbank": {
-                    "name": "河岸"
+                    "name": "河岸",
+                    "terms": "Riverbank,江岸,河堤"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "船舶污水處理",

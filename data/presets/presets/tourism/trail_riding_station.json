@@ -4,15 +4,11 @@
         "name",
         "horse_stables",
         "horse_riding",
-        "horse_dressage"
-    ],
-    "moreFields": [
+        "horse_dressage",
         "address",
-        "opening_hours",
-        "website",
         "phone",
-        "email",
-        "fax"
+        "website",
+        "description"
     ],
     "geometry": [
         "point",

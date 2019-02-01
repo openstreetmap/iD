@@ -3,10 +3,7 @@
     "fields": [
         "tower/type",
         "tower/construction",
-        "height"
-    ],
-    "moreFields": [
-        "material",
+        "height",
         "communication_multi"
     ],
     "geometry": [

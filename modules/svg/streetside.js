@@ -12,6 +12,7 @@ export function svgStreetside(projection, context, dispatch) {
     var layer = d3_select(null);
     var _viewerYaw = 0;
     var _selectedSequence = null;
+    var _hoveredBubble = null;
     var _streetside;
 
     /**
@@ -120,7 +121,8 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseover(d) {
         var service = getService();
-        if (service) service.setStyles(d);
+        _hoveredBubble = d;
+        if (service) service.setStyles(d, true);
     }
 
     /**
@@ -128,7 +130,8 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseout() {
         var service = getService();
-        if (service) service.setStyles(null);
+        _hoveredBubble = null;
+        if (service) service.setStyles(null, true);
     }
 
     /**
@@ -158,7 +161,7 @@ export function svgStreetside(projection, context, dispatch) {
         // e.g. during drags or easing.
         if (context.map().isTransformed()) return;
 
-        layer.selectAll('.viewfield-group.currentView')
+        layer.selectAll('.viewfield-group.selected')
             .attr('transform', transform);
     }
 
@@ -206,8 +209,8 @@ export function svgStreetside(projection, context, dispatch) {
         var groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .on('mouseenter', mouseover)
-            .on('mouseleave', mouseout)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
             .on('click', click);
 
         groupsEnter
@@ -247,6 +250,12 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+
+        if (service) {
+            service.setStyles(_hoveredBubble, true);
+        }
+
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;

@@ -12,7 +12,7 @@ describe('iD.serviceMapillary', function() {
     });
 
     beforeEach(function() {
-        context = iD.coreContext().assetPath('../dist/');
+        context = iD.Context().assetPath('../dist/');
         context.projection
             .scale(667544.214430109)  // z14
             .translate([-116508, 0])  // 10,0

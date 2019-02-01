@@ -55,7 +55,7 @@ export function uiIntroArea(context, reveal) {
 
         var msec = transitionTime(playground, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().centerZoomEase(playground, 19, msec);
+        context.map().zoom(19).centerEase(playground, msec);
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
@@ -331,14 +331,7 @@ export function uiIntroArea(context, reveal) {
 
                 d3_select('.more-fields .combobox-input')
                     .on('click.intro', function() {
-                        // Watch for the combobox to appear...
-                        var watcher;
-                        watcher = window.setInterval(function() {
-                            if (!d3_select('div.combobox').empty()) {
-                                window.clearInterval(watcher);
-                                continueTo(chooseDescriptionField);
-                            }
-                        }, 300);
+                        continueTo(chooseDescriptionField);
                     });
             }, 300);  // after "Add Field" visible
 

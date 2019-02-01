@@ -3,10 +3,10 @@ describe('iD.behaviorSelect', function() {
 
     beforeEach(function() {
         container = d3.select('body').append('div');
-        context = iD.coreContext().container(container);
+        context = iD.Context().container(container);
 
-        a = iD.osmNode({loc: [0, 0]});
-        b = iD.osmNode({loc: [0, 0]});
+        a = iD.Node({loc: [0, 0]});
+        b = iD.Node({loc: [0, 0]});
 
         context.perform(iD.actionAddEntity(a), iD.actionAddEntity(b));
 

@@ -5,14 +5,11 @@
         "structure",
         "gauge",
         "electrified",
-        "service_rail",
-        "usage_rail"
-    ],
-    "moreFields": [
-        "covered",
-        "frequency_electrified",
         "maxspeed",
-        "voltage_electrified"
+        "service_rail",
+        "usage_rail",
+        "voltage",
+        "frequency"
     ],
     "geometry": [
         "line"

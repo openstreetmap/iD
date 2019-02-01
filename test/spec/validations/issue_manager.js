@@ -1,4 +1,4 @@
-describe('iD.validations.coreValidator', function () {
+describe('iD.validations.IssueManager', function () {
     var context;
 
     beforeEach(function() {
@@ -19,19 +19,19 @@ describe('iD.validations.coreValidator', function () {
     }
 
     it('has no issues on init', function() {
-        var validator = new iD.coreValidator(context);
-        var issues = validator.getIssues();
+        var issueManager = new iD.IssueManager(context);
+        var issues = issueManager.getIssues();
         expect(issues).to.have.lengthOf(0);
     });
 
     it('populates issues on validate', function() {
         createInvalidWay();
-        var validator = new iD.coreValidator(context);
-        var issues = validator.getIssues();
+        var issueManager = new iD.IssueManager(context);
+        var issues = issueManager.getIssues();
         expect(issues).to.have.lengthOf(0);
 
-        validator.validate();
-        issues = validator.getIssues();
+        issueManager.validate();
+        issues = issueManager.getIssues();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql(iD.ValidationIssueType.missing_tag);

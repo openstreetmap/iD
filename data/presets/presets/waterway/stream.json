@@ -6,10 +6,6 @@
         "width",
         "intermittent"
     ],
-    "moreFields": [
-        "salt",
-        "tidal"
-    ],
     "geometry": [
         "line"
     ],

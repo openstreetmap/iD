@@ -1,13 +1,10 @@
 {
-    "icon": "temaki-post_box",
+    "icon": "maki-post",
     "fields": [
         "operator",
         "collection_times",
         "drive_through",
         "ref"
-    ],
-    "moreFields": [
-        "wheelchair"
     ],
     "geometry": [
         "point",

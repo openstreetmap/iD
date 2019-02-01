@@ -1,8 +1,5 @@
 {
     "icon": "temaki-chimney",
-    "fields": [
-        "material"
-    ],
     "geometry": [
         "point",
         "area"

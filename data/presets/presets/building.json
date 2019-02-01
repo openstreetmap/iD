@@ -7,13 +7,6 @@
         "height",
         "address"
     ],
-    "moreFields": [
-        "architect",
-        "building/material",
-        "roof/colour",
-        "smoking",
-        "wheelchair"
-    ],
     "geometry": [
         "point",
         "area"

@@ -1,8 +1,13 @@
 {
     "icon": "maki-blood-bank",
     "fields": [
-        "{healthcare}",
-        "blood_components"
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "blood_components",
+        "address",
+        "building_area",
+        "opening_hours"
     ],
     "geometry": [
         "point",

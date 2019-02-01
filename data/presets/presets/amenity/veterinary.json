@@ -1,20 +1,11 @@
 {
-    "icon": "temaki-veterinary_care",
+    "icon": "maki-veterinary",
     "fields": [
         "name",
         "operator",
         "address",
         "building_area",
         "opening_hours"
-    ],
-    "moreFields": [
-        "fee",
-        "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
     ],
     "geometry": [
         "point",

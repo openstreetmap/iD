@@ -7,16 +7,7 @@
         "bath/sand_bath",
         "address",
         "building_area",
-        "fee"
-    ],
-    "moreFields": [
-        "opening_hours",
-        "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "opening_hours"
     ],
     "geometry": [
         "point",

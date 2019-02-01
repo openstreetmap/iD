@@ -1,7 +1,10 @@
 {
     "icon": "maki-suitcase",
     "fields": [
-        "{building}",
+        "name",
+        "address",
+        "levels",
+        "height",
         "smoking"
     ],
     "geometry": [

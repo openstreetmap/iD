@@ -1,5 +1,9 @@
 {
     "icon": "maki-pitch",
+    "fields": [
+        "ref",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"

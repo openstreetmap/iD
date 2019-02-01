@@ -352,8 +352,6 @@ button.secondary-action:hover {
     background: #cccccc;
 }
 
-button.action.disabled,
-button.action.disabled:hover,
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;
@@ -454,7 +452,6 @@ button[disabled].action:hover {
     align-items: center;
     padding: 0 10px;
     min-width: 30px;
-    white-space: nowrap;
 }
 .tool-group button .icon {
     flex: 0 0 20px;
@@ -589,7 +586,6 @@ button.add-note svg.icon {
 .field-help-title button.close,
 .sidebar-component .header button.data-editor-close,
 .sidebar-component .header button.note-editor-close,
-.sidebar-component .header button.keepRight-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -599,7 +595,6 @@ button.add-note svg.icon {
 [dir='rtl'] .field-help-title button.close,
 [dir='rtl'] .sidebar-component .header button.data-editor-close,
 [dir='rtl'] .sidebar-component .header button.note-editor-close,
-[dir='rtl'] .sidebar-component .header button.keepRight-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -787,6 +782,10 @@ a.hide-toggle {
     bottom: 0;
 }
 
+.inspector-border {
+    border-bottom: 1px solid #ccc
+}
+
 .feature-list-pane .inspector-body,
 .preset-list-pane .inspector-body {
     top: 120px;
@@ -797,7 +796,7 @@ a.hide-toggle {
 }
 
 .inspector-inner {
-    padding: 20px 20px 5px 20px;
+    padding: 20px;
     position: relative;
 }
 
@@ -848,10 +847,6 @@ a.hide-toggle {
     left: 25%;
     margin-top: 30px;
     border-radius: 2px;
-}
-
-[dir='rtl'] .geocode-item {
-    left: -25%;
 }
 
 .geocode-item:hover {
@@ -1160,30 +1155,11 @@ img.tag-reference-wiki-image {
 }
 
 
-/* Quick links
-------------------------------------------------------- */
-.quick-links {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    padding: 0 20px;
-}
-.quick-link {
-    margin: 0 5px;
-}
-
-.data-editor .quick-links,
-.keepRight-editor .quick-links,
-.note-editor .quick-links {
-    padding: 5px 0 0 0;
-}
-
-
 /* Entity/Preset Editor
 ------------------------------------------------------- */
 .preset-editor {
     overflow: hidden;
-    padding: 10px 0px 5px 0px;
+    padding-bottom: 10px;
 }
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
@@ -1423,71 +1399,50 @@ img.tag-reference-wiki-image {
 .form-field-input-combo > input:only-of-type {
     border-radius: 0 0 4px 4px;
 }
-.form-field-input-combo.empty-combobox input,
-.form-field-input-multicombo .empty-combobox input {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-.form-field-input-combo.empty-combobox .combobox-caret,
-.form-field-input-multicombo .empty-combobox .combobox-caret {
-    display: none;
-}
 
 .form-field-input-multicombo ul.chiplist {
-    padding: 5px 7px 5px 7px;
+    padding: 5px 0 5px 10px;
     background: #fff;
     display: block;
     border-radius: 0 0 4px 4px;
 }
 
 .form-field-input-multicombo li.chips {
-    background-color: #eff2f7;
-    border: 1px solid #ccd5e3;
-    line-height: 25px;
-    padding: 2px 0px 2px 5px;
-}
-.form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin: 3px;
+    background-color: #eff2f7;
+    border: 1px solid #ccd5e3;
     border-radius: 4px;
+    line-height: 25px;
+    padding: 2px 5px;
+    margin: 3px;
 }
 
 .form-field-input-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
-    line-height: 22px;
+    line-height: 24px;
     float: right;
-    padding: 0px 5px 0px 5px;
-    margin: 0;
+    margin: 1px 0 0 5px;
+    padding: 0;
     cursor: pointer;
     color: #a6b4ce;
 }
 
-.form-field-input-multicombo .input-wrap {
+.form-field-input-multicombo input {
     border: 1px solid #ddd;
     width: 100px;
+    margin: 3px;
     height: 31px;
 }
-.form-field-input-multicombo input {
-    border: none;
-    width: 100%;
-    height: 100%;
+
+.form-field-input-multicombo .combobox-caret {
+    margin: 3px 3px 3px -30px;
 }
 
 .form-field-input-multicombo input:focus {
     border-radius: 4px !important;
-}
-
-.form-field-input-multicombo .full-line-chips li {
-    display: block;
-}
-.form-field-input-multicombo .full-line-chips li:not(:last-child) {
-    margin-bottom: 6px;
-}
-.form-field-input-multicombo .full-line-chips .input-wrap {
-    width: auto;
 }
 
 
@@ -1951,6 +1906,7 @@ div.combobox {
     margin-left: -30px;
     vertical-align: top;
     cursor: pointer;
+    pointer-events: none;
 }
 [dir='rtl'] .combobox-caret {
   margin-left: 0;
@@ -2129,7 +2085,7 @@ div.combobox {
 }
 .tag-row .key-wrap,
 .tag-row .value-wrap {
-    flex: 1 1 50%;
+    flex: 1 1 auto;
 }
 
 .tag-row.readonly,
@@ -2226,6 +2182,22 @@ div.combobox {
     border-right-width: 0;
 }
 
+/* Adding form fields to tag editor */
+.raw-tag-editor .add-tag {
+    width: 40%;
+    height: 30px;
+    border-top: 0;
+    background: rgba(0,0,0,.5);
+    border-radius: 0 0 4px 4px;
+}
+.raw-tag-editor .add-tag:focus,
+.raw-tag-editor .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
+.raw-tag-editor .add-tag .label {
+    display: none;
+}
+
 /* Tag reference */
 .tag-reference-loading {
     background-color: #f5f5f5;
@@ -2282,12 +2254,6 @@ div.combobox {
     padding-left: 10px;
 }
 
-[dir='rtl'] .raw-member-editor .member-row .member-entity-name,
-[dir='rtl'] .raw-membership-editor .member-row .member-entity-name {
-    padding-left:0;
-    padding-right: 10px;
-}
-
 .form-field-input-member > input.member-role {
     border-radius: 0 0 0 4px;
 }
@@ -2310,6 +2276,18 @@ div.combobox {
     border: 0;
 }
 
+.add-relation {
+    width: 40%;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.add-relation:focus,
+.add-relation:hover {
+    background: rgba(0,0,0,.8);
+}
+
 /* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
 .raw-membership-editor.inspector-inner {
     margin-bottom: 150px;
@@ -2324,38 +2302,6 @@ input.key-trap {
 }
 
 
-/* add tag, add relation buttons */
-.add-row {
-    display: flex;
-    width: 100%;
-    flex-flow: row nowrap;
-}
-.add-row .add-tag,
-.add-row .add-relation,
-.add-row .space-value {
-    flex: 1 1 50%;
-}
-.add-row .space-buttons {
-    flex: 0 0 62px;
-}
-.add-row button {
-    height: 30px;
-    background: rgba(0,0,0,.5);
-}
-.add-row button:focus,
-.add-row button:hover {
-    background: rgba(0,0,0,.8);
-}
-
-.add-tag {
-    border-radius: 0 0 4px 4px;
-}
-.add-relation {
-    margin-top: 10px;
-    border-radius: 4px;
-}
-
-
 /* Inspector (hover styles)
 ------------------------------------------------------- */
 .inspector-hover .form-field-input-wrap .label,
@@ -2366,21 +2312,12 @@ input.key-trap {
 .inspector-hover button,
 .inspector-hover input,
 .inspector-hover textarea,
-.inspector-hover label,
-.inspector-hover .entity-issues .issue button {
+.inspector-hover label {
     background: #ececec;
 }
 .inspector-hover .preset-list-button,
 .inspector-hover .tag-row input {
     background: #f6f6f6;
-}
-
-.inspector-hover .entity-issues .issue,
-.inspector-hover .entity-issues .issue li {
-    border: 1px solid #ccc;
-}
-.inspector-hover .entity-issues .issue .icon {
-    color: #666;
 }
 
 .inspector-hover a,
@@ -2405,19 +2342,18 @@ input.key-trap {
 .inspector-hover .preset-list-button-wrap .tag-reference-button,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],
-.inspector-hover .form-field-input-multicombo .input-wrap,
+.inspector-hover .form-field-input-multicombo .combobox-input,
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue ul.fixes {
+.inspector-hover .inspector-inner .add-tag,
+.inspector-hover .inspector-inner .add-relation {
     display: none;
 }
 
 /* hide but preserve in layout */
 .inspector-hover .combobox-caret,
 .inspector-hover .header button,
-.inspector-hover .quick-links,
 .inspector-hover .form-field-input-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
@@ -2494,10 +2430,9 @@ input.key-trap {
 }
 
 
-/* OSM Note / KeepRight Editors
+/* OSM Note Editor
 ------------------------------------------------------- */
-.note-header,
-.kr_error-header {
+.note-header {
     background-color: #f6f6f6;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -2506,8 +2441,7 @@ input.key-trap {
     align-items: center;
 }
 
-.note-header-icon,
-.kr_error-header-icon {
+.note-header-icon {
     background-color: #fff;
     padding: 10px;
     flex: 0 0 62px;
@@ -2517,21 +2451,18 @@ input.key-trap {
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
-[dir='rtl'] .note-header-icon,
-[dir='rtl'] .kr_error-header-icon {
+[dir='rtl'] .note-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
-.note-header-icon .icon-wrap,
-.kr_error-header-icon .icon-wrap {
+.note-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
-.note-header-label,
-.kr_error-header-label {
+.note-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
     flex: 1 1 100%;
@@ -2539,8 +2470,7 @@ input.key-trap {
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
-[dir='rtl'] .note-header-label,
-[dir='rtl'] .kr_error-header-label {
+[dir='rtl'] .note-header-label {
     border-radius: 5px 0 0 5px;
 }
 
@@ -2606,45 +2536,23 @@ input.key-trap {
     border-left: none;
 }
 
-.note-save,
-.keepRight-save {
-    padding-top: 20px;
-}
-.kr_error-details,
-.kr_error-comment-container {
+.note-save {
     padding: 10px;
 }
 
-.keepRight-save .new-comment-input,
-.note-save .new-comment-input {
+.note-save #new-comment-input {
     width: 100%;
     height: 100px;
     max-height: 300px;
     min-height: 100px;
 }
 
-.keepRight-save .detail-section,
 .note-save .detail-section {
     margin: 10px 0;
 }
 
 .note-report {
     float: right;
-}
-
-.kr_error-details-container {
-    background: #ececec;
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.kr_error-details-description {
-    margin-bottom: 10px;
-}
-.kr_error-details-description-text::first-letter {
-    text-transform: capitalize;
 }
 
 
@@ -2818,7 +2726,8 @@ div.full-screen > button:hover {
     border-radius: 4px;
 }
 
-.layer-list > li {
+.layer-list li {
+    position: relative;
     height: 30px;
     background-color: #fff;
     color: #7092ff;
@@ -2917,29 +2826,17 @@ div.full-screen > button:hover {
     padding-bottom: 10px;
 }
 
-/* Issues */
-
-.issue {
-    overflow: hidden;
-}
-.issue button {
+/* Issues List */
+.issues-list label {
     padding: 5px;
+}
+.issues-list label > span {
+    display: inline;
+    white-space: normal;
+}
+.issues-list li {
     height: auto;
-    width: 100%;
-    font-weight: inherit;
-    border-radius: 0;
-}
-.issue button.label {
-    text-align: inherit;
-    display: flex;
-}
-.issue.severity-warning,
-.issue.severity-warning li {
-    border-color: #FFDF5C;
-}
-.issue.severity-error,
-.issue.severity-error li {
-    border-color: #f5b0ab;
+    color: inherit;
 }
 
 .issue.severity-warning button {
@@ -2964,29 +2861,36 @@ div.full-screen > button:hover {
     color: #DD1400
 }
 
-/* Issues Pane List */
-
-.issues-list label {
-    padding: 5px;
-}
-.issues-list label > span {
-    display: inline;
-    white-space: normal;
-}
-.issues-list li {
-    height: auto;
-    color: inherit;
-}
-
 /* Entity Issues List */
 
 .entity-issues {
     padding: 0 20px 20px 20px;
+    margin-bottom: 20px;
 }
 .entity-issues .issue {
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
+    overflow: hidden;
+}
+.entity-issues .issue button {
+    padding: 5px;
+    height: auto;
+    width: 100%;
+    font-weight: inherit;
+    border-radius: 0;
+}
+.entity-issues .issue button.label {
+    text-align: inherit;
+    display: flex;
+}
+.entity-issues .issue.severity-warning,
+.entity-issues .issue.severity-warning li {
+    border-color: #FFDF5C;
+}
+.entity-issues .issue.severity-error,
+.entity-issues .issue.severity-error li {
+    border-color: #f5b0ab;
 }
 .entity-issues .issue:first-of-type {
     margin-top: 5px;
@@ -3001,9 +2905,6 @@ div.full-screen > button:hover {
 .entity-issues .issue ul.fixes li:not(:last-of-type) {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-}
-.entity-issues .issue:not(.fixes-open) ul.fixes {
-    display: none;
 }
 
 /* Background - Display Options Sliders
@@ -4223,11 +4124,13 @@ img.tile-debug {
 }
 
 .modal-shortcuts .shortcut-keys {
-    padding: 0 10px;
+    padding-right: 10px;
     color: #767676;
     text-align: right;
 }
 [dir='rtl'] .modal-shortcuts .shortcut-keys {
+    padding-right: auto;
+    padding-left: 10px;
     text-align: left;
 }
 
@@ -4478,24 +4381,29 @@ svg.mouseclick use.right {
     font-size: 12px;
     white-space: initial;
 }
+
 .tooltip.in {
     opacity: 0.9;
     z-index: 1030;
     height: auto;
     display: block;
 }
+
 .tooltip.top {
     margin-top: -20px;
     text-align: center;
 }
+
 .tooltip.right {
     margin-left: 20px;
     text-align: left;
 }
+
 .tooltip.bottom {
     margin-top: 20px;
     text-align: center;
 }
+
 .tooltip.left {
     margin-left: -20px;
     text-align: right;
@@ -4520,6 +4428,7 @@ svg.mouseclick use.right {
     position: absolute;
     background: transparent;
 }
+
 .tail::after {
     content: "";
     position: absolute;
@@ -4566,6 +4475,7 @@ svg.mouseclick use.right {
     border-color: transparent;
     border-style: solid;
 }
+
 .tooltip.top .tooltip-arrow {
     bottom: -5px;
     left: 50%;
@@ -4573,6 +4483,7 @@ svg.mouseclick use.right {
     border-top-color: #fff;
     border-width: 5px 5px 0;
 }
+
 .tooltip.right .tooltip-arrow {
     top: 50%;
     left: -5px;
@@ -4580,6 +4491,7 @@ svg.mouseclick use.right {
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
+
 .tooltip.left .tooltip-arrow {
     top: 50%;
     right: -5px;
@@ -4587,6 +4499,7 @@ svg.mouseclick use.right {
     border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
+
 .tooltip.bottom .tooltip-arrow {
     top: -5px;
     left: 50%;
@@ -4597,7 +4510,7 @@ svg.mouseclick use.right {
 
 .tooltip-heading {
     font-weight: bold;
-    background: #f6f6f6;
+    background: #F6F6F6;
     padding: 10px;
     margin: -10px -10px 10px -10px;
     border-radius: 3px 3px 0 0;
@@ -4605,50 +4518,52 @@ svg.mouseclick use.right {
 }
 
 .keyhint-wrap {
-    background: #f6f6f6;
+    background: #F6F6F6;
     padding: 10px;
     margin: 10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
+
 .tooltip-inner .keyhint {
     font-weight: bold;
     margin-left: 5px;
 }
 
-[dir='rtl'] .tooltip-inner .keyhint {
-    margin-left: 0;
-    margin-right: 5px;
-}
+/* Exceptions for tooltip layouts */
 
-/* dark tooltips for sidebar / panels */
+/* make tooltips in panels dark */
 .map-pane .tooltip.top .tooltip-arrow,
-#sidebar .tooltip.top .tooltip-arrow {
+.entity-editor-pane .tooltip.top .tooltip-arrow,
+.warning-section .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
+
 .map-pane .tooltip.bottom .tooltip-arrow,
-#sidebar .tooltip.bottom .tooltip-arrow {
+.entity-editor-pane .tooltip.bottom .tooltip-arrow,
+.warning-section .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
+
 .map-pane .tooltip.left .tooltip-arrow,
-#sidebar .tooltip.left .tooltip-arrow {
+.entity-editor-pane .tooltip.left .tooltip-arrow,
+.warning-section .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
+
 .map-pane .tooltip.right .tooltip-arrow,
-#sidebar .tooltip.right .tooltip-arrow {
+.entity-editor-pane .tooltip.right .tooltip-arrow,
+.warning-section .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
+
 .map-pane .tooltip-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,
-#sidebar .tooltip-inner,
-#sidebar .tooltip-heading,
-#sidebar .keyhint-wrap {
+.entity-editor-pane .tooltip-inner,
+.warning-section .tooltip-inner {
     background: #000;
     color: #ccc;
 }
-
-/* Exceptions for tooltip layouts */
-
 /* commit warning tooltips need to be closer */
 .warning-section .tooltip.top {
     margin-top: -5px;
@@ -4664,11 +4579,11 @@ svg.mouseclick use.right {
 
 /* Move over tooltips that are near the edge of screen */
 button.sidebar-toggle .tooltip .tooltip-arrow {
-    left: 36px;
+    left: 32px;
 }
 [dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
-    right: 36px;
+    right: 32px;
 }
 
 li:first-of-type .badge .tooltip,

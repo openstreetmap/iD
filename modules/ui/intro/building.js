@@ -80,7 +80,7 @@ export function uiIntroBuilding(context, reveal) {
 
         var msec = transitionTime(house, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().centerZoomEase(house, 19, msec);
+        context.map().zoom(19).centerEase(house, msec);
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
@@ -328,11 +328,13 @@ export function uiIntroBuilding(context, reveal) {
 
         context.enter(modeBrowse(context));
         context.history().reset('hasHouse');
-        var zoom = context.map().zoom();
-        if (zoom < 20) {
-            zoom = 20;
-        }
-        context.map().centerZoomEase(house, zoom, 500);
+        context.map().centerEase(house, 500);
+
+        timeout(function() {
+            if (context.map().zoom() < 20) {
+                context.map().zoomEase(20, 500);
+            }
+        }, 520);
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return;
@@ -454,7 +456,7 @@ export function uiIntroBuilding(context, reveal) {
 
         var msec = transitionTime(tank, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().centerZoomEase(tank, 19.5, msec);
+        context.map().zoom(19.5).centerEase(tank, msec);
 
         timeout(function() {
             reveal('button.add-area',

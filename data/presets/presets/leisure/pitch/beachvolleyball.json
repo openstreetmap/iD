@@ -1,5 +1,10 @@
 {
     "icon": "maki-volleyball",
+    "fields": [
+        "name",
+        "surface",
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"

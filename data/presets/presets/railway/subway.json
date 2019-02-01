@@ -6,12 +6,9 @@
         "gauge",
         "electrified",
         "service_rail",
-        "usage_rail"
-    ],
-    "moreFields": [
-        "maxspeed",
-        "voltage_electrified",
-        "frequency_electrified"
+        "usage_rail",
+        "voltage",
+        "frequency"
     ],
     "geometry": [
         "line"

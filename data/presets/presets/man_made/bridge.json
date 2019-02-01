@@ -6,10 +6,6 @@
         "layer",
         "maxweight"
     ],
-    "moreFields": [
-        "material",
-        "seamark/type"
-    ],
     "geometry": [
         "area"
     ],

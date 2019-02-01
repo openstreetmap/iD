@@ -1,10 +1,16 @@
 {
     "icon": "iD-highway-secondary",
     "fields": [
-        "{highway/primary}"
-    ],
-    "moreFields": [
-        "{highway/primary}"
+        "name",
+        "oneway",
+        "maxspeed",
+        "lanes",
+        "surface",
+        "structure",
+        "maxheight",
+        "ref_road_number",
+        "cycleway",
+        "access"
     ],
     "geometry": [
         "line"

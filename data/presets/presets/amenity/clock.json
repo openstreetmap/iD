@@ -8,9 +8,6 @@
         "date",
         "faces"
     ],
-    "moreFields": [
-        "lit"
-    ],
     "geometry": [
         "point",
         "vertex"

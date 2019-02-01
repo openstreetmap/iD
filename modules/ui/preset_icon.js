@@ -36,18 +36,16 @@ export function uiPresetIcon() {
         var isPOI = isMaki || isTemaki || isFa;
         var isFramed = (geom === 'area' || geom === 'vertex');
 
-        var tagClasses = '';
-        for (var k in p.tags) {
-            var v = p.tags[k];
-            tagClasses += ' tag-' + k;
-            if (v !== '*') {
-                tagClasses += ' tag-' + k + '-' + v;
-            }
-        }
 
-        // if the preset includes a `building_area` field, class it as a building
-        if (p.fields && p.fields.filter(function(d) { return d.id === 'building_area'; }).length) {
-            tagClasses += ' tag-building';
+        function tag_classes(p) {
+            var s = '';
+            for (var i in p.tags) {
+                s += ' tag-' + i;
+                if (p.tags[i] !== '*') {
+                    s += ' tag-' + i + '-' + p.tags[i];
+                }
+            }
+            return s;
         }
 
 
@@ -60,7 +58,7 @@ export function uiPresetIcon() {
 
         fill
             .attr('class', function() {
-                return 'preset-icon-fill preset-icon-fill-' + geom + tagClasses;
+                return 'preset-icon-fill preset-icon-fill-' + geom + tag_classes(p);
             });
 
 
@@ -92,7 +90,7 @@ export function uiPresetIcon() {
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isPOI ? '' : tagClasses);
+                return 'icon ' + picon + (isPOI ? '' : tag_classes(p));
             });
 
         icon.selectAll('use')
@@ -100,16 +98,16 @@ export function uiPresetIcon() {
     }
 
 
-    presetIcon.preset = function(val) {
+    presetIcon.preset = function(_) {
         if (!arguments.length) return preset;
-        preset = utilFunctor(val);
+        preset = utilFunctor(_);
         return presetIcon;
     };
 
 
-    presetIcon.geometry = function(val) {
+    presetIcon.geometry = function(_) {
         if (!arguments.length) return geometry;
-        geometry = utilFunctor(val);
+        geometry = utilFunctor(_);
         return presetIcon;
     };
 

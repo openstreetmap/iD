@@ -2,20 +2,12 @@
     "icon": "maki-bank",
     "fields": [
 	    "name",
+        "atm",
         "operator",
         "address",
         "building_area",
-        "atm",
-        "drive_through"
-    ],
-    "moreFields": [
         "opening_hours",
-        "currency_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "drive_through"
     ],
     "geometry": [
         "point",

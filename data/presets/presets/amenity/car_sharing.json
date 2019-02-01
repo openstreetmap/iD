@@ -4,17 +4,7 @@
         "name",
         "operator",
         "capacity",
-        "address",
-        "payment_multi",
-        "supervised"
-    ],
-    "moreFields": [
-        "lit",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "payment_multi"
     ],
     "geometry": [
         "point",

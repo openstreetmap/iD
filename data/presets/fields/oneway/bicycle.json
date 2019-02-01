@@ -1,8 +1,0 @@
-{
-    "key": "oneway:bicycle",
-    "type": "check",
-    "label": "One Way (Bicycles)",
-    "prerequisiteTag": {
-        "key": "oneway"
-    }
-}

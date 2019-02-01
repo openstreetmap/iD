@@ -1,20 +1,23 @@
 import { t } from '../util/locale';
-import { osmNote } from '../osm';
-import { services } from '../services';
 import { svgIcon } from '../svg';
+import {
+    osmNote
+} from '../osm';
 
 
 export function uiNoteReport() {
     var _note;
+    var url = 'https://www.openstreetmap.org/reports/new?reportable_id=';
 
     function noteReport(selection) {
-        var url;
-        if (services.osm && (_note instanceof osmNote) && (!_note.isNew())) {
-            url = services.osm.noteReportURL(_note);
-        }
 
+        if (!(_note instanceof osmNote)) return;
+
+        url += _note.id + '&reportable_type=Note';
+
+        var data = ((!_note || _note.isNew()) ? [] : [_note]);
         var link = selection.selectAll('.note-report')
-            .data(url ? [url] : []);
+            .data(data, function(d) { return d.id; });
 
         // exit
         link.exit()
@@ -25,7 +28,7 @@ export function uiNoteReport() {
             .append('a')
             .attr('class', 'note-report')
             .attr('target', '_blank')
-            .attr('href', function(d) { return d; })
+            .attr('href', url)
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
         linkEnter
@@ -34,9 +37,9 @@ export function uiNoteReport() {
     }
 
 
-    noteReport.note = function(val) {
+    noteReport.note = function(_) {
         if (!arguments.length) return _note;
-        _note = val;
+        _note = _;
         return noteReport;
     };
 

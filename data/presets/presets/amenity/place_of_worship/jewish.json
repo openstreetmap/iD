@@ -2,7 +2,6 @@
     "icon": "maki-religious-jewish",
     "fields": [
         "name",
-        "religion",
         "denomination",
         "building_area",
         "address",
@@ -23,5 +22,5 @@
         "key": "amenity",
         "value": "place_of_worship"
     },
-    "name": "Jewish Synagogue"
+    "name": "Synagogue"
 }

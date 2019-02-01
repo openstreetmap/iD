@@ -1,22 +1,11 @@
 {
     "icon": "maki-park",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "opening_hours"
-    ],
-    "moreFields": [
-        "dog",
-        "smoking",
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "terms": [
         "esplanade",

@@ -51,7 +51,7 @@ export function uiIntroNavigation(context, reveal) {
 
         var msec = transitionTime(townHall, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().centerZoomEase(townHall, 19, msec);
+        context.map().zoom(19).centerEase(townHall, msec);
 
         timeout(function() {
             var centerStart = context.map().center();
@@ -172,29 +172,34 @@ export function uiIntroNavigation(context, reveal) {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
 
-        var entity = context.hasEntity(hallId);
-        if (!entity) return;
         reveal(null, null, { duration: 0 });
-        context.map().centerZoomEase(entity.loc, 19, 500);
+        context.map().zoomEase(19, 500);
 
         timeout(function() {
             var entity = context.hasEntity(hallId);
             if (!entity) return;
-            var box = pointBox(entity.loc, context);
-            reveal(box, t('intro.navigation.click_townhall'));
+            context.map().centerEase(entity.loc, 500);
 
-            context.map().on('move.intro drawn.intro', function() {
+            timeout(function() {
                 var entity = context.hasEntity(hallId);
                 if (!entity) return;
                 var box = pointBox(entity.loc, context);
-                reveal(box, t('intro.navigation.click_townhall'), { duration: 0 });
-            });
+                reveal(box, t('intro.navigation.click_townhall'));
 
-            context.on('enter.intro', function() {
-                if (isTownHallSelected()) continueTo(selectedTownHall);
-            });
+                context.map().on('move.intro drawn.intro', function() {
+                    var entity = context.hasEntity(hallId);
+                    if (!entity) return;
+                    var box = pointBox(entity.loc, context);
+                    reveal(box, t('intro.navigation.click_townhall'), { duration: 0 });
+                });
 
-        }, 550);  // after centerZoomEase
+                context.on('enter.intro', function() {
+                    if (isTownHallSelected()) continueTo(selectedTownHall);
+                });
+
+            }, 550);  // after centerEase
+
+        }, 550); // after zoomEase
 
         context.history().on('change.intro', function() {
             if (!context.hasEntity(hallId)) {
@@ -390,7 +395,7 @@ export function uiIntroNavigation(context, reveal) {
 
         var msec = transitionTime(springStreet, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().centerZoomEase(springStreet, 19, msec);  // ..and user can see it
+        context.map().zoom(19).centerEase(springStreet, msec);  // ..and user can see it
 
         timeout(function() {
             reveal('.search-header input',

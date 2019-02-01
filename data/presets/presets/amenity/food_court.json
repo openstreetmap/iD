@@ -5,21 +5,15 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "smoking",
+        "outdoor_seating"
     ],
     "moreFields": [
-        "smoking",
-        "outdoor_seating",
-        "capacity",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "diet_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "diet_multi"
     ],
     "geometry": [
         "point",
@@ -35,3 +29,4 @@
     },
     "name": "Food Court"
 }
+

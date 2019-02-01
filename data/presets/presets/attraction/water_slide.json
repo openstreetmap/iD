@@ -1,8 +1,9 @@
 {
     "icon": "maki-swimming",
     "fields": [
-        "{attraction}",
-        "height"
+        "name",
+        "operator",
+        "opening_hours"
     ],
     "geometry": [
         "line",

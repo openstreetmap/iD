@@ -1,8 +1,10 @@
 {
     "icon": "maki-rail",
     "fields": [
-        "{attraction}",
-        "fee"
+        "name",
+        "operator",
+        "fee",
+        "opening_hours"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,10 @@
 {
     "icon": "maki-pitch",
+    "fields": [
+        "name",
+        "surface",
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"

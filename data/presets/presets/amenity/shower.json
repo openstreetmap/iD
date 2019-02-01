@@ -1,17 +1,12 @@
 {
     "icon": "temaki-shower",
     "fields": [
+        "operator",
         "opening_hours",
         "fee",
         "supervised",
         "building_area",
-        "access_simple",
-        "wheelchair"
-    ],
-    "moreFields": [
-        "operator",
-        "gender",
-        "payment_multi"
+        "access_simple"
     ],
     "geometry": [
         "point",

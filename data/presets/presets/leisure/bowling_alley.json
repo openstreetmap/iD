@@ -4,16 +4,9 @@
         "name",
         "operator",
         "address",
-        "building_area"
-    ],
-    "moreFields": [
+        "building_area",
         "opening_hours",
-        "payment_multi",
-        "smoking",
-        "website",
-        "phone",
-        "email",
-        "fax"
+        "smoking"
     ],
     "geometry": [
         "point",

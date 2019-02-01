@@ -1,8 +1,13 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "{shop}",
-        "second_hand"
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "second_hand",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

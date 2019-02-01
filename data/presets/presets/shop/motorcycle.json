@@ -3,7 +3,11 @@
     "fields": [
         "name",
         "brand",
-        "{shop}"
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

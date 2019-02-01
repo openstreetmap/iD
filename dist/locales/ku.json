@@ -1,8 +1,5 @@
 {
     "ku": {
-        "icons": {
-            "download": "daxîne"
-        },
         "modes": {
             "add_area": {
                 "title": "Qad"
@@ -247,6 +244,7 @@
                     "label": "Faks"
                 },
                 "fire_hydrant/type": {
+                    "label": "Cûre",
                     "options": {
                         "wall": "Dîwar"
                     }
@@ -334,6 +332,11 @@
                 },
                 "wikipedia": {
                     "label": "Wîkîpediya"
+                }
+            },
+            "presets": {
+                "landuse/forest": {
+                    "name": "Daristan"
                 }
             }
         }

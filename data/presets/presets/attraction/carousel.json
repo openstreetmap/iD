@@ -1,8 +1,9 @@
 {
-    "icon": "temaki-amusement_park",
+    "icon": "maki-horse-riding",
     "fields": [
-        "{attraction}",
-        "building_area"
+        "name",
+        "operator",
+        "opening_hours"
     ],
     "geometry": [
         "point",

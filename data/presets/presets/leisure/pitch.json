@@ -6,10 +6,6 @@
         "surface",
         "lit"
     ],
-    "moreFields": [
-        "access_simple",
-        "fee"
-    ],
     "geometry": [
         "point",
         "area"

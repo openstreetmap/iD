@@ -5,14 +5,10 @@
         "ref_platform",
         "network",
         "operator",
-        "surface"
-    ],
-    "moreFields": [
+        "surface",
         "lit",
         "bench",
-        "shelter",
-        "passenger_information_display",
-        "wheelchair"
+        "shelter"
     ],
     "geometry": [
         "point",

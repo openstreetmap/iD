@@ -1,17 +1,4 @@
 {
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "access_simple",
-        "building_area"
-    ],
-    "moreFields": [
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "point",
         "area"

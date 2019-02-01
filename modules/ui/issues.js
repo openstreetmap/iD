@@ -24,7 +24,6 @@ export function uiIssues(context) {
     var key = t('issues.key');
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
-    var pane = d3_select(null);
     var settingsCustomRule = uiSettingsCustomRule(context)
         .on('change', customChanged);
     var _shown = false;
@@ -32,7 +31,8 @@ export function uiIssues(context) {
     var _customRulesContainer = d3_select(null);
     var customRuleName = context.storage('settings-custom-rule-name') ? context.storage('settings-custom-rule-name') : t('issues.rules.custom.title');
 
-    context.validator().on('reload.issues_pane', update);
+
+    context.issueManager().on('reload', update);
 
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
@@ -50,8 +50,6 @@ export function uiIssues(context) {
             .append('ul')
             .attr('class', 'layer-list feature-applicability-list')
             .merge(_featureApplicabilityList);
-
-        updateFeatureApplicabilityList();
     }
 
     function renderIssuesList(selection) {
@@ -62,8 +60,6 @@ export function uiIssues(context) {
             .append('ul')
             .attr('class', 'layer-list issues-list')
             .merge(_issuesList);
-
-        updateIssuesList();
     }
 
     function drawListItems(selection, data, type, name, change, active) {
@@ -77,6 +73,7 @@ export function uiIssues(context) {
         // Enter
         var enter = items.enter()
             .append('li')
+            .attr('class', 'layer')
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
@@ -110,8 +107,7 @@ export function uiIssues(context) {
     }
 
     function drawIssuesList(selection) {
-
-        var issues = context.validator().getIssues();
+        var issues = context.issueManager().getIssues();
 
         /*validations = _reduce(issues, function(validations, val) {
             var severity = val.severity;
@@ -134,13 +130,17 @@ export function uiIssues(context) {
         var enter = items.enter()
             .append('li')
             .attr('class', function (d) {
-                return 'issue severity-' + d.severity;
+                return 'layer issue severity-' + d.severity;
             })
+            .call(tooltip()
+                .html(true)
+                .title(function(d) {
+                    var tip = d.tooltip ? d.tooltip : '';
+                    return uiTooltipHtml(tip);
+                })
+                .placement('bottom')
+            )
             .on('click', function(d) {
-                var loc = d.loc();
-                if (loc) {
-                    context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
-                }
                 if (d.entities) {
                     context.enter(modeSelect(
                         context,
@@ -150,16 +150,7 @@ export function uiIssues(context) {
             });
 
         var label = enter
-            .append('button')
-            .attr('class', 'label')
-            .call(tooltip()
-                .html(true)
-                .title(function(d) {
-                    var tip = d.tooltip ? d.tooltip : '';
-                    return uiTooltipHtml(tip);
-                })
-                .placement('bottom')
-            );
+            .append('label');
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
@@ -186,27 +177,25 @@ export function uiIssues(context) {
     }
 
     function showsFeatureApplicability(d) {
-        return context.validator().getFeatureApplicability() === d;
+        return context.issueManager().getFeatureApplicability() === d;
     }
 
     function setFeatureApplicability(d) {
-        context.validator().setFeatureApplicability(d);
+        context.issueManager().setFeatureApplicability(d);
         update();
     }
 
-    function updateFeatureApplicabilityList() {
+    function update() {
         _featureApplicabilityList
             .call(
                 drawListItems,
-                context.validator().featureApplicabilityOptions,
+                context.issueManager().featureApplicabilityOptions,
                 'radio',
-                'features_to_validate',
+                'feature_applicability',
                 setFeatureApplicability,
                 showsFeatureApplicability
             );
-    }
 
-    function updateIssuesList() {
         _issuesList
             .call(drawIssuesList);
 
@@ -216,15 +205,6 @@ export function uiIssues(context) {
         _customRulesContainer
             .call(drawCustomRulesItems);
 
-    }
-
-    function update() {
-        if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
-            updateFeatureApplicabilityList();
-        }
-        if (!pane.select('.disclosure-wrap-issues_issues').classed('hide')) {
-            updateIssuesList();
-        }
     }
 
     function issues(selection) {
@@ -270,7 +250,7 @@ export function uiIssues(context) {
             }
         }
 
-        pane = selection
+        var pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 

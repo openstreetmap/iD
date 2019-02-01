@@ -7,10 +7,6 @@
         "opening_hours",
         "payment_multi"
     ],
-    "moreFields": [
-        "currency_multi",
-        "wheelchair"
-    ],
     "geometry": [
         "point"
     ],

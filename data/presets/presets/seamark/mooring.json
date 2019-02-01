@@ -2,8 +2,7 @@
     "fields": [
         "ref",
         "operator",
-        "seamark/mooring/category",
-        "seamark/type"
+        "seamark/mooring/category"
     ],
     "geometry": [
         "point"

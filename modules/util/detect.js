@@ -9,8 +9,7 @@ export function utilDetect(force) {
     detected = {};
 
     var ua = navigator.userAgent,
-        m = null,
-        q = utilStringQs(window.location.hash.substring(1));
+        m = null;
 
     m = ua.match(/(edge)\/?\s*(\.?\d+(\.\d+)*)/i);   // Edge
     if (m !== null) {
@@ -60,30 +59,24 @@ export function utilDetect(force) {
     // Added due to incomplete svg style support. See #715
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
-    // Set locale based on url param (format 'en-US') or browser lang (default)
-    if (q.hasOwnProperty('locale')) {
-        detected.locale = q.locale;
-        detected.language = q.locale.split('-')[0];
-    } else {
-        detected.locale = (navigator.language || navigator.userLanguage || 'en-US');
-        detected.language = detected.locale.split('-')[0];
+    detected.locale = (navigator.language || navigator.userLanguage || 'en-US');
+    detected.language = detected.locale.split('-')[0];
 
-        // Search `navigator.languages` for a better locale. Prefer the first language,
-        // unless the second language is a culture-specific version of the first one, see #3842
-        if (navigator.languages && navigator.languages.length > 0) {
-            var code0 = navigator.languages[0],
-                parts0 = code0.split('-');
+    // Search `navigator.languages` for a better locale.. Prefer the first language,
+    // unless the second language is a culture-specific version of the first one, see #3842
+    if (navigator.languages && navigator.languages.length > 0) {
+        var code0 = navigator.languages[0],
+            parts0 = code0.split('-');
 
-            detected.locale = code0;
-            detected.language = parts0[0];
+        detected.locale = code0;
+        detected.language = parts0[0];
 
-            if (navigator.languages.length > 1 && parts0.length === 1) {
-                var code1 = navigator.languages[1],
-                    parts1 = code1.split('-');
+        if (navigator.languages.length > 1 && parts0.length === 1) {
+            var code1 = navigator.languages[1],
+                parts1 = code1.split('-');
 
-                if (parts1[0] === parts0[0]) {
-                    detected.locale = code1;
-                }
+            if (parts1[0] === parts0[0]) {
+                detected.locale = code1;
             }
         }
     }
@@ -97,6 +90,7 @@ export function utilDetect(force) {
     }
 
     // detect text direction
+    var q = utilStringQs(window.location.hash.substring(1));
     var lang = dataLocales[detected.locale];
     if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';

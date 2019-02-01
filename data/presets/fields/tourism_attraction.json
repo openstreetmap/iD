@@ -1,0 +1,7 @@
+{
+    "key": "tourism",
+    "default": "attraction",
+    "type": "typeCombo",
+    "universal": true,
+    "label": "Tourism"
+}

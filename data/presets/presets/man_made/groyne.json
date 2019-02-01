@@ -1,7 +1,4 @@
 {
-    "fields": [
-        "material"
-    ],
     "geometry": [
         "line",
         "area"

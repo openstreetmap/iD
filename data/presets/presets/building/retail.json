@@ -1,7 +1,10 @@
 {
     "icon": "maki-commercial",
     "fields": [
-        "{building}",
+        "name",
+        "address",
+        "levels",
+        "height",
         "smoking"
     ],
     "geometry": [

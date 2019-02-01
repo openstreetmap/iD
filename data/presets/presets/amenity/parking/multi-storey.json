@@ -1,10 +1,15 @@
 {
     "icon": "maki-car",
     "fields": [
-        "{amenity/parking}",
+        "name",
+        "operator",
         "building",
         "levels",
-        "height"
+        "height",
+        "address",
+        "capacity",
+        "fee",
+        "access_simple"
     ],
     "geometry": [
         "area"

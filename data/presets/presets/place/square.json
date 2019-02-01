@@ -6,9 +6,6 @@
     "fields": [
         "name"
     ],
-    "moreFields": [
-        "website"
-    ],
     "tags": {
         "place": "square"
     },

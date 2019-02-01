@@ -7,11 +7,6 @@
         "fee",
         "water_point"
     ],
-    "moreFields": [
-        "opening_hours",
-        "payment_multi",
-        "seamark/type"
-    ],
     "geometry": [
         "point",
         "vertex",

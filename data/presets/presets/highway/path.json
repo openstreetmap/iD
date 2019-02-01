@@ -6,21 +6,14 @@
         "width",
         "structure",
         "access",
-        "incline"
-    ],
-    "moreFields": [
-        "wheelchair",
-        "lit",
-        "smoothness",
-        "trail_visibility",
+        "incline",
         "sac_scale",
+        "trail_visibility",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
         "horse_scale",
-        "covered",
-        "ref",
-        "dog"
+        "ref"
     ],
     "geometry": [
         "line"

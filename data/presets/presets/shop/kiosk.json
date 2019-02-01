@@ -1,7 +1,12 @@
 {
     "icon": "maki-shop",
     "fields": [
-        "{shop}",
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi",
         "levels"
     ],
     "geometry": [

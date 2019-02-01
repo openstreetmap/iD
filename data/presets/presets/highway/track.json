@@ -8,14 +8,11 @@
         "structure",
         "access",
         "incline",
-        "smoothness"
-    ],
-    "moreFields": [
+        "smoothness",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
-        "horse_scale",
-        "covered"
+        "horse_scale"
     ],
     "geometry": [
         "line"

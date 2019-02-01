@@ -6,9 +6,6 @@
         "fee",
         "water_point"
     ],
-    "moreFields": [
-        "payment_multi"
-    ],
     "geometry": [
         "point",
         "vertex",

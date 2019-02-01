@@ -6,15 +6,8 @@
         "address",
         "building_area",
         "opening_hours",
-        "scuba_diving"
-    ],
-    "moreFields": [
         "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "scuba_diving"
     ],
     "geometry": [
         "point",

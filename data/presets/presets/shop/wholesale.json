@@ -1,8 +1,13 @@
 {
     "icon": "maki-warehouse",
     "fields": [
-        "{shop}",
-        "wholesale"
+        "name",
+        "operator",
+        "wholesale",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

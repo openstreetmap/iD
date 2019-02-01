@@ -2,9 +2,9 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgPointTransform } from './helpers';
 import { geoMetersToLat } from '../geo';
+import _throttle from 'lodash-es/throttle';
 
-
-export function svgGeolocate(projection) {
+export function svgGeolocate(projection, context, dispatch) {
     var layer = d3_select(null);
     var _position;
 

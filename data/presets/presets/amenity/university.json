@@ -1,20 +1,18 @@
 {
     "icon": "maki-college",
     "fields": [
-        "{amenity/college}"
-    ],
-    "moreFields": [
-        "{amenity/college}"
+        "name",
+        "operator",
+        "address",
+        "internet_access",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "college",
-        "graduate school",
-        "PhD program",
-        "master's degree program"
+        "college"
     ],
     "tags": {
         "amenity": "university"

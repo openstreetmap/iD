@@ -1,26 +1,16 @@
 {
     "icon": "maki-car",
     "fields": [
+        "name",
         "operator",
         "parking",
         "capacity",
-        "access_simple",
         "fee",
-        "surface"
-    ],
-    "moreFields": [
-        "name",
+        "access_simple",
         "supervised",
         "park_ride",
-        "maxstay",
-        "payment_multi",
-        "address",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair",
-        "covered"
+        "surface",
+        "maxstay"
     ],
     "geometry": [
         "point",

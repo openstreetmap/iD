@@ -6,16 +6,9 @@
         "address",
         "building_area",
         "drive_through",
-        "dispensing"
-    ],
-    "moreFields": [
         "opening_hours",
         "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "dispensing"
     ],
     "geometry": [
         "point",
@@ -38,10 +31,9 @@
     },
     "terms": [
         "apothecary",
-        "drug store",
-        "drugstore",
+        "drug*",
         "med*",
         "prescription"
     ],
-    "name": "Pharmacy Counter"
+    "name": "Pharmacy"
 }

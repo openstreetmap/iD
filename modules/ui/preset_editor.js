@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import _union from 'lodash-es/union';
+
 import {
     event as d3_event,
     select as d3_select
@@ -53,13 +53,16 @@ export function uiPresetEditor(context) {
                 );
             }
 
-            var additionalFields = _union(_preset.moreFields, presets.universal());
-            additionalFields.sort(function(field1, field2) {
-                return field1.label() > field2.label();
+            _preset.moreFields.forEach(function(field) {
+                if (_preset.fields.indexOf(field) === -1) {
+                    _fieldsArr.push(
+                        uiField(context, field, entity, { show: false })
+                    );
+                }
             });
 
-            additionalFields.forEach(function(field) {
-                if (_preset.fields.indexOf(field) === -1) {
+            presets.universal().forEach(function(field) {
+                if (_preset.fields.indexOf(field) === -1 && _preset.moreFields.indexOf(field) === -1) {
                     _fieldsArr.push(
                         uiField(context, field, entity, { show: false })
                     );
@@ -84,9 +87,8 @@ export function uiPresetEditor(context) {
         selection
             .call(formFields
                 .fieldsArr(_fieldsArr)
-                .state(_state)
-                .klass('inspector-inner fillL3')
-            );
+                .state(_state),
+            'inspector-inner fillL3');
 
 
         selection.selectAll('.wrap-form-field input')
@@ -118,6 +120,7 @@ export function uiPresetEditor(context) {
     presetEditor.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
+        formFields.tagsChanged();
         // Don't reset _fieldsArr here.
         return presetEditor;
     };

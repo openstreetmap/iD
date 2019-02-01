@@ -16,13 +16,6 @@ export function uiEntityIssues(context) {
     var dispatch = d3_dispatch('change');
     var _entityID;
 
-    context.validator().on('reload.entity_issues', update);
-
-    function update() {
-        var selection = d3_select('.entity-issues .disclosure-wrap');
-        render(selection);
-    }
-
     function entityIssues(selection) {
         selection.call(uiDisclosure(context, 'entity_issues', true)
             .title(t('issues.title'))
@@ -32,25 +25,10 @@ export function uiEntityIssues(context) {
 
 
     function render(selection) {
-
-        var issues = context.validator().getIssuesForEntityWithID(_entityID);
-
-        if (issues.length > 0) {
-            d3_select('.entity-issues')
-                .style('display', 'block');
-        } else {
-            d3_select('.entity-issues')
-                .style('display', 'none');
-            return;
-        }
+        var issues = context.issueManager().getIssuesForEntityWithID(_entityID);
 
         var items = selection.selectAll('.issue')
-            .data(issues, function(d) {
-                if (d.id) {
-                    return d.id();
-                }
-                return null;
-            });
+            .data(issues, function(d) { return d.id(); });
 
         // Exit
         items.exit()
@@ -101,18 +79,15 @@ export function uiEntityIssues(context) {
                 list = list.enter()
                     .append('ul')
                     .attr('class', 'fixes')
+                    .style('display', 'none')
                     .merge(list);
 
                 issue.select('.label')
                     .on('click', function() {
-                        if (!issue.classed('fixes-open')) {
-                            issue.classed('fixes-open', true);
-                            var loc = d.loc();
-                            if (loc) {
-                                context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
-                            }
+                        if (list.style('display') === 'none') {
+                            list.style('display', 'block');
                         } else {
-                            issue.classed('fixes-open', false);
+                            list.style('display', 'none');
                         }
                     });
 
@@ -130,7 +105,7 @@ export function uiEntityIssues(context) {
                         return d.title;
                     })
                     .on('click', function(d) {
-                        d.onClick();
+                        d.action();
                     });
             }
         });
@@ -138,12 +113,6 @@ export function uiEntityIssues(context) {
         // Update
         items = items
             .merge(enter);
-
-        // open the fixes for the first issue if no others are already open
-        if (selection.selectAll('.issue.fixes-open').empty()) {
-            selection.select('.issue:first-child').classed('fixes-open', true);
-        }
-
     }
 
     entityIssues.entityID = function(val) {

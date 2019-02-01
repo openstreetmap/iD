@@ -5,14 +5,8 @@
         "operator",
         "address",
         "access_simple",
-        "capacity"
-    ],
-    "moreFields": [
-        "smoking",
-        "fee",
-        "payment_multi",
-        "website",
-        "wheelchair"
+        "capacity",
+        "smoking"
     ],
     "geometry": [
         "point",

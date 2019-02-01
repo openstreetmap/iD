@@ -67,7 +67,6 @@ export function uiRawTagEditor(context) {
             _newRow = '';
         }
 
-        // List of tags
         var list = wrap.selectAll('.tag-list')
             .data([0]);
 
@@ -76,30 +75,16 @@ export function uiRawTagEditor(context) {
             .attr('class', 'tag-list')
             .merge(list);
 
+        var newTag = wrap.selectAll('.add-tag')
+            .data([0]);
 
-        // Container for the Add button
-        var addRowEnter = wrap.selectAll('.add-row')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'add-row');
-
-        addRowEnter
+        newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
-            .call(svgIcon('#iD-icon-plus', 'light'))
-            .on('click', addTag);
-
-        addRowEnter
-            .append('div')
-            .attr('class', 'space-value');   // preserve space
-
-        addRowEnter
-            .append('div')
-            .attr('class', 'space-buttons');  // preserve space
+            .on('click', addTag)
+            .call(svgIcon('#iD-icon-plus', 'light'));
 
 
-        // Tag list items
         var items = list.selectAll('.tag-row')
             .data(entries, function(d) { return d.key; });
 
@@ -107,8 +92,8 @@ export function uiRawTagEditor(context) {
             .each(unbind)
             .remove();
 
-
         // Enter
+
         var enter = items.enter()
             .append('li')
             .attr('class', 'tag-row')
@@ -148,6 +133,7 @@ export function uiRawTagEditor(context) {
 
 
         // Update
+
         items = items
             .merge(enter)
             .sort(function(a, b) {

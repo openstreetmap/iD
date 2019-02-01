@@ -6,11 +6,6 @@
         "seats",
         "colour"
     ],
-    "moreFields": [
-        "access_simple",
-        "inscription",
-        "lit"
-    ],
     "geometry": [
         "point",
         "vertex",

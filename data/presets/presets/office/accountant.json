@@ -1,5 +1,11 @@
 {
-    "icon": "temaki-accounting",
+    "icon": "maki-suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"

@@ -1,5 +1,9 @@
 {
     "icon": "maki-water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
     "geometry": [
         "area"
     ],
@@ -8,8 +12,8 @@
         "water": "reservoir"
     },
     "reference": {
-        "key": "water",
-        "value": "reservoir"
+        "key": "natural",
+        "value": "water"
     },
     "name": "Reservoir"
 }

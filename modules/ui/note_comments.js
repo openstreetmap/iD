@@ -110,9 +110,9 @@ export function uiNoteComments() {
     }
 
 
-    noteComments.note = function(val) {
+    noteComments.note = function(_) {
         if (!arguments.length) return _note;
-        _note = val;
+        _note = _;
         return noteComments;
     };
 

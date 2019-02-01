@@ -1,19 +1,10 @@
 {
-    "icon": "temaki-zoo",
+    "icon": "maki-zoo",
     "fields": [
         "name",
         "operator",
         "address",
-        "opening_hours",
-        "fee"
-    ],
-    "moreFields": [
-        "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "opening_hours"
     ],
     "geometry": [
         "point",

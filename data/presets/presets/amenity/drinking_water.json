@@ -1,15 +1,5 @@
 {
     "icon": "maki-drinking-water",
-    "fields": [
-        "operator",
-        "access_simple",
-        "fee",
-        "wheelchair"
-    ],
-    "moreFields": [
-        "lit",
-        "covered"
-    ],
     "geometry": [
         "point"
     ],
@@ -17,11 +7,8 @@
         "amenity": "drinking_water"
     },
     "terms": [
-        "potable water source",
-        "water fountain",
-        "drinking fountain",
-        "bubbler",
-        "water tap"
+        "fountain",
+        "potable"
     ],
     "name": "Drinking Water"
 }

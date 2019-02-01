@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "boules",
-        "{leisure/pitch}"
+        "surface",
+        "lit"
     ],
     "geometry": [
         "point",

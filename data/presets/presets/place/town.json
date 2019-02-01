@@ -4,9 +4,6 @@
         "name",
         "population"
     ],
-    "moreFields": [
-        "website"
-    ],
     "geometry": [
         "point",
         "area"

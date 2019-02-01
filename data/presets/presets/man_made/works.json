@@ -7,12 +7,6 @@
         "building_area",
         "product"
     ],
-    "moreFields": [
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "point",
         "area"

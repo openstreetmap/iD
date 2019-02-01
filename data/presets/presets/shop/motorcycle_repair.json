@@ -1,8 +1,13 @@
 {
     "icon": "fas-motorcycle",
     "fields": [
-        "{shop}",
-        "service/vehicle"
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "service/vehicle",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

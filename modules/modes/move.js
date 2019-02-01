@@ -5,10 +5,7 @@ import {
 
 import { t } from '../util/locale';
 
-import {
-    actionMove,
-    actionNoop
-} from '../actions';
+import { actionMove } from '../actions';
 import { behaviorEdit } from '../behavior';
 import { geoViewportEdge, geoVecSubtract } from '../geo';
 import { modeBrowse, modeSelect } from './index';
@@ -66,7 +63,7 @@ export function modeMove(context, entityIDs, baseGraph) {
         var origMouse = context.projection(_origin);
         var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
-        fn(actionMove(entityIDs, delta, context.projection, _cache));
+        fn(actionMove(entityIDs, delta, context.projection, _cache), annotation);
         _prevGraph = context.graph();
     }
 
@@ -101,7 +98,6 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     function finish() {
         d3_event.stopPropagation();
-        context.replace(actionNoop(), annotation);
         context.enter(modeSelect(context, entityIDs));
         stopNudge();
     }

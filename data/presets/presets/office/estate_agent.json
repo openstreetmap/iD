@@ -1,5 +1,11 @@
 {
-    "icon": "temaki-real_estate_agency",
+    "icon": "maki-suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
@@ -7,6 +13,6 @@
     "tags": {
         "office": "estate_agent"
     },
-    "terms": ["real estate"],
+    "terms": [],
     "name": "Real Estate Office"
 }

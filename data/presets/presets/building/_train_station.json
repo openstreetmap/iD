@@ -1,5 +1,11 @@
 {
     "icon": "maki-building",
+    "fields": [
+        "name",
+        "address",
+        "levels",
+        "height"
+    ],
     "geometry": [
         "point",
         "vertex",

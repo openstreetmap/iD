@@ -6,25 +6,18 @@
         "operator",
         "address",
         "building_area",
-        "drive_through"
-    ],
-    "moreFields": [
         "opening_hours",
-        "diet_multi",
         "takeaway",
         "delivery",
+        "drive_through",
         "smoking",
-        "capacity",
-        "outdoor_seating",
+        "outdoor_seating"
+    ],
+    "moreFields": [
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "payment_multi",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "diet_multi"
     ],
     "geometry": [
         "point",

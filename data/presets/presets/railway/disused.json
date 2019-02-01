@@ -5,9 +5,6 @@
         "service_rail",
         "usage_rail"
     ],
-    "moreFields": [
-        "covered"
-    ],
     "geometry": [
         "line"
     ],

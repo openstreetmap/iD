@@ -3,9 +3,6 @@
         "kerb",
         "tactile_paving"
     ],
-    "moreFields": [
-        "material"
-    ],
     "geometry": [
         "vertex",
         "line"

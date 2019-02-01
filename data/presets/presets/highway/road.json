@@ -1,10 +1,14 @@
 {
     "icon": "iD-highway-road",
     "fields": [
-        "{highway/residential}"
-    ],
-    "moreFields": [
-        "{highway/residential}"
+        "name",
+        "oneway",
+        "maxspeed",
+        "lanes",
+        "surface",
+        "structure",
+        "maxheight",
+        "access"
     ],
     "geometry": [
         "line"

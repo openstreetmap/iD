@@ -3,9 +3,13 @@
     "fields": [
         "name",
         "brand",
-        "{shop}",
+        "operator",
+        "address",
+        "building_area",
         "second_hand",
-        "service/vehicle"
+        "service/vehicle",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

@@ -17,33 +17,22 @@ export function svgTagClasses() {
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking'
     ];
+    var tagClassRe = /^tag-/;
     var _tags = function(entity) { return entity.tags; };
 
 
     var tagClasses = function(selection) {
         selection.each(function tagClassesEach(entity) {
             var value = this.className;
-            var primary, status;
+            var classes, primary, status;
 
-            if (value.baseVal !== undefined) {
-                value = value.baseVal;
-            }
+            if (value.baseVal !== undefined) value = value.baseVal;
 
-            var t = _tags(entity);
-            var isMultiPolygon = (t.type === 'multipolygon');
-            var shouldRenderLineAsArea = isMultiPolygon && !entity.hasInterestingTags();
+            classes = value.trim().split(/\s+/).filter(function(name) {
+                return name.length && !tagClassRe.test(name);
+            }).join(' ');
 
-            var i, k, v;
-
-            // preserve base classes (nothing with `tag-`)
-            var classes = value.trim().split(/\s+/)
-                .filter(function(klass) {
-                    return klass.length && !/^tag-/.test(klass);
-                })
-                .map(function(klass) {  // style multipolygon inner/outers as areas not lines
-                    return (klass === 'line' && shouldRenderLineAsArea) ? 'area' : klass;
-                });
-
+            var t = _tags(entity), i, k, v;
 
             // pick at most one primary classification tag..
             for (i = 0; i < primaries.length; i++) {
@@ -54,10 +43,9 @@ export function svgTagClasses() {
                 primary = k;
                 if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
                     status = v;
-                    classes.push('tag-' + k);
+                    classes += ' tag-' + k;
                 } else {
-                    classes.push('tag-' + k);
-                    classes.push('tag-' + k + '-' + v);
+                    classes += ' tag-' + k + ' tag-' + k + '-' + v;
                 }
 
                 break;
@@ -78,7 +66,7 @@ export function svgTagClasses() {
                     } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
                         status = k;
                         primary = v;
-                        classes.push('tag-' + v);
+                        classes += ' tag-' + v;
                     }  // else ignore e.g.  `highway=path + abandoned=railway`
 
                     if (status) break;
@@ -86,17 +74,15 @@ export function svgTagClasses() {
             }
 
             if (status) {
-                classes.push('tag-status');
-                classes.push('tag-status-' + status);
+                classes += ' tag-status tag-status-' + status;
             }
 
-            // add any secondary tags
+            // add any secondary (structure) tags
             for (i = 0; i < secondaries.length; i++) {
                 k = secondaries[i];
                 v = t[k];
                 if (!v || v === 'no') continue;
-                classes.push('tag-' + k);
-                classes.push('tag-' + k + '-' + v);
+                classes += ' tag-' + k + ' tag-' + k + '-' + v;
             }
 
             // For highways, look for surface tagging..
@@ -110,22 +96,22 @@ export function svgTagClasses() {
                     }
                 }
                 if (!paved) {
-                    classes.push('tag-unpaved');
+                    classes += ' tag-unpaved';
                 }
             }
 
+            classes = classes.trim();
 
-            var computed = classes.join(' ').trim();
-            if (computed !== value) {
-                d3_select(this).attr('class', computed);
+            if (classes !== value) {
+                d3_select(this).attr('class', classes);
             }
         });
     };
 
 
-    tagClasses.tags = function(val) {
+    tagClasses.tags = function(_) {
         if (!arguments.length) return _tags;
-        _tags = val;
+        _tags = _;
         return tagClasses;
     };
 

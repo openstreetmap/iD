@@ -5,9 +5,6 @@
         "width",
         "intermittent"
     ],
-    "moreFields": [
-        "salt"
-    ],
     "geometry": [
         "line"
     ],

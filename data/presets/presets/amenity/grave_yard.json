@@ -2,13 +2,7 @@
     "icon": "maki-cemetery",
     "fields": [
         "religion",
-        "address"
-    ],
-    "moreFields": [
-        "website",
-        "phone",
-        "email",
-        "fax"
+        "denomination"
     ],
     "geometry": [
         "point",

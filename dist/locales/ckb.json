@@ -426,8 +426,14 @@
                 "entrance": {
                     "label": "جۆر"
                 },
+                "fire_hydrant/position": {
+                    "options": {
+                        "green": "سەوز"
+                    }
+                },
                 "fire_hydrant/type": {
                     "options": {
+                        "pond": "گۆم",
                         "wall": "دیوار"
                     }
                 },
@@ -804,14 +810,23 @@
                 "amenity/nightclub": {
                     "name": "یانەی شەوانە"
                 },
+                "amenity/pharmacy": {
+                    "name": "دەرمانخانە"
+                },
                 "amenity/place_of_worship": {
                     "name": "پەرستگا"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "پەرستگایی بودایی"
                 },
+                "amenity/place_of_worship/christian": {
+                    "name": "کڵێسا"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "پەرستگای هیندۆسی"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "مزگەوت"
                 },
                 "amenity/police": {
                     "name": "پۆلیس"
@@ -1007,6 +1022,9 @@
                 },
                 "landuse/commercial": {
                     "name": "ناوچەی بارزگانی"
+                },
+                "landuse/forest": {
+                    "name": "دارستان"
                 },
                 "landuse/grass": {
                     "name": "گژوگیا"

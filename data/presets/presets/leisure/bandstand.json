@@ -5,9 +5,6 @@
         "building_area",
         "operator"
     ],
-    "moreFields": [
-        "website"
-    ],
     "geometry": [
         "point",
         "area"

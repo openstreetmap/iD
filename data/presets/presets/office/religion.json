@@ -1,7 +1,10 @@
 {
     "icon": "maki-suitcase",
     "fields": [
-        "{office}",
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
         "religion",
         "denomination"
     ],

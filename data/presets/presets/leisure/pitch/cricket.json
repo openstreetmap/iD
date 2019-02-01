@@ -1,5 +1,10 @@
 {
     "icon": "maki-cricket",
+    "fields": [
+        "name",
+        "surface",
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"

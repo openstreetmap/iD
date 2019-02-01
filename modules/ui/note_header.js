@@ -49,9 +49,9 @@ export function uiNoteHeader() {
     }
 
 
-    noteHeader.note = function(val) {
+    noteHeader.note = function(_) {
         if (!arguments.length) return _note;
-        _note = val;
+        _note = _;
         return noteHeader;
     };
 

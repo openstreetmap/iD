@@ -33,7 +33,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 // e.g. during drags or easing.
                 if (context.map().isTransformed()) return;
 
-                layer.selectAll('.viewfield-group.currentView')
+                layer.selectAll('.viewfield-group.selected')
                     .filter(function(d) {
                         return d.pano;
                     })
@@ -164,8 +164,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .on('mouseenter', mouseover)
-            .on('mouseleave', mouseout)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
             .on('click', click);
 
         groupsEnter

@@ -2,6 +2,7 @@
     "key": "phone",
     "type": "tel",
     "icon": "maki-telephone",
+    "universal": true,
     "label": "Telephone",
     "placeholder": "+31 42 123 4567"
 }

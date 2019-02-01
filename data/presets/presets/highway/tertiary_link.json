@@ -1,10 +1,17 @@
 {
     "icon": "iD-highway-tertiary-link",
     "fields": [
-        "{highway/primary_link}"
-    ],
-    "moreFields": [
-        "{highway/primary_link}"
+        "name",
+        "oneway",
+        "maxspeed",
+        "maxspeed/advisory",
+        "lanes",
+        "surface",
+        "structure",
+        "maxheight",
+        "ref_road_number",
+        "cycleway",
+        "access"
     ],
     "geometry": [
         "line"

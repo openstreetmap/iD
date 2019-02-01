@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import marked from 'marked';
-import { t, textDirection } from '../util/locale';
+import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { icon } from './intro/helper';
 
@@ -197,7 +197,7 @@ export function uiFieldHelp(context, fieldName) {
 
         titleEnter
             .append('h2')
-            .attr('class', ((textDirection === 'rtl') ? 'fr' : 'fl'))
+            .attr('class', 'fl')
             .text(t('help.field.' + fieldName + '.title'));
 
         titleEnter

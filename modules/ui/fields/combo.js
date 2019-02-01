@@ -42,7 +42,6 @@ export function uiFieldCombo(field, context) {
         .caseSensitive(caseSensitive)
         .minItems(isMulti || isSemi ? 1 : 2);
     var container = d3_select(null);
-    var inputWrap = d3_select(null);
     var input = d3_select(null);
     var _comboData = [];
     var _multiData = [];
@@ -191,9 +190,6 @@ export function uiFieldCombo(field, context) {
                 });
             }
 
-            // hide the caret if there are no suggestions
-            container.classed('empty-combobox', data.length === 0);
-
             _comboData = _map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
@@ -296,37 +292,17 @@ export function uiFieldCombo(field, context) {
             container = container.selectAll('.chiplist')
                 .data([0]);
 
-            var listClass = 'chiplist';
-            
-            // Use a separate line for each value in the Destinations field
-            // to mimic highway exit signs
-            if (field.id === 'destination_oneway') {
-                listClass += ' full-line-chips';
-            }
-
             container = container.enter()
                 .append('ul')
-                .attr('class', listClass)
+                .attr('class', 'chiplist')
                 .on('click', function() {
                     window.setTimeout(function() { input.node().focus(); }, 10);
                 })
                 .merge(container);
-
-
-            inputWrap = container.selectAll('.input-wrap')
-                .data([0]);
-
-            inputWrap = inputWrap.enter()
-                .append('li')
-                .attr('class', 'input-wrap')
-                .merge(inputWrap);
-
-            input = inputWrap.selectAll('input')
-                .data([0]);
-        } else {
-            input = container.selectAll('input')
-                .data([0]);
         }
+
+        input = container.selectAll('input')
+            .data([0]);
 
         input = input.enter()
             .append('input')
@@ -346,16 +322,6 @@ export function uiFieldCombo(field, context) {
         input
             .on('change', change)
             .on('blur', change);
-
-        input
-            .on('keydown.field', function() {
-                switch (d3_event.keyCode) {
-                    case 13: // ↩ Return
-                        input.node().blur(); // blurring also enters the value
-                        d3_event.stopPropagation();
-                        break;
-                }
-            });
 
         if (isMulti || isSemi) {
             combobox
@@ -419,7 +385,7 @@ export function uiFieldCombo(field, context) {
                 .remove();
 
             var enter = chips.enter()
-                .insert('li', '.input-wrap')
+                .insert('li', 'input')
                 .attr('class', 'chips');
 
             enter.append('span');

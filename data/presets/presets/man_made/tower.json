@@ -3,11 +3,7 @@
     "fields": [
         "tower/type",
         "tower/construction",
-        "height",
-        "building_area"
-    ],
-    "moreFields": [
-        "architect"
+        "height"
     ],
     "geometry": [
         "point",

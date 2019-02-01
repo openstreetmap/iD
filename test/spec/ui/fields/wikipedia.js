@@ -2,10 +2,10 @@ describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field, server;
 
     function changeTags(changed) {
-        var e = context.entity(entity.id);
-        var annotation = 'Changed tags.';
-        var tags = JSON.parse(JSON.stringify(e.tags));   // deep copy
-        var didChange = false;
+        var e = context.entity(entity.id),
+            annotation = 'Changed tags.',
+            tags = JSON.parse(JSON.stringify(e.tags)),   // deep copy
+            didChange = false;
 
         for (var k in changed) {
             if (changed.hasOwnProperty(k)) {
@@ -43,15 +43,11 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     beforeEach(function() {
-        entity = iD.osmNode({id: 'n12345'});
-        context = iD.coreContext();
+        entity = iD.Node({id: 'n12345'});
+        context = iD.Context();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
-        field = iD.presetField('wikipedia', {
-            key: 'wikipedia',
-            keys: ['wikipedia', 'wikidata'],
-            type: 'wikipedia'
-        });
+        field = context.presets().field('wikipedia');
         server = createServer({ respondImmediately: true });
     });
 
@@ -114,7 +110,7 @@ describe('iD.uiFieldWikipedia', function() {
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
     });
 
-    it.skip('does not set delayed wikidata tag if graph has changed', function(done) {
+    it('does not set delayed wikidata tag if graph has changed', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);

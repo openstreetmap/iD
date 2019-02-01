@@ -5,17 +5,9 @@
         "brand",
         "operator",
         "address",
-        "fuel_multi"
-    ],
-    "moreFields": [
+        "fuel_multi",
         "opening_hours",
-        "payment_multi",
-        "building",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "payment_multi"
     ],
     "geometry": [
         "point",

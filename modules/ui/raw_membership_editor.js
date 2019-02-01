@@ -29,7 +29,6 @@ export function uiRawMembershipEditor(context) {
     var nearbyCombo = uiCombobox(context, 'parent-relation')
         .minItems(1)
         .fetcher(fetchNearbyRelations);
-    var _inChange = false;
     var _entityID;
     var _showBlank;
 
@@ -45,20 +44,16 @@ export function uiRawMembershipEditor(context) {
 
 
     function changeRole(d) {
-        if (d === 0) return;    // called on newrow (shoudn't happen)
-        if (_inChange) return;  // avoid accidental recursive call #5731
-
+        if (d === 0) return;   // called on newrow (shoudn't happen)
         var oldRole = d.member.role;
         var newRole = d3_select(this).property('value');
 
         if (oldRole !== newRole) {
-            _inChange = true;
             context.perform(
                 actionChangeMember(d.relation.id, _extend({}, d.member, { role: newRole }), d.index),
                 t('operations.change_role.annotation')
             );
         }
-        _inChange = false;
     }
 
 
@@ -82,7 +77,7 @@ export function uiRawMembershipEditor(context) {
                 t('operations.add.annotation.relation')
             );
 
-            context.enter(modeSelect(context, [relation.id]).newFeature(true));
+            context.enter(modeSelect(context, [relation.id]));
         }
     }
 
@@ -192,13 +187,12 @@ export function uiRawMembershipEditor(context) {
 
             itemsEnter.each(function(d){
                 // highlight the relation in the map while hovering on the list item
-                d3_select(this)
-                    .on('mouseover', function() {
-                        utilHighlightEntity(d.relation.id, true, context);
-                    })
-                    .on('mouseout', function() {
-                        utilHighlightEntity(d.relation.id, false, context);
-                    });
+                d3_select(this).on('mouseover', function() {
+                    utilHighlightEntity(d.relation.id, true, context);
+                });
+                d3_select(this).on('mouseout', function() {
+                    utilHighlightEntity(d.relation.id, false, context);
+                });
             });
 
             var labelEnter = itemsEnter
@@ -287,72 +281,43 @@ export function uiRawMembershipEditor(context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove form-field-button member-delete')
-                .call(svgIcon('#iD-operation-delete'))
                 .on('click', function() {
                     list.selectAll('.member-row-new')
                         .remove();
-                });
+                })
+                .call(svgIcon('#iD-operation-delete'));
 
             // Update
             newMembership = newMembership
                 .merge(newMembershipEnter);
 
             newMembership.selectAll('.member-entity-input')
-                .on('blur', cancelEntity)   // if it wasn't accepted normally, cancel it
                 .call(nearbyCombo
-                    .on('accept', acceptEntity)
-                    .on('cancel', cancelEntity)
+                    .on('accept', function (d) {
+                        var role = list.selectAll('.member-row-new .member-role').property('value');
+                        addMembership(d, role);
+                    })
+                    .on('cancel', function() { delete this.value; })
                 );
 
 
-            // Container for the Add button
-            var addRow = selection.selectAll('.add-row')
+            var addrel = selection.selectAll('.add-relation')
                 .data([0]);
 
-            // enter
-            var addRowEnter = addRow.enter()
-                .append('div')
-                .attr('class', 'add-row');
-
-            addRowEnter
+            // Enter
+            var addrelEnter = addrel.enter()
                 .append('button')
-                .attr('class', 'add-relation')
-                .call(svgIcon('#iD-icon-plus', 'light'));
+                .attr('class', 'add-relation');
 
-            addRowEnter
-                .append('div')
-                .attr('class', 'space-value');   // preserve space
-
-            addRowEnter
-                .append('div')
-                .attr('class', 'space-buttons');  // preserve space
-
-            // update
-            addRow = addRow
-                .merge(addRowEnter);
-
-            addRow.select('.add-relation')
+            // Update
+            addrel
+                .merge(addrelEnter)
+                .call(svgIcon('#iD-icon-plus', 'light'))
                 .on('click', function() {
                     _showBlank = true;
                     content(selection);
                     list.selectAll('.member-entity-input').node().focus();
                 });
-
-
-            function acceptEntity(d) {
-                if (!d) {
-                    cancelEntity();
-                    return;
-                }
-                var role = list.selectAll('.member-row-new .member-role').property('value');
-                addMembership(d, role);
-            }
-
-
-            function cancelEntity() {
-                var input = newMembership.selectAll('.member-entity-input');
-                input.property('value', '');
-            }
 
 
             function bindTypeahead(d) {
@@ -402,9 +367,9 @@ export function uiRawMembershipEditor(context) {
     }
 
 
-    rawMembershipEditor.entityID = function(val) {
+    rawMembershipEditor.entityID = function(_) {
         if (!arguments.length) return _entityID;
-        _entityID = val;
+        _entityID = _;
         _showBlank = false;
         return rawMembershipEditor;
     };

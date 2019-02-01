@@ -2,14 +2,15 @@
     "icon": "maki-water",
     "fields": [
         "name",
-        "intermittent"
+        "basin",
+        "intermittent_yes"
     ],
     "geometry": [
         "area"
     ],
     "tags": {
-        "landuse": "reservoir"
+        "landuse": "basin"
     },
-    "name": "Reservoir",
-    "searchable": false
+    "terms": [],
+    "name": "Basin"
 }

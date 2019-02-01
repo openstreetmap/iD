@@ -1,7 +1,6 @@
 {
     "fields": [
-        "ref",
-        "material"
+        "ref"
     ],
     "geometry": [
         "point",

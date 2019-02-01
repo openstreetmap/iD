@@ -4,16 +4,7 @@
         "name",
         "operator",
         "address",
-        "opening_hours",
-        "fee",
-        "payment_multi"
-    ],
-    "moreFields": [
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "opening_hours"
     ],
     "geometry": [
         "point",

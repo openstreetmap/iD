@@ -18,6 +18,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
+import * as Validations from '../validations/index';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -31,7 +32,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'annotatedChange', 'merge', 'restore', 'undone', 'redone');
+    var dispatch = d3_dispatch('change', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
@@ -39,6 +40,7 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
+    var validations = _filter(Validations, _isFunction);
 
 
     // internal _act, accepts list of actions and eased time
@@ -50,6 +52,9 @@ export function coreHistory(context) {
             annotation = actions.pop();
         }
 
+        _stack[_index].transform = context.projection.transform();
+        _stack[_index].selectedIDs = context.selectedIDs();
+
         var graph = _stack[_index].graph;
         for (var i = 0; i < actions.length; i++) {
             graph = actions[i](graph, t);
@@ -58,9 +63,7 @@ export function coreHistory(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imageryUsed: _imageryUsed,
-            transform: context.projection.transform(),
-            selectedIDs: context.selectedIDs()
+            imageryUsed: _imageryUsed
         };
     }
 
@@ -69,10 +72,9 @@ export function coreHistory(context) {
     function _perform(args, t) {
         var previous = _stack[_index].graph;
         _stack = _stack.slice(0, _index + 1);
-        var actionResult = _act(args, t);
-        _stack.push(actionResult);
+        _stack.push(_act(args, t));
         _index++;
-        return change(previous, actionResult.annotation);
+        return change(previous);
     }
 
 
@@ -80,9 +82,8 @@ export function coreHistory(context) {
     function _replace(args, t) {
         var previous = _stack[_index].graph;
         // assert(_index == _stack.length - 1)
-        var actionResult = _act(args, t);
-        _stack[_index] = actionResult;
-        return change(previous, actionResult.annotation);
+        _stack[_index] = _act(args, t);
+        return change(previous);
     }
 
 
@@ -94,22 +95,16 @@ export function coreHistory(context) {
             _stack.pop();
         }
         _stack = _stack.slice(0, _index + 1);
-        var actionResult = _act(args, t);
-        _stack.push(actionResult);
+        _stack.push(_act(args, t));
         _index++;
-        return change(previous, actionResult.annotation);
+        return change(previous);
     }
 
 
     // determine diffrence and dispatch a change event
-    function change(previous, isAnnotated) {
+    function change(previous) {
         var difference = coreDifference(previous, history.graph());
         dispatch.call('change', this, difference);
-        if (isAnnotated) {
-            // actions like dragging a node can fire lots of changes,
-            // so use 'annotatedChange' to listen for grouped undo/redo changes
-            dispatch.call('annotatedChange', this, difference);
-        }
         return difference;
     }
 
@@ -142,7 +137,6 @@ export function coreHistory(context) {
             _tree.rebase(entities, false);
 
             dispatch.call('change', this, undefined, extent);
-            dispatch.call('merge', this, entities);
         },
 
 
@@ -221,7 +215,7 @@ export function coreHistory(context) {
             }
 
             dispatch.call('undone', this, _stack[_index]);
-            return change(previous, true);
+            return change(previous);
         },
 
 
@@ -240,7 +234,7 @@ export function coreHistory(context) {
                 }
             }
 
-            return change(previous, true);
+            return change(previous);
         },
 
 
@@ -289,6 +283,16 @@ export function coreHistory(context) {
                 created: difference.created(),
                 deleted: difference.deleted()
             };
+        },
+
+
+        validate: function(changes) {
+            return _flatten(_map(
+                validations,
+                function(fn) {
+                    return fn(context)(changes, _stack[_index].graph, _tree);
+                }
+            ));
         },
 
 
@@ -406,8 +410,7 @@ export function coreHistory(context) {
             var base = _stack[0];
 
             var s = _stack.map(function(i) {
-                var modified = [];
-                var deleted = [];
+                var modified = [], deleted = [];
 
                 _forEach(i.graph.entities, function(entity, id) {
                     if (entity) {
@@ -423,14 +426,6 @@ export function coreHistory(context) {
                     if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
                     }
-                    if (entity && entity.nodes) {
-                        // get originals of pre-existing child nodes
-                        _forEach(entity.nodes, function(nodeId) {
-                            if (nodeId in base.graph.entities) {
-                                baseEntities[nodeId] = base.graph.entities[nodeId];
-                            }
-                        });
-                    }
                     // get originals of parent entities too
                     _forEach(base.graph._parentWays[id], function(parentId) {
                         if (parentId in base.graph.entities) {
@@ -445,8 +440,6 @@ export function coreHistory(context) {
                 if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
-                if (i.transform) x.transform = i.transform;
-                if (i.selectedIDs) x.selectedIDs = i.selectedIDs;
 
                 return x;
             });
@@ -517,7 +510,6 @@ export function coreHistory(context) {
                                     loading.close();
                                     context.redrawEnable(true);
                                     dispatch.call('change');
-                                    dispatch.call('restore', this);
                                 }
                             };
 
@@ -545,9 +537,7 @@ export function coreHistory(context) {
                     return {
                         graph: coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
-                        imageryUsed: d.imageryUsed,
-                        transform: d.transform,
-                        selectedIDs: d.selectedIDs
+                        imageryUsed: d.imageryUsed
                     };
                 });
 
@@ -565,14 +555,8 @@ export function coreHistory(context) {
                 });
             }
 
-            var transform = _stack[_index].transform;
-            if (transform) {
-                context.map().transformEase(transform, 0);   // 0 = immediate, no easing
-            }
-
             if (loadComplete) {
                 dispatch.call('change');
-                dispatch.call('restore', this);
             }
 
             return history;

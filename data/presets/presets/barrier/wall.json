@@ -1,9 +1,8 @@
 {
-    "icon": "temaki-wall",
+    "icon": "maki-barrier",
     "fields": [
         "wall",
-        "height",
-        "material"
+        "height"
     ],
     "geometry": [
         "line",

@@ -1,8 +1,6 @@
 {
-    "icon": "temaki-wall",
     "fields": [
-        "height",
-        "material"
+        "height"
     ],
     "geometry": [
         "line",

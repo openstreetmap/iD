@@ -1,5 +1,5 @@
 {
-    "icon": "fas-skiing-nordic",
+    "icon": "maki-skiing",
     "fields": [
         "name",
         "piste/type",

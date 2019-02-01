@@ -1,5 +1,13 @@
 {
-    "icon": "temaki-compass",
+    "icon": "maki-shop",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"
@@ -7,10 +15,7 @@
     "terms": [
         "camping",
         "climbing",
-        "hiking",
-        "outfitter",
-        "outdoor equipment",
-        "outdoor supplies"
+        "hiking"
     ],
     "tags": {
         "shop": "outdoor"

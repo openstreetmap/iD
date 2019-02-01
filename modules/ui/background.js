@@ -29,8 +29,6 @@ import { tooltip } from '../util/tooltip';
 export function uiBackground(context) {
     var key = t('background.key');
 
-    var pane = d3_select(null);
-
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
     var _shown = false;
@@ -81,7 +79,7 @@ export function uiBackground(context) {
             return context.background().showsLayer(d);
         }
 
-        selection.selectAll('li')
+        selection.selectAll('.layer')
             .classed('active', active)
             .classed('switch', function(d) { return d === _previousBackground; })
             .call(setTooltips)
@@ -136,7 +134,7 @@ export function uiBackground(context) {
             .sources(context.map().extent())
             .filter(filter);
 
-        var layerLinks = layerList.selectAll('li')
+        var layerLinks = layerList.selectAll('li.layer')
             .data(sources, function(d) { return d.name(); });
 
         layerLinks.exit()
@@ -144,6 +142,7 @@ export function uiBackground(context) {
 
         var enter = layerLinks.enter()
             .append('li')
+            .attr('class', 'layer')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
@@ -181,9 +180,9 @@ export function uiBackground(context) {
             .text(function(d) { return d.name(); });
 
 
-        layerList.selectAll('li')
+        layerList.selectAll('li.layer')
             .sort(sortSources)
-            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
+            .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
 
         layerList
             .call(updateLayerSelections);
@@ -217,7 +216,7 @@ export function uiBackground(context) {
             .append('ul')
             .attr('class', 'layer-list minimap-toggle-list')
             .append('li')
-            .attr('class', 'minimap-toggle-item');
+            .attr('class', 'layer minimap-toggle-item');
 
         var minimapLabelEnter = minimapEnter
             .append('label')
@@ -253,8 +252,6 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
-
-        updateBackgroundList();
     }
 
 
@@ -267,30 +264,15 @@ export function uiBackground(context) {
             .attr('class', 'layer-list layer-overlay-list')
             .attr('dir', 'auto')
             .merge(container);
-
-        updateOverlayList();
-    }
-
-    function updateBackgroundList() {
-        _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
-    }
-
-    function updateOverlayList() {
-        _overlayList
-            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
 
 
     function update() {
+        _backgroundList
+            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
 
-        if (!pane.select('.disclosure-wrap-background_list').classed('hide')) {
-            updateBackgroundList();
-        }
-
-        if (!pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
-            updateOverlayList();
-        }
+        _overlayList
+            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
 
         _displayOptionsContainer
             .call(backgroundDisplayOptions);
@@ -356,7 +338,7 @@ export function uiBackground(context) {
         }
 
 
-        pane = selection
+        var pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 

@@ -1,8 +1,10 @@
 {
     "icon": "temaki-tower",
     "fields": [
-        "{attraction}",
-        "height"
+        "name",
+        "operator",
+        "height",
+        "opening_hours"
     ],
     "geometry": [
         "point",

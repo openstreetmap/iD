@@ -5,13 +5,6 @@
         "operator",
         "plant"
     ],
-    "moreFields": [
-        "address",
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "area"
     ],

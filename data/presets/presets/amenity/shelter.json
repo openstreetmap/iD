@@ -7,10 +7,6 @@
         "bench",
         "bin"
     ],
-    "moreFields": [
-        "lit",
-        "wheelchair"
-    ],
     "geometry": [
         "point",
         "vertex",

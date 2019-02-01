@@ -4,13 +4,6 @@
         "operator",
         "grape_variety"
     ],
-    "moreFields": [
-        "address",
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "area"
     ],

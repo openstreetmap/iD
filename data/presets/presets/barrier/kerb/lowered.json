@@ -1,5 +1,9 @@
 {
     "icon": "maki-wheelchair",
+    "fields": [
+        "kerb",
+        "tactile_paving"
+    ],
     "geometry": [
         "vertex",
         "line"

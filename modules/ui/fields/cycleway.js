@@ -8,7 +8,7 @@ import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 export function uiFieldCycleway(field, context) {
     var dispatch = d3_dispatch('change');
     var items = d3_select(null);
-    var wrap = d3_select(null);
+
 
     function cycleway(selection) {
 
@@ -17,7 +17,7 @@ export function uiFieldCycleway(field, context) {
         }
 
 
-        wrap = selection.selectAll('.form-field-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -34,10 +34,9 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'labeled-inputs')
             .merge(div);
 
-        var keys = ['cycleway:left', 'cycleway:right'];
 
         items = div.selectAll('li')
-            .data(keys);
+            .data(field.keys);
 
         var enter = items.enter()
             .append('li')
@@ -123,8 +122,8 @@ export function uiFieldCycleway(field, context) {
 
 
     cycleway.focus = function() {
-        var node = wrap.selectAll('input').node();
-        if (node) node.focus();
+        items.selectAll('.preset-input-cycleway')
+            .node().focus();
     };
 
 

@@ -1,10 +1,14 @@
 {
     "icon": "maki-bus",
     "fields": [
-        "{public_transport/station}"
-    ],
-    "moreFields": [
-        "{public_transport/station}"
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

@@ -7,11 +7,6 @@
         "bench",
         "opening_hours"
     ],
-    "moreFields": [
-        "lit",
-        "wheelchair",
-        "covered"
-    ],
     "geometry": [
         "point",
         "vertex",

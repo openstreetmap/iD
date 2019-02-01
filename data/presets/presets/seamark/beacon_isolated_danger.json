@@ -2,8 +2,7 @@
     "fields": [
         "ref",
         "operator",
-        "seamark/beacon_isolated_danger/shape",
-        "seamark/type"
+        "seamark/beacon_isolated_danger/shape"
     ],
     "geometry": [
         "point",

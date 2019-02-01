@@ -5,16 +5,7 @@
         "operator",
         "address",
         "religion",
-        "denomination",
-        "website"
-    ],
-    "moreFields": [
-        "internet_access",
-        "internet_access/ssid",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "denomination"
     ],
     "geometry": [
         "point",

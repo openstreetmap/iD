@@ -1,3 +1,4 @@
+
 import { geoBounds as d3_geoBounds } from 'd3-geo';
 
 import {
@@ -11,8 +12,6 @@ import {
     behaviorLasso,
     behaviorSelect
 } from '../behavior';
-
-import { t } from '../util/locale';
 
 import { geoExtent } from '../geo';
 import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
@@ -62,18 +61,9 @@ export function modeSelectData(context, selectedDatum) {
     }
 
 
-    mode.zoomToSelected = function() {
-        var extent = geoExtent(d3_geoBounds(selectedDatum));
-        context.map().centerZoomEase(extent.center(), context.map().trimmedExtentZoom(extent));
-    };
-
-
     mode.enter = function() {
         behaviors.forEach(context.install);
-
-        keybinding
-            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
-            .on('⎋', esc, true);
+        keybinding.on('⎋', esc, true);
 
         d3_select(document)
             .call(keybinding);

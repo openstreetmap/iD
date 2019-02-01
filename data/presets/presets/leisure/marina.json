@@ -3,22 +3,16 @@
     "fields": [
         "name",
         "operator",
+        "address",
         "capacity",
         "fee",
         "sanitary_dump_station",
-        "power_supply"
+        "power_supply",
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
-        "address",
-        "payment_multi",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "seamark/type",
-        "website",
-        "phone",
-        "email",
-        "fax"
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

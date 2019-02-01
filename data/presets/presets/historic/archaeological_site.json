@@ -4,8 +4,7 @@
         "name",
         "site_type",
         "historic/civilization",
-        "inscription",
-        "access_simple"
+        "inscription"
     ],
     "geometry": [
         "point",

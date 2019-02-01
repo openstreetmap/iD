@@ -1,17 +1,10 @@
 {
-    "icon": "temaki-car_wash",
+    "icon": "maki-car",
     "fields": [
         "address",
         "building_area",
         "opening_hours",
         "payment_multi"
-    ],
-    "moreFields": [
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
     ],
     "geometry": [
         "point",

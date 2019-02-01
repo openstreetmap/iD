@@ -26,6 +26,7 @@
     ],
     "reference": {"key": "addr"},
     "icon": "address",
+    "universal": true,
     "label": "Address",
     "strings": {
         "placeholders": {

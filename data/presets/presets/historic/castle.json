@@ -4,8 +4,7 @@
         "name",
         "castle_type",
         "building_area",
-        "historic/civilization",
-        "access_simple"
+        "historic/civilization"
     ],
     "geometry": [
         "point",

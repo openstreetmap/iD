@@ -2,9 +2,9 @@ describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.Context();
         selection = d3.select(document.createElement('div'));
-        field = iD.presetField('name', { key: 'name', type: 'localized' });
+        field = iD.presetField('test', {key: 'name'});
     });
 
     it('adds a blank set of fields when the + button is clicked', function() {

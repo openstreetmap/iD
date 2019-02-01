@@ -1,5 +1,4 @@
 import _isFunction from 'lodash-es/isFunction';
-import _uniq from 'lodash-es/uniq';
 
 import {
     event as d3_event,
@@ -126,7 +125,7 @@ export function utilKeybinding(namespace) {
 
     // Remove one or more keycode bindings.
     keybinding.off = function(codes, capture) {
-        var arr = _uniq([].concat(codes));
+        var arr = [].concat(codes);
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');
@@ -142,7 +141,7 @@ export function utilKeybinding(namespace) {
             return keybinding.off(codes, capture);
         }
 
-        var arr = _uniq([].concat(codes));
+        var arr = [].concat(codes);
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');

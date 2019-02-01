@@ -1,10 +1,10 @@
 {
     "icon": "temaki-subway",
     "fields": [
-        "{public_transport/stop_position}"
-    ],
-    "moreFields": [
-        "{public_transport/stop_position}"
+        "name",
+        "ref_stop_position",
+        "network",
+        "operator"
     ],
     "geometry": [
         "vertex"

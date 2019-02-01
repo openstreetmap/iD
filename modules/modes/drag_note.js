@@ -20,14 +20,13 @@ export function modeDragNote(context) {
 
     var _nudgeInterval;
     var _lastLoc;
-    var _note;    // most current note.. dragged note may have stale datum.
 
 
-    function startNudge(nudge) {
+    function startNudge(note, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
-            doMove(nudge);
+            doMove(note, nudge);
         }, 50);
     }
 
@@ -46,66 +45,58 @@ export function modeDragNote(context) {
 
 
     function start(note) {
-        _note = note;
-        var osm = services.osm;
-        if (osm) {
-            // Get latest note from cache.. The marker may have a stale datum bound to it
-            // and dragging it around can sometimes delete the users note comment.
-            _note = osm.getNote(_note.id);
-        }
-
-        context.surface().selectAll('.note-' + _note.id)
+        context.surface().selectAll('.note-' + note.id)
             .classed('active', true);
 
         context.perform(actionNoop());
         context.enter(mode);
-        context.selectedNoteID(_note.id);
+        context.selectedNoteID(note.id);
     }
 
 
-    function move() {
+    function move(note) {
         d3_event.sourceEvent.stopPropagation();
         _lastLoc = context.projection.invert(d3_event.point);
 
-        doMove();
+        doMove(note);
         var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
         if (nudge) {
-            startNudge(nudge);
+            startNudge(note, nudge);
         } else {
             stopNudge();
         }
     }
 
 
-    function doMove(nudge) {
+    function doMove(note, nudge) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
-        _note = _note.move(loc);
+        note = note.move(loc);
 
         var osm = services.osm;
         if (osm) {
-            osm.replaceNote(_note);  // update note cache
+            osm.replaceNote(note);  // update note cache
         }
 
         context.replace(actionNoop());   // trigger redraw
     }
 
 
-    function end() {
+    function end(note) {
         context.replace(actionNoop());   // trigger redraw
 
         context
-            .selectedNoteID(_note.id)
-            .enter(modeSelectNote(context, _note.id));
+            .selectedNoteID(note.id)
+            .enter(modeSelectNote(context, note.id));
     }
 
 
     var drag = behaviorDrag()
-        .selector('.layer-touch.markers .target.note.new')
+        .selector('.layer-notes .new')
         .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)

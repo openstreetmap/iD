@@ -8,15 +8,9 @@
         "lanes",
         "surface",
         "structure",
-        "access"
-    ],
-    "moreFields": [
-        "toll",
         "maxheight",
-        "covered",
-        "lit",
-        "smoothness",
-        "minspeed"
+        "toll",
+        "access"
     ],
     "geometry": [
         "line"

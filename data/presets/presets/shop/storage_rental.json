@@ -1,5 +1,13 @@
 {
     "icon": "fas-warehouse",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building",
+        "opening_hours",
+        "payment_multi"
+    ],
     "geometry": [
         "point",
         "area"

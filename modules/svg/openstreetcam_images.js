@@ -147,8 +147,8 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .on('mouseenter', mouseover)
-            .on('mouseleave', mouseout)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
             .on('click', click);
 
         groupsEnter

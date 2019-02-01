@@ -1,7 +1,10 @@
 {
     "icon": "maki-town-hall",
     "fields": [
-        "{office}",
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
         "operator"
     ],
     "geometry": [

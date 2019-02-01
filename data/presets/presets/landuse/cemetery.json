@@ -5,13 +5,6 @@
         "religion",
         "denomination"
     ],
-    "moreFields": [
-        "address",
-        "website",
-        "phone",
-        "email",
-        "fax"
-    ],
     "geometry": [
         "area"
     ],

@@ -1,7 +1,9 @@
 {
     "icon": "maki-tennis",
     "fields": [
-        "{leisure/pitch}",
+        "name",
+        "surface",
+        "lit",
         "access_simple"
     ],
     "geometry": [

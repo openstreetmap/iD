@@ -1,15 +1,12 @@
 {
     "icon": "temaki-milestone",
-    "fields": [
-        "distance",
-        "direction_vertex"
-    ],
-    "moreFields": [
-        "seamark/type"
-    ],
     "geometry": [
         "point",
         "vertex"
+    ],
+    "fields": [
+        "distance",
+        "direction_vertex"
     ],
     "tags": {
         "waterway": "milestone"

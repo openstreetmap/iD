@@ -1,7 +1,10 @@
 {
     "icon": "maki-cemetery",
     "fields": [
-        "{shop}",
+        "name",
+        "operator",
+        "address",
+        "building_area",
         "religion",
         "denomination"
     ],

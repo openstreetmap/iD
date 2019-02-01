@@ -1,5 +1,10 @@
 {
     "icon": "maki-soccer",
+    "fields": [
+        "name",
+        "surface",
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"
