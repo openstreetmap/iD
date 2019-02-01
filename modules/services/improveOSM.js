@@ -215,7 +215,7 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
-                                    icon: 'fas-arrow-circle-up', //TODO: Change arrow based on direction?
+                                    icon: '', //TODO: Find suitable icon
                                     identifier: { // this is used to post changes to the error
                                         wayId: feature.wayId,
                                         fromNodeId: feature.fromNodeId,
@@ -387,10 +387,10 @@ export default {
 
                     that.removeError(d);
 
+                    // No pretty identifier, so we just use coordinates
                     if (d.newStatus === 'SOLVED') {
-                        //TODO the identifiers are ugly and can't be used frontend, use error position instead?
-                        // or perhaps don't track this at all?
-                        //_erCache.closed[d.error_type + ':' + d.identifier] = true;
+                        var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
+                        _erCache.closed[d.error_type + ':' + closedID] = true;
                     }
 
                     return callback(err, d);
@@ -430,5 +430,10 @@ export default {
 
         delete _erCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove
+    },
+
+    // Used to populate `closed:improveosm` changeset tag
+    getClosedIDs: function() {
+        return Object.keys(_erCache.closed).sort();
     }
 };
