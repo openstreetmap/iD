@@ -14,7 +14,7 @@ import {
     svgTagClasses
 } from './index';
 
-import { osmEntity, osmSimpleMultipolygonOuterMember } from '../osm';
+import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilDetect } from '../util/detect';
 
 
@@ -191,7 +191,7 @@ export function svgLines(projection, context) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            var outer = osmSimpleMultipolygonOuterMember(entity, graph);
+            var outer = osmOldMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
                 oldMultiPolygonOuters[outer.id] = true;

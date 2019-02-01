@@ -7,7 +7,7 @@ import { actionAddMember } from './add_member';
 import { geoSphericalDistance } from '../geo';
 
 import {
-    osmIsSimpleMultipolygonOuterMember,
+    osmIsOldMultipolygonOuterMember,
     osmRelation,
     osmWay
 } from '../osm';
@@ -93,7 +93,7 @@ export function actionSplit(nodeId, newWayIds) {
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
-        var isOuter = osmIsSimpleMultipolygonOuterMember(wayA, graph);
+        var isOuter = osmIsOldMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1);

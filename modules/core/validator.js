@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import _isObject from 'lodash-es/isObject';
 import _isFunction from 'lodash-es/isFunction';
 import _map from 'lodash-es/map';
 import _filter from 'lodash-es/filter';
@@ -21,9 +20,6 @@ export function coreValidator(context) {
 
     var validations = _filter(Validations, _isFunction).reduce(function(obj, validation) {
         var func = validation();
-        if (!func.type) {
-            console.log('Validation rule not found for: ' + validation);
-        }
         obj[func.type] = func;
         return obj;
     }, {});
@@ -84,12 +80,23 @@ export function coreValidator(context) {
         var ranValidations = new Set([]);
         // runs validation and appends resulting issues, returning true if validation passed
         function runValidation(type) {
-            var fn = validations[type];
-            var typeIssues = fn(entity, context);
-            issues = issues.concat(typeIssues);
-            ranValidations.add(type);
-            return typeIssues.length === 0;
+            if (!ranValidations.has(type)) {
+                var fn = validations[type];
+                var typeIssues = fn(entity, context);
+                issues = issues.concat(typeIssues);
+                ranValidations.add(type);
+                return typeIssues.length === 0;
+            }
+            return true;
         }
+
+        if (entity.type === 'relation') {
+            if (!runValidation('old_multipolygon')) {
+                // don't flag missing tags if they are on the outer way
+                ranValidations.add('missing_tag');
+            }
+        }
+
         // other validations require feature to be tagged
         if (!runValidation('missing_tag')) return issues;
         if (entity.type === 'way') {
@@ -103,10 +110,8 @@ export function coreValidator(context) {
             runValidation('tag_suggests_area');
         }
         // run all validations not yet run manually
-        entityValidationIds.forEach(function(ruleId) {
-            if (!ranValidations.has(ruleId)) {
-                runValidation(ruleId);
-            }
+        entityValidationIds.forEach(function(id) {
+            runValidation(id);
         });
         return issues;
     }
@@ -183,9 +188,6 @@ export function validationIssue(attrs) {
         }
         return id;
     };
-
-    if (!_isObject(attrs)) console.log('Input attrs is not an object');
-    if (!attrs.message) console.log('attrs.message is empty');
 
     this.type = attrs.type;
     this.severity = attrs.severity;

@@ -3,9 +3,44 @@ import { osmIsInterestingTag } from './tags';
 import { osmWay } from './way';
 
 
+// "Old" multipolyons, previously known as "simple" multipolygons, are as follows:
+//
+// 1. Relation tagged with `type=multipolygon` and no interesting tags.
+// 2. One and only one member with the `outer` role. Must be a way with interesting tags.
+// 3. No members without a role.
+//
+// Old multipolygons are no longer recommended but are still rendered as areas by iD.
+
+export function osmOldMultipolygonOuterMemberOfRelation(entity, graph) {
+    if (entity.type !== 'relation' ||
+        !entity.isMultipolygon()
+        || Object.keys(entity.tags).filter(osmIsInterestingTag).length > 1) {
+        return false;
+    }
+
+    var outerMember;
+    for (var memberIndex in entity.members) {
+        var member = entity.members[memberIndex];
+        if (!member.role) return false;
+        if (member.role === 'outer') {
+            if (outerMember) return false;
+            if (member.type !== 'way') return false;
+            if (!graph.hasEntity(member.id)) return false;
+
+            outerMember = graph.entity(member.id);
+
+            if (Object.keys(outerMember.tags).filter(osmIsInterestingTag).length === 0) {
+                return false;
+            }
+        }
+    }
+
+    return outerMember;
+}
+
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
-export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
+export function osmIsOldMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way' || Object.keys(entity.tags).filter(osmIsInterestingTag).length === 0)
         return false;
 
@@ -30,7 +65,7 @@ export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
 }
 
 
-export function osmSimpleMultipolygonOuterMember(entity, graph) {
+export function osmOldMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 

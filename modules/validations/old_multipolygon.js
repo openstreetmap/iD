@@ -1,5 +1,8 @@
 import { t } from '../util/locale';
-import { osmIsSimpleMultipolygonOuterMember } from '../osm';
+import {
+    osmIsOldMultipolygonOuterMember,
+    osmOldMultipolygonOuterMemberOfRelation
+} from '../osm';
 import { utilDisplayLabel } from '../util';
 import {
     validationIssue,
@@ -12,17 +15,29 @@ import {
 export function validationOldMultipolygon() {
 
     var validation = function(entity, context) {
+
         var issues = [];
         var graph = context.graph();
-        var mistaggedMultipolygon = osmIsSimpleMultipolygonOuterMember(entity, graph);
-        if (mistaggedMultipolygon) {
-            var multipolygonLabel = utilDisplayLabel(mistaggedMultipolygon, context);
+
+        var multipolygon, outerWay;
+        if (entity.type === 'relation') {
+            outerWay = osmOldMultipolygonOuterMemberOfRelation(entity, graph);
+            multipolygon = entity;
+        } else if (entity.type === 'way') {
+            multipolygon = osmIsOldMultipolygonOuterMember(entity, graph);
+            outerWay = entity;
+        } else {
+            return issues;
+        }
+
+        if (multipolygon && outerWay) {
+            var multipolygonLabel = utilDisplayLabel(multipolygon, context);
             issues.push(new validationIssue({
                 type: 'old_multipolygon',
                 severity: 'warning',
-                message: t('issues.old_multipolygon.message', {multipolygon: multipolygonLabel}),
+                message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
                 tooltip: t('issues.old_multipolygon.tip'),
-                entities: [entity, mistaggedMultipolygon],
+                entities: [outerWay, multipolygon],
                 fixes: [
                     new validationIssueFix({
                         title: t('issues.fix.move_tags.title'),
