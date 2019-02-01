@@ -2237,6 +2237,8 @@ div.combobox {
     flex: 1 1 auto;
     width: 100%;
     overflow: hidden;
+}
+.tag-reference-body.expanded {
     padding-bottom: 10px;
 }
 .tag-reference-description {
