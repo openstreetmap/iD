@@ -8,6 +8,7 @@ import {
 import { osmEntity, osmNote, krError } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
+import _isEmpty from 'lodash-es/isEmpty';
 
 /*
    The hover behavior adds the `.hover` class on mouseover to all elements to which
@@ -24,6 +25,7 @@ export function behaviorHover(context) {
     var _newId = null;
     var _buttonDown;
     var _altDisables;
+    var _vertex;
     var _target;
 
 
@@ -96,6 +98,9 @@ export function behaviorHover(context) {
                 .on('mouseup.hover', null, true);
         }
 
+        function allowsVertex(d) {
+            return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+        }
 
         function enter(datum) {
             if (datum === _target) return;
@@ -126,7 +131,6 @@ export function behaviorHover(context) {
                 if (entity.type === 'relation') {
                     entity.members.forEach(function(member) { selector += ', .' + member.id; });
                 }
-
             } else if (datum && datum.properties && (datum.properties.entity instanceof osmEntity)) {
                 entity = datum.properties.entity;
                 selector = '.' + entity.id;
@@ -144,7 +148,7 @@ export function behaviorHover(context) {
                     return;
                 }
 
-                var suppressed = _altDisables && d3_event && d3_event.altKey;
+                var suppressed = (_altDisables && d3_event && d3_event.altKey) || (_vertex && !allowsVertex(entity, context.graph()));
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
@@ -182,6 +186,11 @@ export function behaviorHover(context) {
         return behavior;
     };
 
+    behavior.ignoreVertex = function(val) {
+        if (!arguments.length) return _vertex;
+        _vertex = val;
+        return behavior;
+    };
 
     return utilRebind(behavior, dispatch, 'on');
 }

@@ -53,7 +53,7 @@ export function presetIndex() {
             for (var k in entity.tags) {
                 // If any part of an address is present,
                 // allow fallback to "Address" preset - #4353
-                if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
+                if (/^addr:/.test(k) && geometryMatches['addr:*']) {
                     address = geometryMatches['addr:*'][0];
                 }
 
@@ -67,12 +67,43 @@ export function presetIndex() {
                         match = keyMatches[i];
                     }
                 }
+                
             }
 
             if (address && (!match || match.isFallback())) {
                 match = address;
             }
             return match || all.item(geometry);
+        });
+    };
+
+    all.allowsVertex = function(entity, resolver) {
+        return resolver.transient(entity, 'vertexMatch', function() {
+            var vertexPresets = _index.vertex;
+            var match;
+
+            for (var k in entity.tags) {
+                var keyMatches = vertexPresets[k];
+                if (!keyMatches) continue;
+                for (var i = 0; i < keyMatches.length; i++) {
+                    var preset =  keyMatches[i];
+                    if (preset.searchable !== false) {
+                        if (preset.matchScore(entity) > -1) {
+                            match = preset;
+                            break;
+                        }
+                    }
+                }
+
+                if (!match && /^addr:/.test(k) && vertexPresets['addr:*']) {
+                    match = true;
+                }
+
+                if (match) break;
+
+            }
+
+            return match;
         });
     };
 
