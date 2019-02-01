@@ -1376,6 +1376,10 @@
             "title": "Issues",
             "description": "Issues",
             "key": "I",
+            "errors": "Errors",
+            "warnings": "Warnings",
+            "error_tooltip": "error",
+            "warning_tooltip": "warning",
             "options": {
                 "title": "Options"
             },
@@ -1388,10 +1392,6 @@
                     "description": "All features",
                     "tooltip": "Flag issues with all nearby features"
                 }
-            },
-            "severity": {
-                "error": "error",
-                "warning": "warning"
             },
             "disconnected_way": {
                 "highway": {

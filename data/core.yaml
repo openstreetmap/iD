@@ -1137,6 +1137,10 @@ en:
     title: Issues
     description: Issues
     key: I
+    errors: Errors
+    warnings: Warnings
+    error_tooltip: error
+    warning_tooltip: warning
     options:
       title: Options
     features_to_validate:
@@ -1146,9 +1150,6 @@ en:
       all:
         description: All features
         tooltip: Flag issues with all nearby features
-    severity:
-      error: error
-      warning: warning
     disconnected_way:
       highway:
         message: "{highway} is disconnected from other roads and paths."

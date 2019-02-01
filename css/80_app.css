@@ -2931,12 +2931,16 @@ div.full-screen > button:hover {
     text-align: inherit;
     display: flex;
 }
+.warnings-list,
 .issue.severity-warning,
-.issue.severity-warning li {
+.issue.severity-warning li,
+ li.issue.severity-warning {
     border-color: #FFDF5C;
 }
+.errors-list,
 .issue.severity-error,
-.issue.severity-error li {
+.issue.severity-error li,
+ li.issue.severity-error {
     border-color: #f5b0ab;
 }
 

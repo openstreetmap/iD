@@ -17,7 +17,8 @@ import { uiTooltipHtml } from './tooltipHtml';
 export function uiIssues(context) {
     var key = t('issues.key');
     var _featureApplicabilityList = d3_select(null);
-    var _issuesList = d3_select(null);
+    var _errorsList = d3_select(null),
+        _warningsList = d3_select(null);
     var pane = d3_select(null);
     var _shown = false;
 
@@ -43,16 +44,28 @@ export function uiIssues(context) {
         updateFeatureApplicabilityList();
     }
 
-    function renderIssuesList(selection) {
-        _issuesList = selection.selectAll('.issues-list')
+    function renderErrorsList(selection) {
+        _errorsList = selection.selectAll('.errors-list')
             .data([0]);
 
-        _issuesList = _issuesList.enter()
+        _errorsList = _errorsList.enter()
             .append('ul')
-            .attr('class', 'layer-list issues-list')
-            .merge(_issuesList);
+            .attr('class', 'layer-list errors-list issues-list')
+            .merge(_errorsList);
 
-        updateIssuesList();
+        updateErrorsList();
+    }
+
+    function renderWarningsList(selection) {
+        _warningsList = selection.selectAll('.warnings-list')
+            .data([0]);
+
+        _warningsList = _warningsList.enter()
+            .append('ul')
+            .attr('class', 'layer-list warnings-list issues-list')
+            .merge(_warningsList);
+
+        updateWarningsList();
     }
 
     function drawListItems(selection, data, type, name, change, active) {
@@ -72,7 +85,7 @@ export function uiIssues(context) {
                     var tip = t('issues.' + name + '.' + d + '.tooltip');
                     return uiTooltipHtml(tip);
                 })
-                .placement('bottom')
+                .placement('top')
             );
 
         var label = enter
@@ -98,9 +111,7 @@ export function uiIssues(context) {
             .property('checked', active);
     }
 
-    function drawIssuesList(selection) {
-
-        var issues = context.validator().getIssues();
+    function drawIssuesList(selection, issues) {
 
         /*validations = _reduce(issues, function(validations, val) {
             var severity = val.severity;
@@ -147,14 +158,14 @@ export function uiIssues(context) {
                     var tip = d.tooltip ? d.tooltip : '';
                     return uiTooltipHtml(tip);
                 })
-                .placement('bottom')
+                .placement('top')
             );
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
                 .append('div')
-                .attr('title', t('issues.severity.'+d.severity))
+                .attr('title', t('issues.'+d.severity+'_tooltip'))
                 .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
@@ -195,17 +206,27 @@ export function uiIssues(context) {
             );
     }
 
-    function updateIssuesList() {
-        _issuesList
-            .call(drawIssuesList);
+    function updateErrorsList() {
+        var errors = context.validator().getErrors();
+        _errorsList
+            .call(drawIssuesList, errors);
+    }
+
+    function updateWarningsList() {
+        var warnings = context.validator().getWarnings();
+        _warningsList
+            .call(drawIssuesList, warnings);
     }
 
     function update() {
         if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
             updateFeatureApplicabilityList();
         }
-        if (!pane.select('.disclosure-wrap-issues_issues').classed('hide')) {
-            updateIssuesList();
+        if (!pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
+            updateErrorsList();
+        }
+        if (!pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
+            updateWarningsList();
         }
     }
 
@@ -285,13 +306,22 @@ export function uiIssues(context) {
             .append('div')
             .attr('class', 'pane-content');
 
-        // issues
+        // errors
         content
             .append('div')
-            .attr('class', 'issues-issues')
-            .call(uiDisclosure(context, 'issues_issues', true)
-                .title(t('issues.title'))
-                .content(renderIssuesList)
+            .attr('class', 'issues-errors')
+            .call(uiDisclosure(context, 'issues_errors', true)
+                .title(t('issues.errors'))
+                .content(renderErrorsList)
+            );
+
+        // warnings
+        content
+            .append('div')
+            .attr('class', 'issues-warnings')
+            .call(uiDisclosure(context, 'issues_warnings', true)
+                .title(t('issues.warnings'))
+                .content(renderWarningsList)
             );
 
         // options

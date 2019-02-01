@@ -79,7 +79,7 @@ export function uiEntityIssues(context) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
                 .append('div')
-                .attr('title', t('issues.severity.'+d.severity))
+                .attr('title', t('issues.'+d.severity+'_tooltip'))
                 .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
