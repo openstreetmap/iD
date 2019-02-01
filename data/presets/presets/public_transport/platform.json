@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bus",
+    "icon": "temaki-pedestrian",
     "fields": [
         "name",
         "ref_platform",
@@ -16,6 +16,7 @@
     ],
     "geometry": [
         "point",
+        "line",
         "area"
     ],
     "tags": {

@@ -61,11 +61,6 @@ export function svgStreetside(projection, context, dispatch) {
      * hideLayer().
      */
     function hideLayer() {
-        var service = getService();
-        if (service) {
-            service.hideViewer();
-        }
-
         throttledRedraw.cancel();
 
         layer
