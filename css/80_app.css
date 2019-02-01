@@ -2238,15 +2238,11 @@ div.combobox {
     width: 100%;
     overflow: hidden;
 }
-.tag-reference-body .tag-reference-description {
-    margin: 10px 5px 0 5px;
+.tag-reference-description {
+    margin: 10px 5px;
 }
-.tag-reference-body a {
+.tag-reference-link {
     display: block;
-}
-.tag-reference-body .tag-reference-description:last-child,
-.tag-reference-body a:last-child {
-    margin-bottom: 15px;
 }
 
 .preset-list .tag-reference-body {

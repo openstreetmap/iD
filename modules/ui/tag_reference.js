@@ -123,17 +123,14 @@ export function uiTagReference(tag) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .text(docs.description || t('inspector.no_documentation_key'));
-
-            _body
+                .text(docs.description || t('inspector.no_documentation_key'))
                 .append('a')
-                .attr('class', 'tag-reference-link')
+                .attr('class', 'tag-reference-edit')
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
+                .attr('title', t('inspector.edit_reference'))
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
-                .call(svgIcon('#iD-icon-out-link', 'inline'))
-                .append('span')
-                .text(t('inspector.edit_reference'));
+                .call(svgIcon('#iD-icon-edit', 'inline'));
 
             if (docs.wiki) {
                 _body
