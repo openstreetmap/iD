@@ -342,49 +342,51 @@ export default {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
-        var osmUsername = services.osm.userDetails(function(err, user) {
-            if (err) return '';
-
-            return user.display_name;
-        });
-
         var that = this;
-        var type = d.error_type;
-        var payload = {
-            username: osmUsername
-        };
 
-        // Each error type has different data for identification
-        if (type === 'ow') {
-            payload.roadSegments = [ d.identifier ];
-        } else if (type === 'mr') {
-            payload.tiles = [ d.identifier ];
-        } else if (type === 'tr') {
-            payload.targetIds = [ d.identifier ];
-        }
+        // Payload can only be sent once username is established
+        services.osm.userDetails(sendPayload);
 
-        // Separate requests required to comment and change status
-        var url = _impOsmUrls[type] + '/comment';
+        function sendPayload(err, user) {
+            if (err) { return callback(err, d); }
 
-        // Comments don't currently work
-        // if (d.newComment !== undefined) {
-        //     payload.text = d.newComment;
-        // }
+            var type = d.error_type;
+            var url = _impOsmUrls[type] + '/comment';
+            var payload = {
+                username: user.display_name
+            };
 
-        if (d.newStatus !== d.status) {
-            payload.status = d.newStatus;
-            payload.text = 'status changed';
+            // Each error type has different data for identification
+            if (type === 'ow') {
+                payload.roadSegments = [ d.identifier ];
+            } else if (type === 'mr') {
+                payload.tiles = [ d.identifier ];
+            } else if (type === 'tr') {
+                payload.targetIds = [ d.identifier ];
+            }
+
+            // Comments don't currently work, if they ever do in future
+            // it looks as though they require a separate post
+            // if (d.newComment !== undefined) {
+            //     payload.text = d.newComment;
+            // }
+
+            if (d.newStatus !== d.status) {
+                payload.status = d.newStatus;
+                payload.text = 'status changed';
+            }
 
             _erCache.inflightPost[d.id] = d3_request(url)
                 .header('Content-Type', 'application/json')
                 .post(JSON.stringify(payload), function(err) {
                     delete _erCache.inflightPost[d.id];
 
-                    if (d.newStatus === 'INVALID') {
-                        that.removeError(d);
-                    } else if (d.newStatus === 'SOLVED') {
-                        that.removeError(d);
+                    // Unsuccessful response status, keep issue open
+                    if (err.status !== 200) { return callback(err, d); }
 
+                    that.removeError(d);
+
+                    if (d.newStatus === 'SOLVED') {
                         //TODO the identifiers are ugly and can't be used frontend, use error position instead?
                         // or perhaps don't track this at all?
                         //_erCache.closed[d.error_type + ':' + d.identifier] = true;
