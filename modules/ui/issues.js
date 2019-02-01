@@ -378,9 +378,9 @@ export function uiIssues(context) {
             .attr('type', 'checkbox')
             .on('change', function(d) {
                 if (d3_select(this).property('checked')){
-                    context.validator().removeSourceIgnore(d);
+                    context.issueManager().removeSourceIgnore(d);
                 } else {
-                    context.validator().ignoreSource(d);
+                    context.issueManager().ignoreSource(d);
                 }
             });
 
@@ -393,11 +393,11 @@ export function uiIssues(context) {
         li
             .merge(liEnter)
             .classed('active', function(d) {
-                return !context.validator().ignoreIncludes(d);
+                return !context.issueManager().ignoreIncludes(d);
             })
             .selectAll('input')
             .property('checked', function(d) {
-                return !context.validator().ignoreIncludes(d);
+                return !context.issueManager().ignoreIncludes(d);
             });
     }
 
@@ -449,9 +449,9 @@ export function uiIssues(context) {
             .property('checked', context.validationRules)
             .on('change', function() {
                 if (d3_select(this).property('checked')){
-                    context.validator().removeSourceIgnore(d3_select('.custom-rule-name').text());
+                    context.issueManager().removeSourceIgnore(d3_select('.custom-rule-name').text());
                 } else {
-                    context.validator().ignoreSource(d3_select('.custom-rule-name').text());
+                    context.issueManager().ignoreSource(d3_select('.custom-rule-name').text());
                 }
             });
 
@@ -483,11 +483,11 @@ export function uiIssues(context) {
     function customChanged(c) {
         if (c){
             if (c.name){
-                context.validator().setCustomName(c.name);
+                context.issueManager().setCustomName(c.name);
                 d3_select('.custom-rule-name').text(c.name);
             }
             if (c.url) {
-                context.validator().setCustomUrl(c.url);
+                context.issueManager().setCustomUrl(c.url);
                 d3_json(c.url, function (err, rules) {
                     if (err) return;
                     services.maprules.init(context.presets().areaKeys());
@@ -513,7 +513,7 @@ export function uiIssues(context) {
 
     function addJsonRules(rules) {
         _each(rules, function(mapcssSelector) {
-            return services.maprules.addRule(mapcssSelector, context.validator().getCustomName());
+            return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
         });
         context.validationRules = true;
     }
