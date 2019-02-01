@@ -155,9 +155,7 @@ export default {
     loadErrors: function(projection) {
         var options = {
             client: 'iD',
-            confidenceLevel: 'C1', // most confident only, still have false positives
             status: 'OPEN',
-            type: 'PARKING,ROAD,BOTH,PATH', // exclude WATER as it doesn't seem useful
             zoom: '19' // Use a high zoom so that clusters aren't returned
         };
 
@@ -180,7 +178,10 @@ export default {
             var requests = {};
 
             _forEach(_impOsmUrls, function(v, k) {
-                var url = v + '/search?' + utilQsString(params);
+                // We exclude WATER from missing geometry as it doesn't seem useful
+                // We use most confident one-way and turn restrictions only, still have false positives
+                var kParams = _extend({}, params, (k === 'mr') ? { type: 'PARKING,ROAD,BOTH,PATH' } : { confidenceLevel: 'C1' });
+                var url = v + '/search?' + utilQsString(kParams);
 
                 requests[k] = d3_json(url,
                     function(err, data) {
