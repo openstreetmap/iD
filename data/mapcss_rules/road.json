@@ -1,0 +1,12 @@
+[
+    {
+        "geometry": [
+            "way"
+        ],
+        "equals": {
+            "highway": "track"
+        },
+        "absence": "tracktype",
+        "warning": "track may have tracktype"
+    }
+]

@@ -961,6 +961,9 @@ en:
             power:
               title: Power (Osmose-QA)
               tooltip: Checks Power Transformers
+            road:
+              title: Road (Keep Right)
+              tooltip: Validates roads
       custom:
         header: Custom Validation Rules
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"

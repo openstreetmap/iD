@@ -1156,6 +1156,10 @@
                         "power": {
                             "title": "Power (Osmose-QA)",
                             "tooltip": "Checks Power Transformers"
+                        },
+                        "road": {
+                            "title": "Road (Keep Right)",
+                            "tooltip": "Validates roads"
                         }
                     }
                 },
