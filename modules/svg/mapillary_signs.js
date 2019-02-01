@@ -40,6 +40,11 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function hideLayer() {
+        var service = getService();
+        if (service) {
+            service.hideViewer();
+        }
+
         throttledRedraw.cancel();
         editOff();
     }

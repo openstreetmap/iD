@@ -384,6 +384,8 @@ export default {
 
             viewer
                 .selectAll('.photo-wrapper.osc-wrapper')
+                .classed('hide', false)
+                .selectAll('div')
                 .classed('hide', false);
         }
 
@@ -397,11 +399,15 @@ export default {
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
-        viewer
-            .classed('hide', true)
-            .selectAll('.photo-wrapper')
-            .classed('hide', true);
+        // viewer
+        //     .classed('hide', true)
+        //     .selectAll('.photo-wrapper')
+        //     .classed('hide', true);
 
+        viewer
+            .selectAll('.osc-wrapper > div')
+            .classed('hide', true);
+            
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
 

@@ -376,7 +376,8 @@ export default {
         var wrap = d3_select('#photoviewer')
             .classed('hide', false);
 
-        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
+        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size() ||
+            wrap.selectAll('.photo-wrapper.mly-wrapper .hide').size();
 
         if (isHidden && _mlyViewer) {
             wrap
@@ -387,6 +388,14 @@ export default {
                 .selectAll('.photo-wrapper.mly-wrapper')
                 .classed('hide', false);
 
+            wrap
+                .selectAll('.mapillary-js-interactive')
+                .classed('hide', false);
+
+            wrap
+                .selectAll('.mapillary-js-dom')
+                .classed('hide', false);
+            
             _mlyViewer.resize();
         }
 
@@ -404,10 +413,16 @@ export default {
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
-        viewer
-            .classed('hide', true)
-            .selectAll('.photo-wrapper')
-            .classed('hide', true);
+        viewer.select('.mapillary-js-interactive')
+              .classed('hide', true);
+
+        viewer.select('.mapillary-js-dom')
+              .classed('hide', true);
+        
+        // viewer
+        //     .classed('hide', true)
+        //     .selectAll('.photo-wrapper')
+        //     .classed('hide', true);
 
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
@@ -415,6 +430,8 @@ export default {
         return this.setStyles(null, true);
     },
 
+    removeViewer: function() {
+    },
 
     parsePagination: parsePagination,
 

@@ -722,16 +722,29 @@ export default {
         var wrap = d3_select('#photoviewer')
             .classed('hide', false);
 
-        var isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+        var isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size() ||
+                       wrap.selectAll('.photo-wrapper.ms-wrapper > div.hide').size();
 
         if (isHidden) {
             wrap
                 .selectAll('.photo-wrapper:not(.ms-wrapper)')
                 .classed('hide', true);
 
-            wrap
-                .selectAll('.photo-wrapper.ms-wrapper')
+            var msWrap = wrap.selectAll('.photo-wrapper.ms-wrapper');
+                
+            msWrap
+                .classed('hide', false)
+                .selectAll('.pnlm-container')
                 .classed('hide', false);
+
+            msWrap
+                .select('.photo-controls-wrap')
+                .classed('hide', false);
+
+            msWrap
+                .selectAll('#divForCanvasWork > canvas')
+                .classed('hide', false);
+
         }
 
         return this;
@@ -744,9 +757,18 @@ export default {
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
-        viewer
-            .classed('hide', true)
-            .selectAll('.photo-wrapper')
+        var msWrap = viewer.selectAll('.photo-wrapper.ms-wrapper');
+
+        msWrap
+            .select('.photo-controls-wrap')
+            .classed('hide', true);
+        
+        msWrap
+            .selectAll('.pnlm-container')
+            .classed('hide', true);
+
+        msWrap
+            .selectAll('#divForCanvasWork > canvas')
             .classed('hide', true);
 
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')

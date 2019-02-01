@@ -264,7 +264,8 @@ div.hide,
 form.hide,
 button.hide,
 a.hide,
-li.hide {
+li.hide,
+canvas.hide {
     display: none;
 }
 
