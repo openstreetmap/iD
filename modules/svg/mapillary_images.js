@@ -65,9 +65,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function hideLayer() {
         var service = getService();
-        if (service) {
-            service.hideViewer();
-        }
 
         throttledRedraw.cancel();
 
