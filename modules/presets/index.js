@@ -82,25 +82,29 @@ export function presetIndex() {
             var vertexPresets = _index.vertex;
             var match;
 
-            for (var k in entity.tags) {
-                var keyMatches = vertexPresets[k];
-                if (!keyMatches) continue;
-                for (var i = 0; i < keyMatches.length; i++) {
-                    var preset =  keyMatches[i];
-                    if (preset.searchable !== false) {
-                        if (preset.matchScore(entity) > -1) {
-                            match = preset;
-                            break;
+            if (entity.isOnAddressLine(resolver)) {
+                match = true;
+            } else {
+                for (var k in entity.tags) {
+                    var keyMatches = vertexPresets[k];
+                    if (!keyMatches) continue;
+                    for (var i = 0; i < keyMatches.length; i++) {
+                        var preset =  keyMatches[i];
+                        if (preset.searchable !== false) {
+                            if (preset.matchScore(entity) > -1) {
+                                match = preset;
+                                break;
+                            }
                         }
                     }
+
+                    if (!match && /^addr:/.test(k) && vertexPresets['addr:*']) {
+                        match = true;
+                    }
+
+                    if (match) break;
+
                 }
-
-                if (!match && /^addr:/.test(k) && vertexPresets['addr:*']) {
-                    match = true;
-                }
-
-                if (match) break;
-
             }
 
             return match;
