@@ -8,6 +8,16 @@
         "building_area",
         "service_times"
     ],
+    "moreFields": [
+        "opening_hours",
+        "internet_access",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

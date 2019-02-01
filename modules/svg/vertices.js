@@ -46,6 +46,7 @@ export function svgVertices(projection, context) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
+        var activeID = context.activeID();
 
 
         function getIcon(d) {
@@ -56,6 +57,7 @@ export function svgVertices(projection, context) {
             icons[entity.id] =
                 entity.hasInterestingTags() &&
                 context.presets().match(entity, graph).icon;
+
             return icons[entity.id];
         }
 
@@ -79,7 +81,7 @@ export function svgVertices(projection, context) {
                         var r = rads[i ? 3 : z];
 
                         // slightly increase the size of unconnected endpoints #3775
-                        if (entity.isEndpoint(graph) && !entity.isConnected(graph)) {
+                        if (entity.id !== activeID && entity.isEndpoint(graph) && !entity.isConnected(graph)) {
                             r += 1.5;
                         }
 

@@ -1,7 +1,7 @@
 describe('iD.actionCopyEntities', function () {
     it('copies a node', function () {
-        var a = iD.Node({id: 'a'}),
-            base = iD.Graph([a]),
+        var a = iD.osmNode({id: 'a'}),
+            base = iD.coreGraph([a]),
             head = iD.actionCopyEntities(['a'], base)(base),
             diff = iD.Difference(base, head),
             created = diff.created();
@@ -11,10 +11,10 @@ describe('iD.actionCopyEntities', function () {
     });
 
     it('copies a way', function () {
-        var a = iD.Node({id: 'a'}),
-            b = iD.Node({id: 'b'}),
-            w = iD.Way({id: 'w', nodes: ['a', 'b']}),
-            base = iD.Graph([a, b, w]),
+        var a = iD.osmNode({id: 'a'}),
+            b = iD.osmNode({id: 'b'}),
+            w = iD.osmWay({id: 'w', nodes: ['a', 'b']}),
+            base = iD.coreGraph([a, b, w]),
             action = iD.actionCopyEntities(['w'], base),
             head = action(base),
             diff = iD.Difference(base, head),
@@ -25,9 +25,9 @@ describe('iD.actionCopyEntities', function () {
     });
 
     it('copies multiple nodes', function () {
-        var base = iD.Graph([
-                iD.Node({id: 'a'}),
-                iD.Node({id: 'b'})
+        var base = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'})
             ]),
             action = iD.actionCopyEntities(['a', 'b'], base),
             head = action(base),
@@ -40,12 +40,12 @@ describe('iD.actionCopyEntities', function () {
     });
 
     it('copies multiple ways, keeping the same connections', function () {
-        var base = iD.Graph([
-                iD.Node({id: 'a'}),
-                iD.Node({id: 'b'}),
-                iD.Node({id: 'c'}),
-                iD.Way({id: 'w1', nodes: ['a', 'b']}),
-                iD.Way({id: 'w2', nodes: ['b', 'c']})
+        var base = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmWay({id: 'w1', nodes: ['a', 'b']}),
+                iD.osmWay({id: 'w2', nodes: ['b', 'c']})
             ]),
             action = iD.actionCopyEntities(['w1', 'w2'], base),
             head = action(base),
@@ -57,9 +57,9 @@ describe('iD.actionCopyEntities', function () {
     });
 
     it('obtains source entities from an alternate graph', function () {
-        var a = iD.Node({id: 'a'}),
-            old = iD.Graph([a]),
-            base = iD.Graph(),
+        var a = iD.osmNode({id: 'a'}),
+            old = iD.coreGraph([a]),
+            base = iD.coreGraph(),
             action = iD.actionCopyEntities(['a'], old),
             head = action(base),
             diff = iD.Difference(base, head);

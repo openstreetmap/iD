@@ -5,6 +5,15 @@
         "address",
         "fee"
     ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi",
+        "smoking",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "point",
         "area"

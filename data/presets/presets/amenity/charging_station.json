@@ -1,8 +1,11 @@
 {
     "icon": "fas-charging-station",
     "fields": [
+        "name",
         "operator",
-        "capacity"
+        "capacity",
+        "fee",
+        "payment_multi"
     ],
     "geometry": [
         "point"

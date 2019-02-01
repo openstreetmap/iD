@@ -1,12 +1,8 @@
 {
     "icon": "maki-grocery",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi"
+    "moreFields": [
+        "diet_multi",
+        "{shop}"
     ],
     "geometry": [
         "point",

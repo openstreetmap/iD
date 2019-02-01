@@ -2,7 +2,11 @@
     "icon": "maki-monument",
     "fields": [
         "name",
-        "inscription"
+        "inscription",
+        "access_simple"
+    ],
+    "moreFields": [
+        "material"
     ],
     "geometry": [
         "point",

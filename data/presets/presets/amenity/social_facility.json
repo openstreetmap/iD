@@ -6,9 +6,18 @@
         "address",
         "building_area",
         "social_facility",
-        "social_facility_for",
+        "social_facility_for"
+    ],
+    "moreFields": [
         "opening_hours",
-        "wheelchair"
+        "wheelchair",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

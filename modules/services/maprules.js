@@ -2,14 +2,16 @@ import _isMatch from 'lodash-es/isMatch';
 import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
+import { areaKeys } from '../core/context';
 import { mapcss } from '../../data/mapcss_rules';
 import _each from 'lodash-es/each';
+
 
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue
-} from '../validations/validation_issue';
+} from '../core/validator';
 
 var buildRuleChecks = function() {
     return {
@@ -103,7 +105,7 @@ var buildLineKeys = function() {
 };
 
 export default {
-    init: function(areaKeys) {
+    init: function() {
         this._ruleChecks  = buildRuleChecks();
         this._areaKeys = areaKeys;
         this._lineKeys = buildLineKeys();
@@ -115,6 +117,7 @@ export default {
             });
         });
     },
+
     // list of rules only relevant to tag checks...
     filterRuleChecks: function(selector) {
         var _ruleChecks = this._ruleChecks;
@@ -125,6 +128,7 @@ export default {
             return rules;
         }, []);
     },
+
     // builds tagMap from mapcss-parse selector object...
     buildTagMap: function(selector) {
         var getRegexValues = function(regexes) {
@@ -167,6 +171,7 @@ export default {
 
         return tagMap;
     },
+
     // inspired by osmWay#isArea()
     inferGeometry: function(tagMap) {
         var _lineKeys = this._lineKeys;
@@ -199,6 +204,7 @@ export default {
 
         return 'line';
     },
+
     // adds from mapcss-parse selector check...
     addRule: function(selector, source) {
         var rule = {
@@ -226,7 +232,7 @@ export default {
                             ? ValidationIssueSeverity.error
                             : ValidationIssueSeverity.warning;
                     issues.push(new validationIssue({
-                        type: ValidationIssueType.map_rule_issue,
+                        type: ValidationIssueType.maprules,
                         severity: severity,
                         message: selector[severity],
                         entities: [entity],
@@ -237,9 +243,12 @@ export default {
         };
         this._validationRules.push(rule);
     },
+
     clearRules: function() { this._validationRules = []; },
+
     // returns validationRules...
     validationRules: function() { return this._validationRules; },
+
     // returns ruleChecks
     ruleChecks: function() { return this._ruleChecks; }
 };

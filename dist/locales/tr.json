@@ -1,9 +1,13 @@
 {
     "tr": {
         "icons": {
+            "download": "indir",
             "information": "bilgi",
             "remove": "kaldır",
-            "undo": "geri al"
+            "undo": "geri al",
+            "zoom_to": "yakınlaştır",
+            "copy": "kopyala",
+            "open_wikidata": "vikiveri'de aç"
         },
         "modes": {
             "add_area": {
@@ -23,6 +27,7 @@
             },
             "add_note": {
                 "title": "Not",
+                "description": "Bir sorun tespit ettin mi? Diğer haritacıların bilmesini sağla.",
                 "tail": "Not bırakmak için haritaya tıklayın."
             },
             "browse": {
@@ -148,6 +153,14 @@
             },
             "delete_member": {
                 "annotation": "Kümeden bir üye silindi. "
+            },
+            "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Bir yol bir noktaya bağlandı.",
+                        "to_vertex": "Bir yol başka bir yoluna bağlandı."
+                    }
+                }
             },
             "disconnect": {
                 "title": "Birbirinden ayır",
@@ -384,7 +397,9 @@
                 "edited_by": "Düzenleyen",
                 "changeset": "Değişiklik Kümesi",
                 "unknown": "Bilinmeyen",
-                "link_text": "openstreetmap.org üzerindeki geçmiş"
+                "link_text": "openstreetmap.org üzerindeki geçmiş",
+                "note_created_date": "Oluşturma Tarihi",
+                "note_created_user": "Oluşturan"
             },
             "location": {
                 "key": "L",
@@ -414,7 +429,8 @@
             "vertex": "köşe",
             "line": "çizgi",
             "area": "alan",
-            "relation": "küme"
+            "relation": "küme",
+            "note": "not"
         },
         "geocoder": {
             "search": "Dünya çapında ara...",
@@ -428,9 +444,9 @@
         "inspector": {
             "no_documentation_combination": "Bu etiket için detaylı doküman bulunmamaktadır",
             "no_documentation_key": "Bu etiket türü için detaylı doküman bulunmamaktadır",
-            "documentation_redirect": "Bu doküman başka bir sayfaya yönlendirildi",
             "show_more": "Daha Fazla Göster",
             "view_on_osm": "OpenStreetMap.org sayfasında bak",
+            "view_on_keepRight": "keepright.at sitesinde görüntüle",
             "all_fields": "Tüm detaylar",
             "all_tags": "Tüm etiketler",
             "all_members": "Tüm üyeler",
@@ -733,8 +749,7 @@
                 "navigation_drag": "Haritayı farenin sol tuşuna {leftclick} basılı tutarak ve fareyi etrafında hareket ettirerek çekebiliriniz.  Ayrıca  klavyenizdeki `↓`, `↑`, `←`, `→` yön tuşlarını kullanabilirsiniz.",
                 "navigation_zoom": "Farenin tekeri veya trackpad aracılığıyla ya da haritanın kenarındaki {plus} / {minus} tuşlarına basarak yakınlaştırma ya da uzaklaştırma yapabilirsiniz. Ayrıca klavyenizdeki `+`, `-` tuşlarını kullanabilirsiniz.",
                 "features_h": "Harita Nesneleri",
-                "features": "Biz \"nesneler\" kelimesini haritada görünen yol, bina veya görülecek yerler gibi şeyler için kullanıyoruz. Gerçek dünyadaki her şey OpenStreetMap'te bir nesne olarak haritalanabilir. Harita nesneleri haritada *points*, *lines*, veya *areas* kullanılarak temsil edilir.",
-                "nodes_ways": "OpenStreetmap'te noktalar bazen *nodes* olarak, çizgi ve alanlar ise bazen  *ways* olarak kullanılır."
+                "features": "Biz \"nesneler\" kelimesini haritada görünen yol, bina veya görülecek yerler gibi şeyler için kullanıyoruz. Gerçek dünyadaki her şey OpenStreetMap'te bir nesne olarak haritalanabilir. Harita nesneleri haritada *points*, *lines*, veya *areas* kullanılarak temsil edilir."
             },
             "editing": {
                 "title": "Düzenleme ve Kaydetme",
@@ -1349,9 +1364,6 @@
                         "onsen": "Kaplıca"
                     }
                 },
-                "beauty": {
-                    "label": "Mağaza Türü"
-                },
                 "bench": {
                     "label": "Oturak"
                 },
@@ -1432,6 +1444,9 @@
                 },
                 "collection_times": {
                     "label": "Toplanma Zamanları"
+                },
+                "colour": {
+                    "label": "Renk"
                 },
                 "comment": {
                     "label": "Değişlikle ilgili Açıklama",
@@ -1584,6 +1599,9 @@
                 "display": {
                     "label": "Görüntü"
                 },
+                "distance": {
+                    "label": "Uzaklık"
+                },
                 "dock": {
                     "label": "Tür"
                 },
@@ -1634,20 +1652,9 @@
                 "fence_type": {
                     "label": "Tür"
                 },
-                "fire_hydrant/position": {
-                    "label": "Yer",
-                    "options": {
-                        "green": "Yeşil",
-                        "lane": "Şerit",
-                        "parking_lot": "Park Yeri",
-                        "sidewalk": "Kaldırım"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tür",
                     "options": {
                         "pillar": "Sütun",
-                        "pond": "Havuz",
                         "underground": "Yeraltı",
                         "wall": "Duvar"
                     }
@@ -1735,6 +1742,19 @@
                     "label": "Engel",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Evet",
+                        "undefined": "Hayır"
+                    }
+                },
+                "horse_riding": {
+                    "label": "At Binicilik Spor",
+                    "options": {
+                        "horse_riding": "Evet",
+                        "undefined": "Hayır"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1761,6 +1781,9 @@
                     "label": "Yazıt"
                 },
                 "intermittent": {
+                    "label": "Aralıklı"
+                },
+                "intermittent_yes": {
                     "label": "Aralıklı"
                 },
                 "internet_access": {
@@ -1794,6 +1817,9 @@
                 "lanes": {
                     "label": "Şerit",
                     "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Diller"
                 },
                 "layer": {
                     "label": "Katman",
@@ -1854,6 +1880,9 @@
                 "location": {
                     "label": "Konum"
                 },
+                "location_pool": {
+                    "label": "Konum"
+                },
                 "man_made": {
                     "label": "Tür"
                 },
@@ -1873,6 +1902,9 @@
                 "maxspeed": {
                     "label": "Hız Limiti",
                     "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60... "
                 },
                 "maxstay": {
                     "label": "En Fazla Kalma Süresi"
@@ -2019,10 +2051,14 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
                     "label": "Zorluk",
+                    "options": {
+                        "advanced": "Gelişmiş"
+                    },
                     "placeholder": "Kolay, Orta, İleri Derece"
                 },
                 "piste/grooming": {
@@ -2357,9 +2393,6 @@
                 },
                 "tourism": {
                     "label": "Tür"
-                },
-                "tourism_attraction": {
-                    "label": "Turizm"
                 },
                 "tower/construction": {
                     "label": "Kule İnşaatı",
@@ -2846,10 +2879,6 @@
                     "name": "Park Yeri",
                     "terms": "Park Yeri"
                 },
-                "amenity/pharmacy": {
-                    "name": "Eczane",
-                    "terms": "Eczane"
-                },
                 "amenity/place_of_worship": {
                     "name": "İbadethane",
                     "terms": "İbadethane, İbadet Yeri"
@@ -2858,21 +2887,9 @@
                     "name": "Budist Tapınağı",
                     "terms": "Budist Tapınağı"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kilise",
-                    "terms": "Kilise"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Tapınağı",
                     "terms": "Hindu Tapınağı"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagog",
-                    "terms": "Sinagog"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Camii",
-                    "terms": "Camii"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Şintoizm Tapınağı",
@@ -3966,8 +3983,7 @@
                     "terms": "Su Kültürü"
                 },
                 "landuse/basin": {
-                    "name": "Havza",
-                    "terms": "Havza"
+                    "name": "Havza"
                 },
                 "landuse/cemetery": {
                     "name": "Mezarlık",
@@ -3995,10 +4011,6 @@
                 "landuse/farmyard": {
                     "name": "Çiftlik",
                     "terms": "Çiftlik"
-                },
-                "landuse/forest": {
-                    "name": "Orman",
-                    "terms": "Orman"
                 },
                 "landuse/grass": {
                     "name": "Çimenlik",
@@ -4261,10 +4273,6 @@
                 "leisure/resort": {
                     "name": "Tatil Yeri",
                     "terms": "Tatil Yeri"
-                },
-                "leisure/running_track": {
-                    "name": "Yarış Pisti (motor spor hariç)",
-                    "terms": "Koşu Pisti"
                 },
                 "leisure/sauna": {
                     "name": "Sauna"
@@ -5740,8 +5748,7 @@
                     "terms": "Akarsu, Nehir, Irmak"
                 },
                 "waterway/riverbank": {
-                    "name": "Akarsu Kenarı",
-                    "terms": "Akarsu Kenarı, Nehir Kenarı, Irmak Kenarı"
+                    "name": "Akarsu Kenarı"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Deniz Tuvalet İmha İstasyonu",
@@ -5978,6 +5985,9 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "description": "Botswana'daki OpenStreetMap Sayfası"
+            },
             "cape-coast-youthmappers": {
                 "name": "Cape Coast Üniversitesi YouthMappers",
                 "description": "Bizi Twitter'dan takip edin: {url}",
@@ -5985,7 +5995,8 @@
             },
             "osm-gh-facebook": {
                 "name": "OpenStreetMap Gana Facebook'ta",
-                "description": "OpenStreetMap ile ilgilenen kişilerin Faceboo grubu."
+                "description": "OpenStreetMap ile ilgilenen kişilerin Faceboo grubu.",
+                "extendedDescription": "Gana topluluğundaki haritacılar, Gana'daki OpenStreetMap ve Humanitarian OpenStreetMap Team (HOT) projelerini tanıtıyor. Bize katılın."
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Gana Twitter'da",
@@ -6015,17 +6026,42 @@
                 "events": {
                     "sotmasia2018": {
                         "name": "Asya 2018 Haritanın Durumu ",
+                        "description": "Hindistan’daki Harita Asya 2018 OpenStreetMap bölge çapında etkinliğe katılın",
                         "where": "Hint Enstitüsü Yönetimi, Bangalore, Hindistan"
                     }
                 }
+            },
+            "osm-india-forum": {
+                "name": "OpenStreetMap Hindistan forumu",
+                "description": "OpenStreetMap Hindistan internet forumu"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap Hindistan GitHub",
+                "description": "Bizimle birlikte kodlayın: {url}"
             },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap Hindistan Posta Listesi",
                 "description": "Konuşma, Hindistan Topluluğu için resmi Posta Listesi"
             },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap Hindistan Telegram",
+                "description": "Ailemize katılın: {url}"
+            },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap Hindistan Twitter'ı",
                 "description": "Sadece bir tweet uzağındayız: {url}"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap Hindistan",
+                "description": "Hindistan'daki Haritacılar ve OpenStreetMap kullanıcıları"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject Hindistan",
+                "description": "Hindistan'da haritalama hakkında bilmeniz gereken her şey: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap Hindistan Youtube",
+                "description": "Kanalımıza abone olun: {url}"
             },
             "OSM-India-Puducherry-Facebook": {
                 "description": "Topluluk etkinlikleri, aktiviteleri hakkında bilgi edinmek için FSHM Facebook sayfası",
@@ -6039,6 +6075,9 @@
                 "name": "OpenStreetMap Endonezya",
                 "description": "Endonezya'da OpenStreetMap'ı geliştirin",
                 "extendedDescription": "Endonezya'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!"
+            },
+            "osm-iran-aparat": {
+                "description": "{url} adresinden kanalımıza abone olun"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japonya Topluluğu",
@@ -6054,10 +6093,6 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap Japonya",
                 "description": "Japonya'daki Mappers ve OpenStreetMap kullanıcıları"
-            },
-            "OSM-korea-telegram": {
-                "name": "OSM Kore Telegram Kanalı",
-                "description": "Kore'deki OpenStreetMap katılımcıları, toplulukları ve kullanıcılarını paylaşmak ve tartışmak için Resmi Olmayan bir Kanal."
             },
             "OSM-MY-facebook": {
                 "name": "Facebook'ta OpenStreetMap Malezya",

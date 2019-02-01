@@ -1,13 +1,5 @@
 {
-    "icon": "maki-hairdresser",
-    "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "payment_multi"
-    ],
+    "icon": "temaki-beauty_salon",
     "geometry": [
         "point",
         "area"

@@ -1,10 +1,18 @@
 import _isEmpty from 'lodash-es/isEmpty';
+import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
+import {
+    utilTagText
+} from '../util';
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
-} from './validation_issue';
+    validationIssueFix
+} from '../core/validator';
+import {
+    actionChangeTags
+} from '../actions';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
@@ -14,41 +22,60 @@ export function validationTagSuggestsArea() {
     function tagSuggestsArea(tags) {
         if (_isEmpty(tags)) return false;
 
-        var presence = ['landuse', 'amenities', 'tourism', 'shop'];
-        for (var i = 0; i < presence.length; i++) {
-            if (tags[presence[i]] !== undefined) {
-                if (presence[i] === 'tourism' && tags[presence[i]] === 'artwork') {
+        var areaKeys = ['area', 'building', 'landuse', 'shop', 'tourism'];
+        for (var i = 0; i < areaKeys.length; i++) {
+            var key = areaKeys[i];
+            if (tags[key] !== undefined && tags[key] !== 'no') {
+                if (key === 'tourism' && tags[key] === 'artwork') {
                     continue;   // exception for tourism=artwork - #5206
                 } else {
-                    return presence[i] + '=' + tags[presence[i]];
+                    var returnTags = {};
+                    returnTags[key] = tags[key];
+                    return returnTags;
                 }
             }
         }
 
-        if (tags.building && tags.building === 'yes') return 'building=yes';
+        return false;
     }
 
-
-    var validation = function(changes, graph) {
+    var validation = function(entity, context) {
         var issues = [];
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i],
-                geometry = change.geometry(graph),
-                suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
+        var graph = context.graph();
+        var geometry = entity.geometry(graph);
+        var suggestingTags = (geometry === 'line' ? tagSuggestsArea(entity.tags) : undefined);
 
-            if (suggestion) {
-                issues.push(new validationIssue({
-                    type: ValidationIssueType.tag_suggests_area,
-                    severity: ValidationIssueSeverity.warning,
-                    message: t('issues.tag_suggests_area.message', { tag: suggestion }),
-                    entities: [change],
-                }));
-            }
+        if (suggestingTags) {
+            var tagText = utilTagText({ tags: suggestingTags });
+            issues.push(new validationIssue({
+                type: ValidationIssueType.tag_suggests_area,
+                severity: ValidationIssueSeverity.warning,
+                message: t('issues.tag_suggests_area.message', { tag: tagText }),
+                tooltip: t('issues.tag_suggests_area.tip'),
+                entities: [entity],
+                fixes: [
+                    new validationIssueFix({
+                        title: t('issues.fix.remove_tags.title'),
+                        onClick: function() {
+                            var entity = this.issue.entities[0];
+                            var tags = _clone(entity.tags);
+                            for (var key in suggestingTags) {
+                                delete tags[key];
+                            }
+                            context.perform(
+                                actionChangeTags(entity.id, tags),
+                                t('issues.fix.remove_tags.undo_redo')
+                            );
+                        }
+                    })
+                ]
+            }));
         }
 
         return issues;
     };
 
+    validation.type = ValidationIssueType.tag_suggests_area;
 
     return validation;
 }

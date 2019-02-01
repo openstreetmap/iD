@@ -3,7 +3,7 @@ describe('iD.Map', function() {
 
     beforeEach(function() {
         content = d3.select('body').append('div');
-        context = iD.Context();
+        context = iD.coreContext();
         map = context.map();
         content.call(map);
     });

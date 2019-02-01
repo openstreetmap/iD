@@ -4,7 +4,16 @@
         "surface",
         "width",
         "structure",
-        "access"
+        "access",
+        "incline",
+        "horse_scale"
+    ],
+    "moreFields": [
+        "wheelchair",
+        "lit",
+        "smoothness",
+        "covered",
+        "dog"
     ],
     "icon": "iD-highway-bridleway",
     "geometry": [

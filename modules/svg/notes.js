@@ -8,12 +8,18 @@ import { svgPointTransform } from './index';
 import { services } from '../services';
 
 
+var _notesEnabled = false;
+var _osmService;
+
+
 export function svgNotes(projection, context, dispatch) {
     if (!dispatch) { dispatch = d3_dispatch('change'); }
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
-    var layer = d3_select(null);
-    var _notes;
+    var touchLayer = d3_select(null);
+    var drawLayer = d3_select(null);
+    var _notesVisible = false;
+
 
     function markerPath(selection, klass) {
         selection
@@ -22,40 +28,49 @@ export function svgNotes(projection, context, dispatch) {
             .attr('d', 'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z');
     }
 
-    function init() {
-        if (svgNotes.initialized) return;  // run once
-        svgNotes.enabled = false;
-        svgNotes.initialized = true;
-    }
 
-    function editOn() {
-        layer.style('display', 'block');
-    }
-
-
-    function editOff() {
-        layer.selectAll('.note').remove();
-        layer.style('display', 'none');
-    }
-
-
+    // Loosely-coupled osm service for fetching notes.
     function getService() {
-        if (services.osm && !_notes) {
-            _notes = services.osm;
-            _notes.on('loadedNotes', throttledRedraw);
-        } else if (!services.osm && _notes) {
-            _notes = null;
+        if (services.osm && !_osmService) {
+            _osmService = services.osm;
+            _osmService.on('loadedNotes', throttledRedraw);
+        } else if (!services.osm && _osmService) {
+            _osmService = null;
         }
 
-        return _notes;
+        return _osmService;
     }
 
 
-    function showLayer() {
+    // Show the notes
+    function editOn() {
+        if (!_notesVisible) {
+            _notesVisible = true;
+            drawLayer
+                .style('display', 'block');
+        }
+    }
+
+
+    // Immediately remove the notes and their touch targets
+    function editOff() {
+        if (_notesVisible) {
+            _notesVisible = false;
+            drawLayer
+                .style('display', 'none');
+            drawLayer.selectAll('.note')
+                .remove();
+            touchLayer.selectAll('.note')
+                .remove();
+        }
+    }
+
+
+    // Enable the layer.  This shows the notes and transitions them to visible.
+    function layerOn() {
         editOn();
 
-        layer
-            .classed('disabled', false)
+        drawLayer
             .style('opacity', 0)
             .transition()
             .duration(250)
@@ -66,30 +81,35 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    function hideLayer() {
-        editOff();
-
+    // Disable the layer.  This transitions the layer invisible and then hides the notes.
+    function layerOff() {
         throttledRedraw.cancel();
-        layer.interrupt();
+        drawLayer.interrupt();
+        touchLayer.selectAll('.note')
+            .remove();
 
-        layer
+        drawLayer
             .transition()
             .duration(250)
             .style('opacity', 0)
             .on('end interrupt', function () {
-                layer.classed('disabled', true);
+                editOff();
                 dispatch.call('change');
             });
-
     }
 
 
-    function update() {
+    // Update the note markers
+    function updateMarkers() {
+        if (!_notesVisible || !_notesEnabled) return;
+
         var service = getService();
         var selectedID = context.selectedNoteID();
         var data = (service ? service.notes(projection) : []);
-        var transform = svgPointTransform(projection);
-        var notes = layer.selectAll('.note')
+        var getTransform = svgPointTransform(projection);
+
+        // Draw markers..
+        var notes = drawLayer.selectAll('.note')
             .data(data, function(d) { return d.status + d.id; });
 
         // exit
@@ -139,55 +159,90 @@ export function svgNotes(projection, context, dispatch) {
         // update
         notes
             .merge(notesEnter)
-            .sort(function(a, b) {
-                return (a.id === selectedID) ? 1
-                    : (b.id === selectedID) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
+            .sort(sortY)
+            .classed('selected', function(d) {
+                var mode = context.mode();
+                var isMoving = mode && mode.id === 'drag-note';  // no shadows when dragging
+                return !isMoving && d.id === selectedID;
             })
-            .classed('selected', function(d) { return d.id === selectedID; })
-            .attr('transform', transform);
+            .attr('transform', getTransform);
+
+
+        // Draw targets..
+        if (touchLayer.empty()) return;
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+
+        var targets = touchLayer.selectAll('.note')
+            .data(data, function(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('rect')
+            .attr('width', '20px')
+            .attr('height', '20px')
+            .attr('x', '-8px')
+            .attr('y', '-22px')
+            .merge(targets)
+            .sort(sortY)
+            .attr('class', function(d) {
+                var newClass = (d.id < 0 ? 'new' : '');
+                return 'note target note-' + d.id + ' ' + fillClass + newClass;
+            })
+            .attr('transform', getTransform);
+
+
+        function sortY(a, b) {
+            return (a.id === selectedID) ? 1 : (b.id === selectedID) ? -1 : b.loc[1] - a.loc[1];
+        }
     }
 
 
+    // Draw the notes layer and schedule loading notes and updating markers.
     function drawNotes(selection) {
-        var enabled = svgNotes.enabled;
         var service = getService();
 
-        layer = selection.selectAll('.layer-notes')
-            .data(service ? [0] : []);
-
-        layer.exit()
-            .remove();
-
-        layer.enter()
-            .append('g')
-            .attr('class', 'layer-notes')
-            .style('display', enabled ? 'block' : 'none')
-            .merge(layer);
-
-        function dimensions() {
-            return [window.innerWidth, window.innerHeight];
+        var surface = context.surface();
+        if (surface && !surface.empty()) {
+            touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
         }
 
-        if (enabled) {
+        drawLayer = selection.selectAll('.layer-notes')
+            .data(service ? [0] : []);
+
+        drawLayer.exit()
+            .remove();
+
+        drawLayer = drawLayer.enter()
+            .append('g')
+            .attr('class', 'layer-notes')
+            .style('display', _notesEnabled ? 'block' : 'none')
+            .merge(drawLayer);
+
+        if (_notesEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                service.loadNotes(projection, dimensions());
-                update();
+                service.loadNotes(projection);
+                updateMarkers();
             } else {
                 editOff();
             }
         }
     }
 
-    drawNotes.enabled = function(val) {
-        if (!arguments.length) return svgNotes.enabled;
 
-        svgNotes.enabled = val;
-        if (svgNotes.enabled) {
-            showLayer();
+    // Toggles the layer on and off
+    drawNotes.enabled = function(val) {
+        if (!arguments.length) return _notesEnabled;
+
+        _notesEnabled = val;
+        if (_notesEnabled) {
+            layerOn();
         } else {
-            hideLayer();
+            layerOff();
             if (context.selectedNoteID()) {
                 context.enter(modeBrowse(context));
             }
@@ -197,6 +252,6 @@ export function svgNotes(projection, context, dispatch) {
         return this;
     };
 
-    init();
+
     return drawNotes;
 }

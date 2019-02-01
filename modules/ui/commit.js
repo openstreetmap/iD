@@ -8,11 +8,13 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
+import { services } from '../services';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
+import { tooltip } from '../util/tooltip';
 import { utilRebind } from '../util';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
@@ -63,6 +65,8 @@ export function uiCommit(context) {
         }
 
         var tags;
+        // Initialize changeset if one does not exist yet.
+        // Also pull values from local storage.
         if (!_changeset) {
             var detected = utilDetect();
             tags = {
@@ -81,13 +85,9 @@ export function uiCommit(context) {
                 tags.hashtags = hashtags;
             }
 
-            // iD 2.8.1 could write a literal 'undefined' here.. see #5021
-            // (old source values expire after 2 days, so 'undefined' checks can go away in v2.9)
             var source = context.storage('source');
-            if (source && source !== 'undefined') {
+            if (source) {
                 tags.source = source;
-            } else if (source === 'undefined') {
-                context.storage('source', null);
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -95,8 +95,22 @@ export function uiCommit(context) {
 
         tags = _clone(_changeset.tags);
 
+        // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
         tags.imagery_used = imageryUsed || 'None';
+
+        // assign tags for closed issues and notes
+        var osmClosed = osm.getClosedIDs();
+        if (osmClosed.length) {
+            tags['closed:note'] = osmClosed.join(';').substr(0, 255);
+        }
+        if (services.keepRight) {
+            var krClosed = services.keepRight.getClosedIDs();
+            if (krClosed.length) {
+                tags['closed:keepright'] = krClosed.join(';').substr(0, 255);
+            }
+        }
+
         _changeset = _changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
@@ -109,17 +123,17 @@ export function uiCommit(context) {
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer');
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block')
             .append('h3')
             .text(t('commit.title'));
-        
+
         headerTitle
             .append('div')
             .attr('class', 'header-block header-block-outer header-block-close')
-            .append('button') 
+            .append('button')
             .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon('#iD-icon-close'));
@@ -245,12 +259,15 @@ export function uiCommit(context) {
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
-        buttonEnter
+        var uploadButton = buttonEnter
             .append('button')
-            .attr('class', 'action button save-button')
-            .append('span')
+            .attr('class', 'action button save-button');
+
+        uploadButton.append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
+
+        var uploadBlockerTooltip = getUploadBlockerMessage();
 
         // update
         buttonSection = buttonSection
@@ -263,15 +280,21 @@ export function uiCommit(context) {
             });
 
         buttonSection.selectAll('.save-button')
-            .attr('disabled', function() {
-                var n = d3_select('#preset-input-comment').node();
-                return (n && n.value.length) ? null : true;
-            })
+            .classed('disabled', uploadBlockerTooltip !== undefined)
             .on('click.save', function() {
-                this.blur();    // avoid keeping focus on the button - #4641
-                dispatch.call('save', this, _changeset);
+                if (!d3_select(this).classed('disabled')) {
+                    this.blur();    // avoid keeping focus on the button - #4641
+                    dispatch.call('save', this, _changeset);
+                }
             });
 
+        // remove any existing tooltip
+        buttonSection.selectAll('.save-button .tooltip').remove();
+
+        if (uploadBlockerTooltip) {
+            buttonSection.selectAll('.save-button')
+                .call(tooltip().title(uploadBlockerTooltip).placement('top'));
+        }
 
         // Raw Tag Editor
         var tagSection = body.selectAll('.tag-section.raw-tag-editor')
@@ -307,6 +330,22 @@ export function uiCommit(context) {
                     .tags(_clone(_changeset.tags))
                 );
         }
+    }
+
+
+    function getUploadBlockerMessage() {
+        var errorCount = context.validator().getErrors().length;
+        if (errorCount > 0) {
+            return t('commit.outstanding_errors_message', { count: errorCount });
+
+        } else {
+            var n = d3_select('#preset-input-comment').node();
+            var hasChangesetComment = n && n.value.length > 0;
+            if (!hasChangesetComment) {
+                return t('commit.comment_needed_message');
+            }
+        }
+        return null;
     }
 
 

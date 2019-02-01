@@ -1,14 +1,93 @@
 import _clone from 'lodash-es/clone';
 import _omit from 'lodash-es/omit';
+import _uniq from 'lodash-es/uniq';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
-export function presetPreset(id, preset, fields, visible) {
+export function presetPreset(id, preset, fields, visible, rawPresets) {
     preset = _clone(preset);
 
     preset.id = id;
+
+    preset.parentPresetID = function() {
+        var endIndex = preset.id.lastIndexOf('/');
+        if (endIndex < 0) return null;
+
+        return preset.id.substring(0, endIndex);
+    };
+
+
+    // For a preset without fields, use the fields of the parent preset.
+    // Replace {preset} placeholders with the fields of the specified presets.
+    function resolveFieldInheritance() {
+
+        // Skip `fields` for the keys which define the preset.
+        // These are usually `typeCombo` fields like `shop=*`
+        function withoutKeyFields(fieldID) {
+            var f = fields[fieldID];
+            if (f.key) {
+                return preset.tags[f.key] === undefined;
+            }
+            return true;
+        }
+
+        // returns an array of field IDs to inherit from the given presetID, if found
+        function inheritedFieldIDs(presetID, prop) {
+            if (!presetID) return null;
+
+            var inheritPreset = rawPresets[presetID];
+            if (!inheritPreset) return null;
+
+            var inheritFieldIDs = inheritPreset[prop] || [];
+
+            if (prop === 'fields') {
+                inheritFieldIDs = inheritFieldIDs.filter(withoutKeyFields);
+            }
+
+            return inheritFieldIDs;
+        }
+
+
+        ['fields', 'moreFields'].forEach(function(prop) {
+            var fieldIDs = [];
+            if (preset[prop] && preset[prop].length) {    // fields were defined
+                preset[prop].forEach(function(fieldID) {
+                    var match = fieldID.match(/\{(.*)\}/);
+                    if (match !== null) {        // presetID wrapped in braces {}
+                        var inheritIDs = inheritedFieldIDs(match[1], prop);
+                        if (inheritIDs !== null) {
+                            fieldIDs = fieldIDs.concat(inheritIDs);
+                        } else {
+                            /* eslint-disable no-console */
+                            console.log('Cannot resolve presetID ' + match[0] +
+                                ' found in ' + preset.id + ' ' + prop);
+                            /* eslint-enable no-console */
+                        }
+                    } else {
+                        fieldIDs.push(fieldID);  // no braces - just a normal field
+                    }
+                });
+
+            } else {  // no fields defined, so use the parent's if possible
+                fieldIDs = inheritedFieldIDs(preset.parentPresetID(), prop);
+            }
+            // resolve duplicate fields
+            fieldIDs = _uniq(fieldIDs);
+
+            // update this preset with the results
+            preset[prop] = fieldIDs;
+
+            // update the raw object to allow for multiple levels of inheritance
+            rawPresets[preset.id][prop] = fieldIDs;
+        });
+    }
+
+    if (rawPresets) {
+        resolveFieldInheritance();
+    }
+
     preset.fields = (preset.fields || []).map(getFields);
     preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
@@ -51,19 +130,25 @@ export function presetPreset(id, preset, fields, visible) {
     };
 
 
-    var origName = preset.name || '';
+    preset.originalName = preset.name || '';
+
+
     preset.name = function() {
         if (preset.suggestion) {
-            id = id.split('/');
-            id = id[0] + '/' + id[1];
-            return origName + ' - ' + t('presets.presets.' + id + '.name');
+            var path = id.split('/');
+            path.pop();  // remove brand name
+            // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            return preset.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
         }
-        return preset.t('name', { 'default': origName });
+        return preset.t('name', { 'default': preset.originalName });
     };
 
-    var origTerms = (preset.terms || []).join();
+
+    preset.originalTerms = (preset.terms || []).join();
+
+
     preset.terms = function() {
-        return preset.t('terms', { 'default': origTerms }).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
 
@@ -72,17 +157,17 @@ export function presetPreset(id, preset, fields, visible) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
-    preset.visible = function(_) {
+    preset.visible = function(val) {
         if (!arguments.length) return visible;
-        visible = _;
+        visible = val;
         return visible;
     };
 
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0],
-            value = reference.value || preset.tags[key];
+        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0];
+        var value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
             if (value in preset.tags) {

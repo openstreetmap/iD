@@ -4,6 +4,13 @@
         "access",
         "building_area"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "vertex",
         "area"

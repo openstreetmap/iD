@@ -1,10 +1,5 @@
 {
     "icon": "maki-amusement-park",
-    "fields": [
-        "name",
-        "operator",
-        "opening_hours"
-    ],
     "geometry": [
         "point",
         "area"

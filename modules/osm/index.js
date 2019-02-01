@@ -1,5 +1,6 @@
 export { osmChangeset } from './changeset';
 export { osmEntity } from './entity';
+export { krError } from './keepRight';
 export { osmNode } from './node';
 export { osmNote } from './note';
 export { osmRelation } from './relation';

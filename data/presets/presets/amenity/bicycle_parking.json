@@ -5,7 +5,12 @@
         "capacity",
         "operator",
         "covered",
-        "access_simple"
+        "access_simple",
+        "fee"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "covered"
     ],
     "geometry": [
         "point",

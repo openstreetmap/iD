@@ -1,8 +1,52 @@
 {
   "dataDeprecated": [
     {
+      "old": {"amenity": "advertising"},
+      "replace": {"advertising": "*"}
+    },
+    {
+      "old": {"amenity": "artwork"},
+      "replace": {"tourism": "artwork"}
+    },
+    {
+      "old": {"amenity": "car_repair"},
+      "replace": {"shop": "car_repair"}
+    },
+    {
+      "old": {"amenity": "citymap_post"},
+      "replace": {"tourism": "information"}
+    },
+    {
+      "old": {"amenity": "community_center"},
+      "replace": {"amenity": "community_centre"}
+    },
+    {
       "old": {"amenity": "firepit"},
       "replace": {"leisure": "firepit"}
+    },
+    {
+      "old": {"amenity": "register_office"},
+      "replace": {"office": "government", "government": "register_office"}
+    },
+    {
+      "old": {"amenity": "sauna"},
+      "replace": {"leisure": "sauna"}
+    },
+    {
+      "old": {"amenity": "scrapyard"},
+      "replace": {"landuse": "industrial", "industrial": "scrap_yard"}
+    },
+    {
+      "old": {"amenity": "shop"},
+      "replace": {"shop": "*"}
+    },
+    {
+      "old": {"amenity": "swimming_pool"},
+      "replace": {"leisure": "swimming_pool"}
+    },
+    {
+      "old": {"amenity": "vending_machine", "vending": "news_papers"},
+      "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
     {
       "old": {"barrier": "wire_fence"},
@@ -13,8 +57,47 @@
       "replace": {"barrier": "fence", "fence_type": "wood"}
     },
     {
+      "old": {"building": "entrance"},
+      "replace": {"entrance": "*"}
+    },
+    {
+      "old": {"building:roof:colour": "*"},
+      "replace": {"roof:colour": "$1"}
+    },
+    {
+      "old": {"building:type": "*"},
+      "replace": {"building": "$1"}
+    },
+    {
+      "old": {"color": "*"},
+      "replace": {"colour": "$1"}
+    },
+    {
+      "old": {"craft": "jeweler"},
+      "replace": {"shop": "jewelery"}
+    },
+    {
+      "old": {"craft": "optician"},
+      "replace": {"shop": "optician"}
+    },
+    {
+      "old": {"drinkable": "*"},
+      "replace": {"drinking_water": "$1"}
+    },
+    {
+      "old": {"escalator": "*"},
+      "replace": {"highway": "steps", "conveying": "$1"}
+    },
+    {
+      "old": {"fenced": "yes"},
+      "replace": {"barrier": "fence"}
+    },
+    {
       "old": {"highway": "ford"},
-      "replace": {"ford": "yes"}
+      "replace": {"ford": "*"}
+    },
+    {
+      "old": {"highway": "no"}
     },
     {
       "old": {"highway": "stile"},
@@ -33,12 +116,60 @@
       "replace": {"highway": "road", "incline": "unpaved"}
     },
     {
+      "old": {"landuse": "farm"},
+      "replace": {"landuse": "farmland"}
+    },
+    {
+      "old": {"landuse": "field"},
+      "replace": {"landuse": "farmland"}
+    },
+    {
+      "old": {"landuse": "pond"},
+      "replace": {"natural": "water", "water": "pond"}
+    },
+    {
       "old": {"landuse": "wood"},
-      "replace": {"landuse": "forest", "natural": "wood"}
+      "replace": {"natural": "wood"}
+    },
+    {
+      "old": {"leisure": "beach"},
+      "replace": {"natural": "beach"}
+    },
+    {
+      "old": {"leisure": "club"},
+      "replace": {"club": "*"}
+    },
+    {
+      "old": {"man_made": "jetty"},
+      "replace": {"man_made": "pier"}
+    },
+    {
+      "old": {"man_made": "water_tank"},
+      "replace": {"man_made": "storage_tank", "content": "water"}
+    },
+    {
+      "old": {"man_made": "well"},
+      "replace": {"man_made": "water_well"}
     },
     {
       "old": {"natural": "marsh"},
       "replace": {"natural": "wetland", "wetland": "marsh"}
+    },
+    {
+      "old": {"office": "administrative"},
+      "replace": {"office": "government"}
+    },
+    {
+      "old": {"place_name": "*"},
+      "replace": {"name": "$1"}
+    },
+    {
+      "old": {"pole": "transition"},
+      "replace": {"location:transition": "yes"}
+    },
+    {
+      "old": {"power": "sub_station"},
+      "replace": {"power": "substation"}
     },
     {
       "old": {"power_source": "*"},
@@ -49,8 +180,56 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"roof:color": "*"},
+      "replace": {"roof:colour": "$1"}
+    },
+    {
+      "old": {"route": "ncn"},
+      "replace": {"route": "bicycle", "network": "ncn"}
+    },
+    {
       "old": {"shop": "organic"},
       "replace": {"shop": "supermarket", "organic": "only"}
+    },
+    {
+      "old": {"shop": "fish"},
+      "replace": {"shop": "seafood"}
+    },
+    {
+      "old": {"shop": "fishmonger"},
+      "replace": {"shop": "seafood"}
+    },
+    {
+      "old": {"shop": "furnace"},
+      "replace": {"shop": "fireplace"}
+    },
+    {
+      "old": {"shop": "gallery"},
+      "replace": {"shop": "art"}
+    },
+    {
+      "old": {"shop": "perfume"},
+      "replace": {"shop": "perfumery"}
+    },
+    {
+      "old": {"tourism": "bed_and_breakfast"},
+      "replace": {"tourism": "guest_house"}
+    },
+    {
+      "old": {"water": "intermittent"},
+      "replace": {"natural": "water", "intermittent": "yes"}
+    },
+    {
+      "old": {"water": "riverbank"},
+      "replace": {"natural": "water", "water": "river"}
+    },
+    {
+      "old": {"water": "salt"},
+      "replace": {"natural": "water", "salt": "yes"}
+    },
+    {
+      "old": {"water": "tidal"},
+      "replace": {"natural": "water", "tidal": "yes"}
     }
   ]
 }

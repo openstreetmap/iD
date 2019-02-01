@@ -1,11 +1,10 @@
 {
     "icon": "maki-suitcase",
     "fields": [
-        "name",
-        "address",
-        "building_area",
-        "opening_hours",
-        "internet_access",
+        "{office}",
+        "internet_access"
+    ],
+    "moreFields": [
         "internet_access/fee",
         "internet_access/ssid"
     ],

@@ -8,6 +8,13 @@
         "religion",
         "denomination"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "tags": {
         "landuse": "religious"
     },

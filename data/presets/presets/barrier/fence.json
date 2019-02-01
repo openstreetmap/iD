@@ -2,7 +2,8 @@
     "icon": "maki-fence",
     "fields": [
         "fence_type",
-        "height"
+        "height",
+        "material"
     ],
     "geometry": [
         "line"

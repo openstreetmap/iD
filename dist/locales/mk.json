@@ -251,7 +251,6 @@
         "inspector": {
             "no_documentation_combination": "Нема документација за овој сплет на ознаки",
             "no_documentation_key": "Нема документација за овој клуч",
-            "documentation_redirect": "Документацијата е пренасочена кон нова страница",
             "show_more": "Повеќе",
             "view_on_osm": "Погл. на openstreetmap.org",
             "all_fields": "Сите полиња",
@@ -654,9 +653,6 @@
                         "onsen": "Јапонска бања"
                     }
                 },
-                "beauty": {
-                    "label": "Вид дуќан"
-                },
                 "bench": {
                     "label": "Клупа"
                 },
@@ -838,10 +834,8 @@
                     "label": "Вид"
                 },
                 "fire_hydrant/type": {
-                    "label": "Вид",
                     "options": {
                         "pillar": "Столб/надземен",
-                        "pond": "Езерце",
                         "underground": "Подземен",
                         "wall": "Ѕиден"
                     }
@@ -1666,23 +1660,11 @@
                 "amenity/parking_space": {
                     "name": "Паркинг-место"
                 },
-                "amenity/pharmacy": {
-                    "name": "Аптека"
-                },
                 "amenity/place_of_worship": {
                     "name": "Верски објект"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Будистички храм"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Црква"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Синагога"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Џамија"
                 },
                 "amenity/planetarium": {
                     "name": "Планетариум"
@@ -2352,9 +2334,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Селски двор"
-                },
-                "landuse/forest": {
-                    "name": "Шума"
                 },
                 "landuse/grass": {
                     "name": "Трева"

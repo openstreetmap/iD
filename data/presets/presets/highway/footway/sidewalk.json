@@ -1,12 +1,5 @@
 {
     "icon": "iD-highway-footway",
-    "fields": [
-        "surface",
-        "lit",
-        "width",
-        "structure",
-        "access"
-    ],
     "geometry": [
         "line"
     ],

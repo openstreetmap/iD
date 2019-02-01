@@ -160,8 +160,8 @@ export function behaviorDrag() {
                 for (; target && target !== root; target = target.parentNode) {
                     var datum = target.__data__;
 
-                    var entity = datum instanceof osmNote ?
-                        datum : datum && datum.properties && datum.properties.entity;
+                    var entity = datum instanceof osmNote ? datum
+                        : datum && datum.properties && datum.properties.entity;
 
                     if (entity && target[matchesSelector](_selector)) {
                         return dragstart.call(target, entity);

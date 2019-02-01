@@ -1,13 +1,20 @@
 {
-    "icon": "maki-pitch",
+    "icon": "fas-skating",
     "fields": [
         "name",
         "seasonal",
         "sport_ice",
         "operator",
         "address",
-        "building",
-        "opening_hours"
+        "building"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

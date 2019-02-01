@@ -1,3 +1,5 @@
+import _uniq from 'lodash-es/uniq';
+
 import {
     select as d3_select,
     selectAll as d3_selectAll
@@ -19,7 +21,7 @@ export function uiShortcuts(context) {
 
 
     context.keybinding()
-        .on(t('shortcuts.toggle.key'), function () {
+        .on([t('shortcuts.toggle.key'), '?'], function () {
             if (d3_selectAll('.modal-shortcuts').size()) {  // already showing
                 if (_modalSelection) {
                     _modalSelection.close();
@@ -179,7 +181,12 @@ export function uiShortcuts(context) {
                     arr = ['F11'];
                 }
 
-                return arr.map(function(s) {
+                // replace translations
+                arr = arr.map(function(s) {
+                    return uiCmd.display(s.indexOf('.') !== -1 ? t(s) : s);
+                });
+
+                return _uniq(arr).map(function(s) {
                     return {
                         shortcut: s,
                         separator: d.separator
@@ -191,17 +198,14 @@ export function uiShortcuts(context) {
                 var selection = d3_select(this);
                 var click = d.shortcut.toLowerCase().match(/(.*).click/);
 
-                if (click && click[1]) {
+                if (click && click[1]) {   // replace "left_click", "right_click" with mouse icon
                     selection
                         .call(svgIcon('#iD-walkthrough-mouse', 'mouseclick', click[1]));
                 } else {
                     selection
                         .append('kbd')
                         .attr('class', 'shortcut')
-                        .text(function (d) {
-                            var key = d.shortcut;
-                            return key.indexOf('.') !== -1 ? uiCmd.display(t(key)) : uiCmd.display(key);
-                        });
+                        .text(function (d) { return d.shortcut; });
                 }
 
                 if (i < nodes.length - 1) {

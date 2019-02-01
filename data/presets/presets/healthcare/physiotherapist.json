@@ -1,13 +1,5 @@
 {
-    "icon": "maki-hospital",
-    "fields": [
-        "name",
-        "operator",
-        "healthcare/speciality",
-        "building_area",
-        "address",
-        "opening_hours"
-    ],
+    "icon": "temaki-physiotherapist",
     "geometry": [
         "point",
         "area"

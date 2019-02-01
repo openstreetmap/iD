@@ -1,14 +1,8 @@
 {
     "icon": "iD-highway-service",
     "fields": [
-        "name",
-        "oneway",
-        "covered",
-        "maxheight",
-        "maxspeed",
-        "structure",
-        "access",
-        "surface"
+        "{highway/service}",
+        "covered"
     ],
     "geometry": [
         "line"

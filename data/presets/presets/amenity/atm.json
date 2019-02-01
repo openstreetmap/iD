@@ -7,6 +7,14 @@
         "currency_multi",
         "drive_through"
     ],
+    "moreFields": [
+        "name",
+        "brand",
+        "lit",
+        "opening_hours",
+        "wheelchair",
+        "covered"
+    ],
     "geometry": [
         "point",
         "vertex"

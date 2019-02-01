@@ -1,0 +1,30 @@
+{
+    "icon": "maki-star",
+    "fields": [
+        "name",
+        "attraction",
+        "operator",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "fee",
+        "payment_multi",
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "attraction": "*"
+    },
+    "searchable": false,
+    "name": "Attraction"
+}

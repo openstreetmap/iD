@@ -1,9 +1,13 @@
 {
     "lt": {
         "icons": {
+            "download": "atsisiųsti",
             "information": "info",
             "remove": "pašalinti",
-            "undo": "sugrąžinti"
+            "undo": "sugrąžinti",
+            "zoom_to": "padidinti iki",
+            "copy": "kopijuoti",
+            "open_wikidata": "atverti wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -35,6 +39,9 @@
             },
             "draw_line": {
                 "tail": "Spauskite, kad pridėtumėte daugiau taškų linijoje. Spauskite ant kitų linijų, kad jas sujungtumėte. Spauskite du kartus, kad baigtumėte linijos piešimą."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Šito negalima keisti, nes prijungta prie paslėpto geoobjekto."
             }
         },
         "operations": {
@@ -146,6 +153,25 @@
             },
             "delete_member": {
                 "annotation": "Narys pašalintas iš ryšio."
+            },
+            "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Prijungti kelią prie taško.",
+                        "to_vertex": "Prijungti kelią prie kito.",
+                        "to_line": "Prijungti kelią prie linijos.",
+                        "to_area": "Prijungti kelią prie ploto.",
+                        "to_adjacent_vertex": "Sujungti gretimi taškai kelyje.",
+                        "to_sibling_vertex": "Kelias prijungtas prie savęs."
+                    },
+                    "from_point": {
+                        "to_point": "Taškas sulietas su kitu.",
+                        "to_vertex": "Taškas sulietas su tašu kelyje.",
+                        "to_line": "Taškas perkeltas į liniją.",
+                        "to_area": "Taškas perkeltas į plotą."
+                    }
+                },
+                "relation": "Šie geoobjektai negali būti sujungti, nes jie turi konfliktuojančias ryšio roles."
             },
             "disconnect": {
                 "title": "Atskirti",
@@ -435,7 +461,6 @@
         "inspector": {
             "no_documentation_combination": "Nėra šios žymos ar žymų kombinacijos aprašymo",
             "no_documentation_key": "Šis raktas neturi dokumentacijos",
-            "documentation_redirect": "Ši dokumentacija peradresuota į naują puslapį",
             "show_more": "Rodyti daugiau",
             "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
             "all_fields": "Visi laukai",
@@ -1284,9 +1309,6 @@
                         "onsen": "Japoniškas Onsenas"
                     }
                 },
-                "beauty": {
-                    "label": "Parduotuvės tipas"
-                },
                 "bench": {
                     "label": "Suolas"
                 },
@@ -1582,20 +1604,9 @@
                 "fence_type": {
                     "label": "Tipas"
                 },
-                "fire_hydrant/position": {
-                    "label": "Vieta",
-                    "options": {
-                        "green": "Žalia",
-                        "lane": "Juosta",
-                        "parking_lot": "Stovėjimo aikštelė",
-                        "sidewalk": "Šaligatvis"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tipas",
                     "options": {
                         "pillar": "Kolona/antžeminė",
-                        "pond": "Kūdra",
                         "underground": "Požeminis",
                         "wall": "Siena"
                     }
@@ -1728,6 +1739,12 @@
                 },
                 "information": {
                     "label": "Tipas"
+                },
+                "intermittent": {
+                    "label": "Nepastovus"
+                },
+                "intermittent_yes": {
+                    "label": "Nepastovus"
                 },
                 "internet_access": {
                     "label": "Interneto prieiga",
@@ -2401,9 +2418,6 @@
                 "tourism": {
                     "label": "Tipas"
                 },
-                "tourism_attraction": {
-                    "label": "Turizmas"
-                },
                 "tower/construction": {
                     "label": "Statybos"
                 },
@@ -2742,10 +2756,6 @@
                 "amenity/parking_space": {
                     "name": "Stovėjimo vieta"
                 },
-                "amenity/pharmacy": {
-                    "name": "Vaistinė",
-                    "terms": "vaistinė"
-                },
                 "amenity/place_of_worship": {
                     "name": "Maldos namai",
                     "terms": "maldos namai"
@@ -2754,20 +2764,8 @@
                     "name": "Budistų Šventykla",
                     "terms": "budistų šventykla,šventykla"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Bažnyčia",
-                    "terms": "bažnyčia"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu šventykla"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mečetė",
-                    "terms": "mečetė"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Šintoizmo šventykla"
@@ -3494,8 +3492,7 @@
                     "name": "Akvakultūra"
                 },
                 "landuse/basin": {
-                    "name": "Vandens telkinys",
-                    "terms": "prūdas,kūdra,baseinas"
+                    "name": "Vandens telkinys"
                 },
                 "landuse/cemetery": {
                     "name": "Kapinės",
@@ -3522,10 +3519,6 @@
                 "landuse/farmyard": {
                     "name": "Ūkis",
                     "terms": "ūkis,ūkio sodyba,ferma"
-                },
-                "landuse/forest": {
-                    "name": "Miškas",
-                    "terms": "miškas"
                 },
                 "landuse/garages": {
                     "name": "Garažų plotas"
@@ -4572,12 +4565,14 @@
                     "terms": "Upė"
                 },
                 "waterway/riverbank": {
-                    "name": "Upės kraštas",
-                    "terms": "Krantas,Upės krantas"
+                    "name": "Upės kraštas"
                 },
                 "waterway/stream": {
                     "name": "Upelis",
                     "terms": "Upelis,Upeliukas"
+                },
+                "waterway/stream_intermittent": {
+                    "name": "Nepastovus upeliukas"
                 },
                 "waterway/waterfall": {
                     "name": "Krioklys"
@@ -4720,9 +4715,6 @@
             },
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU telegram"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Šri Lanka"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Taivano bendruomenė"

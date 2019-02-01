@@ -1,8 +1,9 @@
 {
     "icon": "maki-water",
     "fields": [
-        "name",
-        "intermittent"
+        "{natural/water}",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "area"
@@ -12,8 +13,8 @@
         "water": "lake"
     },
     "reference": {
-        "key": "natural",
-        "value": "water"
+        "key": "water",
+        "value": "lake"
     },
     "terms": [
         "lakelet",

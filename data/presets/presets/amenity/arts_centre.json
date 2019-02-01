@@ -4,7 +4,17 @@
         "name",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "website"
+    ],
+    "moreFields": [
+        "fee",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

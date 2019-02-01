@@ -5,7 +5,13 @@
         "operator",
         "address"
     ],
-   "geometry": [
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
         "point",
         "area"
     ],

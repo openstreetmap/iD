@@ -1,8 +1,8 @@
 {
     "icon": "maki-water",
     "fields": [
-        "name",
-        "intermittent"
+        "{natural/water}",
+        "salt"
     ],
     "geometry": [
         "area"
@@ -12,8 +12,8 @@
         "water": "pond"
     },
     "reference": {
-        "key": "natural",
-        "value": "water"
+        "key": "water",
+        "value": "pond"
     },
     "terms": [
         "lakelet",

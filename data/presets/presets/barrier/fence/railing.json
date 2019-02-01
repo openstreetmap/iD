@@ -1,5 +1,5 @@
 {
-    "icon": "maki-barrier",
+    "icon": "temaki-railing",
     "geometry": [
         "line"
     ],
@@ -7,14 +7,11 @@
         "barrier": "fence",
         "fence_type": "railing"
     },
-    "fields": [
-        "height"
-    ],
-    "name": "Railing",
     "terms": [
         "railing",
         "handrail",
         "guard rail"
     ],
+    "name": "Railing",
     "matchScore": 0.5
 }

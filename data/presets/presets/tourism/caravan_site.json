@@ -1,18 +1,25 @@
 {
-    "icon": "maki-bus",
+    "icon": "temaki-rv_park",
     "fields": [
         "name",
-        "operator",
         "address",
         "capacity",
-        "fee",
         "sanitary_dump_station",
         "power_supply",
-        "internet_access",
-        "internet_access/fee"
+        "internet_access"
     ],
     "moreFields" : [
-        "internet_access/ssid"
+        "operator",
+        "fee",
+        "payment_multi",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "smoking",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

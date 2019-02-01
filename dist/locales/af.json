@@ -596,23 +596,11 @@
                 "amenity/marketplace": {
                     "name": "Markplein"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apteek"
-                },
                 "amenity/place_of_worship": {
                     "name": "Plek van aanbidding"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Boeddhiste tempel"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kerk"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoge"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moskee"
                 },
                 "amenity/police": {
                     "name": "Polisie"
@@ -814,10 +802,6 @@
                 "landuse/farmyard": {
                     "name": "Plaaswerf",
                     "terms": "plaaswerf"
-                },
-                "landuse/forest": {
-                    "name": "Woud",
-                    "terms": "Woud, Oerwoud, Bos"
                 },
                 "landuse/grass": {
                     "name": "Gras",

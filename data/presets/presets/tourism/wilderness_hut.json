@@ -1,23 +1,28 @@
 {
-  "icon": "maki-lodging",
-  "fields": [
-    "name",
-    "operator",
-    "address",
-    "building_area",
-    "fireplace"
-  ],
-  "geometry": [
-    "point",
-    "area"
-  ],
-  "terms": [
-    "wilderness hut",
-    "backcountry hut",
-    "bothy"
-  ],
-  "tags": {
-    "tourism": "wilderness_hut"
-  },
-  "name": "Wilderness Hut"
+    "icon": "maki-lodging",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "fee",
+        "fireplace"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "wilderness hut",
+        "backcountry hut",
+        "bothy"
+    ],
+    "tags": {
+        "tourism": "wilderness_hut"
+    },
+    "name": "Wilderness Hut"
 }

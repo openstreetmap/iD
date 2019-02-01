@@ -50,7 +50,7 @@ To run the current development version of iD on your own computer:
 
 #### Cloning the repository
 
-The repository is reasonably large, and it's unlikely that you need the full history. If you are happy to wait for it all to download, run:
+The repository is reasonably large, and it's unlikely that you need the full history (~200 MB). If you are happy to wait for it all to download, run:
 
 ```
 git clone https://github.com/openstreetmap/iD.git

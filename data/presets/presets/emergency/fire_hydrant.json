@@ -5,9 +5,11 @@
         "fire_hydrant/type",
         "colour",
         "water_source",
+        "couplings"
+    ],
+    "moreFields": [
         "fire_hydrant/pressure",
         "fire_hydrant/diameter",
-        "couplings",
         "water_volume",
         "survey/date"
     ],

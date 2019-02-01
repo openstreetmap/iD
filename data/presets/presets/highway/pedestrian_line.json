@@ -9,6 +9,10 @@
         "structure",
         "access"
     ],
+    "moreFields": [
+        "covered",
+        "smoothness"
+    ],
     "geometry": [
         "line"
     ],

@@ -6,10 +6,17 @@
         "address",
         "building_area",
         "internet_access",
-        "internet_access/fee"
+        "fee"
     ],
     "moreFields" : [
-        "internet_access/ssid"
+        "payment_multi",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

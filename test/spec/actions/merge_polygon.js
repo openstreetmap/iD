@@ -1,11 +1,11 @@
 describe('iD.actionMergePolygon', function () {
 
     function node(id, x, y) {
-        e.push(iD.Node({ id: id, loc: [x, y] }));
+        e.push(iD.osmNode({ id: id, loc: [x, y] }));
     }
 
     function way(id, nodes) {
-        e.push(iD.Way({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) }));
+        e.push(iD.osmWay({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) }));
     }
 
     var e = [];
@@ -41,7 +41,7 @@ describe('iD.actionMergePolygon', function () {
     var graph;
 
     beforeEach(function() {
-        graph = iD.Graph(e);
+        graph = iD.coreGraph(e);
     });
 
     function find(relation, id) {
@@ -84,9 +84,9 @@ describe('iD.actionMergePolygon', function () {
     });
 
     it('merges multipolygon tags', function() {
-        var graph = iD.Graph([
-            iD.Relation({id: 'r1', tags: {type: 'multipolygon', a: 'a'}}),
-            iD.Relation({id: 'r2', tags: {type: 'multipolygon', b: 'b'}})
+        var graph = iD.coreGraph([
+            iD.osmRelation({id: 'r1', tags: {type: 'multipolygon', a: 'a'}}),
+            iD.osmRelation({id: 'r2', tags: {type: 'multipolygon', b: 'b'}})
         ]);
 
         graph = iD.actionMergePolygon(['r1', 'r2'])(graph);
@@ -105,8 +105,8 @@ describe('iD.actionMergePolygon', function () {
     it('merges no tags from unclosed outer ways', function() {
         graph = graph.replace(graph.entity('w3').update({ tags: { 'natural': 'water' }}));
 
-        var r1 = iD.Relation({id: 'r1', tags: {type: 'multipolygon'}});
-        var r2 = iD.Relation({id: 'r2', tags: {type: 'multipolygon'},
+        var r1 = iD.osmRelation({id: 'r1', tags: {type: 'multipolygon'}});
+        var r2 = iD.osmRelation({id: 'r2', tags: {type: 'multipolygon'},
             members: [
                 { type: 'way', role: 'outer', id: 'w3' },
                 { type: 'way', role: 'outer', id: 'w4' }
@@ -149,7 +149,7 @@ describe('iD.actionMergePolygon', function () {
     });
 
     it('extends a multipolygon with multi-way rings', function() {
-        var r = iD.Relation({ id: 'r', tags: { type: 'multipolygon' }, members: [
+        var r = iD.osmRelation({ id: 'r', tags: { type: 'multipolygon' }, members: [
             { type: 'way', role: 'outer', id: 'w0' },
             { type: 'way', role: 'inner', id: 'w3' },
             { type: 'way', role: 'inner', id: 'w4' }

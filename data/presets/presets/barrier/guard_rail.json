@@ -1,5 +1,8 @@
 {
-    "icon": "maki-barrier",
+    "icon": "temaki-guard_rail",
+    "fields": [
+        "material"
+    ],
     "geometry": [
         "line"
     ],

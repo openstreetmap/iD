@@ -5,6 +5,9 @@
         "fuel",
         "access_simple"
     ],
+    "moreFields": [
+        "lit"
+    ],
     "geometry": [
         "point"
     ],

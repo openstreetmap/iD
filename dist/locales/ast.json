@@ -400,7 +400,6 @@
         "inspector": {
             "no_documentation_combination": "Nun hai documentación disponible pa esta combinación d'etiquetes",
             "no_documentation_key": "Nun hai documentación disponible pa esta clave",
-            "documentation_redirect": "Esta documentación redirixóse a una páxina nueva",
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "all_fields": "Tolos campos",
@@ -947,9 +946,6 @@
                         "onsen": "Onsen xaponés"
                     }
                 },
-                "beauty": {
-                    "label": "Tipu de tienda"
-                },
                 "bench": {
                     "label": "Bancu"
                 },
@@ -1194,20 +1190,9 @@
                 "fence_type": {
                     "label": "Tipu"
                 },
-                "fire_hydrant/position": {
-                    "label": "Posición",
-                    "options": {
-                        "green": "Yerba",
-                        "lane": "Carril",
-                        "parking_lot": "Aparcamientu",
-                        "sidewalk": "Cera"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tipu",
                     "options": {
                         "pillar": "Pilar/Enriba del terrén",
-                        "pond": "Estanque",
                         "underground": "Baxo tierra",
                         "wall": "De parede"
                     }
@@ -1915,9 +1900,6 @@
                 "tourism": {
                     "label": "Tipu"
                 },
-                "tourism_attraction": {
-                    "label": "Turismu"
-                },
                 "tower/construction": {
                     "label": "Construcción"
                 },
@@ -2312,10 +2294,6 @@
                 "amenity/parking_space": {
                     "name": "Espaciu d'aparcamientu"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmacia",
-                    "terms": "Botica,Parafarmacia"
-                },
                 "amenity/place_of_worship": {
                     "name": "Llugar de cultu",
                     "terms": "Cultu,Templu"
@@ -2324,20 +2302,8 @@
                     "name": "Templu budista",
                     "terms": "Pagoda"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Ilesia",
-                    "terms": "Cultu cristianu, templu"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Templu hindú"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "Xudería, xudaísmu"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mezquita",
-                    "terms": "Islam, cultu islámicu"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Capiella sintoísta"
@@ -3199,9 +3165,6 @@
                 "landuse/farmyard": {
                     "name": "Quintana"
                 },
-                "landuse/forest": {
-                    "name": "Forestal"
-                },
                 "landuse/grass": {
                     "name": "Yerba"
                 },
@@ -3389,9 +3352,6 @@
                 },
                 "leisure/playground": {
                     "name": "Xuegos infantiles"
-                },
-                "leisure/running_track": {
-                    "name": "Pista de carreres (a pie)"
                 },
                 "leisure/sauna": {
                     "name": "Sauna"
@@ -4451,8 +4411,7 @@
                     "terms": "Ríu, regatu"
                 },
                 "waterway/riverbank": {
-                    "name": "Ribera",
-                    "terms": "ribera, oriella"
+                    "name": "Ribera"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Vaciáu de sentines",
@@ -4732,9 +4691,6 @@
             },
             "OSM-RU-telegram": {
                 "name": "Telegram d'OpenStreetMap RU"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Sri Lanka"
             },
             "OSM-TW-facebook": {
                 "name": "Comunidá d'OpenStreetMap Taiwan"

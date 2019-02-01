@@ -12,12 +12,14 @@ import {
     modeBrowse,
     modeSelect,
     modeSelectData,
-    modeSelectNote
+    modeSelectNote,
+    modeSelectError
 } from '../modes';
 
 import {
     osmEntity,
-    osmNote
+    osmNote,
+    krError
 } from '../osm';
 
 
@@ -130,6 +132,7 @@ export function behaviorSelect(context) {
         if (datum instanceof osmEntity) {    // clicked an entity..
             var selectedIDs = context.selectedIDs();
             context.selectedNoteID(null);
+            context.selectedErrorID(null);
 
             if (!isMultiselect) {
                 if (selectedIDs.length > 1 && (!suppressMenu && !isShowAlways)) {
@@ -167,9 +170,13 @@ export function behaviorSelect(context) {
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
-
+        } else if (datum instanceof krError & !isMultiselect) {     // clicked a krError error
+            context
+                .selectedErrorID(datum.id)
+                .enter(modeSelectError(context, datum.id));
         } else {    // clicked nothing..
             context.selectedNoteID(null);
+            context.selectedErrorID(null);
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));
             }

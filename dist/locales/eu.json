@@ -549,9 +549,6 @@
                         "onsen": "Onsen japoniarra"
                     }
                 },
-                "beauty": {
-                    "label": "Denda Mota"
-                },
                 "bench": {
                     "label": "Banku"
                 },
@@ -866,20 +863,9 @@
                 "fence_type": {
                     "label": "Mota"
                 },
-                "fire_hydrant/position": {
-                    "label": "Kokapen",
-                    "options": {
-                        "green": "Berdea",
-                        "lane": "Lerro",
-                        "parking_lot": "Aparkaleku",
-                        "sidewalk": "Espaloi"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Mota",
                     "options": {
                         "pillar": "Zutabe/ Lur gaineko",
-                        "pond": "Urmael",
                         "underground": "Lur azpian",
                         "wall": "Horma"
                     }
@@ -1624,9 +1610,6 @@
                 "tourism": {
                     "label": "Mota"
                 },
-                "tourism_attraction": {
-                    "label": "Turismo"
-                },
                 "tower/construction": {
                     "label": "Eraikuntza"
                 },
@@ -1953,26 +1936,14 @@
                 "amenity/parking_space": {
                     "name": "Aparkatzeko lekua"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmazia"
-                },
                 "amenity/place_of_worship": {
                     "name": "Gurtza gune"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Tenplu budista"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Eliza"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Tenplu hindua"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mezkita"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Xintoismo Santutegia"
@@ -2321,9 +2292,6 @@
                 "name": "Japoniako OpenStreetMap",
                 "description": "Japoniako Kartografo eta OpenStreetMap erabiltzaileak"
             },
-            "OSM-korea-telegram": {
-                "name": "Koreako OSM-ren Telegram Katea"
-            },
             "OSM-MY-facebook": {
                 "name": "Malaysiako OpenStreetMap-a Facebook-en",
                 "description": "OpenStreetMap-i buruzko edozein gauzari buruz eztabaidatzeko! "
@@ -2344,10 +2312,6 @@
             },
             "OSM-RU-telegram": {
                 "description": "Errusiako OpenStreetMap-aren telegram txat-a"
-            },
-            "OSM-LKA-facebook": {
-                "name": "Sri Lankako OpenStreetMap",
-                "description": "OpenStreetMap hobetu Sri Lankan"
             },
             "al-telegram": {
                 "name": "Albaniako OSM-aren Telegram Katea",

@@ -1,10 +1,5 @@
 {
     "icon": "maki-american-football",
-    "fields": [
-        "name",
-        "surface",
-        "lit"
-    ],
     "geometry": [
         "point",
         "area"

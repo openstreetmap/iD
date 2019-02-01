@@ -8,6 +8,15 @@
         "opening_hours",
         "recycling_accepts"
     ],
+    "moreFields": [
+        "fee",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

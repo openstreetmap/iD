@@ -1,11 +1,5 @@
 {
     "icon": "maki-communications-tower",
-    "fields": [
-        "tower/type",
-        "tower/construction",
-        "height",
-        "communication_multi"
-    ],
     "geometry": [
         "point"
     ],

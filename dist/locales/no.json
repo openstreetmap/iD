@@ -414,7 +414,6 @@
         "inspector": {
             "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
             "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
-            "documentation_redirect": "Denne dokumentasjonen peker nå til en ny side.",
             "show_more": "Vis mer",
             "view_on_osm": "Se på openstreetmap.org",
             "all_fields": "Alle felter",
@@ -649,8 +648,7 @@
             },
             "overview": {
                 "title": "Oversikt",
-                "navigation_h": "Navigasjon",
-                "nodes_ways": "I OpenStreetMap kaller vi av og til punkter for *noder*, og linjer og områder for *veier*."
+                "navigation_h": "Navigasjon"
             },
             "editing": {
                 "save_h": "Lagre",
@@ -1139,9 +1137,6 @@
                         "foot_bath": "Fotbad"
                     }
                 },
-                "beauty": {
-                    "label": "Butikktype"
-                },
                 "bench": {
                     "label": "Benk"
                 },
@@ -1325,10 +1320,8 @@
                     "label": "Avgift"
                 },
                 "fire_hydrant/type": {
-                    "label": "Type",
                     "options": {
                         "pillar": "Over bakken",
-                        "pond": "Vanndam",
                         "underground": "Under overflaten",
                         "wall": "Vegg"
                     }
@@ -1847,23 +1840,11 @@
                 "amenity/parking_space": {
                     "name": "Parkeringsplass"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apotek"
-                },
                 "amenity/place_of_worship": {
                     "name": "Bedested"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Buddhisttempel"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kirke"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagoge"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moské"
                 },
                 "amenity/police": {
                     "name": "Politi"
@@ -2311,9 +2292,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Gårdsplass"
-                },
-                "landuse/forest": {
-                    "name": "Skog"
                 },
                 "landuse/grass": {
                     "name": "Gress"
@@ -3157,9 +3135,6 @@
             },
             "OSM-Nepal-facebook": {
                 "description": "Forbedre OpenStreetMap i Nepal"
-            },
-            "OSM-LKA-facebook": {
-                "description": "Forbedre OpenStreetMap i Sri Lanka"
             },
             "at-twitter": {
                 "name": "OpenStreetMap Østerrike Twitter",

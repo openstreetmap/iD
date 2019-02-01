@@ -7,9 +7,16 @@
         "lanes",
         "surface",
         "structure",
-        "maxheight",
-        "cycleway",
         "access"
+    ],
+    "moreFields": [
+        "covered",
+        "cycleway",
+        "lit",
+        "oneway/bicycle",
+        "maxheight",
+        "maxspeed/advisory",
+        "smoothness"
     ],
     "geometry": [
         "line"

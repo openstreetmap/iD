@@ -4,7 +4,8 @@
         "name",
         "religion",
         "denomination",
-        "inscription"
+        "inscription",
+        "access_simple"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,6 @@
 import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
+import _flattenDeep from 'lodash-es/flatten';
 import { geoExtent, geoLineIntersection } from '../geo';
 import { set as d3_set } from 'd3-collection';
 import { utilDisplayLabel } from '../util';
@@ -9,13 +10,13 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import { osmNode } from '../osm';
 import { actionAddMidpoint } from '../actions';
 import { geoChooseEdge } from '../geo';
 
 
-export function validationHighwayCrossingOtherWays(context) {
+export function validationCrossingWays() {
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the corss point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited) {
@@ -70,11 +71,21 @@ export function validationHighwayCrossingOtherWays(context) {
         return getFeatureTypeForTags(tags);
     }
 
+    // only validate certain waterway features
+    var waterways = new Set(['canal', 'ditch', 'drain', 'river', 'stream']);
+    // ignore certain highway and railway features
+    var ignoredHighways = new Set(['rest_area', 'services']);
+    var ignoredRailways = new Set(['train_wash']);
+
     function getFeatureTypeForTags(tags) {
-        if (hasTag(tags, 'highway')) return 'highway';
         if (hasTag(tags, 'building')) return 'building';
-        if (hasTag(tags, 'railway')) return 'railway';
-        if (hasTag(tags, 'waterway') || tags.natural === 'water') return 'water';
+
+        // don't check non-building areas
+        if (hasTag(tags, 'area')) return null;
+
+        if (hasTag(tags, 'highway') && !ignoredHighways.has(tags.highway)) return 'highway';
+        if (hasTag(tags, 'railway') && !ignoredRailways.has(tags.railway)) return 'railway';
+        if (hasTag(tags, 'waterway') && waterways.has(tags.waterway)) return 'waterway';
 
         return null;
     }
@@ -106,8 +117,8 @@ export function validationHighwayCrossingOtherWays(context) {
             if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
             if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
         }
-        if ((featureType1 === 'highway' && featureType2 === 'water') ||
-            (featureType1 === 'railway' && featureType2 === 'water')) {
+        if ((featureType1 === 'highway' && featureType2 === 'waterway') ||
+            (featureType1 === 'railway' && featureType2 === 'waterway')) {
             // Legit cases:
             // (1) highway/railway is on a bridge
             // (2) only one of the two ways is in a tunnel
@@ -124,7 +135,7 @@ export function validationHighwayCrossingOtherWays(context) {
             // (2) highway/railway has a covered tag
             if (hasTag(tags1, 'bridge') || hasTag(tags1, 'tunnel') || hasTag(tags1, 'covered')) return true;
         }
-        if (featureType1 === 'water' && featureType2 === 'water') {
+        if (featureType1 === 'waterway' && featureType2 === 'waterway') {
             // Legit cases:
             // (1) only one of the water is in a tunnel
             // (2) both are in tunnels but on differnt layers
@@ -132,7 +143,7 @@ export function validationHighwayCrossingOtherWays(context) {
             if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
             if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && tags1.layer !== tags2.layer) return true;
         }
-        if (featureType1 === 'water' && featureType2 === 'building') {
+        if (featureType1 === 'waterway' && featureType2 === 'building') {
             // Legit cases:
             // (1) water is in a tunnel
             // (2) water has a covered tag
@@ -145,9 +156,41 @@ export function validationHighwayCrossingOtherWays(context) {
         return false;
     }
 
+    // highway values for which we shouldn't recommend connecting to waterways
+    var highwaysDisallowingFords = new Set([
+        'motorway', 'motorway_link', 'trunk', 'trunk_link',
+        'primary', 'primary_link', 'secondary', 'secondary_link'
+    ]);
+
+    function canConnectEntities(entity1, entity2) {
+        var featureType1 = getFeatureTypeForTags(entity1.tags);
+        var featureType2 = getFeatureTypeForTags(entity2.tags);
+        if (featureType1 === featureType2) {
+            if (featureType1 === 'highway') return true;
+            if (featureType1 === 'waterway') return true;
+            if (featureType1 === 'railway') return true;
+        } else {
+            var featureTypes = new Set([featureType1, featureType2]);
+            if (featureTypes.has('highway')) {
+                if (featureTypes.has('waterway')) {
+                    // do not allow fords on structures
+                    if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return false;
+                    if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return false;
+                    if (highwaysDisallowingFords.has(entity1.tags.highway) ||
+                        highwaysDisallowingFords.has(entity2.tags.highway)) {
+                        return false;
+                    }
+                    return true;
+                }
+                if (featureTypes.has('building') || featureTypes.has('railway')) return true;
+            }
+        }
+        return false;
+    }
+
     function findCrossingsByWay(entity, graph, tree, edgePairsVisited) {
         var edgeCrossInfos = [];
-        if (entity.geometry(graph) !== 'line' || entity.type !== 'way') return edgeCrossInfos;
+        if (entity.type !== 'way') return edgeCrossInfos;
 
         var entFeatureType = getFeatureTypeForCrossingCheck(entity, graph);
         if (entFeatureType === null) return edgeCrossInfos;
@@ -193,69 +236,123 @@ export function validationHighwayCrossingOtherWays(context) {
         return edgeCrossInfos;
     }
 
-    var validation = function(changes, graph, tree) {
+    var validation = function(entity, context) {
+
+        var graph = context.graph();
+        var tree = context.history().tree();
         // create one issue per crossing point
-        var edited = changes.created.concat(changes.modified),
-            edgePairsVisited = d3_set(),
+        var edgePairsVisited = d3_set(),
             issues = [];
-        for (var i = 0; i < edited.length; i++) {
-            var crosses = findCrossingsByWay(edited[i], graph, tree, edgePairsVisited);
+        var waysToCheck = _flattenDeep(_map([entity], function(entity) {
+            if (!getFeatureTypeForTags(entity.tags)) {
+                return [];
+            }
+            if (entity.type === 'way') {
+                return entity;
+            } else if (entity.type === 'relation' &&
+                entity.tags.type === 'multipolygon' &&
+                // only check multipolygons if they are buildings
+                hasTag(entity.tags, 'building')) {
+                return _map(entity.members, function(member) {
+                    if (context.hasEntity(member.id)) {
+                        var entity = context.entity(member.id);
+                        if (entity.type === 'way') {
+                            return entity;
+                        }
+                    }
+                    return [];
+                });
+            }
+            return [];
+        }));
+        for (var i = 0; i < waysToCheck.length; i++) {
+            var crosses = findCrossingsByWay(waysToCheck[i], graph, tree, edgePairsVisited);
             for (var j = 0; j < crosses.length; j++) {
                 var crossing = crosses[j];
 
                 // use the entities with the tags that define the feature type
-                var entities = _map(crossing.ways, function(way) {
+                var entities = crossing.ways.sort(function(entity1, entity2) {
+                    var type1 = getFeatureTypeForCrossingCheck(entity1, graph);
+                    var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
+                    if (type1 === type2) {
+                        return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
+                    } else if (type1 === 'waterway') {
+                        return true;
+                    } else if (type2 === 'waterway') {
+                        return false;
+                    }
+                    return type1 < type2;
+                });
+                entities = _map(entities, function(way) {
                     return getFeatureWithFeatureTypeTagsForWay(way, graph);
                 });
 
-                var crossingTypeID = crossing.featureTypes.sort().join('-') + '_crossing';
+                var canConnect = canConnectEntities(entities[0], entities[1]);
 
-                var messageDict = {};
-                messageDict[crossing.featureTypes[0]] = utilDisplayLabel(entities[0], context);
-                var key2 = crossing.featureTypes[1];
-                if (crossing.featureTypes[0] === crossing.featureTypes[1]) {
-                    key2 += '2';
+                var crossingTypeID;
+                if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
+                    crossingTypeID = 'tunnel-tunnel';
+                    if (canConnect) {
+                        crossingTypeID += '_connectable';
+                    }
                 }
-                messageDict[key2] = utilDisplayLabel(entities[1], context);
+                else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
+                    crossingTypeID = 'bridge-bridge';
+                    if (canConnect) {
+                        crossingTypeID += '_connectable';
+                    }
+                }
+                else {
+                    crossingTypeID = crossing.featureTypes.sort().join('-');
+                }
+
+                var messageDict = {
+                    feature: utilDisplayLabel(entities[0], context),
+                    feature2: utilDisplayLabel(entities[1], context)
+                };
+
+                var fixes = [];
+                if (canConnect) {
+                    fixes.push(new validationIssueFix({
+                        title: t('issues.fix.add_connection_vertex.title'),
+                        onClick: function() {
+                            var loc = this.issue.coordinates;
+                            var ways = this.issue.info.ways;
+
+                            context.perform(
+                                function actionConnectCrossingWays(graph) {
+                                    var projection = context.projection;
+
+                                    var node = osmNode({ loc: loc });
+                                    graph = graph.replace(node);
+
+                                    var way0 = graph.entity(ways[0].id);
+                                    var choice0 = geoChooseEdge(graph.childNodes(way0), projection(loc), projection);
+                                    var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
+                                    graph = actionAddMidpoint({loc: loc, edge: edge0}, node)(graph);
+
+                                    var way1 = graph.entity(ways[1].id);
+                                    var choice1 = geoChooseEdge(graph.childNodes(way1), projection(loc), projection);
+                                    var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
+                                    graph = actionAddMidpoint({loc: loc, edge: edge1}, node)(graph);
+
+                                    return graph;
+                                },
+                                t('issues.fix.add_connection_vertex.undo_redo')
+                            );
+                        }
+                    }));
+                }
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('issues.'+crossingTypeID+'.message', messageDict),
-                    tooltip: t('issues.'+crossingTypeID+'.tooltip'),
+                    message: t('issues.crossing_ways.message', messageDict),
+                    tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
                     entities: entities,
                     info: {'ways': crossing.ways},
                     coordinates: crossing.cross_point,
-                    fixes: [
-                        new validationIssueFix({
-                            title: t('issues.fix.add_connection_vertex.title'),
-                            action: function() {
-                                var loc = this.issue.coordinates;
-                                var ways = this.issue.info.ways;
-
-                                context.perform(
-                                    function actionConnectCrossingWays(graph) {
-
-                                        var node = osmNode();
-                                        graph = graph.replace(node);
-
-                                        var way0 = ways[0];
-                                        var choice0 = geoChooseEdge(context.childNodes(way0), loc, context.projection);
-                                        var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
-                                        graph = actionAddMidpoint({loc: choice0.loc, edge: edge0}, node)(graph);
-
-                                        var way1 = ways[1];
-                                        var choice1 = geoChooseEdge(context.childNodes(way1), loc, context.projection);
-                                        var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
-                                        graph = actionAddMidpoint({loc: choice1.loc, edge: edge1}, node)(graph);
-
-                                        return graph;
-                                    },
-                                    t('issues.fix.add_connection_vertex.undo_redo')
-                                );
-                            }
-                        })
-                    ]
+                    fixes: fixes
                 }));
             }
         }
@@ -263,6 +360,7 @@ export function validationHighwayCrossingOtherWays(context) {
         return issues;
     };
 
+    validation.type = ValidationIssueType.crossing_ways;
 
     return validation;
 }

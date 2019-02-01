@@ -27,8 +27,12 @@ in the hash portion of the URL:
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
+* __`maprules`__ - connect to a [MapRules](https://github.com/radiant-maxar/maprules) service for enhanced tag validation.<br/>
+  _Example:_ `maprules=https://path/to/file.json`
 * __`offset`__ - imagery offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
+* __`presets`__ - load an external presets file.<br/>
+  _Example:_ `presets=https://path/to/presets.json`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
@@ -38,6 +42,8 @@ in the hash portion of the URL:
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
+* __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Must be one of the [supported locales](https://github.com/openstreetmap/iD/tree/master/dist/locales). The default locale is set by the browser.<br/>
+  _Example:_ `locale=de`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`walkthrough=true`__ - Start the walkthrough automatically
 
@@ -53,7 +59,9 @@ are available as regular URL query parameters:
 * __`background`__ - same as standalone
 * __`disable_features`__ - same as standalone
 * __`gpx`__ - same as standalone
+* __`maprules`__ - same as standalone
 * __`offset`__ - same as standalone
+* __`presets`__ - same as standalone
 * __`comment`__ - same as standalone
 * __`source`__ - same as standalone
 * __`hashtags`__ - same as standalone
@@ -102,7 +110,7 @@ A **line** is a way that is not an area. Elements representing lines have a `.li
 class. Since a line is also a way, they also have a `.way` class.
 
 An **area** is a way that is circular, has certain tags, or lacks certain other
-tags (see `iD.Way#isArea` for the exact definition). Elements representing areas
+tags (see `iD.osmWay#isArea` for the exact definition). Elements representing areas
 have `.area` and `.way` classes.
 
 
@@ -294,7 +302,7 @@ The minimum zoom at which iD enters the edit mode is configured using the `conte
 
 ```js
 
-var id = iD.Context()
+var id = iD.coreContext()
   .minEditableZoom(zoom_level)
 
 ```

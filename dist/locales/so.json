@@ -411,12 +411,6 @@
                 "fence_type": {
                     "label": "Nooca"
                 },
-                "fire_hydrant/type": {
-                    "label": "Nooca",
-                    "options": {
-                        "pond": "Balli"
-                    }
-                },
                 "ford": {
                     "label": "Nooca"
                 },
@@ -701,9 +695,6 @@
                 "amenity/place_of_worship": {
                     "name": "Goobta Cibaadada"
                 },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Masaajid"
-                },
                 "amenity/restaurant": {
                     "name": "Maqaayad"
                 },
@@ -796,9 +787,6 @@
                 },
                 "landuse/farmland": {
                     "name": "Dhul beereed"
-                },
-                "landuse/forest": {
-                    "name": "Duur"
                 },
                 "landuse/grass": {
                     "name": "Aag cagaaran"

@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "historic/civilization",
-        "inscription"
+        "inscription",
+        "access_simple"
     ],
     "geometry": [
         "point",

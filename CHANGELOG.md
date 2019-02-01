@@ -28,6 +28,216 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.13.1
+##### 2019-Jan-28
+
+#### :sparkles: Usability
+
+* Activate combobox if user is switching from a different active combobox ([#5752])
+* Prevent Chrome and Firefox autofill suggestions from appearing in fields like Address or Email  ([#5818])
+* Restore the pointing hand cursor when hovering over combobox carets ([#5769])
+
+[#5818]: https://github.com/openstreetmap/iD/issues/5818
+[#5769]: https://github.com/openstreetmap/iD/issues/5769
+[#5752]: https://github.com/openstreetmap/iD/issues/5752
+
+#### :bug: Bugfixes
+
+* Fix a few situations where user can leave a combobox but bad data remains ([#5825])
+* Don't erase the Name field when tabbing from it ([#5760])
+* Fix issue where the preset browser would appear after continuing an existing line ([#5770])
+* Fix issue where optional Cycleway fields would not appear by default when the left and right lane values were equivalent ([#5756])
+* Fix issue where optional `multiCombo` fields like Diet Types or Currency Types would not appear by default even if values existed ([#5764])
+
+[#5825]: https://github.com/openstreetmap/iD/issues/5825
+[#5756]: https://github.com/openstreetmap/iD/issues/5756
+[#5760]: https://github.com/openstreetmap/iD/issues/5760
+[#5764]: https://github.com/openstreetmap/iD/issues/5764
+[#5770]: https://github.com/openstreetmap/iD/issues/5770
+
+#### :mortar_board: Walkthrough / Help
+
+* Show the left mouse icon where mentioned in the Background Imagery help
+
+#### :rocket: Presets
+
+* Restore the Basin preset ([#5758])
+* Add Architect and Roof Color fields to Building presets
+* Add Hours field to ATM ([#5750])
+* Make the Hours field appear by default for Shop presets ([#5755])
+* Add Hours field to Toilet
+* Add Currency Type field to Shop
+* Prevent the Name field from appearing by default on generic vertex features ([#5812])
+* Make the Covered field appear by default for Drive-Through
+* Add Covered field to various railway and amenity presets
+* Add Building field to Carousel and Dark Ride area presets
+* Add Name and Intermittent fields to Water
+* Add Inscription field to Bench
+* Add "water fountain" and its synonyms as search terms for Drinking Water
+* Add "riverbank" as a search term for the River area preset
+* Add additional search terms to Managed Forest
+
+[#5750]: https://github.com/openstreetmap/iD/issues/5750
+[#5755]: https://github.com/openstreetmap/iD/issues/5755
+[#5758]: https://github.com/openstreetmap/iD/issues/5758
+[#5812]: https://github.com/openstreetmap/iD/issues/5812
+
+# 2.13.0
+##### 2019-Jan-23
+
+#### :mega: Release Highlights
+
+* :zap: You can now browse and fix [KeepRight](https://wiki.openstreetmap.org/wiki/Keep_Right) data quality issues directly within iD. Many thanks to Thomas Hervey ([@thomas-hervey]) for his work on this!<br/>
+_Open the Map Data pane (shortcut <kbd>F</kbd>) and select "KeepRight Issues" to view and fix map issues._
+* :triangular_ruler: We've added support for [MapRules](https://github.com/radiant-maxar/maprules), an API service and web interface for creating and sharing reusable presets and validation rules.<br/>
+_Check out the [maprules repo](https://github.com/radiant-maxar/maprules) for more info or watch Clarisse and Max's talk at SOTM-US [here](https://2018.stateofthemap.us/program/grossman-maprules.html)_
+* :mag: You can now quickly center and zoom the map on any feature, note, or data issue!<br/>
+_Click the new "zoom to" link on the sidebar under the preset icon, or press <kbd>Z</kbd> keyboard shortcut to focus on the selected feature._
+
+[@thomas-hervey]: https://github.com/thomas-hervey
+
+#### :tada: New Features
+
+* Integrate with Keep Right QA tools ([#3452], [#5201], thanks [@thomas-hervey])
+* Show the location when geolocating the user ([#5587], [#5629], thanks [@maxgrossman])
+* Add MapRules service and parameters to use it ([#5617], thanks [@maxgrossman])
+* Add button to zoom to the selected feature ([#5169])
+* Display some preset fields conditionally based on tags ([#5581], [#5583])
+* Add validation check for generic feature names ([#5590])
+* Support `{wkid}`, `{w}`, `{s}`, `{n}`, and `{e}` tokens in WMS-style background imagery templates ([#5738], thanks [@1ec5])
+
+[#3452]: https://github.com/openstreetmap/iD/issues/3452
+[#5201]: https://github.com/openstreetmap/iD/issues/5201
+[#5590]: https://github.com/openstreetmap/iD/issues/5590
+[#5169]: https://github.com/openstreetmap/iD/issues/5169
+[#5738]: https://github.com/openstreetmap/iD/issues/5738
+[#5617]: https://github.com/openstreetmap/iD/issues/5617
+[#5581]: https://github.com/openstreetmap/iD/issues/5581
+[#5583]: https://github.com/openstreetmap/iD/issues/5583
+[#5587]: https://github.com/openstreetmap/iD/issues/5587
+[#5629]: https://github.com/openstreetmap/iD/issues/5629
+[@maxgrossman]: https://github.com/maxgrossman
+[@1ec5]: https://github.com/1ec5
+[@thomas-hervey]: https://github.com/thomas-hervey
+
+#### :sparkles: Usability
+
+* Open the combobox when clicking anywhere in the text field ([#5596], [#5636], thanks [@maxgrossman])
+* Add close buttom to the save sidebar ([#5614], [#5622], thanks [@maxgrossman])
+* Render reservoirs and fountains with the water fill pattern ([#5606], thanks [@RudyTheDev])
+* Render marine barriers with a blue stroke ([#5606], thanks [@RudyTheDev])
+* Press enter to submit values in combo fields without deselecting the feature ([#5725])
+* Hide combobox caret when there are no suggestions ([#5730])
+* Show the editor instead of the preset browser when selecting untagged features ([#5632])
+* Match the widths of the add tag and relation buttons to other controls ([#5729])
+* Animate simultaneous zooming and positioning of the map in various cases ([#3967])
+* Enforce stricter rules for line vs. area styles ([#5602])
+* Don't style the active drawing vertex as a large endpoint when styling lines ([#5711])
+* Render baseball fields, softball fields, and non-motorsport tracks in yellow
+* Style multipolygons as areas instead of lines
+* Style the icons of building-like presets like buildings
+
+[#5730]: https://github.com/openstreetmap/iD/issues/5730
+[#5729]: https://github.com/openstreetmap/iD/issues/5729
+[#5725]: https://github.com/openstreetmap/iD/issues/5725
+[#5711]: https://github.com/openstreetmap/iD/issues/5711
+[#5602]: https://github.com/openstreetmap/iD/issues/5602
+[#5596]: https://github.com/openstreetmap/iD/issues/5596
+[#5636]: https://github.com/openstreetmap/iD/issues/5636
+[#5622]: https://github.com/openstreetmap/iD/issues/5622
+[#5614]: https://github.com/openstreetmap/iD/issues/5614
+[#5606]: https://github.com/openstreetmap/iD/issues/5606
+[#5632]: https://github.com/openstreetmap/iD/issues/5632
+[#3967]: https://github.com/openstreetmap/iD/issues/3967
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@maxgrossman]: https://github.com/maxgrossman
+
+#### :bug: Bugfixes
+
+* Remove highlight from relation member after it is deleted from relation ([#5612], [#5638], thanks [@maxgrossman])
+* Fix an error where nodes could not be found after a data restore and the save interface would not appear ([#4108])
+* Fix crash in the relation member editor when tabbing away from the role ([#5731])
+* Fix an issue where sections of the Map Data and Background panes might not display ([#5743])
+* Fix a visual glitch where the buttons in the top bar could wrap in an undesirable way ([#5746])
+
+[#5746]: https://github.com/openstreetmap/iD/issues/5746
+[#5743]: https://github.com/openstreetmap/iD/issues/5743
+[#5731]: https://github.com/openstreetmap/iD/issues/5731
+[#5612]: https://github.com/openstreetmap/iD/issues/5612
+[#5638]: https://github.com/openstreetmap/iD/issues/5638
+[#4108]: https://github.com/openstreetmap/iD/issues/4108
+[@maxgrossman]: https://github.com/maxgrossman
+
+#### :earth_asia: Localization
+
+* Fetch multilingual tag descriptions and images from the OSM Wikibase ([#5647], thanks [@nyurik])
+* Set the localization via a URL parameter ([#5644], [#5650], thanks [@tordans])
+* Fix misaligned labels in the right-to-left layout ([#5687], [#5692], [#5699], [#5705], thanks [@iriman])
+* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keboards ([#5663])
+* Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
+* Display translated names and descriptions of more background sources ([#5737])
+
+[#5737]: https://github.com/openstreetmap/iD/issues/5737
+[#5663]: https://github.com/openstreetmap/iD/issues/5663
+[#5647]: https://github.com/openstreetmap/iD/issues/5647
+[#5644]: https://github.com/openstreetmap/iD/issues/5644
+[#5650]: https://github.com/openstreetmap/iD/issues/5650
+[#5687]: https://github.com/openstreetmap/iD/issues/5687
+[#5692]: https://github.com/openstreetmap/iD/issues/5692
+[#5699]: https://github.com/openstreetmap/iD/issues/5699
+[#5705]: https://github.com/openstreetmap/iD/issues/5705
+[@nyurik]: https://github.com/nyurik
+[@tordans]: https://github.com/tordans
+[@iriman]: https://github.com/iriman
+
+#### :hourglass: Performance
+
+* Don't update closed sections of the Map Data and Background panes
+
+#### :rocket: Presets
+
+* Add Frozen Food preset for `shop=frozen_food`
+* Add Fuel, Fireplace, Fishing, Hunting, and Drinking Water Shop presets ([#5651], [#5653], thanks [@hikemaniac])
+* Add Racetrack (Horse Racing) preset ([#5620])
+* Add Enforcement relation preset ([#5610])
+* Add Netball Court and Australian Football Field presets ([#5604], [#5605])
+* Add RV Dealership preset for `shop=caravan`
+* Change tags of Reservoir, replace Riverbank with River area preset, and add Canal and Stream area presets ([#5591])
+* Add Destinations, Destination Road Numbers, Junction Number, and Destination Symbols fields to Link highways ([#4178])
+* Add Diet Types field to Restaurant, Cafe, Fast Food, and Supermarket ([#5580])
+* Add Minimum Speed Limit field to Motorway and Trunk Road
+* Add Dogs field to Foot Path, Park, and more to specify if dogs are allowed
+* Add One Way (Bicycle) field to roads to specify if bikes are exempt from one way restrictions
+* Add Incline and Smoothness fields to Foot Path, Cycle Path, and more
+* Embed name of religion in all Place of Worship labels ([#5611])
+* Rename Forest to Managed Forest ([#5709])
+* Update icons for Chair Lift, Plumber, Car Wash, Real Estate Agent, and more ([via `scottdejonge/map-icons`], thanks [@scottdejonge])
+* Add "real estate" as a search term for Estate Agent ([#5724], thanks [@CloCkWeRX])
+* Let presets inherit fields from other presets ([#5710], [#5712])
+* Reduce the use of universal fields ([#5719])
+* Add more fields to the `Add field:` dropdown of various presets
+
+[via `scottdejonge/map-icons`]: https://github.com/bhousel/temaki/issues/2
+[#5709]: https://github.com/openstreetmap/iD/issues/5709
+[#5620]: https://github.com/openstreetmap/iD/issues/5620
+[#5611]: https://github.com/openstreetmap/iD/issues/5611
+[#5610]: https://github.com/openstreetmap/iD/issues/5610
+[#5591]: https://github.com/openstreetmap/iD/issues/5591
+[#5580]: https://github.com/openstreetmap/iD/issues/5580
+[#5651]: https://github.com/openstreetmap/iD/issues/5651
+[#5653]: https://github.com/openstreetmap/iD/issues/5653
+[#5710]: https://github.com/openstreetmap/iD/issues/5710
+[#5712]: https://github.com/openstreetmap/iD/issues/5712
+[#5719]: https://github.com/openstreetmap/iD/issues/5719
+[#5724]: https://github.com/openstreetmap/iD/issues/5724
+[#4178]: https://github.com/openstreetmap/iD/issues/4178
+[#5604]: https://github.com/openstreetmap/iD/issues/5604
+[#5605]: https://github.com/openstreetmap/iD/issues/5605
+[@scottdejonge]: https://github.com/scottdejonge
+[@hikemaniac]: https://github.com/hikemaniac
+[@CloCkWeRX]: https://github.com/CloCkWeRX
+
+
 # 2.12.2
 ##### 2018-Dec-13
 
@@ -481,7 +691,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 
 #### :mega: Release Highlights
 * :1234: We've rolled out support for vector tiles in iD! This work was done as part of [Princi Vershwal's 2018 Google Summer of Code project](https://medium.com/@vershwal/vector-tile-support-for-openstreetmaps-id-editor-40b1cb77f63b). Thanks [@vershwal]!<br/>
-_Opening the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to add a vector tile source._
+_Open the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to add a vector tile source._
 * :trophy: To get ready for [State of the Map US](https://2018.stateofthemap.us/), let's make Detroit, USA the [best mapped city in the world](https://www.openstreetmap.us/2018/07/detroit-mapping-challenge-sotmus2018/)!  iD includes 3 vector tile layers of public data, built by [@jonahadkins], to support the Detroit Mapping Challenge.  More info is available on the [osmus/detroid-mapping-challenge repository](https://github.com/osmus/detroit-mapping-challenge).<br/>
 _When mapping around Detroit, try out the special Detroit vector tile layers on the Map Data pane (shortcut <kbd>F</kbd>)_
 

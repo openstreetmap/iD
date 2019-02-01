@@ -1,11 +1,5 @@
 {
     "icon": "maki-school",
-    "fields": [
-        "name",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
     "geometry": [
         "point",
         "area"

@@ -69,6 +69,14 @@ export function uiField(context, presetField, entity, options) {
 
     function isPresent() {
         return _some(field.keys, function(key) {
+            if (field.type === 'multiCombo') {
+                for (var tagKey in _tags) {
+                    if (tagKey.indexOf(key) === 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
             return _tags[key] !== undefined;
         });
     }
@@ -231,37 +239,37 @@ export function uiField(context, presetField, entity, options) {
         }
     };
 
+
     // A shown field has a visible UI, a non-shown field is in the 'Add field' dropdown
     field.isShown = function() {
         return _show || isPresent();
     };
 
+
     // An allowed field can appear in the UI or in the 'Add field' dropdown.
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
+        if (!entity || isPresent()) return true;   // a field with a value should always display
 
-        if (isPresent()) {
-            // always allow a field with a value to display
-            return true;
-        }
+        var latest = context.hasEntity(entity.id);   // check the most current copy of the entity
+        if (!latest) return true;
 
-        var prerequisiteTag = field.prerequisiteTag;
-        if (prerequisiteTag && prerequisiteTag.key && field.entityID && context.hasEntity(field.entityID)) {
-            var value = context.entity(field.entityID).tags[prerequisiteTag.key];
-            if (value) {
-                if (prerequisiteTag.valueNot) {
-                    return prerequisiteTag.valueNot !== value;
-                }
-                if (prerequisiteTag.value) {
-                    return prerequisiteTag.value === value;
-                }
-                return true;
-            } else {
-                return false;
+        var require = field.prerequisiteTag;
+        if (require && require.key) {
+            var value = latest.tags[require.key];
+            if (!value) return false;
+
+            if (require.valueNot) {
+                return require.valueNot !== value;
             }
+            if (require.value) {
+                return require.value === value;
+            }
+            return true;
         }
         return true;
     };
+
 
     field.focus = function() {
         if (field.impl) {

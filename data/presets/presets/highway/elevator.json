@@ -4,7 +4,11 @@
         "access_simple",
         "opening_hours",
         "maxweight",
-        "ref"
+        "ref",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "maxheight"
     ],
     "geometry": [
         "vertex"

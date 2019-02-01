@@ -1,11 +1,11 @@
 describe('iD.osmEntity', function () {
     it('returns a subclass of the appropriate type', function () {
-        expect(iD.Entity({type: 'node'})).be.an.instanceOf(iD.Node);
-        expect(iD.Entity({type: 'way'})).be.an.instanceOf(iD.Way);
-        expect(iD.Entity({type: 'relation'})).be.an.instanceOf(iD.Relation);
-        expect(iD.Entity({id: 'n1'})).be.an.instanceOf(iD.Node);
-        expect(iD.Entity({id: 'w1'})).be.an.instanceOf(iD.Way);
-        expect(iD.Entity({id: 'r1'})).be.an.instanceOf(iD.Relation);
+        expect(iD.Entity({type: 'node'})).be.an.instanceOf(iD.osmNode);
+        expect(iD.Entity({type: 'way'})).be.an.instanceOf(iD.osmWay);
+        expect(iD.Entity({type: 'relation'})).be.an.instanceOf(iD.osmRelation);
+        expect(iD.Entity({id: 'n1'})).be.an.instanceOf(iD.osmNode);
+        expect(iD.Entity({id: 'w1'})).be.an.instanceOf(iD.osmWay);
+        expect(iD.Entity({id: 'r1'})).be.an.instanceOf(iD.osmRelation);
     });
 
     if (iD.debug) {
@@ -175,48 +175,48 @@ describe('iD.osmEntity', function () {
 
     describe('#intersects', function () {
         it('returns true for a way with a node within the given extent', function () {
-            var node  = iD.Node({loc: [0, 0]}),
-                way   = iD.Way({nodes: [node.id]}),
-                graph = iD.Graph([node, way]);
+            var node  = iD.osmNode({loc: [0, 0]}),
+                way   = iD.osmWay({nodes: [node.id]}),
+                graph = iD.coreGraph([node, way]);
             expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(true);
         });
 
         it('returns false for way with no nodes within the given extent', function () {
-            var node  = iD.Node({loc: [6, 6]}),
-                way   = iD.Way({nodes: [node.id]}),
-                graph = iD.Graph([node, way]);
+            var node  = iD.osmNode({loc: [6, 6]}),
+                way   = iD.osmWay({nodes: [node.id]}),
+                graph = iD.coreGraph([node, way]);
             expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(false);
         });
     });
 
     describe('#hasNonGeometryTags', function () {
         it('returns false for an entity without tags', function () {
-            var node = iD.Node();
+            var node = iD.osmNode();
             expect(node.hasNonGeometryTags()).to.equal(false);
         });
 
         it('returns true for an entity with tags', function () {
-            var node = iD.Node({tags: {foo: 'bar'}});
+            var node = iD.osmNode({tags: {foo: 'bar'}});
             expect(node.hasNonGeometryTags()).to.equal(true);
         });
 
         it('returns false for an entity with only an area=yes tag', function () {
-            var node = iD.Node({tags: {area: 'yes'}});
+            var node = iD.osmNode({tags: {area: 'yes'}});
             expect(node.hasNonGeometryTags()).to.equal(false);
         });
     });
 
     describe('#hasParentRelations', function () {
         it('returns true for an entity that is a relation member', function () {
-            var node = iD.Node(),
-                relation = iD.Relation({members: [{id: node.id}]}),
-                graph = iD.Graph([node, relation]);
+            var node = iD.osmNode(),
+                relation = iD.osmRelation({members: [{id: node.id}]}),
+                graph = iD.coreGraph([node, relation]);
             expect(node.hasParentRelations(graph)).to.equal(true);
         });
 
         it('returns false for an entity that is not a relation member', function () {
-            var node = iD.Node(),
-                graph = iD.Graph([node]);
+            var node = iD.osmNode(),
+                graph = iD.coreGraph([node]);
             expect(node.hasParentRelations(graph)).to.equal(false);
         });
     });

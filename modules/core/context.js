@@ -13,7 +13,7 @@ import { select as d3_select } from 'd3-selection';
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
-import { IssueManager } from '../validations/issue_manager';
+import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -33,7 +33,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.12.2';
+    context.version = '2.13.1';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -94,10 +94,10 @@ export function coreContext() {
 
 
     /* Straight accessors. Avoid using these if you can. */
-    var connection, history, issueManager;
+    var connection, history, validator;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
-    context.issueManager = function() { return issueManager; };
+    context.validator = function() { return validator; };
 
     /* Connection */
     context.preauth = function(options) {
@@ -144,7 +144,9 @@ export function coreContext() {
             this.loadEntity(entityID, function(err, result) {
                 if (err) return;
                 var entity = _find(result.data, function(e) { return e.id === entityID; });
-                if (entity) { map.zoomTo(entity); }
+                if (entity) {
+                    map.zoomTo(entity);
+                }
             });
         }
 
@@ -259,6 +261,13 @@ export function coreContext() {
     context.selectedNoteID = function(noteID) {
         if (!arguments.length) return _selectedNoteID;
         _selectedNoteID = noteID;
+        return context;
+    };
+
+    var _selectedErrorID;
+    context.selectedErrorID = function(errorID) {
+        if (!arguments.length) return _selectedErrorID;
+        _selectedErrorID = errorID;
         return context;
     };
 
@@ -445,12 +454,22 @@ export function coreContext() {
     context.changes = history.changes;
     context.intersects = history.intersects;
 
-    issueManager = IssueManager(context);
+    validator = coreValidator(context);
 
-    var debouncedValidate = _debounce(issueManager.validate, 1000);
-    history.on('change', function(difference) {
+    // run validation upon restoring from page reload
+    history.on('restore', function() {
+        validator.validate();
+    });
+    // re-run validation upon a significant graph change
+    history.on('annotatedChange', function(difference) {
         if (difference) {
-            debouncedValidate();
+            validator.validate();
+        }
+    });
+    // re-run validation upon merging fetched data
+    history.on('merge', function(entities) {
+        if (entities && entities.length > 0) {
+            validator.validate();
         }
     });
 
@@ -487,20 +506,20 @@ export function coreContext() {
         }
 
         if (utilStringQs(window.location.hash).validations) {
-            customRuleUrl = utilStringQs(window.location.hash).validations;
+            customRuleUrl = utilStringQs(window.location.hash).maprules;
             customRuleName = 'Custom Validation Rule';
             context.validationRules = true;
         }
 
         if (context.validationRules){
-            services.maprules.init(context.presets().areaKeys());
-            context.issueManager().setCustomName(customRuleName);
-            context.issueManager().setCustomUrl(customRuleUrl);
+            context.validator().setCustomName(customRuleName);
+            context.validator().setCustomUrl(customRuleUrl);
 
             d3_json(customRuleUrl, function (err, mapcss) {
                 if (err) return;
+                services.maprules.init();
                 _each(mapcss, function(mapcssSelector) {
-                    return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
+                    return services.maprules.addRule(mapcssSelector, context.validator().getCustomName());
                 });
             });
         }

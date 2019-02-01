@@ -2,7 +2,7 @@ import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior';
 
 
-export function modeDrawLine(context, wayID, startGraph, affix) {
+export function modeDrawLine(context, wayID, startGraph, affix, continuing) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -10,13 +10,14 @@ export function modeDrawLine(context, wayID, startGraph, affix) {
 
     var behavior;
 
+    mode.isContinuing = continuing;
 
     mode.enter = function() {
         var way = context.entity(wayID);
         var index = (affix === 'prefix') ? 0 : undefined;
         var headID = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph)
+        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph, continuing)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;

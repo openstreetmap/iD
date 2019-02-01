@@ -1,7 +1,6 @@
 {
     "icon": "iD-restriction",
     "fields": [
-        "name",
         "restriction",
         "except"
     ],

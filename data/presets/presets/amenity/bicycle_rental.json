@@ -4,7 +4,18 @@
         "capacity",
         "network",
         "operator",
+        "fee",
         "payment_multi"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair",
+        "covered"
     ],
     "geometry": [
         "point",

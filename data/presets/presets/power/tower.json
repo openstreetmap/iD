@@ -1,7 +1,8 @@
 {
     "fields": [
         "design",
-        "ref"
+        "ref",
+        "material"
     ],
     "geometry": [
         "point",

@@ -58,7 +58,40 @@ The complete JSON schema for presets can be found in [`data/presets/schema/prese
 
 #### Preset Properties
 
-##### searchable
+##### `fields`/`moreFields`
+
+Both these properties are arrays of field paths (e.g. `description` or `generator/type`).
+`fields` are shown by default and `moreFields` are shown if manually added by the
+user or if a matching tag is present. Note that some fields have a `prerequisiteTag`
+property that limits when they will be shown.
+
+A preset can reference the fields of another by using that preset's name contained in
+brackets, like `{preset}`. For example, `shop/books` references and extends the fields
+of `shop`:
+
+```javascript
+"fields": [
+    "{shop}",
+    "internet_access"
+],
+"moreFields": [
+    "{shop}",
+    "internet_access/fee",
+    "internet_access/ssid"
+],
+"tags": {
+    "shop": "books"
+}
+```
+
+If `fields` or `moreFields` are not defined, the values of the preset's "parent"
+preset are used. For example, `shop/convenience` automatically uses the same
+fields as `shop`.
+
+In both explicit and implicit inheritance, fields for keys that define the
+preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
+
+##### `searchable`
 
 Deprecated or generic presets can include the property `"searchable": false`.
 This means that they will be recognized by iD when editing existing data,
@@ -287,7 +320,7 @@ iD supports deployments which use a custom set of presets. You can supply preset
 the `presets` accessor:
 
 ```js
-var id = iD.Context().presets({
+var id = iD.coreContext().presets({
     presets: { ... },
     fields: { ... },
     defaults: { ... },

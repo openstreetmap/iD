@@ -4,7 +4,11 @@
         "name",
         "operator",
         "capacity",
-        "website"
+        "website",
+        "lit"
+    ],
+    "moreFields": [
+        "wheelchair"
     ],
     "geometry": [
         "point",

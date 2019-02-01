@@ -422,7 +422,6 @@
         "inspector": {
             "no_documentation_combination": "Za to kombinacijo oznak v dokumentaciji ni opisa",
             "no_documentation_key": "Za ta ključ v dokumentaciji ni opisa",
-            "documentation_redirect": "Dostop do dokumentacije je preusmerjen na novo stran",
             "show_more": "Pokaži več",
             "view_on_osm": "Odpri na openstreetmap.org",
             "all_fields": "Vsa polja",
@@ -1324,9 +1323,6 @@
                         "onsen": "Japonski onsen"
                     }
                 },
-                "beauty": {
-                    "label": "Vrsta trgovine"
-                },
                 "bench": {
                     "label": "Klop"
                 },
@@ -1605,20 +1601,9 @@
                 "fence_type": {
                     "label": "Vrsta"
                 },
-                "fire_hydrant/position": {
-                    "label": "Položaj",
-                    "options": {
-                        "green": "Na zelenici",
-                        "lane": "Vozni pas",
-                        "parking_lot": "Parkirno mesto",
-                        "sidewalk": "Pločnik"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Vrsta",
                     "options": {
                         "pillar": "Nadzemni",
-                        "pond": "Črpališče iz ribnika",
                         "underground": "Podzemni",
                         "wall": "Zidni"
                     }
@@ -2248,9 +2233,6 @@
                 "tourism": {
                     "label": "Vrsta turizma"
                 },
-                "tourism_attraction": {
-                    "label": "Turizem"
-                },
                 "tower/construction": {
                     "label": "Gradbišče",
                     "placeholder": "Vpeto, mrežno, skrito"
@@ -2681,10 +2663,6 @@
                     "name": "Parkirni prostor",
                     "terms": "parking,parkirišče,parkirni prostor, parkirno mesto"
                 },
-                "amenity/pharmacy": {
-                    "name": "Lekarna",
-                    "terms": "farmacija,zdravila,apoteka"
-                },
                 "amenity/place_of_worship": {
                     "name": "Verski hram",
                     "terms": "verski objekt,kraj čaščenja,sakralni objekt"
@@ -2693,20 +2671,8 @@
                     "name": "Budistični tempelj",
                     "terms": "Budistični center"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Cerkev",
-                    "terms": "stolnica,katedrala,bogoslužje"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindujski tempel"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "židovski verski objekt,  judovski verski objekt, judovska sinagoga, judaizem"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mošeja",
-                    "terms": "džamija,đamija,islamski verski center,muslimanski verski center"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarij",
@@ -3628,8 +3594,7 @@
                     "terms": "ribogojništvo, vodne rastline, vodne živali, školjke"
                 },
                 "landuse/basin": {
-                    "name": "Kotanja",
-                    "terms": "usedalnik"
+                    "name": "Kotanja"
                 },
                 "landuse/cemetery": {
                     "name": "Pokopališče",
@@ -3657,10 +3622,6 @@
                 "landuse/farmyard": {
                     "name": "Kmetija",
                     "terms": "dvorišče,farma,kmet,domačija"
-                },
-                "landuse/forest": {
-                    "name": "Gozd",
-                    "terms": "gozdne površine,gozdič,gozdiček"
                 },
                 "landuse/grass": {
                     "name": "Travnata površina",
@@ -3887,10 +3848,6 @@
                 },
                 "leisure/resort": {
                     "name": "Letovišče"
-                },
-                "leisure/running_track": {
-                    "name": "Tekaška steza (tek)",
-                    "terms": "steza (tek),tekališče,kros steza,hipodrom"
                 },
                 "leisure/slipway": {
                     "name": "Rampa",
@@ -4988,8 +4945,7 @@
                     "terms": "veletok,reka,rečica,vodotok"
                 },
                 "waterway/riverbank": {
-                    "name": "Rečni breg",
-                    "terms": "brežina,obala,breg"
+                    "name": "Rečni breg"
                 },
                 "waterway/stream": {
                     "name": "Potok",

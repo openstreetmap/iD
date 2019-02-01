@@ -181,6 +181,13 @@ export function uiHelp(context) {
             'using',
             'tracing',
             'upload'
+        ]],
+        ['qa', [
+            'intro',
+            'tools_h',
+            'tools',
+            'issues_h',
+            'issues'
         ]]
     ];
 
@@ -228,6 +235,8 @@ export function uiHelp(context) {
         'help.imagery.offsets_h': 3,
         'help.streetlevel.using_h': 3,
         'help.gps.using_h': 3,
+        'help.qa.tools_h': 3,
+        'help.qa.issues_h': 3
     };
 
     var replacements = {

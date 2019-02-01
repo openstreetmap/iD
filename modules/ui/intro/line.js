@@ -80,7 +80,7 @@ export function uiIntroLine(context, reveal) {
 
         var msec = transitionTime(tulipRoadStart, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().zoom(18.5).centerEase(tulipRoadStart, msec);
+        context.map().centerZoomEase(tulipRoadStart, 18.5, msec);
 
         timeout(function() {
             var tooltip = reveal('button.add-line',
@@ -383,7 +383,7 @@ export function uiIntroLine(context, reveal) {
 
         var msec = transitionTime(woodRoadDragMidpoint, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().zoom(19).centerEase(woodRoadDragMidpoint, msec);
+        context.map().centerZoomEase(woodRoadDragMidpoint, 19, msec);
 
         timeout(function() {
             var padding = 250 * Math.pow(2, context.map().zoom() - 19);
@@ -606,7 +606,7 @@ export function uiIntroLine(context, reveal) {
 
         var msec = transitionTime(deleteLinesLoc, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
-        context.map().zoom(18).centerEase(deleteLinesLoc, msec);
+        context.map().centerZoomEase(deleteLinesLoc, 18, msec);
 
         timeout(function() {
             var padding = 200 * Math.pow(2, context.map().zoom() - 18);
@@ -649,7 +649,7 @@ export function uiIntroLine(context, reveal) {
         context.history().reset('doneUpdateLine');
         context.enter(modeBrowse(context));
 
-        context.map().zoom(18).centerEase(eleventhAvenueEnd, 500);
+        context.map().centerZoomEase(eleventhAvenueEnd, 18, 500);
 
         timeout(function() {
             var padding = 60 * Math.pow(2, context.map().zoom() - 18);
@@ -747,7 +747,7 @@ export function uiIntroLine(context, reveal) {
 
     function retrySplit() {
         context.enter(modeBrowse(context));
-        context.map().zoom(18).centerEase(eleventhAvenueEnd, 500);
+        context.map().centerZoomEase(eleventhAvenueEnd, 18, 500);
         var advance = function() { continueTo(rightClickIntersection); };
 
         var padding = 60 * Math.pow(2, context.map().zoom() - 18);
@@ -792,7 +792,7 @@ export function uiIntroLine(context, reveal) {
         );
 
         timeout(function() {
-            context.map().zoom(18).centerEase(twelfthAvenue, 500);
+            context.map().centerZoomEase(twelfthAvenue, 18, 500);
 
             context.map().on('move.intro drawn.intro', function() {
                 var padding = 200 * Math.pow(2, context.map().zoom() - 18);
@@ -849,7 +849,7 @@ export function uiIntroLine(context, reveal) {
             return continueTo(didSplit);
         }
 
-        context.map().zoom(18).centerEase(twelfthAvenue, 500);
+        context.map().centerZoomEase(twelfthAvenue, 18, 500);
 
         timeout(function() {
             var selected, other, padding, box;

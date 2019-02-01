@@ -1,0 +1,15 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "pond"
+    },
+    "name": "Pond",
+    "searchable": false
+}

@@ -131,17 +131,14 @@ export function presetIndex() {
             });
         }
 
-        // move the wikidata field to directly follow the wikipedia field
-        _universal.splice(_universal.indexOf(_fields.wikidata), 1);
-        _universal.splice(_universal.indexOf(_fields.wikipedia)+1, 0, _fields.wikidata);
-
         if (d.presets) {
+            var rawPresets = d.presets;
             _forEach(d.presets, function(d, id) {
                 var existing = all.index(id);
                 if (existing !== -1) {
-                    all.collection[existing] = presetPreset(id, d, _fields, visible);
+                    all.collection[existing] = presetPreset(id, d, _fields, visible, rawPresets);
                 } else {
-                    all.collection.push(presetPreset(id, d, _fields, visible));
+                    all.collection.push(presetPreset(id, d, _fields, visible, rawPresets));
                 }
             });
         }

@@ -6,6 +6,13 @@
         "leaf_cycle",
         "produce"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
         "area"
     ],
@@ -15,8 +22,10 @@
     "terms": [
         "cut",
         "forest",
+        "forestry",
         "lumber",
+        "silviculture",
         "tree"
     ],
-    "name": "Forest"
+    "name": "Managed Forest"
 }

@@ -8,6 +8,14 @@
         "building_area",
         "opening_hours"
     ],
+    "moreFields": [
+        "product",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "area"

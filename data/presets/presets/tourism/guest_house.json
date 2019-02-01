@@ -5,13 +5,19 @@
         "operator",
         "address",
         "building_area",
-        "smoking",
         "rooms",
-        "internet_access",
-        "internet_access/fee"
+        "internet_access"
     ],
     "moreFields" : [
-        "internet_access/ssid"
+        "smoking",
+        "payment_multi",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

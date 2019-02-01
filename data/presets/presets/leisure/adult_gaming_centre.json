@@ -1,12 +1,10 @@
 {
-    "icon": "maki-casino",
+    "icon": "temaki-casino",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "smoking"
+        "{amenity/casino}"
+    ],
+    "moreFields": [
+        "{amenity/casino}"
     ],
     "geometry": [
         "point",

@@ -1,9 +1,9 @@
 describe('iD.History', function () {
     var context, history, spy,
-        action = function() { return iD.Graph(); };
+        action = function() { return iD.coreGraph(); };
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD.coreContext();
         history = context.history();
         spy = sinon.spy();
         // clear lock
@@ -12,13 +12,13 @@ describe('iD.History', function () {
 
     describe('#graph', function () {
         it('returns the current graph', function () {
-            expect(history.graph()).to.be.an.instanceOf(iD.Graph);
+            expect(history.graph()).to.be.an.instanceOf(iD.coreGraph);
         });
     });
 
     describe('#merge', function () {
         it('merges the entities into all graph versions', function () {
-            var n = iD.Node({id: 'n'});
+            var n = iD.osmNode({id: 'n'});
             history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
@@ -37,7 +37,7 @@ describe('iD.History', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.Node();
+            var node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -55,8 +55,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.Graph()),
-                action2 = sinon.stub().returns(iD.Graph());
+            var action1 = sinon.stub().returns(iD.coreGraph()),
+                action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -64,7 +64,7 @@ describe('iD.History', function () {
         });
 
         it('performs transitionable actions in a transition', function (done) {
-            var action1 = function() { return iD.Graph(); };
+            var action1 = function() { return iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
             history.perform(action1);
@@ -81,7 +81,7 @@ describe('iD.History', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.Node();
+            var node = iD.osmNode();
             history.replace(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -99,8 +99,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.Graph()),
-                action2 = sinon.stub().returns(iD.Graph());
+            var action1 = sinon.stub().returns(iD.coreGraph()),
+                action2 = sinon.stub().returns(iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -168,7 +168,7 @@ describe('iD.History', function () {
 
         it('updates the graph', function () {
             history.perform(action, 'annotation');
-            var node = iD.Node();
+            var node = iD.osmNode();
             history.overwrite(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -193,8 +193,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.Graph()),
-                action2 = sinon.stub().returns(iD.Graph());
+            var action1 = sinon.stub().returns(iD.coreGraph()),
+                action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action, 'annotation');
             history.overwrite(action1, action2, 'annotation2');
             expect(action1).to.have.been.called;
@@ -268,13 +268,13 @@ describe('iD.History', function () {
 
     describe('#changes', function () {
         it('includes created entities', function () {
-            var node = iD.Node();
+            var node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.changes().created).to.eql([node]);
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.Node({id: 'n1'}),
+            var node1 = iD.osmNode({id: 'n1'}),
                 node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
@@ -282,7 +282,7 @@ describe('iD.History', function () {
         });
 
         it('includes deleted entities', function () {
-            var node = iD.Node({id: 'n1'});
+            var node = iD.osmNode({id: 'n1'});
             history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
@@ -291,7 +291,7 @@ describe('iD.History', function () {
 
     describe('#hasChanges', function() {
         it('is true when any of change\'s values are nonempty', function() {
-            var node = iD.Node();
+            var node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.hasChanges()).to.eql(true);
         });
@@ -350,17 +350,17 @@ describe('iD.History', function () {
 
     describe('#toJSON', function() {
         it('doesn\'t generate unsaveable changes', function() {
-            var node_1 = iD.Node({id: 'n-1'});
+            var node_1 = iD.osmNode({id: 'n-1'});
             history.perform(iD.actionAddEntity(node_1));
             history.perform(iD.actionDeleteNode('n-1'));
             expect(history.toJSON()).to.be.not.ok;
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.Node({id: 'n-1'}),
-                node1 = iD.Node({id: 'n1'}),
-                node2 = iD.Node({id: 'n2'}),
-                node3 = iD.Node({id: 'n3'});
+            var node_1 = iD.osmNode({id: 'n-1'}),
+                node1 = iD.osmNode({id: 'n1'}),
+                node2 = iD.osmNode({id: 'n2'}),
+                node3 = iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
@@ -397,7 +397,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -414,7 +414,7 @@ describe('iD.History', function () {
                 'index': 2
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -430,7 +430,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.Node({id: 'n1'})]);
+            history.merge([iD.osmNode({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -451,7 +451,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -472,8 +472,8 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
+            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -492,7 +492,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -515,7 +515,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -537,7 +537,7 @@ describe('iD.History', function () {
                 'index': 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});

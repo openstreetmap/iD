@@ -1,9 +1,10 @@
 export { validationDeprecatedTag } from './deprecated_tag';
-export { validationDisconnectedHighway } from './disconnected_highway';
-export { validationHighwayCrossingOtherWays } from './crossing_ways';
-export { ValidationIssueType, ValidationIssueSeverity } from './validation_issue';
+export { validationDisconnectedWay } from './disconnected_way';
+export { validationCrossingWays } from './crossing_ways';
+export { validationAlmostJunction } from './almost_junction';
+export { validationGenericName } from './generic_name.js';
 export { validationManyDeletions } from './many_deletions';
-export { validationMapCSSChecks } from './mapcss_checks';
+export { validationMaprules } from './maprules';
 export { validationMissingTag } from './missing_tag';
 export { validationOldMultipolygon } from './old_multipolygon';
 export { validationTagSuggestsArea } from './tag_suggests_area';
