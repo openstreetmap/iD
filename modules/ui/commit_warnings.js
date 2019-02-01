@@ -13,7 +13,7 @@ export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
 
-        var issues = context.issueManager().getIssues();
+        var issues = context.validator().getIssues();
 
         issues = _reduce(issues, function(issues, val) {
             var severity = val.severity;

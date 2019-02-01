@@ -10,13 +10,13 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import { osmNode } from '../osm';
 import { actionAddMidpoint } from '../actions';
 import { geoChooseEdge } from '../geo';
 
 
-export function validationHighwayCrossingOtherWays() {
+export function validationCrossingWays() {
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the corss point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited) {

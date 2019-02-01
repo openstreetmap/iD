@@ -13,7 +13,7 @@ import { select as d3_select } from 'd3-selection';
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
-import { IssueManager } from '../validations/issue_manager';
+import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -96,10 +96,10 @@ export function coreContext() {
 
 
     /* Straight accessors. Avoid using these if you can. */
-    var connection, history, issueManager;
+    var connection, history, validator;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
-    context.issueManager = function() { return issueManager; };
+    context.validator = function() { return validator; };
 
     /* Connection */
     context.preauth = function(options) {
@@ -457,22 +457,22 @@ export function coreContext() {
     context.changes = history.changes;
     context.intersects = history.intersects;
 
-    issueManager = IssueManager(context);
+    validator = coreValidator(context);
 
     // run validation upon restoring from page reload
     history.on('restore', function() {
-        issueManager.validate();
+        validator.validate();
     });
     // re-run validation upon a significant graph change
     history.on('annotatedChange', function(difference) {
         if (difference) {
-            issueManager.validate();
+            validator.validate();
         }
     });
     // re-run validation upon merging fetched data
     history.on('merge', function(entities) {
         if (entities && entities.length > 0) {
-            issueManager.validate();
+            validator.validate();
         }
     });
 

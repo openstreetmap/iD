@@ -19,13 +19,13 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 
 
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationHighwayAlmostJunction() {
+export function validationAlmostJunction() {
 
     function isHighway(entity) {
         return entity.type === 'way' && entity.tags.highway && entity.tags.highway !== 'no';
@@ -146,13 +146,13 @@ export function validationHighwayAlmostJunction() {
                 }));
             }
             issues.push(new validationIssue({
-                type: ValidationIssueType.highway_almost_junction,
+                type: ValidationIssueType.almost_junction,
                 severity: ValidationIssueSeverity.warning,
-                message: t('issues.highway_almost_junction.message', {
-                    highway: utilDisplayLabel(endHighway, context),
-                    highway2: utilDisplayLabel(edgeHighway, context)
+                message: t('issues.almost_junction.message', {
+                    feature: utilDisplayLabel(endHighway, context),
+                    feature2: utilDisplayLabel(edgeHighway, context)
                 }),
-                tooltip: t('issues.highway_almost_junction.tip'),
+                tooltip: t('issues.almost_junction.highway-highway.tip'),
                 entities: [endHighway, node, edgeHighway],
                 coordinates: extendableNodes[j].node.loc,
                 info: {
@@ -166,7 +166,7 @@ export function validationHighwayAlmostJunction() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.highway_almost_junction;
+    validation.type = ValidationIssueType.almost_junction;
 
     return validation;
 }

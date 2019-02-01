@@ -334,7 +334,7 @@ export function uiCommit(context) {
 
 
     function getUploadBlockerMessage() {
-        var errorCount = context.issueManager().getErrors().length;
+        var errorCount = context.validator().getErrors().length;
         if (errorCount > 0) {
             return t('commit.outstanding_errors_message', { count: errorCount });
 

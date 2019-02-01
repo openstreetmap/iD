@@ -9,7 +9,7 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import {
     actionChangeTags
 } from '../actions';
@@ -38,7 +38,6 @@ export function validationTagSuggestsArea() {
 
         return false;
     }
-
 
     var validation = function(entity, context) {
         var issues = [];

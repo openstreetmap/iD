@@ -16,7 +16,7 @@ export function uiEntityIssues(context) {
     var dispatch = d3_dispatch('change');
     var _entityID;
 
-    context.issueManager().on('reload.entity_issues', update);
+    context.validator().on('reload.entity_issues', update);
 
     function update() {
         var selection = d3_select('.entity-issues .disclosure-wrap');
@@ -33,7 +33,7 @@ export function uiEntityIssues(context) {
 
     function render(selection) {
 
-        var issues = context.issueManager().getIssuesForEntityWithID(_entityID);
+        var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
         if (issues.length > 0) {
             d3_select('.entity-issues')

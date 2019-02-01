@@ -3,7 +3,7 @@ import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
-} from './validation_issue';
+} from '../core/validator';
 
 export function validationManyDeletions() {
 
@@ -35,7 +35,7 @@ export function validationManyDeletions() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.map_rule_issue;
+    validation.type = ValidationIssueType.many_deletions;
 
     return validation;
 }

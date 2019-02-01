@@ -21,7 +21,7 @@ export function uiIssues(context) {
     var pane = d3_select(null);
     var _shown = false;
 
-    context.issueManager().on('reload.issues_pane', update);
+    context.validator().on('reload.issues_pane', update);
 
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
@@ -100,7 +100,7 @@ export function uiIssues(context) {
 
     function drawIssuesList(selection) {
 
-        var issues = context.issueManager().getIssues();
+        var issues = context.validator().getIssues();
 
         /*validations = _reduce(issues, function(validations, val) {
             var severity = val.severity;
@@ -175,11 +175,11 @@ export function uiIssues(context) {
     }
 
     function showsFeatureApplicability(d) {
-        return context.issueManager().getFeatureApplicability() === d;
+        return context.validator().getFeatureApplicability() === d;
     }
 
     function setFeatureApplicability(d) {
-        context.issueManager().setFeatureApplicability(d);
+        context.validator().setFeatureApplicability(d);
         update();
     }
 
@@ -187,7 +187,7 @@ export function uiIssues(context) {
         _featureApplicabilityList
             .call(
                 drawListItems,
-                context.issueManager().featureApplicabilityOptions,
+                context.validator().featureApplicabilityOptions,
                 'radio',
                 'features_to_validate',
                 setFeatureApplicability,

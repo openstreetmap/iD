@@ -8,7 +8,7 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import {
     actionChangeTags
 } from '../actions';

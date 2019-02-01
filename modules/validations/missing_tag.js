@@ -9,7 +9,7 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import { operationDelete } from '../operations/index';
 
 export function validationMissingTag() {

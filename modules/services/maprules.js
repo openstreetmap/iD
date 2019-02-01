@@ -9,7 +9,7 @@ import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue
-} from '../validations/validation_issue';
+} from '../core/validator';
 
 var buildRuleChecks = function() {
     return {
@@ -224,7 +224,7 @@ export default {
                             ? ValidationIssueSeverity.error
                             : ValidationIssueSeverity.warning;
                     issues.push(new validationIssue({
-                        type: ValidationIssueType.map_rule_issue,
+                        type: ValidationIssueType.maprules,
                         severity: severity,
                         message: selector[severity],
                         entities: [entity],

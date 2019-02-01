@@ -9,7 +9,7 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import {
     actionChangeTags
 } from '../actions';
@@ -82,7 +82,7 @@ export function validationDeprecatedTag() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.deprecated_tags;
+    validation.type = ValidationIssueType.deprecated_tag;
 
     return validation;
 }

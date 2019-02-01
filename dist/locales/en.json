@@ -1395,9 +1395,11 @@
                 "error": "error",
                 "warning": "warning"
             },
-            "disconnected_highway": {
-                "message": "{highway} is disconnected from other highways.",
-                "tip": "Roads should be connected to other roads or building entrances."
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} is disconnected from other roads and paths.",
+                    "tip": "Highways should connect to other highways or building entrances."
+                }
             },
             "old_multipolygon": {
                 "message": "{multipolygon} has misplaced tags.",
@@ -1468,9 +1470,11 @@
                     "tip": "Crossing bridges should be connected or use different layers."
                 }
             },
-            "highway_almost_junction": {
-                "message": "{highway} is very close but not connected to {highway2}.",
-                "tip": "Intersecting highways should share a junction vertex."
+            "almost_junction": {
+                "message": "{feature} is very close but not connected to {feature2}.",
+                "highway-highway": {
+                    "tip": "Intersecting highways should share a junction vertex."
+                }
             },
             "fix": {
                 "add_connection_vertex": {

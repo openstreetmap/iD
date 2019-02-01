@@ -7,11 +7,11 @@ import {
     ValidationIssueSeverity,
     validationIssue,
     validationIssueFix
-} from './validation_issue';
+} from '../core/validator';
 import { operationDelete } from '../operations/index';
 import { modeDrawLine } from '../modes';
 
-export function validationDisconnectedHighway() {
+export function validationDisconnectedWay() {
 
     function isDisconnectedHighway(entity, graph) {
         if (!entity.tags.highway) return false;
@@ -39,10 +39,10 @@ export function validationDisconnectedHighway() {
             var entityLabel = utilDisplayLabel(entity, context);
 
             issues.push(new validationIssue({
-                type: ValidationIssueType.disconnected_highway,
+                type: ValidationIssueType.disconnected_way,
                 severity: ValidationIssueSeverity.warning,
-                message: t('issues.disconnected_highway.message', {highway: entityLabel}),
-                tooltip: t('issues.disconnected_highway.tip'),
+                message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
+                tooltip: t('issues.disconnected_way.highway.tip'),
                 entities: [entity],
                 fixes: [
                     new validationIssueFix({
@@ -81,7 +81,7 @@ export function validationDisconnectedHighway() {
         return issues;
     };
 
-    validation.type = ValidationIssueType.disconnected_highway;
+    validation.type = ValidationIssueType.disconnected_way;
 
     return validation;
 }
