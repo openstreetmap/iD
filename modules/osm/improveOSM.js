@@ -1,27 +1,28 @@
 import _extend from 'lodash-es/extend';
 
 
-export function krError() {
-    if (!(this instanceof krError)) {
-        return (new krError()).initialize(arguments);
+export function iOsmError() {
+    if (!(this instanceof iOsmError)) {
+        return (new iOsmError()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
-
-krError.id = function() {
-    return krError.id.next--;
+// ImproveOSM has no error IDs unfortunately
+// So no way to explicitly refer to each error in their DB
+iOsmError.id = function() {
+    return iOsmError.id.next--;
 };
 
 
-krError.id.next = -1;
+iOsmError.id.next = -1;
 
 
-_extend(krError.prototype, {
+_extend(iOsmError.prototype, {
 
-    type: 'krError',
-    source: 'kr',
+    type: 'iOsmError',
+    source: 'iOSM',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
@@ -38,13 +39,13 @@ _extend(krError.prototype, {
         }
 
         if (!this.id) {
-            this.id = krError.id() + '';  // as string
+            this.id = iOsmError.id() + '';  // as string
         }
 
         return this;
     },
 
     update: function(attrs) {
-        return krError(this, attrs); // {v: 1 + (this.v || 0)}
+        return iOsmError(this, attrs); // {v: 1 + (this.v || 0)}
     }
 });

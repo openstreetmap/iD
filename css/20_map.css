@@ -33,7 +33,8 @@
 /* No interactivity except what we specifically allow */
 .data-layer.osm *,
 .data-layer.notes *,
-.data-layer.keepRight * {
+.data-layer.keepRight *,
+.data-layer.improveOSM * {
     pointer-events: none;
 }
 
@@ -44,7 +45,7 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.kr_error.target,
+.qa_error.target,
 .note.target,
 .node.target,
 .turn .target {
@@ -79,11 +80,10 @@
     pointer-events: none !important;
 }
 
-/* NOTE: when more QA layers are added, replace kr_error with generic QA layer selector */
 /* points, notes & QA */
 
 /* points, notes, markers */
-g.kr_error .stroke,
+g.qa_error .stroke,
 g.note .stroke {
     stroke: #222;
     stroke-width: 1;
@@ -91,7 +91,7 @@ g.note .stroke {
     opacity: 0.6;
 }
 
-g.kr_error.active .stroke,
+g.qa_error.active .stroke,
 g.note.active .stroke {
     stroke: #222;
     stroke-width: 1;
@@ -105,7 +105,7 @@ g.point .stroke {
     fill: #fff;
 }
 
-g.kr_error .shadow,
+g.qa_error .shadow,
 g.point .shadow,
 g.note .shadow {
     fill: none;
@@ -114,14 +114,14 @@ g.note .shadow {
     stroke-opacity: 0;
 }
 
-g.kr_error.hover:not(.selected) .shadow,
+g.qa_error.hover:not(.selected) .shadow,
 g.note.hover:not(.selected) .shadow,
 g.point.related:not(.selected) .shadow,
 g.point.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
 
-g.kr_error.selected .shadow,
+g.qa_error.selected .shadow,
 g.note.selected .shadow,
 g.point.selected .shadow {
     stroke-opacity: 0.7;

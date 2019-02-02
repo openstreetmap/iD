@@ -5,43 +5,42 @@ import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
-var _keepRightEnabled = false;
-var _keepRightService;
+var _improveOsmEnabled = false;
+var _errorService;
 
 
-export function svgKeepRight(projection, context, dispatch) {
+export function svgImproveOSM(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var touchLayer = d3_select(null);
     var drawLayer = d3_select(null);
-    var _keepRightVisible = false;
-
+    var _improveOsmVisible = false;
 
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-4, -24)')
-            .attr('d', 'M11.6,6.2H7.1l1.4-5.1C8.6,0.6,8.1,0,7.5,0H2.2C1.7,0,1.3,0.3,1.3,0.8L0,10.2c-0.1,0.6,0.4,1.1,0.9,1.1h4.6l-1.8,7.6C3.6,19.4,4.1,20,4.7,20c0.3,0,0.6-0.2,0.8-0.5l6.9-11.9C12.7,7,12.3,6.2,11.6,6.2z');
+            .attr('transform', 'translate(-10, -28)')
+            .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
     }
 
 
-    // Loosely-coupled keepRight service for fetching errors.
+    // Loosely-coupled improveOSM service for fetching errors.
     function getService() {
-        if (services.keepRight && !_keepRightService) {
-            _keepRightService = services.keepRight;
-            _keepRightService.on('loaded', throttledRedraw);
-        } else if (!services.keepRight && _keepRightService) {
-            _keepRightService = null;
+        if (services.improveOSM && !_errorService) {
+            _errorService = services.improveOSM;
+            _errorService.on('loaded', throttledRedraw);
+        } else if (!services.improveOSM && _errorService) {
+            _errorService = null;
         }
 
-        return _keepRightService;
+        return _errorService;
     }
 
 
     // Show the errors
     function editOn() {
-        if (!_keepRightVisible) {
-            _keepRightVisible = true;
+        if (!_improveOsmVisible) {
+            _improveOsmVisible = true;
             drawLayer
                 .style('display', 'block');
         }
@@ -50,13 +49,13 @@ export function svgKeepRight(projection, context, dispatch) {
 
     // Immediately remove the errors and their touch targets
     function editOff() {
-        if (_keepRightVisible) {
-            _keepRightVisible = false;
+        if (_improveOsmVisible) {
+            _improveOsmVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.qa_error.kr')
+            drawLayer.selectAll('.qa_error.iOSM')
                 .remove();
-            touchLayer.selectAll('.qa_error.kr')
+            touchLayer.selectAll('.qa_error.iOSM')
                 .remove();
         }
     }
@@ -81,7 +80,7 @@ export function svgKeepRight(projection, context, dispatch) {
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.qa_error.kr')
+        touchLayer.selectAll('.qa_error.iOSM')
             .remove();
 
         drawLayer
@@ -97,7 +96,7 @@ export function svgKeepRight(projection, context, dispatch) {
 
     // Update the error markers
     function updateMarkers() {
-        if (!_keepRightVisible || !_keepRightEnabled) return;
+        if (!_improveOsmVisible || !_improveOsmEnabled) return;
 
         var service = getService();
         var selectedID = context.selectedErrorID();
@@ -105,7 +104,7 @@ export function svgKeepRight(projection, context, dispatch) {
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var markers = drawLayer.selectAll('.qa_error.kr')
+        var markers = drawLayer.selectAll('.qa_error.iOSM')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -120,30 +119,43 @@ export function svgKeepRight(projection, context, dispatch) {
                     'qa_error',
                     d.source,
                     'error_id-' + d.id,
-                    'error_type-' + d.parent_error_type
+                    'error_type-' + d.error_type + '-' + d.error_subtype
                 ].join(' ');
             });
 
         markersEnter
-            .append('ellipse')
-            .attr('cx', 0.5)
-            .attr('cy', 1)
-            .attr('rx', 6.5)
-            .attr('ry', 3)
-            .attr('class', 'stroke');
-
-        markersEnter
-            .append('path')
+            .append('polygon')
             .call(markerPath, 'shadow');
 
         markersEnter
+            .append('ellipse')
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('rx', 4.5)
+            .attr('ry', 2)
+            .attr('class', 'stroke');
+
+        markersEnter
+            .append('polygon')
+            .attr('fill', 'currentColor')
+            .call(markerPath, 'qa_error-fill');
+
+        markersEnter
             .append('use')
-            .attr('class', 'qa_error-fill')
-            .attr('width', '20px')
-            .attr('height', '20px')
-            .attr('x', '-8px')
-            .attr('y', '-22px')
-            .attr('xlink:href', '#iD-icon-bolt');
+            .attr('transform', 'translate(-5.5, -21)')
+            .attr('class', 'icon')
+            .attr('width', '11px')
+            .attr('height', '11px')
+            .attr('xlink:href', function(d) {
+                var picon = d.icon;
+
+                if (!picon) {
+                    return '';
+                } else {
+                    var isMaki = /^maki-/.test(picon);
+                    return '#' + picon + (isMaki ? '-11' : '');
+                }
+            });
 
         // update
         markers
@@ -157,7 +169,7 @@ export function svgKeepRight(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.qa_error.kr')
+        var targets = touchLayer.selectAll('.qa_error.iOSM')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -168,9 +180,9 @@ export function svgKeepRight(projection, context, dispatch) {
         targets.enter()
             .append('rect')
             .attr('width', '20px')
-            .attr('height', '20px')
-            .attr('x', '-8px')
-            .attr('y', '-22px')
+            .attr('height', '30px')
+            .attr('x', '-10px')
+            .attr('y', '-28px')
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
@@ -189,8 +201,8 @@ export function svgKeepRight(projection, context, dispatch) {
     }
 
 
-    // Draw the keepRight layer and schedule loading errors and updating markers.
-    function drawKeepRight(selection) {
+    // Draw the ImproveOSM layer and schedule loading errors and updating markers.
+    function drawImproveOSM(selection) {
         var service = getService();
 
         var surface = context.surface();
@@ -198,7 +210,7 @@ export function svgKeepRight(projection, context, dispatch) {
             touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
         }
 
-        drawLayer = selection.selectAll('.layer-keepRight')
+        drawLayer = selection.selectAll('.layer-improveOSM')
             .data(service ? [0] : []);
 
         drawLayer.exit()
@@ -206,11 +218,11 @@ export function svgKeepRight(projection, context, dispatch) {
 
         drawLayer = drawLayer.enter()
             .append('g')
-            .attr('class', 'layer-keepRight')
-            .style('display', _keepRightEnabled ? 'block' : 'none')
+            .attr('class', 'layer-improveOSM')
+            .style('display', _improveOsmEnabled ? 'block' : 'none')
             .merge(drawLayer);
 
-        if (_keepRightEnabled) {
+        if (_improveOsmEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 service.loadErrors(projection);
@@ -223,11 +235,11 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
     // Toggles the layer on and off
-    drawKeepRight.enabled = function(val) {
-        if (!arguments.length) return _keepRightEnabled;
+    drawImproveOSM.enabled = function(val) {
+        if (!arguments.length) return _improveOsmEnabled;
 
-        _keepRightEnabled = val;
-        if (_keepRightEnabled) {
+        _improveOsmEnabled = val;
+        if (_improveOsmEnabled) {
             layerOn();
         } else {
             layerOff();
@@ -241,10 +253,10 @@ export function svgKeepRight(projection, context, dispatch) {
     };
 
 
-    drawKeepRight.supported = function() {
+    drawImproveOSM.supported = function() {
         return !!getService();
     };
 
 
-    return drawKeepRight;
+    return drawImproveOSM;
 }
