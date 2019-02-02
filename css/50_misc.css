@@ -95,9 +95,13 @@ path.line.stroke.tag-natural-tree_row {
 
 
 /* barriers and similar */
-path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
+path.line.stroke.tag-barrier {
     stroke: #ddd;
 }
+path.line.stroke.tag-barrier-hedge {
+    stroke: rgb(140, 208, 95);
+}
+
 path.line.stroke.tag-barrier,
 path.line.stroke.tag-man_made-groyne,
 path.line.stroke.tag-man_made-breakwater {
