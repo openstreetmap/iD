@@ -1,4 +1,56 @@
 
+/* narrow width miscellanous things */
+path.line.shadow.tag-aerialway,
+path.line.shadow.tag-attraction-summer_toboggan,
+path.line.shadow.tag-attraction-water_slide,
+path.line.shadow.tag-man_made-pipeline,
+path.line.shadow.tag-natural-tree_row,
+path.line.shadow.tag-piste {
+    stroke-width: 16;
+}
+path.line.casing.tag-aerialway,
+path.line.casing.tag-attraction-summer_toboggan,
+path.line.casing.tag-attraction-water_slide,
+path.line.casing.tag-man_made-pipeline,
+path.line.casing.tag-natural-tree_row,
+path.line.casing.tag-piste {
+    stroke-width: 7;
+}
+path.line.stroke.tag-aerialway,
+path.line.stroke.tag-attraction-summer_toboggan,
+path.line.stroke.tag-attraction-water_slide,
+path.line.stroke.tag-man_made-pipeline,
+path.line.stroke.tag-natural-tree_row,
+path.line.stroke.tag-piste {
+    stroke-width: 5;
+}
+
+.low-zoom path.line.shadow.tag-aerialway,
+.low-zoom path.line.shadow.tag-attraction-summer_toboggan,
+.low-zoom path.line.shadow.tag-attraction-water_slide,
+.low-zoom path.line.shadow.tag-man_made-pipeline,
+.low-zoom path.line.shadow.tag-natural-tree_row,
+.low-zoom path.line.shadow.tag-piste {
+    stroke-width: 12;
+}
+.low-zoom path.line.casing.tag-aerialway,
+.low-zoom path.line.casing.tag-attraction-summer_toboggan,
+.low-zoom path.line.casing.tag-attraction-water_slide,
+.low-zoom path.line.casing.tag-man_made-pipeline,
+.low-zoom path.line.casing.tag-natural-tree_row,
+.low-zoom path.line.casing.tag-piste {
+    stroke-width: 5;
+}
+.low-zoom path.line.stroke.tag-aerialway,
+.low-zoom path.line.stroke.tag-attraction-summer_toboggan,
+.low-zoom path.line.stroke.tag-attraction-water_slide,
+.low-zoom path.line.stroke.tag-man_made-pipeline,
+.low-zoom path.line.stroke.tag-natural-tree_row,
+.low-zoom path.line.stroke.tag-piste {
+    stroke-width: 3;
+}
+
+
 /* ferry routes  */
 .preset-icon .icon.tag-route-ferry {
     color: #58a9ed;
@@ -24,12 +76,29 @@ path.line.stroke.tag-route-ferry {
 }
 
 
+/* aerialways */
+path.line.stroke.tag-aerialway {
+    stroke: #c55;
+}
+path.line.casing.tag-aerialway {
+    stroke: #444;
+}
+
+/* pistes */
+path.line.stroke.tag-piste {
+    stroke: #9ac;
+}
+path.line.casing.tag-piste {
+    stroke: #444;
+}
+
 /* power and pipeline */
 .preset-icon .icon.tag-man_made-pipeline,
 .preset-icon .icon.tag-power {
     color: #939393;
     fill: #939393;
 }
+
 
 /* power */
 path.line.stroke.tag-power {
@@ -40,20 +109,20 @@ path.line.casing.tag-power {
     stroke: none;
 }
 
+
 /* pipeline */
 path.line.stroke.tag-man_made-pipeline {
     stroke: #cbd0d8;
     stroke-linecap: butt;
-    stroke-width: 3;
     stroke-dasharray: 80, 1.25;
 }
 path.line.casing.tag-man_made-pipeline {
     stroke: #666;
-    stroke-width: 4.5;
 }
 .low-zoom path.line.stroke.tag-man_made-pipeline {
     stroke-dasharray: 40, 1;
 }
+
 
 /* boundaries */
 path.line.stroke.tag-boundary {
@@ -70,27 +139,6 @@ path.line.casing.tag-boundary {
 path.line.casing.tag-boundary-protected_area,
 path.line.casing.tag-boundary-national_park {
     stroke: #b0e298;
-}
-
-
-/* Tree Rows */
-path.line.shadow.tag-natural-tree_row {
-    stroke-width: 16;
-}
-path.line.casing.tag-natural-tree_row {
-    stroke-width: 7;
-}
-path.line.stroke.tag-natural-tree_row {
-    stroke-width: 5;
-}
-.low-zoom path.line.shadow.tag-natural-tree_row {
-    stroke-width: 12;
-}
-.low-zoom path.line.casing.tag-natural-tree_row {
-    stroke-width: 5;
-}
-.low-zoom path.line.stroke.tag-natural-tree_row {
-    stroke-width: 3;
 }
 
 
@@ -416,30 +464,6 @@ path.line.stroke.tag-crossing.tag-crossing-zebra {
 }
 
 /* Attractions */
-path.line.shadow.tag-attraction-summer_toboggan,
-path.line.shadow.tag-attraction-water_slide {
-	stroke-width: 16;
-}
-path.line.casing.tag-attraction-summer_toboggan,
-path.line.casing.tag-attraction-water_slide {
-	stroke-width: 7;
-}
-path.line.stroke.tag-attraction-summer_toboggan,
-path.line.stroke.tag-attraction-water_slide {
-	stroke-width: 5;
-}
-.low-zoom path.line.shadow.tag-attraction-summer_toboggan,
-.low-zoom path.line.shadow.tag-attraction-water_slide {
-    stroke-width: 12;
-}
-.low-zoom path.line.casing.tag-attraction-summer_toboggan,
-.low-zoom path.line.casing.tag-attraction-water_slide {
-    stroke-width: 5;
-}
-.low-zoom path.line.stroke.tag-attraction-summer_toboggan,
-.low-zoom path.line.stroke.tag-attraction-water_slide {
-	stroke-width: 3;
-}
 path.line.stroke.tag-attraction-summer_toboggan {
     stroke: #9e9e9e;
 }
