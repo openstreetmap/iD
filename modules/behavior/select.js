@@ -19,7 +19,6 @@ import {
 import {
     osmEntity,
     osmNote,
-    krError,
     qaError
 } from '../osm';
 
@@ -171,10 +170,6 @@ export function behaviorSelect(context) {
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
-        } else if (datum instanceof krError & !isMultiselect) {  // clicked a krError error
-            context
-                .selectedErrorID(datum.id)
-                .enter(modeSelectError(context, datum.id, datum.source));
         } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
             context
                 .selectedErrorID(datum.id)
