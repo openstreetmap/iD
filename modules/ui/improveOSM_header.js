@@ -10,7 +10,7 @@ export function uiImproveOsmHeader() {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
-        var errorType = d.error_type;
+        var errorType = d.error_key;
         var et = dataEn.QA.improveOSM.error_types[errorType];
 
         if (et && et.title) {
@@ -46,7 +46,14 @@ export function uiImproveOsmHeader() {
             .attr('height', '30px')
             .attr('viewbox', '0 0 20 30')
             .attr('class', function(d) {
-                return 'preset-icon-28 qa_error ' + d.source + ' error_id-' + d.id + ' error_type-' + d.error_type + '-' + d.error_subtype;
+                return [
+                    'preset-icon-28',
+                    'qa_error',
+                    d.source,
+                    'error_id-' + d.id,
+                    'error_type-' + d.error_type,
+                    'category-' + d.category
+                ].join(' ');
             });
 
         svgEnter

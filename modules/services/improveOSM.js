@@ -9,7 +9,7 @@ import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
 import { geoExtent, geoVecAdd } from '../geo';
-import { iOsmError } from '../osm';
+import { qaError } from '../osm';
 import { services } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -210,12 +210,13 @@ export default {
                                 // One-ways can land on same segment in opposite direction
                                 loc = preventCoincident(loc, false);
 
-                                var d = new iOsmError({
+                                var d = new qaError({
+                                    // Info required for every error
                                     loc: loc,
-                                    comments: null,
-                                    error_subtype: '',
+                                    service: 'improveOSM',
                                     error_type: k,
-                                    icon: '', //TODO: Find suitable icon
+                                    // Extra details needed for this service
+                                    error_key: k,
                                     identifier: { // this is used to post changes to the error
                                         wayId: feature.wayId,
                                         fromNodeId: feature.fromNodeId,
@@ -243,27 +244,20 @@ export default {
                         // Tiles at high zoom == missing roads
                         if (data.tiles) {
                             data.tiles.forEach(function(feature) {
-                                // Average of recorded points should land on the missing geometry
-                                var loc = pointAverage(feature.points);
+                                var geoType = feature.type.toLowerCase();
 
+                                // Average of recorded points should land on the missing geometry
                                 // Missing geometry could happen to land on another error
+                                var loc = pointAverage(feature.points);
                                 loc = preventCoincident(loc, false);
 
-
-                                var geoType = feature.type.toLowerCase();
-                                var geoIcons = {
-                                    road: 'maki-car',
-                                    parking: 'maki-parking',
-                                    both: 'maki-car',
-                                    path: 'maki-shoe'
-                                };
-
-                                var d = new iOsmError({
+                                var d = new qaError({
+                                    // Info required for every error
                                     loc: loc,
-                                    comments: null,
-                                    error_subtype: geoType,
-                                    error_type: k,
-                                    icon: geoIcons[geoType],
+                                    service: 'improveOSM',
+                                    error_type: k + '-' + geoType,
+                                    // Extra details needed for this service
+                                    error_key: k,
                                     identifier: { x: feature.x, y: feature.y },
                                     status: feature.status
                                 });
@@ -281,10 +275,9 @@ export default {
                         // Entities at high zoom == turn restrictions
                         if (data.entities) {
                             data.entities.forEach(function(feature) {
-                                var loc = feature.point;
-
                                 // Turn restrictions could be missing at same junction
                                 // We also want to bump the error up so node is accessible
+                                var loc = feature.point;
                                 loc = preventCoincident([loc.lon, loc.lat], true);
 
                                 // Elements are presented in a strange way
@@ -293,23 +286,24 @@ export default {
                                 var via_node = ids[3];
                                 var to_way = ids[2].split(':')[1];
 
-                                // Travel direction along from_way clarifies the turn restriction
-                                var p1 = feature.segments[0].points[0];
-                                var p2 = feature.segments[0].points[1];
-
-                                var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
-
-                                var d = new iOsmError({
+                                var d = new qaError({
+                                    // Info required for every error
                                     loc: loc,
-                                    comments: null,
-                                    error_subtype: '',
+                                    service: 'improveOSM',
                                     error_type: k,
-                                    icon: 'temaki-junction',
+                                    // Extra details needed for this service
+                                    error_key: k,
                                     identifier: feature.id,
                                     object_id: via_node,
                                     object_type: 'node',
                                     status: feature.status
                                 });
+
+                                // Travel direction along from_way clarifies the turn restriction
+                                var p1 = feature.segments[0].points[0];
+                                var p2 = feature.segments[0].points[1];
+
+                                var dir_of_travel = cardinalDirection(relativeBearing(p1, p2));
 
                                 // Variables used in the description
                                 d.replacements = {
@@ -351,18 +345,18 @@ export default {
         function sendPayload(err, user) {
             if (err) { return callback(err, d); }
 
-            var type = d.error_type;
-            var url = _impOsmUrls[type] + '/comment';
+            var key = d.error_key;
+            var url = _impOsmUrls[key] + '/comment';
             var payload = {
                 username: user.display_name
             };
 
             // Each error type has different data for identification
-            if (type === 'ow') {
+            if (key === 'ow') {
                 payload.roadSegments = [ d.identifier ];
-            } else if (type === 'mr') {
+            } else if (key === 'mr') {
                 payload.tiles = [ d.identifier ];
-            } else if (type === 'tr') {
+            } else if (key === 'tr') {
                 payload.targetIds = [ d.identifier ];
             }
 
@@ -390,7 +384,7 @@ export default {
                     // No pretty identifier, so we just use coordinates
                     if (d.newStatus === 'SOLVED') {
                         var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
-                        _erCache.closed[d.error_type + ':' + closedID] = true;
+                        _erCache.closed[key + ':' + closedID] = true;
                     }
 
                     return callback(err, d);
@@ -417,7 +411,7 @@ export default {
 
     // replace a single error in the cache
     replaceError: function(error) {
-        if (!(error instanceof iOsmError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         _erCache.data[error.id] = error;
         updateRtree(encodeErrorRtree(error), true); // true = replace
@@ -426,7 +420,7 @@ export default {
 
     // remove a single error from the cache
     removeError: function(error) {
-        if (!(error instanceof iOsmError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         delete _erCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove

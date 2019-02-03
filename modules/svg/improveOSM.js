@@ -119,7 +119,8 @@ export function svgImproveOSM(projection, context, dispatch) {
                     'qa_error',
                     d.source,
                     'error_id-' + d.id,
-                    'error_type-' + d.error_type + '-' + d.error_subtype
+                    'error_type-' + d.error_type,
+                    'category-' + d.category
                 ].join(' ');
             });
 

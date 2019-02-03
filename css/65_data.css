@@ -131,7 +131,7 @@
 /* ImproveOSM Errors
 ------------------------------------------------------- */
 
-.iOSM.error_type-ow- {   /* missing one way */
+.iOSM.error_type-ow {   /* missing one way */
     color: #1E90FF;
 }
 
@@ -148,9 +148,10 @@
     color: #FFA500;
 }
 
-.iOSM.error_type-tr- {   /* missing turn restriction */
+.iOSM.error_type-tr {   /* missing turn restriction */
     color: #EC1C24;
 }
+
 
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
 .layer-mapdata {
@@ -211,4 +212,3 @@
     stroke-width: 5px;
     stroke-miterlimit: 1;
 }
-
