@@ -18,28 +18,20 @@ export function validationCrossingWays() {
     // any edge on way. Return the cross point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph) {
         var crossCoords = [];
-        for (var j = 0; j < way.nodes.length - 1; j++) {
-            var nidA = way.nodes[j],
-                nidB = way.nodes[j + 1];
-            if (nidA === n1.id || nidA === n2.id ||
-                nidB === n1.id || nidB === n2.id) {
+        var nodes = graph.childNodes(way);
+        for (var j = 0; j < nodes.length - 1; j++) {
+            var nA = nodes[j],
+                nB = nodes[j + 1];
+            if (nA.id === n1.id || nA.id === n2.id ||
+                nB.id === n1.id || nB.id === n2.id) {
                 // n1 or n2 is a connection node; skip
                 continue;
             }
 
-            var edgePair = edgePairString(n1.id, n2.id, nidA, nidB);
-
-            var nA = graph.entity(nidA),
-                nB = graph.entity(nidB),
-                point = geoLineIntersection([n1.loc, n2.loc], [nA.loc, nB.loc]);
+            var point = geoLineIntersection([n1.loc, n2.loc], [nA.loc, nB.loc]);
             if (point) crossCoords.push(point);
         }
         return crossCoords;
-    }
-
-    // n1 and n2 from one edge, nA and nB from the other edge
-    function edgePairString(n1, n2, nA, nB) {
-        return n1 > nA ? n1 + n2 + nA + nB : nA + nB + n1 + n2;
     }
 
     // returns the way or its parent relation, whichever has a useful feature type
