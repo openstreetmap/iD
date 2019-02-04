@@ -57,6 +57,7 @@ export function uiImproveOsmHeader() {
 
         svgEnter
             .append('use')
+            .attr('class', 'icon-annotation')
             .attr('width', '11px')
             .attr('height', '11px')
             .attr('transform', 'translate(4.5, 7)')

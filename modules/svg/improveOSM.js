@@ -143,7 +143,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         markersEnter
             .append('use')
             .attr('transform', 'translate(-5.5, -21)')
-            .attr('class', 'icon')
+            .attr('class', 'icon-annotation')
             .attr('width', '11px')
             .attr('height', '11px')
             .attr('xlink:href', function(d) {
@@ -194,8 +194,6 @@ export function svgImproveOSM(projection, context, dispatch) {
         function sortY(a, b) {
             return (a.id === selectedID) ? 1
                 : (b.id === selectedID) ? -1
-                : (a.severity === 'error' && b.severity !== 'error') ? 1
-                : (b.severity === 'error' && a.severity !== 'error') ? -1
                 : b.loc[1] - a.loc[1];
         }
     }
