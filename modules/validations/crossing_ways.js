@@ -2,7 +2,6 @@ import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
 import _flattenDeep from 'lodash-es/flatten';
 import { geoExtent, geoLineIntersection } from '../geo';
-import { set as d3_set } from 'd3-collection';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import {
@@ -16,8 +15,8 @@ import { geoChooseEdge } from '../geo';
 
 export function validationCrossingWays() {
     // Check if the edge going from n1 to n2 crosses (without a connection node)
-    // any edge on way. Return the corss point if so.
-    function findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited) {
+    // any edge on way. Return the cross point if so.
+    function findEdgeToWayCrossCoords(n1, n2, way, graph) {
         var crossCoords = [];
         for (var j = 0; j < way.nodes.length - 1; j++) {
             var nidA = way.nodes[j],
@@ -29,8 +28,6 @@ export function validationCrossingWays() {
             }
 
             var edgePair = edgePairString(n1.id, n2.id, nidA, nidB);
-            if (edgePairsVisited.has(edgePair)) continue;
-            edgePairsVisited.add(edgePair);
 
             var nA = graph.entity(nidA),
                 nB = graph.entity(nidB),
@@ -201,7 +198,7 @@ export function validationCrossingWays() {
         return null;
     }
 
-    function findCrossingsByWay(entity, graph, tree, edgePairsVisited) {
+    function findCrossingsByWay(entity, graph, tree) {
         var edgeCrossInfos = [];
         if (entity.type !== 'way') return edgeCrossInfos;
 
@@ -236,7 +233,7 @@ export function validationCrossingWays() {
                     continue;
                 }
 
-                var crossCoords = findEdgeToWayCrossCoords(n1, n2, way, graph, edgePairsVisited);
+                var crossCoords = findEdgeToWayCrossCoords(n1, n2, way, graph);
                 for (var k = 0; k < crossCoords.length; k++) {
                     edgeCrossInfos.push({
                         ways: [entity, way],
@@ -254,8 +251,7 @@ export function validationCrossingWays() {
         var graph = context.graph();
         var tree = context.history().tree();
         // create one issue per crossing point
-        var edgePairsVisited = d3_set(),
-            issues = [];
+        var issues = [];
         var waysToCheck = _flattenDeep(_map([entity], function(entity) {
             if (!getFeatureTypeForTags(entity.tags)) {
                 return [];
@@ -279,7 +275,7 @@ export function validationCrossingWays() {
             return [];
         }));
         var crossings = waysToCheck.reduce(function(array, way) {
-            return array.concat(findCrossingsByWay(way, graph, tree, edgePairsVisited));
+            return array.concat(findCrossingsByWay(way, graph, tree));
         }, []);
         for (var j in crossings) {
             var crossing = crossings[j];
