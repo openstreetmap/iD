@@ -2821,6 +2821,7 @@ div.full-screen > button:hover {
     height: 30px;
     background-color: #fff;
     color: #7092ff;
+    position: relative;
 }
 
 .layer-list:empty {
@@ -2978,6 +2979,7 @@ div.full-screen > button:hover {
 .issues-list li {
     height: auto;
     color: inherit;
+    position: static;
 }
 
 /* Entity Issues List */

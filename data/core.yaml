@@ -1177,7 +1177,7 @@ en:
     features_to_validate:
       edited:
         description: Edited features only
-        tooltip: Flag issues with created and modified features
+        tooltip: Flag issues with features you create and modify
       all:
         description: All features
         tooltip: Flag issues with all nearby features
