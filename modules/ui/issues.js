@@ -140,6 +140,8 @@ export function uiIssues(context) {
                 var loc = d.loc();
                 if (loc) {
                     context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
+                } else if (d.entities && d.entities.length > 0) {
+                    context.map().zoomTo(d.entities[0]);
                 }
                 if (d.entities) {
                     context.enter(modeSelect(
