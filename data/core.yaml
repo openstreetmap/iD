@@ -1174,7 +1174,7 @@ en:
       icon_tooltip: warning
     no_issues:
       message: Everything looks fine.
-      info: Any issues will be shown here as you edit.
+      info: Any issues will show up here as you edit.
     options:
       title: Options
     almost_junction:
