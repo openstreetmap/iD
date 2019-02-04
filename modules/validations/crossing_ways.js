@@ -159,31 +159,46 @@ export function validationCrossingWays() {
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
         'primary', 'primary_link', 'secondary', 'secondary_link'
     ]);
+    var railwayEqualsCrossingHighways = new Set([
+        'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps'
+    ]);
 
-    function canConnectEntities(entity1, entity2) {
+    function tagsForConnectionNodeIfAllowed(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
-            if (featureType1 === 'highway') return true;
-            if (featureType1 === 'waterway') return true;
-            if (featureType1 === 'railway') return true;
+            if (featureType1 === 'highway') return {};
+            if (featureType1 === 'waterway') return {};
+            if (featureType1 === 'railway') return {};
         } else {
             var featureTypes = new Set([featureType1, featureType2]);
             if (featureTypes.has('highway')) {
+                if (featureTypes.has('building')) return {};
+                if (featureTypes.has('railway')) {
+                    if (railwayEqualsCrossingHighways.has(entity1.tags.highway) ||
+                        railwayEqualsCrossingHighways.has(entity2.tags.highway)) {
+                        // path-rail connections use this tag
+                        return { railway: 'crossing' };
+                    } else {
+                        // road-rail connections use this tag
+                        return { railway: 'level_crossing' };
+                    }
+                }
                 if (featureTypes.has('waterway')) {
                     // do not allow fords on structures
-                    if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return false;
-                    if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return false;
+                    if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return null;
+                    if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return null;
+
                     if (highwaysDisallowingFords.has(entity1.tags.highway) ||
                         highwaysDisallowingFords.has(entity2.tags.highway)) {
-                        return false;
+                        // do not allow fords on major highways 
+                        return null;
                     }
-                    return true;
+                    return { ford: 'yes' };
                 }
-                if (featureTypes.has('building') || featureTypes.has('railway')) return true;
             }
         }
-        return false;
+        return null;
     }
 
     function findCrossingsByWay(entity, graph, tree, edgePairsVisited) {
@@ -285,18 +300,18 @@ export function validationCrossingWays() {
                     return getFeatureWithFeatureTypeTagsForWay(way, graph);
                 });
 
-                var canConnect = canConnectEntities(entities[0], entities[1]);
+                var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
 
                 var crossingTypeID;
                 if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
                     crossingTypeID = 'tunnel-tunnel';
-                    if (canConnect) {
+                    if (connectionTags) {
                         crossingTypeID += '_connectable';
                     }
                 }
                 else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
                     crossingTypeID = 'bridge-bridge';
-                    if (canConnect) {
+                    if (connectionTags) {
                         crossingTypeID += '_connectable';
                     }
                 }
@@ -310,7 +325,7 @@ export function validationCrossingWays() {
                 };
 
                 var fixes = [];
-                if (canConnect) {
+                if (connectionTags) {
                     fixes.push(new validationIssueFix({
                         title: t('issues.fix.add_connection_vertex.title'),
                         onClick: function() {
@@ -321,7 +336,7 @@ export function validationCrossingWays() {
                                 function actionConnectCrossingWays(graph) {
                                     var projection = context.projection;
 
-                                    var node = osmNode({ loc: loc });
+                                    var node = osmNode({ loc: loc, tags: connectionTags });
                                     graph = graph.replace(node);
 
                                     var way0 = graph.entity(ways[0].id);

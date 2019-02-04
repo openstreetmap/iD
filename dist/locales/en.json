@@ -1530,9 +1530,6 @@
                 "delete_feature": {
                     "title": "Delete this feature"
                 },
-                "ignore_temporarily": {
-                    "title": "Ignore for now"
-                },
                 "move_tags": {
                     "title": "Move the tags",
                     "undo_redo": "Moved tags."
