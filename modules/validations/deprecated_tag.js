@@ -17,20 +17,20 @@ export function validationDeprecatedTag() {
 
     var type = 'deprecated_tag';
 
-    var validation = function(change, context) {
+    var validation = function(entity, context) {
         var issues = [];
-        var deprecatedTagsArray = change.deprecatedTags();
+        var deprecatedTagsArray = entity.deprecatedTags();
         if (deprecatedTagsArray.length > 0) {
             for (var deprecatedTagIndex in deprecatedTagsArray) {
                 var deprecatedTags = deprecatedTagsArray[deprecatedTagIndex];
                 var tagsLabel = utilTagText({ tags: deprecatedTags.old });
-                var featureLabel = utilDisplayLabel(change, context);
+                var featureLabel = utilDisplayLabel(entity, context);
                 issues.push(new validationIssue({
                     type: type,
                     severity: 'warning',
                     message: t('issues.deprecated_tag.message', { feature: featureLabel, tags: tagsLabel }),
                     tooltip: t('issues.deprecated_tag.tip'),
-                    entities: [change],
+                    entities: [entity],
                     hash: tagsLabel,
                     info: {
                         oldTags: deprecatedTags.old,
