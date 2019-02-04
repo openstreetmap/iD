@@ -299,7 +299,7 @@ export function uiIssues(context) {
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
             .html(true)
-            .title(uiTooltipHtml(t('issues.description'), key));
+            .title(uiTooltipHtml(t('issues.title'), key));
 
         var button = selection
             .append('button')

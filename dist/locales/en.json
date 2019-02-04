@@ -1411,8 +1411,8 @@
         },
         "issues": {
             "title": "Issues",
-            "description": "Issues",
             "key": "I",
+            "list_title": "Issues ({count})",
             "errors": {
                 "list_title": "Errors ({count})",
                 "icon_tooltip": "error"

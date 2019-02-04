@@ -25,7 +25,6 @@ export function uiEntityIssues(context) {
 
     function entityIssues(selection) {
         selection.call(uiDisclosure(context, 'entity_issues', true)
-            .title(t('issues.title'))
             .content(render)
         );
     }
@@ -43,6 +42,9 @@ export function uiEntityIssues(context) {
                 .style('display', 'none');
             return;
         }
+
+        d3_select('.hide-toggle-entity_issues span')
+            .text(t('issues.list_title', { count: issues.length }));
 
         var items = selection.selectAll('.issue')
             .data(issues, function(d) {
