@@ -45,7 +45,7 @@ describe('iD.validations.deprecated_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('deprecated_tags');
+        expect(issue.type).to.eql('deprecated_tag');
         expect(issue.severity).to.eql('warning');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');

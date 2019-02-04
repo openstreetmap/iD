@@ -7,6 +7,8 @@ export function validationManyDeletions() {
 
     var threshold = 100;
 
+    var type = 'many_deletions';
+
     var validation = function(changes, context) {
         var issues = [];
         var nodes = 0, ways = 0, areas = 0, relations = 0;
@@ -19,7 +21,7 @@ export function validationManyDeletions() {
         });
         if (changes.deleted.length > threshold) {
             issues.push(new validationIssue({
-                type: 'many_deletions',
+                type: type,
                 severity: 'warning',
                 message: t(
                     'issues.many_deletions.message',
@@ -33,7 +35,7 @@ export function validationManyDeletions() {
         return issues;
     };
 
-    validation.type = 'many_deletions';
+    validation.type = type;
     validation.inputType = 'changes';
 
     return validation;

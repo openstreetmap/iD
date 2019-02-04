@@ -15,6 +15,8 @@ import {
 
 export function validationDeprecatedTag() {
 
+    var type = 'deprecated_tag';
+
     var validation = function(change, context) {
         var issues = [];
         var deprecatedTagsArray = change.deprecatedTags();
@@ -24,10 +26,10 @@ export function validationDeprecatedTag() {
                 var tagsLabel = utilTagText({ tags: deprecatedTags.old });
                 var featureLabel = utilDisplayLabel(change, context);
                 issues.push(new validationIssue({
-                    type: 'deprecated_tags',
+                    type: type,
                     severity: 'warning',
-                    message: t('issues.deprecated_tags.message', { feature: featureLabel, tags: tagsLabel }),
-                    tooltip: t('issues.deprecated_tags.tip'),
+                    message: t('issues.deprecated_tag.message', { feature: featureLabel, tags: tagsLabel }),
+                    tooltip: t('issues.deprecated_tag.tip'),
                     entities: [change],
                     hash: tagsLabel,
                     info: {
@@ -80,7 +82,7 @@ export function validationDeprecatedTag() {
         return issues;
     };
 
-    validation.type = 'deprecated_tag';
+    validation.type = type;
 
     return validation;
 }

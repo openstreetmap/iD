@@ -100,13 +100,16 @@ export function coreValidator(context) {
         // other validations require feature to be tagged
         if (!runValidation('missing_tag')) return issues;
         if (entity.type === 'way') {
+
+            runValidation('crossing_ways');
+
             // only check for disconnected way if no almost junctions
             if (runValidation('almost_junction')) {
                 runValidation('disconnected_way');
             } else {
                 ranValidations.add('disconnected_way');
             }
-            runValidation('crossing_ways');
+
             runValidation('tag_suggests_area');
         }
         // run all validations not yet run manually

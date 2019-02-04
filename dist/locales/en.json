@@ -1479,7 +1479,7 @@
                     "tip": "Crossing bridges should be connected or use different layers."
                 }
             },
-            "deprecated_tags": {
+            "deprecated_tag": {
                 "message": "{feature} has outdated tags: {tags}",
                 "tip": "Some tags become deprecated over time and should be replaced."
             },
@@ -1497,6 +1497,10 @@
                 "message": "Deleting {n} features: {p} nodes, {l} lines, {a} areas, and {r} relations.",
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
+            "missing_tag": {
+                "message": "{feature} has no descriptive tags.",
+                "tip": "Features must have tags that define what they are."
+            },
             "old_multipolygon": {
                 "message": "{multipolygon} has misplaced tags.",
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
@@ -1504,10 +1508,6 @@
             "tag_suggests_area": {
                 "message": "Feature is a line, but the tag \"{tag}\" suggests it should be an area.",
                 "tip": "Areas must have connected endpoints."
-            },
-            "untagged_feature": {
-                "message": "{feature} has no descriptive tags.",
-                "tip": "Features must have tags that define what they are."
             },
             "fix": {
                 "add_connection_vertex": {

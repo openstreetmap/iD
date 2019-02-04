@@ -240,12 +240,13 @@ export function validationCrossingWays() {
         return edgeCrossInfos;
     }
 
+    var type = 'crossing_ways';
+
     var validation = function(entity, context) {
 
         var graph = context.graph();
         var tree = context.history().tree();
-        // create one issue per crossing point
-        var issues = [];
+
         var waysToCheck = _flattenDeep(_map([entity], function(entity) {
             if (!getFeatureTypeForTags(entity.tags)) {
                 return [];
@@ -268,103 +269,110 @@ export function validationCrossingWays() {
             }
             return [];
         }));
+
         var crossings = waysToCheck.reduce(function(array, way) {
             return array.concat(findCrossingsByWay(way, graph, tree));
         }, []);
-        for (var j in crossings) {
-            var crossing = crossings[j];
 
-            // use the entities with the tags that define the feature type
-            var entities = crossing.ways.sort(function(entity1, entity2) {
-                var type1 = getFeatureTypeForCrossingCheck(entity1, graph);
-                var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
-                if (type1 === type2) {
-                    return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
-                } else if (type1 === 'waterway') {
-                    return true;
-                } else if (type2 === 'waterway') {
-                    return false;
-                }
-                return type1 < type2;
-            });
-            entities = _map(entities, function(way) {
-                return getFeatureWithFeatureTypeTagsForWay(way, graph);
-            });
-
-            var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
-
-            var crossingTypeID;
-            if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
-                crossingTypeID = 'tunnel-tunnel';
-                if (connectionTags) {
-                    crossingTypeID += '_connectable';
-                }
-            }
-            else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
-                crossingTypeID = 'bridge-bridge';
-                if (connectionTags) {
-                    crossingTypeID += '_connectable';
-                }
-            }
-            else {
-                crossingTypeID = crossing.featureTypes.sort().join('-');
-            }
-
-            var messageDict = {
-                feature: utilDisplayLabel(entities[0], context),
-                feature2: utilDisplayLabel(entities[1], context)
-            };
-
-            var fixes = [];
-            if (connectionTags) {
-                fixes.push(new validationIssueFix({
-                    title: t('issues.fix.add_connection_vertex.title'),
-                    onClick: function() {
-                        var loc = this.issue.coordinates;
-                        var ways = this.issue.info.ways;
-                        var connectionTags = this.issue.info.connectionTags;
-
-                        context.perform(
-                            function actionConnectCrossingWays(graph) {
-                                var projection = context.projection;
-
-                                var node = osmNode({ loc: loc, tags: connectionTags });
-                                graph = graph.replace(node);
-
-                                var way0 = graph.entity(ways[0].id);
-                                var choice0 = geoChooseEdge(graph.childNodes(way0), projection(loc), projection);
-                                var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
-                                graph = actionAddMidpoint({loc: loc, edge: edge0}, node)(graph);
-
-                                var way1 = graph.entity(ways[1].id);
-                                var choice1 = geoChooseEdge(graph.childNodes(way1), projection(loc), projection);
-                                var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
-                                graph = actionAddMidpoint({loc: loc, edge: edge1}, node)(graph);
-
-                                return graph;
-                            },
-                            t('issues.fix.add_connection_vertex.undo_redo')
-                        );
-                    }
-                }));
-            }
-
-            issues.push(new validationIssue({
-                type: 'crossing_ways',
-                severity: 'warning',
-                message: t('issues.crossing_ways.message', messageDict),
-                tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
-                entities: entities,
-                info: { ways: crossing.ways, connectionTags: connectionTags },
-                coordinates: crossing.cross_point,
-                fixes: fixes
-            }));
-        }
-
+        var issues = [];
+        crossings.forEach(function(crossing) {
+            issues.push(createIssue(crossing, context));
+        });
         return issues;
     };
 
-    validation.type = 'crossing_ways';
+    function createIssue(crossing, context) {
+
+        var graph = context.graph();
+
+        // use the entities with the tags that define the feature type
+        var entities = crossing.ways.sort(function(entity1, entity2) {
+            var type1 = getFeatureTypeForCrossingCheck(entity1, graph);
+            var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
+            if (type1 === type2) {
+                return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
+            } else if (type1 === 'waterway') {
+                return true;
+            } else if (type2 === 'waterway') {
+                return false;
+            }
+            return type1 < type2;
+        });
+        entities = _map(entities, function(way) {
+            return getFeatureWithFeatureTypeTagsForWay(way, graph);
+        });
+
+        var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
+
+        var crossingTypeID;
+        if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
+            crossingTypeID = 'tunnel-tunnel';
+            if (connectionTags) {
+                crossingTypeID += '_connectable';
+            }
+        }
+        else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
+            crossingTypeID = 'bridge-bridge';
+            if (connectionTags) {
+                crossingTypeID += '_connectable';
+            }
+        }
+        else {
+            crossingTypeID = crossing.featureTypes.sort().join('-');
+        }
+
+        var messageDict = {
+            feature: utilDisplayLabel(entities[0], context),
+            feature2: utilDisplayLabel(entities[1], context)
+        };
+
+        var fixes = [];
+        if (connectionTags) {
+            fixes.push(new validationIssueFix({
+                title: t('issues.fix.add_connection_vertex.title'),
+                onClick: function() {
+                    var loc = this.issue.coordinates;
+                    var ways = this.issue.info.ways;
+                    var connectionTags = this.issue.info.connectionTags;
+
+                    context.perform(
+                        function actionConnectCrossingWays(graph) {
+                            var projection = context.projection;
+
+                            var node = osmNode({ loc: loc, tags: connectionTags });
+                            graph = graph.replace(node);
+
+                            var way0 = graph.entity(ways[0].id);
+                            var choice0 = geoChooseEdge(graph.childNodes(way0), projection(loc), projection);
+                            var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
+                            graph = actionAddMidpoint({loc: loc, edge: edge0}, node)(graph);
+
+                            var way1 = graph.entity(ways[1].id);
+                            var choice1 = geoChooseEdge(graph.childNodes(way1), projection(loc), projection);
+                            var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
+                            graph = actionAddMidpoint({loc: loc, edge: edge1}, node)(graph);
+
+                            return graph;
+                        },
+                        t('issues.fix.add_connection_vertex.undo_redo')
+                    );
+                }
+            }));
+        }
+
+        return new validationIssue({
+            type: type,
+            severity: 'warning',
+            message: t('issues.crossing_ways.message', messageDict),
+            tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
+            entities: entities,
+            info: { ways: crossing.ways, connectionTags: connectionTags },
+            coordinates: crossing.cross_point,
+            fixes: fixes
+        });
+    }
+
+    validation.type = type;
 
     return validation;
 }

@@ -20,6 +20,8 @@ export function validationMissingTag() {
         return keys.length > 0;
     }
 
+    var type = 'missing_tag';
+
     var validation = function(entity, context) {
         var types = ['point', 'line', 'area', 'relation'];
         var issues = [];
@@ -30,10 +32,10 @@ export function validationMissingTag() {
             !(hasDescriptiveTags(entity) || entity.hasParentRelations(graph))) {
             var entityLabel = utilDisplayLabel(entity, context);
             issues.push(new validationIssue({
-                type: 'missing_tag',
+                type: type,
                 severity: 'error',
-                message: t('issues.untagged_feature.message', {feature: entityLabel}),
-                tooltip: t('issues.untagged_feature.tip'),
+                message: t('issues.missing_tag.message', {feature: entityLabel}),
+                tooltip: t('issues.missing_tag.tip'),
                 entities: [entity],
                 fixes: [
                     new validationIssueFix({
@@ -56,7 +58,7 @@ export function validationMissingTag() {
         return issues;
     };
 
-    validation.type = 'missing_tag';
+    validation.type = type;
 
     return validation;
 }

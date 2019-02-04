@@ -106,6 +106,8 @@ export function validationAlmostJunction() {
         return null;
     }
 
+    var type = 'almost_junction';
+
     var validation = function(endHighway, context) {
         var graph = context.graph();
         var tree = context.history().tree();
@@ -144,7 +146,7 @@ export function validationAlmostJunction() {
                 }));
             }
             issues.push(new validationIssue({
-                type: 'almost_junction',
+                type: type,
                 severity: 'warning',
                 message: t('issues.almost_junction.message', {
                     feature: utilDisplayLabel(endHighway, context),
@@ -164,7 +166,7 @@ export function validationAlmostJunction() {
         return issues;
     };
 
-    validation.type = 'almost_junction';
+    validation.type = type;
 
     return validation;
 }

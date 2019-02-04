@@ -41,6 +41,7 @@ export function validationGenericName(context) {
         return false;
     }
 
+    var type = 'generic_name';
 
     var validation = function(entity) {
         var issues = [];
@@ -48,7 +49,7 @@ export function validationGenericName(context) {
         if (generic) {
             var preset = utilPreset(entity, context);
             issues.push(new validationIssue({
-                type: 'generic_name',
+                type: type,
                 severity: 'warning',
                 message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
                 tooltip: t('issues.generic_name.tip'),
@@ -73,7 +74,7 @@ export function validationGenericName(context) {
         return issues;
     };
 
-    validation.type = 'generic_name';
+    validation.type = type;
 
     return validation;
 }

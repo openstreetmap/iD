@@ -14,6 +14,8 @@ import {
 
 export function validationOldMultipolygon() {
 
+    var type = 'old_multipolygon';
+
     var validation = function(entity, context) {
 
         var issues = [];
@@ -33,7 +35,7 @@ export function validationOldMultipolygon() {
         if (multipolygon && outerWay) {
             var multipolygonLabel = utilDisplayLabel(multipolygon, context);
             issues.push(new validationIssue({
-                type: 'old_multipolygon',
+                type: type,
                 severity: 'warning',
                 message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
                 tooltip: t('issues.old_multipolygon.tip'),
@@ -61,7 +63,7 @@ export function validationOldMultipolygon() {
         return issues;
     };
 
-    validation.type = 'old_multipolygon';
+    validation.type = type;
 
     return validation;
 }

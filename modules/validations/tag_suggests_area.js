@@ -37,6 +37,8 @@ export function validationTagSuggestsArea() {
         return false;
     }
 
+    var type = 'tag_suggests_area';
+
     var validation = function(entity, context) {
         var issues = [];
         var graph = context.graph();
@@ -46,7 +48,7 @@ export function validationTagSuggestsArea() {
         if (suggestingTags) {
             var tagText = utilTagText({ tags: suggestingTags });
             issues.push(new validationIssue({
-                type: 'tag_suggests_area',
+                type: type,
                 severity: 'warning',
                 message: t('issues.tag_suggests_area.message', { tag: tagText }),
                 tooltip: t('issues.tag_suggests_area.tip'),
@@ -73,7 +75,7 @@ export function validationTagSuggestsArea() {
         return issues;
     };
 
-    validation.type = 'tag_suggests_area';
+    validation.type = type;
 
     return validation;
 }

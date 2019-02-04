@@ -29,6 +29,7 @@ export function validationDisconnectedWay() {
             });
     }
 
+    var type = 'disconnected_way';
 
     var validation = function(entity, context) {
         var issues = [];
@@ -37,7 +38,7 @@ export function validationDisconnectedWay() {
             var entityLabel = utilDisplayLabel(entity, context);
 
             issues.push(new validationIssue({
-                type: 'disconnected_way',
+                type: type,
                 severity: 'warning',
                 message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
                 tooltip: t('issues.disconnected_way.highway.tip'),
@@ -81,7 +82,7 @@ export function validationDisconnectedWay() {
         return issues;
     };
 
-    validation.type = 'disconnected_way';
+    validation.type = type;
 
     return validation;
 }
