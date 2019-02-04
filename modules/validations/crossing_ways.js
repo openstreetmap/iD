@@ -18,17 +18,19 @@ export function validationCrossingWays() {
     // any edge on way. Return the cross point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph) {
         var crossCoords = [];
+        var nA, nB, segment1, segment2;
         var nodes = graph.childNodes(way);
         for (var j = 0; j < nodes.length - 1; j++) {
-            var nA = nodes[j],
-                nB = nodes[j + 1];
+            nA = nodes[j];
+            nB = nodes[j + 1];
             if (nA.id === n1.id || nA.id === n2.id ||
                 nB.id === n1.id || nB.id === n2.id) {
                 // n1 or n2 is a connection node; skip
                 continue;
             }
-
-            var point = geoLineIntersection([n1.loc, n2.loc], [nA.loc, nB.loc]);
+            segment1 = [n1.loc, n2.loc];
+            segment2 = [nA.loc, nB.loc];
+            var point = geoLineIntersection(segment1, segment2);
             if (point) crossCoords.push(point);
         }
         return crossCoords;
