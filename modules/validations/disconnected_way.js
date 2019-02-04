@@ -60,6 +60,8 @@ export function validationDisconnectedWay() {
                                 // prefer the terminating node
                                 vertex = endNodes[1];
                             }
+                            // make sure the vertex is actually visible
+                            context.map().zoomToEase(vertex);
                             context.enter(
                                 modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
                             );
