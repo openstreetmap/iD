@@ -110,6 +110,12 @@ export function uiCommit(context) {
                 tags['closed:keepright'] = krClosed.join(';').substr(0, 255);
             }
         }
+        if (services.improveOSM) {
+            var iOsmClosed = services.improveOSM.getClosedIDs();
+            if (iOsmClosed.length) {
+                tags['closed:improveosm'] = iOsmClosed.join(';').substr(0, 255);
+            }
+        }
 
         _changeset = _changeset.update({ tags: tags });
 

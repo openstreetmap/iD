@@ -49,9 +49,9 @@ export function uiKeepRightHeader() {
         iconEnter
             .append('div')
             .attr('class', function(d) {
-                return 'preset-icon-28 kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type;
+                return 'preset-icon-28 qa_error ' + d.source + ' error_id-' + d.id + ' error_type-' + d.parent_error_type;
             })
-            .call(svgIcon('#iD-icon-bolt', 'kr_error-fill'));
+            .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
 
         headerEnter
             .append('div')
