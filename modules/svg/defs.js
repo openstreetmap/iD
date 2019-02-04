@@ -199,6 +199,10 @@ export function svgDefs(context) {
                         node.appendChild(
                             d3_select(svg.documentElement).attr('id', d).node()
                         );
+                        if (d !== 'iD-sprite') {   // allow icon colors to be overridden..
+                            d3_select(node).selectAll('path')
+                                .attr('fill', 'currentColor');
+                        }
                     });
             });
     };

@@ -411,6 +411,10 @@ button[disabled].action:hover {
     border-radius: 3px;
 }
 
+.icon-annotation {
+    color: #333;
+}
+
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
