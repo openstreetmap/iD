@@ -40,14 +40,18 @@ _extend(qaError.prototype, {
             }
         }
 
-        if (this.service) {
-            this.source = services[this.service].shortName;
+        // Extract common error information from data
+        if (this.service && this.error_type) {
+            var serviceInfo = services[this.service];
 
-            if (this.error_type) {
-                var template = services[this.service].errorTypes[this.error_type];
+            if (serviceInfo) {
+                var errInfo = serviceInfo.errorTypes[this.error_type];
 
-                this.icon = template.icon;
-                this.category = template.category;
+                this.source = serviceInfo.shortName;
+                if (errInfo) {
+                    this.icon = errInfo.icon;
+                    this.category = errInfo.category;
+                }
             }
         }
 
