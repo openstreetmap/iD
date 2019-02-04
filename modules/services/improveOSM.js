@@ -215,7 +215,7 @@ export default {
                                     comments: null,
                                     error_subtype: '',
                                     error_type: k,
-                                    icon: '', //TODO: Find suitable icon
+                                    icon: 'fas-long-arrow-alt-right',
                                     identifier: { // this is used to post changes to the error
                                         wayId: feature.wayId,
                                         fromNodeId: feature.fromNodeId,
