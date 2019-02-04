@@ -113,16 +113,6 @@ export function uiIssues(context) {
 
     function drawIssuesList(selection, issues) {
 
-        /*validations = _reduce(issues, function(validations, val) {
-            var severity = val.severity;
-            if (validations.hasOwnProperty(severity)) {
-                validations[severity].push(val);
-            } else {
-                validations[severity] = [val];
-            }
-            return validations;
-        }, {});*/
-
         var items = selection.selectAll('li')
             .data(issues, function(d) { return d.id(); });
 
@@ -172,12 +162,6 @@ export function uiIssues(context) {
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
 
-        /*label
-            .append('input')
-            .attr('type', type)
-            .attr('name', name)
-            .on('change', change);
-*/
         label
             .append('span')
             .text(function(d) { return d.message; });
@@ -185,6 +169,22 @@ export function uiIssues(context) {
         // Update
         items = items
             .merge(enter);
+    }
+
+    function renderNoIssuesBox(selection) {
+
+        selection.append('div')
+            .call(svgIcon('#iD-icon-apply', 'pre-text'));
+
+        var noIssuesLabel = selection.append('span');
+
+        noIssuesLabel.append('strong')
+            .text(t('issues.no_issues.message'));
+
+        noIssuesLabel.append('br');
+
+        noIssuesLabel.append('span')
+            .text(t('issues.no_issues.info'));
     }
 
     function showsFeatureApplicability(d) {
@@ -241,6 +241,8 @@ export function uiIssues(context) {
                 updateWarningsList();
             }
         }
+
+        pane.select('.issues-none').classed('hide', warnings.length > 0 || errors.length > 0);
 
         //if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
         //    updateFeatureApplicabilityList();
@@ -322,6 +324,11 @@ export function uiIssues(context) {
         var content = pane
             .append('div')
             .attr('class', 'pane-content');
+
+        content
+            .append('div')
+            .attr('class', 'issues-none')
+            .call(renderNoIssuesBox)
 
         // errors
         content

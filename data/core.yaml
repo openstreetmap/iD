@@ -1172,6 +1172,9 @@ en:
     warnings:
       list_title: "Warnings ({count})"
       icon_tooltip: warning
+    no_issues:
+      message: Everything looks fine.
+      info: Any issues will be shown here as you edit.
     options:
       title: Options
     almost_junction:
@@ -1236,7 +1239,7 @@ en:
         undo_redo: Connected crossing features.
       connect_almost_junction:
         title: Connect the features
-        undo_redo: Connected two very close features.
+        undo_redo: Connected very close features.
       continue_feature:
         title: Continue this feature
       delete_feature:

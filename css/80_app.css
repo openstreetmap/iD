@@ -2967,7 +2967,7 @@ div.full-screen > button:hover {
     color: #DD1400
 }
 
-/* Issues Pane List */
+/* Issues Pane */
 
 .issues-list label {
     padding: 5px;
@@ -2980,6 +2980,18 @@ div.full-screen > button:hover {
     height: auto;
     color: inherit;
     position: static;
+}
+
+.issues-none {
+    border-radius: 4px;
+    border: 1px solid #72D979;
+    background: #C6FFCA;
+    padding: 5px !important;
+    display: flex;
+    margin-top: 5px;
+}
+.issues-none .icon {
+    color: #05AC10;
 }
 
 /* Entity Issues List */
