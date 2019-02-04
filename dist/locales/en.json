@@ -1413,10 +1413,14 @@
             "title": "Issues",
             "description": "Issues",
             "key": "I",
-            "errors": "Errors",
-            "warnings": "Warnings",
-            "error_tooltip": "error",
-            "warning_tooltip": "warning",
+            "errors": {
+                "list_title": "Errors ({count})",
+                "icon_tooltip": "error"
+            },
+            "warnings": {
+                "list_title": "Warnings ({count})",
+                "icon_tooltip": "warning"
+            },
             "options": {
                 "title": "Options"
             },

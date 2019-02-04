@@ -165,7 +165,7 @@ export function uiIssues(context) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
                 .append('div')
-                .attr('title', t('issues.'+d.severity+'_tooltip'))
+                .attr('title', t('issues.'+d.severity+'s.icon_tooltip'))
                 .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
@@ -219,14 +219,29 @@ export function uiIssues(context) {
     }
 
     function update() {
+
+        var errors = context.validator().getErrors();
+        pane.select('.issues-errors').classed('hide', errors.length === 0);
+        if (errors.length > 0) {
+            pane.select('.hide-toggle-issues_errors .hide-toggle-text')
+                .text(t('issues.errors.list_title', { count: errors.length }))
+            if (!pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
+                updateErrorsList();
+            }
+        }
+
+        var warnings = context.validator().getWarnings();
+        pane.select('.issues-warnings').classed('hide', warnings.length === 0);
+        if (warnings.length > 0) {
+            pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
+                .text(t('issues.warnings.list_title', { count: warnings.length }))
+            if (!pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
+                updateWarningsList();
+            }
+        }
+
         if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
             updateFeatureApplicabilityList();
-        }
-        if (!pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
-            updateErrorsList();
-        }
-        if (!pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
-            updateWarningsList();
         }
     }
 
@@ -311,7 +326,6 @@ export function uiIssues(context) {
             .append('div')
             .attr('class', 'issues-errors')
             .call(uiDisclosure(context, 'issues_errors', true)
-                .title(t('issues.errors'))
                 .content(renderErrorsList)
             );
 
@@ -320,7 +334,6 @@ export function uiIssues(context) {
             .append('div')
             .attr('class', 'issues-warnings')
             .call(uiDisclosure(context, 'issues_warnings', true)
-                .title(t('issues.warnings'))
                 .content(renderWarningsList)
             );
 
