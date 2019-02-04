@@ -98,7 +98,8 @@ export function uiFieldText(field, context) {
                 .merge(buttons)
                 .on('click', function(d) {
                     d3_event.preventDefault();
-                    var vals = input.node().value.split(';');
+                    var raw_vals = input.node().value || '0';
+                    var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         var num = parseFloat(v.trim(), 10);
                         return isFinite(num) ? clamped(num + d) : v.trim();
