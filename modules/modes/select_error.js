@@ -106,7 +106,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             if (!checkSelectedID()) return;
 
             var selection = context.surface()
-                .selectAll('.error_id-' + selectedErrorID + '.' + selectedErrorSource);
+                .selectAll('.error_id-' + selectedErrorID + '.' + selectedErrorService);
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
