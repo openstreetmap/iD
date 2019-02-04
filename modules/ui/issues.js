@@ -16,7 +16,7 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    var _featureApplicabilityList = d3_select(null);
+    //var _featureApplicabilityList = d3_select(null);
     var _errorsList = d3_select(null),
         _warningsList = d3_select(null);
     var pane = d3_select(null);
@@ -24,7 +24,7 @@ export function uiIssues(context) {
 
     context.validator().on('reload.issues_pane', update);
 
-    function renderIssuesOptions(selection) {
+    /*function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
             .data([0]);
 
@@ -42,7 +42,7 @@ export function uiIssues(context) {
             .merge(_featureApplicabilityList);
 
         updateFeatureApplicabilityList();
-    }
+    }*/
 
     function renderErrorsList(selection) {
         _errorsList = selection.selectAll('.errors-list')
@@ -68,7 +68,7 @@ export function uiIssues(context) {
         updateWarningsList();
     }
 
-    function drawListItems(selection, data, type, name, change, active) {
+    /*function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
             .data(data);
 
@@ -109,7 +109,7 @@ export function uiIssues(context) {
             .classed('active', active)
             .selectAll('input')
             .property('checked', active);
-    }
+    }*/
 
     function drawIssuesList(selection, issues) {
 
@@ -186,7 +186,7 @@ export function uiIssues(context) {
         noIssuesLabel.append('span')
             .text(t('issues.no_issues.info'));
     }
-
+    /*
     function showsFeatureApplicability(d) {
         return context.validator().getFeatureApplicability() === d;
     }
@@ -206,7 +206,7 @@ export function uiIssues(context) {
                 setFeatureApplicability,
                 showsFeatureApplicability
             );
-    }
+    }*/
 
     function updateErrorsList() {
         var errors = context.validator().getErrors();
@@ -226,7 +226,7 @@ export function uiIssues(context) {
         pane.select('.issues-errors').classed('hide', errors.length === 0);
         if (errors.length > 0) {
             pane.select('.hide-toggle-issues_errors .hide-toggle-text')
-                .text(t('issues.errors.list_title', { count: errors.length }))
+                .text(t('issues.errors.list_title', { count: errors.length }));
             if (!pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
                 updateErrorsList();
             }
@@ -236,7 +236,7 @@ export function uiIssues(context) {
         pane.select('.issues-warnings').classed('hide', warnings.length === 0);
         if (warnings.length > 0) {
             pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
-                .text(t('issues.warnings.list_title', { count: warnings.length }))
+                .text(t('issues.warnings.list_title', { count: warnings.length }));
             if (!pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
                 updateWarningsList();
             }
@@ -328,7 +328,7 @@ export function uiIssues(context) {
         content
             .append('div')
             .attr('class', 'issues-none')
-            .call(renderNoIssuesBox)
+            .call(renderNoIssuesBox);
 
         // errors
         content

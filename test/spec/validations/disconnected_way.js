@@ -1,4 +1,4 @@
-describe('iD.validations.disconnected_highway', function () {
+describe('iD.validations.disconnected_way', function () {
     var context;
 
     beforeEach(function() {
@@ -40,9 +40,14 @@ describe('iD.validations.disconnected_highway', function () {
     }
 
     function validate() {
-        var validator = iD.validationDisconnectedHighway(context);
+        var validator = iD.validationDisconnectedWay();
         var changes = context.history().changes();
-        return validator(changes, context.graph());
+        var entities = changes.modified.concat(changes.created);
+        var issues = [];
+        entities.forEach(function(entity) {
+            issues = issues.concat(validator(entity, context));
+        });
+        return issues;
     }
 
     it('has no errors on init', function() {
@@ -55,8 +60,8 @@ describe('iD.validations.disconnected_highway', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.disconnected_highway);
-        expect(issue.severity).to.eql(iD.ValidationIssueSeverity.warning);
+        expect(issue.type).to.eql('disconnected_way');
+        expect(issue.severity).to.eql('warning');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });

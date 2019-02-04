@@ -1,4 +1,4 @@
-describe('iD.validations.highway_almost_junction', function () {
+describe('iD.validations.almost_junction', function () {
     var context;
 
     beforeEach(function() {
@@ -127,9 +127,14 @@ describe('iD.validations.highway_almost_junction', function () {
     }
 
     function validate() {
-        var validator = iD.validationHighwayAlmostJunction(context);
+        var validator = iD.validationAlmostJunction();
         var changes = context.history().changes();
-        return validator(changes, context.graph(), context.history().tree());
+        var entities = changes.modified.concat(changes.created);
+        var issues = [];
+        entities.forEach(function(entity) {
+            issues = issues.concat(validator(entity, context));
+        });
+        return issues;
     }
 
     it('has no errors on init', function() {
@@ -142,7 +147,7 @@ describe('iD.validations.highway_almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.highway_almost_junction);
+        expect(issue.type).to.eql('almost_junction');
         expect(issue.entities).to.have.lengthOf(3);
         expect(issue.entities[0].id).to.eql('w-1');
         expect(issue.entities[1].id).to.eql('n-1');
@@ -161,7 +166,7 @@ describe('iD.validations.highway_almost_junction', function () {
         expect(issue.info.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
-        issue.fixes[0].action();
+        issue.fixes[0].onClick();
         issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -171,7 +176,7 @@ describe('iD.validations.highway_almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.highway_almost_junction);
+        expect(issue.type).to.eql('almost_junction');
         expect(issue.entities).to.have.lengthOf(3);
         expect(issue.entities[0].id).to.eql('w-1');
         expect(issue.entities[1].id).to.eql('n-1');
@@ -190,7 +195,7 @@ describe('iD.validations.highway_almost_junction', function () {
         expect(issue.info.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
-        issue.fixes[1].action();
+        issue.fixes[1].onClick();
         issues = validate();
         expect(issues).to.have.lengthOf(0);
     });

@@ -1,4 +1,4 @@
-describe('iD.validations.coreValidator', function () {
+describe('iD.validations.validator', function () {
     var context;
 
     beforeEach(function() {
@@ -34,7 +34,7 @@ describe('iD.validations.coreValidator', function () {
         issues = validator.getIssues();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.missing_tag);
+        expect(issue.type).to.eql('missing_tag');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });

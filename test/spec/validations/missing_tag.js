@@ -19,9 +19,14 @@ describe('iD.validations.missing_tag', function () {
     }
 
     function validate() {
-        var validator = iD.validationMissingTag(context);
+        var validator = iD.validationMissingTag();
         var changes = context.history().changes();
-        return validator(changes, context.graph());
+        var entities = changes.modified.concat(changes.created);
+        var issues = [];
+        entities.forEach(function(entity) {
+            issues = issues.concat(validator(entity, context));
+        });
+        return issues;
     }
 
     it('has no errors on init', function() {
@@ -34,7 +39,7 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.missing_tag);
+        expect(issue.type).to.eql('missing_tag');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });

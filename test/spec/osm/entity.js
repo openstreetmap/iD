@@ -223,11 +223,14 @@ describe('iD.osmEntity', function () {
 
     describe('#hasDeprecatedTags', function () {
         it('returns false if entity has no tags', function () {
-            expect(iD.Entity().deprecatedTags()).to.eql({});
+            expect(iD.Entity().deprecatedTags()).to.eql([]);
         });
 
         it('returns true if entity has deprecated tags', function () {
-            expect(iD.Entity({ tags: { barrier: 'wire_fence' } }).deprecatedTags()).to.eql({ barrier: 'wire_fence' });
+            expect(iD.Entity({ tags: { amenity: 'swimming_pool' } }).deprecatedTags()).to.eql([{
+              old: { amenity: 'swimming_pool' },
+              replace: { leisure: 'swimming_pool' }
+            }]);
         });
     });
 

@@ -53,41 +53,21 @@ describe('iD.validations.crossing_ways', function () {
       );
     }
 
-    function createHighwayCrossingRailway() {
-        var n1 = iD.Node({id: 'n-1', loc: [1,1]});
-        var n2 = iD.Node({id: 'n-2', loc: [2,2]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
-
-        context.perform(
-            iD.actionAddEntity(n1),
-            iD.actionAddEntity(n2),
-            iD.actionAddEntity(w1)
-        );
-
-        var n3 = iD.Node({id: 'n-3', loc: [1,2]});
-        var n4 = iD.Node({id: 'n-4', loc: [2,1]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { railway: 'rail' }});
-
-        context.perform(
-            iD.actionAddEntity(n3),
-            iD.actionAddEntity(n4),
-            iD.actionAddEntity(w2)
-        );
-    }
-
     function validate() {
-        var validator = iD.validationHighwayCrossingOtherWays(context);
+        var validator = iD.validationCrossingWays();
         var changes = context.history().changes();
-        return validator(changes, context.graph(), context.history().tree());
+        var entities = changes.modified.concat(changes.created);
+        var issues = [];
+        entities.forEach(function(entity) {
+            issues = issues.concat(validator(entity, context));
+        });
+        return issues;
     }
 
-    function verifySingleCrossingIssue(issues, crossEid) {
-        expect(issues).to.have.lengthOf(1);
+    function verifySingleCrossingIssue(issues) {
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.crossing_ways);
+        expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('w-1');
-        expect(issue.entities[1].id).to.eql(crossEid);
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(1.5);
@@ -214,22 +194,18 @@ describe('iD.validations.crossing_ways', function () {
     it('two cross points between two highways', function() {
         createWaysWithTwoCrossingPoint();
         var issues = validate();
-        expect(issues).to.have.lengthOf(2);
+        expect(issues).to.have.lengthOf(4);
         var issue = issues[0];
-        expect(issue.type).to.eql(iD.ValidationIssueType.crossing_ways);
+        expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('w-1');
-        expect(issue.entities[1].id).to.eql('w-2');
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(1.5);
         expect(issue.coordinates[1]).to.eql(1.5);
 
         issue = issues[1];
-        expect(issue.type).to.eql(iD.ValidationIssueType.crossing_ways);
+        expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('w-1');
-        expect(issue.entities[1].id).to.eql('w-2');
 
         expect(issue.coordinates).to.have.lengthOf(2);
         expect(issue.coordinates[0]).to.eql(2.5);
@@ -266,13 +242,9 @@ describe('iD.validations.crossing_ways', function () {
         );
     }
 
-    // warning crossing cases between way and relation
-    it('one cross point between highway and water relation', function() {
-        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { natural: 'water' });
-        verifySingleCrossingIssue(validate(), 'r-1');
-    });
 
-    it('one cross point between railway and building relation', function() {
+    // warning crossing cases between way and relation
+    it('one cross point between highway and building relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
         verifySingleCrossingIssue(validate(), 'r-1');
     });

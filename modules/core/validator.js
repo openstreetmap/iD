@@ -36,9 +36,9 @@ export function coreValidator(context) {
         }
     }
 
-    self.featureApplicabilityOptions = ['edited', 'all'];
+    //self.featureApplicabilityOptions = ['edited', 'all'];
 
-    var featureApplicability = context.storage('issue-features') || 'edited';
+    /*var featureApplicability = context.storage('issue-features') || 'edited';
 
     self.getFeatureApplicability = function() {
         return featureApplicability;
@@ -47,7 +47,7 @@ export function coreValidator(context) {
     self.setFeatureApplicability = function(applicability) {
         featureApplicability = applicability;
         context.storage('issue-features', applicability);
-    };
+    };*/
 
     self.getIssues = function() {
         return issues;
@@ -180,7 +180,7 @@ export function validationIssue(attrs) {
             return osmEntity.key(entity);
         });
         // factor in the entities this issue is for
-        id += entityKeys.join();
+        id += entityKeys.sort().join();
         if (this.coordinates) {
             // factor in coordinates since two separate issues can have an
             // idential type and entities, e.g. in crossing_ways
