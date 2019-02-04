@@ -4,7 +4,7 @@
             "shortName": "iOSM",
             "errorTypes": {
                 "ow": {
-                    "icon": "",
+                    "icon": "fas-long-arrow-alt-right",
                     "category": "routing"
                 },
                 "mr-both": {

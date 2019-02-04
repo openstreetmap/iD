@@ -4,8 +4,8 @@ import { osmPavedTags } from '../osm/tags';
 
 export function svgTagClasses() {
     var primaries = [
-        'building', 'highway', 'railway', 'waterway', 'aeroway',
-        'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
+        'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
+        'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction'
     ];
     var statuses = [
@@ -30,19 +30,27 @@ export function svgTagClasses() {
             }
 
             var t = _tags(entity);
-            var isMultiPolygon = (t.type === 'multipolygon');
-            var shouldRenderLineAsArea = isMultiPolygon && !entity.hasInterestingTags();
-
             var i, k, v;
+
+            // in some situations we want to render perimeter strokes a certain way
+            var overrideGeometry;
+            if (/\bstroke\b/.test(value)) {
+                if (!!t.barrier && t.barrier !== 'no') {
+                    overrideGeometry = 'line';
+                } else if (t.type === 'multipolygon' && !entity.hasInterestingTags()) {
+                    overrideGeometry = 'area';
+                }
+            }
 
             // preserve base classes (nothing with `tag-`)
             var classes = value.trim().split(/\s+/)
                 .filter(function(klass) {
                     return klass.length && !/^tag-/.test(klass);
                 })
-                .map(function(klass) {  // style multipolygon inner/outers as areas not lines
-                    return (klass === 'line' && shouldRenderLineAsArea) ? 'area' : klass;
+                .map(function(klass) {  // special overrides for some perimeter strokes
+                    return (klass === 'line' || klass === 'area') ? (overrideGeometry || klass) : klass;
                 });
+
 
 
             // pick at most one primary classification tag..
@@ -50,6 +58,10 @@ export function svgTagClasses() {
                 k = primaries[i];
                 v = t[k];
                 if (!v || v === 'no') continue;
+
+                if (k === 'piste:type') {  // avoid a ':' in the class name
+                    k = 'piste';
+                }
 
                 primary = k;
                 if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
