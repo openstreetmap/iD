@@ -47,7 +47,6 @@ _extend(qaError.prototype, {
             if (serviceInfo) {
                 var errInfo = serviceInfo.errorTypes[this.error_type];
 
-                this.source = serviceInfo.shortName;
                 if (errInfo) {
                     this.icon = errInfo.icon;
                     this.category = errInfo.category;

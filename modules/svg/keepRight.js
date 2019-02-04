@@ -54,9 +54,9 @@ export function svgKeepRight(projection, context, dispatch) {
             _keepRightVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.qa_error.kr')
+            drawLayer.selectAll('.qa_error.keepRight')
                 .remove();
-            touchLayer.selectAll('.qa_error.kr')
+            touchLayer.selectAll('.qa_error.keepRight')
                 .remove();
         }
     }
@@ -81,7 +81,7 @@ export function svgKeepRight(projection, context, dispatch) {
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.qa_error.kr')
+        touchLayer.selectAll('.qa_error.keepRight')
             .remove();
 
         drawLayer
@@ -105,7 +105,7 @@ export function svgKeepRight(projection, context, dispatch) {
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var markers = drawLayer.selectAll('.qa_error.kr')
+        var markers = drawLayer.selectAll('.qa_error.keepRight')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -118,7 +118,7 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('class', function(d) {
                 return [
                     'qa_error',
-                    d.source,
+                    d.service,
                     'error_id-' + d.id,
                     'error_type-' + d.parent_error_type
                 ].join(' ');
@@ -157,7 +157,7 @@ export function svgKeepRight(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.qa_error.kr')
+        var targets = touchLayer.selectAll('.qa_error.keepRight')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -174,7 +174,7 @@ export function svgKeepRight(projection, context, dispatch) {
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
-                return 'qa_error ' + d.source + ' target error_id-' + d.id + ' ' + fillClass;
+                return 'qa_error ' + d.service + ' target error_id-' + d.id + ' ' + fillClass;
             })
             .attr('transform', getTransform);
 

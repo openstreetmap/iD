@@ -49,7 +49,7 @@ export function uiKeepRightHeader() {
         iconEnter
             .append('div')
             .attr('class', function(d) {
-                return 'preset-icon-28 qa_error ' + d.source + ' error_id-' + d.id + ' error_type-' + d.parent_error_type;
+                return 'preset-icon-28 qa_error ' + d.service + ' error_id-' + d.id + ' error_type-' + d.parent_error_type;
             })
             .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
 

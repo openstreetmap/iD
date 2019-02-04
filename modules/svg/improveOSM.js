@@ -53,9 +53,9 @@ export function svgImproveOSM(projection, context, dispatch) {
             _improveOsmVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.qa_error.iOSM')
+            drawLayer.selectAll('.qa_error.improveOSM')
                 .remove();
-            touchLayer.selectAll('.qa_error.iOSM')
+            touchLayer.selectAll('.qa_error.improveOSM')
                 .remove();
         }
     }
@@ -80,7 +80,7 @@ export function svgImproveOSM(projection, context, dispatch) {
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.qa_error.iOSM')
+        touchLayer.selectAll('.qa_error.improveOSM')
             .remove();
 
         drawLayer
@@ -104,7 +104,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var markers = drawLayer.selectAll('.qa_error.iOSM')
+        var markers = drawLayer.selectAll('.qa_error.improveOSM')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -117,7 +117,7 @@ export function svgImproveOSM(projection, context, dispatch) {
             .attr('class', function(d) {
                 return [
                     'qa_error',
-                    d.source,
+                    d.service,
                     'error_id-' + d.id,
                     'error_type-' + d.error_type,
                     'category-' + d.category
@@ -170,7 +170,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.qa_error.iOSM')
+        var targets = touchLayer.selectAll('.qa_error.improveOSM')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -187,7 +187,7 @@ export function svgImproveOSM(projection, context, dispatch) {
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
-                return 'qa_error ' + d.source + ' target error_id-' + d.id + ' ' + fillClass;
+                return 'qa_error ' + d.service + ' target error_id-' + d.id + ' ' + fillClass;
             })
             .attr('transform', getTransform);
 

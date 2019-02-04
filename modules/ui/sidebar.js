@@ -149,9 +149,9 @@ export function uiSidebar(context) {
                 }
 
                 // Temporary solution while only two services
-                var errEditor = (datum.source === 'kr') ? keepRightEditor : improveOsmEditor;
+                var errEditor = (datum.service === 'keepRight') ? keepRightEditor : improveOsmEditor;
 
-                d3_selectAll('.qa_error.' + datum.source)
+                d3_selectAll('.qa_error.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar

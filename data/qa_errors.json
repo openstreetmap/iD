@@ -1,7 +1,6 @@
 {
     "services": {
         "improveOSM": {
-            "shortName": "iOSM",
             "errorTypes": {
                 "ow": {
                     "icon": "fas-long-arrow-alt-right",
@@ -30,7 +29,6 @@
             }
         },
         "keepRight": {
-            "shortName": "kr",
             "errorTypes": {
 
             }

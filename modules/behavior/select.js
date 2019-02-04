@@ -173,7 +173,7 @@ export function behaviorSelect(context) {
         } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
             context
                 .selectedErrorID(datum.id)
-                .enter(modeSelectError(context, datum.id, datum.source));
+                .enter(modeSelectError(context, datum.id, datum.service));
         } else {    // clicked nothing..
             context.selectedNoteID(null);
             context.selectedErrorID(null);

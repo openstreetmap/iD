@@ -17,7 +17,7 @@ import { uiImproveOsmEditor, uiKeepRightEditor } from '../ui';
 import { utilKeybinding } from '../util';
 
 
-export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
+export function modeSelectError(context, selectedErrorID, selectedErrorService) {
     var mode = {
         id: 'select-error',
         button: 'browse'
@@ -25,10 +25,10 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
 
     var keybinding = utilKeybinding('select-error');
 
-    var errorService, errorEditor;
-    switch (selectedErrorSource) {
-        case 'iOSM':
-            errorService = services.improveOSM;
+    var errorService = services[selectedErrorService];
+    var errorEditor;
+    switch (selectedErrorService) {
+        case 'improveOSM':
             errorEditor = uiImproveOsmEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw
@@ -38,8 +38,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorSource) {
                     .show(errorEditor.error(error));
             });
             break;
-        case 'kr':
-            errorService = services.keepRight;
+        case 'keepRight':
             errorEditor = uiKeepRightEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw

@@ -114,7 +114,7 @@ export function behaviorHover(context) {
 
             } else if (datum instanceof qaError) {
                 entity = datum;
-                selector = '.' + datum.source + '.error_id-' + datum.id;
+                selector = '.' + datum.service + '.error_id-' + datum.id;
 
             } else if (datum instanceof osmNote) {
                 entity = datum;
