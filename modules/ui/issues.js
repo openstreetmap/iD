@@ -242,9 +242,9 @@ export function uiIssues(context) {
             }
         }
 
-        if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
-            updateFeatureApplicabilityList();
-        }
+        //if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
+        //    updateFeatureApplicabilityList();
+        //}
     }
 
     function issues(selection) {
@@ -340,6 +340,16 @@ export function uiIssues(context) {
             );
 
         // options
+        /*
+        // add this back to core.yaml when re-enabling the options
+        features_to_validate:
+          edited:
+            description: Edited features only
+            tooltip: Flag issues with features you create and modify
+          all:
+            description: All features
+            tooltip: Flag issues with all nearby features
+
         content
             .append('div')
             .attr('class', 'issues-options')
@@ -347,7 +357,7 @@ export function uiIssues(context) {
                 .title(t('issues.options.title'))
                 .content(renderIssuesOptions)
             );
-
+        */
         update();
 
         context.keybinding()

@@ -1174,13 +1174,6 @@ en:
       icon_tooltip: warning
     options:
       title: Options
-    features_to_validate:
-      edited:
-        description: Edited features only
-        tooltip: Flag issues with features you create and modify
-      all:
-        description: All features
-        tooltip: Flag issues with all nearby features
     disconnected_way:
       highway:
         message: "{highway} is disconnected from other roads and paths."
@@ -1243,7 +1236,7 @@ en:
         undo_redo: Connected crossing features.
       connect_almost_junction:
         title: Connect the features
-        undo_redo: Connected two features that were really close.
+        undo_redo: Connected two very close features.
       continue_feature:
         title: Continue this feature
       delete_feature:
