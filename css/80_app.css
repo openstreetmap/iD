@@ -2949,7 +2949,8 @@ div.full-screen > button:hover {
     border-color: #f5b0ab;
 }
 
-.issue.severity-warning button {
+.issue.severity-warning button,
+.mode-save .warning-section {
     background: #ffb;
 }
 .issue.severity-warning button:hover,
@@ -2960,7 +2961,8 @@ div.full-screen > button:hover {
     color: #FFB300
 }
 
-.issue.severity-error button {
+.issue.severity-error button,
+.mode-save .error-section {
     background: #FFD5D4;
 }
 .issue.severity-error button:hover,
@@ -4360,14 +4362,6 @@ svg.mouseclick use.right {
     border-radius: 4px;
     background: #fff;
     margin-bottom: 10px;
-}
-
-.mode-save .warning-section {
-    background: #ffb;
-}
-
-.mode-save .error-section {
-    background: #ffa5a5;
 }
 
 .mode-save .warning-section .changeset-list button {
