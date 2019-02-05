@@ -12,13 +12,13 @@
         "line"
     ],
     "tags": {
-        "golf": "cartpath",
         "highway": "path",
+        "path": "golf",
         "golf_cart": "designated"
     },
     "reference": {
-        "key": "golf",
-        "value": "cartpath"
+        "key": "path",
+        "value": "golf"
     },
     "name": "Golf Cartpath"
 }

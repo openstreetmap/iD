@@ -12,12 +12,12 @@
         "line"
     ],
     "tags": {
-        "golf": "path",
-        "highway": "footway"
+        "highway": "footway",
+        "footway": "golf"
     },
     "reference": {
-        "key": "golf",
-        "value": "path"
+        "key": "footway",
+        "value": "golf"
     },
     "name": "Golf Walking Path"
 }
