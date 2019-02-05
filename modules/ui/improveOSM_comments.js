@@ -22,7 +22,7 @@ export function uiImproveOsmComments() {
         // must retrieve comments from API before they can be displayed
         services.improveOSM.getComments(_error, function(err, d) {
             var commentEnter = comments.selectAll('.comment')
-                .data(_error.comments)
+                .data(d.comments)
                 .enter()
                 .append('div')
                 .attr('class', 'comment');
@@ -55,7 +55,7 @@ export function uiImproveOsmComments() {
                             .attr('target', '_blank');
                     }
                     selection
-                        .text(function(d) { return d.username });
+                        .text(function(d) { return d.username; });
                 });
 
             metadataEnter
