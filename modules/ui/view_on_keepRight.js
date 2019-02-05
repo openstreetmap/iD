@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { services } from '../services';
 import { svgIcon } from '../svg';
-import { krError } from '../osm';
+import { qaError } from '../osm';
 
 
 export function uiViewOnKeepRight() {
@@ -10,7 +10,7 @@ export function uiViewOnKeepRight() {
 
     function viewOnKeepRight(selection) {
         var url;
-        if (services.keepRight && (_error instanceof krError)) {
+        if (services.keepRight && (_error instanceof qaError)) {
             url = services.keepRight.errorURL(_error);
         }
 
