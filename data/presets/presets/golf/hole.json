@@ -12,9 +12,5 @@
     "tags": {
         "golf": "hole"
     },
-    "reference": {
-        "key": "golf",
-        "value": "hole"
-    },
     "name": "Golf Hole"
 }

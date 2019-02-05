@@ -13,8 +13,8 @@
     ],
     "tags": {
         "golf": "cartpath",
-        "highway:": "path",
-        "golf_cart:": "designated"
+        "highway": "path",
+        "golf_cart": "designated"
     },
     "reference": {
         "key": "golf",
