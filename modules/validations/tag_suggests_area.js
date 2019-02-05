@@ -11,9 +11,10 @@ import {
 } from '../core/validator';
 import {
     actionAddVertex,
+    actionConnect,
     actionChangeTags
 } from '../actions';
-import { geoHasSelfIntersections } from '../geo';
+import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
@@ -51,12 +52,33 @@ export function validationTagSuggestsArea() {
         if (suggestingTags) {
             var tagText = utilTagText({ tags: suggestingTags });
             var fixes = [];
-            var nodes = _clone(graph.childNodes(entity));
-            nodes.push(nodes[0]);
-            if (!geoHasSelfIntersections(nodes, nodes[0].id)) {
-                fixes.push(new validationIssueFix({
-                    title: t('issues.fix.connect_endpoints.title'),
-                    onClick: function() {
+            var nodes = graph.childNodes(entity), testNodes;
+
+            var firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
+            var connectEndpointsOnClick;
+            // if the distance is very small, attempt to merge the endpoints
+            if (firstToLastDistanceMeters < 0.5) {
+                testNodes = _clone(nodes);
+                testNodes.pop();
+                testNodes.push(testNodes[0]);
+                // make sure this will not create a self-intersection
+                if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
+                    connectEndpointsOnClick = function() {
+                        var way = this.issue.entities[0];
+                        context.perform(
+                            actionConnect([way.nodes[0], way.nodes[way.nodes.length-1]]),
+                            t('issues.fix.connect_endpoints.undo_redo')
+                        );
+                    };
+                }
+            }
+            if (!connectEndpointsOnClick) {
+                // if the points were not merged, attempt to close the way
+                testNodes = _clone(nodes);
+                testNodes.push(testNodes[0]);
+                // make sure this will not create a self-intersection
+                if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
+                    connectEndpointsOnClick = function() {
                         var way = this.issue.entities[0];
                         var nodeId = way.nodes[0];
                         var index = way.nodes.length;
@@ -64,7 +86,13 @@ export function validationTagSuggestsArea() {
                             actionAddVertex(way.id, nodeId, index),
                             t('issues.fix.connect_endpoints.undo_redo')
                         );
-                    }
+                    };
+                }
+            }
+            if (connectEndpointsOnClick) {
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.connect_endpoints.title'),
+                    onClick: connectEndpointsOnClick
                 }));
             }
             fixes.push(new validationIssueFix({
