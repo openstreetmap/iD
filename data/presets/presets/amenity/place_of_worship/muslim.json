@@ -1,16 +1,19 @@
 {
     "icon": "maki-religious-muslim",
+    "fields": [
+        "name",
+        "religion",
+        "denomination",
+        "building_area",
+        "address",
+        "service_times"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "dome",
-        "islam",
-        "minaret",
-        "musalla",
-        "shia",
-        "sunni"
+        "muslim"
     ],
     "tags": {
         "amenity": "place_of_worship",
