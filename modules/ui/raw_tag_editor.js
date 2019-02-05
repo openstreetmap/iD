@@ -1,7 +1,3 @@
-import _map from 'lodash-es/map';
-import _includes from 'lodash-es/includes';
-
-import { ascending as d3_ascending } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -20,10 +16,10 @@ export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
     var _readOnlyTags = [];
+    var _sortKeys = false;
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
-    var _newRow;
     var _state;
     var _preset;
     var _tags;
@@ -57,14 +53,19 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var entries = _map(_tags, function(v, k) {
-            return { key: k, value: v };
-        });
+        var entries = [];
+        var keys = Object.keys(_tags);
+        if (_sortKeys) {
+            _sortKeys = false;
+            keys = keys.sort();
+        }
+        for (var i = 0; i < keys.length; i++) {
+            entries.push({ key: keys[i], value: _tags[keys[i]] });
+        }
 
         if (!entries.length || _showBlank) {
             _showBlank = false;
-            entries.push({key: '', value: ''});
-            _newRow = '';
+            entries.push({ key: '', value: '' });
         }
 
         // List of tags
@@ -150,11 +151,7 @@ export function uiRawTagEditor(context) {
         // Update
         items = items
             .merge(enter)
-            .sort(function(a, b) {
-                return (a.key === _newRow && b.key !== _newRow) ? 1
-                    : (a.key !== _newRow && b.key === _newRow) ? -1
-                    : d3_ascending(a.key, b.key);
-            });
+            .order();
 
         items
             .each(function(tag) {
@@ -291,7 +288,7 @@ export function uiRawTagEditor(context) {
                     kNew = base + '_' + suffix++;
                 }
 
-                if (_includes(kNew, '=')) {
+                if (kNew.indexOf('=') !== -1) {
                     var splitStr = kNew.split('=').map(function(str) { return str.trim(); });
                     var key = splitStr[0];
                     var value = splitStr[1];
@@ -304,11 +301,6 @@ export function uiRawTagEditor(context) {
             tag[kNew] = d.value;
 
             d.key = kNew;  // Maintain DOM identity through the subsequent update.
-
-            if (_newRow === kOld) {   // see if this row is still a new row
-                _newRow = ((d.value === '' || kNew === '') ? kNew : undefined);
-            }
-
             this.value = kNew;
             dispatch.call('change', this, tag);
         }
@@ -318,11 +310,6 @@ export function uiRawTagEditor(context) {
             if (isReadOnly(d)) return;
             var tag = {};
             tag[d.key] = this.value;
-
-            if (_newRow === d.key && d.key !== '' && d.value !== '') {   // not a new row anymore
-                _newRow = undefined;
-            }
-
             dispatch.call('change', this, tag);
         }
 
@@ -379,6 +366,9 @@ export function uiRawTagEditor(context) {
 
     rawTagEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
+        if (_entityID !== val) {
+            _sortKeys = true;
+        }
         _entityID = val;
         return rawTagEditor;
     };
