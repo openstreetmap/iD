@@ -1,0 +1,10 @@
+{
+    "icon": "maki-golf",
+    "geometry": "line",
+    "name": "Golf Features",
+    "members": [
+        "golf/hole",
+        "golf/cartpath",
+        "golf/path"
+    ]
+}

@@ -29,7 +29,7 @@
         "building/residential"
       ]
     },
-    "category-golf": {
+    "category-golf-area": {
       "icon": "maki-golf",
       "geometry": "area",
       "name": "Golf Features",
@@ -41,6 +41,16 @@
         "golf/bunker",
         "golf/tee",
         "golf/water_hazard_area"
+      ]
+    },
+    "category-golf-line": {
+      "icon": "maki-golf",
+      "geometry": "line",
+      "name": "Golf Features",
+      "members": [
+        "golf/hole",
+        "golf/cartpath",
+        "golf/path"
       ]
     },
     "category-landuse": {
