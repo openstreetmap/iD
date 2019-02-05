@@ -1511,7 +1511,7 @@
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "tag_suggests_area": {
-                "message": "Feature is a line, but the tag \"{tag}\" suggests it should be an area.",
+                "message": "{feature} should be an area based on the tags: {tags}",
                 "tip": "Areas must have connected endpoints."
             },
             "fix": {
@@ -1528,6 +1528,10 @@
                 },
                 "delete_feature": {
                     "title": "Delete this feature"
+                },
+                "connect_endpoints": {
+                    "title": "Connect the ends",
+                    "undo_redo": "Connected the endpoints of a way."
                 },
                 "move_tags": {
                     "title": "Move the tags",
