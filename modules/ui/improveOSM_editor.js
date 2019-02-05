@@ -104,7 +104,7 @@ export function uiImproveOsmEditor(context) {
         saveSectionEnter
             .append('h4')
             .attr('class', '.error-save-header')
-            .text(t('QA.keepRight.comment'));
+            .text(t('note.newComment'));
 
         saveSectionEnter
             .append('textarea')
