@@ -5,11 +5,12 @@
         "operator",
         "building_area",
         "address",
-        "ref/isil"
+        "ref/isil",
+        "internet_access"
     ],
     "moreFields" : [
+        "access_simple",
         "opening_hours",
-        "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "website",
