@@ -375,7 +375,7 @@
     {"key": "entrance", "description": "🄿 Entrance/Exit, 🄵 Type", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"},
     {"key": "ford", "value": "yes", "description": "🄿 Ford", "object_types": ["node"]},
     {"key": "natural", "value": "sand", "description": "🄿 Sand Trap, 🄿 Sand", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
-    {"key": "landuse", "value": "grass", "description": "🄿 Fairway, 🄿 Rough, 🄿 Tee Box, 🄿 Grass", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
+    {"key": "landuse", "value": "grass", "description": "🄿 Fairway, 🄿 Rough, 🄿 Tee Box, 🄿 Driving Range, 🄿 Grass", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
     {"key": "sport", "value": "golf", "description": "🄿 Putting Green", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
     {"key": "golf", "value": "hole", "description": "🄿 Golf Hole", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
     {"key": "golf", "value": "cartpath", "description": "🄿 Golf CartPath", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/golf-15.svg?sanitize=true"},
