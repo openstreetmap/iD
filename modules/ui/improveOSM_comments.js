@@ -21,6 +21,8 @@ export function uiImproveOsmComments() {
 
         // must retrieve comments from API before they can be displayed
         services.improveOSM.getComments(_error, function(err, d) {
+            if (!d.comments) { return; } // nothing to do here
+
             var commentEnter = comments.selectAll('.comment')
                 .data(d.comments)
                 .enter()
