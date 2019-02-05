@@ -77,7 +77,7 @@ export function uiImproveOsmComments() {
         if (!s) return null;
         var detected = utilDetect();
         var options = { day: 'numeric', month: 'short', year: 'numeric' };
-        var d = new Date(s);
+        var d = new Date(s * 1000); // timestamp is served in seconds, date takes ms
         if (isNaN(d.getTime())) return null;
         return d.toLocaleDateString(detected.locale, options);
     }
