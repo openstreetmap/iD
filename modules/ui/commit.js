@@ -273,7 +273,7 @@ export function uiCommit(context) {
             .attr('class', 'label')
             .text(t('commit.save'));
 
-        var uploadBlockerTooltip = getUploadBlockerMessage();
+        var uploadBlockerTooltipText = getUploadBlockerMessage();
 
         // update
         buttonSection = buttonSection
@@ -286,7 +286,7 @@ export function uiCommit(context) {
             });
 
         buttonSection.selectAll('.save-button')
-            .classed('disabled', uploadBlockerTooltip !== undefined)
+            .classed('disabled', uploadBlockerTooltipText !== null)
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
@@ -295,11 +295,11 @@ export function uiCommit(context) {
             });
 
         // remove any existing tooltip
-        buttonSection.selectAll('.save-button .tooltip').remove();
+        tooltip().destroyAny(buttonSection.selectAll('.save-button'));
 
-        if (uploadBlockerTooltip) {
+        if (uploadBlockerTooltipText) {
             buttonSection.selectAll('.save-button')
-                .call(tooltip().title(uploadBlockerTooltip).placement('top'));
+                .call(tooltip().title(uploadBlockerTooltipText).placement('top'));
         }
 
         // Raw Tag Editor
