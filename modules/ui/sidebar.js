@@ -9,7 +9,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { osmEntity, osmNote, iOsmError, krError } from '../osm';
+import { osmEntity, osmNote, qaError } from '../osm';
 import { services } from '../services';
 import {
     uiDataEditor,
@@ -31,8 +31,7 @@ export function uiSidebar(context) {
     var _current;
     var _wasData = false;
     var _wasNote = false;
-    var _wasIOsmError = false;
-    var _wasKRError = false;
+    var _wasQAError = false;
 
 
     function sidebar(selection) {
@@ -140,36 +139,23 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (datum instanceof iOsmError) {
-                _wasIOsmError = true;
+            } else if (datum instanceof qaError) {
+                _wasQAError = true;
 
-                var improveOSM = services.improveOSM;
-                if (improveOSM) {
-                    datum = improveOSM.getError(datum.id);
+                var errService = services[datum.service];
+                if (errService) {
+                    // marker may contain stale data - get latest
+                    datum = errService.getError(datum.id);
                 }
 
-                d3_selectAll('.iOSM.qa_error')
+                // Temporary solution while only two services
+                var errEditor = (datum.service === 'keepRight') ? keepRightEditor : improveOsmEditor;
+
+                d3_selectAll('.qa_error.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar
-                    .show(improveOsmEditor.error(datum));
-
-                selection.selectAll('.sidebar-component')
-                    .classed('inspector-hover', true);
-
-            } else if (datum instanceof krError) {
-                _wasKRError = true;
-
-                var keepRight = services.keepRight;
-                if (keepRight) {
-                    datum = keepRight.getError(datum.id);   // marker may contain stale data - get latest
-                }
-
-                d3_selectAll('.kr.qa_error')
-                    .classed('hover', function(d) { return d.id === datum.id; });
-
-                sidebar
-                    .show(keepRightEditor.error(datum));
+                    .show(errEditor.error(datum));
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
@@ -199,13 +185,12 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
 
-            } else if (_wasData || _wasNote || _wasIOsmError || _wasKRError) {
+            } else if (_wasData || _wasNote || _wasQAError) {
                 _wasNote = false;
                 _wasData = false;
-                _wasIOsmError = false;
-                _wasKRError = false;
+                _wasQAError = false;
                 d3_selectAll('.note').classed('hover', false);
-                d3_selectAll('.kr_error').classed('hover', false);
+                d3_selectAll('.qa_error').classed('hover', false);
                 sidebar.hide();
             }
         }

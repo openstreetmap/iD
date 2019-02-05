@@ -9,7 +9,7 @@ import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
 import { geoExtent, geoVecAdd } from '../geo';
-import { krError } from '../osm';
+import { qaError } from '../osm';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -71,7 +71,7 @@ function updateRtree(item, replace) {
 
 
 function tokenReplacements(d) {
-    if (!(d instanceof krError)) return;
+    if (!(d instanceof qaError)) return;
 
     var htmlRegex = new RegExp(/<\/[a-z][\s\S]*>/);
     var replacements = {};
@@ -375,14 +375,17 @@ export default {
                             coincident = _krCache.rtree.search(bbox).length;
                         } while (coincident);
 
-                        var d = new krError({
+                        var d = new qaError({
+                            // Required values
                             loc: loc,
+                            service: 'keepRight',
+                            error_type: errorType,
+                            // Extra values for this service
                             id: props.error_id,
                             comment: props.comment || null,
                             description: props.description || '',
                             error_id: props.error_id,
                             which_type: whichType,
-                            error_type: errorType,
                             parent_error_type: parentErrorType,
                             severity: whichTemplate.severity || 'error',
                             object_id: props.object_id,
@@ -468,7 +471,7 @@ export default {
 
     // replace a single error in the cache
     replaceError: function(error) {
-        if (!(error instanceof krError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         _krCache.data[error.id] = error;
         updateRtree(encodeErrorRtree(error), true); // true = replace
@@ -478,7 +481,7 @@ export default {
 
     // remove a single error from the cache
     removeError: function(error) {
-        if (!(error instanceof krError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         delete _krCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove

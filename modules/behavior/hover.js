@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { osmEntity, osmNote, krError, iOsmError } from '../osm';
+import { osmEntity, osmNote, qaError } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
 
@@ -112,12 +112,9 @@ export function behaviorHover(context) {
                 entity = datum;
                 selector = '.data' + datum.__featurehash__;
 
-            } else if (
-                datum instanceof iOsmError ||
-                datum instanceof krError
-            ) {
+            } else if (datum instanceof qaError) {
                 entity = datum;
-                selector = '.' + datum.source + '.error_id-' + datum.id;
+                selector = '.' + datum.service + '.error_id-' + datum.id;
 
             } else if (datum instanceof osmNote) {
                 entity = datum;
