@@ -8,17 +8,16 @@
         "dome",
         "islam",
         "minaret",
-        "musalla",
-        "shia",
-        "sunni"
+        "musalla"
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "muslim"
+        "religion": "muslim",
+        "denomination": "sunni"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "sunni"
     },
-    "name": "Muslim Mosque"
+    "name": "Sunni Muslim Mosque"
 }

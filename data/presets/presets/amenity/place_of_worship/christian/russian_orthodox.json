@@ -13,10 +13,12 @@
         "chancel",
         "chantry",
         "chapel",
+        "eastern orthodox",
         "fold",
         "house of God",
         "house of prayer",
         "house of worship",
+        "orthodox catholic church",
         "minster",
         "mission",
         "oratory",
@@ -29,11 +31,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "russian_orthodox"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "russian_orthodox"
     },
-    "name": "Christian Church"
+    "name": "Russian Orthodox Church"
 }

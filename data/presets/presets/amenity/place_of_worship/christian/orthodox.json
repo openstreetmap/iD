@@ -17,10 +17,12 @@
         "house of God",
         "house of prayer",
         "house of worship",
+        "orthodox catholic church",
         "minster",
         "mission",
         "oratory",
         "parish",
+        "priest",
         "sacellum",
         "sanctuary",
         "shrine",
@@ -29,11 +31,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "orthodox"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "orthodox"
     },
-    "name": "Christian Church"
+    "name": "Eastern Orthodox Church"
 }

@@ -13,6 +13,7 @@
         "chancel",
         "chantry",
         "chapel",
+        "evangelical protestantism",
         "fold",
         "house of God",
         "house of prayer",
@@ -29,11 +30,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "evangelical"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "evangelical"
     },
-    "name": "Christian Church"
+    "name": "Evangelical Church"
 }

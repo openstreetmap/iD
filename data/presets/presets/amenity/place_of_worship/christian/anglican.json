@@ -13,6 +13,7 @@
         "chancel",
         "chantry",
         "chapel",
+        "church of england",
         "fold",
         "house of God",
         "house of prayer",
@@ -29,11 +30,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "anglican"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "anglican"
     },
-    "name": "Christian Church"
+    "name": "Anglican Church"
 }

@@ -6,13 +6,13 @@
         "denomination",
         "address",
         "building_area",
-        "service_times"
+        "service_times",
+        "website"
     ],
     "moreFields": [
         "opening_hours",
         "internet_access",
         "internet_access/ssid",
-        "website",
         "phone",
         "email",
         "fax",

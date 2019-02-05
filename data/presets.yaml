@@ -2627,6 +2627,76 @@ en:
         name: Christian Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
         terms: '<translate with synonyms or related terms for ''Christian Church'', separated by commas>'
+      amenity/place_of_worship/christian/anglican:
+        # 'amenity=place_of_worship, religion=christian, denomination=anglican'
+        name: Anglican Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church of england,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Anglican Church'', separated by commas>'
+      amenity/place_of_worship/christian/baptist:
+        # 'amenity=place_of_worship, religion=christian, denomination=baptist'
+        name: Baptist Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Baptist Church'', separated by commas>'
+      amenity/place_of_worship/christian/catholic:
+        # 'amenity=place_of_worship, religion=christian, denomination=catholic'
+        name: Catholic Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Catholic Church'', separated by commas>'
+      amenity/place_of_worship/christian/evangelical:
+        # 'amenity=place_of_worship, religion=christian, denomination=evangelical'
+        name: Evangelical Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,evangelical protestantism,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Evangelical Church'', separated by commas>'
+      amenity/place_of_worship/christian/greek_orthodox:
+        # 'amenity=place_of_worship, religion=christian, denomination=greek_orthodox'
+        name: Greek Orthodox Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,eastern orthodox,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Greek Orthodox Church'', separated by commas>'
+      amenity/place_of_worship/christian/jehovahs_witness:
+        # 'amenity=place_of_worship, religion=christian, denomination=jehovahs_witness'
+        name: Kingdom Hall of Jehovah's Witnesses
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Kingdom Hall of Jehovah''s Witnesses'', separated by commas>'
+      amenity/place_of_worship/christian/lutheran:
+        # 'amenity=place_of_worship, religion=christian, denomination=lutheran'
+        name: Lutheran Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Lutheran Church'', separated by commas>'
+      amenity/place_of_worship/christian/methodist:
+        # 'amenity=place_of_worship, religion=christian, denomination=methodist'
+        name: Methodist Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Methodist Church'', separated by commas>'
+      amenity/place_of_worship/christian/orthodox:
+        # 'amenity=place_of_worship, religion=christian, denomination=orthodox'
+        name: Eastern Orthodox Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Eastern Orthodox Church'', separated by commas>'
+      amenity/place_of_worship/christian/pentecostal:
+        # 'amenity=place_of_worship, religion=christian, denomination=pentecostal'
+        name: Pentecostal Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Pentecostal Church'', separated by commas>'
+      amenity/place_of_worship/christian/presbyterian:
+        # 'amenity=place_of_worship, religion=christian, denomination=presbyterian'
+        name: Presbyterian Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Presbyterian Church'', separated by commas>'
+      amenity/place_of_worship/christian/quaker:
+        # 'amenity=place_of_worship, religion=christian, denomination=quaker'
+        name: Quaker Friends Meeting House
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Quaker Friends Meeting House'', separated by commas>'
+      amenity/place_of_worship/christian/roman_catholic:
+        # 'amenity=place_of_worship, religion=christian, denomination=roman_catholic'
+        name: Roman Catholic Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Roman Catholic Church'', separated by commas>'
+      amenity/place_of_worship/christian/russian_orthodox:
+        # 'amenity=place_of_worship, religion=christian, denomination=russian_orthodox'
+        name: Russian Orthodox Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,eastern orthodox,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Russian Orthodox Church'', separated by commas>'
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
@@ -2635,13 +2705,23 @@ en:
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
         name: Jewish Synagogue
-        # 'terms: jewish'
+        # 'terms: judaism'
         terms: '<translate with synonyms or related terms for ''Jewish Synagogue'', separated by commas>'
       amenity/place_of_worship/muslim:
         # 'amenity=place_of_worship, religion=muslim'
         name: Muslim Mosque
-        # 'terms: muslim'
+        # 'terms: dome,islam,minaret,musalla,shia,sunni'
         terms: '<translate with synonyms or related terms for ''Muslim Mosque'', separated by commas>'
+      amenity/place_of_worship/muslim/shia:
+        # 'amenity=place_of_worship, religion=muslim, denomination=shia'
+        name: Shia Muslim Mosque
+        # 'terms: dome,islam,minaret,musalla'
+        terms: '<translate with synonyms or related terms for ''Shia Muslim Mosque'', separated by commas>'
+      amenity/place_of_worship/muslim/sunni:
+        # 'amenity=place_of_worship, religion=muslim, denomination=sunni'
+        name: Sunni Muslim Mosque
+        # 'terms: dome,islam,minaret,musalla'
+        terms: '<translate with synonyms or related terms for ''Sunni Muslim Mosque'', separated by commas>'
       amenity/place_of_worship/shinto:
         # 'amenity=place_of_worship, religion=shinto'
         name: Shinto Shrine

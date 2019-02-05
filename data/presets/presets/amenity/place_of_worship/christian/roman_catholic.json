@@ -21,6 +21,7 @@
         "mission",
         "oratory",
         "parish",
+        "priest",
         "sacellum",
         "sanctuary",
         "shrine",
@@ -29,11 +30,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "roman_catholic"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "roman_catholic"
     },
-    "name": "Christian Church"
+    "name": "Roman Catholic Church"
 }

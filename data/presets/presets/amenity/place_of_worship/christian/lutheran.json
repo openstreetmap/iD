@@ -29,11 +29,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "lutheran"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "lutheran"
     },
-    "name": "Christian Church"
+    "name": "Lutheran Church"
 }

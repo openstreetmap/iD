@@ -1,13 +1,5 @@
 {
     "icon": "maki-religious-buddhist",
-    "fields": [
-        "name",
-        "religion",
-        "denomination",
-        "building_area",
-        "address",
-        "service_times"
-    ],
     "geometry": [
         "point",
         "area"

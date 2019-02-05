@@ -1,19 +1,11 @@
 {
     "icon": "maki-religious-jewish",
-    "fields": [
-        "name",
-        "religion",
-        "denomination",
-        "building_area",
-        "address",
-        "service_times"
-    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "jewish"
+        "judaism"
     ],
     "tags": {
         "amenity": "place_of_worship",

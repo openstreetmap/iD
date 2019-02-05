@@ -4138,17 +4138,81 @@
                     "name": "Christian Church",
                     "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
+                "amenity/place_of_worship/christian/anglican": {
+                    "name": "Anglican Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church of england,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/baptist": {
+                    "name": "Baptist Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/catholic": {
+                    "name": "Catholic Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/evangelical": {
+                    "name": "Evangelical Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,evangelical protestantism,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/greek_orthodox": {
+                    "name": "Greek Orthodox Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,eastern orthodox,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Kingdom Hall of Jehovah's Witnesses",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/lutheran": {
+                    "name": "Lutheran Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/methodist": {
+                    "name": "Methodist Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/orthodox": {
+                    "name": "Eastern Orthodox Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/pentecostal": {
+                    "name": "Pentecostal Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/presbyterian": {
+                    "name": "Presbyterian Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Quaker Friends Meeting House",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/roman_catholic": {
+                    "name": "Roman Catholic Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,priest,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/russian_orthodox": {
+                    "name": "Russian Orthodox Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,eastern orthodox,fold,house of God,house of prayer,house of worship,orthodox catholic church,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple",
                     "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Jewish Synagogue",
-                    "terms": "jewish"
+                    "terms": "judaism"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "Muslim Mosque",
-                    "terms": "muslim"
+                    "terms": "dome,islam,minaret,musalla,shia,sunni"
+                },
+                "amenity/place_of_worship/muslim/shia": {
+                    "name": "Shia Muslim Mosque",
+                    "terms": "dome,islam,minaret,musalla"
+                },
+                "amenity/place_of_worship/muslim/sunni": {
+                    "name": "Sunni Muslim Mosque",
+                    "terms": "dome,islam,minaret,musalla"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shinto Shrine",
