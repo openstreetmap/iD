@@ -46,7 +46,7 @@ export function uiImproveOsmComments() {
                 .each(function(d) {
                     var selection = d3_select(this);
                     var osm = services.osm;
-                    if (osm && d.user) {
+                    if (osm && d.username) {
                         selection = selection
                             .append('a')
                             .attr('class', 'comment-author-link')
