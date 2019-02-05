@@ -329,6 +329,29 @@ export default {
         });
     },
 
+    // Test case:
+    // http://missingroads.skobbler.net/missingGeoService/retrieveComments?tileX=137495&tileY=89379
+    getComments: function(d, callback) {
+        var key = d.error_key;
+        var qParams = {};
+
+        if (key === 'ow') {
+            qParams = d.identifier;
+        } else if (key === 'mr') {
+            qParams.tileX = d.identifier.x;
+            qParams.tileY = d.identifier.y;
+        } else if (key === 'tr') {
+            qParams.targetId = d.identifier;
+        }
+
+        var url = _impOsmUrls[key] + '/retrieveComments?' + utilQsString(qParams);
+
+        d3_json(url, function(err, data) {
+            d.comments = data.comments;
+            return callback(err, d);
+        });
+    },
+
     postUpdate: function(d, callback) {
         if (!services.osm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
