@@ -33,7 +33,8 @@ export function validationMissingTag() {
             var entityLabel = utilDisplayLabel(entity, context);
             issues.push(new validationIssue({
                 type: type,
-                severity: 'error',
+                // use error if created or modified, else warning
+                severity: entity.v ? 'error' : 'warning',
                 message: t('issues.missing_tag.message', {feature: entityLabel}),
                 tooltip: t('issues.missing_tag.tip'),
                 entities: [entity],
