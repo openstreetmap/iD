@@ -1546,7 +1546,7 @@
                 },
                 "tag_as_disconnected": {
                     "title": "Tag as disconnected",
-                    "undo_redo": "Tagged nearby features as disconnected."
+                    "undo_redo": "Tagged very close features as disconnected."
                 },
                 "upgrade_tags": {
                     "title": "Upgrade tags",
