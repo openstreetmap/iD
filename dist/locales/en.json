@@ -1494,7 +1494,12 @@
                 "tip": "Names should be the official, on-the-ground titles of features."
             },
             "many_deletions": {
-                "message": "Deleting {n} features: {p} nodes, {l} lines, {a} areas, and {r} relations.",
+                "points-lines-areas": {
+                    "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas."
+                },
+                "points-lines-areas-relations": {
+                    "message": "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations."
+                },
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
             "missing_tag": {
