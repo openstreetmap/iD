@@ -1,11 +1,10 @@
 export { osmChangeset } from './changeset';
 export { osmEntity } from './entity';
-export { krError } from './keepRight';
-export { iOsmError } from './improveOSM';
 export { osmNode } from './node';
 export { osmNote } from './note';
 export { osmRelation } from './relation';
 export { osmWay } from './way';
+export { qaError } from './qa_error';
 
 export {
     osmIntersection,
