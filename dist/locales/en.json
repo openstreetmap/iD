@@ -1435,7 +1435,7 @@
                 }
             },
             "crossing_ways": {
-                "message": "{feature} crosses {feature2} without enough context.",
+                "message": "{feature} crosses {feature2}.",
                 "building-building": {
                     "tip": "Buildings should not intersect except on different layers."
                 },
