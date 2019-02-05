@@ -227,7 +227,12 @@ export function uiRawTagEditor(context) {
                         geometry: geometry,
                         query: value
                     }, function(err, data) {
-                        if (!err) callback(sort(value, data));
+                        if (!err) {
+                            var filtered = data.filter(function(d) {
+                                return _tags[d.value] === undefined;
+                            });
+                            callback(sort(value, filtered));
+                        }
                     });
                 }));
 
