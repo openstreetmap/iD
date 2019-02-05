@@ -117,7 +117,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+            
+            var nodes = graph.childNodes(parent);
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
