@@ -1234,7 +1234,7 @@ en:
       message: "{multipolygon} has misplaced tags."
       tip: Multipolygons should be tagged on their relation, not their outer way.
     tag_suggests_area:
-      message: '{feature} should be an area based on the tags: {tags}'
+      message: "{feature} should be a closed area based on the tag: {tag}"
       tip: Areas must have connected endpoints.
     fix:
       add_connection_vertex:
@@ -1256,9 +1256,9 @@ en:
       remove_generic_name:
         title: Remove the name
         undo_redo: Removed a generic name.
-      remove_tags:
-        title: Remove the tags
-        undo_redo: Removed tags.
+      remove_tag:
+        title: Remove the tag
+        undo_redo: Removed tag.
       select_preset:
         title: Select a feature type
       tag_as_disconnected:
