@@ -345,7 +345,7 @@ export default {
         var url = _impOsmUrls[key] + '/retrieveComments?' + utilQsString(qParams);
 
         d3_json(url, function(err, data) {
-            d.comments = data.comments;
+            d.comments = data.comments.reverse(); // comments served newest to oldest
             return callback(err, d);
         });
     },
