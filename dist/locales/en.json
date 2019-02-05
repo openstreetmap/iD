@@ -3608,7 +3608,7 @@
                 },
                 "website": {
                     "label": "Website",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "Type"

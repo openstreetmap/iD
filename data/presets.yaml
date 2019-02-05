@@ -2089,7 +2089,7 @@ en:
         # website=*
         label: Website
         # website field placeholder
-        placeholder: 'http://example.com/'
+        placeholder: 'https://example.com'
       wetland:
         # wetland=*
         label: Type
