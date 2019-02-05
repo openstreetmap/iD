@@ -16,35 +16,35 @@ export function uiEntityIssues(context) {
     var dispatch = d3_dispatch('change');
     var _entityID;
 
-    context.validator().on('reload.entity_issues', update);
+    context.validator().on('reload.entity_issues', issuesDidReload);
 
-    function update() {
+    function issuesDidReload() {
         var selection = d3_select('.entity-issues .disclosure-wrap');
-        render(selection);
+        renderContent(selection);
+        update();
     }
 
     function entityIssues(selection) {
         selection.call(uiDisclosure(context, 'entity_issues', true)
-            .content(render)
+            .content(renderContent)
         );
+        update();
     }
 
-
-    function render(selection) {
+    function update() {
 
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
-        if (issues.length > 0) {
-            d3_select('.entity-issues')
-                .style('display', 'block');
-        } else {
-            d3_select('.entity-issues')
-                .style('display', 'none');
-            return;
-        }
+        d3_select('.entity-issues')
+            .classed('hide', issues.length === 0);
 
         d3_select('.hide-toggle-entity_issues span')
             .text(t('issues.list_title', { count: issues.length }));
+    }
+
+    function renderContent(selection) {
+
+        var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
         var items = selection.selectAll('.issue')
             .data(issues, function(d) {
