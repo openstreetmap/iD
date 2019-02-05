@@ -360,15 +360,14 @@ export default {
                 payload.targetIds = [ d.identifier ];
             }
 
-            // Comments don't currently work, if they ever do in future
-            // it looks as though they require a separate post
-            // if (d.newComment !== undefined) {
-            //     payload.text = d.newComment;
-            // }
-
-            if (d.newStatus !== d.status) {
+            if (d.newStatus !== undefined) {
                 payload.status = d.newStatus;
                 payload.text = 'status changed';
+            }
+
+            // Comment take place of default text
+            if (d.newComment !== undefined) {
+                payload.text = d.newComment;
             }
 
             _erCache.inflightPost[d.id] = d3_request(url)
@@ -378,6 +377,8 @@ export default {
 
                     // Unsuccessful response status, keep issue open
                     if (err.status !== 200) { return callback(err, d); }
+                    // Just a comment, error still open
+                    if (d.newStatus === undefined) { return callback(err, d); }
 
                     that.removeError(d);
 
