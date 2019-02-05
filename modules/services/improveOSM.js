@@ -330,6 +330,9 @@ export default {
     },
 
     getComments: function(d, callback) {
+        // If comments already retrieved no need to do so again
+        if (d.comments !== undefined) { return callback({}, d); }
+
         var key = d.error_key;
         var qParams = {};
 
@@ -344,8 +347,14 @@ export default {
 
         var url = _impOsmUrls[key] + '/retrieveComments?' + utilQsString(qParams);
 
+        var that = this;
         d3_json(url, function(err, data) {
-            d.comments = data.comments.reverse(); // comments served newest to oldest
+            // comments are served newest to oldest
+            var comments = data.comments ? data.comments.reverse() : [];
+
+            that.replaceError(d.update({
+                comments: comments
+            }));
             return callback(err, d);
         });
     },
@@ -398,15 +407,30 @@ export default {
 
                     // Unsuccessful response status, keep issue open
                     if (err.status !== 200) { return callback(err, d); }
-                    // Just a comment, error still open
-                    if (d.newStatus === undefined) { return callback(err, d); }
 
-                    that.removeError(d);
+                    // Just a comment, update error in cache
+                    if (d.newStatus === undefined) {
+                        var now = new Date();
+                        var comments = d.comments ? d.comments : [];
 
-                    // No pretty identifier, so we just use coordinates
-                    if (d.newStatus === 'SOLVED') {
-                        var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
-                        _erCache.closed[key + ':' + closedID] = true;
+                        comments.push({
+                            username: payload.username,
+                            text: payload.text,
+                            timestamp: now.getTime() / 1000
+                        });
+
+                        that.replaceError(d.update({
+                            comments: comments,
+                            newComment: undefined
+                        }));
+                    } else {
+                        that.removeError(d);
+
+                        if (d.newStatus === 'SOLVED') {
+                            // No pretty identifier, so we just use coordinates
+                            var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
+                            _erCache.closed[key + ':' + closedID] = true;
+                        }
                     }
 
                     return callback(err, d);
