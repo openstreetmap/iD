@@ -28,6 +28,7 @@ export { uiFormFields } from './form_fields';
 export { uiFullScreen } from './full_screen';
 export { uiGeolocate } from './geolocate';
 export { uiHelp } from './help';
+export { uiImproveOsmComments } from './improveOSM_comments';
 export { uiImproveOsmDetails } from './improveOSM_details';
 export { uiImproveOsmEditor } from './improveOSM_editor';
 export { uiImproveOsmHeader } from './improveOSM_header';

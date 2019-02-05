@@ -7,6 +7,7 @@ import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
 
 import {
+    uiImproveOsmComments,
     uiImproveOsmDetails,
     uiImproveOsmHeader,
     uiQuickLinks,
@@ -19,6 +20,7 @@ import { utilNoAuto, utilRebind } from '../util';
 export function uiImproveOsmEditor(context) {
     var dispatch = d3_dispatch('change');
     var errorDetails = uiImproveOsmDetails(context);
+    var errorComments = uiImproveOsmComments(context);
     var errorHeader = uiImproveOsmHeader(context);
     var quickLinks = uiQuickLinks();
 
@@ -77,6 +79,7 @@ export function uiImproveOsmEditor(context) {
             .call(errorHeader.error(_error))
             .call(quickLinks.choices(choices))
             .call(errorDetails.error(_error))
+            .call(errorComments.error(_error))
             .call(improveOsmSaveSection);
     }
 

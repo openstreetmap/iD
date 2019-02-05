@@ -329,8 +329,6 @@ export default {
         });
     },
 
-    // Test case:
-    // http://missingroads.skobbler.net/missingGeoService/retrieveComments?tileX=137495&tileY=89379
     getComments: function(d, callback) {
         var key = d.error_key;
         var qParams = {};
