@@ -85,11 +85,20 @@ export function uiInspector(context) {
     };
 
     inspector.setPreset = function(preset) {
-        wrap.transition()
-            .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
-        editorPane
-            .call(entityEditor.preset(preset));
+        // upon setting multipolygon, go to the area preset list instead of the editor
+        if (preset.id === 'type/multipolygon') {
+            presetPane
+                .call(presetList.preset(preset).autofocus(true));
+
+        } else {
+            wrap.transition()
+                .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+
+            editorPane
+                .call(entityEditor.preset(preset));
+        }
+
     };
 
     inspector.state = function(val) {
