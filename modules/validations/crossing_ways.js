@@ -1,7 +1,11 @@
 import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
 import _flattenDeep from 'lodash-es/flatten';
-import { geoExtent, geoLineIntersection } from '../geo';
+import {
+    geoExtent,
+    geoLineIntersection,
+    geoSphericalClosestNode
+} from '../geo';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import {
@@ -9,8 +13,10 @@ import {
     validationIssueFix
 } from '../core/validator';
 import { osmNode } from '../osm';
-import { actionAddMidpoint } from '../actions';
-import { geoChooseEdge } from '../geo';
+import {
+    actionAddMidpoint,
+    actionMergeNodes
+} from '../actions';
 
 
 export function validationCrossingWays() {
@@ -18,7 +24,8 @@ export function validationCrossingWays() {
     // any edge on way. Return the cross point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph) {
         var crossCoords = [];
-        var nA, nB, segment1, segment2;
+        var nA, nB;
+        var segment1 = [n1.loc, n2.loc], segment2;
         var nodes = graph.childNodes(way);
         for (var j = 0; j < nodes.length - 1; j++) {
             nA = nodes[j];
@@ -28,10 +35,11 @@ export function validationCrossingWays() {
                 // n1 or n2 is a connection node; skip
                 continue;
             }
-            segment1 = [n1.loc, n2.loc];
             segment2 = [nA.loc, nB.loc];
             var point = geoLineIntersection(segment1, segment2);
-            if (point) crossCoords.push(point);
+            if (point) {
+                crossCoords.push({ edge: [nA.id, nB.id], point: point });
+            }
         }
         return crossCoords;
     }
@@ -192,16 +200,16 @@ export function validationCrossingWays() {
         return null;
     }
 
-    function findCrossingsByWay(entity, graph, tree) {
+    function findCrossingsByWay(primaryWay, graph, tree) {
         var edgeCrossInfos = [];
-        if (entity.type !== 'way') return edgeCrossInfos;
+        if (primaryWay.type !== 'way') return edgeCrossInfos;
 
-        var entFeatureType = getFeatureTypeForCrossingCheck(entity, graph);
-        if (entFeatureType === null) return edgeCrossInfos;
+        var primaryFeatureType = getFeatureTypeForCrossingCheck(primaryWay, graph);
+        if (primaryFeatureType === null) return edgeCrossInfos;
 
-        for (var i = 0; i < entity.nodes.length - 1; i++) {
-            var nid1 = entity.nodes[i],
-                nid2 = entity.nodes[i + 1],
+        for (var i = 0; i < primaryWay.nodes.length - 1; i++) {
+            var nid1 = primaryWay.nodes[i],
+                nid2 = primaryWay.nodes[i + 1],
                 n1 = graph.entity(nid1),
                 n2 = graph.entity(nid2),
                 extent = geoExtent([
@@ -222,17 +230,19 @@ export function validationCrossingWays() {
                 var way = intersected[j],
                     wayFeatureType = getFeatureTypeForCrossingCheck(way, graph);
                 if (wayFeatureType === null ||
-                    isLegitCrossing(entity, entFeatureType, way, wayFeatureType, graph) ||
-                    isLegitCrossing(way, wayFeatureType, entity, entFeatureType, graph)) {
+                    isLegitCrossing(primaryWay, primaryFeatureType, way, wayFeatureType, graph) ||
+                    isLegitCrossing(way, wayFeatureType, primaryWay, primaryFeatureType, graph)) {
                     continue;
                 }
 
                 var crossCoords = findEdgeToWayCrossCoords(n1, n2, way, graph);
                 for (var k = 0; k < crossCoords.length; k++) {
+                    var crossingInfo = crossCoords[k];
                     edgeCrossInfos.push({
-                        ways: [entity, way],
-                        featureTypes: [entFeatureType, wayFeatureType],
-                        cross_point: crossCoords[k],
+                        ways: [primaryWay, way],
+                        featureTypes: [primaryFeatureType, wayFeatureType],
+                        edges: [[n1.id, n2.id], crossingInfo.edge],
+                        crossPoint: crossingInfo.point
                     });
                 }
             }
@@ -331,26 +341,35 @@ export function validationCrossingWays() {
             fixes.push(new validationIssueFix({
                 title: t('issues.fix.add_connection_vertex.title'),
                 onClick: function() {
-                    var loc = this.issue.coordinates;
-                    var ways = this.issue.info.ways;
-                    var connectionTags = this.issue.info.connectionTags;
+                    var loc = this.issue.coordinates,
+                        connectionTags = this.issue.info.connectionTags,
+                        edges = this.issue.info.edges;
 
                     context.perform(
                         function actionConnectCrossingWays(graph) {
-                            var projection = context.projection;
-
+                            // create the new node for the points
                             var node = osmNode({ loc: loc, tags: connectionTags });
                             graph = graph.replace(node);
 
-                            var way0 = graph.entity(ways[0].id);
-                            var choice0 = geoChooseEdge(graph.childNodes(way0), projection(loc), projection);
-                            var edge0 = [way0.nodes[choice0.index - 1], way0.nodes[choice0.index]];
-                            graph = actionAddMidpoint({loc: loc, edge: edge0}, node)(graph);
+                            var nodesToMerge = [node.id];
+                            var mergeThresholdInMeters = 0.75;
 
-                            var way1 = graph.entity(ways[1].id);
-                            var choice1 = geoChooseEdge(graph.childNodes(way1), projection(loc), projection);
-                            var edge1 = [way1.nodes[choice1.index - 1], way1.nodes[choice1.index]];
-                            graph = actionAddMidpoint({loc: loc, edge: edge1}, node)(graph);
+                            edges.forEach(function(edge) {
+                                var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
+                                var closestNodeInfo = geoSphericalClosestNode(edgeNodes, loc);
+                                // if there is already a point nearby, use that
+                                if (closestNodeInfo.distance < mergeThresholdInMeters) {
+                                    nodesToMerge.push(closestNodeInfo.node.id);
+                                // else add the new node to the way
+                                } else {
+                                    graph = actionAddMidpoint({loc: loc, edge: edge}, node)(graph);
+                                }
+                            });
+
+                            if (nodesToMerge.length > 1) {
+                                // if we're using nearby nodes, merge them with the new node
+                                graph = actionMergeNodes(nodesToMerge, loc)(graph);
+                            }
 
                             return graph;
                         },
@@ -366,8 +385,8 @@ export function validationCrossingWays() {
             message: t('issues.crossing_ways.message', messageDict),
             tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
             entities: entities,
-            info: { ways: crossing.ways, connectionTags: connectionTags },
-            coordinates: crossing.cross_point,
+            info: { edges: crossing.edges, connectionTags: connectionTags },
+            coordinates: crossing.crossPoint,
             fixes: fixes
         });
     }

@@ -141,7 +141,6 @@ export function validationAlmostJunction() {
                 title: t('issues.fix.connect_almost_junction.title'),
                 onClick: function() {
                     var endNode = this.issue.entities[1],
-                        edgeWay = this.issue.entities[2],
                         targetEdge = this.issue.info.edge,
                         crossLoc = this.issue.info.cross_loc;
                     var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
