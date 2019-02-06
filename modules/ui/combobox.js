@@ -91,6 +91,7 @@ export function uiCombobox(context, klass) {
         function mouseup() {
             input.on('mouseup.combo-input', null);
             if (d3_event.button !== 0) return;    // left click only
+            if (this !== document.activeElement) return;   // exit if this input is not focused
 
             var start = input.property('selectionStart');
             var end = input.property('selectionEnd');
@@ -98,11 +99,10 @@ export function uiCombobox(context, klass) {
 
             // not showing or showing for a different field - try to show it.
             var combo = container.selectAll('.combobox');
-            if (combo.empty() || combo.datum() !== input) {
+            if (combo.empty() || combo.datum() !== input.node()) {
                 var tOrig = _tDown;
                 window.setTimeout(function() {
                     if (tOrig !== _tDown) return;   // exit if user double clicked
-                    input.node().focus();
                     fetch('', function() {
                         show();
                         render();
