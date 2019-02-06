@@ -1,3 +1,4 @@
+import _cloneDeep from 'lodash-es/cloneDeep';
 import {
     geoExtent,
     geoLineIntersection,
@@ -5,6 +6,7 @@ import {
     geoMetersToLon,
     geoSphericalDistance,
     geoVecInterp,
+    geoHasSelfIntersections
 } from '../geo';
 import {
     utilDisplayLabel
@@ -40,26 +42,39 @@ export function validationAlmostJunction() {
             nodeLast = graph.entity(nidLast);
 
         if (nidFirst === nidLast) return results;
+
+        var testNodes;
+
         if (!isNoexit(nodeFirst) && graph.parentWays(nodeFirst).length === 1) {
             var connNearFirst = canConnectByExtend(way, 0, graph, tree);
             if (connNearFirst !== null) {
-                results.push({
-                    node: nodeFirst,
-                    wid: connNearFirst.wid,
-                    edge: connNearFirst.edge,
-                    cross_loc: connNearFirst.cross_loc
-                });
+                testNodes = _cloneDeep(graph.childNodes(way));
+                testNodes[0].loc = connNearFirst.cross_loc;
+                // don't flag issue if connecting the ways would cause self-intersection
+                if (!geoHasSelfIntersections(testNodes, nodeFirst.id)) {
+                    results.push({
+                        node: nodeFirst,
+                        wid: connNearFirst.wid,
+                        edge: connNearFirst.edge,
+                        cross_loc: connNearFirst.cross_loc
+                    });
+                }
             }
         }
         if (!isNoexit(nodeLast) && graph.parentWays(nodeLast).length === 1) {
             var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
             if (connNearLast !== null) {
-                results.push({
-                    node: nodeLast,
-                    wid: connNearLast.wid,
-                    edge: connNearLast.edge,
-                    cross_loc: connNearLast.cross_loc
-                });
+                testNodes = _cloneDeep(graph.childNodes(way));
+                testNodes[testNodes.length-1].loc = connNearLast.cross_loc;
+                // don't flag issue if connecting the ways would cause self-intersection
+                if (!geoHasSelfIntersections(testNodes, nodeLast.id)) {
+                    results.push({
+                        node: nodeLast,
+                        wid: connNearLast.wid,
+                        edge: connNearLast.edge,
+                        cross_loc: connNearLast.cross_loc
+                    });
+                }
             }
         }
         return results;
@@ -109,15 +124,17 @@ export function validationAlmostJunction() {
     var type = 'almost_junction';
 
     var validation = function(endHighway, context) {
+
+        if (!isHighway(endHighway)) return [];
+
         var graph = context.graph();
         var tree = context.history().tree();
-        var issues = [];
-        if (!isHighway(endHighway)) return issues;
-        var extendableNodes = findConnectableEndNodesByExtension(endHighway, graph, tree);
-        for (var j = 0; j < extendableNodes.length; j++) {
-            var node = extendableNodes[j].node;
-            var edgeHighway = graph.entity(extendableNodes[j].wid);
 
+        var issues = [];
+        var extendableNodeInfos = findConnectableEndNodesByExtension(endHighway, graph, tree);
+        extendableNodeInfos.forEach(function(extendableNodeInfo) {
+            var node = extendableNodeInfo.node;
+            var edgeHighway = graph.entity(extendableNodeInfo.wid);
             var fixes = [
               new validationIssueFix({
                   title: t('issues.fix.connect_almost_junction.title'),
@@ -154,14 +171,14 @@ export function validationAlmostJunction() {
                 }),
                 tooltip: t('issues.almost_junction.highway-highway.tip'),
                 entities: [endHighway, node, edgeHighway],
-                coordinates: extendableNodes[j].node.loc,
+                coordinates: extendableNodeInfo.node.loc,
                 info: {
-                    edge: extendableNodes[j].edge,
-                    cross_loc: extendableNodes[j].cross_loc
+                    edge: extendableNodeInfo.edge,
+                    cross_loc: extendableNodeInfo.cross_loc
                 },
                 fixes: fixes
             }));
-        }
+        });
 
         return issues;
     };
