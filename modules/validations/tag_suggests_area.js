@@ -10,8 +10,8 @@ import {
 } from '../core/validator';
 import {
     actionAddVertex,
-    actionConnect,
-    actionChangeTags
+    actionChangeTags,
+    actionMergeNodes
 } from '../actions';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 
@@ -48,7 +48,7 @@ export function validationTagSuggestsArea() {
                     connectEndpointsOnClick = function() {
                         var way = this.issue.entities[0];
                         context.perform(
-                            actionConnect([way.nodes[0], way.nodes[way.nodes.length-1]]),
+                            actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
                             t('issues.fix.connect_endpoints.undo_redo')
                         );
                     };
