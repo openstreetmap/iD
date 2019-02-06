@@ -4010,6 +4010,10 @@
                     "name": "Kebab Fast Food",
                     "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
+                "amenity/fast_food/mexican": {
+                    "name": "Mexican Fast Food",
+                    "terms": "breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas"
+                },
                 "amenity/fast_food/pizza": {
                     "name": "Pizza Fast Food",
                     "terms": "dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
@@ -5889,6 +5893,10 @@
                 "leisure/picnic_table": {
                     "name": "Picnic Table",
                     "terms": "bench"
+                },
+                "leisure/picnic_table/chess": {
+                    "name": "Chess Table",
+                    "terms": "bench,chess board,checkerboard,checkers,chequerboard,game table"
                 },
                 "leisure/pitch": {
                     "name": "Sport Pitch",

@@ -2469,6 +2469,11 @@ en:
         name: Kebab Fast Food
         # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
         terms: '<translate with synonyms or related terms for ''Kebab Fast Food'', separated by commas>'
+      amenity/fast_food/mexican:
+        # 'amenity=fast_food, cuisine=mexican'
+        name: Mexican Fast Food
+        # 'terms: breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas'
+        terms: '<translate with synonyms or related terms for ''Mexican Fast Food'', separated by commas>'
       amenity/fast_food/pizza:
         # 'amenity=fast_food, cuisine=pizza'
         name: Pizza Fast Food
@@ -4645,6 +4650,11 @@ en:
         name: Picnic Table
         # 'terms: bench'
         terms: '<translate with synonyms or related terms for ''Picnic Table'', separated by commas>'
+      leisure/picnic_table/chess:
+        # 'leisure=picnic_table, sport=chess'
+        name: Chess Table
+        # 'terms: bench,chess board,checkerboard,checkers,chequerboard,game table'
+        terms: '<translate with synonyms or related terms for ''Chess Table'', separated by commas>'
       leisure/pitch:
         # leisure=pitch
         name: Sport Pitch

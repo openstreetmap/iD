@@ -5,7 +5,6 @@
         "area"
     ],
     "terms": [
-        "bar",
         "breakfast",
         "dine",
         "dining",
@@ -26,12 +25,12 @@
         "quesadillas"
     ],
     "tags": {
-        "amenity": "restaurant",
+        "amenity": "fast_food",
         "cuisine": "mexican"
     },
     "reference": {
         "key": "cuisine",
         "value": "mexican"
     },
-    "name": "Mexican Restaurant"
+    "name": "Mexican Fast Food"
 }
