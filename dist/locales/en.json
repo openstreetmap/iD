@@ -1503,7 +1503,15 @@
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
             "missing_tag": {
-                "message": "{feature} has no descriptive tags.",
+                "any": {
+                    "message": "{feature} has no tags."
+                },
+                "descriptive": {
+                    "message": "{feature} has no descriptive tags."
+                },
+                "specific": {
+                    "message": "{feature} has no \"{tag}\" tag."
+                },
                 "tip": "Features must have tags that define what they are."
             },
             "old_multipolygon": {
