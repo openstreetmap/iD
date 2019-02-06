@@ -6,14 +6,16 @@ import {
     geoMetersToLon,
     geoSphericalDistance,
     geoVecInterp,
-    geoHasSelfIntersections
+    geoHasSelfIntersections,
+    geoSphericalClosestNode
 } from '../geo';
 import {
     utilDisplayLabel
 } from '../util';
 import {
     actionAddMidpoint,
-    actionChangeTags
+    actionChangeTags,
+    actionMergeNodes
 } from '../actions';
 import { t } from '../util/locale';
 import {
@@ -135,20 +137,30 @@ export function validationAlmostJunction() {
         extendableNodeInfos.forEach(function(extendableNodeInfo) {
             var node = extendableNodeInfo.node;
             var edgeHighway = graph.entity(extendableNodeInfo.wid);
-            var fixes = [
-              new validationIssueFix({
-                  title: t('issues.fix.connect_almost_junction.title'),
-                  onClick: function() {
-                      var endNode = this.issue.entities[1],
-                          targetEdge = this.issue.info.edge,
-                          crossLoc = this.issue.info.cross_loc;
-                      context.perform(
-                          actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
-                          t('issues.fix.connect_almost_junction.undo_redo')
-                      );
-                  }
-              })
-            ];
+            var fixes = [new validationIssueFix({
+                title: t('issues.fix.connect_almost_junction.title'),
+                onClick: function() {
+                    var endNode = this.issue.entities[1],
+                        edgeWay = this.issue.entities[2],
+                        crossLoc = this.issue.info.cross_loc;
+                    var edgeWayNodes = context.graph().childNodes(edgeWay);
+                    var closestNodeInfo = geoSphericalClosestNode(edgeWayNodes, crossLoc);
+                    // if there is already a point nearby, just connect to that
+                    if (closestNodeInfo.distance < 0.8) {
+                        context.perform(
+                            actionMergeNodes([closestNodeInfo.node.id, endNode.id], closestNodeInfo.node.loc),
+                            t('issues.fix.connect_almost_junction.undo_redo')
+                        );
+                    // else add the end node to the edge way
+                    } else {
+                        var targetEdge = this.issue.info.edge;
+                        context.perform(
+                            actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
+                            t('issues.fix.connect_almost_junction.undo_redo')
+                        );
+                    }
+                }
+            })];
             if (Object.keys(node.tags).length === 0) {
                 // node has no tags, suggest noexit fix
                 fixes.push(new validationIssueFix({
