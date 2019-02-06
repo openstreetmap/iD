@@ -286,11 +286,17 @@ export function uiRawTagEditor(context) {
             }
 
             if (kNew && kNew !== kOld) {
-                var match = kNew.match(/^(.*?)(?:_(\d+))?$/);
-                var base = match[1];
-                var suffix = +(match[2] || 1);
-                while (_tags[kNew]) {  // rename key if already in use
-                    kNew = base + '_' + suffix++;
+                if (_tags[kNew] !== undefined) {      // key is already in use
+                    this.value = kOld;                // clear it out
+                    list.selectAll('input.value')
+                        .each(function(d) {
+                            if (d.key === kNew) {     // send focus to that other value combo instead
+                                var input = d3_select(this).node();
+                                input.focus();
+                                input.select();
+                            }
+                        });
+                    return;
                 }
 
                 if (kNew.indexOf('=') !== -1) {
