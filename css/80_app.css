@@ -3822,7 +3822,7 @@ img.tile-debug {
     vertical-align: baseline;
     width: 11px;
     height: 11px;
-    fill: #fff;
+    color: #fff;
 }
 
 /* For text (e.g. upcoming events) */
