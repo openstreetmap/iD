@@ -278,16 +278,33 @@ export function uiRawTagEditor(context) {
         function keyChange(d) {
             var kOld = d.key;
             var kNew = this.value.trim();
-            var tag = {};
+            var row = this.parentNode.parentNode;
+            var inputVal = d3_select(row).selectAll('input.value');
+            var vNew = utilGetSetValue(inputVal);
 
+            // if the key looks like "key=value", split them up - #5024
+            if (kNew.indexOf('=') !== -1) {
+                var parts = kNew
+                    .split('=')
+                    .map(function(str) { return str.trim(); })
+                    .filter(Boolean);
+
+                if (parts.length === 2) {
+                    kNew = parts[0];
+                    vNew = parts[1];
+                }
+            }
+
+            // allow no change if the key should be readonly
             if (isReadOnly({ key: kNew })) {
                 this.value = kOld;
                 return;
             }
 
+            // switch focus if key is already in use
             if (kNew && kNew !== kOld) {
-                if (_tags[kNew] !== undefined) {      // key is already in use
-                    this.value = kOld;                // clear it out
+                if (_tags[kNew] !== undefined) {      // new key is already in use
+                    this.value = kOld;                // reset the key
                     list.selectAll('input.value')
                         .each(function(d) {
                             if (d.key === kNew) {     // send focus to that other value combo instead
@@ -298,38 +315,37 @@ export function uiRawTagEditor(context) {
                         });
                     return;
                 }
-
-                if (kNew.indexOf('=') !== -1) {
-                    var splitStr = kNew.split('=').map(function(str) { return str.trim(); });
-                    var key = splitStr[0];
-                    var value = splitStr[1];
-
-                    kNew = key;
-                    d.value = value;
-                }
             }
-            tag[kOld] = undefined;
-            tag[kNew] = d.value;
 
-            d.key = kNew;  // Maintain DOM identity through the subsequent update.
+            var t = {};
+            if (kOld) {
+                t[kOld] = undefined;
+            }
+            t[kNew] = vNew;
+
+            d.key = kNew;    // update datum to avoid exit/enter on tag update
+            d.value = vNew;
+
             this.value = kNew;
-            dispatch.call('change', this, tag);
+            utilGetSetValue(inputVal, vNew);
+
+            dispatch.call('change', this, t);
         }
 
 
         function valueChange(d) {
             if (isReadOnly(d)) return;
-            var tag = {};
-            tag[d.key] = this.value;
-            dispatch.call('change', this, tag);
+            var t = {};
+            t[d.key] = this.value;
+            dispatch.call('change', this, t);
         }
 
 
         function removeTag(d) {
             if (isReadOnly(d)) return;
-            var tag = {};
-            tag[d.key] = undefined;
-            dispatch.call('change', this, tag);
+            var t = {};
+            t[d.key] = undefined;
+            dispatch.call('change', this, t);
             d3_select(this.parentNode).remove();
         }
 
