@@ -5,6 +5,7 @@
     "members": [
         "golf/hole",
         "golf/cartpath",
+        "golf/cartpath_multipurpose",
         "golf/path"
     ]
 }
