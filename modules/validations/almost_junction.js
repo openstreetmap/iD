@@ -142,9 +142,10 @@ export function validationAlmostJunction() {
                 onClick: function() {
                     var endNode = this.issue.entities[1],
                         edgeWay = this.issue.entities[2],
+                        targetEdge = this.issue.info.edge,
                         crossLoc = this.issue.info.cross_loc;
-                    var edgeWayNodes = context.graph().childNodes(edgeWay);
-                    var closestNodeInfo = geoSphericalClosestNode(edgeWayNodes, crossLoc);
+                    var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
+                    var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
                     // if there is already a point nearby, just connect to that
                     if (closestNodeInfo.distance < 0.75) {
                         context.perform(
@@ -153,7 +154,6 @@ export function validationAlmostJunction() {
                         );
                     // else add the end node to the edge way
                     } else {
-                        var targetEdge = this.issue.info.edge;
                         context.perform(
                             actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
                             t('issues.fix.connect_almost_junction.undo_redo')
