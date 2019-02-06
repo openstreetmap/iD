@@ -39,7 +39,7 @@ export function validationTagSuggestsArea() {
             var firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
             var connectEndpointsOnClick;
             // if the distance is very small, attempt to merge the endpoints
-            if (firstToLastDistanceMeters < 0.5) {
+            if (firstToLastDistanceMeters < 0.75) {
                 testNodes = _clone(nodes);
                 testNodes.pop();
                 testNodes.push(testNodes[0]);

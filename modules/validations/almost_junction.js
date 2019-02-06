@@ -146,7 +146,7 @@ export function validationAlmostJunction() {
                     var edgeWayNodes = context.graph().childNodes(edgeWay);
                     var closestNodeInfo = geoSphericalClosestNode(edgeWayNodes, crossLoc);
                     // if there is already a point nearby, just connect to that
-                    if (closestNodeInfo.distance < 0.8) {
+                    if (closestNodeInfo.distance < 0.75) {
                         context.perform(
                             actionMergeNodes([closestNodeInfo.node.id, endNode.id], closestNodeInfo.node.loc),
                             t('issues.fix.connect_almost_junction.undo_redo')
