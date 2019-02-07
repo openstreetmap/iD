@@ -329,6 +329,36 @@ export default {
         });
     },
 
+    getComments: function(d, callback) {
+        // If comments already retrieved no need to do so again
+        if (d.comments !== undefined) { return callback({}, d); }
+
+        var key = d.error_key;
+        var qParams = {};
+
+        if (key === 'ow') {
+            qParams = d.identifier;
+        } else if (key === 'mr') {
+            qParams.tileX = d.identifier.x;
+            qParams.tileY = d.identifier.y;
+        } else if (key === 'tr') {
+            qParams.targetId = d.identifier;
+        }
+
+        var url = _impOsmUrls[key] + '/retrieveComments?' + utilQsString(qParams);
+
+        var that = this;
+        d3_json(url, function(err, data) {
+            // comments are served newest to oldest
+            var comments = data.comments ? data.comments.reverse() : [];
+
+            that.replaceError(d.update({
+                comments: comments
+            }));
+            return callback(err, d);
+        });
+    },
+
     postUpdate: function(d, callback) {
         if (!services.osm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
@@ -360,15 +390,14 @@ export default {
                 payload.targetIds = [ d.identifier ];
             }
 
-            // Comments don't currently work, if they ever do in future
-            // it looks as though they require a separate post
-            // if (d.newComment !== undefined) {
-            //     payload.text = d.newComment;
-            // }
-
-            if (d.newStatus !== d.status) {
+            if (d.newStatus !== undefined) {
                 payload.status = d.newStatus;
                 payload.text = 'status changed';
+            }
+
+            // Comment take place of default text
+            if (d.newComment !== undefined) {
+                payload.text = d.newComment;
             }
 
             _erCache.inflightPost[d.id] = d3_request(url)
@@ -379,12 +408,29 @@ export default {
                     // Unsuccessful response status, keep issue open
                     if (err.status !== 200) { return callback(err, d); }
 
-                    that.removeError(d);
+                    // Just a comment, update error in cache
+                    if (d.newStatus === undefined) {
+                        var now = new Date();
+                        var comments = d.comments ? d.comments : [];
 
-                    // No pretty identifier, so we just use coordinates
-                    if (d.newStatus === 'SOLVED') {
-                        var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
-                        _erCache.closed[key + ':' + closedID] = true;
+                        comments.push({
+                            username: payload.username,
+                            text: payload.text,
+                            timestamp: now.getTime() / 1000
+                        });
+
+                        that.replaceError(d.update({
+                            comments: comments,
+                            newComment: undefined
+                        }));
+                    } else {
+                        that.removeError(d);
+
+                        if (d.newStatus === 'SOLVED') {
+                            // No pretty identifier, so we just use coordinates
+                            var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
+                            _erCache.closed[key + ':' + closedID] = true;
+                        }
                     }
 
                     return callback(err, d);
