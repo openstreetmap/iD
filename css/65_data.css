@@ -1,7 +1,7 @@
 
 /* OSM Notes and KeepRight Layers */
 
-.kr_error-header-icon .qa_error-fill,
+.error-header-icon .qa_error-fill,
 .layer-keepRight .qa_error .qa_error-fill,
 .layer-improveOSM .qa_error .qa_error-fill {
     stroke: #333;
@@ -44,12 +44,12 @@
 
 /* adjustment for error icon */
 
-.kr_error-header-icon .preset-icon-28 {
+.error-header-icon .preset-icon-28 {
     top: auto;
     left: auto;
 }
 
-.kr_error-header-icon {
+.error-header-icon {
     display: flex;
     align-items: center;
     justify-content: center;

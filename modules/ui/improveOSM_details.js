@@ -32,7 +32,7 @@ export function uiImproveOsmDetails(context) {
 
 
     function improveOsmDetails(selection) {
-        var details = selection.selectAll('.kr_error-details')
+        var details = selection.selectAll('.error-details')
             .data(
                 (_error ? [_error] : []),
                 function(d) { return d.id + '-' + (d.status || 0); }
@@ -43,13 +43,13 @@ export function uiImproveOsmDetails(context) {
 
         var detailsEnter = details.enter()
             .append('div')
-            .attr('class', 'kr_error-details kr_error-details-container');
+            .attr('class', 'error-details error-details-container');
 
 
         // description
         var descriptionEnter = detailsEnter
             .append('div')
-            .attr('class', 'kr_error-details-description');
+            .attr('class', 'error-details-description');
 
         descriptionEnter
             .append('h4')
@@ -57,14 +57,14 @@ export function uiImproveOsmDetails(context) {
 
         descriptionEnter
             .append('div')
-            .attr('class', 'kr_error-details-description-text')
+            .attr('class', 'error-details-description-text')
             .html(errorDetail);
 
         // If there are entity links in the error message..
-        descriptionEnter.selectAll('.kr_error_entity_link, .kr_error_object_link')
+        descriptionEnter.selectAll('.error_entity_link, .error_object_link')
             .each(function() {
                 var link = d3_select(this);
-                var isObjectLink = link.classed('kr_error_object_link');
+                var isObjectLink = link.classed('error_object_link');
                 var entityID = isObjectLink ?
                     (utilEntityRoot(_error.object_type) + _error.object_id)
                     : this.textContent;
