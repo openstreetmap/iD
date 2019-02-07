@@ -1,0 +1,24 @@
+{
+    "icon": "maki-golf",
+    "fields": [
+        "name",
+        "surface",
+        "width",
+        "structure",
+        "access",
+        "incline"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "service",
+        "golf": "cartpath",
+        "golf_cart": "designated"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "cartpath"
+    },
+    "name": "Golf Cartpath Multipurpose"
+}

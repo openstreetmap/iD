@@ -9,6 +9,7 @@
         "golf/rough",
         "golf/bunker",
         "golf/tee",
-        "golf/water_hazard_area"
+        "golf/water_hazard_area",
+        "golf/driving_range"
     ]
 }
