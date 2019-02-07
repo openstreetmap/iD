@@ -16,7 +16,7 @@ export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
     var _readOnlyTags = [];
-    var _sortKeys = false;
+    var _orderedKeys = [];
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
@@ -53,19 +53,34 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var entries = [];
-        var keys = Object.keys(_tags);
-        if (_sortKeys) {
-            _sortKeys = false;
-            keys = keys.sort();
-        }
-        for (var i = 0; i < keys.length; i++) {
-            entries.push({ key: keys[i], value: _tags[keys[i]] });
+        var rowData = [];
+        var seen = {};
+        var allKeys = Object.keys(_tags);
+        var i, k;
+
+        // When switching to a different entity or changing the state (hover/select)
+        // we reorder the keys.  Otherwise leave them as the user entered - #5857
+        if (!_orderedKeys.length) {
+            _orderedKeys = allKeys.sort();
         }
 
-        if (!entries.length || _showBlank) {
+        // push ordered keys first
+        for (i = 0; i < _orderedKeys.length; i++) {
+            k = _orderedKeys[i];
+            if (_tags[k] === undefined) continue;   // e.g. tag was removed
+            seen[k] = true;
+            rowData.push({ key: k, value: _tags[k] });
+        }
+        // push unknown keys after - these are tags the user added
+        for (i = 0; i < allKeys.length; i++) {
+            k = allKeys[i];
+            if (seen[k]) continue;
+            rowData.push({ key: k, value: _tags[k] });
+        }
+        // push blank row last, if necessary
+        if (!rowData.length || _showBlank) {
             _showBlank = false;
-            entries.push({ key: '', value: '' });
+            rowData.push({ key: '', value: '' });
         }
 
         // List of tags
@@ -102,7 +117,7 @@ export function uiRawTagEditor(context) {
 
         // Tag list items
         var items = list.selectAll('.tag-row')
-            .data(entries, function(d) { return d.key; });
+            .data(rowData, function(d) { return d.key; });
 
         items.exit()
             .each(unbind)
@@ -110,12 +125,12 @@ export function uiRawTagEditor(context) {
 
 
         // Enter
-        var enter = items.enter()
+        var itemsEnter = items.enter()
             .append('li')
             .attr('class', 'tag-row')
             .classed('readonly', isReadOnly);
 
-        var innerWrap = enter.append('div')
+        var innerWrap = itemsEnter.append('div')
             .attr('class', 'inner-wrap');
 
         innerWrap
@@ -151,7 +166,7 @@ export function uiRawTagEditor(context) {
 
         // Update
         items = items
-            .merge(enter)
+            .merge(itemsEnter)
             .order();
 
         items
@@ -373,7 +388,10 @@ export function uiRawTagEditor(context) {
 
     rawTagEditor.state = function(val) {
         if (!arguments.length) return _state;
-        _state = val;
+        if (_state !== val) {
+            _orderedKeys = [];
+            _state = val;
+        }
         return rawTagEditor;
     };
 
@@ -402,9 +420,9 @@ export function uiRawTagEditor(context) {
     rawTagEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
         if (_entityID !== val) {
-            _sortKeys = true;
+            _orderedKeys = [];
+            _entityID = val;
         }
-        _entityID = val;
         return rawTagEditor;
     };
 
