@@ -596,21 +596,42 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadNotes', function() {
+        var notesXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
+            '<note lon="10" lat="0">' +
+            '  <id>1</id>' +
+            '  <url>https://www.openstreetmap.org/api/0.6/notes/1</url>' +
+            '  <comment_url>https://www.openstreetmap.org/api/0.6/notes/1/comment</comment_url>' +
+            '  <close_url>https://www.openstreetmap.org/api/0.6/notes/1/close</close_url>' +
+            '  <date_created>2019-01-01 00:00:00 UTC</date_created>' +
+            '  <status>open</status>' +
+            '  <comments>' +
+            '    <comment>' +
+            '      <date>2019-01-01 00:00:00 UTC</date>' +
+            '      <uid>1</uid>' +
+            '      <user>Steve</user>' +
+            '      <user_url>https://www.openstreetmap.org/user/Steve</user_url>' +
+            '      <action>opened</action>' +
+            '      <text>This is a note</text>' +
+            '      <html>&lt;p&gt;This is a note&lt;/p&gt;</html>' +
+            '    </comment>' +
+            '  </comments>' +
+            '</note>' +
+            '</osm>';
+
         beforeEach(function() {
+            var dimensions = [64, 64];
             context.projection
-                .scale(116722210.56960216)
-                .translate([244505613.61327893, 74865520.92230521])
-                .clipExtent([[0,0], [609.34375, 826]]);
+                .scale(iD.geoZoomToScale(14))
+                .translate([-116508, 0])  // 10,0
+                .clipExtent([[0,0], dimensions]);
         });
 
         it('fires loadedNotes when notes are loaded', function() {
             connection.on('loadedNotes', spy);
-            connection.loadNotes(context.projection, [64, 64], {});
+            connection.loadNotes(context.projection, {});
 
-            var url = 'http://www.openstreetmap.org/api/0.6/notes?limit=10000&closed=7&bbox=-120.05859375,34.45221847282654,-119.970703125,34.52466147177173';
-            var notesXML = ''; // TODO: determine output even though this test note is closed and will be gone soon
-
-            server.respondWith('GET', url,
+            server.respondWith('GET', /notes\?/,
                 [200, { 'Content-Type': 'text/xml' }, notesXML ]);
             server.respond();
 
@@ -623,7 +644,7 @@ describe('iD.serviceOsm', function () {
         beforeEach(function() {
             var dimensions = [64, 64];
             context.projection
-                .scale(667544.214430109)  // z14
+                .scale(iD.geoZoomToScale(14))
                 .translate([-116508, 0])  // 10,0
                 .clipExtent([[0,0], dimensions]);
         });
@@ -646,17 +667,17 @@ describe('iD.serviceOsm', function () {
 
 
     describe('#getNote', function() {
-            it('returns a note', function (done) {
-                var note = iD.osmNote({ id: 1, loc: [0, 0], });
-                var obj = {
-                    note: { note: { 1: note } }
-                };
-                connection.caches(obj);
-                var result = connection.getNote(1);
-                expect(result).to.deep.equal(note);
-                done();
-            });
+        it('returns a note', function (done) {
+            var note = iD.osmNote({ id: 1, loc: [0, 0], });
+            var obj = {
+                note: { note: { 1: note } }
+            };
+            connection.caches(obj);
+            var result = connection.getNote(1);
+            expect(result).to.deep.equal(note);
+            done();
         });
+    });
 
     describe('#removeNote', function() {
         it('removes a note that is new', function(done) {
@@ -701,7 +722,8 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function() {
-        var capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
             '<api>' +
             '<version minimum="0.6" maximum="0.6"/>' +
             '<area maximum="0.25"/>' +
