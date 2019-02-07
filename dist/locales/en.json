@@ -1973,7 +1973,10 @@
                 "category-building": {
                     "name": "Building Features"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "Golf Features"
+                },
+                "category-golf-line": {
                     "name": "Golf Features"
                 },
                 "category-landuse": {
@@ -5286,6 +5289,18 @@
                     "name": "Sand Trap",
                     "terms": "hazard,bunker"
                 },
+                "golf/cartpath_service": {
+                    "name": "Golf Cartpath / Service Road",
+                    "terms": ""
+                },
+                "golf/cartpath": {
+                    "name": "Golf Cartpath",
+                    "terms": ""
+                },
+                "golf/driving_range": {
+                    "name": "Driving Range",
+                    "terms": ""
+                },
                 "golf/fairway": {
                     "name": "Fairway",
                     "terms": ""
@@ -5298,12 +5313,12 @@
                     "name": "Golf Hole",
                     "terms": ""
                 },
-                "golf/lateral_water_hazard_area": {
+                "golf/lateral_water_hazard": {
                     "name": "Lateral Water Hazard",
                     "terms": ""
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Lateral Water Hazard",
+                "golf/path": {
+                    "name": "Golf Walking Path",
                     "terms": ""
                 },
                 "golf/rough": {
@@ -5314,11 +5329,7 @@
                     "name": "Tee Box",
                     "terms": "teeing ground"
                 },
-                "golf/water_hazard_area": {
-                    "name": "Water Hazard",
-                    "terms": ""
-                },
-                "golf/water_hazard_line": {
+                "golf/water_hazard": {
                     "name": "Water Hazard",
                     "terms": ""
                 },

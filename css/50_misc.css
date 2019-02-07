@@ -3,6 +3,7 @@
 path.line.shadow.tag-aerialway,
 path.line.shadow.tag-attraction-summer_toboggan,
 path.line.shadow.tag-attraction-water_slide,
+path.line.shadow.tag-golf-cartpath,
 path.line.shadow.tag-man_made-pipeline,
 path.line.shadow.tag-natural-tree_row,
 path.line.shadow.tag-piste {
@@ -11,6 +12,7 @@ path.line.shadow.tag-piste {
 path.line.casing.tag-aerialway,
 path.line.casing.tag-attraction-summer_toboggan,
 path.line.casing.tag-attraction-water_slide,
+path.line.casing.tag-golf-cartpath,
 path.line.casing.tag-man_made-pipeline,
 path.line.casing.tag-natural-tree_row,
 path.line.casing.tag-piste {
@@ -19,6 +21,7 @@ path.line.casing.tag-piste {
 path.line.stroke.tag-aerialway,
 path.line.stroke.tag-attraction-summer_toboggan,
 path.line.stroke.tag-attraction-water_slide,
+path.line.stroke.tag-golf-cartpath,
 path.line.stroke.tag-man_made-pipeline,
 path.line.stroke.tag-natural-tree_row,
 path.line.stroke.tag-piste {
@@ -28,6 +31,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.shadow.tag-aerialway,
 .low-zoom path.line.shadow.tag-attraction-summer_toboggan,
 .low-zoom path.line.shadow.tag-attraction-water_slide,
+.low-zoom path.line.shadow.tag-golf-cartpath,
 .low-zoom path.line.shadow.tag-man_made-pipeline,
 .low-zoom path.line.shadow.tag-natural-tree_row,
 .low-zoom path.line.shadow.tag-piste {
@@ -36,6 +40,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.casing.tag-aerialway,
 .low-zoom path.line.casing.tag-attraction-summer_toboggan,
 .low-zoom path.line.casing.tag-attraction-water_slide,
+.low-zoom path.line.casing.tag-golf-cartpath,
 .low-zoom path.line.casing.tag-man_made-pipeline,
 .low-zoom path.line.casing.tag-natural-tree_row,
 .low-zoom path.line.casing.tag-piste {
@@ -44,6 +49,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.stroke.tag-aerialway,
 .low-zoom path.line.stroke.tag-attraction-summer_toboggan,
 .low-zoom path.line.stroke.tag-attraction-water_slide,
+.low-zoom path.line.stroke.tag-golf-cartpath,
 .low-zoom path.line.stroke.tag-man_made-pipeline,
 .low-zoom path.line.stroke.tag-natural-tree_row,
 .low-zoom path.line.stroke.tag-piste {
@@ -84,6 +90,7 @@ path.line.casing.tag-aerialway {
     stroke: #444;
 }
 
+
 /* pistes */
 path.line.stroke.tag-piste {
     stroke: #9ac;
@@ -91,6 +98,36 @@ path.line.stroke.tag-piste {
 path.line.casing.tag-piste {
     stroke: #444;
 }
+
+
+/* Attractions */
+path.line.stroke.tag-attraction-summer_toboggan {
+    stroke: #9e9e9e;
+}
+path.line.casing.tag-attraction-summer_toboggan {
+    stroke: #666;
+}
+
+path.line.stroke.tag-attraction-water_slide {
+    stroke: #aae0cb;
+}
+path.line.casing.tag-attraction-water_slide {
+    stroke: #3d6c71;
+}
+
+
+/* golf cartpaths (like service roads) */
+.preset-icon .icon.tag-golf-cartpath {
+    color: #dca;
+    fill: #666;
+}
+path.line.stroke.tag-golf-cartpath {
+    stroke: #dca;
+}
+path.line.casing.tag-golf-cartpath {
+    stroke: #666;
+}
+
 
 /* power and pipeline */
 .preset-icon .icon.tag-man_made-pipeline,
@@ -362,6 +399,7 @@ path.fill.tag-building {
 
 
 /* "Special" paths - platforms, piers, crossings */
+.preset-icon .icon.tag-golf-path,
 .preset-icon .icon.tag-public_transport-platform,
 .preset-icon .icon.tag-railway-platform,
 .preset-icon .icon.tag-man_made-pier,
@@ -371,6 +409,7 @@ path.fill.tag-building {
     fill: #dca;
 }
 
+.preset-icon-fill-area.tag-golf-path,
 .preset-icon-fill-area.tag-public_transport-platform,
 .preset-icon-fill-area.tag-railway-platform,
 .preset-icon-fill-area.tag-man_made-pier,
@@ -380,6 +419,7 @@ path.fill.tag-building {
     background-color: #dca;
 }
 
+path.line.shadow.tag-golf-path,
 path.line.shadow.tag-public_transport-platform,
 path.line.shadow.tag-railway-platform,
 path.line.shadow.tag-man_made-pier,
@@ -387,6 +427,7 @@ path.line.shadow.tag-footway.tag-footway-crossing,
 path.line.shadow.tag-crossing {
     stroke-width: 16;
 }
+path.line.casing.tag-golf-path,
 path.line.casing.tag-public_transport-platform,
 path.line.casing.tag-railway-platform,
 path.line.casing.tag-man_made-pier,
@@ -397,6 +438,7 @@ path.line.casing.tag-crossing {
     stroke-linecap: round;
     stroke-dasharray: none;
 }
+path.line.stroke.tag-golf-path,
 path.line.stroke.tag-public_transport-platform,
 path.line.stroke.tag-railway-platform,
 path.line.stroke.tag-man_made-pier,
@@ -408,6 +450,7 @@ path.line.stroke.tag-crossing {
     stroke-dasharray: 6, 6;
 }
 
+.low-zoom path.line.shadow.tag-golf-path,
 .low-zoom path.line.shadow.tag-public_transport-platform,
 .low-zoom path.line.shadow.tag-railway-platform,
 .low-zoom path.line.shadow.tag-man_made-pier,
@@ -415,6 +458,7 @@ path.line.stroke.tag-crossing {
 .low-zoom path.line.shadow.tag-crossing {
     stroke-width: 12;
 }
+.low-zoom path.line.casing.tag-golf-path,
 .low-zoom path.line.casing.tag-public_transport-platform,
 .low-zoom path.line.casing.tag-railway-platform,
 .low-zoom path.line.casing.tag-man_made-pier,
@@ -422,6 +466,7 @@ path.line.stroke.tag-crossing {
 .low-zoom path.line.casing.tag-crossing {
     stroke-width: 3;
 }
+.low-zoom path.line.stroke.tag-golf-path,
 .low-zoom path.line.stroke.tag-public_transport-platform,
 .low-zoom path.line.stroke.tag-railway-platform,
 .low-zoom path.line.stroke.tag-man_made-pier,
@@ -432,6 +477,7 @@ path.line.stroke.tag-crossing {
     stroke-dasharray: 3, 3;
 }
 
+g.midpoint.tag-golf-path .fill,
 g.midpoint.tag-public_transport-platform .fill,
 g.midpoint.tag-railway-platform .fill,
 g.midpoint.tag-man_made-pier .fill,
@@ -461,19 +507,4 @@ path.line.stroke.tag-crossing.tag-crossing-zebra {
 .low-zoom path.line.stroke.tag-crossing.tag-crossing-marked,
 .low-zoom path.line.stroke.tag-crossing.tag-crossing-zebra {
     stroke-dasharray: 3, 2;
-}
-
-/* Attractions */
-path.line.stroke.tag-attraction-summer_toboggan {
-    stroke: #9e9e9e;
-}
-path.line.casing.tag-attraction-summer_toboggan {
-    stroke: #666;
-}
-
-path.line.stroke.tag-attraction-water_slide {
-    stroke: #aae0cb;
-}
-path.line.casing.tag-attraction-water_slide {
-    stroke: #3d6c71;
 }
