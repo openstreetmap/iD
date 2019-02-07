@@ -366,7 +366,7 @@ export function uiRawTagEditor(context) {
                 _showBlank = true;
                 content(wrap);
                 list.selectAll('li:last-child input.key').node().focus();
-            }, 1);
+            }, 10);
         }
     }
 

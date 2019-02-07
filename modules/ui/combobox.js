@@ -177,7 +177,6 @@ export function uiCombobox(context, klass) {
                     break;
 
                 case 9:   // ⇥ Tab
-                    d3_event.stopPropagation();
                     accept();
                     break;
 
