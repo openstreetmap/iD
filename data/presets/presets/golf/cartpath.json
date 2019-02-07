@@ -1,12 +1,7 @@
 {
     "icon": "maki-golf",
     "fields": [
-        "name",
-        "surface",
-        "width",
-        "structure",
-        "access",
-        "incline"
+        "{golf/path}"
     ],
     "geometry": [
         "line"

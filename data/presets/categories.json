@@ -51,7 +51,7 @@
       "members": [
         "golf/hole",
         "golf/cartpath",
-        "golf/cartpath_multipurpose",
+        "golf/cartpath_service",
         "golf/path"
       ]
     },

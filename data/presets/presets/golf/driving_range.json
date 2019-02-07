@@ -1,7 +1,8 @@
 {
     "icon": "maki-golf",
     "fields": [
-        "name"
+        "name",
+        "capacity"
     ],
     "geometry": [
         "area"

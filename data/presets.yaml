@@ -5,7 +5,9 @@ en:
         name: Barrier Features
       category-building:
         name: Building Features
-      category-golf:
+      category-golf-area:
+        name: Golf Features
+      category-golf-line:
         name: Golf Features
       category-landuse:
         name: Land Use Features
@@ -3780,6 +3782,18 @@ en:
         name: Sand Trap
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
+      golf/cartpath:
+        # 'golf=cartpath, golf_cart=designated'
+        name: Golf Cartpath
+        terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
+      golf/cartpath_service:
+        # 'highway=service, golf=cartpath, golf_cart=designated'
+        name: Golf Cartpath / Service Road
+        terms: '<translate with synonyms or related terms for ''Golf Cartpath / Service Road'', separated by commas>'
+      golf/driving_range:
+        # 'golf=driving_range, landuse=grass'
+        name: Driving Range
+        terms: '<translate with synonyms or related terms for ''Driving Range'', separated by commas>'
       golf/fairway:
         # 'golf=fairway, landuse=grass'
         name: Fairway
@@ -3800,6 +3814,10 @@ en:
         # golf=lateral_water_hazard
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
+      golf/path:
+        # 'golf=path, foot=designated'
+        name: Golf Walking Path
+        terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
       golf/rough:
         # 'golf=rough, landuse=grass'
         name: Rough

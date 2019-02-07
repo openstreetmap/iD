@@ -1,12 +1,8 @@
 {
     "icon": "maki-golf",
     "fields": [
-        "name",
-        "surface",
-        "width",
-        "structure",
-        "access",
-        "incline"
+        "{golf/path}",
+        "maxspeed"
     ],
     "geometry": [
         "line"
@@ -20,5 +16,5 @@
         "key": "golf",
         "value": "cartpath"
     },
-    "name": "Golf Cartpath Multipurpose"
+    "name": "Golf Cartpath / Service Road"
 }

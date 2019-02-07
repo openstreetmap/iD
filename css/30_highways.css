@@ -458,7 +458,7 @@ path.line.casing.tag-service {
 }
 
 /* special service roads and bus guideways */
-/* with `service=* tag`  (e.g. parking_aisle, alley, drive-through */
+/* with `service=* tag`  (e.g. parking_aisle, alley, drive-through) */
 .preset-icon .icon.iD-highway-bus_guideway,
 .preset-icon .icon.iD-highway-service.tag-service {
     color: #dca;
