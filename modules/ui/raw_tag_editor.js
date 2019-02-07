@@ -347,7 +347,6 @@ export function uiRawTagEditor(context) {
             var t = {};
             t[d.key] = undefined;
             dispatch.call('change', this, t);
-            d3_select(this.parentNode).remove();
         }
 
 
