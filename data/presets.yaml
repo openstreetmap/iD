@@ -3806,12 +3806,8 @@ en:
         # golf=hole
         name: Golf Hole
         terms: '<translate with synonyms or related terms for ''Golf Hole'', separated by commas>'
-      golf/lateral_water_hazard_area:
+      golf/lateral_water_hazard:
         # 'golf=lateral_water_hazard, natural=water'
-        name: Lateral Water Hazard
-        terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
-      golf/lateral_water_hazard_line:
-        # golf=lateral_water_hazard
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
@@ -3827,12 +3823,8 @@ en:
         name: Tee Box
         # 'terms: teeing ground'
         terms: '<translate with synonyms or related terms for ''Tee Box'', separated by commas>'
-      golf/water_hazard_area:
+      golf/water_hazard:
         # 'golf=water_hazard, natural=water'
-        name: Water Hazard
-        terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
-      golf/water_hazard_line:
-        # golf=water_hazard
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
       healthcare:

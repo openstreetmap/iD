@@ -5173,11 +5173,7 @@
                     "name": "Golf Hole",
                     "terms": ""
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Lateral Water Hazard",
-                    "terms": ""
-                },
-                "golf/lateral_water_hazard_line": {
+                "golf/lateral_water_hazard": {
                     "name": "Lateral Water Hazard",
                     "terms": ""
                 },
@@ -5193,11 +5189,7 @@
                     "name": "Tee Box",
                     "terms": "teeing ground"
                 },
-                "golf/water_hazard_area": {
-                    "name": "Water Hazard",
-                    "terms": ""
-                },
-                "golf/water_hazard_line": {
+                "golf/water_hazard": {
                     "name": "Water Hazard",
                     "terms": ""
                 },
