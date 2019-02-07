@@ -155,10 +155,10 @@ export function uiRawTagEditor(context) {
             .order();
 
         items
-            .each(function(tag) {
+            .each(function(d) {
                 var row = d3_select(this);
-                var key = row.select('input.key');      // propagate bound data to child
-                var value = row.select('input.value');  // propagate bound data to child
+                var key = row.select('input.key');      // propagate bound data
+                var value = row.select('input.value');  // propagate bound data
 
                 if (_entityID && taginfo && _state !== 'hover') {
                     bindTypeahead(key, value);
@@ -167,20 +167,22 @@ export function uiRawTagEditor(context) {
                 var isRelation = (_entityID && context.entity(_entityID).type === 'relation');
                 var reference;
 
-                if (isRelation && tag.key === 'type') {
-                    reference = uiTagReference({ rtype: tag.value }, context);
+                if (isRelation && d.key === 'type') {
+                    reference = uiTagReference({ rtype: d.value }, context);
                 } else {
-                    reference = uiTagReference({ key: tag.key, value: tag.value }, context);
+                    reference = uiTagReference({ key: d.key, value: d.value }, context);
                 }
 
                 if (_state === 'hover') {
                     reference.showing(false);
                 }
 
-                row.select('.inner-wrap')
+                row.select('.inner-wrap')      // propagate bound data
                     .call(reference.button);
 
                 row.call(reference.body);
+
+                row.select('button.remove');   // propagate bound data
             });
 
         items.selectAll('input.key')
@@ -344,9 +346,15 @@ export function uiRawTagEditor(context) {
 
         function removeTag(d) {
             if (isReadOnly(d)) return;
-            var t = {};
-            t[d.key] = undefined;
-            dispatch.call('change', this, t);
+
+            if (d.key === '') {    // removing the blank row
+                _showBlank = false;
+                content(wrap);
+            } else {
+                var t = {};
+                t[d.key] = undefined;
+                dispatch.call('change', this, t);
+            }
         }
 
 
