@@ -143,6 +143,7 @@ export function uiTagReference(tag) {
             .on('click', function () {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
+                this.blur();    // avoid keeping focus on the button - #4641
                 if (_showing) {
                     hide();
                 } else if (_loaded) {
