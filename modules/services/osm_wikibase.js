@@ -66,6 +66,7 @@ export default {
         if (!entity.claims[property]) return undefined;
         var locale = _localeIDs[langCode];
         var preferredPick, localePick;
+
         _forEach(entity.claims[property], function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
@@ -78,8 +79,8 @@ export default {
                 localePick = stmt;
             }
         });
-        var result = localePick || preferredPick;
 
+        var result = localePick || preferredPick;
         if (result) {
             var datavalue = result.mainsnak.datavalue;
             return datavalue.type === 'wikibase-entityid' ? datavalue.value.id : datavalue.value;
@@ -96,6 +97,7 @@ export default {
      */
     monolingualClaimToValueObj: function(entity, property) {
         if (!entity || !entity.claims[property]) return undefined;
+
         return entity.claims[property].reduce(function(acc, obj) {
             var value = obj.mainsnak.datavalue.value;
             acc[value.language] = value.text;
@@ -105,7 +107,7 @@ export default {
 
 
     toSitelink: function(key, value) {
-        var result = value ? 'Tag:' + key + '=' + value : 'Key:' + key;
+        var result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
     },
 
@@ -113,35 +115,44 @@ export default {
     //
     // Pass params object of the form:
     // {
-    //   key: 'string',     // required
-    //   value: 'string'    // optional
-    // }
-    //   -or-
-    // {
-    //   rtype: 'rtype'     // relation type  (e.g. 'multipolygon')
+    //   key: 'string',
+    //   value: 'string',
+    //   rtype: 'string',
+    //   langCode: 'string'
     // }
     //
     getEntity: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
-        var self = this;
+        var that = this;
         var titles = [];
         var result = {};
-        var keySitelink = this.toSitelink(params.key);
-        var tagSitelink = params.value ? this.toSitelink(params.key, params.value) : false;
+        var rtypeSitelink = params.rtype ? ('Relation:' + params.rtype).replace(/_/g, ' ').trim() : false;
+        var keySitelink = params.key ? this.toSitelink(params.key) : false;
+        var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
         var localeSitelink;
 
         if (params.langCode && _localeIDs[params.langCode] === undefined) {
             // If this is the first time we are asking about this locale,
             // fetch corresponding entity (if it exists), and cache it.
             // If there is no such entry, cache `false` value to avoid re-requesting it.
-            localeSitelink = ('Locale:' + params.langCode).replace(/_/g, ' ').trim();
+            localeSitelink = params.langCode ? ('Locale:' + params.langCode).replace(/_/g, ' ').trim() : false;
             titles.push(localeSitelink);
         }
 
-        if (_wikibaseCache[keySitelink]) {
-            result.key = _wikibaseCache[keySitelink];
-        } else {
-            titles.push(keySitelink);
+        if (rtypeSitelink) {
+            if (_wikibaseCache[rtypeSitelink]) {
+                result.rtype = _wikibaseCache[rtypeSitelink];
+            } else {
+                titles.push(rtypeSitelink);
+            }
+        }
+
+        if (keySitelink) {
+            if (_wikibaseCache[keySitelink]) {
+                result.key = _wikibaseCache[keySitelink];
+            } else {
+                titles.push(keySitelink);
+            }
         }
 
         if (tagSitelink) {
@@ -185,11 +196,15 @@ export default {
                 var localeID = false;
                 _forEach(d.entities, function(res) {
                     if (res.missing !== '') {
-                        var title = res.sitelinks.wiki.title;
                         // Simplify access to the localized values
                         res.description = localizedToString(res.descriptions, params.langCode);
                         res.label = localizedToString(res.labels, params.langCode);
-                        if (title === keySitelink) {
+
+                        var title = res.sitelinks.wiki.title;
+                        if (title === rtypeSitelink) {
+                            _wikibaseCache[rtypeSitelink] = res;
+                            result.rtype = res;
+                        } else if (title === keySitelink) {
                             _wikibaseCache[keySitelink] = res;
                             result.key = res;
                         } else if (title === tagSitelink) {
@@ -205,7 +220,7 @@ export default {
 
                 if (localeSitelink) {
                     // If locale ID is not found, store false to prevent repeated queries
-                    self.addLocale(params.langCode, localeID);
+                    that.addLocale(params.langCode, localeID);
                 }
 
                 callback(null, result);
@@ -245,7 +260,7 @@ export default {
                 return;
             }
 
-            var entity = data.tag || data.key;
+            var entity = data.rtype || data.tag || data.key;
             if (!entity) {
                 callback('No entity');
                 return;
@@ -282,6 +297,7 @@ export default {
             // Try to get a wiki page from tag data item first, followed by the corresponding key data item.
             // If neither tag nor key data item contain a wiki page in the needed language nor English,
             // get the first found wiki page from either the tag or the key item.
+            var rtypeWiki = that.monolingualClaimToValueObj(data.rtype, 'P31');
             var tagWiki = that.monolingualClaimToValueObj(data.tag, 'P31');
             var keyWiki = that.monolingualClaimToValueObj(data.key, 'P31');
 
@@ -289,7 +305,11 @@ export default {
             // BUG: in some cases, a more elaborate fallback logic might be needed
             var langPrefix = langCode.split('-', 2)[0];
 
+            // use the first acceptable wiki page
             result.wiki =
+                getWikiInfo(rtypeWiki, langCode, 'inspector.wiki_reference') ||
+                getWikiInfo(rtypeWiki, langPrefix, 'inspector.wiki_reference') ||
+                getWikiInfo(rtypeWiki, 'en', 'inspector.wiki_en_reference') ||
                 getWikiInfo(tagWiki, langCode, 'inspector.wiki_reference') ||
                 getWikiInfo(tagWiki, langPrefix, 'inspector.wiki_reference') ||
                 getWikiInfo(tagWiki, 'en', 'inspector.wiki_en_reference') ||
