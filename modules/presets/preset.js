@@ -166,6 +166,13 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
+        // Lookup documentation on Wikidata...
+        var qid = preset.tags.wikidata || preset.tags['brand:wikidata'] || preset.tags['operator:wikidata'];
+        if (qid) {
+            return { qid: qid };
+        }
+
+        // Lookup documentation on OSM Wikibase...
         var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0];
         var value = reference.value || preset.tags[key];
 

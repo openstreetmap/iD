@@ -66,8 +66,8 @@ export default {
             format: 'json',
             formatversion: 2,
             ids: qid,
-            props: /*sitelinks|*/'labels|descriptions',
-            //sitefilter: lang + 'wiki',
+            props: 'labels|descriptions|claims|sitelinks',
+            sitefilter: langs.map(function(d) { return d + 'wiki'; }).join('|'),
             languages: langs.join('|'),
             languagefallback: 1,
             origin: '*'
@@ -78,6 +78,67 @@ export default {
                 _wikidataCache[qid] = data.entities[qid];
                 callback(qid, data.entities[qid] || {});
             }
+        });
+    },
+
+
+    // Pass `params` object of the form:
+    // {
+    //   qid: 'string'      // brand wikidata  (e.g. 'Q37158')
+    // }
+    //
+    // Get an result object used to display tag documentation
+    // {
+    //   title:        'string',
+    //   description:  'string',
+    //   editURL:      'string',
+    //   imageURL:     'string',
+    //   wiki:         { title: 'string', text: 'string', url: 'string' }
+    // }
+    //
+    getDocs: function(params, callback) {
+        this.entityByQID(params.qid, function(err, entity) {
+            if (err || !entity) {
+                callback(err);
+                return;
+            }
+
+            var description;
+            if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
+                description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
+            }
+
+            // prepare result
+            var result = {
+                title: entity.id,
+                description: description,
+                editURL: 'https://www.wikidata.org/wiki/' + entity.id
+            };
+
+            // add image
+            if (entity.claims) {
+                var imageroot = 'https://commons.wikimedia.org/w/index.php';
+                var props = ['P154','P18'];  // logo image, image
+                var prop, image;
+                for (var i = 0; i < props.length; i++) {
+                    prop = entity.claims[props[i]];
+                    if (prop && Object.keys(prop).length > 0) {
+                        image = prop[Object.keys(prop)[0]].mainsnak.datavalue.value;
+                        if (image) {
+                            result.imageURL = imageroot + '?' + utilQsString({
+                                title: 'Special:Redirect/file/' + image,
+                                width: 400
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // TODO add wiki sitelink
+            // result.wiki = ?
+
+            callback(null, result);
         });
     }
 
