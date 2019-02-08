@@ -135,7 +135,7 @@ export default {
             // If this is the first time we are asking about this locale,
             // fetch corresponding entity (if it exists), and cache it.
             // If there is no such entry, cache `false` value to avoid re-requesting it.
-            localeSitelink = params.langCode ? ('Locale:' + params.langCode).replace(/_/g, ' ').trim() : false;
+            localeSitelink = ('Locale:' + params.langCode).replace(/_/g, ' ').trim();
             titles.push(localeSitelink);
         }
 
