@@ -288,8 +288,7 @@ export default {
                 if (imageroot && image) {
                     result.imageURL = imageroot + '?' + utilQsString({
                         title: 'Special:Redirect/file/' + image,
-                        width: 100,
-                        height: 100
+                        width: 400
                     });
                 }
             }
