@@ -69,10 +69,10 @@ export function validationCrossingWays() {
     }
 
     // only validate certain waterway features
-    var waterways = new Set(['canal', 'ditch', 'drain', 'river', 'stream']);
+    var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
     // ignore certain highway and railway features
-    var ignoredHighways = new Set(['rest_area', 'services']);
-    var ignoredRailways = new Set(['train_wash']);
+    var ignoredHighways = ['rest_area', 'services'];
+    var ignoredRailways = ['train_wash'];
 
     function getFeatureTypeForTags(tags) {
         if (hasTag(tags, 'building')) return 'building';
@@ -80,9 +80,9 @@ export function validationCrossingWays() {
         // don't check non-building areas
         if (hasTag(tags, 'area')) return null;
 
-        if (hasTag(tags, 'highway') && !ignoredHighways.has(tags.highway)) return 'highway';
-        if (hasTag(tags, 'railway') && !ignoredRailways.has(tags.railway)) return 'railway';
-        if (hasTag(tags, 'waterway') && waterways.has(tags.waterway)) return 'waterway';
+        if (hasTag(tags, 'highway') && ignoredHighways.indexOf(tags.highway) === -1) return 'highway';
+        if (hasTag(tags, 'railway') && ignoredRailways.indexOf(tags.railway) === -1) return 'railway';
+        if (hasTag(tags, 'waterway') && waterways.indexOf(tags.waterway) !== -1) return 'waterway';
 
         return null;
     }
@@ -154,13 +154,13 @@ export function validationCrossingWays() {
     }
 
     // highway values for which we shouldn't recommend connecting to waterways
-    var highwaysDisallowingFords = new Set([
+    var highwaysDisallowingFords = [
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
         'primary', 'primary_link', 'secondary', 'secondary_link'
-    ]);
-    var railwayEqualsCrossingHighways = new Set([
+    ];
+    var railwayEqualsCrossingHighways = [
         'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps'
-    ]);
+    ];
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
@@ -170,12 +170,12 @@ export function validationCrossingWays() {
             if (featureType1 === 'waterway') return {};
             if (featureType1 === 'railway') return {};
         } else {
-            var featureTypes = new Set([featureType1, featureType2]);
-            if (featureTypes.has('highway')) {
-                if (featureTypes.has('building')) return {};
-                if (featureTypes.has('railway')) {
-                    if (railwayEqualsCrossingHighways.has(entity1.tags.highway) ||
-                        railwayEqualsCrossingHighways.has(entity2.tags.highway)) {
+            var featureTypes = [featureType1, featureType2];
+            if (featureTypes.indexOf('highway') !== -1) {
+                if (featureTypes.indexOf('building') !== -1) return {};
+                if (featureTypes.indexOf('railway') !== -1) {
+                    if (railwayEqualsCrossingHighways.indexOf(entity1.tags.highway) !== -1 ||
+                        railwayEqualsCrossingHighways.indexOf(entity2.tags.highway) !== -1) {
                         // path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
@@ -183,13 +183,13 @@ export function validationCrossingWays() {
                         return { railway: 'level_crossing' };
                     }
                 }
-                if (featureTypes.has('waterway')) {
+                if (featureTypes.indexOf('waterway') !== -1) {
                     // do not allow fords on structures
                     if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return null;
                     if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return null;
 
-                    if (highwaysDisallowingFords.has(entity1.tags.highway) ||
-                        highwaysDisallowingFords.has(entity2.tags.highway)) {
+                    if (highwaysDisallowingFords.indexOf(entity1.tags.highway) !== -1 ||
+                        highwaysDisallowingFords.indexOf(entity2.tags.highway) !== -1) {
                         // do not allow fords on major highways
                         return null;
                     }
