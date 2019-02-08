@@ -101,7 +101,7 @@ export function coreHistory(context) {
     }
 
 
-    // determine diffrence and dispatch a change event
+    // determine difference and dispatch a change event
     function change(previous, isAnnotated) {
         var difference = coreDifference(previous, history.graph());
         dispatch.call('change', this, difference);

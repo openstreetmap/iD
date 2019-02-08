@@ -2,13 +2,13 @@
 
 /* defaults */
 .preset-icon .icon.tag-waterway.other-line {
-    color: #77d3de;
-    fill: #77d3de;
+    color: #7dd;
+    fill: #7dd;
 }
 .preset-icon .icon.iD-category-water,
 .preset-icon .icon.tag-type-waterway,
 .preset-icon .icon.tag-waterway {
-    color: #77d3de;
+    color: #7dd;
     fill: #fff;
 }
 
@@ -38,10 +38,10 @@ path.line.fill.tag-waterway {
     fill: rgba(119, 211, 222, 0.3);
 }
 path.line.casing.tag-waterway {
-    stroke: #3d6c71;
+    stroke: #444;
 }
 path.line.stroke.tag-waterway {
-    stroke: #77d3de;
+    stroke: #7dd;
 }
 
 
@@ -91,9 +91,9 @@ path.line.stroke.tag-waterway-river {
 
 /* ditch */
 .preset-icon .icon.tag-waterway-ditch {
-    color: #8eabf3;
+    color: #39a;
 }
 path.line.stroke.tag-waterway-ditch {
-    stroke: #8eabf3;
+    stroke: #39a;
 }
 

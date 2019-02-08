@@ -28,7 +28,7 @@ export function uiKeepRightHeader() {
 
 
     function keepRightHeader(selection) {
-        var header = selection.selectAll('.kr_error-header')
+        var header = selection.selectAll('.error-header')
             .data(
                 (_error ? [_error] : []),
                 function(d) { return d.id + '-' + (d.status || 0); }
@@ -39,11 +39,11 @@ export function uiKeepRightHeader() {
 
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'kr_error-header');
+            .attr('class', 'error-header');
 
         var iconEnter = headerEnter
             .append('div')
-            .attr('class', 'kr_error-header-icon')
+            .attr('class', 'error-header-icon')
             .classed('new', function(d) { return d.id < 0; });
 
         iconEnter
@@ -55,7 +55,7 @@ export function uiKeepRightHeader() {
 
         headerEnter
             .append('div')
-            .attr('class', 'kr_error-header-label')
+            .attr('class', 'error-header-label')
             .text(errorTitle);
     }
 

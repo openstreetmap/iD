@@ -168,11 +168,11 @@ function parseError(capture, idType) {
 
 
     function linkErrorObject(d) {
-        return '<a class="kr_error_object_link">' + d + '</a>';
+        return '<a class="error_object_link">' + d + '</a>';
     }
 
     function linkEntity(d) {
-        return '<a class="kr_error_entity_link">' + d + '</a>';
+        return '<a class="error_entity_link">' + d + '</a>';
     }
 
     function linkURL(d) {

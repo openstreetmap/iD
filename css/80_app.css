@@ -593,7 +593,7 @@ button.add-note svg.icon {
 .field-help-title button.close,
 .sidebar-component .header button.data-editor-close,
 .sidebar-component .header button.note-editor-close,
-.sidebar-component .header button.keepRight-editor-close,
+.sidebar-component .header button.error-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -603,7 +603,7 @@ button.add-note svg.icon {
 [dir='rtl'] .field-help-title button.close,
 [dir='rtl'] .sidebar-component .header button.data-editor-close,
 [dir='rtl'] .sidebar-component .header button.note-editor-close,
-[dir='rtl'] .sidebar-component .header button.keepRight-editor-close,
+[dir='rtl'] .sidebar-component .header button.error-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -1177,7 +1177,7 @@ img.tag-reference-wiki-image {
 }
 
 .data-editor .quick-links,
-.keepRight-editor .quick-links,
+.error-editor .quick-links,
 .note-editor .quick-links {
     padding: 5px 0 0 0;
 }
@@ -2500,7 +2500,7 @@ input.key-trap {
 /* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
 .note-header,
-.kr_error-header {
+.error-header {
     background-color: #f6f6f6;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -2510,7 +2510,7 @@ input.key-trap {
 }
 
 .note-header-icon,
-.kr_error-header-icon {
+.error-header-icon {
     background-color: #fff;
     padding: 10px;
     flex: 0 0 62px;
@@ -2521,20 +2521,20 @@ input.key-trap {
     border-radius: 5px 0 0 5px;
 }
 [dir='rtl'] .note-header-icon,
-[dir='rtl'] .kr_error-header-icon {
+[dir='rtl'] .error-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
 .note-header-icon .icon-wrap,
-.kr_error-header-icon .icon-wrap {
+.error-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
 .note-header-label,
-.kr_error-header-label {
+.error-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
     flex: 1 1 100%;
@@ -2543,7 +2543,7 @@ input.key-trap {
     border-radius: 0 5px 5px 0;
 }
 [dir='rtl'] .note-header-label,
-[dir='rtl'] .kr_error-header-label {
+[dir='rtl'] .error-header-label {
     border-radius: 5px 0 0 5px;
 }
 
@@ -2610,44 +2610,42 @@ input.key-trap {
 }
 
 .note-save,
-.keepRight-save {
+.error-save {
     padding-top: 20px;
 }
-.kr_error-details,
-.kr_error-comment-container {
+
+.error-details {
     padding: 10px;
 }
-
-.keepRight-save .new-comment-input,
-.note-save .new-comment-input {
-    width: 100%;
-    height: 100px;
-    max-height: 300px;
-    min-height: 100px;
-}
-
-.keepRight-save .detail-section,
-.note-save .detail-section {
-    margin: 10px 0;
-}
-
-.note-report {
-    float: right;
-}
-
-.kr_error-details-container {
+.error-details-container {
     background: #ececec;
     padding: 10px;
     margin-top: 20px;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
-
-.kr_error-details-description {
+.error-details-description {
     margin-bottom: 10px;
 }
-.kr_error-details-description-text::first-letter {
+.error-details-description-text::first-letter {
     text-transform: capitalize;
+}
+
+.note-save .new-comment-input,
+.error-save .new-comment-input {
+    width: 100%;
+    height: 100px;
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.note-save .detail-section,
+.error-save .detail-section {
+    margin: 10px 0;
+}
+
+.note-report {
+    float: right;
 }
 
 

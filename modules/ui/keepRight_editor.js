@@ -49,7 +49,7 @@ export function uiKeepRightEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fr keepRight-editor-close')
+            .attr('class', 'fr error-editor-close')
             .on('click', function() {
                 context.enter(modeBrowse(context));
             })
@@ -68,12 +68,12 @@ export function uiKeepRightEditor(context) {
             .attr('class', 'body')
             .merge(body);
 
-        var editor = body.selectAll('.keepRight-editor')
+        var editor = body.selectAll('.error-editor')
             .data([0]);
 
         editor.enter()
             .append('div')
-            .attr('class', 'modal-section keepRight-editor')
+            .attr('class', 'modal-section error-editor')
             .merge(editor)
             .call(keepRightHeader.error(_error))
             .call(quickLinks.choices(choices))
@@ -108,7 +108,7 @@ export function uiKeepRightEditor(context) {
         // enter
         var saveSectionEnter = saveSection.enter()
             .append('div')
-            .attr('class', 'keepRight-save save-section cf');
+            .attr('class', 'error-save save-section cf');
 
         saveSectionEnter
             .append('h4')
