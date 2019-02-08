@@ -77,14 +77,16 @@ export function coreValidator(context) {
 
     function validateEntity(entity) {
         var issues = [];
-        var ranValidations = new Set([]);
+        var ranValidations = [];
         // runs validation and appends resulting issues, returning true if validation passed
         function runValidation(type) {
-            if (!ranValidations.has(type)) {
+            // only run each validation once
+            if (ranValidations.indexOf(type) === -1) {
                 var fn = validations[type];
                 var typeIssues = fn(entity, context);
                 issues = issues.concat(typeIssues);
-                ranValidations.add(type);
+                // mark this validation as having run
+                ranValidations.push(type);
                 return typeIssues.length === 0;
             }
             return true;
@@ -93,7 +95,7 @@ export function coreValidator(context) {
         if (entity.type === 'relation') {
             if (!runValidation('old_multipolygon')) {
                 // don't flag missing tags if they are on the outer way
-                ranValidations.add('missing_tag');
+                ranValidations.push('missing_tag');
             }
         }
 
@@ -107,7 +109,7 @@ export function coreValidator(context) {
             if (runValidation('almost_junction')) {
                 runValidation('disconnected_way');
             } else {
-                ranValidations.add('disconnected_way');
+                ranValidations.push('disconnected_way');
             }
 
             runValidation('tag_suggests_area');
