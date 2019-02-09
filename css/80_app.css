@@ -2618,6 +2618,9 @@ input.key-trap {
 .error-details-description-text::first-letter {
     text-transform: capitalize;
 }
+[dir='rtl'] .error-details-description-text::first-letter {
+    text-transform: none;  /* #5877 */
+}
 
 .note-save .new-comment-input,
 .error-save .new-comment-input {
