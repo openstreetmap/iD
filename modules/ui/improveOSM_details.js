@@ -17,6 +17,9 @@ export function uiImproveOsmDetails(context) {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
+
+        if (d.desc) return d.desc;
+
         var errorType = d.error_key;
         var et = dataEn.QA.improveOSM.error_types[errorType];
 
