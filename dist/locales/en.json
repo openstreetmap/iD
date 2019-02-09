@@ -828,7 +828,8 @@
                     },
                     "mr": {
                         "title": "Missing Geometry",
-                        "description": "{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here."
+                        "description": "{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.",
+                        "description_alt": "Data from a 3rd party suggests there may be unmapped {geometry_type} here."
                     },
                     "tr": {
                         "title": "Missing Turn Restriction",

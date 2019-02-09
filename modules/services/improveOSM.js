@@ -267,6 +267,11 @@ export default {
                                     geometry_type: t('QA.improveOSM.geometry_types.' + geoType)
                                 };
 
+                                // -1 trips indicates data came from a 3rd party
+                                if (feature.numberOfTrips === -1) {
+                                    d.desc = t('QA.improveOSM.error_types.mr.description_alt', d.replacements);
+                                }
+
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
                             });
