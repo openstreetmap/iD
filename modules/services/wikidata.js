@@ -5,7 +5,7 @@ import { json as d3_json } from 'd3-request';
 import { utilQsString } from '../util';
 import { currentLocale } from '../util/locale';
 
-var endpoint = 'https://www.wikidata.org/w/api.php?';
+var apibase = 'https://www.wikidata.org/w/api.php?';
 var _wikidataCache = {};
 
 export default {
@@ -21,13 +21,13 @@ export default {
     // corresponding Wikidata entities.
     itemsByTitle: function(lang, title, callback) {
         if (!title) {
-            callback('', {});
+            callback('No title', {});
             return;
         }
 
         lang = lang || 'en';
 
-        d3_json(endpoint + utilQsString({
+        d3_json(apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -36,10 +36,13 @@ export default {
             languages: 'en', // shrink response by filtering to one language
             origin: '*'
         }), function(err, data) {
-            if (err || !data || data.error) {
-                callback('', {});
+            if (data && data.error) {
+                err = data.error;
+            }
+            if (err) {
+                callback(err, {});
             } else {
-                callback(title, data.entities || {});
+                callback(null, data.entities || {});
             }
         });
     },
@@ -47,11 +50,11 @@ export default {
 
     entityByQID: function(qid, callback) {
         if (!qid) {
-            callback('', {});
+            callback('No qid', {});
             return;
         }
         if (_wikidataCache[qid]) {
-            callback('', _wikidataCache[qid]);
+            callback(null, _wikidataCache[qid]);
             return;
         }
 
@@ -61,7 +64,7 @@ export default {
             'en'
         ]);
 
-        d3_json(endpoint + utilQsString({
+        d3_json(apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -72,11 +75,14 @@ export default {
             languagefallback: 1,
             origin: '*'
         }), function(err, data) {
-            if (err || !data || data.error) {
-                callback('', {});
+            if (data && data.error) {
+                err = data.error;
+            }
+            if (err) {
+                callback(err, {});
             } else {
                 _wikidataCache[qid] = data.entities[qid];
-                callback(qid, data.entities[qid] || {});
+                callback(null, data.entities[qid] || {});
             }
         });
     },
@@ -99,7 +105,7 @@ export default {
     getDocs: function(params, callback) {
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
-                callback(err);
+                callback(err || 'No entity');
                 return;
             }
 
