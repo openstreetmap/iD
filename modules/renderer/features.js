@@ -290,11 +290,9 @@ export function rendererFeatures(context) {
 
         for (i = 0; i < entities.length; i++) {
             geometry = entities[i].geometry(resolver);
-            if (!(geometry === 'vertex' || geometry === 'relation')) {
-                matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
-                for (j = 0; j < matches.length; j++) {
-                    _features[matches[j]].count++;
-                }
+            matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
+            for (j = 0; j < matches.length; j++) {
+                _features[matches[j]].count++;
             }
         }
 
@@ -334,9 +332,15 @@ export function rendererFeatures(context) {
         _cache = {};
     };
 
+    // only certain relations are worth checking
+    function relationShouldBeChecked(relation) {
+        // multipolygon features have `area` geometry and aren't checked here
+        return relation.tags.type === 'boundary';
+    }
 
     features.getMatches = function(entity, resolver, geometry) {
-        if (geometry === 'vertex' || geometry === 'relation') return {};
+        if (geometry === 'vertex' ||
+            (geometry === 'relation' && !relationShouldBeChecked(entity))) return {};
 
         var ent = osmEntity.key(entity);
         if (!_cache[ent]) {
@@ -351,19 +355,23 @@ export function rendererFeatures(context) {
                 if (_keys[i] === 'others') {
                     if (hasMatch) continue;
 
-                    // Multipolygon members:
                     // If an entity...
                     //   1. is a way that hasn't matched other 'interesting' feature rules,
-                    //   2. and it belongs to a single parent multipolygon relation
-                    // ...then match whatever feature rules the parent multipolygon has matched.
-                    // see #2548, #2887
-                    //
-                    // IMPORTANT:
-                    // For this to work, getMatches must be called on relations before ways.
-                    //
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
-                        if (parents.length === 1 && parents[0].isMultipolygon()) {
+                        if (parents.length === 0) continue;
+
+                        //   2a. belongs only to a single multipolygon relation
+                        if ((parents.length === 1 && parents[0].isMultipolygon()) ||
+                            // 2b. or belongs only to boundary relations
+                            parents.every(function(parent) { return parent.tags.type === 'boundary'; })) {
+
+                            // ...then match whatever feature rules the parent relation has matched.
+                            // see #2548, #2887
+                            //
+                            // IMPORTANT:
+                            // For this to work, getMatches must be called on relations before ways.
+                            //
                             var pkey = osmEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = _clone(_cache[pkey].matches);
