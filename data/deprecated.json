@@ -73,12 +73,28 @@
       "replace": {"colour": "$1"}
     },
     {
+      "old": {"amenity": "ev_charging"},
+      "replace": {"amenity": "charging_station"}
+    },
+    {
+      "old": {"amenity": "charging"},
+      "replace": {"amenity": "charging_station"}
+    },
+    {
       "old": {"craft": "jeweler"},
       "replace": {"shop": "jewelery"}
     },
     {
       "old": {"craft": "optician"},
       "replace": {"shop": "optician"}
+    },
+    {
+      "old": {"amenity": "garage"},
+      "replace": {"amenity": "parking", "landuse": "garages"}
+    },
+    {
+      "old": {"amenity": "garages"},
+      "replace": {"amenity": "parking", "landuse": "garages"}
     },
     {
       "old": {"drinkable": "*"},
@@ -91,6 +107,18 @@
     {
       "old": {"fenced": "yes"},
       "replace": {"barrier": "fence"}
+    },
+    {
+      "old": {"amenity": "real_estate"},
+      "replace": {"office": "estate_agent"}
+    },
+    {
+      "old": {"office": "real_estate"},
+      "replace": {"office": "estate_agent"}
+    },
+    {
+      "old": {"shop": "real_estate"},
+      "replace": {"office": "estate_agent"}
     },
     {
       "old": {"highway": "ford"},
@@ -106,6 +134,38 @@
     {
       "old": {"highway": "incline"},
       "replace": {"highway": "road", "incline": "up"}
+    },
+    {
+      "old": {"amenity": "youth_center"},
+      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
+    },
+    {
+      "old": {"amenity": "youth_centre"},
+      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
+    },
+    {
+      "old": {"bridge": "arch"},
+      "replace": {"bridge:structure": "*"}
+    },
+    {
+      "old": {"bridge": "beam"},
+      "replace": {"bridge:structure": "*"}
+    },
+    {
+      "old": {"bridge": "humpback"},
+      "replace": {"bridge:structure": "*"}
+    },
+    {
+      "old": {"bridge": "suspension"},
+      "replace": {"bridge:structure": "*"}
+    },
+    {
+      "old": {"bridge": "lift"},
+      "replace": {"bridge:structure": "*"}
+    },
+    {
+      "old": {"bridge": "swing"},
+      "replace": {"bridge:structure": "*"}
     },
     {
       "old": {"highway": "incline_steep"},
@@ -230,6 +290,14 @@
     {
       "old": {"water": "tidal"},
       "replace": {"natural": "water", "tidal": "yes"}
+    },
+    {
+      "old": {"man_made": "MDF"},
+      "replace": {"telecom": "exchange"}
+    },
+    {
+      "old": {"man_made": "mdf"},
+      "replace": {"telecom": "exchange"}
     }
   ]
 }
