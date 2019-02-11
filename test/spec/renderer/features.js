@@ -167,6 +167,25 @@ describe('iD.Features', function() {
             iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
             iD.osmWay({id: 'boundary_road', tags: {boundary: 'administrative', highway: 'primary'}, version: 1}),
 
+            iD.osmWay({id: 'boundary_member', version: 1}),
+            iD.osmWay({id: 'boundary_member2', version: 1}),
+
+            // Boundary relations
+            iD.osmRelation({id: 'boundary_relation', tags: {type: 'boundary', boundary: 'administrative'},
+                    members: [
+                        {id: 'boundary_member'},
+                    ],
+                    version: 1
+                }),
+            iD.osmRelation({id: 'boundary_relation2', tags: {type: 'boundary', boundary: 'administrative'},
+                    members: [
+                        // ways can be members of multiple boundary relations
+                        {id: 'boundary_member'},
+                        {id: 'boundary_member2'}
+                    ],
+                    version: 1
+                }),
+
             // Water
             iD.osmWay({id: 'water', tags: {area: 'yes', natural: 'water'}, version: 1}),
             iD.osmWay({id: 'coastline', tags: {natural: 'coastline'}, version: 1}),
@@ -237,7 +256,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -256,7 +275,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'service', 'road', 'track', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -272,7 +291,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'unclassified', 'living_street',
-                'path', 'building_yes', 'forest', 'boundary', 'water',
+                'path', 'building_yes', 'forest', 'boundary', 'boundary_member', 'water',
                 'railway', 'power_line', 'motorway_construction', 'fence'
             ]);
         });
@@ -289,7 +308,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'building_yes',
-                'forest', 'boundary', 'water', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -306,7 +325,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'building_no', 'point_bar', 'motorway', 'service', 'path',
-                'forest', 'boundary', 'water', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -324,7 +343,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'boundary', 'water', 'railway', 'power_line',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence',
                 'inner3'   // member of landuse multipolygon, but tagged as highway
             ]);
@@ -336,7 +355,11 @@ describe('iD.Features', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch([
-                'boundary'
+                'boundary',
+                // match ways that are part of boundary relations - #5601
+                'boundary_member', 'boundary_member2',
+                // relations
+                'boundary_relation', 'boundary_relation2'
             ]);
 
             dontMatch([
@@ -359,7 +382,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -377,7 +400,7 @@ describe('iD.Features', function() {
             dontMatch([
                 'rail_streetcar', 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'power_line',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -393,7 +416,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'railway',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway',
                 'motorway_construction', 'fence'
             ]);
         });
@@ -411,7 +434,7 @@ describe('iD.Features', function() {
             dontMatch([
                 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'railway', 'power_line', 'fence'
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line', 'fence'
             ]);
         });
 
@@ -426,7 +449,7 @@ describe('iD.Features', function() {
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
-                'forest', 'boundary', 'water', 'railway', 'power_line',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'retail', 'outer', 'inner1', 'inner2', 'inner3'
             ]);
         });
