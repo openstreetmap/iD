@@ -1427,13 +1427,13 @@
                 "info": "Any issues will show up here as you edit."
             },
             "almost_junction": {
-                "message": "{feature} is very close but not connected to {feature2}.",
+                "message": "{feature} is very close but not connected to {feature2}",
                 "highway-highway": {
                     "tip": "Intersecting highways should share a junction vertex."
                 }
             },
             "crossing_ways": {
-                "message": "{feature} crosses {feature2}.",
+                "message": "{feature} crosses {feature2}",
                 "building-building": {
                     "tip": "Buildings should not intersect except on different layers."
                 },
@@ -1483,37 +1483,37 @@
             },
             "disconnected_way": {
                 "highway": {
-                    "message": "{highway} is disconnected from other roads and paths.",
+                    "message": "{highway} is disconnected from other roads and paths",
                     "tip": "Highways should connect to other highways or building entrances."
                 }
             },
             "generic_name": {
-                "message": "{feature} has the generic name \"{name}\".",
+                "message": "{feature} has the generic name \"{name}\"",
                 "tip": "Names should be the official, on-the-ground titles of features."
             },
             "many_deletions": {
                 "points-lines-areas": {
-                    "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas."
+                    "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas"
                 },
                 "points-lines-areas-relations": {
-                    "message": "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations."
+                    "message": "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations"
                 },
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
             "missing_tag": {
                 "any": {
-                    "message": "{feature} has no tags."
+                    "message": "{feature} has no tags"
                 },
                 "descriptive": {
-                    "message": "{feature} has no descriptive tags."
+                    "message": "{feature} has no descriptive tags"
                 },
                 "specific": {
-                    "message": "{feature} has no \"{tag}\" tag."
+                    "message": "{feature} has no \"{tag}\" tag"
                 },
                 "tip": "Features must have tags that define what they are."
             },
             "old_multipolygon": {
-                "message": "{multipolygon} has misplaced tags.",
+                "message": "{multipolygon} has misplaced tags",
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "tag_suggests_area": {
