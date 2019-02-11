@@ -1,17 +1,9 @@
 import _clone from 'lodash-es/clone';
-import { t } from '../util/locale';
-import {
-    utilDisplayLabel,
-    utilTagText
-} from '../util';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
-import {
-    actionChangeTags
-} from '../actions';
 
+import { t } from '../util/locale';
+import { actionChangeTags } from '../actions';
+import { utilDisplayLabel, utilTagText } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
 
 export function validationDeprecatedTag() {
 

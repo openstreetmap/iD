@@ -1,8 +1,8 @@
+export { validationAlmostJunction } from './almost_junction';
+export { validationCrossingWays } from './crossing_ways';
 export { validationDeprecatedTag } from './deprecated_tag';
 export { validationDisconnectedWay } from './disconnected_way';
-export { validationCrossingWays } from './crossing_ways';
-export { validationAlmostJunction } from './almost_junction';
-export { validationGenericName } from './generic_name.js';
+export { validationGenericName } from './generic_name';
 export { validationManyDeletions } from './many_deletions';
 export { validationMaprules } from './maprules';
 export { validationMissingTag } from './missing_tag';

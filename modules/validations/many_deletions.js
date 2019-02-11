@@ -1,14 +1,10 @@
 import { t } from '../util/locale';
-import {
-    validationIssue
-} from '../core/validator';
+import { validationIssue } from '../core/validator';
+
 
 export function validationManyDeletions() {
-
     var totalOtherGeomThreshold = 50;
-
-    // relations are less common so use a lower threshold
-    var relationThreshold = 10;
+    var relationThreshold = 10;   // relations are less common so use a lower threshold
 
     var type = 'many_deletions';
 
@@ -17,6 +13,7 @@ export function validationManyDeletions() {
         var points = 0, lines = 0, areas = 0, relations = 0;
         var base = context.history().base();
         var geometry;
+
         changes.deleted.forEach(function(entity) {
             if (entity.type === 'node' && entity.geometry(base) === 'point') {
                 points++;
@@ -31,9 +28,8 @@ export function validationManyDeletions() {
                 relations++;
             }
         });
-        if (points + lines + areas >= totalOtherGeomThreshold ||
-            relations >= relationThreshold) {
 
+        if (points + lines + areas >= totalOtherGeomThreshold || relations >= relationThreshold) {
             var totalFeatures = points + lines + areas + relations;
 
             var messageType = 'points-lines-areas';

@@ -1,22 +1,13 @@
 import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
 import _flattenDeep from 'lodash-es/flatten';
-import {
-    geoExtent,
-    geoLineIntersection,
-    geoSphericalClosestNode
-} from '../geo';
-import { utilDisplayLabel } from '../util';
-import { t } from '../util/locale';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
+
+import { actionAddMidpoint, actionMergeNodes } from '../actions';
+import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
 import { osmNode } from '../osm';
-import {
-    actionAddMidpoint,
-    actionMergeNodes
-} from '../actions';
+import { t } from '../util/locale';
+import { utilDisplayLabel } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
 
 
 export function validationCrossingWays() {
@@ -25,7 +16,9 @@ export function validationCrossingWays() {
     function findEdgeToWayCrossCoords(n1, n2, way, graph) {
         var crossCoords = [];
         var nA, nB;
-        var segment1 = [n1.loc, n2.loc], segment2;
+        var segment1 = [n1.loc, n2.loc];
+        var segment2;
+
         var nodes = graph.childNodes(way);
         for (var j = 0; j < nodes.length - 1; j++) {
             nA = nodes[j];
@@ -44,6 +37,7 @@ export function validationCrossingWays() {
         return crossCoords;
     }
 
+
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
         if (getFeatureTypeForTags(way.tags) === null) {
@@ -59,20 +53,24 @@ export function validationCrossingWays() {
         return way;
     }
 
+
     function hasTag(tags, key) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
+
 
     function getFeatureTypeForCrossingCheck(way, graph) {
         var tags = getFeatureWithFeatureTypeTagsForWay(way, graph).tags;
         return getFeatureTypeForTags(tags);
     }
 
+
     // only validate certain waterway features
     var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
     // ignore certain highway and railway features
     var ignoredHighways = ['rest_area', 'services'];
     var ignoredRailways = ['train_wash'];
+
 
     function getFeatureTypeForTags(tags) {
         if (hasTag(tags, 'building')) return 'building';
@@ -87,6 +85,7 @@ export function validationCrossingWays() {
         return null;
     }
 
+
     function extendTagsByInferredLayer(tags, way) {
         if (!hasTag(tags, 'layer')) {
             tags.layer = way.layer().toString();
@@ -94,9 +93,10 @@ export function validationCrossingWays() {
         return tags;
     }
 
+
     function isLegitCrossing(way1, featureType1, way2, featureType2, graph) {
-        var tags1 = _clone(getFeatureWithFeatureTypeTagsForWay(way1, graph).tags),
-            tags2 = _clone(getFeatureWithFeatureTypeTagsForWay(way2, graph).tags);
+        var tags1 = _clone(getFeatureWithFeatureTypeTagsForWay(way1, graph).tags);
+        var tags2 = _clone(getFeatureWithFeatureTypeTagsForWay(way2, graph).tags);
         tags1 = extendTagsByInferredLayer(tags1, way1);
         tags2 = extendTagsByInferredLayer(tags2, way2);
 
@@ -153,6 +153,7 @@ export function validationCrossingWays() {
         return false;
     }
 
+
     // highway values for which we shouldn't recommend connecting to waterways
     var highwaysDisallowingFords = [
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
@@ -185,6 +186,7 @@ export function validationCrossingWays() {
             }
             if (featureType1 === 'waterway') return {};
             if (featureType1 === 'railway') return {};
+
         } else {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
@@ -199,6 +201,7 @@ export function validationCrossingWays() {
                         return { railway: 'level_crossing' };
                     }
                 }
+
                 if (featureTypes.indexOf('waterway') !== -1) {
                     // do not allow fords on structures
                     if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return null;
@@ -216,6 +219,7 @@ export function validationCrossingWays() {
         return null;
     }
 
+
     function findCrossingsByWay(primaryWay, graph, tree) {
         var edgeCrossInfos = [];
         if (primaryWay.type !== 'way') return edgeCrossInfos;
@@ -224,27 +228,28 @@ export function validationCrossingWays() {
         if (primaryFeatureType === null) return edgeCrossInfos;
 
         for (var i = 0; i < primaryWay.nodes.length - 1; i++) {
-            var nid1 = primaryWay.nodes[i],
-                nid2 = primaryWay.nodes[i + 1],
-                n1 = graph.entity(nid1),
-                n2 = graph.entity(nid2),
-                extent = geoExtent([
-                    [
-                        Math.min(n1.loc[0], n2.loc[0]),
-                        Math.min(n1.loc[1], n2.loc[1])
-                    ],
-                    [
-                        Math.max(n1.loc[0], n2.loc[0]),
-                        Math.max(n1.loc[1], n2.loc[1])
-                    ]
-                ]),
-                intersected = tree.intersects(extent, graph);
+            var nid1 = primaryWay.nodes[i];
+            var nid2 = primaryWay.nodes[i + 1];
+            var n1 = graph.entity(nid1);
+            var n2 = graph.entity(nid2);
+            var extent = geoExtent([
+                [
+                    Math.min(n1.loc[0], n2.loc[0]),
+                    Math.min(n1.loc[1], n2.loc[1])
+                ],
+                [
+                    Math.max(n1.loc[0], n2.loc[0]),
+                    Math.max(n1.loc[1], n2.loc[1])
+                ]
+            ]);
+
+            var intersected = tree.intersects(extent, graph);
             for (var j = 0; j < intersected.length; j++) {
                 if (intersected[j].type !== 'way') continue;
 
                 // only check crossing highway, waterway, building, and railway
-                var way = intersected[j],
-                    wayFeatureType = getFeatureTypeForCrossingCheck(way, graph);
+                var way = intersected[j];
+                var wayFeatureType = getFeatureTypeForCrossingCheck(way, graph);
                 if (wayFeatureType === null ||
                     isLegitCrossing(primaryWay, primaryFeatureType, way, wayFeatureType, graph) ||
                     isLegitCrossing(way, wayFeatureType, primaryWay, primaryFeatureType, graph)) {
@@ -268,8 +273,8 @@ export function validationCrossingWays() {
 
     var type = 'crossing_ways';
 
-    var validation = function(entity, context) {
 
+    var validation = function(entity, context) {
         var graph = context.graph();
         var tree = context.history().tree();
 
@@ -307,8 +312,8 @@ export function validationCrossingWays() {
         return issues;
     };
 
-    function createIssue(crossing, context) {
 
+    function createIssue(crossing, context) {
         var graph = context.graph();
 
         // use the entities with the tags that define the feature type
@@ -336,14 +341,12 @@ export function validationCrossingWays() {
             if (connectionTags) {
                 crossingTypeID += '_connectable';
             }
-        }
-        else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
+        } else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
             crossingTypeID = 'bridge-bridge';
             if (connectionTags) {
                 crossingTypeID += '_connectable';
             }
-        }
-        else {
+        } else {
             crossingTypeID = crossing.featureTypes.sort().join('-');
         }
 
@@ -357,9 +360,9 @@ export function validationCrossingWays() {
             fixes.push(new validationIssueFix({
                 title: t('issues.fix.add_connection_vertex.title'),
                 onClick: function() {
-                    var loc = this.issue.coordinates,
-                        connectionTags = this.issue.info.connectionTags,
-                        edges = this.issue.info.edges;
+                    var loc = this.issue.coordinates;
+                    var connectionTags = this.issue.info.connectionTags;
+                    var edges = this.issue.info.edges;
 
                     context.perform(
                         function actionConnectCrossingWays(graph) {

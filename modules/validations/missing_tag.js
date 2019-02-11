@@ -1,15 +1,12 @@
 import _without from 'lodash-es/without';
 import _isEmpty from 'lodash-es/isEmpty';
+
+import { operationDelete } from '../operations/index';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
-import {
-    utilDisplayLabel
-} from '../util';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
-import { operationDelete } from '../operations/index';
+import { utilDisplayLabel } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
+
 
 export function validationMissingTag() {
 
@@ -24,7 +21,6 @@ export function validationMissingTag() {
     var type = 'missing_tag';
 
     var validation = function(entity, context) {
-
         var graph = context.graph();
 
         // ignore vertex features and relation members
@@ -32,14 +28,13 @@ export function validationMissingTag() {
             return [];
         }
 
-        var messageObj = {}, missingTagType;
+        var messageObj = {};
+        var missingTagType;
 
         if (_isEmpty(entity.tags)) {
             missingTagType = 'any';
-
         } else if (!hasDescriptiveTags(entity)) {
             missingTagType = 'descriptive';
-
         } else if (entity.type === 'relation' && !entity.tags.type) {
             missingTagType = 'specific';
             messageObj.tag = 'type';
