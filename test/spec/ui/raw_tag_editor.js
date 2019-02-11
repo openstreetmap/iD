@@ -53,7 +53,7 @@ describe('iD.uiRawTagEditor', function() {
             expect(tags).to.eql({highway: undefined});
             done();
         });
-        iD.utilTriggerEvent(element.selectAll('button.remove'), 'click');
+        iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown');
     });
 
     it('adds tags when pressing the TAB key on last input.value', function (done) {
