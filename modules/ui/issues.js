@@ -69,51 +69,8 @@ export function uiIssues(context) {
         updateWarningsList();
     }
 
-    /*function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
-            .data(data);
-
-        // Exit
-        items.exit()
-            .remove();
-
-        // Enter
-        var enter = items.enter()
-            .append('li')
-            .call(tooltip()
-                .html(true)
-                .title(function(d) {
-                    var tip = t('issues.' + name + '.' + d + '.tooltip');
-                    return uiTooltipHtml(tip);
-                })
-                .placement('top')
-            );
-
-        var label = enter
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', type)
-            .attr('name', name)
-            .on('change', change);
-
-        label
-            .append('span')
-            .text(function(d) { return t('issues.' + name + '.' + d + '.description'); });
-
-        // Update
-        items = items
-            .merge(enter);
-
-        items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active);
-    }*/
 
     function drawIssuesList(selection, issues) {
-
         var items = selection.selectAll('li')
             .data(issues, function(d) { return d.id(); });
 
@@ -122,11 +79,9 @@ export function uiIssues(context) {
             .remove();
 
         // Enter
-        var enter = items.enter()
+        var itemsEnter = items.enter()
             .append('li')
-            .attr('class', function (d) {
-                return 'issue severity-' + d.severity;
-            })
+            .attr('class', function (d) { return 'issue severity-' + d.severity; })
             .on('click', function(d) {
                 var loc = d.loc();
                 if (loc) {
@@ -149,34 +104,44 @@ export function uiIssues(context) {
                 utilHighlightEntities(ids, false, context);
             });
 
-        var label = enter
+
+        var labelsEnter = itemsEnter
             .append('button')
-            .attr('class', 'label')
+            .attr('class', 'label');
+
+        labelsEnter
             .call(tooltip()
                 .html(true)
-                .title(function(d) {
-                    var tip = d.tooltip ? d.tooltip : '';
-                    return uiTooltipHtml(tip);
-                })
+                .title(function(d) { return uiTooltipHtml(d.tooltip); })
                 .placement('top')
             );
 
-        label.each(function(d) {
-            var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
-            d3_select(this)
-                .append('div')
-                .attr('title', t('issues.'+d.severity+'s.icon_tooltip'))
-                .style('display', 'inline')
-                .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
-        });
-
-        label
+        labelsEnter
             .append('span')
-            .text(function(d) { return d.message; });
+            .attr('class', 'issue-icon')
+            .call(svgIcon('', 'pre-text'));
+
+        labelsEnter
+            .append('span')
+            .attr('class', 'issue-text');
+
 
         // Update
         items = items
-            .merge(enter);
+            .merge(itemsEnter);
+
+        items.select('button')     // propagate bound data
+            .attr('title', function(d) {
+                return t('issues.' + d.severity + 's.icon_tooltip');
+            });
+
+        items.select('.issue-icon svg use')     // propagate bound data
+            .attr('href', function(d) {
+                return '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+            });
+
+        items.select('.issue-text')     // propagate bound data
+            .text(function(d) { return d.message; });
     }
 
 
