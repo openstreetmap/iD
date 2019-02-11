@@ -66,12 +66,16 @@ export function uiEntityIssues(context) {
             })
             .on('mouseover.highlight', function(d) {
                 d.entities.forEach(function(entity) {
-                    utilHighlightEntity(entity.id, true, context);
+                    if (entity.id !== _entityID) {
+                        utilHighlightEntity(entity.id, true, context);
+                    }
                 });
             })
             .on('mouseout.highlight', function(d) {
                 d.entities.forEach(function(entity) {
-                    utilHighlightEntity(entity.id, false, context);
+                    if (entity.id !== _entityID) {
+                        utilHighlightEntity(entity.id, false, context);
+                    }
                 });
             });
 
