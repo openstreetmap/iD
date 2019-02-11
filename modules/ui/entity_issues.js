@@ -147,6 +147,16 @@ export function uiEntityIssues(context) {
                     })
                     .on('click', function(d) {
                         d.onClick();
+                    })
+                    .on('mouseover.highlight', function(d) {
+                        d.entityIds.forEach(function(entityId) {
+                            utilHighlightEntity(entityId, true, context);
+                        });
+                    })
+                    .on('mouseout.highlight', function(d) {
+                        d.entityIds.forEach(function(entityId) {
+                            utilHighlightEntity(entityId, false, context);
+                        });
                     });
             }
         });

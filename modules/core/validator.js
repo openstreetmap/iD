@@ -229,6 +229,9 @@ export function validationIssueFix(attrs) {
     this.title = attrs.title;
     this.onClick = attrs.onClick;
 
+    // IDs of fix-specific entities. Used for hover-higlighting.
+    this.entityIds = attrs.entityIds || [];
+
     // the issue this fix is for
     this.issue = null;
 }

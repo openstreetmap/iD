@@ -1249,8 +1249,10 @@ en:
       connect_almost_junction:
         title: Connect the features
         undo_redo: Connected very close features.
-      continue_feature:
-        title: Continue this feature
+      continue_from_start:
+        title: Continue drawing from start
+      continue_from_end:
+        title: Continue drawing from end
       delete_feature:
         title: Delete this feature
       connect_endpoints:

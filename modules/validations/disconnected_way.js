@@ -45,28 +45,22 @@ export function validationDisconnectedWay() {
                 entities: [entity],
                 fixes: [
                     new validationIssueFix({
-                        title: t('issues.fix.continue_feature.title'),
+                        title: t('issues.fix.continue_from_start.title'),
                         onClick: function() {
                             var way = this.issue.entities[0];
-                            var childNodes = context.graph().childNodes(way);
-                            var endNodes = [childNodes[0], childNodes[childNodes.length-1]];
-                            var exclusiveEndNodes = endNodes.filter(function(vertex) {
-                                return graph.parentWays(vertex).length === 1;
-                            });
-                            var vertex;
-                            if (exclusiveEndNodes.length === 1) {
-                                // prefer an endpoint with no connecting ways
-                                vertex = exclusiveEndNodes[0];
-                            } else {
-                                // prefer the terminating node
-                                vertex = endNodes[1];
-                            }
-                            // make sure the vertex is actually visible
-                            context.map().zoomToEase(vertex);
-                            context.enter(
-                                modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
-                            );
-                        }
+                            var vertex = context.entity(way.nodes[0]);
+                            continueDrawing(way, vertex, context);
+                        },
+                        entityIds: [entity.nodes[0]]
+                    }),
+                    new validationIssueFix({
+                        title: t('issues.fix.continue_from_end.title'),
+                        onClick: function() {
+                            var way = this.issue.entities[0];
+                            var vertex = context.entity(way.nodes[way.nodes.length-1]);
+                            continueDrawing(way, vertex, context);
+                        },
+                        entityIds: [entity.nodes[entity.nodes.length-1]]
                     }),
                     new validationIssueFix({
                         title: t('issues.fix.delete_feature.title'),
@@ -81,6 +75,19 @@ export function validationDisconnectedWay() {
 
         return issues;
     };
+
+    function continueDrawing(way, vertex, context) {
+
+        if (!context.map().editable() ||
+            !context.map().extent().contains(vertex.loc)) {
+            // make sure the vertex is actually visible and editable
+            context.map().zoomToEase(vertex);
+        }
+
+        context.enter(
+            modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
+        );
+    }
 
     validation.type = type;
 
