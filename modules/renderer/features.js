@@ -359,12 +359,11 @@ export function rendererFeatures(context) {
                     //   1. is a way that hasn't matched other 'interesting' feature rules,
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
-                        if (parents.length === 0) continue;
 
                         //   2a. belongs only to a single multipolygon relation
                         if ((parents.length === 1 && parents[0].isMultipolygon()) ||
                             // 2b. or belongs only to boundary relations
-                            parents.every(function(parent) { return parent.tags.type === 'boundary'; })) {
+                            (parents.length > 0 && parents.every(function(parent) { return parent.tags.type === 'boundary'; }))) {
 
                             // ...then match whatever feature rules the parent relation has matched.
                             // see #2548, #2887
