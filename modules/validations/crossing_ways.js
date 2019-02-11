@@ -158,7 +158,7 @@ export function validationCrossingWays() {
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
         'primary', 'primary_link', 'secondary', 'secondary_link'
     ];
-    var railwayEqualsCrossingHighways = [
+    var pathHighways = [
         'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps'
     ];
 
@@ -166,7 +166,23 @@ export function validationCrossingWays() {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
-            if (featureType1 === 'highway') return {};
+            if (featureType1 === 'highway') {
+                var entity1IsPath = pathHighways.indexOf(entity1.tags.highway) !== -1;
+                var entity2IsPath = pathHighways.indexOf(entity2.tags.highway) !== -1;
+                if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
+                    // one feature is a path but not both, use a crossing
+
+                    var pathFeature = entity1IsPath ? entity1 : entity2;
+                    if (pathFeature.tags.highway === 'footway' &&
+                        pathFeature.tags.footway === 'crossing' &&
+                        ['marked', 'unmarked'].indexOf(pathFeature.tags.crossing) !== -1) {
+                        // if the path is a crossing, match the crossing type
+                        return { highway: 'crossing', crossing: pathFeature.tags.crossing };
+                    }
+                    return { highway: 'crossing' };
+                }
+                return {};
+            }
             if (featureType1 === 'waterway') return {};
             if (featureType1 === 'railway') return {};
         } else {
@@ -174,8 +190,8 @@ export function validationCrossingWays() {
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('building') !== -1) return {};
                 if (featureTypes.indexOf('railway') !== -1) {
-                    if (railwayEqualsCrossingHighways.indexOf(entity1.tags.highway) !== -1 ||
-                        railwayEqualsCrossingHighways.indexOf(entity2.tags.highway) !== -1) {
+                    if (pathHighways.indexOf(entity1.tags.highway) !== -1 ||
+                        pathHighways.indexOf(entity2.tags.highway) !== -1) {
                         // path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
