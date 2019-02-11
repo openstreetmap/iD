@@ -13,6 +13,9 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiTooltipHtml } from './tooltipHtml';
+import {
+    utilHighlightEntity
+} from '../util';
 
 export function uiIssues(context) {
     var key = t('issues.key');
@@ -139,6 +142,20 @@ export function uiIssues(context) {
                         _map(d.entities, function(e) { return e.id; })
                     ));
                 }
+                // re-highlight the entities
+                d.entities.forEach(function(entity) {
+                    utilHighlightEntity(entity.id, true, context);
+                });
+            })
+            .on('mouseover', function(d) {
+                d.entities.forEach(function(entity) {
+                    utilHighlightEntity(entity.id, true, context);
+                });
+            })
+            .on('mouseout', function(d) {
+                d.entities.forEach(function(entity) {
+                    utilHighlightEntity(entity.id, false, context);
+                });
             });
 
         var label = enter

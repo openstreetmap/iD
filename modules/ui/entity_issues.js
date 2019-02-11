@@ -1,13 +1,16 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    select as d3_select
+    select as d3_selectAll
 } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { utilRebind } from '../util';
+import {
+    utilRebind,
+    utilHighlightEntity
+} from '../util';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -19,7 +22,7 @@ export function uiEntityIssues(context) {
     context.validator().on('reload.entity_issues', issuesDidReload);
 
     function issuesDidReload() {
-        var selection = d3_select('.entity-issues .disclosure-wrap');
+        var selection = d3_selectAll('.entity-issues .disclosure-wrap');
         renderContent(selection);
         update();
     }
@@ -35,10 +38,10 @@ export function uiEntityIssues(context) {
 
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
-        d3_select('.entity-issues')
+        d3_selectAll('.entity-issues')
             .classed('hide', issues.length === 0);
 
-        d3_select('.hide-toggle-entity_issues span')
+        d3_selectAll('.hide-toggle-entity_issues span')
             .text(t('issues.list_title', { count: issues.length }));
     }
 
@@ -48,10 +51,7 @@ export function uiEntityIssues(context) {
 
         var items = selection.selectAll('.issue')
             .data(issues, function(d) {
-                if (d.id) {
-                    return d.id();
-                }
-                return null;
+                return d.id();
             });
 
         // Exit
@@ -63,6 +63,16 @@ export function uiEntityIssues(context) {
             .append('div')
             .attr('class', function (d) {
                 return 'issue severity-' + d.severity;
+            })
+            .on('mouseover.highlight', function(d) {
+                d.entities.forEach(function(entity) {
+                    utilHighlightEntity(entity.id, true, context);
+                });
+            })
+            .on('mouseout.highlight', function(d) {
+                d.entities.forEach(function(entity) {
+                    utilHighlightEntity(entity.id, false, context);
+                });
             });
 
         var label = enter
@@ -79,7 +89,7 @@ export function uiEntityIssues(context) {
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
-            d3_select(this)
+            d3_selectAll(this)
                 .append('div')
                 .attr('title', t('issues.'+d.severity+'s.icon_tooltip'))
                 .style('display', 'inline')
@@ -93,7 +103,7 @@ export function uiEntityIssues(context) {
 
         enter.each(function(d) {
 
-            var issue = d3_select(this);
+            var issue = d3_selectAll(this);
 
             var list = issue
                 .selectAll('ul.fixes')
@@ -105,7 +115,7 @@ export function uiEntityIssues(context) {
                     .attr('class', 'fixes')
                     .merge(list);
 
-                issue.select('.label')
+                issue.selectAll('.label')
                     .on('click', function() {
                         if (!issue.classed('fixes-open')) {
                             issue.classed('fixes-open', true);
@@ -143,7 +153,7 @@ export function uiEntityIssues(context) {
 
         // open the fixes for the first issue if no others are already open
         if (selection.selectAll('.issue.fixes-open').empty()) {
-            selection.select('.issue:first-child').classed('fixes-open', true);
+            selection.selectAll('.issue:first-child').classed('fixes-open', true);
         }
 
     }
