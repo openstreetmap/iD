@@ -21,8 +21,24 @@
       "replace": {"amenity": "community_centre"}
     },
     {
+      "old": {"amenity": "ev_charging"},
+      "replace": {"amenity": "charging_station"}
+    },
+    {
       "old": {"amenity": "firepit"},
       "replace": {"leisure": "firepit"}
+    },
+    {
+      "old": {"amenity": "garage"},
+      "replace": {"landuse": "garages"}
+    },
+    {
+      "old": {"amenity": "garages"},
+      "replace": {"landuse": "garages"}
+    },
+    {
+      "old": {"amenity": "real_estate"},
+      "replace": {"office": "estate_agent"}
     },
     {
       "old": {"amenity": "register_office"},
@@ -49,12 +65,44 @@
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
     {
+      "old": {"amenity": "youth_center"},
+      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
+    },
+    {
+      "old": {"amenity": "youth_centre"},
+      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
+    },
+    {
       "old": {"barrier": "wire_fence"},
       "replace": {"barrier": "fence", "fence_type": "chain"}
     },
     {
       "old": {"barrier": "wood_fence"},
       "replace": {"barrier": "fence", "fence_type": "wood"}
+    },
+    {
+      "old": {"bridge": "arch"},
+      "replace": {"bridge": "yes", "bridge:structure": "arch"}
+    },
+    {
+      "old": {"bridge": "beam"},
+      "replace": {"bridge": "yes", "bridge:structure": "beam"}
+    },
+    {
+      "old": {"bridge": "humpback"},
+      "replace": {"bridge": "yes", "bridge:structure": "humpback"}
+    },
+    {
+      "old": {"bridge": "lift"},
+      "replace": {"bridge": "yes", "bridge:moveable": "lift"}
+    },
+    {
+      "old": {"bridge": "pontoon"},
+      "replace": {"bridge": "yes", "bridge:structure": "floating"}
+    },
+    {
+      "old": {"bridge": "suspension"},
+      "replace": {"bridge": "yes", "bridge:structure": "suspension"}
     },
     {
       "old": {"building": "entrance"},
@@ -73,28 +121,12 @@
       "replace": {"colour": "$1"}
     },
     {
-      "old": {"amenity": "ev_charging"},
-      "replace": {"amenity": "charging_station"}
-    },
-    {
-      "old": {"amenity": "charging"},
-      "replace": {"amenity": "charging_station"}
-    },
-    {
       "old": {"craft": "jeweler"},
       "replace": {"shop": "jewelery"}
     },
     {
       "old": {"craft": "optician"},
       "replace": {"shop": "optician"}
-    },
-    {
-      "old": {"amenity": "garage"},
-      "replace": {"amenity": "parking", "landuse": "garages"}
-    },
-    {
-      "old": {"amenity": "garages"},
-      "replace": {"amenity": "parking", "landuse": "garages"}
     },
     {
       "old": {"drinkable": "*"},
@@ -107,18 +139,6 @@
     {
       "old": {"fenced": "yes"},
       "replace": {"barrier": "fence"}
-    },
-    {
-      "old": {"amenity": "real_estate"},
-      "replace": {"office": "estate_agent"}
-    },
-    {
-      "old": {"office": "real_estate"},
-      "replace": {"office": "estate_agent"}
-    },
-    {
-      "old": {"shop": "real_estate"},
-      "replace": {"office": "estate_agent"}
     },
     {
       "old": {"highway": "ford"},
@@ -134,38 +154,6 @@
     {
       "old": {"highway": "incline"},
       "replace": {"highway": "road", "incline": "up"}
-    },
-    {
-      "old": {"amenity": "youth_center"},
-      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
-    },
-    {
-      "old": {"amenity": "youth_centre"},
-      "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
-    },
-    {
-      "old": {"bridge": "arch"},
-      "replace": {"bridge:structure": "*"}
-    },
-    {
-      "old": {"bridge": "beam"},
-      "replace": {"bridge:structure": "*"}
-    },
-    {
-      "old": {"bridge": "humpback"},
-      "replace": {"bridge:structure": "*"}
-    },
-    {
-      "old": {"bridge": "suspension"},
-      "replace": {"bridge:structure": "*"}
-    },
-    {
-      "old": {"bridge": "lift"},
-      "replace": {"bridge:structure": "*"}
-    },
-    {
-      "old": {"bridge": "swing"},
-      "replace": {"bridge:structure": "*"}
     },
     {
       "old": {"highway": "incline_steep"},
@@ -204,6 +192,14 @@
       "replace": {"man_made": "pier"}
     },
     {
+      "old": {"man_made": "mdf"},
+      "replace": {"telecom": "exchange"}
+    },
+    {
+      "old": {"man_made": "MDF"},
+      "replace": {"telecom": "exchange"}
+    },
+    {
       "old": {"man_made": "water_tank"},
       "replace": {"man_made": "storage_tank", "content": "water"}
     },
@@ -218,6 +214,10 @@
     {
       "old": {"office": "administrative"},
       "replace": {"office": "government"}
+    },
+    {
+      "old": {"office": "real_estate"},
+      "replace": {"office": "estate_agent"}
     },
     {
       "old": {"place_name": "*"},
@@ -272,6 +272,10 @@
       "replace": {"shop": "perfumery"}
     },
     {
+      "old": {"shop": "real_estate"},
+      "replace": {"office": "estate_agent"}
+    },
+    {
       "old": {"tourism": "bed_and_breakfast"},
       "replace": {"tourism": "guest_house"}
     },
@@ -290,14 +294,6 @@
     {
       "old": {"water": "tidal"},
       "replace": {"natural": "water", "tidal": "yes"}
-    },
-    {
-      "old": {"man_made": "MDF"},
-      "replace": {"telecom": "exchange"}
-    },
-    {
-      "old": {"man_made": "mdf"},
-      "replace": {"telecom": "exchange"}
     }
   ]
 }
