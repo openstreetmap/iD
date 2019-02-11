@@ -425,7 +425,7 @@ en:
     role: Role
     choose: Select feature type
     results: "{n} results for {search}"
-    no_documentation_key: There is no documentation available for this key
+    no_documentation_key: "There is no documentation available."
     edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
@@ -668,6 +668,7 @@ en:
         mr:
           title: Missing Geometry
           description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'
+          description_alt: 'Data from a 3rd party suggests there may be unmapped {geometry_type} here.'
         tr:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'

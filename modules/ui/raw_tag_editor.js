@@ -20,6 +20,7 @@ export function uiRawTagEditor(context) {
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
+    var _pendingChange = null;
     var _state;
     var _preset;
     var _tags;
@@ -211,7 +212,7 @@ export function uiRawTagEditor(context) {
             .property('disabled', isReadOnly);
 
         items.selectAll('button.remove')
-            .on('click', removeTag);
+            .on('mousedown', removeTag);  // 'click' fires too late - #5878
 
 
 
@@ -335,11 +336,11 @@ export function uiRawTagEditor(context) {
                 }
             }
 
-            var t = {};
+            _pendingChange  = _pendingChange || {};
             if (kOld) {
-                t[kOld] = undefined;
+                _pendingChange[kOld] = undefined;
             }
-            t[kNew] = vNew;
+            _pendingChange[kNew] = vNew;
 
             d.key = kNew;    // update datum to avoid exit/enter on tag update
             d.value = vNew;
@@ -347,15 +348,16 @@ export function uiRawTagEditor(context) {
             this.value = kNew;
             utilGetSetValue(inputVal, vNew);
 
-            dispatch.call('change', this, t);
+            scheduleChange();
         }
 
 
         function valueChange(d) {
             if (isReadOnly(d)) return;
-            var t = {};
-            t[d.key] = this.value;
-            dispatch.call('change', this, t);
+
+            _pendingChange  = _pendingChange || {};
+            _pendingChange[d.key] = this.value;
+            scheduleChange();
         }
 
 
@@ -366,23 +368,32 @@ export function uiRawTagEditor(context) {
                 _showBlank = false;
                 content(wrap);
             } else {
-                var t = {};
-                t[d.key] = undefined;
-                dispatch.call('change', this, t);
+                _pendingChange  = _pendingChange || {};
+                _pendingChange[d.key] = undefined;
+                scheduleChange();
             }
         }
 
 
         function addTag() {
-            // Wrapped in a setTimeout in case it's being called from a blur
-            // handler. Without the setTimeout, the call to `content` would
-            // wipe out the pending value change.
+            // Delay render in case this click is blurring an edited combo.
+            // Without the setTimeout, the `content` render would wipe out the pending tag change.
             window.setTimeout(function() {
                 _showBlank = true;
                 content(wrap);
                 list.selectAll('li:last-child input.key').node().focus();
+            }, 20);
+        }
+
+
+        function scheduleChange() {
+            // Delay change in case this change is blurring an edited combo. - #5878
+            window.setTimeout(function() {
+                dispatch.call('change', this, _pendingChange);
+                _pendingChange = null;
             }, 10);
         }
+
     }
 
 

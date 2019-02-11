@@ -66,6 +66,7 @@ export function uiKeepRightDetails(context) {
             .html(errorDetail);
 
         // If there are entity links in the error message..
+        var relatedEntities = [];
         descriptionEnter.selectAll('.error_entity_link, .error_object_link')
             .each(function() {
                 var link = d3_select(this);
@@ -74,6 +75,8 @@ export function uiKeepRightDetails(context) {
                     (utilEntityRoot(_error.object_type) + _error.object_id)
                     : this.textContent;
                 var entity = context.hasEntity(entityID);
+
+                relatedEntities.push(entityID);
 
                 // Add click handler
                 link
@@ -118,6 +121,9 @@ export function uiKeepRightDetails(context) {
                     }
                 }
             });
+
+        // Don't hide entities related to this error - #5880
+        context.features().forceVisible(relatedEntities);
     }
 
 

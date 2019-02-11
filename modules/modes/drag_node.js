@@ -354,7 +354,6 @@ export function modeDragNode(context) {
         }
     }
 
-
     function end(entity) {
         if (_isCancelled) return;
 

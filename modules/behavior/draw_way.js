@@ -17,6 +17,7 @@ import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 import { utilKeybinding } from '../util';
 
+import _isEmpty from 'lodash-es/isEmpty';
 
 export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     var origWay = context.entity(wayId);
@@ -65,6 +66,9 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         }
     }
 
+    function allowsVertex(d) {
+        return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+    }
 
     // related code
     // - `mode/drag_node.js`     `doMode()`
@@ -73,7 +77,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     function move(datum) {
         context.surface().classed('nope-disabled', d3_event.altKey);
 
-        var targetLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
+        var targetLoc = datum && datum.properties && datum.properties.entity && allowsVertex(datum.properties.entity) && datum.properties.entity.loc;
         var targetNodes = datum && datum.properties && datum.properties.nodes;
         var loc = context.map().mouseCoordinates();
 

@@ -148,6 +148,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             .hide();
 
         context.selectedErrorID(null);
+        context.features().forceVisible([]);
     };
 
 

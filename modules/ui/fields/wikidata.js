@@ -138,43 +138,54 @@ export function uiFieldWikidata(field) {
 
     wiki.tags = function(tags) {
         var value = tags[field.key] || '';
-        var matches = value.match(/^Q[0-9]*$/);
-
         utilGetSetValue(title, value);
 
-        // value in correct format
-        if (matches) {
-            _wikiURL = 'https://wikidata.org/wiki/' + value;
-            wikidata.entityByQID(value, function(qid, entity) {
-                var label = '';
-                var description = '';
+        if (!/^Q[0-9]*$/.test(value)) {   // not a proper QID
+            unrecognized();
+            return;
+        }
 
-                if (entity.labels && Object.keys(entity.labels).length > 0) {
-                    label = entity.labels[Object.keys(entity.labels)[0]].value;
-                }
-                if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
-                    description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
-                }
+        // QID value in correct format
+        _wikiURL = 'https://wikidata.org/wiki/' + value;
+        wikidata.entityByQID(value, function(err, entity) {
+            if (err) {
+                unrecognized();
+                return;
+            }
 
-                d3_select('.preset-wikidata-label')
-                    .style('display', function(){
-                        return label.length > 0 ? 'flex' : 'none';
-                    })
-                    .select('input')
-                    .attr('value', label);
+            var label = '';
+            var description = '';
 
-                d3_select('.preset-wikidata-description')
-                    .style('display', function(){
-                        return description.length > 0 ? 'flex' : 'none';
-                    })
-                    .select('input')
-                    .attr('value', description);
-            });
+            if (entity.labels && Object.keys(entity.labels).length > 0) {
+                label = entity.labels[Object.keys(entity.labels)[0]].value;
+            }
+            if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
+                description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
+            }
 
-        // unrecognized value format
-        } else {
-            d3_select('.preset-wikidata-label').style('display', 'none');
-            d3_select('.preset-wikidata-description').style('display', 'none');
+            d3_select('.preset-wikidata-label')
+                .style('display', function(){
+                    return label.length > 0 ? 'flex' : 'none';
+                })
+                .select('input')
+                .attr('value', label);
+
+            d3_select('.preset-wikidata-description')
+                .style('display', function(){
+                    return description.length > 0 ? 'flex' : 'none';
+                })
+                .select('input')
+                .attr('value', description);
+        });
+
+
+        // not a proper QID
+        function unrecognized() {
+            d3_select('.preset-wikidata-label')
+                .style('display', 'none');
+            d3_select('.preset-wikidata-description')
+                .style('display', 'none');
+
             if (value && value !== '') {
                 _wikiURL = 'https://wikidata.org/wiki/Special:Search?search=' + value;
             } else {

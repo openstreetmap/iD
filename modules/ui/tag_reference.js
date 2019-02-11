@@ -8,17 +8,22 @@ import { services } from '../services';
 import { svgIcon } from '../svg';
 
 
-// Pass `tag` object of the form:
+// Pass `which` object of the form:
 // {
 //   key: 'string',     // required
 //   value: 'string'    // optional
 // }
 //   -or-
 // {
-//   rtype: 'rtype'     // relation type  (e.g. 'multipolygon')
+//   rtype: 'string'    // relation type  (e.g. 'multipolygon')
 // }
-export function uiTagReference(tag) {
-    var wikibase = services.osmWikibase;
+//   -or-
+// {
+//   qid: 'string'      // brand wikidata  (e.g. 'Q37158')
+// }
+//
+export function uiTagReference(what) {
+    var wikibase = what.qid ? services.wikidata : services.osmWikibase;
     var tagReference = {};
 
     var _button = d3_select(null);
@@ -33,66 +38,69 @@ export function uiTagReference(tag) {
         _button
             .classed('tag-reference-loading', true);
 
-        wikibase.getDocs(tag, function(err, docs) {
-            _body.html('');
+        wikibase.getDocs(what, gotDocs);
+    }
 
-            if (!docs || !docs.title) {
-                _body
-                    .append('p')
-                    .attr('class', 'tag-reference-description')
-                    .text(t('inspector.no_documentation_key'));
-                done();
-                return;
-            }
 
-            if (docs.imageURL) {
-                _body
-                    .append('img')
-                    .attr('class', 'tag-reference-wiki-image')
-                    .attr('src', docs.imageURL)
-                    .on('load', function() { done(); })
-                    .on('error', function() { d3_select(this).remove(); done(); });
-            } else {
-                done();
-            }
+    function gotDocs(err, docs) {
+        _body.html('');
 
+        if (!docs || !docs.title) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .text(docs.description || t('inspector.no_documentation_key'))
+                .text(t('inspector.no_documentation_key'));
+            done();
+            return;
+        }
+
+        if (docs.imageURL) {
+            _body
+                .append('img')
+                .attr('class', 'tag-reference-wiki-image')
+                .attr('src', docs.imageURL)
+                .on('load', function() { done(); })
+                .on('error', function() { d3_select(this).remove(); done(); });
+        } else {
+            done();
+        }
+
+        _body
+            .append('p')
+            .attr('class', 'tag-reference-description')
+            .text(docs.description || t('inspector.no_documentation_key'))
+            .append('a')
+            .attr('class', 'tag-reference-edit')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .attr('title', t('inspector.edit_reference'))
+            .attr('href', docs.editURL)
+            .call(svgIcon('#iD-icon-edit', 'inline'));
+
+        if (docs.wiki) {
+            _body
+              .append('a')
+              .attr('class', 'tag-reference-link')
+              .attr('target', '_blank')
+              .attr('tabindex', -1)
+              .attr('href', docs.wiki.url)
+              .call(svgIcon('#iD-icon-out-link', 'inline'))
+              .append('span')
+              .text(t(docs.wiki.text));
+        }
+
+        // Add link to info about "good changeset comments" - #2923
+        if (what.key === 'comment') {
+            _body
                 .append('a')
-                .attr('class', 'tag-reference-edit')
+                .attr('class', 'tag-reference-comment-link')
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
-                .attr('title', t('inspector.edit_reference'))
-                .attr('href', docs.editURL)
-                .call(svgIcon('#iD-icon-edit', 'inline'));
-
-            if (docs.wiki) {
-                _body
-                  .append('a')
-                  .attr('class', 'tag-reference-link')
-                  .attr('target', '_blank')
-                  .attr('tabindex', -1)
-                  .attr('href', docs.wiki.url)
-                  .call(svgIcon('#iD-icon-out-link', 'inline'))
-                  .append('span')
-                  .text(t(docs.wiki.text));
-            }
-
-            // Add link to info about "good changeset comments" - #2923
-            if (tag.key === 'comment') {
-                _body
-                    .append('a')
-                    .attr('class', 'tag-reference-comment-link')
-                    .attr('target', '_blank')
-                    .attr('tabindex', -1)
-                    .call(svgIcon('#iD-icon-out-link', 'inline'))
-                    .attr('href', t('commit.about_changeset_comments_link'))
-                    .append('span')
-                    .text(t('commit.about_changeset_comments'));
-            }
-        });
+                .call(svgIcon('#iD-icon-out-link', 'inline'))
+                .attr('href', t('commit.about_changeset_comments_link'))
+                .append('span')
+                .text(t('commit.about_changeset_comments'));
+        }
     }
 
 
@@ -143,6 +151,7 @@ export function uiTagReference(tag) {
             .on('click', function () {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
+                this.blur();    // avoid keeping focus on the button - #4641
                 if (_showing) {
                     hide();
                 } else if (_loaded) {
@@ -155,9 +164,9 @@ export function uiTagReference(tag) {
 
 
     tagReference.body = function(selection) {
-        var tagid = tag.rtype || (tag.key + '-' + tag.value);
+        var itemID = what.qid || what.rtype || (what.key + '-' + what.value);
         _body = selection.selectAll('.tag-reference-body')
-            .data([tagid], function(d) { return d; });
+            .data([itemID], function(d) { return d; });
 
         _body.exit()
             .remove();

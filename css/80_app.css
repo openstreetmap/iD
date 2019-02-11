@@ -1114,11 +1114,12 @@ a.hide-toggle {
 img.tag-reference-wiki-image {
     float: right;
     width: 33.3333%;
-    width: -webkit-calc(33.3333% - 10px);
-    width: calc(33.3333% - 10px);
     border-radius: 4px;
-    max-height: 200px;
-    margin: 10px 5px 15px 20px;
+    margin: 10px 5px 15px 10px;
+}
+[dir='rtl'] img.tag-reference-wiki-image {
+    float: left;
+    margin: 10px 10px 15px 5px;
 }
 
 
@@ -2629,6 +2630,9 @@ input.key-trap {
 }
 .error-details-description-text::first-letter {
     text-transform: capitalize;
+}
+[dir='rtl'] .error-details-description-text::first-letter {
+    text-transform: none;  /* #5877 */
 }
 
 .note-save .new-comment-input,

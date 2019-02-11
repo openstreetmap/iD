@@ -13,6 +13,7 @@ import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilKeybinding, utilRebind } from '../util';
 
+import _isEmpty from 'lodash-es/isEmpty';
 
 var _usedTails = {};
 var _disableSpace = false;
@@ -26,7 +27,7 @@ export function behaviorDraw(context) {
 
     var keybinding = utilKeybinding('draw');
 
-    var hover = behaviorHover(context).altDisables(true)
+    var hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
         .on('hover', context.ui().sidebar.hover);
     var tail = behaviorTail();
     var edit = behaviorEdit(context);
@@ -116,6 +117,9 @@ export function behaviorDraw(context) {
         _mouseLeave = true;
     }
 
+    function allowsVertex(d) {
+        return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+    }
 
     // related code
     // - `mode/drag_node.js`     `doMode()`
@@ -125,7 +129,7 @@ export function behaviorDraw(context) {
         var d = datum();
         var target = d && d.properties && d.properties.entity;
 
-        if (target && target.type === 'node') {   // Snap to a node
+        if (target && target.type === 'node' && allowsVertex(target)) {   // Snap to a node
             dispatch.call('clickNode', this, target, d);
             return;
 

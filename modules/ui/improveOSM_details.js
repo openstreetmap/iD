@@ -17,6 +17,9 @@ export function uiImproveOsmDetails(context) {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
+
+        if (d.desc) return d.desc;
+
         var errorType = d.error_key;
         var et = dataEn.QA.improveOSM.error_types[errorType];
 
@@ -61,6 +64,7 @@ export function uiImproveOsmDetails(context) {
             .html(errorDetail);
 
         // If there are entity links in the error message..
+        var relatedEntities = [];
         descriptionEnter.selectAll('.error_entity_link, .error_object_link')
             .each(function() {
                 var link = d3_select(this);
@@ -69,6 +73,8 @@ export function uiImproveOsmDetails(context) {
                     (utilEntityRoot(_error.object_type) + _error.object_id)
                     : this.textContent;
                 var entity = context.hasEntity(entityID);
+
+                relatedEntities.push(entityID);
 
                 // Add click handler
                 link
@@ -113,6 +119,9 @@ export function uiImproveOsmDetails(context) {
                     }
                 }
             });
+
+        // Don't hide entities related to this error - #5880
+        context.features().forceVisible(relatedEntities);
     }
 
 
