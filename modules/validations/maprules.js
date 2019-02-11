@@ -1,6 +1,7 @@
 import { services } from '../services';
-export function validationMaprules() {
 
+
+export function validationMaprules() {
     var validation = function(entity, context) {
         if (!services.maprules) return [];
 

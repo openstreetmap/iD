@@ -1,23 +1,16 @@
 import { t } from '../util/locale';
-import {
-    osmIsOldMultipolygonOuterMember,
-    osmOldMultipolygonOuterMemberOfRelation
-} from '../osm';
+
+import { actionChangeTags } from '../actions';
+import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm';
 import { utilDisplayLabel } from '../util';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
-import {
-    actionChangeTags
-} from '../actions';
+import { validationIssue, validationIssueFix } from '../core/validator';
+
 
 export function validationOldMultipolygon() {
-
     var type = 'old_multipolygon';
 
-    var validation = function(entity, context) {
 
+    var validation = function(entity, context) {
         var issues = [];
         var graph = context.graph();
 

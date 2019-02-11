@@ -1,13 +1,9 @@
 import { t } from '../util/locale';
-import {
-    utilDisplayLabel
-} from '../util';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
-import { operationDelete } from '../operations/index';
 import { modeDrawLine } from '../modes';
+import { operationDelete } from '../operations/index';
+import { utilDisplayLabel } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
+
 
 export function validationDisconnectedWay() {
 

@@ -1,15 +1,8 @@
 import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
-import {
-    utilPreset
-} from '../util';
-import {
-    validationIssue,
-    validationIssueFix
-} from '../core/validator';
-import {
-    actionChangeTags
-} from '../actions';
+import { utilPreset } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
+import { actionChangeTags } from '../actions';
 import { discardNames } from '../../node_modules/name-suggestion-index/config/filters.json';
 
 
