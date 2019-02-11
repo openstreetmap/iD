@@ -81,30 +81,6 @@
       "replace": {"barrier": "fence", "fence_type": "wood"}
     },
     {
-      "old": {"bridge": "arch"},
-      "replace": {"bridge": "yes", "bridge:structure": "arch"}
-    },
-    {
-      "old": {"bridge": "beam"},
-      "replace": {"bridge": "yes", "bridge:structure": "beam"}
-    },
-    {
-      "old": {"bridge": "humpback"},
-      "replace": {"bridge": "yes", "bridge:structure": "humpback"}
-    },
-    {
-      "old": {"bridge": "lift"},
-      "replace": {"bridge": "yes", "bridge:movable": "lift"}
-    },
-    {
-      "old": {"bridge": "pontoon"},
-      "replace": {"bridge": "yes", "bridge:structure": "floating"}
-    },
-    {
-      "old": {"bridge": "suspension"},
-      "replace": {"bridge": "yes", "bridge:structure": "suspension"}
-    },
-    {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
     },
