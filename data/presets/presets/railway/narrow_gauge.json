@@ -1,10 +1,18 @@
 {
     "icon": "iD-railway-rail",
     "fields": [
-        "{railway/rail}"
+        "name",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail",
+        "usage_rail"
     ],
     "moreFields": [
-        "{railway/rail}"
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
     ],
     "geometry": [
         "line"

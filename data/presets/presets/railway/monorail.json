@@ -8,7 +8,10 @@
         "usage_rail"
     ],
     "moreFields": [
-        "{railway/rail}"
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
     ],
     "geometry": [
         "line"

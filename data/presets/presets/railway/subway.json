@@ -9,7 +9,6 @@
         "usage_rail"
     ],
     "moreFields": [
-        "bridge/structure_line",
         "maxspeed",
         "voltage_electrified",
         "frequency_electrified"

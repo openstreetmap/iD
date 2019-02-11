@@ -7,9 +7,6 @@
         "structure",
         "covered"
     ],
-    "moreFields": [
-        "bridge/structure_line"
-    ],
     "geometry": [
         "line"
     ],

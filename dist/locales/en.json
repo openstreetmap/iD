@@ -2104,9 +2104,6 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
-                "bridge/structure_line": {
-                    "label": "Bridge Structure"
-                },
                 "bridge/support": {
                     "label": "Type"
                 },
