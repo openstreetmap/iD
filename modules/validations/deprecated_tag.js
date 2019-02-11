@@ -70,7 +70,7 @@ export function validationDeprecatedTag() {
                                 }
                                 context.perform(
                                     actionChangeTags(entity.id, tags),
-                                    t('issues.fix.upgrade_tags.undo_redo')
+                                    t('issues.fix.upgrade_tags.annotation')
                                 );
                             }
                         })

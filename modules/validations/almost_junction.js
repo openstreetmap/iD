@@ -149,13 +149,13 @@ export function validationAlmostJunction() {
                     if (closestNodeInfo.distance < 0.75) {
                         context.perform(
                             actionMergeNodes([closestNodeInfo.node.id, endNode.id], closestNodeInfo.node.loc),
-                            t('issues.fix.connect_almost_junction.undo_redo')
+                            t('issues.fix.connect_almost_junction.annotation')
                         );
                     // else add the end node to the edge way
                     } else {
                         context.perform(
                             actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
-                            t('issues.fix.connect_almost_junction.undo_redo')
+                            t('issues.fix.connect_almost_junction.annotation')
                         );
                     }
                 }
@@ -168,7 +168,7 @@ export function validationAlmostJunction() {
                         var nodeID = this.issue.entities[1].id;
                         context.perform(
                             actionChangeTags(nodeID, {noexit: 'yes'}),
-                            t('issues.fix.tag_as_disconnected.undo_redo')
+                            t('issues.fix.tag_as_disconnected.annotation')
                         );
                     }
                 }));

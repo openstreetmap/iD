@@ -63,7 +63,7 @@ export function validationGenericName(context) {
                             delete tags.name;
                             context.perform(
                                 actionChangeTags(entity.id, tags),
-                                t('issues.fix.remove_generic_name.undo_redo')
+                                t('issues.fix.remove_generic_name.annotation')
                             );
                         }
                     })

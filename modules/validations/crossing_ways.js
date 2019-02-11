@@ -389,7 +389,7 @@ export function validationCrossingWays() {
 
                             return graph;
                         },
-                        t('issues.fix.add_connection_vertex.undo_redo')
+                        t('issues.fix.add_connection_vertex.annotation')
                     );
                 }
             }));

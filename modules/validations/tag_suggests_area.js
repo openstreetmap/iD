@@ -49,7 +49,7 @@ export function validationTagSuggestsArea() {
                         var way = this.issue.entities[0];
                         context.perform(
                             actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
-                            t('issues.fix.connect_endpoints.undo_redo')
+                            t('issues.fix.connect_endpoints.annotation')
                         );
                     };
                 }
@@ -66,7 +66,7 @@ export function validationTagSuggestsArea() {
                         var index = way.nodes.length;
                         context.perform(
                             actionAddVertex(way.id, nodeId, index),
-                            t('issues.fix.connect_endpoints.undo_redo')
+                            t('issues.fix.connect_endpoints.annotation')
                         );
                     };
                 }
@@ -87,7 +87,7 @@ export function validationTagSuggestsArea() {
                     }
                     context.perform(
                         actionChangeTags(entity.id, tags),
-                        t('issues.fix.remove_tag.undo_redo')
+                        t('issues.fix.remove_tag.annotation')
                     );
                 }
             }));

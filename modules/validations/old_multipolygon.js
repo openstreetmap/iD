@@ -53,7 +53,7 @@ export function validationOldMultipolygon() {
                                     graph = actionChangeTags(outerWay.id, {})(graph);
                                     return graph;
                                 },
-                                t('issues.fix.move_tags.undo_redo')
+                                t('issues.fix.move_tags.annotation')
                             );
                         }
                     })
