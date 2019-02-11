@@ -94,7 +94,7 @@
     },
     {
       "old": {"bridge": "lift"},
-      "replace": {"bridge": "yes", "bridge:moveable": "lift"}
+      "replace": {"bridge": "yes", "bridge:movable": "lift"}
     },
     {
       "old": {"bridge": "pontoon"},
