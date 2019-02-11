@@ -8,10 +8,7 @@
         "service_rail"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/rail}"
     ],
     "geometry": [
         "line"

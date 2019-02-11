@@ -10,6 +10,7 @@
         "access"
     ],
     "moreFields": [
+        "bridge/structure_line",
         "covered",
         "lanes",
         "lit",

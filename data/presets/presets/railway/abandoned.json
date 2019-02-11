@@ -1,13 +1,10 @@
 {
     "icon": "iD-railway-abandoned",
     "fields": [
-        "name",
-        "structure",
-        "service_rail",
-        "usage_rail"
+        "{railway/disused}"
     ],
     "moreFields": [
-        "covered"
+        "{railway/disused}"
     ],
     "geometry": [
         "line"

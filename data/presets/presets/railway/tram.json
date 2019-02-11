@@ -9,6 +9,7 @@
         "usage_rail"
     ],
     "moreFields": [
+        "bridge/structure_line",
         "covered",
         "frequency_electrified",
         "maxspeed",

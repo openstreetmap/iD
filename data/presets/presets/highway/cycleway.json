@@ -10,6 +10,7 @@
         "incline"
     ],
     "moreFields": [
+        "bridge/structure_line",
         "wheelchair",
         "lit",
         "smoothness",

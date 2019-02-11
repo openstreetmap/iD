@@ -42,6 +42,7 @@
     "brand": {"key": "brand", "type": "text", "label": "Brand"},
     "brewery": {"key": "brewery", "type": "semiCombo", "label": "Draft Beers"},
     "bridge": {"key": "bridge", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
+    "bridge/structure_line": {"key": "bridge:structure", "type": "combo", "label": "Bridge Structure", "prerequisiteTag": {"key": "bridge", "valueNot": "no"}},
     "bridge/support": {"key": "bridge:support", "type": "combo", "label": "Type"},
     "building_area": {"key": "building", "type": "combo", "default": "yes", "geometry": "area", "label": "Building"},
     "building": {"key": "building", "type": "combo", "label": "Building"},

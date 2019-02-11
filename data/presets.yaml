@@ -279,6 +279,9 @@ en:
         label: Type
         # bridge field placeholder
         placeholder: Default
+      bridge/structure_line:
+        # 'bridge:structure=*'
+        label: Bridge Structure
       bridge/support:
         # 'bridge:support=*'
         label: Type

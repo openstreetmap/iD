@@ -1124,6 +1124,7 @@
     {"key": "brand", "description": "🄵 Brand"},
     {"key": "brewery", "description": "🄵 Draft Beers"},
     {"key": "bridge", "description": "🄵 Type, 🄵 Structure"},
+    {"key": "bridge:structure", "description": "🄵 Bridge Structure"},
     {"key": "building:material", "description": "🄵 Material"},
     {"key": "bunker_type", "description": "🄵 Type"},
     {"key": "cables", "description": "🄵 Cables"},

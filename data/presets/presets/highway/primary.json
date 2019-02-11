@@ -11,6 +11,7 @@
         "access"
     ],
     "moreFields": [
+        "bridge/structure_line",
         "covered",
         "cycleway",
         "lit",

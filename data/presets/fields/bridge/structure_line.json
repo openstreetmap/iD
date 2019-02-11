@@ -1,0 +1,9 @@
+{
+    "key": "bridge:structure",
+    "type": "combo",
+    "label": "Bridge Structure",
+    "prerequisiteTag": {
+        "key": "bridge",
+        "valueNot": "no"
+    }
+}

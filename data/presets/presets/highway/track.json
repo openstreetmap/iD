@@ -11,6 +11,7 @@
         "smoothness"
     ],
     "moreFields": [
+        "bridge/structure_line",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
