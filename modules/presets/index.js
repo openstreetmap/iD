@@ -78,6 +78,7 @@ export function presetIndex() {
     };
 
     all.allowsVertex = function(entity, resolver) {
+        if (entity.type !== 'node') return false;
         return resolver.transient(entity, 'vertexMatch', function() {
             var vertexPresets = _index.vertex;
             var match;
