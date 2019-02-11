@@ -62,6 +62,14 @@ export function utilEntityOrDeepMemberSelector(ids, graph) {
 }
 
 
+// Adds or removes highlight styling for the specified entities
+export function utilHighlightEntities(ids, highlighted, context) {
+    context.surface()
+        .selectAll(utilEntityOrDeepMemberSelector(ids, context.graph()))
+        .classed('highlighted', highlighted);
+}
+
+
 export function utilGetAllNodes(ids, graph) {
     var seen = {};
     var nodes = [];
@@ -344,11 +352,4 @@ export function utilHashcode(str) {
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
-}
-
-// Adds or removes highlight styling for the specified entity's SVG elements in the map.
-export function utilHighlightEntity(id, highlighted, context) {
-    context.surface()
-        .selectAll(utilEntityOrDeepMemberSelector([id], context.graph()))
-        .classed('highlighted', highlighted);
 }

@@ -16,7 +16,7 @@ export { utilGetAllNodes } from './util';
 export { utilGetPrototypeOf } from './util';
 export { utilGetSetValue } from './get_set_value';
 export { utilHashcode } from './util';
-export { utilHighlightEntity } from './util';
+export { utilHighlightEntities } from './util';
 export { utilIdleWorker } from './idle_worker';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';

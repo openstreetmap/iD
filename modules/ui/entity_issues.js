@@ -1,18 +1,12 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_selectAll } from 'd3-selection';
 
-import {
-    select as d3_selectAll
-} from 'd3-selection';
-
-import { t } from '../util/locale';
 import { svgIcon } from '../svg';
-import { uiDisclosure } from './disclosure';
-import {
-    utilRebind,
-    utilHighlightEntity
-} from '../util';
+import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
+import { utilRebind, utilHighlightEntities } from '../util';
 
 
 export function uiEntityIssues(context) {
@@ -21,21 +15,22 @@ export function uiEntityIssues(context) {
 
     context.validator().on('reload.entity_issues', issuesDidReload);
 
+
     function issuesDidReload() {
         var selection = d3_selectAll('.entity-issues .disclosure-wrap');
         renderContent(selection);
         update();
     }
 
+
     function entityIssues(selection) {
-        selection.call(uiDisclosure(context, 'entity_issues', true)
-            .content(renderContent)
-        );
+        selection
+            .call(uiDisclosure(context, 'entity_issues', true).content(renderContent));
         update();
     }
 
-    function update() {
 
+    function update() {
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
         d3_selectAll('.entity-issues')
@@ -45,14 +40,12 @@ export function uiEntityIssues(context) {
             .text(t('issues.list_title', { count: issues.length }));
     }
 
-    function renderContent(selection) {
 
+    function renderContent(selection) {
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
         var items = selection.selectAll('.issue')
-            .data(issues, function(d) {
-                return d.id();
-            });
+            .data(issues, function(d) { return d.id(); });
 
         // Exit
         items.exit()
@@ -61,22 +54,14 @@ export function uiEntityIssues(context) {
         // Enter
         var enter = items.enter()
             .append('div')
-            .attr('class', function (d) {
-                return 'issue severity-' + d.severity;
-            })
+            .attr('class', function (d) { return 'issue severity-' + d.severity; })
             .on('mouseover.highlight', function(d) {
-                d.entities.forEach(function(entity) {
-                    if (entity.id !== _entityID) {
-                        utilHighlightEntity(entity.id, true, context);
-                    }
-                });
+                var ids = d.entities.map(function(e) { return e.id; });
+                utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
-                d.entities.forEach(function(entity) {
-                    if (entity.id !== _entityID) {
-                        utilHighlightEntity(entity.id, false, context);
-                    }
-                });
+                var ids = d.entities.map(function(e) { return e.id; });
+                utilHighlightEntities(ids, false, context);
             });
 
         var label = enter
@@ -84,10 +69,7 @@ export function uiEntityIssues(context) {
             .classed('label', true)
             .call(tooltip()
                 .html(true)
-                .title(function(d) {
-                    var tip = d.tooltip ? d.tooltip : '';
-                    return uiTooltipHtml(tip);
-                })
+                .title(function(d) { return uiTooltipHtml(d.tooltip); })
                 .placement('top')
             );
 
@@ -95,7 +77,7 @@ export function uiEntityIssues(context) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_selectAll(this)
                 .append('div')
-                .attr('title', t('issues.'+d.severity+'s.icon_tooltip'))
+                .attr('title', t('issues.' + d.severity + 's.icon_tooltip'))
                 .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
@@ -105,8 +87,8 @@ export function uiEntityIssues(context) {
             .append('strong')
             .text(function(d) { return d.message; });
 
-        enter.each(function(d) {
 
+        enter.each(function(d) {
             var issue = d3_selectAll(this);
 
             var list = issue
@@ -145,21 +127,13 @@ export function uiEntityIssues(context) {
                 fixItems.enter()
                     .append('li')
                     .append('button')
-                    .text(function(d) {
-                        return d.title;
-                    })
-                    .on('click', function(d) {
-                        d.onClick();
-                    })
+                    .text(function(d) {return d.title; })
+                    .on('click', function(d) { d.onClick(); })
                     .on('mouseover.highlight', function(d) {
-                        d.entityIds.forEach(function(entityId) {
-                            utilHighlightEntity(entityId, true, context);
-                        });
+                        utilHighlightEntities(d.entityIds, true, context);
                     })
                     .on('mouseout.highlight', function(d) {
-                        d.entityIds.forEach(function(entityId) {
-                            utilHighlightEntity(entityId, false, context);
-                        });
+                        utilHighlightEntities(d.entityIds, false, context);
                     });
             }
         });
@@ -174,6 +148,7 @@ export function uiEntityIssues(context) {
         }
 
     }
+
 
     entityIssues.entityID = function(val) {
         if (!arguments.length) return _entityID;

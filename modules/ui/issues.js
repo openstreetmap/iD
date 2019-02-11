@@ -1,4 +1,3 @@
-import _map from 'lodash-es/map';
 import {
     event as d3_event,
     select as d3_select
@@ -13,15 +12,14 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiTooltipHtml } from './tooltipHtml';
-import {
-    utilHighlightEntity
-} from '../util';
+import { utilHighlightEntities } from '../util';
+
 
 export function uiIssues(context) {
     var key = t('issues.key');
     //var _featureApplicabilityList = d3_select(null);
-    var _errorsList = d3_select(null),
-        _warningsList = d3_select(null);
+    var _errorsList = d3_select(null);
+    var _warningsList = d3_select(null);
     var pane = d3_select(null);
     var _shown = false;
 
@@ -137,25 +135,18 @@ export function uiIssues(context) {
                     context.map().zoomTo(d.entities[0]);
                 }
                 if (d.entities) {
-                    context.enter(modeSelect(
-                        context,
-                        _map(d.entities, function(e) { return e.id; })
-                    ));
+                    var ids = d.entities.map(function(e) { return e.id; });
+                    context.enter(modeSelect(context, ids));
+                    utilHighlightEntities(ids, true, context);
                 }
-                // re-highlight the entities
-                d.entities.forEach(function(entity) {
-                    utilHighlightEntity(entity.id, true, context);
-                });
             })
             .on('mouseover', function(d) {
-                d.entities.forEach(function(entity) {
-                    utilHighlightEntity(entity.id, true, context);
-                });
+                var ids = d.entities.map(function(e) { return e.id; });
+                utilHighlightEntities(ids, true, context);
             })
             .on('mouseout', function(d) {
-                d.entities.forEach(function(entity) {
-                    utilHighlightEntity(entity.id, false, context);
-                });
+                var ids = d.entities.map(function(e) { return e.id; });
+                utilHighlightEntities(ids, false, context);
             });
 
         var label = enter
@@ -188,21 +179,27 @@ export function uiIssues(context) {
             .merge(enter);
     }
 
-    function renderNoIssuesBox(selection) {
 
-        selection.append('div')
+    function renderNoIssuesBox(selection) {
+        selection
+            .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesLabel = selection.append('span');
+        var noIssuesLabel = selection
+            .append('span');
 
-        noIssuesLabel.append('strong')
+        noIssuesLabel
+            .append('strong')
             .text(t('issues.no_issues.message'));
 
-        noIssuesLabel.append('br');
+        noIssuesLabel
+            .append('br');
 
-        noIssuesLabel.append('span')
+        noIssuesLabel
+            .append('span')
             .text(t('issues.no_issues.info'));
     }
+
     /*
     function showsFeatureApplicability(d) {
         return context.validator().getFeatureApplicability() === d;
@@ -231,14 +228,15 @@ export function uiIssues(context) {
             .call(drawIssuesList, errors);
     }
 
+
     function updateWarningsList() {
         var warnings = context.validator().getWarnings();
         _warningsList
             .call(drawIssuesList, warnings);
     }
 
-    function update() {
 
+    function update() {
         var errors = context.validator().getErrors();
         pane.select('.issues-errors').classed('hide', errors.length === 0);
         if (errors.length > 0) {
@@ -259,7 +257,8 @@ export function uiIssues(context) {
             }
         }
 
-        pane.select('.issues-none').classed('hide', warnings.length > 0 || errors.length > 0);
+        pane.select('.issues-none')
+            .classed('hide', warnings.length > 0 || errors.length > 0);
 
         //if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
         //    updateFeatureApplicabilityList();

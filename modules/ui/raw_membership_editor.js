@@ -21,7 +21,7 @@ import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { uiCombobox, uiDisclosure } from './index';
-import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
+import { utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -38,7 +38,7 @@ export function uiRawMembershipEditor(context) {
         d3_event.preventDefault();
 
         // remove the hover-highlight styling
-        utilHighlightEntity(d.relation.id, false, context);
+        utilHighlightEntities([d.relation.id], false, context);
 
         context.enter(modeSelect(context, [d.relation.id]));
     }
@@ -194,10 +194,10 @@ export function uiRawMembershipEditor(context) {
                 // highlight the relation in the map while hovering on the list item
                 d3_select(this)
                     .on('mouseover', function() {
-                        utilHighlightEntity(d.relation.id, true, context);
+                        utilHighlightEntities([d.relation.id], true, context);
                     })
                     .on('mouseout', function() {
-                        utilHighlightEntity(d.relation.id, false, context);
+                        utilHighlightEntities([d.relation.id], false, context);
                     });
             });
 
