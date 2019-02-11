@@ -1186,18 +1186,23 @@ img.tag-reference-wiki-image {
 
 /* Entity/Preset Editor
 ------------------------------------------------------- */
+.entity-issues,
 .preset-editor {
     overflow: hidden;
     padding: 10px 0px 5px 0px;
 }
+.entity-issues a.hide-toggle,
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
 }
+.entity-issues .disclosure-wrap-entity_issues,
 .preset-editor .form-fields-container {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
+    background: #ececec;
 }
+.entity-issues .disclosure-wrap-entity_issues:empty,
 .preset-editor .form-fields-container:empty {
     display: none;
 }
@@ -2922,8 +2927,9 @@ div.full-screen > button:hover {
     padding-bottom: 10px;
 }
 
-/* Issues */
 
+/* Issues
+------------------------------------------------------- */
 .issue {
     overflow: hidden;
 }
@@ -3004,9 +3010,10 @@ div.full-screen > button:hover {
 
 /* Entity Issues List */
 
-.entity-issues {
+/*.entity-issues {
     padding: 0 20px 20px 20px;
 }
+*/
 .entity-issues .issue {
     border-radius: 4px;
     border-width: 1px;
@@ -3029,6 +3036,7 @@ div.full-screen > button:hover {
 .entity-issues .issue:not(.fixes-open) ul.fixes {
     display: none;
 }
+
 
 /* Background - Display Options Sliders
 ------------------------------------------------------- */
