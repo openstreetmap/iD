@@ -1,6 +1,6 @@
 describe('iD.Features', function() {
-    var dimensions = [1000, 1000],
-        context, features;
+    var dimensions = [1000, 1000];
+    var context, features;
 
     function _values(obj) {
         var result = [];
@@ -64,18 +64,18 @@ describe('iD.Features', function() {
     describe('#gatherStats', function() {
         it('counts features', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-                    iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-                    iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-                    iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                    iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
-                    iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
-                    iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
-                    iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
-                    iD.osmWay({id: 'fence', tags: {barrier: 'fence'}, version: 1})
-                ]),
-                all = _values(graph.base().entities),
-                stats;
+                iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+                iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+                iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+                iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
+                iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
+                iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+                iD.osmWay({id: 'fence', tags: {barrier: 'fence'}, version: 1})
+            ]);
+            var all = _values(graph.base().entities);
+            var stats;
 
             features.gatherStats(all, graph, dimensions);
             stats = features.stats();
@@ -205,8 +205,8 @@ describe('iD.Features', function() {
                     version: 1
                 })
 
-        ]),
-        all = _values(graph.base().entities);
+        ]);
+        var all = _values(graph.base().entities);
 
 
         function doMatch(ids) {
@@ -435,12 +435,12 @@ describe('iD.Features', function() {
 
     describe('hiding', function() {
         it('hides child vertices on a hidden way', function() {
-            var a = iD.osmNode({id: 'a', version: 1}),
-                b = iD.osmNode({id: 'b', version: 1}),
-                w = iD.osmWay({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
-                graph = iD.coreGraph([a, b, w]),
-                geometry = a.geometry(graph),
-                all = _values(graph.base().entities);
+            var a = iD.osmNode({id: 'a', version: 1});
+            var b = iD.osmNode({id: 'b', version: 1});
+            var w = iD.osmWay({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1});
+            var graph = iD.coreGraph([a, b, w]);
+            var geometry = a.geometry(graph);
+            var all = _values(graph.base().entities);
 
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
@@ -452,23 +452,23 @@ describe('iD.Features', function() {
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
-            var outer = iD.osmWay({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1}),
-                inner1 = iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1}),
-                inner2 = iD.osmWay({id: 'inner2', version: 1}),
-                inner3 = iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
-                r = iD.osmRelation({
-                    id: 'r',
-                    tags: {type: 'multipolygon'},
-                    members: [
-                        {id: outer.id, role: 'outer', type: 'way'},
-                        {id: inner1.id, role: 'inner', type: 'way'},
-                        {id: inner2.id, role: 'inner', type: 'way'},
-                        {id: inner3.id, role: 'inner', type: 'way'}
-                    ],
-                    version: 1
-                }),
-                graph = iD.coreGraph([outer, inner1, inner2, inner3, r]),
-                all = _values(graph.base().entities);
+            var outer = iD.osmWay({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1});
+            var inner1 = iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1});
+            var inner2 = iD.osmWay({id: 'inner2', version: 1});
+            var inner3 = iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1});
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: {type: 'multipolygon'},
+                members: [
+                    {id: outer.id, role: 'outer', type: 'way'},
+                    {id: inner1.id, role: 'inner', type: 'way'},
+                    {id: inner2.id, role: 'inner', type: 'way'},
+                    {id: inner3.id, role: 'inner', type: 'way'}
+                ],
+                version: 1
+            });
+            var graph = iD.coreGraph([outer, inner1, inner2, inner3, r]);
+            var all = _values(graph.base().entities);
 
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
@@ -480,12 +480,12 @@ describe('iD.Features', function() {
         });
 
         it('hides only versioned entities', function() {
-            var a = iD.osmNode({id: 'a', version: 1}),
-                b = iD.osmNode({id: 'b'}),
-                graph = iD.coreGraph([a, b]),
-                ageo = a.geometry(graph),
-                bgeo = b.geometry(graph),
-                all = _values(graph.base().entities);
+            var a = iD.osmNode({id: 'a', version: 1});
+            var b = iD.osmNode({id: 'b'});
+            var graph = iD.coreGraph([a, b]);
+            var ageo = a.geometry(graph);
+            var bgeo = b.geometry(graph);
+            var all = _values(graph.base().entities);
 
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
@@ -494,10 +494,23 @@ describe('iD.Features', function() {
             expect(features.isHidden(b, graph, bgeo)).to.be.false;
         });
 
+        it('#forceVisible', function() {
+            var a = iD.osmNode({id: 'a', version: 1});
+            var graph = iD.coreGraph([a]);
+            var ageo = a.geometry(graph);
+            var all = _values(graph.base().entities);
+
+            features.disable('points');
+            features.gatherStats(all, graph, dimensions);
+            features.forceVisible(['a']);
+
+            expect(features.isHidden(a, graph, ageo)).to.be.false;
+        });
+
         it('auto-hides features', function() {
-            var graph = iD.coreGraph([]),
-                maxPoints = 200,
-                all, hidden, autoHidden, i, msg;
+            var graph = iD.coreGraph([]);
+            var maxPoints = 200;
+            var all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
                 graph.rebase([iD.osmNode({version: 1})], [graph]);
@@ -525,10 +538,10 @@ describe('iD.Features', function() {
         });
 
         it('doubles auto-hide threshold when doubling viewport size', function() {
-            var graph = iD.coreGraph([]),
-                maxPoints = 400,
-                dimensions = [2000, 1000],
-                all, hidden, autoHidden, i, msg;
+            var graph = iD.coreGraph([]);
+            var maxPoints = 400;
+            var dimensions = [2000, 1000];
+            var all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
                 graph.rebase([iD.osmNode({version: 1})], [graph]);

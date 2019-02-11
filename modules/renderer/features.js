@@ -8,10 +8,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
-import {
-	utilQsString,
-	utilStringQs
-} from '../util';
+import { utilQsString, utilStringQs } from '../util';
 
 
 export function rendererFeatures(context) {
@@ -58,13 +55,14 @@ export function rendererFeatures(context) {
         'obliterated': true
     };
 
-    var dispatch = d3_dispatch('change', 'redraw'),
-        _cullFactor = 1,
-        _cache = {},
-        _features = {},
-        _stats = {},
-        _keys = [],
-        _hidden = [];
+    var dispatch = d3_dispatch('change', 'redraw');
+    var _cullFactor = 1;
+    var _cache = {};
+    var _features = {};
+    var _stats = {};
+    var _keys = [];
+    var _hidden = [];
+    var _forceVisible = {};
 
 
     function update() {
@@ -277,10 +275,10 @@ export function rendererFeatures(context) {
 
 
     features.gatherStats = function(d, resolver, dimensions) {
-        var needsRedraw = false,
-            type = _groupBy(d, function(ent) { return ent.type; }),
-            entities = [].concat(type.relation || [], type.way || [], type.node || []),
-            currHidden, geometry, matches, i, j;
+        var needsRedraw = false;
+        var type = _groupBy(d, function(ent) { return ent.type; });
+        var entities = [].concat(type.relation || [], type.way || [], type.node || []);
+        var currHidden, geometry, matches, i, j;
 
         for (i = 0; i < _keys.length; i++) {
             _features[_keys[i]].count = 0;
@@ -346,8 +344,8 @@ export function rendererFeatures(context) {
         }
 
         if (!_cache[ent].matches) {
-            var matches = {},
-                hasMatch = false;
+            var matches = {};
+            var hasMatch = false;
 
             for (var i = 0; i < _keys.length; i++) {
                 if (_keys[i] === 'others') {
@@ -462,6 +460,7 @@ export function rendererFeatures(context) {
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
+        if (_forceVisible[entity.id]) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
@@ -479,6 +478,16 @@ export function rendererFeatures(context) {
             }
         }
         return result;
+    };
+
+
+    features.forceVisible = function(entityIDs) {
+        if (!arguments.length) return Object.keys(_forceVisible);
+        _forceVisible = {};
+        for (var i = 0; i < entityIDs.length; i++) {
+            _forceVisible[entityIDs[i]] = true;
+        }
+        return features;
     };
 
 
