@@ -366,6 +366,8 @@ export function uiIssues(context) {
         // options
         /*
         // add this back to core.yaml when re-enabling the options
+        options:
+          title: Options
         features_to_validate:
           edited:
             description: Edited features only

@@ -1176,8 +1176,6 @@ en:
     no_issues:
       message: Everything looks fine.
       info: Any issues will show up here as you edit.
-    options:
-      title: Options
     almost_junction:
       message: "{feature} is very close but not connected to {feature2}."
       highway-highway:
