@@ -126,7 +126,8 @@ export function uiEntityIssues(context) {
                             var loc = d.loc();
                             if (loc) {
                                 context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
-                            } else if (d.entities && d.entities.length > 0) {
+                            } else if (d.entities && d.entities.length > 0 &&
+                                !d.entities[0].intersects(context.map().extent(), context.graph())) {
                                 context.map().zoomToEase(d.entities[0]);
                             }
                         } else {
