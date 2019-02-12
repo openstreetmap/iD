@@ -74,7 +74,8 @@ export function uiEntityIssues(context) {
             })
             .on('click', function(d, i) {
                 _expanded = i;   // expand only the clicked item
-                items.classed('expanded', function(d, i) { return i === _expanded; });
+                selection.selectAll('.issue')
+                    .classed('expanded', function(d, i) { return i === _expanded; });
 
                 var loc = d.loc();
                 if (loc) {

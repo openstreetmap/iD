@@ -3026,7 +3026,16 @@ ul.issue-fix-list li:not(:last-of-type) {
     border-bottom-width: 1px;
 }
 .issue:not(.expanded) ul.issue-fix-list {
-    display: none;
+    height: 0px;
+    transition: height 75ms linear;
+    -moz-transition: height 75ms linear;
+    -webkit-transition: height 75ms linear;
+}
+.issue.expanded ul.issue-fix-list {
+    height: 100%;
+    transition: height 75ms linear;
+    -moz-transition: height 75ms linear;
+    -webkit-transition: height 75ms linear;
 }
 
 
