@@ -522,6 +522,10 @@
             "edit_reference": "edit/translate",
             "wiki_reference": "View documentation",
             "wiki_en_reference": "View documentation in English",
+            "hidden_preset": {
+                "manual": "{features} are hidden. Enable them in the Map Data pane.",
+                "zoom": "{features} are hidden. Zoom in to enable them."
+            },
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
@@ -653,11 +657,11 @@
                 "tooltip": "Power Lines, Power Plants, Substations, etc."
             },
             "past_future": {
-                "description": "Past/Future",
+                "description": "Past/Future Features",
                 "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
             },
             "others": {
-                "description": "Others",
+                "description": "Other Features",
                 "tooltip": "Everything Else"
             }
         },

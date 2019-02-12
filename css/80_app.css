@@ -1082,7 +1082,9 @@ a.hide-toggle {
 }
 
 .preset-list-button:hover .label,
-.preset-list-button:focus .label {
+.preset-list-button:focus .label,
+.preset-list-button.disabled,
+.preset-list-button.disabled .label {
     background-color: #ececec;
 }
 

@@ -2,13 +2,15 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
     event as d3_event,
-    select as d3_select
+    select as d3_select,
+    selectAll as d3_selectAll
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
 import { svgIcon } from '../svg/index';
+import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
@@ -136,6 +138,8 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'preset-list fillL cf')
             .call(drawList, context.presets().defaults(geometry, 36));
+
+        context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
 
 
@@ -165,6 +169,8 @@ export function uiPresetList(context) {
             .style('opacity', 0)
             .transition()
             .style('opacity', 1);
+
+        updateForFeatureHiddenState();
     }
 
     function itemKeydown(){
@@ -377,6 +383,8 @@ export function uiPresetList(context) {
         }
 
         item.choose = function() {
+            if (d3_select(this).classed('disabled')) return;
+
             context.presets().choose(preset);
             context.perform(
                 actionChangePreset(_entityID, _currentPreset, preset),
@@ -397,6 +405,34 @@ export function uiPresetList(context) {
         return item;
     }
 
+    function updateForFeatureHiddenState() {
+
+        var geometry = context.geometry(_entityID);
+
+        var button = d3_selectAll('.preset-list .preset-list-button');
+
+        // remove existing tooltips
+        button.call(tooltip().destroyAny);
+
+        button.each(function(item, index) {
+
+            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
+            var isHiddenPreset = !!hiddenPresetFeaturesId && item.preset !== _currentPreset;
+
+            d3_select(this)
+                .classed('disabled', isHiddenPreset);
+
+            if (isHiddenPreset) {
+                var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
+                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
+                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
+                d3_select(this).call(tooltip()
+                    .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
+                    .placement(index < 2 ? 'bottom' : 'top')
+                );
+            }
+        });
+    }
 
     presetList.autofocus = function(val) {
         if (!arguments.length) return _autofocus;
