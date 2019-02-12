@@ -254,7 +254,7 @@ export function uiPresetList(context) {
 
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'preset-list-button-wrap category col12');
+                .attr('class', 'preset-list-button-wrap category');
 
             function click() {
                 var isExpanded = d3_select(this).classed('expanded');
@@ -313,7 +313,7 @@ export function uiPresetList(context) {
                 .html(function() { return preset.name() + '&hellip;'; });
 
             box = selection.append('div')
-                .attr('class', 'subgrid col12')
+                .attr('class', 'subgrid')
                 .style('max-height', '0px')
                 .style('opacity', 0);
 
@@ -321,7 +321,7 @@ export function uiPresetList(context) {
                 .attr('class', 'arrow');
 
             sublist = box.append('div')
-                .attr('class', 'preset-list fillL3 cf fl');
+                .attr('class', 'preset-list fillL3');
         }
 
 
@@ -342,7 +342,7 @@ export function uiPresetList(context) {
                     .duration(200)
                     .style('opacity', '1')
                     .style('max-height', 200 + preset.members.collection.length * 190 + 'px')
-                    .style('padding-bottom', '20px');
+                    .style('padding-bottom', '10px');
             }
         };
 
@@ -354,7 +354,7 @@ export function uiPresetList(context) {
     function PresetItem(preset) {
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'preset-list-button-wrap col12');
+                .attr('class', 'preset-list-button-wrap');
 
             var button = wrap.append('button')
                 .attr('class', 'preset-list-button')

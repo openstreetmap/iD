@@ -919,9 +919,12 @@ a.hide-toggle {
     border-bottom: 1px solid #ccc;
 }
 
+.preset-list-item {
+    margin-bottom: 10px;
+}
+
 .preset-list-button-wrap {
     position: relative;
-    margin-bottom: 10px;
     height: 60px;
     display: flex;
 }
@@ -1152,12 +1155,15 @@ img.tag-reference-wiki-image {
 }
 
 .subgrid .preset-list {
-    padding: 10px 10px 0 10px;
+    padding: 10px;
     margin-top: 0;
     border: 0;
     border-radius: 8px;
     width: -webkit-calc(100% + 20px);
     margin-left: -10px;
+}
+.subgrid .preset-list > *:last-child {
+    margin-bottom: 0;
 }
 
 .subgrid .arrow {
@@ -1168,7 +1174,6 @@ img.tag-reference-wiki-image {
     height: 0;
     margin-left: 50%;
     margin-left: -webkit-calc(50% - 10px);
-    margin-top: -10px;
 }
 
 
@@ -1208,7 +1213,7 @@ img.tag-reference-wiki-image {
 .preset-editor .form-fields-container:empty {
     display: none;
 }
-.entity-editor-pane .preset-list-item .preset-list-button-wrap {
+.entity-editor-pane .preset-list-item {
     margin-bottom: 0;
 }
 
