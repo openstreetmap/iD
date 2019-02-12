@@ -420,7 +420,7 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
         for (var i = 0; i < _hidden.length; i++) {
-            if (_features[_hidden[i]].filter(preset.tags, geometry)) {
+            if (_features[_hidden[i]].filter(preset.setTags({}, geometry), geometry)) {
                 return _hidden[i];
             }
         }
