@@ -95,8 +95,12 @@ export function rendererFeatures(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return !this.enabled || !context.editable() || this.count > this.currentMax * _cullFactor; },
-            autoHidden: function() { return this.hidden() && this.enabled; }
+            hidden: function() {
+                return !context.editable() ||
+                    (this.count === 0 && !this.enabled) ||
+                    this.count > this.currentMax * _cullFactor;
+            },
+            autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }
 
