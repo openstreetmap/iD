@@ -6,6 +6,8 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 
 
 export function validationDisconnectedWay() {
+    var type = 'disconnected_way';
+
 
     function isDisconnectedHighway(entity, graph) {
         if (!entity.tags.highway) return false;
@@ -25,7 +27,6 @@ export function validationDisconnectedWay() {
             });
     }
 
-    var type = 'disconnected_way';
 
     var validation = function(entity, context) {
         var issues = [];

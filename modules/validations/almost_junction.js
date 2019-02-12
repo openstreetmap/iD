@@ -20,6 +20,8 @@ import { validationIssue, validationIssueFix } from '../core/validator';
  * Look for roads that can be connected to other roads with a short extension
  */
 export function validationAlmostJunction() {
+    var type = 'almost_junction';
+
 
     function isHighway(entity) {
         return entity.type === 'way' && entity.tags.highway && entity.tags.highway !== 'no';
@@ -120,9 +122,6 @@ export function validationAlmostJunction() {
     }
 
 
-    var type = 'almost_junction';
-
-
     var validation = function(endHighway, context) {
         if (!isHighway(endHighway)) return [];
 
@@ -167,7 +166,7 @@ export function validationAlmostJunction() {
                     onClick: function() {
                         var nodeID = this.issue.entities[1].id;
                         context.perform(
-                            actionChangeTags(nodeID, {noexit: 'yes'}),
+                            actionChangeTags(nodeID, { noexit: 'yes' }),
                             t('issues.fix.tag_as_disconnected.annotation')
                         );
                     }

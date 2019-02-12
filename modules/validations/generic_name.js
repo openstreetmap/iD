@@ -7,6 +7,8 @@ import { discardNames } from '../../node_modules/name-suggestion-index/config/fi
 
 
 export function validationGenericName(context) {
+    var type = 'generic_name';
+
 
     function isGenericName(entity) {
         var name = entity.tags.name;
@@ -34,7 +36,6 @@ export function validationGenericName(context) {
         return false;
     }
 
-    var type = 'generic_name';
 
     var validation = function(entity) {
         var issues = [];

@@ -166,6 +166,15 @@ export function coreValidator(context) {
 
 
 export function validationIssue(attrs) {
+    this.type = attrs.type;                // required
+    this.severity = attrs.severity;        // required - 'warning' or 'error'
+    this.message = attrs.message;          // required - localized string
+    this.tooltip = attrs.tooltip;          // required - localized string
+    this.entities = attrs.entities;        // optional - array of entities
+    this.coordinates = attrs.coordinates;  // optional - expect a [lon, lat] array
+    this.info = attrs.info;                // optional - object containing arbitrary extra information
+    this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
+    this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
@@ -189,15 +198,6 @@ export function validationIssue(attrs) {
         return id;
     };
 
-    this.type = attrs.type;
-    this.severity = attrs.severity;
-    this.message = attrs.message;
-    this.tooltip = attrs.tooltip;
-    this.entities = attrs.entities;        // expect an array of entities
-    this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
-    this.info = attrs.info;      // an object containing arbitrary extra information
-    this.fixes = attrs.fixes;    // expect an array of functions for possible fixes
-    this.hash = attrs.hash;      // an optional string to further differentiate the issue
 
     this.loc = function() {
         if (this.coordinates && Array.isArray(this.coordinates) && this.coordinates.length === 2) {
@@ -210,9 +210,8 @@ export function validationIssue(attrs) {
         }*/
     };
 
-    if (this.fixes) {
+    if (this.fixes) {   // add a reference in the fixes to the issue for use in fix actions
         for (var i = 0; i < this.fixes.length; i++) {
-            // add a reference in the fix to the issue for use in fix actions
             this.fixes[i].issue = this;
         }
     }
@@ -222,10 +221,6 @@ export function validationIssue(attrs) {
 export function validationIssueFix(attrs) {
     this.title = attrs.title;
     this.onClick = attrs.onClick;
-
-    // IDs of fix-specific entities. Used for hover-higlighting.
-    this.entityIds = attrs.entityIds || [];
-
-    // the issue this fix is for
-    this.issue = null;
+    this.entityIds = attrs.entityIds || [];  // Used for hover-higlighting.
+    this.issue = null;    // the issue this fix is for
 }

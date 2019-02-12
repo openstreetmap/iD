@@ -11,6 +11,9 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 
 
 export function validationCrossingWays() {
+    var type = 'crossing_ways';
+
+
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the cross point if so.
     function findEdgeToWayCrossCoords(n1, n2, way, graph) {
@@ -271,8 +274,6 @@ export function validationCrossingWays() {
         return edgeCrossInfos;
     }
 
-    var type = 'crossing_ways';
-
 
     var validation = function(entity, context) {
         var graph = context.graph();
@@ -411,6 +412,7 @@ export function validationCrossingWays() {
     }
 
     validation.type = type;
+
 
     return validation;
 }

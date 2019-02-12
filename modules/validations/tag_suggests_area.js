@@ -10,6 +10,7 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationTagSuggestsArea() {
     var type = 'tag_suggests_area';
 
+
     var validation = function(entity, context) {
         if (entity.type !== 'way') return [];
 

@@ -6,8 +6,8 @@ import { utilDisplayLabel, utilTagText } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
 
 export function validationDeprecatedTag() {
-
     var type = 'deprecated_tag';
+
 
     var validation = function(entity, context) {
         var issues = [];

@@ -9,6 +9,8 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 
 
 export function validationMissingTag() {
+    var type = 'missing_tag';
+
 
     function hasDescriptiveTags(entity) {
         var keys = _without(Object.keys(entity.tags), 'area', 'name').filter(osmIsInterestingTag);
@@ -18,7 +20,6 @@ export function validationMissingTag() {
         return keys.length > 0;
     }
 
-    var type = 'missing_tag';
 
     var validation = function(entity, context) {
         var graph = context.graph();
@@ -52,7 +53,7 @@ export function validationMissingTag() {
             type: type,
             // error if created or modified, else warning
             severity: !entity.version || entity.v  ? 'error' : 'warning',
-            message: t('issues.missing_tag.'+missingTagType+'.message', messageObj),
+            message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
             tooltip: t('issues.missing_tag.tip'),
             entities: [entity],
             fixes: [
