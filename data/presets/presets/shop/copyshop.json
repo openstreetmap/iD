@@ -7,5 +7,9 @@
     "tags": {
         "shop": "copyshop"
     },
+    "terms": [
+        "print",
+        "scan"
+    ],
     "name": "Copy Store"
 }

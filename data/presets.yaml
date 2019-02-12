@@ -5966,6 +5966,7 @@ en:
       shop/bakery:
         # shop=bakery
         name: Bakery
+        # 'terms: bread,cakes,rolls'
         terms: '<translate with synonyms or related terms for ''Bakery'', separated by commas>'
       shop/bathroom_furnishing:
         # shop=bathroom_furnishing
@@ -5992,16 +5993,17 @@ en:
       shop/beverages:
         # shop=beverages
         name: Beverage Store
+        # 'terms: drinks'
         terms: '<translate with synonyms or related terms for ''Beverage Store'', separated by commas>'
       shop/bicycle:
         # shop=bicycle
         name: Bicycle Shop
-        # 'terms: bike,repair'
+        # 'terms: bike,repair,tricycle,unicycle'
         terms: '<translate with synonyms or related terms for ''Bicycle Shop'', separated by commas>'
       shop/bookmaker:
         # shop=bookmaker
         name: Bookmaker
-        # 'terms: betting'
+        # 'terms: betting,bookie'
         terms: '<translate with synonyms or related terms for ''Bookmaker'', separated by commas>'
       shop/books:
         # shop=books
@@ -6014,31 +6016,32 @@ en:
       shop/butcher:
         # shop=butcher
         name: Butcher
-        # 'terms: meat'
+        # 'terms: chicken,beef,lamb,meat,pork'
         terms: '<translate with synonyms or related terms for ''Butcher'', separated by commas>'
       shop/candles:
         # shop=candles
         name: Candle Shop
+        # 'terms: wax'
         terms: '<translate with synonyms or related terms for ''Candle Shop'', separated by commas>'
       shop/car:
         # shop=car
         name: Car Dealership
-        # 'terms: auto'
+        # 'terms: automobile,automotive'
         terms: '<translate with synonyms or related terms for ''Car Dealership'', separated by commas>'
       shop/car_parts:
         # shop=car_parts
         name: Car Parts Store
-        # 'terms: auto'
+        # 'terms: automobile,automotive'
         terms: '<translate with synonyms or related terms for ''Car Parts Store'', separated by commas>'
       shop/car_repair:
         # shop=car_repair
         name: Car Repair Shop
-        # 'terms: auto,garage,service'
+        # 'terms: automobile,automotive,garage,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
       shop/caravan:
         # shop=caravan
         name: RV Dealership
-        # 'terms: auto'
+        # 'terms: auto,camper,recreational vehicle'
         terms: '<translate with synonyms or related terms for ''RV Dealership'', separated by commas>'
       shop/carpet:
         # shop=carpet
@@ -6066,6 +6069,7 @@ en:
       shop/chocolate:
         # shop=chocolate
         name: Chocolate Store
+        # 'terms: cocoa'
         terms: '<translate with synonyms or related terms for ''Chocolate Store'', separated by commas>'
       shop/clothes:
         # shop=clothes
@@ -6078,6 +6082,7 @@ en:
       shop/computer:
         # shop=computer
         name: Computer Store
+        # 'terms: desktop,laptop,hardware,operating system,software'
         terms: '<translate with synonyms or related terms for ''Computer Store'', separated by commas>'
       shop/confectionery:
         # shop=confectionery
@@ -6091,10 +6096,12 @@ en:
       shop/copyshop:
         # shop=copyshop
         name: Copy Store
+        # 'terms: print,scan'
         terms: '<translate with synonyms or related terms for ''Copy Store'', separated by commas>'
       shop/cosmetics:
         # shop=cosmetics
         name: Cosmetics Store
+        # 'terms: make-up,makeup'
         terms: '<translate with synonyms or related terms for ''Cosmetics Store'', separated by commas>'
       shop/country_store:
         # shop=country_store
@@ -6135,7 +6142,7 @@ en:
       shop/e-cigarette:
         # shop=e-cigarette
         name: E-Cigarette Shop
-        # 'terms: electronic,vapor'
+        # 'terms: electronic,vape,vaping,vapor'
         terms: '<translate with synonyms or related terms for ''E-Cigarette Shop'', separated by commas>'
       shop/electronics:
         # shop=electronics
@@ -6169,6 +6176,7 @@ en:
       shop/fishing:
         # shop=fishing
         name: Fishing Shop
+        # 'terms: bait,fishing line,flies,fly,lure,reel,rod,tackle'
         terms: '<translate with synonyms or related terms for ''Fishing Shop'', separated by commas>'
       shop/fishmonger:
         # shop=fishmonger
@@ -6222,7 +6230,7 @@ en:
       shop/greengrocer:
         # shop=greengrocer
         name: Greengrocer
-        # 'terms: fruit,vegetable'
+        # 'terms: fruit,produce,vegetable'
         terms: '<translate with synonyms or related terms for ''Greengrocer'', separated by commas>'
       shop/hairdresser:
         # shop=hairdresser
@@ -6254,7 +6262,7 @@ en:
       shop/hifi:
         # shop=hifi
         name: Hifi Store
-        # 'terms: stereo,video'
+        # 'terms: audio,hi-fi,high fidelity,stereo,video'
         terms: '<translate with synonyms or related terms for ''Hifi Store'', separated by commas>'
       shop/houseware:
         # shop=houseware
@@ -6264,6 +6272,7 @@ en:
       shop/hunting:
         # shop=hunting
         name: Hunting Shop
+        # 'terms: arrows,bows,bullets,crossbows,rifles,traps'
         terms: '<translate with synonyms or related terms for ''Hunting Shop'', separated by commas>'
       shop/interior_decoration:
         # shop=interior_decoration
@@ -6272,7 +6281,7 @@ en:
       shop/jewelry:
         # shop=jewelry
         name: Jeweler
-        # 'terms: diamond,gem,ring'
+        # 'terms: bracelet,diamond,earrings,gem,necklace,pins,ring'
         terms: '<translate with synonyms or related terms for ''Jeweler'', separated by commas>'
       shop/kiosk:
         # shop=kiosk
@@ -6281,6 +6290,7 @@ en:
       shop/kitchen:
         # shop=kitchen
         name: Kitchen Design Store
+        # 'terms: cabinets,countertops,sinks'
         terms: '<translate with synonyms or related terms for ''Kitchen Design Store'', separated by commas>'
       shop/laundry:
         # shop=laundry
@@ -6333,7 +6343,7 @@ en:
       shop/music:
         # shop=music
         name: Music Store
-        # 'terms: CD,vinyl'
+        # 'terms: tape casettes,CDs,compact discs,vinyl records'
         terms: '<translate with synonyms or related terms for ''Music Store'', separated by commas>'
       shop/musical_instrument:
         # shop=musical_instrument
@@ -6392,7 +6402,7 @@ en:
       shop/pet_grooming:
         # shop=pet_grooming
         name: Pet Grooming Store
-        # 'terms: dog'
+        # 'terms: cat,dog'
         terms: '<translate with synonyms or related terms for ''Pet Grooming Store'', separated by commas>'
       shop/photo:
         # shop=photo
@@ -6406,6 +6416,7 @@ en:
       shop/radiotechnics:
         # shop=radiotechnics
         name: Radio/Electronic Component Store
+        # 'terms: antenna,transistor'
         terms: '<translate with synonyms or related terms for ''Radio/Electronic Component Store'', separated by commas>'
       shop/religion:
         # shop=religion
@@ -6434,10 +6445,12 @@ en:
       shop/shoes:
         # shop=shoes
         name: Shoe Store
+        # 'terms: boots,cleats,clogs,heels,loafers,oxfords,sneakers'
         terms: '<translate with synonyms or related terms for ''Shoe Store'', separated by commas>'
       shop/sports:
         # shop=sports
         name: Sporting Goods Store
+        # 'terms: athletics'
         terms: '<translate with synonyms or related terms for ''Sporting Goods Store'', separated by commas>'
       shop/stationery:
         # shop=stationery
@@ -6447,6 +6460,7 @@ en:
       shop/storage_rental:
         # shop=storage_rental
         name: Storage Rental
+        # 'terms: garages'
         terms: '<translate with synonyms or related terms for ''Storage Rental'', separated by commas>'
       shop/supermarket:
         # shop=supermarket
@@ -6461,6 +6475,7 @@ en:
       shop/tattoo:
         # shop=tattoo
         name: Tattoo Parlor
+        # 'terms: ink'
         terms: '<translate with synonyms or related terms for ''Tattoo Parlor'', separated by commas>'
       shop/tea:
         # shop=tea
@@ -6469,6 +6484,7 @@ en:
       shop/ticket:
         # shop=ticket
         name: Ticket Seller
+        # 'terms: box office'
         terms: '<translate with synonyms or related terms for ''Ticket Seller'', separated by commas>'
       shop/tiles:
         # shop=tiles
@@ -6477,10 +6493,12 @@ en:
       shop/tobacco:
         # shop=tobacco
         name: Tobacco Shop
+        # 'terms: cigarettes,cigars'
         terms: '<translate with synonyms or related terms for ''Tobacco Shop'', separated by commas>'
       shop/toys:
         # shop=toys
         name: Toy Store
+        # 'terms: games'
         terms: '<translate with synonyms or related terms for ''Toy Store'', separated by commas>'
       shop/trade:
         # shop=trade
@@ -6508,7 +6526,7 @@ en:
       shop/video:
         # shop=video
         name: Video Store
-        # 'terms: DVD'
+        # 'terms: DVD,VHS,video casette'
         terms: '<translate with synonyms or related terms for ''Video Store'', separated by commas>'
       shop/video_games:
         # shop=video_games

@@ -7044,7 +7044,7 @@
                 },
                 "shop/bakery": {
                     "name": "Bakery",
-                    "terms": ""
+                    "terms": "bread,cakes,rolls"
                 },
                 "shop/bathroom_furnishing": {
                     "name": "Bathroom Furnishing Store",
@@ -7068,15 +7068,15 @@
                 },
                 "shop/beverages": {
                     "name": "Beverage Store",
-                    "terms": ""
+                    "terms": "drinks"
                 },
                 "shop/bicycle": {
                     "name": "Bicycle Shop",
-                    "terms": "bike,repair"
+                    "terms": "bike,repair,tricycle,unicycle"
                 },
                 "shop/bookmaker": {
                     "name": "Bookmaker",
-                    "terms": "betting"
+                    "terms": "betting,bookie"
                 },
                 "shop/books": {
                     "name": "Book Store",
@@ -7088,27 +7088,27 @@
                 },
                 "shop/butcher": {
                     "name": "Butcher",
-                    "terms": "meat"
+                    "terms": "chicken,beef,lamb,meat,pork"
                 },
                 "shop/candles": {
                     "name": "Candle Shop",
-                    "terms": ""
+                    "terms": "wax"
                 },
                 "shop/car_parts": {
                     "name": "Car Parts Store",
-                    "terms": "auto"
+                    "terms": "automobile,automotive"
                 },
                 "shop/car_repair": {
                     "name": "Car Repair Shop",
-                    "terms": "auto,garage,service"
+                    "terms": "automobile,automotive,garage,service"
                 },
                 "shop/car": {
                     "name": "Car Dealership",
-                    "terms": "auto"
+                    "terms": "automobile,automotive"
                 },
                 "shop/caravan": {
                     "name": "RV Dealership",
-                    "terms": "auto"
+                    "terms": "auto,camper,recreational vehicle"
                 },
                 "shop/carpet": {
                     "name": "Carpet Store",
@@ -7132,7 +7132,7 @@
                 },
                 "shop/chocolate": {
                     "name": "Chocolate Store",
-                    "terms": ""
+                    "terms": "cocoa"
                 },
                 "shop/clothes": {
                     "name": "Clothing Store",
@@ -7144,7 +7144,7 @@
                 },
                 "shop/computer": {
                     "name": "Computer Store",
-                    "terms": ""
+                    "terms": "desktop,laptop,hardware,operating system,software"
                 },
                 "shop/confectionery": {
                     "name": "Candy Store",
@@ -7156,11 +7156,11 @@
                 },
                 "shop/copyshop": {
                     "name": "Copy Store",
-                    "terms": ""
+                    "terms": "print,scan"
                 },
                 "shop/cosmetics": {
                     "name": "Cosmetics Store",
-                    "terms": ""
+                    "terms": "make-up,makeup"
                 },
                 "shop/country_store": {
                     "name": "Country Store",
@@ -7196,7 +7196,7 @@
                 },
                 "shop/e-cigarette": {
                     "name": "E-Cigarette Shop",
-                    "terms": "electronic,vapor"
+                    "terms": "electronic,vape,vaping,vapor"
                 },
                 "shop/electronics": {
                     "name": "Electronics Store",
@@ -7224,7 +7224,7 @@
                 },
                 "shop/fishing": {
                     "name": "Fishing Shop",
-                    "terms": ""
+                    "terms": "bait,fishing line,flies,fly,lure,reel,rod,tackle"
                 },
                 "shop/florist": {
                     "name": "Florist",
@@ -7264,7 +7264,7 @@
                 },
                 "shop/greengrocer": {
                     "name": "Greengrocer",
-                    "terms": "fruit,vegetable"
+                    "terms": "fruit,produce,vegetable"
                 },
                 "shop/hairdresser_supply": {
                     "name": "Hairdresser Supply Store",
@@ -7292,7 +7292,7 @@
                 },
                 "shop/hifi": {
                     "name": "Hifi Store",
-                    "terms": "stereo,video"
+                    "terms": "audio,hi-fi,high fidelity,stereo,video"
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",
@@ -7300,7 +7300,7 @@
                 },
                 "shop/hunting": {
                     "name": "Hunting Shop",
-                    "terms": ""
+                    "terms": "arrows,bows,bullets,crossbows,rifles,traps"
                 },
                 "shop/interior_decoration": {
                     "name": "Interior Decoration Store",
@@ -7308,7 +7308,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Jeweler",
-                    "terms": "diamond,gem,ring"
+                    "terms": "bracelet,diamond,earrings,gem,necklace,pins,ring"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",
@@ -7316,7 +7316,7 @@
                 },
                 "shop/kitchen": {
                     "name": "Kitchen Design Store",
-                    "terms": ""
+                    "terms": "cabinets,countertops,sinks"
                 },
                 "shop/laundry": {
                     "name": "Laundry",
@@ -7364,7 +7364,7 @@
                 },
                 "shop/music": {
                     "name": "Music Store",
-                    "terms": "CD,vinyl"
+                    "terms": "tape casettes,CDs,compact discs,vinyl records"
                 },
                 "shop/musical_instrument": {
                     "name": "Musical Instrument Store",
@@ -7412,7 +7412,7 @@
                 },
                 "shop/pet_grooming": {
                     "name": "Pet Grooming Store",
-                    "terms": "dog"
+                    "terms": "cat,dog"
                 },
                 "shop/pet": {
                     "name": "Pet Store",
@@ -7428,7 +7428,7 @@
                 },
                 "shop/radiotechnics": {
                     "name": "Radio/Electronic Component Store",
-                    "terms": ""
+                    "terms": "antenna,transistor"
                 },
                 "shop/religion": {
                     "name": "Religious Store",
@@ -7452,11 +7452,11 @@
                 },
                 "shop/shoes": {
                     "name": "Shoe Store",
-                    "terms": ""
+                    "terms": "boots,cleats,clogs,heels,loafers,oxfords,sneakers"
                 },
                 "shop/sports": {
                     "name": "Sporting Goods Store",
-                    "terms": ""
+                    "terms": "athletics"
                 },
                 "shop/stationery": {
                     "name": "Stationery Store",
@@ -7464,7 +7464,7 @@
                 },
                 "shop/storage_rental": {
                     "name": "Storage Rental",
-                    "terms": ""
+                    "terms": "garages"
                 },
                 "shop/supermarket": {
                     "name": "Supermarket",
@@ -7476,7 +7476,7 @@
                 },
                 "shop/tattoo": {
                     "name": "Tattoo Parlor",
-                    "terms": ""
+                    "terms": "ink"
                 },
                 "shop/tea": {
                     "name": "Tea Store",
@@ -7484,7 +7484,7 @@
                 },
                 "shop/ticket": {
                     "name": "Ticket Seller",
-                    "terms": ""
+                    "terms": "box office"
                 },
                 "shop/tiles": {
                     "name": "Tile Shop",
@@ -7492,11 +7492,11 @@
                 },
                 "shop/tobacco": {
                     "name": "Tobacco Shop",
-                    "terms": ""
+                    "terms": "cigarettes,cigars"
                 },
                 "shop/toys": {
                     "name": "Toy Store",
-                    "terms": ""
+                    "terms": "games"
                 },
                 "shop/trade": {
                     "name": "Trade Shop",
@@ -7524,7 +7524,7 @@
                 },
                 "shop/video": {
                     "name": "Video Store",
-                    "terms": "DVD"
+                    "terms": "DVD,VHS,video casette"
                 },
                 "shop/watches": {
                     "name": "Watches Shop",
