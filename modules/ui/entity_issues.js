@@ -5,7 +5,7 @@ import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilRebind, utilHighlightEntities } from '../util';
+import { utilHighlightEntities } from '../util';
 
 
 export function uiEntityIssues(context) {

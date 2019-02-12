@@ -64,36 +64,35 @@ export function coreValidator(context) {
 
     self.getIssuesForEntityWithID = function(entityID) {
         if (!context.hasEntity(entityID)) return [];
+        var entity = context.entity(entityID);
+        var key = osmEntity.key(entity);
 
-        // if (!_issuesByEntityID[entityID]) {
-            var entity = context.entity(entityID);
-            _issuesByEntityID[entityID] = validateEntity(entity);
-        // }
-        return _issuesByEntityID[entityID];
+        if (!_issuesByEntityID[key]) {
+            _issuesByEntityID[key] = validateEntity(entity);
+        }
+        return _issuesByEntityID[key];
     };
 
 
     function validateEntity(entity) {
         var _issues = [];
-        var ranValidations = [];
+        var ran = {};
 
         // runs validation and appends resulting issues, returning true if validation passed
-        function runValidation(type) {
-            // only run each validation once
-            if (ranValidations.indexOf(type) === -1) {
-                var fn = validations[type];
-                var typeIssues = fn(entity, context);
-                _issues = _issues.concat(typeIssues);
-                ranValidations.push(type);   // mark this validation as having run
-                return typeIssues.length === 0;
-            }
-            return true;
+        function runValidation(which) {
+            if (ran[which]) return true;
+
+            var fn = validations[which];
+            var typeIssues = fn(entity, context);
+            _issues = _issues.concat(typeIssues);
+            ran[which] = true;   // mark this validation as having run
+            return !typeIssues.length;
         }
 
         if (entity.type === 'relation') {
             if (!runValidation('old_multipolygon')) {
                 // don't flag missing tags if they are on the outer way
-                ranValidations.push('missing_tag');
+                ran.missing_tag = true;
             }
         }
 
@@ -107,16 +106,14 @@ export function coreValidator(context) {
             if (runValidation('almost_junction')) {
                 runValidation('disconnected_way');
             } else {
-                ranValidations.push('disconnected_way');
+                ran.disconnected_way = true;
             }
 
             runValidation('tag_suggests_area');
         }
 
         // run all validations not yet run manually
-        entityValidationIDs.forEach(function(id) {
-            runValidation(id);
-        });
+        entityValidationIDs.forEach(runValidation);
 
         return _issues;
     }
