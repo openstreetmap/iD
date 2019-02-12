@@ -14,11 +14,11 @@ export function uiEntityIssues(context) {
     var _entityID;
 
 
-    context.validator().on('reload.entity_issues', function() {
-        _selection.selectAll('.entity-issues')
-            .call(render);
-        update();
-    });
+    // context.validator().on('reload.entity_issues', function() {
+    //     _selection.selectAll('.entity-issues')
+    //         .call(render);
+    //     update();
+    // });
 
 
     function clamp(num, min, max) {

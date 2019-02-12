@@ -65,10 +65,10 @@ export function coreValidator(context) {
     self.getIssuesForEntityWithID = function(entityID) {
         if (!context.hasEntity(entityID)) return [];
 
-        if (!_issuesByEntityID[entityID]) {
+        // if (!_issuesByEntityID[entityID]) {
             var entity = context.entity(entityID);
             _issuesByEntityID[entityID] = validateEntity(entity);
-        }
+        // }
         return _issuesByEntityID[entityID];
     };
 
