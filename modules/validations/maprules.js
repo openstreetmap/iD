@@ -2,7 +2,7 @@ import { services } from '../services';
 
 
 export function validationMaprules() {
-    validation.type = 'maprules';
+    var type = 'maprules';
 
 
     var validation = function(entity, context) {
@@ -20,6 +20,9 @@ export function validationMaprules() {
 
         return issues;
     };
+
+
+    validation.type = type;
 
 
     return validation;

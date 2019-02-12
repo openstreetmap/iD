@@ -83,16 +83,26 @@ export function uiIssues(context) {
             .append('li')
             .attr('class', function (d) { return 'issue severity-' + d.severity; })
             .on('click', function(d) {
-                var loc = d.loc();
-                if (loc) {
-                    context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
-                } else if (d.entities && d.entities.length > 0) {
-                    context.map().zoomTo(d.entities[0]);
-                }
-                if (d.entities) {
-                    var ids = d.entities.map(function(e) { return e.id; });
-                    context.enter(modeSelect(context, ids));
-                    utilHighlightEntities(ids, true, context);
+                var extent = d.extent(context.graph());
+                if (extent) {
+                    var msec = 0;
+                    var view = context.map().trimmedExtent();
+                    var zoom = context.map().zoom();
+
+                    // make sure user can see the issue
+                    if (!view.contains(extent) || zoom < 19) {
+                        msec = 250;
+                        context.map().centerZoomEase(extent.center(), Math.max(zoom, 19), msec);
+                    }
+
+                    // select the first entity
+                    if (d.entities && d.entities.length) {
+                        window.setTimeout(function() {
+                            var ids = d.entities.map(function(e) { return e.id; });
+                            context.enter(modeSelect(context, [ids[0]]));
+                            utilHighlightEntities(ids, true, context);
+                        }, msec);
+                    }
                 }
             })
             .on('mouseover', function(d) {

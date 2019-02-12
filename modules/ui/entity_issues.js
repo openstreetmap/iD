@@ -77,12 +77,13 @@ export function uiEntityIssues(context) {
                 selection.selectAll('.issue')
                     .classed('expanded', function(d, i) { return i === _expanded; });
 
-                var loc = d.loc();
-                if (loc) {
-                    context.map().centerZoomEase(loc, Math.max(context.map().zoom(), 18));
-                } else if (d.entities && d.entities.length > 0 &&
-                    !d.entities[0].intersects(context.map().extent(), context.graph())) {
-                    context.map().zoomToEase(d.entities[0]);
+                var extent = d.extent(context.graph());
+                if (extent) {
+                    var view = context.map().trimmedExtent();
+                    var zoom = context.map().zoom();
+                    if (!view.contains(extent) || zoom < 19) {
+                        context.map().centerZoomEase(extent.center(), Math.max(zoom, 19));
+                    }
                 }
             });
 

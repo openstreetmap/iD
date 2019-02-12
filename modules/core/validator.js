@@ -8,6 +8,7 @@ import _uniqWith from 'lodash-es/uniqWith';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 import * as Validations from '../validations/index';
@@ -199,16 +200,18 @@ export function validationIssue(attrs) {
     };
 
 
-    this.loc = function() {
-        if (this.coordinates && Array.isArray(this.coordinates) && this.coordinates.length === 2) {
-            return this.coordinates;
+    this.extent = function(resolver) {
+        if (this.coordinates) {
+            return geoExtent(this.coordinates);
         }
-        /*if (this.entities && this.entities.length > 0) {
-            if (this.entities[0].loc) {
-                return this.entities[0].loc;
-            }
-        }*/
+        if (this.entities && this.entities.length) {
+            return this.entities.reduce(function(extent, entity) {
+                return extent.extend(entity.extent(resolver));
+            }, geoExtent());
+        }
+        return null;
     };
+
 
     if (this.fixes) {   // add a reference in the fixes to the issue for use in fix actions
         for (var i = 0; i < this.fixes.length; i++) {
