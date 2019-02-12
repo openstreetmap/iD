@@ -38,7 +38,7 @@ export function uiPresetList(context) {
 
         var messagewrap = selection
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         var message = messagewrap
             .append('h3')
@@ -81,7 +81,8 @@ export function uiPresetList(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 // move focus to the first item in the preset list
-                list.select('.preset-list-button').node().focus();
+                var buttons = list.selectAll('.preset-list-button');
+                if (!buttons.empty()) buttons.nodes()[0].focus();
             }
         }
 
@@ -244,7 +245,7 @@ export function uiPresetList(context) {
         } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
-            item.datum().choose();
+            item.datum().choose.call(d3_select(this).node());
         }
     }
 
