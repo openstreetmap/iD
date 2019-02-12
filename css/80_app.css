@@ -2419,7 +2419,7 @@ input.key-trap {
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
 .inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue ul.fixes {
+.inspector-hover .entity-issues .issue ul.issue-fix-list {
     display: none;
 }
 
@@ -3017,15 +3017,15 @@ div.full-screen > button:hover {
 .entity-issues .issue:not(:last-of-type) {
     margin-bottom: 10px;
 }
-.entity-issues .issue ul.fixes li:first-child {
+ul.issue-fix-list li:first-child {
     border-top-style: solid;
     border-top-width: 2px;
 }
-.entity-issues .issue ul.fixes li:not(:last-of-type) {
+ul.issue-fix-list li:not(:last-of-type) {
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
-.entity-issues .issue:not(.fixes-open) ul.fixes {
+.issue:not(.expanded) ul.issue-fix-list {
     display: none;
 }
 

@@ -130,7 +130,7 @@ export function uiIssues(context) {
         items = items
             .merge(itemsEnter);
 
-        items.select('button')     // propagate bound data
+        items.select('button.label')     // propagate bound data
             .attr('title', function(d) {
                 return t('issues.' + d.severity + 's.icon_tooltip');
             });

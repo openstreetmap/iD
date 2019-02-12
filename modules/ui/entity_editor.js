@@ -171,11 +171,6 @@ export function uiEntityEditor(context) {
             .attr('class', 'namepart')
             .text(function(d) { return d; });
 
-        body.select('.entity-issues')
-            .call(entityIssues
-                .entityID(_entityID)
-            );
-
         // update quick links
         var choices = [{
             id: 'zoom_to',
@@ -193,6 +188,11 @@ export function uiEntityEditor(context) {
 
 
         // update editor sections
+        body.select('.entity-issues')
+            .call(entityIssues
+                .entityID(_entityID)
+            );
+
         body.select('.preset-editor')
             .call(presetEditor
                 .preset(_activePreset)

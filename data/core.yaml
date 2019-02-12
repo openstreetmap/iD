@@ -1243,10 +1243,10 @@ en:
     fix:
       add_connection_vertex:
         title: Connect the features
-        undo_redo: Connected crossing features.
+        annotation: Connected crossing features.
       connect_almost_junction:
         title: Connect the features
-        undo_redo: Connected very close features.
+        annotation: Connected very close features.
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
@@ -1255,24 +1255,24 @@ en:
         title: Delete this feature
       connect_endpoints:
         title: Connect the ends
-        undo_redo: Connected the endpoints of a way.
+        annotation: Connected the endpoints of a way.
       move_tags:
         title: Move the tags
-        undo_redo: Moved tags.
+        annotation: Moved tags.
       remove_generic_name:
         title: Remove the name
-        undo_redo: Removed a generic name.
+        annotation: Removed a generic name.
       remove_tag:
         title: Remove the tag
-        undo_redo: Removed tag.
+        annotation: Removed tag.
       select_preset:
         title: Select a feature type
       tag_as_disconnected:
         title: Tag as disconnected
-        undo_redo: Tagged very close features as disconnected.
+        annotation: Tagged very close features as disconnected.
       upgrade_tags:
         title: Upgrade tags
-        undo_redo: Upgraded tags.
+        annotation: Upgraded tags.
   intro:
     done: done
     ok: OK
