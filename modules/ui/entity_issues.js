@@ -41,7 +41,7 @@ export function uiEntityIssues(context) {
     function update() {
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
 
-        _selection.selectAll('.entity-issues')
+        _selection
             .classed('hide', issues.length === 0);
 
         _selection.selectAll('.hide-toggle-entity_issues span')
