@@ -20,7 +20,8 @@ export function uiIssues(context) {
     //var _featureApplicabilityList = d3_select(null);
     var _errorsList = d3_select(null);
     var _warningsList = d3_select(null);
-    var pane = d3_select(null);
+    var _pane = d3_select(null);
+    var _button = d3_select(null);
     var _shown = false;
 
     context.validator().on('reload.issues_pane', update);
@@ -44,6 +45,21 @@ export function uiIssues(context) {
 
         updateFeatureApplicabilityList();
     }*/
+
+    function addIconBadge(selection) {
+        selection.selectAll('svg.icon-badge')
+            .data([0])
+            .enter()
+            .append('svg')
+            .attr('viewbox', '0 0 10 10')
+            .attr('class', 'icon-badge')
+            .append('circle')
+            .attr('cx', '5')
+            .attr('cy', '5')
+            .attr('r', '5')
+            .attr('fill', 'currentColor')
+            .attr('stroke', '#333');
+    }
 
     function renderErrorsList(selection) {
         _errorsList = selection.selectAll('.errors-list')
@@ -208,29 +224,39 @@ export function uiIssues(context) {
 
     function update() {
         var errors = context.validator().getErrors();
-        pane.select('.issues-errors').classed('hide', errors.length === 0);
+        var warnings = context.validator().getWarnings();
+
+        _button.selectAll('.icon-badge')
+            .classed('error', (errors.length > 0))
+            .classed('warning', (errors.length === 0 && warnings.length > 0))
+            .classed('hide', (errors.length === 0 && warnings.length === 0));
+
+        _pane.select('.issues-errors')
+            .classed('hide', errors.length === 0);
+
         if (errors.length > 0) {
-            pane.select('.hide-toggle-issues_errors .hide-toggle-text')
+            _pane.select('.hide-toggle-issues_errors .hide-toggle-text')
                 .text(t('issues.errors.list_title', { count: errors.length }));
-            if (!pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
+            if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
                 updateErrorsList();
             }
         }
 
-        var warnings = context.validator().getWarnings();
-        pane.select('.issues-warnings').classed('hide', warnings.length === 0);
+        _pane.select('.issues-warnings')
+            .classed('hide', warnings.length === 0);
+
         if (warnings.length > 0) {
-            pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
+            _pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
                 .text(t('issues.warnings.list_title', { count: warnings.length }));
-            if (!pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
+            if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
                 updateWarningsList();
             }
         }
 
-        pane.select('.issues-none')
+        _pane.select('.issues-none')
             .classed('hide', warnings.length > 0 || errors.length > 0);
 
-        //if (!pane.select('.disclosure-wrap-issues_options').classed('hide')) {
+        //if (!_pane.select('.disclosure-wrap-issues_options').classed('hide')) {
         //    updateFeatureApplicabilityList();
         //}
     }
@@ -243,12 +269,12 @@ export function uiIssues(context) {
 
         function togglePane() {
             if (d3_event) d3_event.preventDefault();
-            setVisible(!button.classed('active'));
+            setVisible(!_button.classed('active'));
         }
 
         function setVisible(show) {
             if (show !== _shown) {
-                button.classed('active', show);
+                _button.classed('active', show);
                 _shown = show;
 
                 if (show) {
@@ -257,7 +283,7 @@ export function uiIssues(context) {
                     uiMapData.hidePane();
                     update();
 
-                    pane
+                    _pane
                         .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
@@ -265,7 +291,7 @@ export function uiIssues(context) {
                         .style('right', '0px');
 
                 } else {
-                    pane
+                    _pane
                         .style('display', 'block')
                         .style('right', '0px')
                         .transition()
@@ -278,7 +304,7 @@ export function uiIssues(context) {
             }
         }
 
-        pane = selection
+        _pane = selection
             .append('div')
             .attr('class', 'fillL map-pane hide');
 
@@ -287,14 +313,15 @@ export function uiIssues(context) {
             .html(true)
             .title(uiTooltipHtml(t('issues.title'), key));
 
-        var button = selection
+        _button = selection
             .append('button')
             .attr('tabindex', -1)
             .on('click', togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
+            .call(addIconBadge)
             .call(paneTooltip);
 
-        var heading = pane
+        var heading = _pane
             .append('div')
             .attr('class', 'pane-heading');
 
@@ -307,7 +334,7 @@ export function uiIssues(context) {
             .on('click', function() { uiIssues.hidePane(); })
             .call(svgIcon('#iD-icon-close'));
 
-        var content = pane
+        var content = _pane
             .append('div')
             .attr('class', 'pane-content');
 
