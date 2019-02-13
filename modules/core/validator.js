@@ -172,7 +172,7 @@ export function validationIssue(attrs) {
     this.message = attrs.message;          // required - localized string
     this.tooltip = attrs.tooltip;          // required - localized string
     this.entities = attrs.entities;        // optional - array of entities
-    this.coordinates = attrs.coordinates;  // optional - expect a [lon, lat] array
+    this.loc = attrs.loc;                  // optional - expect a [lon, lat] array
     this.info = attrs.info;                // optional - object containing arbitrary extra information
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
@@ -191,18 +191,18 @@ export function validationIssue(attrs) {
         var entityKeys = this.entities.map(osmEntity.key);
         id += entityKeys.sort().join();
 
-        // factor in coordinates since two separate issues can have an
+        // factor in loc since two separate issues can have an
         // idential type and entities, e.g. in crossing_ways
-        if (this.coordinates) {
-            id += this.coordinates.join();
+        if (this.loc) {
+            id += this.loc.join();
         }
         return id;
     };
 
 
     this.extent = function(resolver) {
-        if (this.coordinates) {
-            return geoExtent(this.coordinates);
+        if (this.loc) {
+            return geoExtent(this.loc);
         }
         if (this.entities && this.entities.length) {
             return this.entities.reduce(function(extent, entity) {

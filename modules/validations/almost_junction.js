@@ -182,7 +182,7 @@ export function validationAlmostJunction() {
                 }),
                 tooltip: t('issues.almost_junction.highway-highway.tip'),
                 entities: [endHighway, node, edgeHighway],
-                coordinates: extendableNodeInfo.node.loc,
+                loc: extendableNodeInfo.node.loc,
                 info: {
                     edge: extendableNodeInfo.edge,
                     cross_loc: extendableNodeInfo.cross_loc

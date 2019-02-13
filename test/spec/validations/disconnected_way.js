@@ -2,14 +2,13 @@ describe('iD.validations.disconnected_way', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext();
     });
 
     function createWay(tags) {
-        var n1 = iD.Node({id: 'n-1', loc: [4,4]});
-        var n2 = iD.Node({id: 'n-2', loc: [4,5]});
-
-        var w = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
+        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -19,16 +18,11 @@ describe('iD.validations.disconnected_way', function () {
     }
 
     function createConnectingWays() {
-        var n1 = iD.Node({id: 'n-1', loc: [4,4]});
-        var n2 = iD.Node({id: 'n-2', loc: [4,5]});
-        var n3 = iD.Node({id: 'n-3', loc: [5,5]});
-
-        var w = iD.Way(
-            {id: 'w-1', nodes: ['n-1', 'n-2'],
-            tags: {'highway': 'unclassified'}});
-        var w2 = iD.Way({
-            id: 'w-2', nodes: ['n-1', 'n-3'],
-            tags: {'highway': 'unclassified'}});
+        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: {'highway': 'unclassified'}});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-1', 'n-3'], tags: {'highway': 'unclassified'}});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -71,6 +65,5 @@ describe('iD.validations.disconnected_way', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
-
 
 });

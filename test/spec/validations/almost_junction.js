@@ -2,14 +2,14 @@ describe('iD.validations.almost_junction', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext();
     });
 
     function horizontalVertialCloserThanThd() {
         // horizontal road
-        var n1 = iD.Node({id: 'n-1', loc: [22.42357, 0]});
-        var n2 = iD.Node({id: 'n-2', loc: [22.42367, 0]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+        var n1 = iD.osmNode({id: 'n-1', loc: [22.42357, 0]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [22.42367, 0]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -19,9 +19,9 @@ describe('iD.validations.almost_junction', function () {
 
         // vertical road to the west of w1 by 0.00001 logitude degree
         // 5th digit after decimal point has a resolution of ~1 meter
-        var n3 = iD.Node({id: 'n-3', loc: [22.42356, 0.001]});
-        var n4 = iD.Node({id: 'n-4', loc: [22.42356, -0.001]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
+        var n3 = iD.osmNode({id: 'n-3', loc: [22.42356, 0.001]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [22.42356, -0.001]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -32,9 +32,9 @@ describe('iD.validations.almost_junction', function () {
 
     function horizontalTiltedCloserThanThd() {
         // horizontal road
-        var n1 = iD.Node({id: 'n-1', loc: [22.42357, 0]});
-        var n2 = iD.Node({id: 'n-2', loc: [22.42367, 0]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+        var n1 = iD.osmNode({id: 'n-1', loc: [22.42357, 0]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [22.42367, 0]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -43,9 +43,9 @@ describe('iD.validations.almost_junction', function () {
         );
 
         // tilted road to the west of w1 by 0.00001 logitude degree
-        var n3 = iD.Node({id: 'n-3', loc: [22.423555, 0.001]});
-        var n4 = iD.Node({id: 'n-4', loc: [22.423565, -0.001]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
+        var n3 = iD.osmNode({id: 'n-3', loc: [22.423555, 0.001]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [22.423565, -0.001]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -56,9 +56,9 @@ describe('iD.validations.almost_junction', function () {
 
     function horizontalVertialFurtherThanThd() {
         // horizontal road
-        var n1 = iD.Node({id: 'n-1', loc: [22.42357, 0]});
-        var n2 = iD.Node({id: 'n-2', loc: [22.42367, 0]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+        var n1 = iD.osmNode({id: 'n-1', loc: [22.42357, 0]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [22.42367, 0]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -67,9 +67,9 @@ describe('iD.validations.almost_junction', function () {
         );
 
         // vertical road to the west of w1 by 0.00007 logitude degree
-        var n3 = iD.Node({id: 'n-3', loc: [22.42350, 0.001]});
-        var n4 = iD.Node({id: 'n-4', loc: [22.42350, -0.001]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
+        var n3 = iD.osmNode({id: 'n-3', loc: [22.42350, 0.001]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [22.42350, -0.001]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -80,9 +80,9 @@ describe('iD.validations.almost_junction', function () {
 
     function twoHorizontalCloserThanThd() {
         // horizontal road
-        var n1 = iD.Node({id: 'n-1', loc: [22.42357, 0]});
-        var n2 = iD.Node({id: 'n-2', loc: [22.42367, 0]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+        var n1 = iD.osmNode({id: 'n-1', loc: [22.42357, 0]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [22.42367, 0]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -91,9 +91,9 @@ describe('iD.validations.almost_junction', function () {
         );
 
         // another horizontal road to the north of w1 by 0.0001 latitude degree
-        var n3 = iD.Node({id: 'n-3', loc: [22.42357, 0.00001]});
-        var n4 = iD.Node({id: 'n-4', loc: [22.42367, 0.00001]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
+        var n3 = iD.osmNode({id: 'n-3', loc: [22.42357, 0.00001]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [22.42367, 0.00001]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -104,9 +104,9 @@ describe('iD.validations.almost_junction', function () {
 
     function horizontalVertialWithNoExit() {
         // horizontal road
-        var n1 = iD.Node({id: 'n-1', loc: [22.42357, 0], tags: { noexit: 'yes' }});
-        var n2 = iD.Node({id: 'n-2', loc: [22.42367, 0]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+        var n1 = iD.osmNode({id: 'n-1', loc: [22.42357, 0], tags: { noexit: 'yes' }});
+        var n2 = iD.osmNode({id: 'n-2', loc: [22.42367, 0]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -115,9 +115,9 @@ describe('iD.validations.almost_junction', function () {
         );
 
         // vertical road to the west of w1 by 0.00001 logitude degree
-        var n3 = iD.Node({id: 'n-3', loc: [22.42356, 0.001]});
-        var n4 = iD.Node({id: 'n-4', loc: [22.42356, -0.001]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
+        var n3 = iD.osmNode({id: 'n-3', loc: [22.42356, 0.001]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [22.42356, -0.001]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -153,9 +153,9 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.entities[1].id).to.eql('n-1');
         expect(issue.entities[2].id).to.eql('w-2');
 
-        expect(issue.coordinates).to.have.lengthOf(2);
-        expect(issue.coordinates[0]).to.eql(22.42357);
-        expect(issue.coordinates[1]).to.eql(0);
+        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc[0]).to.eql(22.42357);
+        expect(issue.loc[1]).to.eql(0);
 
         expect(issue.info.edge).to.have.lengthOf(2);
         expect(issue.info.edge[0]).to.eql('n-3');
@@ -182,9 +182,9 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.entities[1].id).to.eql('n-1');
         expect(issue.entities[2].id).to.eql('w-2');
 
-        expect(issue.coordinates).to.have.lengthOf(2);
-        expect(issue.coordinates[0]).to.eql(22.42357);
-        expect(issue.coordinates[1]).to.eql(0);
+        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc[0]).to.eql(22.42357);
+        expect(issue.loc[1]).to.eql(0);
 
         expect(issue.info.edge).to.have.lengthOf(2);
         expect(issue.info.edge[0]).to.eql('n-3');
@@ -217,4 +217,5 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
+
 });

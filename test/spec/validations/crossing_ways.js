@@ -2,13 +2,13 @@ describe('iD.validations.crossing_ways', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext();
     });
 
     function createWaysWithOneCrossingPoint(tags1, tags2) {
-        var n1 = iD.Node({id: 'n-1', loc: [1,1]});
-        var n2 = iD.Node({id: 'n-2', loc: [2,2]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
+        var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [2,2]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -16,9 +16,9 @@ describe('iD.validations.crossing_ways', function () {
             iD.actionAddEntity(w1)
         );
 
-        var n3 = iD.Node({id: 'n-3', loc: [1,2]});
-        var n4 = iD.Node({id: 'n-4', loc: [2,1]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4'], tags: tags2});
+        var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: tags2});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -28,9 +28,9 @@ describe('iD.validations.crossing_ways', function () {
     }
 
     function createWaysWithTwoCrossingPoint() {
-      var n1 = iD.Node({id: 'n-1', loc: [1,1]});
-      var n2 = iD.Node({id: 'n-2', loc: [3,3]});
-      var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+      var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
+      var n2 = iD.osmNode({id: 'n-2', loc: [3,3]});
+      var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
       context.perform(
           iD.actionAddEntity(n1),
@@ -38,11 +38,11 @@ describe('iD.validations.crossing_ways', function () {
           iD.actionAddEntity(w1)
       );
 
-      var n3 = iD.Node({id: 'n-3', loc: [1,2]});
-      var n4 = iD.Node({id: 'n-4', loc: [2,1]});
-      var n5 = iD.Node({id: 'n-5', loc: [3,2]});
-      var n6 = iD.Node({id: 'n-6', loc: [2,3]});
-      var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5', 'n-6'], tags: { highway: 'residential' }});
+      var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
+      var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
+      var n5 = iD.osmNode({id: 'n-5', loc: [3,2]});
+      var n6 = iD.osmNode({id: 'n-6', loc: [2,3]});
+      var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5', 'n-6'], tags: { highway: 'residential' }});
 
       context.perform(
           iD.actionAddEntity(n3),
@@ -69,9 +69,9 @@ describe('iD.validations.crossing_ways', function () {
         expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
 
-        expect(issue.coordinates).to.have.lengthOf(2);
-        expect(issue.coordinates[0]).to.eql(1.5);
-        expect(issue.coordinates[1]).to.eql(1.5);
+        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc[0]).to.eql(1.5);
+        expect(issue.loc[1]).to.eql(1.5);
     }
 
     it('has no errors on init', function() {
@@ -199,23 +199,23 @@ describe('iD.validations.crossing_ways', function () {
         expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
 
-        expect(issue.coordinates).to.have.lengthOf(2);
-        expect(issue.coordinates[0]).to.eql(1.5);
-        expect(issue.coordinates[1]).to.eql(1.5);
+        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc[0]).to.eql(1.5);
+        expect(issue.loc[1]).to.eql(1.5);
 
         issue = issues[1];
         expect(issue.type).to.eql('crossing_ways');
         expect(issue.entities).to.have.lengthOf(2);
 
-        expect(issue.coordinates).to.have.lengthOf(2);
-        expect(issue.coordinates[0]).to.eql(2.5);
-        expect(issue.coordinates[1]).to.eql(2.5);
+        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc[0]).to.eql(2.5);
+        expect(issue.loc[1]).to.eql(2.5);
     });
 
     function createWayAndRelationWithOneCrossingPoint(wayTags, relTags) {
-        var n1 = iD.Node({id: 'n-1', loc: [1,1]});
-        var n2 = iD.Node({id: 'n-2', loc: [2,2]});
-        var w1 = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: wayTags});
+        var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [2,2]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: wayTags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -223,13 +223,13 @@ describe('iD.validations.crossing_ways', function () {
             iD.actionAddEntity(w1)
         );
 
-        var n3 = iD.Node({id: 'n-3', loc: [1,2]});
-        var n4 = iD.Node({id: 'n-4', loc: [2,1]});
-        var n5 = iD.Node({id: 'n-5', loc: [3,2]});
-        var n6 = iD.Node({id: 'n-6', loc: [2,3]});
-        var w2 = iD.Way({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5'], tags: {}});
-        var w3 = iD.Way({id: 'w-3', nodes: ['n-5', 'n-6', 'n-3'], tags: {}});
-        var r1 = iD.Relation({id: 'r-1', members: [{id: 'w-2'}, {id: 'w-3'}], tags: relTags});
+        var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
+        var n5 = iD.osmNode({id: 'n-5', loc: [3,2]});
+        var n6 = iD.osmNode({id: 'n-6', loc: [2,3]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5'], tags: {}});
+        var w3 = iD.osmWay({id: 'w-3', nodes: ['n-5', 'n-6', 'n-3'], tags: {}});
+        var r1 = iD.osmRelation({id: 'r-1', members: [{id: 'w-2'}, {id: 'w-3'}], tags: relTags});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -242,10 +242,9 @@ describe('iD.validations.crossing_ways', function () {
         );
     }
 
-
-    // warning crossing cases between way and relation
     it('one cross point between highway and building relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
         verifySingleCrossingIssue(validate(), 'r-1');
     });
+
 });

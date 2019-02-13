@@ -6,10 +6,9 @@ describe('iD.validations.tag_suggests_area', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.Node({id: 'n-1', loc: [4,4]});
-        var n2 = iD.Node({id: 'n-2', loc: [4,5]});
-
-        var w = iD.Way({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
+        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -19,7 +18,7 @@ describe('iD.validations.tag_suggests_area', function () {
     }
 
     function createPoint(tags) {
-        var n1 = iD.Node({id: 'n-1', loc: [4,4], tags: tags});
+        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
         context.perform(
             iD.actionAddEntity(n1)
         );
@@ -64,6 +63,5 @@ describe('iD.validations.tag_suggests_area', function () {
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });
-
 
 });

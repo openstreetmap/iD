@@ -361,7 +361,7 @@ export function validationCrossingWays() {
             fixes.push(new validationIssueFix({
                 title: t('issues.fix.add_connection_vertex.title'),
                 onClick: function() {
-                    var loc = this.issue.coordinates;
+                    var loc = this.issue.loc;
                     var connectionTags = this.issue.info.connectionTags;
                     var edges = this.issue.info.edges;
 
@@ -406,7 +406,7 @@ export function validationCrossingWays() {
             tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
             entities: entities,
             info: { edges: crossing.edges, connectionTags: connectionTags },
-            coordinates: crossing.crossPoint,
+            loc: crossing.crossPoint,
             fixes: fixes
         });
     }
