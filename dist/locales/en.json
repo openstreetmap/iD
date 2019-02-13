@@ -1415,12 +1415,10 @@
             "key": "I",
             "list_title": "Issues ({count})",
             "errors": {
-                "list_title": "Errors ({count})",
-                "icon_tooltip": "error"
+                "list_title": "Errors ({count})"
             },
             "warnings": {
-                "list_title": "Warnings ({count})",
-                "icon_tooltip": "warning"
+                "list_title": "Warnings ({count})"
             },
             "no_issues": {
                 "message": "Everything looks fine.",

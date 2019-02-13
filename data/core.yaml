@@ -1169,10 +1169,8 @@ en:
     list_title: "Issues ({count})"
     errors:
       list_title: "Errors ({count})"
-      icon_tooltip: error
     warnings:
       list_title: "Warnings ({count})"
-      icon_tooltip: warning
     no_issues:
       message: Everything looks fine.
       info: Any issues will show up here as you edit.

@@ -117,12 +117,6 @@ export function uiEntityIssues(context) {
             .merge(itemsEnter)
             .classed('expanded', function(d, i) { return i === _expanded; });
 
-
-        items.select('button.label')     // propagate bound data
-            .attr('title', function(d) {
-                return t('issues.' + d.severity + 's.icon_tooltip');
-            });
-
         items.select('.issue-icon svg use')     // propagate bound data
             .attr('href', function(d) {
                 return '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');

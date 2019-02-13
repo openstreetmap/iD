@@ -2934,12 +2934,16 @@ div.full-screen > button:hover {
     overflow: hidden;
 }
 .issue button {
-    padding: 5px;
+    padding: 5px 10px 5px 5px;
     height: auto;
     width: 100%;
     font-weight: inherit;
     border-radius: 0;
 }
+[dir='rtl'] .issue button {
+    padding: 5px 5px 5px 10px;
+}
+
 .issue button.label {
     text-align: inherit;
     display: flex;
