@@ -1,8 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
-
 
 export function uiPresetIcon() {
     var preset, geometry;
@@ -38,24 +37,13 @@ export function uiPresetIcon() {
         var drawLine = geom === 'line' && !isCategory;
         var isFramed = (geom === 'area' || drawLine || geom === 'vertex');
 
-        var tagClasses = '';
-        var tags = isCategory ? p.tags : p.setTags({}, geom);
+        var tags = !isCategory ? p.setTags({}, geom) : {};
         for (var k in tags) {
-            if (k === 'piste:type') {  // avoid a ':' in the class name
-                k = 'piste';
-            }
-            var v = tags[k];
-            tagClasses += ' tag-' + k;
-            if (v !== '*') {
-                tagClasses += ' tag-' + k + '-' + v;
+            if (tags[k] === '*') {
+                tags[k] = 'yes';
             }
         }
-
-        // if the preset includes a `building_area` field, class it as a building
-        if (p.fields && p.fields.filter(function(d) { return d.id === 'building_area'; }).length) {
-            tagClasses += ' tag-building';
-        }
-
+        var tagClasses = svgTagClasses().getClassesString(tags, '');
 
         var fill = selection.selectAll('.preset-icon-fill')
             .data([0]);
@@ -66,7 +54,7 @@ export function uiPresetIcon() {
 
         fill
             .attr('class', function() {
-                return 'preset-icon-fill preset-icon-fill-' + geom + tagClasses;
+                return 'preset-icon-fill preset-icon-fill-' + geom + ' ' + tagClasses;
             });
 
         var line = selection.selectAll('.preset-icon-line')
@@ -86,10 +74,10 @@ export function uiPresetIcon() {
 
         line.append('path')
             .attr('d', 'M0 13.5 L40 13.5')
-            .attr('class', 'line casing' + tagClasses);
+            .attr('class', 'line casing ' + tagClasses);
         line.append('path')
             .attr('d', 'M0 13.5 L40 13.5')
-            .attr('class', 'line stroke' + tagClasses);
+            .attr('class', 'line stroke ' + tagClasses);
 
 
         var areaFrame = selection.selectAll('.preset-icon-frame')
@@ -120,7 +108,7 @@ export function uiPresetIcon() {
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isPOI && geom !== 'line'  ? '' : tagClasses);
+                return 'icon ' + picon + ' ' + (isPOI && geom !== 'line'  ? '' : tagClasses);
             });
 
         icon.selectAll('use')

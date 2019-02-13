@@ -33,7 +33,7 @@ path.line.stroke.tag-highway {
 }
 
 .preset-icon .icon.tag-highway-motorway,
-.preset-icon .icon.tag-highway-motorway-link {
+.preset-icon .icon.tag-highway-motorway_link {
     color: #CF2081;
     fill: #70372f;
 }
@@ -49,7 +49,7 @@ path.line.casing.tag-motorway {
 }
 
 .preset-icon .icon.tag-highway-trunk,
-.preset-icon .icon.tag-highway-trunk-link {
+.preset-icon .icon.tag-highway-trunk_link {
     color: #DD2F22;
     fill: #70372f;
 }
@@ -65,7 +65,7 @@ path.line.casing.tag-trunk {
 }
 
 .preset-icon .icon.tag-highway-primary,
-.preset-icon .icon.tag-highway-primary-link {
+.preset-icon .icon.tag-highway-primary_link {
     color: #F99806;
     fill: #70372f;
 }
@@ -81,7 +81,7 @@ path.line.casing.tag-primary {
 }
 
 .preset-icon .icon.tag-highway-secondary,
-.preset-icon .icon.tag-highway-secondary-link {
+.preset-icon .icon.tag-highway-secondary_link {
     color: #F3F312;
     fill: #70372f;
 }
@@ -97,7 +97,7 @@ path.line.casing.tag-secondary {
 }
 
 .preset-icon .icon.tag-highway-tertiary,
-.preset-icon .icon.tag-highway-tertiary-link {
+.preset-icon .icon.tag-highway-tertiary_link {
     color: #FFF9B3;
     fill: #70372f;
 }
@@ -113,7 +113,7 @@ path.line.casing.tag-tertiary {
 }
 
 .legacy-carto .preset-icon .icon.tag-highway-motorway,
-.legacy-carto .preset-icon .icon.tag-highway-motorway-link {
+.legacy-carto .preset-icon .icon.tag-highway-motorway_link {
     color: #58a9ed;
     fill: #2c5476;
 }
@@ -129,7 +129,7 @@ path.line.casing.tag-tertiary {
 }
 
 .legacy-carto .preset-icon .icon.tag-highway-trunk,
-.legacy-carto .preset-icon .icon.tag-highway-trunk-link {
+.legacy-carto .preset-icon .icon.tag-highway-trunk_link {
     color: #8cd05f;
     fill: #46682f;
 }
@@ -145,7 +145,7 @@ path.line.casing.tag-tertiary {
 }
 
 .legacy-carto .preset-icon .icon.tag-highway-primary,
-.legacy-carto .preset-icon .icon.tag-highway-primary-link {
+.legacy-carto .preset-icon .icon.tag-highway-primary_link {
     color: #e06d5f;
     fill: #70372f;
 }
@@ -161,7 +161,7 @@ path.line.casing.tag-tertiary {
 }
 
 .legacy-carto .preset-icon .icon.tag-highway-secondary,
-.legacy-carto .preset-icon .icon.tag-highway-secondary-link {
+.legacy-carto .preset-icon .icon.tag-highway-secondary_link {
     color: #eab056;
     fill: #75582b;
 }
@@ -177,7 +177,7 @@ path.line.casing.tag-tertiary {
 }
 
 .legacy-carto .preset-icon .icon.tag-highway-tertiary,
-.legacy-carto .preset-icon .icon.tag-highway-tertiary-link {
+.legacy-carto .preset-icon .icon.tag-highway-tertiary_link {
     color: #ffff7e;
     fill: #7f7f3f;
 }

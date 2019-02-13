@@ -59,10 +59,6 @@ path.line.stroke.tag-railway-abandoned {
 }
 
 
-.preset-icon .icon.tag-railway-subway {
-    color: #222;
-    fill: #bbb;
-}
 path.line.casing.tag-railway-subway {
     stroke: #222;
 }
