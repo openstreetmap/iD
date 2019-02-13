@@ -64,18 +64,26 @@ export function uiPresetIcon() {
             .remove();
 
         line = line.enter()
-            .append('svg')
+            .append('div')
             .attr('class', 'preset-icon-line')
-            .attr('width', 40)
-            .attr('height', 30)
             .merge(line);
 
         line.html('');
 
-        line.append('path')
+        line.append('div')
+            .attr('class', 'vertex vertex-left');
+        line.append('div')
+            .attr('class', 'vertex vertex-right');
+
+        var lineSvg = line.append('svg')
+            .attr('width', 40)
+            .attr('height', 20)
+            .merge(line);
+
+        lineSvg.append('path')
             .attr('d', 'M0 13.5 L40 13.5')
             .attr('class', 'line casing ' + tagClasses);
-        line.append('path')
+        lineSvg.append('path')
             .attr('d', 'M0 13.5 L40 13.5')
             .attr('class', 'line stroke ' + tagClasses);
 

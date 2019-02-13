@@ -951,8 +951,13 @@ a.hide-toggle {
 .preset-icon-line {
     margin: auto;
     position: absolute;
-    left: 10px;
+    left: 8px;
     top: 30px;
+    width: 44px;
+}
+.preset-icon-line svg {
+    left: 2px;
+    right: 2px;
 }
 .preset-icon-line path.line {
     cursor: inherit;
@@ -964,6 +969,21 @@ a.hide-toggle {
 }
 .preset-icon-line path.line.casing {
     stroke-width: 3.5 !important;
+}
+.preset-icon-line .vertex {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 10.5px;
+}
+.preset-icon-line .vertex.vertex-left {
+    left: 0;
+}
+.preset-icon-line .vertex.vertex-right {
+    right: 0;
 }
 
 .preset-icon-fill-area {
