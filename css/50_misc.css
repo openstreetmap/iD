@@ -352,7 +352,7 @@ path.line.casing.tag-status {
 }
 
 /* Road Closed Status */
-.preset-icon .icon.tag-highway-construction {
+.preset-icon .icon.tag-highway.tag-status-construction {
     color: #fc6c14;
     fill: #fff;
 }

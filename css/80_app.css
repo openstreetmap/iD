@@ -954,13 +954,16 @@ a.hide-toggle {
     left: 10px;
     top: 30px;
 }
+.preset-icon-line path.line {
+    cursor: inherit;
+}
 
 /* use a consistent stroke width */
 .preset-icon-line path.line.stroke {
     stroke-width: 2 !important;
 }
 .preset-icon-line path.line.casing {
-    stroke-width: 4 !important;
+    stroke-width: 3.5 !important;
 }
 
 .preset-icon-fill-area {
