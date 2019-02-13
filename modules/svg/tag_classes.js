@@ -30,7 +30,7 @@ export function svgTagClasses() {
 
             var t = _tags(entity);
 
-            var computed = tagClasses.getClassesString(t, value);
+            var computed = tagClasses.getClassesString(t, value, entity);
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);
@@ -39,7 +39,7 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.getClassesString = function(t, value) {
+    tagClasses.getClassesString = function(t, value, entity) {
         var primary, status;
         var i, k, v;
 
@@ -136,7 +136,7 @@ export function svgTagClasses() {
         }
 
         return classes.join(' ').trim();
-    }
+    };
 
 
     tagClasses.tags = function(val) {
