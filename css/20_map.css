@@ -179,6 +179,9 @@ g.vertex.selected .shadow {
 .preset-icon .icon.iD-other-line {
     color: #989898;
 }
+.preset-icon-line path.casing {
+    stroke: #afafaf;
+}
 
 path.line {
     stroke-linecap: round;

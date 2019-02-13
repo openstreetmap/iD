@@ -80,6 +80,9 @@ path.line.stroke.tag-route-ferry {
 path.line.stroke.tag-route-ferry {
     stroke: #58a9ed;
 }
+path.line.casing.tag-route-ferry {
+    stroke: none;
+}
 
 
 /* aerialways */
@@ -180,13 +183,18 @@ path.line.casing.tag-boundary-national_park {
 
 
 /* barriers and similar */
-path.line.stroke.tag-barrier {
+path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
 }
-path.line.stroke.tag-barrier-hedge {
-    stroke: rgb(140, 208, 95);
+.preset-icon-line path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
+    stroke: rgb(170, 170, 170);
 }
-
+path.line.casing.tag-natural,
+path.line.casing.tag-barrier,
+path.line.casing.tag-man_made-groyne,
+path.line.casing.tag-man_made-breakwater {
+    stroke: none;
+}
 path.line.stroke.tag-barrier,
 path.line.stroke.tag-man_made-groyne,
 path.line.stroke.tag-man_made-breakwater {
@@ -360,16 +368,22 @@ path.line.shadow.tag-status.tag-status-construction {
     stroke-width: 20;
 }
 path.line.casing.tag-status.tag-status-construction {
-    stroke: #fff;
     stroke-width: 10;
     stroke-linecap: butt;
     stroke-dasharray: none
 }
 path.line.stroke.tag-status.tag-status-construction {
-    stroke: #fc6c14;
     stroke-width: 8;
     stroke-linecap: butt;
     stroke-dasharray: 10, 10;
+}
+path.line.casing.tag-status.tag-status-construction,
+.preset-icon-line path.line.stroke.tag-status.tag-status-construction {
+    stroke: #fff;
+}
+path.line.stroke.tag-status.tag-status-construction,
+.preset-icon-line path.line.casing.tag-status.tag-status-construction {
+    stroke: #fc6c14;
 }
 .low-zoom path.line.shadow.tag-status.tag-status-construction {
     stroke-width: 16;
