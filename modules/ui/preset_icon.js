@@ -34,11 +34,17 @@ export function uiPresetIcon() {
         var isTemaki = /^temaki-/.test(picon);
         var isFa = /^fa[srb]-/.test(picon);
         var isPOI = isMaki || isTemaki || isFa;
-        var isFramed = (geom === 'area' || geom === 'vertex');
+        var isCategory = !p.setTags;
+        var drawLine = geom === 'line' && !isCategory;
+        var isFramed = (geom === 'area' || drawLine || geom === 'vertex');
 
         var tagClasses = '';
-        for (var k in p.tags) {
-            var v = p.tags[k];
+        var tags = isCategory ? p.tags : p.setTags({}, geom);
+        for (var k in tags) {
+            if (k === 'piste:type') {  // avoid a ':' in the class name
+                k = 'piste';
+            }
+            var v = tags[k];
             tagClasses += ' tag-' + k;
             if (v !== '*') {
                 tagClasses += ' tag-' + k + '-' + v;
@@ -63,6 +69,28 @@ export function uiPresetIcon() {
                 return 'preset-icon-fill preset-icon-fill-' + geom + tagClasses;
             });
 
+        var line = selection.selectAll('.preset-icon-line')
+            .data(drawLine ? [0] : []);
+
+        line.exit()
+            .remove();
+
+        line = line.enter()
+            .append('svg')
+            .attr('class', 'preset-icon-line')
+            .attr('width', 40)
+            .attr('height', 30)
+            .merge(line);
+
+        line.html('');
+
+        line.append('path')
+            .attr('d', 'M0 13.5 L40 13.5')
+            .attr('class', 'line casing' + tagClasses);
+        line.append('path')
+            .attr('d', 'M0 13.5 L40 13.5')
+            .attr('class', 'line stroke' + tagClasses);
+
 
         var areaFrame = selection.selectAll('.preset-icon-frame')
             .data((geom === 'area') ? [0] : []);
@@ -86,13 +114,13 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon preset-icon-' +
+            .attr('class', 'preset-icon ' + geom + '-geom ' + 'preset-icon-' +
                 (isPOI ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
             );
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isPOI ? '' : tagClasses);
+                return 'icon ' + picon + (isPOI && geom !== 'line'  ? '' : tagClasses);
             });
 
         icon.selectAll('use')

@@ -948,6 +948,21 @@ a.hide-toggle {
     background: #ececec;
 }
 
+.preset-icon-line {
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    top: 30px;
+}
+
+/* use a consistent stroke width */
+.preset-icon-line path.line.stroke {
+    stroke-width: 2 !important;
+}
+.preset-icon-line path.line.casing {
+    stroke-width: 4 !important;
+}
+
 .preset-icon-fill-area {
     cursor: inherit;
     height: 40px;
@@ -1011,6 +1026,9 @@ a.hide-toggle {
     left: 8px;
     margin: auto;
 }
+.preset-icon-44.line-geom {
+    top: 2px;
+}
 
 .preset-icon-44 .icon {
     width: 44px;
@@ -1034,6 +1052,9 @@ a.hide-toggle {
     top: 18px;
     left: 18px;
     margin: auto;
+}
+.preset-icon-24.line-geom {
+    top: 12px;
 }
 
 .preset-icon-24 .icon {

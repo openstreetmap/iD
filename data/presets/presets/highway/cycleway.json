@@ -1,5 +1,5 @@
 {
-    "icon": "iD-highway-cycleway",
+    "icon": "maki-bicycle",
     "fields": [
         "name",
         "oneway",
