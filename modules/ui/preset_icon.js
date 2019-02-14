@@ -64,7 +64,7 @@ export function uiPresetIcon() {
             .remove();
 
         // draw the line parametrically
-        var w = 60, h = 60, y = 43, l = 38, r = 3;
+        var w = 60, h = 60, y = 43, l = 36, r = 2.5;
         var x1 = (w - l)/2, x2 = x1 + l;
 
         var lineEnter = line.enter()
@@ -82,12 +82,12 @@ export function uiPresetIcon() {
             .attr('class', 'line stroke');
         lineEnter.append('circle')
             .attr('class', 'vertex')
-            .attr('cx', x1)
+            .attr('cx', x1 - 1)
             .attr('cy', y)
             .attr('r', r);
         lineEnter.append('circle')
             .attr('class', 'vertex')
-            .attr('cx', x2)
+            .attr('cx', x2 + 1)
             .attr('cy', y)
             .attr('r', r);
 

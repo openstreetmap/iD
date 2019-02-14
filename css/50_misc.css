@@ -210,6 +210,11 @@ path.line.stroke.tag-man_made-breakwater {
     stroke-linecap: butt;
     stroke-dasharray: 8, 2, 2, 2;
 }
+.preset-icon-line path.line.stroke.tag-barrier,
+.preset-icon-line path.line.stroke.tag-man_made-groyne,
+.preset-icon-line path.line.stroke.tag-man_made-breakwater {
+    stroke-dasharray: 1, 4, 6, 4;
+}
 
 
 /* bridges */
