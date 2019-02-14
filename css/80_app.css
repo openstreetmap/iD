@@ -951,8 +951,13 @@ a.hide-toggle {
 .preset-icon-line {
     margin: auto;
     position: absolute;
-    left: 0;
     top: 0;
+}
+[dir='ltr'] .preset-icon-line {
+    left: 0;
+}
+[dir='rtl'] .preset-icon-line {
+    right: 0;
 }
 .preset-icon-line path.line {
     cursor: inherit;
@@ -1071,6 +1076,10 @@ a.hide-toggle {
 [dir='rtl'] .preset-list-button-wrap .preset-icon {
     left: auto;
     right: auto;
+}
+
+[dir='rtl'] .preset-list-button-wrap .preset-icon-44 {
+    right: 8px;
 }
 
 [dir='rtl'] .preset-list-button-wrap .preset-icon-28 {
