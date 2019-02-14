@@ -134,7 +134,7 @@ export function uiEntityIssues(context) {
             .enter()
             .append('li')
             .attr('class', function(d) {
-                return 'issue-fix-item ' + (!!d.onClick ? 'actionable' : '');
+                return 'issue-fix-item ' + (d.onClick ? 'actionable' : '');
             })
             .append('button')
             .on('click', function(d) {
