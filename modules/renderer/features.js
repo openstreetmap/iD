@@ -95,96 +95,100 @@ export function rendererFeatures(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return !context.editable() || this.count > this.currentMax * _cullFactor; },
+            hidden: function() {
+                return !context.editable() ||
+                    (this.count === 0 && !this.enabled) ||
+                    this.count > this.currentMax * _cullFactor;
+            },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }
 
 
-    defineFeature('points', function isPoint(entity, resolver, geometry) {
+    defineFeature('points', function isPoint(tags, geometry) {
         return geometry === 'point';
     }, 200);
 
-    defineFeature('traffic_roads', function isTrafficRoad(entity) {
-        return traffic_roads[entity.tags.highway];
+    defineFeature('traffic_roads', function isTrafficRoad(tags) {
+        return traffic_roads[tags.highway];
     });
 
-    defineFeature('service_roads', function isServiceRoad(entity) {
-        return service_roads[entity.tags.highway];
+    defineFeature('service_roads', function isServiceRoad(tags) {
+        return service_roads[tags.highway];
     });
 
-    defineFeature('paths', function isPath(entity) {
-        return paths[entity.tags.highway];
+    defineFeature('paths', function isPath(tags) {
+        return paths[tags.highway];
     });
 
-    defineFeature('buildings', function isBuilding(entity) {
+    defineFeature('buildings', function isBuilding(tags) {
         return (
-            !!entity.tags['building:part'] ||
-            (!!entity.tags.building && entity.tags.building !== 'no') ||
-            entity.tags.parking === 'multi-storey' ||
-            entity.tags.parking === 'sheds' ||
-            entity.tags.parking === 'carports' ||
-            entity.tags.parking === 'garage_boxes'
+            !!tags['building:part'] ||
+            (!!tags.building && tags.building !== 'no') ||
+            tags.parking === 'multi-storey' ||
+            tags.parking === 'sheds' ||
+            tags.parking === 'carports' ||
+            tags.parking === 'garage_boxes'
         );
     }, 250);
 
-    defineFeature('landuse', function isLanduse(entity, resolver, geometry) {
+    defineFeature('landuse', function isLanduse(tags, geometry) {
         return geometry === 'area' &&
-            !_features.buildings.filter(entity) &&
-            !_features.water.filter(entity);
+            !_features.buildings.filter(tags) &&
+            !_features.water.filter(tags);
     });
 
-    defineFeature('boundaries', function isBoundary(entity) {
+    defineFeature('boundaries', function isBoundary(tags) {
         return (
-            !!entity.tags.boundary
+            !!tags.boundary
         ) && !(
-            traffic_roads[entity.tags.highway] ||
-            service_roads[entity.tags.highway] ||
-            paths[entity.tags.highway]
+            traffic_roads[tags.highway] ||
+            service_roads[tags.highway] ||
+            paths[tags.highway]
         );
     });
 
-    defineFeature('water', function isWater(entity) {
+    defineFeature('water', function isWater(tags) {
         return (
-            !!entity.tags.waterway ||
-            entity.tags.natural === 'water' ||
-            entity.tags.natural === 'coastline' ||
-            entity.tags.natural === 'bay' ||
-            entity.tags.landuse === 'pond' ||
-            entity.tags.landuse === 'basin' ||
-            entity.tags.landuse === 'reservoir' ||
-            entity.tags.landuse === 'salt_pond'
+            !!tags.waterway ||
+            tags.natural === 'water' ||
+            tags.natural === 'coastline' ||
+            tags.natural === 'bay' ||
+            tags.landuse === 'pond' ||
+            tags.landuse === 'basin' ||
+            tags.landuse === 'reservoir' ||
+            tags.landuse === 'salt_pond'
         );
     });
 
-    defineFeature('rail', function isRail(entity) {
+    defineFeature('rail', function isRail(tags) {
         return (
-            !!entity.tags.railway ||
-            entity.tags.landuse === 'railway'
+            !!tags.railway ||
+            tags.landuse === 'railway'
         ) && !(
-            traffic_roads[entity.tags.highway] ||
-            service_roads[entity.tags.highway] ||
-            paths[entity.tags.highway]
+            traffic_roads[tags.highway] ||
+            service_roads[tags.highway] ||
+            paths[tags.highway]
         );
     });
 
-    defineFeature('power', function isPower(entity) {
-        return !!entity.tags.power;
+    defineFeature('power', function isPower(tags) {
+        return !!tags.power;
     });
 
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
-    defineFeature('past_future', function isPastFuture(entity) {
+    defineFeature('past_future', function isPastFuture(tags) {
         if (
-            traffic_roads[entity.tags.highway] ||
-            service_roads[entity.tags.highway] ||
-            paths[entity.tags.highway]
+            traffic_roads[tags.highway] ||
+            service_roads[tags.highway] ||
+            paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(entity.tags);
+        var strings = Object.keys(tags);
 
         for (var i = 0; i < strings.length; i++) {
             var s = strings[i];
-            if (past_futures[s] || past_futures[entity.tags[s]]) { return true; }
+            if (past_futures[s] || past_futures[tags[s]]) { return true; }
         }
         return false;
     });
@@ -192,7 +196,7 @@ export function rendererFeatures(context) {
     // Lines or areas that don't match another feature filter.
     // IMPORTANT: The 'others' feature must be the last one defined,
     //   so that code in getMatches can skip this test if `hasMatch = true`
-    defineFeature('others', function isOther(entity, resolver, geometry) {
+    defineFeature('others', function isOther(tags, geometry) {
         return (geometry === 'line' || geometry === 'area');
     });
 
@@ -290,11 +294,9 @@ export function rendererFeatures(context) {
 
         for (i = 0; i < entities.length; i++) {
             geometry = entities[i].geometry(resolver);
-            if (!(geometry === 'vertex' || geometry === 'relation')) {
-                matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
-                for (j = 0; j < matches.length; j++) {
-                    _features[matches[j]].count++;
-                }
+            matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
+            for (j = 0; j < matches.length; j++) {
+                _features[matches[j]].count++;
             }
         }
 
@@ -334,9 +336,15 @@ export function rendererFeatures(context) {
         _cache = {};
     };
 
+    // only certain relations are worth checking
+    function relationShouldBeChecked(relation) {
+        // multipolygon features have `area` geometry and aren't checked here
+        return relation.tags.type === 'boundary';
+    }
 
     features.getMatches = function(entity, resolver, geometry) {
-        if (geometry === 'vertex' || geometry === 'relation') return {};
+        if (geometry === 'vertex' ||
+            (geometry === 'relation' && !relationShouldBeChecked(entity))) return {};
 
         var ent = osmEntity.key(entity);
         if (!_cache[ent]) {
@@ -351,19 +359,22 @@ export function rendererFeatures(context) {
                 if (_keys[i] === 'others') {
                     if (hasMatch) continue;
 
-                    // Multipolygon members:
                     // If an entity...
                     //   1. is a way that hasn't matched other 'interesting' feature rules,
-                    //   2. and it belongs to a single parent multipolygon relation
-                    // ...then match whatever feature rules the parent multipolygon has matched.
-                    // see #2548, #2887
-                    //
-                    // IMPORTANT:
-                    // For this to work, getMatches must be called on relations before ways.
-                    //
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
-                        if (parents.length === 1 && parents[0].isMultipolygon()) {
+
+                        //   2a. belongs only to a single multipolygon relation
+                        if ((parents.length === 1 && parents[0].isMultipolygon()) ||
+                            // 2b. or belongs only to boundary relations
+                            (parents.length > 0 && parents.every(function(parent) { return parent.tags.type === 'boundary'; }))) {
+
+                            // ...then match whatever feature rules the parent relation has matched.
+                            // see #2548, #2887
+                            //
+                            // IMPORTANT:
+                            // For this to work, getMatches must be called on relations before ways.
+                            //
                             var pkey = osmEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = _clone(_cache[pkey].matches);
@@ -373,7 +384,7 @@ export function rendererFeatures(context) {
                     }
                 }
 
-                if (_features[_keys[i]].filter(entity, resolver, geometry)) {
+                if (_features[_keys[i]].filter(entity.tags, geometry)) {
                     matches[_keys[i]] = hasMatch = true;
                 }
             }
@@ -402,6 +413,18 @@ export function rendererFeatures(context) {
             _cache[ent].parents = parents;
         }
         return _cache[ent].parents;
+    };
+
+
+    features.isHiddenPreset = function(preset, geometry) {
+        if (!_hidden.length) return false;
+        if (!preset.tags) return false;
+        for (var i = 0; i < _hidden.length; i++) {
+            if (_features[_hidden[i]].filter(preset.setTags({}, geometry), geometry)) {
+                return _hidden[i];
+            }
+        }
+        return false;
     };
 
 

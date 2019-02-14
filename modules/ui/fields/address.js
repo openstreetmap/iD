@@ -96,7 +96,7 @@ export function uiFieldAddress(field, context) {
         var box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) { return d.tags[key]; })
+            .filter(function hasTag(d) { return d.id !== _entity.id && d.tags[key]; })
             .map(function(d) {
                 return {
                     title: d.tags[key],
@@ -175,6 +175,7 @@ export function uiFieldAddress(field, context) {
             d3_select(this)
                 .call(uiCombobox(context, 'address-' + d.id)
                     .minItems(1)
+                    .caseSensitive(true)
                     .fetcher(function(value, callback) {
                         callback(nearValues('addr:' + d.id));
                     })

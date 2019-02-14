@@ -5,7 +5,11 @@
         "area"
     ],
     "terms": [
-        "meat"
+        "chicken",
+        "beef",
+        "lamb",
+        "meat",
+        "pork"
     ],
     "tags": {
         "shop": "butcher"

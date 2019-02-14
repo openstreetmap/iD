@@ -118,6 +118,8 @@ export function modeRotate(context, entityIDs) {
 
 
     mode.enter = function() {
+        context.features().forceVisible(entityIDs);
+
         behaviors.forEach(context.install);
 
         context.surface()
@@ -148,6 +150,8 @@ export function modeRotate(context, entityIDs) {
 
         d3_select(document)
             .call(keybinding.unbind);
+
+        context.features().forceVisible([]);
     };
 
 

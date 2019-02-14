@@ -10,7 +10,9 @@
     ],
     "terms": [
         "bike",
-        "repair"
+        "repair",
+        "tricycle",
+        "unicycle"
     ],
     "tags": {
         "shop": "bicycle"

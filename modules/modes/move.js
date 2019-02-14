@@ -129,9 +129,9 @@ export function modeMove(context, entityIDs, baseGraph) {
         _prevGraph = null;
         _cache = {};
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        context.features().forceVisible(entityIDs);
+
+        behaviors.forEach(context.install);
 
         context.surface()
             .on('mousemove.move', move)
@@ -165,6 +165,8 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         d3_select(document)
             .call(keybinding.unbind);
+
+        context.features().forceVisible([]);
     };
 
 
