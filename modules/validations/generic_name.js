@@ -6,7 +6,7 @@ import { actionChangeTags } from '../actions';
 import { discardNames } from '../../node_modules/name-suggestion-index/config/filters.json';
 
 
-export function validationGenericName(context) {
+export function validationGenericName() {
     var type = 'generic_name';
 
 
@@ -37,7 +37,7 @@ export function validationGenericName(context) {
     }
 
 
-    var validation = function(entity) {
+    var validation = function(entity, context) {
         var issues = [];
         var generic = isGenericName(entity);
         if (generic) {
@@ -50,6 +50,7 @@ export function validationGenericName(context) {
                 entities: [entity],
                 fixes: [
                     new validationIssueFix({
+                        icon: 'iD-operation-delete',
                         title: t('issues.fix.remove_generic_name.title'),
                         onClick: function() {
                             var entity = this.issue.entities[0];

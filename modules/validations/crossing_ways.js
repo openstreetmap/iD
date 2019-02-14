@@ -398,7 +398,9 @@ export function validationCrossingWays() {
                 }
             }));
         }
-
+        fixes.push(new validationIssueFix({
+            title: t('issues.fix.reposition_features.title')
+        }));
         return new validationIssue({
             type: type,
             severity: 'warning',

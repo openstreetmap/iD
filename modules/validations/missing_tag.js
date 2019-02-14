@@ -58,12 +58,14 @@ export function validationMissingTag() {
             entities: [entity],
             fixes: [
                 new validationIssueFix({
+                    icon: 'iD-icon-search',
                     title: t('issues.fix.select_preset.title'),
                     onClick: function() {
                         context.ui().sidebar.showPresetList();
                     }
                 }),
                 new validationIssueFix({
+                    icon: 'iD-operation-delete',
                     title: t('issues.fix.delete_feature.title'),
                     onClick: function() {
                         var id = this.issue.entities[0].id;

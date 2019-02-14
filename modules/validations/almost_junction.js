@@ -162,6 +162,7 @@ export function validationAlmostJunction() {
             if (Object.keys(node.tags).length === 0) {
                 // node has no tags, suggest noexit fix
                 fixes.push(new validationIssueFix({
+                    icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
                     onClick: function() {
                         var nodeID = this.issue.entities[1].id;

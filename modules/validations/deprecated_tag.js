@@ -30,6 +30,7 @@ export function validationDeprecatedTag() {
                     },
                     fixes: [
                         new validationIssueFix({
+                            icon: 'iD-icon-up',
                             title: t('issues.fix.upgrade_tags.title'),
                             onClick: function() {
                                 var entity = this.issue.entities[0];

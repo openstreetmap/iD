@@ -222,6 +222,7 @@ export function validationIssue(attrs) {
 
 
 export function validationIssueFix(attrs) {
+    this.icon = attrs.icon;
     this.title = attrs.title;
     this.onClick = attrs.onClick;
     this.entityIds = attrs.entityIds || [];  // Used for hover-higlighting.

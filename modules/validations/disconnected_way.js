@@ -38,6 +38,7 @@ export function validationDisconnectedWay() {
 
             if (!entity.isClosed()) {
                 fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-continue-left',
                     title: t('issues.fix.continue_from_start.title'),
                     entityIds: [entity.first()],
                     onClick: function() {
@@ -46,6 +47,7 @@ export function validationDisconnectedWay() {
                     }
                 }));
                 fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-continue',
                     title: t('issues.fix.continue_from_end.title'),
                     entityIds: [entity.last()],
                     onClick: function() {
@@ -56,6 +58,7 @@ export function validationDisconnectedWay() {
             }
 
             fixes.push(new validationIssueFix({
+                icon: 'iD-operation-delete',
                 title: t('issues.fix.delete_feature.title'),
                 entityIds: [entity.id],
                 onClick: function() {
@@ -80,7 +83,7 @@ export function validationDisconnectedWay() {
         function continueDrawing(way, vertex) {
             // make sure the vertex is actually visible and editable
             var map = context.map();
-            if (!map.editable() || !map.contains(vertex.loc)) {
+            if (!map.editable() || !map.trimmedExtent().contains(vertex.loc)) {
                 map.zoomToEase(vertex);
             }
 

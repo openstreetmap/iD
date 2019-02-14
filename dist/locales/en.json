@@ -1556,6 +1556,9 @@
                     "title": "Remove the tag",
                     "annotation": "Removed tag."
                 },
+                "reposition_features": {
+                    "title": "Reposition the features"
+                },
                 "select_preset": {
                     "title": "Select a feature type"
                 },

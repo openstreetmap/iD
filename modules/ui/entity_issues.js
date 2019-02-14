@@ -14,11 +14,13 @@ export function uiEntityIssues(context) {
     var _entityID;
 
 
-    // context.validator().on('reload.entity_issues', function() {
-    //     _selection.selectAll('.entity-issues')
-    //         .call(render);
-    //     update();
-    // });
+    context.validator().on('reload.entity_issues', function() {
+
+        update();
+
+         _selection.selectAll('.entity-issues')
+             .call(render);
+    });
 
 
     function clamp(num, min, max) {
@@ -64,6 +66,11 @@ export function uiEntityIssues(context) {
         var itemsEnter = items.enter()
             .append('div')
             .attr('class', function(d) { return 'issue severity-' + d.severity; })
+            .call(tooltip()
+                .html(true)
+                .title(function(d) { return uiTooltipHtml(d.tooltip); })
+                .placement('top')
+            )
             .on('mouseover.highlight', function(d) {
                 var ids = d.entities.map(function(e) { return e.id; });
                 utilHighlightEntities(ids, true, context);
@@ -90,13 +97,6 @@ export function uiEntityIssues(context) {
         var labelsEnter = itemsEnter
             .append('button')
             .attr('class', 'label');
-
-        labelsEnter
-            .call(tooltip()
-                .html(true)
-                .title(function(d) { return uiTooltipHtml(d.tooltip); })
-                .placement('top')
-            );
 
         labelsEnter
             .append('span')
@@ -129,14 +129,39 @@ export function uiEntityIssues(context) {
         // fixes
         var fixLists = items.selectAll('.issue-fix-list');
 
-        fixLists.selectAll('.issue-fix-item')
+        var fixes = fixLists.selectAll('.issue-fix-item')
             .data(function(d) { return d.fixes; })
             .enter()
             .append('li')
-            .attr('class', 'issue-fix-item')
+            .attr('class', function(d) {
+                return 'issue-fix-item ' + (!!d.onClick ? 'actionable' : '');
+            })
             .append('button')
-            .text(function(d) { return d.title; })
-            .on('click', function(d) { d.onClick(); });
+            .on('click', function(d) {
+                if (d.onClick) {
+                    utilHighlightEntities(d.entityIds, false, context);
+                    d.onClick();
+                }
+            })
+            .on('mouseover.highlight', function(d) {
+                utilHighlightEntities(d.entityIds, true, context);
+            })
+            .on('mouseout.highlight', function(d) {
+                utilHighlightEntities(d.entityIds, false, context);
+            });
+
+        fixes.append('span')
+            .attr('class', 'fix-icon')
+            .each(function(d) {
+                var iconName = d.icon || 'iD-icon-wrench';
+                if (iconName.startsWith('maki')) {
+                    iconName += '-15';
+                }
+                d3_select(this).call(svgIcon('#' + iconName, 'pre-text'));
+            });
+
+        fixes.append('span')
+            .text(function(d) { return d.title; });
     }
 
 
