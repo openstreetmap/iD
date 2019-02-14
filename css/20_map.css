@@ -177,8 +177,10 @@ g.vertex.selected .shadow {
 
 /* lines */
 .preset-icon .icon.iD-other-line {
-    color: #fff;
-    fill: #777;
+    color: #989898;
+}
+.preset-icon-line path.casing {
+    stroke: #afafaf;
 }
 
 path.line {
@@ -322,4 +324,3 @@ g.vertex.highlighted .shadow {
 .surface.tr g.vertex.related.only .shadow {
     stroke: #68f;
 }
-

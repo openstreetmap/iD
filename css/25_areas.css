@@ -33,7 +33,8 @@ path.stroke.tag-leisure-garden,
 path.stroke.tag-leisure-park,
 path.stroke.tag-landuse-forest,
 path.stroke.tag-landuse-wood,
-path.stroke.tag-landuse-grass {
+path.stroke.tag-landuse-grass,
+path.stroke.tag-barrier-hedge {
     stroke: rgb(140, 208, 95);
 }
 path.fill.tag-landuse,
@@ -46,7 +47,8 @@ path.fill.tag-leisure-garden,
 path.fill.tag-leisure-park,
 path.fill.tag-landuse-forest,
 path.fill.tag-natural-wood,
-path.fill.tag-landuse-grass {
+path.fill.tag-landuse-grass,
+path.fill.tag-barrier-hedge {
     stroke: rgba(140, 208, 95, 0.3);
     fill: rgba(140, 208, 95, 0.3);
 }

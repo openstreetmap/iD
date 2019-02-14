@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="60" height="60" viewBox="0 0 60 60">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
   <path d="M27,14 L27,16 L26,18 L26,20 L25,22 L25,24 L24,26 L24,28 L23,30 L23,32 L22,34 L22,36 L30,36 L38,36 L38,34 L37,32 L37,30 L36,28 L36,26 L35,24 L35,22 L34,20 L34,18 L33,16 L33,14 L30,14 L27,14 z" fill="currentColor" id="highway-steps-stroke3" opacity="0.496"/>
   <path d="M23,32 L23,30 L37,30 L37,32 z M38,36 L38,34 L22,34 L22,36 z M36,28 L36,26 L24,26 L24,28 z M35,24 L35,22 L25,22 L25,24 z M34,20 L34,18 L26,18 L26,20 z M33,16 L33,14 L27,14 L27,16 z" fill="currentColor" id="highway-steps-stroke2"/>
-  <path d="M49.5,39 C50.881,39 52,40.119 52,41.5 C52,42.881 50.881,44 49.5,44 C48.593,44.004 48.127,43.598 47.529,43 L12.471,43 C11.978,43.678 11.297,43.92 10.5,44 C9.119,44 8,42.881 8,41.5 C8,40.119 9.119,39 10.5,39 C11.407,38.996 11.873,39.402 12.471,40 L47.529,40 C48.022,39.322 48.703,39.08 49.5,39 z" fill="currentColor" id="highway-steps-stroke1"/>
-  <path d="M43,41 L46,41 L46,42 L43,42 z M33,42 L36,42 L36,41 L33,41 z M23,42 L26,42 L26,41 L23,41 z M13,42 L16,42 L16,41 L13,41 z M18,42 L21,42 L21,41 L18,41 z M28,42 L31,42 L31,41 L28,41 z M38,42 L41,42 L41,41 L38,41 z" fill="inherit" id="highway-steps-dashes"/>
-  <path d="M51,41.5 C51,42.328 50.328,43 49.5,43 C48.672,43 48,42.328 48,41.5 C48,40.672 48.672,40 49.5,40 C50.328,40 51,40.672 51,41.5 z" fill="#FFFFFF"/>
-  <path d="M12,41.5 C12,42.328 11.328,43 10.5,43 C9.672,43 9,42.328 9,41.5 C9,40.672 9.672,40 10.5,40 C11.328,40 12,40.672 12,41.5 z" fill="#FFFFFF"/>
 </svg>
