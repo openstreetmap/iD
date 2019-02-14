@@ -408,6 +408,8 @@ export function uiPresetList(context) {
 
     function updateForFeatureHiddenState() {
 
+        if (!context.hasEntity(_entityID)) return;
+
         var geometry = context.geometry(_entityID);
 
         var button = d3_selectAll('.preset-list .preset-list-button');
