@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="60" height="60" viewBox="0 0 60 60">
-  <g>
-    <path d="M10.5,39 C9.119,39 8,40.119 8,41.5 C8,42.881 9.119,44 10.5,44 L49.5,44 C50.881,44 52,42.881 52,41.5 C52,40.119 50.881,39 49.5,39 z" fill="inherit" id="highway-secondary-casing1"/>
-    <path d="M12.5,40 C12.81,40.416 13,40.941 13,41.5 C13,42.059 12.81,42.584 12.5,43 L47.5,43 C47.19,42.584 47,42.059 47,41.5 C47,40.941 47.19,40.416 47.5,40 L12.5,40 z" fill="currentColor" id="highway-secondary-stroke1"/>
-    <path d="M12,41.5 C12,42.328 11.328,43 10.5,43 C9.672,43 9,42.328 9,41.5 C9,40.672 9.672,40 10.5,40 C11.328,40 12,40.672 12,41.5 z" fill="#FFFFFF"/>
-    <path d="M51,41.5 C51,42.328 50.328,43 49.5,43 C48.672,43 48,42.328 48,41.5 C48,40.672 48.672,40 49.5,40 C50.328,40 51,40.672 51,41.5 z" fill="#FFFFFF"/>
-  </g>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
   <path d="M22,14 L18,36 L29,36 L29.5,14 L22,14 z M30.5,14 L31,36 L42,36 L37.5,14 L30.5,14 z" fill="#444444"/>
   <path d="M35,33 L34.5,29 L37.5,29 L38,33 z M23.25,20 L23.562,16 L26.438,16 L26.125,20 z" fill="currentColor" id="highway-secondary-stroke2"/>
 </svg>

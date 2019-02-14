@@ -948,6 +948,32 @@ a.hide-toggle {
     background: #ececec;
 }
 
+.preset-icon-line {
+    margin: auto;
+    position: absolute;
+    top: 0;
+}
+[dir='ltr'] .preset-icon-line {
+    left: 0;
+}
+[dir='rtl'] .preset-icon-line {
+    right: 0;
+}
+.preset-icon-line path.line {
+    cursor: inherit;
+}
+.preset-icon-line circle.vertex {
+    fill: #fff;
+    stroke: rgba(0, 0, 0, 0.25);
+}
+/* use a consistent stroke width */
+.preset-icon-line path.line.stroke {
+    stroke-width: 2 !important;
+}
+.preset-icon-line path.line.casing {
+    stroke-width: 4 !important;
+}
+
 .preset-icon-fill-area {
     cursor: inherit;
     height: 40px;
@@ -1011,6 +1037,9 @@ a.hide-toggle {
     left: 8px;
     margin: auto;
 }
+.preset-icon-44.line-geom {
+    top: 2px;
+}
 
 .preset-icon-44 .icon {
     width: 44px;
@@ -1035,6 +1064,9 @@ a.hide-toggle {
     left: 18px;
     margin: auto;
 }
+.preset-icon-24.line-geom {
+    top: 12px;
+}
 
 .preset-icon-24 .icon {
     width: 24px;
@@ -1044,6 +1076,10 @@ a.hide-toggle {
 [dir='rtl'] .preset-list-button-wrap .preset-icon {
     left: auto;
     right: auto;
+}
+
+[dir='rtl'] .preset-list-button-wrap .preset-icon-44 {
+    right: 8px;
 }
 
 [dir='rtl'] .preset-list-button-wrap .preset-icon-28 {
