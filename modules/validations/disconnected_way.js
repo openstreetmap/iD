@@ -31,8 +31,38 @@ export function validationDisconnectedWay() {
     var validation = function(entity, context) {
         var issues = [];
         var graph = context.graph();
+
         if (isDisconnectedHighway(entity, graph)) {
             var entityLabel = utilDisplayLabel(entity, context);
+            var fixes = [];
+
+            if (!entity.isClosed()) {
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.continue_from_start.title'),
+                    entityIds: [entity.first()],
+                    onClick: function() {
+                        var vertex = context.entity(entity.first());
+                        continueDrawing(entity, vertex, context);
+                    }
+                }));
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.continue_from_end.title'),
+                    entityIds: [entity.last()],
+                    onClick: function() {
+                        var vertex = context.entity(entity.last());
+                        continueDrawing(entity, vertex, context);
+                    }
+                }));
+            }
+
+            fixes.push(new validationIssueFix({
+                title: t('issues.fix.delete_feature.title'),
+                entityIds: [entity.id],
+                onClick: function() {
+                    var id = this.issue.entities[0].id;
+                    operationDelete([id], context)();
+                }
+            }));
 
             issues.push(new validationIssue({
                 type: type,
@@ -40,51 +70,26 @@ export function validationDisconnectedWay() {
                 message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
                 tooltip: t('issues.disconnected_way.highway.tip'),
                 entities: [entity],
-                fixes: [
-                    new validationIssueFix({
-                        title: t('issues.fix.continue_from_start.title'),
-                        onClick: function() {
-                            var way = this.issue.entities[0];
-                            var vertex = context.entity(way.nodes[0]);
-                            continueDrawing(way, vertex, context);
-                        },
-                        entityIds: [entity.nodes[0]]
-                    }),
-                    new validationIssueFix({
-                        title: t('issues.fix.continue_from_end.title'),
-                        onClick: function() {
-                            var way = this.issue.entities[0];
-                            var vertex = context.entity(way.nodes[way.nodes.length-1]);
-                            continueDrawing(way, vertex, context);
-                        },
-                        entityIds: [entity.nodes[entity.nodes.length-1]]
-                    }),
-                    new validationIssueFix({
-                        title: t('issues.fix.delete_feature.title'),
-                        onClick: function() {
-                            var id = this.issue.entities[0].id;
-                            operationDelete([id], context)();
-                        }
-                    })
-                ]
+                fixes: fixes
             }));
         }
 
         return issues;
+
+
+        function continueDrawing(way, vertex) {
+            // make sure the vertex is actually visible and editable
+            var map = context.map();
+            if (!map.editable() || !map.contains(vertex.loc)) {
+                map.zoomToEase(vertex);
+            }
+
+            context.enter(
+                modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
+            );
+        }
     };
 
-    function continueDrawing(way, vertex, context) {
-
-        if (!context.map().editable() ||
-            !context.map().extent().contains(vertex.loc)) {
-            // make sure the vertex is actually visible and editable
-            context.map().zoomToEase(vertex);
-        }
-
-        context.enter(
-            modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
-        );
-    }
 
     validation.type = type;
 
