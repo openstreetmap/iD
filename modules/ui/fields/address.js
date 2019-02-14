@@ -96,7 +96,7 @@ export function uiFieldAddress(field, context) {
         var box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) { return d.tags[key]; })
+            .filter(function hasTag(d) { return d.id !== _entity.id && d.tags[key]; })
             .map(function(d) {
                 return {
                     title: d.tags[key],
