@@ -63,29 +63,40 @@ export function uiPresetIcon() {
         line.exit()
             .remove();
 
-        line = line.enter()
-            .append('div')
+        // draw the line parametrically
+        var w = 60, h = 60, y = 43, l = 38, r = 3;
+        var x1 = (w - l)/2, x2 = x1 + l;
+
+        var lineEnter = line.enter()
+            .append('svg')
             .attr('class', 'preset-icon-line')
-            .merge(line);
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
 
-        line.html('');
+        lineEnter.append('path')
+            .attr('d', 'M' + x1 + ' ' + y + ' L' + x2 + ' ' + y)
+            .attr('class', 'line casing');
+        lineEnter.append('path')
+            .attr('d', 'M' + x1 + ' ' + y + ' L' + x2 + ' ' + y)
+            .attr('class', 'line stroke');
+        lineEnter.append('circle')
+            .attr('class', 'vertex')
+            .attr('cx', x1)
+            .attr('cy', y)
+            .attr('r', r);
+        lineEnter.append('circle')
+            .attr('class', 'vertex')
+            .attr('cx', x2)
+            .attr('cy', y)
+            .attr('r', r);
 
-        line.append('div')
-            .attr('class', 'vertex vertex-left');
-        line.append('div')
-            .attr('class', 'vertex vertex-right');
+        line = lineEnter.merge(line);
 
-        var lineSvg = line.append('svg')
-            .attr('width', 40)
-            .attr('height', 20)
-            .merge(line);
-
-        lineSvg.append('path')
-            .attr('d', 'M0 13.5 L40 13.5')
-            .attr('class', 'line casing ' + tagClasses);
-        lineSvg.append('path')
-            .attr('d', 'M0 13.5 L40 13.5')
+        line.selectAll('path.stroke')
             .attr('class', 'line stroke ' + tagClasses);
+        line.selectAll('path.casing')
+            .attr('class', 'line casing ' + tagClasses);
 
 
         var areaFrame = selection.selectAll('.preset-icon-frame')
