@@ -20,7 +20,8 @@ import { utilKeybinding, utilRebind } from '../util';
 export function behaviorHover(context) {
     var dispatch = d3_dispatch('hover');
     var _selection = d3_select(null);
-    var _newId = null;
+    var _newNodeId = null;
+    var _initialNodeId = null;
     var _buttonDown;
     var _altDisables;
     var _ignoreVertex;
@@ -57,7 +58,13 @@ export function behaviorHover(context) {
 
     function behavior(selection) {
         _selection = selection;
-        _newId = null;
+
+        if (_initialNodeId) {
+            _newNodeId = _initialNodeId;
+            _initialNodeId = null;
+        } else {
+            _newNodeId = null;
+        }
 
         _selection
             .on('mouseover.hover', mouseover)
@@ -134,11 +141,11 @@ export function behaviorHover(context) {
             }
 
             // Update hover state and dispatch event
-            if (entity && entity.id !== _newId) {
+            if (entity && entity.id !== _newNodeId) {
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
-                if ((mode === 'draw-line' || mode === 'draw-area') && !_newId && entity.type === 'node') {
-                    _newId = entity.id;
+                if ((mode === 'draw-line' || mode === 'draw-area') && !_newNodeId && entity.type === 'node') {
+                    _newNodeId = entity.id;
                     return;
                 }
 
@@ -184,6 +191,11 @@ export function behaviorHover(context) {
     behavior.ignoreVertex = function(val) {
         if (!arguments.length) return _ignoreVertex;
         _ignoreVertex = val;
+        return behavior;
+    };
+
+    behavior.initialNodeId = function(nodeId) {
+        _initialNodeId = nodeId;
         return behavior;
     };
 
