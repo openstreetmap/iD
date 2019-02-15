@@ -13,14 +13,17 @@ import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 import { utilKeybinding } from '../util';
 
-
 export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
     var origWay = context.entity(wayID);
+
     var annotation = t((origWay.isDegenerate() ?
         'operations.start.annotation.' :
         'operations.continue.annotation.') + context.geometry(wayID)
     );
+
     var behavior = behaviorDraw(context);
+    behavior.hover().initialNodeId(index ? origWay.nodes[index] : origWay.nodes[origWay.nodes.length - 1]);
+
     var _tempEdits = 0;
 
     var end = osmNode({ loc: context.map().mouseCoordinates() });
@@ -67,7 +70,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
 
     function allowsVertex(d) {
-        return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+        return context.presets().allowsVertex(d, context.graph());
     }
 
 

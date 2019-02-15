@@ -27,7 +27,7 @@ export function behaviorDraw(context) {
 
     var keybinding = utilKeybinding('draw');
 
-    var hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
+    var _hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
         .on('hover', context.ui().sidebar.hover);
     var tail = behaviorTail();
     var edit = behaviorEdit(context);
@@ -195,7 +195,7 @@ export function behaviorDraw(context) {
 
 
     function behavior(selection) {
-        context.install(hover);
+        context.install(_hover);
         context.install(edit);
 
         if (!context.inIntro() && !_usedTails[tail.text()]) {
@@ -225,7 +225,7 @@ export function behaviorDraw(context) {
 
     behavior.off = function(selection) {
         context.ui().sidebar.hover.cancel();
-        context.uninstall(hover);
+        context.uninstall(_hover);
         context.uninstall(edit);
 
         if (!context.inIntro() && !_usedTails[tail.text()]) {
@@ -251,6 +251,10 @@ export function behaviorDraw(context) {
     behavior.tail = function(_) {
         tail.text(_);
         return behavior;
+    };
+
+    behavior.hover = function() {
+        return _hover;
     };
 
 

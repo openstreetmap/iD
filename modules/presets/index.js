@@ -1,5 +1,6 @@
 import _bind from 'lodash-es/bind';
 import _forEach from 'lodash-es/forEach';
+import _isEmpty from 'lodash-es/isEmpty';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
 
@@ -79,6 +80,7 @@ export function presetIndex() {
 
     all.allowsVertex = function(entity, resolver) {
         if (entity.type !== 'node') return false;
+        if (_isEmpty(entity.tags)) return true;
         return resolver.transient(entity, 'vertexMatch', function() {
             var vertexPresets = _index.vertex;
             var match;
