@@ -8,8 +8,6 @@ import {
 import { osmEntity, osmNote, qaError } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
-import _isEmpty from 'lodash-es/isEmpty';
-
 /*
    The hover behavior adds the `.hover` class on mouseover to all elements to which
    the identical datum is bound, and removes it on mouseout.
@@ -98,10 +96,6 @@ export function behaviorHover(context) {
                 .on('mouseup.hover', null, true);
         }
 
-        function allowsVertex(d) {
-            return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
-        }
-
         function enter(datum) {
             if (datum === _target) return;
             _target = datum;
@@ -149,7 +143,7 @@ export function behaviorHover(context) {
                 }
 
                 var suppressed = (_altDisables && d3_event && d3_event.altKey) ||
-                    (entity === 'node' && _ignoreVertex && !allowsVertex(entity, context.graph()));
+                    (entity.type === 'node' && _ignoreVertex && !context.presets().allowsVertex(entity, context.graph()));
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
