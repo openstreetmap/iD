@@ -131,23 +131,23 @@ export function uiIssues(context) {
             });
 
 
-        var labelsEnter = itemsEnter
+        var messagesEnter = itemsEnter
             .append('button')
-            .attr('class', 'label');
+            .attr('class', 'message');
 
-        labelsEnter
+        messagesEnter
             .call(tooltip()
                 .html(true)
                 .title(function(d) { return uiTooltipHtml(d.tooltip); })
                 .placement('top')
             );
 
-        labelsEnter
+        messagesEnter
             .append('span')
             .attr('class', 'issue-icon')
             .call(svgIcon('', 'pre-text'));
 
-        labelsEnter
+        messagesEnter
             .append('span')
             .attr('class', 'issue-text');
 
@@ -171,17 +171,17 @@ export function uiIssues(context) {
             .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesLabel = selection
+        var noIssuesMessage = selection
             .append('span');
 
-        noIssuesLabel
+        noIssuesMessage
             .append('strong')
             .text(t('issues.no_issues.message'));
 
-        noIssuesLabel
+        noIssuesMessage
             .append('br');
 
-        noIssuesLabel
+        noIssuesMessage
             .append('span')
             .text(t('issues.no_issues.info'));
     }

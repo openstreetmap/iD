@@ -1,5 +1,3 @@
-import _isEmpty from 'lodash-es/isEmpty';
-
 import {
     event as d3_event,
     select as d3_select

@@ -3103,9 +3103,8 @@ div.full-screen > button:hover {
 .entity-issues .issue:not(:last-of-type) {
     margin-bottom: 10px;
 }
-.issue.expanded button.label {
-    cursor: pointer;
-    pointer-events: none;
+.issue.expanded button.message {
+    cursor: auto;
     padding-bottom: 0px;
 }
 ul.issue-fix-list button {
@@ -3118,25 +3117,30 @@ ul.issue-fix-list button {
     padding-bottom:7px;
 }
 .issue-fix-item:not(.actionable) button {
-    cursor: pointer;
-    pointer-events: none;
+    cursor: auto;
+
 }
 .issue-fix-item:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
+
 .issue:not(.expanded) ul.issue-fix-list {
-    height: 0px;
-    transition: height 75ms linear;
-    -moz-transition: height 75ms linear;
-    -webkit-transition: height 75ms linear;
+    display: none;
+}
+/* don't animate right now
+.issue ul.issue-fix-list {
+    max-height: 0;
+    transition: max-height 200ms linear;
+    -moz-transition: max-height 200ms linear;
+    -webkit-transition: max-height 200ms linear;
 }
 .issue.expanded ul.issue-fix-list {
-    height: 100%;
-    transition: height 75ms linear;
-    -moz-transition: height 75ms linear;
-    -webkit-transition: height 75ms linear;
-}
+    max-height: 180px;
+    transition: max-height 200ms linear;
+    -moz-transition: max-height 200ms linear;
+    -webkit-transition: max-height 200ms linear;
+}*/
 
 
 /* Background - Display Options Sliders

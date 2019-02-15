@@ -10,7 +10,7 @@ import { utilHighlightEntities } from '../util';
 
 export function uiEntityIssues(context) {
     var _selection = d3_select(null);
-    var _expanded = 0;
+    var _expandedIssueID;
     var _entityID;
 
     // Listen for validation reload even though the entity editor is reloaded on
@@ -23,11 +23,6 @@ export function uiEntityIssues(context) {
 
         update();
     });
-
-
-    function clamp(num, min, max) {
-        return Math.max(min, Math.min(num, max));
-    }
 
 
     function entityIssues(selection) {
@@ -55,7 +50,7 @@ export function uiEntityIssues(context) {
 
     function render(selection) {
         var issues = context.validator().getIssuesForEntityWithID(_entityID);
-        _expanded = clamp(_expanded, 0, issues.length);
+        _expandedIssueID = issues.length > 0 ? issues[0].id() : null;
 
         var items = selection.selectAll('.issue')
             .data(issues, function(d) { return d.id(); });
@@ -74,17 +69,25 @@ export function uiEntityIssues(context) {
                 .placement('top')
             )
             .on('mouseover.highlight', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
+                // don't hover-highlight the selected entity
+                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                    .map(function(e) { return e.id; });
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
+                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                    .map(function(e) { return e.id; });
                 utilHighlightEntities(ids, false, context);
-            })
-            .on('click', function(d, i) {
-                _expanded = i;   // expand only the clicked item
+            });
+
+        var messagesEnter = itemsEnter
+            .append('button')
+            .attr('class', 'message')
+            .on('click', function(d) {
+
+                _expandedIssueID = d.id();   // expand only the clicked item
                 selection.selectAll('.issue')
-                    .classed('expanded', function(d, i) { return i === _expanded; });
+                    .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
 
                 var extent = d.extent(context.graph());
                 if (extent) {
@@ -96,16 +99,12 @@ export function uiEntityIssues(context) {
                 }
             });
 
-        var labelsEnter = itemsEnter
-            .append('button')
-            .attr('class', 'label');
-
-        labelsEnter
+        messagesEnter
             .append('span')
             .attr('class', 'issue-icon')
             .call(svgIcon('', 'pre-text'));
 
-        labelsEnter
+        messagesEnter
             .append('strong')
             .attr('class', 'issue-text');
 
@@ -117,7 +116,7 @@ export function uiEntityIssues(context) {
         // Update
         items = items
             .merge(itemsEnter)
-            .classed('expanded', function(d, i) { return i === _expanded; });
+            .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
 
         items.select('.issue-icon svg use')     // propagate bound data
             .attr('href', function(d) {
@@ -171,7 +170,7 @@ export function uiEntityIssues(context) {
         if (!arguments.length) return _entityID;
         if (_entityID !== val) {
             _entityID = val;
-            _expanded = 0;
+            _expandedIssueID = null;
         }
         return entityIssues;
     };
