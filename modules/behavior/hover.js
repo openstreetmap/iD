@@ -25,7 +25,7 @@ export function behaviorHover(context) {
     var _newId = null;
     var _buttonDown;
     var _altDisables;
-    var _vertex;
+    var _ignoreVertex;
     var _target;
 
 
@@ -148,7 +148,8 @@ export function behaviorHover(context) {
                     return;
                 }
 
-                var suppressed = (_altDisables && d3_event && d3_event.altKey) || (_vertex && !allowsVertex(entity, context.graph()));
+                var suppressed = (_altDisables && d3_event && d3_event.altKey) ||
+                    (entity === 'node' && _ignoreVertex && !allowsVertex(entity, context.graph()));
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
@@ -187,8 +188,8 @@ export function behaviorHover(context) {
     };
 
     behavior.ignoreVertex = function(val) {
-        if (!arguments.length) return _vertex;
-        _vertex = val;
+        if (!arguments.length) return _ignoreVertex;
+        _ignoreVertex = val;
         return behavior;
     };
 
