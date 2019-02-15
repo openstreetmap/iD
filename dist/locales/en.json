@@ -1425,8 +1425,8 @@
                 "list_title": "Warnings ({count})"
             },
             "no_issues": {
-                "message": "Everything looks fine.",
-                "info": "Any issues will show up here as you edit."
+                "message": "Everything looks fine",
+                "info": "Any issues will show up here as you edit"
             },
             "almost_junction": {
                 "message": "{feature} is very close but not connected to {feature2}",
@@ -1480,7 +1480,12 @@
                 }
             },
             "deprecated_tag": {
-                "message": "{feature} has outdated tags: {tags}",
+                "single": {
+                    "message": "{feature} has the outdated tag \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} has an outdated tag combination: {tags}"
+                },
                 "tip": "Some tags become deprecated over time and should be replaced."
             },
             "disconnected_way": {
@@ -1491,7 +1496,7 @@
             },
             "generic_name": {
                 "message": "{feature} has the generic name \"{name}\"",
-                "tip": "Names should be the official, on-the-ground titles of features."
+                "tip": "Names should be the actual, on-the-ground names of features."
             },
             "many_deletions": {
                 "points-lines-areas": {
@@ -1519,17 +1524,22 @@
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "tag_suggests_area": {
-                "message": "{feature} should be a closed area based on the tag: {tag}",
+                "message": "{feature} should be a closed area based on the tag \"{tag}\"",
                 "tip": "Areas must have connected endpoints."
             },
             "fix": {
-                "add_connection_vertex": {
-                    "title": "Connect the features",
+                "connect_almost_junction": {
+                    "annotation": "Connected very close features."
+                },
+                "connect_crossing_features": {
                     "annotation": "Connected crossing features."
                 },
-                "connect_almost_junction": {
-                    "title": "Connect the features",
-                    "annotation": "Connected very close features."
+                "connect_endpoints": {
+                    "title": "Connect the ends",
+                    "annotation": "Connected the endpoints of a way."
+                },
+                "connect_features": {
+                    "title": "Connect the features"
                 },
                 "continue_from_start": {
                     "title": "Continue drawing from start"
@@ -1539,10 +1549,6 @@
                 },
                 "delete_feature": {
                     "title": "Delete this feature"
-                },
-                "connect_endpoints": {
-                    "title": "Connect the ends",
-                    "annotation": "Connected the endpoints of a way."
                 },
                 "move_tags": {
                     "title": "Move the tags",
@@ -1566,9 +1572,13 @@
                     "title": "Tag as disconnected",
                     "annotation": "Tagged very close features as disconnected."
                 },
-                "upgrade_tags": {
-                    "title": "Upgrade tags",
-                    "annotation": "Upgraded tags."
+                "upgrade_tag": {
+                    "title": "Upgrade this tag",
+                    "annotation": "Upgraded an old tag."
+                },
+                "upgrade_tag_combo": {
+                    "title": "Upgrade these tags",
+                    "annotation": "Upgraded an old tag combination."
                 }
             }
         },

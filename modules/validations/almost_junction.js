@@ -135,7 +135,7 @@ export function validationAlmostJunction() {
             var edgeHighway = graph.entity(extendableNodeInfo.wid);
 
             var fixes = [new validationIssueFix({
-                title: t('issues.fix.connect_almost_junction.title'),
+                title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var endNode = this.issue.entities[1];
                     var targetEdge = this.issue.info.edge;
@@ -143,17 +143,18 @@ export function validationAlmostJunction() {
                     var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
                     var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
 
+                    var annotation = t('issues.fix.connect_almost_junction.annotation');
                     // already a point nearby, just connect to that
                     if (closestNodeInfo.distance < 0.75) {
                         context.perform(
                             actionMergeNodes([closestNodeInfo.node.id, endNode.id], closestNodeInfo.node.loc),
-                            t('issues.fix.connect_almost_junction.annotation')
+                            annotation
                         );
                     // else add the end node to the edge way
                     } else {
                         context.perform(
                             actionAddMidpoint({loc: crossLoc, edge: targetEdge}, endNode),
-                            t('issues.fix.connect_almost_junction.annotation')
+                            annotation
                         );
                     }
                 }

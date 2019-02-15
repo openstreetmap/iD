@@ -69,6 +69,7 @@ export function validationTagSuggestsArea() {
             }
 
             fixes.push(new validationIssueFix({
+                icon: 'iD-operation-delete',
                 title: t('issues.fix.remove_tag.title'),
                 onClick: function() {
                     var entity = this.issue.entities[0];

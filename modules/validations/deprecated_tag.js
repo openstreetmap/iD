@@ -17,10 +17,18 @@ export function validationDeprecatedTag() {
                 var deprecatedTags = deprecatedTagsArray[deprecatedTagIndex];
                 var tagsLabel = utilTagText({ tags: deprecatedTags.old });
                 var featureLabel = utilDisplayLabel(entity, context);
+                var isCombo = Object.keys(deprecatedTags.old).length > 1;
+                var messageObj = { feature: featureLabel };
+                if (isCombo) {
+                    messageObj.tags = tagsLabel;
+                } else {
+                    messageObj.tag = tagsLabel;
+                }
+                var tagMessageID = isCombo ? 'combination' : 'single';
                 issues.push(new validationIssue({
                     type: type,
                     severity: 'warning',
-                    message: t('issues.deprecated_tag.message', { feature: featureLabel, tags: tagsLabel }),
+                    message: t('issues.deprecated_tag.' + tagMessageID + '.message', messageObj),
                     tooltip: t('issues.deprecated_tag.tip'),
                     entities: [entity],
                     hash: tagsLabel,
@@ -31,12 +39,13 @@ export function validationDeprecatedTag() {
                     fixes: [
                         new validationIssueFix({
                             icon: 'iD-icon-up',
-                            title: t('issues.fix.upgrade_tags.title'),
+                            title: t('issues.fix.' + (isCombo ? 'upgrade_tag_combo' : 'upgrade_tag') + '.title'),
                             onClick: function() {
                                 var entity = this.issue.entities[0];
                                 var tags = _clone(entity.tags);
                                 var replaceTags = this.issue.info.replaceTags;
                                 var oldTags = this.issue.info.oldTags;
+                                var fixTextID = Object.keys(oldTags).length > 1 ? 'upgrade_tag_combo' : 'upgrade_tag';
                                 var transferValue;
                                 for (var oldTagKey in oldTags) {
                                     if (oldTags[oldTagKey] === '*') {
@@ -63,7 +72,7 @@ export function validationDeprecatedTag() {
                                 }
                                 context.perform(
                                     actionChangeTags(entity.id, tags),
-                                    t('issues.fix.upgrade_tags.annotation')
+                                    t('issues.fix.' + fixTextID + '.annotation')
                                 );
                             }
                         })

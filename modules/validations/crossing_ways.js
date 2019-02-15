@@ -359,7 +359,7 @@ export function validationCrossingWays() {
         var fixes = [];
         if (connectionTags) {
             fixes.push(new validationIssueFix({
-                title: t('issues.fix.add_connection_vertex.title'),
+                title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var loc = this.issue.loc;
                     var connectionTags = this.issue.info.connectionTags;
@@ -393,7 +393,7 @@ export function validationCrossingWays() {
 
                             return graph;
                         },
-                        t('issues.fix.add_connection_vertex.annotation')
+                        t('issues.fix.connect_crossing_features.annotation')
                     );
                 }
             }));
