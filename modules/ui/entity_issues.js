@@ -13,13 +13,15 @@ export function uiEntityIssues(context) {
     var _expanded = 0;
     var _entityID;
 
-
+    // Listen for validation reload even though the entity editor is reloaded on
+    // every graph change since the graph change event may happen before the issue
+    // cache is refreshed
     context.validator().on('reload.entity_issues', function() {
 
-        update();
-
-         _selection.selectAll('.entity-issues')
+         _selection.selectAll('.disclosure-wrap-entity_issues')
              .call(render);
+
+        update();
     });
 
 

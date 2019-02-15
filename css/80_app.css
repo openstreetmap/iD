@@ -3041,7 +3041,8 @@ div.full-screen > button:hover {
     color: #ff9205;
     fill: #ff9205;
 }
-.issue.severity-warning .issue-fix-item.actionable:hover {
+.issue.severity-warning .issue-fix-item.actionable:hover,
+.issue.severity-warning .issue-fix-item.actionable button:focus {
     color: #f07504;
     fill: #f07504;
 }
@@ -3060,7 +3061,8 @@ div.full-screen > button:hover {
     color: #DD1400;
     fill: #DD1400;
 }
-.issue.severity-error .issue-fix-item.actionable:hover {
+.issue.severity-error .issue-fix-item.actionable:hover,
+.issue.severity-error .issue-fix-item.actionable button:focus {
     color: #ab0f00;
     fill: #ab0f00;
 }
