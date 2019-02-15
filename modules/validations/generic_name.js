@@ -1,7 +1,14 @@
+import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
+import { utilPreset } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
+import { actionChangeTags } from '../actions';
 import { discardNames } from '../../node_modules/name-suggestion-index/config/filters.json';
 
+
 export function validationGenericName() {
+    var type = 'generic_name';
+
 
     function isGenericName(entity) {
         var name = entity.tags.name;
@@ -30,22 +37,39 @@ export function validationGenericName() {
     }
 
 
-    return function validation(changes) {
-        var warnings = [];
-
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i];
-            var generic = isGenericName(change);
-            if (generic) {
-                warnings.push({
-                    id: 'generic_name',
-                    message: t('validations.generic_name'),
-                    tooltip: t('validations.generic_name_tooltip', { name: generic }),
-                    entity: change
-                });
-            }
+    var validation = function(entity, context) {
+        var issues = [];
+        var generic = isGenericName(entity);
+        if (generic) {
+            var preset = utilPreset(entity, context);
+            issues.push(new validationIssue({
+                type: type,
+                severity: 'warning',
+                message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
+                tooltip: t('issues.generic_name.tip'),
+                entities: [entity],
+                fixes: [
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t('issues.fix.remove_generic_name.title'),
+                        onClick: function() {
+                            var entity = this.issue.entities[0];
+                            var tags = _clone(entity.tags);
+                            delete tags.name;
+                            context.perform(
+                                actionChangeTags(entity.id, tags),
+                                t('issues.fix.remove_generic_name.annotation')
+                            );
+                        }
+                    })
+                ]
+            }));
         }
 
-        return warnings;
+        return issues;
     };
+
+    validation.type = type;
+
+    return validation;
 }

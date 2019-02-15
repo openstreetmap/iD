@@ -14,6 +14,7 @@ import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
+import { tooltip } from '../util/tooltip';
 import { utilRebind } from '../util';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
@@ -264,12 +265,15 @@ export function uiCommit(context) {
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
-        buttonEnter
+        var uploadButton = buttonEnter
             .append('button')
-            .attr('class', 'action button save-button')
-            .append('span')
+            .attr('class', 'action button save-button');
+
+        uploadButton.append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
+
+        var uploadBlockerTooltipText = getUploadBlockerMessage();
 
         // update
         buttonSection = buttonSection
@@ -282,15 +286,21 @@ export function uiCommit(context) {
             });
 
         buttonSection.selectAll('.save-button')
-            .attr('disabled', function() {
-                var n = d3_select('#preset-input-comment').node();
-                return (n && n.value.length) ? null : true;
-            })
+            .classed('disabled', uploadBlockerTooltipText !== null)
             .on('click.save', function() {
-                this.blur();    // avoid keeping focus on the button - #4641
-                dispatch.call('save', this, _changeset);
+                if (!d3_select(this).classed('disabled')) {
+                    this.blur();    // avoid keeping focus on the button - #4641
+                    dispatch.call('save', this, _changeset);
+                }
             });
 
+        // remove any existing tooltip
+        tooltip().destroyAny(buttonSection.selectAll('.save-button'));
+
+        if (uploadBlockerTooltipText) {
+            buttonSection.selectAll('.save-button')
+                .call(tooltip().title(uploadBlockerTooltipText).placement('top'));
+        }
 
         // Raw Tag Editor
         var tagSection = body.selectAll('.tag-section.raw-tag-editor')
@@ -326,6 +336,22 @@ export function uiCommit(context) {
                     .tags(_clone(_changeset.tags))
                 );
         }
+    }
+
+
+    function getUploadBlockerMessage() {
+        var errorCount = context.validator().getErrors().length;
+        if (errorCount > 0) {
+            return t('commit.outstanding_errors_message', { count: errorCount });
+
+        } else {
+            var n = d3_select('#preset-input-comment').node();
+            var hasChangesetComment = n && n.value.length > 0;
+            if (!hasChangesetComment) {
+                return t('commit.comment_needed_message');
+            }
+        }
+        return null;
     }
 
 

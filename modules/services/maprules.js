@@ -4,6 +4,9 @@ import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
 import { areaKeys } from '../core/context';
 
+import {
+    validationIssue
+} from '../core/validator';
 
 var buildRuleChecks = function() {
     return {
@@ -212,14 +215,17 @@ export default {
                 }
             },
             // when geometries match and tag matches are present, return a warning...
-            findWarnings: function (entity, graph, warnings) {
+            findIssues: function (entity, graph, issues) {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
-                    var type = Object.keys(selector).indexOf('error') > -1 ? 'error' : 'warning';
-                    warnings.push({
-                        severity: type,
-                        message: selector[type],
-                        entity: entity
-                    });
+                    var severity = Object.keys(selector).indexOf('error') > -1
+                            ? 'error'
+                            : 'warning';
+                    issues.push(new validationIssue({
+                        type: 'maprules',
+                        severity: severity,
+                        message: selector[severity],
+                        entities: [entity],
+                    }));
                 }
             }
         };

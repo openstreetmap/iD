@@ -1,36 +1,84 @@
 import _without from 'lodash-es/without';
+import _isEmpty from 'lodash-es/isEmpty';
+
+import { operationDelete } from '../operations/index';
+import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
+import { utilDisplayLabel } from '../util';
+import { validationIssue, validationIssueFix } from '../core/validator';
 
 
 export function validationMissingTag() {
+    var type = 'missing_tag';
 
-    // Slightly stricter check than Entity#isUsed (#3091)
-    function hasTags(entity, graph) {
-        return _without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
-            graph.parentRelations(entity).length > 0;
+
+    function hasDescriptiveTags(entity) {
+        var keys = _without(Object.keys(entity.tags), 'area', 'name').filter(osmIsInterestingTag);
+        if (entity.type === 'relation' && keys.length === 1) {
+            return entity.tags.type !== 'multipolygon';
+        }
+        return keys.length > 0;
     }
 
-    var validation = function(changes, graph) {
-        var types = ['point', 'line', 'area', 'relation'];
-        var warnings = [];
 
-        for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i];
-            var geometry = change.geometry(graph);
+    var validation = function(entity, context) {
+        var graph = context.graph();
 
-            if (types.indexOf(geometry) !== -1 && !hasTags(change, graph)) {
-                warnings.push({
-                    id: 'missing_tag',
-                    message: t('validations.untagged_' + geometry),
-                    tooltip: t('validations.untagged_' + geometry + '_tooltip'),
-                    entity: change
-                });
-            }
+        // ignore vertex features and relation members
+        if (entity.geometry(graph) === 'vertex' || entity.hasParentRelations(graph)) {
+            return [];
         }
 
-        return warnings;
+        var messageObj = {};
+        var missingTagType;
+
+        if (_isEmpty(entity.tags)) {
+            missingTagType = 'any';
+        } else if (!hasDescriptiveTags(entity)) {
+            missingTagType = 'descriptive';
+        } else if (entity.type === 'relation' && !entity.tags.type) {
+            missingTagType = 'specific';
+            messageObj.tag = 'type';
+        }
+
+        if (!missingTagType) {
+            return [];
+        }
+
+        messageObj.feature = utilDisplayLabel(entity, context);
+
+        var issues = [];
+
+        issues.push(new validationIssue({
+            type: type,
+            // error if created or modified, else warning
+            severity: !entity.version || entity.v  ? 'error' : 'warning',
+            message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
+            tooltip: t('issues.missing_tag.tip'),
+            entities: [entity],
+            fixes: [
+                new validationIssueFix({
+                    icon: 'iD-icon-search',
+                    title: t('issues.fix.select_preset.title'),
+                    onClick: function() {
+                        context.ui().sidebar.showPresetList();
+                    }
+                }),
+                new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.delete_feature.title'),
+                    onClick: function() {
+                        var id = this.issue.entities[0].id;
+                        operationDelete([id], context)();
+                    }
+                })
+            ]
+        }));
+
+        return issues;
     };
 
+    validation.type = type;
 
     return validation;
 }

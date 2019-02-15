@@ -13,6 +13,7 @@ import { select as d3_select } from 'd3-selection';
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
+import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -95,10 +96,10 @@ export function coreContext() {
 
 
     /* Straight accessors. Avoid using these if you can. */
-    var connection, history;
+    var connection, history, validator;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
-
+    context.validator = function() { return validator; };
 
     /* Connection */
     context.preauth = function(options) {
@@ -451,9 +452,29 @@ export function coreContext() {
     }
 
     history = coreHistory(context);
+
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
+
+    validator = coreValidator(context);
+
+    // run validation upon restoring from page reload
+    history.on('restore', function() {
+        validator.validate();
+    });
+    // re-run validation upon a significant graph change
+    history.on('annotatedChange', function(difference) {
+        if (difference) {
+            validator.validate();
+        }
+    });
+    // re-run validation upon merging fetched data
+    history.on('merge', function(entities) {
+        if (entities && entities.length > 0) {
+            validator.validate();
+        }
+    });
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).

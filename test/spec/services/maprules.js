@@ -465,7 +465,7 @@ describe('maprules', function() {
                 expect(rule.matches(entity)).to.be.false;
             });
         });
-        describe('#findWarnings', function() {
+        describe('#findIssues', function() {
             var selectors, entities, _graph;
 
             before(function() {
@@ -549,24 +549,23 @@ describe('maprules', function() {
                 selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
                 validationRules = iD.serviceMapRules.validationRules();
             });
-            it('finds warnings', function() {
+            it('finds issues', function() {
                 validationRules.forEach(function(rule, i) {
-                    var warnings = [];
+                    var issues = [];
                     var entity = entities[i];
                     var selector = selectors[i];
 
-                    rule.findWarnings(entity, _graph, warnings);
+                    rule.findIssues(entity, _graph, issues);
 
-                    var warning = warnings[0];
+                    var issue = issues[0];
                     var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
 
-                    expect(warnings.length).to.eql(1);
-                    expect(warning.entity).to.eql(entity);
-                    expect(warning.message).to.eql(selector[type]);
-                    expect(type).to.eql(warning.severity);
+                    expect(issues.length).to.eql(1);
+                    expect(issue.entities).to.eql([entity]);
+                    expect(issue.message).to.eql(selector[type]);
+                    expect(type).to.eql(issue.severity);
                 });
             });
         });
     });
 });
-

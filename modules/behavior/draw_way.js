@@ -1,27 +1,22 @@
-import { t } from '../util/locale';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import {
-    actionAddMidpoint,
-    actionMoveNode,
-    actionNoop
-} from '../actions';
-
+import { t } from '../util/locale';
+import { actionAddMidpoint, actionMoveNode, actionNoop } from '../actions';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 import { utilKeybinding } from '../util';
 
-export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
-    var origWay = context.entity(wayId);
+export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
+    var origWay = context.entity(wayID);
+
     var annotation = t((origWay.isDegenerate() ?
         'operations.start.annotation.' :
-        'operations.continue.annotation.') + context.geometry(wayId)
+        'operations.continue.annotation.') + context.geometry(wayID)
     );
 
     var behavior = behaviorDraw(context);
@@ -30,6 +25,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     var _tempEdits = 0;
 
     var end = osmNode({ loc: context.map().mouseCoordinates() });
+
+    if (context.graph() === startGraph) {
+        context.history().checkpoint('drawWay-initial');
+    }
 
     // Push an annotated state for undo to return back to.
     // We must make sure to remove this edit later.
@@ -67,9 +66,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         }
     }
 
+
     function allowsVertex(d) {
         return context.presets().allowsVertex(d, context.graph());
     }
+
 
     // related code
     // - `mode/drag_node.js`     `doMode()`
@@ -122,7 +123,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+
+            var nodes = graph.childNodes(parent);
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
@@ -148,14 +150,16 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     function undone() {
         // Undo popped the history back to the initial annotated no-op edit.
-        // Remove initial no-op edit and whatever edit happened immediately before it.
-        context.pop(2);
-        _tempEdits = 0;
+        _tempEdits = 0;     // We will deal with the temp edits here
+        context.pop(1);     // Remove initial no-op edit
 
-        if (context.hasEntity(wayId)) {
-            context.enter(mode);
+        if (context.graph() === startGraph) {    // We've undone back to the beginning
+            context.history().reset('drawWay-initial');
+            context.enter(modeSelect(context, [wayID]));
         } else {
-            context.enter(modeBrowse(context));
+            // Remove whatever segment was drawn previously and continue drawing
+            context.pop(1);
+            context.enter(mode);
         }
     }
 
@@ -198,10 +202,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
         if (_tempEdits) {
-            context.pop(_tempEdits);
-            while (context.graph() !== startGraph) {
-                context.pop();
-            }
+            context.history().reset('drawWay-initial');
         }
 
         context.map()
@@ -313,7 +314,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        var way = context.hasEntity(wayId);
+        var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
             return;
@@ -323,7 +324,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             context.map().dblclickEnable(true);
         }, 1000);
         var isNewFeature = !mode.isContinuing;
-        context.enter(modeSelect(context, [wayId]).newFeature(isNewFeature));
+        context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
     };
 
 

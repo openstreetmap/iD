@@ -1,6 +1,6 @@
 import _clone from 'lodash-es/clone';
 import _keys from 'lodash-es/keys';
-import _toPairs from 'lodash-es/toPairs';
+import _every from 'lodash-es/every';
 import _union from 'lodash-es/union';
 import _without from 'lodash-es/without';
 
@@ -165,17 +165,19 @@ osmEntity.prototype = {
     },
 
     deprecatedTags: function() {
-        var tags = _toPairs(this.tags);
-        var deprecated = {};
+        var tags = this.tags;
 
+        // if there are no tags, none can be deprecated
+        if (Object.keys(tags).length === 0) return [];
+
+        var deprecated = [];
         dataDeprecated.forEach(function(d) {
-            var match = _toPairs(d.old)[0];
-            tags.forEach(function(t) {
-                if (t[0] === match[0] &&
-                    (t[1] === match[1] || match[1] === '*')) {
-                    deprecated[t[0]] = t[1];
-                }
+            var matchesDeprecatedTags = _every(Object.keys(d.old), function(key) {
+                return tags[key] && (d.old[key] === tags[key] || d.old[key] === '*');
             });
+            if (matchesDeprecatedTags) {
+                deprecated.push(d);
+            }
         });
 
         return deprecated;

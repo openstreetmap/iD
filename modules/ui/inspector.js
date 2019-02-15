@@ -1,5 +1,5 @@
 import { interpolate as d3_interpolate } from 'd3-interpolate';
-import { selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
@@ -9,6 +9,9 @@ import { uiViewOnOSM } from './view_on_osm';
 export function uiInspector(context) {
     var presetList = uiPresetList(context);
     var entityEditor = uiEntityEditor(context);
+    var wrap = d3_select(null),
+        presetPane = d3_select(null),
+        editorPane = d3_select(null);
     var _state = 'select';
     var _entityID;
     var _newFeature = false;
@@ -18,14 +21,14 @@ export function uiInspector(context) {
         presetList
             .entityID(_entityID)
             .autofocus(_newFeature)
-            .on('choose', setPreset);
+            .on('choose', inspector.setPreset);
 
         entityEditor
             .state(_state)
             .entityID(_entityID)
-            .on('choose', showList);
+            .on('choose', inspector.showList);
 
-        var wrap = selection.selectAll('.panewrap')
+        wrap = selection.selectAll('.panewrap')
             .data([0]);
 
         var enter = wrap.enter()
@@ -41,8 +44,8 @@ export function uiInspector(context) {
             .attr('class', 'entity-editor-pane pane');
 
         wrap = wrap.merge(enter);
-        var presetPane = wrap.selectAll('.preset-list-pane');
-        var editorPane = wrap.selectAll('.entity-editor-pane');
+        presetPane = wrap.selectAll('.preset-list-pane');
+        editorPane = wrap.selectAll('.entity-editor-pane');
 
         var entity = context.entity(_entityID);
 
@@ -71,26 +74,32 @@ export function uiInspector(context) {
             .call(uiViewOnOSM(context)
                 .what(context.hasEntity(_entityID))
             );
+    }
 
+    inspector.showList = function(preset) {
+        wrap.transition()
+            .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
 
-        function showList(preset) {
-            wrap.transition()
-                .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
+        presetPane
+            .call(presetList.preset(preset).autofocus(true));
+    };
 
+    inspector.setPreset = function(preset) {
+
+        // upon setting multipolygon, go to the area preset list instead of the editor
+        if (preset.id === 'type/multipolygon') {
             presetPane
                 .call(presetList.preset(preset).autofocus(true));
-        }
 
-
-        function setPreset(preset) {
+        } else {
             wrap.transition()
                 .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
             editorPane
                 .call(entityEditor.preset(preset));
         }
-    }
 
+    };
 
     inspector.state = function(val) {
         if (!arguments.length) return _state;

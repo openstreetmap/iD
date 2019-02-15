@@ -3,7 +3,7 @@ import _values from 'lodash-es/values';
 
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmEntity, osmIsSimpleMultipolygonOuterMember } from '../osm';
+import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
 import { svgPath, svgSegmentWay, svgTagClasses } from './index';
 
 
@@ -200,7 +200,7 @@ export function svgAreas(projection, context) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
 
-            multipolygon = osmIsSimpleMultipolygonOuterMember(entity, graph);
+            multipolygon = osmIsOldMultipolygonOuterMember(entity, graph);
             if (multipolygon) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),

@@ -352,6 +352,8 @@ button.secondary-action:hover {
     background: #cccccc;
 }
 
+button.action.disabled,
+button.action.disabled:hover,
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;
@@ -411,6 +413,19 @@ button[disabled].action:hover {
 
 .icon-annotation {
     color: #333;
+}
+
+.icon-badge {
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 7px;
+    top: 9px;
+}
+
+.icon-badge.hide {
+    display: none;
 }
 
 
@@ -1234,18 +1249,23 @@ img.tag-reference-wiki-image {
 
 /* Entity/Preset Editor
 ------------------------------------------------------- */
+.entity-issues,
 .preset-editor {
     overflow: hidden;
     padding: 10px 0px 5px 0px;
 }
+.entity-issues a.hide-toggle,
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
 }
+.entity-issues .disclosure-wrap-entity_issues,
 .preset-editor .form-fields-container {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
+    background: #ececec;
 }
+.entity-issues .disclosure-wrap-entity_issues:empty,
 .preset-editor .form-fields-container:empty {
     display: none;
 }
@@ -2418,12 +2438,21 @@ input.key-trap {
 .inspector-hover button,
 .inspector-hover input,
 .inspector-hover textarea,
-.inspector-hover label {
+.inspector-hover label,
+.inspector-hover .entity-issues .issue button {
     background: #ececec;
 }
 .inspector-hover .preset-list-button,
 .inspector-hover .tag-row input {
     background: #f6f6f6;
+}
+
+.inspector-hover .entity-issues .issue,
+.inspector-hover .entity-issues .issue li {
+    border: 1px solid #ccc;
+}
+.inspector-hover .entity-issues .issue .icon {
+    color: #666;
 }
 
 .inspector-hover a,
@@ -2452,7 +2481,8 @@ input.key-trap {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row {
+.inspector-hover .inspector-inner .add-row,
+.inspector-hover .entity-issues .issue ul.issue-fix-list {
     display: none;
 }
 
@@ -2760,6 +2790,7 @@ input.key-trap {
 }
 
 .map-control > button {
+    position: relative;
     width: 40px;
     background: rgba(0,0,0,.5);
     border-radius: 0;
@@ -2861,11 +2892,11 @@ div.full-screen > button:hover {
     border-radius: 4px;
 }
 
-.layer-list li {
-    position: relative;
+.layer-list > li {
     height: 30px;
     background-color: #fff;
     color: #7092ff;
+    position: relative;
 }
 
 .layer-list:empty {
@@ -2959,6 +2990,157 @@ div.full-screen > button:hover {
 .map-data-control .vectortile-container .vectortile-footer {
     padding-bottom: 10px;
 }
+
+
+/* Issues
+------------------------------------------------------- */
+.issue {
+    overflow: hidden;
+}
+.issue button {
+    padding: 5px 10px 5px 5px;
+    height: auto;
+    width: 100%;
+    font-weight: inherit;
+    border-radius: 0;
+    text-align: inherit;
+    display: flex;
+    color: inherit;
+}
+[dir='rtl'] .issue button {
+    padding: 5px 5px 5px 10px;
+}
+.warnings-list,
+.issue.severity-warning,
+ li.issue.severity-warning {
+    border-color: #FFDF5C;
+}
+.icon-badge.warning {
+    color: #FFDF5C;
+}
+.errors-list,
+.issue.severity-error,
+ li.issue.severity-error {
+    border-color: #f5b0ab;
+}
+.icon-badge.error {
+    color: #ff0c05;
+}
+
+.issue.severity-warning,
+.issue.severity-warning button,
+.mode-save .warning-section {
+    background: #ffb;
+}
+.issue.severity-warning:not(.expanded) button:hover,
+.issue.severity-warning:not(.expanded) button:focus {
+    background: #FFFF99;
+}
+.issue.severity-warning .issue-icon,
+.issue.severity-warning .issue-fix-item.actionable {
+    color: #ff9205;
+    fill: #ff9205;
+}
+.issue.severity-warning .issue-fix-item.actionable:hover,
+.issue.severity-warning .issue-fix-item.actionable button:focus {
+    color: #f07504;
+    fill: #f07504;
+}
+
+.issue.severity-error,
+.issue.severity-error button,
+.mode-save .error-section {
+    background: #FFD5D4;
+}
+.issue.severity-error:not(.expanded) button:hover,
+.issue.severity-error:not(.expanded) button:focus {
+    background: #ffc9c7;
+}
+.issue.severity-error .issue-icon,
+.issue.severity-error .issue-fix-item.actionable {
+    color: #DD1400;
+    fill: #DD1400;
+}
+.issue.severity-error .issue-fix-item.actionable:hover,
+.issue.severity-error .issue-fix-item.actionable button:focus {
+    color: #ab0f00;
+    fill: #ab0f00;
+}
+
+/* Issues Pane */
+
+.issues-list label {
+    padding: 5px;
+}
+.issues-list label > span {
+    display: inline;
+    white-space: normal;
+}
+.issues-list li {
+    height: auto;
+    color: inherit;
+    position: static;
+}
+
+.issues-none {
+    border-radius: 4px;
+    border: 1px solid #72D979;
+    background: #C6FFCA;
+    padding: 5px !important;
+    display: flex;
+    margin-top: 5px;
+}
+.issues-none .icon {
+    color: #05AC10;
+}
+
+/* Entity Issues List */
+.entity-issues .issue {
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+}
+.entity-issues .issue:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+.issue.expanded button.message {
+    cursor: auto;
+    padding-bottom: 0px;
+}
+ul.issue-fix-list button {
+    padding: 2px 10px 2px 26px;
+}
+.issue-fix-item:first-of-type button {
+    padding-top:4px;
+}
+.issue-fix-item:last-of-type button {
+    padding-bottom:7px;
+}
+.issue-fix-item:not(.actionable) button {
+    cursor: auto;
+
+}
+.issue-fix-item:not(.actionable) .fix-icon {
+    color: #555;
+    fill: #555;
+}
+
+.issue:not(.expanded) ul.issue-fix-list {
+    display: none;
+}
+/* don't animate right now
+.issue ul.issue-fix-list {
+    max-height: 0;
+    transition: max-height 200ms linear;
+    -moz-transition: max-height 200ms linear;
+    -webkit-transition: max-height 200ms linear;
+}
+.issue.expanded ul.issue-fix-list {
+    max-height: 180px;
+    transition: max-height 200ms linear;
+    -moz-transition: max-height 200ms linear;
+    -webkit-transition: max-height 200ms linear;
+}*/
 
 
 /* Background - Display Options Sliders
@@ -4297,14 +4479,6 @@ svg.mouseclick use.right {
     margin-bottom: 10px;
 }
 
-.mode-save .warning-section {
-    background: #ffb;
-}
-
-.mode-save .error-section {
-    background: #ffa5a5;
-}
-
 .mode-save .warning-section .changeset-list button {
     border-left: 1px solid #ccc;
 }
@@ -4432,6 +4606,7 @@ svg.mouseclick use.right {
     color: #333;
     font-size: 12px;
     white-space: initial;
+    pointer-events: none;
 }
 .tooltip.in {
     opacity: 0.9;

@@ -9,7 +9,10 @@ import {
 } from 'd3-polygon';
 
 import { t } from '../util/locale';
-import { actionRotate } from '../actions';
+import {
+    actionRotate,
+    actionNoop
+} from '../actions';
 import { behaviorEdit } from '../behavior';
 import { geoVecInterp } from '../geo';
 import { modeBrowse, modeSelect } from './index';
@@ -88,7 +91,7 @@ export function modeRotate(context, entityIDs) {
         if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
         var delta = currAngle - _prevAngle;
 
-        fn(actionRotate(entityIDs, _pivot, delta, projection), annotation);
+        fn(actionRotate(entityIDs, _pivot, delta, projection));
 
         _prevTransform = currTransform;
         _prevAngle = currAngle;
@@ -98,6 +101,7 @@ export function modeRotate(context, entityIDs) {
 
     function finish() {
         d3_event.stopPropagation();
+        context.replace(actionNoop(), annotation);
         context.enter(modeSelect(context, entityIDs));
     }
 

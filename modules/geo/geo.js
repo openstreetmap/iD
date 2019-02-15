@@ -66,3 +66,23 @@ export function geoZoomToScale(z, tileSize) {
     return tileSize * Math.pow(2, z) / TAU;
 }
 
+
+// returns info about the node from `nodes` closest to the given `point`
+export function geoSphericalClosestNode(nodes, point) {
+    var minDistance = Infinity, distance;
+    var indexOfMin;
+
+    for (var i in nodes) {
+        distance = geoSphericalDistance(nodes[i].loc, point);
+        if (distance < minDistance) {
+            minDistance = distance;
+            indexOfMin = i;
+        }
+    }
+
+    if (indexOfMin !== undefined) {
+        return { index: indexOfMin, distance: minDistance, node: nodes[indexOfMin] };
+    } else {
+        return null;
+    }
+}

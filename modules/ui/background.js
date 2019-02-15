@@ -17,6 +17,7 @@ import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
+import { uiIssues } from './issues';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
@@ -80,7 +81,7 @@ export function uiBackground(context) {
             return context.background().showsLayer(d);
         }
 
-        selection.selectAll('.layer')
+        selection.selectAll('li')
             .classed('active', active)
             .classed('switch', function(d) { return d === _previousBackground; })
             .call(setTooltips)
@@ -135,7 +136,7 @@ export function uiBackground(context) {
             .sources(context.map().extent())
             .filter(filter);
 
-        var layerLinks = layerList.selectAll('li.layer')
+        var layerLinks = layerList.selectAll('li')
             .data(sources, function(d) { return d.name(); });
 
         layerLinks.exit()
@@ -143,7 +144,6 @@ export function uiBackground(context) {
 
         var enter = layerLinks.enter()
             .append('li')
-            .attr('class', 'layer')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
@@ -181,9 +181,9 @@ export function uiBackground(context) {
             .text(function(d) { return d.name(); });
 
 
-        layerList.selectAll('li.layer')
+        layerList.selectAll('li')
             .sort(sortSources)
-            .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
 
         layerList
             .call(updateLayerSelections);
@@ -217,7 +217,7 @@ export function uiBackground(context) {
             .append('ul')
             .attr('class', 'layer-list minimap-toggle-list')
             .append('li')
-            .attr('class', 'layer minimap-toggle-item');
+            .attr('class', 'minimap-toggle-item');
 
         var minimapLabelEnter = minimapEnter
             .append('label')
@@ -329,8 +329,9 @@ export function uiBackground(context) {
                 _shown = show;
 
                 if (show) {
-                    uiMapData.hidePane();
                     uiHelp.hidePane();
+                    uiIssues.hidePane();
+                    uiMapData.hidePane();
                     update();
 
                     pane

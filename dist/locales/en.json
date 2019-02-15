@@ -414,6 +414,8 @@
             "modified": "Modified",
             "deleted": "Deleted",
             "created": "Created",
+            "outstanding_errors_message": "Please resolve all errors first. {count} remaining.",
+            "comment_needed_message": "Please add a changeset comment first.",
             "about_changeset_comments": "About changeset comments",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden.",
@@ -780,25 +782,6 @@
             "description": "Description",
             "on_wiki": "{tag} on wiki.osm.org",
             "used_with": "used with {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Disconnected highway",
-            "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
-            "generic_name": "Possible generic name",
-            "generic_name_tooltip": "This feature seems to have a generic name \"{name}\". Please only use the name field to record the official name of a feature.",
-            "old_multipolygon": "Multipolygon tags on outer way",
-            "old_multipolygon_tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way.",
-            "untagged_point": "Untagged point",
-            "untagged_point_tooltip": "Select a feature type that describes what this point is.",
-            "untagged_line": "Untagged line",
-            "untagged_line_tooltip": "Select a feature type that describes what this line is.",
-            "untagged_area": "Untagged area",
-            "untagged_area_tooltip": "Select a feature type that describes what this area is.",
-            "untagged_relation": "Untagged relation",
-            "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
-            "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
-            "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
             "in": "Zoom in",
@@ -1428,6 +1411,174 @@
                         "indirect_example": "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection.",
                         "indirect_noedit": "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Issues",
+            "key": "I",
+            "list_title": "Issues ({count})",
+            "errors": {
+                "list_title": "Errors ({count})"
+            },
+            "warnings": {
+                "list_title": "Warnings ({count})"
+            },
+            "no_issues": {
+                "message": "Everything looks fine",
+                "info": "Any issues will show up here as you edit"
+            },
+            "almost_junction": {
+                "message": "{feature} is very close but not connected to {feature2}",
+                "highway-highway": {
+                    "tip": "Intersecting highways should share a junction vertex."
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} crosses {feature2}",
+                "building-building": {
+                    "tip": "Buildings should not intersect except on different layers."
+                },
+                "building-highway": {
+                    "tip": "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
+                },
+                "building-railway": {
+                    "tip": "Railways crossing buildings should use bridges or tunnels."
+                },
+                "building-waterway": {
+                    "tip": "Waterways crossing buildings should use tunnels or different layers."
+                },
+                "highway-highway": {
+                    "tip": "Crossing highways should use bridges, tunnels, or intersections."
+                },
+                "highway-railway": {
+                    "tip": "Highways crossing railways should use bridges, tunnels, or level crossings."
+                },
+                "highway-waterway": {
+                    "tip": "Highways crossing waterways should use bridges, tunnels, or fords."
+                },
+                "railway-railway": {
+                    "tip": "Crossing railways should be connected or use bridges or tunnels."
+                },
+                "railway-waterway": {
+                    "tip": "Railways crossing waterways should use bridges or tunnels."
+                },
+                "waterway-waterway": {
+                    "tip": "Crossing waterways should be connected or use tunnels."
+                },
+                "tunnel-tunnel": {
+                    "tip": "Crossing tunnels should use different layers."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Crossing tunnels should be connected or use different layers."
+                },
+                "bridge-bridge": {
+                    "tip": "Crossing bridges should use different layers."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "Crossing bridges should be connected or use different layers."
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} has the outdated tag \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} has an outdated tag combination: {tags}"
+                },
+                "tip": "Some tags become deprecated over time and should be replaced."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} is disconnected from other roads and paths",
+                    "tip": "Highways should connect to other highways or building entrances."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} has the generic name \"{name}\"",
+                "tip": "Names should be the actual, on-the-ground names of features."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas"
+                },
+                "points-lines-areas-relations": {
+                    "message": "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations"
+                },
+                "tip": "Only redundant or nonexistent features should be deleted."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} has no tags"
+                },
+                "descriptive": {
+                    "message": "{feature} has no descriptive tags"
+                },
+                "specific": {
+                    "message": "{feature} has no \"{tag}\" tag"
+                },
+                "tip": "Features must have tags that define what they are."
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} has misplaced tags",
+                "tip": "Multipolygons should be tagged on their relation, not their outer way."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} should be a closed area based on the tag \"{tag}\"",
+                "tip": "Areas must have connected endpoints."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "Connected very close features."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Connected crossing features."
+                },
+                "connect_endpoints": {
+                    "title": "Connect the ends",
+                    "annotation": "Connected the endpoints of a way."
+                },
+                "connect_features": {
+                    "title": "Connect the features"
+                },
+                "continue_from_start": {
+                    "title": "Continue drawing from start"
+                },
+                "continue_from_end": {
+                    "title": "Continue drawing from end"
+                },
+                "delete_feature": {
+                    "title": "Delete this feature"
+                },
+                "move_tags": {
+                    "title": "Move the tags",
+                    "annotation": "Moved tags."
+                },
+                "remove_generic_name": {
+                    "title": "Remove the name",
+                    "annotation": "Removed a generic name."
+                },
+                "remove_tag": {
+                    "title": "Remove the tag",
+                    "annotation": "Removed tag."
+                },
+                "reposition_features": {
+                    "title": "Reposition the features"
+                },
+                "select_preset": {
+                    "title": "Select a feature type"
+                },
+                "tag_as_disconnected": {
+                    "title": "Tag as disconnected",
+                    "annotation": "Tagged very close features as disconnected."
+                },
+                "upgrade_tag": {
+                    "title": "Upgrade this tag",
+                    "annotation": "Upgraded an old tag."
+                },
+                "upgrade_tag_combo": {
+                    "title": "Upgrade these tags",
+                    "annotation": "Upgraded an old tag combination."
                 }
             }
         },

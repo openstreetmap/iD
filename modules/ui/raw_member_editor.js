@@ -10,12 +10,7 @@ import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
 import { services } from '../services';
 import { uiCombobox, uiDisclosure } from './index';
-import {
-    utilDisplayName,
-    utilDisplayType,
-    utilNoAuto,
-    utilHighlightEntity
-} from '../util';
+import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../util';
 
 
 export function uiRawMemberEditor(context) {
@@ -37,7 +32,7 @@ export function uiRawMemberEditor(context) {
         context.map().zoomTo(entity);
 
         // highlight the feature in case it wasn't previously on-screen
-        utilHighlightEntity(d.id, true, context);
+        utilHighlightEntities([d.id], true, context);
     }
 
 
@@ -45,7 +40,7 @@ export function uiRawMemberEditor(context) {
         d3_event.preventDefault();
 
         // remove the hover-highlight styling
-        utilHighlightEntity(d.id, false, context);
+        utilHighlightEntities([d.id], false, context);
 
         var entity = context.entity(d.id);
         var mapExtent = context.map().extent();
@@ -82,7 +77,7 @@ export function uiRawMemberEditor(context) {
             context.enter(modeBrowse(context));
         }
 
-        utilHighlightEntity(d.id, false, context);
+        utilHighlightEntities([d.id], false, context);
     }
 
 
@@ -152,10 +147,10 @@ export function uiRawMemberEditor(context) {
                         // highlight the member feature in the map while hovering on the list item
                         item
                             .on('mouseover', function() {
-                                utilHighlightEntity(d.id, true, context);
+                                utilHighlightEntities([d.id], true, context);
                             })
                             .on('mouseout', function() {
-                                utilHighlightEntity(d.id, false, context);
+                                utilHighlightEntities([d.id], false, context);
                             });
 
                         var labelLink = label
