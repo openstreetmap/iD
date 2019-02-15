@@ -420,18 +420,12 @@ button[disabled].action:hover {
     position: absolute;
     width: 10px;
     height: 10px;
-    right: 8px;
-    top: 8px;
+    right: 7px;
+    top: 9px;
 }
 
 .icon-badge.hide {
     display: none;
-}
-.icon-badge.error {
-    color: #f00;
-}
-.icon-badge.warning {
-    color: #ff0;
 }
 
 
@@ -3021,10 +3015,16 @@ div.full-screen > button:hover {
  li.issue.severity-warning {
     border-color: #FFDF5C;
 }
+.icon-badge.warning {
+    color: #FFDF5C;
+}
 .errors-list,
 .issue.severity-error,
  li.issue.severity-error {
     border-color: #f5b0ab;
+}
+.icon-badge.error {
+    color: #ff0c05;
 }
 
 .issue.severity-warning,

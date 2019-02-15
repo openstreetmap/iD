@@ -47,18 +47,18 @@ export function uiIssues(context) {
     }*/
 
     function addIconBadge(selection) {
+        var d = 10;
         selection.selectAll('svg.icon-badge')
             .data([0])
             .enter()
             .append('svg')
-            .attr('viewbox', '0 0 10 10')
+            .attr('viewbox', '0 0 ' + d + ' ' + d)
             .attr('class', 'icon-badge')
             .append('circle')
-            .attr('cx', '5')
-            .attr('cy', '5')
-            .attr('r', '5')
-            .attr('fill', 'currentColor')
-            .attr('stroke', '#333');
+            .attr('cx', d / 2)
+            .attr('cy', d / 2)
+            .attr('r', (d / 2) - 1)
+            .attr('fill', 'currentColor');
     }
 
     function renderErrorsList(selection) {
