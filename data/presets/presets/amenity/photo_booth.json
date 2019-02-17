@@ -1,0 +1,26 @@
+{
+	"icon": "camera",
+	"fields": [
+		"payment_types",
+		"operator",
+		"wheelchair"
+	],
+	"geometry": [
+		"point",
+		"area"
+	],
+	"terms": [
+		"photobooth",
+		"photo",
+		"booth",
+		"kiosk",
+		"camera"
+	],
+	"tags": {
+		"amenity": "photo_booth"
+	},
+	"name": "Photo Booth"
+}
+
+
+
