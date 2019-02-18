@@ -15,7 +15,14 @@ export function validationDeprecatedTag() {
         if (deprecatedTagsArray.length > 0) {
             for (var deprecatedTagIndex in deprecatedTagsArray) {
                 var deprecatedTags = deprecatedTagsArray[deprecatedTagIndex];
-                var tagsLabel = utilTagText({ tags: deprecatedTags.old });
+                var labelTags = _clone(deprecatedTags.old);
+                for (var key in labelTags) {
+                    if (labelTags[key] === '*') {
+                        // show the user the actual tag, like color=red instead of color=*
+                        labelTags[key] = entity.tags[key];
+                    }
+                }
+                var tagsLabel = utilTagText({ tags: labelTags });
                 var featureLabel = utilDisplayLabel(entity, context);
                 var isCombo = Object.keys(deprecatedTags.old).length > 1;
                 var messageObj = { feature: featureLabel };
