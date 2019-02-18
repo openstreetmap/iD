@@ -17,7 +17,7 @@ export function modeDrawLine(context, wayID, startGraph, affix, continuing) {
         var index = (affix === 'prefix') ? 0 : undefined;
         var headID = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph, continuing)
+        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
