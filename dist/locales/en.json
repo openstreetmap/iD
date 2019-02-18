@@ -3807,7 +3807,7 @@
             "presets": {
                 "aerialway": {
                     "name": "Aerialway",
-                    "terms": "ski lift,funifor,funitel"
+                    "terms": ""
                 },
                 "aeroway": {
                     "name": "Aeroway",
@@ -3833,6 +3833,22 @@
                     "name": "Highway",
                     "terms": ""
                 },
+                "landuse": {
+                    "name": "Land Use",
+                    "terms": ""
+                },
+                "leisure": {
+                    "name": "Leisure",
+                    "terms": ""
+                },
+                "man_made": {
+                    "name": "Man Made",
+                    "terms": ""
+                },
+                "natural": {
+                    "name": "Natural",
+                    "terms": ""
+                },
                 "place": {
                     "name": "Place",
                     "terms": ""
@@ -3851,6 +3867,10 @@
                 },
                 "seamark": {
                     "name": "Seamark",
+                    "terms": ""
+                },
+                "tourism": {
+                    "name": "Tourism",
                     "terms": ""
                 },
                 "waterway": {
@@ -5717,10 +5737,6 @@
                     "name": "Junction",
                     "terms": ""
                 },
-                "landuse": {
-                    "name": "Land Use",
-                    "terms": ""
-                },
                 "landuse/basin": {
                     "name": "Basin",
                     "terms": ""
@@ -5904,10 +5920,6 @@
                 "landuse/vineyard": {
                     "name": "Vineyard",
                     "terms": "grape,wine"
-                },
-                "leisure": {
-                    "name": "Leisure",
-                    "terms": ""
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Center",
@@ -6201,10 +6213,6 @@
                     "name": "Line",
                     "terms": ""
                 },
-                "man_made": {
-                    "name": "Man Made",
-                    "terms": ""
-                },
                 "man_made/adit": {
                     "name": "Adit",
                     "terms": "entrance,underground,mine,cave"
@@ -6384,10 +6392,6 @@
                 "manhole/telecom": {
                     "name": "Telecom Manhole",
                     "terms": "cover,phone,hole,telecom,telephone,bt"
-                },
-                "natural": {
-                    "name": "Natural",
-                    "terms": ""
                 },
                 "natural/bare_rock": {
                     "name": "Bare Rock",
@@ -7707,10 +7711,6 @@
                 },
                 "shop/wine": {
                     "name": "Wine Shop",
-                    "terms": ""
-                },
-                "tourism": {
-                    "name": "Tourism",
                     "terms": ""
                 },
                 "tourism/alpine_hut": {

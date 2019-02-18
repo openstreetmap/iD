@@ -1,8 +1,8 @@
 {
-    "icon": "maki-attraction",
+    "icon": "maki-pitch",
     "fields": [
         "name",
-        "tourism"
+        "leisure"
     ],
     "geometry": [
         "point",
@@ -10,7 +10,8 @@
         "area"
     ],
     "tags": {
-        "tourism": "*"
+        "leisure": "*"
     },
-    "name": "Tourism"
+    "searchable": false,
+    "name": "Leisure"
 }

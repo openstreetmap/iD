@@ -10,11 +10,6 @@
     "tags": {
         "aerialway": "*"
     },
-    "terms": [
-        "ski lift",
-        "funifor",
-        "funitel"
-    ],
     "searchable": false,
     "name": "Aerialway"
 }

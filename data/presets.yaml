@@ -4262,7 +4262,6 @@ en:
       landuse:
         # landuse=*
         name: Land Use
-        terms: '<translate with synonyms or related terms for ''Land Use'', separated by commas>'
       landuse/allotments:
         # landuse=allotments
         name: Community Garden
@@ -4473,7 +4472,6 @@ en:
       leisure:
         # leisure=*
         name: Leisure
-        terms: '<translate with synonyms or related terms for ''Leisure'', separated by commas>'
       leisure/adult_gaming_centre:
         # leisure=adult_gaming_centre
         name: Adult Gaming Center
@@ -4821,7 +4819,6 @@ en:
       man_made:
         # man_made=*
         name: Man Made
-        terms: '<translate with synonyms or related terms for ''Man Made'', separated by commas>'
       man_made/adit:
         # man_made=adit
         name: Adit
@@ -5036,7 +5033,6 @@ en:
       natural:
         # natural=*
         name: Natural
-        terms: '<translate with synonyms or related terms for ''Natural'', separated by commas>'
       natural/bare_rock:
         # natural=bare_rock
         name: Bare Rock
@@ -6565,7 +6561,6 @@ en:
       tourism:
         # tourism=*
         name: Tourism
-        terms: '<translate with synonyms or related terms for ''Tourism'', separated by commas>'
       tourism/alpine_hut:
         # tourism=alpine_hut
         name: Alpine Hut
