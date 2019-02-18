@@ -2776,6 +2776,14 @@
                 "internet_access/ssid": {
                     "label": "SSID (Network Name)"
                 },
+                "junction_line": {
+                    "label": "Junction",
+                    "options": {
+                        "roundabout": "Roundabout",
+                        "circular": "Traffic Circle",
+                        "jughandle": "Jughandle"
+                    }
+                },
                 "junction/ref_oneway": {
                     "label": "Junction Number"
                 },

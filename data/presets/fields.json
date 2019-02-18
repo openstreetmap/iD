@@ -164,6 +164,7 @@
     "internet_access": {"key": "internet_access", "type": "combo", "label": "Internet Access", "strings": {"options": {"yes": "Yes", "no": "No", "wlan": "Wifi", "wired": "Wired", "terminal": "Terminal"}}},
     "internet_access/fee": {"key": "internet_access:fee", "type": "check", "label": "Internet Access Fee", "prerequisiteTag": {"key": "internet_access", "valueNot": "no"}},
     "internet_access/ssid": {"key": "internet_access:ssid", "type": "text", "label": "SSID (Network Name)", "prerequisiteTag": {"key": "internet_access", "valueNot": "no"}},
+    "junction_line": {"key": "junction", "type": "combo", "label": "Junction", "strings": {"options": {"roundabout": "Roundabout", "circular": "Traffic Circle", "jughandle": "Jughandle"}}},
     "junction/ref_oneway": {"key": "junction:ref", "type": "text", "label": "Junction Number", "prerequisiteTag": {"key": "oneway", "value": "yes"}},
     "kerb": {"key": "kerb", "type": "combo", "label": "Curb"},
     "label": {"key": "label", "type": "textarea", "label": "Label"},

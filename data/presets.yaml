@@ -866,6 +866,16 @@ en:
       junction/ref_oneway:
         # 'junction:ref=*'
         label: Junction Number
+      junction_line:
+        # junction=*
+        label: Junction
+        options:
+          # junction=circular
+          circular: Traffic Circle
+          # junction=jughandle
+          jughandle: Jughandle
+          # junction=roundabout
+          roundabout: Roundabout
       kerb:
         # kerb=*
         label: Curb

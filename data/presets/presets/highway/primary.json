@@ -13,6 +13,7 @@
     "moreFields": [
         "covered",
         "cycleway",
+        "junction_line",
         "lit",
         "maxheight",
         "maxspeed/advisory",
