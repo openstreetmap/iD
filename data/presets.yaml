@@ -3454,7 +3454,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Row Houses'', separated by commas>'
       building/train_station:
         # building=train_station
-        name: Train Station
+        name: Train Station Building
       building/transportation:
         # building=transportation
         name: Transportation Building

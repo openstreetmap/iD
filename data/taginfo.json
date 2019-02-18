@@ -261,7 +261,7 @@
     {"key": "building", "description": "🄿 Building, 🄵 Building", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"},
     {"key": "building", "value": "bunker", "description": "🄿 Bunker (unsearchable)", "object_types": ["area"]},
     {"key": "building", "value": "entrance", "description": "🄿 Entrance/Exit (unsearchable)", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"},
-    {"key": "building", "value": "train_station", "description": "🄿 Train Station (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
+    {"key": "building", "value": "train_station", "description": "🄿 Train Station Building (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
     {"key": "building", "value": "apartments", "description": "🄿 Apartment Building", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
     {"key": "building", "value": "barn", "description": "🄿 Barn", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/farm-15.svg?sanitize=true"},
     {"key": "building", "value": "boathouse", "description": "🄿 Boathouse", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/harbor-15.svg?sanitize=true"},

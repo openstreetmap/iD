@@ -261,7 +261,7 @@
     "building": {"icon": "maki-home", "fields": ["name", "building", "levels", "height", "address"], "moreFields": ["architect", "building/material", "roof/colour", "smoking", "wheelchair"], "geometry": ["point", "area"], "tags": {"building": "*"}, "matchScore": 0.6, "terms": [], "name": "Building"},
     "building/bunker": {"geometry": ["area"], "tags": {"building": "bunker"}, "matchScore": 0.5, "name": "Bunker", "searchable": false},
     "building/entrance": {"icon": "maki-entrance-alt1", "fields": [], "moreFields": [], "geometry": ["vertex"], "tags": {"building": "entrance"}, "name": "Entrance/Exit", "searchable": false},
-    "building/train_station": {"icon": "maki-building", "geometry": ["point", "vertex", "area"], "tags": {"building": "train_station"}, "matchScore": 0.5, "name": "Train Station", "searchable": false},
+    "building/train_station": {"icon": "maki-building", "geometry": ["point", "vertex", "area"], "tags": {"building": "train_station"}, "matchScore": 0.5, "name": "Train Station Building", "searchable": false},
     "building/apartments": {"icon": "maki-building", "geometry": ["area"], "tags": {"building": "apartments"}, "matchScore": 0.5, "name": "Apartment Building"},
     "building/barn": {"icon": "maki-farm", "geometry": ["area"], "tags": {"building": "barn"}, "matchScore": 0.5, "name": "Barn"},
     "building/boathouse": {"icon": "maki-harbor", "geometry": ["area"], "tags": {"building": "boathouse"}, "matchScore": 0.5, "terms": [], "name": "Boathouse"},
