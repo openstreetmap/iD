@@ -129,6 +129,7 @@
     {"key": "amenity", "value": "payment_centre", "description": "🄿 Payment Center", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"},
     {"key": "amenity", "value": "payment_terminal", "description": "🄿 Payment Terminal", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"},
     {"key": "amenity", "value": "pharmacy", "description": "🄿 Pharmacy Counter", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pharmacy-15.svg?sanitize=true"},
+    {"key": "amenity", "value": "photo_booth", "description": "🄿 Photo Booth", "object_types": ["node", "area"]},
     {"key": "amenity", "value": "place_of_worship", "description": "🄿 Place of Worship", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/place-of-worship-15.svg?sanitize=true"},
     {"key": "religion", "value": "buddhist", "description": "🄿 Buddhist Temple", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-buddhist-15.svg?sanitize=true"},
     {"key": "religion", "value": "christian", "description": "🄿 Christian Church", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-christian-15.svg?sanitize=true"},

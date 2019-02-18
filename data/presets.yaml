@@ -2629,6 +2629,11 @@ en:
         name: Pharmacy Counter
         # 'terms: apothecary,drug store,drugstore,med*,prescription'
         terms: '<translate with synonyms or related terms for ''Pharmacy Counter'', separated by commas>'
+      amenity/photo_booth:
+        # amenity=photo_booth
+        name: Photo Booth
+        # 'terms: photobooth,photo,booth,kiosk,camera'
+        terms: '<translate with synonyms or related terms for ''Photo Booth'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
         name: Place of Worship

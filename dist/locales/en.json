@@ -4317,6 +4317,10 @@
                     "name": "Pharmacy Counter",
                     "terms": "apothecary,drug store,drugstore,med*,prescription"
                 },
+                "amenity/photo_booth": {
+                    "name": "Photo Booth",
+                    "terms": "photobooth,photo,booth,kiosk,camera"
+                },
                 "amenity/place_of_worship": {
                     "name": "Place of Worship",
                     "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
