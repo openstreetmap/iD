@@ -193,7 +193,6 @@ export function validationCrossingWays() {
         } else {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
-                if (featureTypes.indexOf('building') !== -1) return {};
                 if (featureTypes.indexOf('railway') !== -1) {
                     if (pathHighways.indexOf(entity1.tags.highway) !== -1 ||
                         pathHighways.indexOf(entity2.tags.highway) !== -1) {
