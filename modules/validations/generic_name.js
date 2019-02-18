@@ -33,7 +33,7 @@ export function validationGenericName() {
                     val === name ||
                     key.replace(/\_/g, ' ') === name ||
                     val.replace(/\_/g, ' ') === name) {
-                    return name;
+                    return entity.tags.name;
                 }
             }
         }
@@ -41,7 +41,7 @@ export function validationGenericName() {
         // test if the name is otherwise generic
         for (i = 0; i < discardNamesRegexes.length; i++) {
             if (discardNamesRegexes[i].test(name)) {
-                return name;
+                return entity.tags.name;
             }
         }
 
