@@ -247,10 +247,13 @@ export function validationCrossingWays() {
 
             var intersected = tree.intersects(extent, graph);
             for (var j = 0; j < intersected.length; j++) {
-                if (intersected[j].type !== 'way') continue;
+                var way = intersected[j];
+                if (way.type !== 'way') continue;
+
+                // don't check for self-intersection in this validation
+                if (way.id === primaryWay.id) continue;
 
                 // only check crossing highway, waterway, building, and railway
-                var way = intersected[j];
                 var wayFeatureType = getFeatureTypeForCrossingCheck(way, graph);
                 if (wayFeatureType === null ||
                     isLegitCrossing(primaryWay, primaryFeatureType, way, wayFeatureType, graph) ||
