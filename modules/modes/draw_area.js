@@ -25,6 +25,11 @@ export function modeDrawArea(context, wayId, startGraph) {
 
             if (node.id === way.first() || node.id === penultimate) {
                 behavior.finish();
+
+                //Re-activate locked drawing mode
+                if (context.lockMode()) {
+                    context.enter(context.lockMode());
+                }
             } else {
                 addNode(node, d);
             }

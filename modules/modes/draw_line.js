@@ -24,6 +24,11 @@ export function modeDrawLine(context, wayID, startGraph, affix, continuing) {
         behavior.addNode = function(node, d) {
             if (node.id === headID) {
                 behavior.finish();
+
+                //Re-activate locked drawing mode
+                if (context.lockMode()) {
+                    context.enter(context.lockMode());
+                }
             } else {
                 addNode(node, d);
             }

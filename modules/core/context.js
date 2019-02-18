@@ -232,10 +232,18 @@ export function coreContext() {
 
 
     /* Modes */
-    var mode;
+    var mode, lockedMode;
     context.mode = function() {
         return mode;
     };
+    context.lockMode = function(mode) {
+        if (mode) lockedMode = mode;
+        return lockedMode;
+    };
+    context.unlockMode = function() {
+        lockedMode = null;
+    };
+
     context.enter = function(newMode) {
         if (mode) {
             mode.exit();

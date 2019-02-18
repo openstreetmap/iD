@@ -51,7 +51,8 @@ export function uiModes(context) {
         context
             .on('enter.editor', function(entered) {
                 selection.selectAll('button.add-button')
-                    .classed('active', function(mode) { return entered.button === mode.button; });
+                    .classed('active', function(mode) { return entered.button === mode.button; })
+                    .classed('locked', function(mode) { return context.lockMode() != null && context.lockMode().id === mode.id; });
                 context.container()
                     .classed('mode-' + entered.id, true);
             });
@@ -76,6 +77,27 @@ export function uiModes(context) {
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedClick = _debounce(clickModeButton, 300);
+
+        function clickModeButton(d, isDblClick) {
+            if (!enabled(d)) return;
+
+            // When drawing, ignore accidental clicks on mode buttons - #4042
+            var currMode = context.mode().id;
+            if (/^draw/.test(currMode)) return;
+
+            if (isDblClick === true) {
+                context.lockMode(d);
+            } else {
+                context.unlockMode();
+            }
+
+            if (d.id === currMode) {
+                context.enter(modeBrowse(context));
+            } else {
+                context.enter(d);
+            }
+        }
 
         context.map()
             .on('move.modes', debouncedUpdate)
@@ -103,18 +125,10 @@ export function uiModes(context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', function(d) { return d.id + ' add-button'; })
-                .on('click.mode-buttons', function(d) {
-                    if (!enabled(d)) return;
-
-                    // When drawing, ignore accidental clicks on mode buttons - #4042
-                    var currMode = context.mode().id;
-                    if (/^draw/.test(currMode)) return;
-
-                    if (d.id === currMode) {
-                        context.enter(modeBrowse(context));
-                    } else {
-                        context.enter(d);
-                    }
+                .on('click.mode-buttons', debouncedClick)
+                .on('dblclick.mode-buttons', function(d) {
+                    debouncedClick.cancel(); //cancel single click
+                    clickModeButton(d, true /*dblclick*/);
                 })
                 .call(tooltip()
                     .placement('bottom')

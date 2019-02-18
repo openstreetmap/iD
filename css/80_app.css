@@ -307,6 +307,10 @@ button.disabled {
     color: rgba(0,0,0,.4);
     cursor: not-allowed;
 }
+button.locked {
+    background: #5b637d;
+    color: #fff;
+}
 
 .joined button {
     border-radius: 0;

@@ -35,6 +35,11 @@ export function modeAddPoint(context) {
         context.enter(
             modeSelect(context, [node.id]).newFeature(true)
         );
+
+        //Re-activate mode for locked drawing mode
+        if (context.lockMode()) {
+            context.enter(context.lockMode());
+        }
     }
 
 
