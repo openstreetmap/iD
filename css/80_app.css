@@ -3036,15 +3036,18 @@ div.full-screen > button:hover {
 .issue.severity-warning:not(.expanded) button:focus {
     background: #FFFF99;
 }
-.issue.severity-warning .issue-icon,
+.issue.severity-warning .issue-icon {
+    color: #ffa900;
+    fill: #ffa900;
+}
 .issue.severity-warning .issue-fix-item.actionable {
-    color: #ff9205;
-    fill: #ff9205;
+    color: #b15500;
+    fill: #b15500;
 }
 .issue.severity-warning .issue-fix-item.actionable:hover,
 .issue.severity-warning .issue-fix-item.actionable button:focus {
-    color: #f07504;
-    fill: #f07504;
+    color: #7f3d00;
+    fill: #7f3d00;
 }
 
 .issue.severity-error,
@@ -3056,15 +3059,18 @@ div.full-screen > button:hover {
 .issue.severity-error:not(.expanded) button:focus {
     background: #ffc9c7;
 }
-.issue.severity-error .issue-icon,
-.issue.severity-error .issue-fix-item.actionable {
+.issue.severity-error .issue-icon {
     color: #DD1400;
     fill: #DD1400;
 }
+.issue.severity-error .issue-fix-item.actionable {
+    color: #b91201;
+    fill: #b91201;
+}
 .issue.severity-error .issue-fix-item.actionable:hover,
 .issue.severity-error .issue-fix-item.actionable button:focus {
-    color: #ab0f00;
-    fill: #ab0f00;
+    color: #840c00;
+    fill: #840c00;
 }
 
 /* Issues Pane */
