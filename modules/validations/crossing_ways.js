@@ -16,7 +16,7 @@ export function validationCrossingWays() {
 
     // Check if the edge going from n1 to n2 crosses (without a connection node)
     // any edge on way. Return the cross point if so.
-    function findEdgeToWayCrossCoords(n1, n2, way, graph) {
+    function findEdgeToWayCrossCoords(n1, n2, way, graph, oneOnly) {
         var crossCoords = [];
         var nA, nB;
         var segment1 = [n1.loc, n2.loc];
@@ -35,6 +35,9 @@ export function validationCrossingWays() {
             var point = geoLineIntersection(segment1, segment2);
             if (point) {
                 crossCoords.push({ edge: [nA.id, nB.id], point: point });
+                if (oneOnly) {
+                    break;
+                }
             }
         }
         return crossCoords;
@@ -229,6 +232,8 @@ export function validationCrossingWays() {
         var primaryFeatureType = getFeatureTypeForCrossingCheck(primaryWay, graph);
         if (primaryFeatureType === null) return edgeCrossInfos;
 
+        var checkedSingleCrossingWays = {};
+
         for (var i = 0; i < primaryWay.nodes.length - 1; i++) {
             var nid1 = primaryWay.nodes[i];
             var nid2 = primaryWay.nodes[i + 1];
@@ -248,7 +253,11 @@ export function validationCrossingWays() {
             var intersected = tree.intersects(extent, graph);
             for (var j = 0; j < intersected.length; j++) {
                 var way = intersected[j];
+
                 if (way.type !== 'way') continue;
+
+                // skip if this way was already checked and only one issue is needed
+                if (checkedSingleCrossingWays[way.id]) continue;
 
                 // don't check for self-intersection in this validation
                 if (way.id === primaryWay.id) continue;
@@ -261,7 +270,10 @@ export function validationCrossingWays() {
                     continue;
                 }
 
-                var crossCoords = findEdgeToWayCrossCoords(n1, n2, way, graph);
+                // create only one issue for building crossings
+                var oneOnly = primaryFeatureType === 'building' || wayFeatureType === 'building';
+
+                var crossCoords = findEdgeToWayCrossCoords(n1, n2, way, graph, oneOnly);
                 for (var k = 0; k < crossCoords.length; k++) {
                     var crossingInfo = crossCoords[k];
                     edgeCrossInfos.push({
@@ -270,6 +282,9 @@ export function validationCrossingWays() {
                         edges: [[n1.id, n2.id], crossingInfo.edge],
                         crossPoint: crossingInfo.point
                     });
+                    if (oneOnly) {
+                        checkedSingleCrossingWays[way.id] = true;
+                    }
                 }
             }
         }
