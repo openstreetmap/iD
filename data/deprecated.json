@@ -270,6 +270,10 @@
     {
       "old": {"water": "tidal"},
       "replace": {"natural": "water", "tidal": "yes"}
+    },
+    {
+      "old": {"waterway": "aqueduct"},
+      "replace": {"waterway": "canal", "bridge": "aqueduct"}
     }
   ]
 }
