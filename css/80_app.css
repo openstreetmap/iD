@@ -4612,6 +4612,8 @@ svg.mouseclick use.right {
     color: #333;
     font-size: 12px;
     white-space: initial;
+}
+.tooltip:not(.curtain-tooltip) {
     pointer-events: none;
 }
 .tooltip.in {
