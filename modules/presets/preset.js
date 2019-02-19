@@ -25,10 +25,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
         // Skip `fields` for the keys which define the preset.
         // These are usually `typeCombo` fields like `shop=*`
-        function withoutKeyFields(fieldID) {
+        function shouldInheritFieldWithID(fieldID) {
             var f = fields[fieldID];
             if (f.key) {
-                return preset.tags[f.key] === undefined;
+                if (preset.tags[f.key] !== undefined &&
+                    // inherit anyway if multiple values are allowed
+                    f.type !== 'multiCombo' && f.type !== 'semiCombo') {
+                    return false;
+                }
             }
             return true;
         }
@@ -43,7 +47,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
             var inheritFieldIDs = inheritPreset[prop] || [];
 
             if (prop === 'fields') {
-                inheritFieldIDs = inheritFieldIDs.filter(withoutKeyFields);
+                inheritFieldIDs = inheritFieldIDs.filter(shouldInheritFieldWithID);
             }
 
             return inheritFieldIDs;
