@@ -170,7 +170,7 @@ path.fill.tag-amenity-university {
 
 /* Gold things */
 path.stroke.tag-landuse-residential,
-path.stroke.tag-landuse-construction {
+path.stroke.tag-status-construction {
     stroke: rgb(196, 189, 25);
 }
 path.fill.tag-landuse-residential {
@@ -178,7 +178,7 @@ path.fill.tag-landuse-residential {
     fill: rgba(196, 189, 25, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-residential,
-.preset-icon-fill-area.tag-landuse-construction {
+.preset-icon-fill-area.tag-status-construction {
     border-color: rgb(196, 189, 25);
     background: rgba(196, 189, 25, 0.3);
 }
