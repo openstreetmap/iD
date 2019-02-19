@@ -493,9 +493,11 @@ function validatePresetFields(presets, fields) {
         var preset = presets[presetID];
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
-        for (var fieldsKey in fieldKeys) {
+        for (var fieldsKeyIndex in fieldKeys) {
+            var fieldsKey = fieldKeys[fieldsKeyIndex];
             if (preset[fieldsKey]) {
-                for (var field in preset[fieldsKey]) {
+                for (var fieldIndex in preset[fieldsKey]) {
+                    var field = preset[fieldsKey][fieldIndex];
                     if (fields[field] === undefined) {
                         var regexResult = betweenBracketsRegex.exec(field);
                         if (regexResult) {

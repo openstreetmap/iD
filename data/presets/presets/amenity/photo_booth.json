@@ -1,8 +1,9 @@
 {
-	"icon": "camera",
+	"icon": "maki-attraction",
 	"fields": [
-		"payment_types",
+		"name",
 		"operator",
+		"payment_multi",
 		"wheelchair"
 	],
 	"geometry": [
@@ -21,6 +22,3 @@
 	},
 	"name": "Photo Booth"
 }
-
-
-
