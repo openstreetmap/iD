@@ -37,24 +37,30 @@ export function validationDisconnectedWay() {
             var fixes = [];
 
             if (!entity.isClosed()) {
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue-left',
-                    title: t('issues.fix.continue_from_start.title'),
-                    entityIds: [entity.first()],
-                    onClick: function() {
-                        var vertex = context.entity(entity.first());
-                        continueDrawing(entity, vertex, context);
-                    }
-                }));
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue',
-                    title: t('issues.fix.continue_from_end.title'),
-                    entityIds: [entity.last()],
-                    onClick: function() {
-                        var vertex = context.entity(entity.last());
-                        continueDrawing(entity, vertex, context);
-                    }
-                }));
+                var first = context.entity(entity.first());
+                if (first.tags.noexit !== 'yes') {
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-operation-continue-left',
+                        title: t('issues.fix.continue_from_start.title'),
+                        entityIds: [entity.first()],
+                        onClick: function() {
+                            var vertex = context.entity(entity.first());
+                            continueDrawing(entity, vertex, context);
+                        }
+                    }));
+                }
+                var last = context.entity(entity.last());
+                if (last.tags.noexit !== 'yes') {
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-operation-continue',
+                        title: t('issues.fix.continue_from_end.title'),
+                        entityIds: [entity.last()],
+                        onClick: function() {
+                            var vertex = context.entity(entity.last());
+                            continueDrawing(entity, vertex, context);
+                        }
+                    }));
+                }
             }
 
             fixes.push(new validationIssueFix({
