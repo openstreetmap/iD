@@ -31,18 +31,36 @@ export function validationAlmostJunction() {
         return node.tags.noexit && node.tags.noexit === 'yes';
     }
 
+    function isExtendableCandidate(node, way, graph) {
+        if (isNoexit(node) || graph.parentWays(node).length !== 1) {
+            return false;
+        }
+        var occurences = 0;
+        for (var index in way.nodes) {
+            if (way.nodes[index] === node.id) {
+                occurences += 1;
+                if (occurences > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     function findConnectableEndNodesByExtension(way, graph, tree) {
+
         var results = [];
+
+        if (way.isClosed()) return results;
+
         var nidFirst = way.nodes[0];
         var nidLast = way.nodes[way.nodes.length - 1];
         var nodeFirst = graph.entity(nidFirst);
         var nodeLast = graph.entity(nidLast);
 
-        if (nidFirst === nidLast) return results;
-
         var testNodes;
 
-        if (!isNoexit(nodeFirst) && graph.parentWays(nodeFirst).length === 1) {
+        if (isExtendableCandidate(nodeFirst, way, graph)) {
             var connNearFirst = canConnectByExtend(way, 0, graph, tree);
             if (connNearFirst !== null) {
                 testNodes = _cloneDeep(graph.childNodes(way));
@@ -59,7 +77,7 @@ export function validationAlmostJunction() {
             }
         }
 
-        if (!isNoexit(nodeLast) && graph.parentWays(nodeLast).length === 1) {
+        if (isExtendableCandidate(nodeLast, way, graph)) {
             var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
             if (connNearLast !== null) {
                 testNodes = _cloneDeep(graph.childNodes(way));
