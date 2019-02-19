@@ -64,6 +64,23 @@ export function validationCrossingWays() {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
 
+    function tagsImplyIndoors(tags) {
+        return hasTag(tags, 'level') || tags.highway === 'corridor';
+    }
+
+    function allowsStructures(featureType) {
+        return allowsBridge(featureType) || allowsTunnel(featureType);
+    }
+    function allowsBridge(featureType) {
+        return featureType === 'highway' || featureType === 'railway';
+    }
+    function allowsTunnel(featureType) {
+        return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
+    }
+    function canCover(featureType) {
+        return featureType === 'building';
+    }
+
 
     function getFeatureTypeForCrossingCheck(way, graph) {
         var tags = getFeatureWithFeatureTypeTagsForWay(way, graph).tags;
@@ -106,54 +123,35 @@ export function validationCrossingWays() {
         tags1 = extendTagsByInferredLayer(tags1, way1);
         tags2 = extendTagsByInferredLayer(tags2, way2);
 
-        // For better readability, not chaining all the true conditions into one if statement.
-        if ((featureType1 === 'highway' && featureType2 === 'highway') ||
-            (featureType1 === 'highway' && featureType2 === 'railway') ||
-            (featureType1 === 'railway' && featureType2 === 'railway')) {
-            // Legit cases:
-            // (1) they're on different layers
-            // (2) only one of the two ways is on a bridge
-            // (3) only one of the two ways is in a tunnel
-            if (tags1.layer !== tags2.layer) return true;
+        if (tagsImplyIndoors(tags1) && tagsImplyIndoors(tags2) && tags1.level !== tags2.level) {
+            // assume features don't interact if they're indoor on different levels
+            return true;
+        }
+
+        if (allowsBridge(featureType1) && allowsBridge(featureType2)) {
             if (hasTag(tags1, 'bridge') && !hasTag(tags2, 'bridge')) return true;
             if (!hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge')) return true;
+            // crossing bridges must use different layers
+            if (hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge') && tags1.layer !== tags2.layer) return true;
+        } else if (allowsBridge(featureType1) && hasTag(tags1, 'bridge')) return true;
+        else if (allowsBridge(featureType2) && hasTag(tags2, 'bridge')) return true;
+
+        if (allowsTunnel(featureType1) && allowsTunnel(featureType2)) {
             if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
             if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
-        }
-        if ((featureType1 === 'highway' && featureType2 === 'waterway') ||
-            (featureType1 === 'railway' && featureType2 === 'waterway')) {
-            // Legit cases:
-            // (1) highway/railway is on a bridge
-            // (2) only one of the two ways is in a tunnel
-            // (3) both are in tunnels but on different layers
-            if (hasTag(tags1, 'bridge')) return true;
-            if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
-            if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
+            // crossing tunnels must use different layers
             if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && tags1.layer !== tags2.layer) return true;
-        }
-        if ((featureType1 === 'highway' && featureType2 === 'building') ||
-            (featureType1 === 'railway' && featureType2 === 'building')) {
-            // Legit cases:
-            // (1) highway/railway has a bridge or tunnel tag
-            // (2) highway/railway has a covered tag
-            if (hasTag(tags1, 'bridge') || hasTag(tags1, 'tunnel') || hasTag(tags1, 'covered')) return true;
-        }
-        if (featureType1 === 'waterway' && featureType2 === 'waterway') {
-            // Legit cases:
-            // (1) only one of the water is in a tunnel
-            // (2) both are in tunnels but on differnt layers
-            if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
-            if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
-            if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && tags1.layer !== tags2.layer) return true;
-        }
-        if (featureType1 === 'waterway' && featureType2 === 'building') {
-            // Legit cases:
-            // (1) water is in a tunnel
-            // (2) water has a covered tag
-            if (hasTag(tags1, 'tunnel') || hasTag(tags1, 'covered')) return true;
-        }
-        if (featureType1 === 'building' && featureType2 === 'building') {
-            // Legit case: they're on different layers
+        } else if (allowsTunnel(featureType1) && hasTag(tags1, 'tunnel')) return true;
+        else if (allowsTunnel(featureType2) && hasTag(tags2, 'tunnel')) return true;
+
+        if (canCover(featureType1) && canCover(featureType2)) {
+            // crossing covered features that can themselves cover must use different layers
+            if (hasTag(tags1, 'covered') && hasTag(tags2, 'covered') && tags1.layer !== tags2.layer) return true;
+        } else if (canCover(featureType1) && hasTag(tags2, 'covered')) return true;
+        else if (canCover(featureType2) && hasTag(tags1, 'covered')) return true;
+
+        if (!allowsStructures(featureType1) && !allowsStructures(featureType2)) {
+            // if no structures are applicable, the layers must be different
             if (tags1.layer !== tags2.layer) return true;
         }
         return false;
@@ -166,7 +164,7 @@ export function validationCrossingWays() {
         'primary', 'primary_link', 'secondary', 'secondary_link'
     ];
     var pathHighways = [
-        'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps'
+        'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps', 'corridor'
     ];
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
@@ -353,19 +351,28 @@ export function validationCrossingWays() {
 
         var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
 
+        var featureType1 = crossing.featureTypes[0];
+        var featureType2 = crossing.featureTypes[1];
+
+        var isCrossingIndoors = tagsImplyIndoors(entities[0].tags) && tagsImplyIndoors(entities[1].tags);
+        var isCrossingTunnels = allowsTunnel(featureType1) && hasTag(entities[0].tags, 'tunnel') &&
+                                allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
+        var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
+                                allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
+
         var crossingTypeID;
-        if (hasTag(entities[0].tags, 'tunnel') && hasTag(entities[1].tags, 'tunnel')) {
+
+        if (isCrossingIndoors) {
+            crossingTypeID = 'indoor-indoor';
+        } else if (isCrossingTunnels) {
             crossingTypeID = 'tunnel-tunnel';
-            if (connectionTags) {
-                crossingTypeID += '_connectable';
-            }
-        } else if (hasTag(entities[0].tags, 'bridge') && hasTag(entities[1].tags, 'bridge')) {
+        } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
-            if (connectionTags) {
-                crossingTypeID += '_connectable';
-            }
         } else {
             crossingTypeID = crossing.featureTypes.sort().join('-');
+        }
+        if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
+            crossingTypeID += '_connectable';
         }
 
         var messageDict = {
@@ -415,6 +422,21 @@ export function validationCrossingWays() {
                 }
             }));
         }
+        var useFixID;
+        if (isCrossingIndoors) {
+            useFixID = 'use_different_levels';
+        } else if (isCrossingTunnels || isCrossingBridges) {
+            useFixID = 'use_different_layers';
+        } else if (allowsBridge(featureType1) || allowsBridge(featureType2)) {
+            useFixID = 'use_bridge_or_tunnel';
+        } else if (allowsTunnel(featureType1) || allowsTunnel(featureType2)) {
+            useFixID = 'use_tunnel';
+        } else {
+            useFixID = 'use_different_layers';
+        }
+        fixes.push(new validationIssueFix({
+            title: t('issues.fix.' + useFixID + '.title')
+        }));
         fixes.push(new validationIssueFix({
             title: t('issues.fix.reposition_features.title')
         }));

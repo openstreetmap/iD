@@ -105,7 +105,13 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     it('legit crossing between railway and railway', function() {
-        createWaysWithOneCrossingPoint({ railway: 'rail', layer: '1' }, { railway: 'rail' });
+        createWaysWithOneCrossingPoint({ railway: 'rail', bridge: 'yes' }, { railway: 'rail' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('legit crossing between railway bridges on different layers', function() {
+        createWaysWithOneCrossingPoint({ railway: 'rail', bridge: 'yes', layer: '2' }, { railway: 'rail', bridge: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -136,6 +142,12 @@ describe('iD.validations.crossing_ways', function () {
 
     it('legit crossing between building and building', function() {
         createWaysWithOneCrossingPoint({ building: 'yes' }, { building: 'yes', covered: 'yes' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('legit crossing between indoor corridors on different levels', function() {
+        createWaysWithOneCrossingPoint({ highway: 'corridor', level: '0' }, { highway: 'corridor', level: '1' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -171,13 +183,23 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), 'w-2');
     });
 
+    it('one cross point between railway bridge and highway bridge', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes' }, { railway: 'rail', bridge: 'yes' });
+        verifySingleCrossingIssue(validate(), 'w-2');
+    });
+
     it('one cross point between railway and building', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { building: 'yes' });
         verifySingleCrossingIssue(validate(), 'w-2');
     });
 
     it('one cross point between waterway and waterway', function() {
-        createWaysWithOneCrossingPoint({ waterway: 'canal' }, { waterway: 'river' });
+        createWaysWithOneCrossingPoint({ waterway: 'canal' }, { waterway: 'canal' });
+        verifySingleCrossingIssue(validate(), 'w-2');
+    });
+
+    it('one cross point between waterway tunnels', function() {
+        createWaysWithOneCrossingPoint({ waterway: 'canal', tunnel: 'yes' }, { waterway: 'canal', tunnel: 'yes' });
         verifySingleCrossingIssue(validate(), 'w-2');
     });
 
@@ -188,6 +210,11 @@ describe('iD.validations.crossing_ways', function () {
 
     it('one cross point between building and building', function() {
         createWaysWithOneCrossingPoint({ building: 'yes' }, { building: 'yes' });
+        verifySingleCrossingIssue(validate(), 'w-2');
+    });
+
+    it('one cross point between indoor corridors on the same level', function() {
+        createWaysWithOneCrossingPoint({ highway: 'corridor', level: 0 }, { highway: 'corridor', level: 0 });
         verifySingleCrossingIssue(validate(), 'w-2');
     });
 
