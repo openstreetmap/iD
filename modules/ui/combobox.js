@@ -63,10 +63,14 @@ export function uiCombobox(context, klass) {
                     .enter()
                     .insert('div', function() { return sibling; })
                     .attr('class', 'combobox-caret')
-                    .on('mousedown.combo-caret mouseup.combo-caret', function() {
-                        var e2 = new MouseEvent(d3_event.type, d3_event);
-                        d3_event.preventDefault();       // don't steal focus from input
-                        input.node().dispatchEvent(e2);  // send events to the input instead
+                    .on('mousedown.combo-caret', function() {
+                        d3_event.preventDefault(); // don't steal focus from input
+                        input.node().focus(); // focus the input as if it was clicked
+                        mousedown();
+                    })
+                    .on('mouseup.combo-caret', function() {
+                        d3_event.preventDefault(); // don't steal focus from input
+                        mouseup();
                     });
             });
 
@@ -91,7 +95,7 @@ export function uiCombobox(context, klass) {
         function mouseup() {
             input.on('mouseup.combo-input', null);
             if (d3_event.button !== 0) return;    // left click only
-            if (this !== document.activeElement) return;   // exit if this input is not focused
+            if (input.node() !== document.activeElement) return;   // exit if this input is not focused
 
             var start = input.property('selectionStart');
             var end = input.property('selectionEnd');
