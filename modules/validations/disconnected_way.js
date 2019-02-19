@@ -94,7 +94,7 @@ export function validationDisconnectedWay() {
             }
 
             context.enter(
-                modeDrawLine(context, way.id, context.graph(), way.affix(vertex.id), true)
+                modeDrawLine(context, way.id, context.graph(), context.graph(), way.affix(vertex.id), true)
             );
         }
     };

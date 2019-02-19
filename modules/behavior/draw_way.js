@@ -11,7 +11,8 @@ import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 import { utilKeybinding } from '../util';
 
-export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
+export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph) {
+
     var origWay = context.entity(wayID);
 
     var annotation = t((origWay.isDegenerate() ?
@@ -25,10 +26,6 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
     var _tempEdits = 0;
 
     var end = osmNode({ loc: context.map().mouseCoordinates() });
-
-    if (context.graph() === startGraph) {
-        context.history().checkpoint('drawWay-initial');
-    }
 
     // Push an annotated state for undo to return back to.
     // We must make sure to remove this edit later.
@@ -153,8 +150,11 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         _tempEdits = 0;     // We will deal with the temp edits here
         context.pop(1);     // Remove initial no-op edit
 
-        if (context.graph() === startGraph) {    // We've undone back to the beginning
-            context.history().reset('drawWay-initial');
+        if (context.graph() === baselineGraph) {    // We've undone back to the beginning
+            // baselineGraph may be behind startGraph if this way was added rather than continued
+            while (context.graph() !== startGraph) {
+                context.pop();
+            }
             context.enter(modeSelect(context, [wayID]));
         } else {
             // Remove whatever segment was drawn previously and continue drawing
