@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _map from 'lodash-es/map';
 import _flattenDeep from 'lodash-es/flatten';
 
@@ -109,19 +108,9 @@ export function validationCrossingWays() {
     }
 
 
-    function extendTagsByInferredLayer(tags, way) {
-        if (!hasTag(tags, 'layer')) {
-            tags.layer = way.layer().toString();
-        }
-        return tags;
-    }
-
-
     function isLegitCrossing(way1, featureType1, way2, featureType2, graph) {
-        var tags1 = _clone(getFeatureWithFeatureTypeTagsForWay(way1, graph).tags);
-        var tags2 = _clone(getFeatureWithFeatureTypeTagsForWay(way2, graph).tags);
-        tags1 = extendTagsByInferredLayer(tags1, way1);
-        tags2 = extendTagsByInferredLayer(tags2, way2);
+        var tags1 = way1.tags;
+        var tags2 = way2.tags;
 
         if (tagsImplyIndoors(tags1) && tagsImplyIndoors(tags2) && tags1.level !== tags2.level) {
             // assume features don't interact if they're indoor on different levels
@@ -145,6 +134,8 @@ export function validationCrossingWays() {
         else if (allowsTunnel(featureType2) && hasTag(tags2, 'tunnel')) return true;
 
         if (canCover(featureType1) && canCover(featureType2)) {
+            if (hasTag(tags1, 'covered') && !hasTag(tags2, 'covered')) return true;
+            if (!hasTag(tags1, 'covered') && hasTag(tags2, 'covered')) return true;
             // crossing covered features that can themselves cover must use different layers
             if (hasTag(tags1, 'covered') && hasTag(tags2, 'covered') && tags1.layer !== tags2.layer) return true;
         } else if (canCover(featureType1) && hasTag(tags2, 'covered')) return true;
