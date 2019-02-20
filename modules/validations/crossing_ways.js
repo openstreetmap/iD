@@ -369,6 +369,7 @@ export function validationCrossingWays() {
         var fixes = [];
         if (connectionTags) {
             fixes.push(new validationIssueFix({
+                icon: 'iD-icon-crossing',
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var loc = this.issue.loc;
@@ -408,6 +409,7 @@ export function validationCrossingWays() {
                 }
             }));
         }
+        var useFixIcon = 'iD-icon-layers';
         var useFixID;
         if (isCrossingIndoors) {
             useFixID = 'use_different_levels';
@@ -417,15 +419,18 @@ export function validationCrossingWays() {
         } else if ((allowsBridge(featureType1) && featureType1 !== 'waterway') ||
                 (allowsBridge(featureType2) && featureType2 !== 'waterway')) {
             useFixID = 'use_bridge_or_tunnel';
+            useFixIcon = 'maki-bridge';
         } else if (allowsTunnel(featureType1) || allowsTunnel(featureType2)) {
             useFixID = 'use_tunnel';
         } else {
             useFixID = 'use_different_layers';
         }
         fixes.push(new validationIssueFix({
+            icon: useFixIcon,
             title: t('issues.fix.' + useFixID + '.title')
         }));
         fixes.push(new validationIssueFix({
+            icon: 'iD-operation-move',
             title: t('issues.fix.reposition_features.title')
         }));
         return new validationIssue({

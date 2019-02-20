@@ -153,6 +153,7 @@ export function validationAlmostJunction() {
             var edgeHighway = graph.entity(extendableNodeInfo.wid);
 
             var fixes = [new validationIssueFix({
+                icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var endNode = this.issue.entities[1];
