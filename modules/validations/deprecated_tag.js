@@ -82,6 +82,23 @@ export function validationDeprecatedTag() {
                                     t('issues.fix.' + fixTextID + '.annotation')
                                 );
                             }
+                        }),
+                        new validationIssueFix({
+                            icon: 'iD-operation-delete',
+                            title: t('issues.fix.' + (isCombo ? 'remove_tags' : 'remove_tag') + '.title'),
+                            onClick: function() {
+                                var entity = this.issue.entities[0];
+                                var tags = _clone(entity.tags);
+                                var oldTags = this.issue.info.oldTags;
+                                for (var key in oldTags) {
+                                    delete tags[key];
+                                }
+                                var fixTextID = Object.keys(oldTags).length > 1 ? 'remove_deprecated_tag_combo' : 'remove_deprecated_tag';
+                                context.perform(
+                                    actionChangeTags(entity.id, tags),
+                                    t('issues.fix.' + fixTextID + '.annotation')
+                                );
+                            }
                         })
                     ]
                 }));

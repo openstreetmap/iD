@@ -1267,12 +1267,18 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
+      remove_deprecated_tag:
+        annotation: Removed an old tag.
+      remove_deprecated_tag_combo:
+        annotation: Removed an old tag combination.
       remove_generic_name:
         title: Remove the name
         annotation: Removed a generic name.
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_tags:
+        title: Remove the tags
       reposition_features:
         title: Reposition the features
       select_preset:
@@ -1281,10 +1287,10 @@ en:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
       upgrade_tag:
-        title: Upgrade this tag
+        title: Upgrade the tag
         annotation: Upgraded an old tag.
       upgrade_tag_combo:
-        title: Upgrade these tags
+        title: Upgrade the tags
         annotation: Upgraded an old tag combination.
       use_bridge_or_tunnel:
         title: Use a bridge or tunnel
