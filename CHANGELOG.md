@@ -174,6 +174,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Add Mexican Fast Food and Chess Table presets
 * Add Climbing Gym, Bell Tower, Minaret, Sundial presets ([#5749], [#5772], [#5817], [#5771])
 * Add Salt and Tidal fields to water presets ([#5822])
+* Replace Passenger Information Display field with Departures Board field
 * Add specialized rendering of Aerialways and Pistes ([#5843])
 * Render Dam areas, Groynes, and Breakwaters as grey ([#5759])
 * Render the borders of Construction areas as yellow
