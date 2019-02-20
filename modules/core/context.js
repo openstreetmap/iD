@@ -315,7 +315,7 @@ export function coreContext() {
     //get favorites from local storage
     context.getFavoritePresets = function() {
         return JSON.parse(context.storage('favorite_presets')) || [];
-    }
+    };
     context.favoritePreset = function(preset, geom) {
         var favs = context.getFavoritePresets();
 

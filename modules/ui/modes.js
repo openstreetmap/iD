@@ -110,7 +110,7 @@ export function uiModes(context) {
                     description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name').toLowerCase(), t('geometry.' + d.geom)].join(' '),
                     key: '',
                     icon: icon
-                }
+                };
                 switch (d.geom) {
                     case 'point':
                     case 'vertex':

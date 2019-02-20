@@ -1,6 +1,3 @@
-import _find from 'lodash-es/find';
-import _omit from 'lodash-es/omit';
-
 import {
     event as d3_event,
     select as d3_select
@@ -8,7 +5,6 @@ import {
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
-import { uiModes } from './modes';
 
 export function uiPresetFavorite(preset, geom, context) {
 
@@ -34,7 +30,7 @@ export function uiPresetFavorite(preset, geom, context) {
             .merge(_button);
 
         _button
-            .classed('active', function(d) {
+            .classed('active', function() {
                 return context.isFavoritePreset(preset, geom);
             })
             .on('click', function () {
