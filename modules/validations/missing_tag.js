@@ -49,6 +49,15 @@ export function validationMissingTag() {
 
         var issues = [];
 
+        var deleteFixOnClick = function() {
+            var id = this.issue.entities[0].id;
+            operationDelete([id], context)();
+        };
+        if (entity.type === 'relation' &&
+            !entity.members.every(function(member) { return context.hasEntity(member.id); })) {
+            deleteFixOnClick = null;
+        }
+
         issues.push(new validationIssue({
             type: type,
             // error if created or modified, else warning
@@ -67,10 +76,7 @@ export function validationMissingTag() {
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.delete_feature.title'),
-                    onClick: function() {
-                        var id = this.issue.entities[0].id;
-                        operationDelete([id], context)();
-                    }
+                    onClick: deleteFixOnClick
                 })
             ]
         }));
