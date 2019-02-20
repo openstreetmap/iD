@@ -361,7 +361,7 @@ export default {
 
         // load mapillary signs sprite
         var defs = context.container().select('defs');
-        defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
+        defs.call(svgDefs(context).addSprites, ['mapillary-sprite'], false /* don't override colors */ );
 
         // Register viewer resize handler
         context.ui().photoviewer.on('resize', function() {

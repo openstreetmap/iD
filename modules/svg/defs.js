@@ -174,11 +174,11 @@ export function svgDefs(context) {
         defs
             .call(drawDefs.addSprites, [
                 'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'community-sprite'
-            ]);
+            ], true);
     }
 
 
-    drawDefs.addSprites = function(selection, ids) {
+    drawDefs.addSprites = function(selection, ids, overrideColors) {
         var spritesheets = selection.selectAll('.spritesheet');
         var currData = spritesheets.data();
         var data = _uniq(currData.concat(ids));
@@ -199,7 +199,7 @@ export function svgDefs(context) {
                         node.appendChild(
                             d3_select(svg.documentElement).attr('id', d).node()
                         );
-                        if (d !== 'iD-sprite') {   // allow icon colors to be overridden..
+                        if (overrideColors && d !== 'iD-sprite') {   // allow icon colors to be overridden..
                             d3_select(node).selectAll('path')
                                 .attr('fill', 'currentColor');
                         }
