@@ -21,7 +21,7 @@ export function uiIssues(context) {
     var _errorsList = d3_select(null);
     var _warningsList = d3_select(null);
     var _pane = d3_select(null);
-    var _button = d3_select(null);
+    var _toggleButton = d3_select(null);
     var _shown = false;
 
     context.validator().on('reload.issues_pane', update);
@@ -226,7 +226,7 @@ export function uiIssues(context) {
         var errors = context.validator().getErrors();
         var warnings = context.validator().getWarnings();
 
-        _button.selectAll('.icon-badge')
+        _toggleButton.selectAll('.icon-badge')
             .classed('error', (errors.length > 0))
             .classed('warning', (errors.length === 0 && warnings.length > 0))
             .classed('hide', (errors.length === 0 && warnings.length === 0));
@@ -261,65 +261,70 @@ export function uiIssues(context) {
         //}
     }
 
-    function issues(selection) {
+    var paneTooltip = tooltip()
+        .placement((textDirection === 'rtl') ? 'right' : 'left')
+        .html(true)
+        .title(uiTooltipHtml(t('issues.title'), key));
 
-        function hidePane() {
-            setVisible(false);
-        }
+    uiIssues.hidePane = function() {
+        uiIssues.setVisible(false);
+    };
 
-        function togglePane() {
-            if (d3_event) d3_event.preventDefault();
-            setVisible(!_button.classed('active'));
-        }
+    uiIssues.togglePane = function() {
+        if (d3_event) d3_event.preventDefault();
+        paneTooltip.hide(_toggleButton);
+        uiIssues.setVisible(!_toggleButton.classed('active'));
+    };
 
-        function setVisible(show) {
-            if (show !== _shown) {
-                _button.classed('active', show);
-                _shown = show;
+    uiIssues.setVisible = function(show) {
+        if (show !== _shown) {
+            _toggleButton.classed('active', show);
+            _shown = show;
 
-                if (show) {
-                    uiBackground.hidePane();
-                    uiHelp.hidePane();
-                    uiMapData.hidePane();
-                    update();
+            if (show) {
+                uiBackground.hidePane();
+                uiHelp.hidePane();
+                uiMapData.hidePane();
+                update();
 
-                    _pane
-                        .style('display', 'block')
-                        .style('right', '-300px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '0px');
+                _pane
+                    .style('display', 'block')
+                    .style('right', '-300px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '0px');
 
-                } else {
-                    _pane
-                        .style('display', 'block')
-                        .style('right', '0px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '-300px')
-                        .on('end', function() {
-                            d3_select(this).style('display', 'none');
-                        });
-                }
+            } else {
+                _pane
+                    .style('display', 'block')
+                    .style('right', '0px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '-300px')
+                    .on('end', function() {
+                        d3_select(this).style('display', 'none');
+                    });
             }
         }
+    };
 
-        _pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane hide');
+    uiIssues.renderToggleButton = function(selection) {
 
-        var paneTooltip = tooltip()
-            .placement((textDirection === 'rtl') ? 'right' : 'left')
-            .html(true)
-            .title(uiTooltipHtml(t('issues.title'), key));
-
-        _button = selection
+        _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', togglePane)
+            .on('click', uiIssues.togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
             .call(addIconBadge)
             .call(paneTooltip);
+
+    };
+
+    uiIssues.renderPane = function(selection) {
+
+        _pane = selection
+            .append('div')
+            .attr('class', 'fillL map-pane issues-pane hide');
 
         var heading = _pane
             .append('div')
@@ -331,7 +336,7 @@ export function uiIssues(context) {
 
         heading
             .append('button')
-            .on('click', function() { uiIssues.hidePane(); })
+            .on('click', uiIssues.hidePane)
             .call(svgIcon('#iD-icon-close'));
 
         var content = _pane
@@ -383,12 +388,8 @@ export function uiIssues(context) {
         update();
 
         context.keybinding()
-            .on(key, togglePane);
+            .on(key, uiIssues.togglePane);
+    };
 
-        uiIssues.hidePane = hidePane;
-        uiIssues.togglePane = togglePane;
-        uiIssues.setVisible = setVisible;
-    }
-
-    return issues;
+    return uiIssues;
 }

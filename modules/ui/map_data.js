@@ -25,7 +25,7 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
-    var pane = d3_select(null);
+    var _pane = d3_select(null), _toggleButton = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
@@ -595,13 +595,13 @@ export function uiMapData(context) {
 
     function update() {
 
-        if (!pane.select('.disclosure-wrap-data_layers').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-data_layers').classed('hide')) {
             updateDataLayers();
         }
-        if (!pane.select('.disclosure-wrap-fill_area').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-fill_area').classed('hide')) {
             updateFillList();
         }
-        if (!pane.select('.disclosure-wrap-map_features').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-map_features').classed('hide')) {
             updateFeatureList();
         }
 
@@ -626,70 +626,71 @@ export function uiMapData(context) {
         context.map().pan([0,0]);  // trigger a redraw
     }
 
+    var paneTooltip = tooltip()
+        .placement((textDirection === 'rtl') ? 'right' : 'left')
+        .html(true)
+        .title(uiTooltipHtml(t('map_data.description'), key));
 
-    function mapData(selection) {
+    uiMapData.hidePane = function() {
+        uiMapData.setVisible(false);
+    };
 
-        function hidePane() {
-            setVisible(false);
-        }
+    uiMapData.togglePane = function() {
+        if (d3_event) d3_event.preventDefault();
+        paneTooltip.hide(_toggleButton);
+        uiMapData.setVisible(!_toggleButton.classed('active'));
+    };
 
-        function togglePane() {
-            if (d3_event) d3_event.preventDefault();
-            paneTooltip.hide(button);
-            setVisible(!button.classed('active'));
-        }
+    uiMapData.setVisible = function(show) {
+        if (show !== _shown) {
+            _toggleButton.classed('active', show);
+            _shown = show;
 
-        function setVisible(show) {
-            if (show !== _shown) {
-                button.classed('active', show);
-                _shown = show;
+            if (show) {
+                uiBackground.hidePane();
+                uiHelp.hidePane();
+                uiIssues.hidePane();
+                update();
 
-                if (show) {
-                    uiBackground.hidePane();
-                    uiHelp.hidePane();
-                    uiIssues.hidePane();
-                    update();
+                _pane
+                    .style('display', 'block')
+                    .style('right', '-300px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '0px');
 
-                    pane
-                        .style('display', 'block')
-                        .style('right', '-300px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '0px');
-
-                } else {
-                    pane
-                        .style('display', 'block')
-                        .style('right', '0px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '-300px')
-                        .on('end', function() {
-                            d3_select(this).style('display', 'none');
-                        });
-                }
+            } else {
+                _pane
+                    .style('display', 'block')
+                    .style('right', '0px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '-300px')
+                    .on('end', function() {
+                        d3_select(this).style('display', 'none');
+                    });
             }
         }
+    };
 
+    uiMapData.renderToggleButton = function(selection) {
 
-        pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane hide');
-
-        var paneTooltip = tooltip()
-            .placement((textDirection === 'rtl') ? 'right' : 'left')
-            .html(true)
-            .title(uiTooltipHtml(t('map_data.description'), key));
-
-        var button = selection
+        _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', togglePane)
+            .on('click', uiMapData.togglePane)
             .call(svgIcon('#iD-icon-data', 'light'))
             .call(paneTooltip);
+    };
 
 
-        var heading = pane
+    uiMapData.renderPane = function(selection) {
+
+        _pane = selection
+            .append('div')
+            .attr('class', 'fillL map-pane map-data-pane hide');
+
+        var heading = _pane
             .append('div')
             .attr('class', 'pane-heading');
 
@@ -699,11 +700,11 @@ export function uiMapData(context) {
 
         heading
             .append('button')
-            .on('click', function() { uiMapData.hidePane(); })
+            .on('click', uiMapData.hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 
-        var content = pane
+        var content = _pane
             .append('div')
             .attr('class', 'pane-content');
 
@@ -744,13 +745,9 @@ export function uiMapData(context) {
         setFill(_fillSelected);
 
         context.keybinding()
-            .on(key, togglePane)
+            .on(key, uiMapData.togglePane)
             .on(t('area_fill.wireframe.key'), toggleWireframe);
+    };
 
-        uiMapData.hidePane = hidePane;
-        uiMapData.togglePane = togglePane;
-        uiMapData.setVisible = setVisible;
-    }
-
-    return mapData;
+    return uiMapData;
 }

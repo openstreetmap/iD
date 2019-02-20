@@ -29,7 +29,7 @@ import { tooltip } from '../util/tooltip';
 export function uiBackground(context) {
     var key = t('background.key');
 
-    var pane = d3_select(null);
+    var _pane = d3_select(null), _toggleButton = d3_select(null);
 
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
@@ -284,11 +284,11 @@ export function uiBackground(context) {
 
     function update() {
 
-        if (!pane.select('.disclosure-wrap-background_list').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-background_list').classed('hide')) {
             updateBackgroundList();
         }
 
-        if (!pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
             updateOverlayList();
         }
 
@@ -310,70 +310,71 @@ export function uiBackground(context) {
         }
     }
 
+    var paneTooltip = tooltip()
+        .placement((textDirection === 'rtl') ? 'right' : 'left')
+        .html(true)
+        .title(uiTooltipHtml(t('background.description'), key));
 
-    function background(selection) {
+    uiBackground.togglePane = function() {
+        if (d3_event) d3_event.preventDefault();
+        paneTooltip.hide(_toggleButton);
+        uiBackground.setVisible(!_toggleButton.classed('active'));
+    };
 
-        function hidePane() {
-            setVisible(false);
-        }
+    uiBackground.hidePane = function() {
+        uiBackground.setVisible(false);
+    };
 
-        function togglePane() {
-            if (d3_event) d3_event.preventDefault();
-            paneTooltip.hide(button);
-            setVisible(!button.classed('active'));
-        }
+    uiBackground.setVisible = function(show) {
+        if (show !== _shown) {
+            _toggleButton.classed('active', show);
+            _shown = show;
 
-        function setVisible(show) {
-            if (show !== _shown) {
-                button.classed('active', show);
-                _shown = show;
+            if (show) {
+                uiHelp.hidePane();
+                uiIssues.hidePane();
+                uiMapData.hidePane();
+                update();
 
-                if (show) {
-                    uiHelp.hidePane();
-                    uiIssues.hidePane();
-                    uiMapData.hidePane();
-                    update();
+                _pane
+                    .style('display', 'block')
+                    .style('right', '-300px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '0px');
 
-                    pane
-                        .style('display', 'block')
-                        .style('right', '-300px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '0px');
-
-                } else {
-                    pane
-                        .style('display', 'block')
-                        .style('right', '0px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '-300px')
-                        .on('end', function() {
-                            d3_select(this).style('display', 'none');
-                        });
-                }
+            } else {
+                _pane
+                    .style('display', 'block')
+                    .style('right', '0px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '-300px')
+                    .on('end', function() {
+                        d3_select(this).style('display', 'none');
+                    });
             }
         }
+    };
 
+    uiBackground.renderToggleButton = function(selection) {
 
-        pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane hide');
-
-        var paneTooltip = tooltip()
-            .placement((textDirection === 'rtl') ? 'right' : 'left')
-            .html(true)
-            .title(uiTooltipHtml(t('background.description'), key));
-
-        var button = selection
+        _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', togglePane)
+            .on('click', uiBackground.togglePane)
             .call(svgIcon('#iD-icon-layers', 'light'))
             .call(paneTooltip);
+    };
+
+    uiBackground.renderPane = function(selection) {
+
+        _pane = selection
+            .append('div')
+            .attr('class', 'fillL map-pane background-pane hide');
 
 
-        var heading = pane
+        var heading = _pane
             .append('div')
             .attr('class', 'pane-heading');
 
@@ -383,11 +384,11 @@ export function uiBackground(context) {
 
         heading
             .append('button')
-            .on('click', function() { uiBackground.hidePane(); })
+            .on('click', uiBackground.hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 
-        var content = pane
+        var content = _pane
             .append('div')
             .attr('class', 'pane-content');
 
@@ -431,13 +432,9 @@ export function uiBackground(context) {
         update();
 
         context.keybinding()
-            .on(key, togglePane)
+            .on(key, uiBackground.togglePane)
             .on(uiCmd('⌘' + key), quickSwitch);
+    };
 
-        uiBackground.hidePane = hidePane;
-        uiBackground.togglePane = togglePane;
-        uiBackground.setVisible = setVisible;
-    }
-
-    return background;
+    return uiBackground;
 }

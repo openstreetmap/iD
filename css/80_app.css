@@ -2955,39 +2955,39 @@ div.full-screen > button:hover {
     text-overflow: ellipsis;
 }
 
-.map-data-control .layer-list button,
-.background-control .layer-list button {
+.map-data-pane .layer-list button,
+.background-pane .layer-list button {
     float: right;
     height: 100%;
     width: 10%;
     border-left: 1px solid #ccc;
     border-radius: 0;
 }
-[dir='rtl'] .map-data-control .layer-list button,
-[dir='rtl'] .background-control .layer-list button {
+[dir='rtl'] .map-data-pane .layer-list button,
+[dir='rtl'] .background-pane .layer-list button {
     float: left;
     border-left: none;
     border-right: 1px solid #ccc;
 }
 
-.map-data-control .layer-list button .icon,
-.background-control .layer-list button .icon {
+.map-data-pane .layer-list button .icon,
+.background-pane .layer-list button .icon {
     opacity: 0.5;
 }
 
-.map-data-control .layer-list button:first-of-type,
-.background-control .layer-list button:first-of-type {
+.map-data-pane .layer-list button:first-of-type,
+.background-pane .layer-list button:first-of-type {
     border-radius: 0 3px 3px 0;
 }
-[dir='rtl'] .map-data-control .layer-list button:first-of-type,
-[dir='rtl'] .background-control .layer-list button:first-of-type {
+[dir='rtl'] .map-data-pane .layer-list button:first-of-type,
+[dir='rtl'] .background-pane .layer-list button:first-of-type {
     border-radius: 3px 0 0 3px;
 }
 
-.map-data-control .vectortile-container .vectortile-header {
+.map-data-pane .vectortile-container .vectortile-header {
     padding-bottom: 5px;
 }
-.map-data-control .vectortile-container .vectortile-footer {
+.map-data-pane .vectortile-container .vectortile-footer {
     padding-bottom: 10px;
 }
 
@@ -3186,7 +3186,7 @@ ul.issue-fix-list button {
 
 /* Background - Adjust Alignment
 ------------------------------------------------------- */
-.background-control .nudge-container {
+.background-pane .nudge-container {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
@@ -3287,25 +3287,25 @@ ul.issue-fix-list button {
    cursor: move;
 }
 
-.background-control .nudge.right::after {
+.background-pane .nudge.right::after {
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 5px solid #222;
 }
 
-.background-control .nudge.left::after {
+.background-pane .nudge.left::after {
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-right: 5px solid #222;
 }
 
-.background-control .nudge.top::after {
+.background-pane .nudge.top::after {
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     border-bottom: 5px solid #222;
 }
 
-.background-control .nudge.bottom::after {
+.background-pane .nudge.bottom::after {
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     border-top: 5px solid #222;
@@ -3315,15 +3315,16 @@ ul.issue-fix-list button {
 /* Side Panes - Background / Map Data / Help
 ------------------------------------------------------- */
 .map-pane {
-    position: fixed;
+    position: absolute;
     top: 60px;
     bottom: 30px;
     right: 0;
-    width: 33.3333%;
+    width: 100%;
     max-width: 400px;
+    min-width: 180px;
     padding-bottom: 50px;
     overflow: hidden;
-    z-index: -1;
+    z-index: 10;
 }
 [dir='rtl'] .map-pane {
     left: 0;
@@ -3331,7 +3332,6 @@ ul.issue-fix-list button {
 }
 
 .map-pane.help-wrap {
-    width: 50.0000%;
     max-width: 600px;
 }
 
@@ -3340,15 +3340,16 @@ ul.issue-fix-list button {
     flex-flow: row nowrap;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
+    height: 60px;
 }
 
 .pane-heading h2 {
-    margin: 15px 20px;
+    margin: 14px 20px;
 }
 
 .pane-heading button {
     width: 40px;
-    height: 61px;
+    height: 100%;
     border-radius: 0;
 }
 
