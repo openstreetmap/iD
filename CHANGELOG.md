@@ -7,7 +7,7 @@ or learn more by visiting our project page on GitHub:  :octocat: https://github.
 
 If you love iD, please star our project on GitHub to show your support! :star:
 
-_Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
+_Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :triangular_flag_on_post:
 
 <!--
 # A.B.C
@@ -18,6 +18,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :boom: Breaking Changes
 #### :tada: New Features
 #### :sparkles: Usability
+#### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -27,6 +28,164 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [@xxxx]: https://github.com/xxxx
 -->
+
+# 2.14.0
+##### Planned: 2019-Feb
+
+#### :mega: Release Highlights
+* :warning: iD now validates features while you edit! Select a feature to see its issues and access quick fixes.<br/>
+_Open the new Issues pane (shortcut <kbd>I</kbd>) to browse all errors and warnings._
+* :female-detective: You can now browse missing road data detected by [ImproveOSM](https://improveosm.org) from Telenav. Shoutout to [@SilentSpike] for working on this!<br/>
+_Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" to view detected data._
+
+#### :tada: New Features
+* Integrate ImproveOSM data detection tools ([#5683], [#5739], thanks [@SilentSpike])
+
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5683]: https://github.com/openstreetmap/iD/issues/5683
+[#5739]: https://github.com/openstreetmap/iD/issues/5739
+
+[@SilentSpike]: https://github.com/SilentSpike
+
+#### :sparkles: Usability
+* Don't close the open photo when toggling the photo overlay ([#5829], [#5836], thanks [@maxgrossman])
+* Allow the up and down buttons to work on empty number fields ([#5844], [#5852], thanks [@AndreasHae])
+* Render previews for all line icons and don't show previews when line icons are used for areas ([#5839], [#5888])
+* Open the area feature browser immediately after selecting the multipolygon relation type ([#5765])
+* Render selected features on the map even if their layer is hidden ([#5880])
+* When adding a duplicate tag, focus the existing key instead of adding a "_1" suffix ([#2896])
+* Exclude tags already on object from auto-completion in the All tags list ([#3625])
+* Allow tag values to be entered before keys ([#5872])
+* Allow deletetion of tags while one is focused ([#5878])
+* Make address field suggestions case sensitive ([#5887])
+* Replace the "Edit or translate documentation" link text with a pencil icon ([#5753])
+* When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
+
+[#5829]: https://github.com/openstreetmap/iD/issues/5829
+[#5836]: https://github.com/openstreetmap/iD/issues/5836
+[#5844]: https://github.com/openstreetmap/iD/issues/5844
+[#5852]: https://github.com/openstreetmap/iD/issues/5852
+[#5839]: https://github.com/openstreetmap/iD/issues/5839
+[#5888]: https://github.com/openstreetmap/iD/issues/5888
+[#5765]: https://github.com/openstreetmap/iD/issues/5765
+[#5880]: https://github.com/openstreetmap/iD/issues/5880
+[#2896]: https://github.com/openstreetmap/iD/issues/2896
+[#3625]: https://github.com/openstreetmap/iD/issues/3625
+[#5872]: https://github.com/openstreetmap/iD/issues/5872
+[#5878]: https://github.com/openstreetmap/iD/issues/5878
+[#5887]: https://github.com/openstreetmap/iD/issues/5887
+[#5753]: https://github.com/openstreetmap/iD/issues/5753
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+
+[@AndreasHae]: https://github.com/AndreasHae
+
+#### :white_check_mark: Validation
+* Flag crossing highways, railways, waterways, and buildings ([#1669], [#5217], [#5830], thanks [@gaoxm])
+* Connect crossing lines with one click ([#5830])
+* Flag highways that are very close but not connected to other highways ([#5830], thanks [@gaoxm])
+* Connect very close highways with one click ([#5830])
+* Prevent merging ways if it would cause self-intersection ([#5745], thanks [@jguthrie100])
+* When drawing a way or dragging a vertex, don't snap to points that cannot be vertices ([#5811], [#5875], thanks [@maxgrossman])
+* Flag more instances of lines tagged as areas ([#5830])
+* Connect the endpoints of open areas with one click ([#5830])
+* Flag more instances of deprecated tags ([#5830])
+* Upgrade deprecated tags with one click ([#4591])
+* Flag more instances of generic names ([#5830])
+* Remove generic names with a single click ([#5830])
+* Continue disconnected highways from the feature inspector ([#5830])
+* Move a multipolygon's tags from its outer way to its relation with one click ([#5830])
+* Flag relations without a "type" tag ([#5870], [#5830])
+* Flag features with only meta tags like "source" or "created_by" ([#5830])
+* Block the upload of untagged features ([#5830])
+* Disable adding features of a hidden feature type to avoid redundant mapping ([#5876], [#5884])
+* Don't count vertices when warning of many deletions ([#5830]) 
+
+[#1669]: https://github.com/openstreetmap/iD/issues/1669
+[#5217]: https://github.com/openstreetmap/iD/issues/5217
+[#5745]: https://github.com/openstreetmap/iD/issues/5745
+[#5811]: https://github.com/openstreetmap/iD/issues/5811
+[#5875]: https://github.com/openstreetmap/iD/issues/5875
+[#5870]: https://github.com/openstreetmap/iD/issues/5870
+[#5876]: https://github.com/openstreetmap/iD/issues/5876
+[#5884]: https://github.com/openstreetmap/iD/issues/5884
+[#4591]: https://github.com/openstreetmap/iD/issues/4591
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+
+[@gaoxm]: https://github.com/gaoxm
+
+#### :bug: Bugfixes
+* Fix reversal of turn lanes when reversing a way ([#5674], [#5826], thanks [@SilentSpike])
+* Fix photo overlay selection styling behavior ([#5494], [#5816], thanks [@SilentSpike])
+* Add Junction field to highway presets ([#1264])
+* Fix transit platforms drawn as areas turning into lines upon completion ([#5837])
+* Don't replace spaces with underscores in Destinations and Destination Road Numbers fields ([#5842])
+* Fix error upon deleting all tags and then adding one ([#5840])
+* Fix issue where relation documentation could not be found ([#5860])
+* Hide lines that are part of boundary relations when boundaries are hidden ([#5601])
+* Fix mangling of the undo history when undoing while drawing a way  ([#5830])
+
+[#5674]: https://github.com/openstreetmap/iD/issues/5674
+[#5826]: https://github.com/openstreetmap/iD/issues/5826
+[#5494]: https://github.com/openstreetmap/iD/issues/5494
+[#5816]: https://github.com/openstreetmap/iD/issues/5816
+[#1264]: https://github.com/openstreetmap/iD/issues/1264
+[#5837]: https://github.com/openstreetmap/iD/issues/5837
+[#5842]: https://github.com/openstreetmap/iD/issues/5842
+[#5840]: https://github.com/openstreetmap/iD/issues/5840
+[#5860]: https://github.com/openstreetmap/iD/issues/5860
+[#5601]: https://github.com/openstreetmap/iD/issues/5601
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+
+[@SilentSpike]: https://github.com/SilentSpike
+
+#### :earth_asia: Localization
+* Update the Museum and Planetarium preset icons to not include the letter "M" ([#5751])
+* Don't capitalize feature names in KeepRight messages in right-to-left layouts ([#5877])
+* Keep the map still when resizing the sidebar in right-to-left layouts ([#5881])
+
+[#5751]: https://github.com/openstreetmap/iD/issues/5751
+[#5877]: https://github.com/openstreetmap/iD/issues/5877
+[#5881]: https://github.com/openstreetmap/iD/issues/5881
+
+#### :hourglass: Performance
+* Optimize code tests by not reloading all presets for every test ([#5832])
+
+[#5832]: https://github.com/openstreetmap/iD/issues/5832
+
+#### :rocket: Presets
+* Add Golf Cartpath, Golf Walking Path, and Driving Range presets ([#5859], [#5862], thanks [@chadrockey])
+* Add Photo Booth preset ([#5892], [#5894], thanks [@danielwu830])
+* Add Mexican Fast Food and Chess Table presets
+* Add Climbing Gym, Bell Tower, Minaret, Sundial presets ([#5749], [#5772], [#5817], [#5771])
+* Add Salt and Tidal fields to water presets ([#5822])
+* Add specialized rendering of Aerialways and Pistes ([#5843])
+* Render Dam areas, Groynes, and Breakwaters as grey ([#5759])
+* Render the borders of Construction areas as yellow
+* Render barriers on area features again ([#5761])
+* Improve Club icons ([#5854])
+* Rename building=train_station preset to Train Station Building ([#5903]) 
+* Make generic Land Use, Leisure, Amenity, Man Made, Natural, and Tourism presets unsearchable
+* Add "box office" as a search term for Ticket Shop ([#5849])
+* Add more search terms to various other Shops
+
+[#5859]: https://github.com/openstreetmap/iD/issues/5859
+[#5862]: https://github.com/openstreetmap/iD/issues/5862
+[#5892]: https://github.com/openstreetmap/iD/issues/5892
+[#5894]: https://github.com/openstreetmap/iD/issues/5894
+[#5749]: https://github.com/openstreetmap/iD/issues/5749
+[#5772]: https://github.com/openstreetmap/iD/issues/5772
+[#5817]: https://github.com/openstreetmap/iD/issues/5817
+[#5771]: https://github.com/openstreetmap/iD/issues/5771
+[#5822]: https://github.com/openstreetmap/iD/issues/5822
+[#5843]: https://github.com/openstreetmap/iD/issues/5843
+[#5759]: https://github.com/openstreetmap/iD/issues/5759
+[#5761]: https://github.com/openstreetmap/iD/issues/5761
+[#5854]: https://github.com/openstreetmap/iD/issues/5854
+[#5903]: https://github.com/openstreetmap/iD/issues/5903
+[#5849]: https://github.com/openstreetmap/iD/issues/5849
+
+[@chadrockey]: https://github.com/chadrockey
+[@danielwu830]: https://github.com/danielwu830
 
 # 2.13.1
 ##### 2019-Jan-28
@@ -298,7 +457,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Don't create hidden/universal fields until they are actually needed
 * Don't render contents of collapsed sections (e.g. hidden raw tag editor)
 * Don't recreate as many comboboxes on every render ([#5568])
-  * :warning: Code refactor - Move lib/d3.combobox.js -> ui/combobox.js
+  * :triangular_flag_on_post: Code refactor - Move lib/d3.combobox.js -> ui/combobox.js
 
 [#5568]: https://github.com/openstreetmap/iD/issues/5568
 
@@ -360,9 +519,9 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * Upgrade the brand name presets from new [name-suggestion-index](https://github.com/osmlab/name-suggestion-index):
   * Display name suggestion presets on 2 lines ([#5514])
   * Offer up to 10 brand name suggestions in the name field, show preset type alongside brand name
-  * :warning: Code refactor - remove `dataSuggestions` and `utilSuggestNames` functions
+  * :triangular_flag_on_post: Code refactor - remove `dataSuggestions` and `utilSuggestNames` functions
 * Add `context.keybinding` for keybindings that don't change ([#5487])
-  * :warning: Code refactor - Move `lib/d3.keybinding.js` -> `util/keybinding.js`
+  * :triangular_flag_on_post: Code refactor - Move `lib/d3.keybinding.js` -> `util/keybinding.js`
 * The sidebar can be now be resized by dragging the divider ([#3447], [#5443], thanks [@quincylvania])
   * There is also a new button in the top tool bar, and keyboard shortcut to toggle the sidebar
 * Add hover-highlighting to the selected features list ([#5404], thanks [@quincylvania])
@@ -702,7 +861,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 * Add support for vector tile data ([#3742], [#5072], [#5243], thanks [@vershwal] and [@geohacker])
   * Replaced the "GPX"/"Local Data" layer with "Custom Map Data" on Map Data pane.
   * We've added several vector tile sources to the Map Data pane.  They will be available if the user is editing around Detroit.  This is a "Beta" feature to demonstrate the technology. (thanks [@jonahadkins])
-  * :warning: We refactored `svgGpx`->`svgData` module, which now handles both data files and data from vector tile urls. (Important: the URL parameter for loading gpx files has **not** changed, and remains compatible with applications like the HOT Task Manager).
+  * :triangular_flag_on_post: We refactored `svgGpx`->`svgData` module, which now handles both data files and data from vector tile urls. (Important: the URL parameter for loading gpx files has **not** changed, and remains compatible with applications like the HOT Task Manager).
   * Added `serviceVectorTile` for fetching and caching data from vector tile servers, and merging and deduplicating features that cross tile boundaries.
 
 [#5243]: https://github.com/openstreetmap/iD/issues/5243
@@ -810,8 +969,8 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Add Detach Node operation ([#4320], [#5127], thanks [@Psigio])
 * Add support for high resolution image tile sizes
   * This improves the appearance of the Mapbox Satellite layer and fixes the display of MTB-Norway layer ([#5179])
-  * :warning: We refactored `d3.geo.tile`->`utilTiler`, `scaleExtent`->`zoomExtent` ([#5104], [#5148], thanks [@thomas-hervey])
-  * :warning: `context.loadTiles` and a few other functions have changed arity - they no longer require a `dimensions` argument
+  * :triangular_flag_on_post: We refactored `d3.geo.tile`->`utilTiler`, `scaleExtent`->`zoomExtent` ([#5104], [#5148], thanks [@thomas-hervey])
+  * :triangular_flag_on_post: `context.loadTiles` and a few other functions have changed arity - they no longer require a `dimensions` argument
 * Add ability to resize Mapillary / OpenStreetCam / Bing Streetside photo viewer ([#5138], [#4930], thanks [@kratico])
 * Add "View on Bing Maps" link and Forward/Backward controls to Bing Streetside ([#5125])
 
@@ -973,7 +1132,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
   * Added support for more icon sets (such as [FontAwesome](https://fontawesome.com/icons?d=gallery)) for presets or other iD icons ([#3025])
   * Extracted many preset icons from the iD sprite into a separate project: [bhousel/temaki](https://github.com/bhousel/temaki)
   * Many presets that previously did not have a suitable icon now have one.
-  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/master/data/presets/README.md#icons) for more details.
+  * :triangular_flag_on_post: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/master/data/presets/README.md#icons) for more details.
 
 [#5050]: https://github.com/openstreetmap/iD/issues/5050
 [#3924]: https://github.com/openstreetmap/iD/issues/3924
@@ -1116,7 +1275,7 @@ _Reach out to nearby mappers and say hello!_
 
 #### :boom: Breaking Changes
 * Drop support for node 4 / npm 2 ([#4853])
-  * :warning: If you are building the iD project, you will need to upgrade your node version.
+  * :triangular_flag_on_post: If you are building the iD project, you will need to upgrade your node version.
 
 [#4853]: https://github.com/openstreetmap/iD/issues/4853
 
@@ -1326,7 +1485,7 @@ _Reach out to nearby mappers and say hello!_
 #### :tada: New Features
 * Support background imagery on WMS servers supporting EPSG:3857 ([#1141], [#4814], thanks [@tyrasd] and [@grischard])
 * Add support for complex intersection via way, and `only_` restrictions ([#2346], [#2622], [#4768])
-  * :warning: code depending on any of these modules will need modification:
+  * :triangular_flag_on_post: code depending on any of these modules will need modification:
   `actionRestrictTurn`, `actionUnrestrictTurn`, `osmIntersection`, `osmInferRestriction`, `uiFieldRestrictions`
 * Added `uiFieldHelp` component for popup field help (currently used only for restrictions field) ([#4768])
 
@@ -2537,7 +2696,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add "What's new in iD" notification when user sees a new version for the first time ([#1856])
 * Always access OSM over https now
 * Replace radial menu with a context menu ([#3671], [#3753], thanks [@kepta], [@rasagy], [@samanpwbb], [@slhh])
-  * :warning: users may continue to use the radial menu by setting a flag in localStorage, but it is deprecated and will be removed eventually
+  * :triangular_flag_on_post: users may continue to use the radial menu by setting a flag in localStorage, but it is deprecated and will be removed eventually
 
 [#3933]: https://github.com/openstreetmap/iD/issues/3933
 [#3908]: https://github.com/openstreetmap/iD/issues/3908
@@ -2811,7 +2970,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
   * Includes icon for tourism information objects ([#3573])
   * Includes icon for subway_entrance ([#3255])
 * Support replacing the geocoder service ([#3754], thanks [@kepta])
-  * :warning: `iD.services.nominatim` is now `iD.services.geocoder`
+  * :triangular_flag_on_post: `iD.services.nominatim` is now `iD.services.geocoder`
 * Support smoothly transitioned actions ([#3659])
 * Add Reflect Long / Reflect Short operations ([#3555], [#3375], thanks [@Psigio])
 * Improved address field customization, allow country-specific placeholders ([#3643], thanks [@Natsuyasumi])
@@ -3030,21 +3189,21 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 ##### 2016-Nov-15
 
 #### :boom: Breaking Changes
-* :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
+* :triangular_flag_on_post: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
   * Many thanks to @tmcw, @kepta, @tyrasd, @beaugunderson, @davidchouse
-* :warning: Flattened namespace means that all functions have changed names (#3479)
+* :triangular_flag_on_post: Flattened namespace means that all functions have changed names (#3479)
   * e.g. `iD.actions.Move` -> `iD.actionMove`, `iD.geo.Extent` -> `iD.geoExtent`
   * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
-* :warning: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
+* :triangular_flag_on_post: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
   * No longer need to call things like `presets()`, `imagery()`, `taginfo()` when creating `iD.Context`
   * See [API.md](https://github.com/openstreetmap/iD/blob/master/API.md#customized-deployments) for details on customized deployments
-* :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
+* :triangular_flag_on_post: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
   * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
-* :warning: iD now uses `npm` scripts for all build processes
+* :triangular_flag_on_post: iD now uses `npm` scripts for all build processes
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
-* :warning: iD url hash map order has changed to `zoom/latitude/longitude` to match OSM and others (#3554)
-* :warning: Authentication methods like `context.preauth`, `connection.switch`, `iD.uiSourceSwitch.keys` options have changed
+* :triangular_flag_on_post: iD url hash map order has changed to `zoom/latitude/longitude` to match OSM and others (#3554)
+* :triangular_flag_on_post: Authentication methods like `context.preauth`, `connection.switch`, `iD.uiSourceSwitch.keys` options have changed
   * `url` option has been renamed to `urlroot`
 
 #### :tada: New Features
@@ -3254,7 +3413,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
   * Add ability to remove/disable Mapillary layers (#2722)
 * Add expansion arrows to category presets for better usability (#2972, thanks @kepta)
 * Refactor services into iD.services namespace
-  * :warning: This means that `iD.taginfo` is now `iD.serviceTaginfo`
+  * :triangular_flag_on_post: This means that `iD.taginfo` is now `iD.serviceTaginfo`
 * Disallow disconnecting that would damage relations (#1714, thanks @jfirebaugh)
 * Allow escape to cancel ⌘-V paste (#2889)
 * Enter should accept input and return to browse mode only on preset input fields (#2912, #2957, #2380)
@@ -3360,7 +3519,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add surface type to parking preset (#2816)
 * Make 100% background brightness the default (#2824)
 * Use SVG for preset and feature icons (#2785)
-  * :warning: Projects that have customized the icon spritesheet may need to upgrade their custom icons
+  * :triangular_flag_on_post: Projects that have customized the icon spritesheet may need to upgrade their custom icons
 * Add "Help Translate" icon next to "Report a Bug" (#2766)
 * Update highway colors to match openstreetmap-carto (#2764)
 * Prefer suggested capitalization in autocomplete box (#2791)
@@ -3512,7 +3671,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
   * Area filling options (full, partial, wireframe) (#813)
   * Map Features filtering (#1299, #1871, #2033)
 * Allow customization of presets, imagery, and taginfo
-  * :warning: These _must_ be set when creating an`iD()` object - see `index.html` example
+  * :triangular_flag_on_post: These _must_ be set when creating an`iD()` object - see `index.html` example
 
 
 # 1.6.2
