@@ -1560,6 +1560,12 @@
                     "title": "移动标签",
                     "annotation": "移动标签。"
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "删除一个旧标签。"
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "删除一个旧标签组合。"
+                },
                 "remove_generic_name": {
                     "title": "删除名称",
                     "annotation": "删除笼统名称。"
@@ -1567,6 +1573,9 @@
                 "remove_tag": {
                     "title": "删除标签",
                     "annotation": "删除标签。"
+                },
+                "remove_tags": {
+                    "title": "删除标签"
                 },
                 "reposition_features": {
                     "title": "更改要素位置"
@@ -1579,9 +1588,11 @@
                     "annotation": "标记极相近要素为断开连接。"
                 },
                 "upgrade_tag": {
+                    "title": "改进此标签",
                     "annotation": "改进一个旧标签。"
                 },
                 "upgrade_tag_combo": {
+                    "title": "改进这些标签",
                     "annotation": "改进一个旧标签组合。"
                 },
                 "use_bridge_or_tunnel": {

@@ -1475,6 +1475,12 @@
                 },
                 "bridge-bridge_connectable": {
                     "tip": "Intersekciĝantaj pontoj estu konektitaj, aŭ estu sur malsamaj tavoloj."
+                },
+                "indoor-indoor": {
+                    "tip": "Intersekciĝantaj enkonstruaĵaj objektoj estu sur malsamaj etaĝoj."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Intersekciĝantaj enkonstruaĵaj objektoj estu konektitaj aŭ estu sur malsamaj etaĝoj."
                 }
             },
             "deprecated_tag": {
@@ -1552,6 +1558,12 @@
                     "title": "Movi etikedojn",
                     "annotation": "Movis etikedojn."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Forigis malnovan evitindan etikedon."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Forigis malnovan evitindan kombinaĵon de etikedoj."
+                },
                 "remove_generic_name": {
                     "title": "Forigi nomon",
                     "annotation": "Forigis misuzitan etikedon “nomo”."
@@ -1559,6 +1571,9 @@
                 "remove_tag": {
                     "title": "Forigi etikedon",
                     "annotation": "Forigis etikedon."
+                },
+                "remove_tags": {
+                    "title": "Forigi etikedojn"
                 },
                 "reposition_features": {
                     "title": "Movi objektojn"
@@ -1571,10 +1586,24 @@
                     "annotation": "Markis tre proksimajn objektojn kiel nekonektitajn."
                 },
                 "upgrade_tag": {
+                    "title": "Uzi konsilindan etikedon",
                     "annotation": "Anstataŭigis malnovan evitindan etikedon."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Uzi konsilindajn etikedojn",
                     "annotation": "Anstataŭigis malnovan evitindan kombinaĵon de etikedoj."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Uzi ponton aŭ tunelon"
+                },
+                "use_different_layers": {
+                    "title": "Uzi malsamajn tavolojn"
+                },
+                "use_different_levels": {
+                    "title": "Uzi malsamajn etaĝojn"
+                },
+                "use_tunnel": {
+                    "title": "Uzi tunelon"
                 }
             }
         },
