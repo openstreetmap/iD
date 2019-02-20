@@ -5,13 +5,13 @@
         "ref_platform",
         "network",
         "operator",
+        "departures_board",
         "surface"
     ],
     "moreFields": [
         "lit",
         "bench",
         "shelter",
-        "passenger_information_display",
         "wheelchair"
     ],
     "geometry": [

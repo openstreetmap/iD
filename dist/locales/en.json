@@ -2463,6 +2463,15 @@
                 "denotation": {
                     "label": "Denotation"
                 },
+                "departures_board": {
+                    "label": "Departures Board",
+                    "options": {
+                        "yes": "Yes",
+                        "timetable": "Timetable",
+                        "realtime": "Realtime",
+                        "no": "None"
+                    }
+                },
                 "description": {
                     "label": "Description"
                 },
@@ -3081,9 +3090,6 @@
                         "garage_boxes": "Garage Boxes",
                         "lane": "Roadside Lane"
                     }
-                },
-                "passenger_information_display": {
-                    "label": "Passenger information display"
                 },
                 "payment_multi": {
                     "label": "Payment Types"

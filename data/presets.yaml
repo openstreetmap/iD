@@ -468,6 +468,18 @@ en:
       denotation:
         # denotation=*
         label: Denotation
+      departures_board:
+        # departures_board=*
+        label: Departures Board
+        options:
+          # departures_board=no
+          'no': None
+          # departures_board=realtime
+          realtime: Realtime
+          # departures_board=timetable
+          timetable: Timetable
+          # departures_board=yes
+          'yes': 'Yes'
       description:
         # description=*
         label: Description
@@ -1211,9 +1223,6 @@ en:
           surface: Surface
           # parking=underground
           underground: Underground
-      passenger_information_display:
-        # passenger_information_display=*
-        label: Passenger information display
       payment_multi:
         # 'payment:=*'
         label: Payment Types
