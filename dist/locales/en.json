@@ -8377,6 +8377,13 @@
                 "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
                 "name": "Japan GSI airphoto Imagery"
             },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan seamless photo"
+                },
+                "description": "Japan GSI seamlessphoto Imagery. The collection of latest imageries of GSI ortho, airphoto, post disaster and others.",
+                "name": "Japan GSI seamlessphoto Imagery"
+            },
             "gsi.go.jp_std_map": {
                 "attribution": {
                     "text": "GSI Japan"
