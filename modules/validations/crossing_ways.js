@@ -1,6 +1,3 @@
-import _map from 'lodash-es/map';
-import _flattenDeep from 'lodash-es/flatten';
-
 import { actionAddMidpoint, actionMergeNodes } from '../actions';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
 import { osmNode } from '../osm';
@@ -276,41 +273,42 @@ export function validationCrossingWays() {
     }
 
 
+    function waysToCheck(entity, context) {
+        if (!getFeatureTypeForTags(entity.tags)) {
+            return [];
+        }
+        if (entity.type === 'way') {
+            return [entity];
+        } else if (entity.type === 'relation' &&
+            entity.isMultipolygon() &&
+            // only check multipolygons if they are buildings
+            hasTag(entity.tags, 'building')) {
+            return entity.members.reduce(function(array, member) {
+                if (member.type === 'way' &&
+                    //(member.role === 'outer' || member.role === 'inner') &&
+                    context.hasEntity(member.id)) {
+                    var entity = context.entity(member.id);
+                    array.push(entity);
+                }
+                return array;
+            }, []);
+        }
+        return [];
+    }
+
     var validation = function(entity, context) {
         var graph = context.graph();
         var tree = context.history().tree();
 
-        var waysToCheck = _flattenDeep(_map([entity], function(entity) {
-            if (!getFeatureTypeForTags(entity.tags)) {
-                return [];
-            }
-            if (entity.type === 'way') {
-                return entity;
-            } else if (entity.type === 'relation' &&
-                entity.tags.type === 'multipolygon' &&
-                // only check multipolygons if they are buildings
-                hasTag(entity.tags, 'building')) {
-                return _map(entity.members, function(member) {
-                    if (context.hasEntity(member.id)) {
-                        var entity = context.entity(member.id);
-                        if (entity.type === 'way') {
-                            return entity;
-                        }
-                    }
-                    return [];
-                });
-            }
-            return [];
-        }));
-
-        var crossings = waysToCheck.reduce(function(array, way) {
-            return array.concat(findCrossingsByWay(way, graph, tree));
-        }, []);
+        var ways = waysToCheck(entity, context);
 
         var issues = [];
-        crossings.forEach(function(crossing) {
-            issues.push(createIssue(crossing, context));
-        });
+        for (var wayIndex in ways) {
+            var crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
+            for (var crossingIndex in crossings) {
+                issues.push(createIssue(crossings[crossingIndex], context));
+            }
+        }
         return issues;
     };
 
@@ -331,7 +329,7 @@ export function validationCrossingWays() {
             }
             return type1 < type2;
         });
-        entities = _map(entities, function(way) {
+        entities = entities.map(function(way) {
             return getFeatureWithFeatureTypeTagsForWay(way, graph);
         });
 
