@@ -53,15 +53,18 @@ export function validationMissingTag() {
             var id = this.issue.entities[0].id;
             operationDelete([id], context)();
         };
+        var canDelete = true;
+        
         if (entity.type === 'relation' &&
             !entity.members.every(function(member) { return context.hasEntity(member.id); })) {
             deleteFixOnClick = null;
+            canDelete = false;
         }
 
         issues.push(new validationIssue({
             type: type,
-            // error if created or modified, else warning
-            severity: !entity.version || entity.v  ? 'error' : 'warning',
+            // error if created or modified and is deletable, else warning
+            severity: (!entity.version || entity.v) && canDelete  ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
             tooltip: t('issues.missing_tag.tip'),
             entities: [entity],
