@@ -163,6 +163,9 @@ path.line.casing.tag-man_made-pipeline {
 .low-zoom path.line.stroke.tag-man_made-pipeline {
     stroke-dasharray: 40, 1;
 }
+.preset-icon-line path.line.stroke.tag-man_made-pipeline {
+    stroke-dasharray: 19, 1;
+}
 
 
 /* boundaries */
