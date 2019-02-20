@@ -269,12 +269,6 @@
             },
             "rail": {
                 "tooltip": "இரயில்வே"
-            },
-            "past_future": {
-                "description": "கடந்த கால / எதிர்கால"
-            },
-            "others": {
-                "description": "பிற"
             }
         },
         "area_fill": {
@@ -313,10 +307,6 @@
         },
         "tag_reference": {
             "description": "விளக்கம்"
-        },
-        "validations": {
-            "untagged_area": "குறிக்கப்படாதப் பகுதி",
-            "untagged_relation": "குறிக்கப்படாதத் தொடர்பு"
         },
         "note": {
             "note": "குறிப்பு",
@@ -494,9 +484,6 @@
                 },
                 "category-building": {
                     "name": "கட்டிடம் அம்சங்கள்"
-                },
-                "category-golf": {
-                    "name": "குழிப்பந்தாட்ட அம்சங்கள்"
                 },
                 "category-landuse": {
                     "name": "காணிப் பயன்பாட்டு அம்சங்கள்"
@@ -1638,8 +1625,7 @@
                     "label": "வகை"
                 },
                 "website": {
-                    "label": "இணையதளம்",
-                    "placeholder": "http://example.com/"
+                    "label": "இணையதளம்"
                 },
                 "wetland": {
                     "label": "வகை"
@@ -1932,9 +1918,6 @@
                 },
                 "building/temple": {
                     "name": "கோயில் கட்டிடம்"
-                },
-                "building/train_station": {
-                    "name": "தொடருந்து நிலையம்"
                 },
                 "building/transportation": {
                     "name": "போக்குவரத்துக் கட்டிடம்"
@@ -2280,15 +2263,6 @@
                 },
                 "power/tower": {
                     "name": "அதிக-மின்னழுத்தக் கோபுரம்"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "பேருந்து நிறுத்தம் / தடம்"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "இலகு இரயில் நிறுத்தம் / நடைமேடை"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "இரயில் நிறுத்தம் / தடம்"
                 },
                 "public_transport/platform_bus": {
                     "name": "பேருந்து நிறுத்தம்  / தடம்"

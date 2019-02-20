@@ -193,7 +193,8 @@
                 "restriction": "این عارضه‌ها را نمی‌توان ادغام کرد، زیرا به یک رابطهٔ «{relation}» آسیب می‌زند.",
                 "relation": "این عارضه‌ها را نمی‌توانید ادغام کنید، زیرا نقش‌های آن‌ها در رابطه، با هم تداخل دارد.",
                 "incomplete_relation": "این عارضه‌ها را نمی‌توان ادغام کرد زیرا حداقل یکی از آن‌ها کامل دانلود نشده است.",
-                "conflicting_tags": "این عارضه‌ها را نمی‌توان ادغام کرد زیرا مقدار بعضی از تگ‌های آن‌ها با هم تداخل دارد."
+                "conflicting_tags": "این عارضه‌ها را نمی‌توان ادغام کرد زیرا مقدار بعضی از تگ‌های آن‌ها با هم تداخل دارد.",
+                "paths_intersect": "این عارضه‌ها را نمی‌توان ادغام کرد زیرا شکل نهایی خودش را قطع خواهد کرد."
             },
             "move": {
                 "title": "جابه‌جایی",
@@ -413,6 +414,8 @@
             "modified": "اصلاح",
             "deleted": "حذف",
             "created": "ایجاد",
+            "outstanding_errors_message": "لطفاً ابتدا همهٔ خطاها را اصلاح کنید. {count} مورد مانده.",
+            "comment_needed_message": "لطفاً ابتدا توضیحی برای بستهٔ تغییرات خود بنویسید.",
             "about_changeset_comments": "دربارهٔ توضیح تغییرات",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Fa:Good_changeset_comments",
             "google_warning": "شما در توضیحات خود از گوگل نام بردید. لطفا توجه داشته باشید که کپی کردن از نقشه‌های گوگل، ممنوع است.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "این داده‌ها را در مرکز قرار بده و روی آن بزرگنمایی کن.",
                 "tooltip_issue": "این مسئله را در مرکز قرار بده و روی آن بزرگنمایی کن."
             },
-            "no_documentation_combination": "برای این ترکیب تگ‌ها مستنداتی موجود نیست",
-            "no_documentation_key": "برای این کلید مستنداتی موجود نیست",
             "show_more": "نمایش بیشتر",
             "view_on_osm": "نمایش در openstreetmap.org",
             "view_on_keepRight": "نمایش در keepright.at",
@@ -519,10 +520,14 @@
             "role": "نقش",
             "choose": "انتخاب نوع عارضه",
             "results": "{n} نتیجه برای {search}",
-            "reference": "نمایش در ویکی  OpenStreetMap",
-            "edit_reference": "توضیحات را ویرایش یا ترجمه کنید",
+            "no_documentation_key": "مستنداتی موجود نیست.",
+            "edit_reference": "اصلاح/ترجمه",
             "wiki_reference": "مشاهده مستندات",
             "wiki_en_reference": "مشاهده مستندات به زبان انگلیسی",
+            "hidden_preset": {
+                "manual": "{features} مخفی هستند. آن‌ها را از طریق کادر «داده‌های نقشه» فعال کنید.",
+                "zoom": "{features} مخفی هستند. بزرگنمایی کنید تا فعال شوند."
+            },
             "back_tooltip": "تغییر عارضه",
             "remove": "پاک کردن",
             "search": "جستجو",
@@ -597,6 +602,10 @@
                     "tooltip": "مسائلی که keepright.at به‌طور خودکار در نقشه کشف کرده است.",
                     "title": "مسائل KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "کمبودهایی که improveosm.org به‌طور خودکار در داده‌ها کشف کرده است",
+                    "title": "مسائل ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "یک فایل اطلاعاتی را به داخل صفحه بکشید و رها کنید یا برای تنظیم روی دکمه کلیک کنید",
                     "title": "دادهٔ سفارشی برای نقشه",
@@ -622,7 +631,7 @@
                 "tooltip": "جاده‌های خدماتی، راه‌های پارکینگ، ردها و غیره."
             },
             "paths": {
-                "description": "راهچه",
+                "description": "راهچه‌ها",
                 "tooltip": "پیاده‌روها، راه‌های پیاده، مسیرهای دوچرخه‌سواری و غیره."
             },
             "buildings": {
@@ -650,11 +659,11 @@
                 "tooltip": "خطوط برق، نیروگاه‌ها، ایستگاه‌های فرعی و غیره."
             },
             "past_future": {
-                "description": "گذشته/آینده",
+                "description": "عارضه‌های گذشته/آینده",
                 "tooltip": "پیشنهادشده، در حال ساخت، رهاشده، تخریب‌شده و غیره."
             },
             "others": {
-                "description": "سایر",
+                "description": "سایر عارضه‌ها",
                 "tooltip": "هر چیز دیگر"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} در wiki.osm.org",
             "used_with": "با  {type} استفاده شده"
         },
-        "validations": {
-            "disconnected_highway": "معبر غیرمتصل",
-            "disconnected_highway_tooltip": "جاده‌ها باید به سایر جاده‌ها یا ورودی ساختمان‌ها متصل شوند.",
-            "generic_name": "احتمالاً از نام کلی استفاده شده",
-            "generic_name_tooltip": "به‌نظر می‌رسد این عارضه یک نام کلی دارد: «{name}». لطفاً از فیلد نام فقط برای ثبت نام رسمی یک عارضه استفاده کنید.",
-            "old_multipolygon": "تگ‌های Multipolygon روی راه outer ",
-            "old_multipolygon_tooltip": "این سبک از Multipolygon منسوخ شده. لطفاً به‌جای راه outer، تگ‌ها را به Multipolygon مادر بدهید.",
-            "untagged_point": "نقطهٔ بی‌تگ",
-            "untagged_point_tooltip": "یکی از انواع عارضه‌ها را انتخاب کنید تا چیستی این نقطه مشخص شود.",
-            "untagged_line": "خط بی‌تگ",
-            "untagged_line_tooltip": "یکی از انواع عارضه‌ها را انتخاب کنید تا چیستی این خط مشخص شود.",
-            "untagged_area": "محدودهٔ بی‌تگ",
-            "untagged_area_tooltip": "یکی از انواع عارضه‌ها را انتخاب کنید تا چیستی این محدوده مشخص شود.",
-            "untagged_relation": "رابطهٔ بی‌تگ",
-            "untagged_relation_tooltip": "یکی از انواع عارضه‌ها را انتخاب کنید تا چیستی این رابطه مشخص شود.",
-            "many_deletions": "شما دارید {n} عارضه را حذف می‌کنید: {p} گره، {l} خط، {a} محدوده و {r} رابطه. آیا از انجام این کار مطمئن هستید؟ با این کار آن‌ها از روی نقشهٔ openstreetmap.org که همه استفاده می‌کنند حذف می‌شوند.",
-            "tag_suggests_area": "تگ {tag} پیشنهاد می‌کند که خط باید محدوده باشد، اما یک محدوده نیست",
-            "deprecated_tags": "تگ‌های منسوخ: {tags}"
-        },
         "zoom": {
             "in": "بزرگ‌نمایی",
             "out": "کوچک‌نمایی"
@@ -800,6 +790,40 @@
         "cannot_zoom": "در حالت فعلی بیش از این نمیتوان کوچک نمایی کرد.",
         "full_screen": "تعویض صفحه‌نمایش کامل",
         "QA": {
+            "improveOSM": {
+                "title": "تشخیص ImproveOSM",
+                "geometry_types": {
+                    "path": "راهچه‌ها",
+                    "parking": "پارکینگ",
+                    "road": "جاده‌ها",
+                    "both": "جاده‌ها و پارکینگ"
+                },
+                "directions": {
+                    "east": "شرق",
+                    "north": "شمال",
+                    "northeast": "شمال شرقی",
+                    "northwest": "شمال غربی",
+                    "south": "جنوب",
+                    "southeast": "جنوب شرقی",
+                    "southwest": "جنوب غربی",
+                    "west": "غرب"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "کمبود یکطرفه",
+                        "description": "در امتداد این تکه از {highway}‏، {percentage}% از {num_trips} سفرِ ثبت‌شده، از {from_node} به {to_node} بوده. به‌نظر می‌رسد تگ oneway فراموش شده."
+                    },
+                    "mr": {
+                        "title": "کمبود رسم",
+                        "description": "بر اساس {num_trips} سفر ثبت‌شده در این منطقه، به‌نظر می‌رسد رسم {geometry_type} در این محدوده انجام نشده.",
+                        "description_alt": "از بررسی داده‌های شخص ثالث بر می‌آید که در این محدوده {geometry_type} نقشه‌کشی نشده."
+                    },
+                    "tr": {
+                        "title": "کمبود محدودیت گردش",
+                        "description": "در {num_passed} سفر از {num_trips} سفر ثبت‌شده (به‌سمت {travel_direction}) در {junction} از {from_way} به {to_way} گردش انجام شده. به‌نظر می‌رسد یک محدودیت {turn_restriction} نیاز باشد."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "خطای KeepRight",
                 "detail_title": "خطا",
@@ -1166,7 +1190,7 @@
             "save": "ذخیره‌سازی یادداشت",
             "login": "برای تغییردادن این یادداشت یا نظردادن روی آن باید وارد شوید.",
             "upload_explanation": "پیام‌های شما به‌طور عمومی در معرض دید همهٔ کاربران اوپن‌استریت‌مپ قرار می‌گیرد.",
-            "upload_explanation_with_user": "پیام‌های شما تحت نام {user} به‌طور عمومی در معرض دید همهٔ کاربران اوپن‌استریت‌مپ قرار می‌گیرد."
+            "upload_explanation_with_user": "پیام‌های شما با نام {user} به‌طور عمومی در معرض دید همهٔ کاربران اوپن‌استریت‌مپ قرار می‌گیرد."
         },
         "help": {
             "title": "راهنمایی",
@@ -1347,7 +1371,7 @@
                 "title": "تضمین کیفیت",
                 "intro": "به‌کمک ابزارهای *تضمین کیفیت* یا *Quality Assurance* (Q/A)‎ می‌توانیم تگ‌های نادرست، جاده‌های غیرمتصل و سایر مشکلات موجود در اوپن‌استریت‌مپ را پیدا کنیم و نقشه‌کش‌ها در صورت نیاز آن‌ها را اصلاح می‌کنند. برای دیدن مشکلاتی که هنوز حل نشده، روی دکمهٔ **داده‌های نقشه** {data} کلیک کنید و یکی از لایه‌های تضمین کیفیت را فعال کنید.",
                 "tools_h": "ابزارها",
-                "tools": "در حال حاضر ویرایشگر iD از این ابزارها پشتیبانی می‌کند:  [KeepRight](https://www.keepright.at/). به‌مرور از [Osmose](https://osmose.openstreetmap.fr/)،‏ [ImproveOSM](https://improveosm.org/en/) و سایر ابزارهای تضمین کیفیت نیز پشتیبانی خواهد شد.",
+                "tools": "در حال حاضر ویرایشگر iD از این ابزارها پشتیبانی می‌کند:  [KeepRight](https://www.keepright.at/) و [ImproveOSM](https://improveosm.org/en/). به‌مرور از [Osmose](https://osmose.openstreetmap.fr/) و سایر ابزارهای تضمین کیفیت نیز پشتیبانی خواهد شد.",
                 "issues_h": "کارکردن با مسائل",
                 "issues": "کارکردن با مسئله‌های تضمین کیفیت مثل کارکردن با یادداشت‌هاست. روی یکی از نشانه‌گذارهای نقشه کلیک کنید تا جزئیات مسئله را در کادر کنار صفحه ببینید. هر کدام از ابزارها امکانات خودشان را دارند، اما به‌طور کلی می‌توانید روی یک مسئله پیام بگذارید یا آن را ببندید. "
             },
@@ -1387,6 +1411,172 @@
                         "indirect_example": "این محدودیت‌ها از یک محدودیت دیگر که در آن نزدیکی است نشأت می‌گیرند. مثلاً یک محدودیت «فقط مستقیم»، به‌طور غیرمستقیم به سایر مسیرهایی که از تقاطع می‌گذرند محدویت «گردش ممنوع» می‌دهد.",
                         "indirect_noedit": "شما نمی‌توانید محدودیت‌هایی را که به‌طور غیرمستقیم ایجاد شده‌اند ویرایش کنید. در عوض، آن محدودیتی را ویرایش کنید که مستقیماً ایجاد شده."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "مسئله‌ها",
+            "key": "I",
+            "list_title": "مسئله‌ها ({count})",
+            "errors": {
+                "list_title": "خطاها ({count})"
+            },
+            "warnings": {
+                "list_title": "هشدارها ({count})"
+            },
+            "no_issues": {
+                "message": "همه‌چیز خوب است",
+                "info": "همزمان با ویرایش شما، اگر مسئله‌ای را تشخیص دهیم اینجا اعلام می‌کنیم"
+            },
+            "almost_junction": {
+                "message": "{feature} خیلی به {feature2} نزدیک است اما به آن متصل نیست",
+                "highway-highway": {
+                    "tip": "معابر باید در تقاطع یک نقطهٔ مشترک داشته باشند."
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} از {feature2} می‌گذرد",
+                "building-building": {
+                    "tip": "ساختمان‌ها نباید اشتراک داشته باشند، مگر اینکه در لایه‌های مختلف باشند."
+                },
+                "building-highway": {
+                    "tip": "معابری که از ساختمان‌ها می‌گذرند باید پل (bridge)، تونل (tunnel)، سرپوشیدگی (covering) یا (ورودی) entrance داشته باشند."
+                },
+                "building-railway": {
+                    "tip": "ریل‌هایی که از ساختمان‌ها می‌گذرند باید پل یا تونل داشته باشند."
+                },
+                "building-waterway": {
+                    "tip": "راه‌های آبی که از ساختمان‌ها می‌گذرند باید تونل داشته باشند یا در لایهٔ مجزا باشند."
+                },
+                "highway-highway": {
+                    "tip": "معابری که از هم می‌گذرند باید پل، تونل یا تقاطع داشته باشند."
+                },
+                "highway-railway": {
+                    "tip": "معابری که از ریل‌ها می‌گذرند باید پل، تونل یا تقاطع با راه‌آهن (level crossing) داشته باشند."
+                },
+                "highway-waterway": {
+                    "tip": "معابری که از راه‌های آبی می‌گذرند باید پل، تونل یا گدار(ford) داشته باشند."
+                },
+                "railway-railway": {
+                    "tip": "ریل‌هایی که از هم می‌گذرند باید متصل باشند یا اینکه پل یا تونل داشته باشند."
+                },
+                "railway-waterway": {
+                    "tip": "ریل‌هایی که از راه‌های آبی می‌گذرند باید پل یا تونل داشته باشند."
+                },
+                "waterway-waterway": {
+                    "tip": "راه‌های آبی که از هم می‌گذرند باید متصل باشند یا اینکه تونل داشته باشند."
+                },
+                "tunnel-tunnel": {
+                    "tip": "تونل‌هایی که از هم می‌گذرند باید لایه‌های مجزا داشته باشند."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "تونل‌هایی که از هم می‌گذرند باید متصل باشند یا لایه‌های مجزا داشته باشند."
+                },
+                "bridge-bridge": {
+                    "tip": "پل‌هایی که از هم می‌گذرند باید لایه‌های مجزا داشته باشند."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "پل‌هایی که از هم می‌گذرند باید متصل باشند یا لایه‌های مجزا داشته باشند."
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} دارای تگ منسوخ «{tag}» است"
+                },
+                "combination": {
+                    "message": "{feature} دارای یک ترکیب منسوخ از تگ‌هاست: {tags}"
+                },
+                "tip": "برخی تگ‌ها به‌مرور زمان منسوخ شده‌اند و باید جایگزین شوند."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} به سایر جاده‌ها و راه‌ها وصل نیست.",
+                    "tip": "معابر باید به سایر معابر یا ورودی ساختمان‌ها وصل شوند."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} دارای نام عمومی «{name}» است",
+                "tip": "نام باید واقعی باشد و همانی باشد که در عمل به‌کار رفته."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "حذف {n} عارضه: {p} نقطه، {l} خط و {a} محدوده"
+                },
+                "points-lines-areas-relations": {
+                    "message": "حذف {n} عارضه: {p} نقطه، {l} خط، {a} محدوده و {r} رابطه"
+                },
+                "tip": "فقط عارضه‌های زائد یا ناموجود باید حذف شوند."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} هیچ تگی ندارد"
+                },
+                "descriptive": {
+                    "message": "{feature} هیچ تگ توصیف‌کننده‌ای ندارد"
+                },
+                "specific": {
+                    "message": "{feature} تگ {tag} ندارد"
+                },
+                "tip": "عارضه‌ها باید تگ‌هایی داشته باشند که چیستی آن‌ها را تعریف کند."
+            },
+            "old_multipolygon": {
+                "message": "تگ‌های {multipolygon} در جای درست به‌کار نرفته.",
+                "tip": "تگ مربوط به چندچندضلعی‌ها (Multipolygons) باید روی رابطه بیاید نه روی راه بیرونی (outer)."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} باید یک محدودهٔ بسته باشد زیرا دارای تگ {tag} است.",
+                "tip": "نقاط ابتدا و انتهای محدوده‌ها باید به هم وصل باشد."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "عارضه‌های خیلی نزدیک متصل شدند."
+                },
+                "connect_crossing_features": {
+                    "annotation": "عارضه‌های گذرنده از هم، متصل شدند."
+                },
+                "connect_endpoints": {
+                    "title": "نقاط انتهایی را متصل کنید",
+                    "annotation": "نقاط انتهایی یک راه به هم وصل شدند."
+                },
+                "connect_features": {
+                    "title": "عارضه‌ها را متصل کنید"
+                },
+                "continue_from_start": {
+                    "title": "رسم را از نقطهٔ ابتدایی ادامه دهید"
+                },
+                "continue_from_end": {
+                    "title": "رسم را از نقطهٔ انتهایی ادامه دهید"
+                },
+                "delete_feature": {
+                    "title": "این عارضه را حذف کنید"
+                },
+                "move_tags": {
+                    "title": "تگ‌ها را جابه‌جا کنید",
+                    "annotation": "تگ‌ها جابه‌جا شد."
+                },
+                "remove_generic_name": {
+                    "title": "نام را حذف کنید",
+                    "annotation": "یک نام عمومی حذف شد."
+                },
+                "remove_tag": {
+                    "title": "تگ را حذف کنید",
+                    "annotation": "تگ حذف شد."
+                },
+                "reposition_features": {
+                    "title": "جای عارضه‌ها را تنظیم کنید"
+                },
+                "select_preset": {
+                    "title": "یکی از انواع عارضه‌ها را انتخاب کنید"
+                },
+                "tag_as_disconnected": {
+                    "title": "به‌عنوان غیرمتصل تگ‌گذاری کنید",
+                    "annotation": "عارضه‌هایی که خیلی به هم نزدیک بودند به‌عنوان غیرمتصل تگ‌گذاری شدند."
+                },
+                "upgrade_tag": {
+                    "annotation": "یک تگ قدیمی ارتقا یافت."
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "یک ترکیب قدیمی از تگ‌ها ارتقا یافت."
                 }
             }
         },
@@ -1797,7 +1987,10 @@
                 "category-building": {
                     "name": "عارضه‌های ساختمانی"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "عارضه‌های گلف"
+                },
+                "category-golf-line": {
                     "name": "عارضه‌های گلف"
                 },
                 "category-landuse": {
@@ -3289,7 +3482,7 @@
                 },
                 "website": {
                     "label": "وب سايت",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "نوع"
@@ -3421,7 +3614,7 @@
                     "terms": "ترمینال فرودگاه"
                 },
                 "amenity": {
-                    "name": "اماکن رفاهی"
+                    "name": "مکان رفاهی"
                 },
                 "amenity/animal_breeding": {
                     "name": "امکانات پرورش حیوانات"
@@ -3552,6 +3745,9 @@
                 "amenity/fast_food/kebab": {
                     "name": "کبابی"
                 },
+                "amenity/fast_food/mexican": {
+                    "name": "فست‌فود مکزیکی"
+                },
                 "amenity/fast_food/pizza": {
                     "name": "پیتزا",
                     "terms": "فست فود, حاضری"
@@ -3593,11 +3789,12 @@
                     "terms": "کافه‌ی اینترنت, کافینت, اینترنت"
                 },
                 "amenity/kindergarten": {
-                    "name": "محوطه پیش دبستانی / مهدکودک"
+                    "name": "محوطه پیش دبستانی / مهدکودک",
+                    "terms": "پیش دبستانی، مهد کودک، مدرسه، کودکستان"
                 },
                 "amenity/language_school": {
                     "name": "آموزشگاه زبان",
-                    "terms": "زبانکده"
+                    "terms": "زبانکده، آکادمی موسیقی، مدرسه موسیقی"
                 },
                 "amenity/library": {
                     "name": "کتابخانه"
@@ -3613,7 +3810,8 @@
                     "terms": "موتورسیکلت"
                 },
                 "amenity/music_school": {
-                    "name": "آموزشگاه موسیقی"
+                    "name": "آموزشگاه موسیقی",
+                    "terms": "مدرسه موسیقی، آکادمی موسیقی"
                 },
                 "amenity/nightclub": {
                     "name": "کلوپ شبانه"
@@ -3748,7 +3946,8 @@
                     "name": "دفع توالت RV"
                 },
                 "amenity/school": {
-                    "name": "محیط مدرسه"
+                    "name": "محیط مدرسه",
+                    "terms": "آکادمی، دبیرستان، مدرسه، راهنمایی، دبستان، پیش دانشگاهی، ابتدایی"
                 },
                 "amenity/shelter": {
                     "name": "پناهگاه",
@@ -4057,7 +4256,8 @@
                     "name": "ساختمان صنعتی"
                 },
                 "building/kindergarten": {
-                    "name": "پیش دبستانی /ساختمان کودکستان"
+                    "name": "ساختمان پیش دبستانی / کودکستان",
+                    "terms": "پیش دبستانی، مهد کودک، مدرسه، کودکستان"
                 },
                 "building/mosque": {
                     "name": "ساختمان مسجد"
@@ -4079,7 +4279,8 @@
                     "name": "خرابه های ساختمان"
                 },
                 "building/school": {
-                    "name": "ساختمان مدرسه"
+                    "name": "ساختمان مدرسه",
+                    "terms": "آکادمی، دبیرستان، مدرسه، راهنمایی، دبستان، پیش دانشگاهی، ابتدایی"
                 },
                 "building/semidetached_house": {
                     "name": "خانه شبه ویلایی"
@@ -4101,9 +4302,6 @@
                 },
                 "building/terrace": {
                     "name": "خانه های ردیفی"
-                },
-                "building/train_station": {
-                    "name": "ایستگاه قطار"
                 },
                 "building/university": {
                     "name": "ساختمان دانشگاه"
@@ -4320,23 +4518,11 @@
                 "golf/hole": {
                     "name": "سوراخ گلف"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "خطر آب های کناری"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "خطر آب های کناری"
-                },
                 "golf/rough": {
                     "name": "منطقه زمخت"
                 },
                 "golf/tee": {
                     "name": "Tee Box"
-                },
-                "golf/water_hazard_area": {
-                    "name": "خطر آب"
-                },
-                "golf/water_hazard_line": {
-                    "name": "خطر آب"
                 },
                 "healthcare/audiologist": {
                     "name": "شنوایی سنجی"
@@ -4784,7 +4970,8 @@
                     "terms": "تالار رقص"
                 },
                 "leisure/dancing_school": {
-                    "name": "مدرسه رقص"
+                    "name": "مدرسه رقص",
+                    "terms": "رقص"
                 },
                 "leisure/dog_park": {
                     "name": "پارک سگ"
@@ -4840,6 +5027,10 @@
                 },
                 "leisure/picnic_table": {
                     "name": "میز پیکنیک"
+                },
+                "leisure/picnic_table/chess": {
+                    "name": "میز شطرنج",
+                    "terms": "شطرنج، میز، نیمکت، تخته بازی، بازی تخته‌ای، بازی رومیزی"
                 },
                 "leisure/pitch": {
                     "name": "زمین ورزشی"
@@ -5106,14 +5297,15 @@
                     "name": "چوب"
                 },
                 "office": {
-                    "name": "اداره",
-                    "terms": "دفتر"
+                    "name": "دفتر",
+                    "terms": "اداره"
                 },
                 "office/accountant": {
-                    "name": "دفتر حسابدار"
+                    "name": "دفتر حسابدار",
+                    "terms": "حسابدار"
                 },
                 "office/administrative": {
-                    "name": "دفتر حکومتی"
+                    "name": "اداره حکومتی"
                 },
                 "office/advertising_agency": {
                     "name": "کانون تبلیغاتی",
@@ -5290,9 +5482,6 @@
                 "power/transformer": {
                     "name": "مبدل برق"
                 },
-                "public_transport/linear_platform_bus": {
-                    "name": "ایستگاه اتوبوس"
-                },
                 "public_transport/station_monorail": {
                     "name": "ایستگاه مونوریل"
                 },
@@ -5412,7 +5601,8 @@
                     "terms": "دوچرخه, تعمیر"
                 },
                 "shop/bookmaker": {
-                    "name": "صحافی"
+                    "name": "دلال شرط‌بندی",
+                    "terms": "قماربازی, شرطبندی"
                 },
                 "shop/books": {
                     "name": "کتاب‌فروشی",
@@ -5801,8 +5991,7 @@
                     "name": "فروشگاه شراب"
                 },
                 "tourism": {
-                    "name": "گردشگری",
-                    "terms": "توریستی, توریست, گردشگر, توریزم, دیدنی ها, جاذبه گردشگری"
+                    "name": "گردشگری"
                 },
                 "tourism/alpine_hut": {
                     "name": "کلبه آلپ"

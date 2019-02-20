@@ -497,17 +497,15 @@
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoomaa tähän",
-                "tooltip_feature": "Keskitä ja zoomaa kartta tarkentaaksesi tähän ominaisuuteen.",
-                "tooltip_note": "Keskitä ja zoomaa kartta tarkentaaksesi tähän huomautukseen.",
-                "tooltip_data": "Keskitä ja zoomaa kartta tarkentaaksesi tähän dataan.",
-                "tooltip_issue": "Keskitä ja zoomaa kartta tarkentaaksesi tähän virheeseen."
+                "title": "Lähennä tähän",
+                "tooltip_feature": "Keskitä ja lähennä kartta tähän kohteeseen.",
+                "tooltip_note": "Keskitä ja lähennä kartta tähän huomautukseen.",
+                "tooltip_data": "Keskitä ja lähennä kartta tähän aineistoon.",
+                "tooltip_issue": "Keskitä ja lähennä kartta thän karttailmoitukseen."
             },
-            "no_documentation_combination": "Tälle ominaisuustiedolle ei löydy käyttöohjeita tai -suosituksia.",
-            "no_documentation_key": "Tälle avaimelle ei löydy käyttöohjeita tai -suosituksia",
             "show_more": "Näytä lisää",
             "view_on_osm": "Näytä openstreetmap.org-sivustolla",
-            "view_on_keepRight": "Tarkastele sivustolla KeepRight.at",
+            "view_on_keepRight": "Tarkastele KeepRight.at-sivustolla",
             "all_fields": "Kaikki kentät",
             "all_tags": "Kaikki ominaisuustiedot",
             "all_members": "Kaikki jäsenet",
@@ -517,10 +515,8 @@
             "role": "Rooli",
             "choose": "Valitse ominaisuustyyppi",
             "results": "{n} hakutulosta haulle {search}",
-            "reference": "Näytä OpenStreetMapin Wikissä",
-            "edit_reference": "Muokka tai käännä kuvaus",
-            "wiki_reference": "Näytä dokumentointi",
-            "wiki_en_reference": "Näytä dokumentointi englanniksi",
+            "wiki_reference": "Näytä ohjeistus",
+            "wiki_en_reference": "Näytä englanninkielinen ohjeistus",
             "back_tooltip": "Vaihda ominaisuustyyppi",
             "remove": "Poista",
             "search": "Hae",
@@ -592,13 +588,13 @@
                     "title": "OpenStreetMapin karttailmoitukset"
                 },
                 "keepRight": {
-                    "tooltip": "Tunnistettiin automaattisesti ongelmia kartalla sivustolta KeepRight.at",
-                    "title": "KeepRight Ongelmat"
+                    "tooltip": "Koneellisesti tunnistettuja karttaongelmia KeepRight.at-sivustolta",
+                    "title": "KeepRight-ilmoitukset"
                 },
                 "custom": {
                     "tooltip": "Vedä ja pudota datatiedosto sivulle, tai klikkaa näppäintä asettaaksesi",
                     "title": "Räätälöidyt karttatiedot",
-                    "zoom": "Zoomaa dataan"
+                    "zoom": "Lähennä aineistoon"
                 }
             },
             "fill_area": "Alueen taustatäyttö",
@@ -648,11 +644,9 @@
                 "tooltip": "Voimalinjat, muuntajat, sähköasemat,  voimalaitokset jne."
             },
             "past_future": {
-                "description": "Mennyt/tuleva",
                 "tooltip": "Suunnitteilla, rakenteilla, hylätty, purettu jne."
             },
             "others": {
-                "description": "Muut",
                 "tooltip": "Kaikki muu"
             }
         },
@@ -772,25 +766,6 @@
             "on_wiki": "{tag} palvelussa wiki.osm.org",
             "used_with": "käytetään tyypin {type} kanssa"
         },
-        "validations": {
-            "disconnected_highway": "Erota valtatie",
-            "disconnected_highway_tooltip": "Tie tulisi yhdistää toiseen tiehen tai rakennuksen sisäänkäyntiin",
-            "generic_name": "Mahdollinen yleisnimi",
-            "generic_name_tooltip": "Tämä ominaisuus näyttää sisältävän yleisnimen \"{name}\". Ole hyvä ja käytä ainoastaan nimitietoa tallentaaksesi ominaisuuden virallisen nimen.",
-            "old_multipolygon": "Monikulmioiden ominaisuustiedot ulkoviivalla",
-            "old_multipolygon_tooltip": "Tämänkaltainen monikulmiotyyppi on vanhentunut. Merkitse ominaisuustiedot päämonikulmioon ulkoviivan sijasta.",
-            "untagged_point": "Ominaisuustiedoton piste",
-            "untagged_point_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän pisteen tarkoitusta.",
-            "untagged_line": "Ominaisuustiedoton viiva",
-            "untagged_line_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän viivan tarkoitusta.",
-            "untagged_area": "Ominaisuustiedoton alue",
-            "untagged_area_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän alueen tarkoitusta.",
-            "untagged_relation": "Ominaisuustiedoton relaatio",
-            "untagged_relation_tooltip": "Valitse relaation mukainen karttakohde",
-            "many_deletions": "Olet poistamassa {n} karttakohdetta: {p} pistettä, {l} viivaa, {a} aluetta ja {r} relaatiota. Haluatko varmasti poistaa ne kaikkien julkisesti käyttämältä OpenStreetMap.org-kartalta?",
-            "tag_suggests_area": "Ominaisuustiedon {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
-            "deprecated_tags": "Vanhentuneet ominaisuustiedot: {tags}"
-        },
         "zoom": {
             "in": "Lähennä",
             "out": "Loitonna"
@@ -798,8 +773,20 @@
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
         "QA": {
+            "improveOSM": {
+                "directions": {
+                    "east": "itä",
+                    "north": "pohjoinen",
+                    "northeast": "koillinen",
+                    "northwest": "luode",
+                    "south": "etelä",
+                    "southeast": "kaakko",
+                    "southwest": "lounas",
+                    "west": "länsi"
+                }
+            },
             "keepRight": {
-                "title": "KeepRight virhe",
+                "title": "KeepRight-virhe",
                 "detail_title": "Virhe",
                 "detail_description": "Kuvaus",
                 "comment": "Kommentti",
@@ -1359,7 +1346,7 @@
                 "with_selected": {
                     "title": "Kohde valittuna",
                     "edit_menu": "Näytä/piilota toimintovalikko",
-                    "zoom_to": "Zoomaa valittuun ominaisuuteen"
+                    "zoom_to": "Lähennä valittuun kohteeseen"
                 },
                 "vertex_selected": {
                     "title": "Piste valittuna",
@@ -1452,9 +1439,6 @@
                 "category-building": {
                     "name": "Rakennukset"
                 },
-                "category-golf": {
-                    "name": "Golf-kentät"
-                },
                 "category-landuse": {
                     "name": "Maankäyttö"
                 },
@@ -1468,7 +1452,7 @@
                     "name": "Luonto"
                 },
                 "category-path": {
-                    "name": "Jalankulun ja pyöräilyn väylät"
+                    "name": "Kävely- ja pyörätiet"
                 },
                 "category-rail": {
                     "name": "Rautatiet"
@@ -1622,6 +1606,9 @@
                 "animal_shelter": {
                     "label": "Eläimille"
                 },
+                "architect": {
+                    "label": "Arkkitehti"
+                },
                 "area/highway": {
                     "label": "Tyyppi"
                 },
@@ -1634,10 +1621,16 @@
                 "atm": {
                     "label": "Pankkiautomaatti"
                 },
+                "attraction": {
+                    "label": "Tyyppi"
+                },
                 "backrest": {
                     "label": "Selkänoja"
                 },
                 "barrier": {
+                    "label": "Tyyppi"
+                },
+                "basin": {
                     "label": "Tyyppi"
                 },
                 "bath/open_air": {
@@ -1697,6 +1690,9 @@
                 "building": {
                     "label": "Rakennus"
                 },
+                "building/material": {
+                    "label": "Materiaali"
+                },
                 "building_area": {
                     "label": "Rakennus"
                 },
@@ -1732,6 +1728,9 @@
                 "castle_type": {
                     "label": "Tyyppi"
                 },
+                "check_date": {
+                    "label": "Tarkistettu viimeksi"
+                },
                 "clothes": {
                     "label": "Vaatteet"
                 },
@@ -1740,6 +1739,9 @@
                 },
                 "collection_times": {
                     "label": "Tyhjennysajat"
+                },
+                "colour": {
+                    "label": "väri"
                 },
                 "comment": {
                     "label": "Muutoskokoelman kommentti",
@@ -1758,8 +1760,18 @@
                 "content": {
                     "label": "Sisältö"
                 },
+                "conveying": {
+                    "label": "Liikkeen suunta",
+                    "options": {
+                        "backward": "taaksepäin",
+                        "forward": "eteenpäin"
+                    }
+                },
                 "country": {
                     "label": "Maa"
+                },
+                "couplings": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "covered": {
                     "label": "Katos"
@@ -1856,6 +1868,9 @@
                 "diaper": {
                     "label": "Vaipanvaihtomahdollisuus"
                 },
+                "diet_multi": {
+                    "label": "ruokavalio"
+                },
                 "direction": {
                     "label": "Suunta (asteina myötäpäivään)",
                     "placeholder": "45, 90, 180, 270"
@@ -1896,11 +1911,21 @@
                         "forward": "Eteenpäin"
                     }
                 },
+                "dispensing": {
+                    "label": "reseptilääkkeet"
+                },
                 "display": {
                     "label": "Näyttö"
                 },
                 "dock": {
                     "label": "Tyyppi"
+                },
+                "dog": {
+                    "label": "Koirat",
+                    "options": {
+                        "no": "Ei sallittu",
+                        "yes": "Sallittu"
+                    }
                 },
                 "drive_through": {
                     "label": "Autokaista"
@@ -1964,6 +1989,9 @@
                 },
                 "fixme": {
                     "label": "Virheenkorjauspyyntö"
+                },
+                "flag/type": {
+                    "label": "Lipun tyyppi"
                 },
                 "ford": {
                     "label": "Tyyppi",
@@ -2037,6 +2065,9 @@
                 },
                 "historic/civilization": {
                     "label": "Historiallinen kulttuuri"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Uppoamispäivä"
                 },
                 "hoops": {
                     "label": "Koritelineet",
@@ -2118,6 +2149,9 @@
                 "internet_access/ssid": {
                     "label": "SSID-verkkonimi"
                 },
+                "junction/ref_oneway": {
+                    "label": "Liittymän numero "
+                },
                 "kerb": {
                     "label": "Reunakiveyksen muoto"
                 },
@@ -2196,6 +2230,14 @@
                 "location": {
                     "label": "Sijainti"
                 },
+                "location_pool": {
+                    "label": "Sijainti",
+                    "options": {
+                        "indoor": "Sisätila",
+                        "outdoor": "Ulkotila",
+                        "roof": "Katolla"
+                    }
+                },
                 "man_made": {
                     "label": "Tyyppi"
                 },
@@ -2231,6 +2273,10 @@
                 },
                 "memorial": {
                     "label": "Tyyppi"
+                },
+                "minspeed": {
+                    "label": "Alhaisin sallittu nopeus",
+                    "placeholder": "20, 30, 40..."
                 },
                 "mtb/scale": {
                     "label": "Maastopyöräilyn haastavuus",
@@ -2327,6 +2373,9 @@
                         "yes": "Kyllä"
                     }
                 },
+                "oneway/bicycle": {
+                    "label": "Yksisuuntaisuus (pyöräily)"
+                },
                 "oneway_yes": {
                     "label": "Yksisuuntaisuus",
                     "options": {
@@ -2336,6 +2385,9 @@
                         "undefined": "Oletettavasti kyllä",
                         "yes": "Kyllä"
                     }
+                },
+                "opening_date": {
+                    "label": "Uudelleenavaamispäivä"
                 },
                 "opening_hours": {
                     "label": "Aukioloajat"
@@ -2388,6 +2440,13 @@
                         "mogul": "Kumpare",
                         "scooter": "Moottorikelkka",
                         "skating": "Vapaa hiihtotyyli"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "options": {
+                        "classic": "Perinteinen",
+                        "classic+skating": "Perinteinen ja luistelu",
+                        "skating": "Luistelu"
                     }
                 },
                 "piste/type": {
@@ -2458,6 +2517,12 @@
                 "recycling_accepts": {
                     "label": "Keräysastiat"
                 },
+                "recycling_type": {
+                    "options": {
+                        "centre": "Kierrätysasema",
+                        "container": "Keräysastia"
+                    }
+                },
                 "ref/isil": {
                     "label": "ISIL-tunnus"
                 },
@@ -2503,6 +2568,9 @@
                 "restrictions": {
                     "label": "Kääntymisrajoitukset"
                 },
+                "roof/colour": {
+                    "label": "Katon väri"
+                },
                 "rooms": {
                     "label": "Huoneet"
                 },
@@ -2524,8 +2592,22 @@
                     },
                     "placeholder": "Vuoristopatikointi, alppipatikointi..."
                 },
+                "salt": {
+                    "label": "suola"
+                },
                 "sanitary_dump_station": {
                     "label": "Tyhjennystekniikka"
+                },
+                "scuba_diving": {
+                    "label": "Palvelut"
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Väri",
+                    "options": {
+                        "green": "Vihreä",
+                        "grey": "Harmaa",
+                        "red": "Punainen"
+                    }
                 },
                 "seamark/type": {
                     "label": "Merimerkintä"
@@ -2552,7 +2634,7 @@
                     "label": "Palvelut"
                 },
                 "service_rail": {
-                    "label": "Käyttötarkoitus",
+                    "label": "Ratatyyppi",
                     "options": {
                         "crossover": "Raiteenvaihtoraide",
                         "siding": "Ohitusraide",
@@ -2693,6 +2775,9 @@
                 "surveillance/zone": {
                     "label": "Valvontavyöhyke"
                 },
+                "survey/date": {
+                    "label": "Tarkistettu viimeksi"
+                },
                 "switch": {
                     "label": "Tyyppi",
                     "options": {
@@ -2724,7 +2809,7 @@
                     }
                 },
                 "toll": {
-                    "label": "Tulli"
+                    "label": "Tiemaksu"
                 },
                 "tomb": {
                     "label": "Tyyppi"
@@ -2799,10 +2884,11 @@
                 },
                 "usage_rail": {
                     "options": {
-                        "industrial": "Teollinen",
-                        "main": "Tärkein",
+                        "branch": "Sivurata",
+                        "industrial": "Teollisuus",
+                        "main": "Päärata",
                         "military": "Armeija",
-                        "test": "Testi",
+                        "test": "Koeajo",
                         "tourism": "Turismi"
                     }
                 },
@@ -2858,8 +2944,7 @@
                     "label": "Tyyppi"
                 },
                 "website": {
-                    "label": "Verkkosivusto",
-                    "placeholder": "http://www.esimerkki.fi/"
+                    "label": "Verkkosivusto"
                 },
                 "wetland": {
                     "label": "Tyyppi"
@@ -3266,9 +3351,18 @@
                     "name": "Buddhalaistemppeli",
                     "terms": "buddhalainen, stupa, pagoda, luostari, zendo, dojo, meditaatio"
                 },
+                "amenity/place_of_worship/christian": {
+                    "name": "Kristinusko, kirkko"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindutemppeli",
                     "terms": "hindulaisuus, hindut, hindu, temppeli, uskonto, uskonnollinen, rukoilu, intia, jooga"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Juutalaisuus, synagoga"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Islam, moskeija"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Šintolainen pyhäkkö",
@@ -3313,6 +3407,9 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Metsävartiosto"
+                },
+                "amenity/recycling": {
+                    "name": "Kierrätys"
                 },
                 "amenity/recycling_centre": {
                     "name": "Kierrätyskeskus"
@@ -3395,12 +3492,18 @@
                     "name": "Katos",
                     "terms": "katos, katettu, kota, kotus, korsu, laavu, maja, koppi, suoja, tauko, taukopaikka, taukokatos, piknik, picnic, retki, lepo, lepääminen, pukukoppi, pukeutuminen, bussi, linja-auto, kalliolippa"
                 },
+                "amenity/shelter/gazebo": {
+                    "name": "huvimaja"
+                },
                 "amenity/shelter/lean_to": {
                     "name": "Sääsuoja",
                     "terms": "katos, kate, sää, suojus, suoja, keli, sade, sateen"
                 },
                 "amenity/shelter/picnic_shelter": {
                     "name": "Piknikkatos"
+                },
+                "amenity/shelter/public_transport": {
+                    "name": "pysäkkikatos"
                 },
                 "amenity/shower": {
                     "name": "Suihku"
@@ -3460,6 +3563,9 @@
                 "amenity/university": {
                     "name": "Yliopistoalue"
                 },
+                "amenity/vehicle_inspection": {
+                    "name": "Katsastusasema"
+                },
                 "amenity/vending_machine": {
                     "name": "Myyntiautomaatti",
                     "terms": "automaatti, myyntiautomaatti, jakeluautomaatti, palautusautomaatti, pullonpalautus"
@@ -3503,6 +3609,12 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Lehtiautomaatti"
+                },
+                "amenity/vending_machine/parcel_pickup": {
+                    "name": "Postin noutoautomaatti"
+                },
+                "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "Postin nouto/jättöautomaatti"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Pysäköintimaksuautomaatti",
@@ -3550,6 +3662,9 @@
                 "area/highway": {
                     "name": "Tien päällyste",
                     "terms": "pinnoite, pinta"
+                },
+                "attraction": {
+                    "name": "Nähtävyys"
                 },
                 "attraction/amusement_ride": {
                     "name": "Huvipuistolaite",
@@ -3637,6 +3752,9 @@
                 },
                 "barrier/fence": {
                     "name": "Aita"
+                },
+                "barrier/fence/railing": {
+                    "name": "Kaide"
                 },
                 "barrier/gate": {
                     "name": "Portti",
@@ -3810,9 +3928,6 @@
                 },
                 "building/terrace": {
                     "name": "Rivitalo"
-                },
-                "building/train_station": {
-                    "name": "Rautatieasema"
                 },
                 "building/transportation": {
                     "name": "Terminaalirakennus"
@@ -4077,12 +4192,6 @@
                 "golf/hole": {
                     "name": "Golf-reikä"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Sivuvesieste"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Sivuvesieste"
-                },
                 "golf/rough": {
                     "name": "Karheikko",
                     "terms": "karheikko, raffi, golf"
@@ -4090,12 +4199,6 @@
                 "golf/tee": {
                     "name": "Tiiauspaikka",
                     "terms": "tiiauspaikka, golf, lyöntipaikka, lähtöalue, lyöntialue, tiiausalue"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Vesieste"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Vesieste"
                 },
                 "healthcare": {
                     "name": "Terveyspalvelu"
@@ -4159,6 +4262,10 @@
                 "highway/bus_stop": {
                     "name": "Linja-autopysäkki/-laituri"
                 },
+                "highway/construction": {
+                    "name": "Suljettu väylä",
+                    "terms": "tie, väylä, katu, polku, reitti, pyörätie, jalkakäytävä, suljettu, työmaa, kiinni, rakennustyömaa, rakenteilla, kesken, suunnitteilla"
+                },
                 "highway/corridor": {
                     "name": "Sisäkäytävä",
                     "terms": "katettu, katos, käytävä, sisällä, sisätila, sisätiloissa"
@@ -4179,8 +4286,8 @@
                     "name": "Hissi"
                 },
                 "highway/footway": {
-                    "name": "Jalankulkutie",
-                    "terms": "Polku"
+                    "name": "Kävelytie",
+                    "terms": "jalankulkija, kävelijä, kävely, jalankulku, polku, reitti, väylä, tie"
                 },
                 "highway/footway/sidewalk": {
                     "name": "Jalkakäytävä"
@@ -4671,8 +4778,7 @@
                     "name": "Viiva"
                 },
                 "man_made": {
-                    "name": "Ihmisen tekemä",
-                    "terms": "keinotekoinen"
+                    "name": "Ihmisen tekemä"
                 },
                 "man_made/adit": {
                     "name": "Vaakasuoran tunnelin suuaukko"
@@ -5156,35 +5262,8 @@
                 "power/transformer": {
                     "name": "Muuntaja"
                 },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Ilmaradan pysäkki/laituri",
-                    "terms": "ilmarata, köysirata, gondoli, hissi, laituri, pysäkki, alue"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Linja-autopysäkki/-laituri",
-                    "terms": "linja-autopysäkki, bussipysäkki, pysäkki, pysähdyspaikka, odotuspaikka, linja-auto, bussi, dösis, dösäri, levennys, pysäkkimerkki, katos, pikavuoro, linja-autolaituri, bussilaituri, laituri, joukkoliikenne"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Laivapaikka/-matkustajalaituri"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Pikaraitiotiepysäkki/-laituri"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Monorailpysäkki/-laituri"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Metrolaituri"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Rautatielaituri",
-                    "terms": "juna, rautatie, laituri, rata, raide, asema, pysäkki"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Katuraitiotiepysäkki/-laituri"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Johdinautopysäkki/-laituri"
+                "public_transport/platform": {
+                    "name": "Joukkoliikennepysäkki/-laituri"
                 },
                 "public_transport/platform_aerialway": {
                     "name": "Ilmaradan pysäkki/laituri",
@@ -5249,6 +5328,12 @@
                 "public_transport/station_trolleybus": {
                     "name": "Johdinautoasema/-terminaali"
                 },
+                "public_transport/stop_area": {
+                    "name": "Joukkoliikennealue"
+                },
+                "public_transport/stop_position": {
+                    "name": "Joukkoliikenteen pysähtymiskohta"
+                },
                 "public_transport/stop_position_aerialway": {
                     "name": "Ilmaradan vaunun pysähtymiskohta",
                     "terms": "ilmarata, köysirata, gondoli, hissi, asema, pysäkki, yläasema, ala-asema"
@@ -5288,7 +5373,7 @@
                     "name": "Pysäytyspuskuri"
                 },
                 "railway/crossing": {
-                    "name": "Jalankulun ja pyöräilyn tasoristeys",
+                    "name": "Kävelyn ja pyöräilyn tasoristeys",
                     "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, jalankulku, pyöräily, jalan, pyörällä, pyörä, polkupyörä, polkupyörien, polkupyörän, pyörien, pyörän, suojatie"
                 },
                 "railway/disused": {

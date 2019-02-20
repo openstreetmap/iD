@@ -442,8 +442,6 @@
             "locating": "Buluyor, lütfen bekle..."
         },
         "inspector": {
-            "no_documentation_combination": "Bu etiket için detaylı doküman bulunmamaktadır",
-            "no_documentation_key": "Bu etiket türü için detaylı doküman bulunmamaktadır",
             "show_more": "Daha Fazla Göster",
             "view_on_osm": "OpenStreetMap.org sayfasında bak",
             "view_on_keepRight": "keepright.at sitesinde görüntüle",
@@ -455,7 +453,6 @@
             "role": "Görev",
             "choose": "Nesne türünü seç",
             "results": "{search} için {n} adet sonuç ",
-            "reference": "OpenStreetMap Wiki'de bak",
             "back_tooltip": "Türü değiştir",
             "remove": "Kaldır",
             "search": "Ara",
@@ -571,11 +568,9 @@
                 "tooltip": "Enerji Nakil Hatları, Enerji Santralleri, Trafolar vb."
             },
             "past_future": {
-                "description": "Geçmiş/Gelecek",
                 "tooltip": "Planlanmış, Yapım Aşamasında, Terk Edilmiş, Yıkılmış v.b."
             },
             "others": {
-                "description": "Diğerleri",
                 "tooltip": "Geriye Kalanlar"
             }
         },
@@ -670,22 +665,6 @@
             "description": "Açıklama",
             "on_wiki": "wiki.osm.org sitesinde {tag} ",
             "used_with": "{type} ile birlikte kullanılır"
-        },
-        "validations": {
-            "disconnected_highway": "Kopuk yol",
-            "disconnected_highway_tooltip": "Yollar, başka yollara veya bina girişlerine bağlı olmalıdır.",
-            "old_multipolygon": "Dış yolda çoklu poligon etiketleri",
-            "old_multipolygon_tooltip": "Bu çoklu poligon stili yenisiyle değiştirilecektir. Lütfen etiketleri dış taraf yerine ana çoklu poligonla ilişkilendiriniz. ",
-            "untagged_point": "Etiketlenmemiş nokta",
-            "untagged_point_tooltip": "Bu noktanın ne olduğunu belirten bir tür seç.",
-            "untagged_line": "Etiketlenmemiş çizgi",
-            "untagged_line_tooltip": "Bu çizginin ne olduğunu belirten bir tür seç.",
-            "untagged_area": "Etiketlenmemiş alan",
-            "untagged_area_tooltip": "Bu alanın ne olduğunu belirten bir tür seç.",
-            "untagged_relation": "Etiketlenmemiş Küme",
-            "untagged_relation_tooltip": "Bu kümeyi tanımlayan bir tür seç",
-            "tag_suggests_area": "{tag} etiketi buranın alan olmasını ima ediyor, ama burası alan değil.",
-            "deprecated_tags": "Kullanımdan kaldırılmış etiketler: {tags}"
         },
         "zoom": {
             "in": "Yakınlaştır",
@@ -1162,9 +1141,6 @@
                 },
                 "category-building": {
                     "name": "Bina"
-                },
-                "category-golf": {
-                    "name": "Golf"
                 },
                 "category-landuse": {
                     "name": "Arazi"
@@ -2510,8 +2486,7 @@
                     "label": "Tür"
                 },
                 "website": {
-                    "label": "Web Sitesi",
-                    "placeholder": "http://ornek.com/"
+                    "label": "Web Sitesi"
                 },
                 "wetland": {
                     "label": "Tür"
@@ -3381,9 +3356,6 @@
                     "name": "Sıra Evler",
                     "terms": "Sıra Evler"
                 },
-                "building/train_station": {
-                    "name": "Tren İstasyonu"
-                },
                 "building/transportation": {
                     "name": "Terminal",
                     "terms": "Terminal"
@@ -3663,14 +3635,6 @@
                     "name": "Delik",
                     "terms": "Delik"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Yanda Su Alanı",
-                    "terms": "Yanda Su Alanı"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Yanda Su Hattı",
-                    "terms": "Yanda Su Hattı"
-                },
                 "golf/rough": {
                     "name": "Sert",
                     "terms": "Sert"
@@ -3678,14 +3642,6 @@
                 "golf/tee": {
                     "name": "Başlama Yeri",
                     "terms": "Başlama Yeri"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Su Alanı",
-                    "terms": "Su Alanı"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Su Hattı",
-                    "terms": "Su Hattı"
                 },
                 "healthcare": {
                     "name": "Sağlık Merkezi",
@@ -3971,8 +3927,7 @@
                     "terms": "Kavşak, Yol Ayrımı"
                 },
                 "landuse": {
-                    "name": "Arazi Kullanımı",
-                    "terms": "Arazi Kullanımı, Toprak Kullanımı"
+                    "name": "Arazi Kullanımı"
                 },
                 "landuse/allotments": {
                     "name": "Hobi Bahçesi",
@@ -4128,8 +4083,7 @@
                     "terms": "Üzüm Bağı, Bağ"
                 },
                 "leisure": {
-                    "name": "Eğlence",
-                    "terms": "Eğlence, Eğlenme, Dinlenme"
+                    "name": "Eğlence"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Yetişkin Oyun Merkezi",
@@ -4310,8 +4264,7 @@
                     "terms": "Çizgi"
                 },
                 "man_made": {
-                    "name": "Yapay",
-                    "terms": "Yapay, İnsan Yapımı"
+                    "name": "Yapay"
                 },
                 "man_made/adit": {
                     "name": "Tünel Girişi",
@@ -4427,8 +4380,7 @@
                     "name": "Rogar"
                 },
                 "natural": {
-                    "name": "Doğal",
-                    "terms": "Doğal, Tabii"
+                    "name": "Doğal"
                 },
                 "natural/bare_rock": {
                     "name": "Kayalık Bölge",
@@ -4781,46 +4733,6 @@
                 "power/transformer": {
                     "name": "Transformatör",
                     "terms": "Transformatör"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Toplu Taşıma Durağı",
-                    "terms": "Toplu Taşıma Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Havayolu Durağı",
-                    "terms": "Havayolu ile Taşıma Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Otobüs Durağı",
-                    "terms": "Durak, Otobüs Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Feribot Terminali",
-                    "terms": "Feribot Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Raybüs Durağı",
-                    "terms": "Raybüs, Hafif Raylı Taşıt Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Tek Raylı Tren İstasyonu",
-                    "terms": "Tek Raylı Tren Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Metro Durağı",
-                    "terms": "Metro Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Tren Durağı",
-                    "terms": "Tren Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Tramvay Durağı",
-                    "terms": "Tramvay Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Troleybüs Durağı",
-                    "terms": "Troleybüs, Raysız Tramvay Yolcu İndirme/Bindirme Platformu"
                 },
                 "public_transport/platform": {
                     "name": "Toplu Taşıma Durağı",
@@ -5486,8 +5398,7 @@
                     "terms": "Şarap Mağazası"
                 },
                 "tourism": {
-                    "name": "Turizm",
-                    "terms": "Turizm"
+                    "name": "Turizm"
                 },
                 "tourism/alpine_hut": {
                     "name": "Dağ Evi",

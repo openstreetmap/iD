@@ -193,7 +193,8 @@
                 "restriction": "Không thể gộp các đối tượng này vì sẽ làm hư một quan hệ “{relation}”.",
                 "relation": "Không thể gộp các đối tượng này vì có vai trò quan hệ xung đột.",
                 "incomplete_relation": "Không thể gộp vì một trong số đối tượng này chưa được tải về hoàn toàn.",
-                "conflicting_tags": "Không thể gộp các đối tượng này vì một số thẻ có giá trị xung đột."
+                "conflicting_tags": "Không thể gộp các đối tượng này vì một số thẻ có giá trị xung đột.",
+                "paths_intersect": "Không thể gộp các đối tượng này vì lối kết quả sẽ tự giao điểm."
             },
             "move": {
                 "title": "Di chuyển",
@@ -505,8 +506,6 @@
                 "tooltip_data": "Đặt dữ liệu này vào giữa bản đồ và phóng vừa.",
                 "tooltip_issue": "Đặt vấn đề này vào giữa bản đồ và phóng vừa."
             },
-            "no_documentation_combination": "Không có tài liệu về tổ hợp thẻ này",
-            "no_documentation_key": "Không có tài liệu về chìa khóa này",
             "show_more": "Xem thêm",
             "view_on_osm": "Xem tại openstreetmap.org",
             "view_on_keepRight": "Xem tại keepright.at",
@@ -519,8 +518,8 @@
             "role": "Vai trò",
             "choose": "Chọn thể loại đối tượng",
             "results": "{n} kết quả cho {search}",
-            "reference": "Tra cứu OpenStreetMap Wiki",
-            "edit_reference": "Sửa hoặc dịch lời miêu tả",
+            "no_documentation_key": "Không có tài liệu.",
+            "edit_reference": "sửa/dịch",
             "wiki_reference": "Tra cứu tài liệu",
             "wiki_en_reference": "Tra cứu tài liệu tiếng Anh",
             "back_tooltip": "Thay đổi đối tượng",
@@ -597,6 +596,10 @@
                     "tooltip": "Các vấn đề bản đồ được phát hiện tự động từ keepright.at",
                     "title": "Vấn đề KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "Dữ liệu bị thiếu do improveosm.org tự động dò",
+                    "title": "Vấn đề ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "Kéo thả một tập tin dữ liệu vào trang hoặc bấm nút để thiết lập",
                     "title": "Dữ liệu Bản đồ Tùy biến",
@@ -650,11 +653,9 @@
                 "tooltip": "Đường Dây điện, Nhà máy Điện, Trạm Điện Phụ, v.v."
             },
             "past_future": {
-                "description": "Quá khứ & Tương lai",
                 "tooltip": "Đề nghị, Đang Xây, Bỏ hoang, Phá hủy, v.v."
             },
             "others": {
-                "description": "Khác",
                 "tooltip": "Những Gì Khác"
             }
         },
@@ -774,25 +775,6 @@
             "on_wiki": "{tag} tại wiki.osm.org",
             "used_with": "được sử dụng với {type}"
         },
-        "validations": {
-            "disconnected_highway": "Đường không nối liền",
-            "disconnected_highway_tooltip": "Đường phải nối liền với đường khác hoặc lối ra vào tòa nhà.",
-            "generic_name": "Có thể tên chung",
-            "generic_name_tooltip": "Đối tượng này hình như có tên chung là “{name}”. Vui lòng chỉ sử dụng hộp Tên để ghi tên chính thức của đối tượng.",
-            "old_multipolygon": "Thẻ được gắn vào lối bên ngoài của tổ hợp đa giác",
-            "old_multipolygon_tooltip": "Kiểu tổ hợp đa giác này đã bị phản đối. Xin vui lòng gắn các thẻ vào chính tổ hợp đa giác thay vì lối bên ngoài.",
-            "untagged_point": "Địa điểm không có thẻ",
-            "untagged_point_tooltip": "Chọn loại điểm.",
-            "untagged_line": "Đường kẻ không có thẻ",
-            "untagged_line_tooltip": "Chọn loại đường kẻ.",
-            "untagged_area": "Vùng không có thẻ",
-            "untagged_area_tooltip": "Chọn loại vùng.",
-            "untagged_relation": "Quan hệ không có thẻ",
-            "untagged_relation_tooltip": "Chọn loại quan hệ.",
-            "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng, tính cả {p} nốt, {l} đường kẻ, {a} vùng, và {r} quan hệ? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
-            "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
-            "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
-        },
         "zoom": {
             "in": "Phóng to",
             "out": "Thu nhỏ"
@@ -800,6 +782,39 @@
         "cannot_zoom": "Không thể thu nhỏ hơn trong chế độ hiện tại.",
         "full_screen": "Bật/tắt Chế độ Toàn màn hình",
         "QA": {
+            "improveOSM": {
+                "title": "Sự dò ImproveOSM",
+                "geometry_types": {
+                    "path": "lối",
+                    "parking": "bãi đậu xe",
+                    "road": "đường sá",
+                    "both": "đường sá và bãi đậu xe"
+                },
+                "directions": {
+                    "east": "đông",
+                    "north": "bắc",
+                    "northeast": "đông bắc",
+                    "northwest": "tây bắc",
+                    "south": "nam",
+                    "southeast": "đông nam",
+                    "southwest": "tây nam",
+                    "west": "tây"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Đường Thiếu Thẻ Một chiều",
+                        "description": "Trong số {num_trips} chuyến đi được ghi lại trên đoạn {highway} này, {percentage}% đi từ {from_node} đến {to_node}. Thẻ “oneway” (đường một chiều) có thể bị thiếu."
+                    },
+                    "mr": {
+                        "title": "Thiếu Đối tượng",
+                        "description": "Số {num_trips} chuyến đi được ghi lại trong khu vực này gợi ý rằng một {geometry_type} tồn tại tại đây nhưng chưa được thêm vào bản đồ."
+                    },
+                    "tr": {
+                        "title": "Thiếu Hạn chế Rẽ",
+                        "description": "Trong số {num_trips} chuyến đi về hướng {travel_direction} được ghi lại, {num_passed} chuyến đi rẽ từ {from_way} đến {to_way} tại {junction}. Một hạn chế rẽ “{turn_restriction}” có thể bị thiếu."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "Lỗi KeepRight",
                 "detail_title": "Lỗi",
@@ -1347,7 +1362,7 @@
                 "title": "Bảo đảm chất lượng",
                 "intro": "Các *bảo đảm chất lượng* có thể nhận ra các thẻ sai, con đường không nối liền, và vấn đề khác trong OpenStreetMap để bạn giải quyết. Để xem các vấn đề bảo đảm chất lượng hiện tại, bấm nút {data} **Dữ liệu bản đồ** ở bên phải của bản đồ và bật một lớp bảo đảm chất lượng cụ thể.",
                 "tools_h": "Công cụ",
-                "tools": "Hiện tại chỉ hỗ trợ công cụ [KeepRight](https://www.keepright.at/), nhưng mai mốt iD sẽ hỗ trợ [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/vi/), và thêm công cụ bảo đảm chất lượng.",
+                "tools": "Hiện tại các công cụ [KeepRight](https://www.keepright.at/) và [ImproveOSM](https://improveosm.org/vi/) được hỗ trợ. Mai mốt iD sẽ hỗ trợ [Osmose](https://osmose.openstreetmap.fr/) và thêm công cụ bảo đảm chất lượng.",
                 "issues_h": "Xử lý Vấn đề",
                 "issues": "Một vấn đề bảo đảm chất lượng được xử lý giống như một ghi chú. Nhấn chuột vào ghim để xem các chi tiết trong thanh bên. Mỗi công cụ có khả năng khác nhau, nhưng nói chung bạn có thể nhận xét hoặc đánh dấu giải quyết vấn đề."
             },
@@ -1797,7 +1812,10 @@
                 "category-building": {
                     "name": "Liên quan đến Tòa nhà"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "Liên quan đến Golf"
+                },
+                "category-golf-line": {
                     "name": "Liên quan đến Golf"
                 },
                 "category-landuse": {
@@ -1979,6 +1997,9 @@
                 },
                 "animal_shelter": {
                     "label": "Loại Thú"
+                },
+                "architect": {
+                    "label": "Kiến trúc sư"
                 },
                 "area/highway": {
                     "label": "Loại"
@@ -2647,7 +2668,7 @@
                     "label": "Chiều dài (Mét)"
                 },
                 "level": {
-                    "label": "Tầng"
+                    "label": "Lầu"
                 },
                 "levels": {
                     "label": "Số Tầng",
@@ -2848,9 +2869,6 @@
                         "surface": "Ngoài trời",
                         "underground": "Ngầm"
                     }
-                },
-                "passenger_information_display": {
-                    "label": "Hệ thống Thông tin Hành khách"
                 },
                 "payment_multi": {
                     "label": "Phương thức Thanh toán"
@@ -3075,6 +3093,9 @@
                 "restrictions": {
                     "label": "Hạn chế rẽ"
                 },
+                "roof/colour": {
+                    "label": "Màu Mái"
+                },
                 "rooms": {
                     "label": "Số Phòng"
                 },
@@ -3095,6 +3116,9 @@
                         "mountain_hiking": "T2: Đi bộ Đường dài Núi"
                     },
                     "placeholder": "Đi bộ Đường dài Núi, Đi bộ Đường dài Anpơ…"
+                },
+                "salt": {
+                    "label": "Nước mặn"
                 },
                 "sanitary_dump_station": {
                     "label": "Trạm Đổ Chất thải Vệ sinh"
@@ -3387,6 +3411,9 @@
                         "yes": "Có"
                     },
                     "placeholder": "Có, Không có, Chỉ có Mang về…"
+                },
+                "tidal": {
+                    "label": "Thủy triều"
                 },
                 "to": {
                     "label": "Đến"
@@ -3817,6 +3844,10 @@
                     "name": "Đồng hồ",
                     "terms": "đồng hồ, dong ho"
                 },
+                "amenity/clock/sundial": {
+                    "name": "Đồng hồ Mặt Trời",
+                    "terms": "đồng hồ mặt trời, đồng hồ ánh nắng mặt trời, dong ho mat troi, dong ho anh nang mat troi"
+                },
                 "amenity/college": {
                     "name": "Sân trường Cao đẳng",
                     "terms": "sân trường cao đẳng, trường cao đẳng, cao đẳng, cđ, san truong cao dang, truong cao dang, cao dang, cd"
@@ -3887,6 +3918,10 @@
                 "amenity/fast_food/kebab": {
                     "name": "Tiệm Ăn nhanh Kebab",
                     "terms": "tiệm kebab, quán kebab, nhà hàng kebab, quán ăn kebab, kebab xiên, doner kebab, tiệm ăn nhanh kebab, tiem kebab, quan kebab, nha hang kebab, quan an kebab, kebab xien, tiem an nhanh kebab"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "Tiệm Ăn nhanh Mễ",
+                    "terms": "nhà hàng mễ, nhà hàng méxico, nhà hàng mexico, quán ăn mễ, quán ăn méxico, quán ăn mexico, tiệm ăn mễ, tiệm ăn méxico, tiệm ăn mexico, tiệm mễ, tiệm méxico, tiệm mexico, nhà ăn mễ, nhà ăn méxico, nhà ăn mexico, phòng ăn mễ, phòng ăn méxico, phòng ăn mexico, nhà hàng đồ mễ, nhà hàng đồ méxico, nhà hàng đồ mexico, quán ăn đồ mễ, quán ăn đồ méxico, quán ăn đồ mexico, tiệm ăn đồ mễ, tiệm ăn đồ méxico, tiệm ăn đồ mexico, tiệm đồ mễ, tiệm đồ méxico, tiệm đồ mexico, nhà ăn đồ mễ, nhà ăn đồ méxico, nhà ăn đồ mexico, phòng ăn đồ mễ, phòng ăn đồ méxico, phòng ăn đồ mexico, taco, burrito, carne asada, enchilada, fajita, nacho, tortilla, tamale, quesadilla, nha hang me, nha hang mexico, nha hang mexico, quan an me, quan an mexico, quan an mexico, tiem an me, tiem an mexico, tiem an mexico, tiem me, tiem mexico, tiem mexico, nha an me, nha an mexico, nha an mexico, phong an me, phong an mexico, phong an mexico, nha hang do me, nha hang do mexico, nha hang do mexico, quan an do me, quan an do mexico, quan an do mexico, tiem an do me, tiem an do mexico, tiem an do mexico, tiem do me, tiem do mexico, tiem do mexico, nha an do me, nha an do mexico,, nha an do mexico, phong an do me, phong an do mexico, phong an do mexico"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "Tiệm Ăn nhanh Pizza",
@@ -4130,7 +4165,7 @@
                 },
                 "amenity/restaurant/mexican": {
                     "name": "Nhà hàng Mễ",
-                    "terms": "nhà hàng mễ, nhà hàng méxico, nhà hàng mexico, quán ăn mễ, quán ăn méxico, quán ăn mexico, tiệm ăn mễ, tiệm ăn méxico, tiệm ăn mexico, tiệm mễ, tiệm méxico, tiệm mexico, nhà ăn mễ, nhà ăn méxico, nhà ăn mexico, phòng ăn mễ, phòng ăn méxico, phòng ăn mexico, nhà hàng đồ mễ, nhà hàng đồ méxico, nhà hàng đồ mexico, quán ăn đồ mễ, quán ăn đồ méxico, quán ăn đồ mexico, tiệm ăn đồ mễ, tiệm ăn đồ méxico, tiệm ăn đồ mexico, tiệm đồ mễ, tiệm đồ méxico, tiệm đồ mexico, nhà ăn đồ mễ, nhà ăn đồ méxico,, nhà ăn đồ mexico, phòng ăn đồ mễ, phòng ăn đồ méxico, phòng ăn đồ mexico, taco, burrito, carne asada, enchilada, fajita, nacho, tortilla, tamale, quesadilla, nha hang me, nha hang mexico, nha hang mexico, quan an me, quan an mexico, quan an mexico, tiem an me, tiem an mexico, tiem an mexico, tiem me, tiem mexico, tiem mexico, nha an me, nha an mexico, nha an mexico, phong an me, phong an mexico, phong an mexico, nha hang do me, nha hang do mexico, nha hang do mexico, quan an do me, quan an do mexico, quan an do mexico, tiem an do me, tiem an do mexico, tiem an do mexico, tiem do me, tiem do mexico, tiem do mexico, nha an do me, nha an do mexico,, nha an do mexico, phong an do me, phong an do mexico, phong an do mexico"
+                    "terms": "nhà hàng mễ, nhà hàng méxico, nhà hàng mexico, quán ăn mễ, quán ăn méxico, quán ăn mexico, tiệm ăn mễ, tiệm ăn méxico, tiệm ăn mexico, tiệm mễ, tiệm méxico, tiệm mexico, nhà ăn mễ, nhà ăn méxico, nhà ăn mexico, phòng ăn mễ, phòng ăn méxico, phòng ăn mexico, nhà hàng đồ mễ, nhà hàng đồ méxico, nhà hàng đồ mexico, quán ăn đồ mễ, quán ăn đồ méxico, quán ăn đồ mexico, tiệm ăn đồ mễ, tiệm ăn đồ méxico, tiệm ăn đồ mexico, tiệm đồ mễ, tiệm đồ méxico, tiệm đồ mexico, nhà ăn đồ mễ, nhà ăn đồ méxico, nhà ăn đồ mexico, phòng ăn đồ mễ, phòng ăn đồ méxico, phòng ăn đồ mexico, taco, burrito, carne asada, enchilada, fajita, nacho, tortilla, tamale, quesadilla, nha hang me, nha hang mexico, nha hang mexico, quan an me, quan an mexico, quan an mexico, tiem an me, tiem an mexico, tiem an mexico, tiem me, tiem mexico, tiem mexico, nha an me, nha an mexico, nha an mexico, phong an me, phong an mexico, phong an mexico, nha hang do me, nha hang do mexico, nha hang do mexico, quan an do me, quan an do mexico, quan an do mexico, tiem an do me, tiem an do mexico, tiem an do mexico, tiem do me, tiem do mexico, tiem do mexico, nha an do me, nha an do mexico,, nha an do mexico, phong an do me, phong an do mexico, phong an do mexico"
                 },
                 "amenity/restaurant/noodle": {
                     "name": "Nhà hàng Mì/Bún/Miến/Phở/v.v.",
@@ -4721,9 +4756,6 @@
                     "name": "Dãy Nhà",
                     "terms": "dãy nhà, day nha"
                 },
-                "building/train_station": {
-                    "name": "Nhà ga"
-                },
                 "building/transportation": {
                     "name": "Tòa nhà Phương tiện Công cộng",
                     "terms": "tòa nhà phương tiện công cộng, toà nhà phương tiện công cộng, tòa nhà ptcc, toà nhà ptcc, kiến trúc phương tiện công cộng, kiến trúc ptcc, toa nha phuong tien cong cong, toa nha ptcc, kien truc phuong tien cong cong, kien truc ptcc"
@@ -5032,11 +5064,7 @@
                     "name": "Lỗ Golf",
                     "terms": "lỗ golf, lỗ gôn, hố golf, hố gôn, lo golf, lo gon, ho golf, ho gon"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Bẫy Nước Cắt ngang",
-                    "terms": "bẫy nước cắt ngang, chướng ngại nước cắt ngang, dòng sông, dòng suối, bay nuoc cat ngang, chuong ngai nuoc cat ngang, dong song, dong suoi"
-                },
-                "golf/lateral_water_hazard_line": {
+                "golf/lateral_water_hazard": {
                     "name": "Bẫy Nước Cắt ngang",
                     "terms": "bẫy nước cắt ngang, chướng ngại nước cắt ngang, dòng sông, dòng suối, bay nuoc cat ngang, chuong ngai nuoc cat ngang, dong song, dong suoi"
                 },
@@ -5047,14 +5075,6 @@
                 "golf/tee": {
                     "name": "Điểm Phát bóng",
                     "terms": "điểm phát bóng, vị trí phát bóng, diem phat bong, vi tri phat bong"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Bẫy Nước",
-                    "terms": "bẫy nước, chướng ngại nước, ao hồ, ao nước, hồ nước, bay nuoc, chuong ngai nuoc, ao ho, ao nuoc, ho nuoc"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Bẫy Nước",
-                    "terms": "bẫy nước, chướng ngại nước, ao hồ, ao nước, hồ nước, bay nuoc, chuong ngai nuoc, ao ho, ao nuoc, ho nuoc"
                 },
                 "healthcare": {
                     "name": "Trung tâm Y tế",
@@ -5423,8 +5443,7 @@
                     "terms": "giao lộ, chỗ đường gặp nhau, nơi đường gặp nhau, giao lo, cho duong gap nhau, noi duong gap nhau"
                 },
                 "landuse": {
-                    "name": "Sử dụng Đất",
-                    "terms": "kiểu sử dụng đất, kiểu dùng đất, kieu su dung dat, kieu dung dat"
+                    "name": "Sử dụng Đất"
                 },
                 "landuse/allotments": {
                     "name": "Khu Vườn Gia đình",
@@ -5607,8 +5626,7 @@
                     "terms": "vườn nho, vuon nho"
                 },
                 "leisure": {
-                    "name": "Giải trí",
-                    "terms": "giải trí, thể thao, thể dục, giai tri, the thao, the duc"
+                    "name": "Giải trí"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Trung tâm Đánh bạc",
@@ -5762,6 +5780,10 @@
                     "name": "Bàn ăn Ngoài trời",
                     "terms": "bàn ăn ngoài trời, bàn ghế dã ngoại, bàn ghế dài, ban an ngoai troi, ban ghe da ngoai, ban ghe dai"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "Bàn Cờ vua",
+                    "terms": "bàn cờ vua, bàn cờ quốc tế, cờ vua, cờ quốc tế, ban co vua, ban co quoc te, co vua, co quoc te"
+                },
                 "leisure/pitch": {
                     "name": "Sân Thể thao",
                     "terms": "sân thể thao, sân cỏ, sân vận động, svđ, san the thao, san co, san van dong, svd"
@@ -5862,6 +5884,10 @@
                     "name": "Trung tâm Thể thao",
                     "terms": "trung tâm thể thao, tòa nhà thể thao, toà nhà thể thao, sân vận động trong nhà, svđ trong nhà, trung tam the thao, toa nha the thao, san van dong trong nha, svd trong nha"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Khu Tường Leo núi",
+                    "terms": "khu tường leo núi, tường leo núi, tường leo núi nhân tạo, khu tuong leo nui, tuong leo nui, tuong leo nui nhan tao"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Trung tâm Bơi lội",
                     "terms": "trung tâm bơi lội, trung tâm spa, trung tam boi loi, trung tam spa"
@@ -5895,8 +5921,7 @@
                     "terms": "đường kẻ, đường, lối, duong ke, duong, loi"
                 },
                 "man_made": {
-                    "name": "Công trình",
-                    "terms": "công trình, nhân tạo, cong trinh, nhan tao"
+                    "name": "Công trình"
                 },
                 "man_made/adit": {
                     "name": "Lối vào Mỏ",
@@ -6022,9 +6047,17 @@
                     "name": "Tháp",
                     "terms": "tháp, thap"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Tháp chuông",
+                    "terms": "tháp chuông, lầu chuông, gác chuông, tháp nhà thờ, thap chuong, lau chuong, gac chuong, thap nha tho"
+                },
                 "man_made/tower/communication": {
                     "name": "Tháp Giao thông",
                     "terms": "tháp giao thông, tháp viễn thông, thap giao thong, thap vien thong"
+                },
+                "man_made/tower/minaret": {
+                    "name": "Tháp Nhà thờ Hồi giáo",
+                    "terms": "tháp nhà thờ hồi giáo, tháp giáo đường hồi giáo, tháp thánh đường hồi giáo, thap nha tho hoi giao, thap giao duong hoi giao, thap thanh duong hoi giao"
                 },
                 "man_made/tower/observation": {
                     "name": "Tháp Quan sát",
@@ -6071,8 +6104,7 @@
                     "terms": "hố cáp viễn thông, lỗ cáp viễn thông, ho cap vien thong, lo cap vien thong"
                 },
                 "natural": {
-                    "name": "Thiên nhiên",
-                    "terms": "thiên nhiên, tự nhiên, thien nhien, tu nhien"
+                    "name": "Thiên nhiên"
                 },
                 "natural/bare_rock": {
                     "name": "Hòn đá Không",
@@ -6165,6 +6197,10 @@
                 "natural/water": {
                     "name": "Nước",
                     "terms": "nước, nuoc"
+                },
+                "natural/water/basin": {
+                    "name": "Bể",
+                    "terms": "bể, bể nước, bể nước mưa, bồn, vũng, be, be nuoc, be nuoc mua, bon, vung"
                 },
                 "natural/water/canal": {
                     "name": "Kênh đào",
@@ -6553,46 +6589,6 @@
                 "power/transformer": {
                     "name": "Máy biến áp",
                     "terms": "máy biến áp, may bien ap"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Trạm/Bến Phương tiện Công cộng",
-                    "terms": "trạm, bến, ke, ke ga, phương tiện công cộng, ptcc, giao thông công cộng, gtcc, tram, ben, phuong tien cong cong, giao thong cong cong"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Trạm/Bến Cáp treo",
-                    "terms": "trạm cáp treo, trạm thang kéo, bến cáp treo, bến thang kéo, tram cap treo, tram thang keo, ben cap treo, ben thang keo"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Trạm/Bến Xe buýt",
-                    "terms": "trạm xe buýt, trạm xe bus, bến xe buýt, bến xe bus, ke buýt, ke bus, tram xe buyt, tram xe bus, ben xe buyt, ben xe bus, ke buyt"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Bến Phà",
-                    "terms": "bến phà, ke phà, ben pha, ke pha"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Trạm/Bến Đường sắt Nhẹ",
-                    "terms": "trạm đường sắt nhẹ, trạm đường ray nhẹ, trạm tàu điện, bến đường sắt nhẹ, bến đường ray nhẹ, bến tàu điện, ke đường sắt nhẹ, ke đường ray nhẹ, ke tàu điện, tram duong sat nhe, tram duong ray nhe, tram tau dien, ben duong sat nhe, ben duong ray nhe, ben tau dien, ke duong sat nhe, ke duong ray nhe, ke tau dien"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Trạm/Bến Tàu một ray",
-                    "terms": "trạm tàu một ray, trạm monorail, bến tàu một ray, bến monorail, ke tàu một ray, ke monorail, tram tau mot ray, tram monorail, ben tau mot ray, ben monorail, ke tau mot ray"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Trạm/Bến Tàu điện ngầm",
-                    "terms": "trạm tàu điện ngầm, bến tàu điện ngầm, tram tau dien ngam, ben tau dien ngam"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Trạm/Bến Xe lửa",
-                    "terms": "trạm xe lửa, trạm tàu hỏa, trạm tau hoả, bến xe lửa, bến tàu hỏa, bến tàu hoả, tram xe lua, tram tau hoa, ben xe lua, ben tau hoa"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Trạm/Bến Tàu điện",
-                    "terms": "trạm tàu điện, trạm xe điện, bến tàu điện, bến xe điện, ke tàu điện, ke xe điện, tram tau dien, tram xe dien, ben tau dien, ben xe dien, ke tau dien, ke xe dien"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Trạm/Bến Xe điện Bánh hơi",
-                    "terms": "trạm xe điện bánh hơi, trạm xe buýt điện, trạm xe bus điện, bến xe điện bánh hơi, bến xe buýt điện, bến xe bus điện, ke xe điện bánh hơi, ke xe buýt điện, ke xe bus điện, tram xe dien banh hoi, tram xe buyt dien, tram xe bus dien, ben xe dien banh hoi, ben xe buyt dien, ben xe bus dien, ke xe dien banh hoi, ke xe buyt dien, ke xe bus dien"
                 },
                 "public_transport/platform": {
                     "name": "Trạm/Bến Phương tiện Công cộng",
@@ -7405,8 +7401,7 @@
                     "terms": "tiệm rượu vang, nơi bán rượu vang, chỗ bán rượu vang, quầy bán rượu vang, cửa hàng rượu vang, cửa hàng bán rượu vang, tiệm bán rượu vang, tiem ruou vang, noi ban ruou vang, cho ban ruou vang, quay ban ruou vang, cua hang ruou vang, cua hang ban ruou vang, tiem ban ruou vang"
                 },
                 "tourism": {
-                    "name": "Du lịch",
-                    "terms": "du lịch, máy bay, xe lửa, chuyến bay, nghỉ hè, du lich, may bay, xe lua, chuyen bay, nghi he"
+                    "name": "Du lịch"
                 },
                 "tourism/alpine_hut": {
                     "name": "Túp lều trên Núi",
@@ -8645,6 +8640,7 @@
                 "description": "talk-is là danh sách thư chính thức của cộng đồng OSM Iceland"
             },
             "is-twitter": {
+                "name": "OSM Iceland tại Twitter",
                 "description": "Twitter OpenStreetMap tại Iceland"
             },
             "it-facebook": {

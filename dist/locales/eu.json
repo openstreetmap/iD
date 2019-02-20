@@ -342,9 +342,6 @@
                 "category-building": {
                     "name": "Eraikuntzaren ezaugarriak"
                 },
-                "category-golf": {
-                    "name": "Golf-aren ezaugarriak"
-                },
                 "category-landuse": {
                     "name": "Lurraren erabilera ezaugarriak"
                 },
@@ -1251,9 +1248,6 @@
                         "underground": "Lur azpiko"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Bidaiarientzako informazio pantaila"
-                },
                 "payment_multi": {
                     "label": "Ordaintzeko Moduak"
                 },
@@ -1716,8 +1710,7 @@
                     "label": "Mota"
                 },
                 "website": {
-                    "label": "Webgune",
-                    "placeholder": "http://example.com/"
+                    "label": "Webgune"
                 },
                 "wetland": {
                     "label": "Mota"
@@ -2151,9 +2144,6 @@
                 },
                 "building/stable": {
                     "name": "Ukuilu"
-                },
-                "building/train_station": {
-                    "name": "Tren geltoki"
                 },
                 "club": {
                     "name": "Klub"

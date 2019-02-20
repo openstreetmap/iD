@@ -463,8 +463,6 @@
             "locating": "Lociram, molim pričekaj..."
         },
         "inspector": {
-            "no_documentation_combination": "Ne postoji dokumentacija za ovu kombinaciju oznaka",
-            "no_documentation_key": "Ne postoji dokumentacija za ovaj ključ.",
             "show_more": "Prikaži više",
             "view_on_osm": "Pogledaj na openstreetmap.org",
             "all_fields": "Sva polja",
@@ -475,7 +473,6 @@
             "role": "Uloga",
             "choose": "Odaberi vrstu elementa",
             "results": "{n} rezultata za {search}",
-            "reference": "Pogledaj na OpenStreetMap Wiki",
             "back_tooltip": "Promijeni element karte",
             "remove": "Ukloni",
             "search": "Pretraži",
@@ -589,11 +586,9 @@
                 "tooltip": "Dalekovodi, elektrane, trafostanice, itd."
             },
             "past_future": {
-                "description": "Prošlost/Budućnost",
                 "tooltip": "U planu, u izgradnji, napušteno, srušeno, itd."
             },
             "others": {
-                "description": "Ostali",
                 "tooltip": "Sve ostalo"
             }
         },
@@ -689,23 +684,6 @@
             "description": "Opis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "koristi se sa {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Cesta je razdvojena",
-            "disconnected_highway_tooltip": "Prometnice bi trebale biti spojene na druge prometnice ili na ulaz u zgradu.",
-            "old_multipolygon": "Oznake multipoligona na vanjskom putu",
-            "old_multipolygon_tooltip": "Ovaj stil multipoligona je zastario. Molim dodijeli oznake na roditeljski multipoligon umjesto na vanjski put.",
-            "untagged_point": "Neoznačena točka",
-            "untagged_point_tooltip": "Odaberi element karte koji opisuje što ova točka predstavlja.",
-            "untagged_line": "Neoznačena linija",
-            "untagged_line_tooltip": "Odaberi element karte koji opisuje što ova linija predstavlja.",
-            "untagged_area": "Neoznačeno područje",
-            "untagged_area_tooltip": "Odaberi element karte koji opisuje što ovo područje predstavlja.",
-            "untagged_relation": "Neoznačena relacija",
-            "untagged_relation_tooltip": "Odaberi element karte koji opisuje što ova relacija predstavlja.",
-            "many_deletions": "Brišeš {n} elemenata: {p} točaka, {l} linija, {a} područja, {r} relacija. Jesi li siguran/na da želiš to učiniti? Time ćeš obrisati elemente sa karte koju svi vide na openstreetmap.org.",
-            "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
-            "deprecated_tags": "Zastarjele oznake: {tags}"
         },
         "zoom": {
             "in": "Približi",
@@ -1272,9 +1250,6 @@
                 },
                 "category-building": {
                     "name": "Vrste građevina"
-                },
-                "category-golf": {
-                    "name": "Elementi golf igrališta"
                 },
                 "category-landuse": {
                     "name": "Načini korištenja zemljišta"
@@ -2049,8 +2024,7 @@
                     "label": "Vrsta"
                 },
                 "website": {
-                    "label": "Web stranica",
-                    "placeholder": "http://primjer.hr/"
+                    "label": "Web stranica"
                 },
                 "wetland": {
                     "label": "Vrsta"
@@ -2585,9 +2559,6 @@
                 "building/terrace": {
                     "name": "Kuće u nizu"
                 },
-                "building/train_station": {
-                    "name": "Željeznički kolodvor"
-                },
                 "building/university": {
                     "name": "Zgrada sveučilišta"
                 },
@@ -3075,8 +3046,7 @@
                     "terms": "linija,crta"
                 },
                 "man_made": {
-                    "name": "Ljudske tvorevine",
-                    "terms": "ljudske tvorevine,napravio čovjek,umjetno,ljudska tvorevina u okolišu"
+                    "name": "Ljudske tvorevine"
                 },
                 "man_made/adit": {
                     "name": "Položeni ulaz u rudnik"
@@ -3147,8 +3117,7 @@
                     "terms": "vodocrpilište,vodovod,vodovodna instalacija,vađenje pitke vode"
                 },
                 "natural": {
-                    "name": "Prirodno",
-                    "terms": "prirodno,prirodne,prirodan,prirodni,prirodno,šuma,močvara,drvored,drvo,krš,blato,pijesak,livada,pašnjak,prirodni elementi"
+                    "name": "Prirodno"
                 },
                 "natural/bare_rock": {
                     "name": "Goli kamen"
@@ -3770,8 +3739,7 @@
                     "name": "Prodavaonica vina"
                 },
                 "tourism": {
-                    "name": "Turizam",
-                    "terms": "turizam,seoski turizam"
+                    "name": "Turizam"
                 },
                 "tourism/alpine_hut": {
                     "name": "Planinarski dom",

@@ -193,7 +193,8 @@
                 "restriction": "Esses recursos não podem ser mesclados porque isso danificaria uma relação \"{relation}\".",
                 "relation": "Esses recursos não podem ser mesclados porque possuem funções de relação conflitantes.",
                 "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente.",
-                "conflicting_tags": "Estes elementos não podem ser mesclados porque algumas de suas etiquetas têm valores conflitantes."
+                "conflicting_tags": "Estes elementos não podem ser mesclados porque algumas de suas etiquetas têm valores conflitantes.",
+                "paths_intersect": "Esses recursos não podem ser mesclados porque o caminho resultante se interceptaria."
             },
             "move": {
                 "title": "Mover",
@@ -413,6 +414,8 @@
             "modified": "Modificado",
             "deleted": "Excluído",
             "created": "Criado",
+            "outstanding_errors_message": "Por favor, resolva todos os erros primeiro. {count} restantes.",
+            "comment_needed_message": "Por favor, adicione primeiro um comentário ao conjunto de alterações.",
             "about_changeset_comments": "Sobre comentários do conjunto de alterações",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Você mencionou o Google  neste comentário: lembre-se que a cópia do Google Maps é estritamente proibida.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "Centralize e amplie o mapa para focar nestes dados.",
                 "tooltip_issue": "Centralize e amplie o mapa para focar este problema."
             },
-            "no_documentation_combination": "Não há documentação disponível para esta combinação de etiquetas",
-            "no_documentation_key": "Não há documentação disponível para esta chave",
             "show_more": "Mostrar Mais",
             "view_on_osm": "Ver no openstreetmap.org",
             "view_on_keepRight": "Ver no keepright.at",
@@ -519,10 +520,14 @@
             "role": "Papel",
             "choose": "Selecione o tipo de elemento",
             "results": "{n} resultado(s) para {search}",
-            "reference": "Ver no wiki do OpenStreetMap",
-            "edit_reference": "Editar ou traduzir a descrição",
+            "no_documentation_key": "Não há documentação disponível.",
+            "edit_reference": "editar/traduzir",
             "wiki_reference": "Ver documentação",
             "wiki_en_reference": "Ver documentação em inglês",
+            "hidden_preset": {
+                "manual": "{features} estão escondidos. Ative-os no painel Dados do mapa.",
+                "zoom": "{features} estão escondidos. Aumente o zoom para ativá-los."
+            },
             "back_tooltip": "Alterar elemento",
             "remove": "Remover",
             "search": "Procurar",
@@ -597,6 +602,10 @@
                     "tooltip": "Detectou automaticamente os erros de mapeamento do keepright.at",
                     "title": "Erros do KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "Dados perdidos detectados automaticamente por improveosm.org",
+                    "title": "Problemas ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "Arraste e solte um arquivo de dados na página ou clique no botão para configurar",
                     "title": "Dados de mapa personalizados",
@@ -650,11 +659,11 @@
                 "tooltip": "Linhas de Transmissão, Usinas Elétricas, Subestações etc."
             },
             "past_future": {
-                "description": "Passado/Futuro",
+                "description": "Recursos passados/futuros",
                 "tooltip": "Propostas, Construído, Abandonado, Demolido etc."
             },
             "others": {
-                "description": "Outros",
+                "description": "Outras características",
                 "tooltip": "Outras coisas"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} em wiki.osm.org",
             "used_with": "usado com {type}"
         },
-        "validations": {
-            "disconnected_highway": "Estrada desconectada",
-            "disconnected_highway_tooltip": "Estradas devem estar conectadas a outras estradas ou entradas de prédios.",
-            "generic_name": "Possível nome genérico",
-            "generic_name_tooltip": "Este recurso parece ter um nome genérico \"{name}\". Por favor, use o campo de nome apenas para registrar o nome oficial de um elemento.",
-            "old_multipolygon": "Etiquetas de multipolígono na borda exterior",
-            "old_multipolygon_tooltip": "Esta forma de mapear um multipolígono está obsoleta é desencorajada. Por favor, insira as etiquetas na relação-mãe do multipolígono e não em sua borda exterior.",
-            "untagged_point": "Ponto sem etiquetas",
-            "untagged_point_tooltip": "Selecionar um tipo de elemento que descreva o que este ponto é.",
-            "untagged_line": "Linha sem etiquetas",
-            "untagged_line_tooltip": "Selecionar um tipo de elemento que descreva o que esta linha é.",
-            "untagged_area": "Área sem etiquetas",
-            "untagged_area_tooltip": "Selecionar um tipo de elemento que descreva o que esta área é.",
-            "untagged_relation": "Relação sem etiquetas",
-            "untagged_relation_tooltip": "Selecionar um tipo de elemento que descreva o que esta relação é.",
-            "many_deletions": "Você está apagando {n} feições: {p} nós, {l} linhas, {a} áreas, {r} relações. Você ter certeza que quer executar esta ação? Ela irá apagar estes elementos para todas as pessoas que acessam o openstreetmap.org.",
-            "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
-            "deprecated_tags": "Etiquetas obsoletas: {tags}"
-        },
         "zoom": {
             "in": "Aproximar o zoom",
             "out": "Afastar o zoom"
@@ -800,6 +790,40 @@
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Alterar para Tela Cheia",
         "QA": {
+            "improveOSM": {
+                "title": "Detecção do ImproveOSM",
+                "geometry_types": {
+                    "path": "caminhos",
+                    "parking": "estacionamento",
+                    "road": "estradas",
+                    "both": "estradas e estacionamento"
+                },
+                "directions": {
+                    "east": "leste",
+                    "north": "norte",
+                    "northeast": "nordeste",
+                    "northwest": "noroeste",
+                    "south": "sul",
+                    "southeast": "sudeste",
+                    "southwest": "sudoeste",
+                    "west": "oeste"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Falta de sentido",
+                        "description": "Ao longo desta seção de {highway}, {percentage}% de viagens {num_trips} gravadas viajam de {from_node} para {to_node}. Pode estar faltando uma etiqueta \"oneway\"."
+                    },
+                    "mr": {
+                        "title": "Geometria ausente",
+                        "description": "Viagens  {num_trips} gravadas nesta área sugerem que pode haver desmapeamento {geometry_type} aqui.",
+                        "description_alt": "Os dados de terceiros sugerem que pode haver {geometry_type} não mapeado aqui."
+                    },
+                    "tr": {
+                        "title": "Restrição de sentido ausente",
+                        "description": "{num_passed} de viagens {num_trips}  gravadas  (viajando {travel_direction}) fazer uma curva de {from_way} para {to_way} na {junction}. Pode haver uma restrição \"{turn_restriction}\" em falta."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "Erro no KeepRight",
                 "detail_title": "Erro",
@@ -1347,7 +1371,7 @@
                 "title": "Verificação de qualidade",
                 "intro": "* Verificação de qualidade * (Q/A) ferramentas de terceiros que ajudam a melhorar a qualidade dos dados do OSM. Eles listam automaticamente erros, conflitos e problemas detectados com os dados, que os mapeadores podem então corrigir. Para ver os problemas existentes em Q/A, clique no painel {data} **Dados do mapa** para ativar uma camada Q/A específica.",
                 "tools_h": "Ferramentas",
-                "tools": "As seguintes ferramentas são suportadas atualmente: [KeepRight](https://www.keepright.at/). Espere que o iD suporte [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), e mais ferramentas Q/A no futuro.",
+                "tools": "As seguintes ferramentas são suportadas atualmente: [KeepRight](https://www.keepright.at/) e  [ImproveOSM](https://improveosm.org/en/). Espere que o iD suporte [Osmose](https://osmose.openstreetmap.fr/) e mais ferramentas Q/A no futuro.",
                 "issues_h": "Problemas de manuseio",
                 "issues": "Lidar com questões Q/A é semelhante ao tratamento de notas. Clique em um marcador para ver os detalhes do problema na barra lateral. Cada ferramenta tem seus próprios recursos, mas geralmente você pode comentar e/ou fechar um problema."
             },
@@ -1387,6 +1411,190 @@
                         "indirect_example": "Essas restrições existem por causa de outra restrição próxima. Por exemplo, uma restrição \"Somente Direto\" criará indiretamente restrições \"Nenhuma volta\" para todos os outros caminhos através da interseção.",
                         "indirect_noedit": "Você não pode editar restrições indiretas. Ao invés disso, tente editar uma relação direta próxima."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problemas",
+            "key": "I",
+            "list_title": "({count}) problemas",
+            "errors": {
+                "list_title": "({count}) erros"
+            },
+            "warnings": {
+                "list_title": "({count}) avisos"
+            },
+            "no_issues": {
+                "message": "Tudo parece bem",
+                "info": "Quaisquer problemas aparecerão aqui conforme você edita"
+            },
+            "almost_junction": {
+                "message": "{feature} é muito próximo, mas não está conectado a {feature2}",
+                "highway-highway": {
+                    "tip": "Estradas com interseção devem compartilhar um vértice de junção."
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} cruza {feature2}",
+                "building-building": {
+                    "tip": "Os edifícios não devem se cruzar, exceto em camadas diferentes."
+                },
+                "building-highway": {
+                    "tip": "Rodovias que cruzam edifícios devem usar pontes, túneis, coberturas ou entradas."
+                },
+                "building-railway": {
+                    "tip": "Estradas de ferro que cruzam edifícios devem usar pontes ou túneis."
+                },
+                "building-waterway": {
+                    "tip": "Os canais que atravessam edifícios devem usar túneis ou camadas diferentes."
+                },
+                "highway-highway": {
+                    "tip": "As rodovias de travessia devem usar pontes, túneis ou cruzamentos."
+                },
+                "highway-railway": {
+                    "tip": "Rodovias que cruzam ferrovias devem usar pontes, túneis ou passagens de nível."
+                },
+                "highway-waterway": {
+                    "tip": "Rodovias que atravessam cursos de água devem usar pontes, túneis ou vaus."
+                },
+                "railway-railway": {
+                    "tip": "Ferrovias de cruzamento devem ser conectadas ou usar pontes ou túneis."
+                },
+                "railway-waterway": {
+                    "tip": "Estradas de ferro que cruzam cursos de água devem usar pontes ou túneis."
+                },
+                "waterway-waterway": {
+                    "tip": "Os canais de travessia devem estar conectados ou usar túneis."
+                },
+                "tunnel-tunnel": {
+                    "tip": "Túneis cruzados devem usar diferentes camadas."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Os túneis de cruzamento devem ser conectados ou usar camadas diferentes."
+                },
+                "bridge-bridge": {
+                    "tip": "Pontes de cruzamento devem usar camadas diferentes."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "As pontes de cruzamento devem ser conectadas ou usar camadas diferentes."
+                },
+                "indoor-indoor": {
+                    "tip": "Os recursos internos de cruzamento devem usar níveis diferentes."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Os recursos internos de cruzamento devem estar conectados ou usar níveis diferentes."
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} tem a etiqueta desatualizada \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} tem uma combinação de etiqueta desatualizada: {tags}"
+                },
+                "tip": "Algumas etiquetas se tornam obsoletas com o tempo e devem ser substituídas."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} está desconectado de outras estradas e caminhos",
+                    "tip": "As rodovias devem se conectar a outras rodovias ou entradas de prédios."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} tem o nome genérico \"{name}\"",
+                "tip": "Os nomes devem ser os nomes reais dos recursos."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "Excluindo {n} recursos: {p} pontos, {l} linhas e {a} áreas"
+                },
+                "points-lines-areas-relations": {
+                    "message": "Excluindo {n} recursos: {p} pontos, {l} linhas, {a} áreas e {r} relações"
+                },
+                "tip": "Somente recursos redundantes ou inexistentes devem ser excluídos."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} não tem etiquetas."
+                },
+                "descriptive": {
+                    "message": "{feature} não tem etiquetas descritivas"
+                },
+                "specific": {
+                    "message": "{feature} não tem etiqueta \"{tag}\""
+                },
+                "tip": "Os recursos devem ter etiquetas que definem o que são."
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} tem etiquetas perdidas",
+                "tip": "Multipolígonos devem ser marcados em sua relação, não em seu caminho externo."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} deve ser uma área fechada com base na etiqueta \"{tag}\"",
+                "tip": "As áreas devem ter terminais conectados."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "Conectado recursos muito próximos."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Recursos de travessia conectados."
+                },
+                "connect_endpoints": {
+                    "title": "Conectar as extremidades",
+                    "annotation": "Conectado os pontos finais de um caminho."
+                },
+                "connect_features": {
+                    "title": "Conecte os recursos"
+                },
+                "continue_from_start": {
+                    "title": "Continue desenhando desde o início"
+                },
+                "continue_from_end": {
+                    "title": "Continue a desenhar a partir da extremidade"
+                },
+                "delete_feature": {
+                    "title": "Excluir este recurso"
+                },
+                "move_tags": {
+                    "title": "Mover etiquetas",
+                    "annotation": "Movido etiquetas"
+                },
+                "remove_generic_name": {
+                    "title": "Remova o nome",
+                    "annotation": "Removido nome genérico"
+                },
+                "remove_tag": {
+                    "title": "Remova etiqueta",
+                    "annotation": "Removido etiqueta."
+                },
+                "reposition_features": {
+                    "title": "Reposicione os recursos"
+                },
+                "select_preset": {
+                    "title": "Selecione um tipo de recurso"
+                },
+                "tag_as_disconnected": {
+                    "title": "Etiqueta está desconectada",
+                    "annotation": "Marcou recursos muito próximos como desconectados."
+                },
+                "upgrade_tag": {
+                    "annotation": "Atualizado essa etiqueta."
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "Atualizou uma combinação antiga de etiquetas."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Use uma ponte ou túnel"
+                },
+                "use_different_layers": {
+                    "title": "Use camadas diferentes"
+                },
+                "use_different_levels": {
+                    "title": "Use níveis diferentes"
+                },
+                "use_tunnel": {
+                    "title": "Use um túnel"
                 }
             }
         },
@@ -1797,7 +2005,10 @@
                 "category-building": {
                     "name": "Tipos de Edificações"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "Elementos de Golf"
+                },
+                "category-golf-line": {
                     "name": "Elementos de Golf"
                 },
                 "category-landuse": {
@@ -1979,6 +2190,9 @@
                 },
                 "animal_shelter": {
                     "label": "Para Animais"
+                },
+                "architect": {
+                    "label": "Arquiteto"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -2581,6 +2795,14 @@
                 "junction/ref_oneway": {
                     "label": "Número do entroncamento"
                 },
+                "junction_line": {
+                    "label": "Entroncamento",
+                    "options": {
+                        "circular": "Junção Circular",
+                        "jughandle": "Jughandle",
+                        "roundabout": "Rotatória"
+                    }
+                },
                 "kerb": {
                     "label": "Meio-fio"
                 },
@@ -2849,9 +3071,6 @@
                         "underground": "Subterrâneo"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Painel de informações"
-                },
                 "payment_multi": {
                     "label": "Tipos de Pagamento"
                 },
@@ -3075,6 +3294,9 @@
                 "restrictions": {
                     "label": "Restrições de curva"
                 },
+                "roof/colour": {
+                    "label": "Cor do telhado"
+                },
                 "rooms": {
                     "label": "Número de quartos ou apartamentos"
                 },
@@ -3095,6 +3317,9 @@
                         "mountain_hiking": "T2: Caminhada de montanha"
                     },
                     "placeholder": "Caminhada de montanha, caminhada alpina"
+                },
+                "salt": {
+                    "label": "Sal"
                 },
                 "sanitary_dump_station": {
                     "label": "Ponto de Descarga de Dejetos"
@@ -3388,6 +3613,9 @@
                     },
                     "placeholder": "Sim, Não, Só para Viagem..."
                 },
+                "tidal": {
+                    "label": "Maré"
+                },
                 "to": {
                     "label": "Para"
                 },
@@ -3560,7 +3788,7 @@
                 },
                 "website": {
                     "label": "Página da Internet",
-                    "placeholder": "http://exemplo.com.br/"
+                    "placeholder": "https://exemplo.com"
                 },
                 "wetland": {
                     "label": "Tipo"
@@ -3815,6 +4043,10 @@
                     "name": "Relógio",
                     "terms": "Relógio"
                 },
+                "amenity/clock/sundial": {
+                    "name": "Relógio de sol",
+                    "terms": "Relógio de sol"
+                },
                 "amenity/college": {
                     "name": "Escola técnica",
                     "terms": "Colégio técnico, Ensino profissionalizante, Educação profissional"
@@ -3871,28 +4103,32 @@
                     "terms": "fast food, lanchonete, lanches, Lancheria, comida rápida"
                 },
                 "amenity/fast_food/burger": {
-                    "name": "Comida de Hambúrguer Rápido",
-                    "terms": "Comida de Hambúrguer rápido"
+                    "name": "Hamburgueria",
+                    "terms": "lanchonete, fast food, comida rápida, hambúrguer, restaurante, lanche"
                 },
                 "amenity/fast_food/chicken": {
-                    "name": "Comida de Frango Rápido",
-                    "terms": "Comida de Frango Rápido"
+                    "name": "Frango Frito",
+                    "terms": "frango, lanchonete, comida rápida, fast food, chicken fry"
                 },
                 "amenity/fast_food/fish_and_chips": {
-                    "name": "Comida de Peixe e Batatas fritas Rápido",
-                    "terms": "Comida de Peixe e Batatas fritas Rápido"
+                    "name": "Peixe e Batatas Fritas",
+                    "terms": "lanchonete, comida rápida, fast food, restaurante, alimentação, peixe, fritas,"
                 },
                 "amenity/fast_food/kebab": {
-                    "name": "Comida de Churrasquinho Rápido",
-                    "terms": "Comida de Churrasquinho Rápido"
+                    "name": "Kebab",
+                    "terms": "lanchonete, comida rápida, fast food, restaurante, alimentação, kebab, shawarma, falafel, comida árabe, árabe"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "Fast Food Mexicano",
+                    "terms": "Fast Food Mexicano"
                 },
                 "amenity/fast_food/pizza": {
-                    "name": "Comida de Pizza Rápida",
-                    "terms": "Comida de Pizza Rápida"
+                    "name": "Pizzaria Delivery",
+                    "terms": "lanchonete, comida rápida, fast food, alimentação, pizza, delivery"
                 },
                 "amenity/fast_food/sandwich": {
-                    "name": "Comida de Sanduíche rápido",
-                    "terms": "Comida de Sanduíche rápido"
+                    "name": "Sanduicheria",
+                    "terms": "lanchonete, comida rápida, fast food, restaurante, alimentação, sanduíche natural, sandwich natural,"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Terminal de Ferry Boat / Balsa"
@@ -3903,7 +4139,7 @@
                 },
                 "amenity/food_court": {
                     "name": "Praça de Alimentação",
-                    "terms": "praça de alimentação, área de alimentação, comida, alimentação"
+                    "terms": "praça de alimentação, área de alimentação, comida, alimentação, restaurantes, lanchonete, comida rápida, fast food"
                 },
                 "amenity/fountain": {
                     "name": "Chafariz",
@@ -4007,6 +4243,10 @@
                     "name": "Farmácia",
                     "terms": "Contador de Farmácia"
                 },
+                "amenity/photo_booth": {
+                    "name": "Cabine de foto",
+                    "terms": "Cabine de foto"
+                },
                 "amenity/place_of_worship": {
                     "name": "Local de Prática Religiosa",
                     "terms": "Local de Culto, Lugar de Adoração, Abadia, Basílica, Betel, Catedral, Mor, Capela, Igreja, Aprisco, Casa de Deus, Casa de oração, Casa de adoração, Mesquita, Oratório, Paróquia, Santuário, Sinagoga, Tabernáculo, Templo"
@@ -4065,7 +4305,7 @@
                 },
                 "amenity/pub": {
                     "name": "Bar / Boteco",
-                    "terms": "Pub, botequim, boteco, buteco, bar, butequim, chopperia, choperia,"
+                    "terms": "pub, botequim, boteco, buteco, bar, botequim, butequim, chopperia, choperia"
                 },
                 "amenity/public_bath": {
                     "name": "Banho Público",
@@ -4103,51 +4343,51 @@
                 },
                 "amenity/restaurant/asian": {
                     "name": "Restaurante Asiático",
-                    "terms": "Restaurante Asiático"
+                    "terms": "Asiático, comida asiática, restaurante, ásia"
                 },
                 "amenity/restaurant/chinese": {
-                    "name": "Restaurante Chines",
-                    "terms": "Restaurante Chines"
+                    "name": "Restaurante Chinês",
+                    "terms": "comida chinesa, yakisoba, lamen,"
                 },
                 "amenity/restaurant/french": {
                     "name": "Restaurante Francês",
-                    "terms": "Restaurante Francês"
+                    "terms": "Restaurante Francês, comida francesa, frança, comida mediterrânea, restaurante mediterrâneo"
                 },
                 "amenity/restaurant/german": {
                     "name": "Restaurante Alemão",
-                    "terms": "Restaurante Alemão"
+                    "terms": "Comida Alemã, alemanha, restaurante, salsicha, cerveja"
                 },
                 "amenity/restaurant/greek": {
                     "name": "Restaurante Grego",
-                    "terms": "Restaurante Grego"
+                    "terms": "comida grega, comida mediterrânea, restaurante mediterrâneo"
                 },
                 "amenity/restaurant/indian": {
                     "name": "Restaurante Indiano",
-                    "terms": "Restaurante Indiano"
+                    "terms": "comida Indiana, índia, restaurante asiático, comida asiática,"
                 },
                 "amenity/restaurant/italian": {
                     "name": "Restaurante Italiano",
-                    "terms": "Restaurante italiano"
+                    "terms": "Restaurante italiano, comida italiana, macarrão, pasta, pizza"
                 },
                 "amenity/restaurant/japanese": {
                     "name": "Restaurante Japonês",
-                    "terms": "Restaurante Japonês"
+                    "terms": "comida Japonesa, sushi, temaki, teriaki,"
                 },
                 "amenity/restaurant/mexican": {
                     "name": "Restaurante Mexicano",
-                    "terms": "Restaurante Mexicano"
+                    "terms": "comida Mexicana, tex-mex, nachos, guacamole, tortillas"
                 },
                 "amenity/restaurant/noodle": {
-                    "name": "Restaurante de macarrão",
-                    "terms": "Restaurante de macarrão"
+                    "name": "Restaurante de Lámen",
+                    "terms": "ramen, lamen, noodle,"
                 },
                 "amenity/restaurant/pizza": {
-                    "name": "Restaurante de pizza",
-                    "terms": "Restaurante de pizza"
+                    "name": "Pizzaria",
+                    "terms": "restaurante, alimentação, pizza, comida italiana"
                 },
                 "amenity/restaurant/seafood": {
                     "name": "Restaurante de frutos do mar",
-                    "terms": "Restaurante de frutos do mar"
+                    "terms": "pescados, alimentação, frutos do mar, peixes"
                 },
                 "amenity/restaurant/steakhouse": {
                     "name": "Churrascaria",
@@ -4155,19 +4395,19 @@
                 },
                 "amenity/restaurant/sushi": {
                     "name": "Restaurante de sushi",
-                    "terms": "Restaurante de sushi"
+                    "terms": "sushi, sashimi, comida japonesa, restaurante, alimentação, comida asiática, restaurante asiático, restaurante japonês"
                 },
                 "amenity/restaurant/thai": {
                     "name": "Restaurante Tailandês",
-                    "terms": "Restaurante Tailandês"
+                    "terms": "tailândia, comida tailandesa, comida asiática, restaurante asiático"
                 },
                 "amenity/restaurant/turkish": {
-                    "name": "Restaurante turco",
-                    "terms": "Restaurante turco"
+                    "name": "Restaurante Turco",
+                    "terms": "Restaurante, turquia, comida turca, kebab, falafel, shawarma, homus, tahine"
                 },
                 "amenity/restaurant/vietnamese": {
-                    "name": "Restaurante vietnamita",
-                    "terms": "Restaurante vietnamita"
+                    "name": "Restaurante Vietnamita",
+                    "terms": "Restaurante, vietnã, restaurante asiático, comida asiática, alimentação,"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "Ponto de Descarga de Dejetos (para trailers)",
@@ -4729,7 +4969,7 @@
                     "terms": "Fileira de Casas"
                 },
                 "building/train_station": {
-                    "name": "Estação Ferroviária"
+                    "name": "Edifício de estação de trem"
                 },
                 "building/transportation": {
                     "name": "Edifício de transporte",
@@ -5025,6 +5265,18 @@
                     "name": "Banco de Areia",
                     "terms": "Bunker, Banco de Areia, Banca de Areia, Poça de Areia, Obstáculo de Areia"
                 },
+                "golf/cartpath": {
+                    "name": "Carrinho de golfe",
+                    "terms": "Carrinho de golfe"
+                },
+                "golf/cartpath_service": {
+                    "name": "Carrinho de golfe / Estrada de serviço",
+                    "terms": "Carrinho de golfe / Estrada de serviço"
+                },
+                "golf/driving_range": {
+                    "name": "Driving Range",
+                    "terms": "Carrinho de golfe / Estrada de serviço"
+                },
                 "golf/fairway": {
                     "name": "Fairway",
                     "terms": "Fairway, Percurso Intermediário"
@@ -5037,13 +5289,13 @@
                     "name": "Buraco",
                     "terms": "Golfe, Golf, Buraco de Golf"
                 },
-                "golf/lateral_water_hazard_area": {
+                "golf/lateral_water_hazard": {
                     "name": "Obstáculo de Água Lateral",
                     "terms": "Água Lateral, golfe, Perigo de água lateral"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Obstáculo de Água Lateral",
-                    "terms": "Água Lateral, golfe, Perigo de água lateral"
+                "golf/path": {
+                    "name": "Caminho de golfe",
+                    "terms": "Caminho de golfe"
                 },
                 "golf/rough": {
                     "name": "Rough",
@@ -5053,13 +5305,9 @@
                     "name": "Tee Box",
                     "terms": "Tee Box"
                 },
-                "golf/water_hazard_area": {
+                "golf/water_hazard": {
                     "name": "Obstáculo de Água",
                     "terms": "Perigo de Água, Água, Lago"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Obstáculo de Água",
-                    "terms": "Lago, água, perigo de água, golfe"
                 },
                 "healthcare": {
                     "name": "Assistência Médica",
@@ -5428,8 +5676,7 @@
                     "terms": "Encruzilhada, Junção"
                 },
                 "landuse": {
-                    "name": "Uso da terra",
-                    "terms": "Uso do Solo, Ocupação da Terra, Ordenamento Territorial, Exploração da Terra, Utilização da Terra, uso de terreno"
+                    "name": "Uso da terra"
                 },
                 "landuse/allotments": {
                     "name": "Horta Urbana",
@@ -5612,8 +5859,7 @@
                     "terms": "Vinha, Vinhedo, Plantação de uvas, Parreiras"
                 },
                 "leisure": {
-                    "name": "Área de Lazer",
-                    "terms": "Lazer, Diversão, Recreação, área de recreação, recreativa, parque, praça,"
+                    "name": "Área de Lazer"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Centro de Jogos para Adultos",
@@ -5767,6 +6013,10 @@
                     "name": "Mesa de piquenique",
                     "terms": "mesa de piquenique, picnic, pique-nique"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "Tabuleiro de xadrez",
+                    "terms": "Tabuleiro de xadrez"
+                },
                 "leisure/pitch": {
                     "name": "Quadra ou Campo Esportivo",
                     "terms": "Campo de Esportes, Campo Esportivo, Quadra Esportiva, ginásio, estádio"
@@ -5867,6 +6117,10 @@
                     "name": "Centro Esportivo / Clube",
                     "terms": "centro de esportes, complexo esportivo, centro desportivo, complexo desportivo"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Academia de escalada",
+                    "terms": "Academia de escalada"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Academia de Natação",
                     "terms": "natação, nado, esportes aquáticos, desportos aquáticos, piscina, centro de natação"
@@ -5900,8 +6154,7 @@
                     "terms": "Linha"
                 },
                 "man_made": {
-                    "name": "Construção Humana",
-                    "terms": "construção humana, artificial"
+                    "name": "Construção Humana"
                 },
                 "man_made/adit": {
                     "name": "Ádito de Mineração",
@@ -6027,9 +6280,17 @@
                     "name": "Torre",
                     "terms": "Torre"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Campanário",
+                    "terms": "Campanário , Torre sineira"
+                },
                 "man_made/tower/communication": {
                     "name": "Torre de comunicação",
                     "terms": "Torre de comunicação"
+                },
+                "man_made/tower/minaret": {
+                    "name": "Minarete",
+                    "terms": "Minarete"
                 },
                 "man_made/tower/observation": {
                     "name": "Torre de Observação",
@@ -6076,8 +6337,7 @@
                     "terms": "poço de inspeção de telefone"
                 },
                 "natural": {
-                    "name": "Natural",
-                    "terms": "Natural"
+                    "name": "Natural"
                 },
                 "natural/bare_rock": {
                     "name": "Leito Rochoso",
@@ -6170,6 +6430,10 @@
                 "natural/water": {
                     "name": "Água",
                     "terms": "Água"
+                },
+                "natural/water/basin": {
+                    "name": "Bacia",
+                    "terms": "Bacia"
                 },
                 "natural/water/canal": {
                     "name": "Canal",
@@ -6582,46 +6846,6 @@
                 "power/transformer": {
                     "name": "Transformador",
                     "terms": "transformador, energia elétrica, eletricidade"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Parada de Transporte / Plataforma",
-                    "terms": "Parada de Trânsito / Plataforma"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Parada / Plataforma Aérea",
-                    "terms": "Parada / Plataforma Aérea"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Parada de Ônibus / Plataforma",
-                    "terms": "ônibus, ponto de ônibus, transporte público, plataforma, trânsito"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Parada de Balsa / Plataforma",
-                    "terms": "Parada de balsa / Plataforma"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Parada de VLT / Plataforma",
-                    "terms": "veículo leve sobre trilhos, VLT, bonde, transporte público, trânsito, transporte, coletivo"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Parada de Monotrilho / Plataforma",
-                    "terms": "monotrilho, monocarrilho, trilho, trem, transporte público, trânsito, transporte"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Parada de metrô / Plataforma",
-                    "terms": "metrô, plataforma, transporte público, trânsito, trilhos"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Parada de trem / Plataforma",
-                    "terms": "trem, estação, trilhos, transporte público, trânsito, transporte"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Parada de Bonde / Plataforma",
-                    "terms": "ponto de bonde, eléctrico, tram, vlt, veículo sobre trilhos, transporte público, transporte coletivo, trânsito, trólebus, trolleybus"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Parada de Trólebus / Plataforma",
-                    "terms": "parada de trolleybus, ponto de trólebus, trólei, tróleibus, trolleybus, bonde, tram, elétrico, trânsito, transporte público, transporte, coletivo"
                 },
                 "public_transport/platform": {
                     "name": "Parada de Transporte / Plataforma",
@@ -7437,8 +7661,7 @@
                     "terms": "Vinícola, Adega"
                 },
                 "tourism": {
-                    "name": "Turismo",
-                    "terms": "Turismo"
+                    "name": "Turismo"
                 },
                 "tourism/alpine_hut": {
                     "name": "Abrigo de Montanha",

@@ -250,8 +250,6 @@
             "locating": "Sedang mencari, mohon tunggu..."
         },
         "inspector": {
-            "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tag ini",
-            "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
             "show_more": "Tampilkan Lainnya",
             "view_on_osm": "Lihat di openstreetmap.org",
             "all_fields": "Semua wilayah",
@@ -262,7 +260,6 @@
             "role": "Aturan",
             "choose": "Pilih Tipe Fitur",
             "results": "{n} hasil untuk {search}",
-            "reference": "Lihat di OpenStreetMap Wiki",
             "back_tooltip": "Ubah Fitur",
             "remove": "Buang",
             "search": "Cari",
@@ -342,11 +339,9 @@
                 "tooltip": "Jalur Listrik, Pembangkit Listrik, Gardu, dsb."
             },
             "past_future": {
-                "description": "Masa Lalu/Akan Datang",
                 "tooltip": "Diajukan, Dibangun, Ditinggalkan, Diruntuhkan, dsb."
             },
             "others": {
-                "description": "Lainnya",
                 "tooltip": "Selain yang disebutkan"
             }
         },
@@ -415,16 +410,6 @@
             "description": "Deskripsi",
             "on_wiki": "{tag} di wiki.osm.org",
             "used_with": "digunakan dengan {type}"
-        },
-        "validations": {
-            "untagged_point": "Titik tanpa tag",
-            "untagged_point_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas poin ini.",
-            "untagged_line": "Garis tanpa tag",
-            "untagged_line_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas garis ini.",
-            "untagged_area": "Area tanpa tag",
-            "untagged_area_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas area ini.",
-            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
-            "deprecated_tags": "Tag sudah tidak dipergunakan: {tags}"
         },
         "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
         "full_screen": "Tombol Layar Penuh",
@@ -1003,8 +988,7 @@
                     "label": "Tipe"
                 },
                 "website": {
-                    "label": "Website",
-                    "placeholder": "http://example.com/"
+                    "label": "Website"
                 },
                 "wetland": {
                     "label": "Tipe"
@@ -1378,9 +1362,6 @@
                 "building/stable": {
                     "name": "Kandang Kuda"
                 },
-                "building/train_station": {
-                    "name": "Stasiun Kereta"
-                },
                 "building/university": {
                     "name": "Bangunan Universitas",
                     "terms": "Universitas, Kampus"
@@ -1671,8 +1652,7 @@
                     "terms": "Pertigaan, Perempatan"
                 },
                 "landuse": {
-                    "name": "Guna Lahan",
-                    "terms": "Guna Lahan"
+                    "name": "Guna Lahan"
                 },
                 "landuse/basin": {
                     "name": "Cekungan"
@@ -1833,8 +1813,7 @@
                     "terms": "Garis"
                 },
                 "man_made": {
-                    "name": "Buatan manusia",
-                    "terms": "Buatan Manusia"
+                    "name": "Buatan manusia"
                 },
                 "man_made/breakwater": {
                     "name": "Pemecah Gelombang",
@@ -2409,8 +2388,7 @@
                     "terms": "Alkohol, Minum, Minuman Beralkohol"
                 },
                 "tourism": {
-                    "name": "Pariwisata",
-                    "terms": "Wisata, Turisme"
+                    "name": "Pariwisata"
                 },
                 "tourism/artwork": {
                     "name": "Karya Seni"

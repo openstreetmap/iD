@@ -391,8 +391,6 @@
             "locating": "Lokalizuje sa. Prosím, čakajte..."
         },
         "inspector": {
-            "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
-            "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
             "show_more": "Zobraziť viac",
             "view_on_osm": "Zobraziť na openstreetmap.org",
             "all_fields": "Všetky polia",
@@ -403,7 +401,6 @@
             "role": "Rola",
             "choose": "Zvoľte typ objektu",
             "results": "{n} výsledkov pre {search}",
-            "reference": "Zobraziť na Wiki OpenStreetMap",
             "back_tooltip": "Zmeň typ objektu",
             "remove": "Odstráň",
             "search": "Hľadaj",
@@ -506,11 +503,9 @@
                 "tooltip": "Elektrické vedenia, elektrárne, transformátory, atď."
             },
             "past_future": {
-                "description": "Bývalý/Budúci objekt",
                 "tooltip": "Navrhovaný, vo výstavbe, opustený, zbúraný, atď."
             },
             "others": {
-                "description": "Iné objekty",
                 "tooltip": "Všetko ostané"
             }
         },
@@ -593,22 +588,6 @@
             "description": "Popis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "použité s {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Rozpojená cesta",
-            "disconnected_highway_tooltip": "Cesty by mali byť spojené s ďalšími cestami alebo vchodmi do budov.",
-            "old_multipolygon": "Multipolygónové značky na vonkajšej ceste",
-            "old_multipolygon_tooltip": "Tento štýl multipolygónu nie je schválený. Pridajte prosím značky samotnému multipolygónu namiesto vonkajšej cesty.",
-            "untagged_point": "Neoznačený bod",
-            "untagged_point_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je tento bod.",
-            "untagged_line": "Neoznačená čiara",
-            "untagged_line_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto línia.",
-            "untagged_area": "Neoznačená plocha",
-            "untagged_area_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto plocha.",
-            "untagged_relation": "Neoznačená relácia",
-            "untagged_relation_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto relácia.",
-            "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
-            "deprecated_tags": "Neschválené označenie: {tags}"
         },
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
@@ -999,9 +978,6 @@
                 },
                 "category-building": {
                     "name": "Objekty budov"
-                },
-                "category-golf": {
-                    "name": "Golfové objekty"
                 },
                 "category-landuse": {
                     "name": "Objekty využitia územia"
@@ -2294,8 +2270,7 @@
                     "label": "Typ"
                 },
                 "website": {
-                    "label": "Internetová stránka",
-                    "placeholder": "http://adresa.sk/"
+                    "label": "Internetová stránka"
                 },
                 "wetland": {
                     "label": "Typ"
@@ -3039,9 +3014,6 @@
                     "name": "Radová zástavba",
                     "terms": "radova zastavba,radovka"
                 },
-                "building/train_station": {
-                    "name": "Železničná stanica"
-                },
                 "building/university": {
                     "name": "Univerzitná budova",
                     "terms": "univerzitna budova,univerzita"
@@ -3487,8 +3459,7 @@
                     "terms": "krizovatka"
                 },
                 "landuse": {
-                    "name": "Využitie územia",
-                    "terms": "vuzitie uzemia, vyuzitie pody, využitie pôdy, krajina"
+                    "name": "Využitie územia"
                 },
                 "landuse/allotments": {
                     "name": "Komunitná záhrada",
@@ -3577,8 +3548,7 @@
                     "terms": "vinice,vinohrad,hrozno,víno,vino"
                 },
                 "leisure": {
-                    "name": "Oddych",
-                    "terms": "relax,volny cas,voľný čas"
+                    "name": "Oddych"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Výherné automaty",
@@ -3697,8 +3667,7 @@
                     "terms": "ciara,cesta,trat,kanal,trasa,trať,trat"
                 },
                 "man_made": {
-                    "name": "Ľudský výtvor",
-                    "terms": "ludsky vytvor,artefakt,konštrukcia,konstrukcia,dielo,stavba,objekt,mechanizmus"
+                    "name": "Ľudský výtvor"
                 },
                 "man_made/adit": {
                     "name": "Štôlňa",
@@ -3789,8 +3758,7 @@
                     "terms": "závod,zavod,továreň,tovaren"
                 },
                 "natural": {
-                    "name": "Prírodné",
-                    "terms": "prirodne,prirodny,príroda,priroda"
+                    "name": "Prírodné"
                 },
                 "natural/bay": {
                     "name": "Zátoka",
@@ -4516,8 +4484,7 @@
                     "terms": "vinaren,vinoteka,vínotéka,vino,víno"
                 },
                 "tourism": {
-                    "name": "Turizmus",
-                    "terms": "turizmus,turistika,turisticke,turistické,hotel,motel,chata,muzeum,múzeum,atrakcia,zoo,park"
+                    "name": "Turizmus"
                 },
                 "tourism/alpine_hut": {
                     "name": "Vysokohorská chata",

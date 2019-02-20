@@ -5,9 +5,9 @@
             "information": "מידע",
             "remove": "הסרה",
             "undo": "ביטול",
-            "zoom_to": "התקרבות",
+            "zoom_to": "התקרבות אל",
             "copy": "עותק",
-            "open_wikidata": "פתח בwikidata.org"
+            "open_wikidata": "פתיחה ב־wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -157,18 +157,18 @@
             "connect": {
                 "annotation": {
                     "from_vertex": {
-                        "to_point": "מחובר לנקודה.",
-                        "to_vertex": "חיבור דרך לאחר",
-                        "to_line": "חיבור לקו",
-                        "to_area": "חיבור לשטח",
-                        "to_adjacent_vertex": "חיבור נקודות לדרך",
-                        "to_sibling_vertex": "דרך מחובר לעצמו"
+                        "to_point": "דרך חוברה לנקודה.",
+                        "to_vertex": "חוברה דרך לאחרת.",
+                        "to_line": "חוברה דרך לקו.",
+                        "to_area": "חוברה דרך לשטח.",
+                        "to_adjacent_vertex": "מוזגו נקודות סמוכות לדרך.",
+                        "to_sibling_vertex": "דרך חוברה לעצמה."
                     },
                     "from_point": {
-                        "to_point": "חיבור קו לאחר",
-                        "to_vertex": "חיבור נקודה לנקודה על דרך",
-                        "to_line": "חיבור נקודה לקו",
-                        "to_area": "חבור קו לשטח"
+                        "to_point": "נקודה מוזגה לאחרת.",
+                        "to_vertex": "מוזגה נקודה עם נקודה בדרך.",
+                        "to_line": "הועברה נקודה לקו.",
+                        "to_area": "הועברה נקודה לשטח."
                     }
                 },
                 "relation": "לא ניתן לחבר תכונות אלה כיוון שיש להן תפקידים סותרים ביחס.",
@@ -193,7 +193,8 @@
                 "restriction": "לא ניתן למזג תכונות אלו כיוון שהמיזוג יפגע ביחס „{relation}”.",
                 "relation": "לא ניתן למזג תכונות אלו כיוון שיש להן תפקידים סותרים ביחס.",
                 "incomplete_relation": "אי אפשר למזג את התכונות האלו כיוון שלפחות אחת מהן לא התקבלה לחלוטין.",
-                "conflicting_tags": "אי אפשר למזג את התכונות האלה כיוון שלחלק מהתגיות שלהן יש ערכים סותרים."
+                "conflicting_tags": "אי אפשר למזג את התכונות האלה כיוון שלחלק מהתגיות שלהן יש ערכים סותרים.",
+                "paths_intersect": "לא ניתן למזג את התכונות האלו כיוון שהנתיב שייווצר יחתוך את עצמו."
             },
             "move": {
                 "title": "העברה",
@@ -386,7 +387,7 @@
         "report_a_bug": "דיווח על תקלה",
         "help_translate": "עזרה בתרגום",
         "sidebar": {
-            "key": "  ",
+            "key": "`",
             "tooltip": "פתיחה/סגירה של חלונית צד."
         },
         "feature_info": {
@@ -413,6 +414,8 @@
             "modified": "השתנה",
             "deleted": "נמחק",
             "created": "נוצר",
+            "outstanding_errors_message": "נא לפתור את כל השגיאות קודם. נותרו {count}.",
+            "comment_needed_message": "נא להוסיף הערות לערכת שינויים תחילה.",
             "about_changeset_comments": "על הערות לערכות שינויים",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "ציינת את Google בהערה הזאת: כדאי לזכור כי העתקה ממפות Google אסורה בתכלית האיסור.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "יש למרכז ולהתקרב למפה כדי להתמקד על הנתונים האלה.",
                 "tooltip_issue": "יש למרכז ולהתקרב למפה כדי להתמקד על התקלה הזו."
             },
-            "no_documentation_combination": "אין תיעוד זמין לצירוף תגיות זה",
-            "no_documentation_key": "אין תיעוד זמין למפתח זה",
             "show_more": "הצגת עוד",
             "view_on_osm": "הצגה ב־openstreetmap.org",
             "view_on_keepRight": "הצגה ב־keepright.at",
@@ -519,10 +520,14 @@
             "role": "תפקיד",
             "choose": "בחירת סוג תכונה",
             "results": "{n} תוצאות לחיפוש {search}",
-            "reference": "הצגה בוויקי של OpenStreetMap",
-            "edit_reference": "עריכה או תרגום התיאור",
+            "no_documentation_key": "אין תיעוד זמין",
+            "edit_reference": "עריכה/תרגום",
             "wiki_reference": "הצגת התיעוד",
             "wiki_en_reference": "הצגת התיעוד באנגלית",
+            "hidden_preset": {
+                "manual": "{features} מוסתרות. נא להפעיל אותן בחלונית נתוני המפה.",
+                "zoom": "{features} מוסתרות. יש להתקרב כדי להפעיל אותן."
+            },
             "back_tooltip": "שינוי תכונה",
             "remove": "הסרה",
             "search": "חיפוש",
@@ -551,7 +556,7 @@
             "location": "מיקום",
             "add_fields": "הוספת שדה:",
             "lock": {
-                "suggestion": "ה \"{label}\" הוא ערך נעול כי יש תג Wikidata. אתה יכול למחוק או לערוך את התג ב\"All tags\" "
+                "suggestion": "השדה „{label}” נעול כי יש תג ויקינתונים. ניתן למחוק או לערוך את התגים תחת הסעיף „כל התגיות”."
             }
         },
         "background": {
@@ -596,6 +601,10 @@
                 "keepRight": {
                     "tooltip": "התגלו תקלות מפה אוטומטית דרך keepright.at",
                     "title": "תקלות KeepRight"
+                },
+                "improveOSM": {
+                    "tooltip": "הנתונים החסרים זוהו אוטומטית על ידי improveosm.org",
+                    "title": "תקלות ב־ImproveOSM"
                 },
                 "custom": {
                     "tooltip": "ניתן לגרור ולהשליך קובץ נתונים לעמוד או ללחוץ על הכפתור כדי להגדיר",
@@ -650,11 +659,11 @@
                 "tooltip": "קווי חשמל, תחנות תת־קרקעיות, מפעלי אנרגיה וכו׳"
             },
             "past_future": {
-                "description": "עבר/עתיד",
+                "description": "תכונות עבר/עתיד",
                 "tooltip": "מקומות מוצעים, בבנייה, נטושים, הרוסים וכו׳"
             },
             "others": {
-                "description": "אחרים",
+                "description": "תכונות אחרות",
                 "tooltip": "כל השאר"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} ב־wiki.osm.org",
             "used_with": "בשימוש עם {type}"
         },
-        "validations": {
-            "disconnected_highway": "דרך ראשית מנותקת",
-            "disconnected_highway_tooltip": "דרכים אמורות להיות מחוברות לדרכים אחרות או לכניסות לבניינים.",
-            "generic_name": "שם גנרי אפשרי",
-            "generic_name_tooltip": "נראה כי לתכונה זו יש שם גנרי „{name}”. נא להשתמש בשדה השם כדי לתעד את השם הרשמי של התכונה.",
-            "old_multipolygon": "תגיות מסוג רב־מצולע בדרך החיצונית",
-            "old_multipolygon_tooltip": "השימוש בסגנון רב־מצולע זה הופסק. נא להקצות את התג לרב־מצולע ההורה במקום לדרך החיצונית.",
-            "untagged_point": "נקודה ללא תיוג",
-            "untagged_point_tooltip": "נא לבחור בסוג תכונה שמתאר מה הנקודה הזו.",
-            "untagged_line": "קו ללא תיוג",
-            "untagged_line_tooltip": "נא לבחור בסוג תכונה שמתאר מה הקו הזה.",
-            "untagged_area": "שטח ללא תיוג",
-            "untagged_area_tooltip": "נא לבחור בסוג תכונה שמתאר מה השטח הזה.",
-            "untagged_relation": "יחס בלתי מתויג",
-            "untagged_relation_tooltip": "נא לבחור סוג תכונה שמתארת מה היחס הזה.",
-            "many_deletions": "פעולה זו תוביל למחיקת {n} תכונות: {p} מפרקים, {l} קווים, {a} שטחים, {r} קשרים. להמשיך בפעולה? כמו כן, הם יימחקו מהמפה שכולם רואים בכתובת openstreetmap.org.",
-            "tag_suggests_area": "התגית {tag} רומזת שהקו אמור להיות שטח, אך זה לא שטח",
-            "deprecated_tags": "תגיות שנזנחו: {tags}"
-        },
         "zoom": {
             "in": "התקרבות",
             "out": "התרחקות"
@@ -800,6 +790,38 @@
         "cannot_zoom": "לא ניתן להתקרב יותר במצב הנוכחי.",
         "full_screen": "החלפת מצב מסך מלא",
         "QA": {
+            "improveOSM": {
+                "title": "איתור עם ImproveOSM",
+                "geometry_types": {
+                    "path": "נתיבים",
+                    "parking": "חנייה",
+                    "road": "דרכים",
+                    "both": "דרכים וחנייה"
+                },
+                "directions": {
+                    "east": "מזרח",
+                    "north": "צפון",
+                    "northeast": "צפון מזרח",
+                    "northwest": "צפון מערב",
+                    "south": "דרום",
+                    "southeast": "דרום מזרח",
+                    "southwest": "דרום מערב",
+                    "west": "מערב"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "חד־סטרי חסר"
+                    },
+                    "mr": {
+                        "title": "צורה חסרה",
+                        "description": "{num_trips} טיולים שהוקלטו בשטח הזה מרמזים שיתכן שיש כאן {geometry_type} שלא מופה.",
+                        "description_alt": "נתונים מגוף צד־שלישי מרמזים שייתכן שיש כאן {geometry_type} שלא מופה."
+                    },
+                    "tr": {
+                        "title": "הגבלת פנייה חסרה"
+                    }
+                }
+            },
             "keepRight": {
                 "title": "שגיאת KeepRight",
                 "detail_title": "שגיאה",
@@ -812,9 +834,31 @@
                 "close_comment": "סגירה והוספת תגובה",
                 "ignore_comment": "התעלמות והוספת תגובה",
                 "error_parts": {
+                    "this_node": "המפרק הזה",
+                    "this_way": "הדרך הזאת",
+                    "this_relation": "היחס הזה",
+                    "this_oneway": "הדרך החד־סטרית הזאת",
+                    "this_highway": "הדרך המהירה הזאת",
+                    "this_railway": "מסילת הרכבת הזאת",
+                    "this_waterway": "הדרך הימית הזאת",
+                    "this_cycleway": "מסלול האופניים הזה",
+                    "this_cycleway_footpath": "דרך האופניים/הולכי הרגל הזאת",
+                    "this_riverbank": "גדת הנהר הזאת",
+                    "this_crossing": "המעבר הזה",
+                    "this_railway_crossing": "מעבר מסילת הרכבת הזה",
+                    "this_bridge": "הגשר הזה",
+                    "this_tunnel": "המנהרה הזו",
+                    "this_boundary": "הגבול הזה",
+                    "this_turn_restriction": "מגבלת פנייה זו",
+                    "this_roundabout": "מעגל התנועה הזה",
+                    "this_mini_roundabout": "הכיכר המזערית הזאת",
+                    "this_track": "מסלול",
+                    "this_feature": "התכונה הזאת",
                     "highway": "כביש בין־עירוני",
                     "railway": "מסילת רכבת",
                     "waterway": "נתיב מים",
+                    "cycleway": "דרך אופניים",
+                    "cycleway_footpath": "דרך אופניים/הולכי רגל",
                     "riverbank": "גדות נהר",
                     "place_of_worship": "בית תפילה",
                     "pub": "פאב",
@@ -831,20 +875,173 @@
                     "cafe": "בית קפה",
                     "fast_food": "מזון מהיר",
                     "fuel": "דלק",
+                    "from": "מוצא",
+                    "to": "יעד",
                     "left_hand": "מצד שמאל",
                     "right_hand": "מצד ימין"
                 },
                 "errorTypes": {
+                    "20": {
+                        "title": "מספר מפרקים באותה הנקודה",
+                        "description": "יש יותר ממפרק אחד בנקודה הזאת. מזהי המפרקים: {var1}."
+                    },
+                    "30": {
+                        "title": "שטח לא סגור",
+                        "description": "{var1} מתויג בתגית „{var2}” ואמור להיות לולאה סגורה."
+                    },
+                    "40": {
+                        "title": "חד־סטרי בלתי אפשרי",
+                        "description": "המפרק הראשון {var1} מתוך {var2} לא מחובר לאף דרך אחרת."
+                    },
+                    "41": {
+                        "description": "המפרק האחרון {var1} מתוך {var2} לא מחובר לאף דרך אחרת."
+                    },
+                    "42": {
+                        "description": "אין לך אפשרות להגיע אל {var1} כיוון שכל הדרכים שמגיעות משם הן חד־סטריות."
+                    },
+                    "43": {
+                        "description": "אין לך אפשרות לברוח מ־{var1} כיוון שכל הדרכים שמובילות לשם הן חד־סטריות."
+                    },
+                    "50": {
+                        "title": "כמעט צומת",
+                        "description": "{var1} הוא מאוד קרוב אך אינו מחובר לדרך {var2}."
+                    },
+                    "60": {
+                        "title": "תגית שאינה בשימוש עוד",
+                        "description": "ב־{var1} נעשה שימוש בתגית שהשימוש בה הופסק „{var2}”. נא להשתמש ב־„{var3}” במקום."
+                    },
+                    "70": {
+                        "title": "תגית חסרה",
+                        "description": "ל־{var1} יש תגית חסרה: „{var2}”."
+                    },
+                    "71": {
+                        "description": "ל־{var1} אין תגיות."
+                    },
+                    "74": {
+                        "description": "ל־{var1} יש תגית ריקה: „{var2}”."
+                    },
+                    "75": {
+                        "description": "{var} נושא את השם „{var2}” אך אין לו אף תגית אחרת."
+                    },
+                    "90": {
+                        "title": "דרך לכלי רכב ממונעים ללא תגית ref (הפניה)"
+                    },
+                    "100": {
+                        "title": "מקום סגידה ללא דת",
+                        "description": "{var1} מתויג כמקום של סגידה ולכן נדרשת התגית religion (דת)."
+                    },
+                    "110": {
+                        "title": "נקודת עניין ללא שם",
+                        "description": "{var1} מתויג בתור „{var2}” ולכן נדרשת תגית name (שם)."
+                    },
+                    "120": {
+                        "title": "דרך ללא מפרקים",
+                        "description": "ל־{var1} יש רק מפרק אחד."
+                    },
                     "130": {
                         "title": "דרך מנותקת",
                         "description": "{var1} אינה מחוברת לשאר המפה."
+                    },
+                    "150": {
+                        "title": "חציית מסילת רכבת ללא תגית",
+                        "description": "{var1} של דרך מהירה ומסילת רכבת אמור להיות מתויג בתור „railway=crossing” או „railway=level_crossing”."
+                    },
+                    "160": {
+                        "title": "סתירת שכבת מסילת רכבת",
+                        "description": "ישנן דרכים בשכבות אחרות (למשל: מנהרה או גשר) שנפגשות ב־{var1}."
+                    },
+                    "170": {
+                        "title": "פריט שמתויג ב־FIXME",
+                        "description": "{var1} נושא את התגית FIXME‏: {var2}"
                     },
                     "180": {
                         "title": "יחס ללא סוג",
                         "description": "ל־{var1} חסרה תגית „סוג” (type)."
                     },
                     "190": {
-                        "title": "מפגש ללא צומת"
+                        "title": "מפגש ללא צומת",
+                        "description": "{var1} נפגש עם {var2} {var3} אך אין בנקודה הזאת מפרק של צומת, גשר או מנהרה."
+                    },
+                    "200": {
+                        "title": "דרכים חופפות",
+                        "description": "{var1} חופף על גבי {var2} {var3}."
+                    },
+                    "210": {
+                        "title": "דרך שפוגשת את עצמה",
+                        "description": "קיימת תקלה בלתי מוגדרת עם דרכים שפוגשות את עצמן."
+                    },
+                    "211": {
+                        "description": "{var1} מכיל יותר ממפרק אחד מספר פעמים. המפרקים הם {var2}. יתכן שמדובר בתקלה וגם יתכן שלא."
+                    },
+                    "212": {
+                        "description": "ל־{var1} יש רק שני מפרקים שונים והוא מכיל אחד מהם יותר מפעם אחת."
+                    },
+                    "220": {
+                        "title": "תגית עם איות שגוי",
+                        "description": "{var1} מתויג בתור „{var2}” כאשר „{var3}” נראה כמו „{var4}”."
+                    },
+                    "221": {
+                        "description": "ל־{var1} יש תגית חשודה „{var2}”."
+                    },
+                    "230": {
+                        "title": "סתירת שכבות",
+                        "description": "{var1} הוא צומת של דרכים בשכבות שונות."
+                    },
+                    "231": {
+                        "description": "{var1} הוא צומת של דרכים בשכבות שונות: {var2}.",
+                        "layer": "(שכבה: {layer})"
+                    },
+                    "232": {
+                        "description": "{var1} מתויג ב־„layer={var2}”. זאת לא אמורה להיות שגיאה אבל זה נראה מוזר."
+                    },
+                    "280": {
+                        "title": "תקלת גבול",
+                        "description": "יש תקלה בלתי מוגדרת עם הגבול הזה."
+                    },
+                    "281": {
+                        "title": "לגבול אין שם",
+                        "description": "ל־{var1} אין שם."
+                    },
+                    "282": {
+                        "title": "לגבול חסרה דרגה ניהולית",
+                        "description": "לגבול של {var1} אין ערך מספרי נכון עבור admin_level. לא לערבב בין דרגים ניהוליים (למשל: „6;7”). עליך תמיד לתייג את רמת ה־admin_level הנמוכה ביותר לכל הגבולות."
+                    },
+                    "283": {
+                        "title": "הגבול הוא לא לולאה סגורה",
+                        "description": "הגבול של {var1} אינו לולאה סגורה."
+                    },
+                    "284": {
+                        "title": "הגבול מקוטע",
+                        "description": "הגבול של {var1} נקטע כאן."
+                    },
+                    "285": {
+                        "title": "ה־admin_level של הגבול גבוה מדי"
+                    },
+                    "290": {
+                        "title": "תקלת מגבלה",
+                        "description": "קיימת תקלה בלתי מוגדרת עם המגבלה הזאת."
+                    },
+                    "291": {
+                        "title": "למגבלה חסר סוג",
+                        "description": "ל־{var1} יש סוג מגבלה לא ידוע."
+                    },
+                    "292": {
+                        "title": "למגבלה חסרה דרך „מוצא”",
+                        "description": "ל־{var1} יש {var2} חברים מסוג „מוצא”, אמור להיות רק 1."
+                    },
+                    "293": {
+                        "title": "למגבלה חסרה דרך „יעד”",
+                        "description": "ל־{var1} יש {var2} חברים מסוג „יעד”, אמור להיות רק 1."
+                    },
+                    "294": {
+                        "title": "ההגבלה „מוצא” או „יעד” אינה דרך"
+                    },
+                    "296": {
+                        "title": "זווית מגבלה חריגה"
+                    },
+                    "297": {
+                        "title": "כיוון שגוי של דרך „יעד”",
+                        "description": "ל־{var1} אין התאמה לכיוון של דרך ה־„יעד” {var2}."
                     },
                     "312": {
                         "title": "כיוון הכיכר שגוי",
@@ -853,6 +1050,21 @@
                     "313": {
                         "title": "חיבור הכיכר תלוש מעט",
                         "description": "ל־{var1} יש רק {var2} דרכים אחרות מחוברות. לכיכרות יש בדרך כלל 3 או יותר."
+                    },
+                    "370": {
+                        "title": "רווחים כפולים",
+                        "including_the_name": "(לרבות השם {name})"
+                    },
+                    "380": {
+                        "title": "שימוש בלתי פיזי בתגית ספורט"
+                    },
+                    "390": {
+                        "title": "סוג המסלול חסר",
+                        "description": "ל־{var1} אין תגית tracktype (סוג מסלול)."
+                    },
+                    "400": {
+                        "title": "תקלת צורה",
+                        "description": "יש תקלה בלתי מוגדרת עם הצורה שכאן."
                     },
                     "401": {
                         "title": "חסרה הגבלת פנייה",
@@ -950,7 +1162,8 @@
                 "navigation_drag": "ניתן לגרור את המפה על ידי לחיצה והחזקה של {leftclick} כפתור העכבר השמאלי והזזת העכבר. ניתן גם להשתמש במקשי החצים `↑`, `↓`,  `→` , `←` במקלדת שלך.",
                 "navigation_zoom": "ניתן להתקרב או להתרחק על ידי גלילת העכבר או משטח המעקב, לחלופין, על ידי לחיצה על הכפתורים {plus} / {minus} שבצד המפה. ניתן גם להשתמש במקשים ‚+’ או ‚-’ שבמקלדת שלך.",
                 "features_h": "תכונות המפה",
-                "features": "אנו משתמשים במילה *תכונות* כדי לתאר דברים שמופיעים על המפה. כל דבר בעולם האמתי ניתן למפות כתכונה ב־OpenStreetMap. תכונות מפה מיוצגות במפה באמצעות *נקודות*, *קווים* או *שטחים*."
+                "features": "אנו משתמשים במילה *תכונות* כדי לתאר דברים שמופיעים על המפה. כל דבר בעולם האמתי ניתן למפות כתכונה ב־OpenStreetMap. תכונות מפה מיוצגות במפה באמצעות *נקודות*, *קווים* או *שטחים*.",
+                "nodes_ways": "ב־OpenStreetMap, נקודות לעתים נקראות *מפרקים* וקווים או שטחים נעתים נקראים *דרכים*."
             },
             "editing": {
                 "title": "עריכה ושמירה",
@@ -1105,7 +1318,8 @@
             },
             "qa": {
                 "title": "אבטחת איכות",
-                "tools_h": "כלים"
+                "tools_h": "כלים",
+                "issues_h": "טיפול בתקלות"
             },
             "field": {
                 "restrictions": {
@@ -1143,6 +1357,62 @@
                         "indirect_example": "הגבלות אלו קיימות עקב הגבלה אחרת בקרבת מקום. למשל, הגבלת „ישר בלבד” תיצור הגבלות „אין פנייה” לכל שאר הנתיבים שעוברים בצומת.",
                         "indirect_noedit": "לא ניתן לערוך הגבלות עקיפות. במקום, יש לערוך את המגבלה הישירה הקרובה."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "תקלות",
+            "key": "I",
+            "list_title": "תקלות ({count})",
+            "errors": {
+                "list_title": "שגיאות ({count})"
+            },
+            "warnings": {
+                "list_title": "אזהרות ({count})"
+            },
+            "no_issues": {
+                "message": "הכול נראה טוב",
+                "info": "תקלות כלשהן שתצוצנה תופענה כאן בזמן העריכה"
+            },
+            "almost_junction": {
+                "message": "{feature} קרוב מאוד אך לא מחובר אל {feature2}"
+            },
+            "fix": {
+                "move_tags": {
+                    "title": "העברת התגיות",
+                    "annotation": "תגיות הועברו."
+                },
+                "remove_generic_name": {
+                    "title": "הסרת השם",
+                    "annotation": "השם הגנרי הוסר."
+                },
+                "remove_tag": {
+                    "title": "הסרת התגית",
+                    "annotation": "תגית הוסרה."
+                },
+                "reposition_features": {
+                    "title": "מיקום התכונות מחדש"
+                },
+                "select_preset": {
+                    "title": "בחירת סוג תכונה"
+                },
+                "tag_as_disconnected": {
+                    "title": "תיוג כבלתי מחובר"
+                },
+                "upgrade_tag": {
+                    "annotation": "שודרגה תגית ישנה."
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "שילוב של תגיות ישנות שודרג."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "שימוש בגשר או במנהרה"
+                },
+                "use_different_layers": {
+                    "title": "שימוש בשכבות שונות"
+                },
+                "use_tunnel": {
+                    "title": "שימוש במנהרה"
                 }
             }
         },
@@ -1457,7 +1727,8 @@
                 },
                 "with_selected": {
                     "title": "לאחר בחירת התכונה",
-                    "edit_menu": "החלפת תצוגה של תפריט עריכה"
+                    "edit_menu": "החלפת תצוגה של תפריט עריכה",
+                    "zoom_to": "התמקדות בתכונה הנבחרת"
                 },
                 "vertex_selected": {
                     "title": "עם מפרק שנבחר",
@@ -1552,8 +1823,11 @@
                 "category-building": {
                     "name": "מאפייני בניינים"
                 },
-                "category-golf": {
-                    "name": "מאפייני גולף"
+                "category-golf-area": {
+                    "name": "תכונות גולף"
+                },
+                "category-golf-line": {
+                    "name": "תכונות גולף"
                 },
                 "category-landuse": {
                     "name": "מאפייני קרקע"
@@ -1625,7 +1899,7 @@
                             "title": "פרטי"
                         },
                         "yes": {
-                            "description": "הכניסה מותרת לפי חוק",
+                            "description": "הכניסה מותרת לפי חוק, מקום ציבורי",
                             "title": "מותר"
                         }
                     },
@@ -1734,6 +2008,9 @@
                 },
                 "animal_shelter": {
                     "label": "לחיות"
+                },
+                "architect": {
+                    "label": "ארכיטקטורה"
                 },
                 "area/highway": {
                     "label": "סוג"
@@ -2336,6 +2613,14 @@
                 "junction/ref_oneway": {
                     "label": "מספר צומת"
                 },
+                "junction_line": {
+                    "label": "צומת",
+                    "options": {
+                        "circular": "מעגל תנועה",
+                        "jughandle": "ידית קנקן",
+                        "roundabout": "כיכר"
+                    }
+                },
                 "kerb": {
                     "label": "שפת מדרכה"
                 },
@@ -2604,9 +2889,6 @@
                         "underground": "תת־קרקעי"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "תצוגת נתוני נוסעים"
-                },
                 "payment_multi": {
                     "label": "צורות תשלום"
                 },
@@ -2830,6 +3112,9 @@
                 "restrictions": {
                     "label": "הגבלות פנייה"
                 },
+                "roof/colour": {
+                    "label": "צבע הגג"
+                },
                 "rooms": {
                     "label": "חדרים"
                 },
@@ -2850,6 +3135,9 @@
                         "mountain_hiking": "T2: טיול הרים"
                     },
                     "placeholder": "טיול הרים, טיול אלפים"
+                },
+                "salt": {
+                    "label": "מלח"
                 },
                 "sanitary_dump_station": {
                     "label": "תחנת סילוק"
@@ -3143,6 +3431,9 @@
                     },
                     "placeholder": "יש, אין, איסוף עצמי בלבד…"
                 },
+                "tidal": {
+                    "label": "לפי גאות ושפל"
+                },
                 "to": {
                     "label": "יעד"
                 },
@@ -3315,7 +3606,7 @@
                 },
                 "website": {
                     "label": "אתר",
-                    "placeholder": "http://example.com/‎"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "סוג"
@@ -3572,6 +3863,10 @@
                     "name": "שעון",
                     "terms": "שעון"
                 },
+                "amenity/clock/sundial": {
+                    "name": "שעון שמש",
+                    "terms": "שעה;שעון;זמן;צל;שמש"
+                },
                 "amenity/college": {
                     "name": "גן המכללה",
                     "terms": "גן המכללה"
@@ -3628,10 +3923,12 @@
                     "terms": "פאסט פוד"
                 },
                 "amenity/fast_food/burger": {
-                    "name": "מזון מהיר המבורגר"
+                    "name": "מזון מהיר המבורגר",
+                    "terms": "מזון מהיר,אוכל מהיר,ג׳אנק,ג'אנק,ג׳אנד פוד,ג'אנק פוד,המבורגר,המבורגריה"
                 },
                 "amenity/fast_food/chicken": {
-                    "name": "מזון מהיר עוף"
+                    "name": "מזון מהיר עוף",
+                    "terms": "מזון מהיר,אוכל מהיר,ג׳אנק,ג'אנק,ג׳אנד פוד,ג'אנק פוד,המבורגר,המבורגריה,עוף,צ׳יקן,צ'יקן,עוף,פאסט פוד"
                 },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "מזון מהיר פיש אנד צ׳יפס",
@@ -3640,6 +3937,9 @@
                 "amenity/fast_food/kebab": {
                     "name": "מזון מהיר קבב",
                     "terms": "שווארמה,קבב,שיפודים,על האש,מנגל,בשרים"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "מזון מהיר מקסיקני"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "מזון מהיר פיצה",
@@ -3717,7 +4017,8 @@
                     "terms": "גני מנזר,שטחי מנזר"
                 },
                 "amenity/money_transfer": {
-                    "name": "תחנת העברת כספים"
+                    "name": "תחנת העברת כספים",
+                    "terms": "צ׳יינג׳,צ'יינג',חלפנות כספים,חלפן,המרת מטבע"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "חניית אופנועים",
@@ -3751,13 +4052,17 @@
                     "terms": "אזור חניה"
                 },
                 "amenity/payment_centre": {
-                    "name": "מרכז תשלום"
+                    "name": "מרכז תשלום",
+                    "terms": "נקודת תשלום,עמדת תשלום,דלפק תשלום"
                 },
                 "amenity/payment_terminal": {
                     "name": "מסוף תשלום"
                 },
                 "amenity/pharmacy": {
                     "name": "דלפק בית מרקחת"
+                },
+                "amenity/photo_booth": {
+                    "name": "תא צילום"
                 },
                 "amenity/place_of_worship": {
                     "name": "בית תפילה",
@@ -3881,10 +4186,12 @@
                     "name": "מסעדה מקסיקנית"
                 },
                 "amenity/restaurant/noodle": {
-                    "name": "מסעדת אטריות"
+                    "name": "מסעדת אטריות",
+                    "terms": "ראמן;ספגטי;אטריות"
                 },
                 "amenity/restaurant/pizza": {
-                    "name": "מסעדת פיצה"
+                    "name": "מסעדת פיצה",
+                    "terms": "פיצריה;איטלקי"
                 },
                 "amenity/restaurant/seafood": {
                     "name": "מסעדת פרות ים"
@@ -3893,7 +4200,8 @@
                     "name": "בית סטייק"
                 },
                 "amenity/restaurant/sushi": {
-                    "name": "מסעדת סושי"
+                    "name": "מסעדת סושי",
+                    "terms": "סושיה"
                 },
                 "amenity/restaurant/thai": {
                     "name": "מסעדה תאילנדית"
@@ -4460,7 +4768,7 @@
                     "terms": "בתים בשורות"
                 },
                 "building/train_station": {
-                    "name": "תחנת רכבת"
+                    "name": "מבנה תחנת רכבת"
                 },
                 "building/transportation": {
                     "name": "מבנה תחבורה",
@@ -4757,6 +5065,16 @@
                     "name": "מכשול חול",
                     "terms": "מכשול חול"
                 },
+                "golf/cartpath": {
+                    "name": "מסלול לרכבי גולף"
+                },
+                "golf/cartpath_service": {
+                    "name": "מסלול לרכבי גולף / כביש שירות"
+                },
+                "golf/driving_range": {
+                    "name": "מטווח אימונים",
+                    "terms": "דרייבינג ריינג׳;דרייבינג ריינג';מטווח חבטות;מטווח אימונים לטווח בינוני;מטווח אימונים לטווח קצר;מגרש גולף"
+                },
                 "golf/fairway": {
                     "name": "אזור פתוח בגולף",
                     "terms": "אזור פתוח בגולף"
@@ -4769,13 +5087,11 @@
                     "name": "גומת גולף",
                     "terms": "חור גולף"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "מכשול מים",
-                    "terms": "מכשול מים"
+                "golf/lateral_water_hazard": {
+                    "name": "מכשול מים צדדי"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "מכשול מים צדדי",
-                    "terms": "מכשול מים צדי"
+                "golf/path": {
+                    "name": "נתיב הליכה לגולף"
                 },
                 "golf/rough": {
                     "name": "שטח קשה בגולף",
@@ -4785,13 +5101,8 @@
                     "name": "עמדת חביטה בגולף",
                     "terms": "עמדת חביטה בגולף"
                 },
-                "golf/water_hazard_area": {
-                    "name": "מכשול מים",
-                    "terms": "מכשול מים"
-                },
-                "golf/water_hazard_line": {
-                    "name": "מכשול מים",
-                    "terms": "מכשול מים"
+                "golf/water_hazard": {
+                    "name": "מכשול מים"
                 },
                 "healthcare": {
                     "name": "מוסד טיפול בריאותי",
@@ -5159,8 +5470,7 @@
                     "terms": "צומת"
                 },
                 "landuse": {
-                    "name": "שימוש בקרקע",
-                    "terms": "קרקע בשימוש"
+                    "name": "שימוש בקרקע"
                 },
                 "landuse/allotments": {
                     "name": "גינה קהילתית",
@@ -5341,8 +5651,7 @@
                     "terms": "כרם"
                 },
                 "leisure": {
-                    "name": "אזור פנאי",
-                    "terms": "אזור פנאי"
+                    "name": "אזור פנאי"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "מרכז בידור למבוגרים",
@@ -5495,6 +5804,10 @@
                     "name": "שולחן פיקניק",
                     "terms": "שולחן פיקניק"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "שולחן שח",
+                    "terms": "שח מט;שחמט"
+                },
                 "leisure/pitch": {
                     "name": "מגרש ספורט",
                     "terms": "צגרש,כדורגל,כדורסל,טניס"
@@ -5593,6 +5906,10 @@
                     "name": "מרכז ספורט",
                     "terms": "מרכז ספורט"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "קיר טיפוס",
+                    "terms": "חדר כושר לטיפוס,חדר כושר,כושר"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "בריכות שחייה",
                     "terms": "בריכות שחייה"
@@ -5624,8 +5941,7 @@
                     "terms": "קו"
                 },
                 "man_made": {
-                    "name": "מעשה ידי אדם",
-                    "terms": "מעשה ידי אדם"
+                    "name": "מעשה ידי אדם"
                 },
                 "man_made/adit": {
                     "name": "פתח גישה",
@@ -5664,7 +5980,8 @@
                     "terms": "מקטע חיץ,הפרדה"
                 },
                 "man_made/embankment": {
-                    "name": "סוללה"
+                    "name": "סוללה",
+                    "terms": "סוללה;הגבהה;עפר;הפרדה;חוצץ;חצץ"
                 },
                 "man_made/flagpole": {
                     "name": "עמוד דגל",
@@ -5745,8 +6062,17 @@
                     "name": "מגדל",
                     "terms": "מגדל"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "מגדל פעמון",
+                    "terms": "פעמון,תפילה"
+                },
                 "man_made/tower/communication": {
-                    "name": "מגדל תקשורת"
+                    "name": "מגדל תקשורת",
+                    "terms": "שידור,אנטנה,תשדורת,תקשורת,רדיו,תורן שידור,תורן תקשורת,תורן שידור,עמוד"
+                },
+                "man_made/tower/minaret": {
+                    "name": "צריח מסגד",
+                    "terms": "אסלאם,איסלאם,מוסלמים,מסגד,מינרט,מינארט"
                 },
                 "man_made/tower/observation": {
                     "name": "מגדל תצפית"
@@ -5792,8 +6118,7 @@
                     "terms": "בור טלקום"
                 },
                 "natural": {
-                    "name": "מאפייני טבע",
-                    "terms": "מאפייני טבע"
+                    "name": "מאפייני טבע"
                 },
                 "natural/bare_rock": {
                     "name": "סלע חשוף",
@@ -5886,6 +6211,9 @@
                 "natural/water": {
                     "name": "מים",
                     "terms": "מים"
+                },
+                "natural/water/basin": {
+                    "name": "אגן"
                 },
                 "natural/water/canal": {
                     "name": "תעלת מים"
@@ -6293,46 +6621,6 @@
                     "name": "שנאי",
                     "terms": "שנאי"
                 },
-                "public_transport/linear_platform": {
-                    "name": "תחנת / רציף תחבורה ציבורית",
-                    "terms": "רציף / תחנת תחבורה ציבורית"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "תחנה / רציף של תחבורת כבל",
-                    "terms": "תחנת רכבל,רציף רכבל,רציף / תחנה של תחבורת כבל"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "תחנת / רציף אוטובוס",
-                    "terms": "רציף / תחנת אוטובוס"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "תחנת / רציף מעבורת",
-                    "terms": "רציף / תחנת מעבורת"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "תחנת / רציף רכבת קלה",
-                    "terms": "רציף / תחנת רכבת קלה"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "תחנת / רציף מונורייל",
-                    "terms": "רציף / תחנת מונורייל"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "תחנת / רציף רכבת תחתית",
-                    "terms": "רציף / תחנת רכבת תחתית"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "תחנת / רציף רכבת",
-                    "terms": "רציף / תחנת רכבת"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "תחנת / רציף חשמלית",
-                    "terms": "רציף / תחנת טראם,רציף / תחנת חשמלית,תחנת / רציף טראם"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "תחנת / רציף טרוליבוס",
-                    "terms": "רציף / תחנת טרוליבוס"
-                },
                 "public_transport/platform": {
                     "name": "תחנת / רציף תחבורה ציבורית",
                     "terms": "רציף / תחנת תחבורה ציבורית"
@@ -6691,7 +6979,8 @@
                     "terms": "מוסך"
                 },
                 "shop/caravan": {
-                    "name": "סוכנות קרוואנים"
+                    "name": "סוכנות קרוואנים",
+                    "terms": "רכב,מכונית,נגרר,אוטו"
                 },
                 "shop/carpet": {
                     "name": "חנות שטיחים",
@@ -7135,8 +7424,7 @@
                     "terms": "חנות יינות"
                 },
                 "tourism": {
-                    "name": "תיירות",
-                    "terms": "תיירות"
+                    "name": "תיירות"
                 },
                 "tourism/alpine_hut": {
                     "name": "בקטה הררית",
@@ -7755,6 +8043,7 @@
                 "attribution": {
                     "text": "GSI יפן"
                 },
+                "description": "צילומי אוויר של GSI יפן. לא מיושר אבל מעט חדש יותר ו/או מכוסה בצורה קצת שונה מצילומי GSI מיושרים.",
                 "name": "צילומי אוויר של GSI יפן"
             },
             "gsi.go.jp_std_map": {
@@ -8019,7 +8308,7 @@
             },
             "osm-india-telegram": {
                 "name": "OpenStreetMap הודו טלגרם",
-                "description": "תצטרף למשפחתנו {url}"
+                "description": "מוזמנים למשפחה: {url}"
             },
             "OSM-india-twitter": {
                 "name": "הטוויטר של OpenStreetMap הודו",
@@ -8035,7 +8324,7 @@
             },
             "osm-india-youtube": {
                 "name": "OpenStreetMap הודו יוטוב",
-                "description": "תצטרף לערוץ שלנו ב {url}"
+                "description": "מוזמנים לערוץ שלנו: {url}"
             },
             "OSM-India-Puducherry-Facebook": {
                 "name": "תנועת החומרה והתכנה החופשית - פייסבוק",
@@ -8056,6 +8345,20 @@
                 "name": "OpenStreetMap אינדונזיה",
                 "description": "שיפור OpenStreetMap באינדונזיה",
                 "extendedDescription": "מעניין אותך מיפוי באינדונזיה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
+            },
+            "osm-iran-aparat": {
+                "name": "ה־Aparat של OpenStreetMap איראן",
+                "description": "מוזמנים לערוץ שלנו בכתובת {url}",
+                "extendedDescription": "משאב טוב של סרטונים על כל מה שקשור ב־OpenStreetMap. בעיקר בפרסית."
+            },
+            "osm-iran-forum": {
+                "name": "הפורום המקוון של OpenStreetMap איראן",
+                "description": "הפורום המקוון של OpenStreetMap איראן",
+                "extendedDescription": "פורום מקוון למשתמשי OpenStreetMap באיראן. אפשר לשאול שאלות ולדון עם אחרים באופן חופשי!"
+            },
+            "osm-iran-telegram": {
+                "name": "הטלגרם של OpenStreetMap איראן",
+                "description": "מזמינים אותך להצטרף לערוץ הטלגרם שלנו בכתובת {url}. יש לנו גם קבוצת על של משתמשי OSM רבים שמתעניינים באיראן. ניתן למצוא את הקישור אליה בביוגרפיה של הערוץ."
             },
             "OSM-japan-facebook": {
                 "name": "קהילת OpenStreetMap יפן",
@@ -8106,7 +8409,7 @@
             },
             "osm-asia-telegram": {
                 "name": "OSM אסיה טלגרם",
-                "description": "תצטרף למשפחתנו {url}"
+                "description": "מוזמנים למשפחה: {url}"
             },
             "OSM-PH-facebook": {
                 "name": "הפייסבוק של OpenStreetMap PH (הפיליפינים)",
@@ -8367,6 +8670,7 @@
                 "description": "Talk-is היא קבוצת הדיוור הרשמית של קהילת OSM האיסלנדית"
             },
             "is-twitter": {
+                "name": "OSM איסלנד בטוויטר",
                 "description": "הטוויטר של OpenStreetMap באיסלנד"
             },
             "it-facebook": {
@@ -8422,6 +8726,10 @@
             "no-mailinglist": {
                 "name": "קבוצת הדיוור של OpenStreetMap נורווגיה",
                 "description": "קבוצת דיוור לממפי, משתמשי, מפתחי וחובבי OpenStreetMap בנורווגיה"
+            },
+            "no-telegram": {
+                "name": "‎@OSM_no בטלגרם",
+                "description": "הטלגרם של OpenStreetMap נורבגיה"
             },
             "OSM-PL-facebook-group": {
                 "name": "קבוצת הפייסבוק של OpenStreetMap פולין",

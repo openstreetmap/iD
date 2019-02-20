@@ -287,8 +287,6 @@
             "locating": "摷緊地方，等下⋯⋯"
         },
         "inspector": {
-            "no_documentation_combination": "爾組籤，未有文件解",
-            "no_documentation_key": "爾個圖例，未有文件解。",
             "show_more": "睇多啲",
             "view_on_osm": "入公家街圖睇",
             "all_fields": "所有欄位",
@@ -299,7 +297,6 @@
             "role": "作用",
             "choose": "揀地貌",
             "results": "{search}搵出{n}項",
-            "reference": "入公家街圖百科睇",
             "back_tooltip": "轉地貌",
             "remove": "移走",
             "search": "搵",
@@ -383,11 +380,9 @@
                 "tooltip": "電纜、發電廠、變電站等。"
             },
             "past_future": {
-                "description": "過往／未來",
                 "tooltip": "籌備、興建、廢棄、移平等。"
             },
             "others": {
-                "description": "其他",
                 "tooltip": "其他"
             }
         },
@@ -470,17 +465,6 @@
             "description": "描述",
             "on_wiki": "喺公家街圖百科度嘅{tag}",
             "used_with": "同{type}一齊用"
-        },
-        "validations": {
-            "disconnected_highway": "道無駁通",
-            "untagged_point": "未有籤嘅點",
-            "untagged_point_tooltip": "揀種地貌，兼且寫呢處係乜來。",
-            "untagged_line": "冇籤嘅綫",
-            "untagged_line_tooltip": "揀種地貌，兼且寫呢綫係乜來。",
-            "untagged_area": "冇籤嘅範圍",
-            "untagged_area_tooltip": "揀種地貌，兼且寫呢範圍係乜來。",
-            "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
-            "deprecated_tags": "廢籤：{tags}"
         },
         "zoom": {
             "in": "放大",
@@ -596,9 +580,6 @@
                 },
                 "category-building": {
                     "name": "屋宇地貌"
-                },
-                "category-golf": {
-                    "name": "哥夫波地貌"
                 },
                 "category-landuse": {
                     "name": "用地地貌"
@@ -1633,8 +1614,7 @@
                     "label": "類"
                 },
                 "website": {
-                    "label": "網站",
-                    "placeholder": "http://example.com/"
+                    "label": "網站"
                 },
                 "wetland": {
                     "label": "類"
@@ -2268,8 +2248,7 @@
                     "terms": "Vineyard,葡萄園,酒莊"
                 },
                 "leisure": {
-                    "name": "消閒",
-                    "terms": "Leisure,休閑場所,休閒設施,消閒"
+                    "name": "消閒"
                 },
                 "leisure/common": {
                     "name": "公地",
@@ -2344,8 +2323,7 @@
                     "terms": "Line,綫,線"
                 },
                 "man_made": {
-                    "name": "人造",
-                    "terms": "Man Made,人造,人造構築,人造物"
+                    "name": "人造"
                 },
                 "man_made/breakwater": {
                     "name": "防波堤",
@@ -2395,8 +2373,7 @@
                     "terms": "Water Works,供水廠,水務設施"
                 },
                 "natural": {
-                    "name": "天然",
-                    "terms": "Natural,天然,自然,自然物件"
+                    "name": "天然"
                 },
                 "natural/bare_rock": {
                     "name": "石地"
@@ -2879,8 +2856,7 @@
                     "terms": "Wine Shop,酒舖"
                 },
                 "tourism": {
-                    "name": "旅行",
-                    "terms": "Tourism,旅行,旅遊設施"
+                    "name": "旅行"
                 },
                 "tourism/alpine_hut": {
                     "name": "高山屋仔",

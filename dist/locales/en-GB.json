@@ -449,8 +449,6 @@
             "locating": "Locating, please wait..."
         },
         "inspector": {
-            "no_documentation_combination": "There is no documentation available for this tag combination",
-            "no_documentation_key": "There is no documentation available for this key",
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
             "all_fields": "All fields",
@@ -461,7 +459,6 @@
             "role": "Role",
             "choose": "Select feature type",
             "results": "{n} results for {search}",
-            "reference": "View on OpenStreetMap Wiki",
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
@@ -573,11 +570,9 @@
                 "tooltip": "Power Lines, Power Plants, Substations, etc."
             },
             "past_future": {
-                "description": "Past/Future",
                 "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
             },
             "others": {
-                "description": "Others",
                 "tooltip": "Everything Else"
             }
         },
@@ -673,23 +668,6 @@
             "description": "Description",
             "on_wiki": "{tag} on wiki.osm.org",
             "used_with": "used with {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Disconnected highway",
-            "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
-            "old_multipolygon": "Multipolygon tags on outer way",
-            "old_multipolygon_tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way.",
-            "untagged_point": "Untagged point",
-            "untagged_point_tooltip": "Select a feature type that describes what this point is.",
-            "untagged_line": "Untagged line",
-            "untagged_line_tooltip": "Select a feature type that describes what this line is.",
-            "untagged_area": "Untagged area",
-            "untagged_area_tooltip": "Select a feature type that describes what this area is.",
-            "untagged_relation": "Untagged relation",
-            "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
-            "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
-            "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
             "in": "Zoom in",
@@ -1314,9 +1292,6 @@
                 },
                 "category-building": {
                     "name": "Building Features"
-                },
-                "category-golf": {
-                    "name": "Golf Features"
                 },
                 "category-landuse": {
                     "name": "Land Use Features"
@@ -2747,8 +2722,7 @@
                     "label": "Type"
                 },
                 "website": {
-                    "label": "Website",
-                    "placeholder": "http://example.com/"
+                    "label": "Website"
                 },
                 "wetland": {
                     "label": "Type"
@@ -3497,9 +3471,6 @@
                 "building/terrace": {
                     "name": "Terraced houses"
                 },
-                "building/train_station": {
-                    "name": "Train Station"
-                },
                 "building/transportation": {
                     "name": "Transportation Building"
                 },
@@ -3722,23 +3693,11 @@
                 "golf/hole": {
                     "name": "Golf Hole"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Lateral Water Hazard"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Lateral Water Hazard"
-                },
                 "golf/rough": {
                     "name": "Rough"
                 },
                 "golf/tee": {
                     "name": "Tee Box"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Water Hazard"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Water Hazard"
                 },
                 "healthcare": {
                     "name": "Healthcare Facility"
@@ -4708,36 +4667,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformer"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Transit Stop / Platform"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Aerialway Stop / Platform"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Bus Stop / Platform"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Ferry Stop / Platform"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Light Rail Stop / Platform"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Monorail Stop / Platform"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Subway Stop / Platform"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Train Stop / Platform"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Tram Stop / Platform"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Trolleybus Stop / Platform"
                 },
                 "public_transport/platform": {
                     "name": "Transit Stop / Platform"

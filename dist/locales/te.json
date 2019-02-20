@@ -233,8 +233,6 @@
             "title": "నా ప్రాంతాన్ని చూపించు"
         },
         "inspector": {
-            "no_documentation_combination": "ఈ ట్యాగ్ కాంబినేషన్ కి సంబంధించి ఎటువంటి సమాధానము లేదు",
-            "no_documentation_key": "ఈ కీకి సంబంధించి ఎటువంటి సమాధానము లేదు",
             "show_more": "మరింత చూపించు",
             "view_on_osm": "openstreetmap.org లో చూడండి",
             "all_tags": "అన్ని ట్యాగులు",
@@ -244,7 +242,6 @@
             "role": "పాత్ర",
             "choose": "విశేష రకాన్ని ఎంచుకోండి",
             "results": "{search} కి {n} ఫలితాలు",
-            "reference": "OpenStreetMap వికీలో చూడండి",
             "back_tooltip": "విశేషం మార్పు",
             "remove": "తొలగించు",
             "search": "వెతుకు",
@@ -293,9 +290,6 @@
             },
             "rail": {
                 "tooltip": "రైల్వేలు"
-            },
-            "others": {
-                "description": "ఇతరాలు"
             }
         },
         "restore": {

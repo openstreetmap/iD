@@ -205,8 +205,6 @@
             "title": "Pokazati moju lokaciju"
         },
         "inspector": {
-            "no_documentation_combination": "Nema dostupne dokumentacije za ovu kombinaciju oznaka",
-            "no_documentation_key": "Nema dostupne dokumentacije za ovaj ključ",
             "show_more": "Prikazati više",
             "view_on_osm": "Pogledajte na stranici openstreetmap.org",
             "all_tags": "Sve oznake",
@@ -216,7 +214,6 @@
             "role": "Uloga",
             "choose": "Odaberite tip svojstva",
             "results": "{search} dala {n} rezultata",
-            "reference": "Pogledajte na stranici OpenStreetMap Wiki",
             "back_tooltip": "Promijeniti značajku",
             "remove": "Uklonite",
             "search": "Pretraga",
@@ -259,13 +256,6 @@
             "description": "Opis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "Korišteno sa {type}"
-        },
-        "validations": {
-            "untagged_point": "Neoznačena tačka",
-            "untagged_line": "Neoznačena linija",
-            "untagged_area": "Neoznačeno područje",
-            "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
-            "deprecated_tags": "Zastarjele oznake: {tags}"
         },
         "cannot_zoom": "Ne može se umanjiti više u trenutnom načinu.",
         "help": {
@@ -637,8 +627,7 @@
                     "label": "Vrsta"
                 },
                 "website": {
-                    "label": "Internet stranica",
-                    "placeholder": "http://primjer.com/"
+                    "label": "Internet stranica"
                 },
                 "wetland": {
                     "label": "Vrsta"
@@ -1256,8 +1245,7 @@
                     "terms": "vinograd,uzgoj grožđa"
                 },
                 "leisure": {
-                    "name": "Rekreacija",
-                    "terms": "rekreacija,razonoda"
+                    "name": "Rekreacija"
                 },
                 "leisure/common": {
                     "name": "Uobičajeno",
@@ -1332,8 +1320,7 @@
                     "terms": "linija"
                 },
                 "man_made": {
-                    "name": "Napravljeno ljudskom rukom",
-                    "terms": "napravljeno ljudskom rukom,umjetno,vještačko"
+                    "name": "Napravljeno ljudskom rukom"
                 },
                 "man_made/breakwater": {
                     "name": "Lukobran",
@@ -1383,8 +1370,7 @@
                     "terms": "vodosnadbjevanje,snadbjevanje vodom"
                 },
                 "natural": {
-                    "name": "Prirodno područje",
-                    "terms": "prirodno područje"
+                    "name": "Prirodno područje"
                 },
                 "natural/bay": {
                     "name": "Zaliv",
@@ -1814,8 +1800,7 @@
                     "terms": "videoklub,videoteka"
                 },
                 "tourism": {
-                    "name": "Turizam",
-                    "terms": "turizam,putovanja"
+                    "name": "Turizam"
                 },
                 "tourism/alpine_hut": {
                     "name": "Planinski dom",

@@ -465,8 +465,6 @@
             "locating": "Localitzant, espereu si us plau..."
         },
         "inspector": {
-            "no_documentation_combination": "No hi ha documentació per a aquesta combinació d'etiquetes",
-            "no_documentation_key": "No hi ha documentació per a aquesta clau",
             "show_more": "Mostra'n més",
             "view_on_osm": "Mostra-ho a openstreetmap.org",
             "all_fields": "Tots els camps",
@@ -477,7 +475,6 @@
             "role": "Rol",
             "choose": "Seleccioneu el tipus d'objecte",
             "results": "{n} resultats per {search}",
-            "reference": "Mostra-ho al wiki de l'OpenStreetMap",
             "back_tooltip": "Modifica l'objecte",
             "remove": "Eliminar",
             "search": "Cercar",
@@ -589,11 +586,9 @@
                 "tooltip": "Línies elèctriques, centrals, subestacions, etc."
             },
             "past_future": {
-                "description": "Passat/futur",
                 "tooltip": "Proposat, en construcció, abandonat, enderrocat, etc."
             },
             "others": {
-                "description": "Altres",
                 "tooltip": "Tota la resta"
             }
         },
@@ -689,23 +684,6 @@
             "description": "Descripció",
             "on_wiki": "{tag} a wiki.osm.org",
             "used_with": "utilitzat amb {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Via desconnectada",
-            "disconnected_highway_tooltip": "Les vies haurien de connectar altres vies o entrades d'edificis.",
-            "old_multipolygon": "Etiqueta Multipoligon en ",
-            "old_multipolygon_tooltip": "Aquest estil de polígon és en desús. Assigneu les etiquetes al multipolígon pare en comptes d'a la via exterior.",
-            "untagged_point": "Punt sense etiquetar",
-            "untagged_point_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquest punt.",
-            "untagged_line": "Línia sense etiquetar",
-            "untagged_line_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquesta línia.",
-            "untagged_area": "Àrea sense etiquetar",
-            "untagged_area_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquesta àrea.",
-            "untagged_relation": "Relació sense etiquetar",
-            "untagged_relation_tooltip": "Seleccioneu un tipus d'objecte que descrigui com és aquesta relació.",
-            "many_deletions": "Estàs eliminant  {n} característiques:{n} funcions, {l} línies, {a} àrees, {r} relacions. Segur que ho vols fer? Això les eliminarà del mapa que tothom veu a openstreetmap.org",
-            "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
-            "deprecated_tags": "Etiquetes obsoletes : {tags}"
         },
         "zoom": {
             "in": "Apropa't",
@@ -1113,9 +1091,6 @@
                 },
                 "category-building": {
                     "name": "Tipus d'edificis"
-                },
-                "category-golf": {
-                    "name": "Elements de golf"
                 },
                 "category-landuse": {
                     "name": "Ús del terreny"
@@ -2517,8 +2492,7 @@
                     "label": "Tipus"
                 },
                 "website": {
-                    "label": "Lloc web",
-                    "placeholder": "http://exemple.com/"
+                    "label": "Lloc web"
                 },
                 "wetland": {
                     "label": "Tipus"
@@ -3275,9 +3249,6 @@
                 "building/terrace": {
                     "name": "Cases unifamiliars"
                 },
-                "building/train_station": {
-                    "name": "Estació de ferrocarril"
-                },
                 "building/transportation": {
                     "name": "Edifici per a transports"
                 },
@@ -3503,23 +3474,11 @@
                 "golf/hole": {
                     "name": "Forat"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Obstacle d'aigua lateral"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Obstacle d'aigua lateral"
-                },
                 "golf/rough": {
                     "name": "Rough"
                 },
                 "golf/tee": {
                     "name": "Àrea inicial"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Obstacle d'aigua"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Obstacle d'aigua"
                 },
                 "healthcare/alternative/chiropractic": {
                     "name": "Quiropràctic"
@@ -3818,8 +3777,7 @@
                     "terms": "Vinyar, Vinyal, Vinyet, Vinya"
                 },
                 "leisure": {
-                    "name": "Esbarjo",
-                    "terms": "Lleure,Temps lliure"
+                    "name": "Esbarjo"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Centre d'oci adult"
@@ -3953,8 +3911,7 @@
                     "terms": "Línia"
                 },
                 "man_made": {
-                    "name": "Fet per l'home",
-                    "terms": "Fet per la mà de l'home"
+                    "name": "Fet per l'home"
                 },
                 "man_made/adit": {
                     "name": "Entrada"
@@ -4272,9 +4229,6 @@
                 "power/transformer": {
                     "name": "Transformador",
                     "terms": "Transformador"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Plataforma de parada bus"
                 },
                 "public_transport/station_bus": {
                     "name": "Estació d'autobusos"
@@ -4725,8 +4679,7 @@
                     "terms": "Celler, Licoreria"
                 },
                 "tourism": {
-                    "name": "Turisme",
-                    "terms": "Turisme, Visita"
+                    "name": "Turisme"
                 },
                 "tourism/alpine_hut": {
                     "name": "Refugi de muntanya"

@@ -171,7 +171,8 @@
                         "to_area": "Taškas perkeltas į plotą."
                     }
                 },
-                "relation": "Šie geoobjektai negali būti sujungti, nes jie turi konfliktuojančias ryšio roles."
+                "relation": "Šie geoobjektai negali būti sujungti, nes jie turi konfliktuojančias ryšio roles.",
+                "restriction": "Šių objektų sujungti negalima, nes tai pažeis ryšį „{relation}“."
             },
             "disconnect": {
                 "title": "Atskirti",
@@ -189,6 +190,7 @@
                 "annotation": "Sulieti {n} objektai.",
                 "not_eligible": "Šie geoobjektai negali būti sulieti.",
                 "not_adjacent": "Šių objektų negalima sulieti, nes jų pabaigos taškai nėra sujungti.",
+                "restriction": "Šių objektų sulieti negalima, nes tai pažeis ryšį „{relation}“.",
                 "incomplete_relation": "Šie objektai negali būti sujungti, nes ne visi pilnai atsiųsti.",
                 "conflicting_tags": "Šių objektų negalima sulieti, nes kai kurios iš jų žymų turi nesuderinamas reikšmes."
             },
@@ -459,8 +461,6 @@
             "locating": "Ieškoma, prašome palaukti..."
         },
         "inspector": {
-            "no_documentation_combination": "Nėra šios žymos ar žymų kombinacijos aprašymo",
-            "no_documentation_key": "Šis raktas neturi dokumentacijos",
             "show_more": "Rodyti daugiau",
             "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
             "all_fields": "Visi laukai",
@@ -471,7 +471,6 @@
             "role": "Rolė",
             "choose": "Parinkite geoobjekto tipą",
             "results": "{n} paieškos {search} rezultatai",
-            "reference": "Žiūrėti OpenStreetMap Wikyje",
             "back_tooltip": "Keisti objektą",
             "remove": "Pašalinti",
             "search": "Ieškoti",
@@ -588,11 +587,9 @@
                 "tooltip": "Elektros linijos, jėgainės, pastotės ir pan."
             },
             "past_future": {
-                "description": "Praeitis/Ateitis",
                 "tooltip": "Siūloma, statoma, apleista, nugriauta ir pan."
             },
             "others": {
-                "description": "Kita",
                 "tooltip": "Visa kita"
             }
         },
@@ -703,21 +700,6 @@
             "description": "Aprašymas",
             "on_wiki": "{tag} svetainėje wiki.osm.org",
             "used_with": "naudojama su {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Neprijungtas kelias",
-            "disconnected_highway_tooltip": "Keliai turi būti prijungti prie kitų kelių arba pastatų įėjimų.",
-            "old_multipolygon": "Multipoligono žymės išorinėje linijoje",
-            "untagged_point": "Taškas be žymų",
-            "untagged_point_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai taškas yra.",
-            "untagged_line": "Linija be žymų",
-            "untagged_line_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, kokia tai linija yra.",
-            "untagged_area": "Plotas be žymų",
-            "untagged_area_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai plotas yra.",
-            "untagged_relation": "Ryšys be žymų",
-            "untagged_relation_tooltip": "Parinkite objekto tipą, aprašantį kas yra šis ryšys.",
-            "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
-            "deprecated_tags": "Pasenusios žymos: {tags}"
         },
         "zoom": {
             "in": "Priartinti",
@@ -1103,9 +1085,6 @@
                 },
                 "category-building": {
                     "name": "Pastatų objektai"
-                },
-                "category-golf": {
-                    "name": "Golfo objektai"
                 },
                 "category-landuse": {
                     "name": "Žemėnaudos objektai"
@@ -2522,8 +2501,7 @@
                     "label": "Tipas"
                 },
                 "website": {
-                    "label": "Interneto svetainė",
-                    "placeholder": "http://pavyzdys.lt/"
+                    "label": "Interneto svetainė"
                 },
                 "wetland": {
                     "label": "Tipas"
@@ -2743,7 +2721,7 @@
                     "terms": "prekyvietė,turgus,turgelis"
                 },
                 "amenity/motorcycle_parking": {
-                    "name": "Motociklų parkavimas",
+                    "name": "Motociklų stovėjimo aikštelė",
                     "terms": "Motociklų stovėjimo aikštelė"
                 },
                 "amenity/music_school": {
@@ -2752,6 +2730,9 @@
                 "amenity/nightclub": {
                     "name": "Naktinis klubas",
                     "terms": "klubas,naktinis klubas"
+                },
+                "amenity/parking": {
+                    "name": "Automobilių stovėjimo aikštelė"
                 },
                 "amenity/parking_space": {
                     "name": "Stovėjimo vieta"
@@ -3116,9 +3097,6 @@
                 },
                 "building/temple": {
                     "name": "Šventyklos pastatas"
-                },
-                "building/train_station": {
-                    "name": "Traukinių stotis"
                 },
                 "building/university": {
                     "name": "Universiteto pastatas",
@@ -3574,16 +3552,15 @@
                     "terms": "gyvenamoji zona,miegamoji zona"
                 },
                 "landuse/retail": {
-                    "name": "Gelžkelio zona",
-                    "terms": "geležinkelio zona,gelžkelio zona"
+                    "name": "Prekybos zona",
+                    "terms": "prekybos zona"
                 },
                 "landuse/vineyard": {
                     "name": "Vynuogynas",
                     "terms": "vynuogynas"
                 },
                 "leisure": {
-                    "name": "Laisvalaikis",
-                    "terms": "laisvalaikis"
+                    "name": "Laisvalaikis"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Suaugusiųjų lošimų vieta"
@@ -3682,8 +3659,7 @@
                     "name": "Linija"
                 },
                 "man_made": {
-                    "name": "Žmogaus sukurtas",
-                    "terms": "Žmogaus sukurtas"
+                    "name": "Žmogaus sukurtas"
                 },
                 "man_made/antenna": {
                     "name": "Antena"

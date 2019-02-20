@@ -193,7 +193,8 @@
                 "restriction": "\"{relation}\" リレーションを壊してしまうため、これらの地物はマージできません。",
                 "relation": "リレーションのロールが競合しているため、地物をマージできません",
                 "incomplete_relation": "地物全体がダウンロードされていないため、マージさせることができません。",
-                "conflicting_tags": "タグの値が競合しているため、地物をマージできません"
+                "conflicting_tags": "タグの値が競合しているため、地物をマージできません",
+                "paths_intersect": "経路を自己交差することになるため、この地物はマージできません。"
             },
             "move": {
                 "title": "移動",
@@ -413,6 +414,8 @@
             "modified": "変更した地物",
             "deleted": "削除した地物",
             "created": "作成した地物",
+            "outstanding_errors_message": "まず全てのエラーを解決してください。{count} 件残っています。",
+            "comment_needed_message": "まず変更セットのコメントを追加してください。",
             "about_changeset_comments": "変更セットの良いコメントについて",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "コメントの中で Google に触れていますが、 Google マップからのコピーは絶対に禁止です。",
@@ -505,8 +508,6 @@
                 "tooltip_data": "マップを中央寄せ・ズームしてこのデータにフォーカス。",
                 "tooltip_issue": "マップを中央寄せ・ズームしてこの課題にフォーカス。"
             },
-            "no_documentation_combination": "このタグの組み合わせに関する解説はありません",
-            "no_documentation_key": "このキーに対する解説はありません",
             "show_more": "次を表示",
             "view_on_osm": "openstreetmap.orgで確認",
             "view_on_keepRight": "keepright.at 上で閲覧",
@@ -519,10 +520,14 @@
             "role": "役割",
             "choose": "地物の種類を選択",
             "results": "検索結果{n}件: {search}",
-            "reference": "OpenStreetMap WIkiで確認",
-            "edit_reference": "説明を編集または翻訳",
+            "no_documentation_key": "利用できる文書はありません。",
+            "edit_reference": "編集/翻訳",
             "wiki_reference": "ドキュメントを見る",
             "wiki_en_reference": "ドキュメントを英語で見る",
+            "hidden_preset": {
+                "manual": "{features} が非表示となっています。地図データ設定ペインで有効化してください。",
+                "zoom": "{features} が非表示となっています。ズームインして有効化してください。"
+            },
             "back_tooltip": "地物の編集",
             "remove": "削除",
             "search": "検索",
@@ -597,6 +602,10 @@
                     "tooltip": "マップの課題をkeepright.at から自動的に検知しました",
                     "title": "KeepRight の改善提案"
                 },
+                "improveOSM": {
+                    "tooltip": "improveosm.org が自動的に検知した設定漏れデータ",
+                    "title": "ImproveOSM の改善提案"
+                },
                 "custom": {
                     "tooltip": "ページ上にデータファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックして設定してください",
                     "title": "カスタム地図データ",
@@ -650,11 +659,11 @@
                 "tooltip": "電線、高圧線、発電所、変電所など"
             },
             "past_future": {
-                "description": "廃棄消失/建設予定地",
+                "description": "過去/未来の地物",
                 "tooltip": "予定地、建設中、廃業、撤去済など"
             },
             "others": {
-                "description": "その他",
+                "description": "その他の地物",
                 "tooltip": "すべて"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag}: wiki.osm.org ",
             "used_with": "さらに詳しく:  {type}"
         },
-        "validations": {
-            "disconnected_highway": "切断された道路",
-            "disconnected_highway_tooltip": "道路は他の道路か建物の入口に接続させてください。",
-            "generic_name": "普通名詞の可能性",
-            "generic_name_tooltip": "この地物には一般的な普通名詞の \"{name}\"タグが付いているようです。name タグには地物の公式な固有名詞だけを付けてください。（訳注：畑、神社、建物といった固有名詞ではないカテゴリやグループ名、あるいはOSM上にメモするための名前らしきものなどはname タグには入れてはいけません。固有の名前がわからない場合にはname タグは付けません。）",
-            "old_multipolygon": "outerのウェイ上のマルチポリゴンタグ",
-            "old_multipolygon_tooltip": "このスタイルのマルチポリゴンは非推奨となっています。outerのウェイの代わりに親のマルチポリゴンにタグを割り当ててください。",
-            "untagged_point": "タグなしポイント",
-            "untagged_point_tooltip": "この点が表す地物の種類を選択してください。",
-            "untagged_line": "ラインにタグが付与されていません",
-            "untagged_line_tooltip": "この直線が表す地物の種類を選択してください。",
-            "untagged_area": "エリアにタグが付与されていません",
-            "untagged_area_tooltip": "このエリアが表す地物の種類を選択してください。",
-            "untagged_relation": "タグの無いリレーション",
-            "untagged_relation_tooltip": "このリレーションを表す地物の種別を選んでください。",
-            "many_deletions": "あなたは計{n}件の地物を削除しようとしています：{p}ノード, {l}ライン, {a}エリア, {r}リレーション。本当に削除しますか？この操作でみんながopenstreetmap.org上で見ているマップから削除されます。",
-            "tag_suggests_area": "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
-            "deprecated_tags": "タグの重複: {tags}"
-        },
         "zoom": {
             "in": "ズームイン",
             "out": "ズームアウト"
@@ -800,6 +790,40 @@
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
         "QA": {
+            "improveOSM": {
+                "title": "ImproveOSM 検知内容",
+                "geometry_types": {
+                    "path": "歩道・小道",
+                    "parking": "駐車場",
+                    "road": "道路",
+                    "both": "道路と駐車場"
+                },
+                "directions": {
+                    "east": "東",
+                    "north": "北",
+                    "northeast": "北東",
+                    "northwest": "北西",
+                    "south": "南",
+                    "southeast": "南東",
+                    "southwest": "南西",
+                    "west": "西"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "一方通行が未設定",
+                        "description": "{highway} のこの区間では、{num_trips} 件の通行記録のうち、{percentage} %が{from_node} から{to_node} に向かっています。「一方通行」タグが漏れている可能性があります。"
+                    },
+                    "mr": {
+                        "title": "ジオメトリが未設定",
+                        "description": "このエリアで記録された{num_trips}件の通行記録は、ここにマッピングされていない{geometry_type} がある可能性を示しています。",
+                        "description_alt": "サードパーティのデータが、ここにマッピングされていない{geometry_type} がある可能性を示しています。"
+                    },
+                    "tr": {
+                        "title": "進行方向制限が未設定",
+                        "description": "{num_trips} 件の記録された通行({travel_direction}方面への移動)のうち{num_passed} 件が、{from_way} から{to_way} へ{junction}で方向転換しています。「{turn_restriction}」の制限が未設定である可能性があります。"
+                    }
+                }
+            },
             "keepRight": {
                 "title": "KeepRight の指摘内容",
                 "detail_title": "エラー",
@@ -925,7 +949,7 @@
                     },
                     "130": {
                         "title": "未接続のウェイ(浮島)",
-                        "description": "{var1} はマップの他のオブジェクトに接続していません。（訳注：（対処例）大きめの白い丸である未接続の終端ノードをドラッグして相手先のウェイに接続するか、終端ノード上でショートカットキー\"A\"を押すか、右クリックして(+)延長アイコンをクリックしてウェイを延ばして接続します。正しく接続されると丸は小さめのグレイに変化します。）"
+                        "description": "{var1} はマップの他のオブジェクトに接続していません。（訳注：（対処例）大きめの白い丸である未接続の終端ノードをドラッグして相手先のウェイに接続するか、終端ノード上でショートカットキー\"A\"を押すか、右クリックして(+)延長アイコンをクリックしてウェイを延ばして接続します。正しく接続されると丸は小さめのグレイに変化します。エリアで描いたペデストリアンも他の歩道や道路に接続します）"
                     },
                     "150": {
                         "title": "タグの無い鉄道踏切",
@@ -1057,7 +1081,7 @@
                     },
                     "312": {
                         "title": "ラウンドアバウトの方向誤り",
-                        "description": "{var1} が {var2} 通行の国にある場合、その向き先は誤った方向に向かっています。"
+                        "description": "{var1} が {var2} 通行の国にある場合、進行方向が誤っています。(訳注：日本は左側通行)"
                     },
                     "313": {
                         "title": "ラウンドアバウトの接続が弱い",
@@ -1347,7 +1371,7 @@
                 "title": "品質改善",
                 "intro": "*品質改善* (Q/A) 用のツールはOpenStreetMap内の不適切なタグ、接続されていない道路、その他の課題などを見つけ出し、マッパーはそれを見て修正することができます。Q/A の課題にどのようなものがあるか見てみる場合は、 {data} **地図データ設定** パネルをクリックして、専用の Q/A レイヤを有効化してください。（訳注：見つけ出された課題はあくまで機械的にピックアップされたものであり、必ずしもエラーではない場合があります。現地の状態やタグ付けの知識があまり無い場合にはくれぐれも注意してください。まずは地元や自分でマッピングした内容の修正から始めると良いでしょう。）",
                 "tools_h": "ツール",
-                "tools": "現在は次のツールがサポートされています: [KeepRight](https://www.keepright.at/)。iD は将来 [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), その他の Q/A ツールもサポートしたいと考えています。",
+                "tools": "現在は次のツールがサポートされています: [KeepRight](https://www.keepright.at/)及び[ImproveOSM](https://improveosm.org/en/)。iD は将来 [Osmose](https://osmose.openstreetmap.fr/), その他の Q/A ツールもサポートしたいと考えています。",
                 "issues_h": "課題の扱い方",
                 "issues": "Q/A の課題の扱い方はメモと似ています。マーカーをクリックすると、サードバー内で課題の詳細を見ることができます。各ツールにはそれぞれにできることがありますが、たいていコメントを付けたり課題をクローズしたりすることができます。"
             },
@@ -1387,6 +1411,190 @@
                         "indirect_example": "これらは近くに別の制限がある場合に存在する制限です。例えば、「直進専用」制限は交差点内の全ての他の通行路に対して、間接的に「進行方向変更不可」という制限を設けることになります。",
                         "indirect_noedit": "間接的な制限を編集するのではなく、近くの直接的な制限を編集します。"
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "改善提案",
+            "key": "I",
+            "list_title": "改善提案 ({count})",
+            "errors": {
+                "list_title": "エラー ({count})"
+            },
+            "warnings": {
+                "list_title": "警告 ({count})"
+            },
+            "no_issues": {
+                "message": "改善提案はありません",
+                "info": "ここには編集操作中に改善提案が表示されます"
+            },
+            "almost_junction": {
+                "message": "{feature} は{feature2} のすぐ近くにありますが接続されていません",
+                "highway-highway": {
+                    "tip": "交差する道路は頂点ノードを共有すべきです"
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} は{feature2} と重なっています",
+                "building-building": {
+                    "tip": "建物は別レイヤである場合を除いて、交差すべきではありません。"
+                },
+                "building-highway": {
+                    "tip": "建物と重なる道路は橋、トンネル、遮蔽物、入口のいずれかのタグを使うべきです。"
+                },
+                "building-railway": {
+                    "tip": "建物と重なる鉄道は橋かトンネルのタグを使うべきです。"
+                },
+                "building-waterway": {
+                    "tip": "建物と重なる水路はトンネルのタグか別のレイヤを使うべきです。"
+                },
+                "highway-highway": {
+                    "tip": "重なっている道路は橋、トンネル、交差点のいずれかのタグを使うべきです。"
+                },
+                "highway-railway": {
+                    "tip": "鉄道と重なる道路は橋、トンネル、踏切のいずれかのタグを使うべきです。"
+                },
+                "highway-waterway": {
+                    "tip": "水路と重なる道路は橋、トンネル、洗い越し(ford)のいずれかのタグを使うべきです。"
+                },
+                "railway-railway": {
+                    "tip": "重なっている鉄道は接続するか、橋やトンネルのタグを使うべきです。"
+                },
+                "railway-waterway": {
+                    "tip": "水路と重なる鉄道は橋やトンネルのタグを使うべきです。"
+                },
+                "waterway-waterway": {
+                    "tip": "重なっている水路は接続するかトンネルのタグを使うべきです。"
+                },
+                "tunnel-tunnel": {
+                    "tip": "重なっているトンネルは別のレイヤを使うべきです。"
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "重なっているトンネルは接続するか、別のレイヤを使うべきです。"
+                },
+                "bridge-bridge": {
+                    "tip": "重なっている橋は別のレイヤを使うべきです。"
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "重なっている橋は接続するか、別のレイヤを使うべきです。"
+                },
+                "indoor-indoor": {
+                    "tip": "重なっているインドアの地物は別のレイヤを使うべきです。"
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "重なっているインドアの地物は別の階と接続するか、接続せずに別の階を使用するべきです。"
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} には旧式のタグ\"{tag}\" があります"
+                },
+                "combination": {
+                    "message": "{feature} には旧式のタグの組み合わせがあります: {tags}"
+                },
+                "tip": "非推奨となったタグがあるので置き換えるべきです。"
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} は他の道路や小道と切り離されています",
+                    "tip": "道路は他の道路か建物の入口に接続してください。"
+                }
+            },
+            "generic_name": {
+                "message": "{feature} には一般名詞\"{name}\" が付けられています",
+                "tip": "名前は実際の、現地にある地物の名前であるべきです。"
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "{n} 件の地物を削除します: {p} 件のポイント, {l} 件のライン, {a} 件のエリア"
+                },
+                "points-lines-areas-relations": {
+                    "message": "{n} 件の地物を削除します: {p} 件のポイント, {l} 件のライン, {a} 件のエリア, {r} 件のリレーション"
+                },
+                "tip": "冗長あるいは存在しない地物だけを削除すべきです。"
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} にはタグがありません"
+                },
+                "descriptive": {
+                    "message": "{feature} が何であるのかを示すタグがありません"
+                },
+                "specific": {
+                    "message": "{feature} には\"{tag}\" タグがありません"
+                },
+                "tip": "地物にはタグを付けてそれが何であるかを定義しなければなりません"
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} には間違ったタグがあります",
+                "tip": "マルチポリゴンはリレーションにタグ付けすべきで、アウターウェイにではありません。"
+            },
+            "tag_suggests_area": {
+                "message": "{feature} は\"{tag}\" タグに基づくクローズドエリアであるべきです",
+                "tip": "エリアは終端を接続しなければなりません。"
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "近接した地物を接続しました。"
+                },
+                "connect_crossing_features": {
+                    "annotation": "重なっている地物を接続しました。"
+                },
+                "connect_endpoints": {
+                    "title": "終端を接続する",
+                    "annotation": "ウェイの終端を接続しました。"
+                },
+                "connect_features": {
+                    "title": "地物を接続する"
+                },
+                "continue_from_start": {
+                    "title": "開始点から延長する"
+                },
+                "continue_from_end": {
+                    "title": "終了点から延長する"
+                },
+                "delete_feature": {
+                    "title": "この地物を削除する(よく分からないものは安易に削除しないこと)"
+                },
+                "move_tags": {
+                    "title": "タグを移動する",
+                    "annotation": "タグを移動しました。"
+                },
+                "remove_generic_name": {
+                    "title": "名前を削除する",
+                    "annotation": "一般名詞を削除しました。"
+                },
+                "remove_tag": {
+                    "title": "タグを削除する",
+                    "annotation": "タグを削除しました。"
+                },
+                "reposition_features": {
+                    "title": "地物を配置し直す(手動で編集してください)"
+                },
+                "select_preset": {
+                    "title": "地物の種類を選んでタグを付ける"
+                },
+                "tag_as_disconnected": {
+                    "title": "未接続(行き止まり)のタグを付ける",
+                    "annotation": "近接している地物に未接続(行き止まり)のタグを付けました。"
+                },
+                "upgrade_tag": {
+                    "annotation": "古いタグをアップグレードしました。"
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "古いタグの組み合わせをアップグレードしました。"
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "橋かトンネルを使用してください"
+                },
+                "use_different_layers": {
+                    "title": "別のレイヤを使ってください"
+                },
+                "use_different_levels": {
+                    "title": "別の階を使ってください"
+                },
+                "use_tunnel": {
+                    "title": "トンネルを使ってください"
                 }
             }
         },
@@ -1797,7 +2005,10 @@
                 "category-building": {
                     "name": "建物の地物"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "ゴルフの地物"
+                },
+                "category-golf-line": {
                     "name": "ゴルフの地物"
                 },
                 "category-landuse": {
@@ -2584,6 +2795,14 @@
                 "junction/ref_oneway": {
                     "label": "ジャンクション番号"
                 },
+                "junction_line": {
+                    "label": "ジャンクション",
+                    "options": {
+                        "circular": "ロータリー交差点(優先権なし)",
+                        "jughandle": "連絡用ランプ",
+                        "roundabout": "ラウンドアバウト(優先権あり)"
+                    }
+                },
                 "kerb": {
                     "label": "縁石の詳細"
                 },
@@ -2852,9 +3071,6 @@
                         "underground": "地下"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "乗客向け情報掲示板"
-                },
                 "payment_multi": {
                     "label": "支払の種類"
                 },
@@ -3101,6 +3317,9 @@
                         "mountain_hiking": "T2: 山岳ハイキング"
                     },
                     "placeholder": "山岳ハイキング, 高地登山…"
+                },
+                "salt": {
+                    "label": "塩分"
                 },
                 "sanitary_dump_station": {
                     "label": "汚物廃棄所の場所"
@@ -3394,6 +3613,9 @@
                     },
                     "placeholder": "可、不可、持ち帰りのみ"
                 },
+                "tidal": {
+                    "label": "潮間帯"
+                },
                 "to": {
                     "label": "To"
                 },
@@ -3566,7 +3788,7 @@
                 },
                 "website": {
                     "label": "ウェブサイト",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "種類"
@@ -3823,6 +4045,10 @@
                     "name": "時計",
                     "terms": "時計, クロック, 公園, 駅前, 広場"
                 },
+                "amenity/clock/sundial": {
+                    "name": "日時計",
+                    "terms": "日時計, 時計"
+                },
                 "amenity/college": {
                     "name": "短大・高専・専門学校（代表点または敷地）",
                     "terms": "キャンパス, 短大, 高専, 専門学校, , 教育, 学校"
@@ -3893,6 +4119,10 @@
                 "amenity/fast_food/kebab": {
                     "name": "ファストフード・ケバブ",
                     "terms": "ファストフード, ケバブ, シシケバブ, 飲食店, 食事, 食べる, 料理, ランチ"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "ファストフード・メキシコ料理",
+                    "terms": "食事, ランチ, 食べる, 料理, 飲食店, ファストフード・メキシコ料理, メキシカン"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "ファストフード・ピザ",
@@ -4015,6 +4245,10 @@
                 "amenity/pharmacy": {
                     "name": "薬局・ドラッグストア",
                     "terms": "薬局, ドラッグストア, 薬品店, 医療, 薬, 薬屋, くすり屋, 調剤, 調剤薬局, 処方箋, 健康, 薬店"
+                },
+                "amenity/photo_booth": {
+                    "name": "証明写真機",
+                    "terms": "証明写真機, 証明写真撮影機,証明写真ボックス, コンビニ証明写真, 自販機, 写真"
                 },
                 "amenity/place_of_worship": {
                     "name": "宗教施設全般",
@@ -5038,6 +5272,18 @@
                     "name": "サンドトラップ",
                     "terms": "サンドトラップ, バンカー, ゴルフ"
                 },
+                "golf/cartpath": {
+                    "name": "ゴルフカート用の道",
+                    "terms": "ゴルフカート用の道, ゴルフ, ゴルフカート, ゴルフ場"
+                },
+                "golf/cartpath_service": {
+                    "name": "ゴルフカート用の道・側道",
+                    "terms": "ゴルフカート用の道・側道, ゴルフ, ゴルフカート, ゴルフ場"
+                },
+                "golf/driving_range": {
+                    "name": "打ちっぱなし",
+                    "terms": "打ちっぱなし, ゴルフ, ゴルフ練習場, ゴルフ場, スポーツ, 打ちっ放し"
+                },
                 "golf/fairway": {
                     "name": "フェアウェイ",
                     "terms": "フェアウェー, フェアウェイ, ゴルフ"
@@ -5050,13 +5296,13 @@
                     "name": "ゴルフホール",
                     "terms": "ホール, ゴルフ"
                 },
-                "golf/lateral_water_hazard_area": {
+                "golf/lateral_water_hazard": {
                     "name": "ラテラルウォーターハザード",
-                    "terms": "池ポチャ, ウォーターハザード, ゴルフ"
+                    "terms": "ラテラルウォーターハザード, ゴルフ"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "ラテラルウォーターハザード",
-                    "terms": "池ポチャ, ウォーターハザード, ゴルフ"
+                "golf/path": {
+                    "name": "ゴルフ場の歩行路",
+                    "terms": "ゴルフ場の歩行路, ゴルフ, ゴルフ場"
                 },
                 "golf/rough": {
                     "name": "ラフ",
@@ -5066,13 +5312,9 @@
                     "name": "ティー",
                     "terms": "ティー, ゴルフ"
                 },
-                "golf/water_hazard_area": {
+                "golf/water_hazard": {
                     "name": "ウォーターハザード",
-                    "terms": "池ポチャ, ウォーターハザード, ゴルフ"
-                },
-                "golf/water_hazard_line": {
-                    "name": "ウォーターハザード",
-                    "terms": "池ポチャ, ウォーターハザード, ゴルフ"
+                    "terms": "池ポチャ, ウォーターハザード, ゴルフ, ゴルフ場"
                 },
                 "healthcare": {
                     "name": "医療",
@@ -5441,8 +5683,7 @@
                     "terms": "交差点"
                 },
                 "landuse": {
-                    "name": "土地利用",
-                    "terms": "土地利用"
+                    "name": "土地利用"
                 },
                 "landuse/allotments": {
                     "name": "市民農園",
@@ -5625,8 +5866,7 @@
                     "terms": "ぶどう畑, 果樹園, 森林, 樹木, 植物, ブドウ, 農業"
                 },
                 "leisure": {
-                    "name": "レジャー施設全般",
-                    "terms": "レジャー, 娯楽"
+                    "name": "レジャー施設全般"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "遊技場（成人向け）",
@@ -5780,6 +6020,10 @@
                     "name": "ピクニックテーブル",
                     "terms": "ピクニックテーブル, アウトドア"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "チェス台",
+                    "terms": "チェス台, チェステーブル, チェス卓, ゲーム"
+                },
                 "leisure/pitch": {
                     "name": "スポーツ競技場",
                     "terms": "スポーツ競技場, 運動場, 競技場, グラウンド, 校庭, 競技, 練習"
@@ -5880,6 +6124,10 @@
                     "name": "スポーツセンター/複合施設",
                     "terms": "スポーツセンター, 複合施設, 運動, 競技, トレーニング, 練習, 訓練, 体操"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "クライミングジム",
+                    "terms": "クライミングジム, クライミング, スポーツ, ボルダリング"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "遊泳プール（屋内）",
                     "terms": "遊泳プール, プール, 水泳場, スポーツ, 運動, 競技, スポーツセンター, 屋内プール, 娯楽, 水浴び, 水遊び, 競泳"
@@ -5913,8 +6161,7 @@
                     "terms": "線, ライン"
                 },
                 "man_made": {
-                    "name": "人工物",
-                    "terms": "人工物, 建造物"
+                    "name": "人工物"
                 },
                 "man_made/adit": {
                     "name": "坑口",
@@ -6040,9 +6287,17 @@
                     "name": "塔",
                     "terms": "塔, タワー"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "鐘楼",
+                    "terms": "鐘楼, 鐘, 釣鐘, 釣り鐘"
+                },
                 "man_made/tower/communication": {
                     "name": "塔（通信）",
                     "terms": "塔（通信）, 通信塔, 塔, タワー"
+                },
+                "man_made/tower/minaret": {
+                    "name": "ミナレット",
+                    "terms": "ミナレット, イスラム"
                 },
                 "man_made/tower/observation": {
                     "name": "塔（観察）",
@@ -6089,8 +6344,7 @@
                     "terms": "電話線用マンホール"
                 },
                 "natural": {
-                    "name": "自然",
-                    "terms": "自然"
+                    "name": "自然"
                 },
                 "natural/bare_rock": {
                     "name": "岩場",
@@ -6183,6 +6437,10 @@
                 "natural/water": {
                     "name": "水域",
                     "terms": "水域"
+                },
+                "natural/water/basin": {
+                    "name": "遊水地",
+                    "terms": "遊水地, 遊水池, 集水地域, 水, 貯水池"
                 },
                 "natural/water/canal": {
                     "name": "運河",
@@ -6595,46 +6853,6 @@
                 "power/transformer": {
                     "name": "変圧器",
                     "terms": "変圧器"
-                },
-                "public_transport/linear_platform": {
-                    "name": "交通機関のプラットホーム/のりば",
-                    "terms": "プラットホーム, 待合所, 乗り場, ホーム, 駅, 乗降所, 停車場, 停留所, のりば"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "ロープウェイのりば/プラットホーム",
-                    "terms": "ロープウェイ, チェアリフト, 牽引リフト, スキーリフト, リフト, のりば, ホーム, プラットホーム, 索道駅, 駅"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "バスのりば/プラットホーム",
-                    "terms": "バス停, バス乗り場, バスのりば, バス, BRT, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所, 駅"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "旅客船のりば/プラットホーム",
-                    "terms": "フェリー乗り場, フェリー, 港, 船着場, 船, 客船, 旅客船, フェリーターミナル, 舟, 連絡船, 渡し船, 渡船, のりば, ホーム, プラットホーム"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "ライトレールのりば/プラットホーム",
-                    "terms": "ライトレール乗り場, ライトレール, LRT, 路面電車, トラム, 駅, 停留所, 電停, 停車場, 乗降所, のりば, ホーム, プラットホーム"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "モノレールのりば/プラットホーム",
-                    "terms": "モノレール乗り場, モノレール, 駅, 停車場, 停留場, のりば, ホーム, プラットホーム"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "地下鉄のりば/プラットホーム",
-                    "terms": "地下鉄乗り場, 地下鉄, のりば, ホーム, プラットホーム, 駅, メトロ, 地下駅, 地下鉄駅, 停車場, 停留場"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "鉄道のりば/プラットホーム",
-                    "terms": "鉄道乗り場, 鉄道, 列車, 電車, のりば, ホーム, プラットホーム, 駅, 停車場, 停留場"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "路面電車のりば/プラットホーム",
-                    "terms": "トラム乗り場, トラム, 路面電車, LRT, ライトレール, 市電, ちんちん電車, チンチン電車, のりば, ホーム, プラットホーム, 駅, 電停, 停留場, 停車場, 乗降所"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "トロリーバスのりば/プラットホーム",
-                    "terms": "トロリーバス乗り場, トロリーバス, のりば, ホーム, プラットホーム, バス停, バス乗り場, バスのりば, バス, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所"
                 },
                 "public_transport/platform": {
                     "name": "交通機関（全般）の乗り場/プラットホーム",
@@ -7451,8 +7669,7 @@
                     "terms": "ワイン店, 酒屋, 食品, アルコール, 嗜好品, 飲み物"
                 },
                 "tourism": {
-                    "name": "観光",
-                    "terms": "旅行, 観光"
+                    "name": "観光"
                 },
                 "tourism/alpine_hut": {
                     "name": "山小屋",
@@ -8062,21 +8279,21 @@
             },
             "gsi.go.jp": {
                 "attribution": {
-                    "text": "国土地理院"
+                    "text": "国土地理院 オルソ"
                 },
                 "description": "最大ズームレベル17。歪みは補正（オルソ化）済みであり、概してBingより位置精度が高く国内では最も安定して利用可能な画像だが、Bingよりやや古い場合がある。",
                 "name": "国土地理院 電子国土基本図(オルソ画像)"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
-                    "text": "国土地理院"
+                    "text": "国土地理院 簡易空中写真"
                 },
                 "description": "航空レーザー測量点検用写真をつなぎ合わせたもので、地理院オルソ画像とは撮影時期やカバー範囲が少し異なる部分もあるため、オルソ画像の代替として有用な場合がある。",
                 "name": "国土地理院 簡易空中写真"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
-                    "text": "国土地理院"
+                    "text": "国土地理院 標準地図"
                 },
                 "description": "ズームレベル5～18の日本全国とその周辺地域をカバー。地図画像なのでトレースしやすく、概してBingより位置精度が高いが、やや古い場合がある。",
                 "name": "国土地理院 標準地図"

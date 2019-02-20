@@ -505,8 +505,6 @@
                 "tooltip_data": "Centrer kortet på og zoom ind til dette data.",
                 "tooltip_issue": "Centrer kortet på og zoom ind til dette problem."
             },
-            "no_documentation_combination": "Der er ingen tilgængelig dokumentation for denne kombination af tags",
-            "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
             "show_more": "Vis mere",
             "view_on_osm": "Se på openstreetmap.org",
             "view_on_keepRight": "Vis på keepright.at",
@@ -519,8 +517,6 @@
             "role": "Rolle",
             "choose": "Vælg objekttype",
             "results": "{n} resultater for {search}",
-            "reference": "Se på OpenStreetMap-Wiki",
-            "edit_reference": "Rediger eller oversæt beskrivelse",
             "wiki_reference": "Vis dokumentation",
             "wiki_en_reference": "Vis dokumentation på engelsk",
             "back_tooltip": "Ændr objekt",
@@ -650,11 +646,9 @@
                 "tooltip": "Højspændingsmaster, kraftværker, transformatorstationer, osv."
             },
             "past_future": {
-                "description": "Fortid/fremtid",
                 "tooltip": "Planlagt, under konstruktion, forladt, nedrevet, osv."
             },
             "others": {
-                "description": "Andet",
                 "tooltip": "Alt andet"
             }
         },
@@ -773,25 +767,6 @@
             "description": "Beskrivelse",
             "on_wiki": "{tag} på wiki.osm.org",
             "used_with": "brugt med {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Ej forbundet vejsegment",
-            "disconnected_highway_tooltip": "Veje skal forbindes til andre veje eller indgange til bygninger.",
-            "generic_name": "Muligt generaliseret navn",
-            "generic_name_tooltip": "Dette kortobjekt lader til at have et generaliseret navn \"{name}\". Brug kun navne-feltet til kortobjektets specifikke og officielle navn.",
-            "old_multipolygon": "Multipolygon har tags på den ydre vej",
-            "old_multipolygon_tooltip": "Denne måde at tagge multipolygoner på er ikke længere understøttet. Vær venlig at tilføje tags på multipolygonen hvori den ydre vej indgår, i stedet for på selve vejen.",
-            "untagged_point": "Punkt uden tags",
-            "untagged_point_tooltip": "Vælg en objekttype der beskriver hvad dette punkt er.",
-            "untagged_line": "Linje uden tags",
-            "untagged_line_tooltip": "Vælg en objekttype der beskriver hvad slags linje dette er.",
-            "untagged_area": "Område uden tags",
-            "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
-            "untagged_relation": "Ej tagget relation",
-            "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvilken slags relation dette er.",
-            "many_deletions": "Du sletter {n} kortobjekter: {p} noder, {l} linjer, {a} områder, {r} relationer. Er du sikker på at du vil gøre dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
-            "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
-            "deprecated_tags": "Frarådede tags: {tags}"
         },
         "zoom": {
             "in": "Zoom ind",
@@ -1549,9 +1524,6 @@
                 },
                 "category-building": {
                     "name": "Bygningsegenskaber"
-                },
-                "category-golf": {
-                    "name": "Golfegenskaber"
                 },
                 "category-landuse": {
                     "name": "Arealanvendelsesegenskaber"
@@ -2917,8 +2889,7 @@
                     "label": "Type"
                 },
                 "website": {
-                    "label": "Websted",
-                    "placeholder": "http://example.com/"
+                    "label": "Websted"
                 },
                 "wetland": {
                     "label": "Type"
@@ -3609,15 +3580,15 @@
                 },
                 "barrier/gate": {
                     "name": "Led/låge",
-                    "terms": "Led, Låge, Havelåge"
+                    "terms": "Led, Låge, Havelåge, port, åbning, indgang, udgang"
                 },
                 "barrier/hedge": {
                     "name": "Læhegn/hæk",
                     "terms": "Læhegn, Hæk"
                 },
                 "barrier/kissing_gate": {
-                    "name": "Dyrefoldsport",
-                    "terms": "Dyrefoldsport"
+                    "name": "Dyrefoldslåge",
+                    "terms": "Dyrefoldsport, låge,dyr,fold,dyrefold"
                 },
                 "barrier/lift_gate": {
                     "name": "Løftebom",
@@ -3770,9 +3741,6 @@
                 "building/terrace": {
                     "name": "Rækkehuse",
                     "terms": "Rækkehuse"
-                },
-                "building/train_station": {
-                    "name": "Togstation"
                 },
                 "building/university": {
                     "name": "Universitetsbygning",
@@ -4046,14 +4014,6 @@
                     "name": "Golfhul",
                     "terms": "Golfhul"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Golfvandhul",
-                    "terms": "Golfvandhul"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Golfvandhul",
-                    "terms": "Golfvandhul"
-                },
                 "golf/rough": {
                     "name": "Rough",
                     "terms": "Rough, Højt græs"
@@ -4061,14 +4021,6 @@
                 "golf/tee": {
                     "name": "Tee Box",
                     "terms": "Tee Box"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Golfvandbunker",
-                    "terms": "Golfvandbunker"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Golfvandbunker",
-                    "terms": "Golfvandbunker"
                 },
                 "healthcare": {
                     "name": "Sundhedsfacilitet",
@@ -4344,8 +4296,7 @@
                     "terms": "Vejfletning, Gadefletning"
                 },
                 "landuse": {
-                    "name": "Arealanvendelse",
-                    "terms": "Arealanvendelse"
+                    "name": "Arealanvendelse"
                 },
                 "landuse/allotments": {
                     "name": "Kolonihave",
@@ -4489,8 +4440,7 @@
                     "terms": "Vingård, Vinmark"
                 },
                 "leisure": {
-                    "name": "Fritids",
-                    "terms": "Fritid"
+                    "name": "Fritids"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Voksen spillecenter",
@@ -4684,8 +4634,7 @@
                     "terms": "Linje"
                 },
                 "man_made": {
-                    "name": "Menneskeskabt",
-                    "terms": "Menneskeskabt"
+                    "name": "Menneskeskabt"
                 },
                 "man_made/adit": {
                     "name": "Mineindgang",
@@ -4823,8 +4772,7 @@
                     "terms": "storm,regn,afløb"
                 },
                 "natural": {
-                    "name": "Naturlig",
-                    "terms": "Naturlig"
+                    "name": "Naturlig"
                 },
                 "natural/bare_rock": {
                     "name": "Klippe",
@@ -5691,8 +5639,7 @@
                     "terms": "Vinforretning, Vinbutik, Vinhandler"
                 },
                 "tourism": {
-                    "name": "Turisme",
-                    "terms": "Turisme"
+                    "name": "Turisme"
                 },
                 "tourism/alpine_hut": {
                     "name": "Bjerghytte",
@@ -5709,6 +5656,10 @@
                 "tourism/artwork": {
                     "name": "Kunstværk",
                     "terms": "Skulptur, Statue, Vægmaleri"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Skulptur",
+                    "terms": "statue,figur,udskæring,kunst,buste"
                 },
                 "tourism/attraction": {
                     "name": "Turistattraktion",

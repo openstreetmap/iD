@@ -193,7 +193,8 @@
                 "restriction": "Az elemek nem egyesíthetőek, mert ez megsértene egy „{relation}” kapcsolatot.",
                 "relation": "Az elemek nem egyesíthetőek, mert néhány kapcsolati szerep ütközik.",
                 "incomplete_relation": "Nem sikerült az egyesítés, mert legalább egy elem nincs teljesen letöltve.",
-                "conflicting_tags": "Az elemek nem egyesíthetőek, mert néhány címke értéke ütközik."
+                "conflicting_tags": "Az elemek nem egyesíthetőek, mert néhány címke értéke ütközik.",
+                "paths_intersect": "Az elemek nem egyesíthetőek, mert az így létrejövő útvonal metszené önmagát."
             },
             "move": {
                 "title": "Mozgatás",
@@ -505,8 +506,6 @@
                 "tooltip_data": "Térkép fókuszálása erre az adatra.",
                 "tooltip_issue": "Térkép fókuszálása erre a problémára."
             },
-            "no_documentation_combination": "Ehhez a címkekombinációhoz nem érhető el dokumentáció",
-            "no_documentation_key": "Ehhez a kulcshoz nem érhető el dokumentáció",
             "show_more": "Mutass többet",
             "view_on_osm": "Megtekintés openstreetmap.org-on",
             "view_on_keepRight": "Megtekintés a keepright.at-en",
@@ -519,8 +518,7 @@
             "role": "Szerep",
             "choose": "Jelölj ki egy elemtípust",
             "results": "{n} találat {search} keresésre",
-            "reference": "Megtekintés az OpenStreetMap Wikiben",
-            "edit_reference": "Leírás szerkesztése vagy fordítása",
+            "edit_reference": "szerkesztés/fordítás",
             "wiki_reference": "Dokumentáció megtekintése",
             "wiki_en_reference": "Dokumentáció megtekintése angolul",
             "back_tooltip": "Elem megváltoztatása",
@@ -594,6 +592,10 @@
                     "tooltip": "Automatikusan észlelt térkép problémák a keepright.at-ről",
                     "title": "KeepRight problémák"
                 },
+                "improveOSM": {
+                    "tooltip": "Az improveosm.org által automatikusan észlelt hiányzó adat",
+                    "title": "ImproveOSM problémák"
+                },
                 "custom": {
                     "tooltip": "Húzz egy adatfájlt az oldalra, vagy kattints a gombra a beállításhoz",
                     "title": "Egyedi térképadat",
@@ -647,11 +649,9 @@
                 "tooltip": "Távvezetékek, erőművek, alállomások, stb."
             },
             "past_future": {
-                "description": "Múlt/Jövő",
                 "tooltip": "Tervezett, építés alatt, elhagyott, elbontott, stb."
             },
             "others": {
-                "description": "Egyebek",
                 "tooltip": "Minden más"
             }
         },
@@ -771,25 +771,6 @@
             "on_wiki": "{tag} a wiki.osm.org-on",
             "used_with": "a következővel használva: {type}"
         },
-        "validations": {
-            "disconnected_highway": "Szétválasztott út",
-            "disconnected_highway_tooltip": "Az utakat össze kell kötni más utakkal vagy épület bejáratokkal.",
-            "generic_name": "Lehetséges általános név",
-            "generic_name_tooltip": "Úgy tűnik, ennek az elemnek egy általános neve van: „{name}”. Kérjük, hogy a név mezőt csak az elem hivatalos nevének rögzítésére használd.",
-            "old_multipolygon": "Multipoligon-címkék vannak a külső vonalon",
-            "old_multipolygon_tooltip": "Ez a multipoligon-stílus elavult. A külső vonal helyett a szülő multipoligonhoz kapcsold a címkéket.",
-            "untagged_point": "Címkézetlen pont",
-            "untagged_point_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a pont.",
-            "untagged_line": "Címkézetlen vonal",
-            "untagged_line_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a vonal.",
-            "untagged_area": "Címkézetlen terület",
-            "untagged_area_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a terület.",
-            "untagged_relation": "Címkézetlen kapcsolat",
-            "untagged_relation_tooltip": "Jelölj ki egy elemtípust, amely leírja, hogy mi ez a kapcsolat.",
-            "many_deletions": "{n} elem: {p} pont, {l} vonal, {a} terület és {r} kapcsolat törlésére készülsz. Biztosan ezt szeretnéd? Ez törli őket arról a térképről, amelyet mindenki más is lát az openstreetmap.org oldalon.",
-            "tag_suggests_area": "A(z) {tag} címke alapján a vonal terület kéne legyen, de ez nem terület",
-            "deprecated_tags": "Elavult címkék: {tags}"
-        },
         "zoom": {
             "in": "Nagyítás",
             "out": "Kicsinyítés"
@@ -797,6 +778,34 @@
         "cannot_zoom": "Nem lehet jobban távolítani ebben a módban.",
         "full_screen": "Váltás teljes képernyőre",
         "QA": {
+            "improveOSM": {
+                "geometry_types": {
+                    "path": "gyalogutak",
+                    "parking": "parkolók",
+                    "road": "utak",
+                    "both": "utak és parkolók"
+                },
+                "directions": {
+                    "east": "kelet",
+                    "north": "észak",
+                    "northeast": "északkelet",
+                    "northwest": "északnyugat",
+                    "south": "dél",
+                    "southeast": "délkelet",
+                    "southwest": "délnyugat",
+                    "west": "nyugat"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Hiányzó egyirányú jelölés",
+                        "description": "{highway} ezen szakaszán rögzített {num_trips} utazás {percentage} százaléka innen: {from_node} ide: {to_node} tart. Valószínűleg hiányzik az „egyirányú” címke."
+                    },
+                    "mr": {
+                        "title": "Hiányzó geometria",
+                        "description": "Az ezen a területen rögzített {num_trips} utazás alapján itt valószínűleg feltérképezetlen {geometry_type} vannak."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "KeepRight hiba",
                 "detail_title": "Hiba",
@@ -1684,9 +1693,6 @@
                 },
                 "category-building": {
                     "name": "Épületek"
-                },
-                "category-golf": {
-                    "name": "Golfpályaelemek"
                 },
                 "category-landuse": {
                     "name": "Területhasználati módok"
@@ -2687,9 +2693,6 @@
                         "underground": "Földalatti"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Utasinformációs kijelző"
-                },
                 "payment_multi": {
                     "label": "Fizetési típusok"
                 },
@@ -3329,8 +3332,7 @@
                     "label": "Típus"
                 },
                 "website": {
-                    "label": "Weboldal",
-                    "placeholder": "http://example.com/"
+                    "label": "Weboldal"
                 },
                 "wetland": {
                     "label": "Típus"
@@ -4333,9 +4335,6 @@
                     "name": "Sorház",
                     "terms": "házsor"
                 },
-                "building/train_station": {
-                    "name": "Vasútállomás-épület"
-                },
                 "building/transportation": {
                     "name": "Közlekedési épület"
                 },
@@ -4627,14 +4626,6 @@
                     "name": "Golflyuk",
                     "terms": "Golflyuk"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Keresztirányú vízakadály",
-                    "terms": "keresztirányú vízi akadály, oldalirányú vízi akadály, oldalirányú vízakadály"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Keresztirányú vízakadály",
-                    "terms": "keresztirányú vízi akadály, oldalirányú vízi akadály, oldalirányú vízakadály"
-                },
                 "golf/rough": {
                     "name": "Rough - vágatlan fűves rész",
                     "terms": "Rough -  vágatlan fűves rész"
@@ -4642,14 +4633,6 @@
                 "golf/tee": {
                     "name": "Tee box - Elütőhely",
                     "terms": "Tee box - Elütőhely"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Vízakadály",
-                    "terms": "vízi akadály"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Vízakadály",
-                    "terms": "vízi akadály"
                 },
                 "healthcare": {
                     "name": "Egészségügyi létesítmény",
@@ -4989,8 +4972,7 @@
                     "terms": "Elágazás, útkereszteződés, csomópont"
                 },
                 "landuse": {
-                    "name": "Területhasználat",
-                    "terms": "föld,terület,használat,funkció"
+                    "name": "Területhasználat"
                 },
                 "landuse/allotments": {
                     "name": "Közösségi kert",
@@ -5154,8 +5136,7 @@
                     "terms": "szőlőskert, szőlőültetvény"
                 },
                 "leisure": {
-                    "name": "Szabadidő",
-                    "terms": "szabadidő"
+                    "name": "Szabadidő"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Felnőtt játékközpont",
@@ -5375,8 +5356,7 @@
                     "terms": "Vonal"
                 },
                 "man_made": {
-                    "name": "Építmények",
-                    "terms": "Ember alkotta"
+                    "name": "Építmények"
                 },
                 "man_made/adit": {
                     "name": "Bányatárna (vízszintes)",
@@ -5523,8 +5503,7 @@
                     "terms": "akna, szekrény, távközlés"
                 },
                 "natural": {
-                    "name": "Természet",
-                    "terms": "Természet"
+                    "name": "Természet"
                 },
                 "natural/bare_rock": {
                     "name": "Csupasz szikla",
@@ -5905,9 +5884,6 @@
                 "power/transformer": {
                     "name": "Transzformátor",
                     "terms": "transzformátor, trafó, áramátalakító"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Buszmegálló peron"
                 },
                 "public_transport/platform_ferry": {
                     "name": "Kompmegállo peron"
@@ -6577,8 +6553,7 @@
                     "terms": "borászat, italbolt, borkereskedés"
                 },
                 "tourism": {
-                    "name": "Turizmus",
-                    "terms": "Idegenforgalom"
+                    "name": "Turizmus"
                 },
                 "tourism/alpine_hut": {
                     "name": "Menedékház",

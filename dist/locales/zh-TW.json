@@ -193,7 +193,8 @@
                 "restriction": "這些圖徽無法合併，因為它會危害到「{relation}」關係。",
                 "relation": "這些圖徽無法合併，因為它們有衝突的關係。",
                 "incomplete_relation": "這些物件不能合併，因為其中最少有一件未有完全下載。",
-                "conflicting_tags": "這些特徵並不能合儀，因為它們有彼此衝突的標籤。"
+                "conflicting_tags": "這些特徵並不能合儀，因為它們有彼此衝突的標籤。",
+                "paths_intersect": "這些圖徽無法合併，因為產生的路徑會自相交叉。"
             },
             "move": {
                 "title": "移動",
@@ -505,8 +506,6 @@
                 "tooltip_data": "置中和縮放地圖到這資料。",
                 "tooltip_issue": "置中和縮放地圖到這問題。"
             },
-            "no_documentation_combination": "這個標籤組合沒有可用的說明",
-            "no_documentation_key": "這個鍵值沒有可用的說明",
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "view_on_keepRight": "在 keepright.at 檢視",
@@ -519,10 +518,14 @@
             "role": "角色",
             "choose": "選擇物件種類",
             "results": "{search} 的 {n} 個結果",
-            "reference": "在 OpenStreetMap Wiki 中檢閱",
-            "edit_reference": "編輯或翻譯描述",
+            "no_documentation_key": "沒有可用的文件。",
+            "edit_reference": "編輯/翻譯",
             "wiki_reference": "觀看說明文件",
             "wiki_en_reference": "觀看英文的說明文件",
+            "hidden_preset": {
+                "manual": "{features} 已隱藏。在地圖資料面板中啟用它們。",
+                "zoom": "{features} 已隱藏。拉近以啟用它們。"
+            },
             "back_tooltip": "修改物件",
             "remove": "移除",
             "search": "搜尋",
@@ -597,6 +600,10 @@
                     "tooltip": "自動從 keepright.at 偵測地圖問題",
                     "title": "KeepRight 問題"
                 },
+                "improveOSM": {
+                    "tooltip": "由 improveosm.org 自動偵測到遺失資料",
+                    "title": "ImproveOSM 問題"
+                },
                 "custom": {
                     "tooltip": "拖曳資料檔案到頁面上，或點選按鈕以設定",
                     "title": "自訂地圖資料",
@@ -650,11 +657,11 @@
                 "tooltip": "輸電線、發電廠、變電所等。"
             },
             "past_future": {
-                "description": "過去/未來",
+                "description": "過去／未來圖徽",
                 "tooltip": "預定地，施工中，廢棄，拆除等。"
             },
             "others": {
-                "description": "其他",
+                "description": "其他圖徽",
                 "tooltip": "其他東西"
             }
         },
@@ -774,25 +781,6 @@
             "on_wiki": "於wiki.osm.org上的 {tag}",
             "used_with": "可與 {type} 使用"
         },
-        "validations": {
-            "disconnected_highway": "未連結道路",
-            "disconnected_highway_tooltip": "道路應該要被連接到其他道路或是建築物的入口。",
-            "generic_name": "可能的一般名稱",
-            "generic_name_tooltip": "這個圖徵看來有一般名稱 \"{name}\"。只有在圖徵有正式名稱之下才用名稱欄位。",
-            "old_multipolygon": "在外部路徑上的多邊形標籤",
-            "old_multipolygon_tooltip": "這種多邊形樣式已被棄用。請將標籤加於母多邊形而非外部路徑。",
-            "untagged_point": "未有標籤的點",
-            "untagged_point_tooltip": "選擇適當的物件種類描述該點是什麼。",
-            "untagged_line": "未有標籤的線段",
-            "untagged_line_tooltip": "選擇適當的物件種類描述這條線是什麼。",
-            "untagged_area": "未有標籤的區域",
-            "untagged_area_tooltip": "選擇適當的物件種類描述這區域是什麼。",
-            "untagged_relation": "未標記的關係",
-            "untagged_relation_tooltip": "選取一個可以適當地描述這個關係的圖徽類型。",
-            "many_deletions": "您正要刪除 {n} 個圖徽：{p} 個節點、{l} 條線段、{a} 個區域、{r} 個關係。您確定您要這麼做嗎？這將會把它們從每個人都看得到的 openstreetmap.org 的地圖上刪除。",
-            "tag_suggests_area": "{tag} 標籤所建議的線段應為區域，但這個不是一區域",
-            "deprecated_tags": "已棄用的標籤︰{tags}"
-        },
         "zoom": {
             "in": "拉近",
             "out": "拉遠"
@@ -800,6 +788,40 @@
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
         "QA": {
+            "improveOSM": {
+                "title": " ImproveOSM 偵測",
+                "geometry_types": {
+                    "path": "路徑",
+                    "parking": "停車場",
+                    "road": "道路",
+                    "both": "道路和停車場"
+                },
+                "directions": {
+                    "east": "東",
+                    "north": "北",
+                    "northeast": "東北",
+                    "northwest": "西北",
+                    "south": "南",
+                    "southeast": "東南",
+                    "southwest": "西南",
+                    "west": "西"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "遺失的單行道",
+                        "description": "沿著選取的 {highway}，{num_trips} 中有 {percentage}% 記錄從 {from_node} 到 {to_node} 的旅程，也許遺失 \"oneway\" 標籤。"
+                    },
+                    "mr": {
+                        "title": "遺失幾何性質",
+                        "description": "{num_trips} 記錄的旅程資料，顯示也許這裡有未繪製的  {geometry_type}。 ",
+                        "description_alt": "從第三方而來的資料表示這裡可能有未繪製的 {geometry_type}。"
+                    },
+                    "tr": {
+                        "title": "遺失的轉彎限制",
+                        "description": "{num_trips} 中 {num_passed} 記錄  (travelling {travel_direction}) 的旅程中，有在 {junction} 從  {from_way} 到 {to_way}，也許有遺失的 \"{turn_restriction}\" 的限制。"
+                    }
+                }
+            },
             "keepRight": {
                 "title": "KeepRIght 錯誤",
                 "detail_title": "錯誤",
@@ -1347,7 +1369,7 @@
                 "title": "品質保証",
                 "intro": "*品質保証* (Q/A, Quality Assurance) 工具能找出開放街圖上，不適當地標籤，為連結的道路或是其他問題，圖客能藉此修復。要檢視現有的 Q/A 問題，,回擊 {data} **地圖資料**儀表板開啓特定 Q/A 圖層。",
                 "tools_h": "工具",
-                "tools": "目前支援以下的工具：[KeepRight](https://www.keepright.at/)，之後  iD 將支援 [Osmose](https://osmose.openstreetmap.fr/)，[ImproveOSM](https://improveosm.org/en/)，未來將支援更多 Q/A 工具。",
+                "tools": "目前支援以下的工具：[KeepRight](https://www.keepright.at/) 和[ImproveOSM](https://improveosm.org/en/)，之後  iD 將支援 [Osmose](https://osmose.openstreetmap.fr/)，未來將支援更多 Q/A 工具。",
                 "issues_h": "處理問題",
                 "issues": "處理 Q/A 問題類似處理註解。點選已存在的 Q/A 問題會埴滿整個側邊欄，像是問題種類以及相關的圖徵。每個工具都有其能耐，但是一般來說你可以回應和/或關閉問題。"
             },
@@ -1797,8 +1819,11 @@
                 "category-building": {
                     "name": "建築物圖徵"
                 },
-                "category-golf": {
-                    "name": "高爾夫圖徵"
+                "category-golf-area": {
+                    "name": "高爾夫球圖徵"
+                },
+                "category-golf-line": {
+                    "name": "高爾夫球圖徵"
                 },
                 "category-landuse": {
                     "name": "土地利用圖徵"
@@ -2584,6 +2609,12 @@
                 "junction/ref_oneway": {
                     "label": "路口號碼"
                 },
+                "junction_line": {
+                    "label": "連接點",
+                    "options": {
+                        "roundabout": "圓環"
+                    }
+                },
                 "kerb": {
                     "label": "路邊斜坡"
                 },
@@ -2852,9 +2883,6 @@
                         "underground": "地下"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "乘客資訊顯示器"
-                },
                 "payment_multi": {
                     "label": "付款種類"
                 },
@@ -3101,6 +3129,9 @@
                         "mountain_hiking": "T2：登山旅行"
                     },
                     "placeholder": "登山旅行、越嶺縱走..."
+                },
+                "salt": {
+                    "label": "鹽份"
                 },
                 "sanitary_dump_station": {
                     "label": "廁所處理方式"
@@ -3394,6 +3425,9 @@
                     },
                     "placeholder": "可以, 不行, 只能外帶 ..."
                 },
+                "tidal": {
+                    "label": "潮汐"
+                },
                 "to": {
                     "label": "到"
                 },
@@ -3566,7 +3600,7 @@
                 },
                 "website": {
                     "label": "網站",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "種類"
@@ -3823,6 +3857,10 @@
                     "name": "時鐘",
                     "terms": "時鐘,鐘塔"
                 },
+                "amenity/clock/sundial": {
+                    "name": "日晷",
+                    "terms": "日晷"
+                },
                 "amenity/college": {
                     "name": "學院範圍",
                     "terms": "學院,學院用地,技術學院,獨立學院,學校,College Grounds,College"
@@ -3893,6 +3931,10 @@
                 "amenity/fast_food/kebab": {
                     "name": "炸肉串速食店",
                     "terms": "炸肉串店"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "墨西哥速食餐",
+                    "terms": "墨西哥快餐"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "批薩快餐店",
@@ -4015,6 +4057,10 @@
                 "amenity/pharmacy": {
                     "name": "藥房櫃臺",
                     "terms": "藥房櫃臺"
+                },
+                "amenity/photo_booth": {
+                    "name": "照相站",
+                    "terms": "照相站"
                 },
                 "amenity/place_of_worship": {
                     "name": "宗教祟拜場所",
@@ -5036,6 +5082,18 @@
                     "name": "沙坑",
                     "terms": "沙坑"
                 },
+                "golf/cartpath": {
+                    "name": "高爾夫球車道",
+                    "terms": "高爾夫球車道"
+                },
+                "golf/cartpath_service": {
+                    "name": "高爾夫球車道 / 服務道路",
+                    "terms": "高爾夫球車道 / 服務道路"
+                },
+                "golf/driving_range": {
+                    "name": "高爾夫球練習場",
+                    "terms": "高爾夫球練習場,練習場"
+                },
                 "golf/fairway": {
                     "name": "球道",
                     "terms": "球道"
@@ -5048,13 +5106,13 @@
                     "name": "球洞",
                     "terms": "球洞"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "側面水障礙區",
-                    "terms": "側面水障礙區"
+                "golf/lateral_water_hazard": {
+                    "name": "橫向水障礙",
+                    "terms": "橫向水障礙"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "側面水障礙區",
-                    "terms": "側面水障礙區"
+                "golf/path": {
+                    "name": "高爾夫步道",
+                    "terms": "高爾夫步道"
                 },
                 "golf/rough": {
                     "name": "深草區",
@@ -5064,13 +5122,9 @@
                     "name": "開球區",
                     "terms": "開球區"
                 },
-                "golf/water_hazard_area": {
-                    "name": "水障礙區",
-                    "terms": "水障礙區"
-                },
-                "golf/water_hazard_line": {
-                    "name": "水障礙區",
-                    "terms": "水障礙區"
+                "golf/water_hazard": {
+                    "name": "水障礙",
+                    "terms": "水障礙"
                 },
                 "healthcare": {
                     "name": "醫療設施",
@@ -5438,8 +5492,7 @@
                     "terms": "槽化車道,道路交叉,十字路口,丁字路,路"
                 },
                 "landuse": {
-                    "name": "土地利用",
-                    "terms": "土地利用,國土利用,使用分區"
+                    "name": "土地利用"
                 },
                 "landuse/allotments": {
                     "name": "社區農園",
@@ -5622,8 +5675,7 @@
                     "terms": "酒莊"
                 },
                 "leisure": {
-                    "name": "休閒設施",
-                    "terms": "休閒設施,休閒娛樂"
+                    "name": "休閒設施"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "成人遊戲中心",
@@ -5777,6 +5829,10 @@
                     "name": "野餐桌",
                     "terms": "野餐桌"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "棋桌",
+                    "terms": "象棋桌,西洋棋桌"
+                },
                 "leisure/pitch": {
                     "name": "運動場地",
                     "terms": "運動場"
@@ -5877,6 +5933,10 @@
                     "name": "體育中心／設施",
                     "terms": "體育中心,體育設施"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "攀岩場",
+                    "terms": "攀岩場"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "游泳池附屬設施",
                     "terms": "游泳池設施,游池附屬設施,游池設施"
@@ -5910,8 +5970,7 @@
                     "terms": "線"
                 },
                 "man_made": {
-                    "name": "人工設施",
-                    "terms": "人造構築,人造建築,人造設施"
+                    "name": "人工設施"
                 },
                 "man_made/adit": {
                     "name": "坑口",
@@ -6037,9 +6096,17 @@
                     "name": "塔",
                     "terms": "塔"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "鐘樓",
+                    "terms": "鐘樓"
+                },
                 "man_made/tower/communication": {
                     "name": "通訊塔",
                     "terms": "無線通訊塔"
+                },
+                "man_made/tower/minaret": {
+                    "name": "尖塔",
+                    "terms": "尖塔"
                 },
                 "man_made/tower/observation": {
                     "name": "瞭望塔",
@@ -6086,8 +6153,7 @@
                     "terms": "電信公司人孔,電信人孔"
                 },
                 "natural": {
-                    "name": "自然景觀",
-                    "terms": "自然物件"
+                    "name": "自然景觀"
                 },
                 "natural/bare_rock": {
                     "name": "裸露的岩石",
@@ -6596,46 +6662,6 @@
                 "power/transformer": {
                     "name": "變壓器",
                     "terms": "變壓器"
-                },
-                "public_transport/linear_platform": {
-                    "name": "轉運站 / 月台",
-                    "terms": "站牌,客運站牌,客運月台"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "纜車站/月台",
-                    "terms": "纜車站,纜車月台"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "公車站/公車月台",
-                    "terms": "公車月台"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "船運停船處 / 船運月台",
-                    "terms": "渡輪停船處,船運月台"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "輕軌停車處/ 月台",
-                    "terms": "輕軌停車處,輕軌月台"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "單軌電車停車處 / 月台",
-                    "terms": "單軌電車停車處,"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "捷運停車處 / 月台",
-                    "terms": "地鐵停車處,地鐵月台"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "火車停車處 / 月台",
-                    "terms": "火車停車處,火車月台"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "街車停車處 / 月台",
-                    "terms": "街車停車處,街車月台"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "無軌電車停車處 / 月台",
-                    "terms": "無軌電車停車處,無軌電車月台"
                 },
                 "public_transport/platform": {
                     "name": "公車專用道停車處 / 月台",
@@ -7449,8 +7475,7 @@
                     "terms": "酒店"
                 },
                 "tourism": {
-                    "name": "旅遊設施",
-                    "terms": "旅遊設施"
+                    "name": "旅遊設施"
                 },
                 "tourism/alpine_hut": {
                     "name": "高山小屋",

@@ -462,8 +462,6 @@
             "locating": "定位中，請稍候..."
         },
         "inspector": {
-            "no_documentation_combination": "沒有這個標籤組合的相關文件",
-            "no_documentation_key": "沒有這個鍵值的相關文件",
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "all_fields": "所有資料",
@@ -474,7 +472,6 @@
             "role": "作用",
             "choose": "選擇特徵種類",
             "results": "{search}的{n}個結果",
-            "reference": "在 OpenStreetMap Wiki 中檢閱",
             "back_tooltip": "變更特徵",
             "remove": "移除",
             "search": "搜尋",
@@ -583,11 +580,9 @@
                 "tooltip": "電線、發電廠、變電站等等"
             },
             "past_future": {
-                "description": "過去／將來",
                 "tooltip": "已建議、建築中、已廢棄、已拆毀等等"
             },
             "others": {
-                "description": "其他",
                 "tooltip": "其他東西"
             }
         },
@@ -670,22 +665,6 @@
             "description": "描述",
             "on_wiki": "在wiki.osm.org上的 {tag}",
             "used_with": "與{type}一起用"
-        },
-        "validations": {
-            "disconnected_highway": "已斷開的高速公路。",
-            "disconnected_highway_tooltip": "道路必須連接至其他道路或建築物入口。",
-            "old_multipolygon": "外部路徑上的多邊形標籤",
-            "old_multipolygon_tooltip": "這種多邊形格式已停用。請將標籤分配予母多邊形，而非外部路徑。",
-            "untagged_point": "未有標籤的點",
-            "untagged_point_tooltip": "選擇一個特徵種類來形容這個點是甚麼。",
-            "untagged_line": "未有標籤的綫",
-            "untagged_line_tooltip": "選擇一個特徵種類來形容這條綫是甚麼。",
-            "untagged_area": "未有標籤的範圍",
-            "untagged_area_tooltip": "選擇一個特徵種類來形容這個範圍是甚麼。",
-            "untagged_relation": "未有標籤的關係",
-            "untagged_relation_tooltip": "選擇一個特徵種類來形容這個關係是甚麼。",
-            "tag_suggests_area": "{tag}標籤建議綫應為範圍，但這不是一個範圍。",
-            "deprecated_tags": "已棄用的標籤: {tags}"
         },
         "zoom": {
             "in": "放大",
@@ -1121,9 +1100,6 @@
                 },
                 "category-building": {
                     "name": "建築物特徵"
-                },
-                "category-golf": {
-                    "name": "高爾夫特徵"
                 },
                 "category-landuse": {
                     "name": "土地利用特徵"
@@ -2075,9 +2051,6 @@
                         "underground": "地下"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "乘客資訊顯示"
-                },
                 "payment_multi": {
                     "label": "付款種類"
                 },
@@ -2739,8 +2712,7 @@
                     "label": "種類"
                 },
                 "website": {
-                    "label": "網站",
-                    "placeholder": "http://example.com/"
+                    "label": "網站"
                 },
                 "wetland": {
                     "label": "種類"
@@ -3753,9 +3725,6 @@
                     "name": "排屋",
                     "terms": "行列式房屋,連棟式住宅"
                 },
-                "building/train_station": {
-                    "name": "火車站"
-                },
                 "building/university": {
                     "name": "大學建築物",
                     "terms": "大學校舍"
@@ -4037,14 +4006,6 @@
                     "name": "高爾夫球洞",
                     "terms": "Golf Hole,高爾夫球球洞"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "側面水障礙",
-                    "terms": "Lateral Water Hazard, 側面水障礙"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "側面水障礙",
-                    "terms": "Lateral Water Hazard, 側面水障礙"
-                },
                 "golf/rough": {
                     "name": "深草區",
                     "terms": "Rough,深草區"
@@ -4052,14 +4013,6 @@
                 "golf/tee": {
                     "name": "發球區",
                     "terms": "Tee Box,發球區,開球區"
-                },
-                "golf/water_hazard_area": {
-                    "name": "水障礙",
-                    "terms": "Water Hazard,水障礙"
-                },
-                "golf/water_hazard_line": {
-                    "name": "水障礙",
-                    "terms": "Water Hazard, 水障礙"
                 },
                 "healthcare": {
                     "name": "醫療設施",
@@ -4343,8 +4296,7 @@
                     "terms": "十字路口,交界處,交界"
                 },
                 "landuse": {
-                    "name": "土地利用",
-                    "terms": "土地利用"
+                    "name": "土地利用"
                 },
                 "landuse/allotments": {
                     "name": "社區園圃",
@@ -4509,8 +4461,7 @@
                     "terms": "Vineyard,葡萄園,酒莊"
                 },
                 "leisure": {
-                    "name": "消閒",
-                    "terms": "Leisure,休閑場所,休閒設施,消閒"
+                    "name": "消閒"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "成人遊戲中心",
@@ -4701,8 +4652,7 @@
                     "terms": "Line,綫,線"
                 },
                 "man_made": {
-                    "name": "人造",
-                    "terms": "Man Made,人造,人造構築,人造物"
+                    "name": "人造"
                 },
                 "man_made/adit": {
                     "name": "礦坑口",
@@ -4824,8 +4774,7 @@
                     "terms": "Telecom Manhole,電訊人孔,電信沙井"
                 },
                 "natural": {
-                    "name": "自然景觀",
-                    "terms": "Natural,天然,自然,自然物件"
+                    "name": "自然景觀"
                 },
                 "natural/bare_rock": {
                     "name": "裸岩",
@@ -5691,8 +5640,7 @@
                     "terms": "紅酒店,白酒店"
                 },
                 "tourism": {
-                    "name": "旅遊設施",
-                    "terms": "Tourism,旅行,旅遊"
+                    "name": "旅遊設施"
                 },
                 "tourism/alpine_hut": {
                     "name": "高山小屋",

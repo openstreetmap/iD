@@ -388,8 +388,6 @@
                 "tooltip_data": "Tsentreeri ja suumi kaarti, et keskenduda sellele andmele.",
                 "tooltip_issue": "Tsentreeri ja suumi kaarti, et keskenduda sellele veale."
             },
-            "no_documentation_combination": "Selle sildi kohta puudub dokumentatsioon",
-            "no_documentation_key": "Selle objektiliigi kohta puudub informatsioon",
             "show_more": "Näita rohkem",
             "view_on_osm": "Vaata asukohas openstreetmap.org",
             "view_on_keepRight": "Vaata lehel keepright.at",
@@ -401,7 +399,6 @@
             "role": "Roll",
             "choose": "Vali objekti liik",
             "results": "{n} tulemust otsingule {search}",
-            "reference": "Vaata OpenStreetMapi vikis",
             "back_tooltip": "Muuda objekti",
             "remove": "Eemalda",
             "search": "Otsi",
@@ -517,11 +514,9 @@
                 "tooltip": "Elektriliinid, eletrijaamad, alajaamad.."
             },
             "past_future": {
-                "description": "Minevik/Tulevik",
                 "tooltip": "Planeeritud, ehitamisel, mahajäetud, lammutatud.."
             },
             "others": {
-                "description": "Muu",
                 "tooltip": "Kõik ülejäänud"
             }
         },
@@ -600,16 +595,6 @@
             "on_wiki": "{tag} wiki.osm.org-is",
             "used_with": "kasutatakse koos liigiga {type}"
         },
-        "validations": {
-            "disconnected_highway": "Lahtiühendatud tee",
-            "disconnected_highway_tooltip": "Teed peaksid olema ühendatud teiste teede või hoonete sissepääsudega.",
-            "untagged_point": "Sildistamata punkt",
-            "untagged_line": "Sildistamata joon",
-            "untagged_area": "Sildistamata ala",
-            "untagged_relation": "Sildistamata relatsioon",
-            "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
-            "deprecated_tags": "Iganenud sildid: {tags}"
-        },
         "zoom": {
             "in": "Suurenda",
             "out": "Vähenda"
@@ -680,9 +665,6 @@
             },
             "notes": {
                 "title": "Märked"
-            },
-            "qa": {
-                "tools": "Hetkel on toetatud järgmised tööriistad: [KeepRight](https://www.keepright.at/). Lähitulevikus on iD redaktorile oodata [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/) ja teiste kvaliteedi tagamise tööriistade tuge."
             }
         },
         "intro": {
@@ -733,9 +715,6 @@
                 },
                 "category-building": {
                     "name": "Hooned"
-                },
-                "category-golf": {
-                    "name": "Golf"
                 },
                 "category-landuse": {
                     "name": "Maakasutus"
@@ -909,6 +888,11 @@
                 "contact/webcam": {
                     "label": "Veebikaamera URL",
                     "placeholder": "http://näidis.ee"
+                },
+                "conveying": {
+                    "options": {
+                        "reversible": "Muutsuunaga"
+                    }
                 },
                 "country": {
                     "label": "Riik"
@@ -1190,7 +1174,7 @@
                     "options": {
                         "alternating": "Vahelduv",
                         "no": "Ei",
-                        "reversible": "Ümberpööratav",
+                        "reversible": "Muutsuunaga",
                         "undefined": "Eeldatavasti mitte",
                         "yes": "Jah"
                     }
@@ -1200,7 +1184,7 @@
                     "options": {
                         "alternating": "Vahelduv",
                         "no": "Ei",
-                        "reversible": "Ümberpööratav",
+                        "reversible": "Muutsuunaga",
                         "undefined": "Eeldatavasti Jah",
                         "yes": "Jah"
                     }
@@ -1428,8 +1412,7 @@
                     "label": "Tüüp"
                 },
                 "website": {
-                    "label": "Veebileht",
-                    "placeholder": "http://näidis24.ee/"
+                    "label": "Veebileht"
                 },
                 "wetland": {
                     "label": "Tüüp"
@@ -2016,9 +1999,6 @@
                 },
                 "building/terrace": {
                     "name": "Terrassmaja"
-                },
-                "building/train_station": {
-                    "name": "Raudteejaam"
                 },
                 "building/transportation": {
                     "name": "Transpordihoone"
@@ -2676,8 +2656,7 @@
                     "name": "Joon"
                 },
                 "man_made": {
-                    "name": "Inimtehtud",
-                    "terms": "Tehislik, Tehis"
+                    "name": "Inimtehtud"
                 },
                 "man_made/adit": {
                     "name": "Stoll",
@@ -2761,8 +2740,7 @@
                     "terms": "Vabrik"
                 },
                 "natural": {
-                    "name": "Looduslik",
-                    "terms": "loomulik, naturaalne"
+                    "name": "Looduslik"
                 },
                 "natural/bare_rock": {
                     "name": "Paljand",

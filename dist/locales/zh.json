@@ -178,8 +178,6 @@
             "title": "显示我的位置"
         },
         "inspector": {
-            "no_documentation_combination": "没有关于此标签组合的文档",
-            "no_documentation_key": "没有关于此键的文档",
             "show_more": "显示更多",
             "view_on_osm": "在openstreetmap.org上查看",
             "all_tags": "所有标签",
@@ -188,7 +186,6 @@
             "role": "角色",
             "choose": "选择对象的类型",
             "results": "{search}共有{n}个结果",
-            "reference": "在OpenStreetMap Wiki上查看",
             "back_tooltip": "修改要素",
             "remove": "删除",
             "search": "搜索",
@@ -227,13 +224,6 @@
             "description": "描述",
             "on_wiki": "在wiki.osm.org查看{tag}",
             "used_with": "使用{type}"
-        },
-        "validations": {
-            "untagged_point": "未标记的点",
-            "untagged_line": "未标记的线",
-            "untagged_area": "未标记的面",
-            "tag_suggests_area": "{tag}这个标签建议使用在面上，但是他不是一个面",
-            "deprecated_tags": "已过时标签：{tags}"
         },
         "cannot_zoom": "在当前模式下无法进一步缩小。",
         "help": {
@@ -519,8 +509,7 @@
                     "label": "类型"
                 },
                 "website": {
-                    "label": "网站",
-                    "placeholder": "http://example.com/"
+                    "label": "网站"
                 },
                 "wetland": {
                     "label": "类型"

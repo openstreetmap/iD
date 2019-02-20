@@ -404,8 +404,6 @@
             "locating": "Одређивање положаја, молимо сачекајте..."
         },
         "inspector": {
-            "no_documentation_combination": "Не постоји доступна документација за ову комбинацију ознака",
-            "no_documentation_key": "Не постоји доступна документација за овај кључ",
             "show_more": "Прикажи још",
             "view_on_osm": "Прикажи на openstreetmap.org",
             "all_fields": "Сва поља",
@@ -416,7 +414,6 @@
             "role": "Улога",
             "choose": "Изаберите тип обележја",
             "results": "{n} резултата за {search}",
-            "reference": "Прикажи на Опенстреетмап викију",
             "back_tooltip": "Измените објекат",
             "remove": "Уклони",
             "search": "Претрага",
@@ -525,11 +522,9 @@
                 "tooltip": "Далеководи, електране, трафо-станице итд"
             },
             "past_future": {
-                "description": "Прошло/будуће",
                 "tooltip": "Предложено, изграђено, напуштено, срушено итд."
             },
             "others": {
-                "description": "Остало",
                 "tooltip": "Све остало"
             }
         },
@@ -614,20 +609,6 @@
             "description": "Опис",
             "on_wiki": "{tag} на wiki.osm.org",
             "used_with": "користи се са {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Раздвојен ауто-пут",
-            "disconnected_highway_tooltip": "Путеви би требало да буду повезани са другим путевима или улазима у зграду.",
-            "untagged_point": "Неозначени чвор",
-            "untagged_point_tooltip": "Изаберите врсту обележја која описује шта овај чвор представља.",
-            "untagged_line": "Неозначена путања",
-            "untagged_line_tooltip": "Изаберите врсту обележја која описује шта ова линија представља.",
-            "untagged_area": "Неозначена област",
-            "untagged_area_tooltip": "Изаберите врсту обележја која описује шта ова област представља.",
-            "untagged_relation": "Неозначени однос",
-            "untagged_relation_tooltip": "Изаберите врсту обележја која описује шта овај однос представља.",
-            "tag_suggests_area": "Ознака {ознака} указује да би линија требало да буде област, али није област",
-            "deprecated_tags": "Застареле ознаке: {tags}"
         },
         "cannot_zoom": "Не можете даље умањивати у тренутном режиму.",
         "full_screen": "Укључи / искључи приказ на целом екрану",
@@ -902,9 +883,6 @@
                 },
                 "category-building": {
                     "name": "Грађевине"
-                },
-                "category-golf": {
-                    "name": "Голф терени"
                 },
                 "category-landuse": {
                     "name": "Намене земљишта"
@@ -1898,8 +1876,7 @@
                     "label": "Врста"
                 },
                 "website": {
-                    "label": "Сајт",
-                    "placeholder": "http://primer.com/"
+                    "label": "Сајт"
                 },
                 "wetland": {
                     "label": "Врста"
@@ -2447,9 +2424,6 @@
                 "building/terrace": {
                     "name": "Куће у низу"
                 },
-                "building/train_station": {
-                    "name": "Железничка станица"
-                },
                 "building/university": {
                     "name": "Универзитетска зграда"
                 },
@@ -2796,8 +2770,7 @@
                     "name": "Раскршће"
                 },
                 "landuse": {
-                    "name": "Намена земљишта",
-                    "terms": "намена земљишта,коришћење земљишта,употреба земљишта"
+                    "name": "Намена земљишта"
                 },
                 "landuse/basin": {
                     "name": "Слив"

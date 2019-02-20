@@ -423,8 +423,6 @@
             "locating": "Andraso fa mbola mamantatra ny toerana..."
         },
         "inspector": {
-            "no_documentation_combination": "Tsy misy tahirin-kevitra fantatra momba an'ity fitambarana tag  ity",
-            "no_documentation_key": "Tsy misy tahirin-kevitra fantatra momba ity clé ity",
             "show_more": "Hampiseho Misimisy Kokoa",
             "view_on_osm": "Hijery ao amin'ny openstreetmap.org",
             "all_fields": "Ny saha rehetra",
@@ -434,7 +432,6 @@
             "role": "Anjara asa",
             "choose": "Safidio ny karazan'ny singa",
             "results": "Vokatra {n} hoan'ny {search}",
-            "reference": "Hijery ao amin'ny OpenStreetMap Wiki",
             "back_tooltip": "Hanova ny singa",
             "remove": "Hanala",
             "search": "Hikaroka",
@@ -546,11 +543,9 @@
                 "tooltip": "Fitarihana Herinaratra, Toeram-pamokarana Herinaratra, Tobin-herinaratra, sns."
             },
             "past_future": {
-                "description": "Lasa/Ho avy",
                 "tooltip": "Andalam-pangatahana, Fanamboarana, Tsy Miasa Intsony, Rava, sns."
             },
             "others": {
-                "description": "Hafa",
                 "tooltip": "Izay Zavatra Hafa Rehetra"
             }
         },
@@ -640,20 +635,6 @@
             "description": "Famariparitana",
             "on_wiki": "{tag} ao amin'ny wiki.osm.org",
             "used_with": "ampiasaina miaraka amin'ny {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Nanasaraka ny làlana",
-            "disconnected_highway_tooltip": "Ny làlana dia tokony hifandray amin'ny làlana hafa na amin'ny fidirana amina trano.",
-            "untagged_point": "Teboka tsy misy tag",
-            "untagged_point_tooltip": "Safidio izay karana singa mahalaza hoe inona ito teboka ito.",
-            "untagged_line": "Tsipika tsy misy tag",
-            "untagged_line_tooltip": "Safidio izay karazana singa mahalaza hoe inona ito tsipika ito.",
-            "untagged_area": "Faritra tsy misy tag",
-            "untagged_area_tooltip": "Safidio izay karana singa mahalaza hoe inona ito faritra ito.",
-            "untagged_relation": "Relation tsy misy tag",
-            "untagged_relation_tooltip": "Safidio izay karana singa mahalaza hoe inona ito relation ito.",
-            "many_deletions": "Eo am-pamafana singa {n} ianao: teboka {p}, tsipika {l}, faritra {a}, relations {r}. Azonao antoka ve izay ataonao? Ity dia hamafa azy ireo tao amin'ny sarintany izay hitan'ny olon-drehetra ao amin'ny openstreetmap.org.",
-            "deprecated_tags": "Tags tsy fampiasa intsony: {tags}"
         },
         "zoom": {
             "in": "Hanakaiky",

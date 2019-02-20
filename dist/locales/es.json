@@ -193,7 +193,8 @@
                 "restriction": "Estos elementos no pueden combinarse porque dañaría una relación \"{relación}\".",
                 "relation": "Estos elementos no pueden combinarse porque tienen roles de relación con conflicto.",
                 "incomplete_relation": "Estos elementos no se pueden combinar porque al menos uno no ha sido descargado por completo.",
-                "conflicting_tags": "Estos elementos no se pueden combinar porque algunas de sus etiquetas tienen conflictos en sus valores."
+                "conflicting_tags": "Estos elementos no se pueden combinar porque algunas de sus etiquetas tienen conflictos en sus valores.",
+                "paths_intersect": "Estos elementos no se pueden combinar porque la ruta resultante se intersecaría."
             },
             "move": {
                 "title": "Mover",
@@ -413,6 +414,8 @@
             "modified": "Modificado",
             "deleted": "Eliminado",
             "created": "Creado",
+            "outstanding_errors_message": "Resuelva todos los errores primero. Quedan {count}.",
+            "comment_needed_message": "Agregue un comentario del conjunto de cambios primero.",
             "about_changeset_comments": "Acerca de los comentarios del conjuntos de cambios",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/ES:Good_changeset_comments",
             "google_warning": "Usted mencionó Google en este comentario: recuerde que copiar desde Google Maps está estrictamente prohibido.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "Centre y amplíe el mapa para enfocarse en este dato.",
                 "tooltip_issue": "Centre y amplíe el mapa para enfocarse en este problema."
             },
-            "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
-            "no_documentation_key": "No hay documentación disponible para esta etiqueta",
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "view_on_keepRight": "Ver en keepright.at",
@@ -519,10 +520,14 @@
             "role": "Rol",
             "choose": "Selecciona tipo de elemento",
             "results": "{n} resultados para {search}",
-            "reference": "Ver más información en la wiki de OpenStreetMap",
-            "edit_reference": "Editar o traducir descripción",
+            "no_documentation_key": "No hay documentación disponible.",
+            "edit_reference": "editar / traducir",
             "wiki_reference": "Ver documentación",
             "wiki_en_reference": "Ver documentación en inglés",
+            "hidden_preset": {
+                "manual": "{features} están ocultos. Habilítelos en el panel Datos de mapa.",
+                "zoom": "{features} están ocultos. Acercar para habilitarlos."
+            },
             "back_tooltip": "Cambiar tipo de elemento",
             "remove": "Quitar",
             "search": "Buscar",
@@ -597,6 +602,10 @@
                     "tooltip": "Problemas del mapa detectados automáticamente desde keepright.at",
                     "title": "Problemas de KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "Los datos faltantes son detectados automáticamente por improveosm.org",
+                    "title": "Problemas de ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "Arrastre y suelte un archivo de datos en la página, o haga clic en el botón para configurar",
                     "title": "Datos de mapa personalizado",
@@ -650,11 +659,11 @@
                 "tooltip": "Líneas eléctricas, plantas de energía, subestaciones, etc."
             },
             "past_future": {
-                "description": "Pasado/Futuro",
+                "description": "Elementos Pasado/Futuro",
                 "tooltip": "Proyectado, construido, abandonado, demolido, etc."
             },
             "others": {
-                "description": "Otros",
+                "description": "Otros elementos",
                 "tooltip": "Todo lo demás"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} en wiki.osm.org",
             "used_with": "usado con {type}"
         },
-        "validations": {
-            "disconnected_highway": "Carretera desconectada",
-            "disconnected_highway_tooltip": "Las vías deben estar conectadas a otras vías o entradas de edificios.",
-            "generic_name": "Posible nombre genérico",
-            "generic_name_tooltip": "Este elemento parece tener un nombre genérico \"{name}\". Utilice solo el campo de nombre para registrar el nombre oficial de un elemento.",
-            "old_multipolygon": "Etiquetas multipolígono en la vía externa",
-            "old_multipolygon_tooltip": "Este estilo de multipolígono está obsoleto. Asigne las etiquetas al multipolígono padre en lugar de la vía externa.",
-            "untagged_point": "Punto sin etiquetar",
-            "untagged_point_tooltip": "Seleccione un tipo de elemento que describa lo que es este punto.",
-            "untagged_line": "Línea sin etiquetar",
-            "untagged_line_tooltip": "Seleccione un tipo de elemento que describa lo que es esta línea.",
-            "untagged_area": "Área sin etiquetar",
-            "untagged_area_tooltip": "Seleccione un tipo de elemento que describa lo que es esta área.",
-            "untagged_relation": "Relación no etiquetada",
-            "untagged_relation_tooltip": "Seleccione un tipo de elemento que describa qué es esta relación.",
-            "many_deletions": "Está eliminando {n} elementos: {p} nodos, {l} líneas, {a} áreas, {r} relaciones. ¿Seguro que quiere hacer esto? Esto los borrará del mapa que todo el mundo ven en openstreetmap.org.",
-            "tag_suggests_area": "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no es un área",
-            "deprecated_tags": "Etiquetas obsoletas: {tags}"
-        },
         "zoom": {
             "in": "Acercar",
             "out": "Alejar"
@@ -800,6 +790,40 @@
         "cannot_zoom": "No se puede alejar más la imagen en el modo actual.",
         "full_screen": "Alternar pantalla completa",
         "QA": {
+            "improveOSM": {
+                "title": "Detección de ImproveOSM",
+                "geometry_types": {
+                    "path": "senderos",
+                    "parking": "estacionamiento",
+                    "road": "vías",
+                    "both": "vías y estacionamiento"
+                },
+                "directions": {
+                    "east": "este",
+                    "north": "norte",
+                    "northeast": "noreste",
+                    "northwest": "noroeste",
+                    "south": "sur",
+                    "southeast": "sureste",
+                    "southwest": "suroeste",
+                    "west": "oeste"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Falta sentido único",
+                        "description": "A lo largo de esta sección de {highway}, {percentage}% de {num_trips} viajes registrados viajan de {from_node} a {to_node}. Puede que falte una etiqueta de \"oneway\" (sentido único)."
+                    },
+                    "mr": {
+                        "title": "Falta geometría",
+                        "description": "{num_trips} viajes registrados en esta área sugieren que puede haber un {geometry_type} sin mapear aquí.",
+                        "description_alt": "Los datos de un tercero sugieren que puede haber un {geometry_type} sin mapear aquí."
+                    },
+                    "tr": {
+                        "title": "Falta la restricción de giro",
+                        "description": "{num_passed} de {num_trips} viajes registrados (viajando hacia el {travel_direction}) hacen un giro desde {from_way} a {to_way} en {junction}. Puede que falte una restricción \"turn_restriction}\"."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "Errores de KeepRight",
                 "detail_title": "Error",
@@ -881,7 +905,7 @@
                         "description": "No se puede escapar de {var1} porque todas las vías que llevan a él son de un solo sentido."
                     },
                     "50": {
-                        "title": "Casi unión",
+                        "title": "Casi cruce",
                         "description": "{var1} está muy cerca pero no está conectado a la vía {var2}."
                     },
                     "60": {
@@ -944,7 +968,7 @@
                         "description": "A {var1} le falta una etiqueta \"type\"."
                     },
                     "190": {
-                        "title": "Intersección sin unión",
+                        "title": "Intersección sin cruce",
                         "description": "{var1} se intersecta con la {var2} {var3} pero no hay un nodo de unión, puente o túnel."
                     },
                     "200": {
@@ -970,10 +994,10 @@
                     },
                     "230": {
                         "title": "Conflicto de capas",
-                        "description": "{var1} es una unión de vías en diferentes capas."
+                        "description": "{var1} es un cruce de vías en diferentes capas."
                     },
                     "231": {
-                        "description": "{var1} es una unión de vías en diferentes capas: {var2}.",
+                        "description": "{var1} es un cruce de vías en diferentes capas: {var2}.",
                         "layer": "(capa: {layer})"
                     },
                     "232": {
@@ -1296,7 +1320,7 @@
                 "multipolygon_merge": "Combinar varias líneas o áreas creará una nueva relación multipolígono con todas las áreas seleccionadas como miembros. iD elegirá los roles internos y externos de forma automática, en función de los elementos que se encuentran dentro de otros elementos.",
                 "turn_restriction_h": "Restricciones de giro",
                 "turn_restriction": "Una relación de *restricción de giro* es un grupo de varios segmentos de camino en una intersección. Las restricciones de giro constan de un camino *desde*, nodo o carreteras *vía*, y un camino *hasta*.",
-                "turn_restriction_field": "Para editar restricciones de giro, seleccione un nodo de unión donde dos o más caminos se crucen. El editor de elementos mostrará un campo especial \"Restricciones de giro\" que contiene un modelo de intersección.",
+                "turn_restriction_field": "Para editar restricciones de giro, seleccione un nodo de cruce donde dos o más caminos se encuentren. El editor de elementos mostrará un campo especial \"Restricciones de giro\" que contiene un modelo de intersección.",
                 "turn_restriction_editing": "En el campo \"Restricciones de giro\", haga clic para seleccionar un camino \"desde\", y vea si los giros están permitidos o restringidos a cualquiera de las carreteras \"hasta\". Puede hacer clic en los iconos de giro para alternar entre permitido y restringido. iD creará relaciones automáticamente y establecerá los desde, vía y roles según sus elecciones.",
                 "route_h": "Rutas",
                 "route": "Una relación *Ruta* es un grupo de una o más elementos de línea que juntas forman una red de rutas, como una ruta de autobús, una ruta de tren o una ruta de carretera.",
@@ -1347,7 +1371,7 @@
                 "title": "Control de calidad",
                 "intro": "Las herramientas de *control de calidad* (Q/A) pueden encontrar etiquetas inadecuadas, carreteras desconectadas y otros problemas con OpenStreetMap, que los mapeadores pueden solucionar. Para ver los problemas de Q/A existentes, haga clic en el panel {data} **Datos de mapa** para habilitar una capa Q/A específica.",
                 "tools_h": "Herramientas",
-                "tools": "Las siguientes herramientas son compatibles actualmente: [KeepRight] (https://www.keepright.at/). Espere que iD sea compatible con [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), y más herramientas de Q/A en el futuro.",
+                "tools": "Las siguientes herramientas son actualmente compatibles: [KeepRight](https://www.keepright.at/) e [ImproveOSM] (https://improveosm.org/en/). Espere que iD sea compatible con [Osmose] (https://osmose.openstreetmap.fr/) y más herramientas de Q/A en el futuro.",
                 "issues_h": "Manejo de problemas",
                 "issues": "El manejo de los problemas de Q/A es similar al manejo de notas. Haga clic en un marcador para ver los detalles del problema en la barra lateral. Cada herramienta tiene sus propias capacidades, pero generalmente puede comentar y/o cerrar un problema."
             },
@@ -1387,6 +1411,190 @@
                         "indirect_example": "Estas restricciones existen debido a otra restricción cercana. Por ejemplo, una restricción \"Solo seguir derecho\" creará indirectamente restricciones de \"No girar\" para todos los demás caminos a través de la intersección.",
                         "indirect_noedit": "No se puede editar restricciones indirectas. En cambio, edite la restricción directa cercana."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problemas",
+            "key": "P",
+            "list_title": "Problemas ({count})",
+            "errors": {
+                "list_title": "Errores ({count})"
+            },
+            "warnings": {
+                "list_title": "Advertencias ({count})"
+            },
+            "no_issues": {
+                "message": "Todo se ve bien",
+                "info": "Cualquier problema se mostrará aquí mientras edita"
+            },
+            "almost_junction": {
+                "message": "{feature} está muy cerca pero no está conectado a {feature2}",
+                "highway-highway": {
+                    "tip": "Intersección de carreteras debe compartir un vértice de cruce."
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} cruza {feature2}",
+                "building-building": {
+                    "tip": "Los edificios no deben cruzarse, excepto en capas diferentes."
+                },
+                "building-highway": {
+                    "tip": "Carreteras que cruzan edificios deben usar puentes, túneles, cubierta o entradas."
+                },
+                "building-railway": {
+                    "tip": "Ferrocarriles que cruzan edificios deben usar puentes o túneles."
+                },
+                "building-waterway": {
+                    "tip": "Vías fluviales que cruzan edificios deben usar túneles o capas diferentes."
+                },
+                "highway-highway": {
+                    "tip": "Carreteras que se cruzan deben usar puentes, túneles o intersecciones."
+                },
+                "highway-railway": {
+                    "tip": "Carreteras que cruzan ferrocarriles deben usar puentes, túneles o pasos a nivel."
+                },
+                "highway-waterway": {
+                    "tip": "Carreteras que cruzan las vías fluviales deben usar puentes, túneles o vados."
+                },
+                "railway-railway": {
+                    "tip": "Ferrocarriles que se cruzan deben estar conectados o usar puentes o túneles."
+                },
+                "railway-waterway": {
+                    "tip": "Ferrocarriles que cruzan vías fluviales deben utilizar puentes o túneles."
+                },
+                "waterway-waterway": {
+                    "tip": "Vías fluviales que se cruzan debe estar conectadas o usar túneles."
+                },
+                "tunnel-tunnel": {
+                    "tip": "Túneles que se cruzan deben utilizar capas diferentes."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Túneles que se cruzan deben estar conectados o utilizar capas diferentes."
+                },
+                "bridge-bridge": {
+                    "tip": "Puentes que se cruzan deben utilizar diferentes capas."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "Puentes que se cruzan deben estar conectados o usar diferentes capas."
+                },
+                "indoor-indoor": {
+                    "tip": "Los elementos de interiores que se crucen deben utilizar diferentes niveles."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Los elementos de interiores que se crucen deben estar conectados o utilizar diferentes niveles."
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} tiene la etiqueta obsoleta \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} tiene una combinación de etiquetas obsoleta: {tags}"
+                },
+                "tip": "Algunas etiquetas se vuelven obsoletas con el tiempo y deben reemplazarse."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} está desconectada de otras carreteras y senderos",
+                    "tip": "Carreteras deben conectarse a otras carreteras o entradas de edificios."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} tiene el nombre genérico \"{name}\"",
+                "tip": "Los nombres deben ser los actuales y reales."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "Eliminar {n} elementos: {p} puntos, {l} líneas y {a} áreas"
+                },
+                "points-lines-areas-relations": {
+                    "message": "Eliminar {n} elementos: {p} puntos, {l} líneas, {a} áreas y {r} relaciones"
+                },
+                "tip": "Solo se debe eliminar los elementos redundantes o inexistentes."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} no tiene etiquetas"
+                },
+                "descriptive": {
+                    "message": "{feature} no tiene etiquetas descriptivas"
+                },
+                "specific": {
+                    "message": "{feature} no tiene etiqueta \"{tag}\""
+                },
+                "tip": "Los elementos deben tener etiquetas que definan lo que son."
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} tiene etiquetas mal ubicadas",
+                "tip": "Los multipolígonos deben estar etiquetados en su relación, no en su forma externa."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} debe ser un área cerrada basada en la etiqueta \"{tag}\"",
+                "tip": "Las áreas deben tener puntos finales conectados."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "Conectados los elementos muy cercanos."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Conectados los elementos que se cruzan."
+                },
+                "connect_endpoints": {
+                    "title": "Conectar los extremos",
+                    "annotation": "Conectados los extremos de una vía."
+                },
+                "connect_features": {
+                    "title": "Conectar los elementos"
+                },
+                "continue_from_start": {
+                    "title": "Continuar dibujando desde el inicio"
+                },
+                "continue_from_end": {
+                    "title": "Continuar dibujando desde el final"
+                },
+                "delete_feature": {
+                    "title": "Eliminar este elemento"
+                },
+                "move_tags": {
+                    "title": "Mover las etiquetas",
+                    "annotation": "Etiquetas movidas."
+                },
+                "remove_generic_name": {
+                    "title": "Quitar el nombre",
+                    "annotation": "Se eliminó un nombre genérico."
+                },
+                "remove_tag": {
+                    "title": "Quitar la etiqueta",
+                    "annotation": "Etiqueta eliminada."
+                },
+                "reposition_features": {
+                    "title": "Reposicionar los elementos"
+                },
+                "select_preset": {
+                    "title": "Seleccionar un tipo de elemento"
+                },
+                "tag_as_disconnected": {
+                    "title": "Etiquetar como desconectado",
+                    "annotation": "Etiquetado elementos muy cercanos como desconectados."
+                },
+                "upgrade_tag": {
+                    "annotation": "Se actualizó una etiqueta vieja."
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "Se ha actualizado una combinación de etiquetas antiguas."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Use un puente o túnel"
+                },
+                "use_different_layers": {
+                    "title": "Use capas diferentes"
+                },
+                "use_different_levels": {
+                    "title": "Use niveles diferentes"
+                },
+                "use_tunnel": {
+                    "title": "Use un túnel"
                 }
             }
         },
@@ -1797,8 +2005,11 @@
                 "category-building": {
                     "name": "Elementos de edificio"
                 },
-                "category-golf": {
-                    "name": "Elementos de golf"
+                "category-golf-area": {
+                    "name": "Elementos de Golf"
+                },
+                "category-golf-line": {
+                    "name": "Elementos de Golf"
                 },
                 "category-landuse": {
                     "name": "Elementos de uso de suelo"
@@ -2582,7 +2793,15 @@
                     "label": "SSID (nombre de red)"
                 },
                 "junction/ref_oneway": {
-                    "label": "Número de empalme"
+                    "label": "Número de cruce"
+                },
+                "junction_line": {
+                    "label": "Cruce",
+                    "options": {
+                        "circular": "Círculo de tráfico",
+                        "jughandle": "Cambio de sentido a distinto nivel",
+                        "roundabout": "Rotonda"
+                    }
                 },
                 "kerb": {
                     "label": "Bordillo/Cordón"
@@ -2852,9 +3071,6 @@
                         "underground": "Subterráneo"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Pantalla de información del pasajero"
-                },
                 "payment_multi": {
                     "label": "Formas de pago"
                 },
@@ -3044,7 +3260,7 @@
                     "placeholder": "1-18"
                 },
                 "ref_highway_junction": {
-                    "label": "Número de intersección"
+                    "label": "Número de cruce"
                 },
                 "ref_platform": {
                     "label": "Número de plataforma"
@@ -3101,6 +3317,9 @@
                         "mountain_hiking": "T2: Senderismo de montaña"
                     },
                     "placeholder": "Caminata de montaña, caminata alpina..."
+                },
+                "salt": {
+                    "label": "Sal"
                 },
                 "sanitary_dump_station": {
                     "label": "Desecho del inodoro"
@@ -3394,6 +3613,9 @@
                     },
                     "placeholder": "Si, no, sólo para llevar..."
                 },
+                "tidal": {
+                    "label": "De marea"
+                },
                 "to": {
                     "label": "Hasta"
                 },
@@ -3566,7 +3788,7 @@
                 },
                 "website": {
                     "label": "Sitio web",
-                    "placeholder": "http://ejemplo.com/"
+                    "placeholder": "https://ejemplo.com/"
                 },
                 "wetland": {
                     "label": "Tipo"
@@ -3823,6 +4045,10 @@
                     "name": "Reloj",
                     "terms": "cronómetro"
                 },
+                "amenity/clock/sundial": {
+                    "name": "Reloj de sol",
+                    "terms": "gnomon, sombra, sol, solar"
+                },
                 "amenity/college": {
                     "name": "Terreno de centro educativo superior no universitario",
                     "terms": "formación profesional, escuela profesional, educación terciaria, post-bachillerato, ciclo formativo de grado superior, FP, conservatorio, Terciario, superior, no universitario, terreno, área, area, suelo, instituto"
@@ -3893,6 +4119,10 @@
                 "amenity/fast_food/kebab": {
                     "name": "Comida rápida de kebab",
                     "terms": "desayuno, cena, comedor, cena, comer, parrilla, almuerzo, mesa, café, cafe, cantina"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "Comida rápida mexicana",
+                    "terms": "desayuno, cena, comedor, cena, comer, parrilla, almuerzo, mesa, tacos, burritos, enchiladas, fajitas, nachos, tortillas, salsa, tamales, quesadillas"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "Comida rápida de pizza",
@@ -4015,6 +4245,10 @@
                 "amenity/pharmacy": {
                     "name": "Farmacia",
                     "terms": "farmacia,botica, laboratorio, apoteca, herbolario, medicamentos, remedios"
+                },
+                "amenity/photo_booth": {
+                    "name": "Cabina de fotos",
+                    "terms": "foto, stand, quiosco, cámara"
                 },
                 "amenity/place_of_worship": {
                     "name": "Lugar de adoración",
@@ -4739,7 +4973,7 @@
                     "terms": "Casas adosadas, casa pareada, viviendas en hilera, Bloques de casas"
                 },
                 "building/train_station": {
-                    "name": "Estación de ferrocarril"
+                    "name": "Edificio de la estación de tren"
                 },
                 "building/transportation": {
                     "name": "Edificio de transporte público",
@@ -5037,6 +5271,18 @@
                     "name": "Búnker de arena",
                     "terms": "Recolector de arena, búnker, bunker, Trampa de arena, sand"
                 },
+                "golf/cartpath": {
+                    "name": "Sendero del carrito de golf",
+                    "terms": "Carrito, carro, golf, sendero"
+                },
+                "golf/cartpath_service": {
+                    "name": "Sendero del carrito de golf / Vía de servicio",
+                    "terms": "Carrito, carro, golf, sendero"
+                },
+                "golf/driving_range": {
+                    "name": "Driving range",
+                    "terms": "práctica, área, area, golf"
+                },
                 "golf/fairway": {
                     "name": "Fairway",
                     "terms": "canalizo, calle, fairway"
@@ -5049,13 +5295,13 @@
                     "name": "Hoyo de golf",
                     "terms": "Hoyo de golf, hoyo, hole"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Obstáculo de agua lateral",
-                    "terms": "obstáculo, agua, golf"
+                "golf/lateral_water_hazard": {
+                    "name": "Obstáculo lateral de agua",
+                    "terms": "obstáculo, riesgo, peligro, agua, lateral, golf"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Obstáculo de agua lateral",
-                    "terms": "obstáculo, agua, golf"
+                "golf/path": {
+                    "name": "Sendero de golf",
+                    "terms": "sendero, golf, caminar"
                 },
                 "golf/rough": {
                     "name": "Rough",
@@ -5065,13 +5311,9 @@
                     "name": "Lugar de salida Tee",
                     "terms": "Tee, Tee Box, Zona del tee, lugar de salida"
                 },
-                "golf/water_hazard_area": {
+                "golf/water_hazard": {
                     "name": "Obstáculo de agua",
-                    "terms": "obstáculo, agua, golf"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Obstáculo de agua",
-                    "terms": "obstáculo, agua, golf"
+                    "terms": "Obstáculo, agua, golf"
                 },
                 "healthcare": {
                     "name": "Asistencia sanitaria",
@@ -5244,7 +5486,7 @@
                     "terms": "autopista, autovía, vía rápida"
                 },
                 "highway/motorway_junction": {
-                    "name": "Salida de autopista",
+                    "name": "Cruce de autopista / Salida",
                     "terms": "enlace, cruce de autopista, salida de autopista"
                 },
                 "highway/motorway_link": {
@@ -5436,12 +5678,11 @@
                     "terms": "wi-fi,wifi,hotspot,punto de acceso, router"
                 },
                 "junction": {
-                    "name": "Intersección vial",
+                    "name": "Cruce",
                     "terms": "cruce, intersección, empalme, nudo, unión, intersección vial, crucero"
                 },
                 "landuse": {
-                    "name": "Uso de suelo",
-                    "terms": "uso de suelo, uso de la tierra, uso de tierras, explotación del suelo, utilización del suelo, uso del terreno, utilización del terreno, ocupación del suelo"
+                    "name": "Uso de suelo"
                 },
                 "landuse/allotments": {
                     "name": "Huerto comunitario",
@@ -5624,8 +5865,7 @@
                     "terms": "viña, viñedo, majuelo, parral"
                 },
                 "leisure": {
-                    "name": "Ocio",
-                    "terms": "zona, diversión, entretenimiento, pasatiempo, distracción, recreo, ocio, esparcimiento, tiempo libre"
+                    "name": "Ocio"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Centro de juegos para adultos",
@@ -5779,6 +6019,10 @@
                     "name": "Mesa de picnic",
                     "terms": "mesa de picnic, mesa de parque"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "Tabla de ajedrez",
+                    "terms": "banco, tablero de ajedrez, ajedrez, damas, tablero de damas, mesa de juego"
+                },
                 "leisure/pitch": {
                     "name": "Cancha de juego",
                     "terms": "cancha, frontón, campo, pista, polideportivo, terreno de juego, juego, deporte"
@@ -5879,6 +6123,10 @@
                     "name": "Complejo deportivo",
                     "terms": "centro de deporte, complejo deportivo, polideportivo, deporte, ejercicio"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Gimnasio de escalada",
+                    "terms": "rappel, muro de escalada artificial, instalación de escalada en roca, muro interior de roca, gimnasio de roca, cuerdas, escalada"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Natatorio",
                     "terms": "Natatorio, piscina, pileta, alberca"
@@ -5912,8 +6160,7 @@
                     "terms": "línea, linea"
                 },
                 "man_made": {
-                    "name": "Estructura artificial creada por el hombre",
-                    "terms": "estructura, construcción, artificial, hecho, creado, construido, hombre"
+                    "name": "Estructura artificial creada por el hombre"
                 },
                 "man_made/adit": {
                     "name": "Socavón",
@@ -6039,9 +6286,17 @@
                     "name": "Torre",
                     "terms": "torre, mástil, edificio, estructura alta"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Campanario",
+                    "terms": "campanario, torre de la iglesia, campana"
+                },
                 "man_made/tower/communication": {
                     "name": "Torre de comunicación",
                     "terms": "antena, torre de transmisión, torre de telefonía celular, torre de telefonía móvil, mástil de comunicación, torre de comunicación, torre adaptada, torre de telefonía móvil, mástil de radio, torre de radio, torre de televisión, mástil de transmisión, torre de transmisión, torre de televisión"
+                },
+                "man_made/tower/minaret": {
+                    "name": "Alminar",
+                    "terms": "Islam, Mezquita, Muezzin, Musulmana, alminar, minarete"
                 },
                 "man_made/tower/observation": {
                     "name": "Torre de observación",
@@ -6088,8 +6343,7 @@
                     "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
                 },
                 "natural": {
-                    "name": "Natural",
-                    "terms": "natural, naturaleza, geológica, cubierta terrestre, vegetación"
+                    "name": "Natural"
                 },
                 "natural/bare_rock": {
                     "name": "Roca desnuda",
@@ -6598,46 +6852,6 @@
                 "power/transformer": {
                     "name": "Transformador de energía",
                     "terms": "Transformador, transformador de potencia, transformador eléctrico, transformador de energía"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Parada / Plataforma de transporte público",
-                    "terms": "plataforma, transporte público, transporte publico, tránsito, transporte"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Parada / Plataforma aérea",
-                    "terms": "vía aérea, teleférico, plataforma, transporte público, transporte publico, tránsito, transporte"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Parada / Plataforma de bus",
-                    "terms": "bus, autobús, autobus, plataforma, transporte público, transporte publico, tránsito, transporte"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Parada / Plataforma de ferry",
-                    "terms": "barco, muelle, ferry, buque, transbordador, plataforma, tránsito, transporte público, transporte publico, tránsito, transporte"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Parada / Plataforma de tren ligero",
-                    "terms": "tren ligero, eléctrico, plataforma, transporte público, transporte publico, ferrocarril, vía, tranvía, trole, tránsito, transporte"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Parada / Plataforma de monorraíl",
-                    "terms": "monorriel, plataforma, transporte público, transporte publico, ferrocarril, tránsito, transporte"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Parada / Plataforma de metro",
-                    "terms": "metro, plataforma, transporte público, transporte publico, ferrocarril, subte, vía, tránsito, transporte, subterráneo, subterraneo"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Parada / Plataforma de tren",
-                    "terms": "plataforma, transporte público, transporte publico, ferrocarril, vía, tren, tránsito, transporte"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Parada / Plataforma de tranvía",
-                    "terms": "eléctrico, ligero, plataforma, transporte público, transporte publico, ferrocarril, tranvía, vía, tranvia, trole, tránsito, transporte"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Parada / Plataforma de trolebús",
-                    "terms": "autobús, bus, eléctrico, plataforma, transporte público, transporte publico, tranvía,tranvia, trolebús, trolebus, tránsito, transporte"
                 },
                 "public_transport/platform": {
                     "name": "Parada / Plataforma de transporte público",
@@ -7454,8 +7668,7 @@
                     "terms": "vinatería, vinos, espirituosos, licorería, bebidas, establecimiento de vinos"
                 },
                 "tourism": {
-                    "name": "Turismo",
-                    "terms": "turismo"
+                    "name": "Turismo"
                 },
                 "tourism/alpine_hut": {
                     "name": "Refugio de montaña",

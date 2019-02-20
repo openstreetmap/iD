@@ -449,8 +449,6 @@
             "locating": "Зареждане, моля изчакайте..."
         },
         "inspector": {
-            "no_documentation_combination": "Няма налична документация за тази комбинация от тагове",
-            "no_documentation_key": "Няма налична документация за този ключ",
             "show_more": "Покажи още",
             "view_on_osm": "Вижте на openstreetmap.org",
             "all_fields": "Всички полета",
@@ -461,7 +459,6 @@
             "role": "Роля",
             "choose": "Изберете вид обект",
             "results": "{n} резултата за {search}",
-            "reference": "Вижте в OpenStreetMap Wiki",
             "back_tooltip": "Смяна на обект",
             "remove": "Премахнете",
             "search": "Търсене",
@@ -573,11 +570,9 @@
                 "tooltip": "Електропроводи , Електроцентрали, Подстанции, и т.н."
             },
             "past_future": {
-                "description": "Минал/Бъдещ",
                 "tooltip": "Проектни, В строеж, Изоставени, Разрушени, и др."
             },
             "others": {
-                "description": "Други",
                 "tooltip": "Всичко Друго"
             }
         },
@@ -673,23 +668,6 @@
             "description": "Описание",
             "on_wiki": "{tag} в wiki.osm.org",
             "used_with": "използва се с {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Прекъснат път",
-            "disconnected_highway_tooltip": "Пътищата трябва да бъдат свързани с други пътища или входове на сгради.",
-            "old_multipolygon": "Тагове за мултиполигон на външен път",
-            "old_multipolygon_tooltip": "Този вид мултиполигон е отхвърлен. Моля, сложете таговете на самия мултиполигон вместо на външния му път. ",
-            "untagged_point": "Точка без тагове.",
-            "untagged_point_tooltip": "Изберете типът обект който описва каква е тази точка.",
-            "untagged_line": "Линия без таг",
-            "untagged_line_tooltip": "Изберете типът обект който описва каква е тази линия.",
-            "untagged_area": "Площен обект без таг",
-            "untagged_area_tooltip": "Изберете типът обект който описва каква е тази площ.",
-            "untagged_relation": "Релация без тагове",
-            "untagged_relation_tooltip": "Изберете типът обект, който описва каква е тази релация.",
-            "many_deletions": "Изтривате {n} обекта: {p} възела, {l} линии, {a} площи, {r} релации. Сигурни ли сте, че искате да направите това? Това ще ги изтрие от картата, която всеки вижда на openstreetmap.org.",
-            "tag_suggests_area": "Тагът {tag} предполага линията да е площен обект, но тя не е",
-            "deprecated_tags": "Отхвърлени тагове: {tags}"
         },
         "zoom": {
             "in": "Навътре",
@@ -1874,8 +1852,7 @@
                     "label": "Вид"
                 },
                 "website": {
-                    "label": "Уебсайт",
-                    "placeholder": "http://example.com/"
+                    "label": "Уебсайт"
                 },
                 "wetland": {
                     "label": "Вид"

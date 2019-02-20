@@ -297,8 +297,6 @@
             "locating": "Localizare, te rugăm să aștepți..."
         },
         "inspector": {
-            "no_documentation_combination": "Nu este documentație disponibilă pentru combinația de tag-uri (cuvinte cheie)",
-            "no_documentation_key": "Nu este documentație pentru această cheie.",
             "show_more": "Arată mai mult",
             "view_on_osm": "Vezi pe openstreetmap.org",
             "all_fields": "Toate câmpurile",
@@ -309,7 +307,6 @@
             "role": "Rol",
             "choose": "Selectează tip de obiect",
             "results": "{n} rezultate pentru {search}",
-            "reference": "Vezi pe OpenStreetMap Wiki",
             "back_tooltip": "Schimbă trăsătură",
             "remove": "Şterge",
             "search": "Caută",
@@ -396,11 +393,7 @@
                 "description": "Căi Ferate",
                 "tooltip": "Căi Ferate"
             },
-            "past_future": {
-                "description": "Trecut/Viitor"
-            },
             "others": {
-                "description": "Altele",
                 "tooltip": "Orice Altceva"
             }
         },
@@ -468,15 +461,6 @@
             "description": "Descriere",
             "on_wiki": "{tag} pe wiki.osm.org",
             "used_with": "folosit cu {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Drum deconectat",
-            "untagged_point": "Punct neetichetat",
-            "untagged_line": "Linie fară tag-uri (cuvinte cheie)",
-            "untagged_area": "Suprafața fară tag-uri",
-            "untagged_relation": "Relație fără taguri",
-            "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
-            "deprecated_tags": "Tag-uri învechite: {tags}"
         },
         "mapillary": {
             "view_on_mapillary": "Vezi această imagine pe Mapillary"
@@ -713,9 +697,6 @@
                 },
                 "category-building": {
                     "name": "Clădiri"
-                },
-                "category-golf": {
-                    "name": "Golfuri"
                 },
                 "category-landuse": {
                     "name": "Utilizări de Teren"
@@ -1595,8 +1576,7 @@
                     "label": "Tip"
                 },
                 "website": {
-                    "label": "Website",
-                    "placeholder": "http://example.com/"
+                    "label": "Website"
                 },
                 "wetland": {
                     "label": "Tip"
@@ -1962,9 +1942,6 @@
                 },
                 "building/terrace": {
                     "name": "Case în Rând"
-                },
-                "building/train_station": {
-                    "name": "Gară"
                 },
                 "building/university": {
                     "name": "Universitate"

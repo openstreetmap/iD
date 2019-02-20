@@ -193,7 +193,8 @@
                 "restriction": "Ces éléments ne peuvent être fusionnés car cela endommagerait une relation « {relation} ».",
                 "relation": "Ces éléments ne peuvent être fusionnés car leurs rôles sont incompatibles dans une relation.",
                 "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé.",
-                "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs attributs ont des valeurs conflictuelles."
+                "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs attributs ont des valeurs conflictuelles.",
+                "paths_intersect": "Ces éléments ne peuvent être fusionnés car le chemin qui en résulterait se croiserait lui-même."
             },
             "move": {
                 "title": "Déplacer",
@@ -413,6 +414,8 @@
             "modified": "Modifié",
             "deleted": "Supprimé",
             "created": "Créé",
+            "outstanding_errors_message": "Résolvez d'abord toutes les erreurs. Il en reste {count}.",
+            "comment_needed_message": "Ajoutez d'abord un commentaire pour le groupe de modifications.",
             "about_changeset_comments": "À propos des commentaires de groupe de modifications",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/FR:Bons_commentaires_de_groupe_de_modifications",
             "google_warning": "Vous avez mentionné Google dans ce commentaire : rappelez-vous que copier depuis Google Maps est strictement interdit.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "Centrer et zoomer la carte sur cette donnée.",
                 "tooltip_issue": "Centrer et zoomer la carte sur ce problème."
             },
-            "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison d'étiquettes",
-            "no_documentation_key": "Aucune documentation n'est disponible pour cette clé",
             "show_more": "Plus d'informations",
             "view_on_osm": "Consulter sur openstreetmap.org",
             "view_on_keepRight": "Voir sur keepright.at",
@@ -519,10 +520,14 @@
             "role": "Rôle",
             "choose": "Que souhaitez-vous ajouter ?",
             "results": "{n} résultats pour {search}",
-            "reference": "Consulter sur le Wiki d'OpenStreetMap",
-            "edit_reference": "Éditer ou traduire la description",
+            "no_documentation_key": "Aucune documentation disponible.",
+            "edit_reference": "modifier ou traduire",
             "wiki_reference": "Voir la documentation",
             "wiki_en_reference": "Voir la documentation en anglais",
+            "hidden_preset": {
+                "manual": "{features} sont cachés. Activez-les dans le panneau de données de carte.",
+                "zoom": "{features} sont cachés. Zoomez pour les afficher."
+            },
             "back_tooltip": "Changer l'objet",
             "remove": "Supprimer",
             "search": "Rechercher",
@@ -597,6 +602,10 @@
                     "tooltip": "Problèmes détectés automatiquement par keepright.at",
                     "title": "Problèmes KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "Données manquantes automatiquement détectées par improveosm.org",
+                    "title": "Problèmes ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "Faîtes glisser-déposer un fichier de données sur la page, ou cliquez sur le bouton pour les paramétrer",
                     "title": "Données de carte personnalisées",
@@ -650,11 +659,11 @@
                 "tooltip": "Lignes électriques, Centrales électriques, Postes électriques, etc."
             },
             "past_future": {
-                "description": "Passé/Futur",
+                "description": "Éléments passés et futurs",
                 "tooltip": "Proposé, Construction, Abandonné, Démoli, etc."
             },
             "others": {
-                "description": "Autres",
+                "description": "Autres éléments",
                 "tooltip": "Autres"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} sur wiki.osm.org",
             "used_with": "Utilisé avec {type}"
         },
-        "validations": {
-            "disconnected_highway": "Route déconnectée",
-            "disconnected_highway_tooltip": "Les routes doivent être connectées à d'autres routes ou à des entrées de bâtiment.",
-            "generic_name": "Nom générique possible",
-            "generic_name_tooltip": "Cet élément a le nom générique « {name} ». N'utilisez le champ nom que pour enregistrer le nom officiel de l'élément.",
-            "old_multipolygon": "Un polygone extérieur porte les attributs du multipolygone",
-            "old_multipolygon_tooltip": "Ce modèle de multipolygone est déprécié. Veuillez retirer les attributs du polygone extérieur (membre) et les placer sur le multipolygone lui-même (parent). ",
-            "untagged_point": "Point sans attribut",
-            "untagged_point_tooltip": "Sélectionnez un type d'élément pour décrire ce point.",
-            "untagged_line": "Ligne sans aucun attribut",
-            "untagged_line_tooltip": "Sélectionnez un type d'élément pour décrire cette ligne.",
-            "untagged_area": "Polygone sans aucun attribut",
-            "untagged_area_tooltip": "Sélectionnez un type d'élément pour décrire cette surface.",
-            "untagged_relation": "Relation sans attributs",
-            "untagged_relation_tooltip": "Sélectionnez un type d’entité décrivant ce qu’est cette relation.",
-            "many_deletions": "Vous êtes en train de supprimer {n} éléments : {p} nœuds, {l} lignes, {a} polygones et {r} relations. En êtes-vous sûr ? Ils seront supprimés de la carte que tout le monde voit sur openstreetmap.org.",
-            "tag_suggests_area": "Cet attribut {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
-            "deprecated_tags": "Attributs obsolètes : {tags}"
-        },
         "zoom": {
             "in": "Zoomer",
             "out": "Dézoomer"
@@ -800,6 +790,40 @@
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
         "full_screen": "Afficher/cacher le plein écran",
         "QA": {
+            "improveOSM": {
+                "title": "Détections ImproveOSM",
+                "geometry_types": {
+                    "path": "chemins",
+                    "parking": "parking",
+                    "road": "routes",
+                    "both": "routes et parking"
+                },
+                "directions": {
+                    "east": "est",
+                    "north": "nord",
+                    "northeast": "nord-est",
+                    "northwest": "nord-ouest",
+                    "south": "sud",
+                    "southeast": "sud-est",
+                    "southwest": "sud-ouest",
+                    "west": "ouest"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Sens unique manquant",
+                        "description": "Le long de cette section de {highway}, {percentage} % des {num_trips} trajets enregistrés vont de {from_node} à {to_node}. Il se pourrait qu'il manque un attribut de sens-unique."
+                    },
+                    "mr": {
+                        "title": "Géométrie manquante",
+                        "description": "{num_trips} trajets enregistrés dans cette région suggèrent qu'il y a des {geometry_type} ici.",
+                        "description_alt": "Des données d'une source tierce suggèrent qu'il y a des {geometry_type} non cartographiés ici."
+                    },
+                    "tr": {
+                        "title": "Interdiction de tourner manquante",
+                        "description": "{num_passed} des {num_trips} trajets enregistrés (vers {travel_direction}) ont tourné de {from_way} vers {to_way} au niveau de {junction}. Il pourrait y avoir une interdiction de tourner « {turn_restriction} » manquante."
+                    }
+                }
+            },
             "keepRight": {
                 "title": "Erreur KeepRight",
                 "detail_title": "Erreur",
@@ -1347,7 +1371,7 @@
                 "title": "Assurance qualité",
                 "intro": "*Les outils d'assurance qualité* (Q/A) peuvent trouver des attributs incorrects, des chemins déconnectés et d'autres problèmes dans OpenStreetMap que vous pouvez ensuite corriger. Pour visualiser les problèmes de qualité existants, cliquez sur le panneau {data} **Données de carte** pour activer une couche Q/A spécifique.",
                 "tools_h": "Outils",
-                "tools": "Les outils suivants sont actuellement supportés : [KeepRight](https://www.keepright.at/). Attendez-vous à ce qu'iD supporte [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/fr/) et bien plus d'outils Q/A dans le futur.",
+                "tools": "Les outils suivants sont actuellement supportés : [KeepRight](https://www.keepright.at/) et [ImproveOSM](https://improveosm.org/fr/). Attendez-vous à ce qu'iD supporte [Osmose](https://osmose.openstreetmap.fr/) et bien plus d'outils de Q/A dans le futur.",
                 "issues_h": "Gérer les problèmes",
                 "issues": "La gestion des problème de Q/A est similaire à celle des notes. Cliquez sur un marqueur pour afficher les détails du problème sur la barre latérale. Chaque outil a ses propres fonctionnalités, mais généralement vous pouvez commenter ou fermer un problème."
             },
@@ -1387,6 +1411,184 @@
                         "indirect_example": "Ces interdictions existent à cause d'une autre restriction proche. Par exemple, une restriction « Obligation d'aller tout droit » créera indirectement des restrictions « Interdiction de tourner » pour tous les autres chemins de l'intersection.",
                         "indirect_noedit": "Vous ne pouvez pas modifier les interdictions indirectes. À la place, modifiez la restriction directe la plus proche."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problèmes",
+            "key": "I",
+            "list_title": "Problèmes ({count})",
+            "errors": {
+                "list_title": "Erreurs ({count})"
+            },
+            "warnings": {
+                "list_title": "Avertissements ({count})"
+            },
+            "no_issues": {
+                "message": "Tout a l'air correct",
+                "info": "Les problèmes seront affichés ici pendant que vous modifiez la carte"
+            },
+            "almost_junction": {
+                "message": "{feature} est très proche mais n'est pas connecté à {feature2}",
+                "highway-highway": {
+                    "tip": "Les routes qui se croisent devraient partager un point de jonction"
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} croise {feature2}",
+                "building-building": {
+                    "tip": "Les bâtiments ne devraient pas se recouper, sauf sur des couches différentes."
+                },
+                "building-highway": {
+                    "tip": "Les routes qui croisent des bâtiments devraient utiliser des ponts, des tunnels, des couvertures ou des entrées."
+                },
+                "building-railway": {
+                    "tip": "Les voies de chemin de fer qui croisent des bâtiments devraient utiliser des ponts ou des tunnels."
+                },
+                "building-waterway": {
+                    "tip": "Les cours d'eau qui croisent des bâtiments devraient utiliser des tunnels ou d'autres couches."
+                },
+                "highway-highway": {
+                    "tip": "Les routes qui se croisent devraient utiliser des ponts, des tunnels ou des intersections."
+                },
+                "highway-railway": {
+                    "tip": "Les routes qui croisent des voies de chemin de fer devraient utiliser des ponts, des tunnels ou des passages à niveau."
+                },
+                "highway-waterway": {
+                    "tip": "Les routes qui croisent des cours d'eau devraient utiliser des ponts, des tunnels ou des gués."
+                },
+                "railway-railway": {
+                    "tip": "Les voies de chemin de fer qui se croisent devrait être connectées ou utiliser les ponts ou des tunnels."
+                },
+                "railway-waterway": {
+                    "tip": "Les voies de chemin de fer qui croisent des cours d'eau devraient utiliser des ponts ou des tunnels."
+                },
+                "waterway-waterway": {
+                    "tip": "Les cours d'eau qui se croisent devraient être connecter ou utiliser des tunnels."
+                },
+                "tunnel-tunnel": {
+                    "tip": "Les tunnels qui se croisent devraient utiliser des couches différentes."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Les tunnels qui se croisent devraient être connectés ou utiliser des couches différentes."
+                },
+                "bridge-bridge": {
+                    "tip": "Les ponts qui se croisent devraient utiliser des couches différentes."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "Les ponts qui se croisent devraient être connectés ou utiliser des couches différentes."
+                },
+                "indoor-indoor": {
+                    "tip": "Les éléments intérieurs se croisant doivent utiliser des niveaux différents."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Les éléments intérieurs se croisant devraient être connectés ou utiliser des niveaux différents"
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} utilise l'attribut obsolète « {tag} »"
+                },
+                "combination": {
+                    "message": "{feature} utilise une combinaison d'attributs obsolète : {tags}"
+                },
+                "tip": "Certains attributs deviennent obsolètes avec le temps et devraient être remplacés."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} est déconnectée des autres routes et chemins",
+                    "tip": "Les routes devraient être connectées à d'autres routes ou à des entrées de bâtiments."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} possède le nom générique « {name} »",
+                "tip": "Les noms devraient être le nom réel de l'élément sur le terrain."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "Suppression de {n} éléments : {p} points, {l} lignes et {a} polygones"
+                },
+                "points-lines-areas-relations": {
+                    "message": "Suppression de {n} éléments : {p} points, {l} lignes, {a} polygones et {r} relations"
+                },
+                "tip": "Seuls les éléments redondants ou inexistants devraient être supprimés."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} n'a pas d'attribut"
+                },
+                "descriptive": {
+                    "message": "{feature} n'a aucun attribut descriptif"
+                },
+                "specific": {
+                    "message": "{feature} n'a pas d'attribut « {tag} »"
+                },
+                "tip": "Les éléments doivent avoir un attribut qui définit ce qu'ils sont."
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} a des attributs mal placés",
+                "tip": "Les attributs des multipolygones devraient se trouver sur leur relation, pas sur leur ligne extérieure."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} devrait être un polygone fermé d'après l'attribut « {tag} »",
+                "tip": "Les polygones doivent avoir deux points connectés."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "Éléments très proches et connectés."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Éléments connectés et se croisant."
+                },
+                "connect_endpoints": {
+                    "title": "Connecter le bout",
+                    "annotation": "Bouts de la ligne connectés."
+                },
+                "connect_features": {
+                    "title": "Connecter les éléments"
+                },
+                "continue_from_start": {
+                    "title": "Continuer le dessin du début"
+                },
+                "continue_from_end": {
+                    "title": "Continuer le dessin de la fin"
+                },
+                "delete_feature": {
+                    "title": "Supprimer cet élément"
+                },
+                "move_tags": {
+                    "title": "Déplacer les attributs",
+                    "annotation": "Attributs déplacés."
+                },
+                "remove_deprecated_tag": {
+                    "annotation": "Ancien attribut supprimé."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Ancienne combinaison d'attributs supprimée."
+                },
+                "remove_generic_name": {
+                    "title": "Supprimer le nom",
+                    "annotation": "Nom générique supprimé."
+                },
+                "remove_tag": {
+                    "title": "Supprimer l'attribut",
+                    "annotation": "Attribut supprimé."
+                },
+                "reposition_features": {
+                    "title": "Repositionner l'élément"
+                },
+                "select_preset": {
+                    "title": "Choisir un type d'élément"
+                },
+                "tag_as_disconnected": {
+                    "title": "Indiquer qu'ils sont déconnectés",
+                    "annotation": "Éléments très proches cartographiés comme étant déconnectés."
+                },
+                "upgrade_tag": {
+                    "annotation": "Ancien attribut mis à jour."
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "Ancienne combinaison d'attributs mise à jour."
                 }
             }
         },
@@ -1797,8 +1999,11 @@
                 "category-building": {
                     "name": "Types de bâtiments"
                 },
-                "category-golf": {
-                    "name": "Éléments de terrain de golf"
+                "category-golf-area": {
+                    "name": "Éléments de golfs"
+                },
+                "category-golf-line": {
+                    "name": "Éléments de golfs"
                 },
                 "category-landuse": {
                     "name": "Types d'occupation des sols"
@@ -2584,6 +2789,14 @@
                 "junction/ref_oneway": {
                     "label": "Identifiant de l'embranchement"
                 },
+                "junction_line": {
+                    "label": "Jonction routière",
+                    "options": {
+                        "circular": "Rond-point",
+                        "jughandle": "Jughandle (bretelle pour tourner)",
+                        "roundabout": "Rond-point"
+                    }
+                },
                 "kerb": {
                     "label": "Aménagement de trottoir, Abaissement (bateau)"
                 },
@@ -2852,9 +3065,6 @@
                         "underground": "Souterrain"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Affichage d'informations aux voyageurs"
-                },
                 "payment_multi": {
                     "label": "Types de paiement"
                 },
@@ -3101,6 +3311,9 @@
                         "mountain_hiking": "T2 : randonnée de montagne"
                     },
                     "placeholder": "Randonnée de montagne, randonnée alpine…"
+                },
+                "salt": {
+                    "label": "Salé"
                 },
                 "sanitary_dump_station": {
                     "label": "Station de vidange sanitaire"
@@ -3394,6 +3607,9 @@
                     },
                     "placeholder": "Oui, non, à emporter seulement…"
                 },
+                "tidal": {
+                    "label": "Sous l'influence de la marée"
+                },
                 "to": {
                     "label": "Vers"
                 },
@@ -3566,7 +3782,7 @@
                 },
                 "website": {
                     "label": "Site Web",
-                    "placeholder": "https://exemple.fr/"
+                    "placeholder": "https://exemple.com"
                 },
                 "wetland": {
                     "label": "Type"
@@ -3621,11 +3837,11 @@
                 },
                 "aerialway/cable_car": {
                     "name": "Téléphérique",
-                    "terms": "téléphérique, telepherique, téléférique, teleferique, télécabine, telecabine, remontée mécanique, nacelle, cabine, bulle, cable car"
+                    "terms": "téléphérique, telepherique, téléférique, teleferique, télécabine, telecabine, remontée mécanique, nacelle, cabine, bulle, cable car, remontées mécaniques,remontée mécaniques,tire-fesses,télé-siège,télésiège"
                 },
                 "aerialway/chair_lift": {
                     "name": "Télésiège",
-                    "terms": "télésiège, telesiege, remontée mécanique, remontee mecanique, chair lift"
+                    "terms": "télésiège, telesiege, remontée mécanique, remontee mecanique, chair lift, remontées mécaniques, remontée mécaniques"
                 },
                 "aerialway/drag_lift": {
                     "name": "Téléski",
@@ -3702,7 +3918,8 @@
                     "terms": "Terminal"
                 },
                 "allotments/plot": {
-                    "name": "Parcelle dans un jardin familial"
+                    "name": "Parcelle dans un jardin familial",
+                    "terms": "parcelle,jardin"
                 },
                 "amenity": {
                     "name": "Équipement"
@@ -3775,7 +3992,8 @@
                     "terms": "Café, bar, salon de thé, pub, brasserie, restaurant, cafe"
                 },
                 "amenity/car_pooling": {
-                    "name": "Covoiturage"
+                    "name": "Covoiturage",
+                    "terms": "covoiturage"
                 },
                 "amenity/car_rental": {
                     "name": "Location de voiture",
@@ -3820,6 +4038,10 @@
                 "amenity/clock": {
                     "name": "Horloge",
                     "terms": "Horloge publique, pendule, heure, cadran solaire, clock"
+                },
+                "amenity/clock/sundial": {
+                    "name": "Cadran solaire",
+                    "terms": "cadran, solaire, horloge, gnomon, ombre, heure"
                 },
                 "amenity/college": {
                     "name": "Enseignement supérieur (non universitaire) - institution ou campus",
@@ -3892,6 +4114,10 @@
                     "name": "Kebab",
                     "terms": "kebab,grec,kébab,sandwich,kebap,doner,döner"
                 },
+                "amenity/fast_food/mexican": {
+                    "name": "Fast food mexicain",
+                    "terms": "fast-food,tacos,burritos"
+                },
                 "amenity/fast_food/pizza": {
                     "name": "Pizzeria",
                     "terms": "pizzeria,pizza"
@@ -3948,21 +4174,24 @@
                     "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
                 },
                 "amenity/language_school": {
-                    "name": "École de langues"
+                    "name": "École de langues",
+                    "terms": "école de langues,langues étrangères"
                 },
                 "amenity/library": {
                     "name": "Bibliothèque",
                     "terms": "Bibliothèque, Médiathèque"
                 },
                 "amenity/love_hotel": {
-                    "name": "Love hôtel"
+                    "name": "Love hôtel",
+                    "terms": "love hôtel"
                 },
                 "amenity/marketplace": {
                     "name": "Marché",
                     "terms": "Marché, Place de marché"
                 },
                 "amenity/monastery": {
-                    "name": "Terrain de monastère"
+                    "name": "Terrain de monastère",
+                    "terms": "monastère,abbaye,basilique,cathédrale,chapelle,église"
                 },
                 "amenity/money_transfer": {
                     "name": "Transfert d'argent",
@@ -4011,6 +4240,10 @@
                     "name": "Pharmacie",
                     "terms": "pharmacie"
                 },
+                "amenity/photo_booth": {
+                    "name": "Photomaton",
+                    "terms": "photomaton,caméra,identité,cabine photographique"
+                },
                 "amenity/place_of_worship": {
                     "name": "Lieu de culte",
                     "terms": "Édifice religieux"
@@ -4024,7 +4257,8 @@
                     "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte"
                 },
                 "amenity/place_of_worship/hindu": {
-                    "name": "Temple hindou"
+                    "name": "Temple hindou",
+                    "terms": "temple,religion,hindou,monastère"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
@@ -4035,13 +4269,16 @@
                     "terms": "mosquée,lieu de culte,musulman,islam"
                 },
                 "amenity/place_of_worship/shinto": {
-                    "name": "Shintoïste"
+                    "name": "Sanctuaire shintoïste",
+                    "terms": "temple,religion,shinto,monastère,sanctuaire"
                 },
                 "amenity/place_of_worship/sikh": {
-                    "name": "Temple Sikh"
+                    "name": "Temple Sikh",
+                    "terms": "temple,religion,sikh,monastère"
                 },
                 "amenity/place_of_worship/taoist": {
-                    "name": "Temple Taoïste"
+                    "name": "Temple Taoïste",
+                    "terms": "temple,religion,taoïste,monastère"
                 },
                 "amenity/planetarium": {
                     "name": "Planétarium",
@@ -4185,7 +4422,8 @@
                     "terms": "Abri"
                 },
                 "amenity/shelter/gazebo": {
-                    "name": "Gazébo"
+                    "name": "Gazébo",
+                    "terms": "gazébo"
                 },
                 "amenity/shelter/lean_to": {
                     "name": "Appentis",
@@ -4200,10 +4438,12 @@
                     "terms": "arrêt de bus,attente,abris"
                 },
                 "amenity/shower": {
-                    "name": "Douche"
+                    "name": "Douche",
+                    "terms": "douche"
                 },
                 "amenity/smoking_area": {
-                    "name": "Zone fumeur"
+                    "name": "Zone fumeur",
+                    "terms": "zone fumeur,cigarette,fumer"
                 },
                 "amenity/social_facility": {
                     "name": "Établissement de services sociaux",
@@ -4285,10 +4525,12 @@
                     "terms": "distributeur de boissons, distributeur à boissons, boissons, distributeur automatique de boissons, machine à boissons, machine à café, vente automatique de boissons, vente de boissons, vente boissons, eau, café, thé, soda, jus de fruit, vending machine drinks, drinks"
                 },
                 "amenity/vending_machine/electronics": {
-                    "name": "Distributeur de matériel éléctronique"
+                    "name": "Distributeur de matériel éléctronique",
+                    "terms": "matériel électronique,câbles,écouteurs,téléphone,tablette"
                 },
                 "amenity/vending_machine/elongated_coin": {
-                    "name": "Distributeur de pièces"
+                    "name": "Distributeur de pièces",
+                    "terms": "pièces,souvenir,commémoration"
                 },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Distributeur de sacs pour excréments d'animaux",
@@ -4334,7 +4576,8 @@
                     "terms": "distributeur de titres de transport, distributeur à titres de transport, titres de transport, tickets de transport, distributeur automatique de titres de transport, guichet automatique, machine à titres de transport, vente automatique de titres de transport, vente de titres de transport, vente titres de transport, tickets de train, tickets de bus, tickets de métro, tickets de RER, tickets train, tickets bus, tickets métro, tickets RER, billets de train, billets de bus, billets de métro, billets de RER, billets train, billets bus, billets métro, billets RER, titres de train, titres de bus, titres de métro, titres de RER, vending machine public transport tickets, public transport tickets, tickets, billets, train, bus, métro, RER"
                 },
                 "amenity/vending_machine/stamps": {
-                    "name": "Distributeur de timbres"
+                    "name": "Distributeur de timbres",
+                    "terms": "timbres,courrier,enveloppe,lettre"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Distributeur de snacks",
@@ -4345,7 +4588,8 @@
                     "terms": "Vétérinaire"
                 },
                 "amenity/waste/dog_excrement": {
-                    "name": "Bac à excrément de chien"
+                    "name": "Bac à excrément de chien",
+                    "terms": "bac à excrément de chien,poubelle,déchets,crottes,chien"
                 },
                 "amenity/waste_basket": {
                     "name": "Poubelle pour piétons",
@@ -4379,52 +4623,64 @@
                     "name": "Attraction touristique"
                 },
                 "attraction/amusement_ride": {
-                    "name": "Manège"
+                    "name": "Manège",
+                    "terms": "manège,attraction,parc d'attraction"
                 },
                 "attraction/animal": {
-                    "name": "Animal"
+                    "name": "Animal",
+                    "terms": "animal,animaux,cage,lion,tigre,ours,zoo,parc zoologique,parc animalier"
                 },
                 "attraction/big_wheel": {
-                    "name": "Grande Roue"
+                    "name": "Grande Roue",
+                    "terms": "grande roue,roue,attraction,parc d'attraction"
                 },
                 "attraction/bumper_car": {
-                    "name": "Auto tamponeuse"
+                    "name": "Auto tamponeuse",
+                    "terms": "auto tamponneuse,attraction,parc d'attraction"
                 },
                 "attraction/bungee_jumping": {
-                    "name": "Saut à l'élastique"
+                    "name": "Saut à l'élastique",
+                    "terms": "saut à l'élastique,attraction,parc d'attraction"
                 },
                 "attraction/carousel": {
                     "name": "Carrousel",
-                    "terms": "Carrousel, Manège"
+                    "terms": "Carrousel, Manège,attraction,parc d'attraction"
                 },
                 "attraction/dark_ride": {
-                    "name": "Parcours scénique"
+                    "name": "Parcours scénique",
+                    "terms": "parcours scénique,train fantôme,attraction,parc d'attraction"
                 },
                 "attraction/drop_tower": {
-                    "name": "Tour de chute"
+                    "name": "Tour de chute",
+                    "terms": "tour de chute,attraction,parc d'attraction"
                 },
                 "attraction/maze": {
                     "name": "Labyrinthe",
-                    "terms": "Labyrinthe"
+                    "terms": "Labyrinthe,attraction,parc d'attraction"
                 },
                 "attraction/pirate_ship": {
-                    "name": "Bateau pirate"
+                    "name": "Bateau pirate",
+                    "terms": "bateau pirate,attraction,parc d'attraction"
                 },
                 "attraction/river_rafting": {
-                    "name": "Rafting"
+                    "name": "Rafting",
+                    "terms": "rafting,bateau,canoë,kayak"
                 },
                 "attraction/roller_coaster": {
-                    "name": "Montagnes Russes"
+                    "name": "Montagnes russes",
+                    "terms": "montagnes russes,attraction,parc d'attraction"
                 },
                 "attraction/summer_toboggan": {
                     "name": "Luge d'été",
                     "terms": "luge d'été,toboggan d'été"
                 },
                 "attraction/train": {
-                    "name": "Train touristique"
+                    "name": "Train touristique",
+                    "terms": "train touristique,petit train"
                 },
                 "attraction/water_slide": {
-                    "name": "Toboggan Aquatique"
+                    "name": "Toboggan aquatique",
+                    "terms": "toboggan aquatique"
                 },
                 "barrier": {
                     "name": "Barrière physique",
@@ -4542,10 +4798,12 @@
                     "terms": "grange, hangar agricole, bâtiment agricole, stockage, grenier, abri, remise, étable, ferme, barn"
                 },
                 "building/boathouse": {
-                    "name": "Hangar à bateaux"
+                    "name": "Hangar à bateaux",
+                    "terms": "hangar à bateaux,bateaux"
                 },
                 "building/bungalow": {
-                    "name": "Bungalow"
+                    "name": "Bungalow",
+                    "terms": "bungalow"
                 },
                 "building/bunker": {
                     "name": "Bunker"
@@ -4571,7 +4829,8 @@
                     "terms": "Église, église, eglise, bâtiment religieux, lieu de culte, édifice religieux,\néglise catholique, église primatiale, basilique, église basilique, collégiale, église collégiale, église décanale, paroisses, église paroissiale, abbatiale, église abbatiale, église priorale,\néglise orthodoxe, métropole, catholicon, katholikon, kyriakon,\nchristianisme, catholicisme, orthodoxie, chrétienne, chrétiens, catholique, orthodoxe, prêtre, religion, clergé, prière, messe, church"
                 },
                 "building/civic": {
-                    "name": "Équipement public"
+                    "name": "Équipement public",
+                    "terms": "équipement public,bâtiment"
                 },
                 "building/college": {
                     "name": "Enseignement supérieur (non universitaire) - bâtiment",
@@ -4597,10 +4856,12 @@
                     "name": "Entrée/Sortie"
                 },
                 "building/farm": {
-                    "name": "Corps de ferme"
+                    "name": "Corps de ferme",
+                    "terms": "corps de ferme,ferme"
                 },
                 "building/farm_auxiliary": {
-                    "name": "Bâtiment de ferme"
+                    "name": "Bâtiment de ferme",
+                    "terms": "bâtiment de ferme,ferme"
                 },
                 "building/garage": {
                     "name": "Garage privé",
@@ -4611,7 +4872,8 @@
                     "terms": "garages, bloc de garages, boxes, box, hangar, parcages, parkings, voitures, parc de stationnement couvert"
                 },
                 "building/grandstand": {
-                    "name": "Tribune"
+                    "name": "Tribune",
+                    "terms": "tribune,gradins,stands,bancs"
                 },
                 "building/greenhouse": {
                     "name": "Serre",
@@ -4642,7 +4904,8 @@
                     "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
                 },
                 "building/mosque": {
-                    "name": "Mosquée - Bâtiment"
+                    "name": "Mosquée - Bâtiment",
+                    "terms": "mosquée,bâtiment,religion"
                 },
                 "building/pavilion": {
                     "name": "Pavillon",
@@ -4665,7 +4928,8 @@
                     "terms": "Voûte, Toit ouvert, Marché couvert"
                 },
                 "building/ruins": {
-                    "name": "Bâtiment en ruine"
+                    "name": "Bâtiment en ruine",
+                    "terms": "bâtiment en ruine,ruine"
                 },
                 "building/school": {
                     "name": "Bâtiment scolaire - élémentaire ou secondaire",
@@ -4676,7 +4940,8 @@
                     "terms": "maison jumelée, maison jumelle, maison mitoyenne, maison avec mur mitoyen, pavillon mitoyen, maisons jumelées, maisons jumelles, maisons mitoyennes, maisons avec mur mitoyen, pavillons mitoyens, building semidetached house, semidetached house, semi detached house"
                 },
                 "building/service": {
-                    "name": "Bâtiment de services"
+                    "name": "Bâtiment de services",
+                    "terms": "bâtiment de services,batiment de services,services"
                 },
                 "building/shed": {
                     "name": "Cabanon",
@@ -4695,7 +4960,8 @@
                     "terms": "Mobil home statique"
                 },
                 "building/temple": {
-                    "name": "Temple"
+                    "name": "Temple",
+                    "terms": "temple,religion"
                 },
                 "building/terrace": {
                     "name": "Rangée de maisons",
@@ -4705,7 +4971,8 @@
                     "name": "Gare ferroviaire"
                 },
                 "building/transportation": {
-                    "name": "Bâtiment pour transports publics"
+                    "name": "Bâtiment pour transports publics",
+                    "terms": "bâtiment pour transports publics,transports publics"
                 },
                 "building/university": {
                     "name": "Université - bâtiment universitaire",
@@ -4783,7 +5050,8 @@
                     "terms": "Confisier, confiseur, fabricant de bonbons"
                 },
                 "craft/distillery": {
-                    "name": "Distillerie"
+                    "name": "Distillerie",
+                    "terms": "distillerie,alcool,boisson,bière,bourbon,brandy,gin,liqueur"
                 },
                 "craft/dressmaker": {
                     "name": "Couturier",
@@ -4948,14 +5216,15 @@
                 },
                 "emergency/fire_hydrant": {
                     "name": "Borne incendie",
-                    "terms": "Borne incendie, borne-fontaine, borne fontaine, bouche d'incendie"
+                    "terms": "Borne incendie, borne-fontaine, borne fontaine, bouche d'incendie, poteau incendie, hydrant, fire hydrant"
                 },
                 "emergency/first_aid_kit": {
                     "name": "Kit de premiers secours",
                     "terms": "bandage, pansement, premiers secours, kit médical, kit d'urgence, trousse de secours, trousse d'urgence"
                 },
                 "emergency/life_ring": {
-                    "name": "Bouée de Sauvetage"
+                    "name": "Bouée de Sauvetage",
+                    "terms": "bouée de sauvetage"
                 },
                 "emergency/lifeguard": {
                     "name": "sauveteur",
@@ -4979,7 +5248,8 @@
                     "terms": "raid aérien, tempête, tornade, avertissement"
                 },
                 "emergency/water_tank": {
-                    "name": "Réservoir d'eau de secours"
+                    "name": "Réservoir d'eau de secours",
+                    "terms": "réservoir d'eau de secours,secours,urgence,reservoir"
                 },
                 "emergency/yes": {
                     "name": "Accessible aux services d'urgences"
@@ -4996,6 +5266,18 @@
                     "name": "Bunker (golf)",
                     "terms": "Bunker, Fosse de sable, bunker de fairway"
                 },
+                "golf/cartpath": {
+                    "name": "chemin pour charriot de golf",
+                    "terms": "charriot,golf,chemin,parcours de golf,terrain de golf"
+                },
+                "golf/cartpath_service": {
+                    "name": "voie de service pour charriot de golf",
+                    "terms": "charriot,golf,chemin,parcours de golf,terrain de golf"
+                },
+                "golf/driving_range": {
+                    "name": "Terrain de pratique",
+                    "terms": "pratique,swing,golf,parcours de golf,terrain de golf,practice"
+                },
                 "golf/fairway": {
                     "name": "Fairway",
                     "terms": "Fairway"
@@ -5008,13 +5290,13 @@
                     "name": "Trou de golf",
                     "terms": "Trou de golf"
                 },
-                "golf/lateral_water_hazard_area": {
+                "golf/lateral_water_hazard": {
                     "name": "Obstacle d'eau latéral",
-                    "terms": "zone d'eau latéral"
+                    "terms": "terrain de golf,obstacle d'eau,zone d'eau"
                 },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Obstacle d'eau latéral",
-                    "terms": "ligne d'eau latéral"
+                "golf/path": {
+                    "name": "Chemin de terrain de golf",
+                    "terms": "terrain de golf,parcours de golf,chemin"
                 },
                 "golf/rough": {
                     "name": "Hautes herbes (golf)",
@@ -5024,13 +5306,9 @@
                     "name": "Départ",
                     "terms": "Tertre de départ"
                 },
-                "golf/water_hazard_area": {
+                "golf/water_hazard": {
                     "name": "Obstacle d'eau",
-                    "terms": "zone d'eau"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Obstacle d'eau",
-                    "terms": "ligne d'eau"
+                    "terms": "terrain de golf,obstacle d'eau,zone d'eau"
                 },
                 "healthcare": {
                     "name": "Établissement de soins de santé",
@@ -5104,7 +5382,8 @@
                     "terms": "Piste cavalière, Sentier à chevaux, Sentier pour chevaux"
                 },
                 "highway/bus_guideway": {
-                    "name": "Voie de bus guidés"
+                    "name": "Voie de bus guidés",
+                    "terms": "voie de bus guidés"
                 },
                 "highway/bus_stop": {
                     "name": "Arrêt de bus"
@@ -5190,7 +5469,8 @@
                     "terms": "Zone de rencontre"
                 },
                 "highway/milestone": {
-                    "name": "Borne kilométrique"
+                    "name": "Borne kilométrique",
+                    "terms": "borne kilométrique"
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini carrefour giratoire",
@@ -5397,8 +5677,7 @@
                     "terms": "Jonction routière, Jonction, Carrefour, Intersection routière,  Intersection"
                 },
                 "landuse": {
-                    "name": "Utilisation du sol",
-                    "terms": "Type d'utilisation du sol, terrain"
+                    "name": "Utilisation du sol"
                 },
                 "landuse/allotments": {
                     "name": "Jardins familiaux",
@@ -5447,7 +5726,8 @@
                     "terms": "exploitation forestière,forêt,arbres,rondins"
                 },
                 "landuse/garages": {
-                    "name": "Terrain pour garages"
+                    "name": "Terrain pour garages",
+                    "terms": "terrain pour garages,garages"
                 },
                 "landuse/grass": {
                     "name": "Herbe",
@@ -5458,7 +5738,8 @@
                     "terms": "Terrain vierge"
                 },
                 "landuse/greenhouse_horticulture": {
-                    "name": "Serre d'horticulture"
+                    "name": "Serre d'horticulture",
+                    "terms": "serre d'horticulture,fleurs,horticulture"
                 },
                 "landuse/harbour": {
                     "name": "Port / Havre",
@@ -5579,18 +5860,19 @@
                     "terms": "Vignes"
                 },
                 "leisure": {
-                    "name": "Loisirs",
-                    "terms": "Loisir"
+                    "name": "Loisirs"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Jeux pour adultes",
                     "terms": "Jeux pour adultes"
                 },
                 "leisure/amusement_arcade": {
-                    "name": "Salle de jeux"
+                    "name": "Salle de jeux",
+                    "terms": "salle de jeux,arcade,jeux vidéos,simulateurs de course,pinball"
                 },
                 "leisure/bandstand": {
-                    "name": "Kiosque à musique"
+                    "name": "Kiosque à musique",
+                    "terms": "kioske à musique,kiosque à musique"
                 },
                 "leisure/beach_resort": {
                     "name": "Station balnéaire",
@@ -5601,7 +5883,8 @@
                     "terms": "Observatoire d'oiseaux"
                 },
                 "leisure/bleachers": {
-                    "name": "Gradins"
+                    "name": "Gradins",
+                    "terms": "gradins,bancs,sport,stand"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling",
@@ -5616,7 +5899,8 @@
                     "terms": "piste de danse,salle de bal,dancing"
                 },
                 "leisure/dancing_school": {
-                    "name": "École de dance"
+                    "name": "École de dance",
+                    "terms": "école de dance,swing,tango,valse,dance"
                 },
                 "leisure/dog_park": {
                     "name": "Parc canin",
@@ -5667,18 +5951,20 @@
                     "terms": "Barres parallèles"
                 },
                 "leisure/fitness_station/push-up": {
-                    "name": "Équipement pour pompes inclinées en extérieur"
+                    "name": "Équipement pour pompes inclinées en extérieur",
+                    "terms": "pompes inclinées,équipement,fitness,exercice"
                 },
                 "leisure/fitness_station/rings": {
                     "name": "Anneaux de gymnastique ",
-                    "terms": "Anneaux de gymnastique"
+                    "terms": "Anneaux de gymnastique,gymnastique"
                 },
                 "leisure/fitness_station/sign": {
                     "name": "Panneau d'instruction d'un exercice",
-                    "terms": "Panneau d'instruction d'un exercice"
+                    "terms": "Panneau d'instruction d'un exercice,exercice,instructions,fitness"
                 },
                 "leisure/fitness_station/sit-up": {
-                    "name": "Équipement pour abdominaux en extérieur"
+                    "name": "Équipement pour abdominaux en extérieur",
+                    "terms": "abdos,exercices,équipement sportif,abdominaux,fitness"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "Escalier d'exercices",
@@ -5717,7 +6003,8 @@
                     "terms": "Zone protégée"
                 },
                 "leisure/outdoor_seating": {
-                    "name": "Aire des places en terrasse"
+                    "name": "Aire des places en terrasse",
+                    "terms": "places en terrase,terrasse,beer garden,biergarten,restaurant,bar"
                 },
                 "leisure/park": {
                     "name": "Parc",
@@ -5726,6 +6013,10 @@
                 "leisure/picnic_table": {
                     "name": "Table de pique-nique",
                     "terms": "Table de pique-nique"
+                },
+                "leisure/picnic_table/chess": {
+                    "name": "Échiquier",
+                    "terms": "table d'échecs,échecs,échiquier,bancs,table de jeu,jeu"
                 },
                 "leisure/pitch": {
                     "name": "Terrain de sport",
@@ -5827,6 +6118,10 @@
                     "name": "Centre sportif",
                     "terms": "complexe sportif,salle de sport"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Salle d'escalade",
+                    "terms": "escalade,salle,mur,prises,block,bloque"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Centre aquatique",
                     "terms": "Piscine,Stade nautique,Stade aquatique"
@@ -5860,8 +6155,7 @@
                     "terms": "Ligne"
                 },
                 "man_made": {
-                    "name": "Édifices",
-                    "terms": "Créé par l'homme"
+                    "name": "Édifices"
                 },
                 "man_made/adit": {
                     "name": "Entrée de mine",
@@ -5888,7 +6182,8 @@
                     "terms": "Cheminée"
                 },
                 "man_made/clearcut": {
-                    "name": "Coupe rase forestière"
+                    "name": "Coupe rase forestière",
+                    "terms": "coupe rase forestière,bucheron,bois,arbres coupés,forêt"
                 },
                 "man_made/crane": {
                     "name": "Grue",
@@ -5986,9 +6281,17 @@
                     "name": "Tour",
                     "terms": "Tour"
                 },
+                "man_made/tower/bell_tower": {
+                    "name": "Clocher",
+                    "terms": "clocher,tour,église,beffroi"
+                },
                 "man_made/tower/communication": {
                     "name": "Tour de communication",
                     "terms": "tour de télécommunication,diffusion,antenne,téléphone portable,téléphone cellulaire,gsm,tour,radio,mât de transmission,pylône de transmission"
+                },
+                "man_made/tower/minaret": {
+                    "name": "Minaret",
+                    "terms": "minaret,islam,mosquée,muezzin,tour"
                 },
                 "man_made/tower/observation": {
                     "name": "Tour d'observation",
@@ -6011,28 +6314,31 @@
                     "terms": "Usine d'eau potable"
                 },
                 "man_made/watermill": {
-                    "name": "Moulin à eau"
+                    "name": "Moulin à eau",
+                    "terms": "moulin à eau,eau,roue"
                 },
                 "man_made/windmill": {
-                    "name": "Moulin à vent"
+                    "name": "Moulin à vent",
+                    "terms": "moulin à vent,vent"
                 },
                 "man_made/works": {
                     "name": "Usine",
                     "terms": "Usine"
                 },
                 "manhole": {
-                    "name": "Bouche d'égout"
+                    "name": "Bouche d'égout",
+                    "terms": "bouche d'égout,égout,télécommunication,plaque"
                 },
                 "manhole/drain": {
-                    "name": "Collecteur d'eaux pluviales"
+                    "name": "Collecteur d'eaux pluviales",
+                    "terms": "collecteur d'eaux pluviales,pluies,égouts,tempête,débordement"
                 },
                 "manhole/telecom": {
                     "name": "Puits de télécommunication",
                     "terms": "couvert,puits,trou,télécom,téléphone"
                 },
                 "natural": {
-                    "name": "Nature",
-                    "terms": "Nature"
+                    "name": "Nature"
                 },
                 "natural/bare_rock": {
                     "name": "Zone Rocheuse",
@@ -6125,6 +6431,10 @@
                 "natural/water": {
                     "name": "Eau",
                     "terms": "Eau"
+                },
+                "natural/water/basin": {
+                    "name": "Bassin",
+                    "terms": "bassin,eau,plan d'eau"
                 },
                 "natural/water/canal": {
                     "name": "Canal",
@@ -6538,131 +6848,133 @@
                     "name": "Transformateur",
                     "terms": "Transformateur"
                 },
-                "public_transport/linear_platform": {
-                    "name": "Quai de transport en commun"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Quai pour remontée mécanique"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Arrêt de bus"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Quai pour ferry"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Station de métro léger"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Quai de monorail"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Quai de métro"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Quai de gare ferroviaire"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Quai pour tramway"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Quai pour trolleys"
-                },
                 "public_transport/platform": {
-                    "name": "Quai de transport en commun"
+                    "name": "Quai de transport en commun",
+                    "terms": "gare de transports en commun,station de transports en commun,quai de transports en commun,gare,stop,arrêt,station,attente voyageur,transports en commun"
                 },
                 "public_transport/platform_aerialway": {
-                    "name": "Quai pour remontée mécanique"
+                    "name": "Quai pour remontée mécanique",
+                    "terms": "gare de remontées mécaniques,station de remontées mécaniques,quai de remontées mécaniques,gare,stop,arrêt,station,attente voyageur,remontées mécaniques,remontée mécaniques,tire-fesses,télé-siège,télésiège,téléphérique,télécabine"
                 },
                 "public_transport/platform_bus": {
-                    "name": "Arrêt de bus"
+                    "name": "Arrêt de bus",
+                    "terms": "gare de bus,station de bus,quai de bus,gare,stop,arrêt,station,attente voyageur,bus,car"
                 },
                 "public_transport/platform_ferry": {
-                    "name": "Quai pour ferry"
+                    "name": "Quai pour ferry",
+                    "terms": "gare de ferry,station de ferry,quai de ferry,gare,stop,arrêt,station,attente voyageur,ferry,bateau"
                 },
                 "public_transport/platform_light_rail": {
-                    "name": "Station de métro léger"
+                    "name": "Station de métro léger",
+                    "terms": "gare de métro léger,station de métro léger,quai de métro léger,gare,stop,arrêt,station,attente voyageur,métro léger"
                 },
                 "public_transport/platform_monorail": {
-                    "name": "Quai de monorail"
+                    "name": "Quai de monorail",
+                    "terms": "gare de monorail,station de monorail,quai de monorail,gare,stop,arrêt,station,attente voyageur,monorail"
                 },
                 "public_transport/platform_subway": {
-                    "name": "Quai de métro"
+                    "name": "Quai de métro",
+                    "terms": "gare de métro,station de métro,quai de métro,gare,stop,arrêt,station,attente voyageur,métro"
                 },
                 "public_transport/platform_train": {
-                    "name": "Quai de gare ferroviaire"
+                    "name": "Quai de gare ferroviaire",
+                    "terms": "gare ferroviaire,station ferroviaire,quai ferroviaire,quai de train,gare,stop,arrêt,station,attente voyageur,train"
                 },
                 "public_transport/platform_tram": {
-                    "name": "Quai pour tramway"
+                    "name": "Quai pour tramway",
+                    "terms": "gare de tramway,station de tramway,quai de tramway,gare,stop,arrêt,station,attente voyageur,tramway"
                 },
                 "public_transport/platform_trolleybus": {
-                    "name": "Quai pour trolleys"
+                    "name": "Quai pour trolleys",
+                    "terms": "gare de trolleys,station de trolleys,quai de trolley,gare,stop,arrêt,station,attente voyageur,trolleys"
                 },
                 "public_transport/station": {
-                    "name": "Station"
+                    "name": "Station",
+                    "terms": "gare,stop,arrêt,station"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Gare de remontée mécanique"
+                    "name": "Gare de remontée mécanique",
+                    "terms": "gare de remontées mécaniques,station de remontées mécaniques,gare,stop,arrêt,station,remontées mécaniques,remontée mécanique,tire-fesse,télésiège,télé-siège,téléphérique"
                 },
                 "public_transport/station_bus": {
-                    "name": "Gare routière"
+                    "name": "Gare routière",
+                    "terms": "gare routière,station routière,gare,stop,arrêt,station,bus"
                 },
                 "public_transport/station_ferry": {
-                    "name": "Terminal ferry"
+                    "name": "Terminal ferry",
+                    "terms": "terminal de ferry,gare de ferry,station de ferry,gare,stop,arrêt,station,bateau,ferry"
                 },
                 "public_transport/station_light_rail": {
-                    "name": "Station de tramway léger"
+                    "name": "Station de tramway léger",
+                    "terms": "gare de tramway,station de tramway,gare,stop,arrêt,station,train-tram,tramway léger"
                 },
                 "public_transport/station_monorail": {
-                    "name": "Station de monorail"
+                    "name": "Station de monorail",
+                    "terms": "gare de monorail,station de monorail,gare,stop,arrêt,station,monorail"
                 },
                 "public_transport/station_subway": {
-                    "name": "Station de métro"
+                    "name": "Station de métro",
+                    "terms": "gare de métro,station de métro,gare,stop,arrêt,station,métro"
                 },
                 "public_transport/station_train": {
-                    "name": "Gare ferroviaire"
+                    "name": "Gare ferroviaire",
+                    "terms": "gare ferroviaire,station ferroviaire,gare,stop,arrêt,station,train"
                 },
                 "public_transport/station_train_halt": {
-                    "name": "Gare ferroviaire (arrêt à la demande)"
+                    "name": "Gare ferroviaire (arrêt à la demande)",
+                    "terms": "gare ferroviaire,station ferorviaire,gare,stop,arrêt,station,train"
                 },
                 "public_transport/station_tram": {
-                    "name": "Station de tramway"
+                    "name": "Station de tramway",
+                    "terms": "gare de tramway,station de tramway,gare,stop,arrêt,station,train"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "Gare de trolleys"
+                    "name": "Gare de trolleys",
+                    "terms": "gare de trolleys,station de trolleys,gare,stop,arrêt,station,trolley"
                 },
                 "public_transport/stop_area": {
-                    "name": "Zone d'arrêt"
+                    "name": "Zone d'arrêt",
+                    "terms": "zone d'arrêt,arrêt,stop"
                 },
                 "public_transport/stop_position": {
-                    "name": "Emplacement d'arrêt"
+                    "name": "Emplacement d'arrêt",
+                    "terms": "emplacement d'arrêt,arrêt,stop"
                 },
                 "public_transport/stop_position_aerialway": {
-                    "name": "Emplacement où s'arrête la remontée mécanique"
+                    "name": "Emplacement où s'arrête la remontée mécanique",
+                    "terms": "emplacement où s'arrête la remontée mécanique,arrêt de remontée mécanique,stop de remontée mécanique,remontée mécanique,remontées mécaniques"
                 },
                 "public_transport/stop_position_bus": {
-                    "name": "Emplacement où s'arrête le bus"
+                    "name": "Emplacement où s'arrête le bus",
+                    "terms": "emplacement où s'arrête le bus,arrêt de bus,stop de bus,bus,car"
                 },
                 "public_transport/stop_position_ferry": {
-                    "name": "Emplacement où s'arrête le ferry"
+                    "name": "Emplacement où s'arrête le ferry",
+                    "terms": "emplacement où s'arrête le ferry,arrêt de ferry,stop de ferry,ferry,bateau"
                 },
                 "public_transport/stop_position_light_rail": {
-                    "name": "Emplacement où s'arrête le train-tram"
+                    "name": "Emplacement où s'arrête le train-tram",
+                    "terms": "emplacement où s'arrête le train-tram,arrêt de train-tram,stop de train-tram,train-tram,tramway léger"
                 },
                 "public_transport/stop_position_monorail": {
-                    "name": "Emplacement où s'arrête le monorail"
+                    "name": "Emplacement où s'arrête le monorail",
+                    "terms": "emplacement où s'arrête le monorail,arrêt de monorail,stop de monorail,monorail"
                 },
                 "public_transport/stop_position_subway": {
-                    "name": "Emplacement où s'arrête le métro"
+                    "name": "Emplacement où s'arrête le métro",
+                    "terms": "emplacement où s'arrête le métro,arrêt de métro,stop de métro,métro"
                 },
                 "public_transport/stop_position_train": {
-                    "name": "Emplacement où s'arrête le train"
+                    "name": "Emplacement où s'arrête le train",
+                    "terms": "emplacement où s'arrête le train,arrêt de train,stop de train,train"
                 },
                 "public_transport/stop_position_tram": {
-                    "name": "Emplacement où s'arrête le tramway"
+                    "name": "Emplacement où s'arrête le tramway",
+                    "terms": "emplacement où s'arrête le tramway,arrêt de tramway,stop de tramway,tramway"
                 },
                 "public_transport/stop_position_trolleybus": {
-                    "name": "Emplacement où s'arrête le trolley"
+                    "name": "Emplacement où s'arrête le trolley",
+                    "terms": "emplacement où s'arrête le trolley,arrêt de trolley,stop de trolley,trolley"
                 },
                 "railway": {
                     "name": "Ferroviaire"
@@ -6672,14 +6984,16 @@
                     "terms": "Voie ferrée abandonnée"
                 },
                 "railway/buffer_stop": {
-                    "name": "Butoir"
+                    "name": "Butoir",
+                    "terms": "butoir,stop,arrêt"
                 },
                 "railway/crossing": {
                     "name": "Passage à niveau (piétons)",
                     "terms": "Passage à niveau (chemin)"
                 },
                 "railway/derail": {
-                    "name": "Dérailleur Ferroviaire"
+                    "name": "Dérailleur Ferroviaire",
+                    "terms": "dérailleur ferroviaire"
                 },
                 "railway/disused": {
                     "name": "Voie ferrée désaffectée",
@@ -6701,10 +7015,12 @@
                     "terms": "Métro léger"
                 },
                 "railway/milestone": {
-                    "name": "Borne kilométrique ferroviaire"
+                    "name": "Borne kilométrique ferroviaire",
+                    "terms": "borne kilométrique ferroviaire"
                 },
                 "railway/miniature": {
-                    "name": "Train miniature à passagers"
+                    "name": "Train miniature à passagers",
+                    "terms": "train miniature,mini train"
                 },
                 "railway/monorail": {
                     "name": "Monorail",
@@ -6722,7 +7038,8 @@
                     "terms": "Rail"
                 },
                 "railway/signal": {
-                    "name": "Feux tricolores Ferroviaire"
+                    "name": "Feux tricolores ferroviaires",
+                    "terms": "feux tricolores ferroviaires,signalisation ferroviaire"
                 },
                 "railway/station": {
                     "name": "Gare ferroviaire"
@@ -6736,10 +7053,12 @@
                     "terms": "Entrée de métro, Bouche de métro"
                 },
                 "railway/switch": {
-                    "name": "Commutateur Ferroviaire"
+                    "name": "Commutateur Ferroviaire",
+                    "terms": "commutateur ferroviaire"
                 },
                 "railway/train_wash": {
-                    "name": "Lavage de Train"
+                    "name": "Lavage de Train",
+                    "terms": "lavage de train,nettoyage de train"
                 },
                 "railway/tram": {
                     "name": "Tramway",
@@ -6791,7 +7110,8 @@
                     "terms": "Magasin,Boutique"
                 },
                 "shop/agrarian": {
-                    "name": "Magasin de produits de la ferme"
+                    "name": "Magasin d'agriculture",
+                    "terms": "magasin de produit de la ferme,machines,pesticides,graines,engins agricoles"
                 },
                 "shop/alcohol": {
                     "name": "Magasin de vente d'alcool",
@@ -7064,7 +7384,8 @@
                     "terms": "Quincaillerie"
                 },
                 "shop/health_food": {
-                    "name": "Magasin d'alimentation de santé"
+                    "name": "Magasin d'alimentation de santé",
+                    "terms": "magasin d'alimentation de santé,vitamines"
                 },
                 "shop/hearing_aids": {
                     "name": "Audioprothésiste",
@@ -7330,7 +7651,8 @@
                     "terms": "Armurerie"
                 },
                 "shop/wholesale": {
-                    "name": "Commerce de gros"
+                    "name": "Commerce de gros",
+                    "terms": "commerce de gros,gros,lot,entrepôt"
                 },
                 "shop/window_blind": {
                     "name": "Magasin de vente de stores",
@@ -7341,8 +7663,7 @@
                     "terms": "Caviste,  Bar à vins"
                 },
                 "tourism": {
-                    "name": "Tourisme",
-                    "terms": "Tourisme"
+                    "name": "Tourisme"
                 },
                 "tourism/alpine_hut": {
                     "name": "Refuge de montagne",
@@ -7441,7 +7762,8 @@
                     "terms": "Parc à thème, parc d'attractions"
                 },
                 "tourism/trail_riding_station": {
-                    "name": "Station équestre"
+                    "name": "Station équestre",
+                    "terms": "station équestre,station de randonnée équestre,randonnée équestre"
                 },
                 "tourism/viewpoint": {
                     "name": "Point de vue",
@@ -7682,7 +8004,8 @@
                     "terms": "Station-service nautique, nautisme, bateaux, essence"
                 },
                 "waterway/milestone": {
-                    "name": "Borne kilométrique fluviale"
+                    "name": "Borne kilométrique fluviale",
+                    "terms": "borne kilométrique fluviale"
                 },
                 "waterway/river": {
                     "name": "Rivière",

@@ -193,7 +193,8 @@
                 "restriction": "Questi elementi non possono essere uniti perché ciò danneggerebbe la relazione “{relation}”.",
                 "relation": "Questi elementi non possono essere uniti perché hanno dei ruoli di relazione tra loro in conflitto.",
                 "incomplete_relation": "Questi elementi non posso essere uniti perché almeno uno di loro non è stato completamente scaricato.",
-                "conflicting_tags": "Questi elementi non possono essere uniti perché alcuni dei loro tag sono in conflitto tra loro."
+                "conflicting_tags": "Questi elementi non possono essere uniti perché alcuni dei loro tag sono in conflitto tra loro.",
+                "paths_intersect": "Queste strade non possono essere unite perché il percorso risultante intersecherebbe se stesso."
             },
             "move": {
                 "title": "Muovi",
@@ -413,6 +414,8 @@
             "modified": "Modificati",
             "deleted": "Cancellati",
             "created": "Creati",
+            "outstanding_errors_message": "Per favore, risolvi tutti gli errori. [count] rimanenti.",
+            "comment_needed_message": "Per favore aggiungi un commento al gruppo di modifiche.",
             "about_changeset_comments": "Info sui Commenti al gruppo di modifiche",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "In questo commento hai nominato Google: ricorda sempre che copiare da Google Maps è severamente proibito.",
@@ -505,8 +508,6 @@
                 "tooltip_data": "Centra e ingrandisci la mappa per focalizzare su questi dati.",
                 "tooltip_issue": "Centra e ingrandisci la mappa per focalizzare su questo problema."
             },
-            "no_documentation_combination": "Non c'è documentazione per questa combinazione di tag",
-            "no_documentation_key": "Non c'è documentazione per questa chiave",
             "show_more": "Mostra di più",
             "view_on_osm": "Vedi su openstreetmap.org",
             "view_on_keepRight": "Vedi su keepright.at",
@@ -519,10 +520,14 @@
             "role": "Ruolo",
             "choose": "Seleziona il tipo di caratteristica",
             "results": "{n} risultati per {search}",
-            "reference": "Vedi sulla Wiki di OpenStreetMap →",
-            "edit_reference": "Modifica o traduci la descrizione",
+            "no_documentation_key": "Nessuna documentazione disponibile",
+            "edit_reference": "modifica/traduci",
             "wiki_reference": "Vedi la documentazione",
             "wiki_en_reference": "Vedi la documentazione in inglese",
+            "hidden_preset": {
+                "manual": "{elementi} sono nascosti. Abilitale nel pannello Dati della mappa.",
+                "zoom": "{elementi} sono nascosti. Ingrandisci per abilitarle."
+            },
             "back_tooltip": "Cambia elemento",
             "remove": "Rimuovere",
             "search": "Cerca",
@@ -597,6 +602,10 @@
                     "tooltip": "Problemi della mappa rilevati automaticamente da keepright.at",
                     "title": "Problemi KeepRight"
                 },
+                "improveOSM": {
+                    "tooltip": "Dati mancanti rilevati automaticamente da improveosm.org",
+                    "title": "Problemi ImproveOSM"
+                },
                 "custom": {
                     "tooltip": "Trascina un file dati sulla pagina oppure clicca il pulsante per impostarlo.",
                     "title": "Dati della mappa personalizzati",
@@ -650,11 +659,11 @@
                 "tooltip": "Linee elettriche, centrali, sottostazioni, ecc."
             },
             "past_future": {
-                "description": "Elementi passati o futuri",
+                "description": "Funzioni passate/future",
                 "tooltip": "Proposti, in costruzione, abbandonati, demoliti, ecc."
             },
             "others": {
-                "description": "Altri",
+                "description": "Altre funzioni",
                 "tooltip": "Tutto il resto"
             }
         },
@@ -774,25 +783,6 @@
             "on_wiki": "{tag} su wiki.osm.org",
             "used_with": "usato con {type}"
         },
-        "validations": {
-            "disconnected_highway": "Percorso scollegato",
-            "disconnected_highway_tooltip": "I percorsi dovrebbero essere connessi ad altri percorsi o all'ingresso di un edificio.",
-            "generic_name": "Possibile nome generico",
-            "generic_name_tooltip": "Questo elemento sembra un nome generico \"{name}\". Per favore usa il campo name per inserire il nome ufficiale dell'elemento.",
-            "old_multipolygon": "Etichette di multipoligono su percorso esterno",
-            "old_multipolygon_tooltip": "Questo modo di mappare un multipoligono è sconsigliato. Assegnare le etichette alla relazione multipoligono piuttosto che al percorso esterno.",
-            "untagged_point": "Punto senta tag",
-            "untagged_point_tooltip": "Seleziona un tipo di elemento che descriva cos'è questo punto.",
-            "untagged_line": "Linea senza tag",
-            "untagged_line_tooltip": "Seleziona un tipo di elemento che descriva cos'è questa linea.",
-            "untagged_area": "Area senza tag",
-            "untagged_area_tooltip": "Seleziona un tipo di elemento che descriva cos'è quest'area.",
-            "untagged_relation": "Relazione senza tag",
-            "untagged_relation_tooltip": "Seleziona un tipo di elemento che descriva di che relazione si tratta.",
-            "many_deletions": "Stai cancellando {n} elementi: {p} nodi, {l} linee, {a} aree, {r} relazioni. Sei sicuro di volerlo fare? Questo cancellerà gli elementi dalla mappa che può vedere chiunque su openstreetmap.org.",
-            "tag_suggests_area": "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
-            "deprecated_tags": "Tag deprecati: {tags}"
-        },
         "zoom": {
             "in": "Ingrandisci",
             "out": "Rimpicciolisci"
@@ -800,6 +790,30 @@
         "cannot_zoom": "Impossibile rimpicciolire ulteriormente nella modalità attuale.",
         "full_screen": "Passa a schermo intero",
         "QA": {
+            "improveOSM": {
+                "title": "Rilevamento ImproveOSM",
+                "geometry_types": {
+                    "path": "percorsi",
+                    "parking": "parcheggio",
+                    "road": "strade",
+                    "both": "strade e parcheggio"
+                },
+                "directions": {
+                    "east": "est",
+                    "north": "nord",
+                    "northeast": "nordest",
+                    "northwest": "nordovest",
+                    "south": "sud",
+                    "southeast": "sudest",
+                    "southwest": "sudovest",
+                    "west": "ovest"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Senso unico mancante"
+                    }
+                }
+            },
             "keepRight": {
                 "title": "Errore KeepRight",
                 "detail_title": "Errore",
@@ -896,6 +910,10 @@
                     "75": {
                         "description": "{var1} ha il nome \"{var2}\" ma nessun altro tag."
                     },
+                    "90": {
+                        "title": "Autostrada senza etichetta \"ref\"",
+                        "description": "{var1} é etichettata come autostrada, serve quindi aggiungere i tag \"ref\", \"nat_ref\", o \"int_ref\"."
+                    },
                     "100": {
                         "title": "Luogo di culto senza religion"
                     },
@@ -924,7 +942,8 @@
                         "description": "Manca il tag \"type\" a {var1}."
                     },
                     "190": {
-                        "title": "Intersezione senza incrocio"
+                        "title": "Intersezione senza incrocio",
+                        "description": "{var1} interseca la {var2} {var3}, manca però un nodo di connessione, un ponte, o un tunnel."
                     },
                     "200": {
                         "title": "Percorsi sovrapposti"
@@ -1262,8 +1281,7 @@
             },
             "qa": {
                 "title": "Controllo qualità.",
-                "tools_h": "Strumenti",
-                "tools": "Sono supportati i seguenti strumenti:: [KeepRight](https://www.keepright.at/). Probabilmente in futuro iD supporterà [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/) e altri strumenti per il mantenimento della qualità in futuro."
+                "tools_h": "Strumenti"
             },
             "field": {
                 "restrictions": {
@@ -1710,9 +1728,6 @@
                 },
                 "category-building": {
                     "name": "Caratteristiche degli Edifici"
-                },
-                "category-golf": {
-                    "name": "Caratteristiche del Golf"
                 },
                 "category-landuse": {
                     "name": "Caratteristiche degli Utilizzi del terreno"
@@ -2762,9 +2777,6 @@
                         "underground": "Sotterraneo"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Display arrivi/partenze"
-                },
                 "payment_multi": {
                     "label": "Tipologie di pagamento"
                 },
@@ -3398,8 +3410,7 @@
                     "label": "Tipo"
                 },
                 "website": {
-                    "label": "Sito web",
-                    "placeholder": "http://example.com/"
+                    "label": "Sito web"
                 },
                 "wetland": {
                     "label": "Tipo"
@@ -3731,7 +3742,7 @@
                     "name": "Stazione / Terminal dei battelli"
                 },
                 "amenity/fire_station": {
-                    "name": "Caserma dei pompieri",
+                    "name": "Caserma dei vigili del fuoco",
                     "terms": "Stazione dei Vigili del fuoco"
                 },
                 "amenity/food_court": {
@@ -4467,9 +4478,6 @@
                     "name": "Villette a schiera",
                     "terms": "villette,fila di case"
                 },
-                "building/train_station": {
-                    "name": "Stazione ferroviaria"
-                },
                 "building/transportation": {
                     "name": "Stazione (mezzi di trasporto)"
                 },
@@ -4770,14 +4778,6 @@
                     "name": "Buca del golf",
                     "terms": "buca,golf"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Laghetto laterale",
-                    "terms": "Laghetto laterale"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Laghetto laterale",
-                    "terms": "Laghetto Laterale"
-                },
                 "golf/rough": {
                     "name": "Irregolare, grezzo",
                     "terms": "Erba alta,Rough"
@@ -4785,14 +4785,6 @@
                 "golf/tee": {
                     "name": "Tee di Partenza",
                     "terms": "Piazzola di partenza"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Laghetto",
-                    "terms": "Laghetto"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Laghetto",
-                    "terms": "Laghetto"
                 },
                 "healthcare": {
                     "name": "Clinica",
@@ -5098,8 +5090,7 @@
                     "terms": "svincolo,uscita"
                 },
                 "landuse": {
-                    "name": "Utilizzi del terreno",
-                    "terms": "uso del suolo,suolo,terreno,uso,utilizzo,destinazione"
+                    "name": "Utilizzi del terreno"
                 },
                 "landuse/allotments": {
                     "name": "Orti in concessione",
@@ -5266,8 +5257,7 @@
                     "terms": "Vigna"
                 },
                 "leisure": {
-                    "name": "Svago",
-                    "terms": "Svago"
+                    "name": "Svago"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Sala da gioco",
@@ -5515,8 +5505,7 @@
                     "terms": "Linea"
                 },
                 "man_made": {
-                    "name": "Costruzioni civili",
-                    "terms": "Artificiale"
+                    "name": "Costruzioni civili"
                 },
                 "man_made/adit": {
                     "name": "Cunicolo",
@@ -5676,8 +5665,7 @@
                     "name": "Tombino per telecominicazioni"
                 },
                 "natural": {
-                    "name": "Naturale",
-                    "terms": "Elemento naturale"
+                    "name": "Naturale"
                 },
                 "natural/bare_rock": {
                     "name": "Roccia",
@@ -6106,36 +6094,6 @@
                 "power/transformer": {
                     "name": "Trasformatore",
                     "terms": "Trasformatore"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Fermata / Banchina del trasporto pubblico"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Fermata / banchina del trasporto a fune"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Fermata / banchina dell'autobus"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Fermata / banchina del traghetto"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Fermata / banchina della metropolitana di superficie"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Fermata / banchina della monorotaia"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Fermata / banchina della metropolitana"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Fermata / banchina del treno"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Fermata / banchina del tram"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Fermata / Banchina del filobus"
                 },
                 "public_transport/platform": {
                     "name": "Fermata / Banchina del trasporto pubblico"
@@ -6882,8 +6840,7 @@
                     "terms": "vino,negozio di vini"
                 },
                 "tourism": {
-                    "name": "Turismo",
-                    "terms": "turismo,attrazione,turistica,interesse,turisti,escursionismo,viaggio,gita"
+                    "name": "Turismo"
                 },
                 "tourism/alpine_hut": {
                     "name": "Rifugio",
@@ -7476,6 +7433,13 @@
                 },
                 "description": "Ortofoto di GSI Giappone. In genere migliori di Bing ma un po’ più vecchie.",
                 "name": "Ortofoto di GSI Giappone"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI del Giappone"
+                },
+                "description": "Immagini aeree GSI del Giappone. Non del tutto orto-rettificate ma un po’ più recenti e/o con copertura differente delle orto-immagini GSI.",
+                "name": "Immagini aeree GSI del Giappone"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

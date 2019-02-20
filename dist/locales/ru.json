@@ -499,8 +499,6 @@
             "zoom_to": {
                 "key": "Z"
             },
-            "no_documentation_combination": "Для этой комбинации ключа и значения нет описания",
-            "no_documentation_key": "Для этого ключа нет описания",
             "show_more": "Ещё",
             "view_on_osm": "Посмотреть на openstreetmap.org",
             "all_fields": "Все поля",
@@ -512,7 +510,6 @@
             "role": "Роль",
             "choose": "Что это за объект?",
             "results": "{n} результатов для {search}",
-            "reference": "Посмотреть в OpenStreetMap Wiki",
             "back_tooltip": "Изменить объект",
             "remove": "Удалить",
             "search": "Поиск",
@@ -633,11 +630,9 @@
                 "tooltip": "Линии электропередач, электростанции, подстанции и т.д."
             },
             "past_future": {
-                "description": "Бывшие/Будущие",
                 "tooltip": "Проекты, строительство, заброшенные, разрушенные объекты и т.д."
             },
             "others": {
-                "description": "Другое",
                 "tooltip": "Всё остальное"
             }
         },
@@ -756,23 +751,6 @@
             "description": "Описание",
             "on_wiki": "{tag} в wiki.osm.org",
             "used_with": "ставится на {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Несоединенные дороги",
-            "disconnected_highway_tooltip": "Дороги должны быть соединены с другими дорогами или с входами в здания.",
-            "old_multipolygon": "Теги мультиполигона на внешнем контуре",
-            "old_multipolygon_tooltip": "Такой вид мультиполигона устарел. Пожалуйста, назначьте теги отношению, а не внешнему контуру.",
-            "untagged_point": "Точка без тегов",
-            "untagged_point_tooltip": "Выберите тип объекта, который описывает, чем является эта точка.",
-            "untagged_line": "Линия без тегов",
-            "untagged_line_tooltip": "Выберите тип объекта, который описывает, чем является эта линия.",
-            "untagged_area": "Полигон без тегов",
-            "untagged_area_tooltip": "Выберите тип объекта, который описывает, чем является этот полигон.",
-            "untagged_relation": "Отношение без тегов",
-            "untagged_relation_tooltip": "Выберите тип объекта, который описывает, чем является это отношение.",
-            "many_deletions": "Вы удаялете {n} объектов: {p} точек, {l} линий, {a} полигонов, {r} отошений. Вы уверены, что хотите сделать это? Это приведёт к удалению их с карты, которые все видят на openstreetmap.org.",
-            "tag_suggests_area": "Тег {tag} обычно ставится на полигоны, но это не полигон",
-            "deprecated_tags": "Теги устарели: {tags}"
         },
         "zoom": {
             "in": "Приблизить",
@@ -1485,9 +1463,6 @@
                 },
                 "category-building": {
                     "name": "Здания"
-                },
-                "category-golf": {
-                    "name": "Гольф-объекты"
                 },
                 "category-landuse": {
                     "name": "Объекты землепользования"
@@ -2478,9 +2453,6 @@
                         "underground": "Подземная"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Табло прибытия/отправления"
-                },
                 "payment_multi": {
                     "label": "Способы оплаты"
                 },
@@ -3145,8 +3117,7 @@
                     "label": "Тип"
                 },
                 "website": {
-                    "label": "Веб-сайт",
-                    "placeholder": "http://example.com/"
+                    "label": "Веб-сайт"
                 },
                 "wetland": {
                     "label": "Тип"
@@ -4137,9 +4108,6 @@
                     "name": "Ряд из примыкающих домов",
                     "terms": "рядный дом"
                 },
-                "building/train_station": {
-                    "name": "Железнодорожный вокзал"
-                },
                 "building/transportation": {
                     "name": "Здание транспортного терминала/вокзал"
                 },
@@ -4440,12 +4408,6 @@
                     "name": "Лунка",
                     "terms": "Лунка для гольфа"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Водная преграда сбоку"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Водная преграда сбоку"
-                },
                 "golf/rough": {
                     "name": "Раф",
                     "terms": "Неровная площадка, Высокая трава"
@@ -4453,12 +4415,6 @@
                 "golf/tee": {
                     "name": "Стартовая площадка",
                     "terms": "Стартовая площадка, Стартовая зона"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Водная преграда"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Водная преграда"
                 },
                 "healthcare": {
                     "name": "Медицинские учреждения"
@@ -4951,8 +4907,7 @@
                     "terms": "виноградник"
                 },
                 "leisure": {
-                    "name": "Место отдыха",
-                    "terms": "Территории для отдыха"
+                    "name": "Место отдыха"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Игровые автоматы (азартные, на деньги)"
@@ -5190,8 +5145,7 @@
                     "terms": "Линия"
                 },
                 "man_made": {
-                    "name": "Рукотворное",
-                    "terms": "рукотворное"
+                    "name": "Рукотворное"
                 },
                 "man_made/adit": {
                     "name": "Штольня",
@@ -5330,8 +5284,7 @@
                     "name": "Люк к телекоммуникационным сетям"
                 },
                 "natural": {
-                    "name": "Природа",
-                    "terms": "Природные объекты"
+                    "name": "Природа"
                 },
                 "natural/bare_rock": {
                     "name": "Голые скалы"
@@ -5747,38 +5700,6 @@
                 "power/transformer": {
                     "name": "Отдельный трансформатор",
                     "terms": "трансформатор"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Платформа",
-                    "terms": "платформа, место ожидания транспорта, общественный транспорт"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Платформа канатной дороги"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Автобусная платформа"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Пристань для парома",
-                    "terms": "пристань, причал, пирс, паром, платформа, общественный транспорт"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Платформа легкорельсового транспорта"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Платформа монорельса"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Платформа метро"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Железнодорожная платформа"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Трамвайная платформа"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Троллейбусная платформа"
                 },
                 "public_transport/platform": {
                     "name": "Платформа"
@@ -6503,8 +6424,7 @@
                     "terms": "вино, вина"
                 },
                 "tourism": {
-                    "name": "Туризм",
-                    "terms": "Туризм, Отдых, Путешествия"
+                    "name": "Туризм"
                 },
                 "tourism/alpine_hut": {
                     "name": "Горный приют",

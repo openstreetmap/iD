@@ -193,7 +193,8 @@
                 "restriction": "这些要素不能被合并，因为这样会破坏 “{relation}” 关系。",
                 "relation": "这些要素不能被合并，因为其有冲突的关系成员。",
                 "incomplete_relation": "此要素暂未下载完成，无法合并。",
-                "conflicting_tags": "这些要素不能被合并，因为它们的某些标签具有冲突的值。"
+                "conflicting_tags": "这些要素不能被合并，因为它们的某些标签具有冲突的值。",
+                "paths_intersect": "这些要素无法被合并，因为生成的路径将会自相交。"
             },
             "move": {
                 "title": "移动",
@@ -413,6 +414,8 @@
             "modified": "已更改",
             "deleted": "已删除",
             "created": "已创建",
+            "outstanding_errors_message": "请先解决所有错误。剩余 {count} 个。",
+            "comment_needed_message": "请先添加变更集合注释。",
             "about_changeset_comments": "关于编辑变动",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "您在该评论中提及 Google : 请注意从 Google Maps 中复制信息是被严格禁止的。",
@@ -505,8 +508,6 @@
                 "tooltip_data": "居中并缩放地图以关注此数据。",
                 "tooltip_issue": "居中并缩放地图以关注此问题。"
             },
-            "no_documentation_combination": "这个标签组合没有可用的说明",
-            "no_documentation_key": "这个键值没有可用的说明",
             "show_more": "显示更多",
             "view_on_osm": "在 openstreetmap.org 上查看",
             "view_on_keepRight": "在 keepright.at 查看",
@@ -519,10 +520,14 @@
             "role": "角色",
             "choose": "选择要素类型",
             "results": "{search}有{n}个结果。",
-            "reference": "在 OpenStreetMap Wiki 中查看",
-            "edit_reference": "编辑或翻译描述",
+            "no_documentation_key": "没有可用的说明文档。",
+            "edit_reference": "编辑/翻译",
             "wiki_reference": "查看参考资料",
             "wiki_en_reference": "查看英文参考资料",
+            "hidden_preset": {
+                "manual": "{features} 已隐藏。请在地图数据面板中启用它们。",
+                "zoom": "{features} 已隐藏。请放大地图以启用它们。"
+            },
             "back_tooltip": "变更要素",
             "remove": "删除",
             "search": "搜索",
@@ -597,6 +602,10 @@
                     "tooltip": "自动使用 keepright.at 探测地图问题",
                     "title": "KeepRight 问题"
                 },
+                "improveOSM": {
+                    "tooltip": "使用 improveosm.org 自动探测缺失数据",
+                    "title": "ImproveOSM 问题"
+                },
                 "custom": {
                     "tooltip": "将数据文件拖放到页面上，或点击按钮设置",
                     "title": "自定义地图数据",
@@ -650,11 +659,11 @@
                 "tooltip": "输电线，发电厂，变电所等。"
             },
             "past_future": {
-                "description": "过去/未来",
+                "description": "历史/未来要素",
                 "tooltip": "规划，在建，废弃，拆毁等。"
             },
             "others": {
-                "description": "其他",
+                "description": "其他要素",
                 "tooltip": "其他东西"
             }
         },
@@ -748,7 +757,7 @@
             "more": "更多",
             "events": "事件",
             "languages": "语言：{languages}",
-            "missing": "该列表里有遗漏的信息吗？",
+            "missing": "该列表有遗漏的信息？",
             "tell_us": "告诉我们！"
         },
         "confirm": {
@@ -774,25 +783,6 @@
             "on_wiki": "wiki.osm.org上的{tag}",
             "used_with": "使用 {type}"
         },
-        "validations": {
-            "disconnected_highway": "断开的道路",
-            "disconnected_highway_tooltip": "道路应当与其他道路连接或通往建筑入口。",
-            "generic_name": "可能为笼统名称",
-            "generic_name_tooltip": "该要素似乎有个笼统的名称 \"{name}\"。请只使用名称字段记录要素的正式名称。",
-            "old_multipolygon": "复合多边形的标签添加在外围路径",
-            "old_multipolygon_tooltip": "我们不赞成这种复合多边形的样式。请将标签添加在父复合多边形中，而不是在其外围的路径上添加。",
-            "untagged_point": "未标记的点",
-            "untagged_point_tooltip": "选择该点的要素类型。",
-            "untagged_line": "未标记的线",
-            "untagged_line_tooltip": "选择描述这条线的要素类型。",
-            "untagged_area": "未标记的区域",
-            "untagged_area_tooltip": "选择描述这块区域的要素类型。",
-            "untagged_relation": "未标记的关系",
-            "untagged_relation_tooltip": "选择描述这个关系的要素类型。",
-            "many_deletions": "您正在删除 {n} 个要素：{p} 个节点、{l} 条路径、{a} 片区域、{r} 个关系。您确定要这么做吗？这些要素将会在任何人所见的 openstreetmap.org 地图上被删除。",
-            "tag_suggests_area": "{tag}的标签所建议的线段应为区域，但这个不是一区域",
-            "deprecated_tags": "弃用标签：{tags}"
-        },
         "zoom": {
             "in": "放大",
             "out": "缩小"
@@ -800,6 +790,40 @@
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
         "QA": {
+            "improveOSM": {
+                "title": "ImproveOSM 检测",
+                "geometry_types": {
+                    "path": "小路",
+                    "parking": "停车位",
+                    "road": "道路",
+                    "both": "道路和停车位"
+                },
+                "directions": {
+                    "east": "东",
+                    "north": "北",
+                    "northeast": "东北",
+                    "northwest": "西北",
+                    "south": "南",
+                    "southeast": "东南",
+                    "southwest": "西南",
+                    "west": "西"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "缺少单行线",
+                        "description": "在 {highway} 中该路段的 {num_trips} 个旅行记录中，有 {percentage}% 从 {from_node} 移动至 {to_node}，所以这里可能缺少一个单行线标签。"
+                    },
+                    "mr": {
+                        "title": "缺少几何形状",
+                        "description": "在该区域的 {num_trips} 个旅行记录表明此处可能有 {geometry_type} 未被绘制。",
+                        "description_alt": "来自第三方的数据表明此处可能有 {geometry_type} 未被绘制。"
+                    },
+                    "tr": {
+                        "title": "缺少转向限制",
+                        "description": "{num_trips} 个朝{travel_direction}方向的旅行记录中的 {num_passed} 个在 {junction} 处从 {from_way} 转向至 {to_way}，所以这里可能缺少一个 \"{turn_restriction}\" 限制。"
+                    }
+                }
+            },
             "keepRight": {
                 "title": "KeepRight 错误",
                 "detail_title": "错误",
@@ -1347,7 +1371,7 @@
                 "title": "质量保证",
                 "intro": "*质量保证* (Quality Assurance, Q/A) 工具可以搜寻不正确的标签、断开的道路以及其他 OpenStreetMap 的问题以供绘图者修复。要查看现有的 Q/A 问题，点击 {data} **地图数据** 面板以启用特定的 Q/A 图层。",
                 "tools_h": "工具",
-                "tools": "目前支持以下工具：[KeepRight](https://www.keepright.at/)。未来 iD 将会支持 [Osmose](https://osmose.openstreetmap.fr/)、[ImproveOSM](https://improveosm.org/en/) 以及更多 Q/A 工具。",
+                "tools": "目前支持以下工具：[KeepRight](https://www.keepright.at/) 和 [ImproveOSM](https://improveosm.org/en/)。未来 iD 将会支持 [Osmose](https://osmose.openstreetmap.fr/) 以及更多 Q/A 工具。",
                 "issues_h": "处理问题",
                 "issues": "处理 Q/A 问题与处理笔记相似。点击其中一个标记，然后在侧边栏中查看问题详情。每个工具都有自己的功能，但通常您可以评论和/或关闭问题。"
             },
@@ -1362,14 +1386,215 @@
                         "maxvia": "\"{viaField}\" 滑块可调整搜索中可包含的经由路径数。（提示：越简单越好）"
                     },
                     "inspecting": {
-                        "title": "检查"
+                        "title": "检查",
+                        "about": "将鼠标悬停在任意 **起始** 部分以查看其是否有任何转向限制。每个可能的 **结束** 部分将会被绘制为彩色阴影，用来显示是否存在限制。",
+                        "from_shadow": "{fromShadow} **起始部分**",
+                        "allow_shadow": "{allowShadow} **允许通行**",
+                        "restrict_shadow": "{restrictShadow} **禁止通行**",
+                        "only_shadow": "{onlyShadow} **仅限通行**",
+                        "restricted": "“禁止”表明存在一个转向限制，例如“禁止左转”。",
+                        "only": "“仅限”表明车辆途径该道路时只能做出该选择，例如“仅限直行”。"
                     },
                     "modifying": {
-                        "title": "修改"
+                        "title": "修改",
+                        "about": "要修改转向限制，首先点击任意 **起始** 部分以选择它。选定的部分将会不断闪烁，同时所有可能的 **结束** 部分都将以转向图标显示。",
+                        "indicators": "然后，点击转向图标以在“允许”、“限制”和“仅限”中切换。",
+                        "allow_turn": "{allowTurn} **允许通行**",
+                        "restrict_turn": "{restrictTurn} **禁止通行**",
+                        "only_turn": "{onlyTurn} **仅限通行**"
                     },
                     "tips": {
-                        "title": "提示"
+                        "title": "提示",
+                        "simple": "**简单的限制比复杂的更好。**",
+                        "simple_example": "例如，如果一个转向限制能用经由节点创建，就避免在该限制中使用较复杂的经由路径。",
+                        "indirect": "**有些限制会显示“(间接)”文字并绘制得更淡。**",
+                        "indirect_example": "存在这些限制是因为附近的另一个限制。例如，一个“仅限直行”限制将会间接地在交叉路口的其他道路上创建“禁止转向”限制。",
+                        "indirect_noedit": "您不能编辑间接的限制。相反，您可以编辑邻近的直接限制。"
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "问题",
+            "key": "I",
+            "list_title": "问题 ({count})",
+            "errors": {
+                "list_title": "错误 ({count})"
+            },
+            "warnings": {
+                "list_title": "警告 ({count})"
+            },
+            "no_issues": {
+                "message": "看起来一切正常",
+                "info": "在您编辑时遇到的任何问题都将显示在此处"
+            },
+            "almost_junction": {
+                "message": "{feature} 与 {feature2} 极为接近却并未相交",
+                "highway-highway": {
+                    "tip": "相交的道路应共享一个交叉节点。"
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} 与 {feature2} 相交",
+                "building-building": {
+                    "tip": "除不同图层情况下，建筑物不应相交。"
+                },
+                "building-highway": {
+                    "tip": "穿越建筑物的道路应使用桥梁、隧道、有上盖或出入口。"
+                },
+                "building-railway": {
+                    "tip": "穿越建筑物的铁路应使用桥梁或隧道。"
+                },
+                "building-waterway": {
+                    "tip": "穿越建筑物的航道应使用隧道或不同图层。"
+                },
+                "highway-highway": {
+                    "tip": "相交的道路应使用桥梁、隧道或交叉路口。"
+                },
+                "highway-railway": {
+                    "tip": "与铁路相交的道路应使用桥梁、隧道或铁路道口。"
+                },
+                "highway-waterway": {
+                    "tip": "与航道相交的道路应使用桥梁、隧道或过水路面。"
+                },
+                "railway-railway": {
+                    "tip": "相交的铁路应互相连接或使用桥梁或隧道。"
+                },
+                "railway-waterway": {
+                    "tip": "与航道相交的铁路应使用桥梁或隧道。"
+                },
+                "waterway-waterway": {
+                    "tip": "相交的航道应互相连接或使用隧道。"
+                },
+                "tunnel-tunnel": {
+                    "tip": "相交的隧道应使用不同图层。"
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "相交的隧道应互相连接或使用不同图层。"
+                },
+                "bridge-bridge": {
+                    "tip": "相交的桥梁应使用不同图层。"
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "相交的桥梁应互相连接或使用不同图层。"
+                },
+                "indoor-indoor": {
+                    "tip": "相交的室内要素应使用不同楼层数。"
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "相交的室内要素应互相连接或使用不同楼层数。"
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} 存在一个过时的标签 \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} 存在一个过时的标签组合：{tags}"
+                },
+                "tip": "有些标签会随时间推移而被弃用，应予以更换。"
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} 与其他道路和路径断开连接",
+                    "tip": "道路应当与其他道路或建筑入口连接。"
+                }
+            },
+            "generic_name": {
+                "message": "{feature} 存在一个笼统的名称 \"{name}\"",
+                "tip": "名称应为要素的实际名称。"
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "将要删除 {n} 个要素：{p} 个点、{l} 根线和 {a} 个区域"
+                },
+                "points-lines-areas-relations": {
+                    "message": "将要删除 {n} 个要素：{p} 个点、{l} 根线、{a} 个区域和 {r} 个关系"
+                },
+                "tip": "只有多余或不存在的要素才应被删除。"
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} 没有标签"
+                },
+                "descriptive": {
+                    "message": "{feature} 没有描述性标签"
+                },
+                "specific": {
+                    "message": "{feature} 没有 \"{tag}\" 标签"
+                },
+                "tip": "要素必须具有定义它们的标签。"
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} 存在错误放置的标签",
+                "tip": "复合多边形应被标记在它们的关系上，而不是它们的外围路径。"
+            },
+            "tag_suggests_area": {
+                "message": "基于 {feature} 的标签 \"{tag}\"，其应为一个封闭的区域。",
+                "tip": "区域必须具有连接的端点。"
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "连接极相近要素。"
+                },
+                "connect_crossing_features": {
+                    "annotation": "连接相交要素。"
+                },
+                "connect_endpoints": {
+                    "title": "连接首尾节点",
+                    "annotation": "连接路径的首尾节点。"
+                },
+                "connect_features": {
+                    "title": "连接这些要素"
+                },
+                "continue_from_start": {
+                    "title": "从起始节点继续绘制"
+                },
+                "continue_from_end": {
+                    "title": "从末端节点继续绘制"
+                },
+                "delete_feature": {
+                    "title": "删除此要素"
+                },
+                "move_tags": {
+                    "title": "移动标签",
+                    "annotation": "移动标签。"
+                },
+                "remove_generic_name": {
+                    "title": "删除名称",
+                    "annotation": "删除笼统名称。"
+                },
+                "remove_tag": {
+                    "title": "删除标签",
+                    "annotation": "删除标签。"
+                },
+                "reposition_features": {
+                    "title": "更改要素位置"
+                },
+                "select_preset": {
+                    "title": "选择一个要素类型"
+                },
+                "tag_as_disconnected": {
+                    "title": "标记为断开连接",
+                    "annotation": "标记极相近要素为断开连接。"
+                },
+                "upgrade_tag": {
+                    "annotation": "改进一个旧标签。"
+                },
+                "upgrade_tag_combo": {
+                    "annotation": "改进一个旧标签组合。"
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "使用桥梁或隧道"
+                },
+                "use_different_layers": {
+                    "title": "使用不同图层"
+                },
+                "use_different_levels": {
+                    "title": "使用不同楼层数"
+                },
+                "use_tunnel": {
+                    "title": "使用隧道"
                 }
             }
         },
@@ -1780,7 +2005,10 @@
                 "category-building": {
                     "name": "建筑"
                 },
-                "category-golf": {
+                "category-golf-area": {
+                    "name": "高尔夫"
+                },
+                "category-golf-line": {
                     "name": "高尔夫"
                 },
                 "category-landuse": {
@@ -1959,6 +2187,9 @@
                 },
                 "animal_shelter": {
                     "label": "收留动物类型"
+                },
+                "architect": {
+                    "label": "建筑设计师"
                 },
                 "area/highway": {
                     "label": "类型"
@@ -2548,6 +2779,14 @@
                 "junction/ref_oneway": {
                     "label": "匝道编号"
                 },
+                "junction_line": {
+                    "label": "交叉口",
+                    "options": {
+                        "circular": "信号控制环岛",
+                        "jughandle": "壶柄式连接路",
+                        "roundabout": "环岛"
+                    }
+                },
                 "kerb": {
                     "label": "路缘"
                 },
@@ -2630,7 +2869,8 @@
                     "label": "位置",
                     "options": {
                         "indoor": "室内",
-                        "outdoor": "户外"
+                        "outdoor": "户外",
+                        "roof": "屋顶"
                     }
                 },
                 "man_made": {
@@ -2957,6 +3197,9 @@
                 "restrictions": {
                     "label": "转向限制"
                 },
+                "roof/colour": {
+                    "label": "屋顶颜色"
+                },
                 "rooms": {
                     "label": "房间数"
                 },
@@ -2977,6 +3220,9 @@
                         "mountain_hiking": "T2：山地徒步"
                     },
                     "placeholder": "山地徒步，高山远足..."
+                },
+                "salt": {
+                    "label": "咸水"
                 },
                 "sanitary_dump_station": {
                     "label": "厕所废物"
@@ -3210,6 +3456,9 @@
                     },
                     "placeholder": "是，否，仅限外卖"
                 },
+                "tidal": {
+                    "label": "处于潮间带"
+                },
                 "to": {
                     "label": "终点"
                 },
@@ -3376,7 +3625,7 @@
                 },
                 "website": {
                     "label": "网站",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "类型"
@@ -3628,6 +3877,10 @@
                     "name": "时钟",
                     "terms": "时钟,钟表,钟"
                 },
+                "amenity/clock/sundial": {
+                    "name": "日晷",
+                    "terms": "日晷,日晷钟,晷影,晷影器,影子,晷针,日规"
+                },
                 "amenity/college": {
                     "name": "学院",
                     "terms": "学院,大学,院校,大专,校园,学校,学习"
@@ -3775,6 +4028,10 @@
                 "amenity/parking_space": {
                     "name": "停车位",
                     "terms": "停车空间,停车场地,停车位"
+                },
+                "amenity/photo_booth": {
+                    "name": "自助拍照机",
+                    "terms": "拍照机,照相机,拍照,照相,自助,自动,照相馆,照相亭,证件,证件照,护照,快照,照片,照"
                 },
                 "amenity/place_of_worship": {
                     "name": "礼拜场所",
@@ -4392,7 +4649,7 @@
                     "terms": "屋列,房列,一列房,一列屋"
                 },
                 "building/train_station": {
-                    "name": "火车站"
+                    "name": "火车站建筑"
                 },
                 "building/transportation": {
                     "name": "公共交通建筑",
@@ -4676,14 +4933,6 @@
                     "name": "高尔夫球洞",
                     "terms": "高尔夫球洞"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "高尔夫侧面水障碍区",
-                    "terms": "高尔夫侧面水障碍水体,水障碍,侧面水障碍,水障碍区"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "高尔夫侧面水障碍",
-                    "terms": "高尔夫侧面水障碍,水障碍,侧面水障碍,水障碍区"
-                },
                 "golf/rough": {
                     "name": "高尔夫深草区",
                     "terms": "高尔夫深草区"
@@ -4691,14 +4940,6 @@
                 "golf/tee": {
                     "name": "高尔夫开球区",
                     "terms": "高尔夫开球区,开球区,发球台"
-                },
-                "golf/water_hazard_area": {
-                    "name": "高尔夫水障碍区",
-                    "terms": "高尔夫水障碍水体,水障碍,正面水障碍,水障碍区"
-                },
-                "golf/water_hazard_line": {
-                    "name": "高尔夫水障碍",
-                    "terms": "高尔夫水障碍,水障碍,正面水障碍,水障碍区"
                 },
                 "healthcare": {
                     "name": "医疗机构",
@@ -5052,8 +5293,7 @@
                     "terms": "交通枢纽,路口"
                 },
                 "landuse": {
-                    "name": "土地用途",
-                    "terms": "土地用途,土地使用"
+                    "name": "土地用途"
                 },
                 "landuse/allotments": {
                     "name": "公共花园",
@@ -5228,8 +5468,7 @@
                     "terms": "葡萄园,酒庄"
                 },
                 "leisure": {
-                    "name": "休闲场所",
-                    "terms": "休闲场所"
+                    "name": "休闲场所"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "成人街机厅",
@@ -5432,8 +5671,7 @@
                     "terms": "线"
                 },
                 "man_made": {
-                    "name": "人造物",
-                    "terms": "人造物"
+                    "name": "人造物"
                 },
                 "man_made/adit": {
                     "name": "坑道入口",
@@ -5570,8 +5808,7 @@
                     "terms": "井盖,井,检查,人孔,手机,盖,通讯,通信,移动,联通,电信,电话,洞,孔,下水道,基站"
                 },
                 "natural": {
-                    "name": "自然",
-                    "terms": "自然"
+                    "name": "自然"
                 },
                 "natural/bare_rock": {
                     "name": "岩石",
@@ -6004,46 +6241,6 @@
                 "power/transformer": {
                     "name": "变压器",
                     "terms": "变电所"
-                },
-                "public_transport/linear_platform": {
-                    "name": "公共交通站 / 站台",
-                    "terms": "公共交通,车站,站台"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "缆车站 / 站台",
-                    "terms": "缆车,空中列车,车站,站台"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "公交车站 / 站台",
-                    "terms": "公交,公交站,公交车,巴士,大巴,客车,车站,站台"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "轮船渡口 / 站台",
-                    "terms": "轮船,渡轮,渡口,车站,站台"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "轻轨站 / 站台",
-                    "terms": "轻轨,地铁,捷运,铁路,车站,站台,月台"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "单轨列车站 / 站台",
-                    "terms": "单轨,列车,车站,站台,月台"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "地铁站 / 站台",
-                    "terms": "地铁,轻轨,捷运,铁路,车站,站台,月台"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "列车站 / 站台",
-                    "terms": "列车,火车,动车,高铁,铁路,车站,站台,月台"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "有轨电车站 / 站台",
-                    "terms": "电车,有轨电车,车站,站台"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "无轨电车站 / 站台",
-                    "terms": "电车,无轨电车,车站,站台"
                 },
                 "public_transport/platform": {
                     "name": "公共交通站 / 站台",
@@ -6773,8 +6970,7 @@
                     "terms": "酒品商店,酒店,酒楼,酒坊"
                 },
                 "tourism": {
-                    "name": "旅游设施",
-                    "terms": "旅行,旅游设施"
+                    "name": "旅游设施"
                 },
                 "tourism/alpine_hut": {
                     "name": "高山小屋",
@@ -7434,7 +7630,12 @@
                 "extendedDescription": "在尼泊尔绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
             },
             "OSM-Asia-mailinglist": {
-                "name": "OpenStreetMap 亚洲邮件列表"
+                "name": "OpenStreetMap 亚洲邮件列表",
+                "description": "Talk-asia 是亚洲社区的官方邮件列表"
+            },
+            "osm-asia-telegram": {
+                "name": "OpenStreetMap 亚洲 Telegram",
+                "description": "加入我们的大家庭：{url}"
             },
             "OSM-PH-facebook": {
                 "name": "OpenStreetMap 菲律宾 Facebook"
@@ -7810,6 +8011,10 @@
                 "description": "在 OSM 社区驱动的问答网站上提问并得到解答。",
                 "extendedDescription": "{url} 为所有人提供关于 OpenStreetMap 的帮助。无论您是新手绘图者或者有任何技术问题，都来找我们帮助吧！"
             },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap Reddit 社区",
                 "description": "/r/openstreetmap/ 是了解更多关于 OpenStreetMap 的好地方。来尽管问我们吧！"
@@ -7825,6 +8030,7 @@
             "OSMF": {
                 "name": "OpenStreetMap 基金会 (OSMF)",
                 "description": "OSMF 是总部位于英国的非营利组织，用于支持 OpenStreetMap 项目。",
+                "extendedDescription": "OSMF 通过筹款、维护为网站提供动力的服务器、组织年度 State of the Map 会议以及协调维护网站的志愿者来支持 OpenStreetMap。您可以通过点击该链接成为 OSMF 的一员以展示您的支持并为 OpenStreetMap 的未来发声：{signupUrl}",
                 "events": {
                     "sotm2018": {
                         "name": "State of the Map 2018",

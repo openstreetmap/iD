@@ -258,8 +258,6 @@
             "title": "অামার অবস্থানটি দেখান"
         },
         "inspector": {
-            "no_documentation_combination": "এই ট্যাগ সমবায় এর জন্য কোন বিবরন নেই",
-            "no_documentation_key": "এই টীকাটির জন্য কোন বিবরন নেই",
             "show_more": "অারো দেখান",
             "view_on_osm": "openstreetmap.org-এ দেখুন",
             "all_tags": "সমস্ত ট্যাগ",
@@ -269,7 +267,6 @@
             "role": "ভূমিকা",
             "choose": "বৈশিষ্ট্যের প্রকার নির্বাচন করুন",
             "results": "{search}-এর জন্য {n}-টি ফলাফল ",
-            "reference": "openstreetmap.org-এর উইকি-তে দেখুন",
             "back_tooltip": "বৈশিষ্ট্য পরিবর্তন করুন",
             "remove": "অপসারণ",
             "search": "কিছু খুঁজুন",
@@ -309,11 +306,6 @@
                 "osm": {
                     "title": "ওপেনস্ট্রীটম্যাপের উপাত্ত"
                 }
-            }
-        },
-        "feature": {
-            "others": {
-                "description": "অন্যান্য"
             }
         },
         "restore": {
@@ -359,13 +351,6 @@
             "description": "বিবরন",
             "on_wiki": "wiki.osm.org-এ {tag}",
             "used_with": "{type}-এর সাথে ব্যবহার করা হয়"
-        },
-        "validations": {
-            "untagged_point": "ট্যাগবিহীন বিন্দু",
-            "untagged_line": "ট্যাগবিহীন রেখা",
-            "untagged_area": "ট্যাগবিহীন এলাকা",
-            "tag_suggests_area": "{tag} ট্যাগটি অনুসারে রেখাটি এলাকা হবে, কিন্তু নয়।",
-            "deprecated_tags": "পুরোন ও অব্যবহৃত ট্যাগ: {tags}"
         },
         "cannot_zoom": "বর্তমান মোডে আরও জুম আউট করা যাবে না।",
         "help": {
@@ -724,8 +709,7 @@
                     "label": "ধরন"
                 },
                 "website": {
-                    "label": "ওয়েবসাইট",
-                    "placeholder": "http://example.com/"
+                    "label": "ওয়েবসাইট"
                 },
                 "wetland": {
                     "label": "ধরন"

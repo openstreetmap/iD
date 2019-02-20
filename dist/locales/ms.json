@@ -416,8 +416,6 @@
             "locating": "Menentukan tempat, sila tunggu..."
         },
         "inspector": {
-            "no_documentation_combination": "Tiada dokumentasi yang tersedia untuk kombinasi penanda ini",
-            "no_documentation_key": "Tiada dokumentasi yang tersedia untuk kunci ini",
             "show_more": "Tunjukkan Lagi",
             "view_on_osm": "Lihat pada openstreetmap.org",
             "all_fields": "Semua tempat kosong",
@@ -428,7 +426,6 @@
             "role": "Peranan",
             "choose": "Pilih jenis ciri",
             "results": "{n} keputusan untuk {search}",
-            "reference": "Lihat Wiki OpenStreetMap",
             "back_tooltip": "Tukar ciri",
             "remove": "Keluarkan",
             "search": "Gelintar",
@@ -530,11 +527,9 @@
                 "tooltip": "Talian-talian Elektrik, Loji-loji Kuasa, Pencawang-pencawang, dll."
             },
             "past_future": {
-                "description": "Garis Masa",
                 "tooltip": "Cadangan, Pembinaan, Terabai, Diruntuhkan, dll."
             },
             "others": {
-                "description": "Lain-lain",
                 "tooltip": "Yang Lain-lain"
             }
         },
@@ -619,22 +614,6 @@
             "description": "Perincian",
             "on_wiki": "{tag} pada wiki.osm.org",
             "used_with": "digunakan dengan {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Jalan raya terputus",
-            "disconnected_highway_tooltip": "Jalan raya sepatutnya dihubungkan dengan jalan lain atau pintu masuk bangunan.",
-            "old_multipolygon": "Penanda multipoligon cara luaran",
-            "old_multipolygon_tooltip": "Gaya multipoligon ini tidak digunakan lagi. Sila berikan penanda pada multipoligon induk dan bukannya pada cara luaran.",
-            "untagged_point": "Titik tanpa tag",
-            "untagged_point_tooltip": "Pilih jenis ciri yang menggambarkan titik ini.",
-            "untagged_line": "Garis tanpa tag",
-            "untagged_line_tooltip": "Pilih jenis ciri yang menggambarkan garis ini.",
-            "untagged_area": "Kawasan tanpa tag",
-            "untagged_area_tooltip": "Pilih jenis ciri yang menggambarkan kawasan ini.",
-            "untagged_relation": "Hubungan tanpa tag",
-            "untagged_relation_tooltip": "Pilih jenis ciri yang menggambarkan hubungan ini.",
-            "tag_suggests_area": "Tanda {tag} mencadangkan garis sepatutnya menjadi kawasan, tetapi ianya bukan kawasan",
-            "deprecated_tags": "Tag-tag yang telah lapuk: {tags}"
         },
         "zoom": {
             "in": "Zum dekat",
@@ -907,9 +886,6 @@
                 },
                 "category-building": {
                     "name": "Ciri-ciri Bangunan"
-                },
-                "category-golf": {
-                    "name": "Ciri-ciri Golf"
                 },
                 "category-landuse": {
                     "name": "Ciri-ciri Guna Tanah"
@@ -2026,8 +2002,7 @@
                     "label": "Jenis"
                 },
                 "website": {
-                    "label": "Tapak Web",
-                    "placeholder": "http://contoh.com/"
+                    "label": "Tapak Web"
                 },
                 "wetland": {
                     "label": "Jenis"
@@ -2286,9 +2261,6 @@
                 "building/stable": {
                     "name": "Kandang Kuda"
                 },
-                "building/train_station": {
-                    "name": "Stesen Kereta Api"
-                },
                 "building/university": {
                     "name": "Bangunan Universiti"
                 },
@@ -2510,30 +2482,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformer"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Hentian Bas / Platform"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Hentian Feri / Platform"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Hentian Rel Ringan / Platform"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Hentian Monorel / Platform"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Hentian Laluan Bawah Tanah / Platform"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Hentian Kereta Api / Platform"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Hentian Tram / Platform"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Hentian Bas Troli / Platform"
                 },
                 "public_transport/platform": {
                     "name": "Hentian Transit"

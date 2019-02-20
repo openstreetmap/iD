@@ -412,8 +412,6 @@
             "locating": "Finner sted, vennligst vent..."
         },
         "inspector": {
-            "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
-            "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
             "show_more": "Vis mer",
             "view_on_osm": "Se på openstreetmap.org",
             "all_fields": "Alle felter",
@@ -424,7 +422,6 @@
             "role": "Rolle",
             "choose": "Velg egenskapstype",
             "results": "{n} resultater for {search}",
-            "reference": "Les mer på OpenStreetMap Wiki",
             "back_tooltip": "Endre kartegenskap",
             "remove": "Fjern",
             "search": "Søk",
@@ -528,7 +525,6 @@
                 "tooltip": "Kraftlinjer, kraftverk osv."
             },
             "others": {
-                "description": "Andre",
                 "tooltip": "Alt annet"
             }
         },
@@ -608,20 +604,6 @@
             "description": "Beskrivelse",
             "on_wiki": "{tag} på wiki.osm.org",
             "used_with": "brukes med {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Koblet fra vei",
-            "disconnected_highway_tooltip": "Veier burde være koblet til andre veier eller til inngangen til bygninger.",
-            "untagged_point": "Utagget punkt",
-            "untagged_point_tooltip": "Velg en kartegenskaptype som beskriver hva dette punktet er.",
-            "untagged_line": "Utagget linje",
-            "untagged_line_tooltip": "Velg en kartegenskaptype som beskriver hva denne linjen er.",
-            "untagged_area": "Utagget område",
-            "untagged_area_tooltip": "Velg en kartegenskaptype som beskriver hva dette område er.",
-            "untagged_relation": "Utagget relasjon",
-            "untagged_relation_tooltip": "Velg en kartegenskaptype som beskriver hva denne relasjonen er.",
-            "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
-            "deprecated_tags": "Utgående tagger: {tags}"
         },
         "zoom": {
             "in": "Zoom inn",
@@ -959,9 +941,6 @@
                 },
                 "category-building": {
                     "name": "Bygingsrelatert"
-                },
-                "category-golf": {
-                    "name": "Golfrelatert"
                 },
                 "category-landuse": {
                     "name": "Arealbrukrelaterte egenskaper"
@@ -1711,8 +1690,7 @@
                     "label": "Type"
                 },
                 "website": {
-                    "label": "Nettside",
-                    "placeholder": "http://example.com/"
+                    "label": "Nettside"
                 },
                 "wetland": {
                     "label": "Type"
@@ -2010,9 +1988,6 @@
                 },
                 "building/stable": {
                     "name": "Stall"
-                },
-                "building/train_station": {
-                    "name": "Togstasjon"
                 },
                 "building/university": {
                     "name": "Universitetsbygning"

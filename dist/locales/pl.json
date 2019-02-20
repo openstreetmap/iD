@@ -499,14 +499,12 @@
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Przybliż do tego",
+                "title": "Przybliż ten problem",
                 "tooltip_feature": "Wyśrodkuj i przybliż mapę na ten obiekt.",
                 "tooltip_note": "Wyśrodkuj i przybliż mapę na ten węzeł",
                 "tooltip_data": "Wyśrodkuj i przybliż mapę na ten obiekt.",
                 "tooltip_issue": "Wyśrodkuj i przybliż mapę na ten problem"
             },
-            "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji znaczników",
-            "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
             "show_more": "Wyświetl więcej",
             "view_on_osm": "Wyświetl na openstreetmap.org",
             "view_on_keepRight": "Wyświetl w keepright.at",
@@ -519,8 +517,7 @@
             "role": "Rola",
             "choose": "Wybierz rodzaj obiektu",
             "results": "{n} wyników dla {search}",
-            "reference": "Wyświetl na Wiki OpenStreetMap",
-            "edit_reference": "Edytuj lub tłumacz opis",
+            "edit_reference": "edytuj/tłumacz",
             "wiki_reference": "Przegląd dokumentacji",
             "wiki_en_reference": "Przegląd dokumentacji w języku angielskim",
             "back_tooltip": "Zmień rodzaj obiektu",
@@ -650,11 +647,9 @@
                 "tooltip": "Linie energetyczne, elektrownie, podstacje etc."
             },
             "past_future": {
-                "description": "Przeszłość/przyszłość",
                 "tooltip": "Obiekty projektowane, w czasie budowy, opuszczone, wyburzone etc."
             },
             "others": {
-                "description": "Inne",
                 "tooltip": "Wszystko pozostałe"
             }
         },
@@ -774,25 +769,6 @@
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "używany z {type}"
         },
-        "validations": {
-            "disconnected_highway": "Droga odłączona od siatki innych dróg",
-            "disconnected_highway_tooltip": "Drogi powinny być połączone z innymi drogami lub wejściami do budynków. ",
-            "generic_name": "Prawdopodobieństwo nadania zbyt ogólnej nazwy",
-            "generic_name_tooltip": "Zdaje się, że ten obiekt ma zbyt ogólną nazwę: \"{name}\". Proszę zmień nazwę tego obiektu na oficjalną nazwę.",
-            "old_multipolygon": "Znaczniki multipoligonu na linii zewnętrznej",
-            "old_multipolygon_tooltip": "Ten sposób oznaczania multipoligonu jest przestarzały. Znaczniki powinny być zapisane w relacji, a nie na zewnętrznej linii.",
-            "untagged_point": "Pusty punkt - brak znaczników",
-            "untagged_point_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten punkt.",
-            "untagged_line": "Pusta linia - brak znaczników",
-            "untagged_line_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta linia.",
-            "untagged_area": "Nieoznaczony obszar",
-            "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
-            "untagged_relation": "Pusta relacja - brak znaczników",
-            "untagged_relation_tooltip": "Wybierz rodzaj obiektu, który opisuje, czym jest ta relacja.",
-            "many_deletions": "Usuwasz {n} obiekty/obiektów: {p} węzłów, {l} linii, {a} obszarów, {r} relacji. Na pewno chcesz to zrobić? To spowoduje, że znikną one z mapy, którą wszyscy widzą na openstreetmap.org.",
-            "tag_suggests_area": "Znacznik {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
-            "deprecated_tags": "Przestarzałe znaczniki: {tags}"
-        },
         "zoom": {
             "in": "Przybliż",
             "out": "Oddal"
@@ -813,7 +789,7 @@
                 "ignore_comment": "Ignoruj i zostaw komentarz",
                 "error_parts": {
                     "this_node": "ten węzeł",
-                    "this_way": "ta ścieżka",
+                    "this_way": "ta droga",
                     "this_relation": "ta relacja",
                     "this_oneway": "ta droga jednokierunkowa",
                     "this_highway": "ta droga",
@@ -830,6 +806,7 @@
                     "this_turn_restriction": "ten zakaz zawracania",
                     "this_roundabout": "te rondo",
                     "this_track": "ta ścieżka",
+                    "this_feature": "Ten obiekt",
                     "highway": "droga",
                     "railway": "kolej",
                     "waterway": "szlak wodny",
@@ -866,16 +843,30 @@
                     },
                     "50": {
                         "title": "Blisko położone węzły",
-                        "description": "{var1} jest bardzo blisko ścieżki {var2}, ale nie jest połączony"
+                        "description": "{var1} jest bardzo blisko drogi {var2}, ale nie jest z nią połączona"
                     },
                     "60": {
-                        "title": "Przestarzały tag"
+                        "title": "Przestarzały tag",
+                        "description": "{var1} używa przestarzałego tagu \"{var2}\". Proszę zastąp go tagiem \"{var3}\""
                     },
                     "70": {
-                        "title": "Brakujący tag"
+                        "title": "Brakujący tag",
+                        "description": "{var1} posiada pusty tag: \"{var2}\"."
                     },
                     "71": {
                         "description": "{var1} nie posiada tagu"
+                    },
+                    "72": {
+                        "description": "{var1} nie jest związany z żadną drogą oraz nie posiada żadnego tagu."
+                    },
+                    "74": {
+                        "description": "{var1} posiada pusty tag: \"{var2}\"."
+                    },
+                    "100": {
+                        "description": "{var1} jest oznaczony jako miejsce kultu i w związku z tym należy przypisać religię."
+                    },
+                    "110": {
+                        "description": "{var1} jest oznaczony jako \"{var2}\" i w związku z tym należy nadać mu nazwę."
                     },
                     "170": {
                         "title": "obiekty oznaczone FIXME",
@@ -885,7 +876,12 @@
                         "description": "{var1} przecina się z {var2} {var3}, ale brakuje węzła, mostu lub tunelu."
                     },
                     "360": {
+                        "title": "Brakująca lokalna nazwa",
                         "description": "Byłoby miło jeśli {var1} posiadał lokalną nazwę w różnych językach. W tym celu utwórz tag \"name:XX=YYY\", gdzie XX to skrót języka np. \"en\" lub \"de\", a YYY to nazwa w danym języku"
+                    },
+                    "390": {
+                        "title": "Brakujący rodzaj drogi",
+                        "description": "{var1} nie posiada przypisanego rodzaju spoistości drogi (tag \"tracktype\")"
                     },
                     "400": {
                         "title": "Problem z geometrią"
@@ -898,7 +894,17 @@
                         "description": "{var1} zakręca pod bardzo ostrym kątem tutaj."
                     },
                     "410": {
-                        "title": "Problem z stroną www"
+                        "title": "Problem z stroną www",
+                        "description": "Istnieje nieokreślony problem z witryną kontaktową lub adresem URL."
+                    },
+                    "411": {
+                        "description": "{var1} może posiadać przestarzały adres URL: {var2}\nHTTP zwraca kod: {var3}."
+                    },
+                    "412": {
+                        "description": "{var1} może posiadać przestarzały adres URL: {var2} zawierający podejrzany tekst \"{var3}\"."
+                    },
+                    "413": {
+                        "description": "{var1} może posiadać przestarzały URL: {var2} nie zawiera słów kluczowych \"{var3}\"."
                     }
                 }
             }
@@ -1129,7 +1135,6 @@
                 "upload": "Możesz także wysłać [swój ślad GPS na serwery OpenStreetMap](https://www.openstreetmap.org/trace/create), pozwalając tym samym innym użytkownikom na korzystanie z niego."
             },
             "qa": {
-                "tools": "Aktualnie wspierane narzędzia: [KeepRight](https://www.keepright.at/). Oczekujące na wsparcie: [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/) oraz planowane więcej narzędzi typu \"Pytanie/Odpowiedź\"",
                 "issues": "Obsługa problemów Q/A jest podobna do obsługi notatek. Kliknij na znaczek, aby wyświetlić szczegóły problemu na pasku bocznym. Każde narzędzie ma swoje własne możliwości, ale zazwyczaj można je komentować i/lub zamykać."
             },
             "field": {
@@ -1574,9 +1579,6 @@
                 },
                 "category-building": {
                     "name": "Budynki"
-                },
-                "category-golf": {
-                    "name": "Golf"
                 },
                 "category-landuse": {
                     "name": "Zagospodarowanie terenu"
@@ -2588,9 +2590,6 @@
                         "underground": "Podziemny"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "System informacji pasażerskiej"
-                },
                 "payment_multi": {
                     "label": "Rodzaje płatności"
                 },
@@ -3295,8 +3294,7 @@
                     "label": "Typ"
                 },
                 "website": {
-                    "label": "Strona WWW",
-                    "placeholder": "http://example.com/"
+                    "label": "Strona WWW"
                 },
                 "wetland": {
                     "label": "Rodzaj"
@@ -3749,6 +3747,14 @@
                 "amenity/place_of_worship/hindu": {
                     "name": "Świątynia hinduistyczna",
                     "terms": "świątynia hinduistyczna"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Synagoga (czynna)",
+                    "terms": "synagoga"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Meczet (czynny)",
+                    "terms": "meczet"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Sanktuarium shintoistyczne",
@@ -4442,9 +4448,6 @@
                     "name": "Domki szeregowe",
                     "terms": "szeregówki"
                 },
-                "building/train_station": {
-                    "name": "Budynek dworca kolejowego"
-                },
                 "building/transportation": {
                     "name": "Budynek stacji",
                     "terms": "transport,dworzec,stacja"
@@ -4749,14 +4752,6 @@
                     "name": "dołek na polu golfowym ",
                     "terms": "dołek golfowy"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Przeszkoda wodna boczna",
-                    "terms": "przeszkoda wodna boczna"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Przeszkoda wodna boczna",
-                    "terms": "przeszkoda wodna boczna"
-                },
                 "golf/rough": {
                     "name": "Rough",
                     "terms": "rough"
@@ -4764,14 +4759,6 @@
                 "golf/tee": {
                     "name": "Rzutnia",
                     "terms": "tee box"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Przeszkoda wodna",
-                    "terms": "przeszkoda wodna"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Przeszkoda wodna",
-                    "terms": "przeszkoda wodna"
                 },
                 "healthcare": {
                     "name": "Placówka służby zdrowia",
@@ -5139,8 +5126,7 @@
                     "terms": "krzyżówka"
                 },
                 "landuse": {
-                    "name": "Zagospodarowanie terenu",
-                    "terms": "użytkowanie terenu"
+                    "name": "Zagospodarowanie terenu"
                 },
                 "landuse/allotments": {
                     "name": "Ogródki działkowe",
@@ -5183,6 +5169,10 @@
                 "landuse/farmyard": {
                     "name": "Teren z zabudowaniami rolniczymi",
                     "terms": "podwórze gospodarskie"
+                },
+                "landuse/forest": {
+                    "name": "Las",
+                    "terms": "las,puszcza"
                 },
                 "landuse/garages": {
                     "name": "Teren z garażami",
@@ -5312,8 +5302,7 @@
                     "terms": "winnica"
                 },
                 "leisure": {
-                    "name": "Rozrywka i wypoczynek",
-                    "terms": "wypoczynek, czas wolny, gry, zabawy"
+                    "name": "Rozrywka i wypoczynek"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Salon gier hazardowych",
@@ -5596,8 +5585,7 @@
                     "terms": "Linia, lina"
                 },
                 "man_made": {
-                    "name": "Obiekty sztuczne",
-                    "terms": "obiekty stworzone przez człowieka"
+                    "name": "Obiekty sztuczne"
                 },
                 "man_made/adit": {
                     "name": "Sztolnia",
@@ -5772,8 +5760,7 @@
                     "terms": "studzienka telekomunikacyjna"
                 },
                 "natural": {
-                    "name": "Natura",
-                    "terms": "Przyroda"
+                    "name": "Natura"
                 },
                 "natural/bare_rock": {
                     "name": "Skała Macierzysta",
@@ -5878,6 +5865,10 @@
                 "natural/water/reservoir": {
                     "name": "Zbiornik retencyjny",
                     "terms": "Zbiornik wodny, zbiornik"
+                },
+                "natural/water/river": {
+                    "name": "Obszar rzeki",
+                    "terms": "obszar rzeki"
                 },
                 "natural/wetland": {
                     "name": "Bagno",
@@ -6262,46 +6253,6 @@
                 "power/transformer": {
                     "name": "Transformator",
                     "terms": "transformator"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Przystanek / Peron",
-                    "terms": "peron,przystanek,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Przystanek / Peron wyciągu",
-                    "terms": "przystanek wyciągu,peron,przystanek,wyciąg,kolejka linowa,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Przystanek autobusowy / platforma",
-                    "terms": "przystanek autobusowy,peron,przystanek,autobus,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Przystanek / Peron promu",
-                    "terms": "przystanek promu,peron,przystanek,prom,łódź,łódka,dok,port,nabrzeże,pomost,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Przystanek / Peron kolei miejskiej",
-                    "terms": "peron kolei miejskiej,peron,przystanek,kolej miejska,kolej elektryczna,tory,szyny,tramwaj,wagon,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Przystanek / Peron kolei jednoszynowej",
-                    "terms": "peron kolei jednoszynowej,peron,przystanek,kolej jednoszynowa,tory,szyny,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Przystanek / Peron metra",
-                    "terms": "peron metra,peron,przystanek,metro,tor,szyna,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Przystanek / Peron kolejowy",
-                    "terms": "peron kolejowy,peron,przystanek,kolej,tory,szyny,pociąg,transport publiczny,transport,przewozy"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Przystanek tramwajowy",
-                    "terms": "przystanek tramwajowy"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Przystanek / Peron trolejbusowy",
-                    "terms": "przystanek trolejbusowy,peron,przystanek,trolejbus,autobus,tramwaj,elektryczny,transport publiczny,transport,przewozy"
                 },
                 "public_transport/platform": {
                     "name": "Przystanek / Peron",
@@ -7095,8 +7046,7 @@
                     "terms": "Winiarnia"
                 },
                 "tourism": {
-                    "name": "Turystyka",
-                    "terms": "Turystyka"
+                    "name": "Turystyka"
                 },
                 "tourism/alpine_hut": {
                     "name": "Chata górska",

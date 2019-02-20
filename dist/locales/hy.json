@@ -239,8 +239,6 @@
             "title": "Ցոյց տալ իմ տեղադրութիւնը"
         },
         "inspector": {
-            "no_documentation_combination": "Պիտակների այս խմբի համար ձեռնարկ չկայ։",
-            "no_documentation_key": "Այս բանալու համար ձեռնարկ չկայ",
             "show_more": "Ցուցադրել աւելին",
             "view_on_osm": "Դիտել openstreetmap.org ֊ում",
             "all_tags": "Բոլոր պիտակները",
@@ -250,7 +248,6 @@
             "role": "Դեր",
             "choose": "Ընտրել յատկութեան տեսակը",
             "results": "{n} արդիւնք {search} ֊ի համար",
-            "reference": "Դիտել OpenStreetMap Wiki ֊ում",
             "back_tooltip": "Փոխել յատկութիւնը",
             "remove": "Հեռացնել",
             "search": "Փնտրել",
@@ -321,11 +318,9 @@
                 "tooltip": "Էլեկտրական Գծեր, Էլեկտրակայաններ, եւ այլն։"
             },
             "past_future": {
-                "description": "Անցեալ/Ապագայ",
                 "tooltip": "Առաջարկուած, Շինարարութիւն, Լքուած, Քանդուած, եւ այլն։"
             },
             "others": {
-                "description": "Այլ",
                 "tooltip": "Մնացած Ամէնը"
             }
         },
@@ -393,16 +388,6 @@
             "on_wiki": "{tag} wiki.osm.org ֊ում",
             "used_with": "օգտագործւում է {type} ֊ի հետ"
         },
-        "validations": {
-            "untagged_point": "Չպիտակուած կէտ",
-            "untagged_point_tooltip": "Ընտրիր յատկութիւն, որ բնորոշում է այս գիծը։",
-            "untagged_line": "Չպիտակուած գիծ",
-            "untagged_line_tooltip": "Ընտրիր յատկութեան տիպը, որ բնորոշում է այս գիծը։",
-            "untagged_area": "Չպիտակուած տիրոյթ",
-            "untagged_area_tooltip": "Ընտրիր յատկութեան տիպը, որ բնորոշում է այս տիրոյթը",
-            "tag_suggests_area": "{tag} պիտակը ենթադրում է, որ գիծը պէտք է լինի տիրոյթ, բայց այն տիրոյթ չէ",
-            "deprecated_tags": "Հնացած պիտակներ՝ {tags}"
-        },
         "cannot_zoom": "Այս ռեժիմում հնարաւոր չէ աւելի փոքրացնել։",
         "full_screen": "Դարձնել լիաէկրան",
         "mapillary": {
@@ -447,9 +432,6 @@
             "categories": {
                 "category-building": {
                     "name": "Շինութեան Յատկութիւններ"
-                },
-                "category-golf": {
-                    "name": "Ծովածոցի յատկութիւններ"
                 },
                 "category-landuse": {
                     "name": "Տիրոյթի օգտագործման յատկութիւններ"

@@ -377,8 +377,6 @@
             "title": "Shfaq Vendndodhjen Time"
         },
         "inspector": {
-            "no_documentation_combination": "Nuk ka dokumentim disponueshëm për këtë kombinin etiketave",
-            "no_documentation_key": "Nuk ka dokumentim disponueshëm për këte çelës",
             "show_more": "Paraqit më tepër",
             "view_on_osm": "Shiko në openstreetmap.org",
             "all_fields": "Të gjithë fushat",
@@ -389,7 +387,6 @@
             "role": "Rol",
             "choose": "Zgjidhni llojën e tiparit",
             "results": "{n} rezultate për {search}",
-            "reference": "Shiko në OpenStreetMap Wiki",
             "back_tooltip": "Ndrysho tiparin",
             "remove": "Hiq",
             "search": "Kërko",
@@ -477,7 +474,6 @@
                 "tooltip": "Hekurudhat"
             },
             "others": {
-                "description": "Të tjera",
                 "tooltip": "Çdo gjë tjetër"
             }
         },
@@ -566,20 +562,6 @@
             "description": "Përshkrim",
             "on_wiki": "{tag} në wiki.osm.org",
             "used_with": "përdorur me {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Hekurudhë e shkëputur",
-            "disconnected_highway_tooltip": "Rrugët duhet të lidhen me rrugë të tjera ose me hyrjet e ndërtesave.",
-            "untagged_point": "Pikë e paetiketuar",
-            "untagged_point_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo pikë.",
-            "untagged_line": "Vijë e paetiketuar",
-            "untagged_line_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo vijë.",
-            "untagged_area": "Sipërfaqe e paetiketuar",
-            "untagged_area_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo sipërfaqe.",
-            "untagged_relation": "Lidhje e paetiketuar",
-            "untagged_relation_tooltip": "Përzgjidhni një karakteristikë që përshkruan se çfarë është kjo lidhje.",
-            "many_deletions": "Ju po fshini {n} karakteristika: {p} nyje, {l} vija, {a} sipërfaqe, {r} lidhje. Jeni të sigurtë që doni ta baëni këtë? Kjo do fshihet nga harta që çdo përdorues shikon në openstreetmap.org.",
-            "tag_suggests_area": "Etiketa {tag} sugjeron se vija duhet të jetë sipërfaqe, por nuk është e tillë."
         },
         "zoom": {
             "in": "Zmadhoni",

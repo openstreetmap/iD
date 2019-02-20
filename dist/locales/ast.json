@@ -398,8 +398,6 @@
             "locating": "Llocalizando, aguarda..."
         },
         "inspector": {
-            "no_documentation_combination": "Nun hai documentación disponible pa esta combinación d'etiquetes",
-            "no_documentation_key": "Nun hai documentación disponible pa esta clave",
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "all_fields": "Tolos campos",
@@ -410,7 +408,6 @@
             "role": "Rol",
             "choose": "Seleicione un tipu de carauterística",
             "results": "{n} resultaos pa {search}",
-            "reference": "Ver na Wiki d'OpenStreetMap",
             "back_tooltip": "Camudar carauterística",
             "remove": "Desaniciar",
             "search": "Guetar",
@@ -512,11 +509,9 @@
                 "tooltip": "Llinies eléctriques, plantes de xeneración, subestaciones, etc."
             },
             "past_future": {
-                "description": "Pasao/Futuru",
                 "tooltip": "Propuesto, en construcción, abandonao, valtao, etc."
             },
             "others": {
-                "description": "Otros",
                 "tooltip": "Tolo demás"
             }
         },
@@ -588,16 +583,6 @@
             "description": "Descripción",
             "on_wiki": "{tag} en wiki.osm.org",
             "used_with": "usada con {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Carretera desconeutada",
-            "disconnected_highway_tooltip": "Les carreteres habríen tar coneutaes con otres carreteres o entraes d'edificios.",
-            "old_multipolygon": "Etiquetes de multipolígonu na vía esterior",
-            "untagged_point": "Puntu ensin etiquetar",
-            "untagged_line": "Llinia ensin etiquetar",
-            "untagged_area": "Área ensin etiquetar",
-            "tag_suggests_area": "La etiqueta {tag} suxer que la llinia tendría de ser un área, pero nun ye un area",
-            "deprecated_tags": "Etiquetes anticuaes: {tags}"
         },
         "zoom": {
             "in": "Averar",
@@ -747,9 +732,6 @@
                 },
                 "category-building": {
                     "name": "Elementos d'edificiu"
-                },
-                "category-golf": {
-                    "name": "Elementos de golf"
                 },
                 "category-landuse": {
                     "name": "Elementos d'usu del terrén"
@@ -2007,8 +1989,7 @@
                     "label": "Tipu"
                 },
                 "website": {
-                    "label": "Sitiu web",
-                    "placeholder": "http://un.exemplu.ast/"
+                    "label": "Sitiu web"
                 },
                 "wetland": {
                     "label": "Tipu"
@@ -2673,9 +2654,6 @@
                 "building/terrace": {
                     "name": "Filera de cases"
                 },
-                "building/train_station": {
-                    "name": "Estación de tren"
-                },
                 "building/university": {
                     "name": "Edificiu universitariu"
                 },
@@ -2896,23 +2874,11 @@
                 "golf/hole": {
                     "name": "Furacu de golf"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Llagu d'agua llateral en golf"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Llagu d'agua llateral en golf"
-                },
                 "golf/rough": {
                     "name": "Rough de golf"
                 },
                 "golf/tee": {
                     "name": "Salida de percorríu"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Llagu de golf"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Llagu de golf"
                 },
                 "healthcare": {
                     "name": "Instalación sanitaria"
@@ -3696,36 +3662,6 @@
                 },
                 "power/transformer": {
                     "name": "Tresformador"
-                },
-                "public_transport/linear_platform": {
-                    "name": "Andén / Parada de tresporte"
-                },
-                "public_transport/linear_platform_aerialway": {
-                    "name": "Andén / Parada de remonte"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Andén / Parada d'autobús"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Andén / Parada de ferry"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "Andén / Parada de tren llixeru"
-                },
-                "public_transport/linear_platform_monorail": {
-                    "name": "Andén / Parada de monocarril"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Andén / Parada de metro"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Andén / Parada de tren"
-                },
-                "public_transport/linear_platform_tram": {
-                    "name": "Andén / Parada de tranvía"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Andén / Parada de trolebús"
                 },
                 "public_transport/platform": {
                     "name": "Andén / Parada de tresporte"

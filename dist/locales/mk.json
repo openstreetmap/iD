@@ -249,8 +249,6 @@
             "locating": "Ве пронаоѓам. Почекајте..."
         },
         "inspector": {
-            "no_documentation_combination": "Нема документација за овој сплет на ознаки",
-            "no_documentation_key": "Нема документација за овој клуч",
             "show_more": "Повеќе",
             "view_on_osm": "Погл. на openstreetmap.org",
             "all_fields": "Сите полиња",
@@ -261,7 +259,6 @@
             "role": "Улога",
             "choose": "Изберете вид елемент",
             "results": "{n} ставки од пребарувањето на {search}",
-            "reference": "Погл. на викито на OpenStreetMap ",
             "back_tooltip": "Измени елемент",
             "remove": "Отстрани",
             "search": "Пребарај",
@@ -345,11 +342,9 @@
                 "tooltip": "Електрични водови, електрани, трафостаници и тн."
             },
             "past_future": {
-                "description": "Минато/иднина",
                 "tooltip": "Предложено, во изградба, напуштено, урнато и тн."
             },
             "others": {
-                "description": "Други",
                 "tooltip": "Сето останато"
             }
         },
@@ -420,16 +415,6 @@
             "on_wiki": "{tag} на wiki.osm.org",
             "used_with": "се користи со {type}"
         },
-        "validations": {
-            "untagged_point": "Неозначена точка",
-            "untagged_point_tooltip": "Изберете вид на елемент што опишува каква точка е ова.",
-            "untagged_line": "Неозначена линија",
-            "untagged_line_tooltip": "Изберете вид на елемент што опишува каква линија е ова.",
-            "untagged_area": "Неозначено подрачје",
-            "untagged_area_tooltip": "Изберете вид на елемент што опишува какво подрачје е ова.",
-            "tag_suggests_area": "Ознаката {tag} укажува дека линијата треба да е подрачје, но не е.",
-            "deprecated_tags": "Застарени ознаки: {tags}"
-        },
         "cannot_zoom": "Не можам повеќе да приближувам во тековниот режим.",
         "full_screen": "Полн екран",
         "mapillary_images": {
@@ -488,9 +473,6 @@
                 },
                 "category-building": {
                     "name": "Елементи за градби"
-                },
-                "category-golf": {
-                    "name": "Елементи за голф"
                 },
                 "category-landuse": {
                     "name": "Елементи за видови земјиште"
@@ -1436,8 +1418,7 @@
                     "label": "Вид"
                 },
                 "website": {
-                    "label": "Мрежно место",
-                    "placeholder": "http://example.com/"
+                    "label": "Мрежно место"
                 },
                 "wetland": {
                     "label": "Вид"
@@ -1942,9 +1923,6 @@
                 "building/terrace": {
                     "name": "Нанижани куќи"
                 },
-                "building/train_station": {
-                    "name": "Железничка станица"
-                },
                 "building/university": {
                     "name": "Универзитет"
                 },
@@ -2137,23 +2115,11 @@
                 "golf/hole": {
                     "name": "Дупка за голф"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Странична водена препрека"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Странична водена препрека"
-                },
                 "golf/rough": {
                     "name": "Нерамно поле"
                 },
                 "golf/tee": {
                     "name": "Почетна рамнинка"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Водена препрека"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Водена препрека"
                 },
                 "healthcare/blood_donation": {
                     "name": "Крводарителски центар"

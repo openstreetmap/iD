@@ -347,8 +347,6 @@
             "locating": "Hinahanap ang lokasyon, mangyaring maghintay..."
         },
         "inspector": {
-            "no_documentation_combination": "Walang documentation para sa kumbinasyon ng mga tag na ginamit",
-            "no_documentation_key": "Walang \"documentation\" na magagamit para sa \"key\" na ito.",
             "show_more": "Higit pang detalye",
             "view_on_osm": "Tingnan sa openstreetmap.org",
             "all_tags": "Lahat ng tags",
@@ -358,7 +356,6 @@
             "role": "Kasapi",
             "choose": "Pumili ng uri ng \"features\"",
             "results": "{n} mga resulta para sa {search}",
-            "reference": "Tingnan sa OpenStreetMap Wiki",
             "back_tooltip": "Baguhin ang \"feature\"",
             "remove": "Alisin",
             "search": "Mag-search",
@@ -428,11 +425,7 @@
                 "description": "Mga tampok na pang enerhiya",
                 "tooltip": "Mga linya ng kuryente, Mga planta ng kuryente, Mga substasyono, etc."
             },
-            "past_future": {
-                "description": "Nakaraan/Kinabukasan"
-            },
             "others": {
-                "description": "Iba pa",
                 "tooltip": "Lahat ng iba pa"
             }
         },
@@ -489,17 +482,6 @@
             "on_wiki": "{tag} sa wiki.osm.org",
             "used_with": "Kabilang sa gingamait ang {type}"
         },
-        "validations": {
-            "disconnected_highway": "Hindi nakakabit na highway",
-            "untagged_point": "Walang tag na punto o tuldok",
-            "untagged_point_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang puntong ito.",
-            "untagged_line": "Walang tag na linya",
-            "untagged_line_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang linyang ito.",
-            "untagged_area": "Walang tag na area o poligon",
-            "untagged_area_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang poligong ito.",
-            "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
-            "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
-        },
         "cannot_zoom": "Hindi na pwedeng mag-zoom out sa kasalukuyang \"mode\".",
         "full_screen": "I-fullscreen",
         "help": {
@@ -545,9 +527,6 @@
                 },
                 "category-building": {
                     "name": "Tampok ng gusali"
-                },
-                "category-golf": {
-                    "name": "Mga tampok para sa Golf"
                 },
                 "category-landuse": {
                     "name": "Mga tampok para sa gagamiting lupa"

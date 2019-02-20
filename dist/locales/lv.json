@@ -419,8 +419,6 @@
             "locating": "Nosakām atrašanās vietu, uzgaidiet..."
         },
         "inspector": {
-            "no_documentation_combination": "Šai apzīmējumu kombinācijai nav piejama dokumentācija",
-            "no_documentation_key": "Šai vērtībai nav piejama dokumentācija",
             "show_more": "Rādīt vairāk",
             "view_on_osm": "Apskatīt openstreetmap.org",
             "all_fields": "Visi lauki",
@@ -430,7 +428,6 @@
             "role": "Loma",
             "choose": "Izvēlieties objekta tipu",
             "results": "Atrasti {n} rezultāti meklējot {search}",
-            "reference": "Skatīt OpenStreetMap wiki →",
             "back_tooltip": "Mainīt objektu",
             "remove": "Noņemt ",
             "search": "Meklēt",
@@ -646,15 +643,6 @@
             "description": "Apraksts",
             "on_wiki": "{tag} wiki.osm.org",
             "used_with": "izmantots kopā ar {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Nepievienots ceļš",
-            "untagged_line": "Neapzīmēta līnija",
-            "untagged_line_tooltip": "Izvēlies tipu, kas vislabāk izskaidro šo līniju.",
-            "untagged_area": "Neapzīmēts apgabals",
-            "many_deletions": "Jūs dzēšat {n} objektus: {p} mezglus, {l} līnijas, {a} apgabalus, {r} relācijas.. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
-            "tag_suggests_area": "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
-            "deprecated_tags": "Novecojuši apzīmējumi: {tags}"
         },
         "zoom": {
             "in": "Pietuvināt",
@@ -899,9 +887,6 @@
                 },
                 "category-building": {
                     "name": "Ēku veidi"
-                },
-                "category-golf": {
-                    "name": "Golfa Objekti"
                 },
                 "category-landuse": {
                     "name": "Zemes Izmantojuma Objekti"
@@ -1783,9 +1768,6 @@
                         "underground": "Apakšzemes"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Pasažieru informācijas displejs"
-                },
                 "payment_multi": {
                     "label": "Maksājumu veidi"
                 },
@@ -2121,8 +2103,7 @@
                     "label": "Tips"
                 },
                 "website": {
-                    "label": "Interneta lapa",
-                    "placeholder": "http://example.com/"
+                    "label": "Interneta lapa"
                 },
                 "wetland": {
                     "label": "Tips"
@@ -2745,9 +2726,6 @@
                 "building/terrace": {
                     "name": "Rindumājas",
                     "terms": "rindu mājas,mājas"
-                },
-                "building/train_station": {
-                    "name": "Vilcienu Stacija"
                 },
                 "building/university": {
                     "name": "Universitātes Ēka"
@@ -3387,21 +3365,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformators"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Autobusu pietura / platforma"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Prāmja pietura / Platforma"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Metro pietura / platforma"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Vilciena Pietura / Platforma"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Trolejbusu pietura / platforma"
                 },
                 "public_transport/platform_bus": {
                     "name": "Autobusu pietura / platforma"
