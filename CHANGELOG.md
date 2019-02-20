@@ -35,7 +35,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :mega: Release Highlights
 * :warning: iD now validates features while you edit! Select a feature to see its issues and access quick fixes.<br/>
 _Open the new Issues pane (shortcut <kbd>I</kbd>) to browse all errors and warnings._
-* :female-detective: You can now browse missing road data detected by [ImproveOSM](https://improveosm.org) from Telenav. Shoutout to [@SilentSpike] for working on this!<br/>
+* :detective: You can now browse missing road data detected by [ImproveOSM](https://improveosm.org) from Telenav. Shoutout to [@SilentSpike] for working on this!<br/>
 _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" to view detected data._
 
 #### :tada: New Features
