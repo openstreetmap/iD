@@ -39,18 +39,32 @@ _Open the new Issues pane (shortcut <kbd>I</kbd>) to browse all errors and warni
 _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" to view detected data._
 
 #### :tada: New Features
+* Upgrade the validation system ([#5830], a group effort by [@quincylvania], [@bhousel], [@gaoxm], [@wonga00], [@chrisklaiber], [@abalosc1], [@maxgrossman], [@brianhatchl])
+    * Update and show issues live during editing
+    * Add an Issues pane
+    * List issues in the feature sidebar
+    * Recommend fixes
+    * _More details below in the new :white_check_mark: **Validation** section of this changelog_
 * Integrate ImproveOSM data detection tools ([#5683], [#5739], thanks [@SilentSpike])
 
 [#5830]: https://github.com/openstreetmap/iD/issues/5830
 [#5683]: https://github.com/openstreetmap/iD/issues/5683
 [#5739]: https://github.com/openstreetmap/iD/issues/5739
 
+[@quincylvania]: https://github.com/quincylvania
+[@bhousel]: https://github.com/bhousel
+[@gaoxm]: https://github.com/gaoxm
+[@wonga00]: https://github.com/wonga00
+[@chrisklaiber]: https://github.com/chrisklaiber
+[@abalosc1]: https://github.com/abalosc1
+[@maxgrossman]: https://github.com/maxgrossman
+[@brianhatchl]: https://github.com/brianhatchl
 [@SilentSpike]: https://github.com/SilentSpike
 
 #### :sparkles: Usability
 * Don't close the open photo when toggling the photo overlay ([#5829], [#5836], thanks [@maxgrossman])
 * Allow the up and down buttons to work on empty number fields ([#5844], [#5852], thanks [@AndreasHae])
-* Render previews for all line icons and don't show previews when line icons are used for areas ([#5839], [#5888])
+* Render stroke previews for all line icons and don't show previews when line icons are used for areas ([#5839], [#5888])
 * Open the area feature browser immediately after selecting the multipolygon relation type ([#5765])
 * Render selected features on the map even if their layer is hidden ([#5880])
 * When adding a duplicate tag, focus the existing key instead of adding a "_1" suffix ([#2896])
@@ -60,6 +74,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Make address field suggestions case sensitive ([#5887])
 * Replace the "Edit or translate documentation" link text with a pencil icon ([#5753])
 * When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
+* Don't squish the panes at narrow window widths ([#5890])
 
 [#5829]: https://github.com/openstreetmap/iD/issues/5829
 [#5836]: https://github.com/openstreetmap/iD/issues/5836
@@ -76,6 +91,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 [#5887]: https://github.com/openstreetmap/iD/issues/5887
 [#5753]: https://github.com/openstreetmap/iD/issues/5753
 [#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5890]: https://github.com/openstreetmap/iD/issues/5890
 
 [@AndreasHae]: https://github.com/AndreasHae
 
@@ -98,7 +114,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Flag features with only meta tags like "source" or "created_by" ([#5830])
 * Block the upload of untagged features ([#5830])
 * Disable adding features of a hidden feature type to avoid redundant mapping ([#5876], [#5884])
-* Don't count vertices when warning of many deletions ([#5830]) 
+* Don't count vertices when warning about many deletions ([#5830]) 
 
 [#1669]: https://github.com/openstreetmap/iD/issues/1669
 [#5217]: https://github.com/openstreetmap/iD/issues/5217
