@@ -29,6 +29,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.14.1
+##### 2019-Feb-20
+
+#### :bug: Bugfixes
+* Fix an issue where ImproveOSM would not load due to non-HTTPS endpoints
+
 # 2.14.0
 ##### 2019-Feb-20
 
