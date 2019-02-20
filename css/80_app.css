@@ -1150,26 +1150,45 @@ a.hide-toggle {
     background-color: #ececec;
 }
 
+.preset-list-item button.preset-favorite-button,
 .preset-list-item button.tag-reference-button {
     height: 100%;
     border: 1px solid #ccc;
     flex: 32px;
     background: #f6f6f6;
 }
+[dir='ltr'] .preset-list-item button.preset-favorite-button,
 [dir='ltr'] .preset-list-item button.tag-reference-button {
     border-left: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0;
 }
+[dir='rtl'] .preset-list-item button.preset-favorite-button,
 [dir='rtl'] .preset-list-item button.tag-reference-button {
     border-right: none;
+    border-radius: 0;
+}
+[dir='ltr'] .preset-list-item button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+[dir='rtl'] .preset-list-item button:last-child {
     border-radius: 4px 0 0 4px;
 }
 
+.preset-list-item button.preset-favorite-button:hover,
 .preset-list-item button.tag-reference-button:hover {
     background: #f1f1f1;
 }
+.preset-list-item button.preset-favorite-button .icon,
 .preset-list-item button.tag-reference-button .icon {
     opacity: .5;
+}
+
+.preset-list-item button.preset-favorite-button .icon {
+    fill-opacity: 0;
+    stroke-width: 1.6;
+}
+.preset-list-item button.preset-favorite-button.active .icon {
+    fill-opacity: inherit;
 }
 
 img.tag-reference-wiki-image {
@@ -2474,6 +2493,7 @@ input.key-trap {
 
 /* hide and remove from layout */
 .inspector-hidden,
+.inspector-hover .preset-list-button-wrap .preset-favorite-button,
 .inspector-hover .preset-list-button-wrap .tag-reference-button,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],

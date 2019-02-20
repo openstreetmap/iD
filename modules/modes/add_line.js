@@ -10,8 +10,8 @@ import { modeDrawLine } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddLine(context) {
-    var mode = {
+export function modeAddLine(context, customMode, preset) {
+    var mode = customMode || {
         id: 'add-line',
         button: 'line',
         title: t('modes.add_line.title'),
@@ -25,11 +25,14 @@ export function modeAddLine(context) {
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
+    var defaultTags = {};
+    if (preset) defaultTags = preset.setTags(defaultTags, 'line');
+
 
     function start(loc) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay();
+        var way = osmWay({ tags: defaultTags });
 
         context.perform(
             actionAddEntity(node),
@@ -37,7 +40,7 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 
@@ -53,7 +56,7 @@ export function modeAddLine(context) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 
@@ -66,7 +69,7 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 

@@ -11,6 +11,7 @@ import {
 } from '../modes';
 
 import { svgIcon } from '../svg';
+import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -82,7 +83,8 @@ export function uiModes(context) {
             .on('drawn.modes', debouncedUpdate);
 
         context
-            .on('enter.modes', update);
+            .on('enter.modes', update)
+            .on('favoritePreset.modes', update);
 
         update();
 
@@ -90,6 +92,37 @@ export function uiModes(context) {
         function update() {
             var showNotes = notesEnabled();
             var data = showNotes ? modes : modes.slice(0, 3);
+
+            // add favorite presets to modes
+            var favoritePresets = context.getFavoritePresets();
+            var favoriteModes = favoritePresets.map(function(d) {
+                var preset = context.presets().item(d.id);
+                var isMaki = /^maki-/.test(preset.icon);
+                var icon = '#' + preset.icon + (isMaki ? '-11' : '');
+                var markerClass = 'add-preset-' + preset.name()
+                    .replace(/\s+/g, '_')
+                    + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
+
+                var favoriteMode = {
+                    id: markerClass,
+                    button: markerClass,
+                    title: t('presets.presets.' + preset.id + '.name'),
+                    description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name').toLowerCase(), t('geometry.' + d.geom)].join(' '),
+                    key: '',
+                    icon: icon
+                }
+                switch (d.geom) {
+                    case 'point':
+                    case 'vertex':
+                        return modeAddPoint(context, favoriteMode, preset);
+                    case 'line':
+                        return modeAddLine(context, favoriteMode, preset);
+                    case 'area':
+                        return modeAddArea(context, favoriteMode, preset);
+                }
+            });
+
+            data = data.concat(favoriteModes);
 
             var buttons = selection.selectAll('button.add-button')
                 .data(data, function(d) { return d.id; });
@@ -125,7 +158,7 @@ export function uiModes(context) {
             buttonsEnter
                 .each(function(d) {
                     d3_select(this)
-                        .call(svgIcon('#iD-icon-' + d.button));
+                        .call(svgIcon(d.icon || '#iD-icon-' + d.button));
                 });
 
             buttonsEnter

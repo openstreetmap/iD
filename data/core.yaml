@@ -7,6 +7,7 @@ en:
     zoom_to: zoom to
     copy: copy
     open_wikidata: open on wikidata.org
+    favorite: add to favorites
   modes:
     add_area:
       title: Area
@@ -40,6 +41,7 @@ en:
         vertex: Added a node to a way.
         relation: Added a relation.
         note: Added a note.
+      title: Add
     start:
       annotation:
         line: Started a line.

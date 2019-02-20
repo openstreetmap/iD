@@ -7,7 +7,8 @@
             "undo": "undo",
             "zoom_to": "zoom to",
             "copy": "copy",
-            "open_wikidata": "open on wikidata.org"
+            "open_wikidata": "open on wikidata.org",
+            "favorite": "add to favorites"
         },
         "modes": {
             "add_area": {
@@ -51,7 +52,8 @@
                     "vertex": "Added a node to a way.",
                     "relation": "Added a relation.",
                     "note": "Added a note."
-                }
+                },
+                "title": "Add"
             },
             "start": {
                 "annotation": {
@@ -8369,13 +8371,6 @@
                 },
                 "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
                 "name": "Japan GSI ortho Imagery"
-            },
-            "gsi.go.jp_airphoto": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
-                "name": "Japan GSI airphoto Imagery"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
