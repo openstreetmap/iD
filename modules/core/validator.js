@@ -1,10 +1,8 @@
 import _isFunction from 'lodash-es/isFunction';
-import _map from 'lodash-es/map';
 import _filter from 'lodash-es/filter';
 import _flatten from 'lodash-es/flatten';
 import _flattenDeep from 'lodash-es/flattenDeep';
 import _uniq from 'lodash-es/uniq';
-import _uniqWith from 'lodash-es/uniqWith';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -135,17 +133,17 @@ export function coreValidator(context) {
         var entitiesToCheck = changes.created.concat(changes.modified);
         var graph = history.graph();
 
-        _issues = _flatten(_map(changesValidationIDs, function(ruleID) {
+        _issues = _flatten(changesValidationIDs.map(function(ruleID) {
             var validation = validations[ruleID];
             return validation(changes, context);
         }));
 
-        entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
+        entitiesToCheck = _uniq(_flattenDeep(entitiesToCheck.map(function(entity) {
             var entities = [entity];
             if (entity.type === 'node') {  // validate ways if their nodes have changed
                 entities = entities.concat(graph.parentWays(entity));
             }
-            entities = _map(entities, function(entity) {
+            entities = entities.map(function(entity) {
                 if (entity.type !== 'relation') {  // validate relations if their geometries have changed
                     return [entity].concat(graph.parentRelations(entity));
                 }
@@ -154,16 +152,22 @@ export function coreValidator(context) {
             return entities;
         })));
 
+        var issuesByID = {};
+
         for (var entityIndex in entitiesToCheck) {
             var entity = entitiesToCheck[entityIndex];
             var entityIssues = validateEntity(entity);
             _issuesByEntityID[entity.id] = entityIssues;
-            _issues = _issues.concat(entityIssues);
+            entityIssues.forEach(function(issue) {
+                // Different entities can produce the same issue so store them by
+                // the ID to ensure that there are no duplicate issues.
+                issuesByID[issue.id()] = issue;
+            });
         }
 
-        _issues = _uniqWith(_issues, function(issue1, issue2) {
-            return issue1.id() === issue2.id();
-        });
+        for (var issueID in issuesByID) {
+            _issues.push(issuesByID[issueID]);
+        }
 
         dispatch.call('reload', self, _issues);
     };
