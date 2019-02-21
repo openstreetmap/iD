@@ -414,6 +414,8 @@
             "modified": "已修改",
             "deleted": "已刪除",
             "created": "已建立",
+            "outstanding_errors_message": "請先解決所有的錯誤。仍有 {count} 錯誤。",
+            "comment_needed_message": "請先加上編輯變動註解。",
             "about_changeset_comments": "關於編輯變動",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "您在此留言中提到了 Google：請注意從 Google 地圖是嚴格禁止的。",
@@ -1412,6 +1414,201 @@
                 }
             }
         },
+        "issues": {
+            "title": "問題",
+            "key": "I",
+            "list_title": "({count}) 問題",
+            "errors": {
+                "list_title": "({count}) 錯誤"
+            },
+            "warnings": {
+                "list_title": "({count}) 警告"
+            },
+            "no_issues": {
+                "message": "所有東西都很好",
+                "info": "當你編輯時，任何問題都會在這裡顯示。"
+            },
+            "almost_junction": {
+                "message": "{feature} 很接近但是沒有連到 {feature2}",
+                "highway-highway": {
+                    "tip": "交叉的道路應該共享交叉連接點。"
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} 跨過 {feature2}",
+                "building-building": {
+                    "tip": "除非是不同層，不然建築不該交叉"
+                },
+                "building-highway": {
+                    "tip": "只有在使用橋樑、隧道、遮蓋或入口時，道路才能交叉建築。"
+                },
+                "building-railway": {
+                    "tip": "只有在使用橋樑或隧道時，鐵軌才能交叉建築。"
+                },
+                "building-waterway": {
+                    "tip": "只有使用隧道或位在不同層時，水路才能交叉建築。"
+                },
+                "highway-highway": {
+                    "tip": "只有在使用橋樑、隧道或交叉路口時，道路才能交叉。"
+                },
+                "highway-railway": {
+                    "tip": "只有在使用橋樑、隧道或平交道時，道路才能交叉鐵軌。"
+                },
+                "highway-waterway": {
+                    "tip": "只有在使用橋樑、隧道、或淺灘時，道路才能跨越水路。"
+                },
+                "railway-railway": {
+                    "tip": "交叉的鐵軌應當要連接，或是使用橋樑或隧道。"
+                },
+                "railway-waterway": {
+                    "tip": "只有在使用橋樑或隧道時，鐵軌才能交叉水路。"
+                },
+                "waterway-waterway": {
+                    "tip": "交叉的水路應當要連結，或是使用隧道。"
+                },
+                "tunnel-tunnel": {
+                    "tip": "交叉的隧道應當屬於不同層。"
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "交叉的隧道應當連接或是使用不同層級。"
+                },
+                "bridge-bridge": {
+                    "tip": "交叉的橋樑應當使用不同圖層。"
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "交叉的橋樑應當連接，或使用不同圖層。"
+                },
+                "indoor-indoor": {
+                    "tip": "交叉的室內圖徽應當使用不同圖層。"
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "交叉的室內圖徽應當連接，或是使用不用層級。"
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} 有過時的標籤 \"{tag}\""
+                },
+                "combination": {
+                    "message": "{feature} 有過時的標籤組合：{tag}"
+                },
+                "tip": "有些標籤已隨著時間流逝而被棄用，而且應當被取代。"
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} 與其他道路和路徑斷開連接",
+                    "tip": "道路應當連到其他道路，或者建築入口。"
+                }
+            },
+            "generic_name": {
+                "message": "{feature} 有一般名稱 \"{name}\"",
+                "tip": "名稱應當是真實，圖徽實際在地的名稱。"
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "刪除 {n} 圖徽： {p} 點，{l} 線段，和 {a} 區域"
+                },
+                "points-lines-areas-relations": {
+                    "message": "刪除 {n} 圖徽： {p} 點，{l} 線段， {a} 區域，和 {r} 關聯"
+                },
+                "tip": "只有冗餘或不存在的圖徽該被刪除。"
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} 沒有標籤"
+                },
+                "descriptive": {
+                    "message": "{feature} 沒有描述性的標籤"
+                },
+                "specific": {
+                    "message": "{feature} 沒有 \"{tag}\" 標籤"
+                },
+                "tip": "圖徽必須有標籤來定義他們。"
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} 有誤標的標籤",
+                "tip": "多動多邊形應當標在他們的關聯，而非他們的外圍路徑。"
+            },
+            "tag_suggests_area": {
+                "message": "{feature} 依據標籤 \"{tag}\"，應當是封閉區域",
+                "tip": "區域必須有連結的端點。"
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "接連相當靠近的圖徽"
+                },
+                "connect_crossing_features": {
+                    "annotation": "連接交叉的圖徽"
+                },
+                "connect_endpoints": {
+                    "title": "連接結束處",
+                    "annotation": "連接路徑的端點"
+                },
+                "connect_features": {
+                    "title": "連接圖徽"
+                },
+                "continue_from_start": {
+                    "title": "繼續從開始處繪製"
+                },
+                "continue_from_end": {
+                    "title": "繼續從結束處繪製"
+                },
+                "delete_feature": {
+                    "title": "刪除這個圖徶"
+                },
+                "move_tags": {
+                    "title": "移動這標籤",
+                    "annotation": "移動標籤"
+                },
+                "remove_deprecated_tag": {
+                    "annotation": "移除舊的標籤"
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "移除舊的標籤組合"
+                },
+                "remove_generic_name": {
+                    "title": "移除名稱",
+                    "annotation": "移除常用名稱"
+                },
+                "remove_tag": {
+                    "title": "移除這個標籤",
+                    "annotation": "移除標籤。"
+                },
+                "remove_tags": {
+                    "title": "移除標籤"
+                },
+                "reposition_features": {
+                    "title": "重新排列圖徽"
+                },
+                "select_preset": {
+                    "title": "選擇圖徽類型"
+                },
+                "tag_as_disconnected": {
+                    "title": "標示為未連接標籤",
+                    "annotation": "標示相當近的圖徽為未連接。"
+                },
+                "upgrade_tag": {
+                    "title": "更新標籤",
+                    "annotation": "更新舊的標籤"
+                },
+                "upgrade_tag_combo": {
+                    "title": "更新標籤",
+                    "annotation": "更新舊標籤組合"
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "使用橋樑或隧道"
+                },
+                "use_different_layers": {
+                    "title": "使用不同階層"
+                },
+                "use_different_levels": {
+                    "title": "使用不同樓層"
+                },
+                "use_tunnel": {
+                    "title": "使用隧道"
+                }
+            }
+        },
         "intro": {
             "done": "完成",
             "ok": "OK",
@@ -2266,6 +2463,15 @@
                 "denotation": {
                     "label": "表示"
                 },
+                "departures_board": {
+                    "label": "出發告示牌",
+                    "options": {
+                        "no": "無",
+                        "realtime": "即時",
+                        "timetable": "時刻表",
+                        "yes": "是"
+                    }
+                },
                 "description": {
                     "label": "描述"
                 },
@@ -2612,6 +2818,8 @@
                 "junction_line": {
                     "label": "連接點",
                     "options": {
+                        "circular": "號誌圓環",
+                        "jughandle": "槽化車道",
                         "roundabout": "圓環"
                     }
                 },
@@ -4351,8 +4559,8 @@
                     "terms": "扁平紀念幣販賣機,扁平紀念幣自動販賣機"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "糞便袋販賣機",
-                    "terms": "糞便袋自動販賣機,販賣機"
+                    "name": "大便丟棄袋",
+                    "terms": "排泄物丟棄袋"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "女性衛生用品自動販賣機",
@@ -8096,6 +8304,13 @@
                 },
                 "description": "日本 GSI 航空照片。並未完全正射，但比 GSI 正射影像新且／或覆蓋範圍不同。",
                 "name": "日本 GSI 航空照片"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI 日本無縫照片"
+                },
+                "description": "日本 GSI 無縫照片影像，具有最新 GSI ortho，航空影像，災後影像等組合。",
+                "name": "日本 GSI 無縫照片影像"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

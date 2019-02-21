@@ -1611,6 +1611,15 @@
                 "denotation": {
                     "label": "Υποδήλωση"
                 },
+                "departures_board": {
+                    "label": "Πίνακας Αναχωρήσεων",
+                    "options": {
+                        "no": "Κανένα",
+                        "realtime": "Σε Πραγματικό Χρόνο",
+                        "timetable": "Χρονοδιάγραμμα",
+                        "yes": "Ναι"
+                    }
+                },
                 "description": {
                     "label": "Περιγραφή"
                 },
@@ -2241,6 +2250,7 @@
                 "piste/difficulty": {
                     "label": "Δυσκολία",
                     "options": {
+                        "advanced": "Ανώτερο",
                         "easy": "Εύκολο",
                         "expert": "Έμπειρο",
                         "extreme": "Ακραίο",
@@ -2446,8 +2456,8 @@
                         "danger_right": "Κίνδυνος Δεξιά",
                         "port": "Λιμάνι",
                         "starboard": "Δεξιά πλευρά πλοίου",
-                        "waterway_left": "Αριστερός Υδατόδρομος",
-                        "waterway_right": "Δεξιός Υδατόδρομος"
+                        "waterway_left": "Αριστερός Υδάτινος Δρόμος",
+                        "waterway_right": "Δεξιός Υδάτινος Δρόμος"
                     }
                 },
                 "seamark/beacon_lateral/colour": {
@@ -2477,8 +2487,8 @@
                         "port": "Είσοδος",
                         "preferred_channel_port": "Προτιμώμενο Κανάλι Εισόδου",
                         "starboard": "Δεξιά πλευρά πλοίου",
-                        "waterway_left": "Αριστερός Υδατόδρομος",
-                        "waterway_right": "Δεξιός Υδατόδρομος"
+                        "waterway_left": "Αριστερός Υδάτινος Δρόμος",
+                        "waterway_right": "Δεξιός Υδάτινος Δρόμος"
                     }
                 },
                 "seamark/buoy_lateral/colour": {
@@ -3467,9 +3477,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Αυτόματης Πωλητής με Κέρματα"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Αυτόματης Πωλητής Σακούλας Περιττωμάτων"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Μπιντές"
                 },
@@ -3490,6 +3497,9 @@
                 },
                 "amenity/vending_machine/parcel_pickup": {
                     "name": "Ντουλάπι Παραληφθέντων Δεμάτων"
+                },
+                "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "Ντουλάπι Παραλαβής / Εναπόθεσης Δέματος"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Αυτόματος πωλητής εισιτηρίων στάθμευσης"
@@ -4096,6 +4106,9 @@
                 "golf/rough": {
                     "name": "Σκληρό"
                 },
+                "healthcare/alternative": {
+                    "name": "Εναλλακτικό Φάρμακο"
+                },
                 "healthcare/alternative/chiropractic": {
                     "name": "Χειροπράκτορας"
                 },
@@ -4373,6 +4386,9 @@
                 "historic/tomb": {
                     "name": "Τύμβος"
                 },
+                "historic/wayside_cross": {
+                    "name": "Εικονοστάσιο"
+                },
                 "historic/wayside_shrine": {
                     "name": "Εικονοστάσιο",
                     "terms": "Εικονοστάσιο, Εικόνισμα"
@@ -4450,6 +4466,12 @@
                 "landuse/industrial": {
                     "name": "Βιομηχανική Περιοχή",
                     "terms": "Βιομηχανική Ζώνη, ΒΙ.ΠΕ."
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Μάντρα"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Σφαγείο"
                 },
                 "landuse/landfill": {
                     "name": "Χωματερή",
@@ -5204,6 +5226,9 @@
                     "name": "Πόλη",
                     "terms": "Πόλη"
                 },
+                "place/city_block": {
+                    "name": "Οικοδομικό Τετράγωνο"
+                },
                 "place/farm": {
                     "name": "Φάρμα"
                 },
@@ -5231,6 +5256,9 @@
                 "place/square": {
                     "name": "Πλατεία"
                 },
+                "place/suburb": {
+                    "name": "Προάστιο"
+                },
                 "place/town": {
                     "name": "Κωμόπολη",
                     "terms": "Κωμόπολη"
@@ -5238,6 +5266,18 @@
                 "place/village": {
                     "name": "Χωριό",
                     "terms": "Χωριό"
+                },
+                "playground/seesaw": {
+                    "name": "Τραμπάλα"
+                },
+                "playground/slide": {
+                    "name": "Τσουλίθρα"
+                },
+                "playground/structure": {
+                    "name": "Κατασκευή Παιγνίων"
+                },
+                "playground/swing": {
+                    "name": "Κούνια"
                 },
                 "point": {
                     "name": "Σημείο",
@@ -5253,8 +5293,14 @@
                     "name": "Γεννήτρια Ρεύματος",
                     "terms": "ηλεκτρική γεννήτρια"
                 },
+                "power/generator/method/photovoltaic": {
+                    "name": "Ηλιακό Πάνελ"
+                },
                 "power/generator/source/nuclear": {
                     "name": "Πυρηνικός Αντιδραστήρας"
+                },
+                "power/generator/source/wind": {
+                    "name": "Ανεμογεννήτρια"
                 },
                 "power/line": {
                     "name": "Γραμμή Υψηλής Τάσης Ρεύματος",
@@ -5263,6 +5309,9 @@
                 "power/minor_line": {
                     "name": "Γραμμή Χαμηλής Τάσης Ρεύματος",
                     "terms": "Γραμμή χαμηλότερης ισχύος Ρεύματος, Γραμμή παροσ΄χης Ρεύματος χαμηλότερης ισχύος"
+                },
+                "power/plant": {
+                    "name": "Ηλεκτρικός Σταθμός"
                 },
                 "power/pole": {
                     "name": "Κολόνα Ρεύματος",
@@ -5274,6 +5323,9 @@
                 "power/substation": {
                     "name": "Υποσταθμός"
                 },
+                "power/switch": {
+                    "name": "Διακόπτης Ρεύματος"
+                },
                 "power/tower": {
                     "name": "Κολόνα Υψηλής Τάσης",
                     "terms": "Πυλώνας Υψηλής Τάσης"
@@ -5281,6 +5333,30 @@
                 "power/transformer": {
                     "name": "Μετασχηματιστής",
                     "terms": "Μετασχηματιστής"
+                },
+                "public_transport/platform": {
+                    "name": "Στάση / Πλατφόρμα Μετεπιβίβασης"
+                },
+                "public_transport/platform_bus": {
+                    "name": "Στάση / Πλατφόρμα Λεωφορείου"
+                },
+                "public_transport/platform_ferry": {
+                    "name": "Στάση / Πλατφόρμα Φέρι"
+                },
+                "public_transport/platform_light_rail": {
+                    "name": "Στάση / Πλατφόρμα Ελαφρού Σιδηρόδρομου"
+                },
+                "public_transport/platform_subway": {
+                    "name": "Στάση / Πλατφόρμα Υπόγειου Σιδηρόδρομου"
+                },
+                "public_transport/platform_train": {
+                    "name": "Στάση / Πλατφόρμα Τρένου"
+                },
+                "public_transport/platform_tram": {
+                    "name": "Στάση / Πλατφόρμα Τραμ"
+                },
+                "public_transport/platform_trolleybus": {
+                    "name": "Στάση / Πλατφόρμα Τρόλλεϋ"
                 },
                 "public_transport/station": {
                     "name": "Σταθμός Μετεπιβίβασης"
@@ -5290,6 +5366,9 @@
                 },
                 "public_transport/station_ferry": {
                     "name": "Πορθμείο Φέρι Μπωτ"
+                },
+                "public_transport/station_light_rail": {
+                    "name": "Σταθμός Ελαφρού Σιδηρόδρομου"
                 },
                 "public_transport/station_subway": {
                     "name": "Σταθμός Υπόγειου Σιδηρόδρομου / Μετρό"
@@ -5302,6 +5381,12 @@
                 },
                 "public_transport/station_trolleybus": {
                     "name": "Σταθμός / Τέρμα Τρόλλευ"
+                },
+                "public_transport/stop_area": {
+                    "name": "Χώρος Μετεπιβίβασης"
+                },
+                "public_transport/stop_position": {
+                    "name": "Τοποθεσία Μετεπιβίβασης"
                 },
                 "public_transport/stop_position_aerialway": {
                     "name": "Χώρος Στάθμευσης Αεροσκαφών"
@@ -5381,6 +5466,9 @@
                 "railway/switch": {
                     "name": "Σιδηροδρομικό Ψαλίδι"
                 },
+                "railway/train_wash": {
+                    "name": "Πλυντήριο Τρένου"
+                },
                 "railway/tram": {
                     "name": "Τραμ",
                     "terms": "Τραμ"
@@ -5398,6 +5486,9 @@
                 "route/ferry": {
                     "name": "Διαδρομή Πορθμείου",
                     "terms": "Δρομολόγιο Πορθμείου"
+                },
+                "seamark": {
+                    "name": "Σημαδούρα"
                 },
                 "seamark/beacon_isolated_danger": {
                     "name": "Φάρος Κινδύνου"
@@ -6089,8 +6180,14 @@
                 "type/route/horse": {
                     "name": "Διαδρομή Ιππασίας"
                 },
+                "type/route/light_rail": {
+                    "name": "Διαδρομή Ελαφρού Σιδηρόδρομου"
+                },
                 "type/route/pipeline": {
                     "name": "Διαδρομή Σωλήνωσης"
+                },
+                "type/route/piste": {
+                    "name": "Πίστα / Διαδρομή Σκι"
                 },
                 "type/route/power": {
                     "name": "Διαδρομή Ρεύματος"
@@ -6111,12 +6208,15 @@
                 "type/site": {
                     "name": "Χώρος"
                 },
+                "type/waterway": {
+                    "name": "Υδάτινος Δρόμος"
+                },
                 "vertex": {
                     "name": "Άλλο",
                     "terms": "Άλλο"
                 },
                 "waterway": {
-                    "name": "Διαδρομή νερού"
+                    "name": "Υδάτινος Δρόμος"
                 },
                 "waterway/boatyard": {
                     "name": "Ναυπηγείο"
@@ -6140,7 +6240,7 @@
                     "name": "Πρατήριο Καυσίμων Λιμένα"
                 },
                 "waterway/milestone": {
-                    "name": "Χιλιομετρικό Σημείο Υδατόδρομου"
+                    "name": "Χιλιομετρικό Σημείο Υδάτινου Δρόμου"
                 },
                 "waterway/river": {
                     "name": "Ποταμός",

@@ -3921,10 +3921,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "기념품 동전 자판기"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "쓰레기 봉투 자판기",
-                    "terms": "쓰레기 봉투 자판기, 쓰레기 봉투 자동 판매기"
-                },
                 "amenity/vending_machine/food": {
                     "name": "식품 자판기"
                 },

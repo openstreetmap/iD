@@ -1146,6 +1146,9 @@
                 }
             }
         },
+        "issues": {
+            "list_title": "Merkintävirheet ({count})"
+        },
         "intro": {
             "done": "valmis",
             "ok": "OK",
@@ -3586,10 +3589,6 @@
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Elektroniikka-automaatti"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Koirankakkapussiautomaatti",
-                    "terms": "koira, koirat, koiran, kakka, uloste, koirankakka, koiranuloste, pussi, muovipussi"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Naishygienia-automaatti",

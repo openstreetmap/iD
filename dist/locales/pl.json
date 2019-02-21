@@ -4020,10 +4020,6 @@
                     "name": "Automat do sprzedaży monet pamiątkowych",
                     "terms": "automat do sprzedaży monet pamiątkowych,moneta pamiątkowa"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Dozownik z workami na psie odchody",
-                    "terms": "woreczki na psie odchody"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat z produktami higieny kobiecej",
                     "terms": "podpaski,tampony"

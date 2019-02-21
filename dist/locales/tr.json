@@ -3015,10 +3015,6 @@
                     "name": "İçecek Otomatı",
                     "terms": "İçecek Otomatı"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Dışkı Toplama Poşet Otomatı",
-                    "terms": "Dışkı Toplama Poşet Otomatı"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Kadın Sağlık Otomatı",
                     "terms": "Kadın Sağlık Otomatik Satış Makinası"

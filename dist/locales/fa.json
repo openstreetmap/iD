@@ -1477,6 +1477,12 @@
                 },
                 "bridge-bridge_connectable": {
                     "tip": "پل‌هایی که از هم می‌گذرند باید متصل باشند یا لایه‌های مجزا داشته باشند."
+                },
+                "indoor-indoor": {
+                    "tip": "عارضه‌های داخلی (indoor) که از هم می‌گذرند باید در طبقه‌های (level) مجزا باشند."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "عارضه‌های داخلی (indoor) که از هم می‌گذرند یا باید متصل باشند یا در طبقه‌های (level) مجزا باشند."
                 }
             },
             "deprecated_tag": {
@@ -1554,6 +1560,12 @@
                     "title": "تگ‌ها را جابه‌جا کنید",
                     "annotation": "تگ‌ها جابه‌جا شد."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "یک تگ قدیمی حذف شد."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "یک ترکیب قدیمی از تگ‌ها حذف شد."
+                },
                 "remove_generic_name": {
                     "title": "نام را حذف کنید",
                     "annotation": "یک نام عمومی حذف شد."
@@ -1561,6 +1573,9 @@
                 "remove_tag": {
                     "title": "تگ را حذف کنید",
                     "annotation": "تگ حذف شد."
+                },
+                "remove_tags": {
+                    "title": "تگ‌ها را حذف کنید"
                 },
                 "reposition_features": {
                     "title": "جای عارضه‌ها را تنظیم کنید"
@@ -1573,10 +1588,24 @@
                     "annotation": "عارضه‌هایی که خیلی به هم نزدیک بودند به‌عنوان غیرمتصل تگ‌گذاری شدند."
                 },
                 "upgrade_tag": {
+                    "title": "تگ را ارتقا دهید",
                     "annotation": "یک تگ قدیمی ارتقا یافت."
                 },
                 "upgrade_tag_combo": {
+                    "title": "تگ‌ها را ارتقا دهید",
                     "annotation": "یک ترکیب قدیمی از تگ‌ها ارتقا یافت."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "از یک پل یا تول استفاده کنید"
+                },
+                "use_different_layers": {
+                    "title": "از لایه‌های مجزا استفاده کنید"
+                },
+                "use_different_levels": {
+                    "title": "از طبقه‌های مجزا استفاده کنید"
+                },
+                "use_tunnel": {
+                    "title": "از یک تونل استفاده کنید"
                 }
             }
         },
@@ -4032,9 +4061,6 @@
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "دستگاه خودفروش آب آشامیدنی"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "دستگاه خود توزیع کیسه پسماند"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "دستتگاه فروش لوازم بهداشتی زنان"

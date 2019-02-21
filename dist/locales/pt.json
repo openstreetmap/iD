@@ -1477,6 +1477,12 @@
                 },
                 "bridge-bridge_connectable": {
                     "tip": "As pontes que se cruzem devem-se conectar ou usar níveis diferentes."
+                },
+                "indoor-indoor": {
+                    "tip": "Os elementos em interiores que se cruzem devem usar níveis diferentes."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Os elementos em interiores que se cruzem devem estar conectados ou usar níveis diferentes."
                 }
             },
             "deprecated_tag": {
@@ -1554,6 +1560,12 @@
                     "title": "Mover as etiquetas",
                     "annotation": "Etiquetas movidas."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Etiqueta antiga removida."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Combinação de etiqueta antiga removida."
+                },
                 "remove_generic_name": {
                     "title": "Remover o nome",
                     "annotation": "Nome genérico removido."
@@ -1561,6 +1573,9 @@
                 "remove_tag": {
                     "title": "Remover a etiqueta.",
                     "annotation": "Etiqueta removida."
+                },
+                "remove_tags": {
+                    "title": "Remover as etiquetas"
                 },
                 "reposition_features": {
                     "title": "Reposicionar os elementos"
@@ -1573,10 +1588,24 @@
                     "annotation": "Elementos muito próximos etiquetados."
                 },
                 "upgrade_tag": {
+                    "title": "Atualizar a etiqueta",
                     "annotation": "Etiqueta antiga atualizada."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Atualizar as etiquetas",
                     "annotation": "Combinação de etiquetas atualizadas."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Usar uma ponte ou túnel"
+                },
+                "use_different_layers": {
+                    "title": "Usar camadas diferentes"
+                },
+                "use_different_levels": {
+                    "title": "Usar níveis diferentes"
+                },
+                "use_tunnel": {
+                    "title": "Usar um túnel"
                 }
             }
         },
@@ -2434,6 +2463,15 @@
                 "denotation": {
                     "label": "Importância"
                 },
+                "departures_board": {
+                    "label": "Quadro de partidas",
+                    "options": {
+                        "no": "Nenhum",
+                        "realtime": "Tempo real",
+                        "timetable": "Calendário",
+                        "yes": "Sim"
+                    }
+                },
                 "description": {
                     "label": "Descrição"
                 },
@@ -2780,6 +2818,8 @@
                 "junction_line": {
                     "label": "Cruzamento",
                     "options": {
+                        "circular": "Rotunda",
+                        "jughandle": "Jughandle (rampa de saída)",
                         "roundabout": "Rotunda"
                     }
                 },
@@ -4519,8 +4559,7 @@
                     "terms": "Máquina, venda automática, moedas"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Dispensador de sacos para dejetos",
-                    "terms": "excrement, excrementos, cocó, dejetos, saco, sacos"
+                    "name": "Distribuidor de sacos de excrementos"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de venda de produtos de higiene feminina",
@@ -8263,6 +8302,13 @@
                 },
                 "description": "Fotos aéreas do GSI Japão. Não completamente ortorretificadas, mas um pouco mais recente e/ou diferente das imagens aéras GSI orto.",
                 "name": "Imagens aéreas do Japão GSI"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "Japão GSI contínuo"
+                },
+                "description": "Imagens aéreas do Japão GSI contínuo. A coleção das últimas imagens GSI ortofotos, aéreas, pós-desastre e outras.",
+                "name": "Imagens aéreas do Japão GSI contínuo"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

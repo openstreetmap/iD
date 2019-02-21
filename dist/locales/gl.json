@@ -64,7 +64,7 @@
                 "title": "Continuar",
                 "description": "Continuar esta liña.",
                 "not_eligible": "Ningunha liña pode continuar dende eiquí.",
-                "multiple": "Dende eiquí poden continuar varias liñas. Pra escoller unha delas, preme a tecra de Maiúsculas e fai clic na liña pra seleccionala.",
+                "multiple": "Dende aquí poden continuar varias liñas. Para escoller unha delas, preme a tecla de Maiúsculas e fai clic na liña para seleccionala.",
                 "annotation": {
                     "line": "Liña continuada.",
                     "area": "Área continuada."
@@ -114,7 +114,7 @@
                 "description": "Endereitar esta liña.",
                 "key": "S",
                 "annotation": "Liña endereitada.",
-                "too_bendy": "Isto non pode ser endereitado porque é demasiado sinuoso.",
+                "too_bendy": "Isto non pode ser endereitado porque é moi sinuoso.",
                 "connected_to_hidden": "Isto non se pode facer lineal xa que está conectado cun elemento agochado."
             },
             "delete": {
@@ -745,7 +745,7 @@
             }
         },
         "success": {
-            "just_edited": "Acabas de editar OpenStreetMap!",
+            "just_edited": "Remataches de editar no OpenStreetMap!",
             "thank_you": "Grazas por mellorar o mapa",
             "thank_you_location": "Grazas por mellorar o mapa por {where}",
             "help_html": "As túas mudanzas terían que aparecer na capa estándar do OpenStreetMap nuns intres. Pódelle levar máis tempo actualizarse a outras capas e mapas doutros sitios.",
@@ -753,7 +753,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Ollar mudanzas no OSM",
             "changeset_id": "O teu conxunto de mudanzas é o {changeset_id}",
-            "like_osm": "Gústache OpenStreetMap? Comunícate con outras persoas:",
+            "like_osm": "Góstache o OpenStreetMap? Comunícate con outras persoas:",
             "more": "Máis",
             "events": "Eventos",
             "languages": "Linguas: {languages}",
@@ -1204,13 +1204,13 @@
                 "before_start": "Tería que estar familiarizado co OpenStreetMap e este editor antes de comezar a editar. O iD ten un titorial para ensinarlle os conceptos básicos da edición do OpenStreetMap. Prema en \"Inicia-lo titorial\" nesta pantalla para face-lo titorial - Só lle tomará uns 15 minutos.",
                 "open_source_h": "Código aberto",
                 "open_source": "O editor do iD é un proxecto colaborativo de código aberto e agora está a emprega-la versión {version}. O código fonte está dispoñíbel [no GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Pode axudar ó iD [traducindo](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ou [reportando erros](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "Podes axudar ó iD [traducindo](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ou [reportando erros](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Resumo",
                 "navigation_h": "Navegación",
-                "navigation_drag": "Pode arrastra-lo mapa premendo e mantendo premido o {leftclick} botón esquerdo do rato e movendo o rato. Tamén se pode emprega-las teclas de frecha `↓`, `↑`, `←`, `→` do teclado.",
-                "navigation_zoom": "Pode achegar ou afastar xirando a roda do rato ou o panel táctil, ou premendo nos botóns {plus} / {minus} á beira do mapa. Tamén se pode emprega-las teclas `+`, `-` do teclado.",
+                "navigation_drag": "Podes arrastra-lo mapa premendo e mantendo premido o {leftclick} botón esquerdo do rato e movendo o rato. Tamén se poden emprega-las teclas de frecha `↓`, `↑`, `←`, `→` do teclado.",
+                "navigation_zoom": "Podes achegar ou afastar xirando a roda do rato ou o panel táctil, ou premendo nos botóns {plus} / {minus} á beira do mapa. Tamén se poden emprega-las teclas `+`, `-` do teclado.",
                 "features_h": "Elementos do mapa",
                 "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa, coma estradas, construcións ou puntos de interese. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap. Os elementos do mapa represéntanse empregando *puntos*, *liñas* ou *áreas*.",
                 "nodes_ways": "No OpenStreetMap, ós puntos ás veces chámaselles *nós*, e as liñas e áreas *vías* ou camiños."
@@ -1240,14 +1240,14 @@
                 "intro": "O *editor de elemento* aparece xunto ó mapa, e permítelle ollar e editar toda a información do elemento escollido.",
                 "definitions": "A lapela de enriba amosa o tipo de elemento. A lapela central contén *campos* que amosan os atributos do elemento, coma o seu nome ou enderezo.",
                 "type_h": "Tipo de elemento",
-                "type": "Pode facer clic no tipo de elemento para muda-lo elemento cara un tipo diferente. Todo o que existe no mundo real pódese engadir ó OpenStreetMap, polo que hai milleiros de tipos de elementos para elixir.",
-                "type_picker": "A escolla de tipos amosa os tipos de elementos máis comúns, coma parques, hospitais, restaurantes, estradas e construccións. Pode procurar calquera cousa escribindo o que está a procurar na caixa de procura. Tamén pode premer na icona {inspect} **Información** xunto ó tipo de elemento para obter máis información ó respecto.",
+                "type": "Podes facer clic no tipo de elemento para muda-lo elemento cara un tipo diferente. Todo o que existe no mundo real pódese engadir ó OpenStreetMap, polo que hai milleiros de tipos de elementos para elixir.",
+                "type_picker": "A escolla de tipos amosa os tipos de elementos máis comúns, coma parques, hospitais, restaurantes, estradas e construccións. Podes procurar calquera cousa escribindo o que estás a procurar na caixa de procura. Tamén podes premer na icona {inspect} **Información** ó carón do tipo de elemento para obter máis información ó respecto.",
                 "fields_h": "Campos",
-                "fields_all_fields": "A lapela \"Tódolos campos\" contén tódolos detalles do elemento que pode editar. No OpenStreetMap, tódolos campos son opcionais, e está ben deixar un campo en branco se non está na certeza del.",
+                "fields_all_fields": "A lapela \"Tódolos campos\" contén tódolos detalles do elemento que podes editar. No OpenStreetMap, tódolos campos son opcionais, e está ben deixar un campo en branco se non estás na certeza del.",
                 "fields_example": "Cada tipo de elemento amosará diferentes campos. Por exemplo, unha estrada pode amosar campos para a súa superficie e límite da velocidade, pero un restaurante pode amosar campos para o tipo da comida que serve e o horario no que está aberto.",
-                "fields_add_field": "Tamén pode facer clic no menú despregábel \"Engadir campo\" para engadir máis campos, coma unha descrición, ligazón á Wikipedia, acceso para cadeiras de rodas e demais.",
+                "fields_add_field": "Tamén podes facer clic no menú despregábel \"Engadir campo\" para engadir máis campos, coma unha descrición, ligazón á Wikipedia, acceso para cadeiras de rodas e demais.",
                 "tags_h": "Etiquetas",
-                "tags_all_tags": "Embaixo da lapela dos campos, pode expandi-la lapela \"Tódalas etiquetas\" para editar calquera das *etiquetas* do OpenStreetMap para o elemento escollido. Cada etiqueta ten unha *clave* e *valor*, elementos de datos que definen tódolos elementos almacenados no OpenStreetMap.",
+                "tags_all_tags": "Embaixo da lapela dos campos, podes expandi-la lapela \"Tódalas etiquetas\" para editar calquera das *etiquetas* do OpenStreetMap para o elemento escollido. Cada etiqueta ten unha *clave* e *valor*, elementos de datos que definen tódolos elementos almacenados no OpenStreetMap.",
                 "tags_resources": "Edita-las etiquetas dun elemento precisa dun coñecemento intermedio acerca do OpenStreetMap. Tería que consultar recursos coma a [Wiki do OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) ou o [Taginfo](https://taginfo.openstreetmap.org/) para obter máis información sobre as prácticas ou costumes aceptadas de etiquetado do OpenStreetMap."
             },
             "points": {
@@ -1267,16 +1267,16 @@
                 "intro": "As *liñas* empréganse para representar elementos tales coma estradas, ferrocarrís e ríos. As liñas teñen que debuxarse no centro do elemento que representan.",
                 "add_line_h": "Engadindo liñas",
                 "add_line": "Para engadir unha liña, prema no botón {line} **Liña** na barra das ferramentas enriba do mapa, ou prema a tecla de método abreviado `2`. Isto trocará o cursor do rato nun símbolo dunha cruz.",
-                "add_line_draw": "Deseguido, poña o cursor do rato onde debe comeza-la liña e {leftclick} faga clic co botón esquerdo do rato ou prema `Espazo` para comezar a poñer nós ó longo da liña. Prosegue poñendo máis nós faciendo clic ou premendo `Espazo`. Mentres debuxa, pode achegar ou arrastra-lo mapa para engadir máis detalles.",
+                "add_line_draw": "Deseguido, pon o cursor do rato onde debe comeza-la liña e {leftclick} fai clic co botón esquerdo do rato ou preme `Espazo` para comezar a poñer nós ó longo da liña. Prosegue poñendo máis nós facendo clic ou premendo `Espazo`. Mentres debuxas, podes achegar ou arrastra-lo mapa para engadir máis detalles.",
                 "add_line_finish": "Para rematar unha liña, prema `{return}` ou faga clic de novo no derradeiro nó.",
                 "modify_line_h": "Modificando as liñas",
-                "modify_line_dragnode": "Decote verá liñas que non teñen a forma axeitada, por exemplo, unha estrada que non coincide cas imaxes do fondo. Para axusta-la forma dunha liña, primeiro faga clic co {leftclick} botón esquerdo para seleccionala. Tódolos nós da liña debuxaranse coma pequenos círculos. Deseguido, pode arrastra-los nós cara localizacións mellores.",
-                "modify_line_addnode": "Tamén pode crear novos nós ó longo dunha liña mediante {leftclick}**x2** facendo dobre clic na liña ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
+                "modify_line_dragnode": "Decote verás liñas que non teñen a forma axeitada, por exemplo, unha estrada que non coincide cas imaxes do fondo. Para axusta-la forma dunha liña, primeiro fai clic co {leftclick} botón esquerdo para seleccionala. Tódolos nós da liña debuxaranse coma pequenos círculos. Deseguido, podes arrastra-los nós cara localizacións mellores.",
+                "modify_line_addnode": "Tamén podes crear novos nós ó longo dunha liña mediante {leftclick}**x2** facendo dobre clic na liña ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
                 "connect_line_h": "Conectando as liñas",
                 "connect_line": "Te-las estradas conectadas de xeito correcto é importante para o mapa e esencial para fornecer indicacións de manexo.",
                 "connect_line_display": "As conexións entre estradas están debuxadas con círculos grises. Os puntos derradeiros dunha liña debúxanse con círculos brancos máis grandes se non se conectan a ren.",
-                "connect_line_drag": "Para conectar unha liña a otro elemento, arrastre un dos nós da liña ó outro elemento até que ámbolos dous se xunten. Consello: Pode manter premida a tecla `{alt}` para evitar que os nós se conecten a outros elementos.",
-                "connect_line_tag": "Se sabe que a conexión ten semáforos ou cruzamentos peonís, pode engadilos seleccionando o nó de conexión e empregando o editor de elementos para escolle-lo tipo de elemento axeitado.",
+                "connect_line_drag": "Para conectar unha liña a otro elemento, arrastra un dos nós da liña ó outro elemento até que ámbolos dous se xunten. Consello: Podes manter premida a tecla `{alt}` para evitar que os nós se conecten a outros elementos.",
+                "connect_line_tag": "Se sabes que a conexión ten semáforos ou cruzamentos peonís, podes engadilos seleccionando o nó de conexión e empregando o editor de elementos para escolle-lo tipo de elemento axeitado.",
                 "disconnect_line_h": "Desconectando as liñas",
                 "disconnect_line_command": "Para desconectar unha estrada doutro elemento, {rightclick} faga clic co botón dereito no nó de conexión e escolla a orde ou comando {disconnect} **Desconectar** do menú da edición.",
                 "move_line_h": "Movendo as liñas",
@@ -1293,13 +1293,13 @@
                 "point_or_area": "Moitos elementos pódense representar coma puntos ou áreas. Ten que cartografa-los edificios e as contornas da propiedade coma áreas sempre que sexa posíbel. Poña puntos dentro da área do edificio para representar negocios, instalacións e outros elementos ubicados dentro do edificio.",
                 "add_area_h": "Engadindo áreas",
                 "add_area_command": "Para engadir unha área, prema no botón {area} **Área** na barra das ferramentas enriba do mapa, ou prema a tecla de método abreviado `3`. Isto trocará o cursor do rato nun símbolo dunha cruz.",
-                "add_area_draw": "Deseguido, poña o cursor do rato nunha das esquinas do elemento e {leftclick} faga clic co botón esquerdo ou prema `Espazo` para comezar a colocar nós arredor do bordo exterior da área. Prosega poñendo máis nós faciendo clic ou premendo `Espazo`. Mentres debuxa, pode achegar ou arrastra-lo mapa para engadir máis detalles.",
+                "add_area_draw": "Deseguido, pon o cursor do rato nunha das esquinas do elemento e {leftclick} fai clic co botón esquerdo ou preme `Espazo` para comezar a colocar nós arredor do bordo exterior da área. Prosegue pondo máis nós faciendo clic ou premendo `Espazo`. Mentres debuxas, podes achegar ou arrastra-lo mapa para engadir máis detalles.",
                 "add_area_finish": "Para rematar unha área, prema `{return}` ou faga clic novamente no primeiro ou derradeiro nó.",
                 "square_area_h": "Esquinas cadradas",
                 "square_area_command": "Moitos elementos da área, coma edificios, teñen esquinas cadradas. Para encadra-las esquinas dunha área, faga clic {rightclick} co botón dereito na beira da área e escolla a orde ou comando {orthogonalize} **Encadrar** no menú da edición.",
                 "modify_area_h": "Modificando áreas",
-                "modify_area_dragnode": "Decote verá áreas que non teñen a forma axeitada, por exemplo, un edificio que non coincide cas imaxes do fondo. Para axusta-la forma dunha área, primeiro, faga clic no {leftclick} botón esquerdo do rato para seleccionala. Tódolos nós da área debuxaranse coma pequenos círculos. Deseguido, pode arrastra-los nós cara localizacións mellores.",
-                "modify_area_addnode": "Tamén pode crear novos nós ó longo dunha área mediante {leftclick} **x2** faciendo dobre clic no bordo da área ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
+                "modify_area_dragnode": "Decote verá áreas que non teñen a forma axeitada, por exemplo, un edificio que non coincide cas imaxes do fondo. Para axusta-la forma dunha área, primeiro, fai clic no {leftclick} botón esquerdo do rato para seleccionala. Tódolos nós da área debuxaranse coma pequenos círculos. Deseguido, podes arrastra-los nós cara localizacións mellores.",
+                "modify_area_addnode": "Tamén podes crear novos nós ó longo dunha área mediante {leftclick} **x2** faciendo dobre clic no bordo da área ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
                 "delete_area_h": "Eliminando áreas",
                 "delete_area": "Se unha área é completamente incorrecta, por exemplo, un edificio que non existe no mundo real, está ben que se elimine. Teña coitadiño ó eliminar elementos: as imaxes do fondo que está a empregar poden ficar desactualizadas, e un edificio que semella incorrecto podería sinxelamente estar recén construído.",
                 "delete_area_command": "Para eliminar unha área, faga clic co {rightclick} botón dereito na área para seleccionala e amosa-lo menú da edición, despois empregue a orde ou comando {delete} **Eliminar**."
@@ -1308,9 +1308,9 @@
                 "title": "Relacións",
                 "intro": "Unha *relación* é un tipo especial de elemento no OpenStreetMap que agrupa outros elementos. Os elementos que pertencen a unha relación chámanse *membros*, e cada membro pode ter un *rol* na relación.",
                 "edit_relation_h": "Editando as relacións",
-                "edit_relation": "Na beira inferior do editor de elementos, pode expandi-la lapela \"Tódalas relacións\" para ollar se o elemento escollido é membro dalgunha relación. Deseguido, pode facer clic na relación para seleccionala e editala.",
-                "edit_relation_add": "Para engadir un elemento cara unha relación, escolla o elemento e despois prema no botón {plus} engadir na lapela \"Tódalas relacións\" do editor de funcións. Pode elixir dunha listaxe de relacións pretas, ou elixi-la opción \"Nova relación...\".",
-                "edit_relation_delete": "Tamén pode premer no botón {delete} **Eliminar** para elimina-lo elemento escollido da relación. Se elimina tódolos membros dunha relación, a relación eliminarase de xeito automático.",
+                "edit_relation": "Na beira inferior do editor de elementos, podes expandi-la lapela \"Tódalas relacións\" para ollar se o elemento escollido é membro dalgunha relación. Deseguido, podes facer clic na relación para seleccionala e editala.",
+                "edit_relation_add": "Para engadir un elemento cara unha relación, escolle o elemento e despois preme no botón {plus} engadir na lapela \"Tódalas relacións\" do editor de funcións. Podes escoller dunha listaxe de relacións pretas, ou elixi-la opción \"Nova relación...\".",
+                "edit_relation_delete": "Tamén podes premer no botón {delete} **Eliminar** para elimina-lo elemento escollido da relación. Se eliminas tódolos membros dunha relación, a relación eliminarase de xeito automático.",
                 "maintain_relation_h": "Mantendo as relacións",
                 "maintain_relation": "Na súa meirande parte, o iD manterá relacións de xeito automático mentres edita. Debe ter coidado ó substituí-los elementos que poderían ser membros das relacións. Por exemplo, se elimina un treito da estrada e debuxa un novo treito da estrada para substituíla, ten que engadi-lo novo treito ás mesmas relacións (rotas, restricións de xiro, etc.) que a orixinal.",
                 "relation_types_h": "Tipos de relacións",
@@ -1321,7 +1321,7 @@
                 "turn_restriction_h": "Muda-las restricións",
                 "turn_restriction": "Unha relación de *restrición de xiro* é un grupo de varios segmentos de camiño nun cruzamento. As restricións de xiro constan dun camiño *dende*, nó ou estradas *vía*, e un camiño *até*.",
                 "turn_restriction_field": "Para editar restricións de xiro, seleccione un nó de unión onde dous ou máis camiños se crucen. O editor de elementos amosará un campo especial \"Restricións de xiro\" que contén un modelo de cruzamento.",
-                "turn_restriction_editing": "No campo \"Restricións de xiro\", faga clic para escoller un camiño \"dende\", e vexa se os xiros están permitidos ou restrinxidos a calquera das estradas \"até\". Pode facer clic nas iconas de xiro para trocar entre permitido e restrinxido. O iD xerará relacións de xeito automático e estabelecerá os dende, vía e roles segundo as súas escollas.",
+                "turn_restriction_editing": "No campo \"Restricións de xiro\", fai clic para escoller un camiño \"dende\", e mira se os xiros están permitidos ou restrinxidos a calquera das estradas \"até\". Podes facer clic nas iconas de xiro para trocar entre permitido e restrinxido. O iD xerará relacións de xeito automático e estabelecerá os 'dende', vía e roles segundo as túas escollas.",
                 "route_h": "Rotas",
                 "route": "Unha relación *Rota* é un grupo dun ou máis elementos de liña que xuntas forman unha rede de rotas, coma unha rota de bus, unha rota de tren ou unha rota de estrada.",
                 "route_add": "Para engadir un elemento a unha relación de rota, seleccione o elemento e desprácese cara embaixo á lapela \"Tódalas relacións\" do editor de elementos, despois prema no botón {plus} engadir para engadir este elemento a unha relación preta existente ou a unha nova relación.",
@@ -1347,7 +1347,7 @@
                 "choosing": "Para ollar que fontes de imaxes están dispoñíbeis para editar, prema no botón {layers} **Axustes do fondo** no costado do mapa.",
                 "sources": "De xeito predeterminado, escóllese a capa de satélite [Bing Maps](https://www.bing.com/maps/) coma imaxe do fondo. Dependendo de onde esté editando, outras fontes de imaxes estarán dispoñíbeis. Algunhas poden ser máis recentes ou ter unha resolución máis alta, polo que sempre é útil verificar que capa é a mellor para empregar coma referenza do cartografado.",
                 "offsets_h": "Axusta-lo desprazamento das imaxes",
-                "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se olla unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as mova para que coincidan co fondo. No seu lugar, pode axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo.",
+                "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se ollas unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as movas para que coincidan co fondo. No seu lugar, podes axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo.",
                 "offset_change": "Prema nos triángulos pequenos para axusta-lo desprazamento das imaxes en pequenos intervalos, ou manteña premido o {leftclick} botón esquerdo do rato e arrastre dentro do cadrado gris para escorrega-las imaxes cara a aliñación."
             },
             "streetlevel": {
@@ -1365,13 +1365,13 @@
                 "using_h": "Empregando as pistas de GPS",
                 "using": "Para empregar unha pista do GPS para o cartografado, arrastre e solte o ficheiro dos datos no editor de mapas. Se o recoñece, debuxarao no mapa coma unha liña violeta brilante. Prema na lapela {data} **Datos do mapa** na beira do mapa para habilitar, deshabilitar ou achega-los seus datos do GPS.",
                 "tracing": "A pista do GPS non se envía ó OpenStreetMap; a mellor maneira de empregala é debuxar no mapa empregándoa coma unha guía para os novos elementos que engada.",
-                "upload": "Tamén pode [baixa-los datos do GPS ó OpenStreetMap](https://www.openstreetmap.org/trace/create) para que os empreguen outros usuarios."
+                "upload": "Tamén podes [baixa-los datos do GPS ó OpenStreetMap](https://www.openstreetmap.org/trace/create) para que os empreguen outros usuarios."
             },
             "qa": {
                 "title": "Control de calidade",
                 "intro": "As ferramentas de *control de calidade* (Q/A) poden atopar etiquetas non axeitadas, estradas desconectadas e outros problemas co OpenStreetMap que poderán arranxar os cartógrafos. Para olla-los problemas das ferramentas de *control de calidade* (Q/A) existentes, preme no taboleiro {data} **Datos do mapa** para habilitares unha capa específica das ferramentas.",
                 "tools_h": "Ferramentas",
-                "tools": "As ferramentas que son actualmente compatíbeis son: O [KeepRight] (https://www.keepright.at/) e o [ImproveOSM] (https://improveosm.org/en/). Agarda a que o iD sexa compatíbel co [Osmose] (https://osmose.openstreetmap.fr/) e máis ferramentas de *control de calidade* (Q/A) e rastrexo de erros no futuro.",
+                "tools": "As ferramentas que son actualmente compatíbeis son: O [KeepRight](https://www.keepright.at/) e o [ImproveOSM](https://improveosm.org/en/). Agarda a que o iD sexa compatíbel co [Osmose](https://osmose.openstreetmap.fr/) e máis ferramentas de *control de calidade* (Q/A) e rastrexo de erros no futuro.",
                 "issues_h": "Manexo de problemas",
                 "issues": "O manexo dos problemas das ferramentas de *control de calidade* (Q/A) é semellante ó manexo de notas. Preme nunha marcaxe para ollar na lapela lateral os detalles do problema. Cada ferramenta ten as súas propias capacidades, pero xeralmente podes comentar e/ou pechar un problema."
             },
@@ -1425,7 +1425,7 @@
                 "list_title": "Avisos ({count})"
             },
             "no_issues": {
-                "message": "Todo vese ben",
+                "message": "Todo se ve ben",
                 "info": "Calquera problema amosarase aquí mentres editas"
             },
             "almost_junction": {
@@ -1560,6 +1560,12 @@
                     "title": "Mover as etiquetas",
                     "annotation": "Movéronse as etiquetas."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Eliminada unha etiqueta obsoleta."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Eliminada unha combinación de etiquetas obsoleta."
+                },
                 "remove_generic_name": {
                     "title": "Eliminar o nome",
                     "annotation": "Eliminouse un nome xenérico."
@@ -1567,6 +1573,9 @@
                 "remove_tag": {
                     "title": "Eliminar a etiqueta",
                     "annotation": "Eliminouse a etiqueta."
+                },
+                "remove_tags": {
+                    "title": "Eliminar as etiquetas"
                 },
                 "reposition_features": {
                     "title": "Reposicionar os elementos"
@@ -1579,9 +1588,11 @@
                     "annotation": "Etiquetados elementos moi pretos coma desconectados."
                 },
                 "upgrade_tag": {
+                    "title": "Actualizar a etiqueta",
                     "annotation": "Actualizouse unha etiqueta vella."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Actualizar as etiquetas",
                     "annotation": "Actualizouse unha combinación de etiquetas vellas."
                 },
                 "use_bridge_or_tunnel": {
@@ -1738,7 +1749,7 @@
             },
             "navigation": {
                 "title": "Navegación",
-                "drag": "A zona principal do mapa amosa os datos do OpenStreetMap enriba dun fondo. {br} Pode arrastra-lo mapa premendo e sostendo o botón esquerdo do rato mentres move o rato arredor. Tamén pode emprega-las frechas do teclado. ** Arrastre o mapa! **",
+                "drag": "A zona principal do mapa amosa os datos do OpenStreetMap enriba dun fondo. {br} Podes arrastra-lo mapa premendo e sostendo o botón esquerdo do rato mentres moves o rato arredor. Tamén podes emprega-las frechas do teclado. ** Arrastra o mapa! **",
                 "zoom": "Podes facer zoom fora da zona de desprazamento coa roda do rato ou o trackpad, ou premendo nos botóns  {plus} / {minus}. **Fai zoom no mapa!**",
                 "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap.",
                 "points_lines_areas": "Os elementos do mapa están representados empregando *puntos, liñas ou áreas.*",
@@ -1841,7 +1852,7 @@
             },
             "startediting": {
                 "title": "Comezar a editar",
-                "help": "Agora estás listo para editar OpenStreetMap! {br} Pode reproducir este paseo en calquera momento ou ver máis documentación premendo no botón {button} Axuda ou premendo a tecla  '{key}'.",
+                "help": "Agora estás disposto para editar no OpenStreetMap! {br} Podes reproducir este paseo en calquera intre ou ollar máis documentación premendo no botón {button} Axuda ou premendo na tecla '{key}'.",
                 "shortcuts": "Podes ollar unha listaxe de ordes ou comandos xunto cos teus atallos do teclado premendo a tecla '{key}'.",
                 "save": "Non te esquezas de gardar de xeito regular as túas mudanzas!",
                 "start": "Comeza a cartografar!"
@@ -2446,6 +2457,11 @@
                 "denotation": {
                     "label": "Descrición rápida"
                 },
+                "departures_board": {
+                    "options": {
+                        "yes": "Si"
+                    }
+                },
                 "description": {
                     "label": "Descrición completa"
                 },
@@ -2788,6 +2804,11 @@
                 },
                 "junction/ref_oneway": {
                     "label": "Número de cruzamento"
+                },
+                "junction_line": {
+                    "options": {
+                        "roundabout": "Rotonda"
+                    }
                 },
                 "kerb": {
                     "label": "Bordo"
@@ -4454,9 +4475,6 @@
                 },
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Máquina expendedora de moedas planas"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Caca Can"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina expendedora de hixiene feminina"
@@ -6990,6 +7008,13 @@
                 "description": "Imaxes aéreas do Xapón GSI. Non está ortorrectificado de xeito completo, pero é un chisco máis recente e/ou está cuberto de xeito diferente que as ortoimaxes do GSI.",
                 "name": "Imaxes aéreas do Xapón GSI"
             },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "Imaxes sen ortorectificar do GSI Xapón"
+                },
+                "description": "Imaxes sen ortorectificar do GSI Xapón. A colección das últimas imaxes ortográficas, imaxe aérea, postdesastre e outros do GSI.",
+                "name": "Imaxes sen ortorectificar do GSI Xapón"
+            },
             "gsi.go.jp_std_map": {
                 "attribution": {
                     "text": "Xapón GSI"
@@ -7224,28 +7249,119 @@
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Mellore o OpenStreetMap en Bangladesh",
-                "extendedDescription": "Cartografando en Bangladesh? Ten algunha pregunta, desexa conectarse ca comunidade aquí? Únase a nós en {url}. Todos son benvidos!"
+                "extendedDescription": "Cartografando en Bangladesh? Tes algunha pregunta e desexas contactar ca comunidade aquí? Únete a nós en {url}. Todos son benvidos!"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Cartografado participativo do bairro",
                 "description": "Mellore o OpenStreetMap na India",
-                "extendedDescription": "Cartografando na India? Ten preguntas, desexa conectarse ca comunidade aquí? Únase a nós en {url}. Todos son benvidos!",
+                "extendedDescription": "Cartografando na India? Tes cuestións e desexas contactar ca comunidade aquí? Únete a nós en {url}. Todos son benvidos!",
                 "events": {
                     "sotmasia2018": {
                         "name": "Estado do Mapa, Asia 2018",
-                        "description": "Únase ó acontecemento rexional do OpenStreetMap 2018 no State of the Map Asia na India"
+                        "description": "Únase ó acontecemento rexional do OpenStreetMap 2018 no State of the Map Asia na India",
+                        "where": "Instituto Indio da Administración, Bangalore, India"
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "Foro do OpenStreetMap India",
+                "description": "Foro web do OpenStreetMap India"
+            },
+            "osm-india-github": {
+                "name": "GitHub do OpenStreetMap India",
+                "description": "Codifica connosco: {url}"
+            },
+            "osm-india-telegram": {
+                "description": "Únete á nosa familia: {url}"
+            },
             "OSM-india-twitter": {
+                "name": "Twitter do OpenStreetMap India",
                 "description": "Estamos só a un chío de distancia: {url}"
             },
+            "osm-india-website": {
+                "name": "OpenStreetMap India"
+            },
+            "osm-india-youtube": {
+                "description": "Subscríbete á nosa canle: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Free Software Hardware Movement - Facebook"
+            },
+            "OSM-IDN-facebook": {
+                "extendedDescription": "Cartografando na Indonesia? Tes cuestións e desexas contactar ca comunidade aquí? Únete a nós en {Url}. Todos son benvidos!"
+            },
+            "osm-iran-forum": {
+                "extendedDescription": "Un foro web para os usuarios do OpenStreetMap en Irán. Síntete ceibe de facer cuestións e debater con outros!"
+            },
+            "OSM-japan-facebook": {
+                "name": "Comunidad OpenStreetMap Xapón",
+                "description": "Cartógrafos e usuarios do OpenStreetMap no Xapón"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Listaxe de correo do OpenStreetMap Xapón",
+                "description": "Talk-ja é unha listaxe de correo oficial para a Comunidade Xaponesa"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter do OpenStreetMap Xapón",
+                "description": "Cancelo no Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Xapón",
+                "description": "Cartógrafos e usuarios do OpenStreetMap no Xapón"
+            },
             "OSM-MY-facebook": {
-                "name": "OpenStreetMap Malaisia no Facebook"
+                "name": "OpenStreetMap Malaisia no Facebook",
+                "description": "Para parolar sobre calquera cousa relacionada co OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Foro do OpenStreetMap Malaisia",
+                "description": "Foro oficial do OpenStreetMap Malaisia"
+            },
+            "OSM-MY-matrix": {
+                "name": "Canle de Riot do OpenStreetMap Malaisia",
+                "description": "Tódolos cartógrafos son benvidos! Rexístrate en {signupUrl}"
+            },
+            "OSM-MNG-facebook": {
+                "extendedDescription": "Cartografando en Mongolia? Tes cuestións e desexas contactar ca comunidade aquí? Únete a nós en {Url}. Todos son benvidos!"
+            },
+            "be-forum": {
+                "description": "Foro web do OpenStreetMap Bélxica"
+            },
+            "be-irc": {
+                "name": "IRC do OpenStreetMap Bélxica",
+                "description": "Únete a #osmbe en irc.oftc.net (porto 6667)",
+                "extendedDescription": "Únete a #osmbe en irc.oftc.net (porto 6667), está ligado ca canle de conversa de Matrix"
+            },
+            "be-mailinglist": {
+                "name": "Listaxe de correo de Talk-be",
+                "description": "Talk-be é a listaxe de correo oficial para a comunidade belga do OSM"
+            },
+            "be-matrix": {
+                "name": "Canle de Matrix do OpenStreetMap BE",
+                "description": "Tódolos cartógrafos son benvidos!",
+                "extendedDescription": "A maioría das conversas ocorren na canle \"OpenStreetMap Belgium\". Podes preguntar calquera cousa alí! As outras salas son para eidos específicos."
+            },
+            "be-meetup": {
+                "name": "Xuntanza do OpenStreetMap Bélxica",
+                "description": "Xuntanzas presenciais de tódolos interesados no OpenStreetMap",
+                "extendedDescription": "As xuntanzas presenciais son xeniais para coñecer a outros cartógrafos, facerlles cuestións e aprender moito. Son de xeito especial benvidos os novos contribuíntes!"
+            },
+            "be-twitter": {
+                "name": "Twitter do OpenStreetMap Bélxica",
+                "description": "OSM Bélxica no Twitter: @osm_be"
+            },
+            "hr-facebook": {
+                "name": "Grupo de Facebook do OpenStreetMap de Croacia"
             },
             "fr-facebook": {
                 "name": "Páxina do Facebook do OpenStreetMap Francia",
                 "description": "Páxina do Facebook do OpenStreetMap Francia"
+            },
+            "de-berlin-twitter": {
+                "description": "Séguenos no Twitter: {url}"
+            },
+            "de-forum": {
+                "description": "Foro web do OpenStreetMap Alemaña"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap Hungría no Facebook",
@@ -7257,6 +7373,12 @@
             "it-facebook": {
                 "name": "Facebook do OpenStreetMap Italia",
                 "description": "Unirse á comunidade do OpenStreetMap Italia no Facebook"
+            },
+            "it-twitter": {
+                "description": "Séguenos no Twitter en {url}"
+            },
+            "OSM-Rome-meetup": {
+                "description": "Mellora o OpenStreetMap na área de Roma"
             },
             "OSM-PL-facebook-group": {
                 "name": "Grupo de Facebook do OpenStreetMap Polonia"
@@ -7272,6 +7394,9 @@
             "se-facebook": {
                 "name": "Facebook do OpenStreetMap Suecia",
                 "description": "OpenStreetMap Suecia no Facebook"
+            },
+            "se-twitter": {
+                "description": "Séguenos no Twitter en {url}"
             },
             "GeoPhilly": {
                 "name": "GeoPhilly"
@@ -7292,8 +7417,39 @@
                 "name": "Facebook do OpenStreetMap Arxentina",
                 "description": "Unirse á comunidade do OpenStreetMap Arxentina no Facebook"
             },
+            "OSM-AR-forum": {
+                "name": "Foro web do OpenStreetMap Arxentina",
+                "description": "Únete ó foro web do OpenStreetMap Arxentina",
+                "extendedDescription": "Axeitado para conversas longas ou importantes. Tempo de resposta tardo. "
+            },
+            "OSM-AR-irc": {
+                "name": "IRC do OpenStreetMap Arxentina",
+                "description": "Únete a #osm-ar en irc.oftc.net (porto 6667)",
+                "extendedDescription": "Seica atopes ó usuario máis experto da comunidade."
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Listaxe de correo Talk-ar",
+                "description": "Listaxe de correo electrónico vella. Case sen uso hoxe en día."
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram do OpenStreetMap Arxentina",
+                "description": "Únete á comunidade do OpenStreetMap Arxentina no Telegram",
+                "extendedDescription": "A canle máis activa da comunidade, axeitada para parolar e obter respostas ás túas cuestións no mesmo intre. Todos son benvidos!"
+            },
             "OSM-AR-twitter": {
-                "description": "Seguenos no Twitter na seguinte ligazón {url}"
+                "name": "Twitter do OpenStreetMap Arxentina",
+                "description": "Seguenos no Twitter na seguinte ligazón {url}",
+                "extendedDescription": "Novas da comunidade local e do OpenStreetMap en xeral. "
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Listaxe de correo talk-bo",
+                "description": "Talk-bo é a listaxe de correo oficial da comunidade boliviana do OpenStreetMap",
+                "extendedDescription": "Cartografando en Bolivia? Tes cuestións e desexas contactar ca comunidade aquí? Únete a nós en {url}. Todos son benvidos!"
+            },
+            "Bahia-telegram": {
+                "name": "Grupo de Telegram do OpenStreetMap Baía",
+                "description": "Únete á comunidade do OpenStreetMap Baía no Telegram",
+                "extendedDescription": "Únete á comunidade para obter máis información acerca do OpenStreetMap, facer cuestións ou participar nas nosas xuntanzas. Todos son benvidos!"
             },
             "OSM-br-twitter": {
                 "description": "Seguenos no Twitter na seguinte ligazón {url}"

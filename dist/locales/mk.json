@@ -1737,9 +1737,6 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Автопат за пијалаци"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Автомат за изметни кеси"
-                },
                 "amenity/vending_machine/news_papers": {
                     "name": "<преведете со истозначници или сродни поими на „Автомат за весници“, одделени со запирки>"
                 },

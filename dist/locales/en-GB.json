@@ -3174,9 +3174,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Elongated Coin Vending Machine"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Excrement Bag Vending Machine"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine"
                 },

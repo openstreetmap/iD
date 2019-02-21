@@ -2465,10 +2465,6 @@
                     "name": "Plakanu Monētu Tirdzniecības automāts",
                     "terms": "monēta,saspiešana,suvenīri,suvenīrs,saplacināt"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Suņu Maisiņu Tirdzniecības automāts",
-                    "terms": "dzīvnieku,suņu,ekskrementu maisiņu,kaku maisiņu,sūdu"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Sieviešu Higēnas Tirdzniecības automāts",
                     "terms": "tampons, ieliknis, biksīšu, sieivešu, menstruāls, personālā apkope"

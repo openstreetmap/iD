@@ -3381,10 +3381,6 @@
                     "name": "飲品售賣機",
                     "terms": "飲料售賣機"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "排泄物袋售賣機",
-                    "terms": "糞便袋售賣機"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "女性衞生用品售賣機",
                     "terms": "Feminine Hygiene Vending Machine,女性用品售賣機"

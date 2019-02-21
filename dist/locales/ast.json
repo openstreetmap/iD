@@ -2413,10 +2413,6 @@
                     "name": "Máquina de venta de bébora",
                     "terms": "máquina,refrescos,agua,café,te,automática"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Máquina de venta de bolses d'escrementos",
-                    "terms": "máquina,bolses,perros.gatos"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de venta d'hixénicos femeninos",
                     "terms": "máquina,compresa,tampón"

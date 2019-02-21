@@ -1560,6 +1560,12 @@
                     "title": "Mover las etiquetas",
                     "annotation": "Etiquetas movidas."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Se ha eliminado una etiqueta antigua."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Se eliminó una combinación de etiqueta antigua."
+                },
                 "remove_generic_name": {
                     "title": "Quitar el nombre",
                     "annotation": "Se eliminó un nombre genérico."
@@ -1567,6 +1573,9 @@
                 "remove_tag": {
                     "title": "Quitar la etiqueta",
                     "annotation": "Etiqueta eliminada."
+                },
+                "remove_tags": {
+                    "title": "Quitar las etiquetas"
                 },
                 "reposition_features": {
                     "title": "Reposicionar los elementos"
@@ -1579,9 +1588,11 @@
                     "annotation": "Etiquetado elementos muy cercanos como desconectados."
                 },
                 "upgrade_tag": {
+                    "title": "Actualizar la etiqueta",
                     "annotation": "Se actualizó una etiqueta vieja."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Actualizar las etiquetas",
                     "annotation": "Se ha actualizado una combinación de etiquetas antiguas."
                 },
                 "use_bridge_or_tunnel": {
@@ -2451,6 +2462,15 @@
                 },
                 "denotation": {
                     "label": "Denotación"
+                },
+                "departures_board": {
+                    "label": "Tablero de salidas",
+                    "options": {
+                        "no": "Ninguno",
+                        "realtime": "Tiempo real",
+                        "timetable": "Tabla de horarios",
+                        "yes": "Sí"
+                    }
                 },
                 "description": {
                     "label": "Descripción"
@@ -4539,8 +4559,8 @@
                     "terms": "Máquina expendedora de monedas planas, moneda, aplastar, alargar, aplanar, penique, recuerdo"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Máquina expendedora de bolsa para excrementos",
-                    "terms": "excremento, caca, bolsa, expendedor"
+                    "name": "Dispensador de bolsas de excremento",
+                    "terms": "Bolsas de excremento, caca, residuos, perro, animal"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina expendedora de higiene femenina",
@@ -8289,6 +8309,13 @@
                 },
                 "description": "Imágenes aéreas de Japón GSI. No está completamente ortorrectificado, pero es un poco más reciente y/o está cubierto de manera diferente que las ortoimágenes de GSI.",
                 "name": "Imágenes aéreas de Japón GSI"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "Imágenes sin ortorectificar de GSI Japón"
+                },
+                "description": "Imágenes sin ortorectificar de GSI Japón. La colección de las últimas imágenes ortográficas, foto aérea, post desastre y otros de GSI.",
+                "name": "Imágenes sin ortorectificar de GSI Japón"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

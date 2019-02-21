@@ -4086,10 +4086,6 @@
                     "name": "Macchinetta di monete da souvenir",
                     "terms": "moneta,monete,appiatita,appiattite,schiacciata,schiacciate,allungata,allungate,penny,souvenir,turismo,ricordo,commemorativa,commemorative"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Distributore automatico di sacchetti per escrementi",
-                    "terms": "distributore automatico,macchinetta,cacca,cane"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Distributore automatico di prodotti per l'igiene femminile",
                     "terms": "preservativo,preservativi,pillola,coppetta,spirale,profilattico,profilattici,tampone,tamponi,assorbente,assorbenti,assorbente interno,assorbenti interni,donna,donne,femmina,femmine,femminilità,sviluppo,mestruazioni,ciclo,mestruale,prodotti di igiene,prodotti per la persona,cura della persona"

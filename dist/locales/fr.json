@@ -1574,6 +1574,9 @@
                     "title": "Supprimer l'attribut",
                     "annotation": "Attribut supprimé."
                 },
+                "remove_tags": {
+                    "title": "Supprimer les attributs"
+                },
                 "reposition_features": {
                     "title": "Repositionner l'élément"
                 },
@@ -1585,10 +1588,24 @@
                     "annotation": "Éléments très proches cartographiés comme étant déconnectés."
                 },
                 "upgrade_tag": {
+                    "title": "Mettre à jour l'attribut",
                     "annotation": "Ancien attribut mis à jour."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Mettre à jour les attributs",
                     "annotation": "Ancienne combinaison d'attributs mise à jour."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Utiliser un pont ou un tunnel"
+                },
+                "use_different_layers": {
+                    "title": "Utiliser des couches différentes"
+                },
+                "use_different_levels": {
+                    "title": "Utiliser des niveaux différents"
+                },
+                "use_tunnel": {
+                    "title": "Utiliser un tunnel"
                 }
             }
         },
@@ -2446,6 +2463,15 @@
                 "denotation": {
                     "label": "Signification"
                 },
+                "departures_board": {
+                    "label": "Tableau des départs",
+                    "options": {
+                        "no": "Aucun",
+                        "realtime": "Temps réel",
+                        "timetable": "Horaires prévisionnelles",
+                        "yes": "Oui"
+                    }
+                },
                 "description": {
                     "label": "Description"
                 },
@@ -2793,7 +2819,7 @@
                     "label": "Jonction routière",
                     "options": {
                         "circular": "Rond-point",
-                        "jughandle": "Jughandle (bretelle pour tourner)",
+                        "jughandle": "Tourne-à-droite",
                         "roundabout": "Rond-point"
                     }
                 },
@@ -4533,8 +4559,8 @@
                     "terms": "pièces,souvenir,commémoration"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Distributeur de sacs pour excréments d'animaux",
-                    "terms": "distributeur de sacs pour excréments d'animaux, distributeur à sacs pour excréments d'animaux, sacs pour excréments d'animaux, sacs à excréments d'animaux, sacs à crottes, distributeur automatique de sacs pour excréments d'animaux, distributeur automatique de sacs à crottes, machine à sacs pour excréments d'animaux, machine à sacs à crottes, vente de sacs pour excréments d'animaux, vente de sacs à crottes, vente sacs pour excréments d'animaux, vente sacs à crottes, vending machine excrement bags, excrement bags"
+                    "name": "Distributeur de sacs pour excréments",
+                    "terms": "distributeur de sacs pour excréments,crottes de chien,sacs à excrément,chien,canin,animal"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Distributeur de produits d'hygiène féminine",
@@ -8284,6 +8310,13 @@
                 },
                 "description": "Imagerie ortho GSI du Japon. Pas totalement ortho-rectifiée, mais un peu plus récente et avec une couverture différente de l'imagerie ortho GSI.",
                 "name": "Imagerie ortho GSI aérienne du Japon"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "Intégration des photos GSI du Japon"
+                },
+                "description": "Imagerie de photos intégrées GSI du Japon. La collection des dernières imageries ortho GSI, aériennes, post-catastrophe et d'autres.",
+                "name": "Imagerie intégrée GSI du Japon"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

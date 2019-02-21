@@ -3967,10 +3967,6 @@
                     "name": "Italárusító automata",
                     "terms": "italautomata, italgép"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Ürülékfelszedő tasakot árusító automata",
-                    "terms": "kutyapiszok,zacskó,automata"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Női higéniás automata",
                     "terms": "automata, óvszer, tampon, betét, nő, menstruáció, higiéniás eszközök, testápolás"

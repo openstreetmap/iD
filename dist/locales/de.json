@@ -1599,7 +1599,7 @@
                     "title": "Benutze eine Brücke oder einen Tunnel"
                 },
                 "use_different_layers": {
-                    "title": "Benutzer verschiede Ebenen"
+                    "title": "Benutze verschiedene Ebenen"
                 },
                 "use_different_levels": {
                     "title": "Benutze verschiedene Stockwerke"
@@ -4559,8 +4559,8 @@
                     "terms": "Münz-Sourvenir-Präge-Automat"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Hundekottütenspender",
-                    "terms": "Hundekot-Tütenspender, Kottütenspender, Kottütenautomat,"
+                    "name": "Kottütenspender",
+                    "terms": "kottütenspender, Kotsackerlspender"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Frauenhygiene-Automat",
@@ -8309,6 +8309,13 @@
                 },
                 "description": "Japan GSI Luftbilder. Nicht ganz lagegenau, aber etwas neuer oder andere Abdeckung als GSI Orthofotos.",
                 "name": "Japan GSI Luftbilder"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan nahtlose Fotos"
+                },
+                "description": "GSI Japan nahtloser Fotohintergrund. Die Sammlung der aktuellste Hintergrundbilder von GSI Orthofotos, Luftbilder, nach der Katastrophe und andere.",
+                "name": "GSI Japan nahtloser Fotohintergrund"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

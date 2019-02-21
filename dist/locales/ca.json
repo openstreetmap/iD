@@ -2969,9 +2969,6 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Màquina de vènding de begudes"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Equipament de residus canins"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Màquina de vènding d'articles d'higiene femenina"
                 },

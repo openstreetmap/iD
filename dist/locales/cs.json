@@ -4175,10 +4175,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Prodejní automat na mince"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Automat na pytlíky na exkrementy",
-                    "terms": "automat,prodejní automat,pytlík,pes,psí exkrementy,psí hovna,exkrement,hovno,hovínko"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat dámské hygieny"
                 },

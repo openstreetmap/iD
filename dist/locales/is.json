@@ -3830,9 +3830,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Sjálfsali fyrir flatta/stimplaða mynt"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Sjálfsali með úrgangspokum"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Sjálfsali með dömusnyrtivörum"
                 },

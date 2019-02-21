@@ -4263,10 +4263,6 @@
                     "name": "Souvenirsmuntautomaat",
                     "terms": "muntautomaat,iconische munt,muntvervormer"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Strontzakjesautomaat",
-                    "terms": "poepzakjesautomaat,hondenstrontzakjesautomaat,hondenpoepzakjesautomaat,dierenstront,automaat"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Menstruatieproductautomaat",
                     "terms": "maandverbandautomaat,tamponautomaat,menstruatie,vrouwelijke hygiëne,vrouwencondooms"

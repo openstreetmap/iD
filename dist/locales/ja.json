@@ -1560,6 +1560,12 @@
                     "title": "タグを移動する",
                     "annotation": "タグを移動しました。"
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "古いタグを削除しました。"
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "古いタグの組み合わせを削除しました。"
+                },
                 "remove_generic_name": {
                     "title": "名前を削除する",
                     "annotation": "一般名詞を削除しました。"
@@ -1568,8 +1574,11 @@
                     "title": "タグを削除する",
                     "annotation": "タグを削除しました。"
                 },
+                "remove_tags": {
+                    "title": "タグを削除する"
+                },
                 "reposition_features": {
-                    "title": "地物を配置し直す(手動で編集してください)"
+                    "title": "地物を配置し直す"
                 },
                 "select_preset": {
                     "title": "地物の種類を選んでタグを付ける"
@@ -1579,22 +1588,24 @@
                     "annotation": "近接している地物に未接続(行き止まり)のタグを付けました。"
                 },
                 "upgrade_tag": {
+                    "title": "タグをアップグレードする",
                     "annotation": "古いタグをアップグレードしました。"
                 },
                 "upgrade_tag_combo": {
+                    "title": "タグをアップグレードする",
                     "annotation": "古いタグの組み合わせをアップグレードしました。"
                 },
                 "use_bridge_or_tunnel": {
-                    "title": "橋かトンネルを使用してください"
+                    "title": "橋かトンネルを使用する"
                 },
                 "use_different_layers": {
-                    "title": "別のレイヤを使ってください"
+                    "title": "別のレイヤを使う"
                 },
                 "use_different_levels": {
-                    "title": "別の階を使ってください"
+                    "title": "別の階を使う"
                 },
                 "use_tunnel": {
-                    "title": "トンネルを使ってください"
+                    "title": "トンネルを使う"
                 }
             }
         },
@@ -2451,6 +2462,15 @@
                 },
                 "denotation": {
                     "label": "意味"
+                },
+                "departures_board": {
+                    "label": "出発案内板",
+                    "options": {
+                        "no": "なし",
+                        "realtime": "リアルタイム",
+                        "timetable": "時刻表",
+                        "yes": "あり"
+                    }
                 },
                 "description": {
                     "label": "説明"
@@ -4537,10 +4557,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "記念コイン自販機",
                     "terms": "記念コイン, 自販機, 自動販売機"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "犬の糞入れ自動販売機",
-                    "terms": "犬の糞入れ, 自動販売機, 自販機"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "生理用品自動販売機",
@@ -8290,6 +8306,13 @@
                 },
                 "description": "航空レーザー測量点検用写真をつなぎ合わせたもので、地理院オルソ画像とは撮影時期やカバー範囲が少し異なる部分もあるため、オルソ画像の代替として有用な場合がある。",
                 "name": "国土地理院 簡易空中写真"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "国土地理院 シームレス写真"
+                },
+                "description": "国土地理院のシームレス写真。電子国土基本図(オルソ画像), 東日本大震災後正射画像, 森林(国有林)の空中写真(林野庁), 簡易空中写真, 国土画像情報, からそれぞれ最新の写真を組合せたもの。",
+                "name": "国土地理院 全国最新写真(シームレス)"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

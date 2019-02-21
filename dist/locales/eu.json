@@ -2079,9 +2079,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Txanpon-makina"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Iraizkin poltsen makina saltzaile"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Emakumezkoentzako higiene produktuen makina saltzaile"
                 },

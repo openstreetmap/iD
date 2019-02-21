@@ -2766,10 +2766,6 @@
                     "name": "Automat na nápoje",
                     "terms": "automat na napoje,napoj,nápoj"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Automat na sáčky pre výkaly",
-                    "terms": "automat na sacky pre vykaly"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat na ženké hygienické produkty",
                     "terms": "Automat na zenske produkty,vlozky,vložky,kondomy,kondómy,prezervatív,prezervativ,tampon,tampón"

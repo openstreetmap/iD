@@ -2367,9 +2367,6 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Automat za piće"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Automat za vrećice za fekalije"
-                },
                 "amenity/vending_machine/news_papers": {
                     "name": "Automat za novine"
                 },

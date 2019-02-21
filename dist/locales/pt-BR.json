@@ -4533,10 +4533,6 @@
                     "name": "Máquina de Venda de Moedas Achatadas",
                     "terms": "Máquina de venda automática de moedas"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Máquina de Vendas de Sacola de Excrementos",
-                    "terms": "sacos de excremento, cocô, fezes, dejetos, animal, cachorro, animal de estimação, pet, sacola"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de Vendas - Higiene Feminina",
                     "terms": "produtos de higiene feminina, camisinha, preservativo, absorvente, tampão, cuidados pessoais, higiene, mulher"

@@ -1525,6 +1525,9 @@
                 "category-building": {
                     "name": "Bygningsegenskaber"
                 },
+                "category-golf-area": {
+                    "name": "Golf-egenskaber"
+                },
                 "category-landuse": {
                     "name": "Arealanvendelsesegenskaber"
                 },
@@ -3433,10 +3436,6 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Drikkeautomat",
                     "terms": "Drikkeautomat, Sodavandsautomat"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Hundelorteposeautomat",
-                    "terms": "Hundelorteposeautomat, Hundeposeautomat"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Salgsautomat, feminin hygiejne",

@@ -2461,6 +2461,15 @@
                 "denotation": {
                     "label": "Signifo"
                 },
+                "departures_board": {
+                    "label": "Tabulo de forveturoj",
+                    "options": {
+                        "no": "neniu",
+                        "realtime": "elektronika",
+                        "timetable": "hortabulo",
+                        "yes": "jes"
+                    }
+                },
                 "description": {
                     "label": "Priskribo"
                 },
@@ -2803,6 +2812,14 @@
                 },
                 "junction/ref_oneway": {
                     "label": "Numero de vokruciĝo"
+                },
+                "junction_line": {
+                    "label": "vojkruciĝo",
+                    "options": {
+                        "circular": "trafikcirklo (pasrajto por alveturantaj)",
+                        "jughandle": "vojnodo (jughandle)",
+                        "roundabout": "trafikcirklo (pasrajto por enaj)"
+                    }
                 },
                 "kerb": {
                     "label": "Trotuar-randaĵo"
@@ -4247,6 +4264,10 @@
                     "name": "Apoteko",
                     "terms": "medikamentejo,sanigilejo,kuracilejo,drogejo,drogvendejo,farmaciejo"
                 },
+                "amenity/photo_booth": {
+                    "name": "fot-aŭtomato",
+                    "terms": "fotaŭtomato,fotoaŭtomato,fotobudo,fotilo"
+                },
                 "amenity/place_of_worship": {
                     "name": "Preĝejo",
                     "terms": "preghejo,pregxejo,didomo,sakrejo,kirko,pagodo,baziliko,katedro,katedralo,sinagogo,templo,moskeo,monaĥejo"
@@ -4534,10 +4555,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Vendilo de etenditaj moneroj",
                     "terms": "moneretendilo,etendilo,memoraĵoj"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Vendilo de saketoj por fekaĵoj",
-                    "terms": "fekajhoj,fekajxoj,merdo,hundo"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Vendilo de virinaj higienaĵoj",
@@ -4969,6 +4986,9 @@
                 "building/terrace": {
                     "name": "Envicaj domoj",
                     "terms": "envica domo,ŝtondomo,brikdomo,envicdomo,vica domo,sekvenca domo"
+                },
+                "building/train_station": {
+                    "name": "Fervoj-stacia konstruaĵo"
                 },
                 "building/transportation": {
                     "name": "Transporta konstruaĵo",

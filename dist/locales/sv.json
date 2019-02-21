@@ -50,7 +50,7 @@
                     "point": "Lade till en punkt.",
                     "vertex": "Lade till en nod till en linje.",
                     "relation": "Lade till en relation.",
-                    "note": "Lagt till en anteckning."
+                    "note": "Lade till en anteckning."
                 }
             },
             "start": {
@@ -124,12 +124,12 @@
                     "multiple": "Radera dessa objekt permanent."
                 },
                 "annotation": {
-                    "point": "Raderade en punkt.",
-                    "vertex": "Raderade en nod från en väg.",
-                    "line": "Raderade en linje.",
-                    "area": "Raderade ett område.",
-                    "relation": "Raderade en relation.",
-                    "multiple": "Raderade {n} objekt."
+                    "point": "Tog bort en punkt.",
+                    "vertex": "Tog bort en nod från en väg.",
+                    "line": "Tog bort en linje.",
+                    "area": "Tog bort ett område.",
+                    "relation": "Tog bort en relation.",
+                    "multiple": "Tog bort {n} objekt."
                 },
                 "too_large": {
                     "single": "Detta objekt kan inte raderas då inte tillräckligt av det är synligt för tillfället.",
@@ -152,7 +152,7 @@
                 "annotation": "Lade till en medlem till en relationen."
             },
             "delete_member": {
-                "annotation": "Raderade en medlem från en relationen."
+                "annotation": "Tog bort en medlem från en relationen."
             },
             "connect": {
                 "annotation": {
@@ -316,14 +316,14 @@
             "restriction": {
                 "annotation": {
                     "create": "Lade till en svängrestriktion",
-                    "delete": "Raderade en svängrestriktion"
+                    "delete": "Tog bort en svängrestriktion"
                 }
             },
             "detach_node": {
                 "title": "Ta loss",
                 "key": "E",
                 "description": "Ta loss denna nod från dessa linjer/områden.",
-                "annotation": "Ta loss en nod från föräldralinjer/-områden.",
+                "annotation": "Tog bort en nod från föräldralinjer/-områden.",
                 "restriction": "Denna nod kan inte tas loss då det skulle skada en \"{relation}\"-relation.",
                 "connected_to_hidden": "Denna nod kan inte tas loss då den är kopplad till ett dolt objekt."
             }
@@ -1535,14 +1535,14 @@
             },
             "fix": {
                 "connect_almost_junction": {
-                    "annotation": "Har kopplat samman närliggande objekt."
+                    "annotation": "Kopplade samman närliggande objekt."
                 },
                 "connect_crossing_features": {
-                    "annotation": "Har kopplat samman korsande objekt."
+                    "annotation": "Kopplade samman korsande objekt."
                 },
                 "connect_endpoints": {
                     "title": "Koppla samman ändarna",
-                    "annotation": "Har kopplat samman ändarna på en väg."
+                    "annotation": "Kopplade samman ändarna på en väg."
                 },
                 "connect_features": {
                     "title": "Koppla samman objekten"
@@ -1560,13 +1560,22 @@
                     "title": "Flytta taggen",
                     "annotation": "Flyttade taggar."
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Tog bort en gammal tagg."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Tog bort en gammal tagg-kombination."
+                },
                 "remove_generic_name": {
                     "title": "Radera namnet",
-                    "annotation": "Raderat ett generellt namn."
+                    "annotation": "Tog bort ett generellt namn."
                 },
                 "remove_tag": {
                     "title": "Ta bort taggen",
-                    "annotation": "Ta bort tagg."
+                    "annotation": "Tog bort tagg."
+                },
+                "remove_tags": {
+                    "title": "Tog bort taggarna"
                 },
                 "reposition_features": {
                     "title": "Flytta objekten"
@@ -1576,13 +1585,15 @@
                 },
                 "tag_as_disconnected": {
                     "title": "Tagga som okopplad",
-                    "annotation": "Har taggat ett objekt nära som okopplat. "
+                    "annotation": "Taggade ett närliggande objekt som okopplat. "
                 },
                 "upgrade_tag": {
-                    "annotation": "Har uppgraderat en gammal tagg."
+                    "title": "Uppgraderade taggen",
+                    "annotation": "Uppgraderade en gammal tagg."
                 },
                 "upgrade_tag_combo": {
-                    "annotation": "Har uppgraderat en gammal tagg-kombination."
+                    "title": "Uppgraderade taggarna",
+                    "annotation": "Uppgraderade en gammal tagg-kombination."
                 },
                 "use_bridge_or_tunnel": {
                     "title": "Använd en bro eller tunnel"
@@ -4533,10 +4544,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Elongated coin-maskin (myntpressmaskin)",
                     "terms": "elongated coin, souvenirmynt, minnesmynt, souvenir, minne, mynt,  elongated coin-maskin, myntpressmaskin, minnesmyntmaskin, ECM, Penny Press, elongated penny, coin maskin"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Bajspåsar",
-                    "terms": "Bajspåsar, hundbajspåsar, hundpåsar, hundbajs, hundskit, skitpåse, avföringspåse, bajs, hund, djur"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Varumaskin för mensskydd",
@@ -8262,6 +8269,13 @@
                 },
                 "description": "Japan GSI- flygfoton. Inte fullständigt Ortofotoeserade, men lite nyare och/eller annan täckningsgrad än  GSI ortho-flygfoton.",
                 "name": "Japan GSI- flygfoton"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan sömlössa foton"
+                },
+                "description": "Japan GSI sömlösa flygfoton. Samlingen med senaste bilderna från GSI ortho, flygfoton, katastroffoton m.m.",
+                "name": "Japan GSI sömlösa flygfoton"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
