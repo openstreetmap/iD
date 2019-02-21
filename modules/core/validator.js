@@ -177,26 +177,33 @@ export function validationIssue(attrs) {
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
+
+    var _id;
+
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
     this.id = function() {
-        var id = this.type;
+        if (_id) {
+            return _id;
+        }
+
+        _id = this.type;
 
         if (this.hash) {   // subclasses can pass in their own differentiator
-            id += this.hash;
+            _id += this.hash;
         }
 
         // factor in the entities this issue is for
         // (sort them so the id is deterministic)
         var entityKeys = this.entities.map(osmEntity.key);
-        id += entityKeys.sort().join();
+        _id += entityKeys.sort().join();
 
         // factor in loc since two separate issues can have an
         // idential type and entities, e.g. in crossing_ways
         if (this.loc) {
-            id += this.loc.join();
+            _id += this.loc.join();
         }
-        return id;
+        return _id;
     };
 
 
