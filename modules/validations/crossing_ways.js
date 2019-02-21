@@ -56,12 +56,13 @@ export function validationCrossingWays() {
     // only validate certain waterway features
     var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
     // ignore certain highway and railway features
-    var ignoredHighways = ['rest_area', 'services'];
-    var ignoredRailways = ['train_wash'];
+    var ignoredHighways = ['rest_area', 'services', 'proposed'];
+    var ignoredRailways = ['train_wash', 'proposed'];
+    var ignoredBuildings = ['proposed'];
 
 
     function getFeatureTypeForTags(tags) {
-        if (hasTag(tags, 'building')) return 'building';
+        if (hasTag(tags, 'building') && ignoredBuildings.indexOf(tags.building) === -1) return 'building';
 
         // don't check non-building areas
         if (hasTag(tags, 'area')) return null;

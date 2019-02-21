@@ -10,7 +10,9 @@ export function validationDisconnectedWay() {
 
 
     function isDisconnectedHighway(entity, graph) {
-        if (!entity.tags.highway) return false;
+        if (!entity.tags.highway ||
+            entity.tags.highway === 'no' ||
+            entity.tags.highway === 'proposed') return false;
         if (entity.geometry(graph) !== 'line') return false;
 
         return graph.childNodes(entity)
