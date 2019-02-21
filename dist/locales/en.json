@@ -4635,8 +4635,8 @@
                     "terms": "coin,crush,elongated,flatten,penny,souvenir"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Excrement Bag Vending Machine",
-                    "terms": "excrement bags,poop,dog,animal"
+                    "name": "Excrement Bag Dispenser",
+                    "terms": "excrement bags,poop,waste,dog,animal"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
