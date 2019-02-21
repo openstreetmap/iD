@@ -29,6 +29,39 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.14.2
+##### 2019-Feb-21
+
+#### :white_check_mark: Validation
+* Don't flag crossing way issues for proposed, razed, or abandoned features ([#5922])
+* Don't flag lines or areas as untagged while they are being drawn
+* Deprecate "amenity=public_building" tag ([#5916])
+
+[#5922]: https://github.com/openstreetmap/iD/issues/5922
+[#5916]: https://github.com/openstreetmap/iD/issues/5916
+
+#### :bug: Bugfixes
+* Fix an issue where all map data would be removed upon switching modes while drawing a line or area ([#5917])
+* Fix an issue where cancelling line or area drawing could leave an extra error ([#5918])
+* Show all warnings and errors in the save sidebar
+
+[#5917]: https://github.com/openstreetmap/iD/issues/5917
+[#5918]: https://github.com/openstreetmap/iD/issues/5918
+
+#### :hourglass: Performance
+* Speed up validation, particularly the crossing ways check ([#5923])
+
+[#5923]: https://github.com/openstreetmap/iD/issues/5923
+
+#### :rocket: Presets
+* Rename Excrement Bag Vending Machine to Excrement Bag Dispenser ([#5920], thanks [@SelfishSeahorse])
+* Add Covered field to waterway presets
+
+[#5920]: https://github.com/openstreetmap/iD/issues/5920
+
+[@SelfishSeahorse]: https://github.com/SelfishSeahorse
+
+
 # 2.14.1
 ##### 2019-Feb-20
 
