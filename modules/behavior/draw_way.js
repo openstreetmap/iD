@@ -152,9 +152,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
         if (context.graph() === baselineGraph) {    // We've undone back to the beginning
             // baselineGraph may be behind startGraph if this way was added rather than continued
-            while (context.graph() !== startGraph) {
-                context.pop();
-            }
+            resetContextGraphToStartGraph();
             context.enter(modeSelect(context, [wayID]));
         } else {
             // Remove whatever segment was drawn previously and continue drawing
@@ -196,13 +194,19 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             .on('undone.draw', undone);
     };
 
+    function resetContextGraphToStartGraph() {
+        while (context.graph() !== startGraph) {
+            context.pop();
+        }
+    }
 
     drawWay.off = function(surface) {
         // Drawing was interrupted unexpectedly.
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
         if (_tempEdits) {
-            context.history().reset('drawWay-initial');
+            context.pop(_tempEdits);
+            resetContextGraphToStartGraph();
         }
 
         context.map()
@@ -333,9 +337,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        while (context.graph() !== startGraph) {
-            context.pop();
-        }
+        resetContextGraphToStartGraph();
 
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
