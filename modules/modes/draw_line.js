@@ -10,6 +10,8 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, affix, c
 
     var behavior;
 
+    mode.wayID = wayID;
+
     mode.isContinuing = continuing;
 
     mode.enter = function() {
