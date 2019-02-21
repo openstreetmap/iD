@@ -37,6 +37,10 @@
       "replace": {"landuse": "garages"}
     },
     {
+      "old": {"amenity": "public_building"},
+      "replace": {"building": "public"}
+    },
+    {
       "old": {"amenity": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
@@ -222,6 +226,10 @@
     {
       "old": {"route": "ncn"},
       "replace": {"route": "bicycle", "network": "ncn"}
+    },
+    {
+      "old": {"shop": "betting"},
+      "replace": {"shop": "bookmaker"}
     },
     {
       "old": {"shop": "organic"},
