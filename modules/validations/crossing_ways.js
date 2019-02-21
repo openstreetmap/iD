@@ -9,10 +9,23 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationCrossingWays() {
     var type = 'crossing_ways';
 
+    /*
+    Avoid duplicate work by cacheing issues. The same issues live under two paths.
+    {
+        w-123: {
+            w-456: [{issue1}, {issue2}…]
+        },
+        w-456: {
+            w-123: [{issue1}, {issue2}…]
+        }
+    }
+    */
+    var issueCache = {};
+
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
         if (getFeatureTypeForTags(way.tags) === null) {
-            // if the way doesn't match a feature type, check is parent relations
+            // if the way doesn't match a feature type, check its parent relations
             var parentRels = graph.parentRelations(way);
             for (var i = 0; i < parentRels.length; i++) {
                 var rel = parentRels[i];
@@ -207,6 +220,7 @@ export function validationCrossingWays() {
         var oneOnly;
         var intersected, way2, way2FeatureType, way2Nodes;
         var way1Nodes = graph.childNodes(way1);
+        var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
             n1 = way1Nodes[i];
             n2 = way1Nodes[i + 1];
@@ -232,6 +246,12 @@ export function validationCrossingWays() {
 
                 // don't check for self-intersection in this validation
                 if (way2.id === way1.id) continue;
+
+                // don't re-check previously checked features
+                if (issueCache[way1.id] && issueCache[way1.id][way2.id]) continue;
+
+                // mark this way as checked even if there are no crossings
+                comparedWays[way2.id] = true;
 
                 // only check crossing highway, waterway, building, and railway
                 way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
@@ -270,6 +290,12 @@ export function validationCrossingWays() {
                 }
             }
         }
+        for (var way2ID in comparedWays) {
+            if (!issueCache[way1.id]) issueCache[way1.id] = {};
+            if (!issueCache[way1.id][way2ID]) issueCache[way1.id][way2ID] = [];
+            if (!issueCache[way2ID]) issueCache[way2ID] = {};
+            if (!issueCache[way2ID][way1.id]) issueCache[way2ID][way1.id] = [];
+        }
         return edgeCrossInfos;
     }
 
@@ -304,10 +330,20 @@ export function validationCrossingWays() {
         var ways = waysToCheck(entity, context);
 
         var issues = [];
-        for (var wayIndex in ways) {
-            var crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
-            for (var crossingIndex in crossings) {
-                issues.push(createIssue(crossings[crossingIndex], context));
+        // declare these here to reduce garbage collection
+        var wayIndex, crossingIndex, key, crossings, crossing, issue;
+        for (wayIndex in ways) {
+            var way = ways[wayIndex];
+            crossings = findCrossingsByWay(way, graph, tree);
+            for (crossingIndex in crossings) {
+                crossing = crossings[crossingIndex];
+                issue = createIssue(crossing, context);
+                // cache the issues for each way
+                issueCache[way.id][crossing.ways[1].id].push(issue);
+                issueCache[crossing.ways[1].id][way.id].push(issue);
+            }
+            for (key in issueCache[way.id]) {
+                issues = issues.concat(issueCache[way.id][key]);
             }
         }
         return issues;
@@ -443,6 +479,10 @@ export function validationCrossingWays() {
             fixes: fixes
         });
     }
+
+    validation.reset = function() {
+        issueCache = {};
+    };
 
     validation.type = type;
 

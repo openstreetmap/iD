@@ -124,6 +124,12 @@ export function coreValidator(context) {
         _issuesByEntityID = {};   // clear cached
         _issues = [];
 
+        for (var validationIndex in validations) {
+            if (validations[validationIndex].reset) {
+                validations[validationIndex].reset();
+            }
+        }
+
         var history = context.history();
         var changes = history.changes();
         var entitiesToCheck = changes.created.concat(changes.modified);
