@@ -241,18 +241,18 @@ export function validationCrossingWays() {
 
                 if (way2.type !== 'way') continue;
 
-                // skip if this way was already checked and only one issue is needed
-                if (checkedSingleCrossingWays[way2.id]) continue;
-
                 // don't check for self-intersection in this validation
                 if (way2.id === way1.id) continue;
+
+                // skip if this way was already checked and only one issue is needed
+                if (checkedSingleCrossingWays[way2.id]) continue;
 
                 // don't re-check previously checked features
                 if (issueCache[way1.id] && issueCache[way1.id][way2.id]) continue;
 
                 // mark this way as checked even if there are no crossings
                 comparedWays[way2.id] = true;
-
+                            
                 // only check crossing highway, waterway, building, and railway
                 way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
                 if (way2FeatureType === null ||
@@ -337,10 +337,11 @@ export function validationCrossingWays() {
             crossings = findCrossingsByWay(way, graph, tree);
             for (crossingIndex in crossings) {
                 crossing = crossings[crossingIndex];
+                var way2 = crossing.ways[1];
                 issue = createIssue(crossing, context);
                 // cache the issues for each way
-                issueCache[way.id][crossing.ways[1].id].push(issue);
-                issueCache[crossing.ways[1].id][way.id].push(issue);
+                issueCache[way.id][way2.id].push(issue);
+                issueCache[way2.id][way.id].push(issue);
             }
             for (key in issueCache[way.id]) {
                 issues = issues.concat(issueCache[way.id][key]);
