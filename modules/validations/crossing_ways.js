@@ -66,12 +66,13 @@ export function validationCrossingWays() {
     }
 
 
-    // only validate certain waterway features
+    // only validate certain waterway and railway features
     var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
-    // ignore certain highway and railway features
-    var ignoredHighways = ['rest_area', 'services', 'proposed'];
-    var ignoredRailways = ['train_wash', 'proposed'];
-    var ignoredBuildings = ['proposed'];
+    var railways = ['rail', 'disused', 'tram', 'subway', 'narrow_gauge', 'light_rail',
+                    'preserved', 'miniature', 'monorail', 'funicular'];
+    // ignore certain highway and building features
+    var ignoredHighways = ['rest_area', 'services', 'proposed', 'razed'];
+    var ignoredBuildings = ['proposed', 'razed'];
 
 
     function getFeatureTypeForTags(tags) {
@@ -81,7 +82,7 @@ export function validationCrossingWays() {
         if (hasTag(tags, 'area')) return null;
 
         if (hasTag(tags, 'highway') && ignoredHighways.indexOf(tags.highway) === -1) return 'highway';
-        if (hasTag(tags, 'railway') && ignoredRailways.indexOf(tags.railway) === -1) return 'railway';
+        if (hasTag(tags, 'railway') && railways.indexOf(tags.railway) !== -1) return 'railway';
         if (hasTag(tags, 'waterway') && waterways.indexOf(tags.waterway) !== -1) return 'waterway';
 
         return null;
@@ -252,7 +253,7 @@ export function validationCrossingWays() {
 
                 // mark this way as checked even if there are no crossings
                 comparedWays[way2.id] = true;
-                            
+
                 // only check crossing highway, waterway, building, and railway
                 way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
                 if (way2FeatureType === null ||
