@@ -121,6 +121,30 @@
       "replace": {"barrier": "fence"}
     },
     {
+      "old": {"footway": "both"},
+      "replace": {"sidewalk": "both"}
+    },
+    {
+      "old": {"footway": "left"},
+      "replace": {"sidewalk": "left"}
+    },
+    {
+      "old": {"footway": "no"},
+      "replace": {"sidewalk": "no"}
+    },
+    {
+      "old": {"footway": "none"},
+      "replace": {"sidewalk": "no"}
+    },
+    {
+      "old": {"footway": "right"},
+      "replace": {"sidewalk": "right"}
+    },
+    {
+      "old": {"footway": "separate"},
+      "replace": {"sidewalk": "separate"}
+    },
+    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
     },
