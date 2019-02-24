@@ -1,6 +1,7 @@
 import _uniq from 'lodash-es/uniq';
 import _difference from 'lodash-es/difference';
 import _includes from 'lodash-es/includes';
+import _filter from 'lodash-es/filter';
 
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
@@ -44,10 +45,10 @@ export function operationStraighten(selectedIDs, context) {
 
         // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
         startNodes = _filter(startNodes, function(n) {
-            return startNodes.indexOf(n) == startNodes.lastIndexOf(n);
+            return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
         });
         endNodes = _filter(endNodes, function(n) {
-            return endNodes.indexOf(n) == endNodes.lastIndexOf(n);
+            return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
         });
 
         // Return false if line is only 2 nodes long

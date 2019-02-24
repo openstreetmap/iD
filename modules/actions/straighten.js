@@ -43,10 +43,10 @@ export function actionStraighten(selectedIDs, projection) {
         //                                  and need to be removed so currNode _difference calculation below works)
         // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
         startNodes = _filter(startNodes, function(n) {
-            return startNodes.indexOf(n) == startNodes.lastIndexOf(n);
+            return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
         });
         endNodes = _filter(endNodes, function(n) {
-            return endNodes.indexOf(n) == endNodes.lastIndexOf(n);
+            return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
         });
 
         // Choose the initial endpoint to start from
@@ -54,15 +54,20 @@ export function actionStraighten(selectedIDs, projection) {
             nextWay = [];
             nodes = [];
 
+        // Create nested function outside of loop to avoid "function in loop" lint error
+        var getNextWay = function(currNode, remainingWays) {
+            return _filter(remainingWays, function(way) {
+                return way[0] === currNode || way[way.length-1] === currNode;
+            })[0];
+        };
+
         // Add nodes to end of nodes array, until all ways are added
         while (remainingWays.length) {
-            nextWay = _filter(remainingWays, function(way) {
-                return way[0] == currNode || way[way.length-1] == currNode;
-            })[0];
+            nextWay = getNextWay(currNode, remainingWays);
 
             remainingWays = _difference(remainingWays, [nextWay]);
 
-            if (nextWay[0] != currNode) {
+            if (nextWay[0] !== currNode) {
                 nextWay.reverse();
             }
             nodes = nodes.concat(nextWay);
@@ -71,7 +76,7 @@ export function actionStraighten(selectedIDs, projection) {
         }
 
         // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
-        if (selectedNodes.length == 2) {
+        if (selectedNodes.length === 2) {
             var startNodeIdx = nodes.indexOf(selectedNodes[0]),
                 endNodeIdx = nodes.indexOf(selectedNodes[1]),
                 sortedStartEnd = [startNodeIdx, endNodeIdx];
@@ -84,7 +89,7 @@ export function actionStraighten(selectedIDs, projection) {
         }
 
         return nodes.map(function(n) { return graph.entity(n); });
-    };
+    }
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
