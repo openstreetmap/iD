@@ -1,4 +1,5 @@
 import serviceKeepRight from './keepRight';
+import serviceImproveOSM from './improveOSM';
 import serviceMapillary from './mapillary';
 import serviceMapRules from './maprules';
 import serviceNominatim from './nominatim';
@@ -15,6 +16,7 @@ import serviceWikipedia from './wikipedia';
 export var services = {
     geocoder: serviceNominatim,
     keepRight: serviceKeepRight,
+    improveOSM: serviceImproveOSM,
     mapillary: serviceMapillary,
     openstreetcam: serviceOpenstreetcam,
     osm: serviceOsm,
@@ -29,6 +31,7 @@ export var services = {
 
 export {
     serviceKeepRight,
+    serviceImproveOSM,
     serviceMapillary,
     serviceMapRules,
     serviceNominatim,

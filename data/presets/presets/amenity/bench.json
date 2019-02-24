@@ -7,8 +7,9 @@
         "colour"
     ],
     "moreFields": [
-        "lit",
-        "access_simple"
+        "access_simple",
+        "inscription",
+        "lit"
     ],
     "geometry": [
         "point",

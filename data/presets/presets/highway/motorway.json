@@ -16,7 +16,8 @@
         "covered",
         "lit",
         "smoothness",
-        "minspeed"
+        "minspeed",
+        "junction_line"
     ],
     "geometry": [
         "line"

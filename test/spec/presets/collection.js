@@ -149,12 +149,12 @@ describe('iD.presetCollection', function() {
 
         it('excludes presets with searchable: false', function() {
             var excluded = iD.presetPreset('__test/excluded', {
-                    name: 'excluded',
-                    tags: { amenity: 'excluded' },
-                    geometry: ['point'],
-                    searchable: false
-                }),
-                collection = iD.presetCollection([excluded, p.point]);
+                name: 'excluded',
+                tags: { amenity: 'excluded' },
+                geometry: ['point'],
+                searchable: false
+            });
+            var collection = iD.presetCollection([excluded, p.point]);
             expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
         });
     });

@@ -28,7 +28,7 @@ export function uiKeepRightHeader() {
 
 
     function keepRightHeader(selection) {
-        var header = selection.selectAll('.kr_error-header')
+        var header = selection.selectAll('.error-header')
             .data(
                 (_error ? [_error] : []),
                 function(d) { return d.id + '-' + (d.status || 0); }
@@ -39,23 +39,23 @@ export function uiKeepRightHeader() {
 
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'kr_error-header');
+            .attr('class', 'error-header');
 
         var iconEnter = headerEnter
             .append('div')
-            .attr('class', 'kr_error-header-icon')
+            .attr('class', 'error-header-icon')
             .classed('new', function(d) { return d.id < 0; });
 
         iconEnter
             .append('div')
             .attr('class', function(d) {
-                return 'preset-icon-28 kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type;
+                return 'preset-icon-28 qa_error ' + d.service + ' error_id-' + d.id + ' error_type-' + d.parent_error_type;
             })
-            .call(svgIcon('#iD-icon-bolt', 'kr_error-fill'));
+            .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
 
         headerEnter
             .append('div')
-            .attr('class', 'kr_error-header-label')
+            .attr('class', 'error-header-label')
             .text(errorTitle);
     }
 

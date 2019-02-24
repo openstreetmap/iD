@@ -96,6 +96,12 @@ export function modeDragNode(context) {
     }
 
 
+    function shouldSnapToNode(target) {
+        return _activeEntity.geometry(context.graph()) !== 'vertex' ||
+            context.presets().allowsVertex(target, context.graph());
+    }
+
+
     function origin(entity) {
         return context.projection(entity.loc);
     }
@@ -158,6 +164,8 @@ export function modeDragNode(context) {
         _activeEntity = entity;
         _startLoc = entity.loc;
 
+        hover.ignoreVertex(entity.geometry(context.graph()) === 'vertex');
+
         context.surface().selectAll('.' + _activeEntity.id)
             .classed('active', true);
 
@@ -199,7 +207,9 @@ export function modeDragNode(context) {
             var edge;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
-                loc = targetLoc;
+                if (shouldSnapToNode(target)) {
+                    loc = targetLoc;
+                }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
                 edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
@@ -210,8 +220,7 @@ export function modeDragNode(context) {
         }
 
         context.replace(
-            actionMoveNode(entity.id, loc),
-            moveAnnotation(entity)
+            actionMoveNode(entity.id, loc)
         );
 
         // Below here: validations
@@ -355,7 +364,6 @@ export function modeDragNode(context) {
         }
     }
 
-
     function end(entity) {
         if (_isCancelled) return;
 
@@ -378,7 +386,7 @@ export function modeDragNode(context) {
                 connectAnnotation(entity, target)
             );
 
-        } else if (target && target.type === 'node') {
+        } else if (target && target.type === 'node' && shouldSnapToNode(target)) {
             context.replace(
                 actionConnect([target.id, entity.id]),
                 connectAnnotation(entity, target)

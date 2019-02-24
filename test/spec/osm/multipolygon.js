@@ -1,11 +1,11 @@
-describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
+describe('iD.osmIsOldMultipolygonOuterMember', function() {
     it('returns the parent relation of a simple multipolygon outer', function() {
         var outer = iD.osmWay({tags: {'natural':'wood'}});
         var relation = iD.osmRelation(
             {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
     });
 
     it('returns the parent relation of a simple multipolygon outer, assuming role outer if unspecified', function() {
@@ -14,7 +14,7 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: outer.id}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
     });
 
     it('returns false if entity is not a way', function() {
@@ -23,7 +23,7 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
     });
 
     it('returns false if entity does not have interesting tags', function() {
@@ -32,13 +32,13 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
     });
 
     it('returns false if entity does not have a parent relation', function() {
         var outer = iD.osmWay({tags: {'natural':'wood'}});
         var graph = iD.coreGraph([outer]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
     });
 
     it('returns false if the parent is not a multipolygon', function() {
@@ -47,7 +47,7 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'route'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
     });
 
     it('returns false if the parent has interesting tags', function() {
@@ -56,7 +56,7 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {natural: 'wood', type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
     });
 
     it('returns the parent relation of a simple multipolygon outer, ignoring uninteresting parent tags', function() {
@@ -65,7 +65,7 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {'tiger:reviewed':'no', type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
     });
 
     it('returns false if the parent has multiple outer ways', function() {
@@ -75,8 +75,8 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: outer1.id, role: 'outer'}, {id: outer2.id, role: 'outer'}]}
         );
         var graph = iD.coreGraph([outer1, outer2, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer1, graph)).to.be.false;
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer2, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer1, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer2, graph)).to.be.false;
     });
 
     it('returns false if the parent has multiple outer ways, assuming role outer if unspecified', function() {
@@ -86,8 +86,8 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: outer1.id}, {id: outer2.id}]}
         );
         var graph = iD.coreGraph([outer1, outer2, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer1, graph)).to.be.false;
-        expect(iD.osmIsSimpleMultipolygonOuterMember(outer2, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer1, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(outer2, graph)).to.be.false;
     });
 
     it('returns false if the entity is not an outer', function() {
@@ -96,12 +96,12 @@ describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
             {tags: {type: 'multipolygon'}, members: [{id: inner.id, role: 'inner'}]}
         );
         var graph = iD.coreGraph([inner, relation]);
-        expect(iD.osmIsSimpleMultipolygonOuterMember(inner, graph)).to.be.false;
+        expect(iD.osmIsOldMultipolygonOuterMember(inner, graph)).to.be.false;
     });
 });
 
 
-describe('iD.osmSimpleMultipolygonOuterMember', function() {
+describe('iD.osmOldMultipolygonOuterMember', function() {
     it('returns the outer member of a simple multipolygon', function() {
         var inner = iD.osmWay();
         var outer = iD.osmWay({tags: {'natural':'wood'}});
@@ -111,8 +111,8 @@ describe('iD.osmSimpleMultipolygonOuterMember', function() {
         });
         var graph = iD.coreGraph([inner, outer, relation]);
 
-        expect(iD.osmSimpleMultipolygonOuterMember(inner, graph)).to.equal(outer);
-        expect(iD.osmSimpleMultipolygonOuterMember(outer, graph)).to.equal(outer);
+        expect(iD.osmOldMultipolygonOuterMember(inner, graph)).to.equal(outer);
+        expect(iD.osmOldMultipolygonOuterMember(outer, graph)).to.equal(outer);
     });
 
     it('returns falsy for a complex multipolygon', function() {
@@ -126,9 +126,9 @@ describe('iD.osmSimpleMultipolygonOuterMember', function() {
         });
         var graph = iD.coreGraph([inner, outer1, outer2, relation]);
 
-        expect(iD.osmSimpleMultipolygonOuterMember(inner, graph)).not.to.be.ok;
-        expect(iD.osmSimpleMultipolygonOuterMember(outer1, graph)).not.to.be.ok;
-        expect(iD.osmSimpleMultipolygonOuterMember(outer2, graph)).not.to.be.ok;
+        expect(iD.osmOldMultipolygonOuterMember(inner, graph)).not.to.be.ok;
+        expect(iD.osmOldMultipolygonOuterMember(outer1, graph)).not.to.be.ok;
+        expect(iD.osmOldMultipolygonOuterMember(outer2, graph)).not.to.be.ok;
     });
 
     it('handles incomplete relations', function() {
@@ -139,7 +139,7 @@ describe('iD.osmSimpleMultipolygonOuterMember', function() {
         });
         var graph = iD.coreGraph([way, relation]);
 
-        expect(iD.osmSimpleMultipolygonOuterMember(way, graph)).not.to.be.ok;
+        expect(iD.osmOldMultipolygonOuterMember(way, graph)).not.to.be.ok;
     });
 });
 

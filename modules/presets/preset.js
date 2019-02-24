@@ -25,10 +25,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
         // Skip `fields` for the keys which define the preset.
         // These are usually `typeCombo` fields like `shop=*`
-        function withoutKeyFields(fieldID) {
+        function shouldInheritFieldWithID(fieldID) {
             var f = fields[fieldID];
             if (f.key) {
-                return preset.tags[f.key] === undefined;
+                if (preset.tags[f.key] !== undefined &&
+                    // inherit anyway if multiple values are allowed
+                    f.type !== 'multiCombo' && f.type !== 'semiCombo') {
+                    return false;
+                }
             }
             return true;
         }
@@ -43,7 +47,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
             var inheritFieldIDs = inheritPreset[prop] || [];
 
             if (prop === 'fields') {
-                inheritFieldIDs = inheritFieldIDs.filter(withoutKeyFields);
+                inheritFieldIDs = inheritFieldIDs.filter(shouldInheritFieldWithID);
             }
 
             return inheritFieldIDs;
@@ -130,19 +134,25 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
 
-    var origName = preset.name || '';
+    preset.originalName = preset.name || '';
+
+
     preset.name = function() {
         if (preset.suggestion) {
             var path = id.split('/');
             path.pop();  // remove brand name
-            return origName + ' - ' + t('presets.presets.' + path.join('/') + '.name');
+            // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            return preset.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
         }
-        return preset.t('name', { 'default': origName });
+        return preset.t('name', { 'default': preset.originalName });
     };
 
-    var origTerms = (preset.terms || []).join();
+
+    preset.originalTerms = (preset.terms || []).join();
+
+
     preset.terms = function() {
-        return preset.t('terms', { 'default': origTerms }).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
 
@@ -160,8 +170,15 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0],
-            value = reference.value || preset.tags[key];
+        // Lookup documentation on Wikidata...
+        var qid = preset.tags.wikidata || preset.tags['brand:wikidata'] || preset.tags['operator:wikidata'];
+        if (qid) {
+            return { qid: qid };
+        }
+
+        // Lookup documentation on OSM Wikibase...
+        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0];
+        var value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
             if (value in preset.tags) {

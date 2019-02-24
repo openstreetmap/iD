@@ -33,7 +33,9 @@ path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-dasharray: 6,6;
 }
-
+.preset-icon-line path.line.stroke.tag-railway:not(.tag-status) {
+    stroke-dasharray: 6;
+}
 
 /* styles */
 path.line.casing.tag-railway {
@@ -59,10 +61,6 @@ path.line.stroke.tag-railway-abandoned {
 }
 
 
-.preset-icon .icon.tag-railway-subway {
-    color: #222;
-    fill: #bbb;
-}
 path.line.casing.tag-railway-subway {
     stroke: #222;
 }

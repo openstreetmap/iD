@@ -1,4 +1,3 @@
-/* globals context: true */
 describe('iD.presetPreset', function() {
     it('has optional fields', function() {
         var preset = iD.presetPreset('test', {});
@@ -19,30 +18,30 @@ describe('iD.presetPreset', function() {
 
     describe('#matchScore', function() {
         it('returns -1 if preset does not match tags', function() {
-            var preset = iD.presetPreset('test', {tags: {foo: 'bar'}}),
-                entity = iD.Way({tags: {highway: 'motorway'}});
+            var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
+            var entity = iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity)).to.equal(-1);
         });
 
         it('returns the value of the matchScore property when matched', function() {
-            var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2}),
-                entity = iD.Way({tags: {highway: 'motorway'}});
+            var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2});
+            var entity = iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity)).to.equal(0.2);
         });
 
         it('defaults to the number of matched tags', function() {
-            var preset = iD.presetPreset('test', {tags: {highway: 'residential'}}),
-                entity = iD.Way({tags: {highway: 'residential'}});
+            var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
+            var entity = iD.osmWay({tags: {highway: 'residential'}});
             expect(preset.matchScore(entity)).to.equal(1);
 
             preset = iD.presetPreset('test', {tags: {highway: 'service', service: 'alley'}});
-            entity = iD.Way({tags: {highway: 'service', service: 'alley'}});
+            entity = iD.osmWay({tags: {highway: 'service', service: 'alley'}});
             expect(preset.matchScore(entity)).to.equal(2);
         });
 
         it('counts * as a match for any value with score 0.5', function() {
-            var preset = iD.presetPreset('test', {tags: {building: '*'}}),
-                entity = iD.Way({tags: {building: 'yep'}});
+            var preset = iD.presetPreset('test', {tags: {building: '*'}});
+            var entity = iD.osmWay({tags: {building: 'yep'}});
             expect(preset.matchScore(entity)).to.equal(0.5);
         });
     });
@@ -70,14 +69,25 @@ describe('iD.presetPreset', function() {
     });
 
     describe('#setTags', function() {
+        var savedAreaKeys;
+
+        before(function () {
+            savedAreaKeys = iD.areaKeys;
+            iD.setAreaKeys({ building: {}, natural: {} });
+        });
+
+        after(function () {
+            iD.setAreaKeys(savedAreaKeys);
+        });
+
         it('adds match tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
             expect(preset.setTags({}, 'line')).to.eql({highway: 'residential'});
         });
 
         it('adds wildcard tags with value \'yes\'', function() {
-            var preset = iD.presetPreset('test', {tags: {building: '*'}});
-            expect(preset.setTags({}, 'area')).to.eql({building: 'yes'});
+            var preset = iD.presetPreset('test', {tags: {natural: '*'}});
+            expect(preset.setTags({}, 'area')).to.eql({natural: 'yes'});
         });
 
         it('prefers to add tags of addTags property', function() {
@@ -86,14 +96,14 @@ describe('iD.presetPreset', function() {
         });
 
         it('adds default tags of fields with matching geometry', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
             expect(preset.setTags({}, 'area')).to.eql({area: 'yes', building: 'yes'});
         });
 
         it('adds no default tags of fields with non-matching geometry', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
             expect(preset.setTags({}, 'point')).to.eql({});
         });
 
@@ -111,9 +121,10 @@ describe('iD.presetPreset', function() {
 
         describe('for a preset with a tag in areaKeys', function() {
             it('doesn\'t add area=yes automatically', function() {
-                var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', natural: 'water'}});
-                expect(preset.setTags({}, 'area')).to.eql({name: 'testname', natural: 'water'});
+                var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', building: 'yes'}});
+                expect(preset.setTags({}, 'area')).to.eql({name: 'testname', building: 'yes'});
             });
+
             it('does add area=yes if asked to', function() {
                 var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', area: 'yes'}});
                 expect(preset.setTags({}, 'area')).to.eql({name: 'testname', area: 'yes'});

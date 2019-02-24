@@ -131,9 +131,6 @@
                 "category-building": {
                     "name": "इमारत विशॆषता"
                 },
-                "category-golf": {
-                    "name": "गोल्फ विशॆषता"
-                },
                 "category-landuse": {
                     "name": "भूमि उपयोग विशॆषता"
                 },
@@ -257,7 +254,6 @@
                 },
                 "fire_hydrant/type": {
                     "options": {
-                        "pond": "तलाब",
                         "wall": "दिवार"
                     }
                 },
@@ -354,9 +350,6 @@
                 },
                 "golf/rough": {
                     "name": "खुरदुरा"
-                },
-                "landuse/forest": {
-                    "name": "जंगल"
                 },
                 "landuse/grass": {
                     "name": "घास"

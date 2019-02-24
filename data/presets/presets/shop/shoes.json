@@ -7,5 +7,14 @@
     "tags": {
         "shop": "shoes"
     },
+    "terms": [
+        "boots",
+        "cleats",
+        "clogs",
+        "heels",
+        "loafers",
+        "oxfords",
+        "sneakers"
+    ],
     "name": "Shoe Store"
 }

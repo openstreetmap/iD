@@ -11,7 +11,9 @@
         "name",
         "brand",
         "lit",
-        "wheelchair"
+        "opening_hours",
+        "wheelchair",
+        "covered"
     ],
     "geometry": [
         "point",

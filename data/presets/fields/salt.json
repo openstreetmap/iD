@@ -1,0 +1,5 @@
+{
+    "key": "salt",
+    "type": "check",
+    "label": "Salt"
+}

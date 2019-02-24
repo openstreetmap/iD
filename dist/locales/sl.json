@@ -420,9 +420,6 @@
             "locating": "Poteka določevanje trenutne točke ..."
         },
         "inspector": {
-            "no_documentation_combination": "Za to kombinacijo oznak v dokumentaciji ni opisa",
-            "no_documentation_key": "Za ta ključ v dokumentaciji ni opisa",
-            "documentation_redirect": "Dostop do dokumentacije je preusmerjen na novo stran",
             "show_more": "Pokaži več",
             "view_on_osm": "Odpri na openstreetmap.org",
             "all_fields": "Vsa polja",
@@ -433,7 +430,6 @@
             "role": "Vloga",
             "choose": "Izberite vrsto predmeta",
             "results": "{n} zadetkov iskanja {search}",
-            "reference": "Pokaži OSM Wiki",
             "back_tooltip": "Spremeni predmet",
             "remove": "Odstrani",
             "search": "Poišči",
@@ -543,11 +539,9 @@
                 "tooltip": "Električni daljnovodi, elektrarne, transformatorske postaje ..."
             },
             "past_future": {
-                "description": "Preteklo/Prihodnje",
                 "tooltip": "V načrtovanju, gradbišče, zapuščeno, zrušeno ..."
             },
             "others": {
-                "description": "Drugo",
                 "tooltip": "Vse ostalo"
             }
         },
@@ -642,22 +636,6 @@
             "description": "Opis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "uporabljeno: {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Nepovezana cesta",
-            "disconnected_highway_tooltip": "Ceste morajo biti povezane z drugimi cestami, parkirišči ali vhodi v zgradbe.",
-            "old_multipolygon": "Oznake mnogokotnika na obrisani poti",
-            "old_multipolygon_tooltip": "Ta vrsta mnogokotnika je opuščena. Namesto obrisani poti, dodelite oznake nadrejenemu mnogokotniku.",
-            "untagged_point": "Točka je brez oznak",
-            "untagged_point_tooltip": "Izberite vrsto predmeta, , ki ga ponazarja točko na zemljevidu.",
-            "untagged_line": "Črta je brez oznak",
-            "untagged_line_tooltip": "Izberite vrsto predmeta, ki ga ponazarja črta na zemljevidu.",
-            "untagged_area": "Dodan je mnogokotnik brez oznak",
-            "untagged_area_tooltip": "Izberite vrsto predmeta, ki ga ponazarja polje na zemljevidu.",
-            "untagged_relation": "Neoznačena zveza",
-            "untagged_relation_tooltip": "Izberite vrsto predmeta, ki opisuje zvezo.",
-            "tag_suggests_area": "Oznaka {tag} nakazuje, da črta opisovati območje, vendar pa ni sklenjena",
-            "deprecated_tags": "Zastarele oznake: {tags}"
         },
         "zoom": {
             "in": "Približaj",
@@ -1123,9 +1101,6 @@
                 "category-building": {
                     "name": "Vrste zgradbe"
                 },
-                "category-golf": {
-                    "name": "Igrišča za golf"
-                },
                 "category-landuse": {
                     "name": "Vrsta zemljišča"
                 },
@@ -1323,9 +1298,6 @@
                         "hot_spring": "Vrelec",
                         "onsen": "Japonski onsen"
                     }
-                },
-                "beauty": {
-                    "label": "Vrsta trgovine"
                 },
                 "bench": {
                     "label": "Klop"
@@ -1605,20 +1577,9 @@
                 "fence_type": {
                     "label": "Vrsta"
                 },
-                "fire_hydrant/position": {
-                    "label": "Položaj",
-                    "options": {
-                        "green": "Na zelenici",
-                        "lane": "Vozni pas",
-                        "parking_lot": "Parkirno mesto",
-                        "sidewalk": "Pločnik"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Vrsta",
                     "options": {
                         "pillar": "Nadzemni",
-                        "pond": "Črpališče iz ribnika",
                         "underground": "Podzemni",
                         "wall": "Zidni"
                     }
@@ -2248,9 +2209,6 @@
                 "tourism": {
                     "label": "Vrsta turizma"
                 },
-                "tourism_attraction": {
-                    "label": "Turizem"
-                },
                 "tower/construction": {
                     "label": "Gradbišče",
                     "placeholder": "Vpeto, mrežno, skrito"
@@ -2341,8 +2299,7 @@
                     "label": "Vrsta"
                 },
                 "website": {
-                    "label": "Spletno mesto",
-                    "placeholder": "http://example.com/"
+                    "label": "Spletno mesto"
                 },
                 "wetland": {
                     "label": "Vrsta"
@@ -2681,10 +2638,6 @@
                     "name": "Parkirni prostor",
                     "terms": "parking,parkirišče,parkirni prostor, parkirno mesto"
                 },
-                "amenity/pharmacy": {
-                    "name": "Lekarna",
-                    "terms": "farmacija,zdravila,apoteka"
-                },
                 "amenity/place_of_worship": {
                     "name": "Verski hram",
                     "terms": "verski objekt,kraj čaščenja,sakralni objekt"
@@ -2693,20 +2646,8 @@
                     "name": "Budistični tempelj",
                     "terms": "Budistični center"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Cerkev",
-                    "terms": "stolnica,katedrala,bogoslužje"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindujski tempel"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "židovski verski objekt,  judovski verski objekt, judovska sinagoga, judaizem"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mošeja",
-                    "terms": "džamija,đamija,islamski verski center,muslimanski verski center"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarij",
@@ -2837,9 +2778,6 @@
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "Avtomat za pijače"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Vrečke za iztrebke"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Avtomat za časopis"
@@ -3082,9 +3020,6 @@
                 "building/terrace": {
                     "name": "Vrstne hiše",
                     "terms": "vrstna hiša"
-                },
-                "building/train_station": {
-                    "name": "Želežniška postaja"
                 },
                 "building/university": {
                     "name": "Univerzitetna stavba",
@@ -3360,14 +3295,6 @@
                     "name": "Luknja",
                     "terms": "golf luknja"
                 },
-                "golf/lateral_water_hazard_area": {
-                    "name": "Bočne vodne ovire",
-                    "terms": "Vodne ovire, golf"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "name": "Bočne vodne ovire",
-                    "terms": "Vodne ovire, golf"
-                },
                 "golf/rough": {
                     "name": "Ledina",
                     "terms": "jasa,ledina,območje ob čistini in ovirah in zelenici z visoko košeno ali nepokošeno travo"
@@ -3375,14 +3302,6 @@
                 "golf/tee": {
                     "name": "Podstavek za žogico",
                     "terms": "podstavek, golf"
-                },
-                "golf/water_hazard_area": {
-                    "name": "Vodne ovire",
-                    "terms": "Vodne ovire, golf"
-                },
-                "golf/water_hazard_line": {
-                    "name": "Vodne ovire",
-                    "terms": "Vodne ovire, golf"
                 },
                 "healthcare": {
                     "name": "Zdravstvo",
@@ -3628,8 +3547,7 @@
                     "terms": "ribogojništvo, vodne rastline, vodne živali, školjke"
                 },
                 "landuse/basin": {
-                    "name": "Kotanja",
-                    "terms": "usedalnik"
+                    "name": "Kotanja"
                 },
                 "landuse/cemetery": {
                     "name": "Pokopališče",
@@ -3657,10 +3575,6 @@
                 "landuse/farmyard": {
                     "name": "Kmetija",
                     "terms": "dvorišče,farma,kmet,domačija"
-                },
-                "landuse/forest": {
-                    "name": "Gozd",
-                    "terms": "gozdne površine,gozdič,gozdiček"
                 },
                 "landuse/grass": {
                     "name": "Travnata površina",
@@ -3754,8 +3668,7 @@
                     "terms": "zidanica"
                 },
                 "leisure": {
-                    "name": "Prosti čas",
-                    "terms": "rekreacija,turizem"
+                    "name": "Prosti čas"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Igralnica za odrasle",
@@ -3888,10 +3801,6 @@
                 "leisure/resort": {
                     "name": "Letovišče"
                 },
-                "leisure/running_track": {
-                    "name": "Tekaška steza (tek)",
-                    "terms": "steza (tek),tekališče,kros steza,hipodrom"
-                },
                 "leisure/slipway": {
                     "name": "Rampa",
                     "terms": "rampa za vodna plovila"
@@ -3923,8 +3832,7 @@
                     "terms": "linija,daljica,lomljenka"
                 },
                 "man_made": {
-                    "name": "Antropogena konstrukcija",
-                    "terms": "druge konstrukcije"
+                    "name": "Antropogena konstrukcija"
                 },
                 "man_made/adit": {
                     "name": "Vodoravni rudniški rov ",
@@ -4033,8 +3941,7 @@
                     "name": "Odtočni kanal"
                 },
                 "natural": {
-                    "name": "Naravna prvina",
-                    "terms": "naravno"
+                    "name": "Naravna prvina"
                 },
                 "natural/bare_rock": {
                     "name": "Skalovje",
@@ -4748,8 +4655,7 @@
                     "terms": "kletarstvo,vinska klet,vinotoč"
                 },
                 "tourism": {
-                    "name": "Turizem",
-                    "terms": "turistične storitve"
+                    "name": "Turizem"
                 },
                 "tourism/alpine_hut": {
                     "name": "Planinska koča",
@@ -4988,8 +4894,7 @@
                     "terms": "veletok,reka,rečica,vodotok"
                 },
                 "waterway/riverbank": {
-                    "name": "Rečni breg",
-                    "terms": "brežina,obala,breg"
+                    "name": "Rečni breg"
                 },
                 "waterway/stream": {
                     "name": "Potok",

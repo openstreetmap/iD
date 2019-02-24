@@ -13,6 +13,7 @@
         "cycleway",
         "maxheight",
         "covered",
+        "junction_line",
         "lit",
         "smoothness",
         "oneway/bicycle"

@@ -2,7 +2,7 @@ describe('iD.behaviorLasso', function () {
     var context, lasso;
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD.coreContext();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());

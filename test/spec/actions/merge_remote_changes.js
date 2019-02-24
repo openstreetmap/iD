@@ -1,30 +1,30 @@
 describe('iD.actionMergeRemoteChanges', function () {
-    var base = iD.Graph([
-            iD.Node({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
+    var base = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
-            iD.Node({id: 'p1', loc: [ 10,  10], version: '1'}),
-            iD.Node({id: 'p2', loc: [ 10, -10], version: '1'}),
-            iD.Node({id: 'p3', loc: [-10, -10], version: '1'}),
-            iD.Node({id: 'p4', loc: [-10,  10], version: '1'}),
-            iD.Way({
+            iD.osmNode({id: 'p1', loc: [ 10,  10], version: '1'}),
+            iD.osmNode({id: 'p2', loc: [ 10, -10], version: '1'}),
+            iD.osmNode({id: 'p3', loc: [-10, -10], version: '1'}),
+            iD.osmNode({id: 'p4', loc: [-10,  10], version: '1'}),
+            iD.osmWay({
                 id: 'w1',
                 nodes: ['p1', 'p2', 'p3', 'p4', 'p1'],
                 version: '1',
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.Node({id: 'q1', loc: [ 5,  5], version: '1'}),
-            iD.Node({id: 'q2', loc: [ 5, -5], version: '1'}),
-            iD.Node({id: 'q3', loc: [-5, -5], version: '1'}),
-            iD.Node({id: 'q4', loc: [-5,  5], version: '1'}),
-            iD.Way({
+            iD.osmNode({id: 'q1', loc: [ 5,  5], version: '1'}),
+            iD.osmNode({id: 'q2', loc: [ 5, -5], version: '1'}),
+            iD.osmNode({id: 'q3', loc: [-5, -5], version: '1'}),
+            iD.osmNode({id: 'q4', loc: [-5,  5], version: '1'}),
+            iD.osmWay({
                 id: 'w2',
                 nodes: ['q1', 'q2', 'q3', 'q4', 'q1'],
                 version: '1',
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.Relation({
+            iD.osmRelation({
                 id: 'r',
                 members: [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],
                 version: '1',
@@ -33,22 +33,22 @@ describe('iD.actionMergeRemoteChanges', function () {
         ]),
 
         // some new objects not in the graph yet..
-        r1 = iD.Node({id: 'r1', loc: [ 12,  12], version: '1'}),
-        r2 = iD.Node({id: 'r2', loc: [ 12, -12], version: '1'}),
-        r3 = iD.Node({id: 'r3', loc: [-12, -12], version: '1'}),
-        r4 = iD.Node({id: 'r4', loc: [-12,  12], version: '1'}),
-        w3 = iD.Way({
+        r1 = iD.osmNode({id: 'r1', loc: [ 12,  12], version: '1'}),
+        r2 = iD.osmNode({id: 'r2', loc: [ 12, -12], version: '1'}),
+        r3 = iD.osmNode({id: 'r3', loc: [-12, -12], version: '1'}),
+        r4 = iD.osmNode({id: 'r4', loc: [-12,  12], version: '1'}),
+        w3 = iD.osmWay({
                 id: 'w3',
                 nodes: ['r1', 'r2', 'r3', 'r4', 'r1'],
                 version: '1',
                 tags: {foo: 'foo_new', area: 'yes'}
             }),
 
-        s1 = iD.Node({id: 's1', loc: [ 6,  6], version: '1'}),
-        s2 = iD.Node({id: 's2', loc: [ 6, -6], version: '1'}),
-        s3 = iD.Node({id: 's3', loc: [-6, -6], version: '1'}),
-        s4 = iD.Node({id: 's4', loc: [-6,  6], version: '1'}),
-        w4 = iD.Way({
+        s1 = iD.osmNode({id: 's1', loc: [ 6,  6], version: '1'}),
+        s2 = iD.osmNode({id: 's2', loc: [ 6, -6], version: '1'}),
+        s3 = iD.osmNode({id: 's3', loc: [-6, -6], version: '1'}),
+        s4 = iD.osmNode({id: 's4', loc: [-6,  6], version: '1'}),
+        w4 = iD.osmWay({
                 id: 'w4',
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
                 version: '1',
@@ -59,7 +59,7 @@ describe('iD.actionMergeRemoteChanges', function () {
     function makeGraph(entities) {
         return entities.reduce(function(graph, entity) {
             return graph.replace(entity);
-        }, iD.Graph(base));
+        }, iD.coreGraph(base));
     }
 
 

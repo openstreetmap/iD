@@ -11,6 +11,7 @@ import { svgData } from './data';
 import { svgDebug } from './debug';
 import { svgGeolocate } from './geolocate';
 import { svgKeepRight } from './keepRight';
+import { svgImproveOSM } from './improveOSM';
 import { svgStreetside } from './streetside';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
@@ -30,6 +31,7 @@ export function svgLayers(projection, context) {
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
+        { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },

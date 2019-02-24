@@ -89,7 +89,7 @@ preset are used. For example, `shop/convenience` automatically uses the same
 fields as `shop`.
 
 In both explicit and implicit inheritance, fields for keys that define the
-preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.  
+preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
 
 ##### `searchable`
 
@@ -320,7 +320,7 @@ iD supports deployments which use a custom set of presets. You can supply preset
 the `presets` accessor:
 
 ```js
-var id = iD.Context().presets({
+var id = iD.coreContext().presets({
     presets: { ... },
     fields: { ... },
     defaults: { ... },

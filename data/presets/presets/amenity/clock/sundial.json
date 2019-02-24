@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-clock",
+    "fields": [
+        "name",
+        "support",
+        "visibility",
+        "inscription"
+    ],
+    "moreFields": [],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "gnomon",
+        "shadow"
+    ],
+    "tags": {
+        "amenity": "clock",
+        "display": "sundial"
+    },
+    "reference": {
+        "key": "display",
+        "value": "sundial"
+    },
+    "name": "Sundial"
+}

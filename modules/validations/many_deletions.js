@@ -1,31 +1,58 @@
 import { t } from '../util/locale';
+import { validationIssue } from '../core/validator';
 
 
 export function validationManyDeletions() {
-    var threshold = 100;
+    var totalOtherGeomThreshold = 50;
+    var relationThreshold = 10;   // relations are less common so use a lower threshold
 
-    var validation = function(changes, graph) {
-        var warnings = [];
-        var nodes = 0, ways = 0, areas = 0, relations = 0;
+    var type = 'many_deletions';
 
-        changes.deleted.forEach(function(c) {
-            if (c.type === 'node') { nodes++; }
-            else if (c.type === 'way' && c.geometry(graph) === 'line') { ways++; }
-            else if (c.type === 'way' && c.geometry(graph) === 'area') { areas++; }
-            else if (c.type === 'relation') { relations++; }
+    var validation = function(changes, context) {
+        var issues = [];
+        var points = 0, lines = 0, areas = 0, relations = 0;
+        var base = context.history().base();
+        var geometry;
+
+        changes.deleted.forEach(function(entity) {
+            if (entity.type === 'node' && entity.geometry(base) === 'point') {
+                points++;
+            } else if (entity.type === 'way') {
+                geometry = entity.geometry(base);
+                if (geometry === 'line') {
+                    lines++;
+                } else if (geometry === 'area') {
+                     areas++;
+                }
+            } else if (entity.type === 'relation') {
+                relations++;
+            }
         });
-        if (changes.deleted.length > threshold) {
-            warnings.push({
-                id: 'many_deletions',
-                message: t('validations.many_deletions',
-                    { n: changes.deleted.length, p: nodes, l: ways, a:areas, r: relations }
-                )
-            });
+
+        if (points + lines + areas >= totalOtherGeomThreshold || relations >= relationThreshold) {
+            var totalFeatures = points + lines + areas + relations;
+
+            var messageType = 'points-lines-areas';
+            if (relations > 0) {
+                messageType += '-relations';
+            }
+            issues.push(new validationIssue({
+                type: type,
+                severity: 'warning',
+                message: t(
+                    'issues.many_deletions.'+messageType+'.message',
+                    { n: totalFeatures, p: points, l: lines, a:areas, r: relations }
+                ),
+                tooltip: t('issues.many_deletions.tip'),
+                hash: [points, lines, areas, relations].join()
+            }));
         }
 
-        return warnings;
+        return issues;
     };
 
+    validation.type = type;
+    validation.inputType = 'changes';
 
     return validation;
 }

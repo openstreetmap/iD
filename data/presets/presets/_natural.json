@@ -1,0 +1,17 @@
+{
+    "icon": "maki-natural",
+    "fields": [
+        "name",
+        "natural"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "natural": "*"
+    },
+    "searchable": false,
+    "name": "Natural"
+}

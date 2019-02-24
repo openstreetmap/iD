@@ -7,7 +7,8 @@
         "wheelchair"
     ],
     "moreFields": [
-        "lit"
+        "lit",
+        "covered"
     ],
     "geometry": [
         "point"
@@ -16,8 +17,11 @@
         "amenity": "drinking_water"
     },
     "terms": [
-        "fountain",
-        "potable"
+        "potable water source",
+        "water fountain",
+        "drinking fountain",
+        "bubbler",
+        "water tap"
     ],
     "name": "Drinking Water"
 }

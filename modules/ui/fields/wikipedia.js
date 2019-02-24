@@ -200,7 +200,9 @@ export function uiFieldWikipedia(field, context) {
         var initGraph = context.graph();
         var initEntityID = _entity.id;
 
-        wikidata.itemsByTitle(language()[2], value, function(title, data) {
+        wikidata.itemsByTitle(language()[2], value, function(err, data) {
+            if (err) return;
+
             // If graph has changed, we can't apply this update.
             if (context.graph() !== initGraph) return;
 

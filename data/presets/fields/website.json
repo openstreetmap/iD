@@ -2,6 +2,6 @@
     "key": "website",
     "type": "url",
     "icon": "website",
-    "placeholder": "http://example.com/",
+    "placeholder": "https://example.com",
     "label": "Website"
 }

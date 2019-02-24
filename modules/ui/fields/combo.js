@@ -297,7 +297,7 @@ export function uiFieldCombo(field, context) {
                 .data([0]);
 
             var listClass = 'chiplist';
-            
+
             // Use a separate line for each value in the Destinations field
             // to mimic highway exit signs
             if (field.id === 'destination_oneway') {

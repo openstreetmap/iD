@@ -12,6 +12,7 @@
     "moreFields": [
         "covered",
         "cycleway",
+        "junction_line",
         "lit",
         "oneway/bicycle",
         "maxheight",

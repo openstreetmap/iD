@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="60" height="60" viewBox="0 0 60 60">
-  <g>
-    <path d="M10.5,39 C9.119,39 8,40.119 8,41.5 C8,42.881 9.119,44 10.5,44 L49.5,44 C50.881,44 52,42.881 52,41.5 C52,40.119 50.881,39 49.5,39 z" fill="inherit" id="highway-motorway-casing1"/>
-    <path d="M12.5,40 C12.81,40.416 13,40.941 13,41.5 C13,42.059 12.81,42.584 12.5,43 L47.5,43 C47.19,42.584 47,42.059 47,41.5 C47,40.941 47.19,40.416 47.5,40 L12.5,40 z" fill="currentColor" id="highway-motorway-stroke1"/>
-    <path d="M12,41.5 C12,42.328 11.328,43 10.5,43 C9.672,43 9,42.328 9,41.5 C9,40.672 9.672,40 10.5,40 C11.328,40 12,40.672 12,41.5 z" fill="#FFFFFF"/>
-    <path d="M51,41.5 C51,42.328 50.328,43 49.5,43 C48.672,43 48,42.328 48,41.5 C48,40.672 48.672,40 49.5,40 C50.328,40 51,40.672 51,41.5 z" fill="#FFFFFF"/>
-  </g>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
   <path d="M13,14 L8,36 L16.5,36 L19.5,14 L13,14 z M21,14 L18.5,36 L27,36 L28,14 L21,14 z M32,14 L33,36 L40.5,36 L38,14 L32,14 z M39.5,14 L42.5,36 L52,36 L46.5,14 L39.5,14 z" fill="#444444"/>
   <path d="M42.75,20 L42,16 L44.875,16 L45.625,20 z M38,33 L37.5,29 L34.5,29 L35,33 z M11.5,33 L12,29 L15,29 L14.5,33 z M23.25,20 L23.562,16 L26.438,16 L26.125,20 z" fill="currentColor" id="highway-motorway-stroke2"/>
 </svg>

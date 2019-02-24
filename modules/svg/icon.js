@@ -1,6 +1,6 @@
 export function svgIcon(name, svgklass, useklass) {
     return function drawIcon(selection) {
-        selection.selectAll('svg')
+        selection.selectAll('svg.icon')
             .data([0])
             .enter()
             .append('svg')

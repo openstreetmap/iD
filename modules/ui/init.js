@@ -21,6 +21,7 @@ import { uiGeolocate } from './geolocate';
 import { uiHelp } from './help';
 import { uiInfo } from './info';
 import { uiIntro } from './intro';
+import { uiIssues } from './issues';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
@@ -141,7 +142,7 @@ export function uiInit(context) {
 
 
         // Map controls (appended to #bar, but absolutely positioned)
-        var controls = bar
+        var controls = content
             .append('div')
             .attr('class', 'map-controls');
 
@@ -155,20 +156,33 @@ export function uiInit(context) {
             .attr('class', 'map-control geolocate-control')
             .call(uiGeolocate(context));
 
+        var background = uiBackground(context);
         controls
             .append('div')
             .attr('class', 'map-control background-control')
-            .call(uiBackground(context));
+            .call(background.renderToggleButton);
+        content.call(background.renderPane);
 
+        var mapData = uiMapData(context);
         controls
             .append('div')
             .attr('class', 'map-control map-data-control')
-            .call(uiMapData(context));
+            .call(mapData.renderToggleButton);
+        content.call(mapData.renderPane);
 
+        var issues = uiIssues(context);
+        controls
+            .append('div')
+            .attr('class', 'map-control map-issues-control')
+            .call(issues.renderToggleButton);
+        content.call(issues.renderPane);
+
+        var help = uiHelp(context);
         controls
             .append('div')
             .attr('class', 'map-control help-control')
-            .call(uiHelp(context));
+            .call(help.renderToggleButton);
+        content.call(help.renderPane);
 
 
         // Add attribution and footer

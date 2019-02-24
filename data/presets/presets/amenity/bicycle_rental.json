@@ -14,7 +14,8 @@
         "phone",
         "email",
         "fax",
-        "wheelchair"
+        "wheelchair",
+        "covered"
     ],
     "geometry": [
         "point",

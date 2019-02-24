@@ -1,6 +1,7 @@
 {
     "icon": "fas-charging-station",
     "fields": [
+        "name",
         "operator",
         "capacity",
         "fee",

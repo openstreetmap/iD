@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-storage_tank",
+    "fields": [
+        "name",
+        "man_made"
+    ],
+    "moreFields": [
+        "material"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "man_made": "*"
+    },
+    "searchable": false,
+    "name": "Man Made"
+}

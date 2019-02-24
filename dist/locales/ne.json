@@ -237,9 +237,6 @@
                 "fence_type": {
                     "label": "प्रकार"
                 },
-                "fire_hydrant/type": {
-                    "label": "प्रकार"
-                },
                 "generator/type": {
                     "label": "प्रकार"
                 },

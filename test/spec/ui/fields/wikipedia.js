@@ -2,10 +2,10 @@ describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field, server;
 
     function changeTags(changed) {
-        var e = context.entity(entity.id),
-            annotation = 'Changed tags.',
-            tags = JSON.parse(JSON.stringify(e.tags)),   // deep copy
-            didChange = false;
+        var e = context.entity(entity.id);
+        var annotation = 'Changed tags.';
+        var tags = JSON.parse(JSON.stringify(e.tags));   // deep copy
+        var didChange = false;
 
         for (var k in changed) {
             if (changed.hasOwnProperty(k)) {
@@ -43,11 +43,15 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     beforeEach(function() {
-        entity = iD.Node({id: 'n12345'});
-        context = iD.Context();
+        entity = iD.osmNode({id: 'n12345'});
+        context = iD.coreContext();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
-        field = context.presets().field('wikipedia');
+        field = iD.presetField('wikipedia', {
+            key: 'wikipedia',
+            keys: ['wikipedia', 'wikidata'],
+            type: 'wikipedia'
+        });
         server = createServer({ respondImmediately: true });
     });
 

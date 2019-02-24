@@ -239,6 +239,8 @@ export function modeSelect(context, selectedIDs) {
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
+        context.features().forceVisible(selectedIDs);
+
         var operations = _without(_values(Operations), Operations.operationDelete)
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available(); });
@@ -546,6 +548,7 @@ export function modeSelect(context, selectedIDs) {
 
         context.map().on('drawn.select', null);
         context.ui().sidebar.hide();
+        context.features().forceVisible([]);
     };
 
 

@@ -1,11 +1,13 @@
 {
-    "icon": "maki-shop",
+    "icon": "temaki-movie_rental",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "DVD"
+        "DVD",
+        "VHS",
+        "video casette"
     ],
     "tags": {
         "shop": "video"

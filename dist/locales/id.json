@@ -250,9 +250,6 @@
             "locating": "Sedang mencari, mohon tunggu..."
         },
         "inspector": {
-            "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tag ini",
-            "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
-            "documentation_redirect": "Dokumen ini telah diarahkan ke halaman baru",
             "show_more": "Tampilkan Lainnya",
             "view_on_osm": "Lihat di openstreetmap.org",
             "all_fields": "Semua wilayah",
@@ -263,7 +260,6 @@
             "role": "Aturan",
             "choose": "Pilih Tipe Fitur",
             "results": "{n} hasil untuk {search}",
-            "reference": "Lihat di OpenStreetMap Wiki",
             "back_tooltip": "Ubah Fitur",
             "remove": "Buang",
             "search": "Cari",
@@ -343,11 +339,9 @@
                 "tooltip": "Jalur Listrik, Pembangkit Listrik, Gardu, dsb."
             },
             "past_future": {
-                "description": "Masa Lalu/Akan Datang",
                 "tooltip": "Diajukan, Dibangun, Ditinggalkan, Diruntuhkan, dsb."
             },
             "others": {
-                "description": "Lainnya",
                 "tooltip": "Selain yang disebutkan"
             }
         },
@@ -416,16 +410,6 @@
             "description": "Deskripsi",
             "on_wiki": "{tag} di wiki.osm.org",
             "used_with": "digunakan dengan {type}"
-        },
-        "validations": {
-            "untagged_point": "Titik tanpa tag",
-            "untagged_point_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas poin ini.",
-            "untagged_line": "Garis tanpa tag",
-            "untagged_line_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas garis ini.",
-            "untagged_area": "Area tanpa tag",
-            "untagged_area_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas area ini.",
-            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
-            "deprecated_tags": "Tag sudah tidak dipergunakan: {tags}"
         },
         "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
         "full_screen": "Tombol Layar Penuh",
@@ -692,9 +676,7 @@
                     "label": "Biaya"
                 },
                 "fire_hydrant/type": {
-                    "label": "Tipe",
                     "options": {
-                        "pond": "Kolam",
                         "underground": "Bawah tanah",
                         "wall": "Tembok"
                     }
@@ -1006,8 +988,7 @@
                     "label": "Tipe"
                 },
                 "website": {
-                    "label": "Website",
-                    "placeholder": "http://example.com/"
+                    "label": "Website"
                 },
                 "wetland": {
                     "label": "Tipe"
@@ -1188,10 +1169,6 @@
                 "amenity/parking_entrance": {
                     "name": "Pintu Masuk/Keluar Area Parkir"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apotek",
-                    "terms": "Farmasi"
-                },
                 "amenity/place_of_worship": {
                     "name": "Tempat Beribadah",
                     "terms": "Rumah Ibadah"
@@ -1199,17 +1176,6 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Kuil Buddha",
                     "terms": "Wihara"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Gereja"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "Yahudi"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Masjid",
-                    "terms": "Mesjid,Mushola,Langgar"
                 },
                 "amenity/police": {
                     "name": "Polisi",
@@ -1395,9 +1361,6 @@
                 },
                 "building/stable": {
                     "name": "Kandang Kuda"
-                },
-                "building/train_station": {
-                    "name": "Stasiun Kereta"
                 },
                 "building/university": {
                     "name": "Bangunan Universitas",
@@ -1689,12 +1652,10 @@
                     "terms": "Pertigaan, Perempatan"
                 },
                 "landuse": {
-                    "name": "Guna Lahan",
-                    "terms": "Guna Lahan"
+                    "name": "Guna Lahan"
                 },
                 "landuse/basin": {
-                    "name": "Cekungan",
-                    "terms": "Daerah Aliran Sungai"
+                    "name": "Cekungan"
                 },
                 "landuse/cemetery": {
                     "name": "Pemakaman",
@@ -1721,10 +1682,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Peternakan"
-                },
-                "landuse/forest": {
-                    "name": "Hutan",
-                    "terms": "Hutan Produksi"
                 },
                 "landuse/grass": {
                     "name": "Rumput",
@@ -1856,8 +1813,7 @@
                     "terms": "Garis"
                 },
                 "man_made": {
-                    "name": "Buatan manusia",
-                    "terms": "Buatan Manusia"
+                    "name": "Buatan manusia"
                 },
                 "man_made/breakwater": {
                     "name": "Pemecah Gelombang",
@@ -2432,8 +2388,7 @@
                     "terms": "Alkohol, Minum, Minuman Beralkohol"
                 },
                 "tourism": {
-                    "name": "Pariwisata",
-                    "terms": "Wisata, Turisme"
+                    "name": "Pariwisata"
                 },
                 "tourism/artwork": {
                     "name": "Karya Seni"
@@ -2560,8 +2515,7 @@
                     "terms": "Kali"
                 },
                 "waterway/riverbank": {
-                    "name": "Tepi Sungai",
-                    "terms": "Pinggir Kali"
+                    "name": "Tepi Sungai"
                 },
                 "waterway/stream": {
                     "name": "Aliran"

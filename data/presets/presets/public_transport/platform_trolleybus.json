@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-trolleybus",
+    "icon": "temaki-pedestrian",
     "fields": [
         "{public_transport/platform}"
     ],
@@ -8,6 +8,7 @@
     ],
     "geometry": [
         "point",
+        "line",
         "area"
     ],
     "tags": {

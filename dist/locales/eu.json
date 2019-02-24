@@ -342,9 +342,6 @@
                 "category-building": {
                     "name": "Eraikuntzaren ezaugarriak"
                 },
-                "category-golf": {
-                    "name": "Golf-aren ezaugarriak"
-                },
                 "category-landuse": {
                     "name": "Lurraren erabilera ezaugarriak"
                 },
@@ -548,9 +545,6 @@
                         "hot_spring": "Iturri termala",
                         "onsen": "Onsen japoniarra"
                     }
-                },
-                "beauty": {
-                    "label": "Denda Mota"
                 },
                 "bench": {
                     "label": "Banku"
@@ -866,20 +860,9 @@
                 "fence_type": {
                     "label": "Mota"
                 },
-                "fire_hydrant/position": {
-                    "label": "Kokapen",
-                    "options": {
-                        "green": "Berdea",
-                        "lane": "Lerro",
-                        "parking_lot": "Aparkaleku",
-                        "sidewalk": "Espaloi"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Mota",
                     "options": {
                         "pillar": "Zutabe/ Lur gaineko",
-                        "pond": "Urmael",
                         "underground": "Lur azpian",
                         "wall": "Horma"
                     }
@@ -1265,9 +1248,6 @@
                         "underground": "Lur azpiko"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Bidaiarientzako informazio pantaila"
-                },
                 "payment_multi": {
                     "label": "Ordaintzeko Moduak"
                 },
@@ -1624,9 +1604,6 @@
                 "tourism": {
                     "label": "Mota"
                 },
-                "tourism_attraction": {
-                    "label": "Turismo"
-                },
                 "tower/construction": {
                     "label": "Eraikuntza"
                 },
@@ -1733,8 +1710,7 @@
                     "label": "Mota"
                 },
                 "website": {
-                    "label": "Webgune",
-                    "placeholder": "http://example.com/"
+                    "label": "Webgune"
                 },
                 "wetland": {
                     "label": "Mota"
@@ -1953,26 +1929,14 @@
                 "amenity/parking_space": {
                     "name": "Aparkatzeko lekua"
                 },
-                "amenity/pharmacy": {
-                    "name": "Farmazia"
-                },
                 "amenity/place_of_worship": {
                     "name": "Gurtza gune"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Tenplu budista"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Eliza"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Tenplu hindua"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mezkita"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Xintoismo Santutegia"
@@ -2115,9 +2079,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Txanpon-makina"
                 },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Iraizkin poltsen makina saltzaile"
-                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Emakumezkoentzako higiene produktuen makina saltzaile"
                 },
@@ -2180,9 +2141,6 @@
                 },
                 "building/stable": {
                     "name": "Ukuilu"
-                },
-                "building/train_station": {
-                    "name": "Tren geltoki"
                 },
                 "club": {
                     "name": "Klub"
@@ -2321,9 +2279,6 @@
                 "name": "Japoniako OpenStreetMap",
                 "description": "Japoniako Kartografo eta OpenStreetMap erabiltzaileak"
             },
-            "OSM-korea-telegram": {
-                "name": "Koreako OSM-ren Telegram Katea"
-            },
             "OSM-MY-facebook": {
                 "name": "Malaysiako OpenStreetMap-a Facebook-en",
                 "description": "OpenStreetMap-i buruzko edozein gauzari buruz eztabaidatzeko! "
@@ -2344,10 +2299,6 @@
             },
             "OSM-RU-telegram": {
                 "description": "Errusiako OpenStreetMap-aren telegram txat-a"
-            },
-            "OSM-LKA-facebook": {
-                "name": "Sri Lankako OpenStreetMap",
-                "description": "OpenStreetMap hobetu Sri Lankan"
             },
             "al-telegram": {
                 "name": "Albaniako OSM-aren Telegram Katea",

@@ -9,7 +9,7 @@ import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
 import { geoExtent, geoVecAdd } from '../geo';
-import { krError } from '../osm';
+import { qaError } from '../osm';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -41,13 +41,13 @@ function abortRequest(i) {
 }
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflight, function(v, k) {
+    _forEach(cache.inflightTile, function(v, k) {
         var wanted = _find(tiles, function(tile) {
             return k === tile.id;
         });
         if (!wanted) {
             abortRequest(v);
-            delete cache.inflight[k];
+            delete cache.inflightTile[k];
         }
     });
 }
@@ -71,7 +71,7 @@ function updateRtree(item, replace) {
 
 
 function tokenReplacements(d) {
-    if (!(d instanceof krError)) return;
+    if (!(d instanceof qaError)) return;
 
     var htmlRegex = new RegExp(/<\/[a-z][\s\S]*>/);
     var replacements = {};
@@ -168,11 +168,11 @@ function parseError(capture, idType) {
 
 
     function linkErrorObject(d) {
-        return '<a class="kr_error_object_link">' + d + '</a>';
+        return '<a class="error_object_link">' + d + '</a>';
     }
 
     function linkEntity(d) {
-        return '<a class="kr_error_entity_link">' + d + '</a>';
+        return '<a class="error_entity_link">' + d + '</a>';
     }
 
     function linkURL(d) {
@@ -279,12 +279,13 @@ export default {
 
     reset: function() {
         if (_krCache) {
-            _forEach(_krCache.inflight, abortRequest);
+            _forEach(_krCache.inflightTile, abortRequest);
         }
         _krCache = {
             data: {},
-            loaded: {},
-            inflight: {},
+            loadedTile: {},
+            inflightTile: {},
+            inflightPost: {},
             closed: {},
             rtree: rbush()
         };
@@ -306,18 +307,18 @@ export default {
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (_krCache.loaded[tile.id] || _krCache.inflight[tile.id]) return;
+            if (_krCache.loadedTile[tile.id] || _krCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle();
             var params = _extend({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
             var url = _krUrlRoot + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
-            _krCache.inflight[tile.id] = d3_json(url,
+            _krCache.inflightTile[tile.id] = d3_json(url,
                 function(err, data) {
-                    delete _krCache.inflight[tile.id];
+                    delete _krCache.inflightTile[tile.id];
 
                     if (err) return;
-                    _krCache.loaded[tile.id] = true;
+                    _krCache.loadedTile[tile.id] = true;
 
                     if (!data.features || !data.features.length) return;
 
@@ -374,14 +375,17 @@ export default {
                             coincident = _krCache.rtree.search(bbox).length;
                         } while (coincident);
 
-                        var d = new krError({
+                        var d = new qaError({
+                            // Required values
                             loc: loc,
+                            service: 'keepRight',
+                            error_type: errorType,
+                            // Extra values for this service
                             id: props.error_id,
                             comment: props.comment || null,
                             description: props.description || '',
                             error_id: props.error_id,
                             which_type: whichType,
-                            error_type: errorType,
                             parent_error_type: parentErrorType,
                             severity: whichTemplate.severity || 'error',
                             object_id: props.object_id,
@@ -404,7 +408,7 @@ export default {
 
 
     postKeepRightUpdate: function(d, callback) {
-        if (_krCache.inflight[d.id]) {
+        if (_krCache.inflightPost[d.id]) {
             return callback({ message: 'Error update already inflight', status: -2 }, d);
         }
 
@@ -421,9 +425,9 @@ export default {
         // NOTE: This throws a CORS err, but it seems successful.
         // We don't care too much about the response, so this is fine.
         var url = _krUrlRoot + 'comment.php?' + utilQsString(params);
-        _krCache.inflight[d.id] = d3_request(url)
+        _krCache.inflightPost[d.id] = d3_request(url)
             .post(function(err) {
-                delete _krCache.inflight[d.id];
+                delete _krCache.inflightPost[d.id];
 
                 if (d.state === 'ignore') {   // ignore permanently (false positive)
                     that.removeError(d);
@@ -467,7 +471,7 @@ export default {
 
     // replace a single error in the cache
     replaceError: function(error) {
-        if (!(error instanceof krError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         _krCache.data[error.id] = error;
         updateRtree(encodeErrorRtree(error), true); // true = replace
@@ -477,7 +481,7 @@ export default {
 
     // remove a single error from the cache
     removeError: function(error) {
-        if (!(error instanceof krError) || !error.id) return;
+        if (!(error instanceof qaError) || !error.id) return;
 
         delete _krCache.data[error.id];
         updateRtree(encodeErrorRtree(error), false); // false = remove

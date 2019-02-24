@@ -7,7 +7,7 @@ import { t } from '../util/locale';
 import { modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
-import { utilDisplayName, utilHighlightEntity } from '../util';
+import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
 export function uiSelectionList(context, selectedIDs) {
@@ -69,14 +69,13 @@ export function uiSelectionList(context, selectedIDs) {
 
             enter
                 .each(function(d) {
-                // highlight the feature in the map while hovering on the list item
-                d3_select(this).on('mouseover', function() {
-                    utilHighlightEntity(d.id, true, context);
+                    d3_select(this).on('mouseover', function() {
+                        utilHighlightEntities([d.id], true, context);
+                    });
+                    d3_select(this).on('mouseout', function() {
+                        utilHighlightEntities([d.id], false, context);
+                    });
                 });
-                d3_select(this).on('mouseout', function() {
-                    utilHighlightEntity(d.id, false, context);
-                });
-            });
 
             var label = enter
                 .append('button')

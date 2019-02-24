@@ -1,0 +1,19 @@
+{
+    "icon": "maki-golf",
+    "fields": [
+        "name",
+        "capacity"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "golf": "driving_range",
+        "landuse": "grass"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "driving_range"
+    },
+    "name": "Driving Range"
+}

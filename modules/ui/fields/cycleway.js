@@ -34,9 +34,10 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'labeled-inputs')
             .merge(div);
 
+        var keys = ['cycleway:left', 'cycleway:right'];
 
         items = div.selectAll('li')
-            .data(field.keys);
+            .data(keys);
 
         var enter = items.enter()
             .append('li')

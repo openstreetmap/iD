@@ -14,6 +14,7 @@
     "moreFields": [
         "covered",
         "destination/symbol_oneway",
+        "junction_line",
         "lit",
         "maxheight",
         "maxspeed/advisory",

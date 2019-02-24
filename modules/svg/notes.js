@@ -143,11 +143,11 @@ export function svgNotes(projection, context, dispatch) {
             .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-note');
 
-        notesEnter.selectAll('.note-annotation')
+        notesEnter.selectAll('.icon-annotation')
             .data(function(d) { return [d]; })
             .enter()
             .append('use')
-            .attr('class', 'note-annotation')
+            .attr('class', 'icon-annotation')
             .attr('width', '10px')
             .attr('height', '10px')
             .attr('x', '-3px')
