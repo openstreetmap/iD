@@ -43,9 +43,12 @@ export function operationStraighten(selectedIDs, context) {
         }
 
         // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
-        // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
-        startNodes = startNodes.filter(n => startNodes.indexOf(n) == startNodes.lastIndexOf(n));
-        endNodes = endNodes.filter(n => endNodes.indexOf(n) == endNodes.lastIndexOf(n));
+        startNodes = _filter(startNodes, function(n) {
+            return startNodes.indexOf(n) == startNodes.lastIndexOf(n);
+        });
+        endNodes = _filter(endNodes, function(n) {
+            return endNodes.indexOf(n) == endNodes.lastIndexOf(n);
+        });
 
         // Return false if line is only 2 nodes long
         // Return false unless exactly 0 or 2 specific nodes are selected
