@@ -93,6 +93,10 @@
       "replace": {"entrance": "*"}
     },
     {
+      "old": {"building:color": "*"},
+      "replace": {"building:colour": "$1"}
+    },
+    {
       "old": {"building:roof:colour": "*"},
       "replace": {"roof:colour": "$1"}
     },
