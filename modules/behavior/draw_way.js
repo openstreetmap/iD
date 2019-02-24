@@ -125,6 +125,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
+                    if (nodes.length < 3) return false;
+
                     nodes.splice(-2, 1);
                     entity = nodes[nodes.length-2];
                 } else {
