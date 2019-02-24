@@ -145,27 +145,11 @@ export function uiFieldLocalized(field, context) {
                 // Show the suggestions.. If the user picks one, change the tags..
                 if (allSuggestions.length && goodSuggestions.length) {
                     input
+                        .on('blur.localized', checkBrandOnBlur)
                         .call(brandCombo
                             .fetcher(fetchBrandNames(preset, allSuggestions))
-                            .on('accept', function(d) {
-                                var entity = context.entity(_entity.id);  // get latest
-                                var tags = entity.tags;
-                                var geometry = entity.geometry(context.graph());
-                                var removed = preset.unsetTags(tags, geometry);
-                                for (var k in tags) {
-                                    tags[k] = removed[k];  // set removed tags to `undefined`
-                                }
-                                tags = d.suggestion.setTags(tags, geometry);
-                                utilGetSetValue(input, tags.name);
-                                dispatch.call('change', this, tags);
-                            })
-                            .on('cancel', function() {
-                                // user hit escape, remove whatever is after the '-'
-                                var name = utilGetSetValue(input);
-                                name = name.split('-', 2)[0].trim();
-                                utilGetSetValue(input, name);
-                                dispatch.call('change', this, { name: name });
-                            })
+                            .on('accept', acceptBrand)
+                            .on('cancel', cancelBrand)
                         );
                 }
             }
@@ -214,6 +198,68 @@ export function uiFieldLocalized(field, context) {
             .classed('disabled', !!_isLocked)
             .attr('readonly', _isLocked || null);
 
+
+        // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
+        // (This can happen if the user actives the combo, arrows down, and then clicks off to blur)
+        // So compare the current field value against the suggestions one last time.
+        function checkBrandOnBlur() {
+            var latest = context.hasEntity(_entity.id);
+            if (!latest) return;   // deleting the entity blurred the field?
+
+            var preset = context.presets().match(latest, context.graph());
+            if (preset && preset.suggestion) return;   // already accepted
+
+            // note: here we are testing against "decorated" names, i.e. 'Starbucks – Cafe'
+            var name = utilGetSetValue(input).trim();
+            var matched = allSuggestions.filter(function(s) { return name === s.name(); });
+
+            if (matched.length === 1) {
+                acceptBrand({ suggestion: matched[0] });
+            } else {
+                cancelBrand();
+            }
+        }
+
+
+        function acceptBrand(d) {
+            if (!d) {
+                cancelBrand();
+                return;
+            }
+
+            var entity = context.entity(_entity.id);  // get latest
+            var tags = entity.tags;
+            var geometry = entity.geometry(context.graph());
+            var removed = preset.unsetTags(tags, geometry);
+            for (var k in tags) {
+                tags[k] = removed[k];  // set removed tags to `undefined`
+            }
+            tags = d.suggestion.setTags(tags, geometry);
+            utilGetSetValue(input, tags.name);
+            dispatch.call('change', this, tags);
+        }
+
+
+        // user hit escape, clean whatever preset name appears after the last ' – '
+        function cancelBrand() {
+            var name = utilGetSetValue(input);
+            var clean = cleanName(name);
+            if (clean !== name) {
+                utilGetSetValue(input, clean);
+                dispatch.call('change', this, { name: clean });
+            }
+        }
+
+        // Remove whatever is after the last ' – '
+        // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+        function cleanName(name) {
+            var parts = name.split(' – ');
+            if (parts.length > 1) {
+                parts.pop();
+                name = parts.join(' – ');
+            }
+            return name;
+        }
 
 
         function fetchBrandNames(preset, suggestions) {

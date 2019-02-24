@@ -3,6 +3,7 @@ import _forEach from 'lodash-es/forEach';
 
 import { json as d3_json } from 'd3-request';
 
+import { utilDetect } from '../util/detect';
 import { utilQsString } from '../util';
 
 
@@ -65,6 +66,7 @@ export default {
         if (!entity.claims[property]) return undefined;
         var locale = _localeIDs[langCode];
         var preferredPick, localePick;
+
         _forEach(entity.claims[property], function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
@@ -77,8 +79,8 @@ export default {
                 localePick = stmt;
             }
         });
-        var result = localePick || preferredPick;
 
+        var result = localePick || preferredPick;
         if (result) {
             var datavalue = result.mainsnak.datavalue;
             return datavalue.type === 'wikibase-entityid' ? datavalue.value.id : datavalue.value;
@@ -95,6 +97,7 @@ export default {
      */
     monolingualClaimToValueObj: function(entity, property) {
         if (!entity || !entity.claims[property]) return undefined;
+
         return entity.claims[property].reduce(function(acc, obj) {
             var value = obj.mainsnak.datavalue.value;
             acc[value.language] = value.text;
@@ -104,18 +107,28 @@ export default {
 
 
     toSitelink: function(key, value) {
-        var result = value ? 'Tag:' + key + '=' + value : 'Key:' + key;
+        var result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
     },
 
 
+    //
+    // Pass params object of the form:
+    // {
+    //   key: 'string',
+    //   value: 'string',
+    //   rtype: 'string',
+    //   langCode: 'string'
+    // }
+    //
     getEntity: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
-        var self = this;
+        var that = this;
         var titles = [];
         var result = {};
-        var keySitelink = this.toSitelink(params.key);
-        var tagSitelink = params.value ? this.toSitelink(params.key, params.value) : false;
+        var rtypeSitelink = params.rtype ? ('Relation:' + params.rtype).replace(/_/g, ' ').trim() : false;
+        var keySitelink = params.key ? this.toSitelink(params.key) : false;
+        var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
         var localeSitelink;
 
         if (params.langCode && _localeIDs[params.langCode] === undefined) {
@@ -126,10 +139,20 @@ export default {
             titles.push(localeSitelink);
         }
 
-        if (_wikibaseCache[keySitelink]) {
-            result.key = _wikibaseCache[keySitelink];
-        } else {
-            titles.push(keySitelink);
+        if (rtypeSitelink) {
+            if (_wikibaseCache[rtypeSitelink]) {
+                result.rtype = _wikibaseCache[rtypeSitelink];
+            } else {
+                titles.push(rtypeSitelink);
+            }
+        }
+
+        if (keySitelink) {
+            if (_wikibaseCache[keySitelink]) {
+                result.key = _wikibaseCache[keySitelink];
+            } else {
+                titles.push(keySitelink);
+            }
         }
 
         if (tagSitelink) {
@@ -173,11 +196,15 @@ export default {
                 var localeID = false;
                 _forEach(d.entities, function(res) {
                     if (res.missing !== '') {
-                        var title = res.sitelinks.wiki.title;
                         // Simplify access to the localized values
                         res.description = localizedToString(res.descriptions, params.langCode);
                         res.label = localizedToString(res.labels, params.langCode);
-                        if (title === keySitelink) {
+
+                        var title = res.sitelinks.wiki.title;
+                        if (title === rtypeSitelink) {
+                            _wikibaseCache[rtypeSitelink] = res;
+                            result.rtype = res;
+                        } else if (title === keySitelink) {
                             _wikibaseCache[keySitelink] = res;
                             result.key = res;
                         } else if (title === tagSitelink) {
@@ -193,10 +220,114 @@ export default {
 
                 if (localeSitelink) {
                     // If locale ID is not found, store false to prevent repeated queries
-                    self.addLocale(params.langCode, localeID);
+                    that.addLocale(params.langCode, localeID);
                 }
 
                 callback(null, result);
+            }
+        });
+    },
+
+
+    //
+    // Pass params object of the form:
+    // {
+    //   key: 'string',     // required
+    //   value: 'string'    // optional
+    // }
+    //   -or-
+    // {
+    //   rtype: 'rtype'     // relation type  (e.g. 'multipolygon')
+    // }
+    //
+    // Get an result object used to display tag documentation
+    // {
+    //   title:        'string',
+    //   description:  'string',
+    //   editURL:      'string',
+    //   imageURL:     'string',
+    //   wiki:         { title: 'string', text: 'string', url: 'string' }
+    // }
+    //
+    getDocs: function(params, callback) {
+        var that = this;
+        var langCode = utilDetect().locale.toLowerCase();
+        params.langCode = langCode;
+
+        this.getEntity(params, function(err, data) {
+            if (err) {
+                callback(err);
+                return;
+            }
+
+            var entity = data.rtype || data.tag || data.key;
+            if (!entity) {
+                callback('No entity');
+                return;
+            }
+
+            // prepare result
+            var result = {
+                title: entity.title,
+                description: entity.description,
+                editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title
+            };
+
+            // add image
+            if (entity.claims) {
+                var imageroot;
+                var image = that.claimToValue(entity, 'P4', langCode);
+                if (image) {
+                    imageroot = 'https://commons.wikimedia.org/w/index.php';
+                } else {
+                    image = that.claimToValue(entity, 'P28', langCode);
+                    if (image) {
+                        imageroot = 'https://wiki.openstreetmap.org/w/index.php';
+                    }
+                }
+                if (imageroot && image) {
+                    result.imageURL = imageroot + '?' + utilQsString({
+                        title: 'Special:Redirect/file/' + image,
+                        width: 400
+                    });
+                }
+            }
+
+            // Try to get a wiki page from tag data item first, followed by the corresponding key data item.
+            // If neither tag nor key data item contain a wiki page in the needed language nor English,
+            // get the first found wiki page from either the tag or the key item.
+            var rtypeWiki = that.monolingualClaimToValueObj(data.rtype, 'P31');
+            var tagWiki = that.monolingualClaimToValueObj(data.tag, 'P31');
+            var keyWiki = that.monolingualClaimToValueObj(data.key, 'P31');
+
+            // If exact language code does not exist, try to find the first part before the '-'
+            // BUG: in some cases, a more elaborate fallback logic might be needed
+            var langPrefix = langCode.split('-', 2)[0];
+
+            // use the first acceptable wiki page
+            result.wiki =
+                getWikiInfo(rtypeWiki, langCode, 'inspector.wiki_reference') ||
+                getWikiInfo(rtypeWiki, langPrefix, 'inspector.wiki_reference') ||
+                getWikiInfo(rtypeWiki, 'en', 'inspector.wiki_en_reference') ||
+                getWikiInfo(tagWiki, langCode, 'inspector.wiki_reference') ||
+                getWikiInfo(tagWiki, langPrefix, 'inspector.wiki_reference') ||
+                getWikiInfo(tagWiki, 'en', 'inspector.wiki_en_reference') ||
+                getWikiInfo(keyWiki, langCode, 'inspector.wiki_reference') ||
+                getWikiInfo(keyWiki, langPrefix, 'inspector.wiki_reference') ||
+                getWikiInfo(keyWiki, 'en', 'inspector.wiki_en_reference');
+
+            callback(null, result);
+
+
+            // Helper method to get wiki info if a given language exists
+            function getWikiInfo(wiki, langCode, tKey) {
+                if (wiki && wiki[langCode]) {
+                    return {
+                        title: wiki[langCode],
+                        text: tKey,
+                        url: 'https://wiki.openstreetmap.org/wiki/' + wiki[langCode]
+                    };
+                }
             }
         });
     },
@@ -206,6 +337,7 @@ export default {
         // Makes it easier to unit test
         _localeIDs[langCode] = qid;
     },
+
 
     apibase: function(val) {
         if (!arguments.length) return apibase;

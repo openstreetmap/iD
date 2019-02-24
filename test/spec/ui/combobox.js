@@ -18,7 +18,7 @@ describe('uiCombobox', function() {
         iD.d3.customEvent(happen.makeEvent({
             type: 'keydown',
             keyCode: keyCode
-        }), input.on('keydown.combobox'));
+        }), input.on('keydown.combo-input'));
 
         switch (key) {
             case '⇥':
@@ -80,7 +80,7 @@ describe('uiCombobox', function() {
 
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combobox'));
+        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combo-input'));
     }
 
     it('adds the combobox-input class', function() {
@@ -105,7 +105,7 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal('Baz');
     });
 
-    it('shows all entries when clicking on the caret', function() {
+    it('shows all entries when activating the combo', function() {
         input.property('value', 'foobar').call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
@@ -238,6 +238,7 @@ describe('uiCombobox', function() {
     it('emits accepted event with selected datum on ⇥', function(done) {
         combobox.on('accept', function(d) {
             expect(d).to.eql({title: 'bar', value: 'bar'});
+            combobox.on('accept', null);
             done();
         });
         input.call(combobox.data(data));
@@ -249,6 +250,7 @@ describe('uiCombobox', function() {
     it('emits accepted event with selected datum on ↩', function(done) {
         combobox.on('accept', function(d) {
             expect(d).to.eql({title: 'bar', value: 'bar'});
+            combobox.on('accept', null);
             done();
         });
         input.call(combobox.data(data));
@@ -257,15 +259,15 @@ describe('uiCombobox', function() {
         simulateKeypress('↩');
     });
 
-    it('emits cancel event with selected datum on ⎋', function(done) {
-        combobox.on('cancel', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            done();
-        });
+    it('emits cancel event on ⎋', function() {
+        var spy = sinon.spy();
+        combobox.on('cancel', spy);
+
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⎋');
+        expect(spy).to.have.been.calledOnce;
     });
 
     it('hides on ↩', function() {

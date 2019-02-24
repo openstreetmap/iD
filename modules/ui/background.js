@@ -17,6 +17,7 @@ import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
+import { uiIssues } from './issues';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
@@ -27,6 +28,8 @@ import { tooltip } from '../util/tooltip';
 
 export function uiBackground(context) {
     var key = t('background.key');
+
+    var _pane = d3_select(null), _toggleButton = d3_select(null);
 
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
@@ -78,7 +81,7 @@ export function uiBackground(context) {
             return context.background().showsLayer(d);
         }
 
-        selection.selectAll('.layer')
+        selection.selectAll('li')
             .classed('active', active)
             .classed('switch', function(d) { return d === _previousBackground; })
             .call(setTooltips)
@@ -133,7 +136,7 @@ export function uiBackground(context) {
             .sources(context.map().extent())
             .filter(filter);
 
-        var layerLinks = layerList.selectAll('li.layer')
+        var layerLinks = layerList.selectAll('li')
             .data(sources, function(d) { return d.name(); });
 
         layerLinks.exit()
@@ -141,7 +144,6 @@ export function uiBackground(context) {
 
         var enter = layerLinks.enter()
             .append('li')
-            .attr('class', 'layer')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
@@ -179,9 +181,9 @@ export function uiBackground(context) {
             .text(function(d) { return d.name(); });
 
 
-        layerList.selectAll('li.layer')
+        layerList.selectAll('li')
             .sort(sortSources)
-            .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
 
         layerList
             .call(updateLayerSelections);
@@ -215,7 +217,7 @@ export function uiBackground(context) {
             .append('ul')
             .attr('class', 'layer-list minimap-toggle-list')
             .append('li')
-            .attr('class', 'layer minimap-toggle-item');
+            .attr('class', 'minimap-toggle-item');
 
         var minimapLabelEnter = minimapEnter
             .append('label')
@@ -251,6 +253,8 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
+
+        updateBackgroundList();
     }
 
 
@@ -263,15 +267,30 @@ export function uiBackground(context) {
             .attr('class', 'layer-list layer-overlay-list')
             .attr('dir', 'auto')
             .merge(container);
+
+        updateOverlayList();
+    }
+
+    function updateBackgroundList() {
+        _backgroundList
+            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
+    }
+
+    function updateOverlayList() {
+        _overlayList
+            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
 
 
     function update() {
-        _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
 
-        _overlayList
-            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
+        if (!_pane.select('.disclosure-wrap-background_list').classed('hide')) {
+            updateBackgroundList();
+        }
+
+        if (!_pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
+            updateOverlayList();
+        }
 
         _displayOptionsContainer
             .call(backgroundDisplayOptions);
@@ -291,69 +310,71 @@ export function uiBackground(context) {
         }
     }
 
+    var paneTooltip = tooltip()
+        .placement((textDirection === 'rtl') ? 'right' : 'left')
+        .html(true)
+        .title(uiTooltipHtml(t('background.description'), key));
 
-    function background(selection) {
+    uiBackground.togglePane = function() {
+        if (d3_event) d3_event.preventDefault();
+        paneTooltip.hide(_toggleButton);
+        uiBackground.setVisible(!_toggleButton.classed('active'));
+    };
 
-        function hidePane() {
-            setVisible(false);
-        }
+    uiBackground.hidePane = function() {
+        uiBackground.setVisible(false);
+    };
 
-        function togglePane() {
-            if (d3_event) d3_event.preventDefault();
-            paneTooltip.hide(button);
-            setVisible(!button.classed('active'));
-        }
+    uiBackground.setVisible = function(show) {
+        if (show !== _shown) {
+            _toggleButton.classed('active', show);
+            _shown = show;
 
-        function setVisible(show) {
-            if (show !== _shown) {
-                button.classed('active', show);
-                _shown = show;
+            if (show) {
+                uiHelp.hidePane();
+                uiIssues.hidePane();
+                uiMapData.hidePane();
+                update();
 
-                if (show) {
-                    uiMapData.hidePane();
-                    uiHelp.hidePane();
-                    update();
+                _pane
+                    .style('display', 'block')
+                    .style('right', '-300px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '0px');
 
-                    pane
-                        .style('display', 'block')
-                        .style('right', '-300px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '0px');
-
-                } else {
-                    pane
-                        .style('display', 'block')
-                        .style('right', '0px')
-                        .transition()
-                        .duration(200)
-                        .style('right', '-300px')
-                        .on('end', function() {
-                            d3_select(this).style('display', 'none');
-                        });
-                }
+            } else {
+                _pane
+                    .style('display', 'block')
+                    .style('right', '0px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '-300px')
+                    .on('end', function() {
+                        d3_select(this).style('display', 'none');
+                    });
             }
         }
+    };
 
+    uiBackground.renderToggleButton = function(selection) {
 
-        var pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane hide');
-
-        var paneTooltip = tooltip()
-            .placement((textDirection === 'rtl') ? 'right' : 'left')
-            .html(true)
-            .title(uiTooltipHtml(t('background.description'), key));
-
-        var button = selection
+        _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', togglePane)
+            .on('click', uiBackground.togglePane)
             .call(svgIcon('#iD-icon-layers', 'light'))
             .call(paneTooltip);
+    };
+
+    uiBackground.renderPane = function(selection) {
+
+        _pane = selection
+            .append('div')
+            .attr('class', 'fillL map-pane background-pane hide');
 
 
-        var heading = pane
+        var heading = _pane
             .append('div')
             .attr('class', 'pane-heading');
 
@@ -363,11 +384,11 @@ export function uiBackground(context) {
 
         heading
             .append('button')
-            .on('click', function() { uiBackground.hidePane(); })
+            .on('click', uiBackground.hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 
-        var content = pane
+        var content = _pane
             .append('div')
             .attr('class', 'pane-content');
 
@@ -411,13 +432,9 @@ export function uiBackground(context) {
         update();
 
         context.keybinding()
-            .on(key, togglePane)
+            .on(key, uiBackground.togglePane)
             .on(uiCmd('⌘' + key), quickSwitch);
+    };
 
-        uiBackground.hidePane = hidePane;
-        uiBackground.togglePane = togglePane;
-        uiBackground.setVisible = setVisible;
-    }
-
-    return background;
+    return uiBackground;
 }

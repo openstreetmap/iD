@@ -9,7 +9,8 @@
         "fee"
     ],
     "moreFields": [
-        "payment_multi"
+        "payment_multi",
+        "covered"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,5 @@
 {
-    "icon": "iD-ferry-line",
+    "icon": "maki-ferry",
     "geometry": [
         "line"
     ],
@@ -7,8 +7,8 @@
         "name",
         "operator",
         "duration",
-        "access", 
-        "to", 
+        "access",
+        "to",
         "from"
     ],
     "tags": {

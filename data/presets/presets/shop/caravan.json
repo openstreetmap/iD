@@ -1,5 +1,5 @@
 {
-    "icon": "maki-car",
+    "icon": "temaki-rv_park",
     "fields": [
         "name",
         "brand",
@@ -11,11 +11,13 @@
         "point",
         "area"
     ],
-    "terms": [
-        "auto"
-    ],
     "tags": {
         "shop": "caravan"
     },
+    "terms": [
+        "auto",
+        "camper",
+        "recreational vehicle"
+    ],
     "name": "RV Dealership"
 }

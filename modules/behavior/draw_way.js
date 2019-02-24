@@ -1,30 +1,28 @@
-import { t } from '../util/locale';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import {
-    actionAddMidpoint,
-    actionMoveNode,
-    actionNoop
-} from '../actions';
-
+import { t } from '../util/locale';
+import { actionAddMidpoint, actionMoveNode, actionNoop } from '../actions';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 import { utilKeybinding } from '../util';
 
+export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph) {
 
-export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
-    var origWay = context.entity(wayId);
+    var origWay = context.entity(wayID);
+
     var annotation = t((origWay.isDegenerate() ?
         'operations.start.annotation.' :
-        'operations.continue.annotation.') + context.geometry(wayId)
+        'operations.continue.annotation.') + context.geometry(wayID)
     );
+
     var behavior = behaviorDraw(context);
+    behavior.hover().initialNodeId(index ? origWay.nodes[index] : origWay.nodes[origWay.nodes.length - 1]);
+
     var _tempEdits = 0;
 
     var end = osmNode({ loc: context.map().mouseCoordinates() });
@@ -66,6 +64,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     }
 
 
+    function allowsVertex(d) {
+        return context.presets().allowsVertex(d, context.graph());
+    }
+
+
     // related code
     // - `mode/drag_node.js`     `doMode()`
     // - `behavior/draw.js`      `click()`
@@ -73,7 +76,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     function move(datum) {
         context.surface().classed('nope-disabled', d3_event.altKey);
 
-        var targetLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
+        var targetLoc = datum && datum.properties && datum.properties.entity && allowsVertex(datum.properties.entity) && datum.properties.entity.loc;
         var targetNodes = datum && datum.properties && datum.properties.nodes;
         var loc = context.map().mouseCoordinates();
 
@@ -117,7 +120,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+
+            var nodes = graph.childNodes(parent);
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
@@ -143,14 +147,17 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     function undone() {
         // Undo popped the history back to the initial annotated no-op edit.
-        // Remove initial no-op edit and whatever edit happened immediately before it.
-        context.pop(2);
-        _tempEdits = 0;
+        _tempEdits = 0;     // We will deal with the temp edits here
+        context.pop(1);     // Remove initial no-op edit
 
-        if (context.hasEntity(wayId)) {
-            context.enter(mode);
+        if (context.graph() === baselineGraph) {    // We've undone back to the beginning
+            // baselineGraph may be behind startGraph if this way was added rather than continued
+            resetContextGraphToStartGraph();
+            context.enter(modeSelect(context, [wayID]));
         } else {
-            context.enter(modeBrowse(context));
+            // Remove whatever segment was drawn previously and continue drawing
+            context.pop(1);
+            context.enter(mode);
         }
     }
 
@@ -187,6 +194,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             .on('undone.draw', undone);
     };
 
+    function resetContextGraphToStartGraph() {
+        while (context.graph() !== startGraph) {
+            context.pop();
+        }
+    }
 
     drawWay.off = function(surface) {
         // Drawing was interrupted unexpectedly.
@@ -194,9 +206,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         // clicks geolocate button, a hashchange event occurs, etc.
         if (_tempEdits) {
             context.pop(_tempEdits);
-            while (context.graph() !== startGraph) {
-                context.pop();
-            }
+            resetContextGraphToStartGraph();
         }
 
         context.map()
@@ -308,7 +318,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        var way = context.hasEntity(wayId);
+        var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
             return;
@@ -317,8 +327,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
         }, 1000);
-
-        context.enter(modeSelect(context, [wayId]).newFeature(true));
+        var isNewFeature = !mode.isContinuing;
+        context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
+        if (isNewFeature) {
+            context.validator().validate();
+        }
     };
 
 
@@ -327,9 +340,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        while (context.graph() !== startGraph) {
-            context.pop();
-        }
+        resetContextGraphToStartGraph();
 
         window.setTimeout(function() {
             context.map().dblclickEnable(true);

@@ -1,11 +1,11 @@
-describe('iD.Context', function() {
+describe('iD.coreContext', function() {
     var assets = {
         'iD/img/loader.gif': '/assets/iD/img/loader-b66184b5c4afbccc25f.gif'
     };
 
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
-            var context = iD.Context();
+            var context = iD.coreContext();
             expect(context.assetPath()).to.eql('');
 
             context.assetPath('iD/');
@@ -15,7 +15,7 @@ describe('iD.Context', function() {
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
-            var context = iD.Context();
+            var context = iD.coreContext();
             expect(context.assetMap()).to.eql({});
 
             context.assetMap(assets);
@@ -26,7 +26,7 @@ describe('iD.Context', function() {
     describe('#asset', function() {
         var context;
         beforeEach(function() {
-            context = iD.Context().assetPath('iD/').assetMap(assets);
+            context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -40,7 +40,7 @@ describe('iD.Context', function() {
     describe('#imagePath', function() {
         var context;
         beforeEach(function() {
-            context = iD.Context().assetPath('iD/').assetMap(assets);
+            context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -53,7 +53,7 @@ describe('iD.Context', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD.Context(),
+            var context = iD.coreContext(),
                 flags = {
                     tile: false,
                     collision: false,

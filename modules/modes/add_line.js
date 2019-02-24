@@ -37,7 +37,7 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
     }
 
 
@@ -53,7 +53,7 @@ export function modeAddLine(context) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
     }
 
 
@@ -66,7 +66,7 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph, context.graph()));
     }
 
 

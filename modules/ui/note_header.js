@@ -35,7 +35,7 @@ export function uiNoteHeader() {
             iconEnter
                 .append('div')
                 .attr('class', 'note-icon-annotation')
-                .call(svgIcon(statusIcon, 'note-annotation'));
+                .call(svgIcon(statusIcon, 'icon-annotation'));
         });
 
         headerEnter

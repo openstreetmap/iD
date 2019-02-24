@@ -3,37 +3,23 @@ import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
-import _reduce from 'lodash-es/reduce';
-import _forEach from 'lodash-es/forEach';
-import _uniqBy from 'lodash-es/uniqBy';
 
 export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
 
-        var changes = context.history().changes();
-        var validations = context.history().validate(changes);
+        var issuesBySeverity = {
+            warning: context.validator().getWarnings(),
+            error: context.validator().getErrors()
+        };
 
-        validations = _reduce(validations, function(validations, val) {
-            var severity = val.severity;
-            if (validations.hasOwnProperty(severity)) {
-                validations[severity].push(val);
-            } else {
-                validations[severity] = [val];
-            }
-            return validations;
-        }, {});
-
-        _forEach(validations, function(instances, type) {
-            instances = _uniqBy(instances, function(val) {
-                return val.entity || (val.id + '_' + val.message.replace(/\s+/g,''));
-            });
-
-            var section = type + '-section';
-            var instanceItem = type + '-item';
+        for (var severity in issuesBySeverity) {
+            var issues = issuesBySeverity[severity];
+            var section = severity + '-section';
+            var issueItem = severity + '-item';
 
             var container = selection.selectAll('.' + section)
-                .data(instances.length ? [0] : []);
+                .data(issues.length ? [0] : []);
 
             container.exit()
                 .remove();
@@ -44,7 +30,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .text(type === 'warning' ? t('commit.warnings') : t('commit.errors'));
+                .text(severity === 'warning' ? t('commit.warnings') : t('commit.errors'));
 
             containerEnter
                 .append('ul')
@@ -55,14 +41,14 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(instances);
+                .data(issues, function(d) { return d.id(); });
 
             items.exit()
                 .remove();
 
             var itemsEnter = items.enter()
                 .append('li')
-                .attr('class', instanceItem);
+                .attr('class', issueItem);
 
             itemsEnter
                 .call(svgIcon('#iD-icon-alert', 'pre-text'));
@@ -80,34 +66,32 @@ export function uiCommitWarnings(context) {
             items = itemsEnter
                 .merge(items);
 
+
             items
-                .on('mouseover', mouseover)
-                .on('mouseout', mouseout)
-                .on('click', warningClick);
-
-
-            function mouseover(d) {
-                if (d.entity) {
-                    context.surface().selectAll(
-                        utilEntityOrMemberSelector([d.entity.id], context.graph())
-                    ).classed('hover', true);
-                }
-            }
-
-
-            function mouseout() {
-                context.surface().selectAll('.hover')
-                    .classed('hover', false);
-            }
-
-
-            function warningClick(d) {
-                if (d.entity) {
-                    context.map().zoomTo(d.entity);
-                    context.enter(modeSelect(context, [d.entity.id]));
-                }
-            }
-        });
+                .on('mouseover', function(d) {
+                    if (d.entities) {
+                        context.surface().selectAll(
+                            utilEntityOrMemberSelector(
+                                d.entities.map(function(e) { return e.id; }),
+                                context.graph()
+                            )
+                        ).classed('hover', true);
+                    }
+                })
+                .on('mouseout', function() {
+                    context.surface().selectAll('.hover')
+                        .classed('hover', false);
+                })
+                .on('click', function(d) {
+                    if (d.entities && d.entities.length > 0) {
+                        context.map().zoomTo(d.entities[0]);
+                        context.enter(modeSelect(
+                            context,
+                            d.entities.map(function(e) { return e.id; })
+                        ));
+                    }
+                });
+        }
     }
 
 

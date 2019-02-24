@@ -1,5 +1,9 @@
 {
-    "icon": "maki-horse-riding",
+    "icon": "temaki-amusement_park",
+    "fields": [
+        "{attraction}",
+        "building_area"
+    ],
     "geometry": [
         "point",
         "area"

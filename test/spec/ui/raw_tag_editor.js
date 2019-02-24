@@ -15,8 +15,8 @@ describe('iD.uiRawTagEditor', function() {
     }
 
     beforeEach(function () {
-        entity = iD.Node({id: 'n12345'});
-        context = iD.Context();
+        entity = iD.osmNode({id: 'n12345'});
+        context = iD.coreContext();
         context.history().merge([entity]);
         render({highway: 'residential'});
     });
@@ -53,7 +53,7 @@ describe('iD.uiRawTagEditor', function() {
             expect(tags).to.eql({highway: undefined});
             done();
         });
-        iD.utilTriggerEvent(element.selectAll('button.remove'), 'click');
+        iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown');
     });
 
     it('adds tags when pressing the TAB key on last input.value', function (done) {

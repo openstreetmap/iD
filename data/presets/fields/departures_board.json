@@ -1,0 +1,13 @@
+{
+    "key": "departures_board",
+    "type": "combo",
+    "label": "Departures Board",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "timetable": "Timetable",
+            "realtime": "Realtime",
+            "no": "None"
+        }
+    }
+}

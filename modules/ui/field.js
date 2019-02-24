@@ -69,6 +69,14 @@ export function uiField(context, presetField, entity, options) {
 
     function isPresent() {
         return _some(field.keys, function(key) {
+            if (field.type === 'multiCombo') {
+                for (var tagKey in _tags) {
+                    if (tagKey.indexOf(key) === 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
             return _tags[key] !== undefined;
         });
     }

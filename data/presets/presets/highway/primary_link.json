@@ -15,6 +15,7 @@
         "cycleway",
         "destination/symbol_oneway",
         "junction/ref_oneway",
+        "junction_line",
         "lit",
         "maxheight",
         "maxspeed/advisory",

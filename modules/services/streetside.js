@@ -750,7 +750,7 @@ export default {
             .classed('hide', true);
 
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')
-            .classed('selected', false);
+            .classed('currentView', false);
 
         return this.setStyles(null, true);
     },
@@ -925,19 +925,19 @@ export default {
     },
 
 
-    /**
-     * setStyles().
-     */
+    // Updates the currently highlighted sequence and selected bubble.
+    // Reset is only necessary when interacting with the viewport because
+    // this implicitly changes the currently selected bubble/sequence
     setStyles: function (hovered, reset) {
         if (reset) {  // reset all layers
             d3_selectAll('.viewfield-group')
                 .classed('highlighted', false)
                 .classed('hovered', false)
-                .classed('selected', false);
+                .classed('currentView', false);
 
             d3_selectAll('.sequence')
                 .classed('highlighted', false)
-                .classed('selected', false);
+                .classed('currentView', false);
         }
 
         var hoveredBubbleKey = hovered && hovered.key;
@@ -958,11 +958,11 @@ export default {
         d3_selectAll('.layer-streetside-images .viewfield-group')
             .classed('highlighted', function (d) { return highlightedBubbleKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function (d) { return d.key === hoveredBubbleKey; })
-            .classed('selected', function (d) { return d.key === selectedBubbleKey; });
+            .classed('currentView', function (d) { return d.key === selectedBubbleKey; });
 
         d3_selectAll('.layer-streetside-images .sequence')
             .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('selected', function (d) { return d.properties.key === selectedSequenceKey; });
+            .classed('currentView', function (d) { return d.properties.key === selectedSequenceKey; });
 
         // update viewfields if needed
         d3_selectAll('.viewfield-group .viewfield')

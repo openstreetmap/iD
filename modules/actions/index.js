@@ -13,7 +13,6 @@ export { actionDeleteMultiple } from './delete_multiple';
 export { actionDeleteNode } from './delete_node';
 export { actionDeleteRelation } from './delete_relation';
 export { actionDeleteWay } from './delete_way';
-export { actionDeprecateTags } from './deprecate_tags';
 export { actionDiscardTags } from './discard_tags';
 export { actionDisconnect } from './disconnect';
 export { actionJoin } from './join';

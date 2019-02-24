@@ -31,10 +31,10 @@ path.stroke.tag-leisure-track,
 path.stroke.tag-leisure-golf_course,
 path.stroke.tag-leisure-garden,
 path.stroke.tag-leisure-park,
-path.stroke.tag-barrier-hedge,
 path.stroke.tag-landuse-forest,
 path.stroke.tag-landuse-wood,
-path.stroke.tag-landuse-grass {
+path.stroke.tag-landuse-grass,
+path.stroke.tag-barrier-hedge {
     stroke: rgb(140, 208, 95);
 }
 path.fill.tag-landuse,
@@ -47,7 +47,8 @@ path.fill.tag-leisure-garden,
 path.fill.tag-leisure-park,
 path.fill.tag-landuse-forest,
 path.fill.tag-natural-wood,
-path.fill.tag-landuse-grass {
+path.fill.tag-landuse-grass,
+path.fill.tag-barrier-hedge {
     stroke: rgba(140, 208, 95, 0.3);
     fill: rgba(140, 208, 95, 0.3);
 }
@@ -83,8 +84,6 @@ path.stroke.tag-landuse-aquaculture,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-harbour,
 path.stroke.tag-landuse-reservoir,
-path.stroke.tag-man_made-groyne,
-path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
@@ -171,7 +170,7 @@ path.fill.tag-amenity-university {
 
 /* Gold things */
 path.stroke.tag-landuse-residential,
-path.stroke.tag-landuse-construction {
+path.stroke.tag-status-construction {
     stroke: rgb(196, 189, 25);
 }
 path.fill.tag-landuse-residential {
@@ -179,7 +178,7 @@ path.fill.tag-landuse-residential {
     fill: rgba(196, 189, 25, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-residential,
-.preset-icon-fill-area.tag-landuse-construction {
+.preset-icon-fill-area.tag-status-construction {
     border-color: rgb(196, 189, 25);
     background: rgba(196, 189, 25, 0.3);
 }
@@ -298,31 +297,41 @@ path.fill.tag-landuse-farmyard {
 
 /* Dark Gray things */
 path.stroke.tag-amenity-parking,
+path.stroke.tag-landuse-railway,
+path.stroke.tag-landuse-quarry,
 path.stroke.tag-leisure-pitch.tag-sport-basketball,
 path.stroke.tag-leisure-pitch.tag-sport-skateboard,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-bare_rock,
 path.stroke.tag-natural-scree,
-path.stroke.tag-landuse-railway,
-path.stroke.tag-landuse-quarry {
+path.stroke.tag-waterway-dam,
+path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
 }
 path.fill.tag-amenity-parking,
+path.fill.tag-landuse-railway,
+path.fill.tag-landuse-quarry,
 path.fill.tag-leisure-pitch.tag-sport-basketball,
 path.fill.tag-leisure-pitch.tag-sport-skateboard,
+path.fill.tag-man_made-groyne,
+path.fill.tag-man_made-breakwater,
 path.fill.tag-natural-bare_rock,
 path.fill.tag-natural-scree,
-path.fill.tag-landuse-railway,
-path.fill.tag-landuse-quarry {
+path.fill.tag-waterway-dam,
+path.fill.tag-waterway-weir {
     stroke: rgba(140, 140, 140, 0.5);
     fill: rgba(140, 140, 140, 0.5);
 }
 .preset-icon-fill-area.tag-amenity-parking,
+.preset-icon-fill-area.tag-landuse-railway,
+.preset-icon-fill-area.tag-landuse-quarry,
 .preset-icon-fill-area.tag-leisure-pitch.tag-sport-basketball,
 .preset-icon-fill-area.tag-leisure-pitch.tag-sport-skateboard,
 .preset-icon-fill-area.tag-natural-bare_rock,
 .preset-icon-fill-area.tag-natural-scree,
-.preset-icon-fill-area.tag-landuse-railway,
-.preset-icon-fill-area.tag-landuse-quarry {
+.preset-icon-fill-area.tag-waterway-dam,
+.preset-icon-fill-area.tag-waterway-weir {
     border-color: rgb(170, 170, 170);
     background-color: rgba(140, 140, 140, 0.5);
 }

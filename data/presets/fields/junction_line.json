@@ -1,0 +1,12 @@
+{
+    "key": "junction",
+    "type": "combo",
+    "label": "Junction",
+    "strings": {
+        "options": {
+            "roundabout": "Roundabout",
+            "circular": "Traffic Circle",
+            "jughandle": "Jughandle"
+        }
+    }
+}

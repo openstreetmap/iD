@@ -269,12 +269,6 @@
             },
             "rail": {
                 "tooltip": "இரயில்வே"
-            },
-            "past_future": {
-                "description": "கடந்த கால / எதிர்கால"
-            },
-            "others": {
-                "description": "பிற"
             }
         },
         "area_fill": {
@@ -313,10 +307,6 @@
         },
         "tag_reference": {
             "description": "விளக்கம்"
-        },
-        "validations": {
-            "untagged_area": "குறிக்கப்படாதப் பகுதி",
-            "untagged_relation": "குறிக்கப்படாதத் தொடர்பு"
         },
         "note": {
             "note": "குறிப்பு",
@@ -494,9 +484,6 @@
                 },
                 "category-building": {
                     "name": "கட்டிடம் அம்சங்கள்"
-                },
-                "category-golf": {
-                    "name": "குழிப்பந்தாட்ட அம்சங்கள்"
                 },
                 "category-landuse": {
                     "name": "காணிப் பயன்பாட்டு அம்சங்கள்"
@@ -695,9 +682,6 @@
                         "foot_bath": "கால் நனைப்பு",
                         "hot_spring": "வெந்நீர் ஊற்று"
                     }
-                },
-                "beauty": {
-                    "label": "கடை வகை"
                 },
                 "bench": {
                     "label": "விசுப்பலகை"
@@ -937,15 +921,8 @@
                 "fence_type": {
                     "label": "வகை"
                 },
-                "fire_hydrant/position": {
-                    "options": {
-                        "green": "பச்சை"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "வகை",
                     "options": {
-                        "pond": "குளம்",
                         "underground": "நிலத்துக்குக் கீழ்",
                         "wall": "சுவர்"
                     }
@@ -1554,9 +1531,6 @@
                 "tourism": {
                     "label": "வகை"
                 },
-                "tourism_attraction": {
-                    "label": "சுற்றுலா"
-                },
                 "tower/construction": {
                     "label": "கட்டுமானம்"
                 },
@@ -1651,8 +1625,7 @@
                     "label": "வகை"
                 },
                 "website": {
-                    "label": "இணையதளம்",
-                    "placeholder": "http://example.com/"
+                    "label": "இணையதளம்"
                 },
                 "wetland": {
                     "label": "வகை"
@@ -1797,9 +1770,6 @@
                     "name": "இரவு விடுதி",
                     "terms": "டிஸ்கோ, இரவு விடுதி, ஆட்டம்"
                 },
-                "amenity/pharmacy": {
-                    "name": "மருந்தகம்"
-                },
                 "amenity/place_of_worship": {
                     "name": "வழிபாட்டு இடம்",
                     "terms": "பாசிலிகா, சேப்பல், கிறத்தவ ஆலயம், கோயில், பள்ளிவாசல், வணக்கத்தலம்"
@@ -1807,16 +1777,9 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "புத்தக் கோயில்"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "தேவாலயம் "
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "இந்துக் கோயில்",
                     "terms": "கோவில், தேவஸ்தானம், மந்திர், சேத்திரம், ஆலயம்"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "பள்ளிவாசல்",
-                    "terms": "முஸ்லிம்"
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "சீக்கியக் கோயில்"
@@ -1956,9 +1919,6 @@
                 "building/temple": {
                     "name": "கோயில் கட்டிடம்"
                 },
-                "building/train_station": {
-                    "name": "தொடருந்து நிலையம்"
-                },
                 "building/transportation": {
                     "name": "போக்குவரத்துக் கட்டிடம்"
                 },
@@ -2069,9 +2029,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "பண்ணை"
-                },
-                "landuse/forest": {
-                    "name": "காடு"
                 },
                 "landuse/grass": {
                     "name": "புல்வெளி"
@@ -2306,15 +2263,6 @@
                 },
                 "power/tower": {
                     "name": "அதிக-மின்னழுத்தக் கோபுரம்"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "பேருந்து நிறுத்தம் / தடம்"
-                },
-                "public_transport/linear_platform_light_rail": {
-                    "name": "இலகு இரயில் நிறுத்தம் / நடைமேடை"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "இரயில் நிறுத்தம் / தடம்"
                 },
                 "public_transport/platform_bus": {
                     "name": "பேருந்து நிறுத்தம்  / தடம்"
@@ -2587,7 +2535,7 @@
                     "name": "ஆறு"
                 },
                 "waterway/riverbank": {
-                    "name": "ஆற்றாங்கரை"
+                    "name": "ஆற்றங்கரை"
                 },
                 "waterway/stream": {
                     "name": "ஓடை"
@@ -2864,9 +2812,6 @@
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap நேபால்"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap இலங்கை"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap தாய்வான் குமூகம்"

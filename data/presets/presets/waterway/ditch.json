@@ -1,8 +1,10 @@
 {
     "icon": "iD-waterway-ditch",
     "fields": [
-        "structure_waterway",
-        "intermittent"
+        "{waterway/drain}"
+    ],
+    "moreFields": [
+        "{waterway/drain}"
     ],
     "geometry": [
         "line"

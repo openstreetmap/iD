@@ -33,7 +33,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 // e.g. during drags or easing.
                 if (context.map().isTransformed()) return;
 
-                layer.selectAll('.viewfield-group.selected')
+                layer.selectAll('.viewfield-group.currentView')
                     .filter(function(d) {
                         return d.pano;
                     })
@@ -64,11 +64,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function hideLayer() {
-        var service = getService();
-        if (service) {
-            service.hideViewer();
-        }
-
         throttledRedraw.cancel();
 
         layer
@@ -164,8 +159,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
+            .on('mouseenter', mouseover)
+            .on('mouseleave', mouseout)
             .on('click', click);
 
         groupsEnter

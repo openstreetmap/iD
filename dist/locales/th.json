@@ -168,9 +168,6 @@
                 "category-building": {
                     "name": "คุณลักษณะอาคาร"
                 },
-                "category-golf": {
-                    "name": "คุณลักษณะกอล์ฟ"
-                },
                 "category-landuse": {
                     "name": "คุณลักษณะที่ดิน"
                 },
@@ -278,9 +275,6 @@
                 },
                 "atm": {
                     "label": "เครื่องรับจ่ายเงินอัตโนมัติ"
-                },
-                "beauty": {
-                    "label": "ประเภทร้านค้า"
                 },
                 "blood_components": {
                     "label": "องค์ประกอบของเลือด",

@@ -7,7 +7,7 @@ import { geoVecAdd, geoVecScale } from '../geo';
 // 1. move all the nodes to a common location
 // 2. `actionConnect` them
 
-export function actionMergeNodes(nodeIDs) {
+export function actionMergeNodes(nodeIDs, loc) {
 
     // If there is a single "interesting" node, use that as the location.
     // Otherwise return the average location of all the nodes.
@@ -31,11 +31,16 @@ export function actionMergeNodes(nodeIDs) {
 
     var action = function(graph) {
         if (nodeIDs.length < 2) return graph;
-        var toLoc = chooseLoc(graph);
+        var toLoc = loc;
+        if (!toLoc) {
+            toLoc = chooseLoc(graph);
+        }
 
         for (var i = 0; i < nodeIDs.length; i++) {
             var node = graph.entity(nodeIDs[i]);
-            graph = graph.replace(node.move(toLoc));
+            if (node.loc !== toLoc) {
+                graph = graph.replace(node.move(toLoc));
+            }
         }
 
         return actionConnect(nodeIDs)(graph);

@@ -10,9 +10,10 @@
         "access"
     ],
     "moreFields": [
-        "maxheight",
         "covered",
+        "lanes",
         "lit",
+        "maxheight",
         "maxspeed/advisory",
         "oneway/bicycle"
     ],

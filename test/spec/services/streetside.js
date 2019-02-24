@@ -1,6 +1,6 @@
 describe('iD.serviceStreetside', function() {
-    var dimensions = [64, 64],
-        context, server, streetside;
+    var dimensions = [64, 64];
+    var context, server, streetside;
 
     before(function() {
         iD.services.streetside = iD.serviceStreetside;
@@ -11,9 +11,9 @@ describe('iD.serviceStreetside', function() {
     });
 
     beforeEach(function() {
-        context = iD.Context().assetPath('../dist/');
+        context = iD.coreContext().assetPath('../dist/');
         context.projection
-            .scale(667544.214430109)  // z14
+            .scale(iD.geoZoomToScale(14))
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
@@ -53,7 +53,7 @@ describe('iD.serviceStreetside', function() {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
-                .scale(10680707.430881744)  // z18
+                .scale(iD.geoZoomToScale(18))
                 .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
                 .clipExtent([[0,0], dimensions]);
 
@@ -84,7 +84,7 @@ describe('iD.serviceStreetside', function() {
 
         it('does not load bubbles around null island', function() {
             context.projection
-                .scale(10680707.430881744)  // z18
+                .scale(iD.geoZoomToScale(18))
                 .translate([0, 0])
                 .clipExtent([[0,0], dimensions]);
 

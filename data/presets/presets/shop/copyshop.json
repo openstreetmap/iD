@@ -1,5 +1,5 @@
 {
-    "icon": "maki-shop",
+    "icon": "fas-print",
     "geometry": [
         "point",
         "area"
@@ -7,5 +7,9 @@
     "tags": {
         "shop": "copyshop"
     },
+    "terms": [
+        "print",
+        "scan"
+    ],
     "name": "Copy Store"
 }

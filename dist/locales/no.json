@@ -412,9 +412,6 @@
             "locating": "Finner sted, vennligst vent..."
         },
         "inspector": {
-            "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
-            "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
-            "documentation_redirect": "Denne dokumentasjonen peker nå til en ny side.",
             "show_more": "Vis mer",
             "view_on_osm": "Se på openstreetmap.org",
             "all_fields": "Alle felter",
@@ -425,7 +422,6 @@
             "role": "Rolle",
             "choose": "Velg egenskapstype",
             "results": "{n} resultater for {search}",
-            "reference": "Les mer på OpenStreetMap Wiki",
             "back_tooltip": "Endre kartegenskap",
             "remove": "Fjern",
             "search": "Søk",
@@ -529,7 +525,6 @@
                 "tooltip": "Kraftlinjer, kraftverk osv."
             },
             "others": {
-                "description": "Andre",
                 "tooltip": "Alt annet"
             }
         },
@@ -610,20 +605,6 @@
             "on_wiki": "{tag} på wiki.osm.org",
             "used_with": "brukes med {type}"
         },
-        "validations": {
-            "disconnected_highway": "Koblet fra vei",
-            "disconnected_highway_tooltip": "Veier burde være koblet til andre veier eller til inngangen til bygninger.",
-            "untagged_point": "Utagget punkt",
-            "untagged_point_tooltip": "Velg en kartegenskaptype som beskriver hva dette punktet er.",
-            "untagged_line": "Utagget linje",
-            "untagged_line_tooltip": "Velg en kartegenskaptype som beskriver hva denne linjen er.",
-            "untagged_area": "Utagget område",
-            "untagged_area_tooltip": "Velg en kartegenskaptype som beskriver hva dette område er.",
-            "untagged_relation": "Utagget relasjon",
-            "untagged_relation_tooltip": "Velg en kartegenskaptype som beskriver hva denne relasjonen er.",
-            "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
-            "deprecated_tags": "Utgående tagger: {tags}"
-        },
         "zoom": {
             "in": "Zoom inn",
             "out": "Zoom ut"
@@ -649,8 +630,7 @@
             },
             "overview": {
                 "title": "Oversikt",
-                "navigation_h": "Navigasjon",
-                "nodes_ways": "I OpenStreetMap kaller vi av og til punkter for *noder*, og linjer og områder for *veier*."
+                "navigation_h": "Navigasjon"
             },
             "editing": {
                 "save_h": "Lagre",
@@ -962,9 +942,6 @@
                 "category-building": {
                     "name": "Bygingsrelatert"
                 },
-                "category-golf": {
-                    "name": "Golfrelatert"
-                },
                 "category-landuse": {
                     "name": "Arealbrukrelaterte egenskaper"
                 },
@@ -1138,9 +1115,6 @@
                     "options": {
                         "foot_bath": "Fotbad"
                     }
-                },
-                "beauty": {
-                    "label": "Butikktype"
                 },
                 "bench": {
                     "label": "Benk"
@@ -1325,10 +1299,8 @@
                     "label": "Avgift"
                 },
                 "fire_hydrant/type": {
-                    "label": "Type",
                     "options": {
                         "pillar": "Over bakken",
-                        "pond": "Vanndam",
                         "underground": "Under overflaten",
                         "wall": "Vegg"
                     }
@@ -1718,8 +1690,7 @@
                     "label": "Type"
                 },
                 "website": {
-                    "label": "Nettside",
-                    "placeholder": "http://example.com/"
+                    "label": "Nettside"
                 },
                 "wetland": {
                     "label": "Type"
@@ -1847,23 +1818,11 @@
                 "amenity/parking_space": {
                     "name": "Parkeringsplass"
                 },
-                "amenity/pharmacy": {
-                    "name": "Apotek"
-                },
                 "amenity/place_of_worship": {
                     "name": "Bedested"
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Buddhisttempel"
-                },
-                "amenity/place_of_worship/christian": {
-                    "name": "Kirke"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Synagoge"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Moské"
                 },
                 "amenity/police": {
                     "name": "Politi"
@@ -2029,9 +1988,6 @@
                 },
                 "building/stable": {
                     "name": "Stall"
-                },
-                "building/train_station": {
-                    "name": "Togstasjon"
                 },
                 "building/university": {
                     "name": "Universitetsbygning"
@@ -2311,9 +2267,6 @@
                 },
                 "landuse/farmyard": {
                     "name": "Gårdsplass"
-                },
-                "landuse/forest": {
-                    "name": "Skog"
                 },
                 "landuse/grass": {
                     "name": "Gress"
@@ -3157,9 +3110,6 @@
             },
             "OSM-Nepal-facebook": {
                 "description": "Forbedre OpenStreetMap i Nepal"
-            },
-            "OSM-LKA-facebook": {
-                "description": "Forbedre OpenStreetMap i Sri Lanka"
             },
             "at-twitter": {
                 "name": "OpenStreetMap Østerrike Twitter",

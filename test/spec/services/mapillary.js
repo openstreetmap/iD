@@ -12,9 +12,9 @@ describe('iD.serviceMapillary', function() {
     });
 
     beforeEach(function() {
-        context = iD.Context().assetPath('../dist/');
+        context = iD.coreContext().assetPath('../dist/');
         context.projection
-            .scale(667544.214430109)  // z14
+            .scale(iD.geoZoomToScale(14))
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 

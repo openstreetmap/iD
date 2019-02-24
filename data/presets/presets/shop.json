@@ -6,11 +6,12 @@
         "operator",
         "address",
         "building_area",
+        "opening_hours",
         "payment_multi"
     ],
     "moreFields": [
-        "opening_hours",
         "brand",
+        "currency_multi",
         "website",
         "phone",
         "email",

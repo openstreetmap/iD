@@ -19,12 +19,13 @@ export * from './ui/settings/index';
 export * from './ui/index';
 export * from './util/index';
 export * from './validations/index';
+export { coreValidator } from './core/validator';
 
 /* export some legacy symbols: */
 import { services } from './services/index';
 var Connection = services.osm;
 export { Connection };
-export { coreContext as Context, setAreaKeys } from './core/context';
+export { coreContext as Context, setAreaKeys, areaKeys } from './core/context';
 export { coreDifference as Difference } from './core/difference';
 export { coreGraph as Graph } from './core/graph';
 export { coreHistory as History } from './core/history';

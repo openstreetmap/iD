@@ -419,9 +419,6 @@
             "locating": "Nosakām atrašanās vietu, uzgaidiet..."
         },
         "inspector": {
-            "no_documentation_combination": "Šai apzīmējumu kombinācijai nav piejama dokumentācija",
-            "no_documentation_key": "Šai vērtībai nav piejama dokumentācija",
-            "documentation_redirect": "Šī dokumentācija ir pārcelta uz jaunu lapu",
             "show_more": "Rādīt vairāk",
             "view_on_osm": "Apskatīt openstreetmap.org",
             "all_fields": "Visi lauki",
@@ -431,7 +428,6 @@
             "role": "Loma",
             "choose": "Izvēlieties objekta tipu",
             "results": "Atrasti {n} rezultāti meklējot {search}",
-            "reference": "Skatīt OpenStreetMap wiki →",
             "back_tooltip": "Mainīt objektu",
             "remove": "Noņemt ",
             "search": "Meklēt",
@@ -647,15 +643,6 @@
             "description": "Apraksts",
             "on_wiki": "{tag} wiki.osm.org",
             "used_with": "izmantots kopā ar {type}"
-        },
-        "validations": {
-            "disconnected_highway": "Nepievienots ceļš",
-            "untagged_line": "Neapzīmēta līnija",
-            "untagged_line_tooltip": "Izvēlies tipu, kas vislabāk izskaidro šo līniju.",
-            "untagged_area": "Neapzīmēts apgabals",
-            "many_deletions": "Jūs dzēšat {n} objektus: {p} mezglus, {l} līnijas, {a} apgabalus, {r} relācijas.. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
-            "tag_suggests_area": "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
-            "deprecated_tags": "Novecojuši apzīmējumi: {tags}"
         },
         "zoom": {
             "in": "Pietuvināt",
@@ -901,9 +888,6 @@
                 "category-building": {
                     "name": "Ēku veidi"
                 },
-                "category-golf": {
-                    "name": "Golfa Objekti"
-                },
                 "category-landuse": {
                     "name": "Zemes Izmantojuma Objekti"
                 },
@@ -1059,6 +1043,9 @@
                 "barrier": {
                     "label": "Tips"
                 },
+                "basin": {
+                    "label": "Tips"
+                },
                 "bath/open_air": {
                     "label": "Brīvdabas"
                 },
@@ -1072,9 +1059,6 @@
                         "hot_spring": "Karstais Avots",
                         "onsen": "Japāņu Onsens"
                     }
-                },
-                "beauty": {
-                    "label": "Veikala Veids"
                 },
                 "bench": {
                     "label": "Sols"
@@ -1360,20 +1344,9 @@
                 "fence_type": {
                     "label": "Tips"
                 },
-                "fire_hydrant/position": {
-                    "label": "Novietojums",
-                    "options": {
-                        "green": "Zāle",
-                        "lane": "Ceļš",
-                        "parking_lot": "Stāvvieta",
-                        "sidewalk": "Ietve"
-                    }
-                },
                 "fire_hydrant/type": {
-                    "label": "Tips",
                     "options": {
                         "pillar": "Stabs / Virszemes",
-                        "pond": "Dīķis",
                         "underground": "Apakšzemes",
                         "wall": "Siena"
                     }
@@ -1795,9 +1768,6 @@
                         "underground": "Apakšzemes"
                     }
                 },
-                "passenger_information_display": {
-                    "label": "Pasažieru informācijas displejs"
-                },
                 "payment_multi": {
                     "label": "Maksājumu veidi"
                 },
@@ -2059,9 +2029,6 @@
                 "tourism": {
                     "label": "Tips"
                 },
-                "tourism_attraction": {
-                    "label": "Tūrisms"
-                },
                 "tower/construction": {
                     "label": "Būvēšana"
                 },
@@ -2136,8 +2103,7 @@
                     "label": "Tips"
                 },
                 "website": {
-                    "label": "Interneta lapa",
-                    "placeholder": "http://example.com/"
+                    "label": "Interneta lapa"
                 },
                 "wetland": {
                     "label": "Tips"
@@ -2389,10 +2355,6 @@
                     "name": "Daudzlīmeņu Stāvvietas Ieeja/Izeja",
                     "terms": "daudzstāvu stāvvieta, ieeja, izeja, iebrauktuve, izbrauktuve"
                 },
-                "amenity/pharmacy": {
-                    "name": "Aptieka",
-                    "terms": "medicīnas, recepšu"
-                },
                 "amenity/place_of_worship": {
                     "name": "Dievnams",
                     "terms": "baziliks, baznīca, katedrāle, kapella, mošeja, lūgšanas, bazilika"
@@ -2400,17 +2362,8 @@
                 "amenity/place_of_worship/buddhist": {
                     "name": "Budistu templis"
                 },
-                "amenity/place_of_worship/christian": {
-                    "name": "Baznīca"
-                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Templis"
-                },
-                "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga"
-                },
-                "amenity/place_of_worship/muslim": {
-                    "name": "Mošeja"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Sintoistu svētnīca"
@@ -2511,10 +2464,6 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Plakanu Monētu Tirdzniecības automāts",
                     "terms": "monēta,saspiešana,suvenīri,suvenīrs,saplacināt"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "name": "Suņu Maisiņu Tirdzniecības automāts",
-                    "terms": "dzīvnieku,suņu,ekskrementu maisiņu,kaku maisiņu,sūdu"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Sieviešu Higēnas Tirdzniecības automāts",
@@ -2774,9 +2723,6 @@
                     "name": "Rindumājas",
                     "terms": "rindu mājas,mājas"
                 },
-                "building/train_station": {
-                    "name": "Vilcienu Stacija"
-                },
                 "building/university": {
                     "name": "Universitātes Ēka"
                 },
@@ -3030,9 +2976,6 @@
                 "landuse/farmyard": {
                     "name": "Lauku sēta"
                 },
-                "landuse/forest": {
-                    "name": "Mežs"
-                },
                 "landuse/garages": {
                     "name": "Garāžu zeme"
                 },
@@ -3275,7 +3218,8 @@
                     "name": "Neapstrādāta zeme"
                 },
                 "natural/heath": {
-                    "name": "Siltums"
+                    "name": "Tīrelis",
+                    "terms": "virsājs, koki, tīrelis, mazs"
                 },
                 "natural/mud": {
                     "name": "Dubļi"
@@ -3417,21 +3361,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformators"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Autobusu pietura / platforma"
-                },
-                "public_transport/linear_platform_ferry": {
-                    "name": "Prāmja pietura / Platforma"
-                },
-                "public_transport/linear_platform_subway": {
-                    "name": "Metro pietura / platforma"
-                },
-                "public_transport/linear_platform_train": {
-                    "name": "Vilciena Pietura / Platforma"
-                },
-                "public_transport/linear_platform_trolleybus": {
-                    "name": "Trolejbusu pietura / platforma"
                 },
                 "public_transport/platform_bus": {
                     "name": "Autobusu pietura / platforma"
@@ -4416,10 +4345,6 @@
                 "name": "OpenStreetMap Japāna",
                 "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
             },
-            "OSM-korea-telegram": {
-                "name": "OSM Korejas Telegram Kanāls",
-                "description": "Neoficiāls Kanāls priekš OpenStreetMap kartētājiem, kopienām un lietotājiem Korejā, kur dalīties un diskutēt."
-            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaizija Facebookā",
                 "description": "Čatam par jebko, kas ir saistīts ar OpenStreetMap!"
@@ -4470,11 +4395,6 @@
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU telegram",
                 "description": "OpenStreetMap Krievijas telegram čats"
-            },
-            "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Šrilanka",
-                "description": "Uzlabo OpenStreetMap Šrilankā",
-                "extendedDescription": "Kartē Šrilankā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Taivānas Kopiena",
@@ -4702,7 +4622,6 @@
                 "description": "Talk-is ir oficiāls E-Pasta saraksts Islandiešu OSM kopienai."
             },
             "is-twitter": {
-                "name": "OSM Islande Twitterī",
                 "description": "Twitteris priekš OpenStreetMap Islandē"
             },
             "it-facebook": {
@@ -4972,6 +4891,10 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Jaunumi un resursi OpenStreetMap Peru kopienai"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discords",
+                "description": "Sazinies ar citiem kartētājiem Discordā"
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap Facebookā.",

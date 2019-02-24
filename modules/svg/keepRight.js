@@ -54,9 +54,9 @@ export function svgKeepRight(projection, context, dispatch) {
             _keepRightVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.kr_error')
+            drawLayer.selectAll('.qa_error.keepRight')
                 .remove();
-            touchLayer.selectAll('.kr_error')
+            touchLayer.selectAll('.qa_error.keepRight')
                 .remove();
         }
     }
@@ -81,7 +81,7 @@ export function svgKeepRight(projection, context, dispatch) {
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.kr_error')
+        touchLayer.selectAll('.qa_error.keepRight')
             .remove();
 
         drawLayer
@@ -105,7 +105,7 @@ export function svgKeepRight(projection, context, dispatch) {
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var markers = drawLayer.selectAll('.kr_error')
+        var markers = drawLayer.selectAll('.qa_error.keepRight')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -116,8 +116,13 @@ export function svgKeepRight(projection, context, dispatch) {
         var markersEnter = markers.enter()
             .append('g')
             .attr('class', function(d) {
-                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.parent_error_type; }
-            );
+                return [
+                    'qa_error',
+                    d.service,
+                    'error_id-' + d.id,
+                    'error_type-' + d.parent_error_type
+                ].join(' ');
+            });
 
         markersEnter
             .append('ellipse')
@@ -133,7 +138,7 @@ export function svgKeepRight(projection, context, dispatch) {
 
         markersEnter
             .append('use')
-            .attr('class', 'kr_error-fill')
+            .attr('class', 'qa_error-fill')
             .attr('width', '20px')
             .attr('height', '20px')
             .attr('x', '-8px')
@@ -152,7 +157,7 @@ export function svgKeepRight(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.kr_error')
+        var targets = touchLayer.selectAll('.qa_error.keepRight')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -169,7 +174,7 @@ export function svgKeepRight(projection, context, dispatch) {
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
-                return 'kr_error target kr_error-' + d.id + ' ' + fillClass;
+                return 'qa_error ' + d.service + ' target error_id-' + d.id + ' ' + fillClass;
             })
             .attr('transform', getTransform);
 

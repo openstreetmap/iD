@@ -1,8 +1,8 @@
 {
     "icon": "maki-water",
     "fields": [
-        "name",
-        "intermittent"
+        "{natural/water}",
+        "tidal"
     ],
     "geometry": [
         "area"
@@ -23,6 +23,7 @@
         "creek",
         "estuary",
         "rill",
+        "riverbank",
         "rivulet",
         "run",
         "runnel",

@@ -153,6 +153,7 @@ en:
       relation: These features can't be merged because they have conflicting relation roles.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
       conflicting_tags: These features can't be merged because some of their tags have conflicting values.
+      paths_intersect: These features can't be merged because the resulting path would intersect itself.
     move:
       title: Move
       description:
@@ -329,6 +330,8 @@ en:
     modified: Modified
     deleted: Deleted
     created: Created
+    outstanding_errors_message: "Please resolve all errors first. {count} remaining."
+    comment_needed_message: Please add a changeset comment first.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
@@ -410,8 +413,6 @@ en:
       tooltip_note: "Center and zoom the map to focus on this note."
       tooltip_data: "Center and zoom the map to focus on this data."
       tooltip_issue: "Center and zoom the map to focus on this issue."
-    no_documentation_combination: There is no documentation available for this tag combination
-    no_documentation_key: There is no documentation available for this key
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_keepRight: View on keepright.at
@@ -424,10 +425,13 @@ en:
     role: Role
     choose: Select feature type
     results: "{n} results for {search}"
-    reference: View on OpenStreetMap Wiki
-    edit_reference: Edit or translate description
+    no_documentation_key: "There is no documentation available."
+    edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    hidden_preset:
+      manual: "{features} are hidden. Enable them in the Map Data pane."
+      zoom: "{features} are hidden. Zoom in to enable them."
     back_tooltip: Change feature
     remove: Remove
     search: Search
@@ -492,6 +496,9 @@ en:
       keepRight:
         tooltip: Automatically detected map issues from keepright.at
         title: KeepRight Issues
+      improveOSM:
+        tooltip: Missing data automatically detected by improveosm.org
+        title: ImproveOSM Issues
       custom:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
@@ -532,10 +539,10 @@ en:
       description: Power Features
       tooltip: "Power Lines, Power Plants, Substations, etc."
     past_future:
-      description: Past/Future
+      description: Past/Future Features
       tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
     others:
-      description: Others
+      description: Other Features
       tooltip: "Everything Else"
   area_fill:
     wireframe:
@@ -635,30 +642,39 @@ en:
     description: Description
     on_wiki: "{tag} on wiki.osm.org"
     used_with: "used with {type}"
-  validations:
-    disconnected_highway: Disconnected highway
-    disconnected_highway_tooltip: "Roads should be connected to other roads or building entrances."
-    generic_name: Possible generic name
-    generic_name_tooltip: 'This feature seems to have a generic name "{name}". Please only use the name field to record the official name of a feature.'
-    old_multipolygon: Multipolygon tags on outer way
-    old_multipolygon_tooltip: "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
-    untagged_point: Untagged point
-    untagged_point_tooltip: "Select a feature type that describes what this point is."
-    untagged_line: Untagged line
-    untagged_line_tooltip: "Select a feature type that describes what this line is."
-    untagged_area: Untagged area
-    untagged_area_tooltip: "Select a feature type that describes what this area is."
-    untagged_relation: Untagged relation
-    untagged_relation_tooltip: "Select a feature type that describes what this relation is."
-    many_deletions: "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
-    tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
-    deprecated_tags: "Deprecated tags: {tags}"
   zoom:
     in: Zoom in
     out: Zoom out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   QA:
+    improveOSM:
+      title: ImproveOSM Detection
+      geometry_types:
+        path: paths
+        parking: parking
+        road: roads
+        both: roads and parking
+      directions:
+        east: east
+        north: north
+        northeast: northeast
+        northwest: northwest
+        south: south
+        southeast: southeast
+        southwest: southwest
+        west: west
+      error_types:
+        ow:
+          title: Missing One-way
+          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a "oneway" tag.'
+        mr:
+          title: Missing Geometry
+          description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'
+          description_alt: 'Data from a 3rd party suggests there may be unmapped {geometry_type} here.'
+        tr:
+          title: Missing Turn Restriction
+          description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
       title: KeepRight Error
       detail_title: Error
@@ -968,7 +984,7 @@ en:
       navigation_zoom: "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons along the side of the map. You can also use the `+`, `-` keys on your keyboard."
       features_h: "Map Features"
       features: "We use the word *features* to describe things that appear on the map, such as roads, buildings, or points of interest. Anything in the real world can be mapped as a feature on OpenStreetMap. Map features are represented on the map using *points*, *lines*, or *areas*."
-      nodes_ways: "In OpenStreetmap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
+      nodes_ways: "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
     editing:
       title: "Editing & Saving"
       select_h: "Select"
@@ -1095,7 +1111,7 @@ en:
       sources: "By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is chosen as the background image. Depending on where you are editing, other imagery sources will be available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference."
       offsets_h: "Adjusting Imagery Offset"
       offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Adjust Imagery Offset\" section at the bottom of the Background Settings pane."
-      offset_change: "Click on the small triangles to adjust the imagery offset in small steps, or hold the left mouse button and drag within the gray square to slide the imagery into alignment."
+      offset_change: "Click on the small triangles to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
       intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org)."
@@ -1115,7 +1131,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/), [ImproveOSM](https://improveosm.org/en/), and more Q/A tools in the future."
+      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/) and [ImproveOSM](https://improveosm.org/en/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/) and more Q/A tools in the future."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
@@ -1150,6 +1166,140 @@ en:
           indirect: "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**"
           indirect_example: "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection."
           indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
+  issues:
+    title: Issues
+    key: I
+    list_title: "Issues ({count})"
+    errors:
+      list_title: "Errors ({count})"
+    warnings:
+      list_title: "Warnings ({count})"
+    no_issues:
+      message: Everything looks fine
+      info: Any issues will show up here as you edit
+    almost_junction:
+      message: "{feature} is very close but not connected to {feature2}"
+      highway-highway:
+        tip: Intersecting highways should share a junction vertex.
+    crossing_ways:
+      message: "{feature} crosses {feature2}"
+      building-building:
+        tip: "Buildings should not intersect except on different layers."
+      building-highway:
+        tip: "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
+      building-railway:
+        tip: "Railways crossing buildings should use bridges or tunnels."
+      building-waterway:
+        tip: "Waterways crossing buildings should use tunnels or different layers."
+      highway-highway:
+        tip: "Crossing highways should use bridges, tunnels, or intersections."
+      highway-railway:
+        tip: "Highways crossing railways should use bridges, tunnels, or level crossings."
+      highway-waterway:
+        tip: "Highways crossing waterways should use bridges, tunnels, or fords."
+      railway-railway:
+        tip: "Crossing railways should be connected or use bridges or tunnels."
+      railway-waterway:
+        tip: "Railways crossing waterways should use bridges or tunnels."
+      waterway-waterway:
+        tip: "Crossing waterways should be connected or use tunnels."
+      tunnel-tunnel:
+        tip: "Crossing tunnels should use different layers."
+      tunnel-tunnel_connectable:
+        tip: "Crossing tunnels should be connected or use different layers."
+      bridge-bridge:
+        tip: "Crossing bridges should use different layers."
+      bridge-bridge_connectable:
+        tip: "Crossing bridges should be connected or use different layers."
+      indoor-indoor:
+        tip: "Crossing indoor features should use different levels."
+      indoor-indoor_connectable:
+        tip: "Crossing indoor features should be connected or use different levels."
+    deprecated_tag:
+      single:
+        message: '{feature} has the outdated tag "{tag}"'
+      combination:
+        message: '{feature} has an outdated tag combination: {tags}'
+      tip: "Some tags become deprecated over time and should be replaced."
+    disconnected_way:
+      highway:
+        message: "{highway} is disconnected from other roads and paths"
+        tip: "Highways should connect to other highways or building entrances."
+    generic_name:
+      message: '{feature} has the generic name "{name}"'
+      tip: "Names should be the actual, on-the-ground names of features."
+    many_deletions:
+      points-lines-areas:
+        message: "Deleting {n} features: {p} points, {l} lines, and {a} areas"
+      points-lines-areas-relations:
+        message: "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations"
+      tip: "Only redundant or nonexistent features should be deleted."
+    missing_tag:
+      any:
+        message: "{feature} has no tags"
+      descriptive:
+        message: "{feature} has no descriptive tags"
+      specific:
+        message: '{feature} has no "{tag}" tag'
+      tip: "Features must have tags that define what they are."
+    old_multipolygon:
+      message: "{multipolygon} has misplaced tags"
+      tip: "Multipolygons should be tagged on their relation, not their outer way."
+    tag_suggests_area:
+      message: '{feature} should be a closed area based on the tag "{tag}"'
+      tip: "Areas must have connected endpoints."
+    fix:
+      connect_almost_junction:
+        annotation: Connected very close features.
+      connect_crossing_features:
+        annotation: Connected crossing features.
+      connect_endpoints:
+        title: Connect the ends
+        annotation: Connected the endpoints of a way.
+      connect_features:
+        title: Connect the features
+      continue_from_start:
+        title: Continue drawing from start
+      continue_from_end:
+        title: Continue drawing from end
+      delete_feature:
+        title: Delete this feature
+      move_tags:
+        title: Move the tags
+        annotation: Moved tags.
+      remove_deprecated_tag:
+        annotation: Removed an old tag.
+      remove_deprecated_tag_combo:
+        annotation: Removed an old tag combination.
+      remove_generic_name:
+        title: Remove the name
+        annotation: Removed a generic name.
+      remove_tag:
+        title: Remove the tag
+        annotation: Removed tag.
+      remove_tags:
+        title: Remove the tags
+      reposition_features:
+        title: Reposition the features
+      select_preset:
+        title: Select a feature type
+      tag_as_disconnected:
+        title: Tag as disconnected
+        annotation: Tagged very close features as disconnected.
+      upgrade_tag:
+        title: Upgrade the tag
+        annotation: Upgraded an old tag.
+      upgrade_tag_combo:
+        title: Upgrade the tags
+        annotation: Upgraded an old tag combination.
+      use_bridge_or_tunnel:
+        title: Use a bridge or tunnel
+      use_different_layers:
+        title: Use different layers
+      use_different_levels:
+        title: Use different levels
+      use_tunnel:
+        title: Use a tunnel
   intro:
     done: done
     ok: OK
