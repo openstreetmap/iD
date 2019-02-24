@@ -29,9 +29,11 @@ describe('iD.operationStraighten', function () {
                 iD.osmNode({ id: 'n10', type: 'node' }),
                 iD.osmNode({ id: 'n11', type: 'node' }),
                 iD.osmNode({ id: 'n12', type: 'node' }),
+                iD.osmNode({ id: 'n13', type: 'node' }),
                 iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'] }),
                 iD.osmWay({ id: 'w1-2', nodes: ['n2', 'n2-1'] }),
                 iD.osmWay({ id: 'w2', nodes: ['n2', 'n3', 'n4'] }),
+                iD.osmWay({ id: 'w2-2', nodes: ['n4', 'n13', 'n2'] }), // w-2 reversed
                 iD.osmWay({ id: 'w3', nodes: ['n4', 'n5', 'n6'] }),
                 iD.osmWay({ id: 'w4', nodes: ['n6', 'n7', 'n8'] }),
                 iD.osmWay({ id: 'w5', nodes: ['n9', 'n10', 'n11', 'n12'] }),
@@ -78,6 +80,11 @@ describe('iD.operationStraighten', function () {
             expect(result).to.be.ok;
         });
 
+        it('is available for selected, continuous ways with different way-directions', function () {
+            var result = iD.operationStraighten(['w1', 'w3', 'w2-2'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
+        });
+
         it('is available for 2 selected nodes in the same way, more than one node apart', function () {
             var result = iD.operationStraighten(['w5', 'n9', 'n11'], fakeContext.graph()).available();
             expect(result).to.be.ok;
@@ -90,6 +97,11 @@ describe('iD.operationStraighten', function () {
 
         it('is available for 2 selected nodes in non-adjacent ways, providing inbetween ways are selected', function () {
             var result = iD.operationStraighten(['n2', 'n7', 'w4', 'w1', 'w3', 'w2'], fakeContext.graph()).available();
+            expect(result).to.be.ok;
+        });
+
+        it('is available for 2 selected nodes in non-adjacent, non-same-directional ways, providing inbetween ways are selected', function () {
+            var result = iD.operationStraighten(['n2', 'n7', 'w4', 'w1', 'w3', 'w2-2'], fakeContext.graph()).available();
             expect(result).to.be.ok;
         });
 

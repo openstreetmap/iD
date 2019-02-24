@@ -17,6 +17,7 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.available = function() {
+        console.log("Running operation.available..");
         var nodes = [],
             startNodes = [],
             endNodes = [],
@@ -42,11 +43,17 @@ export function operationStraighten(selectedIDs, context) {
             endNodes.push(entity.nodes[entity.nodes.length-1]);
         }
 
+        // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
+        // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
+        startNodes = startNodes.filter(n => startNodes.indexOf(n) == startNodes.lastIndexOf(n));
+        endNodes = endNodes.filter(n => endNodes.indexOf(n) == endNodes.lastIndexOf(n));
+
+        // Return false if line is only 2 nodes long
+        // Return false unless exactly 0 or 2 specific nodes are selected
         if (_uniq(nodes).length <= 2 || !_includes([0,2], selectedNodes.length)) return false;
 
-        // Ensure all ways are connected (i.e. only one unique start point and one unique end point)
-        if (_difference(startNodes, endNodes).length !== 1 ||
-            _difference(endNodes, startNodes).length !== 1) return false;
+        // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
+        if (_difference(startNodes, endNodes).length + _difference(endNodes, startNodes).length !== 2) return false;
 
         // Ensure both selected nodes lie on the selected path
         if (selectedNodes.length && (!_includes(nodes, selectedNodes[0]) ||
@@ -57,6 +64,7 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
+        console.log("Running operation.disabled..");
         var reason;
         for (var i = 0; i < selectedIDs.length; i++) {
             if (context.hasHiddenConnections(selectedIDs[i])) {
@@ -68,6 +76,7 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.tooltip = function() {
+        console.log("Running operation.tooltip");
         var disable = operation.disabled();
         return disable ?
             t('operations.straighten.' + disable) :

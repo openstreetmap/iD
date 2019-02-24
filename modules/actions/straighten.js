@@ -1,5 +1,6 @@
 import { actionDeleteNode } from './delete_node';
 import _difference from 'lodash-es/difference';
+import _filter from 'lodash-es/filter';
 
 import {
     geoVecInterp,
@@ -17,12 +18,12 @@ export function actionStraighten(selectedIDs, projection) {
                 (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
     }
 
-    // Return all ways as a continuous, ordered array of nodes
-    var allNodes = function(graph) {
+    // Return all selected ways as a continuous, ordered array of nodes
+    function allNodes(graph) {
         var nodes = [],
             startNodes = [],
             endNodes = [],
-            ways = {},
+            remainingWays = [],
             selectedWays = selectedIDs.filter(function(w) {
                 return graph.entity(w).type === 'way';
             }),
@@ -32,27 +33,47 @@ export function actionStraighten(selectedIDs, projection) {
 
         for (var i = 0; i < selectedWays.length; i++) {
             var way = graph.entity(selectedWays[i]);
-                nodes = graph.childNodes(way);
-                ways[nodes[0].id] = nodes;
+                nodes = way.nodes.slice(0);
+                remainingWays.push(nodes);
                 startNodes.push(nodes[0]);
                 endNodes.push(nodes[nodes.length-1]);
         }
 
-        var startNode = _difference(startNodes, endNodes)[0],
-            endNode = _difference(endNodes, startNodes)[0];
+        // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end,
+        //                                  and need to be removed so currNode _difference calculation below works)
+        // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
+        startNodes = _filter(startNodes, function(n) {
+            return startNodes.indexOf(n) == startNodes.lastIndexOf(n);
+        });
+        endNodes = _filter(endNodes, function(n) {
+            return endNodes.indexOf(n) == endNodes.lastIndexOf(n);
+        });
 
-        nodes = ways[startNode.id];
+        // Choose the initial endpoint to start from
+        var currNode = _difference(startNodes, endNodes).concat(_difference(endNodes, startNodes))[0],
+            nextWay = [];
+            nodes = [];
 
-        // Add nodes to end of array, until endNode matches end of array
-        while (nodes[nodes.length-1] !== endNode) {
-            var currEndNode = nodes[nodes.length-1];
-                nodes = nodes.concat(ways[currEndNode.id]);
+        // Add nodes to end of nodes array, until all ways are added
+        while (remainingWays.length) {
+            nextWay = _filter(remainingWays, function(way) {
+                return way[0] == currNode || way[way.length-1] == currNode;
+            })[0];
+
+            remainingWays = _difference(remainingWays, [nextWay]);
+
+            if (nextWay[0] != currNode) {
+                nextWay.reverse();
+            }
+            nodes = nodes.concat(nextWay);
+
+            currNode = nodes[nodes.length-1];
         }
 
         // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
-        if (selectedNodes.length) {
-            var startNodeIdx = nodes.indexOf(graph.entity(selectedNodes[0])),
-                endNodeIdx = nodes.indexOf(graph.entity(selectedNodes[1])),
+        if (selectedNodes.length == 2) {
+            var startNodeIdx = nodes.indexOf(selectedNodes[0]),
+                endNodeIdx = nodes.indexOf(selectedNodes[1]),
                 sortedStartEnd = [startNodeIdx, endNodeIdx];
 
                 sortedStartEnd.sort(function(a, b) {
@@ -62,9 +83,8 @@ export function actionStraighten(selectedIDs, projection) {
             nodes = nodes.slice(sortedStartEnd[0], sortedStartEnd[1]+1);
         }
 
-        return nodes;
+        return nodes.map(function(n) { return graph.entity(n); });
     };
-
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
@@ -136,7 +156,6 @@ export function actionStraighten(selectedIDs, projection) {
             }
         }
     };
-
 
     action.transitionable = true;
 
