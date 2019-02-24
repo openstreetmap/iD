@@ -17,7 +17,6 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.available = function() {
-        console.log("Running operation.available..");
         var nodes = [],
             startNodes = [],
             endNodes = [],
@@ -64,7 +63,6 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        console.log("Running operation.disabled..");
         var reason;
         for (var i = 0; i < selectedIDs.length; i++) {
             if (context.hasHiddenConnections(selectedIDs[i])) {
@@ -76,7 +74,6 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        console.log("Running operation.tooltip");
         var disable = operation.disabled();
         return disable ?
             t('operations.straighten.' + disable) :
