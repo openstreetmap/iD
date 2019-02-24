@@ -102,6 +102,28 @@ describe('iD.actionStraighten', function () {
         expect(graph.hasEntity('g')).to.eq(undefined);
     });
 
+    it('straightens multiple, connected ways going in different directions', function() {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                iD.Node({id: 'c', loc: [2, -0.01]}),
+                iD.Node({id: 'd', loc: [3, 0]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+
+                iD.Node({id: 'e', loc: [4, 0]}),
+                iD.Node({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
+                iD.Node({id: 'g', loc: [6, -0.01]}),
+                iD.Node({id: 'h', loc: [7, 0]}),
+                iD.Way({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
+            ]);
+
+        graph = iD.actionStraighten(['-', '--'], projection)(graph);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
+        expect(graph.entity('--').nodes).to.eql(['h', 'f', 'd']);
+        expect(graph.entity('f').loc[0]).to.be.closeTo(5, 1e-6);
+        expect(graph.entity('f').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.hasEntity('g')).to.eq(undefined);
+    });
 
     describe('transitions', function () {
         it('is transitionable', function() {
