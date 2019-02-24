@@ -37,10 +37,6 @@
       "replace": {"landuse": "garages"}
     },
     {
-      "old": {"amenity": "public_building"},
-      "replace": {"building": "public"}
-    },
-    {
       "old": {"amenity": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
