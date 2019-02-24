@@ -65,6 +65,10 @@
       "replace": {"leisure": "swimming_pool"}
     },
     {
+      "old": {"amenity": "toilet"},
+      "replace": {"amenity": "toilets"}
+    },
+    {
       "old": {"amenity": "vending_machine", "vending": "news_papers"},
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
