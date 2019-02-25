@@ -8,6 +8,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
+import { t } from '../util/locale';
 import { utilRebind } from '../util/rebind';
 import * as Validations from '../validations/index';
 
@@ -17,6 +18,8 @@ export function coreValidator(context) {
     var self = {};
     var _issues = [];
     var _issuesByEntityID = {};
+
+    var _disabledValidations = {};
 
     var validations = _filter(Validations, _isFunction).reduce(function(obj, validation) {
         var func = validation();
@@ -35,6 +38,13 @@ export function coreValidator(context) {
             entityValidationIDs.push(key);
         }
     }
+
+    var validationIDsToDisplay = Object.keys(validations).filter(function(rule) {
+        return rule !== 'maprules';
+    });
+    validationIDsToDisplay.sort(function(rule1, rule2) {
+        return t('issues.' + rule1 + '.title') > t('issues.' + rule2 + '.title');
+    });
 
     //self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -72,6 +82,22 @@ export function coreValidator(context) {
         return _issuesByEntityID[key];
     };
 
+    self.getRuleIDs = function(){
+        return validationIDsToDisplay;
+    };
+
+    self.getDisabledRules = function(){
+        return _disabledValidations;
+    };
+
+    self.toggleRule = function(ruleID) {
+        if (_disabledValidations[ruleID]) {
+            delete _disabledValidations[ruleID];
+        } else {
+            _disabledValidations[ruleID] = true;
+        }
+        self.validate();
+    };
 
     function validateEntity(entity) {
         var _issues = [];
@@ -80,6 +106,12 @@ export function coreValidator(context) {
         // runs validation and appends resulting issues, returning true if validation passed
         function runValidation(which) {
             if (ran[which]) return true;
+
+            if (_disabledValidations[which]) {
+                // don't run disabled validations but mark as having run
+                ran[which] = true;
+                return true;
+            }
 
             var fn = validations[which];
             var typeIssues = fn(entity, context);
@@ -134,6 +166,9 @@ export function coreValidator(context) {
         var graph = history.graph();
 
         _issues = _flatten(changesValidationIDs.map(function(ruleID) {
+            if (_disabledValidations[ruleID]) {
+                return [];
+            }
             var validation = validations[ruleID];
             return validation(changes, context);
         }));

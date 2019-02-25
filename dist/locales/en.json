@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Warnings ({count})"
             },
+            "rules": {
+                "title": "Rules"
+            },
             "no_issues": {
                 "message": "Everything looks fine",
                 "info": "Any issues will show up here as you edit"
             },
             "almost_junction": {
+                "title": "Almost Junctions",
                 "message": "{feature} is very close but not connected to {feature2}",
                 "highway-highway": {
                     "tip": "Intersecting highways should share a junction vertex."
                 }
             },
             "crossing_ways": {
+                "title": "Crossings Ways",
                 "message": "{feature} crosses {feature2}",
+                "tip": "Highways, railways, waterways, and buildings should not cross ambiguously.",
                 "building-building": {
                     "tip": "Buildings should not intersect except on different layers."
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Deprecated Tags",
                 "single": {
                     "message": "{feature} has the outdated tag \"{tag}\""
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Some tags become deprecated over time and should be replaced."
             },
             "disconnected_way": {
+                "title": "Disconnected Ways",
                 "highway": {
                     "message": "{highway} is disconnected from other roads and paths",
                     "tip": "Highways should connect to other highways or building entrances."
                 }
             },
             "generic_name": {
+                "title": "Generic Names",
                 "message": "{feature} has the generic name \"{name}\"",
                 "tip": "Names should be the actual, on-the-ground names of features."
             },
             "many_deletions": {
+                "title": "Many Deletions",
                 "points-lines-areas": {
                     "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas"
                 },
@@ -1514,6 +1524,7 @@
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
             "missing_tag": {
+                "title": "Missing Tags",
                 "any": {
                     "message": "{feature} has no tags"
                 },
@@ -1526,10 +1537,12 @@
                 "tip": "Features must have tags that define what they are."
             },
             "old_multipolygon": {
+                "title": "Misplaced Multipolygon Tags",
                 "message": "{multipolygon} has misplaced tags",
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "tag_suggests_area": {
+                "title": "Lines Tagged as Areas",
                 "message": "{feature} should be a closed area based on the tag \"{tag}\"",
                 "tip": "Areas must have connected endpoints."
             },

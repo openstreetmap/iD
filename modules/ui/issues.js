@@ -18,8 +18,8 @@ import { utilHighlightEntities } from '../util';
 export function uiIssues(context) {
     var key = t('issues.key');
     //var _featureApplicabilityList = d3_select(null);
-    var _errorsList = d3_select(null);
-    var _warningsList = d3_select(null);
+    var _errorsList = d3_select(null), _warningsList = d3_select(null);
+    var _rulesList = d3_select(null);
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
     var _shown = false;
@@ -186,6 +186,18 @@ export function uiIssues(context) {
             .text(t('issues.no_issues.info'));
     }
 
+    function renderRulesList(selection) {
+        var container = selection.selectAll('.issue-rules-list')
+            .data([0]);
+
+        _rulesList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list issue-rules-list')
+            .merge(container);
+
+        updateRulesList();
+    }
+
     /*
     function showsFeatureApplicability(d) {
         return context.validator().getFeatureApplicability() === d;
@@ -219,6 +231,20 @@ export function uiIssues(context) {
         var warnings = context.validator().getWarnings();
         _warningsList
             .call(drawIssuesList, warnings);
+    }
+
+    function updateRulesList() {
+        var rules = context.validator().getRuleIDs();
+        _rulesList
+            .call(drawListItems, rules, 'checkbox', 'rule', toggleRule, ruleIsEnabled);
+    }
+
+    function ruleIsEnabled(d) {
+        return !context.validator().getDisabledRules()[d];
+    }
+
+    function toggleRule(d) {
+        context.validator().toggleRule(d);
     }
 
 
@@ -259,6 +285,57 @@ export function uiIssues(context) {
         //if (!_pane.select('.disclosure-wrap-issues_options').classed('hide')) {
         //    updateFeatureApplicabilityList();
         //}
+
+        if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
+            updateRulesList();
+        }
+    }
+
+    function drawListItems(selection, data, type, name, change, active) {
+        var items = selection.selectAll('li')
+            .data(data);
+
+        // Exit
+        items.exit()
+            .remove();
+
+        // Enter
+        var enter = items.enter()
+            .append('li')
+            .call(tooltip()
+                .title(function(d) {
+                    if (d === 'disconnected_way') {
+                        d += '.highway';
+                    } else if (d === 'almost_junction') {
+                        d += '.highway-highway';
+                    }
+                    return t('issues.' + d + '.tip');
+                })
+                .placement('top')
+            );
+
+        var label = enter
+            .append('label');
+
+        label
+            .append('input')
+            .attr('type', type)
+            .attr('name', name)
+            .on('change', change);
+
+        label
+            .append('span')
+            .text(function(d) { return t('issues.' + d + '.title'); });
+
+        // Update
+        items = items
+            .merge(enter);
+
+        items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active)
+            .property('indeterminate', false);
     }
 
     var paneTooltip = tooltip()
@@ -362,6 +439,15 @@ export function uiIssues(context) {
             .attr('class', 'issues-warnings')
             .call(uiDisclosure(context, 'issues_warnings', true)
                 .content(renderWarningsList)
+            );
+
+        // rules
+        content
+            .append('div')
+            .attr('class', 'issues-rules')
+            .call(uiDisclosure(context, 'issues_rules', false)
+                .title(t('issues.rules.title'))
+                .content(renderRulesList)
             );
 
         // options
