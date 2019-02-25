@@ -916,7 +916,7 @@
     "shop/houseware": {"icon": "fas-blender", "geometry": ["point", "area"], "terms": ["home", "household"], "tags": {"shop": "houseware"}, "name": "Houseware Store"},
     "shop/hunting": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "hunting"}, "terms": ["arrows", "bows", "bullets", "crossbows", "rifles", "traps"], "name": "Hunting Shop"},
     "shop/interior_decoration": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "interior_decoration"}, "name": "Interior Decoration Store"},
-    "shop/jewelry": {"icon": "maki-jewelry-store", "geometry": ["point", "area"], "terms": ["bracelet", "diamond", "earrings", "gem", "necklace", "pins", "ring"], "tags": {"shop": "jewelry"}, "name": "Jeweler"},
+    "shop/jewelry": {"icon": "maki-jewelry-store", "geometry": ["point", "area"], "terms": ["bracelet", "diamond", "earrings", "gem", "gold", "jeweler", "jewellery", "jeweller", "necklace", "pins", "ring", "silver"], "tags": {"shop": "jewelry"}, "name": "Jewelry Store"},
     "shop/kiosk": {"icon": "maki-shop", "fields": ["{shop}", "levels"], "geometry": ["point", "area"], "tags": {"shop": "kiosk"}, "name": "Kiosk"},
     "shop/kitchen": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "kitchen"}, "terms": ["cabinets", "countertops", "sinks"], "name": "Kitchen Design Store"},
     "shop/laundry": {"icon": "maki-laundry", "geometry": ["point", "area"], "tags": {"shop": "laundry"}, "name": "Laundry"},

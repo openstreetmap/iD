@@ -7514,8 +7514,8 @@
                     "terms": ""
                 },
                 "shop/jewelry": {
-                    "name": "Jeweler",
-                    "terms": "bracelet,diamond,earrings,gem,necklace,pins,ring"
+                    "name": "Jewelry Store",
+                    "terms": "bracelet,diamond,earrings,gem,gold,jeweler,jewellery,jeweller,necklace,pins,ring,silver"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",

@@ -6303,9 +6303,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Interior Decoration Store'', separated by commas>'
       shop/jewelry:
         # shop=jewelry
-        name: Jeweler
-        # 'terms: bracelet,diamond,earrings,gem,necklace,pins,ring'
-        terms: '<translate with synonyms or related terms for ''Jeweler'', separated by commas>'
+        name: Jewelry Store
+        # 'terms: bracelet,diamond,earrings,gem,gold,jeweler,jewellery,jeweller,necklace,pins,ring,silver'
+        terms: '<translate with synonyms or related terms for ''Jewelry Store'', separated by commas>'
       shop/kiosk:
         # shop=kiosk
         name: Kiosk
