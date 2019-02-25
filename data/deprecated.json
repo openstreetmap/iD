@@ -180,6 +180,10 @@
       "replace": {"highway": "road", "incline": "unpaved"}
     },
     {
+      "old": {"landuse": "conservation"},
+      "replace": {"boundary": "protected_area"}
+    },
+    {
       "old": {"landuse": "farm"},
       "replace": {"landuse": "farmland"}
     },
