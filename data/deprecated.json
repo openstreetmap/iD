@@ -224,6 +224,10 @@
       "replace": {"natural": "wetland", "wetland": "marsh"}
     },
     {
+      "old": {"natural": "waterfall"},
+      "replace": {"waterway": "waterfall"}
+    },
+    {
       "old": {"office": "administrative"},
       "replace": {"office": "government"}
     },
