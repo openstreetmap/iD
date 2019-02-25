@@ -3865,6 +3865,10 @@
                     "name": "Attraction",
                     "terms": ""
                 },
+                "boundary": {
+                    "name": "Boundary",
+                    "terms": ""
+                },
                 "circular": {
                     "name": "Traffic Circle",
                     "terms": ""

@@ -3274,6 +3274,9 @@ en:
         # barrier=wall
         name: Wall
         terms: '<translate with synonyms or related terms for ''Wall'', separated by commas>'
+      boundary:
+        # boundary=*
+        name: Boundary
       boundary/administrative:
         # boundary=administrative
         name: Administrative Boundary

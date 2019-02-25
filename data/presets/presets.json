@@ -4,6 +4,7 @@
     "aeroway": {"icon": "maki-airport", "fields": ["aeroway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"aeroway": "*"}, "searchable": false, "name": "Aeroway"},
     "amenity": {"fields": ["amenity"], "geometry": ["point", "vertex", "area"], "tags": {"amenity": "*"}, "searchable": false, "name": "Amenity"},
     "attraction": {"icon": "maki-star", "fields": ["name", "attraction", "operator", "opening_hours"], "moreFields": ["opening_hours", "fee", "payment_multi", "address", "website", "phone", "email", "fax"], "geometry": ["point", "vertex", "line", "area"], "tags": {"attraction": "*"}, "searchable": false, "name": "Attraction"},
+    "boundary": {"fields": ["boundary"], "geometry": ["line"], "tags": {"boundary": "*"}, "searchable": false, "name": "Boundary"},
     "circular": {"geometry": ["vertex", "line"], "fields": ["name"], "tags": {"junction": "circular"}, "name": "Traffic Circle", "searchable": false},
     "embankment": {"geometry": ["line"], "tags": {"embankment": "yes"}, "name": "Embankment", "matchScore": 0.2, "searchable": false},
     "highway": {"fields": ["name", "highway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"highway": "*"}, "searchable": false, "name": "Highway"},
