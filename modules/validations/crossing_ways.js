@@ -143,20 +143,27 @@ export function validationCrossingWays() {
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
         'primary', 'primary_link', 'secondary', 'secondary_link'
     ];
-    var pathHighways = [
-        'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps', 'corridor'
-    ];
+    var pathHighways = {
+        path: true, footway: true, cycleway: true, bridleway: true,
+        pedestrian: true, steps: true, corridor: true
+    };
+    var nonCrossingHighways = { service: true, track: true };
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
-                var entity1IsPath = pathHighways.indexOf(entity1.tags.highway) !== -1;
-                var entity2IsPath = pathHighways.indexOf(entity2.tags.highway) !== -1;
+                var entity1IsPath = pathHighways[entity1.tags.highway];
+                var entity2IsPath = pathHighways[entity2.tags.highway];
                 if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
-                    // one feature is a path but not both, use a crossing
+                    // one feature is a path but not both
 
+                    var roadFeature = entity1IsPath ? entity2 : entity1;
+                    if (nonCrossingHighways[roadFeature.tags.highway]) {
+                        // don't mark path connections with certain roads as crossings
+                        return {};
+                    }
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     if (pathFeature.tags.highway === 'footway' &&
                         pathFeature.tags.footway === 'crossing' &&
@@ -175,8 +182,8 @@ export function validationCrossingWays() {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
-                    if (pathHighways.indexOf(entity1.tags.highway) !== -1 ||
-                        pathHighways.indexOf(entity2.tags.highway) !== -1) {
+                    if (pathHighways[entity1.tags.highway] ||
+                        pathHighways[entity2.tags.highway]) {
                         // path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
