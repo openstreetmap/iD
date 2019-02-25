@@ -40,42 +40,47 @@ export function presetIndex() {
     all.match = function(entity, resolver) {
         return resolver.transient(entity, 'presetMatch', function() {
             var geometry = entity.geometry(resolver);
-            var address;
 
             // Treat entities on addr:interpolation lines as points, not vertices - #3241
             if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
                 geometry = 'point';
             }
 
-            var geometryMatches = _index[geometry];
-            var best = -1;
-            var match;
-
-            for (var k in entity.tags) {
-                // If any part of an address is present,
-                // allow fallback to "Address" preset - #4353
-                if (/^addr:/.test(k) && geometryMatches['addr:*']) {
-                    address = geometryMatches['addr:*'][0];
-                }
-
-                var keyMatches = geometryMatches[k];
-                if (!keyMatches) continue;
-
-                for (var i = 0; i < keyMatches.length; i++) {
-                    var score = keyMatches[i].matchScore(entity);
-                    if (score > best) {
-                        best = score;
-                        match = keyMatches[i];
-                    }
-                }
-
-            }
-
-            if (address && (!match || match.isFallback())) {
-                match = address;
-            }
-            return match || all.item(geometry);
+            return all.matchTags(entity.tags, geometry);
         });
+    };
+
+    all.matchTags = function(tags, geometry) {
+
+        var address;
+        var geometryMatches = _index[geometry];
+        var best = -1;
+        var match;
+
+        for (var k in tags) {
+            // If any part of an address is present,
+            // allow fallback to "Address" preset - #4353
+            if (/^addr:/.test(k) && geometryMatches['addr:*']) {
+                address = geometryMatches['addr:*'][0];
+            }
+
+            var keyMatches = geometryMatches[k];
+            if (!keyMatches) continue;
+
+            for (var i = 0; i < keyMatches.length; i++) {
+                var score = keyMatches[i].matchScore(tags);
+                if (score > best) {
+                    best = score;
+                    match = keyMatches[i];
+                }
+            }
+
+        }
+
+        if (address && (!match || match.isFallback())) {
+            match = address;
+        }
+        return match || all.item(geometry);
     };
 
     all.allowsVertex = function(entity, resolver) {
@@ -93,7 +98,7 @@ export function presetIndex() {
                     didFindMatches = true;
                     for (var i = 0; i < keyMatches.length; i++) {
                         var preset = keyMatches[i];
-                        if (preset.searchable !== false && preset.matchScore(entity) > -1) {
+                        if (preset.searchable !== false && preset.matchScore(entity.tags) > -1) {
                             return preset;
                         }
                     }

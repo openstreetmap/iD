@@ -111,14 +111,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     preset.originalScore = preset.matchScore || 1;
 
 
-    preset.matchScore = function(entity) {
+    preset.matchScore = function(entityTags) {
         var tags = preset.tags;
         var score = 0;
 
         for (var t in tags) {
-            if (entity.tags[t] === tags[t]) {
+            if (entityTags[t] === tags[t]) {
                 score += preset.originalScore;
-            } else if (tags[t] === '*' && t in entity.tags) {
+            } else if (tags[t] === '*' && t in entityTags) {
                 score += preset.originalScore / 2;
             } else {
                 return -1;
