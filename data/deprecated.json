@@ -248,6 +248,10 @@
       "replace": {"location:transition": "yes"}
     },
     {
+      "old": {"postcode": "*"},
+      "replace": {"addr:postcode": "$1"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
     },
