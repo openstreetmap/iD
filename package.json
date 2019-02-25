@@ -90,9 +90,7 @@
     "smash": "0.0",
     "svg-sprite": "1.5.0",
     "temaki": "1.2.0",
-    "uglify-js": "~3.4.0",
-    "xml2js": "^0.4.17",
-    "xmlbuilder": "^10.0.0"
+    "uglify-js": "~3.4.0"
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",
