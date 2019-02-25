@@ -210,6 +210,9 @@ en:
       backrest:
         # backrest=*
         label: Backrest
+      bar:
+        # bar=*
+        label: Bar
       barrier:
         # barrier=*
         label: Type

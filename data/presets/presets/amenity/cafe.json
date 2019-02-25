@@ -22,7 +22,8 @@
         "phone",
         "email",
         "fax",
-        "wheelchair"
+        "wheelchair",
+        "bar"
     ],
     "geometry": [
         "point",

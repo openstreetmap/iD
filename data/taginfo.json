@@ -1104,6 +1104,7 @@
     {"key": "artwork_type", "description": "🄵 Type"},
     {"key": "atm", "description": "🄵 ATM"},
     {"key": "backrest", "description": "🄵 Backrest"},
+    {"key": "bar", "description": "🄵 Bar"},
     {"key": "basin", "description": "🄵 Type"},
     {"key": "bath:open_air", "description": "🄵 Open Air"},
     {"key": "bath:sand_bath", "description": "🄵 Sand Bath"},
