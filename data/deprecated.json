@@ -300,6 +300,18 @@
       "replace": {"tourism": "guest_house"}
     },
     {
+      "old": {"type": "broad_leaved"},
+      "replace": {"leaf_type": "broadleaved"}
+    },
+    {
+      "old": {"type": "conifer"},
+      "replace": {"leaf_type": "needleleaved"}
+    },
+    {
+      "old": {"type": "deciduous"},
+      "replace": {"leaf_cycle": "deciduous"}
+    },
+    {
       "old": {"water": "intermittent"},
       "replace": {"natural": "water", "intermittent": "yes"}
     },
@@ -318,6 +330,22 @@
     {
       "old": {"waterway": "aqueduct"},
       "replace": {"waterway": "canal", "bridge": "aqueduct"}
+    },
+    {
+      "old": {"wood": "coniferous"},
+      "replace": {"leaf_type": "needleleaved"}
+    },
+    {
+      "old": {"wood": "deciduous"},
+      "replace": {"leaf_cycle": "deciduous"}
+    },
+    {
+      "old": {"wood": "evergreen"},
+      "replace": {"leaf_cycle": "evergreen"}
+    },
+    {
+      "old": {"wood": "mixed"},
+      "replace": {"leaf_cycle": "mixed", "leaf_type": "mixed"}
     }
   ]
 }
