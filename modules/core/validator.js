@@ -120,6 +120,8 @@ export function coreValidator(context) {
             return !typeIssues.length;
         }
 
+        runValidation('missing_role');
+        
         if (entity.type === 'relation') {
             if (!runValidation('old_multipolygon')) {
                 // don't flag missing tags if they are on the outer way
