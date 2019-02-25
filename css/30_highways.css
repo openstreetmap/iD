@@ -224,33 +224,21 @@ path.line.shadow.tag-highway-living_street,
 path.line.shadow.tag-highway-bus_guideway,
 path.line.shadow.tag-highway-service,
 path.line.shadow.tag-highway-track,
-path.line.shadow.tag-highway-road,
-path.line.shadow.tag-living_street,
-path.line.shadow.tag-service,
-path.line.shadow.tag-track,
-path.line.shadow.tag-road {
+path.line.shadow.tag-highway-road {
     stroke-width: 16;
 }
 path.line.casing.tag-highway-living_street,
 path.line.casing.tag-highway-bus_guideway,
 path.line.casing.tag-highway-service,
 path.line.casing.tag-highway-track,
-path.line.casing.tag-highway-road,
-path.line.casing.tag-living_street,
-path.line.casing.tag-service,
-path.line.casing.tag-track,
-path.line.casing.tag-road {
+path.line.casing.tag-highway-road {
     stroke-width: 7;
 }
 path.line.stroke.tag-highway-living_street,
 path.line.stroke.tag-highway-bus_guideway,
 path.line.stroke.tag-highway-service,
 path.line.stroke.tag-highway-track,
-path.line.stroke.tag-highway-road,
-path.line.stroke.tag-living_street,
-path.line.stroke.tag-service,
-path.line.stroke.tag-track,
-path.line.stroke.tag-road {
+path.line.stroke.tag-highway-road {
     stroke-width: 5;
 }
 
@@ -260,14 +248,7 @@ path.line.shadow.tag-highway-cycleway,
 path.line.shadow.tag-highway-bridleway,
 path.line.shadow.tag-highway-corridor,
 path.line.shadow.tag-highway-pedestrian,
-path.line.shadow.tag-highway-steps,
-path.line.shadow.tag-path,
-path.line.shadow.tag-footway,
-path.line.shadow.tag-cycleway,
-path.line.shadow.tag-bridleway,
-path.line.shadow.tag-corridor,
-path.line.shadow.tag-pedestrian,
-path.line.shadow.tag-steps {
+path.line.shadow.tag-highway-steps {
     stroke-width: 16;
 }
 path.line.casing.tag-highway-path,
@@ -276,14 +257,7 @@ path.line.casing.tag-highway-cycleway,
 path.line.casing.tag-highway-bridleway,
 path.line.casing.tag-highway-corridor,
 path.line.casing.tag-highway-pedestrian,
-path.line.casing.tag-highway-steps,
-path.line.casing.tag-path,
-path.line.casing.tag-footway,
-path.line.casing.tag-cycleway,
-path.line.casing.tag-bridleway,
-path.line.casing.tag-corridor,
-path.line.casing.tag-pedestrian,
-path.line.casing.tag-steps {
+path.line.casing.tag-highway-steps {
     stroke-width: 5;
 }
 path.line.stroke.tag-highway-path,
@@ -292,14 +266,7 @@ path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway,
 path.line.stroke.tag-highway-corridor,
 path.line.stroke.tag-highway-pedestrian,
-path.line.stroke.tag-highway-steps,
-path.line.stroke.tag-path,
-path.line.stroke.tag-footway,
-path.line.stroke.tag-cycleway,
-path.line.stroke.tag-bridleway,
-path.line.stroke.tag-corridor,
-path.line.stroke.tag-pedestrian,
-path.line.stroke.tag-steps {
+path.line.stroke.tag-highway-steps {
     stroke-width: 3;
 }
 
@@ -307,33 +274,21 @@ path.line.stroke.tag-steps {
 .low-zoom path.line.shadow.tag-highway-bus_guideway,
 .low-zoom path.line.shadow.tag-highway-service,
 .low-zoom path.line.shadow.tag-highway-track,
-.low-zoom path.line.shadow.tag-highway-road,
-.low-zoom path.line.shadow.tag-living_street,
-.low-zoom path.line.shadow.tag-service,
-.low-zoom path.line.shadow.tag-track,
-.low-zoom path.line.shadow.tag-road {
+.low-zoom path.line.shadow.tag-highway-road {
     stroke-width: 12;
 }
 .low-zoom path.line.casing.tag-highway-living_street,
 .low-zoom path.line.casing.tag-highway-bus_guideway,
 .low-zoom path.line.casing.tag-highway-service,
 .low-zoom path.line.casing.tag-highway-track,
-.low-zoom path.line.casing.tag-highway-road,
-.low-zoom path.line.casing.tag-living_street,
-.low-zoom path.line.casing.tag-service,
-.low-zoom path.line.casing.tag-track,
-.low-zoom path.line.casing.tag-road {
+.low-zoom path.line.casing.tag-highway-road {
     stroke-width: 5;
 }
 .low-zoom path.line.stroke.tag-highway-living_street,
 .low-zoom path.line.stroke.tag-highway-bus_guideway,
 .low-zoom path.line.stroke.tag-highway-service,
 .low-zoom path.line.stroke.tag-highway-track,
-.low-zoom path.line.stroke.tag-highway-road,
-.low-zoom path.line.stroke.tag-living_street,
-.low-zoom path.line.stroke.tag-service,
-.low-zoom path.line.stroke.tag-track,
-.low-zoom path.line.stroke.tag-road {
+.low-zoom path.line.stroke.tag-highway-road {
     stroke-width: 3;
 }
 
@@ -343,14 +298,7 @@ path.line.stroke.tag-steps {
 .low-zoom path.line.shadow.tag-highway-bridleway,
 .low-zoom path.line.shadow.tag-highway-corridor,
 .low-zoom path.line.shadow.tag-highway-pedestrian,
-.low-zoom path.line.shadow.tag-highway-steps,
-.low-zoom path.line.shadow.tag-path,
-.low-zoom path.line.shadow.tag-footway,
-.low-zoom path.line.shadow.tag-cycleway,
-.low-zoom path.line.shadow.tag-bridleway,
-.low-zoom path.line.shadow.tag-corridor,
-.low-zoom path.line.shadow.tag-pedestrian,
-.low-zoom path.line.shadow.tag-steps {
+.low-zoom path.line.shadow.tag-highway-steps {
     stroke-width: 12;
 }
 .low-zoom path.line.casing.tag-highway-path,
@@ -359,14 +307,7 @@ path.line.stroke.tag-steps {
 .low-zoom path.line.casing.tag-highway-bridleway,
 .low-zoom path.line.casing.tag-highway-corridor,
 .low-zoom path.line.casing.tag-highway-pedestrian,
-.low-zoom path.line.casing.tag-highway-steps,
-.low-zoom path.line.casing.tag-path,
-.low-zoom path.line.casing.tag-footway,
-.low-zoom path.line.casing.tag-cycleway,
-.low-zoom path.line.casing.tag-bridleway,
-.low-zoom path.line.casing.tag-corridor,
-.low-zoom path.line.casing.tag-pedestrian,
-.low-zoom path.line.casing.tag-steps {
+.low-zoom path.line.casing.tag-highway-steps {
     stroke-width: 3;
 }
 .low-zoom path.line.stroke.tag-highway-path,
@@ -375,14 +316,7 @@ path.line.stroke.tag-steps {
 .low-zoom path.line.stroke.tag-highway-bridleway,
 .low-zoom path.line.stroke.tag-highway-corridor,
 .low-zoom path.line.stroke.tag-highway-pedestrian,
-.low-zoom path.line.stroke.tag-highway-steps,
-.low-zoom path.line.stroke.tag-path,
-.low-zoom path.line.stroke.tag-footway,
-.low-zoom path.line.stroke.tag-cycleway,
-.low-zoom path.line.stroke.tag-bridleway,
-.low-zoom path.line.stroke.tag-corridor,
-.low-zoom path.line.stroke.tag-pedestrian,
-.low-zoom path.line.stroke.tag-steps {
+.low-zoom path.line.stroke.tag-highway-steps {
     stroke-width: 1;
 }
 
