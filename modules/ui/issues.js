@@ -308,6 +308,8 @@ export function uiIssues(context) {
                         d += '.highway';
                     } else if (d === 'almost_junction') {
                         d += '.highway-highway';
+                    } else if (d === 'missing_role') {
+                        d += '.multipolygon';
                     }
                     return t('issues.' + d + '.tip');
                 })

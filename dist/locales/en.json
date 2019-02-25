@@ -1523,6 +1523,13 @@
                 },
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
+            "missing_role": {
+                "title": "Missing Roles",
+                "message": "{member} has no role within {relation}",
+                "multipolygon": {
+                    "tip": "Multipolygon members must have an inner or outer role."
+                }
+            },
             "missing_tag": {
                 "title": "Missing Tags",
                 "any": {
@@ -1579,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Removed an old tag combination."
                 },
+                "remove_from_relation": {
+                    "title": "Remove from relation"
+                },
                 "remove_generic_name": {
                     "title": "Remove the name",
                     "annotation": "Removed a generic name."
@@ -1595,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Select a feature type"
+                },
+                "set_as_inner": {
+                    "title": "Set as inner"
+                },
+                "set_as_outer": {
+                    "title": "Set as outer"
                 },
                 "tag_as_disconnected": {
                     "title": "Tag as disconnected",
