@@ -68,7 +68,7 @@ export function presetIndex() {
                         match = keyMatches[i];
                     }
                 }
-                
+
             }
 
             if (address && (!match || match.isFallback())) {
@@ -83,34 +83,23 @@ export function presetIndex() {
         if (_isEmpty(entity.tags)) return true;
         return resolver.transient(entity, 'vertexMatch', function() {
             var vertexPresets = _index.vertex;
-            var match;
-
             if (entity.isOnAddressLine(resolver)) {
-                match = true;
+                return true;
             } else {
+                var didFindMatches = false;
                 for (var k in entity.tags) {
                     var keyMatches = vertexPresets[k];
                     if (!keyMatches) continue;
+                    didFindMatches = true;
                     for (var i = 0; i < keyMatches.length; i++) {
-                        var preset =  keyMatches[i];
-                        if (preset.searchable !== false) {
-                            if (preset.matchScore(entity) > -1) {
-                                match = preset;
-                                break;
-                            }
+                        var preset = keyMatches[i];
+                        if (preset.searchable !== false && preset.matchScore(entity) > -1) {
+                            return preset;
                         }
                     }
-
-                    if (!match && /^addr:/.test(k) && vertexPresets['addr:*']) {
-                        match = true;
-                    }
-
-                    if (match) break;
-
                 }
+                return !didFindMatches;
             }
-
-            return match;
         });
     };
 

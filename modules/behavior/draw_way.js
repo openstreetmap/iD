@@ -65,7 +65,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     function allowsVertex(d) {
-        return context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
     }
 
 

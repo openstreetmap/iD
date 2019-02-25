@@ -118,7 +118,7 @@ export function behaviorDraw(context) {
     }
 
     function allowsVertex(d) {
-        return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
     }
 
     // related code

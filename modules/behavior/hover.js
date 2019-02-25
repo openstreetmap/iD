@@ -103,6 +103,10 @@ export function behaviorHover(context) {
                 .on('mouseup.hover', null, true);
         }
 
+        function allowsVertex(d) {
+            return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
+        }
+
         function enter(datum) {
             if (datum === _target) return;
             _target = datum;
@@ -150,7 +154,7 @@ export function behaviorHover(context) {
                 }
 
                 var suppressed = (_altDisables && d3_event && d3_event.altKey) ||
-                    (entity.type === 'node' && _ignoreVertex && !context.presets().allowsVertex(entity, context.graph()));
+                    (entity.type === 'node' && _ignoreVertex && !allowsVertex(entity));
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
