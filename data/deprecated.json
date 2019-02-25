@@ -153,6 +153,10 @@
       "replace": {"sidewalk": "separate"}
     },
     {
+      "old": {"highway": "abandoned"},
+      "replace": {"abandoned:highway": "*"}
+    },
+    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
     },
