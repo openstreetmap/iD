@@ -13,8 +13,6 @@ import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilKeybinding, utilRebind } from '../util';
 
-import _isEmpty from 'lodash-es/isEmpty';
-
 var _usedTails = {};
 var _disableSpace = false;
 var _lastSpace = null;
