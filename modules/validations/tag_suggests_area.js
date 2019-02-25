@@ -19,9 +19,9 @@ export function validationTagSuggestsArea() {
             return [];
         }
 
-        if (context.presets().matchTags(entity.tags, 'line') ===
-            context.presets().matchTags(entity.tags, 'area')) {
-            // the preset allows lines and making this an area wouldn't matter
+        if (context.presets().matchTags(tagSuggestingArea, 'line') ===
+            context.presets().matchTags(tagSuggestingArea, 'area')) {
+            // these tags also allow lines and making this an area wouldn't matter
             return [];
         }
 
