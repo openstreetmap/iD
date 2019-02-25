@@ -2223,6 +2223,9 @@
                 "backrest": {
                     "label": "Backrest"
                 },
+                "bar": {
+                    "label": "Bar"
+                },
                 "barrier": {
                     "label": "Type"
                 },
