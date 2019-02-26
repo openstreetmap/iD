@@ -147,7 +147,7 @@ export function validationCrossingWays() {
         path: true, footway: true, cycleway: true, bridleway: true,
         pedestrian: true, steps: true, corridor: true
     };
-    var nonCrossingHighways = { service: true, track: true };
+    var nonCrossingHighways = { track: true };
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
