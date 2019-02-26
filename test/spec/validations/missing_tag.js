@@ -61,7 +61,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('finds no tags', function() {
+    it('flags no tags', function() {
         createWay({});
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -71,7 +71,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issue.entities[0].id).to.eql('w-1');
     });
 
-    it('finds no descriptive tags', function() {
+    it('flags no descriptive tags', function() {
         createWay({ name: 'Main Street', source: 'Bing' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -81,7 +81,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issue.entities[0].id).to.eql('w-1');
     });
 
-    it('finds no descriptive tags on multipolygon', function() {
+    it('flags no descriptive tags on multipolygon', function() {
         createRelation({ name: 'City Park', source: 'Bing', type: 'multipolygon' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -91,7 +91,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issue.entities[0].id).to.eql('r-1');
     });
 
-    it('finds no type tag on relation', function() {
+    it('flags no type tag on relation', function() {
         createRelation({ name: 'City Park', source: 'Bing', leisure: 'park' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);

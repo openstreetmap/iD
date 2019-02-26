@@ -49,7 +49,7 @@ describe('iD.validations.disconnected_way', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('finds disconnected highway', function() {
+    it('flags disconnected highway', function() {
         createWay({'highway': 'unclassified'});
         var issues = validate();
         expect(issues).to.have.lengthOf(1);

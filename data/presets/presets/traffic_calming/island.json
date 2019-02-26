@@ -5,6 +5,7 @@
     ],
     "geometry": [
         "vertex",
+        "line",
         "area"
     ],
     "terms": [

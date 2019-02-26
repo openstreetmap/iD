@@ -15,7 +15,8 @@ iD.data.presets = {
         vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
         relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
         // for tests related to areaKeys:
-        building: { name: 'Building', tags: { building: 'yes' }, geometry: ['area'] }
+        building: { name: 'Building', tags: { building: 'yes' }, geometry: ['point', 'area'] },
+        man_made: { name: 'Man Made', tags: { man_made: '*' }, geometry: ['vertex', 'point', 'line', 'area'] }
     }
 };
 

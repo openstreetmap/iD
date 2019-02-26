@@ -39,7 +39,7 @@ describe('iD.validations.deprecated_tag', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('finds deprecated tags', function() {
+    it('flags deprecated tags', function() {
         createWay({'highway': 'ford'});
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
