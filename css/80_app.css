@@ -999,7 +999,7 @@ a.hide-toggle {
     stroke-width: 4 !important;
 }
 
-.preset-icon-fill-area {
+.preset-icon-fill {
     cursor: inherit;
     height: 66%;
     width: 66%;
@@ -1010,22 +1010,10 @@ a.hide-toggle {
 }
 
 .preset-icon-fill-vertex {
-    height: 40px;
-    width: 40px;
-    margin: auto;
-    position: absolute;
-    left: 10px;
-    top: 10px;
     border: 1.5px solid #333;
-    border-radius: 20px;
+    border-radius: 100%;
     background-color: #efefef;
     backface-visibility: hidden;
-}
-
-[dir='rtl'] .preset-icon-fill-vertex,
-[dir='rtl'] .preset-icon-fill-area {
-  left: auto;
-  right: 10px;
 }
 .preset-icon-frame {
     width: 100%;
