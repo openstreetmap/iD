@@ -1,7 +1,12 @@
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { geoSphericalDistance } from '../../geo';
+import {
+    geoSphericalDistance,
+    geoVecDot,
+    geoVecNormalize,
+    geoVecSubtract
+} from '../../geo';
 
 
 export function pointBox(loc, context) {
@@ -133,28 +138,9 @@ export function isMostlySquare(points) {
         var a = points[(i - 1 + points.length) % points.length];
         var b = points[i];
         var c = points[(i + 1) % points.length];
-        var p = subtractPoints(a, b);
-        var q = subtractPoints(c, b);
-
-        p = normalizePoint(p);
-        q = normalizePoint(q);
-
-        return p[0] * q[0] + p[1] * q[1];
-
-
-        function subtractPoints(a, b) {
-            return [a[0] - b[0], a[1] - b[1]];
-        }
-
-        function normalizePoint(point) {
-            var vector = [0, 0];
-            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
-            if (length !== 0) {
-                vector[0] = point[0] / length;
-                vector[1] = point[1] / length;
-            }
-            return vector;
-        }
+        var p = geoVecNormalize(geoVecSubtract(a, b));
+        var q = geoVecNormalize(geoVecSubtract(c, b));
+        return geoVecDot(p, q);
     }
 }
 

@@ -2,33 +2,41 @@ import _clone from 'lodash-es/clone';
 import _uniq from 'lodash-es/uniq';
 
 import { actionDeleteNode } from './delete_node';
-import { geoVecInterp, geoVecLength } from '../geo';
+import {
+    geoVecAdd,
+    geoVecDot,
+    geoVecInterp,
+    geoVecLength,
+    geoVecNormalize,
+    geoVecScale,
+    geoVecSubtract
+} from '../geo';
 
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
  */
 export function actionOrthogonalize(wayId, projection) {
-    var threshold = 12, // degrees within right or straight to alter
-        lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),
-        upperThreshold = Math.cos(threshold * Math.PI / 180);
+    var threshold = 12; // degrees within right or straight to alter
+    var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
+    var upperThreshold = Math.cos(threshold * Math.PI / 180);
 
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
-            points = _uniq(nodes).map(function(n) { return projection(n.loc); }),
-            corner = {i: 0, dotp: 1},
-            epsilon = 1e-4,
-            node, loc, score, motions, i, j;
+        var way = graph.entity(wayId);
+        var nodes = graph.childNodes(way);
+        var points = _uniq(nodes).map(function(n) { return projection(n.loc); });
+        var corner = {i: 0, dotp: 1};
+        var epsilon = 1e-4;
+        var node, loc, score, motions, i, j;
 
         if (points.length === 3) {   // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
-                points[corner.i] = addPoints(points[corner.i], motions[corner.i]);
+                points[corner.i] = geoVecAdd(points[corner.i], motions[corner.i]);
                 score = corner.dotp;
                 if (score < epsilon) {
                     break;
@@ -40,14 +48,14 @@ export function actionOrthogonalize(wayId, projection) {
             graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
 
         } else {
-            var best,
-                originalPoints = _clone(points);
+            var best;
+            var originalPoints = _clone(points);
             score = Infinity;
 
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
                 for (j = 0; j < motions.length; j++) {
-                    points[j] = addPoints(points[j],motions[j]);
+                    points[j] = geoVecAdd(points[j],motions[j]);
                 }
                 var newScore = squareness(points);
                 if (newScore < score) {
@@ -91,15 +99,15 @@ export function actionOrthogonalize(wayId, projection) {
 
 
         function calcMotion(b, i, array) {
-            var a = array[(i - 1 + array.length) % array.length],
-                c = array[(i + 1) % array.length],
-                p = subtractPoints(a, b),
-                q = subtractPoints(c, b),
-                scale, dotp;
+            var a = array[(i - 1 + array.length) % array.length];
+            var c = array[(i + 1) % array.length];
+            var p = geoVecSubtract(a, b);
+            var q = geoVecSubtract(c, b);
+            var scale, dotp;
 
-            scale = 2 * Math.min(geoVecLength(p, [0, 0]), geoVecLength(q, [0, 0]));
-            p = normalizePoint(p, 1.0);
-            q = normalizePoint(q, 1.0);
+            scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
+            p = geoVecNormalize(p);
+            q = geoVecNormalize(q);
 
             dotp = filterDotProduct(p[0] * q[0] + p[1] * q[1]);
 
@@ -113,7 +121,9 @@ export function actionOrthogonalize(wayId, projection) {
                 corner.dotp = Math.abs(dotp);
             }
 
-            return normalizePoint(addPoints(p, q), 0.1 * dotp * scale);
+            var vec = geoVecNormalize(geoVecAdd(p, q));
+            return geoVecScale(vec, 0.1 * dotp * scale);
+
         }
     };
 
@@ -121,7 +131,6 @@ export function actionOrthogonalize(wayId, projection) {
     function squareness(points) {
         return points.reduce(function(sum, val, i, array) {
             var dotp = normalizedDotProduct(i, array);
-
             dotp = filterDotProduct(dotp);
             return sum + 2.0 * Math.min(Math.abs(dotp - 1.0), Math.min(Math.abs(dotp), Math.abs(dotp + 1)));
         }, 0);
@@ -129,41 +138,12 @@ export function actionOrthogonalize(wayId, projection) {
 
 
     function normalizedDotProduct(i, points) {
-        var a = points[(i - 1 + points.length) % points.length],
-            b = points[i],
-            c = points[(i + 1) % points.length],
-            p = subtractPoints(a, b),
-            q = subtractPoints(c, b);
-
-        p = normalizePoint(p, 1.0);
-        q = normalizePoint(q, 1.0);
-
-        return p[0] * q[0] + p[1] * q[1];
-    }
-
-
-    function subtractPoints(a, b) {
-        return [a[0] - b[0], a[1] - b[1]];
-    }
-
-
-    function addPoints(a, b) {
-        return [a[0] + b[0], a[1] + b[1]];
-    }
-
-
-    function normalizePoint(point, scale) {
-        var vector = [0, 0];
-        var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
-        if (length !== 0) {
-            vector[0] = point[0] / length;
-            vector[1] = point[1] / length;
-        }
-
-        vector[0] *= scale;
-        vector[1] *= scale;
-
-        return vector;
+        var a = points[(i - 1 + points.length) % points.length];
+        var b = points[i];
+        var c = points[(i + 1) % points.length];
+        var p = geoVecNormalize(geoVecSubtract(a, b));
+        var q = geoVecNormalize(geoVecSubtract(c, b));
+        return geoVecDot(p, q);
     }
 
 
@@ -177,9 +157,9 @@ export function actionOrthogonalize(wayId, projection) {
 
 
     action.disabled = function(graph) {
-        var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
-            points = _uniq(nodes).map(function(n) { return projection(n.loc); });
+        var way = graph.entity(wayId);
+        var nodes = graph.childNodes(way);
+        var points = _uniq(nodes).map(function(n) { return projection(n.loc); });
 
         if (squareness(points)) {
             return false;

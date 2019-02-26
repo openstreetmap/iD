@@ -37,9 +37,19 @@ export function geoVecInterp(a, b, t) {
 
 // http://jsperf.com/id-dist-optimization
 export function geoVecLength(a, b) {
+    b = b || [0, 0];
     var x = a[0] - b[0];
     var y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
+}
+
+// get a unit vector
+export function geoVecNormalize(a) {
+    var length = Math.sqrt((a[0] * a[0]) + (a[1] * a[1]));
+    if (length !== 0) {
+        return geoVecScale(a, 1 / length);
+    }
+    return [0, 0];
 }
 
 // Return the counterclockwise angle in the range (-pi, pi)
