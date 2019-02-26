@@ -3099,6 +3099,9 @@ ul.issue-fix-list {
 ul.issue-fix-list button {
     padding: 2px 10px 2px 26px;
 }
+[dir='rtl'] ul.issue-fix-list button {
+    padding: 2px 26px 2px 10px;
+}
 .issue-fix-item:not(.actionable) button {
     cursor: auto;
 
