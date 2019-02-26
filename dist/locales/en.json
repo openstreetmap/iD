@@ -1782,6 +1782,18 @@
                     "reference": "Google products are proprietary and must not be used as references."
                 }
             },
+            "invalid_format": {
+                "title": "Invalid Formatting",
+                "tip": "Find features tagged with invalid value formatting",
+                "email": {
+                    "message": "{feature} is tagged with an invalid email address",
+                    "reference": "Email addresses must be of the form \"local-part@domain\"."
+                },
+                "website": {
+                    "message": "{feature} is tagged with an invalid website",
+                    "reference": "Websites should start with a \"http\" or \"https\" scheme."
+                }
+            },
             "missing_role": {
                 "title": "Missing Roles",
                 "message": "{member} has no role within {relation}",
