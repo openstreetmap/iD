@@ -29,6 +29,72 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.14.3
+##### 2019-Feb-26
+
+#### :tada: New Features
+* Add a Rules section to the Issues pane where all validation types are listed and can be toggled on or off ([#5979])
+
+[#5979]: https://github.com/openstreetmap/iD/issues/5979
+
+#### :white_check_mark: Validation
+* Flag multipolygon members without roles ([#5851])
+* Don't flag lines tagged as areas if the tag is also allowed on lines ([#5933])
+* Don't automatically add "highway=crossing" tag when connecting paths to Unmaintained Track Roads
+* Deprecate "amenity=toilet" ([#5953]), "landuse=conservation" ([#5957]) and "building:color" ([#5956], thanks [@matkoniecz])
+* Deprecate various "footway" ([#5935]) and "wood" ([#5958]) values 
+* Deprecate "highway=abandoned" ([#5968]), "natural=waterfall" ([#5972]), and "postcode" ([#5959])
+
+[#5851]: https://github.com/openstreetmap/iD/issues/5851
+[#5933]: https://github.com/openstreetmap/iD/issues/5933
+[#5953]: https://github.com/openstreetmap/iD/issues/5953
+[#5957]: https://github.com/openstreetmap/iD/issues/5957
+[#5935]: https://github.com/openstreetmap/iD/issues/5935
+[#5956]: https://github.com/openstreetmap/iD/issues/5956
+[#5958]: https://github.com/openstreetmap/iD/issues/5958
+[#5968]: https://github.com/openstreetmap/iD/issues/5968
+[#5972]: https://github.com/openstreetmap/iD/issues/5972
+[#5959]: https://github.com/openstreetmap/iD/issues/5959
+
+[@matkoniecz]: https://github.com/matkoniecz
+
+#### :bug: Bugfixes
+* Fix error upon pressing escape when drawing an area  with only one point ([#5941], [#5950], thanks [@jguthrie100])
+* Fix an issue where vertices would not snap to some nodes that could be vertices ([#5942])
+* Fix an issue where pressing enter during feature type search would not select the first item ([#5921])
+* Fix an issue where all feature types would be disabled if Other Features were hidden ([#5934])
+* Fix an issue where the sidebar UI would flash when adding a node while drawing an area
+
+[#5941]: https://github.com/openstreetmap/iD/issues/5941
+[#5950]: https://github.com/openstreetmap/iD/issues/5950
+[#5942]: https://github.com/openstreetmap/iD/issues/5942
+[#5921]: https://github.com/openstreetmap/iD/issues/5921
+[#5934]: https://github.com/openstreetmap/iD/issues/5934
+
+[@jguthrie100]: https://github.com/jguthrie100
+
+#### :hourglass: Performance
+* Add option to turn off specific validation rules if they are slowing down iD ([#5979])
+
+[#5979]: https://github.com/openstreetmap/iD/issues/5979
+
+#### :rocket: Presets
+* Add Bar field to Restuarant, Cafe, and Hotel ([#5947], [#5970], thanks [@alphagamer7])
+* Rename Jeweler to Jewelry Store ([#5948])
+* Add unsearchable generic Boundary preset ([#5975])
+* Don't render roads with a "footway" tag too thin ([#5936])
+* Allow Traffic Islands to be drawn as lines ([#5945])
+
+[#5947]: https://github.com/openstreetmap/iD/issues/5947
+[#5970]: https://github.com/openstreetmap/iD/issues/5970
+[#5948]: https://github.com/openstreetmap/iD/issues/5948
+[#5975]: https://github.com/openstreetmap/iD/issues/5975
+[#5936]: https://github.com/openstreetmap/iD/issues/5936
+[#5945]: https://github.com/openstreetmap/iD/issues/5945
+
+[@alphagamer7]: https://github.com/alphagamer7
+
+
 # 2.14.2
 ##### 2019-Feb-21
 
