@@ -26,13 +26,22 @@ export function uiPresetIcon() {
 
     function render() {
         var selection = d3_select(this);
+
+        var container = selection.selectAll('.preset-icon-container')
+            .data([0]);
+
+        container = container.enter()
+            .append('div')
+            .attr('class', 'preset-icon-container')
+            .merge(container);
+
         var p = preset.apply(this, arguments);
         var geom = geometry.apply(this, arguments);
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
         var isFa = /^fa[srb]-/.test(picon);
-        var isPOI = isMaki || isTemaki || isFa;
+        var isiDIcon = !(isMaki || isTemaki || isFa);
         var isCategory = !p.setTags;
         var drawLine = geom === 'line' && !isCategory;
         var isFramed = (geom === 'area' || drawLine || geom === 'vertex');
@@ -45,7 +54,7 @@ export function uiPresetIcon() {
         }
         var tagClasses = svgTagClasses().getClassesString(tags, '');
 
-        var fill = selection.selectAll('.preset-icon-fill')
+        var fill = container.selectAll('.preset-icon-fill')
             .data([0]);
 
         fill = fill.enter()
@@ -57,7 +66,7 @@ export function uiPresetIcon() {
                 return 'preset-icon-fill preset-icon-fill-' + geom + ' ' + tagClasses;
             });
 
-        var line = selection.selectAll('.preset-icon-line')
+        var line = container.selectAll('.preset-icon-line')
             .data(drawLine ? [0] : []);
 
         line.exit()
@@ -99,7 +108,7 @@ export function uiPresetIcon() {
             .attr('class', 'line casing ' + tagClasses);
 
 
-        var areaFrame = selection.selectAll('.preset-icon-frame')
+        var areaFrame = container.selectAll('.preset-icon-frame')
             .data((geom === 'area') ? [0] : []);
 
         areaFrame.exit()
@@ -111,7 +120,7 @@ export function uiPresetIcon() {
             .call(svgIcon('#iD-preset-icon-frame'));
 
 
-        var icon = selection.selectAll('.preset-icon')
+        var icon = container.selectAll('.preset-icon')
             .data([0]);
 
         icon = icon.enter()
@@ -121,13 +130,13 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon ' + geom + '-geom ' + 'preset-icon-' +
-                (isPOI ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
-            );
+            .attr('class', 'preset-icon ' + geom + '-geom')
+            .classed('framed', isFramed)
+            .classed('preset-icon-iD', isiDIcon);
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + ' ' + (isPOI && geom !== 'line'  ? '' : tagClasses);
+                return 'icon ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses);
             });
 
         icon.selectAll('use')
