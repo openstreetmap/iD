@@ -4,6 +4,9 @@
         "structure_waterway",
         "intermittent"
     ],
+    "moreFields": [
+        "covered"
+    ],
     "geometry": [
         "line"
     ],

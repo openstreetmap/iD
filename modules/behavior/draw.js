@@ -13,8 +13,6 @@ import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilKeybinding, utilRebind } from '../util';
 
-import _isEmpty from 'lodash-es/isEmpty';
-
 var _usedTails = {};
 var _disableSpace = false;
 var _lastSpace = null;
@@ -118,7 +116,7 @@ export function behaviorDraw(context) {
     }
 
     function allowsVertex(d) {
-        return _isEmpty(d.tags) || context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
     }
 
     // related code

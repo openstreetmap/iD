@@ -1426,18 +1426,24 @@
             "warnings": {
                 "list_title": "Warnings ({count})"
             },
+            "rules": {
+                "title": "Rules"
+            },
             "no_issues": {
                 "message": "Everything looks fine",
                 "info": "Any issues will show up here as you edit"
             },
             "almost_junction": {
+                "title": "Almost Junctions",
                 "message": "{feature} is very close but not connected to {feature2}",
                 "highway-highway": {
                     "tip": "Intersecting highways should share a junction vertex."
                 }
             },
             "crossing_ways": {
+                "title": "Crossings Ways",
                 "message": "{feature} crosses {feature2}",
+                "tip": "Highways, railways, waterways, and buildings should not cross ambiguously.",
                 "building-building": {
                     "tip": "Buildings should not intersect except on different layers."
                 },
@@ -1488,6 +1494,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Deprecated Tags",
                 "single": {
                     "message": "{feature} has the outdated tag \"{tag}\""
                 },
@@ -1497,16 +1504,19 @@
                 "tip": "Some tags become deprecated over time and should be replaced."
             },
             "disconnected_way": {
+                "title": "Disconnected Ways",
                 "highway": {
                     "message": "{highway} is disconnected from other roads and paths",
                     "tip": "Highways should connect to other highways or building entrances."
                 }
             },
             "generic_name": {
+                "title": "Generic Names",
                 "message": "{feature} has the generic name \"{name}\"",
                 "tip": "Names should be the actual, on-the-ground names of features."
             },
             "many_deletions": {
+                "title": "Many Deletions",
                 "points-lines-areas": {
                     "message": "Deleting {n} features: {p} points, {l} lines, and {a} areas"
                 },
@@ -1515,7 +1525,15 @@
                 },
                 "tip": "Only redundant or nonexistent features should be deleted."
             },
+            "missing_role": {
+                "title": "Missing Roles",
+                "message": "{member} has no role within {relation}",
+                "multipolygon": {
+                    "tip": "Multipolygon members must have an inner or outer role."
+                }
+            },
             "missing_tag": {
+                "title": "Missing Tags",
                 "any": {
                     "message": "{feature} has no tags"
                 },
@@ -1528,10 +1546,12 @@
                 "tip": "Features must have tags that define what they are."
             },
             "old_multipolygon": {
+                "title": "Misplaced Multipolygon Tags",
                 "message": "{multipolygon} has misplaced tags",
                 "tip": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "tag_suggests_area": {
+                "title": "Lines Tagged as Areas",
                 "message": "{feature} should be a closed area based on the tag \"{tag}\"",
                 "tip": "Areas must have connected endpoints."
             },
@@ -1568,6 +1588,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Removed an old tag combination."
                 },
+                "remove_from_relation": {
+                    "title": "Remove from relation"
+                },
                 "remove_generic_name": {
                     "title": "Remove the name",
                     "annotation": "Removed a generic name."
@@ -1584,6 +1607,12 @@
                 },
                 "select_preset": {
                     "title": "Select a feature type"
+                },
+                "set_as_inner": {
+                    "title": "Set as inner"
+                },
+                "set_as_outer": {
+                    "title": "Set as outer"
                 },
                 "tag_as_disconnected": {
                     "title": "Tag as disconnected",
@@ -2224,6 +2253,9 @@
                 },
                 "backrest": {
                     "label": "Backrest"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Type"
@@ -3864,6 +3896,10 @@
                     "name": "Attraction",
                     "terms": ""
                 },
+                "boundary": {
+                    "name": "Boundary",
+                    "terms": ""
+                },
                 "circular": {
                     "name": "Traffic Circle",
                     "terms": ""
@@ -4637,8 +4673,8 @@
                     "terms": "coin,crush,elongated,flatten,penny,souvenir"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Excrement Bag Vending Machine",
-                    "terms": "excrement bags,poop,dog,animal"
+                    "name": "Excrement Bag Dispenser",
+                    "terms": "excrement bags,poop,waste,dog,animal"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
@@ -7513,8 +7549,8 @@
                     "terms": ""
                 },
                 "shop/jewelry": {
-                    "name": "Jeweler",
-                    "terms": "bracelet,diamond,earrings,gem,necklace,pins,ring"
+                    "name": "Jewelry Store",
+                    "terms": "bracelet,diamond,earrings,gem,gold,jeweler,jewellery,jeweller,necklace,pins,ring,silver"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",
@@ -8371,6 +8407,20 @@
                 },
                 "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
                 "name": "Japan GSI ortho Imagery"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
+                "name": "Japan GSI airphoto Imagery"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan seamless photo"
+                },
+                "description": "Japan GSI seamlessphoto Imagery. The collection of latest imageries of GSI ortho, airphoto, post disaster and others.",
+                "name": "Japan GSI seamlessphoto Imagery"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

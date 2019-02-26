@@ -1,15 +1,14 @@
 import _isFunction from 'lodash-es/isFunction';
-import _map from 'lodash-es/map';
 import _filter from 'lodash-es/filter';
 import _flatten from 'lodash-es/flatten';
 import _flattenDeep from 'lodash-es/flattenDeep';
 import _uniq from 'lodash-es/uniq';
-import _uniqWith from 'lodash-es/uniqWith';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
+import { t } from '../util/locale';
 import { utilRebind } from '../util/rebind';
 import * as Validations from '../validations/index';
 
@@ -19,6 +18,8 @@ export function coreValidator(context) {
     var self = {};
     var _issues = [];
     var _issuesByEntityID = {};
+
+    var _disabledValidations = {};
 
     var validations = _filter(Validations, _isFunction).reduce(function(obj, validation) {
         var func = validation();
@@ -37,6 +38,13 @@ export function coreValidator(context) {
             entityValidationIDs.push(key);
         }
     }
+
+    var validationIDsToDisplay = Object.keys(validations).filter(function(rule) {
+        return rule !== 'maprules';
+    });
+    validationIDsToDisplay.sort(function(rule1, rule2) {
+        return t('issues.' + rule1 + '.title') > t('issues.' + rule2 + '.title');
+    });
 
     //self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -74,6 +82,22 @@ export function coreValidator(context) {
         return _issuesByEntityID[key];
     };
 
+    self.getRuleIDs = function(){
+        return validationIDsToDisplay;
+    };
+
+    self.getDisabledRules = function(){
+        return _disabledValidations;
+    };
+
+    self.toggleRule = function(ruleID) {
+        if (_disabledValidations[ruleID]) {
+            delete _disabledValidations[ruleID];
+        } else {
+            _disabledValidations[ruleID] = true;
+        }
+        self.validate();
+    };
 
     function validateEntity(entity) {
         var _issues = [];
@@ -83,6 +107,12 @@ export function coreValidator(context) {
         function runValidation(which) {
             if (ran[which]) return true;
 
+            if (_disabledValidations[which]) {
+                // don't run disabled validations but mark as having run
+                ran[which] = true;
+                return true;
+            }
+
             var fn = validations[which];
             var typeIssues = fn(entity, context);
             _issues = _issues.concat(typeIssues);
@@ -90,6 +120,8 @@ export function coreValidator(context) {
             return !typeIssues.length;
         }
 
+        runValidation('missing_role');
+        
         if (entity.type === 'relation') {
             if (!runValidation('old_multipolygon')) {
                 // don't flag missing tags if they are on the outer way
@@ -124,22 +156,31 @@ export function coreValidator(context) {
         _issuesByEntityID = {};   // clear cached
         _issues = [];
 
+        for (var validationIndex in validations) {
+            if (validations[validationIndex].reset) {
+                validations[validationIndex].reset();
+            }
+        }
+
         var history = context.history();
         var changes = history.changes();
         var entitiesToCheck = changes.created.concat(changes.modified);
         var graph = history.graph();
 
-        _issues = _flatten(_map(changesValidationIDs, function(ruleID) {
+        _issues = _flatten(changesValidationIDs.map(function(ruleID) {
+            if (_disabledValidations[ruleID]) {
+                return [];
+            }
             var validation = validations[ruleID];
             return validation(changes, context);
         }));
 
-        entitiesToCheck = _uniq(_flattenDeep(_map(entitiesToCheck, function(entity) {
+        entitiesToCheck = _uniq(_flattenDeep(entitiesToCheck.map(function(entity) {
             var entities = [entity];
             if (entity.type === 'node') {  // validate ways if their nodes have changed
                 entities = entities.concat(graph.parentWays(entity));
             }
-            entities = _map(entities, function(entity) {
+            entities = entities.map(function(entity) {
                 if (entity.type !== 'relation') {  // validate relations if their geometries have changed
                     return [entity].concat(graph.parentRelations(entity));
                 }
@@ -148,16 +189,22 @@ export function coreValidator(context) {
             return entities;
         })));
 
+        var issuesByID = {};
+
         for (var entityIndex in entitiesToCheck) {
             var entity = entitiesToCheck[entityIndex];
             var entityIssues = validateEntity(entity);
             _issuesByEntityID[entity.id] = entityIssues;
-            _issues = _issues.concat(entityIssues);
+            entityIssues.forEach(function(issue) {
+                // Different entities can produce the same issue so store them by
+                // the ID to ensure that there are no duplicate issues.
+                issuesByID[issue.id()] = issue;
+            });
         }
 
-        _issues = _uniqWith(_issues, function(issue1, issue2) {
-            return issue1.id() === issue2.id();
-        });
+        for (var issueID in issuesByID) {
+            _issues.push(issuesByID[issueID]);
+        }
 
         dispatch.call('reload', self, _issues);
     };
@@ -177,26 +224,33 @@ export function validationIssue(attrs) {
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
+
+    var _id;
+
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
     this.id = function() {
-        var id = this.type;
+        if (_id) {
+            return _id;
+        }
+
+        _id = this.type;
 
         if (this.hash) {   // subclasses can pass in their own differentiator
-            id += this.hash;
+            _id += this.hash;
         }
 
         // factor in the entities this issue is for
         // (sort them so the id is deterministic)
         var entityKeys = this.entities.map(osmEntity.key);
-        id += entityKeys.sort().join();
+        _id += entityKeys.sort().join();
 
         // factor in loc since two separate issues can have an
         // idential type and entities, e.g. in crossing_ways
         if (this.loc) {
-            id += this.loc.join();
+            _id += this.loc.join();
         }
-        return id;
+        return _id;
     };
 
 

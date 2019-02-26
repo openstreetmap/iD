@@ -193,7 +193,7 @@ _extend(osmWay.prototype, {
         return true;
     },
 
-    // returns an objects with the tag that implies this is an area, if any
+    // returns an object with the tag that implies this is an area, if any
     tagSuggestingArea: function() {
 
         if (this.tags.area === 'yes') return { area: 'yes' };

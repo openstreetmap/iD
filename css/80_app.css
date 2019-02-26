@@ -3119,6 +3119,7 @@ div.full-screen > button:hover {
     padding: 5px !important;
     display: flex;
     margin-top: 5px;
+    margin-bottom: 15px;
 }
 .issues-none .icon {
     color: #05AC10;

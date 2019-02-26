@@ -25,6 +25,7 @@
     "atm": {"key": "atm", "type": "check", "label": "ATM"},
     "attraction": {"key": "attraction", "type": "typeCombo", "label": "Type"},
     "backrest": {"key": "backrest", "type": "check", "label": "Backrest"},
+    "bar": {"key": "bar", "type": "check", "label": "Bar"},
     "barrier": {"key": "barrier", "type": "typeCombo", "label": "Type"},
     "basin": {"key": "basin", "type": "combo", "label": "Type"},
     "bath/open_air": {"key": "bath:open_air", "label": "Open Air", "type": "check"},

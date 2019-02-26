@@ -22,9 +22,9 @@ var _erCache;
 var _erZoom = 14;
 
 var _impOsmUrls = {
-    ow: 'http://directionofflow.skobbler.net/directionOfFlowService',
-    mr: 'http://missingroads.skobbler.net/missingGeoService',
-    tr: 'http://turnrestrictionservice.skobbler.net/turnRestrictionService'
+    ow: 'https://directionofflow.skobbler.net/directionOfFlowService',
+    mr: 'https://missingroads.skobbler.net/missingGeoService',
+    tr: 'https://turnrestrictionservice.skobbler.net/turnRestrictionService'
 };
 
 function abortRequest(i) {

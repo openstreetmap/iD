@@ -24,7 +24,10 @@ export function validationAlmostJunction() {
 
 
     function isHighway(entity) {
-        return entity.type === 'way' && entity.tags.highway && entity.tags.highway !== 'no';
+        return entity.type === 'way' &&
+            entity.tags.highway &&
+            entity.tags.highway !== 'no' &&
+            entity.tags.highway !== 'proposed';
     }
 
     function isNoexit(node) {

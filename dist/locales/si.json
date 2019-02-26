@@ -221,8 +221,6 @@
             "title": "මගේ ස්ථානය පෙන්වන්න"
         },
         "inspector": {
-            "no_documentation_combination": "මෙම සටහන් පත සදහා විස්තරක් අඩන්ගු නොවේ",
-            "no_documentation_key": "මෙම යතුර සදහා විස්තරයක් නොමැත",
             "show_more": "තව පෙන්වන්න",
             "view_on_osm": "openstreetmap.org හි පෙන්වන්න",
             "all_tags": "සියලු සටහන්පත්",
@@ -232,7 +230,6 @@
             "role": "භූමිකාව",
             "choose": "ලක්ෂණයෙහි වර්ගය තෝරන්න",
             "results": "{search} සෙවුම සදහා ප්‍රතිපල {n} ඇත",
-            "reference": "OpenStreetMap Wiki හි පෙන්නවන්න",
             "back_tooltip": "ලක්ෂණ වෙනස් කරන්න",
             "remove": "ඉවත් කරන්න",
             "search": "සොයන්න",
@@ -299,11 +296,9 @@
                 "tooltip": "විදුලි සැපයුම්, බලාගාර, උප බලාගාර ආදී"
             },
             "past_future": {
-                "description": "අතීත/අනාගත",
                 "tooltip": "යෝජිත, ඉදිකෙරිමින් පවතින ,අතහැර දැමු , විනාශකරන ලද , ආදී"
             },
             "others": {
-                "description": "වෙනත්",
                 "tooltip": "හැම දෙයක්ම"
             }
         },
@@ -356,12 +351,6 @@
             "description": "විස්තරය",
             "on_wiki": "on wiki.osm.org මත {tag} ",
             "used_with": "{type} බවිත කර ඇත"
-        },
-        "validations": {
-            "untagged_point": "සටහනක් නොයෙදූ ලක්ෂයක්",
-            "untagged_line": "සටහනක් නොයෙදූ රේකාවක්",
-            "untagged_area": "සටහනක් නොයෙදූ ප්‍රදේශයක්",
-            "deprecated_tags": "{tags} : බාවිතයෙන් ඉවත් කර ඇත"
         },
         "help": {
             "title": "සහය"

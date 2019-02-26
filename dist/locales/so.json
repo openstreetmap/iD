@@ -148,7 +148,6 @@
             "all_tags": "Dhammaan taxanbayaasha",
             "all_relations": "Dhammaan xiriirada",
             "choose": "Dooro nooca tilmaamaha",
-            "reference": "Ka eeg Wiki OpenStreetMap",
             "search": "Raadi",
             "feature_list": "Tilmaamaha Waydiimaha",
             "edit": "Tifaftir tilmaamaha",
@@ -883,9 +882,6 @@
                 },
                 "power/line": {
                     "name": "Khadka Korantada"
-                },
-                "public_transport/linear_platform_bus": {
-                    "name": "Boostaajo"
                 },
                 "public_transport/platform_bus": {
                     "name": "Boostaajo"

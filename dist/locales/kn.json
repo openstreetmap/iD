@@ -372,8 +372,6 @@
             "locating": "ಪತ್ತೆ ಹಚ್ಚುತ್ತಿದೆ. ದವವಿತ್ತು ಸ್ವಲ್ಪ ಸಮಯ ಕಾಯಿರಿ. "
         },
         "inspector": {
-            "no_documentation_combination": "ಈ ಗುರುತುಪಟ್ಟಿ ಸಂಯೋಜನೆ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿ ಅಥವಾ ದಾಖಲೆ ಇಲ್ಲ.  ",
-            "no_documentation_key": "ಈ ಕೀ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿ ಅಥವಾ ದಾಖಲೆ ಇಲ್ಲ.  ",
             "show_more": "‍ಇನ್ನೂ ತೋರಿಸು",
             "view_on_osm": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್.ಆರ್ಗ್ ನಲ್ಲಿ ನೋಡಿ. ",
             "all_fields": "ಎಲ್ಲ ವರ್ಗಗಳು. ",
@@ -384,7 +382,6 @@
             "role": "ಪಾತ್ರ",
             "choose": "ವಸ್ತು ಪ್ರಕಾರವನ್ನ ಆಯ್ಕೆಮಾಡಿ  ",
             "results": "{n} ಫಲಿತಾಂಶಗಳು {search} ",
-            "reference": "ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ವಿಕಿ ನಲ್ಲಿ ನೋಡಿ.",
             "back_tooltip": "ಲಕ್ಷಣವನ್ನು ಬದಲಿಸು",
             "remove": "ತೆಗೆದುಹಾಕು",
             "search": "ಹುಡುಕು",
@@ -477,11 +474,9 @@
                 "tooltip": "ವಿದ್ಯುತ್ ಸಂಪರ್ಕಗಳು, ವಿದ್ಯುತ್ ಉತ್ಪಾದನಾ ಘಟಕಗಳು, ಉಪಕೇಂದ್ರಗಳು ಇತ್ಯಾದಿ"
             },
             "past_future": {
-                "description": "ಭೌತ / ಭವಿಷ್ಯ",
                 "tooltip": "ಪ್ರ‍ಸ್ತಾವಿಸಿದ, ನಿರ್ಮಾ‍ಣ ಹಂತದ, ಕೈಬಿಟ್ಟ, ಕೆಡವ‍ಲಾದ ಇತ್ಯಾದಿ"
             },
             "others": {
-                "description": "ಇತರೆ",
                 "tooltip": "ಇನ್ನಿತರೆ"
             }
         },
@@ -543,14 +538,6 @@
             "description": "ವಿವರಣೆ",
             "on_wiki": "{tag} wiki.osm.org ನಲ್ಲಿ",
             "used_with": "{ಮಾದರಿ} ಜೊತೆಗೆ ಬಳಸಿ. "
-        },
-        "validations": {
-            "disconnected_highway": "ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡಿರುವ ಹೆದ್ದಾರಿ  ",
-            "untagged_point": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಚುಕ್ಕೆ. ",
-            "untagged_line": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಗೆರೆ. ",
-            "untagged_area": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಕ್ಷೇತ್ರ.",
-            "untagged_relation": "ಟ್ಯಾಗ್ ಮಾಡಲಾಗದ ಸಂಬಂಧ",
-            "deprecated_tags": "‍ಉಪಯೋಗಿಸದ ಗುರುತುಪಟ್ಟಿಗಳು: {tags}"
         },
         "full_screen": "‍ಪೂರ್ಣ ಪರದೆಗೆ ಹಿಂದಿರುಗು",
         "mapillary_images": {
@@ -708,9 +695,6 @@
                 },
                 "category-building": {
                     "name": "‍ಕಟ್ಟಡ ‍ವೈಶಿಷ್ಟ್ಯಗಳು"
-                },
-                "category-golf": {
-                    "name": "ಗಾಲ್ಫ್ ವೈಶಿಷ್ಟ್ಯಗಳು‍‍‍"
                 },
                 "category-landuse": {
                     "name": "ಭೂಮಿಯ  ವೈಶಿಷ್ಟ್ಯಗಳು‍‍"
@@ -1393,8 +1377,7 @@
                     "label": "ವಿಧ"
                 },
                 "website": {
-                    "label": "ಜಾಲತಾಣ",
-                    "placeholder": "http://example.com/"
+                    "label": "ಜಾಲತಾಣ"
                 },
                 "wetland": {
                     "label": "ವಿಧ"
@@ -1556,9 +1539,6 @@
                 },
                 "building/terrace": {
                     "name": "ಸಾಲು ಮನೆಗಳು"
-                },
-                "building/train_station": {
-                    "name": "ರೈಲ್ವೆ ನಿಲ್ದಾಣ"
                 },
                 "building/university": {
                     "name": "ವಿಶ್ವವಿದ್ಯಾಲಯ ಕಟ್ಟಡ"

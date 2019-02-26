@@ -9,12 +9,17 @@
         "diamond",
         "earrings",
         "gem",
+        "gold",
+        "jeweler",
+        "jewellery",
+        "jeweller",
         "necklace",
         "pins",
-        "ring"
+        "ring",
+        "silver"
     ],
     "tags": {
         "shop": "jewelry"
     },
-    "name": "Jeweler"
+    "name": "Jewelry Store"
 }

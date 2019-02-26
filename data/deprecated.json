@@ -37,6 +37,10 @@
       "replace": {"landuse": "garages"}
     },
     {
+      "old": {"amenity": "public_building"},
+      "replace": {"building": "public"}
+    },
+    {
       "old": {"amenity": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
@@ -61,6 +65,10 @@
       "replace": {"leisure": "swimming_pool"}
     },
     {
+      "old": {"amenity": "toilet"},
+      "replace": {"amenity": "toilets"}
+    },
+    {
       "old": {"amenity": "vending_machine", "vending": "news_papers"},
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
@@ -83,6 +91,10 @@
     {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
+    },
+    {
+      "old": {"building:color": "*"},
+      "replace": {"building:colour": "$1"}
     },
     {
       "old": {"building:roof:colour": "*"},
@@ -117,6 +129,34 @@
       "replace": {"barrier": "fence"}
     },
     {
+      "old": {"footway": "both"},
+      "replace": {"sidewalk": "both"}
+    },
+    {
+      "old": {"footway": "left"},
+      "replace": {"sidewalk": "left"}
+    },
+    {
+      "old": {"footway": "no"},
+      "replace": {"sidewalk": "no"}
+    },
+    {
+      "old": {"footway": "none"},
+      "replace": {"sidewalk": "no"}
+    },
+    {
+      "old": {"footway": "right"},
+      "replace": {"sidewalk": "right"}
+    },
+    {
+      "old": {"footway": "separate"},
+      "replace": {"sidewalk": "separate"}
+    },
+    {
+      "old": {"highway": "abandoned"},
+      "replace": {"abandoned:highway": "*"}
+    },
+    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
     },
@@ -138,6 +178,10 @@
     {
       "old": {"highway": "unsurfaced"},
       "replace": {"highway": "road", "incline": "unpaved"}
+    },
+    {
+      "old": {"landuse": "conservation"},
+      "replace": {"boundary": "protected_area"}
     },
     {
       "old": {"landuse": "farm"},
@@ -188,6 +232,10 @@
       "replace": {"natural": "wetland", "wetland": "marsh"}
     },
     {
+      "old": {"natural": "waterfall"},
+      "replace": {"waterway": "waterfall"}
+    },
+    {
       "old": {"office": "administrative"},
       "replace": {"office": "government"}
     },
@@ -202,6 +250,10 @@
     {
       "old": {"pole": "transition"},
       "replace": {"location:transition": "yes"}
+    },
+    {
+      "old": {"postcode": "*"},
+      "replace": {"addr:postcode": "$1"}
     },
     {
       "old": {"power": "sub_station"},
@@ -222,6 +274,10 @@
     {
       "old": {"route": "ncn"},
       "replace": {"route": "bicycle", "network": "ncn"}
+    },
+    {
+      "old": {"shop": "betting"},
+      "replace": {"shop": "bookmaker"}
     },
     {
       "old": {"shop": "organic"},
@@ -256,6 +312,18 @@
       "replace": {"tourism": "guest_house"}
     },
     {
+      "old": {"type": "broad_leaved"},
+      "replace": {"leaf_type": "broadleaved"}
+    },
+    {
+      "old": {"type": "conifer"},
+      "replace": {"leaf_type": "needleleaved"}
+    },
+    {
+      "old": {"type": "deciduous"},
+      "replace": {"leaf_cycle": "deciduous"}
+    },
+    {
       "old": {"water": "intermittent"},
       "replace": {"natural": "water", "intermittent": "yes"}
     },
@@ -274,6 +342,22 @@
     {
       "old": {"waterway": "aqueduct"},
       "replace": {"waterway": "canal", "bridge": "aqueduct"}
+    },
+    {
+      "old": {"wood": "coniferous"},
+      "replace": {"leaf_type": "needleleaved"}
+    },
+    {
+      "old": {"wood": "deciduous"},
+      "replace": {"leaf_cycle": "deciduous"}
+    },
+    {
+      "old": {"wood": "evergreen"},
+      "replace": {"leaf_cycle": "evergreen"}
+    },
+    {
+      "old": {"wood": "mixed"},
+      "replace": {"leaf_cycle": "mixed", "leaf_type": "mixed"}
     }
   ]
 }

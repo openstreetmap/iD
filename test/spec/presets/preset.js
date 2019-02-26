@@ -20,29 +20,29 @@ describe('iD.presetPreset', function() {
         it('returns -1 if preset does not match tags', function() {
             var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
             var entity = iD.osmWay({tags: {highway: 'motorway'}});
-            expect(preset.matchScore(entity)).to.equal(-1);
+            expect(preset.matchScore(entity.tags)).to.equal(-1);
         });
 
         it('returns the value of the matchScore property when matched', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2});
             var entity = iD.osmWay({tags: {highway: 'motorway'}});
-            expect(preset.matchScore(entity)).to.equal(0.2);
+            expect(preset.matchScore(entity.tags)).to.equal(0.2);
         });
 
         it('defaults to the number of matched tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
             var entity = iD.osmWay({tags: {highway: 'residential'}});
-            expect(preset.matchScore(entity)).to.equal(1);
+            expect(preset.matchScore(entity.tags)).to.equal(1);
 
             preset = iD.presetPreset('test', {tags: {highway: 'service', service: 'alley'}});
             entity = iD.osmWay({tags: {highway: 'service', service: 'alley'}});
-            expect(preset.matchScore(entity)).to.equal(2);
+            expect(preset.matchScore(entity.tags)).to.equal(2);
         });
 
         it('counts * as a match for any value with score 0.5', function() {
             var preset = iD.presetPreset('test', {tags: {building: '*'}});
             var entity = iD.osmWay({tags: {building: 'yep'}});
-            expect(preset.matchScore(entity)).to.equal(0.5);
+            expect(preset.matchScore(entity.tags)).to.equal(0.5);
         });
     });
 

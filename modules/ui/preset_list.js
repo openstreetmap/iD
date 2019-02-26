@@ -90,7 +90,8 @@ export function uiPresetList(context) {
             // enter
             var value = search.property('value');
             if (d3_event.keyCode === 13 && value.length) {
-                list.selectAll('.preset-list-item:first-child').datum().choose();
+                list.selectAll('.preset-list-item:first-child')
+                    .each(function(d) { d.choose.call(d3_select(this).node()); });
             }
         }
 

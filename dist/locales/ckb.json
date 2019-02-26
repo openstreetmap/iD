@@ -167,12 +167,6 @@
             },
             "rail": {
                 "tooltip": "ڕێگەی ئاسنین"
-            },
-            "past_future": {
-                "description": "ڕابردوو/داهاتوو"
-            },
-            "others": {
-                "description": "هی تر"
             }
         },
         "settings": {
@@ -905,9 +899,6 @@
                 },
                 "building/residential": {
                     "name": "باڵەخانەی نیشتەجێبوون"
-                },
-                "building/train_station": {
-                    "name": "وێسگەی شەمەندەفەر"
                 },
                 "club": {
                     "name": "یانە"

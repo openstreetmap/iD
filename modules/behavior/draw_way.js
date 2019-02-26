@@ -21,7 +21,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     );
 
     var behavior = behaviorDraw(context);
-    behavior.hover().initialNodeId(index ? origWay.nodes[index] : origWay.nodes[origWay.nodes.length - 1]);
+    behavior.hover().initialNodeID(index ? origWay.nodes[index] :
+        (origWay.isClosed() ? origWay.nodes[origWay.nodes.length - 2] : origWay.nodes[origWay.nodes.length - 1]));
 
     var _tempEdits = 0;
 
@@ -65,7 +66,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     function allowsVertex(d) {
-        return context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
     }
 
 
@@ -125,6 +126,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
+                    if (nodes.length < 3) return false;
+
                     nodes.splice(-2, 1);
                     entity = nodes[nodes.length-2];
                 } else {
@@ -152,9 +155,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
         if (context.graph() === baselineGraph) {    // We've undone back to the beginning
             // baselineGraph may be behind startGraph if this way was added rather than continued
-            while (context.graph() !== startGraph) {
-                context.pop();
-            }
+            resetContextGraphToStartGraph();
             context.enter(modeSelect(context, [wayID]));
         } else {
             // Remove whatever segment was drawn previously and continue drawing
@@ -196,13 +197,19 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             .on('undone.draw', undone);
     };
 
+    function resetContextGraphToStartGraph() {
+        while (context.graph() !== startGraph) {
+            context.pop();
+        }
+    }
 
     drawWay.off = function(surface) {
         // Drawing was interrupted unexpectedly.
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
         if (_tempEdits) {
-            context.history().reset('drawWay-initial');
+            context.pop(_tempEdits);
+            resetContextGraphToStartGraph();
         }
 
         context.map()
@@ -325,6 +332,9 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         }, 1000);
         var isNewFeature = !mode.isContinuing && mode.button.indexOf('add-preset-') === -1;
         context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
+        if (isNewFeature) {
+            context.validator().validate();
+        }
     };
 
 
@@ -333,9 +343,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        while (context.graph() !== startGraph) {
-            context.pop();
-        }
+        resetContextGraphToStartGraph();
 
         window.setTimeout(function() {
             context.map().dblclickEnable(true);

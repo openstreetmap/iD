@@ -210,6 +210,9 @@ en:
       backrest:
         # backrest=*
         label: Backrest
+      bar:
+        # bar=*
+        label: Bar
       barrier:
         # barrier=*
         label: Type
@@ -2996,9 +2999,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Flat Coin Vending Machine'', separated by commas>'
       amenity/vending_machine/excrement_bags:
         # 'amenity=vending_machine, vending=excrement_bags'
-        name: Excrement Bag Vending Machine
-        # 'terms: excrement bags,poop,dog,animal'
-        terms: '<translate with synonyms or related terms for ''Excrement Bag Vending Machine'', separated by commas>'
+        name: Excrement Bag Dispenser
+        # 'terms: excrement bags,poop,waste,dog,animal'
+        terms: '<translate with synonyms or related terms for ''Excrement Bag Dispenser'', separated by commas>'
       amenity/vending_machine/feminine_hygiene:
         # 'amenity=vending_machine, vending=feminine_hygiene'
         name: Feminine Hygiene Vending Machine
@@ -3271,6 +3274,9 @@ en:
         # barrier=wall
         name: Wall
         terms: '<translate with synonyms or related terms for ''Wall'', separated by commas>'
+      boundary:
+        # boundary=*
+        name: Boundary
       boundary/administrative:
         # boundary=administrative
         name: Administrative Boundary
@@ -6300,9 +6306,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Interior Decoration Store'', separated by commas>'
       shop/jewelry:
         # shop=jewelry
-        name: Jeweler
-        # 'terms: bracelet,diamond,earrings,gem,necklace,pins,ring'
-        terms: '<translate with synonyms or related terms for ''Jeweler'', separated by commas>'
+        name: Jewelry Store
+        # 'terms: bracelet,diamond,earrings,gem,gold,jeweler,jewellery,jeweller,necklace,pins,ring,silver'
+        terms: '<translate with synonyms or related terms for ''Jewelry Store'', separated by commas>'
       shop/kiosk:
         # shop=kiosk
         name: Kiosk

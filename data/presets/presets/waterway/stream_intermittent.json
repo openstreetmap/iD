@@ -1,10 +1,11 @@
 {
     "icon": "iD-waterway-stream",
     "fields": [
-        "name",
-        "structure_waterway",
-        "width",
+        "{waterway/stream}",
         "intermittent"
+    ],
+    "moreFields": [
+        "{waterway/stream}"
     ],
     "geometry": [
         "line"

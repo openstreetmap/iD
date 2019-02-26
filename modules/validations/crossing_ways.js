@@ -9,10 +9,23 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationCrossingWays() {
     var type = 'crossing_ways';
 
+    /*
+    Avoid duplicate work by cacheing issues. The same issues live under two paths.
+    {
+        w-123: {
+            w-456: [{issue1}, {issue2}…]
+        },
+        w-456: {
+            w-123: [{issue1}, {issue2}…]
+        }
+    }
+    */
+    var issueCache = {};
+
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
         if (getFeatureTypeForTags(way.tags) === null) {
-            // if the way doesn't match a feature type, check is parent relations
+            // if the way doesn't match a feature type, check its parent relations
             var parentRels = graph.parentRelations(way);
             for (var i = 0; i < parentRels.length; i++) {
                 var rel = parentRels[i];
@@ -53,21 +66,23 @@ export function validationCrossingWays() {
     }
 
 
-    // only validate certain waterway features
+    // only validate certain waterway and railway features
     var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
-    // ignore certain highway and railway features
-    var ignoredHighways = ['rest_area', 'services'];
-    var ignoredRailways = ['train_wash'];
+    var railways = ['rail', 'disused', 'tram', 'subway', 'narrow_gauge', 'light_rail',
+                    'preserved', 'miniature', 'monorail', 'funicular'];
+    // ignore certain highway and building features
+    var ignoredHighways = ['rest_area', 'services', 'proposed', 'razed'];
+    var ignoredBuildings = ['proposed', 'razed'];
 
 
     function getFeatureTypeForTags(tags) {
-        if (hasTag(tags, 'building')) return 'building';
+        if (hasTag(tags, 'building') && ignoredBuildings.indexOf(tags.building) === -1) return 'building';
 
         // don't check non-building areas
         if (hasTag(tags, 'area')) return null;
 
         if (hasTag(tags, 'highway') && ignoredHighways.indexOf(tags.highway) === -1) return 'highway';
-        if (hasTag(tags, 'railway') && ignoredRailways.indexOf(tags.railway) === -1) return 'railway';
+        if (hasTag(tags, 'railway') && railways.indexOf(tags.railway) !== -1) return 'railway';
         if (hasTag(tags, 'waterway') && waterways.indexOf(tags.waterway) !== -1) return 'waterway';
 
         return null;
@@ -128,20 +143,27 @@ export function validationCrossingWays() {
         'motorway', 'motorway_link', 'trunk', 'trunk_link',
         'primary', 'primary_link', 'secondary', 'secondary_link'
     ];
-    var pathHighways = [
-        'path', 'footway', 'cycleway', 'bridleway', 'pedestrian', 'steps', 'corridor'
-    ];
+    var pathHighways = {
+        path: true, footway: true, cycleway: true, bridleway: true,
+        pedestrian: true, steps: true, corridor: true
+    };
+    var nonCrossingHighways = { track: true };
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
         var featureType1 = getFeatureTypeForTags(entity1.tags);
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
-                var entity1IsPath = pathHighways.indexOf(entity1.tags.highway) !== -1;
-                var entity2IsPath = pathHighways.indexOf(entity2.tags.highway) !== -1;
+                var entity1IsPath = pathHighways[entity1.tags.highway];
+                var entity2IsPath = pathHighways[entity2.tags.highway];
                 if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
-                    // one feature is a path but not both, use a crossing
+                    // one feature is a path but not both
 
+                    var roadFeature = entity1IsPath ? entity2 : entity1;
+                    if (nonCrossingHighways[roadFeature.tags.highway]) {
+                        // don't mark path connections with certain roads as crossings
+                        return {};
+                    }
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     if (pathFeature.tags.highway === 'footway' &&
                         pathFeature.tags.footway === 'crossing' &&
@@ -160,8 +182,8 @@ export function validationCrossingWays() {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
-                    if (pathHighways.indexOf(entity1.tags.highway) !== -1 ||
-                        pathHighways.indexOf(entity2.tags.highway) !== -1) {
+                    if (pathHighways[entity1.tags.highway] ||
+                        pathHighways[entity2.tags.highway]) {
                         // path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
@@ -206,6 +228,7 @@ export function validationCrossingWays() {
         var oneOnly;
         var intersected, way2, way2FeatureType, way2Nodes;
         var way1Nodes = graph.childNodes(way1);
+        var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
             n1 = way1Nodes[i];
             n2 = way1Nodes[i + 1];
@@ -226,11 +249,17 @@ export function validationCrossingWays() {
 
                 if (way2.type !== 'way') continue;
 
+                // don't check for self-intersection in this validation
+                if (way2.id === way1.id) continue;
+
                 // skip if this way was already checked and only one issue is needed
                 if (checkedSingleCrossingWays[way2.id]) continue;
 
-                // don't check for self-intersection in this validation
-                if (way2.id === way1.id) continue;
+                // don't re-check previously checked features
+                if (issueCache[way1.id] && issueCache[way1.id][way2.id]) continue;
+
+                // mark this way as checked even if there are no crossings
+                comparedWays[way2.id] = true;
 
                 // only check crossing highway, waterway, building, and railway
                 way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
@@ -269,6 +298,12 @@ export function validationCrossingWays() {
                 }
             }
         }
+        for (var way2ID in comparedWays) {
+            if (!issueCache[way1.id]) issueCache[way1.id] = {};
+            if (!issueCache[way1.id][way2ID]) issueCache[way1.id][way2ID] = [];
+            if (!issueCache[way2ID]) issueCache[way2ID] = {};
+            if (!issueCache[way2ID][way1.id]) issueCache[way2ID][way1.id] = [];
+        }
         return edgeCrossInfos;
     }
 
@@ -303,10 +338,21 @@ export function validationCrossingWays() {
         var ways = waysToCheck(entity, context);
 
         var issues = [];
-        for (var wayIndex in ways) {
-            var crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
-            for (var crossingIndex in crossings) {
-                issues.push(createIssue(crossings[crossingIndex], context));
+        // declare these here to reduce garbage collection
+        var wayIndex, crossingIndex, key, crossings, crossing, issue;
+        for (wayIndex in ways) {
+            var way = ways[wayIndex];
+            crossings = findCrossingsByWay(way, graph, tree);
+            for (crossingIndex in crossings) {
+                crossing = crossings[crossingIndex];
+                var way2 = crossing.ways[1];
+                issue = createIssue(crossing, context);
+                // cache the issues for each way
+                issueCache[way.id][way2.id].push(issue);
+                issueCache[way2.id][way.id].push(issue);
+            }
+            for (key in issueCache[way.id]) {
+                issues = issues.concat(issueCache[way.id][key]);
             }
         }
         return issues;
@@ -442,6 +488,10 @@ export function validationCrossingWays() {
             fixes: fixes
         });
     }
+
+    validation.reset = function() {
+        issueCache = {};
+    };
 
     validation.type = type;
 

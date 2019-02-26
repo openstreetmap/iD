@@ -419,9 +419,12 @@ export function rendererFeatures(context) {
     features.isHiddenPreset = function(preset, geometry) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
-        for (var i = 0; i < _hidden.length; i++) {
-            if (_features[_hidden[i]].filter(preset.setTags({}, geometry), geometry)) {
-                return _hidden[i];
+        for (var key in _features) {
+            if (_features[key].filter(preset.setTags({}, geometry), geometry)) {
+                if (_hidden.indexOf(key) !== -1) {
+                    return key;
+                }
+                return false;
             }
         }
         return false;
