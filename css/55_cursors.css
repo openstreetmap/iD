@@ -54,7 +54,7 @@
     cursor: url(img/cursor-select-remove.png), pointer; /* FF */
 }
 
-[class*=" mode-add-preset-"] #map,
+.mode-add-favorite #map,
 .mode-draw-line #map,
 .mode-draw-area #map,
 .mode-add-line  #map,
@@ -105,4 +105,3 @@
 .turn circle {
     cursor: pointer;
 }
-

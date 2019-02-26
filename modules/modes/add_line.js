@@ -10,7 +10,7 @@ import { modeDrawLine } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddLine(context, customMode, preset) {
+export function modeAddLine(context, customMode) {
     var mode = customMode || {
         id: 'add-line',
         button: 'line',
@@ -26,7 +26,7 @@ export function modeAddLine(context, customMode, preset) {
         .on('startFromNode', startFromNode);
 
     var defaultTags = {};
-    if (preset) defaultTags = preset.setTags(defaultTags, 'line');
+    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line');
 
 
     function start(loc) {

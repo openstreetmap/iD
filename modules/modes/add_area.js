@@ -10,7 +10,7 @@ import { modeDrawArea } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddArea(context, customMode, preset) {
+export function modeAddArea(context, customMode) {
     var mode = customMode || {
         id: 'add-area',
         button: 'area',
@@ -26,7 +26,7 @@ export function modeAddArea(context, customMode, preset) {
         .on('startFromNode', startFromNode);
 
     var defaultTags = { area: 'yes' };
-    if (preset) defaultTags = preset.setTags(defaultTags, 'area');
+    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
 
 
     function actionClose(wayId) {

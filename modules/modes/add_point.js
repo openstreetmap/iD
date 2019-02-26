@@ -6,7 +6,7 @@ import { osmNode } from '../osm';
 import { actionAddMidpoint } from '../actions';
 
 
-export function modeAddPoint(context, customMode, preset) {
+export function modeAddPoint(context, customMode) {
     var mode = customMode || {
         id: 'add-point',
         button: 'point',
@@ -24,7 +24,7 @@ export function modeAddPoint(context, customMode, preset) {
         .on('finish', cancel);
 
     var defaultTags = {};
-    if (preset) defaultTags = preset.setTags(defaultTags, 'point');
+    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
 
 
     function add(loc) {

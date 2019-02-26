@@ -99,7 +99,7 @@ export function uiModes(context) {
                 var preset = context.presets().item(d.id);
                 var isMaki = /^maki-/.test(preset.icon);
                 var icon = '#' + preset.icon + (isMaki ? '-11' : '');
-                var markerClass = 'add-preset-' + preset.name()
+                var markerClass = 'add-favorite add-preset-' + preset.name()
                     .replace(/\s+/g, '_')
                     + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
 
@@ -107,18 +107,19 @@ export function uiModes(context) {
                     id: markerClass,
                     button: markerClass,
                     title: t('presets.presets.' + preset.id + '.name'),
-                    description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name').toLowerCase(), t('geometry.' + d.geom)].join(' '),
+                    description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name'), t('geometry.' + d.geom)].join(' '),
                     key: '',
-                    icon: icon
+                    icon: icon,
+                    preset: preset
                 };
                 switch (d.geom) {
                     case 'point':
                     case 'vertex':
-                        return modeAddPoint(context, favoriteMode, preset);
+                        return modeAddPoint(context, favoriteMode);
                     case 'line':
-                        return modeAddLine(context, favoriteMode, preset);
+                        return modeAddLine(context, favoriteMode);
                     case 'area':
-                        return modeAddArea(context, favoriteMode, preset);
+                        return modeAddArea(context, favoriteMode);
                 }
             });
 
