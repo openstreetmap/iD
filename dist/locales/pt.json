@@ -905,7 +905,7 @@
                         "description": "Não pode sair da {var1} porque todas as vias que levam a esta são de sentido único."
                     },
                     "50": {
-                        "title": "Quase junção",
+                        "title": "Quase cruzamento",
                         "description": "{var1} está muito perto mas não está ligada à via {var2}."
                     },
                     "60": {
@@ -968,7 +968,7 @@
                         "description": "{var1} não tem uma etiqueta \"type\" (tipo)."
                     },
                     "190": {
-                        "title": "Intersecção sem junção",
+                        "title": "Intersecção sem cruzamento",
                         "description": "{var1} interseta com {var2} {var3} mas não existe um nó de cruzamento, ponte nem túnel."
                     },
                     "200": {
@@ -1320,7 +1320,7 @@
                 "multipolygon_merge": "Juntar várias linhas ou áreas irá criar uma nova relação multi-polígono com todas as áreas selecionadas como membros. O iD irá escolher os elementos interiores e exteriores automaticamente, com base nos elementos que estão contidos dentro de outros elementos.",
                 "turn_restriction_h": "Restrições de viragem",
                 "turn_restriction": "Uma relação de *restrição de viragem* é um grupo de vários segmentos de estradas numa intersecção. As restrições de viragem consistem em *de*, nó da *via* e *para* das estradas que a compõem.",
-                "turn_restriction_field": "Para editar as restrições de viragem, selecione o nó de junção onde as duas ou mais estradas confluem. O editor de elementos irá mostrar um campo especial chamado \"Restrições de viragem\" que contem o modelo da interseção.",
+                "turn_restriction_field": "Para editar as restrições de viragem, selecione o nó onde as duas ou mais estradas se cruzam. O editor de elementos irá mostrar um campo especial chamado \"Restrições de viragem\" que contem o modelo da interseção.",
                 "turn_restriction_editing": "No campo \"Restrições de viragem\" clique para selecionar a estrada \"desde\" e verá quais as viragens que são permitidas ou restritas para qualquer uma das estradas \"para\". Pode clicar no ícone de viragem para alterar as restrições ou as permissões de viragem. O iD irá criar as relações automaticamente e definirá as funções \"desde\", \"via\" e \"para\" baseando-se nas suas escolhas.",
                 "route_h": "Rotas",
                 "route": "Uma relação de *rota* é um grupo de uma ou mais elementos linha que juntos formam uma rede de rota, como uma carreira de autocarro, percursos de um comboio ou uma autoestrada.",
@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Avisos ({count})"
             },
+            "rules": {
+                "title": "Regras"
+            },
             "no_issues": {
                 "message": "Parece que está tudo bem",
                 "info": "Se existir algum problema, ele aparecerá aqui à medida que edita"
             },
             "almost_junction": {
+                "title": "Quase cruzamentos",
                 "message": "{feature} está muito perto mas não está ligada a {feature2}",
                 "highway-highway": {
-                    "tip": "As rodovias que se intersetam devem ter um vértice comum na interseção."
+                    "tip": "As rodovias que se intersetam devem ter um nó comum no cruzamento."
                 }
             },
             "crossing_ways": {
+                "title": "Vias que se cruzam",
                 "message": "{feature} cruza com {feature2}",
+                "tip": "As rodovias, ferrovias, hidrovias e edifícios não se devem cruzar de forma ambígua.",
                 "building-building": {
                     "tip": "Os edifícios não se devem intersetar a não ser que estejam em níveis diferentes."
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Etiquetas em desuso",
                 "single": {
                     "message": "{feature} tem a etiqueta \"{tag}\" que foi descontinuada"
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Algumas etiquetas tornam-se descontinuadas ao longo do tempo e devem ser substituídas."
             },
             "disconnected_way": {
+                "title": "Vias desconectadas",
                 "highway": {
                     "message": "{highway} está desconectada de outras estradas e caminhos",
                     "tip": "As rodovias devem estar conectadas a outras rodovias ou entradas de edifícios."
                 }
             },
             "generic_name": {
+                "title": "Nomes genéricos",
                 "message": "{feature} tem o nome genérico \"{name}\"",
                 "tip": "Os nomes devem ser os atuais e como aparecem no terreno."
             },
             "many_deletions": {
+                "title": "Muitas eliminações",
                 "points-lines-areas": {
                     "message": "A eliminar {n} elementos: {p} pontos, {l} linhas e {a} áreas"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Apenas devem ser eliminados elementos redundantes ou não existentes no terreno."
             },
+            "missing_role": {
+                "title": "Funções em falta",
+                "message": "o membro {member} não tem uma função na relação {relation}",
+                "multipolygon": {
+                    "tip": "Os membros de multi-polígonos têm de ter uma função inner ou outer."
+                }
+            },
             "missing_tag": {
+                "title": "Etiquetas em falta",
                 "any": {
                     "message": "{feature} não tem etiquetas"
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Os elementos devem ter etiquetas que definam o que são."
             },
             "old_multipolygon": {
+                "title": "Etiquetas de multi-polígono no elemento errado",
                 "message": "{multipolygon} tem etiquetas colocadas no elemento errado",
                 "tip": "Os multi-polígonos devem ser etiquetados na sua relação e não na linha exterior."
             },
             "tag_suggests_area": {
+                "title": "Linhas etiquetadas como áreas",
                 "message": "{feature} deve ser uma área fechada, de acordo com a chave \"{tag}\"",
                 "tip": "As áreas devem ter pontos dos extremos ligados."
             },
@@ -1566,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Combinação de etiqueta antiga removida."
                 },
+                "remove_from_relation": {
+                    "title": "Remover da relação"
+                },
                 "remove_generic_name": {
                     "title": "Remover o nome",
                     "annotation": "Nome genérico removido."
@@ -1582,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Selecionar um tipo de elemento"
+                },
+                "set_as_inner": {
+                    "title": "Definir como membro interior"
+                },
+                "set_as_outer": {
+                    "title": "Definir como membro exterior"
                 },
                 "tag_as_disconnected": {
                     "title": "Etiquetar como desconectados",
@@ -2223,6 +2252,9 @@
                 "backrest": {
                     "label": "Encosto"
                 },
+                "bar": {
+                    "label": "Bar"
+                },
                 "barrier": {
                     "label": "Tipo"
                 },
@@ -2464,11 +2496,11 @@
                     "label": "Importância"
                 },
                 "departures_board": {
-                    "label": "Quadro de partidas",
+                    "label": "Painel de partidas",
                     "options": {
                         "no": "Nenhum",
                         "realtime": "Tempo real",
-                        "timetable": "Calendário",
+                        "timetable": "Horários",
                         "yes": "Sim"
                     }
                 },
@@ -4512,7 +4544,7 @@
                 },
                 "amenity/theatre/type/amphi": {
                     "name": "Anfiteatro",
-                    "terms": "Anfiteatro"
+                    "terms": "anfiteatro, anfiteatros"
                 },
                 "amenity/toilets": {
                     "name": "Casas de banho",
@@ -4551,15 +4583,16 @@
                     "terms": "Drink Vending Machine, Máquina de venda de bebidas, bebida, refrigerante, sumo"
                 },
                 "amenity/vending_machine/electronics": {
-                    "name": "Máquina de venda automática de electrónicos",
-                    "terms": "Máquina de venda automática de aparelhos electrónicos"
+                    "name": "Máquina de venda automática de material eletrónico",
+                    "terms": "máquina, venda automática, aparelhos eletrónicos, eletrónica, electrónica, electrónico, electrónicos"
                 },
                 "amenity/vending_machine/elongated_coin": {
-                    "name": "Máquina de venda automática de moedas",
+                    "name": "Máquina de venda automática de moedas alongadas",
                     "terms": "Máquina, venda automática, moedas"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Distribuidor de sacos de excrementos"
+                    "name": "Distribuidor de sacos de excrementos",
+                    "terms": "excrement, excrementos, cocó, dejetos, saco, sacos"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de venda de produtos de higiene feminina",
@@ -4585,12 +4618,12 @@
                     "terms": "jornais, jornal, revista, revistas, máquina de venda"
                 },
                 "amenity/vending_machine/parcel_pickup": {
-                    "name": "Armários automáticos de coleta",
-                    "terms": "Armários de coleta automática"
+                    "name": "Armário para entrega de encomendas",
+                    "terms": "parcel pickup locker, armário de coleta, armário de recolha, encomenda, encomendas, entrega"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Armários automáticos de coleta",
-                    "terms": "coleta, automática, recolha, parcel pickup, dropoff"
+                    "name": "Armário para recolha e entrega de encomendas",
+                    "terms": "parcel pickup, dropoff, coleta, armário, recolha, entrega, encomenda, encomendas"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Máquina de bilhetes de estacionamento",
@@ -4696,8 +4729,8 @@
                     "terms": "montanhas-russas, montanhas russas, montanha russa"
                 },
                 "attraction/summer_toboggan": {
-                    "name": "Escorrega de verão",
-                    "terms": "Escorrega de verão"
+                    "name": "Montanha russa alpina",
+                    "terms": "summer toboggan, montanha russa"
                 },
                 "attraction/train": {
                     "name": "Comboio turístico",
@@ -4755,8 +4788,8 @@
                     "terms": "Grade"
                 },
                 "barrier/guard_rail": {
-                    "name": "Grade",
-                    "terms": "Corrimão"
+                    "name": "Rails",
+                    "terms": "guard rail, mureta, defensa metálica, rail"
                 },
                 "barrier/hedge": {
                     "name": "Sebe",
@@ -4797,6 +4830,9 @@
                 "barrier/wall": {
                     "name": "Muro",
                     "terms": "Parede, Muro"
+                },
+                "boundary": {
+                    "name": "Fronteira"
                 },
                 "boundary/administrative": {
                     "name": "Fronteira administrativa",
@@ -5252,8 +5288,8 @@
                     "terms": "bóia, salvamento, salva vidas, salva-vidas"
                 },
                 "emergency/lifeguard": {
-                    "name": "Salva-vidas",
-                    "terms": "salva-vidas, salvador, supervisor"
+                    "name": "Nadador-salvador",
+                    "terms": "salva-vidas, nadador-salvador, salvador, supervisor, salva-vida, guarda-vida, nadador salvador"
                 },
                 "emergency/no": {
                     "name": "Acesso de emergência, não"
@@ -5270,7 +5306,7 @@
                 },
                 "emergency/siren": {
                     "name": "Sirene",
-                    "terms": "ataque aéreo, tempestade, tornado, aviso"
+                    "terms": "ataque aéreo, tempestade, tornado, aviso, sirene, buzina, busina, campainha"
                 },
                 "emergency/water_tank": {
                     "name": "Tanque de água de emergência",
@@ -5365,7 +5401,7 @@
                 },
                 "healthcare/laboratory": {
                     "name": "Laboratório médico",
-                    "terms": "Laboratório de biologia médica, Laboratório de análises médicas"
+                    "terms": "laboratório de biologia médica, laboratório de análises médicas, laboratório, análises clínicas, análises"
                 },
                 "healthcare/midwife": {
                     "name": "Obstetra",
@@ -5423,25 +5459,25 @@
                 },
                 "highway/crossing/marked": {
                     "name": "Faixa de pedestres marcada",
-                    "terms": "Passadeira"
+                    "terms": "passadeira, zebra, marcações, passagem"
                 },
                 "highway/crossing/marked-raised": {
                     "name": "Faixa de pedestres marcada (levantada)",
-                    "terms": "Passadeira (levantada)"
+                    "terms": "passadeira levantada, passadeira elevada"
                 },
                 "highway/crossing/unmarked": {
-                    "name": "Cruzamento não marcado",
-                    "terms": "passagem de pedestres não marcada"
+                    "name": "Atravessamento sem marcas",
+                    "terms": "passagem de pedestres não marcada, passadeira não marcada, passadeira sem marcas"
                 },
                 "highway/crossing/unmarked-raised": {
-                    "name": "Cruzamento não marcado (levantado)",
+                    "name": "Passadeira não marcada elevada",
                     "terms": "travessia de pedestres não marcada (elevada)"
                 },
                 "highway/crossing/zebra": {
-                    "name": "Faixa de pedestres marcada"
+                    "name": "Passadeira com marcas"
                 },
                 "highway/crossing/zebra-raised": {
-                    "name": "Faixa de pedestres marcada (levantada)"
+                    "name": "Passadeira marcada elevada"
                 },
                 "highway/cycleway": {
                     "name": "Ciclovia",
@@ -5874,7 +5910,7 @@
                 },
                 "landuse/residential/apartments": {
                     "name": "Complexo de apartamentos",
-                    "terms": "Condomínio"
+                    "terms": "condomínio, apartamentos"
                 },
                 "landuse/retail": {
                     "name": "Zona de retalho",
@@ -5901,7 +5937,7 @@
                 },
                 "leisure/beach_resort": {
                     "name": "Resort na praia",
-                    "terms": "Centro de férias na praia"
+                    "terms": "Centro de férias na praia, resort"
                 },
                 "leisure/bird_hide": {
                     "name": "Observatório de aves",
@@ -5937,7 +5973,7 @@
                 },
                 "leisure/fishing": {
                     "name": "Ponto de pesca",
-                    "terms": "local de pesca, área de pesca"
+                    "terms": "local de pesca, área de pesca, pesqueiro"
                 },
                 "leisure/fitness_centre": {
                     "name": "Academia desportiva / ginásio",
@@ -6057,7 +6093,7 @@
                 },
                 "leisure/pitch/badminton": {
                     "name": "Campo de badminton",
-                    "terms": "quadra de badminton, terreno de badminton"
+                    "terms": "quadra de badminton, terreno de badminton, badminton, badmínton"
                 },
                 "leisure/pitch/baseball": {
                     "name": "Campo de beisebol",
@@ -6144,7 +6180,8 @@
                     "terms": "Centro Desportivo, Complexo Desportivo, Cidade Desportiva, Centro de Desporto, Centro de Desportos"
                 },
                 "leisure/sports_centre/climbing": {
-                    "name": "Academia de escalada"
+                    "name": "Academia de escalada",
+                    "terms": "escalada artificial, escalada, parede de escalada"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "Academia de natação",
@@ -6164,7 +6201,7 @@
                 },
                 "leisure/track/horse_racing": {
                     "name": "Hipódromo (corrida de cavalos)",
-                    "terms": "Pista (corrida de cavalos), pista de corrida de cavalos"
+                    "terms": "pista, corridas de cavalos, corrida de cavalos, pista de corrida de cavalos, cavalo, cavalos"
                 },
                 "leisure/track/running": {
                     "name": "Pista de corrida (corrida a pé)",
@@ -6187,7 +6224,7 @@
                 },
                 "man_made/antenna": {
                     "name": "Antena",
-                    "terms": "Parabólica"
+                    "terms": "parabólica, antena, torre de telecomunicações, torre de retransmissão, torre celular, torre de telemóveis, torre de tv, torre de televisão, torre de rádio, retransmissão, retransmitir"
                 },
                 "man_made/breakwater": {
                     "name": "Molhe",
@@ -6243,11 +6280,11 @@
                 },
                 "man_made/mast/communication": {
                     "name": "Mastro de comunicação",
-                    "terms": "Transmissor móvel, transmissor de telemóvel, mastro de transmissão, torre de transmissão, torre de satélite, transmissor de rádio, transmissor de televisão, torre de televisão, torre de televisão"
+                    "terms": "antena, parabólica, transmissor móvel, transmissor de telemóvel, mastro de transmissão, torre de transmissão, torre de satélite, transmissor de rádio, transmissor de televisão, torre de tv, torre de televisão"
                 },
                 "man_made/mast/communication/mobile_phone": {
                     "name": "Mastro do telefone móvel",
-                    "terms": "Transmissor móvel, transmissor de telemóvel, mastro de transmissão, torre de transmissão, torre de satélite, transmissor de rádio, transmissor de televisão, torre de televisão, torre de televisão"
+                    "terms": "antena, antena celular, antena de telemóveis, transmissor de telemóvel, mastro de transmissão, torre de transmissão"
                 },
                 "man_made/mast/communication/radio": {
                     "name": "Mastro de transmissão de rádio",
@@ -6827,7 +6864,7 @@
                 },
                 "power/generator/method/photovoltaic": {
                     "name": "Painel solar",
-                    "terms": "painéis solares, estação de energia solar"
+                    "terms": "painéis solares, painel solar, estação de energia solar, painel fotovoltaico, parque de energia solar, parque de painéis solares"
                 },
                 "power/generator/source/nuclear": {
                     "name": "Reator nuclear",
@@ -6835,7 +6872,7 @@
                 },
                 "power/generator/source/wind": {
                     "name": "Turbina eólica",
-                    "terms": "usina eólica, turbinas eólicas"
+                    "terms": "usina eólica, turbinas eólicas, torre eólica, éolica, eólica, heólica, héolica, vento, aerogerador"
                 },
                 "power/line": {
                     "name": "Linha de alta tensão",
@@ -7097,7 +7134,7 @@
                     "terms": "rota do ferry, rota, ferry, percurso, viagem"
                 },
                 "seamark": {
-                    "name": "Seamark"
+                    "name": "Marco marítimo"
                 },
                 "seamark/beacon_isolated_danger": {
                     "name": "Baliza de perigo",
@@ -7232,7 +7269,7 @@
                     "terms": "Carpet Store, Carpetes, Carpete, Tapete, Tapetes, Passadeira, Passadeiras, Paçadeira, Paçadeiras"
                 },
                 "shop/catalogue": {
-                    "name": "Loja",
+                    "name": "Loja de catálogo",
                     "terms": "catálogo"
                 },
                 "shop/charity": {
@@ -7395,7 +7432,7 @@
                 },
                 "shop/hairdresser_supply": {
                     "name": "Loja de suprimentos de cabeleireiro",
-                    "terms": "Loja de suprimentos de cabeleireiro"
+                    "terms": "suprimentos de cabeleireiro, material de cabeleireiro, material de cabeleireira"
                 },
                 "shop/hardware": {
                     "name": "Loja de ferragens",
@@ -7431,7 +7468,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Joalharia",
-                    "terms": "Jeweler, Jóias, Jóia"
+                    "terms": "joalharia, joalheria, jóias, joias, bijuteria, joalheiro, joalheira"
                 },
                 "shop/kiosk": {
                     "name": "Quiosque",
@@ -7519,7 +7556,7 @@
                 },
                 "shop/party": {
                     "name": "Loja de materiais para festas",
-                    "terms": "Loja de materiais para festas"
+                    "terms": "materiais para festas, festas, festa"
                 },
                 "shop/pastry": {
                     "name": "Pastelaria",

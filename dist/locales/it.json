@@ -6589,10 +6589,6 @@
                     "name": "Negozio di casalinghi",
                     "terms": "decorazioni,interni,casalinghi"
                 },
-                "shop/jewelry": {
-                    "name": "Gioielliere",
-                    "terms": "Gioielleria"
-                },
                 "shop/kiosk": {
                     "name": "Chiosco",
                     "terms": "chiosco,edicola,tabacchi,dolciumi,snack"

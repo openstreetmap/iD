@@ -2463,6 +2463,15 @@
                 "denotation": {
                     "label": "Betydelse"
                 },
+                "departures_board": {
+                    "label": "Avgångstavla",
+                    "options": {
+                        "no": "Ingen",
+                        "realtime": "Realtid",
+                        "timetable": "Tidtabell",
+                        "yes": "Ja"
+                    }
+                },
                 "description": {
                     "label": "Beskrivning"
                 },
@@ -7395,10 +7404,6 @@
                 "shop/interior_decoration": {
                     "name": "Inredningsaffär",
                     "terms": "Inredningsaffär, inredning, dekoration"
-                },
-                "shop/jewelry": {
-                    "name": "Juvelerare",
-                    "terms": "Juvelerare, smycken, halsband, ring, ringar, örhänge, örhängen, klocka, klockor, guld, silver, diamant, pärla, pärlor"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",

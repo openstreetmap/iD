@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Warnungen ({count})"
             },
+            "rules": {
+                "title": "Regeln"
+            },
             "no_issues": {
                 "message": "Alles sieht gut aus",
                 "info": "Probleme werden während des Bearbeiten hier angezeigt"
             },
             "almost_junction": {
+                "title": "Fast-Kreuzungen",
                 "message": "{feature} ist sehr nahe zu {feature2}, aber nicht verbunden",
                 "highway-highway": {
                     "tip": "Kreuzende Straßen benötigen einen Kreuzungsknoten."
                 }
             },
             "crossing_ways": {
+                "title": "Kreuzende Wege",
                 "message": "{feature} kreuzt {feature2}",
+                "tip": "Straßen, Eisenbahnen, Wasserwege und Gebäude sollen sich nicht mehrdeutig kreuzen.",
                 "building-building": {
                     "tip": "Gebäude sollen sich nicht überschneiden, ausgenommen bei verschiedenen Ebenen"
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Veraltete Eigenschaften",
                 "single": {
                     "message": "{feature} hat die veraltete Eigenschaft \"{tag}\""
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Manche Eigenschaften werden im Laufe der Zeit veraltet und sollten ausgetauscht werden."
             },
             "disconnected_way": {
+                "title": "Nicht verbundene Wege",
                 "highway": {
                     "message": "{highway} ist nicht mit anderen Straßen oder Wegen verbunden",
                     "tip": "Wege sollten mit anderen Wegen oder mit Gebäude-Eingängen verbunden sein."
                 }
             },
             "generic_name": {
+                "title": "Generische Namen",
                 "message": "{feature} hat den generischen Namen \"{name}\"",
                 "tip": "Name sollten tatsächlich Objekte vor Ort bezeichnen."
             },
             "many_deletions": {
+                "title": "Viele Löschungen",
                 "points-lines-areas": {
                     "message": "Lösche {n} Objekte: {p} Punkte, {l} Linien und {a} Flächen"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Nur mehrfach erfasst oder in der realen Welt nicht vorhandene Objekte sollten gelöscht werden."
             },
+            "missing_role": {
+                "title": "Fehlende Rollen",
+                "message": "{member} hat keine Rolle in {relation}",
+                "multipolygon": {
+                    "tip": "Mitglieder eines Multipolygon müssen eine innere oder äußere Rolle haben."
+                }
+            },
             "missing_tag": {
+                "title": "Fehlende Eigenschaften",
                 "any": {
                     "message": "{feature} hat keine Eigenschaften"
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Objekte brauchen Eigenschaften die beschreiben was sie sind."
             },
             "old_multipolygon": {
+                "title": "Falsch plazierte Multipolygon-Eigenschaften",
                 "message": "{multipolygon} hat unpassende Eigenschaften",
                 "tip": "Multipolygone sollten Eigenschaften in der Relation und nicht an der äußeren Fläche haben."
             },
             "tag_suggests_area": {
+                "title": "Linien mit Flächen-Eigenschaften",
                 "message": "{feature} sollte eine geschlossene Fläche mit der Eigenschaft \"{tag}\" sein",
                 "tip": "Flächen müssen verbundene Endpunkte haben"
             },
@@ -1566,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Veraltete Eigenschaftskombination entfernt."
                 },
+                "remove_from_relation": {
+                    "title": "Lösche aus der Relation"
+                },
                 "remove_generic_name": {
                     "title": "Namen entfernt",
                     "annotation": "Generischer Name entfernt"
@@ -1582,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Wähle einen Objekttyp"
+                },
+                "set_as_inner": {
+                    "title": "Als Innen einstellen"
+                },
+                "set_as_outer": {
+                    "title": "Als Außen einstellen"
                 },
                 "tag_as_disconnected": {
                     "title": "Erfasse als \"getrennt\".",
@@ -2222,6 +2251,9 @@
                 },
                 "backrest": {
                     "label": "Rückenlehne"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Typ"
@@ -4042,8 +4074,8 @@
                     "terms": "Ladestation, E-Tankstelle, Stromtankstelle"
                 },
                 "amenity/childcare": {
-                    "name": "Kindertagesstätte/Kinderbetreuung",
-                    "terms": "Kindergarten,Kinderkrippe,"
+                    "name": "Kindergrippenbetreuung, Kindertagesstätte",
+                    "terms": "Kinderkrippe, Kindergarten"
                 },
                 "amenity/cinema": {
                     "name": "Kino",
@@ -4196,8 +4228,8 @@
                     "terms": "Internetcafé, Cybercafé"
                 },
                 "amenity/kindergarten": {
-                    "name": "Kindergartengelände",
-                    "terms": "Kindergartengeläde,Kinderkrippengelände"
+                    "name": "Kindergarten, Kindergartengelände, Kindertagesstätte, Kindertagesstättengelände",
+                    "terms": "Kindergartengelände"
                 },
                 "amenity/language_school": {
                     "name": "Sprachschule",
@@ -4799,6 +4831,9 @@
                     "name": "Mauer",
                     "terms": "Mauer"
                 },
+                "boundary": {
+                    "name": "Grenze"
+                },
                 "boundary/administrative": {
                     "name": "Administrative Grenze",
                     "terms": "Verwaltungsgrenze"
@@ -4926,8 +4961,8 @@
                     "terms": "Industriegebäude"
                 },
                 "building/kindergarten": {
-                    "name": "Vorschul-/Kindergartengebäude",
-                    "terms": "Kindergartengebäude,Kinderkrippengebäude"
+                    "name": "Kindergartengebäude, Vorschulgebäude",
+                    "terms": "Kindergartengebäude"
                 },
                 "building/mosque": {
                     "name": "Moscheegebäude",
@@ -7438,7 +7473,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Juweliergeschäft",
-                    "terms": "Juwelier, Schmuckgeschäft, Juweliergeschäft"
+                    "terms": "Juweliergeschäft, Juwelenverkauf"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",

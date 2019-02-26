@@ -1596,7 +1596,7 @@
                     "annotation": "یک ترکیب قدیمی از تگ‌ها ارتقا یافت."
                 },
                 "use_bridge_or_tunnel": {
-                    "title": "از یک پل یا تول استفاده کنید"
+                    "title": "از یک پل یا تونل استفاده کنید"
                 },
                 "use_different_layers": {
                     "title": "از لایه‌های مجزا استفاده کنید"
@@ -5818,10 +5818,6 @@
                 },
                 "shop/interior_decoration": {
                     "name": "فروشگاه تزئینات داخلی"
-                },
-                "shop/jewelry": {
-                    "name": "جواهر فروشی",
-                    "terms": "حلقه, الماس"
                 },
                 "shop/kiosk": {
                     "name": "دکه",

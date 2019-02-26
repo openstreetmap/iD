@@ -6615,10 +6615,6 @@
                     "name": "Obchod s bytovými doplňky",
                     "terms": "bytový doplněk,bytové doplňky,bytové dekorace,bytová dekorace,dekorace,dekorativní doplněk,doplněk do bytu,dekorace do bytu"
                 },
-                "shop/jewelry": {
-                    "name": "Klenotnictví",
-                    "terms": "zlatnictví,šperky,klenotník,klenoty,klenotnictví,bižutérie,náramky,náušnice,prsteny"
-                },
                 "shop/kiosk": {
                     "name": "Kiosek"
                 },

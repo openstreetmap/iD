@@ -4482,10 +4482,6 @@
                     "name": "Trgovina z avdio opremo",
                     "terms": "hifi"
                 },
-                "shop/jewelry": {
-                    "name": "Draguljarna",
-                    "terms": "bižuterija,nakit,zlatarna"
-                },
                 "shop/kiosk": {
                     "name": "Kiosk"
                 },

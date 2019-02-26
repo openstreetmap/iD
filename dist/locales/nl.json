@@ -6990,10 +6990,6 @@
                     "name": "Binnenhuisdecoratiewinkel",
                     "terms": "versiering,decoratie,huis,interieur,stijl"
                 },
-                "shop/jewelry": {
-                    "name": "Juwelier",
-                    "terms": "juwelier"
-                },
                 "shop/kiosk": {
                     "name": "Winkelkiosk",
                     "terms": "kiosk,nieuwskiosk,krantenwinkel,krantenkiosk"

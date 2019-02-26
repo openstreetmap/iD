@@ -3442,9 +3442,6 @@
                 "shop/interior_decoration": {
                     "name": "Унутрашња декорација"
                 },
-                "shop/jewelry": {
-                    "name": "Златар"
-                },
                 "shop/kiosk": {
                     "name": "Киоск",
                     "terms": "киоск,штанд"

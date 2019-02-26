@@ -6475,10 +6475,6 @@
                 "shop/interior_decoration": {
                     "name": "실내장식 가게"
                 },
-                "shop/jewelry": {
-                    "name": "보석상",
-                    "terms": "다이아몬드,보석,귀금속,반지"
-                },
                 "shop/kiosk": {
                     "name": "가판대"
                 },

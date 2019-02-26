@@ -1720,10 +1720,6 @@
                     "name": "HiFi prodavnica",
                     "terms": "HiFi prodavnica,radnja za prodaju HiFi uređaja"
                 },
-                "shop/jewelry": {
-                    "name": "Zlatar",
-                    "terms": "zlatara,radnja za prodaju nakita"
-                },
                 "shop/laundry": {
                     "name": "Praonica",
                     "terms": "praonica,servis za pranje rublja"

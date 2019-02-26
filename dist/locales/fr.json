@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Avertissements ({count})"
             },
+            "rules": {
+                "title": "Règles"
+            },
             "no_issues": {
                 "message": "Tout a l'air correct",
                 "info": "Les problèmes seront affichés ici pendant que vous modifiez la carte"
             },
             "almost_junction": {
+                "title": "Jonctions imparfaites",
                 "message": "{feature} est très proche mais n'est pas connecté à {feature2}",
                 "highway-highway": {
                     "tip": "Les routes qui se croisent devraient partager un point de jonction"
                 }
             },
             "crossing_ways": {
+                "title": "Chemins se croisant",
                 "message": "{feature} croise {feature2}",
+                "tip": "Les routes, les voies de chemins de fers, les cours d'eau et les bâtiments ne devraient pas se croiser de manière ambigüe.",
                 "building-building": {
                     "tip": "Les bâtiments ne devraient pas se recouper, sauf sur des couches différentes."
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Attributs obsolètes",
                 "single": {
                     "message": "{feature} utilise l'attribut obsolète « {tag} »"
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Certains attributs deviennent obsolètes avec le temps et devraient être remplacés."
             },
             "disconnected_way": {
+                "title": "Lignes déconnectés",
                 "highway": {
                     "message": "{highway} est déconnectée des autres routes et chemins",
                     "tip": "Les routes devraient être connectées à d'autres routes ou à des entrées de bâtiments."
                 }
             },
             "generic_name": {
+                "title": "Noms génériques",
                 "message": "{feature} possède le nom générique « {name} »",
                 "tip": "Les noms devraient être le nom réel de l'élément sur le terrain."
             },
             "many_deletions": {
+                "title": "Multiples suppressions",
                 "points-lines-areas": {
                     "message": "Suppression de {n} éléments : {p} points, {l} lignes et {a} polygones"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Seuls les éléments redondants ou inexistants devraient être supprimés."
             },
+            "missing_role": {
+                "title": "Rôles manquants",
+                "message": "{member} n'a pas de rôle dans {relation}",
+                "multipolygon": {
+                    "tip": "Les membres du multipolygone doivent avoir un rôle intérieur ou extérieur."
+                }
+            },
             "missing_tag": {
+                "title": "Attributs manquants",
                 "any": {
                     "message": "{feature} n'a pas d'attribut"
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Les éléments doivent avoir un attribut qui définit ce qu'ils sont."
             },
             "old_multipolygon": {
+                "title": "Attributs de multipolygone mal placés",
                 "message": "{multipolygon} a des attributs mal placés",
                 "tip": "Les attributs des multipolygones devraient se trouver sur leur relation, pas sur leur ligne extérieure."
             },
             "tag_suggests_area": {
+                "title": "Lignes en tant que surface",
                 "message": "{feature} devrait être un polygone fermé d'après l'attribut « {tag} »",
                 "tip": "Les polygones doivent avoir deux points connectés."
             },
@@ -1566,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Ancienne combinaison d'attributs supprimée."
                 },
+                "remove_from_relation": {
+                    "title": "Supprimer de la relation"
+                },
                 "remove_generic_name": {
                     "title": "Supprimer le nom",
                     "annotation": "Nom générique supprimé."
@@ -1582,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Choisir un type d'élément"
+                },
+                "set_as_inner": {
+                    "title": "Indiquer comme intérieur"
+                },
+                "set_as_outer": {
+                    "title": "Indiquer comme extérieur"
                 },
                 "tag_as_disconnected": {
                     "title": "Indiquer qu'ils sont déconnectés",
@@ -2222,6 +2251,9 @@
                 },
                 "backrest": {
                     "label": "Dossier de siège"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Type"
@@ -4798,6 +4830,9 @@
                 "barrier/wall": {
                     "name": "Mur",
                     "terms": "mur, parapet, paroi, muraille, enceinte, rempart, cloison, clôture, barrière, pierres, briques, béton, wall"
+                },
+                "boundary": {
+                    "name": "Type de frontière"
                 },
                 "boundary/administrative": {
                     "name": "Limite administrative",
@@ -7439,7 +7474,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Bijouterie",
-                    "terms": "Bijoutier"
+                    "terms": "magasin de bijoux,bijouterie,bijoux,bracelets,diamants,boucles d'oreilles,boucle d'oreille,or,joyau,gemme,pierre précieuse,collier,argent"
                 },
                 "shop/kiosk": {
                     "name": "Kiosque",

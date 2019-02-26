@@ -4200,10 +4200,6 @@
                 "shop/interior_decoration": {
                     "name": "Interjero dekoravimo parduotuvė"
                 },
-                "shop/jewelry": {
-                    "name": "Juvelyrikos parduotuvė",
-                    "terms": "juvelyras"
-                },
                 "shop/kiosk": {
                     "name": "Kioskas"
                 },

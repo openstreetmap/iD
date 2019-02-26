@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Advertencias ({count})"
             },
+            "rules": {
+                "title": "Reglas"
+            },
             "no_issues": {
                 "message": "Todo se ve bien",
                 "info": "Cualquier problema se mostrará aquí mientras edita"
             },
             "almost_junction": {
+                "title": "Casi cruces",
                 "message": "{feature} está muy cerca pero no está conectado a {feature2}",
                 "highway-highway": {
                     "tip": "Intersección de carreteras debe compartir un vértice de cruce."
                 }
             },
             "crossing_ways": {
+                "title": "Cruces de vías",
                 "message": "{feature} cruza {feature2}",
+                "tip": "Carreteras, ferrocarriles, vías fluviales y los edificios no deben cruzarse de manera ambigua.",
                 "building-building": {
                     "tip": "Los edificios no deben cruzarse, excepto en capas diferentes."
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Etiquetas obsoletas",
                 "single": {
                     "message": "{feature} tiene la etiqueta obsoleta \"{tag}\""
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Algunas etiquetas se vuelven obsoletas con el tiempo y deben reemplazarse."
             },
             "disconnected_way": {
+                "title": "Vías desconectadas",
                 "highway": {
                     "message": "{highway} está desconectada de otras carreteras y senderos",
                     "tip": "Carreteras deben conectarse a otras carreteras o entradas de edificios."
                 }
             },
             "generic_name": {
+                "title": "Nombres genéricos",
                 "message": "{feature} tiene el nombre genérico \"{name}\"",
                 "tip": "Los nombres deben ser los actuales y reales."
             },
             "many_deletions": {
+                "title": "Muchas eliminaciones",
                 "points-lines-areas": {
                     "message": "Eliminar {n} elementos: {p} puntos, {l} líneas y {a} áreas"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Solo se debe eliminar los elementos redundantes o inexistentes."
             },
+            "missing_role": {
+                "title": "Roles faltantes",
+                "message": "{member} no tiene ningún rol dentro de {relation}",
+                "multipolygon": {
+                    "tip": "Los miembros de un multipolígono deben tener un rol interno o externo."
+                }
+            },
             "missing_tag": {
+                "title": "Etiquetas faltantes",
                 "any": {
                     "message": "{feature} no tiene etiquetas"
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Los elementos deben tener etiquetas que definan lo que son."
             },
             "old_multipolygon": {
+                "title": "Etiquetas de multipolígono mal colocadas",
                 "message": "{multipolygon} tiene etiquetas mal ubicadas",
                 "tip": "Los multipolígonos deben estar etiquetados en su relación, no en su forma externa."
             },
             "tag_suggests_area": {
+                "title": "Líneas etiquetadas como áreas",
                 "message": "{feature} debe ser un área cerrada basada en la etiqueta \"{tag}\"",
                 "tip": "Las áreas deben tener puntos finales conectados."
             },
@@ -1566,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Se eliminó una combinación de etiqueta antigua."
                 },
+                "remove_from_relation": {
+                    "title": "Eliminar de la relación"
+                },
                 "remove_generic_name": {
                     "title": "Quitar el nombre",
                     "annotation": "Se eliminó un nombre genérico."
@@ -1582,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Seleccionar un tipo de elemento"
+                },
+                "set_as_inner": {
+                    "title": "Establecer como interior"
+                },
+                "set_as_outer": {
+                    "title": "Establecer como exterior"
                 },
                 "tag_as_disconnected": {
                     "title": "Etiquetar como desconectado",
@@ -2222,6 +2251,9 @@
                 },
                 "backrest": {
                     "label": "Respaldo"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Tipo"
@@ -4798,6 +4830,9 @@
                 "barrier/wall": {
                     "name": "Muro",
                     "terms": "muro, murete, tapia, pared, paredón, tabique, muralla, piedra seca, pared en seco, pared seca, aparejo, barrera acústica, new jersey, gavión, erosión, muro de mar, dique marino, muro contra riadas, cortina, aparejo"
+                },
+                "boundary": {
+                    "name": "Límite"
                 },
                 "boundary/administrative": {
                     "name": "Límite administrativo",
@@ -7438,7 +7473,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Joyería",
-                    "terms": "joyería, joyero, argentería, orfebrería, orfebre, platero, joyas, alhajas"
+                    "terms": "pulsera, diamante, pendientes, gema, oro, joyero, joyería, joya, collar, anillo, alianza, plata, acero"
                 },
                 "shop/kiosk": {
                     "name": "Quiosco",

@@ -1147,7 +1147,199 @@
             }
         },
         "issues": {
-            "list_title": "Merkintävirheet ({count})"
+            "title": "Merkintävirheet",
+            "key": "I",
+            "list_title": "Merkintävirheet ({count})",
+            "errors": {
+                "list_title": "Virheet ({count})"
+            },
+            "warnings": {
+                "list_title": "Varoitukset ({count})"
+            },
+            "no_issues": {
+                "message": "Korjattavaa ei löytynyt",
+                "info": "Automaattisesti havaitut merkintävirheet näytetään tässä"
+            },
+            "almost_junction": {
+                "message": "{feature} on hyvin lähellä mutta ei yhdistetty kohteeseen {feature2}",
+                "highway-highway": {
+                    "tip": "Risteävillä teillä tulisi olla yhteinen viivapiste."
+                }
+            },
+            "crossing_ways": {
+                "message": "{feature} risteää kohteen {feature2} kanssa",
+                "building-building": {
+                    "tip": "Rakennusten ei tulisi leikata toisiaan, elleivät ne ole eri korkeuksilla."
+                },
+                "building-highway": {
+                    "tip": "Rakennuksen kanssa risteävä tie tulisi merkitä tunneliksi, sillaksi tai katetuksi tieksi."
+                },
+                "building-railway": {
+                    "tip": "Rakennuksen kanssa risteävä rautatie tulisi merkitä tunneliksi tai sillaksi."
+                },
+                "building-waterway": {
+                    "tip": "Rakennuksen kanssa risteävä vesiväylä tulisi merkitä tunneliksi tai eri korkeuksille."
+                },
+                "highway-highway": {
+                    "tip": "Risteävät tiet tulisi merkitä sillalla, tunnelilla tai risteyksenä."
+                },
+                "highway-railway": {
+                    "tip": "Tien kanssa risteävä rautatie tulisi merkitä sillalla, tunnelilla tai tasoristeyksellä."
+                },
+                "highway-waterway": {
+                    "tip": "Tien kanssa risteävä vesiväylä tulisi merkitä sillalla, tunnelilla tai kahluupaikkana."
+                },
+                "railway-railway": {
+                    "tip": "Risteävät rautatiet tulisi yhdistää viivapisteellä tai merkitä sillalla tai tunnelilla."
+                },
+                "railway-waterway": {
+                    "tip": "Vesiväylän kanssa risteävä rautatie tulisi merkitä sillalla tai tunnelilla."
+                },
+                "waterway-waterway": {
+                    "tip": "Risteävät vesiväylät tulisi merkitä yhteisellä viivapisteellä tai tunnelina."
+                },
+                "tunnel-tunnel": {
+                    "tip": "Risteävät tunnelit tulisi merkitä eri korkeustasoihin."
+                },
+                "tunnel-tunnel_connectable": {
+                    "tip": "Risteävät tunnelit tulisi merkitä yhteisellä viivapisteellä tai eri korkeustasoihin."
+                },
+                "bridge-bridge": {
+                    "tip": "Risteävät sillat tulisi merkitä eri korkeustasoihin."
+                },
+                "bridge-bridge_connectable": {
+                    "tip": "Risteävät sillat tulisi merkitä yhteisellä viivapisteellä tai eri korkeustasoihin."
+                },
+                "indoor-indoor": {
+                    "tip": "Risteävät sisäkäytävät tulisi merkitä eri korkeustasoihin."
+                },
+                "indoor-indoor_connectable": {
+                    "tip": "Risteävät sisäkäytävät tulisi merkitä yhteisellä viivapisteellä tai eri tasoihin."
+                }
+            },
+            "deprecated_tag": {
+                "single": {
+                    "message": "{feature} on merkitty ominaisuudella {tag}, joka on poistunut käytöstä"
+                },
+                "combination": {
+                    "message": "{feature} on merkitty ominaisuuksilla, jotka on poistettu käytöstä: {tags}"
+                },
+                "tip": "Ominaisuustietovalikoimaa päivitellään ajoittain, ja kohteisiin saattaa jäädä vanhentuneita tietoja."
+            },
+            "disconnected_way": {
+                "highway": {
+                    "message": "{highway} ei ole yhdistetty tieverkostoon",
+                    "tip": "Tiet tulisi merkitä yhteisellä viivapisteellä muuhun tieverkostoon tai sisäänkäynteihin."
+                }
+            },
+            "generic_name": {
+                "message": "{feature} on merkitty liian yleisellä nimellä {name}",
+                "tip": "Nimen tulisi olla todellisuuteen perustuva, kohteen yksilöllinen nimi."
+            },
+            "many_deletions": {
+                "points-lines-areas": {
+                    "message": "Poistetaan {n} karttakohdetta: {p} pistettä, {l} viivaa ja {a} aluetta"
+                },
+                "points-lines-areas-relations": {
+                    "message": "Poistetaan {n} karttakohdetta: {p} pistettä, {l} viivaa, {a} aluetta ja {r} relaatiota"
+                },
+                "tip": "Vain tarpeettomat tai olemassa olemattomat kohteet tulisi poistaa."
+            },
+            "missing_tag": {
+                "any": {
+                    "message": "{feature} ei ole merkitty millään ominaisuustiedoilla"
+                },
+                "descriptive": {
+                    "message": "{feature} ei ole merkitty ominaisuustiedoilla"
+                },
+                "specific": {
+                    "message": "{feature} ei ole merkitty {tag}-ominaisuustiedolla"
+                },
+                "tip": "Karttakohteet tulee merkitä niitä kuvaavilla ominaisuustiedoilla."
+            },
+            "old_multipolygon": {
+                "message": "Monikulmion {multipolygon} ominaisuustiedot on merkitty väärään paikkaan",
+                "tip": "Monikulmion ominaisuustiedot merkitään relaatioon, ei ulkoviivaan."
+            },
+            "tag_suggests_area": {
+                "message": "{feature} tulisi merkittynä suljettuna alueena ominaisuustiedolla {tag}",
+                "tip": "Alueen alku- ja päätepiste tulee yhdistää."
+            },
+            "fix": {
+                "connect_almost_junction": {
+                    "annotation": "Vierekkäiset kohteet yhdistetty."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Risteävät kohteet yhdistetty."
+                },
+                "connect_endpoints": {
+                    "title": "Yhdistä päätteet",
+                    "annotation": "Viivan päätepisteet yhdistettiin."
+                },
+                "connect_features": {
+                    "title": "Yhdistä karttakohteet"
+                },
+                "continue_from_start": {
+                    "title": "Jatka piirtämistä alkupäästä"
+                },
+                "continue_from_end": {
+                    "title": "Jatka piirtämistä loppupäästä"
+                },
+                "delete_feature": {
+                    "title": "Poista karttakohde"
+                },
+                "move_tags": {
+                    "title": "Siirrä ominaisuustietoja",
+                    "annotation": "Ominaisuustietoja siirrettiin."
+                },
+                "remove_deprecated_tag": {
+                    "annotation": "Vanhentunut ominaisuustieto poistettiin."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Vanhoja ominaisuustietoja poistettiin."
+                },
+                "remove_generic_name": {
+                    "title": "Poista nimi",
+                    "annotation": "Karkeahko nimi poistettiin."
+                },
+                "remove_tag": {
+                    "title": "Poista ominaisuustieto",
+                    "annotation": "Ominaisuustieto poistettiin."
+                },
+                "remove_tags": {
+                    "title": "Poista ominaisuustietoja"
+                },
+                "reposition_features": {
+                    "title": "Siirrä kohde toiseen sijaintiin"
+                },
+                "select_preset": {
+                    "title": "Valitse ominaisuustyypp"
+                },
+                "tag_as_disconnected": {
+                    "title": "Merkitse irralleen",
+                    "annotation": "Vierekkäiset karttakohteet merkittiin irralleen."
+                },
+                "upgrade_tag": {
+                    "title": "Päivitä ominaisuustieto",
+                    "annotation": "Vanhentunut ominaisuustieto päivitettiin."
+                },
+                "upgrade_tag_combo": {
+                    "title": "Päivitä ominaisuustiedot",
+                    "annotation": "Vanhentuneet ominaisuustiedot päivitettiin."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Merkitse siltana tai tunnelina"
+                },
+                "use_different_layers": {
+                    "title": "Käytä eri korkeustasoja"
+                },
+                "use_different_levels": {
+                    "title": "Käytä eri kerroksia"
+                },
+                "use_tunnel": {
+                    "title": "Käytä tunnelia"
+                }
+            }
         },
         "intro": {
             "done": "valmis",
@@ -5682,9 +5874,6 @@
                 "shop/interior_decoration": {
                     "name": "Sisustusmyymälä",
                     "terms": "huonekalu, kalustus, kaluste, koriste, esine, kauppa, liike"
-                },
-                "shop/jewelry": {
-                    "name": "Jalokiviliike"
                 },
                 "shop/kiosk": {
                     "name": "Kioski"

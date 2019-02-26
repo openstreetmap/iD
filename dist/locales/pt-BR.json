@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "({count}) avisos"
             },
+            "rules": {
+                "title": "Regras"
+            },
             "no_issues": {
                 "message": "Tudo parece bem",
                 "info": "Quaisquer problemas aparecerão aqui conforme você edita"
             },
             "almost_junction": {
+                "title": "Quase junções",
                 "message": "{feature} é muito próximo, mas não está conectado a {feature2}",
                 "highway-highway": {
                     "tip": "Estradas com interseção devem compartilhar um vértice de junção."
                 }
             },
             "crossing_ways": {
+                "title": "Maneiras de cruzamento",
                 "message": "{feature} cruza {feature2}",
+                "tip": "Rodovias, ferrovias, hidrovias e prédios não devem cruzar ambiguamente.",
                 "building-building": {
                     "tip": "Os edifícios não devem se cruzar, exceto em camadas diferentes."
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Etiqueta descontinuada",
                 "single": {
                     "message": "{feature} tem a etiqueta desatualizada \"{tag}\""
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Algumas etiquetas se tornam obsoletas com o tempo e devem ser substituídas."
             },
             "disconnected_way": {
+                "title": "Caminhos desconectados",
                 "highway": {
                     "message": "{highway} está desconectado de outras estradas e caminhos",
                     "tip": "As rodovias devem se conectar a outras rodovias ou entradas de prédios."
                 }
             },
             "generic_name": {
+                "title": "Nomes genéricos",
                 "message": "{feature} tem o nome genérico \"{name}\"",
                 "tip": "Os nomes devem ser os nomes reais dos recursos."
             },
             "many_deletions": {
+                "title": "Muitas exclusões",
                 "points-lines-areas": {
                     "message": "Excluindo {n} recursos: {p} pontos, {l} linhas e {a} áreas"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Somente recursos redundantes ou inexistentes devem ser excluídos."
             },
+            "missing_role": {
+                "title": "Papéis ausentes",
+                "message": "{member} não tem nenhum papel dentro {relation}",
+                "multipolygon": {
+                    "tip": "Os membros do multipolígono devem ter uma função interna ou externa."
+                }
+            },
             "missing_tag": {
+                "title": "Etiquetas ausentes",
                 "any": {
                     "message": "{feature} não tem etiquetas."
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Os recursos devem ter etiquetas que definem o que são."
             },
             "old_multipolygon": {
+                "title": "Etiquetas multipolígonos deslocadas",
                 "message": "{multipolygon} tem etiquetas perdidas",
                 "tip": "Multipolígonos devem ser marcados em sua relação, não em seu caminho externo."
             },
             "tag_suggests_area": {
+                "title": "Linhas marcadas como áreas",
                 "message": "{feature} deve ser uma área fechada com base na etiqueta \"{tag}\"",
                 "tip": "As áreas devem ter terminais conectados."
             },
@@ -1560,6 +1580,15 @@
                     "title": "Mover etiquetas",
                     "annotation": "Movido etiquetas"
                 },
+                "remove_deprecated_tag": {
+                    "annotation": "Removida uma etiqueta antiga."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "Removida uma combinação de etiquetas antiga."
+                },
+                "remove_from_relation": {
+                    "title": "Remover da relação"
+                },
                 "remove_generic_name": {
                     "title": "Remova o nome",
                     "annotation": "Removido nome genérico"
@@ -1568,20 +1597,31 @@
                     "title": "Remova etiqueta",
                     "annotation": "Removido etiqueta."
                 },
+                "remove_tags": {
+                    "title": "Remova etiquetas"
+                },
                 "reposition_features": {
                     "title": "Reposicione os recursos"
                 },
                 "select_preset": {
                     "title": "Selecione um tipo de recurso"
                 },
+                "set_as_inner": {
+                    "title": "Definir como interno"
+                },
+                "set_as_outer": {
+                    "title": "Definir como exterior"
+                },
                 "tag_as_disconnected": {
                     "title": "Etiqueta está desconectada",
                     "annotation": "Marcou recursos muito próximos como desconectados."
                 },
                 "upgrade_tag": {
+                    "title": "Atualizar essa etiqueta",
                     "annotation": "Atualizado essa etiqueta."
                 },
                 "upgrade_tag_combo": {
+                    "title": "Atualizar essas etiquetas",
                     "annotation": "Atualizou uma combinação antiga de etiquetas."
                 },
                 "use_bridge_or_tunnel": {
@@ -2212,6 +2252,9 @@
                 "backrest": {
                     "label": "Encosto"
                 },
+                "bar": {
+                    "label": "Bar"
+                },
                 "barrier": {
                     "label": "Tipo"
                 },
@@ -2451,6 +2494,15 @@
                 },
                 "denotation": {
                     "label": "Denotação"
+                },
+                "departures_board": {
+                    "label": "Quadro de Partidas",
+                    "options": {
+                        "no": "Nenhum",
+                        "realtime": "Tempo real",
+                        "timetable": "Calendário",
+                        "yes": "SIm"
+                    }
                 },
                 "description": {
                     "label": "Descrição"
@@ -4533,6 +4585,10 @@
                     "name": "Máquina de Venda de Moedas Achatadas",
                     "terms": "Máquina de venda automática de moedas"
                 },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Dispensador de saco de excrementos",
+                    "terms": "Dispensador de saco de excrementos"
+                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de Vendas - Higiene Feminina",
                     "terms": "produtos de higiene feminina, camisinha, preservativo, absorvente, tampão, cuidados pessoais, higiene, mulher"
@@ -4769,6 +4825,9 @@
                 "barrier/wall": {
                     "name": "Muro",
                     "terms": "Parede"
+                },
+                "boundary": {
+                    "name": "Limite"
                 },
                 "boundary/administrative": {
                     "name": "Limite Administrativo",
@@ -7407,7 +7466,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Joalheria",
-                    "terms": "Joalheria, Lojas de Jóias"
+                    "terms": "Joalheria"
                 },
                 "shop/kiosk": {
                     "name": "Quiosque",
@@ -8275,6 +8334,13 @@
                 },
                 "description": "Imagens do Japão GSI airphoto. Não completamente ortorretificado, mas um pouco mais novo e/ou diferente do que as Imagens do GSI orto.",
                 "name": "Imagens do Japão GSI airphoto"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "Foto sem emenda GSI Japão"
+                },
+                "description": "Imagens do seamlessphoto de Japão GSI. A coleção de imagens mais recentes da GSI orto, airphoto, pós desastre e outros.",
+                "name": "Imagens do Japan GSI seamlessphoto"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

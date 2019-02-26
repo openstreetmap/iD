@@ -6319,9 +6319,6 @@
                 "shop/interior_decoration": {
                     "name": "Tenda de decoración de interiores"
                 },
-                "shop/jewelry": {
-                    "name": "Xoiaría"
-                },
                 "shop/kiosk": {
                     "name": "Quiosco"
                 },
@@ -6681,7 +6678,7 @@
                     "name": "Rota de equitación"
                 },
                 "type/route/pipeline": {
-                    "name": "Rota de tubaría"
+                    "name": "Rota de tubaxe"
                 },
                 "type/route/power": {
                     "name": "Rota da rede de enerxía"

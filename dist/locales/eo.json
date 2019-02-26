@@ -2221,6 +2221,9 @@
                 "backrest": {
                     "label": "Seĝodorso"
                 },
+                "bar": {
+                    "label": "Drinkejo"
+                },
                 "barrier": {
                     "label": "Speco"
                 },
@@ -4555,6 +4558,10 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Vendilo de etenditaj moneroj",
                     "terms": "moneretendilo,etendilo,memoraĵoj"
+                },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Vendilo de saketoj por fekaĵoj",
+                    "terms": "rubujo,hundaj fekoj,fekaĵoj,eksrementoj,saketoj"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Vendilo de virinaj higienaĵoj",
@@ -7427,10 +7434,6 @@
                     "name": "Ensembla (meblara) vendejo",
                     "terms": "ensembloj,ornamoj,ornamaĵoj,dekoracioj,mebloj,meblaro"
                 },
-                "shop/jewelry": {
-                    "name": "Juvelista vendejo",
-                    "terms": "juveloj,juvelaĵoj,juvelartoj,oraĵoj,diamantoj,ringoj"
-                },
                 "shop/kiosk": {
                     "name": "Gazetbudo",
                     "terms": "gazetejo,kiosko,budo,stratkiosko"
@@ -8300,6 +8303,13 @@
                 },
                 "description": "Aera fotaro de GSI Japanujo. Ne tute geometrie korektita, sed iomete pli aktuala aŭ kovranta aliajn terenojn ol fotaro de GSI.",
                 "name": "Aera fotaro GSI Japanujo (nekorektita)"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japanujo unuforma fotaro"
+                },
+                "description": "Senkunliga (unuforma) fotaro de GSI Japanujo. Kolekto de la plej aktualaj aeraj fotoj de GSI post la kataklismo kaj aliaj.",
+                "name": "Unuforma fotaro GSI Japanujo"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

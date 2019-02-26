@@ -414,6 +414,7 @@
             "modified": "Módosítva",
             "deleted": "Törölve",
             "created": "Létrehozva",
+            "outstanding_errors_message": "Kérjük, előbb javítsd az összes hibát. Még {count} van hátra.",
             "about_changeset_comments": "A módosításcsomag megjegyzésekről",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Hu:Good_changeset_comments",
             "google_warning": "Megemlítetted a Google-t a megjegyzésben: ne felejtsd, hogy a Google Mapsből történő másolás szigorúan tilos.",
@@ -518,9 +519,14 @@
             "role": "Szerep",
             "choose": "Jelölj ki egy elemtípust",
             "results": "{n} találat {search} keresésre",
+            "no_documentation_key": "Nem érhető el dokumentáció.",
             "edit_reference": "szerkesztés/fordítás",
             "wiki_reference": "Dokumentáció megtekintése",
             "wiki_en_reference": "Dokumentáció megtekintése angolul",
+            "hidden_preset": {
+                "manual": "{features} el vannak rejtve. Engedélyezd őket a Térképadatok alatt.",
+                "zoom": "{features} el vannak rejtve. Nagyíts az engedélyezésükhöz."
+            },
             "back_tooltip": "Elem megváltoztatása",
             "remove": "Eltávolítás",
             "search": "Keresés",
@@ -593,7 +599,7 @@
                     "title": "KeepRight problémák"
                 },
                 "improveOSM": {
-                    "tooltip": "Az improveosm.org által automatikusan észlelt hiányzó adat",
+                    "tooltip": "Az improveosm.org által automatikusan észlelt hiányzó adatok",
                     "title": "ImproveOSM problémák"
                 },
                 "custom": {
@@ -649,9 +655,11 @@
                 "tooltip": "Távvezetékek, erőművek, alállomások, stb."
             },
             "past_future": {
+                "description": "Múltbeli/jövőbeli elemek",
                 "tooltip": "Tervezett, építés alatt, elhagyott, elbontott, stb."
             },
             "others": {
+                "description": "Egyéb elemek",
                 "tooltip": "Minden más"
             }
         },
@@ -1694,6 +1702,12 @@
                 "category-building": {
                     "name": "Épületek"
                 },
+                "category-golf-area": {
+                    "name": "Golfpálya-elemek"
+                },
+                "category-golf-line": {
+                    "name": "Golfpálya-elemek"
+                },
                 "category-landuse": {
                     "name": "Területhasználati módok"
                 },
@@ -1870,6 +1884,9 @@
                 },
                 "animal_shelter": {
                     "label": "Állatoknak"
+                },
+                "architect": {
+                    "label": "Építész"
                 },
                 "area/highway": {
                     "label": "Típus"
@@ -2121,6 +2138,13 @@
                 },
                 "denotation": {
                     "label": "Jelentőség"
+                },
+                "departures_board": {
+                    "options": {
+                        "no": "Nincs",
+                        "realtime": "Valósidejű",
+                        "yes": "Van"
+                    }
                 },
                 "description": {
                     "label": "Leírás"
@@ -6324,10 +6348,6 @@
                     "name": "Lakberendezési bolt",
                     "terms": "lakástextil, díszek, bútor"
                 },
-                "shop/jewelry": {
-                    "name": "Ékszerbolt",
-                    "terms": "ékszerüzlet,arany, ezüst, gyémánt, briliáns,  ékszer,bijou,bizsu,fülbevaló, nyakék,karkötő,divatékszer,jegygyűrű, gyűrű, ékszerész, ötvös, aranyműves"
-                },
                 "shop/kiosk": {
                     "name": "Trafik"
                 },
@@ -7124,6 +7144,12 @@
                 },
                 "description": "Japán GSI ortofotó. Általában jobb mint a Bing, de kicsit régebbi.",
                 "name": "Japán GSI ortofotó"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japán"
+                },
+                "name": "Japán GSI légifotó"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

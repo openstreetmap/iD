@@ -1924,6 +1924,9 @@
                 "description": {
                     "label": "Beskrivelse"
                 },
+                "destination_oneway": {
+                    "label": "Destinationer"
+                },
                 "devices": {
                     "label": "Enheder",
                     "placeholder": "1, 2, 3..."
@@ -2189,6 +2192,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (Netværksnavn)"
                 },
+                "junction/ref_oneway": {
+                    "label": "Vejkrydsnummer"
+                },
                 "kerb": {
                     "label": "Kantsten"
                 },
@@ -2389,6 +2395,9 @@
                         "undefined": "Antages at være Nej",
                         "yes": "Ja"
                     }
+                },
+                "oneway/bicycle": {
+                    "label": "Ensrettet (cyklister)"
                 },
                 "oneway_yes": {
                     "label": "Ensrettet",
@@ -2622,7 +2631,7 @@
                     "label": "Servicetid"
                 },
                 "shelter": {
-                    "label": "Venteskur"
+                    "label": "Læskur"
                 },
                 "shelter_type": {
                     "label": "Type"
@@ -3059,7 +3068,7 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Cykelparkering",
-                    "terms": "parkering,cyklist"
+                    "terms": "parkering,cyklist,cykelskur,skur,cykel"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Cykeludlejning",
@@ -3357,8 +3366,24 @@
                     "name": "Skrotplads"
                 },
                 "amenity/shelter": {
-                    "name": "Skur",
-                    "terms": "Shelter, Bivuak"
+                    "name": "Læsted",
+                    "terms": "Shelter,Bivuak,hytte,læ,ly,læskur,skur,halvtag"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Lysthus",
+                    "terms": "skovtur,læskur,skur,"
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Åbent overnatningsshelter",
+                    "terms": "bivuak,overnatning,lejrplads,shelterplads"
+                },
+                "amenity/shelter/picnic_shelter": {
+                    "name": "Madpakkehus",
+                    "terms": "hytte,læ,ly,skovtur,madpakke,hytte"
+                },
+                "amenity/shelter/public_transport": {
+                    "name": "Venteskur",
+                    "terms": "bus,tog,transport,offentlig,vente,læskur,læ,ly,halvtag"
                 },
                 "amenity/shower": {
                     "name": "Brusebad",
@@ -4096,6 +4121,10 @@
                 "highway/footway": {
                     "name": "Gangsti",
                     "terms": "Gangsti"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Fortov",
+                    "terms": "fodgænger,flise"
                 },
                 "highway/give_way": {
                     "name": "Advarselsskilt",
@@ -5417,10 +5446,6 @@
                 "shop/interior_decoration": {
                     "name": "Brugskunstbutik",
                     "terms": "Indendørsudsmykningsbutik, Indendørsudsmykning,brugskunst,kunst,indendørs,bolig"
-                },
-                "shop/jewelry": {
-                    "name": "Juvelér",
-                    "terms": "Juvelér, Smykkeforretning,smykke,guldsmed"
                 },
                 "shop/kitchen": {
                     "name": "Køkkenforhandler",

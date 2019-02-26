@@ -3557,10 +3557,6 @@
                 "shop/interior_decoration": {
                     "name": "Trgovina unutarnjeg uređenja"
                 },
-                "shop/jewelry": {
-                    "name": "Zlatarnica",
-                    "terms": "zlatarna,zlatara,zlatar"
-                },
                 "shop/kiosk": {
                     "name": "Kiosk"
                 },

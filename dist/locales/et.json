@@ -3234,10 +3234,6 @@
                     "name": "Sisedekoratsioonikauplus",
                     "terms": "dekoratsioonid,kaunistus"
                 },
-                "shop/jewelry": {
-                    "name": "Ehtepood",
-                    "terms": "ehted,kalliskivid"
-                },
                 "shop/kitchen": {
                     "name": "Köögimööblikauplus",
                     "terms": "köögimööblistuudio,köögistuudio"

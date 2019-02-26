@@ -819,7 +819,8 @@
                         "description_alt": "נתונים מגוף צד־שלישי מרמזים שייתכן שיש כאן {geometry_type} שלא מופה."
                     },
                     "tr": {
-                        "title": "הגבלת פנייה חסרה"
+                        "title": "הגבלת פנייה חסרה",
+                        "description": "{num_passed} מתוך {num_trips} מסלולים שתועדו (לכיוון {travel_direction}) פונים מ־{from_way} אל {to_way} ב־{junction}. There יכול להיות שחסרה הגבלת „{turn_restriction}”."
                     }
                 }
             },
@@ -918,6 +919,12 @@
                     "71": {
                         "description": "ל־{var1} אין תגיות."
                     },
+                    "72": {
+                        "description": "{var1} אינו חבר באף דרך ואין לו תגיות."
+                    },
+                    "73": {
+                        "description": "ל־{var1} יש תגית „{var2}” אבל אין תגית „highway” (דרך מהירה)."
+                    },
                     "74": {
                         "description": "ל־{var1} יש תגית ריקה: „{var2}”."
                     },
@@ -995,6 +1002,10 @@
                     "232": {
                         "description": "{var1} מתויג ב־„layer={var2}”. זאת לא אמורה להיות שגיאה אבל זה נראה מוזר."
                     },
+                    "270": {
+                        "title": "חיבור חריג של דרך לממונעים",
+                        "description": "{var1} הוא צומת של דרך למונעים ודרך מהירה שאינן מבין „motorway” (דרך לממונעים),‏ „motorway_link” (קישור לדרך לממונעים),‏ „trunk” (כביש עיקרי),‏ „rest_area” (אזור מנוחה) או „construction” (מבנה). החיבור אל „service” (שירות) או „unclassified” (ללא סיווג) תקף רק במקרה שיש את התגית „access=no/private” (גישה מוגבלת), או שהוא מוביל לאזור שירות לממונעים, או אם מדובר ב־„service=parking_aisle” (מתחם חנייה)."
+                    },
                     "280": {
                         "title": "תקלת גבול",
                         "description": "יש תקלה בלתי מוגדרת עם הגבול הזה."
@@ -1037,12 +1048,31 @@
                     "294": {
                         "title": "ההגבלה „מוצא” או „יעד” אינה דרך"
                     },
+                    "295": {
+                        "title": "מגבלת „דרך” אינה נקודת קצה"
+                    },
                     "296": {
                         "title": "זווית מגבלה חריגה"
                     },
                     "297": {
                         "title": "כיוון שגוי של דרך „יעד”",
                         "description": "ל־{var1} אין התאמה לכיוון של דרך ה־„יעד” {var2}."
+                    },
+                    "298": {
+                        "title": "הגבלה מיותרת - חד־סטרי",
+                        "description": "ייתכן ש־{var1} הוא מיותר. הרשומה כבר מוגבלת עם התגית „oneway” (חד־סטרי) על גבי {var2}."
+                    },
+                    "300": {
+                        "title": "המהירות המרבית חסרה",
+                        "description": "ל־{var1} חסרה התגית „maxspeed” (מהירות מרבית) על אף כי הוא מתויג בתוך דרך לממונעים, ראשית, עיקרית או משנית."
+                    },
+                    "310": {
+                        "title": "תקלת כיכר",
+                        "description": "התגלתה תקלה בלתי מוגדרת עם הכיכר הזאת."
+                    },
+                    "311": {
+                        "title": "כיכר היא לולאה בלתי סגורה",
+                        "description": "{var1} הוא חלק מהכיכר אך אינו סגור בלולאה. (דרכי הולכה שמשתלבות עם הכיכר לא אמורות להיות מתויגות בתור כיכר)."
                     },
                     "312": {
                         "title": "כיוון הכיכר שגוי",
@@ -1051,6 +1081,9 @@
                     "313": {
                         "title": "חיבור הכיכר תלוש מעט",
                         "description": "ל־{var1} יש רק {var2} דרכים אחרות מחוברות. לכיכרות יש בדרך כלל 3 או יותר."
+                    },
+                    "320": {
+                        "title": "חיבור קישור בלתי ראוי"
                     },
                     "350": {
                         "title": "תגית גשר בלתי ראויה",
@@ -1385,17 +1418,22 @@
             "warnings": {
                 "list_title": "אזהרות ({count})"
             },
+            "rules": {
+                "title": "כללים"
+            },
             "no_issues": {
                 "message": "הכול נראה טוב",
                 "info": "תקלות כלשהן שתצוצנה תופענה כאן בזמן העריכה"
             },
             "almost_junction": {
+                "title": "כמעט צמתים",
                 "message": "{feature} קרוב מאוד אך לא מחובר אל {feature2}",
                 "highway-highway": {
                     "tip": "דרכים מהירות מצטלבות אמורות לחלוק קדקוד צומת."
                 }
             },
             "crossing_ways": {
+                "title": "דרכים חוצות",
                 "message": "{feature} חוצה את {feature2}",
                 "building-building": {
                     "tip": "בניינים לא אמורים להצטלב למעט במקרים של שכבות שונות."
@@ -1413,10 +1451,76 @@
                     "tip": "דרכים מהירות שחוצות זו את זו אמורות להשתמש בגשרים, מנהרות או צמתים."
                 }
             },
+            "deprecated_tag": {
+                "title": "תגיות שאינן בשימוש עוד",
+                "single": {
+                    "message": "ל־{feature} יש את התגית „{tag}” שאינה בשימוש עוד"
+                },
+                "tip": "השימוש בחלק מהתגיות הופסק במרוצת הזמן ויש להחליף אותן."
+            },
+            "disconnected_way": {
+                "title": "דרכים מנותקות",
+                "highway": {
+                    "message": "קיים נתק בין {highway} ובין כבישים ונתיבים אחרים",
+                    "tip": "דרכים מהירות אמורות להתחבר לדרכים מהירות או כניסות לבניינים."
+                }
+            },
+            "generic_name": {
+                "title": "שמות גנריים",
+                "message": "ל־{feature} יש את השם הגנרי „{name}”"
+            },
+            "many_deletions": {
+                "title": "מחיקות רבות"
+            },
+            "missing_role": {
+                "title": "תפקידים חסרים",
+                "message": "ל־{member} אין תפקיד בתוך {relation}"
+            },
+            "missing_tag": {
+                "title": "תגיות חסרות",
+                "any": {
+                    "message": "ל־{feature} אין תגיות"
+                },
+                "descriptive": {
+                    "message": "ל־{feature} אין תגיות שתפקידן לתאר"
+                },
+                "specific": {
+                    "message": "ל־{feature} אין תגית „{tag}”"
+                },
+                "tip": "לתכונות חייבות להיות תגיות שמגדירות מה טיבן."
+            },
             "fix": {
+                "connect_crossing_features": {
+                    "annotation": "תכונות חוצות חוברו."
+                },
+                "connect_endpoints": {
+                    "title": "חיבור הקצוות",
+                    "annotation": "חיבור נקודות קצה של דרך."
+                },
+                "connect_features": {
+                    "title": "חיבור התכונות"
+                },
+                "continue_from_start": {
+                    "title": "להמשיך את הציור מההתחלה"
+                },
+                "continue_from_end": {
+                    "title": "להמשיך את הציור מהסוף"
+                },
+                "delete_feature": {
+                    "title": "מחיקת התכונה הזאת"
+                },
                 "move_tags": {
                     "title": "העברת התגיות",
                     "annotation": "תגיות הועברו."
+                },
+                "remove_deprecated_tag": {
+                    "annotation": "הוסרה תגית ישנה."
+                },
+                "remove_deprecated_tag_combo": {
+                    "annotation": "הוסר שילוב של תגית ישנה."
+                },
+                "remove_from_relation": {
+                    "title": "הסרה מיחס"
                 },
                 "remove_generic_name": {
                     "title": "הסרת השם",
@@ -1426,19 +1530,31 @@
                     "title": "הסרת התגית",
                     "annotation": "תגית הוסרה."
                 },
+                "remove_tags": {
+                    "title": "הסרת התגיות"
+                },
                 "reposition_features": {
                     "title": "מיקום התכונות מחדש"
                 },
                 "select_preset": {
                     "title": "בחירת סוג תכונה"
                 },
+                "set_as_inner": {
+                    "title": "הגדרה כפנימי"
+                },
+                "set_as_outer": {
+                    "title": "הגדרה כחיצוני"
+                },
                 "tag_as_disconnected": {
-                    "title": "תיוג כבלתי מחובר"
+                    "title": "תיוג כבלתי מחובר",
+                    "annotation": "שתי תכונות קרובות מאוד תויגו כמנותקות."
                 },
                 "upgrade_tag": {
+                    "title": "שדרוג התגית",
                     "annotation": "שודרגה תגית ישנה."
                 },
                 "upgrade_tag_combo": {
+                    "title": "שדרוג התגיות",
                     "annotation": "שילוב של תגיות ישנות שודרג."
                 },
                 "use_bridge_or_tunnel": {
@@ -1446,6 +1562,9 @@
                 },
                 "use_different_layers": {
                     "title": "שימוש בשכבות שונות"
+                },
+                "use_different_levels": {
+                    "title": "שימוש ברמות שונות"
                 },
                 "use_tunnel": {
                     "title": "שימוש במנהרה"
@@ -2305,6 +2424,15 @@
                 },
                 "denotation": {
                     "label": "אזכור"
+                },
+                "departures_board": {
+                    "label": "לוח המראות",
+                    "options": {
+                        "no": "אין",
+                        "realtime": "זמן אמת",
+                        "timetable": "טבלת זמנים",
+                        "yes": "יש"
+                    }
                 },
                 "description": {
                     "label": "תיאור"
@@ -4372,6 +4500,9 @@
                 "amenity/vending_machine/elongated_coin": {
                     "name": "מכונת השטחת מטבעות",
                     "terms": "אוטומט השטחת מטבעות"
+                },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "מתקן שקיות פסולת"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "מכונת היגיינה נשית",
@@ -7206,10 +7337,6 @@
                     "name": "חנות עיצוב פנים",
                     "terms": "חנות עיצוב פנים"
                 },
-                "shop/jewelry": {
-                    "name": "תכשיטן",
-                    "terms": "תכשיטנית"
-                },
                 "shop/kiosk": {
                     "name": "קיוסק",
                     "terms": "פיצוציה"
@@ -8077,6 +8204,13 @@
                 },
                 "description": "צילומי אוויר של GSI יפן. לא מיושר אבל מעט חדש יותר ו/או מכוסה בצורה קצת שונה מצילומי GSI מיושרים.",
                 "name": "צילומי אוויר של GSI יפן"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "צילום רציף וחלק מ־GSI יפן"
+                },
+                "description": "צילום רציף וחלק מ־GSI יפן. האוסף של הצילום העדכני ביותר מ־GSO מיושר, אווירי, לאחר אסון ואחרים.",
+                "name": "צילום רציף וחלק מ־GSI יפן"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
