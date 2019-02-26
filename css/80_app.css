@@ -949,6 +949,7 @@ a.hide-toggle {
     height: 100%;
     position: relative;
     border: 1px solid #ccc;
+    display: flex;
 }
 [dir='ltr'] .preset-list-button-wrap:not(.category) .preset-list-button {
     border-top-right-radius: 0;
@@ -963,10 +964,19 @@ a.hide-toggle {
     background: #ececec;
 }
 
+.preset-icon-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
 .preset-icon-line {
     margin: auto;
     position: absolute;
     top: 0;
+    width: 100%;
+    height: 100%;
 }
 [dir='ltr'] .preset-icon-line {
     left: 0;
@@ -991,12 +1001,12 @@ a.hide-toggle {
 
 .preset-icon-fill-area {
     cursor: inherit;
-    height: 40px;
-    width: 40px;
+    height: 66%;
+    width: 66%;
     margin: auto;
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 17%;
+    top: 17%;
 }
 
 .preset-icon-fill-vertex {
@@ -1017,92 +1027,57 @@ a.hide-toggle {
   left: auto;
   right: 10px;
 }
-
 .preset-icon-frame {
+    width: 100%;
+    height:100%;
+}
+.preset-icon-frame .icon{
     position: absolute;
-    top: 7px;
-    left: 7px;
-    margin: auto;
-}
-[dir='rtl'] .preset-icon-frame {
-    left: auto;
-    right: 7px;
-}
-
-.preset-icon-frame .icon {
-    width: 46px;
-    height: 46px;
-}
-
-.preset-icon-60 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 12%;
+    left: 12%;
+    width: 76%;
+    height: 76%;
     margin: auto;
 }
 
-.preset-icon-60 .icon {
-    width: 60px;
-    height: 60px;
+.preset-icon {
+    width: 100%;
+    height:100%;
 }
-
-.preset-icon-44 {
+.preset-icon .icon {
     position: absolute;
-    top: 9px;
-    left: 8px;
     margin: auto;
-}
-.preset-icon-44.line-geom {
-    top: 2px;
-}
-
-.preset-icon-44 .icon {
-    width: 44px;
-    height: 44px;
+    top: 26%;
+    left: 26%;
+    width: 48%;
+    height: 48%;
 }
 
-.preset-icon-28 {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    margin: auto;
+.preset-icon.framed .icon {
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+}
+.preset-icon.framed.line-geom .icon {
+    top: 20%;
 }
 
-.preset-icon-28 .icon {
-    width: 28px;
-    height: 28px;
+.preset-icon-iD .icon {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
-.preset-icon-24 {
-    position: absolute;
-    top: 18px;
-    left: 18px;
-    margin: auto;
+.preset-icon-iD.framed .icon {
+    top: 13%;
+    left: 13%;
+    width: 74%;
+    height: 74%;
 }
-.preset-icon-24.line-geom {
-    top: 12px;
-}
-
-.preset-icon-24 .icon {
-    width: 24px;
-    height: 24px;
-}
-
-[dir='rtl'] .preset-list-button-wrap .preset-icon {
-    left: auto;
-    right: auto;
-}
-
-[dir='rtl'] .preset-list-button-wrap .preset-icon-44 {
-    right: 8px;
-}
-
-[dir='rtl'] .preset-list-button-wrap .preset-icon-28 {
-    right: 16px;
-}
-
-[dir='rtl'] .preset-list-button-wrap .preset-icon-24 {
-    right: 18px;
+.preset-icon-iD.framed.line-geom .icon {
+    top: 3%;
 }
 
 .preset-list-button .label {
@@ -3143,6 +3118,9 @@ ul.issue-fix-list {
 }
 ul.issue-fix-list button {
     padding: 2px 10px 2px 26px;
+}
+[dir='rtl'] ul.issue-fix-list button {
+    padding: 2px 26px 2px 10px;
 }
 .issue-fix-item:not(.actionable) button {
     cursor: auto;
