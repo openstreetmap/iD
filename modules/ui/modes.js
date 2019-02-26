@@ -13,6 +13,7 @@ import {
 import { svgIcon } from '../svg';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { uiPresetIcon } from './preset_icon';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiModes(context) {
@@ -110,7 +111,8 @@ export function uiModes(context) {
                     description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name'), t('geometry.' + d.geom)].join(' '),
                     key: '',
                     icon: icon,
-                    preset: preset
+                    preset: preset,
+                    geometry: d.geom
                 };
                 switch (d.geom) {
                     case 'point':
@@ -158,8 +160,16 @@ export function uiModes(context) {
 
             buttonsEnter
                 .each(function(d) {
-                    d3_select(this)
-                        .call(svgIcon(d.icon || '#iD-icon-' + d.button));
+                    if (d.preset) {
+                        d3_select(this)
+                            .call(uiPresetIcon()
+                                .geometry(d.geometry)
+                                .preset(d.preset)
+                            )
+                    } else {
+                        d3_select(this)
+                            .call(svgIcon(d.icon || '#iD-icon-' + d.button));
+                    }
                 });
 
             buttonsEnter

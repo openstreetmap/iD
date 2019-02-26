@@ -14,10 +14,9 @@ export function uiPresetFavorite(preset, geom, context) {
 
 
     presetFavorite.button = function(selection) {
-        var data = (preset.icon) ? [0] : [];
 
         _button = selection.selectAll('.preset-favorite-button')
-            .data(data);
+            .data([0]);
 
         _button.exit().remove();
 

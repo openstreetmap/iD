@@ -472,8 +472,18 @@ button[disabled].action:hover {
     padding: 0 10px;
     min-width: 30px;
     white-space: nowrap;
+    display: flex;
 }
-.tool-group button .icon {
+.tool-group button.add-favorite {
+    padding-left: 0px;
+}
+.tool-group button.add-favorite .label {
+    padding-left: 0;
+}
+.narrow .tool-group button.add-favorite {
+    padding-right: 0;
+}
+.tool-group button > .icon {
     flex: 0 0 20px;
 }
 .tool-group button .label {
@@ -970,6 +980,10 @@ a.hide-toggle {
     height: 60px;
     text-align: center;
 }
+#bar .preset-icon-container {
+    width: 40px;
+    height: 40px;
+}
 
 .preset-icon-line {
     margin: auto;
@@ -1018,6 +1032,7 @@ a.hide-toggle {
 .preset-icon-frame {
     width: 100%;
     height:100%;
+    position: absolute;
 }
 .preset-icon-frame .icon{
     position: absolute;
