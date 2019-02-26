@@ -21,8 +21,7 @@ export function osmOldMultipolygonOuterMemberOfRelation(entity, graph) {
     var outerMember;
     for (var memberIndex in entity.members) {
         var member = entity.members[memberIndex];
-        if (!member.role) return false;
-        if (member.role === 'outer') {
+        if (!member.role || member.role === 'outer') {
             if (outerMember) return false;
             if (member.type !== 'way') return false;
             if (!graph.hasEntity(member.id)) return false;
