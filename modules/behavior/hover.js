@@ -21,7 +21,7 @@ export function behaviorHover(context) {
     var dispatch = d3_dispatch('hover');
     var _selection = d3_select(null);
     var _newNodeId = null;
-    var _initialNodeId = null;
+    var _initialNodeID = null;
     var _buttonDown;
     var _altDisables;
     var _ignoreVertex;
@@ -59,9 +59,9 @@ export function behaviorHover(context) {
     function behavior(selection) {
         _selection = selection;
 
-        if (_initialNodeId) {
-            _newNodeId = _initialNodeId;
-            _initialNodeId = null;
+        if (_initialNodeID) {
+            _newNodeId = _initialNodeID;
+            _initialNodeID = null;
         } else {
             _newNodeId = null;
         }
@@ -198,8 +198,8 @@ export function behaviorHover(context) {
         return behavior;
     };
 
-    behavior.initialNodeId = function(nodeId) {
-        _initialNodeId = nodeId;
+    behavior.initialNodeID = function(nodeId) {
+        _initialNodeID = nodeId;
         return behavior;
     };
 

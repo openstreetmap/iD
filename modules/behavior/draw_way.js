@@ -21,7 +21,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     );
 
     var behavior = behaviorDraw(context);
-    behavior.hover().initialNodeId(index ? origWay.nodes[index] : origWay.nodes[origWay.nodes.length - 1]);
+    behavior.hover().initialNodeID(index ? origWay.nodes[index] :
+        (origWay.isClosed() ? origWay.nodes[origWay.nodes.length - 2] : origWay.nodes[origWay.nodes.length - 1]));
 
     var _tempEdits = 0;
 
