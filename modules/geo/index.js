@@ -37,5 +37,6 @@ export { geoVecFloor } from './vector.js';
 export { geoVecInterp } from './vector.js';
 export { geoVecLength } from './vector.js';
 export { geoVecNormalize } from './vector.js';
+export { geoVecNormalizedDot } from './vector.js';
 export { geoVecSubtract } from './vector.js';
 export { geoVecScale } from './vector.js';

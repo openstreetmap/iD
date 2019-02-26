@@ -4,10 +4,10 @@ import _uniq from 'lodash-es/uniq';
 import { actionDeleteNode } from './delete_node';
 import {
     geoVecAdd,
-    geoVecDot,
     geoVecInterp,
     geoVecLength,
     geoVecNormalize,
+    geoVecNormalizedDot,
     geoVecScale,
     geoVecSubtract
 } from '../geo';
@@ -16,7 +16,7 @@ import {
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
  */
-export function actionOrthogonalize(wayId, projection) {
+export function actionOrthogonalize(wayID, projection) {
     var threshold = 12; // degrees within right or straight to alter
     var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
     var upperThreshold = Math.cos(threshold * Math.PI / 180);
@@ -26,7 +26,7 @@ export function actionOrthogonalize(wayId, projection) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayId);
+        var way = graph.entity(wayID);
         var nodes = graph.childNodes(way);
         var points = _uniq(nodes).map(function(n) { return projection(n.loc); });
         var corner = {i: 0, dotp: 1};
@@ -103,13 +103,12 @@ export function actionOrthogonalize(wayId, projection) {
             var c = array[(i + 1) % array.length];
             var p = geoVecSubtract(a, b);
             var q = geoVecSubtract(c, b);
-            var scale, dotp;
 
-            scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
+            var scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
             p = geoVecNormalize(p);
             q = geoVecNormalize(q);
 
-            dotp = filterDotProduct(p[0] * q[0] + p[1] * q[1]);
+            var dotp = filterDotProduct(p[0] * q[0] + p[1] * q[1]);
 
             // nasty hack to deal with almost-straight segments (angle is closer to 180 than to 90/270).
             if (array.length > 3) {
@@ -123,7 +122,6 @@ export function actionOrthogonalize(wayId, projection) {
 
             var vec = geoVecNormalize(geoVecAdd(p, q));
             return geoVecScale(vec, 0.1 * dotp * scale);
-
         }
     };
 
@@ -139,11 +137,9 @@ export function actionOrthogonalize(wayId, projection) {
 
     function normalizedDotProduct(i, points) {
         var a = points[(i - 1 + points.length) % points.length];
-        var b = points[i];
-        var c = points[(i + 1) % points.length];
-        var p = geoVecNormalize(geoVecSubtract(a, b));
-        var q = geoVecNormalize(geoVecSubtract(c, b));
-        return geoVecDot(p, q);
+        var origin = points[i];
+        var b = points[(i + 1) % points.length];
+        return geoVecNormalizedDot(a, b, origin);
     }
 
 
@@ -151,13 +147,12 @@ export function actionOrthogonalize(wayId, projection) {
         if (lowerThreshold > Math.abs(dotp) || Math.abs(dotp) > upperThreshold) {
             return dotp;
         }
-
         return 0;
     }
 
 
     action.disabled = function(graph) {
-        var way = graph.entity(wayId);
+        var way = graph.entity(wayID);
         var nodes = graph.childNodes(way);
         var points = _uniq(nodes).map(function(n) { return projection(n.loc); });
 
