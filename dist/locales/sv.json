@@ -1424,18 +1424,24 @@
             "warnings": {
                 "list_title": "Varningar ({count})"
             },
+            "rules": {
+                "title": "Regler"
+            },
             "no_issues": {
                 "message": "Allt ser bra ut",
                 "info": "Alla problem kommer att visas här medan du redigerar"
             },
             "almost_junction": {
+                "title": "Nästan korsande",
                 "message": "{feature} är väldigt nära men inte ansluten till {feature2}",
                 "highway-highway": {
                     "tip": "Korsande vägar bör ha en gemensam korsningspunkt."
                 }
             },
             "crossing_ways": {
+                "title": "Korsande vägar",
                 "message": "{feature} korsar {feature2}",
+                "tip": "Vägar, järnvägar, vattenvägar och byggnader bör inte korsas på ett odefinierat vis.",
                 "building-building": {
                     "tip": "Byggnader bör inte överlappas förutom på olika lager. "
                 },
@@ -1486,6 +1492,7 @@
                 }
             },
             "deprecated_tag": {
+                "title": "Föråldrade taggar",
                 "single": {
                     "message": "{feature} har den föråldrade taggen \"{tag}\""
                 },
@@ -1495,16 +1502,19 @@
                 "tip": "Vissa taggar har med tiden blivit föråldrade, och bör bytas ut."
             },
             "disconnected_way": {
+                "title": "Ej anslutna vägar",
                 "highway": {
                     "message": "{highway} är ej ansluten med andra vägar eller stigar",
                     "tip": "Vägar bör vara anslutna till andra vägar eller entréer i byggnader."
                 }
             },
             "generic_name": {
+                "title": "Generella namn",
                 "message": "{feature} har det generella namnet \"{name}\"",
                 "tip": "Namn bör vara de faktiska namnen som används i verkligheten för objekten."
             },
             "many_deletions": {
+                "title": "Många raderingar",
                 "points-lines-areas": {
                     "message": "Raderar {n} objekt: {p} punkter, {l} linjer och {a} områden"
                 },
@@ -1513,7 +1523,15 @@
                 },
                 "tip": "Endast överflödiga eller icke existerande objekt bör raderas."
             },
+            "missing_role": {
+                "title": "Saknar roller",
+                "message": "{member} har ingen roll i {relation}",
+                "multipolygon": {
+                    "tip": "Multipolygon-medlemmar måste ha rollen \"inner\" eller \"outer\"."
+                }
+            },
             "missing_tag": {
+                "title": "Saknar taggar",
                 "any": {
                     "message": "{feature} har inga taggar"
                 },
@@ -1526,10 +1544,12 @@
                 "tip": "Objekt måste ha taggar som definierar vad de är"
             },
             "old_multipolygon": {
+                "title": "Felaktig placering av multipolygon-taggar",
                 "message": "{multipolygon} har felstavade taggar",
                 "tip": "Multipolygoner bör vara taggade i sina relationer, inte i de omslutande vägarna."
             },
             "tag_suggests_area": {
+                "title": "Linjer taggade som områden",
                 "message": "{feature} bör vara ett stängt område baserat på taggen \"{tag}\"",
                 "tip": "Områden måste ha sammankopplade ändpunkter."
             },
@@ -1566,6 +1586,9 @@
                 "remove_deprecated_tag_combo": {
                     "annotation": "Tog bort en gammal tagg-kombination."
                 },
+                "remove_from_relation": {
+                    "title": "Ta bort från relation"
+                },
                 "remove_generic_name": {
                     "title": "Radera namnet",
                     "annotation": "Tog bort ett generellt namn."
@@ -1582,6 +1605,12 @@
                 },
                 "select_preset": {
                     "title": "Välj en objekttyp"
+                },
+                "set_as_inner": {
+                    "title": "Sätt som \"inner\""
+                },
+                "set_as_outer": {
+                    "title": "Sätt som \"outer\""
                 },
                 "tag_as_disconnected": {
                     "title": "Tagga som okopplad",
@@ -2222,6 +2251,9 @@
                 },
                 "backrest": {
                     "label": "Ryggstöd"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Typ"
@@ -4790,6 +4822,9 @@
                 "barrier/wall": {
                     "name": "Mur",
                     "terms": "Mur, vägg, murverk, skyddsvärn, befästning, hinder, barriär"
+                },
+                "boundary": {
+                    "name": "Gräns"
                 },
                 "boundary/administrative": {
                     "name": "Administrativ gräns",
