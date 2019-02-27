@@ -103,12 +103,19 @@ export function uiModes(context) {
                 var markerClass = 'add-favorite add-preset-' + preset.name()
                     .replace(/\s+/g, '_')
                     + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
-
+                var presetName = t('presets.presets.' + preset.id + '.name');
+                var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
+                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                });
+                var tooltipTitleID = 'modes.add_preset.title';
+                if (relevantMatchingGeometry.length !== 1) {
+                    tooltipTitleID = 'modes.add_preset.' + d.geom + '.title'
+                }
                 var favoriteMode = {
                     id: markerClass,
                     button: markerClass,
-                    title: t('presets.presets.' + preset.id + '.name'),
-                    description: [t('operations.add.title'), t('presets.presets.' + preset.id + '.name'), t('geometry.' + d.geom)].join(' '),
+                    title: presetName,
+                    description: t(tooltipTitleID, { feature: presetName }),
                     key: '',
                     icon: icon,
                     preset: preset,
