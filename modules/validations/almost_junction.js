@@ -145,6 +145,7 @@ export function validationAlmostJunction() {
 
     var validation = function(endHighway, context) {
         if (!isHighway(endHighway)) return [];
+        if (endHighway.isDegenerate()) return [];
 
         var graph = context.graph();
         var tree = context.history().tree();

@@ -57,7 +57,7 @@ export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3_dispatch('enter', 'exit', 'change');
+    var dispatch = d3_dispatch('enter', 'exit', 'change', 'favoritePreset');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -312,7 +312,39 @@ export function coreContext() {
     /* Presets */
     var presets;
     context.presets = function() { return presets; };
+    //get favorites from local storage
+    context.getFavoritePresets = function() {
+        return JSON.parse(context.storage('favorite_presets')) || [];
+    };
+    context.favoritePreset = function(preset, geom) {
+        var favs = context.getFavoritePresets();
 
+        //add/remove favorites from local storage
+        if (context.isFavoritePreset(preset, geom)) {
+            favs = favs.filter(function(d) {
+                return !(d.id === preset.id && d.geom === geom);
+            });
+        } else {
+            // only allow 3 favorites
+            if (favs.length === 3) {
+                // remove the last favorite (first in, first out)
+                favs.pop();
+            }
+            // prepend array
+            favs.unshift({id: preset.id, geom: geom});
+        }
+
+        context.storage('favorite_presets', JSON.stringify(favs));
+
+        //and call update on modes
+        dispatch.call('favoritePreset');
+    };
+    context.isFavoritePreset = function(preset, geom) {
+        var favs = context.getFavoritePresets();
+        return favs.some(function(d) {
+            return d.id === preset.id && d.geom === geom;
+        });
+    };
 
     /* Map */
     var map;

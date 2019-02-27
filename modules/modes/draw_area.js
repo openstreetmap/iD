@@ -2,9 +2,9 @@ import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior';
 
 
-export function modeDrawArea(context, wayID, startGraph, baselineGraph) {
+export function modeDrawArea(context, wayID, startGraph, baselineGraph, button) {
     var mode = {
-        button: 'area',
+        button: button,
         id: 'draw-area'
     };
 

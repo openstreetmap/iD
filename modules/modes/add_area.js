@@ -10,8 +10,8 @@ import { modeDrawArea } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddArea(context) {
-    var mode = {
+export function modeAddArea(context, customMode) {
+    var mode = customMode || {
         id: 'add-area',
         button: 'area',
         title: t('modes.add_area.title'),
@@ -26,6 +26,7 @@ export function modeAddArea(context) {
         .on('startFromNode', startFromNode);
 
     var defaultTags = { area: 'yes' };
+    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
 
 
     function actionClose(wayId) {
@@ -47,7 +48,7 @@ export function modeAddArea(context) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawArea(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 
@@ -64,7 +65,7 @@ export function modeAddArea(context) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawArea(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 
@@ -78,7 +79,7 @@ export function modeAddArea(context) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, context.graph()));
+        context.enter(modeDrawArea(context, way.id, startGraph, context.graph(), mode.button));
     }
 
 
