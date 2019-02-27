@@ -15,7 +15,7 @@ export function uiPresetFavorite(preset, geom, context) {
 
     presetFavorite.button = function(selection) {
 
-        var canFavorite = geom !== 'vertex' && geom !== 'relation';
+        var canFavorite = geom !== 'vertex' && geom !== 'relation' && !preset.isFallback();
 
         _button = selection.selectAll('.preset-favorite-button')
             .data(canFavorite ? [0] : []);
