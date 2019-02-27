@@ -1,0 +1,19 @@
+{
+    "icon": "maki-bar",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "gay bar",
+        "lesbian bar",
+        "lgbtq bar",
+        "lgbt bar",
+        "lgb bar"
+    ],
+    "tags": {
+        "amenity": "bar",
+        "lgbtq": "primary"
+    },
+    "name": "LGBTQ+ Bar"
+}
