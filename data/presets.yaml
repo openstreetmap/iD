@@ -2303,6 +2303,11 @@ en:
         name: Bar
         # 'terms: dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Bar'', separated by commas>'
+      amenity/bar/lgbtq:
+        # 'amenity=bar, lgbtq=primary'
+        name: LGBTQ+ Bar
+        # 'terms: gay bar,lesbian bar,lgbtq bar,lgbt bar,lgb bar'
+        terms: '<translate with synonyms or related terms for ''LGBTQ+ Bar'', separated by commas>'
       amenity/bbq:
         # amenity=bbq
         name: Barbecue/Grill
@@ -2419,6 +2424,11 @@ en:
         name: Community Center
         # 'terms: event,hall'
         terms: '<translate with synonyms or related terms for ''Community Center'', separated by commas>'
+      amenity/community_centre/lgbtq:
+        # 'amenity=community_centre, lgbtq=primary'
+        name: LGBTQ+ Community Center
+        # 'terms: lgbtq event,lgbtq hall,lgbt event,lgbt hall,lgb event,lgb hall'
+        terms: '<translate with synonyms or related terms for ''LGBTQ+ Community Center'', separated by commas>'
       amenity/compressed_air:
         # amenity=compressed_air
         name: Compressed Air
@@ -2605,6 +2615,11 @@ en:
         name: Nightclub
         # 'terms: disco*,night club,dancing,dance club'
         terms: '<translate with synonyms or related terms for ''Nightclub'', separated by commas>'
+      amenity/nightclub/lgbtq:
+        # 'amenity=nightclub, lgbtq=primary'
+        name: LGBTQ+ Nightclub
+        # 'terms: gay nightclub,lesbian nightclub,lgbtq nightclub,lgbt nightclub,lgb nightclub'
+        terms: '<translate with synonyms or related terms for ''LGBTQ+ Nightclub'', separated by commas>'
       amenity/nursing_home:
         # amenity=nursing_home
         name: Nursing Home
@@ -2721,6 +2736,11 @@ en:
         name: Pub
         # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
+      amenity/pub/lgbtq:
+        # 'amenity=pub, lgbtq=primary'
+        name: LGBTQ+ Pub
+        # 'terms: gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub'
+        terms: '<translate with synonyms or related terms for ''LGBTQ+ Pub'', separated by commas>'
       amenity/public_bath:
         # amenity=public_bath
         name: Public Bath
@@ -6180,6 +6200,11 @@ en:
         name: Erotic Store
         # 'terms: sex,porn'
         terms: '<translate with synonyms or related terms for ''Erotic Store'', separated by commas>'
+      shop/erotic/lgbtq:
+        # 'shop=erotic, lgbtq=primary'
+        name: LGBTQ+ Erotic Store
+        # 'terms: sex,porn'
+        terms: '<translate with synonyms or related terms for ''LGBTQ+ Erotic Store'', separated by commas>'
       shop/fabric:
         # shop=fabric
         name: Fabric Store
