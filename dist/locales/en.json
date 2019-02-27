@@ -4112,6 +4112,10 @@
                     "name": "Bar",
                     "terms": "dive,beer,bier,booze"
                 },
+                "amenity/bar/lgbtq": {
+                    "name": "LGBTQ+ Bar",
+                    "terms": "gay bar,lesbian bar,lgbtq bar,lgbt bar,lgb bar"
+                },
                 "amenity/bbq": {
                     "name": "Barbecue/Grill",
                     "terms": "bbq,grill"
@@ -4207,6 +4211,10 @@
                 "amenity/community_centre": {
                     "name": "Community Center",
                     "terms": "event,hall"
+                },
+                "amenity/community_centre/lgbtq": {
+                    "name": "LGBTQ+ Community Center",
+                    "terms": "lgbtq event,lgbtq hall,lgbt event,lgbt hall,lgb event,lgb hall"
                 },
                 "amenity/compressed_air": {
                     "name": "Compressed Air",
@@ -4360,6 +4368,10 @@
                     "name": "Nightclub",
                     "terms": "disco*,night club,dancing,dance club"
                 },
+                "amenity/nightclub/lgbtq": {
+                    "name": "LGBTQ+ Nightclub",
+                    "terms": "gay nightclub,lesbian nightclub,lgbtq nightclub,lgbt nightclub,lgb nightclub"
+                },
                 "amenity/parking_entrance": {
                     "name": "Parking Garage Entrance/Exit",
                     "terms": ""
@@ -4451,6 +4463,10 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "alcohol,drink,dive,beer,bier,booze"
+                },
+                "amenity/pub/lgbtq": {
+                    "name": "LGBTQ+ Pub",
+                    "terms": "gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub"
                 },
                 "amenity/public_bath": {
                     "name": "Public Bath",
@@ -7446,6 +7462,10 @@
                 },
                 "shop/erotic": {
                     "name": "Erotic Store",
+                    "terms": "sex,porn"
+                },
+                "shop/erotic/lgbtq": {
+                    "name": "LGBTQ+ Erotic Store",
                     "terms": "sex,porn"
                 },
                 "shop/fabric": {

@@ -1,0 +1,19 @@
+{
+    "icon": "maki-bar",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "nightclub",
+        "lgbtq": "primary"
+    },
+    "terms": [
+        "gay nightclub",
+        "lesbian nightclub",
+        "lgbtq nightclub",
+        "lgbt nightclub",
+        "lgb nightclub"
+    ],
+    "name": "LGBTQ+ Nightclub"
+}

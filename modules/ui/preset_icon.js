@@ -23,60 +23,47 @@ export function uiPresetIcon() {
             return 'maki-marker-stroked';
     }
 
+    function renderCircleFill(fillEnter) {
+        var w = 60, h = 60, d = 40;
+        fillEnter = fillEnter
+            .append('svg')
+            .attr('class', 'preset-icon-fill preset-icon-fill-vertex')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
 
-    function render() {
-        var selection = d3_select(this);
+        fillEnter.append('circle')
+            .attr('cx', w/2)
+            .attr('cy', h/2)
+            .attr('r', d/2);
+    }
 
-        var container = selection.selectAll('.preset-icon-container')
-            .data([0]);
+    function renderSquareFill(fillEnter) {
+        var w = 60, h = 60, l = 40, c1 = (w-l)/2, c2 = c1 + l;
+        fillEnter = fillEnter
+            .append('svg')
+            .attr('class', 'preset-icon-fill preset-icon-fill-area')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
 
-        container = container.enter()
-            .append('div')
-            .attr('class', 'preset-icon-container')
-            .merge(container);
+        var data = 'M' + c1 + ' ' + c1 + ' L' + c1 + ' ' + c2 + ' L' + c2 + ' ' + c2 + ' L' + c2 + ' ' + c1 + ' Z';
 
-        var p = preset.apply(this, arguments);
-        var geom = geometry.apply(this, arguments);
-        var picon = getIcon(p, geom);
-        var isMaki = /^maki-/.test(picon);
-        var isTemaki = /^temaki-/.test(picon);
-        var isFa = /^fa[srb]-/.test(picon);
-        var isiDIcon = !(isMaki || isTemaki || isFa);
-        var isCategory = !p.setTags;
-        var drawLine = geom === 'line' && !isCategory;
-        var isFramed = (geom === 'area' || drawLine || geom === 'vertex');
+        fillEnter.append('path')
+            .attr('d', data)
+            .attr('class', 'line area fill');
 
-        var tags = !isCategory ? p.setTags({}, geom) : {};
-        for (var k in tags) {
-            if (tags[k] === '*') {
-                tags[k] = 'yes';
-            }
-        }
-        var tagClasses = svgTagClasses().getClassesString(tags, '');
+        fillEnter.append('path')
+            .attr('d', data)
+            .attr('class', 'line area stroke');
+    }
 
-        var fill = container.selectAll('.preset-icon-fill')
-            .data([0]);
-
-        fill = fill.enter()
-            .append('div')
-            .merge(fill);
-
-        fill
-            .attr('class', function() {
-                return 'preset-icon-fill preset-icon-fill-' + geom + ' ' + tagClasses;
-            });
-
-        var line = container.selectAll('.preset-icon-line')
-            .data(drawLine ? [0] : []);
-
-        line.exit()
-            .remove();
-
+    function renderLine(lineEnter) {
         // draw the line parametrically
         var w = 60, h = 60, y = 43, l = 36, r = 2.5;
         var x1 = (w - l)/2, x2 = x1 + l;
 
-        var lineEnter = line.enter()
+        lineEnter = lineEnter
             .append('svg')
             .attr('class', 'preset-icon-line')
             .attr('width', w)
@@ -99,6 +86,76 @@ export function uiPresetIcon() {
             .attr('cx', x2 + 1)
             .attr('cy', y)
             .attr('r', r);
+    }
+
+
+    function render() {
+        var selection = d3_select(this);
+
+        var container = selection.selectAll('.preset-icon-container')
+            .data([0]);
+
+        container = container.enter()
+            .append('div')
+            .attr('class', 'preset-icon-container')
+            .merge(container);
+
+        var p = preset.apply(this, arguments);
+        var geom = geometry.apply(this, arguments);
+        var picon = getIcon(p, geom);
+        var isMaki = /^maki-/.test(picon);
+        var isTemaki = /^temaki-/.test(picon);
+        var isFa = /^fa[srb]-/.test(picon);
+        var isiDIcon = !(isMaki || isTemaki || isFa);
+        var isCategory = !p.setTags;
+        var drawLine = geom === 'line' && !isCategory;
+        var drawFill = geom === 'area' || geom === 'vertex';
+        var isFramed = (drawFill || drawLine);
+
+        var tags = !isCategory ? p.setTags({}, geom) : {};
+        for (var k in tags) {
+            if (tags[k] === '*') {
+                tags[k] = 'yes';
+            }
+        }
+        var tagClasses = svgTagClasses().getClassesString(tags, '');
+
+
+        var vertexFill = container.selectAll('.preset-icon-fill-vertex')
+            .data(geom === 'vertex' ? [0] : []);
+
+        vertexFill.exit()
+            .remove();
+
+        var vertexFillEnter = vertexFill.enter();
+        renderCircleFill(vertexFillEnter);
+        vertexFill = vertexFillEnter.merge(vertexFill);
+
+
+        var fill = container.selectAll('.preset-icon-fill-area')
+            .data(geom === 'area' ? [0] : []);
+
+        fill.exit()
+            .remove();
+
+        var fillEnter = fill.enter();
+        renderSquareFill(fillEnter);
+        fill = fillEnter.merge(fill);
+
+        fill.selectAll('path.stroke')
+            .attr('class', 'area stroke ' + tagClasses);
+        fill.selectAll('path.fill')
+            .attr('class', 'area fill ' + tagClasses);
+
+
+        var line = container.selectAll('.preset-icon-line')
+            .data(drawLine ? [0] : []);
+
+        line.exit()
+            .remove();
+
+        var lineEnter = line.enter();
+        renderLine(lineEnter);
 
         line = lineEnter.merge(line);
 
