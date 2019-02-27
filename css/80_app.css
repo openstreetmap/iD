@@ -474,14 +474,29 @@ button[disabled].action:hover {
     white-space: nowrap;
     display: flex;
 }
-.tool-group button.add-preset {
+[dir='ltr'] .tool-group button.add-preset.add-point,
+[dir='ltr'] .tool-group button.add-preset.add-point .label {
     padding-left: 0px;
 }
-.tool-group button.add-preset .label {
-    padding-left: 0;
+[dir='ltr'] .tool-group button.add-preset:not(.add-point) {
+    padding-left: 5px;
+}
+[dir='ltr'] .tool-group button.add-preset:not(.add-point) .label {
+    padding-left: 3px;
+}
+[dir='rtl'] .tool-group button.add-preset.add-point,
+[dir='rtl'] .tool-group button.add-preset.add-point .label {
+    padding-right: 0px;
+}
+[dir='rtl'] .tool-group button.add-preset:not(.add-point) {
+    padding-right: 5px;
+}
+[dir='rtl'] .tool-group button.add-preset:not(.add-point) .label {
+    padding-right: 3px;
 }
 .narrow .tool-group button.add-preset {
-    padding-right: 0;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 .tool-group button > .icon {
     flex: 0 0 20px;

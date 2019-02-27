@@ -74,15 +74,18 @@ export function uiPresetIcon() {
             }
         }
 
-        var midCoordinates = [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]];
-        for (var index in midCoordinates) {
-            var loc = midCoordinates[index];
-            fillEnter.append('circle')
-                .attr('class', 'midpoint')
-                .attr('cx', loc[0])
-                .attr('cy', loc[1])
-                .attr('r', 1.25);
+        if (!isSmall()) {
+            var midCoordinates = [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]];
+            for (var index in midCoordinates) {
+                var loc = midCoordinates[index];
+                fillEnter.append('circle')
+                    .attr('class', 'midpoint')
+                    .attr('cx', loc[0])
+                    .attr('cy', loc[1])
+                    .attr('r', 1.25);
+            }
         }
+
     }
 
     function renderLine(lineEnter) {
