@@ -215,8 +215,10 @@ export function uiSidebar(context) {
                 var entity = context.entity(id);
                 // uncollapse the sidebar
                 if (selection.classed('collapsed')) {
-                    var extent = entity.extent(context.graph());
-                    sidebar.expand(sidebar.intersects(extent));
+                    if (newFeature) {
+                        var extent = entity.extent(context.graph());
+                        sidebar.expand(sidebar.intersects(extent));
+                    }
                 }
 
                 featureListWrap

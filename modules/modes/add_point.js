@@ -36,7 +36,7 @@ export function modeAddPoint(context, customMode) {
         );
 
         context.enter(
-            modeSelect(context, [node.id]).newFeature(true)
+            modeSelect(context, [node.id]).newFeature(!mode.preset)
         );
     }
 
@@ -50,7 +50,7 @@ export function modeAddPoint(context, customMode) {
         );
 
         context.enter(
-            modeSelect(context, [node.id]).newFeature(true)
+            modeSelect(context, [node.id]).newFeature(!mode.preset)
         );
     }
 
