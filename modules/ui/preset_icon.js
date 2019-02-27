@@ -4,7 +4,11 @@ import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
 export function uiPresetIcon() {
-    var preset, geometry;
+    var preset, geometry, sizeClass = 'medium';
+
+    function isSmall() {
+        return sizeClass === 'small';
+    }
 
 
     function presetIcon(selection) {
@@ -39,7 +43,8 @@ export function uiPresetIcon() {
     }
 
     function renderSquareFill(fillEnter) {
-        var w = 60, h = 60, l = 40, c1 = (w-l)/2, c2 = c1 + l;
+        var d = isSmall() ? 40 : 60;
+        var w = d, h = d, l = d*2/3, c1 = (w-l)/2, c2 = c1 + l;
         fillEnter = fillEnter
             .append('svg')
             .attr('class', 'preset-icon-fill preset-icon-fill-area')
@@ -59,8 +64,9 @@ export function uiPresetIcon() {
     }
 
     function renderLine(lineEnter) {
+        var d = isSmall() ? 40 : 60;
         // draw the line parametrically
-        var w = 60, h = 60, y = 43, l = 36, r = 2.5;
+        var w = d, h = d, y = Math.round(d*0.72), l = Math.round(d*0.6), r = 2.5;
         var x1 = (w - l)/2, x2 = x1 + l;
 
         lineEnter = lineEnter
@@ -166,7 +172,7 @@ export function uiPresetIcon() {
 
 
         var areaFrame = container.selectAll('.preset-icon-frame')
-            .data((geom === 'area') ? [0] : []);
+            .data((geom === 'area' && !isSmall()) ? [0] : []);
 
         areaFrame.exit()
             .remove();
@@ -211,6 +217,13 @@ export function uiPresetIcon() {
     presetIcon.geometry = function(val) {
         if (!arguments.length) return geometry;
         geometry = utilFunctor(val);
+        return presetIcon;
+    };
+
+
+    presetIcon.sizeClass = function(val) {
+        if (!arguments.length) return sizeClass;
+        sizeClass = val;
         return presetIcon;
     };
 

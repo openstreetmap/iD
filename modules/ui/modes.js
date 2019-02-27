@@ -165,6 +165,7 @@ export function uiModes(context) {
                             .call(uiPresetIcon()
                                 .geometry(d.geometry)
                                 .preset(d.preset)
+                                .sizeClass('small')
                             )
                     } else {
                         d3_select(this)
