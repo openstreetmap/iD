@@ -47,7 +47,7 @@ export function modeAddLine(context, customMode) {
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay();
+        var way = osmWay({ tags: defaultTags });
 
         context.perform(
             actionAddEntity(node),
@@ -62,7 +62,7 @@ export function modeAddLine(context, customMode) {
 
     function startFromNode(node) {
         var startGraph = context.graph();
-        var way = osmWay();
+        var way = osmWay({ tags: defaultTags });
 
         context.perform(
             actionAddEntity(way),

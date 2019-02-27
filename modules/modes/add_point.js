@@ -42,7 +42,7 @@ export function modeAddPoint(context, customMode) {
 
 
     function addWay(loc, edge) {
-        var node =  osmNode();
+        var node =  osmNode({ tags: defaultTags });
 
         context.perform(
             actionAddMidpoint({loc: loc, edge: edge}, node),
