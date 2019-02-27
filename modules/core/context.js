@@ -325,12 +325,13 @@ export function coreContext() {
                 return !(d.id === preset.id && d.geom === geom);
             });
         } else {
-            //only allow 3 favorites
-            //replace the last one
+            // only allow 3 favorites
             if (favs.length === 3) {
-                favs = favs.slice(0,2);
+                // remove the last favorite (first in, first out)
+                favs.pop();
             }
-            favs.push({id: preset.id, geom: geom});
+            // prepend array
+            favs.unshift({id: preset.id, geom: geom});
         }
 
         context.storage('favorite_presets', JSON.stringify(favs));

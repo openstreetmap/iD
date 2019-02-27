@@ -340,8 +340,8 @@ export function uiEntityEditor(context) {
             _activePreset = val;
             _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
-            _presetFavorite = uiPresetFavorite(_activePreset, context.geometry(_entityID), context);
         }
+        _presetFavorite = uiPresetFavorite(_activePreset, context.geometry(_entityID), context);
         return entityEditor;
     };
 
