@@ -100,7 +100,7 @@ export function uiModes(context) {
                 var preset = context.presets().item(d.id);
                 var isMaki = /^maki-/.test(preset.icon);
                 var icon = '#' + preset.icon + (isMaki ? '-11' : '');
-                var markerClass = 'add-favorite add-preset-' + preset.name()
+                var markerClass = 'add-preset add-preset-' + preset.name()
                     .replace(/\s+/g, '_')
                     + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
                 var presetName = t('presets.presets.' + preset.id + '.name');

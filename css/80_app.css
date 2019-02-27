@@ -474,13 +474,13 @@ button[disabled].action:hover {
     white-space: nowrap;
     display: flex;
 }
-.tool-group button.add-favorite {
+.tool-group button.add-preset {
     padding-left: 0px;
 }
-.tool-group button.add-favorite .label {
+.tool-group button.add-preset .label {
     padding-left: 0;
 }
-.narrow .tool-group button.add-favorite {
+.narrow .tool-group button.add-preset {
     padding-right: 0;
 }
 .tool-group button > .icon {

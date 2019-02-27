@@ -54,7 +54,7 @@
     cursor: url(img/cursor-select-remove.png), pointer; /* FF */
 }
 
-.mode-add-favorite #map,
+.mode-add-preset #map,
 .mode-draw-line #map,
 .mode-draw-area #map,
 .mode-add-line  #map,
