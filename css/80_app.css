@@ -1001,8 +1001,13 @@ a.hide-toggle {
 .preset-icon-line path.line {
     cursor: inherit;
 }
-.preset-icon-line circle.vertex {
+.preset-icon-line circle.vertex,
+.preset-icon-fill circle.vertex {
     fill: #fff;
+    stroke: rgba(0, 0, 0, 0.25);
+}
+.preset-icon-fill circle.midpoint {
+    fill: transparent;
     stroke: rgba(0, 0, 0, 0.25);
 }
 /* use a consistent stroke width */
@@ -1031,19 +1036,6 @@ a.hide-toggle {
     stroke: #333;
     fill: #efefef;
     backface-visibility: hidden;
-}
-.preset-icon-frame {
-    width: 100%;
-    height:100%;
-    position: absolute;
-}
-.preset-icon-frame .icon{
-    position: absolute;
-    top: 12%;
-    left: 12%;
-    width: 76%;
-    height: 76%;
-    margin: auto;
 }
 
 .preset-icon {

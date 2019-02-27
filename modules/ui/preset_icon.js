@@ -61,6 +61,28 @@ export function uiPresetIcon() {
         fillEnter.append('path')
             .attr('d', data)
             .attr('class', 'line area stroke');
+
+        var r = 2.5;
+        var coordinates = [c1, c2];
+        for (var xIndex in coordinates) {
+            for (var yIndex in coordinates) {
+                fillEnter.append('circle')
+                    .attr('class', 'vertex')
+                    .attr('cx', coordinates[xIndex])
+                    .attr('cy', coordinates[yIndex])
+                    .attr('r', r);
+            }
+        }
+
+        var midCoordinates = [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]];
+        for (var index in midCoordinates) {
+            var loc = midCoordinates[index];
+            fillEnter.append('circle')
+                .attr('class', 'midpoint')
+                .attr('cx', loc[0])
+                .attr('cy', loc[1])
+                .attr('r', 1.25);
+        }
     }
 
     function renderLine(lineEnter) {
@@ -169,18 +191,6 @@ export function uiPresetIcon() {
             .attr('class', 'line stroke ' + tagClasses);
         line.selectAll('path.casing')
             .attr('class', 'line casing ' + tagClasses);
-
-
-        var areaFrame = container.selectAll('.preset-icon-frame')
-            .data((geom === 'area' && !isSmall()) ? [0] : []);
-
-        areaFrame.exit()
-            .remove();
-
-        areaFrame = areaFrame.enter()
-            .append('div')
-            .attr('class', 'preset-icon-frame')
-            .call(svgIcon('#iD-preset-icon-frame'));
 
 
         var icon = container.selectAll('.preset-icon')
