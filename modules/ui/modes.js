@@ -109,7 +109,7 @@ export function uiModes(context) {
                 });
                 var tooltipTitleID = 'modes.add_preset.title';
                 if (relevantMatchingGeometry.length !== 1) {
-                    tooltipTitleID = 'modes.add_preset.' + d.geom + '.title'
+                    tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
                 }
                 var favoriteMode = {
                     id: markerClass,
@@ -173,7 +173,7 @@ export function uiModes(context) {
                                 .geometry(d.geometry)
                                 .preset(d.preset)
                                 .sizeClass('small')
-                            )
+                            );
                     } else {
                         d3_select(this)
                             .call(svgIcon(d.icon || '#iD-icon-' + d.button));
