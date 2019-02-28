@@ -568,15 +568,15 @@ button.add-note svg.icon {
 
 .spinner {
     opacity: .5;
-    display: flex;
-    flex-shrink: 2;
-    justify-content: flex-end;
+    position: absolute;
+    right: 4px;
+    bottom: 26px;
 }
 .spinner img {
-    height: 40px;
-    width: 40px;
-    border-radius: 4px;
-    background: black;
+    height: 20px;
+    width: 20px;
+    background: transparent;
+    border-radius: 100%;
 }
 [dir='rtl'] .spinner img {
     -moz-transform: scaleX(-1);
@@ -635,13 +635,16 @@ button.add-note svg.icon {
     pointer-events: none;
 }
 .search-add .popover {
-    max-height: 200px;
+    max-height: 250px;
     width: 100%;
     position: absolute;
     top: 40px;
     border-radius: 0 0 4px 4px;
     border-top: 2px solid #DCDCDC;
     overflow-y: auto;
+}
+.search-add .popover .list {
+    max-height: 70vh;
 }
 .search-add .list-item {
     display: flex;

@@ -140,13 +140,6 @@ export function uiInit(context) {
             .call(uiSave(context));
 
 
-        // For now, just put spinner at the end of the #bar
-        bar
-            .append('div')
-            .attr('class', 'spinner')
-            .call(uiSpinner(context));
-
-
         // Map controls (appended to #bar, but absolutely positioned)
         var controls = content
             .append('div')
@@ -190,6 +183,10 @@ export function uiInit(context) {
             .call(help.renderToggleButton);
         content.call(help.renderPane);
 
+        content
+            .append('div')
+            .attr('class', 'spinner')
+            .call(uiSpinner(context));
 
         // Add attribution and footer
         var about = content
