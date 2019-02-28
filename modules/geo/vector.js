@@ -84,3 +84,40 @@ export function geoVecCross(a, b, origin) {
     return (p[0]) * (q[1]) - (p[1]) * (q[0]);
 }
 
+
+// find closest orthogonal projection of point onto points array
+export function geoVecProject(a, points) {
+    var min = Infinity;
+    var idx;
+    var target;
+
+    for (var i = 0; i < points.length - 1; i++) {
+        var o = points[i];
+        var s = geoVecSubtract(points[i + 1], o);
+        var v = geoVecSubtract(a, o);
+        var proj = geoVecDot(v, s) / geoVecDot(s, s);
+        var p;
+
+        if (proj < 0) {
+            p = o;
+        } else if (proj > 1) {
+            p = points[i + 1];
+        } else {
+            p = [o[0] + proj * s[0], o[1] + proj * s[1]];
+        }
+
+        var dist = geoVecLength(p, a);
+        if (dist < min) {
+            min = dist;
+            idx = i + 1;
+            target = p;
+        }
+    }
+
+    if (idx !== undefined) {
+        return { index: idx, distance: min, target: target };
+    } else {
+        return null;
+    }
+}
+
