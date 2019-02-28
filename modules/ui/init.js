@@ -36,6 +36,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiSearchAdd } from './search_add';
 import { uiTooltipHtml } from './tooltipHtml';
 import { uiUndoRedo } from './undo_redo';
 import { uiVersion } from './version';
@@ -110,10 +111,15 @@ export function uiInit(context) {
 
 
         // Center area button group (Point/Line/Area/Note mode buttons)
-        bar
+        var centerArea = bar
             .append('div')
-            .attr('class', 'tool-group center-area')
-            .append('div')
+            .attr('class', 'tool-group center-area');
+
+        centerArea.append('div')
+            .attr('class', 'search-add')
+            .call(uiSearchAdd(context), bar);
+
+        centerArea.append('div')
             .attr('class', 'modes joined')
             .call(uiModes(context), bar);
 

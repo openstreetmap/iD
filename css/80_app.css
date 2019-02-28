@@ -597,6 +597,29 @@ button.add-note svg.icon {
     border-right-width: 0;
 }
 
+.search-add .search-wrap {
+    position: relative;
+}
+.search-add input[type='search'] {
+    position: relative;
+    width: 100%;
+    height:100%;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    min-width: 160px;
+    text-indent: 25px;
+    padding: 5px 10px
+}
+.search-add .search-icon {
+    color: #333;
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    pointer-events: none;
+}
+
 
 /* Header for modals / panes
 ------------------------------------------------------- */
