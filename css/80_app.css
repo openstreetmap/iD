@@ -477,7 +477,7 @@ button[disabled].action:hover {
     white-space: nowrap;
     display: flex;
 }
-.tool-group button.add-preset {
+.tool-group button.add-preset:not(.add-generic-preset) {
     padding: 0;
 }
 .tool-group button.bar-button .icon {

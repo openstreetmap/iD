@@ -16,11 +16,6 @@ import { uiPresetIcon } from './preset_icon';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiModes(context) {
-    var modes = [
-        modeAddPoint(context),
-        modeAddLine(context),
-        modeAddArea(context)
-    ];
 
 
     function enabled() {
@@ -47,7 +42,7 @@ export function uiModes(context) {
                 context.container()
                     .classed('mode-' + exited.id, false);
             });
-
+/*
         modes.forEach(function(mode) {
             context.keybinding().on(mode.key, function() {
                 if (!enabled(mode)) return;
@@ -59,7 +54,7 @@ export function uiModes(context) {
                 }
             });
         });
-
+*/
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -75,8 +70,6 @@ export function uiModes(context) {
 
 
         function update() {
-            var data = modes;
-
             // add favorite presets to modes
             var favoritePresets = context.getFavoritePresets();
             var favoriteModes = favoritePresets.map(function(d) {
@@ -84,6 +77,9 @@ export function uiModes(context) {
                 var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + preset.name()
                     .replace(/\s+/g, '_')
                     + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
+                if (preset.isFallback()) {
+                    markerClass += ' add-generic-preset';
+                }
                 var presetName = t('presets.presets.' + preset.id + '.name');
                 var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
                     return ['point', 'line', 'area'].indexOf(geometry) !== -1;
@@ -112,7 +108,7 @@ export function uiModes(context) {
                 }
             });
 
-            data = data.concat(favoriteModes);
+            var data = favoriteModes;
 
             var buttons = selection.selectAll('button.add-button')
                 .data(data, function(d) { return d.id; });
@@ -147,16 +143,16 @@ export function uiModes(context) {
 
             buttonsEnter
                 .each(function(d) {
-                    if (d.preset) {
+                    if (d.preset.isFallback()) {
+                        d3_select(this)
+                            .call(svgIcon('#iD-icon-' + d.preset.id));
+                    } else {
                         d3_select(this)
                             .call(uiPresetIcon()
                                 .geometry(d.geometry)
                                 .preset(d.preset)
                                 .sizeClass('small')
                             );
-                    } else {
-                        d3_select(this)
-                            .call(svgIcon(d.icon || '#iD-icon-' + d.button));
                     }
                 });
             /*
