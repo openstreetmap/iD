@@ -6,7 +6,6 @@ import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
-    modeAddNote,
     modeBrowse
 } from '../modes';
 
@@ -20,32 +19,17 @@ export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
         modeAddLine(context),
-        modeAddArea(context),
-        modeAddNote(context)
+        modeAddArea(context)
     ];
 
 
-    function enabled(d) {
-        if (d.id === 'add-note') {
-            return notesEnabled() && notesEditable();
-        } else {
-            return osmEditable();
-        }
+    function enabled() {
+        return osmEditable();
     }
 
     function osmEditable() {
         var mode = context.mode();
         return context.editable() && mode && mode.id !== 'save';
-    }
-
-    function notesEnabled() {
-        var noteLayer = context.layers().layer('notes');
-        return noteLayer && noteLayer.enabled();
-    }
-
-    function notesEditable() {
-        var mode = context.mode();
-        return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
 
@@ -91,8 +75,7 @@ export function uiModes(context) {
 
 
         function update() {
-            var showNotes = notesEnabled();
-            var data = showNotes ? modes : modes.slice(0, 3);
+            var data = modes;
 
             // add favorite presets to modes
             var favoritePresets = context.getFavoritePresets();

@@ -26,6 +26,7 @@ import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiModes } from './modes';
+import { uiNotes } from './notes';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
 import { uiRestore } from './restore';
@@ -122,6 +123,10 @@ export function uiInit(context) {
         centerArea.append('div')
             .attr('class', 'modes joined')
             .call(uiModes(context), bar);
+
+        centerArea.append('div')
+            .attr('class', 'notes')
+            .call(uiNotes(context), bar);
 
 
         // Trailing area button group (Undo/Redo save buttons)
