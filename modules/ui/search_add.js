@@ -17,6 +17,7 @@ import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
+import { uiPresetFavorite } from './preset_favorite';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
@@ -116,6 +117,7 @@ export function uiSearchAdd(context) {
             .attr('class', function(item) { return 'list-item preset-' + item.id.replace('/', '-'); });
 
         var button = row.append('button')
+            .attr('class', 'choose')
             .on('click', function(d) {
                 var geom = defaultGeometry(d);
                 var markerClass = 'add-preset add-' + geom + ' add-preset-' + d.name()
@@ -158,6 +160,14 @@ export function uiSearchAdd(context) {
             .text(function(d) {
                 return d.name();
             });
+
+        row.each(function(d) {
+            var supportedGeom = supportedGeometry(d);
+            if (supportedGeom.length === 1) {
+                var presetFavorite = uiPresetFavorite(d, supportedGeom[0], context, 'accessory');
+                d3_select(this).call(presetFavorite.button);
+            }
+        });
 
         //updateForFeatureHiddenState();
     }

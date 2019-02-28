@@ -649,11 +649,12 @@ button.add-note svg.icon {
     display: flex;
     align-items: center;
     line-height: 1.2em;
+    width: 100%;
 }
 .search-add .list-item > *:not(button) {
     pointer-events: none;
 }
-.search-add .list-item button {
+.search-add .list-item button.choose {
     position: absolute;
     border-radius: 0;
     height: 100%;
@@ -661,7 +662,17 @@ button.add-note svg.icon {
     top: 0;
     left: 0;
 }
-
+.search-add .list-item button.accessory {
+    position: relative;
+    flex: 0 0 auto;
+    color: #808080;
+    background: transparent;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+.search-add .list-item button.accessory:hover {
+    color: #666;
+}
 /* Header for modals / panes
 ------------------------------------------------------- */
 .header {
@@ -1209,7 +1220,8 @@ a.hide-toggle {
 .preset-list-item button.tag-reference-button {
     height: 100%;
     border: 1px solid #ccc;
-    flex: 32px;
+    width: 32px;
+    flex: 0 0 auto;
     background: #f6f6f6;
 }
 [dir='ltr'] .preset-list-item button.preset-favorite-button,
@@ -1238,11 +1250,11 @@ a.hide-toggle {
     opacity: .5;
 }
 
-.preset-list-item button.preset-favorite-button .icon {
+button.preset-favorite-button .icon {
     fill-opacity: 0;
-    stroke-width: 1.6;
+    stroke-width: 1;
 }
-.preset-list-item button.preset-favorite-button.active .icon {
+button.preset-favorite-button.active .icon {
     fill-opacity: inherit;
 }
 

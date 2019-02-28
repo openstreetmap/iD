@@ -6,7 +6,7 @@ import {
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 
-export function uiPresetFavorite(preset, geom, context) {
+export function uiPresetFavorite(preset, geom, context, klass) {
 
     var presetFavorite = {};
 
@@ -15,7 +15,7 @@ export function uiPresetFavorite(preset, geom, context) {
 
     presetFavorite.button = function(selection) {
 
-        var canFavorite = geom !== 'vertex' && geom !== 'relation' && !preset.isFallback();
+        var canFavorite = geom !== 'vertex' && geom !== 'relation';
 
         _button = selection.selectAll('.preset-favorite-button')
             .data(canFavorite ? [0] : []);
@@ -24,7 +24,7 @@ export function uiPresetFavorite(preset, geom, context) {
 
         _button = _button.enter()
             .insert('button', '.tag-reference-button')
-            .attr('class', 'preset-favorite-button')
+            .attr('class', 'preset-favorite-button ' + klass)
             .attr('title', t('icons.favorite'))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-favorite'))
