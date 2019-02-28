@@ -585,12 +585,13 @@ button.add-note svg.icon {
 .search-add {
     width: 100%;
     justify-content: center;
+    position: relative;
 }
 .search-add .search-wrap {
     position: relative;
     width: 100%;
     min-width: 200px;
-    max-width: 400px;
+    max-width: 250px;
     border-radius: 20px 0 0 20px;
     background: #fff;
 }
@@ -600,16 +601,12 @@ button.add-note svg.icon {
 .search-add input[type='search'] {
     position: relative;
     width: 100%;
-    height:100%;
+    height: 100%;
     border: none;
     font-size: 14px;
     text-indent: 25px;
     padding: 5px 10px;
     border-radius: inherit;
-}
-.search-add input[type='search']:focus {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 .search-add .search-icon {
     color: #333;
@@ -623,10 +620,15 @@ button.add-note svg.icon {
     max-height: 250px;
     width: 100%;
     position: absolute;
-    top: 40px;
-    border-radius: 0 0 4px 4px;
-    border-top: 2px solid #DCDCDC;
+    top: 44px;
+    border: none;
+    border-radius: 6px;
     overflow-y: auto;
+    max-width: 350px;
+}
+.search-add .popover::-webkit-scrollbar {
+    /* don't overlap rounded corners */
+    background: transparent;
 }
 .search-add .popover .list {
     max-height: 70vh;
