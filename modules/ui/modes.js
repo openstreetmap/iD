@@ -98,8 +98,6 @@ export function uiModes(context) {
             var favoritePresets = context.getFavoritePresets();
             var favoriteModes = favoritePresets.map(function(d) {
                 var preset = context.presets().item(d.id);
-                var isMaki = /^maki-/.test(preset.icon);
-                var icon = '#' + preset.icon + (isMaki ? '-11' : '');
                 var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + preset.name()
                     .replace(/\s+/g, '_')
                     + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
@@ -117,7 +115,6 @@ export function uiModes(context) {
                     title: presetName,
                     description: t(tooltipTitleID, { feature: presetName }),
                     key: '',
-                    icon: icon,
                     preset: preset,
                     geometry: d.geom
                 };
@@ -145,7 +142,7 @@ export function uiModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', function(d) { return d.id + ' add-button'; })
+                .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.mode-buttons', function(d) {
                     if (!enabled(d)) return;
 

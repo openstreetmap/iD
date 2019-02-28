@@ -128,7 +128,7 @@ export function uiPresetIcon() {
 
         container = container.enter()
             .append('div')
-            .attr('class', 'preset-icon-container')
+            .attr('class', 'preset-icon-container ' + sizeClass)
             .merge(container);
 
         var p = preset.apply(this, arguments);

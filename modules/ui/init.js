@@ -91,7 +91,7 @@ export function uiInit(context) {
         var sidebarButton = leadingArea
             .append('div')
             .append('button')
-            .attr('class', 'sidebar-toggle')
+            .attr('class', 'sidebar-toggle bar-button')
             .attr('tabindex', -1)
             .on('click', ui.sidebar.toggle)
             .call(tooltip()

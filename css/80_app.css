@@ -451,21 +451,24 @@ button[disabled].action:hover {
     width: 100%;
 }
 .tool-group.leading-area {
-    flex-shrink: 2;
     justify-content: flex-start;
+}
+.tool-group.leading-area,
+.tool-group.trailing-area {
+    flex-shrink: 2;
 }
 .tool-group.center-area {
     justify-content: center;
 }
 .tool-group.trailing-area {
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .tool-group > div {
     display: flex;
     margin: 0 5px;
 }
-.tool-group button {
+.tool-group button.bar-button {
     flex: 1 1 auto;
     flex-flow: row nowrap;
     align-items: center;
@@ -589,7 +592,7 @@ button.add-note svg.icon {
     width: unset;
 }
 #bar.narrow .spinner,
-#bar.narrow button .label {
+#bar.narrow button.bar-button .label {
     display: none;
 }
 #bar.narrow button .count {
@@ -597,8 +600,17 @@ button.add-note svg.icon {
     border-right-width: 0;
 }
 
+/* Add a feature search bar
+------------------------------------------------------- */
+
+.search-add {
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
+}
 .search-add .search-wrap {
     position: relative;
+    width: 100%;
 }
 .search-add input[type='search'] {
     position: relative;
@@ -607,9 +619,12 @@ button.add-note svg.icon {
     border: none;
     border-radius: 20px;
     font-size: 14px;
-    min-width: 160px;
     text-indent: 25px;
     padding: 5px 10px
+}
+.search-add input[type='search']:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .search-add .search-icon {
     color: #333;
@@ -619,7 +634,45 @@ button.add-note svg.icon {
     top: 10px;
     pointer-events: none;
 }
-
+.search-add .popover {
+    max-height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    border-radius: 0 0 4px 4px;
+    border-top: 2px solid #DCDCDC;
+    overflow-y: auto;
+}
+.search-add .list-item {
+    display: flex;
+    position: relative;
+    padding: 2px;
+}
+.search-add .list-item:not(:last-of-type) {
+    border-bottom: 1px solid #DCDCDC;
+}
+.search-add .list-item .label {
+    font-weight: bold;
+    font-size: 12px;
+    padding-left: 2px;
+    top: 0;
+    bottom: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    line-height: 1.2em;
+}
+.search-add .list-item > *:not(button) {
+    pointer-events: none;
+}
+.search-add .list-item button {
+    position: absolute;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
 
 /* Header for modals / panes
 ------------------------------------------------------- */
@@ -1018,9 +1071,10 @@ a.hide-toggle {
     height: 60px;
     text-align: center;
 }
-#bar .preset-icon-container {
+.preset-icon-container.small {
     width: 40px;
     height: 40px;
+    flex: 0 0 auto;
 }
 
 .preset-icon-line {

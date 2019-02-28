@@ -6,6 +6,12 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
+import {
+    modeAddArea,
+    modeAddLine,
+    modeAddPoint
+} from '../modes';
+
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
@@ -18,25 +24,142 @@ import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 export function uiSearchAdd(context) {
     var dispatch = d3_dispatch('choose');
+    var presets;
+    var search = d3_select(null), popover = d3_select(null), list = d3_select(null);
 
     function searchAdd(selection) {
+
+        presets = context.presets().matchAnyGeometry(['point', 'line', 'area']);
 
         var searchWrap = selection
             .append('div')
             .attr('class', 'search-wrap');
 
-        var search = searchWrap
+        search = searchWrap
             .append('input')
             .attr('class', 'search-input')
             .attr('placeholder', t('modes.add_feature.title'))
             .attr('type', 'search')
-            .call(utilNoAuto);
-            //.on('keydown', initialKeydown)
-            //.on('keypress', keypress)
-            //.on('input', inputevent);
+            .call(utilNoAuto)
+            .on('focus', function() {
+                popover.classed('hide', false);
+            })
+            .on('blur', function() {
+                popover.classed('hide', true);
+            })
+            .on('input', function () {
+                var value = search.property('value');
+                //list.classed('filtered', value.length);
+                if (value.length) {
+                    var results = presets.search(value);
+                    list.call(drawList, results);
+                } else {
+                    //list.call(drawList, context.presets().defaults(geometry, 36));
+                }
+            });
 
         searchWrap
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
+
+        popover = searchWrap
+            .append('div')
+            .attr('class', 'popover fillL hide')
+            .on('mousedown', function() {
+                // don't blur the search input (and thus close results)
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+            });
+
+        list = popover
+            .append('div')
+            .attr('class', 'list');//
+            //.call(drawList, context.presets().defaults(geometry, 36));
+    }
+
+    function supportedGeometry(preset) {
+        return preset.geometry.filter(function(geometry) {
+            return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+        });
+    }
+    function defaultGeometry(item) {
+        if (item.geometry.filter) {
+            var supportedGeom = supportedGeometry(item);
+            if (supportedGeom.length === 1) {
+                return supportedGeom[0];
+            }
+        } else {
+            return item.geometry;
+        }
+        return 'point';
+    }
+
+    function drawList(list, presets) {
+        /*var collection = presets.collection.reduce(function(collection, preset) {
+            if (preset.members) {
+                collection.push(CategoryItem(preset));
+            } else if (preset.visible()) {
+                collection.push(PresetItem(preset));
+            }
+            return collection;
+        }, []);*/
+
+        var items = list.selectAll('.list-item')
+            .data(presets.collection, function(d) { return d.id; });
+
+        items.order();
+
+        items.exit()
+            .remove();
+
+        var row = items.enter()
+            .append('div')
+            .attr('class', function(item) { return 'list-item preset-' + item.id.replace('/', '-'); });
+
+        var button = row.append('button')
+            .on('click', function(d) {
+                var geom = defaultGeometry(d);
+                var markerClass = 'add-preset add-' + geom + ' add-preset-' + d.name()
+                    .replace(/\s+/g, '_')
+                    + '-' + geom; //replace spaces with underscores to avoid css interpretation
+                var modeInfo = {
+                    id: markerClass,
+                    button: markerClass,
+                    preset: d,
+                    geometry: geom
+                };
+                var mode;
+                switch (geom) {
+                    case 'point':
+                    case 'vertex':
+                        mode = modeAddPoint(context, modeInfo);
+                        break;
+                    case 'line':
+                        mode = modeAddLine(context, modeInfo);
+                        break;
+                    case 'area':
+                        mode = modeAddArea(context, modeInfo);
+                }
+                search.node().blur();
+                context.enter(mode);
+            });
+
+        row.each(function(d) {
+            d3_select(this).call(
+                uiPresetIcon()
+                    .geometry(defaultGeometry(d))
+                    .preset(d)
+                    .sizeClass('small')
+            );
+        });
+        row.append('div')
+            .attr('class', 'label')
+            .append('div')
+            .attr('class', 'label-inner')
+            .text(function(d) {
+                return d.name();
+            });
+
+        //updateForFeatureHiddenState();
     }
 
     return utilRebind(searchAdd, dispatch, 'on');
