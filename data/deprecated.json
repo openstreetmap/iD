@@ -117,6 +117,26 @@
       "replace": {"shop": "optician"}
     },
     {
+      "old": {"cuisine": "gluten-free"},
+      "replace": {"diet:gluten_free": "yes"}
+    },
+    {
+      "old": {"cuisine": "halal"},
+      "replace": {"diet:halal": "yes"}
+    },
+    {
+      "old": {"cuisine": "kosher"},
+      "replace": {"diet:kosher": "yes"}
+    },
+    {
+      "old": {"cuisine": "vegan"},
+      "replace": {"diet:vegan": "yes"}
+    },
+    {
+      "old": {"cuisine": "vegetarian"},
+      "replace": {"diet:vegetarian": "yes"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },
