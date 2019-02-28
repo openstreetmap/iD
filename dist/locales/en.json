@@ -571,6 +571,7 @@
             "overlays": "Overlays",
             "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
+            "reset_all": "Reset All",
             "display_options": "Display Options",
             "brightness": "Brightness",
             "contrast": "Contrast",
