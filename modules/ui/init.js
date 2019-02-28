@@ -116,13 +116,11 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'tool-group center-area');
 
-        centerArea.append('div')
-            .attr('class', 'search-add')
-            .call(uiSearchAdd(context), bar);
+        var addArea = centerArea.append('div')
+            .attr('class', 'search-add joined');
 
-        centerArea.append('div')
-            .attr('class', 'modes joined')
-            .call(uiModes(context), bar);
+        addArea.call(uiSearchAdd(context), bar);
+        addArea.call(uiModes(context), bar);
 
         centerArea.append('div')
             .attr('class', 'notes')

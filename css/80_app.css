@@ -308,29 +308,29 @@ button.disabled {
     cursor: not-allowed;
 }
 
-.joined button {
+.joined > * {
     border-radius: 0;
     border-right: 1px solid rgba(0,0,0,.5);
 }
-[dir='rtl'] .joined button {
+[dir='rtl'] .joined > * {
     border-left: 1px solid rgba(0,0,0,.5);
     border-right: none;
 }
 
-.fillL .joined button {
+.fillL .joined > * {
     border-right: 1px solid #fff;
 }
-.joined button:first-child {
+.joined > *:first-child {
     border-radius: 4px 0 0 4px;
 }
-[dir='rtl'] .joined button:first-child {
+[dir='rtl'] .joined > *:first-child {
     border-radius: 0 4px 4px 0;
 }
-.joined button:last-child {
+.joined > *:last-child {
     border-right-width: 0;
     border-radius: 0 4px 4px 0;
 }
-[dir='rtl'] .joined button:last-child {
+[dir='rtl'] .joined > *.bar-button:last-child {
     border-radius: 4px 0 0 4px;
 }
 
@@ -469,7 +469,7 @@ button[disabled].action:hover {
     margin: 0 5px;
 }
 .tool-group button.bar-button {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     flex-flow: row nowrap;
     align-items: center;
     padding: 0 10px;
@@ -501,10 +501,10 @@ button[disabled].action:hover {
     padding-right: 0 !important;
     padding-left: 0 !important;
 }
-.tool-group button > .icon {
+.tool-group button.bar-button .icon {
     flex: 0 0 20px;
 }
-.tool-group button .label {
+.tool-group button.bar-button .label {
     flex: 0 1 auto;
     padding: 0 5px;
 }
@@ -605,22 +605,28 @@ button.add-note svg.icon {
 
 .search-add {
     width: 100%;
-    min-width: 200px;
-    max-width: 600px;
+    justify-content: center;
 }
 .search-add .search-wrap {
     position: relative;
     width: 100%;
+    min-width: 200px;
+    max-width: 400px;
+    border-radius: 20px 0 0 20px;
+    background: #fff;
+}
+.search-add .search-wrap:only-child {
+    border-radius: 20px;
 }
 .search-add input[type='search'] {
     position: relative;
     width: 100%;
     height:100%;
     border: none;
-    border-radius: 20px;
     font-size: 14px;
     text-indent: 25px;
-    padding: 5px 10px
+    padding: 5px 10px;
+    border-radius: inherit;
 }
 .search-add input[type='search']:focus {
     border-bottom-left-radius: 0;
