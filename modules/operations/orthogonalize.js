@@ -6,11 +6,11 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationOrthogonalize(selectedIDs, context) {
-    var entityId = selectedIDs[0],
-        entity = context.entity(entityId),
-        extent = entity.extent(context.graph()),
-        geometry = context.geometry(entityId),
-        action = actionOrthogonalize(entityId, context.projection);
+    var entityID = selectedIDs[0];
+    var entity = context.entity(entityID);
+    var extent = entity.extent(context.graph());
+    var geometry = context.geometry(entityID);
+    var action = actionOrthogonalize(entityID, context.projection);
 
 
     var operation = function() {
@@ -21,7 +21,6 @@ export function operationOrthogonalize(selectedIDs, context) {
     operation.available = function() {
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
-            entity.isClosed() &&
             _uniq(entity.nodes).length > 2;
     };
 
@@ -30,7 +29,7 @@ export function operationOrthogonalize(selectedIDs, context) {
         var reason;
         if (extent.percentContainedIn(context.extent()) < 0.8) {
             reason = 'too_large';
-        } else if (context.hasHiddenConnections(entityId)) {
+        } else if (context.hasHiddenConnections(entityID)) {
             reason = 'connected_to_hidden';
         }
         return action.disabled(context.graph()) || reason;
