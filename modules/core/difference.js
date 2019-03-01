@@ -5,7 +5,7 @@ import _values from 'lodash-es/values';
 
 
 /*
-    iD.Difference represents the difference between two graphs.
+    iD.coreDifference represents the difference between two graphs.
     It knows how to calculate the set of entities that were
     created, modified, or deleted, and also contains the logic
     for recursively extending a difference to the complete set
