@@ -100,7 +100,7 @@
                     "line": "Square the corners of this line.",
                     "area": "Square the corners of this area."
                 },
-                "key": "S",
+                "key": "Q",
                 "annotation": {
                     "line": "Squared the corners of a line.",
                     "area": "Squared the corners of an area."
