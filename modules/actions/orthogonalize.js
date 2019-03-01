@@ -235,10 +235,10 @@ export function actionOrthogonalize(wayID, projection) {
             var origin = coords[i];
             var b = coords[(i + 1) % coords.length];
 
-            var val = filterDotProduct(normalizedDotProduct(a, b, origin));
-            if (val === null) continue;  // ignore vertex
-            if (val > 0) return 1;       // something to do
-            score = 0;                   // already square
+            var dotp = filterDotProduct(normalizedDotProduct(a, b, origin));
+            if (dotp === null) continue;        // ignore vertex
+            if (Math.abs(dotp) > 0) return 1;   // something to do
+            score = 0;                          // already square
         }
 
         return score;
