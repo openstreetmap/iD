@@ -3,7 +3,7 @@ import { utilFunctor } from './index';
 
 var _tooltipID = 0;
 
-export function tooltip() {
+export function tooltip(klass) {
     var _id = _tooltipID++;
     var tooltip = function(selection) {
         selection.each(setup);
@@ -98,7 +98,7 @@ export function tooltip() {
 
         var enter = tip.enter()
             .append('div')
-            .attr('class', 'tooltip tooltip-' + _id);
+            .attr('class', 'tooltip tooltip-' + _id + ' ' + (klass ? klass : ''));
 
         enter
             .append('div')

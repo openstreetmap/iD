@@ -75,8 +75,16 @@ export function uiSearchAdd(context) {
             .append('div')
             .attr('class', 'list');//
             //.call(drawList, context.presets().defaults(geometry, 36));
+
+        context.features().on('change.search-add', updateForFeatureHiddenState);
     }
 
+    function isSingularItem(item) {
+        if (item.geometry.filter) {
+            return supportedGeometry(item).length === 1;
+        }
+        return false;
+    }
     function supportedGeometry(preset) {
         return preset.geometry.filter(function(geometry) {
             return ['point', 'line', 'area'].indexOf(geometry) !== -1;
@@ -116,9 +124,11 @@ export function uiSearchAdd(context) {
             .append('div')
             .attr('class', function(item) { return 'list-item preset-' + item.id.replace('/', '-'); });
 
-        var button = row.append('button')
+        row.append('button')
             .attr('class', 'choose')
             .on('click', function(d) {
+                if (d3_select(this).classed('disabled')) return;
+
                 var geom = defaultGeometry(d);
                 var markerClass = 'add-preset add-' + geom + ' add-preset-' + d.name()
                     .replace(/\s+/g, '_')
@@ -169,7 +179,41 @@ export function uiSearchAdd(context) {
             }
         });
 
-        //updateForFeatureHiddenState();
+        updateForFeatureHiddenState();
+    }
+
+    function updateForFeatureHiddenState() {
+
+        var listItem = d3_selectAll('.search-add .popover .list-item');
+
+        // remove existing tooltips
+        listItem.selectAll('button.choose').call(tooltip().destroyAny);
+
+        listItem.each(function(item, index) {
+            if (!isSingularItem(item)) {
+                return;
+            }
+            var geometry = defaultGeometry(item);
+
+            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item, geometry);
+            var isHiddenPreset = !!hiddenPresetFeaturesId;
+
+            var button = d3_select(this).selectAll('button.choose');
+
+            d3_select(this).classed('disabled', isHiddenPreset);
+            button.classed('disabled', isHiddenPreset);
+
+            if (isHiddenPreset) {
+                var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
+                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
+                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
+                button.call(tooltip('dark')
+                    .html(true)
+                    .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
+                    .placement(index < 2 ? 'bottom' : 'top')
+                );
+            }
+        });
     }
 
     return utilRebind(searchAdd, dispatch, 'on');

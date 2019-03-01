@@ -653,6 +653,10 @@ button.add-note svg.icon {
     line-height: 1.2em;
     width: 100%;
 }
+.search-add .list-item.disabled .preset-icon-container,
+.search-add .list-item.disabled .label {
+    opacity: 0.55;
+}
 .search-add .list-item > *:not(button) {
     pointer-events: none;
 }
@@ -663,6 +667,9 @@ button.add-note svg.icon {
     width: 100%;
     top: 0;
     left: 0;
+}
+.search-add .list-item button.choose.disabled {
+    background-color: #ececec;
 }
 .search-add .list-item button.accessory {
     position: relative;
@@ -4854,22 +4861,29 @@ svg.mouseclick use.right {
 }
 
 /* dark tooltips for sidebar / panels */
+.tooltip.dark.top .tooltip-arrow,
 .map-pane .tooltip.top .tooltip-arrow,
 #sidebar .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
+.tooltip.dark.bottom .tooltip-arrow,
 .map-pane .tooltip.bottom .tooltip-arrow,
 #sidebar .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
+.tooltip.dark.left .tooltip-arrow,
 .map-pane .tooltip.left .tooltip-arrow,
 #sidebar .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
+.tooltip.dark.right .tooltip-arrow,
 .map-pane .tooltip.right .tooltip-arrow,
 #sidebar .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
+.tooltip.dark .tooltip-inner,
+.tooltip.dark .tooltip-heading,
+.tooltip.dark .keyhint-wrap,
 .map-pane .tooltip-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,
