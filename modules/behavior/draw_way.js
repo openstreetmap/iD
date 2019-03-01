@@ -330,7 +330,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
         }, 1000);
-        var isNewFeature = !mode.isContinuing && mode.button.indexOf('add-preset-') === -1;
+
+        var isNewFeature = !mode.isContinuing && context.presets().match(origWay, context.graph()).isFallback();
         context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
         if (isNewFeature) {
             context.validator().validate();

@@ -35,9 +35,7 @@ export function modeAddPoint(context, customMode) {
             t('operations.add.annotation.point')
         );
 
-        context.enter(
-            modeSelect(context, [node.id]).newFeature(!mode.preset)
-        );
+        enterSelectMode(node);
     }
 
 
@@ -49,8 +47,12 @@ export function modeAddPoint(context, customMode) {
             t('operations.add.annotation.vertex')
         );
 
+        enterSelectMode(node);
+    }
+
+    function enterSelectMode(node) {
         context.enter(
-            modeSelect(context, [node.id]).newFeature(!mode.preset)
+            modeSelect(context, [node.id]).newFeature(mode.preset.isFallback())
         );
     }
 
