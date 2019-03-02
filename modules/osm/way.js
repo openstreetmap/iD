@@ -195,7 +195,6 @@ _extend(osmWay.prototype, {
 
     // returns an object with the tag that implies this is an area, if any
     tagSuggestingArea: function() {
-
         if (this.tags.area === 'yes') return { area: 'yes' };
         if (this.tags.area === 'no') return null;
 
@@ -230,7 +229,6 @@ _extend(osmWay.prototype, {
     },
 
     isArea: function() {
-
         if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')

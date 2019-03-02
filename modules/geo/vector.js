@@ -37,9 +37,19 @@ export function geoVecInterp(a, b, t) {
 
 // http://jsperf.com/id-dist-optimization
 export function geoVecLength(a, b) {
+    b = b || [0, 0];
     var x = a[0] - b[0];
     var y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
+}
+
+// get a unit vector
+export function geoVecNormalize(a) {
+    var length = Math.sqrt((a[0] * a[0]) + (a[1] * a[1]));
+    if (length !== 0) {
+        return geoVecScale(a, 1 / length);
+    }
+    return [0, 0];
 }
 
 // Return the counterclockwise angle in the range (-pi, pi)
@@ -51,8 +61,17 @@ export function geoVecAngle(a, b) {
 // dot product
 export function geoVecDot(a, b, origin) {
     origin = origin || [0, 0];
-    return (a[0] - origin[0]) * (b[0] - origin[0]) +
-        (a[1] - origin[1]) * (b[1] - origin[1]);
+    var p = geoVecSubtract(a, origin);
+    var q = geoVecSubtract(b, origin);
+    return (p[0]) * (q[0]) + (p[1]) * (q[1]);
+}
+
+// normalized dot product
+export function geoVecNormalizedDot(a, b, origin) {
+    origin = origin || [0, 0];
+    var p = geoVecNormalize(geoVecSubtract(a, origin));
+    var q = geoVecNormalize(geoVecSubtract(b, origin));
+    return geoVecDot(p, q);
 }
 
 // 2D cross product of OA and OB vectors, returns magnitude of Z vector
@@ -60,7 +79,45 @@ export function geoVecDot(a, b, origin) {
 // negative for clockwise turn, and zero if the points are collinear.
 export function geoVecCross(a, b, origin) {
     origin = origin || [0, 0];
-    return (a[0] - origin[0]) * (b[1] - origin[1]) -
-        (a[1] - origin[1]) * (b[0] - origin[0]);
+    var p = geoVecSubtract(a, origin);
+    var q = geoVecSubtract(b, origin);
+    return (p[0]) * (q[1]) - (p[1]) * (q[0]);
+}
+
+
+// find closest orthogonal projection of point onto points array
+export function geoVecProject(a, points) {
+    var min = Infinity;
+    var idx;
+    var target;
+
+    for (var i = 0; i < points.length - 1; i++) {
+        var o = points[i];
+        var s = geoVecSubtract(points[i + 1], o);
+        var v = geoVecSubtract(a, o);
+        var proj = geoVecDot(v, s) / geoVecDot(s, s);
+        var p;
+
+        if (proj < 0) {
+            p = o;
+        } else if (proj > 1) {
+            p = points[i + 1];
+        } else {
+            p = [o[0] + proj * s[0], o[1] + proj * s[1]];
+        }
+
+        var dist = geoVecLength(p, a);
+        if (dist < min) {
+            min = dist;
+            idx = i + 1;
+            target = p;
+        }
+    }
+
+    if (idx !== undefined) {
+        return { index: idx, distance: min, target: target };
+    } else {
+        return null;
+    }
 }
 
