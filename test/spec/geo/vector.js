@@ -76,6 +76,17 @@ describe('iD.geo - vector', function() {
         });
     });
 
+    describe('geoVecNormalize', function() {
+        it('gets unit vectors', function() {
+            expect(iD.geoVecNormalize([0, 0])).to.eql([0, 0]);
+            expect(iD.geoVecNormalize([1, 0])).to.eql([1, 0]);
+            expect(iD.geoVecNormalize([5, 0])).to.eql([1, 0]);
+            expect(iD.geoVecNormalize([-5, 0])).to.eql([-1, 0]);
+            expect(iD.geoVecNormalize([1, 1])[0]).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
+            expect(iD.geoVecNormalize([1, 1])[1]).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
+        });
+    });
+
     describe('geoVecAngle', function() {
         it('returns angle between a and b', function() {
             expect(iD.geoVecAngle([0, 0], [1, 0])).to.be.closeTo(0, 1e-6);
@@ -98,6 +109,24 @@ describe('iD.geo - vector', function() {
         });
     });
 
+    describe('geoVecNormalizedDot', function() {
+        it('normalized dot product of right angle is zero', function() {
+            var a = [2, 0];
+            var b = [0, 2];
+            expect(iD.geoVecNormalizedDot(a, b)).to.eql(0);
+        });
+        it('normalized dot product of same vector multiplies unit vectors', function() {
+            var a = [2, 0];
+            var b = [2, 0];
+            expect(iD.geoVecNormalizedDot(a, b)).to.eql(1);
+        });
+        it('normalized dot product of 45 degrees', function() {
+            var a = [0, 2];
+            var b = [2, 2];
+            expect(iD.geoVecNormalizedDot(a, b)).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
+        });
+    });
+
     describe('geoVecCross', function() {
         it('2D cross product of right hand turn is positive', function() {
             var a = [2, 0];
@@ -116,4 +145,49 @@ describe('iD.geo - vector', function() {
         });
     });
 
+
+    describe('geoVecProject', function() {
+        it('returns null for a degenerate path (no nodes)', function() {
+            expect(iD.geoVecProject([0, 1], [])).to.be.null;
+        });
+
+        it('returns null for a degenerate path (single node)', function() {
+            expect(iD.geoVecProject([0, 1], [0, 0])).to.be.null;
+        });
+
+        it('calculates the orthogonal projection of a point onto a path', function() {
+            //     c
+            //     |
+            // a --*--- b
+            //
+            // * = [2, 0]
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [2, 1];
+            var choice = iD.geoVecProject(c, [a, b]);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(1);
+            expect(choice.target).to.eql([2, 0]);
+        });
+
+        it('returns the starting vertex when the orthogonal projection is < 0', function() {
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [-3, 4];
+            var choice = iD.geoVecProject(c, [a, b]);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(5);
+            expect(choice.target).to.eql([0, 0]);
+        });
+
+        it('returns the ending vertex when the orthogonal projection is > 1', function() {
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [8, 4];
+            var choice = iD.geoVecProject(c, [a, b]);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(5);
+            expect(choice.target).to.eql([5, 0]);
+        });
+    });
 });
