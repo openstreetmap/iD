@@ -42,9 +42,18 @@ export function uiSearchAdd(context) {
             .attr('placeholder', t('modes.add_feature.title'))
             .attr('type', 'search')
             .call(utilNoAuto)
+            .on('keypress', function() {
+                // enter/return
+                if (d3_event.keyCode === 13) {
+                    popover.selectAll('.list > .list-item:first-child button.choose')
+                        .each(function(d) { d.choose.call(this); });
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                }
+            })
             .on('focus', function() {
-                search.attr('focusing', true);
                 search.node().setSelectionRange(0, search.property('value').length);
+                search.attr('focusing', true);
                 popover.classed('hide', false);
             })
             .on('blur', function() {
@@ -52,8 +61,8 @@ export function uiSearchAdd(context) {
             })
             .on('click', function() {
                 if (search.attr('focusing')) {
-                    search.attr('focusing', null);
                     search.node().setSelectionRange(0, search.property('value').length);
+                    search.attr('focusing', null);
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 }

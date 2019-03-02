@@ -674,6 +674,10 @@ button.add-note svg.icon {
     top: 0;
     left: 0;
 }
+.search-add .list-item button.choose:hover,
+.search-add .list-item button.choose:focus {
+    background: #E6ECFF;
+}
 .search-add .list-item button.choose.disabled {
     background-color: #ececec;
 }
