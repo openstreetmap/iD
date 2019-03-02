@@ -127,11 +127,40 @@ describe('iD.actionOrthogonalize', function () {
             expect(diff.changes().d).to.be.undefined;
             expect(graph.hasEntity('d')).to.be.ok;
         });
+
+        it('preserves the shape of skinny quads', function () {
+            var projection = iD.d3.geoMercator();
+            var tests = [[
+                [-77.0339864831478, 38.8616391227204],
+                [-77.0209775298677, 38.8613609264884],
+                [-77.0210405781065, 38.8607390721519],
+                [-77.0339024188294, 38.8610663645859]
+            ], [
+                [-89.4706683, 40.6261177],
+                [-89.4706664, 40.6260574],
+                [-89.4693973, 40.6260830],
+                [-89.4694012, 40.6261355]
+            ]];
+
+            for (var i = 0; i < tests.length; i++) {
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: tests[i][0]}),
+                    iD.osmNode({id: 'b', loc: tests[i][1]}),
+                    iD.osmNode({id: 'c', loc: tests[i][2]}),
+                    iD.osmNode({id: 'd', loc: tests[i][3]}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+                var initialWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
+                graph = iD.actionOrthogonalize('-', projection)(graph);
+                var finalWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
+                expect(finalWidth / initialWidth).within(0.90, 1.10);
+            }
+        });
     });
 
 
     describe('open paths', function () {
-        it('orthogonalizes a perfect quad', function () {
+        it('orthogonalizes a perfect quad path', function () {
             //    d --- c
             //          |
             //    a --- b
@@ -147,7 +176,7 @@ describe('iD.actionOrthogonalize', function () {
             expect(graph.entity('-').nodes).to.have.length(4);
         });
 
-        it('orthogonalizes a quad', function () {
+        it('orthogonalizes a quad path', function () {
             //    d --- c
             //          |
             //    a ---  b
@@ -254,33 +283,80 @@ describe('iD.actionOrthogonalize', function () {
     });
 
 
-    it('preserves the shape of skinny quads', function () {
-        var projection = iD.d3.geoMercator();
-        var tests = [[
-            [-77.0339864831478, 38.8616391227204],
-            [-77.0209775298677, 38.8613609264884],
-            [-77.0210405781065, 38.8607390721519],
-            [-77.0339024188294, 38.8610663645859]
-        ], [
-            [-89.4706683, 40.6261177],
-            [-89.4706664, 40.6260574],
-            [-89.4693973, 40.6260830],
-            [-89.4694012, 40.6261355]
-        ]];
-
-        for (var i = 0; i < tests.length; i++) {
+    describe('vertices', function () {
+        it('orthogonalizes a single vertex in a quad', function () {
+            //    d --- c
+            //    |     |
+            //    a ---  b
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: tests[i][0]}),
-                iD.osmNode({id: 'b', loc: tests[i][1]}),
-                iD.osmNode({id: 'c', loc: tests[i][2]}),
-                iD.osmNode({id: 'd', loc: tests[i][3]}),
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
-            var initialWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
-            graph = iD.actionOrthogonalize('-', projection)(graph);
-            var finalWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
-            expect(finalWidth / initialWidth).within(0.90, 1.10);
-        }
+
+            var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
+            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().c).to.be.undefined;
+            expect(diff.changes().d).to.be.undefined;
+        });
+
+        it('orthogonalizes a single vertex in a triangle', function () {
+            //    a
+            //    | \
+            //    |   \
+            //     b - c
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 3]}),
+                iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                iD.osmNode({id: 'c', loc: [3, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
+            ]);
+
+            var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
+            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().c).to.be.undefined;
+        });
+
+        it('orthogonalizes a single vertex in a quad path', function () {
+            //    d --- c
+            //          |
+            //    a ---  b
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmNode({id: 'd', loc: [0, 2]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
+
+            var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
+            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().c).to.be.undefined;
+            expect(diff.changes().d).to.be.undefined;
+        });
+
+        it('orthogonalizes a single vertex in a 3-point path', function () {
+            //    a
+            //    |
+            //    |
+            //     b - c
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 3]}),
+                iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                iD.osmNode({id: 'c', loc: [3, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+            ]);
+
+            var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
+            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().c).to.be.undefined;
+        });
     });
 
 
@@ -501,8 +577,79 @@ describe('iD.actionOrthogonalize', function () {
                 expect(result).to.be.false;
             });
         });
-    });
 
+        describe('vertex-only', function () {
+
+            it('returns "square_enough" for a vertex in a perfect quad', function () {
+                //    d ---- c
+                //           |
+                //    a ---- b
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [0, 0]}),
+                    iD.osmNode({id: 'b', loc: [2, 0]}),
+                    iD.osmNode({id: 'c', loc: [2, 2]}),
+                    iD.osmNode({id: 'd', loc: [0, 2]}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
+                expect(result).to.eql('square_enough');
+            });
+
+            it('returns false for a vertex in an unsquared quad', function () {
+                //    d --- c
+                //          |
+                //    a ---  b
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [0, 0]}),
+                    iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                    iD.osmNode({id: 'c', loc: [2, 2]}),
+                    iD.osmNode({id: 'd', loc: [0, 2]}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
+                expect(result).to.be.false;
+            });
+
+            it('returns false for a vertex in an unsquared 3-point path', function () {
+                //    a
+                //    |
+                //    |
+                //     b - c
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [0, 3]}),
+                    iD.osmNode({id: 'b', loc: [0, 0.1]}),
+                    iD.osmNode({id: 'c', loc: [3, 0]}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
+                expect(result).to.be.false;
+            });
+
+            it('returns "not_squarish" for vertex that can not be squared', function () {
+                //      e -- d
+                //     /      \
+                //    f        c
+                //            /
+                //      a -- b
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [1, 0]}),
+                    iD.osmNode({id: 'b', loc: [3, 0]}),
+                    iD.osmNode({id: 'c', loc: [4, 2]}),
+                    iD.osmNode({id: 'd', loc: [3, 4]}),
+                    iD.osmNode({id: 'e', loc: [1, 4]}),
+                    iD.osmNode({id: 'f', loc: [0, 2]}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
+                expect(result).to.eql('not_squarish');
+            });
+
+        });
+    });
 
     describe('transitions', function () {
         it('is transitionable', function() {

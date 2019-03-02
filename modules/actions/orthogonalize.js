@@ -15,10 +15,7 @@ import {
 } from '../geo';
 
 
-/*
- * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
- */
-export function actionOrthogonalize(wayID, projection) {
+export function actionOrthogonalize(wayID, projection, vertexID) {
     var epsilon = 1e-4;
     var threshold = 13;  // degrees within right or straight to alter
 
@@ -38,6 +35,11 @@ export function actionOrthogonalize(wayID, projection) {
         var isClosed = way.isClosed();
         var nodes = _clone(graph.childNodes(way));
         if (isClosed) nodes.pop();
+
+        if (vertexID !== undefined) {
+            nodes = nodeSubset(nodes, vertexID, isClosed);
+            if (nodes.length !== 3) return graph;
+        }
 
         // note: all geometry functions here use the unclosed node/point/coord list
 
@@ -245,6 +247,26 @@ export function actionOrthogonalize(wayID, projection) {
     }
 
 
+    // if we are only orthogonalizing one vertex,
+    // get that vertex and the previous and next
+    function nodeSubset(nodes, vertexID, isClosed) {
+        var first = isClosed ? 0 : 1;
+        var last = isClosed ? nodes.length : nodes.length - 1;
+
+        for (var i = first; i < last; i++) {
+            if (nodes[i].id === vertexID) {
+                return [
+                    nodes[(i - 1 + nodes.length) % nodes.length],
+                    nodes[i],
+                    nodes[(i + 1) % nodes.length]
+                ];
+            }
+        }
+
+        return [];
+    }
+
+
     action.disabled = function(graph) {
         var way = graph.entity(wayID);
         way = way.removeNode('');  // sanity check - remove any consecutive duplicates
@@ -253,6 +275,11 @@ export function actionOrthogonalize(wayID, projection) {
         var isClosed = way.isClosed();
         var nodes = _clone(graph.childNodes(way));
         if (isClosed) nodes.pop();
+
+        if (vertexID !== undefined) {
+            nodes = nodeSubset(nodes, vertexID, isClosed);
+            if (nodes.length !== 3) return 'end_vertex';
+        }
 
         var coords = nodes.map(function(n) { return projection(n.loc); });
         var score = canOrthogonalize(coords, isClosed);
