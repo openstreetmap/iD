@@ -38,6 +38,12 @@ expect = chai.expect;
 
 window.d3 = iD.d3;   // TODO: remove
 
+// Object.getOwnPropertySymbols polyfill (For PhantomJS / IE11) - #6001
+if (!Object.getOwnPropertySymbols) {
+  Object.defineProperty(Object.prototype, 'getOwnPropertySymbols', {
+    value: function() { return []; }
+  });
+}
 
 // Array.find polyfill (For PhantomJS / IE11)
 // https://tc39.github.io/ecma262/#sec-array.prototype.find
