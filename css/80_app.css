@@ -1100,7 +1100,7 @@ a.hide-toggle {
 
 .preset-icon-point-border path {
     stroke: #333;
-    stroke-width: 1.5;
+    stroke-width: 1.2;
     fill: transparent;
 }
 
@@ -1162,44 +1162,31 @@ a.hide-toggle {
     height:100%;
     position: absolute;
     z-index: 1;
+    transform: scale(0.48);
 }
 .preset-icon .icon {
     position: absolute;
     margin: auto;
-    top: 26%;
     left: 0;
     right: 0;
-    width: 48%;
-    height: 48%;
-}
-.preset-icon-container.small .preset-icon.point-geom .icon {
-    width: 32%;
-    height: 32%;
-    top: 30%;
-}
-
-.preset-icon.framed .icon {
-    top: 30%;
-    width: 40%;
-    height: 40%;
-}
-.preset-icon.framed.line-geom .icon {
-    top: 20%;
-}
-
-.preset-icon-iD .icon {
-    top: 0;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
-
-.preset-icon-iD.framed .icon {
-    top: 13%;
-    width: 74%;
-    height: 74%;
+.preset-icon-container.small .preset-icon.point-geom {
+    transform: translateY(-5%) scale(0.32);
 }
-.preset-icon-iD.framed.line-geom .icon {
-    top: 3%;
+.preset-icon.framed {
+    transform: scale(0.4);
+}
+.preset-icon.framed.line-geom {
+    top: 20%;
+    transform: translateY(-30%) scale(0.4);
+}
+.preset-icon-iD {
+    transform: scale(1);
+}
+.preset-icon-iD.framed.line-geom {
+    transform: translateY(-30%) scale(0.74);
 }
 
 .preset-list-button .label {
