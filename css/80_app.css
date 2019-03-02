@@ -1098,6 +1098,12 @@ a.hide-toggle {
     flex: 0 0 auto;
 }
 
+.preset-icon-point-border path {
+    stroke: #333;
+    stroke-width: 1.5;
+    fill: transparent;
+}
+
 .preset-icon-line {
     margin: auto;
     position: absolute;
@@ -1161,14 +1167,19 @@ a.hide-toggle {
     position: absolute;
     margin: auto;
     top: 26%;
-    left: 26%;
+    left: 0;
+    right: 0;
     width: 48%;
     height: 48%;
+}
+.preset-icon-container.small .preset-icon.point-geom .icon {
+    width: 32%;
+    height: 32%;
+    top: 30%;
 }
 
 .preset-icon.framed .icon {
     top: 30%;
-    left: 30%;
     width: 40%;
     height: 40%;
 }
@@ -1178,14 +1189,12 @@ a.hide-toggle {
 
 .preset-icon-iD .icon {
     top: 0;
-    left: 0;
     height: 100%;
     width: 100%;
 }
 
 .preset-icon-iD.framed .icon {
     top: 13%;
-    left: 13%;
     width: 74%;
     height: 74%;
 }

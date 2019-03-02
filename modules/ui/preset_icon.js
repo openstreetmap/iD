@@ -27,6 +27,20 @@ export function uiPresetIcon() {
             return 'maki-marker-stroked';
     }
 
+    function renderPointBorder(enter) {
+        var d = "M20,7 C14.4766667,7 10,10.207551 10,16.6166837 C10,23.0278061 20,33 20,33 C20,33 30,23.0278061 30,16.6166837 C30,10.207551 25.5233333,7 20,7 Z"
+        var w = 40, h = 40;
+        enter = enter
+            .append('svg')
+            .attr('class', 'preset-icon-fill preset-icon-point-border')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+        enter.append('path')
+            .attr('d', d);
+    }
+
     function renderCircleFill(fillEnter) {
         var w = 60, h = 60, d = 40;
         fillEnter = fillEnter
@@ -132,7 +146,7 @@ export function uiPresetIcon() {
             .merge(container);
 
         var p = preset.apply(this, arguments);
-        var geom = geometry.apply(this, arguments);
+        var geom = geometry ? geometry.apply(this, arguments) : null;
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
@@ -150,6 +164,16 @@ export function uiPresetIcon() {
             }
         }
         var tagClasses = svgTagClasses().getClassesString(tags, '');
+
+        var pointBorder = container.selectAll('.preset-icon-point-border')
+            .data(geom === 'point' && isSmall() ? [0] : []);
+
+        pointBorder.exit()
+            .remove();
+
+        var pointBorderEnter = pointBorder.enter();
+        renderPointBorder(pointBorderEnter);
+        pointBorder = pointBorderEnter.merge(pointBorder);
 
 
         var vertexFill = container.selectAll('.preset-icon-fill-vertex')
@@ -206,7 +230,7 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon ' + geom + '-geom')
+            .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
             .classed('framed', isFramed)
             .classed('preset-icon-iD', isiDIcon);
 

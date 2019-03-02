@@ -88,31 +88,16 @@ export function uiSearchAdd(context) {
         context.features().on('change.search-add', updateForFeatureHiddenState);
     }
 
-    function supportedGeometry(preset) {
-        return preset.geometry.filter(function(geometry) {
-            return ['point', 'line', 'area'].indexOf(geometry) !== -1;
-        }).sort();
-    }
-    function defaultGeometry(item) {
-        if (item.geometry.filter) {
-            var supportedGeom = supportedGeometry(item);
-            if (supportedGeom.length === 1) {
-                return supportedGeom[0];
-            }
-        } else {
-            return item.geometry;
-        }
-        return 'point';
-    }
-
     function drawList(list, presets) {
 
         var collection = presets.collection.map(function(preset) {
             if (preset.members) {
                 return CategoryItem(preset);
             } else if (preset.visible()) {
-                var supportedGeom = supportedGeometry(preset);
-                if (supportedGeom.length === 1) {
+                var supportedGeometry = preset.geometry.filter(function(geometry) {
+                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                }).sort();
+                if (supportedGeometry.length === 1) {
                     return AddablePresetItem(preset, supportedGeom[0]);
                 }
                 return MultiGeometryPresetItem(preset, supportedGeom);
@@ -155,7 +140,7 @@ export function uiSearchAdd(context) {
         row.each(function(d) {
             d3_select(this).call(
                 uiPresetIcon()
-                    .geometry(d.geometry || defaultGeometry(d.preset))
+                    .geometry(d.geometry)
                     .preset(d.preset)
                     .sizeClass('small')
             );

@@ -249,11 +249,12 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 }
             }
         }
-
-        for (var f in preset.fields) {
-            var field = preset.fields[f];
-            if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
-                tags[field.key] = field.default;
+        if (geometry) {
+            for (var f in preset.fields) {
+                var field = preset.fields[f];
+                if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
+                    tags[field.key] = field.default;
+                }
             }
         }
 
