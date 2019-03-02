@@ -43,10 +43,19 @@ export function uiSearchAdd(context) {
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('focus', function() {
+                search.attr('focusing', true);
                 popover.classed('hide', false);
             })
             .on('blur', function() {
                 popover.classed('hide', true);
+            })
+            .on('click', function() {
+                if (search.attr('focusing')) {
+                    search.attr('focusing', null);
+                    search.node().setSelectionRange(0, search.property('value').length);
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                }
             })
             .on('input', function () {
                 var value = search.property('value');
