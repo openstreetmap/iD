@@ -51,9 +51,19 @@ export function uiSearchAdd(context) {
                     d3_event.stopPropagation();
                 }
             })
+            .on('mousedown', function() {
+                search.attr('clicking', true);
+            })
+            .on('mouseup', function() {
+                search.attr('clicking', null);
+            })
             .on('focus', function() {
-                search.node().setSelectionRange(0, search.property('value').length);
-                search.attr('focusing', true);
+                if (search.attr('clicking')) {
+                    search.attr('focusing', true);
+                    search.attr('clicking', null);
+                } else {
+                    search.node().setSelectionRange(0, search.property('value').length);
+                }
                 popover.classed('hide', false);
             })
             .on('blur', function() {
@@ -63,8 +73,6 @@ export function uiSearchAdd(context) {
                 if (search.attr('focusing')) {
                     search.node().setSelectionRange(0, search.property('value').length);
                     search.attr('focusing', null);
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
                 }
             })
             .on('input', function () {
