@@ -638,7 +638,8 @@ button.add-note svg.icon {
     position: relative;
     padding: 2px;
 }
-.search-add .list-item:not(:last-of-type) {
+.search-add .list-item:not(:last-of-type),
+.search-add .subsection .list-item {
     border-bottom: 1px solid #DCDCDC;
 }
 .search-add .list-item .label {
@@ -657,6 +658,10 @@ button.add-note svg.icon {
 .search-add .list-item.disabled .label {
     opacity: 0.55;
 }
+.search-add .subsection .list-item .label {
+    font-weight: normal;
+    letter-spacing: 0.1;
+}
 .search-add .list-item > *:not(button) {
     pointer-events: none;
 }
@@ -671,6 +676,9 @@ button.add-note svg.icon {
 .search-add .list-item button.choose.disabled {
     background-color: #ececec;
 }
+.search-add .subsection .list-item button.choose {
+    opacity: 0.85;
+}
 .search-add .list-item button.accessory {
     position: relative;
     flex: 0 0 auto;
@@ -681,6 +689,10 @@ button.add-note svg.icon {
 }
 .search-add .list-item button.accessory:hover {
     color: #666;
+}
+.search-add .subsection {
+    padding-left: 6px;
+    background-color: #CBCBCB;
 }
 /* Header for modals / panes
 ------------------------------------------------------- */

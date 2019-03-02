@@ -79,16 +79,10 @@ export function uiSearchAdd(context) {
         context.features().on('change.search-add', updateForFeatureHiddenState);
     }
 
-    function isSingularItem(item) {
-        if (item.geometry.filter) {
-            return supportedGeometry(item).length === 1;
-        }
-        return false;
-    }
     function supportedGeometry(preset) {
         return preset.geometry.filter(function(geometry) {
             return ['point', 'line', 'area'].indexOf(geometry) !== -1;
-        });
+        }).sort();
     }
     function defaultGeometry(item) {
         if (item.geometry.filter) {
@@ -103,63 +97,57 @@ export function uiSearchAdd(context) {
     }
 
     function drawList(list, presets) {
-        /*var collection = presets.collection.reduce(function(collection, preset) {
+
+        var collection = presets.collection.map(function(preset) {
             if (preset.members) {
-                collection.push(CategoryItem(preset));
+                return CategoryItem(preset);
             } else if (preset.visible()) {
-                collection.push(PresetItem(preset));
+                var supportedGeom = supportedGeometry(preset);
+                if (supportedGeom.length === 1) {
+                    return AddablePresetItem(preset, supportedGeom[0]);
+                }
+                return MultiGeometryPresetItem(preset, supportedGeom);
             }
-            return collection;
-        }, []);*/
+        });
 
         var items = list.selectAll('.list-item')
-            .data(presets.collection, function(d) { return d.id; });
+            .data(collection, function(d) { return d.preset.id; });
 
         items.order();
 
         items.exit()
             .remove();
 
-        var row = items.enter()
+        items.enter();
+        drawItems(items.enter());
+
+        updateForFeatureHiddenState();
+    }
+
+    function drawItems(selection) {
+
+        var row = selection
             .append('div')
-            .attr('class', function(item) { return 'list-item preset-' + item.id.replace('/', '-'); });
+            .attr('class', function(d) { return 'list-item preset-' + d.preset.id.replace(/\//g, '-'); })
+            .attr('id', function(d) {
+                var id = 'search-add-list-item-preset-' + d.preset.id.replace(/\//g, '-');
+                if (d.geometry) {
+                    id += '-' + d.geometry;
+                }
+                return id;
+            });
 
         row.append('button')
             .attr('class', 'choose')
             .on('click', function(d) {
-                if (d3_select(this).classed('disabled')) return;
-
-                var geom = defaultGeometry(d);
-                var markerClass = 'add-preset add-' + geom + ' add-preset-' + d.name()
-                    .replace(/\s+/g, '_')
-                    + '-' + geom; //replace spaces with underscores to avoid css interpretation
-                var modeInfo = {
-                    id: markerClass,
-                    button: markerClass,
-                    preset: d,
-                    geometry: geom
-                };
-                var mode;
-                switch (geom) {
-                    case 'point':
-                    case 'vertex':
-                        mode = modeAddPoint(context, modeInfo);
-                        break;
-                    case 'line':
-                        mode = modeAddLine(context, modeInfo);
-                        break;
-                    case 'area':
-                        mode = modeAddArea(context, modeInfo);
-                }
-                search.node().blur();
-                context.enter(mode);
+                d.choose.call(this);
             });
 
         row.each(function(d) {
             d3_select(this).call(
                 uiPresetIcon()
-                    .geometry(defaultGeometry(d))
-                    .preset(d)
+                    .geometry(d.geometry || defaultGeometry(d.preset))
+                    .preset(d.preset)
                     .sizeClass('small')
             );
         });
@@ -168,18 +156,18 @@ export function uiSearchAdd(context) {
             .append('div')
             .attr('class', 'label-inner')
             .text(function(d) {
-                return d.name();
+                if (d.isSubitem) {
+                    return t('modes.add_' + d.geometry + '.title');
+                }
+                return d.preset.name();
             });
 
         row.each(function(d) {
-            var supportedGeom = supportedGeometry(d);
-            if (supportedGeom.length === 1) {
-                var presetFavorite = uiPresetFavorite(d, supportedGeom[0], context, 'accessory');
+            if (d.geometry) {
+                var presetFavorite = uiPresetFavorite(d.preset,d.geometry, context, 'accessory');
                 d3_select(this).call(presetFavorite.button);
             }
         });
-
-        updateForFeatureHiddenState();
     }
 
     function updateForFeatureHiddenState() {
@@ -190,12 +178,9 @@ export function uiSearchAdd(context) {
         listItem.selectAll('button.choose').call(tooltip().destroyAny);
 
         listItem.each(function(item, index) {
-            if (!isSingularItem(item)) {
-                return;
-            }
-            var geometry = defaultGeometry(item);
+            if (!item.geometry) return;
 
-            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item, geometry);
+            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, item.geometry);
             var isHiddenPreset = !!hiddenPresetFeaturesId;
 
             var button = d3_select(this).selectAll('button.choose');
@@ -214,6 +199,88 @@ export function uiSearchAdd(context) {
                 );
             }
         });
+    }
+
+    function CategoryItem(preset) {
+        function item(selection) {
+
+        }
+        item.preset = preset;
+        item.choose = function() {
+        };
+        return item;
+    }
+
+    function MultiGeometryPresetItem(preset, geometries) {
+
+        var subsection = d3_select(null);
+
+        function item(selection) {
+
+        }
+        item.preset = preset;
+        item.geometries = geometries;
+        item.choose = function() {
+            var selection = d3_select(this);
+            if (selection.classed('disabled')) return;
+
+            var shouldExpand = !selection.classed('expanded');
+
+            selection.classed('expanded', shouldExpand)
+
+            if (shouldExpand) {
+                var subitems = geometries.map(function(geometry) {
+                    return AddablePresetItem(preset, geometry, true);
+                });
+                var selector = '#' + selection.node().closest('.list-item').id + ' + *';
+                subsection = d3_selectAll('.search-add .popover .list').insert('div', selector)
+                    .attr('class', 'subsection');
+                var subitemsEnter = subsection.selectAll('.list-item')
+                    .data(subitems)
+                    .enter();
+                drawItems(subitemsEnter);
+                updateForFeatureHiddenState();
+            } else {
+                subsection.remove();
+            }
+        };
+        return item;
+    }
+
+    function AddablePresetItem(preset, geometry, isSubitem) {
+        function item(selection) {
+
+        }
+        item.isSubitem = isSubitem;
+        item.preset = preset;
+        item.geometry = geometry;
+        item.choose = function() {
+            if (d3_select(this).classed('disabled')) return;
+
+            var markerClass = 'add-preset add-' + geometry +
+                ' add-preset-' + preset.name().replace(/\s+/g, '_') + '-' + geometry;n
+            var modeInfo = {
+                id: markerClass,
+                button: markerClass,
+                preset: preset,
+                geometry: geometry
+            };
+            var mode;
+            switch (geometry) {
+                case 'point':
+                case 'vertex':
+                    mode = modeAddPoint(context, modeInfo);
+                    break;
+                case 'line':
+                    mode = modeAddLine(context, modeInfo);
+                    break;
+                case 'area':
+                    mode = modeAddArea(context, modeInfo);
+            }
+            search.node().blur();
+            context.enter(mode);
+        };
+        return item;
     }
 
     return utilRebind(searchAdd, dispatch, 'on');
