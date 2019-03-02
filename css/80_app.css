@@ -659,8 +659,8 @@ button.add-note svg.icon {
     opacity: 0.55;
 }
 .search-add .subsection .list-item .label {
-    font-weight: normal;
-    letter-spacing: 0.1;
+    /*font-weight: normal;
+    letter-spacing: 0.1;*/
 }
 .search-add .list-item > *:not(button) {
     pointer-events: none;

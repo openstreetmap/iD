@@ -128,9 +128,9 @@ export function uiSearchAdd(context) {
 
         var row = selection
             .append('div')
-            .attr('class', function(d) { return 'list-item preset-' + d.preset.id.replace(/\//g, '-'); })
+            .attr('class', 'list-item')
             .attr('id', function(d) {
-                var id = 'search-add-list-item-preset-' + d.preset.id.replace(/\//g, '-');
+                var id = 'search-add-list-item-preset-' + d.preset.id.replace(/[^a-zA-Z\d:]/g, '-');
                 if (d.geometry) {
                     id += '-' + d.geometry;
                 }
@@ -153,8 +153,6 @@ export function uiSearchAdd(context) {
         });
         row.append('div')
             .attr('class', 'label')
-            .append('div')
-            .attr('class', 'label-inner')
             .text(function(d) {
                 if (d.isSubitem) {
                     return t('modes.add_' + d.geometry + '.title');
@@ -202,9 +200,7 @@ export function uiSearchAdd(context) {
     }
 
     function CategoryItem(preset) {
-        function item(selection) {
-
-        }
+        var item = {};
         item.preset = preset;
         item.choose = function() {
         };
@@ -215,9 +211,7 @@ export function uiSearchAdd(context) {
 
         var subsection = d3_select(null);
 
-        function item(selection) {
-
-        }
+        var item = {};
         item.preset = preset;
         item.geometries = geometries;
         item.choose = function() {
@@ -226,7 +220,7 @@ export function uiSearchAdd(context) {
 
             var shouldExpand = !selection.classed('expanded');
 
-            selection.classed('expanded', shouldExpand)
+            selection.classed('expanded', shouldExpand);
 
             if (shouldExpand) {
                 var subitems = geometries.map(function(geometry) {
@@ -248,9 +242,7 @@ export function uiSearchAdd(context) {
     }
 
     function AddablePresetItem(preset, geometry, isSubitem) {
-        function item(selection) {
-
-        }
+        var item = {};
         item.isSubitem = isSubitem;
         item.preset = preset;
         item.geometry = geometry;
@@ -258,7 +250,7 @@ export function uiSearchAdd(context) {
             if (d3_select(this).classed('disabled')) return;
 
             var markerClass = 'add-preset add-' + geometry +
-                ' add-preset-' + preset.name().replace(/\s+/g, '_') + '-' + geometry;n
+                ' add-preset-' + preset.name().replace(/\s+/g, '_') + '-' + geometry;
             var modeInfo = {
                 id: markerClass,
                 button: markerClass,
