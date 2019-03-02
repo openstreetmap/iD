@@ -15,8 +15,7 @@ export function modeAddArea(context, customMode) {
         id: 'add-area',
         button: 'area',
         title: t('modes.add_area.title'),
-        description: t('modes.add_area.description'),
-        key: '3'
+        description: t('modes.add_area.description')
     };
 
     var behavior = behaviorAddWay(context)

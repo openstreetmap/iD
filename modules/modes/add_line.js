@@ -15,8 +15,7 @@ export function modeAddLine(context, customMode) {
         id: 'add-line',
         button: 'line',
         title: t('modes.add_line.title'),
-        description: t('modes.add_line.description'),
-        key: '2'
+        description: t('modes.add_line.description')
     };
 
     var behavior = behaviorAddWay(context)

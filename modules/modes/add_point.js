@@ -11,8 +11,7 @@ export function modeAddPoint(context, customMode) {
         id: 'add-point',
         button: 'point',
         title: t('modes.add_point.title'),
-        description: t('modes.add_point.description'),
-        key: '1'
+        description: t('modes.add_point.description')
     };
 
     var behavior = behaviorDraw(context)

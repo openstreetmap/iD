@@ -44,6 +44,7 @@ export function uiSearchAdd(context) {
             .call(utilNoAuto)
             .on('focus', function() {
                 search.attr('focusing', true);
+                search.node().setSelectionRange(0, search.property('value').length);
                 popover.classed('hide', false);
             })
             .on('blur', function() {
@@ -86,6 +87,12 @@ export function uiSearchAdd(context) {
             //.call(drawList, context.presets().defaults(geometry, 36));
 
         context.features().on('change.search-add', updateForFeatureHiddenState);
+
+        context.keybinding().on('1', function() {
+            search.node().focus();
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+        });
     }
 
     function drawList(list, presets) {
@@ -98,9 +105,9 @@ export function uiSearchAdd(context) {
                     return ['point', 'line', 'area'].indexOf(geometry) !== -1;
                 }).sort();
                 if (supportedGeometry.length === 1) {
-                    return AddablePresetItem(preset, supportedGeom[0]);
+                    return AddablePresetItem(preset, supportedGeometry[0]);
                 }
-                return MultiGeometryPresetItem(preset, supportedGeom);
+                return MultiGeometryPresetItem(preset, supportedGeometry);
             }
         });
 
