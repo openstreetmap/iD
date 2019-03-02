@@ -4020,7 +4020,7 @@ en:
       highway/footway:
         # highway=footway
         name: Foot Path
-        # 'terms: hike,hiking,trackway,trail,walk'
+        # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
       highway/footway/conveying:
         # 'highway=footway, conveying=*'
@@ -4187,7 +4187,7 @@ en:
       highway/steps:
         # highway=steps
         name: Steps
-        # 'terms: stairs,staircase'
+        # 'terms: stairs,staircase,stairway'
         terms: '<translate with synonyms or related terms for ''Steps'', separated by commas>'
       highway/steps/conveying:
         # 'highway=steps, conveying=*'

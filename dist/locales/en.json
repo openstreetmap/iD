@@ -5601,7 +5601,7 @@
                 },
                 "highway/footway": {
                     "name": "Foot Path",
-                    "terms": "hike,hiking,trackway,trail,walk"
+                    "terms": "hike,hiking,promenade,trackway,trail,walk"
                 },
                 "highway/footway/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
@@ -5745,7 +5745,7 @@
                 },
                 "highway/steps": {
                     "name": "Steps",
-                    "terms": "stairs,staircase"
+                    "terms": "stairs,staircase,stairway"
                 },
                 "highway/steps/conveying": {
                     "name": "Escalator",
