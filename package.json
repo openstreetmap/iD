@@ -60,7 +60,7 @@
     "d3": "4.13.0",
     "ecstatic": "^3.0.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
-    "eslint": "^5.0.0",
+    "eslint": "^5.15.0",
     "esm": "~3.2.1",
     "gaze": "^1.1.1",
     "glob": "^7.1.0",
