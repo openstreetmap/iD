@@ -59,6 +59,11 @@ export function uiFeatureList(context) {
             .append('div')
             .attr('class', 'feature-list cf');
 
+        list
+            .append('p')
+            .attr('class', 'search-hints')
+            .text(t('geocoder.search_hints'));
+
         context
             .on('exit.feature-list', clearSearch);
         context.map()
@@ -229,6 +234,9 @@ export function uiFeatureList(context) {
 
             resultsIndicator.append('span')
                 .attr('class', 'entity-name');
+
+            list.selectAll('.search-hints')
+                .style('display', value.length ? 'none' : 'block');
 
             list.selectAll('.no-results-item .entity-name')
                 .text(noResultsWorldwide ? t('geocoder.no_results_worldwide') : t('geocoder.no_results_visible'));

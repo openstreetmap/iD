@@ -875,6 +875,13 @@ a.hide-toggle {
 .feature-list  {
     width: 100%;
 }
+
+.search-hints {
+    padding: 20px;
+    font-size: 14px;
+    text-align: left;
+}
+
 .no-results-item,
 .geocode-item,
 .feature-list-item {

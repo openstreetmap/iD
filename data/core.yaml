@@ -415,6 +415,11 @@ en:
     search: Search worldwide...
     no_results_visible: No results in visible map area
     no_results_worldwide: No results found
+    search_hints: >
+      You can search for features by name (like California, Manhattan, or White House)
+      or by type (like cafe or restaurant). You can search by lat/lng coordinates
+      (e.g. 39.12, -75.99), or plus codes. You can also enter ids of OSM elements
+      (e.g. n1234567 for a node, w9876543 for a way/area, r13579864 for a relation).
   geolocate:
     title: Show My Location
     locating: "Locating, please wait..."
