@@ -159,7 +159,17 @@ export function uiSearchAdd(context) {
     function focusListItem(selection) {
         if (!selection.empty()) {
             selection.classed('focused', true);
-            //selection.nodes()[0].scrollIntoView();
+            var node = selection.nodes()[0];
+            var popoverNode = popover.node();
+            var nodeRect = node.getBoundingClientRect();
+
+            // scroll to keep the focused item visible
+            if (node.offsetTop < popoverNode.scrollTop) {
+                popoverNode.scrollTop = node.offsetTop;
+
+            } else if (node.offsetTop + node.offsetHeight > popoverNode.scrollTop + popoverNode.offsetHeight) {
+                popoverNode.scrollTop = node.offsetTop + node.offsetHeight - popoverNode.offsetHeight;
+            }
         }
     }
 
