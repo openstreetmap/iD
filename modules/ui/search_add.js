@@ -25,7 +25,7 @@ export function uiSearchAdd(context) {
     var presets;
     var search = d3_select(null), popover = d3_select(null), list = d3_select(null);
 
-    var shownGeometry = ['vertex', 'point', 'line', 'area'];
+    var shownGeometry = ['area', 'line', 'point', 'vertex'];
 
     function searchAdd(selection) {
 
@@ -133,7 +133,7 @@ export function uiSearchAdd(context) {
                 var value = search.property('value');
                 if (value.length) {
                     popover.selectAll('.subsection').remove();
-                    var results = presets.search(value);
+                    var results = presets.search(value, shownGeometry);
                     list.call(drawList, results);
                     popover.selectAll('.list .list-item.focused')
                         .classed('focused', false);

@@ -152,8 +152,13 @@ export function presetCollection(collection) {
             ).slice(0, maxSearchResults - 1);
 
             if (geometry) {
-                var other = presets.item(geometry);
-                results = results.concat(other);
+                if (typeof geometry === 'string') {
+                    results.push(presets.item(geometry));
+                } else {
+                    geometry.forEach(function(geom) {
+                        results.push(presets.item(geom));
+                    });
+                }
             }
 
             return presetCollection(_uniq(results));
