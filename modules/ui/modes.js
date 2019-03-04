@@ -74,13 +74,13 @@ export function uiModes(context) {
             var favoritePresets = context.getFavoritePresets();
             var favoriteModes = favoritePresets.map(function(d) {
                 var preset = context.presets().item(d.id);
-                var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + preset.name()
-                    .replace(/\s+/g, '_')
-                    + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
+                var presetName = preset.name();
+                var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + presetName.replace(/\s+/g, '_')
+                    + '-' + d.geom; // replace spaces with underscores to avoid css interpretation
                 if (preset.isFallback()) {
                     markerClass += ' add-generic-preset';
                 }
-                var presetName = t('presets.presets.' + preset.id + '.name');
+
                 var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
                     return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
                 });
