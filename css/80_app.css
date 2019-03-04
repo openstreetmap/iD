@@ -659,9 +659,11 @@ button.add-note svg.icon {
 .search-add .list-item.disabled .label {
     opacity: 0.55;
 }
-.search-add .subsection .list-item .label {
-    /*font-weight: normal;
-    letter-spacing: 0.1;*/
+[dir='ltr'] .search-add .list-item .label .icon.inline {
+    margin-left: 0;
+}
+[dir='rtl'] .search-add .list-item .label .icon.inline {
+    margin-right: 0;
 }
 .search-add .list-item > *:not(button) {
     pointer-events: none;

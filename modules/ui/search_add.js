@@ -54,12 +54,13 @@ export function uiSearchAdd(context) {
             .on('keydown', function(){
                 // up/down arrow key navigation
 
+                var nextFocus,
+                    priorFocus;
                 if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
-                    var nextFocus,
-                        priorFocus = popover.selectAll('.list .list-item.focused');
+                    priorFocus = popover.selectAll('.list .list-item.focused');
                     if (priorFocus.empty()) {
                         nextFocus = popover.selectAll('.list > .list-item:first-child');
                     } else {
@@ -78,9 +79,9 @@ export function uiSearchAdd(context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
-                    var priorFocus = popover.selectAll('.list .list-item.focused');
+                    priorFocus = popover.selectAll('.list .list-item.focused');
                     if (!priorFocus.empty()) {
-                        var nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
+                        nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
                         if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
                             nextFocus = nextFocus.selectAll('.list-item:last-child');
                         }
@@ -240,8 +241,17 @@ export function uiSearchAdd(context) {
                     .sizeClass('small')
             );
         });
-        row.append('div')
-            .attr('class', 'label')
+        var label = row.append('div')
+            .attr('class', 'label');
+
+        label.each(function(d) {
+            if (!d.geometry) {
+                d3_select(this)
+                    .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
+            }
+        });
+
+        label.append('span')
             .text(function(d) {
                 if (d.isSubitem) {
                     return t('modes.add_' + d.geometry + '.title');
@@ -307,15 +317,22 @@ export function uiSearchAdd(context) {
             var selection = d3_select(this);
             if (selection.classed('disabled')) return;
 
+            var listItemNode = selection.node().closest('.list-item');
+
             var shouldExpand = !selection.classed('expanded');
 
             selection.classed('expanded', shouldExpand);
+
+            var iconName = shouldExpand ?
+                '#iD-icon-down' : (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
+            d3_select(listItemNode).selectAll('.label svg.icon use')
+                .attr('href', iconName);
 
             if (shouldExpand) {
                 var subitems = geometries.map(function(geometry) {
                     return AddablePresetItem(preset, geometry, true);
                 });
-                var selector = '#' + selection.node().closest('.list-item').id + ' + *';
+                var selector = '#' + listItemNode.id + ' + *';
                 subsection = d3_selectAll('.search-add .popover .list').insert('div', selector)
                     .attr('class', 'subsection');
                 var subitemsEnter = subsection.selectAll('.list-item')
