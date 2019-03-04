@@ -6,7 +6,7 @@ This file documents efforts toward establishing a public API for iD.
 
 iD supports several URL parameters. When constructing a URL to a standalone instance
 of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters are available
-in the hash portion of the URL:
+**in the hash portion of the URL**:
 
 * __`map`__ - A slash separated `zoom/latitude/longitude`.<br/>
    _Example:_ `map=20.00/38.90085/-77.02271`
@@ -43,7 +43,7 @@ in the hash portion of the URL:
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Must be one of the [supported locales](https://github.com/openstreetmap/iD/tree/master/dist/locales). The default locale is set by the browser.<br/>
-  _Example:_ `locale=de`
+  _Example:_ `locale=en-US`, `locale=de`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`walkthrough=true`__ - Start the walkthrough automatically
 
@@ -51,7 +51,7 @@ in the hash portion of the URL:
 
 When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
-are available as regular URL query parameters:
+are available as **regular URL query parameters**:
 
 * __`map`__ - same as standalone
 * __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
@@ -65,6 +65,7 @@ are available as regular URL query parameters:
 * __`comment`__ - same as standalone
 * __`source`__ - same as standalone
 * __`hashtags`__ - same as standalone
+* __`locale`__ - same as standalone, but the default locale is set by the language settings in your OSM user account.
 * __`walkthrough`__ - same as standalone
 
 
