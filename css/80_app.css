@@ -1177,7 +1177,7 @@ a.hide-toggle {
     height: 100%;
 }
 .preset-icon-container.small .preset-icon.point-geom {
-    transform: translateY(-5%) scale(0.32);
+    transform: translateY(-7%) scale(0.27);
 }
 .preset-icon.framed {
     transform: scale(0.4);

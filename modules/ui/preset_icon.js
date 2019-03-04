@@ -28,7 +28,6 @@ export function uiPresetIcon() {
     }
 
     function renderPointBorder(enter) {
-        var d = "M20,7 C14.4766667,7 10,10.207551 10,16.6166837 C10,23.0278061 20,33 20,33 C20,33 30,23.0278061 30,16.6166837 C30,10.207551 25.5233333,7 20,7 Z"
         var w = 40, h = 40;
         enter = enter
             .append('svg')
@@ -38,7 +37,8 @@ export function uiPresetIcon() {
             .attr('viewBox', '0 0 ' + w + ' ' + h);
 
         enter.append('path')
-            .attr('d', d);
+            .attr('transform', 'translate(11.5, 8)')
+            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
     function renderCircleFill(fillEnter) {
@@ -240,7 +240,7 @@ export function uiPresetIcon() {
             });
 
         icon.selectAll('use')
-            .attr('href', '#' + picon + (isMaki ? '-15' : ''));
+            .attr('href', '#' + picon + (isMaki ? (isSmall() ? '-11' : '-15') : ''));
     }
 
 
