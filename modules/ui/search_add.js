@@ -298,51 +298,70 @@ export function uiSearchAdd(context) {
         });
     }
 
+    function chooseExpandable(item, itemSelection) {
+
+        var shouldExpand = !itemSelection.classed('expanded');
+
+        itemSelection.classed('expanded', shouldExpand);
+
+        var iconName = shouldExpand ?
+            '#iD-icon-down' : (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
+        itemSelection.selectAll('.label svg.icon use')
+            .attr('href', iconName);
+
+        if (shouldExpand) {
+            var subitems = item.subitems();
+            var selector = '#' + itemSelection.node().id + ' + *';
+            item.subsection = d3_selectAll('.search-add .popover .list').insert('div', selector)
+                .attr('class', 'subsection');
+            var subitemsEnter = item.subsection.selectAll('.list-item')
+                .data(subitems)
+                .enter();
+            drawItems(subitemsEnter);
+            updateForFeatureHiddenState();
+        } else {
+            item.subsection.remove();
+        }
+    }
+
     function CategoryItem(preset) {
         var item = {};
+        item.subsection = d3_select(null);
         item.preset = preset;
         item.choose = function() {
+            var selection = d3_select(this);
+            if (selection.classed('disabled')) return;
+            chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
+        item.subitems = function() {
+            return preset.members.collection.map(function(preset) {
+                var supportedGeometry = preset.geometry.filter(function(geometry) {
+                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                }).sort();
+                if (supportedGeometry.length === 1) {
+                    return AddablePresetItem(preset, supportedGeometry[0]);
+                }
+                return MultiGeometryPresetItem(preset, supportedGeometry);
+            });
+        }
         return item;
     }
 
     function MultiGeometryPresetItem(preset, geometries) {
 
-        var subsection = d3_select(null);
-
         var item = {};
+        item.subsection = d3_select(null);
         item.preset = preset;
         item.geometries = geometries;
         item.choose = function() {
             var selection = d3_select(this);
             if (selection.classed('disabled')) return;
-
-            var listItemNode = selection.node().closest('.list-item');
-
-            var shouldExpand = !selection.classed('expanded');
-
-            selection.classed('expanded', shouldExpand);
-
-            var iconName = shouldExpand ?
-                '#iD-icon-down' : (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
-            d3_select(listItemNode).selectAll('.label svg.icon use')
-                .attr('href', iconName);
-
-            if (shouldExpand) {
-                var subitems = geometries.map(function(geometry) {
-                    return AddablePresetItem(preset, geometry, true);
-                });
-                var selector = '#' + listItemNode.id + ' + *';
-                subsection = d3_selectAll('.search-add .popover .list').insert('div', selector)
-                    .attr('class', 'subsection');
-                var subitemsEnter = subsection.selectAll('.list-item')
-                    .data(subitems)
-                    .enter();
-                drawItems(subitemsEnter);
-                updateForFeatureHiddenState();
-            } else {
-                subsection.remove();
-            }
+            chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
+        };
+        item.subitems = function() {
+            return geometries.map(function(geometry) {
+                return AddablePresetItem(preset, geometry, true);
+            });
         };
         return item;
     }
