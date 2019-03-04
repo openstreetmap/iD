@@ -65,7 +65,7 @@ are available as **regular URL query parameters**:
 * __`comment`__ - same as standalone
 * __`source`__ - same as standalone
 * __`hashtags`__ - same as standalone
-* __`locale`__ - same as standalone, but the default locale is set by the languate settings in your OSM user account.
+* __`locale`__ - same as standalone, but the default locale is set by the language settings in your OSM user account.
 * __`walkthrough`__ - same as standalone
 
 
