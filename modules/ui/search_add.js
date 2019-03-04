@@ -28,9 +28,11 @@ export function uiSearchAdd(context) {
     var presets;
     var search = d3_select(null), popover = d3_select(null), list = d3_select(null);
 
+    var shownGeometry = ['point', 'line', 'area'];
+
     function searchAdd(selection) {
 
-        presets = context.presets().matchAnyGeometry(['point', 'line', 'area']);
+        presets = context.presets().matchAnyGeometry(shownGeometry);
 
         var searchWrap = selection
             .append('div')
@@ -194,7 +196,7 @@ export function uiSearchAdd(context) {
                 return CategoryItem(preset);
             } else if (preset.visible()) {
                 var supportedGeometry = preset.geometry.filter(function(geometry) {
-                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                    return shownGeometry.indexOf(geometry) !== -1;
                 }).sort();
                 if (supportedGeometry.length === 1) {
                     return AddablePresetItem(preset, supportedGeometry[0]);
@@ -325,7 +327,7 @@ export function uiSearchAdd(context) {
         if (shouldExpand) {
             var subitems = item.subitems();
             var selector = '#' + itemSelection.node().id + ' + *';
-            item.subsection = d3_selectAll('.search-add .popover .list').insert('div', selector)
+            item.subsection = d3_select(itemSelection.node().parentElement).insert('div', selector)
                 .attr('class', 'subsection');
             var subitemsEnter = item.subsection.selectAll('.list-item')
                 .data(subitems)
@@ -347,9 +349,9 @@ export function uiSearchAdd(context) {
             chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
         item.subitems = function() {
-            return preset.members.collection.map(function(preset) {
+            return preset.members.matchAnyGeometry(shownGeometry).collection.map(function(preset) {
                 var supportedGeometry = preset.geometry.filter(function(geometry) {
-                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                    return shownGeometry.indexOf(geometry) !== -1;
                 }).sort();
                 if (supportedGeometry.length === 1) {
                     return AddablePresetItem(preset, supportedGeometry[0]);
