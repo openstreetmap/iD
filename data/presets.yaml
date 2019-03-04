@@ -5,17 +5,11 @@ en:
         name: Barrier Features
       category-building:
         name: Building Features
-      category-golf-area:
-        name: Golf Features
-      category-golf-line:
+      category-golf:
         name: Golf Features
       category-landuse:
         name: Land Use Features
-      category-natural-area:
-        name: Natural Features
-      category-natural-line:
-        name: Natural Features
-      category-natural-point:
+      category-natural:
         name: Natural Features
       category-path:
         name: Path Features
@@ -29,9 +23,7 @@ en:
         name: Route Features
       category-utility:
         name: Utility Features
-      category-water-area:
-        name: Water Features
-      category-water-line:
+      category-water:
         name: Water Features
     fields:
       access:

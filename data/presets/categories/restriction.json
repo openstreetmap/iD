@@ -1,6 +1,5 @@
 {
     "icon": "iD-restriction",
-    "geometry": "relation",
     "name": "Restriction Features",
     "members": [
         "type/restriction/no_left_turn",

@@ -14,6 +14,17 @@ export function presetCategory(id, category, all) {
     }));
 
 
+    category.geometry = category.members.collection.reduce(function(geometries, preset) {
+        for (var index in preset.geometry) {
+            var geometry = preset.geometry[index];
+            if (geometries.indexOf(geometry) === -1) {
+                geometries.push(geometry);
+            }
+        }
+        return geometries;
+    }, []);
+
+
     category.matchGeometry = function(geometry) {
         return category.geometry.indexOf(geometry) >= 0;
     };

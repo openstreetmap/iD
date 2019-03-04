@@ -1194,6 +1194,9 @@ a.hide-toggle {
 .preset-icon-iD {
     transform: scale(1);
 }
+.preset-icon-iD.framed {
+    transform: scale(0.74);
+}
 .preset-icon-iD.framed.line-geom {
     transform: translateY(-30%) scale(0.74);
 }

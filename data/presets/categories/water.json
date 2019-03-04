@@ -1,8 +1,11 @@
 {
-    "icon": "iD-category-water",
-    "geometry": "line",
+    "icon": "maki-water",
     "name": "Water Features",
     "members": [
+        "natural/water/lake",
+        "natural/water/pond",
+        "natural/water/reservoir",
+        "natural/water",
         "waterway/river",
         "waterway/stream",
         "waterway/canal",

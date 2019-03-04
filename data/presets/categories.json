@@ -2,7 +2,6 @@
   "categories": {
     "category-barrier": {
       "icon": "maki-roadblock",
-      "geometry": "line",
       "name": "Barrier Features",
       "members": [
         "barrier/fence",
@@ -16,7 +15,6 @@
     },
     "category-building": {
       "icon": "maki-building",
-      "geometry": "area",
       "name": "Building Features",
       "members": [
         "building",
@@ -29,9 +27,8 @@
         "building/residential"
       ]
     },
-    "category-golf-area": {
+    "category-golf": {
       "icon": "maki-golf",
-      "geometry": "area",
       "name": "Golf Features",
       "members": [
         "golf/fairway",
@@ -41,14 +38,7 @@
         "golf/bunker",
         "golf/tee",
         "golf/water_hazard",
-        "golf/driving_range"
-      ]
-    },
-    "category-golf-line": {
-      "icon": "maki-golf",
-      "geometry": "line",
-      "name": "Golf Features",
-      "members": [
+        "golf/driving_range",
         "golf/hole",
         "golf/cartpath",
         "golf/cartpath_service",
@@ -57,7 +47,6 @@
     },
     "category-landuse": {
       "icon": "maki-landuse",
-      "geometry": "area",
       "name": "Land Use Features",
       "members": [
         "landuse/residential",
@@ -74,9 +63,8 @@
         "landuse/religious"
       ]
     },
-    "category-natural-area": {
+    "category-natural": {
       "icon": "maki-natural",
-      "geometry": "area",
       "name": "Natural Features",
       "members": [
         "natural/water",
@@ -88,20 +76,9 @@
         "natural/bare_rock",
         "natural/beach",
         "natural/cave_entrance",
-        "natural/glacier"
-      ]
-    },
-    "category-natural-line": {
-      "icon": "maki-natural",
-      "geometry": "line",
-      "name": "Natural Features",
-      "members": ["natural/coastline", "natural/tree_row"]
-    },
-    "category-natural-point": {
-      "icon": "maki-natural",
-      "geometry": "point",
-      "name": "Natural Features",
-      "members": [
+        "natural/glacier",
+        "natural/coastline",
+        "natural/tree_row",
         "natural/peak",
         "natural/cliff",
         "natural/beach",
@@ -110,7 +87,6 @@
     },
     "category-path": {
       "icon": "iD-category-path",
-      "geometry": "line",
       "name": "Path Features",
       "members": [
         "highway/footway/marked",
@@ -125,20 +101,21 @@
     },
     "category-rail": {
       "icon": "iD-category-rail",
-      "geometry": "line",
       "name": "Rail Features",
       "members": [
         "railway/rail",
         "railway/subway",
         "railway/tram",
-        "railway/monorail",
         "railway/disused",
-        "railway/abandoned"
+        "railway/level_crossing",
+        "railway/crossing",
+        "railway/switch",
+        "railway/buffer_stop",
+        "railway/signal"
       ]
     },
     "category-restriction": {
       "icon": "iD-restriction",
-      "geometry": "relation",
       "name": "Restriction Features",
       "members": [
         "type/restriction/no_left_turn",
@@ -154,7 +131,6 @@
     },
     "category-road": {
       "icon": "iD-category-roads",
-      "geometry": "line",
       "name": "Road Features",
       "members": [
         "highway/residential",
@@ -177,7 +153,6 @@
     },
     "category-route": {
       "icon": "iD-route",
-      "geometry": "relation",
       "name": "Route Features",
       "members": [
         "type/route/road",
@@ -201,7 +176,6 @@
     },
     "category-utility": {
       "icon": "iD-category-utility",
-      "geometry": "line",
       "name": "Utility Features",
       "members": [
         "power/line",
@@ -210,22 +184,14 @@
         "power/cable/underground"
       ]
     },
-    "category-water-area": {
+    "category-water": {
       "icon": "maki-water",
-      "geometry": "area",
       "name": "Water Features",
       "members": [
         "natural/water/lake",
         "natural/water/pond",
         "natural/water/reservoir",
-        "natural/water"
-      ]
-    },
-    "category-water-line": {
-      "icon": "iD-category-water",
-      "geometry": "line",
-      "name": "Water Features",
-      "members": [
+        "natural/water",
         "waterway/river",
         "waterway/stream",
         "waterway/canal",

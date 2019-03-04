@@ -339,11 +339,12 @@ export function uiPresetList(context) {
                     .style('padding-bottom', '0px');
             } else {
                 shown = true;
-                sublist.call(drawList, preset.members);
+                var members = preset.members.matchGeometry(context.geometry(_entityID));
+                sublist.call(drawList, members);
                 box.transition()
                     .duration(200)
                     .style('opacity', '1')
-                    .style('max-height', 200 + preset.members.collection.length * 190 + 'px')
+                    .style('max-height', 200 + members.collection.length * 190 + 'px')
                     .style('padding-bottom', '10px');
             }
         };
