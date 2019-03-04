@@ -69,6 +69,12 @@ export function uiSearchAdd(context) {
                             nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling)
                                 .selectAll('.list-item:first-child');
                         }
+                        if (nextFocus.empty()) {
+                            var parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                            if (parentSubsection && parentSubsection.nextElementSibling) {
+                                nextFocus = d3_select(parentSubsection.nextElementSibling);
+                            }
+                        }
                     }
                     if (!nextFocus.empty()) {
                         focusListItem(nextFocus);
@@ -81,9 +87,16 @@ export function uiSearchAdd(context) {
 
                     priorFocus = popover.selectAll('.list .list-item.focused');
                     if (!priorFocus.empty()) {
+
                         nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
                         if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
                             nextFocus = nextFocus.selectAll('.list-item:last-child');
+                        }
+                        if (nextFocus.empty()) {
+                            var parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                            if (parentSubsection && parentSubsection.previousElementSibling) {
+                                nextFocus = d3_select(parentSubsection.previousElementSibling);
+                            }
                         }
                         if (!nextFocus.empty()) {
                             focusListItem(nextFocus);

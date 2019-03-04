@@ -680,7 +680,7 @@ button.add-note svg.icon {
 .search-add .list-item button.choose:focus {
     background: #fff;
 }
-.search-add .list-item.focused:not(.disabled) button {
+.search-add .list-item.focused:not(.disabled) button.choose {
     background: #e8ebff;
 }
 .search-add .list-item button.choose.disabled {
