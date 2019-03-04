@@ -6944,8 +6944,9 @@ en:
         name: Waterway
         terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       vertex:
-        name: Other
-        terms: '<translate with synonyms or related terms for ''Other'', separated by commas>'
+        name: Vertex
+        # 'terms: other'
+        terms: '<translate with synonyms or related terms for ''Vertex'', separated by commas>'
       waterway:
         # waterway=*
         name: Waterway

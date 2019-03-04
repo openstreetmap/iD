@@ -82,7 +82,7 @@ export function uiModes(context) {
                 }
                 var presetName = t('presets.presets.' + preset.id + '.name');
                 var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
-                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                    return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
                 });
                 var tooltipTitleID = 'modes.add_preset.title';
                 if (relevantMatchingGeometry.length !== 1) {

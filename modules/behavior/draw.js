@@ -129,13 +129,11 @@ export function behaviorDraw(context) {
 
         var mode = context.mode();
 
-        var allowsSnappingToWay = (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'));
-
         if (target && target.type === 'node' && allowsVertex(target)) {   // Snap to a node
             dispatch.call('clickNode', this, target, d);
             return;
 
-        } else if (target && target.type === 'way' && allowsSnappingToWay) {   // Snap to a way
+        } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
             var choice = geoChooseEdge(
                 context.childNodes(target), context.mouse(), context.projection, context.activeID()
             );
@@ -144,8 +142,10 @@ export function behaviorDraw(context) {
                 dispatch.call('clickWay', this, choice.loc, edge, d);
                 return;
             }
+        } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
+            dispatch.call('click', this, context.map().mouseCoordinates(), d);
         }
-        dispatch.call('click', this, context.map().mouseCoordinates(), d);
+
     }
 
 

@@ -29,6 +29,9 @@
                 "description": "Add restaurants, monuments, postal boxes or other points to the map.",
                 "tail": "Click on the map to add a point."
             },
+            "add_vertex": {
+                "title": "Vertex"
+            },
             "add_note": {
                 "title": "Note",
                 "description": "Spotted an issue? Let other mappers know.",
@@ -44,6 +47,9 @@
                 },
                 "area": {
                     "title": "Add {feature} as an area"
+                },
+                "vertex": {
+                    "title": "Add {feature} as a vertex"
                 }
             },
             "browse": {
@@ -8127,8 +8133,8 @@
                     "terms": ""
                 },
                 "vertex": {
-                    "name": "Other",
-                    "terms": ""
+                    "name": "Vertex",
+                    "terms": "other"
                 },
                 "waterway/riverbank": {
                     "name": "Riverbank",

@@ -25,7 +25,7 @@ export function uiSearchAdd(context) {
     var presets;
     var search = d3_select(null), popover = d3_select(null), list = d3_select(null);
 
-    var shownGeometry = ['point', 'line', 'area'];
+    var shownGeometry = ['vertex', 'point', 'line', 'area'];
 
     function searchAdd(selection) {
 
@@ -192,20 +192,28 @@ export function uiSearchAdd(context) {
         }
     }
 
+    function itemForPreset(preset) {
+        var supportedGeometry = preset.geometry.filter(function(geometry) {
+            return shownGeometry.indexOf(geometry) !== -1;
+        }).sort();
+        var vertexIndex = supportedGeometry.indexOf('vertex');
+        if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
+            // both point and vertex allowed, just show point
+            supportedGeometry.splice(vertexIndex, 1);
+        }
+        if (supportedGeometry.length === 1) {
+            return AddablePresetItem(preset, supportedGeometry[0]);
+        }
+        return MultiGeometryPresetItem(preset, supportedGeometry);
+    }
+
     function drawList(list, presets) {
 
         var collection = presets.collection.map(function(preset) {
             if (preset.members) {
                 return CategoryItem(preset);
-            } else if (preset.visible()) {
-                var supportedGeometry = preset.geometry.filter(function(geometry) {
-                    return shownGeometry.indexOf(geometry) !== -1;
-                }).sort();
-                if (supportedGeometry.length === 1) {
-                    return AddablePresetItem(preset, supportedGeometry[0]);
-                }
-                return MultiGeometryPresetItem(preset, supportedGeometry);
             }
+            return itemForPreset(preset);
         });
 
         var items = list.selectAll('.list-item')
@@ -279,7 +287,7 @@ export function uiSearchAdd(context) {
 
         row.each(function(d) {
             if (d.geometry) {
-                var presetFavorite = uiPresetFavorite(d.preset,d.geometry, context, 'accessory');
+                var presetFavorite = uiPresetFavorite(d.preset, d.geometry, context, 'accessory');
                 d3_select(this).call(presetFavorite.button);
             }
         });
@@ -354,13 +362,7 @@ export function uiSearchAdd(context) {
         };
         item.subitems = function() {
             return preset.members.matchAnyGeometry(shownGeometry).collection.map(function(preset) {
-                var supportedGeometry = preset.geometry.filter(function(geometry) {
-                    return shownGeometry.indexOf(geometry) !== -1;
-                }).sort();
-                if (supportedGeometry.length === 1) {
-                    return AddablePresetItem(preset, supportedGeometry[0]);
-                }
-                return MultiGeometryPresetItem(preset, supportedGeometry);
+                return itemForPreset(preset);
             });
         };
         return item;
