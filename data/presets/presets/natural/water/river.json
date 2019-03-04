@@ -1,5 +1,5 @@
 {
-    "icon": "maki-water",
+    "icon": "iD-waterway-river",
     "fields": [
         "{natural/water}",
         "tidal"
