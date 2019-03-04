@@ -13,13 +13,10 @@ import {
 } from '../modes';
 
 import { t, textDirection } from '../util/locale';
-import { actionChangePreset } from '../actions/index';
-import { operationDelete } from '../operations/index';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { uiPresetFavorite } from './preset_favorite';
 import { uiPresetIcon } from './preset_icon';
-import { uiTagReference } from './tag_reference';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 
@@ -57,7 +54,8 @@ export function uiSearchAdd(context) {
                 // up/down arrow key navigation
 
                 var nextFocus,
-                    priorFocus;
+                    priorFocus,
+                    parentSubsection;
                 if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
@@ -72,7 +70,7 @@ export function uiSearchAdd(context) {
                                 .selectAll('.list-item:first-child');
                         }
                         if (nextFocus.empty()) {
-                            var parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                            parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
                             if (parentSubsection && parentSubsection.nextElementSibling) {
                                 nextFocus = d3_select(parentSubsection.nextElementSibling);
                             }
@@ -95,7 +93,7 @@ export function uiSearchAdd(context) {
                             nextFocus = nextFocus.selectAll('.list-item:last-child');
                         }
                         if (nextFocus.empty()) {
-                            var parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                            parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
                             if (parentSubsection && parentSubsection.previousElementSibling) {
                                 nextFocus = d3_select(parentSubsection.previousElementSibling);
                             }
@@ -133,7 +131,6 @@ export function uiSearchAdd(context) {
             })
             .on('input', function () {
                 var value = search.property('value');
-                //list.classed('filtered', value.length);
                 if (value.length) {
                     popover.selectAll('.subsection').remove();
                     var results = presets.search(value);
@@ -142,7 +139,7 @@ export function uiSearchAdd(context) {
                         .classed('focused', false);
                     focusListItem(popover.selectAll('.list > .list-item:first-child'));
                 } else {
-                    //list.call(drawList, context.presets().defaults(geometry, 36));
+                    popover.selectAll('.list > *').remove();
                 }
             });
 
@@ -175,17 +172,23 @@ export function uiSearchAdd(context) {
     function focusListItem(selection) {
         if (!selection.empty()) {
             selection.classed('focused', true);
-            var node = selection.nodes()[0];
-            var popoverNode = popover.node();
-            var nodeRect = node.getBoundingClientRect();
-
             // scroll to keep the focused item visible
-            if (node.offsetTop < popoverNode.scrollTop) {
-                popoverNode.scrollTop = node.offsetTop;
+            scrollPopoverToShow(selection)
+        }
+    }
 
-            } else if (node.offsetTop + node.offsetHeight > popoverNode.scrollTop + popoverNode.offsetHeight) {
-                popoverNode.scrollTop = node.offsetTop + node.offsetHeight - popoverNode.offsetHeight;
-            }
+    function scrollPopoverToShow(selection) {
+        if (selection.empty()) return;
+
+        var node = selection.nodes()[0];
+        var popoverNode = popover.node();
+
+        if (node.offsetTop < popoverNode.scrollTop) {
+            popoverNode.scrollTop = node.offsetTop;
+
+        } else if (node.offsetTop + node.offsetHeight > popoverNode.scrollTop + popoverNode.offsetHeight &&
+            node.offsetHeight < popoverNode.offsetHeight) {
+            popoverNode.scrollTop = node.offsetTop + node.offsetHeight - popoverNode.offsetHeight;
         }
     }
 
@@ -231,13 +234,13 @@ export function uiSearchAdd(context) {
                 }
                 return id;
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function() {
                 list.selectAll('.list-item.focused')
                     .classed('focused', false);
                 d3_select(this)
                     .classed('focused', true);
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function() {
                 d3_select(this)
                     .classed('focused', false);
             });
@@ -334,6 +337,7 @@ export function uiSearchAdd(context) {
                 .enter();
             drawItems(subitemsEnter);
             updateForFeatureHiddenState();
+            scrollPopoverToShow(item.subsection);
         } else {
             item.subsection.remove();
         }
@@ -358,7 +362,7 @@ export function uiSearchAdd(context) {
                 }
                 return MultiGeometryPresetItem(preset, supportedGeometry);
             });
-        }
+        };
         return item;
     }
 
