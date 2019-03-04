@@ -119,6 +119,7 @@ export function uiSearchAdd(context) {
                 var value = search.property('value');
                 //list.classed('filtered', value.length);
                 if (value.length) {
+                    popover.selectAll('.subsection').remove();
                     var results = presets.search(value);
                     list.call(drawList, results);
                     popover.selectAll('.list .list-item.focused')

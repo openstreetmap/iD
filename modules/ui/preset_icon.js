@@ -23,6 +23,8 @@ export function uiPresetIcon() {
             return 'iD-other-line';
         else if (geom === 'vertex')
             return p.isFallback() ? '' : 'temaki-vertex';
+        else if (isSmall() && geom === 'point')
+            return null;
         else
             return 'maki-marker-stroked';
     }
@@ -148,9 +150,9 @@ export function uiPresetIcon() {
         var p = preset.apply(this, arguments);
         var geom = geometry ? geometry.apply(this, arguments) : null;
         var picon = getIcon(p, geom);
-        var isMaki = /^maki-/.test(picon);
-        var isTemaki = /^temaki-/.test(picon);
-        var isFa = /^fa[srb]-/.test(picon);
+        var isMaki = picon ? /^maki-/.test(picon) : false;
+        var isTemaki = picon ? /^temaki-/.test(picon) : false;
+        var isFa = picon ? /^fa[srb]-/.test(picon) : false;
         var isiDIcon = !(isMaki || isTemaki || isFa);
         var isCategory = !p.setTags;
         var drawLine = geom === 'line' && !isCategory;
@@ -229,18 +231,22 @@ export function uiPresetIcon() {
             .call(svgIcon(''))
             .merge(icon);
 
-        icon
-            .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
-            .classed('framed', isFramed)
-            .classed('preset-icon-iD', isiDIcon);
+        if (picon) {
 
-        icon.selectAll('svg')
-            .attr('class', function() {
-                return 'icon ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses);
-            });
+            icon
+                .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
+                .classed('framed', isFramed)
+                .classed('preset-icon-iD', isiDIcon);
 
-        icon.selectAll('use')
-            .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
+            icon.selectAll('svg')
+                .attr('class', function() {
+                    return 'icon ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses);
+                });
+
+            icon.selectAll('use')
+                .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
+        }
+
     }
 
 
