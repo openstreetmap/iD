@@ -396,7 +396,6 @@ export function uiSearchAdd(context) {
             var markerClass = 'add-preset add-' + geometry +
                 ' add-preset-' + preset.name().replace(/\s+/g, '_') + '-' + geometry;
             var modeInfo = {
-                id: markerClass,
                 button: markerClass,
                 preset: preset,
                 geometry: geometry

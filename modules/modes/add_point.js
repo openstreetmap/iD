@@ -6,13 +6,9 @@ import { osmNode } from '../osm';
 import { actionAddMidpoint } from '../actions';
 
 
-export function modeAddPoint(context, customMode) {
-    var mode = customMode || {
-        id: 'add-point',
-        button: 'point',
-        title: t('modes.add_point.title'),
-        description: t('modes.add_point.description')
-    };
+export function modeAddPoint(context, mode) {
+
+    mode.id = 'add-point';
 
     var behavior = behaviorDraw(context)
         .tail(t('modes.add_point.tail'))

@@ -127,11 +127,15 @@ export function behaviorDraw(context) {
         var d = datum();
         var target = d && d.properties && d.properties.entity;
 
+        var mode = context.mode();
+
+        var allowsSnappingToWay = (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'));
+
         if (target && target.type === 'node' && allowsVertex(target)) {   // Snap to a node
             dispatch.call('clickNode', this, target, d);
             return;
 
-        } else if (target && target.type === 'way') {   // Snap to a way
+        } else if (target && target.type === 'way' && allowsSnappingToWay) {   // Snap to a way
             var choice = geoChooseEdge(
                 context.childNodes(target), context.mouse(), context.projection, context.activeID()
             );

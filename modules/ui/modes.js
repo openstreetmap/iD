@@ -89,7 +89,6 @@ export function uiModes(context) {
                     tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
                 }
                 var favoriteMode = {
-                    id: markerClass,
                     button: markerClass,
                     title: presetName,
                     description: t(tooltipTitleID, { feature: presetName }),
@@ -121,7 +120,7 @@ export function uiModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', function(d) { return d.id + ' add-button bar-button'; })
+                .attr('class', function(d) { return d.button + ' add-button bar-button'; })
                 .on('click.mode-buttons', function(d) {
                     if (!enabled(d)) return;
 

@@ -10,13 +10,8 @@ import { modeDrawLine } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddLine(context, customMode) {
-    var mode = customMode || {
-        id: 'add-line',
-        button: 'line',
-        title: t('modes.add_line.title'),
-        description: t('modes.add_line.description')
-    };
+export function modeAddLine(context, mode) {
+    mode.id = 'add-line';
 
     var behavior = behaviorAddWay(context)
         .tail(t('modes.add_line.tail'))
