@@ -45,10 +45,50 @@ export function uiSearchAdd(context) {
             .on('keypress', function() {
                 // enter/return
                 if (d3_event.keyCode === 13) {
-                    popover.selectAll('.list > .list-item:first-child button.choose')
+                    popover.selectAll('.list .list-item.focused button.choose')
                         .each(function(d) { d.choose.call(this); });
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
+                }
+            })
+            .on('keydown', function(){
+                // up/down arrow key navigation
+
+                if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
+                    var nextFocus,
+                        priorFocus = popover.selectAll('.list .list-item.focused');
+                    if (priorFocus.empty()) {
+                        nextFocus = popover.selectAll('.list > .list-item:first-child');
+                    } else {
+                        nextFocus = popover.selectAll('.list .list-item.focused + .list-item');
+                        if (nextFocus.empty()) {
+                            nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling)
+                                .selectAll('.list-item:first-child');
+                        }
+                    }
+                    if (!nextFocus.empty()) {
+                        focusListItem(nextFocus);
+                        priorFocus.classed('focused', false);
+                    }
+
+                } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑']) {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
+                    var priorFocus = popover.selectAll('.list .list-item.focused');
+                    if (!priorFocus.empty()) {
+                        var nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
+                        if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
+                            nextFocus = nextFocus.selectAll('.list-item:last-child');
+                        }
+                        if (!nextFocus.empty()) {
+                            focusListItem(nextFocus);
+                            priorFocus.classed('focused', false);
+                        }
+                    }
                 }
             })
             .on('mousedown', function() {
@@ -81,6 +121,9 @@ export function uiSearchAdd(context) {
                 if (value.length) {
                     var results = presets.search(value);
                     list.call(drawList, results);
+                    popover.selectAll('.list .list-item.focused')
+                        .classed('focused', false);
+                    focusListItem(popover.selectAll('.list > .list-item:first-child'));
                 } else {
                     //list.call(drawList, context.presets().defaults(geometry, 36));
                 }
@@ -110,6 +153,13 @@ export function uiSearchAdd(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
         });
+    }
+
+    function focusListItem(selection) {
+        if (!selection.empty()) {
+            selection.classed('focused', true);
+            //selection.nodes()[0].scrollIntoView();
+        }
     }
 
     function drawList(list, presets) {
@@ -153,6 +203,16 @@ export function uiSearchAdd(context) {
                     id += '-' + d.geometry;
                 }
                 return id;
+            })
+            .on('mouseover', function(d) {
+                list.selectAll('.list-item.focused')
+                    .classed('focused', false);
+                d3_select(this)
+                    .classed('focused', true);
+            })
+            .on('mouseout', function(d) {
+                d3_select(this)
+                    .classed('focused', false);
             });
 
         row.append('button')

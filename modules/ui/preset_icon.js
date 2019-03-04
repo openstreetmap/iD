@@ -240,7 +240,7 @@ export function uiPresetIcon() {
             });
 
         icon.selectAll('use')
-            .attr('href', '#' + picon + (isMaki ? (isSmall() ? '-11' : '-15') : ''));
+            .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
     }
 
 
