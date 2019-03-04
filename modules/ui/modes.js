@@ -110,7 +110,7 @@ export function uiModes(context) {
             var data = favoriteModes;
 
             var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d) { return d.id; });
+                .data(data, function(d) { return d.button; });
 
             // exit
             buttons.exit()
