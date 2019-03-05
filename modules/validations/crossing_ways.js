@@ -65,25 +65,36 @@ export function validationCrossingWays() {
         return getFeatureTypeForTags(tags);
     }
 
-
-    // only validate certain waterway and railway features
-    var waterways = ['canal', 'ditch', 'drain', 'river', 'stream'];
-    var railways = ['rail', 'disused', 'tram', 'subway', 'narrow_gauge', 'light_rail',
-                    'preserved', 'miniature', 'monorail', 'funicular'];
-    // ignore certain highway and building features
-    var ignoredHighways = ['rest_area', 'services', 'proposed', 'razed'];
-    var ignoredBuildings = ['proposed', 'razed'];
+    // whitelists
+    var waterways = {
+        canal: true, ditch: true, drain: true, river: true, stream: true
+    };
+    var railways = {
+        rail: true, disused: true, tram: true, subway: true, narrow_gauge: true,
+        light_rail: true, preserved: true, miniature: true, monorail: true, funicular: true
+    };
+    var highways = {
+        residential: true, service: true, track: true, unclassified: true, footway: true,
+        path: true, tertiary: true, secondary: true, primary: true, living_street: true,
+        cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
+        pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
+        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true
+    };
+    // blacklist
+    var ignoredBuildings = {
+        demolished: true, dismantled: true, proposed: true, razed: true
+    };
 
 
     function getFeatureTypeForTags(tags) {
-        if (hasTag(tags, 'building') && ignoredBuildings.indexOf(tags.building) === -1) return 'building';
+        if (hasTag(tags, 'building') && !ignoredBuildings[tags.building]) return 'building';
 
         // don't check non-building areas
         if (hasTag(tags, 'area')) return null;
 
-        if (hasTag(tags, 'highway') && ignoredHighways.indexOf(tags.highway) === -1) return 'highway';
-        if (hasTag(tags, 'railway') && railways.indexOf(tags.railway) !== -1) return 'railway';
-        if (hasTag(tags, 'waterway') && waterways.indexOf(tags.waterway) !== -1) return 'waterway';
+        if (hasTag(tags, 'highway') && highways[tags.highway]) return 'highway';
+        if (hasTag(tags, 'railway') && railways[tags.railway]) return 'railway';
+        if (hasTag(tags, 'waterway') && waterways[tags.waterway]) return 'waterway';
 
         return null;
     }
@@ -139,10 +150,10 @@ export function validationCrossingWays() {
 
 
     // highway values for which we shouldn't recommend connecting to waterways
-    var highwaysDisallowingFords = [
-        'motorway', 'motorway_link', 'trunk', 'trunk_link',
-        'primary', 'primary_link', 'secondary', 'secondary_link'
-    ];
+    var highwaysDisallowingFords = {
+        motorway: true, motorway_link: true, trunk: true, trunk_link: true,
+        primary: true, primary_link: true, secondary: true, secondary_link: true
+    };
     var pathHighways = {
         path: true, footway: true, cycleway: true, bridleway: true,
         pedestrian: true, steps: true, corridor: true
@@ -197,8 +208,8 @@ export function validationCrossingWays() {
                     if (hasTag(entity1.tags, 'tunnel') && hasTag(entity2.tags, 'tunnel')) return null;
                     if (hasTag(entity1.tags, 'bridge') && hasTag(entity2.tags, 'bridge')) return null;
 
-                    if (highwaysDisallowingFords.indexOf(entity1.tags.highway) !== -1 ||
-                        highwaysDisallowingFords.indexOf(entity2.tags.highway) !== -1) {
+                    if (highwaysDisallowingFords[entity1.tags.highway] ||
+                        highwaysDisallowingFords[entity2.tags.highway]) {
                         // do not allow fords on major highways
                         return null;
                     }
