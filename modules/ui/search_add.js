@@ -173,7 +173,7 @@ export function uiSearchAdd(context) {
         if (!selection.empty()) {
             selection.classed('focused', true);
             // scroll to keep the focused item visible
-            scrollPopoverToShow(selection)
+            scrollPopoverToShow(selection);
         }
     }
 

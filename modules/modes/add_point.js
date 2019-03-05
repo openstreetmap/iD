@@ -1,5 +1,7 @@
+import _clone from 'lodash-es/clone';
+
 import { t } from '../util/locale';
-import { actionAddEntity } from '../actions';
+import { actionAddEntity, actionChangeTags } from '../actions';
 import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
@@ -53,7 +55,23 @@ export function modeAddPoint(context, mode) {
 
 
     function addNode(node) {
-        add(node.loc);
+
+        if (Object.keys(defaultTags).length === 0) {
+            enterSelectMode(node);
+            return;
+        }
+
+        var tags = _clone(node.tags);
+        for (var key in defaultTags) {
+            tags[key] = defaultTags[key];
+        }
+
+        context.perform(
+            actionChangeTags(node.id, tags),
+            t('operations.add.annotation.point')
+        );
+
+        enterSelectMode(node);
     }
 
 

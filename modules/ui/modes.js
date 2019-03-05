@@ -83,7 +83,6 @@ export function uiModes(context) {
                     button: markerClass,
                     title: presetName,
                     description: t(tooltipTitleID, { feature: presetName }),
-                    key: '',
                     preset: preset,
                     geometry: d.geom
                 };
