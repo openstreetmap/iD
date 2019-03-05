@@ -4066,6 +4066,7 @@ en:
       highway/mini_roundabout:
         # highway=mini_roundabout
         name: Mini-Roundabout
+        # 'terms: traffic circle'
         terms: '<translate with synonyms or related terms for ''Mini-Roundabout'', separated by commas>'
       highway/motorway:
         # highway=motorway

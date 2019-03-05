@@ -3,6 +3,9 @@
     "geometry": [
         "vertex"
     ],
+    "terms": [
+        "traffic circle"
+    ],
     "tags": {
         "highway": "mini_roundabout"
     },
