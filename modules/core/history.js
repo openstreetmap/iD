@@ -36,6 +36,7 @@ export function coreHistory(context) {
     var duration = 150;
     var _imageryUsed = [];
     var _checkpoints = {};
+    var _pausedGraph;
     var _stack;
     var _index;
     var _tree;
@@ -104,11 +105,13 @@ export function coreHistory(context) {
     // determine difference and dispatch a change event
     function change(previous, isAnnotated) {
         var difference = coreDifference(previous, history.graph());
-        dispatch.call('change', this, difference);
-        if (isAnnotated) {
-            // actions like dragging a node can fire lots of changes,
-            // so use 'annotatedChange' to listen for grouped undo/redo changes
-            dispatch.call('annotatedChange', this, difference);
+        if (!_pausedGraph) {
+            dispatch.call('change', this, difference);
+            if (isAnnotated) {
+                // actions like dragging a node can fire lots of changes,
+                // so use 'annotatedChange' to listen for grouped undo/redo changes
+                dispatch.call('annotatedChange', this, difference);
+            }
         }
         return difference;
     }
@@ -240,6 +243,18 @@ export function coreHistory(context) {
                 }
             }
 
+            return change(previous, true);
+        },
+
+
+        pauseChangeDispatch: function() {
+            _pausedGraph = _stack[_index].graph;
+        },
+
+
+        resumeChangeDispatch: function() {
+            var previous = _pausedGraph;
+            _pausedGraph = null;
             return change(previous, true);
         },
 

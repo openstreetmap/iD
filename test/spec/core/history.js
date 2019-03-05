@@ -55,8 +55,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -99,8 +99,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -193,8 +193,8 @@ describe('iD.History', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action, 'annotation');
             history.overwrite(action1, action2, 'annotation2');
             expect(action1).to.have.been.called;
@@ -266,6 +266,31 @@ describe('iD.History', function () {
         });
     });
 
+    describe('#pauseChangeDispatch / #resumeChangeDispatch', function() {
+        it('prevents change events from getting dispatched', function() {
+            history.perform(action, 'base');
+            history.on('change', spy);
+
+            history.pauseChangeDispatch();
+
+            history.perform(action, 'perform');
+            expect(spy).to.have.been.notCalled;
+            history.replace(action, 'replace');
+            expect(spy).to.have.been.notCalled;
+            history.overwrite(action, 'replace');
+            expect(spy).to.have.been.notCalled;
+            history.undo();
+            expect(spy).to.have.been.notCalled;
+            history.redo();
+            expect(spy).to.have.been.notCalled;
+            history.pop();
+            expect(spy).to.have.been.notCalled;
+
+            var difference = history.resumeChangeDispatch();
+            expect(spy).to.have.been.calledOnceWith(difference);
+        });
+    });
+
     describe('#changes', function () {
         it('includes created entities', function () {
             var node = iD.osmNode();
@@ -274,8 +299,8 @@ describe('iD.History', function () {
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'}),
-                node2 = node1.update({ tags: { yes: 'no' } });
+            var node1 = iD.osmNode({id: 'n1'});
+            var node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
@@ -357,10 +382,10 @@ describe('iD.History', function () {
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'}),
-                node1 = iD.osmNode({id: 'n1'}),
-                node2 = iD.osmNode({id: 'n2'}),
-                node3 = iD.osmNode({id: 'n3'});
+            var node_1 = iD.osmNode({id: 'n-1'});
+            var node1 = iD.osmNode({id: 'n1'});
+            var node2 = iD.osmNode({id: 'n2'});
+            var node3 = iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
