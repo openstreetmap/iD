@@ -1,4 +1,3 @@
-import _compact from 'lodash-es/compact';
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
@@ -232,34 +231,40 @@ export function uiFieldCombo(field, context) {
 
 
     function change() {
-        var val = tagValue(utilGetSetValue(input));
         var t = {};
+        var val;
 
         if (isMulti || isSemi) {
-            if (!val) return;
+            val = tagValue(utilGetSetValue(input).replace(/,/g, ';')) || '';
             container.classed('active', false);
             utilGetSetValue(input, '');
 
+            var vals = val.split(';').filter(Boolean);
+            if (!vals.length) return;
+
             if (isMulti) {
-                var key = field.key + val;
-                if (_entity) {
-                    // don't set a multicombo value to 'yes' if it already has a non-'no' value
-                    // e.g. `language:de=main`
-                    var old = _entity.tags[key] || '';
-                    if (old && old.toLowerCase() !== 'no') return;
-                }
-                field.keys.push(key);
-                t[key] = 'yes';
+                _uniq(vals).forEach(function(v) {
+                    var key = field.key + v;
+                    if (_entity) {
+                        // don't set a multicombo value to 'yes' if it already has a non-'no' value
+                        // e.g. `language:de=main`
+                        var old = _entity.tags[key] || '';
+                        if (old && old.toLowerCase() !== 'no') return;
+                    }
+                    field.keys.push(key);
+                    t[key] = 'yes';
+                });
 
             } else if (isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
-                arr.push(val);
-                t[field.key] = _compact(_uniq(arr)).join(';');
+                arr = arr.concat(vals);
+                t[field.key] = _uniq(arr).filter(Boolean).join(';');
             }
 
             window.setTimeout(function() { input.node().focus(); }, 10);
 
         } else {
+            val = tagValue(utilGetSetValue(input));
             t[field.key] = val;
         }
 
@@ -275,7 +280,7 @@ export function uiFieldCombo(field, context) {
         } else if (isSemi) {
             _remove(_multiData, function(md) { return md.key === d.key; });
             var arr = _multiData.map(function(md) { return md.key; });
-            arr = _compact(_uniq(arr));
+            arr = _uniq(arr).filter(Boolean);
             t[field.key] = arr.length ? arr.join(';') : undefined;
         }
         dispatch.call('change', this, t);
@@ -392,7 +397,7 @@ export function uiFieldCombo(field, context) {
                 field.keys = _map(_multiData, 'key');
 
             } else if (isSemi) {
-                var arr = _compact(_uniq((tags[field.key] || '').split(';')));
+                var arr = _uniq((tags[field.key] || '').split(';')).filter(Boolean);
                 _multiData = arr.map(function(k) {
                     return {
                         key: k,
