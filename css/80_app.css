@@ -1158,13 +1158,16 @@ a.hide-toggle {
 }
 
 .preset-icon-fill {
-    cursor: inherit;
     margin: auto;
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
+}
+.preset-icon-container svg,
+.preset-icon-container svg > * {
+    cursor: inherit !important;
 }
 .preset-icon-fill path.area.stroke {
     fill: transparent;
