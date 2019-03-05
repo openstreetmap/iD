@@ -5649,7 +5649,7 @@
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini-Roundabout",
-                    "terms": ""
+                    "terms": "traffic circle"
                 },
                 "highway/motorway_junction": {
                     "name": "Motorway Junction / Exit",
