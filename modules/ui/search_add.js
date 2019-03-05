@@ -57,7 +57,7 @@ export function uiSearchAdd(context) {
                     priorFocus,
                     parentSubsection;
                 if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] ||
-                    d3_event.keyCode === utilKeybinding.keyCodes['tab'] && !d3_event.shiftKey) {
+                    d3_event.keyCode === utilKeybinding.keyCodes.tab && !d3_event.shiftKey) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
@@ -83,7 +83,7 @@ export function uiSearchAdd(context) {
                     }
 
                 } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑'] ||
-                    d3_event.keyCode === utilKeybinding.keyCodes['tab'] && d3_event.shiftKey) {
+                    d3_event.keyCode === utilKeybinding.keyCodes.tab && d3_event.shiftKey) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
