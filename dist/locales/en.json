@@ -3913,6 +3913,10 @@
                     "name": "Boundary",
                     "terms": ""
                 },
+                "building_point": {
+                    "name": "Building",
+                    "terms": ""
+                },
                 "circular": {
                     "name": "Traffic Circle",
                     "terms": ""

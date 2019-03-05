@@ -3510,6 +3510,9 @@ en:
         # building=warehouse
         name: Warehouse
         terms: '<translate with synonyms or related terms for ''Warehouse'', separated by commas>'
+      building_point:
+        # building=*
+        name: Building
       camp_site/camp_pitch:
         # camp_site=camp_pitch
         name: Camp Pitch
