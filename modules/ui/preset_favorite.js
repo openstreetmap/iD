@@ -31,24 +31,24 @@ export function uiPresetFavorite(preset, geom, context, klass) {
             .merge(_button);
 
         _button
-            .classed('active', function() {
-                return context.isFavoritePreset(preset, geom);
-            })
             .on('click', function () {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                //update state of favorite icon
-                d3_select(this)
-                    .classed('active', function() {
-                        return !d3_select(this).classed('active');
-                    });
+                context.favoritePreset(preset, geom);
 
-               context.favoritePreset(preset, geom);
-
+                update();
             });
 
+        update();
     };
+
+    function update() {
+        _button
+            .classed('active', context.isFavoritePreset(preset, geom));
+    }
+
+    context.on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
 
     return presetFavorite;
 }
