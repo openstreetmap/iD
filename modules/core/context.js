@@ -325,8 +325,8 @@ export function coreContext() {
                 return !(d.id === preset.id && d.geom === geom);
             });
         } else {
-            // only allow 3 favorites
-            if (favs.length === 3) {
+            // only allow 10 favorites
+            if (favs.length === 10) {
                 // remove the last favorite (first in, first out)
                 favs.pop();
             }

@@ -86,6 +86,13 @@ export function uiModes(context) {
                     preset: preset,
                     geometry: d.geom
                 };
+                var keyCode = index + 1;
+                if (keyCode <= 10) {
+                    if (keyCode === 10) {
+                        keyCode = 0;
+                    }
+                    favoriteMode.key = keyCode.toString();
+                }
                 var mode;
                 switch (d.geom) {
                     case 'point':
@@ -98,12 +105,9 @@ export function uiModes(context) {
                     case 'area':
                         mode = modeAddArea(context, favoriteMode);
                 }
-                var keyCode = index + 1;
-                if (keyCode <= 10) {
-                    if (keyCode === 10) {
-                        keyCode = 0;
-                    }
-                    context.keybinding().on(keyCode.toString(), function() {
+
+                if (mode.key) {
+                    context.keybinding().on(mode.key, function() {
                         if (!enabled(mode)) return;
 
                         if (mode.button === context.mode().button) {
