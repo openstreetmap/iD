@@ -56,7 +56,8 @@ export function uiSearchAdd(context) {
                 var nextFocus,
                     priorFocus,
                     parentSubsection;
-                if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
+                if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] ||
+                    d3_event.keyCode === utilKeybinding.keyCodes['tab'] && !d3_event.shiftKey) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
@@ -81,7 +82,8 @@ export function uiSearchAdd(context) {
                         priorFocus.classed('focused', false);
                     }
 
-                } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑']) {
+                } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑'] ||
+                    d3_event.keyCode === utilKeybinding.keyCodes['tab'] && d3_event.shiftKey) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
 
@@ -162,7 +164,7 @@ export function uiSearchAdd(context) {
 
         context.features().on('change.search-add', updateForFeatureHiddenState);
 
-        context.keybinding().on('1', function() {
+        context.keybinding().on('tab', function() {
             search.node().focus();
             d3_event.preventDefault();
             d3_event.stopPropagation();
