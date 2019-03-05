@@ -491,6 +491,14 @@ button[disabled].action:hover {
     padding: 0 5px;
 }
 
+.tool-group button.dragging {
+    opacity: 0.75;
+    z-index: 200;
+}
+.tool-group button.dragging .tooltip {
+    display: none;
+}
+
 button.save .count {
     display: inline-block;
     border: 0px solid #ccc;

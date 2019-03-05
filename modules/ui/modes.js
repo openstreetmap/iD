@@ -1,6 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
-import { select as d3_select } from 'd3-selection';
+import { drag as d3_drag } from 'd3-drag';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import {
     modeAddArea,
@@ -168,6 +169,39 @@ export function uiModes(context) {
                             );
                     }
                 });
+
+            var dragOrigin;
+
+            buttonsEnter.call(d3_drag()
+                .on('start', function(d) {
+                    //if (d3_select(this).classed('disabled')) return;
+                    dragOrigin = {
+                        x: d3_event.x,
+                        y: d3_event.y
+                    };
+                })
+                .on('drag', function(d) {
+                    var x = d3_event.x - dragOrigin.x,
+                        y = d3_event.y - dragOrigin.y;
+
+                    d3_select(this)
+                        .classed('dragging', true)
+                        .style('transform', 'translate(' + x + 'px, ' + y + 'px)');
+                })
+                .on('end', function(d) {
+
+                    d3_select(this)
+                        .style('transform', null)
+                        .classed('dragging', false);
+
+                    var y = d3_event.y - dragOrigin.y;
+                    if (y > 50) {
+                        // dragged out of the top bar, remove the favorite
+                        context.favoritePreset(d.preset, d.geometry);
+                    }
+                })
+            );
+
             /*
             buttonsEnter
                 .append('span')
