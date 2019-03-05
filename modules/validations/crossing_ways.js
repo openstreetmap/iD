@@ -78,7 +78,8 @@ export function validationCrossingWays() {
         path: true, tertiary: true, secondary: true, primary: true, living_street: true,
         cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
         pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
-        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true
+        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true,
+        bus_guideway: true
     };
     // blacklist
     var ignoredBuildings = {
