@@ -42,19 +42,6 @@ export function uiModes(context) {
                 context.container()
                     .classed('mode-' + exited.id, false);
             });
-/*
-        modes.forEach(function(mode) {
-            context.keybinding().on(mode.key, function() {
-                if (!enabled(mode)) return;
-
-                if (mode.id === context.mode().id) {
-                    context.enter(modeBrowse(context));
-                } else {
-                    context.enter(mode);
-                }
-            });
-        });
-*/
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -70,9 +57,13 @@ export function uiModes(context) {
 
 
         function update() {
-            // add favorite presets to modes
+
+            for (var i = 0; i <= 9; i++) {
+                context.keybinding().off(i.toString());
+            }
+
             var favoritePresets = context.getFavoritePresets();
-            var favoriteModes = favoritePresets.map(function(d) {
+            var favoriteModes = favoritePresets.map(function(d, index) {
                 var preset = context.presets().item(d.id);
                 var presetName = preset.name();
                 var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + presetName.replace(/\s+/g, '_')
@@ -96,15 +87,35 @@ export function uiModes(context) {
                     preset: preset,
                     geometry: d.geom
                 };
+                var mode;
                 switch (d.geom) {
                     case 'point':
                     case 'vertex':
-                        return modeAddPoint(context, favoriteMode);
+                        mode = modeAddPoint(context, favoriteMode);
+                        break;
                     case 'line':
-                        return modeAddLine(context, favoriteMode);
+                        mode = modeAddLine(context, favoriteMode);
+                        break;
                     case 'area':
-                        return modeAddArea(context, favoriteMode);
+                        mode = modeAddArea(context, favoriteMode);
                 }
+                var keyCode = index + 1;
+                if (keyCode <= 10) {
+                    if (keyCode === 10) {
+                        keyCode = 0;
+                    }
+                    context.keybinding().on(keyCode.toString(), function() {
+                        if (!enabled(mode)) return;
+
+                        if (mode.button === context.mode().button) {
+                            context.enter(modeBrowse(context));
+                        } else {
+                            context.enter(mode);
+                        }
+                    });
+                }
+
+                return mode;
             });
 
             var data = favoriteModes;
