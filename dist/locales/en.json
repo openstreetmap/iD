@@ -35,7 +35,8 @@
             "add_note": {
                 "title": "Note",
                 "description": "Spotted an issue? Let other mappers know.",
-                "tail": "Click on the map to add a note."
+                "tail": "Click on the map to add a note.",
+                "key": "N"
             },
             "add_preset": {
                 "title": "Add {feature}",
