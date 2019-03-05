@@ -464,7 +464,7 @@ button[disabled].action:hover {
     justify-content: flex-end;
 }
 
-.tool-group > div {
+.tool-group > div:not(:empty) {
     display: flex;
     margin: 0 5px;
 }
