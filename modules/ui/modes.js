@@ -173,14 +173,13 @@ export function uiModes(context) {
             var dragOrigin;
 
             buttonsEnter.call(d3_drag()
-                .on('start', function(d) {
-                    //if (d3_select(this).classed('disabled')) return;
+                .on('start', function() {
                     dragOrigin = {
                         x: d3_event.x,
                         y: d3_event.y
                     };
                 })
-                .on('drag', function(d) {
+                .on('drag', function() {
                     var x = d3_event.x - dragOrigin.x,
                         y = d3_event.y - dragOrigin.y;
 
