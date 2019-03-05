@@ -498,6 +498,9 @@ button[disabled].action:hover {
 .tool-group button.dragging .tooltip {
     display: none;
 }
+.tool-group button.dragging.removing {
+    cursor: url(img/cursor-select-remove.png), pointer;
+}
 
 button.save .count {
     display: inline-block;

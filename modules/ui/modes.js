@@ -186,13 +186,15 @@ export function uiModes(context) {
 
                     d3_select(this)
                         .classed('dragging', true)
+                        .classed('removing', y > 50)
                         .style('transform', 'translate(' + x + 'px, ' + y + 'px)');
                 })
                 .on('end', function(d) {
 
                     d3_select(this)
-                        .style('transform', null)
-                        .classed('dragging', false);
+                        .classed('dragging', false)
+                        .classed('removing', false)
+                        .style('transform', null);
 
                     var y = d3_event.y - dragOrigin.y;
                     if (y > 50) {
