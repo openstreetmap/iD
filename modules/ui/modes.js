@@ -73,11 +73,16 @@ export function uiModes(context) {
                     markerClass += ' add-generic-preset';
                 }
 
-                var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
+                var supportedGeometry = preset.geometry.filter(function(geometry) {
                     return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
                 });
+                var vertexIndex = supportedGeometry.indexOf('vertex');
+                if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
+                    // both point and vertex allowed, just combine them
+                    supportedGeometry.splice(vertexIndex, 1);
+                }
                 var tooltipTitleID = 'modes.add_preset.title';
-                if (relevantMatchingGeometry.length !== 1) {
+                if (supportedGeometry.length !== 1) {
                     if (preset.setTags({}, d.geom).building) {
                         tooltipTitleID = 'modes.add_preset.building.title';
                     } else {
