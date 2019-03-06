@@ -1,15 +1,14 @@
 {
     "icon": "iD-category-rail",
-    "name": "Rail Features",
+    "name": "Rails",
     "members": [
         "railway/rail",
-        "railway/subway",
-        "railway/tram",
         "railway/disused",
-        "railway/level_crossing",
-        "railway/crossing",
-        "railway/switch",
-        "railway/buffer_stop",
-        "railway/signal"
+        "railway/tram",
+        "railway/subway",
+        "railway/narrow_gauge",
+        "railway/light_rail",
+        "railway/monorail",
+        "railway/funicular"
     ]
 }

@@ -1,18 +1,12 @@
 {
     "icon": "maki-water",
-    "name": "Water Features",
+    "name": "Water Bodies",
     "members": [
-        "natural/water/lake",
-        "natural/water/pond",
-        "natural/water/reservoir",
         "natural/water",
-        "waterway/stream",
-        "natural/water/stream",
-        "waterway/drain",
-        "waterway/river",
-        "natural/water/river",
-        "waterway/canal",
-        "natural/water/canal",
-        "waterway/ditch"
+        "natural/water/pond",
+        "natural/water/basin",
+        "natural/water/lake",
+        "natural/water/reservoir",
+        "natural/bay"
     ]
 }

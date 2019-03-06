@@ -1,0 +1,12 @@
+{
+    "icon": "iD-category-roads",
+    "name": "Minor Roads",
+    "members": [
+        "highway/unclassified",
+        "highway/residential",
+        "highway/living_street",
+        "highway/service",
+        "highway/track",
+        "highway/road"
+    ]
+}

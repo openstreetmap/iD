@@ -2082,16 +2082,22 @@
                     "name": "Natural Features"
                 },
                 "category-path": {
-                    "name": "Path Features"
+                    "name": "Paths"
                 },
                 "category-rail": {
-                    "name": "Rail Features"
+                    "name": "Rails"
                 },
                 "category-restriction": {
                     "name": "Restriction Features"
                 },
-                "category-road": {
-                    "name": "Road Features"
+                "category-road_major": {
+                    "name": "Major Roads"
+                },
+                "category-road_minor": {
+                    "name": "Minor Roads"
+                },
+                "category-road_service": {
+                    "name": "Service Roads"
                 },
                 "category-route": {
                     "name": "Route Features"
@@ -2100,7 +2106,10 @@
                     "name": "Utility Features"
                 },
                 "category-water": {
-                    "name": "Water Features"
+                    "name": "Water Bodies"
+                },
+                "category-waterway": {
+                    "name": "Waterways"
                 }
             },
             "fields": {

@@ -13,10 +13,11 @@
       "area"
     ],
     "line": [
-      "category-road",
+      "category-road_major",
+      "category-road_minor",
       "category-rail",
       "category-path",
-      "category-water",
+      "category-waterway",
       "category-barrier",
       "category-natural",
       "category-utility",
