@@ -178,6 +178,7 @@ export function uiModes(context) {
                         x: d3_event.x,
                         y: d3_event.y
                     };
+                    targetIndex = null;
                 })
                 .on('drag', function(d, index) {
                     var x = d3_event.x - dragOrigin.x,
