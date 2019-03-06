@@ -125,7 +125,7 @@ export function uiModes(context) {
             var data = favoriteModes;
 
             var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d) { return d.button; });
+                .data(data, function(d, index) { return d.button + index; });
 
             // exit
             buttons.exit()
@@ -170,7 +170,7 @@ export function uiModes(context) {
                     }
                 });
 
-            var dragOrigin;
+            var dragOrigin, targetIndex;
 
             buttonsEnter.call(d3_drag()
                 .on('start', function() {
@@ -179,45 +179,65 @@ export function uiModes(context) {
                         y: d3_event.y
                     };
                 })
-                .on('drag', function() {
+                .on('drag', function(d, index) {
                     var x = d3_event.x - dragOrigin.x,
                         y = d3_event.y - dragOrigin.y;
 
                     d3_select(this)
                         .classed('dragging', true)
-                        .classed('removing', y > 50)
-                        .style('transform', 'translate(' + x + 'px, ' + y + 'px)');
+                        .classed('removing', y > 50);
+
+                    targetIndex = null;
+
+                    selection.selectAll('button.add-preset')
+                        .style('transform', function(d2, index2) {
+                            if (index === index2) {
+                                return 'translate(' + x + 'px, ' + y + 'px)';
+                            } else if (y > 50) {
+                                if (index2 > index) {
+                                    return 'translateX(-100%)';
+                                }
+                            } else if (index2 > index && d3_event.x > d3_select(this).node().offsetLeft) {
+                                if (targetIndex === null || index2 > targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateX(-100%)';
+                            } else if (index2 < index && d3_event.x < d3_select(this).node().offsetLeft + d3_select(this).node().offsetWidth) {
+                                if (targetIndex === null || index2 < targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateX(100%)';
+                            }
+                            return null;
+                        });
                 })
-                .on('end', function(d) {
+                .on('end', function(d, index) {
 
                     d3_select(this)
                         .classed('dragging', false)
-                        .classed('removing', false)
+                        .classed('removing', false);
+
+                    selection.selectAll('button.add-preset')
                         .style('transform', null);
 
                     var y = d3_event.y - dragOrigin.y;
                     if (y > 50) {
                         // dragged out of the top bar, remove the favorite
                         context.favoritePreset(d.preset, d.geometry);
+                    } else if (targetIndex !== null) {
+                        // dragged to a new position, reorder
+                        context.moveFavoritePreset(index, targetIndex);
                     }
                 })
             );
-
-            /*
-            buttonsEnter
-                .append('span')
-                .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
-                */
-            // if we are adding/removing the buttons, check if toolbar has overflowed
-            if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('#bar', true);
-            }
 
             // update
             buttons = buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function(d) { return !enabled(d); });
+
+            // check if toolbar has overflowed
+            context.ui().checkOverflow('#bar', true);
         }
     };
 }

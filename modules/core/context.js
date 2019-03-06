@@ -316,6 +316,12 @@ export function coreContext() {
     context.getFavoritePresets = function() {
         return JSON.parse(context.storage('favorite_presets')) || [];
     };
+    function setFavoritePresets(favs) {
+        context.storage('favorite_presets', JSON.stringify(favs));
+
+        //and call update on modes
+        dispatch.call('favoritePreset');
+    }
     context.favoritePreset = function(preset, geom) {
         var favs = context.getFavoritePresets();
 
@@ -333,17 +339,19 @@ export function coreContext() {
             // prepend array
             favs.unshift({id: preset.id, geom: geom});
         }
-
-        context.storage('favorite_presets', JSON.stringify(favs));
-
-        //and call update on modes
-        dispatch.call('favoritePreset');
+        setFavoritePresets(favs);
     };
+
     context.isFavoritePreset = function(preset, geom) {
         var favs = context.getFavoritePresets();
         return favs.some(function(d) {
             return d.id === preset.id && d.geom === geom;
         });
+    };
+    context.moveFavoritePreset = function(fromIndex, toIndex) {
+        var favs = context.getFavoritePresets();
+        favs.splice(toIndex, 0, favs.splice(fromIndex, 1)[0]);
+        setFavoritePresets(favs);
     };
 
     /* Map */
