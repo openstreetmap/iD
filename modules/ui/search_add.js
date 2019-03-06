@@ -40,7 +40,7 @@ export function uiSearchAdd(context) {
             .call(tooltip()
                 .placement('bottom')
                 .html(true)
-                .title(function(d) { return uiTooltipHtml(t('modes.add_feature.description'), key); })
+                .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
             );
 
         search = searchWrap

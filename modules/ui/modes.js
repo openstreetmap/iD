@@ -11,7 +11,7 @@ import {
 } from '../modes';
 
 import { svgIcon } from '../svg';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -96,13 +96,26 @@ export function uiModes(context) {
                     preset: preset,
                     geometry: d.geom
                 };
-                var keyCode = index + 1;
-                if (keyCode <= 10) {
-                    if (keyCode === 10) {
+                var keyCode;
+                if (textDirection === 'ltr') {
+                    // use number row order: 1 2 3 4 5 6 7 8 9 0
+                    if (index === 9) {
                         keyCode = 0;
+                    } else if (index < 10) {
+                        keyCode = index + 1;
                     }
+                } else {
+                    // use number row order from right to left
+                    if (index === 0) {
+                        keyCode = 0;
+                    } else if (index < 10) {
+                        keyCode = 10 - index;
+                    }
+                }
+                if (keyCode !== null) {
                     favoriteMode.key = keyCode.toString();
                 }
+
                 var mode;
                 switch (d.geom) {
                     case 'point':
@@ -201,22 +214,29 @@ export function uiModes(context) {
 
                     selection.selectAll('button.add-preset')
                         .style('transform', function(d2, index2) {
+                            var node = d3_select(this).node();
                             if (index === index2) {
                                 return 'translate(' + x + 'px, ' + y + 'px)';
                             } else if (y > 50) {
                                 if (index2 > index) {
-                                    return 'translateX(-100%)';
+                                    return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
                                 }
-                            } else if (index2 > index && d3_event.x > d3_select(this).node().offsetLeft) {
+                            } else if (index2 > index && (
+                                (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
+                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
+                            )) {
                                 if (targetIndex === null || index2 > targetIndex) {
                                     targetIndex = index2;
                                 }
-                                return 'translateX(-100%)';
-                            } else if (index2 < index && d3_event.x < d3_select(this).node().offsetLeft + d3_select(this).node().offsetWidth) {
+                                return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
+                            } else if (index2 < index && (
+                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'ltr') ||
+                                (d3_event.x > node.offsetLeft && textDirection === 'rtl')
+                            )) {
                                 if (targetIndex === null || index2 < targetIndex) {
                                     targetIndex = index2;
                                 }
-                                return 'translateX(100%)';
+                                return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
                             }
                             return null;
                         });

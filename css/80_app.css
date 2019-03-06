@@ -634,6 +634,10 @@ button.add-note svg.icon {
     top: 10px;
     pointer-events: none;
 }
+[dir='rtl'] .search-add .search-icon {
+    left: auto;
+    right: 10px;
+}
 .search-add .popover {
     max-height: 250px;
     width: 100%;
@@ -723,8 +727,13 @@ button.add-note svg.icon {
     color: #666;
 }
 .search-add .subsection {
-    padding-left: 6px;
     background-color: #CBCBCB;
+}
+[dir='ltr'] .search-add .subsection {
+    padding-left: 6px;
+}
+[dir='rtl'] .search-add .subsection {
+    padding-right: 6px;
 }
 /* Header for modals / panes
 ------------------------------------------------------- */
