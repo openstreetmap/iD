@@ -1,5 +1,5 @@
 {
-    "icon": "iD-category-roads",
+    "icon": "iD-highway-service",
     "name": "Service Roads",
     "members": [
         "highway/service",

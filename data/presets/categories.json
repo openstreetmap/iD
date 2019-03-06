@@ -86,7 +86,7 @@
       ]
     },
     "category-path": {
-      "icon": "iD-category-path",
+      "icon": "temaki-pedestrian",
       "name": "Paths",
       "members": [
         "highway/path",
@@ -100,7 +100,7 @@
       ]
     },
     "category-rail": {
-      "icon": "iD-category-rail",
+      "icon": "iD-railway-rail",
       "name": "Rails",
       "members": [
         "railway/rail",
@@ -129,7 +129,7 @@
       ]
     },
     "category-road_major": {
-      "icon": "iD-category-roads",
+      "icon": "iD-highway-unclassified",
       "name": "Major Roads",
       "members": [
         "highway/motorway",
@@ -145,7 +145,7 @@
       ]
     },
     "category-road_minor": {
-      "icon": "iD-category-roads",
+      "icon": "iD-highway-unclassified",
       "name": "Minor Roads",
       "members": [
         "highway/unclassified",
@@ -157,7 +157,7 @@
       ]
     },
     "category-road_service": {
-      "icon": "iD-category-roads",
+      "icon": "iD-highway-service",
       "name": "Service Roads",
       "members": [
         "highway/service",
@@ -192,7 +192,7 @@
       ]
     },
     "category-utility": {
-      "icon": "iD-category-utility",
+      "icon": "iD-power-line",
       "name": "Utility Features",
       "members": [
         "power/line",

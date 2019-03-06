@@ -1,5 +1,5 @@
 {
-    "icon": "iD-category-path",
+    "icon": "temaki-pedestrian",
     "name": "Paths",
     "members": [
         "highway/path",

@@ -1,5 +1,5 @@
 {
-    "icon": "iD-category-rail",
+    "icon": "iD-railway-rail",
     "name": "Rails",
     "members": [
         "railway/rail",
