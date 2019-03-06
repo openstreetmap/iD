@@ -607,7 +607,6 @@ button.add-note svg.icon {
     min-width: 200px;
     max-width: 250px;
     border-radius: 20px 0 0 20px;
-    background: #fff;
 }
 .search-add .search-wrap.focused .tooltip {
     display: none;
@@ -625,6 +624,10 @@ button.add-note svg.icon {
     text-indent: 25px;
     padding: 5px 10px;
     border-radius: inherit;
+}
+.search-add input[type='search'][disabled] {
+    opacity: 0.25;
+    cursor: not-allowed;
 }
 .search-add .search-icon {
     color: #333;

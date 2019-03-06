@@ -1,5 +1,6 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
+import _debounce from 'lodash-es/debounce';
 
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     event as d3_event,
     select as d3_select,
@@ -24,7 +25,10 @@ import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 export function uiSearchAdd(context) {
     var dispatch = d3_dispatch('choose');
     var presets;
-    var search = d3_select(null), popover = d3_select(null), list = d3_select(null);
+    var searchWrap = d3_select(null),
+        search = d3_select(null),
+        popover = d3_select(null),
+        list = d3_select(null);
 
     var shownGeometry = ['area', 'line', 'point', 'vertex'];
 
@@ -34,7 +38,7 @@ export function uiSearchAdd(context) {
 
         var key = t('modes.add_feature.key');
 
-        var searchWrap = selection
+        searchWrap = selection
             .append('div')
             .attr('class', 'search-wrap')
             .call(tooltip()
@@ -103,6 +107,28 @@ export function uiSearchAdd(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
         });
+
+        var debouncedUpdate = _debounce(updateEnabledState, 500, { leading: true, trailing: true });
+
+        context.map()
+            .on('move.search-add', debouncedUpdate)
+            .on('drawn.search-add', debouncedUpdate);
+
+        updateEnabledState();
+    }
+
+    function osmEditable() {
+        var mode = context.mode();
+        return context.editable() && mode && mode.id !== 'save';
+    }
+
+    function updateEnabledState() {
+        var isEnabled = osmEditable();
+        searchWrap.classed('disabled', !isEnabled);
+        if (!isEnabled) {
+            search.node().blur();
+        }
+        search.attr('disabled', isEnabled ? null : true);
     }
 
     function keypress() {
