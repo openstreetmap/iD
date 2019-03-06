@@ -333,11 +333,11 @@ export function coreContext() {
         } else {
             // only allow 10 favorites
             if (favs.length === 10) {
-                // remove the last favorite (first in, first out)
+                // remove the last favorite (last in, first out)
                 favs.pop();
             }
-            // prepend array
-            favs.unshift({id: preset.id, geom: geom});
+            // append array
+            favs.push({id: preset.id, geom: geom});
         }
         setFavoritePresets(favs);
     };
