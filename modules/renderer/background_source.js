@@ -228,6 +228,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     var providers = [];
 
     d3_json(url, function(err, json) {
+        if (err) return;
         providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
             return {
                 attribution: provider.attribution,
