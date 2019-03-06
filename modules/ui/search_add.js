@@ -41,72 +41,6 @@ export function uiSearchAdd(context) {
             .attr('placeholder', t('modes.add_feature.title'))
             .attr('type', 'search')
             .call(utilNoAuto)
-            .on('keypress', function() {
-                // enter/return
-                if (d3_event.keyCode === 13) {
-                    popover.selectAll('.list .list-item.focused button.choose')
-                        .each(function(d) { d.choose.call(this); });
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-                }
-            })
-            .on('keydown', function(){
-                // up/down arrow key navigation
-
-                var nextFocus,
-                    priorFocus,
-                    parentSubsection;
-                if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] ||
-                    d3_event.keyCode === utilKeybinding.keyCodes.tab && !d3_event.shiftKey) {
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-
-                    priorFocus = popover.selectAll('.list .list-item.focused');
-                    if (priorFocus.empty()) {
-                        nextFocus = popover.selectAll('.list > .list-item:first-child');
-                    } else {
-                        nextFocus = popover.selectAll('.list .list-item.focused + .list-item');
-                        if (nextFocus.empty()) {
-                            nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling)
-                                .selectAll('.list-item:first-child');
-                        }
-                        if (nextFocus.empty()) {
-                            parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
-                            if (parentSubsection && parentSubsection.nextElementSibling) {
-                                nextFocus = d3_select(parentSubsection.nextElementSibling);
-                            }
-                        }
-                    }
-                    if (!nextFocus.empty()) {
-                        focusListItem(nextFocus);
-                        priorFocus.classed('focused', false);
-                    }
-
-                } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑'] ||
-                    d3_event.keyCode === utilKeybinding.keyCodes.tab && d3_event.shiftKey) {
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-
-                    priorFocus = popover.selectAll('.list .list-item.focused');
-                    if (!priorFocus.empty()) {
-
-                        nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
-                        if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
-                            nextFocus = nextFocus.selectAll('.list-item:last-child');
-                        }
-                        if (nextFocus.empty()) {
-                            parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
-                            if (parentSubsection && parentSubsection.previousElementSibling) {
-                                nextFocus = d3_select(parentSubsection.previousElementSibling);
-                            }
-                        }
-                        if (!nextFocus.empty()) {
-                            focusListItem(nextFocus);
-                            priorFocus.classed('focused', false);
-                        }
-                    }
-                }
-            })
             .on('mousedown', function() {
                 search.attr('clicking', true);
             })
@@ -131,24 +65,9 @@ export function uiSearchAdd(context) {
                     search.attr('focusing', null);
                 }
             })
-            .on('input', function () {
-
-                popover.selectAll('.subsection').remove();
-
-                var value = search.property('value');
-                var results;
-                if (value.length) {
-                    results = presets.search(value, shownGeometry);
-                } else {
-                    results = context.presets().recent(shownGeometry, 36);
-                }
-
-                list.call(drawList, results);
-
-                popover.selectAll('.list .list-item.focused')
-                    .classed('focused', false);
-                focusListItem(popover.selectAll('.list > .list-item:first-child'));
-            });
+            .on('keypress', keypress)
+            .on('keydown', keydown)
+            .on('input', searchInput);
 
         searchWrap
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
@@ -174,6 +93,95 @@ export function uiSearchAdd(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
         });
+    }
+
+    function keypress() {
+        if (d3_event.keyCode === utilKeybinding.keyCodes.enter) {
+            popover.selectAll('.list .list-item.focused button.choose')
+                .each(function(d) { d.choose.call(this); });
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+        }
+    }
+
+    function keydown() {
+
+        var nextFocus,
+            priorFocus,
+            parentSubsection;
+        if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] ||
+            d3_event.keyCode === utilKeybinding.keyCodes.tab && !d3_event.shiftKey) {
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+
+            priorFocus = popover.selectAll('.list .list-item.focused');
+            if (priorFocus.empty()) {
+                nextFocus = popover.selectAll('.list > .list-item:first-child');
+            } else {
+                nextFocus = popover.selectAll('.list .list-item.focused + .list-item');
+                if (nextFocus.empty()) {
+                    nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling)
+                        .selectAll('.list-item:first-child');
+                }
+                if (nextFocus.empty()) {
+                    parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                    if (parentSubsection && parentSubsection.nextElementSibling) {
+                        nextFocus = d3_select(parentSubsection.nextElementSibling);
+                    }
+                }
+            }
+            if (!nextFocus.empty()) {
+                focusListItem(nextFocus);
+                priorFocus.classed('focused', false);
+            }
+
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑'] ||
+            d3_event.keyCode === utilKeybinding.keyCodes.tab && d3_event.shiftKey) {
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+
+            priorFocus = popover.selectAll('.list .list-item.focused');
+            if (!priorFocus.empty()) {
+
+                nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
+                if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
+                    nextFocus = nextFocus.selectAll('.list-item:last-child');
+                }
+                if (nextFocus.empty()) {
+                    parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
+                    if (parentSubsection && parentSubsection.previousElementSibling) {
+                        nextFocus = d3_select(parentSubsection.previousElementSibling);
+                    }
+                }
+                if (!nextFocus.empty()) {
+                    focusListItem(nextFocus);
+                    priorFocus.classed('focused', false);
+                }
+            }
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes.esc) {
+            search.node().blur();
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+        }
+    }
+
+    function searchInput() {
+
+        popover.selectAll('.subsection').remove();
+
+        var value = search.property('value');
+        var results;
+        if (value.length) {
+            results = presets.search(value, shownGeometry);
+        } else {
+            results = context.presets().recent(shownGeometry, 36);
+        }
+
+        list.call(drawList, results);
+
+        popover.selectAll('.list .list-item.focused')
+            .classed('focused', false);
+        focusListItem(popover.selectAll('.list > .list-item:first-child'));
     }
 
     function focusListItem(selection) {
