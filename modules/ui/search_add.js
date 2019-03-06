@@ -15,6 +15,7 @@ import {
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
+import { uiTooltipHtml } from './tooltipHtml';
 import { uiPresetFavorite } from './preset_favorite';
 import { uiPresetIcon } from './preset_icon';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
@@ -31,9 +32,16 @@ export function uiSearchAdd(context) {
 
         presets = context.presets().matchAnyGeometry(shownGeometry);
 
+        var key = t('modes.add_feature.key');
+
         var searchWrap = selection
             .append('div')
-            .attr('class', 'search-wrap');
+            .attr('class', 'search-wrap')
+            .call(tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(function(d) { return uiTooltipHtml(t('modes.add_feature.description'), key); })
+            );
 
         search = searchWrap
             .append('input')
@@ -48,6 +56,7 @@ export function uiSearchAdd(context) {
                 search.attr('clicking', null);
             })
             .on('focus', function() {
+                searchWrap.classed('focused', true);
                 if (search.attr('clicking')) {
                     search.attr('focusing', true);
                     search.attr('clicking', null);
@@ -57,6 +66,7 @@ export function uiSearchAdd(context) {
                 popover.classed('hide', false);
             })
             .on('blur', function() {
+                searchWrap.classed('focused', false);
                 popover.classed('hide', true);
             })
             .on('click', function() {
@@ -88,7 +98,7 @@ export function uiSearchAdd(context) {
 
         context.features().on('change.search-add', updateForFeatureHiddenState);
 
-        context.keybinding().on('tab', function() {
+        context.keybinding().on(key, function() {
             search.node().focus();
             d3_event.preventDefault();
             d3_event.stopPropagation();

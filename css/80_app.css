@@ -609,6 +609,9 @@ button.add-note svg.icon {
     border-radius: 20px 0 0 20px;
     background: #fff;
 }
+.search-add .search-wrap.focused .tooltip {
+    display: none;
+}
 .search-add .search-wrap:nth-last-child(2) {
     border-radius: 20px;
     border: none;

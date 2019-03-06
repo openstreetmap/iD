@@ -12,7 +12,9 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Add a feature"
+                "title": "Add a feature",
+                "description": "Search for features to add to the map.",
+                "key": "Tab"
             },
             "add_area": {
                 "title": "Area",

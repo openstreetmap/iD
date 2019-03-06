@@ -11,6 +11,8 @@ en:
   modes:
     add_feature:
       title: Add a feature
+      description: "Search for features to add to the map."
+      key: Tab
     add_area:
       title: Area
       description: "Add parks, buildings, lakes or other areas to the map."
