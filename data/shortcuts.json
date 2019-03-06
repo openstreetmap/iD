@@ -258,6 +258,10 @@
               "text": "shortcuts.editing.operations.orthogonalize"
             },
             {
+              "shortcuts": ["operations.straighten.key"],
+              "text": "shortcuts.editing.operations.straighten"
+            },
+            {
               "shortcuts": ["operations.circularize.key"],
               "text": "shortcuts.editing.operations.circularize"
             },
