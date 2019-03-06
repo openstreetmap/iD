@@ -3131,9 +3131,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Amusement Ride'', separated by commas>'
       attraction/animal:
         # attraction=animal
-        name: Animal
-        # 'terms: zoo,theme park,animal park,lion,tiger,bear'
-        terms: '<translate with synonyms or related terms for ''Animal'', separated by commas>'
+        name: Animal Enclosure
+        # 'terms: amphibian,animal park,aquarium,bear,bird,fish,insect,lion,mammal,monkey,penguin,reptile,safari,theme park,tiger,zoo'
+        terms: '<translate with synonyms or related terms for ''Animal Enclosure'', separated by commas>'
       attraction/big_wheel:
         # attraction=big_wheel
         name: Big Wheel

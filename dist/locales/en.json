@@ -4792,8 +4792,8 @@
                     "terms": "theme park,carnival ride"
                 },
                 "attraction/animal": {
-                    "name": "Animal",
-                    "terms": "zoo,theme park,animal park,lion,tiger,bear"
+                    "name": "Animal Enclosure",
+                    "terms": "amphibian,animal park,aquarium,bear,bird,fish,insect,lion,mammal,monkey,penguin,reptile,safari,theme park,tiger,zoo"
                 },
                 "attraction/big_wheel": {
                     "name": "Big Wheel",

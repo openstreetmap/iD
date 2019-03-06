@@ -9,15 +9,25 @@
         "area"
     ],
     "terms": [
-        "zoo",
-        "theme park",
+        "amphibian",
         "animal park",
+        "aquarium",
+        "bear",
+        "bird",
+        "fish",
+        "insect",
         "lion",
+        "mammal",
+        "monkey",
+        "penguin",
+        "reptile",
+        "safari",
+        "theme park",
         "tiger",
-        "bear"
+        "zoo"
     ],
     "tags": {
         "attraction": "animal"
     },
-    "name": "Animal"
+    "name": "Animal Enclosure"
 }
