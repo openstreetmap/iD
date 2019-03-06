@@ -133,14 +133,14 @@
       "name": "Major Roads",
       "members": [
         "highway/motorway",
-        "highway/motorway_link",
         "highway/trunk",
-        "highway/trunk_link",
         "highway/primary",
-        "highway/primary_link",
         "highway/secondary",
-        "highway/secondary_link",
         "highway/tertiary",
+        "highway/motorway_link",
+        "highway/trunk_link",
+        "highway/primary_link",
+        "highway/secondary_link",
         "highway/tertiary_link"
       ]
     },
