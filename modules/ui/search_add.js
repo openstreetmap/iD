@@ -97,8 +97,7 @@ export function uiSearchAdd(context) {
 
         list = popover
             .append('div')
-            .attr('class', 'list');//
-            //.call(drawList, context.presets().defaults(geometry, 36));
+            .attr('class', 'list');
 
         context.features().on('change.search-add', updateForFeatureHiddenState);
 
@@ -203,8 +202,6 @@ export function uiSearchAdd(context) {
 
     function searchInput() {
 
-        popover.selectAll('.subsection').remove();
-
         var value = search.property('value');
         var results;
         if (value.length) {
@@ -263,6 +260,8 @@ export function uiSearchAdd(context) {
 
     function drawList(list, presets) {
 
+        list.selectAll('.subsection').remove();
+
         var collection = presets.collection.map(function(preset) {
             return itemForPreset(preset);
         });
@@ -275,8 +274,12 @@ export function uiSearchAdd(context) {
         items.exit()
             .remove();
 
-        items.enter();
         drawItems(items.enter());
+
+        list.selectAll('.list-item.expanded')
+            .classed('expanded', false)
+            .selectAll('.label svg.icon use')
+            .attr('href', textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
 
         updateForFeatureHiddenState();
     }
