@@ -38,6 +38,8 @@ en:
         title: "Add {feature} as a line"
       area:
         title: "Add {feature} as an area"
+      building:
+        title: "Add {feature} as a building"
       vertex:
         title: "Add {feature} as a vertex"
     browse:

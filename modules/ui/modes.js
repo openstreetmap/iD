@@ -78,7 +78,11 @@ export function uiModes(context) {
                 });
                 var tooltipTitleID = 'modes.add_preset.title';
                 if (relevantMatchingGeometry.length !== 1) {
-                    tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
+                    if (preset.setTags({}, d.geom).building) {
+                        tooltipTitleID = 'modes.add_preset.building.title';
+                    } else {
+                        tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
+                    }
                 }
                 var favoriteMode = {
                     button: markerClass,

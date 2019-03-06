@@ -132,17 +132,22 @@ export function uiSearchAdd(context) {
                 }
             })
             .on('input', function () {
+
+                popover.selectAll('.subsection').remove();
+
                 var value = search.property('value');
+                var results;
                 if (value.length) {
-                    popover.selectAll('.subsection').remove();
-                    var results = presets.search(value, shownGeometry);
-                    list.call(drawList, results);
-                    popover.selectAll('.list .list-item.focused')
-                        .classed('focused', false);
-                    focusListItem(popover.selectAll('.list > .list-item:first-child'));
+                    results = presets.search(value, shownGeometry);
                 } else {
-                    popover.selectAll('.list > *').remove();
+                    results = context.presets().recent(shownGeometry, 36);
                 }
+
+                list.call(drawList, results);
+
+                popover.selectAll('.list .list-item.focused')
+                    .classed('focused', false);
+                focusListItem(popover.selectAll('.list > .list-item:first-child'));
             });
 
         searchWrap
@@ -195,6 +200,9 @@ export function uiSearchAdd(context) {
     }
 
     function itemForPreset(preset) {
+        if (preset.members) {
+            return CategoryItem(preset);
+        }
         var supportedGeometry = preset.geometry.filter(function(geometry) {
             return shownGeometry.indexOf(geometry) !== -1;
         }).sort();
@@ -212,9 +220,6 @@ export function uiSearchAdd(context) {
     function drawList(list, presets) {
 
         var collection = presets.collection.map(function(preset) {
-            if (preset.members) {
-                return CategoryItem(preset);
-            }
             return itemForPreset(preset);
         });
 
@@ -282,6 +287,9 @@ export function uiSearchAdd(context) {
         label.append('span')
             .text(function(d) {
                 if (d.isSubitem) {
+                    if (d.preset.setTags({}, d.geometry).building) {
+                        return t('presets.presets.building.name');
+                    }
                     return t('modes.add_' + d.geometry + '.title');
                 }
                 return d.preset.name();
@@ -417,6 +425,7 @@ export function uiSearchAdd(context) {
                     mode = modeAddArea(context, modeInfo);
             }
             search.node().blur();
+            context.presets().choose(preset);
             context.enter(mode);
         };
         return item;
