@@ -270,7 +270,7 @@ export function presetIndex() {
 
     all.recent = function(geometries, n) {
         return presetCollection(_recent.matchAnyGeometry(geometries).collection.slice(0, n - 1));
-    }
+    };
 
     all.choose = function(preset) {
         if (preset.searchable !== false) {

@@ -292,16 +292,32 @@ export function uiSearchAdd(context) {
             }
         });
 
-        label.append('span')
-            .text(function(d) {
-                if (d.isSubitem) {
-                    if (d.preset.setTags({}, d.geometry).building) {
-                        return t('presets.presets.building.name');
-                    }
-                    return t('modes.add_' + d.geometry + '.title');
-                }
-                return d.preset.name();
-            });
+        label.each(function(d) {
+
+            if ((d.geometry && !d.isSubitem) || d.geometries) {
+                // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+                d3_select(this)
+                    .append('div')
+                    .attr('class', 'label-inner')
+                    .selectAll('.namepart')
+                    .data(d.preset.name().split(' – '))
+                    .enter()
+                    .append('div')
+                    .attr('class', 'namepart')
+                    .text(function(d) { return d; });
+            } else {
+                d3_select(this).append('span')
+                    .text(function(d) {
+                        if (d.isSubitem) {
+                            if (d.preset.setTags({}, d.geometry).building) {
+                                return t('presets.presets.building.name');
+                            }
+                            return t('modes.add_' + d.geometry + '.title');
+                        }
+                        return d.preset.name();
+                    });
+            }
+        });
 
         row.each(function(d) {
             if (d.geometry) {

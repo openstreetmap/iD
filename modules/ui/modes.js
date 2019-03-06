@@ -66,7 +66,7 @@ export function uiModes(context) {
             var favoritePresets = context.getFavoritePresets();
             var favoriteModes = favoritePresets.map(function(d, index) {
                 var preset = context.presets().item(d.id);
-                var presetName = preset.name();
+                var presetName = preset.name().split(' – ')[0];
                 var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + presetName.replace(/\s+/g, '_')
                     + '-' + d.geom; // replace spaces with underscores to avoid css interpretation
                 if (preset.isFallback()) {
@@ -92,7 +92,7 @@ export function uiModes(context) {
                 var favoriteMode = {
                     button: markerClass,
                     title: presetName,
-                    description: t(tooltipTitleID, { feature: presetName }),
+                    description: t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' }),
                     preset: preset,
                     geometry: d.geom
                 };

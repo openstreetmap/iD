@@ -668,8 +668,11 @@ button.add-note svg.icon {
     position: relative;
     display: flex;
     align-items: center;
-    line-height: 1.2em;
+    line-height: 1.3em;
     width: 100%;
+}
+.search-add .list-item .label .namepart:nth-child(2) {
+    font-weight: normal;
 }
 .search-add .list-item.disabled .preset-icon-container,
 .search-add .list-item.disabled .label {
