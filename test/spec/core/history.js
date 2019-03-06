@@ -1,6 +1,11 @@
-describe('iD.History', function () {
-    var context, history, spy,
-        action = function() { return iD.coreGraph(); };
+describe('iD.coreHistory', function () {
+    var context, history, spy;
+    var actionNoop = function(g) { return g; };
+    var actionAddNode = function (nodeID) {
+        return function(g) {
+            return g.replace(iD.osmNode({ id: nodeID }));
+        };
+    };
 
     beforeEach(function () {
         context = iD.coreContext();
@@ -33,7 +38,7 @@ describe('iD.History', function () {
 
     describe('#perform', function () {
         it('returns a difference', function () {
-            expect(history.perform(action).changes()).to.eql({});
+            expect(history.perform(actionNoop).changes()).to.eql({});
         });
 
         it('updates the graph', function () {
@@ -43,20 +48,20 @@ describe('iD.History', function () {
         });
 
         it('pushes an undo annotation', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             expect(history.undoAnnotation()).to.equal('annotation');
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
-            var difference = history.perform(action);
+            var difference = history.perform(actionNoop);
             expect(spy).to.have.been.calledWith(difference);
             expect(spy.callCount).to.eql(1);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -77,7 +82,7 @@ describe('iD.History', function () {
 
     describe('#replace', function () {
         it('returns a difference', function () {
-            expect(history.replace(action).changes()).to.eql({});
+            expect(history.replace(actionNoop).changes()).to.eql({});
         });
 
         it('updates the graph', function () {
@@ -87,20 +92,20 @@ describe('iD.History', function () {
         });
 
         it('replaces the undo annotation', function () {
-            history.perform(action, 'annotation1');
-            history.replace(action, 'annotation2');
+            history.perform(actionNoop, 'annotation1');
+            history.replace(actionNoop, 'annotation2');
             expect(history.undoAnnotation()).to.equal('annotation2');
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
-            var difference = history.replace(action);
+            var difference = history.replace(actionNoop);
             expect(spy).to.have.been.calledWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -110,49 +115,49 @@ describe('iD.History', function () {
 
     describe('#pop', function () {
         it('returns a difference', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             expect(history.pop().changes()).to.eql({});
         });
 
         it('updates the graph', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.pop();
             expect(history.undoAnnotation()).to.be.undefined;
         });
 
         it('does not push the redo stack', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.pop();
             expect(history.redoAnnotation()).to.be.undefined;
         });
 
         it('emits a change event', function () {
-            history.perform(action);
+            history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.pop();
             expect(spy).to.have.been.calledWith(difference);
         });
 
         it('pops n times', function () {
-            history.perform(action, 'annotation1');
-            history.perform(action, 'annotation2');
-            history.perform(action, 'annotation3');
+            history.perform(actionNoop, 'annotation1');
+            history.perform(actionNoop, 'annotation2');
+            history.perform(actionNoop, 'annotation3');
             history.pop(2);
             expect(history.undoAnnotation()).to.equal('annotation1');
         });
 
         it('pops 0 times', function () {
-            history.perform(action, 'annotation1');
-            history.perform(action, 'annotation2');
-            history.perform(action, 'annotation3');
+            history.perform(actionNoop, 'annotation1');
+            history.perform(actionNoop, 'annotation2');
+            history.perform(actionNoop, 'annotation3');
             history.pop(0);
             expect(history.undoAnnotation()).to.equal('annotation3');
         });
 
         it('pops 1 time if argument is invalid', function () {
-            history.perform(action, 'annotation1');
-            history.perform(action, 'annotation2');
-            history.perform(action, 'annotation3');
+            history.perform(actionNoop, 'annotation1');
+            history.perform(actionNoop, 'annotation2');
+            history.perform(actionNoop, 'annotation3');
             history.pop('foo');
             expect(history.undoAnnotation()).to.equal('annotation2');
             history.pop(-1);
@@ -162,40 +167,40 @@ describe('iD.History', function () {
 
     describe('#overwrite', function () {
         it('returns a difference', function () {
-            history.perform(action, 'annotation');
-            expect(history.overwrite(action).changes()).to.eql({});
+            history.perform(actionNoop, 'annotation');
+            expect(history.overwrite(actionNoop).changes()).to.eql({});
         });
 
         it('updates the graph', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             var node = iD.osmNode();
             history.overwrite(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
 
         it('replaces the undo annotation', function () {
-            history.perform(action, 'annotation1');
-            history.overwrite(action, 'annotation2');
+            history.perform(actionNoop, 'annotation1');
+            history.overwrite(actionNoop, 'annotation2');
             expect(history.undoAnnotation()).to.equal('annotation2');
         });
 
         it('does not push the redo stack', function () {
-            history.perform(action, 'annotation');
-            history.overwrite(action, 'annotation2');
+            history.perform(actionNoop, 'annotation');
+            history.overwrite(actionNoop, 'annotation2');
             expect(history.redoAnnotation()).to.be.undefined;
         });
 
         it('emits a change event', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.on('change', spy);
-            var difference = history.overwrite(action, 'annotation2');
+            var difference = history.overwrite(actionNoop, 'annotation2');
             expect(spy).to.have.been.calledWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph()),
-                action2 = sinon.stub().returns(iD.coreGraph());
-            history.perform(action, 'annotation');
+            var action1 = sinon.stub().returns(iD.coreGraph());
+            var action2 = sinon.stub().returns(iD.coreGraph());
+            history.perform(actionNoop, 'annotation');
             history.overwrite(action1, action2, 'annotation2');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -209,26 +214,26 @@ describe('iD.History', function () {
         });
 
         it('pops the undo stack', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.undo();
             expect(history.undoAnnotation()).to.be.undefined;
         });
 
         it('pushes the redo stack', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.undo();
             expect(history.redoAnnotation()).to.equal('annotation');
         });
 
         it('emits an undone event', function () {
-            history.perform(action);
+            history.perform(actionNoop);
             history.on('undone', spy);
             history.undo();
             expect(spy).to.have.been.called;
         });
 
         it('emits a change event', function () {
-            history.perform(action);
+            history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.undo();
             expect(spy).to.have.been.calledWith(difference);
@@ -241,7 +246,7 @@ describe('iD.History', function () {
         });
 
         it('does redo into an annotated state', function () {
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.on('redone', spy);
             history.undo();
             history.redo();
@@ -250,7 +255,7 @@ describe('iD.History', function () {
         });
 
         it('does not redo into a non-annotated state', function () {
-            history.perform(action);
+            history.perform(actionNoop);
             history.on('redone', spy);
             history.undo();
             history.redo();
@@ -258,11 +263,59 @@ describe('iD.History', function () {
         });
 
         it('emits a change event', function () {
-            history.perform(action);
+            history.perform(actionNoop);
             history.undo();
             history.on('change', spy);
             var difference = history.redo();
             expect(spy).to.have.been.calledWith(difference);
+        });
+    });
+
+    describe('#pauseChangeDispatch / #resumeChangeDispatch', function() {
+        it('prevents change events from getting dispatched', function() {
+            history.perform(actionNoop, 'base');
+            history.on('change', spy);
+
+            history.pauseChangeDispatch();
+
+            history.perform(actionNoop, 'perform');
+            expect(spy).to.have.been.notCalled;
+            history.replace(actionNoop, 'replace');
+            expect(spy).to.have.been.notCalled;
+            history.overwrite(actionNoop, 'replace');
+            expect(spy).to.have.been.notCalled;
+            history.undo();
+            expect(spy).to.have.been.notCalled;
+            history.redo();
+            expect(spy).to.have.been.notCalled;
+            history.pop();
+            expect(spy).to.have.been.notCalled;
+
+            var diff = history.resumeChangeDispatch();
+            expect(spy).to.have.been.calledOnceWith(diff);
+        });
+
+        it('does nothing if resume called before pause', function() {
+            history.perform(actionNoop, 'base');
+            history.on('change', spy);
+
+            history.resumeChangeDispatch();
+            expect(spy).to.have.been.notCalled;
+        });
+
+        it('uses earliest difference if pause called multiple times', function() {
+            history.perform(actionNoop, 'base');
+            history.on('change', spy);
+
+            history.pauseChangeDispatch();
+            history.perform(actionAddNode('a'), 'perform');
+
+            history.pauseChangeDispatch();
+            history.perform(actionAddNode('b'), 'perform');
+
+            var diff = history.resumeChangeDispatch();
+            expect(spy).to.have.been.calledOnceWith(diff);
+            expect(diff.changes()).to.include.keys(['a', 'b']);
         });
     });
 
@@ -274,8 +327,8 @@ describe('iD.History', function () {
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'}),
-                node2 = node1.update({ tags: { yes: 'no' } });
+            var node1 = iD.osmNode({id: 'n1'});
+            var node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
@@ -303,8 +356,8 @@ describe('iD.History', function () {
 
     describe('#reset', function () {
         it('clears the version stack', function () {
-            history.perform(action, 'annotation');
-            history.perform(action, 'annotation');
+            history.perform(actionNoop, 'annotation');
+            history.perform(actionNoop, 'annotation');
             history.undo();
             history.reset();
             expect(history.undoAnnotation()).to.be.undefined;
@@ -320,16 +373,16 @@ describe('iD.History', function () {
 
     describe('#checkpoint', function () {
         it('saves and resets to checkpoints', function () {
-            history.perform(action, 'annotation1');
-            history.perform(action, 'annotation2');
-            history.perform(action, 'annotation3');
+            history.perform(actionNoop, 'annotation1');
+            history.perform(actionNoop, 'annotation2');
+            history.perform(actionNoop, 'annotation3');
             history.checkpoint('check1');
-            history.perform(action, 'annotation4');
-            history.perform(action, 'annotation5');
+            history.perform(actionNoop, 'annotation4');
+            history.perform(actionNoop, 'annotation5');
             history.checkpoint('check2');
-            history.perform(action, 'annotation6');
-            history.perform(action, 'annotation7');
-            history.perform(action, 'annotation8');
+            history.perform(actionNoop, 'annotation6');
+            history.perform(actionNoop, 'annotation7');
+            history.perform(actionNoop, 'annotation8');
 
             history.reset('check1');
             expect(history.undoAnnotation()).to.equal('annotation3');
@@ -350,17 +403,16 @@ describe('iD.History', function () {
 
     describe('#toJSON', function() {
         it('doesn\'t generate unsaveable changes', function() {
-            var node_1 = iD.osmNode({id: 'n-1'});
-            history.perform(iD.actionAddEntity(node_1));
+            history.perform(actionAddNode('n-1'));
             history.perform(iD.actionDeleteNode('n-1'));
             expect(history.toJSON()).to.be.not.ok;
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'}),
-                node1 = iD.osmNode({id: 'n1'}),
-                node2 = iD.osmNode({id: 'n2'}),
-                node3 = iD.osmNode({id: 'n3'});
+            var node_1 = iD.osmNode({id: 'n-1'});
+            var node1 = iD.osmNode({id: 'n1'});
+            var node2 = iD.osmNode({id: 'n2'});
+            var node3 = iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification

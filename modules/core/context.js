@@ -496,6 +496,8 @@ export function coreContext() {
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
+    context.pauseChangeDispatch = history.pauseChangeDispatch;
+    context.resumeChangeDispatch = history.resumeChangeDispatch;
 
     validator = coreValidator(context);
 

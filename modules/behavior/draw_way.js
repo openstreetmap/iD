@@ -1,3 +1,5 @@
+import _clone from 'lodash-es/clone';
+
 import {
     event as d3_event,
     select as d3_select
@@ -30,6 +32,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
     // Push an annotated state for undo to return back to.
     // We must make sure to remove this edit later.
+    context.pauseChangeDispatch();
     context.perform(actionNoop(), annotation);
     _tempEdits++;
 
@@ -37,6 +40,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // We must make sure to remove this edit later.
     context.perform(_actionAddDrawNode());
     _tempEdits++;
+    context.resumeChangeDispatch();
 
 
     function keydown() {
@@ -122,7 +126,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
 
-            var nodes = graph.childNodes(parent);
+            var nodes = _clone(graph.childNodes(parent));
 
             if (origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
@@ -149,17 +153,20 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     function undone() {
+        context.pauseChangeDispatch();
         // Undo popped the history back to the initial annotated no-op edit.
         _tempEdits = 0;     // We will deal with the temp edits here
         context.pop(1);     // Remove initial no-op edit
 
         if (context.graph() === baselineGraph) {    // We've undone back to the beginning
             // baselineGraph may be behind startGraph if this way was added rather than continued
-            resetContextGraphToStartGraph();
+            resetToStartGraph();
+            context.resumeChangeDispatch();
             context.enter(modeSelect(context, [wayID]));
         } else {
             // Remove whatever segment was drawn previously and continue drawing
             context.pop(1);
+            context.resumeChangeDispatch();
             context.enter(mode);
         }
     }
@@ -168,6 +175,13 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     function setActiveElements() {
         context.surface().selectAll('.' + end.id)
             .classed('active', true);
+    }
+
+
+    function resetToStartGraph() {
+        while (context.graph() !== startGraph) {
+            context.pop();
+        }
     }
 
 
@@ -197,19 +211,16 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             .on('undone.draw', undone);
     };
 
-    function resetContextGraphToStartGraph() {
-        while (context.graph() !== startGraph) {
-            context.pop();
-        }
-    }
 
     drawWay.off = function(surface) {
         // Drawing was interrupted unexpectedly.
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
         if (_tempEdits) {
+            context.pauseChangeDispatch();
             context.pop(_tempEdits);
-            resetContextGraphToStartGraph();
+            resetToStartGraph();
+            context.resumeChangeDispatch();
         }
 
         context.map()
@@ -257,6 +268,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -265,6 +277,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             annotation
         );
 
+        context.resumeChangeDispatch();
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
@@ -276,6 +289,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -285,6 +299,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             annotation
         );
 
+        context.resumeChangeDispatch();
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
@@ -296,6 +311,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -304,6 +320,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             annotation
         );
 
+        context.resumeChangeDispatch();
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
@@ -318,6 +335,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -326,6 +344,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             drawWay.cancel();
             return;
         }
+
+        context.resumeChangeDispatch();
 
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
@@ -341,10 +361,12 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
     // Cancel the draw operation, delete everything, and return to browse mode.
     drawWay.cancel = function() {
+        context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
-        resetContextGraphToStartGraph();
+        resetToStartGraph();
+        context.resumeChangeDispatch();
 
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
