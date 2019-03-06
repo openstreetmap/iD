@@ -1,6 +1,5 @@
 {
     "icon": "maki-landuse",
-    "geometry": "area",
     "name": "Land Use Features",
     "members": [
         "landuse/residential",

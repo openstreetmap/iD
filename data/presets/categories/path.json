@@ -1,13 +1,12 @@
 {
-    "icon": "iD-category-path",
-    "geometry": "line",
-    "name": "Path Features",
+    "icon": "temaki-pedestrian",
+    "name": "Paths",
     "members": [
+        "highway/path",
+        "highway/footway",
         "highway/footway/marked",
         "highway/footway/sidewalk",
         "highway/steps",
-        "highway/path",
-        "highway/footway",
         "highway/cycleway",
         "highway/bridleway",
         "highway/pedestrian_line"

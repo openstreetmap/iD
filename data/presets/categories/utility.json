@@ -1,6 +1,5 @@
 {
-    "icon": "iD-category-utility",
-    "geometry": "line",
+    "icon": "iD-power-line",
     "name": "Utility Features",
     "members": [
         "power/line",

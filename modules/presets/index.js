@@ -268,6 +268,10 @@ export function presetIndex() {
         return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
+    all.recent = function(geometries, n) {
+        return presetCollection(_recent.matchAnyGeometry(geometries).collection.slice(0, n - 1));
+    };
+
     all.choose = function(preset) {
         if (preset.searchable !== false) {
             _recent = presetCollection(_uniq([preset].concat(_recent.collection)));

@@ -23,8 +23,24 @@ export function uiPresetIcon() {
             return 'iD-other-line';
         else if (geom === 'vertex')
             return p.isFallback() ? '' : 'temaki-vertex';
+        else if (isSmall() && geom === 'point')
+            return '';
         else
             return 'maki-marker-stroked';
+    }
+
+    function renderPointBorder(enter) {
+        var w = 40, h = 40;
+        enter = enter
+            .append('svg')
+            .attr('class', 'preset-icon-fill preset-icon-point-border')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+        enter.append('path')
+            .attr('transform', 'translate(11.5, 8)')
+            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
     function renderCircleFill(fillEnter) {
@@ -128,11 +144,11 @@ export function uiPresetIcon() {
 
         container = container.enter()
             .append('div')
-            .attr('class', 'preset-icon-container')
+            .attr('class', 'preset-icon-container ' + sizeClass)
             .merge(container);
 
         var p = preset.apply(this, arguments);
-        var geom = geometry.apply(this, arguments);
+        var geom = geometry ? geometry.apply(this, arguments) : null;
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
@@ -150,6 +166,16 @@ export function uiPresetIcon() {
             }
         }
         var tagClasses = svgTagClasses().getClassesString(tags, '');
+
+        var pointBorder = container.selectAll('.preset-icon-point-border')
+            .data(geom === 'point' && isSmall() ? [0] : []);
+
+        pointBorder.exit()
+            .remove();
+
+        var pointBorderEnter = pointBorder.enter();
+        renderPointBorder(pointBorderEnter);
+        pointBorder = pointBorderEnter.merge(pointBorder);
 
 
         var vertexFill = container.selectAll('.preset-icon-fill-vertex')
@@ -206,7 +232,7 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon ' + geom + '-geom')
+            .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
             .classed('framed', isFramed)
             .classed('preset-icon-iD', isiDIcon);
 
@@ -216,7 +242,8 @@ export function uiPresetIcon() {
             });
 
         icon.selectAll('use')
-            .attr('href', '#' + picon + (isMaki ? '-15' : ''));
+            .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
+
     }
 
 

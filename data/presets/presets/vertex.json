@@ -5,7 +5,10 @@
     "geometry": [
         "vertex"
     ],
+    "terms": [
+        "other"
+    ],
     "tags": {},
-    "name": "Other",
+    "name": "Vertex",
     "matchScore": 0.1
 }

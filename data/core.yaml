@@ -9,6 +9,10 @@ en:
     open_wikidata: open on wikidata.org
     favorite: favorite
   modes:
+    add_feature:
+      title: Add a feature
+      description: "Search for features to add to the map."
+      key: Tab
     add_area:
       title: Area
       description: "Add parks, buildings, lakes or other areas to the map."
@@ -21,10 +25,13 @@ en:
       title: Point
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       tail: Click on the map to add a point.
+    add_vertex:
+      title: Vertex
     add_note:
       title: Note
       description: "Spotted an issue? Let other mappers know."
       tail: Click on the map to add a note.
+      key: N
     add_preset:
       title: "Add {feature}"
       point:
@@ -33,6 +40,10 @@ en:
         title: "Add {feature} as a line"
       area:
         title: "Add {feature} as an area"
+      building:
+        title: "Add {feature} as a building"
+      vertex:
+        title: "Add {feature} as a vertex"
     browse:
       title: Browse
       description: Pan and zoom the map.
@@ -1643,10 +1654,12 @@ en:
       title: "Editing"
       drawing:
         title: "Drawing"
+        focus_add_feature: "Focus the feature search field"
         add_point: "'Add point' mode"
         add_line: "'Add line' mode"
         add_area: "'Add area' mode"
         add_note: "'Add note' mode"
+        add_favorite: "Add a favorite feature"
         place_point: "Place a point or note"
         disable_snap: "Hold to disable point snapping"
         stop_line: "Finish drawing a line or area"

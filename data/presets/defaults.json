@@ -3,8 +3,8 @@
     "area": [
       "category-landuse",
       "category-building",
-      "category-water-area",
-      "category-natural-area",
+      "category-water",
+      "category-natural",
       "leisure/park",
       "amenity/hospital",
       "amenity/place_of_worship",
@@ -13,17 +13,18 @@
       "area"
     ],
     "line": [
-      "category-road",
+      "category-road_major",
+      "category-road_minor",
       "category-rail",
       "category-path",
-      "category-water-line",
+      "category-waterway",
       "category-barrier",
-      "category-natural-line",
+      "category-natural",
       "category-utility",
       "line"
     ],
     "point": [
-      "category-natural-point",
+      "category-natural",
       "leisure/park",
       "amenity/hospital",
       "amenity/place_of_worship",

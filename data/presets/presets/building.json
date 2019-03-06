@@ -16,7 +16,6 @@
         "wheelchair"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

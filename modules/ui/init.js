@@ -26,6 +26,7 @@ import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiModes } from './modes';
+import { uiNotes } from './notes';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
 import { uiRestore } from './restore';
@@ -36,6 +37,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiSearchAdd } from './search_add';
 import { uiTooltipHtml } from './tooltipHtml';
 import { uiUndoRedo } from './undo_redo';
 import { uiVersion } from './version';
@@ -90,7 +92,7 @@ export function uiInit(context) {
         var sidebarButton = leadingArea
             .append('div')
             .append('button')
-            .attr('class', 'sidebar-toggle')
+            .attr('class', 'sidebar-toggle bar-button')
             .attr('tabindex', -1)
             .on('click', ui.sidebar.toggle)
             .call(tooltip()
@@ -110,12 +112,19 @@ export function uiInit(context) {
 
 
         // Center area button group (Point/Line/Area/Note mode buttons)
-        bar
+        var centerArea = bar
             .append('div')
-            .attr('class', 'tool-group center-area')
-            .append('div')
-            .attr('class', 'modes joined')
-            .call(uiModes(context), bar);
+            .attr('class', 'tool-group center-area');
+
+        var addArea = centerArea.append('div')
+            .attr('class', 'search-add joined');
+
+        addArea.call(uiSearchAdd(context), bar);
+        addArea.call(uiModes(context), bar);
+
+        centerArea.append('div')
+            .attr('class', 'notes')
+            .call(uiNotes(context), bar);
 
 
         // Trailing area button group (Undo/Redo save buttons)
@@ -132,13 +141,6 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'save-wrap')
             .call(uiSave(context));
-
-
-        // For now, just put spinner at the end of the #bar
-        bar
-            .append('div')
-            .attr('class', 'spinner')
-            .call(uiSpinner(context));
 
 
         // Map controls (appended to #bar, but absolutely positioned)
@@ -184,6 +186,10 @@ export function uiInit(context) {
             .call(help.renderToggleButton);
         content.call(help.renderPane);
 
+        content
+            .append('div')
+            .attr('class', 'spinner')
+            .call(uiSpinner(context));
 
         // Add attribution and footer
         var about = content

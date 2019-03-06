@@ -6,7 +6,7 @@ import {
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 
-export function uiPresetFavorite(preset, geom, context) {
+export function uiPresetFavorite(preset, geom, context, klass) {
 
     var presetFavorite = {};
 
@@ -15,7 +15,7 @@ export function uiPresetFavorite(preset, geom, context) {
 
     presetFavorite.button = function(selection) {
 
-        var canFavorite = geom !== 'vertex' && geom !== 'relation' && !preset.isFallback();
+        var canFavorite = geom !== 'relation';
 
         _button = selection.selectAll('.preset-favorite-button')
             .data(canFavorite ? [0] : []);
@@ -24,31 +24,31 @@ export function uiPresetFavorite(preset, geom, context) {
 
         _button = _button.enter()
             .insert('button', '.tag-reference-button')
-            .attr('class', 'preset-favorite-button')
+            .attr('class', 'preset-favorite-button ' + klass)
             .attr('title', t('icons.favorite'))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-favorite'))
             .merge(_button);
 
         _button
-            .classed('active', function() {
-                return context.isFavoritePreset(preset, geom);
-            })
             .on('click', function () {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                //update state of favorite icon
-                d3_select(this)
-                    .classed('active', function() {
-                        return !d3_select(this).classed('active');
-                    });
+                context.favoritePreset(preset, geom);
 
-               context.favoritePreset(preset, geom);
-
+                update();
             });
 
+        update();
     };
+
+    function update() {
+        _button
+            .classed('active', context.isFavoritePreset(preset, geom));
+    }
+
+    context.on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
 
     return presetFavorite;
 }

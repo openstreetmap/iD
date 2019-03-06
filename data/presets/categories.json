@@ -2,7 +2,6 @@
   "categories": {
     "category-barrier": {
       "icon": "maki-roadblock",
-      "geometry": "line",
       "name": "Barrier Features",
       "members": [
         "barrier/fence",
@@ -16,7 +15,6 @@
     },
     "category-building": {
       "icon": "maki-building",
-      "geometry": "area",
       "name": "Building Features",
       "members": [
         "building",
@@ -29,9 +27,8 @@
         "building/residential"
       ]
     },
-    "category-golf-area": {
+    "category-golf": {
       "icon": "maki-golf",
-      "geometry": "area",
       "name": "Golf Features",
       "members": [
         "golf/fairway",
@@ -41,14 +38,7 @@
         "golf/bunker",
         "golf/tee",
         "golf/water_hazard",
-        "golf/driving_range"
-      ]
-    },
-    "category-golf-line": {
-      "icon": "maki-golf",
-      "geometry": "line",
-      "name": "Golf Features",
-      "members": [
+        "golf/driving_range",
         "golf/hole",
         "golf/cartpath",
         "golf/cartpath_service",
@@ -57,7 +47,6 @@
     },
     "category-landuse": {
       "icon": "maki-landuse",
-      "geometry": "area",
       "name": "Land Use Features",
       "members": [
         "landuse/residential",
@@ -74,9 +63,8 @@
         "landuse/religious"
       ]
     },
-    "category-natural-area": {
+    "category-natural": {
       "icon": "maki-natural",
-      "geometry": "area",
       "name": "Natural Features",
       "members": [
         "natural/water",
@@ -88,20 +76,9 @@
         "natural/bare_rock",
         "natural/beach",
         "natural/cave_entrance",
-        "natural/glacier"
-      ]
-    },
-    "category-natural-line": {
-      "icon": "maki-natural",
-      "geometry": "line",
-      "name": "Natural Features",
-      "members": ["natural/coastline", "natural/tree_row"]
-    },
-    "category-natural-point": {
-      "icon": "maki-natural",
-      "geometry": "point",
-      "name": "Natural Features",
-      "members": [
+        "natural/glacier",
+        "natural/coastline",
+        "natural/tree_row",
         "natural/peak",
         "natural/cliff",
         "natural/beach",
@@ -109,36 +86,35 @@
       ]
     },
     "category-path": {
-      "icon": "iD-category-path",
-      "geometry": "line",
-      "name": "Path Features",
+      "icon": "temaki-pedestrian",
+      "name": "Paths",
       "members": [
+        "highway/path",
+        "highway/footway",
         "highway/footway/marked",
         "highway/footway/sidewalk",
         "highway/steps",
-        "highway/path",
-        "highway/footway",
         "highway/cycleway",
         "highway/bridleway",
         "highway/pedestrian_line"
       ]
     },
     "category-rail": {
-      "icon": "iD-category-rail",
-      "geometry": "line",
-      "name": "Rail Features",
+      "icon": "iD-railway-rail",
+      "name": "Rails",
       "members": [
         "railway/rail",
-        "railway/subway",
-        "railway/tram",
-        "railway/monorail",
         "railway/disused",
-        "railway/abandoned"
+        "railway/tram",
+        "railway/subway",
+        "railway/narrow_gauge",
+        "railway/light_rail",
+        "railway/monorail",
+        "railway/funicular"
       ]
     },
     "category-restriction": {
       "icon": "iD-restriction",
-      "geometry": "relation",
       "name": "Restriction Features",
       "members": [
         "type/restriction/no_left_turn",
@@ -152,32 +128,48 @@
         "type/restriction"
       ]
     },
-    "category-road": {
-      "icon": "iD-category-roads",
-      "geometry": "line",
-      "name": "Road Features",
+    "category-road_major": {
+      "icon": "iD-highway-unclassified",
+      "name": "Major Roads",
       "members": [
-        "highway/residential",
         "highway/motorway",
         "highway/trunk",
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
-        "highway/living_street",
-        "highway/unclassified",
-        "highway/service",
-        "highway/track",
         "highway/motorway_link",
         "highway/trunk_link",
         "highway/primary_link",
         "highway/secondary_link",
-        "highway/tertiary_link",
+        "highway/tertiary_link"
+      ]
+    },
+    "category-road_minor": {
+      "icon": "iD-highway-unclassified",
+      "name": "Minor Roads",
+      "members": [
+        "highway/unclassified",
+        "highway/residential",
+        "highway/living_street",
+        "highway/service",
+        "highway/track",
         "highway/road"
+      ]
+    },
+    "category-road_service": {
+      "icon": "iD-highway-service",
+      "name": "Service Roads",
+      "members": [
+        "highway/service",
+        "highway/service/parking_aisle",
+        "highway/service/driveway",
+        "highway/service/alley",
+        "highway/service/emergency_access",
+        "highway/service/drive-through"
       ]
     },
     "category-route": {
       "icon": "iD-route",
-      "geometry": "relation",
       "name": "Route Features",
       "members": [
         "type/route/road",
@@ -200,8 +192,7 @@
       ]
     },
     "category-utility": {
-      "icon": "iD-category-utility",
-      "geometry": "line",
+      "icon": "iD-power-line",
       "name": "Utility Features",
       "members": [
         "power/line",
@@ -210,27 +201,30 @@
         "power/cable/underground"
       ]
     },
-    "category-water-area": {
+    "category-water": {
       "icon": "maki-water",
-      "geometry": "area",
-      "name": "Water Features",
+      "name": "Water Bodies",
       "members": [
-        "natural/water/lake",
+        "natural/water",
         "natural/water/pond",
+        "natural/water/basin",
+        "natural/water/lake",
         "natural/water/reservoir",
-        "natural/water"
+        "natural/bay"
       ]
     },
-    "category-water-line": {
-      "icon": "iD-category-water",
-      "geometry": "line",
-      "name": "Water Features",
+    "category-waterway": {
+      "icon": "iD-waterway-stream",
+      "name": "Waterways",
       "members": [
-        "waterway/river",
         "waterway/stream",
+        "waterway/drain",
+        "waterway/river",
         "waterway/canal",
         "waterway/ditch",
-        "waterway/drain"
+        "natural/water/stream",
+        "natural/water/river",
+        "natural/water/canal"
       ]
     }
   }

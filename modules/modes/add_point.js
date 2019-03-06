@@ -1,19 +1,16 @@
+import _clone from 'lodash-es/clone';
+
 import { t } from '../util/locale';
-import { actionAddEntity } from '../actions';
+import { actionAddEntity, actionChangeTags } from '../actions';
 import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
 import { actionAddMidpoint } from '../actions';
 
 
-export function modeAddPoint(context, customMode) {
-    var mode = customMode || {
-        id: 'add-point',
-        button: 'point',
-        title: t('modes.add_point.title'),
-        description: t('modes.add_point.description'),
-        key: '1'
-    };
+export function modeAddPoint(context, mode) {
+
+    mode.id = 'add-point';
 
     var behavior = behaviorDraw(context)
         .tail(t('modes.add_point.tail'))
@@ -35,9 +32,7 @@ export function modeAddPoint(context, customMode) {
             t('operations.add.annotation.point')
         );
 
-        context.enter(
-            modeSelect(context, [node.id]).newFeature(!mode.preset)
-        );
+        enterSelectMode(node);
     }
 
 
@@ -49,14 +44,34 @@ export function modeAddPoint(context, customMode) {
             t('operations.add.annotation.vertex')
         );
 
+        enterSelectMode(node);
+    }
+
+    function enterSelectMode(node) {
         context.enter(
-            modeSelect(context, [node.id]).newFeature(!mode.preset)
+            modeSelect(context, [node.id]).newFeature(mode.preset.isFallback())
         );
     }
 
 
     function addNode(node) {
-        add(node.loc);
+
+        if (Object.keys(defaultTags).length === 0) {
+            enterSelectMode(node);
+            return;
+        }
+
+        var tags = _clone(node.tags);
+        for (var key in defaultTags) {
+            tags[key] = defaultTags[key];
+        }
+
+        context.perform(
+            actionChangeTags(node.id, tags),
+            t('operations.add.annotation.point')
+        );
+
+        enterSelectMode(node);
     }
 
 

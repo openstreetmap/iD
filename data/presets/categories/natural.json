@@ -1,6 +1,5 @@
 {
     "icon": "maki-natural",
-    "geometry": "area",
     "name": "Natural Features",
     "members": [
         "natural/water",
@@ -12,6 +11,12 @@
         "natural/bare_rock",
         "natural/beach",
         "natural/cave_entrance",
-        "natural/glacier"
+        "natural/glacier",
+        "natural/coastline",
+        "natural/tree_row",
+        "natural/peak",
+        "natural/cliff",
+        "natural/beach",
+        "natural/cave_entrance"
     ]
 }

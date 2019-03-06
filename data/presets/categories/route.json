@@ -1,6 +1,5 @@
 {
     "icon": "iD-route",
-    "geometry": "relation",
     "name": "Route Features",
     "members": [
         "type/route/road",

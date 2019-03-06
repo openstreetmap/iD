@@ -1,51 +1,31 @@
 import _debounce from 'lodash-es/debounce';
 
-import { select as d3_select } from 'd3-selection';
+import { drag as d3_drag } from 'd3-drag';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
-    modeAddNote,
     modeBrowse
 } from '../modes';
 
 import { svgIcon } from '../svg';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiModes(context) {
-    var modes = [
-        modeAddPoint(context),
-        modeAddLine(context),
-        modeAddArea(context),
-        modeAddNote(context)
-    ];
 
 
-    function enabled(d) {
-        if (d.id === 'add-note') {
-            return notesEnabled() && notesEditable();
-        } else {
-            return osmEditable();
-        }
+    function enabled() {
+        return osmEditable();
     }
 
     function osmEditable() {
         var mode = context.mode();
         return context.editable() && mode && mode.id !== 'save';
-    }
-
-    function notesEnabled() {
-        var noteLayer = context.layers().layer('notes');
-        return noteLayer && noteLayer.enabled();
-    }
-
-    function notesEditable() {
-        var mode = context.mode();
-        return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
 
@@ -64,19 +44,6 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        modes.forEach(function(mode) {
-            context.keybinding().on(mode.key, function() {
-                if (!enabled(mode)) return;
-
-                if (mode.id === context.mode().id) {
-                    context.enter(modeBrowse(context));
-                } else {
-                    context.enter(mode);
-                }
-            });
-        });
-
-
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
@@ -91,51 +58,96 @@ export function uiModes(context) {
 
 
         function update() {
-            var showNotes = notesEnabled();
-            var data = showNotes ? modes : modes.slice(0, 3);
 
-            // add favorite presets to modes
+            for (var i = 0; i <= 9; i++) {
+                context.keybinding().off(i.toString());
+            }
+
             var favoritePresets = context.getFavoritePresets();
-            var favoriteModes = favoritePresets.map(function(d) {
+            var favoriteModes = favoritePresets.map(function(d, index) {
                 var preset = context.presets().item(d.id);
-                var isMaki = /^maki-/.test(preset.icon);
-                var icon = '#' + preset.icon + (isMaki ? '-11' : '');
-                var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + preset.name()
-                    .replace(/\s+/g, '_')
-                    + '-' + d.geom; //replace spaces with underscores to avoid css interpretation
-                var presetName = t('presets.presets.' + preset.id + '.name');
-                var relevantMatchingGeometry = preset.geometry.filter(function(geometry) {
-                    return ['point', 'line', 'area'].indexOf(geometry) !== -1;
+                var presetName = preset.name().split(' – ')[0];
+                var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + presetName.replace(/\s+/g, '_')
+                    + '-' + d.geom; // replace spaces with underscores to avoid css interpretation
+                if (preset.isFallback()) {
+                    markerClass += ' add-generic-preset';
+                }
+
+                var supportedGeometry = preset.geometry.filter(function(geometry) {
+                    return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
                 });
+                var vertexIndex = supportedGeometry.indexOf('vertex');
+                if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
+                    // both point and vertex allowed, just combine them
+                    supportedGeometry.splice(vertexIndex, 1);
+                }
                 var tooltipTitleID = 'modes.add_preset.title';
-                if (relevantMatchingGeometry.length !== 1) {
-                    tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
+                if (supportedGeometry.length !== 1) {
+                    if (preset.setTags({}, d.geom).building) {
+                        tooltipTitleID = 'modes.add_preset.building.title';
+                    } else {
+                        tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
+                    }
                 }
                 var favoriteMode = {
-                    id: markerClass,
                     button: markerClass,
                     title: presetName,
-                    description: t(tooltipTitleID, { feature: presetName }),
-                    key: '',
-                    icon: icon,
+                    description: t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' }),
                     preset: preset,
                     geometry: d.geom
                 };
+                var keyCode;
+                if (textDirection === 'ltr') {
+                    // use number row order: 1 2 3 4 5 6 7 8 9 0
+                    if (index === 9) {
+                        keyCode = 0;
+                    } else if (index < 10) {
+                        keyCode = index + 1;
+                    }
+                } else {
+                    // use number row order from right to left
+                    if (index === 0) {
+                        keyCode = 0;
+                    } else if (index < 10) {
+                        keyCode = 10 - index;
+                    }
+                }
+                if (keyCode !== null) {
+                    favoriteMode.key = keyCode.toString();
+                }
+
+                var mode;
                 switch (d.geom) {
                     case 'point':
                     case 'vertex':
-                        return modeAddPoint(context, favoriteMode);
+                        mode = modeAddPoint(context, favoriteMode);
+                        break;
                     case 'line':
-                        return modeAddLine(context, favoriteMode);
+                        mode = modeAddLine(context, favoriteMode);
+                        break;
                     case 'area':
-                        return modeAddArea(context, favoriteMode);
+                        mode = modeAddArea(context, favoriteMode);
                 }
+
+                if (mode.key) {
+                    context.keybinding().on(mode.key, function() {
+                        if (!enabled(mode)) return;
+
+                        if (mode.button === context.mode().button) {
+                            context.enter(modeBrowse(context));
+                        } else {
+                            context.enter(mode);
+                        }
+                    });
+                }
+
+                return mode;
             });
 
-            data = data.concat(favoriteModes);
+            var data = favoriteModes;
 
             var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d) { return d.id; });
+                .data(data, function(d, index) { return d.button + index; });
 
             // exit
             buttons.exit()
@@ -145,7 +157,7 @@ export function uiModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', function(d) { return d.id + ' add-button'; })
+                .attr('class', function(d) { return d.button + ' add-button bar-button'; })
                 .on('click.mode-buttons', function(d) {
                     if (!enabled(d)) return;
 
@@ -167,33 +179,95 @@ export function uiModes(context) {
 
             buttonsEnter
                 .each(function(d) {
-                    if (d.preset) {
+                    if (d.preset.isFallback()) {
+                        d3_select(this)
+                            .call(svgIcon('#iD-icon-' + d.preset.id));
+                    } else {
                         d3_select(this)
                             .call(uiPresetIcon()
                                 .geometry(d.geometry)
                                 .preset(d.preset)
                                 .sizeClass('small')
                             );
-                    } else {
-                        d3_select(this)
-                            .call(svgIcon(d.icon || '#iD-icon-' + d.button));
                     }
                 });
 
-            buttonsEnter
-                .append('span')
-                .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
+            var dragOrigin, targetIndex;
 
-            // if we are adding/removing the buttons, check if toolbar has overflowed
-            if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('#bar', true);
-            }
+            buttonsEnter.call(d3_drag()
+                .on('start', function() {
+                    dragOrigin = {
+                        x: d3_event.x,
+                        y: d3_event.y
+                    };
+                    targetIndex = null;
+                })
+                .on('drag', function(d, index) {
+                    var x = d3_event.x - dragOrigin.x,
+                        y = d3_event.y - dragOrigin.y;
+
+                    d3_select(this)
+                        .classed('dragging', true)
+                        .classed('removing', y > 50);
+
+                    targetIndex = null;
+
+                    selection.selectAll('button.add-preset')
+                        .style('transform', function(d2, index2) {
+                            var node = d3_select(this).node();
+                            if (index === index2) {
+                                return 'translate(' + x + 'px, ' + y + 'px)';
+                            } else if (y > 50) {
+                                if (index2 > index) {
+                                    return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
+                                }
+                            } else if (index2 > index && (
+                                (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
+                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
+                            )) {
+                                if (targetIndex === null || index2 > targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
+                            } else if (index2 < index && (
+                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'ltr') ||
+                                (d3_event.x > node.offsetLeft && textDirection === 'rtl')
+                            )) {
+                                if (targetIndex === null || index2 < targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
+                            }
+                            return null;
+                        });
+                })
+                .on('end', function(d, index) {
+
+                    d3_select(this)
+                        .classed('dragging', false)
+                        .classed('removing', false);
+
+                    selection.selectAll('button.add-preset')
+                        .style('transform', null);
+
+                    var y = d3_event.y - dragOrigin.y;
+                    if (y > 50) {
+                        // dragged out of the top bar, remove the favorite
+                        context.favoritePreset(d.preset, d.geometry);
+                    } else if (targetIndex !== null) {
+                        // dragged to a new position, reorder
+                        context.moveFavoritePreset(index, targetIndex);
+                    }
+                })
+            );
 
             // update
             buttons = buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function(d) { return !enabled(d); });
+
+            // check if toolbar has overflowed
+            context.ui().checkOverflow('#bar', true);
         }
     };
 }

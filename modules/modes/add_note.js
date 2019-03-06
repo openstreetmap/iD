@@ -11,7 +11,7 @@ export function modeAddNote(context) {
         button: 'note',
         title: t('modes.add_note.title'),
         description: t('modes.add_note.description'),
-        key: '4'
+        key: t('modes.add_note.key')
     };
 
     var behavior = behaviorDraw(context)

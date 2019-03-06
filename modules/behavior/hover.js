@@ -107,6 +107,15 @@ export function behaviorHover(context) {
             return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
         }
 
+        function modeAllowsHover(target) {
+            var mode = context.mode();
+            if (mode.id === 'add-point') {
+                return mode.preset.matchGeometry('vertex') ||
+                    (target.type !== 'way' && target.geometry(context.graph()) !== 'vertex');
+            }
+            return true;
+        }
+
         function enter(datum) {
             if (datum === _target) return;
             _target = datum;
@@ -144,17 +153,20 @@ export function behaviorHover(context) {
                 }
             }
 
+            var mode = context.mode();
+
             // Update hover state and dispatch event
             if (entity && entity.id !== _newNodeId) {
                 // If drawing a way, don't hover on a node that was just placed. #3974
-                var mode = context.mode() && context.mode().id;
-                if ((mode === 'draw-line' || mode === 'draw-area') && !_newNodeId && entity.type === 'node') {
+
+                if ((mode.id === 'draw-line' || mode.id === 'draw-area') && !_newNodeId && entity.type === 'node') {
                     _newNodeId = entity.id;
                     return;
                 }
 
                 var suppressed = (_altDisables && d3_event && d3_event.altKey) ||
-                    (entity.type === 'node' && _ignoreVertex && !allowsVertex(entity));
+                    (entity.type === 'node' && _ignoreVertex && !allowsVertex(entity)) ||
+                    !modeAllowsHover(entity);
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 

@@ -1,23 +1,16 @@
 {
-    "icon": "iD-category-roads",
-    "geometry": "line",
-    "name": "Road Features",
+    "icon": "iD-highway-unclassified",
+    "name": "Major Roads",
     "members": [
-        "highway/residential",
         "highway/motorway",
         "highway/trunk",
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
-        "highway/living_street",
-        "highway/unclassified",
-        "highway/service",
-        "highway/track",
         "highway/motorway_link",
         "highway/trunk_link",
         "highway/primary_link",
         "highway/secondary_link",
-        "highway/tertiary_link",
-        "highway/road"
+        "highway/tertiary_link"
     ]
 }

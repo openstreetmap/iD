@@ -1,13 +1,14 @@
 {
-    "icon": "iD-category-rail",
-    "geometry": "line",
-    "name": "Rail Features",
+    "icon": "iD-railway-rail",
+    "name": "Rails",
     "members": [
         "railway/rail",
-        "railway/subway",
-        "railway/tram",
-        "railway/monorail",
         "railway/disused",
-        "railway/abandoned"
+        "railway/tram",
+        "railway/subway",
+        "railway/narrow_gauge",
+        "railway/light_rail",
+        "railway/monorail",
+        "railway/funicular"
     ]
 }

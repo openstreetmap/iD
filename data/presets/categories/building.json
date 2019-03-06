@@ -1,6 +1,5 @@
 {
     "icon": "maki-building",
-    "geometry": "area",
     "name": "Building Features",
     "members": [
         "building",

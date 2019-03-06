@@ -5,34 +5,32 @@ en:
         name: Barrier Features
       category-building:
         name: Building Features
-      category-golf-area:
-        name: Golf Features
-      category-golf-line:
+      category-golf:
         name: Golf Features
       category-landuse:
         name: Land Use Features
-      category-natural-area:
-        name: Natural Features
-      category-natural-line:
-        name: Natural Features
-      category-natural-point:
+      category-natural:
         name: Natural Features
       category-path:
-        name: Path Features
+        name: Paths
       category-rail:
-        name: Rail Features
+        name: Rails
       category-restriction:
         name: Restriction Features
-      category-road:
-        name: Road Features
+      category-road_major:
+        name: Major Roads
+      category-road_minor:
+        name: Minor Roads
+      category-road_service:
+        name: Service Roads
       category-route:
         name: Route Features
       category-utility:
         name: Utility Features
-      category-water-area:
-        name: Water Features
-      category-water-line:
-        name: Water Features
+      category-water:
+        name: Water Bodies
+      category-waterway:
+        name: Waterways
     fields:
       access:
         # 'access=*, foot=*, motor_vehicle=*, bicycle=*, horse=*'
@@ -3518,6 +3516,9 @@ en:
         # building=warehouse
         name: Warehouse
         terms: '<translate with synonyms or related terms for ''Warehouse'', separated by commas>'
+      building_point:
+        # building=*
+        name: Building
       camp_site/camp_pitch:
         # camp_site=camp_pitch
         name: Camp Pitch
@@ -6953,8 +6954,9 @@ en:
         name: Waterway
         terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       vertex:
-        name: Other
-        terms: '<translate with synonyms or related terms for ''Other'', separated by commas>'
+        name: Vertex
+        # 'terms: other'
+        terms: '<translate with synonyms or related terms for ''Vertex'', separated by commas>'
       waterway:
         # waterway=*
         name: Waterway

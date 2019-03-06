@@ -34,6 +34,14 @@ export function presetCollection(collection) {
             }));
         },
 
+        matchAnyGeometry: function(geometries) {
+            return presetCollection(this.collection.filter(function(d) {
+                return geometries.some(function(geometry) {
+                    return d.matchGeometry(geometry);
+                });
+            }));
+        },
+
 
         search: function(value, geometry) {
             if (!value) return this;
@@ -134,8 +142,6 @@ export function presetCollection(collection) {
                     return a.preset;
                 });
 
-            var other = presets.item(geometry);
-
             var results = leading_name.concat(
                 leading_suggestions,
                 leading_terms,
@@ -145,7 +151,17 @@ export function presetCollection(collection) {
                 similar_terms
             ).slice(0, maxSearchResults - 1);
 
-            return presetCollection(_uniq(results.concat(other)));
+            if (geometry) {
+                if (typeof geometry === 'string') {
+                    results.push(presets.item(geometry));
+                } else {
+                    geometry.forEach(function(geom) {
+                        results.push(presets.item(geom));
+                    });
+                }
+            }
+
+            return presetCollection(_uniq(results));
         }
     };
 

@@ -10,14 +10,8 @@ import { modeDrawArea } from './index';
 import { osmNode, osmWay } from '../osm';
 
 
-export function modeAddArea(context, customMode) {
-    var mode = customMode || {
-        id: 'add-area',
-        button: 'area',
-        title: t('modes.add_area.title'),
-        description: t('modes.add_area.description'),
-        key: '3'
-    };
+export function modeAddArea(context, mode) {
+    mode.id = 'add-area';
 
     var behavior = behaviorAddWay(context)
         .tail(t('modes.add_area.tail'))

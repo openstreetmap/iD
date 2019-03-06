@@ -46,7 +46,7 @@ export function uiUndoRedo(context) {
             .data(commands)
             .enter()
             .append('button')
-            .attr('class', function(d) { return 'disabled ' + d.id + '-button'; })
+            .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 

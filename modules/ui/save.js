@@ -77,7 +77,7 @@ export function uiSave(context) {
 
         var button = selection
             .append('button')
-            .attr('class', 'save disabled')
+            .attr('class', 'save disabled bar-button')
             .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
