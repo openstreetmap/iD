@@ -222,7 +222,7 @@
     {"key": "area", "value": "yes", "description": "🄿 Area, 🄿 Pedestrian Area", "object_types": ["area"]},
     {"key": "area:highway", "description": "🄿 Road Surface, 🄵 Type", "object_types": ["area"]},
     {"key": "attraction", "value": "amusement_ride", "description": "🄿 Amusement Ride", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/amusement-park-15.svg?sanitize=true"},
-    {"key": "attraction", "value": "animal", "description": "🄿 Animal", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/zoo-15.svg?sanitize=true"},
+    {"key": "attraction", "value": "animal", "description": "🄿 Animal Enclosure", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/zoo-15.svg?sanitize=true"},
     {"key": "attraction", "value": "big_wheel", "description": "🄿 Big Wheel", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/amusement-park-15.svg?sanitize=true"},
     {"key": "attraction", "value": "bumper_car", "description": "🄿 Bumper Car", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"},
     {"key": "attraction", "value": "bungee_jumping", "description": "🄿 Bungee Jumping", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"},

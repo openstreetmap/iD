@@ -225,7 +225,7 @@
     "area": {"fields": ["name"], "geometry": ["area"], "tags": {"area": "yes"}, "name": "Area", "matchScore": 0.1},
     "area/highway": {"fields": ["name", "area/highway"], "geometry": ["area"], "tags": {"area:highway": "*"}, "name": "Road Surface"},
     "attraction/amusement_ride": {"icon": "maki-amusement-park", "geometry": ["point", "area"], "terms": ["theme park", "carnival ride"], "tags": {"attraction": "amusement_ride"}, "name": "Amusement Ride"},
-    "attraction/animal": {"icon": "maki-zoo", "fields": ["name", "operator"], "geometry": ["point", "area"], "terms": ["zoo", "theme park", "animal park", "lion", "tiger", "bear"], "tags": {"attraction": "animal"}, "name": "Animal"},
+    "attraction/animal": {"icon": "maki-zoo", "fields": ["name", "operator"], "geometry": ["point", "area"], "terms": ["amphibian", "animal park", "aquarium", "bear", "bird", "fish", "insect", "lion", "mammal", "monkey", "penguin", "reptile", "safari", "theme park", "tiger", "zoo"], "tags": {"attraction": "animal"}, "name": "Animal Enclosure"},
     "attraction/big_wheel": {"icon": "maki-amusement-park", "fields": ["{attraction}", "height"], "geometry": ["point"], "terms": ["ferris wheel", "theme park", "amusement ride"], "tags": {"attraction": "big_wheel"}, "name": "Big Wheel"},
     "attraction/bumper_car": {"icon": "maki-car", "geometry": ["point", "area"], "terms": ["theme park", "dodgem cars", "autoscooter"], "tags": {"attraction": "bumper_car"}, "name": "Bumper Car"},
     "attraction/bungee_jumping": {"icon": "maki-pitch", "fields": ["{attraction}", "height"], "geometry": ["point", "area"], "terms": ["theme park", "bungy jumping", "jumping platform"], "tags": {"attraction": "bungee_jumping"}, "name": "Bungee Jumping"},

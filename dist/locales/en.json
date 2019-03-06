@@ -2017,7 +2017,8 @@
                     "reverse": "Reverse a line",
                     "move": "Move selected features",
                     "rotate": "Rotate selected features",
-                    "orthogonalize": "Straighten line / Square area corners",
+                    "orthogonalize": "Square corners of a line or area",
+                    "straighten": "Straighten a line",
                     "circularize": "Circularize a closed line or area",
                     "reflect_long": "Reflect features across the longer axis",
                     "reflect_short": "Reflect features across the shorter axis",
@@ -4810,8 +4811,8 @@
                     "terms": "theme park,carnival ride"
                 },
                 "attraction/animal": {
-                    "name": "Animal",
-                    "terms": "zoo,theme park,animal park,lion,tiger,bear"
+                    "name": "Animal Enclosure",
+                    "terms": "amphibian,animal park,aquarium,bear,bird,fish,insect,lion,mammal,monkey,penguin,reptile,safari,theme park,tiger,zoo"
                 },
                 "attraction/big_wheel": {
                     "name": "Big Wheel",
