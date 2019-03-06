@@ -248,14 +248,18 @@ export function coreHistory(context) {
 
 
         pauseChangeDispatch: function() {
-            _pausedGraph = _stack[_index].graph;
+            if (!_pausedGraph) {
+                _pausedGraph = _stack[_index].graph;
+            }
         },
 
 
         resumeChangeDispatch: function() {
-            var previous = _pausedGraph;
-            _pausedGraph = null;
-            return change(previous, true);
+            if (_pausedGraph) {
+                var previous = _pausedGraph;
+                _pausedGraph = null;
+                return change(previous, true);
+            }
         },
 
 
