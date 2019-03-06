@@ -189,7 +189,8 @@ export function uiShortcuts(context) {
                 return _uniq(arr).map(function(s) {
                     return {
                         shortcut: s,
-                        separator: d.separator
+                        separator: d.separator,
+                        suffix: d.suffix
                     };
                 });
             })
@@ -212,6 +213,10 @@ export function uiShortcuts(context) {
                     selection
                         .append('span')
                         .text(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
+                } else if (i === nodes.length - 1 && d.suffix) {
+                    selection
+                        .append('span')
+                        .text(d.suffix);
                 }
             });
 
