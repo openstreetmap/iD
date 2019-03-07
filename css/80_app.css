@@ -607,7 +607,6 @@ button.add-note svg.icon {
 }
 .search-add .search-wrap:nth-last-child(2) {
     border-radius: 20px;
-    border: none;
 }
 .search-add input[type='search'] {
     position: relative;
@@ -734,7 +733,12 @@ button.add-note svg.icon {
 }
 .search-add button.add-preset {
     border-radius: 4px;
+}
+[dir='ltr'] .search-add button.add-preset {
     margin-left: 1px;
+}
+[dir='rtl'] .search-add button.add-preset {
+    margin-right: 1px;
 }
 .search-add button.add-preset:not(.add-generic-preset) {
     padding: 0;

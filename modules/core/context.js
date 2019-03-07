@@ -314,7 +314,10 @@ export function coreContext() {
     context.presets = function() { return presets; };
     //get favorites from local storage
     context.getFavoritePresets = function() {
-        return JSON.parse(context.storage('favorite_presets')) || [];
+        var favs = JSON.parse(context.storage('favorite_presets')) || [];
+        return favs.filter(function(d) {
+            return presets.item(d.id) !== null;
+        });
     };
     function setFavoritePresets(favs) {
         context.storage('favorite_presets', JSON.stringify(favs));
