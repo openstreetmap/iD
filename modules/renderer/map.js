@@ -191,9 +191,6 @@ export function rendererMap(context) {
                 }
             });
 
-        supersurface
-            .call(context.background());
-
         context.on('enter.map',  function() {
             if (map.editable() && !_isTransformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
