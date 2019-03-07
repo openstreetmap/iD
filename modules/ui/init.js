@@ -117,7 +117,7 @@ export function uiInit(context) {
             .attr('class', 'tool-group center-area');
 
         var addArea = centerArea.append('div')
-            .attr('class', 'search-add joined');
+            .attr('class', 'search-add');
 
         addArea.call(uiSearchAdd(context), bar);
         addArea.call(uiModes(context), bar);

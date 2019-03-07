@@ -477,12 +477,6 @@ button[disabled].action:hover {
     white-space: nowrap;
     display: flex;
 }
-.tool-group button.add-preset:not(.add-generic-preset) {
-    padding: 0;
-}
-.tool-group button.add-preset.disabled .preset-icon-container {
-    opacity: 0.5;
-}
 .tool-group button.bar-button .icon {
     flex: 0 0 20px;
 }
@@ -606,7 +600,7 @@ button.add-note svg.icon {
     width: 100%;
     min-width: 200px;
     max-width: 250px;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px 4px 4px 20px;
 }
 .search-add .search-wrap.focused .tooltip {
     display: none;
@@ -737,6 +731,16 @@ button.add-note svg.icon {
 }
 [dir='rtl'] .search-add .subsection {
     padding-right: 6px;
+}
+.search-add button.add-preset {
+    border-radius: 4px;
+    margin-left: 1px;
+}
+.search-add button.add-preset:not(.add-generic-preset) {
+    padding: 0;
+}
+.search-add button.add-preset.disabled .preset-icon-container {
+    opacity: 0.5;
 }
 /* Header for modals / panes
 ------------------------------------------------------- */
