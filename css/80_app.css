@@ -635,7 +635,7 @@ button.add-note svg.icon {
     right: 10px;
 }
 .search-add .popover {
-    max-height: 250px;
+    max-height: 600px;
     width: 100%;
     position: absolute;
     top: 44px;
