@@ -316,7 +316,13 @@ export function coreContext() {
     context.getFavoritePresets = function() {
         var favs = JSON.parse(context.storage('favorite_presets')) || [];
         return favs.filter(function(d) {
-            return presets.item(d.id) !== null;
+            var preset = presets.item(d.id);
+            if (preset === null) {
+                return false;
+            } else if (preset.geometry.indexOf(d.geom) === -1) {
+                return false;
+            }
+            return true;
         });
     };
     function setFavoritePresets(favs) {
