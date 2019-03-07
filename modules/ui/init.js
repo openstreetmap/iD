@@ -163,28 +163,24 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'map-control background-control')
             .call(background.renderToggleButton);
-        content.call(background.renderPane);
 
         var mapData = uiMapData(context);
         controls
             .append('div')
             .attr('class', 'map-control map-data-control')
             .call(mapData.renderToggleButton);
-        content.call(mapData.renderPane);
 
         var issues = uiIssues(context);
         controls
             .append('div')
             .attr('class', 'map-control map-issues-control')
             .call(issues.renderToggleButton);
-        content.call(issues.renderPane);
 
         var help = uiHelp(context);
         controls
             .append('div')
             .attr('class', 'map-control help-control')
             .call(help.renderToggleButton);
-        content.call(help.renderPane);
 
         content
             .append('div')
@@ -285,6 +281,19 @@ export function uiInit(context) {
         if (!hash.hadHash) {
             map.centerZoom([0, 0], 2);
         }
+
+
+        // Add panes
+        // This should happen after map is initialized, as some require surface()
+        var panes = content
+            .append('div')
+            .attr('class', 'map-panes');
+
+        panes
+            .call(background.renderPane)
+            .call(mapData.renderPane)
+            .call(issues.renderPane)
+            .call(help.renderPane);
 
 
         // Add absolutely-positioned elements that sit on top of the map
