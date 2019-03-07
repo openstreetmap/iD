@@ -315,7 +315,12 @@ export function coreContext() {
 
     context.getFavoritePresets = function() {
         // get favorites from local storage
-        var favs = JSON.parse(context.storage('favorite_presets')) || [];
+        var favs = JSON.parse(context.storage('favorite_presets')) || [
+            // use the generic presets as the default favorites
+            { id: 'point', geom: 'point'},
+            { id: 'line', geom: 'line'},
+            { id: 'area', geom: 'area'}
+        ];
         return favs.filter(function(d) {
             // iD's presets could have changed since this favorite was saved,
             // so make sure it's still valid.
