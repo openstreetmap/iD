@@ -6615,6 +6615,11 @@ en:
         # shop=wine
         name: Wine Shop
         terms: '<translate with synonyms or related terms for ''Wine Shop'', separated by commas>'
+      tactile_paving:
+        # tactile_paving=*
+        name: Tactile Paving
+        # 'terms: blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path'
+        terms: '<translate with synonyms or related terms for ''Tactile Paving'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism

@@ -7850,6 +7850,10 @@
                     "name": "Wine Shop",
                     "terms": ""
                 },
+                "tactile_paving": {
+                    "name": "Tactile Paving",
+                    "terms": "blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path"
+                },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
                     "terms": "climbing hut"

@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-blind",
+    "fields": [
+        "colour",
+        "description"
+    ],
+    "geometry": [
+        "vertex",
+        "point",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "tactile_paving": "*"
+    },
+    "matchScore": 0.25,
+    "terms": [
+        "blind path",
+        "detectable warning surfaces",
+        "tactile ground surface indicators",
+        "tactile walking surface indicators",
+        "truncated domes",
+        "visually impaired path"
+    ],
+    "name": "Tactile Paving"
+}
