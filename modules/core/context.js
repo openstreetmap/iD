@@ -312,10 +312,13 @@ export function coreContext() {
     /* Presets */
     var presets;
     context.presets = function() { return presets; };
-    //get favorites from local storage
+
     context.getFavoritePresets = function() {
+        // get favorites from local storage
         var favs = JSON.parse(context.storage('favorite_presets')) || [];
         return favs.filter(function(d) {
+            // iD's presets could have changed since this favorite was saved,
+            // so make sure it's still valid.
             var preset = presets.item(d.id);
             if (preset === null) {
                 return false;
@@ -358,7 +361,13 @@ export function coreContext() {
         });
     };
     context.moveFavoritePreset = function(fromIndex, toIndex) {
+        if (fromIndex === toIndex) return;
+
         var favs = context.getFavoritePresets();
+
+        if (fromIndex < 0 || toIndex < 0 ||
+            fromIndex >= favs.length || toIndex >= favs.length) return;
+
         favs.splice(toIndex, 0, favs.splice(fromIndex, 1)[0]);
         setFavoritePresets(favs);
     };
