@@ -207,7 +207,7 @@ export function uiSearchAdd(context) {
         if (value.length) {
             results = presets.search(value, shownGeometry).collection;
         } else {
-            var recents = context.presets().recentWithGeometry();
+            var recents = context.presets().getRecents();
             recents = recents.filter(function(d) {
                 return shownGeometry.indexOf(d.geometry) !== -1;
             });
@@ -504,7 +504,7 @@ export function uiSearchAdd(context) {
                     mode = modeAddArea(context, modeInfo);
             }
             search.node().blur();
-            context.presets().choose(preset, geometry);
+            context.presets().setMostRecent(preset, geometry);
             context.enter(mode);
         };
         return item;

@@ -52,7 +52,7 @@ export function uiModes(context) {
 
         context
             .on('enter.modes', update)
-            .on('favoritePreset.modes', update);
+            .presets().on('favoritePreset.modes', update);
 
         update();
 
@@ -63,17 +63,16 @@ export function uiModes(context) {
                 context.keybinding().off(i.toString());
             }
 
-            var favoritePresets = context.getFavoritePresets();
+            var favoritePresets = context.presets().getFavorites();
             var favoriteModes = favoritePresets.map(function(d, index) {
-                var preset = context.presets().item(d.id);
-                var presetName = preset.name().split(' – ')[0];
-                var markerClass = 'add-preset add-' + d.geom + ' add-preset-' + presetName.replace(/\s+/g, '_')
-                    + '-' + d.geom; // replace spaces with underscores to avoid css interpretation
-                if (preset.isFallback()) {
+                var presetName = d.preset.name().split(' – ')[0];
+                var markerClass = 'add-preset add-' + d.geometry + ' add-preset-' + presetName.replace(/\s+/g, '_')
+                    + '-' + d.geometry; // replace spaces with underscores to avoid css interpretation
+                if (d.preset.isFallback()) {
                     markerClass += ' add-generic-preset';
                 }
 
-                var supportedGeometry = preset.geometry.filter(function(geometry) {
+                var supportedGeometry = d.preset.geometry.filter(function(geometry) {
                     return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
                 });
                 var vertexIndex = supportedGeometry.indexOf('vertex');
@@ -83,18 +82,18 @@ export function uiModes(context) {
                 }
                 var tooltipTitleID = 'modes.add_preset.title';
                 if (supportedGeometry.length !== 1) {
-                    if (preset.setTags({}, d.geom).building) {
+                    if (d.preset.setTags({}, d.geometry).building) {
                         tooltipTitleID = 'modes.add_preset.building.title';
                     } else {
-                        tooltipTitleID = 'modes.add_preset.' + d.geom + '.title';
+                        tooltipTitleID = 'modes.add_preset.' + d.geometry + '.title';
                     }
                 }
                 var favoriteMode = {
                     button: markerClass,
                     title: presetName,
                     description: t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' }),
-                    preset: preset,
-                    geometry: d.geom
+                    preset: d.preset,
+                    geometry: d.geometry
                 };
                 var keyCode;
                 if (textDirection === 'ltr') {
@@ -117,7 +116,7 @@ export function uiModes(context) {
                 }
 
                 var mode;
-                switch (d.geom) {
+                switch (d.geometry) {
                     case 'point':
                     case 'vertex':
                         mode = modeAddPoint(context, favoriteMode);
@@ -169,7 +168,7 @@ export function uiModes(context) {
                         context.enter(modeBrowse(context));
                     } else {
                         if (d.preset) {
-                            context.presets().choose(d.preset, d.geometry);
+                            context.presets().setMostRecent(d.preset, d.geometry);
                         }
                         context.enter(d);
                     }
@@ -256,10 +255,10 @@ export function uiModes(context) {
                     var y = d3_event.y - dragOrigin.y;
                     if (y > 50) {
                         // dragged out of the top bar, remove the favorite
-                        context.favoritePreset(d.preset, d.geometry);
+                        context.presets().toggleFavorite(d.preset, d.geometry);
                     } else if (targetIndex !== null) {
                         // dragged to a new position, reorder
-                        context.moveFavoritePreset(index, targetIndex);
+                        context.presets().moveFavorite(index, targetIndex);
                     }
                 })
             );

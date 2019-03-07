@@ -57,7 +57,7 @@ export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3_dispatch('enter', 'exit', 'change', 'favoritePreset');
+    var dispatch = d3_dispatch('enter', 'exit', 'change');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -313,69 +313,6 @@ export function coreContext() {
     var presets;
     context.presets = function() { return presets; };
 
-    context.getFavoritePresets = function() {
-        // get favorites from local storage
-        var favs = JSON.parse(context.storage('favorite_presets')) || [
-            // use the generic presets as the default favorites
-            { id: 'point', geom: 'point'},
-            { id: 'line', geom: 'line'},
-            { id: 'area', geom: 'area'}
-        ];
-        return favs.filter(function(d) {
-            // iD's presets could have changed since this favorite was saved,
-            // so make sure it's still valid.
-            var preset = presets.item(d.id);
-            if (preset === null) {
-                return false;
-            } else if (preset.geometry.indexOf(d.geom) === -1) {
-                return false;
-            }
-            return true;
-        });
-    };
-    function setFavoritePresets(favs) {
-        context.storage('favorite_presets', JSON.stringify(favs));
-
-        //and call update on modes
-        dispatch.call('favoritePreset');
-    }
-    context.favoritePreset = function(preset, geom) {
-        var favs = context.getFavoritePresets();
-
-        //add/remove favorites from local storage
-        if (context.isFavoritePreset(preset, geom)) {
-            favs = favs.filter(function(d) {
-                return !(d.id === preset.id && d.geom === geom);
-            });
-        } else {
-            // only allow 10 favorites
-            if (favs.length === 10) {
-                // remove the last favorite (last in, first out)
-                favs.pop();
-            }
-            // append array
-            favs.push({id: preset.id, geom: geom});
-        }
-        setFavoritePresets(favs);
-    };
-
-    context.isFavoritePreset = function(preset, geom) {
-        var favs = context.getFavoritePresets();
-        return favs.some(function(d) {
-            return d.id === preset.id && d.geom === geom;
-        });
-    };
-    context.moveFavoritePreset = function(fromIndex, toIndex) {
-        if (fromIndex === toIndex) return;
-
-        var favs = context.getFavoritePresets();
-
-        if (fromIndex < 0 || toIndex < 0 ||
-            fromIndex >= favs.length || toIndex >= favs.length) return;
-
-        favs.splice(toIndex, 0, favs.splice(fromIndex, 1)[0]);
-        setFavoritePresets(favs);
-    };
 
     /* Map */
     var map;
@@ -564,7 +501,7 @@ export function coreContext() {
     connection = services.osm;
     background = rendererBackground(context);
     features = rendererFeatures(context);
-    presets = presetIndex();
+    presets = presetIndex(context);
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;

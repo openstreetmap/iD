@@ -388,7 +388,7 @@ export function uiPresetList(context) {
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            context.presets().choose(preset, context.geometry(_entityID));
+            context.presets().setMostRecent(preset, context.geometry(_entityID));
             context.perform(
                 actionChangePreset(_entityID, _currentPreset, preset),
                 t('operations.change_tags.annotation')

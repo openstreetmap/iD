@@ -3,8 +3,8 @@ import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
-import _uniqWith from 'lodash-es/uniqWith';
 
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 
 import { data } from '../../data/index';
@@ -12,6 +12,7 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
+import { utilRebind } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -19,15 +20,17 @@ export { presetField };
 export { presetPreset };
 
 
-export function presetIndex() {
+export function presetIndex(context) {
     // a presetCollection with methods for
     // loading new data and returning defaults
+
+    var dispatch = d3_dispatch('favoritePreset');
 
     var all = presetCollection([]);
     var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
     var _fields = {};
     var _universal = [];
-    var _recentWithGeometry = [];
+    var _favorites, _recents;
 
     // Index of presets by (geometry, tag key).
     var _index = {
@@ -214,7 +217,8 @@ export function presetIndex() {
 
     all.init = function() {
         all.collection = [];
-        _recentWithGeometry = [];
+        _favorites = null;
+        _recents = null;
         _fields = {};
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -228,7 +232,8 @@ export function presetIndex() {
         _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
         _fields = {};
         _universal = [];
-        _recentWithGeometry = [];
+        _favorites = null;
+        _recents = null;
 
         // Index of presets by (geometry, tag key).
         _index = {
@@ -270,27 +275,153 @@ export function presetIndex() {
     };
 
     all.recent = function() {
-        return presetCollection(_uniq(_recentWithGeometry.map(function(d) {
+        return presetCollection(_uniq(all.getRecents().map(function(d) {
             return d.preset;
         })));
     };
 
-    all.recentWithGeometry = function() {
-        return _recentWithGeometry;
-    };
+    function RibbonItem(preset, geometry, source) {
+        var item = {};
+        item.preset = preset;
+        item.geometry = geometry;
+        item.source = source;
 
-    all.choose = function(preset, geometry) {
-        if (preset.searchable !== false) {
-            var newWithGeometry = {
-                preset: preset,
-                geometry: geometry
+        item.matches = function(preset, geometry) {
+            return item.preset.id === preset.id && item.geometry === geometry;
+        };
+        item.minified = function() {
+            return {
+                pID: item.preset.id,
+                geom: item.geometry
             };
-            _recentWithGeometry = _uniqWith([newWithGeometry].concat(_recentWithGeometry), function(d1, d2) {
-                return d1.preset === d2.preset && d1.geometry === d2.geometry;
-            });
+        };
+        return item;
+    }
+
+    function ribbonItemForMinified(d, source) {
+        if (d && d.pID && d.geom) {
+            var preset = all.item(d.pID);
+            // iD's presets could have changed since this was saved,
+            // so make sure it's still valid.
+            if (preset && preset.matchGeometry(d.geom)) {
+                return RibbonItem(preset, d.geom, source);
+            }
         }
-        return all;
+        return null;
+    }
+
+    function setFavorites(items) {
+        _favorites = items;
+        var minifiedItems = items.map(function(d) { return d.minified(); });
+        context.storage('preset_favorites', JSON.stringify(minifiedItems));
+
+        // call update
+        dispatch.call('favoritePreset');
+    }
+
+    all.getFavorites = function() {
+        if (!_favorites) {
+            // fetch from local storage
+            _favorites = (JSON.parse(context.storage('preset_favorites')) || [
+                    // use the generic presets as the default favorites
+                    { pID: 'point', geom: 'point'},
+                    { pID: 'line', geom: 'line'},
+                    { pID: 'area', geom: 'area'}
+                ]).reduce(function(output, d) {
+                    var item = ribbonItemForMinified(d, 'favorite');
+                    if (item) output.push(item);
+                    return output;
+                }, []);
+        }
+        return _favorites;
     };
 
-    return all;
+    function setRecents(items) {
+        _recents = items;
+        var minifiedItems = items.map(function(d) { return d.minified(); });
+        context.storage('preset_recents', JSON.stringify(minifiedItems));
+    }
+    
+    all.getRecents = function() {
+        if (!_recents) {
+            // fetch from local storage
+            _recents = (JSON.parse(context.storage('preset_recents')) || [])
+                .reduce(function(output, d) {
+                    var item = ribbonItemForMinified(d, 'recent');
+                    if (item) output.push(item);
+                    return output;
+                }, []);
+        }
+        return _recents;
+    };
+
+    all.toggleFavorite = function(preset, geometry) {
+        var favs = all.getFavorites();
+        var favorite = all.isFavorite(preset, geometry);
+        if (favorite) {
+            favs.splice(favs.indexOf(favorite), 1);
+        } else {
+            // only allow 10 favorites
+            if (favs.length === 10) {
+                // remove the last favorite (last in, first out)
+                favs.pop();
+            }
+            // append array
+            favs.push(RibbonItem(preset, geometry, 'favorite'));
+        }
+        setFavorites(favs);
+    };
+
+    all.isFavorite = function(preset, geometry) {
+        var favs = all.getFavorites();
+        for (var index in favs) {
+            if (favs[index].matches(preset, geometry)) {
+                return favs[index];
+            }
+        }
+        return false;
+    };
+    all.isRecent = function(preset, geometry) {
+        var items = all.getRecents();
+        for (var index in items) {
+            if (items[index].matches(preset, geometry)) {
+                return items[index];
+            }
+        }
+        return false;
+    };
+
+    all.moveFavorite = function(fromIndex, toIndex) {
+        if (fromIndex === toIndex) return;
+
+        var favs = all.getFavorites();
+
+        if (fromIndex < 0 || toIndex < 0 ||
+            fromIndex >= favs.length || toIndex >= favs.length) return;
+
+        favs.splice(toIndex, 0, favs.splice(fromIndex, 1)[0]);
+        setFavorites(favs);
+    };
+
+    all.setMostRecent = function(preset, geometry) {
+        if (preset.searchable === false) return;
+
+        var items = all.getRecents();
+        var item = all.isRecent(preset, geometry);
+        if (item) {
+            items.splice(items.indexOf(item), 1);
+        } else {
+            item = RibbonItem(preset, geometry, 'recent');
+        }
+        // allow 30 recents
+        if (items.length === 30) {
+            // remove the last favorite (first in, first out)
+            items.pop();
+        }
+        // prepend array
+        items.unshift(item);
+        setRecents(items);
+    };
+
+    return utilRebind(all, dispatch, 'on');
 }

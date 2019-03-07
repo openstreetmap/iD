@@ -35,7 +35,7 @@ export function uiPresetFavorite(preset, geom, context, klass) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                context.favoritePreset(preset, geom);
+                context.presets().toggleFavorite(preset, geom);
 
                 update();
             });
@@ -45,10 +45,10 @@ export function uiPresetFavorite(preset, geom, context, klass) {
 
     function update() {
         _button
-            .classed('active', context.isFavoritePreset(preset, geom));
+            .classed('active', context.presets().isFavorite(preset, geom));
     }
 
-    context.on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
+    context.presets().on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
 
     return presetFavorite;
 }
