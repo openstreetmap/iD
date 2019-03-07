@@ -3,6 +3,7 @@ import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
+import _uniqWith from 'lodash-es/uniqWith';
 
 import { json as d3_json } from 'd3-request';
 
@@ -26,7 +27,7 @@ export function presetIndex() {
     var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
     var _fields = {};
     var _universal = [];
-    var _recent = presetCollection([]);
+    var _recentWithGeometry = [];
 
     // Index of presets by (geometry, tag key).
     var _index = {
@@ -213,7 +214,7 @@ export function presetIndex() {
 
     all.init = function() {
         all.collection = [];
-        _recent.collection = [];
+        _recentWithGeometry = [];
         _fields = {};
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -227,7 +228,7 @@ export function presetIndex() {
         _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
         _fields = {};
         _universal = [];
-        _recent = presetCollection([]);
+        _recentWithGeometry = [];
 
         // Index of presets by (geometry, tag key).
         _index = {
@@ -263,18 +264,30 @@ export function presetIndex() {
     };
 
     all.defaults = function(geometry, n) {
-        var rec = _recent.matchGeometry(geometry).collection.slice(0, 4);
+        var rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
         return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
-    all.recent = function(geometries, n) {
-        return presetCollection(_recent.matchAnyGeometry(geometries).collection.slice(0, n - 1));
+    all.recent = function() {
+        return presetCollection(_uniq(_recentWithGeometry.map(function(d) {
+            return d.preset;
+        })));
     };
 
-    all.choose = function(preset) {
+    all.recentWithGeometry = function() {
+        return _recentWithGeometry;
+    };
+
+    all.choose = function(preset, geometry) {
         if (preset.searchable !== false) {
-            _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+            var newWithGeometry = {
+                preset: preset,
+                geometry: geometry
+            };
+            _recentWithGeometry = _uniqWith([newWithGeometry].concat(_recentWithGeometry), function(d1, d2) {
+                return d1.preset === d2.preset && d1.geometry === d2.geometry;
+            });
         }
         return all;
     };

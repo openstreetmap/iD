@@ -168,6 +168,9 @@ export function uiModes(context) {
                     if (d.id === currMode) {
                         context.enter(modeBrowse(context));
                     } else {
+                        if (d.preset) {
+                            context.presets().choose(d.preset, d.geometry);
+                        }
                         context.enter(d);
                     }
                 })

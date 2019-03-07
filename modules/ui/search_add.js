@@ -205,9 +205,13 @@ export function uiSearchAdd(context) {
         var value = search.property('value');
         var results;
         if (value.length) {
-            results = presets.search(value, shownGeometry);
+            results = presets.search(value, shownGeometry).collection;
         } else {
-            results = context.presets().recent(shownGeometry, 36);
+            var recents = context.presets().recentWithGeometry();
+            recents = recents.filter(function(d) {
+                return shownGeometry.indexOf(d.geometry) !== -1;
+            });
+            results = recents.slice(0, 35);
         }
 
         list.call(drawList, results);
@@ -244,6 +248,9 @@ export function uiSearchAdd(context) {
         if (preset.members) {
             return CategoryItem(preset);
         }
+        if (preset.preset && preset.geometry) {
+            return AddablePresetItem(preset.preset, preset.geometry);
+        }
         var supportedGeometry = preset.geometry.filter(function(geometry) {
             return shownGeometry.indexOf(geometry) !== -1;
         }).sort();
@@ -258,16 +265,16 @@ export function uiSearchAdd(context) {
         return MultiGeometryPresetItem(preset, supportedGeometry);
     }
 
-    function drawList(list, presets) {
+    function drawList(list, data) {
 
         list.selectAll('.subsection').remove();
 
-        var collection = presets.collection.map(function(preset) {
+        var dataItems = data.map(function(preset) {
             return itemForPreset(preset);
         });
 
         var items = list.selectAll('.list-item')
-            .data(collection, function(d) { return d.preset.id; });
+            .data(dataItems, function(d) { return d.id(); });
 
         items.order();
 
@@ -426,6 +433,9 @@ export function uiSearchAdd(context) {
 
     function CategoryItem(preset) {
         var item = {};
+        item.id = function() {
+            return preset.id;
+        };
         item.subsection = d3_select(null);
         item.preset = preset;
         item.choose = function() {
@@ -444,6 +454,9 @@ export function uiSearchAdd(context) {
     function MultiGeometryPresetItem(preset, geometries) {
 
         var item = {};
+        item.id = function() {
+            return preset.id + geometries;
+        };
         item.subsection = d3_select(null);
         item.preset = preset;
         item.geometries = geometries;
@@ -462,6 +475,9 @@ export function uiSearchAdd(context) {
 
     function AddablePresetItem(preset, geometry, isSubitem) {
         var item = {};
+        item.id = function() {
+            return preset.id + geometry + isSubitem;
+        };
         item.isSubitem = isSubitem;
         item.preset = preset;
         item.geometry = geometry;
@@ -488,7 +504,7 @@ export function uiSearchAdd(context) {
                     mode = modeAddArea(context, modeInfo);
             }
             search.node().blur();
-            context.presets().choose(preset);
+            context.presets().choose(preset, geometry);
             context.enter(mode);
         };
         return item;
