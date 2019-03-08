@@ -24,9 +24,9 @@ if you're looking for something to do.
   * Stable mirror of `release` branch:  http://preview.ideditor.com/release
   * Development mirror of `master` branch + latest translations:  http://preview.ideditor.com/master
 
-Come on in, the water's lovely. More help? Ping `bhousel` on:
+Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
 * [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)
-(`#dev` or `#general` channels)
+(`#id` or `#general` channels)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)
 (`irc.oftc.net`, in `#osm-dev` or `#osm`)
 * [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
