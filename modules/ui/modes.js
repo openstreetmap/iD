@@ -212,7 +212,7 @@ export function uiModes(context) {
                     }
                 });
 
-            var dragOrigin, targetIndex;
+            var dragOrigin, targetIndex, targetData;
 
             buttonsEnter.call(d3_drag()
                 .on('start', function() {
@@ -221,6 +221,7 @@ export function uiModes(context) {
                         y: d3_event.y
                     };
                     targetIndex = null;
+                    targetData = null;
                 })
                 .on('drag', function(d, index) {
                     var x = d3_event.x - dragOrigin.x,
@@ -231,6 +232,7 @@ export function uiModes(context) {
                         .classed('removing', y > 50);
 
                     targetIndex = null;
+                    targetData = null;
 
                     selection.selectAll('button.add-preset')
                         .style('transform', function(d2, index2) {
@@ -241,13 +243,14 @@ export function uiModes(context) {
                                 if (index2 > index) {
                                     return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
                                 }
-                            } else if (d.source === 'favorite' && d.source === d2.source) {
+                            } else if (d.source === d2.source) {
                                 if (index2 > index && (
                                     (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
                                     (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
                                 )) {
                                     if (targetIndex === null || index2 > targetIndex) {
                                         targetIndex = index2;
+                                        targetData = d2;
                                     }
                                     return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
                                 } else if (index2 < index && (
@@ -256,6 +259,7 @@ export function uiModes(context) {
                                 )) {
                                     if (targetIndex === null || index2 < targetIndex) {
                                         targetIndex = index2;
+                                        targetData = d2;
                                     }
                                     return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
                                 }
@@ -285,7 +289,9 @@ export function uiModes(context) {
                         if (d.isFavorite()) {
                             context.presets().moveFavorite(index, targetIndex);
                         } else if (d.isRecent()) {
-                            //context.presets().moveRecent(index - favoritesCount, targetIndex - favoritesCount);
+                            var item = context.presets().recentMatching(d.preset, d.geometry);
+                            var beforeItem = context.presets().recentMatching(targetData.preset, targetData.geometry);
+                            context.presets().moveRecent(item, beforeItem);
                         }
                     }
                 })

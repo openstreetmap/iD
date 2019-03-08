@@ -365,7 +365,7 @@ export function presetIndex(context) {
 
     all.toggleFavorite = function(preset, geometry) {
         var favs = all.getFavorites();
-        var favorite = all.isFavorite(preset, geometry);
+        var favorite = all.favoriteMatching(preset, geometry);
         if (favorite) {
             favs.splice(favs.indexOf(favorite), 1);
         } else {
@@ -380,23 +380,23 @@ export function presetIndex(context) {
         setFavorites(favs);
     };
 
-    all.isFavorite = function(preset, geometry) {
+    all.favoriteMatching = function(preset, geometry) {
         var favs = all.getFavorites();
         for (var index in favs) {
             if (favs[index].matches(preset, geometry)) {
                 return favs[index];
             }
         }
-        return false;
+        return null;
     };
-    all.isRecent = function(preset, geometry) {
+    all.recentMatching = function(preset, geometry) {
         var items = all.getRecents();
         for (var index in items) {
             if (items[index].matches(preset, geometry)) {
                 return items[index];
             }
         }
-        return false;
+        return null;
     };
 
     all.moveItem = function(items, fromIndex, toIndex) {
@@ -412,8 +412,11 @@ export function presetIndex(context) {
         if (items) setFavorites(items);
     };
 
-    all.moveRecent = function(fromIndex, toIndex) {
-        var items = all.moveItem(all.getRecents(), fromIndex, toIndex);
+    all.moveRecent = function(item, beforeItem) {
+        var recents = all.getRecents();
+        var fromIndex = recents.indexOf(item);
+        var toIndex = recents.indexOf(beforeItem);
+        var items = all.moveItem(recents, fromIndex, toIndex);
         if (items) setRecents(items);
     };
 
@@ -421,7 +424,7 @@ export function presetIndex(context) {
         if (preset.searchable === false) return;
 
         var items = all.getRecents();
-        var item = all.isRecent(preset, geometry);
+        var item = all.recentMatching(preset, geometry);
         if (item) {
             items.splice(items.indexOf(item), 1);
         } else {
@@ -437,7 +440,7 @@ export function presetIndex(context) {
         setRecents(items);
     };
     all.removeRecent = function(preset, geometry) {
-        var item = all.isRecent(preset, geometry);
+        var item = all.recentMatching(preset, geometry);
         if (item) {
             var items = all.getRecents();
             items.splice(items.indexOf(item), 1);

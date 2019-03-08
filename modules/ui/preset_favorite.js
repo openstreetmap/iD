@@ -45,7 +45,7 @@ export function uiPresetFavorite(preset, geom, context, klass) {
 
     function update() {
         _button
-            .classed('active', context.presets().isFavorite(preset, geom));
+            .classed('active', context.presets().favoriteMatching(preset, geom));
     }
 
     context.presets().on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
