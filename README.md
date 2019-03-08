@@ -25,7 +25,7 @@ if you're looking for something to do.
   * Development mirror of `master` branch + latest translations:  http://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
-* [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)
+* [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
 (`#id` or `#general` channels)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)
 (`irc.oftc.net`, in `#osm-dev` or `#osm`)
