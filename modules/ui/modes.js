@@ -30,6 +30,22 @@ export function uiModes(context) {
         return context.editable() && mode && mode.id !== 'save';
     }
 
+    function toggleMode(d) {
+
+        if (!enabled(d)) return;
+
+        if (d.button === context.mode().button) {
+            context.enter(modeBrowse(context));
+        } else {
+            if (d.preset &&
+                // don't set a recent as most recent to avoid reordering buttons
+                !d.isRecent()) {
+                context.presets().setMostRecent(d.preset, d.geometry);
+            }
+            context.enter(d);
+        }
+    }
+
 
     return function(selection) {
         context
@@ -141,16 +157,7 @@ export function uiModes(context) {
 
                 if (mode.key) {
                     context.keybinding().on(mode.key, function() {
-                        if (!enabled(mode)) return;
-
-                        if (mode.button === context.mode().button) {
-                            context.enter(modeBrowse(context));
-                        } else {
-                            if (mode.preset && mode.isFavorite()) {
-                                context.presets().setMostRecent(mode.preset, mode.geometry);
-                            }
-                            context.enter(mode);
-                        }
+                        toggleMode(mode);
                     });
                 }
 
@@ -176,20 +183,12 @@ export function uiModes(context) {
                     return classes;
                 })
                 .on('click.mode-buttons', function(d) {
-                    if (!enabled(d)) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
                     if (/^draw/.test(currMode)) return;
 
-                    if (d.id === currMode) {
-                        context.enter(modeBrowse(context));
-                    } else {
-                        if (d.preset && d.isFavorite()) {
-                            context.presets().setMostRecent(d.preset, d.geometry);
-                        }
-                        context.enter(d);
-                    }
+                    toggleMode(d);
                 })
                 .call(tooltip()
                     .placement('bottom')
@@ -280,7 +279,9 @@ export function uiModes(context) {
                     if (y > 50) {
                         // dragged out of the top bar, remove
                         if (d.isFavorite()) {
-                            context.presets().toggleFavorite(d.preset, d.geometry);
+                            context.presets().removeFavorite(d.preset, d.geometry);
+                            // also remove this as a recent so it doesn't still appear
+                            context.presets().removeRecent(d.preset, d.geometry);
                         } else if (d.isRecent()) {
                             context.presets().removeRecent(d.preset, d.geometry);
                         }

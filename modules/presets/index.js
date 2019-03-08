@@ -380,6 +380,24 @@ export function presetIndex(context) {
         setFavorites(favs);
     };
 
+    all.removeFavorite = function(preset, geometry) {
+        var item = all.favoriteMatching(preset, geometry);
+        if (item) {
+            var items = all.getFavorites();
+            items.splice(items.indexOf(item), 1);
+            setFavorites(items);
+        }
+    };
+
+    all.removeRecent = function(preset, geometry) {
+        var item = all.recentMatching(preset, geometry);
+        if (item) {
+            var items = all.getRecents();
+            items.splice(items.indexOf(item), 1);
+            setRecents(items);
+        }
+    };
+
     all.favoriteMatching = function(preset, geometry) {
         var favs = all.getFavorites();
         for (var index in favs) {
@@ -438,14 +456,6 @@ export function presetIndex(context) {
         // prepend array
         items.unshift(item);
         setRecents(items);
-    };
-    all.removeRecent = function(preset, geometry) {
-        var item = all.recentMatching(preset, geometry);
-        if (item) {
-            var items = all.getRecents();
-            items.splice(items.indexOf(item), 1);
-            setRecents(items);
-        }
     };
 
     return utilRebind(all, dispatch, 'on');
