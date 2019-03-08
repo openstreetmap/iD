@@ -1,26 +1,29 @@
 /* eslint-disable no-console */
-
-const fs = require('fs');
-const rollup = require('rollup');
+const colors = require('colors/safe');
 const commonjs = require('rollup-plugin-commonjs');
 const includePaths = require('rollup-plugin-includepaths');
-const nodeResolve = require('rollup-plugin-node-resolve');
 const json = require('rollup-plugin-json');
-const colors = require('colors/safe');
+const nodeResolve = require('rollup-plugin-node-resolve');
+const rollup = require('rollup');
+const shell = require('shelljs');
+
 
 module.exports = function buildSrc() {
-    var building = false;
+    var isBuilding = false;
+
     return function () {
-        if (building) return;
+        if (isBuilding) return;
 
         // Start clean
-        unlink('dist/iD.js');
-        unlink('dist/iD.js.map');
+        shell.rm('-f', [
+            'dist/iD.js',
+            'dist/iD.js.map'
+        ]);
 
         console.log('building src');
         console.time(colors.green('src built'));
 
-        building = true;
+        isBuilding = true;
 
         return rollup
             .rollup({
@@ -50,20 +53,13 @@ module.exports = function buildSrc() {
                 });
             })
             .then(function () {
-                building = false;
+                isBuilding = false;
                 console.timeEnd(colors.green('src built'));
             })
             .catch(function (err) {
-                building = false;
+                isBuilding = false;
                 console.error(err);
                 process.exit(1);
             });
     };
 };
-
-
-function unlink(f) {
-    try {
-        fs.unlinkSync(f);
-    } catch (e) { /* noop */ }
-}

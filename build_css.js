@@ -1,21 +1,22 @@
 /* eslint-disable no-console */
-
-const glob = require('glob');
-const concat = require('concat-files');
 const colors = require('colors/safe');
+const concat = require('concat-files');
+const glob = require('glob');
 
 
 module.exports = function buildCSS() {
-    var building = false;
+    var isBuilding = false;
     return function () {
-        if (building) return;
+        if (isBuilding) return;
+
         console.log('building css');
         console.time(colors.green('css built'));
-        building = true;
+        isBuilding = true;
+
         return concatFilesProm('css/**/*.css', 'dist/iD.css')
             .then(function () {
                 console.timeEnd(colors.green('css built'));
-                building = false;
+                isBuilding = false;
             })
             .catch(function (err) {
                 console.error(err);

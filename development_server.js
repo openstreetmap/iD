@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
+const colors = require('colors/safe');
+const ecstatic = require('ecstatic');
+const gaze = require('gaze');
+const http = require('http');
 
-var http = require('http');
-var gaze = require('gaze');
-var ecstatic = require('ecstatic');
-var colors = require('colors/safe');
+const isDevelopment = process.argv[2] === 'develop';
 
-var isDevelopment = process.argv[2] === 'develop';
+const buildData = require('./build_data')(isDevelopment);
+const buildSrc = require('./build_src')(isDevelopment);
+const buildCSS = require('./build_css')(isDevelopment);
 
-var buildData = require('./build_data')(isDevelopment);
-var buildSrc = require('./build_src')(isDevelopment);
-var buildCSS = require('./build_css')(isDevelopment);
 
 buildData()
     .then(function () {
@@ -25,8 +25,7 @@ if (isDevelopment) {
         });
     });
 
-    gaze(
-        [
+    gaze([
             'data/**/*.{js,json}',
             'data/core.yaml',
             // ignore the output files of `buildData`
