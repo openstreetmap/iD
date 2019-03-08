@@ -24,7 +24,7 @@ export function presetIndex(context) {
     // a presetCollection with methods for
     // loading new data and returning defaults
 
-    var dispatch = d3_dispatch('favoritePreset');
+    var dispatch = d3_dispatch('recentsChange', 'favoritePreset');
 
     var all = presetCollection([]);
     var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
@@ -286,6 +286,12 @@ export function presetIndex(context) {
         item.geometry = geometry;
         item.source = source;
 
+        item.isFavorite = function() {
+            return item.source === 'favorite';
+        };
+        item.isRecent = function() {
+            return item.source === 'recent';
+        };
         item.matches = function(preset, geometry) {
             return item.preset.id === preset.id && item.geometry === geometry;
         };
@@ -340,8 +346,10 @@ export function presetIndex(context) {
         _recents = items;
         var minifiedItems = items.map(function(d) { return d.minified(); });
         context.storage('preset_recents', JSON.stringify(minifiedItems));
+
+        dispatch.call('recentsChange');
     }
-    
+
     all.getRecents = function() {
         if (!_recents) {
             // fetch from local storage
@@ -391,16 +399,22 @@ export function presetIndex(context) {
         return false;
     };
 
+    all.moveItem = function(items, fromIndex, toIndex) {
+        if (fromIndex === toIndex ||
+            fromIndex < 0 || toIndex < 0 ||
+            fromIndex >= items.length || toIndex >= items.length) return null;
+        items.splice(toIndex, 0, items.splice(fromIndex, 1)[0]);
+        return items;
+    };
+
     all.moveFavorite = function(fromIndex, toIndex) {
-        if (fromIndex === toIndex) return;
+        var items = all.moveItem(all.getFavorites(), fromIndex, toIndex);
+        if (items) setFavorites(items);
+    };
 
-        var favs = all.getFavorites();
-
-        if (fromIndex < 0 || toIndex < 0 ||
-            fromIndex >= favs.length || toIndex >= favs.length) return;
-
-        favs.splice(toIndex, 0, favs.splice(fromIndex, 1)[0]);
-        setFavorites(favs);
+    all.moveRecent = function(fromIndex, toIndex) {
+        var items = all.moveItem(all.getRecents(), fromIndex, toIndex);
+        if (items) setRecents(items);
     };
 
     all.setMostRecent = function(preset, geometry) {
@@ -421,6 +435,14 @@ export function presetIndex(context) {
         // prepend array
         items.unshift(item);
         setRecents(items);
+    };
+    all.removeRecent = function(preset, geometry) {
+        var item = all.isRecent(preset, geometry);
+        if (item) {
+            var items = all.getRecents();
+            items.splice(items.indexOf(item), 1);
+            setRecents(items);
+        }
     };
 
     return utilRebind(all, dispatch, 'on');

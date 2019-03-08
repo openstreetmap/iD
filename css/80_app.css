@@ -740,6 +740,12 @@ button.add-note svg.icon {
 [dir='rtl'] .search-add button.add-preset {
     margin-right: 1px;
 }
+[dir='ltr'] .search-add button.add-preset.first-recent {
+    margin-left: 5px;
+}
+[dir='rtl'] .search-add button.add-preset.first-recent {
+    margin-right: 5px;
+}
 .search-add button.add-preset:not(.add-generic-preset) {
     padding: 0;
 }

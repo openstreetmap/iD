@@ -1,4 +1,6 @@
+import _clone from 'lodash-es/clone';
 import _debounce from 'lodash-es/debounce';
+import _uniqWith from 'lodash-es/uniqWith';
 
 import { drag as d3_drag } from 'd3-drag';
 import { event as d3_event, select as d3_select } from 'd3-selection';
@@ -52,7 +54,9 @@ export function uiModes(context) {
 
         context
             .on('enter.modes', update)
-            .presets().on('favoritePreset.modes', update);
+            .presets()
+            .on('favoritePreset.modes', update)
+            .on('recentsChange.modes', update);
 
         update();
 
@@ -63,11 +67,21 @@ export function uiModes(context) {
                 context.keybinding().off(i.toString());
             }
 
-            var favoritePresets = context.presets().getFavorites();
-            var favoriteModes = favoritePresets.map(function(d, index) {
+            var items = context.presets().getFavorites();
+
+            var favoritesCount = items.length;
+
+            if (favoritesCount < 10) {
+                items = _uniqWith(items.concat(context.presets().getRecents()), function(item1, item2) {
+                    return item1.matches(item2.preset, item2.geometry);
+                });
+                items = items.slice(0, 10);
+            }
+
+            var modes = items.map(function(d, index) {
                 var presetName = d.preset.name().split(' – ')[0];
                 var markerClass = 'add-preset add-' + d.geometry + ' add-preset-' + presetName.replace(/\s+/g, '_')
-                    + '-' + d.geometry; // replace spaces with underscores to avoid css interpretation
+                    + '-' + d.geometry + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
                 if (d.preset.isFallback()) {
                     markerClass += ' add-generic-preset';
                 }
@@ -88,13 +102,10 @@ export function uiModes(context) {
                         tooltipTitleID = 'modes.add_preset.' + d.geometry + '.title';
                     }
                 }
-                var favoriteMode = {
-                    button: markerClass,
-                    title: presetName,
-                    description: t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' }),
-                    preset: d.preset,
-                    geometry: d.geometry
-                };
+                var protoMode = _clone(d);
+                protoMode.button = markerClass;
+                protoMode.title = presetName;
+                protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
                 var keyCode;
                 if (textDirection === 'ltr') {
                     // use number row order: 1 2 3 4 5 6 7 8 9 0
@@ -112,20 +123,20 @@ export function uiModes(context) {
                     }
                 }
                 if (keyCode !== null) {
-                    favoriteMode.key = keyCode.toString();
+                    protoMode.key = keyCode.toString();
                 }
 
                 var mode;
                 switch (d.geometry) {
                     case 'point':
                     case 'vertex':
-                        mode = modeAddPoint(context, favoriteMode);
+                        mode = modeAddPoint(context, protoMode);
                         break;
                     case 'line':
-                        mode = modeAddLine(context, favoriteMode);
+                        mode = modeAddLine(context, protoMode);
                         break;
                     case 'area':
-                        mode = modeAddArea(context, favoriteMode);
+                        mode = modeAddArea(context, protoMode);
                 }
 
                 if (mode.key) {
@@ -135,6 +146,9 @@ export function uiModes(context) {
                         if (mode.button === context.mode().button) {
                             context.enter(modeBrowse(context));
                         } else {
+                            if (mode.preset && mode.isFavorite()) {
+                                context.presets().setMostRecent(mode.preset, mode.geometry);
+                            }
                             context.enter(mode);
                         }
                     });
@@ -143,10 +157,8 @@ export function uiModes(context) {
                 return mode;
             });
 
-            var data = favoriteModes;
-
             var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d, index) { return d.button + index; });
+                .data(modes, function(d, index) { return d.button + index; });
 
             // exit
             buttons.exit()
@@ -156,7 +168,13 @@ export function uiModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', function(d) { return d.button + ' add-button bar-button'; })
+                .attr('class', function(d, index) {
+                    var classes = d.button + ' add-button bar-button';
+                    if (index === favoritesCount && index !== 0) {
+                        classes += ' first-recent';
+                    }
+                    return classes;
+                })
                 .on('click.mode-buttons', function(d) {
                     if (!enabled(d)) return;
 
@@ -167,7 +185,7 @@ export function uiModes(context) {
                     if (d.id === currMode) {
                         context.enter(modeBrowse(context));
                     } else {
-                        if (d.preset) {
+                        if (d.preset && d.isFavorite()) {
                             context.presets().setMostRecent(d.preset, d.geometry);
                         }
                         context.enter(d);
@@ -223,22 +241,24 @@ export function uiModes(context) {
                                 if (index2 > index) {
                                     return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
                                 }
-                            } else if (index2 > index && (
-                                (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
-                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
-                            )) {
-                                if (targetIndex === null || index2 > targetIndex) {
-                                    targetIndex = index2;
+                            } else if (d.source === 'favorite' && d.source === d2.source) {
+                                if (index2 > index && (
+                                    (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
+                                    (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
+                                )) {
+                                    if (targetIndex === null || index2 > targetIndex) {
+                                        targetIndex = index2;
+                                    }
+                                    return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
+                                } else if (index2 < index && (
+                                    (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'ltr') ||
+                                    (d3_event.x > node.offsetLeft && textDirection === 'rtl')
+                                )) {
+                                    if (targetIndex === null || index2 < targetIndex) {
+                                        targetIndex = index2;
+                                    }
+                                    return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
                                 }
-                                return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
-                            } else if (index2 < index && (
-                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'ltr') ||
-                                (d3_event.x > node.offsetLeft && textDirection === 'rtl')
-                            )) {
-                                if (targetIndex === null || index2 < targetIndex) {
-                                    targetIndex = index2;
-                                }
-                                return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
                             }
                             return null;
                         });
@@ -254,11 +274,19 @@ export function uiModes(context) {
 
                     var y = d3_event.y - dragOrigin.y;
                     if (y > 50) {
-                        // dragged out of the top bar, remove the favorite
-                        context.presets().toggleFavorite(d.preset, d.geometry);
+                        // dragged out of the top bar, remove
+                        if (d.isFavorite()) {
+                            context.presets().toggleFavorite(d.preset, d.geometry);
+                        } else if (d.isRecent()) {
+                            context.presets().removeRecent(d.preset, d.geometry);
+                        }
                     } else if (targetIndex !== null) {
                         // dragged to a new position, reorder
-                        context.presets().moveFavorite(index, targetIndex);
+                        if (d.isFavorite()) {
+                            context.presets().moveFavorite(index, targetIndex);
+                        } else if (d.isRecent()) {
+                            //context.presets().moveRecent(index - favoritesCount, targetIndex - favoritesCount);
+                        }
                     }
                 })
             );
