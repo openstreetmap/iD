@@ -8,7 +8,7 @@ export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0780-\u07BF]/;
 export function fixRTLTextForSvg(inputText) {
     var ret = '', rtlBuffer = [];
     var arabicRegex = /[\u0600-\u06FF]/g;
-    var arabicTashkil = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]/;
+    var arabicMath = /[\u0660-\u066C]+/g;
     var thaanaVowel = /[\u07A6-\u07B0]/;
     var hebrewSign = /[\u0591-\u05bd\u05bf\u05c1-\u05c5\u05c7]/;
 
@@ -32,7 +32,14 @@ export function fixRTLTextForSvg(inputText) {
         ret += rtlBuffer.reverse().join('');
         return ret;
     } else {
-        return WordShaper(inputText).split('').reverse().join();
-        // TODO: numerals fix
+        var label = WordShaper(inputText).split('').reverse().join('');
+        // prevent Arabic numbers from being reversed
+        var numericSwaps = label.match(arabicMath) || [];
+        for (var i = 0; i < numericSwaps.length; i++) {
+            if (numericSwaps[i].length > 1) {
+                label = label.replace(numericSwaps[i], numericSwaps[i].split('').reverse().join(''));
+            }
+        }
+        return label;
     }
 }
