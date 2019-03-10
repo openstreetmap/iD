@@ -5,8 +5,15 @@
         "ref_route",
         "operator",
         "network",
-        "to", 
+        "to",
         "from"
+    ],
+    "moreFields" : [
+        "colour",
+        "interval",
+        "opening_hours",
+        "duration",
+        "wheelchair"
     ],
     "geometry": [
         "relation"

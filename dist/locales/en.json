@@ -2876,6 +2876,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (Network Name)"
                 },
+                "interval": {
+                    "label": "Interval"
+                },
                 "junction_line": {
                     "label": "Junction",
                     "options": {

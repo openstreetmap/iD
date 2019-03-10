@@ -7,6 +7,12 @@
         "operator",
         "network"
     ],
+    "moreFields" : [
+        "colour",
+        "interval",
+        "opening_hours",
+        "wheelchair"
+    ],
     "geometry": [
         "relation"
     ],
