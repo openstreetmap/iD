@@ -5870,6 +5870,10 @@
                     "name": "Junction",
                     "terms": ""
                 },
+                "junction/jughandle": {
+                    "name": "Jughandle",
+                    "terms": ""
+                },
                 "landuse/basin": {
                     "name": "Basin",
                     "terms": ""

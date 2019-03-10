@@ -4311,6 +4311,9 @@ en:
         # junction=yes
         name: Junction
         terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
+      junction/jughandle:
+        # junction=jughandle
+        name: Jughandle
       landuse:
         # landuse=*
         name: Land Use
