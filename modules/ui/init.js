@@ -16,7 +16,6 @@ import { uiAttribution } from './attribution';
 import { uiBackground } from './background';
 import { uiContributors } from './contributors';
 import { uiFeatureInfo } from './feature_info';
-import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
 import { uiHelp } from './help';
 import { uiInfo } from './info';
@@ -25,21 +24,16 @@ import { uiIssues } from './issues';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
-import { uiModes } from './modes';
-import { uiNotes } from './notes';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
 import { uiRestore } from './restore';
-import { uiSave } from './save';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
-import { uiSearchAdd } from './search_add';
-import { uiTooltipHtml } from './tooltipHtml';
-import { uiUndoRedo } from './undo_redo';
+import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
@@ -73,10 +67,11 @@ export function uiInit(context) {
             .attr('class', 'active');
 
         // Top toolbar
-        var bar = content
+        content
             .append('div')
             .attr('id', 'bar')
-            .attr('class', 'fillD');
+            .attr('class', 'fillD')
+            .call(uiTopToolbar(context));
 
         content
             .append('div')
@@ -84,66 +79,8 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(map);
 
-        // Leading area button group (Sidebar toggle)
-        var leadingArea = bar
-            .append('div')
-            .attr('class', 'tool-group leading-area');
 
-        var sidebarButton = leadingArea
-            .append('div')
-            .append('button')
-            .attr('class', 'sidebar-toggle bar-button')
-            .attr('tabindex', -1)
-            .on('click', ui.sidebar.toggle)
-            .call(tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
-            );
-
-        var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
-        sidebarButton
-            .call(svgIcon('#iD-icon-sidebar-' + iconSuffix));
-
-        leadingArea
-            .append('div')
-            .attr('class', 'full-screen bar-group')
-            .call(uiFullScreen(context));
-
-
-        // Center area button group (Point/Line/Area/Note mode buttons)
-        var centerArea = bar
-            .append('div')
-            .attr('class', 'tool-group center-area');
-
-        var addArea = centerArea.append('div')
-            .attr('class', 'search-add');
-
-        addArea.call(uiSearchAdd(context), bar);
-        addArea.call(uiModes(context), bar);
-
-        centerArea.append('div')
-            .attr('class', 'notes')
-            .call(uiNotes(context), bar);
-
-
-        // Trailing area button group (Undo/Redo save buttons)
-        var trailingArea = bar
-            .append('div')
-            .attr('class', 'tool-group trailing-area');
-
-        trailingArea
-            .append('div')
-            .attr('class', 'joined')
-            .call(uiUndoRedo(context));
-
-        trailingArea
-            .append('div')
-            .attr('class', 'save-wrap')
-            .call(uiSave(context));
-
-
-        // Map controls (appended to #bar, but absolutely positioned)
+        // Map controls
         var controls = content
             .append('div')
             .attr('class', 'map-controls');
