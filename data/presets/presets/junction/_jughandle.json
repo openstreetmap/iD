@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name"
+    ],
+    "tags": {
+        "junction": "jughandle"
+    },
+    "name": "Jughandle",
+    "searchable": false
+}

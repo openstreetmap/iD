@@ -3527,9 +3527,6 @@ en:
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
-      circular:
-        # junction=circular
-        name: Traffic Circle
       club:
         # club=*
         name: Club
@@ -4314,6 +4311,15 @@ en:
         # junction=yes
         name: Junction
         terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
+      junction/circular:
+        # junction=circular
+        name: Traffic Circle
+      junction/jughandle:
+        # junction=jughandle
+        name: Jughandle
+      junction/roundabout:
+        # junction=roundabout
+        name: Roundabout
       landuse:
         # landuse=*
         name: Land Use
@@ -5932,9 +5938,6 @@ en:
       relation:
         name: Relation
         terms: '<translate with synonyms or related terms for ''Relation'', separated by commas>'
-      roundabout:
-        # junction=roundabout
-        name: Roundabout
       route/ferry:
         # route=ferry
         name: Ferry Route
