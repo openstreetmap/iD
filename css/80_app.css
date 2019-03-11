@@ -659,7 +659,7 @@ button.add-note svg.icon {
     padding: 2px;
 }
 .search-add .list-item:not(:last-of-type),
-.search-add .subsection .list-item {
+.search-add .subsection > * {
     border-bottom: 1px solid #DCDCDC;
 }
 .search-add .list-item .label {
@@ -711,6 +711,10 @@ button.add-note svg.icon {
 .search-add .subsection .list-item button.choose {
     opacity: 0.85;
 }
+.search-add .subsection .tag-reference-body {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px;
+}
 .search-add .list-item button.accessory {
     position: relative;
     flex: 0 0 auto;
@@ -722,13 +726,16 @@ button.add-note svg.icon {
 .search-add .list-item button.accessory:hover {
     color: #666;
 }
+.search-add .list-item button.tag-reference-open path {
+    fill: #000;
+}
 .search-add .subsection {
     background-color: #CBCBCB;
 }
-[dir='ltr'] .search-add .subsection {
+[dir='ltr'] .search-add .subitems {
     padding-left: 6px;
 }
-[dir='rtl'] .search-add .subsection {
+[dir='rtl'] .search-add .subitems {
     padding-right: 6px;
 }
 .search-add button.add-preset {
@@ -1337,17 +1344,6 @@ button.preset-favorite-button .icon {
 }
 button.preset-favorite-button.active .icon {
     fill-opacity: inherit;
-}
-
-img.tag-reference-wiki-image {
-    float: right;
-    width: 33.3333%;
-    border-radius: 4px;
-    margin: 10px 5px 15px 10px;
-}
-[dir='rtl'] img.tag-reference-wiki-image {
-    float: left;
-    margin: 10px 10px 15px 5px;
 }
 
 
@@ -2479,15 +2475,29 @@ div.combobox {
     flex: 1 1 auto;
     width: 100%;
     overflow: hidden;
+    display: none;
+    padding-top: 10px;
 }
 .tag-reference-body.expanded {
     padding-bottom: 10px;
+    display: inline-block;
 }
 .tag-reference-description {
-    margin: 10px 5px;
+
 }
 .tag-reference-link {
     display: block;
+}
+
+img.tag-reference-wiki-image {
+    float: right;
+    width: 33.3333%;
+    border-radius: 4px;
+    margin: 0 0 0 5px;
+}
+[dir='rtl'] img.tag-reference-wiki-image {
+    float: left;
+    margin: 0 5px 0 0;
 }
 
 .preset-list .tag-reference-body {

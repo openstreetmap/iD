@@ -118,6 +118,12 @@ export function uiTagReference(what) {
             .style('opacity', '1');
 
         _showing = true;
+
+        _button.selectAll('svg.icon use').each(function(iconUse) {
+            if (iconUse.attr && iconUse.attr('href') === '#iD-icon-info') {
+                iconUse.attr('href', '#iD-icon-info-filled');
+            }
+        });
     }
 
 
@@ -132,19 +138,26 @@ export function uiTagReference(what) {
             });
 
         _showing = false;
+
+        _button.selectAll('svg.icon use').each(function(iconUse) {
+            if (iconUse.attr && iconUse.attr('href') === '#iD-icon-info-filled') {
+                iconUse.attr('href', '#iD-icon-info');
+            }
+        });
+
     }
 
 
-    tagReference.button = function(selection) {
+    tagReference.button = function(selection, klass, iconName) {
         _button = selection.selectAll('.tag-reference-button')
             .data([0]);
 
         _button = _button.enter()
             .append('button')
-            .attr('class', 'tag-reference-button')
+            .attr('class', 'tag-reference-button ' + klass)
             .attr('title', t('icons.information'))
             .attr('tabindex', -1)
-            .call(svgIcon('#iD-icon-inspect'))
+            .call(svgIcon('#iD-icon-' + (iconName || 'inspect')))
             .merge(_button);
 
         _button

@@ -1,6 +1,4 @@
 
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
-
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';

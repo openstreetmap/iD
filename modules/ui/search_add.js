@@ -16,6 +16,7 @@ import {
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
+import { uiTagReference } from './tag_reference';
 import { uiTooltipHtml } from './tooltipHtml';
 import { uiPresetFavorite } from './preset_favorite';
 import { uiPresetIcon } from './preset_icon';
@@ -371,6 +372,21 @@ export function uiSearchAdd(context) {
                 d3_select(this).call(presetFavorite.button);
             }
         });
+        row.each(function(d) {
+            if ((d.geometry && !d.isSubitem) || d.geometries) {
+
+                var reference = uiTagReference(d.preset.reference(d.geometry || d.geometries[0]), context);
+
+                var thisRow = d3_select(this);
+                thisRow.call(reference.button, 'accessory', 'info');
+
+                var selector = '#' + thisRow.node().id + ' + *';
+                var subsection = d3_select(thisRow.node().parentElement)
+                    .insert('div', selector)
+                    .attr('class', 'subsection reference');
+                subsection.call(reference.body);
+            }
+        });
     }
 
     function updateForFeatureHiddenState() {
@@ -419,7 +435,7 @@ export function uiSearchAdd(context) {
             var subitems = item.subitems();
             var selector = '#' + itemSelection.node().id + ' + *';
             item.subsection = d3_select(itemSelection.node().parentElement).insert('div', selector)
-                .attr('class', 'subsection');
+                .attr('class', 'subsection subitems');
             var subitemsEnter = item.subsection.selectAll('.list-item')
                 .data(subitems)
                 .enter();
