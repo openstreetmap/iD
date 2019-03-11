@@ -876,6 +876,9 @@ en:
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: SSID (Network Name)
+      interval:
+        # interval=*
+        label: Interval
       junction/ref_oneway:
         # 'junction:ref=*'
         label: Junction Number

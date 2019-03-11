@@ -1305,6 +1305,7 @@
     {"key": "internet_access", "value": "terminal", "description": "🄵 Internet Access"},
     {"key": "internet_access:fee", "description": "🄵 Internet Access Fee"},
     {"key": "internet_access:ssid", "description": "🄵 SSID (Network Name)"},
+    {"key": "interval", "description": "🄵 Interval"},
     {"key": "junction:ref", "description": "🄵 Junction Number"},
     {"key": "kerb", "description": "🄵 Curb"},
     {"key": "label", "description": "🄵 Label"},
