@@ -3934,10 +3934,6 @@
                     "name": "Building",
                     "terms": ""
                 },
-                "circular": {
-                    "name": "Traffic Circle",
-                    "terms": ""
-                },
                 "embankment": {
                     "name": "Embankment",
                     "terms": ""
@@ -3972,10 +3968,6 @@
                 },
                 "railway": {
                     "name": "Railway",
-                    "terms": ""
-                },
-                "roundabout": {
-                    "name": "Roundabout",
                     "terms": ""
                 },
                 "seamark": {
@@ -5870,8 +5862,16 @@
                     "name": "Junction",
                     "terms": ""
                 },
+                "junction/circular": {
+                    "name": "Traffic Circle",
+                    "terms": ""
+                },
                 "junction/jughandle": {
                     "name": "Jughandle",
+                    "terms": ""
+                },
+                "junction/roundabout": {
+                    "name": "Roundabout",
                     "terms": ""
                 },
                 "landuse/basin": {
