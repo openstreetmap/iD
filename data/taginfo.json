@@ -472,7 +472,7 @@
     {"key": "historic", "value": "wreck", "description": "🄿 Shipwreck", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/ruins.svg?sanitize=true"},
     {"key": "internet_access", "value": "wlan", "description": "🄿 Wi-Fi Hotspot, 🄵 Internet Access", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-wifi.svg?sanitize=true"},
     {"key": "junction", "value": "yes", "description": "🄿 Junction", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/junction.svg?sanitize=true"},
-    {"key": "junction", "value": "jughandle", "description": "🄿 Jughandle (unsearchable), 🄵 Junction", "object_types": ["node", "way"]},
+    {"key": "junction", "value": "jughandle", "description": "🄿 Jughandle (unsearchable), 🄵 Junction", "object_types": ["way"]},
     {"key": "landuse", "value": "basin", "description": "🄿 Basin (unsearchable)", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "landuse", "value": "farm", "description": "🄿 Farmland (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/farm-15.svg?sanitize=true"},
     {"key": "landuse", "value": "pond", "description": "🄿 Pond (unsearchable)", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
