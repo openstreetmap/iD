@@ -56,4 +56,20 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
     });
 
+    it('upgrades a tag in a semicolon-delimited list with one other value', function () {
+        var oldTags = { cuisine: 'vegan' },
+            newTags = { 'diet:vegan': 'yes' },
+            entity = iD.Entity({ tags: { cuisine: 'italian;vegan', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian', 'diet:vegan': 'yes', name: 'Foo' });
+    });
+
+    it('upgrades a tag in a semicolon-delimited list with many other values', function () {
+        var oldTags = { cuisine: 'vegan' },
+            newTags = { 'diet:vegan': 'yes' },
+            entity = iD.Entity({ tags: { cuisine: 'italian;vegan;regional;american', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian;regional;american', 'diet:vegan': 'yes', name: 'Foo' });
+    });
+
 });

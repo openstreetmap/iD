@@ -8,8 +8,17 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
         for (var oldTagKey in oldTags) {
             if (oldTags[oldTagKey] === '*') {
                 transferValue = tags[oldTagKey];
+                delete tags[oldTagKey];
+            } else {
+                var vals = tags[oldTagKey].split(';').filter(Boolean);
+                var oldIndex = vals.indexOf(oldTags[oldTagKey]);
+                if (vals.length === 1 || oldIndex === -1) {
+                    delete tags[oldTagKey];
+                } else {
+                    vals.splice(oldIndex, 1);
+                    tags[oldTagKey] = vals.join(';');
+                }
             }
-            delete tags[oldTagKey];
         }
         if (replaceTags) {
             for (var replaceKey in replaceTags) {

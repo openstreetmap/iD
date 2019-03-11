@@ -173,7 +173,12 @@ osmEntity.prototype = {
         var deprecated = [];
         dataDeprecated.forEach(function(d) {
             var matchesDeprecatedTags = _every(Object.keys(d.old), function(key) {
-                return tags[key] && (d.old[key] === tags[key] || d.old[key] === '*');
+                if (!tags[key]) return false;
+                if (d.old[key] === '*') return true;
+
+                var vals = tags[key].split(';').filter(Boolean);
+                if (!vals.length) return false;
+                return vals.indexOf(d.old[key]) !== -1;
             });
             if (matchesDeprecatedTags) {
                 deprecated.push(d);
