@@ -185,8 +185,7 @@ export function uiModes(context) {
                 .on('click.mode-buttons', function(d) {
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
-                    var currMode = context.mode().id;
-                    if (/^draw/.test(currMode)) return;
+                    if (/^draw/.test(context.mode().id)) return;
 
                     toggleMode(d);
                 })
@@ -211,7 +210,7 @@ export function uiModes(context) {
                     }
                 });
 
-            var dragOrigin, targetIndex, targetData;
+            var dragOrigin, dragMoved, targetIndex, targetData;
 
             buttonsEnter.call(d3_drag()
                 .on('start', function() {
@@ -221,8 +220,10 @@ export function uiModes(context) {
                     };
                     targetIndex = null;
                     targetData = null;
+                    dragMoved = false;
                 })
                 .on('drag', function(d, index) {
+                    dragMoved = true;
                     var x = d3_event.x - dragOrigin.x,
                         y = d3_event.y - dragOrigin.y;
 
@@ -272,7 +273,10 @@ export function uiModes(context) {
                 })
                 .on('end', function(d, index) {
 
-                    if (!d3_select(this).classed('dragging')) return;
+                    if (dragMoved && !d3_select(this).classed('dragging')) {
+                        toggleMode(d);
+                        return;
+                    }
 
                     d3_select(this)
                         .classed('dragging', false)
