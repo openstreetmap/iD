@@ -184,6 +184,10 @@
       "old": {"highway": "no"}
     },
     {
+      "old": {"highway": "platform"},
+      "replace": {"bus": "yes", "highway": "bus_stop", "public_transport": "platform"}
+    },
+    {
       "old": {"highway": "stile"},
       "replace": {"barrier": "stile"}
     },
