@@ -29,5 +29,6 @@
     "tags": {
         "highway": "footway"
     },
+    "matchScore": 0.95,
     "name": "Foot Path"
 }

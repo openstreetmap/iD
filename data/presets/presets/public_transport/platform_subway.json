@@ -18,12 +18,14 @@
     "addTags": {
         "public_transport": "platform",
         "subway": "yes",
-        "railway": "platform"
+        "railway": "platform",
+        "highway": "footway"
     },
     "removeTags": {
         "public_transport": "platform",
         "subway": "yes",
-        "railway": "platform"
+        "railway": "platform",
+        "highway": "footway"
     },
     "reference": {
         "key": "railway",

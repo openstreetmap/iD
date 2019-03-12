@@ -15,7 +15,7 @@ export function svgTagClasses() {
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
-        'public_transport', 'location', 'parking', 'golf', 'type'
+        'public_transport', 'location', 'parking', 'golf', 'type', 'leisure', 'man_made'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -115,7 +115,7 @@ export function svgTagClasses() {
         for (i = 0; i < secondaries.length; i++) {
             k = secondaries[i];
             v = t[k];
-            if (!v || v === 'no') continue;
+            if (!v || v === 'no' || k === primary) continue;
             classes.push('tag-' + k);
             classes.push('tag-' + k + '-' + v);
         }

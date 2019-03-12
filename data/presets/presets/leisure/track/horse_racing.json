@@ -16,6 +16,16 @@
         "leisure": "track",
         "sport": "horse_racing"
     },
+    "addTags": {
+        "leisure": "track",
+        "sport": "horse_racing",
+        "highway": "bridleway"
+    },
+    "removeTags": {
+        "leisure": "track",
+        "sport": "horse_racing",
+        "highway": "bridleway"
+    },
     "terms": [
         "race*",
         "horse",

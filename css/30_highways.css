@@ -503,6 +503,17 @@ path.line.stroke.tag-highway-bridleway,
     stroke: #fff;
 }
 
+.preset-icon .icon.tag-leisure-track {
+    color: rgb(229, 184, 43);
+}
+path.line.stroke.tag-leisure-track,
+.preset-icon-line path.casing.tag-highway.tag-leisure-track {
+    stroke: rgb(229, 184, 43);
+}
+.preset-icon-line path.line.stroke.tag-highway.tag-leisure-track {
+    stroke: #fff;
+}
+
 .preset-icon .icon.tag-highway-steps {
     color: #81d25c;
     fill: #fff;

@@ -177,8 +177,22 @@ osmEntity.prototype = {
                 if (d.old[key] === '*') return true;
 
                 var vals = tags[key].split(';').filter(Boolean);
-                if (!vals.length) return false;
-                return vals.indexOf(d.old[key]) !== -1;
+                if (vals.length === 0) {
+                    return false;
+                } else if (vals.length > 1) {
+                    return vals.indexOf(d.old[key]) !== -1;
+                } else {
+                    if (tags[key] === d.old[key]) {
+                        if (d.old[key] === d.replace[key]) {
+                            return !_every(Object.keys(d.replace), function(key) {
+                                return tags[key] === d.replace[key];
+                            });
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+                return false;
             });
             if (matchesDeprecatedTags) {
                 deprecated.push(d);

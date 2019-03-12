@@ -16,6 +16,16 @@
         "leisure": "track",
         "sport": "running"
     },
+    "addTags": {
+        "leisure": "track",
+        "sport": "running",
+        "highway": "footway"
+    },
+    "removeTags": {
+        "leisure": "track",
+        "sport": "running",
+        "highway": "footway"
+    },
     "terms": [
         "race*",
         "running",
