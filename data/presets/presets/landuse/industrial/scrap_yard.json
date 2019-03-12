@@ -11,6 +11,7 @@
         "area"
     ],
     "tags": {
+        "landuse": "industrial",
         "industrial": "scrap_yard"
     },
     "addTags": {
