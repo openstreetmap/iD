@@ -1244,13 +1244,6 @@ en:
         tip: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         tip: "Crossing indoor features should be connected or use different levels."
-    deprecated_tag:
-      title: Deprecated Tags
-      single:
-        message: '{feature} has the outdated tag "{tag}"'
-      combination:
-        message: '{feature} has an outdated tag combination: {tags}'
-      tip: "Some tags become deprecated over time and should be replaced."
     disconnected_way:
       title: Disconnected Ways
       highway:
@@ -1285,6 +1278,10 @@ en:
       title: Misplaced Multipolygon Tags
       message: "{multipolygon} has misplaced tags"
       tip: "Multipolygons should be tagged on their relation, not their outer way."
+    outdated_tags:
+      title: Outdated Tags
+      message: '{feature} has outdated tags'
+      tip: "Some tags change over time and should be updated."
     tag_suggests_area:
       title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
@@ -1308,10 +1305,6 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
-      remove_deprecated_tag:
-        annotation: Removed an old tag.
-      remove_deprecated_tag_combo:
-        annotation: Removed an old tag combination.
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
@@ -1333,12 +1326,9 @@ en:
       tag_as_disconnected:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
-      upgrade_tag:
-        title: Upgrade the tag
-        annotation: Upgraded an old tag.
-      upgrade_tag_combo:
+      upgrade_tags:
         title: Upgrade the tags
-        annotation: Upgraded an old tag combination.
+        annotation: Upgraded old tags.
       use_bridge_or_tunnel:
         title: Use a bridge or tunnel
       use_different_layers:
