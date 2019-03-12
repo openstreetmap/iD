@@ -653,13 +653,14 @@ button.add-note svg.icon {
 .search-add .popover .list {
     max-height: 70vh;
 }
-.search-add .list-item {
+.search-add .list-item > .row {
     display: flex;
     position: relative;
     padding: 2px;
 }
-.search-add .list-item:not(:last-of-type),
-.search-add .subsection > * {
+.search-add .list-item:not(:last-of-type) .row,
+.search-add .subsection.subitems .list-item .row,
+.search-add .subsection > .tag-reference-body  {
     border-bottom: 1px solid #DCDCDC;
 }
 .search-add .list-item .label {
@@ -687,7 +688,7 @@ button.add-note svg.icon {
 [dir='rtl'] .search-add .list-item .label .icon.inline {
     margin-right: 0;
 }
-.search-add .list-item > *:not(button) {
+.search-add .list-item .row > *:not(button) {
     pointer-events: none;
 }
 .search-add .list-item button.choose {

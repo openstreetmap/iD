@@ -154,10 +154,9 @@ export function uiSearchAdd(context) {
             if (priorFocus.empty()) {
                 nextFocus = popover.selectAll('.list > .list-item:first-child');
             } else {
-                nextFocus = popover.selectAll('.list .list-item.focused + .list-item');
-                if (nextFocus.empty()) {
-                    nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling)
-                        .selectAll('.list-item:first-child');
+                nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling);
+                if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
+                    nextFocus = nextFocus.selectAll('.list-item:first-child');
                 }
                 if (nextFocus.empty()) {
                     parentSubsection = priorFocus.nodes()[0].closest('.list .subsection');
@@ -268,7 +267,7 @@ export function uiSearchAdd(context) {
 
     function drawList(list, data) {
 
-        list.selectAll('.subsection').remove();
+        list.selectAll('.subsection.subitems').remove();
 
         var dataItems = data.map(function(preset) {
             return itemForPreset(preset);
@@ -294,7 +293,7 @@ export function uiSearchAdd(context) {
 
     function drawItems(selection) {
 
-        var row = selection
+        var item = selection
             .append('div')
             .attr('class', 'list-item')
             .attr('id', function(d) {
@@ -314,6 +313,9 @@ export function uiSearchAdd(context) {
                 d3_select(this)
                     .classed('focused', false);
             });
+
+        var row = item.append('div')
+            .attr('class', 'row');
 
         row.append('button')
             .attr('class', 'choose')
@@ -372,17 +374,16 @@ export function uiSearchAdd(context) {
                 d3_select(this).call(presetFavorite.button);
             }
         });
-        row.each(function(d) {
+        item.each(function(d) {
             if ((d.geometry && !d.isSubitem) || d.geometries) {
 
                 var reference = uiTagReference(d.preset.reference(d.geometry || d.geometries[0]), context);
 
-                var thisRow = d3_select(this);
-                thisRow.call(reference.button, 'accessory', 'info');
+                var thisItem = d3_select(this);
+                thisItem.selectAll('.row').call(reference.button, 'accessory', 'info');
 
-                var selector = '#' + thisRow.node().id + ' + *';
-                var subsection = d3_select(thisRow.node().parentElement)
-                    .insert('div', selector)
+                var subsection = thisItem
+                    .append('div')
                     .attr('class', 'subsection reference');
                 subsection.call(reference.body);
             }

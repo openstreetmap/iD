@@ -119,8 +119,9 @@ export function uiTagReference(what) {
 
         _showing = true;
 
-        _button.selectAll('svg.icon use').each(function(iconUse) {
-            if (iconUse.attr && iconUse.attr('href') === '#iD-icon-info') {
+        _button.selectAll('svg.icon use').each(function() {
+            var iconUse = d3_select(this);
+            if (iconUse.attr('href') === '#iD-icon-info') {
                 iconUse.attr('href', '#iD-icon-info-filled');
             }
         });
@@ -139,8 +140,9 @@ export function uiTagReference(what) {
 
         _showing = false;
 
-        _button.selectAll('svg.icon use').each(function(iconUse) {
-            if (iconUse.attr && iconUse.attr('href') === '#iD-icon-info-filled') {
+        _button.selectAll('svg.icon use').each(function() {
+            var iconUse = d3_select(this);
+            if (iconUse.attr('href') === '#iD-icon-info-filled') {
                 iconUse.attr('href', '#iD-icon-info');
             }
         });
