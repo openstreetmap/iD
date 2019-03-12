@@ -27,10 +27,17 @@
         "highway": "footway"
     },
     "terms": [
-        "race*",
+        "athletics track",
+        "decathlon",
+        "foot race",
+        "long distance running",
+        "marathon",
+        "middle distance running",
+        "racetrack",
         "running",
         "sprint",
-        "track"
+        "track",
+        "walking"
     ],
-    "name": "Racetrack (Running)"
+    "name": "Running Track"
 }

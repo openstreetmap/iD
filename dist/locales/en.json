@@ -6338,12 +6338,12 @@
                     "terms": "cycle,dog,greyhound,horse,race*,track"
                 },
                 "leisure/track/horse_racing": {
-                    "name": "Racetrack (Horse Racing)",
-                    "terms": "race*,horse,track"
+                    "name": "Horse Racing Track",
+                    "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
                 },
                 "leisure/track/running": {
-                    "name": "Racetrack (Running)",
-                    "terms": "race*,running,sprint,track"
+                    "name": "Running Track",
+                    "terms": "athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking"
                 },
                 "leisure/water_park": {
                     "name": "Water Park",

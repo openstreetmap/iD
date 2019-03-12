@@ -27,9 +27,11 @@
         "highway": "bridleway"
     },
     "terms": [
-        "race*",
-        "horse",
-        "track"
+        "equestrian race track",
+        "horse race betting",
+        "horseracing",
+        "horsetrack",
+        "horse racetrack"
     ],
-    "name": "Racetrack (Horse Racing)"
+    "name": "Horse Racing Track"
 }
