@@ -226,6 +226,10 @@ export function uiModes(context) {
                     var x = d3_event.x - dragOrigin.x,
                         y = d3_event.y - dragOrigin.y;
 
+                    if (!d3_select(this).classed('dragging') &&
+                        // don't display drag until dragging beyond a distance threshold
+                        Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
                     d3_select(this)
                         .classed('dragging', true)
                         .classed('removing', y > 50);
@@ -267,6 +271,8 @@ export function uiModes(context) {
                         });
                 })
                 .on('end', function(d, index) {
+
+                    if (!d3_select(this).classed('dragging')) return;
 
                     d3_select(this)
                         .classed('dragging', false)
