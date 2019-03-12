@@ -2701,6 +2701,9 @@
                 "flag/type": {
                     "label": "Flag Type"
                 },
+                "floating": {
+                    "label": "Floating"
+                },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"

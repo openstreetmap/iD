@@ -1257,6 +1257,7 @@
     {"key": "fitness_station", "description": "🄵 Equipment Type"},
     {"key": "fixme", "description": "🄵 Fix Me"},
     {"key": "flag:type", "description": "🄵 Flag Type"},
+    {"key": "floating", "description": "🄵 Floating"},
     {"key": "ford", "description": "🄵 Type, 🄵 Structure"},
     {"key": "frequency", "description": "🄵 Operating Frequency"},
     {"key": "from", "description": "🄵 From"},
