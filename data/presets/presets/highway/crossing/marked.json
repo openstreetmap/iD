@@ -9,6 +9,13 @@
         "vertex"
     ],
     "tags": {
+        "crossing": "marked"
+    },
+    "addTags": {
+        "highway": "crossing",
+        "crossing": "marked"
+    },
+    "removeTags": {
         "highway": "crossing",
         "crossing": "marked"
     },

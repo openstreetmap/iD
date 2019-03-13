@@ -11,6 +11,16 @@
         "line"
     ],
     "tags": {
+        "crossing": "marked",
+        "traffic_calming": "table"
+    },
+    "addTags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "marked",
+        "traffic_calming": "table"
+    },
+    "removeTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "marked",

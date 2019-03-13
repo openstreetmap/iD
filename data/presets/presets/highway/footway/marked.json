@@ -11,6 +11,14 @@
         "line"
     ],
     "tags": {
+        "crossing": "marked"
+    },
+    "addTags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "marked"
+    },
+    "removeTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "marked"

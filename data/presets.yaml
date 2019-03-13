@@ -3987,12 +3987,12 @@ en:
         # 'terms: gallery,hall,hallway,indoor,passage,passageway'
         terms: '<translate with synonyms or related terms for ''Indoor Corridor'', separated by commas>'
       highway/crossing/marked:
-        # 'highway=crossing, crossing=marked'
+        # crossing=marked
         name: Marked Crosswalk
         # 'terms: zebra crossing,marked crossing,crosswalk'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/crossing/marked-raised:
-        # 'highway=crossing, crossing=marked, traffic_calming=table'
+        # 'crossing=marked, traffic_calming=table'
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
@@ -4032,17 +4032,17 @@ en:
         # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
         terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
       highway/footway/marked:
-        # 'highway=footway, footway=crossing, crossing=marked'
+        # crossing=marked
         name: Marked Crosswalk
         # 'terms: zebra crossing,marked crossing,crosswalk'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/footway/marked-raised:
-        # 'highway=footway, footway=crossing, crossing=marked, traffic_calming=table'
+        # 'crossing=marked, traffic_calming=table'
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/footway/sidewalk:
-        # 'highway=footway, footway=sidewalk'
+        # footway=sidewalk
         name: Sidewalk
         # 'terms: pavement,sidepath'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'

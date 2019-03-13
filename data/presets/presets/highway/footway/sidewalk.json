@@ -4,6 +4,13 @@
         "line"
     ],
     "tags": {
+        "footway": "sidewalk"
+    },
+    "addTags": {
+        "highway": "footway",
+        "footway": "sidewalk"
+    },
+    "removeTags": {
         "highway": "footway",
         "footway": "sidewalk"
     },
