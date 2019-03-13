@@ -22,7 +22,6 @@
         "traffic_calming": "table"
     },
     "tags": {
-        "highway": "footway",
         "footway": "crossing",
         "traffic_calming": "table"
     },
@@ -36,5 +35,6 @@
         "speed",
         "slow"
     ],
+    "matchScore": 0.95,
     "name": "Unmarked Crossing (Raised)"
 }

@@ -20,7 +20,6 @@
         "crossing": "unmarked"
     },
     "tags": {
-        "highway": "footway",
         "footway": "crossing"
     },
     "reference": {
@@ -28,5 +27,6 @@
         "value": "crossing"
     },
     "terms": [],
+    "matchScore": 0.95,
     "name": "Unmarked Crossing"
 }

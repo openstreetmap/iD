@@ -4055,11 +4055,11 @@ en:
         # 'terms: pavement,sidepath'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       highway/footway/unmarked:
-        # 'highway=footway, footway=crossing'
+        # footway=crossing
         name: Unmarked Crossing
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/footway/unmarked-raised:
-        # 'highway=footway, footway=crossing, traffic_calming=table'
+        # 'footway=crossing, traffic_calming=table'
         name: Unmarked Crossing (Raised)
         # 'terms: flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
