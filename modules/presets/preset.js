@@ -29,8 +29,8 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
             var f = fields[fieldID];
             if (f.key) {
                 if (preset.tags[f.key] !== undefined &&
-                    // inherit anyway if multiple values are allowed
-                    f.type !== 'multiCombo' && f.type !== 'semiCombo') {
+                    // inherit anyway if multiple values are allowed or just a checkbox
+                    f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check') {
                     return false;
                 }
             }
