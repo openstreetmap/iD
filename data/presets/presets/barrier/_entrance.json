@@ -7,5 +7,6 @@
         "barrier": "entrance"
     },
     "name": "Entrance",
-    "searchable": false
+    "searchable": false,
+    "replacement": "entrance"
 }

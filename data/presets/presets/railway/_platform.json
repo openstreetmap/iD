@@ -15,5 +15,6 @@
         "railway": "platform"
     },
     "name": "Train Platform",
-    "searchable": false
+    "searchable": false,
+    "replacement": "public_transport/platform/train"
 }

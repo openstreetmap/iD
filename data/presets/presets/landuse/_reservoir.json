@@ -11,5 +11,6 @@
         "landuse": "reservoir"
     },
     "name": "Reservoir",
-    "searchable": false
+    "searchable": false,
+    "replacement": "natural/water/reservoir"
 }

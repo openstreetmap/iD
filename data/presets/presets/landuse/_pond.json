@@ -11,5 +11,6 @@
         "landuse": "pond"
     },
     "name": "Pond",
-    "searchable": false
+    "searchable": false,
+    "replacement": "natural/water/pond"
 }

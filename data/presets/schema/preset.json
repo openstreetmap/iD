@@ -91,6 +91,10 @@
                 }
             },
             "additionalProperties": false
+        },
+        "replacement": {
+            "description": "The ID of a preset that is preferable to this one",
+            "type": "string"
         }
     },
     "additionalProperties": false

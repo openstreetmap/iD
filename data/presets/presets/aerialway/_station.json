@@ -15,5 +15,6 @@
         "aerialway": "station"
     },
     "name": "Aerialway Station",
-    "searchable": false
+    "searchable": false,
+    "replacement": "public_transport/station_aerialway"
 }

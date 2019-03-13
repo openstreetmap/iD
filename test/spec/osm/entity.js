@@ -227,9 +227,9 @@ describe('iD.osmEntity', function () {
         });
 
         it('returns true if entity has deprecated tags', function () {
-            expect(iD.Entity({ tags: { amenity: 'swimming_pool' } }).deprecatedTags()).to.eql([{
-              old: { amenity: 'swimming_pool' },
-              replace: { leisure: 'swimming_pool' }
+            expect(iD.Entity({ tags: { amenity: 'toilet' } }).deprecatedTags()).to.eql([{
+              old: { amenity: 'toilet' },
+              replace: { amenity: 'toilets' }
             }]);
         });
     });

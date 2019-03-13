@@ -1,20 +1,12 @@
 {
   "dataDeprecated": [
     {
-      "old": {"aerialway": "station"},
-      "replace": {"aerialway": "yes", "public_transport": "station"}
-    },
-    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
     {
       "old": {"amenity": "artwork"},
       "replace": {"tourism": "artwork"}
-    },
-    {
-      "old": {"amenity": "bus_station"},
-      "replace": {"amenity": "bus_station", "bus": "yes", "public_transport": "station"}
     },
     {
       "old": {"amenity": "car_repair"},
@@ -31,10 +23,6 @@
     {
       "old": {"amenity": "ev_charging"},
       "replace": {"amenity": "charging_station"}
-    },
-    {
-      "old": {"amenity": "ferry_terminal"},
-      "replace": {"amenity": "ferry_terminal", "ferry": "yes", "public_transport": "station"}
     },
     {
       "old": {"amenity": "firepit"},
@@ -71,10 +59,6 @@
     {
       "old": {"amenity": "shop"},
       "replace": {"shop": "*"}
-    },
-    {
-      "old": {"amenity": "swimming_pool"},
-      "replace": {"leisure": "swimming_pool"}
     },
     {
       "old": {"amenity": "toilet"},
@@ -119,18 +103,6 @@
     {
       "old": {"color": "*"},
       "replace": {"colour": "$1"}
-    },
-    {
-      "old": {"craft": "jeweler"},
-      "replace": {"shop": "jewelery"}
-    },
-    {
-      "old": {"craft": "optician"},
-      "replace": {"shop": "optician"}
-    },
-    {
-      "old": {"crossing": "zebra"},
-      "replace": {"crossing": "marked"}
     },
     {
       "old": {"cuisine": "gluten-free"},
@@ -193,10 +165,6 @@
       "replace": {"abandoned:highway": "*"}
     },
     {
-      "old": {"highway": "bus_stop"},
-      "replace": {"bus": "yes", "highway": "bus_stop", "public_transport": "platform"}
-    },
-    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
     },
@@ -228,16 +196,8 @@
       "replace": {"boundary": "protected_area"}
     },
     {
-      "old": {"landuse": "farm"},
-      "replace": {"landuse": "farmland"}
-    },
-    {
       "old": {"landuse": "field"},
       "replace": {"landuse": "farmland"}
-    },
-    {
-      "old": {"landuse": "pond"},
-      "replace": {"natural": "water", "water": "pond"}
     },
     {
       "old": {"landuse": "wood"},
@@ -280,10 +240,6 @@
       "replace": {"waterway": "waterfall"}
     },
     {
-      "old": {"office": "administrative"},
-      "replace": {"office": "government"}
-    },
-    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
@@ -310,14 +266,6 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
-    },
-    {
-      "old": {"railway": "platform"},
-      "replace": {"highway": "footway", "public_transport": "platform", "railway": "platform"}
-    },
-    {
-      "old": {"railway": "station"},
-      "replace": {"public_transport": "station", "railway": "station"}
     },
     {
       "old": {"roof:color": "*"},

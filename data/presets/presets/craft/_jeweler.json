@@ -12,5 +12,6 @@
         "value": "jewelry"
     },
     "name": "Jeweler",
-    "searchable": false
+    "searchable": false,
+    "replacement": "shop/jewelry"
 }

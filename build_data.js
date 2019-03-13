@@ -491,6 +491,14 @@ function validatePresetFields(presets, fields) {
     var maxFieldsBeforeWarning = 8;
     for (var presetID in presets) {
         var preset = presets[presetID];
+
+        if (preset.replacement) {
+            if (presets[preset.replacement] === undefined) {
+                console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset ' + preset.name);
+                process.exit(1);
+            }
+        }
+
         // the keys for properties that contain arrays of field ids
         var fieldKeys = ['fields', 'moreFields'];
         for (var fieldsKeyIndex in fieldKeys) {

@@ -23,5 +23,6 @@
         "station"
     ],
     "name": "Train Station",
-    "searchable": false
+    "searchable": false,
+    "replacement": "public_transport/station_train"
 }

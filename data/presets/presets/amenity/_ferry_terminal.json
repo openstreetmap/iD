@@ -17,5 +17,6 @@
         "amenity": "ferry_terminal"
     },
     "name": "Ferry Station / Terminal",
-    "searchable": false
+    "searchable": false,
+    "replacement": "public_transport/station_ferry"
 }

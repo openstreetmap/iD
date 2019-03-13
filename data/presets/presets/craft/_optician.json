@@ -12,5 +12,6 @@
         "value": "optician"
     },
     "name": "Optician",
-    "searchable": false
+    "searchable": false,
+    "replacement": "shop/optician"
 }

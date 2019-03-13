@@ -1,7 +1,7 @@
 import _clone from 'lodash-es/clone';
 
 import { t } from '../util/locale';
-import { actionUpgradeTags, actionChangeTags } from '../actions';
+import { actionUpgradeTags, actionChangeTags, actionChangePreset } from '../actions';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
 
@@ -9,23 +9,29 @@ export function validationOutdatedTags() {
     var type = 'outdated_tags';
 
 
-    var validation = function(entity, context) {
-
-        var deprecatedTagsArray = entity.deprecatedTags();
-
-        var preset = context.presets().match(entity, context.graph());
-        var missingRecommendedTags = {};
+    function missingRecommendedTags(entity, context, graph) {
+        var preset = context.presets().match(entity, graph);
         if (!preset.isFallback() && preset.tags !== preset.addTags) {
-            missingRecommendedTags = Object.keys(preset.addTags).reduce(function(obj, key) {
+            return Object.keys(preset.addTags).reduce(function(obj, key) {
                 if (!entity.tags[key]) {
                     obj[key] = preset.addTags[key];
                 }
                 return obj;
             }, {});
         }
+        return {};
+    }
 
-        if (deprecatedTagsArray.length === 0 &&
-            Object.keys(missingRecommendedTags).length === 0) return [];
+
+    var validation = function(entity, context) {
+
+        var replacementPresetID = context.presets().match(entity, context.graph()).replacement;
+        var deprecatedTagsArray = entity.deprecatedTags();
+        var missingTags = missingRecommendedTags(entity, context, context.graph());
+
+
+        if (!replacementPresetID && deprecatedTagsArray.length === 0 &&
+            Object.keys(missingTags).length === 0) return [];
 
         return [new validationIssue({
             type: type,
@@ -35,24 +41,31 @@ export function validationOutdatedTags() {
             entities: [entity],
             info: {
                 deprecatedTagsArray: deprecatedTagsArray,
-                missingRecommendedTags: missingRecommendedTags
+                replacementPresetID: replacementPresetID
             },
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-icon-up',
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function() {
+                        var replacementPresetID = this.issue.info.replacementPresetID;
+                        var replacementPreset = replacementPresetID && context.presets().item(replacementPresetID);
                         var deprecatedTagsArray = this.issue.info.deprecatedTagsArray;
-                        var missingRecommendedTags = this.issue.info.missingRecommendedTags;
                         var entityID = this.issue.entities[0].id;
                         context.perform(
                             function(graph) {
+                                if (replacementPreset) {
+                                    var oldPreset = context.presets().match(graph.entity(entityID), context.graph());
+                                    graph = actionChangePreset(entityID, oldPreset, replacementPreset)(graph);
+                                    deprecatedTagsArray = graph.entity(entityID).deprecatedTags();
+                                }
                                 deprecatedTagsArray.forEach(function(deprecatedTags) {
                                     graph = actionUpgradeTags(entityID, deprecatedTags.old, deprecatedTags.replace)(graph);
                                 });
+                                var missingTags = missingRecommendedTags(graph.entity(entityID), context, graph);
                                 var tags = _clone(graph.entity(entityID).tags);
-                                for (var key in missingRecommendedTags) {
-                                    tags[key] = missingRecommendedTags[key];
+                                for (var key in missingTags) {
+                                    tags[key] = missingTags[key];
                                 }
                                 graph = actionChangeTags(entityID, tags)(graph);
                                 return graph;

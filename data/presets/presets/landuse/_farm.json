@@ -13,5 +13,6 @@
         "landuse": "farm"
     },
     "name": "Farmland",
-    "searchable": false
+    "searchable": false,
+    "replacement": "landuse/farmland"
 }

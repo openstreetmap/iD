@@ -15,5 +15,6 @@
         "highway": "bus_stop"
     },
     "name": "Bus Stop",
-    "searchable": false
+    "searchable": false,
+    "replacement": "public_transport/platform/bus_point"
 }
