@@ -9,16 +9,17 @@
         "brewery"
     ],
     "moreFields": [
-        "outdoor_seating",
         "diet_multi",
-        "payment_multi",
+        "email",
+        "fax",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "website",
+        "microbrewery",
+        "outdoor_seating",
+        "payment_multi",
         "phone",
-        "email",
-        "fax",
+        "website",
         "wheelchair"
     ],
     "geometry": [

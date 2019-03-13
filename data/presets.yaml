@@ -1037,6 +1037,9 @@ en:
       memorial:
         # memorial=*
         label: Type
+      microbrewery:
+        # microbrewery=*
+        label: Microbrewery
       minspeed:
         # minspeed=*
         label: Minimum Speed Limit
@@ -2745,6 +2748,11 @@ en:
         name: LGBTQ+ Pub
         # 'terms: gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub'
         terms: '<translate with synonyms or related terms for ''LGBTQ+ Pub'', separated by commas>'
+      amenity/pub/microbrewery:
+        # 'amenity=pub, microbrewery=yes'
+        name: Brewpub
+        # 'terms: alcohol,drink,dive,beer,bier,booze,craft brewery,microbrewery,small batch brewery'
+        terms: '<translate with synonyms or related terms for ''Brewpub'', separated by commas>'
       amenity/public_bath:
         # amenity=public_bath
         name: Public Bath

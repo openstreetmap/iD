@@ -3000,6 +3000,9 @@
                 "memorial": {
                     "label": "Type"
                 },
+                "microbrewery": {
+                    "label": "Microbrewery"
+                },
                 "minspeed": {
                     "label": "Minimum Speed Limit",
                     "placeholder": "20, 30, 40..."
@@ -4484,6 +4487,10 @@
                 "amenity/pub/lgbtq": {
                     "name": "LGBTQ+ Pub",
                     "terms": "gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub"
+                },
+                "amenity/pub/microbrewery": {
+                    "name": "Brewpub",
+                    "terms": "alcohol,drink,dive,beer,bier,booze,craft brewery,microbrewery,small batch brewery"
                 },
                 "amenity/public_bath": {
                     "name": "Public Bath",
