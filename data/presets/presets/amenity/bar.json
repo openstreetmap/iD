@@ -8,13 +8,14 @@
         "brewery"
     ],
     "moreFields": [
-        "smoking",
-        "opening_hours",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "microbrewery",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [
