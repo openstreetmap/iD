@@ -91,7 +91,13 @@ export function uiModes(context) {
                 items = _uniqWith(items.concat(context.presets().getRecents()), function(item1, item2) {
                     return item1.matches(item2.preset, item2.geometry);
                 });
-                items = items.slice(0, 10);
+                var maxShown = 10;
+                var maxRecents = 5;
+                if (favoritesCount < maxRecents) {
+                    // only show five most recent at most
+                    maxShown = maxRecents + favoritesCount;
+                }
+                items = items.slice(0, maxShown);
             }
 
             var modes = items.map(function(d, index) {
