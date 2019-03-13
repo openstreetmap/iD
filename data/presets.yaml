@@ -4987,8 +4987,13 @@ en:
       man_made/pier:
         # man_made=pier
         name: Pier
-        # 'terms: dock,jetty'
+        # 'terms: berth,dock,jetty,landing,promenade,wharf'
         terms: '<translate with synonyms or related terms for ''Pier'', separated by commas>'
+      man_made/pier/floating:
+        # 'man_made=pier, floating=yes'
+        name: Floating Pier
+        # 'terms: berth,dock,jetty,landing,promenade,wharf'
+        terms: '<translate with synonyms or related terms for ''Floating Pier'', separated by commas>'
       man_made/pipeline:
         # man_made=pipeline
         name: Pipeline

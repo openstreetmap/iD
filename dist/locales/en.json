@@ -6431,7 +6431,11 @@
                 },
                 "man_made/pier": {
                     "name": "Pier",
-                    "terms": "dock,jetty"
+                    "terms": "berth,dock,jetty,landing,promenade,wharf"
+                },
+                "man_made/pier/floating": {
+                    "name": "Floating Pier",
+                    "terms": "berth,dock,jetty,landing,promenade,wharf"
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",

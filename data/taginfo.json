@@ -613,6 +613,7 @@
     {"key": "man_made", "value": "observatory", "description": "🄿 Observatory", "object_types": ["node", "area"]},
     {"key": "man_made", "value": "petroleum_well", "description": "🄿 Oil Well", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/storage_tank.svg?sanitize=true"},
     {"key": "man_made", "value": "pier", "description": "🄿 Pier", "object_types": ["way", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"},
+    {"key": "floating", "value": "yes", "description": "🄿 Floating Pier", "object_types": ["way", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"},
     {"key": "man_made", "value": "pipeline", "description": "🄿 Pipeline", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/pipeline-line.svg?sanitize=true"},
     {"key": "man_made", "value": "pumping_station", "description": "🄿 Pumping Station", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "man_made", "value": "silo", "description": "🄿 Silo", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/silo.svg?sanitize=true"},

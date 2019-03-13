@@ -1,17 +1,5 @@
 {
     "icon": "temaki-pedestrian",
-    "fields": [
-        "name",
-        "surface",
-        "floating",
-        "width",
-        "access",
-        "lit"
-    ],
-    "moreFields": [
-        "incline",
-        "{highway/footway}"
-    ],
     "geometry": [
         "line",
         "area"
@@ -25,15 +13,18 @@
         "wharf"
     ],
     "tags": {
-        "man_made": "pier"
+        "man_made": "pier",
+        "floating": "yes"
     },
     "addTags": {
         "highway": "footway",
-        "man_made": "pier"
+        "man_made": "pier",
+        "floating": "yes"
     },
     "removeTags": {
         "highway": "footway",
-        "man_made": "pier"
+        "man_made": "pier",
+        "floating": "yes"
     },
-    "name": "Pier"
+    "name": "Floating Pier"
 }
