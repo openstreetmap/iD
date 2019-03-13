@@ -7,7 +7,6 @@
         "{public_transport/platform}"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
@@ -18,12 +17,12 @@
     "addTags": {
         "public_transport": "platform",
         "trolleybus": "yes",
-        "highway": "bus_stop"
+        "highway": "footway"
     },
     "removeTags": {
         "public_transport": "platform",
         "trolleybus": "yes",
-        "highway": "bus_stop"
+        "highway": "footway"
     },
     "reference": {
         "key": "public_transport",
@@ -42,5 +41,5 @@
         "transit",
         "transportation"
     ],
-    "name": "Trolleybus Stop / Platform"
+    "name": "Trolleybus Platform"
 }

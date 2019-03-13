@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-monorail",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "monorail": "yes"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "terms": [
+        "monorail",
+        "platform",
+        "public transit",
+        "public transportation",
+        "rail",
+        "transit",
+        "transportation"
+    ],
+    "searchable": false,
+    "name": "Monorail Stop / Platform"
+}

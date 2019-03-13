@@ -3983,7 +3983,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Bus Guideway'', separated by commas>'
       highway/bus_stop:
         # highway=bus_stop
-        name: Bus Stop / Platform
+        name: Bus Stop
       highway/construction:
         # 'highway=construction, access=no'
         name: Road Closed
@@ -5688,54 +5688,90 @@ en:
         terms: '<translate with synonyms or related terms for ''Transformer'', separated by commas>'
       public_transport/platform:
         # public_transport=platform
+        name: Transit Platform
+        # 'terms: platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Transit Platform'', separated by commas>'
+      public_transport/platform/aerialway_point:
+        # 'public_transport=platform, aerialway=yes'
+        name: Aerialway Stop / Platform
+      public_transport/platform/bus_point:
+        # 'public_transport=platform, bus=yes'
+        name: Bus Stop
+        # 'terms: bus,platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Bus Stop'', separated by commas>'
+      public_transport/platform/ferry_point:
+        # 'public_transport=platform, ferry=yes'
+        name: Ferry Stop / Platform
+      public_transport/platform/light_rail_point:
+        # 'public_transport=platform, light_rail=yes'
+        name: Light Rail Stop / Platform
+      public_transport/platform/monorail_point:
+        # 'public_transport=platform, monorail=yes'
+        name: Monorail Stop / Platform
+      public_transport/platform/subway_point:
+        # 'public_transport=platform, subway=yes'
+        name: Subway Stop / Platform
+      public_transport/platform/train_point:
+        # 'public_transport=platform, train=yes'
+        name: Train Stop / Platform
+      public_transport/platform/tram_point:
+        # 'public_transport=platform, tram=yes'
+        name: Tram Stop / Platform
+      public_transport/platform/trolleybus_point:
+        # 'public_transport=platform, trolleybus=yes'
+        name: Trolleybus Stop
+        # 'terms: bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Trolleybus Stop'', separated by commas>'
+      public_transport/platform_aerialway:
+        # 'public_transport=platform, aerialway=yes'
+        name: Aerialway Platform
+        # 'terms: aerialway,cable car,platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Aerialway Platform'', separated by commas>'
+      public_transport/platform_bus:
+        # 'public_transport=platform, bus=yes'
+        name: Bus Platform
+        # 'terms: bus,platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Bus Platform'', separated by commas>'
+      public_transport/platform_ferry:
+        # 'public_transport=platform, ferry=yes'
+        name: Ferry Platform
+        # 'terms: boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Ferry Platform'', separated by commas>'
+      public_transport/platform_light_rail:
+        # 'public_transport=platform, light_rail=yes'
+        name: Light Rail Platform
+        # 'terms: electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Light Rail Platform'', separated by commas>'
+      public_transport/platform_monorail:
+        # 'public_transport=platform, monorail=yes'
+        name: Monorail Platform
+        # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Monorail Platform'', separated by commas>'
+      public_transport/platform_point:
+        # public_transport=platform
         name: Transit Stop / Platform
         # 'terms: platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Stop / Platform'', separated by commas>'
-      public_transport/platform_aerialway:
-        # 'public_transport=platform, aerialway=yes'
-        name: Aerialway Stop / Platform
-        # 'terms: aerialway,cable car,platform,public transit,public transportation,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Aerialway Stop / Platform'', separated by commas>'
-      public_transport/platform_bus:
-        # 'public_transport=platform, bus=yes'
-        name: Bus Stop / Platform
-        # 'terms: bus,platform,public transit,public transportation,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Bus Stop / Platform'', separated by commas>'
-      public_transport/platform_ferry:
-        # 'public_transport=platform, ferry=yes'
-        name: Ferry Stop / Platform
-        # 'terms: boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Ferry Stop / Platform'', separated by commas>'
-      public_transport/platform_light_rail:
-        # 'public_transport=platform, light_rail=yes'
-        name: Light Rail Stop / Platform
-        # 'terms: electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Light Rail Stop / Platform'', separated by commas>'
-      public_transport/platform_monorail:
-        # 'public_transport=platform, monorail=yes'
-        name: Monorail Stop / Platform
-        # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Monorail Stop / Platform'', separated by commas>'
       public_transport/platform_subway:
         # 'public_transport=platform, subway=yes'
-        name: Subway Stop / Platform
+        name: Subway Platform
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
-        terms: '<translate with synonyms or related terms for ''Subway Stop / Platform'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Subway Platform'', separated by commas>'
       public_transport/platform_train:
         # 'public_transport=platform, train=yes'
-        name: Train Stop / Platform
+        name: Train Platform
         # 'terms: platform,public transit,public transportation,rail,track,train,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Train Stop / Platform'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Train Platform'', separated by commas>'
       public_transport/platform_tram:
         # 'public_transport=platform, tram=yes'
-        name: Tram Stop / Platform
+        name: Tram Platform
         # 'terms: electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Tram Stop / Platform'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Tram Platform'', separated by commas>'
       public_transport/platform_trolleybus:
         # 'public_transport=platform, trolleybus=yes'
-        name: Trolleybus Stop / Platform
+        name: Trolleybus Platform
         # 'terms: bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Trolleybus Stop / Platform'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Trolleybus Platform'', separated by commas>'
       public_transport/station:
         # public_transport=station
         name: Transit Station
@@ -5910,7 +5946,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Narrow Gauge Rail'', separated by commas>'
       railway/platform:
         # railway=platform
-        name: Train Stop / Platform
+        name: Train Platform
       railway/rail:
         # railway=rail
         name: Rail

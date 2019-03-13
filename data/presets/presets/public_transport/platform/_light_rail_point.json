@@ -1,30 +1,17 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "temaki-light_rail",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
         "light_rail": "yes"
-    },
-    "addTags": {
-        "public_transport": "platform",
-        "light_rail": "yes",
-        "railway": "platform",
-        "highway": "footway"
-    },
-    "removeTags": {
-        "public_transport": "platform",
-        "light_rail": "yes",
-        "railway": "platform",
-        "highway": "footway"
     },
     "reference": {
         "key": "railway",
@@ -43,5 +30,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Light Rail Platform"
+    "searchable": false,
+    "name": "Light Rail Stop / Platform"
 }

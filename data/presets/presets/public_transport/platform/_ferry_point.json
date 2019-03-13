@@ -1,28 +1,17 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "maki-ferry",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
         "ferry": "yes"
-    },
-    "addTags": {
-        "public_transport": "platform",
-        "ferry": "yes",
-        "highway": "footway"
-    },
-    "removeTags": {
-        "public_transport": "platform",
-        "ferry": "yes",
-        "highway": "footway"
     },
     "reference": {
         "key": "public_transport",
@@ -39,5 +28,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Ferry Platform"
+    "searchable": false,
+    "name": "Ferry Stop / Platform"
 }

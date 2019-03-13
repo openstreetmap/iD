@@ -1,30 +1,17 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "temaki-tram",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
         "tram": "yes"
-    },
-    "addTags": {
-        "public_transport": "platform",
-        "tram": "yes",
-        "railway": "platform",
-        "highway": "footway"
-    },
-    "removeTags": {
-        "public_transport": "platform",
-        "tram": "yes",
-        "railway": "platform",
-        "highway": "footway"
     },
     "reference": {
         "key": "public_transport",
@@ -44,5 +31,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Tram Platform"
+    "searchable": false,
+    "name": "Tram Stop / Platform"
 }

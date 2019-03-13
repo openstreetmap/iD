@@ -1,28 +1,17 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "maki-aerialway",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
         "aerialway": "yes"
-    },
-    "addTags": {
-        "public_transport": "platform",
-        "aerialway": "yes",
-        "highway": "footway"
-    },
-    "removeTags": {
-        "public_transport": "platform",
-        "aerialway": "yes",
-        "highway": "footway"
     },
     "reference": {
         "key": "public_transport",
@@ -37,5 +26,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Aerialway Platform"
+    "searchable": false,
+    "name": "Aerialway Stop / Platform"
 }

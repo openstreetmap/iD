@@ -7,7 +7,6 @@
         "{public_transport/platform}"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
@@ -18,12 +17,12 @@
     "addTags": {
         "public_transport": "platform",
         "bus": "yes",
-        "highway": "bus_stop"
+        "highway": "footway"
     },
     "removeTags": {
         "public_transport": "platform",
         "bus": "yes",
-        "highway": "bus_stop"
+        "highway": "footway"
     },
     "reference": {
         "key": "public_transport",
@@ -37,5 +36,5 @@
         "transit",
         "transportation"
     ],
-    "name": "Bus Stop / Platform"
+    "name": "Bus Platform"
 }

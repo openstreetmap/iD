@@ -1,48 +1,39 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "maki-bus",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
-        "tram": "yes"
+        "bus": "yes"
     },
     "addTags": {
         "public_transport": "platform",
-        "tram": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "bus": "yes",
+        "highway": "bus_stop"
     },
     "removeTags": {
         "public_transport": "platform",
-        "tram": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "bus": "yes",
+        "highway": "bus_stop"
     },
     "reference": {
         "key": "public_transport",
         "value": "platform"
     },
     "terms": [
-        "electric",
-        "light rail",
+        "bus",
         "platform",
         "public transit",
         "public transportation",
-        "rail",
-        "streetcar",
-        "track",
-        "tram",
-        "trolley",
         "transit",
         "transportation"
     ],
-    "name": "Tram Platform"
+    "name": "Bus Stop"
 }

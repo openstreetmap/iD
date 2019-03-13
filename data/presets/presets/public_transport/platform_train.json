@@ -7,7 +7,6 @@
         "{public_transport/platform}"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
@@ -41,5 +40,5 @@
         "transit",
         "transportation"
     ],
-    "name": "Train Stop / Platform"
+    "name": "Train Platform"
 }

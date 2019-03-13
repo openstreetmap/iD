@@ -1,47 +1,44 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "temaki-trolleybus",
     "fields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "moreFields": [
-        "{public_transport/platform}"
+        "{public_transport/platform_point}"
     ],
     "geometry": [
-        "line",
-        "area"
+        "point"
     ],
     "tags": {
         "public_transport": "platform",
-        "light_rail": "yes"
+        "trolleybus": "yes"
     },
     "addTags": {
         "public_transport": "platform",
-        "light_rail": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "trolleybus": "yes",
+        "highway": "bus_stop"
     },
     "removeTags": {
         "public_transport": "platform",
-        "light_rail": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "trolleybus": "yes",
+        "highway": "bus_stop"
     },
     "reference": {
-        "key": "railway",
+        "key": "public_transport",
         "value": "platform"
     },
     "terms": [
+        "bus",
         "electric",
-        "light rail",
         "platform",
         "public transit",
         "public transportation",
-        "rail",
-        "track",
+        "streetcar",
+        "trackless",
         "tram",
         "trolley",
         "transit",
         "transportation"
     ],
-    "name": "Light Rail Platform"
+    "name": "Trolleybus Stop"
 }

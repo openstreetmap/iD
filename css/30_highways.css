@@ -244,7 +244,6 @@ path.line.stroke.tag-highway-road {
 
 path.line.shadow.tag-highway-path,
 path.line.shadow.tag-highway-footway,
-path.line.shadow.tag-highway-bus_stop,
 path.line.shadow.tag-highway-cycleway,
 path.line.shadow.tag-highway-bridleway,
 path.line.shadow.tag-highway-corridor,
@@ -254,7 +253,6 @@ path.line.shadow.tag-highway-steps {
 }
 path.line.casing.tag-highway-path,
 path.line.casing.tag-highway-footway,
-path.line.casing.tag-highway-bus_stop,
 path.line.casing.tag-highway-cycleway,
 path.line.casing.tag-highway-bridleway,
 path.line.casing.tag-highway-corridor,
@@ -264,7 +262,6 @@ path.line.casing.tag-highway-steps {
 }
 path.line.stroke.tag-highway-path,
 path.line.stroke.tag-highway-footway,
-path.line.stroke.tag-highway-bus_stop,
 path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway,
 path.line.stroke.tag-highway-corridor,
@@ -297,7 +294,6 @@ path.line.stroke.tag-highway-steps {
 
 .low-zoom path.line.shadow.tag-highway-path,
 .low-zoom path.line.shadow.tag-highway-footway,
-.low-zoom path.line.shadow.tag-highway-bus_stop,
 .low-zoom path.line.shadow.tag-highway-cycleway,
 .low-zoom path.line.shadow.tag-highway-bridleway,
 .low-zoom path.line.shadow.tag-highway-corridor,
@@ -307,7 +303,6 @@ path.line.stroke.tag-highway-steps {
 }
 .low-zoom path.line.casing.tag-highway-path,
 .low-zoom path.line.casing.tag-highway-footway,
-.low-zoom path.line.casing.tag-highway-bus_stop,
 .low-zoom path.line.casing.tag-highway-cycleway,
 .low-zoom path.line.casing.tag-highway-bridleway,
 .low-zoom path.line.casing.tag-highway-corridor,
@@ -317,7 +312,6 @@ path.line.stroke.tag-highway-steps {
 }
 .low-zoom path.line.stroke.tag-highway-path,
 .low-zoom path.line.stroke.tag-highway-footway,
-.low-zoom path.line.stroke.tag-highway-bus_stop,
 .low-zoom path.line.stroke.tag-highway-cycleway,
 .low-zoom path.line.stroke.tag-highway-bridleway,
 .low-zoom path.line.stroke.tag-highway-corridor,
@@ -435,7 +429,6 @@ path.line.casing.tag-track {
 /* paths */
 path.line.stroke.tag-highway-path,
 path.line.stroke.tag-highway-footway,
-path.line.stroke.tag-highway-bus_stop,
 path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway {
     stroke-linecap: butt;
@@ -443,16 +436,16 @@ path.line.stroke.tag-highway-bridleway {
 }
 .low-zoom path.line.stroke.tag-highway-path,
 .low-zoom path.line.stroke.tag-highway-footway,
-.low-zoom path.line.stroke.tag-highway-bus_stop,
 .low-zoom path.line.stroke.tag-highway-cycleway,
 .low-zoom path.line.stroke.tag-highway-bridleway {
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
 }
 
+/* style for features that should have highway=footway but don't yet */
 path.line.stroke.tag-crossing,
-path.line.stroke.tag-highway-bus_stop,
 path.line.stroke.tag-public_transport-platform,
+path.line.stroke.tag-highway-platform,
 path.line.stroke.tag-railway-platform,
 path.line.stroke.tag-man_made-pier {
     stroke: #dca;
@@ -460,7 +453,6 @@ path.line.stroke.tag-man_made-pier {
 
 path.line.casing.tag-highway-path,
 path.line.casing.tag-highway-path.tag-unpaved,
-path.line.casing.tag-highway-bus_stop,
 path.line.casing.tag-highway-footway.tag-public_transport-platform,
 path.line.casing.tag-highway-footway.tag-man_made-pier,
 path.line.casing.tag-highway-footway.tag-footway-crossing {
@@ -483,13 +475,11 @@ path.line.casing.tag-highway-bridleway.tag-unpaved {
 .preset-icon .icon.tag-highway-path,
 .preset-icon .icon.tag-highway-footway.tag-public_transport-platform,
 .preset-icon .icon.tag-highway-footway.tag-man_made-pier,
-.preset-icon .icon.tag-highway-bus_stop,
 .preset-icon .icon.tag-footway.tag-footway-crossing {
     color: #988;
     fill: #dca;
 }
-path.line.stroke.tag-highway-path,
-path.line.stroke.tag-highway-bus_stop {
+path.line.stroke.tag-highway-path {
     stroke: #988;
 }
 
