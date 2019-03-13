@@ -17,9 +17,7 @@
     ],
     "tags": {
         "power": "generator",
-        "generator:source": "solar",
-        "generator:method": "photovoltaic",
-        "generator:type": "solar_photovoltaic_panel"
+        "generator:method": "photovoltaic"
     },
     "addTags": {
         "power": "generator",

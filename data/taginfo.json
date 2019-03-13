@@ -748,7 +748,7 @@
     {"key": "power", "value": "sub_station", "description": "🄿 Substation (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"},
     {"key": "location", "value": "underground", "description": "🄿 Underground Power Cable", "object_types": ["way"]},
     {"key": "power", "value": "generator", "description": "🄿 Power Generator", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"},
-    {"key": "generator:type", "value": "solar_photovoltaic_panel", "description": "🄿 Solar Panel", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-solar-panel.svg?sanitize=true"},
+    {"key": "generator:method", "value": "photovoltaic", "description": "🄿 Solar Panel", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-solar-panel.svg?sanitize=true"},
     {"key": "generator:method", "value": "fission", "description": "🄿 Nuclear Reactor", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/radiation.svg?sanitize=true"},
     {"key": "generator:method", "value": "wind_turbine", "description": "🄿 Wind Turbine", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/wind_turbine.svg?sanitize=true"},
     {"key": "power", "value": "line", "description": "🄿 Power Line", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/power-line.svg?sanitize=true"},

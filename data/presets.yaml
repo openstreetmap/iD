@@ -5627,7 +5627,7 @@ en:
         # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
       power/generator/method/photovoltaic:
-        # 'power=generator, generator:source=solar, generator:method=photovoltaic, generator:type=solar_photovoltaic_panel'
+        # 'power=generator, generator:method=photovoltaic'
         name: Solar Panel
         # 'terms: photovoltaic module,PV module,sunlight'
         terms: '<translate with synonyms or related terms for ''Solar Panel'', separated by commas>'
