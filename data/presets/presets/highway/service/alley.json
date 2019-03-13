@@ -4,6 +4,13 @@
         "line"
     ],
     "tags": {
+        "service": "alley"
+    },
+    "addTags": {
+        "highway": "service",
+        "service": "alley"
+    },
+    "removeTags": {
         "highway": "service",
         "service": "alley"
     },

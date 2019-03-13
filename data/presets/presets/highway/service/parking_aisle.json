@@ -4,6 +4,13 @@
         "line"
     ],
     "tags": {
+        "service": "parking_aisle"
+    },
+    "addTags": {
+        "highway": "service",
+        "service": "parking_aisle"
+    },
+    "removeTags": {
         "highway": "service",
         "service": "parking_aisle"
     },

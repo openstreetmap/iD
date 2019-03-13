@@ -4161,23 +4161,23 @@ en:
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Service Road'', separated by commas>'
       highway/service/alley:
-        # 'highway=service, service=alley'
+        # service=alley
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
       highway/service/drive-through:
-        # 'highway=service, service=drive-through'
+        # service=drive-through
         name: Drive-Through
         terms: '<translate with synonyms or related terms for ''Drive-Through'', separated by commas>'
       highway/service/driveway:
-        # 'highway=service, service=driveway'
+        # service=driveway
         name: Driveway
         terms: '<translate with synonyms or related terms for ''Driveway'', separated by commas>'
       highway/service/emergency_access:
-        # 'highway=service, service=emergency_access'
+        # service=emergency_access
         name: Emergency Access
         terms: '<translate with synonyms or related terms for ''Emergency Access'', separated by commas>'
       highway/service/parking_aisle:
-        # 'highway=service, service=parking_aisle'
+        # service=parking_aisle
         name: Parking Aisle
         terms: '<translate with synonyms or related terms for ''Parking Aisle'', separated by commas>'
       highway/services:
