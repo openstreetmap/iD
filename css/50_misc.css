@@ -414,120 +414,45 @@ path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
-.preset-icon-fill-area.tag-parking-multi-storey,
-.preset-icon-fill-area.tag-building {
-    border-color: rgb(224, 110, 95);
-    background-color: rgba(224, 110, 95, 0.3);
-}
 
 
-/* "Special" paths - platforms, piers, crossings */
-.preset-icon .icon.tag-golf-path,
-.preset-icon .icon.tag-public_transport-platform,
-.preset-icon .icon.tag-railway-platform,
-.preset-icon .icon.tag-man_made-pier,
-.preset-icon .icon.tag-footway.tag-footway-crossing,
-.preset-icon .icon.tag-crossing {
+/* "Special" paths - highways that aren't highways */
+.preset-icon .icon.tag-golf-path {
     color: #988;
     fill: #dca;
 }
 
-.preset-icon-fill-area.tag-golf-path,
-.preset-icon-fill-area.tag-public_transport-platform,
-.preset-icon-fill-area.tag-railway-platform,
-.preset-icon-fill-area.tag-man_made-pier,
-.preset-icon-fill-area.tag-footway.tag-footway-crossing,
-.preset-icon-fill-area.tag-crossing {
-    border-color: #988;
-    background-color: #dca;
-}
-
-path.line.shadow.tag-golf-path,
-path.line.shadow.tag-public_transport-platform,
-path.line.shadow.tag-railway-platform,
-path.line.shadow.tag-man_made-pier,
-path.line.shadow.tag-footway.tag-footway-crossing,
-path.line.shadow.tag-crossing {
+path.line.shadow.tag-golf-path {
     stroke-width: 16;
 }
-path.line.casing.tag-golf-path,
-path.line.casing.tag-public_transport-platform,
-path.line.casing.tag-railway-platform,
-path.line.casing.tag-man_made-pier,
-path.line.casing.tag-footway.tag-footway-crossing,
-path.line.casing.tag-crossing {
+path.line.casing.tag-golf-path {
     stroke: #dca;
     stroke-width: 5;
     stroke-linecap: round;
     stroke-dasharray: none;
 }
-path.line.stroke.tag-golf-path,
-path.line.stroke.tag-public_transport-platform,
-path.line.stroke.tag-railway-platform,
-path.line.stroke.tag-man_made-pier,
-path.line.stroke.tag-footway.tag-footway-crossing,
-path.line.stroke.tag-crossing {
+path.line.stroke.tag-golf-path {
     stroke: #988;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
 }
 
-.low-zoom path.line.shadow.tag-golf-path,
-.low-zoom path.line.shadow.tag-public_transport-platform,
-.low-zoom path.line.shadow.tag-railway-platform,
-.low-zoom path.line.shadow.tag-man_made-pier,
-.low-zoom path.line.shadow.tag-footway.tag-footway-crossing,
-.low-zoom path.line.shadow.tag-crossing {
+.low-zoom path.line.shadow.tag-golf-path {
     stroke-width: 12;
 }
-.low-zoom path.line.casing.tag-golf-path,
-.low-zoom path.line.casing.tag-public_transport-platform,
-.low-zoom path.line.casing.tag-railway-platform,
-.low-zoom path.line.casing.tag-man_made-pier,
-.low-zoom path.line.casing.tag-footway.tag-footway-crossing,
-.low-zoom path.line.casing.tag-crossing {
+.low-zoom path.line.casing.tag-golf-path {
     stroke-width: 3;
 }
-.low-zoom path.line.stroke.tag-golf-path,
-.low-zoom path.line.stroke.tag-public_transport-platform,
-.low-zoom path.line.stroke.tag-railway-platform,
-.low-zoom path.line.stroke.tag-man_made-pier,
-.low-zoom path.line.stroke.tag-footway.tag-footway-crossing,
-.low-zoom path.line.stroke.tag-crossing {
+.low-zoom path.line.stroke.tag-golf-path {
     stroke-width: 1;
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
 }
 
-g.midpoint.tag-golf-path .fill,
-g.midpoint.tag-public_transport-platform .fill,
-g.midpoint.tag-railway-platform .fill,
-g.midpoint.tag-man_made-pier .fill,
-g.midpoint.tag-footway.tag-footway-crossing .fill,
-g.midpoint.tag-crossing .fill {
+g.midpoint.tag-golf-path .fill {
     fill: #fff;
     stroke: #333;
     stroke-opacity: .8;
     opacity: .8;
-}
-
-/* marked crossings, zebras */
-.preset-icon .icon.tag-crossing.tag-crossing-marked,
-.preset-icon .icon.tag-crossing.tag-crossing-zebra {
-    color: #444;
-    fill: #dca;
-}
-path.line.casing.tag-crossing.tag-crossing-marked,
-path.line.casing.tag-crossing.tag-crossing-zebra {
-    stroke: #dca;
-}
-path.line.stroke.tag-crossing.tag-crossing-marked,
-path.line.stroke.tag-crossing.tag-crossing-zebra {
-    stroke: #444;
-    stroke-dasharray: 6, 4;
-}
-.low-zoom path.line.stroke.tag-crossing.tag-crossing-marked,
-.low-zoom path.line.stroke.tag-crossing.tag-crossing-zebra {
-    stroke-dasharray: 3, 2;
 }

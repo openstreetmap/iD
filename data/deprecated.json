@@ -117,6 +117,10 @@
       "replace": {"shop": "optician"}
     },
     {
+      "old": {"crossing": "zebra"},
+      "replace": {"crossing": "marked"}
+    },
+    {
       "old": {"cuisine": "gluten-free"},
       "replace": {"diet:gluten_free": "yes"}
     },
