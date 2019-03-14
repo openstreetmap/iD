@@ -3127,6 +3127,13 @@ div.full-screen > button:hover {
     cursor: pointer;
 }
 
+[dir='ltr'] .layer-list .indented label {
+    padding-left: 24px;
+}
+[dir='rtl'] .layer-list .indented label {
+    padding-right: 24px;
+}
+
 .layer-list label > span {
     display: block;
     overflow: hidden;

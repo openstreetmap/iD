@@ -30,6 +30,7 @@ export function uiMapData(context) {
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
+    var _photoOverlayContainer = d3_select(null);
     var _fillList = d3_select(null);
     var _featureList = d3_select(null);
     var _QAList = d3_select(null);
@@ -144,14 +145,24 @@ export function uiMapData(context) {
 
         var liEnter = li.enter()
             .append('li')
-            .attr('class', function(d) { return 'list-item-photos list-item-' + d.id; });
+            .attr('class', function(d) {
+                var classes = 'list-item-photos list-item-' + d.id;
+                if (d.id === 'mapillary-signs') {
+                    classes += ' indented';
+                }
+                return classes;
+            });
 
         var labelEnter = liEnter
             .append('label')
             .each(function(d) {
+                var titleID = d.id.replace('-', '_') + '.tooltip';
+                if (d.id === 'mapillary-signs') {
+                    titleID = 'mapillary.signs.tooltip';
+                }
                 d3_select(this)
                     .call(tooltip()
-                        .title(t(d.id.replace('-', '_') + '.tooltip'))
+                        .title(t(titleID))
                         .placement('top')
                     );
             });
@@ -163,7 +174,13 @@ export function uiMapData(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t(d.id.replace('-', '_') + '.title'); });
+            .text(function(d) {
+                var id = d.id;
+                if (id === 'mapillary-images') id = 'mapillary';
+                if (id === 'openstreetcam-images') id = 'openstreetcam';
+                if (id === 'mapillary-signs') id = 'map_data.traffic_signs';
+                return t(id.replace('-', '_') + '.title');
+            });
 
 
         // Update
@@ -548,6 +565,18 @@ export function uiMapData(context) {
         updateDataLayers();
     }
 
+    function renderPhotoOverlays(selection) {
+        var container = selection.selectAll('.photo-overlay-container')
+            .data([0]);
+
+        _photoOverlayContainer = container.enter()
+            .append('div')
+            .attr('class', 'photo-overlay-container')
+            .merge(container);
+
+        updatePhotoOverlays();
+    }
+
 
     function renderFillList(selection) {
         var container = selection.selectAll('.layer-fill-list')
@@ -574,11 +603,15 @@ export function uiMapData(context) {
         updateFeatureList();
     }
 
+    function updatePhotoOverlays() {
+        _photoOverlayContainer
+            .call(drawPhotoItems);
+    }
+
     function updateDataLayers() {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawQAItems)
-            .call(drawPhotoItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
     }
@@ -597,6 +630,9 @@ export function uiMapData(context) {
 
         if (!_pane.select('.disclosure-wrap-data_layers').classed('hide')) {
             updateDataLayers();
+        }
+        if (!_pane.select('.disclosure-wrap-photo_overlays').classed('hide')) {
+            updatePhotoOverlays();
         }
         if (!_pane.select('.disclosure-wrap-fill_area').classed('hide')) {
             updateFillList();
@@ -716,6 +752,15 @@ export function uiMapData(context) {
             .call(uiDisclosure(context, 'data_layers', true)
                 .title(t('map_data.data_layers'))
                 .content(renderDataLayers)
+            );
+
+        // photo overlays
+        content
+            .append('div')
+            .attr('class', 'map-data-photo-overlays')
+            .call(uiDisclosure(context, 'photo_overlays', false)
+                .title(t('map_data.photo_overlays'))
+                .content(renderPhotoOverlays)
             );
 
         // area fills

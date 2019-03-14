@@ -644,8 +644,12 @@
                     "zoom": "Zoom to data"
                 }
             },
+            "photo_overlays": "Photo Overlays",
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
+            "traffic_signs": {
+                "title": "Traffic Signs"
+            },
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
@@ -1174,27 +1178,26 @@
         },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
-            "title": "Photo Overlay (Bing Streetside)",
+            "title": "Bing Streetside",
             "report": "Report a privacy concern with this image",
             "view_on_bing": "View on Bing Maps",
             "hires": "High resolution"
         },
         "mapillary_images": {
-            "tooltip": "Street-level photos from Mapillary",
-            "title": "Photo Overlay (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Traffic signs from Mapillary (must enable Photo Overlay)",
-            "title": "Traffic Sign Overlay (Mapillary)"
+            "tooltip": "Street-level photos from Mapillary"
         },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Traffic signs from Mapillary"
+            },
             "view_on_mapillary": "View this image on Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Street-level photos from OpenStreetCam",
-            "title": "Photo Overlay (OpenStreetCam)"
+            "tooltip": "Street-level photos from OpenStreetCam"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "View this image on OpenStreetCam"
         },
         "note": {
