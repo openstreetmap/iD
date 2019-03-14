@@ -36,7 +36,6 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
-        service.loadViewer(context);
         editOn();
 
         layer
@@ -195,7 +194,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var enabled = svgOpenstreetcamImages.enabled,
             service = getService();
 
-        layer = selection.selectAll('.layer-openstreetcam-images')
+        layer = selection.selectAll('.layer-openstreetcam')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -203,7 +202,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-openstreetcam-images')
+            .attr('class', 'layer-openstreetcam')
             .style('display', enabled ? 'block' : 'none');
 
         layerEnter

@@ -46,7 +46,6 @@ export function svgStreetside(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
-        service.loadViewer(context);
         editOn();
 
         layer

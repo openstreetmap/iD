@@ -197,7 +197,7 @@ export function rendererBackground(context) {
             imageryUsed.push('Bing Streetside');
         }
 
-        var mapillary_images = context.layers().layer('mapillary-images');
+        var mapillary_images = context.layers().layer('mapillary');
         if (mapillary_images && mapillary_images.enabled()) {
             imageryUsed.push('Mapillary Images');
         }
@@ -207,7 +207,7 @@ export function rendererBackground(context) {
             imageryUsed.push('Mapillary Signs');
         }
 
-        var openstreetcam_images = context.layers().layer('openstreetcam-images');
+        var openstreetcam_images = context.layers().layer('openstreetcam');
         if (openstreetcam_images && openstreetcam_images.enabled()) {
             imageryUsed.push('OpenStreetCam Images');
         }

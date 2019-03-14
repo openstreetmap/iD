@@ -33,9 +33,9 @@ export function svgLayers(projection, context) {
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
-        { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
+        { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
-        { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
+        { id: 'openstreetcam', layer: svgOpenstreetcamImages(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
         { id: 'touch', layer: svgTouch(projection, context, dispatch) }

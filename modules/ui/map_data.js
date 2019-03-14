@@ -117,7 +117,7 @@ export function uiMapData(context) {
 
 
     function drawPhotoItems(selection) {
-        var photoKeys = ['streetside', 'mapillary-images', 'mapillary-signs', 'openstreetcam-images'];
+        var photoKeys = context.photos().overlayLayerIDs();
         var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
         var data = photoLayers.filter(function(obj) { return obj.layer.supported(); });
 
@@ -156,10 +156,11 @@ export function uiMapData(context) {
         var labelEnter = liEnter
             .append('label')
             .each(function(d) {
-                var titleID = d.id.replace('-', '_') + '.tooltip';
-                if (d.id === 'mapillary-signs') {
-                    titleID = 'mapillary.signs.tooltip';
-                }
+                var titleID;
+                if (d.id === 'mapillary-signs') titleID = 'mapillary.signs.tooltip';
+                else if (d.id === 'mapillary') titleID = 'mapillary_images.tooltip';
+                else if (d.id === 'openstreetcam') titleID = 'openstreetcam_images.tooltip';
+                else titleID = d.id.replace('-', '_') + '.tooltip';
                 d3_select(this)
                     .call(tooltip()
                         .title(t(titleID))
@@ -176,8 +177,6 @@ export function uiMapData(context) {
             .append('span')
             .text(function(d) {
                 var id = d.id;
-                if (id === 'mapillary-images') id = 'mapillary';
-                if (id === 'openstreetcam-images') id = 'openstreetcam';
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
                 return t(id.replace('-', '_') + '.title');
             });

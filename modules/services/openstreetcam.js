@@ -522,12 +522,12 @@ export default {
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
 
-        d3_selectAll('.layer-openstreetcam-images .viewfield-group')
+        d3_selectAll('.layer-openstreetcam .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function(d) { return d.key === hoveredImageKey; })
             .classed('currentView', function(d) { return d.key === selectedImageKey; });
 
-        d3_selectAll('.layer-openstreetcam-images .sequence')
+        d3_selectAll('.layer-openstreetcam .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
             .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
 

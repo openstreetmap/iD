@@ -538,6 +538,7 @@ export function coreContext() {
 
     background.init();
     features.init();
+    photos.init();
     if (utilStringQs(window.location.hash).presets) {
         var external = utilStringQs(window.location.hash).presets;
         presets.fromExternal(external, function(externalPresets) {

@@ -51,7 +51,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
-        service.loadViewer(context);
         editOn();
 
         layer
@@ -258,7 +257,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var enabled = svgMapillaryImages.enabled;
         var service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-images')
+        layer = selection.selectAll('.layer-mapillary')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -266,7 +265,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-images')
+            .attr('class', 'layer-mapillary')
             .style('display', enabled ? 'block' : 'none');
 
         layerEnter
