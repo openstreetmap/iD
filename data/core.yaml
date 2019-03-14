@@ -527,13 +527,21 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
-    photo_overlays: Photo Overlays
     fill_area: Fill Areas
     map_features: Map Features
-    traffic_signs:
-      title: Traffic Signs
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
+  photo_overlays:
+    title: Photo Overlays
+    traffic_signs:
+      title: Traffic Signs
+    photo_type:
+      flat:
+        title: "Flat Photos"
+        tooltip: "Traditional photos"
+      panoramic:
+        title: "Panoramic Photos"
+        tooltip: "360° photos"
   feature:
     points:
       description: Points

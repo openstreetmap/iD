@@ -18,7 +18,7 @@ import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { presetIndex } from '../presets';
-import { rendererBackground, rendererFeatures, rendererMap } from '../renderer';
+import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
@@ -309,6 +309,11 @@ export function coreContext() {
     };
 
 
+    /* Photos */
+    var photos;
+    context.photos = function() { return photos; };
+
+
     /* Presets */
     var presets;
     context.presets = function() { return presets; };
@@ -501,6 +506,7 @@ export function coreContext() {
     connection = services.osm;
     background = rendererBackground(context);
     features = rendererFeatures(context);
+    photos = rendererPhotos(context);
     presets = presetIndex(context);
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {

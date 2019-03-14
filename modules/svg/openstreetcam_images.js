@@ -104,6 +104,8 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     }
 
 
+    context.photos().on('change.openstreetcam_images', update);
+
     function update() {
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
@@ -113,8 +115,13 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
 
         var service = getService();
-        var sequences = (service ? service.sequences(projection) : []);
-        var images = (service && showMarkers ? service.images(projection) : []);
+        var sequences = [];
+        var images = [];
+
+        if (context.photos().showsFlat()) {
+            sequences = (service ? service.sequences(projection) : []);
+            images = (service && showMarkers ? service.images(projection) : []);
+        }
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });

@@ -289,6 +289,11 @@ export default {
     },
 
 
+    cachedImage: function(imageKey) {
+        return _mlyCache.images.forImageKey[imageKey];
+    },
+
+
     sequences: function(projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];

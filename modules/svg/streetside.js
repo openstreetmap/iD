@@ -158,6 +158,8 @@ export function svgStreetside(projection, context, dispatch) {
     }
 
 
+    context.photos().on('change.streetside', update);
+
     /**
      * update().
      */
@@ -169,8 +171,13 @@ export function svgStreetside(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
         var service = getService();
 
-        var sequences = (service ? service.sequences(projection) : []);
-        var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+        var sequences = [];
+        var bubbles = [];
+
+        if (context.photos().showsPanoramic()) {
+            sequences = (service ? service.sequences(projection) : []);
+            bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+        }
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });

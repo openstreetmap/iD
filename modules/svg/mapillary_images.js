@@ -120,6 +120,46 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return t;
     }
 
+    context.photos().on('change.mapillary_images', update);
+
+    function filterImages(images) {
+        var showsPano = context.photos().showsPanoramic();
+        var showsFlat = context.photos().showsFlat();
+        if (!showsPano || !showsFlat) {
+            images = images.filter(function(image) {
+                if (image.pano) return showsPano;
+                return showsFlat;
+            });
+        }
+        return images;
+    }
+
+    function filterSequences(sequences, service) {
+        var showsPano = context.photos().showsPanoramic();
+        var showsFlat = context.photos().showsFlat();
+        if (!showsPano || !showsFlat) {
+            sequences = sequences.filter(function(sequence) {
+                if (sequence.properties.hasOwnProperty('pano')) {
+                    if (sequence.properties.pano) return showsPano;
+                    return showsFlat;
+                } else {
+                    // if the sequence doesn't specify pano or not, search its images
+                    var cProps = sequence.properties.coordinateProperties;
+                    if (cProps && cProps.image_keys && cProps.image_keys.length > 0) {
+                        for (var index in cProps.image_keys) {
+                            var imageKey = cProps.image_keys[index];
+                            var image = service.cachedImage(imageKey);
+                            if (image && image.hasOwnProperty('pano')) {
+                                if (image.pano) return showsPano;
+                                return showsFlat;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        return sequences;
+    }
 
     function update() {
         var viewer = d3_select('#photoviewer');
@@ -132,6 +172,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var service = getService();
         var sequences = (service ? service.sequences(projection) : []);
         var images = (service && showMarkers ? service.images(projection) : []);
+
+        images = filterImages(images);
+        sequences = filterSequences(sequences, service);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
