@@ -1230,7 +1230,6 @@ a.hide-toggle {
     height:100%;
     position: absolute;
     z-index: 1;
-    transform: scale(0.48);
 }
 .preset-icon .icon {
     position: absolute;
@@ -1239,24 +1238,25 @@ a.hide-toggle {
     right: 0;
     width: 100%;
     height: 100%;
+    transform: scale(0.48);
 }
-.preset-icon-container.small .preset-icon.point-geom {
+.preset-icon-container.small .preset-icon.point-geom .icon {
     transform: translateY(-7%) scale(0.27);
 }
-.preset-icon.framed {
+.preset-icon.framed .icon {
     transform: scale(0.4);
 }
-.preset-icon.framed.line-geom {
+.preset-icon.framed.line-geom .icon {
     top: 20%;
     transform: translateY(-30%) scale(0.4);
 }
-.preset-icon-iD {
+.preset-icon-iD .icon {
     transform: scale(1);
 }
-.preset-icon-iD.framed {
+.preset-icon-iD.framed .icon {
     transform: scale(0.74);
 }
-.preset-icon-iD.framed.line-geom {
+.preset-icon-iD.framed.line-geom .icon {
     transform: translateY(-30%) scale(0.74);
 }
 
