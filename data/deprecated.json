@@ -348,6 +348,10 @@
       "replace": {"waterway": "canal", "bridge": "aqueduct"}
     },
     {
+      "old": {"waterway": "riverbank"},
+      "replace": {"natural": "water", "water": "river"}
+    },
+    {
       "old": {"wood": "coniferous"},
       "replace": {"leaf_type": "needleleaved"}
     },
