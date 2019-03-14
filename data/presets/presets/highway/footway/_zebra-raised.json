@@ -30,6 +30,5 @@
         "slow"
     ],
     "name": "Marked Crosswalk (Raised)",
-    "searchable": false,
-    "replacement": "highway/footway/marked-raised"
+    "searchable": false
 }

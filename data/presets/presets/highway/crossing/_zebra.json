@@ -22,6 +22,5 @@
         "crosswalk"
     ],
     "name": "Marked Crosswalk",
-    "searchable": false,
-    "replacement": "highway/crossing/marked"
+    "searchable": false
 }
