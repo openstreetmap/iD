@@ -656,6 +656,7 @@
     {"key": "natural", "value": "spring", "description": "🄿 Spring", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "natural", "value": "tree_row", "description": "🄿 Tree Row", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"},
     {"key": "natural", "value": "tree", "description": "🄿 Tree", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"},
+    {"key": "natural", "value": "valley", "description": "🄿 Valley", "object_types": ["node", "way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-stroked-15.svg?sanitize=true"},
     {"key": "natural", "value": "volcano", "description": "🄿 Volcano", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/volcano-15.svg?sanitize=true"},
     {"key": "water", "value": "basin", "description": "🄿 Basin", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "water", "value": "canal", "description": "🄿 Canal", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/waterway-canal.svg?sanitize=true"},

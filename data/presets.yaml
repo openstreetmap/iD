@@ -5208,6 +5208,11 @@ en:
         # natural=tree_row
         name: Tree Row
         terms: '<translate with synonyms or related terms for ''Tree Row'', separated by commas>'
+      natural/valley:
+        # natural=valley
+        name: Valley
+        # 'terms: canyon,dale,dell,dene,depression,glen,gorge,gully,gulley,gultch,hollow,ravine,rift,vale'
+        terms: '<translate with synonyms or related terms for ''Valley'', separated by commas>'
       natural/volcano:
         # natural=volcano
         name: Volcano

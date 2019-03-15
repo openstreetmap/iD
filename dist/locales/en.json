@@ -6631,6 +6631,10 @@
                     "name": "Tree",
                     "terms": ""
                 },
+                "natural/valley": {
+                    "name": "Valley",
+                    "terms": "canyon,dale,dell,dene,depression,glen,gorge,gully,gulley,gultch,hollow,ravine,rift,vale"
+                },
                 "natural/volcano": {
                     "name": "Volcano",
                     "terms": "mountain,crater"
