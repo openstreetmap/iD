@@ -759,6 +759,9 @@ en:
       height:
         # height=*
         label: Height (Meters)
+      highspeed:
+        # highspeed=*
+        label: Highspeed
       highway:
         # highway=*
         label: Type

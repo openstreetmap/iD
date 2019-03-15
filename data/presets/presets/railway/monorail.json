@@ -2,6 +2,7 @@
     "icon": "temaki-monorail",
     "fields": [
         "name",
+        "operator",
         "structure",
         "electrified",
         "service_rail",

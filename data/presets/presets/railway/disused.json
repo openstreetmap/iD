@@ -1,6 +1,7 @@
 {
     "icon": "iD-railway-disused",
     "fields": [
+        "operator",
         "structure",
         "service_rail",
         "usage_rail"

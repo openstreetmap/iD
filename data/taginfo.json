@@ -1281,6 +1281,7 @@
     {"key": "hashtags", "description": "🄵 Suggested Hashtags"},
     {"key": "healthcare:speciality", "description": "🄵 Specialties"},
     {"key": "height", "description": "🄵 Height (Meters)"},
+    {"key": "highspeed", "description": "🄵 Highspeed"},
     {"key": "historic:civilization", "description": "🄵 Historic Civilization"},
     {"key": "wreck:date_sunk", "description": "🄵 Date Sunk"},
     {"key": "wreck:visible_at_high_tide", "description": "🄵 Visible At High Tide"},

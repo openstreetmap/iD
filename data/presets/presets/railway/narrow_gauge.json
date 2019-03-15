@@ -1,12 +1,7 @@
 {
     "icon": "iD-railway-rail",
     "fields": [
-        "name",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail",
-        "usage_rail"
+        "{railway/rail}"
     ],
     "moreFields": [
         "covered",

@@ -2,6 +2,7 @@
     "icon": "iD-railway-rail",
     "fields": [
         "name",
+        "operator",
         "structure",
         "gauge",
         "electrified",
@@ -11,6 +12,7 @@
     "moreFields": [
         "covered",
         "frequency_electrified",
+        "highspeed",
         "maxspeed",
         "voltage_electrified"
     ],

@@ -1,17 +1,12 @@
 {
     "icon": "temaki-subway",
     "fields": [
-        "name",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail",
-        "usage_rail"
+        "{railway/rail}"
     ],
     "moreFields": [
+        "frequency_electrified",
         "maxspeed",
-        "voltage_electrified",
-        "frequency_electrified"
+        "voltage_electrified"
     ],
     "geometry": [
         "line"
