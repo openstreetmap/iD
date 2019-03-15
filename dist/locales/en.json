@@ -186,6 +186,9 @@
             "delete_member": {
                 "annotation": "Removed a member from a relation."
             },
+            "reorder_members": {
+                "annotation": "Reordered a relation's members."
+            },
             "connect": {
                 "annotation": {
                     "from_vertex": {

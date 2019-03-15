@@ -167,6 +167,12 @@ _extend(osmRelation.prototype, {
         return this.update({members: members});
     },
 
+    moveMember: function(fromIndex, toIndex) {
+        var members = this.members.slice();
+        members.splice(toIndex, 0, members.splice(fromIndex, 1)[0]);
+        return this.update({members: members});
+    },
+
 
     // Wherever a member appears with id `needle.id`, replace it with a member
     // with id `replacement.id`, type `replacement.type`, and the original role,

@@ -1,10 +1,11 @@
+import { drag as d3_drag } from 'd3-drag';
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { actionChangeMember, actionDeleteMember } from '../actions';
+import { actionChangeMember, actionDeleteMember, actionMoveMember } from '../actions';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
@@ -228,6 +229,70 @@ export function uiRawMemberEditor(context) {
             if (taginfo) {
                 wrapEnter.each(bindTypeahead);
             }
+
+            var dragOrigin, targetIndex;
+
+            itemsEnter.call(d3_drag()
+                .on('start', function() {
+                    dragOrigin = {
+                        x: d3_event.x,
+                        y: d3_event.y
+                    };
+                    targetIndex = null;
+                })
+                .on('drag', function(d, index) {
+                    var x = d3_event.x - dragOrigin.x,
+                        y = d3_event.y - dragOrigin.y;
+
+                    if (!d3_select(this).classed('dragging') &&
+                        // don't display drag until dragging beyond a distance threshold
+                        Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
+                    d3_select(this)
+                        .classed('dragging', true);
+
+                    targetIndex = null;
+
+                    selection.selectAll('li.member-row')
+                        .style('transform', function(d2, index2) {
+                            var node = d3_select(this).node();
+                            if (index === index2) {
+                                return 'translate(' + x + 'px, ' + y + 'px)';
+                            } else if (index2 > index && d3_event.y > node.offsetTop - node.offsetHeight) {
+                                if (targetIndex === null || index2 > targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateY(-100%)';
+                            } else if (index2 < index && d3_event.y < node.offsetTop) {
+                                if (targetIndex === null || index2 < targetIndex) {
+                                    targetIndex = index2;
+                                }
+                                return 'translateY(100%)';
+                            }
+                            return null;
+                        });
+                })
+                .on('end', function(d, index) {
+
+                    if (!d3_select(this).classed('dragging')) {
+                        return;
+                    }
+
+                    d3_select(this)
+                        .classed('dragging', false);
+
+                    selection.selectAll('li.member-row')
+                        .style('transform', null);
+
+                    if (targetIndex !== null) {
+                        // dragged to a new position, reorder
+                        context.perform(
+                            actionMoveMember(d.relation.id, index, targetIndex),
+                            t('operations.reorder_members.annotation')
+                        );
+                    }
+                })
+            );
 
 
             // update

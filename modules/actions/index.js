@@ -21,6 +21,7 @@ export { actionMergeNodes } from './merge_nodes';
 export { actionMergePolygon } from './merge_polygon';
 export { actionMergeRemoteChanges } from './merge_remote_changes';
 export { actionMove } from './move';
+export { actionMoveMember } from './move_member';
 export { actionMoveNode } from './move_node';
 export { actionNoop } from './noop';
 export { actionOrthogonalize } from './orthogonalize';
