@@ -27,5 +27,6 @@
         "road",
         "street"
     ],
+    "matchScore": 0.9,
     "name": "Service Road"
 }
