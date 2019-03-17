@@ -175,6 +175,9 @@ en:
       agrarian:
         # agrarian=*
         label: Products
+      air_conditioning:
+        # air_conditioning=*
+        label: Air Conditioning
       amenity:
         # amenity=*
         label: Type

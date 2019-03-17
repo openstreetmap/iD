@@ -2262,6 +2262,9 @@
                 "agrarian": {
                     "label": "Products"
                 },
+                "air_conditioning": {
+                    "label": "Air Conditioning"
+                },
                 "amenity": {
                     "label": "Type"
                 },

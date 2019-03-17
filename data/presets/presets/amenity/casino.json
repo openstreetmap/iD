@@ -9,6 +9,7 @@
         "smoking"
     ],
     "moreFields": [
+        "air_conditioning",
         "payment_multi",
         "website",
         "phone",

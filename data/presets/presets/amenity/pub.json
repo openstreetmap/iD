@@ -9,6 +9,7 @@
         "brewery"
     ],
     "moreFields": [
+        "air_conditioning",
         "diet_multi",
         "email",
         "fax",

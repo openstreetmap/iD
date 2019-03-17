@@ -7,6 +7,7 @@
         "building_area"
     ],
     "moreFields": [
+        "air_conditioning",
         "opening_hours",
         "payment_multi",
         "smoking",
@@ -20,7 +21,7 @@
         "area"
     ],
     "terms": [
-      "bowling center"
+        "bowling center"
     ],
     "tags": {
         "leisure": "bowling_alley"

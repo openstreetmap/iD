@@ -8,6 +8,7 @@
         "opening_hours"
     ],
     "moreFields": [
+        "air_conditioning",
         "operator",
         "smoking",
         "website",

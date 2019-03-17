@@ -8,6 +8,7 @@
         "brewery"
     ],
     "moreFields": [
+        "air_conditioning",
         "email",
         "fax",
         "microbrewery",

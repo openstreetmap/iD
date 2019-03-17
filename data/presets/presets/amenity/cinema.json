@@ -8,6 +8,7 @@
         "payment_multi"
     ],
     "moreFields": [
+        "air_conditioning",
         "website",
         "phone",
         "email",

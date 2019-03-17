@@ -10,6 +10,7 @@
         "internet_access/ssid"
     ],
     "moreFields": [
+        "air_conditioning",
         "opening_hours",
         "smoking",
         "outdoor_seating",

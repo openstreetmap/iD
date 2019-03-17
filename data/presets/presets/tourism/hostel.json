@@ -1,23 +1,10 @@
 {
     "icon": "maki-lodging",
     "fields": [
-        "name",
-        "operator",
-        "address",
-        "building_area",
-        "rooms",
-        "internet_access"
+        "{tourism/guest_house}"
     ],
     "moreFields" : [
-        "smoking",
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "website",
-        "phone",
-        "email",
-        "fax",
-        "wheelchair"
+        "{tourism/guest_house}"
     ],
     "geometry": [
         "point",

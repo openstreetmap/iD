@@ -1104,6 +1104,7 @@
     {"key": "aerialway:summer:access", "value": "exit", "description": "🄵 Access (summer)"},
     {"key": "aerialway:summer:access", "value": "both", "description": "🄵 Access (summer)"},
     {"key": "agrarian", "description": "🄵 Products"},
+    {"key": "air_conditioning", "description": "🄵 Air Conditioning"},
     {"key": "animal_boarding", "description": "🄵 For Animals"},
     {"key": "animal_breeding", "description": "🄵 For Animals"},
     {"key": "animal_shelter", "description": "🄵 For Animals"},

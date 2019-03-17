@@ -9,6 +9,7 @@
         "outdoor_seating"
     ],
     "moreFields": [
+        "air_conditioning",
         "bar",
         "brewery",
         "capacity",

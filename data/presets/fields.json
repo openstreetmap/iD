@@ -14,6 +14,7 @@
     "aerialway/summer/access": {"key": "aerialway:summer:access", "type": "combo", "label": "Access (summer)", "strings": {"options": {"entry": "Entry", "exit": "Exit", "both": "Both"}}},
     "aeroway": {"key": "aeroway", "type": "typeCombo", "label": "Type"},
     "agrarian": {"key": "agrarian", "type": "semiCombo", "label": "Products"},
+    "air_conditioning": {"key": "air_conditioning", "type": "check", "label": "Air Conditioning"},
     "amenity": {"key": "amenity", "type": "typeCombo", "label": "Type"},
     "animal_boarding": {"key": "animal_boarding", "type": "semiCombo", "label": "For Animals"},
     "animal_breeding": {"key": "animal_breeding", "type": "semiCombo", "label": "For Animals"},

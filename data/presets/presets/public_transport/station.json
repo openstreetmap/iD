@@ -9,6 +9,7 @@
         "internet_access"
     ],
     "moreFields": [
+        "air_conditioning",
         "internet_access/fee",
         "internet_access/ssid",
         "website",

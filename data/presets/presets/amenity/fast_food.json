@@ -9,6 +9,7 @@
         "drive_through"
     ],
     "moreFields": [
+        "air_conditioning",
         "opening_hours",
         "diet_multi",
         "takeaway",

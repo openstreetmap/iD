@@ -8,6 +8,7 @@
         "outdoor_seating"
     ],
     "moreFields": [
+        "air_conditioning",
         "diet_multi",
         "takeaway",
         "delivery",

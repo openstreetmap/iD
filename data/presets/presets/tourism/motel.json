@@ -9,6 +9,7 @@
         "internet_access"
     ],
     "moreFields" : [
+        "air_conditioning",
         "operator",
         "smoking",
         "payment_multi",
