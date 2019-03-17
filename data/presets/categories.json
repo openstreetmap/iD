@@ -152,8 +152,7 @@
         "highway/residential",
         "highway/living_street",
         "highway/service",
-        "highway/track",
-        "highway/road"
+        "highway/track"
       ]
     },
     "category-road_service": {

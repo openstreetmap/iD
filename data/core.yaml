@@ -1298,6 +1298,10 @@ en:
       title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
       tip: "Areas must have connected endpoints."
+    unknown_road:
+      title: Unknown Roads
+      message: "{feature} has no classification"
+      tip: "Roads without a specific type may not appear in maps or routing."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
@@ -1331,6 +1335,8 @@ en:
         title: Reposition the features
       select_preset:
         title: Select a feature type
+      select_road_type:
+        title: Select a road type
       set_as_inner:
         title: Set as inner
       set_as_outer:
