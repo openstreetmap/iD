@@ -143,7 +143,7 @@
     "healthcare": {"key": "healthcare", "type": "typeCombo", "label": "Type"},
     "healthcare/speciality": {"key": "healthcare:speciality", "type": "semiCombo", "reference": {"key": "healthcare"}, "label": "Specialties"},
     "height": {"key": "height", "minValue": 0, "type": "number", "label": "Height (Meters)"},
-    "highspeed": {"key": "highspeed", "type": "check", "label": "Highspeed"},
+    "highspeed": {"key": "highspeed", "type": "check", "label": "High-Speed"},
     "highway": {"key": "highway", "type": "typeCombo", "label": "Type"},
     "historic": {"key": "historic", "type": "typeCombo", "label": "Type"},
     "historic/civilization": {"key": "historic:civilization", "type": "combo", "label": "Historic Civilization"},

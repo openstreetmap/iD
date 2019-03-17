@@ -1,0 +1,21 @@
+{
+    "icon": "iD-railway-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "rail",
+        "highspeed": "yes"
+    },
+    "reference": {
+        "key": "highspeed"
+    },
+    "terms": [
+        "bullet train",
+        "fast rail",
+        "high speed rail",
+        "highspeed rail",
+        "HSR"
+    ],
+    "name": "High-Speed Rail"
+}

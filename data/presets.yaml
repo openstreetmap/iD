@@ -761,7 +761,7 @@ en:
         label: Height (Meters)
       highspeed:
         # highspeed=*
-        label: Highspeed
+        label: High-Speed
       highway:
         # highway=*
         label: Type
@@ -5959,6 +5959,11 @@ en:
         # railway=rail
         name: Rail
         terms: '<translate with synonyms or related terms for ''Rail'', separated by commas>'
+      railway/rail/highspeed:
+        # 'railway=rail, highspeed=yes'
+        name: High-Speed Rail
+        # 'terms: bullet train,fast rail,high speed rail,highspeed rail,HSR'
+        terms: '<translate with synonyms or related terms for ''High-Speed Rail'', separated by commas>'
       railway/signal:
         # railway=signal
         name: Railway Signal

@@ -2786,7 +2786,7 @@
                     "label": "Height (Meters)"
                 },
                 "highspeed": {
-                    "label": "Highspeed"
+                    "label": "High-Speed"
                 },
                 "highway": {
                     "label": "Type"
@@ -7308,6 +7308,10 @@
                 "railway/rail": {
                     "name": "Rail",
                     "terms": ""
+                },
+                "railway/rail/highspeed": {
+                    "name": "High-Speed Rail",
+                    "terms": "bullet train,fast rail,high speed rail,highspeed rail,HSR"
                 },
                 "railway/signal": {
                     "name": "Railway Signal",
