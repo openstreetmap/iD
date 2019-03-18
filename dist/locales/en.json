@@ -31,9 +31,6 @@
                 "description": "Add restaurants, monuments, postal boxes or other points to the map.",
                 "tail": "Click on the map to add a point."
             },
-            "add_vertex": {
-                "title": "Vertex"
-            },
             "add_note": {
                 "title": "Note",
                 "description": "Spotted an issue? Let other mappers know.",
@@ -53,9 +50,6 @@
                 },
                 "building": {
                     "title": "Add {feature} as a building"
-                },
-                "vertex": {
-                    "title": "Add {feature} as a vertex"
                 }
             },
             "browse": {
@@ -4825,7 +4819,7 @@
                 },
                 "area": {
                     "name": "Area",
-                    "terms": ""
+                    "terms": "polygon"
                 },
                 "area/highway": {
                     "name": "Road Surface",
@@ -6381,7 +6375,7 @@
                 },
                 "line": {
                     "name": "Line",
-                    "terms": ""
+                    "terms": "polyline"
                 },
                 "man_made/adit": {
                     "name": "Adit",
@@ -7025,7 +7019,7 @@
                 },
                 "point": {
                     "name": "Point",
-                    "terms": ""
+                    "terms": "node,other,vertex,vertices"
                 },
                 "power/sub_station": {
                     "name": "Substation",
@@ -8250,10 +8244,6 @@
                 "type/waterway": {
                     "name": "Waterway",
                     "terms": ""
-                },
-                "vertex": {
-                    "name": "Vertex",
-                    "terms": "other"
                 },
                 "waterway/riverbank": {
                     "name": "Riverbank",

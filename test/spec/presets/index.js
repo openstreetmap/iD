@@ -42,14 +42,14 @@ describe('iD.presetIndex', function () {
             expect(presets.match(line, graph).id).to.eql('line');
         });
 
-        it('matches vertices on a line as vertices', function () {
+        it('matches vertices on a line as points', function () {
             iD.data.presets = testPresets;
             var presets = iD.coreContext().presets();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
             var graph = iD.coreGraph([point, line]);
 
-            expect(presets.match(point, graph).id).to.eql('vertex');
+            expect(presets.match(point, graph).id).to.eql('point');
         });
 
         it('matches vertices on an addr:interpolation line as points', function () {

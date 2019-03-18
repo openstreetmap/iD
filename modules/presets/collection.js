@@ -42,6 +42,11 @@ export function presetCollection(collection) {
             }));
         },
 
+        fallback: function(geometry) {
+            var id = geometry;
+            if (id === 'vertex') id = 'point';
+            return this.item(id);
+        },
 
         search: function(value, geometry) {
             if (!value) return this;
@@ -153,10 +158,10 @@ export function presetCollection(collection) {
 
             if (geometry) {
                 if (typeof geometry === 'string') {
-                    results.push(presets.item(geometry));
+                    results.push(presets.fallback(geometry));
                 } else {
                     geometry.forEach(function(geom) {
-                        results.push(presets.item(geom));
+                        results.push(presets.fallback(geom));
                     });
                 }
             }

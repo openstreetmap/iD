@@ -8,6 +8,9 @@
     "tags": {
         "area": "yes"
     },
+    "terms": [
+        "polygon"
+    ],
     "name": "Area",
     "matchScore": 0.1
 }

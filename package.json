@@ -60,9 +60,9 @@
     "concat-files": "^0.1.1",
     "d3": "4.13.0",
     "ecstatic": "^3.0.0",
-    "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
-    "eslint": "^5.15.0",
-    "esm": "~3.2.11",
+    "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
+    "eslint": "^5.15.3",
+    "esm": "^3.2.18",
     "gaze": "^1.1.1",
     "glob": "^7.1.0",
     "happen": "^0.3.1",
@@ -91,7 +91,7 @@
     "smash": "0.0",
     "svg-sprite": "1.5.0",
     "temaki": "1.2.0",
-    "uglify-js": "~3.4.0"
+    "uglify-js": "^3.4.10"
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",

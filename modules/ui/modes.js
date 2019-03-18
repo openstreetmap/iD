@@ -121,7 +121,7 @@ export function uiModes(context) {
                     if (d.preset.setTags({}, d.geometry).building) {
                         tooltipTitleID = 'modes.add_preset.building.title';
                     } else {
-                        tooltipTitleID = 'modes.add_preset.' + d.geometry + '.title';
+                        tooltipTitleID = 'modes.add_preset.' + context.presets().fallback(d.geometry).id + '.title';
                     }
                 }
                 var protoMode = _clone(d);
@@ -209,7 +209,7 @@ export function uiModes(context) {
                     } else {
                         d3_select(this)
                             .call(uiPresetIcon()
-                                .geometry(d.geometry)
+                                .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
                                 .preset(d.preset)
                                 .sizeClass('small')
                             );

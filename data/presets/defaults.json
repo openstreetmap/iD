@@ -46,7 +46,7 @@
       "traffic_calming",
       "highway/mini_roundabout",
       "highway/motorway_junction",
-      "vertex"
+      "point"
     ],
     "relation": [
       "category-route",

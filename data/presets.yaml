@@ -3137,6 +3137,7 @@ en:
       area:
         # area=yes
         name: Area
+        # 'terms: polygon'
         terms: '<translate with synonyms or related terms for ''Area'', separated by commas>'
       area/highway:
         # 'area:highway=*'
@@ -4896,6 +4897,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Water Park'', separated by commas>'
       line:
         name: Line
+        # 'terms: polyline'
         terms: '<translate with synonyms or related terms for ''Line'', separated by commas>'
       man_made:
         # man_made=*
@@ -5640,6 +5642,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Zip Wire'', separated by commas>'
       point:
         name: Point
+        # 'terms: node,other,vertex,vertices'
         terms: '<translate with synonyms or related terms for ''Point'', separated by commas>'
       power:
         # power=*
@@ -7040,10 +7043,6 @@ en:
         # type=waterway
         name: Waterway
         terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
-      vertex:
-        name: Vertex
-        # 'terms: other'
-        terms: '<translate with synonyms or related terms for ''Vertex'', separated by commas>'
       waterway:
         # waterway=*
         name: Waterway

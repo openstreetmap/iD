@@ -84,7 +84,7 @@ export function presetIndex(context) {
         if (address && (!match || match.isFallback())) {
             match = address;
         }
-        return match || all.item(geometry);
+        return match || all.fallback(geometry);
     };
 
     all.allowsVertex = function(entity, resolver) {
@@ -271,7 +271,7 @@ export function presetIndex(context) {
     all.defaults = function(geometry, n) {
         var rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
+        return presetCollection(_uniq(rec.concat(def).concat(all.fallback(geometry))));
     };
 
     all.recent = function() {
@@ -307,10 +307,16 @@ export function presetIndex(context) {
     function ribbonItemForMinified(d, source) {
         if (d && d.pID && d.geom) {
             var preset = all.item(d.pID);
+            if (!preset) return null;
+
+            var geom = d.geom;
+            // treat point and vertex features as one geometry
+            if (geom === 'vertex') geom = 'point';
+
             // iD's presets could have changed since this was saved,
             // so make sure it's still valid.
-            if (preset && preset.matchGeometry(d.geom)) {
-                return RibbonItem(preset, d.geom, source);
+            if (preset.matchGeometry(geom) || (geom === 'point' && preset.matchGeometry('vertex'))) {
+                return RibbonItem(preset, geom, source);
             }
         }
         return null;
@@ -364,6 +370,7 @@ export function presetIndex(context) {
     };
 
     all.toggleFavorite = function(preset, geometry) {
+        geometry = all.fallback(geometry).id;
         var favs = all.getFavorites();
         var favorite = all.favoriteMatching(preset, geometry);
         if (favorite) {
@@ -381,6 +388,7 @@ export function presetIndex(context) {
     };
 
     all.removeFavorite = function(preset, geometry) {
+        geometry = all.fallback(geometry).id;
         var item = all.favoriteMatching(preset, geometry);
         if (item) {
             var items = all.getFavorites();
@@ -399,6 +407,7 @@ export function presetIndex(context) {
     };
 
     all.favoriteMatching = function(preset, geometry) {
+        geometry = all.fallback(geometry).id;
         var favs = all.getFavorites();
         for (var index in favs) {
             if (favs[index].matches(preset, geometry)) {
@@ -408,6 +417,7 @@ export function presetIndex(context) {
         return null;
     };
     all.recentMatching = function(preset, geometry) {
+        geometry = all.fallback(geometry).id;
         var items = all.getRecents();
         for (var index in items) {
             if (items[index].matches(preset, geometry)) {
@@ -439,6 +449,7 @@ export function presetIndex(context) {
     };
 
     all.setMostRecent = function(preset, geometry) {
+        geometry = all.fallback(geometry).id;
         if (preset.searchable === false) return;
 
         var items = all.getRecents();

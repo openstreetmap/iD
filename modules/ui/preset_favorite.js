@@ -8,6 +8,8 @@ import { svgIcon } from '../svg';
 
 export function uiPresetFavorite(preset, geom, context, klass) {
 
+    geom = context.presets().fallback(geom).id;
+
     var presetFavorite = {};
 
     var _button = d3_select(null);

@@ -361,7 +361,7 @@ export function uiSearchAdd(context) {
                             if (d.preset.setTags({}, d.geometry).building) {
                                 return t('presets.presets.building.name');
                             }
-                            return t('modes.add_' + d.geometry + '.title');
+                            return t('modes.add_' + context.presets().fallback(d.geometry).id + '.title');
                         }
                         return d.preset.name();
                     });
