@@ -268,6 +268,7 @@
     "ref/isil": {"key": "ref:isil", "type": "text", "label": "ISIL Code"},
     "relation": {"key": "type", "type": "combo", "label": "Type"},
     "religion": {"key": "religion", "type": "combo", "label": "Religion"},
+    "resource": {"key": "resource", "type": "semiCombo", "label": "Resources"},
     "restriction": {"key": "restriction", "type": "combo", "label": "Type"},
     "restrictions": {"type": "restrictions", "geometry": "vertex", "icon": "iD-restrictions", "reference": {"rtype": "restriction"}, "label": "Turn Restrictions"},
     "roof/colour": {"key": "roof:colour", "type": "combo", "label": "Roof Color"},

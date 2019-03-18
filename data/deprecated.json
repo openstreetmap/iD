@@ -236,6 +236,10 @@
       "replace": {"man_made": "water_well"}
     },
     {
+      "old": {"mining_resource": "*"},
+      "replace": {"resource": "$1"}
+    },
+    {
       "old": {"natural": "marsh"},
       "replace": {"natural": "wetland", "wetland": "marsh"}
     },

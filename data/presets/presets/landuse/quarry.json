@@ -3,7 +3,9 @@
         "area"
     ],
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "resource"
     ],
     "moreFields": [
         "address",

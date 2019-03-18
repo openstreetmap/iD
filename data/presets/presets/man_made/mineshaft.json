@@ -7,17 +7,17 @@
     "fields": [
         "name",
         "operator",
-        "resource",
-        "direction"
+        "resource"
     ],
     "terms": [
         "cave",
-        "horizontal mine entrance",
+        "mine shaft",
         "tunnel",
-        "underground"
+        "underground",
+        "vertical mine entrance"
     ],
     "tags": {
-        "man_made": "adit"
+        "man_made": "mineshaft"
     },
-    "name": "Adit"
+    "name": "Mineshaft"
 }

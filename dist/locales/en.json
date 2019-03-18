@@ -3398,6 +3398,9 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "resource": {
+                    "label": "Resources"
+                },
                 "restriction": {
                     "label": "Type"
                 },
@@ -6382,7 +6385,7 @@
                 },
                 "man_made/adit": {
                     "name": "Adit",
-                    "terms": "entrance,underground,mine,cave"
+                    "terms": "cave,horizontal mine entrance,tunnel,underground"
                 },
                 "man_made/antenna": {
                     "name": "Antenna",
@@ -6455,6 +6458,10 @@
                 "man_made/mast/communication/television": {
                     "name": "Television Broadcast Mast",
                     "terms": "antenna,broadcast tower,communication mast,communication tower,guyed tower,television mast,television tower,transmission mast,transmission tower,tv mast,tv tower"
+                },
+                "man_made/mineshaft": {
+                    "name": "Mineshaft",
+                    "terms": "cave,mine shaft,tunnel,underground,vertical mine entrance"
                 },
                 "man_made/monitoring_station": {
                     "name": "Monitoring Station",

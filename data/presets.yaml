@@ -1514,6 +1514,9 @@ en:
       religion:
         # religion=*
         label: Religion
+      resource:
+        # resource=*
+        label: Resources
       restriction:
         # restriction=*
         label: Type
@@ -4900,7 +4903,7 @@ en:
       man_made/adit:
         # man_made=adit
         name: Adit
-        # 'terms: entrance,underground,mine,cave'
+        # 'terms: cave,horizontal mine entrance,tunnel,underground'
         terms: '<translate with synonyms or related terms for ''Adit'', separated by commas>'
       man_made/antenna:
         # man_made=antenna
@@ -4983,6 +4986,11 @@ en:
         name: Television Broadcast Mast
         # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,television mast,television tower,transmission mast,transmission tower,tv mast,tv tower'
         terms: '<translate with synonyms or related terms for ''Television Broadcast Mast'', separated by commas>'
+      man_made/mineshaft:
+        # man_made=mineshaft
+        name: Mineshaft
+        # 'terms: cave,mine shaft,tunnel,underground,vertical mine entrance'
+        terms: '<translate with synonyms or related terms for ''Mineshaft'', separated by commas>'
       man_made/monitoring_station:
         # man_made=monitoring_station
         name: Monitoring Station
