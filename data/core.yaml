@@ -13,18 +13,23 @@ en:
       title: Add a feature
       description: "Search for features to add to the map."
       key: Tab
+      result: "{count} result"
+      results: "{count} results"
     add_area:
       title: Area
       description: "Add parks, buildings, lakes or other areas to the map."
       tail: "Click on the map to start drawing an area, like a park, lake, or building."
+      filter_tooltip: areas
     add_line:
       title: Line
       description: "Add highways, streets, pedestrian paths, canals or other lines to the map."
       tail: "Click on the map to start drawing a road, path, or route."
+      filter_tooltip: lines
     add_point:
       title: Point
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       tail: Click on the map to add a point.
+      filter_tooltip: points
     add_note:
       title: Note
       description: "Spotted an issue? Let other mappers know."

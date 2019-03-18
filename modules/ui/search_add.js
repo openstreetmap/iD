@@ -1,3 +1,4 @@
+import _clone from 'lodash-es/clone';
 import _debounce from 'lodash-es/debounce';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -29,13 +30,41 @@ export function uiSearchAdd(context) {
     var searchWrap = d3_select(null),
         search = d3_select(null),
         popover = d3_select(null),
-        list = d3_select(null);
+        popoverContent = d3_select(null),
+        list = d3_select(null),
+        footer = d3_select(null),
+        message = d3_select(null);
 
-    var shownGeometry = ['area', 'line', 'point', 'vertex'];
+    var allowedGeometry = ['area', 'line', 'point', 'vertex'];
+    var shownGeometry = [];
+
+    function updateShownGeometry(geom) {
+        shownGeometry = geom.sort();
+        presets = context.presets().matchAnyGeometry(shownGeometry);
+    }
+    function toggleShownGeometry(d) {
+        var geom = shownGeometry;
+        var index = geom.indexOf(d);
+        if (index === -1) {
+            geom.push(d);
+            if (d === 'point') geom.push('vertex');
+        } else {
+            geom.splice(index, 1);
+            if (d === 'point') geom.splice(geom.indexOf('vertex'), 1);
+        }
+        updateShownGeometry(geom);
+    }
+
+    function updateFilterButtonsStates() {
+        footer.selectAll('button.filter')
+            .classed('active', function(d) {
+                return shownGeometry.indexOf(d) !== -1;
+            });
+    }
 
     function searchAdd(selection) {
 
-        presets = context.presets().matchAnyGeometry(shownGeometry);
+        updateShownGeometry(_clone(allowedGeometry));
 
         var key = t('modes.add_feature.key');
 
@@ -82,7 +111,7 @@ export function uiSearchAdd(context) {
             })
             .on('keypress', keypress)
             .on('keydown', keydown)
-            .on('input', searchInput);
+            .on('input', updateResultsList);
 
         searchWrap
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
@@ -96,9 +125,42 @@ export function uiSearchAdd(context) {
                 d3_event.stopPropagation();
             });
 
-        list = popover
+        popoverContent = popover
             .append('div')
+            .attr('class', 'popover-content');
+
+        list = popoverContent.append('div')
             .attr('class', 'list');
+
+        footer = popover
+            .append('div')
+            .attr('class', 'popover-footer');
+
+        message = footer.append('div')
+            .attr('class', 'message');
+
+        footer.append('div')
+            .attr('class', 'filter-wrap')
+            .selectAll('button.filter')
+            .data(['point', 'line', 'area'])
+            .enter()
+            .append('button')
+            .attr('class', 'filter active')
+            .attr('title', function(d) {
+                return t('modes.add_' + d + '.filter_tooltip');
+            })
+            .each(function(d) {
+                d3_select(this).call(svgIcon('#iD-icon-' + d));
+            })
+            .on('click', function(d) {
+                toggleShownGeometry(d);
+                if (shownGeometry.length === 0) {
+                    updateShownGeometry(_clone(allowedGeometry));
+                    toggleShownGeometry(d);
+                }
+                updateFilterButtonsStates();
+                updateResultsList();
+            });
 
         context.features().on('change.search-add', updateForFeatureHiddenState);
 
@@ -115,6 +177,8 @@ export function uiSearchAdd(context) {
             .on('drawn.search-add', debouncedUpdate);
 
         updateEnabledState();
+
+        updateResultsList();
     }
 
     function osmEditable() {
@@ -200,7 +264,7 @@ export function uiSearchAdd(context) {
         }
     }
 
-    function searchInput() {
+    function updateResultsList() {
 
         var value = search.property('value');
         var results;
@@ -219,6 +283,9 @@ export function uiSearchAdd(context) {
         popover.selectAll('.list .list-item.focused')
             .classed('focused', false);
         focusListItem(popover.selectAll('.list > .list-item:first-child'));
+
+        var resultCount = results.length;
+        message.text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
     function focusListItem(selection) {
@@ -233,14 +300,14 @@ export function uiSearchAdd(context) {
         if (selection.empty()) return;
 
         var node = selection.nodes()[0];
-        var popoverNode = popover.node();
+        var scrollableNode = popoverContent.node();
 
-        if (node.offsetTop < popoverNode.scrollTop) {
-            popoverNode.scrollTop = node.offsetTop;
+        if (node.offsetTop < scrollableNode.scrollTop) {
+            scrollableNode.scrollTop = node.offsetTop;
 
-        } else if (node.offsetTop + node.offsetHeight > popoverNode.scrollTop + popoverNode.offsetHeight &&
-            node.offsetHeight < popoverNode.offsetHeight) {
-            popoverNode.scrollTop = node.offsetTop + node.offsetHeight - popoverNode.offsetHeight;
+        } else if (node.offsetTop + node.offsetHeight > scrollableNode.scrollTop + scrollableNode.offsetHeight &&
+            node.offsetHeight < scrollableNode.offsetHeight) {
+            scrollableNode.scrollTop = node.offsetTop + node.offsetHeight - scrollableNode.offsetHeight;
         }
     }
 

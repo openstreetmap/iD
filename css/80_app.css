@@ -641,17 +641,46 @@ button.add-note svg.icon {
     top: 44px;
     border: none;
     border-radius: 6px;
-    overflow-y: auto;
     max-width: 350px;
+}
+.search-add .popover .popover-content {
+    overflow-y: auto;
+}
+.search-add .popover,
+.search-add .popover .popover-content {
     /* ensure corners are rounded in Chrome */
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+}
+.search-add .popover .popover-footer {
+    padding: 5px 10px 5px 10px;
+    background: #f6f6f6;
+    border-top: 1px solid #DCDCDC;
+    display: flex;
+}
+.search-add .popover .popover-footer .message {
+    color: #666666;
+    flex-grow: 1;
+}
+.search-add .popover .popover-footer button.filter {
+    height: 20px;
+    background: transparent;
+    color: #666;
+}
+.search-add .popover .popover-footer button.filter.active {
+    color: #7092ff;
+}
+.search-add .popover .popover-footer button.filter:hover {
+    color: #333;
+}
+.search-add .popover .popover-footer button.filter.active:hover {
+    color: #597be7;
 }
 .search-add .popover::-webkit-scrollbar {
     /* don't overlap rounded corners */
     background: transparent;
 }
 .search-add .popover .list {
-    max-height: 70vh;
+    max-height: 65vh;
 }
 .search-add .list-item > .row {
     display: flex;
