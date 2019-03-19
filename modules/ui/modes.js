@@ -12,7 +12,6 @@ import {
     modeBrowse
 } from '../modes';
 
-import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';
@@ -203,17 +202,12 @@ export function uiModes(context) {
 
             buttonsEnter
                 .each(function(d) {
-                    if (d.preset.isFallback()) {
-                        d3_select(this)
-                            .call(svgIcon('#iD-icon-' + d.preset.id));
-                    } else {
-                        d3_select(this)
-                            .call(uiPresetIcon()
-                                .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
-                                .preset(d.preset)
-                                .sizeClass('small')
-                            );
-                    }
+                    d3_select(this)
+                        .call(uiPresetIcon()
+                            .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
+                            .preset(d.preset)
+                            .sizeClass('small')
+                        );
                 });
 
             var dragOrigin, dragMoved, targetIndex, targetData;

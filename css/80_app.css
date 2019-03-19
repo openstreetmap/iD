@@ -783,7 +783,7 @@ button.add-note svg.icon {
 [dir='rtl'] .search-add button.add-preset.first-recent {
     margin-right: 5px;
 }
-.search-add button.add-preset:not(.add-generic-preset) {
+.search-add button.add-preset {
     padding: 0;
 }
 .search-add button.add-preset.disabled .preset-icon-container {
@@ -1287,6 +1287,9 @@ a.hide-toggle {
 }
 .preset-icon-iD.framed.line-geom .icon {
     transform: translateY(-30%) scale(0.74);
+}
+.preset-icon-container.fallback .preset-icon .icon {
+    transform: scale(0.5) !important;
 }
 
 .preset-list-button .label {

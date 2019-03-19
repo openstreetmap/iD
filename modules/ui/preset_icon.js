@@ -17,7 +17,9 @@ export function uiPresetIcon() {
 
 
     function getIcon(p, geom) {
-        if (p.icon)
+        if (isSmall() && p.isFallback && p.isFallback())
+            return 'iD-icon-' + p.id;
+        else if (p.icon)
             return p.icon;
         else if (geom === 'line')
             return 'iD-other-line';
@@ -148,6 +150,7 @@ export function uiPresetIcon() {
             .merge(container);
 
         var p = preset.apply(this, arguments);
+        var isFallback = isSmall() && p.isFallback && p.isFallback();
         var geom = geometry ? geometry.apply(this, arguments) : null;
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
@@ -155,9 +158,13 @@ export function uiPresetIcon() {
         var isFa = /^fa[srb]-/.test(picon);
         var isiDIcon = !(isMaki || isTemaki || isFa);
         var isCategory = !p.setTags;
-        var drawLine = geom === 'line' && !isCategory;
-        var drawFill = geom === 'area' || geom === 'vertex';
-        var isFramed = (drawFill || drawLine);
+        var drawPoint = geom === 'point' && isSmall() && !isFallback;
+        var drawVertex = geom === 'vertex' && !isFallback;
+        var drawLine = geom === 'line' && !isFallback && !isCategory;
+        var drawArea = geom === 'area' && !isFallback;
+        var isFramed = (drawVertex || drawArea || drawLine);
+
+        container.classed('fallback', isFallback);
 
         var tags = !isCategory ? p.setTags({}, geom) : {};
         for (var k in tags) {
@@ -168,7 +175,7 @@ export function uiPresetIcon() {
         var tagClasses = svgTagClasses().getClassesString(tags, '');
 
         var pointBorder = container.selectAll('.preset-icon-point-border')
-            .data(geom === 'point' && isSmall() ? [0] : []);
+            .data(drawPoint ? [0] : []);
 
         pointBorder.exit()
             .remove();
@@ -179,7 +186,7 @@ export function uiPresetIcon() {
 
 
         var vertexFill = container.selectAll('.preset-icon-fill-vertex')
-            .data(geom === 'vertex' ? [0] : []);
+            .data(drawVertex ? [0] : []);
 
         vertexFill.exit()
             .remove();
@@ -190,7 +197,7 @@ export function uiPresetIcon() {
 
 
         var fill = container.selectAll('.preset-icon-fill-area')
-            .data(geom === 'area' ? [0] : []);
+            .data(drawArea ? [0] : []);
 
         fill.exit()
             .remove();
