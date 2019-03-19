@@ -9,7 +9,6 @@ export function validationManyDeletions() {
     var type = 'many_deletions';
 
     var validation = function(changes, context) {
-        var issues = [];
         var points = 0, lines = 0, areas = 0, relations = 0;
         var base = context.history().base();
         var geometry;
@@ -36,7 +35,7 @@ export function validationManyDeletions() {
             if (relations > 0) {
                 messageType += '-relations';
             }
-            issues.push(new validationIssue({
+            return [new validationIssue({
                 type: type,
                 severity: 'warning',
                 message: t(
@@ -45,10 +44,10 @@ export function validationManyDeletions() {
                 ),
                 tooltip: t('issues.many_deletions.tip'),
                 hash: [points, lines, areas, relations].join()
-            }));
+            })];
         }
 
-        return issues;
+        return [];
     };
 
     validation.type = type;

@@ -12,6 +12,32 @@ export function validationUnknownRoad() {
 
         if (entity.type !== 'way' || entity.tags.highway !== 'road') return [];
 
+        var fixes = [
+            new validationIssueFix({
+                icon: 'iD-icon-search',
+                title: t('issues.fix.select_road_type.title'),
+                onClick: function() {
+                    context.ui().sidebar.showPresetList();
+                }
+            })
+        ];
+
+        if (!operationDelete([entity.id], context).disabled()) {
+            fixes.push(
+                new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.delete_feature.title'),
+                    onClick: function() {
+                        var id = this.issue.entities[0].id;
+                        var operation = operationDelete([id], context);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                    }
+                })
+            );
+        }
+
         return [new validationIssue({
             type: type,
             severity: 'warning',
@@ -20,23 +46,7 @@ export function validationUnknownRoad() {
             }),
             tooltip: t('issues.unknown_road.tip'),
             entities: [entity],
-            fixes: [
-                new validationIssueFix({
-                    icon: 'iD-icon-search',
-                    title: t('issues.fix.select_road_type.title'),
-                    onClick: function() {
-                        context.ui().sidebar.showPresetList();
-                    }
-                }),
-                new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t('issues.fix.delete_feature.title'),
-                    onClick: function() {
-                        var id = this.issue.entities[0].id;
-                        operationDelete([id], context)();
-                    }
-                })
-            ]
+            fixes: fixes
         })];
     };
 

@@ -31,61 +31,63 @@ export function validationDisconnectedWay() {
 
 
     var validation = function(entity, context) {
-        var issues = [];
         var graph = context.graph();
 
-        if (isDisconnectedHighway(entity, graph)) {
-            var entityLabel = utilDisplayLabel(entity, context);
-            var fixes = [];
+        if (!isDisconnectedHighway(entity, graph)) return [];
 
-            if (!entity.isClosed()) {
-                var first = context.entity(entity.first());
-                if (first.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue-left',
-                        title: t('issues.fix.continue_from_start.title'),
-                        entityIds: [entity.first()],
-                        onClick: function() {
-                            var vertex = context.entity(entity.first());
-                            continueDrawing(entity, vertex, context);
-                        }
-                    }));
-                }
-                var last = context.entity(entity.last());
-                if (last.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue',
-                        title: t('issues.fix.continue_from_end.title'),
-                        entityIds: [entity.last()],
-                        onClick: function() {
-                            var vertex = context.entity(entity.last());
-                            continueDrawing(entity, vertex, context);
-                        }
-                    }));
-                }
+        var entityLabel = utilDisplayLabel(entity, context);
+        var fixes = [];
+
+        if (!entity.isClosed()) {
+            var first = context.entity(entity.first());
+            if (first.tags.noexit !== 'yes') {
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-continue-left',
+                    title: t('issues.fix.continue_from_start.title'),
+                    entityIds: [entity.first()],
+                    onClick: function() {
+                        var vertex = context.entity(entity.first());
+                        continueDrawing(entity, vertex, context);
+                    }
+                }));
             }
+            var last = context.entity(entity.last());
+            if (last.tags.noexit !== 'yes') {
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-continue',
+                    title: t('issues.fix.continue_from_end.title'),
+                    entityIds: [entity.last()],
+                    onClick: function() {
+                        var vertex = context.entity(entity.last());
+                        continueDrawing(entity, vertex, context);
+                    }
+                }));
+            }
+        }
 
+        if (!operationDelete([entity.id], context).disabled()) {
             fixes.push(new validationIssueFix({
                 icon: 'iD-operation-delete',
                 title: t('issues.fix.delete_feature.title'),
                 entityIds: [entity.id],
                 onClick: function() {
                     var id = this.issue.entities[0].id;
-                    operationDelete([id], context)();
+                    var operation = operationDelete([id], context);
+                    if (!operation.disabled()) {
+                        operation();
+                    }
                 }
-            }));
-
-            issues.push(new validationIssue({
-                type: type,
-                severity: 'warning',
-                message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
-                tooltip: t('issues.disconnected_way.highway.tip'),
-                entities: [entity],
-                fixes: fixes
             }));
         }
 
-        return issues;
+        return [new validationIssue({
+            type: type,
+            severity: 'warning',
+            message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
+            tooltip: t('issues.disconnected_way.highway.tip'),
+            entities: [entity],
+            fixes: fixes
+        })];
 
 
         function continueDrawing(way, vertex) {

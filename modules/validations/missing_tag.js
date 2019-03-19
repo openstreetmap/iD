@@ -55,44 +55,43 @@ export function validationMissingTag() {
 
         messageObj.feature = utilDisplayLabel(entity, context);
 
-        var issues = [];
+        var fixes = [
+            new validationIssueFix({
+                icon: 'iD-icon-search',
+                title: t('issues.fix.select_preset.title'),
+                onClick: function() {
+                    context.ui().sidebar.showPresetList();
+                }
+            })
+        ];
 
-        var deleteFixOnClick = function() {
-            var id = this.issue.entities[0].id;
-            operationDelete([id], context)();
-        };
-        var canDelete = true;
-        
-        if (entity.type === 'relation' &&
-            !entity.members.every(function(member) { return context.hasEntity(member.id); })) {
-            deleteFixOnClick = null;
-            canDelete = false;
+        var canDelete = false;
+        if (!operationDelete([entity.id], context).disabled()) {
+            canDelete = true;
+            fixes.push(
+                new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.delete_feature.title'),
+                    onClick: function() {
+                        var id = this.issue.entities[0].id;
+                        var operation = operationDelete([id], context);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                    }
+                })
+            );
         }
 
-        issues.push(new validationIssue({
+        return [new validationIssue({
             type: type,
             // error if created or modified and is deletable, else warning
             severity: (!entity.version || entity.v) && canDelete  ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
             tooltip: t('issues.missing_tag.tip'),
             entities: [entity],
-            fixes: [
-                new validationIssueFix({
-                    icon: 'iD-icon-search',
-                    title: t('issues.fix.select_preset.title'),
-                    onClick: function() {
-                        context.ui().sidebar.showPresetList();
-                    }
-                }),
-                new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t('issues.fix.delete_feature.title'),
-                    onClick: deleteFixOnClick
-                })
-            ]
-        }));
-
-        return issues;
+            fixes: fixes
+        })];
     };
 
     validation.type = type;
