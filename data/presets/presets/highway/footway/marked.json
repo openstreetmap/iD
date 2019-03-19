@@ -29,9 +29,10 @@
         "value": "crossing"
     },
     "terms": [
-        "zebra crossing",
+        "marked foot path crossing",
         "marked crossing",
-        "crosswalk"
+        "marked pedestrian crosswalk",
+        "zebra crossing"
     ],
     "name": "Marked Crosswalk"
 }

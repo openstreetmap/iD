@@ -26,7 +26,11 @@
         "key": "footway",
         "value": "crossing"
     },
-    "terms": [],
+    "terms": [
+        "unmarked foot path crossing",
+        "unmarked crosswalk",
+        "unmarked pedestrian crossing"
+    ],
     "matchScore": 0.95,
     "name": "Unmarked Crossing"
 }

@@ -4062,7 +4062,7 @@ en:
       highway/footway/marked:
         # 'footway=crossing, crossing=marked'
         name: Marked Crosswalk
-        # 'terms: zebra crossing,marked crossing,crosswalk'
+        # 'terms: marked foot path crossing,marked crossing,marked pedestrian crosswalk,zebra crossing'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/footway/marked-raised:
         # 'footway=crossing, crossing=marked, traffic_calming=table'
@@ -4077,6 +4077,7 @@ en:
       highway/footway/unmarked:
         # footway=crossing
         name: Unmarked Crossing
+        # 'terms: unmarked foot path crossing,unmarked crosswalk,unmarked pedestrian crossing'
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/footway/unmarked-raised:
         # 'footway=crossing, traffic_calming=table'
