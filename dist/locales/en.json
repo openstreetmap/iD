@@ -8026,6 +8026,10 @@
                     "name": "Tourist Information Office",
                     "terms": ""
                 },
+                "tourism/information/route_marker": {
+                    "name": "Trail Marker",
+                    "terms": "cairn,painted blaze,route flag,route marker,stone pile,trail blaze,trail post,way marker"
+                },
                 "tourism/motel": {
                     "name": "Motel",
                     "terms": ""

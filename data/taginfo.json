@@ -967,6 +967,7 @@
     {"key": "information", "value": "guidepost", "description": "🄿 Guidepost", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/information-15.svg?sanitize=true"},
     {"key": "information", "value": "map", "description": "🄿 Map", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/information-15.svg?sanitize=true"},
     {"key": "information", "value": "office", "description": "🄿 Tourist Information Office", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/information-15.svg?sanitize=true"},
+    {"key": "information", "value": "route_marker", "description": "🄿 Trail Marker", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/information-15.svg?sanitize=true"},
     {"key": "tourism", "value": "motel", "description": "🄿 Motel", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/lodging-15.svg?sanitize=true"},
     {"key": "tourism", "value": "museum", "description": "🄿 Museum", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/museum.svg?sanitize=true"},
     {"key": "tourism", "value": "picnic_site", "description": "🄿 Picnic Site", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/picnic-site-15.svg?sanitize=true"},

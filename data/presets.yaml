@@ -6800,6 +6800,11 @@ en:
         # 'tourism=information, information=office'
         name: Tourist Information Office
         terms: '<translate with synonyms or related terms for ''Tourist Information Office'', separated by commas>'
+      tourism/information/route_marker:
+        # 'tourism=information, information=route_marker'
+        name: Trail Marker
+        # 'terms: cairn,painted blaze,route flag,route marker,stone pile,trail blaze,trail post,way marker'
+        terms: '<translate with synonyms or related terms for ''Trail Marker'', separated by commas>'
       tourism/motel:
         # tourism=motel
         name: Motel
