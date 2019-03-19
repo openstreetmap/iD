@@ -13,6 +13,5 @@
         "value": "swimming_pool"
     },
     "name": "Swimming Pool",
-    "searchable": false,
-    "replacement": "leisure/swimming_pool"
+    "searchable": false
 }

@@ -22,6 +22,7 @@
         "train station",
         "station"
     ],
+    "matchScore": 0.95,
     "name": "Train Station",
     "searchable": false,
     "replacement": "public_transport/station_train"

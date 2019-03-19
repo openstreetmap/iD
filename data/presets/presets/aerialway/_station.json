@@ -14,6 +14,7 @@
     "tags": {
         "aerialway": "station"
     },
+    "matchScore": 0.95,
     "name": "Aerialway Station",
     "searchable": false,
     "replacement": "public_transport/station_aerialway"

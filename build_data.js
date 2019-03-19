@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const requireESM = require('esm')(module);
+const _clone = requireESM('lodash-es/clone').default;
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _forEach = requireESM('lodash-es/forEach').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
@@ -493,8 +494,12 @@ function validatePresetFields(presets, fields) {
         var preset = presets[presetID];
 
         if (preset.replacement) {
-            if (presets[preset.replacement] === undefined) {
+            var replacementPreset = presets[preset.replacement];
+            if (replacementPreset === undefined) {
                 console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset ' + preset.name);
+                process.exit(1);
+            } else if (_clone(preset.geometry).sort().toString() !== _clone(replacementPreset.geometry).sort().toString()) {
+                console.error('The preset "' + presetID + '" has different geometry than its replacement preset, "' + preset.replacement + '". They must match for tag upgrades to work.');
                 process.exit(1);
             }
         }

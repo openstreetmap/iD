@@ -61,6 +61,10 @@
       "replace": {"shop": "*"}
     },
     {
+      "old": {"amenity": "swimming_pool"},
+      "replace": {"leisure": "swimming_pool"}
+    },
+    {
       "old": {"amenity": "toilet"},
       "replace": {"amenity": "toilets"}
     },
@@ -198,6 +202,10 @@
     {
       "old": {"landuse": "conservation"},
       "replace": {"boundary": "protected_area"}
+    },
+    {
+      "old": {"landuse": "farm"},
+      "replace": {"landuse": "farmland"}
     },
     {
       "old": {"landuse": "field"},

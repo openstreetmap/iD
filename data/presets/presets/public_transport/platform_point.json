@@ -4,12 +4,13 @@
         "name",
         "network",
         "operator",
-        "departures_board"
+        "departures_board",
+        "shelter"
     ],
     "moreFields": [
-        "lit",
         "bench",
-        "shelter",
+        "bin",
+        "lit",
         "wheelchair"
     ],
     "geometry": [
