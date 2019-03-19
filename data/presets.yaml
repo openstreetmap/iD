@@ -4032,8 +4032,18 @@ en:
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
-        # 'terms: bike'
+        # 'terms: bike path,bicyle path'
         terms: '<translate with synonyms or related terms for ''Cycle Path'', separated by commas>'
+      highway/cycleway/crossing/marked:
+        # 'cycleway=crossing, crossing=marked'
+        name: Marked Cycle Crossing
+        # 'terms: cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
+        terms: '<translate with synonyms or related terms for ''Marked Cycle Crossing'', separated by commas>'
+      highway/cycleway/crossing/unmarked:
+        # cycleway=crossing
+        name: Unmarked Cycle Crossing
+        # 'terms: cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
+        terms: '<translate with synonyms or related terms for ''Unmarked Cycle Crossing'', separated by commas>'
       highway/elevator:
         # highway=elevator
         name: Elevator
@@ -4050,12 +4060,12 @@ en:
         # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
         terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
       highway/footway/marked:
-        # crossing=marked
+        # 'footway=crossing, crossing=marked'
         name: Marked Crosswalk
         # 'terms: zebra crossing,marked crossing,crosswalk'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/footway/marked-raised:
-        # 'crossing=marked, traffic_calming=table'
+        # 'footway=crossing, crossing=marked, traffic_calming=table'
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'

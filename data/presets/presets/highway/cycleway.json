@@ -24,7 +24,9 @@
         "highway": "cycleway"
     },
     "terms": [
-        "bike"
+        "bike path",
+        "bicyle path"
     ],
+    "matchScore": 0.9,
     "name": "Cycle Path"
 }

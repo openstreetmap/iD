@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "maki-bicycle",
     "fields": [
         "crossing",
         "access",
@@ -11,27 +11,29 @@
         "line"
     ],
     "tags": {
-        "footway": "crossing",
+        "cycleway": "crossing",
         "crossing": "marked"
     },
     "addTags": {
-        "highway": "footway",
-        "footway": "crossing",
+        "highway": "cycleway",
+        "cycleway": "crossing",
         "crossing": "marked"
     },
     "removeTags": {
-        "highway": "footway",
-        "footway": "crossing",
+        "highway": "cycleway",
+        "cycleway": "crossing",
         "crossing": "marked"
     },
     "reference": {
-        "key": "footway",
+        "key": "cycleway",
         "value": "crossing"
     },
     "terms": [
-        "zebra crossing",
-        "marked crossing",
-        "crosswalk"
+        "cycle crosswalk",
+        "cycle path crossing",
+        "cycleway crossing",
+        "bicycle crossing",
+        "bike crossing"
     ],
-    "name": "Marked Crosswalk"
+    "name": "Marked Cycle Crossing"
 }

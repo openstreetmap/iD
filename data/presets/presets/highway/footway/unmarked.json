@@ -9,6 +9,9 @@
     "geometry": [
         "line"
     ],
+    "tags": {
+        "footway": "crossing"
+    },
     "addTags": {
         "highway": "footway",
         "footway": "crossing",
@@ -18,9 +21,6 @@
         "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked"
-    },
-    "tags": {
-        "footway": "crossing"
     },
     "reference": {
         "key": "footway",

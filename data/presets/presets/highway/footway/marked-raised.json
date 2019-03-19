@@ -11,6 +11,7 @@
         "line"
     ],
     "tags": {
+        "footway": "crossing",
         "crossing": "marked",
         "traffic_calming": "table"
     },

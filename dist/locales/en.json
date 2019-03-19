@@ -5636,7 +5636,15 @@
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path",
-                    "terms": "bike"
+                    "terms": "bike path,bicyle path"
+                },
+                "highway/cycleway/crossing/marked": {
+                    "name": "Marked Cycle Crossing",
+                    "terms": "cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
+                },
+                "highway/cycleway/crossing/unmarked": {
+                    "name": "Unmarked Cycle Crossing",
+                    "terms": "cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
                 },
                 "highway/elevator": {
                     "name": "Elevator",

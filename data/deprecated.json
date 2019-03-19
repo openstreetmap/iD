@@ -149,6 +149,10 @@
       "replace": {"sidewalk": "both"}
     },
     {
+      "old": {"footway": "crossing", "highway": "cycleway"},
+      "replace": {"cycleway": "crossing", "highway": "cycleway"}
+    },
+    {
       "old": {"footway": "left"},
       "replace": {"sidewalk": "left"}
     },

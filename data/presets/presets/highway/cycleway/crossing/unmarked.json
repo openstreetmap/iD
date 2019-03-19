@@ -1,0 +1,38 @@
+{
+    "icon": "maki-bicycle",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "cycleway": "crossing"
+    },
+    "addTags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "crossing": "unmarked"
+    },
+    "removeTags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "crossing": "unmarked"
+    },
+    "reference": {
+        "key": "cycleway",
+        "value": "crossing"
+    },
+    "terms": [
+        "cycle path crossing",
+        "cycleway crossing",
+        "bicycle crossing",
+        "bike crossing"
+    ],
+    "matchScore": 0.95,
+    "name": "Unmarked Cycle Crossing"
+}
