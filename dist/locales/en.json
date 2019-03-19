@@ -6486,6 +6486,10 @@
                     "name": "Pipeline",
                     "terms": "oil,natural gas,water,sewer,sewage"
                 },
+                "man_made/pipeline/underground": {
+                    "name": "Underground Pipeline",
+                    "terms": "oil,natural gas,water,sewer,sewage"
+                },
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
                     "terms": ""

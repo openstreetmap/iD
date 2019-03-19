@@ -5023,6 +5023,11 @@ en:
         name: Pipeline
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline'', separated by commas>'
+      man_made/pipeline/underground:
+        # 'man_made=pipeline, location=underground'
+        name: Underground Pipeline
+        # 'terms: oil,natural gas,water,sewer,sewage'
+        terms: '<translate with synonyms or related terms for ''Underground Pipeline'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
         name: Pumping Station
