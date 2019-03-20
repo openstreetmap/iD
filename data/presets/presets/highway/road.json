@@ -1,6 +1,7 @@
 {
     "icon": "iD-other-line",
     "fields": [
+        "highway",
         "{highway/residential}"
     ],
     "moreFields": [
