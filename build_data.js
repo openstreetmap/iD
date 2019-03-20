@@ -20,6 +20,7 @@ const YAML = require('js-yaml');
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
 const suggestions = require('name-suggestion-index').names;
+const deprecated = require('./data/deprecated.json').dataDeprecated;
 
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome-svg-core');
@@ -416,6 +417,30 @@ function generateTaginfo(presets, fields) {
                 coalesceTags(taginfo, tag);
             }
         });
+    });
+
+    _forEach(deprecated, function(elem) {
+        var old = elem.old;
+        var oldKeys = Object.keys(old);
+        if (oldKeys.length === 1) {
+            var oldKey = oldKeys[0];
+            var tag = { key: oldKey };
+
+            var oldValue = old[oldKey];
+            if (oldValue !== '*') tag.value = oldValue;
+            var replacementStrings = [];
+            for (var replaceKey in elem.replace) {
+                var replaceValue = elem.replace[replaceKey];
+                if (replaceValue === '$1') replaceValue = '*';
+                replacementStrings.push(replaceKey + '=' + replaceValue);
+            }
+            var description = '🄳';
+            if (replacementStrings.length > 0) {
+                description += ' ➜ ' + replacementStrings.join(' + ');
+            }
+            tag.description = [description];
+            coalesceTags(taginfo, tag);
+        }
     });
 
     _forEach(taginfo.tags, function(elem) {
