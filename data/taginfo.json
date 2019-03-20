@@ -874,7 +874,7 @@
     {"key": "shop", "value": "garden_centre", "description": "🄿 Garden Center", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"},
     {"key": "shop", "value": "gas", "description": "🄿 Bottled Gas Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "gift", "description": "🄿 Gift Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/gift-15.svg?sanitize=true"},
-    {"key": "shop", "value": "greengrocer", "description": "🄿 Greengrocer", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
+    {"key": "shop", "value": "greengrocer", "description": "🄿 Greengrocer", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-carrot.svg?sanitize=true"},
     {"key": "shop", "value": "hairdresser_supply", "description": "🄿 Hairdresser Supply Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "hairdresser", "description": "🄿 Hairdresser", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beauty_salon.svg?sanitize=true"},
     {"key": "shop", "value": "hardware", "description": "🄿 Hardware Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tools.svg?sanitize=true"},
