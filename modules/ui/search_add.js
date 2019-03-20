@@ -336,9 +336,23 @@ export function uiSearchAdd(context) {
 
         list.selectAll('.subsection.subitems').remove();
 
-        var dataItems = data.map(function(preset) {
-            return itemForPreset(preset);
-        });
+        var dataItems = [];
+        for (var i = 0; i < data.length; i++) {
+            var preset = data[i];
+            if (i < data.length - 1) {
+                var nextPreset = data[i+1];
+                // group neighboring presets with the same name
+                if (preset.name && nextPreset.name && preset.name() === nextPreset.name()) {
+                    var groupedPresets = [preset, nextPreset].sort(function(p1, p2) {
+                        return (p1.geometry[0] < p2.geometry[0]) ? -1 : 1;
+                    });
+                    dataItems.push(MultiPresetItem(groupedPresets));
+                    i++; // skip the next preset since we accounted for it
+                    continue;
+                }
+            }
+            dataItems.push(itemForPreset(preset));
+        }
 
         var items = list.selectAll('.list-item')
             .data(dataItems, function(d) { return d.id(); });
@@ -364,11 +378,7 @@ export function uiSearchAdd(context) {
             .append('div')
             .attr('class', 'list-item')
             .attr('id', function(d) {
-                var id = 'search-add-list-item-preset-' + d.preset.id.replace(/[^a-zA-Z\d:]/g, '-');
-                if (d.geometry) {
-                    id += '-' + d.geometry;
-                }
-                return id;
+                return 'search-add-list-item-preset-' + d.id().replace(/[^a-zA-Z\d:]/g, '-');
             })
             .on('mouseover', function() {
                 list.selectAll('.list-item.focused')
@@ -394,7 +404,7 @@ export function uiSearchAdd(context) {
             d3_select(this).call(
                 uiPresetIcon()
                     .geometry(d.geometry)
-                    .preset(d.preset)
+                    .preset(d.preset || d.presets[0])
                     .sizeClass('small')
             );
         });
@@ -402,37 +412,23 @@ export function uiSearchAdd(context) {
             .attr('class', 'label');
 
         label.each(function(d) {
-            if (!d.geometry) {
+            if (d.subitems) {
                 d3_select(this)
                     .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
             }
         });
 
         label.each(function(d) {
-
-            if ((d.geometry && !d.isSubitem) || d.geometries) {
-                // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-                d3_select(this)
-                    .append('div')
-                    .attr('class', 'label-inner')
-                    .selectAll('.namepart')
-                    .data(d.preset.name().split(' – '))
-                    .enter()
-                    .append('div')
-                    .attr('class', 'namepart')
-                    .text(function(d) { return d; });
-            } else {
-                d3_select(this).append('span')
-                    .text(function(d) {
-                        if (d.isSubitem) {
-                            if (d.preset.setTags({}, d.geometry).building) {
-                                return t('presets.presets.building.name');
-                            }
-                            return t('modes.add_' + context.presets().fallback(d.geometry).id + '.title');
-                        }
-                        return d.preset.name();
-                    });
-            }
+            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            d3_select(this)
+                .append('div')
+                .attr('class', 'label-inner')
+                .selectAll('.namepart')
+                .data(d.name().split(' – '))
+                .enter()
+                .append('div')
+                .attr('class', 'namepart')
+                .text(function(d) { return d; });
         });
 
         row.each(function(d) {
@@ -520,6 +516,9 @@ export function uiSearchAdd(context) {
         item.id = function() {
             return preset.id;
         };
+        item.name = function() {
+            return preset.name();
+        };
         item.subsection = d3_select(null);
         item.preset = preset;
         item.choose = function() {
@@ -535,11 +534,43 @@ export function uiSearchAdd(context) {
         return item;
     }
 
+    function MultiPresetItem(presets) {
+        var item = {};
+        item.id = function() {
+            return presets.map(function(preset) { return preset.id; }).join();
+        };
+        item.name = function() {
+            return presets[0].name();
+        };
+        item.subsection = d3_select(null);
+        item.presets = presets;
+        item.choose = function() {
+            var selection = d3_select(this);
+            if (selection.classed('disabled')) return;
+            chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
+        };
+        item.subitems = function() {
+            var items = [];
+            presets.forEach(function(preset) {
+                preset.geometry.filter(function(geometry) {
+                    return shownGeometry.indexOf(geometry) !== -1;
+                }).forEach(function(geometry) {
+                    items.push(AddablePresetItem(preset, geometry, true));
+                });
+            });
+            return items;
+        };
+        return item;
+    }
+
     function MultiGeometryPresetItem(preset, geometries) {
 
         var item = {};
         item.id = function() {
             return preset.id + geometries;
+        };
+        item.name = function() {
+            return preset.name();
         };
         item.subsection = d3_select(null);
         item.preset = preset;
@@ -561,6 +592,15 @@ export function uiSearchAdd(context) {
         var item = {};
         item.id = function() {
             return preset.id + geometry + isSubitem;
+        };
+        item.name = function() {
+            if (isSubitem) {
+                if (preset.setTags({}, geometry).building) {
+                    return t('presets.presets.building.name');
+                }
+                return t('modes.add_' + context.presets().fallback(geometry).id + '.title');
+            }
+            return preset.name();
         };
         item.isSubitem = isSubitem;
         item.preset = preset;
