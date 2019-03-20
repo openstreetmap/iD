@@ -90,7 +90,7 @@ export function uiModes(context) {
                 var recents = context.presets().getRecents().filter(function(recent) {
                     return recent.geometry !== 'relation';
                 });
-                items = _uniqWith(items.concat(), function(item1, item2) {
+                items = _uniqWith(items.concat(recents), function(item1, item2) {
                     return item1.matches(item2.preset, item2.geometry);
                 });
                 var maxShown = 10;

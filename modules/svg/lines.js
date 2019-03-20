@@ -122,8 +122,15 @@ export function svgLines(projection, context) {
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
+
+                    var prefix = 'way line';
+                    if (!d.hasInterestingTags() && graph.parentMultipolygons(d).length > 0) {
+                        // fudge the classes to style multipolygon member lines as area edges
+                        prefix = 'relation area';
+                    }
+
                     var oldMPClass = oldMultiPolygonOuters[d.id] ? 'old-multipolygon ' : '';
-                    return 'way line ' + klass + ' ' + selectedClass + oldMPClass + d.id;
+                    return prefix + ' ' + klass + ' ' + selectedClass + oldMPClass + d.id;
                 })
                 .call(svgTagClasses())
                 .merge(lines)

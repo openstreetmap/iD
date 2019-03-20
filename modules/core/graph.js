@@ -102,6 +102,12 @@ coreGraph.prototype = {
         return result;
     },
 
+    parentMultipolygons: function(entity) {
+        return this.parentRelations(entity).filter(function(relation) {
+            return relation.isMultipolygon();
+        });
+    },
+
 
     childNodes: function(entity) {
         if (this._childNodes[entity.id]) return this._childNodes[entity.id];
