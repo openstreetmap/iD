@@ -1282,6 +1282,9 @@ a.hide-toggle {
 .preset-icon-container.small .preset-icon.point-geom .icon {
     transform: translateY(-7%) scale(0.27);
 }
+.preset-icon-container.small .preset-icon.point-geom.preset-icon-iD .icon {
+    transform: translateY(-9%) scale(0.5);
+}
 .preset-icon.framed .icon {
     transform: scale(0.4);
 }
