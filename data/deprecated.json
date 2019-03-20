@@ -93,6 +93,18 @@
       "replace": {"entrance": "*"}
     },
     {
+      "old": {"building": "family_house"},
+      "replace": {"building": "house"}
+    },
+    {
+      "old": {"building": "home"},
+      "replace": {"building": "house"}
+    },
+    {
+      "old": {"building": "household"},
+      "replace": {"building": "house"}
+    },
+    {
       "old": {"building:color": "*"},
       "replace": {"building:colour": "$1"}
     },
