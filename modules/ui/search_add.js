@@ -116,7 +116,7 @@ export function uiSearchAdd(context) {
         searchWrap
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
 
-        popover = selection
+        popover = searchWrap
             .append('div')
             .attr('class', 'popover fillL hide')
             .on('mousedown', function() {

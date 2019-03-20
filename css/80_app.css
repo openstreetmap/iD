@@ -599,13 +599,18 @@ button.add-note svg.icon {
     position: relative;
     width: 100%;
     min-width: 150px;
-    max-width: 300px;
+    max-width: 325px;
+}
+[dir='ltr'] .search-add .search-wrap {
     border-radius: 20px 4px 4px 20px;
+}
+[dir='rtl'] .search-add .search-wrap {
+    border-radius: 4px 20px 20px 4px;
 }
 .search-add .search-wrap.focused .tooltip {
     display: none;
 }
-.search-add .search-wrap:nth-last-child(2) {
+.search-add .search-wrap:last-child {
     border-radius: 20px;
 }
 .search-add input[type='search'] {
@@ -635,16 +640,21 @@ button.add-note svg.icon {
     right: 10px;
 }
 .search-add .popover {
-    max-height: 600px;
-    width: 100%;
-    position: absolute;
-    top: 44px;
     border: none;
     border-radius: 6px;
-    max-width: 350px;
+    position: absolute;
+    max-height: 600px;
+    top: 44px;
+    width: 200%;
+    max-width: 325px;
+    margin: auto;
+    left: auto;
+    right: auto;
 }
 .search-add .popover .popover-content {
     overflow-y: auto;
+    height: 100%;
+    max-height: 60vh;
 }
 .search-add .popover,
 .search-add .popover .popover-content {
@@ -680,7 +690,7 @@ button.add-note svg.icon {
     background: transparent;
 }
 .search-add .popover .list {
-    max-height: 65vh;
+    height: 100%;
 }
 .search-add .list-item > .row {
     display: flex;
