@@ -8,5 +8,6 @@ export { validationMissingRole } from './missing_role';
 export { validationMissingTag } from './missing_tag';
 export { validationOldMultipolygon } from './old_multipolygon';
 export { validationOutdatedTags } from './outdated_tags';
+export { validationPrivateData } from './private_data';
 export { validationTagSuggestsArea } from './tag_suggests_area';
 export { validationUnknownRoad } from './unknown_road';

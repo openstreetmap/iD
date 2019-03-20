@@ -1295,6 +1295,11 @@ en:
       title: Outdated Tags
       message: '{feature} has outdated tags'
       tip: "Some tags change over time and should be updated."
+    private_data:
+      title: Private Information
+      contact:
+        message: '{feature} might be tagged with private contact information'
+      tip: "Sensitive data like personal phone numbers should not be tagged."
     tag_suggests_area:
       title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
@@ -1327,6 +1332,8 @@ en:
       remove_generic_name:
         title: Remove the name
         annotation: Removed a generic name.
+      remove_private_info:
+        annotation: Removed private information.
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
