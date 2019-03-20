@@ -6374,6 +6374,10 @@
                     "name": "Racetrack (Non-Motorsport)",
                     "terms": "cycle,dog,greyhound,horse,race*,track"
                 },
+                "leisure/track/cycling": {
+                    "name": "Cycling Track",
+                    "terms": "bicycle track,bicycling track,cycle racetrack,velodrome"
+                },
                 "leisure/track/horse_racing": {
                     "name": "Horse Racing Track",
                     "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"

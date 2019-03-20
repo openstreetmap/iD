@@ -4891,6 +4891,11 @@ en:
         name: Racetrack (Non-Motorsport)
         # 'terms: cycle,dog,greyhound,horse,race*,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Non-Motorsport)'', separated by commas>'
+      leisure/track/cycling:
+        # 'leisure=track, sport=cycling'
+        name: Cycling Track
+        # 'terms: bicycle track,bicycling track,cycle racetrack,velodrome'
+        terms: '<translate with synonyms or related terms for ''Cycling Track'', separated by commas>'
       leisure/track/horse_racing:
         # 'leisure=track, sport=horse_racing'
         name: Horse Racing Track
