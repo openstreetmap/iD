@@ -87,7 +87,10 @@ export function uiModes(context) {
             var favoritesCount = items.length;
 
             if (favoritesCount < 10) {
-                items = _uniqWith(items.concat(context.presets().getRecents()), function(item1, item2) {
+                var recents = context.presets().getRecents().filter(function(recent) {
+                    return recent.geometry !== 'relation';
+                });
+                items = _uniqWith(items.concat(), function(item1, item2) {
                     return item1.matches(item2.preset, item2.geometry);
                 });
                 var maxShown = 10;
