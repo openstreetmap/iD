@@ -438,7 +438,7 @@ export function uiSearchAdd(context) {
             }
         });
         item.each(function(d) {
-            if ((d.geometry && !d.isSubitem) || d.geometries) {
+            if ((d.geometry && (!d.isSubitem || d.isInNameGroup)) || d.geometries) {
 
                 var reference = uiTagReference(d.preset.reference(d.geometry || d.geometries[0]), context);
 
@@ -555,7 +555,7 @@ export function uiSearchAdd(context) {
                 preset.geometry.filter(function(geometry) {
                     return shownGeometry.indexOf(geometry) !== -1;
                 }).forEach(function(geometry) {
-                    items.push(AddablePresetItem(preset, geometry, true));
+                    items.push(AddablePresetItem(preset, geometry, true, true));
                 });
             });
             return items;
@@ -588,7 +588,7 @@ export function uiSearchAdd(context) {
         return item;
     }
 
-    function AddablePresetItem(preset, geometry, isSubitem) {
+    function AddablePresetItem(preset, geometry, isSubitem, isInNameGroup) {
         var item = {};
         item.id = function() {
             return preset.id + geometry + isSubitem;
@@ -602,6 +602,7 @@ export function uiSearchAdd(context) {
             }
             return preset.name();
         };
+        item.isInNameGroup = isInNameGroup;
         item.isSubitem = isSubitem;
         item.preset = preset;
         item.geometry = geometry;
