@@ -95,6 +95,9 @@
         "replacement": {
             "description": "The ID of a preset that is preferable to this one",
             "type": "string"
+        },
+        "fill": {
+            "description": "Specifies the area fill pattern(s) used for rendering"
         }
     },
     "additionalProperties": false

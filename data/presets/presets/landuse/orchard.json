@@ -21,5 +21,6 @@
     "terms": [
         "fruit"
     ],
-    "name": "Orchard"
+    "name": "Orchard",
+    "fill": "orchard"
 }

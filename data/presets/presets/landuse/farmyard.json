@@ -23,5 +23,6 @@
         "grow",
         "plant"
     ],
-    "name": "Farmyard"
+    "name": "Farmyard",
+    "fill": "farmyard"
 }

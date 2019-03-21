@@ -18,5 +18,6 @@
     "terms": [
         "dump"
     ],
-    "name": "Landfill"
+    "name": "Landfill",
+    "fill": "landfill"
 }

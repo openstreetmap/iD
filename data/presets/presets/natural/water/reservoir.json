@@ -11,5 +11,6 @@
         "key": "water",
         "value": "reservoir"
     },
-    "name": "Reservoir"
+    "name": "Reservoir",
+    "fill": "water_standing"
 }

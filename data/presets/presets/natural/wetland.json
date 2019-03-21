@@ -17,5 +17,12 @@
         "swamp",
         "tidalflat"
     ],
-    "name": "Wetland"
+    "name": "Wetland",
+    "fill": [
+        "wetland",
+        { "wetland": "marsh", "pattern": "wetland_marsh" },
+        { "wetland": "swamp", "pattern": "wetland_swamp" },
+        { "wetland": "bog", "pattern": "wetland_bog" },
+        { "wetland": "reedbed", "pattern": "wetland_reedbed" }
+    ]
 }

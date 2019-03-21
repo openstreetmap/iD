@@ -24,5 +24,6 @@
         "grow",
         "plant"
     ],
-    "name": "Farmland"
+    "name": "Farmland",
+    "fill": "farmland"
 }

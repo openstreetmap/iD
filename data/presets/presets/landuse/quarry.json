@@ -18,5 +18,6 @@
         "landuse": "quarry"
     },
     "terms": [],
-    "name": "Quarry"
+    "name": "Quarry",
+    "fill": "quarry"
 }

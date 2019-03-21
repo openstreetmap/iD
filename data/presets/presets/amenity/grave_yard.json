@@ -17,5 +17,6 @@
     "tags": {
         "amenity": "grave_yard"
     },
-    "name": "Graveyard"
+    "name": "Graveyard",
+    "fill": "cemetery"
 }

@@ -15,5 +15,11 @@
     "terms": [
         "tree"
     ],
-    "name": "Wood"
+    "name": "Wood",
+    "fill": [
+        "forest",
+        { "leaf_type": "broadleaved", "pattern": "forest_broadleaved" },
+        { "leaf_type": "needleleaved", "pattern": "forest_needleleaved" },
+        { "leaf_type": "leafless", "pattern": "forest_leafless" }
+    ]
 }

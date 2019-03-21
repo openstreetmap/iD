@@ -10,131 +10,76 @@ import { svgPath, svgSegmentWay, svgTagClasses } from './index';
 export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
-    var patterns = {
-        // tag - pattern name
-        // -or-
-        // tag - value - pattern name
-        // -or-
-        // tag - value - rules (optional tag-values, pattern name)
-        // (matches earlier rules first, so fallback should be last entry)
-        amenity: {
-            grave_yard: 'cemetery',
-            fountain: 'water_standing'
-        },
-        landuse: {
-            cemetery: [
-                { religion: 'christian', pattern: 'cemetery_christian' },
-                { religion: 'buddhist', pattern: 'cemetery_buddhist' },
-                { religion: 'muslim', pattern: 'cemetery_muslim' },
-                { religion: 'jewish', pattern: 'cemetery_jewish' },
-                { pattern: 'cemetery' }
-            ],
-            construction: 'construction',
-            farmland: 'farmland',
-            farmyard: 'farmyard',
-            forest: [
-                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
-                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
-                { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' } // same as 'leaf_type:mixed'
-            ],
-            grave_yard: 'cemetery',
-            grass: 'grass',
-            landfill: 'landfill',
-            meadow: 'meadow',
-            military: 'construction',
-            orchard: 'orchard',
-            reservoir: 'water_standing',
-            quarry: 'quarry',
-            vineyard: 'vineyard'
-        },
-        natural: {
-            beach: 'beach',
-            grassland: 'grass',
-            sand: 'beach',
-            scrub: 'scrub',
-            water: [
-                { water: 'pond', pattern: 'pond' },
-                { water: 'reservoir', pattern: 'water_standing' },
-                { pattern: 'waves' }
-            ],
-            wetland: [
-                { wetland: 'marsh', pattern: 'wetland_marsh' },
-                { wetland: 'swamp', pattern: 'wetland_swamp' },
-                { wetland: 'bog', pattern: 'wetland_bog' },
-                { wetland: 'reedbed', pattern: 'wetland_reedbed' },
-                { pattern: 'wetland' }
-            ],
-            wood: [
-                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
-                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
-                { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' } // same as 'leaf_type:mixed'
-            ]
-        },
-        traffic_calming: {
-            island: [
-                { surface: 'grass', pattern: 'grass' },
-            ],
-            chicane: [
-                { surface: 'grass', pattern: 'grass' },
-            ],
-            choker: [
-                { surface: 'grass', pattern: 'grass' },
-            ]
-        }
-    };
 
-    function setPattern(entity) {
+    function setPattern(entity, preset) {
+
         // Skip pattern filling if this is a building (buildings don't get patterns applied)
         if (entity.tags.building && entity.tags.building !== 'no') {
             this.style.fill = this.style.stroke = '';
             return;
         }
 
-        for (var tag in patterns) {
-            var entityValue = entity.tags[tag];
-            if (!entityValue) continue;
+        if (!preset || preset.fill === undefined) {
+            this.style.fill = this.style.stroke = '';
+            return;
+        }
 
-            if (typeof patterns[tag] === 'string') { // extra short syntax (just tag) - pattern name
-                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[tag] + '")';
-                return;
-            } else {
-                var values = patterns[tag];
-                for (var value in values) {
-                    if (entityValue !== value) continue;
+        if (typeof preset.fill === 'string') {
+            // Simple typical case -- pattern name is directly specified
+            // e.g. "fill": "grass"
 
-                    var rules = values[value];
-                    if (typeof rules === 'string') { // short syntax - pattern name
-                        this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
-                        return;
-                    } else { // long syntax - rule array
-                        for (var ruleKey in rules) {
-                            var rule = rules[ruleKey];
+            this.style.fill = this.style.stroke = 'url("#pattern-' + preset.fill + '")';
 
-                            var pass = true;
-                            for (var criterion in rule) {
-                                if (criterion !== 'pattern') { // reserved for pattern name
-                                    // The only rule is a required tag-value pair
-                                    var v = entity.tags[criterion];
-                                    if (!v || v !== rule[criterion]) {
-                                        pass = false;
-                                        break;
-                                    }
-                                }
-                            }
+        } else {
+            // Complex cases -- different patterns are available based on specific tag values
 
-                            if (pass) {
-                                this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                                return;
-                            }
+            var fallbackPattern = null;
+
+            for (var k in preset.fill) {
+                var conditionalPatterns = preset.fill[k];
+
+                if (typeof conditionalPatterns === 'string') {
+                    // The (optional) fallback pattern used in case no other more specific pattern is matched
+                    // e.g. "fill": [ "forest" ]
+
+                    fallbackPattern = conditionalPatterns;
+
+                } else {
+                    // The tag-value matching case so we can pick a more specific pattern (that doesn't have a separate preset)
+                    // e.g. "fill": [ { "leaf_type": "broadleaved", "pattern": "forest_broadleaved" } ]
+
+                    var match = true;
+
+                    for (var tag in conditionalPatterns) {
+
+                        if (tag === 'pattern')
+                            continue; // this is the pattern we would use, not a tag to match
+
+                        var entityValue = entity.tags[tag];
+
+                        // See if the entity has the required tag-value
+                        if (!entityValue || (conditionalPatterns[tag] !== '*' && entityValue !== conditionalPatterns[tag])) {
+                            match = false;
+                            break;
                         }
+                    }
+
+                    if (match) {
+                        this.style.fill = this.style.stroke = 'url("#pattern-' + conditionalPatterns.pattern + '")';
+                        return;
                     }
                 }
             }
-        }
 
-        this.style.fill = this.style.stroke = '';
+            if (fallbackPattern !== null) {
+                // None of the tag-value cases matched, so we use the default pattern
+                this.style.fill = this.style.stroke = 'url("#pattern-' + fallbackPattern + '")';
+                return;
+            }
+
+            // We didn't match any of the conditional patterns and had no fallback pattern
+            this.style.fill = this.style.stroke = '';
+        }
     }
 
 
@@ -291,7 +236,8 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
-                    setPattern.call(this, entity);
+                    var preset = context.presets().match(entity, graph);
+                    setPattern.call(this, entity, preset);
                 }
             })
             .call(svgTagClasses())

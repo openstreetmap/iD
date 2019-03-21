@@ -13,5 +13,6 @@
     "terms": [
         "shore"
     ],
-    "name": "Beach"
+    "name": "Beach",
+    "fill": "beach"
 }

@@ -27,5 +27,11 @@
         "silviculture",
         "tree"
     ],
-    "name": "Managed Forest"
+    "name": "Managed Forest",
+    "fill": [
+        "forest",
+        { "leaf_type": "broadleaved", "pattern": "forest_broadleaved" },
+        { "leaf_type": "needleleaved", "pattern": "forest_needleleaved" },
+        { "leaf_type": "leafless", "pattern": "forest_leafless" }
+    ]
 }

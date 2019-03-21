@@ -12,5 +12,6 @@
     "tags": {
         "amenity": "fountain"
     },
-    "name": "Fountain"
+    "name": "Fountain",
+    "fill": "water_standing"
 }

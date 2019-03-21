@@ -30,5 +30,6 @@
         "grape",
         "wine"
     ],
-    "name": "Vineyard"
+    "name": "Vineyard",
+    "fill": "vineyard"
 }

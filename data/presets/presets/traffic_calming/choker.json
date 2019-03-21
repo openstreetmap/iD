@@ -15,5 +15,8 @@
     "tags": {
         "traffic_calming": "choker"
     },
-    "name": "Traffic Choker"
+    "name": "Traffic Choker",
+    "fill": [
+        { "surface": "grass", "pattern": "grass" }
+    ]
 }

@@ -8,5 +8,6 @@
     "terms": [
         "desert"
     ],
-    "name": "Sand"
+    "name": "Sand",
+    "fill": "beach"
 }

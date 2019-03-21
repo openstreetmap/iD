@@ -15,5 +15,6 @@
     "tags": {
         "natural": "water"
     },
-    "name": "Water"
+    "name": "Water",
+    "fill": "waves"
 }

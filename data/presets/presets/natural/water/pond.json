@@ -22,5 +22,6 @@
         "pool",
         "mere"
     ],
-    "name": "Pond"
+    "name": "Pond",
+    "fill": "pond"
 }

@@ -16,5 +16,8 @@
     "tags": {
         "traffic_calming": "chicane"
     },
-    "name": "Traffic Chicane"
+    "name": "Traffic Chicane",
+    "fill": [
+        { "surface": "grass", "pattern": "grass" }
+    ]
 }

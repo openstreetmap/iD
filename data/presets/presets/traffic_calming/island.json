@@ -16,5 +16,8 @@
     "tags": {
         "traffic_calming": "island"
     },
-    "name": "Traffic Island"
+    "name": "Traffic Island",
+    "fill": [
+        { "surface": "grass", "pattern": "grass" }
+    ]
 }

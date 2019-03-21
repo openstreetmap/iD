@@ -19,5 +19,12 @@
         "landuse": "cemetery"
     },
     "terms": [],
-    "name": "Cemetery"
+    "name": "Cemetery",
+    "fill": [
+        "cemetery",
+        { "religion": "christian", "pattern": "cemetery_christian" },
+        { "religion": "buddhist", "pattern": "cemetery_buddhist" },
+        { "religion": "muslim", "pattern": "cemetery_muslim" },
+        { "religion": "jewish", "pattern": "cemetery_jewish" }
+    ]
 }

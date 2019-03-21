@@ -6,5 +6,6 @@
         "landuse": "grass"
     },
     "terms": [],
-    "name": "Grass"
+    "name": "Grass",
+    "fill": "grass"
 }
