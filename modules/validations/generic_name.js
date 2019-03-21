@@ -1,16 +1,17 @@
 import _clone from 'lodash-es/clone';
+import { filters } from 'name-suggestion-index';
+
 import { t } from '../util/locale';
 import { utilPreset } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
 import { actionChangeTags } from '../actions';
-import { discardNames } from '../../node_modules/name-suggestion-index/config/filters.json';
 
 
 export function validationGenericName() {
     var type = 'generic_name';
 
     // known list of generic names (e.g. "bar")
-    var discardNamesRegexes = discardNames.map(function(discardName) {
+    var discardNamesRegexes = filters.discardNames.map(function(discardName) {
         return new RegExp(discardName, 'i');
     });
 

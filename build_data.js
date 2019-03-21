@@ -19,7 +19,7 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
-const suggestions = require('name-suggestion-index').names;
+const suggestions = require('name-suggestion-index').brands.brands;
 const deprecated = require('./data/deprecated.json').dataDeprecated;
 
 // fontawesome icons
@@ -200,18 +200,18 @@ function generateFields(tstrings, faIcons) {
 
 function suggestionsToPresets(presets) {
 
-    for (var key in suggestions) {
-        for (var value in suggestions[key]) {
-            for (var name in suggestions[key][value]) {
-                addSuggestion(key, value, name);
-            }
-        }
-    }
+    Object.keys(suggestions).forEach(k => {
+        const suggestion = suggestions[k];
+        const qid = suggestion.tags['brand:wikidata'];
+        if (!qid || !/^Q\d+$/.test(qid)) return;   // wikidata tag missing or looks wrong..
 
+        const parts = k.split('|', 2);
+        const tag = parts[0].split('/', 2);
+        const key = tag[0];
+        const value = tag[1];
+        const name = parts[1].replace('~', ' ');
 
-    function addSuggestion(key, value, name) {
-        var suggestion = suggestions[key][value][name];
-        var presetID, preset;
+        let presetID, preset;
 
         // sometimes we can find a more specific preset then key/value..
         if (suggestion.tags.cuisine) {
@@ -238,8 +238,8 @@ function suggestionsToPresets(presets) {
             return;
         }
 
-        var wikidataTag = { 'brand:wikidata': suggestion.tags['brand:wikidata'] };
-        var suggestionID = presetID + '/' + name;
+        let wikidataTag = { 'brand:wikidata': qid };
+        let suggestionID = presetID + '/' + name;
 
         presets[suggestionID] = {
             name: name,
@@ -252,7 +252,7 @@ function suggestionsToPresets(presets) {
             matchScore: 2,
             suggestion: true
         };
-    }
+    });
 
     return presets;
 }
