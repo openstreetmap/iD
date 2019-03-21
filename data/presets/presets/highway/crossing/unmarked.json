@@ -1,7 +1,6 @@
 {
     "fields": [
         "crossing",
-        "kerb",
         "tactile_paving"
     ],
     "geometry": [
