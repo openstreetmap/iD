@@ -2994,6 +2994,11 @@ en:
         name: Town Hall
         # 'terms: village,city,government,courthouse,municipal'
         terms: '<translate with synonyms or related terms for ''Town Hall'', separated by commas>'
+      amenity/toy_library:
+        # amenity=toy_library
+        name: Toy Library
+        # 'terms: game,toy'
+        terms: '<translate with synonyms or related terms for ''Toy Library'', separated by commas>'
       amenity/university:
         # amenity=university
         name: University Grounds

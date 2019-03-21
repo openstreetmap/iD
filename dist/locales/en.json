@@ -4716,6 +4716,10 @@
                     "name": "Town Hall",
                     "terms": "village,city,government,courthouse,municipal"
                 },
+                "amenity/toy_library": {
+                    "name": "Toy Library",
+                    "terms": "game,toy"
+                },
                 "amenity/university": {
                     "name": "University Grounds",
                     "terms": "college,graduate school,PhD program,master's degree program"
