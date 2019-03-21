@@ -48,13 +48,13 @@ describe('iD.validations.generic_name', function () {
     });
 
     it('ignores feature with a specific name', function() {
-        createWay({ shop: 'supermarket', name: "Lou's" });
+        createWay({ shop: 'supermarket', name: 'Lou\'s' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
     it('ignores feature with a specific name that includes a generic name', function() {
-        createWay({ shop: 'supermarket', name: "Lou's Store" });
+        createWay({ shop: 'supermarket', name: 'Lou\'s Store' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
