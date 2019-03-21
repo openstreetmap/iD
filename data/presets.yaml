@@ -904,6 +904,9 @@ en:
       kerb:
         # kerb=*
         label: Curb
+      kerb/height:
+        # 'kerb:height=*'
+        label: Height
       label:
         # label=*
         label: Label
@@ -3302,6 +3305,15 @@ en:
         name: Lowered Curb
         # 'terms: curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp'
         terms: '<translate with synonyms or related terms for ''Lowered Curb'', separated by commas>'
+      barrier/kerb/raised:
+        # 'barrier=kerb, kerb=raised'
+        name: Raised Curb
+        terms: '<translate with synonyms or related terms for ''Raised Curb'', separated by commas>'
+      barrier/kerb/rolled:
+        # 'barrier=kerb, kerb=rolled'
+        name: Rolled Curb
+        # 'terms: gutter'
+        terms: '<translate with synonyms or related terms for ''Rolled Curb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate

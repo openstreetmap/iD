@@ -1,0 +1,20 @@
+{
+    "fields": [
+        "{barrier/kerb}",
+        "kerb/height"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "barrier": "kerb",
+        "kerb": "raised"
+    },
+    "reference": {
+        "key": "kerb",
+        "value": "raised"
+    },
+    "terms": [],
+    "name": "Raised Curb"
+}
