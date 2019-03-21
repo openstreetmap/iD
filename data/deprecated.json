@@ -157,6 +157,10 @@
       "replace": {"drinking_water": "$1"}
     },
     {
+      "old": {"dropped_kerb": "*"},
+      "replace": {"kerb": "lowered"}
+    },
+    {
       "old": {"escalator": "*"},
       "replace": {"highway": "steps", "conveying": "$1"}
     },
