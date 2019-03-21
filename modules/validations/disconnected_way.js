@@ -8,37 +8,80 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationDisconnectedWay() {
     var type = 'disconnected_way';
 
+    var highways = {
+        residential: true, service: true, track: true, unclassified: true, footway: true,
+        path: true, tertiary: true, secondary: true, primary: true, living_street: true,
+        cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
+        pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
+        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true,
+        bus_guideway: true
+    };
 
-    function isDisconnectedHighway(entity, graph) {
-        if (!entity.tags.highway ||
-            entity.tags.highway === 'no' ||
-            entity.tags.highway === 'proposed') return false;
-        if (entity.geometry(graph) !== 'line') return false;
+    function isTaggedAsHighway(entity) {
+        return highways[entity.tags.highway];
+    }
 
-        return graph.childNodes(entity)
-            .every(function(vertex) {
-                var parents = graph.parentWays(vertex);
-                if (parents.length === 1) {  // standalone vertex
-                    return true;
-                } else {                     // shared vertex
-                    return !vertex.tags.entrance &&
-                        parents.filter(function(parent) {
-                            return parent.tags.highway && parent !== entity;
-                        }).length === 0;
-                }
+    function vertexIsDisconnected(way, vertex, graph, relation) {
+        var parents = graph.parentWays(vertex);
+
+        // standalone vertex
+        if (parents.length === 1) return true;
+
+        // entrances are considered connected
+        if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return false;
+
+        return !parents.some(function(parentWay) {
+            // ignore the way we're testing
+            if (parentWay === way) return false;
+
+            if (isTaggedAsHighway(parentWay)) return true;
+
+            return graph.parentMultipolygons(parentWay).some(function(parentRelation) {
+                // ignore the relation we're testing, if any
+                if (relation && parentRelation === relation) return false;
+
+                return isTaggedAsHighway(parentRelation);
             });
+        });
+    }
+
+    function isDisconnectedWay(entity, graph) {
+
+        if (entity.type !== 'way') return false;
+
+        return graph.childNodes(entity).every(function(vertex) {
+            return vertexIsDisconnected(entity, vertex, graph);
+        });
+    }
+
+    function isDisconnectedMultipolygon(entity, graph) {
+
+        if (entity.type !== 'relation' || !entity.isMultipolygon()) return false;
+
+        return entity.members.every(function(member) {
+            if (member.type !== 'way') return true;
+
+            var way = graph.hasEntity(member.id);
+            if (!way) return true;
+
+            return graph.childNodes(way).every(function(vertex) {
+                return vertexIsDisconnected(way, vertex, graph, entity);
+            });
+        });
     }
 
 
     var validation = function(entity, context) {
         var graph = context.graph();
 
-        if (!isDisconnectedHighway(entity, graph)) return [];
+        if (!isTaggedAsHighway(entity)) return [];
+
+        if (!isDisconnectedWay(entity, graph) && !isDisconnectedMultipolygon(entity, graph)) return [];
 
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
 
-        if (!entity.isClosed()) {
+        if (entity.type === 'way' && !entity.isClosed()) {
             var first = context.entity(entity.first());
             if (first.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({
