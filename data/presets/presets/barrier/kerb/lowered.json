@@ -1,5 +1,9 @@
 {
     "icon": "maki-wheelchair",
+    "fields": [
+        "{barrier/kerb}",
+        "kerb/height"
+    ],
     "geometry": [
         "vertex",
         "line"

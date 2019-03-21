@@ -1,4 +1,8 @@
 {
+    "fields": [
+        "{barrier/kerb}",
+        "kerb/height"
+    ],
     "geometry": [
         "vertex",
         "line"

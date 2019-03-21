@@ -61,6 +61,10 @@
       "replace": {"shop": "*"}
     },
     {
+      "old": {"amenity": "sloped_curb"},
+      "replace": {"kerb": "lowered"}
+    },
+    {
       "old": {"amenity": "swimming_pool"},
       "replace": {"leisure": "swimming_pool"}
     },
@@ -145,6 +149,10 @@
       "replace": {"diet:vegetarian": "yes"}
     },
     {
+      "old": {"curb": "*"},
+      "replace": {"kerb": "$1"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },
@@ -214,6 +222,14 @@
     {
       "old": {"highway": "unsurfaced"},
       "replace": {"highway": "road", "incline": "unpaved"}
+    },
+    {
+      "old": {"kerb": "dropped"},
+      "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"kerb": "flat"},
+      "replace": {"kerb": "flush"}
     },
     {
       "old": {"landuse": "conservation"},
@@ -338,6 +354,50 @@
     {
       "old": {"shop": "real_estate"},
       "replace": {"office": "estate_agent"}
+    },
+    {
+      "old": {"sloped_curb": "0"},
+      "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"sloped_curb": "0.00"},
+      "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"sloped_curb": "0.01"},
+      "replace": {"kerb": "lowered", "kerb:height": "1 cm"}
+    },
+    {
+      "old": {"sloped_curb": "0.02"},
+      "replace": {"kerb": "lowered", "kerb:height": "2 cm"}
+    },
+    {
+      "old": {"sloped_curb": "0.03"},
+      "replace": {"kerb": "lowered", "kerb:height": "3 cm"}
+    },
+    {
+      "old": {"sloped_curb": "at_grade"},
+      "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"sloped_curb": "both"},
+      "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"sloped_curb": "flush"},
+      "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"sloped_curb": "low"},
+      "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"sloped_curb": "no"},
+      "replace": {"kerb": "raised"}
+    },
+    {
+      "old": {"sloped_curb": "yes"},
+      "replace": {"kerb": "lowered"}
     },
     {
       "old": {"tourism": "bed_and_breakfast"},
