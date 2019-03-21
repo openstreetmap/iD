@@ -4668,6 +4668,10 @@
                     "name": "Smoking Area",
                     "terms": ""
                 },
+                "amenity/social_centre": {
+                    "name": "Social Center",
+                    "terms": "event,fraternal,fraternity,hall,organization,professional,society,sorority,union,vetern"
+                },
                 "amenity/social_facility": {
                     "name": "Social Facility",
                     "terms": ""

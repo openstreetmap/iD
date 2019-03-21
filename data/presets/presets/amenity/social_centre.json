@@ -1,0 +1,37 @@
+{
+    "icon": "fas-handshake",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "event",
+        "fraternal",
+        "fraternity",
+        "hall",
+        "organization",
+        "professional",
+        "society",
+        "sorority",
+        "union",
+        "vetern"
+    ],
+    "tags": {
+        "amenity": "social_centre"
+    },
+    "name": "Social Center"
+}

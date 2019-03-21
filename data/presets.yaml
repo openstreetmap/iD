@@ -2933,6 +2933,11 @@ en:
         # amenity=smoking_area
         name: Smoking Area
         terms: '<translate with synonyms or related terms for ''Smoking Area'', separated by commas>'
+      amenity/social_centre:
+        # amenity=social_centre
+        name: Social Center
+        # 'terms: event,fraternal,fraternity,hall,organization,professional,society,sorority,union,vetern'
+        terms: '<translate with synonyms or related terms for ''Social Center'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility
         name: Social Facility
