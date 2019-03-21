@@ -230,7 +230,7 @@ export function uiSearchAdd(context) {
                 }
             }
             if (!nextFocus.empty()) {
-                focusListItem(nextFocus);
+                focusListItem(nextFocus, true);
                 priorFocus.classed('focused', false);
             }
 
@@ -253,7 +253,7 @@ export function uiSearchAdd(context) {
                     }
                 }
                 if (!nextFocus.empty()) {
-                    focusListItem(nextFocus);
+                    focusListItem(nextFocus, true);
                     priorFocus.classed('focused', false);
                 }
             }
@@ -282,17 +282,21 @@ export function uiSearchAdd(context) {
 
         popover.selectAll('.list .list-item.focused')
             .classed('focused', false);
-        focusListItem(popover.selectAll('.list > .list-item:first-child'));
+        focusListItem(popover.selectAll('.list > .list-item:first-child'), false);
+
+        popoverContent.node().scrollTop = 0;
 
         var resultCount = results.length;
         message.text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
-    function focusListItem(selection) {
+    function focusListItem(selection, scrollingToShow) {
         if (!selection.empty()) {
             selection.classed('focused', true);
-            // scroll to keep the focused item visible
-            scrollPopoverToShow(selection);
+            if (scrollingToShow) {
+                // scroll to keep the focused item visible
+                scrollPopoverToShow(selection);
+            }
         }
     }
 

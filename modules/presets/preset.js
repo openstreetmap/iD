@@ -128,9 +128,16 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return score;
     };
 
+    var _textCache = {};
 
     preset.t = function(scope, options) {
-        return t('presets.presets.' + id + '.' + scope, options);
+        var textID = 'presets.presets.' + id + '.' + scope;
+
+        if (_textCache[textID]) return _textCache[textID];
+
+        var text = t(textID, options);
+        _textCache[textID] = text;
+        return text;
     };
 
 
