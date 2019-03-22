@@ -132,6 +132,9 @@ export function coreValidator(context) {
         // other validations require feature to be tagged
         if (!runValidation('missing_tag')) return _issues;
 
+        // run outdated_tags early
+        runValidation('outdated_tags');
+
         if (entity.type === 'way') {
             runValidation('crossing_ways');
 

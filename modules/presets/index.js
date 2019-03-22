@@ -127,7 +127,8 @@ export function presetIndex(context) {
     all.areaKeys = function() {
         var areaKeys = {};
         var ignore = ['barrier', 'highway', 'footway', 'railway', 'type'];  // probably a line..
-        var presets = _reject(all.collection, 'suggestion');
+        // ignore name-suggestion-index and deprecated presets
+        var presets = _reject(_reject(all.collection, 'suggestion'), 'replacement');
 
         // whitelist
         presets.forEach(function(d) {

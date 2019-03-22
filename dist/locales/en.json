@@ -2872,6 +2872,9 @@
                 "incline": {
                     "label": "Incline"
                 },
+                "indoor_type": {
+                    "label": "Type"
+                },
                 "indoor": {
                     "label": "Indoor"
                 },
@@ -3384,6 +3387,9 @@
                 },
                 "ref_road_number": {
                     "label": "Road Number"
+                },
+                "ref_room_number": {
+                    "label": "Room Number"
                 },
                 "ref_route": {
                     "label": "Route Number"
@@ -3982,6 +3988,10 @@
                 },
                 "highway": {
                     "name": "Highway",
+                    "terms": ""
+                },
+                "indoor": {
+                    "name": "Indoor Feature",
                     "terms": ""
                 },
                 "landuse": {
@@ -5923,6 +5933,30 @@
                 "historic/wreck": {
                     "name": "Shipwreck",
                     "terms": "hull,mast,maritime,remains,ship,boat"
+                },
+                "indoor/corridor_line": {
+                    "name": "Indoor Corridor",
+                    "terms": ""
+                },
+                "indoor/area": {
+                    "name": "Indoor Area",
+                    "terms": "indoor space"
+                },
+                "indoor/corridor": {
+                    "name": "Indoor Corridor",
+                    "terms": "concourse,foyer,hallway,passageway"
+                },
+                "indoor/door": {
+                    "name": "Indoor Door",
+                    "terms": "doorframe,doorway,portal,room access,threshold"
+                },
+                "indoor/room": {
+                    "name": "Room",
+                    "terms": "antechamber,anteroom,atrium,cell,chamber,concourse,foyer,indoor room,lobby,vestibule"
+                },
+                "indoor/wall": {
+                    "name": "Indoor Wall",
+                    "terms": "indoor barrier,room divider,room partition"
                 },
                 "internet_access/wlan": {
                     "name": "Wi-Fi Hotspot",

@@ -850,6 +850,9 @@ en:
       indoor:
         # indoor=*
         label: Indoor
+      indoor_type:
+        # indoor=*
+        label: Type
       industrial:
         # industrial=*
         label: Type
@@ -1495,6 +1498,9 @@ en:
       ref_road_number:
         # ref=*
         label: Road Number
+      ref_room_number:
+        # ref=*
+        label: Room Number
       ref_route:
         # ref=*
         label: Route Number
@@ -4356,6 +4362,37 @@ en:
         name: Shipwreck
         # 'terms: hull,mast,maritime,remains,ship,boat'
         terms: '<translate with synonyms or related terms for ''Shipwreck'', separated by commas>'
+      indoor:
+        # indoor=*
+        name: Indoor Feature
+      indoor/area:
+        # indoor=area
+        name: Indoor Area
+        # 'terms: indoor space'
+        terms: '<translate with synonyms or related terms for ''Indoor Area'', separated by commas>'
+      indoor/corridor:
+        # indoor=corridor
+        name: Indoor Corridor
+        # 'terms: concourse,foyer,hallway,passageway'
+        terms: '<translate with synonyms or related terms for ''Indoor Corridor'', separated by commas>'
+      indoor/corridor_line:
+        # indoor=corridor
+        name: Indoor Corridor
+      indoor/door:
+        # indoor=door
+        name: Indoor Door
+        # 'terms: doorframe,doorway,portal,room access,threshold'
+        terms: '<translate with synonyms or related terms for ''Indoor Door'', separated by commas>'
+      indoor/room:
+        # indoor=room
+        name: Room
+        # 'terms: antechamber,anteroom,atrium,cell,chamber,concourse,foyer,indoor room,lobby,vestibule'
+        terms: '<translate with synonyms or related terms for ''Room'', separated by commas>'
+      indoor/wall:
+        # indoor=wall
+        name: Indoor Wall
+        # 'terms: indoor barrier,room divider,room partition'
+        terms: '<translate with synonyms or related terms for ''Indoor Wall'', separated by commas>'
       internet_access/wlan:
         # internet_access=wlan
         name: Wi-Fi Hotspot

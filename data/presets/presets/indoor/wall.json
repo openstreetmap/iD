@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-wall",
+    "fields": [
+        "level",
+        "height"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "indoor": "wall"
+    },
+    "terms": [
+        "indoor barrier",
+        "room divider",
+        "room partition"
+    ],
+    "name": "Indoor Wall"
+}

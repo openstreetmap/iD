@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "level",
+        "name",
+        "ref",
+        "height"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "corridor"
+    },
+    "terms": [
+        "concourse",
+        "foyer",
+        "hallway",
+        "passageway"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor Corridor"
+}
