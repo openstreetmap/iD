@@ -398,6 +398,87 @@ describe('iD.actionJoin', function () {
         expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd', e: 'e'});
     });
 
+    it('preserves sidedness of start segment, co-directional lines', function () {
+        // a -----> b =====> c
+        //   v v v
+        //
+        //  Expected result:
+        // a -----> b -----> c
+        //   v v v    v v v
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b'], tags: { natural: 'cliff' }}),
+            iD.osmWay({id: '=', nodes: ['b', 'c']})
+        ]);
+        graph = iD.actionJoin(['-', '='])(graph);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+    });
+
+    it('preserves sidedness of end segment, co-directional lines', function () {
+        // a -----> b =====> c
+        //            v v v
+        //
+        //  Expected result:
+        // a =====> b =====> c
+        //   v v v    v v v
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b']}),
+            iD.osmWay({id: '=', nodes: ['b', 'c'], tags: { natural: 'cliff' }})
+        ]);
+        graph = iD.actionJoin(['-', '='])(graph);
+        expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('=').tags).to.eql({ natural: 'cliff' });
+    });
+
+    it('preserves sidedness of start segment, contra-directional lines', function () {
+        // a -----> b <===== c
+        //   v v v
+        //
+        //  Expected result:
+        // a -----> b -----> c
+        //   v v v    v v v
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b'], tags: { natural: 'cliff' }}),
+            iD.osmWay({id: '=', nodes: ['c', 'b']})
+        ]);
+        graph = iD.actionJoin(['-', '='])(graph);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+    });
+
+    it('preserves sidedness of end segment, contra-directional lines', function () {
+        // a -----> b <===== c
+        //             v v v
+        //
+        //  Expected result:
+        // a <===== b <===== c
+        //    v v v    v v v
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b']}),
+            iD.osmWay({id: '=', nodes: ['c', 'b'], tags: { natural: 'cliff' }})
+        ]);
+        graph = iD.actionJoin(['-', '='])(graph);
+        expect(graph.entity('=').nodes).to.eql(['c', 'b', 'a']);
+        expect(graph.entity('=').tags).to.eql({ natural: 'cliff' });
+    });
+
+
     it('merges relations', function () {
         var graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),

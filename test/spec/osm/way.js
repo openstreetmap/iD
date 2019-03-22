@@ -356,6 +356,7 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { highway: 'motorway' }}).sidednessIdentifier()).to.be.null;
         });
     });
+
     describe('#isSided', function() {
         it('returns false when the way has no tags', function() {
             expect(iD.osmWay().isSided()).to.be.false;

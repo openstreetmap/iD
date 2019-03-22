@@ -150,12 +150,13 @@ _extend(osmWay.prototype, {
 
         return null;
     },
+
     isSided: function() {
         if (this.tags.two_sided === 'yes') {
             return false;
         }
 
-        return this.sidednessIdentifier() != null;
+        return this.sidednessIdentifier() !== null;
     },
 
     lanes: function() {

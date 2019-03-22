@@ -27,6 +27,16 @@ export function actionJoin(ids) {
         var ways = ids.map(graph.entity, graph);
         var survivorID = ways[0].id;
 
+        // if any of the ways are sided (e.g. coastline, cliff, kerb)
+        // sort them first so they establish the overall order - #6033
+        ways.sort(function(a, b) {
+            var aSided = a.isSided();
+            var bSided = b.isSided();
+            return (aSided && !bSided) ? -1
+                : (bSided && !aSided) ? 1
+                : 0;
+        });
+
         // Prefer to keep an existing way.
         for (var i = 0; i < ways.length; i++) {
             if (!ways[i].isNew()) {
