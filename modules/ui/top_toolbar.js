@@ -1,9 +1,14 @@
 
+import {
+    select as d3_select
+} from 'd3-selection';
+
+import _debounce from 'lodash-es/debounce';
+
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { uiFullScreen } from './full_screen';
 import { uiModes } from './modes';
 import { uiNotes } from './notes';
 import { uiSave } from './save';
@@ -14,18 +19,17 @@ import { uiUndoRedo } from './undo_redo';
 
 export function uiTopToolbar(context) {
 
+    var searchAdd = uiSearchAdd(context),
+        modes = uiModes(context),
+        notes = uiNotes(context),
+        undoRedo = uiUndoRedo(context),
+        save = uiSave(context);
 
-    function topToolbar(bar) {
+    var sidebarToggle = function(selection) {
 
-        // Leading area button group (Sidebar toggle)
-        var leadingArea = bar
-            .append('div')
-            .attr('class', 'tool-group leading-area');
-
-        var sidebarButton = leadingArea
-            .append('div')
+        selection
             .append('button')
-            .attr('class', 'sidebar-toggle bar-button')
+            .attr('class', 'bar-button')
             .attr('tabindex', -1)
             .on('click', function() {
                 context.ui().sidebar.toggle();
@@ -34,48 +38,69 @@ export function uiTopToolbar(context) {
                 .placement('bottom')
                 .html(true)
                 .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
-            );
+            )
+            .call(svgIcon('#iD-icon-sidebar-' + (textDirection === 'rtl' ? 'right' : 'left')));
+    };
 
-        var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
-        sidebarButton
-            .call(svgIcon('#iD-icon-sidebar-' + iconSuffix));
+    var itemContentByID = {
+        sidebar_toggle: sidebarToggle,
+        search_add: searchAdd,
+        modes: modes,
+        notes: notes,
+        undo_redo: undoRedo,
+        save: save
+    };
 
-        leadingArea
-            .append('div')
-            .attr('class', 'full-screen bar-group')
-            .call(uiFullScreen(context));
+    function notesEnabled() {
+        var noteLayer = context.layers().layer('notes');
+        return noteLayer && noteLayer.enabled();
+    }
 
+    function topToolbar(bar) {
 
-        // Center area button group (Point/Line/Area/Note mode buttons)
-        var centerArea = bar
-            .append('div')
-            .attr('class', 'tool-group center-area');
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        context.layers()
+            .on('change.topToolbar', debouncedUpdate);
 
-        var addArea = centerArea.append('div')
-            .attr('class', 'search-add');
+        update();
 
-        addArea.call(uiSearchAdd(context), bar);
-        addArea.call(uiModes(context), bar);
+        function update() {
 
-        centerArea.append('div')
-            .attr('class', 'notes')
-            .call(uiNotes(context), bar);
+            var toolbarItemIDs = [
+                'sidebar_toggle',
+                'spacer',
+                'search_add',
+                'modes',
+                'spacer'
+            ];
 
+            if (notesEnabled()) {
+                toolbarItemIDs = toolbarItemIDs.concat(['notes', 'spacer']);
+            }
 
-        // Trailing area button group (Undo/Redo save buttons)
-        var trailingArea = bar
-            .append('div')
-            .attr('class', 'tool-group trailing-area');
+            toolbarItemIDs = toolbarItemIDs.concat(['undo_redo', 'save']);
 
-        trailingArea
-            .append('div')
-            .attr('class', 'joined')
-            .call(uiUndoRedo(context));
+            var toolbarItems = bar.selectAll('.toolbar-item')
+                .data(toolbarItemIDs, function(d) {
+                    return d;
+                });
 
-        trailingArea
-            .append('div')
-            .attr('class', 'save-wrap')
-            .call(uiSave(context));
+            toolbarItems.exit()
+                .remove();
+
+            toolbarItems
+                .enter()
+                .append('div')
+                .attr('class', function(d) {
+                    return 'toolbar-item ' + d.replace('_', '-');
+                })
+                .each(function(d) {
+                    if (itemContentByID[d]) {
+                        d3_select(this).call(itemContentByID[d], bar);
+                    }
+                });
+        }
+
     }
 
     return topToolbar;

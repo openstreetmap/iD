@@ -436,39 +436,37 @@ button[disabled].action:hover {
     flex-flow: row nowrap;
     justify-content: space-between;
     position: absolute;
-    padding: 10px;
+    padding: 10px 5px 10px 5px;
     left: 0;
     top: 0;
     right: 0;
     height: 60px;
     z-index: 9;
 }
-
-.tool-group {
+#bar .toolbar-item {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
-    width: 100%;
+    justify-content: center;
+    position: relative;
 }
-.tool-group.leading-area {
+#bar .toolbar-item:not(.spacer) {
+    margin: 0 5px 0 5px;
+}
+#bar .toolbar-item.spacer {
+    width: 100%;
+    flex-grow: 2;
+}
+#bar .toolbar-item:first-child {
     justify-content: flex-start;
 }
-.tool-group.leading-area,
-.tool-group.trailing-area {
-    flex-shrink: 2;
-}
-.tool-group.center-area {
-    justify-content: center;
-}
-.tool-group.trailing-area {
+#bar .toolbar-item:last-child {
     justify-content: flex-end;
 }
-
-.tool-group > div:not(:empty) {
-    display: flex;
-    margin: 0 5px;
+#bar .toolbar-item:empty:not(.spacer) {
+    display: none;
 }
-.tool-group button.bar-button {
+button.bar-button {
     flex: 0 0 auto;
     flex-flow: row nowrap;
     align-items: center;
@@ -477,22 +475,22 @@ button[disabled].action:hover {
     white-space: nowrap;
     display: flex;
 }
-.tool-group button.bar-button .icon {
+button.bar-button .icon {
     flex: 0 0 20px;
 }
-.tool-group button.bar-button .label {
+button.bar-button .label {
     flex: 0 1 auto;
     padding: 0 5px;
 }
 
-.tool-group button.dragging {
+button.bar-button.dragging {
     opacity: 0.75;
     z-index: 200;
 }
-.tool-group button.dragging .tooltip {
+button.bar-button.dragging .tooltip {
     display: none;
 }
-.tool-group button.dragging.removing {
+button.bar-button.dragging.removing {
     cursor: url(img/cursor-select-remove.png), pointer;
 }
 
@@ -575,9 +573,6 @@ button.add-note svg.icon {
 }
 
 
-#bar.narrow .tool-group {
-    width: unset;
-}
 #bar.narrow .spinner,
 #bar.narrow button.bar-button .label {
     display: none;
@@ -587,19 +582,26 @@ button.add-note svg.icon {
     border-right-width: 0;
 }
 
+[dir='ltr'] .undo-redo > button:first-of-type {
+    margin-right: 1px;
+}
+[dir='rtl'] .undo-redo > button:first-of-type {
+    margin-left: 1px;
+}
+
 /* Add a feature search bar
 ------------------------------------------------------- */
 
 .search-add {
-    width: 100%;
+    width: 200%;
     justify-content: center;
     position: relative;
+    min-width: 150px;
+    max-width: 325px;
 }
 .search-add .search-wrap {
     position: relative;
     width: 100%;
-    min-width: 150px;
-    max-width: 325px;
 }
 [dir='ltr'] .search-add .search-wrap {
     border-radius: 20px 4px 4px 20px;
@@ -778,25 +780,29 @@ button.add-note svg.icon {
 [dir='rtl'] .search-add .subitems {
     padding-right: 6px;
 }
-.search-add button.add-preset {
+
+/* Add a preset mode buttons
+------------------------------------------------------- */
+
+button.bar-button.add-preset {
     border-radius: 4px;
 }
-[dir='ltr'] .search-add button.add-preset {
+[dir='ltr'] button.bar-button.add-preset {
     margin-left: 1px;
 }
-[dir='rtl'] .search-add button.add-preset {
+[dir='rtl'] button.bar-button.add-preset {
     margin-right: 1px;
 }
-[dir='ltr'] .search-add button.add-preset.first-recent {
-    margin-left: 5px;
+[dir='ltr'] button.bar-button.add-preset.first-recent {
+    margin-left: 10px;
 }
-[dir='rtl'] .search-add button.add-preset.first-recent {
-    margin-right: 5px;
+[dir='rtl'] button.bar-button.add-preset.first-recent {
+    margin-right: 10px;
 }
-.search-add button.add-preset {
+button.bar-button.add-preset {
     padding: 0;
 }
-.search-add button.add-preset.disabled .preset-icon-container {
+button.add-preset.disabled .preset-icon-container {
     opacity: 0.5;
 }
 /* Header for modals / panes
@@ -5064,10 +5070,10 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-button.sidebar-toggle .tooltip .tooltip-arrow {
+.sidebar-toggle .tooltip .tooltip-arrow {
     left: 36px;
 }
-[dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
+[dir='rtl'] .sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
     right: 36px;
 }

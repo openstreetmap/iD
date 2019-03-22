@@ -29,8 +29,18 @@ export function uiNotes(context) {
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
+    context.keybinding().on(mode.key, function() {
+        if (!enabled(mode)) return;
+
+        if (mode.id === context.mode().id) {
+            context.enter(modeBrowse(context));
+        } else {
+            context.enter(mode);
+        }
+    });
 
     return function(selection) {
+
         context
             .on('enter.editor.notes', function(entered) {
                 selection.selectAll('button.add-button')
@@ -44,16 +54,6 @@ export function uiNotes(context) {
                 context.container()
                     .classed('mode-' + exited.id, false);
             });
-
-        context.keybinding().on(mode.key, function() {
-            if (!enabled(mode)) return;
-
-            if (mode.id === context.mode().id) {
-                context.enter(modeBrowse(context));
-            } else {
-                context.enter(mode);
-            }
-        });
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
