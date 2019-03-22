@@ -1,5 +1,5 @@
 {
-    "icon": "iD-highway-track",
+    "icon": "fas-truck-monster",
     "fields": [
         "name",
         "tracktype",

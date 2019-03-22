@@ -413,10 +413,6 @@ path.line.casing.tag-service.tag-service {
 }
 
 /* unmaintained track roads */
-.preset-icon .icon.tag-highway-track {
-    color: #eaeaea;
-    fill: #c5b59f;
-}
 path.line.stroke.tag-highway-track,
 path.line.stroke.tag-track {
     stroke: #c5b59f;
