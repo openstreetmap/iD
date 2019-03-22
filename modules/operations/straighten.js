@@ -1,7 +1,5 @@
 import _uniq from 'lodash-es/uniq';
 import _difference from 'lodash-es/difference';
-import _includes from 'lodash-es/includes';
-import _filter from 'lodash-es/filter';
 
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
@@ -18,24 +16,21 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.available = function() {
-        var nodes = [],
-            startNodes = [],
-            endNodes = [],
-            selectedNodes = [];
+        var nodes = [];
+        var startNodes = [];
+        var endNodes = [];
+        var selectedNodes = [];
 
+        // collect nodes along selected ways
         for (var i = 0; i < selectedIDs.length; i++) {
             if (!context.hasEntity(selectedIDs[i])) return false;
 
             var entity = context.entity(selectedIDs[i]);
-
             if (entity.type === 'node') {
                 selectedNodes.push(entity.id);
                 continue;
-            }
-
-            if (entity.type !== 'way' ||
-                entity.isClosed()) {
-                return false;
+            } else if (entity.type !== 'way' || entity.isClosed()) {
+                return false;  // exit early, can't straighten these
             }
 
             nodes = nodes.concat(entity.nodes);
@@ -44,23 +39,26 @@ export function operationStraighten(selectedIDs, context) {
         }
 
         // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
-        startNodes = _filter(startNodes, function(n) {
+        startNodes = startNodes.filter(function(n) {
             return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
         });
-        endNodes = _filter(endNodes, function(n) {
+        endNodes = endNodes.filter(function(n) {
             return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
         });
 
         // Return false if line is only 2 nodes long
-        // Return false unless exactly 0 or 2 specific nodes are selected
-        if (_uniq(nodes).length <= 2 || !_includes([0,2], selectedNodes.length)) return false;
+        if (_uniq(nodes).length <= 2) return false;
+
+        // Return false unless exactly 0 or 2 specific start/end nodes are selected
+        if (!(selectedNodes.length === 0 || selectedNodes.length === 2)) return false;
 
         // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
         if (_difference(startNodes, endNodes).length + _difference(endNodes, startNodes).length !== 2) return false;
 
-        // Ensure both selected nodes lie on the selected path
-        if (selectedNodes.length && (!_includes(nodes, selectedNodes[0]) ||
-            !_includes(nodes, selectedNodes[1]))) return false;
+        // Ensure both start/end selected nodes lie on the selected path
+        if (selectedNodes.length === 2 && (
+            nodes.indexOf(selectedNodes[0]) === -1 || nodes.indexOf(selectedNodes[1]) === -1
+        )) return false;
 
         return true;
     };
