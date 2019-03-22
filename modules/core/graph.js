@@ -1,4 +1,3 @@
-import _assign from 'lodash-es/assign';
 import _difference from 'lodash-es/difference';
 import _includes from 'lodash-es/includes';
 import _without from 'lodash-es/without';
@@ -12,9 +11,9 @@ export function coreGraph(other, mutable) {
 
     if (other instanceof coreGraph) {
         var base = other.base();
-        this.entities = _assign(Object.create(base.entities), other.entities);
-        this._parentWays = _assign(Object.create(base.parentWays), other._parentWays);
-        this._parentRels = _assign(Object.create(base.parentRels), other._parentRels);
+        this.entities = Object.assign(Object.create(base.entities), other.entities);
+        this._parentWays = Object.assign(Object.create(base.parentWays), other._parentWays);
+        this._parentRels = Object.assign(Object.create(base.parentRels), other._parentRels);
 
     } else {
         this.entities = Object.create({});

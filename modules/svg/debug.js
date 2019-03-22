@@ -1,5 +1,3 @@
-import _values from 'lodash-es/values';
-
 import { select as d3_select } from 'd3-selection';
 
 import { data, dataImperial, dataDriveLeft } from '../../data';
@@ -94,7 +92,7 @@ export function svgDebug(projection, context) {
 
 
         var community = layer.selectAll('path.debug-community')
-            .data(showsCommunity ? _values(data.community.features) : []);
+            .data(showsCommunity ? Object.values(data.community.features) : []);
 
         community.exit()
             .remove();

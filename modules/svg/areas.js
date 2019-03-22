@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _values from 'lodash-es/values';
 
 import { bisector as d3_bisector } from 'd3-array';
 
@@ -214,7 +213,7 @@ export function svgAreas(projection, context) {
             }
         }
 
-        areas = _values(areas).filter(function hasPath(a) { return path(a.entity); });
+        areas = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
         areas.sort(function areaSort(a, b) { return b.area - a.area; });
         areas = _map(areas, 'entity');
 

@@ -10,7 +10,6 @@ import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
 import _reject from 'lodash-es/reject';
-import _values from 'lodash-es/values';
 import _without from 'lodash-es/without';
 import _uniq from 'lodash-es/uniq';
 
@@ -23,11 +22,7 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-
-import {
-    utilRebind,
-    utilSessionMutex
-} from '../util';
+import { utilRebind, utilSessionMutex } from '../util';
 
 
 export function coreHistory(context) {
@@ -472,8 +467,8 @@ export function coreHistory(context) {
 
             return JSON.stringify({
                 version: 3,
-                entities: _values(allEntities),
-                baseEntities: _values(baseEntities),
+                entities: Object.values(allEntities),
+                baseEntities: Object.values(baseEntities),
                 stack: s,
                 nextIDs: osmEntity.id.next,
                 index: _index

@@ -1,4 +1,3 @@
-import _assign from 'lodash-es/assign';
 import _forEach from 'lodash-es/forEach';
 
 import { json as d3_json } from 'd3-request';
@@ -63,7 +62,7 @@ export default {
             }
 
             var extent = geoExtent(location).padByMeters(200);
-            nominatimCache.insert(_assign(extent.bbox(), {data: result}));
+            nominatimCache.insert(Object.assign(extent.bbox(), {data: result}));
 
             callback(null, result);
         });

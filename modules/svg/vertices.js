@@ -1,6 +1,3 @@
-import _assign from 'lodash-es/assign';
-import _values from 'lodash-es/values';
-
 import { select as d3_select } from 'd3-selection';
 
 import { geoScaleToZoom } from '../geo';
@@ -368,7 +365,7 @@ export function svgVertices(projection, context) {
             hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
         };
 
-        var all = _assign({}, (isMoving ? _currHover : {}), _currSelected, _currPersistent);
+        var all = Object.assign({}, (isMoving ? _currHover : {}), _currSelected, _currPersistent);
 
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
@@ -406,7 +403,7 @@ export function svgVertices(projection, context) {
 
         // note that drawVertices will add `_currSelected` automatically if needed..
         var filter = function(d) { return d.id in _prevSelected; };
-        drawVertices(selection, graph, _values(_prevSelected), filter, extent, false);
+        drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
     };
 
 
@@ -429,7 +426,7 @@ export function svgVertices(projection, context) {
 
         // note that drawVertices will add `_currHover` automatically if needed..
         var filter = function(d) { return d.id in _prevHover; };
-        drawVertices(selection, graph, _values(_prevHover), filter, extent, false);
+        drawVertices(selection, graph, Object.values(_prevHover), filter, extent, false);
     };
 
     return drawVertices;

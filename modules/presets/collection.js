@@ -2,7 +2,6 @@ import _find from 'lodash-es/find';
 import _findIndex from 'lodash-es/findIndex';
 import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
-import _values from 'lodash-es/values';
 import _without from 'lodash-es/without';
 
 import { utilEditDistance } from '../util/index';
@@ -108,7 +107,7 @@ export function presetCollection(collection) {
             // matches value to preset.tags values
             var leading_tag_values = searchable
                 .filter(function(a) {
-                    return _some(_without(_values(a.tags || {}), '*'), leading);
+                    return _some(_without(Object.values(a.tags || {}), '*'), leading);
                 });
 
             var leading_suggestions = suggestions

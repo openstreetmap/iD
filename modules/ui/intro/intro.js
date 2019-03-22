@@ -1,6 +1,5 @@
 import _difference from 'lodash-es/difference';
 import _uniq from 'lodash-es/uniq';
-import _values from 'lodash-es/values';
 
 import {
     select as d3_select,
@@ -86,7 +85,7 @@ export function uiIntro(context) {
         // Load semi-real data used in intro
         if (osm) { osm.toggle(false).reset(); }
         context.history().reset();
-        context.history().merge(_values(coreGraph().load(introGraph).entities));
+        context.history().merge(Object.values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
 
         // Setup imagery
@@ -165,7 +164,7 @@ export function uiIntro(context) {
             d3_selectAll('#map .layer-background').style('opacity', opacity);
             d3_selectAll('button.sidebar-toggle').classed('disabled', false);
             if (osm) { osm.toggle(true).reset().caches(caches); }
-            context.history().reset().merge(_values(baseEntities));
+            context.history().reset().merge(Object.values(baseEntities));
             context.background().baseLayerSource(background);
             overlays.forEach(function(d) { context.background().toggleOverlayLayer(d); });
             if (history) { context.history().fromJSON(history, false); }

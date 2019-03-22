@@ -1,4 +1,3 @@
-import _assign from 'lodash-es/assign';
 import _omit from 'lodash-es/omit';
 import _throttle from 'lodash-es/throttle';
 
@@ -6,11 +5,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes';
-
-import {
-    utilQsString,
-    utilStringQs
-} from '../util';
+import { utilQsString, utilStringQs } from '../util';
 
 
 export function behaviorHash(context) {
@@ -62,7 +57,7 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
-        return '#' + utilQsString(_assign(q, newParams), true);
+        return '#' + utilQsString(Object.assign(q, newParams), true);
     };
 
 

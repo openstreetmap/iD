@@ -1,7 +1,6 @@
 import _intersection from 'lodash-es/intersection';
 import _map from 'lodash-es/map';
 import _uniq from 'lodash-es/uniq';
-import _values from 'lodash-es/values';
 import _without from 'lodash-es/without';
 
 import {
@@ -241,7 +240,7 @@ export function modeSelect(context, selectedIDs) {
 
         context.features().forceVisible(selectedIDs);
 
-        var operations = _without(_values(Operations), Operations.operationDelete)
+        var operations = _without(Object.values(Operations), Operations.operationDelete)
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available(); });
 

@@ -1,7 +1,6 @@
 import _difference from 'lodash-es/difference';
 import _each from 'lodash-es/each';
 import _isEqual from 'lodash-es/isEqual';
-import _values from 'lodash-es/values';
 
 
 /*
@@ -167,7 +166,7 @@ export function coreDifference(base, head) {
             }
         }
 
-        return _values(relevant);
+        return Object.values(relevant);
     };
 
 

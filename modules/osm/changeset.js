@@ -1,9 +1,7 @@
-import _compact from 'lodash-es/compact';
 import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
-import _values from 'lodash-es/values';
 
 import { osmEntity } from './entity';
 import { geoExtent } from '../geo';
@@ -106,7 +104,7 @@ _extend(osmChangeset.prototype, {
 
                 while (processing.length > 0) {
                     var next = processing[0],
-                    deps = _filter(_compact(next.member.map(resolve)), isNew);
+                    deps = _filter(next.member.map(resolve).filter(Boolean), isNew);
                     if (deps.length === 0) {
                         sorted[next['@id']] = next;
                         processing.shift();
@@ -116,7 +114,7 @@ _extend(osmChangeset.prototype, {
                 }
             }
 
-            changes.relation = _values(sorted);
+            changes.relation = Object.values(sorted);
             return changes;
         }
 

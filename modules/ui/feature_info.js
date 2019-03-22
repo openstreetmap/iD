@@ -1,6 +1,3 @@
-import _compact from 'lodash-es/compact';
-import _map from 'lodash-es/map';
-
 import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
@@ -10,15 +7,15 @@ import { tooltip } from '../util/tooltip';
 
 export function uiFeatureInfo(context) {
     function update(selection) {
-        var features = context.features(),
-            stats = features.stats(),
-            count = 0,
-            hiddenList = _compact(_map(features.hidden(), function(k) {
-                if (stats[k]) {
-                    count += stats[k];
-                    return String(stats[k]) + ' ' + t('feature.' + k + '.description');
-                }
-            }));
+        var features = context.features();
+        var stats = features.stats();
+        var count = 0;
+        var hiddenList = features.hidden().map(function(k) {
+            if (stats[k]) {
+                count += stats[k];
+                return String(stats[k]) + ' ' + t('feature.' + k + '.description');
+            }
+        }).filter(Boolean);
 
         selection.html('');
 

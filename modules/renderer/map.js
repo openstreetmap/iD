@@ -1,7 +1,5 @@
-import _compact from 'lodash-es/compact';
 import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
-import _values from 'lodash-es/values';
 
 import { set as d3_set } from 'd3-collection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -207,7 +205,7 @@ export function rendererMap(context) {
                         }
                     }
                 });
-                var data = _values(selectedAndParents);
+                var data = Object.values(selectedAndParents);
                 var filter = function(d) { return d.id in selectedAndParents; };
 
                 data = context.features().filter(data, graph);
@@ -279,7 +277,7 @@ export function rendererMap(context) {
 
         if (difference) {
             var complete = difference.complete(map.extent());
-            data = _compact(_values(complete));
+            data = Object.values(complete).filter(Boolean);
             filter = function(d) { return d.id in complete; };
             features.clear(data);
 
