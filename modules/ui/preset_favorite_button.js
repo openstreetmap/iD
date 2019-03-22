@@ -6,7 +6,7 @@ import {
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 
-export function uiPresetFavorite(preset, geom, context, klass) {
+export function uiPresetFavoriteButton(preset, geom, context, klass) {
 
     geom = context.presets().fallback(geom).id;
 
@@ -17,7 +17,7 @@ export function uiPresetFavorite(preset, geom, context, klass) {
 
     presetFavorite.button = function(selection) {
 
-        var canFavorite = geom !== 'relation';
+        var canFavorite = geom !== 'relation' && preset.searchable !== false;
 
         _button = selection.selectAll('.preset-favorite-button')
             .data(canFavorite ? [0] : []);

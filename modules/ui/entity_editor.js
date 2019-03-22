@@ -14,7 +14,7 @@ import { tooltip } from '../util/tooltip';
 import { actionChangeTags } from '../actions';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
-import { uiPresetFavorite } from './preset_favorite';
+import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
@@ -341,7 +341,7 @@ export function uiEntityEditor(context) {
             _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
         }
-        _presetFavorite = uiPresetFavorite(_activePreset, context.geometry(_entityID), context);
+        _presetFavorite = uiPresetFavoriteButton(_activePreset, context.geometry(_entityID), context);
         return entityEditor;
     };
 

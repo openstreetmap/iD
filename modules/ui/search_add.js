@@ -19,7 +19,7 @@ import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
 import { uiTooltipHtml } from './tooltipHtml';
-import { uiPresetFavorite } from './preset_favorite';
+import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
@@ -437,7 +437,7 @@ export function uiSearchAdd(context) {
 
         row.each(function(d) {
             if (d.geometry) {
-                var presetFavorite = uiPresetFavorite(d.preset, d.geometry, context, 'accessory');
+                var presetFavorite = uiPresetFavoriteButton(d.preset, d.geometry, context, 'accessory');
                 d3_select(this).call(presetFavorite.button);
             }
         });
