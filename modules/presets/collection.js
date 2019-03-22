@@ -1,5 +1,3 @@
-import _find from 'lodash-es/find';
-import _findIndex from 'lodash-es/findIndex';
 import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 import _without from 'lodash-es/without';
@@ -16,13 +14,13 @@ export function presetCollection(collection) {
 
 
         item: function(id) {
-            return _find(this.collection, function(d) {
+            return this.collection.find(function(d) {
                 return d.id === id;
             });
         },
 
         index: function(id) {
-            return _findIndex(this.collection, function(d) {
+            return this.collection.findIndex(function(d) {
                 return d.id === id;
             });
         },

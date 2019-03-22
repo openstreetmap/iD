@@ -1,5 +1,4 @@
 import _filter from 'lodash-es/filter';
-import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
 import _reject from 'lodash-es/reject';
 import _remove from 'lodash-es/remove';
@@ -75,7 +74,7 @@ export function uiFieldCombo(field, context) {
         dval = clean(dval || '');
 
         if (optstrings) {
-            var found = _find(_comboData, function(o) {
+            var found = _comboData.find(function(o) {
                 return o.key && clean(o.value) === dval;
             });
             if (found) {
@@ -97,7 +96,9 @@ export function uiFieldCombo(field, context) {
         tval = tval || '';
 
         if (optstrings) {
-            var found = _find(_comboData, function(o) { return o.key === tval && o.value; });
+            var found = _comboData.find(function(o) {
+                return o.key === tval && o.value;
+            });
             if (found) {
                 return found.value;
             }

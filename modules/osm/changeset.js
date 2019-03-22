@@ -1,6 +1,5 @@
 import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
-import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
 
 import { osmEntity } from './entity';
@@ -75,7 +74,7 @@ _extend(osmChangeset.prototype, {
 
             // find a referenced relation in the current changeset
             function resolve(item) {
-                return _find(relations, function(relation) {
+                return relations.find(function(relation) {
                     return item.keyAttributes.type === 'relation'
                         && item.keyAttributes.ref === relation['@id'];
                 });
@@ -83,14 +82,14 @@ _extend(osmChangeset.prototype, {
 
             // a new item is an item that has not been already processed
             function isNew(item) {
-                return !sorted[ item['@id'] ] && !_find(processing, function(proc) {
+                return !sorted[ item['@id'] ] && !processing.find(function(proc) {
                     return proc['@id'] === item['@id'];
                 });
             }
 
-            var processing = [],
-                sorted = {},
-                relations = changes.relation;
+            var processing = [];
+            var sorted = {};
+            var relations = changes.relation;
 
             if (!relations) return changes;
 

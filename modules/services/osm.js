@@ -2,7 +2,6 @@ import _chunk from 'lodash-es/chunk';
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
-import _find from 'lodash-es/find';
 import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
@@ -79,7 +78,7 @@ function abortRequest(i) {
 
 function abortUnwantedRequests(cache, tiles) {
     _forEach(cache.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k === tile.id; });
+        var wanted = tiles.find(function(tile) { return k === tile.id; });
         if (!wanted) {
             abortRequest(v);
             delete cache.inflight[k];

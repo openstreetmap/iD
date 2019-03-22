@@ -1,4 +1,3 @@
-import _find from 'lodash-es/find';
 import _includes from 'lodash-es/includes';
 import _reduce from 'lodash-es/reduce';
 import _uniqBy from 'lodash-es/uniqBy';
@@ -115,7 +114,7 @@ export function uiFieldAddress(field, context) {
     function countryCallback(err, countryCode) {
         if (err) return;
 
-        var addressFormat = _find(dataAddressFormats, function (a) {
+        var addressFormat = dataAddressFormats.find(function (a) {
             return a && a.countryCodes && _includes(a.countryCodes, countryCode.toLowerCase());
         }) || dataAddressFormats[0];
 

@@ -1,5 +1,3 @@
-import _find from 'lodash-es/find';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -302,7 +300,7 @@ export function uiFieldLocalized(field, context) {
             if (_isLocked) return;
 
             var defaultLang = utilDetect().locale.toLowerCase().split('-')[0];
-            var langExists = _find(_multilingual, function(datum) { return datum.lang === defaultLang;});
+            var langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
             var isLangEn = defaultLang.indexOf('en') > -1;
             if (isLangEn || langExists) {
                 defaultLang = '';
@@ -336,7 +334,7 @@ export function uiFieldLocalized(field, context) {
     function changeLang(d) {
         var lang = utilGetSetValue(d3_select(this));
         var t = {};
-        var language = _find(dataWikipedia, function(d) {
+        var language = dataWikipedia.find(function(d) {
             return d[0].toLowerCase() === lang.toLowerCase() ||
                 d[1].toLowerCase() === lang.toLowerCase();
         });
@@ -467,7 +465,7 @@ export function uiFieldLocalized(field, context) {
         var entry = selection.selectAll('.entry');
 
         utilGetSetValue(entry.select('.localized-lang'), function(d) {
-            var lang = _find(dataWikipedia, function(lang) { return lang[2] === d.lang; });
+            var lang = dataWikipedia.find(function(lang) { return lang[2] === d.lang; });
             return lang ? lang[1] : d.lang;
         });
 

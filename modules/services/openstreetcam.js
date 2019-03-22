@@ -1,4 +1,3 @@
-import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
 import _union from 'lodash-es/union';
 
@@ -20,13 +19,7 @@ import rbush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilDetect } from '../util/detect';
-
-import {
-    utilQsString,
-    utilRebind,
-    utilSetTransform,
-    utilTiler
-} from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
 
 
 var apibase = 'https://openstreetcam.org';
@@ -65,8 +58,7 @@ function loadTiles(which, url, projection) {
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];
     _forEach(cache.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
-
+        var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
             abortRequest(v);
             delete cache.inflight[k];

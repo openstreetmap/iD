@@ -1,5 +1,4 @@
 import _clone from 'lodash-es/clone';
-import _find from 'lodash-es/find';
 import _isEqual from 'lodash-es/isEqual';
 import _forEach from 'lodash-es/forEach';
 
@@ -194,8 +193,7 @@ export default {
 
         // abort inflight requests that are no longer needed
         _forEach(source.inflight, function(v, k) {
-            var wanted = _find(tiles, function(tile) { return k === tile.id; });
-
+            var wanted = tiles.find(function(tile) { return k === tile.id; });
             if (!wanted) {
                 abortRequest(v);
                 delete source.inflight[k];

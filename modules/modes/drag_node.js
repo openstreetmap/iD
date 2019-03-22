@@ -1,4 +1,3 @@
-import _find from 'lodash-es/find';
 import _intersection from 'lodash-es/intersection';
 
 import {
@@ -311,7 +310,7 @@ export function modeDragNode(context) {
                 // find active ring and test it for self intersections
                 for (k = 0; k < rings.length; k++) {
                     nodes = rings[k].nodes;
-                    if (_find(nodes, function(n) { return n.id === entity.id; })) {
+                    if (nodes.find(function(n) { return n.id === entity.id; })) {
                         activeIndex = k;
                         if (geoHasSelfIntersections(nodes, entity.id)) {
                             return true;

@@ -1,5 +1,3 @@
-import _find from 'lodash-es/find';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
@@ -277,7 +275,7 @@ export function rendererBackground(context) {
 
 
     background.findSource = function(id) {
-        return _find(_backgroundSources, function(d) {
+        return _backgroundSources.find(function(d) {
             return d.id && d.id === id;
         });
     };
@@ -441,7 +439,7 @@ export function rendererBackground(context) {
 
         // Decide which background layer to display
         if (!requested && extent) {
-            best = _find(this.sources(extent), function(s) { return s.best(); });
+            best = this.sources(extent).find(function(s) { return s.best(); });
         }
         if (requested && requested.indexOf('custom:') === 0) {
             template = requested.replace(/^custom:/, '');
@@ -458,7 +456,7 @@ export function rendererBackground(context) {
             );
         }
 
-        var locator = _find(_backgroundSources, function(d) {
+        var locator = _backgroundSources.find(function(d) {
             return d.overlay && d.default;
         });
 

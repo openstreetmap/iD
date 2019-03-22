@@ -1,6 +1,4 @@
-
 import _difference from 'lodash-es/difference';
-import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
 import _reject from 'lodash-es/reject';
 
@@ -78,7 +76,7 @@ export function svgLayers(projection, context) {
 
 
     drawLayers.layer = function(id) {
-        var obj = _find(layers, function(o) {return o.id === id;});
+        var obj = layers.find(function(o) {return o.id === id;});
         return obj && obj.layer;
     };
 

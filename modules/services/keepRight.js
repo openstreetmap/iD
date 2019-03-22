@@ -1,5 +1,4 @@
 import _extend from 'lodash-es/extend';
-import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
 
 import rbush from 'rbush';
@@ -42,9 +41,7 @@ function abortRequest(i) {
 
 function abortUnwantedRequests(cache, tiles) {
     _forEach(cache.inflightTile, function(v, k) {
-        var wanted = _find(tiles, function(tile) {
-            return k === tile.id;
-        });
+        var wanted = tiles.find(function(tile) { return k === tile.id; });
         if (!wanted) {
             abortRequest(v);
             delete cache.inflightTile[k];

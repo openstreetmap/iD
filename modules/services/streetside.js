@@ -1,5 +1,4 @@
 import _extend from 'lodash-es/extend';
-import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
 import _union from 'lodash-es/union';
 
@@ -84,8 +83,7 @@ function loadTiles(which, url, projection, margin) {
     // abort inflight requests that are no longer needed
     var cache = _ssCache[which];
     _forEach(cache.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
-
+        var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
             abortRequest(v);
             delete cache.inflight[k];

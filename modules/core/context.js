@@ -1,7 +1,6 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _debounce from 'lodash-es/debounce';
 import _each from 'lodash-es/each';
-import _find from 'lodash-es/find';
 import _forOwn from 'lodash-es/forOwn';
 import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
@@ -145,7 +144,7 @@ export function coreContext() {
         if (zoomTo !== false) {
             this.loadEntity(entityID, function(err, result) {
                 if (err) return;
-                var entity = _find(result.data, function(e) { return e.id === entityID; });
+                var entity = result.data.find(function(e) { return e.id === entityID; });
                 if (entity) {
                     map.zoomTo(entity);
                 }
