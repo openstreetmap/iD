@@ -96,13 +96,14 @@ export function uiBackgroundDisplayOptions(context) {
             })
             .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
-        //reset all button
-        containerEnter.append('button')
-            .append('text')
+        // reset all button
+        containerEnter
+            .append('a')
+            .attr('class', 'display-option-resetlink')
+            .attr('href', '#')
             .text(t('background.reset_all'))
-            .attr('class', 'display-option-reset display-option-reset')
             .on('click', function() {
-                for (var i=0; i< sliders.length; i++) {
+                for (var i = 0; i < sliders.length; i++) {
                     updateValue(sliders[i],1);
                 }
             });
