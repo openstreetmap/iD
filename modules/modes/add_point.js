@@ -1,5 +1,3 @@
-import _clone from 'lodash-es/clone';
-
 import { t } from '../util/locale';
 import { actionAddEntity, actionChangeTags } from '../actions';
 import { behaviorDraw } from '../behavior';
@@ -37,7 +35,7 @@ export function modeAddPoint(context, mode) {
 
 
     function addWay(loc, edge) {
-        var node =  osmNode({ tags: defaultTags });
+        var node = osmNode({ tags: defaultTags });
 
         context.perform(
             actionAddMidpoint({loc: loc, edge: edge}, node),
@@ -55,13 +53,12 @@ export function modeAddPoint(context, mode) {
 
 
     function addNode(node) {
-
         if (Object.keys(defaultTags).length === 0) {
             enterSelectMode(node);
             return;
         }
 
-        var tags = _clone(node.tags);
+        var tags = Object.assign({}, node.tags);  // shallow copy
         for (var key in defaultTags) {
             tags[key] = defaultTags[key];
         }

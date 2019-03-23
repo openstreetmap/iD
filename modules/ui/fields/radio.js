@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _pull from 'lodash-es/pull';
 import _union from 'lodash-es/union';
 
@@ -19,7 +18,7 @@ export function uiFieldRadio(field, context) {
     var wrap = d3_select(null);
     var labels = d3_select(null);
     var radios = d3_select(null);
-    var radioData = _clone(field.options || field.keys);
+    var radioData = (field.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
     var _oldType = {};

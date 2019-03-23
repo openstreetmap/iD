@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import { filters } from 'name-suggestion-index';
 
 import { t } from '../util/locale';
@@ -67,7 +66,7 @@ export function validationGenericName() {
                     title: t('issues.fix.remove_generic_name.title'),
                     onClick: function() {
                         var entity = this.issue.entities[0];
-                        var tags = _clone(entity.tags);
+                        var tags = Object.assign({}, entity.tags);   // shallow copy
                         delete tags.name;
                         context.perform(
                             actionChangeTags(entity.id, tags),

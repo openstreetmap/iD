@@ -1,10 +1,9 @@
-import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 import { presetCollection } from './collection';
 
 
 export function presetCategory(id, category, all) {
-    category = _clone(category);
+    category = Object.assign({}, category);   // shallow copy
 
     category.id = id;
 

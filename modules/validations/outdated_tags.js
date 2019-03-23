@@ -1,9 +1,8 @@
-import _clone from 'lodash-es/clone';
-
 import { t } from '../util/locale';
 import { actionUpgradeTags, actionChangeTags, actionChangePreset } from '../actions';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
+
 
 export function validationOutdatedTags() {
     var type = 'outdated_tags';
@@ -24,7 +23,6 @@ export function validationOutdatedTags() {
 
 
     var validation = function(entity, context) {
-
         var replacementPresetID = context.presets().match(entity, context.graph()).replacement;
         var deprecatedTagsArray = entity.deprecatedTags();
         var missingTags = missingRecommendedTags(entity, context, context.graph());
@@ -63,7 +61,7 @@ export function validationOutdatedTags() {
                                     graph = actionUpgradeTags(entityID, deprecatedTags.old, deprecatedTags.replace)(graph);
                                 });
                                 var missingTags = missingRecommendedTags(graph.entity(entityID), context, graph);
-                                var tags = _clone(graph.entity(entityID).tags);
+                                var tags = Object.assign({}, graph.entity(entityID).tags);  // shallow copy
                                 for (var key in missingTags) {
                                     tags[key] = missingTags[key];
                                 }

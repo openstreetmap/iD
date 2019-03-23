@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
@@ -166,7 +165,7 @@ export function modeSave(context) {
                     }
                 }
                 return result;
-            }, _clone(ids)));
+            }, ids.slice()));   // shallow copy
         }
 
 

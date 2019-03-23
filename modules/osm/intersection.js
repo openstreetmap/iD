@@ -1,23 +1,11 @@
-import _clone from 'lodash-es/clone';
 import _difference from 'lodash-es/difference';
 import _extend from 'lodash-es/extend';
 import _uniq from 'lodash-es/uniq';
 
-import {
-    actionDeleteRelation,
-    actionReverse,
-    actionSplit
-} from '../actions';
-
+import { actionDeleteRelation, actionReverse, actionSplit } from '../actions';
 import { coreGraph } from '../core';
-
-import {
-    geoAngle,
-    geoSphericalDistance
-} from '../geo';
-
+import { geoAngle, geoSphericalDistance } from '../geo';
 import { osmEntity } from './entity';
-
 
 
 export function osmTurn(turn) {
@@ -373,10 +361,10 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
         // traverse the intersection graph and find all the valid paths
         function step(entity, currPath, currRestrictions, matchedRestriction) {
-            currPath = _clone(currPath || []);
+            currPath = (currPath || []).slice();  // shallow copy
             if (currPath.length >= maxPathLength) return;
             currPath.push(entity.id);
-            currRestrictions = _clone(currRestrictions || []);
+            currRestrictions = (currRestrictions || []).slice();  // shallow copy
             var i, j;
 
             if (entity.type === 'node') {
@@ -469,7 +457,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
             } else {  // entity.type === 'way'
                 if (currPath.length >= 3) {     // this is a "complete" path..
-                    var turnPath = _clone(currPath);
+                    var turnPath = currPath.slice();   // shallow copy
 
                     // an indirect restriction - only include the partial path (starting at FROM)
                     if (matchedRestriction && matchedRestriction.direct === false) {

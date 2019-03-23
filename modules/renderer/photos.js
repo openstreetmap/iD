@@ -1,35 +1,32 @@
-import _clone from 'lodash-es/clone';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { utilRebind } from '../util/rebind';
 import { utilQsString, utilStringQs } from '../util';
 
+
 export function rendererPhotos(context) {
-
     var dispatch = d3_dispatch('change');
-
     var _layerIDs = ['streetside', 'mapillary', 'mapillary-signs', 'openstreetcam'];
     var _allPhotoTypes = ['flat', 'panoramic'];
-    var _shownPhotoTypes = _clone(_allPhotoTypes);
+    var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
 
     function photos() {}
 
     function updateStorage() {
-        if (!window.mocha) {
-            var q = utilStringQs(window.location.hash.substring(1));
-            var enabled = context.layers().all().filter(function(d) {
-                return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
-            }).map(function(d) {
-                return d.id;
-            });
-            if (enabled.length) {
-                q.photo_overlay = enabled.join(',');
-            } else {
-                delete q.photo_overlay;
-            }
-            window.location.replace('#' + utilQsString(q, true));
+        if (window.mocha) return;
+
+        var q = utilStringQs(window.location.hash.substring(1));
+        var enabled = context.layers().all().filter(function(d) {
+            return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
+        }).map(function(d) {
+            return d.id;
+        });
+        if (enabled.length) {
+            q.photo_overlay = enabled.join(',');
+        } else {
+            delete q.photo_overlay;
         }
+        window.location.replace('#' + utilQsString(q, true));
     }
 
     photos.overlayLayerIDs = function() {

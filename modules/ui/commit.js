@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _forEach from 'lodash-es/forEach';
 import _isEqual from 'lodash-es/isEqual';
 import _unionBy from 'lodash-es/unionBy';
@@ -93,7 +92,7 @@ export function uiCommit(context) {
             _changeset = new osmChangeset({ tags: tags });
         }
 
-        tags = _clone(_changeset.tags);
+        tags = Object.assign({}, _changeset.tags);   // shallow copy
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
@@ -316,7 +315,7 @@ export function uiCommit(context) {
             .call(rawTagEditor
                 .expanded(expanded)
                 .readOnlyTags(readOnlyTags)
-                .tags(_clone(_changeset.tags))
+                .tags(Object.assign({}, _changeset.tags))   // shallow copy
             );
 
 
@@ -333,7 +332,7 @@ export function uiCommit(context) {
                 .call(rawTagEditor
                     .expanded(expanded)
                     .readOnlyTags(readOnlyTags)
-                    .tags(_clone(_changeset.tags))
+                    .tags(Object.assign({}, _changeset.tags))   // shallow copy
                 );
         }
     }
@@ -424,7 +423,7 @@ export function uiCommit(context) {
 
 
     function updateChangeset(changed, onInput) {
-        var tags = _clone(_changeset.tags);
+        var tags = Object.assign({}, _changeset.tags);   // shallow copy
 
         _forEach(changed, function(v, k) {
             k = k.trim().substr(0, 255);

@@ -1,5 +1,3 @@
-import _clone from 'lodash-es/clone';
-
 import { actionChangeTags } from '../actions';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
@@ -74,7 +72,7 @@ export function validationPrivateData() {
                     title: t('issues.fix.' + fixID + '.title'),
                     onClick: function() {
                         var entity = this.issue.entities[0];
-                        var tags = _clone(entity.tags);
+                        var tags = Object.assign({}, entity.tags);   // shallow copy
                         var privateKeys = this.issue.info.privateKeys;
                         for (var index in privateKeys) {
                             delete tags[privateKeys[index]];

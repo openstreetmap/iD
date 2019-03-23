@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _groupBy from 'lodash-es/groupBy';
 import _omit from 'lodash-es/omit';
 
@@ -177,7 +176,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
                 }
             }
 
-            var item = _clone(arr[i]);
+            var item = Object.assign({}, arr[i]);   // shallow copy
             arr[i].index = -1;   // mark as dead
             item.index = toIndex;
             arr.splice(toIndex, 0, item);
@@ -189,7 +188,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         function withIndex(arr) {
             var result = new Array(arr.length);
             for (var i = 0; i < arr.length; i++) {
-                result[i] = _clone(arr[i]);
+                result[i] = Object.assign({}, arr[i]);   // shallow copy
                 result[i].index = i;
             }
             return result;

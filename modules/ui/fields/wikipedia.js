@@ -1,5 +1,3 @@
-import _clone from 'lodash-es/clone';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -209,7 +207,7 @@ export function uiFieldWikipedia(field, context) {
 
             var qids = Object.keys(data);
             var value = qids && qids.find(function(id) { return id.match(/^Q\d+$/); });
-            var currTags = _clone(context.entity(initEntityID).tags);
+            var currTags = Object.assign({}, context.entity(initEntityID).tags);  // shallow copy
 
             currTags.wikidata = value;
 

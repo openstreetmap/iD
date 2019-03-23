@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _omit from 'lodash-es/omit';
 import _uniq from 'lodash-es/uniq';
 
@@ -7,7 +6,7 @@ import { areaKeys } from '../core/context';
 
 
 export function presetPreset(id, preset, fields, visible, rawPresets) {
-    preset = _clone(preset);
+    preset = Object.assign({}, preset);   // shallow copy
 
     preset.id = id;
 
@@ -225,7 +224,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         var addTags = preset.addTags;
         var k;
 
-        tags = _clone(tags);
+        tags = Object.assign({}, tags);   // shallow copy
 
         for (k in addTags) {
             if (addTags[k] === '*') {

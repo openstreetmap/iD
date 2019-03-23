@@ -1,9 +1,8 @@
-import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 
 
 export function presetField(id, field) {
-    field = _clone(field);
+    field = Object.assign({}, field);   // shallow copy
 
     field.id = id;
 

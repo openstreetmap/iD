@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _isEmpty from 'lodash-es/isEmpty';
 import _isEqual from 'lodash-es/isEqual';
 
@@ -47,7 +46,7 @@ export function uiEntityEditor(context) {
 
     function entityEditor(selection) {
         var entity = context.entity(_entityID);
-        var tags = _clone(entity.tags);
+        var tags = Object.assign({}, entity.tags);  // shallow copy
 
         // Header
         var header = selection.selectAll('.header')
@@ -273,7 +272,7 @@ export function uiEntityEditor(context) {
     function changeTags(changed, onInput) {
         var entity = context.entity(_entityID);
         var annotation = t('operations.change_tags.annotation');
-        var tags = _clone(entity.tags);
+        var tags = Object.assign({}, entity.tags);   // shallow copy
 
         for (var k in changed) {
             if (!k) continue;

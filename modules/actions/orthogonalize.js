@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _cloneDeep from 'lodash-es/cloneDeep';
 
 import { actionDeleteNode } from './delete_node';
@@ -33,7 +32,7 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
         graph = graph.replace(way);
 
         var isClosed = way.isClosed();
-        var nodes = _clone(graph.childNodes(way));
+        var nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 
         if (vertexID !== undefined) {
@@ -273,7 +272,7 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
         graph = graph.replace(way);
 
         var isClosed = way.isClosed();
-        var nodes = _clone(graph.childNodes(way));
+        var nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 
         if (vertexID !== undefined) {

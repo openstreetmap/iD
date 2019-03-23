@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _isEqual from 'lodash-es/isEqual';
 import _forEach from 'lodash-es/forEach';
 
@@ -173,9 +172,9 @@ export default {
                 if (seen[hash]) continue;
                 seen[hash] = true;
 
-                // return a shallow clone, because the hash may change
+                // return a shallow copy, because the hash may change
                 // later if this feature gets merged with another
-                results.push(_clone(feature));
+                results.push(Object.assign({}, feature));  // shallow copy
             }
         }
 

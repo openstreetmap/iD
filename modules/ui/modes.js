@@ -1,24 +1,17 @@
-import _clone from 'lodash-es/clone';
 import _debounce from 'lodash-es/debounce';
 import _uniqWith from 'lodash-es/uniqWith';
 
 import { drag as d3_drag } from 'd3-drag';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import {
-    modeAddArea,
-    modeAddLine,
-    modeAddPoint,
-    modeBrowse
-} from '../modes';
-
+import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../modes';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';
 import { uiTooltipHtml } from './tooltipHtml';
 
-export function uiModes(context) {
 
+export function uiModes(context) {
 
     function enabled() {
         return osmEditable();
@@ -30,7 +23,6 @@ export function uiModes(context) {
     }
 
     function toggleMode(d) {
-
         if (!enabled(d)) return;
 
         if (d.button === context.mode().button) {
@@ -126,10 +118,11 @@ export function uiModes(context) {
                         tooltipTitleID = 'modes.add_preset.' + context.presets().fallback(d.geometry).id + '.title';
                     }
                 }
-                var protoMode = _clone(d);
+                var protoMode = Object.assign({}, d);  // shallow copy
                 protoMode.button = markerClass;
                 protoMode.title = presetName;
                 protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
+
                 var keyCode;
                 if (textDirection === 'ltr') {
                     // use number row order: 1 2 3 4 5 6 7 8 9 0

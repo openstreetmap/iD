@@ -1,5 +1,3 @@
-import _clone from 'lodash-es/clone';
-
 import { actionAddVertex, actionChangeTags, actionMergeNodes } from '../actions';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../util/locale';
@@ -37,7 +35,7 @@ export function validationTagSuggestsArea() {
 
             // if the distance is very small, attempt to merge the endpoints
             if (firstToLastDistanceMeters < 0.75) {
-                testNodes = _clone(nodes);
+                testNodes = nodes.slice();   // shallow copy
                 testNodes.pop();
                 testNodes.push(testNodes[0]);
                 // make sure this will not create a self-intersection
@@ -54,7 +52,7 @@ export function validationTagSuggestsArea() {
 
             if (!connectEndpointsOnClick) {
                 // if the points were not merged, attempt to close the way
-                testNodes = _clone(nodes);
+                testNodes = nodes.slice();   // shallow copy
                 testNodes.push(testNodes[0]);
                 // make sure this will not create a self-intersection
                 if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
@@ -81,7 +79,7 @@ export function validationTagSuggestsArea() {
             title: t('issues.fix.remove_tag.title'),
             onClick: function() {
                 var entity = this.issue.entities[0];
-                var tags = _clone(entity.tags);
+                var tags = Object.assign({}, entity.tags);  // shallow copy
                 for (var key in tagSuggestingArea) {
                     delete tags[key];
                 }

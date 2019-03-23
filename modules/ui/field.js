@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _extend from 'lodash-es/extend';
 import _some from 'lodash-es/some';
 
@@ -28,7 +27,7 @@ export function uiField(context, presetField, entity, options) {
     }, options);
 
     var dispatch = d3_dispatch('change');
-    var field = _clone(presetField);
+    var field = Object.assign({}, presetField);   // shallow copy
     var _show = options.show;
     var _state = '';
     var _tags = {};

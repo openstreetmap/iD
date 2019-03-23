@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _debounce from 'lodash-es/debounce';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -8,12 +7,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import {
-    modeAddArea,
-    modeAddLine,
-    modeAddPoint
-} from '../modes';
-
+import { modeAddArea, modeAddLine, modeAddPoint } from '../modes';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
@@ -38,10 +32,12 @@ export function uiSearchAdd(context) {
     var allowedGeometry = ['area', 'line', 'point', 'vertex'];
     var shownGeometry = [];
 
+
     function updateShownGeometry(geom) {
         shownGeometry = geom.sort();
         presets = context.presets().matchAnyGeometry(shownGeometry);
     }
+
     function toggleShownGeometry(d) {
         var geom = shownGeometry;
         var index = geom.indexOf(d);
@@ -62,9 +58,9 @@ export function uiSearchAdd(context) {
             });
     }
 
-    function searchAdd(selection) {
 
-        updateShownGeometry(_clone(allowedGeometry));
+    function searchAdd(selection) {
+        updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
         var key = t('modes.add_feature.key');
 
@@ -155,7 +151,7 @@ export function uiSearchAdd(context) {
             .on('click', function(d) {
                 toggleShownGeometry(d);
                 if (shownGeometry.length === 0) {
-                    updateShownGeometry(_clone(allowedGeometry));
+                    updateShownGeometry(allowedGeometry.slice());   // shallow copy
                     toggleShownGeometry(d);
                 }
                 updateFilterButtonsStates();

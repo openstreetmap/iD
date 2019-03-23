@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _groupBy from 'lodash-es/groupBy';
 import _reduce from 'lodash-es/reduce';
 import _some from 'lodash-es/some';
@@ -377,7 +376,7 @@ export function rendererFeatures(context) {
                             //
                             var pkey = osmEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
-                                matches = _clone(_cache[pkey].matches);
+                                matches = Object.assign({}, _cache[pkey].matches);  // shallow copy
                                 continue;
                             }
                         }

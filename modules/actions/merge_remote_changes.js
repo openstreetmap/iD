@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _isEqual from 'lodash-es/isEqual';
 import _isFunction from 'lodash-es/isFunction';
 import _keys from 'lodash-es/keys';
@@ -176,7 +175,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         var a = target.tags || {};
         var b = remote.tags || {};
         var keys = _reject(_union(_keys(o), _keys(a), _keys(b)), ignoreKey);
-        var tags = _clone(a);
+        var tags = Object.assign({}, a);   // shallow copy
         var changed = false;
 
         for (var i = 0; i < keys.length; i++) {

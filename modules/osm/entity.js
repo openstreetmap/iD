@@ -1,4 +1,3 @@
-import _clone from 'lodash-es/clone';
 import _keys from 'lodash-es/keys';
 import _every from 'lodash-es/every';
 import _union from 'lodash-es/union';
@@ -99,7 +98,7 @@ osmEntity.prototype = {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = osmEntity(this, {id: undefined, user: undefined, version: undefined});
+        var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
         copies[this.id] = copy;
 
         return copy;
@@ -117,15 +116,16 @@ osmEntity.prototype = {
 
 
     update: function(attrs) {
-        return osmEntity(this, attrs, {v: 1 + (this.v || 0)});
+        return osmEntity(this, attrs, { v: 1 + (this.v || 0) });
     },
 
 
     mergeTags: function(tags) {
-        var merged = _clone(this.tags), changed = false;
+        var merged = Object.assign({}, this.tags);   // shallow copy
+        var changed = false;
         for (var k in tags) {
-            var t1 = merged[k],
-                t2 = tags[k];
+            var t1 = merged[k];
+            var t2 = tags[k];
             if (!t1) {
                 changed = true;
                 merged[k] = t2;
@@ -134,7 +134,7 @@ osmEntity.prototype = {
                 merged[k] = _union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             }
         }
-        return changed ? this.update({tags: merged}) : this;
+        return changed ? this.update({ tags: merged }) : this;
     },
 
 

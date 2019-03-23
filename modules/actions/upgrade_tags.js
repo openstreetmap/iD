@@ -1,10 +1,10 @@
-import _clone from 'lodash-es/clone';
-
 export function actionUpgradeTags(entityId, oldTags, replaceTags) {
+
     return function(graph) {
         var entity = graph.entity(entityId);
-        var tags = _clone(entity.tags);
+        var tags = Object.assign({}, entity.tags);  // shallow copy
         var transferValue;
+
         for (var oldTagKey in oldTags) {
             if (oldTags[oldTagKey] === '*') {
                 transferValue = tags[oldTagKey];
@@ -20,6 +20,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 }
             }
         }
+
         if (replaceTags) {
             for (var replaceKey in replaceTags) {
                 var replaceValue = replaceTags[replaceKey];
@@ -39,6 +40,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 }
             }
         }
-        return graph.replace(entity.update({tags: tags}));
+
+        return graph.replace(entity.update({ tags: tags }));
     };
 }
