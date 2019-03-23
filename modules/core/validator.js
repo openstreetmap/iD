@@ -1,5 +1,3 @@
-import _isFunction from 'lodash-es/isFunction';
-import _filter from 'lodash-es/filter';
 import _flatten from 'lodash-es/flatten';
 import _flattenDeep from 'lodash-es/flattenDeep';
 import _uniq from 'lodash-es/uniq';
@@ -18,14 +16,15 @@ export function coreValidator(context) {
     var self = {};
     var _issues = [];
     var _issuesByEntityID = {};
-
     var _disabledValidations = {};
 
-    var validations = _filter(Validations, _isFunction).reduce(function(obj, validation) {
-        var func = validation();
-        obj[func.type] = func;
-        return obj;
-    }, {});
+    var validations = {};
+    Object.values(Validations).forEach(function(validation) {
+        if (typeof validation === 'function') {
+            var fn = validation();
+            validations[fn.type] = fn;
+        }
+    });
 
     var entityValidationIDs = [];
     var changesValidationIDs = [];
@@ -121,7 +120,7 @@ export function coreValidator(context) {
         }
 
         runValidation('missing_role');
-        
+
         if (entity.type === 'relation') {
             if (!runValidation('old_multipolygon')) {
                 // don't flag missing tags if they are on the outer way

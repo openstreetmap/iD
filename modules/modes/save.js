@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
@@ -132,7 +131,10 @@ export function modeSave(context) {
 
         // Do the full (slow) conflict check..
         } else {
-            var modified = _filter(history.difference().summary(), { changeType: 'modified' });
+            var summary = history.difference().summary();
+            var modified = summary.filter(function(item) {
+                return item.changeType === 'modified';
+            });
             _toCheck = _map(_map(modified, 'entity'), 'id');
             _toLoad = withChildNodes(_toCheck, localGraph);
             _loaded = {};
@@ -156,8 +158,10 @@ export function modeSave(context) {
                 var entity = graph.entity(id);
                 if (entity.type === 'way') {
                     try {
-                        var children = graph.childNodes(entity);
-                        result.push.apply(result, _map(_filter(children, 'version'), 'id'));
+                        var children = graph.childNodes(entity)
+                            .filter(function(child) { return child.version !== undefined; });
+
+                        result.push.apply(result, _map(children, 'id'));
                     } catch (err) {
                         /* eslint-disable no-console */
                         if (typeof console !== 'undefined') console.error(err);

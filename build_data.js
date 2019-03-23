@@ -5,7 +5,6 @@ const _forEach = requireESM('lodash-es/forEach').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
-const _filter = requireESM('lodash-es/filter').default;
 
 const colors = require('colors/safe');
 const fs = require('fs');
@@ -561,7 +560,7 @@ function validatePresetFields(presets, fields) {
             if (fieldCount > maxFieldsBeforeWarning) {
                 // Fields with `prerequisiteTag` probably won't show up initially,
                 // so don't count them against the limits.
-                var fieldsWithoutPrerequisites = _filter(preset.fields, function(fieldID) {
+                var fieldsWithoutPrerequisites = preset.fields.filter(function(fieldID) {
                     if (fields[fieldID] && fields[fieldID].prerequisiteTag) {
                         return false;
                     }

@@ -1,4 +1,3 @@
-import _every from 'lodash-es/every';
 import _union from 'lodash-es/union';
 import _without from 'lodash-es/without';
 
@@ -171,7 +170,7 @@ osmEntity.prototype = {
 
         var deprecated = [];
         dataDeprecated.forEach(function(d) {
-            var matchesDeprecatedTags = _every(Object.keys(d.old), function(key) {
+            var matchesDeprecatedTags = Object.keys(d.old).every(function(key) {
                 if (!tags[key]) return false;
                 if (d.old[key] === '*') return true;
 
@@ -183,7 +182,7 @@ osmEntity.prototype = {
                 } else {
                     if (tags[key] === d.old[key]) {
                         if (d.old[key] === d.replace[key]) {
-                            return !_every(Object.keys(d.replace), function(key) {
+                            return !Object.keys(d.replace).every(function(key) {
                                 return tags[key] === d.replace[key];
                             });
                         } else {

@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 
 import { osmEntity } from './entity';
@@ -102,7 +101,7 @@ Object.assign(osmChangeset.prototype, {
 
                 while (processing.length > 0) {
                     var next = processing[0],
-                    deps = _filter(next.member.map(resolve).filter(Boolean), isNew);
+                    deps = next.member.map(resolve).filter(Boolean).filter(isNew);
                     if (deps.length === 0) {
                         sorted[next['@id']] = next;
                         processing.shift();

@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _without from 'lodash-es/without';
 
 import { t } from '../util/locale';
@@ -8,13 +7,13 @@ import { modeSelect } from '../modes/index';
 
 
 export function operationSplit(selectedIDs, context) {
-    var vertices = _filter(selectedIDs, function(entityId) {
+    var vertices = selectedIDs.filter(function(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
-    var entityId = vertices[0],
-        action = actionSplit(entityId),
-        ways = [];
+    var entityId = vertices[0];
+    var action = actionSplit(entityId);
+    var ways = [];
 
     if (vertices.length === 1) {
         if (selectedIDs.length > 1) {

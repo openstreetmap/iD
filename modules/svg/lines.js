@@ -1,5 +1,4 @@
 import _groupBy from 'lodash-es/groupBy';
-import _filter from 'lodash-es/filter';
 import _flatten from 'lodash-es/flatten';
 import _forOwn from 'lodash-es/forOwn';
 import _map from 'lodash-es/map';
@@ -211,7 +210,7 @@ export function svgLines(projection, context) {
         pathdata = _groupBy(ways, function(way) { return way.layer(); });
 
         _forOwn(pathdata, function(v, k) {
-            var onewayArr = _filter(v, function(d) { return d.isOneWay(); });
+            var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
                 projection, graph, 35,
                 function shouldReverse(entity) { return entity.tags.oneway === '-1'; },
@@ -221,7 +220,7 @@ export function svgLines(projection, context) {
             );
             onewaydata[k] = _flatten(_map(onewayArr, onewaySegments));
 
-            var sidedArr = _filter(v, function(d) { return d.isSided(); });
+            var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
                 projection, graph, 30,
                 function shouldReverse() { return false; },

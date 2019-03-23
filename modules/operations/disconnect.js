@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _without from 'lodash-es/without';
 
 import { t } from '../util/locale';
@@ -7,12 +6,12 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = _filter(selectedIDs, function(entityId) {
+    var vertices = selectedIDs.filter(function(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
-    var entityId = vertices[0],
-        action = actionDisconnect(entityId);
+    var entityId = vertices[0];
+    var action = actionDisconnect(entityId);
 
     if (selectedIDs.length > 1) {
         action.limitWays(_without(selectedIDs, entityId));

@@ -1,5 +1,3 @@
-import _every from 'lodash-es/every';
-
 import {
     geoVecAngle,
     geoVecCross,
@@ -257,7 +255,7 @@ export function geoPointInPolygon(point, polygon) {
 
 
 export function geoPolygonContainsPolygon(outer, inner) {
-    return _every(inner, function(point) {
+    return inner.every(function(point) {
         return geoPointInPolygon(point, outer);
     });
 }

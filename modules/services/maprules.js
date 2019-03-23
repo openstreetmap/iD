@@ -1,7 +1,6 @@
 import _isMatch from 'lodash-es/isMatch';
 import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
-import _every from 'lodash-es/every';
 import { areaKeys } from '../core/context';
 
 import {
@@ -201,7 +200,7 @@ export default {
             checks: this.filterRuleChecks(selector),
             // true if all conditions for a tag error are true..
             matches: function(entity) {
-                return _every(this.checks, function(check) {
+                return this.checks.every(function(check) {
                     return check(entity.tags);
                 });
             },

@@ -1,5 +1,3 @@
-import _filter from 'lodash-es/filter';
-
 import { event as d3_event } from 'd3-selection';
 
 import {
@@ -15,8 +13,8 @@ import { services } from '../../services';
 
 
 export function uiPanelMeasurement(context) {
-    var locale = utilDetect().locale,
-        isImperial = (locale.toLowerCase() === 'en-us');
+    var locale = utilDetect().locale;
+    var isImperial = (locale.toLowerCase() === 'en-us');
 
 
     function radiansToMeters(r) {
@@ -65,7 +63,8 @@ export function uiPanelMeasurement(context) {
 
         } else {                           // selected 1..n entities
             var extent = geoExtent();
-            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+            selected = context.selectedIDs()
+                .filter(function(e) { return context.hasEntity(e); });
             if (selected.length) {
                 for (var i = 0; i < selected.length; i++) {
                     entity = context.entity(selected[i]);

@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _groupBy from 'lodash-es/groupBy';
 
 import {
@@ -120,10 +119,8 @@ export function uiRawMembershipEditor(context) {
         });
 
         // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = _filter(
-            _groupBy(result, 'value'),
-            function(v) { return v.length > 1; }
-        );
+        var dupeGroups = _groupBy(result, 'value')
+            .filter(function(v) { return v.length > 1; });
 
         dupeGroups.forEach(function(group) {
             group.forEach(function(obj) {

@@ -1,5 +1,3 @@
-import _every from 'lodash-es/every';
-import _filter from 'lodash-es/filter';
 import _intersection from 'lodash-es/intersection';
 import _isEqual from 'lodash-es/isEqual';
 import _map from 'lodash-es/map';
@@ -34,7 +32,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             if (parents.length < 3) return true;
 
             // Restrict movement of a vertex where >2 ways meet, unless all parentWays are moving too..
-            var parentsMoving = _every(parents, function(id) { return cache.moving[id]; });
+            var parentsMoving = parents.every(function(id) { return cache.moving[id]; });
             if (!parentsMoving) delete cache.moving[nodeId];
 
             return parentsMoving;
@@ -118,7 +116,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
             cacheEntities(moveIds);
             cacheIntersections(cache.ways);
-            cache.nodes = _filter(cache.nodes, canMove);
+            cache.nodes = cache.nodes.filter(canMove);
 
             cache.ok = true;
         }

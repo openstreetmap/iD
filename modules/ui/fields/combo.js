@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 import _reject from 'lodash-es/reject';
 import _remove from 'lodash-es/remove';
@@ -185,7 +184,7 @@ export function uiFieldCombo(field, context) {
         taginfo[fn](params, function(err, data) {
             if (err) return;
             if (hasCountryPrefix) {
-                data = _filter(data, function(d) {
+                data = data.filter(function(d) {
                     return d.value.toLowerCase().indexOf(_country + ':') === 0;
                 });
             }

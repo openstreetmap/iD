@@ -1,5 +1,3 @@
-import _filter from 'lodash-es/filter';
-
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
 import { utilDetect } from '../../util/detect';
@@ -104,7 +102,8 @@ export function uiPanelHistory(context) {
             selected = [ t('note.note') + ' ' + selectedNoteID ];
             note = osm.getNote(selectedNoteID);
         } else {                           // selected 1..n entities
-            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+            selected = context.selectedIDs()
+                .filter(function(e) { return context.hasEntity(e); });
             if (selected.length) {
                 entity = context.entity(selected[0]);
             }

@@ -1,7 +1,6 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
 import _difference from 'lodash-es/difference';
-import _filter from 'lodash-es/filter';
 import _flatten from 'lodash-es/flatten';
 import _groupBy from 'lodash-es/groupBy';
 import _isFunction from 'lodash-es/isFunction';
@@ -502,7 +501,8 @@ export function coreHistory(context) {
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
                         var osm = context.connection();
-                        var nodes = _flatten(_uniq(_map(_filter(baseEntities, { type: 'way' }), 'nodes')));
+                        var baseWays = baseEntities.filter(function(e) { return e.type === 'way'; });
+                        var nodes = _flatten(_uniq(_map(baseWays, 'nodes')));
                         var missing = _reject(nodes, function(n) { return _stack[0].graph.hasEntity(n); });
 
                         if (!_isEmpty(missing) && osm) {
