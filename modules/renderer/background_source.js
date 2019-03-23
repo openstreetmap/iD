@@ -1,5 +1,3 @@
-import _some from 'lodash-es/some';
-
 import {
   geoArea as d3_geoArea,
   geoMercatorRaw as d3_geoMercatorRaw
@@ -246,7 +244,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
-            return _some(provider.areas, function(area) {
+            return provider.areas.some(function(area) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
                     area.zoom[1] >= zoom;

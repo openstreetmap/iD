@@ -1,4 +1,3 @@
-import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 import _without from 'lodash-es/without';
 
@@ -99,13 +98,13 @@ export function presetCollection(collection) {
             // matches value to preset.terms values
             var leading_terms = searchable
                 .filter(function(a) {
-                    return _some(a.terms() || [], leading);
+                    return (a.terms() || []).some(leading);
                 });
 
             // matches value to preset.tags values
             var leading_tag_values = searchable
                 .filter(function(a) {
-                    return _some(_without(Object.values(a.tags || {}), '*'), leading);
+                    return _without(Object.values(a.tags || {}), '*').some(leading);
                 });
 
             var leading_suggestions = suggestions
@@ -128,7 +127,7 @@ export function presetCollection(collection) {
             // finds close matches to value in preset.terms
             var similar_terms = searchable
                 .filter(function(a) {
-                    return _some(a.terms() || [], function(b) {
+                    return (a.terms() || []).some(function(b) {
                         return utilEditDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });

@@ -2,7 +2,6 @@ import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 import _reject from 'lodash-es/reject';
 import _remove from 'lodash-es/remove';
-import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -114,7 +113,7 @@ export function uiFieldCombo(field, context) {
 
     function objectDifference(a, b) {
         return _reject(a, function(d1) {
-            return _some(b, function(d2) { return d1.value === d2.value; });
+            return b.some(function(d2) { return d1.value === d2.value; });
         });
     }
 

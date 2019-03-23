@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _some from 'lodash-es/some';
 import _throttle from 'lodash-es/throttle';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
@@ -76,7 +75,7 @@ export function svgLabels(projection, context) {
 
     function blacklisted(preset) {
         var noIcons = ['building', 'landuse', 'natural'];
-        return _some(noIcons, function(s) {
+        return noIcons.some(function(s) {
             return preset.id.indexOf(s) >= 0;
         });
     }
@@ -400,7 +399,7 @@ export function svgLabels(projection, context) {
                 entity.isEndpoint(graph) ||
                 entity.isConnected(graph) ||
                 selectedIDs.indexOf(entity.id) !== -1 ||
-                _some(graph.parentWays(entity), function(parent) {
+                graph.parentWays(entity).some(function(parent) {
                     return selectedIDs.indexOf(parent.id) !== -1;
                 });
         }

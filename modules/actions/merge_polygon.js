@@ -2,14 +2,9 @@ import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
-import _some from 'lodash-es/some';
 
 import { geoPolygonContainsPolygon } from '../geo';
-
-import {
-    osmJoinWays,
-    osmRelation
-} from '../osm';
+import { osmJoinWays, osmRelation } from '../osm';
 
 
 export function actionMergePolygon(ids, newRelationId) {
@@ -55,13 +50,14 @@ export function actionMergePolygon(ids, newRelationId) {
                 if (i === n) return null;
                 return geoPolygonContainsPolygon(
                     _map(d.nodes, 'loc'),
-                    _map(w.nodes, 'loc'));
+                    _map(w.nodes, 'loc')
+                );
             });
         });
 
         // Sort all polygons as either outer or inner ways
-        var members = [],
-            outer = true;
+        var members = [];
+        var outer = true;
 
         while (polygons.length) {
             extractUncontained(polygons);
@@ -70,7 +66,7 @@ export function actionMergePolygon(ids, newRelationId) {
         }
 
         function isContained(d, i) {
-            return _some(contained[i]);
+            return contained[i].some(function(val) { return val; });
         }
 
         function filterContained(d) {

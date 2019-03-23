@@ -1,5 +1,4 @@
 import _filter from 'lodash-es/filter';
-import _some from 'lodash-es/some';
 import _without from 'lodash-es/without';
 
 import { t } from '../util/locale';
@@ -32,7 +31,7 @@ export function operationDisconnect(selectedIDs, context) {
 
     operation.disabled = function() {
         var reason;
-        if (_some(selectedIDs, context.hasHiddenConnections)) {
+        if (selectedIDs.some(context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         }
         return action.disabled(context.graph()) || reason;

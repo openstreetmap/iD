@@ -1,6 +1,5 @@
 /* global Mapillary:false */
 import _forEach from 'lodash-es/forEach';
-import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -535,7 +534,7 @@ export default {
         // if signs signs are shown, highlight the ones that appear in this image
         d3_selectAll('.layer-mapillary-signs .icon-sign')
             .classed('currentView', function(d) {
-                return _some(d.detections, function(detection) {
+                return d.detections.some(function(detection) {
                     return detection.image_key === imageKey;
                 });
             });

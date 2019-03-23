@@ -1,17 +1,10 @@
 import _extend from 'lodash-es/extend';
 import _indexOf from 'lodash-es/indexOf';
 import _intersection from 'lodash-es/intersection';
-import _some from 'lodash-es/some';
 
 import { actionAddMember } from './add_member';
 import { geoSphericalDistance } from '../geo';
-
-import {
-    osmIsOldMultipolygonOuterMember,
-    osmRelation,
-    osmWay
-} from '../osm';
-
+import { osmIsOldMultipolygonOuterMember, osmRelation, osmWay } from '../osm';
 import { utilWrap } from '../util';
 
 
@@ -225,7 +218,9 @@ export function actionSplit(nodeId, newWayIds) {
     action.ways = function(graph) {
         var node = graph.entity(nodeId);
         var parents = graph.parentWays(node);
-        var hasLines = _some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
+        var hasLines = parents.some(function(parent) {
+            return parent.geometry(graph) === 'line';
+        });
 
         return parents.filter(function(parent) {
             if (_wayIDs && _wayIDs.indexOf(parent.id) === -1)

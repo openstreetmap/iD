@@ -1,5 +1,4 @@
 import _every from 'lodash-es/every';
-import _some from 'lodash-es/some';
 
 import {
     geoVecAngle,
@@ -266,7 +265,7 @@ export function geoPolygonContainsPolygon(outer, inner) {
 
 export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
     function testPoints(outer, inner) {
-        return _some(inner, function(point) {
+        return inner.some(function(point) {
             return geoPointInPolygon(point, outer);
         });
     }

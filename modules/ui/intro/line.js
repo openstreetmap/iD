@@ -1,5 +1,3 @@
-import _some from 'lodash-es/some';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -191,8 +189,8 @@ export function uiIntroLine(context, reveal) {
         if (!entity) return false;
 
         var drawNodes = context.graph().childNodes(entity);
-        return _some(drawNodes, function(node) {
-            return _some(context.graph().parentWays(node), function(parent) {
+        return drawNodes.some(function(node) {
+            return context.graph().parentWays(node).some(function(parent) {
                 return parent.id === flowerRoadID;
             });
         });

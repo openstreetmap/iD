@@ -1,4 +1,3 @@
-import _keys from 'lodash-es/keys';
 import _every from 'lodash-es/every';
 import _union from 'lodash-es/union';
 import _without from 'lodash-es/without';
@@ -152,7 +151,7 @@ osmEntity.prototype = {
     },
 
     hasInterestingTags: function() {
-        return _keys(this.tags).some(osmIsInterestingTag);
+        return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
 

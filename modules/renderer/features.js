@@ -1,6 +1,5 @@
 import _groupBy from 'lodash-es/groupBy';
 import _reduce from 'lodash-es/reduce';
-import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -476,9 +475,9 @@ export function rendererFeatures(context) {
             return resolver.isShared(e) ? _union(result, resolver.parentWays(e)) : result;
         }, connections);
 
-        return connections.length ? _some(connections, function(e) {
+        return connections.some(function(e) {
             return features.isHidden(e, resolver, e.geometry(resolver));
-        }) : false;
+        });
     };
 
 

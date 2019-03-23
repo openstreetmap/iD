@@ -1,5 +1,4 @@
 import _extend from 'lodash-es/extend';
-import _some from 'lodash-es/some';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -60,14 +59,14 @@ export function uiField(context, presetField, entity, options) {
     function isModified() {
         if (!entity) return false;
         var original = context.graph().base().entities[entity.id];
-        return _some(field.keys, function(key) {
+        return field.keys.some(function(key) {
             return original ? _tags[key] !== original.tags[key] : _tags[key];
         });
     }
 
 
     function isPresent() {
-        return _some(field.keys, function(key) {
+        return field.keys.some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {

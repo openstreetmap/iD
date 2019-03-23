@@ -1,6 +1,5 @@
 import _extend from 'lodash-es/extend';
 import _map from 'lodash-es/map';
-import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 
 import { osmEntity } from './entity';
@@ -167,12 +166,12 @@ _extend(osmNode.prototype, {
             }
 
             // vertex is connected to multiple parent lines
-            if (parents.length > 1 && _some(parents, isLine)) {
+            if (parents.length > 1 && parents.some(isLine)) {
                 return true;
 
             } else if (parents.length === 1) {
-                var way = parents[0],
-                    nodes = way.nodes.slice();
+                var way = parents[0];
+                var nodes = way.nodes.slice();
                 if (way.isClosed()) { nodes.pop(); }  // ignore connecting node if closed
 
                 // return true if vertex appears multiple times (way is self intersecting)
