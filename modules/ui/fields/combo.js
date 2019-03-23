@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _reject from 'lodash-es/reject';
 import _remove from 'lodash-es/remove';
 import _uniq from 'lodash-es/uniq';
 
@@ -110,9 +109,14 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    // Compute the difference between arrays of objects by `value` property
+    //
+    // objectDifference([{value:1}, {value:2}, {value:3}], [{value:2}])
+    // > [{value:1}, {value:3}]
+    //
     function objectDifference(a, b) {
-        return _reject(a, function(d1) {
-            return b.some(function(d2) { return d1.value === d2.value; });
+        return a.filter(function(d1) {
+            return !b.some(function(d2) { return d1.value === d2.value; });
         });
     }
 

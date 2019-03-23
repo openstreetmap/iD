@@ -1,6 +1,5 @@
 import _difference from 'lodash-es/difference';
 import _map from 'lodash-es/map';
-import _reject from 'lodash-es/reject';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
@@ -91,7 +90,7 @@ export function svgLayers(projection, context) {
     drawLayers.remove = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(id) {
-            layers = _reject(layers, function(o) {return o.id === id;});
+            layers = layers.filter(function(o) { return o.id !== id; });
         });
         dispatch.call('change');
         return this;

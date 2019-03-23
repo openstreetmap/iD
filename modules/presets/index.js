@@ -1,7 +1,6 @@
 import _bind from 'lodash-es/bind';
 import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
-import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -127,8 +126,11 @@ export function presetIndex(context) {
     all.areaKeys = function() {
         var areaKeys = {};
         var ignore = ['barrier', 'highway', 'footway', 'railway', 'type'];  // probably a line..
+
         // ignore name-suggestion-index and deprecated presets
-        var presets = _reject(_reject(all.collection, 'suggestion'), 'replacement');
+        var presets = all.collection.filter(function(p) {
+            return !p.suggestion && !p.replacement;
+        });
 
         // whitelist
         presets.forEach(function(d) {

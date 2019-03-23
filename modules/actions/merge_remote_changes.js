@@ -1,7 +1,6 @@
 import _isEqual from 'lodash-es/isEqual';
 import _isFunction from 'lodash-es/isFunction';
 import _map from 'lodash-es/map';
-import _reject from 'lodash-es/reject';
 import _union from 'lodash-es/union';
 import _uniq from 'lodash-es/uniq';
 import _without from 'lodash-es/without';
@@ -158,10 +157,6 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeTags(base, remote, target) {
-        function ignoreKey(k) {
-            return dataDiscarded[k];
-        }
-
         if (_option === 'force_local' || _isEqual(target.tags, remote.tags)) {
             return target;
         }
@@ -173,7 +168,8 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         var o = base.tags || {};
         var a = target.tags || {};
         var b = remote.tags || {};
-        var keys = _reject(_union(Object.keys(o), Object.keys(a), Object.keys(b)), ignoreKey);
+        var keys = _union(Object.keys(o), Object.keys(a), Object.keys(b))
+            .filter(function(k) { return !dataDiscarded[k]; });
         var tags = Object.assign({}, a);   // shallow copy
         var changed = false;
 

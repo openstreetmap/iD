@@ -1,15 +1,10 @@
 import _map from 'lodash-es/map';
-import _reject from 'lodash-es/reject';
 
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { osmEntity } from './entity';
 import { osmJoinWays } from './multipolygon';
-import {
-    geoExtent,
-    geoPolygonContainsPolygon,
-    geoPolygonIntersectsPolygon
-} from '../geo';
+import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
 
 
 export function osmRelation() {
@@ -162,7 +157,7 @@ Object.assign(osmRelation.prototype, {
 
 
     removeMembersWithID: function(id) {
-        var members = _reject(this.members, function(m) { return m.id === id; });
+        var members = this.members.filter(function(m) { return m.id !== id; });
         return this.update({members: members});
     },
 

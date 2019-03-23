@@ -8,7 +8,6 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
-import _reject from 'lodash-es/reject';
 import _without from 'lodash-es/without';
 import _uniq from 'lodash-es/uniq';
 
@@ -503,7 +502,7 @@ export function coreHistory(context) {
                         var osm = context.connection();
                         var baseWays = baseEntities.filter(function(e) { return e.type === 'way'; });
                         var nodes = _flatten(_uniq(_map(baseWays, 'nodes')));
-                        var missing = _reject(nodes, function(n) { return _stack[0].graph.hasEntity(n); });
+                        var missing = nodes.filter(function(n) { return !_stack[0].graph.hasEntity(n); });
 
                         if (!_isEmpty(missing) && osm) {
                             loadComplete = false;
