@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 
@@ -19,7 +18,7 @@ osmEntity.changeset = osmChangeset;
 
 osmChangeset.prototype = Object.create(osmEntity.prototype);
 
-_extend(osmChangeset.prototype, {
+Object.assign(osmChangeset.prototype, {
 
     type: 'changeset',
 
@@ -127,7 +126,7 @@ _extend(osmChangeset.prototype, {
                 '@generator': 'iD',
                 'create': sort(nest(changes.created.map(rep), ['node', 'way', 'relation'])),
                 'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
-                'delete': _extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
+                'delete': Object.assign(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
             }
         };
     },

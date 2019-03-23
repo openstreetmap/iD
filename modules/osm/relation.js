@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _map from 'lodash-es/map';
 import _reject from 'lodash-es/reject';
 
@@ -36,7 +35,7 @@ osmRelation.creationOrder = function(a, b) {
 };
 
 
-_extend(osmRelation.prototype, {
+Object.assign(osmRelation.prototype, {
     type: 'relation',
     members: [],
 
@@ -47,7 +46,7 @@ _extend(osmRelation.prototype, {
         var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
         var members = this.members.map(function(member) {
-            return _extend({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
+            return Object.assign({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
         });
 
         copy = copy.update({members: members});
@@ -92,7 +91,7 @@ _extend(osmRelation.prototype, {
     indexedMembers: function() {
         var result = new Array(this.members.length);
         for (var i = 0; i < this.members.length; i++) {
-            result[i] = _extend({}, this.members[i], {index: i});
+            result[i] = Object.assign({}, this.members[i], {index: i});
         }
         return result;
     },
@@ -103,7 +102,7 @@ _extend(osmRelation.prototype, {
     memberByRole: function(role) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
-                return _extend({}, this.members[i], {index: i});
+                return Object.assign({}, this.members[i], {index: i});
             }
         }
     },
@@ -113,7 +112,7 @@ _extend(osmRelation.prototype, {
         var result = [];
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
-                result.push(_extend({}, this.members[i], {index: i}));
+                result.push(Object.assign({}, this.members[i], {index: i}));
             }
         }
         return result;
@@ -124,7 +123,7 @@ _extend(osmRelation.prototype, {
     memberById: function(id) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id) {
-                return _extend({}, this.members[i], {index: i});
+                return Object.assign({}, this.members[i], {index: i});
             }
         }
     },
@@ -135,7 +134,7 @@ _extend(osmRelation.prototype, {
     memberByIdAndRole: function(id, role) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id && this.members[i].role === role) {
-                return _extend({}, this.members[i], {index: i});
+                return Object.assign({}, this.members[i], {index: i});
             }
         }
     },
@@ -150,7 +149,7 @@ _extend(osmRelation.prototype, {
 
     updateMember: function(member, index) {
         var members = this.members.slice();
-        members.splice(index, 1, _extend({}, members[index], member));
+        members.splice(index, 1, Object.assign({}, members[index], member));
         return this.update({members: members});
     },
 
@@ -233,7 +232,7 @@ _extend(osmRelation.prototype, {
                     type: 'FeatureCollection',
                     properties: this.tags,
                     features: this.members.map(function (member) {
-                        return _extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                        return Object.assign({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
                     })
                 };
             }

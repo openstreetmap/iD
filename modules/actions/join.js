@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _intersection from 'lodash-es/intersection';
 
@@ -19,7 +18,9 @@ export function actionJoin(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return _extend({line: []}, _groupBy(entities, function(entity) { return entity.geometry(graph); }));
+        return Object.assign({ line: [] },
+            _groupBy(entities, function(entity) { return entity.geometry(graph); })
+        );
     }
 
 

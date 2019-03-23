@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 import _union from 'lodash-es/union';
 
@@ -806,7 +805,7 @@ export default {
                 that.selectImage(d)
                     .then(function(r) {
                         if (r.status === 'ok') {
-                            _sceneOptions = _extend(_sceneOptions, viewstate);
+                            _sceneOptions = Object.assign(_sceneOptions, viewstate);
                             that.showViewer();
                         }
                     });

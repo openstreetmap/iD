@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 
 import rbush from 'rbush';
@@ -169,7 +168,7 @@ export default {
             if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle();
-            var params = _extend({}, options, { east: rect[0], south: rect[3], west: rect[2], north: rect[1] });
+            var params = Object.assign({}, options, { east: rect[0], south: rect[3], west: rect[2], north: rect[1] });
 
             // 3 separate requests to store for each tile
             var requests = {};
@@ -177,7 +176,7 @@ export default {
             _forEach(_impOsmUrls, function(v, k) {
                 // We exclude WATER from missing geometry as it doesn't seem useful
                 // We use most confident one-way and turn restrictions only, still have false positives
-                var kParams = _extend({}, params, (k === 'mr') ? { type: 'PARKING,ROAD,BOTH,PATH' } : { confidenceLevel: 'C1' });
+                var kParams = Object.assign({}, params, (k === 'mr') ? { type: 'PARKING,ROAD,BOTH,PATH' } : { confidenceLevel: 'C1' });
                 var url = v + '/search?' + utilQsString(kParams);
 
                 requests[k] = d3_json(url,

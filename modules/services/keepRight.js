@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 
 import rbush from 'rbush';
@@ -307,7 +306,7 @@ export default {
             if (_krCache.loadedTile[tile.id] || _krCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle();
-            var params = _extend({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
+            var params = Object.assign({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
             var url = _krUrlRoot + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
             _krCache.inflightTile[tile.id] = d3_json(url,

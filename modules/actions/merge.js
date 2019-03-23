@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _uniq from 'lodash-es/uniq';
 
@@ -7,7 +6,7 @@ export function actionMerge(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return _extend({point: [], area: [], line: [], relation: []},
+        return Object.assign({point: [], area: [], line: [], relation: []},
             _groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
 

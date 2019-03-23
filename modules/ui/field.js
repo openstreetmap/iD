@@ -1,5 +1,3 @@
-import _extend from 'lodash-es/extend';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -17,7 +15,7 @@ import { utilRebind } from '../util';
 
 
 export function uiField(context, presetField, entity, options) {
-    options = _extend({
+    options = Object.assign({
         show: true,
         wrap: true,
         remove: true,

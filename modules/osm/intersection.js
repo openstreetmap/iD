@@ -1,5 +1,4 @@
 import _difference from 'lodash-es/difference';
-import _extend from 'lodash-es/extend';
 import _uniq from 'lodash-es/uniq';
 
 import { actionDeleteRelation, actionReverse, actionSplit } from '../actions';
@@ -12,7 +11,7 @@ export function osmTurn(turn) {
     if (!(this instanceof osmTurn)) {
         return new osmTurn(turn);
     }
-    _extend(this, turn);
+    Object.assign(this, turn);
 }
 
 

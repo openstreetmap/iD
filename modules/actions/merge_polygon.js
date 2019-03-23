@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
@@ -11,7 +10,7 @@ export function actionMergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return _extend({
+        return Object.assign({
                 closedWay: [],
                 multipolygon: [],
                 other: []

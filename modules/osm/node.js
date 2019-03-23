@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _map from 'lodash-es/map';
 import _uniq from 'lodash-es/uniq';
 
@@ -18,7 +17,7 @@ osmEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
 
-_extend(osmNode.prototype, {
+Object.assign(osmNode.prototype, {
 
     type: 'node',
 

@@ -1,5 +1,5 @@
-import _extend from 'lodash-es/extend';
 import { services } from '../../data/qa_errors.json';
+
 
 export function qaError() {
     if (!(this instanceof qaError)) {
@@ -16,7 +16,7 @@ qaError.id = function() {
 
 qaError.id.next = -1;
 
-_extend(qaError.prototype, {
+Object.assign(qaError.prototype, {
     type: 'qaError',
 
     // All errors need a position

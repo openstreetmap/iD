@@ -1,5 +1,4 @@
 import _debounce from 'lodash-es/debounce';
-import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 import _omit from 'lodash-es/omit';
 
@@ -218,7 +217,7 @@ export default {
     keys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({
+        params = Object.assign({
             rp: 10,
             sortname: 'count_all',
             sortorder: 'desc',
@@ -243,7 +242,7 @@ export default {
     multikeys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({
+        params = Object.assign({
             rp: 25,
             sortname: 'count_all',
             sortorder: 'desc',
@@ -276,7 +275,7 @@ export default {
 
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
-        params = _extend({
+        params = Object.assign({
             rp: 25,
             sortname: 'count_all',
             sortorder: 'desc',
@@ -309,7 +308,7 @@ export default {
         var doRequest = params.debounce ? debouncedRequest : request;
         var geometry = params.geometry;
         params = clean(setSortMembers(params));
-        params = _extend({
+        params = Object.assign({
             rp: 25,
             sortname: 'count_all_members',
             sortorder: 'desc',

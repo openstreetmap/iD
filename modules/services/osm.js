@@ -1,6 +1,5 @@
 import _chunk from 'lodash-es/chunk';
 import _cloneDeep from 'lodash-es/cloneDeep';
-import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
@@ -294,7 +293,7 @@ var parsers = {
 
 
 function parseXML(xml, callback, options) {
-    options = _extend({ skipSeen: true }, options);
+    options = Object.assign({ skipSeen: true }, options);
     if (!xml || !xml.childNodes) {
         return callback({ message: 'No XML', status: -1 });
     }
@@ -439,7 +438,7 @@ export default {
     // Generic method to load data from the OSM API
     // Can handle either auth or unauth calls.
     loadFromAPI: function(path, callback, options) {
-        options = _extend({ skipSeen: true }, options);
+        options = Object.assign({ skipSeen: true }, options);
         var that = this;
         var cid = _connectionID;
 
@@ -820,7 +819,7 @@ export default {
                         _tileCache.loaded[tile.id] = true;
                     }
                     if (callback) {
-                        callback(err, _extend({ data: parsed }, tile));
+                        callback(err, Object.assign({ data: parsed }, tile));
                     }
                     if (_isEmpty(_tileCache.inflight)) {
                         dispatch.call('loaded');     // stop the spinner
@@ -835,7 +834,7 @@ export default {
     // Load notes from the API in tiles
     // GET /api/0.6/notes?bbox=
     loadNotes: function(projection, noteOptions) {
-        noteOptions = _extend({ limit: 10000, closed: 7 }, noteOptions);
+        noteOptions = Object.assign({ limit: 10000, closed: 7 }, noteOptions);
         if (_off) return;
 
         var that = this;
@@ -977,7 +976,7 @@ export default {
     switch: function(options) {
         urlroot = options.urlroot;
 
-        oauth.options(_extend({
+        oauth.options(Object.assign({
             url: urlroot,
             loading: authLoading,
             done: authDone
@@ -990,8 +989,8 @@ export default {
     },
 
 
-    toggle: function(_) {
-        _off = !_;
+    toggle: function(val) {
+        _off = !val;
         return this;
     },
 
@@ -1083,9 +1082,9 @@ export default {
     },
 
 
-    tileZoom: function(_) {
+    tileZoom: function(val) {
         if (!arguments.length) return _tileZoom;
-        _tileZoom = _;
+        _tileZoom = val;
         return this;
     },
 

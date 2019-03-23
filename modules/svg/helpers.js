@@ -1,16 +1,10 @@
-import _extend from 'lodash-es/extend';
-
 import {
     geoIdentity as d3_geoIdentity,
     geoPath as d3_geoPath,
     geoStream as d3_geoStream
 } from 'd3-geo';
 
-import {
-    geoVecAdd,
-    geoVecAngle,
-    geoVecLength
-} from '../geo';
+import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
 
 
 // Touch targets control which other vertices we can drag a vertex onto.
@@ -206,7 +200,7 @@ export function svgRelationMemberTags(graph) {
         graph.parentRelations(entity).forEach(function(relation) {
             var type = relation.tags.type;
             if ((type === 'multipolygon' && shouldCopyMultipolygonTags) || type === 'boundary') {
-                tags = _extend({}, relation.tags, tags);
+                tags = Object.assign({}, relation.tags, tags);
             }
         });
         return tags;

@@ -1,5 +1,3 @@
-import _extend from 'lodash-es/extend';
-
 import { geoExtent } from '../geo';
 
 
@@ -20,7 +18,7 @@ osmNote.id = function() {
 osmNote.id.next = -1;
 
 
-_extend(osmNote.prototype, {
+Object.assign(osmNote.prototype, {
 
     type: 'note',
 

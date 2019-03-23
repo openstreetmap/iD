@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
 import _groupBy from 'lodash-es/groupBy';
 
@@ -54,7 +53,7 @@ export function uiRawMembershipEditor(context) {
         if (oldRole !== newRole) {
             _inChange = true;
             context.perform(
-                actionChangeMember(d.relation.id, _extend({}, d.member, { role: newRole }), d.index),
+                actionChangeMember(d.relation.id, Object.assign({}, d.member, { role: newRole }), d.index),
                 t('operations.change_role.annotation')
             );
         }

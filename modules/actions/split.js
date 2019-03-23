@@ -1,4 +1,3 @@
-import _extend from 'lodash-es/extend';
 import _indexOf from 'lodash-es/indexOf';
 import _intersection from 'lodash-es/intersection';
 
@@ -190,7 +189,7 @@ export function actionSplit(nodeId, newWayIds) {
 
         if (!isOuter && isArea) {
             var multipolygon = osmRelation({
-                tags: _extend({}, wayA.tags, {type: 'multipolygon'}),
+                tags: Object.assign({}, wayA.tags, { type: 'multipolygon' }),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},
                     {id: wayB.id, role: 'outer', type: 'way'}
