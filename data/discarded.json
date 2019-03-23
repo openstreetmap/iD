@@ -13,6 +13,8 @@
     "geobase:datasetName": true,
     "geobase:uuid": true,
 
+    "osmarender:nameDirection": true,
+
     "sub_sea:type": true,
 
     "KSJ2:ADS": true,
