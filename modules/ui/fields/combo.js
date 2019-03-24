@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _remove from 'lodash-es/remove';
 import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -281,8 +280,9 @@ export function uiFieldCombo(field, context) {
         if (isMulti) {
             t[d.key] = undefined;
         } else if (isSemi) {
-            _remove(_multiData, function(md) { return md.key === d.key; });
-            var arr = _multiData.map(function(md) { return md.key; });
+            var arr = _multiData.map(function(md) {
+                return md.key === d.key ? null : md.key;
+            });
             arr = _uniq(arr).filter(Boolean);
             t[field.key] = arr.length ? arr.join(';') : undefined;
         }
