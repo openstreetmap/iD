@@ -37,10 +37,3 @@ mocha.setup({
 expect = chai.expect;
 
 window.d3 = iD.d3;   // TODO: remove
-
-// Object.getOwnPropertySymbols polyfill (For PhantomJS / IE11) - #6001
-if (!Object.getOwnPropertySymbols) {
-  Object.defineProperty(Object.prototype, 'getOwnPropertySymbols', {
-    value: function() { return []; }
-  });
-}
