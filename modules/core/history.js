@@ -8,7 +8,6 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
-import _without from 'lodash-es/without';
 import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -314,8 +313,23 @@ export function coreHistory(context) {
                 _imageryUsed = sources;
                 return history;
             } else {
-                var arr = _map(_stack.slice(1, _index + 1), 'imageryUsed');
-                return _without(_uniq(_flatten(arr)), 'Custom');
+                var s = new Set();
+                _stack.slice(1, _index + 1).forEach(function(state) {
+                    state.imageryUsed.forEach(function(source) {
+                        if (source !== 'Custom') {
+                            s.add(source);
+                        }
+                    });
+                });
+                if (window.mocha) {
+                    var arr = [];
+                    s.forEach(function(v) { arr.push(v); });
+                    return arr;
+                } else {
+                    return Array.from(s);
+                }
+                // var arr = _map(_stack.slice(1, _index + 1), 'imageryUsed');
+                // return _without(_uniq(_flatten(arr)), 'Custom');
             }
         },
 
