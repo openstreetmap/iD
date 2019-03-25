@@ -13,6 +13,7 @@
     "moreFields": [
         "covered",
         "cycleway",
+        "incline",
         "junction_line",
         "lit",
         "maxheight",
