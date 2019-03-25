@@ -4,13 +4,14 @@ import {
 } from 'd3-selection';
 
 import _debounce from 'lodash-es/debounce';
-import { uiToolAddRecent, uiToolNotes, uiToolSave, uiToolSearchAdd, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolSave, uiToolSearchAdd, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
         searchAdd = uiToolSearchAdd(context),
+        addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
@@ -27,6 +28,10 @@ export function uiTopToolbar(context) {
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
 
+        context.presets()
+            .on('favoritePreset.topToolbar', update)
+            .on('recentsChange.topToolbar', update);
+
         update();
 
         function update() {
@@ -34,10 +39,18 @@ export function uiTopToolbar(context) {
             var tools = [
                 sidebarToggle,
                 'spacer',
-                searchAdd,
-                addRecent,
-                'spacer'
+                searchAdd
             ];
+
+            if (context.presets().getFavorites().length > 0) {
+                tools.push(addFavorite);
+            }
+
+            if (addRecent.shouldShow()) {
+                tools.push(addRecent);
+            }
+
+            tools.push('spacer');
 
             if (notesEnabled()) {
                 tools = tools.concat([notes, 'spacer']);
@@ -62,7 +75,9 @@ export function uiTopToolbar(context) {
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
-                    return 'toolbar-item ' + (d.id || d).replace('_', '-');
+                    var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
+                    if (d.klass) classes += ' ' + d.klass;
+                    return classes;
                 });
 
             var actionableItems = itemsEnter.filter(function(d) { return d !== 'spacer'; });

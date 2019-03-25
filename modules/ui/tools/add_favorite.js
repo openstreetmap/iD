@@ -10,12 +10,12 @@ import { uiPresetIcon } from '../preset_icon';
 import { uiTooltipHtml } from '../tooltipHtml';
 
 
-export function uiToolAddRecent(context) {
+export function uiToolAddFavorite(context) {
 
     var tool = {
-        id: 'add_recent',
+        id: 'add_favorite',
         klass: 'modes',
-        label: t('toolbar.recent')
+        label: t('toolbar.favorites')
     };
 
     function enabled() {
@@ -33,56 +33,17 @@ export function uiToolAddRecent(context) {
         if (d.button === context.mode().button) {
             context.enter(modeBrowse(context));
         } else {
-            if (d.preset &&
-                // don't set a recent as most recent to avoid reordering buttons
-                !d.isRecent()) {
+            if (d.preset) {
                 context.presets().setMostRecent(d.preset, d.geometry);
             }
             context.enter(d);
         }
     }
 
-    function recentsToDraw() {
-        var maxShown = 10;
-        var maxRecents = 5;
-
-        var favorites = context.presets().getFavorites().slice(0, maxShown);
-
-        function isAFavorite(recent) {
-            return favorites.some(function(favorite) {
-                return favorite.matches(recent.preset, recent.geometry);
-            });
-        }
-
-        var favoritesCount = favorites.length;
-        maxRecents = Math.min(maxRecents, maxShown - favoritesCount);
-        var items = [];
-        if (maxRecents > 0) {
-            var recents = context.presets().getRecents().filter(function(recent) {
-                return recent.geometry !== 'relation';
-            });
-            for (var i in recents) {
-                var recent = recents[i];
-                if (!isAFavorite(recent)) {
-                    items.push(recent);
-                    if (items.length === maxRecents) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        return items;
-    }
-
-    tool.shouldShow = function() {
-        return recentsToDraw().length > 0;
-    };
-
 
     tool.render = function(selection) {
         context
-            .on('enter.editor.recent', function(entered) {
+            .on('enter.editor.favorite', function(entered) {
                 selection.selectAll('button.add-button')
                     .classed('active', function(mode) { return entered.button === mode.button; });
                 context.container()
@@ -90,7 +51,7 @@ export function uiToolAddRecent(context) {
             });
 
         context
-            .on('exit.editor.recent', function(exited) {
+            .on('exit.editor.favorite', function(exited) {
                 context.container()
                     .classed('mode-' + exited.id, false);
             });
@@ -98,22 +59,25 @@ export function uiToolAddRecent(context) {
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
-            .on('move.recent', debouncedUpdate)
-            .on('drawn.recent', debouncedUpdate);
+            .on('move.favorite', debouncedUpdate)
+            .on('drawn.favorite', debouncedUpdate);
 
         context
-            .on('enter.recent', update)
+            .on('enter.favorite', update)
             .presets()
-            .on('favoritePreset.recent', update)
-            .on('recentsChange.recent', update);
+            .on('favoritePreset.favorite', update)
+            .on('recentsChange.favorite', update);
 
         update();
 
 
         function update() {
 
-            var items = recentsToDraw();
-            var favoritesCount = context.presets().getFavorites().length;
+            for (var i = 0; i <= 9; i++) {
+                context.keybinding().off(i.toString());
+            }
+
+            var items = context.presets().getFavorites();
 
             var modes = items.map(function(d, index) {
                 var presetName = d.preset.name().split(' – ')[0];
@@ -144,21 +108,20 @@ export function uiToolAddRecent(context) {
                 protoMode.title = presetName;
                 protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
 
-                var totalIndex = favoritesCount + index;
                 var keyCode;
                 if (textDirection === 'ltr') {
                     // use number row order: 1 2 3 4 5 6 7 8 9 0
-                    if (totalIndex === 9) {
+                    if (index === 9) {
                         keyCode = 0;
-                    } else if (totalIndex < 10) {
-                        keyCode = totalIndex + 1;
+                    } else if (index < 10) {
+                        keyCode = index + 1;
                     }
                 } else {
                     // use number row order from right to left
-                    if (totalIndex === 0) {
+                    if (index === 0) {
                         keyCode = 0;
-                    } else if (totalIndex < 10) {
-                        keyCode = 10 - totalIndex;
+                    } else if (index < 10) {
+                        keyCode = 10 - index;
                     }
                 }
                 if (keyCode !== undefined) {
@@ -225,7 +188,7 @@ export function uiToolAddRecent(context) {
                         );
                 });
 
-            var dragOrigin, dragMoved, targetIndex, targetData;
+            var dragOrigin, dragMoved, targetIndex;
 
             buttonsEnter.call(d3_drag()
                 .on('start', function() {
@@ -234,7 +197,6 @@ export function uiToolAddRecent(context) {
                         y: d3_event.y
                     };
                     targetIndex = null;
-                    targetData = null;
                     dragMoved = false;
                 })
                 .on('drag', function(d, index) {
@@ -251,7 +213,6 @@ export function uiToolAddRecent(context) {
                         .classed('removing', y > 50);
 
                     targetIndex = null;
-                    targetData = null;
 
                     selection.selectAll('button.add-preset')
                         .style('transform', function(d2, index2) {
@@ -269,7 +230,6 @@ export function uiToolAddRecent(context) {
                                 )) {
                                     if (targetIndex === null || index2 > targetIndex) {
                                         targetIndex = index2;
-                                        targetData = d2;
                                     }
                                     return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
                                 } else if (index2 < index && (
@@ -278,7 +238,6 @@ export function uiToolAddRecent(context) {
                                 )) {
                                     if (targetIndex === null || index2 < targetIndex) {
                                         targetIndex = index2;
-                                        targetData = d2;
                                     }
                                     return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
                                 }
@@ -286,7 +245,7 @@ export function uiToolAddRecent(context) {
                             return null;
                         });
                 })
-                .on('end', function(d) {
+                .on('end', function(d, index) {
 
                     if (dragMoved && !d3_select(this).classed('dragging')) {
                         toggleMode(d);
@@ -303,15 +262,15 @@ export function uiToolAddRecent(context) {
                     var y = d3_event.y - dragOrigin.y;
                     if (y > 50) {
                         // dragged out of the top bar, remove
-                        if (d.isRecent()) {
+                        if (d.isFavorite()) {
+                            context.presets().removeFavorite(d.preset, d.geometry);
+                            // also remove this as a recent so it doesn't still appear
                             context.presets().removeRecent(d.preset, d.geometry);
                         }
                     } else if (targetIndex !== null) {
                         // dragged to a new position, reorder
-                        if (d.isRecent()) {
-                            var item = context.presets().recentMatching(d.preset, d.geometry);
-                            var beforeItem = context.presets().recentMatching(targetData.preset, targetData.geometry);
-                            context.presets().moveRecent(item, beforeItem);
+                        if (d.isFavorite()) {
+                            context.presets().moveFavorite(index, targetIndex);
                         }
                     }
                 })
@@ -327,17 +286,17 @@ export function uiToolAddRecent(context) {
     tool.uninstall = function() {
 
         context
-            .on('enter.editor.recent', null)
-            .on('exit.editor.recent', null)
-            .on('enter.recent', null);
+            .on('enter.editor.favorite', null)
+            .on('exit.editor.favorite', null)
+            .on('enter.favorite', null);
 
         context.presets()
-            .on('favoritePreset.recent', null)
-            .on('recentsChange.recent', null);
+            .on('favoritePreset.favorite', null)
+            .on('recentsChange.favorite', null);
 
         context.map()
-            .on('move.recent', null)
-            .on('drawn.recent', null);
+            .on('move.favorite', null)
+            .on('drawn.favorite', null);
     };
 
     return tool;

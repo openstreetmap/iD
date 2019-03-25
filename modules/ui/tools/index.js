@@ -1,3 +1,4 @@
+export * from './add_favorite';
 export * from './add_recent';
 export * from './notes';
 export * from './save';

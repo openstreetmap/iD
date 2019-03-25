@@ -12,6 +12,7 @@ en:
     inspect: Inspect
     undo_redo: Undo / Redo
     recent: Recent
+    favorites: Favorites
   modes:
     add_feature:
       title: Add a feature

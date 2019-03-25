@@ -13,7 +13,8 @@
         "toolbar": {
             "inspect": "Inspect",
             "undo_redo": "Undo / Redo",
-            "recent": "Recent"
+            "recent": "Recent",
+            "favorites": "Favorites"
         },
         "modes": {
             "add_feature": {
