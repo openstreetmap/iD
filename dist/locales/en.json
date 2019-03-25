@@ -2645,6 +2645,12 @@
                         "no": "Not Allowed"
                     }
                 },
+                "door_type": {
+                    "label": "Type"
+                },
+                "door": {
+                    "label": "Door"
+                },
                 "drive_through": {
                     "label": "Drive-Through"
                 },

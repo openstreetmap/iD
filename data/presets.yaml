@@ -591,6 +591,12 @@ en:
           'no': Not Allowed
           # dog=yes
           'yes': Allowed
+      door:
+        # door=*
+        label: Door
+      door_type:
+        # door=*
+        label: Type
       drive_through:
         # drive_through=*
         label: Drive-Through

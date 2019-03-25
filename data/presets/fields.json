@@ -102,6 +102,8 @@
     "distance": {"key": "distance", "type": "text", "label": "Distance"},
     "dock": {"key": "dock", "type": "combo", "label": "Type"},
     "dog": {"key": "dog", "type": "combo", "label": "Dogs", "strings": {"options": {"yes": "Allowed", "leashed": "Leashed Only", "no": "Not Allowed"}}},
+    "door_type": {"key": "door", "type": "typeCombo", "label": "Type"},
+    "door": {"key": "door", "type": "combo", "label": "Door"},
     "drive_through": {"key": "drive_through", "type": "check", "label": "Drive-Through"},
     "duration": {"key": "duration", "type": "text", "label": "Duration", "placeholder": "00:00"},
     "electrified": {"key": "electrified", "type": "combo", "label": "Electrification", "placeholder": "Contact Line, Electrified Rail...", "strings": {"options": {"contact_line": "Contact Line", "rail": "Electrified Rail", "yes": "Yes (unspecified)", "no": "No"}}},

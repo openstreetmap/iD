@@ -13,8 +13,10 @@
     },
     "fields": [
         "entrance",
+        "door",
         "access_simple",
         "address"
     ],
+    "matchScore": 0.8,
     "name": "Entrance/Exit"
 }

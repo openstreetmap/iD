@@ -3,8 +3,13 @@
     "fields": [
         "level",
         "ref",
+        "door_type",
+        "access_simple",
         "width",
         "height"
+    ],
+    "moreFields": [
+        "wheelchair"
     ],
     "geometry": [
         "vertex"
@@ -14,11 +19,11 @@
     },
     "addTags": {
         "indoor": "door",
-        "entrance": "yes"
+        "door": "yes"
     },
     "removeTags": {
         "indoor": "door",
-        "entrance": "yes"
+        "door": "*"
     },
     "terms": [
         "doorframe",
