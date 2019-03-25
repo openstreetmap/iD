@@ -88,15 +88,37 @@ export function uiTopToolbar(context) {
             toolbarItems.exit()
                 .remove();
 
-            toolbarItems
+            var itemsEnter = toolbarItems
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
                     return 'toolbar-item ' + d.replace('_', '-');
-                })
+                });
+
+            var actionableItems = itemsEnter.filter(function(d) { return d !== 'spacer'; });
+
+            actionableItems
+                .append('div')
+                .attr('class', 'item-content')
                 .each(function(d) {
-                    if (itemContentByID[d]) {
-                        d3_select(this).call(itemContentByID[d], bar);
+                    d3_select(this).call(itemContentByID[d], bar);
+                });
+
+            actionableItems
+                .append('div')
+                .attr('class', 'item-label')
+                .text(function(d) {
+                    switch (d) {
+                    case 'sidebar_toggle':
+                        return t('toolbar.inspect');
+                    case 'save':
+                        return t('save.title');
+                    case 'search_add':
+                        return t('inspector.search');
+                    case 'modes':
+                        return t('toolbar.recent');
+                    default:
+                        return t('toolbar.' + d);
                     }
                 });
         }

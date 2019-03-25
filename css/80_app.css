@@ -436,19 +436,33 @@ button[disabled].action:hover {
     flex-flow: row nowrap;
     justify-content: space-between;
     position: absolute;
-    padding: 10px 5px 10px 5px;
+    padding: 10px 5px 0px 5px;
     left: 0;
     top: 0;
     right: 0;
-    height: 60px;
     z-index: 9;
 }
 #bar .toolbar-item {
     display: flex;
     flex: 0 1 auto;
+    flex-flow: column wrap;
+    justify-content: center;
+    position: relative;
+}
+#bar .toolbar-item .item-content {
+    display: flex;
+    flex: 0 1 auto;
     flex-flow: row nowrap;
     justify-content: center;
     position: relative;
+    height: 40px;
+    width: auto;
+}
+#bar .toolbar-item .item-label {
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 2px;
+    font-size: 11px;
 }
 #bar .toolbar-item:not(.spacer) {
     margin: 0 5px 0 5px;
@@ -496,37 +510,8 @@ button.bar-button.dragging.removing {
 
 button.save .count {
     display: inline-block;
-    border: 0px solid #ccc;
-    border-left-width: 1px;
-    padding: 0px 0px 0px 8px;
     min-width: 32px;
     text-align: center;
-}
-[dir='rtl'] button.save .count {
-    border-left-width: 0px;
-    border-right-width: 1px;
-    padding: 0px 8px 0px 0px;
-}
-button.save.disabled .count {
-    border: 0px solid rgba(0,0,0,0.25);
-    border-left-width: 1px;
-}
-[dir='rtl'] button.save.disabled .count {
-    border-left-width: 0px;
-    border-right-width: 1px;
-    padding: 0px 8px 0px 0px;
-}
-#bar.narrow button.save .count {
-    padding: 0px;
-}
-
-button.save .label {
-    margin-right: 3px;
-    margin-left: 0;
-}
-[dir='rtl'] button.save .label {
-    margin-left: 3px;
-    margin-right: 0;
 }
 
 .help-wrap svg.icon.pre-text.add-note,
@@ -582,10 +567,10 @@ button.add-note svg.icon {
     border-right-width: 0;
 }
 
-[dir='ltr'] .undo-redo > button:first-of-type {
+[dir='ltr'] .undo-redo button:first-of-type {
     margin-right: 1px;
 }
-[dir='rtl'] .undo-redo > button:first-of-type {
+[dir='rtl'] .undo-redo button:first-of-type {
     margin-left: 1px;
 }
 

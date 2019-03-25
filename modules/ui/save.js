@@ -87,11 +87,6 @@ export function uiSave(context) {
 
         button
             .append('span')
-            .attr('class', 'label')
-            .text(t('save.title'));
-
-        button
-            .append('span')
             .attr('class', 'count')
             .text('0');
 

@@ -8,6 +8,10 @@ en:
     copy: copy
     open_wikidata: open on wikidata.org
     favorite: favorite
+  toolbar:
+    inspect: Inspect
+    undo_redo: Undo / Redo
+    recent: Recent
   modes:
     add_feature:
       title: Add a feature
