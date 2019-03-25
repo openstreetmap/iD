@@ -1455,6 +1455,7 @@
     {"key": "resource", "description": "🄵 Resources"},
     {"key": "restriction", "description": "🄵 Type"},
     {"key": "roof:colour", "description": "🄵 Roof Color"},
+    {"key": "room", "description": "🄵 Type"},
     {"key": "rooms", "description": "🄵 Rooms"},
     {"key": "route_master", "description": "🄵 Type"},
     {"key": "route", "description": "🄵 Type"},

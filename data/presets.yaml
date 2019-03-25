@@ -1540,6 +1540,9 @@ en:
       roof/colour:
         # 'roof:colour=*'
         label: Roof Color
+      room:
+        # room=*
+        label: Type
       rooms:
         # rooms=*
         label: Rooms
