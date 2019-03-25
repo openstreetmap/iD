@@ -321,15 +321,7 @@ export function coreHistory(context) {
                         }
                     });
                 });
-                if (window.mocha) {
-                    var arr = [];
-                    s.forEach(function(v) { arr.push(v); });
-                    return arr;
-                } else {
-                    return Array.from(s);
-                }
-                // var arr = _map(_stack.slice(1, _index + 1), 'imageryUsed');
-                // return _without(_uniq(_flatten(arr)), 'Custom');
+                return Array.from(s);
             }
         },
 

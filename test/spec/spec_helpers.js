@@ -36,4 +36,18 @@ mocha.setup({
 
 expect = chai.expect;
 
-window.d3 = iD.d3;   // TODO: remove
+window.d3 = iD.d3;   // TODO: remove if we can avoid exporting all of d3.js
+
+
+// workaround for `Array.from` polyfill in PhantomJS
+// https://github.com/openstreetmap/iD/issues/6087#issuecomment-476219308
+var __arrayfrom = Array.from;
+Array.from = function(what) {
+    if (what instanceof Set) {
+        var arr = [];
+        what.forEach(function(v) { arr.push(v); });
+        return arr;
+    } else {
+        return __arrayfrom.apply(null, arguments);
+    }
+};

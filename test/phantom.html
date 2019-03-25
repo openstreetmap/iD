@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Mocha Tests</title>
+    <link rel='stylesheet' href='../node_modules/mocha/mocha.css'>
+    <link rel='stylesheet' href='../dist/iD.css'>
+    <!-- <script src='../node_modules/d3/build/d3.js'></script> -->
+</head>
+
+<body style="overflow:scroll">
+    <div id='mocha'></div>
+
+    <script src='../node_modules/mocha/mocha.js'></script>
+    <script src='../node_modules/chai/chai.js'></script>
+    <script src='../node_modules/sinon/pkg/sinon.js'></script>
+    <script src='../node_modules/sinon-chai/lib/sinon-chai.js'></script>
+    <script src='../node_modules/happen/happen.js'></script>
+
+    <script>
+        if (typeof initMochaPhantomJS === 'function') {
+            initMochaPhantomJS()
+        }
+    </script>
+
+    <!-- include source files here... -->
+    <script src='../dist/iD.js'></script>
+    <script src='spec/spec_helpers.js'></script>
+
+    <!-- include spec files below... -->
+    <script src='spec/phantom.js'></script>
+
+    <script>
+        window.mocha.run();
+    </script>
+</body>
+
+</html>
