@@ -127,5 +127,16 @@ export function uiToolNotes(context) {
         }
     };
 
+    tool.uninstall = function() {
+        context
+            .on('enter.editor.notes', null)
+            .on('exit.editor.notes', null)
+            .on('enter.notes', null);
+
+        context.map()
+            .on('move.notes', null)
+            .on('drawn.notes', null);
+    };
+
     return tool;
 }

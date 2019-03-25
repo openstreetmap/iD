@@ -51,6 +51,11 @@ export function uiTopToolbar(context) {
                 });
 
             toolbarItems.exit()
+                .each(function(d) {
+                    if (d.uninstall) {
+                        d.uninstall();
+                    }
+                })
                 .remove();
 
             var itemsEnter = toolbarItems
