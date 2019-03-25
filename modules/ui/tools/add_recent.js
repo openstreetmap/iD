@@ -4,14 +4,19 @@ import _uniqWith from 'lodash-es/uniqWith';
 import { drag as d3_drag } from 'd3-drag';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../modes';
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { uiPresetIcon } from './preset_icon';
-import { uiTooltipHtml } from './tooltipHtml';
+import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { uiPresetIcon } from '../preset_icon';
+import { uiTooltipHtml } from '../tooltipHtml';
 
 
-export function uiModes(context) {
+export function uiToolAddRecent(context) {
+
+    var tool = {
+        id: 'modes',
+        label: t('toolbar.recent')
+    };
 
     function enabled() {
         return osmEditable();
@@ -38,7 +43,7 @@ export function uiModes(context) {
     }
 
 
-    return function(selection) {
+    tool.render = function(selection) {
         context
             .on('enter.editor', function(entered) {
                 selection.selectAll('button.add-button')
@@ -313,4 +318,6 @@ export function uiModes(context) {
             context.ui().checkOverflow('#bar', true);
         }
     };
+
+    return tool;
 }

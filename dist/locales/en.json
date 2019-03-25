@@ -43,6 +43,7 @@
             },
             "add_note": {
                 "title": "Note",
+                "label": "Add Note",
                 "description": "Spotted an issue? Let other mappers know.",
                 "tail": "Click on the map to add a note.",
                 "key": "N"

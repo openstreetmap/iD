@@ -7,18 +7,24 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { modeAddArea, modeAddLine, modeAddPoint } from '../modes';
-import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/index';
-import { tooltip } from '../util/tooltip';
-import { uiTagReference } from './tag_reference';
-import { uiTooltipHtml } from './tooltipHtml';
-import { uiPresetFavoriteButton } from './preset_favorite_button';
-import { uiPresetIcon } from './preset_icon';
-import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
+import { modeAddArea, modeAddLine, modeAddPoint } from '../../modes';
+import { t, textDirection } from '../../util/locale';
+import { svgIcon } from '../../svg/index';
+import { tooltip } from '../../util/tooltip';
+import { uiTagReference } from '../tag_reference';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { uiPresetFavoriteButton } from '../preset_favorite_button';
+import { uiPresetIcon } from '../preset_icon';
+import { utilKeybinding, utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSearchAdd(context) {
+export function uiToolSearchAdd(context) {
+
+    var tool = {
+        id: 'search_add',
+        label: t('inspector.search')
+    };
+
     var dispatch = d3_dispatch('choose');
     var presets;
     var searchWrap = d3_select(null),
@@ -59,7 +65,7 @@ export function uiSearchAdd(context) {
     }
 
 
-    function searchAdd(selection) {
+    tool.render = function(selection) {
         updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
         var key = t('modes.add_feature.key');
@@ -175,7 +181,7 @@ export function uiSearchAdd(context) {
         updateEnabledState();
 
         updateResultsList();
-    }
+    };
 
     function osmEditable() {
         var mode = context.mode();
@@ -635,5 +641,5 @@ export function uiSearchAdd(context) {
         return item;
     }
 
-    return utilRebind(searchAdd, dispatch, 'on');
+    return utilRebind(tool, dispatch, 'on');
 }

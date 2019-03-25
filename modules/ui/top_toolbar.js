@@ -4,52 +4,17 @@ import {
 } from 'd3-selection';
 
 import _debounce from 'lodash-es/debounce';
-
-import { svgIcon } from '../svg';
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-
-import { uiModes } from './modes';
-import { uiNotes } from './notes';
-import { uiSave } from './save';
-import { uiSearchAdd } from './search_add';
-import { uiTooltipHtml } from './tooltipHtml';
-import { uiUndoRedo } from './undo_redo';
+import { uiToolAddRecent, uiToolNotes, uiToolSave, uiToolSearchAdd, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 
 
 export function uiTopToolbar(context) {
 
-    var searchAdd = uiSearchAdd(context),
-        modes = uiModes(context),
-        notes = uiNotes(context),
-        undoRedo = uiUndoRedo(context),
-        save = uiSave(context);
-
-    var sidebarToggle = function(selection) {
-
-        selection
-            .append('button')
-            .attr('class', 'bar-button')
-            .attr('tabindex', -1)
-            .on('click', function() {
-                context.ui().sidebar.toggle();
-            })
-            .call(tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
-            )
-            .call(svgIcon('#iD-icon-sidebar-' + (textDirection === 'rtl' ? 'right' : 'left')));
-    };
-
-    var itemContentByID = {
-        sidebar_toggle: sidebarToggle,
-        search_add: searchAdd,
-        modes: modes,
-        notes: notes,
-        undo_redo: undoRedo,
-        save: save
-    };
+    var sidebarToggle = uiToolSidebarToggle(context),
+        searchAdd = uiToolSearchAdd(context),
+        addRecent = uiToolAddRecent(context),
+        notes = uiToolNotes(context),
+        undoRedo = uiToolUndoRedo(context),
+        save = uiToolSave(context);
 
     function notesEnabled() {
         var noteLayer = context.layers().layer('notes');
@@ -66,23 +31,23 @@ export function uiTopToolbar(context) {
 
         function update() {
 
-            var toolbarItemIDs = [
-                'sidebar_toggle',
+            var tools = [
+                sidebarToggle,
                 'spacer',
-                'search_add',
-                'modes',
+                searchAdd,
+                addRecent,
                 'spacer'
             ];
 
             if (notesEnabled()) {
-                toolbarItemIDs = toolbarItemIDs.concat(['notes', 'spacer']);
+                tools = tools.concat([notes, 'spacer']);
             }
 
-            toolbarItemIDs = toolbarItemIDs.concat(['undo_redo', 'save']);
+            tools = tools.concat([undoRedo, save]);
 
             var toolbarItems = bar.selectAll('.toolbar-item')
-                .data(toolbarItemIDs, function(d) {
-                    return d;
+                .data(tools, function(d) {
+                    return d.id || d;
                 });
 
             toolbarItems.exit()
@@ -92,7 +57,7 @@ export function uiTopToolbar(context) {
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
-                    return 'toolbar-item ' + d.replace('_', '-');
+                    return 'toolbar-item ' + (d.id || d).replace('_', '-');
                 });
 
             var actionableItems = itemsEnter.filter(function(d) { return d !== 'spacer'; });
@@ -101,25 +66,14 @@ export function uiTopToolbar(context) {
                 .append('div')
                 .attr('class', 'item-content')
                 .each(function(d) {
-                    d3_select(this).call(itemContentByID[d], bar);
+                    d3_select(this).call(d.render, bar);
                 });
 
             actionableItems
                 .append('div')
                 .attr('class', 'item-label')
                 .text(function(d) {
-                    switch (d) {
-                    case 'sidebar_toggle':
-                        return t('toolbar.inspect');
-                    case 'save':
-                        return t('save.title');
-                    case 'search_add':
-                        return t('inspector.search');
-                    case 'modes':
-                        return t('toolbar.recent');
-                    default:
-                        return t('toolbar.' + d);
-                    }
+                    return d.label;
                 });
         }
 

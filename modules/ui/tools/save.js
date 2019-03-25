@@ -1,21 +1,27 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
 import { event as d3_event } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { modeSave } from '../modes';
-import { svgIcon } from '../svg';
-import { uiCmd } from './cmd';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
+import { t } from '../../util/locale';
+import { modeSave } from '../../modes';
+import { svgIcon } from '../../svg';
+import { uiCmd } from '../cmd';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { tooltip } from '../../util/tooltip';
 
 
-export function uiSave(context) {
+export function uiToolSave(context) {
+
+    var tool = {
+        id: 'save',
+        label: t('save.title')
+    };
+
     var history = context.history();
     var key = uiCmd('⌘S');
     var _numChanges = 0;
 
 
-    return function(selection) {
+    tool.render = function(selection) {
 
 
         function isSaving() {
@@ -109,4 +115,6 @@ export function uiSave(context) {
                 }
             });
     };
+
+    return tool;
 }

@@ -5,14 +5,20 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
-import { uiCmd } from './cmd';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
+import { t, textDirection } from '../../util/locale';
+import { svgIcon } from '../../svg';
+import { uiCmd } from '../cmd';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { tooltip } from '../../util/tooltip';
 
 
-export function uiUndoRedo(context) {
+export function uiToolUndoRedo(context) {
+
+    var tool = {
+        id: 'undo_redo',
+        label: t('toolbar.undo_redo')
+    };
+
     var commands = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
@@ -32,7 +38,7 @@ export function uiUndoRedo(context) {
     }
 
 
-    return function(selection) {
+    tool.render = function(selection) {
         var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
@@ -93,4 +99,6 @@ export function uiUndoRedo(context) {
                 });
         }
     };
+
+    return tool;
 }

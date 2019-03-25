@@ -5,13 +5,19 @@ import { select as d3_select } from 'd3-selection';
 import {
     modeAddNote,
     modeBrowse
-} from '../modes';
+} from '../../modes';
 
-import { svgIcon } from '../svg';
-import { tooltip } from '../util/tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
+import { t } from '../../util/locale';
+import { svgIcon } from '../../svg';
+import { tooltip } from '../../util/tooltip';
+import { uiTooltipHtml } from '../tooltipHtml';
 
-export function uiNotes(context) {
+export function uiToolNotes(context) {
+
+    var tool = {
+        id: 'notes',
+        label: t('modes.add_note.label')
+    };
 
     var mode = modeAddNote(context);
 
@@ -39,7 +45,7 @@ export function uiNotes(context) {
         }
     });
 
-    return function(selection) {
+    tool.render = function(selection) {
 
         context
             .on('enter.editor.notes', function(entered) {
@@ -109,11 +115,6 @@ export function uiNotes(context) {
                         .call(svgIcon(d.icon || '#iD-icon-' + d.button));
                 });
 
-            buttonsEnter
-                .append('span')
-                .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
-
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {
                 context.ui().checkOverflow('#bar', true);
@@ -125,4 +126,6 @@ export function uiNotes(context) {
                 .classed('disabled', function(d) { return !enabled(d); });
         }
     };
+
+    return tool;
 }
