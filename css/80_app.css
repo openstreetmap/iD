@@ -638,6 +638,7 @@ button.add-note svg.icon {
     margin: auto;
     left: auto;
     right: auto;
+    z-index: 300;
 }
 .search-add .popover .popover-content {
     overflow-y: auto;
