@@ -100,5 +100,21 @@ export function uiToolUndoRedo(context) {
         }
     };
 
+    tool.uninstall = function() {
+        context.keybinding()
+            .off(commands[0].cmd)
+            .off(commands[1].cmd);
+
+        context.map()
+            .on('move.undo_redo', null)
+            .on('drawn.undo_redo', null);
+
+        context.history()
+            .on('change.undo_redo', null);
+
+        context
+            .on('enter.undo_redo', null);
+    };
+
     return tool;
 }

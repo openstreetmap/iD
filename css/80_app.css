@@ -457,16 +457,13 @@ button[disabled].action:hover {
     position: relative;
     height: 40px;
     width: auto;
+    margin: 0 5px;
 }
 #bar .toolbar-item .item-label {
     text-align: center;
-    margin-top: 1px;
-    margin-bottom: 2px;
     font-size: 11px;
     white-space: nowrap;
-}
-#bar .toolbar-item:not(.spacer) {
-    margin: 0 5px 0 5px;
+    margin: 1px 2px 2px 2px;
 }
 #bar .toolbar-item.spacer {
     width: 100%;

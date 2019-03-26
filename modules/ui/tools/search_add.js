@@ -37,7 +37,7 @@ export function uiToolSearchAdd(context) {
 
     var allowedGeometry = ['area', 'line', 'point', 'vertex'];
     var shownGeometry = [];
-
+    var key = t('modes.add_feature.key');
 
     function updateShownGeometry(geom) {
         shownGeometry = geom.sort();
@@ -67,8 +67,6 @@ export function uiToolSearchAdd(context) {
 
     tool.render = function(selection) {
         updateShownGeometry(allowedGeometry.slice());   // shallow copy
-
-        var key = t('modes.add_feature.key');
 
         searchWrap = selection
             .append('div')
@@ -164,7 +162,8 @@ export function uiToolSearchAdd(context) {
                 updateResultsList();
             });
 
-        context.features().on('change.search-add', updateForFeatureHiddenState);
+        context.features()
+            .on('change.search-add', updateForFeatureHiddenState);
 
         context.keybinding().on(key, function() {
             search.node().focus();
@@ -181,6 +180,17 @@ export function uiToolSearchAdd(context) {
         updateEnabledState();
 
         updateResultsList();
+    };
+
+    tool.uninstall = function() {
+        context.keybinding().off(key);
+
+        context.features()
+            .on('change.search-add', null);
+
+        context.map()
+            .on('move.search-add', null)
+            .on('drawn.search-add', null);
     };
 
     function osmEditable() {
