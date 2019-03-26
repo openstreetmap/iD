@@ -1,4 +1,3 @@
-import _pull from 'lodash-es/pull';
 import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -157,7 +156,7 @@ export function uiFieldRadio(field, context) {
             field.keys = _union(field.keys, ['layer']);
         } else {
             layerField = null;
-            _pull(field.keys, 'layer');
+            field.keys = field.keys.filter(function(k) { return k !== 'layer'; });
         }
 
         var layerItem = list.selectAll('.structure-layer-item')
