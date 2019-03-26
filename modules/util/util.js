@@ -283,11 +283,6 @@ export function utilFastMouse(container) {
 }
 
 
-/* eslint-disable no-proto */
-export var utilGetPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
-/* eslint-enable no-proto */
-
-
 export function utilAsyncMap(inputs, func, callback) {
     var remaining = inputs.length;
     var results = [];

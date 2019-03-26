@@ -71,13 +71,6 @@ describe('iD.util', function() {
         expect(iD.utilQsString({})).to.eql('');
     });
 
-    it('utilGetPrototypeOf', function() {
-        var a = function() {};
-        a.prototype = { foo: 'foo' };
-        expect(iD.utilGetPrototypeOf({})).to.eql({});
-        expect(iD.utilGetPrototypeOf(new a())).to.eql({ foo: 'foo' });
-    });
-
     describe('utilEditDistance', function() {
         it('returns zero for same strings', function() {
             expect(iD.utilEditDistance('foo', 'foo')).to.eql(0);

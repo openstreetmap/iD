@@ -13,7 +13,6 @@ export { utilEntityOrDeepMemberSelector } from './util';
 export { utilFastMouse } from './util';
 export { utilFunctor } from './util';
 export { utilGetAllNodes } from './util';
-export { utilGetPrototypeOf } from './util';
 export { utilGetSetValue } from './get_set_value';
 export { utilHashcode } from './util';
 export { utilHighlightEntities } from './util';

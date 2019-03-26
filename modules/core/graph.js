@@ -2,7 +2,6 @@ import _difference from 'lodash-es/difference';
 import _includes from 'lodash-es/includes';
 
 import { debug } from '../index';
-import { utilGetPrototypeOf } from '../util';
 
 
 export function coreGraph(other, mutable) {
@@ -125,9 +124,9 @@ coreGraph.prototype = {
 
     base: function() {
         return {
-            'entities': utilGetPrototypeOf(this.entities),
-            'parentWays': utilGetPrototypeOf(this._parentWays),
-            'parentRels': utilGetPrototypeOf(this._parentRels)
+            'entities': Object.getPrototypeOf(this.entities),
+            'parentWays': Object.getPrototypeOf(this._parentWays),
+            'parentRels': Object.getPrototypeOf(this._parentRels)
         };
     },
 
