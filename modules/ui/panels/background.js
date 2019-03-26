@@ -1,5 +1,4 @@
 import _debounce from 'lodash-es/debounce';
-import _without from 'lodash-es/without';
 
 import {
     event as d3_event,
@@ -103,10 +102,10 @@ export function uiPanelBackground(context) {
         var tile = d3_select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var sourceName = currSourceName,
-            d = tile.datum(),
-            zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom()),
-            center = context.map().center();
+        var sourceName = currSourceName;
+        var d = tile.datum();
+        var zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom());
+        var center = context.map().center();
 
         // update zoom
         metadata.zoom = String(zoom);
@@ -129,15 +128,15 @@ export function uiPanelBackground(context) {
                 .text(metadata.vintage);
 
             // update other metdata
-            _without(metadataKeys, 'zoom', 'vintage')
-                .forEach(function(k) {
-                    var val = result[k];
-                    metadata[k] = val;
-                    selection.selectAll('.background-info-list-' + k)
-                        .classed('hide', !val)
-                        .selectAll('.background-info-span-' + k)
-                        .text(val);
-                });
+            metadataKeys.forEach(function(k) {
+                if (k === 'zoom' || k === 'vintage') return;  // done already
+                var val = result[k];
+                metadata[k] = val;
+                selection.selectAll('.background-info-list-' + k)
+                    .classed('hide', !val)
+                    .selectAll('.background-info-span-' + k)
+                    .text(val);
+            });
         });
     }
 

@@ -1,5 +1,4 @@
 import _uniq from 'lodash-es/uniq';
-import _without from 'lodash-es/without';
 
 import { utilEditDistance } from '../util/index';
 
@@ -104,7 +103,9 @@ export function presetCollection(collection) {
             // matches value to preset.tags values
             var leading_tag_values = searchable
                 .filter(function(a) {
-                    return _without(Object.values(a.tags || {}), '*').some(leading);
+                    return Object.values(a.tags || {})
+                        .filter(function(val) { return val !== '*'; })
+                        .some(leading);
                 });
 
             var leading_suggestions = suggestions

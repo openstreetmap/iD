@@ -1,9 +1,7 @@
 import _isEqual from 'lodash-es/isEqual';
 import _isFunction from 'lodash-es/isFunction';
-import _map from 'lodash-es/map';
 import _union from 'lodash-es/union';
 import _uniq from 'lodash-es/uniq';
-import _without from 'lodash-es/without';
 
 import { diff3Merge } from 'node-diff3';
 import { t } from '../util/locale';
@@ -80,9 +78,11 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
     function mergeChildren(targetWay, children, updates, graph) {
         function isUsed(node, targetWay) {
-            var parentWays = _map(graph.parentWays(node), 'id');
+            var hasInterestingParent = graph.parentWays(node)
+                .some(function(way) { return way.id !== targetWay.id; });
+
             return node.hasInterestingTags() ||
-                _without(parentWays, targetWay.id).length > 0 ||
+                hasInterestingParent ||
                 graph.parentRelations(node).length > 0;
         }
 

@@ -1,6 +1,4 @@
-import _each from 'lodash-es/each';
 import _uniq from 'lodash-es/uniq';
-import _without from 'lodash-es/without';
 
 import { median as d3_median } from 'd3-array';
 
@@ -22,8 +20,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayId),
-            origNodes = {};
+        var way = graph.entity(wayId);
+        var origNodes = {};
 
         graph.childNodes(way).forEach(function(node) {
             if (!origNodes[node.id]) origNodes[node.id] = node;
@@ -33,14 +31,14 @@ export function actionCircularize(wayId, projection, maxAngle) {
             graph = action.makeConvex(graph);
         }
 
-        var nodes = _uniq(graph.childNodes(way)),
-            keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
-            points = nodes.map(function(n) { return projection(n.loc); }),
-            keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points),
-            radius = d3_median(points, function(p) { return geoVecLength(centroid, p); }),
-            sign = d3_polygonArea(points) > 0 ? 1 : -1,
-            ids;
+        var nodes = _uniq(graph.childNodes(way));
+        var keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; });
+        var points = nodes.map(function(n) { return projection(n.loc); });
+        var keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
+        var centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points);
+        var radius = d3_median(points, function(p) { return geoVecLength(centroid, p); });
+        var sign = d3_polygonArea(points) > 0 ? 1 : -1;
+        var ids, i, j, k;
 
         // we need atleast two key nodes for the algorithm to work
         if (!keyNodes.length) {
@@ -49,8 +47,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
         }
 
         if (keyNodes.length === 1) {
-            var index = nodes.indexOf(keyNodes[0]),
-                oppositeIndex = Math.floor((index + nodes.length / 2) % nodes.length);
+            var index = nodes.indexOf(keyNodes[0]);
+            var oppositeIndex = Math.floor((index + nodes.length / 2) % nodes.length);
 
             keyNodes.push(nodes[oppositeIndex]);
             keyPoints.push(points[oppositeIndex]);
@@ -60,26 +58,25 @@ export function actionCircularize(wayId, projection, maxAngle) {
         // they are projected onto the circle, inbetween nodes are moved
         // to constant intervals between key nodes, extra inbetween nodes are
         // added if necessary.
-        for (var i = 0; i < keyPoints.length; i++) {
-            var nextKeyNodeIndex = (i + 1) % keyNodes.length,
-                startNode = keyNodes[i],
-                endNode = keyNodes[nextKeyNodeIndex],
-                startNodeIndex = nodes.indexOf(startNode),
-                endNodeIndex = nodes.indexOf(endNode),
-                numberNewPoints = -1,
-                indexRange = endNodeIndex - startNodeIndex,
-                nearNodes = {},
-                inBetweenNodes = [],
-                startAngle, endAngle, totalAngle, eachAngle,
-                angle, loc, node, origNode, j;
+        for (i = 0; i < keyPoints.length; i++) {
+            var nextKeyNodeIndex = (i + 1) % keyNodes.length;
+            var startNode = keyNodes[i];
+            var endNode = keyNodes[nextKeyNodeIndex];
+            var startNodeIndex = nodes.indexOf(startNode);
+            var endNodeIndex = nodes.indexOf(endNode);
+            var numberNewPoints = -1;
+            var indexRange = endNodeIndex - startNodeIndex;
+            var nearNodes = {};
+            var inBetweenNodes = [];
+            var startAngle, endAngle, totalAngle, eachAngle;
+            var angle, loc, node, origNode;
 
             if (indexRange < 0) {
                 indexRange += nodes.length;
             }
 
             // position this key node
-            var distance = geoVecLength(centroid, keyPoints[i]);
-            if (distance === 0) { distance = 1e-4; }
+            var distance = geoVecLength(centroid, keyPoints[i]) || 1e-4;
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
                 centroid[1] + (keyPoints[i][1] - centroid[1]) / distance * radius
@@ -133,8 +130,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 // choose a nearnode to use as the original
                 var min = Infinity;
                 for (var nodeId in nearNodes) {
-                    var nearAngle = nearNodes[nodeId],
-                        dist = Math.abs(nearAngle - angle);
+                    var nearAngle = nearNodes[nodeId];
+                    var dist = Math.abs(nearAngle - angle);
                     if (dist < min) {
                         dist = min;
                         origNode = origNodes[nodeId];
@@ -152,31 +149,33 @@ export function actionCircularize(wayId, projection, maxAngle) {
             // If keyNodes are adjacent in both ways,
             // we can add inBetween nodes to that shared way too..
             if (indexRange === 1 && inBetweenNodes.length) {
-                var startIndex1 = way.nodes.lastIndexOf(startNode.id),
-                    endIndex1 = way.nodes.lastIndexOf(endNode.id),
-                    wayDirection1 = (endIndex1 - startIndex1);
+                var startIndex1 = way.nodes.lastIndexOf(startNode.id);
+                var endIndex1 = way.nodes.lastIndexOf(endNode.id);
+                var wayDirection1 = (endIndex1 - startIndex1);
                 if (wayDirection1 < -1) { wayDirection1 = 1; }
 
-                /* eslint-disable no-loop-func */
-                _each(_without(graph.parentWays(keyNodes[i]), way), function(sharedWay) {
+                var parentWays = graph.parentWays(keyNodes[i]);
+                for (j = 0; j < parentWays.length; j++) {
+                    var sharedWay = parentWays[j];
+                    if (sharedWay === way) continue;
+
                     if (sharedWay.areAdjacent(startNode.id, endNode.id)) {
-                        var startIndex2 = sharedWay.nodes.lastIndexOf(startNode.id),
-                            endIndex2 = sharedWay.nodes.lastIndexOf(endNode.id),
-                            wayDirection2 = (endIndex2 - startIndex2),
-                            insertAt = endIndex2;
+                        var startIndex2 = sharedWay.nodes.lastIndexOf(startNode.id);
+                        var endIndex2 = sharedWay.nodes.lastIndexOf(endNode.id);
+                        var wayDirection2 = (endIndex2 - startIndex2);
+                        var insertAt = endIndex2;
                         if (wayDirection2 < -1) { wayDirection2 = 1; }
 
                         if (wayDirection1 !== wayDirection2) {
                             inBetweenNodes.reverse();
                             insertAt = startIndex2;
                         }
-                        for (j = 0; j < inBetweenNodes.length; j++) {
-                            sharedWay = sharedWay.addNode(inBetweenNodes[j], insertAt + j);
+                        for (k = 0; k < inBetweenNodes.length; k++) {
+                            sharedWay = sharedWay.addNode(inBetweenNodes[k], insertAt + k);
                         }
                         graph = graph.replace(sharedWay);
                     }
-                });
-                /* eslint-enable no-loop-func */
+                }
             }
 
         }
@@ -193,11 +192,12 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
 
     action.makeConvex = function(graph) {
-        var way = graph.entity(wayId),
-            nodes = _uniq(graph.childNodes(way)),
-            points = nodes.map(function(n) { return projection(n.loc); }),
-            sign = d3_polygonArea(points) > 0 ? 1 : -1,
-            hull = d3_polygonHull(points);
+        var way = graph.entity(wayId);
+        var nodes = _uniq(graph.childNodes(way));
+        var points = nodes.map(function(n) { return projection(n.loc); });
+        var sign = d3_polygonArea(points) > 0 ? 1 : -1;
+        var hull = d3_polygonHull(points);
+        var i, j;
 
         // D3 convex hulls go counterclockwise..
         if (sign === -1) {
@@ -205,19 +205,19 @@ export function actionCircularize(wayId, projection, maxAngle) {
             points.reverse();
         }
 
-        for (var i = 0; i < hull.length - 1; i++) {
-            var startIndex = points.indexOf(hull[i]),
-                endIndex = points.indexOf(hull[i+1]),
-                indexRange = (endIndex - startIndex);
+        for (i = 0; i < hull.length - 1; i++) {
+            var startIndex = points.indexOf(hull[i]);
+            var endIndex = points.indexOf(hull[i+1]);
+            var indexRange = (endIndex - startIndex);
 
             if (indexRange < 0) {
                 indexRange += nodes.length;
             }
 
             // move interior nodes to the surface of the convex hull..
-            for (var j = 1; j < indexRange; j++) {
-                var point = geoVecInterp(hull[i], hull[i+1], j / indexRange),
-                    node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
+            for (j = 1; j < indexRange; j++) {
+                var point = geoVecInterp(hull[i], hull[i+1], j / indexRange);
+                var node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
                 graph = graph.replace(node);
             }
         }

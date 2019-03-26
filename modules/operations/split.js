@@ -1,5 +1,3 @@
-import _without from 'lodash-es/without';
-
 import { t } from '../util/locale';
 import { actionSplit } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
@@ -7,17 +5,18 @@ import { modeSelect } from '../modes/index';
 
 
 export function operationSplit(selectedIDs, context) {
-    var vertices = selectedIDs.filter(function(entityId) {
-        return context.geometry(entityId) === 'vertex';
+    var vertices = selectedIDs.filter(function(id) {
+        return context.geometry(id) === 'vertex';
     });
 
-    var entityId = vertices[0];
-    var action = actionSplit(entityId);
+    var entityID = vertices[0];
+    var action = actionSplit(entityID);
     var ways = [];
 
     if (vertices.length === 1) {
-        if (selectedIDs.length > 1) {
-            action.limitWays(_without(selectedIDs, entityId));
+        if (entityID && selectedIDs.length > 1) {
+            var ids = selectedIDs.filter(function(id) { return id !== entityID; });
+            action.limitWays(ids);
         }
         ways = action.ways(context.graph());
     }

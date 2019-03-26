@@ -1,6 +1,5 @@
 import _difference from 'lodash-es/difference';
 import _includes from 'lodash-es/includes';
-import _without from 'lodash-es/without';
 
 import { debug } from '../index';
 import { utilGetPrototypeOf } from '../util';
@@ -228,10 +227,12 @@ coreGraph.prototype = {
                 added = entity.nodes;
             }
             for (i = 0; i < removed.length; i++) {
-                parentWays[removed[i]] = _without(parentWays[removed[i]], oldentity.id);
+                parentWays[removed[i]] = (parentWays[removed[i]] || [])
+                    .filter(function(id) { return id !== oldentity.id; });
             }
             for (i = 0; i < added.length; i++) {
-                ways = _without(parentWays[added[i]], entity.id);
+                ways = (parentWays[added[i]] || [])
+                    .filter(function(id) { return id !== entity.id; });
                 ways.push(entity.id);
                 parentWays[added[i]] = ways;
             }
@@ -248,10 +249,12 @@ coreGraph.prototype = {
                 added = entity.members;
             }
             for (i = 0; i < removed.length; i++) {
-                parentRels[removed[i].id] = _without(parentRels[removed[i].id], oldentity.id);
+                parentRels[removed[i].id] = (parentRels[removed[i].id] || [])
+                    .filter(function(id) { return id !== oldentity.id; });
             }
             for (i = 0; i < added.length; i++) {
-                rels = _without(parentRels[added[i].id], entity.id);
+                rels = (parentRels[added[i].id] || [])
+                    .filter(function(id) { return id !== entity.id; });
                 rels.push(entity.id);
                 parentRels[added[i].id] = rels;
             }

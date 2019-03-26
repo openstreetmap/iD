@@ -2,7 +2,6 @@ import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 import _uniq from 'lodash-es/uniq';
-import _without from 'lodash-es/without';
 
 import {
     event as d3_event,
@@ -132,10 +131,14 @@ export function modeSave(context) {
         // Do the full (slow) conflict check..
         } else {
             var summary = history.difference().summary();
-            var modified = summary.filter(function(item) {
-                return item.changeType === 'modified';
-            });
-            _toCheck = _map(_map(modified, 'entity'), 'id');
+            _toCheck = [];
+            for (var i = 0; i < summary.length; i++) {
+                var item = summary[i];
+                if (item.changeType === 'modified') {
+                    _toCheck.push(item.entity.id);
+                }
+            }
+
             _toLoad = withChildNodes(_toCheck, localGraph);
             _loaded = {};
             _toLoadCount = 0;
@@ -190,7 +193,7 @@ export function modeSave(context) {
                 result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
                     _loaded[entity.id] = true;
-                    _toLoad = _without(_toLoad, entity.id);
+                    _toLoad = _toLoad.filter(function(val) { return val !== entity.id; });
 
                     if (!entity.visible) return;
 

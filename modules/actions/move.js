@@ -1,7 +1,6 @@
 import _intersection from 'lodash-es/intersection';
 import _isEqual from 'lodash-es/isEqual';
 import _map from 'lodash-es/map';
-import _without from 'lodash-es/without';
 
 import { osmNode } from '../osm';
 
@@ -259,8 +258,8 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         // don't move the vertex if it is the endpoint of both ways.
         if (isEP1 && isEP2) return graph;
 
-        var nodes1 = _without(graph.childNodes(way1), vertex);
-        var nodes2 = _without(graph.childNodes(way2), vertex);
+        var nodes1 = graph.childNodes(way1).filter(function(n) { return n !== vertex; });
+        var nodes2 = graph.childNodes(way2).filter(function(n) { return n !== vertex; });
 
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);

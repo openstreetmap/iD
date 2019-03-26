@@ -1,5 +1,3 @@
-import _without from 'lodash-es/without';
-
 import {
     event as d3_event,
     mouse as d3_mouse,
@@ -16,11 +14,7 @@ import {
     modeSelectError
 } from '../modes';
 
-import {
-    osmEntity,
-    osmNote,
-    qaError
-} from '../osm';
+import { osmEntity, osmNote, qaError } from '../osm';
 
 
 export function behaviorSelect(context) {
@@ -151,7 +145,7 @@ export function behaviorSelect(context) {
                         mode.suppressMenu(false).reselect();
                     } else {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
-                        selectedIDs = _without(selectedIDs, datum.id);
+                        selectedIDs = selectedIDs.filter(function(id) { return id !== datum.id; });
                         context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
                     }
                 } else {

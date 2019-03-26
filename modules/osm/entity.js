@@ -1,5 +1,4 @@
 import _union from 'lodash-es/union';
-import _without from 'lodash-es/without';
 
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
@@ -142,7 +141,7 @@ osmEntity.prototype = {
 
 
     hasNonGeometryTags: function() {
-        return _without(Object.keys(this.tags), 'area').length > 0;
+        return Object.keys(this.tags).some(function(k) { return k !== 'area'; });
     },
 
     hasParentRelations: function(resolver) {

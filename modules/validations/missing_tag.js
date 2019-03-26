@@ -1,6 +1,3 @@
-import _without from 'lodash-es/without';
-import _isEmpty from 'lodash-es/isEmpty';
-
 import { operationDelete } from '../operations/index';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
@@ -13,7 +10,15 @@ export function validationMissingTag() {
 
 
     function hasDescriptiveTags(entity) {
-        var keys = _without(Object.keys(entity.tags), 'area', 'name').filter(osmIsInterestingTag);
+        var keys = Object.keys(entity.tags)
+            .filter(function(k) {
+                if (k === 'area' || k === 'name') {
+                    return false;
+                } else {
+                    return osmIsInterestingTag(k);
+                }
+            });
+
         if (entity.type === 'relation' && keys.length === 1) {
             return entity.tags.type !== 'multipolygon';
         }
@@ -40,7 +45,7 @@ export function validationMissingTag() {
         var messageObj = {};
         var missingTagType;
 
-        if (_isEmpty(entity.tags)) {
+        if (Object.keys(entity.tags).length === 0) {
             missingTagType = 'any';
         } else if (!hasDescriptiveTags(entity)) {
             missingTagType = 'descriptive';

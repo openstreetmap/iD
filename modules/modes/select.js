@@ -1,7 +1,6 @@
 import _intersection from 'lodash-es/intersection';
 import _map from 'lodash-es/map';
 import _uniq from 'lodash-es/uniq';
-import _without from 'lodash-es/without';
 
 import {
     event as d3_event,
@@ -214,23 +213,23 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
-    mode.newFeature = function(_) {
+    mode.newFeature = function(val) {
         if (!arguments.length) return newFeature;
-        newFeature = _;
+        newFeature = val;
         return mode;
     };
 
 
-    mode.suppressMenu = function(_) {
+    mode.suppressMenu = function(val) {
         if (!arguments.length) return suppressMenu;
-        suppressMenu = _;
+        suppressMenu = val;
         return mode;
     };
 
 
-    mode.follow = function(_) {
+    mode.follow = function(val) {
         if (!arguments.length) return follow;
-        follow = _;
+        follow = val;
         return mode;
     };
 
@@ -240,9 +239,9 @@ export function modeSelect(context, selectedIDs) {
 
         context.features().forceVisible(selectedIDs);
 
-        var operations = _without(Object.values(Operations), Operations.operationDelete)
+        var operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
-            .filter(function(o) { return o.available(); });
+            .filter(function(o) { return o.available() && o.id !== 'delete'; });
 
         // deprecation warning - Radial Menu to be removed in iD v3
         var isRadialMenu = context.storage('edit-menu-style') === 'radial';
@@ -343,7 +342,7 @@ export function modeSelect(context, selectedIDs) {
                 var next = entity.nodes[choice.index];
 
                 context.perform(
-                    actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, osmNode()),
+                    actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, osmNode()),
                     t('operations.add.annotation.vertex')
                 );
 
@@ -352,7 +351,7 @@ export function modeSelect(context, selectedIDs) {
 
             } else if (entity.type === 'midpoint') {
                 context.perform(
-                    actionAddMidpoint({loc: entity.loc, edge: entity.edge}, osmNode()),
+                    actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, osmNode()),
                     t('operations.add.annotation.vertex'));
 
                 d3_event.preventDefault();
