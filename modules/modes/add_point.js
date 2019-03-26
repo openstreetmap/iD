@@ -47,7 +47,7 @@ export function modeAddPoint(context, mode) {
 
     function enterSelectMode(node) {
         context.enter(
-            modeSelect(context, [node.id]).newFeature(mode.preset.isFallback())
+            modeSelect(context, [node.id]).newFeature(true)
         );
     }
 
