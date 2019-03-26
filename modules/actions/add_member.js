@@ -1,6 +1,6 @@
 import _groupBy from 'lodash-es/groupBy';
-import _omit from 'lodash-es/omit';
 
+import { utilObjectOmit } from '../util';
 import { osmJoinWays, osmWay } from '../osm';
 
 
@@ -135,7 +135,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
                 wayMembers.push(item.pair[0]);
                 wayMembers.push(item.pair[1]);
             } else {
-                wayMembers.push(_omit(item, 'index'));
+                wayMembers.push(utilObjectOmit(item, ['index']));
             }
         }
 
@@ -144,7 +144,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         // see https://wiki.openstreetmap.org/wiki/Public_transport#Service_routes
         var newMembers = PTv2members.concat( (groups.node || []), wayMembers, (groups.relation || []) );
 
-        return graph.replace(relation.update({members: newMembers}));
+        return graph.replace(relation.update({ members: newMembers }));
 
 
         // `moveMember()` changes the `members` array in place by splicing

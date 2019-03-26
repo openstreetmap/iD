@@ -7,7 +7,6 @@ import _isFunction from 'lodash-es/isFunction';
 import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
-import _omit from 'lodash-es/omit';
 import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -19,7 +18,7 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-import { utilRebind, utilSessionMutex } from '../util';
+import { utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
 
 
 export function coreHistory(context) {
@@ -393,7 +392,7 @@ export function coreHistory(context) {
 
 
             function customizer(src) {
-                var copy = _omit(_cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
+                var copy = utilObjectOmit(_cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
                 if (_isEmpty(copy.tags)) {
                     delete copy.tags;
                 }

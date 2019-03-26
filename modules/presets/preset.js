@@ -1,8 +1,8 @@
-import _omit from 'lodash-es/omit';
 import _uniq from 'lodash-es/uniq';
 
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
+import { utilObjectOmit } from '../util';
 
 
 export function presetPreset(id, preset, fields, visible, rawPresets) {
@@ -183,7 +183,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         }
 
         // Lookup documentation on OSM Wikibase...
-        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0];
+        var key = reference.key || Object.keys(utilObjectOmit(preset.tags, 'name'))[0];
         var value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
@@ -205,7 +205,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.removeTags = preset.removeTags || preset.tags || {};
     preset.unsetTags = function(tags, geometry) {
-        tags = _omit(tags, Object.keys(preset.removeTags));
+        tags = utilObjectOmit(tags, Object.keys(preset.removeTags));
 
         for (var f in preset.fields) {
             var field = preset.fields[f];

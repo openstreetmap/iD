@@ -1,11 +1,10 @@
-import _omit from 'lodash-es/omit';
 import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes';
-import { utilQsString, utilStringQs } from '../util';
+import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 
 
 export function behaviorHash(context) {
@@ -21,9 +20,9 @@ export function behaviorHash(context) {
             return true; // replace bogus hash
 
         } else if (s !== formatter(map).slice(1)) {   // hash has changed
-            var mode = context.mode(),
-                dist = geoSphericalDistance(map.center(), [args[2], args[1]]),
-                maxdist = 500;
+            var mode = context.mode();
+            var dist = geoSphericalDistance(map.center(), [args[2], args[1]]);
+            var maxdist = 500;
 
             // Don't allow the hash location to change too much while drawing
             // This can happen if the user accidently hit the back button.  #3996
@@ -40,7 +39,7 @@ export function behaviorHash(context) {
         var center = map.center();
         var zoom = map.zoom();
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var q = _omit(utilStringQs(window.location.hash.substring(1)),
+        var q = utilObjectOmit(utilStringQs(window.location.hash.substring(1)),
             ['comment', 'source', 'hashtags', 'walkthrough']
         );
         var newParams = {};

@@ -1,9 +1,8 @@
 import _groupBy from 'lodash-es/groupBy';
-import _map from 'lodash-es/map';
-import _omit from 'lodash-es/omit';
 
 import { geoPolygonContainsPolygon } from '../geo';
 import { osmJoinWays, osmRelation } from '../osm';
+import { utilObjectOmit } from '../util';
 
 
 export function actionMergePolygon(ids, newRelationId) {
@@ -48,8 +47,8 @@ export function actionMergePolygon(ids, newRelationId) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
                 return geoPolygonContainsPolygon(
-                    _map(d.nodes, 'loc'),
-                    _map(w.nodes, 'loc')
+                    d.nodes.map(function(n) { return n.loc; }),
+                    w.nodes.map(function(n) { return n.loc; })
                 );
             });
         });
@@ -108,7 +107,7 @@ export function actionMergePolygon(ids, newRelationId) {
 
         return graph.replace(relation.update({
             members: members,
-            tags: _omit(relation.tags, 'area')
+            tags: utilObjectOmit(relation.tags, ['area'])
         }));
     };
 

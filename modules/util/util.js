@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
@@ -7,7 +5,9 @@ import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 
 export function utilTagText(entity) {
-    return _map(entity.tags, function(v, k) {
+    var obj = (entity && entity.tags) || {};
+    return Object.keys(obj).map(function(k) {
+        var v = obj[k];
         return k + '=' + v;
     }).join(', ');
 }

@@ -19,6 +19,7 @@ export { utilHighlightEntities } from './util';
 export { utilIdleWorker } from './idle_worker';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
+export { utilObjectOmit } from './object';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';
 export { utilPreset } from './util';

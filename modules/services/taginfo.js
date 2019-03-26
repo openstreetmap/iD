@@ -1,10 +1,9 @@
 import _debounce from 'lodash-es/debounce';
 import _forEach from 'lodash-es/forEach';
-import _omit from 'lodash-es/omit';
 
 import { json as d3_json } from 'd3-request';
 
-import { utilQsString } from '../util';
+import { utilObjectOmit, utilQsString } from '../util';
 import { currentLocale } from '../util/locale';
 
 
@@ -65,7 +64,7 @@ function setSortMembers(params) {
 
 
 function clean(params) {
-    return _omit(params, ['geometry', 'debounce']);
+    return utilObjectOmit(params, ['geometry', 'debounce']);
 }
 
 
