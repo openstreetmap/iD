@@ -146,20 +146,12 @@ export function uiToolAddRecent(context) {
 
                 var totalIndex = favoritesCount + index;
                 var keyCode;
-                if (textDirection === 'ltr') {
-                    // use number row order: 1 2 3 4 5 6 7 8 9 0
-                    if (totalIndex === 9) {
-                        keyCode = 0;
-                    } else if (totalIndex < 10) {
-                        keyCode = totalIndex + 1;
-                    }
-                } else {
-                    // use number row order from right to left
-                    if (totalIndex === 0) {
-                        keyCode = 0;
-                    } else if (totalIndex < 10) {
-                        keyCode = 10 - totalIndex;
-                    }
+                // use number row order: 1 2 3 4 5 6 7 8 9 0
+                // use the same for RTL even though the layout is backward: #6107
+                if (totalIndex === 9) {
+                    keyCode = 0;
+                } else if (totalIndex < 10) {
+                    keyCode = totalIndex + 1;
                 }
                 if (keyCode !== undefined) {
                     protoMode.key = keyCode.toString();

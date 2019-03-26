@@ -109,20 +109,12 @@ export function uiToolAddFavorite(context) {
                 protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
 
                 var keyCode;
-                if (textDirection === 'ltr') {
-                    // use number row order: 1 2 3 4 5 6 7 8 9 0
-                    if (index === 9) {
-                        keyCode = 0;
-                    } else if (index < 10) {
-                        keyCode = index + 1;
-                    }
-                } else {
-                    // use number row order from right to left
-                    if (index === 0) {
-                        keyCode = 0;
-                    } else if (index < 10) {
-                        keyCode = 10 - index;
-                    }
+                // use number row order: 1 2 3 4 5 6 7 8 9 0
+                // use the same for RTL even though the layout is backward: #6107
+                if (index === 9) {
+                    keyCode = 0;
+                } else if (index < 10) {
+                    keyCode = index + 1;
                 }
                 if (keyCode !== undefined) {
                     protoMode.key = keyCode.toString();
