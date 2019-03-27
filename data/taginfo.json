@@ -266,6 +266,7 @@
     {"key": "boundary", "value": "administrative", "description": "🄿 Administrative Boundary", "object_types": ["way"]},
     {"key": "bridge:support", "description": "🄿 Bridge Support, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"},
     {"key": "bridge:support", "value": "pier", "description": "🄿 Bridge Pier", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"},
+    {"key": "building:part", "description": "🄿 Building Part", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
     {"key": "building", "value": "bunker", "description": "🄿 Bunker (unsearchable)", "object_types": ["area"]},
     {"key": "building", "value": "entrance", "description": "🄿 Entrance/Exit (unsearchable), 🄳 ➜ entrance=*", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"},
     {"key": "building", "value": "train_station", "description": "🄿 Train Station Building (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},

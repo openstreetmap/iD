@@ -5050,6 +5050,10 @@
                     "name": "Bridge Pier",
                     "terms": ""
                 },
+                "building_part": {
+                    "name": "Building Part",
+                    "terms": "roof,simple 3D buildings"
+                },
                 "building": {
                     "name": "Building",
                     "terms": ""

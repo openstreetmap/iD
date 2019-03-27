@@ -3577,6 +3577,11 @@ en:
         # building=warehouse
         name: Warehouse
         terms: '<translate with synonyms or related terms for ''Warehouse'', separated by commas>'
+      building_part:
+        # 'building:part=*'
+        name: Building Part
+        # 'terms: roof,simple 3D buildings'
+        terms: '<translate with synonyms or related terms for ''Building Part'', separated by commas>'
       building_point:
         # building=*
         name: Building
