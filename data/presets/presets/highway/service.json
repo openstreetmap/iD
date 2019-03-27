@@ -11,13 +11,14 @@
     ],
     "moreFields": [
         "covered",
+        "flood_prone",
         "incline",
         "lanes",
         "lit",
         "maxheight",
         "maxspeed/advisory",
-        "oneway/bicycle",
-        "flood_prone"
+        "maxweight_bridge",
+        "oneway/bicycle"
     ],
     "geometry": [
         "line"

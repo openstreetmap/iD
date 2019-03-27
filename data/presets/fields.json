@@ -204,6 +204,7 @@
     "maxspeed": {"key": "maxspeed", "type": "maxspeed", "label": "Speed Limit", "placeholder": "40, 50, 60..."},
     "maxspeed/advisory": {"key": "maxspeed:advisory", "type": "maxspeed", "label": "Advisory Speed Limit", "placeholder": "40, 50, 60..."},
     "maxstay": {"key": "maxstay", "type": "combo", "label": "Max Stay", "options": ["15 min", "30 min", "45 min", "1 hr", "1.5 hr", "2 hr", "2.5 hr", "3 hr", "4 hr", "1 day", "2 day"], "snake_case": false},
+    "maxweight_bridge": {"key": "maxweight", "type": "combo", "label": "Max Weight", "snake_case": false, "prerequisiteTag": {"key": "bridge", "valueNot": "no"}},
     "maxweight": {"key": "maxweight", "type": "combo", "label": "Max Weight", "snake_case": false},
     "memorial": {"key": "memorial", "type": "typeCombo", "label": "Type"},
     "microbrewery": {"key": "microbrewery", "type": "check", "label": "Microbrewery"},

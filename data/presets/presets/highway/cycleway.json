@@ -10,12 +10,13 @@
         "incline"
     ],
     "moreFields": [
-        "wheelchair",
-        "lit",
-        "smoothness",
-        "maxspeed",
         "covered",
-        "dog"
+        "dog",
+        "lit",
+        "maxspeed",
+        "maxweight_bridge",
+        "smoothness",
+        "wheelchair"
     ],
     "geometry": [
         "line"

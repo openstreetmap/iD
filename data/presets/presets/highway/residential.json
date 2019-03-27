@@ -12,14 +12,15 @@
     "moreFields": [
         "covered",
         "cycleway",
+        "flood_prone",
         "incline",
         "junction_line",
         "lit",
         "oneway/bicycle",
         "maxheight",
         "maxspeed/advisory",
-        "smoothness",
-        "flood_prone"
+        "maxweight_bridge",
+        "smoothness"
     ],
     "geometry": [
         "line"

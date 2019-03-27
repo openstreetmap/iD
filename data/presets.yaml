@@ -1055,6 +1055,9 @@ en:
       maxweight:
         # maxweight=*
         label: Max Weight
+      maxweight_bridge:
+        # maxweight=*
+        label: Max Weight
       memorial:
         # memorial=*
         label: Type

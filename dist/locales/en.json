@@ -3059,6 +3059,9 @@
                 "maxstay": {
                     "label": "Max Stay"
                 },
+                "maxweight_bridge": {
+                    "label": "Max Weight"
+                },
                 "maxweight": {
                     "label": "Max Weight"
                 },

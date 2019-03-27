@@ -19,6 +19,7 @@
         "lit",
         "maxheight",
         "maxspeed/advisory",
+        "maxweight_bridge",
         "name",
         "ref_road_number",
         "smoothness",
