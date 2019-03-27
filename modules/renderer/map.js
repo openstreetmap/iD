@@ -105,22 +105,29 @@ export function rendererMap(context) {
             osm.on('change.map', immediateRedraw);
         }
 
+        function didUndoOrRedo(stack, targetTransform) {
+            var mode = context.mode().id;
+            if (mode !== 'browse' && mode !== 'select') return;
+
+            var followSelected = false;
+            if (Array.isArray(stack.selectedIDs)) {
+                followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
+                context.enter(
+                    modeSelect(context, stack.selectedIDs).follow(followSelected)
+                );
+            }
+            if (!followSelected && targetTransform) {
+                map.transformEase(targetTransform);
+            }
+        }
+
         context.history()
             .on('change.map', immediateRedraw)
-            .on('undone.map redone.map', function(stack) {
-                var mode = context.mode().id;
-                if (mode !== 'browse' && mode !== 'select') return;
-
-                var followSelected = false;
-                if (Array.isArray(stack.selectedIDs)) {
-                    followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
-                    context.enter(
-                        modeSelect(context, stack.selectedIDs).follow(followSelected)
-                    );
-                }
-                if (!followSelected && stack.transform) {
-                    map.transformEase(stack.transform);
-                }
+            .on('undone.map', function(stack, fromStack) {
+                didUndoOrRedo(stack, fromStack.transform);
+            })
+            .on('redone.map', function(stack) {
+                didUndoOrRedo(stack, stack.transform);
             });
 
         context.background()

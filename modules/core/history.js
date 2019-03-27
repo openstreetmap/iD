@@ -203,13 +203,14 @@ export function coreHistory(context) {
         undo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previous = _stack[_index].graph;
+            var previousStack = _stack[_index];
+            var previous = previousStack.graph;
             while (_index > 0) {
                 _index--;
                 if (_stack[_index].annotation) break;
             }
 
-            dispatch.call('undone', this, _stack[_index]);
+            dispatch.call('undone', this, _stack[_index], previousStack);
             return change(previous, true);
         },
 
@@ -218,13 +219,14 @@ export function coreHistory(context) {
         redo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previous = _stack[_index].graph;
+            var previousStack = _stack[_index];
+            var previous = previousStack.graph;
             var tryIndex = _index;
             while (tryIndex < _stack.length - 1) {
                 tryIndex++;
                 if (_stack[tryIndex].annotation) {
                     _index = tryIndex;
-                    dispatch.call('redone', this, _stack[_index]);
+                    dispatch.call('redone', this, _stack[_index], previousStack);
                     break;
                 }
             }
