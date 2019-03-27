@@ -4352,7 +4352,7 @@ img.tile-debug {
 }
 
 .shaded {
-    z-index: 49;
+    z-index: 5000;
     position: absolute;
     top: 0;
     bottom: 0;
