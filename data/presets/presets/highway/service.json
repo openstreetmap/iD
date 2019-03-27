@@ -16,7 +16,8 @@
         "lit",
         "maxheight",
         "maxspeed/advisory",
-        "oneway/bicycle"
+        "oneway/bicycle",
+        "flood_prone"
     ],
     "geometry": [
         "line"

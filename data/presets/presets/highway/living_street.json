@@ -16,7 +16,8 @@
         "junction_line",
         "lit",
         "smoothness",
-        "oneway/bicycle"
+        "oneway/bicycle",
+        "flood_prone"
     ],
     "geometry": [
         "line"

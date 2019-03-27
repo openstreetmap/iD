@@ -691,6 +691,9 @@ en:
       floating:
         # floating=*
         label: Floating
+      flood_prone:
+        # flood_prone=*
+        label: Flood Prone
       ford:
         # ford=*
         label: Type
