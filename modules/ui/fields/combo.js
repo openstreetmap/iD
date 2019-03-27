@@ -7,6 +7,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';
 import { services } from '../../services';
 import { uiCombobox } from '../index';
@@ -185,6 +186,15 @@ export function uiFieldCombo(field, context) {
 
         taginfo[fn](params, function(err, data) {
             if (err) return;
+
+            var deprecatedValues = osmEntity.deprecatedTagValuesByKey()[field.key];
+            if (deprecatedValues) {
+                // don't suggest deprecated tag values
+                data = data.filter(function(d) {
+                    return deprecatedValues.indexOf(d.value) === -1;
+                });
+            }
+
             if (hasCountryPrefix) {
                 data = data.filter(function(d) {
                     return d.value.toLowerCase().indexOf(_country + ':') === 0;
