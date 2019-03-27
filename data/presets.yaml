@@ -6239,7 +6239,6 @@ en:
       shop/boutique:
         # shop=boutique
         name: Boutique
-        terms: '<translate with synonyms or related terms for ''Boutique'', separated by commas>'
       shop/butcher:
         # shop=butcher
         name: Butcher
@@ -6301,6 +6300,7 @@ en:
       shop/clothes:
         # shop=clothes
         name: Clothing Store
+        # 'terms: blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear'
         terms: '<translate with synonyms or related terms for ''Clothing Store'', separated by commas>'
       shop/coffee:
         # shop=coffee
@@ -6399,7 +6399,6 @@ en:
       shop/fashion:
         # shop=fashion
         name: Fashion Store
-        terms: '<translate with synonyms or related terms for ''Fashion Store'', separated by commas>'
       shop/fireplace:
         # shop=fireplace
         name: Fireplace Store

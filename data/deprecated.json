@@ -332,8 +332,12 @@
       "replace": {"shop": "bookmaker"}
     },
     {
-      "old": {"shop": "organic"},
-      "replace": {"shop": "supermarket", "organic": "only"}
+      "old": {"shop": "boutique"},
+      "replace": {"shop": "clothes"}
+    },
+    {
+      "old": {"shop": "fashion"},
+      "replace": {"shop": "clothes"}
     },
     {
       "old": {"shop": "fish"},
@@ -350,6 +354,10 @@
     {
       "old": {"shop": "gallery"},
       "replace": {"shop": "art"}
+    },
+    {
+      "old": {"shop": "organic"},
+      "replace": {"shop": "supermarket", "organic": "only"}
     },
     {
       "old": {"shop": "perfume"},
