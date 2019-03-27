@@ -992,7 +992,7 @@
     "shop/second_hand": {"icon": "maki-shop", "fields": ["{shop}", "second_hand"], "geometry": ["point", "area"], "terms": ["secondhand", "second hand", "resale", "thrift", "used"], "tags": {"shop": "second_hand"}, "name": "Consignment/Thrift Store"},
     "shop/sewing": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["haberdashery"], "tags": {"shop": "sewing"}, "name": "Sewing Supply Shop"},
     "shop/shoes": {"icon": "maki-shoe", "geometry": ["point", "area"], "tags": {"shop": "shoes"}, "terms": ["boots", "cleats", "clogs", "heels", "loafers", "oxfords", "sneakers"], "name": "Shoe Store"},
-    "shop/sports": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "sports"}, "terms": ["athletics"], "name": "Sporting Goods Store"},
+    "shop/sports": {"icon": "maki-shop", "fields": ["name", "operator", "sport", "{shop}"], "geometry": ["point", "area"], "tags": {"shop": "sports"}, "terms": ["athletics"], "name": "Sporting Goods Store"},
     "shop/stationery": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["card", "paper"], "tags": {"shop": "stationery"}, "name": "Stationery Store"},
     "shop/storage_rental": {"icon": "fas-warehouse", "geometry": ["point", "area"], "tags": {"shop": "storage_rental"}, "terms": ["garages"], "name": "Storage Rental"},
     "shop/supermarket": {"icon": "maki-grocery", "moreFields": ["diet_multi", "{shop}"], "geometry": ["point", "area"], "terms": ["grocery", "store", "shop"], "tags": {"shop": "supermarket"}, "name": "Supermarket"},

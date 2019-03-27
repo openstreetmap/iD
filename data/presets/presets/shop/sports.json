@@ -1,5 +1,11 @@
 {
     "icon": "maki-shop",
+    "fields": [
+        "name",
+        "operator",
+        "sport",
+        "{shop}"
+    ],
     "geometry": [
         "point",
         "area"
