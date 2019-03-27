@@ -1,9 +1,6 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _debounce from 'lodash-es/debounce';
-import _each from 'lodash-es/each';
 import _forOwn from 'lodash-es/forOwn';
-import _isObject from 'lodash-es/isObject';
-import _isString from 'lodash-es/isString';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
@@ -42,9 +39,9 @@ export function coreContext() {
 
     function traverser(v, k, obj) {
         parents.push(k);
-        if (_isObject(v)) {
+        if (typeof v === 'object') {
             _forOwn(v, traverser);
-        } else if (_isString(v)) {
+        } else if (typeof v === 'string') {
             obj[k] = parents.join('.');
         }
         parents.pop();
@@ -434,7 +431,7 @@ export function coreContext() {
     /* reset (aka flush) */
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
-        _each(services, function(service) {
+        Object.values(services).forEach(function(service) {
             if (service && typeof service.reset === 'function') {
                 service.reset(context);
             }
@@ -513,7 +510,7 @@ export function coreContext() {
         d3_json(maprules, function (err, mapcss) {
             if (err) return;
             services.maprules.init();
-            _each(mapcss, function(mapcssSelector) {
+            mapcss.forEach(function(mapcssSelector) {
                 return services.maprules.addRule(mapcssSelector);
             });
         });
@@ -529,7 +526,7 @@ export function coreContext() {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    _each(services, function(service) {
+    Object.values(services).forEach(function(service) {
         if (service && typeof service.init === 'function') {
             service.init(context);
         }
@@ -538,6 +535,7 @@ export function coreContext() {
     background.init();
     features.init();
     photos.init();
+
     if (utilStringQs(window.location.hash).presets) {
         var external = utilStringQs(window.location.hash).presets;
         presets.fromExternal(external, function(externalPresets) {

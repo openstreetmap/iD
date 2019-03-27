@@ -1,9 +1,7 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
 import _groupBy from 'lodash-es/groupBy';
-import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
-import _map from 'lodash-es/map';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
@@ -128,7 +126,8 @@ export function coreHistory(context) {
 
 
         merge: function(entities, extent) {
-            _stack[0].graph.rebase(entities, _map(_stack, 'graph'), false);
+            var stack = _stack.map(function(state) { return state.graph; });
+            _stack[0].graph.rebase(entities, stack, false);
             _tree.rebase(entities, false);
 
             dispatch.call('change', this, undefined, extent);
@@ -494,7 +493,8 @@ export function coreHistory(context) {
                     // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
                     var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
-                    _stack[0].graph.rebase(baseEntities, _map(_stack, 'graph'), true);
+                    var stack = _stack.map(function(state) { return state.graph; });
+                    _stack[0].graph.rebase(baseEntities, stack, true);
                     _tree.rebase(baseEntities, true);
 
                     // When we restore a modified way, we also need to fetch any missing
@@ -508,7 +508,7 @@ export function coreHistory(context) {
                         var missing = nodeIDs
                             .filter(function(n) { return !_stack[0].graph.hasEntity(n); });
 
-                        if (!_isEmpty(missing) && osm) {
+                        if (missing.length && osm) {
                             loadComplete = false;
                             context.redrawEnable(false);
 
@@ -517,20 +517,25 @@ export function coreHistory(context) {
 
                             var childNodesLoaded = function(err, result) {
                                 if (!err) {
-                                    var visible = _groupBy(result.data, 'visible');
-                                    if (!_isEmpty(visible.true)) {
-                                        missing = utilArrayDifference(missing, _map(visible.true, 'id'));
-                                        _stack[0].graph.rebase(visible.true, _map(_stack, 'graph'), true);
-                                        _tree.rebase(visible.true, true);
+                                    var visibleGroups = _groupBy(result.data, 'visible');
+                                    var visibles = visibleGroups.true || [];      // alive nodes
+                                    var invisibles = visibleGroups.false || [];   // deleted nodes
+
+                                    if (visibles.length) {
+                                        var visibleIDs = visibles.map(function(entity) { return entity.id; });
+                                        var stack = _stack.map(function(state) { return state.graph; });
+                                        missing = utilArrayDifference(missing, visibleIDs);
+                                        _stack[0].graph.rebase(visibles, stack, true);
+                                        _tree.rebase(visibles, true);
                                     }
 
                                     // fetch older versions of nodes that were deleted..
-                                    _forEach(visible.false, function(entity) {
+                                    invisibles.forEach(function(entity) {
                                         osm.loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
                                     });
                                 }
 
-                                if (err || _isEmpty(missing)) {
+                                if (err || !missing.length) {
                                     loading.close();
                                     context.redrawEnable(true);
                                     dispatch.call('change');

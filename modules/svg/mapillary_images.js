@@ -1,5 +1,5 @@
 import _throttle from 'lodash-es/throttle';
-import _isNumber from 'lodash-es/isNumber';
+
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
@@ -111,7 +111,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function transform(d) {
         var t = svgPointTransform(projection)(d);
-        if (d.pano && _isNumber(viewerCompassAngle)) {
+        if (d.pano && viewerCompassAngle !== null && isFinite(viewerCompassAngle)) {
             t += ' rotate(' + Math.floor(viewerCompassAngle) + ',0,0)';
         } else if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';

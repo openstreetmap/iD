@@ -2,8 +2,6 @@ import _chunk from 'lodash-es/chunk';
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _forEach from 'lodash-es/forEach';
 import _groupBy from 'lodash-es/groupBy';
-import _isEmpty from 'lodash-es/isEmpty';
-import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
 
 import rbush from 'rbush';
@@ -513,11 +511,11 @@ export default {
         var that = this;
 
         _forEach(_groupBy(utilArrayUniq(ids), osmEntity.id.type), function(v, k) {
-            var type = k + 's';
-            var osmIDs = _map(v, osmEntity.id.toOSM);
+            var type = k + 's';   // nodes, ways, relations
+            var osmIDs = v.map(function(id) { return osmEntity.id.toOSM(id); });
             var options = { skipSeen: false };
 
-            _forEach(_chunk(osmIDs, 150), function(arr) {
+            _chunk(osmIDs, 150).forEach(function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
@@ -783,16 +781,16 @@ export default {
         var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
-        var hadRequests = !_isEmpty(_tileCache.inflight);
+        var hadRequests = hasInflightRequests();
         abortUnwantedRequests(_tileCache, tiles);
-        if (hadRequests && _isEmpty(_tileCache.inflight)) {
+        if (hadRequests && !hasInflightRequests()) {
             dispatch.call('loaded');    // stop the spinner
         }
 
         // issue new requests..
         tiles.forEach(function(tile) {
             if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
-            if (_isEmpty(_tileCache.inflight)) {
+            if (!hasInflightRequests()) {
                 dispatch.call('loading');   // start the spinner
             }
 
@@ -807,13 +805,17 @@ export default {
                     if (callback) {
                         callback(err, Object.assign({ data: parsed }, tile));
                     }
-                    if (_isEmpty(_tileCache.inflight)) {
+                    if (!hasInflightRequests()) {
                         dispatch.call('loaded');     // stop the spinner
                     }
                 },
                 options
             );
         });
+
+        function hasInflightRequests() {
+            return Object.keys(_tileCache.inflight).length;
+        }
     },
 
 

@@ -1,7 +1,6 @@
 /* Downloads the latest translations from Transifex */
 
 const requireESM = require('esm')(module);
-const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 
 const fs = require('fs');
@@ -50,7 +49,7 @@ asyncMap(resources, getResource, function(err, results) {
 
     asyncMap(Object.keys(locale),
         function(code, done) {
-            if (code === 'en' || _isEmpty(locale[code])) {
+            if (code === 'en' || !Object.keys(locale[code]).length) {
                 done();
             } else {
                 var obj = {};
@@ -104,7 +103,7 @@ function getResource(resource, callback) {
                             preset.terms = preset.terms.replace(/<.*>/, '').trim();
                             if (!preset.terms) {
                                 delete preset.terms;
-                                if (_isEmpty(preset)) {
+                                if (!Object.keys(preset).length) {
                                     delete presets[key];
                                 }
                             }

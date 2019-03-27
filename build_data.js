@@ -1,10 +1,6 @@
 /* eslint-disable no-console */
 const requireESM = require('esm')(module);
-const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _forEach = requireESM('lodash-es/forEach').default;
-const _isEmpty = requireESM('lodash-es/isEmpty').default;
-const _merge = requireESM('lodash-es/merge').default;
-const _toPairs = requireESM('lodash-es/toPairs').default;
 
 const colors = require('colors/safe');
 const fs = require('fs');
@@ -243,7 +239,7 @@ function suggestionsToPresets(presets) {
             name: name,
             icon: preset.icon,
             geometry: preset.geometry,
-            tags: _merge({}, preset.tags, wikidataTag),
+            tags: Object.assign({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
             removeTags: suggestion.tags,
             reference: preset.reference,
@@ -285,34 +281,33 @@ function generatePresets(tstrings, faIcons) {
         }
     });
 
-    presets = _merge(presets, suggestionsToPresets(presets));
+    presets = Object.assign(presets, suggestionsToPresets(presets));
     return presets;
 }
 
 
 function generateTranslations(fields, presets, tstrings) {
-    var translations = _cloneDeep(tstrings);
+    var translations = JSON.parse(JSON.stringify(tstrings));  // deep clone
 
     _forEach(translations.fields, function(field, id) {
         var f = fields[id];
+        var options = field.options || {};
+        var optkeys = Object.keys(options);
+
         if (f.keys) {
-            field['label#'] = _forEach(f.keys).map(function(key) { return key + '=*'; }).join(', ');
-            if (!_isEmpty(field.options)) {
-                _forEach(field.options, function(v,k) {
-                    if (id === 'access') {
-                        field.options[k]['title#'] = field.options[k]['description#'] = 'access=' + k;
-                    } else {
-                        field.options[k + '#'] = k + '=yes';
-                    }
-                });
-            }
+            field['label#'] = f.keys.map(function(k) { return k + '=*'; }).join(', ');
+            optkeys.forEach(function(k) {
+                if (id === 'access') {
+                    options[k]['title#'] = options[k]['description#'] = 'access=' + k;
+                } else {
+                    options[k + '#'] = k + '=yes';
+                }
+            });
         } else if (f.key) {
             field['label#'] = f.key + '=*';
-            if (!_isEmpty(field.options)) {
-                _forEach(field.options, function(v,k) {
-                    field.options[k + '#'] = f.key + '=' + k;
-                });
-            }
+            optkeys.forEach(function(k) {
+                options[k + '#'] = f.key + '=' + k;
+            });
         }
 
         if (f.placeholder) {
@@ -322,11 +317,16 @@ function generateTranslations(fields, presets, tstrings) {
 
     _forEach(translations.presets, function(preset, id) {
         var p = presets[id];
-        if (!_isEmpty(p.tags))
-            preset['name#'] = _toPairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
+        var tags = p.tags || {};
+        var keys = Object.keys(tags);
+
+        if (keys.length) {
+            preset['name#'] = keys.map(function(k) { return k + '=' + tags[k]; }).join(', ');
+        }
         if (p.searchable !== false) {
-            if (p.terms && p.terms.length)
+            if (p.terms && p.terms.length) {
                 preset['terms#'] = 'terms: ' + p.terms.join();
+            }
             preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
         } else {
             delete preset.terms;
@@ -612,13 +612,13 @@ function writeEnJson(tstrings) {
         var core = YAML.load(data[0]);
         var imagery = YAML.load(data[1]);
         var community = YAML.load(data[2]);
-        var en = _merge(
-            core,
-            { en: { presets: tstrings } },
-            imagery,
-            { en: { community: community.en } }
-        );
-        return writeFileProm('dist/locales/en.json', JSON.stringify(en, null, 4));
+
+        var enjson = core;
+        enjson.en.presets = tstrings;
+        enjson.en.imagery = imagery.en.imagery;
+        enjson.en.community = community.en;
+
+        return writeFileProm('dist/locales/en.json', JSON.stringify(enjson, null, 4));
     });
 }
 

@@ -1,4 +1,3 @@
-import _isEmpty from 'lodash-es/isEmpty';
 import _isEqual from 'lodash-es/isEqual';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -254,7 +253,8 @@ export function uiEntityEditor(context) {
 
             var match = context.presets().match(entity, graph);
             var activePreset = entityEditor.preset();
-            var weakPreset = activePreset && _isEmpty(activePreset.addTags);
+            var weakPreset = activePreset &&
+                Object.keys(activePreset.addTags || {}).length === 0;
 
             // A "weak" preset doesn't set any tags. (e.g. "Address")
             // Don't replace a weak preset with a fallback preset (e.g. "Point")

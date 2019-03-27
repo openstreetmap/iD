@@ -1,5 +1,4 @@
 import _flatten from 'lodash-es/flatten';
-import _isEmpty from 'lodash-es/isEmpty';
 import _throttle from 'lodash-es/throttle';
 
 import {
@@ -345,7 +344,8 @@ export function svgData(projection, context, dispatch) {
                 break;
         }
 
-        if (!_isEmpty(gj)) {
+        gj = gj || {};
+        if (Object.keys(gj).length) {
             _geojson = ensureIDs(gj);
             _src = extension + ' data file';
             this.fitZoom();
@@ -380,7 +380,8 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.hasData = function() {
-        return !!(_template || !_isEmpty(_geojson));
+        var gj = _geojson || {};
+        return !!(_template || Object.keys(gj).length);
     };
 
 
@@ -434,7 +435,8 @@ export function svgData(projection, context, dispatch) {
         _geojson = null;
         _src = null;
 
-        if (!_isEmpty(gj)) {
+        gj = gj || {};
+        if (Object.keys(gj).length) {
             _geojson = ensureIDs(gj);
             _src = src || 'unknown.geojson';
         }
