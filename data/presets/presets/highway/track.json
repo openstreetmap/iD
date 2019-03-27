@@ -15,7 +15,8 @@
         "mtb/scale/uphill",
         "mtb/scale/imba",
         "horse_scale",
-        "covered"
+        "covered",
+        "flood_prone"
     ],
     "geometry": [
         "line"

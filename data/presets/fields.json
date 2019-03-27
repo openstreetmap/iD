@@ -126,6 +126,7 @@
     "fixme": {"key": "fixme", "type": "textarea", "label": "Fix Me", "universal": true},
     "flag/type": {"key": "flag:type", "type": "combo", "label": "Flag Type"},
     "floating": {"key": "floating", "type": "check", "label": "Floating"},
+    "flood_prone": {"key": "flood_prone", "type": "check", "label": "Flood Prone"},
     "ford": {"key": "ford", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "frequency_electrified": {"key": "frequency", "type": "combo", "label": "Operating Frequency", "prerequisiteTag": {"key": "electrified", "valueNot": "no"}},
     "frequency": {"key": "frequency", "type": "combo", "label": "Operating Frequency"},

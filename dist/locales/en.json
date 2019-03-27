@@ -2742,6 +2742,9 @@
                 "floating": {
                     "label": "Floating"
                 },
+                "flood_prone": {
+                    "label": "Flood Prone"
+                },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
