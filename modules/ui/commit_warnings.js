@@ -25,7 +25,10 @@ export function uiCommitWarnings(context) {
         }, {});
 
         _forEach(validations, function(instances, type) {
-            instances = _uniqBy(instances, function(val) { return val.id + '_' + val.message.replace(/\s+/g,''); });
+            instances = _uniqBy(instances, function(val) {
+                return val.entity || (val.id + '_' + val.message.replace(/\s+/g,''));
+            });
+
             var section = type + '-section';
             var instanceItem = type + '-item';
 

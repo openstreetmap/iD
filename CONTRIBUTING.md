@@ -431,7 +431,7 @@ Then change to the master branch and get everything from upstream (the main repo
 
 If you want to submit Documentation, Spelling improvements, etc. which do not need testing,
 you can do this with your browser in GitHub. Please don't use this to change Code and create untested Pull Requests.
-You also need a GitHub account and may find this [Article about Editing](https://help.github.com/articles/editing-files-in-another-user-s-repository/) and this [Article about Pull Requests](https://help.github.com/articles/about-pull-requests/) usefull.
+You also need a GitHub account and may find this [Article about Editing](https://help.github.com/articles/editing-files-in-another-user-s-repository/) and this [Article about Pull Requests](https://help.github.com/articles/about-pull-requests/) useful.
 
 ### Step by Step with Browser
 

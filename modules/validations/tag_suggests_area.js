@@ -27,9 +27,9 @@ export function validationTagSuggestsArea() {
     var validation = function(changes, graph) {
         var warnings = [];
         for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i],
-                geometry = change.geometry(graph),
-                suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
+            var change = changes.created[i];
+            var geometry = change.geometry(graph);
+            var suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
 
             if (suggestion) {
                 warnings.push({

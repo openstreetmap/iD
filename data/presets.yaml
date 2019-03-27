@@ -2553,9 +2553,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Payment Terminal'', separated by commas>'
       amenity/pharmacy:
         # amenity=pharmacy
-        name: Pharmacy
-        # 'terms: apothecary,drug*,med*,prescription'
-        terms: '<translate with synonyms or related terms for ''Pharmacy'', separated by commas>'
+        name: Pharmacy Counter
+        # 'terms: apothecary,drug store,drugstore,med*,prescription'
+        terms: '<translate with synonyms or related terms for ''Pharmacy Counter'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
         name: Place of Worship
@@ -2568,9 +2568,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Buddhist Temple'', separated by commas>'
       amenity/place_of_worship/christian:
         # 'amenity=place_of_worship, religion=christian'
-        name: Church
+        name: Christian Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
-        terms: '<translate with synonyms or related terms for ''Church'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Christian Church'', separated by commas>'
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
@@ -2578,14 +2578,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
-        name: Synagogue
+        name: Jewish Synagogue
         # 'terms: jewish'
-        terms: '<translate with synonyms or related terms for ''Synagogue'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Jewish Synagogue'', separated by commas>'
       amenity/place_of_worship/muslim:
         # 'amenity=place_of_worship, religion=muslim'
-        name: Mosque
+        name: Muslim Mosque
         # 'terms: muslim'
-        terms: '<translate with synonyms or related terms for ''Mosque'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Muslim Mosque'', separated by commas>'
       amenity/place_of_worship/shinto:
         # 'amenity=place_of_worship, religion=shinto'
         name: Shinto Shrine
@@ -4197,7 +4197,6 @@ en:
       landuse/basin:
         # landuse=basin
         name: Basin
-        terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
       landuse/brownfield:
         # landuse=brownfield
         name: Brownfield
@@ -4233,9 +4232,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Farmyard'', separated by commas>'
       landuse/forest:
         # landuse=forest
-        name: Forest
+        name: Managed Forest
         # 'terms: cut,forest,lumber,tree'
-        terms: '<translate with synonyms or related terms for ''Forest'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Managed Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
         name: Garage Landuse
@@ -4350,6 +4349,9 @@ en:
         name: Plant Nursery
         # 'terms: flower,garden,grow,vivero'
         terms: '<translate with synonyms or related terms for ''Plant Nursery'', separated by commas>'
+      landuse/pond:
+        # landuse=pond
+        name: Pond
       landuse/quarry:
         # landuse=quarry
         name: Quarry
@@ -4368,6 +4370,9 @@ en:
         # landuse=religious
         name: Religious Area
         terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
+      landuse/reservoir:
+        # landuse=reservoir
+        name: Reservoir
       landuse/residential:
         # landuse=residential
         name: Residential Area
@@ -4674,11 +4679,6 @@ en:
         # leisure=resort
         name: Resort
         terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
-      leisure/running_track:
-        # 'leisure=track, sport=running'
-        name: Racetrack (Running)
-        # 'terms: race*,running,sprint,track'
-        terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
       leisure/sauna:
         # leisure=sauna
         name: Sauna
@@ -4711,6 +4711,16 @@ en:
         name: Racetrack (Non-Motorsport)
         # 'terms: cycle,dog,greyhound,horse,race*,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Non-Motorsport)'', separated by commas>'
+      leisure/track/horse_racing:
+        # 'leisure=track, sport=horse_racing'
+        name: Racetrack (Horse Racing)
+        # 'terms: race*,horse,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Horse Racing)'', separated by commas>'
+      leisure/track/running:
+        # 'leisure=track, sport=running'
+        name: Racetrack (Running)
+        # 'terms: race*,running,sprint,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
       leisure/water_park:
         # leisure=water_park
         name: Water Park
@@ -5035,6 +5045,10 @@ en:
         # natural=water
         name: Water
         terms: '<translate with synonyms or related terms for ''Water'', separated by commas>'
+      natural/water/canal:
+        # 'natural=water, water=canal'
+        name: Canal
+        terms: '<translate with synonyms or related terms for ''Canal'', separated by commas>'
       natural/water/lake:
         # 'natural=water, water=lake'
         name: Lake
@@ -5049,6 +5063,16 @@ en:
         # 'natural=water, water=reservoir'
         name: Reservoir
         terms: '<translate with synonyms or related terms for ''Reservoir'', separated by commas>'
+      natural/water/river:
+        # 'natural=water, water=river'
+        name: River
+        # 'terms: beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse'
+        terms: '<translate with synonyms or related terms for ''River'', separated by commas>'
+      natural/water/stream:
+        # 'natural=water, water=stream'
+        name: Stream
+        # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
+        terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
       natural/wetland:
         # natural=wetland
         name: Wetland
@@ -5249,6 +5273,11 @@ en:
         name: Downhill Piste/Ski Run
         # 'terms: ski,alpine,snowboard,downhill,piste'
         terms: '<translate with synonyms or related terms for ''Downhill Piste/Ski Run'', separated by commas>'
+      piste/downhill/halfpipe:
+        # 'piste:type=downhill, man_made=piste:halfpipe'
+        name: Halfpipe
+        # 'terms: ski,alpine,halfpipe,half pipe,snowboard,downhill,piste'
+        terms: '<translate with synonyms or related terms for ''Halfpipe'', separated by commas>'
       piste/hike:
         # 'piste:type=hike'
         name: Snowshoeing or Winter Hiking Trail
@@ -5951,6 +5980,11 @@ en:
         name: Car Repair Shop
         # 'terms: auto,garage,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
+      shop/caravan:
+        # shop=caravan
+        name: RV Dealership
+        # 'terms: auto'
+        terms: '<translate with synonyms or related terms for ''RV Dealership'', separated by commas>'
       shop/carpet:
         # shop=carpet
         name: Carpet Store
@@ -5972,7 +6006,7 @@ en:
       shop/chemist:
         # shop=chemist
         name: Drugstore
-        # 'terms: apothecary,med*,drug*,gift'
+        # 'terms: apothecary,beauty,drug store,drugstore,gift,hair,med*,pharmacy,prescription,tooth'
         terms: '<translate with synonyms or related terms for ''Drugstore'', separated by commas>'
       shop/chocolate:
         # shop=chocolate
@@ -6072,6 +6106,15 @@ en:
         # shop=fashion
         name: Fashion Store
         terms: '<translate with synonyms or related terms for ''Fashion Store'', separated by commas>'
+      shop/fireplace:
+        # shop=fireplace
+        name: Fireplace Store
+        # 'terms: fireplace,stove,masonry heater'
+        terms: '<translate with synonyms or related terms for ''Fireplace Store'', separated by commas>'
+      shop/fishing:
+        # shop=fishing
+        name: Fishing Shop
+        terms: '<translate with synonyms or related terms for ''Fishing Shop'', separated by commas>'
       shop/fishmonger:
         # shop=fishmonger
         name: Fishmonger
@@ -6085,6 +6128,10 @@ en:
         name: Framing Shop
         # 'terms: art*,paint*,photo*,frame'
         terms: '<translate with synonyms or related terms for ''Framing Shop'', separated by commas>'
+      shop/fuel:
+        # shop=fuel
+        name: Fuel Shop
+        terms: '<translate with synonyms or related terms for ''Fuel Shop'', separated by commas>'
       shop/funeral_directors:
         # shop=funeral_directors
         name: Funeral Home
@@ -6155,6 +6202,10 @@ en:
         name: Houseware Store
         # 'terms: home,household'
         terms: '<translate with synonyms or related terms for ''Houseware Store'', separated by commas>'
+      shop/hunting:
+        # shop=hunting
+        name: Hunting Shop
+        terms: '<translate with synonyms or related terms for ''Hunting Shop'', separated by commas>'
       shop/interior_decoration:
         # shop=interior_decoration
         name: Interior Decoration Store
@@ -6408,6 +6459,10 @@ en:
         # shop=watches
         name: Watches Shop
         terms: '<translate with synonyms or related terms for ''Watches Shop'', separated by commas>'
+      shop/water:
+        # shop=water
+        name: Drinking Water Shop
+        terms: '<translate with synonyms or related terms for ''Drinking Water Shop'', separated by commas>'
       shop/water_sports:
         # shop=water_sports
         name: Watersport/Swim Shop
@@ -6818,7 +6873,6 @@ en:
       waterway/riverbank:
         # waterway=riverbank
         name: Riverbank
-        terms: '<translate with synonyms or related terms for ''Riverbank'', separated by commas>'
       waterway/sanitary_dump_station:
         # waterway=sanitary_dump_station
         name: Marine Toilet Disposal

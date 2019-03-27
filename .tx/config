@@ -2,6 +2,11 @@
 host = https://www.transifex.com
 minimum_perc = 1
 
+[id-editor.community]
+file_filter = .tx/tmp/community/<lang>.yaml
+source_lang = en
+type = YAML
+
 [id-editor.core]
 file_filter = .tx/tmp/core/<lang>.yaml
 source_file = data/core.yaml

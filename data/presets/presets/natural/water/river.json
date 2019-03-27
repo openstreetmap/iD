@@ -1,0 +1,34 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "river"
+    },
+    "reference": {
+        "key": "water",
+        "value": "river"
+    },
+    "terms": [
+        "beck",
+        "branch",
+        "brook",
+        "course",
+        "creek",
+        "estuary",
+        "rill",
+        "rivulet",
+        "run",
+        "runnel",
+        "stream",
+        "tributary",
+        "watercourse"
+    ],
+    "name": "River"
+}

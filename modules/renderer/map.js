@@ -351,10 +351,11 @@ export function rendererMap(context) {
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
-        surface.selectAll('.layer-touch *').remove();
+        surface.selectAll('.layer-touch:not(.markers) *').remove();
 
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select-note' && mode.id !== 'select-data') {
+        if (mode && mode.id !== 'save' && mode.id !== 'select-note' &&
+            mode.id !== 'select-data' && mode.id !== 'select-error') {
             context.enter(modeBrowse(context));
         }
 
@@ -857,7 +858,7 @@ export function rendererMap(context) {
         if (!isFinite(extent.area())) return;
 
         var z2 = map.trimmedExtentZoom(extent);
-        zoomLimits = zoomLimits || [context.minEditableZoom(), 19];
+        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
         map.centerZoom(extent.center(), Math.min(Math.max(z2, zoomLimits[0]), zoomLimits[1]));
     };
 

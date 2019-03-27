@@ -11,12 +11,12 @@ export function validationMissingTag() {
     }
 
     var validation = function(changes, graph) {
-        var types = ['point', 'line', 'area', 'relation'],
-            warnings = [];
+        var types = ['point', 'line', 'area', 'relation'];
+        var warnings = [];
 
         for (var i = 0; i < changes.created.length; i++) {
-            var change = changes.created[i],
-                geometry = change.geometry(graph);
+            var change = changes.created[i];
+            var geometry = change.geometry(graph);
 
             if (types.indexOf(geometry) !== -1 && !hasTags(change, graph)) {
                 warnings.push({

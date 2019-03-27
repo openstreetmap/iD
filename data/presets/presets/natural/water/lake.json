@@ -12,8 +12,8 @@
         "water": "lake"
     },
     "reference": {
-        "key": "natural",
-        "value": "water"
+        "key": "water",
+        "value": "lake"
     },
     "terms": [
         "lakelet",

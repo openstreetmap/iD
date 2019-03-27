@@ -92,9 +92,9 @@ export function uiInspector(context) {
     }
 
 
-    inspector.state = function(_) {
+    inspector.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         entityEditor.state(_state);
 
         // remove any old field help overlay that might have gotten attached to the inspector
@@ -104,16 +104,16 @@ export function uiInspector(context) {
     };
 
 
-    inspector.entityID = function(_) {
+    inspector.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         return inspector;
     };
 
 
-    inspector.newFeature = function(_) {
+    inspector.newFeature = function(val) {
         if (!arguments.length) return _newFeature;
-        _newFeature = _;
+        _newFeature = val;
         return inspector;
     };
 

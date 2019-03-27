@@ -1,0 +1,21 @@
+{
+    "icon": "maki-shop",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+	"fuel_multi",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "fuel"
+    },
+    "name": "Fuel Shop",
+    "matchScore": 0.5
+}

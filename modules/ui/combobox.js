@@ -56,15 +56,12 @@ export function uiCombobox(context, klass) {
             var parent = this.parentNode;
             var sibling = this.nextSibling;
 
-            var caret = d3_select(parent).selectAll('.combobox-caret')
+            d3_select(parent).selectAll('.combobox-caret')
                 .filter(function(d) { return d === input.node(); })
-                .data([input.node()]);
-
-            caret = caret.enter()
+                .data([input.node()])
+                .enter()
                 .insert('div', function() { return sibling; })
-                .attr('class', 'combobox-caret')
-                .merge(caret);
-
+                .attr('class', 'combobox-caret');
         }
 
 
@@ -341,7 +338,7 @@ export function uiCombobox(context, klass) {
         // Dispatches an 'accept' event if an option has been chosen.
         // Then hides the combobox.
         function accept(d) {
-            d = d || _choice;
+            d = d || _choice || value();
             if (d) {
                 utilGetSetValue(input, d.value);
                 utilTriggerEvent(input, 'change');
