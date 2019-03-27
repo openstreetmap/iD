@@ -385,7 +385,7 @@ export function uiCommit(context) {
 
         if (inComment !== null) {                    // when hashtags are detected in comment...
             context.storage('hashtags', null);       // always remove stored hashtags - #4304
-            if (commentOnly) { inHashTags = null; }  // optionally override hashtags field
+            if (commentOnly) { inHashTags = []; }    // optionally override hashtags field
         }
 
         // keep only one copy of the tags
@@ -406,21 +406,24 @@ export function uiCommit(context) {
 
         // Extract hashtags from `comment`
         function commentTags() {
-            return tags.comment
+            var matches = (tags.comment || '')
                 .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
                 .match(hashtagRegex);
+
+            return (matches || []);
         }
 
         // Extract and clean hashtags from `hashtags`
         function hashTags() {
-            var t = tags.hashtags || '';
-            return t
+            var matches = (tags.hashtags || '')
                 .split(/[,;\s]+/)
                 .map(function (s) {
                     if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
                     var matched = s.match(hashtagRegex);
                     return matched && matched[0];
-                }).filter(Boolean);                       // exclude falsey
+                }).filter(Boolean);                       // exclude falsy
+
+            return (matches || []);
         }
     }
 
