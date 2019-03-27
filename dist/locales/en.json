@@ -14,7 +14,8 @@
             "inspect": "Inspect",
             "undo_redo": "Undo / Redo",
             "recent": "Recent",
-            "favorites": "Favorites"
+            "favorites": "Favorites",
+            "add_feature": "Add Feature"
         },
         "modes": {
             "add_feature": {

@@ -4,15 +4,16 @@ import {
 } from 'd3-selection';
 
 import _debounce from 'lodash-es/debounce';
-import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolSave, uiToolSearchAdd, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { /*uiToolAddFavorite, uiToolAddRecent, uiToolSearchAdd, */ uiToolOldDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
-        searchAdd = uiToolSearchAdd(context),
-        addFavorite = uiToolAddFavorite(context),
-        addRecent = uiToolAddRecent(context),
+        modes = uiToolOldDrawModes(context),
+        //searchAdd = uiToolSearchAdd(context),
+        //addFavorite = uiToolAddFavorite(context),
+        //addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
         save = uiToolSave(context);
@@ -39,16 +40,17 @@ export function uiTopToolbar(context) {
             var tools = [
                 sidebarToggle,
                 'spacer',
-                searchAdd
+                modes
+            //    searchAdd
             ];
-
+            /*
             if (context.presets().getFavorites().length > 0) {
                 tools.push(addFavorite);
             }
 
             if (addRecent.shouldShow()) {
                 tools.push(addRecent);
-            }
+            }*/
 
             tools.push('spacer');
 
