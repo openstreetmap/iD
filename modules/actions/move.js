@@ -1,8 +1,5 @@
-import _intersection from 'lodash-es/intersection';
 import _isEqual from 'lodash-es/isEqual';
 import _map from 'lodash-es/map';
-
-import { osmNode } from '../osm';
 
 import {
   geoAngle,
@@ -14,6 +11,9 @@ import {
   geoVecInterp,
   geoVecSubtract
 } from '../geo';
+
+import { osmNode } from '../osm';
+import { utilArrayIntersection } from '../util';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
@@ -87,7 +87,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
                     if (!unmoved) continue;
 
                     // exclude ways that are overly connected..
-                    if (_intersection(moved.nodes, unmoved.nodes).length > 2) continue;
+                    if (utilArrayIntersection(moved.nodes, unmoved.nodes).length > 2) continue;
                     if (moved.isArea() || unmoved.isArea()) continue;
 
                     cache.intersections.push({

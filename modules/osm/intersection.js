@@ -1,10 +1,10 @@
-import _difference from 'lodash-es/difference';
 import _uniq from 'lodash-es/uniq';
 
 import { actionDeleteRelation, actionReverse, actionSplit } from '../actions';
 import { coreGraph } from '../core';
 import { geoAngle, geoSphericalDistance } from '../geo';
 import { osmEntity } from './entity';
+import { utilArrayDifference } from '../util';
 
 
 export function osmTurn(turn) {
@@ -413,7 +413,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                                         restrictionVias.push(v[k].id);
                                     }
                                 }
-                                var diff = _difference(pathVias, restrictionVias);
+                                var diff = utilArrayDifference(pathVias, restrictionVias);
                                 matchesViaTo = !diff.length;
                             }
 

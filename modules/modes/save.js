@@ -1,7 +1,5 @@
 import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
-import _union from 'lodash-es/union';
-import _uniq from 'lodash-es/uniq';
 
 import {
     event as d3_event,
@@ -10,35 +8,12 @@ import {
 
 import { t } from '../util/locale';
 
-import {
-    actionDiscardTags,
-    actionMergeRemoteChanges,
-    actionNoop,
-    actionRevert
-} from '../actions';
-
+import { actionDiscardTags, actionMergeRemoteChanges, actionNoop, actionRevert } from '../actions';
 import { coreGraph } from '../core';
-
-import {
-    modeBrowse,
-    modeSelect
-} from './index';
-
+import { modeBrowse, modeSelect } from './index';
 import { services } from '../services';
-
-import {
-    uiConflicts,
-    uiConfirm,
-    uiCommit,
-    uiLoading,
-    uiSuccess
-} from '../ui';
-
-import {
-    utilDisplayName,
-    utilDisplayType,
-    utilKeybinding
-} from '../util';
+import { uiConflicts, uiConfirm, uiCommit, uiLoading, uiSuccess } from '../ui';
+import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilKeybinding } from '../util';
 
 
 var _isSaving = false;
@@ -157,7 +132,7 @@ export function modeSave(context) {
 
 
         function withChildNodes(ids, graph) {
-            return _uniq(_reduce(ids, function(result, id) {
+            return utilArrayUniq(_reduce(ids, function(result, id) {
                 var entity = graph.entity(id);
                 if (entity.type === 'way') {
                     try {
@@ -250,7 +225,7 @@ export function modeSave(context) {
                 if (local.version !== remote.version) return false;
 
                 if (local.type === 'way') {
-                    var children = _union(local.nodes, remote.nodes);
+                    var children = utilArrayUnion(local.nodes, remote.nodes);
                     for (var i = 0; i < children.length; i++) {
                         var a = localGraph.hasEntity(children[i]);
                         var b = remoteGraph.hasEntity(children[i]);
@@ -390,7 +365,7 @@ export function modeSave(context) {
                     if (_conflicts[i].chosen === 1) {  // user chose "keep theirs"
                         var entity = context.hasEntity(_conflicts[i].id);
                         if (entity && entity.type === 'way') {
-                            var children = _uniq(entity.nodes);
+                            var children = utilArrayUniq(entity.nodes);
                             for (var j = 0; j < children.length; j++) {
                                 history.replace(actionRevert(children[j]));
                             }

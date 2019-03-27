@@ -1,6 +1,5 @@
-import _difference from 'lodash-es/difference';
-
 import { debug } from '../index';
+import { utilArrayDifference } from '../util';
 
 
 export function coreGraph(other, mutable) {
@@ -206,8 +205,8 @@ coreGraph.prototype = {
 
         if (type === 'way') {   // Update parentWays
             if (oldentity && entity) {
-                removed = _difference(oldentity.nodes, entity.nodes);
-                added = _difference(entity.nodes, oldentity.nodes);
+                removed = utilArrayDifference(oldentity.nodes, entity.nodes);
+                added = utilArrayDifference(entity.nodes, oldentity.nodes);
             } else if (oldentity) {
                 removed = oldentity.nodes;
                 added = [];
@@ -228,8 +227,8 @@ coreGraph.prototype = {
 
         } else if (type === 'relation') {   // Update parentRels
             if (oldentity && entity) {
-                removed = _difference(oldentity.members, entity.members);
-                added = _difference(entity.members, oldentity);
+                removed = utilArrayDifference(oldentity.members, entity.members);
+                added = utilArrayDifference(entity.members, oldentity.members);
             } else if (oldentity) {
                 removed = oldentity.members;
                 added = [];

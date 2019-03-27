@@ -1,6 +1,3 @@
-import _difference from 'lodash-es/difference';
-import _map from 'lodash-es/map';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
@@ -16,14 +13,14 @@ import { svgOpenstreetcamImages } from './openstreetcam_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
 import { svgTouch } from './touch';
-import { utilRebind } from '../util/rebind';
+import { utilArrayDifference, utilRebind } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 
 
 export function svgLayers(projection, context) {
     var dispatch = d3_dispatch('change');
     var svg = d3_select(null);
-    var layers = [
+    var _layers = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
@@ -56,7 +53,7 @@ export function svgLayers(projection, context) {
             .attr('class', 'surface-defs');
 
         var groups = svg.selectAll('.data-layer')
-            .data(layers);
+            .data(_layers);
 
         groups.exit()
             .remove();
@@ -70,27 +67,27 @@ export function svgLayers(projection, context) {
 
 
     drawLayers.all = function() {
-        return layers;
+        return _layers;
     };
 
 
     drawLayers.layer = function(id) {
-        var obj = layers.find(function(o) {return o.id === id;});
+        var obj = _layers.find(function(o) { return o.id === id; });
         return obj && obj.layer;
     };
 
 
     drawLayers.only = function(what) {
         var arr = [].concat(what);
-        drawLayers.remove(_difference(_map(layers, 'id'), arr));
-        return this;
+        var all = _layers.map(function(layer) { return layer.id; });
+        return drawLayers.remove(utilArrayDifference(all, arr));
     };
 
 
     drawLayers.remove = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(id) {
-            layers = layers.filter(function(o) { return o.id !== id; });
+            _layers = _layers.filter(function(o) { return o.id !== id; });
         });
         dispatch.call('change');
         return this;
@@ -101,7 +98,7 @@ export function svgLayers(projection, context) {
         var arr = [].concat(what);
         arr.forEach(function(obj) {
             if ('id' in obj && 'layer' in obj) {
-                layers.push(obj);
+                _layers.push(obj);
             }
         });
         dispatch.call('change');
@@ -109,9 +106,9 @@ export function svgLayers(projection, context) {
     };
 
 
-    drawLayers.dimensions = function(_) {
+    drawLayers.dimensions = function(val) {
         if (!arguments.length) return utilGetDimensions(svg);
-        utilSetDimensions(svg, _);
+        utilSetDimensions(svg, val);
         return this;
     };
 

@@ -1,11 +1,9 @@
-import _union from 'lodash-es/union';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { uiField } from '../field';
-import { utilRebind } from '../../util';
+import { utilArrayUnion, utilRebind } from '../../util';
 
 
 export { uiFieldRadio as uiFieldStructureRadio };
@@ -153,7 +151,7 @@ export function uiFieldRadio(field, context) {
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
-            field.keys = _union(field.keys, ['layer']);
+            field.keys = utilArrayUnion(field.keys, ['layer']);
         } else {
             layerField = null;
             field.keys = field.keys.filter(function(k) { return k !== 'layer'; });

@@ -1,4 +1,3 @@
-import _difference from 'lodash-es/difference';
 import _uniq from 'lodash-es/uniq';
 
 import {
@@ -16,6 +15,7 @@ import { osmEntity } from '../../osm/entity';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
+import { utilArrayDifference } from '../../util';
 
 import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
@@ -154,7 +154,7 @@ export function uiIntro(context) {
             context.storage('walkthrough_progress', _uniq(progress).join(';'));
 
             // Store if walkthrough is completed..
-            var incomplete = _difference(chapterFlow, progress);
+            var incomplete = utilArrayDifference(chapterFlow, progress);
             if (!incomplete.length) {
                 context.storage('walkthrough_completed', 'yes');
             }

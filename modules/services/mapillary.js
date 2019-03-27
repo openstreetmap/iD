@@ -1,6 +1,5 @@
 /* global Mapillary:false */
 import _forEach from 'lodash-es/forEach';
-import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
@@ -13,7 +12,7 @@ import rbush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { svgDefs } from '../svg';
-import { utilQsString, utilRebind, utilTiler } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
 
 
 var apibase = 'https://a.mapillary.com/v3/';
@@ -586,7 +585,7 @@ export default {
         var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
+        var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
         d3_selectAll('.layer-mapillary .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })

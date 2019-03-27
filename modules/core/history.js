@@ -1,9 +1,7 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
-import _difference from 'lodash-es/difference';
 import _flatten from 'lodash-es/flatten';
 import _groupBy from 'lodash-es/groupBy';
-import _isFunction from 'lodash-es/isFunction';
 import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -18,7 +16,7 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-import { utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
+import { utilArrayDifference, utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
 
 
 export function coreHistory(context) {
@@ -38,7 +36,7 @@ export function coreHistory(context) {
         actions = Array.prototype.slice.call(actions);
 
         var annotation;
-        if (!_isFunction(actions[actions.length - 1])) {
+        if (typeof actions[actions.length - 1] !== 'function') {
             annotation = actions.pop();
         }
 
@@ -148,7 +146,7 @@ export function coreHistory(context) {
             var action0 = arguments[0];
 
             if (arguments.length === 1 ||
-                arguments.length === 2 && !_isFunction(arguments[1])) {
+                (arguments.length === 2 && (typeof arguments[1] !== 'function'))) {
                 transitionable = !!action0.transitionable;
             }
 
@@ -520,7 +518,7 @@ export function coreHistory(context) {
                                 if (!err) {
                                     var visible = _groupBy(result.data, 'visible');
                                     if (!_isEmpty(visible.true)) {
-                                        missing = _difference(missing, _map(visible.true, 'id'));
+                                        missing = utilArrayDifference(missing, _map(visible.true, 'id'));
                                         _stack[0].graph.rebase(visible.true, _map(_stack, 'graph'), true);
                                         _tree.rebase(visible.true, true);
                                     }

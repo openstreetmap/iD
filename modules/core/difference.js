@@ -1,6 +1,6 @@
-import _difference from 'lodash-es/difference';
-import _each from 'lodash-es/each';
 import _isEqual from 'lodash-es/isEqual';
+
+import { utilArrayDifference } from '../util';
 
 
 /*
@@ -41,7 +41,7 @@ export function coreDifference(base, head) {
         h = head.entities[k];
         b = base.entities[k];
         if (changed(h, b)) {
-            _changes[k] = {base: b, head: h};
+            _changes[k] = { base: b, head: h };
             _length++;
         }
     }
@@ -52,7 +52,7 @@ export function coreDifference(base, head) {
         h = head.entities[k];
         b = base.entities[k];
         if (!_changes[k] && changed(h, b)) {
-            _changes[k] = {base: b, head: h};
+            _changes[k] = { base: b, head: h };
             _length++;
         }
     }
@@ -83,8 +83,10 @@ export function coreDifference(base, head) {
 
     _diff.extantIDs = function extantIDs() {
         var result = [];
-        _each(_changes, function(change, id) {
-            if (change.head) result.push(id);
+        Object.keys(_changes).forEach(function(id) {
+            if (_changes[id].head) {
+                result.push(id);
+            }
         });
         return result;
     };
@@ -92,8 +94,10 @@ export function coreDifference(base, head) {
 
     _diff.modified = function modified() {
         var result = [];
-        _each(_changes, function(change) {
-            if (change.base && change.head) result.push(change.head);
+        Object.values(_changes).forEach(function(change) {
+            if (change.base && change.head) {
+                result.push(change.head);
+            }
         });
         return result;
     };
@@ -101,7 +105,7 @@ export function coreDifference(base, head) {
 
     _diff.created = function created() {
         var result = [];
-        _each(_changes, function(change) {
+        Object.values(_changes).forEach(function(change) {
             if (!change.base && change.head) result.push(change.head);
         });
         return result;
@@ -110,7 +114,7 @@ export function coreDifference(base, head) {
 
     _diff.deleted = function deleted() {
         var result = [];
-        _each(_changes, function(change) {
+        Object.values(_changes).forEach(function(change) {
             if (change.base && !change.head) result.push(change.base);
         });
         return result;
@@ -193,12 +197,12 @@ export function coreDifference(base, head) {
                 var nb = b ? b.nodes : [];
                 var diff, i;
 
-                diff = _difference(nh, nb);
+                diff = utilArrayDifference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.hasEntity(diff[i]);
                 }
 
-                diff = _difference(nb, nh);
+                diff = utilArrayDifference(nb, nh);
                 for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.hasEntity(diff[i]);
                 }

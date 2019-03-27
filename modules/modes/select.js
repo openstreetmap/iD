@@ -1,4 +1,3 @@
-import _intersection from 'lodash-es/intersection';
 import _map from 'lodash-es/map';
 import _uniq from 'lodash-es/uniq';
 
@@ -28,7 +27,7 @@ import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-import { utilEntityOrMemberSelector, utilEntitySelector, utilKeybinding } from '../util';
+import { utilArrayIntersection, utilEntityOrMemberSelector, utilEntitySelector, utilKeybinding } from '../util';
 
 // deprecation warning - Radial Menu to be removed in iD v3
 import { uiRadialMenu } from '../ui';
@@ -107,7 +106,7 @@ export function modeSelect(context, selectedIDs) {
                 continue;
             }
 
-            commonParents = _intersection(commonParents, currParents);
+            commonParents = utilArrayIntersection(commonParents, currParents);
             if (!commonParents.length) {
                 return [];
             }

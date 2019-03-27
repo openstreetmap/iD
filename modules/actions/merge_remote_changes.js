@@ -1,13 +1,11 @@
 import _isEqual from 'lodash-es/isEqual';
-import _isFunction from 'lodash-es/isFunction';
-import _union from 'lodash-es/union';
-import _uniq from 'lodash-es/uniq';
 
 import { diff3Merge } from 'node-diff3';
 import { t } from '../util/locale';
 import { actionDeleteMultiple } from './delete_multiple';
 import { osmEntity } from '../osm';
 import { dataDiscarded } from '../../data';
+import { utilArrayUnion, utilArrayUniq } from '../util';
 
 
 export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
@@ -16,7 +14,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function user(d) {
-        return _isFunction(formatUser) ? formatUser(d) : d;
+        return (typeof formatUser === 'function') ? formatUser(d) : d;
     }
 
 
@@ -168,7 +166,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         var o = base.tags || {};
         var a = target.tags || {};
         var b = remote.tags || {};
-        var keys = _union(Object.keys(o), Object.keys(a), Object.keys(b))
+        var keys = utilArrayUnion(utilArrayUnion(Object.keys(o), Object.keys(a)), Object.keys(b))
             .filter(function(k) { return !dataDiscarded[k]; });
         var tags = Object.assign({}, a);   // shallow copy
         var changed = false;
@@ -220,7 +218,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
             } else if (_option === 'force_local') {
                 if (target.type === 'way') {
-                    target = mergeChildren(target, _uniq(local.nodes), updates, graph);
+                    target = mergeChildren(target, utilArrayUniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
                 }
                 return graph.replace(target);
@@ -239,7 +237,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             // pull in any child nodes that may not be present locally..
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeNodes(base, remote, target);
-            target = mergeChildren(target, _union(local.nodes, remote.nodes), updates, graph);
+            target = mergeChildren(target, utilArrayUnion(local.nodes, remote.nodes), updates, graph);
 
         } else if (target.type === 'relation') {
             target = mergeMembers(remote, target);

@@ -1,8 +1,7 @@
-import _union from 'lodash-es/union';
-
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
+import { utilArrayUnion } from '../util';
 
 
 export function osmEntity(attrs) {
@@ -128,7 +127,7 @@ osmEntity.prototype = {
                 merged[k] = t2;
             } else if (t1 !== t2) {
                 changed = true;
-                merged[k] = _union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
+                merged[k] = utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             }
         }
         return changed ? this.update({ tags: merged }) : this;

@@ -1,5 +1,4 @@
 import _forEach from 'lodash-es/forEach';
-import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { timer as d3_timer } from 'd3-timer';
@@ -25,7 +24,7 @@ import {
 } from '../geo';
 
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind, utilTiler } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
 
 import Q from 'q';
 
@@ -950,7 +949,7 @@ export default {
         var selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles.map(function (d) { return d.key; })) || [];
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        var highlightedBubbleKeys = _union(hoveredBubbleKeys, selectedBubbleKeys);
+        var highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
 
         d3_selectAll('.layer-streetside-images .viewfield-group')
             .classed('highlighted', function (d) { return highlightedBubbleKeys.indexOf(d.key) !== -1; })
