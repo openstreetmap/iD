@@ -5,6 +5,7 @@
         "access_simple"
     ],
     "geometry": [
+        "vertex",
         "point",
         "area"
     ],
