@@ -76,8 +76,15 @@ export function operationDelete(selectedIDs, context) {
             reason = 'part_of_relation';
         } else if (selectedIDs.some(incompleteRelation)) {
             reason = 'incomplete_relation';
+        } else if (selectedIDs.some(hasWikidataTag)) {
+            reason = 'has_wikidata_tag';
         }
         return reason;
+
+        function hasWikidataTag(id) {
+            var entity = context.entity(id);
+            return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
+        }
 
         function incompleteRelation(id) {
             var entity = context.entity(id);
