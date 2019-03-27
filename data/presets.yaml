@@ -4150,7 +4150,7 @@ en:
       highway/milestone:
         # highway=milestone
         name: Highway Milestone
-        # 'terms: milestone,marker'
+        # 'terms: mile marker,mile post,mile stone,mileage marker,milemarker,milepost'
         terms: '<translate with synonyms or related terms for ''Highway Milestone'', separated by commas>'
       highway/mini_roundabout:
         # highway=mini_roundabout

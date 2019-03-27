@@ -5767,7 +5767,7 @@
                 },
                 "highway/milestone": {
                     "name": "Highway Milestone",
-                    "terms": "milestone,marker"
+                    "terms": "mile marker,mile post,mile stone,mileage marker,milemarker,milepost"
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini-Roundabout",
