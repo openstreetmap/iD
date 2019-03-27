@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -9,7 +7,7 @@ import {
 
 import { t, textDirection } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
-import { utilRebind } from '../../util/rebind';
+import { utilArrayUniq, utilRebind } from '../../util';
 import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 
 
@@ -155,7 +153,8 @@ export function uiIntroBuilding(context, reveal) {
                 var graph = context.graph();
                 var way = context.entity(context.selectedIDs()[0]);
                 var nodes = graph.childNodes(way);
-                var points = _uniq(nodes).map(function(n) { return context.projection(n.loc); });
+                var points = utilArrayUniq(nodes)
+                    .map(function(n) { return context.projection(n.loc); });
 
                 if (isMostlySquare(points)) {
                     _houseID = way.id;

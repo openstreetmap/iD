@@ -5,7 +5,6 @@ import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
-import _uniq from 'lodash-es/uniq';
 
 import rbush from 'rbush';
 
@@ -15,21 +14,8 @@ import { xml as d3_xml } from 'd3-request';
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { geoExtent, geoVecAdd } from '../geo';
-
-import {
-    osmEntity,
-    osmNode,
-    osmNote,
-    osmRelation,
-    osmWay
-} from '../osm';
-
-import {
-    utilRebind,
-    utilIdleWorker,
-    utilTiler,
-    utilQsString
-} from '../util';
+import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
+import { utilArrayUniq, utilRebind, utilIdleWorker, utilTiler, utilQsString } from '../util';
 
 
 var tiler = utilTiler();
@@ -526,7 +512,7 @@ export default {
     loadMultiple: function(ids, callback) {
         var that = this;
 
-        _forEach(_groupBy(_uniq(ids), osmEntity.id.type), function(v, k) {
+        _forEach(_groupBy(utilArrayUniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's';
             var osmIDs = _map(v, osmEntity.id.toOSM);
             var options = { skipSeen: false };
@@ -622,7 +608,7 @@ export default {
         var toLoad = [];
         var cached = [];
 
-        _uniq(uids).forEach(function(uid) {
+        utilArrayUniq(uids).forEach(function(uid) {
             if (_userCache.user[uid]) {
                 delete _userCache.toLoad[uid];
                 cached.push(_userCache.user[uid]);

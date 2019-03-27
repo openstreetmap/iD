@@ -1,8 +1,6 @@
-import _uniq from 'lodash-es/uniq';
-
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
-import { utilObjectOmit } from '../util';
+import { utilArrayUniq, utilObjectOmit } from '../util';
 
 
 export function presetPreset(id, preset, fields, visible, rawPresets) {
@@ -77,7 +75,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 fieldIDs = inheritedFieldIDs(preset.parentPresetID(), prop);
             }
             // resolve duplicate fields
-            fieldIDs = _uniq(fieldIDs);
+            fieldIDs = utilArrayUniq(fieldIDs);
 
             // update this preset with the results
             preset[prop] = fieldIDs;

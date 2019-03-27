@@ -8,10 +8,10 @@ import { utilGetAllNodes } from '../util';
 
 
 export function operationRotate(selectedIDs, context) {
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        extent = selectedIDs.reduce(function(extent, id) {
-            return extent.extend(context.entity(id).extent(context.graph()));
-        }, geoExtent());
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    var extent = selectedIDs.reduce(function(extent, id) {
+        return extent.extend(context.entity(id).extent(context.graph()));
+    }, geoExtent());
 
 
     var operation = function() {

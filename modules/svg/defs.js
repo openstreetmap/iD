@@ -1,7 +1,7 @@
-import _uniq from 'lodash-es/uniq';
-
 import { request as d3_request } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
+
+import { utilArrayUniq } from '../util';
 
 
 /*
@@ -181,7 +181,7 @@ export function svgDefs(context) {
     drawDefs.addSprites = function(selection, ids, overrideColors) {
         var spritesheets = selection.selectAll('.spritesheet');
         var currData = spritesheets.data();
-        var data = _uniq(currData.concat(ids));
+        var data = utilArrayUniq(currData.concat(ids));
 
         spritesheets
             .data(data)

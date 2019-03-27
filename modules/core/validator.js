@@ -1,13 +1,12 @@
 import _flatten from 'lodash-es/flatten';
 import _flattenDeep from 'lodash-es/flattenDeep';
-import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
 import { t } from '../util/locale';
-import { utilRebind } from '../util/rebind';
+import { utilArrayUniq, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -177,7 +176,7 @@ export function coreValidator(context) {
             return validation(changes, context);
         }));
 
-        entitiesToCheck = _uniq(_flattenDeep(entitiesToCheck.map(function(entity) {
+        entitiesToCheck = utilArrayUniq(_flattenDeep(entitiesToCheck.map(function(entity) {
             var entities = [entity];
             if (entity.type === 'node') {  // validate ways if their nodes have changed
                 entities = entities.concat(graph.parentWays(entity));

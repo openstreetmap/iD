@@ -1,8 +1,8 @@
 import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
 
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
+import { utilArrayUniq } from '../util';
 
 
 export function osmNode() {
@@ -141,7 +141,7 @@ Object.assign(osmNode.prototype, {
 
         }, this);
 
-        return _uniq(results);
+        return utilArrayUniq(results);
     },
 
 

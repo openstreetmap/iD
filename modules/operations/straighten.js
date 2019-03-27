@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
@@ -47,7 +45,7 @@ export function operationStraighten(selectedIDs, context) {
         });
 
         // Return false if line is only 2 nodes long
-        if (_uniq(nodes).length <= 2) return false;
+        if (new Set(nodes).size <= 2) return false;
 
         // Return false unless exactly 0 or 2 specific start/end nodes are selected
         if (!(selectedNodes.length === 0 || selectedNodes.length === 2)) return false;

@@ -1,10 +1,9 @@
-import _isFunction from 'lodash-es/isFunction';
-import _uniq from 'lodash-es/uniq';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
+
+import { utilArrayUniq } from '../util/index';
 
 
 export function utilKeybinding(namespace) {
@@ -126,7 +125,7 @@ export function utilKeybinding(namespace) {
 
     // Remove one or more keycode bindings.
     keybinding.off = function(codes, capture) {
-        var arr = _uniq([].concat(codes));
+        var arr = utilArrayUniq([].concat(codes));
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');
@@ -138,11 +137,11 @@ export function utilKeybinding(namespace) {
 
     // Add one or more keycode bindings.
     keybinding.on = function(codes, callback, capture) {
-        if (!_isFunction(callback)) {
+        if (typeof callback !== 'function') {
             return keybinding.off(codes, capture);
         }
 
-        var arr = _uniq([].concat(codes));
+        var arr = utilArrayUniq([].concat(codes));
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');

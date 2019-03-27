@@ -1,11 +1,9 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
-import _flatten from 'lodash-es/flatten';
 import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
@@ -16,7 +14,7 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-import { utilArrayDifference, utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
+import { utilArrayDifference, utilArrayUnion, utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
 
 
 export function coreHistory(context) {
@@ -391,7 +389,7 @@ export function coreHistory(context) {
 
             function customizer(src) {
                 var copy = utilObjectOmit(_cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
-                if (_isEmpty(copy.tags)) {
+                if (!Object.keys(copy.tags)) {
                     delete copy.tags;
                 }
 
@@ -503,9 +501,12 @@ export function coreHistory(context) {
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
                         var osm = context.connection();
-                        var baseWays = baseEntities.filter(function(e) { return e.type === 'way'; });
-                        var nodes = _flatten(_uniq(_map(baseWays, 'nodes')));
-                        var missing = nodes.filter(function(n) { return !_stack[0].graph.hasEntity(n); });
+                        var baseWays = baseEntities
+                            .filter(function(e) { return e.type === 'way'; });
+                        var nodeIDs = baseWays
+                            .reduce(function(acc, way) { return utilArrayUnion(acc, way.nodes); }, []);
+                        var missing = nodeIDs
+                            .filter(function(n) { return !_stack[0].graph.hasEntity(n); });
 
                         if (!_isEmpty(missing) && osm) {
                             loadComplete = false;

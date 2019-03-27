@@ -1,12 +1,11 @@
-import _uniq from 'lodash-es/uniq';
-
 import { json as d3_json } from 'd3-request';
 
-import { utilQsString } from '../util';
+import { utilArrayUniq, utilQsString } from '../util';
 import { currentLocale } from '../util/locale';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
 var _wikidataCache = {};
+
 
 export default {
 
@@ -58,7 +57,7 @@ export default {
             return;
         }
 
-        var langs = _uniq([
+        var langs = utilArrayUniq([
             currentLocale.toLowerCase(),
             currentLocale.split('-', 2)[0].toLowerCase(),
             'en'
@@ -145,7 +144,7 @@ export default {
 
             if (entity.sitelinks) {
                 // must be one of these that we requested..
-                var langs = _uniq([
+                var langs = utilArrayUniq([
                     currentLocale.toLowerCase(),
                     currentLocale.split('-', 2)[0].toLowerCase(),
                     'en'

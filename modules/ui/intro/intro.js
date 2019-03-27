@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import {
     select as d3_select,
     selectAll as d3_selectAll
@@ -15,7 +13,7 @@ import { osmEntity } from '../../osm/entity';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
-import { utilArrayDifference } from '../../util';
+import { utilArrayDifference, utilArrayUniq } from '../../util';
 
 import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
@@ -143,7 +141,7 @@ export function uiIntro(context) {
 
                     // Store walkthrough progress..
                     progress.push(chapter);
-                    context.storage('walkthrough_progress', _uniq(progress).join(';'));
+                    context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
                 });
             return s;
         });
@@ -151,7 +149,7 @@ export function uiIntro(context) {
         chapters[chapters.length - 1].on('startEditing', function() {
             // Store walkthrough progress..
             progress.push('startEditing');
-            context.storage('walkthrough_progress', _uniq(progress).join(';'));
+            context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
 
             // Store if walkthrough is completed..
             var incomplete = utilArrayDifference(chapterFlow, progress);

@@ -1,10 +1,8 @@
-import _uniq from 'lodash-es/uniq';
-
 import { actionDeleteRelation, actionReverse, actionSplit } from '../actions';
 import { coreGraph } from '../core';
 import { geoAngle, geoSphericalDistance } from '../geo';
 import { osmEntity } from './entity';
-import { utilArrayDifference } from '../util';
+import { utilArrayDifference, utilArrayUniq } from '../util';
 
 
 export function osmTurn(turn) {
@@ -89,7 +87,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             hasWays = true;
 
             // check the way's children for more key vertices
-            nodes = _uniq(graph.childNodes(way));
+            nodes = utilArrayUniq(graph.childNodes(way));
             for (j = 0; j < nodes.length; j++) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
@@ -120,8 +118,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         }
     }
 
-    vertices = _uniq(vertices);
-    ways = _uniq(ways);
+    vertices = utilArrayUniq(vertices);
+    ways = utilArrayUniq(ways);
 
 
     // STEP 2:  Build a virtual graph containing only the entities in the intersection..
@@ -200,8 +198,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         ways = ways.concat(parents);
     });
 
-    vertices = _uniq(vertices);
-    ways = _uniq(ways);
+    vertices = utilArrayUniq(vertices);
+    ways = utilArrayUniq(ways);
 
     vertexIds = vertices.map(function(v) { return v.id; });
     wayIds = ways.map(function(w) { return w.id; });
