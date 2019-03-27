@@ -10,7 +10,8 @@
         "area"
     ],
     "tags": {
-        "shop": "boutique"
+        "shop": "fashion"
     },
-    "name": "Boutique"
+    "searchable": false,
+    "name": "Fashion Store"
 }

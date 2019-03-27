@@ -12,5 +12,21 @@
     "tags": {
         "shop": "clothes"
     },
+    "terms": [
+        "blouses",
+        "boutique",
+        "bras",
+        "clothes",
+        "dresses",
+        "fashion",
+        "pants",
+        "shirts",
+        "shorts",
+        "skirts",
+        "slacks",
+        "socks",
+        "suits",
+        "underwear"
+    ],
     "name": "Clothing Store"
 }

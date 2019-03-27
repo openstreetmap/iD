@@ -5050,6 +5050,10 @@
                     "name": "Bridge Pier",
                     "terms": ""
                 },
+                "building_part": {
+                    "name": "Building Part",
+                    "terms": "roof,simple 3D buildings"
+                },
                 "building": {
                     "name": "Building",
                     "terms": ""
@@ -7478,6 +7482,14 @@
                     "name": "Shop",
                     "terms": ""
                 },
+                "shop/boutique": {
+                    "name": "Boutique",
+                    "terms": ""
+                },
+                "shop/fashion": {
+                    "name": "Fashion Store",
+                    "terms": ""
+                },
                 "shop/fishmonger": {
                     "name": "Fishmonger",
                     "terms": ""
@@ -7562,10 +7574,6 @@
                     "name": "Book Store",
                     "terms": ""
                 },
-                "shop/boutique": {
-                    "name": "Boutique",
-                    "terms": ""
-                },
                 "shop/butcher": {
                     "name": "Butcher",
                     "terms": "chicken,beef,lamb,meat,pork"
@@ -7616,7 +7624,7 @@
                 },
                 "shop/clothes": {
                     "name": "Clothing Store",
-                    "terms": ""
+                    "terms": "blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear"
                 },
                 "shop/coffee": {
                     "name": "Coffee Store",
@@ -7697,10 +7705,6 @@
                 "shop/farm": {
                     "name": "Produce Stand",
                     "terms": "farm shop,farm stand"
-                },
-                "shop/fashion": {
-                    "name": "Fashion Store",
-                    "terms": ""
                 },
                 "shop/fireplace": {
                     "name": "Fireplace Store",
