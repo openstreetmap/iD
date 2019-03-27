@@ -440,7 +440,7 @@ button[disabled].action:hover {
     left: 0;
     top: 0;
     right: 0;
-    z-index: 9;
+    z-index: 101;
 }
 #bar .toolbar-item {
     display: flex;
@@ -3012,7 +3012,7 @@ input.key-trap {
 ------------------------------------------------------- */
 .map-controls {
     right: 0;
-    top: 132px;
+    top: 141px;
     width: 40px;
     position: fixed;
     z-index: 100;
@@ -3560,7 +3560,7 @@ ul.issue-fix-list button {
 ------------------------------------------------------- */
 .map-pane {
     position: absolute;
-    top: 60px;
+    top: 71px;
     bottom: 30px;
     right: 0;
     width: 100%;
@@ -4864,7 +4864,7 @@ svg.mouseclick use.right {
 }
 .tooltip.in {
     opacity: 0.9;
-    z-index: 1030;
+    z-index: 5000;
     height: auto;
     display: block;
 }
@@ -5054,12 +5054,33 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.sidebar-toggle .tooltip .tooltip-arrow {
-    left: 36px;
+[dir='ltr'] .sidebar-toggle .tooltip {
+    left: 0 !important;
+}
+[dir='rtl'] .sidebar-toggle .tooltip {
+    right: 0 !important;
+}
+[dir='ltr'] .sidebar-toggle .tooltip .tooltip-arrow {
+    left: 20px;
 }
 [dir='rtl'] .sidebar-toggle .tooltip .tooltip-arrow {
+    right: 20px;
+}
+[dir='ltr'] .save .tooltip {
+    left: auto !important;
+    right: 0 !important;
+}
+[dir='rtl'] .save .tooltip {
+    right: auto !important;
+    left: 0 !important;
+}
+[dir='ltr'] .save .tooltip .tooltip-arrow {
     left: auto;
     right: 36px;
+}
+[dir='rtl'] .save .tooltip .tooltip-arrow {
+    right: auto;
+    left: 36px;
 }
 
 li:first-of-type .badge .tooltip,
