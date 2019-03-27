@@ -1,5 +1,3 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import {
     event as d3_event,
     select as d3_select
@@ -19,7 +17,7 @@ import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { uiCombobox, uiDisclosure } from './index';
-import { utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
+import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -119,7 +117,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = Object.values(_groupBy(result, 'value'))
+        var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
             .filter(function(v) { return v.length > 1; });
 
         dupeGroups.forEach(function(group) {

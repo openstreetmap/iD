@@ -1,19 +1,15 @@
-import _groupBy from 'lodash-es/groupBy';
 import _flatten from 'lodash-es/flatten';
-import _forOwn from 'lodash-es/forOwn';
 import _map from 'lodash-es/map';
 
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments,
-    svgPath,
-    svgRelationMemberTags,
-    svgSegmentWay,
-    svgTagClasses
+    svgMarkerSegments, svgPath, svgRelationMemberTags,
+    svgSegmentWay, svgTagClasses
 } from './index';
 
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
+import { utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -190,7 +186,6 @@ export function svgLines(projection, context) {
 
         var getPath = svgPath(projection, graph);
         var ways = [];
-        var pathdata = {};
         var onewaydata = {};
         var sideddata = {};
         var oldMultiPolygonOuters = {};
@@ -207,9 +202,10 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        pathdata = _groupBy(ways, function(way) { return way.layer(); });
+        var pathdata = utilArrayGroupBy(ways, function(way) { return way.layer(); });
 
-        _forOwn(pathdata, function(v, k) {
+        Object.keys(pathdata).forEach(function(k) {
+            var v = pathdata[k];
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
                 projection, graph, 35,

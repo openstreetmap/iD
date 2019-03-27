@@ -1,7 +1,5 @@
-import _chunk from 'lodash-es/chunk';
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _forEach from 'lodash-es/forEach';
-import _groupBy from 'lodash-es/groupBy';
 import _throttle from 'lodash-es/throttle';
 
 import rbush from 'rbush';
@@ -13,7 +11,11 @@ import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { geoExtent, geoVecAdd } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
-import { utilArrayUniq, utilRebind, utilIdleWorker, utilTiler, utilQsString } from '../util';
+
+import {
+    utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
+    utilIdleWorker, utilTiler, utilQsString
+} from '../util';
 
 
 var tiler = utilTiler();
@@ -509,13 +511,14 @@ export default {
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
+        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
 
-        _forEach(_groupBy(utilArrayUniq(ids), osmEntity.id.type), function(v, k) {
+        Object.keys(groups).forEach(function(k) {
             var type = k + 's';   // nodes, ways, relations
-            var osmIDs = v.map(function(id) { return osmEntity.id.toOSM(id); });
+            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
             var options = { skipSeen: false };
 
-            _chunk(osmIDs, 150).forEach(function(arr) {
+            utilArrayChunk(osmIDs, 150).forEach(function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
@@ -620,7 +623,7 @@ export default {
             if (!this.authenticated()) return;  // require auth
         }
 
-        _chunk(toLoad, 150).forEach(function(arr) {
+        utilArrayChunk(toLoad, 150).forEach(function(arr) {
             oauth.xhr(
                 { method: 'GET', path: '/api/0.6/users?users=' + arr.join() },
                 wrapcb(this, done, _connectionID)

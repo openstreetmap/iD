@@ -1,27 +1,26 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import { geoPolygonContainsPolygon } from '../geo';
 import { osmJoinWays, osmRelation } from '../osm';
-import { utilObjectOmit } from '../util';
+import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
 
 export function actionMergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return Object.assign({
-                closedWay: [],
-                multipolygon: [],
-                other: []
-            }, _groupBy(entities, function(entity) {
-                if (entity.type === 'way' && entity.isClosed()) {
-                    return 'closedWay';
-                } else if (entity.type === 'relation' && entity.isMultipolygon()) {
-                    return 'multipolygon';
-                } else {
-                    return 'other';
-                }
-            }));
+        var geometryGroups = utilArrayGroupBy(entities, function(entity) {
+            if (entity.type === 'way' && entity.isClosed()) {
+                return 'closedWay';
+            } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+                return 'multipolygon';
+            } else {
+                return 'other';
+            }
+        });
+
+        return Object.assign(
+            { closedWay: [], multipolygon: [], other: [] },
+            geometryGroups
+        );
     }
 
 

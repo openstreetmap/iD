@@ -1,10 +1,8 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
 
 export function rendererFeatures(context) {
@@ -276,8 +274,8 @@ export function rendererFeatures(context) {
 
     features.gatherStats = function(d, resolver, dimensions) {
         var needsRedraw = false;
-        var type = _groupBy(d, function(ent) { return ent.type; });
-        var entities = [].concat(type.relation || [], type.way || [], type.node || []);
+        var types = utilArrayGroupBy(d, 'type');
+        var entities = [].concat(types.relation || [], types.way || [], types.node || []);
         var currHidden, geometry, matches, i, j;
 
         for (i = 0; i < _keys.length; i++) {

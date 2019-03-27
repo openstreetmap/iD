@@ -1,6 +1,5 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
-import _groupBy from 'lodash-es/groupBy';
 import _forEach from 'lodash-es/forEach';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -12,7 +11,8 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-import { utilArrayDifference, utilArrayUnion, utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
+import { utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
+    utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
 
 
 export function coreHistory(context) {
@@ -517,7 +517,7 @@ export function coreHistory(context) {
 
                             var childNodesLoaded = function(err, result) {
                                 if (!err) {
-                                    var visibleGroups = _groupBy(result.data, 'visible');
+                                    var visibleGroups = utilArrayGroupBy(result.data, 'visible');
                                     var visibles = visibleGroups.true || [];      // alive nodes
                                     var invisibles = visibleGroups.false || [];   // deleted nodes
 

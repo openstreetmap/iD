@@ -1,16 +1,17 @@
-import _groupBy from 'lodash-es/groupBy';
-import _map from 'lodash-es/map';
-
 import { event as d3_event } from 'd3-selection';
+
 import { uiCmd } from '../ui';
+import { utilArrayGroupBy } from '../util';
 
 
 export function behaviorCopy(context) {
 
     function groupEntities(ids, graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return Object.assign({relation: [], way: [], node: []},
-            _groupBy(entities, function(entity) { return entity.type; }));
+        return Object.assign(
+            { relation: [], way: [], node: [] },
+            utilArrayGroupBy(entities, 'type')
+        );
     }
 
 
@@ -21,7 +22,7 @@ export function behaviorCopy(context) {
         descendants = descendants || {};
 
         if (entity.type === 'relation') {
-            children = _map(entity.members, 'id');
+            children = entity.members.map(function(m) { return m.id; });
         } else if (entity.type === 'way') {
             children = entity.nodes;
         } else {
