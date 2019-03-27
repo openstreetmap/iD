@@ -119,7 +119,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = _groupBy(result, 'value')
+        var dupeGroups = Object.values(_groupBy(result, 'value'))
             .filter(function(v) { return v.length > 1; });
 
         dupeGroups.forEach(function(group) {
