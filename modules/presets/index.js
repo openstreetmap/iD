@@ -271,7 +271,10 @@ export function presetIndex(context) {
     };
 
     all.defaults = function(geometry, n) {
-        var rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
+        var rec = [];
+        if (!context.inIntro()) {
+            rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
+        }
         var def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
         return presetCollection(utilArrayUniq(rec.concat(def).concat(all.fallback(geometry))));
     };
@@ -451,8 +454,10 @@ export function presetIndex(context) {
     };
 
     all.setMostRecent = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
+        if (context.inIntro()) return;
         if (preset.searchable === false) return;
+
+        geometry = all.fallback(geometry).id;
 
         var items = all.getRecents();
         var item = all.recentMatching(preset, geometry);
