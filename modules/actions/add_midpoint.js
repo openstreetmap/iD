@@ -1,14 +1,15 @@
-import _intersection from 'lodash-es/intersection';
 import { geoEdgeEqual } from '../geo';
+import { utilArrayIntersection } from '../util';
 
 
 export function actionAddMidpoint(midpoint, node) {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 
-        var parents = _intersection(
+        var parents = utilArrayIntersection(
             graph.parentWays(graph.entity(midpoint.edge[0])),
-            graph.parentWays(graph.entity(midpoint.edge[1])));
+            graph.parentWays(graph.entity(midpoint.edge[1]))
+        );
 
         parents.forEach(function(way) {
             for (var i = 0; i < way.nodes.length - 1; i++) {

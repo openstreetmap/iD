@@ -1,6 +1,5 @@
-import _uniq from 'lodash-es/uniq';
-
 import { actionDeleteNode } from './delete_node';
+import { utilArrayUniq } from '../util';
 
 
 // Connect the ways at the given nodes.
@@ -113,7 +112,7 @@ export function actionConnect(nodeIDs) {
 
 
         // test restrictions
-        restrictionIDs = _uniq(restrictionIDs);
+        restrictionIDs = utilArrayUniq(restrictionIDs);
         for (i = 0; i < restrictionIDs.length; i++) {
             relation = graph.entity(restrictionIDs[i]);
             if (!relation.isComplete(graph)) continue;
@@ -122,7 +121,7 @@ export function actionConnect(nodeIDs) {
                 .filter(function(m) { return m.type === 'way'; })
                 .map(function(m) { return graph.entity(m.id); });
 
-            memberWays = _uniq(memberWays);
+            memberWays = utilArrayUniq(memberWays);
             var f = relation.memberByRole('from');
             var t = relation.memberByRole('to');
             var isUturn = (f.id === t.id);
@@ -134,8 +133,8 @@ export function actionConnect(nodeIDs) {
                 collectNodes(relation.members[j], nodes);
             }
 
-            nodes.keyfrom = _uniq(nodes.keyfrom.filter(hasDuplicates));
-            nodes.keyto = _uniq(nodes.keyto.filter(hasDuplicates));
+            nodes.keyfrom = utilArrayUniq(nodes.keyfrom.filter(hasDuplicates));
+            nodes.keyto = utilArrayUniq(nodes.keyto.filter(hasDuplicates));
 
             var filter = keyNodeFilter(nodes.keyfrom, nodes.keyto);
             nodes.from = nodes.from.filter(filter);

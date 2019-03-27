@@ -1,11 +1,10 @@
 import _isMatch from 'lodash-es/isMatch';
-import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
-import { areaKeys } from '../core/context';
 
-import {
-    validationIssue
-} from '../core/validator';
+import { areaKeys } from '../core/context';
+import { utilArrayIntersection } from '../util';
+import { validationIssue } from '../core/validator';
+
 
 var buildRuleChecks = function() {
     return {
@@ -166,10 +165,10 @@ export default {
         var _areaKeys = this._areaKeys;
 
         var isAreaKeyBlackList = function(key) {
-            return _intersection(tagMap[key], Object.keys(_areaKeys[key])).length > 0;
+            return utilArrayIntersection(tagMap[key], Object.keys(_areaKeys[key])).length > 0;
         };
         var isLineKeysWhiteList = function(key) {
-            return _intersection(tagMap[key], Object.keys(_lineKeys[key])).length > 0;
+            return utilArrayIntersection(tagMap[key], Object.keys(_lineKeys[key])).length > 0;
         };
 
         if (tagMap.hasOwnProperty('area')) {

@@ -1,7 +1,5 @@
 import _bind from 'lodash-es/bind';
 import _forEach from 'lodash-es/forEach';
-import _isEmpty from 'lodash-es/isEmpty';
-import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
@@ -11,7 +9,7 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilRebind } from '../util';
+import { utilArrayUniq, utilRebind } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -88,7 +86,8 @@ export function presetIndex(context) {
 
     all.allowsVertex = function(entity, resolver) {
         if (entity.type !== 'node') return false;
-        if (_isEmpty(entity.tags)) return true;
+        if (Object.keys(entity.tags).length === 0) return true;
+
         return resolver.transient(entity, 'vertexMatch', function() {
             var vertexPresets = _index.vertex;
             if (entity.isOnAddressLine(resolver)) {
@@ -273,12 +272,12 @@ export function presetIndex(context) {
 
     all.defaults = function(geometry, n) {
         var rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
-        var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        return presetCollection(_uniq(rec.concat(def).concat(all.fallback(geometry))));
+        var def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
+        return presetCollection(utilArrayUniq(rec.concat(def).concat(all.fallback(geometry))));
     };
 
     all.recent = function() {
-        return presetCollection(_uniq(all.getRecents().map(function(d) {
+        return presetCollection(utilArrayUniq(all.getRecents().map(function(d) {
             return d.preset;
         })));
     };

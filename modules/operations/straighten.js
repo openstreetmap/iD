@@ -1,9 +1,7 @@
-import _uniq from 'lodash-es/uniq';
-import _difference from 'lodash-es/difference';
-
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
+import { utilArrayDifference } from '../util/index';
 
 
 export function operationStraighten(selectedIDs, context) {
@@ -47,13 +45,14 @@ export function operationStraighten(selectedIDs, context) {
         });
 
         // Return false if line is only 2 nodes long
-        if (_uniq(nodes).length <= 2) return false;
+        if (new Set(nodes).size <= 2) return false;
 
         // Return false unless exactly 0 or 2 specific start/end nodes are selected
         if (!(selectedNodes.length === 0 || selectedNodes.length === 2)) return false;
 
         // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
-        if (_difference(startNodes, endNodes).length + _difference(endNodes, startNodes).length !== 2) return false;
+        if (utilArrayDifference(startNodes, endNodes).length +
+            utilArrayDifference(endNodes, startNodes).length !== 2) return false;
 
         // Ensure both start/end selected nodes lie on the selected path
         if (selectedNodes.length === 2 && (

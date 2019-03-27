@@ -1,10 +1,8 @@
-import _uniq from 'lodash-es/uniq';
 import { actionDeleteRelation } from './delete_relation';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
-export function actionDeleteWay(wayId) {
-
+export function actionDeleteWay(wayID) {
 
     function canDeleteNode(node, graph) {
         return !graph.parentWays(node).length &&
@@ -14,22 +12,21 @@ export function actionDeleteWay(wayId) {
 
 
     var action = function(graph) {
-        var way = graph.entity(wayId);
+        var way = graph.entity(wayID);
 
-        graph.parentRelations(way)
-            .forEach(function(parent) {
-                parent = parent.removeMembersWithID(wayId);
-                graph = graph.replace(parent);
+        graph.parentRelations(way).forEach(function(parent) {
+            parent = parent.removeMembersWithID(wayID);
+            graph = graph.replace(parent);
 
-                if (parent.isDegenerate()) {
-                    graph = actionDeleteRelation(parent.id)(graph);
-                }
-            });
+            if (parent.isDegenerate()) {
+                graph = actionDeleteRelation(parent.id)(graph);
+            }
+        });
 
-        _uniq(way.nodes).forEach(function(nodeId) {
-            graph = graph.replace(way.removeNode(nodeId));
+        (new Set(way.nodes)).forEach(function(nodeID) {
+            graph = graph.replace(way.removeNode(nodeID));
 
-            var node = graph.entity(nodeId);
+            var node = graph.entity(nodeID);
             if (canDeleteNode(node, graph)) {
                 graph = graph.remove(node);
             }

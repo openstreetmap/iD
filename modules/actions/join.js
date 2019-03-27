@@ -1,9 +1,9 @@
 import _groupBy from 'lodash-es/groupBy';
-import _intersection from 'lodash-es/intersection';
 
 import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag, osmJoinWays } from '../osm';
 import { geoPathIntersections } from '../geo';
+import { utilArrayIntersection } from '../util';
 
 
 // Join ways at the end node they share.
@@ -76,31 +76,34 @@ export function actionJoin(ids) {
 
     action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
-        if (ids.length < 2 || ids.length !== geometries.line.length)
+        if (ids.length < 2 || ids.length !== geometries.line.length) {
             return 'not_eligible';
+        }
 
         var joined = osmJoinWays(ids.map(graph.entity, graph), graph);
-        if (joined.length > 1)
+        if (joined.length > 1) {
             return 'not_adjacent';
+        }
 
-        // Loop through all combinations of path-pairs to check potential intersections
-        //  between all pairs
-        for (var i = 0; i < ids.length-1; i++) {
-            for (var j = i+1; j < ids.length; j++) {
-                var path1 = graph.childNodes(graph.entity(ids[i])).map(function(e) {
-                    return e.loc;
-                });
-                var path2 = graph.childNodes(graph.entity(ids[j])).map(function(e) {
-                    return e.loc;
-                });
+        // Loop through all combinations of path-pairs
+        // to check potential intersections between all pairs
+        for (var i = 0; i < ids.length - 1; i++) {
+            for (var j = i + 1; j < ids.length; j++) {
+                var path1 = graph.childNodes(graph.entity(ids[i]))
+                    .map(function(e) { return e.loc; });
+                var path2 = graph.childNodes(graph.entity(ids[j]))
+                    .map(function(e) { return e.loc; });
                 var intersections = geoPathIntersections(path1, path2);
 
-                // Check if intersections are just nodes lying on top of each other/the line,
-                //  as opposed to crossing it
-                if (_intersection(
-                        joined[0].nodes.map(function(n) { return n.loc.toString(); }),
-                        intersections.map(function(n) { return n.toString(); })
-                    ).length !== intersections.length) return 'paths_intersect';
+                // Check if intersections are just nodes lying on top of
+                // each other/the line, as opposed to crossing it
+                var common = utilArrayIntersection(
+                    joined[0].nodes.map(function(n) { return n.loc.toString(); }),
+                    intersections.map(function(n) { return n.toString(); })
+                );
+                if (common.length !== intersections.length) {
+                    return 'paths_intersect';
+                }
             }
         }
 
@@ -112,8 +115,9 @@ export function actionJoin(ids) {
         joined[0].forEach(function(way) {
             var parents = graph.parentRelations(way);
             parents.forEach(function(parent) {
-                if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; }))
+                if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; })) {
                     relation = parent;
+                }
             });
 
             for (var k in way.tags) {
@@ -125,11 +129,13 @@ export function actionJoin(ids) {
             }
         });
 
-        if (relation)
+        if (relation) {
             return 'restriction';
+        }
 
-        if (conflicting)
+        if (conflicting) {
             return 'conflicting_tags';
+        }
     };
 
 

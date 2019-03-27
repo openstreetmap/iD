@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -11,7 +10,7 @@ import {
 import { t } from '../../util/locale';
 import { services } from '../../services';
 import { uiCombobox } from '../index';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 export {
     uiFieldCombo as uiFieldMultiCombo,
@@ -245,7 +244,7 @@ export function uiFieldCombo(field, context) {
             if (!vals.length) return;
 
             if (isMulti) {
-                _uniq(vals).forEach(function(v) {
+                utilArrayUniq(vals).forEach(function(v) {
                     var key = field.key + v;
                     if (_entity) {
                         // don't set a multicombo value to 'yes' if it already has a non-'no' value
@@ -260,7 +259,7 @@ export function uiFieldCombo(field, context) {
             } else if (isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr = arr.concat(vals);
-                t[field.key] = _uniq(arr).filter(Boolean).join(';');
+                t[field.key] = utilArrayUniq(arr).filter(Boolean).join(';');
             }
 
             window.setTimeout(function() { input.node().focus(); }, 10);
@@ -282,8 +281,9 @@ export function uiFieldCombo(field, context) {
         } else if (isSemi) {
             var arr = _multiData.map(function(md) {
                 return md.key === d.key ? null : md.key;
-            });
-            arr = _uniq(arr).filter(Boolean);
+            }).filter(Boolean);
+
+            arr = utilArrayUniq(arr);
             t[field.key] = arr.length ? arr.join(';') : undefined;
         }
         dispatch.call('change', this, t);
@@ -400,7 +400,7 @@ export function uiFieldCombo(field, context) {
                 field.keys = _map(_multiData, 'key');
 
             } else if (isSemi) {
-                var arr = _uniq((tags[field.key] || '').split(';')).filter(Boolean);
+                var arr = utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
                 _multiData = arr.map(function(k) {
                     return {
                         key: k,

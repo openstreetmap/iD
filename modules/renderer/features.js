@@ -1,12 +1,10 @@
 import _groupBy from 'lodash-es/groupBy';
-import _reduce from 'lodash-es/reduce';
-import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilQsString, utilStringQs } from '../util';
+import { utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
 
 export function rendererFeatures(context) {
@@ -471,8 +469,8 @@ export function rendererFeatures(context) {
         }
 
         // gather ways connected to child nodes..
-        connections = _reduce(childNodes, function(result, e) {
-            return resolver.isShared(e) ? _union(result, resolver.parentWays(e)) : result;
+        connections = childNodes.reduce(function(result, e) {
+            return resolver.isShared(e) ? utilArrayUnion(result, resolver.parentWays(e)) : result;
         }, connections);
 
         return connections.some(function(e) {

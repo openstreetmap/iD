@@ -1,7 +1,3 @@
-import _intersection from 'lodash-es/intersection';
-import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
-
 import {
     event as d3_event,
     select as d3_select
@@ -28,7 +24,11 @@ import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-import { utilEntityOrMemberSelector, utilEntitySelector, utilKeybinding } from '../util';
+
+import {
+    utilArrayIntersection, utilEntityOrMemberSelector,
+    utilEntitySelector, utilKeybinding
+} from '../util';
 
 // deprecation warning - Radial Menu to be removed in iD v3
 import { uiRadialMenu } from '../ui';
@@ -101,13 +101,13 @@ export function modeSelect(context, selectedIDs) {
                 return [];  // selection includes some not vertexes
             }
 
-            var currParents = _map(graph.parentWays(entity), 'id');
+            var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
             if (!commonParents.length) {
                 commonParents = currParents;
                 continue;
             }
 
-            commonParents = _intersection(commonParents, currParents);
+            commonParents = utilArrayIntersection(commonParents, currParents);
             if (!commonParents.length) {
                 return [];
             }
@@ -498,7 +498,7 @@ export function modeSelect(context, selectedIDs) {
 
         function nextParent() {
             d3_event.preventDefault();
-            var parents = _uniq(commonParents());
+            var parents = commonParents();
             if (!parents || parents.length < 2) return;
 
             var index = parents.indexOf(_relatedParent);

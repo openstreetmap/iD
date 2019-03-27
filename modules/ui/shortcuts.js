@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import {
     select as d3_select,
     selectAll as d3_selectAll
@@ -10,6 +8,7 @@ import { dataShortcuts } from '../../data';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
+import { utilArrayUniq } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -186,7 +185,7 @@ export function uiShortcuts(context) {
                     return uiCmd.display(s.indexOf('.') !== -1 ? t(s) : s);
                 });
 
-                return _uniq(arr).map(function(s) {
+                return utilArrayUniq(arr).map(function(s) {
                     return {
                         shortcut: s,
                         separator: d.separator,

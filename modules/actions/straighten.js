@@ -1,7 +1,6 @@
-import _difference from 'lodash-es/difference';
-
 import { actionDeleteNode } from './delete_node';
 import { geoVecDot, geoVecInterp, geoVecLength } from '../geo';
+import { utilArrayDifference } from '../util';
 
 
 /*
@@ -35,7 +34,7 @@ export function actionStraighten(selectedIDs, projection) {
         }
 
         // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end,
-        //   and need to be removed so currNode _difference calculation below works)
+        //   and need to be removed so currNode difference calculation below works)
         // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
         startNodes = startNodes.filter(function(n) {
             return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
@@ -45,7 +44,8 @@ export function actionStraighten(selectedIDs, projection) {
         });
 
         // Choose the initial endpoint to start from
-        var currNode = _difference(startNodes, endNodes).concat(_difference(endNodes, startNodes))[0];
+        var currNode = utilArrayDifference(startNodes, endNodes)
+            .concat(utilArrayDifference(endNodes, startNodes))[0];
         var nextWay = [];
         nodes = [];
 
@@ -59,7 +59,7 @@ export function actionStraighten(selectedIDs, projection) {
         // Add nodes to end of nodes array, until all ways are added
         while (remainingWays.length) {
             nextWay = getNextWay(currNode, remainingWays);
-            remainingWays = _difference(remainingWays, [nextWay]);
+            remainingWays = utilArrayDifference(remainingWays, [nextWay]);
 
             if (nextWay[0] !== currNode) {
                 nextWay.reverse();

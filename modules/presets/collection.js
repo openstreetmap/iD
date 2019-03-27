@@ -1,6 +1,4 @@
-import _uniq from 'lodash-es/uniq';
-
-import { utilEditDistance } from '../util/index';
+import { utilArrayUniq, utilEditDistance } from '../util';
 
 
 export function presetCollection(collection) {
@@ -163,7 +161,7 @@ export function presetCollection(collection) {
                 }
             }
 
-            return presetCollection(_uniq(results));
+            return presetCollection(utilArrayUniq(results));
         }
     };
 

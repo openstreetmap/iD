@@ -1,6 +1,4 @@
-import _forEach from 'lodash-es/forEach';
 import _isEqual from 'lodash-es/isEqual';
-import _unionBy from 'lodash-es/unionBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
@@ -389,9 +387,22 @@ export function uiCommit(context) {
             context.storage('hashtags', null);       // always remove stored hashtags - #4304
             if (commentOnly) { inHashTags = null; }  // optionally override hashtags field
         }
-        return _unionBy(inComment, inHashTags, function (s) {
-            return s.toLowerCase();
-        });
+
+        // keep only one copy of the tags
+        var all = new Set();
+        var keepTags = [];
+        inComment.forEach(checkTag);
+        inHashTags.forEach(checkTag);
+        return keepTags;
+
+        // Compare tags as lowercase strings, but keep original case tags
+        function checkTag(s) {
+            var compare = s.toLowerCase();
+            if (!all.has(compare)) {
+                all.add(compare);
+                keepTags.push(s);
+            }
+        }
 
         // Extract hashtags from `comment`
         function commentTags() {
@@ -425,7 +436,8 @@ export function uiCommit(context) {
     function updateChangeset(changed, onInput) {
         var tags = Object.assign({}, _changeset.tags);   // shallow copy
 
-        _forEach(changed, function(v, k) {
+        Object.keys(changed).forEach(function(k) {
+            var v = changed[k];
             k = k.trim().substr(0, 255);
             if (readOnlyTags.indexOf(k) !== -1) return;
 

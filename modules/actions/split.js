@@ -1,10 +1,9 @@
 import _indexOf from 'lodash-es/indexOf';
-import _intersection from 'lodash-es/intersection';
 
 import { actionAddMember } from './add_member';
 import { geoSphericalDistance } from '../geo';
 import { osmIsOldMultipolygonOuterMember, osmRelation, osmWay } from '../osm';
-import { utilWrap } from '../util';
+import { utilArrayIntersection, utilWrap } from '../util';
 
 
 // Split a way at the given node.
@@ -80,7 +79,7 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     function split(graph, wayA, newWayId) {
-        var wayB = osmWay({id: newWayId, tags: wayA.tags});   // `wayB` is the NEW way
+        var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var origNodes = wayA.nodes.slice();
         var nodesA;
         var nodesB;
@@ -133,7 +132,7 @@ export function actionSplit(nodeId, newWayIds) {
                         for (i = 0; i < v.length; i++) {
                             if (v[i].type === 'way') {
                                 var wayVia = graph.hasEntity(v[i].id);
-                                if (wayVia && _intersection(wayB.nodes, wayVia.nodes).length) {
+                                if (wayVia && utilArrayIntersection(wayB.nodes, wayVia.nodes).length) {
                                     keepB = true;
                                     break;
                                 }

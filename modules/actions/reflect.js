@@ -3,13 +3,7 @@ import {
     polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import {
-    geoExtent,
-    geoRotate,
-    geoVecInterp,
-    geoVecLength
-} from '../geo';
-
+import { geoExtent, geoRotate, geoVecInterp, geoVecLength } from '../geo';
 import { utilGetAllNodes } from '../util';
 
 
@@ -21,23 +15,23 @@ export function actionReflect(reflectIds, projection) {
     // http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
     // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
     function getSmallestSurroundingRectangle(graph, nodes) {
-        var points = nodes.map(function(n) { return projection(n.loc); }),
-            hull = d3_polygonHull(points),
-            centroid = d3_polygonCentroid(hull),
-            minArea = Infinity,
-            ssrExtent = [],
-            ssrAngle = 0,
-            c1 = hull[0];
+        var points = nodes.map(function(n) { return projection(n.loc); });
+        var hull = d3_polygonHull(points);
+        var centroid = d3_polygonCentroid(hull);
+        var minArea = Infinity;
+        var ssrExtent = [];
+        var ssrAngle = 0;
+        var c1 = hull[0];
 
         for (var i = 0; i <= hull.length - 1; i++) {
-            var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1],
-                angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]),
-                poly = geoRotate(hull, -angle, centroid),
-                extent = poly.reduce(function(extent, point) {
-                        return extent.extend(geoExtent(point));
-                    }, geoExtent()),
-                area = extent.area();
+            var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1];
+            var angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]);
+            var poly = geoRotate(hull, -angle, centroid);
+            var extent = poly.reduce(function(extent, point) {
+                return extent.extend(geoExtent(point));
+            }, geoExtent());
 
+            var area = extent.area();
             if (area < minArea) {
                 minArea = area;
                 ssrExtent = extent;
@@ -57,17 +51,17 @@ export function actionReflect(reflectIds, projection) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var nodes = utilGetAllNodes(reflectIds, graph),
-            ssr = getSmallestSurroundingRectangle(graph, nodes);
+        var nodes = utilGetAllNodes(reflectIds, graph);
+        var ssr = getSmallestSurroundingRectangle(graph, nodes);
 
         // Choose line pq = axis of symmetry.
         // The shape's surrounding rectangle has 2 axes of symmetry.
         // Reflect across the longer axis by default.
-        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ],
-            q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ],
-            p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ],
-            q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ],
-            p, q;
+        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
+        var q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
+        var p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
+        var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
+        var p, q;
 
         var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
         if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
@@ -100,9 +94,9 @@ export function actionReflect(reflectIds, projection) {
     };
 
 
-    action.useLongAxis = function(_) {
+    action.useLongAxis = function(val) {
         if (!arguments.length) return useLongAxis;
-        useLongAxis = _;
+        useLongAxis = val;
         return action;
     };
 

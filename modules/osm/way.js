@@ -1,5 +1,4 @@
 import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
 
 import { geoArea as d3_geoArea } from 'd3-geo';
 
@@ -8,6 +7,7 @@ import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags, osmRightSideIsInsideTags } from './tags';
 import { areaKeys } from '../core/context';
+import { utilArrayUniq } from '../util';
 
 
 export function osmWay() {
@@ -171,8 +171,8 @@ Object.assign(osmWay.prototype, {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = _uniq(resolver.childNodes(this));
-        var coords = _map(nodes, 'loc');
+        var nodes = utilArrayUniq(resolver.childNodes(this));
+        var coords = nodes.map(function(n) { return n.loc; });
         var curr = 0;
         var prev = 0;
 
@@ -238,7 +238,7 @@ Object.assign(osmWay.prototype, {
 
 
     isDegenerate: function() {
-        return _uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+        return (new Set(this.nodes).size < (this.isArea() ? 3 : 2));
     },
 
 
@@ -435,7 +435,7 @@ Object.assign(osmWay.prototype, {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                nd: _map(this.nodes, function(id) {
+                nd: this.nodes.map(function(id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
                 }),
                 tag: _map(this.tags, function(v, k) {
@@ -452,7 +452,9 @@ Object.assign(osmWay.prototype, {
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = _map(resolver.childNodes(this), 'loc');
+            var coordinates = resolver.childNodes(this)
+                .map(function(n) { return n.loc; });
+
             if (this.isArea() && this.isClosed()) {
                 return {
                     type: 'Polygon',
@@ -474,7 +476,7 @@ Object.assign(osmWay.prototype, {
 
             var json = {
                 type: 'Polygon',
-                coordinates: [_map(nodes, 'loc')]
+                coordinates: [ nodes.map(function(n) { return n.loc; }) ]
             };
 
             if (!this.isClosed() && nodes.length) {

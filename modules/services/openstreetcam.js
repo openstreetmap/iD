@@ -1,5 +1,4 @@
 import _forEach from 'lodash-es/forEach';
-import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
@@ -19,7 +18,7 @@ import rbush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
 
 
 var apibase = 'https://openstreetcam.org';
@@ -512,7 +511,7 @@ export default {
         var selectedImageKeys = (selectedSequence && selectedSequence.images.map(function (d) { return d.key; })) || [];
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
+        var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
         d3_selectAll('.layer-openstreetcam .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })

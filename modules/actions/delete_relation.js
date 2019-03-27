@@ -1,11 +1,9 @@
-import _map from 'lodash-es/map';
-import _uniq from 'lodash-es/uniq';
 import { actionDeleteMultiple } from './delete_multiple';
+import { utilArrayUniq } from '../util';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-export function actionDeleteRelation(relationId) {
-
+export function actionDeleteRelation(relationID) {
 
     function canDeleteEntity(entity, graph) {
         return !graph.parentWays(entity).length &&
@@ -15,11 +13,11 @@ export function actionDeleteRelation(relationId) {
 
 
     var action = function(graph) {
-        var relation = graph.entity(relationId);
+        var relation = graph.entity(relationID);
 
         graph.parentRelations(relation)
             .forEach(function(parent) {
-                parent = parent.removeMembersWithID(relationId);
+                parent = parent.removeMembersWithID(relationID);
                 graph = graph.replace(parent);
 
                 if (parent.isDegenerate()) {
@@ -27,12 +25,13 @@ export function actionDeleteRelation(relationId) {
                 }
             });
 
-        _uniq(_map(relation.members, 'id')).forEach(function(memberId) {
-            graph = graph.replace(relation.removeMembersWithID(memberId));
+        var memberIDs = utilArrayUniq(relation.members.map(function(m) { return m.id; }));
+        memberIDs.forEach(function(memberID) {
+            graph = graph.replace(relation.removeMembersWithID(memberID));
 
-            var entity = graph.entity(memberId);
+            var entity = graph.entity(memberID);
             if (canDeleteEntity(entity, graph)) {
-                graph = actionDeleteMultiple([memberId])(graph);
+                graph = actionDeleteMultiple([memberID])(graph);
             }
         });
 

@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import _union from 'lodash-es/union';
+
 import {
     event as d3_event,
     select as d3_select
@@ -10,7 +10,7 @@ import { modeBrowse } from '../modes';
 import { uiDisclosure } from './disclosure';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilRebind } from '../util';
+import { utilArrayUnion, utilRebind } from '../util';
 
 
 export function uiPresetEditor(context) {
@@ -53,7 +53,7 @@ export function uiPresetEditor(context) {
                 );
             }
 
-            var additionalFields = _union(_preset.moreFields, presets.universal());
+            var additionalFields = utilArrayUnion(_preset.moreFields, presets.universal());
             additionalFields.sort(function(field1, field2) {
                 return field1.label() > field2.label();
             });

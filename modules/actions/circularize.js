@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import { median as d3_median } from 'd3-array';
 
 import {
@@ -10,6 +8,7 @@ import {
 
 import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm';
+import { utilArrayUniq } from '../util';
 
 
 export function actionCircularize(wayId, projection, maxAngle) {
@@ -31,7 +30,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             graph = action.makeConvex(graph);
         }
 
-        var nodes = _uniq(graph.childNodes(way));
+        var nodes = utilArrayUniq(graph.childNodes(way));
         var keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; });
         var points = nodes.map(function(n) { return projection(n.loc); });
         var keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
@@ -193,7 +192,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
     action.makeConvex = function(graph) {
         var way = graph.entity(wayId);
-        var nodes = _uniq(graph.childNodes(way));
+        var nodes = utilArrayUniq(graph.childNodes(way));
         var points = nodes.map(function(n) { return projection(n.loc); });
         var sign = d3_polygonArea(points) > 0 ? 1 : -1;
         var hull = d3_polygonHull(points);

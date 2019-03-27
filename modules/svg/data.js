@@ -1,7 +1,5 @@
 import _flatten from 'lodash-es/flatten';
 import _isEmpty from 'lodash-es/isEmpty';
-import _reduce from 'lodash-es/reduce';
-import _union from 'lodash-es/union';
 import _throttle from 'lodash-es/throttle';
 
 import {
@@ -23,7 +21,7 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
-import { utilHashcode } from '../util';
+import { utilArrayUnion, utilHashcode } from '../util';
 
 
 var _initialized = false;
@@ -504,7 +502,7 @@ export function svgData(projection, context, dispatch) {
 
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
-        var coords = _reduce(features, function(coords, feature) {
+        var coords = features.reduce(function(coords, feature) {
             var c = feature.geometry.coordinates;
 
             /* eslint-disable no-fallthrough */
@@ -524,7 +522,7 @@ export function svgData(projection, context, dispatch) {
             }
             /* eslint-enable no-fallthrough */
 
-            return _union(coords, c);
+            return utilArrayUnion(coords, c);
         }, []);
 
         if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {

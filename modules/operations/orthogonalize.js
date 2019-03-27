@@ -1,5 +1,3 @@
-import _uniq from 'lodash-es/uniq';
-
 import { t } from '../util/locale';
 import { actionOrthogonalize } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
@@ -20,7 +18,7 @@ export function operationOrthogonalize(selectedIDs, context) {
         _geometry = context.geometry(_entityID);
 
         // square a line/area
-        if (_entity.type === 'way' && _uniq(_entity.nodes).length > 2 ) {
+        if (_entity.type === 'way' && new Set(_entity.nodes).size > 2 ) {
             return actionOrthogonalize(_entityID, context.projection);
 
         // square a single vertex
