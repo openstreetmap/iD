@@ -240,7 +240,11 @@ function suggestionsToPresets(presets) {
 
         let logoURLs = nameSuggestionsWikidata[qid] && nameSuggestionsWikidata[qid].logos;
         if (logoURLs) {
-            logoURL = logoURLs.facebook || logoURLs.twitter || logoURLs.wikidata;
+            if (logoURLs.facebook) {
+                logoURL = logoURLs.facebook.replace('?type=square', '?type=large');
+            } else {
+                logoURL = logoURLs.twitter || logoURLs.wikidata;
+            }
         }
 
         presets[suggestionID] = {
