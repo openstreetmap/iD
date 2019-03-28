@@ -243,6 +243,7 @@ function suggestionsToPresets(presets) {
             addTags: suggestion.tags,
             removeTags: suggestion.tags,
             reference: preset.reference,
+            countryCodes: suggestion.countryCodes,
             matchScore: 2,
             suggestion: true
         };

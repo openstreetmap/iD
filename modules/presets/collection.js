@@ -41,7 +41,7 @@ export function presetCollection(collection) {
             return this.item(id);
         },
 
-        search: function(value, geometry) {
+        search: function(value, geometry, countryCode) {
             if (!value) return this;
 
             value = value.toLowerCase();
@@ -78,11 +78,17 @@ export function presetCollection(collection) {
                 return aCompare.length - bCompare.length;
             }
 
-
-            var searchable = this.collection.filter(function(a) {
+            var pool = this.collection;
+            if (countryCode) {
+                pool = pool.filter(function(a) {
+                    if (!a.countryCodes) return true;
+                    return a.countryCodes.indexOf(countryCode) !== -1;
+                });
+            }
+            var searchable = pool.filter(function(a) {
                 return a.searchable !== false && a.suggestion !== true;
             });
-            var suggestions = this.collection.filter(function(a) {
+            var suggestions = pool.filter(function(a) {
                 return a.suggestion === true;
             });
 
