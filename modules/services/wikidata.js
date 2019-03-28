@@ -16,6 +16,35 @@ export default {
     },
 
 
+    // Search for Wikidata items matching the query
+    itemsForSearchQuery: function(query, callback) {
+        if (!query) {
+            callback('No query', {});
+            return;
+        }
+
+        d3_json(apibase + utilQsString({
+            action: 'wbsearchentities',
+            format: 'json',
+            formatversion: 2,
+            search: query,
+            type: 'item',
+            language: this.languagesToQuery()[0],
+            limit: 10,
+            origin: '*'
+        }), function(err, data) {
+            if (data && data.error) {
+                err = data.error;
+            }
+            if (err) {
+                callback(err, {});
+            } else {
+                callback(null, data.search || {});
+            }
+        });
+    },
+
+
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
     itemsByTitle: function(lang, title, callback) {
@@ -46,6 +75,13 @@ export default {
         });
     },
 
+    languagesToQuery: function() {
+        return utilArrayUniq([
+            currentLocale.toLowerCase(),
+            currentLocale.split('-', 2)[0].toLowerCase(),
+            'en'
+        ]);
+    },
 
     entityByQID: function(qid, callback) {
         if (!qid) {
@@ -57,11 +93,7 @@ export default {
             return;
         }
 
-        var langs = utilArrayUniq([
-            currentLocale.toLowerCase(),
-            currentLocale.split('-', 2)[0].toLowerCase(),
-            'en'
-        ]);
+        var langs = this.languagesToQuery();
 
         d3_json(apibase + utilQsString({
             action: 'wbgetentities',
@@ -144,11 +176,7 @@ export default {
 
             if (entity.sitelinks) {
                 // must be one of these that we requested..
-                var langs = utilArrayUniq([
-                    currentLocale.toLowerCase(),
-                    currentLocale.split('-', 2)[0].toLowerCase(),
-                    'en'
-                ]);
+                var langs = this.languagesToQuery();
                 var englishLocale = (currentLocale.split('-', 2)[0].toLowerCase() === 'en');
 
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference

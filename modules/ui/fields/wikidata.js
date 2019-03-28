@@ -5,6 +5,8 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { uiCombobox } from '../index';
+
 import { services } from '../../services/index';
 
 import { svgIcon } from '../../svg/index';
@@ -17,13 +19,18 @@ import {
 import { t } from '../../util/locale';
 
 
-export function uiFieldWikidata(field) {
+export function uiFieldWikidata(field, context) {
     var wikidata = services.wikidata;
     var dispatch = d3_dispatch('change');
-    var link = d3_select(null);
-    var title = d3_select(null);
+    var searchInput = d3_select(null);
+    var _qid = null;
+    var _wikidataEntity = null;
     var _wikiURL = '';
+    var _entity;
 
+    var combobox = uiCombobox(context, 'combo-' + field.safeid)
+        .caseSensitive(true)
+        .minItems(1);
 
     function wiki(selection) {
 
@@ -41,18 +48,59 @@ export function uiFieldWikidata(field) {
 
         list = list.enter()
             .append('ul')
-            .attr('class', 'labeled-inputs')
+            .attr('class', 'rows')
             .merge(list);
 
-        var wikidataProperties = ['identifier', 'label', 'description'];
+        var searchRow = list.selectAll('li.wikidata-search')
+            .data([0]);
 
-        var items = list.selectAll('li')
+        var searchRowEnter = searchRow.enter()
+            .append('li')
+            .attr('class', 'wikidata-search');
+
+        searchInput = searchRowEnter
+            .append('input')
+            .attr('type', 'text')
+            .style('flex', '1')
+            .call(utilNoAuto);
+
+        searchInput
+            .on('focus', function() {
+                var node = d3_select(this).node();
+                node.setSelectionRange(0, node.value.length);
+            })
+            .on('blur', function() {
+                setLabelForEntity();
+            })
+            .call(combobox.fetcher(fetchWikidataItems));
+
+        combobox.on('accept', function(d) {
+            _qid = d.id;
+            change();
+        }).on('cancel', function() {
+            setLabelForEntity();
+        });
+
+        searchRowEnter
+            .append('button')
+            .attr('class', 'form-field-button wiki-link')
+            .attr('title', t('icons.open_wikidata'))
+            .attr('tabindex', -1)
+            .call(svgIcon('#iD-icon-out-link'))
+            .on('click', function() {
+                d3_event.preventDefault();
+                if (_wikiURL) window.open(_wikiURL, '_blank');
+            });
+
+        var wikidataProperties = ['description', 'identifier'];
+
+        var items = list.selectAll('li.labeled-input')
             .data(wikidataProperties);
 
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'preset-wikidata-' + d; });
+            .attr('class', function(d) { return 'labeled-input preset-wikidata-' + d; });
 
         enter
             .append('span')
@@ -60,55 +108,17 @@ export function uiFieldWikidata(field) {
             .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
             .text(function(d) { return t('wikidata.' + d); });
 
-        var inputWrap = enter
-            .append('div')
-            .attr('class', 'input-wrap');
-
-        inputWrap
+        enter
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'preset-input-wikidata')
-            .attr('id', function(d) { return 'preset-input-wikidata-' + d; });
-
-
-        title = wrap.select('.preset-wikidata-identifier input')
+            .attr('id', function(d) { return 'preset-input-wikidata-' + d; })
             .call(utilNoAuto)
-            .merge(title);
-
-        title
-            .on('blur', blur)
-            .on('change', change);
-
-        var idItem = wrap.select('.preset-wikidata-identifier');
-
-        idItem.select('button')
-            .remove();
-
-        link = idItem
-            .append('button')
-            .attr('class', 'form-field-button wiki-link')
-            .attr('title', t('icons.open_wikidata'))
-            .attr('tabindex', -1)
-            .call(svgIcon('#iD-icon-out-link'))
-            .merge(link);
-
-        link
-            .on('click', function() {
-                d3_event.preventDefault();
-                if (_wikiURL) window.open(_wikiURL, '_blank');
-            });
-
-        var readOnlyItems = wrap.selectAll('li:not(.preset-wikidata-identifier)');
-
-        readOnlyItems.select('input')
             .classed('disabled', 'true')
             .attr('readonly', 'true');
 
-        readOnlyItems.select('button')
-            .remove();
-
-        readOnlyItems.append('button')
-            .attr('class', 'form-field-button wiki-link')
+        enter
+            .append('button')
+            .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-operation-copy'))
@@ -120,55 +130,76 @@ export function uiFieldWikidata(field) {
                     .select();
                 document.execCommand('copy');
             });
+
     }
 
+    function fetchWikidataItems(q, callback) {
 
-    function blur() {
-        change();
+        if (!q && _entity) {
+            q = context.entity(_entity.id).tags.name || '';
+        }
+
+        wikidata.itemsForSearchQuery(q, function(err, data) {
+            if (err) return;
+
+            for (var i in data) {
+                data[i].value = data[i].label + ' (' +  data[i].id + ')';
+                data[i].title = data[i].description;
+            }
+
+            if (callback) callback(data);
+        });
     }
 
 
     function change() {
         var syncTags = {
-            wikidata: utilGetSetValue(title)
+            wikidata: _qid
         };
         dispatch.call('change', this, syncTags);
     }
 
+    function setLabelForEntity() {
+        var label = '';
+        if (_wikidataEntity) {
+            if (_wikidataEntity.labels && Object.keys(_wikidataEntity.labels).length > 0) {
+                label = _wikidataEntity.labels[Object.keys(_wikidataEntity.labels)[0]].value;
+            }
+            if (label.length === 0) {
+                label = _wikidataEntity.id.toString();
+            }
+        }
+        utilGetSetValue(d3_select('li.wikidata-search input'), label);
+    }
+
 
     wiki.tags = function(tags) {
-        var value = tags[field.key] || '';
-        utilGetSetValue(title, value);
+        _qid = tags[field.key] || '';
 
-        if (!/^Q[0-9]*$/.test(value)) {   // not a proper QID
+        if (!/^Q[0-9]*$/.test(_qid)) {   // not a proper QID
             unrecognized();
             return;
         }
 
         // QID value in correct format
-        _wikiURL = 'https://wikidata.org/wiki/' + value;
-        wikidata.entityByQID(value, function(err, entity) {
+        _wikiURL = 'https://wikidata.org/wiki/' + _qid;
+        wikidata.entityByQID(_qid, function(err, entity) {
             if (err) {
                 unrecognized();
                 return;
             }
+            _wikidataEntity = entity;
 
-            var label = '';
+            setLabelForEntity();
+
             var description = '';
 
-            if (entity.labels && Object.keys(entity.labels).length > 0) {
-                label = entity.labels[Object.keys(entity.labels)[0]].value;
-            }
             if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
                 description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
             }
 
-            d3_select('.preset-wikidata-label')
-                .style('display', function(){
-                    return label.length > 0 ? 'flex' : 'none';
-                })
-                .select('input')
-                .attr('value', label);
+            d3_select('.form-field-wikidata button.wiki-link')
+                .classed('disabled', false);
 
             d3_select('.preset-wikidata-description')
                 .style('display', function(){
@@ -176,18 +207,31 @@ export function uiFieldWikidata(field) {
                 })
                 .select('input')
                 .attr('value', description);
+
+            d3_select('.preset-wikidata-identifier')
+                .style('display', function(){
+                    return entity.id ? 'flex' : 'none';
+                })
+                .select('input')
+                .attr('value', entity.id);
         });
 
 
         // not a proper QID
         function unrecognized() {
-            d3_select('.preset-wikidata-label')
-                .style('display', 'none');
+            _wikidataEntity = null;
+            setLabelForEntity();
+
             d3_select('.preset-wikidata-description')
                 .style('display', 'none');
+            d3_select('.preset-wikidata-identifier')
+                .style('display', 'none');
 
-            if (value && value !== '') {
-                _wikiURL = 'https://wikidata.org/wiki/Special:Search?search=' + value;
+            d3_select('.form-field-wikidata button.wiki-link')
+                .classed('disabled', true);
+
+            if (_qid && _qid !== '') {
+                _wikiURL = 'https://wikidata.org/wiki/Special:Search?search=' + _qid;
             } else {
                 _wikiURL = '';
             }
@@ -195,8 +239,15 @@ export function uiFieldWikidata(field) {
     };
 
 
+    wiki.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
+        return wiki;
+    };
+
+
     wiki.focus = function() {
-        title.node().focus();
+        searchInput.node().focus();
     };
 
 

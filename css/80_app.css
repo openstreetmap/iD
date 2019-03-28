@@ -1591,7 +1591,7 @@ button.preset-favorite-button.active .icon {
 
 /* Buttons inside fields */
 .form-field-button {
-    flex: 0 0 32px;
+    flex: 0 0 auto;
     height: 30px;
     width: 32px;
     position: relative;
@@ -1635,7 +1635,7 @@ button.preset-favorite-button.active .icon {
 
 /* Field - lists with labeled input items
 ------------------------------------------------------- */
-.form-field ul.labeled-inputs {
+.form-field ul.rows {
     flex: 1 1 auto;
     border: 1px solid #ccc;
     border-top: 0;
@@ -1643,32 +1643,36 @@ button.preset-favorite-button.active .icon {
     overflow: hidden;
     width: 100%;
 }
-.form-field ul.labeled-inputs li {
+.form-field ul.rows li {
     border-top: 1px solid #ccc;
+}
+.form-field ul.rows li:first-child {
+    border-top: 0;
+}
+.form-field ul.rows li {
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.labeled-inputs li:first-child {
-    border-top: 0;
-}
-.form-field ul.labeled-inputs li > span,
-.form-field ul.labeled-inputs li > div {
+.form-field ul.rows li.labeled-input > span,
+.form-field ul.rows li.labeled-input > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
 }
-.form-field ul.labeled-inputs li input {
+.form-field ul.rows li input {
     border-radius: 0;
+    border-width: 0;
     width: 100%;
 }
-.form-field ul.labeled-inputs li input,
-.form-field ul.labeled-inputs li button {
+.form-field ul.rows li button {
     border-width: 0;
+}
+[dir='ltr'] .form-field ul.rows li.labeled-input input,
+[dir='ltr'] .form-field ul.rows li button {
     border-left-width: 1px;
 }
-[dir='rtl'] .form-field ul.labeled-inputs li input,
-[dir='rtl'] .form-field ul.labeled-inputs li button {
-    border-left-width: 0;
+[dir='rtl'] .form-field ul.rows li.labeled-input input,
+[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
 }
 
@@ -1683,7 +1687,7 @@ button.preset-favorite-button.active .icon {
     border-top: 0px;
     border-radius: 0 0 4px 4px;
 }
-.structure-extras-wrap > ul.labeled-inputs {
+.structure-extras-wrap > ul.rows {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -2058,10 +2062,12 @@ button.preset-favorite-button.active .icon {
 [dir='rtl'] .wiki-title-container > input.wiki-title {
     border-radius: 0 0 4px 0;
 }
-.wiki-title-container > button.wiki-link {
+.wiki-title-container > button.wiki-link,
+.form-field-wikidata ul.rows li:last-child button.form-field-button:last-child {
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .wiki-title-container > button.wiki-link {
+[dir='rtl'] .wiki-title-container > button.wiki-link,
+[dir='rtl'] .form-field-wikidata ul.rows li:last-child button.form-field-button:last-child {
     border-radius: 0 0 0 4px;
 }
 
@@ -2218,7 +2224,7 @@ div.combobox {
     display: inline-block;
     position: relative;
     height: 30px;
-    width: 30px;
+    width: 30px !important;
     margin-left: -30px;
     vertical-align: top;
     cursor: pointer;

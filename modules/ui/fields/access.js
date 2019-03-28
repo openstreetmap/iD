@@ -23,7 +23,7 @@ export function uiFieldAccess(field, context) {
 
         list = list.enter()
             .append('ul')
-            .attr('class', 'labeled-inputs')
+            .attr('class', 'rows')
             .merge(list);
 
 
@@ -33,7 +33,7 @@ export function uiFieldAccess(field, context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'preset-access-' + d; });
+            .attr('class', function(d) { return 'labeled-input preset-access-' + d; });
 
         enter
             .append('span')

@@ -97,7 +97,7 @@ export function uiFieldRadio(field, context) {
 
         list = list.enter()
             .append('ul')
-            .attr('class', 'labeled-inputs')
+            .attr('class', 'rows')
             .merge(list);
 
 
@@ -122,7 +122,7 @@ export function uiFieldRadio(field, context) {
         // Enter
         var typeEnter = typeItem.enter()
             .insert('li', ':first-child')
-            .attr('class', 'structure-type-item');
+            .attr('class', 'labeled-input structure-type-item');
 
         typeEnter
             .append('span')
@@ -167,7 +167,7 @@ export function uiFieldRadio(field, context) {
         // Enter
         var layerEnter = layerItem.enter()
             .append('li')
-            .attr('class', 'structure-layer-item');
+            .attr('class', 'labeled-input structure-layer-item');
 
         layerEnter
             .append('span')
