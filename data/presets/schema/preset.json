@@ -59,6 +59,10 @@
             "description": "Name of preset icon which represents this preset",
             "type": "string"
         },
+        "imageURL": {
+            "description": "The URL of a remote image that is more specific than 'icon'",
+            "type": "string"
+        },
         "terms": {
             "description": "English synonyms or related terms",
             "type": "array",

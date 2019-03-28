@@ -13,7 +13,8 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
-const suggestions = require('name-suggestion-index').brands.brands;
+const suggestionBrands = require('name-suggestion-index').brands.brands;
+const nameSuggestionsWikidata = require('name-suggestion-index').wikidata.wikidata;
 const deprecated = require('./data/deprecated.json').dataDeprecated;
 
 // fontawesome icons
@@ -194,8 +195,8 @@ function generateFields(tstrings, faIcons) {
 
 function suggestionsToPresets(presets) {
 
-    Object.keys(suggestions).forEach(k => {
-        const suggestion = suggestions[k];
+    Object.keys(suggestionBrands).forEach(k => {
+        const suggestion = suggestionBrands[k];
         const qid = suggestion.tags['brand:wikidata'];
         if (!qid || !/^Q\d+$/.test(qid)) return;   // wikidata tag missing or looks wrong..
 
@@ -235,9 +236,17 @@ function suggestionsToPresets(presets) {
         let wikidataTag = { 'brand:wikidata': qid };
         let suggestionID = presetID + '/' + name;
 
+        let logoURL;
+
+        let logoURLs = nameSuggestionsWikidata[qid] && nameSuggestionsWikidata[qid].logos;
+        if (logoURLs) {
+            logoURL = logoURLs.facebook || logoURLs.twitter || logoURLs.wikidata;
+        }
+
         presets[suggestionID] = {
             name: name,
             icon: preset.icon,
+            imageURL: logoURL,
             geometry: preset.geometry,
             tags: Object.assign({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,

@@ -139,6 +139,31 @@ export function uiPresetIcon() {
 
 
     function render() {
+
+        var p = preset.apply(this, arguments);
+        var isFallback = isSmall() && p.isFallback && p.isFallback();
+        var geom = geometry ? geometry.apply(this, arguments) : null;
+        var imageURL = p.imageURL;
+        var picon = imageURL ? null : getIcon(p, geom);
+        var isMaki = picon && /^maki-/.test(picon);
+        var isTemaki = picon && /^temaki-/.test(picon);
+        var isFa = picon && /^fa[srb]-/.test(picon);
+        var isiDIcon = picon && !(isMaki || isTemaki || isFa);
+        var isCategory = !p.setTags;
+        var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
+        var drawVertex = picon && geom === 'vertex' && !isFallback;
+        var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
+        var drawArea = picon && geom === 'area' && !isFallback;
+        var isFramed = (drawVertex || drawArea || drawLine);
+
+        var tags = !isCategory ? p.setTags({}, geom) : {};
+        for (var k in tags) {
+            if (tags[k] === '*') {
+                tags[k] = 'yes';
+            }
+        }
+        var tagClasses = svgTagClasses().getClassesString(tags, '');
+
         var selection = d3_select(this);
 
         var container = selection.selectAll('.preset-icon-container')
@@ -149,30 +174,21 @@ export function uiPresetIcon() {
             .attr('class', 'preset-icon-container ' + sizeClass)
             .merge(container);
 
-        var p = preset.apply(this, arguments);
-        var isFallback = isSmall() && p.isFallback && p.isFallback();
-        var geom = geometry ? geometry.apply(this, arguments) : null;
-        var picon = getIcon(p, geom);
-        var isMaki = /^maki-/.test(picon);
-        var isTemaki = /^temaki-/.test(picon);
-        var isFa = /^fa[srb]-/.test(picon);
-        var isiDIcon = !(isMaki || isTemaki || isFa);
-        var isCategory = !p.setTags;
-        var drawPoint = geom === 'point' && isSmall() && !isFallback;
-        var drawVertex = geom === 'vertex' && !isFallback;
-        var drawLine = geom === 'line' && !isFallback && !isCategory;
-        var drawArea = geom === 'area' && !isFallback;
-        var isFramed = (drawVertex || drawArea || drawLine);
-
         container.classed('fallback', isFallback);
 
-        var tags = !isCategory ? p.setTags({}, geom) : {};
-        for (var k in tags) {
-            if (tags[k] === '*') {
-                tags[k] = 'yes';
-            }
-        }
-        var tagClasses = svgTagClasses().getClassesString(tags, '');
+        var imageIcon = container.selectAll('img.image-icon')
+            .data(imageURL ? [0] : []);
+
+        imageIcon.exit()
+            .remove();
+
+        imageIcon = imageIcon.enter()
+            .append('img')
+            .attr('class', 'image-icon')
+            .merge(imageIcon);
+
+        imageIcon
+            .attr('src', imageURL);
 
         var pointBorder = container.selectAll('.preset-icon-point-border')
             .data(drawPoint ? [0] : []);
@@ -230,7 +246,10 @@ export function uiPresetIcon() {
 
 
         var icon = container.selectAll('.preset-icon')
-            .data([0]);
+            .data(picon ? [0] : []);
+
+        icon.exit()
+            .remove();
 
         icon = icon.enter()
             .append('div')

@@ -1713,6 +1713,7 @@
     {"key": "man_made", "value": "MDF", "description": "🄳 ➜ telecom=exchange"},
     {"key": "man_made", "value": "water_tank", "description": "🄳 ➜ man_made=storage_tank + content=water"},
     {"key": "man_made", "value": "well", "description": "🄳 ➜ man_made=water_well"},
+    {"key": "memorial", "value": "plate", "description": "🄳 ➜ memorial=plaque"},
     {"key": "mining_resource", "description": "🄳 ➜ resource=*"},
     {"key": "natural", "value": "marsh", "description": "🄳 ➜ natural=wetland + wetland=marsh"},
     {"key": "natural", "value": "waterfall", "description": "🄳 ➜ waterway=waterfall"},
