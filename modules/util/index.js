@@ -4,6 +4,7 @@ export { utilArrayGroupBy } from './array';
 export { utilArrayIntersection } from './array';
 export { utilArrayUnion } from './array';
 export { utilArrayUniq } from './array';
+export { utilArrayUniqBy } from './array';
 
 export { utilAsyncMap } from './util';
 export { utilCallWhenIdle } from './call_when_idle';

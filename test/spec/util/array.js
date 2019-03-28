@@ -81,4 +81,38 @@ describe('iD.utilArray', function() {
         });
     });
 
+    describe('utilArrayUniqBy', function() {
+        var pets = [
+            { type: 'Dog', name: 'Spot' },
+            { type: 'Cat', name: 'Tiger' },
+            { type: 'Dog', name: 'Rover' },
+            { type: 'Cat', name: 'Leo' }
+        ];
+
+        it('groups by key property', function() {
+            var expected = [
+                { type: 'Dog', name: 'Spot' },
+                { type: 'Cat', name: 'Tiger' }
+                //{ type: 'Dog', name: 'Rover' },   // not unique by type
+                //{ type: 'Cat', name: 'Leo' }      // not unique by type
+            ];
+            expect(iD.utilArrayUniqBy(pets, 'type')).to.eql(expected);
+        });
+
+        it('groups by key function', function() {
+            var expected = [
+                { type: 'Dog', name: 'Spot' },
+                { type: 'Cat', name: 'Tiger' },
+                //{ type: 'Dog', name: 'Rover' },   // not unique by name length
+                { type: 'Cat', name: 'Leo' }
+            ];
+            var keyFn = function(item) { return item.name.length; };
+            expect(iD.utilArrayUniqBy(pets, keyFn)).to.eql(expected);
+        });
+
+        it('undefined key function', function() {
+            expect(iD.utilArrayUniqBy(pets)).to.eql([]);
+        });
+    });
+
 });

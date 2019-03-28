@@ -1,5 +1,3 @@
-import _uniqBy from 'lodash-es/uniqBy';
-
 import { t } from '../util/locale';
 import { actionReflect } from '../actions';
 import { behaviorOperation } from '../behavior';
@@ -19,10 +17,10 @@ export function operationReflectLong(selectedIDs, context) {
 
 export function operationReflect(selectedIDs, context, axis) {
     axis = axis || 'long';
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        extent = selectedIDs.reduce(function(extent, id) {
-            return extent.extend(context.entity(id).extent(context.graph()));
-        }, geoExtent());
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    var extent = selectedIDs.reduce(function(extent, id) {
+        return extent.extend(context.entity(id).extent(context.graph()));
+    }, geoExtent());
 
 
     var operation = function() {
@@ -34,7 +32,11 @@ export function operationReflect(selectedIDs, context, axis) {
 
     operation.available = function() {
         var nodes = utilGetAllNodes(selectedIDs, context.graph());
-        return _uniqBy(nodes, function(n) { return n.loc; }).length >= 3;
+        var uniqeLocs = nodes.reduce(function(acc, node) {
+            return acc.add(node.loc);
+        }, new Set());
+
+        return uniqeLocs.size >= 3;
     };
 
 

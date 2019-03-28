@@ -45,6 +45,7 @@ export function utilArrayUniq(a) {
     return Array.from(new Set(a));
 }
 
+
 // Splits array into chunks of given chunk size
 // var a = [1,2,3,4,5,6,7];
 // utilArrayChunk(a, 3);
@@ -87,5 +88,41 @@ export function utilArrayGroupBy(a, key) {
         (acc[group] = acc[group] || []).push(item);
         return acc;
     }, {});
+}
+
+
+// Returns an Array with all the duplicates removed
+// where uniqueness determined by the given key
+// `key` can be passed as a property or as a key function
+//
+// var pets = [
+//     { type: 'Dog', name: 'Spot' },
+//     { type: 'Cat', name: 'Tiger' },
+//     { type: 'Dog', name: 'Rover' },
+//     { type: 'Cat', name: 'Leo' }
+// ];
+//
+// utilArrayUniqBy(pets, 'type')
+//   [
+//     { type: 'Dog', name: 'Spot' },
+//     { type: 'Cat', name: 'Tiger' }
+//   ]
+//
+// utilArrayUniqBy(pets, function(item) { return item.name.length; })
+//   [
+//     { type: 'Dog', name: 'Spot' },
+//     { type: 'Cat', name: 'Tiger' },
+//     { type: 'Cat', name: 'Leo' }
+//   }
+export function utilArrayUniqBy(a, key) {
+    var seen = new Set();
+    return a.reduce(function(acc, item) {
+        var val = (typeof key === 'function') ? key(item) : item[key];
+        if (val && !seen.has(val)) {
+            seen.add(val);
+            acc.push(item);
+        }
+        return acc;
+    }, []);
 }
 

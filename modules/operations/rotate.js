@@ -1,5 +1,3 @@
-import _uniqBy from 'lodash-es/uniqBy';
-
 import { t } from '../util/locale';
 import { behaviorOperation } from '../behavior';
 import { geoExtent } from '../geo';
@@ -21,7 +19,11 @@ export function operationRotate(selectedIDs, context) {
 
     operation.available = function() {
         var nodes = utilGetAllNodes(selectedIDs, context.graph());
-        return _uniqBy(nodes, function(n) { return n.loc; }).length >= 2;
+        var uniqeLocs = nodes.reduce(function(acc, node) {
+            return acc.add(node.loc);
+        }, new Set());
+
+        return uniqeLocs.size >= 2;
     };
 
 

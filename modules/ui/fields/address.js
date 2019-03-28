@@ -1,5 +1,3 @@
-import _uniqBy from 'lodash-es/uniqBy';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
@@ -7,7 +5,7 @@ import { dataAddressFormats } from '../../../data';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
 import { uiCombobox } from '../index';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldAddress(field, context) {
@@ -41,7 +39,7 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _uniqBy(streets, 'value');
+        return utilArrayUniqBy(streets, 'value');
 
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
@@ -67,7 +65,7 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _uniqBy(cities, 'value');
+        return utilArrayUniqBy(cities, 'value');
 
 
         function isAddressable(d) {
@@ -105,7 +103,7 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _uniqBy(results, 'value');
+        return utilArrayUniqBy(results, 'value');
     }
 
 

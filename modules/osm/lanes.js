@@ -1,7 +1,3 @@
-import _isNumber from 'lodash-es/isNumber';
-import _isString from 'lodash-es/isString';
-import _isNaN from 'lodash-es/isNaN';
-
 
 export function osmLanes(entity) {
     if (entity.type !== 'way') return null;
@@ -122,12 +118,12 @@ function getLaneCount(tags, isOneWay) {
 
 function parseMaxspeed(tags) {
     var maxspeed = tags.maxspeed;
-    if (_isNumber(maxspeed)) return maxspeed;
-    if (_isString(maxspeed)) {
-        maxspeed = maxspeed.match(/^([0-9][\.0-9]+?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/g);
-        if (!maxspeed) return;
-        return parseInt(maxspeed, 10);
-    }
+    if (!maxspeed) return;
+
+    var maxspeedRegex = /^([0-9][\.0-9]+?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/;
+    if (!maxspeedRegex.test(maxspeed)) return;
+
+    return parseInt(maxspeed, 10);
 }
 
 
@@ -146,17 +142,17 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
         bothways = 0;
         backward = 0;
     }
-    else if (_isNaN(forward) && _isNaN(backward)) {
+    else if (isNaN(forward) && isNaN(backward)) {
         backward = Math.floor((laneCount - bothways) / 2);
         forward = laneCount - bothways - backward;
     }
-    else if (_isNaN(forward)) {
+    else if (isNaN(forward)) {
         if (backward > laneCount - bothways) {
             backward = laneCount - bothways;
         }
         forward = laneCount - bothways - backward;
     }
-    else if (_isNaN(backward)) {
+    else if (isNaN(backward)) {
         if (forward > laneCount - bothways) {
             forward = laneCount - bothways;
         }
@@ -197,7 +193,7 @@ function parseMaxspeedLanes(tag, maxspeed) {
             if (s === 'none') return s;
             var m = parseInt(s, 10);
             if (s === '' || m === maxspeed) return null;
-            return _isNaN(m) ? 'unknown': m;
+            return isNaN(m) ? 'unknown': m;
         });
 }
 

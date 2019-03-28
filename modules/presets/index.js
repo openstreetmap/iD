@@ -1,6 +1,3 @@
-import _bind from 'lodash-es/bind';
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 
@@ -161,9 +158,10 @@ export function presetIndex(context) {
 
     all.build = function(d, visible) {
         if (d.fields) {
-            _forEach(d.fields, function(d, id) {
-                _fields[id] = presetField(id, d);
-                if (d.universal) {
+            Object.keys(d.fields).forEach(function(id) {
+                var f = d.fields[id];
+                _fields[id] = presetField(id, f);
+                if (f.universal) {
                     _universal.push(_fields[id]);
                 }
             });
@@ -171,29 +169,31 @@ export function presetIndex(context) {
 
         if (d.presets) {
             var rawPresets = d.presets;
-            _forEach(d.presets, function(d, id) {
+            Object.keys(d.presets).forEach(function(id) {
+                var p = d.presets[id];
                 var existing = all.index(id);
                 if (existing !== -1) {
-                    all.collection[existing] = presetPreset(id, d, _fields, visible, rawPresets);
+                    all.collection[existing] = presetPreset(id, p, _fields, visible, rawPresets);
                 } else {
-                    all.collection.push(presetPreset(id, d, _fields, visible, rawPresets));
+                    all.collection.push(presetPreset(id, p, _fields, visible, rawPresets));
                 }
             });
         }
 
         if (d.categories) {
-            _forEach(d.categories, function(d, id) {
+            Object.keys(d.categories).forEach(function(id) {
+                var c = d.categories[id];
                 var existing = all.index(id);
                 if (existing !== -1) {
-                    all.collection[existing] = presetCategory(id, d, all);
+                    all.collection[existing] = presetCategory(id, c, all);
                 } else {
-                    all.collection.push(presetCategory(id, d, all));
+                    all.collection.push(presetCategory(id, c, all));
                 }
             });
         }
 
         if (d.defaults) {
-            var getItem = _bind(all.item, all);
+            var getItem = (all.item).bind(all);
             _defaults = {
                 area: presetCollection(d.defaults.area.map(getItem)),
                 line: presetCollection(d.defaults.line.map(getItem)),

@@ -8,12 +8,7 @@ import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
 import { tooltip } from '../../util/tooltip';
-
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export {
