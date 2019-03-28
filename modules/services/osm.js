@@ -1,5 +1,4 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
-import _forEach from 'lodash-es/forEach';
 import _throttle from 'lodash-es/throttle';
 
 import rbush from 'rbush';
@@ -62,10 +61,10 @@ function abortRequest(i) {
 
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflight, function(v, k) {
+    Object.keys(cache.inflight).forEach(function(k) {
         var wanted = tiles.find(function(tile) { return k === tile.id; });
         if (!wanted) {
-            abortRequest(v);
+            abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
         }
     });
@@ -363,9 +362,9 @@ export default {
         _userDetails = undefined;
         _rateLimitError = undefined;
 
-        _forEach(_tileCache.inflight, abortRequest);
-        _forEach(_noteCache.inflight, abortRequest);
-        _forEach(_noteCache.inflightPost, abortRequest);
+        Object.values(_tileCache.inflight).forEach(abortRequest);
+        Object.values(_noteCache.inflight).forEach(abortRequest);
+        Object.values(_noteCache.inflightPost).forEach(abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };

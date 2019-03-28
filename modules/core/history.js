@@ -1,6 +1,5 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _cloneDeepWith from 'lodash-es/cloneDeepWith';
-import _forEach from 'lodash-es/forEach';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
@@ -11,8 +10,10 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui';
-import { utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
-    utilObjectOmit, utilRebind, utilSessionMutex } from '../util';
+import {
+    utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
+    utilObjectOmit, utilRebind, utilSessionMutex
+} from '../util';
 
 
 export function coreHistory(context) {
@@ -355,13 +356,14 @@ export function coreHistory(context) {
             var baseEntities = {};
 
             // clone base entities..
-            _forEach(graph.base().entities, function(entity) {
+            Object.values(graph.base().entities).forEach(function(entity) {
                 var copy = _cloneDeepWith(entity, customizer);
                 baseEntities[copy.id] = copy;
             });
 
             // replace base entities with head entities..
-            _forEach(graph.entities, function(entity, id) {
+            Object.keys(graph.entities).forEach(function(id) {
+                var entity = graph.entities[id];
                 if (entity) {
                     var copy = _cloneDeepWith(entity, customizer);
                     baseEntities[copy.id] = copy;
@@ -371,7 +373,7 @@ export function coreHistory(context) {
             });
 
             // swap temporary for permanent ids..
-            _forEach(baseEntities, function(entity) {
+            Object.values(baseEntities).forEach(function(entity) {
                 if (Array.isArray(entity.nodes)) {
                     entity.nodes = entity.nodes.map(function(node) {
                         return permIds[node] || node;
@@ -423,7 +425,8 @@ export function coreHistory(context) {
                 var modified = [];
                 var deleted = [];
 
-                _forEach(i.graph.entities, function(entity, id) {
+                Object.keys(i.graph.entities).forEach(function(id) {
+                    var entity = i.graph.entities[id];
                     if (entity) {
                         var key = osmEntity.key(entity);
                         allEntities[key] = entity;
@@ -439,18 +442,21 @@ export function coreHistory(context) {
                     }
                     if (entity && entity.nodes) {
                         // get originals of pre-existing child nodes
-                        _forEach(entity.nodes, function(nodeId) {
-                            if (nodeId in base.graph.entities) {
-                                baseEntities[nodeId] = base.graph.entities[nodeId];
+                        entity.nodes.forEach(function(nodeID) {
+                            if (nodeID in base.graph.entities) {
+                                baseEntities[nodeID] = base.graph.entities[nodeID];
                             }
                         });
                     }
                     // get originals of parent entities too
-                    _forEach(base.graph._parentWays[id], function(parentId) {
-                        if (parentId in base.graph.entities) {
-                            baseEntities[parentId] = base.graph.entities[parentId];
-                        }
-                    });
+                    var baseParents = base.graph._parentWays[id];
+                    if (baseParents) {
+                        baseParents.forEach(function(parentID) {
+                            if (parentID in base.graph.entities) {
+                                baseEntities[parentID] = base.graph.entities[parentID];
+                            }
+                        });
+                    }
                 });
 
                 var x = {};

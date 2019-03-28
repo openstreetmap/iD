@@ -1,5 +1,3 @@
-import _forEach from 'lodash-es/forEach';
-
 import { json as d3_json } from 'd3-request';
 
 import rbush from 'rbush';
@@ -7,22 +5,22 @@ import { geoExtent } from '../geo';
 import { utilQsString } from '../util';
 
 
-var apibase = 'https://nominatim.openstreetmap.org/',
-    inflight = {},
-    nominatimCache;
+var apibase = 'https://nominatim.openstreetmap.org/';
+var _inflight = {};
+var _nominatimCache;
 
 
 export default {
 
     init: function() {
-        inflight = {};
-        nominatimCache = rbush();
+        _inflight = {};
+        _nominatimCache = rbush();
     },
 
     reset: function() {
-        _forEach(inflight, function(req) { req.abort(); });
-        inflight = {};
-        nominatimCache = rbush();
+        Object.values(_inflight).forEach(function(req) { req.abort(); });
+        _inflight = {};
+        _nominatimCache = rbush();
     },
 
 
@@ -40,7 +38,7 @@ export default {
 
 
     reverse: function (location, callback) {
-        var cached = nominatimCache.search(
+        var cached = _nominatimCache.search(
             { minX: location[0], minY: location[1], maxX: location[0], maxY: location[1] }
         );
 
@@ -50,10 +48,10 @@ export default {
 
         var params = { zoom: 13, format: 'json', addressdetails: 1, lat: location[1], lon: location[0] };
         var url = apibase + 'reverse?' + utilQsString(params);
-        if (inflight[url]) return;
+        if (_inflight[url]) return;
 
-        inflight[url] = d3_json(url, function(err, result) {
-            delete inflight[url];
+        _inflight[url] = d3_json(url, function(err, result) {
+            delete _inflight[url];
 
             if (err) {
                 return callback(err);
@@ -62,7 +60,7 @@ export default {
             }
 
             var extent = geoExtent(location).padByMeters(200);
-            nominatimCache.insert(Object.assign(extent.bbox(), {data: result}));
+            _nominatimCache.insert(Object.assign(extent.bbox(), {data: result}));
 
             callback(null, result);
         });
@@ -72,10 +70,10 @@ export default {
     search: function (val, callback) {
         var searchVal = encodeURIComponent(val);
         var url = apibase + 'search/' + searchVal + '?limit=10&format=json';
-        if (inflight[url]) return;
+        if (_inflight[url]) return;
 
-        inflight[url] = d3_json(url, function(err, result) {
-            delete inflight[url];
+        _inflight[url] = d3_json(url, function(err, result) {
+            delete _inflight[url];
             callback(err, result);
         });
     }

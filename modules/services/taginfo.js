@@ -1,5 +1,4 @@
 import _debounce from 'lodash-es/debounce';
-import _forEach from 'lodash-es/forEach';
 
 import { json as d3_json } from 'd3-request';
 
@@ -208,7 +207,7 @@ export default {
 
 
     reset: function() {
-        _forEach(_inflight, function(req) { req.abort(); });
+        Object.values(_inflight).forEach(function(request) { request.abort(); });
         _inflight = {};
     },
 

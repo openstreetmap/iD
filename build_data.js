@@ -1,7 +1,4 @@
 /* eslint-disable no-console */
-const requireESM = require('esm')(module);
-const _forEach = requireESM('lodash-es/forEach').default;
-
 const colors = require('colors/safe');
 const fs = require('fs');
 const glob = require('glob');
@@ -303,7 +300,8 @@ function generatePresets(tstrings, faIcons) {
 function generateTranslations(fields, presets, tstrings) {
     var translations = JSON.parse(JSON.stringify(tstrings));  // deep clone
 
-    _forEach(translations.fields, function(field, id) {
+    Object.keys(translations.fields).forEach(function(id) {
+        var field = translations.fields[id];
         var f = fields[id];
         var options = field.options || {};
         var optkeys = Object.keys(options);
@@ -329,7 +327,8 @@ function generateTranslations(fields, presets, tstrings) {
         }
     });
 
-    _forEach(translations.presets, function(preset, id) {
+    Object.keys(translations.presets).forEach(function(id) {
+        var preset = translations.presets[id];
         var p = presets[id];
         var tags = p.tags || {};
         var keys = Object.keys(tags);
@@ -368,7 +367,8 @@ function generateTaginfo(presets, fields) {
         'tags': []
     };
 
-    _forEach(presets, function(preset) {
+    Object.keys(presets).forEach(function(id) {
+        var preset = presets[id];
         if (preset.suggestion) return;
 
         var keys = Object.keys(preset.tags);
@@ -406,7 +406,8 @@ function generateTaginfo(presets, fields) {
         coalesceTags(taginfo, tag);
     });
 
-    _forEach(fields, function(field) {
+    Object.keys(fields).forEach(function(id) {
+        var field = fields[id];
         var keys = field.keys || [ field.key ] || [];
         var isRadio = (field.type === 'radio' || field.type === 'structureRadio');
 
@@ -431,7 +432,7 @@ function generateTaginfo(presets, fields) {
         });
     });
 
-    _forEach(deprecated, function(elem) {
+    deprecated.forEach(function(elem) {
         var old = elem.old;
         var oldKeys = Object.keys(old);
         if (oldKeys.length === 1) {
@@ -455,9 +456,10 @@ function generateTaginfo(presets, fields) {
         }
     });
 
-    _forEach(taginfo.tags, function(elem) {
-        if (elem.description)
+    taginfo.tags.forEach(function(elem) {
+        if (elem.description) {
             elem.description = elem.description.join(', ');
+        }
     });
 
 
@@ -511,7 +513,8 @@ function generateTaginfo(presets, fields) {
 }
 
 function validateCategoryPresets(categories, presets) {
-    _forEach(categories, function(category) {
+    Object.keys(categories).forEach(function(id) {
+        var category = categories[id];
         if (category.members) {
             category.members.forEach(function(preset) {
                 if (presets[preset] === undefined) {
@@ -594,7 +597,8 @@ function validatePresetFields(presets, fields) {
 }
 
 function validateDefaults (defaults, categories, presets) {
-    _forEach(defaults.defaults, function (members, name) {
+    Object.keys(defaults.defaults).forEach(function(name) {
+        var members = defaults.defaults[name];
         members.forEach(function (id) {
             if (!presets[id] && !categories[id]) {
                 console.error('Unknown category or preset: ' + id + ' in default ' + name);

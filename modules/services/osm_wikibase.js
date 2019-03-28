@@ -1,5 +1,4 @@
 import _debounce from 'lodash-es/debounce';
-import _forEach from 'lodash-es/forEach';
 
 import { json as d3_json } from 'd3-request';
 
@@ -51,7 +50,7 @@ export default {
 
 
     reset: function() {
-        _forEach(_inflight, function(req) { req.abort(); });
+        Object.values(_inflight).forEach(function(req) { req.abort(); });
         _inflight = {};
     },
 
@@ -67,7 +66,7 @@ export default {
         var locale = _localeIDs[langCode];
         var preferredPick, localePick;
 
-        _forEach(entity.claims[property], function(stmt) {
+        entity.claims[property].forEach(function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
             if (!preferredPick && stmt.rank === 'preferred') {
@@ -194,7 +193,7 @@ export default {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
                 var localeID = false;
-                _forEach(d.entities, function(res) {
+                Object.values(d.entities).forEach(function(res) {
                     if (res.missing !== '') {
                         // Simplify access to the localized values
                         res.description = localizedToString(res.descriptions, params.langCode);

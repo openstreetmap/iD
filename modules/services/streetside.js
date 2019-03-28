@@ -1,5 +1,3 @@
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { timer as d3_timer } from 'd3-timer';
 
@@ -80,10 +78,10 @@ function loadTiles(which, url, projection, margin) {
 
     // abort inflight requests that are no longer needed
     var cache = _ssCache[which];
-    _forEach(cache.inflight, function(v, k) {
+    Object.keys(cache.inflight).forEach(function(k) {
         var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
-            abortRequest(v);
+            abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
         }
     });
@@ -446,12 +444,8 @@ export default {
      * reset() reset the cache.
      */
     reset: function () {
-        var cache = _ssCache;
-
-        if (cache) {
-            if (cache.bubbles && cache.bubbles.inflight) {
-                _forEach(cache.bubbles.inflight, abortRequest);
-            }
+        if (_ssCache) {
+            Object.values(_ssCache.bubbles.inflight).forEach(abortRequest);
         }
 
         _ssCache = {

@@ -1,5 +1,3 @@
-import _forEach from 'lodash-es/forEach';
-
 import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -39,10 +37,10 @@ function abortRequest(i) {
 }
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflightTile, function(v, k) {
+    Object.keys(cache.inflightTile).forEach(function(k) {
         var wanted = tiles.find(function(tile) { return k === tile.id; });
         if (!wanted) {
-            abortRequest(v);
+            abortRequest(cache.inflightTile[k]);
             delete cache.inflightTile[k];
         }
     });
@@ -275,8 +273,9 @@ export default {
 
     reset: function() {
         if (_krCache) {
-            _forEach(_krCache.inflightTile, abortRequest);
+            Object.values(_krCache.inflightTile).forEach(abortRequest);
         }
+
         _krCache = {
             data: {},
             loadedTile: {},

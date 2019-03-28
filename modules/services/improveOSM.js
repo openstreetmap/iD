@@ -1,12 +1,10 @@
-import _forEach from 'lodash-es/forEach';
-
 import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
-import { geoExtent, geoVecAdd } from '../geo';
+import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { qaError } from '../osm';
 import { services } from './index';
 import { t } from '../util/locale';
@@ -26,7 +24,7 @@ var _impOsmUrls = {
 };
 
 function abortRequest(i) {
-    _forEach(i, function(v) {
+    Object.values(i).forEach(function(v) {
         if (v) {
             v.abort();
         }
@@ -34,10 +32,10 @@ function abortRequest(i) {
 }
 
 function abortUnwantedRequests(cache, tiles) {
-    _forEach(cache.inflightTile, function(v, k) {
+    Object.keys(cache.inflightTile).forEach(function(k) {
         var wanted = tiles.find(function(tile) { return k === tile.id; });
         if (!wanted) {
-            abortRequest(v);
+            abortRequest(cache.inflightTile[k]);
             delete cache.inflightTile[k];
         }
     });
@@ -69,18 +67,11 @@ function linkEntity(d) {
 }
 
 function pointAverage(points) {
-    var x = 0;
-    var y = 0;
-
-    _forEach(points, function(v) {
-        x += v.lon;
-        y += v.lat;
-    });
-
-    x /= points.length;
-    y /= points.length;
-
-    return [x, y];
+    if (points.length) {
+        return geoVecScale(points.reduce(geoVecAdd, [0,0]), 1 / points.length);
+    } else {
+        return [0,0];
+    }
 }
 
 function relativeBearing(p1, p2) {
@@ -136,7 +127,7 @@ export default {
 
     reset: function() {
         if (_erCache) {
-            _forEach(_erCache.inflightTile, abortRequest);
+            Object.values(_erCache.inflightTile).forEach(abortRequest);
         }
         _erCache = {
             data: {},
@@ -173,10 +164,14 @@ export default {
             // 3 separate requests to store for each tile
             var requests = {};
 
-            _forEach(_impOsmUrls, function(v, k) {
+            Object.keys(_impOsmUrls).forEach(function(k) {
+                var v = _impOsmUrls[k];
                 // We exclude WATER from missing geometry as it doesn't seem useful
                 // We use most confident one-way and turn restrictions only, still have false positives
-                var kParams = Object.assign({}, params, (k === 'mr') ? { type: 'PARKING,ROAD,BOTH,PATH' } : { confidenceLevel: 'C1' });
+                var kParams = Object.assign({},
+                    params,
+                    (k === 'mr') ? { type: 'PARKING,ROAD,BOTH,PATH' } : { confidenceLevel: 'C1' }
+                );
                 var url = v + '/search?' + utilQsString(kParams);
 
                 requests[k] = d3_json(url,

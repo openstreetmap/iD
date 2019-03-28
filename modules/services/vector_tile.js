@@ -1,5 +1,4 @@
 import _isEqual from 'lodash-es/isEqual';
-import _forEach from 'lodash-es/forEach';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
@@ -140,7 +139,7 @@ export default {
         for (var sourceID in _vtCache) {
             var source = _vtCache[sourceID];
             if (source && source.inflight) {
-                _forEach(source.inflight, abortRequest);
+                Object.values(source.inflight).forEach(abortRequest);
             }
         }
 
@@ -191,10 +190,10 @@ export default {
         var tiles = tiler.getTiles(projection);
 
         // abort inflight requests that are no longer needed
-        _forEach(source.inflight, function(v, k) {
+        Object.keys(source.inflight).forEach(function(k) {
             var wanted = tiles.find(function(tile) { return k === tile.id; });
             if (!wanted) {
-                abortRequest(v);
+                abortRequest(source.inflight[k]);
                 delete source.inflight[k];
             }
         });
