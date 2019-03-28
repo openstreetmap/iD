@@ -248,6 +248,18 @@
       "replace": {"landuse": "farmland"}
     },
     {
+      "old": {"landuse": "basin"},
+      "replace": {"natural": "water", "water": "basin"}
+    },
+    {
+      "old": {"landuse": "pond"},
+      "replace": {"natural": "water", "water": "pond"}
+    },
+    {
+      "old": {"landuse": "reservoir"},
+      "replace": {"natural": "water", "water": "reservoir"}
+    },
+    {
       "old": {"landuse": "wood"},
       "replace": {"natural": "wood"}
     },

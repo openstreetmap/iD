@@ -12,6 +12,5 @@
         "landuse": "basin"
     },
     "name": "Basin",
-    "searchable": false,
-    "replacement": "natural/water/basin"
+    "searchable": false
 }
