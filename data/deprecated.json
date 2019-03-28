@@ -280,6 +280,10 @@
       "replace": {"man_made": "water_well"}
     },
     {
+      "old": {"memorial": "plate"},
+      "replace": {"memorial": "plaque"}
+    },
+    {
       "old": {"mining_resource": "*"},
       "replace": {"resource": "$1"}
     },

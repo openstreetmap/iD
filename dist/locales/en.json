@@ -5941,6 +5941,10 @@
                     "name": "Memorial",
                     "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
                 },
+                "historic/memorial/plaque": {
+                    "name": "Commemorative Plaque",
+                    "terms": "dedicatory,epitaph,historical marker,remember,remembrance,memory"
+                },
                 "historic/monument": {
                     "name": "Monument",
                     "terms": ""
