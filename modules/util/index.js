@@ -1,5 +1,6 @@
 export { utilArrayChunk } from './array';
 export { utilArrayDifference } from './array';
+export { utilArrayFlatten } from './array';
 export { utilArrayGroupBy } from './array';
 export { utilArrayIntersection } from './array';
 export { utilArrayUnion } from './array';

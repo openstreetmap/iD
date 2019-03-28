@@ -1,15 +1,11 @@
-import _flatten from 'lodash-es/flatten';
-import _map from 'lodash-es/map';
-
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments, svgPath, svgRelationMemberTags,
-    svgSegmentWay, svgTagClasses
+    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay, svgTagClasses
 } from './index';
 
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
-import { utilArrayGroupBy } from '../util';
+import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -214,7 +210,7 @@ export function svgLines(projection, context) {
                     return entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating';
                 }
             );
-            onewaydata[k] = _flatten(_map(onewayArr, onewaySegments));
+            onewaydata[k] = utilArrayFlatten(onewayArr.map(onewaySegments));
 
             var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
@@ -222,7 +218,7 @@ export function svgLines(projection, context) {
                 function shouldReverse() { return false; },
                 function bothDirections() { return false; }
             );
-            sideddata[k] = _flatten(_map(sidedArr, sidedSegments));
+            sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
         });
 
 

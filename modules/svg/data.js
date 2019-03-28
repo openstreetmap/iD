@@ -1,4 +1,3 @@
-import _flatten from 'lodash-es/flatten';
 import _throttle from 'lodash-es/throttle';
 
 import {
@@ -20,7 +19,7 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
-import { utilArrayUnion, utilHashcode } from '../util';
+import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 
 
 var _initialized = false;
@@ -516,10 +515,10 @@ export function svgData(projection, context, dispatch) {
                     break;
 
                 case 'MultiPolygon':
-                    c = _flatten(c);
+                    c = utilArrayFlatten(c);
                 case 'Polygon':
                 case 'MultiLineString':
-                    c = _flatten(c);
+                    c = utilArrayFlatten(c);
                     break;
             }
             /* eslint-enable no-fallthrough */

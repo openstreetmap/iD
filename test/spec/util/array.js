@@ -47,6 +47,11 @@ describe('iD.utilArray', function() {
         expect(iD.utilArrayChunk(a, 4)).to.eql([[1, 2, 3, 4], [5, 6, 7]]);
     });
 
+    it('utilArrayFlatten returns two level array as single level', function() {
+        var a = [[1, 2, 3], [4, 5, 6], [7]];
+        expect(iD.utilArrayFlatten(a)).to.eql([1, 2, 3, 4, 5, 6, 7]);
+    });
+
     describe('utilArrayGroupBy', function() {
         var pets = [
             { type: 'Dog', name: 'Spot' },
