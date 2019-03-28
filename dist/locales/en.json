@@ -188,7 +188,7 @@
                 },
                 "has_wikidata_tag": {
                     "single": "This feature can't be deleted because it has a Wikidata tag.",
-                    "multiple": "These feature can't be deleted because some have Wikidata tags."
+                    "multiple": "These features can't be deleted because some have Wikidata tags."
                 }
             },
             "add_member": {
