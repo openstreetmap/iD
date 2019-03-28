@@ -24,7 +24,8 @@ var readOnlyTags = [
     /^ideditor:/,
     /^imagery_used$/,
     /^host$/,
-    /^locale$/
+    /^locale$/,
+    /^warnings:/
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
@@ -112,6 +113,18 @@ export function uiCommit(context) {
             if (iOsmClosed.length) {
                 tags['closed:improveosm'] = iOsmClosed.join(';').substr(0, 255);
             }
+        }
+
+        var warningCountsByType = {};
+        context.validator().getWarnings().forEach(function(warning) {
+            // deletion count can be derived so don't tag that warning in the changeset
+            if (warning.type === 'many_deletions') return;
+            if (!warningCountsByType[warning.type]) warningCountsByType[warning.type] = 0;
+            warningCountsByType[warning.type] += 1;
+        });
+        for (var warningType in warningCountsByType) {
+            // tag the counts of warnings ignored by the user
+            tags['warnings:' + warningType] = warningCountsByType[warningType].toString();
         }
 
         _changeset = _changeset.update({ tags: tags });
