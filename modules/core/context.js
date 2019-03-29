@@ -1,6 +1,4 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
 import _debounce from 'lodash-es/debounce';
-import _forOwn from 'lodash-es/forOwn';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
@@ -34,20 +32,24 @@ export function coreContext() {
     context.version = '2.14.3';
 
     // create a special translation that contains the keys in place of the strings
-    var tkeys = _cloneDeep(dataEn);
+    var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
     var parents = [];
 
     function traverser(v, k, obj) {
         parents.push(k);
         if (typeof v === 'object') {
-            _forOwn(v, traverser);
+            forOwn(v, traverser);
         } else if (typeof v === 'string') {
             obj[k] = parents.join('.');
         }
         parents.pop();
     }
 
-    _forOwn(tkeys, traverser);
+    function forOwn(obj, fn) {
+        Object.keys(obj).forEach(function(k) { fn(obj[k], k, obj); });
+    }
+
+    forOwn(tkeys, traverser);
     addTranslation('_tkeys_', tkeys);
 
     addTranslation('en', dataEn);
