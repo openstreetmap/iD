@@ -1,12 +1,6 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
 import {
-    geoExtent,
-    geoLineIntersection,
-    geoMetersToLat,
-    geoMetersToLon,
-    geoSphericalDistance,
-    geoVecInterp,
-    geoHasSelfIntersections,
+    geoExtent, geoLineIntersection, geoMetersToLat, geoMetersToLon,
+    geoSphericalDistance, geoVecInterp, geoHasSelfIntersections,
     geoSphericalClosestNode
 } from '../geo';
 
@@ -50,24 +44,24 @@ export function validationAlmostJunction() {
         return true;
     }
 
+
     function findConnectableEndNodesByExtension(way, graph, tree) {
-
         var results = [];
-
         if (way.isClosed()) return results;
 
         var nidFirst = way.nodes[0];
         var nidLast = way.nodes[way.nodes.length - 1];
         var nodeFirst = graph.entity(nidFirst);
         var nodeLast = graph.entity(nidLast);
-
-        var testNodes;
+        var testNodes, index;
 
         if (isExtendableCandidate(nodeFirst, way, graph)) {
             var connNearFirst = canConnectByExtend(way, 0, graph, tree);
             if (connNearFirst !== null) {
-                testNodes = _cloneDeep(graph.childNodes(way));
-                testNodes[0].loc = connNearFirst.cross_loc;
+                testNodes = graph.childNodes(way).slice();   // shallow copy
+                index = 0;  // first
+                testNodes[index] = testNodes[index].move(connNearFirst.cross_loc);
+
                 // don't flag issue if connecting the ways would cause self-intersection
                 if (!geoHasSelfIntersections(testNodes, nodeFirst.id)) {
                     results.push({
@@ -83,8 +77,10 @@ export function validationAlmostJunction() {
         if (isExtendableCandidate(nodeLast, way, graph)) {
             var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
             if (connNearLast !== null) {
-                testNodes = _cloneDeep(graph.childNodes(way));
-                testNodes[testNodes.length-1].loc = connNearLast.cross_loc;
+                testNodes = graph.childNodes(way).slice();   // shallow copy
+                index = testNodes.length - 1;  // last
+                testNodes[index] = testNodes[index].move(connNearFirst.cross_loc);
+
                 // don't flag issue if connecting the ways would cause self-intersection
                 if (!geoHasSelfIntersections(testNodes, nodeLast.id)) {
                     results.push({

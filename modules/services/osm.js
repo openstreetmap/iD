@@ -1,16 +1,14 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
 import _throttle from 'lodash-es/throttle';
-
-import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
+import rbush from 'rbush';
+
 import { JXON } from '../util/jxon';
 import { geoExtent, geoVecAdd } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
-
 import {
     utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
     utilIdleWorker, utilTiler, utilQsString
@@ -994,11 +992,32 @@ export default {
     // This is used to save/restore the state when entering/exiting the walkthrough
     // Also used for testing purposes.
     caches: function(obj) {
+        function cloneDeep(source) {
+            return JSON.parse(JSON.stringify(source));
+        }
+
+        function cloneNoteCache(source) {
+            var target = {};
+            Object.keys(source).forEach(function(k) {
+                if (k === 'rtree') {
+                    target.rtree = rbush().fromJSON(source.rtree.toJSON());
+                } else if (k === 'note') {
+                    target.note = {};
+                    Object.keys(source.note).forEach(function(id) {
+                        target.note[id] = osmNote(source.note[id]);
+                    });
+                } else {
+                    target[k] = cloneDeep(source[k]);
+                }
+            });
+            return target;
+        }
+
         if (!arguments.length) {
             return {
-                tile: _cloneDeep(_tileCache),
-                note: _cloneDeep(_noteCache),
-                user: _cloneDeep(_userCache)
+                tile: cloneDeep(_tileCache),
+                note: cloneNoteCache(_noteCache),
+                user: cloneDeep(_userCache)
             };
         }
 

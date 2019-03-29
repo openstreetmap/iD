@@ -1,52 +1,15 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
+import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { actionRestrictTurn, actionUnrestrictTurn } from '../../actions';
 import { behaviorBreathe } from '../../behavior';
-
-import {
-    geoExtent,
-    geoRawMercator,
-    geoVecScale,
-    geoVecSubtract,
-    geoZoomToScale
-} from '../../geo';
-
-import {
-    osmIntersection,
-    osmInferRestriction,
-    osmTurn,
-    osmWay
-} from '../../osm';
-
-import {
-    svgLayers,
-    svgLines,
-    svgTurns,
-    svgVertices
-} from '../../svg';
-
-import {
-    utilDisplayName,
-    utilDisplayType,
-    utilEntitySelector,
-    utilFunctor,
-    utilRebind
-} from '../../util';
-
+import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale } from '../../geo';
+import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
+import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
+import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilRebind } from '../../util';
 import { utilDetect } from '../../util/detect';
-
-import {
-    utilGetDimensions,
-    utilSetDimensions
-} from '../../util/dimensions';
+import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldRestrictions(field, context) {
@@ -363,8 +326,8 @@ export function uiFieldRestrictions(field, context) {
 
                 } else if (datum.restrictionID && !datum.only) {    // NO -> ONLY
                     var seen = {};
-                    var datumOnly = _cloneDeep(datum);
-                    datumOnly.only = true;
+                    var datumOnly = JSON.parse(JSON.stringify(datum));   // deep clone the datum
+                    datumOnly.only = true;                               // but change this property
                     restrictionType = restrictionType.replace(/^no/, 'only');
 
                     // Adding an ONLY restriction should destroy all other direct restrictions from the FROM towards the VIA.
