@@ -1,11 +1,5 @@
-import _map from 'lodash-es/map';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';
@@ -204,7 +198,7 @@ export function uiFieldCombo(field, context) {
             // hide the caret if there are no suggestions
             container.classed('empty-combobox', data.length === 0);
 
-            _comboData = _map(data, function(d) {
+            _comboData = data.map(function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
                 var v = snake_case ? unsnake(k) : k;
@@ -221,14 +215,17 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function setPlaceholder(d) {
+    function setPlaceholder(values) {
         var ph;
 
         if (isMulti || isSemi) {
             ph = field.placeholder() || t('inspector.add');
         } else {
-            var vals = _map(d, 'value').filter(function(s) { return s.length < 20; }),
-                placeholders = vals.length > 1 ? vals : _map(d, 'key');
+            var vals = values
+                .map(function(d) { return d.value; })
+                .filter(function(s) { return s.length < 20; });
+
+            var placeholders = vals.length > 1 ? vals : values.map(function(d) { return d.key; });
             ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
         }
 
@@ -407,7 +404,7 @@ export function uiFieldCombo(field, context) {
                 }
 
                 // Set keys for form-field modified (needed for undo and reset buttons)..
-                field.keys = _map(_multiData, 'key');
+                field.keys = _multiData.map(function(d) { return d.key; });
 
             } else if (isSemi) {
                 var arr = utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);

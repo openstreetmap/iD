@@ -1,13 +1,12 @@
-import _map from 'lodash-es/map';
 import rbush from 'rbush';
 
 import { coreDifference } from './difference';
 
 
 export function coreTree(head) {
-    var rtree = rbush(),
-        bboxes = {},
-        tree = {};
+    var rtree = rbush();
+    var bboxes = {};
+    var tree = {};
 
 
     function entityBBox(entity) {
@@ -44,9 +43,7 @@ export function coreTree(head) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-
-            if (!entity.visible)
-                continue;
+            if (!entity.visible) continue;
 
             if (head.entities.hasOwnProperty(entity.id) || bboxes[entity.id]) {
                 if (!force) {
@@ -60,7 +57,7 @@ export function coreTree(head) {
             updateParents(entity, insertions, {});
         }
 
-        rtree.load(_map(insertions, entityBBox));
+        rtree.load(Object.values(insertions).map(entityBBox));
 
         return tree;
     };
@@ -68,8 +65,8 @@ export function coreTree(head) {
 
     tree.intersects = function(extent, graph) {
         if (graph !== head) {
-            var diff = coreDifference(head, graph),
-                insertions = {};
+            var diff = coreDifference(head, graph);
+            var insertions = {};
 
             head = graph;
 
@@ -88,12 +85,11 @@ export function coreTree(head) {
                 insertions[entity.id] = entity;
             });
 
-            rtree.load(_map(insertions, entityBBox));
+            rtree.load(Object.values(insertions).map(entityBBox));
         }
 
-        return rtree.search(extent.bbox()).map(function(bbox) {
-            return head.entity(bbox.id);
-        });
+        return rtree.search(extent.bbox())
+            .map(function(bbox) { return head.entity(bbox.id); });
     };
 
 

@@ -1,15 +1,8 @@
 import _isEqual from 'lodash-es/isEqual';
-import _map from 'lodash-es/map';
 
 import {
-  geoAngle,
-  geoChooseEdge,
-  geoPathIntersections,
-  geoPathLength,
-  geoVecAdd,
-  geoVecEqual,
-  geoVecInterp,
-  geoVecSubtract
+  geoAngle, geoChooseEdge, geoPathIntersections, geoPathLength,
+  geoVecAdd, geoVecEqual, geoVecInterp, geoVecSubtract
 } from '../geo';
 
 import { osmNode } from '../osm';
@@ -18,21 +11,21 @@ import { utilArrayIntersection } from '../util';
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-export function actionMove(moveIds, tryDelta, projection, cache) {
+export function actionMove(moveIDs, tryDelta, projection, cache) {
     var _delta = tryDelta;
 
     function setupCache(graph) {
-        function canMove(nodeId) {
+        function canMove(nodeID) {
             // Allow movement of any node that is in the selectedIDs list..
-            if (moveIds.indexOf(nodeId) !== -1) return true;
+            if (moveIDs.indexOf(nodeID) !== -1) return true;
 
             // Allow movement of a vertex where 2 ways meet..
-            var parents = _map(graph.parentWays(graph.entity(nodeId)), 'id');
+            var parents = graph.parentWays(graph.entity(nodeID));
             if (parents.length < 3) return true;
 
             // Restrict movement of a vertex where >2 ways meet, unless all parentWays are moving too..
-            var parentsMoving = parents.every(function(id) { return cache.moving[id]; });
-            if (!parentsMoving) delete cache.moving[nodeId];
+            var parentsMoving = parents.every(function(way) { return cache.moving[way.id]; });
+            if (!parentsMoving) delete cache.moving[nodeID];
 
             return parentsMoving;
         }
@@ -113,7 +106,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             cache.nodes = [];
             cache.ways = [];
 
-            cacheEntities(moveIds);
+            cacheEntities(moveIDs);
             cacheIntersections(cache.ways);
             cache.nodes = cache.nodes.filter(canMove);
 
@@ -331,9 +324,9 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             var start = projection(node.loc);
             var end = geoVecAdd(start, _delta);
             var movedNodes = graph.childNodes(graph.entity(obj.movedId));
-            var movedPath = _map(_map(movedNodes, 'loc'), moveNode);
+            var movedPath = movedNodes.map(function(n) { return moveNode(n.loc); });
             var unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId));
-            var unmovedPath = _map(_map(unmovedNodes, 'loc'), projection);
+            var unmovedPath = unmovedNodes.map(function(n) { return projection(n.loc); });
             var hits = geoPathIntersections(movedPath, unmovedPath);
 
             for (var j = 0; i < hits.length; i++) {

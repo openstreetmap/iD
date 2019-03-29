@@ -19,7 +19,6 @@ import { utilDetect } from '../util/detect';
 import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
 
 
-
 export var areaKeys = {};
 
 export function setAreaKeys(value) {

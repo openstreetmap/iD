@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { geoExtent, geoVecCross } from '../geo';
@@ -437,10 +435,10 @@ Object.assign(osmWay.prototype, {
                 '@version': this.version || 0,
                 nd: this.nodes.map(function(id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
-                }),
-                tag: _map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                }, this),
+                tag: Object.keys(this.tags).map(function(k) {
+                    return { keyAttributes: { k: k, v: this.tags[k] } };
+                }, this)
             }
         };
         if (changeset_id) {

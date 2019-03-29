@@ -1,20 +1,10 @@
-import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
 
-import { set as d3_set } from 'd3-collection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
 import { scaleLinear as d3_scaleLinear } from 'd3-scale';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import {
-    zoom as d3_zoom,
-    zoomIdentity as d3_zoomIdentity
-} from 'd3-zoom';
+import { event as d3_event, select as d3_select } from 'd3-selection';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
@@ -280,12 +270,14 @@ export function rendererMap(context) {
         var all = context.intersects(map.extent());
         var fullRedraw = false;
         var data;
+        var set;
         var filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
-            filter = function(d) { return d.id in complete; };
+            set = new Set(data.map(function(entity) { return entity.id; }));
+            filter = function(d) { return set.has(d.id); };
             features.clear(data);
 
         } else {
@@ -297,7 +289,7 @@ export function rendererMap(context) {
 
             if (extent) {
                 data = context.intersects(map.extent().intersection(extent));
-                var set = d3_set(_map(data, 'id'));
+                set = new Set(data.map(function(entity) { return entity.id; }));
                 filter = function(d) { return set.has(d.id); };
 
             } else {

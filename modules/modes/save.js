@@ -1,11 +1,4 @@
-import _map from 'lodash-es/map';
-import _reduce from 'lodash-es/reduce';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
+import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
 import { actionDiscardTags, actionMergeRemoteChanges, actionNoop, actionRevert } from '../actions';
@@ -132,22 +125,19 @@ export function modeSave(context) {
 
 
         function withChildNodes(ids, graph) {
-            return utilArrayUniq(_reduce(ids, function(result, id) {
+            var s = new Set(ids);
+            ids.forEach(function(id) {
                 var entity = graph.entity(id);
-                if (entity.type === 'way') {
-                    try {
-                        var children = graph.childNodes(entity)
-                            .filter(function(child) { return child.version !== undefined; });
+                if (entity.type !== 'way') return;
 
-                        result.push.apply(result, _map(children, 'id'));
-                    } catch (err) {
-                        /* eslint-disable no-console */
-                        if (typeof console !== 'undefined') console.error(err);
-                        /* eslint-enable no-console */
+                graph.childNodes(entity).forEach(function(child) {
+                    if (child.version !== undefined) {
+                        s.add(child.id);
                     }
-                }
-                return result;
-            }, ids.slice()));   // shallow copy
+                });
+            });
+
+            return Array.from(s);
         }
 
 

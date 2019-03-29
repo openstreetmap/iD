@@ -1,24 +1,9 @@
 import { geoPath as d3_geoPath } from 'd3-geo';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import {
-    zoom as d3_zoom,
-    zoomIdentity as d3_zoomIdentity
-} from 'd3-zoom';
+import { event as d3_event, select as d3_select } from 'd3-selection';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
-import {
-    geoRawMercator,
-    geoScaleToZoom,
-    geoVecSubtract,
-    geoVecScale,
-    geoZoomToScale,
-} from '../geo';
-
+import { geoRawMercator, geoScaleToZoom, geoVecSubtract, geoVecScale, geoZoomToScale } from '../geo';
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
@@ -27,7 +12,7 @@ import { utilGetDimensions } from '../util/dimensions';
 
 export function uiMapInMap(context) {
 
-    function map_in_map(selection) {
+    function mapInMap(selection) {
         var backgroundLayer = rendererTileLayer(context);
         var overlayLayers = {};
         var projection = geoRawMercator();
@@ -338,5 +323,5 @@ export function uiMapInMap(context) {
             .on(t('background.minimap.key'), toggle);
     }
 
-    return map_in_map;
+    return mapInMap;
 }
