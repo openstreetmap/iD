@@ -68,7 +68,10 @@ function linkEntity(d) {
 
 function pointAverage(points) {
     if (points.length) {
-        return geoVecScale(points.reduce(geoVecAdd, [0,0]), 1 / points.length);
+        var sum = points.reduce(function(acc, point) {
+            return geoVecAdd(acc, [point.lon, point.lat]);
+        }, [0,0]);
+        return geoVecScale(sum, 1 / points.length);
     } else {
         return [0,0];
     }
