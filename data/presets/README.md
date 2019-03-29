@@ -97,6 +97,39 @@ fields as `shop`.
 In both explicit and implicit inheritance, fields for keys that define the
 preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
 
+##### `icon`
+
+The name of a local SVG icon file. You can use icons from any of the following open source icon sets.
+
+* [Maki](http://www.mapbox.com/maki/) - prefix: `maki-`
+* [Temaki](http://bhousel.github.io/temaki/docs/) - prefix: `temaki-`
+* [Font Awesome (free, solid)](https://fontawesome.com/icons?d=gallery&s=solid) - prefix: `fas-`
+* [Font Awesome (free, regular)](https://fontawesome.com/icons?d=gallery&s=regular) - prefix: `far-`
+* [Font Awesome (free, brands)](https://fontawesome.com/icons?d=gallery&s=brands) - prefix: `fab-`
+* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) - prefix: `iD-`
+
+When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
+
+##### `imageURL`
+
+The URL of a remote image file. This does not fully replace `icon`—both may be shown in the UI.
+
+For example, `imageURL` is used to specify the logos of brand presets from the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index).
+
+Bitmap images should be at least 100x100px to look good at 50x50pt on high-resolution screens.
+
+##### `name`
+
+The primary name of the feature type in American English.
+
+Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
+
+##### `replacement`
+
+The ID of a preset that is preferable to this one. iD's validator will flag features matching this preset and recommend that the user upgrade the tags.
+
+When possible, use `deprecated.json` instead to specify upgrade paths for old tags. This property is meant for special cases, such as upgrades with geometry requirements.
+
 ##### `searchable`
 
 Deprecated or generic presets can include the property `"searchable": false`.
@@ -138,10 +171,14 @@ For example, the field for the tag `piste:difficulty=*` is stored in the file
 ```
 The complete JSON schema for fields can be found in [`data/presets/schema/field.json`](schema/field.json)
 
+#### Field Properties
 
-#### Field Types
+##### `type`
 
-**Text fields**
+A string specifying the UI and behavior of the field. Must be one of the following values.
+
+###### Text fields
+
 * `text` - Basic single line text field
 * `number` - Text field with up/down buttons for entering numbers (e.g. `width=*`)
 * `localized` - Text field with localization abilities (e.g. `name=*`, `name:es=*`, etc.)
@@ -150,7 +187,8 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 * `url` - Text field for entering URLs
 * `textarea` - Multi-line text area (e.g. `description=*`)
 
-**Combo/Dropdown fields**
+###### Combo/Dropdown fields
+
 * `combo` - Dropdown field for picking one option out of many (e.g. `surface=*`)
 * `typeCombo` - Dropdown field picking a specific type from a generic category key<br/>
 (e.g. `waterway=*`.  If unset, tag will be `waterway=yes`, but dropdown contains options like `stream`, `ditch`, `river`)
@@ -160,25 +198,26 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 * `semiCombo` - Dropdown field for adding multiple values to a semicolon-delimited list<br/>
 (e.g. `sport=*` -> `soccer;lacrosse;athletics;field_hockey`)
 
-**Checkboxes**
+###### Checkboxes
+
 * `check` - 3-state checkbox: `yes`, `no`, unknown (no tag)
 * `defaultCheck` - 2-state checkbox where checked produces `yes` and unchecked produces no tag
 * `onewayCheck` - 3-state checkbox for `oneway` fields, with extra button for direction switching
 
-**Radio Buttons**
+###### Radio Buttons
+
 * `radio` - Multiple choice radio button field
 * `structureRadio` - Multiple choice structure radio button field, with extra input for bridge/tunnel level
 
-**Special**
+###### Special
+
 * `access` - Block of dropdowns for defining the `access=*` tags on a highway
 * `address` - Block of text and dropdown fields for entering address information (localized for editing location)
 * `cycleway` - Block of dropdowns for adding `cycleway:left` and `cycleway:right` tags on a highway
 * `maxspeed` - Numeric text field for speed and dropdown for "mph/kph"
 * `restrictions` - Graphical field for editing turn restrictions
+* `wikidata` - Search field for selecting a Wikidata entity
 * `wikipedia` - Block of fields for selecting a wiki language and Wikipedia page
-
-
-#### Field Properties
 
 ##### `key`/`keys`
 
@@ -291,19 +330,6 @@ For example, this is how we show the Internet Access Fee field only if the featu
     "valueNot": "no"
 }
 ```
-
-## Icons
-
-You can use any of the following open source map icon sets as preset icons.
-
-* [Maki](http://www.mapbox.com/maki/) - prefix: `maki-`
-* [Temaki](http://bhousel.github.io/temaki/docs/) - prefix: `temaki-`
-* [Font Awesome (free, solid)](https://fontawesome.com/icons?d=gallery&s=solid) - prefix: `fas-`
-* [Font Awesome (free, regular)](https://fontawesome.com/icons?d=gallery&s=regular) - prefix: `far-`
-* [Font Awesome (free, brands)](https://fontawesome.com/icons?d=gallery&s=brands) - prefix: `fab-`
-* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) - prefix: `iD-`
-
-When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
 
 
 ## Building
