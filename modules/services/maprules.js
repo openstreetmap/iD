@@ -1,5 +1,3 @@
-import _isMatch from 'lodash-es/isMatch';
-
 import { areaKeys } from '../core/context';
 import { utilArrayIntersection } from '../util';
 import { validationIssue } from '../core/validator';
@@ -9,12 +7,16 @@ var buildRuleChecks = function() {
     return {
         equals: function (equals) {
             return function(tags) {
-                return _isMatch(tags, equals);
+                return Object.keys(equals).every(function(k) {
+                    return equals[k] === tags[k];
+                });
             };
         },
         notEquals: function (notEquals) {
             return function(tags) {
-                return !_isMatch(tags, notEquals);
+                return Object.keys(notEquals).some(function(k) {
+                    return notEquals[k] !== tags[k];
+                });
             };
         },
         absence: function(absence) {
