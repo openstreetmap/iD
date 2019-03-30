@@ -1,7 +1,6 @@
-import _isEqual from 'lodash-es/isEqual';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
@@ -508,7 +507,7 @@ export function uiCommit(context) {
             delete tags.changesets_count;
         }
 
-        if (!_isEqual(_changeset.tags, tags)) {
+        if (!deepEqual(_changeset.tags, tags)) {
             _changeset = _changeset.update({ tags: tags });
         }
     }

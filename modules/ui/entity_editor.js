@@ -1,11 +1,6 @@
-import _isEqual from 'lodash-es/isEqual';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    selectAll as d3_selectAll
-} from 'd3-selection';
+import {event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
@@ -286,7 +281,7 @@ export function uiEntityEditor(context) {
             tags = utilCleanTags(tags);
         }
 
-        if (!_isEqual(entity.tags, tags)) {
+        if (!deepEqual(entity.tags, tags)) {
             if (_coalesceChanges) {
                 context.overwrite(actionChangeTags(_entityID, tags), annotation);
             } else {

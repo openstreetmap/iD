@@ -1,8 +1,7 @@
-import _isEqual from 'lodash-es/isEqual';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 
+import deepEqual from 'fast-deep-equal';
 import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
 import martinez from 'martinez-polygon-clipping';
@@ -46,7 +45,7 @@ function vtToGeoJSON(data, tile, mergeCache) {
                 if (geometry.type === 'MultiPolygon') {
                     var isClipped = false;
                     var featureClip = turf_bboxClip(feature, tile.extent.rectangle());
-                    if (!_isEqual(feature.geometry, featureClip.geometry)) {
+                    if (!deepEqual(feature.geometry, featureClip.geometry)) {
                         // feature = featureClip;
                         isClipped = true;
                     }

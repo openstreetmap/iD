@@ -1,5 +1,4 @@
-import _isEqual from 'lodash-es/isEqual';
-
+import deepEqual from 'fast-deep-equal';
 import { utilArrayDifference } from '../util';
 
 
@@ -26,12 +25,12 @@ export function coreDifference(base, head) {
                 h.loc[0] !== b.loc[0] || h.loc[1] !== b.loc[1]) return true;
         }
         if (h.nodes || b.nodes) {
-            if (!_isEqual(h.nodes, b.nodes)) return true;
+            if (!deepEqual(h.nodes, b.nodes)) return true;
         }
         if (h.members || b.members) {
-            if (!_isEqual(h.members, b.members)) return true;
+            if (!deepEqual(h.members, b.members)) return true;
         }
-        return !_isEqual(h.tags, b.tags);
+        return !deepEqual(h.tags, b.tags);
     }
 
 
@@ -151,8 +150,8 @@ export function coreDifference(base, head) {
                 addEntity(change.base, base, 'deleted');
 
             } else if (change.base && change.head) { // modified vertex
-                var moved    = !_isEqual(change.base.loc,  change.head.loc);
-                var retagged = !_isEqual(change.base.tags, change.head.tags);
+                var moved    = !deepEqual(change.base.loc,  change.head.loc);
+                var retagged = !deepEqual(change.base.tags, change.head.tags);
 
                 if (moved) {
                     addParents(change.head);

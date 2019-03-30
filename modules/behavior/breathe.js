@@ -1,4 +1,4 @@
-import _isEqual from 'lodash-es/isEqual';
+import deepEqual from 'fast-deep-equal';
 
 import {
     interpolateNumber as d3_interpolateNumber,
@@ -120,7 +120,7 @@ export function behaviorBreathe() {
             return;
         }
 
-        if (!_isEqual(currSelected.data(), _selected.data()) || currClassed !== _classed) {
+        if (!deepEqual(currSelected.data(), _selected.data()) || currClassed !== _classed) {
             _selected.call(reset);
             _classed = currClassed;
             _selected = currSelected.call(calcAnimationParams);

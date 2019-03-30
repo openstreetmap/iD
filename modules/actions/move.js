@@ -1,5 +1,3 @@
-import _isEqual from 'lodash-es/isEqual';
-
 import {
   geoAngle, geoChooseEdge, geoPathIntersections, geoPathLength,
   geoVecAdd, geoVecEqual, geoVecInterp, geoVecSubtract
@@ -330,7 +328,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
             var hits = geoPathIntersections(movedPath, unmovedPath);
 
             for (var j = 0; i < hits.length; i++) {
-                if (_isEqual(hits[j], end)) continue;
+                if (geoVecEqual(hits[j], end)) continue;
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
                 _delta = geoVecSubtract(projection(edge.loc), start);
             }
