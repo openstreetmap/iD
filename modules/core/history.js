@@ -1,6 +1,3 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
-import _cloneDeepWith from 'lodash-es/cloneDeepWith';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
@@ -326,7 +323,7 @@ export function coreHistory(context) {
         // save the current history state
         checkpoint: function(key) {
             _checkpoints[key] = {
-                stack: _cloneDeep(_stack),
+                stack: _stack,
                 index: _index
             };
             return history;
@@ -336,7 +333,7 @@ export function coreHistory(context) {
         // restore history state to a given checkpoint or reset completely
         reset: function(key) {
             if (key !== undefined && _checkpoints.hasOwnProperty(key)) {
-                _stack = _cloneDeep(_checkpoints[key].stack);
+                _stack = _checkpoints[key].stack;
                 _index = _checkpoints[key].index;
             } else {
                 _stack = [{graph: coreGraph()}];
@@ -349,15 +346,25 @@ export function coreHistory(context) {
         },
 
 
+        // `toIntroGraph()` is used to export the intro graph used by the walkthrough.
+        //
+        // To use it:
+        //  1. Start the walkthrough.
+        //  2. Get to a "free editing" tutorial step
+        //  3. Make your edits to the walkthrough map
+        //  4. In your browser dev console run:
+        //        `id.history().toIntroGraph()`
+        //  5. This outputs stringified JSON to the browser console
+        //  6. Copy it to `data/intro_graph.json` and prettify it in your code editor
         toIntroGraph: function() {
-            var nextId = { n: 0, r: 0, w: 0 };
-            var permIds = {};
+            var nextID = { n: 0, r: 0, w: 0 };
+            var permIDs = {};
             var graph = this.graph();
             var baseEntities = {};
 
             // clone base entities..
             Object.values(graph.base().entities).forEach(function(entity) {
-                var copy = _cloneDeepWith(entity, customizer);
+                var copy = copyIntroEntity(entity);
                 baseEntities[copy.id] = copy;
             });
 
@@ -365,7 +372,7 @@ export function coreHistory(context) {
             Object.keys(graph.entities).forEach(function(id) {
                 var entity = graph.entities[id];
                 if (entity) {
-                    var copy = _cloneDeepWith(entity, customizer);
+                    var copy = copyIntroEntity(entity);
                     baseEntities[copy.id] = copy;
                 } else {
                     delete baseEntities[id];
@@ -376,12 +383,12 @@ export function coreHistory(context) {
             Object.values(baseEntities).forEach(function(entity) {
                 if (Array.isArray(entity.nodes)) {
                     entity.nodes = entity.nodes.map(function(node) {
-                        return permIds[node] || node;
+                        return permIDs[node] || node;
                     });
                 }
                 if (Array.isArray(entity.members)) {
                     entity.members = entity.members.map(function(member) {
-                        member.id = permIds[member.id] || member.id;
+                        member.id = permIDs[member.id] || member.id;
                         return member;
                     });
                 }
@@ -390,9 +397,11 @@ export function coreHistory(context) {
             return JSON.stringify({ dataIntroGraph: baseEntities });
 
 
-            function customizer(src) {
-                var copy = utilObjectOmit(_cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
-                if (!Object.keys(copy.tags)) {
+            function copyIntroEntity(source) {
+                var copy = utilObjectOmit(source, ['type', 'user', 'v', 'version', 'visible']);
+
+                // Note: the copy is no longer an osmEntity, so it might not have `tags`
+                if (copy.tags && !Object.keys(copy.tags)) {
                     delete copy.tags;
                 }
 
@@ -401,13 +410,14 @@ export function coreHistory(context) {
                     copy.loc[1] = +copy.loc[1].toFixed(6);
                 }
 
-                var match = src.id.match(/([nrw])-\d*/);  // temporary id
+                var match = source.id.match(/([nrw])-\d*/);  // temporary id
                 if (match !== null) {
-                    var nrw = match[1], permId;
-                    do { permId = nrw + (++nextId[nrw]); }
-                    while (baseEntities.hasOwnProperty(permId));
+                    var nrw = match[1];
+                    var permID;
+                    do { permID = nrw + (++nextID[nrw]); }
+                    while (baseEntities.hasOwnProperty(permID));
 
-                    copy.id = permIds[src.id] = permId;
+                    copy.id = permIDs[source.id] = permID;
                 }
                 return copy;
             }
