@@ -2167,7 +2167,7 @@ en:
         # width=*
         label: Width (Meters)
       wikidata:
-        # wikidata=*
+        # 'wikidata=*, wikipedia=*'
         label: Wikidata
       wikipedia:
         # 'wikipedia=*, wikidata=*'

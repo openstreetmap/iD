@@ -7,6 +7,7 @@ import {
 
 import { uiCombobox } from '../index';
 
+import { actionChangeTags } from '../../actions/index';
 import { services } from '../../services/index';
 
 import { svgIcon } from '../../svg/index';
@@ -153,10 +154,80 @@ export function uiFieldWikidata(field, context) {
 
 
     function change() {
-        var syncTags = {
-            wikidata: _qid
-        };
+        var syncTags = {};
+        syncTags[field.key] = _qid;
         dispatch.call('change', this, syncTags);
+
+        // attempt asynchronous update of wikidata tag..
+        var initGraph = context.graph();
+        var initEntityID = _entity.id;
+
+        wikidata.entityByQID(_qid, function(err, entity) {
+            if (err) return;
+
+            // If graph has changed, we can't apply this update.
+            if (context.graph() !== initGraph) return;
+
+            if (!entity.sitelinks) return;
+
+            var langs = wikidata.languagesToQuery();
+            // use the label and description languages as fallbacks
+            ['labels', 'descriptions'].forEach(function(key) {
+                if (!entity[key]) return;
+
+                var valueLangs = Object.keys(entity[key]);
+                if (valueLangs.length === 0) return;
+                var valueLang = valueLangs[0];
+
+                if (langs.indexOf(valueLang) === -1) {
+                    langs.push(valueLang);
+                }
+            });
+
+            var currTags = Object.assign({}, context.entity(initEntityID).tags);  // shallow copy
+
+            var foundPreferred;
+            for (var i in langs) {
+                var lang = langs[i];
+                var siteID = lang.replace('-', '_') + 'wiki';
+                if (entity.sitelinks[siteID]) {
+                    foundPreferred = true;
+                    currTags.wikipedia = lang + ':' + entity.sitelinks[siteID].title;
+                    // use the first match
+                    break;
+                }
+            }
+
+            if (!foundPreferred) {
+                // No wikipedia sites available in the user's language or the fallback languages,
+                // default to any wikipedia sitelink
+
+                var wikiSiteKeys = Object.keys(entity.sitelinks).filter(function(site) {
+                    return site.endsWith('wiki');
+                });
+
+                if (wikiSiteKeys.length === 0) {
+                    // if no wikipedia pages are linked to this wikidata entity, delete that tag
+                    if (currTags.wikipedia) {
+                        delete currTags.wikipedia;
+                    }
+                } else {
+                    var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
+                    var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
+                    currTags.wikipedia = wikiLang + ':' + wikiTitle;
+                }
+            }
+
+            // Coalesce the update of wikidata tag into the previous tag change
+            context.overwrite(
+                actionChangeTags(initEntityID, currTags),
+                context.history().undoAnnotation()
+            );
+
+            // do not dispatch.call('change') here, because entity_editor
+            // changeTags() is not intended to be called asynchronously
+
+        });
     }
 
     function setLabelForEntity() {

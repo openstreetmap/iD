@@ -1642,7 +1642,7 @@
     {"key": "wholesale", "description": "🄵 Wholesale"},
     {"key": "width", "description": "🄵 Width (Meters)"},
     {"key": "wikidata", "description": "🄵 Wikidata, 🄵 Wikipedia"},
-    {"key": "wikipedia", "description": "🄵 Wikipedia"},
+    {"key": "wikipedia", "description": "🄵 Wikidata, 🄵 Wikipedia"},
     {"key": "windings", "description": "🄵 Windings"},
     {"key": "windings:configuration", "value": "star", "description": "🄵 Windings Configuration"},
     {"key": "windings:configuration", "value": "delta", "description": "🄵 Windings Configuration"},
