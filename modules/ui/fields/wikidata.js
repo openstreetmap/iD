@@ -233,9 +233,7 @@ export function uiFieldWikidata(field, context) {
     function setLabelForEntity() {
         var label = '';
         if (_wikidataEntity) {
-            if (_wikidataEntity.labels && Object.keys(_wikidataEntity.labels).length > 0) {
-                label = _wikidataEntity.labels[Object.keys(_wikidataEntity.labels)[0]].value;
-            }
+            label = entityPropertyForDisplay(_wikidataEntity, 'labels');
             if (label.length === 0) {
                 label = _wikidataEntity.id.toString();
             }
@@ -263,11 +261,7 @@ export function uiFieldWikidata(field, context) {
 
             setLabelForEntity();
 
-            var description = '';
-
-            if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
-                description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
-            }
+            var description = entityPropertyForDisplay(entity, 'descriptions');
 
             d3_select('.form-field-wikidata button.wiki-link')
                 .classed('disabled', false);
@@ -308,6 +302,22 @@ export function uiFieldWikidata(field, context) {
             }
         }
     };
+
+    function entityPropertyForDisplay(wikidataEntity, propKey) {
+        if (!wikidataEntity[propKey]) return '';
+        var propObj = wikidataEntity[propKey];
+        var langKeys = Object.keys(propObj);
+        if (langKeys.length === 0) return '';
+        // sorted by priority, since we want to show the user's language first if possible
+        var langs = wikidata.languagesToQuery();
+        for (var i in langs) {
+            var lang = langs[i];
+            var valueObj = propObj[lang];
+            if (valueObj && valueObj.value && valueObj.value.length > 0) return valueObj.value;
+        }
+        // default to any available value
+        return propObj[langKeys[0]].value;
+    }
 
 
     wiki.entity = function(val) {
