@@ -201,6 +201,18 @@
       "replace": {"abandoned:highway": "*"}
     },
     {
+      "old": {"highway": "bridleway", "horse": "no"},
+      "replace": {"highway": "path", "horse": "no"}
+    },
+    {
+      "old": {"highway": "cycleway", "bicycle": "no"},
+      "replace": {"highway": "path", "bicycle": "no"}
+    },
+    {
+      "old": {"highway": "footway", "foot": "no"},
+      "replace": {"highway": "path", "foot": "no"}
+    },
+    {
       "old": {"highway": "ford"},
       "replace": {"ford": "*"}
     },
