@@ -1,0 +1,28 @@
+{
+    "icon": "maki-bicycle",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway",
+        "foot": "designated"
+    },
+    "addTags": {
+        "highway": "cycleway",
+        "foot": "designated",
+        "bicycle": "designated"
+    },
+    "removeTags": {
+        "highway": "cycleway",
+        "foot": "designated",
+        "bicycle": "designated"
+    },
+    "terms": [
+        "bicycle and foot path",
+        "mixed-use trail",
+        "multi-use trail",
+        "segregated trail"
+    ],
+    "matchScore": 0.95,
+    "name": "Cycle & Foot Path"
+}

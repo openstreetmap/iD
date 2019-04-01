@@ -4082,6 +4082,11 @@ en:
         name: Cycle Path
         # 'terms: bike path,bicyle path'
         terms: '<translate with synonyms or related terms for ''Cycle Path'', separated by commas>'
+      highway/cycleway/bicycle_foot:
+        # 'highway=cycleway, foot=designated'
+        name: Cycle & Foot Path
+        # 'terms: bicycle and foot path,mixed-use trail,multi-use trail,segregated trail'
+        terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
       highway/cycleway/crossing/marked:
         # 'cycleway=crossing, crossing=marked'
         name: Marked Cycle Crossing

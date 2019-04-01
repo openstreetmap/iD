@@ -5715,6 +5715,10 @@
                     "name": "Cycle Path",
                     "terms": "bike path,bicyle path"
                 },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Cycle & Foot Path",
+                    "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
+                },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
                     "terms": "cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
