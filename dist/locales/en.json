@@ -1685,6 +1685,12 @@
                     "title": "Tag as disconnected",
                     "annotation": "Tagged very close features as disconnected."
                 },
+                "tag_this_as_higher": {
+                    "title": "Tag this as higher"
+                },
+                "tag_this_as_lower": {
+                    "title": "Tag this as lower"
+                },
                 "upgrade_tags": {
                     "title": "Upgrade the tags",
                     "annotation": "Upgraded old tags."

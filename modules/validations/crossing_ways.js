@@ -1,4 +1,4 @@
-import { actionAddMidpoint, actionMergeNodes } from '../actions';
+import { actionAddMidpoint, actionChangeTags, actionMergeNodes } from '../actions';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
 import { osmNode } from '../osm';
 import { t } from '../util/locale';
@@ -482,10 +482,15 @@ export function validationCrossingWays() {
         } else {
             useFixID = 'use_different_layers';
         }
-        fixes.push(new validationIssueFix({
-            icon: useFixIcon,
-            title: t('issues.fix.' + useFixID + '.title')
-        }));
+        if (useFixID === 'use_different_layers') {
+            fixes.push(makeChangeLayerFix('higher', context));
+            fixes.push(makeChangeLayerFix('lower', context));
+        } else {
+            fixes.push(new validationIssueFix({
+                icon: useFixIcon,
+                title: t('issues.fix.' + useFixID + '.title')
+            }));
+        }
         fixes.push(new validationIssueFix({
             icon: 'iD-operation-move',
             title: t('issues.fix.reposition_features.title')
@@ -499,6 +504,50 @@ export function validationCrossingWays() {
             info: { edges: crossing.edges, connectionTags: connectionTags },
             loc: crossing.crossPoint,
             fixes: fixes
+        });
+    }
+
+    function makeChangeLayerFix(higherOrLower, context) {
+        return new validationIssueFix({
+            icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
+            title: t('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+            onClick: function() {
+
+                var mode = context.mode();
+                if (!mode || mode.id !== 'select') return;
+
+                var selectedIDs = mode.selectedIDs();
+                if (selectedIDs.length !== 1) return;
+
+                var selectedID = selectedIDs[0];
+                if (!this.issue.entities.some(function(entity) {
+                    return entity.id === selectedID;
+                })) return;
+
+                var entity = context.hasEntity(selectedID);
+                if (!entity) return;
+
+                var tags = Object.assign({}, entity.tags);   // shallow copy
+                var layer = tags.layer && Number(tags.layer);
+                if (layer && !isNaN(layer)) {
+                    if (higherOrLower === 'higher') {
+                        layer += 1;
+                    } else {
+                        layer -= 1;
+                    }
+                } else {
+                    if (higherOrLower === 'higher') {
+                        layer = 1;
+                    } else {
+                        layer = -1;
+                    }
+                }
+                tags.layer = layer;
+                context.perform(
+                    actionChangeTags(entity.id, tags),
+                    t('operations.change_tags.annotation')
+                );
+            }
         });
     }
 
