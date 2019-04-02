@@ -2,6 +2,7 @@ export { operationCircularize } from './circularize';
 export { operationContinue } from './continue';
 export { operationDelete } from './delete';
 export { operationDisconnect } from './disconnect';
+export { operationDowngrade } from './downgrade';
 export { operationMerge } from './merge';
 export { operationMove } from './move';
 export { operationOrthogonalize } from './orthogonalize';

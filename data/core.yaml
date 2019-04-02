@@ -149,6 +149,23 @@ en:
       has_wikidata_tag:
         single: This feature can't be deleted because it has a Wikidata tag.
         multiple: These features can't be deleted because some have Wikidata tags.
+    downgrade:
+      title: Downgrade
+      description:
+        building_address: Remove all non-address and non-building tags.
+        building: Remove all non-building tags.
+        address: Remove all non-address tags.
+      annotation:
+        building:
+          single: Downgraded a feature to a basic building.
+          multiple: "Downgraded {n} features to basic buildings."
+        address:
+          single: Downgraded a feature to an address.
+          multiple: "Downgraded {n} features to addresses."
+        multiple: "Downgraded {n} features."
+      has_wikidata_tag:
+        single: This feature can't be downgraded because it has a Wikidata tag.
+        multiple: These features can't be downgraded because some have Wikidata tags.
     add_member:
       annotation: Added a member to a relation.
     delete_member:

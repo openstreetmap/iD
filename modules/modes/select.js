@@ -241,15 +241,19 @@ export function modeSelect(context, selectedIDs) {
 
         var operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
-            .filter(function(o) { return o.available() && o.id !== 'delete'; });
+            .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
+
+        var downgradeOperation = Operations.operationDowngrade(selectedIDs, context);
+        // don't allow delete if downgrade is available
+        var lastOperation = downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
 
         // deprecation warning - Radial Menu to be removed in iD v3
         var isRadialMenu = context.storage('edit-menu-style') === 'radial';
         if (isRadialMenu) {
             operations = operations.slice(0,7);
-            operations.unshift(Operations.operationDelete(selectedIDs, context));
+            operations.unshift(lastOperation);
         } else {
-            operations.push(Operations.operationDelete(selectedIDs, context));
+            operations.push(lastOperation);
         }
 
         operations.forEach(function(operation) {
