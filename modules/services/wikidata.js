@@ -134,6 +134,9 @@ export default {
     // }
     //
     getDocs: function(params, callback) {
+
+        var langs = this.languagesToQuery();
+
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
                 callback(err || 'No entity');
@@ -175,10 +178,9 @@ export default {
             }
 
             if (entity.sitelinks) {
-                // must be one of these that we requested..
-                var langs = this.languagesToQuery();
                 var englishLocale = (currentLocale.split('-', 2)[0].toLowerCase() === 'en');
 
+                // must be one of these that we requested..
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference
                     var w = langs[i] + 'wiki';
                     if (entity.sitelinks[w]) {
