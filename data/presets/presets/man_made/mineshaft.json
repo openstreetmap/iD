@@ -13,11 +13,11 @@
         "cave",
         "mine shaft",
         "tunnel",
-        "underground",
-        "vertical mine entrance"
+        "underground"
     ],
     "tags": {
         "man_made": "mineshaft"
     },
-    "name": "Mineshaft"
+    "name": "Mineshaft",
+    "subtitle": "Vertical Mine Entrance"
 }

@@ -5736,8 +5736,8 @@ en:
       man_made/mineshaft:
         # man_made=mineshaft
         name: Mineshaft
-        subtitle: '<translate with short summary or explanation of ''Mineshaft'', if needed>'
-        # 'terms: cave,mine shaft,tunnel,underground,vertical mine entrance'
+        subtitle: Vertical Mine Entrance
+        # 'terms: cave,mine shaft,tunnel,underground'
         terms: '<translate with synonyms or related terms for ''Mineshaft'', separated by commas>'
       man_made/monitoring_station:
         # man_made=monitoring_station

@@ -6606,7 +6606,8 @@
                 },
                 "man_made/mineshaft": {
                     "name": "Mineshaft",
-                    "terms": "cave,mine shaft,tunnel,underground,vertical mine entrance"
+                    "subtitle": "Vertical Mine Entrance",
+                    "terms": "cave,mine shaft,tunnel,underground"
                 },
                 "man_made/monitoring_station": {
                     "name": "Monitoring Station",
