@@ -67,12 +67,7 @@ export function validationAlmostJunction() {
             // don't flag issue if connecting the ways would cause self-intersection
             if (geoHasSelfIntersections(testNodes, nodeID)) return;
 
-            results.push({
-                node: node,
-                wid: connectionInfo.wid,
-                edge: connectionInfo.edge,
-                cross_loc: connectionInfo.cross_loc
-            });
+            results.push(connectionInfo);
         });
 
         return results;
@@ -111,6 +106,7 @@ export function validationAlmostJunction() {
                 var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
                 if (crossLoc) {
                     return {
+                        node: tipNode,
                         wid: way2.id,
                         edge: [nA.id, nB.id],
                         cross_loc: crossLoc
