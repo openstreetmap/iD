@@ -151,7 +151,7 @@ export function uiPresetIcon() {
         var isiDIcon = picon && !(isMaki || isTemaki || isFa);
         var isCategory = !p.setTags;
         var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
-        var drawVertex = picon && geom === 'vertex' && !isFallback;
+        var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
         var isFramed = (drawVertex || drawArea || drawLine);
