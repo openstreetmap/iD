@@ -1,4 +1,6 @@
 import deepEqual from 'fast-deep-equal';
+
+import { geoVecEqual } from '../geo';
 import { utilArrayDifference } from '../util';
 
 
@@ -12,72 +14,65 @@ import { utilArrayDifference } from '../util';
  */
 export function coreDifference(base, head) {
     var _changes = {};
+    var _didChange = {};  // 'addition', 'deletion', 'geometry', 'properties'
     var _diff = {};
-    var _length = 0;
     var i, k, h, b, keys;
 
-    function changed(h, b) {
-        if (h === b) return false;
-        if (!h || !b) return true;
 
-        if (h.loc || b.loc) {
-            if (!h.loc && b.loc || h.loc && !b.loc ||
-                h.loc[0] !== b.loc[0] || h.loc[1] !== b.loc[1]) return true;
+    function checkEntityID(id) {
+        var h = head.entities[id];
+        var b = base.entities[id];
+
+        if (h === b) return;
+        if (_changes[id]) return;
+
+        if (!h && b) {
+            _changes[id] = { base: b, head: h };
+            _didChange.deletion = true;
+            return;
         }
-        if (h.nodes || b.nodes) {
-            if (!deepEqual(h.nodes, b.nodes)) return true;
+        if (h && !b) {
+            _changes[id] = { base: b, head: h };
+            _didChange.addition = true;
+            return;
         }
-        if (h.members || b.members) {
-            if (!deepEqual(h.members, b.members)) return true;
-        }
-        return !deepEqual(h.tags, b.tags);
-    }
 
-
-    keys = Object.keys(head.entities);
-    for (i = 0; i < keys.length; i++) {
-        k = keys[i];
-        h = head.entities[k];
-        b = base.entities[k];
-        if (changed(h, b)) {
-            _changes[k] = { base: b, head: h };
-            _length++;
-        }
-    }
-
-    keys = Object.keys(base.entities);
-    for (i = 0; i < keys.length; i++) {
-        k = keys[i];
-        h = head.entities[k];
-        b = base.entities[k];
-        if (!_changes[k] && changed(h, b)) {
-            _changes[k] = { base: b, head: h };
-            _length++;
-        }
-    }
-
-
-    function addParents(parents, result) {
-        for (var i = 0; i < parents.length; i++) {
-            var parent = parents[i];
-
-            if (parent.id in result)
-                continue;
-
-            result[parent.id] = parent;
-            addParents(head.parentRelations(parent), result);
+        if (h && b) {
+            if (h.members && b.members && !deepEqual(h.members, b.members)) {
+                _changes[id] = { base: b, head: h };
+                _didChange.geometry = true;
+                _didChange.properties = true;
+                return;
+            }
+            if (h.loc && b.loc && !geoVecEqual(h.loc, b.loc)) {
+                _changes[id] = { base: b, head: h };
+                _didChange.geometry = true;
+            }
+            if (h.nodes && b.nodes && !deepEqual(h.nodes, b.nodes)) {
+                _changes[id] = { base: b, head: h };
+                _didChange.geometry = true;
+            }
+            if (h.tags && b.tags && !deepEqual(h.tags, b.tags)) {
+                _changes[id] = { base: b, head: h };
+                _didChange.properties = true;
+            }
         }
     }
+
+    Object.keys(head.entities).forEach(checkEntityID);
+    Object.keys(base.entities).forEach(checkEntityID);
 
 
     _diff.length = function length() {
-        return _length;
+        return Object.keys(_changes).length;
     };
 
 
     _diff.changes = function changes() {
         return _changes;
     };
+
+    _diff.didChange = _didChange;
 
 
     _diff.extantIDs = function extantIDs() {
@@ -123,22 +118,6 @@ export function coreDifference(base, head) {
     _diff.summary = function summary() {
         var relevant = {};
 
-        function addEntity(entity, graph, changeType) {
-            relevant[entity.id] = {
-                entity: entity,
-                graph: graph,
-                changeType: changeType
-            };
-        }
-
-        function addParents(entity) {
-            var parents = head.parentWays(entity);
-            for (var j = parents.length - 1; j >= 0; j--) {
-                var parent = parents[j];
-                if (!(parent.id in relevant)) addEntity(parent, head, 'modified');
-            }
-        }
-
         var keys = Object.keys(_changes);
         for (var i = 0; i < keys.length; i++) {
             var change = _changes[keys[i]];
@@ -170,6 +149,25 @@ export function coreDifference(base, head) {
         }
 
         return Object.values(relevant);
+
+
+        function addEntity(entity, graph, changeType) {
+            relevant[entity.id] = {
+                entity: entity,
+                graph: graph,
+                changeType: changeType
+            };
+        }
+
+        function addParents(entity) {
+            var parents = head.parentWays(entity);
+            for (var j = parents.length - 1; j >= 0; j--) {
+                var parent = parents[j];
+                if (!(parent.id in relevant)) {
+                    addEntity(parent, head, 'modified');
+                }
+            }
+        }
     };
 
 
@@ -212,6 +210,17 @@ export function coreDifference(base, head) {
         }
 
         return result;
+
+
+        function addParents(parents, result) {
+            for (var i = 0; i < parents.length; i++) {
+                var parent = parents[i];
+                if (parent.id in result) continue;
+
+                result[parent.id] = parent;
+                addParents(head.parentRelations(parent), result);
+            }
+        }
     };
 
 
