@@ -468,7 +468,7 @@ export function coreContext() {
         validator.validate();
     });
     // re-run validation upon a significant graph change
-    history.on('annotatedChange', function(difference) {
+    history.on('change', function(difference) {
         if (difference) {
             validator.validate();
         }

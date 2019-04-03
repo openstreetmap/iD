@@ -14,7 +14,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'annotatedChange', 'merge', 'restore', 'undone', 'redone');
+    var dispatch = d3_dispatch('change', 'merge', 'restore', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
@@ -56,7 +56,7 @@ export function coreHistory(context) {
         var actionResult = _act(args, t);
         _stack.push(actionResult);
         _index++;
-        return change(previous, actionResult.annotation);
+        return change(previous);
     }
 
 
@@ -66,7 +66,7 @@ export function coreHistory(context) {
         // assert(_index == _stack.length - 1)
         var actionResult = _act(args, t);
         _stack[_index] = actionResult;
-        return change(previous, actionResult.annotation);
+        return change(previous);
     }
 
 
@@ -81,20 +81,15 @@ export function coreHistory(context) {
         var actionResult = _act(args, t);
         _stack.push(actionResult);
         _index++;
-        return change(previous, actionResult.annotation);
+        return change(previous);
     }
 
 
     // determine difference and dispatch a change event
-    function change(previous, isAnnotated) {
+    function change(previous) {
         var difference = coreDifference(previous, history.graph());
         if (!_pausedGraph) {
             dispatch.call('change', this, difference);
-            if (isAnnotated) {
-                // actions like dragging a node can fire lots of changes,
-                // so use 'annotatedChange' to listen for grouped undo/redo changes
-                dispatch.call('annotatedChange', this, difference);
-            }
         }
         return difference;
     }
@@ -209,7 +204,7 @@ export function coreHistory(context) {
             }
 
             dispatch.call('undone', this, _stack[_index], previousStack);
-            return change(previous, true);
+            return change(previous);
         },
 
 
@@ -229,7 +224,7 @@ export function coreHistory(context) {
                 }
             }
 
-            return change(previous, true);
+            return change(previous);
         },
 
 
@@ -244,7 +239,7 @@ export function coreHistory(context) {
             if (_pausedGraph) {
                 var previous = _pausedGraph;
                 _pausedGraph = null;
-                return change(previous, true);
+                return change(previous);
             }
         },
 
