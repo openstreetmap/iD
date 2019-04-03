@@ -230,7 +230,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
 
     preset.addTags = preset.addTags || preset.tags || {};
-    preset.setTags = function(tags, geometry) {
+    preset.setTags = function(tags, geometry, skipFieldDefaults) {
         var addTags = preset.addTags;
         var k;
 
@@ -265,7 +265,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 }
             }
         }
-        if (geometry) {
+        if (geometry && !skipFieldDefaults) {
             for (var f in preset.fields) {
                 var field = preset.fields[f];
                 if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {

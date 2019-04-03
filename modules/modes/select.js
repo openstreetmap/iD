@@ -245,7 +245,7 @@ export function modeSelect(context, selectedIDs) {
 
         var downgradeOperation = Operations.operationDowngrade(selectedIDs, context);
         // don't allow delete if downgrade is available
-        var lastOperation = downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
+        var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
 
         // deprecation warning - Radial Menu to be removed in iD v3
         var isRadialMenu = context.storage('edit-menu-style') === 'radial';
