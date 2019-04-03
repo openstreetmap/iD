@@ -51,6 +51,10 @@ export function t(s, o, loc) {
     }
 
     if (loc !== 'en') {
+        if (s.startsWith('presets.presets.') && s.endsWith('.subtitle')) {
+            // don't fallback to English for preset subtitles
+            return '';
+        }
         return t(s, o, 'en');
     }
 
