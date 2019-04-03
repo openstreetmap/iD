@@ -57,7 +57,7 @@ export function validationAlmostJunction() {
 
         if (isExtendableCandidate(nodeFirst, way, graph)) {
             var connNearFirst = canConnectByExtend(way, 0, graph, tree);
-            if (connNearFirst !== null) {
+            if (connNearFirst) {
                 testNodes = graph.childNodes(way).slice();   // shallow copy
                 index = 0;  // first
                 testNodes[index] = testNodes[index].move(connNearFirst.cross_loc);
@@ -76,10 +76,10 @@ export function validationAlmostJunction() {
 
         if (isExtendableCandidate(nodeLast, way, graph)) {
             var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
-            if (connNearLast !== null) {
+            if (connNearLast) {
                 testNodes = graph.childNodes(way).slice();   // shallow copy
                 index = testNodes.length - 1;  // last
-                testNodes[index] = testNodes[index].move(connNearFirst.cross_loc);
+                testNodes[index] = testNodes[index].move(connNearLast.cross_loc);
 
                 // don't flag issue if connecting the ways would cause self-intersection
                 if (!geoHasSelfIntersections(testNodes, nodeLast.id)) {
@@ -126,7 +126,7 @@ export function validationAlmostJunction() {
                 var nA = graph.entity(way2.nodes[j]);
                 var nB = graph.entity(way2.nodes[j + 1]);
                 var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
-                if (crossLoc !== null) {
+                if (crossLoc) {
                     return {
                         wid: way2.id,
                         edge: [nA.id, nB.id],
