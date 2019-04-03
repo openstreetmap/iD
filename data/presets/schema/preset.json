@@ -6,7 +6,13 @@
         "name": {
             "description": "The English name for the feature",
             "type": "string",
+            "maxLength": 35,
             "required": true
+        },
+        "subtitle": {
+            "description": "Short explanation or summary of the feature in American English",
+            "type": "string",
+            "maxLength": 35
         },
         "geometry": {
             "description": "Valid geometry types for the feature",

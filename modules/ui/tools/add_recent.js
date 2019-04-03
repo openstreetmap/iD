@@ -116,7 +116,7 @@ export function uiToolAddRecent(context) {
             var favoritesCount = context.presets().getFavorites().length;
 
             var modes = items.map(function(d, index) {
-                var presetName = d.preset.name().split(' – ')[0];
+                var presetName = d.preset.name();
                 var markerClass = 'add-preset add-' + d.geometry + ' add-preset-' + presetName.replace(/\s+/g, '_')
                     + '-' + d.geometry + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
                 if (d.preset.isFallback()) {

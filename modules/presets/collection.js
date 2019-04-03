@@ -58,24 +58,26 @@ export function presetCollection(collection) {
                 return index === 0;
             }
 
-            function sortNames(a, b) {
-                var aCompare = (a.suggestion ? a.originalName : a.name()).toLowerCase();
-                var bCompare = (b.suggestion ? b.originalName : b.name()).toLowerCase();
+            function getPropertySortFunction(propFn) {
+                return function(a, b) {
+                    var aCompare = (a[propFn]()).toLowerCase();
+                    var bCompare = (b[propFn]()).toLowerCase();
 
-                // priority if search string matches preset name exactly - #4325
-                if (value === aCompare) return -1;
-                if (value === bCompare) return 1;
+                    // priority if search string matches preset name exactly - #4325
+                    if (value === aCompare) return -1;
+                    if (value === bCompare) return 1;
 
-                // priority for higher matchScore
-                var i = b.originalScore - a.originalScore;
-                if (i !== 0) return i;
+                    // priority for higher matchScore
+                    var i = b.originalScore - a.originalScore;
+                    if (i !== 0) return i;
 
-                // priority if search string appears earlier in preset name
-                i = aCompare.indexOf(value) - bCompare.indexOf(value);
-                if (i !== 0) return i;
+                    // priority if search string appears earlier in preset name
+                    i = aCompare.indexOf(value) - bCompare.indexOf(value);
+                    if (i !== 0) return i;
 
-                // priority for shorter preset names
-                return aCompare.length - bCompare.length;
+                    // priority for shorter preset names
+                    return aCompare.length - bCompare.length;
+                };
             }
 
             var pool = this.collection;
@@ -96,7 +98,14 @@ export function presetCollection(collection) {
             var leading_name = searchable
                 .filter(function(a) {
                     return leading(a.name().toLowerCase());
-                }).sort(sortNames);
+                }).sort(getPropertySortFunction('name'));
+
+            // matches value to preset.subtitle
+            var leading_subtitle = searchable
+                .filter(function(a) {
+                    if (!a.subtitle || !a.subtitle()) return false;
+                    return leading(a.subtitle().toLowerCase());
+                }).sort(getPropertySortFunction('subtitle'));
 
             // matches value to preset.terms values
             var leading_terms = searchable
@@ -115,7 +124,7 @@ export function presetCollection(collection) {
             var leading_suggestions = suggestions
                 .filter(function(a) {
                     return leadingStrict(a.originalName.toLowerCase());
-                }).sort(sortNames);
+                }).sort(getPropertySortFunction('name'));
 
             // finds close matches to value in preset.name
             var similar_name = searchable
@@ -149,6 +158,7 @@ export function presetCollection(collection) {
                 });
 
             var results = leading_name.concat(
+                leading_subtitle,
                 leading_suggestions,
                 leading_terms,
                 leading_tag_values,

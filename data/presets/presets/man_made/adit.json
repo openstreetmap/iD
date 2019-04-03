@@ -12,12 +12,12 @@
     ],
     "terms": [
         "cave",
-        "horizontal mine entrance",
         "tunnel",
         "underground"
     ],
     "tags": {
         "man_made": "adit"
     },
-    "name": "Adit"
+    "name": "Adit",
+    "subtitle": "Horizontal Mine Entrance"
 }

@@ -435,12 +435,11 @@ export function uiToolSearchAdd(context) {
         });
 
         label.each(function(d) {
-            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
             d3_select(this)
                 .append('div')
                 .attr('class', 'label-inner')
                 .selectAll('.namepart')
-                .data(d.name().split(' – '))
+                .data(d.nameParts())
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')

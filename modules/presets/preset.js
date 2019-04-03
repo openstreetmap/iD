@@ -139,16 +139,28 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
 
     preset.originalName = preset.name || '';
+    preset.originalSubtitle = preset.subtitle || '';
 
 
     preset.name = function() {
+        return preset.t('name', { 'default': preset.originalName });
+    };
+
+    preset.subtitle = function() {
         if (preset.suggestion) {
             var path = id.split('/');
             path.pop();  // remove brand name
-            // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-            return preset.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
+            // use the suggestion's base preset name as the subtitle
+            return t('presets.presets.' + path.join('/') + '.name');
         }
-        return preset.t('name', { 'default': preset.originalName });
+        return preset.t('subtitle', { 'default': preset.originalSubtitle });
+    };
+
+    preset.nameParts = function() {
+        var parts = [preset.name()];
+        var subtitle = preset.subtitle();
+        if (subtitle) parts.push(subtitle);
+        return parts;
     };
 
 

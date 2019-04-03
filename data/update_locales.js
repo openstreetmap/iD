@@ -92,17 +92,24 @@ function getResource(resource, callback) {
 
                 } else {
                     if (resource === 'presets') {
-                        // remove terms that were not really translated
+                        // remove terms and subtitles that were not really translated
                         var presets = (result.presets && result.presets.presets) || {};
                         for (const key of Object.keys(presets)) {
                             var preset = presets[key];
-                            if (!preset.terms) continue;
-                            preset.terms = preset.terms.replace(/<.*>/, '').trim();
-                            if (!preset.terms) {
-                                delete preset.terms;
-                                if (!Object.keys(preset).length) {
-                                    delete presets[key];
+                            if (preset.terms) {
+                                preset.terms = preset.terms.replace(/<.*>/, '').trim();
+                                if (!preset.terms) {
+                                    delete preset.terms;
                                 }
+                            }
+                            if (preset.subtitle) {
+                                preset.subtitle = preset.subtitle.replace(/<.*>/, '').trim();
+                                if (!preset.subtitle) {
+                                    delete preset.subtitle;
+                                }
+                            }
+                            if (!Object.keys(preset).length) {
+                                delete presets[key];
                             }
                         }
                     }

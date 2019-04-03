@@ -281,6 +281,7 @@ function generatePresets(tstrings, faIcons) {
 
         tstrings.presets[id] = {
             name: preset.name,
+            subtitle: preset.subtitle,
             terms: (preset.terms || []).join(',')
         };
 
@@ -343,6 +344,9 @@ function generateTranslations(fields, presets, tstrings) {
             preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
         } else {
             delete preset.terms;
+        }
+        if (!p.subtitle) {
+            preset.subtitle = '<translate with short summary or explanation of \'' + preset.name + '\', if needed>';
         }
     });
 

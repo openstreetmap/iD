@@ -17,10 +17,12 @@
         "nordic",
         "crosscountry",
         "skating",
-        "piste"
+        "piste",
+        "XC skiing trail"
     ],
     "tags": {
         "piste:type": "nordic"
     },
-    "name": "Nordic or Crosscountry Piste/Ski Trail"
+    "name": "Cross-country Ski Trail",
+    "subtitle": "Nordic Piste"
 }

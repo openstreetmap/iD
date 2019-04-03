@@ -6232,6 +6232,7 @@
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Center",
+                    "subtitle": "Gambling Arcade",
                     "terms": "gambling,slot machine"
                 },
                 "leisure/amusement_arcade": {
@@ -6528,7 +6529,8 @@
                 },
                 "man_made/adit": {
                     "name": "Adit",
-                    "terms": "cave,horizontal mine entrance,tunnel,underground"
+                    "subtitle": "Horizontal Mine Entrance",
+                    "terms": "cave,tunnel,underground"
                 },
                 "man_made/antenna": {
                     "name": "Antenna",
@@ -7019,7 +7021,8 @@
                     "terms": "water board,utility"
                 },
                 "piste/downhill": {
-                    "name": "Downhill Piste/Ski Run",
+                    "name": "Downhill Ski Trail",
+                    "subtitle": "Alpine Piste",
                     "terms": "ski,alpine,snowboard,downhill,piste"
                 },
                 "piste/downhill/halfpipe": {
@@ -7035,8 +7038,9 @@
                     "terms": "ice,skating,ski,piste"
                 },
                 "piste/nordic": {
-                    "name": "Nordic or Crosscountry Piste/Ski Trail",
-                    "terms": "ski,nordic,crosscountry,skating,piste"
+                    "name": "Cross-country Ski Trail",
+                    "subtitle": "Nordic Piste",
+                    "terms": "ski,nordic,crosscountry,skating,piste,XC skiing trail"
                 },
                 "piste/piste": {
                     "name": "Winter Sport Trails",
