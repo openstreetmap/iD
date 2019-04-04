@@ -1294,6 +1294,13 @@ en:
       title: Generic Names
       message: '{feature} has the generic name "{name}"'
       tip: "Names should be the actual, on-the-ground names of features."
+    incompatible_source:
+      title: Incompatible Data Sources
+      google:
+        feature:
+          message: '{feature} lists Google as a data source'
+        tip: "Google products are proprietary and must not be used as references."
+      tip: "Source data must be licensed in a manner compatible with OpenStreetMap."
     many_deletions:
       title: Many Deletions
       points-lines-areas:
@@ -1362,6 +1369,8 @@ en:
         annotation: Removed a generic name.
       remove_private_info:
         annotation: Removed private information.
+      remove_proprietary_data:
+        title: Remove any proprietary data
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.

@@ -2,6 +2,7 @@ export { validationAlmostJunction } from './almost_junction';
 export { validationCrossingWays } from './crossing_ways';
 export { validationDisconnectedWay } from './disconnected_way';
 export { validationGenericName } from './generic_name';
+export { validationIncompatibleSource } from './incompatible_source';
 export { validationManyDeletions } from './many_deletions';
 export { validationMaprules } from './maprules';
 export { validationMissingRole } from './missing_role';
