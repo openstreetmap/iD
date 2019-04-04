@@ -97,6 +97,50 @@ fields as `shop`.
 In both explicit and implicit inheritance, fields for keys that define the
 preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
 
+##### `geometry`
+
+An array of possible geometry types that a feature can have in order to match this preset.
+
+* `point`: an OSM node that is not a member of any way
+* `vertex`: an OSM node that is a member of one or more ways
+* `line`: an OSM way that is not an area
+* `area`: an OSM way that is closed/circular (the first and last nodes are the same) or a `type=multipolygon` relation
+* `relation`: an OSM relation
+
+Closed ways can be treated as both `line` or `area` geometry. If a preset allows both, iD will add an additional `area=yes` tag when choosing the preset for an area feature.
+
+This property is required. There is no default.
+
+##### `tags`
+
+An object with the `"key": "value"` tags a feature must have to match this preset. A `"*"` wildcard value can be set to have this preset match any value for that key.
+
+A features can only match one preset even if its tags and geometry could technically match more than one. iD will pick the best match based on `matchScore`, the number of tags, and the use of wildcard values.
+
+This property is required. There is no default.
+
+##### `addTags`/`removeTags`
+
+Objects with the tags that are added to or removed from the feature when selected or deselecting this preset. These both default to the value of `tags`.
+
+Generally, these properties will be equivalent and should be supersets of `tags`.
+
+iD's validator will recommend that users add missing tags from `addTags` to matching features.
+
+For example, the Bridge preset has these properties: 
+
+```
+    "tags": {
+        "man_made": "bridge"
+    },
+    "addTags": {
+        "man_made": "bridge",
+        "layer": "1"
+    },
+```
+
+When adding a feature with this preset, it will be given the tags `man_made=bridge` and `layer=1`. The user could then change `layer` to `3`, for instance, and the feature would still match the preset because it still has `man_made=bridge`. If the user removes the `layer` tag altogether, iD will recommend adding it back with a value of `1`.
+
 ##### `icon`
 
 The name of a local SVG icon file. You can use icons from any of the following open source icon sets.
@@ -118,11 +162,21 @@ For example, `imageURL` is used to specify the logos of brand presets from the [
 
 Bitmap images should be at least 100x100px to look good at 50x50pt on high-resolution screens.
 
+##### `matchScore`
+
+A number that ranks this preset against others that match the feature.
+
+For example, a feature with `amenity=cafe` and `building=commercial` will match the Cafe preset instead of the Commercial Building preset because Commercial Building has a lower `matchScore`.
+
+The default is `1.0`.
+
 ##### `name`
 
 The primary name of the feature type in American English.
 
 Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
+
+This property is required. There is no default.
 
 ##### `replacement`
 
@@ -382,13 +436,7 @@ For example:
 "point": {
     "name": "Point",
     "tags": {},
-    "geometry": ["point"],
-    "matchScore": 0.1
-},
-"vertex": {
-    "name": "Other",
-    "tags": {},
-    "geometry": ["vertex"],
+    "geometry": ["point", "vertex"],
     "matchScore": 0.1
 },
 "relation": {
