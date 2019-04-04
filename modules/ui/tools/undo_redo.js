@@ -81,7 +81,9 @@ export function uiToolUndoRedo(context) {
             .on('drawn.undo_redo', debouncedUpdate);
 
         context.history()
-            .on('change.undo_redo', update);
+            .on('change.undo_redo', function(difference) {
+                if (difference) update();
+            });
 
         context
             .on('enter.undo_redo', update);

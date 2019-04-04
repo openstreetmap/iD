@@ -263,7 +263,7 @@ export function rendererMap(context) {
     }
 
 
-    function drawVector(difference, extent) {
+    function drawEditable(difference, extent) {
         var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
@@ -576,15 +576,13 @@ export function rendererMap(context) {
 
         if (!difference) {
             supersurface.call(context.background());
+            wrapper.call(drawLayers);
         }
-
-        wrapper
-            .call(drawLayers);
 
         // OSM
         if (map.editable()) {
             context.loadTiles(projection);
-            drawVector(difference, extent);
+            drawEditable(difference, extent);
         } else {
             editOff();
         }

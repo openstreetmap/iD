@@ -16,8 +16,8 @@ export function uiToolSave(context) {
         label: t('save.title')
     };
 
-    var button = null,
-        tooltipBehavior = null;
+    var button = null;
+    var tooltipBehavior = null;
     var history = context.history();
     var key = uiCmd('⌘S');
     var _numChanges = 0;
@@ -102,8 +102,11 @@ export function uiToolSave(context) {
         context.keybinding()
             .on(key, save, true);
 
+
         context.history()
-            .on('change.save', updateCount);
+            .on('change.save', function(difference) {
+                if (difference) updateCount();
+            });
 
         context
             .on('enter.save', function() {

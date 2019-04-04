@@ -239,8 +239,9 @@ export function uiEntityEditor(context) {
             .on('change.entity-editor', historyChanged);
 
 
-        function historyChanged() {
+        function historyChanged(difference) {
             if (_state === 'hide') return;
+            if (!difference || !difference.didChange.properties) return;
 
             var entity = context.hasEntity(_entityID);
             var graph = context.graph();
