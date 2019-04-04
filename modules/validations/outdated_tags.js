@@ -54,7 +54,7 @@ export function validationOutdatedTags() {
                             function(graph) {
                                 if (replacementPreset) {
                                     var oldPreset = context.presets().match(graph.entity(entityID), context.graph());
-                                    graph = actionChangePreset(entityID, oldPreset, replacementPreset)(graph);
+                                    graph = actionChangePreset(entityID, oldPreset, replacementPreset, true /* skip field defaults */)(graph);
                                     deprecatedTagsArray = graph.entity(entityID).deprecatedTags();
                                 }
                                 deprecatedTagsArray.forEach(function(deprecatedTags) {
