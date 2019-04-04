@@ -16,5 +16,6 @@
     "tags": {
         "man_made": "tower"
     },
-    "name": "Tower"
+    "name": "Tower",
+    "subtitle": "Building constructed for its height"
 }

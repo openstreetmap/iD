@@ -6691,6 +6691,7 @@
                 },
                 "man_made/tower": {
                     "name": "Tower",
+                    "subtitle": "Building constructed for its height",
                     "terms": ""
                 },
                 "man_made/tower/bell_tower": {
@@ -8500,7 +8501,7 @@
                 },
                 "waterway/waterfall": {
                     "name": "Waterfall",
-                    "subtitle": "Water flowing down a steep drop",
+                    "subtitle": "Where water flows down a steep drop",
                     "terms": "fall"
                 },
                 "waterway/weir": {

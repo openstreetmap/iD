@@ -5819,7 +5819,7 @@ en:
       man_made/tower:
         # man_made=tower
         name: Tower
-        subtitle: '<translate with short summary or explanation of ''Tower'', if needed>'
+        subtitle: Building constructed for its height
         terms: '<translate with synonyms or related terms for ''Tower'', separated by commas>'
       man_made/tower/bell_tower:
         # 'man_made=tower, tower:type=bell_tower'
@@ -8336,7 +8336,7 @@ en:
       waterway/waterfall:
         # waterway=waterfall
         name: Waterfall
-        subtitle: Water flowing down a steep drop
+        subtitle: Where water flows down a steep drop
         # 'terms: fall'
         terms: '<translate with synonyms or related terms for ''Waterfall'', separated by commas>'
       waterway/weir:
