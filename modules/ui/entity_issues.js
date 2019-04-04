@@ -131,7 +131,7 @@ export function uiEntityIssues(context) {
         var fixLists = items.selectAll('.issue-fix-list');
 
         var fixes = fixLists.selectAll('.issue-fix-item')
-            .data(function(d) { return d.fixes; })
+            .data(function(d) { return d.fixes ? d.fixes : []; })
             .enter()
             .append('li')
             .attr('class', function(d) {
