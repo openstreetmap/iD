@@ -1336,6 +1336,7 @@ a.hide-toggle {
 }
 .preset-list-button .label-inner .namepart:nth-child(2) {
     font-weight: normal;
+    font-size: 11px;
 }
 
 .preset-list-button:hover .label,
