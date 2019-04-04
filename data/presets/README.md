@@ -127,7 +127,7 @@ Generally, these properties will be equivalent and should be supersets of `tags`
 
 iD's validator will recommend that users add missing tags from `addTags` to matching features.
 
-For example, the Bridge preset has these properties: 
+For example, the Bridge preset has these properties:
 
 ```
     "tags": {
@@ -177,6 +177,10 @@ The primary name of the feature type in American English.
 Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
 
 This property is required. There is no default.
+
+##### `subtitle`
+
+An optional summary or explanation of the feature in American English. This is displayed alongside `name` in some parts of the UI.
 
 ##### `replacement`
 
