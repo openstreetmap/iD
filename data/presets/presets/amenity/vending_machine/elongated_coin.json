@@ -19,5 +19,6 @@
         "key": "vending",
         "value": "elongated_coin"
     },
-    "name": "Flat Coin Vending Machine"
+    "name": "Flat Coin Vending Machine",
+    "subtitle": "Presses coins into souvenirs"
 }

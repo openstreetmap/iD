@@ -19,5 +19,10 @@
         "amenity": "theatre",
         "theatre:type": "amphi"
     },
-    "name": "Amphitheatre"
+    "reference": {
+        "key": "theatre:type",
+        "value":  "amphi"
+    },
+    "name": "Amphitheatre",
+    "subtitle": "Open-air theater"
 }

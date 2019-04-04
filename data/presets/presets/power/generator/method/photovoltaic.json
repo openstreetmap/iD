@@ -37,5 +37,6 @@
         "key": "generator:method",
         "value": "photovoltaic"
     },
-    "name": "Solar Panel"
+    "name": "Solar Panel",
+    "subtitle": "Generates electricity from sunlight"
 }

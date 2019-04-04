@@ -32,5 +32,6 @@
     "tags": {
         "amenity": "cinema"
     },
-    "name": "Cinema"
+    "name": "Cinema",
+    "subtitle": "Movie theater"
 }

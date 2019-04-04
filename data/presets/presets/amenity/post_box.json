@@ -20,5 +20,6 @@
         "letter",
         "post"
     ],
-    "name": "Mailbox"
+    "name": "Mailbox",
+    "subtitle": "Drop box for outgoing post"
 }

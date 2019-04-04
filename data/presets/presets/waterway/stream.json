@@ -44,5 +44,6 @@
     "tags": {
         "waterway": "stream"
     },
-    "name": "Stream"
+    "name": "Stream",
+    "subtitle": "Minor natural waterway"
 }

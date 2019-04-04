@@ -174,13 +174,41 @@ The default is `1.0`.
 
 The primary name of the feature type in American English.
 
+Names use [title case](https://en.wikipedia.org/wiki/Letter_case#Title_case), where most words are capitalized.
+
 Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
 
 This property is required. There is no default.
 
 ##### `subtitle`
 
-An optional summary or explanation of the feature in American English. This is displayed alongside `name` in some parts of the UI.
+An optional summary or explanation of the feature in American English. This is displayed alongside `name` in some parts of the UI. Its purpose is to help mappers accurately decide what preset to use.
+
+Subtitles use [sentence case](https://en.wikipedia.org/wiki/Letter_case#Sentence_case), where just the first word is capitalized.
+
+Subtitles can be noun phrases, where they further specify what the preset _is_.
+
+```
+    "name": "Stream",
+    "subtitle": "Minor natural waterway"
+```
+
+```
+    "name": "Ford",
+    "subtitle": "Where water flows over a road"
+```
+
+Alternatively, subtitles can be verb phrases, where they specify what the preset _does_.
+
+```
+    "name": "Bar",
+    "subtitle": "Serves alcoholic drinks"
+```
+
+```
+    "name": "Flat Coin Vending Machine",
+    "subtitle": "Presses coins into souvenirs"
+```
 
 ##### `replacement`
 

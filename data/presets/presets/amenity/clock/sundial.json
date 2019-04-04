@@ -23,5 +23,6 @@
         "key": "display",
         "value": "sundial"
     },
-    "name": "Sundial"
+    "name": "Sundial",
+    "subtitle": "Tells time from the sun"
 }

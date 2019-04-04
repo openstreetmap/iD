@@ -32,5 +32,6 @@
     "tags": {
         "waterway": "river"
     },
-    "name": "River"
+    "name": "River",
+    "subtitle": "Major natural waterway"
 }

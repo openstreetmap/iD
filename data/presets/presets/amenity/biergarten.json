@@ -22,5 +22,6 @@
         "bier",
         "booze"
     ],
-    "name": "Biergarten"
+    "name": "Biergarten",
+    "subtitle": "Serves beer outside"
 }

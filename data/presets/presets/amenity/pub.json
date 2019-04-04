@@ -38,5 +38,6 @@
         "bier",
         "booze"
     ],
-    "name": "Pub"
+    "name": "Pub",
+    "subtitle": "Serves beer & food"
 }

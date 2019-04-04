@@ -22,5 +22,6 @@
         "microbrewery",
         "small batch brewery"
     ],
-    "name": "Brewpub"
+    "name": "Brewpub",
+    "subtitle": "Pub with a microbrewery"
 }

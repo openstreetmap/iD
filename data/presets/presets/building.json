@@ -23,5 +23,6 @@
     },
     "matchScore": 0.6,
     "terms": [],
-    "name": "Building"
+    "name": "Building",
+    "subtitle": "Structure"
 }

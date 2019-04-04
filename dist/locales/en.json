@@ -4257,6 +4257,7 @@
                 },
                 "amenity/bar": {
                     "name": "Bar",
+                    "subtitle": "Serves alcoholic drinks",
                     "terms": "dive,beer,bier,booze"
                 },
                 "amenity/bar/lgbtq": {
@@ -4285,6 +4286,7 @@
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
+                    "subtitle": "Serves beer outside",
                     "terms": "beer,bier,booze"
                 },
                 "amenity/boat_rental": {
@@ -4329,6 +4331,7 @@
                 },
                 "amenity/cinema": {
                     "name": "Cinema",
+                    "subtitle": "Movie theater",
                     "terms": "drive-in,film,flick,movie,theater,picture,show,screen"
                 },
                 "amenity/clinic": {
@@ -4349,6 +4352,7 @@
                 },
                 "amenity/clock/sundial": {
                     "name": "Sundial",
+                    "subtitle": "Tells time from the sun",
                     "terms": "gnomon,shadow"
                 },
                 "amenity/college": {
@@ -4388,7 +4392,8 @@
                     "terms": "medic*,physician"
                 },
                 "amenity/dojo": {
-                    "name": "Dojo / Martial Arts Academy",
+                    "name": "Dojo",
+                    "subtitle": "Martial arts academy",
                     "terms": "martial arts,dojang"
                 },
                 "amenity/drinking_water": {
@@ -4597,6 +4602,7 @@
                 },
                 "amenity/post_box": {
                     "name": "Mailbox",
+                    "subtitle": "Drop box for outgoing post",
                     "terms": "letter,post"
                 },
                 "amenity/post_office": {
@@ -4609,6 +4615,7 @@
                 },
                 "amenity/pub": {
                     "name": "Pub",
+                    "subtitle": "Serves beer & food",
                     "terms": "alcohol,drink,dive,beer,bier,booze"
                 },
                 "amenity/pub/lgbtq": {
@@ -4617,6 +4624,7 @@
                 },
                 "amenity/pub/microbrewery": {
                     "name": "Brewpub",
+                    "subtitle": "Pub with a microbrewery",
                     "terms": "alcohol,drink,dive,beer,bier,booze,craft brewery,microbrewery,small batch brewery"
                 },
                 "amenity/public_bath": {
@@ -4793,6 +4801,7 @@
                 },
                 "amenity/theatre/type/amphi": {
                     "name": "Amphitheatre",
+                    "subtitle": "Open-air theater",
                     "terms": "open air,outdoor,greek,ampi"
                 },
                 "amenity/toilets": {
@@ -4845,6 +4854,7 @@
                 },
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Flat Coin Vending Machine",
+                    "subtitle": "Presses coins into souvenirs",
                     "terms": "coin,crush,elongated,flatten,penny,souvenir"
                 },
                 "amenity/vending_machine/excrement_bags": {
@@ -5109,6 +5119,7 @@
                 },
                 "building": {
                     "name": "Building",
+                    "subtitle": "Structure",
                     "terms": ""
                 },
                 "building/bunker": {
@@ -5313,6 +5324,7 @@
                 },
                 "club": {
                     "name": "Club",
+                    "subtitle": "Meeting place of a social group",
                     "terms": "social"
                 },
                 "club/sport": {
@@ -5321,6 +5333,7 @@
                 },
                 "craft": {
                     "name": "Craft",
+                    "subtitle": "Workshop",
                     "terms": ""
                 },
                 "craft/jeweler": {
@@ -5589,6 +5602,7 @@
                 },
                 "ford": {
                     "name": "Ford",
+                    "subtitle": "Where water flows over a road",
                     "terms": ""
                 },
                 "golf/bunker": {
@@ -6121,6 +6135,7 @@
                 },
                 "landuse/grass": {
                     "name": "Grass",
+                    "subtitle": "Managed grass area",
                     "terms": ""
                 },
                 "landuse/greenfield": {
@@ -6245,7 +6260,7 @@
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Center",
-                    "subtitle": "Gambling Arcade",
+                    "subtitle": "Gambling arcade",
                     "terms": "gambling,slot machine"
                 },
                 "leisure/amusement_arcade": {
@@ -6542,7 +6557,7 @@
                 },
                 "man_made/adit": {
                     "name": "Adit",
-                    "subtitle": "Horizontal Mine Entrance",
+                    "subtitle": "Horizontal mine entrance",
                     "terms": "cave,tunnel,underground"
                 },
                 "man_made/antenna": {
@@ -6619,7 +6634,7 @@
                 },
                 "man_made/mineshaft": {
                     "name": "Mineshaft",
-                    "subtitle": "Vertical Mine Entrance",
+                    "subtitle": "Vertical mine entrance",
                     "terms": "cave,mine shaft,tunnel,underground"
                 },
                 "man_made/monitoring_station": {
@@ -6768,6 +6783,7 @@
                 },
                 "natural/grassland": {
                     "name": "Grassland",
+                    "subtitle": "Grass-dominated natural landscape",
                     "terms": "prairie,savanna"
                 },
                 "natural/heath": {
@@ -6868,6 +6884,7 @@
                 },
                 "noexit/yes": {
                     "name": "No Exit",
+                    "subtitle": "Indicates a road does not continue",
                     "terms": "no exit,road end,dead end"
                 },
                 "office": {
@@ -7036,7 +7053,7 @@
                 },
                 "piste/downhill": {
                     "name": "Downhill Ski Trail",
-                    "subtitle": "Alpine Piste",
+                    "subtitle": "Alpine piste",
                     "terms": "ski,alpine,snowboard,downhill,piste"
                 },
                 "piste/downhill/halfpipe": {
@@ -7053,7 +7070,7 @@
                 },
                 "piste/nordic": {
                     "name": "Cross-country Ski Trail",
-                    "subtitle": "Nordic Piste",
+                    "subtitle": "Nordic piste",
                     "terms": "ski,nordic,crosscountry,skating,piste,XC skiing trail"
                 },
                 "piste/piste": {
@@ -7206,6 +7223,7 @@
                 },
                 "power/generator/method/photovoltaic": {
                     "name": "Solar Panel",
+                    "subtitle": "Generates electricity from sunlight",
                     "terms": "photovoltaic module,PV module,sunlight"
                 },
                 "power/generator/source/nuclear": {
@@ -7214,6 +7232,7 @@
                 },
                 "power/generator/source/wind": {
                     "name": "Wind Turbine",
+                    "subtitle": "Generates electricity from wind",
                     "terms": "generator,turbine,windmill,wind"
                 },
                 "power/line": {
@@ -8214,6 +8233,7 @@
                 },
                 "tourism/trail_riding_station": {
                     "name": "Trail Riding Station",
+                    "subtitle": "Horse facility along a bridleway",
                     "terms": ""
                 },
                 "tourism/viewpoint": {
@@ -8458,6 +8478,7 @@
                 },
                 "waterway/river": {
                     "name": "River",
+                    "subtitle": "Major natural waterway",
                     "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
                 },
                 "waterway/sanitary_dump_station": {
@@ -8470,6 +8491,7 @@
                 },
                 "waterway/stream": {
                     "name": "Stream",
+                    "subtitle": "Minor natural waterway",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
                 },
                 "waterway/water_point": {
@@ -8478,6 +8500,7 @@
                 },
                 "waterway/waterfall": {
                     "name": "Waterfall",
+                    "subtitle": "Water flowing down a steep drop",
                     "terms": "fall"
                 },
                 "waterway/weir": {

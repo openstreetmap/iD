@@ -15,5 +15,6 @@
         "key": "noexit",
         "value": "*"
     },
-    "name": "No Exit"
+    "name": "No Exit",
+    "subtitle": "Indicates a road does not continue"
 }

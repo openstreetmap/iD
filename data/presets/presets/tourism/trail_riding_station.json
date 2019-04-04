@@ -22,5 +22,6 @@
         "tourism": "trail_riding_station"
     },
     "name": "Trail Riding Station",
+    "subtitle": "Horse facility along a bridleway",
     "matchScore": 2.0
 }

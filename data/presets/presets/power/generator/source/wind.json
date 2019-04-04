@@ -29,5 +29,6 @@
         "key": "generator:source",
         "value": "wind"
     },
-    "name": "Wind Turbine"
+    "name": "Wind Turbine",
+    "subtitle": "Generates electricity from wind"
 }

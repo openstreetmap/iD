@@ -32,5 +32,6 @@
     "tags": {
         "amenity": "bar"
     },
-    "name": "Bar"
+    "name": "Bar",
+    "subtitle": "Serves alcoholic drinks"
 }
