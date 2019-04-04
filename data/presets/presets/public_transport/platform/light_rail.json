@@ -43,5 +43,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Light Rail Platform"
+    "name": "Light Rail Platform",
+    "subtitle": "Where passengers board"
 }

@@ -36,5 +36,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Bus Platform"
+    "name": "Bus Platform",
+    "subtitle": "Where passengers board"
 }

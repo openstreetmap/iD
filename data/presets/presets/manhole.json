@@ -20,5 +20,6 @@
         "sewage",
         "telecom"
     ],
-    "name": "Manhole"
+    "name": "Manhole",
+    "subtitle": "Access to areas below ground level"
 }

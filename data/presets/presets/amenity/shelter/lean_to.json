@@ -13,5 +13,6 @@
         "amenity": "shelter",
         "shelter_type": "lean_to"
     },
-    "name": "Lean-To"
+    "name": "Lean-To",
+    "subtitle": "Unenclosed wilderness shelter"
 }

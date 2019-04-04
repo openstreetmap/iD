@@ -39,5 +39,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Ferry Platform"
+    "name": "Ferry Platform",
+    "subtitle": "Where passengers board"
 }

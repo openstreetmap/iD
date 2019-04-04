@@ -4109,6 +4109,7 @@
                 },
                 "advertising/billboard": {
                     "name": "Billboard",
+                    "subtitle": "Large, flat advertising structure",
                     "terms": ""
                 },
                 "advertising/column": {
@@ -4741,6 +4742,7 @@
                 },
                 "amenity/shelter/lean_to": {
                     "name": "Lean-To",
+                    "subtitle": "Unenclosed wilderness shelter",
                     "terms": ""
                 },
                 "amenity/shelter/picnic_shelter": {
@@ -5983,6 +5985,7 @@
                 },
                 "historic": {
                     "name": "Historic Site",
+                    "subtitle": "Designated place of historic value",
                     "terms": ""
                 },
                 "historic/archaeological_site": {
@@ -6614,6 +6617,7 @@
                 },
                 "man_made/mast": {
                     "name": "Mast",
+                    "subtitle": "Tall vertical structure",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
                 },
                 "man_made/mast/communication": {
@@ -6740,6 +6744,7 @@
                 },
                 "manhole": {
                     "name": "Manhole",
+                    "subtitle": "Access to areas below ground level",
                     "terms": "cover,hole,sewer,sewage,telecom"
                 },
                 "manhole/drain": {
@@ -7274,6 +7279,7 @@
                 },
                 "public_transport/platform": {
                     "name": "Transit Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "platform,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/platform/aerialway_point": {
@@ -7306,6 +7312,7 @@
                 },
                 "public_transport/platform/aerialway": {
                     "name": "Aerialway Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/platform/bus_point": {
@@ -7314,30 +7321,37 @@
                 },
                 "public_transport/platform/bus": {
                     "name": "Bus Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "bus,platform,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/platform/ferry": {
                     "name": "Ferry Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/platform/light_rail": {
                     "name": "Light Rail Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/platform/monorail": {
                     "name": "Monorail Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "monorail,platform,public transit,public transportation,rail,transit,transportation"
                 },
                 "public_transport/platform/subway": {
                     "name": "Subway Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground"
                 },
                 "public_transport/platform/train": {
                     "name": "Train Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
                 },
                 "public_transport/platform/tram": {
                     "name": "Tram Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/platform/trolleybus_point": {
@@ -7346,6 +7360,7 @@
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Trolleybus Platform",
+                    "subtitle": "Where passengers board",
                     "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
                 },
                 "public_transport/station_aerialway": {
@@ -7398,42 +7413,52 @@
                 },
                 "public_transport/stop_position_aerialway": {
                     "name": "Aerialway Stopping Location",
+                    "subtitle": "Where lifts stop for boarding",
                     "terms": "aerialway,cable car,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/stop_position_bus": {
                     "name": "Bus Stopping Location",
+                    "subtitle": "Where buses stop for boarding",
                     "terms": "bus,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/stop_position_ferry": {
                     "name": "Ferry Stopping Location",
+                    "subtitle": "Where ferries stop for boarding",
                     "terms": "boat,dock,ferry,pier,public transit,public transportation,transit,transportation"
                 },
                 "public_transport/stop_position_light_rail": {
                     "name": "Light Rail Stopping Location",
+                    "subtitle": "Where trains stop for boarding",
                     "terms": "electric,light rail,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/stop_position_monorail": {
                     "name": "Monorail Stopping Location",
+                    "subtitle": "Where trains stop for boarding",
                     "terms": "monorail,public transit,public transportation,rail,transit,transportation"
                 },
                 "public_transport/stop_position_subway": {
                     "name": "Subway Stopping Location",
+                    "subtitle": "Where trains stop for boarding",
                     "terms": "metro,public transit,public transportation,rail,subway,track,transit,transportation,underground"
                 },
                 "public_transport/stop_position_train": {
                     "name": "Train Stopping Location",
+                    "subtitle": "Where trains stop for boarding",
                     "terms": "public transit,public transportation,rail,track,train,transit,transportation"
                 },
                 "public_transport/stop_position_tram": {
                     "name": "Tram Stopping Location",
+                    "subtitle": "Where trams stop for boarding",
                     "terms": "electric,light rail,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Trolleybus Stopping Location",
+                    "subtitle": "Where trolleybuses stop for boarding",
                     "terms": "bus,electric,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
                 },
                 "public_transport/stop_position": {
                     "name": "Transit Stopping Location",
+                    "subtitle": "Where transit vehicles stop for boarding",
                     "terms": "public transit,public transportation,transit,transportation"
                 },
                 "railway/halt": {
@@ -8134,6 +8159,7 @@
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
+                    "subtitle": "Staffed mountain lodging",
                     "terms": "climbing hut"
                 },
                 "tourism/apartment": {
@@ -8150,14 +8176,17 @@
                 },
                 "tourism/artwork/mural": {
                     "name": "Mural",
+                    "subtitle": "Wall or ceiling painted as art",
                     "terms": "fresco,wall painting"
                 },
                 "tourism/artwork/sculpture": {
                     "name": "Sculpture",
+                    "subtitle": "Three-dimensional artwork",
                     "terms": "statue,figure,carving"
                 },
                 "tourism/artwork/statue": {
                     "name": "Statue",
+                    "subtitle": "Sculpture of people or animals",
                     "terms": "sculpture,figure,carving"
                 },
                 "tourism/attraction": {
@@ -8243,6 +8272,7 @@
                 },
                 "tourism/wilderness_hut": {
                     "name": "Wilderness Hut",
+                    "subtitle": "Unstaffed backcountry lodging",
                     "terms": "wilderness hut,backcountry hut,bothy"
                 },
                 "tourism/zoo": {

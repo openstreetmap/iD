@@ -44,5 +44,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Tram Platform"
+    "name": "Tram Platform",
+    "subtitle": "Where passengers board"
 }

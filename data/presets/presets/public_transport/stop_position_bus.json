@@ -24,5 +24,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Bus Stopping Location"
+    "name": "Bus Stopping Location",
+    "subtitle": "Where buses stop for boarding"
 }

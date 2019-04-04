@@ -35,5 +35,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Monorail Stopping Location"
+    "name": "Monorail Stopping Location",
+    "subtitle": "Where trains stop for boarding"
 }

@@ -25,5 +25,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Aerialway Stopping Location"
+    "name": "Aerialway Stopping Location",
+    "subtitle": "Where lifts stop for boarding"
 }

@@ -29,5 +29,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Trolleybus Stopping Location"
+    "name": "Trolleybus Stopping Location",
+    "subtitle": "Where trolleybuses stop for boarding"
 }

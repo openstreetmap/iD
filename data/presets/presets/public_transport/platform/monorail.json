@@ -39,5 +39,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Monorail Platform"
+    "name": "Monorail Platform",
+    "subtitle": "Where passengers board"
 }

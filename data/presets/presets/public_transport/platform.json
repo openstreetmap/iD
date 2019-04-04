@@ -34,5 +34,6 @@
         "transportation"
     ],
     "name": "Transit Platform",
+    "subtitle": "Where passengers board",
     "matchScore": 0.2
 }

@@ -39,5 +39,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Light Rail Stopping Location"
+    "name": "Light Rail Stopping Location",
+    "subtitle": "Where trains stop for boarding"
 }

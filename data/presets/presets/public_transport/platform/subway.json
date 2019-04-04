@@ -42,5 +42,6 @@
         "transportation",
         "underground"
     ],
-    "name": "Subway Platform"
+    "name": "Subway Platform",
+    "subtitle": "Where passengers board"
 }

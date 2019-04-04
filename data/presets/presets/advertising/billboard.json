@@ -11,5 +11,6 @@
     "tags": {
         "advertising": "billboard"
     },
-    "name": "Billboard"
+    "name": "Billboard",
+    "subtitle": "Large, flat advertising structure"
 }

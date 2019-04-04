@@ -12,7 +12,7 @@
         "subtitle": {
             "description": "Short explanation or summary of the feature in American English",
             "type": "string",
-            "maxLength": 35
+            "maxLength": 40
         },
         "geometry": {
             "description": "Valid geometry types for the feature",

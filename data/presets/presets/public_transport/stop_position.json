@@ -19,5 +19,6 @@
         "transportation"
     ],
     "name": "Transit Stopping Location",
+    "subtitle": "Where transit vehicles stop for boarding",
     "matchScore": 0.2
 }

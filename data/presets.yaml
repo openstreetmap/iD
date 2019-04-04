@@ -2204,7 +2204,7 @@ en:
       advertising/billboard:
         # advertising=billboard
         name: Billboard
-        subtitle: '<translate with short summary or explanation of ''Billboard'', if needed>'
+        subtitle: 'Large, flat advertising structure'
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
       advertising/column:
         # advertising=column
@@ -3096,7 +3096,7 @@ en:
       amenity/shelter/lean_to:
         # 'amenity=shelter, shelter_type=lean_to'
         name: Lean-To
-        subtitle: '<translate with short summary or explanation of ''Lean-To'', if needed>'
+        subtitle: Unenclosed wilderness shelter
         terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
       amenity/shelter/picnic_shelter:
         # 'amenity=shelter, shelter_type=picnic_shelter'
@@ -4818,7 +4818,7 @@ en:
       historic:
         # historic=*
         name: Historic Site
-        subtitle: '<translate with short summary or explanation of ''Historic Site'', if needed>'
+        subtitle: Designated place of historic value
         terms: '<translate with synonyms or related terms for ''Historic Site'', separated by commas>'
       historic/archaeological_site:
         # historic=archaeological_site
@@ -5706,7 +5706,7 @@ en:
       man_made/mast:
         # man_made=mast
         name: Mast
-        subtitle: '<translate with short summary or explanation of ''Mast'', if needed>'
+        subtitle: Tall vertical structure
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
       man_made/mast/communication:
@@ -5887,7 +5887,7 @@ en:
       manhole:
         # manhole=*
         name: Manhole
-        subtitle: '<translate with short summary or explanation of ''Manhole'', if needed>'
+        subtitle: Access to areas below ground level
         # 'terms: cover,hole,sewer,sewage,telecom'
         terms: '<translate with synonyms or related terms for ''Manhole'', separated by commas>'
       manhole/drain:
@@ -6621,13 +6621,13 @@ en:
       public_transport/platform:
         # public_transport=platform
         name: Transit Platform
-        subtitle: '<translate with short summary or explanation of ''Transit Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Platform'', separated by commas>'
       public_transport/platform/aerialway:
         # 'public_transport=platform, aerialway=yes'
         name: Aerialway Platform
-        subtitle: '<translate with short summary or explanation of ''Aerialway Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: aerialway,cable car,platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Aerialway Platform'', separated by commas>'
       public_transport/platform/aerialway_point:
@@ -6637,7 +6637,7 @@ en:
       public_transport/platform/bus:
         # 'public_transport=platform, bus=yes'
         name: Bus Platform
-        subtitle: '<translate with short summary or explanation of ''Bus Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: bus,platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Bus Platform'', separated by commas>'
       public_transport/platform/bus_point:
@@ -6649,7 +6649,7 @@ en:
       public_transport/platform/ferry:
         # 'public_transport=platform, ferry=yes'
         name: Ferry Platform
-        subtitle: '<translate with short summary or explanation of ''Ferry Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Ferry Platform'', separated by commas>'
       public_transport/platform/ferry_point:
@@ -6659,7 +6659,7 @@ en:
       public_transport/platform/light_rail:
         # 'public_transport=platform, light_rail=yes'
         name: Light Rail Platform
-        subtitle: '<translate with short summary or explanation of ''Light Rail Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Light Rail Platform'', separated by commas>'
       public_transport/platform/light_rail_point:
@@ -6669,7 +6669,7 @@ en:
       public_transport/platform/monorail:
         # 'public_transport=platform, monorail=yes'
         name: Monorail Platform
-        subtitle: '<translate with short summary or explanation of ''Monorail Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Platform'', separated by commas>'
       public_transport/platform/monorail_point:
@@ -6679,7 +6679,7 @@ en:
       public_transport/platform/subway:
         # 'public_transport=platform, subway=yes'
         name: Subway Platform
-        subtitle: '<translate with short summary or explanation of ''Subway Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Platform'', separated by commas>'
       public_transport/platform/subway_point:
@@ -6689,7 +6689,7 @@ en:
       public_transport/platform/train:
         # 'public_transport=platform, train=yes'
         name: Train Platform
-        subtitle: '<translate with short summary or explanation of ''Train Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: platform,public transit,public transportation,rail,track,train,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Train Platform'', separated by commas>'
       public_transport/platform/train_point:
@@ -6699,7 +6699,7 @@ en:
       public_transport/platform/tram:
         # 'public_transport=platform, tram=yes'
         name: Tram Platform
-        subtitle: '<translate with short summary or explanation of ''Tram Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Tram Platform'', separated by commas>'
       public_transport/platform/tram_point:
@@ -6709,7 +6709,7 @@ en:
       public_transport/platform/trolleybus:
         # 'public_transport=platform, trolleybus=yes'
         name: Trolleybus Platform
-        subtitle: '<translate with short summary or explanation of ''Trolleybus Platform'', if needed>'
+        subtitle: Where passengers board
         # 'terms: bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Trolleybus Platform'', separated by commas>'
       public_transport/platform/trolleybus_point:
@@ -6798,61 +6798,61 @@ en:
       public_transport/stop_position:
         # public_transport=stop_position
         name: Transit Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Transit Stopping Location'', if needed>'
+        subtitle: Where transit vehicles stop for boarding
         # 'terms: public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Stopping Location'', separated by commas>'
       public_transport/stop_position_aerialway:
         # 'public_transport=stop_position, aerialway=yes'
         name: Aerialway Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Aerialway Stopping Location'', if needed>'
+        subtitle: Where lifts stop for boarding
         # 'terms: aerialway,cable car,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Aerialway Stopping Location'', separated by commas>'
       public_transport/stop_position_bus:
         # 'public_transport=stop_position, bus=yes'
         name: Bus Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Bus Stopping Location'', if needed>'
+        subtitle: Where buses stop for boarding
         # 'terms: bus,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Bus Stopping Location'', separated by commas>'
       public_transport/stop_position_ferry:
         # 'public_transport=stop_position, ferry=yes'
         name: Ferry Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Ferry Stopping Location'', if needed>'
+        subtitle: Where ferries stop for boarding
         # 'terms: boat,dock,ferry,pier,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Ferry Stopping Location'', separated by commas>'
       public_transport/stop_position_light_rail:
         # 'public_transport=stop_position, light_rail=yes'
         name: Light Rail Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Light Rail Stopping Location'', if needed>'
+        subtitle: Where trains stop for boarding
         # 'terms: electric,light rail,public transit,public transportation,rail,track,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Light Rail Stopping Location'', separated by commas>'
       public_transport/stop_position_monorail:
         # 'public_transport=stop_position, monorail=yes'
         name: Monorail Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Monorail Stopping Location'', if needed>'
+        subtitle: Where trains stop for boarding
         # 'terms: monorail,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Stopping Location'', separated by commas>'
       public_transport/stop_position_subway:
         # 'public_transport=stop_position, subway=yes'
         name: Subway Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Subway Stopping Location'', if needed>'
+        subtitle: Where trains stop for boarding
         # 'terms: metro,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Stopping Location'', separated by commas>'
       public_transport/stop_position_train:
         # 'public_transport=stop_position, train=yes'
         name: Train Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Train Stopping Location'', if needed>'
+        subtitle: Where trains stop for boarding
         # 'terms: public transit,public transportation,rail,track,train,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Train Stopping Location'', separated by commas>'
       public_transport/stop_position_tram:
         # 'public_transport=stop_position, tram=yes'
         name: Tram Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Tram Stopping Location'', if needed>'
+        subtitle: Where trams stop for boarding
         # 'terms: electric,light rail,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Tram Stopping Location'', separated by commas>'
       public_transport/stop_position_trolleybus:
         # 'public_transport=stop_position, trolleybus=yes'
         name: Trolleybus Stopping Location
-        subtitle: '<translate with short summary or explanation of ''Trolleybus Stopping Location'', if needed>'
+        subtitle: Where trolleybuses stop for boarding
         # 'terms: bus,electric,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Trolleybus Stopping Location'', separated by commas>'
       railway:
@@ -7839,7 +7839,7 @@ en:
       tourism/alpine_hut:
         # tourism=alpine_hut
         name: Alpine Hut
-        subtitle: '<translate with short summary or explanation of ''Alpine Hut'', if needed>'
+        subtitle: Staffed mountain lodging
         # 'terms: climbing hut'
         terms: '<translate with synonyms or related terms for ''Alpine Hut'', separated by commas>'
       tourism/apartment:
@@ -7862,19 +7862,19 @@ en:
       tourism/artwork/mural:
         # 'tourism=artwork, artwork_type=mural'
         name: Mural
-        subtitle: '<translate with short summary or explanation of ''Mural'', if needed>'
+        subtitle: Wall or ceiling painted as art
         # 'terms: fresco,wall painting'
         terms: '<translate with synonyms or related terms for ''Mural'', separated by commas>'
       tourism/artwork/sculpture:
         # 'tourism=artwork, artwork_type=sculpture'
         name: Sculpture
-        subtitle: '<translate with short summary or explanation of ''Sculpture'', if needed>'
+        subtitle: Three-dimensional artwork
         # 'terms: statue,figure,carving'
         terms: '<translate with synonyms or related terms for ''Sculpture'', separated by commas>'
       tourism/artwork/statue:
         # 'tourism=artwork, artwork_type=statue'
         name: Statue
-        subtitle: '<translate with short summary or explanation of ''Statue'', if needed>'
+        subtitle: Sculpture of people or animals
         # 'terms: sculpture,figure,carving'
         terms: '<translate with synonyms or related terms for ''Statue'', separated by commas>'
       tourism/attraction:
@@ -7989,7 +7989,7 @@ en:
       tourism/wilderness_hut:
         # tourism=wilderness_hut
         name: Wilderness Hut
-        subtitle: '<translate with short summary or explanation of ''Wilderness Hut'', if needed>'
+        subtitle: Unstaffed backcountry lodging
         # 'terms: wilderness hut,backcountry hut,bothy'
         terms: '<translate with synonyms or related terms for ''Wilderness Hut'', separated by commas>'
       tourism/zoo:

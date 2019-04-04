@@ -27,5 +27,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Ferry Stopping Location"
+    "name": "Ferry Stopping Location",
+    "subtitle": "Where ferries stop for boarding"
 }

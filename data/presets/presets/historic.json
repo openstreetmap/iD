@@ -13,5 +13,6 @@
     "tags": {
         "historic": "*"
     },
-    "name": "Historic Site"
+    "name": "Historic Site",
+    "subtitle": "Designated place of historic value"
 }

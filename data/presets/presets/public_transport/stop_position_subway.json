@@ -38,5 +38,6 @@
         "transportation",
         "underground"
     ],
-    "name": "Subway Stopping Location"
+    "name": "Subway Stopping Location",
+    "subtitle": "Where trains stop for boarding"
 }

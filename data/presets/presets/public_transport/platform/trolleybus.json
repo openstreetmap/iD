@@ -41,5 +41,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Trolleybus Platform"
+    "name": "Trolleybus Platform",
+    "subtitle": "Where passengers board"
 }

@@ -40,5 +40,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Tram Stopping Location"
+    "name": "Tram Stopping Location",
+    "subtitle": "Where trams stop for boarding"
 }

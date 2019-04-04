@@ -37,5 +37,6 @@
         "transit",
         "transportation"
     ],
-    "name": "Aerialway Platform"
+    "name": "Aerialway Platform",
+    "subtitle": "Where passengers board"
 }
