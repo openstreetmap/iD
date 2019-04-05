@@ -311,11 +311,13 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
+        if (_entityID === val) return entityEditor;  // exit early if no change
+
         _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
 
-        // reset the scroll to the top of the inspector
+        // reset the scroll to the top of the inspector (warning: triggers reflow)
         var body = d3_selectAll('.entity-editor-pane .inspector-body');
         if (!body.empty()) {
             body.node().scrollTop = 0;

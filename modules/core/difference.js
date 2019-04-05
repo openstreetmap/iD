@@ -100,7 +100,9 @@ export function coreDifference(base, head) {
     _diff.created = function created() {
         var result = [];
         Object.values(_changes).forEach(function(change) {
-            if (!change.base && change.head) result.push(change.head);
+            if (!change.base && change.head) {
+                result.push(change.head);
+            }
         });
         return result;
     };
@@ -109,7 +111,9 @@ export function coreDifference(base, head) {
     _diff.deleted = function deleted() {
         var result = [];
         Object.values(_changes).forEach(function(change) {
-            if (change.base && !change.head) result.push(change.base);
+            if (change.base && !change.head) {
+                result.push(change.base);
+            }
         });
         return result;
     };
