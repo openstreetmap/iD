@@ -1,6 +1,10 @@
 {
   "dataDeprecated": [
     {
+      "old": {"aerialway": "canopy"},
+      "replace": {"aerialway": "zip_line"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
