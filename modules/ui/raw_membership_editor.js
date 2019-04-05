@@ -87,6 +87,9 @@ export function uiRawMembershipEditor(context) {
         this.blur();           // avoid keeping focus on the button
         if (d === 0) return;   // called on newrow (shoudn't happen)
 
+        // remove the hover-highlight styling
+        utilHighlightEntities([d.relation.id], false, context);
+
         context.perform(
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
@@ -184,16 +187,13 @@ export function uiRawMembershipEditor(context) {
                 .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
 
-            itemsEnter.each(function(d){
-                // highlight the relation in the map while hovering on the list item
-                d3_select(this)
-                    .on('mouseover', function() {
-                        utilHighlightEntities([d.relation.id], true, context);
-                    })
-                    .on('mouseout', function() {
-                        utilHighlightEntities([d.relation.id], false, context);
-                    });
-            });
+            // highlight the relation in the map while hovering on the list item
+            itemsEnter.on('mouseover', function(d) {
+                    utilHighlightEntities([d.relation.id], true, context);
+                })
+                .on('mouseout', function(d) {
+                    utilHighlightEntities([d.relation.id], false, context);
+                });
 
             var labelEnter = itemsEnter
                 .append('label')
