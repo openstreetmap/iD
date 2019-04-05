@@ -20,5 +20,6 @@
     "tags": {
         "amenity": "embassy"
     },
+    "searchable": false,
     "name": "Embassy"
 }

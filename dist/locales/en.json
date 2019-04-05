@@ -2497,6 +2497,9 @@
                 "construction": {
                     "label": "Type"
                 },
+                "consulate": {
+                    "label": "Type"
+                },
                 "contact/webcam": {
                     "label": "Webcam URL",
                     "placeholder": "http://example.com/"
@@ -2639,6 +2642,12 @@
                 "diet_multi": {
                     "label": "Diet Types"
                 },
+                "diplomatic": {
+                    "label": "Type"
+                },
+                "diplomatic/services": {
+                    "label": "Services"
+                },
                 "direction_cardinal": {
                     "label": "Direction",
                     "options": {
@@ -2732,6 +2741,9 @@
                 "embankment": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "embassy": {
+                    "label": "Type"
                 },
                 "emergency": {
                     "label": "Emergency"
@@ -3060,6 +3072,9 @@
                 "levels": {
                     "label": "Levels",
                     "placeholder": "2, 4, 6..."
+                },
+                "liaison": {
+                    "label": "Type"
                 },
                 "lit": {
                     "label": "Lit"
@@ -3814,6 +3829,9 @@
                         "only": "Takeaway Only"
                     }
                 },
+                "target": {
+                    "label": "Target"
+                },
                 "tidal": {
                     "label": "Tidal"
                 },
@@ -4207,6 +4225,10 @@
                     "name": "Coworking Space",
                     "terms": ""
                 },
+                "amenity/embassy": {
+                    "name": "Embassy",
+                    "terms": ""
+                },
                 "amenity/ferry_terminal": {
                     "name": "Ferry Station / Terminal",
                     "terms": ""
@@ -4397,10 +4419,6 @@
                 },
                 "amenity/driving_school": {
                     "name": "Driving School",
-                    "terms": ""
-                },
-                "amenity/embassy": {
-                    "name": "Embassy",
                     "terms": ""
                 },
                 "amenity/fast_food": {
@@ -6914,6 +6932,22 @@
                 "office/coworking": {
                     "name": "Coworking Space",
                     "terms": "coworking,office"
+                },
+                "office/diplomatic": {
+                    "name": "Diplomatic Office",
+                    "terms": ""
+                },
+                "office/diplomatic/consulate": {
+                    "name": "Consulate",
+                    "terms": ""
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Embassy",
+                    "terms": ""
+                },
+                "office/diplomatic/liaison": {
+                    "name": "Liaison Office",
+                    "terms": ""
                 },
                 "office/educational_institution": {
                     "name": "Educational Institution",

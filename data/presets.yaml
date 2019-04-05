@@ -358,6 +358,9 @@ en:
       construction:
         # construction=*
         label: Type
+      consulate:
+        # consulate=*
+        label: Type
       contact/webcam:
         # 'contact:webcam=*'
         label: Webcam URL
@@ -510,6 +513,12 @@ en:
       diet_multi:
         # 'diet:=*'
         label: Diet Types
+      diplomatic:
+        # diplomatic=*
+        label: Type
+      diplomatic/services:
+        # 'diplomatic:services:=*'
+        label: Services
       direction:
         # direction=*
         label: Direction (Degrees Clockwise)
@@ -632,6 +641,9 @@ en:
         label: Type
         # embankment field placeholder
         placeholder: Default
+      embassy:
+        # embassy=*
+        label: Type
       emergency:
         # emergency=*
         label: Emergency
@@ -1003,6 +1015,9 @@ en:
         label: Levels
         # levels field placeholder
         placeholder: '2, 4, 6...'
+      liaison:
+        # liaison=*
+        label: Type
       lit:
         # lit=*
         label: Lit
@@ -1938,6 +1953,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      target:
+        # target=*
+        label: Target
       tidal:
         # tidal=*
         label: Tidal
@@ -2517,7 +2535,6 @@ en:
       amenity/embassy:
         # amenity=embassy
         name: Embassy
-        terms: '<translate with synonyms or related terms for ''Embassy'', separated by commas>'
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
@@ -5439,6 +5456,22 @@ en:
         name: Coworking Space
         # 'terms: coworking,office'
         terms: '<translate with synonyms or related terms for ''Coworking Space'', separated by commas>'
+      office/diplomatic:
+        # office=diplomatic
+        name: Diplomatic Office
+        terms: '<translate with synonyms or related terms for ''Diplomatic Office'', separated by commas>'
+      office/diplomatic/consulate:
+        # 'office=diplomatic, diplomatic=consulate'
+        name: Consulate
+        terms: '<translate with synonyms or related terms for ''Consulate'', separated by commas>'
+      office/diplomatic/embassy:
+        # 'office=diplomatic, diplomatic=embassy'
+        name: Embassy
+        terms: '<translate with synonyms or related terms for ''Embassy'', separated by commas>'
+      office/diplomatic/liaison:
+        # 'office=diplomatic, diplomatic=liaison'
+        name: Liaison Office
+        terms: '<translate with synonyms or related terms for ''Liaison Office'', separated by commas>'
       office/educational_institution:
         # office=educational_institution
         name: Educational Institution

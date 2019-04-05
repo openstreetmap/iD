@@ -21,6 +21,10 @@
       "replace": {"amenity": "community_centre"}
     },
     {
+      "old": {"amenity": "embassy"},
+      "replace": {"office": "diplomatic"}
+    },
+    {
       "old": {"amenity": "ev_charging"},
       "replace": {"amenity": "charging_station"}
     },
