@@ -8,7 +8,8 @@ export function validationManyDeletions() {
 
     var type = 'many_deletions';
 
-    var validation = function(changes, context) {
+
+    var validation = function checkManyDeletions(changes, context) {
         var points = 0, lines = 0, areas = 0, relations = 0;
         var base = context.history().base();
         var geometry;

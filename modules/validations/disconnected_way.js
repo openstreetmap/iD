@@ -21,6 +21,7 @@ export function validationDisconnectedWay() {
         return highways[entity.tags.highway];
     }
 
+
     function vertexIsDisconnected(way, vertex, graph, relation) {
         var parents = graph.parentWays(vertex);
 
@@ -45,10 +46,9 @@ export function validationDisconnectedWay() {
         });
     }
 
+
     function isDisconnectedWay(entity, graph) {
-
         if (entity.type !== 'way') return false;
-
         return graph.childNodes(entity).every(function(vertex) {
             return vertexIsDisconnected(entity, vertex, graph);
         });
@@ -71,11 +71,9 @@ export function validationDisconnectedWay() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
-
         if (!isTaggedAsHighway(entity)) return [];
-
         if (!isDisconnectedWay(entity, graph) && !isDisconnectedMultipolygon(entity, graph)) return [];
 
         var entityLabel = utilDisplayLabel(entity, context);

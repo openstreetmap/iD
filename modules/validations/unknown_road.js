@@ -1,4 +1,3 @@
-
 import { operationDelete } from '../operations/index';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
@@ -8,8 +7,7 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationUnknownRoad() {
     var type = 'unknown_road';
 
-    var validation = function(entity, context) {
-
+    var validation = function checkUnknownRoad(entity, context) {
         if (entity.type !== 'way' || entity.tags.highway !== 'road') return [];
 
         var fixes = [

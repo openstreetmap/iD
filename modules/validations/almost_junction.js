@@ -118,15 +118,15 @@ export function validationAlmostJunction() {
     }
 
 
-    var validation = function(endHighway, context) {
-        if (!isHighway(endHighway)) return [];
-        if (endHighway.isDegenerate()) return [];
+    var validation = function checkAlmostJunction(entity, context) {
+        if (!isHighway(entity)) return [];
+        if (entity.isDegenerate()) return [];
 
         var graph = context.graph();
         var tree = context.history().tree();
         var issues = [];
 
-        var extendableNodeInfos = findConnectableEndNodesByExtension(endHighway, graph, tree);
+        var extendableNodeInfos = findConnectableEndNodesByExtension(entity, graph, tree);
         extendableNodeInfos.forEach(function(extendableNodeInfo) {
             var node = extendableNodeInfo.node;
             var edgeHighway = graph.entity(extendableNodeInfo.wid);
@@ -177,11 +177,11 @@ export function validationAlmostJunction() {
                 type: type,
                 severity: 'warning',
                 message: t('issues.almost_junction.message', {
-                    feature: utilDisplayLabel(endHighway, context),
+                    feature: utilDisplayLabel(entity, context),
                     feature2: utilDisplayLabel(edgeHighway, context)
                 }),
                 tooltip: t('issues.almost_junction.highway-highway.tip'),
-                entities: [endHighway, node, edgeHighway],
+                entities: [entity, node, edgeHighway],
                 loc: extendableNodeInfo.node.loc,
                 info: {
                     edge: extendableNodeInfo.edge,

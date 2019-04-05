@@ -9,7 +9,7 @@ export function validationTagSuggestsArea() {
     var type = 'tag_suggests_area';
 
 
-    var validation = function(entity, context) {
+    var validation = function checkTagSuggestsArea(entity, context) {
         if (entity.type !== 'way' || entity.isClosed()) return [];
 
         var tagSuggestingArea = entity.tagSuggestingArea();

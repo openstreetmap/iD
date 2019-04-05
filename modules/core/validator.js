@@ -13,7 +13,7 @@ export function coreValidator(context) {
     var _rules = {};
     var _disabledRules = {};
     var _entityRules = [];
-    var _changesRules = [];
+//    var _changesRules = [];        // skip for now
 
     var _issues = [];
     var _issuesByEntityID = {};
@@ -29,7 +29,7 @@ export function coreValidator(context) {
             _rules[key] = fn;
 
             if (fn.inputType === 'changes') {   // 'many_deletions' is the only one like this
-                _changesRules.push(key);
+//                _changesRules.push(key);      // skip for now
             } else {
                 _entityRules.push(key);
             }
@@ -39,8 +39,8 @@ export function coreValidator(context) {
 
     validator.reset = function() {
         // clear caches
-        var _issues = [];
-        var _issuesByEntityID = {};
+        _issues = [];
+        _issuesByEntityID = {};
         for (var key in _rules) {
             if (typeof _rules[key].reset === 'function') {
                 _rules[key].reset();   // 'crossing_ways' is the only one like this

@@ -26,7 +26,7 @@ export function validationMissingTag() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkMissingTag(entity, context) {
         var graph = context.graph();
 
         // ignore vertex features and relation members

@@ -49,7 +49,7 @@ export function validationGenericName() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkGenericName(entity, context) {
         var generic = isGenericName(entity);
         if (!generic) return [];
 

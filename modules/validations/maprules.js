@@ -5,7 +5,7 @@ export function validationMaprules() {
     var type = 'maprules';
 
 
-    var validation = function(entity, context) {
+    var validation = function checkMaprules(entity, context) {
         if (!services.maprules) return [];
 
         var graph = context.graph();

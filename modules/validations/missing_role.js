@@ -7,8 +7,7 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationMissingRole() {
     var type = 'missing_role';
 
-    var validation = function(entity, context) {
-
+    var validation = function checkMissingRole(entity, context) {
         var issues = [];
         if (entity.type === 'way') {
             context.graph().parentRelations(entity).forEach(function(relation) {

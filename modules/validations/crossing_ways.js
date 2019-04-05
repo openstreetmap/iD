@@ -344,7 +344,8 @@ export function validationCrossingWays() {
         return [];
     }
 
-    var validation = function(entity, context) {
+
+    var validation = function checkCrossingWays(entity, context) {
         var graph = context.graph();
         var tree = context.history().tree();
 

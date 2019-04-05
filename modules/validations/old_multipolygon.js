@@ -1,5 +1,4 @@
 import { t } from '../util/locale';
-
 import { actionChangeTags } from '../actions';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm';
 import { utilDisplayLabel } from '../util';
@@ -10,7 +9,7 @@ export function validationOldMultipolygon() {
     var type = 'old_multipolygon';
 
 
-    var validation = function(entity, context) {
+    var validation = function checkOldMultipolygon(entity, context) {
         var graph = context.graph();
 
         var multipolygon, outerWay;

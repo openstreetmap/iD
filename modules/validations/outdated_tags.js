@@ -22,7 +22,7 @@ export function validationOutdatedTags() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkOutdatedTags(entity, context) {
         var replacementPresetID = context.presets().match(entity, context.graph()).replacement;
         var deprecatedTagsArray = entity.deprecatedTags();
         var missingTags = missingRecommendedTags(entity, context, context.graph());

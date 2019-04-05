@@ -50,10 +50,8 @@ export function validationPrivateData() {
         return privateKeys;
     }
 
-    var validation = function(entity, context) {
-
+    var validation = function checkPrivateData(entity, context) {
         var privateKeys = privateDataKeys(entity);
-
         if (privateKeys.length === 0) return [];
 
         var fixID = privateKeys.length === 1 ? 'remove_tag' : 'remove_tags';
