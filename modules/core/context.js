@@ -300,8 +300,8 @@ export function coreContext() {
     var features;
     context.features = function() { return features; };
     context.hasHiddenConnections = function(id) {
-        var graph = history.graph(),
-            entity = graph.entity(id);
+        var graph = history.graph();
+        var entity = graph.entity(id);
         return features.hasHiddenConnections(entity, graph);
     };
 
