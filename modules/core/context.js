@@ -437,8 +437,11 @@ export function coreContext() {
                 service.reset(context);
             }
         });
+
+        validator.reset();
         features.reset();
         history.reset();
+
         return context;
     };
 
@@ -533,6 +536,7 @@ export function coreContext() {
         }
     });
 
+    validator.init();
     background.init();
     features.init();
     photos.init();

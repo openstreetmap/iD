@@ -234,13 +234,13 @@ export function uiIssues(context) {
     }
 
     function updateRulesList() {
-        var rules = context.validator().getRuleIDs();
+        var ruleKeys = context.validator().getRuleKeys();
         _rulesList
-            .call(drawListItems, rules, 'checkbox', 'rule', toggleRule, ruleIsEnabled);
+            .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
     }
 
-    function ruleIsEnabled(d) {
-        return !context.validator().getDisabledRules()[d];
+    function isRuleEnabled(d) {
+        return context.validator().isRuleEnabled(d);
     }
 
     function toggleRule(d) {

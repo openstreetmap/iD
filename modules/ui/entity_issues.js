@@ -17,7 +17,6 @@ export function uiEntityIssues(context) {
     // every graph change since the graph change event may happen before the issue
     // cache is refreshed
     context.validator().on('reload.entity_issues', function() {
-
          _selection.selectAll('.disclosure-wrap-entity_issues')
              .call(render);
 
@@ -38,7 +37,7 @@ export function uiEntityIssues(context) {
 
 
     function update() {
-        var issues = context.validator().getIssuesForEntityWithID(_entityID);
+        var issues = context.validator().getEntityIssues(_entityID);
 
         _selection
             .classed('hide', issues.length === 0);
@@ -49,7 +48,7 @@ export function uiEntityIssues(context) {
 
 
     function render(selection) {
-        var issues = context.validator().getIssuesForEntityWithID(_entityID);
+        var issues = context.validator().getEntityIssues(_entityID);
         _expandedIssueID = issues.length > 0 ? issues[0].id() : null;
 
         var items = selection.selectAll('.issue')

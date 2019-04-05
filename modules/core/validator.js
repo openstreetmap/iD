@@ -2,117 +2,127 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
-import { t } from '../util/locale';
 import { utilArrayFlatten, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
     var dispatch = d3_dispatch('reload');
-    var self = {};
+    var validator = {};
+
+    var _rules = {};
+    var _disabledRules = {};
+    var _entityRules = [];
+    var _changesRules = [];
+
     var _issues = [];
     var _issuesByEntityID = {};
-    var _disabledValidations = {};
 
-    var validations = {};
-    Object.values(Validations).forEach(function(validation) {
-        if (typeof validation === 'function') {
+
+
+    validator.init = function() {
+        Object.values(Validations).forEach(function(validation) {
+            if (typeof validation !== 'function') return;
+
             var fn = validation();
-            validations[fn.type] = fn;
-        }
-    });
+            var key = fn.type;
+            _rules[key] = fn;
 
-    var entityValidationIDs = [];
-    var changesValidationIDs = [];
-
-    for (var key in validations) {
-        var validation = validations[key];
-        if (validation.inputType && validation.inputType === 'changes') {
-            changesValidationIDs.push(key);
-        } else {
-            entityValidationIDs.push(key);
-        }
-    }
-
-    var validationIDsToDisplay = Object.keys(validations)
-        .filter(function(rule) { return rule !== 'maprules'; });
-
-    validationIDsToDisplay.sort(function(rule1, rule2) {
-        return t('issues.' + rule1 + '.title') > t('issues.' + rule2 + '.title');
-    });
-
-    //self.featureApplicabilityOptions = ['edited', 'all'];
-
-    /*var featureApplicability = context.storage('issue-features') || 'edited';
-
-    self.getFeatureApplicability = function() {
-        return featureApplicability;
+            if (fn.inputType === 'changes') {   // 'many_deletions' is the only one like this
+                _changesRules.push(key);
+            } else {
+                _entityRules.push(key);
+            }
+        });
     };
 
-    self.setFeatureApplicability = function(applicability) {
-        featureApplicability = applicability;
-        context.storage('issue-features', applicability);
-    };*/
 
-    self.getIssues = function() {
+    validator.reset = function() {
+        // clear caches
+        var _issues = [];
+        var _issuesByEntityID = {};
+        for (var key in _rules) {
+            if (typeof _rules[key].reset === 'function') {
+                _rules[key].reset();   // 'crossing_ways' is the only one like this
+            }
+        }
+    };
+
+
+    validator.getIssues = function() {
         return _issues;
     };
 
-    self.getWarnings = function() {
-        return _issues.filter(function(d) { return d.severity === 'warning'; });
+
+    validator.getWarnings = function() {
+        return _issues
+            .filter(function(d) { return d.severity === 'warning'; });
     };
 
-    self.getErrors = function() {
-        return _issues.filter(function(d) { return d.severity === 'error'; });
+
+    validator.getErrors = function() {
+        return _issues
+            .filter(function(d) { return d.severity === 'error'; });
     };
 
-    self.getIssuesForEntityWithID = function(entityID) {
-        if (!context.hasEntity(entityID)) return [];
-        var entity = context.entity(entityID);
-        var key = osmEntity.key(entity);
 
-        if (!_issuesByEntityID[key]) {
-            _issuesByEntityID[key] = validateEntity(entity);
+    validator.getEntityIssues = function(entityID) {
+        var entity = context.hasEntity(entityID);
+        if (!entity) return [];
+
+        if (!_issuesByEntityID[entityID]) {
+            _issuesByEntityID[entityID] = validateEntity(entity);
         }
-        return _issuesByEntityID[key];
+        return _issuesByEntityID[entityID];
     };
 
-    self.getRuleIDs = function(){
-        return validationIDsToDisplay;
+
+    validator.getRuleKeys = function() {
+        return Object.keys(_rules)
+            .filter(function(key) { return key !== 'maprules'; });
     };
 
-    self.getDisabledRules = function(){
-        return _disabledValidations;
+
+    validator.isRuleEnabled = function(key) {
+        return !_disabledRules[key];
     };
 
-    self.toggleRule = function(ruleID) {
-        if (_disabledValidations[ruleID]) {
-            delete _disabledValidations[ruleID];
+
+    validator.toggleRule = function(key) {
+        if (_disabledRules[key]) {
+            delete _disabledRules[key];
         } else {
-            _disabledValidations[ruleID] = true;
+            _disabledRules[key] = true;
         }
-        self.validate();
+        validator.validate();
     };
+
 
     function validateEntity(entity) {
         var _issues = [];
         var ran = {};
 
-        // runs validation and appends resulting issues, returning true if validation passed
-        function runValidation(which) {
-            if (ran[which]) return true;
+        // runs validation and appends resulting issues,
+        // returning true if validation passed without issue
+        function runValidation(key) {
+            if (ran[key]) return true;
 
-            if (_disabledValidations[which]) {
-                // don't run disabled validations but mark as having run
-                ran[which] = true;
+            var fn = _rules[key];
+            if (typeof fn !== 'function') {
+                console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
+                ran[key] = true;
                 return true;
             }
 
-            var fn = validations[which];
-            var typeIssues = fn(entity, context);
-            _issues = _issues.concat(typeIssues);
-            ran[which] = true;   // mark this validation as having run
-            return !typeIssues.length;
+            if (_disabledRules[key]) {   // don't run disabled, but mark as having run
+                ran[key] = true;
+                return true;
+            }
+
+            var detected = fn(entity, context);
+            _issues = _issues.concat(detected);
+            ran[key] = true;   // mark this validation as having run
+            return !detected.length;
         }
 
         runValidation('missing_role');
@@ -124,7 +134,7 @@ export function coreValidator(context) {
             }
         }
 
-        // other validations require feature to be tagged
+        // other _rules require feature to be tagged
         if (!runValidation('missing_tag')) return _issues;
 
         // run outdated_tags early
@@ -143,20 +153,20 @@ export function coreValidator(context) {
             runValidation('tag_suggests_area');
         }
 
-        // run all validations not yet run manually
-        entityValidationIDs.forEach(runValidation);
+        // run all _rules not yet run manually
+        _entityRules.forEach(runValidation);
 
         return _issues;
     }
 
 
-    self.validate = function() {
-        _issuesByEntityID = {};   // clear cached
+    validator.validate = function() {
+        // clear caches
+        _issuesByEntityID = {};
         _issues = [];
-
-        for (var validationIndex in validations) {
-            if (validations[validationIndex].reset) {
-                validations[validationIndex].reset();
+        for (var key in _rules) {
+            if (typeof _rules[key].reset === 'function') {
+                _rules[key].reset();   // 'crossing_ways' is the only one like this
             }
         }
 
@@ -165,11 +175,11 @@ export function coreValidator(context) {
         var changesToCheck = changes.created.concat(changes.modified);
         var graph = history.graph();
 
-        _issues = utilArrayFlatten(changesValidationIDs.map(function(ruleID) {
-            if (_disabledValidations[ruleID]) return [];
-            var validation = validations[ruleID];
-            return validation(changes, context);
-        }));
+        // _issues = utilArrayFlatten(_changesRules.map(function(ruleID) {
+        //     if (_disabledRules[ruleID]) return [];
+        //     var fn = _rules[ruleID];
+        //     return fn(changes, context);
+        // }));
 
         var entitiesToCheck = changesToCheck.reduce(function(acc, entity) {
             var entities = [entity];
@@ -213,10 +223,10 @@ export function coreValidator(context) {
             _issues.push(issuesByID[issueID]);
         }
 
-        dispatch.call('reload', self, _issues);
+        dispatch.call('reload', validator, _issues);
     };
 
-    return utilRebind(self, dispatch, 'on');
+    return utilRebind(validator, dispatch, 'on');
 }
 
 
