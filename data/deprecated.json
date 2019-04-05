@@ -245,7 +245,7 @@
     },
     {
       "old": {"highway": "unsurfaced"},
-      "replace": {"highway": "road", "incline": "unpaved"}
+      "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
       "old": {"kerb": "dropped"},
