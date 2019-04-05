@@ -4181,6 +4181,10 @@
                     "name": "T-bar Lift",
                     "terms": "tbar"
                 },
+                "aerialway/zip_line": {
+                    "name": "Zip Line",
+                    "terms": "aerial runway,canopy,flying fox,foefie slide,gravity propelled aerial ropeslide,Tyrolean traverse,zip wire,zip-line,zipline,zipwire"
+                },
                 "aeroway/aerodrome": {
                     "name": "Airport",
                     "terms": "aerodrome,aeroway,airplane,airport,jet,plane"

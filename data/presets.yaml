@@ -2280,6 +2280,11 @@ en:
         name: T-bar Lift
         # 'terms: tbar'
         terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
+      aerialway/zip_line:
+        # aerialway=zip_line
+        name: Zip Line
+        # 'terms: aerial runway,canopy,flying fox,foefie slide,gravity propelled aerial ropeslide,Tyrolean traverse,zip wire,zip-line,zipline,zipwire'
+        terms: '<translate with synonyms or related terms for ''Zip Line'', separated by commas>'
       aeroway:
         # aeroway=*
         name: Aeroway

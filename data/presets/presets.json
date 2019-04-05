@@ -34,6 +34,7 @@
     "aerialway/pylon": {"geometry": ["point", "vertex"], "fields": ["ref"], "tags": {"aerialway": "pylon"}, "name": "Aerialway Pylon"},
     "aerialway/rope_tow": {"geometry": ["line"], "terms": ["handle tow", "bugel lift"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "tags": {"aerialway": "rope_tow"}, "name": "Rope Tow Lift"},
     "aerialway/t-bar": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "terms": ["tbar"], "tags": {"aerialway": "t-bar"}, "name": "T-bar Lift"},
+    "aerialway/zip_line": {"geometry": ["line"], "fields": ["name", "oneway_yes", "aerialway/duration", "maxweight", "access_simple"], "terms": ["aerial runway", "canopy", "flying fox", "foefie slide", "gravity propelled aerial ropeslide", "Tyrolean traverse", "zip wire", "zip-line", "zipline", "zipwire"], "tags": {"aerialway": "zip_line"}, "name": "Zip Line"},
     "aeroway/aerodrome": {"icon": "maki-airport", "geometry": ["point", "area"], "fields": ["name", "iata", "icao", "operator", "internet_access", "internet_access/fee", "internet_access/ssid"], "terms": ["aerodrome", "aeroway", "airplane", "airport", "jet", "plane"], "tags": {"aeroway": "aerodrome"}, "matchScore": 0.9, "name": "Airport"},
     "aeroway/apron": {"icon": "maki-airport", "geometry": ["area"], "terms": ["ramp"], "fields": ["ref", "surface"], "tags": {"aeroway": "apron"}, "name": "Apron"},
     "aeroway/gate": {"icon": "maki-airport", "geometry": ["point"], "fields": ["ref_aeroway_gate"], "tags": {"aeroway": "gate"}, "name": "Airport Gate"},
