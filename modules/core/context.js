@@ -466,12 +466,10 @@ export function coreContext() {
 
     validator = coreValidator(context);
 
-// todo: put these back in somehow,
-// but for now try to just validate an edit difference
     // run validation upon restoring from page reload
-    // history.on('restore', function() {
-    //     validator.validate();
-    // });
+    history.on('restore', function() {
+        validator.validate();
+    });
     // re-run validation upon a significant graph change
     history.on('change', function(difference) {
         if (difference) {

@@ -15,7 +15,6 @@ export function coreValidator(context) {
     var _entityRules = [];
 //    var _changesRules = [];        // skip for now
 
-    // var _issues = [];
     var _issuesByIssueID = {};
     var _issuesByEntityID = {};
 
@@ -40,7 +39,6 @@ export function coreValidator(context) {
 
     validator.reset = function() {
         // clear caches
-        // _issues = [];
         _issuesByIssueID = {};
         _issuesByEntityID = {};
 
@@ -54,31 +52,22 @@ export function coreValidator(context) {
 
     validator.getIssues = function() {
         return Object.values(_issuesByIssueID);
-        // return _issues;
     };
 
 
     validator.getWarnings = function() {
-        // return _issues
         return Object.values(_issuesByIssueID)
             .filter(function(d) { return d.severity === 'warning'; });
     };
 
 
     validator.getErrors = function() {
-        // return _issues
         return Object.values(_issuesByIssueID)
             .filter(function(d) { return d.severity === 'error'; });
     };
 
 
     validator.getEntityIssues = function(entityID) {
-        // var entity = context.hasEntity(entityID);
-        // if (!entity) return [];
-
-        // if (!_issuesByEntityID[entityID]) {
-        //     _issuesByEntityID[entityID] = validator.validateEntity(entity);
-        // }
         return _issuesByEntityID[entityID] || [];
     };
 
@@ -182,7 +171,7 @@ export function coreValidator(context) {
         // }));
 
         var graph = context.graph();
-        var entityIDs = difference.extantIDs();
+        var entityIDs = difference.extantIDs();  // created and modified
 
         var entitiesToCheck = entityIDs.reduce(function(acc, entityID) {
             var entity = graph.entity(entityID);
@@ -207,31 +196,48 @@ export function coreValidator(context) {
             });
 
             return acc;
+
         }, new Set());
 
 
-        // var issuesByID = {};
+        // clear caches for existing issues related to changed entities
+        difference.deleted().forEach(clearCaches);
+        entitiesToCheck.forEach(clearCaches);
 
+
+        // detect new issues and update caches
         entitiesToCheck.forEach(function(entity) {
-            var detected = validator.validateEntity(entity);
-            _issuesByEntityID[entity.id] = detected;
-            detected.forEach(function(d) { _issuesByIssueID[d.id] = d; });
-            // entityIssues.forEach(function(issue) {
-                // Different entities can produce the same issue so store them by
-                // the ID to ensure that there are no duplicate issues.
-                // issuesByID[issue.id()] = issue;
-            // });
+            var issues = validator.validateEntity(entity);
+
+            issues.forEach(function(issue) {
+                var entities = issue.entities || [];
+                entities.forEach(function(entity) {
+                    if (!_issuesByEntityID[entity.id]) {
+                        _issuesByEntityID[entity.id] = [];
+                    }
+                    _issuesByEntityID[entity.id].push(issue);
+                });
+                _issuesByIssueID[issue.id] = issue;
+            });
         });
 
-        // for (var issueID in issuesByID) {
-        //     _issues.push(issuesByID[issueID]);
-        // }
-
-        // dispatch.call('reload', validator, _issues);
         dispatch.call('reload');
     };
 
     return utilRebind(validator, dispatch, 'on');
+
+
+
+    function clearCaches(entity) {
+        var issues = _issuesByEntityID[entity.id] || [];
+        issues.forEach(function(issue) {
+            var entities = issue.entities || [];
+            entities.forEach(function(entity) {
+                delete _issuesByEntityID[entity.id];
+            });
+            delete _issuesByIssueID[issue.id];
+        });
+    }
 }
 
 
@@ -246,32 +252,32 @@ export function validationIssue(attrs) {
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
-
-    var _id;
+    this.id = generateID.apply(this);      // generated - see below
 
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
-    this.id = function() {
-        if (_id) return _id;
-
-        _id = this.type;
+    function generateID() {
+        var parts = [this.type];
 
         if (this.hash) {   // subclasses can pass in their own differentiator
-            _id += this.hash;
+            parts.push(this.hash);
         }
 
-        // factor in the entities this issue is for
+        // include entities this issue is for
         // (sort them so the id is deterministic)
-        var entityKeys = this.entities.map(osmEntity.key);
-        _id += entityKeys.sort().join();
+        if (this.entities) {
+            var entityKeys = this.entities.map(osmEntity.key).sort();
+            parts.push.apply(parts, entityKeys);
+        }
 
-        // factor in loc since two separate issues can have an
+        // include loc since two separate issues can have an
         // idential type and entities, e.g. in crossing_ways
         if (this.loc) {
-            _id += this.loc.join();
+            parts.push.apply(parts, this.loc);
         }
-        return _id;
-    };
+
+        return parts.join(':');
+    }
 
 
     this.extent = function(resolver) {

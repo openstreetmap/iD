@@ -49,10 +49,10 @@ export function uiEntityIssues(context) {
 
     function render(selection) {
         var issues = context.validator().getEntityIssues(_entityID);
-        _expandedIssueID = issues.length > 0 ? issues[0].id() : null;
+        _expandedIssueID = issues.length > 0 ? issues[0].id : null;
 
         var items = selection.selectAll('.issue')
-            .data(issues, function(d) { return d.id(); });
+            .data(issues, function(d) { return d.id; });
 
         // Exit
         items.exit()
@@ -69,13 +69,17 @@ export function uiEntityIssues(context) {
             )
             .on('mouseover.highlight', function(d) {
                 // don't hover-highlight the selected entity
-                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                var ids = d.entities
+                    .filter(function(e) { return e.id !== _entityID; })
                     .map(function(e) { return e.id; });
+
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
-                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                var ids = d.entities
+                    .filter(function(e) { return e.id !== _entityID; })
                     .map(function(e) { return e.id; });
+
                 utilHighlightEntities(ids, false, context);
             });
 
@@ -83,10 +87,9 @@ export function uiEntityIssues(context) {
             .append('button')
             .attr('class', 'message')
             .on('click', function(d) {
-
-                _expandedIssueID = d.id();   // expand only the clicked item
+                _expandedIssueID = d.id;   // expand only the clicked item
                 selection.selectAll('.issue')
-                    .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
+                    .classed('expanded', function(d) { return d.id === _expandedIssueID; });
 
                 var extent = d.extent(context.graph());
                 if (extent) {
@@ -115,7 +118,7 @@ export function uiEntityIssues(context) {
         // Update
         items = items
             .merge(itemsEnter)
-            .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
+            .classed('expanded', function(d) { return d.id === _expandedIssueID; });
 
         items.select('.issue-icon svg use')     // propagate bound data
             .attr('href', function(d) {

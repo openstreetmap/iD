@@ -88,7 +88,7 @@ export function uiIssues(context) {
 
     function drawIssuesList(selection, issues) {
         var items = selection.selectAll('li')
-            .data(issues, function(d) { return d.id(); });
+            .data(issues, function(d) { return d.id; });
 
         // Exit
         items.exit()
