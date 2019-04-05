@@ -4,6 +4,7 @@
     ],
     "fields": [
         "name",
+        "oneway_yes",
         "aerialway/capacity",
         "aerialway/duration"
     ],
