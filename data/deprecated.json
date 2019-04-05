@@ -181,6 +181,10 @@
       "replace": {"colour": "$1"}
     },
     {
+      "old": {"craft": "glass"},
+      "replace": {"craft": "glaziery"}
+    },
+    {
       "old": {"crossing": "zebra"},
       "replace": {"crossing": "marked"}
     },
@@ -442,6 +446,14 @@
     {
       "old": {"shop": "auto_parts"},
       "replace": {"shop": "car_parts"}
+    },
+    {
+      "old": {"shop": "baby"},
+      "replace": {"shop": "baby_goods"}
+    },
+    {
+      "old": {"shop": "baby_care"},
+      "replace": {"shop": "baby_goods"}
     },
     {
       "old": {"shop": "betting"},
