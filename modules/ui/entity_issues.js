@@ -13,10 +13,10 @@ export function uiEntityIssues(context) {
     var _expandedIssueID;
     var _entityID;
 
-    // Listen for validation reload even though the entity editor is reloaded on
+    // Listen for validation event even though the entity editor is reloaded on
     // every graph change since the graph change event may happen before the issue
     // cache is refreshed
-    context.validator().on('reload.entity_issues', function() {
+    context.validator().on('validated.entity_issues', function() {
          _selection.selectAll('.disclosure-wrap-entity_issues')
              .call(render);
 

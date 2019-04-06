@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { coreDifference } from './difference';
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util';
@@ -7,7 +8,7 @@ import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
-    var dispatch = d3_dispatch('reload');
+    var dispatch = d3_dispatch('validated');
     var validator = {};
 
     var _rules = {};
@@ -17,9 +18,12 @@ export function coreValidator(context) {
 
     var _issuesByIssueID = {};
     var _issuesByEntityID = {};
+    var _validatedGraph = null;
 
 
-
+    //
+    // initialize the validator rulesets
+    //
     validator.init = function() {
         Object.values(Validations).forEach(function(validation) {
             if (typeof validation !== 'function') return;
@@ -37,10 +41,14 @@ export function coreValidator(context) {
     };
 
 
+    //
+    // reset caches, called whenever iD resets after a save
+    //
     validator.reset = function() {
         // clear caches
         _issuesByIssueID = {};
         _issuesByEntityID = {};
+        _validatedGraph = null;
 
         for (var key in _rules) {
             if (typeof _rules[key].reset === 'function') {
@@ -93,7 +101,25 @@ export function coreValidator(context) {
     };
 
 
-    validator.validateEntity = function(entity) {
+    //
+    // Remove a single entity from the caches
+    //
+    function uncacheEntity(entity) {
+        var issues = _issuesByEntityID[entity.id] || [];
+        issues.forEach(function(issue) {
+            var entities = issue.entities || [];
+            entities.forEach(function(entity) {
+                delete _issuesByEntityID[entity.id];
+            });
+            delete _issuesByIssueID[issue.id];
+        });
+    }
+
+
+    //
+    // Run validation on a single entity
+    //
+    function validateEntity(entity) {
         var entityIssues = [];
         var ran = {};
 
@@ -152,36 +178,26 @@ export function coreValidator(context) {
         _entityRules.forEach(runValidation);
 
         return entityIssues;
-    };
+    }
 
 
-    validator.validate = function(difference) {
-        difference = difference || context.history().difference();
-
-        for (var key in _rules) {
-            if (typeof _rules[key].reset === 'function') {
-                _rules[key].reset();   // 'crossing_ways' is the only one like this
-            }
-        }
-
-        // _issues = utilArrayFlatten(_changesRules.map(function(ruleID) {
-        //     if (_disabledRules[ruleID]) return [];
-        //     var fn = _rules[ruleID];
-        //     return fn(changes, context);
-        // }));
-
-        var graph = context.graph();
-        var entityIDs = difference.extantIDs();  // created and modified
+    //
+    // Run validation for several entities, supplied `entityIDs`
+    // It uses the "validatedGraph", so this can be called asynchronously
+    // as entities are loaded from OSM if we want to.
+    //
+    validator.validateEntities = function(entityIDs) {
+        _validatedGraph = _validatedGraph || context.history().base();
 
         var entitiesToCheck = entityIDs.reduce(function(acc, entityID) {
-            var entity = graph.entity(entityID);
+            var entity = _validatedGraph.entity(entityID);
             if (acc.has(entity)) return acc;
 
             acc.add(entity);
             var checkParentRels = [entity];
 
             if (entity.type === 'node') {   // include parent ways
-                graph.parentWays(entity).forEach(function(parentWay) {
+                _validatedGraph.parentWays(entity).forEach(function(parentWay) {
                     checkParentRels.push(parentWay);
                     acc.add(parentWay);
                 });
@@ -189,7 +205,7 @@ export function coreValidator(context) {
 
             checkParentRels.forEach(function(entity) {   // include parent relations
                 if (entity.type !== 'relation') {     // but not super-relations
-                    graph.parentRelations(entity).forEach(function(parentRel) {
+                    _validatedGraph.parentRelations(entity).forEach(function(parentRel) {
                         acc.add(parentRel);
                     });
                 }
@@ -199,15 +215,12 @@ export function coreValidator(context) {
 
         }, new Set());
 
-
         // clear caches for existing issues related to changed entities
-        difference.deleted().forEach(clearCaches);
-        entitiesToCheck.forEach(clearCaches);
-
+        entitiesToCheck.forEach(uncacheEntity);
 
         // detect new issues and update caches
         entitiesToCheck.forEach(function(entity) {
-            var issues = validator.validateEntity(entity);
+            var issues = validateEntity(entity);
 
             issues.forEach(function(issue) {
                 var entities = issue.entities || [];
@@ -221,24 +234,70 @@ export function coreValidator(context) {
             });
         });
 
-        dispatch.call('reload');
+        dispatch.call('validated');
     };
 
+
+    //
+    // Validates anything that has changed since the last time it was run.
+    // Also updates the "validatedGraph" to be the current graph
+    // and dispatches a `validated` event when finished.
+    //
+    validator.validate = function() {
+        var currGraph = context.graph();
+        _validatedGraph = _validatedGraph || context.history().base();
+        if (currGraph === _validatedGraph) return;
+
+        var difference = coreDifference(_validatedGraph, currGraph);
+        _validatedGraph = currGraph;
+
+        for (var key in _rules) {
+            if (typeof _rules[key].reset === 'function') {
+                _rules[key].reset();   // 'crossing_ways' is the only one like this
+            }
+        }
+
+        // _issues = utilArrayFlatten(_changesRules.map(function(ruleID) {
+        //     if (_disabledRules[ruleID]) return [];
+        //     var fn = _rules[ruleID];
+        //     return fn(changes, context);
+        // }));
+
+        var entityIDs = difference.extantIDs();  // created and modified
+        difference.deleted().forEach(uncacheEntity);   // deleted
+
+        validator.validateEntities(entityIDs);   // dispatches 'validated'
+    };
+
+
+
+    // run validation upon restoring user's changes
+    context.history().on('restore.validator', function() {
+        validator.validate();
+    });
+
+    // re-run validation upon merging fetched data
+    context.history().on('merge.validator', function(entities) {
+        if (!entities) return;
+        var ids = entities.map(function(entity) { return entity.id; });
+        validator.validateEntities(ids);
+    });
+
+    // // re-run validation on history change (frequent)
+    // context.history().on('change.validator', function(difference) {
+    //     if (!difference) return;
+    //     validator.validate();
+    // });
+
+    // re-run validation when the user switches editing modes (less frequent)
+    context.on('exit.validator', function() {
+        validator.validate();
+    });
+
+
     return utilRebind(validator, dispatch, 'on');
-
-
-
-    function clearCaches(entity) {
-        var issues = _issuesByEntityID[entity.id] || [];
-        issues.forEach(function(issue) {
-            var entities = issue.entities || [];
-            entities.forEach(function(entity) {
-                delete _issuesByEntityID[entity.id];
-            });
-            delete _issuesByIssueID[issue.id];
-        });
-    }
 }
+
 
 
 export function validationIssue(attrs) {

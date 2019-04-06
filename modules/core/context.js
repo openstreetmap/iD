@@ -55,6 +55,7 @@ export function coreContext() {
     setLocale('en');
 
     var dispatch = d3_dispatch('enter', 'exit', 'change');
+    context = utilRebind(context, dispatch, 'on');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -457,31 +458,13 @@ export function coreContext() {
     }
 
     history = coreHistory(context);
+    validator = coreValidator(context);
 
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
     context.pauseChangeDispatch = history.pauseChangeDispatch;
     context.resumeChangeDispatch = history.resumeChangeDispatch;
-
-    validator = coreValidator(context);
-
-    // run validation upon restoring from page reload
-    history.on('restore', function() {
-        validator.validate();
-    });
-    // re-run validation upon a significant graph change
-    history.on('change', function(difference) {
-        if (difference) {
-            validator.validate(difference);
-        }
-    });
-    // re-run validation upon merging fetched data
-    // history.on('merge', function(entities) {
-    //     if (entities && entities.length > 0) {
-    //         validator.validate();
-    //     }
-    // });
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
@@ -552,5 +535,5 @@ export function coreContext() {
         areaKeys = presets.areaKeys();
     }
 
-    return utilRebind(context, dispatch, 'on');
+    return context;
 }

@@ -1,7 +1,4 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
@@ -24,7 +21,7 @@ export function uiIssues(context) {
     var _toggleButton = d3_select(null);
     var _shown = false;
 
-    context.validator().on('reload.issues_pane', update);
+    context.validator().on('validated.issues_pane', update);
 
     /*function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
