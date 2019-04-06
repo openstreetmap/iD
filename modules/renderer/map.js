@@ -6,6 +6,8 @@ import { scaleLinear as d3_scaleLinear } from 'd3-scale';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
+import mapboxgl from 'mapbox-gl';
+
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
@@ -43,6 +45,7 @@ export function rendererMap(context) {
     var supersurface = d3_select(null);
     var wrapper = d3_select(null);
     var surface = d3_select(null);
+    var glContainer = d3_select(null);
 
     var _dimensions = [1, 1];
     var _dblClickEnabled = true;
@@ -54,6 +57,8 @@ export function rendererMap(context) {
     var _minzoom = 0;
     var _getMouseCoords;
     var _mouseEvent;
+
+    var glMap;
 
     var zoom = d3_zoom()
         .scaleExtent([kMin, kMax])
@@ -87,6 +92,45 @@ export function rendererMap(context) {
     function map(selection) {
         _selection = selection;
 
+
+        glContainer = selection.append('div')
+            .attr('id', 'gl-container');
+
+        glMap = new mapboxgl.Map({
+            container: 'gl-container',
+            style: {
+                version: 8,
+                name: 'iD',
+                sources: {},
+                layers: []
+            },
+            interactive: false,
+            renderWorldCopies: false
+        });
+
+        glMap.on('load', function() {
+            var backgroundSource = context.background().baseLayerSource();
+            console.log(backgroundSource.template());
+            glMap.addSource(backgroundSource.id, {
+                type: 'raster',
+                tiles: [backgroundSource.template().replace(/\{switch:([^}]+)\}/, function(s, r) {
+                    var subdomains = r.split(',');
+                    return subdomains[0];
+                })],
+                tileSize: backgroundSource.tileSize
+            });
+            glMap.addLayer({
+                id: backgroundSource.id,
+                type: 'raster',
+                source: backgroundSource.id
+            });
+        })
+
+
+        //if (!glMap.getSource('background-imagery')) {
+
+        //}
+        /*
         context
             .on('change.map', immediateRedraw);
 
@@ -119,10 +163,10 @@ export function rendererMap(context) {
             .on('redone.map', function(stack) {
                 didUndoOrRedo(stack, stack.transform);
             });
-
+            */
         context.background()
             .on('change.map', immediateRedraw);
-
+/*
         context.features()
             .on('redraw.map', immediateRedraw);
 
@@ -131,12 +175,12 @@ export function rendererMap(context) {
                 context.background().updateImagery();
                 immediateRedraw();
             });
-
+        */
         selection
             .on('dblclick.map', dblClick)
             .call(zoom)
             .call(zoom.transform, projection.transform());
-
+        /*
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
             .call(utilSetTransform, 0, 0);
@@ -146,13 +190,15 @@ export function rendererMap(context) {
         wrapper = supersurface
             .append('div')
             .attr('class', 'layer layer-data');
-
-        map.surface = surface = wrapper
+            */
+        map.surface = glContainer; /*surface = wrapper
             .call(drawLayers)
             .selectAll('.surface')
-            .attr('id', 'surface');
+            .attr('id', 'surface');*/
 
-        surface
+
+
+        glContainer
             .call(drawLabels.observe)
             .on('gesturestart.surface', function() {
                 _gestureTransformStart = projection.transform();
@@ -170,8 +216,8 @@ export function rendererMap(context) {
             })
             .on('mousemove.map', function() {
                 _mouseEvent = d3_event;
-            })
-            .on('mouseover.vertices', function() {
+            });
+            /*.on('mouseover.vertices', function() {
                 if (map.editable() && !_isTransformed) {
                     var hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
@@ -184,8 +230,8 @@ export function rendererMap(context) {
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
-            });
-
+            });*/
+        /*
         context.on('enter.map',  function() {
             if (map.editable() && !_isTransformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
@@ -219,7 +265,7 @@ export function rendererMap(context) {
                 scheduleRedraw();
             }
         });
-
+*/
         map.dimensions(utilGetDimensions(selection));
     }
 
@@ -520,7 +566,11 @@ export function rendererMap(context) {
         }
         _isTransformed = true;
         _transformLast = eventTransform;
-        utilSetTransform(supersurface, tX, tY, scale);
+        glMap.jumpTo({
+            center: map.center(),
+            zoom: map.zoom() - 1
+        });
+        //utilSetTransform(supersurface, tX, tY, scale);
         scheduleRedraw();
 
         dispatch.call('move', this, map);
@@ -547,7 +597,7 @@ export function rendererMap(context) {
 
 
     function redraw(difference, extent) {
-        if (surface.empty() || !_redrawEnabled) return;
+        if (glContainer.empty() || !_redrawEnabled) return;
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
@@ -559,9 +609,9 @@ export function rendererMap(context) {
         var zoom = map.zoom();
         var z = String(~~zoom);
 
-        if (surface.attr('data-zoom') !== z) {
-            surface.attr('data-zoom', z);
-        }
+        //if (surface.attr('data-zoom') !== z) {
+        //    surface.attr('data-zoom', z);
+        //}
 
         // class surface as `lowzoom` around z17-z18.5 (based on latitude)
         var lat = map.center()[1];
@@ -570,12 +620,12 @@ export function rendererMap(context) {
             .range([17, 18.5, 17])
             .clamp(true);
 
-        surface
-            .classed('low-zoom', zoom <= lowzoom(lat));
+        //surface
+        //    .classed('low-zoom', zoom <= lowzoom(lat));
 
 
         if (!difference) {
-            supersurface.call(context.background());
+
         }
 
         wrapper
@@ -676,7 +726,13 @@ export function rendererMap(context) {
         t[0] += center[0] - point[0];
         t[1] += center[1] - point[1];
 
-        return setTransform(d3_zoomIdentity.translate(t[0], t[1]).scale(k2), duration, force);
+        glMap.easeTo({
+            center: loc2,
+            zoom: z2 - 1
+        });
+        return true;
+
+        //return setTransform(d3_zoomIdentity.translate(t[0], t[1]).scale(k2), duration, force);
     }
 
 
@@ -712,7 +768,7 @@ export function rendererMap(context) {
         drawLayers.dimensions(_dimensions);
         context.background().dimensions(_dimensions);
         projection.clipExtent([[0, 0], _dimensions]);
-        _getMouseCoords = utilFastMouse(supersurface.node());
+        _getMouseCoords = utilFastMouse(glContainer.node());
 
         scheduleRedraw();
         return map;

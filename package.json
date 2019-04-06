@@ -71,6 +71,7 @@
     "js-yaml": "^3.9.0",
     "json-stringify-pretty-compact": "^1.1.0",
     "jsonschema": "^1.1.0",
+    "mapbox-gl": "0.53.1",
     "mapillary-js": "2.17.0",
     "mapillary_sprite_source": "^1.7.0",
     "minimist": "^1.2.0",

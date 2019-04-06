@@ -3816,7 +3816,13 @@ img.tile-debug {
     right: 0;
     bottom: 0;
 }
-
+#gl-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
 /* Map-In-Map
 ------------------------------------------------------- */
