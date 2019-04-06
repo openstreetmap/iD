@@ -489,7 +489,7 @@ path.line.stroke.tag-highway_bus_stop,
 .preset-icon-line path.casing.tag-highway-footway {
     stroke: #988;
 }
-.preset-icon-line path.stroke.tag-highway-footway:not(.tag-footway-crossing, .tag-man_made-pier, .tag-public_transport-platform) {
+.preset-icon-line path.stroke.tag-highway-footway:not(.tag-footway-crossing):not(.tag-man_made-pier):not(.tag-public_transport-platform) {
     stroke: #fff;
 }
 
