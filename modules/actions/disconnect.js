@@ -71,7 +71,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     action.disabled = function(graph) {
         var connections = action.connections(graph);
-        if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
+        if (connections.length === 0)
             return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));
