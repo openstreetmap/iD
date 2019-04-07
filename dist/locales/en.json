@@ -7474,7 +7474,7 @@
                     "terms": "stop,halt,buffer"
                 },
                 "railway/construction": {
-                    "name": "Rail Under Construction",
+                    "name": "Railway Under Construction",
                     "terms": ""
                 },
                 "railway/crossing": {
