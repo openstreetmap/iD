@@ -5,7 +5,7 @@ import {
 
 import { t } from '../util/locale';
 
-import { actionAddMidpoint } from '../actions';
+import { actionAddMidpoint, actionDeleteRelation } from '../actions';
 
 import {
     behaviorBreathe,
@@ -67,7 +67,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function singular() {
-        if (selectedIDs.length === 1) {
+        if (selectedIDs && selectedIDs.length === 1) {
             return context.hasEntity(selectedIDs[0]);
         }
     }
@@ -551,6 +551,22 @@ export function modeSelect(context, selectedIDs) {
         context.map().on('drawn.select', null);
         context.ui().sidebar.hide();
         context.features().forceVisible([]);
+
+        var entity = singular();
+        if (newFeature &&
+            entity &&
+            entity.type === 'relation' &&
+            // no tags
+            Object.keys(entity.tags).length === 0 &&
+            // no parent relations
+            context.graph().parentRelations(entity).length === 0 &&
+            // no members or one member with no role
+            (entity.members.length === 0 || (entity.members.length === 1 && !entity.members[0].role))) {
+
+            // the user added this relation but didn't edit it at all, so just delete it
+            var deleteAction = actionDeleteRelation(entity.id, true /* don't delete untagged members */);
+            context.perform(deleteAction, t('operations.delete.annotation.relation'));
+        }
     };
 
 
