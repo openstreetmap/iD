@@ -14,7 +14,7 @@ export function uiSplash(context) {
         var modalSelection = uiModal(selection);
 
         modalSelection.select('.modal')
-            .attr('class', 'modal-splash modal col6');
+            .attr('class', 'modal-splash modal');
 
         var introModal = modalSelection.select('.content')
             .append('div')
@@ -22,7 +22,7 @@ export function uiSplash(context) {
 
         introModal
             .append('div')
-            .attr('class','modal-section cf')
+            .attr('class','modal-section')
             .append('h3').text(t('splash.welcome'));
 
         introModal
@@ -37,11 +37,11 @@ export function uiSplash(context) {
 
         var buttonWrap = introModal
             .append('div')
-            .attr('class', 'modal-actions cf');
+            .attr('class', 'modal-actions');
 
         var walkthrough = buttonWrap
             .append('button')
-            .attr('class', 'walkthrough col6')
+            .attr('class', 'walkthrough')
             .on('click', function() {
                 context.container().call(uiIntro(context));
                 modalSelection.close();
@@ -59,7 +59,7 @@ export function uiSplash(context) {
 
         var startEditing = buttonWrap
             .append('button')
-            .attr('class', 'start-editing col6')
+            .attr('class', 'start-editing')
             .on('click', modalSelection.close);
 
         startEditing

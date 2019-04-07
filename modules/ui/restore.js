@@ -11,12 +11,9 @@ export function uiRestore(context) {
         var modalSelection = uiModal(selection, true);
 
         modalSelection.select('.modal')
-            .attr('class', 'modal fillL col6');
+            .attr('class', 'modal fillL');
 
         var introModal = modalSelection.select('.content');
-
-        introModal
-            .attr('class','cf');
 
         introModal
             .append('div')
@@ -32,11 +29,11 @@ export function uiRestore(context) {
 
         var buttonWrap = introModal
             .append('div')
-            .attr('class', 'modal-actions cf');
+            .attr('class', 'modal-actions');
 
         var restore = buttonWrap
             .append('button')
-            .attr('class', 'restore col6')
+            .attr('class', 'restore')
             .on('click', function() {
                 context.history().restore();
                 modalSelection.remove();
@@ -54,7 +51,7 @@ export function uiRestore(context) {
 
         var reset = buttonWrap
             .append('button')
-            .attr('class', 'reset col6')
+            .attr('class', 'reset')
             .on('click', function() {
                 context.history().clearSaved();
                 modalSelection.remove();

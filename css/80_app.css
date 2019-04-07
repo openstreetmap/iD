@@ -227,7 +227,6 @@ table.tags, table.tags td, table.tags th {
 /* Grid
 ------------------------------------------------------- */
 .col6  { float: left; width: 50.0000%; max-width: 600px; }
-.col8  { float: left; width: 66.6666%; }
 .col12 { float: left; width: 100.0000%; }
 
 
@@ -4357,6 +4356,9 @@ img.tile-debug {
     right: 0;
     margin: auto;
     z-index: 50;
+    width: 50%;
+    min-width: 200px;
+    max-width: 600px;
 }
 
 .modal .loader {
@@ -4422,7 +4424,9 @@ img.tile-debug {
 .loading-modal {
     text-align: center;
 }
-
+.modal-actions {
+    display: flex;
+}
 .modal-actions button {
     font-weight: normal;
     color: #7092ff;
@@ -4430,7 +4434,7 @@ img.tile-debug {
     border-radius: 0;
     height: 160px;
     text-align: center;
-    display: inline-block;
+    width: 100%;
 }
 .modal-actions button:hover {
     background-color: #ececec;
@@ -5331,8 +5335,8 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     padding: 10px 20px 0 20px;
 }
 
-[dir='rtl'] .curtain-tooltip .tooltip-inner .button-section button.col8 {
-    float: right;
+.curtain-tooltip .tooltip-inner .button-section button {
+    width: 66.6666%;
 }
 
 .curtain-tooltip .tooltip-inner .instruction:only-child {
