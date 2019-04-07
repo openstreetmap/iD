@@ -7519,7 +7519,7 @@
                 },
                 "railway/rail": {
                     "name": "Rail",
-                    "terms": ""
+                    "terms": "rail line,railroad track,train track"
                 },
                 "railway/rail/highspeed": {
                     "name": "High-Speed Rail",

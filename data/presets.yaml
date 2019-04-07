@@ -6124,6 +6124,7 @@ en:
       railway/rail:
         # railway=rail
         name: Rail
+        # 'terms: rail line,railroad track,train track'
         terms: '<translate with synonyms or related terms for ''Rail'', separated by commas>'
       railway/rail/highspeed:
         # 'railway=rail, highspeed=yes'
