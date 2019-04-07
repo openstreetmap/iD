@@ -7729,6 +7729,10 @@
                     "name": "Clothing Store",
                     "terms": "blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear"
                 },
+                "shop/clothes/underwear": {
+                    "name": "Underwear Store",
+                    "terms": "boutique,bras,brassieres,briefs,boxers,clothes,fashion,lingerie,panties,slips,socks,stockings,underclothing,underpants"
+                },
                 "shop/coffee": {
                     "name": "Coffee Store",
                     "terms": ""

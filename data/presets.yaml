@@ -6360,6 +6360,11 @@ en:
         name: Clothing Store
         # 'terms: blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear'
         terms: '<translate with synonyms or related terms for ''Clothing Store'', separated by commas>'
+      shop/clothes/underwear:
+        # 'shop=clothes, clothes=underwear'
+        name: Underwear Store
+        # 'terms: boutique,bras,brassieres,briefs,boxers,clothes,fashion,lingerie,panties,slips,socks,stockings,underclothing,underpants'
+        terms: '<translate with synonyms or related terms for ''Underwear Store'', separated by commas>'
       shop/coffee:
         # shop=coffee
         name: Coffee Store

@@ -488,6 +488,10 @@
       "replace": {"shop": "art"}
     },
     {
+      "old": {"shop": "lingerie"},
+      "replace": {"shop": "clothes", "clothes": "underwear"}
+    },
+    {
       "old": {"shop": "moneylender"},
       "replace": {"shop": "money_lender"}
     },
@@ -506,6 +510,10 @@
     {
       "old": {"shop": "tickets"},
       "replace": {"shop": "ticket"}
+    },
+    {
+      "old": {"shop": "underwear"},
+      "replace": {"shop": "clothes", "clothes": "underwear"}
     },
     {
       "old": {"shop": "winery"},
