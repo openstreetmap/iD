@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 
 import {
     actionAddEntity,
@@ -17,6 +17,7 @@ import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { uiCombobox, uiDisclosure } from './index';
+import { tooltip } from '../util/tooltip';
 import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
 
 
@@ -308,10 +309,14 @@ export function uiRawMembershipEditor(context) {
                 .append('div')
                 .attr('class', 'add-row');
 
-            addRowEnter
+            var addRelationButton = addRowEnter
                 .append('button')
-                .attr('class', 'add-relation')
+                .attr('class', 'add-relation');
+
+            addRelationButton
                 .call(svgIcon('#iD-icon-plus', 'light'));
+            addRelationButton
+                .call(tooltip().title(t('inspector.add_to_relation')).placement(textDirection === 'ltr' ? 'right' : 'left'));
 
             addRowEnter
                 .append('div')

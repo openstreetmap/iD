@@ -474,6 +474,7 @@ en:
     all_tags: All tags
     all_members: All members
     all_relations: All relations
+    add_to_relation: Add to a relation
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
