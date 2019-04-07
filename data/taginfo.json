@@ -461,6 +461,7 @@
     {"key": "highway", "value": "track", "description": "🄿 Unmaintained Track Road", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-truck-monster.svg?sanitize=true"},
     {"key": "highway", "value": "traffic_mirror", "description": "🄿 Traffic Mirror", "object_types": ["node"]},
     {"key": "highway", "value": "traffic_signals", "description": "🄿 Traffic Signals", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/traffic_signals.svg?sanitize=true"},
+    {"key": "highway", "value": "trailhead", "description": "🄿 Trailhead", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-hiking.svg?sanitize=true"},
     {"key": "highway", "value": "trunk_link", "description": "🄿 Trunk Link", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-trunk-link.svg?sanitize=true"},
     {"key": "highway", "value": "trunk", "description": "🄿 Trunk Road", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-trunk.svg?sanitize=true"},
     {"key": "highway", "value": "turning_circle", "description": "🄿 Turning Circle", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/circle-stroked-15.svg?sanitize=true"},

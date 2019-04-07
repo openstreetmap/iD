@@ -5970,6 +5970,10 @@
                     "name": "Traffic Signals",
                     "terms": "light,stoplight,traffic light"
                 },
+                "highway/trailhead": {
+                    "name": "Trailhead",
+                    "terms": "hiking,mile zero,mountain biking,mountaineering,trail endpoint,trail start,staging area,trekking"
+                },
                 "highway/trunk_link": {
                     "name": "Trunk Link",
                     "terms": "on ramp,off ramp,ramp,road,street"
