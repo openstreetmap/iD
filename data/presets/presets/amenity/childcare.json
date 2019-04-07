@@ -1,5 +1,5 @@
 {
-    "icon": "maki-school",
+    "icon": "fas-child",
     "fields": [
         "name",
         "operator",

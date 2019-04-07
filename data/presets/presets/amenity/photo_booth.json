@@ -1,5 +1,5 @@
 {
-	"icon": "maki-attraction",
+	"icon": "fas-person-booth",
 	"fields": [
 		"name",
 		"operator",

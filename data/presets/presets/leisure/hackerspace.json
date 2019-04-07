@@ -1,5 +1,5 @@
 {
-    "icon": "maki-commercial",
+    "icon": "fas-code",
     "fields": [
         "name",
         "address",
