@@ -7731,7 +7731,7 @@
                 },
                 "shop/clothes/underwear": {
                     "name": "Underwear Store",
-                    "terms": "boutique,bras,brassieres,briefs,boxers,clothes,fashion,lingerie,panties,slips,socks,stockings,underclothing,underpants"
+                    "terms": "boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies"
                 },
                 "shop/coffee": {
                     "name": "Coffee Store",

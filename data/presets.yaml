@@ -6363,7 +6363,7 @@ en:
       shop/clothes/underwear:
         # 'shop=clothes, clothes=underwear'
         name: Underwear Store
-        # 'terms: boutique,bras,brassieres,briefs,boxers,clothes,fashion,lingerie,panties,slips,socks,stockings,underclothing,underpants'
+        # 'terms: boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies'
         terms: '<translate with synonyms or related terms for ''Underwear Store'', separated by commas>'
       shop/coffee:
         # shop=coffee

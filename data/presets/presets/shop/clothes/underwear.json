@@ -18,15 +18,16 @@
         "brassieres",
         "briefs",
         "boxers",
-        "clothes",
         "fashion",
         "lingerie",
         "panties",
         "slips",
         "socks",
         "stockings",
-        "underclothing",
-        "underpants"
+        "underclothes",
+        "undergarments",
+        "underpants",
+        "undies"
     ],
     "name": "Underwear Store"
 }
