@@ -59,6 +59,9 @@ export function actionDisconnect(nodeId, newNodeId) {
             } else {
                 way.nodes.forEach(function(waynode, index) {
                     if (waynode === nodeId) {
+                        if (way.isClosed() && parentWays.length > 1 && wayIds && wayIds.indexOf(way.id) !== -1 && index === way.nodes.length-1) {
+                            return;
+                        }
                         candidates.push({ wayID: way.id, index: index });
                     }
                 });

@@ -4,8 +4,15 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = selectedIDs.filter(function(id) {
-        return context.geometry(id) === 'vertex';
+    var vertices = [],
+        ways = [];
+
+    selectedIDs.forEach(function(id) {
+        if (context.geometry(id) === 'vertex') {
+            vertices.push(id);
+        } else {
+            ways.push(id);
+        }
     });
 
     var entityID = vertices[0];
@@ -23,7 +30,7 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.available = function() {
-        return vertices.length === 1;
+        return vertices.length === 1 && ways.every(function(way) { return context.graph().entity(way).nodes.includes(vertices[0]); });
     };
 
 
