@@ -180,6 +180,35 @@ describe('iD.actionDisconnect', function () {
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
     });
 
+    it('preserves the closed way when part of a larger disconnect operation', function () {
+        // Situation:
+        //    a ---- bb === c
+        //           =   ==
+        //           = ==
+        //           d
+        // Disconnect - at b (whilst == is selected).
+        //
+        // Expected result:
+        //    a ---- b   ee === c
+        //               =   ==
+        //               = ==
+        //               d
+        //
+        var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['e', 'c', 'd', 'e']})
+            ]);
+
+        graph = iD.actionDisconnect('b', 'e').limitWays(['='])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b']);
+        expect(graph.entity('=').nodes).to.eql(['e', 'c', 'd', 'e']);
+    });
+
     it('replaces later occurrences in a self-intersecting way', function() {
         // Situtation:
         //  a --- b
