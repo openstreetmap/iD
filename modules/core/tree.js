@@ -98,7 +98,7 @@ export function coreTree(head) {
         }
 
         return rtree.search(extent.bbox())
-            .map(function(bbox) { return head.entity(bbox.id); });
+            .map(function(bbox) { return graph.entity(bbox.id); });
     };
 
 
