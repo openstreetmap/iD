@@ -4997,6 +4997,11 @@ en:
         # leisure=stadium
         name: Stadium
         terms: '<translate with synonyms or related terms for ''Stadium'', separated by commas>'
+      leisure/swimming_area:
+        # leisure=swimming_area
+        name: Natural Swimming Area
+        # 'terms: dive,water,aquatics'
+        terms: '<translate with synonyms or related terms for ''Natural Swimming Area'', separated by commas>'
       leisure/swimming_pool:
         # leisure=swimming_pool
         name: Swimming Pool

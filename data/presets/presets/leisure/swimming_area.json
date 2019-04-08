@@ -1,20 +1,17 @@
 {
-    "icon": "fas-swimming-pool",
+    "icon": "maki-swimming",
     "fields": [
         "name",
         "access_simple",
-        "lit",
-        "location_pool",
-        "length",
-        "swimming_pool"
+        "supervised",
+        "fee",
+        "lit"
     ],
     "moreFields": [
-        "address",
         "opening_hours",
         "operator"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "terms": [
@@ -23,7 +20,7 @@
         "aquatics"
     ],
     "tags": {
-        "leisure": "swimming_pool"
+        "leisure": "swimming_area"
     },
-    "name": "Swimming Pool"
+    "name": "Natural Swimming Area"
 }
