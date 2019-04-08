@@ -200,7 +200,7 @@ describe('iD.actionDisconnect', function () {
                 iD.osmNode({id: 'c'}),
                 iD.osmNode({id: 'd'}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['e', 'c', 'd', 'e']})
+                iD.osmWay({id: '=', nodes: ['b', 'c', 'd', 'b']})
             ]);
 
         graph = iD.actionDisconnect('b', 'e').limitWays(['='])(graph);
