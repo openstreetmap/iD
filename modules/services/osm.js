@@ -27,7 +27,7 @@ var oauth = osmAuth({
 });
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
-var _tileCache = { loaded: {}, inflight: {}, seen: {} };
+var _tileCache = { loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
 var _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
@@ -365,7 +365,7 @@ export default {
         Object.values(_noteCache.inflightPost).forEach(abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
-        _tileCache = { loaded: {}, inflight: {}, seen: {} };
+        _tileCache = { loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
         _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
         _userCache = { toLoad: {}, user: {} };
         _changeset = {};
@@ -801,6 +801,9 @@ export default {
                     delete _tileCache.inflight[tile.id];
                     if (!err) {
                         _tileCache.loaded[tile.id] = true;
+                        var bbox = tile.extent.bbox();
+                        bbox.id = tile.id;
+                        _tileCache.rtree.insert(bbox);
                     }
                     if (callback) {
                         callback(err, Object.assign({ data: parsed }, tile));
@@ -816,6 +819,12 @@ export default {
         function hasInflightRequests() {
             return Object.keys(_tileCache.inflight).length;
         }
+    },
+
+
+    isDataLoaded: function(loc) {
+        var bbox = { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] };
+        return _tileCache.rtree.collides(bbox);
     },
 
 
@@ -992,22 +1001,18 @@ export default {
     // This is used to save/restore the state when entering/exiting the walkthrough
     // Also used for testing purposes.
     caches: function(obj) {
-        function cloneDeep(source) {
-            return JSON.parse(JSON.stringify(source));
-        }
-
-        function cloneNoteCache(source) {
+        function cloneCache(source) {
             var target = {};
             Object.keys(source).forEach(function(k) {
                 if (k === 'rtree') {
-                    target.rtree = rbush().fromJSON(source.rtree.toJSON());
+                    target.rtree = rbush().fromJSON(source.rtree.toJSON());  // clone rbush
                 } else if (k === 'note') {
                     target.note = {};
                     Object.keys(source.note).forEach(function(id) {
-                        target.note[id] = osmNote(source.note[id]);
+                        target.note[id] = osmNote(source.note[id]);   // copy notes
                     });
                 } else {
-                    target[k] = cloneDeep(source[k]);
+                    target[k] = JSON.parse(JSON.stringify(source[k]));   // clone deep
                 }
             });
             return target;
@@ -1015,9 +1020,9 @@ export default {
 
         if (!arguments.length) {
             return {
-                tile: cloneDeep(_tileCache),
-                note: cloneNoteCache(_noteCache),
-                user: cloneDeep(_userCache)
+                tile: cloneCache(_tileCache),
+                note: cloneCache(_noteCache),
+                user: cloneCache(_userCache)
             };
         }
 
