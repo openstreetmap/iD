@@ -8,6 +8,10 @@ export function operationDisconnect(selectedIDs, context) {
         return context.geometry(id) === 'vertex';
     });
 
+    var ways = selectedIDs.filter(function(id) {
+        return context.geometry(id) !== 'vertex';
+    });
+
     var entityID = vertices[0];
     var action = actionDisconnect(entityID);
 
@@ -23,7 +27,7 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.available = function() {
-        return vertices.length === 1;
+        return vertices.length === 1 && ways.every(function(way) { return context.graph().entity(way).nodes.includes(vertices[0]); });
     };
 
 
