@@ -1,5 +1,5 @@
 {
-    "icon": "maki-alcohol-shop",
+    "icon": "fas-wine-bottle",
     "fields": [
         "{shop}",
         "drive_through"
