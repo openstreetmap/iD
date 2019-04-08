@@ -16,8 +16,6 @@ export function coreDifference(base, head) {
     var _changes = {};
     var _didChange = {};  // 'addition', 'deletion', 'geometry', 'properties'
     var _diff = {};
-    var i, k, h, b, keys;
-
 
     function checkEntityID(id) {
         var h = head.entities[id];
