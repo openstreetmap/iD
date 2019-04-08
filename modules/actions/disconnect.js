@@ -22,7 +22,7 @@ export function actionDisconnect(nodeId, newNodeId) {
     var action = function(graph) {
         var node = graph.entity(nodeId);
         var connections = action.connections(graph);
-        
+
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID);
             var newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
