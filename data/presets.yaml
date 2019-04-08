@@ -6872,6 +6872,11 @@ en:
         name: Tactile Paving
         # 'terms: blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path'
         terms: '<translate with synonyms or related terms for ''Tactile Paving'', separated by commas>'
+      telecom/data_center:
+        # telecom=data_center
+        name: Data Center
+        # 'terms: computer systems storage,information technology,server farm,the cloud,telecommunications'
+        terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism
