@@ -8,7 +8,11 @@ export function operationDisconnect(selectedIDs, context) {
         ways = [];
 
     selectedIDs.forEach(function(id) {
-        context.geometry(id) === 'vertex' ? vertices.push(id) : ways.push(id);
+        if (context.geometry(id) === 'vertex') {
+            vertices.push(id);
+        } else {
+            ways.push(id);
+        }
     });
 
     var entityID = vertices[0];
