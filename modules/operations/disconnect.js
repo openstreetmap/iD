@@ -4,12 +4,11 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = selectedIDs.filter(function(id) {
-        return context.geometry(id) === 'vertex';
-    });
+    var vertices = [],
+        ways = [];
 
-    var ways = selectedIDs.filter(function(id) {
-        return context.geometry(id) !== 'vertex';
+    selectedIDs.forEach(function(id) {
+        context.geometry(id) === 'vertex' ? vertices.push(id) : ways.push(id);
     });
 
     var entityID = vertices[0];
