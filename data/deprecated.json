@@ -456,6 +456,10 @@
       "replace": {"shop": "baby_goods"}
     },
     {
+      "old": {"shop": "bags"},
+      "replace": {"shop": "bag"}
+    },
+    {
       "old": {"shop": "betting"},
       "replace": {"shop": "bookmaker"}
     },
@@ -490,6 +494,10 @@
     {
       "old": {"shop": "lingerie"},
       "replace": {"shop": "clothes", "clothes": "underwear"}
+    },
+    {
+      "old": {"shop": "luggage"},
+      "replace": {"shop": "bag"}
     },
     {
       "old": {"shop": "moneylender"},
