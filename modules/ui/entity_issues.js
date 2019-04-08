@@ -144,6 +144,7 @@ export function uiEntityIssues(context) {
                 if (d.onClick) {
                     utilHighlightEntities(d.entityIds, false, context);
                     d.onClick();
+                    context.validator().validate();
                 }
             })
             .on('mouseover.highlight', function(d) {

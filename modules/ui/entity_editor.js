@@ -290,6 +290,11 @@ export function uiEntityEditor(context) {
                 _coalesceChanges = !!onInput;
             }
         }
+
+        // if leaving field (blur event), rerun validation
+        if (!onInput) {
+            context.validator().validate();
+        }
     }
 
 

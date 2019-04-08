@@ -16,8 +16,8 @@ export function coreValidator(context) {
     var _entityRules = [];
 //    var _changesRules = [];        // skip for now
 
-    var _issuesByIssueID = {};
-    var _issuesByEntityID = {};
+    var _issuesByIssueID = {};       // issue.id -> issue
+    var _issuesByEntityID = {};      // entity.id -> set(issue.id)
     var _validatedGraph = null;
 
 
@@ -42,7 +42,7 @@ export function coreValidator(context) {
 
 
     //
-    // reset caches, called whenever iD resets after a save
+    // clear caches, called whenever iD resets after a save
     //
     validator.reset = function() {
         // clear caches
@@ -76,7 +76,11 @@ export function coreValidator(context) {
 
 
     validator.getEntityIssues = function(entityID) {
-        return _issuesByEntityID[entityID] || [];
+        var issueIDs = _issuesByEntityID[entityID];
+        if (!issueIDs) return [];
+
+        return Array.from(issueIDs)
+            .map(function(id) { return _issuesByIssueID[id]; });
     };
 
 
@@ -102,17 +106,23 @@ export function coreValidator(context) {
 
 
     //
-    // Remove a single entity from the caches
+    // Remove a single entity and all its related issues from the caches
     //
     function uncacheEntity(entity) {
-        var issues = _issuesByEntityID[entity.id] || [];
-        issues.forEach(function(issue) {
+        var issueIDs = _issuesByEntityID[entity.id];
+        if (!issueIDs) return;
+
+        issueIDs.forEach(function(issueID) {
+            var issue = _issuesByIssueID[issueID];
             var entities = issue.entities || [];
-            entities.forEach(function(entity) {
-                delete _issuesByEntityID[entity.id];
+            entities.forEach(function(other) {   // other entities will need to be revalidated
+                if (other.id !== entity.id) {
+                    delete _issuesByEntityID[other.id];
+                }
             });
             delete _issuesByIssueID[issue.id];
         });
+        delete _issuesByEntityID[entity.id];
     }
 
 
@@ -226,9 +236,9 @@ export function coreValidator(context) {
                 var entities = issue.entities || [];
                 entities.forEach(function(entity) {
                     if (!_issuesByEntityID[entity.id]) {
-                        _issuesByEntityID[entity.id] = [];
+                        _issuesByEntityID[entity.id] = new Set();
                     }
-                    _issuesByEntityID[entity.id].push(issue);
+                    _issuesByEntityID[entity.id].add(issue.id);
                 });
                 _issuesByIssueID[issue.id] = issue;
             });
