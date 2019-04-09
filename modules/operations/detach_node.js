@@ -48,11 +48,13 @@ export function operationDetachNode(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        var reason;
-        if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        return false;
     };
 
 
@@ -60,7 +62,8 @@ export function operationDetachNode(selectedIDs, context) {
         var disableReason = operation.disabled();
         if (disableReason) {
             return t('operations.detach_node.' + disableReason,
-                { relation: context.presets().item('type/restriction').name() });
+                { relation: context.presets().item('type/restriction').name() }
+            );
         } else {
             return t('operations.detach_node.description');
         }

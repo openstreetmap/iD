@@ -5,10 +5,8 @@ import { modeSelect } from '../modes/index';
 
 
 export function operationSplit(selectedIDs, context) {
-    var vertices = selectedIDs.filter(function(id) {
-        return context.geometry(id) === 'vertex';
-    });
-
+    var vertices = selectedIDs
+        .filter(function(id) { return context.geometry(id) === 'vertex'; });
     var entityID = vertices[0];
     var action = actionSplit(entityID);
     var ways = [];
@@ -34,11 +32,13 @@ export function operationSplit(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
-        if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        return false;
     };
 
 
@@ -46,8 +46,7 @@ export function operationSplit(selectedIDs, context) {
         var disable = operation.disabled();
         if (disable) {
             return t('operations.split.' + disable);
-        }
-        if (ways.length === 1) {
+        } else if (ways.length === 1) {
             return t('operations.split.description.' + context.geometry(ways[0].id));
         } else {
             return t('operations.split.description.multiple');

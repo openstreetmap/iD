@@ -27,7 +27,9 @@ export function setAreaKeys(value) {
 
 
 export function coreContext() {
-    var context = {};
+    var dispatch = d3_dispatch('enter', 'exit', 'change');
+    var context = utilRebind({}, dispatch, 'on');
+
     context.version = '2.14.3';
 
     // create a special translation that contains the keys in place of the strings
@@ -54,8 +56,6 @@ export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3_dispatch('enter', 'exit', 'change');
-    context = utilRebind(context, dispatch, 'on');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9

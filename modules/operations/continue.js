@@ -33,17 +33,20 @@ export function operationContinue(selectedIDs, context) {
 
 
     operation.available = function() {
-        return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+        return geometries.vertex.length === 1 &&
+            geometries.line.length <= 1 &&
             !context.features().hasHiddenConnections(vertex, context.graph());
     };
 
 
     operation.disabled = function() {
         var candidates = candidateWays();
-        if (candidates.length === 0)
+        if (candidates.length === 0) {
             return 'not_eligible';
-        if (candidates.length > 1)
+        } else if (candidates.length > 1) {
             return 'multiple';
+        }
+        return false;
     };
 
 

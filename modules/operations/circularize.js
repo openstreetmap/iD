@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
 import { actionCircularize } from '../actions';
 import { behaviorOperation } from '../behavior';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationCircularize(selectedIDs, context) {
@@ -9,7 +10,8 @@ export function operationCircularize(selectedIDs, context) {
     var extent = entity.extent(context.graph());
     var geometry = context.geometry(entityID);
     var action = actionCircularize(entityID, context.projection);
-
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
 
     var operation = function() {
         context.perform(action, operation.annotation());
@@ -24,13 +26,18 @@ export function operationCircularize(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
-        if (extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+        var osm = context.connection();
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (extent.percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
+        } else if (osm && !coords.every(osm.isDataLoaded)) {
+            return 'not_downloaded';
         } else if (context.hasHiddenConnections(entityID)) {
-            reason = 'connected_to_hidden';
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        return false;
     };
 
 

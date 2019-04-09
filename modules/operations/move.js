@@ -2,12 +2,15 @@ import { t } from '../util/locale';
 import { behaviorOperation } from '../behavior';
 import { geoExtent } from '../geo';
 import { modeMove } from '../modes';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationMove(selectedIDs, context) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var extent = selectedIDs.reduce(function(extent, id) {
-        return extent.extend(context.entity(id).extent(context.graph()));
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
+    var extent = nodes.reduce(function(extent, node) {
+        return extent.extend(node.extent(context.graph()));
     }, geoExtent());
 
 
@@ -23,15 +26,17 @@ export function operationMove(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
+        var osm = context.connection();
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+            return 'too_large';
+        } else if (osm && !coords.every(osm.isDataLoaded)) {
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+            return 'connected_to_hidden';
         } else if (selectedIDs.some(incompleteRelation)) {
-            reason = 'incomplete_relation';
+            return 'incomplete_relation';
         }
-        return reason;
+        return false;
 
         function incompleteRelation(id) {
             var entity = context.entity(id);

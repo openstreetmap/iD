@@ -18,8 +18,10 @@ export function operationReflectLong(selectedIDs, context) {
 export function operationReflect(selectedIDs, context, axis) {
     axis = axis || 'long';
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var extent = selectedIDs.reduce(function(extent, id) {
-        return extent.extend(context.entity(id).extent(context.graph()));
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
+    var extent = nodes.reduce(function(extent, node) {
+        return extent.extend(node.extent(context.graph()));
     }, geoExtent());
 
 
@@ -31,25 +33,22 @@ export function operationReflect(selectedIDs, context, axis) {
 
 
     operation.available = function() {
-        var nodes = utilGetAllNodes(selectedIDs, context.graph());
-        var uniqeLocs = nodes.reduce(function(acc, node) {
-            return acc.add(node.loc);
-        }, new Set());
-
-        return uniqeLocs.size >= 3;
+        return nodes.length >= 3;
     };
 
 
     operation.disabled = function() {
-        var reason;
+        var osm = context.connection();
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+            return 'too_large';
+        } else if (osm && !coords.every(osm.isDataLoaded)) {
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+            return 'connected_to_hidden';
         } else if (selectedIDs.some(incompleteRelation)) {
-            reason = 'incomplete_relation';
+            return 'incomplete_relation';
         }
-        return reason;
+        return false;
 
         function incompleteRelation(id) {
             var entity = context.entity(id);

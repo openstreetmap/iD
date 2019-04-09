@@ -1,11 +1,14 @@
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
-import { utilArrayDifference } from '../util/index';
+import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
 export function operationStraighten(selectedIDs, context) {
     var action = actionStraighten(selectedIDs, context.projection);
+    var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
+    var nodes = utilGetAllNodes(wayIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
 
 
     function operation() {
@@ -14,49 +17,45 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.available = function() {
-        var nodes = [];
-        var startNodes = [];
-        var endNodes = [];
-        var selectedNodes = [];
+        var nodeIDs = nodes.map(function(node) { return node.id; });
+        var startNodeIDs = [];
+        var endNodeIDs = [];
+        var selectedNodeIDs = [];
 
-        // collect nodes along selected ways
         for (var i = 0; i < selectedIDs.length; i++) {
-            if (!context.hasEntity(selectedIDs[i])) return false;
-
             var entity = context.entity(selectedIDs[i]);
             if (entity.type === 'node') {
-                selectedNodes.push(entity.id);
+                selectedNodeIDs.push(entity.id);
                 continue;
             } else if (entity.type !== 'way' || entity.isClosed()) {
                 return false;  // exit early, can't straighten these
             }
 
-            nodes = nodes.concat(entity.nodes);
-            startNodes.push(entity.nodes[0]);
-            endNodes.push(entity.nodes[entity.nodes.length-1]);
+            startNodeIDs.push(entity.first());
+            endNodeIDs.push(entity.last());
         }
 
-        // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
-        startNodes = startNodes.filter(function(n) {
-            return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
+        // Remove duplicate end/startNodeIDs (duplicate nodes cannot be at the line end)
+        startNodeIDs = startNodeIDs.filter(function(n) {
+            return startNodeIDs.indexOf(n) === startNodeIDs.lastIndexOf(n);
         });
-        endNodes = endNodes.filter(function(n) {
-            return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
+        endNodeIDs = endNodeIDs.filter(function(n) {
+            return endNodeIDs.indexOf(n) === endNodeIDs.lastIndexOf(n);
         });
 
         // Return false if line is only 2 nodes long
-        if (new Set(nodes).size <= 2) return false;
+        if (nodeIDs.length <= 2) return false;
 
         // Return false unless exactly 0 or 2 specific start/end nodes are selected
-        if (!(selectedNodes.length === 0 || selectedNodes.length === 2)) return false;
+        if (!(selectedNodeIDs.length === 0 || selectedNodeIDs.length === 2)) return false;
 
         // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
-        if (utilArrayDifference(startNodes, endNodes).length +
-            utilArrayDifference(endNodes, startNodes).length !== 2) return false;
+        if (utilArrayDifference(startNodeIDs, endNodeIDs).length +
+            utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return false;
 
         // Ensure both start/end selected nodes lie on the selected path
-        if (selectedNodes.length === 2 && (
-            nodes.indexOf(selectedNodes[0]) === -1 || nodes.indexOf(selectedNodes[1]) === -1
+        if (selectedNodeIDs.length === 2 && (
+            nodeIDs.indexOf(selectedNodeIDs[0]) === -1 || nodeIDs.indexOf(selectedNodeIDs[1]) === -1
         )) return false;
 
         return true;
@@ -64,13 +63,16 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
-        for (var i = 0; i < selectedIDs.length; i++) {
-            if (context.hasHiddenConnections(selectedIDs[i])) {
-                reason = 'connected_to_hidden';
-            }
+        var osm = context.connection();
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (osm && !coords.every(osm.isDataLoaded)) {
+            return 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        return false;
     };
 
 

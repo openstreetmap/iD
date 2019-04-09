@@ -4,10 +4,8 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = selectedIDs.filter(function(id) {
-        return context.geometry(id) === 'vertex';
-    });
-
+    var vertices = selectedIDs
+        .filter(function(id) { return context.geometry(id) === 'vertex'; });
     var entityID = vertices[0];
     var action = actionDisconnect(entityID);
 
@@ -28,11 +26,13 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
-        if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        return false;
     };
 
 
