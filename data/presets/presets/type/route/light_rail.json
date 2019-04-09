@@ -1,5 +1,5 @@
 {
-    "icon": "iD-route-light-rail",
+    "icon": "temaki-light_rail",
     "fields": [
         "name",
         "ref_route",

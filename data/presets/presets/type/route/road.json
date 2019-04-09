@@ -1,10 +1,10 @@
 {
-    "icon": "iD-route-road",
+    "icon": "iD-highway-unclassified",
     "fields": [
         "name",
         "ref_route",
         "network_road",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

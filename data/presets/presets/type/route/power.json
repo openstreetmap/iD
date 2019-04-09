@@ -1,10 +1,10 @@
 {
-    "icon": "iD-route-power",
+    "icon": "iD-power-line",
     "fields": [
         "name",
         "ref_route",
         "operator",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

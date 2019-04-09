@@ -1,5 +1,5 @@
 {
-    "icon": "iD-route-horse",
+    "icon": "maki-horse-riding",
     "fields": [
         "name",
         "ref_route",
@@ -7,7 +7,7 @@
         "network_horse",
         "description",
         "distance",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

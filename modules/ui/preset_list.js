@@ -292,7 +292,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
-                .call(uiPresetIcon()
+                .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', click)
@@ -380,7 +380,7 @@ export function uiPresetList(context) {
 
             var button = wrap.append('button')
                 .attr('class', 'preset-list-button')
-                .call(uiPresetIcon()
+                .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', item.choose)
