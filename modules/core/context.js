@@ -336,7 +336,8 @@ export function coreContext() {
         community: false,   // community bounding polygons
         imperial: false,    // imperial (not metric) bounding polygons
         driveLeft: false,   // driveLeft bounding polygons
-        target: false       // touch targets
+        target: false,      // touch targets
+        downloaded: false   // downloaded data from osm
     };
     context.debugFlags = function() {
         return debugFlags;
