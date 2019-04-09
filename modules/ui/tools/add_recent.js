@@ -210,7 +210,7 @@ export function uiToolAddRecent(context) {
             buttonsEnter
                 .each(function(d) {
                     d3_select(this)
-                        .call(uiPresetIcon()
+                        .call(uiPresetIcon(context)
                             .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
                             .preset(d.preset)
                             .sizeClass('small')

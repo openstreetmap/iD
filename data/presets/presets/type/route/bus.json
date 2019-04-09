@@ -1,5 +1,5 @@
 {
-    "icon": "iD-route-bus",
+    "icon": "maki-bus",
     "fields": [
         "name",
         "ref_route",

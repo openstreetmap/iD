@@ -1,5 +1,5 @@
 {
-    "icon": "maki-beer",
+    "icon": "fas-beer",
     "fields": [
         "name",
         "address",

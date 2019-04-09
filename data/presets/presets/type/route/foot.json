@@ -1,11 +1,11 @@
 {
-    "icon": "iD-route-foot",
+    "icon": "temaki-pedestrian",
     "fields": [
         "name",
         "ref_route",
         "operator",
         "network_foot",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

@@ -1,15 +1,15 @@
 {
-    "icon": "maki-commercial",
+    "icon": "fas-code",
     "fields": [
         "name",
         "address",
         "building_area",
         "opening_hours",
-        "website"
+        "website",
+        "internet_access"
     ],
     "moreFields": [
         "payment_multi",
-        "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "smoking",

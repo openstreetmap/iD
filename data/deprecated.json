@@ -1,6 +1,10 @@
 {
   "dataDeprecated": [
     {
+      "old": {"aerialway": "canopy"},
+      "replace": {"aerialway": "zip_line"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
@@ -21,8 +25,24 @@
       "replace": {"amenity": "community_centre"}
     },
     {
+      "old": {"amenity": "dog_bin"},
+      "replace": {"amenity": "waste_basket", "waste": "dog_excrement"}
+    },
+    {
+      "old": {"amenity": "dog_waste_bin"},
+      "replace": {"amenity": "waste_basket", "waste": "dog_excrement"}
+    },
+    {
+      "old": {"amenity": "embassy"},
+      "replace": {"office": "diplomatic"}
+    },
+    {
       "old": {"amenity": "ev_charging"},
       "replace": {"amenity": "charging_station"}
+    },
+    {
+      "old": {"amenity": "fire_hydrant"},
+      "replace": {"emergency": "fire_hydrant"}
     },
     {
       "old": {"amenity": "firepit"},
@@ -35,6 +55,26 @@
     {
       "old": {"amenity": "garages"},
       "replace": {"landuse": "garages"}
+    },
+    {
+      "old": {"amenity": "gym"},
+      "replace": {"leisure": "fitness_centre"}
+    },
+    {
+      "old": {"amenity": "hotel"},
+      "replace": {"tourism": "hotel"}
+    },
+    {
+      "old": {"amenity": "kiosk"},
+      "replace": {"shop": "kiosk"}
+    },
+    {
+      "old": {"amenity": "nursery"},
+      "replace": {"amenity": "kindergarten"}
+    },
+    {
+      "old": {"amenity": "preschool"},
+      "replace": {"amenity": "kindergarten"}
     },
     {
       "old": {"amenity": "public_building"},
@@ -69,6 +109,10 @@
       "replace": {"leisure": "swimming_pool"}
     },
     {
+      "old": {"amenity": "ticket_booth"},
+      "replace": {"shop": "ticket"}
+    },
+    {
       "old": {"amenity": "toilet"},
       "replace": {"amenity": "toilets"}
     },
@@ -77,12 +121,24 @@
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
     {
+      "old": {"amenity": "winery"},
+      "replace": {"craft": "winery"}
+    },
+    {
       "old": {"amenity": "youth_center"},
       "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
     },
     {
       "old": {"amenity": "youth_centre"},
       "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
+    },
+    {
+      "old": {"barrier": "curb"},
+      "replace": {"barrier": "kerb"}
+    },
+    {
+      "old": {"barrier": "entrance"},
+      "replace": {"entrance": "*"}
     },
     {
       "old": {"barrier": "wire_fence"},
@@ -123,6 +179,10 @@
     {
       "old": {"color": "*"},
       "replace": {"colour": "$1"}
+    },
+    {
+      "old": {"craft": "glass"},
+      "replace": {"craft": "glaziery"}
     },
     {
       "old": {"crossing": "zebra"},
@@ -237,7 +297,7 @@
     },
     {
       "old": {"highway": "unsurfaced"},
-      "replace": {"highway": "road", "incline": "unpaved"}
+      "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
       "old": {"kerb": "dropped"},
@@ -284,6 +344,14 @@
       "replace": {"club": "*"}
     },
     {
+      "old": {"leisure": "video_arcade"},
+      "replace": {"leisure": "amusement_arcade"}
+    },
+    {
+      "old": {"man_made": "cut_line"},
+      "replace": {"man_made": "cutline"}
+    },
+    {
       "old": {"man_made": "jetty"},
       "replace": {"highway": "footway", "man_made": "pier"}
     },
@@ -302,6 +370,10 @@
     {
       "old": {"man_made": "well"},
       "replace": {"man_made": "water_well"}
+    },
+    {
+      "old": {"man_made": "winery"},
+      "replace": {"craft": "winery"}
     },
     {
       "old": {"memorial": "plate"},
@@ -336,8 +408,16 @@
       "replace": {"addr:postcode": "$1"}
     },
     {
+      "old": {"power": "busbar"},
+      "replace": {"power": "line", "line": "busbar"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
+    },
+    {
+      "old": {"power": "underground_cable"},
+      "replace": {"power": "cable", "location": "underground"}
     },
     {
       "old": {"power_source": "*"},
@@ -356,12 +436,40 @@
       "replace": {"route": "bicycle", "network": "ncn"}
     },
     {
+      "old": {"shop": "adult"},
+      "replace": {"shop": "erotic"}
+    },
+    {
+      "old": {"shop": "antique"},
+      "replace": {"shop": "antiques"}
+    },
+    {
+      "old": {"shop": "auto_parts"},
+      "replace": {"shop": "car_parts"}
+    },
+    {
+      "old": {"shop": "baby"},
+      "replace": {"shop": "baby_goods"}
+    },
+    {
+      "old": {"shop": "baby_care"},
+      "replace": {"shop": "baby_goods"}
+    },
+    {
+      "old": {"shop": "bags"},
+      "replace": {"shop": "bag"}
+    },
+    {
       "old": {"shop": "betting"},
       "replace": {"shop": "bookmaker"}
     },
     {
       "old": {"shop": "boutique"},
       "replace": {"shop": "clothes"}
+    },
+    {
+      "old": {"shop": "dive"},
+      "replace": {"shop": "scuba_diving"}
     },
     {
       "old": {"shop": "fashion"},
@@ -384,6 +492,18 @@
       "replace": {"shop": "art"}
     },
     {
+      "old": {"shop": "lingerie"},
+      "replace": {"shop": "clothes", "clothes": "underwear"}
+    },
+    {
+      "old": {"shop": "luggage"},
+      "replace": {"shop": "bag"}
+    },
+    {
+      "old": {"shop": "moneylender"},
+      "replace": {"shop": "money_lender"}
+    },
+    {
       "old": {"shop": "organic"},
       "replace": {"shop": "supermarket", "organic": "only"}
     },
@@ -394,6 +514,18 @@
     {
       "old": {"shop": "real_estate"},
       "replace": {"office": "estate_agent"}
+    },
+    {
+      "old": {"shop": "tickets"},
+      "replace": {"shop": "ticket"}
+    },
+    {
+      "old": {"shop": "underwear"},
+      "replace": {"shop": "clothes", "clothes": "underwear"}
+    },
+    {
+      "old": {"shop": "winery"},
+      "replace": {"craft": "winery"}
     },
     {
       "old": {"sloped_curb": "0"},

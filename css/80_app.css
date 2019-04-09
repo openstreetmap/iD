@@ -227,7 +227,6 @@ table.tags, table.tags td, table.tags th {
 /* Grid
 ------------------------------------------------------- */
 .col6  { float: left; width: 50.0000%; max-width: 600px; }
-.col8  { float: left; width: 66.6666%; }
 .col12 { float: left; width: 100.0000%; }
 
 
@@ -1203,21 +1202,16 @@ a.hide-toggle {
 .preset-icon-line {
     margin: auto;
     position: absolute;
+    left: 0;
+    right: 0;
     top: 0;
     width: 100%;
     height: 100%;
 }
-[dir='ltr'] .preset-icon-line {
-    left: 0;
-}
-[dir='rtl'] .preset-icon-line {
-    right: 0;
-}
-.preset-icon-line path.line {
+.preset-icon-container path {
     cursor: inherit;
 }
-.preset-icon-line circle.vertex,
-.preset-icon-fill circle.vertex {
+.preset-icon-container circle.vertex {
     fill: #fff;
     stroke: rgba(0, 0, 0, 0.25);
 }
@@ -1226,10 +1220,10 @@ a.hide-toggle {
     stroke: rgba(0, 0, 0, 0.25);
 }
 /* use a consistent stroke width */
-.preset-icon-line path.line.stroke {
+.preset-icon-container path.line.stroke {
     stroke-width: 2 !important;
 }
-.preset-icon-line path.line.casing {
+.preset-icon-container path.line.casing {
     stroke-width: 4 !important;
 }
 
@@ -1280,7 +1274,8 @@ a.hide-toggle {
 .preset-icon.framed .icon {
     transform: scale(0.4);
 }
-.preset-icon.framed.line-geom .icon {
+.preset-icon.framed.line-geom .icon,
+.preset-icon.framed.route-geom .icon {
     top: 20%;
     transform: translateY(-30%) scale(0.4);
 }
@@ -1290,7 +1285,8 @@ a.hide-toggle {
 .preset-icon-iD.framed .icon {
     transform: scale(0.74);
 }
-.preset-icon-iD.framed.line-geom .icon {
+.preset-icon-iD.framed.line-geom .icon,
+.preset-icon-iD.framed.route-geom .icon {
     transform: translateY(-30%) scale(0.74);
 }
 .preset-icon-container.fallback .preset-icon .icon {
@@ -4361,6 +4357,9 @@ img.tile-debug {
     right: 0;
     margin: auto;
     z-index: 50;
+    width: 50%;
+    min-width: 200px;
+    max-width: 600px;
 }
 
 .modal .loader {
@@ -4426,7 +4425,9 @@ img.tile-debug {
 .loading-modal {
     text-align: center;
 }
-
+.modal-actions {
+    display: flex;
+}
 .modal-actions button {
     font-weight: normal;
     color: #7092ff;
@@ -4434,7 +4435,7 @@ img.tile-debug {
     border-radius: 0;
     height: 160px;
     text-align: center;
-    display: inline-block;
+    width: 100%;
 }
 .modal-actions button:hover {
     background-color: #ececec;
@@ -5335,8 +5336,8 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     padding: 10px 20px 0 20px;
 }
 
-[dir='rtl'] .curtain-tooltip .tooltip-inner .button-section button.col8 {
-    float: right;
+.curtain-tooltip .tooltip-inner .button-section button {
+    width: 66.6666%;
 }
 
 .curtain-tooltip .tooltip-inner .instruction:only-child {

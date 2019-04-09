@@ -1,0 +1,22 @@
+{
+    "icon": "maki-embassy",
+    "fields": [
+        "name",
+        "embassy",
+        "{office/diplomatic}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "diplomatic",
+        "diplomatic": "embassy"
+    },
+    "reference": {
+        "key": "diplomatic",
+        "value": "embassy"
+    },
+    "terms": [],
+    "name": "Embassy"
+}

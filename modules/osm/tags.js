@@ -17,7 +17,7 @@ export var osmOneWayTags = {
         'platter': true,
         'rope_tow': true,
         't-bar': true,
-        'zipline': true
+        'zip_line': true
     },
     'highway': {
         'motorway': true

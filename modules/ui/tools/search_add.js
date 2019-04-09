@@ -418,7 +418,7 @@ export function uiToolSearchAdd(context) {
 
         row.each(function(d) {
             d3_select(this).call(
-                uiPresetIcon()
+                uiPresetIcon(context)
                     .geometry(d.geometry)
                     .preset(d.preset || d.presets[0])
                     .sizeClass('small')

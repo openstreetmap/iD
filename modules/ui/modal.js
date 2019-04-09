@@ -41,7 +41,7 @@ export function uiModal(selection, blocking) {
 
     var modal = shaded
         .append('div')
-        .attr('class', 'modal fillL col6');
+        .attr('class', 'modal fillL');
 
     if (!blocking) {
         shaded.on('click.remove-modal', function() {

@@ -114,6 +114,11 @@ export function uiCommit(context) {
             }
         }
 
+        for (var key in tags) {
+            // remove existing warning counts
+            if (key.match(/^warnings:/)) delete tags[key];
+        }
+
         var warningCountsByType = {};
         context.validator().getWarnings().forEach(function(warning) {
             // deletion count can be derived so don't tag that warning in the changeset

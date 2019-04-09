@@ -74,7 +74,7 @@ path.line.stroke.tag-route-ferry {
     stroke-width: 12;
 }
 .low-zoom path.line.stroke.tag-route-ferry,
-.preset-icon-line path.line.stroke.tag-route-ferry {
+.preset-icon-container path.line.stroke.tag-route-ferry {
     stroke-width: 2;
     stroke-dasharray: 6,4;
 }
@@ -163,7 +163,7 @@ path.line.casing.tag-man_made-pipeline {
 .low-zoom path.line.stroke.tag-man_made-pipeline {
     stroke-dasharray: 40, 1;
 }
-.preset-icon-line path.line.stroke.tag-man_made-pipeline {
+.preset-icon-container path.line.stroke.tag-man_made-pipeline {
     stroke-dasharray: 19, 1;
 }
 
@@ -190,7 +190,7 @@ path.line.casing.tag-boundary-national_park {
 path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
 }
-.preset-icon-line path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
+.preset-icon-container path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: rgb(170, 170, 170);
 }
 path.line.casing.tag-natural,
@@ -213,9 +213,9 @@ path.line.stroke.tag-man_made-breakwater {
     stroke-linecap: butt;
     stroke-dasharray: 8, 2, 2, 2;
 }
-.preset-icon-line path.line.stroke.tag-barrier,
-.preset-icon-line path.line.stroke.tag-man_made-groyne,
-.preset-icon-line path.line.stroke.tag-man_made-breakwater {
+.preset-icon-container path.line.stroke.tag-barrier,
+.preset-icon-container path.line.stroke.tag-man_made-groyne,
+.preset-icon-container path.line.stroke.tag-man_made-breakwater {
     stroke-dasharray: 1, 4, 6, 4;
 }
 
@@ -373,34 +373,34 @@ path.line.casing.tag-status {
     color: #fc6c14;
     fill: #fff;
 }
-path.line.shadow.tag-status.tag-status-construction {
+path.line.shadow.tag-highway.tag-status.tag-status-construction {
     stroke-width: 20;
 }
-path.line.casing.tag-status.tag-status-construction {
+path.line.casing.tag-highway.tag-status.tag-status-construction {
     stroke-width: 10;
     stroke-linecap: butt;
     stroke-dasharray: none
 }
-path.line.stroke.tag-status.tag-status-construction {
+path.line.stroke.tag-highway.tag-status.tag-status-construction {
     stroke-width: 8;
     stroke-linecap: butt;
     stroke-dasharray: 10, 10;
 }
-path.line.casing.tag-status.tag-status-construction,
-.preset-icon-line path.line.stroke.tag-status.tag-status-construction {
+path.line.casing.tag-highway.tag-status.tag-status-construction,
+.preset-icon-container path.line.stroke.tag-highway.tag-status.tag-status-construction {
     stroke: #fff;
 }
-path.line.stroke.tag-status.tag-status-construction,
-.preset-icon-line path.line.casing.tag-status.tag-status-construction {
+path.line.stroke.tag-highway.tag-status.tag-status-construction,
+.preset-icon-container path.line.casing.tag-highway.tag-status.tag-status-construction {
     stroke: #fc6c14;
 }
-.low-zoom path.line.shadow.tag-status.tag-status-construction {
+.low-zoom path.line.shadow.tag-highway.tag-status.tag-status-construction {
     stroke-width: 16;
 }
-.low-zoom path.line.casing.tag-status.tag-status-construction {
+.low-zoom path.line.casing.tag-highway.tag-status.tag-status-construction {
     stroke-width: 7;
 }
-.low-zoom path.line.stroke.tag-status.tag-status-construction {
+.low-zoom path.line.stroke.tag-highway.tag-status.tag-status-construction {
     stroke-width: 5;
     stroke-dasharray: 8, 8;
 }

@@ -152,7 +152,7 @@ export function uiEntityEditor(context) {
             });
 
         body.select('.preset-list-item button')
-            .call(uiPresetIcon()
+            .call(uiPresetIcon(context)
                 .geometry(context.geometry(_entityID))
                 .preset(_activePreset)
             );

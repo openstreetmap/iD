@@ -1,5 +1,5 @@
 {
-    "icon": "maki-swimming",
+    "icon": "fas-swimming-pool",
     "fields": [
         "name",
         "access_simple",
@@ -9,8 +9,9 @@
         "swimming_pool"
     ],
     "moreFields": [
-        "operator",
-        "address"
+        "address",
+        "opening_hours",
+        "operator"
     ],
     "geometry": [
         "point",

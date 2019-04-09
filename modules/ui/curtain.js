@@ -106,7 +106,7 @@ export function uiCurtain() {
 
             if (options.buttonText && options.buttonCallback) {
                 html += '<div class="button-section">' +
-                    '<button href="#" class="button action col8">' + options.buttonText + '</button></div>';
+                    '<button href="#" class="button action">' + options.buttonText + '</button></div>';
             }
 
             var classes = 'curtain-tooltip tooltip in ' + (options.tooltipClass || '');
