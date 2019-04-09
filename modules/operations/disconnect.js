@@ -5,32 +5,52 @@ import { behaviorOperation } from '../behavior/index';
 
 export function operationDisconnect(selectedIDs, context) {
     var vertices = [],
-        ways = [];
+        ways = [],
+        others = [];
 
     selectedIDs.forEach(function(id) {
         if (context.geometry(id) === 'vertex') {
             vertices.push(id);
-        } else {
+        } else if (context.entity(id).type === 'way'){
             ways.push(id);
+        } else {
+            others.push(id);
         }
     });
 
-    var entityID = vertices[0];
-    var action = actionDisconnect(entityID);
+    var actions = [];
 
-    if (entityID && selectedIDs.length > 1) {
-        var ids = selectedIDs.filter(function(id) { return id !== entityID; });
-        action.limitWays(ids);
-    }
+    vertices.forEach(function(vertexID) {
+        var action = actionDisconnect(vertexID);
+
+        if (ways.length > 0) {
+            var waysIDsForVertex = ways.filter(function(wayID) {
+                return context.graph().entity(wayID).nodes.includes(vertexID);
+            });
+            action.limitWays(waysIDsForVertex);
+        }
+        actions.push(action);
+    });
 
 
     var operation = function() {
-        context.perform(action, operation.annotation());
+        context.perform(function(graph) {
+            actions.forEach(function(action) {
+                graph = action(graph);
+            });
+            return graph;
+        }, operation.annotation());
     };
 
 
     operation.available = function() {
-        return vertices.length === 1 && ways.every(function(way) { return context.graph().entity(way).nodes.includes(vertices[0]); });
+        return vertices.length > 0 &&
+            others.length === 0 &&
+            (ways.length === 0 || ways.every(function(way) {
+                return vertices.some(function(vertex) {
+                    return context.graph().entity(way).nodes.includes(vertex);
+                });
+            }));
     };
 
 
@@ -39,7 +59,12 @@ export function operationDisconnect(selectedIDs, context) {
         if (selectedIDs.some(context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+        for (var actionIndex in actions) {
+            var action = actions[actionIndex];
+            var actionReason = action.disabled(context.graph());
+            if (actionReason) return actionReason;
+        }
+        return reason;
     };
 
 
