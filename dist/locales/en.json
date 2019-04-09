@@ -4394,6 +4394,10 @@
                     "name": "Compressed Air",
                     "terms": ""
                 },
+                "amenity/conference_centre": {
+                    "name": "Convention Center",
+                    "terms": "auditorium,conference,exhibition,exposition,lecture"
+                },
                 "amenity/courthouse": {
                     "name": "Courthouse",
                     "terms": ""
@@ -4425,6 +4429,10 @@
                 "amenity/driving_school": {
                     "name": "Driving School",
                     "terms": ""
+                },
+                "amenity/events_venue": {
+                    "name": "Events Venue",
+                    "terms": "banquet hall,baptism,Bar Mitzvah,Bat Mitzvah,birthdays,celebrations,conferences,confirmation,meetings,parties,party,quinceañera,reunions,weddings"
                 },
                 "amenity/fast_food": {
                     "name": "Fast Food",

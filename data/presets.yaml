@@ -2496,6 +2496,11 @@ en:
         # amenity=compressed_air
         name: Compressed Air
         terms: '<translate with synonyms or related terms for ''Compressed Air'', separated by commas>'
+      amenity/conference_centre:
+        # amenity=conference_centre
+        name: Convention Center
+        # 'terms: auditorium,conference,exhibition,exposition,lecture'
+        terms: '<translate with synonyms or related terms for ''Convention Center'', separated by commas>'
       amenity/courthouse:
         # amenity=courthouse
         name: Courthouse
@@ -2540,6 +2545,11 @@ en:
       amenity/embassy:
         # amenity=embassy
         name: Embassy
+      amenity/events_venue:
+        # amenity=events_venue
+        name: Events Venue
+        # 'terms: banquet hall,baptism,Bar Mitzvah,Bat Mitzvah,birthdays,celebrations,conferences,confirmation,meetings,parties,party,quinceañera,reunions,weddings'
+        terms: '<translate with synonyms or related terms for ''Events Venue'', separated by commas>'
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
