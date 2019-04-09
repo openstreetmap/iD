@@ -1487,6 +1487,7 @@
     {"key": "sac_scale", "value": "difficult_alpine_hiking", "description": "🄵 Hiking Difficulty"},
     {"key": "salt", "description": "🄵 Salt"},
     {"key": "sanitary_dump_station", "description": "🄵 Toilet Disposal"},
+    {"key": "screen", "description": "🄵 Screens"},
     {"key": "scuba_diving:", "description": "🄵 Services"},
     {"key": "seamark:beacon_isolated_danger:shape", "description": "🄵 Shape"},
     {"key": "seamark:beacon_lateral:category", "value": "port", "description": "🄵 Category"},
