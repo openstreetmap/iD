@@ -1597,6 +1597,11 @@ en:
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
+      screen:
+        # screen=*
+        label: Screens
+        # screen field placeholder
+        placeholder: '1, 4, 8…'
       scuba_diving:
         # 'scuba_diving:=*'
         label: Services

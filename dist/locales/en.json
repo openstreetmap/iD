@@ -3541,6 +3541,10 @@
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
+                "screen": {
+                    "label": "Screens",
+                    "placeholder": "1, 4, 8…"
+                },
                 "scuba_diving": {
                     "label": "Services"
                 },

@@ -3,16 +3,17 @@
     "fields": [
         "name",
         "address",
+        "screen",
         "building_area",
         "opening_hours",
         "payment_multi"
     ],
     "moreFields": [
         "air_conditioning",
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [
