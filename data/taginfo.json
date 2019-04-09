@@ -64,7 +64,7 @@
     {"key": "amenity", "value": "bank", "description": "🄿 Bank", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"},
     {"key": "amenity", "value": "bar", "description": "🄿 Bar", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bar-15.svg?sanitize=true"},
     {"key": "lgbtq", "value": "primary", "description": "🄿 LGBTQ+ Bar, 🄿 LGBTQ+ Community Center, 🄿 LGBTQ+ Nightclub, 🄿 LGBTQ+ Pub, 🄿 LGBTQ+ Erotic Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bar-15.svg?sanitize=true"},
-    {"key": "amenity", "value": "bbq", "description": "🄿 Barbecue/Grill", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bbq-15.svg?sanitize=true"},
+    {"key": "amenity", "value": "bbq", "description": "🄿 Barbecue Grill", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bbq-15.svg?sanitize=true"},
     {"key": "amenity", "value": "bench", "description": "🄿 Bench", "object_types": ["node", "way"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/bench.svg?sanitize=true"},
     {"key": "amenity", "value": "bicycle_parking", "description": "🄿 Bicycle Parking", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bicycle-15.svg?sanitize=true"},
     {"key": "amenity", "value": "bicycle_rental", "description": "🄿 Bicycle Rental", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bicycle-15.svg?sanitize=true"},

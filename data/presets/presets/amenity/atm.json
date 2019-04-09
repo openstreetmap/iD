@@ -27,5 +27,6 @@
     "tags": {
         "amenity": "atm"
     },
-    "name": "ATM"
+    "name": "ATM",
+    "subtitle": "Machine allowing bank account access"
 }

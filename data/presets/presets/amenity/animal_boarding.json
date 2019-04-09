@@ -38,5 +38,6 @@
     "tags": {
         "amenity": "animal_boarding"
     },
-    "name": "Animal Boarding Facility"
+    "name": "Animal Boarding Facility",
+    "subtitle": "Temporary housing and care for pets"
 }

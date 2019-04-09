@@ -7,7 +7,8 @@
         "lit"
     ],
     "geometry": [
-        "point", "area"
+        "point",
+        "area"
     ],
     "terms": [
         "open air",
@@ -23,6 +24,5 @@
         "key": "theatre:type",
         "value":  "amphi"
     },
-    "name": "Amphitheatre",
-    "subtitle": "Open-air theater"
+    "name": "Amphitheatre"
 }

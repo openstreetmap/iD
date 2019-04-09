@@ -2368,7 +2368,7 @@ en:
       amenity/animal_boarding:
         # amenity=animal_boarding
         name: Animal Boarding Facility
-        subtitle: '<translate with short summary or explanation of ''Animal Boarding Facility'', if needed>'
+        subtitle: Temporary housing and care for pets
         # 'terms: boarding,cat,cattery,dog,horse,kennel,kitten,pet,pet boarding,pet care,pet hotel,puppy,reptile'
         terms: '<translate with synonyms or related terms for ''Animal Boarding Facility'', separated by commas>'
       amenity/animal_breeding:
@@ -2391,7 +2391,7 @@ en:
       amenity/atm:
         # amenity=atm
         name: ATM
-        subtitle: '<translate with short summary or explanation of ''ATM'', if needed>'
+        subtitle: Machine allowing bank account access
         # 'terms: money,cash,machine'
         terms: '<translate with synonyms or related terms for ''ATM'', separated by commas>'
       amenity/bank:
@@ -2403,7 +2403,7 @@ en:
       amenity/bar:
         # amenity=bar
         name: Bar
-        subtitle: Serves alcoholic drinks
+        subtitle: Establishment serving alcoholic drinks
         # 'terms: dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Bar'', separated by commas>'
       amenity/bar/lgbtq:
@@ -2414,10 +2414,10 @@ en:
         terms: '<translate with synonyms or related terms for ''LGBTQ+ Bar'', separated by commas>'
       amenity/bbq:
         # amenity=bbq
-        name: Barbecue/Grill
-        subtitle: '<translate with short summary or explanation of ''Barbecue/Grill'', if needed>'
+        name: Barbecue Grill
+        subtitle: Device for cooking over flames
         # 'terms: bbq,grill'
-        terms: '<translate with synonyms or related terms for ''Barbecue/Grill'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Barbecue Grill'', separated by commas>'
       amenity/bench:
         # amenity=bench
         name: Bench
@@ -2445,7 +2445,7 @@ en:
       amenity/biergarten:
         # amenity=biergarten
         name: Biergarten
-        subtitle: Serves beer outside
+        subtitle: Establishment serving beer outside
         # 'terms: beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Biergarten'', separated by commas>'
       amenity/boat_rental:
@@ -2510,7 +2510,7 @@ en:
       amenity/cinema:
         # amenity=cinema
         name: Cinema
-        subtitle: Movie theater
+        subtitle: Venue for screening motion pictures
         # 'terms: drive-in,film,flick,movie,theater,picture,show,screen'
         terms: '<translate with synonyms or related terms for ''Cinema'', separated by commas>'
       amenity/clinic:
@@ -2538,7 +2538,7 @@ en:
       amenity/clock/sundial:
         # 'amenity=clock, display=sundial'
         name: Sundial
-        subtitle: Tells time from the sun
+        subtitle: Device using the sun to tell time
         # 'terms: gnomon,shadow'
         terms: '<translate with synonyms or related terms for ''Sundial'', separated by commas>'
       amenity/college:
@@ -2939,7 +2939,7 @@ en:
       amenity/pub:
         # amenity=pub
         name: Pub
-        subtitle: Serves beer & food
+        subtitle: Establishment serving beer and food
         # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
       amenity/pub/lgbtq:
@@ -3226,7 +3226,7 @@ en:
       amenity/theatre/type/amphi:
         # 'amenity=theatre, theatre:type=amphi'
         name: Amphitheatre
-        subtitle: Open-air theater
+        subtitle: '<translate with short summary or explanation of ''Amphitheatre'', if needed>'
         # 'terms: open air,outdoor,greek,ampi'
         terms: '<translate with synonyms or related terms for ''Amphitheatre'', separated by commas>'
       amenity/toilets:
