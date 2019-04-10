@@ -1034,6 +1034,9 @@ en:
           outdoor: Outdoor
           # location=roof
           roof: Rooftop
+      lock:
+        # lock=*
+        label: Lock
       man_made:
         # man_made=*
         label: Type
@@ -7255,6 +7258,10 @@ en:
         # waterway=canal
         name: Canal
         terms: '<translate with synonyms or related terms for ''Canal'', separated by commas>'
+      waterway/canal/lock:
+        # 'waterway=canal, lock=yes'
+        name: Canal Lock
+        terms: '<translate with synonyms or related terms for ''Canal Lock'', separated by commas>'
       waterway/dam:
         # waterway=dam
         name: Dam
@@ -7277,6 +7284,11 @@ en:
         name: Marine Fuel Station
         # 'terms: petrol,gas,diesel,boat'
         terms: '<translate with synonyms or related terms for ''Marine Fuel Station'', separated by commas>'
+      waterway/lock_gate:
+        # waterway=lock_gate
+        name: Lock Gate
+        # 'terms: canal'
+        terms: '<translate with synonyms or related terms for ''Lock Gate'', separated by commas>'
       waterway/milestone:
         # waterway=milestone
         name: Waterway Milestone

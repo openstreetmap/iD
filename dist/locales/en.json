@@ -3091,6 +3091,9 @@
                 "location": {
                     "label": "Location"
                 },
+                "lock": {
+                    "label": "Lock"
+                },
                 "man_made": {
                     "label": "Type"
                 },
@@ -8505,6 +8508,10 @@
                     "name": "Canal",
                     "terms": ""
                 },
+                "waterway/canal/lock": {
+                    "name": "Canal Lock",
+                    "terms": ""
+                },
                 "waterway/dam": {
                     "name": "Dam",
                     "terms": ""
@@ -8524,6 +8531,10 @@
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
+                },
+                "waterway/lock_gate": {
+                    "name": "Lock Gate",
+                    "terms": "canal"
                 },
                 "waterway/milestone": {
                     "name": "Waterway Milestone",

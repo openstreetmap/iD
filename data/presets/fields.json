@@ -200,6 +200,7 @@
     "lit": {"key": "lit", "type": "check", "label": "Lit"},
     "location_pool": {"key": "location", "type": "typeCombo", "label": "Location", "strings": {"options": {"outdoor": "Outdoor", "indoor": "Indoor", "roof": "Rooftop"}}},
     "location": {"key": "location", "type": "combo", "label": "Location"},
+    "lock": {"key": "lock", "type": "check", "label": "Lock"},
     "man_made": {"key": "man_made", "type": "typeCombo", "label": "Type"},
     "manhole": {"key": "manhole", "type": "typeCombo", "label": "Type"},
     "map_size": {"key": "map_size", "type": "typeCombo", "label": "Coverage"},
