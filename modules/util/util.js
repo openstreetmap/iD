@@ -348,3 +348,22 @@ export function utilHashcode(str) {
     }
     return hash;
 }
+
+var statusKeys = { construction: true, proposed: true };
+var statusFeatureKeys = ['highway', 'railway', 'building'];
+export function utilLifecycleStatusInfo(tags) {
+    for (var i in statusFeatureKeys) {
+        var statusFeatureKey = statusFeatureKeys[i];
+        if (tags[statusFeatureKey] && statusKeys[tags[statusFeatureKey]]) {
+            var statusKey = tags[statusFeatureKey];
+            if (tags[statusKey]) {
+                return {
+                    featureKey: statusFeatureKey,
+                    status: tags[statusFeatureKey],
+                    featureValue: tags[statusKey]
+                };
+            }
+        }
+    }
+    return null;
+}

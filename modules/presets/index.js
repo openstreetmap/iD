@@ -6,7 +6,7 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilArrayUniq, utilRebind } from '../util';
+import { utilArrayUniq, utilRebind, utilLifecycleStatusInfo } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -49,6 +49,13 @@ export function presetIndex(context) {
     };
 
     all.matchTags = function(tags, geometry) {
+
+        var statusInfo = utilLifecycleStatusInfo(tags);
+        if (statusInfo) {
+            tags = Object.assign({}, tags); // shallow copy
+            // match against the base tag instead of the status tag
+            tags[statusInfo.featureKey] = statusInfo.featureValue;
+        }
 
         var address;
         var geometryMatches = _index[geometry];
