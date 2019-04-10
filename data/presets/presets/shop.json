@@ -13,10 +13,11 @@
         "air_conditioning",
         "brand",
         "currency_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "second_hand",
+        "website",
         "wheelchair"
     ],
     "geometry": [

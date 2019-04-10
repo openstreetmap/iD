@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
-export function uiPresetIcon() {
+export function uiPresetIcon(context) {
     var preset, geometry, sizeClass = 'medium';
 
     function isSmall() {
@@ -119,30 +119,87 @@ export function uiPresetIcon() {
             .attr('height', h)
             .attr('viewBox', '0 0 ' + w + ' ' + h);
 
-        lineEnter.append('path')
-            .attr('d', 'M' + x1 + ' ' + y + ' L' + x2 + ' ' + y)
-            .attr('class', 'line casing');
-        lineEnter.append('path')
-            .attr('d', 'M' + x1 + ' ' + y + ' L' + x2 + ' ' + y)
-            .attr('class', 'line stroke');
-        lineEnter.append('circle')
-            .attr('class', 'vertex')
-            .attr('cx', x1 - 1)
-            .attr('cy', y)
-            .attr('r', r);
-        lineEnter.append('circle')
-            .attr('class', 'vertex')
-            .attr('cx', x2 + 1)
-            .attr('cy', y)
-            .attr('r', r);
+        ['casing', 'stroke'].forEach(function(klass) {
+            lineEnter.append('path')
+                .attr('d', 'M' + x1 + ' ' + y + ' L' + x2 + ' ' + y)
+                .attr('class', 'line ' + klass);
+        });
+
+        [[x1 - 1, y], [x2 + 1, y]].forEach(function(loc) {
+            lineEnter.append('circle')
+                .attr('class', 'vertex')
+                .attr('cx', loc[0])
+                .attr('cy', loc[1])
+                .attr('r', r);
+        });
     }
 
+    function renderRoute(routeEnter) {
+        var d = isSmall() ? 40 : 60;
+        // draw the route parametrically
+        var w = d,
+            h = d,
+            y1 = Math.round(d*0.80),
+            y2 = Math.round(d*0.68),
+            l = Math.round(d*0.6),
+            r = 2;
+        var x1 = (w - l)/2, x2 = x1 + l/3, x3 = x2 + l/3, x4 = x3 + l/3;
+
+        routeEnter = routeEnter
+            .append('svg')
+            .attr('class', 'preset-icon-route')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+        ['casing', 'stroke'].forEach(function(klass) {
+            routeEnter.append('path')
+                .attr('d', 'M' + x1 + ' ' + y1 + ' L' + x2 + ' ' + y2)
+                .attr('class', 'segment0 line ' + klass);
+            routeEnter.append('path')
+                .attr('d', 'M' + x2 + ' ' + y2 + ' L' + x3 + ' ' + y1)
+                .attr('class', 'segment1 line ' + klass);
+            routeEnter.append('path')
+                .attr('d', 'M' + x3 + ' ' + y1 + ' L' + x4 + ' ' + y2)
+                .attr('class', 'segment2 line ' + klass);
+        });
+
+        [[x1, y1], [x2, y2], [x3, y1], [x4, y2]].forEach(function(loc) {
+            routeEnter.append('circle')
+                .attr('class', 'vertex')
+                .attr('cx', loc[0])
+                .attr('cy', loc[1])
+                .attr('r', r);
+        });
+    }
+
+    var routeSegements = {
+        bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
+        bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
+        detour: ['highway/tertiary', 'highway/residential', 'highway/unclassified'],
+        ferry: ['route/ferry', 'route/ferry', 'route/ferry'],
+        foot: ['highway/footway', 'highway/footway', 'highway/footway'],
+        hiking: ['highway/path', 'highway/path', 'highway/path'],
+        horse: ['highway/bridleway', 'highway/bridleway', 'highway/bridleway'],
+        light_rail: ['railway/light_rail', 'railway/light_rail', 'railway/light_rail'],
+        pipeline: ['man_made/pipeline', 'man_made/pipeline', 'man_made/pipeline'],
+        piste: ['piste/downhill', 'piste/hike', 'piste/nordic'],
+        power: ['power/line', 'power/line', 'power/line'],
+        road: ['highway/secondary', 'highway/primary', 'highway/trunk'],
+        subway: ['railway/subway', 'railway/subway', 'railway/subway'],
+        train: ['railway/rail', 'railway/rail', 'railway/rail'],
+        tram: ['railway/tram', 'railway/tram', 'railway/tram'],
+        waterway: ['waterway/stream', 'waterway/stream', 'waterway/stream']
+    };
 
     function render() {
 
         var p = preset.apply(this, arguments);
         var isFallback = isSmall() && p.isFallback && p.isFallback();
         var geom = geometry ? geometry.apply(this, arguments) : null;
+        if (geom === 'relation' && p.tags && ((p.tags.type === 'route' && p.tags.route && routeSegements[p.tags.route]) || p.tags.type === 'waterway')) {
+            geom = 'route';
+        }
         var imageURL = p.imageURL;
         var picon = imageURL ? null : getIcon(p, geom);
         var isMaki = picon && /^maki-/.test(picon);
@@ -154,7 +211,8 @@ export function uiPresetIcon() {
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
-        var isFramed = (drawVertex || drawArea || drawLine);
+        var drawRoute = picon && geom === 'route';
+        var isFramed = (drawVertex || drawArea || drawLine || drawRoute);
 
         var tags = !isCategory ? p.setTags({}, geom) : {};
         for (var k in tags) {
@@ -243,6 +301,31 @@ export function uiPresetIcon() {
             .attr('class', 'line stroke ' + tagClasses);
         line.selectAll('path.casing')
             .attr('class', 'line casing ' + tagClasses);
+
+        var route = container.selectAll('.preset-icon-route')
+            .data(drawRoute ? [0] : []);
+
+        route.exit()
+            .remove();
+
+        var routeEnter = route.enter();
+        renderRoute(routeEnter);
+
+        route = routeEnter.merge(route);
+
+        if (drawRoute) {
+            var routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
+            var segmentPresetIDs = routeSegements[routeType];
+            for (var segmentIndex in segmentPresetIDs) {
+                var segmentPreset = context.presets().item(segmentPresetIDs[segmentIndex]);
+                var segmentTagClasses = svgTagClasses().getClassesString(segmentPreset.tags, '');
+                route.selectAll('path.stroke.segment' + segmentIndex)
+                    .attr('class', 'segment' + segmentIndex + ' line stroke ' + segmentTagClasses);
+                route.selectAll('path.casing.segment' + segmentIndex)
+                    .attr('class', 'segment' + segmentIndex + ' line casing ' + segmentTagClasses);
+            }
+
+        }
 
 
         var icon = container.selectAll('.preset-icon')

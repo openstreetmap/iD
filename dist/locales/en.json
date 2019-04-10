@@ -603,6 +603,7 @@
             "all_tags": "All tags",
             "all_members": "All members",
             "all_relations": "All relations",
+            "add_to_relation": "Add to a relation",
             "new_relation": "New relation...",
             "choose_relation": "Choose a parent relation",
             "role": "Role",
@@ -1607,6 +1608,16 @@
                 "message": "{feature} has the generic name \"{name}\"",
                 "tip": "Names should be the actual, on-the-ground names of features."
             },
+            "incompatible_source": {
+                "title": "Incompatible Data Sources",
+                "google": {
+                    "feature": {
+                        "message": "{feature} lists Google as a data source"
+                    },
+                    "tip": "Google products are proprietary and must not be used as references."
+                },
+                "tip": "Source data must be licensed in a manner compatible with OpenStreetMap."
+            },
             "many_deletions": {
                 "title": "Many Deletions",
                 "points-lines-areas": {
@@ -1700,6 +1711,9 @@
                 },
                 "remove_private_info": {
                     "annotation": "Removed private information."
+                },
+                "remove_proprietary_data": {
+                    "title": "Remove any proprietary data"
                 },
                 "remove_tag": {
                     "title": "Remove the tag",
@@ -2503,6 +2517,9 @@
                 "construction": {
                     "label": "Type"
                 },
+                "consulate": {
+                    "label": "Type"
+                },
                 "contact/webcam": {
                     "label": "Webcam URL",
                     "placeholder": "http://example.com/"
@@ -2645,6 +2662,12 @@
                 "diet_multi": {
                     "label": "Diet Types"
                 },
+                "diplomatic": {
+                    "label": "Type"
+                },
+                "diplomatic/services": {
+                    "label": "Services"
+                },
                 "direction_cardinal": {
                     "label": "Direction",
                     "options": {
@@ -2738,6 +2761,9 @@
                 "embankment": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "embassy": {
+                    "label": "Type"
                 },
                 "emergency": {
                     "label": "Emergency"
@@ -3066,6 +3092,9 @@
                 "levels": {
                     "label": "Levels",
                     "placeholder": "2, 4, 6..."
+                },
+                "liaison": {
+                    "label": "Type"
                 },
                 "lit": {
                     "label": "Lit"
@@ -3531,6 +3560,10 @@
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
+                "screen": {
+                    "label": "Screens",
+                    "placeholder": "1, 4, 8…"
+                },
                 "scuba_diving": {
                     "label": "Services"
                 },
@@ -3819,6 +3852,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "target": {
+                    "label": "Target"
                 },
                 "tidal": {
                     "label": "Tidal"
@@ -4169,6 +4205,10 @@
                     "name": "T-bar Lift",
                     "terms": "tbar"
                 },
+                "aerialway/zip_line": {
+                    "name": "Zip Line",
+                    "terms": "aerial runway,canopy,flying fox,foefie slide,gravity propelled aerial ropeslide,Tyrolean traverse,zip wire,zip-line,zipline,zipwire"
+                },
                 "aeroway/aerodrome": {
                     "name": "Airport",
                     "terms": "aerodrome,aeroway,airplane,airport,jet,plane"
@@ -4211,6 +4251,10 @@
                 },
                 "amenity/coworking_space": {
                     "name": "Coworking Space",
+                    "terms": ""
+                },
+                "amenity/embassy": {
+                    "name": "Embassy",
                     "terms": ""
                 },
                 "amenity/ferry_terminal": {
@@ -4373,6 +4417,10 @@
                     "name": "Compressed Air",
                     "terms": ""
                 },
+                "amenity/conference_centre": {
+                    "name": "Convention Center",
+                    "terms": "auditorium,conference,exhibition,exposition,lecture"
+                },
                 "amenity/courthouse": {
                     "name": "Courthouse",
                     "terms": ""
@@ -4405,9 +4453,9 @@
                     "name": "Driving School",
                     "terms": ""
                 },
-                "amenity/embassy": {
-                    "name": "Embassy",
-                    "terms": ""
+                "amenity/events_venue": {
+                    "name": "Events Venue",
+                    "terms": "banquet hall,baptism,Bar Mitzvah,Bat Mitzvah,birthdays,celebrations,conferences,confirmation,meetings,parties,party,quinceañera,reunions,weddings"
                 },
                 "amenity/fast_food": {
                     "name": "Fast Food",
@@ -5601,10 +5649,6 @@
                     "name": "Sand Trap",
                     "terms": "hazard,bunker"
                 },
-                "golf/cartpath_service": {
-                    "name": "Golf Cartpath / Service Road",
-                    "terms": ""
-                },
                 "golf/cartpath": {
                     "name": "Golf Cartpath",
                     "terms": ""
@@ -5952,6 +5996,10 @@
                 "highway/traffic_signals": {
                     "name": "Traffic Signals",
                     "terms": "light,stoplight,traffic light"
+                },
+                "highway/trailhead": {
+                    "name": "Trailhead",
+                    "terms": "hiking,mile zero,mountain biking,mountaineering,trail endpoint,trail start,staging area,trekking"
                 },
                 "highway/trunk_link": {
                     "name": "Trunk Link",
@@ -6517,6 +6565,10 @@
                     "name": "Stadium",
                     "terms": ""
                 },
+                "leisure/swimming_area": {
+                    "name": "Natural Swimming Area",
+                    "terms": "dive,water,aquatics"
+                },
                 "leisure/swimming_pool": {
                     "name": "Swimming Pool",
                     "terms": "dive,water,aquatics"
@@ -6920,6 +6972,22 @@
                 "office/coworking": {
                     "name": "Coworking Space",
                     "terms": "coworking,office"
+                },
+                "office/diplomatic": {
+                    "name": "Diplomatic Office",
+                    "terms": ""
+                },
+                "office/diplomatic/consulate": {
+                    "name": "Consulate",
+                    "terms": ""
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Embassy",
+                    "terms": ""
+                },
+                "office/diplomatic/liaison": {
+                    "name": "Liaison Office",
+                    "terms": ""
                 },
                 "office/educational_institution": {
                     "name": "Educational Institution",
@@ -7441,6 +7509,10 @@
                     "name": "Buffer Stop",
                     "terms": "stop,halt,buffer"
                 },
+                "railway/construction": {
+                    "name": "Railway Under Construction",
+                    "terms": ""
+                },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",
                     "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"
@@ -7483,7 +7555,7 @@
                 },
                 "railway/rail": {
                     "name": "Rail",
-                    "terms": ""
+                    "terms": "rail line,railroad track,train track"
                 },
                 "railway/rail/highspeed": {
                     "name": "High-Speed Rail",
@@ -7692,6 +7764,10 @@
                 "shop/clothes": {
                     "name": "Clothing Store",
                     "terms": "blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear"
+                },
+                "shop/clothes/underwear": {
+                    "name": "Underwear Store",
+                    "terms": "boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies"
                 },
                 "shop/coffee": {
                     "name": "Coffee Store",
@@ -8112,6 +8188,10 @@
                 "tactile_paving": {
                     "name": "Tactile Paving",
                     "terms": "blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path"
+                },
+                "telecom/data_center": {
+                    "name": "Data Center",
+                    "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",

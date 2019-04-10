@@ -1,11 +1,11 @@
 {
-    "icon": "iD-route-bicycle",
+    "icon": "maki-bicycle",
     "fields": [
         "name",
         "ref_route",
         "network_bicycle",
         "cycle_network",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

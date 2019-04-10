@@ -92,7 +92,9 @@ export function uiToolUndoRedo(context) {
         function update() {
             buttons
                 .property('disabled', !editable())
-                .classed('disabled', function(d) { return !d.annotation(); })
+                .classed('disabled', function(d) {
+                    return !editable() || !d.annotation();
+                })
                 .each(function() {
                     var selection = d3_select(this);
                     if (selection.property('tooltipVisible')) {

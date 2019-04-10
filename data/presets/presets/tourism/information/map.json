@@ -1,5 +1,5 @@
 {
-    "icon": "maki-information",
+    "icon": "fas-map",
     "fields": [
         "operator",
         "map_type",

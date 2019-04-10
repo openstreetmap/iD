@@ -1,12 +1,12 @@
 {
-    "icon": "iD-route-piste",
+    "icon": "fas-skiing",
     "fields": [
         "name",
         "piste/type",
         "colour",
         "ref_route",
         "operator",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

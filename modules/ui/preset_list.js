@@ -105,16 +105,21 @@ export function uiPresetList(context) {
                 if (geocoder && entity) {
                     var center = entity.extent(context.graph()).center();
                     geocoder.countryCode(center, function countryCallback(err, countryCode) {
+                        // get the input value again because it may have changed
+                        var currentValue = search.property('value');
+
+                        if (!currentValue.length) return;
+
                         var results;
                         if (!err && countryCode) {
                             countryCode = countryCode.toLowerCase();
-                            results = presets.search(value, geometry, countryCode);
+                            results = presets.search(currentValue, geometry, countryCode);
                         } else {
-                            results = presets.search(value, geometry);
+                            results = presets.search(currentValue, geometry);
                         }
                         message.text(t('inspector.results', {
                             n: results.collection.length,
-                            search: value
+                            search: currentValue
                         }));
                         list.call(drawList, results);
                     });
@@ -287,7 +292,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
-                .call(uiPresetIcon()
+                .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', click)
@@ -375,7 +380,7 @@ export function uiPresetList(context) {
 
             var button = wrap.append('button')
                 .attr('class', 'preset-list-button')
-                .call(uiPresetIcon()
+                .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', item.choose)

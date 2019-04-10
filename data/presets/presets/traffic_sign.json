@@ -1,5 +1,5 @@
 {
-    "icon": "maki-square-stroked",
+    "icon": "fas-directions",
     "fields": [
         "traffic_sign",
         "direction"

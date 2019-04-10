@@ -358,6 +358,9 @@ en:
       construction:
         # construction=*
         label: Type
+      consulate:
+        # consulate=*
+        label: Type
       contact/webcam:
         # 'contact:webcam=*'
         label: Webcam URL
@@ -510,6 +513,12 @@ en:
       diet_multi:
         # 'diet:=*'
         label: Diet Types
+      diplomatic:
+        # diplomatic=*
+        label: Type
+      diplomatic/services:
+        # 'diplomatic:services:=*'
+        label: Services
       direction:
         # direction=*
         label: Direction (Degrees Clockwise)
@@ -632,6 +641,9 @@ en:
         label: Type
         # embankment field placeholder
         placeholder: Default
+      embassy:
+        # embassy=*
+        label: Type
       emergency:
         # emergency=*
         label: Emergency
@@ -1003,6 +1015,9 @@ en:
         label: Levels
         # levels field placeholder
         placeholder: '2, 4, 6...'
+      liaison:
+        # liaison=*
+        label: Type
       lit:
         # lit=*
         label: Lit
@@ -1582,6 +1597,11 @@ en:
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
+      screen:
+        # screen=*
+        label: Screens
+        # screen field placeholder
+        placeholder: '1, 4, 8…'
       scuba_diving:
         # 'scuba_diving:=*'
         label: Services
@@ -1938,6 +1958,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      target:
+        # target=*
+        label: Target
       tidal:
         # tidal=*
         label: Tidal
@@ -2262,6 +2285,11 @@ en:
         name: T-bar Lift
         # 'terms: tbar'
         terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
+      aerialway/zip_line:
+        # aerialway=zip_line
+        name: Zip Line
+        # 'terms: aerial runway,canopy,flying fox,foefie slide,gravity propelled aerial ropeslide,Tyrolean traverse,zip wire,zip-line,zipline,zipwire'
+        terms: '<translate with synonyms or related terms for ''Zip Line'', separated by commas>'
       aeroway:
         # aeroway=*
         name: Aeroway
@@ -2473,6 +2501,11 @@ en:
         # amenity=compressed_air
         name: Compressed Air
         terms: '<translate with synonyms or related terms for ''Compressed Air'', separated by commas>'
+      amenity/conference_centre:
+        # amenity=conference_centre
+        name: Convention Center
+        # 'terms: auditorium,conference,exhibition,exposition,lecture'
+        terms: '<translate with synonyms or related terms for ''Convention Center'', separated by commas>'
       amenity/courthouse:
         # amenity=courthouse
         name: Courthouse
@@ -2517,7 +2550,11 @@ en:
       amenity/embassy:
         # amenity=embassy
         name: Embassy
-        terms: '<translate with synonyms or related terms for ''Embassy'', separated by commas>'
+      amenity/events_venue:
+        # amenity=events_venue
+        name: Events Venue
+        # 'terms: banquet hall,baptism,Bar Mitzvah,Bat Mitzvah,birthdays,celebrations,conferences,confirmation,meetings,parties,party,quinceañera,reunions,weddings'
+        terms: '<translate with synonyms or related terms for ''Events Venue'', separated by commas>'
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
@@ -3903,13 +3940,9 @@ en:
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
       golf/cartpath:
-        # 'golf=cartpath, golf_cart=designated'
+        # golf=cartpath
         name: Golf Cartpath
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
-      golf/cartpath_service:
-        # 'highway=service, golf=cartpath, golf_cart=designated'
-        name: Golf Cartpath / Service Road
-        terms: '<translate with synonyms or related terms for ''Golf Cartpath / Service Road'', separated by commas>'
       golf/driving_range:
         # 'golf=driving_range, landuse=grass'
         name: Driving Range
@@ -3931,7 +3964,7 @@ en:
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
-        # 'golf=path, foot=designated'
+        # golf=path
         name: Golf Walking Path
         terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
       golf/rough:
@@ -4316,6 +4349,11 @@ en:
         name: Traffic Signals
         # 'terms: light,stoplight,traffic light'
         terms: '<translate with synonyms or related terms for ''Traffic Signals'', separated by commas>'
+      highway/trailhead:
+        # highway=trailhead
+        name: Trailhead
+        # 'terms: hiking,mile zero,mountain biking,mountaineering,trail endpoint,trail start,staging area,trekking'
+        terms: '<translate with synonyms or related terms for ''Trailhead'', separated by commas>'
       highway/trunk:
         # highway=trunk
         name: Trunk Road
@@ -4970,6 +5008,11 @@ en:
         # leisure=stadium
         name: Stadium
         terms: '<translate with synonyms or related terms for ''Stadium'', separated by commas>'
+      leisure/swimming_area:
+        # leisure=swimming_area
+        name: Natural Swimming Area
+        # 'terms: dive,water,aquatics'
+        terms: '<translate with synonyms or related terms for ''Natural Swimming Area'', separated by commas>'
       leisure/swimming_pool:
         # leisure=swimming_pool
         name: Swimming Pool
@@ -5439,6 +5482,22 @@ en:
         name: Coworking Space
         # 'terms: coworking,office'
         terms: '<translate with synonyms or related terms for ''Coworking Space'', separated by commas>'
+      office/diplomatic:
+        # office=diplomatic
+        name: Diplomatic Office
+        terms: '<translate with synonyms or related terms for ''Diplomatic Office'', separated by commas>'
+      office/diplomatic/consulate:
+        # 'office=diplomatic, diplomatic=consulate'
+        name: Consulate
+        terms: '<translate with synonyms or related terms for ''Consulate'', separated by commas>'
+      office/diplomatic/embassy:
+        # 'office=diplomatic, diplomatic=embassy'
+        name: Embassy
+        terms: '<translate with synonyms or related terms for ''Embassy'', separated by commas>'
+      office/diplomatic/liaison:
+        # 'office=diplomatic, diplomatic=liaison'
+        name: Liaison Office
+        terms: '<translate with synonyms or related terms for ''Liaison Office'', separated by commas>'
       office/educational_institution:
         # office=educational_institution
         name: Educational Institution
@@ -6025,6 +6084,10 @@ en:
         name: Buffer Stop
         # 'terms: stop,halt,buffer'
         terms: '<translate with synonyms or related terms for ''Buffer Stop'', separated by commas>'
+      railway/construction:
+        # railway=construction
+        name: Railway Under Construction
+        terms: '<translate with synonyms or related terms for ''Railway Under Construction'', separated by commas>'
       railway/crossing:
         # railway=crossing
         name: Railway Crossing (Path)
@@ -6082,6 +6145,7 @@ en:
       railway/rail:
         # railway=rail
         name: Rail
+        # 'terms: rail line,railroad track,train track'
         terms: '<translate with synonyms or related terms for ''Rail'', separated by commas>'
       railway/rail/highspeed:
         # 'railway=rail, highspeed=yes'
@@ -6318,6 +6382,11 @@ en:
         name: Clothing Store
         # 'terms: blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear'
         terms: '<translate with synonyms or related terms for ''Clothing Store'', separated by commas>'
+      shop/clothes/underwear:
+        # 'shop=clothes, clothes=underwear'
+        name: Underwear Store
+        # 'terms: boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies'
+        terms: '<translate with synonyms or related terms for ''Underwear Store'', separated by commas>'
       shop/coffee:
         # shop=coffee
         name: Coffee Store
@@ -6814,6 +6883,11 @@ en:
         name: Tactile Paving
         # 'terms: blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path'
         terms: '<translate with synonyms or related terms for ''Tactile Paving'', separated by commas>'
+      telecom/data_center:
+        # telecom=data_center
+        name: Data Center
+        # 'terms: computer systems storage,information technology,server farm,the cloud,telecommunications'
+        terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism

@@ -69,6 +69,10 @@ export function uiRawMemberEditor(context) {
 
 
     function deleteMember(d) {
+
+        // remove the hover-highlight styling
+        utilHighlightEntities([d.id], false, context);
+
         context.perform(
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
@@ -77,8 +81,6 @@ export function uiRawMemberEditor(context) {
         if (!context.hasEntity(d.relation.id)) {
             context.enter(modeBrowse(context));
         }
-
-        utilHighlightEntities([d.id], false, context);
     }
 
 

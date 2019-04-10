@@ -59,6 +59,9 @@ export function actionDisconnect(nodeId, newNodeId) {
             } else {
                 way.nodes.forEach(function(waynode, index) {
                     if (waynode === nodeId) {
+                        if (way.isClosed() && parentWays.length > 1 && wayIds && wayIds.indexOf(way.id) !== -1 && index === way.nodes.length-1) {
+                            return;
+                        }
                         candidates.push({ wayID: way.id, index: index });
                     }
                 });
@@ -71,7 +74,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     action.disabled = function(graph) {
         var connections = action.connections(graph);
-        if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
+        if (connections.length === 0)
             return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));

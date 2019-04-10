@@ -1,5 +1,5 @@
 {
-    "icon": "maki-lodging",
+    "icon": "fas-concierge-bell",
     "fields": [
         "{tourism/motel}"
     ],

@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-courthouse",
+    "icon": "fas-gavel",
     "fields": [
         "name",
         "operator",
