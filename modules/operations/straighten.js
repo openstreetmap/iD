@@ -5,6 +5,7 @@ import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
 export function operationStraighten(selectedIDs, context) {
+    var _disabled;
     var action = actionStraighten(selectedIDs, context.projection);
     var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
     var nodes = utilGetAllNodes(wayIDs, context.graph());
@@ -63,16 +64,21 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason = action.disabled(context.graph());
-        if (reason) {
-            return reason;
+        if (_disabled !== undefined) return _disabled;
+
+        _disabled = action.disabled(context.graph());
+        if (_disabled) {
+            return _disabled;
         } else if (someMissing()) {
-            return 'not_downloaded';
+            _disabled = 'not_downloaded';
+            return _disabled;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return 'connected_to_hidden';
+            _disabled = 'connected_to_hidden';
+            return _disabled;
         }
 
-        return false;
+        _disabled = false;
+        return _disabled;
 
 
         function someMissing() {

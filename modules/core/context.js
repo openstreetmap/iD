@@ -108,62 +108,59 @@ export function coreContext() {
     };
 
 
-    function wrapcb(callback, cid) {
+    function afterLoad(cid, callback) {
         return function(err, result) {
             if (err) {
                 // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
                 if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    connection.logout();
+                    if (connection) {
+                        connection.logout();
+                    }
                 }
-                return callback.call(context, err);
+                if (typeof callback === 'function') {
+                    callback(err);
+                }
+                return;
 
-            } else if (connection.getConnectionId() !== cid) {
-                return callback.call(context, { message: 'Connection Switched', status: -1 });
+            } else if (connection && connection.getConnectionId() !== cid) {
+                if (typeof callback === 'function') {
+                    callback({ message: 'Connection Switched', status: -1 });
+                }
+                return;
 
             } else {
-                return callback.call(context, err, result);
+                history.merge(result.data, result.extent);
+                if (typeof callback === 'function') {
+                    callback(err, result);
+                }
+                return;
             }
         };
     }
 
 
     context.loadTiles = function(projection, callback) {
-        var cid;
-        function done(err, result) {
-            if (!err) history.merge(result.data, result.extent);
-            if (callback) callback(err, result);
-        }
         if (connection && context.editable()) {
-            cid = connection.getConnectionId();
+            var cid = connection.getConnectionId();
             utilCallWhenIdle(function() {
-                connection.loadTiles(projection, wrapcb(done, cid));
+                connection.loadTiles(projection, afterLoad(cid, callback));
             })();
         }
     };
 
     context.loadTileAtLoc = function(loc, callback) {
-        var cid;
-        function done(err, result) {
-            if (!err) history.merge(result.data, result.extent);
-            if (callback) callback(err, result);
-        }
         if (connection && context.editable()) {
-            cid = connection.getConnectionId();
+            var cid = connection.getConnectionId();
             utilCallWhenIdle(function() {
-                connection.loadTileAtLoc(loc, wrapcb(done, cid));
+                connection.loadTileAtLoc(loc, afterLoad(cid, callback));
             })();
         }
     };
 
     context.loadEntity = function(entityID, callback) {
-        var cid;
-        function done(err, result) {
-            if (!err) history.merge(result.data, result.extent);
-            if (callback) callback(err, result);
-        }
         if (connection) {
-            cid = connection.getConnectionId();
-            connection.loadEntity(entityID, wrapcb(done, cid));
+            var cid = connection.getConnectionId();
+            connection.loadEntity(entityID, afterLoad(cid, callback));
         }
     };
 

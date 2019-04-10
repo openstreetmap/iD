@@ -1,21 +1,12 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 
 import { actionAddMidpoint } from '../actions';
-
 import {
-    behaviorBreathe,
-    behaviorCopy,
-    behaviorHover,
-    behaviorLasso,
-    behaviorPaste,
-    behaviorSelect
+    behaviorBreathe, behaviorCopy, behaviorHover,
+    behaviorLasso, behaviorPaste, behaviorSelect
 } from '../behavior';
-
 import { geoExtent, geoChooseEdge, geoPointInPolygon } from '../geo';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
@@ -24,7 +15,6 @@ import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-
 import {
     utilArrayIntersection, utilEntityOrMemberSelector,
     utilEntitySelector, utilKeybinding
@@ -148,7 +138,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function positionMenu() {
-        if (!editMenu) { return; }
+        if (!editMenu) return;
 
         var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
