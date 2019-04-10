@@ -1808,6 +1808,7 @@
     {"key": "water", "value": "salt", "description": "🄳 ➜ natural=water + salt=yes"},
     {"key": "water", "value": "tidal", "description": "🄳 ➜ natural=water + tidal=yes"},
     {"key": "waterway", "value": "aqueduct", "description": "🄳 ➜ waterway=canal + bridge=aqueduct"},
+    {"key": "waterway", "value": "lock", "description": "🄳 ➜ waterway=canal + lock=yes"},
     {"key": "wood", "value": "coniferous", "description": "🄳 ➜ leaf_type=needleleaved"},
     {"key": "wood", "value": "deciduous", "description": "🄳 ➜ leaf_cycle=deciduous"},
     {"key": "wood", "value": "evergreen", "description": "🄳 ➜ leaf_cycle=evergreen"},
