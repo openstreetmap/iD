@@ -333,6 +333,7 @@
     "start_date": {"key": "start_date", "type": "text", "universal": true, "label": "Start Date"},
     "step_count": {"key": "step_count", "type": "number", "minValue": 0, "label": "Number of Steps"},
     "stop": {"key": "stop", "type": "combo", "label": "Stop Type", "strings": {"options": {"all": "All Ways", "minor": "Minor Road"}}},
+    "street_cabinet": {"key": "street_cabinet", "type": "combo", "label": "Type"},
     "structure_waterway": {"type": "structureRadio", "keys": ["tunnel"], "label": "Structure", "placeholder": "Unknown", "strings": {"options": {"tunnel": "Tunnel"}}},
     "structure": {"type": "structureRadio", "keys": ["bridge", "tunnel", "embankment", "cutting", "ford"], "label": "Structure", "placeholder": "Unknown", "strings": {"options": {"bridge": "Bridge", "tunnel": "Tunnel", "embankment": "Embankment", "cutting": "Cutting", "ford": "Ford"}}},
     "studio": {"key": "studio", "type": "combo", "label": "Type"},

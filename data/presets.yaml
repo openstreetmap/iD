@@ -1867,6 +1867,9 @@ en:
           all: All Ways
           # stop=minor
           minor: Minor Road
+      street_cabinet:
+        # street_cabinet=*
+        label: Type
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
@@ -5060,6 +5063,11 @@ en:
         name: Antenna
         # 'terms: broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv'
         terms: '<translate with synonyms or related terms for ''Antenna'', separated by commas>'
+      man_made/beehive:
+        # man_made=beehive
+        name: Beehive
+        # 'terms: apiary,beekeeper,farm,honey,pollination'
+        terms: '<translate with synonyms or related terms for ''Beehive'', separated by commas>'
       man_made/breakwater:
         # man_made=breakwater
         name: Breakwater
@@ -5190,6 +5198,11 @@ en:
         name: Storage Tank
         # 'terms: water,oil,gas,petrol'
         terms: '<translate with synonyms or related terms for ''Storage Tank'', separated by commas>'
+      man_made/street_cabinet:
+        # man_made=street_cabinet
+        name: Street Cabinet
+        # 'terms: cable tv,monitoring box,technical box,telecommunications,traffic signal controls'
+        terms: '<translate with synonyms or related terms for ''Street Cabinet'', separated by commas>'
       man_made/surveillance:
         # man_made=surveillance
         name: Surveillance
