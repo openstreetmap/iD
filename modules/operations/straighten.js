@@ -63,16 +63,29 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var osm = context.connection();
         var reason = action.disabled(context.graph());
         if (reason) {
             return reason;
-        } else if (osm && !coords.every(osm.isDataLoaded)) {
+        } else if (someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
             return 'connected_to_hidden';
         }
+
         return false;
+
+
+        function someMissing() {
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 

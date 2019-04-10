@@ -7,7 +7,7 @@ import osmAuth from 'osm-auth';
 import rbush from 'rbush';
 
 import { JXON } from '../util/jxon';
-import { geoExtent, geoVecAdd } from '../geo';
+import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import {
     utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
@@ -27,8 +27,8 @@ var oauth = osmAuth({
 });
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
-var _tileCache = { loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
-var _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
+var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
+var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 
@@ -58,13 +58,18 @@ function abortRequest(i) {
 }
 
 
-function abortUnwantedRequests(cache, tiles) {
+function hasInflightRequests(cache) {
+    return Object.keys(cache.inflight).length;
+}
+
+
+function abortUnwantedRequests(cache, visibleTiles) {
     Object.keys(cache.inflight).forEach(function(k) {
-        var wanted = tiles.find(function(tile) { return k === tile.id; });
-        if (!wanted) {
-            abortRequest(cache.inflight[k]);
-            delete cache.inflight[k];
-        }
+        if (cache.toLoad[k]) return;
+        if (visibleTiles.find(function(tile) { return k === tile.id; })) return;
+
+        abortRequest(cache.inflight[k]);
+        delete cache.inflight[k];
     });
 }
 
@@ -365,8 +370,8 @@ export default {
         Object.values(_noteCache.inflightPost).forEach(abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
-        _tileCache = { loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
-        _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
+        _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
+        _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
         _userCache = { toLoad: {}, user: {} };
         _changeset = {};
 
@@ -774,57 +779,77 @@ export default {
     loadTiles: function(projection, callback) {
         if (_off) return;
 
-        var that = this;
-        var path = '/api/0.6/map?bbox=';
-
         // determine the needed tiles to cover the view
         var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
-        var hadRequests = hasInflightRequests();
+        var hadRequests = hasInflightRequests(_tileCache);
         abortUnwantedRequests(_tileCache, tiles);
-        if (hadRequests && !hasInflightRequests()) {
+        if (hadRequests && !hasInflightRequests(_tileCache)) {
             dispatch.call('loaded');    // stop the spinner
         }
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
-            if (!hasInflightRequests()) {
-                dispatch.call('loading');   // start the spinner
-            }
+            this.loadTile(tile, callback);
+        }, this);
+    },
 
-            var options = { skipSeen: true };
-            _tileCache.inflight[tile.id] = that.loadFromAPI(
-                path + tile.extent.toParam(),
-                function(err, parsed) {
-                    delete _tileCache.inflight[tile.id];
-                    if (!err) {
-                        _tileCache.loaded[tile.id] = true;
-                        var bbox = tile.extent.bbox();
-                        bbox.id = tile.id;
-                        _tileCache.rtree.insert(bbox);
-                    }
-                    if (callback) {
-                        callback(err, Object.assign({ data: parsed }, tile));
-                    }
-                    if (!hasInflightRequests()) {
-                        dispatch.call('loaded');     // stop the spinner
-                    }
-                },
-                options
-            );
-        });
 
-        function hasInflightRequests() {
-            return Object.keys(_tileCache.inflight).length;
+    // Load a single data tile
+    // GET /api/0.6/map?bbox=
+    loadTile: function(tile, callback) {
+        if (_off) return;
+        if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+
+        if (!hasInflightRequests(_tileCache)) {
+            dispatch.call('loading');   // start the spinner
         }
+
+        var path = '/api/0.6/map?bbox=';
+        var options = { skipSeen: true };
+
+        _tileCache.inflight[tile.id] = this.loadFromAPI(
+            path + tile.extent.toParam(),
+            function(err, parsed) {
+                delete _tileCache.inflight[tile.id];
+                if (!err) {
+                    delete _tileCache.toLoad[tile.id];
+                    _tileCache.loaded[tile.id] = true;
+                    var bbox = tile.extent.bbox();
+                    bbox.id = tile.id;
+                    _tileCache.rtree.insert(bbox);
+                }
+                if (callback) {
+                    callback(err, Object.assign({ data: parsed }, tile));
+                }
+                if (!hasInflightRequests(_tileCache)) {
+                    dispatch.call('loaded');     // stop the spinner
+                }
+            },
+            options
+        );
     },
 
 
     isDataLoaded: function(loc) {
         var bbox = { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] };
         return _tileCache.rtree.collides(bbox);
+    },
+
+
+    // load the tile that covers the given `loc`
+    loadTileAtLoc: function(loc, callback) {
+        var k = geoZoomToScale(_tileZoom + 1);
+        var offset = geoRawMercator().scale(k)(loc);
+        var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
+        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+
+        tiles.forEach(function(tile) {
+            if (_tileCache.toLoad[tile.id]) return;  // already in queue
+            _tileCache.toLoad[tile.id] = true;
+            this.loadTile(tile, callback);
+        }, this);
     },
 
 

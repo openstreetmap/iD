@@ -107,35 +107,63 @@ export function coreContext() {
         return context;
     };
 
-    context.loadTiles = utilCallWhenIdle(function(projection, callback) {
+
+    function wrapcb(callback, cid) {
+        return function(err, result) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    connection.logout();
+                }
+                return callback.call(context, err);
+
+            } else if (connection.getConnectionId() !== cid) {
+                return callback.call(context, { message: 'Connection Switched', status: -1 });
+
+            } else {
+                return callback.call(context, err, result);
+            }
+        };
+    }
+
+
+    context.loadTiles = function(projection, callback) {
         var cid;
         function done(err, result) {
-            if (connection.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
-                return;
-            }
             if (!err) history.merge(result.data, result.extent);
             if (callback) callback(err, result);
         }
         if (connection && context.editable()) {
             cid = connection.getConnectionId();
-            connection.loadTiles(projection, done);
+            utilCallWhenIdle(function() {
+                connection.loadTiles(projection, wrapcb(done, cid));
+            })();
         }
-    });
+    };
+
+    context.loadTileAtLoc = function(loc, callback) {
+        var cid;
+        function done(err, result) {
+            if (!err) history.merge(result.data, result.extent);
+            if (callback) callback(err, result);
+        }
+        if (connection && context.editable()) {
+            cid = connection.getConnectionId();
+            utilCallWhenIdle(function() {
+                connection.loadTileAtLoc(loc, wrapcb(done, cid));
+            })();
+        }
+    };
 
     context.loadEntity = function(entityID, callback) {
         var cid;
         function done(err, result) {
-            if (connection.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
-                return;
-            }
             if (!err) history.merge(result.data, result.extent);
             if (callback) callback(err, result);
         }
         if (connection) {
             cid = connection.getConnectionId();
-            connection.loadEntity(entityID, done);
+            connection.loadEntity(entityID, wrapcb(done, cid));
         }
     };
 
@@ -166,11 +194,11 @@ export function coreContext() {
     };
 
     var minEditableZoom = 16;
-    context.minEditableZoom = function(_) {
+    context.minEditableZoom = function(val) {
         if (!arguments.length) return minEditableZoom;
-        minEditableZoom = _;
+        minEditableZoom = val;
         if (connection) {
-            connection.tileZoom(_);
+            connection.tileZoom(val);
         }
         return context;
     };
@@ -178,9 +206,9 @@ export function coreContext() {
 
     /* History */
     var inIntro = false;
-    context.inIntro = function(_) {
+    context.inIntro = function(val) {
         if (!arguments.length) return inIntro;
-        inIntro = _;
+        inIntro = val;
         return context;
     };
 
@@ -284,9 +312,9 @@ export function coreContext() {
     /* Copy/Paste */
     var copyIDs = [], copyGraph;
     context.copyGraph = function() { return copyGraph; };
-    context.copyIDs = function(_) {
+    context.copyIDs = function(val) {
         if (!arguments.length) return copyIDs;
-        copyIDs = _;
+        copyIDs = val;
         copyGraph = history.graph();
         return context;
     };
@@ -355,42 +383,42 @@ export function coreContext() {
 
     /* Container */
     var container = d3_select(document.body);
-    context.container = function(_) {
+    context.container = function(val) {
         if (!arguments.length) return container;
-        container = _;
+        container = val;
         container.classed('id-container', true);
         return context;
     };
     var embed;
-    context.embed = function(_) {
+    context.embed = function(val) {
         if (!arguments.length) return embed;
-        embed = _;
+        embed = val;
         return context;
     };
 
 
     /* Assets */
     var assetPath = '';
-    context.assetPath = function(_) {
+    context.assetPath = function(val) {
         if (!arguments.length) return assetPath;
-        assetPath = _;
+        assetPath = val;
         return context;
     };
 
     var assetMap = {};
-    context.assetMap = function(_) {
+    context.assetMap = function(val) {
         if (!arguments.length) return assetMap;
-        assetMap = _;
+        assetMap = val;
         return context;
     };
 
-    context.asset = function(_) {
-        var filename = assetPath + _;
+    context.asset = function(val) {
+        var filename = assetPath + val;
         return assetMap[filename] || filename;
     };
 
-    context.imagePath = function(_) {
-        return context.asset('img/' + _);
+    context.imagePath = function(val) {
+        return context.asset('img/' + val);
     };
 
 
