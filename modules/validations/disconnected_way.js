@@ -22,59 +22,11 @@ export function validationDisconnectedWay() {
     }
 
 
-    function vertexIsDisconnected(way, vertex, graph, relation) {
-        var parents = graph.parentWays(vertex);
-
-        // standalone vertex
-        if (parents.length === 1) return true;
-
-        // entrances are considered connected
-        if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return false;
-
-        return !parents.some(function(parentWay) {
-            // ignore the way we're testing
-            if (parentWay === way) return false;
-
-            if (isTaggedAsHighway(parentWay)) return true;
-
-            return graph.parentMultipolygons(parentWay).some(function(parentRelation) {
-                // ignore the relation we're testing, if any
-                if (relation && parentRelation === relation) return false;
-
-                return isTaggedAsHighway(parentRelation);
-            });
-        });
-    }
-
-
-    function isDisconnectedWay(entity, graph) {
-        if (entity.type !== 'way') return false;
-        return graph.childNodes(entity).every(function(vertex) {
-            return vertexIsDisconnected(entity, vertex, graph);
-        });
-    }
-
-    function isDisconnectedMultipolygon(entity, graph) {
-
-        if (entity.type !== 'relation' || !entity.isMultipolygon()) return false;
-
-        return entity.members.every(function(member) {
-            if (member.type !== 'way') return true;
-
-            var way = graph.hasEntity(member.id);
-            if (!way) return true;
-
-            return graph.childNodes(way).every(function(vertex) {
-                return vertexIsDisconnected(way, vertex, graph, entity);
-            });
-        });
-    }
-
-
     var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
+
         if (!isTaggedAsHighway(entity)) return [];
-        if (!isDisconnectedWay(entity, graph) && !isDisconnectedMultipolygon(entity, graph)) return [];
+        if (!isDisconnectedWay(entity) && !isDisconnectedMultipolygon(entity)) return [];
 
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
@@ -130,6 +82,58 @@ export function validationDisconnectedWay() {
             fixes: fixes
         })];
 
+
+        function vertexIsDisconnected(way, vertex, relation) {
+            // can not accurately test vertices on tiles not downloaded from osm - #5938
+            var osm = context.connection();
+            if (osm && !osm.isDataLoaded(vertex.loc)) {
+                return false;
+            }
+
+            var parents = graph.parentWays(vertex);
+
+            // standalone vertex
+            if (parents.length === 1) return true;
+
+            // entrances are considered connected
+            if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return false;
+
+            return !parents.some(function(parentWay) {
+                if (parentWay === way) return false;   // ignore the way we're testing
+                if (isTaggedAsHighway(parentWay)) return true;
+
+                return graph.parentMultipolygons(parentWay).some(function(parentRelation) {
+                    // ignore the relation we're testing, if any
+                    if (relation && parentRelation === relation) return false;
+
+                    return isTaggedAsHighway(parentRelation);
+                });
+            });
+        }
+
+
+        function isDisconnectedWay(entity) {
+            if (entity.type !== 'way') return false;
+            return graph.childNodes(entity).every(function(vertex) {
+                return vertexIsDisconnected(entity, vertex);
+            });
+        }
+
+
+        function isDisconnectedMultipolygon(entity) {
+            if (entity.type !== 'relation' || !entity.isMultipolygon()) return false;
+
+            return entity.members.every(function(member) {
+                if (member.type !== 'way') return true;
+
+                var way = graph.hasEntity(member.id);
+                if (!way) return true;
+
+                return graph.childNodes(way).every(function(vertex) {
+                    return vertexIsDisconnected(way, vertex, entity);
+                });
+            });
+        }
 
         function continueDrawing(way, vertex) {
             // make sure the vertex is actually visible and editable
