@@ -54,7 +54,7 @@ export function presetIndex(context) {
         if (statusInfo) {
             tags = Object.assign({}, tags); // shallow copy
             // match against the base tag instead of the status tag
-            tags[statusInfo.featureKey] = statusInfo.featureValue;
+            tags[statusInfo.key] = statusInfo.value;
         }
 
         var address;

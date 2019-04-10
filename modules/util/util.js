@@ -349,19 +349,23 @@ export function utilHashcode(str) {
     return hash;
 }
 
-var statusKeys = { construction: true, proposed: true };
-var statusFeatureKeys = ['highway', 'railway', 'building'];
+var statuses = [ 'proposed', 'construction', 'disused', 'abandoned' ];
 export function utilLifecycleStatusInfo(tags) {
-    for (var i in statusFeatureKeys) {
-        var statusFeatureKey = statusFeatureKeys[i];
-        if (tags[statusFeatureKey] && statusKeys[tags[statusFeatureKey]]) {
-            var statusKey = tags[statusFeatureKey];
-            if (tags[statusKey]) {
-                return {
-                    featureKey: statusFeatureKey,
-                    status: tags[statusFeatureKey],
-                    featureValue: tags[statusKey]
-                };
+    for (var key in tags) {
+        for (var index in statuses) {
+            var status = statuses[index];
+            var regex = new RegExp('^' + status + ':(.*)');
+            var results = regex.exec(key);
+            if (results && results.length > 0) {
+                var featureKey = results[1];
+                if (!tags[featureKey]) {
+                    return {
+                        combinedKey: key,
+                        status: status,
+                        key: featureKey,
+                        value: tags[key]
+                    };
+                }
             }
         }
     }

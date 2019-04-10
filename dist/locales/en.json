@@ -618,6 +618,13 @@
                     "layer": "Layer"
                 }
             },
+            "status": {
+                "abandoned": "Abandoned",
+                "active": "Active",
+                "disused": "Disused",
+                "proposed": "Proposed",
+                "construction": "Under Construction"
+            },
             "add": "Add",
             "none": "None",
             "node": "Node",
