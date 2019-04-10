@@ -41,7 +41,6 @@
         "golf/driving_range",
         "golf/hole",
         "golf/cartpath",
-        "golf/cartpath_service",
         "golf/path"
       ]
     },

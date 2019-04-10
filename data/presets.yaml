@@ -3940,13 +3940,9 @@ en:
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
       golf/cartpath:
-        # 'golf=cartpath, golf_cart=designated'
+        # golf=cartpath
         name: Golf Cartpath
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
-      golf/cartpath_service:
-        # 'highway=service, golf=cartpath, golf_cart=designated'
-        name: Golf Cartpath / Service Road
-        terms: '<translate with synonyms or related terms for ''Golf Cartpath / Service Road'', separated by commas>'
       golf/driving_range:
         # 'golf=driving_range, landuse=grass'
         name: Driving Range
@@ -3968,7 +3964,7 @@ en:
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
-        # 'golf=path, foot=designated'
+        # golf=path
         name: Golf Walking Path
         terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
       golf/rough:

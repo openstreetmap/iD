@@ -5630,10 +5630,6 @@
                     "name": "Sand Trap",
                     "terms": "hazard,bunker"
                 },
-                "golf/cartpath_service": {
-                    "name": "Golf Cartpath / Service Road",
-                    "terms": ""
-                },
                 "golf/cartpath": {
                     "name": "Golf Cartpath",
                     "terms": ""
