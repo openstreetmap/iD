@@ -12,6 +12,7 @@ export function operationCircularize(selectedIDs, context) {
     var action = actionCircularize(entityID, context.projection);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
+    var _disabled;
 
     var operation = function() {
         context.perform(action, operation.annotation());
@@ -26,18 +27,33 @@ export function operationCircularize(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var osm = context.connection();
-        var reason = action.disabled(context.graph());
-        if (reason) {
-            return reason;
+        if (_disabled !== undefined) return _disabled;
+
+        _disabled = action.disabled(context.graph());
+        if (_disabled) {
+            return _disabled;
         } else if (extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
-        } else if (osm && !coords.every(osm.isDataLoaded)) {
-            return 'not_downloaded';
-        } else if (context.hasHiddenConnections(entityID)) {
-            return 'connected_to_hidden';
+            return _disabled = 'too_large';
+        } else if (someMissing()) {
+            return _disabled = 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return _disabled = 'connected_to_hidden';
         }
-        return false;
+
+        return _disabled = false;
+
+
+        function someMissing() {
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 

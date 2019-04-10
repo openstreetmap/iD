@@ -5,11 +5,11 @@ import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
 export function operationStraighten(selectedIDs, context) {
-    var _disabled;
     var action = actionStraighten(selectedIDs, context.projection);
     var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
     var nodes = utilGetAllNodes(wayIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
+    var _disabled;
 
 
     function operation() {
@@ -70,15 +70,12 @@ export function operationStraighten(selectedIDs, context) {
         if (_disabled) {
             return _disabled;
         } else if (someMissing()) {
-            _disabled = 'not_downloaded';
-            return _disabled;
+            return _disabled = 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            _disabled = 'connected_to_hidden';
-            return _disabled;
+            return _disabled = 'connected_to_hidden';
         }
 
-        _disabled = false;
-        return _disabled;
+        return _disabled = false;
 
 
         function someMissing() {

@@ -6,9 +6,9 @@ import { uiCmd } from '../ui';
 
 
 export function operationDowngrade(selectedIDs, context) {
-
     var affectedFeatureCount = 0;
     var downgradeType;
+    var _disabled;
 
     setDowngradeTypeForEntityIDs();
 
@@ -94,15 +94,17 @@ export function operationDowngrade(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        var reason;
+        if (_disabled !== undefined) return _disabled;
+
         if (selectedIDs.some(hasWikidataTag)) {
-            reason = 'has_wikidata_tag';
+            return _disabled = 'has_wikidata_tag';
         }
+        return _disabled = false;
+
         function hasWikidataTag(id) {
             var entity = context.entity(id);
             return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
         }
-        return reason;
     };
 
 

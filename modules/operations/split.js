@@ -10,6 +10,7 @@ export function operationSplit(selectedIDs, context) {
     var entityID = vertices[0];
     var action = actionSplit(entityID);
     var ways = [];
+    var _disabled;
 
     if (vertices.length === 1) {
         if (entityID && selectedIDs.length > 1) {
@@ -32,13 +33,16 @@ export function operationSplit(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason = action.disabled(context.graph());
-        if (reason) {
-            return reason;
+        if (_disabled !== undefined) return _disabled;
+
+        _disabled = action.disabled(context.graph());
+        if (_disabled) {
+            return _disabled;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return 'connected_to_hidden';
+            return _disabled = 'connected_to_hidden';
         }
-        return false;
+
+        return _disabled = false;
     };
 
 

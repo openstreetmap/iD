@@ -7,6 +7,8 @@ import { t } from '../util/locale';
 export function operationDetachNode(selectedIDs, context) {
     var nodeID = selectedIDs.length && selectedIDs[0];
     var action = actionDetachNode(nodeID);
+    var _disabled;
+
 
     var operation = function () {
         context.perform(action);  // do the detach
@@ -48,13 +50,16 @@ export function operationDetachNode(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        var reason = action.disabled(context.graph());
-        if (reason) {
-            return reason;
+        if (_disabled !== undefined) return _disabled;
+
+        _disabled = action.disabled(context.graph());
+        if (_disabled) {
+            return _disabled;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return 'connected_to_hidden';
+            return _disabled = 'connected_to_hidden';
         }
-        return false;
+
+        return _disabled = false;
     };
 
 

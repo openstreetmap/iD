@@ -8,6 +8,7 @@ export function operationOrthogonalize(selectedIDs, context) {
     var _entityID;
     var _entity;
     var _geometry;
+    var _disabled;
     var action = chooseAction();
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
@@ -53,21 +54,35 @@ export function operationOrthogonalize(selectedIDs, context) {
 
     operation.disabled = function() {
         if (!action) return '';
+        if (_disabled !== undefined) return _disabled;
 
-        var osm = context.connection();
         var extent = _entity.extent(context.graph());
-        var reason = action.disabled(context.graph());
+        _disabled = action.disabled(context.graph());
 
-        if (reason) {
-            return reason;
+        if (_disabled) {
+            return _disabled;
         } else if (_geometry !== 'vertex' && extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
-        } else if (osm && !coords.every(osm.isDataLoaded)) {
-            return 'not_downloaded';
-        } else if (context.hasHiddenConnections(_entityID)) {
-            return 'connected_to_hidden';
+            return _disabled = 'too_large';
+        } else if (someMissing()) {
+            return _disabled = 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return _disabled = 'connected_to_hidden';
         }
-        return false;
+
+        return _disabled = false;
+
+
+        function someMissing() {
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 

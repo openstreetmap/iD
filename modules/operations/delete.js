@@ -15,6 +15,7 @@ export function operationDelete(selectedIDs, context) {
     var extent = nodes.reduce(function(extent, node) {
         return extent.extend(node.extent(context.graph()));
     }, geoExtent());
+    var _disabled;
 
 
     var operation = function() {
@@ -70,21 +71,36 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var osm = context.connection();
+        if (_disabled !== undefined) return _disabled;
+
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
-        } else if (osm && !coords.every(osm.isDataLoaded)) {
-            return 'not_downloaded';
+            return _disabled = 'too_large';
+        } else if (someMissing()) {
+            return _disabled = 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return 'connected_to_hidden';
+            return _disabled = 'connected_to_hidden';
         } else if (selectedIDs.some(protectedMember)) {
-            return 'part_of_relation';
+            return _disabled = 'part_of_relation';
         } else if (selectedIDs.some(incompleteRelation)) {
-            return 'incomplete_relation';
+            return _disabled = 'incomplete_relation';
         } else if (selectedIDs.some(hasWikidataTag)) {
-            return 'has_wikidata_tag';
+            return _disabled = 'has_wikidata_tag';
         }
-        return false;
+
+        return _disabled = false;
+
+
+        function someMissing() {
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
 
         function hasWikidataTag(id) {
             var entity = context.entity(id);

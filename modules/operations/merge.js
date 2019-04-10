@@ -1,11 +1,8 @@
 import { t } from '../util/locale';
 
 import {
-    actionChangePreset,
-    actionJoin,
-    actionMerge,
-    actionMergeNodes,
-    actionMergePolygon
+    actionChangePreset, actionJoin, actionMerge,
+    actionMergeNodes, actionMergePolygon
 } from '../actions';
 
 import { behaviorOperation } from '../behavior';
