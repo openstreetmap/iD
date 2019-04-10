@@ -3,10 +3,10 @@
     "fields": [
         "name",
         "width",
-        "intermittent",
         "lock"
     ],
     "moreFields": [
+        "intermittent",
         "salt",
         "tidal"
     ],
@@ -14,7 +14,8 @@
         "line"
     ],
     "tags": {
-        "waterway": "canal"
+        "waterway": "canal",
+        "lock": "yes"
     },
-    "name": "Canal"
+    "name": "Canal Lock"
 }

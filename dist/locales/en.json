@@ -3098,6 +3098,9 @@
                 "location": {
                     "label": "Location"
                 },
+                "lock": {
+                    "label": "Lock"
+                },
                 "man_made": {
                     "label": "Type"
                 },
@@ -3763,6 +3766,9 @@
                         "all": "All Ways",
                         "minor": "Minor Road"
                     }
+                },
+                "street_cabinet": {
+                    "label": "Type"
                 },
                 "structure_waterway": {
                     "label": "Structure",
@@ -6593,6 +6599,10 @@
                     "name": "Antenna",
                     "terms": "broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv"
                 },
+                "man_made/beehive": {
+                    "name": "Beehive",
+                    "terms": "apiary,beekeeper,farm,honey,pollination"
+                },
                 "man_made/breakwater": {
                     "name": "Breakwater",
                     "terms": ""
@@ -6704,6 +6714,10 @@
                 "man_made/storage_tank": {
                     "name": "Storage Tank",
                     "terms": "water,oil,gas,petrol"
+                },
+                "man_made/street_cabinet": {
+                    "name": "Street Cabinet",
+                    "terms": "cable tv,monitoring box,technical box,telecommunications,traffic signal controls"
                 },
                 "man_made/surveillance": {
                     "name": "Surveillance",
@@ -8501,6 +8515,10 @@
                     "name": "Canal",
                     "terms": ""
                 },
+                "waterway/canal/lock": {
+                    "name": "Canal Lock",
+                    "terms": ""
+                },
                 "waterway/dam": {
                     "name": "Dam",
                     "terms": ""
@@ -8520,6 +8538,10 @@
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
+                },
+                "waterway/lock_gate": {
+                    "name": "Lock Gate",
+                    "terms": "canal"
                 },
                 "waterway/milestone": {
                     "name": "Waterway Milestone",

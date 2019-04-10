@@ -608,6 +608,10 @@
       "replace": {"waterway": "canal", "bridge": "aqueduct"}
     },
     {
+      "old": {"waterway": "lock"},
+      "replace": {"waterway": "canal", "lock": "yes"}
+    },
+    {
       "old": {"waterway": "riverbank"},
       "replace": {"natural": "water", "water": "river"}
     },
