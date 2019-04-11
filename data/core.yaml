@@ -507,9 +507,10 @@ en:
     status:
       abandoned: Abandoned
       active: Active
-      disused: Disused
-      proposed: Proposed
       construction: Under Construction
+      disused: Disused
+      mixed: Mixed
+      proposed: Proposed
     add: Add
     none: None
     node: Node

@@ -621,9 +621,10 @@
             "status": {
                 "abandoned": "Abandoned",
                 "active": "Active",
+                "construction": "Under Construction",
                 "disused": "Disused",
-                "proposed": "Proposed",
-                "construction": "Under Construction"
+                "mixed": "Mixed",
+                "proposed": "Proposed"
             },
             "add": "Add",
             "none": "None",

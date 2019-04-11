@@ -104,15 +104,22 @@ export function uiFieldStatus(field, context) {
     };
 
     function status(tags) {
+        var matchingStatuses = {};
         for (var presetKey in _preset.tags) {
             if (!tags[presetKey]) {
                 for (var i in statuses) {
                     var status = statuses[i];
                     if (tags[status + ':' + presetKey]) {
-                        return status;
+                        matchingStatuses[status] = true;
                     }
                 }
             }
+        }
+        var matchingStatusesArray = Object.keys(matchingStatuses);
+        if (matchingStatusesArray.length === 1) {
+            return matchingStatusesArray[0];
+        } else if (matchingStatusesArray.length > 1) {
+            return 'mixed';
         }
         return 'active';
     }
