@@ -65,7 +65,7 @@ export function uiField(context, presetField, entity, options) {
 
     function isPresent() {
         return field.keys.some(function(key) {
-            if (field.type === 'multiCombo') {
+            if (field.type === 'multiCombo' || field.type === 'status') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
                         return true;

@@ -39,10 +39,24 @@ export function uiFieldStatus(field, context) {
 
     function change() {
         var t = {};
-        var val;
 
-        //val = utilGetSetValue(input);
-        //t[field.key] = val;
+        var displayVal = utilGetSetValue(input);
+        var newStatus = _comboData.find(function(o) {
+            return o.key && o.value === displayVal;
+        }).key;
+
+        var presetTags = _preset.tags;
+        for (var key in presetTags) {
+            for (var i in options) {
+                var status = options[i];
+                var combinedKey = status === 'active' ? key : (status + ':' + key);
+                if (newStatus === status) {
+                    t[combinedKey] = presetTags[key];
+                } else {
+                    t[combinedKey] = undefined;
+                }
+            }
+        }
 
         dispatch.call('change', this, t);
     }
@@ -86,16 +100,22 @@ export function uiFieldStatus(field, context) {
 
 
     combo.tags = function(tags) {
-        var matchingStatuses
+        utilGetSetValue(input, t('inspector.status.' +  status(tags)));
+    };
+
+    function status(tags) {
         for (var presetKey in _preset.tags) {
             if (!tags[presetKey]) {
                 for (var i in statuses) {
-
+                    var status = statuses[i];
+                    if (tags[status + ':' + presetKey]) {
+                        return status;
+                    }
                 }
             }
         }
-        //utilGetSetValue(input, displayValue(tags[field.key]));
-    };
+        return 'active';
+    }
 
 
     combo.focus = function() {
@@ -106,7 +126,7 @@ export function uiFieldStatus(field, context) {
     combo.entity = function(val) {
         if (!arguments.length) return _entity;
         _entity = val;
-        _preset = context.match(_entity, context.graph());
+        _preset = context.presets().match(_entity, context.graph());
         return combo;
     };
 
