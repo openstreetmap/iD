@@ -1691,7 +1691,8 @@ button.preset-favorite-button.active .icon {
 
 /* Field - Combo / Multicombo
 ------------------------------------------------------- */
-.form-field-input-combo > input:only-of-type {
+.form-field-input-combo > input:only-of-type,
+.form-field-input-status > input:only-of-type {
     border-radius: 0 0 4px 4px;
 }
 .form-field-input-combo.empty-combobox input,

@@ -219,5 +219,15 @@ osmEntity.prototype = {
         });
 
         return deprecated;
+    },
+
+    hasTagWithAnyStatusForKey: function(key) {
+        if (this.tags[key]) return true;
+        var statuses = [ 'construction', 'disused', 'abandoned', 'proposed' ];
+        for (var i in statuses) {
+            var status = statuses[i];
+            if (this.tags[status + ':' + key]) return true;
+        }
+        return false;
     }
 };

@@ -372,9 +372,9 @@ export function utilLifecycleStatusInfo(tags) {
     return infoArray;
 }
 
-export function utilLifecycleStatusForTags(entityTags, presetTags) {
+export function utilLifecycleStatusForTags(entityTags, preset) {
     var matchingStatuses = {};
-    for (var presetKey in presetTags) {
+    for (var presetKey in preset.addTags) {
         if (!entityTags[presetKey]) {
             for (var i in statuses) {
                 var status = statuses[i];

@@ -12,7 +12,7 @@ export function validationOutdatedTags() {
         var preset = context.presets().match(entity, graph);
         if (!preset.isFallback() && preset.tags !== preset.addTags) {
             return Object.keys(preset.addTags).reduce(function(obj, key) {
-                if (!entity.tags[key]) {
+                if (!entity.hasTagWithAnyStatusForKey(key)) {
                     obj[key] = preset.addTags[key];
                 }
                 return obj;

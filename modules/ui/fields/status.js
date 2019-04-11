@@ -43,7 +43,7 @@ export function uiFieldStatus(field, context) {
             return o.key && o.value === displayVal;
         }).key;
 
-        var presetTags = _preset.tags;
+        var presetTags = _preset.addTags;
         for (var key in presetTags) {
             for (var i in options) {
                 var status = options[i];
@@ -98,7 +98,7 @@ export function uiFieldStatus(field, context) {
 
 
     combo.tags = function(tags) {
-        var status = utilLifecycleStatusForTags(tags, _preset.tags);
+        var status = utilLifecycleStatusForTags(tags, _preset);
         utilGetSetValue(input, t('inspector.status.' + status));
     };
 
