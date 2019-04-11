@@ -371,3 +371,24 @@ export function utilLifecycleStatusInfo(tags) {
     }
     return infoArray;
 }
+
+export function utilLifecycleStatusForTags(entityTags, presetTags) {
+    var matchingStatuses = {};
+    for (var presetKey in presetTags) {
+        if (!entityTags[presetKey]) {
+            for (var i in statuses) {
+                var status = statuses[i];
+                if (entityTags[status + ':' + presetKey]) {
+                    matchingStatuses[status] = true;
+                }
+            }
+        }
+    }
+    var matchingStatusesArray = Object.keys(matchingStatuses);
+    if (matchingStatusesArray.length === 1) {
+        return matchingStatusesArray[0];
+    } else if (matchingStatusesArray.length > 1) {
+        return 'mixed';
+    }
+    return 'active';
+}

@@ -27,6 +27,7 @@ export { utilHashcode } from './util';
 export { utilHighlightEntities } from './util';
 export { utilIdleWorker } from './idle_worker';
 export { utilLifecycleStatusInfo } from './util';
+export { utilLifecycleStatusForTags } from './util';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
 export { utilObjectOmit } from './object';

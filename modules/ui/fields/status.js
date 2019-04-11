@@ -1,11 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';
-import { services } from '../../services';
 import { uiCombobox } from '../index';
-import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilLifecycleStatusForTags, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldStatus(field, context) {
@@ -100,29 +98,9 @@ export function uiFieldStatus(field, context) {
 
 
     combo.tags = function(tags) {
-        utilGetSetValue(input, t('inspector.status.' +  status(tags)));
+        var status = utilLifecycleStatusForTags(tags, _preset.tags);
+        utilGetSetValue(input, t('inspector.status.' + status));
     };
-
-    function status(tags) {
-        var matchingStatuses = {};
-        for (var presetKey in _preset.tags) {
-            if (!tags[presetKey]) {
-                for (var i in statuses) {
-                    var status = statuses[i];
-                    if (tags[status + ':' + presetKey]) {
-                        matchingStatuses[status] = true;
-                    }
-                }
-            }
-        }
-        var matchingStatusesArray = Object.keys(matchingStatuses);
-        if (matchingStatusesArray.length === 1) {
-            return matchingStatusesArray[0];
-        } else if (matchingStatusesArray.length > 1) {
-            return 'mixed';
-        }
-        return 'active';
-    }
 
 
     combo.focus = function() {
