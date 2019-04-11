@@ -88,10 +88,12 @@ export function validationMissingTag() {
             );
         }
 
+        // error if created or modified and is deletable, else warning
+        var isError = (entity.version === undefined || entity.v !== undefined) && canDelete;
+
         return [new validationIssue({
             type: type,
-            // error if created or modified and is deletable, else warning
-            severity: (!entity.version || entity.v) && canDelete  ? 'error' : 'warning',
+            severity: isError ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
             tooltip: t('issues.missing_tag.tip'),
             entities: [entity],
