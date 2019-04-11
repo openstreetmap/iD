@@ -1,3 +1,5 @@
+import _debounce from 'lodash-es/debounce';
+
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg';
@@ -9,39 +11,29 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilHighlightEntities } from '../util';
+import { utilArrayGroupBy, utilCallWhenIdle, utilHighlightEntities } from '../util';
 
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    //var _featureApplicabilityList = d3_select(null);
-    var _errorsList = d3_select(null), _warningsList = d3_select(null);
+    var _errorsList = d3_select(null);
+    var _warningsList = d3_select(null);
     var _rulesList = d3_select(null);
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
+
+    var _errors = [];
+    var _warnings = [];
     var _shown = false;
+    var _options = {
+        what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
+        where: context.storage('validate-where') || 'visible'  // 'all', 'visible'
+    };
 
-    context.validator().on('validated.issues_pane', update);
+    // listeners
+    context.validator().on('validated.uiIssues', utilCallWhenIdle(update));
+    context.map().on('move.uiIssues', _debounce(utilCallWhenIdle(update), 1000));
 
-    /*function renderIssuesOptions(selection) {
-        var container = selection.selectAll('.issues-options-container')
-            .data([0]);
-
-        container = container.enter()
-            .append('div')
-            .attr('class', 'issues-options-container')
-            .merge(container);
-
-        _featureApplicabilityList = container.selectAll('.feature-applicability-list')
-            .data([0]);
-
-        _featureApplicabilityList = _featureApplicabilityList.enter()
-            .append('ul')
-            .attr('class', 'layer-list feature-applicability-list')
-            .merge(_featureApplicabilityList);
-
-        updateFeatureApplicabilityList();
-    }*/
 
     function addIconBadge(selection) {
         var d = 10;
@@ -67,7 +59,8 @@ export function uiIssues(context) {
             .attr('class', 'layer-list errors-list issues-list')
             .merge(_errorsList);
 
-        updateErrorsList();
+        _errorsList
+            .call(drawIssuesList, _errors);
     }
 
     function renderWarningsList(selection) {
@@ -79,7 +72,8 @@ export function uiIssues(context) {
             .attr('class', 'layer-list warnings-list issues-list')
             .merge(_warningsList);
 
-        updateWarningsList();
+        _warningsList
+            .call(drawIssuesList, _warnings);
     }
 
 
@@ -163,6 +157,64 @@ export function uiIssues(context) {
     }
 
 
+    function updateOptionValue(d, val) {
+        if (!val && d3_event && d3_event.target) {
+            val = d3_event.target.value;
+        }
+
+        _options[d] = val;
+        context.storage('validate-' + d, val);
+        update();
+    }
+
+
+    function renderIssuesOptions(selection) {
+        var container = selection.selectAll('.issues-options-container')
+            .data([0]);
+
+        container = container.enter()
+            .append('div')
+            .attr('class', 'issues-options-container')
+            .merge(container);
+
+        var data = [
+            { key: 'what', values: ['edited', 'all'] },
+            { key: 'where', values: ['visible', 'all'] }
+        ];
+
+        var options = container.selectAll('.issues-option')
+            .data(data, function(d) { return d.key; });
+
+        var optionsEnter = options.enter()
+            .append('div')
+            .attr('class', function(d) { return 'issues-option issues-option-' + d.key; });
+
+        optionsEnter
+            .append('div')
+            .attr('class', function(d) { return 'issues-option-' + d.key + '-title'; })
+            .text(function(d) { return t('issues.options.' + d.key + '.title'); });
+
+        var valuesEnter = optionsEnter.selectAll('label')
+            .data(function(d) {
+                return d.values.map(function(val) { return { value: val, key: d.key }; });
+            })
+            .enter()
+            .append('label');
+
+        valuesEnter
+            .append('input')
+            .attr('type', 'radio')
+            .attr('name', function(d) { return 'issues-option-' + d.key; })
+            .attr('value', function(d) { return d.value; })
+            .property('checked', function(d) { return _options[d.key] === d.value; })
+            .on('change', function(d) { updateOptionValue(d.key, d.value); });
+
+        valuesEnter
+            .append('span')
+            .text(function(d) { return t('issues.options.' + d.key + '.' + d.value); });
+    }
+
+
     function renderNoIssuesBox(selection) {
         selection
             .append('div')
@@ -183,6 +235,7 @@ export function uiIssues(context) {
             .text(t('issues.no_issues.info'));
     }
 
+
     function renderRulesList(selection) {
         var container = selection.selectAll('.issue-rules-list')
             .data([0]);
@@ -193,41 +246,6 @@ export function uiIssues(context) {
             .merge(container);
 
         updateRulesList();
-    }
-
-    /*
-    function showsFeatureApplicability(d) {
-        return context.validator().getFeatureApplicability() === d;
-    }
-
-    function setFeatureApplicability(d) {
-        context.validator().setFeatureApplicability(d);
-        update();
-    }
-
-    function updateFeatureApplicabilityList() {
-        _featureApplicabilityList
-            .call(
-                drawListItems,
-                context.validator().featureApplicabilityOptions,
-                'radio',
-                'features_to_validate',
-                setFeatureApplicability,
-                showsFeatureApplicability
-            );
-    }*/
-
-    function updateErrorsList() {
-        var errors = context.validator().getErrors();
-        _errorsList
-            .call(drawIssuesList, errors);
-    }
-
-
-    function updateWarningsList() {
-        var warnings = context.validator().getWarnings();
-        _warningsList
-            .call(drawIssuesList, warnings);
     }
 
     function updateRulesList() {
@@ -246,47 +264,69 @@ export function uiIssues(context) {
 
 
     function update() {
-        var errors = context.validator().getErrors();
-        var warnings = context.validator().getWarnings();
+        var issues = context.validator().getIssues();
+        var changes = context.history().difference().changes();
+        var view = context.map().extent();
+
+        // filter
+        issues = issues.filter(function(issue) {
+            if (_options.what === 'edited') {
+                var entities = issue.entities || [];
+                var isEdited = entities.some(function(entity) { return changes[entity.id]; });
+                if (entities.length && !isEdited) return false;
+            }
+
+            if (_options.where === 'visible') {
+                var extent = issue.extent(context.graph());
+                if (!view.intersects(extent)) return false;
+            }
+
+            return true;
+        });
+
+
+        var groups = utilArrayGroupBy(issues, 'severity');
+        _errors = groups.error || [];
+        _warnings = groups.warning || [];
+
 
         _toggleButton.selectAll('.icon-badge')
-            .classed('error', (errors.length > 0))
-            .classed('warning', (errors.length === 0 && warnings.length > 0))
-            .classed('hide', (errors.length === 0 && warnings.length === 0));
+            .classed('error', (_errors.length > 0))
+            .classed('warning', (_errors.length === 0 && _warnings.length > 0))
+            .classed('hide', (_errors.length === 0 && _warnings.length === 0));
 
         _pane.select('.issues-errors')
-            .classed('hide', errors.length === 0);
+            .classed('hide', _errors.length === 0);
 
-        if (errors.length > 0) {
+        if (_errors.length > 0) {
             _pane.select('.hide-toggle-issues_errors .hide-toggle-text')
-                .text(t('issues.errors.list_title', { count: errors.length }));
+                .text(t('issues.errors.list_title', { count: _errors.length }));
             if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
-                updateErrorsList();
+                _errorsList
+                    .call(drawIssuesList, _errors);
             }
         }
 
         _pane.select('.issues-warnings')
-            .classed('hide', warnings.length === 0);
+            .classed('hide', _warnings.length === 0);
 
-        if (warnings.length > 0) {
+        if (_warnings.length > 0) {
             _pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
-                .text(t('issues.warnings.list_title', { count: warnings.length }));
+                .text(t('issues.warnings.list_title', { count: _warnings.length }));
             if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
-                updateWarningsList();
+                _warningsList
+                    .call(drawIssuesList, _warnings);
             }
         }
 
         _pane.select('.issues-none')
-            .classed('hide', warnings.length > 0 || errors.length > 0);
-
-        //if (!_pane.select('.disclosure-wrap-issues_options').classed('hide')) {
-        //    updateFeatureApplicabilityList();
-        //}
+            .classed('hide', _warnings.length > 0 || _errors.length > 0);
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();
         }
     }
+
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -337,20 +377,24 @@ export function uiIssues(context) {
             .property('indeterminate', false);
     }
 
+
     var paneTooltip = tooltip()
         .placement((textDirection === 'rtl') ? 'right' : 'left')
         .html(true)
         .title(uiTooltipHtml(t('issues.title'), key));
 
+
     uiIssues.hidePane = function() {
         uiIssues.setVisible(false);
     };
+
 
     uiIssues.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
         uiIssues.setVisible(!_toggleButton.classed('active'));
     };
+
 
     uiIssues.setVisible = function(show) {
         if (show !== _shown) {
@@ -384,8 +428,8 @@ export function uiIssues(context) {
         }
     };
 
-    uiIssues.renderToggleButton = function(selection) {
 
+    uiIssues.renderToggleButton = function(selection) {
         _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
@@ -393,11 +437,10 @@ export function uiIssues(context) {
             .call(svgIcon('#iD-icon-alert', 'light'))
             .call(addIconBadge)
             .call(paneTooltip);
-
     };
 
-    uiIssues.renderPane = function(selection) {
 
+    uiIssues.renderPane = function(selection) {
         _pane = selection
             .append('div')
             .attr('class', 'fillL map-pane issues-pane hide');
@@ -418,6 +461,11 @@ export function uiIssues(context) {
         var content = _pane
             .append('div')
             .attr('class', 'pane-content');
+
+        content
+            .append('div')
+            .attr('class', 'issues-options')
+            .call(renderIssuesOptions);
 
         content
             .append('div')
@@ -449,28 +497,7 @@ export function uiIssues(context) {
                 .content(renderRulesList)
             );
 
-        // options
-        /*
-        // add this back to core.yaml when re-enabling the options
-        options:
-          title: Options
-        features_to_validate:
-          edited:
-            description: Edited features only
-            tooltip: Flag issues with features you create and modify
-          all:
-            description: All features
-            tooltip: Flag issues with all nearby features
-
-        content
-            .append('div')
-            .attr('class', 'issues-options')
-            .call(uiDisclosure(context, 'issues_options', true)
-                .title(t('issues.options.title'))
-                .content(renderIssuesOptions)
-            );
-        */
-        update();
+        // update();
 
         context.keybinding()
             .on(key, uiIssues.togglePane);

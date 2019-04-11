@@ -3330,6 +3330,31 @@ div.full-screen > button:hover {
 
 /* Issues Pane */
 
+.issues-options-container {
+    display: table;
+}
+.issues-option-what,
+.issues-option-where {
+    display: table-row;
+}
+
+.issues-option-what-title,
+.issues-option-where-title {
+    display: table-cell;
+    font-weight: bold;
+    padding-right: 10px;
+}
+[dir='rtl'] .issues-option-what-title,
+[dir='rtl'] .issues-option-where-title {
+    padding-right: 0;
+    padding-left: 10px;
+}
+.issues-option-what label,
+.issues-option-where label {
+    display: table-cell;
+    padding: 0 10px;
+}
+
 .issues-list label {
     padding: 5px;
 }

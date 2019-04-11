@@ -1536,6 +1536,18 @@
                 "message": "Everything looks fine",
                 "info": "Any issues will show up here as you edit"
             },
+            "options": {
+                "what": {
+                    "title": "Check:",
+                    "edited": "My Edits",
+                    "all": "Everything"
+                },
+                "where": {
+                    "title": "Where:",
+                    "visible": "In View",
+                    "all": "Everywhere"
+                }
+            },
             "almost_junction": {
                 "title": "Almost Junctions",
                 "message": "{feature} is very close but not connected to {feature2}",
