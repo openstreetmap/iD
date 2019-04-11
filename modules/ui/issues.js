@@ -191,7 +191,7 @@ export function uiIssues(context) {
 
         optionsEnter
             .append('div')
-            .attr('class', function(d) { return 'issues-option-' + d.key + '-title'; })
+            .attr('class', 'issues-option-title')
             .text(function(d) { return t('issues.options.' + d.key + '.title'); });
 
         var valuesEnter = optionsEnter.selectAll('label')

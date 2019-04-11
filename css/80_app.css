@@ -3333,24 +3333,19 @@ div.full-screen > button:hover {
 .issues-options-container {
     display: table;
 }
-.issues-option-what,
-.issues-option-where {
+.issues-option {
     display: table-row;
 }
-
-.issues-option-what-title,
-.issues-option-where-title {
+.issues-option-title {
     display: table-cell;
     font-weight: bold;
     padding-right: 10px;
 }
-[dir='rtl'] .issues-option-what-title,
-[dir='rtl'] .issues-option-where-title {
+[dir='rtl'] .issues-option-title {
     padding-right: 0;
     padding-left: 10px;
 }
-.issues-option-what label,
-.issues-option-where label {
+.issues-option label {
     display: table-cell;
     padding: 0 10px;
 }
