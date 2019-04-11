@@ -1859,6 +1859,9 @@ en:
       start_date:
         # start_date=*
         label: Start Date
+      status:
+        # 'abandoned:=*, construction:=*, disused:=*, proposed:=*'
+        label: Status
       step_count:
         # step_count=*
         label: Number of Steps
@@ -6100,10 +6103,6 @@ en:
         name: Buffer Stop
         # 'terms: stop,halt,buffer'
         terms: '<translate with synonyms or related terms for ''Buffer Stop'', separated by commas>'
-      railway/construction:
-        # railway=construction
-        name: Railway Under Construction
-        terms: '<translate with synonyms or related terms for ''Railway Under Construction'', separated by commas>'
       railway/crossing:
         # railway=crossing
         name: Railway Crossing (Path)

@@ -349,25 +349,25 @@ export function utilHashcode(str) {
     return hash;
 }
 
-var statuses = [ 'proposed', 'construction', 'disused', 'abandoned' ];
+// supported lifecycle prefixes in order of importance
+var statuses = [ 'construction', 'disused', 'abandoned', 'proposed' ];
 export function utilLifecycleStatusInfo(tags) {
-    for (var key in tags) {
-        for (var index in statuses) {
-            var status = statuses[index];
-            var regex = new RegExp('^' + status + ':(.*)');
+    var infoArray = [];
+    for (var index in statuses) {
+        var status = statuses[index];
+        var regex = new RegExp('^' + status + ':(.*)');
+        for (var key in tags) {
             var results = regex.exec(key);
-            if (results && results.length > 0) {
-                var featureKey = results[1];
-                if (!tags[featureKey]) {
-                    return {
-                        combinedKey: key,
-                        status: status,
-                        key: featureKey,
-                        value: tags[key]
-                    };
-                }
+            var featureKey = results && results.length > 1 && results[1];
+            if (featureKey) {
+                infoArray.push({
+                    combinedKey: key,
+                    status: status,
+                    key: featureKey,
+                    value: tags[key]
+                });
             }
         }
     }
-    return null;
+    return infoArray;
 }

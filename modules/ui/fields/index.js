@@ -9,6 +9,7 @@ export * from './localized';
 export * from './maxspeed';
 export * from './radio';
 export * from './restrictions';
+export * from './status';
 export * from './textarea';
 export * from './wikidata';
 export * from './wikipedia';
@@ -47,6 +48,7 @@ import { uiFieldLanes } from './lanes';
 import { uiFieldLocalized } from './localized';
 import { uiFieldMaxspeed } from './maxspeed';
 import { uiFieldRestrictions } from './restrictions';
+import { uiFieldStatus } from './status';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikidata } from './wikidata';
 import { uiFieldWikipedia } from './wikipedia';
@@ -70,6 +72,7 @@ export var uiFields = {
     restrictions: uiFieldRestrictions,
     semiCombo: uiFieldSemiCombo,
     structureRadio: uiFieldStructureRadio,
+    status: uiFieldStatus,
     tel: uiFieldTel,
     text: uiFieldText,
     textarea: uiFieldTextarea,

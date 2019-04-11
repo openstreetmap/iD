@@ -332,6 +332,7 @@
     "sport": {"key": "sport", "type": "semiCombo", "label": "Sports"},
     "stars": {"key": "stars", "type": "combo", "label": "Stars"},
     "start_date": {"key": "start_date", "type": "text", "universal": true, "label": "Start Date"},
+    "status": {"keys": ["abandoned:", "construction:", "disused:", "proposed:"], "type": "status", "label": "Status", "universal": true},
     "step_count": {"key": "step_count", "type": "number", "minValue": 0, "label": "Number of Steps"},
     "stop": {"key": "stop", "type": "combo", "label": "Stop Type", "strings": {"options": {"all": "All Ways", "minor": "Minor Road"}}},
     "street_cabinet": {"key": "street_cabinet", "type": "combo", "label": "Type"},

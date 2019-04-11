@@ -50,11 +50,16 @@ export function presetIndex(context) {
 
     all.matchTags = function(tags, geometry) {
 
-        var statusInfo = utilLifecycleStatusInfo(tags);
-        if (statusInfo) {
+        var statusInfoArray = utilLifecycleStatusInfo(tags);
+        if (statusInfoArray.length > 0) {
             tags = Object.assign({}, tags); // shallow copy
-            // match against the base tag instead of the status tag
-            tags[statusInfo.key] = statusInfo.value;
+
+            // match against the base tags instead of the status tags
+            statusInfoArray.forEach(function(statusInfo) {
+                if (!tags[statusInfo.key]) {
+                    tags[statusInfo.key] = statusInfo.value;
+                }
+            });
         }
 
         var address;

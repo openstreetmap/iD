@@ -3757,6 +3757,9 @@
                 "start_date": {
                     "label": "Start Date"
                 },
+                "status": {
+                    "label": "Status"
+                },
                 "step_count": {
                     "label": "Number of Steps"
                 },
@@ -7510,10 +7513,6 @@
                 "railway/buffer_stop": {
                     "name": "Buffer Stop",
                     "terms": "stop,halt,buffer"
-                },
-                "railway/construction": {
-                    "name": "Railway Under Construction",
-                    "terms": ""
                 },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",

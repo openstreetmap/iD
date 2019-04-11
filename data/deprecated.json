@@ -149,6 +149,22 @@
       "replace": {"barrier": "fence", "fence_type": "wood"}
     },
     {
+      "old": {"building": "abandoned", "abandoned": "*"},
+      "replace": {"abandoned:building": "$1"}
+    },
+    {
+      "old": {"building": "disused", "disused": "*"},
+      "replace": {"disused:building": "$1"}
+    },
+    {
+      "old": {"building": "construction", "construction": "*"},
+      "replace": {"construction:building": "$1"}
+    },
+    {
+      "old": {"building": "proposed", "proposed": "*"},
+      "replace": {"proposed:building": "$1"}
+    },
+    {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
     },
@@ -257,8 +273,20 @@
       "replace": {"sidewalk": "separate"}
     },
     {
-      "old": {"highway": "abandoned"},
-      "replace": {"abandoned:highway": "*"}
+      "old": {"highway": "abandoned", "abandoned": "*"},
+      "replace": {"abandoned:highway": "$1"}
+    },
+    {
+      "old": {"highway": "disused", "disused": "*"},
+      "replace": {"disused:highway": "$1"}
+    },
+    {
+      "old": {"highway": "construction", "construction": "*"},
+      "replace": {"construction:highway": "$1"}
+    },
+    {
+      "old": {"highway": "proposed", "proposed": "*"},
+      "replace": {"proposed:highway": "$1"}
     },
     {
       "old": {"highway": "bridleway", "horse": "no"},
@@ -426,6 +454,22 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"railway": "abandoned", "abandoned": "*"},
+      "replace": {"abandoned:railway": "$1"}
+    },
+    {
+      "old": {"railway": "disused", "disused": "*"},
+      "replace": {"disused:railway": "$1"}
+    },
+    {
+      "old": {"railway": "construction", "construction": "*"},
+      "replace": {"construction:railway": "$1"}
+    },
+    {
+      "old": {"railway": "proposed", "proposed": "*"},
+      "replace": {"proposed:railway": "$1"}
     },
     {
       "old": {"roof:color": "*"},

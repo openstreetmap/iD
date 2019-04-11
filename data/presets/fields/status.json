@@ -1,0 +1,6 @@
+{
+    "keys": [ "abandoned:", "construction:", "disused:", "proposed:"],
+    "type": "status",
+    "label": "Status",
+    "universal": true
+}
