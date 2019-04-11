@@ -3,17 +3,17 @@ import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
+import { modeBrowse } from '../modes';
 import { osmChangeset } from '../osm';
+import { svgIcon } from '../svg';
 import { services } from '../services';
+import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
+import { utilArrayGroupBy, utilRebind } from '../util';
 import { utilDetect } from '../util/detect';
-import { tooltip } from '../util/tooltip';
-import { utilRebind } from '../util';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
 
 
 var _changeset;
@@ -114,22 +114,23 @@ export function uiCommit(context) {
             }
         }
 
+        // remove existing warning counts
         for (var key in tags) {
-            // remove existing warning counts
             if (key.match(/^warnings:/)) delete tags[key];
         }
 
-        var warningCountsByType = {};
-        context.validator().getWarnings().forEach(function(warning) {
-            // deletion count can be derived so don't tag that warning in the changeset
-            if (warning.type === 'many_deletions') return;
-            if (!warningCountsByType[warning.type]) warningCountsByType[warning.type] = 0;
-            warningCountsByType[warning.type] += 1;
-        });
-        for (var warningType in warningCountsByType) {
-            // tag the counts of warnings ignored by the user
-            tags['warnings:' + warningType] = warningCountsByType[warningType].toString();
+        var warnings = context.validator()
+            .getIssuesBySeverity({ what: 'edited', where: 'all' }).warning;
+        var warningsByType = utilArrayGroupBy(warnings, 'type');
+
+        // deletion count can be derived so don't tag that warning in the changeset
+        delete warningsByType.many_deletions;
+
+        // add tags for counts of warnings ignored by the user
+        for (var warningType in warningsByType) {
+            tags['warnings:' + warningType] = warningsByType[warningType].length.toString();
         }
+
 
         _changeset = _changeset.update({ tags: tags });
 
@@ -354,9 +355,11 @@ export function uiCommit(context) {
 
 
     function getUploadBlockerMessage() {
-        var errorCount = context.validator().getErrors().length;
-        if (errorCount > 0) {
-            return t('commit.outstanding_errors_message', { count: errorCount });
+        var errors = context.validator()
+            .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
+
+        if (errors.length) {
+            return t('commit.outstanding_errors_message', { count: errors.length });
 
         } else {
             var n = d3_select('#preset-input-comment').node();

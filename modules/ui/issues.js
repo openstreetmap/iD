@@ -11,7 +11,7 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilArrayGroupBy, utilCallWhenIdle, utilHighlightEntities } from '../util';
+import { utilCallWhenIdle, utilHighlightEntities } from '../util';
 
 
 export function uiIssues(context) {
@@ -264,30 +264,9 @@ export function uiIssues(context) {
 
 
     function update() {
-        var issues = context.validator().getIssues();
-        var changes = context.history().difference().changes();
-        var view = context.map().extent();
-
-        // filter
-        issues = issues.filter(function(issue) {
-            if (_options.what === 'edited') {
-                var entities = issue.entities || [];
-                var isEdited = entities.some(function(entity) { return changes[entity.id]; });
-                if (entities.length && !isEdited) return false;
-            }
-
-            if (_options.where === 'visible') {
-                var extent = issue.extent(context.graph());
-                if (!view.intersects(extent)) return false;
-            }
-
-            return true;
-        });
-
-
-        var groups = utilArrayGroupBy(issues, 'severity');
-        _errors = groups.error || [];
-        _warnings = groups.warning || [];
+        var issuesBySeverity = context.validator().getIssuesBySeverity(_options);
+        _errors = issuesBySeverity.error;
+        _warnings = issuesBySeverity.warning;
 
 
         _toggleButton.selectAll('.icon-badge')

@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
-import { utilRebind } from '../util';
+import { utilArrayGroupBy, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -58,20 +58,38 @@ export function coreValidator(context) {
     };
 
 
-    validator.getIssues = function() {
-        return Object.values(_issuesByIssueID);
+    // options = {
+    //     what: 'edited',    // 'all' or 'edited'
+    //     where: 'visible'   // 'all' or 'visible'
+    // };
+    validator.getIssues = function(options) {
+        var opts = Object.assign({ what: 'all', where: 'all' }, options);
+        var issues = Object.values(_issuesByIssueID);
+        var changes = context.history().difference().changes();
+        var view = context.map().extent();
+
+        return issues.filter(function(issue) {
+            if (opts.what === 'edited') {
+                var entities = issue.entities || [];
+                var isEdited = entities.some(function(entity) { return changes[entity.id]; });
+                if (entities.length && !isEdited) return false;
+            }
+
+            if (opts.where === 'visible') {
+                var extent = issue.extent(context.graph());
+                if (!view.intersects(extent)) return false;
+            }
+
+            return true;
+        });
     };
 
 
-    validator.getWarnings = function() {
-        return Object.values(_issuesByIssueID)
-            .filter(function(d) { return d.severity === 'warning'; });
-    };
-
-
-    validator.getErrors = function() {
-        return Object.values(_issuesByIssueID)
-            .filter(function(d) { return d.severity === 'error'; });
+    validator.getIssuesBySeverity = function(options) {
+        var groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
+        groups.error = groups.error || [];
+        groups.warning = groups.warning || [];
+        return groups;
     };
 
 
