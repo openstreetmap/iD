@@ -413,6 +413,7 @@ export function uiPresetList(context) {
                 t('operations.change_tags.annotation')
             );
 
+            context.validator().validate();  // rerun validation
             dispatch.call('choose', this, preset);
         };
 
