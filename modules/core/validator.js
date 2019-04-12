@@ -368,13 +368,15 @@ export function validationIssue(attrs) {
         return parts.join(':');
     }
 
-
+    var _extent;
     this.extent = function(resolver) {
+        if (_extent) return _extent;
+
         if (this.loc) {
-            return geoExtent(this.loc);
+            return _extent = geoExtent(this.loc);
         }
         if (this.entities && this.entities.length) {
-            return this.entities.reduce(function(extent, entity) {
+            return _extent = this.entities.reduce(function(extent, entity) {
                 return extent.extend(entity.extent(resolver));
             }, geoExtent());
         }

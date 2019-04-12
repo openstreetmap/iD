@@ -2,10 +2,11 @@ import _debounce from 'lodash-es/debounce';
 
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { geoSphericalDistance } from '../geo';
 import { modeSelect } from '../modes';
+import { svgIcon } from '../svg';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
@@ -145,7 +146,8 @@ export function uiIssues(context) {
 
         // Update
         items = items
-            .merge(itemsEnter);
+            .merge(itemsEnter)
+            .order();
 
         items.select('.issue-icon svg use')     // propagate bound data
             .attr('href', function(d) {
@@ -265,8 +267,18 @@ export function uiIssues(context) {
 
     function update() {
         var issuesBySeverity = context.validator().getIssuesBySeverity(_options);
-        _errors = issuesBySeverity.error;
-        _warnings = issuesBySeverity.warning;
+
+        // sort issues by distance away from the center of the map
+        var center = context.map().center();
+        var graph = context.graph();
+        _errors = issuesBySeverity.error.map(withDistance).sort(byDistance);
+        _warnings = issuesBySeverity.warning.map(withDistance).sort(byDistance);
+
+        // cut off at 1000
+        var errorCount = _errors.length > 1000 ? '1000+' : String(_errors.length);
+        var warningCount = _warnings.length > 1000 ? '1000+' : String(_warnings.length);
+        _errors = _errors.slice(0, 1000);
+        _warnings = _warnings.slice(0, 1000);
 
 
         _toggleButton.selectAll('.icon-badge')
@@ -279,7 +291,7 @@ export function uiIssues(context) {
 
         if (_errors.length > 0) {
             _pane.select('.hide-toggle-issues_errors .hide-toggle-text')
-                .text(t('issues.errors.list_title', { count: _errors.length }));
+                .text(t('issues.errors.list_title', { count: errorCount }));
             if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
                 _errorsList
                     .call(drawIssuesList, _errors);
@@ -291,7 +303,7 @@ export function uiIssues(context) {
 
         if (_warnings.length > 0) {
             _pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
-                .text(t('issues.warnings.list_title', { count: _warnings.length }));
+                .text(t('issues.warnings.list_title', { count: warningCount }));
             if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
                 _warningsList
                     .call(drawIssuesList, _warnings);
@@ -303,6 +315,17 @@ export function uiIssues(context) {
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();
+        }
+
+
+        function byDistance(a, b) {
+            return a.dist - b.dist;
+        }
+
+        function withDistance(issue) {
+            var extent = issue.extent(graph);
+            var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
+            return Object.assign(issue, { dist: dist });
         }
     }
 
