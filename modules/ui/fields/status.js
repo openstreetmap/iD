@@ -24,11 +24,10 @@ export function uiFieldStatus(field, context) {
         selection.call(combobox, attachTo);
 
         _comboData = options.map(function(k) {
-            var v = t('inspector.status.' + k);
             return {
                 key: k,
-                value: v,
-                title: v
+                value: t('inspector.status.' + k + '.title'),
+                title: t('inspector.status.' + k + '.description')
             };
         });
 
@@ -49,7 +48,16 @@ export function uiFieldStatus(field, context) {
                 var status = options[i];
                 var combinedKey = status === 'active' ? key : (status + ':' + key);
                 if (newStatus === status) {
-                    t[combinedKey] = presetTags[key];
+                    if (presetTags[key] === '*') {
+                        var value = _entity.hasTagWithAnyStatusForKey(key);
+                        if (value) {
+                            t[combinedKey] = value;
+                        } else {
+                            t[combinedKey] = 'yes';
+                        }
+                    } else {
+                        t[combinedKey] = presetTags[key];
+                    }
                 } else {
                     t[combinedKey] = undefined;
                 }
@@ -99,7 +107,7 @@ export function uiFieldStatus(field, context) {
 
     combo.tags = function(tags) {
         var status = utilLifecycleStatusForTags(tags, _preset);
-        utilGetSetValue(input, t('inspector.status.' + status));
+        utilGetSetValue(input, t('inspector.status.' + status + '.title'));
     };
 
 

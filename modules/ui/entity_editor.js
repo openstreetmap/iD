@@ -17,7 +17,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCleanTags, utilLifecycleStatusForTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -85,7 +85,7 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'inspector-body');
 
-        bodyEnter
+        var labelEnter = bodyEnter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')
             .append('div')
@@ -94,9 +94,15 @@ export function uiEntityEditor(context) {
             .attr('class', 'preset-list-button preset-reset')
             .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'))
             .append('div')
-            .attr('class', 'label')
+            .attr('class', 'label');
+
+        labelEnter
             .append('div')
             .attr('class', 'label-inner');
+
+        labelEnter
+            .append('div')
+            .attr('class', 'label-status');
 
         bodyEnter
             .append('div')
@@ -156,6 +162,12 @@ export function uiEntityEditor(context) {
                 .geometry(context.geometry(_entityID))
                 .preset(_activePreset)
             );
+
+        var status = utilLifecycleStatusForTags(entity.tags, _activePreset);
+        body.select('.label-status')
+            .attr('class', 'label-status ' + status)
+            .attr('title', t('inspector.status.' + status + '.description'))
+            .text(t('inspector.status.' + status + (status === 'mixed' ? '.title_long' : '.title')));
 
         // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
         var label = body.select('.label-inner');

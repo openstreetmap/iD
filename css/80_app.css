@@ -1295,8 +1295,8 @@ a.hide-toggle {
 
 .preset-list-button .label {
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     background-color: #f6f6f6;
     text-align: left;
     position: absolute;
@@ -1314,6 +1314,39 @@ a.hide-toggle {
     border-left: none;
     border-right: 1px solid rgba(0, 0, 0, .1);
 }
+.preset-list-button .label .label-status {
+    font-size: 11px;
+    line-height: 16px;
+    color: #fff;
+    padding: 0px 3px 0px 3px;
+    border-radius: 3px;
+    margin-top: 4px;
+}
+[dir='ltr'] .preset-list-button .label .label-status {
+    margin-right: auto;
+}
+[dir='rtl'] .preset-list-button .label .label-status {
+    margin-left: auto;
+}
+.preset-list-button .label .label-status.active {
+    display: none;
+}
+.preset-list-button .label .label-status.abandoned {
+    background: #983842;
+}
+.preset-list-button .label .label-status.construction {
+    background: #fc6c14;
+}
+.preset-list-button .label .label-status.disused {
+    background: #ad8e58;
+}
+.preset-list-button .label .label-status.mixed {
+    background: #874980;
+}
+.preset-list-button .label .label-status.proposed {
+    background: #7e838f;
+}
+
 [dir='ltr'] .category .preset-list-button .label {
     border-radius: 0px 4px 4px 0px;
 }

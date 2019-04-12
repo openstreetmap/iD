@@ -382,6 +382,8 @@ export function utilLifecycleStatusForTags(entityTags, preset) {
                     matchingStatuses[status] = true;
                 }
             }
+        } else {
+            matchingStatuses.active = true;
         }
     }
     var matchingStatusesArray = Object.keys(matchingStatuses);

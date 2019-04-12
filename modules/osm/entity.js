@@ -226,7 +226,7 @@ osmEntity.prototype = {
         var statuses = [ 'construction', 'disused', 'abandoned', 'proposed' ];
         for (var i in statuses) {
             var status = statuses[i];
-            if (this.tags[status + ':' + key]) return true;
+            if (this.tags[status + ':' + key]) return this.tags[status + ':' + key];
         }
         return false;
     }

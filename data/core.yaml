@@ -505,12 +505,25 @@ en:
         default: Default
         layer: Layer
     status:
-      abandoned: Abandoned
-      active: Active
-      construction: Under Construction
-      disused: Disused
-      mixed: Mixed
-      proposed: Proposed
+      abandoned:
+        title: Abandoned
+        description: In serious disrepair, unusable
+      active:
+        title: Active
+        description: In normal condition
+      construction:
+        title: Under Construction
+        description: Incomplete or closed for maintenance
+      disused:
+        title: Disused
+        description: Functional but inactive
+      mixed:
+        title: Mixed
+        title_long: Mixed Status
+        description: Multiple statuses apply
+      proposed:
+        title: Proposed
+        description: Nonexistent but likely to be created
     add: Add
     none: None
     node: Node
