@@ -34,14 +34,6 @@ export function validationMissingTag() {
             return [];
         }
 
-        var mode = context.mode();
-        if (entity.type === 'way' && mode &&
-            (mode.id === 'draw-area' || (mode.id === 'draw-line' && !mode.isContinuing)) &&
-            mode.wayID === entity.id) {
-            // don't flag missing tag issues if drawing a new way
-            return [];
-        }
-
         var messageObj = {};
         var missingTagType;
 
