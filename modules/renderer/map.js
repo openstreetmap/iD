@@ -112,6 +112,7 @@ export function rendererMap(context) {
         }
 
         context.history()
+            .on('merge.map', function() { scheduleRedraw(); })
             .on('change.map', immediateRedraw)
             .on('undone.map', function(stack, fromStack) {
                 didUndoOrRedo(stack, fromStack.transform);
