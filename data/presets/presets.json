@@ -269,7 +269,7 @@
     "barrier/stile": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "stile"}, "name": "Stile"},
     "barrier/toll_booth": {"icon": "maki-roadblock", "fields": ["access", "building_area", "payment_multi", "currency_multi"], "moreFields": ["address", "website", "phone", "email", "fax"], "geometry": ["vertex", "area"], "tags": {"barrier": "toll_booth"}, "name": "Toll Booth"},
     "barrier/wall": {"icon": "temaki-wall", "fields": ["wall", "height", "material"], "geometry": ["line", "area"], "tags": {"barrier": "wall"}, "name": "Wall", "matchScore": 0.25},
-    "boundary/administrative": {"name": "Administrative Boundary", "geometry": ["line"], "tags": {"boundary": "administrative"}, "fields": ["name", "admin_level"]},
+    "boundary/administrative": {"fields": ["name", "admin_level"], "geometry": ["line"], "tags": {"boundary": "administrative"}, "name": "Administrative Boundary", "matchScore": 0.5},
     "bridge/support": {"icon": "fas-archway", "fields": ["bridge/support"], "moreFields": ["material", "seamark/type"], "geometry": ["point", "vertex", "area"], "tags": {"bridge:support": "*"}, "name": "Bridge Support"},
     "bridge/support/pier": {"icon": "fas-archway", "fields": ["bridge/support"], "moreFields": ["material", "seamark/type"], "geometry": ["point", "vertex", "area"], "tags": {"bridge:support": "pier"}, "name": "Bridge Pier"},
     "building_part": {"icon": "maki-building", "fields": ["levels", "height", "building/material", "roof/colour"], "moreFields": ["layer"], "geometry": ["area"], "tags": {"building:part": "*"}, "matchScore": 0.5, "terms": ["roof", "simple 3D buildings"], "name": "Building Part"},
