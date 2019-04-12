@@ -4607,11 +4607,11 @@ img.tile-debug {
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 .modal-shortcuts .shortcut-column {
-    flex: 1 1 50%;
-    width: 50%;
+    width: auto;
 }
 
 .modal-shortcuts .shortcut-tab-tools .shortcut-column {
@@ -4631,6 +4631,7 @@ img.tile-debug {
     padding: 0 10px;
     color: #767676;
     text-align: right;
+    white-space: nowrap;
 }
 [dir='rtl'] .modal-shortcuts .shortcut-keys {
     text-align: left;
