@@ -1,10 +1,32 @@
+// call a single function while idle.
+// note the function should be of low priority
+// and should not be returning a value.
+export function utilCallWhenIdle(func, timeout) {
+    return function() {
+        var args = arguments;
+        var that = this;
+        window.requestIdleCallback(function() {
+            func.apply(that, args);
+        }, { timeout: timeout });
+    };
+}
+
+// process queue while idle
 export function utilIdleWorker(tasks, processor, callback) {
-    var results = [], result;
-    for (var i = 0; i < tasks.length; i++) {
-        result = processor(tasks[i]);
-        if (result) results.push(result);
-    }
-    callback(results);
+
+    // all tasks in single deferral
+    utilCallWhenIdle(function() {
+        var results = [];
+        var result;
+        for (var i = 0; i < tasks.length; i++) {
+            result = processor(tasks[i]);
+            if (result) results.push(result);
+        }
+        callback(results);
+    })();
+
+    // alternatively, each task deferred in its own callback
+    // seems to not work because it
 
     // var processed = [];
     // var currentPos = 0;
@@ -36,7 +58,7 @@ window.requestIdleCallback =
     window.requestIdleCallback ||
     function(cb) {
         var start = Date.now();
-        return setTimeout(function() {
+        return window.setTimeout(function() {
             cb({
                 didTimeout: false,
                 timeRemaining: function() {
@@ -49,5 +71,5 @@ window.requestIdleCallback =
 window.cancelIdleCallback =
     window.cancelIdleCallback ||
     function(id) {
-        clearTimeout(id);
+        window.clearTimeout(id);
     };

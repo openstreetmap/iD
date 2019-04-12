@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo';
 import { osmEntity } from '../osm';
-import { utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayGroupBy, utilCallWhenIdle, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -306,9 +306,11 @@ export function coreValidator(context) {
 
     // re-run validation upon merging fetched data
     context.history().on('merge.validator', function(entities) {
-        if (!entities) return;
-        var ids = entities.map(function(entity) { return entity.id; });
-        validator.validateEntities(ids);
+        utilCallWhenIdle(function() {
+            if (!entities) return;
+            var ids = entities.map(function(entity) { return entity.id; });
+            validator.validateEntities(ids);
+        })();
     });
 
     // // re-run validation on history change (frequent)
