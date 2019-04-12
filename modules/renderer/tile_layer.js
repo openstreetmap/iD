@@ -253,23 +253,23 @@ export function rendererTileLayer(context) {
     }
 
 
-    background.projection = function(_) {
+    background.projection = function(val) {
         if (!arguments.length) return _projection;
-        _projection = _;
+        _projection = val;
         return background;
     };
 
 
-    background.dimensions = function(_) {
+    background.dimensions = function(val) {
         if (!arguments.length) return tiler.size();
-        tiler.size(_);
+        tiler.size(val);
         return background;
     };
 
 
-    background.source = function(_) {
+    background.source = function(val) {
         if (!arguments.length) return _source;
-        _source = _;
+        _source = val;
         _tileSize = _source.tileSize;
         _cache = {};
         tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
