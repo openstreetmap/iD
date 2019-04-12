@@ -316,7 +316,7 @@ describe('iD.serviceOsm', function () {
                 .clipExtent([[0,0], dimensions]);
         });
 
-        it('calls callback when data tiles are loaded', function() {
+        it('calls callback when data tiles are loaded', function(done) {
             var spy = sinon.spy();
             connection.loadTiles(context.projection, spy);
 
@@ -324,10 +324,13 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, tileXML]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 20);
         });
 
-        it('#isDataLoaded', function() {
+        it('#isDataLoaded', function(done) {
             expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.not.ok;
 
             connection.loadTiles(context.projection);
@@ -335,7 +338,10 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, tileXML]);
             server.respond();
 
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.ok;
+            window.setTimeout(function() {
+                expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.ok;
+                done();
+            }, 20);
         });
     });
 
@@ -666,7 +672,7 @@ describe('iD.serviceOsm', function () {
                 .clipExtent([[0,0], dimensions]);
         });
 
-        it('fires loadedNotes when notes are loaded', function() {
+        it('fires loadedNotes when notes are loaded', function(done) {
             connection.on('loadedNotes', spy);
             connection.loadNotes(context.projection, {});
 
@@ -674,7 +680,10 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, notesXML ]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 20);
         });
     });
 
