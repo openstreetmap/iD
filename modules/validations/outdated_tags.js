@@ -43,7 +43,7 @@ export function validationOutdatedTags() {
             },
             fixes: [
                 new validationIssueFix({
-                    icon: 'iD-icon-up',
+                    auto: true,
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function() {
                         var replacementPresetID = this.issue.info.replacementPresetID;

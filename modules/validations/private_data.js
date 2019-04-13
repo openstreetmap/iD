@@ -66,6 +66,7 @@ export function validationPrivateData() {
             info: { privateKeys: privateKeys },
             fixes: [
                 new validationIssueFix({
+                    auto: true,
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.' + fixID + '.title'),
                     onClick: function() {

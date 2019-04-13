@@ -33,6 +33,7 @@ export function validationOldMultipolygon() {
             entities: [outerWay, multipolygon],
             fixes: [
                 new validationIssueFix({
+                    auto: true,
                     title: t('issues.fix.move_tags.title'),
                     onClick: function() {
                         var outerWay = this.issue.entities[0];

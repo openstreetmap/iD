@@ -3248,7 +3248,7 @@ div.full-screen > button:hover {
 .issue {
     overflow: hidden;
 }
-.issue button {
+.issue .issue-message {
     padding: 5px 10px 5px 5px;
     height: auto;
     width: 100%;
@@ -3257,21 +3257,43 @@ div.full-screen > button:hover {
     text-align: inherit;
     display: flex;
     color: inherit;
+    cursor: pointer;
 }
-[dir='rtl'] .issue button {
+[dir='rtl'] .issue .issue-message {
     padding: 5px 5px 5px 10px;
 }
+
+.issue-message .issue-icon {
+    flex: 0 0 auto;
+}
+.issue-message .issue-text {
+    flex: 1 1 auto;
+    padding: 0 5px;
+}
+.issue-message button.autofix.action {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+    background: #7092ff;
+    color: #fff;
+}
+.issue-message button.autofix.action:focus,
+.issue-message button.autofix.action:hover,
+.issue-message button.autofix.action.active {
+    background: #597be7;
+}
+
 .warnings-list,
 .issue.severity-warning,
- li.issue.severity-warning {
-    border-color: #FFDF5C;
+li.issue.severity-warning {
+    border-color: #ffdf5c;
 }
 .icon-badge.warning {
-    color: #FFDF5C;
+    color: #ffdf5c;
 }
 .errors-list,
 .issue.severity-error,
- li.issue.severity-error {
+li.issue.severity-error {
     border-color: #f5b0ab;
 }
 .icon-badge.error {
@@ -3279,15 +3301,12 @@ div.full-screen > button:hover {
 }
 
 .issue.severity-warning,
-.issue.severity-warning button,
 .mode-save .warning-section {
     background: #ffb;
 }
-.issue.severity-warning:not(.expanded) button:hover,
-.issue.severity-warning:not(.expanded) button:focus,
-.issue.severity-warning .issue-fix-item.actionable button:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
-    background: #FFFF99;
+.issue.severity-warning:not(.expanded) .issue-message:hover,
+.issue.severity-warning .issue-fix-item.actionable .issue-message:hover {
+    background: #ffff99;
 }
 .issue.severity-warning .issue-icon {
     color: #ffa900;
@@ -3297,33 +3316,28 @@ div.full-screen > button:hover {
     color: #b15500;
     fill: #b15500;
 }
-.issue.severity-warning .issue-fix-item.actionable:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
+.issue.severity-warning .issue-fix-item.actionable:hover {
     color: #7f3d00;
     fill: #7f3d00;
 }
 
 .issue.severity-error,
-.issue.severity-error button,
 .mode-save .error-section {
-    background: #FFD5D4;
+    background: #ffd5d4;
 }
-.issue.severity-error:not(.expanded) button:hover,
-.issue.severity-error:not(.expanded) button:focus,
-.issue.severity-error .issue-fix-item.actionable button:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
+.issue.severity-error:not(.expanded) .issue-message:hover,
+.issue.severity-error .issue-fix-item.actionable .issue-message:hover {
     background: #ffc9c7;
 }
 .issue.severity-error .issue-icon {
-    color: #DD1400;
-    fill: #DD1400;
+    color: #dd1400;
+    fill: #dd1400;
 }
 .issue.severity-error .issue-fix-item.actionable {
     color: #b91201;
     fill: #b91201;
 }
-.issue.severity-error .issue-fix-item.actionable:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
+.issue.severity-error .issue-fix-item.actionable:hover {
     color: #840c00;
     fill: #840c00;
 }
@@ -3382,27 +3396,29 @@ div.full-screen > button:hover {
     border-width: 1px;
     border-style: solid;
 }
-.entity-issues .issue:not(:last-of-type) {
-    margin-bottom: 10px;
-}
-.issue.expanded button.message {
+.issue.expanded .issue-message {
     cursor: auto;
     padding-bottom: 0px;
+}
+.issue.expanded:not(:first-of-type) {
+    margin-top: 5px;
+}
+.issue.expanded:not(:last-of-type) {
+    margin-bottom: 5px;
 }
 ul.issue-fix-list {
     margin-bottom: 5px;
 }
-ul.issue-fix-list button {
+ul.issue-fix-list li.issue-fix-item {
     padding: 2px 10px 2px 26px;
 }
-[dir='rtl'] ul.issue-fix-list button {
+[dir='rtl'] ul.issue-fix-list li.issue-fix-item {
     padding: 2px 26px 2px 10px;
 }
-.issue-fix-item:not(.actionable) button {
-    cursor: auto;
-
+li.issue-fix-item.actionable {
+    cursor: pointer;
 }
-.issue-fix-item:not(.actionable) .fix-icon {
+li.issue-fix-item:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
@@ -3410,6 +3426,7 @@ ul.issue-fix-list button {
 .issue:not(.expanded) ul.issue-fix-list {
     display: none;
 }
+
 /* don't animate right now
 .issue ul.issue-fix-list {
     max-height: 0;
@@ -3630,12 +3647,12 @@ ul.issue-fix-list button {
 
 .pane-content {
     height: 100%;
-    padding: 10px 50px 20px 20px;
+    padding: 10px 40px 20px 20px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 [dir='rtl'] .pane-content {
-    padding: 10px 20px 20px 50px;
+    padding: 10px 20px 20px 40px;
 }
 
 .pane-content > div {

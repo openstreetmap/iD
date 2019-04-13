@@ -124,8 +124,8 @@ export function uiIssues(context) {
 
 
         var messagesEnter = itemsEnter
-            .append('button')
-            .attr('class', 'message');
+            .append('div')
+            .attr('class', 'issue-message');
 
         messagesEnter
             .call(tooltip()
@@ -137,11 +137,27 @@ export function uiIssues(context) {
         messagesEnter
             .append('span')
             .attr('class', 'issue-icon')
-            .call(svgIcon('', 'pre-text'));
+            .call(svgIcon(''));
 
         messagesEnter
             .append('span')
             .attr('class', 'issue-text');
+
+        messagesEnter
+            .each(function(d) {
+                if (!d.auto) return;
+
+                d3_select(this)
+                    .append('button')
+                    .datum(d.auto)  // set button datum to the autofix
+                    .attr('class', 'autofix action')
+                    .on('click', function(d) {
+                        utilHighlightEntities(d.entityIds, false, context);
+                        d.onClick();
+                        context.validator().validate();
+                    })
+                    .call(svgIcon('#iD-icon-wrench'));
+            });
 
 
         // Update

@@ -13,9 +13,7 @@ export function uiEntityIssues(context) {
     var _expandedIssueID;
     var _entityID;
 
-    // Listen for validation event even though the entity editor is reloaded on
-    // every graph change since the graph change event may happen before the issue
-    // cache is refreshed
+    // Refresh on validated events
     context.validator().on('validated.entity_issues', function() {
          _selection.selectAll('.disclosure-wrap-entity_issues')
              .call(render);
@@ -84,8 +82,8 @@ export function uiEntityIssues(context) {
             });
 
         var messagesEnter = itemsEnter
-            .append('button')
-            .attr('class', 'message')
+            .append('div')
+            .attr('class', 'issue-message')
             .on('click', function(d) {
                 _expandedIssueID = d.id;   // expand only the clicked item
                 selection.selectAll('.issue')
@@ -104,7 +102,7 @@ export function uiEntityIssues(context) {
         messagesEnter
             .append('span')
             .attr('class', 'issue-icon')
-            .call(svgIcon('', 'pre-text'));
+            .call(svgIcon(''));
 
         messagesEnter
             .append('strong')
@@ -133,13 +131,13 @@ export function uiEntityIssues(context) {
         var fixLists = items.selectAll('.issue-fix-list');
 
         var fixes = fixLists.selectAll('.issue-fix-item')
-            .data(function(d) { return d.fixes ? d.fixes : []; })
-            .enter()
+            .data(function(d) { return d.fixes ? d.fixes : []; });
+
+        var fixesEnter = fixes.enter()
             .append('li')
             .attr('class', function(d) {
                 return 'issue-fix-item ' + (d.onClick ? 'actionable' : '');
             })
-            .append('button')
             .on('click', function(d) {
                 if (d.onClick) {
                     utilHighlightEntities(d.entityIds, false, context);
@@ -154,7 +152,8 @@ export function uiEntityIssues(context) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
 
-        fixes.append('span')
+        fixesEnter
+            .append('span')
             .attr('class', 'fix-icon')
             .each(function(d) {
                 var iconName = d.icon || 'iD-icon-wrench';
@@ -164,7 +163,9 @@ export function uiEntityIssues(context) {
                 d3_select(this).call(svgIcon('#' + iconName, 'pre-text'));
             });
 
-        fixes.append('span')
+        fixesEnter
+            .append('span')
+            .attr('class', 'fix-message')
             .text(function(d) { return d.title; });
     }
 

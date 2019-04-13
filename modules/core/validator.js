@@ -342,6 +342,7 @@ export function validationIssue(attrs) {
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
     this.id = generateID.apply(this);      // generated - see below
+    this.auto = null;                      // generated - if autofix exists, will be set below
 
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
@@ -386,16 +387,22 @@ export function validationIssue(attrs) {
 
     if (this.fixes) {   // add a reference in the fixes to the issue for use in fix actions
         for (var i = 0; i < this.fixes.length; i++) {
-            this.fixes[i].issue = this;
+            var fix = this.fixes[i];
+            fix.issue = this;
+            if (fix.auto) {
+                this.auto = fix;
+            }
         }
     }
 }
 
 
 export function validationIssueFix(attrs) {
-    this.icon = attrs.icon;
-    this.title = attrs.title;
-    this.onClick = attrs.onClick;
-    this.entityIds = attrs.entityIds || [];  // Used for hover-higlighting.
-    this.issue = null;    // the issue this fix is for
+    this.title = attrs.title;                    // Required
+    this.onClick = attrs.onClick;                // Required
+    this.icon = attrs.icon;                      // Optional - shows 'iD-icon-wrench' if not set
+    this.entityIds = attrs.entityIds || [];      // Optional - Used for hover-higlighting.
+    this.auto = attrs.auto;                      // Optional - pass true if this fix can be an auto fix
+
+    this.issue = null;    // Generated link - added by ValidationIssue constructor
 }
