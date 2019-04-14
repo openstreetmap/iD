@@ -10,9 +10,9 @@
         "beach"
     ],
     "tags": {
-        "natural"= "beach",
-        "natural"= "sand",
-        "natural"= "scree"
+        "natural": "beach",
+        "natural": "sand",
+        "natural": "scree"
     },
     "name": "shingle"
 }
