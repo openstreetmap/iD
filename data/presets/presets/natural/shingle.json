@@ -5,11 +5,14 @@
         "area"
     ],
     "terms": [
-        "rock",
+        "scree",
+        "sand",
+        "beach"
     ],
     "tags": {
-        "natural": "river",
-        "natural": "beach"
+        "natural"= "beach",
+        "natural"= "sand",
+        "natural"= "scree"
     },
-    "name": "Shingle"
+    "name": "shingle"
 }
