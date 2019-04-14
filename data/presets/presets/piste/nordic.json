@@ -22,5 +22,10 @@
     "tags": {
         "piste:type": "nordic"
     },
+    "addTags": {
+        "piste:type":"nordic",
+        "piste:difficulty":"",
+        "piste:grooming":""
+    },
     "name": "Nordic or Crosscountry Piste/Ski Trail"
 }
