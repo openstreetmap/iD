@@ -1,0 +1,15 @@
+{
+    "icon": "fas-retweet",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "rock",
+    ],
+    "tags": {
+        "natural": "river",
+        "natural": "beach"
+    },
+    "name": "Shingle"
+}
