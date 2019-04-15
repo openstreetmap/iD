@@ -7,10 +7,7 @@ import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { modeSelect } from '../modes';
-import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
-import { uiHelp } from './help';
-import { uiMapData } from './map_data';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilHighlightEntities } from '../util';
 
@@ -22,7 +19,6 @@ export function uiIssues(context) {
     var _rulesList = d3_select(null);
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
-    var _shown = false;
 
     context.validator().on('reload.issues_pane', update);
 
@@ -345,46 +341,14 @@ export function uiIssues(context) {
         .html(true)
         .title(uiTooltipHtml(t('issues.title'), key));
 
-    uiIssues.hidePane = function() {
-        uiIssues.setVisible(false);
-    };
+    function hidePane() {
+        context.ui().togglePanes();
+    }
 
     uiIssues.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
-        uiIssues.setVisible(!_toggleButton.classed('active'));
-    };
-
-    uiIssues.setVisible = function(show) {
-        if (show !== _shown) {
-            _toggleButton.classed('active', show);
-            _shown = show;
-
-            if (show) {
-                uiBackground.hidePane();
-                uiHelp.hidePane();
-                uiMapData.hidePane();
-                update();
-
-                _pane
-                    .style('display', 'block')
-                    .style('right', '-300px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '0px');
-
-            } else {
-                _pane
-                    .style('display', 'block')
-                    .style('right', '0px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '-300px')
-                    .on('end', function() {
-                        d3_select(this).style('display', 'none');
-                    });
-            }
-        }
+        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiIssues.renderToggleButton = function(selection) {
@@ -403,7 +367,8 @@ export function uiIssues(context) {
 
         _pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane issues-pane hide');
+            .attr('class', 'fillL map-pane issues-pane hide')
+            .attr('pane', 'map-issues');
 
         var heading = _pane
             .append('div')
@@ -415,7 +380,7 @@ export function uiIssues(context) {
 
         heading
             .append('button')
-            .on('click', uiIssues.hidePane)
+            .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 
         var content = _pane

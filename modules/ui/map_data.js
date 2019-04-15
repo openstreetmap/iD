@@ -8,10 +8,7 @@ import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes';
-import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
-import { uiHelp } from './help';
-import { uiIssues } from './issues';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -28,7 +25,6 @@ export function uiMapData(context) {
     var _pane = d3_select(null), _toggleButton = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
-    var _shown = false;
     var _dataLayerContainer = d3_select(null);
     var _photoOverlayContainer = d3_select(null);
     var _fillList = d3_select(null);
@@ -731,46 +727,14 @@ export function uiMapData(context) {
         .html(true)
         .title(uiTooltipHtml(t('map_data.description'), key));
 
-    uiMapData.hidePane = function() {
-        uiMapData.setVisible(false);
-    };
+    function hidePane() {
+        context.ui().togglePanes();
+    }
 
     uiMapData.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
-        uiMapData.setVisible(!_toggleButton.classed('active'));
-    };
-
-    uiMapData.setVisible = function(show) {
-        if (show !== _shown) {
-            _toggleButton.classed('active', show);
-            _shown = show;
-
-            if (show) {
-                uiBackground.hidePane();
-                uiHelp.hidePane();
-                uiIssues.hidePane();
-                update();
-
-                _pane
-                    .style('display', 'block')
-                    .style('right', '-300px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '0px');
-
-            } else {
-                _pane
-                    .style('display', 'block')
-                    .style('right', '0px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '-300px')
-                    .on('end', function() {
-                        d3_select(this).style('display', 'none');
-                    });
-            }
-        }
+        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiMapData.renderToggleButton = function(selection) {
@@ -788,7 +752,8 @@ export function uiMapData(context) {
 
         _pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane map-data-pane hide');
+            .attr('class', 'fillL map-pane map-data-pane hide')
+            .attr('pane', 'map-data');
 
         var heading = _pane
             .append('div')
@@ -800,7 +765,7 @@ export function uiMapData(context) {
 
         heading
             .append('button')
-            .on('click', uiMapData.hidePane)
+            .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 

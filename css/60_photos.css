@@ -1,7 +1,7 @@
 /* photo viewer div */
 #photoviewer {
     position: absolute;
-    bottom: 40px;
+    bottom: 10px;
     left: 10px;
     width: 330px;
     height: 250px;
