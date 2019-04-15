@@ -11,9 +11,8 @@ export function validationMissingRole() {
         var issues = [];
         if (entity.type === 'way') {
             context.graph().parentRelations(entity).forEach(function(relation) {
-                if (!relation.isMultipolygon()) {
-                    return;
-                }
+                if (!relation.isMultipolygon()) return;
+
                 var member = relation.memberById(entity.id);
                 if (member && isMissingRole(member)) {
                     issues.push(makeIssue(entity, relation, member, context));
@@ -31,6 +30,7 @@ export function validationMissingRole() {
         return issues;
     };
 
+
     function isMissingRole(member) {
         return !member.role || !member.role.trim().length;
     }
@@ -45,7 +45,9 @@ export function validationMissingRole() {
             }),
             tooltip: t('issues.missing_role.multipolygon.tip'),
             entities: [relation, way],
-            info: {member: member},
+            data: {
+                member: member
+            },
             fixes: [
                 makeAddRoleFix('inner', context),
                 makeAddRoleFix('outer', context),
@@ -54,7 +56,7 @@ export function validationMissingRole() {
                     title: t('issues.fix.remove_from_relation.title'),
                     onClick: function() {
                         context.perform(
-                            actionDeleteMember(this.issue.entities[0].id, this.issue.info.member.index),
+                            actionDeleteMember(this.issue.entities[0].id, this.issue.data.member.index),
                             t('operations.delete_member.annotation')
                         );
                     }
@@ -67,7 +69,7 @@ export function validationMissingRole() {
         return new validationIssueFix({
             title: t('issues.fix.set_as_' + role + '.title'),
             onClick: function() {
-                var oldMember = this.issue.info.member;
+                var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entities[1].id, type: oldMember.type, role: role };
                 context.perform(
                     actionChangeMember(this.issue.entities[0].id, member, oldMember.index),

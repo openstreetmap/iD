@@ -68,7 +68,7 @@ export function validationOutdatedTags() {
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
             tooltip: tooltip, // t('issues.outdated_tags.tip'),
             entities: [entity],
-            info: {
+            data: {
                 tagDiff: tagDiff,
                 newTags: newTags
             },
@@ -78,7 +78,7 @@ export function validationOutdatedTags() {
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function() {
                         var entityID = this.issue.entities[0].id;
-                        var newTags = this.issue.info.newTags;
+                        var newTags = this.issue.data.newTags;
                         context.perform(
                             actionChangeTags(entityID, newTags),
                             t('issues.fix.upgrade_tags.annotation')

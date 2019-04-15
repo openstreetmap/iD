@@ -431,8 +431,8 @@ export function validationCrossingWays() {
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var loc = this.issue.loc;
-                    var connectionTags = this.issue.info.connectionTags;
-                    var edges = this.issue.info.edges;
+                    var connectionTags = this.issue.data.connectionTags;
+                    var edges = this.issue.data.edges;
 
                     context.perform(
                         function actionConnectCrossingWays(graph) {
@@ -500,9 +500,12 @@ export function validationCrossingWays() {
             type: type,
             severity: 'warning',
             message: t('issues.crossing_ways.message', messageDict),
-            tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
+            tooltip: t('issues.crossing_ways.' + crossingTypeID + '.tip'),
             entities: entities,
-            info: { edges: crossing.edges, connectionTags: connectionTags },
+            data: {
+                edges: crossing.edges,
+                connectionTags: connectionTags
+            },
             loc: crossing.crossPoint,
             fixes: fixes
         });

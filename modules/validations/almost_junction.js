@@ -47,8 +47,8 @@ export function validationAlmostJunction() {
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var endNode = this.issue.entities[1];
-                    var targetEdge = this.issue.info.edge;
-                    var crossLoc = this.issue.info.cross_loc;
+                    var targetEdge = this.issue.data.edge;
+                    var crossLoc = this.issue.data.cross_loc;
                     var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
                     var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
 
@@ -94,7 +94,7 @@ export function validationAlmostJunction() {
                 tooltip: t('issues.almost_junction.highway-highway.tip'),
                 entities: [entity, node, edgeHighway],
                 loc: extendableNodeInfo.node.loc,
-                info: {
+                data: {
                     edge: extendableNodeInfo.edge,
                     cross_loc: extendableNodeInfo.cross_loc
                 },

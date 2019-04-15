@@ -63,7 +63,9 @@ export function validationPrivateData() {
             }),
             tooltip: t('issues.private_data.tip'),
             entities: [entity],
-            info: { privateKeys: privateKeys },
+            data: {
+                privateKeys: privateKeys
+            },
             fixes: [
                 new validationIssueFix({
                     auto: true,
@@ -72,7 +74,7 @@ export function validationPrivateData() {
                     onClick: function() {
                         var entity = this.issue.entities[0];
                         var tags = Object.assign({}, entity.tags);   // shallow copy
-                        var privateKeys = this.issue.info.privateKeys;
+                        var privateKeys = this.issue.data.privateKeys;
                         for (var index in privateKeys) {
                             delete tags[privateKeys[index]];
                         }

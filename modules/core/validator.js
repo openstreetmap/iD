@@ -337,7 +337,7 @@ export function validationIssue(attrs) {
     this.tooltip = attrs.tooltip;          // required - localized string
     this.entities = attrs.entities;        // optional - array of entities
     this.loc = attrs.loc;                  // optional - expect a [lon, lat] array
-    this.info = attrs.info;                // optional - object containing arbitrary extra information
+    this.data = attrs.data;                // optional - object containing extra data for the fixes
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
