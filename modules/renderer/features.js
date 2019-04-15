@@ -413,8 +413,10 @@ export function rendererFeatures(context) {
     features.isHiddenPreset = function(preset, geometry) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
+
+        var test = preset.setTags({}, geometry);
         for (var key in _rules) {
-            if (_rules[key].filter(preset.setTags({}, geometry), geometry)) {
+            if (_rules[key].filter(test, geometry)) {
                 if (_hidden.indexOf(key) !== -1) {
                     return key;
                 }
@@ -429,12 +431,8 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
 
-        var matches = features.getMatches(entity, resolver, geometry);
-
-        for (var i = 0; i < _hidden.length; i++) {
-            if (matches[_hidden[i]]) return true;
-        }
-        return false;
+        var matches = Object.keys(features.getMatches(entity, resolver, geometry));
+        return matches.every(function(k) { return features.hidden(k); });
     };
 
 
@@ -456,8 +454,8 @@ export function rendererFeatures(context) {
 
     features.hasHiddenConnections = function(entity, resolver) {
         if (!_hidden.length) return false;
-        var childNodes, connections;
 
+        var childNodes, connections;
         if (entity.type === 'midpoint') {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
             connections = [];
@@ -503,6 +501,7 @@ export function rendererFeatures(context) {
 
     features.forceVisible = function(entityIDs) {
         if (!arguments.length) return Object.keys(_forceVisible);
+
         _forceVisible = {};
         for (var i = 0; i < entityIDs.length; i++) {
             _forceVisible[entityIDs[i]] = true;
