@@ -1344,6 +1344,10 @@ en:
       title: Unknown Roads
       message: "{feature} has no classification"
       tip: "Roads without a specific type may not appear in maps or routing."
+    duplicate_tags:
+      title: Duplicate Tags
+      message: 'An entity with {tag_type}: "{tag_value}" already exists in this part of the map'
+      tip: "{tag_type} tags are typically unique in a given geographical area."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
@@ -1375,6 +1379,9 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_duplicated_tag:
+        title: Remove duplicated tag
+        annotation: Removed duplicated tag.
       remove_tags:
         title: Remove the tags
       reposition_features:

@@ -1656,6 +1656,11 @@
                 "message": "{feature} has no classification",
                 "tip": "Roads without a specific type may not appear in maps or routing."
             },
+            "duplicate_tags": {
+                "title": "Duplicate Tags",
+                "message": "An entity with {tag_type}: \"{tag_value}\" already exists in this part of the map",
+                "tip": "{tag_type} tags are typically unique in a given geographical area."
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Connected very close features."
@@ -1699,6 +1704,10 @@
                 "remove_tag": {
                     "title": "Remove the tag",
                     "annotation": "Removed tag."
+                },
+                "remove_duplicated_tag": {
+                    "title": "Remove duplicated tag",
+                    "annotation": "Removed duplicated tag."
                 },
                 "remove_tags": {
                     "title": "Remove the tags"
@@ -8553,24 +8562,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Orthophoto Flanders most recent © AGIV"
-                },
-                "name": "AGIV Flanders most recent aerial imagery"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Orthophoto Flanders © AGIV"
-                },
-                "name": "AGIV Flanders 2013-2015 aerial imagery 10cm"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Flanders © AGIV"
-                },
-                "name": "AGIV Flanders GRB"
-            },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
@@ -8579,28 +8570,28 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
+                "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
                 "name": "DigitalGlobe Premium Imagery Vintage"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+                "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
                 "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
@@ -8673,11 +8664,8 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
-            "SPW_ORTHO_LAST": {
-                "name": "SPW(allonie) most recent aerial imagery"
-            },
-            "SPW_PICC": {
-                "name": "SPW(allonie) PICC numerical imagery"
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
             },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
@@ -8686,44 +8674,6 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
-            },
-            "US-TIGER-Roads-2018": {
-                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
-                "name": "TIGER Roads 2018"
-            },
-            "US_Forest_Service_roads_overlay": {
-                "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
-                "name": "U.S. Forest Roads Overlay"
-            },
-            "UrbISOrtho2016": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbIS-Ortho 2016"
-            },
-            "UrbISOrtho2017": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbIS-Ortho 2017"
-            },
-            "UrbISOrtho2018": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbIS-Ortho 2018"
-            },
-            "UrbisAdmFR": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbisAdm FR"
-            },
-            "UrbisAdmNL": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -8759,7 +8709,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on government data.",
+                "description": "Basemap of Austria, based on goverment data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -8769,110 +8719,11 @@
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
             },
-            "eufar-balaton": {
+            "hike_n_bike": {
                 "attribution": {
-                    "text": "EUFAR Balaton ortofotó 2010"
+                    "text": "© OpenStreetMap contributors"
                 },
-                "description": "1940 geo-tagged photography from Balaton Limnological Institute.",
-                "name": "EUFAR Balaton orthophotos"
-            },
-            "finds.jp_KBN_2500": {
-                "attribution": {
-                    "text": "GSI KIBAN 2500"
-                },
-                "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
-                "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
-                "name": "Japan GSI ortho Imagery"
-            },
-            "gsi.go.jp_airphoto": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
-                "name": "Japan GSI airphoto Imagery"
-            },
-            "gsi.go.jp_seamlessphoto": {
-                "attribution": {
-                    "text": "GSI Japan seamless photo"
-                },
-                "description": "Japan GSI seamlessphoto Imagery. The collection of latest imageries of GSI ortho, airphoto, post disaster and others.",
-                "name": "Japan GSI seamlessphoto Imagery"
-            },
-            "gsi.go.jp_std_map": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI Standard Map. Widely covered.",
-                "name": "Japan GSI Standard Map"
-            },
-            "helsingborg-orto": {
-                "attribution": {
-                    "text": "© Helsingborg municipality"
-                },
-                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
-                "name": "Helsingborg Orthophoto"
-            },
-            "kalmar-orto-2014": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
-                "name": "Kalmar North Orthophoto 2014"
-            },
-            "kalmar-orto-2016": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
-                "name": "Kalmar South Orthophoto 2016"
-            },
-            "kalmar-orto-2018": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
-                "name": "Kalmar Urban Orthophoto 2018"
-            },
-            "kelkkareitit": {
-                "attribution": {
-                    "text": "© Kelkkareitit.fi"
-                },
-                "description": "Kelkkareitit.fi snowmobile trails from OSM (Nordic coverage)",
-                "name": "Nordic snowmobile overlay"
-            },
-            "lantmateriet-orto1960": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Mosaic of Swedish orthophotos from the period 1955–1965. Older and younger pictures may occur.",
-                "name": "Lantmäteriet Historic Orthophoto 1960"
-            },
-            "lantmateriet-orto1975": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
-                "name": "Lantmäteriet Historic Orthophoto 1975"
-            },
-            "lantmateriet-topowebb": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Topographic map of Sweden 1:50 000",
-                "name": "Lantmäteriet Topographic Map"
-            },
-            "linkoping-orto": {
-                "attribution": {
-                    "text": "© Linköping municipality"
-                },
-                "description": "Orthophotos from the municipality of Linköping 2010, open data",
-                "name": "Linköping Orthophoto"
+                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -8906,13 +8757,6 @@
                 },
                 "name": "OpenStreetMap (German Style)"
             },
-            "osmse-ekonomiska": {
-                "attribution": {
-                    "text": "© Lantmäteriet"
-                },
-                "description": "Scan of \"Economic maps\" ca. 1950–1980",
-                "name": "Lantmäteriet Economic Map 1950–1980"
-            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap contributors"
@@ -8925,25 +8769,11 @@
                 },
                 "name": "skobbler"
             },
-            "skoterleder": {
-                "attribution": {
-                    "text": "© Skoterleder.org"
-                },
-                "description": "Snowmobile trails",
-                "name": "Snowmobile map Sweden"
-            },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
                 },
                 "name": "Stamen Terrain"
-            },
-            "stockholm-orto": {
-                "attribution": {
-                    "text": "© Stockholm municipality, CC0"
-                },
-                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
-                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
@@ -8956,48 +8786,6 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
-            },
-            "trafikverket-baninfo": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish railway network, including sidings",
-                "name": "Trafikverket Railway Network"
-            },
-            "trafikverket-baninfo-option": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish railway network with several options for map layers",
-                "name": "Trafikverket Railway Network options"
-            },
-            "trafikverket-vagnat": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish NVDB road network",
-                "name": "Trafikverket Road Network"
-            },
-            "trafikverket-vagnat-extra": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish NVDB extra details: Highway reference, traffic calming, rest area, bus stop, bridge, tunnel, speed camera",
-                "name": "Trafikverket Road Network extra"
-            },
-            "trafikverket-vagnat-navn": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish NVDB street names",
-                "name": "Trafikverket Street Names"
-            },
-            "trafikverket-vagnat-option": {
-                "attribution": {
-                    "text": "© Trafikverket, CC0"
-                },
-                "description": "Swedish NVDB road network with several options for map layers",
-                "name": "Trafikverket Road Network options"
             }
         },
         "community": {
