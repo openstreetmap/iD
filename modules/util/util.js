@@ -97,12 +97,19 @@ export function utilGetAllNodes(ids, graph) {
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0];
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
-    var network = entity.tags.cycle_network || entity.tags.network;
 
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
+        var network = entity.tags.cycle_network || entity.tags.network;
         if (network) {
             name = network + ' ' + name;
+        }
+    }
+
+    if (!name && entity.tags['addr:housenumber']) {
+        name = entity.tags['addr:housenumber'];
+        if (entity.tags['addr:street']) {
+            name += ' ' + entity.tags['addr:street'];
         }
     }
 
