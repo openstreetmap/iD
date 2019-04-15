@@ -3214,9 +3214,10 @@ div.full-screen > button:hover {
 .background-pane .layer-list button {
     float: right;
     height: 100%;
-    width: 10%;
     border-left: 1px solid #ccc;
     border-radius: 0;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 [dir='rtl'] .map-data-pane .layer-list button,
 [dir='rtl'] .background-pane .layer-list button {
@@ -3573,21 +3574,21 @@ ul.issue-fix-list button {
 
 /* Side Panes - Background / Map Data / Help
 ------------------------------------------------------- */
+.map-panes {
+    flex: 0 1 auto;
+    position: relative;
+    height: 100%;
+}
 .map-pane {
-    position: absolute;
-    top: 71px;
-    bottom: 30px;
-    right: 0;
+    position: relative;
+    top: 0;
     width: 100%;
-    max-width: 400px;
-    min-width: 180px;
-    padding-bottom: 50px;
+    height: 100%;
+    padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
-}
-[dir='rtl'] .map-pane {
-    left: 0;
-    right: auto !important;
+    max-width: 400px;
+    min-width: 300px;
 }
 
 .map-pane.help-wrap {
@@ -3617,6 +3618,7 @@ ul.issue-fix-list button {
     padding: 10px 50px 20px 20px;
     overflow-x: hidden;
     overflow-y: scroll;
+    position: relative;
 }
 [dir='rtl'] .pane-content {
     padding: 10px 20px 20px 50px;
@@ -3823,13 +3825,19 @@ img.tile-debug {
 .map-in-map {
     position: absolute;
     overflow: hidden;
-    top: 60px;
+    top: 10px;
     width: 200px;
     height: 150px;
     z-index: 5;
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
+}
+[dir='ltr'] .map-in-map {
+    left: 10px;
+}
+[dir='rtl'] .map-in-map {
+    right: 10px;
 }
 
 .map-in-map-tiles {
@@ -3915,36 +3923,49 @@ img.tile-debug {
 }
 
 
+.over-map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 71px;
+    bottom: 30px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+.over-map > * {
+    pointer-events: auto;
+}
+
 /* Information Panels
 ------------------------------------------------------- */
 .info-panels {
     display: flex;
     flex-flow: row-reverse wrap-reverse;
-    position: absolute;
+    width: 100%;
     z-index: 1;
-    right: 0;
-    bottom: 30px;
     -ms-user-select: element;
 }
 
-.info-panels h1,
-.info-panels h2,
-.info-panels h3,
-.info-panels h4,
-.info-panels h5 {
+.panel-container h1,
+.panel-container h2,
+.panel-container h3,
+.panel-container h4,
+.panel-container h5 {
     display: inline-block;
     margin-bottom: 0;
 }
 
-.info-panels h1,
-.info-panels h2,
-.info-panels h3 {
+.panel-container h1,
+.panel-container h2,
+.panel-container h3 {
     color: #ff8;
 }
 
 .panel-container {
     flex: 0 0 auto;
-    margin: 2px 0 0 2px;
+    margin: 0 2px 2px 0;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.75);
     padding-bottom: 10px;
@@ -4611,11 +4632,11 @@ img.tile-debug {
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 .modal-shortcuts .shortcut-column {
-    flex: 1 1 50%;
-    width: 50%;
+    width: auto;
 }
 
 .modal-shortcuts .shortcut-tab-tools .shortcut-column {
@@ -4635,6 +4656,7 @@ img.tile-debug {
     padding: 0 10px;
     color: #767676;
     text-align: right;
+    white-space: nowrap;
 }
 [dir='rtl'] .modal-shortcuts .shortcut-keys {
     text-align: left;
@@ -4840,7 +4862,7 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .notice {
     position: absolute;
-    top: 45px;
+    top: 15px;
     left: 0;
     right: 0;
     text-align: center;

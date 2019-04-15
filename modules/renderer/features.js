@@ -138,7 +138,13 @@ export function rendererFeatures(context) {
         ) && !(
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
-            paths[tags.highway]
+            paths[tags.highway] ||
+            tags.waterway ||
+            tags.railway ||
+            tags.landuse ||
+            tags.natural ||
+            tags.building ||
+            tags.power
         );
     });
 

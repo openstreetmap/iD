@@ -6,11 +6,11 @@
         "line",
         "area"
     ],
-    "moreFields": [
-        "website"
-    ],
     "fields": [
         "name"
+    ],
+    "moreFields": [
+        "website"
     ],
     "tags": {
         "waterway": "dam"

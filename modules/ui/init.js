@@ -1,6 +1,7 @@
 import {
     event as d3_event,
-    select as d3_select
+    select as d3_select,
+    selectAll as d3_selectAll
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
@@ -220,9 +221,13 @@ export function uiInit(context) {
         }
 
 
+        var overMap = content
+            .append('div')
+            .attr('class', 'over-map');
+
         // Add panes
         // This should happen after map is initialized, as some require surface()
-        var panes = content
+        var panes = overMap
             .append('div')
             .attr('class', 'map-panes');
 
@@ -232,15 +237,15 @@ export function uiInit(context) {
             .call(issues.renderPane)
             .call(help.renderPane);
 
-
         // Add absolutely-positioned elements that sit on top of the map
         // This should happen after the map is ready (center/zoom)
-        content
+        overMap
             .call(uiMapInMap(context))
             .call(uiInfo(context))
             .call(uiNotice(context));
 
-        content
+
+        overMap
             .append('div')
             .attr('id', 'photoviewer')
             .classed('al', true)       // 'al'=left,  'ar'=right
@@ -410,6 +415,49 @@ export function uiInit(context) {
         }
     };
 
+    ui.togglePanes = function(showPane) {
+        var shownPanes = d3_selectAll('.map-pane.shown');
+
+        shownPanes
+            .classed('shown', false);
+
+        d3_selectAll('.map-control button')
+            .classed('active', false);
+
+        if (showPane) {
+            shownPanes
+                .style('display', 'none')
+                .style('right', '-500px');
+
+            d3_selectAll('.' + showPane.attr('pane') + '-control button')
+                .classed('active', true);
+
+            showPane
+                .classed('shown', true)
+                .style('display', 'block');
+            if (shownPanes.empty()) {
+                showPane
+                    .style('display', 'block')
+                    .style('right', '-500px')
+                    .transition()
+                    .duration(200)
+                    .style('right', '0px');
+            } else {
+                showPane
+                    .style('right', '0px');
+            }
+        } else {
+            shownPanes
+                .style('display', 'block')
+                .style('right', '0px')
+                .transition()
+                .duration(200)
+                .style('right', '-500px')
+                .on('end', function() {
+                    d3_select(this).style('display', 'none');
+                });
+        }
+    };
 
     return ui;
 }

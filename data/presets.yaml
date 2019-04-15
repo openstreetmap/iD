@@ -1034,6 +1034,9 @@ en:
           outdoor: Outdoor
           # location=roof
           roof: Rooftop
+      lock:
+        # lock=*
+        label: Lock
       man_made:
         # man_made=*
         label: Type
@@ -1867,6 +1870,9 @@ en:
           all: All Ways
           # stop=minor
           minor: Minor Road
+      street_cabinet:
+        # street_cabinet=*
+        label: Type
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
@@ -4323,15 +4329,10 @@ en:
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
       golf/cartpath:
-        # 'golf=cartpath, golf_cart=designated'
+        # golf=cartpath
         name: Golf Cartpath
         subtitle: '<translate with short summary or explanation of ''Golf Cartpath'', if needed>'
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
-      golf/cartpath_service:
-        # 'highway=service, golf=cartpath, golf_cart=designated'
-        name: Golf Cartpath / Service Road
-        subtitle: '<translate with short summary or explanation of ''Golf Cartpath / Service Road'', if needed>'
-        terms: '<translate with synonyms or related terms for ''Golf Cartpath / Service Road'', separated by commas>'
       golf/driving_range:
         # 'golf=driving_range, landuse=grass'
         name: Driving Range
@@ -4358,7 +4359,7 @@ en:
         subtitle: '<translate with short summary or explanation of ''Lateral Water Hazard'', if needed>'
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
-        # 'golf=path, foot=designated'
+        # golf=path
         name: Golf Walking Path
         subtitle: '<translate with short summary or explanation of ''Golf Walking Path'', if needed>'
         terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
@@ -5692,6 +5693,12 @@ en:
         subtitle: '<translate with short summary or explanation of ''Antenna'', if needed>'
         # 'terms: broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv'
         terms: '<translate with synonyms or related terms for ''Antenna'', separated by commas>'
+      man_made/beehive:
+        # man_made=beehive
+        name: Beehive
+        subtitle: '<translate with short summary or explanation of ''Beehive'', if needed>'
+        # 'terms: apiary,beekeeper,farm,honey,pollination'
+        terms: '<translate with synonyms or related terms for ''Beehive'', separated by commas>'
       man_made/breakwater:
         # man_made=breakwater
         name: Breakwater
@@ -5850,6 +5857,12 @@ en:
         subtitle: '<translate with short summary or explanation of ''Storage Tank'', if needed>'
         # 'terms: water,oil,gas,petrol'
         terms: '<translate with synonyms or related terms for ''Storage Tank'', separated by commas>'
+      man_made/street_cabinet:
+        # man_made=street_cabinet
+        name: Street Cabinet
+        subtitle: '<translate with short summary or explanation of ''Street Cabinet'', if needed>'
+        # 'terms: cable tv,monitoring box,technical box,telecommunications,traffic signal controls'
+        terms: '<translate with synonyms or related terms for ''Street Cabinet'', separated by commas>'
       man_made/surveillance:
         # man_made=surveillance
         name: Surveillance
@@ -8357,6 +8370,11 @@ en:
         name: Canal
         subtitle: '<translate with short summary or explanation of ''Canal'', if needed>'
         terms: '<translate with synonyms or related terms for ''Canal'', separated by commas>'
+      waterway/canal/lock:
+        # 'waterway=canal, lock=yes'
+        name: Canal Lock
+        subtitle: '<translate with short summary or explanation of ''Canal Lock'', if needed>'
+        terms: '<translate with synonyms or related terms for ''Canal Lock'', separated by commas>'
       waterway/dam:
         # waterway=dam
         name: Dam
@@ -8384,6 +8402,12 @@ en:
         subtitle: '<translate with short summary or explanation of ''Marine Fuel Station'', if needed>'
         # 'terms: petrol,gas,diesel,boat'
         terms: '<translate with synonyms or related terms for ''Marine Fuel Station'', separated by commas>'
+      waterway/lock_gate:
+        # waterway=lock_gate
+        name: Lock Gate
+        subtitle: '<translate with short summary or explanation of ''Lock Gate'', if needed>'
+        # 'terms: canal'
+        terms: '<translate with synonyms or related terms for ''Lock Gate'', separated by commas>'
       waterway/milestone:
         # waterway=milestone
         name: Waterway Milestone

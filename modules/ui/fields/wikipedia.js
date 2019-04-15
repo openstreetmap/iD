@@ -185,7 +185,6 @@ export function uiFieldWikipedia(field, context) {
             syncTags.wikipedia = language()[2] + ':' + value;
         } else {
             syncTags.wikipedia = undefined;
-            syncTags.wikidata = undefined;
         }
 
         dispatch.call('change', this, syncTags);
