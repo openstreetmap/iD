@@ -19,7 +19,7 @@ export function validationDuplicateTags() {
         tagsToCheck.forEach(function(tag) {
             var existingTagValues = Object.keys(context.graph().entities)
                                     .filter(function(n) {
-                                        return n !== entity.id;
+                                        return n !== entity.id && context.hasEntity(n);
                                     })
                                     .map(function(n) {
                                         return tag[1].map(function(t) {
