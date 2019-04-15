@@ -3939,6 +3939,7 @@ img.tile-debug {
 .info-panels {
     display: flex;
     flex-flow: row-reverse wrap-reverse;
+    width: 100%;
     z-index: 1;
     -ms-user-select: element;
 }
