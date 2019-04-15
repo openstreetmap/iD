@@ -6,7 +6,7 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationIncompatibleSource() {
     var type = 'incompatible_source';
 
-    var invalidSources = [{id:'google', regex:'google'}];
+    var invalidSources = [{id:'google', name: 'Google', regex:'google'}];
 
     var validation = function(entity, context) {
         var issues = [];
@@ -20,10 +20,13 @@ export function validationIncompatibleSource() {
                     issues.push(new validationIssue({
                         type: type,
                         severity: 'warning',
-                        message: t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
+                        message: t('issues.incompatible_source.source.feature.message', {
                             feature: utilDisplayLabel(entity, context),
+                            source: invalidSource.name
                         }),
-                        tooltip: t('issues.incompatible_source.' + invalidSource.id + '.tip'),
+                        tooltip: t('issues.incompatible_source.source.tip', {
+                            source: invalidSource.name
+                        }),
                         entities: [entity],
                         fixes: [
                             new validationIssueFix({

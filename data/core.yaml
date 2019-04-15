@@ -1297,10 +1297,10 @@ en:
       tip: "Names should be the actual, on-the-ground names of features."
     incompatible_source:
       title: Incompatible Data Sources
-      google:
+      source:
         feature:
-          message: '{feature} lists Google as a data source'
-        tip: "Google products are proprietary and must not be used as references."
+          message: '{feature} lists {source} as a data source'
+        tip: "{source} products are proprietary and must not be used as references."
       tip: "Source data must be licensed in a manner compatible with OpenStreetMap."
     many_deletions:
       title: Many Deletions
