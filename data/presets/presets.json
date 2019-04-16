@@ -705,6 +705,7 @@
     "natural/sand": {"geometry": ["area"], "tags": {"natural": "sand"}, "terms": ["desert"], "name": "Sand"},
     "natural/scree": {"geometry": ["area"], "tags": {"natural": "scree"}, "terms": ["loose rocks"], "name": "Scree"},
     "natural/scrub": {"geometry": ["area"], "tags": {"natural": "scrub"}, "terms": ["bush", "shrubs"], "name": "Scrub"},
+    "natural/shingle": {"geometry": ["area"], "tags": {"natural": "shingle"}, "terms": ["beach", "gravel", "pebbles", "riverbed", "rounded rock fragments"], "name": "Shingle"},
     "natural/spring": {"icon": "maki-water", "fields": ["name", "intermittent"], "geometry": ["point", "vertex"], "tags": {"natural": "spring"}, "terms": [], "name": "Spring"},
     "natural/tree_row": {"icon": "maki-park", "fields": ["leaf_type", "leaf_cycle", "denotation"], "geometry": ["line"], "tags": {"natural": "tree_row"}, "terms": [], "name": "Tree Row"},
     "natural/tree": {"icon": "maki-park", "fields": ["leaf_type_singular", "leaf_cycle_singular", "denotation"], "geometry": ["point", "vertex"], "tags": {"natural": "tree"}, "terms": [], "name": "Tree"},

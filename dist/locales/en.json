@@ -6882,6 +6882,10 @@
                     "name": "Scrub",
                     "terms": "bush,shrubs"
                 },
+                "natural/shingle": {
+                    "name": "Shingle",
+                    "terms": "beach,gravel,pebbles,riverbed,rounded rock fragments"
+                },
                 "natural/spring": {
                     "name": "Spring",
                     "terms": ""

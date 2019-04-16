@@ -5406,6 +5406,11 @@ en:
         name: Scrub
         # 'terms: bush,shrubs'
         terms: '<translate with synonyms or related terms for ''Scrub'', separated by commas>'
+      natural/shingle:
+        # natural=shingle
+        name: Shingle
+        # 'terms: beach,gravel,pebbles,riverbed,rounded rock fragments'
+        terms: '<translate with synonyms or related terms for ''Shingle'', separated by commas>'
       natural/spring:
         # natural=spring
         name: Spring

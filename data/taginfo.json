@@ -682,6 +682,7 @@
     {"key": "natural", "value": "saddle", "description": "🄿 Saddle", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-stroked-15.svg?sanitize=true"},
     {"key": "natural", "value": "scree", "description": "🄿 Scree", "object_types": ["area"]},
     {"key": "natural", "value": "scrub", "description": "🄿 Scrub", "object_types": ["area"]},
+    {"key": "natural", "value": "shingle", "description": "🄿 Shingle", "object_types": ["area"]},
     {"key": "natural", "value": "spring", "description": "🄿 Spring", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "natural", "value": "tree_row", "description": "🄿 Tree Row", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"},
     {"key": "natural", "value": "tree", "description": "🄿 Tree", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"},

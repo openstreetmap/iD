@@ -259,6 +259,7 @@ path.stroke.tag-man_made-groyne,
 path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-bare_rock,
 path.stroke.tag-natural-scree,
+path.stroke.tag-natural-shingle,
 path.stroke.tag-waterway-dam,
 path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
@@ -272,6 +273,7 @@ path.fill.tag-man_made-groyne,
 path.fill.tag-man_made-breakwater,
 path.fill.tag-natural-bare_rock,
 path.fill.tag-natural-scree,
+path.fill.tag-natural-shingle,
 path.fill.tag-waterway-dam,
 path.fill.tag-waterway-weir {
     stroke: rgba(140, 140, 140, 0.5);
