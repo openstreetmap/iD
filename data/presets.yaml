@@ -2347,6 +2347,10 @@ en:
         name: Airport Terminal
         # 'terms: airport,aerodrome'
         terms: '<translate with synonyms or related terms for ''Airport Terminal'', separated by commas>'
+      aeroway/windsock:
+        # aeroway=windsock
+        name: Windsock
+        terms: '<translate with synonyms or related terms for ''Windsock'', separated by commas>'
       allotments/plot:
         # allotments=plot
         name: Community Garden Plot

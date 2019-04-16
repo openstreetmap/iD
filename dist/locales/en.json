@@ -4242,6 +4242,10 @@
                     "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
                 },
+                "aeroway/windsock": {
+                    "name": "Windsock",
+                    "terms": ""
+                },
                 "allotments/plot": {
                     "name": "Community Garden Plot",
                     "terms": ""
