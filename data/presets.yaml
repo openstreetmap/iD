@@ -5860,6 +5860,11 @@ en:
         name: Solar Panel
         # 'terms: photovoltaic module,PV module,sunlight'
         terms: '<translate with synonyms or related terms for ''Solar Panel'', separated by commas>'
+      power/generator/source/hydro:
+        # 'power=generator, generator:source=hydro'
+        name: Water Turbine
+        # 'terms: dam,generator,francis turbine,hydroelectricity,kaplan turbine,pelton turbine'
+        terms: '<translate with synonyms or related terms for ''Water Turbine'', separated by commas>'
       power/generator/source/nuclear:
         # 'power=generator, generator:source=nuclear, generator:method=fission'
         name: Nuclear Reactor

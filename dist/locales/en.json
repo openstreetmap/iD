@@ -7286,6 +7286,10 @@
                     "name": "Solar Panel",
                     "terms": "photovoltaic module,PV module,sunlight"
                 },
+                "power/generator/source/hydro": {
+                    "name": "Water Turbine",
+                    "terms": "dam,generator,francis turbine,hydroelectricity,kaplan turbine,pelton turbine"
+                },
                 "power/generator/source/nuclear": {
                     "name": "Nuclear Reactor",
                     "terms": "fission,generator,nuclear,nuke,reactor"
