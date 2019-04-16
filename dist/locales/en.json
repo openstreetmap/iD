@@ -7879,6 +7879,10 @@
                     "name": "Furniture Store",
                     "terms": "chair,sofa,table"
                 },
+                "shop/games": {
+                    "name": "Tabletop Game Store",
+                    "terms": "board game,card game,dice game,game shop,live action role-playing game,miniatures wargame,strategy game"
+                },
                 "shop/garden_centre": {
                     "name": "Garden Center",
                     "terms": "landscape,mulch,shrub,tree"

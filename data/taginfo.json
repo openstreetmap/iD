@@ -898,6 +898,7 @@
     {"key": "shop", "value": "fuel", "description": "🄿 Fuel Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "funeral_directors", "description": "🄿 Funeral Home", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/cemetery-15.svg?sanitize=true"},
     {"key": "shop", "value": "furniture", "description": "🄿 Furniture Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-couch.svg?sanitize=true"},
+    {"key": "shop", "value": "games", "description": "🄿 Tabletop Game Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-dice.svg?sanitize=true"},
     {"key": "shop", "value": "garden_centre", "description": "🄿 Garden Center", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"},
     {"key": "shop", "value": "gas", "description": "🄿 Bottled Gas Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "gift", "description": "🄿 Gift Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/gift-15.svg?sanitize=true"},

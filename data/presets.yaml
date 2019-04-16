@@ -6547,6 +6547,11 @@ en:
         name: Furniture Store
         # 'terms: chair,sofa,table'
         terms: '<translate with synonyms or related terms for ''Furniture Store'', separated by commas>'
+      shop/games:
+        # shop=games
+        name: Tabletop Game Store
+        # 'terms: board game,card game,dice game,game shop,live action role-playing game,miniatures wargame,strategy game'
+        terms: '<translate with synonyms or related terms for ''Tabletop Game Store'', separated by commas>'
       shop/garden_centre:
         # shop=garden_centre
         name: Garden Center

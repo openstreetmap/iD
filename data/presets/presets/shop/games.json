@@ -1,0 +1,20 @@
+{
+    "icon": "fas-dice",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "games"
+    },
+    "terms": [
+        "board game",
+        "card game",
+        "dice game",
+        "game shop",
+        "live action role-playing game",
+        "miniatures wargame",
+        "strategy game"
+    ],
+    "name": "Tabletop Game Store"
+}
