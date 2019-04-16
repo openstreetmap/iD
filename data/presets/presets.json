@@ -14,6 +14,7 @@
     "man_made": {"icon": "temaki-storage_tank", "fields": ["name", "man_made"], "moreFields": ["material"], "geometry": ["point", "vertex", "line", "area"], "tags": {"man_made": "*"}, "searchable": false, "name": "Man Made"},
     "natural": {"icon": "maki-natural", "fields": ["name", "natural"], "geometry": ["point", "vertex", "line", "area"], "tags": {"natural": "*"}, "searchable": false, "name": "Natural"},
     "place": {"fields": ["name", "place"], "geometry": ["point", "vertex", "area"], "tags": {"place": "*"}, "searchable": false, "name": "Place"},
+    "playground": {"icon": "maki-playground", "fields": ["playground"], "geometry": ["point", "vertex", "line", "area"], "tags": {"playground": "*"}, "searchable": false, "name": "Playground Equipment"},
     "power": {"geometry": ["point", "vertex", "line", "area"], "tags": {"power": "*"}, "fields": ["power"], "moreFields": ["material"], "searchable": false, "name": "Power"},
     "railway": {"fields": ["railway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"railway": "*"}, "searchable": false, "name": "Railway"},
     "seamark": {"icon": "maki-harbor", "fields": ["seamark/type"], "geometry": ["point", "vertex", "line", "area"], "tags": {"seamark:type": "*"}, "searchable": false, "name": "Seamark"},

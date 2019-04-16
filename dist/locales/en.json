@@ -3407,6 +3407,9 @@
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Type"
+                },
                 "playground/baby": {
                     "label": "Baby Seat"
                 },
@@ -4113,6 +4116,10 @@
                 },
                 "place": {
                     "name": "Place",
+                    "terms": ""
+                },
+                "playground": {
+                    "name": "Playground Equipment",
                     "terms": ""
                 },
                 "power": {

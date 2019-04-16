@@ -1450,6 +1450,9 @@ en:
         label: Power Output
         # plant/output/electricity field placeholder
         placeholder: '500 MW, 1000 MW, 2000 MW...'
+      playground:
+        # playground=*
+        label: Type
       playground/baby:
         # baby=*
         label: Baby Seat
@@ -5768,6 +5771,9 @@ en:
         # place=village
         name: Village
         terms: '<translate with synonyms or related terms for ''Village'', separated by commas>'
+      playground:
+        # playground=*
+        name: Playground Equipment
       playground/balance_beam:
         # playground=balancebeam
         name: Play Balance Beam

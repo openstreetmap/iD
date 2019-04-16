@@ -17,6 +17,7 @@
     {"key": "man_made", "description": "🄿 Man Made (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/storage_tank.svg?sanitize=true"},
     {"key": "natural", "description": "🄿 Natural (unsearchable), 🄵 Natural", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/natural-15.svg?sanitize=true"},
     {"key": "place", "description": "🄿 Place (unsearchable), 🄵 Type", "object_types": ["node", "area"]},
+    {"key": "playground", "description": "🄿 Playground Equipment (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/playground-15.svg?sanitize=true"},
     {"key": "power", "description": "🄿 Power (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"]},
     {"key": "railway", "description": "🄿 Railway (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"]},
     {"key": "seamark:type", "description": "🄿 Seamark (unsearchable), 🄵 Seamark", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/harbor-15.svg?sanitize=true"},
