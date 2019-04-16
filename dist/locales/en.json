@@ -5138,6 +5138,10 @@
                     "name": "Toll Booth",
                     "terms": ""
                 },
+                "barrier/turnstile": {
+                    "name": "Turnstile",
+                    "terms": "baffle gate,turnstyle"
+                },
                 "barrier/wall": {
                     "name": "Wall",
                     "terms": ""
@@ -8410,6 +8414,10 @@
                     "name": "Enforcement",
                     "terms": ""
                 },
+                "type/public_transport/stop_area_group": {
+                    "name": "Transit Stop Area Group",
+                    "terms": ""
+                },
                 "type/restriction": {
                     "name": "Restriction",
                     "terms": ""
@@ -8484,6 +8492,10 @@
                 },
                 "type/route/light_rail": {
                     "name": "Light Rail Route",
+                    "terms": ""
+                },
+                "type/route/monorail": {
+                    "name": "Monorail Route",
                     "terms": ""
                 },
                 "type/route/pipeline": {

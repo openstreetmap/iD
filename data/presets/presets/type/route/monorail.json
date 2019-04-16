@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-monorail",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network",
+        "to",
+        "from"
+    ],
+    "moreFields" : [
+        "colour",
+        "interval",
+        "opening_hours",
+        "duration",
+        "wheelchair"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "monorail"
+    },
+    "name": "Monorail Route"
+}

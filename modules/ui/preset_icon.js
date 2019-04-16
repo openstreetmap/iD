@@ -182,6 +182,7 @@ export function uiPresetIcon(context) {
         hiking: ['highway/path', 'highway/path', 'highway/path'],
         horse: ['highway/bridleway', 'highway/bridleway', 'highway/bridleway'],
         light_rail: ['railway/light_rail', 'railway/light_rail', 'railway/light_rail'],
+        monorail: ['railway/monorail', 'railway/monorail', 'railway/monorail'],
         pipeline: ['man_made/pipeline', 'man_made/pipeline', 'man_made/pipeline'],
         piste: ['piste/downhill', 'piste/hike', 'piste/nordic'],
         power: ['power/line', 'power/line', 'power/line'],

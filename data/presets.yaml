@@ -3404,6 +3404,11 @@ en:
         # barrier=toll_booth
         name: Toll Booth
         terms: '<translate with synonyms or related terms for ''Toll Booth'', separated by commas>'
+      barrier/turnstile:
+        # barrier=turnstile
+        name: Turnstile
+        # 'terms: baffle gate,turnstyle'
+        terms: '<translate with synonyms or related terms for ''Turnstile'', separated by commas>'
       barrier/wall:
         # barrier=wall
         name: Wall
@@ -7164,6 +7169,10 @@ en:
       type/multipolygon:
         # type=multipolygon
         name: Multipolygon
+      type/public_transport/stop_area_group:
+        # 'type=public_transport, public_transport=stop_area_group'
+        name: Transit Stop Area Group
+        terms: '<translate with synonyms or related terms for ''Transit Stop Area Group'', separated by commas>'
       type/restriction:
         # type=restriction
         name: Restriction
@@ -7236,6 +7245,10 @@ en:
         # 'type=route, route=light_rail'
         name: Light Rail Route
         terms: '<translate with synonyms or related terms for ''Light Rail Route'', separated by commas>'
+      type/route/monorail:
+        # 'type=route, route=monorail'
+        name: Monorail Route
+        terms: '<translate with synonyms or related terms for ''Monorail Route'', separated by commas>'
       type/route/pipeline:
         # 'type=route, route=pipeline'
         name: Pipeline Route
