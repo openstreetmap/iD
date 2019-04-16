@@ -7,7 +7,7 @@ import { geoRawMercator, geoScaleToZoom, geoVecSubtract, geoVecScale, geoZoomToS
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
-import { utilGetDimensions } from '../util/dimensions';
+// import { utilGetDimensions } from '../util/dimensions';
 
 
 export function uiMapInMap(context) {

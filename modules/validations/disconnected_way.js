@@ -77,10 +77,20 @@ export function validationDisconnectedWay() {
             type: type,
             severity: 'warning',
             message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
-            tooltip: t('issues.disconnected_way.highway.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.disconnected_way.highway.tip'));
+        }
 
 
         function vertexIsDisconnected(way, vertex, relation) {

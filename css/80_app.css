@@ -3360,10 +3360,34 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     width: 100%;
     overflow: hidden;
     display: none;
-    padding: 10px;
+    padding: 10px 0;
 }
 .issue-info.expanded {
     display: inline-block;
+}
+
+.issue-info .issue-reference {
+    margin-bottom: 10px;
+}
+.issue-info .tagDiff-table {
+    min-width: 60%;
+    width: unset;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-row {
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell {
+    padding: 2px 5px;
+    font-family: monospace;
+    font-size: 10px;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell-add {
+    background: #dfd;
+}
+.issue-info .tagDiff-cell-remove {
+    background: #fdd;
 }
 
 

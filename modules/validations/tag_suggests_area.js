@@ -95,10 +95,20 @@ export function validationTagSuggestsArea() {
             type: type,
             severity: 'warning',
             message: t('issues.tag_suggests_area.message', { feature: featureLabel, tag: tagText }),
-            tooltip: t('issues.tag_suggests_area.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.tag_suggests_area.tip'));
+        }
     };
 
     validation.type = type;

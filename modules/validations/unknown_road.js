@@ -42,10 +42,20 @@ export function validationUnknownRoad() {
             message: t('issues.unknown_road.message', {
                 feature: utilDisplayLabel(entity, context),
             }),
-            tooltip: t('issues.unknown_road.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.unknown_road.tip'));
+        }
     };
 
     validation.type = type;

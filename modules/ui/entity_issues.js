@@ -159,7 +159,10 @@ export function uiEntityIssues(context) {
             .attr('class', 'issue-info')
             .style('max-height', '0')
             .style('opacity', '0')
-            .html(function(d) { return d.tooltip; });
+            .each(function(d) {
+                d3_select(this)
+                    .call(d.reference);
+            });
 
 
         // Update

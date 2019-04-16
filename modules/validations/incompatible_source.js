@@ -21,7 +21,7 @@ export function validationIncompatibleSource() {
                         message: t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
                             feature: utilDisplayLabel(entity, context),
                         }),
-                        tooltip: t('issues.incompatible_source.' + invalidSource.id + '.tip'),
+                        reference: getReference(invalidSource.id),
                         entities: [entity],
                         fixes: [
                             new validationIssueFix({
@@ -32,7 +32,20 @@ export function validationIncompatibleSource() {
                 }
             });
         }
+
         return issues;
+
+
+        function getReference(id) {
+            return function showReference(selection) {
+                selection.selectAll('.issue-reference')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .attr('class', 'issue-reference')
+                    .text(t('issues.incompatible_source.' + id + '.tip'));
+            };
+        }
     };
 
     validation.type = type;

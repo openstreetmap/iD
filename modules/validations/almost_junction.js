@@ -91,7 +91,7 @@ export function validationAlmostJunction() {
                     feature: utilDisplayLabel(entity, context),
                     feature2: utilDisplayLabel(edgeHighway, context)
                 }),
-                tooltip: t('issues.almost_junction.highway-highway.tip'),
+                reference: showReference,
                 entities: [entity, node, edgeHighway],
                 loc: extendableNodeInfo.node.loc,
                 data: {
@@ -104,6 +104,15 @@ export function validationAlmostJunction() {
 
         return issues;
 
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.almost_junction.highway-highway.tip'));
+        }
 
 
         function isExtendableCandidate(node, way) {

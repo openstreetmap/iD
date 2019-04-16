@@ -43,13 +43,24 @@ export function validationManyDeletions() {
                     'issues.many_deletions.'+messageType+'.message',
                     { n: totalFeatures, p: points, l: lines, a:areas, r: relations }
                 ),
-                tooltip: t('issues.many_deletions.tip'),
+                reference: showReference,
                 hash: [points, lines, areas, relations].join()
             })];
         }
 
         return [];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.many_deletions.tip'));
+        }
     };
+
 
     validation.type = type;
     validation.inputType = 'changes';

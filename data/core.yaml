@@ -1269,6 +1269,7 @@ en:
         title: "Where:"
         visible: "In View"
         all: "Everywhere"
+    suggested: "Suggested updates:"
     almost_junction:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"

@@ -87,11 +87,22 @@ export function validationMissingTag() {
             type: type,
             severity: isError ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
-            tooltip: t('issues.missing_tag.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.missing_tag.tip'));
+        }
     };
+
 
     validation.type = type;
 

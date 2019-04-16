@@ -224,7 +224,6 @@ export function validationCrossingWays() {
 
 
     function findCrossingsByWay(way1, graph, tree) {
-
         var edgeCrossInfos = [];
         if (way1.type !== 'way') return edgeCrossInfos;
 
@@ -467,6 +466,7 @@ export function validationCrossingWays() {
                 }
             }));
         }
+
         var useFixIcon = 'iD-icon-layers';
         var useFixID;
         if (isCrossingIndoors) {
@@ -496,11 +496,12 @@ export function validationCrossingWays() {
             icon: 'iD-operation-move',
             title: t('issues.fix.reposition_features.title')
         }));
+
         return new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.crossing_ways.message', messageDict),
-            tooltip: t('issues.crossing_ways.' + crossingTypeID + '.tip'),
+            reference: showReference,
             entities: entities,
             data: {
                 edges: crossing.edges,
@@ -509,6 +510,15 @@ export function validationCrossingWays() {
             loc: crossing.crossPoint,
             fixes: fixes
         });
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.crossing_ways.' + crossingTypeID + '.tip'));
+        }
     }
 
     function makeChangeLayerFix(higherOrLower, context) {

@@ -93,11 +93,8 @@ export function uiIssues(context) {
             .on('click', function(d) {
                 var extent = d.extent(context.graph());
                 if (extent) {
-                    var extent = d.extent(context.graph());
-                    if (extent) {
-                        var setZoom = Math.max(context.map().zoom(), 19);
-                        context.map().centerZoomEase(extent.center(), setZoom);
-                    }
+                    var setZoom = Math.max(context.map().zoom(), 19);
+                    context.map().centerZoomEase(extent.center(), setZoom);
 
                     // select the first entity
                     if (d.entities && d.entities.length) {
@@ -134,7 +131,7 @@ export function uiIssues(context) {
                 var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
                     .call(svgIcon(iconName));
-            })
+            });
 
         textEnter
             .append('span')

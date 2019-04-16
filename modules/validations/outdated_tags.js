@@ -57,19 +57,13 @@ export function validationOutdatedTags() {
 
         if (!tagDiff.length) return [];
 
-
-        // debugging (sorta)
-        var tooltip = '<pre>\n' + tagDiff.join('\n') + '</pre>';
-
-
         return [new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
-            tooltip: tooltip, // t('issues.outdated_tags.tip'),
+            reference: showReference,
             entities: [entity],
             data: {
-                tagDiff: tagDiff,
                 newTags: newTags
             },
             fixes: [
@@ -87,6 +81,37 @@ export function validationOutdatedTags() {
                 })
             ]
         })];
+
+
+        function showReference(selection) {
+            var enter = selection.selectAll('.issue-reference')
+                .data([0])
+                .enter();
+
+            enter
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.outdated_tags.tip'));
+
+            enter
+                .append('strong')
+                .text(t('issues.suggested'));
+
+            enter
+                .append('table')
+                .attr('class', 'tagDiff-table')
+                .selectAll('.tagDiff-row')
+                .data(tagDiff)
+                .enter()
+                .append('tr')
+                .attr('class', 'tagDiff-row')
+                .append('td')
+                .attr('class', function(d) {
+                    var klass = d.charAt(0) === '+' ? 'add' : 'remove';
+                    return 'tagDiff-cell tagDiff-cell-' + klass;
+                })
+                .text(function(d) { return d; });
+        }
     };
 
 

@@ -35,6 +35,7 @@ export function validationMissingRole() {
         return !member.role || !member.role.trim().length;
     }
 
+
     function makeIssue(way, relation, member, context) {
         return new validationIssue({
             type: type,
@@ -43,7 +44,7 @@ export function validationMissingRole() {
                 member: utilDisplayLabel(way, context),
                 relation: utilDisplayLabel(relation, context),
             }),
-            tooltip: t('issues.missing_role.multipolygon.tip'),
+            reference: showReference,
             entities: [relation, way],
             data: {
                 member: member
@@ -63,7 +64,18 @@ export function validationMissingRole() {
                 })
             ]
         });
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.missing_role.multipolygon.tip'));
+        }
     }
+
 
     function makeAddRoleFix(role, context) {
         return new validationIssueFix({

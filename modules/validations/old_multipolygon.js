@@ -24,12 +24,13 @@ export function validationOldMultipolygon() {
         }
 
         if (!multipolygon || !outerWay) return [];
+
         var multipolygonLabel = utilDisplayLabel(multipolygon, context);
         return [new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
-            tooltip: t('issues.old_multipolygon.tip'),
+            reference: showReference,
             entities: [outerWay, multipolygon],
             fixes: [
                 new validationIssueFix({
@@ -51,7 +52,18 @@ export function validationOldMultipolygon() {
                 })
             ]
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.old_multipolygon.tip'));
+        }
     };
+
 
     validation.type = type;
 
