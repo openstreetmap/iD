@@ -919,6 +919,7 @@
     {"key": "shop", "value": "kitchen", "description": "🄿 Kitchen Design Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "laundry", "description": "🄿 Laundry", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/laundry-15.svg?sanitize=true"},
     {"key": "shop", "value": "leather", "description": "🄿 Leather Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
+    {"key": "shop", "value": "lighting", "description": "🄿 Lighting Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/far-lightbulb.svg?sanitize=true"},
     {"key": "shop", "value": "locksmith", "description": "🄿 Locksmith", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-key.svg?sanitize=true"},
     {"key": "shop", "value": "lottery", "description": "🄿 Lottery Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "mall", "description": "🄿 Mall", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},

@@ -6646,6 +6646,11 @@ en:
         # shop=leather
         name: Leather Store
         terms: '<translate with synonyms or related terms for ''Leather Store'', separated by commas>'
+      shop/lighting:
+        # shop=lighting
+        name: Lighting Store
+        # 'terms: fluorescent lighting,lamps,LEDs,light fixtures,lightbulbs'
+        terms: '<translate with synonyms or related terms for ''Lighting Store'', separated by commas>'
       shop/locksmith:
         # shop=locksmith
         name: Locksmith

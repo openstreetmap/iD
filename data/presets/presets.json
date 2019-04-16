@@ -976,6 +976,7 @@
     "shop/kitchen": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "kitchen"}, "terms": ["cabinets", "countertops", "sinks"], "name": "Kitchen Design Store"},
     "shop/laundry": {"icon": "maki-laundry", "geometry": ["point", "area"], "tags": {"shop": "laundry"}, "name": "Laundry"},
     "shop/leather": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "leather"}, "name": "Leather Store"},
+    "shop/lighting": {"icon": "far-lightbulb", "geometry": ["point", "area"], "terms": ["fluorescent lighting", "lamps", "LEDs", "light fixtures", "lightbulbs"], "tags": {"shop": "lighting"}, "name": "Lighting Store"},
     "shop/locksmith": {"icon": "fas-key", "geometry": ["point", "area"], "terms": ["key", "lockpick"], "tags": {"shop": "locksmith"}, "name": "Locksmith"},
     "shop/lottery": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "lottery"}, "name": "Lottery Shop"},
     "shop/mall": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["shopping"], "tags": {"shop": "mall"}, "name": "Mall"},

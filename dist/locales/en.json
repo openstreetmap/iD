@@ -7966,6 +7966,10 @@
                     "name": "Leather Store",
                     "terms": ""
                 },
+                "shop/lighting": {
+                    "name": "Lighting Store",
+                    "terms": "fluorescent lighting,lamps,LEDs,light fixtures,lightbulbs"
+                },
                 "shop/locksmith": {
                     "name": "Locksmith",
                     "terms": "key,lockpick"
