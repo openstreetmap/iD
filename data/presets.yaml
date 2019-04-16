@@ -5315,6 +5315,11 @@ en:
         name: Beach
         # 'terms: shore'
         terms: '<translate with synonyms or related terms for ''Beach'', separated by commas>'
+      natural/cape:
+        # natural=cape
+        name: Cape
+        # 'terms: bay,coastline,erosion,headland,promontory'
+        terms: '<translate with synonyms or related terms for ''Cape'', separated by commas>'
       natural/cave_entrance:
         # natural=cave_entrance
         name: Cave Entrance

@@ -6806,6 +6806,10 @@
                     "name": "Beach",
                     "terms": "shore"
                 },
+                "natural/cape": {
+                    "name": "Cape",
+                    "terms": "bay,coastline,erosion,headland,promontory"
+                },
                 "natural/cave_entrance": {
                     "name": "Cave Entrance",
                     "terms": "cavern,hollow,grotto,shelter,cavity"
