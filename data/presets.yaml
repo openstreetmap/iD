@@ -2328,6 +2328,11 @@ en:
         name: Helipad
         # 'terms: helicopter,helipad,heliport'
         terms: '<translate with synonyms or related terms for ''Helipad'', separated by commas>'
+      aeroway/jet_bridge:
+        # aeroway=jet_bridge
+        name: Jet Bridge
+        # 'terms: aerobridge,air jetty,airbridge,finger,gangway,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector'
+        terms: '<translate with synonyms or related terms for ''Jet Bridge'', separated by commas>'
       aeroway/runway:
         # aeroway=runway
         name: Runway

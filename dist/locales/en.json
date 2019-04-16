@@ -4226,6 +4226,10 @@
                     "name": "Helipad",
                     "terms": "helicopter,helipad,heliport"
                 },
+                "aeroway/jet_bridge": {
+                    "name": "Jet Bridge",
+                    "terms": "aerobridge,air jetty,airbridge,finger,gangway,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector"
+                },
                 "aeroway/runway": {
                     "name": "Runway",
                     "terms": "landing strip"

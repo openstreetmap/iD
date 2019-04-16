@@ -5,6 +5,10 @@
       "replace": {"aerialway": "zip_line"}
     },
     {
+      "old": {"aeroway": "aerobridge"},
+      "replace": {"aeroway": "jet_bridge"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
