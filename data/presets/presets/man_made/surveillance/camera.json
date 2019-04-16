@@ -12,7 +12,10 @@
         "camera/direction",
         "surveillance/zone",
         "contact/webcam"
-     ],
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
     "terms": [
         "anpr",
         "alpr",

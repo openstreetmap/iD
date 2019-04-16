@@ -2,7 +2,10 @@
     "icon": "temaki-storage_tank",
     "fields": [
         "content",
-        "building_area"
+        "operator",
+        "manufacturer",
+        "building_area",
+        "height"
     ],
     "geometry": [
         "point",

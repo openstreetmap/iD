@@ -7,6 +7,7 @@
         "maxweight"
     ],
     "moreFields": [
+        "manufacturer",
         "material",
         "seamark/type"
     ],

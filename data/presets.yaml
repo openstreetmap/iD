@@ -1043,6 +1043,9 @@ en:
       manhole:
         # manhole=*
         label: Type
+      manufacturer:
+        # manufacturer=*
+        label: Manufacturer
       map_size:
         # map_size=*
         label: Coverage

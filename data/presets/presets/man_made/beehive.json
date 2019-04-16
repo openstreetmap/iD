@@ -11,6 +11,9 @@
         "height",
         "colour"
     ],
+    "moreFields": [
+        "manufacturer"
+    ],
     "terms": [
         "apiary",
         "beekeeper",

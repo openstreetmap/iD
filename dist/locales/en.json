@@ -3100,6 +3100,9 @@
                 "manhole": {
                     "label": "Type"
                 },
+                "manufacturer": {
+                    "label": "Manufacturer"
+                },
                 "map_size": {
                     "label": "Coverage"
                 },

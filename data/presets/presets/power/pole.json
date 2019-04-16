@@ -1,7 +1,9 @@
 {
     "fields": [
         "ref",
-        "material"
+        "material",
+        "operator",
+        "manufacturer"
     ],
     "geometry": [
         "point",
