@@ -963,7 +963,7 @@
     {"key": "shop", "value": "tobacco", "description": "🄿 Tobacco Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "toys", "description": "🄿 Toy Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-space-shuttle.svg?sanitize=true"},
     {"key": "shop", "value": "trade", "description": "🄿 Trade Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
-    {"key": "shop", "value": "travel_agency", "description": "🄿 Travel Agency", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/suitcase-15.svg?sanitize=true"},
+    {"key": "shop", "value": "travel_agency", "description": "🄿 Travel Agency", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-suitcase.svg?sanitize=true"},
     {"key": "shop", "value": "tyres", "description": "🄿 Tire Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "vacuum_cleaner", "description": "🄿 Vacuum Cleaner Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "variety_store", "description": "🄿 Variety Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
