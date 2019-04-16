@@ -959,7 +959,7 @@
     {"key": "shop", "value": "tailor", "description": "🄿 Tailor", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/clothing-store-15.svg?sanitize=true"},
     {"key": "shop", "value": "tattoo", "description": "🄿 Tattoo Parlor", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "tea", "description": "🄿 Tea Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/teahouse-15.svg?sanitize=true"},
-    {"key": "shop", "value": "ticket", "description": "🄿 Ticket Seller", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
+    {"key": "shop", "value": "ticket", "description": "🄿 Ticket Seller", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-ticket-alt.svg?sanitize=true"},
     {"key": "shop", "value": "tiles", "description": "🄿 Tile Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "tobacco", "description": "🄿 Tobacco Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "toys", "description": "🄿 Toy Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-space-shuttle.svg?sanitize=true"},
