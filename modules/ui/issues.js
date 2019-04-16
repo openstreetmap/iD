@@ -36,14 +36,14 @@ export function uiIssues(context) {
     context.map().on('move.uiIssues', _debounce(utilCallWhenIdle(update), 1000));
 
 
-    function addIconBadge(selection) {
+    function addNotificationBadge(selection) {
         var d = 10;
-        selection.selectAll('svg.icon-badge')
+        selection.selectAll('svg.notification-badge')
             .data([0])
             .enter()
             .append('svg')
             .attr('viewbox', '0 0 ' + d + ' ' + d)
-            .attr('class', 'icon-badge')
+            .attr('class', 'notification-badge')
             .append('circle')
             .attr('cx', d / 2)
             .attr('cy', d / 2)
@@ -93,14 +93,10 @@ export function uiIssues(context) {
             .on('click', function(d) {
                 var extent = d.extent(context.graph());
                 if (extent) {
-                    var msec = 0;
-                    var view = context.map().trimmedExtent();
-                    var zoom = context.map().zoom();
-
-                    // make sure user can see the issue
-                    if (!view.contains(extent) || zoom < 19) {
-                        msec = 250;
-                        context.map().centerZoomEase(extent.center(), Math.max(zoom, 19), msec);
+                    var extent = d.extent(context.graph());
+                    if (extent) {
+                        var setZoom = Math.max(context.map().zoom(), 19);
+                        context.map().centerZoomEase(extent.center(), setZoom);
                     }
 
                     // select the first entity
@@ -109,7 +105,7 @@ export function uiIssues(context) {
                             var ids = d.entities.map(function(e) { return e.id; });
                             context.enter(modeSelect(context, [ids[0]]));
                             utilHighlightEntities(ids, true, context);
-                        }, msec);
+                        }, 250);  // after ease
                     }
                 }
             })
@@ -123,27 +119,32 @@ export function uiIssues(context) {
             });
 
 
-        var messagesEnter = itemsEnter
+        var labelsEnter = itemsEnter
             .append('div')
-            .attr('class', 'issue-message');
+            .attr('class', 'issue-label');
 
-        messagesEnter
-            .call(tooltip()
-                .html(true)
-                .title(function(d) { return uiTooltipHtml(d.tooltip); })
-                .placement('top')
-            );
-
-        messagesEnter
-            .append('span')
-            .attr('class', 'issue-icon')
-            .call(svgIcon(''));
-
-        messagesEnter
+        var textEnter = labelsEnter
             .append('span')
             .attr('class', 'issue-text');
 
-        messagesEnter
+        textEnter
+            .append('span')
+            .attr('class', 'issue-icon')
+            .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                d3_select(this)
+                    .call(svgIcon(iconName));
+            })
+
+        textEnter
+            .append('span')
+            .attr('class', 'issue-message')
+            .text(function(d) { return d.message; });
+
+
+        labelsEnter
+            .append('span')
+            .attr('class', 'issue-autofix')
             .each(function(d) {
                 if (!d.auto) return;
 
@@ -164,14 +165,6 @@ export function uiIssues(context) {
         items = items
             .merge(itemsEnter)
             .order();
-
-        items.select('.issue-icon svg use')     // propagate bound data
-            .attr('href', function(d) {
-                return '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
-            });
-
-        items.select('.issue-text')     // propagate bound data
-            .text(function(d) { return d.message; });
     }
 
 
@@ -297,7 +290,7 @@ export function uiIssues(context) {
         _warnings = _warnings.slice(0, 1000);
 
 
-        _toggleButton.selectAll('.icon-badge')
+        _toggleButton.selectAll('.notification-badge')
             .classed('error', (_errors.length > 0))
             .classed('warning', (_errors.length === 0 && _warnings.length > 0))
             .classed('hide', (_errors.length === 0 && _warnings.length === 0));
@@ -356,20 +349,7 @@ export function uiIssues(context) {
 
         // Enter
         var enter = items.enter()
-            .append('li')
-            .call(tooltip()
-                .title(function(d) {
-                    if (d === 'disconnected_way') {
-                        d += '.highway';
-                    } else if (d === 'almost_junction') {
-                        d += '.highway-highway';
-                    } else if (d === 'missing_role') {
-                        d += '.multipolygon';
-                    }
-                    return t('issues.' + d + '.tip');
-                })
-                .placement('top')
-            );
+            .append('li');
 
         var label = enter
             .append('label');
@@ -453,7 +433,7 @@ export function uiIssues(context) {
             .attr('tabindex', -1)
             .on('click', uiIssues.togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
-            .call(addIconBadge)
+            .call(addNotificationBadge)
             .call(paneTooltip);
     };
 
