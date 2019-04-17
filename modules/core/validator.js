@@ -318,11 +318,13 @@ export function coreValidator(context) {
     //     if (!difference) return;
     //     validator.validate();
     // });
+    context.history()
+        .on('undone.validator', validator.validate)
+        .on('redone.validator', validator.validate);
 
     // re-run validation when the user switches editing modes (less frequent)
-    context.on('exit.validator', function() {
-        validator.validate();
-    });
+    context
+        .on('exit.validator', validator.validate);
 
 
     return validator;
@@ -342,7 +344,7 @@ export function validationIssue(attrs) {
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
     this.id = generateID.apply(this);      // generated - see below
-    this.auto = null;                      // generated - if autofix exists, will be set below
+    this.autoFix = null;                   // generated - if autofix exists, will be set below
 
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
@@ -389,8 +391,8 @@ export function validationIssue(attrs) {
         for (var i = 0; i < this.fixes.length; i++) {
             var fix = this.fixes[i];
             fix.issue = this;
-            if (fix.auto) {
-                this.auto = fix;
+            if (fix.autoArgs) {
+                this.autoFix = fix;
             }
         }
     }
@@ -398,11 +400,11 @@ export function validationIssue(attrs) {
 
 
 export function validationIssueFix(attrs) {
-    this.title = attrs.title;                    // Required
-    this.onClick = attrs.onClick;                // Required
-    this.icon = attrs.icon;                      // Optional - shows 'iD-icon-wrench' if not set
-    this.entityIds = attrs.entityIds || [];      // Optional - Used for hover-higlighting.
-    this.auto = attrs.auto;                      // Optional - pass true if this fix can be an auto fix
+    this.title = attrs.title;                 // Required
+    this.onClick = attrs.onClick;             // Required
+    this.icon = attrs.icon;                   // Optional - shows 'iD-icon-wrench' if not set
+    this.entityIds = attrs.entityIds || [];   // Optional - Used for hover-higlighting.
+    this.autoArgs = attrs.autoArgs;           // Optional - pass [actions, annotation] arglist if this fix can automatically run
 
     this.issue = null;    // Generated link - added by ValidationIssue constructor
 }

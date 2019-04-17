@@ -63,24 +63,21 @@ export function validationOutdatedTags() {
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
             reference: showReference,
             entities: [entity],
-            data: {
-                newTags: newTags
-            },
             fixes: [
                 new validationIssueFix({
-                    auto: true,
+                    autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function() {
-                        var entityID = this.issue.entities[0].id;
-                        var newTags = this.issue.data.newTags;
-                        context.perform(
-                            actionChangeTags(entityID, newTags),
-                            t('issues.fix.upgrade_tags.annotation')
-                        );
+                        context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                     }
                 })
             ]
         })];
+
+
+        function doUpgrade(graph) {
+            return actionChangeTags(entity.id, newTags)(graph);
+        }
 
 
         function showReference(selection) {

@@ -3126,9 +3126,8 @@ div.full-screen > button:hover {
     padding: 5px 0;
 }
 .issue-label .issue-autofix {
-    width: 36px;
     flex: 0 0 auto;
-    padding: 5px 7px;
+    padding: 5px 8px;
 }
 .issue-label .issue-info-button {
     height: unset;
@@ -3149,17 +3148,37 @@ div.full-screen > button:hover {
     border-radius: 4px 0 0 4px;
 }
 
-.issue-autofix button.autofix.action {
+button.autofix.action {
     flex: 0 0 20px;
     height: 20px;
     width: 20px;
     background: #7092ff;
     color: #fff;
 }
-.issue-label button.autofix.action:focus,
-.issue-label button.autofix.action:hover,
-.issue-label button.autofix.action.active {
+button.autofix.action:focus,
+button.autofix.action:hover,
+button.autofix.action.active {
     background: #597be7;
+}
+
+/* fix all */
+.autofix-all {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    height: 30px;
+    padding-top: 5px;
+}
+.autofix-all-link-text {
+    padding: 0 5px;
+}
+.autofix-all-link-icon svg {
+    margin: 0 9px;
+    background: currentColor;
+    border-radius: 4px;
+}
+.autofix-all-link-icon svg use {
+    color: #fff;
 }
 
 /* warning styles */
@@ -3243,6 +3262,10 @@ div.full-screen > button:hover {
 
 .notification-badge.error {
     color: #ff0c05;
+}
+
+.layer-list.issues-list {
+    margin-bottom: 0;
 }
 
 

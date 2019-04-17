@@ -34,24 +34,21 @@ export function validationOldMultipolygon() {
             entities: [outerWay, multipolygon],
             fixes: [
                 new validationIssueFix({
-                    auto: true,
+                    autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
                     title: t('issues.fix.move_tags.title'),
                     onClick: function() {
-                        var outerWay = this.issue.entities[0];
-                        var multipolygon =  this.issue.entities[1];
-                        context.perform(
-                            function(graph) {
-                                multipolygon = multipolygon.mergeTags(outerWay.tags);
-                                graph = graph.replace(multipolygon);
-                                graph = actionChangeTags(outerWay.id, {})(graph);
-                                return graph;
-                            },
-                            t('issues.fix.move_tags.annotation')
-                        );
+                        context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
                     }
                 })
             ]
         })];
+
+
+        function doUpgrade(graph) {
+            multipolygon = multipolygon.mergeTags(outerWay.tags);
+            graph = graph.replace(multipolygon);
+            return actionChangeTags(outerWay.id, {})(graph);
+        }
 
 
         function showReference(selection) {

@@ -1270,6 +1270,11 @@ en:
         visible: "In View"
         all: "Everywhere"
     suggested: "Suggested updates:"
+    fix_one:
+      title: fix
+    fix_all:
+      title: Fix All
+      annotation: Fixed several validation issues.
     almost_junction:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"

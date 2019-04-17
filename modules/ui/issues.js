@@ -4,6 +4,8 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+
+import { actionNoop } from '../actions';
 import { geoSphericalDistance } from '../geo';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
@@ -17,8 +19,8 @@ import { utilCallWhenIdle, utilHighlightEntities } from '../util';
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    var _errorsList = d3_select(null);
-    var _warningsList = d3_select(null);
+    var _errorsSelection = d3_select(null);
+    var _warningsSelection = d3_select(null);
     var _rulesList = d3_select(null);
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
@@ -51,35 +53,30 @@ export function uiIssues(context) {
             .attr('fill', 'currentColor');
     }
 
+
     function renderErrorsList(selection) {
-        _errorsList = selection.selectAll('.errors-list')
-            .data([0]);
-
-        _errorsList = _errorsList.enter()
-            .append('ul')
-            .attr('class', 'layer-list errors-list issues-list')
-            .merge(_errorsList);
-
-        _errorsList
-            .call(drawIssuesList, _errors);
+        _errorsSelection = selection
+            .call(drawIssuesList, 'errors', _errors);
     }
+
 
     function renderWarningsList(selection) {
-        _warningsList = selection.selectAll('.warnings-list')
-            .data([0]);
-
-        _warningsList = _warningsList.enter()
-            .append('ul')
-            .attr('class', 'layer-list warnings-list issues-list')
-            .merge(_warningsList);
-
-        _warningsList
-            .call(drawIssuesList, _warnings);
+        _warningsSelection = selection
+            .call(drawIssuesList, 'warnings', _warnings);
     }
 
 
-    function drawIssuesList(selection, issues) {
-        var items = selection.selectAll('li')
+    function drawIssuesList(selection, which, issues) {
+        var list = selection.selectAll('.issues-list')
+            .data([0]);
+
+        list = list.enter()
+            .append('ul')
+            .attr('class', 'layer-list issues-list ' + which + '-list')
+            .merge(list);
+
+
+        var items = list.selectAll('li')
             .data(issues, function(d) { return d.id; });
 
         // Exit
@@ -143,15 +140,16 @@ export function uiIssues(context) {
             .append('span')
             .attr('class', 'issue-autofix')
             .each(function(d) {
-                if (!d.auto) return;
+                if (!d.autoFix) return;
 
                 d3_select(this)
                     .append('button')
-                    .datum(d.auto)  // set button datum to the autofix
+                    .attr('title', t('issues.fix_one.title'))
+                    .datum(d.autoFix)  // set button datum to the autofix
                     .attr('class', 'autofix action')
                     .on('click', function(d) {
                         utilHighlightEntities(d.entityIds, false, context);
-                        d.onClick();
+                        context.perform.apply(context, d.autoArgs);
                         context.validator().validate();
                     })
                     .call(svgIcon('#iD-icon-wrench'));
@@ -162,6 +160,55 @@ export function uiIssues(context) {
         items = items
             .merge(itemsEnter)
             .order();
+
+
+        // autofix
+        var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
+
+        var autoFixAll = selection.selectAll('.autofix-all')
+            .data(canAutoFix.length ? [0] : []);
+
+        // exit
+        autoFixAll.exit()
+            .remove();
+
+        // enter
+        var autoFixAllEnter = autoFixAll.enter()
+            .append('div')
+            .attr('class', 'autofix-all');
+
+        var linkEnter = autoFixAllEnter
+            .append('a')
+            .attr('class', 'autofix-all-link')
+            .attr('href', '#');
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-text')
+            .text(t('issues.fix_all.title'));
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-icon')
+            .call(svgIcon('#iD-icon-wrench'));
+
+        // update
+        autoFixAll = autoFixAll
+            .merge(autoFixAllEnter);
+
+        autoFixAll.selectAll('.autofix-all-link')
+            .on('click', function() {
+                context.perform(actionNoop());
+                canAutoFix.forEach(function(issue) {
+                    var args = issue.autoFix.autoArgs.slice();  // copy
+                    if (typeof args[args.length - 1] !== 'function') {
+                        args.pop();
+                    }
+                    args.push(t('issues.fix_all.annotation'));
+                    context.replace.apply(context, args);
+                });
+                context.validator().validate();
+            });
     }
 
 
@@ -292,27 +339,28 @@ export function uiIssues(context) {
             .classed('warning', (_errors.length === 0 && _warnings.length > 0))
             .classed('hide', (_errors.length === 0 && _warnings.length === 0));
 
-        _pane.select('.issues-errors')
+
+        _pane.selectAll('.issues-errors')
             .classed('hide', _errors.length === 0);
 
         if (_errors.length > 0) {
-            _pane.select('.hide-toggle-issues_errors .hide-toggle-text')
+            _pane.selectAll('.hide-toggle-issues_errors .hide-toggle-text')
                 .text(t('issues.errors.list_title', { count: errorCount }));
             if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
-                _errorsList
-                    .call(drawIssuesList, _errors);
+                _errorsSelection
+                    .call(drawIssuesList, 'errors', _errors);
             }
         }
 
-        _pane.select('.issues-warnings')
+        _pane.selectAll('.issues-warnings')
             .classed('hide', _warnings.length === 0);
 
         if (_warnings.length > 0) {
-            _pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
+            _pane.selectAll('.hide-toggle-issues_warnings .hide-toggle-text')
                 .text(t('issues.warnings.list_title', { count: warningCount }));
             if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
-                _warningsList
-                    .call(drawIssuesList, _warnings);
+                _warningsSelection
+                    .call(drawIssuesList, 'warnings', _warnings);
             }
         }
 
