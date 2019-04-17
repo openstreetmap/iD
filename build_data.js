@@ -690,9 +690,9 @@ function writeTnpIcons(tnpIcons) {
     }
     var baseURL = 'http://api.thenounproject.com/icon/';
 
-    var unusedSvgFiles = fs.readdirSync('svg/the-noun-project', { encoding: 'utf8', withFileTypes: true }).reduce(function(obj, dirent) {
-        if (dirent.isFile() && dirent.name.endsWith('.svg')) {
-            obj[dirent.name] = true;
+    var unusedSvgFiles = fs.readdirSync('svg/the-noun-project', 'utf8').reduce(function(obj, name) {
+        if (name.endsWith('.svg')) {
+            obj[name] = true;
         }
         return obj;
     }, {});
