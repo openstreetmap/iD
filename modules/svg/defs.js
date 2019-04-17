@@ -173,7 +173,7 @@ export function svgDefs(context) {
         // add symbol spritesheets
         defs
             .call(drawDefs.addSprites, [
-                'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'community-sprite'
+                'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'tnp-sprite', 'community-sprite'
             ], true);
     }
 

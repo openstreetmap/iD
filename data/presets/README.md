@@ -127,7 +127,7 @@ Generally, these properties will be equivalent and should be supersets of `tags`
 
 iD's validator will recommend that users add missing tags from `addTags` to matching features.
 
-For example, the Bridge preset has these properties: 
+For example, the Bridge preset has these properties:
 
 ```
     "tags": {
@@ -143,16 +143,22 @@ When adding a feature with this preset, it will be given the tags `man_made=brid
 
 ##### `icon`
 
-The name of a local SVG icon file. You can use icons from any of the following open source icon sets.
+The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
 
-* [Maki](http://www.mapbox.com/maki/) - prefix: `maki-`
-* [Temaki](http://bhousel.github.io/temaki/docs/) - prefix: `temaki-`
-* [Font Awesome (free, solid)](https://fontawesome.com/icons?d=gallery&s=solid) - prefix: `fas-`
-* [Font Awesome (free, regular)](https://fontawesome.com/icons?d=gallery&s=regular) - prefix: `far-`
-* [Font Awesome (free, brands)](https://fontawesome.com/icons?d=gallery&s=brands) - prefix: `fab-`
-* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) - prefix: `iD-`
-
-When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
+* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) (`iD-`)
+* [Maki](http://www.mapbox.com/maki/) (`maki-`), map-specific icons from Mapbox
+* [Temaki](http://bhousel.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
+    * This is the best place to submit a PR if you want to create a preset icon!
+* [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free), thousands of general-purpose icons
+    * There is a free and pro tier. You can use any icon from the free tier in the following styles:
+        * [Solid](https://fontawesome.com/icons?d=gallery&s=solid&m=free) (`fas-`)
+        * [Regular](https://fontawesome.com/icons?d=gallery&s=regular&m=free) (`far-`)
+        * [Brands](https://fontawesome.com/icons?d=gallery&s=brands&m=free) (`fab-`)
+* [The Noun Project](https://thenounproject.com) (`tnp-`), millions of general-purpose icons
+    * The licenses vary. You can only use the public-domain icons in iD.
+    * The icon styles vary. Avoid icons with thin outlines or too much detail since they will not look good at small sizes in iD.
+    * Use the numeric ID of the icon (e.g. `2009223`). This is shown in the URL when you select an icon on their site.
+    * Unfortunately, you must [sign up for a free API key](https://thenounproject.com/developers/) in order to download new icons (even though they're public-domain). Add a file called `the_noun_project.auth` to the root of your local iD instance containing your credentials like `{"consumer_key": "xxxxxx", "consumer_secret": "xxxxxx"}`. This file is not version-controlled.
 
 ##### `imageURL`
 

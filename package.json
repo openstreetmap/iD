@@ -20,6 +20,7 @@
     "dist:svg:id": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"iD-%s\" --symbol-sprite dist/img/iD-sprite.svg \"svg/iD-sprite/**/*.svg\"",
     "dist:svg:community": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"community-%s\" --symbol-sprite dist/img/community-sprite.svg node_modules/osm-community-index/dist/img/*.svg",
     "dist:svg:fa": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/fa-sprite.svg svg/fontawesome/*.svg",
+    "dist:svg:tnp": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"tnp-%s\" --symbol-sprite dist/img/tnp-sprite.svg svg/the-noun-project/*.svg",
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"maki-%s\" --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
     "dist:svg:mapillary": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-sprite.svg node_modules/mapillary_sprite_source/package_signs/*.svg",
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/temaki/icons/*.svg",

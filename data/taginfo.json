@@ -520,7 +520,7 @@
     {"key": "landuse", "value": "landfill", "description": "🄿 Landfill", "object_types": ["area"]},
     {"key": "landuse", "value": "meadow", "description": "🄿 Meadow", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-15.svg?sanitize=true"},
     {"key": "landuse", "value": "military", "description": "🄿 Military Area", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/military.svg?sanitize=true"},
-    {"key": "military", "value": "airfield", "description": "🄿 Military Airfield", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/airfield-15.svg?sanitize=true"},
+    {"key": "military", "value": "airfield", "description": "🄿 Military Airfield", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/the-noun-project/2009265.svg?sanitize=true"},
     {"key": "military", "value": "barracks", "description": "🄿 Barracks", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/military.svg?sanitize=true"},
     {"key": "military", "value": "bunker", "description": "🄿 Military Bunker", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/military.svg?sanitize=true"},
     {"key": "military", "value": "checkpoint", "description": "🄿 Checkpoint", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/barrier-15.svg?sanitize=true"},

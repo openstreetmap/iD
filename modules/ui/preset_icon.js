@@ -206,7 +206,8 @@ export function uiPresetIcon(context) {
         var isMaki = picon && /^maki-/.test(picon);
         var isTemaki = picon && /^temaki-/.test(picon);
         var isFa = picon && /^fa[srb]-/.test(picon);
-        var isiDIcon = picon && !(isMaki || isTemaki || isFa);
+        var isTnp = picon && /^tnp-/.test(picon);
+        var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
         var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
