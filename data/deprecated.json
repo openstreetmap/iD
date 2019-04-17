@@ -460,6 +460,10 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"reservations": "*"},
+      "replace": {"reservation": "$1"}
+    },
+    {
       "old": {"roof:color": "*"},
       "replace": {"roof:colour": "$1"}
     },

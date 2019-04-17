@@ -11,6 +11,8 @@
         "smoking",
         "fee",
         "payment_multi_fee",
+        "phone",
+        "reservation",
         "website",
         "wheelchair"
     ],

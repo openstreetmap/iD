@@ -10,15 +10,16 @@
     ],
     "moreFields" : [
         "air_conditioning",
-        "operator",
-        "smoking",
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "operator",
+        "payment_multi",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

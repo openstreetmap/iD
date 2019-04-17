@@ -18,7 +18,8 @@
         "phone",
         "email",
         "fax",
-        "wheelchair"
+        "wheelchair",
+        "reservation"
     ],
     "geometry": [
         "point",

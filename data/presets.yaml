@@ -1562,6 +1562,18 @@ en:
       religion:
         # religion=*
         label: Religion
+      reservation:
+        # reservation=*
+        label: Reservations
+        options:
+          # reservation=no
+          'no': Not Accepted
+          # reservation=recommended
+          recommended: Recommended
+          # reservation=required
+          required: Required
+          # reservation=yes
+          'yes': Accepted
       resource:
         # resource=*
         label: Resources

@@ -6,7 +6,7 @@
         "address",
         "building_area",
         "opening_hours",
-        "outdoor_seating"
+        "phone"
     ],
     "moreFields": [
         "air_conditioning",
@@ -21,8 +21,10 @@
         "internet_access/fee",
         "internet_access/ssid",
         "microbrewery",
-        "phone",
+        "outdoor_seating",
+        "reservation",
         "smoking",
+        "stars",
         "takeaway",
         "website",
         "wheelchair"

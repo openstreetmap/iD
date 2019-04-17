@@ -3511,6 +3511,15 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "reservation": {
+                    "label": "Reservations",
+                    "options": {
+                        "yes": "Accepted",
+                        "no": "Not Accepted",
+                        "required": "Required",
+                        "recommended": "Recommended"
+                    }
+                },
                 "resource": {
                     "label": "Resources"
                 },
@@ -4897,7 +4906,7 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Newspaper Vending Machine",
-                    "terms": "newspaper"
+                    "terms": ""
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
