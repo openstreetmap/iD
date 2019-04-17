@@ -21,15 +21,6 @@ const far = require('@fortawesome/free-regular-svg-icons').far;
 const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
-/*
- * The Noun Project doesn't allow anonymous API access. New "tnp-" icons will
- * not be downloaded without a the_noun_project.auth file with a json object:
- *  {
- *      "consumer_key": "xxxxxx",
- *      "consumer_secret": "xxxxxx"
- *  }
- *  */
-const nounAuth = JSON.parse(fs.readFileSync('./the_noun_project.auth', 'utf8'));
 const request = require('request').defaults({ maxSockets: 1 });
 
 module.exports = function buildData() {
@@ -685,6 +676,18 @@ function writeFaIcons(faIcons) {
 
 
 function writeTnpIcons(tnpIcons) {
+    /*
+     * The Noun Project doesn't allow anonymous API access. New "tnp-" icons will
+     * not be downloaded without a "the_noun_project.auth" file with a json object:
+     *  {
+     *      "consumer_key": "xxxxxx",
+     *      "consumer_secret": "xxxxxx"
+     *  }
+     *  */
+    var nounAuth;
+    if (fs.existsSync('./the_noun_project.auth')) {
+        nounAuth = JSON.parse(fs.readFileSync('./the_noun_project.auth', 'utf8'));
+    }
     var baseURL = 'http://api.thenounproject.com/icon/';
     for (var key in tnpIcons) {
         var id = key.substring(4);
@@ -694,7 +697,7 @@ function writeTnpIcons(tnpIcons) {
         if (fs.existsSync(localPath)) continue;
 
         if (!nounAuth) {
-            console.error('No authentication file found for The Noun Project with which to download the icon with id: ' + key);
+            console.error('No authentication file for The Noun Project. Cannot download icon: ' + key);
             return;
         }
 
