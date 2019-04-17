@@ -689,20 +689,41 @@ function writeTnpIcons(tnpIcons) {
         nounAuth = JSON.parse(fs.readFileSync('./the_noun_project.auth', 'utf8'));
     }
     var baseURL = 'http://api.thenounproject.com/icon/';
+
+    var unusedSvgFiles = fs.readdirSync('svg/the-noun-project', { encoding: 'utf8', withFileTypes: true }).reduce(function(obj, dirent) {
+        if (dirent.isFile() && dirent.name.endsWith('.svg')) {
+            obj[dirent.name] = true;
+        }
+        return obj;
+    }, {});
+
     for (var key in tnpIcons) {
         var id = key.substring(4);
-        var localPath = 'svg/the-noun-project/' + id + '.svg';
+        var fileName = id + '.svg';
+
+        if (unusedSvgFiles[fileName]) {
+            delete unusedSvgFiles[fileName];
+        }
+
+        var localPath = 'svg/the-noun-project/' + fileName;
 
         // don't redownload existing icons
         if (fs.existsSync(localPath)) continue;
 
         if (!nounAuth) {
             console.error('No authentication file for The Noun Project. Cannot download icon: ' + key);
-            return;
+            continue;
         }
 
         var url = baseURL + id;
         request.get(url, { oauth : nounAuth }, handleTheNounProjectResponse);
+    }
+
+    // remove icons that are not needed
+    for (var unusedFileName in unusedSvgFiles) {
+        shell.rm('-f', [
+            'svg/the-noun-project/' + unusedFileName
+        ]);
     }
 }
 
@@ -713,10 +734,14 @@ function handleTheNounProjectResponse(err, resp, body) {
     }
     var icon = JSON.parse(body).icon;
     if (icon.license_description !== 'public-domain') {
-        console.error('The icon ' + icon.term + ' (tnp-' + icon.id + ') from The Noun Project cannot be used in iD because it is not in the public domain.');
+        console.error('The icon "' + icon.term + '" (tnp-' + icon.id + ') from The Noun Project cannot be used in iD because it is not in the public domain.');
         return;
     }
     var iconURL = icon.icon_url;
+    if (!iconURL) {
+        console.error('The Noun Project has not provided a URL to download the icon "' + icon.term + '" (tnp-' + icon.id + ').');
+        return;
+    }
     request.get(iconURL, function(err2, resp2, svg) {
         if (err2) {
             console.error(err2);
