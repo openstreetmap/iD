@@ -13,7 +13,7 @@
         "fee",
         "opening_hours",
         "operator",
-        "payment_multi",
+        "payment_multi_fee",
         "toilets/position"
     ],
     "geometry": [

@@ -5,7 +5,7 @@
         "operator",
         "capacity",
         "fee",
-        "payment_multi"
+        "payment_multi_fee"
     ],
     "geometry": [
         "point"

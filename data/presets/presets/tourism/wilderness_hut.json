@@ -6,10 +6,10 @@
         "address",
         "building_area",
         "fee",
+        "payment_multi_fee",
         "fireplace"
     ],
     "moreFields": [
-        "payment_multi",
         "wheelchair"
     ],
     "geometry": [

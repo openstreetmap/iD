@@ -7,10 +7,10 @@
         "access_simple",
         "capacity",
         "fee",
+        "payment_multi_fee",
         "internet_access"
     ],
     "moreFields" : [
-        "payment_multi",
         "internet_access/fee",
         "internet_access/ssid",
         "sanitary_dump_station",

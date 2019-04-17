@@ -1281,6 +1281,9 @@ en:
       payment_multi:
         # 'payment:=*'
         label: Payment Types
+      payment_multi_fee:
+        # 'payment:=*'
+        label: Payment Types
       phases:
         # phases=*
         label: Phases

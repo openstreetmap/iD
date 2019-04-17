@@ -229,6 +229,34 @@
       "replace": {"highway": "steps", "conveying": "$1"}
     },
     {
+      "old": {"fee": "0"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "free"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "Free"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "No"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "none"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "some"},
+      "replace": {"fee": "yes"}
+    },
+    {
+      "old": {"fee": "Yes"},
+      "replace": {"fee": "yes"}
+    },
+    {
       "old": {"fenced": "yes"},
       "replace": {"barrier": "fence"}
     },

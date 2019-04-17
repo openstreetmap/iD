@@ -5,6 +5,7 @@
         "access_simple",
         "supervised",
         "fee",
+        "payment_multi_fee",
         "lit"
     ],
     "moreFields": [

@@ -8,6 +8,9 @@
         "fee",
         "opening_hours"
     ],
+    "moreFields": [
+        "payment_multi_fee"    
+    ],
     "geometry": [
         "vertex"
     ],

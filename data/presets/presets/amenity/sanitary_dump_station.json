@@ -4,10 +4,8 @@
         "operator",
         "access_simple",
         "fee",
+        "payment_multi_fee",
         "water_point"
-    ],
-    "moreFields": [
-        "payment_multi"
     ],
     "geometry": [
         "point",

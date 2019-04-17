@@ -5,7 +5,7 @@
         "network",
         "operator",
         "fee",
-        "payment_multi"
+        "payment_multi_fee"
     ],
     "moreFields": [
         "opening_hours",

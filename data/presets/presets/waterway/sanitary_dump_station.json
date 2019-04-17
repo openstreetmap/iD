@@ -5,11 +5,11 @@
         "operator",
         "access_simple",
         "fee",
+        "payment_multi_fee",
         "water_point"
     ],
     "moreFields": [
         "opening_hours",
-        "payment_multi",
         "seamark/type"
     ],
     "geometry": [

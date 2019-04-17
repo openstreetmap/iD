@@ -3285,6 +3285,9 @@
                         "lane": "Roadside Lane"
                     }
                 },
+                "payment_multi_fee": {
+                    "label": "Payment Types"
+                },
                 "payment_multi": {
                     "label": "Payment Types"
                 },

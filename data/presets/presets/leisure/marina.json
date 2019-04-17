@@ -5,12 +5,12 @@
         "operator",
         "capacity",
         "fee",
+        "payment_multi_fee",
         "sanitary_dump_station",
         "power_supply"
     ],
     "moreFields" : [
         "address",
-        "payment_multi",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",

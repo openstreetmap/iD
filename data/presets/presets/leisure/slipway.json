@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "access_simple",
-        "fee"
+        "fee",
+        "payment_multi_fee"
     ],
     "moreFields": [
         "seamark/type"

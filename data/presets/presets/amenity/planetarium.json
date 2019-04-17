@@ -10,7 +10,7 @@
     "moreFields": [
         "air_conditioning",
         "fee",
-        "payment_multi",
+        "payment_multi_fee",
         "website",
         "phone",
         "email",

@@ -1,11 +1,7 @@
 {
     "icon": "temaki-vending_machine",
     "fields": [
-        "vending",
-        "operator",
-        "fee",
-        "payment_multi",
-        "currency_multi"
+        "{amenity/vending_machine/newspapers}"
     ],
     "geometry": [
         "point"

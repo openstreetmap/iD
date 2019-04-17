@@ -4,6 +4,7 @@
         "operator",
         "access_simple",
         "fee",
+        "payment_multi_fee",
         "wheelchair"
     ],
     "moreFields": [

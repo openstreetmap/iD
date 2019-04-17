@@ -5,9 +5,12 @@
         "area"
     ],
     "fields": [
-        "fee",
+        "name",
+        "elevation",
         "access_simple",
-        "direction"
+        "direction",
+        "fee",
+        "payment_multi_fee"
     ],
     "tags": {
         "natural": "cave_entrance"

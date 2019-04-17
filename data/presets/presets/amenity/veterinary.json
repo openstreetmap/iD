@@ -9,7 +9,7 @@
     ],
     "moreFields": [
         "fee",
-        "payment_multi",
+        "payment_multi_fee",
         "website",
         "phone",
         "email",
