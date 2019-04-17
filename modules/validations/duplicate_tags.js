@@ -31,7 +31,7 @@ export function validationDuplicateTags() {
                                     return entity.tags[t];
                                 }).join(',');
 
-            if (!entityTagValue.match(/^,+$/) && existingTagValues.indexOf(entityTagValue.toLowerCase()) !== -1) {
+            if (!entityTagValue.match(/^,*$/) && existingTagValues.indexOf(entityTagValue.toLowerCase()) !== -1) {
                 issues.push(new validationIssue({
                             type: type,
                             severity: 'warning',

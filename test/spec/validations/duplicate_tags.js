@@ -157,5 +157,9 @@ describe('iD.validations.duplicate_tags', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-
+    it('ignores ways having no tags', function() {
+        createWays({ }, { });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
 });
