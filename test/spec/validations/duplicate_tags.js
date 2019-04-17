@@ -76,9 +76,9 @@ describe('iD.validations.duplicate_tags', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags both ways having same start of address', function() {
+    it('flags both ways having same start of address (without unit)', function() {
         createWays({ 'addr:housenumber': '23', 'addr:street': 'Park Street' },
-                  { 'addr:housenumber': '23', 'addr:street': 'Park Street' });
+                   { 'addr:housenumber': '23', 'addr:street': 'Park Street' });
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
 
@@ -91,9 +91,39 @@ describe('iD.validations.duplicate_tags', function () {
         expect(issues[1].entities[0].id).to.eql('w-2');
     });
 
-    it('flags both ways having same start of address (case-insensitive)', function() {
+    it('flags both ways having same start of address (without unit) (case-insensitive)', function() {
         createWays({ 'addr:housenumber': '23', 'addr:street': 'Park Street' },
-                  { 'addr:housenumber': '23', 'addr:street': 'park street' });
+                   { 'addr:housenumber': '23', 'addr:street': 'park street' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(2);
+
+        expect(issues[0].type).to.eql('duplicate_tags');
+        expect(issues[0].entities).to.have.lengthOf(1);
+        expect(issues[0].entities[0].id).to.eql('w-1');
+
+        expect(issues[1].type).to.eql('duplicate_tags');
+        expect(issues[1].entities).to.have.lengthOf(1);
+        expect(issues[1].entities[0].id).to.eql('w-2');
+    });
+
+    it('flags both ways having same start of address (with unit)', function() {
+        createWays({ 'addr:unit': '6', 'addr:housenumber': '23', 'addr:street': 'Park Street' },
+                   { 'addr:unit': '6', 'addr:housenumber': '23', 'addr:street': 'Park Street' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(2);
+
+        expect(issues[0].type).to.eql('duplicate_tags');
+        expect(issues[0].entities).to.have.lengthOf(1);
+        expect(issues[0].entities[0].id).to.eql('w-1');
+
+        expect(issues[1].type).to.eql('duplicate_tags');
+        expect(issues[1].entities).to.have.lengthOf(1);
+        expect(issues[1].entities[0].id).to.eql('w-2');
+    });
+
+    it('flags both ways having same start of address (with unit) (case-insensitive)', function() {
+        createWays({ 'addr:unit': '6B', 'addr:housenumber': '23', 'addr:street': 'Park Street' },
+                   { 'addr:unit': '6b', 'addr:housenumber': '23', 'addr:street': 'park street' });
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
 
@@ -108,14 +138,21 @@ describe('iD.validations.duplicate_tags', function () {
 
     it('ignores ways having different house number, same street', function() {
         createWays({ 'addr:housenumber': '22', 'addr:street': 'Park Street' },
-                  { 'addr:housenumber': '23', 'addr:street': 'Park Street' });
+                   { 'addr:housenumber': '23', 'addr:street': 'Park Street' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
     it('ignores ways having same house number, different street', function() {
         createWays({ 'addr:housenumber': '22', 'addr:street': 'Park Street' },
-                  { 'addr:housenumber': '22', 'addr:street': 'Tree Street' });
+                   { 'addr:housenumber': '22', 'addr:street': 'Tree Street' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores ways having different unit, same house number, same street', function() {
+        createWays({ 'addr:unit': '6', 'addr:housenumber': '22', 'addr:street': 'Park Street' },
+                   { 'addr:unit': '7', 'addr:housenumber': '22', 'addr:street': 'Tree Street' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });

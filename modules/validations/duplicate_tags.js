@@ -7,7 +7,7 @@ export function validationDuplicateTags() {
     var type = 'duplicate_tags';
     var tagsToCheck = [
                         ['Name', ['name']],
-                        ['Address', ['addr:housenumber', 'addr:street']],
+                        ['Address', ['addr:unit', 'addr:housenumber', 'addr:street']],
                         // Add more tags to check here
                       ];
 
@@ -31,7 +31,7 @@ export function validationDuplicateTags() {
                                     return entity.tags[t];
                                 }).join(',');
 
-            if (entity.tags[tag[1][0]] !== undefined && existingTagValues.indexOf(entityTagValue.toLowerCase()) !== -1) {
+            if (!entityTagValue.match(/^,+$/) && existingTagValues.indexOf(entityTagValue.toLowerCase()) !== -1) {
                 issues.push(new validationIssue({
                             type: type,
                             severity: 'warning',
