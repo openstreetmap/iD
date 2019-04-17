@@ -160,8 +160,13 @@ export function uiEntityIssues(context) {
             .style('max-height', '0')
             .style('opacity', '0')
             .each(function(d) {
-                d3_select(this)
-                    .call(d.reference);
+                if (typeof d.reference === 'function') {
+                    d3_select(this)
+                        .call(d.reference);
+                } else {
+                    d3_select(this)
+                        .text(t('inspector.no_documentation_key'));
+                }
             });
 
 

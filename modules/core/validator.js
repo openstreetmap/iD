@@ -334,7 +334,7 @@ export function validationIssue(attrs) {
     this.type = attrs.type;                // required
     this.severity = attrs.severity;        // required - 'warning' or 'error'
     this.message = attrs.message;          // required - localized string
-    this.reference = attrs.reference;      // required - function(selection) to render reference info
+    this.reference = attrs.reference;      // optional - function(selection) to render reference info
     this.entities = attrs.entities;        // optional - array of entities
     this.loc = attrs.loc;                  // optional - expect a [lon, lat] array
     this.data = attrs.data;                // optional - object containing extra data for the fixes
