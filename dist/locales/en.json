@@ -3859,10 +3859,16 @@
                     "label": "Disposal",
                     "options": {
                         "flush": "Flush",
-                        "pitlatrine": "Pit/Latrine",
+                        "pitlatrine": "Pit Latrine",
                         "chemical": "Chemical",
                         "bucket": "Bucket"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Handwashing"
+                },
+                "toilets/position": {
+                    "label": "Positions"
                 },
                 "toll": {
                     "label": "Toll"
@@ -4857,6 +4863,14 @@
                 "amenity/toilets": {
                     "name": "Toilets",
                     "terms": "bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C."
+                },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Flush Toilets",
+                    "terms": "bathroom,head,lavatory,privy,restroom,water closet,WC,W.C."
+                },
+                "amenity/toilets/disposal/pitlatrine": {
+                    "name": "Pit Latrine",
+                    "terms": "head,lavatory,long drop,outhouse,pit toilet,privy"
                 },
                 "amenity/townhall": {
                     "name": "Town Hall",

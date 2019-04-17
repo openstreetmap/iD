@@ -1,0 +1,28 @@
+{
+    "icon": "tnp-2009541",
+    "fields": [
+        "toilets/disposal",
+        "{amenity/toilets}"
+    ],
+    "moreFields": [
+        "{amenity/toilets}"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "head",
+        "lavatory",
+        "long drop",
+        "outhouse",
+        "pit toilet",
+        "privy"
+    ],
+    "tags": {
+        "amenity": "toilets",
+        "toilets:disposal": "pitlatrine"
+    },
+    "name": "Pit Latrine"
+}

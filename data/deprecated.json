@@ -576,6 +576,14 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"toilets:disposal": "longdrop"},
+      "replace": {"toilets:disposal": "pitlatrine"}
+    },
+    {
+      "old": {"toilets:disposal": "pit_latrine"},
+      "replace": {"toilets:disposal": "pitlatrine"}
+    },
+    {
       "old": {"tourism": "bed_and_breakfast"},
       "replace": {"tourism": "guest_house"}
     },
