@@ -4615,6 +4615,10 @@
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
+                "amenity/parking/underground": {
+                    "name": "Underground Parking",
+                    "terms": "automobile parking,car lot,car parking,rv parking,subsurface parking,truck parking,vehicle parking"
+                },
                 "amenity/payment_centre": {
                     "name": "Payment Center",
                     "terms": "check,tax pay,bill pay,currency,finance,cash,money"

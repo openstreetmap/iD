@@ -2755,6 +2755,11 @@ en:
         name: Multilevel Parking Garage
         # 'terms: car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure'
         terms: '<translate with synonyms or related terms for ''Multilevel Parking Garage'', separated by commas>'
+      amenity/parking/underground:
+        # 'amenity=parking, parking=underground'
+        name: Underground Parking
+        # 'terms: automobile parking,car lot,car parking,rv parking,subsurface parking,truck parking,vehicle parking'
+        terms: '<translate with synonyms or related terms for ''Underground Parking'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
         name: Parking Garage Entrance/Exit
