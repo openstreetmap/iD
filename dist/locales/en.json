@@ -3965,6 +3965,9 @@
                 "trees": {
                     "label": "Trees"
                 },
+                "trolley_wire": {
+                    "label": "Overhead Trolley Wires"
+                },
                 "tunnel": {
                     "label": "Type",
                     "placeholder": "Default"

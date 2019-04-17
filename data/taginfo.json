@@ -1655,6 +1655,7 @@
     {"key": "transformer", "value": "auxiliary", "description": "🄵 Type"},
     {"key": "transformer", "value": "yes", "description": "🄵 Type"},
     {"key": "trees", "description": "🄵 Trees"},
+    {"key": "trolley_wire", "description": "🄵 Overhead Trolley Wires"},
     {"key": "usage", "value": "main", "description": "🄵 Usage Type"},
     {"key": "usage", "value": "branch", "description": "🄵 Usage Type"},
     {"key": "usage", "value": "industrial", "description": "🄵 Usage Type"},

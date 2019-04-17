@@ -376,6 +376,7 @@
     "trail_visibility": {"key": "trail_visibility", "type": "combo", "label": "Trail Visibility", "placeholder": "Excellent, Good, Bad...", "strings": {"options": {"excellent": "Excellent: unambiguous path or markers everywhere", "good": "Good: markers visible, sometimes require searching", "intermediate": "Intermediate: few markers, path mostly visible", "bad": "Bad: no markers, path sometimes invisible/pathless", "horrible": "Horrible: often pathless, some orientation skills required", "no": "No: pathless, excellent orientation skills required"}}},
     "transformer": {"key": "transformer", "type": "combo", "label": "Type", "strings": {"options": {"distribution": "Distribution", "generator": "Generator", "converter": "Converter", "traction": "Traction", "auto": "Autotransformer", "phase_angle_regulator": "Phase Angle Regulator", "auxiliary": "Auxiliary", "yes": "Unknown"}}},
     "trees": {"key": "trees", "type": "semiCombo", "label": "Trees"},
+    "trolley_wire": {"key": "trolley_wire", "type": "check", "label": "Overhead Trolley Wires"},
     "tunnel": {"key": "tunnel", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "usage_rail": {"key": "usage", "type": "combo", "label": "Usage Type", "strings": {"options": {"main": "Main", "branch": "Branch", "industrial": "Industrial", "military": "Military", "test": "Test", "tourism": "Tourism"}}},
     "vending": {"key": "vending", "type": "semiCombo", "label": "Types of Goods"},

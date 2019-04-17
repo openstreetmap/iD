@@ -2118,6 +2118,9 @@ en:
       trees:
         # trees=*
         label: Trees
+      trolley_wire:
+        # trolley_wire=*
+        label: Overhead Trolley Wires
       tunnel:
         # tunnel=*
         label: Type

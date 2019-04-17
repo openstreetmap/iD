@@ -26,7 +26,8 @@
         "oneway/bicycle",
         "ref_road_number",
         "smoothness",
-        "toll"
+        "toll",
+        "trolley_wire"
     ],
     "geometry": [
         "line"
