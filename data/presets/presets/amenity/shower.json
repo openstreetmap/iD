@@ -1,17 +1,18 @@
 {
-    "icon": "temaki-shower",
+    "icon": "fas-shower",
     "fields": [
         "opening_hours",
+        "access_simple",
         "fee",
+        "payment_multi_fee",
         "supervised",
         "building_area",
-        "access_simple",
         "wheelchair"
     ],
     "moreFields": [
+        "address",
         "operator",
-        "gender",
-        "payment_multi_fee"
+        "gender"
     ],
     "geometry": [
         "point",
