@@ -62,9 +62,15 @@ export function validationMissingTag() {
             })
         ];
 
-        var canDelete = false;
-        if (!operationDelete([entity.id], context).disabled()) {
-            canDelete = true;
+        // can always delete if the user created it in the first place..
+        var canDelete = (entity.version === undefined || entity.v !== undefined);
+
+        // otherwise check with operationDelete whether we can delete this entity
+        if (!canDelete) {
+            canDelete = !operationDelete([entity.id], context).disabled();
+        }
+
+        if (canDelete) {
             fixes.push(
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
@@ -80,12 +86,9 @@ export function validationMissingTag() {
             );
         }
 
-        // error if created or modified and is deletable, else warning
-        var isError = (entity.version === undefined || entity.v !== undefined) && canDelete;
-
         return [new validationIssue({
             type: type,
-            severity: isError ? 'error' : 'warning',
+            severity: canDelete ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
             reference: showReference,
             entities: [entity],
