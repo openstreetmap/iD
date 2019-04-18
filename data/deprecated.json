@@ -372,6 +372,10 @@
       "replace": {"kerb": "flush"}
     },
     {
+      "old": {"landuse": "basin"},
+      "replace": {"natural": "water", "water": "basin"}
+    },
+    {
       "old": {"landuse": "conservation"},
       "replace": {"boundary": "protected_area"}
     },
@@ -384,12 +388,12 @@
       "replace": {"landuse": "farmland"}
     },
     {
-      "old": {"landuse": "basin"},
-      "replace": {"natural": "water", "water": "basin"}
-    },
-    {
       "old": {"landuse": "pond"},
       "replace": {"natural": "water", "water": "pond"}
+    },
+    {
+      "old": {"landuse": "port"},
+      "replace": {"landuse": "industrial", "industrial": "port"}
     },
     {
       "old": {"landuse": "reservoir"},
