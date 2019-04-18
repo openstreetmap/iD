@@ -4047,12 +4047,9 @@ img.tile-debug {
     margin-left: auto;
     margin-right: 8px;
 }
-
-.panel-content-history .view-history-on-osm {
-    display: block;
-    margin-top: 10px;
+.panel-content-history h4 {
+    padding-bottom: 0;
 }
-
 .panel-content-location .location-info {
     margin-top: 10px;
 }
