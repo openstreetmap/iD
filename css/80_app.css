@@ -1558,7 +1558,8 @@ button.preset-favorite-button.active .icon {
 .form-field-input-wrap {
     display: flex;
     flex-flow: row nowrap;
-    flex: 1 1 100%;
+    width: 100%;
+    flex: 1 1 auto;
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
@@ -1705,35 +1706,58 @@ button.preset-favorite-button.active .icon {
 }
 
 .form-field-input-multicombo ul.chiplist {
-    padding: 5px 7px 5px 7px;
+    padding: 3px 6px 3px 6px;
     background: #fff;
     display: block;
     border-radius: 0 0 4px 4px;
+    width: 100%;
+}
+
+.form-field-input-multicombo li {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 4px;
+}
+[dir='ltr'] .form-field-input-multicombo li {
+    margin-right: 6px;
+}
+[dir='rtl'] .form-field-input-multicombo li {
+    margin-left: 6px;
 }
 
 .form-field-input-multicombo li.chips {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     line-height: 25px;
+    max-width: 100%;
+}
+[dir='ltr'] .form-field-input-multicombo li.chips {
     padding: 2px 0px 2px 5px;
 }
-.form-field-input-multicombo li {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    margin: 3px;
-    border-radius: 4px;
+[dir='rtl'] .form-field-input-multicombo li.chips {
+    padding: 2px 5px 2px 0px;
+}
+
+.form-field-input-multicombo li.chips span {
+    display: block;
+    flex: 1 1 auto;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .form-field-input-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
-    line-height: 22px;
-    float: right;
     padding: 0px 5px 0px 5px;
     margin: 0;
     cursor: pointer;
     color: #a6b4ce;
+    display: block;
+    text-align: center;
+    flex: 0 0 auto;
 }
 
 .form-field-input-multicombo .input-wrap {
@@ -1751,11 +1775,8 @@ button.preset-favorite-button.active .icon {
     border-radius: 4px !important;
 }
 
-.form-field-input-multicombo .full-line-chips li {
-    display: block;
-}
-.form-field-input-multicombo .full-line-chips li:not(:last-child) {
-    margin-bottom: 6px;
+.form-field-input-multicombo .full-line-chips li.chips {
+    width: 100%;
 }
 .form-field-input-multicombo .full-line-chips .input-wrap {
     width: auto;
