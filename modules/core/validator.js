@@ -38,6 +38,12 @@ export function coreValidator(context) {
                 _entityRules.push(key);
             }
         });
+
+        var disabledRules = context.storage('validate-disabledRules');
+        if (disabledRules) {
+            disabledRules.split(',')
+                .forEach(function(key) { _disabledRules[key] = true });
+        }
     };
 
 
@@ -122,6 +128,8 @@ export function coreValidator(context) {
         } else {
             _disabledRules[key] = true;
         }
+
+        context.storage('validate-disabledRules', Object.keys(_disabledRules).join(','));
         validator.validate();
     };
 
