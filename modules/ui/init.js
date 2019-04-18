@@ -17,6 +17,7 @@ import { uiAttribution } from './attribution';
 import { uiBackground } from './background';
 import { uiContributors } from './contributors';
 import { uiFeatureInfo } from './feature_info';
+import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
 import { uiHelp } from './help';
 import { uiInfo } from './info';
@@ -49,6 +50,10 @@ export function uiInit(context) {
     function render(container) {
         container
             .attr('dir', textDirection);
+
+        // setup fullscreen keybindings (no button shown at this time)
+        container
+            .call(uiFullScreen(context));
 
         var map = context.map();
 
