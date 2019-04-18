@@ -332,6 +332,22 @@
       "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
+      "old": {"internet_access:fee": "0"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "Free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "No"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
       "old": {"kerb": "dropped"},
       "replace": {"kerb": "lowered"}
     },
@@ -502,6 +518,10 @@
     {
       "old": {"shop": "boutique"},
       "replace": {"shop": "clothes"}
+    },
+    {
+      "old": {"shop": "cafe"},
+      "replace": {"amenity": "cafe"}
     },
     {
       "old": {"shop": "dive"},
