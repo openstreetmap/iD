@@ -1311,6 +1311,7 @@
     {"key": "fire_hydrant:type", "value": "wall", "description": "🄵 Shape"},
     {"key": "fire_hydrant:type", "value": "pipe", "description": "🄵 Shape"},
     {"key": "fireplace", "description": "🄵 Fireplace"},
+    {"key": "fishing", "description": "🄵 Fishing"},
     {"key": "fitness_station", "description": "🄵 Equipment Type"},
     {"key": "fixme", "description": "🄵 Fix Me"},
     {"key": "flag:type", "description": "🄵 Flag Type"},

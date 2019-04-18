@@ -2789,6 +2789,9 @@
                 "fireplace": {
                     "label": "Fireplace"
                 },
+                "fishing": {
+                    "label": "Fishing"
+                },
                 "fitness_station": {
                     "label": "Equipment Type"
                 },

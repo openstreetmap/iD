@@ -126,6 +126,7 @@
     "fire_hydrant/pressure": {"key": "fire_hydrant:pressure", "type": "combo", "label": "Pressure (bar)", "snake_case": false},
     "fire_hydrant/type": {"key": "fire_hydrant:type", "type": "combo", "label": "Shape", "strings": {"options": {"pillar": "Pillar/Aboveground", "underground": "Underground", "wall": "Wall", "pipe": "Capped Pipe"}}},
     "fireplace": {"key": "fireplace", "type": "check", "label": "Fireplace"},
+    "fishing": {"key": "fishing", "type": "combo", "label": "Fishing"},
     "fitness_station": {"key": "fitness_station", "type": "typeCombo", "label": "Equipment Type"},
     "fixme": {"key": "fixme", "type": "textarea", "label": "Fix Me", "universal": true},
     "flag/type": {"key": "flag:type", "type": "combo", "label": "Flag Type"},

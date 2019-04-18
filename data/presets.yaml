@@ -691,6 +691,9 @@ en:
       fireplace:
         # fireplace=*
         label: Fireplace
+      fishing:
+        # fishing=*
+        label: Fishing
       fitness_station:
         # fitness_station=*
         label: Equipment Type
