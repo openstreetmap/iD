@@ -42,7 +42,7 @@ export function coreValidator(context) {
         var disabledRules = context.storage('validate-disabledRules');
         if (disabledRules) {
             disabledRules.split(',')
-                .forEach(function(key) { _disabledRules[key] = true });
+                .forEach(function(key) { _disabledRules[key] = true; });
         }
     };
 
