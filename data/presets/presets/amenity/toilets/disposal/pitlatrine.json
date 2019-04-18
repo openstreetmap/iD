@@ -2,7 +2,8 @@
     "icon": "tnp-2009541",
     "fields": [
         "toilets/disposal",
-        "{amenity/toilets}"
+        "{amenity/toilets}",
+        "toilets/handwashing"
     ],
     "moreFields": [
         "{amenity/toilets}"
@@ -23,6 +24,10 @@
     "tags": {
         "amenity": "toilets",
         "toilets:disposal": "pitlatrine"
+    },
+    "reference": {
+        "key": "toilets:disposal",
+        "value": "pitlatrine"
     },
     "name": "Pit Latrine"
 }

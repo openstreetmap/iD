@@ -648,6 +648,10 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"theatre:type": "amphitheatre"},
+      "replace": {"theatre:type": "amphi"}
+    },
+    {
       "old": {"toilets:disposal": "longdrop"},
       "replace": {"toilets:disposal": "pitlatrine"}
     },

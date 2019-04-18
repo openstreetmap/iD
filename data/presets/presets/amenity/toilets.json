@@ -4,7 +4,6 @@
         "toilets/disposal",
         "access_simple",
         "gender",
-        "toilets/handwashing",
         "diaper",
         "wheelchair",
         "building_area"
@@ -14,6 +13,7 @@
         "opening_hours",
         "operator",
         "payment_multi_fee",
+        "toilets/handwashing",
         "toilets/position"
     ],
     "geometry": [
