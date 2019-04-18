@@ -7996,7 +7996,7 @@
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",
-                    "terms": "home,household"
+                    "terms": "home,household,kitchenware"
                 },
                 "shop/hunting": {
                     "name": "Hunting Shop",

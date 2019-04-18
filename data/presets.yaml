@@ -6684,7 +6684,7 @@ en:
       shop/houseware:
         # shop=houseware
         name: Houseware Store
-        # 'terms: home,household'
+        # 'terms: home,household,kitchenware'
         terms: '<translate with synonyms or related terms for ''Houseware Store'', separated by commas>'
       shop/hunting:
         # shop=hunting
