@@ -332,6 +332,14 @@
       "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
+      "old": {"internet_access": "public"},
+      "replace": {"internet_access": "yes", "internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access": "wifi"},
+      "replace": {"internet_access": "wlan"}
+    },
+    {
       "old": {"internet_access:fee": "0"},
       "replace": {"internet_access:fee": "no"}
     },
@@ -346,6 +354,14 @@
     {
       "old": {"internet_access:fee": "No"},
       "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:name": "*"},
+      "replace": {"internet_access:ssid": "$1"}
+    },
+    {
+      "old": {"internet_access:type": "*"},
+      "replace": {"internet_access": "$1"}
     },
     {
       "old": {"kerb": "dropped"},
