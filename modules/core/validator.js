@@ -59,8 +59,8 @@ export function coreValidator(context) {
 
 
     // options = {
-    //     what: 'edited',    // 'all' or 'edited'
-    //     where: 'visible'   // 'all' or 'visible'
+    //     what: 'edited',     // 'all' or 'edited'
+    //     where: 'visible',   // 'all' or 'visible'
     // };
     validator.getIssues = function(options) {
         var opts = Object.assign({ what: 'all', where: 'all' }, options);
@@ -69,6 +69,8 @@ export function coreValidator(context) {
         var view = context.map().extent();
 
         return issues.filter(function(issue) {
+            if (_disabledRules[issue.type]) return false;
+
             if (opts.what === 'edited') {
                 var entities = issue.entities || [];
                 var isEdited = entities.some(function(entity) { return changes[entity.id]; });
@@ -98,7 +100,8 @@ export function coreValidator(context) {
         if (!issueIDs) return [];
 
         return Array.from(issueIDs)
-            .map(function(id) { return _issuesByIssueID[id]; });
+            .map(function(id) { return _issuesByIssueID[id]; })
+            .filter(function(issue) { return !_disabledRules[issue.type]; });
     };
 
 
@@ -163,11 +166,6 @@ export function coreValidator(context) {
                 return true;
             }
 
-            if (_disabledRules[key]) {   // skip disabled rules, but mark as having run
-                ran[key] = true;
-                return true;
-            }
-
             var detected = fn(entity, context);
             entityIssues = entityIssues.concat(detected);
             ran[key] = true;
@@ -202,7 +200,7 @@ export function coreValidator(context) {
             runValidation('tag_suggests_area');
         }
 
-        // run all _rules not yet run manually
+        // run all rules not yet run
         _entityRules.forEach(runValidation);
 
         return entityIssues;
@@ -232,7 +230,7 @@ export function coreValidator(context) {
             }
 
             checkParentRels.forEach(function(entity) {   // include parent relations
-                if (entity.type !== 'relation') {     // but not super-relations
+                if (entity.type !== 'relation') {        // but not super-relations
                     _validatedGraph.parentRelations(entity).forEach(function(parentRel) {
                         acc.add(parentRel);
                     });
@@ -274,7 +272,10 @@ export function coreValidator(context) {
     validator.validate = function() {
         var currGraph = context.graph();
         _validatedGraph = _validatedGraph || context.history().base();
-        if (currGraph === _validatedGraph) return;
+        if (currGraph === _validatedGraph) {
+            dispatch.call('validated');
+            return;
+        }
 
         var difference = coreDifference(_validatedGraph, currGraph);
         _validatedGraph = currGraph;
@@ -284,12 +285,6 @@ export function coreValidator(context) {
                 _rules[key].reset();   // 'crossing_ways' is the only one like this
             }
         }
-
-        // _issues = utilArrayFlatten(_changesRules.map(function(ruleID) {
-        //     if (_disabledRules[ruleID]) return [];
-        //     var fn = _rules[ruleID];
-        //     return fn(changes, context);
-        // }));
 
         var entityIDs = difference.extantIDs();  // created and modified
         difference.deleted().forEach(uncacheEntity);   // deleted
@@ -333,12 +328,12 @@ export function coreValidator(context) {
 
 
 export function validationIssue(attrs) {
-    this.type = attrs.type;                // required
+    this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
     this.severity = attrs.severity;        // required - 'warning' or 'error'
     this.message = attrs.message;          // required - localized string
-    this.reference = attrs.reference;      // optional - function(selection) to render reference info
-    this.entities = attrs.entities;        // optional - array of entities
-    this.loc = attrs.loc;                  // optional - expect a [lon, lat] array
+    this.reference = attrs.reference;      // optional - function(selection) to render reference information
+    this.entities = attrs.entities;        // optional - array of entities involved in the issue
+    this.loc = attrs.loc;                  // optional - [lon, lat] to zoom in on to see the issue
     this.data = attrs.data;                // optional - object containing extra data for the fixes
     this.fixes = attrs.fixes;              // optional - array of validationIssueFix objects
     this.hash = attrs.hash;                // optional - string to further differentiate the issue

@@ -198,6 +198,7 @@ export function uiIssues(context) {
 
         autoFixAll.selectAll('.autofix-all-link')
             .on('click', function() {
+                context.pauseChangeDispatch();
                 context.perform(actionNoop());
                 canAutoFix.forEach(function(issue) {
                     var args = issue.autoFix.autoArgs.slice();  // copy
@@ -207,6 +208,7 @@ export function uiIssues(context) {
                     args.push(t('issues.fix_all.annotation'));
                     context.replace.apply(context, args);
                 });
+                context.resumeChangeDispatch();
                 context.validator().validate();
             });
     }
