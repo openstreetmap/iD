@@ -647,6 +647,9 @@ en:
       emergency:
         # emergency=*
         label: Emergency
+      emergency_combo:
+        # emergency=*
+        label: Type
       enforcement:
         # enforcement=*
         label: Type
@@ -3923,6 +3926,9 @@ en:
       embankment:
         # embankment=yes
         name: Embankment
+      emergency:
+        # emergency=*
+        name: Emergency Feature
       emergency/ambulance_station:
         # emergency=ambulance_station
         name: Ambulance Station

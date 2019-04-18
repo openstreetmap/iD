@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "emergency_combo"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "emergency": "*"
+    },
+    "searchable": false,
+    "matchScore": 0.005,
+    "name": "Emergency Feature"
+}

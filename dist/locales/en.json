@@ -2746,6 +2746,9 @@
                 "embassy": {
                     "label": "Type"
                 },
+                "emergency_combo": {
+                    "label": "Type"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -4112,6 +4115,10 @@
                 },
                 "embankment": {
                     "name": "Embankment",
+                    "terms": ""
+                },
+                "emergency": {
+                    "name": "Emergency Feature",
                     "terms": ""
                 },
                 "highway": {
