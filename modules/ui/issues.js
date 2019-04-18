@@ -45,7 +45,7 @@ export function uiIssues(context) {
             .enter()
             .append('svg')
             .attr('viewbox', '0 0 ' + d + ' ' + d)
-            .attr('class', 'notification-badge')
+            .attr('class', 'notification-badge hide')
             .append('circle')
             .attr('cx', d / 2)
             .attr('cy', d / 2)
