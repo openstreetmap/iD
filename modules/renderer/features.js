@@ -432,7 +432,7 @@ export function rendererFeatures(context) {
         if (!entity.version) return false;
 
         var matches = Object.keys(features.getMatches(entity, resolver, geometry));
-        return matches.every(function(k) { return features.hidden(k); });
+        return matches.length && matches.every(function(k) { return features.hidden(k); });
     };
 
 
