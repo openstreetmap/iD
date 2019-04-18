@@ -5512,7 +5512,7 @@ en:
       natural/wetland:
         # natural=wetland
         name: Wetland
-        # 'terms: bog,marsh,reedbed,swamp,tidalflat'
+        # 'terms: bog,fen,marsh,mire,moor,muskeg,peatland,quagmire,reedbed,saltmarsh,swamp,tidalflat,wet meadow'
         terms: '<translate with synonyms or related terms for ''Wetland'', separated by commas>'
       natural/wood:
         # natural=wood

@@ -6973,7 +6973,7 @@
                 },
                 "natural/wetland": {
                     "name": "Wetland",
-                    "terms": "bog,marsh,reedbed,swamp,tidalflat"
+                    "terms": "bog,fen,marsh,mire,moor,muskeg,peatland,quagmire,reedbed,saltmarsh,swamp,tidalflat,wet meadow"
                 },
                 "natural/wood": {
                     "name": "Wood",
