@@ -200,18 +200,25 @@ export function uiCommit(context) {
         var prose = saveSection.selectAll('.commit-info')
             .data([0]);
 
+        if (prose.enter().size()) {   // first time, make sure to update user details in prose
+            _userDetails = null;
+        }
+
         prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
             .text(t('commit.upload_explanation'))
             .merge(prose);
 
+        // always check if this has changed, but only update prose.html()
+        // if needed, because it can trigger a style recalculation
         osm.userDetails(function(err, user) {
             if (err) return;
 
-            var userLink = d3_select(document.createElement('div'));
-
+            if (_userDetails === user) return;  // no change
             _userDetails = user;
+
+            var userLink = d3_select(document.createElement('div'));
 
             if (user.image_url) {
                 userLink
