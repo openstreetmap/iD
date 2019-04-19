@@ -1,0 +1,7 @@
+{
+    "key": "manufacturer",
+    "type": "combo",
+    "snake_case": false,
+    "caseSensitive": true,
+    "label": "Manufacturer"
+}

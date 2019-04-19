@@ -10,7 +10,9 @@
     "moreFields": [
         "smoking",
         "fee",
-        "payment_multi",
+        "payment_multi_fee",
+        "phone",
+        "reservation",
         "website",
         "wheelchair"
     ],

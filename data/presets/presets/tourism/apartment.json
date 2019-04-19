@@ -9,14 +9,15 @@
         "internet_access"
     ],
     "moreFields" : [
-        "smoking",
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

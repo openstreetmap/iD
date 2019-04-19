@@ -2,7 +2,9 @@
     "fields": [
         "design",
         "ref",
-        "material"
+        "material",
+        "operator",
+        "manufacturer"
     ],
     "geometry": [
         "point",

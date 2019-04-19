@@ -6,7 +6,7 @@
         "address",
         "opening_hours",
         "fee",
-        "payment_multi"
+        "payment_multi_fee"
     ],
     "moreFields": [
         "website",

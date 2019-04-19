@@ -11,6 +11,7 @@
     ],
     "moreFields": [
         "frequency",
+        "manufacturer",
         "voltage/primary",
         "voltage/secondary",
         "voltage/tertiary",

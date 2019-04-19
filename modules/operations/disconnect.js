@@ -9,6 +9,7 @@ export function operationDisconnect(selectedIDs, context) {
     var vertices = [];
     var ways = [];
     var others = [];
+    var _extent;
 
     selectedIDs.forEach(function(id) {
         if (context.geometry(id) === 'vertex') {
@@ -21,17 +22,30 @@ export function operationDisconnect(selectedIDs, context) {
     });
 
     var actions = [];
+    var disconnectingWay = vertices.length === 0 && ways.length === 1 && ways[0];
 
-    vertices.forEach(function(vertexID) {
-        var action = actionDisconnect(vertexID);
-        if (ways.length > 0) {
-            var waysIDsForVertex = ways.filter(function(wayID) {
-                return context.graph().entity(wayID).nodes.includes(vertexID);
-            });
-            action.limitWays(waysIDsForVertex);
-        }
-        actions.push(action);
-    });
+    if (disconnectingWay) {
+        _extent = context.entity(disconnectingWay).extent(context.graph());
+
+        context.entity(disconnectingWay).nodes.forEach(function(vertexID) {
+            var action = actionDisconnect(vertexID).limitWays(ways);
+            if (action.disabled(context.graph()) !== 'not_connected') {
+                actions.push(action);
+            }
+        });
+    } else {
+        vertices.forEach(function(vertexID) {
+            var action = actionDisconnect(vertexID);
+
+            if (ways.length > 0) {
+                var waysIDsForVertex = ways.filter(function(wayID) {
+                    return context.graph().entity(wayID).nodes.includes(vertexID);
+                });
+                action.limitWays(waysIDsForVertex);
+            }
+            actions.push(action);
+        });
+    }
 
 
     var operation = function() {
@@ -45,13 +59,16 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.available = function() {
-        return vertices.length > 0 &&
-            others.length === 0 &&
-            (ways.length === 0 || ways.every(function(way) {
-                return vertices.some(function(vertex) {
-                    return context.graph().entity(way).nodes.includes(vertex);
-                });
-            }));
+        if (actions.length === 0) return false;
+        if (others.length !== 0) return false;
+
+        if (vertices.length !== 0 && ways.length !== 0 && !ways.every(function(way) {
+            return vertices.some(function(vertex) {
+                return context.graph().entity(way).nodes.includes(vertex);
+            });
+        })) return false;
+
+        return true;
     };
 
 
@@ -69,6 +86,11 @@ export function operationDisconnect(selectedIDs, context) {
 
         if (_disabled) {
             return _disabled;
+        } else if (_extent && _extent.area() && _extent.percentContainedIn(context.extent()) < 0.8) {
+            return _disabled = 'too_large.single';
+// fixme- maybe needs?
+        // } else if (someMissing()) {
+        //     return _disabled = 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
             return _disabled = 'connected_to_hidden';
         }
@@ -79,9 +101,13 @@ export function operationDisconnect(selectedIDs, context) {
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        return disable ?
-            t('operations.disconnect.' + disable) :
-            t('operations.disconnect.description');
+        if (disable) {
+            return t('operations.disconnect.' + disable);
+        }
+        if (disconnectingWay) {
+            return t('operations.disconnect.' + context.geometry(disconnectingWay) + '.description');
+        }
+        return t('operations.disconnect.description');
     };
 
 

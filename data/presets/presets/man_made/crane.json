@@ -2,6 +2,7 @@
     "icon": "temaki-crane",
     "fields": [
         "operator",
+        "manufacturer",
         "height",
         "crane/type"
     ],

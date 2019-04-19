@@ -8,6 +8,7 @@
         "height"
     ],
     "moreFields": [
+        "manufacturer",
         "material"
     ],
     "geometry": [

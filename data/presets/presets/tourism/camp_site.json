@@ -7,18 +7,19 @@
         "access_simple",
         "capacity",
         "fee",
+        "payment_multi_fee",
         "internet_access"
     ],
     "moreFields" : [
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "sanitary_dump_station",
-        "power_supply",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone",
+        "power_supply",
+        "reservation",
+        "sanitary_dump_station",
+        "website",
         "wheelchair"
     ],
     "geometry": [

@@ -64,21 +64,15 @@ path.fill.tag-barrier-hedge {
 
 /* Blue things */
 path.stroke.tag-amenity-fountain,
-path.stroke.tag-amenity-swimming_pool,
 path.stroke.tag-leisure-swimming_pool,
-path.stroke.tag-landuse-aquaculture,
 path.stroke.tag-landuse-basin,
-path.stroke.tag-landuse-harbour,
 path.stroke.tag-landuse-reservoir,
 path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-fountain,
-path.fill.tag-amenity-swimming_pool,
 path.fill.tag-leisure-swimming_pool,
-path.fill.tag-landuse-aquaculture,
 path.fill.tag-landuse-basin,
-path.fill.tag-landuse-harbour,
 path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
@@ -259,6 +253,7 @@ path.stroke.tag-man_made-groyne,
 path.stroke.tag-man_made-breakwater,
 path.stroke.tag-natural-bare_rock,
 path.stroke.tag-natural-scree,
+path.stroke.tag-natural-shingle,
 path.stroke.tag-waterway-dam,
 path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
@@ -272,6 +267,7 @@ path.fill.tag-man_made-groyne,
 path.fill.tag-man_made-breakwater,
 path.fill.tag-natural-bare_rock,
 path.fill.tag-natural-scree,
+path.fill.tag-natural-shingle,
 path.fill.tag-waterway-dam,
 path.fill.tag-waterway-weir {
     stroke: rgba(140, 140, 140, 0.5);

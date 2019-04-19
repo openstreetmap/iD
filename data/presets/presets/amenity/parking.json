@@ -9,18 +9,19 @@
         "surface"
     ],
     "moreFields": [
-        "name",
-        "supervised",
-        "park_ride",
-        "maxstay",
-        "payment_multi",
         "address",
-        "website",
-        "phone",
+        "covered",
         "email",
         "fax",
-        "wheelchair",
-        "covered"
+        "maxstay",
+        "name",
+        "park_ride",
+        "payment_multi_fee",
+        "phone",
+        "ref",
+        "supervised",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

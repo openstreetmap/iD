@@ -182,6 +182,7 @@ export function uiPresetIcon(context) {
         hiking: ['highway/path', 'highway/path', 'highway/path'],
         horse: ['highway/bridleway', 'highway/bridleway', 'highway/bridleway'],
         light_rail: ['railway/light_rail', 'railway/light_rail', 'railway/light_rail'],
+        monorail: ['railway/monorail', 'railway/monorail', 'railway/monorail'],
         pipeline: ['man_made/pipeline', 'man_made/pipeline', 'man_made/pipeline'],
         piste: ['piste/downhill', 'piste/hike', 'piste/nordic'],
         power: ['power/line', 'power/line', 'power/line'],
@@ -205,7 +206,8 @@ export function uiPresetIcon(context) {
         var isMaki = picon && /^maki-/.test(picon);
         var isTemaki = picon && /^temaki-/.test(picon);
         var isFa = picon && /^fa[srb]-/.test(picon);
-        var isiDIcon = picon && !(isMaki || isTemaki || isFa);
+        var isTnp = picon && /^tnp-/.test(picon);
+        var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
         var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);

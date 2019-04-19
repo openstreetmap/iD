@@ -1,16 +1,20 @@
 /* photo viewer div */
 #photoviewer {
-    position: absolute;
-    bottom: 40px;
-    left: 10px;
+    position: relative;
+    flex-shrink: 0;
+    margin-bottom: 10px;
     width: 330px;
     height: 250px;
     padding: 5px;
     background-color: #fff;
 }
+[dir='ltr'] #photoviewer {
+    margin-left: 10px;
+    margin-right: 2px;
+}
 [dir='rtl'] #photoviewer {
-    left: auto;
-    right: 10px;
+    margin-right: 10px;
+    margin-left: 2px;
 }
 
 @media screen and (min-width: 1600px) {

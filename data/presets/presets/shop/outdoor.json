@@ -1,5 +1,9 @@
 {
     "icon": "temaki-compass",
+    "fields": [
+        "{shop}",
+        "clothes"
+    ],
     "geometry": [
         "point",
         "area"

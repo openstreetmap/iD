@@ -5,6 +5,10 @@
       "replace": {"aerialway": "zip_line"}
     },
     {
+      "old": {"aeroway": "aerobridge"},
+      "replace": {"aeroway": "jet_bridge"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
@@ -225,6 +229,34 @@
       "replace": {"highway": "steps", "conveying": "$1"}
     },
     {
+      "old": {"fee": "0"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "free"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "Free"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "No"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "none"},
+      "replace": {"fee": "no"}
+    },
+    {
+      "old": {"fee": "some"},
+      "replace": {"fee": "yes"}
+    },
+    {
+      "old": {"fee": "Yes"},
+      "replace": {"fee": "yes"}
+    },
+    {
       "old": {"fenced": "yes"},
       "replace": {"barrier": "fence"}
     },
@@ -300,12 +332,48 @@
       "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
+      "old": {"internet_access": "public"},
+      "replace": {"internet_access": "yes", "internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access": "wifi"},
+      "replace": {"internet_access": "wlan"}
+    },
+    {
+      "old": {"internet_access:fee": "0"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "Free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "No"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:name": "*"},
+      "replace": {"internet_access:ssid": "$1"}
+    },
+    {
+      "old": {"internet_access:type": "*"},
+      "replace": {"internet_access": "$1"}
+    },
+    {
       "old": {"kerb": "dropped"},
       "replace": {"kerb": "lowered"}
     },
     {
       "old": {"kerb": "flat"},
       "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"landuse": "basin"},
+      "replace": {"natural": "water", "water": "basin"}
     },
     {
       "old": {"landuse": "conservation"},
@@ -320,12 +388,12 @@
       "replace": {"landuse": "farmland"}
     },
     {
-      "old": {"landuse": "basin"},
-      "replace": {"natural": "water", "water": "basin"}
-    },
-    {
       "old": {"landuse": "pond"},
       "replace": {"natural": "water", "water": "pond"}
+    },
+    {
+      "old": {"landuse": "port"},
+      "replace": {"landuse": "industrial", "industrial": "port"}
     },
     {
       "old": {"landuse": "reservoir"},
@@ -428,6 +496,10 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"reservations": "*"},
+      "replace": {"reservation": "$1"}
+    },
+    {
       "old": {"roof:color": "*"},
       "replace": {"roof:colour": "$1"}
     },
@@ -466,6 +538,10 @@
     {
       "old": {"shop": "boutique"},
       "replace": {"shop": "clothes"}
+    },
+    {
+      "old": {"shop": "cafe"},
+      "replace": {"amenity": "cafe"}
     },
     {
       "old": {"shop": "dive"},
@@ -572,8 +648,20 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"theatre:type": "amphitheatre"},
+      "replace": {"theatre:type": "amphi"}
+    },
+    {
+      "old": {"toilets:disposal": "longdrop"},
+      "replace": {"toilets:disposal": "pitlatrine"}
+    },
+    {
+      "old": {"toilets:disposal": "pit_latrine"},
+      "replace": {"toilets:disposal": "pitlatrine"}
+    },
+    {
       "old": {"tourism": "bed_and_breakfast"},
-      "replace": {"tourism": "guest_house"}
+      "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
     },
     {
       "old": {"type": "broad_leaved"},
@@ -606,6 +694,10 @@
     {
       "old": {"waterway": "aqueduct"},
       "replace": {"waterway": "canal", "bridge": "aqueduct"}
+    },
+    {
+      "old": {"waterway": "lock"},
+      "replace": {"waterway": "canal", "lock": "yes"}
     },
     {
       "old": {"waterway": "riverbank"},

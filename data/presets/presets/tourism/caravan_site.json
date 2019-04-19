@@ -11,7 +11,7 @@
     "moreFields" : [
         "operator",
         "fee",
-        "payment_multi",
+        "payment_multi_fee",
         "internet_access/fee",
         "internet_access/ssid",
         "smoking",
@@ -19,7 +19,8 @@
         "phone",
         "email",
         "fax",
-        "wheelchair"
+        "wheelchair",
+        "reservation"
     ],
     "geometry": [
         "point",

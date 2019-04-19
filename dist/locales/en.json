@@ -253,8 +253,17 @@
             "disconnect": {
                 "title": "Disconnect",
                 "description": "Disconnect these lines/areas from each other.",
+                "line": {
+                    "description": "Disconnect this line from other features."
+                },
+                "area": {
+                    "description": "Disconnect this area from other features."
+                },
                 "key": "D",
                 "annotation": "Disconnected lines/areas.",
+                "too_large": {
+                    "single": "This can't be disconnected because not enough of it is currently visible."
+                },
                 "not_connected": "There aren't enough lines/areas here to disconnect.",
                 "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
                 "relation": "This can't be disconnected because it connects members of a relation."
@@ -2785,6 +2794,9 @@
                 "embassy": {
                     "label": "Type"
                 },
+                "emergency_combo": {
+                    "label": "Type"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -2827,6 +2839,9 @@
                 },
                 "fireplace": {
                     "label": "Fireplace"
+                },
+                "fishing": {
+                    "label": "Fishing"
                 },
                 "fitness_station": {
                     "label": "Equipment Type"
@@ -2892,6 +2907,9 @@
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
+                },
+                "guest_house": {
+                    "label": "Type"
                 },
                 "handicap": {
                     "label": "Handicap",
@@ -3130,11 +3148,17 @@
                 "location": {
                     "label": "Location"
                 },
+                "lock": {
+                    "label": "Lock"
+                },
                 "man_made": {
                     "label": "Type"
                 },
                 "manhole": {
                     "label": "Type"
+                },
+                "manufacturer": {
+                    "label": "Manufacturer"
                 },
                 "map_size": {
                     "label": "Coverage"
@@ -3318,6 +3342,9 @@
                         "lane": "Roadside Lane"
                     }
                 },
+                "payment_multi_fee": {
+                    "label": "Payment Types"
+                },
                 "payment_multi": {
                     "label": "Payment Types"
                 },
@@ -3440,6 +3467,9 @@
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Type"
+                },
                 "playground/baby": {
                     "label": "Baby Seat"
                 },
@@ -3537,6 +3567,15 @@
                 },
                 "religion": {
                     "label": "Religion"
+                },
+                "reservation": {
+                    "label": "Reservations",
+                    "options": {
+                        "yes": "Accepted",
+                        "no": "Not Accepted",
+                        "required": "Required",
+                        "recommended": "Recommended"
+                    }
                 },
                 "resource": {
                     "label": "Resources"
@@ -3796,6 +3835,9 @@
                         "minor": "Minor Road"
                     }
                 },
+                "street_cabinet": {
+                    "label": "Type"
+                },
                 "structure_waterway": {
                     "label": "Structure",
                     "placeholder": "Unknown",
@@ -3886,10 +3928,16 @@
                     "label": "Disposal",
                     "options": {
                         "flush": "Flush",
-                        "pitlatrine": "Pit/Latrine",
+                        "pitlatrine": "Pit Latrine",
                         "chemical": "Chemical",
                         "bucket": "Bucket"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Handwashing"
+                },
+                "toilets/position": {
+                    "label": "Positions"
                 },
                 "toll": {
                     "label": "Toll"
@@ -3973,6 +4021,9 @@
                 },
                 "trees": {
                     "label": "Trees"
+                },
+                "trolley_wire": {
+                    "label": "Overhead Trolley Wires"
                 },
                 "tunnel": {
                     "label": "Type",
@@ -4117,6 +4168,10 @@
                     "name": "Embankment",
                     "terms": ""
                 },
+                "emergency": {
+                    "name": "Emergency Feature",
+                    "terms": ""
+                },
                 "highway": {
                     "name": "Highway",
                     "terms": ""
@@ -4143,6 +4198,10 @@
                 },
                 "place": {
                     "name": "Place",
+                    "terms": ""
+                },
+                "playground": {
+                    "name": "Playground Equipment",
                     "terms": ""
                 },
                 "power": {
@@ -4249,6 +4308,10 @@
                     "name": "Helipad",
                     "terms": "helicopter,helipad,heliport"
                 },
+                "aeroway/jet_bridge": {
+                    "name": "Jet Bridge",
+                    "terms": "aerobridge,air jetty,airbridge,finger,gangway,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector"
+                },
                 "aeroway/runway": {
                     "name": "Runway",
                     "terms": "landing strip"
@@ -4260,6 +4323,10 @@
                 "aeroway/terminal": {
                     "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
+                },
+                "aeroway/windsock": {
+                    "name": "Windsock",
+                    "terms": ""
                 },
                 "allotments/plot": {
                     "name": "Community Garden Plot",
@@ -4609,6 +4676,10 @@
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
+                "amenity/parking/underground": {
+                    "name": "Underground Parking",
+                    "terms": "automobile parking,car lot,car parking,rv parking,subsurface parking,truck parking,vehicle parking"
+                },
                 "amenity/payment_centre": {
                     "name": "Payment Center",
                     "terms": "check,tax pay,bill pay,currency,finance,cash,money"
@@ -4873,6 +4944,14 @@
                     "name": "Toilets",
                     "terms": "bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C."
                 },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Flush Toilets",
+                    "terms": "bathroom,head,lavatory,privy,restroom,water closet,WC,W.C."
+                },
+                "amenity/toilets/disposal/pitlatrine": {
+                    "name": "Pit Latrine",
+                    "terms": "head,lavatory,long drop,outhouse,pit toilet,privy"
+                },
                 "amenity/townhall": {
                     "name": "Town Hall",
                     "terms": "village,city,government,courthouse,municipal"
@@ -4895,7 +4974,7 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Newspaper Vending Machine",
-                    "terms": "newspaper"
+                    "terms": ""
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
@@ -5160,6 +5239,10 @@
                 "barrier/toll_booth": {
                     "name": "Toll Booth",
                     "terms": ""
+                },
+                "barrier/turnstile": {
+                    "name": "Turnstile",
+                    "terms": "baffle gate,turnstyle"
                 },
                 "barrier/wall": {
                     "name": "Wall",
@@ -6625,6 +6708,10 @@
                     "name": "Antenna",
                     "terms": "broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv"
                 },
+                "man_made/beehive": {
+                    "name": "Beehive",
+                    "terms": "apiary,beekeeper,farm,honey,pollination"
+                },
                 "man_made/breakwater": {
                     "name": "Breakwater",
                     "terms": ""
@@ -6737,6 +6824,10 @@
                     "name": "Storage Tank",
                     "terms": "water,oil,gas,petrol"
                 },
+                "man_made/street_cabinet": {
+                    "name": "Street Cabinet",
+                    "terms": "cable tv,monitoring box,technical box,telecommunications,traffic signal controls"
+                },
                 "man_made/surveillance": {
                     "name": "Surveillance",
                     "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
@@ -6821,6 +6912,10 @@
                     "name": "Beach",
                     "terms": "shore"
                 },
+                "natural/cape": {
+                    "name": "Cape",
+                    "terms": "bay,coastline,erosion,headland,promontory"
+                },
                 "natural/cave_entrance": {
                     "name": "Cave Entrance",
                     "terms": "cavern,hollow,grotto,shelter,cavity"
@@ -6881,6 +6976,10 @@
                     "name": "Scrub",
                     "terms": "bush,shrubs"
                 },
+                "natural/shingle": {
+                    "name": "Shingle",
+                    "terms": "beach,gravel,pebbles,riverbed,rounded rock fragments"
+                },
                 "natural/spring": {
                     "name": "Spring",
                     "terms": ""
@@ -6935,7 +7034,7 @@
                 },
                 "natural/wetland": {
                     "name": "Wetland",
-                    "terms": "bog,marsh,reedbed,swamp,tidalflat"
+                    "terms": "bog,fen,marsh,mire,moor,muskeg,peatland,quagmire,reedbed,saltmarsh,swamp,tidalflat,wet meadow"
                 },
                 "natural/wood": {
                     "name": "Wood",
@@ -7296,6 +7395,10 @@
                 "power/generator/method/photovoltaic": {
                     "name": "Solar Panel",
                     "terms": "photovoltaic module,PV module,sunlight"
+                },
+                "power/generator/source/hydro": {
+                    "name": "Water Turbine",
+                    "terms": "dam,generator,francis turbine,hydroelectricity,kaplan turbine,pelton turbine"
                 },
                 "power/generator/source/nuclear": {
                     "name": "Nuclear Reactor",
@@ -7901,6 +8004,10 @@
                     "name": "Furniture Store",
                     "terms": "chair,sofa,table"
                 },
+                "shop/games": {
+                    "name": "Tabletop Game Store",
+                    "terms": "board game,card game,dice game,game shop,live action role-playing game,miniatures wargame,strategy game"
+                },
                 "shop/garden_centre": {
                     "name": "Garden Center",
                     "terms": "landscape,mulch,shrub,tree"
@@ -7947,7 +8054,7 @@
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",
-                    "terms": "home,household"
+                    "terms": "home,household,kitchenware"
                 },
                 "shop/hunting": {
                     "name": "Hunting Shop",
@@ -7976,6 +8083,10 @@
                 "shop/leather": {
                     "name": "Leather Store",
                     "terms": ""
+                },
+                "shop/lighting": {
+                    "name": "Lighting Store",
+                    "terms": "fluorescent lighting,lamps,LEDs,light fixtures,lightbulbs"
                 },
                 "shop/locksmith": {
                     "name": "Locksmith",
@@ -8409,6 +8520,10 @@
                     "name": "Enforcement",
                     "terms": ""
                 },
+                "type/public_transport/stop_area_group": {
+                    "name": "Transit Stop Area Group",
+                    "terms": ""
+                },
                 "type/restriction": {
                     "name": "Restriction",
                     "terms": ""
@@ -8485,6 +8600,10 @@
                     "name": "Light Rail Route",
                     "terms": ""
                 },
+                "type/route/monorail": {
+                    "name": "Monorail Route",
+                    "terms": ""
+                },
                 "type/route/pipeline": {
                     "name": "Pipeline Route",
                     "terms": ""
@@ -8533,6 +8652,10 @@
                     "name": "Canal",
                     "terms": ""
                 },
+                "waterway/canal/lock": {
+                    "name": "Canal Lock",
+                    "terms": ""
+                },
                 "waterway/dam": {
                     "name": "Dam",
                     "terms": ""
@@ -8552,6 +8675,10 @@
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
+                },
+                "waterway/lock_gate": {
+                    "name": "Lock Gate",
+                    "terms": "canal"
                 },
                 "waterway/milestone": {
                     "name": "Waterway Milestone",

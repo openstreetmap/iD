@@ -20,7 +20,8 @@
         "maxheight",
         "maxspeed/advisory",
         "maxweight_bridge",
-        "smoothness"
+        "smoothness",
+        "trolley_wire"
     ],
     "geometry": [
         "line"

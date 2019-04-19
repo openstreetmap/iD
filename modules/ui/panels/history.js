@@ -180,6 +180,28 @@ export function uiPanelHistory(context) {
             return;
         }
 
+        var links = selection
+            .append('div')
+            .attr('class', 'links');
+
+        if (osm) {
+            links
+                .append('a')
+                .attr('class', 'view-history-on-osm')
+                .attr('href', osm.historyURL(entity))
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('title', t('info_panels.history.link_text'))
+                .text('OSM');
+        }
+        links
+            .append('a')
+            .attr('class', 'pewu-history-viewer-link')
+            .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .text('PeWu');
+
         var list = selection
             .append('ul');
 
@@ -204,18 +226,6 @@ export function uiPanelHistory(context) {
             .append('li')
             .text(t('info_panels.history.changeset') + ':')
             .call(displayChangeset, entity.changeset);
-
-        if (osm) {
-            selection
-                .append('a')
-                .attr('class', 'view-history-on-osm')
-                .attr('target', '_blank')
-                .attr('tabindex', -1)
-                .attr('href', osm.historyURL(entity))
-                .call(svgIcon('#iD-icon-out-link', 'inline'))
-                .append('span')
-                .text(t('info_panels.history.link_text'));
-        }
     }
 
 

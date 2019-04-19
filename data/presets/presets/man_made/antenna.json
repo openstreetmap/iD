@@ -1,8 +1,10 @@
 {
     "icon": "temaki-antenna",
     "fields": [
-        "height",
-        "communication_multi"
+        "communication_multi",
+        "operator",
+        "manufacturer",
+        "height"
     ],
     "geometry": [
         "point"

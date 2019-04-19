@@ -5,6 +5,9 @@
         "generator/output/electricity",
         "ref"
     ],
+    "moreFields": [
+        "manufacturer"
+    ],
     "geometry": [
         "point",
         "vertex",

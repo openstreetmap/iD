@@ -14,5 +14,6 @@
     "tags": {
         "tourism": "attraction"
     },
+    "matchScore": 0.75,
     "name": "Tourist Attraction"
 }

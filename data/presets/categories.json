@@ -207,8 +207,7 @@
         "natural/water/pond",
         "natural/water/basin",
         "natural/water/lake",
-        "natural/water/reservoir",
-        "natural/bay"
+        "natural/water/reservoir"
       ]
     },
     "category-waterway": {

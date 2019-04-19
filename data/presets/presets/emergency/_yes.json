@@ -1,5 +1,6 @@
 {
     "fields": [
+        "emergency_combo"
     ],
     "geometry": [
         "line"

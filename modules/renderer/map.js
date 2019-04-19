@@ -8,7 +8,7 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
+import { modeBrowse } from '../modes';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
 import { uiFlash } from '../ui';
 import { utilFastMouse, utilFunctor, utilRebind, utilSetTransform } from '../util';
@@ -95,18 +95,10 @@ export function rendererMap(context) {
             osm.on('change.map', immediateRedraw);
         }
 
-        function didUndoOrRedo(stack, targetTransform) {
+        function didUndoOrRedo(targetTransform) {
             var mode = context.mode().id;
             if (mode !== 'browse' && mode !== 'select') return;
-
-            var followSelected = false;
-            if (Array.isArray(stack.selectedIDs)) {
-                followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
-                context.enter(
-                    modeSelect(context, stack.selectedIDs).follow(followSelected)
-                );
-            }
-            if (!followSelected && targetTransform) {
+            if (targetTransform) {
                 map.transformEase(targetTransform);
             }
         }
@@ -115,10 +107,10 @@ export function rendererMap(context) {
             .on('merge.map', function() { scheduleRedraw(); })
             .on('change.map', immediateRedraw)
             .on('undone.map', function(stack, fromStack) {
-                didUndoOrRedo(stack, fromStack.transform);
+                didUndoOrRedo(fromStack.transform);
             })
             .on('redone.map', function(stack) {
-                didUndoOrRedo(stack, stack.transform);
+                didUndoOrRedo(stack.transform);
             });
 
         context.background()

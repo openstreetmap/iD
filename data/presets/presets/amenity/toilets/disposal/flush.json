@@ -1,0 +1,34 @@
+{
+    "icon": "fas-toilet",
+    "fields": [
+        "toilets/disposal",
+        "{amenity/toilets}"
+    ],
+    "moreFields": [
+        "{amenity/toilets}"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "bathroom",
+        "head",
+        "lavatory",
+        "privy",
+        "restroom",
+        "water closet",
+        "WC",
+        "W.C."
+    ],
+    "tags": {
+        "amenity": "toilets",
+        "toilets:disposal": "flush"
+    },
+    "reference": {
+        "key": "toilets:disposal",
+        "value": "flush"
+    },
+    "name": "Flush Toilets"
+}

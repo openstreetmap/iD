@@ -6,10 +6,10 @@
         "address",
         "opening_hours",
         "access_simple",
-        "fee"
+        "fee",
+        "payment_multi_fee"
     ],
     "moreFields": [
-        "payment_multi",
         "website",
         "phone",
         "email",
