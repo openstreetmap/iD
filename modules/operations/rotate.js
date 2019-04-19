@@ -21,7 +21,7 @@ export function operationRotate(selectedIDs, context) {
 
 
     operation.available = function() {
-        return nodes.size >= 2;
+        return nodes.length >= 2;
     };
 
 
