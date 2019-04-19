@@ -236,7 +236,7 @@
     "oneway": {"key": "oneway", "type": "onewayCheck", "label": "One Way", "strings": {"options": {"undefined": "Assumed to be No", "yes": "Yes", "no": "No", "reversible": "Reversible", "alternating": "Alternating"}}},
     "oneway/bicycle": {"key": "oneway:bicycle", "type": "check", "label": "One Way (Bicycles)", "prerequisiteTag": {"key": "oneway"}},
     "opening_date": {"key": "opening_date", "type": "text", "label": "Expected Opening Date"},
-    "opening_hours": {"key": "opening_hours", "type": "combo", "label": "Hours", "snake_case": false},
+    "opening_hours": {"key": "opening_hours", "type": "combo", "label": "Hours", "placeholder": "Unknown", "snake_case": false},
     "operator": {"key": "operator", "type": "text", "label": "Operator"},
     "outdoor_seating": {"key": "outdoor_seating", "type": "check", "label": "Outdoor Seating"},
     "par": {"key": "par", "type": "number", "minValue": 1, "label": "Par", "placeholder": "3, 4, 5..."},

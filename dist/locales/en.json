@@ -3277,7 +3277,8 @@
                     "label": "Expected Opening Date"
                 },
                 "opening_hours": {
-                    "label": "Hours"
+                    "label": "Hours",
+                    "placeholder": "Unknown"
                 },
                 "operator": {
                     "label": "Operator"

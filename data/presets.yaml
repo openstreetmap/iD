@@ -1255,6 +1255,8 @@ en:
       opening_hours:
         # opening_hours=*
         label: Hours
+        # opening_hours field placeholder
+        placeholder: Unknown
       operator:
         # operator=*
         label: Operator
