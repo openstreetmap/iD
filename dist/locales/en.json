@@ -2860,6 +2860,9 @@
                 "grape_variety": {
                     "label": "Grape Varieties"
                 },
+                "guest_house": {
+                    "label": "Type"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"

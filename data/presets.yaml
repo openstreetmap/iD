@@ -767,6 +767,9 @@ en:
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
+      guest_house:
+        # guest_house=*
+        label: Type
       handicap:
         # handicap=*
         label: Handicap

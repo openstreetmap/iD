@@ -147,6 +147,7 @@
     "generator/type": {"key": "generator:type", "type": "combo", "label": "Type"},
     "government": {"key": "government", "type": "typeCombo", "label": "Type"},
     "grape_variety": {"key": "grape_variety", "type": "semiCombo", "label": "Grape Varieties"},
+    "guest_house": {"key": "guest_house", "type": "combo", "label": "Type"},
     "handicap": {"key": "handicap", "type": "number", "label": "Handicap", "placeholder": "1-18"},
     "handrail": {"key": "handrail", "type": "check", "label": "Handrail"},
     "hashtags": {"key": "hashtags", "type": "semiCombo", "label": "Suggested Hashtags", "placeholder": "#example"},

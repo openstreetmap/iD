@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "guest_house",
         "address",
         "building_area",
         "rooms",

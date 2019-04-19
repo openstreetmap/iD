@@ -661,7 +661,7 @@
     },
     {
       "old": {"tourism": "bed_and_breakfast"},
-      "replace": {"tourism": "guest_house"}
+      "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
     },
     {
       "old": {"type": "broad_leaved"},
