@@ -88,7 +88,7 @@ export function validationOutdatedTags() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.outdated_tags.tip'));
+                .text(t('issues.outdated_tags.reference'));
 
             enter
                 .append('strong')

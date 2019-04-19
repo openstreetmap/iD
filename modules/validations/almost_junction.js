@@ -111,7 +111,7 @@ export function validationAlmostJunction() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.almost_junction.highway-highway.tip'));
+                .text(t('issues.almost_junction.highway-highway.reference'));
         }
 
 

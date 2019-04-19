@@ -89,7 +89,7 @@ export function validationDisconnectedWay() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.disconnected_way.highway.tip'));
+                .text(t('issues.disconnected_way.highway.reference'));
         }
 
 

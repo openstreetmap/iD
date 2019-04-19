@@ -54,7 +54,7 @@ export function validationUnknownRoad() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.unknown_road.tip'));
+                .text(t('issues.unknown_road.reference'));
         }
     };
 

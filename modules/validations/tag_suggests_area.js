@@ -107,7 +107,7 @@ export function validationTagSuggestsArea() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.tag_suggests_area.tip'));
+                .text(t('issues.tag_suggests_area.reference'));
         }
     };
 

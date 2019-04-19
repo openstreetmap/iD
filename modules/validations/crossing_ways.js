@@ -517,7 +517,7 @@ export function validationCrossingWays() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.crossing_ways.' + crossingTypeID + '.tip'));
+                .text(t('issues.crossing_ways.' + crossingTypeID + '.reference'));
         }
     }
 

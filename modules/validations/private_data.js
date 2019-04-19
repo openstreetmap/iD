@@ -96,7 +96,7 @@ export function validationPrivateData() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.private_data.tip'));
+                .text(t('issues.private_data.reference'));
 
             enter
                 .append('strong')

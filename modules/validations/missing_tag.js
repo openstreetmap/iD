@@ -102,7 +102,7 @@ export function validationMissingTag() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.missing_tag.tip'));
+                .text(t('issues.missing_tag.reference'));
         }
     };
 

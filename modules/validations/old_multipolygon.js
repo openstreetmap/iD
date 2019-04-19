@@ -57,7 +57,7 @@ export function validationOldMultipolygon() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.old_multipolygon.tip'));
+                .text(t('issues.old_multipolygon.reference'));
         }
     };
 

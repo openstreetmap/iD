@@ -84,7 +84,7 @@ export function validationGenericName() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.generic_name.tip'));
+                .text(t('issues.generic_name.reference'));
         }
     };
 

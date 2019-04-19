@@ -305,15 +305,18 @@ export function uiIssues(context) {
         updateRulesList();
     }
 
+
     function updateRulesList() {
         var ruleKeys = context.validator().getRuleKeys();
         _rulesList
             .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
     }
 
+
     function isRuleEnabled(d) {
         return context.validator().isRuleEnabled(d);
     }
+
 
     function toggleRule(d) {
         context.validator().toggleRule(d);
@@ -397,6 +400,14 @@ export function uiIssues(context) {
         // Enter
         var enter = items.enter()
             .append('li');
+
+        if (name === 'rule') {
+            enter
+                .call(tooltip()
+                    .title(function(d) { return t('issues.' + d + '.tip'); })
+                    .placement('top')
+                );
+        }
 
         var label = enter
             .append('label');
