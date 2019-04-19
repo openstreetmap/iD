@@ -217,21 +217,19 @@ export function coreValidator(context) {
 
     //
     // Run validation for several entities, supplied `entityIDs`
-    // It uses the "validatedGraph", so this can be called asynchronously
-    // as entities are loaded from OSM if we want to.
     //
     validator.validateEntities = function(entityIDs) {
-        _validatedGraph = _validatedGraph || context.history().base();
+        var graph = context.graph();
 
         var entitiesToCheck = entityIDs.reduce(function(acc, entityID) {
-            var entity = _validatedGraph.entity(entityID);
+            var entity = graph.entity(entityID);
             if (acc.has(entity)) return acc;
 
             acc.add(entity);
             var checkParentRels = [entity];
 
             if (entity.type === 'node') {   // include parent ways
-                _validatedGraph.parentWays(entity).forEach(function(parentWay) {
+                graph.parentWays(entity).forEach(function(parentWay) {
                     checkParentRels.push(parentWay);
                     acc.add(parentWay);
                 });
@@ -239,7 +237,7 @@ export function coreValidator(context) {
 
             checkParentRels.forEach(function(entity) {   // include parent relations
                 if (entity.type !== 'relation') {        // but not super-relations
-                    _validatedGraph.parentRelations(entity).forEach(function(parentRel) {
+                    graph.parentRelations(entity).forEach(function(parentRel) {
                         acc.add(parentRel);
                     });
                 }
