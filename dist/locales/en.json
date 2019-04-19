@@ -246,8 +246,17 @@
             "disconnect": {
                 "title": "Disconnect",
                 "description": "Disconnect these lines/areas from each other.",
+                "line": {
+                    "description": "Disconnect this line from other features."
+                },
+                "area": {
+                    "description": "Disconnect this area from other features."
+                },
                 "key": "D",
                 "annotation": "Disconnected lines/areas.",
+                "too_large": {
+                    "single": "This can't be disconnected because not enough of it is currently visible."
+                },
                 "not_connected": "There aren't enough lines/areas here to disconnect.",
                 "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
                 "relation": "This can't be disconnected because it connects members of a relation."

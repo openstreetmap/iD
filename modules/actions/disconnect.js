@@ -82,9 +82,6 @@ export function actionDisconnect(nodeId, newNodeId) {
         var sharedRelation;
 
         parentWays.forEach(function(way) {
-            if (wayIds && wayIds.indexOf(way.id) === -1)
-                return;
-
             var relations = graph.parentRelations(way);
             relations.forEach(function(relation) {
                 if (relation.id in seenRelationIds) {
