@@ -104,6 +104,7 @@ export function uiToolSave(context) {
 
 
         context.history()
+            .on('restore.save', updateCount)
             .on('change.save', function(difference) {
                 if (difference) updateCount();
             });
