@@ -85,9 +85,16 @@ export function actionDisconnect(nodeId, newNodeId) {
             var relations = graph.parentRelations(way);
             relations.forEach(function(relation) {
                 if (relation.id in seenRelationIds) {
-                    sharedRelation = relation;
+                    if (wayIds) {
+                        if (wayIds.indexOf(way.id) !== -1 ||
+                            wayIds.indexOf(seenRelationIds[relation.id]) !== -1) {
+                            sharedRelation = relation;
+                        }
+                    } else {
+                        sharedRelation = relation;
+                    }
                 } else {
-                    seenRelationIds[relation.id] = true;
+                    seenRelationIds[relation.id] = way.id;
                 }
             });
         });
