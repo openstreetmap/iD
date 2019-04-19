@@ -13,8 +13,6 @@ export function coreValidator(context) {
 
     var _rules = {};
     var _disabledRules = {};
-    var _entityRules = [];
-//    var _changesRules = [];        // skip for now
 
     var _issuesByIssueID = {};       // issue.id -> issue
     var _issuesByEntityID = {};      // entity.id -> set(issue.id)
@@ -31,12 +29,6 @@ export function coreValidator(context) {
             var fn = validation();
             var key = fn.type;
             _rules[key] = fn;
-
-            if (fn.inputType === 'changes') {   // 'many_deletions' is the only one like this
-//                _changesRules.push(key);      // skip for now
-            } else {
-                _entityRules.push(key);
-            }
         });
 
         var disabledRules = context.storage('validate-disabledRules');
@@ -209,7 +201,7 @@ export function coreValidator(context) {
         }
 
         // run all rules not yet run
-        _entityRules.forEach(runValidation);
+        Object.keys(_rules).forEach(runValidation);
 
         return entityIssues;
     }

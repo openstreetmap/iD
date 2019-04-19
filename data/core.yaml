@@ -1335,13 +1335,6 @@ en:
         feature:
           message: '{feature} lists Google as a data source'
         reference: "Google products are proprietary and must not be used as references."
-    many_deletions:
-      title: Many Deletions
-      points-lines-areas:
-        message: "Deleting {n} features: {p} points, {l} lines, and {a} areas"
-      points-lines-areas-relations:
-        message: "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations"
-      tip: "Only redundant or nonexistent features should be deleted."
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
