@@ -104,9 +104,9 @@ export function actionDisconnect(nodeId, newNodeId) {
     };
 
 
-    action.limitWays = function(_) {
+    action.limitWays = function(val) {
         if (!arguments.length) return wayIds;
-        wayIds = _;
+        wayIds = val;
         return action;
     };
 

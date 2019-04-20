@@ -265,6 +265,7 @@
                     "single": "This can't be disconnected because not enough of it is currently visible."
                 },
                 "not_connected": "There aren't enough lines/areas here to disconnect.",
+                "not_downloaded": "This can't be disconnected because parts of it have not yet been downloaded.",
                 "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
                 "relation": "This can't be disconnected because it connects members of a relation."
             },
