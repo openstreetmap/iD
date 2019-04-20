@@ -9,7 +9,6 @@ import { actionNoop } from '../actions';
 import { geoSphericalDistance } from '../geo';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
-import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle, utilHighlightEntities } from '../util';
@@ -25,7 +24,6 @@ export function uiIssues(context) {
 
     var _errors = [];
     var _warnings = [];
-    var _shown = false;
     var _options = {
         what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
         where: context.storage('validate-where') || 'visible'  // 'all', 'visible'
