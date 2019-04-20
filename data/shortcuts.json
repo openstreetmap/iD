@@ -75,6 +75,11 @@
               "text": "shortcuts.browsing.display_options.wireframe"
             },
             {
+              "modifiers": ["⌥"],
+              "shortcuts": ["area_fill.wireframe.key"],
+              "text": "shortcuts.browsing.display_options.osm_data"
+            },
+            {
               "shortcuts": ["background.minimap.key"],
               "text": "shortcuts.browsing.display_options.minimap"
             }

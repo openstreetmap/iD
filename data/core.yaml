@@ -1729,6 +1729,7 @@ en:
         fullscreen: "Enter full screen mode"
         sidebar: "Toggle sidebar"
         wireframe: "Toggle wireframe mode"
+        osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
       selecting:
         title: "Selecting features"
