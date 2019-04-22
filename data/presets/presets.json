@@ -927,6 +927,7 @@
     "shop/bed": {"icon": "maki-lodging", "geometry": ["point", "area"], "tags": {"shop": "bed"}, "name": "Bedding/Mattress Store"},
     "shop/beverages": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "beverages"}, "terms": ["drinks"], "name": "Beverage Store"},
     "shop/bicycle": {"icon": "maki-bicycle", "fields": ["{shop}", "service/bicycle"], "geometry": ["point", "area"], "terms": ["bike", "repair", "tricycle", "unicycle"], "tags": {"shop": "bicycle"}, "name": "Bicycle Shop"},
+    "shop/boat": {"icon": "temaki-boating", "geometry": ["point", "area"], "terms": ["fishing boat", "jetski", "motorboat", "rowboat", "sailboat", "vessel", "watercraft"], "tags": {"shop": "boat"}, "name": "Boat Store"},
     "shop/bookmaker": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["betting", "bookie"], "tags": {"shop": "bookmaker"}, "name": "Bookmaker"},
     "shop/books": {"icon": "fas-book", "fields": ["{shop}", "internet_access"], "moreFields": ["{shop}", "internet_access/fee", "internet_access/ssid"], "geometry": ["point", "area"], "tags": {"shop": "books"}, "name": "Book Store"},
     "shop/butcher": {"icon": "fas-bacon", "geometry": ["point", "area"], "terms": ["chicken", "beef", "lamb", "meat", "pork"], "tags": {"shop": "butcher"}, "name": "Butcher"},

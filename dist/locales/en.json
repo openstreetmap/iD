@@ -7811,6 +7811,10 @@
                     "name": "Bicycle Shop",
                     "terms": "bike,repair,tricycle,unicycle"
                 },
+                "shop/boat": {
+                    "name": "Boat Store",
+                    "terms": "fishing boat,jetski,motorboat,rowboat,sailboat,vessel,watercraft"
+                },
                 "shop/bookmaker": {
                     "name": "Bookmaker",
                     "terms": "betting,bookie"

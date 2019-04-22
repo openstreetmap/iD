@@ -867,6 +867,7 @@
     {"key": "shop", "value": "bed", "description": "🄿 Bedding/Mattress Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/lodging-15.svg?sanitize=true"},
     {"key": "shop", "value": "beverages", "description": "🄿 Beverage Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "bicycle", "description": "🄿 Bicycle Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bicycle-15.svg?sanitize=true"},
+    {"key": "shop", "value": "boat", "description": "🄿 Boat Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/boating.svg?sanitize=true"},
     {"key": "shop", "value": "bookmaker", "description": "🄿 Bookmaker", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "books", "description": "🄿 Book Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-book.svg?sanitize=true"},
     {"key": "shop", "value": "butcher", "description": "🄿 Butcher", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-bacon.svg?sanitize=true"},

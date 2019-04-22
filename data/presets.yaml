@@ -6439,6 +6439,11 @@ en:
         name: Bicycle Shop
         # 'terms: bike,repair,tricycle,unicycle'
         terms: '<translate with synonyms or related terms for ''Bicycle Shop'', separated by commas>'
+      shop/boat:
+        # shop=boat
+        name: Boat Store
+        # 'terms: fishing boat,jetski,motorboat,rowboat,sailboat,vessel,watercraft'
+        terms: '<translate with synonyms or related terms for ''Boat Store'', separated by commas>'
       shop/bookmaker:
         # shop=bookmaker
         name: Bookmaker
