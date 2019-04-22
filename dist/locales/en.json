@@ -6835,6 +6835,10 @@
                     "name": "Observation Tower",
                     "terms": "lookout tower,fire tower"
                 },
+                "man_made/tunnel": {
+                    "name": "Tunnel",
+                    "terms": "bore,dig,shaft,underground passage,underpass"
+                },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"
