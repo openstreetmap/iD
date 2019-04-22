@@ -6611,6 +6611,10 @@
                     "name": "Sauna",
                     "terms": ""
                 },
+                "leisure/slipway_point": {
+                    "name": "Slipway",
+                    "terms": "boat launch,boat ramp,boat landing"
+                },
                 "leisure/slipway": {
                     "name": "Slipway",
                     "terms": "boat launch,boat ramp,boat landing"

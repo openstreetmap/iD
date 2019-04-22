@@ -5069,6 +5069,11 @@ en:
         name: Slipway
         # 'terms: boat launch,boat ramp,boat landing'
         terms: '<translate with synonyms or related terms for ''Slipway'', separated by commas>'
+      leisure/slipway_point:
+        # leisure=slipway
+        name: Slipway
+        # 'terms: boat launch,boat ramp,boat landing'
+        terms: '<translate with synonyms or related terms for ''Slipway'', separated by commas>'
       leisure/sports_centre:
         # leisure=sports_centre
         name: Sports Center / Complex
