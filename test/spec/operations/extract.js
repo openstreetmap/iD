@@ -1,4 +1,4 @@
-describe('iD.operationDetachNode', function () {
+describe('iD.operationExtract', function () {
     var fakeContext;
     var graph;
 
@@ -6,6 +6,7 @@ describe('iD.operationDetachNode', function () {
     fakeContext = {};
     fakeContext.graph = function () { return graph; };
     fakeContext.hasHiddenConnections = function () { return false; };
+    fakeContext.geometry = function () { return 'vertex'; };
 
     var fakeTags = { 'name': 'fake' };
 
@@ -37,52 +38,52 @@ describe('iD.operationDetachNode', function () {
         });
 
         it('is not available for no selected ids', function () {
-            var result = iD.operationDetachNode([], fakeContext).available();
+            var result = iD.operationExtract([], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for two selected ids', function () {
-            var result = iD.operationDetachNode(['a', 'b'], fakeContext).available();
+            var result = iD.operationExtract(['a', 'b'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for unknown selected id', function () {
-            var result = iD.operationDetachNode(['z'], fakeContext).available();
+            var result = iD.operationExtract(['z'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected way', function () {
-            var result = iD.operationDetachNode(['x'], fakeContext).available();
+            var result = iD.operationExtract(['x'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with tags, no parent way', function () {
-            var result = iD.operationDetachNode(['e'], fakeContext).available();
+            var result = iD.operationExtract(['e'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, no parent way', function () {
-            var result = iD.operationDetachNode(['f'], fakeContext).available();
+            var result = iD.operationExtract(['f'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, parent way', function () {
-            var result = iD.operationDetachNode(['c'], fakeContext).available();
+            var result = iD.operationExtract(['c'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, two parent ways', function () {
-            var result = iD.operationDetachNode(['d'], fakeContext).available();
+            var result = iD.operationExtract(['d'], fakeContext).available();
             expect(result).to.be.not.ok;
         });
 
         it('is available for selected node with tags, parent way', function () {
-            var result = iD.operationDetachNode(['a'], fakeContext).available();
+            var result = iD.operationExtract(['a'], fakeContext).available();
             expect(result).to.be.ok;
         });
 
         it('is available for selected node with tags, two parent ways', function () {
-            var result = iD.operationDetachNode(['b'], fakeContext).available();
+            var result = iD.operationExtract(['b'], fakeContext).available();
             expect(result).to.be.ok;
         });
     });
@@ -96,7 +97,7 @@ describe('iD.operationDetachNode', function () {
                 iD.osmNode(createFakeNode('c', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] })
             ]);
-            var result = iD.operationDetachNode(['b'], fakeContext).disabled();
+            var result = iD.operationExtract(['b'], fakeContext).disabled();
             expect(result).to.be.not.ok;
         });
 
@@ -108,7 +109,7 @@ describe('iD.operationDetachNode', function () {
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] }),
                 iD.osmRelation({ id: 'r', members: [{ id: 'b', role: 'label' }] })
             ]);
-            var result = iD.operationDetachNode(['b'], fakeContext).disabled();
+            var result = iD.operationExtract(['b'], fakeContext).disabled();
             expect(result).to.be.not.ok;
         });
 
@@ -133,7 +134,7 @@ describe('iD.operationDetachNode', function () {
                     ]
                 })
             ]);
-            var result = iD.operationDetachNode(['d'], fakeContext).disabled();
+            var result = iD.operationExtract(['d'], fakeContext).disabled();
             expect(result).to.eql('restriction');
         });
 
@@ -159,7 +160,7 @@ describe('iD.operationDetachNode', function () {
                     ]
                 })
             ]);
-            var result = iD.operationDetachNode(['d'], fakeContext).disabled();
+            var result = iD.operationExtract(['d'], fakeContext).disabled();
             expect(result).to.eql('restriction');
         });
     });

@@ -237,8 +237,8 @@
               "text": "shortcuts.editing.operations.disconnect"
             },
             {
-              "shortcuts": ["operations.detach_node.key"],
-              "text": "shortcuts.editing.operations.detach_node"
+              "shortcuts": ["operations.extract.key"],
+              "text": "shortcuts.editing.operations.extract"
             },
             {
               "shortcuts": ["operations.split.key"],

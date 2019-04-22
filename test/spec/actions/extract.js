@@ -1,4 +1,4 @@
-describe('iD.actionDetachNode', function () {
+describe('iD.actionExtract', function () {
     var tags = { 'name': 'test' };
 
     function createTargetNode(id, lonlat) {
@@ -29,7 +29,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way still has 4 nodes
                 var target = assertionGraph.entity('-');
@@ -38,7 +38,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way is ordered correctly
                 var target = assertionGraph.entity('-');
@@ -53,7 +53,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
                 var nodes = assertionGraph.entity('-').nodes;
@@ -65,7 +65,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
@@ -76,7 +76,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
@@ -99,7 +99,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way still has 4 nodes
                 var target = assertionGraph.entity('-');
@@ -108,7 +108,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way is ordered correctly
                 var target = assertionGraph.entity('-');
@@ -123,7 +123,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
                 var nodes = assertionGraph.entity('-').nodes;
@@ -135,7 +135,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
@@ -146,7 +146,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
@@ -188,7 +188,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way still has 5 nodes
                 var target = assertionGraph.entity('-');
@@ -197,7 +197,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way is ordered correctly
                 var target = assertionGraph.entity('-');
@@ -214,7 +214,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
                 var nodes = assertionGraph.entity('-').nodes;
@@ -227,7 +227,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
@@ -240,7 +240,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('a')(graph);
+                var assertionGraph = iD.actionExtract('a')(graph);
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
@@ -263,7 +263,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way still has 5 nodes
                 var target = assertionGraph.entity('-');
@@ -272,7 +272,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way is ordered correctly
                 var target = assertionGraph.entity('-');
@@ -288,7 +288,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
                 var nodes = assertionGraph.entity('-').nodes;
@@ -301,7 +301,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
@@ -312,7 +312,7 @@ describe('iD.actionDetachNode', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionDetachNode('b')(graph);
+                var assertionGraph = iD.actionExtract('b')(graph);
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
@@ -354,7 +354,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change length of ways', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way still has 4 nodes
             var target = assertionGraph.entity('-');
@@ -366,7 +366,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change order of nodes', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way is ordered correctly
             var target = assertionGraph.entity('-');
@@ -385,7 +385,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change location of nodes', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the nodes have not moved, including the replacement node
             var nodes = assertionGraph.entity('-').nodes;
@@ -402,14 +402,14 @@ describe('iD.actionDetachNode', function () {
 
         it('uses same replacement node at intersection', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
             expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
         });
 
         it('does replace target node', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             var nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
@@ -422,7 +422,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does detach target node', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
@@ -464,7 +464,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change length of ways', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way still has 5 nodes
             var target = assertionGraph.entity('-');
@@ -476,7 +476,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change order of nodes', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way is ordered correctly
             var target = assertionGraph.entity('-');
@@ -499,7 +499,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does not change location of nodes', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the nodes have not moved, including the replacement node
             var nodes = assertionGraph.entity('-').nodes;
@@ -518,14 +518,14 @@ describe('iD.actionDetachNode', function () {
 
         it('uses same replacement node at intersection', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
             expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
         });
 
         it('does replace target node', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             var nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
@@ -539,7 +539,7 @@ describe('iD.actionDetachNode', function () {
 
         it('does detach target node', function () {
             // Act
-            var assertionGraph = iD.actionDetachNode('c')(graph);
+            var assertionGraph = iD.actionExtract('c')(graph);
 
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
@@ -580,7 +580,7 @@ describe('iD.actionDetachNode', function () {
         });
 
         it('detached node not a member of relation', function () {
-            var assertionGraph = iD.actionDetachNode('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph);
 
             var targetNode = assertionGraph.entity('b');
             // Confirm is not a member of the relation
@@ -588,7 +588,7 @@ describe('iD.actionDetachNode', function () {
         });
 
         it('new node is a member of relation', function () {
-            var assertionGraph = iD.actionDetachNode('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph);
 
             // Find the new node
             var targetWay = assertionGraph.entity('-');
@@ -603,7 +603,7 @@ describe('iD.actionDetachNode', function () {
         });
 
         it('Relation membership has the same properties', function () {
-            var assertionGraph = iD.actionDetachNode('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph);
 
             // Find the new node
             var targetWay = assertionGraph.entity('-');
