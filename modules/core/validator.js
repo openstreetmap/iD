@@ -69,8 +69,19 @@ export function coreValidator(context) {
         return issues.filter(function(issue) {
             if (_disabledRules[issue.type]) return false;
 
+            // Sanity check:  This issue may be for an entity that not longer exists.
+            // If we detect this, uncache and return false so it is not incluced..
+            var entities = issue.entities || [];
+            for (var i = 0; i < entities.length; i++) {
+                var entity = entities[i];
+                if (!context.hasEntity(entity.id)) {
+                    delete _issuesByEntityID[entity.id];
+                    delete _issuesByIssueID[issue.id];
+                    return false;
+                }
+            }
+
             if (opts.what === 'edited') {
-                var entities = issue.entities || [];
                 var isEdited = entities.some(function(entity) { return changes[entity.id]; });
                 if (entities.length && !isEdited) return false;
             }
@@ -129,21 +140,30 @@ export function coreValidator(context) {
     //
     // Remove a single entity and all its related issues from the caches
     //
-    function uncacheEntity(entity) {
-        var issueIDs = _issuesByEntityID[entity.id];
+    function uncacheEntityID(entityID) {
+        var issueIDs = _issuesByEntityID[entityID];
         if (!issueIDs) return;
 
         issueIDs.forEach(function(issueID) {
             var issue = _issuesByIssueID[issueID];
-            var entities = issue.entities || [];
-            entities.forEach(function(other) {   // other entities will need to be revalidated
-                if (other.id !== entity.id) {
-                    delete _issuesByEntityID[other.id];
-                }
-            });
-            delete _issuesByIssueID[issue.id];
+            if (issue) {
+                // When multiple entities are involved (e.g. crossing_ways),
+                // remove this issue from the other entity caches too..
+                var entities = issue.entities || [];
+                entities.forEach(function(other) {
+                    if (other.id !== entityID) {
+                        var otherIssueIDs = _issuesByEntityID[other.id];
+                        if (otherIssueIDs) {
+                            otherIssueIDs.delete(issueID);
+                        }
+                    }
+                });
+            }
+
+            delete _issuesByIssueID[issueID];
         });
-        delete _issuesByEntityID[entity.id];
+
+        delete _issuesByEntityID[entityID];
     }
 
 
@@ -213,24 +233,24 @@ export function coreValidator(context) {
     validator.validateEntities = function(entityIDs) {
         var graph = context.graph();
 
-        var entitiesToCheck = entityIDs.reduce(function(acc, entityID) {
-            var entity = graph.entity(entityID);
-            if (acc.has(entity)) return acc;
+        var entityIDsToCheck = entityIDs.reduce(function(acc, entityID) {
+            if (acc.has(entityID)) return acc;
+            acc.add(entityID);
 
-            acc.add(entity);
+            var entity = graph.entity(entityID);
             var checkParentRels = [entity];
 
             if (entity.type === 'node') {   // include parent ways
                 graph.parentWays(entity).forEach(function(parentWay) {
                     checkParentRels.push(parentWay);
-                    acc.add(parentWay);
+                    acc.add(parentWay.id);
                 });
             }
 
             checkParentRels.forEach(function(entity) {   // include parent relations
                 if (entity.type !== 'relation') {        // but not super-relations
-                    graph.parentRelations(entity).forEach(function(parentRel) {
-                        acc.add(parentRel);
+                    graph.parentRelations(entity).forEach(function(parentRelation) {
+                        acc.add(parentRelation.id);
                     });
                 }
             });
@@ -240,10 +260,11 @@ export function coreValidator(context) {
         }, new Set());
 
         // clear caches for existing issues related to changed entities
-        entitiesToCheck.forEach(uncacheEntity);
+        entityIDsToCheck.forEach(uncacheEntityID);
 
         // detect new issues and update caches
-        entitiesToCheck.forEach(function(entity) {
+        entityIDsToCheck.forEach(function(entityID) {
+            var entity = graph.entity(entityID);
             var issues = validateEntity(entity);
 
             issues.forEach(function(issue) {
@@ -285,39 +306,31 @@ export function coreValidator(context) {
         }
 
         var entityIDs = difference.extantIDs();  // created and modified
-        difference.deleted().forEach(uncacheEntity);   // deleted
+        difference.deleted().forEach(uncacheEntityID);   // deleted
 
         validator.validateEntities(entityIDs);   // dispatches 'validated'
     };
 
 
-
-    // run validation upon restoring user's changes
-    context.history().on('restore.validator', function() {
-        validator.validate();
-    });
-
-    // re-run validation upon merging fetched data
-    context.history().on('merge.validator', function(entities) {
-        utilCallWhenIdle(function() {
-            if (!entities) return;
-            var ids = entities.map(function(entity) { return entity.id; });
-            validator.validateEntities(ids);
-        })();
-    });
-
-    // // re-run validation on history change (frequent)
-    // context.history().on('change.validator', function(difference) {
-    //     if (!difference) return;
-    //     validator.validate();
-    // });
+    // WHEN TO RUN VALIDATION:
+    // When graph changes:
     context.history()
-        .on('undone.validator', validator.validate)
-        .on('redone.validator', validator.validate);
+        .on('restore.validator', validator.validate)   // restore saved history
+        .on('undone.validator', validator.validate)    // undo
+        .on('redone.validator', validator.validate);   // redo
+        // but not on 'change' (e.g. while drawing)
 
-    // re-run validation when the user switches editing modes (less frequent)
+    // When user chages editing modes:
     context
         .on('exit.validator', validator.validate);
+
+    // When merging fetched data:
+    context.history()
+        .on('merge.validator', function(entities) {
+            if (!entities) return;
+            var ids = entities.map(function(entity) { return entity.id; });
+            utilCallWhenIdle(function() { validator.validateEntities(ids); })();
+        });
 
 
     return validator;

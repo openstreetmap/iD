@@ -51,6 +51,7 @@ export function uiToolSave(context) {
         }
     }
 
+
     function updateCount() {
         var val = history.difference().summary().length;
         if (val === _numChanges) return;
@@ -75,7 +76,6 @@ export function uiToolSave(context) {
 
 
     tool.render = function(selection) {
-
         tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
@@ -104,9 +104,10 @@ export function uiToolSave(context) {
 
 
         context.history()
-            .on('restore.save', updateCount)
-            .on('change.save', function(difference) {
-                if (difference) updateCount();
+            .on('change.save', function(diff) {
+                if (!diff || diff.didChange.addition || diff.didChange.deletion) {
+                    updateCount();  // only on significant changes
+                }
             });
 
         context
@@ -122,8 +123,8 @@ export function uiToolSave(context) {
             });
     };
 
-    tool.uninstall = function() {
 
+    tool.uninstall = function() {
         context.keybinding()
             .off(key, true);
 
