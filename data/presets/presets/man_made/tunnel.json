@@ -4,7 +4,9 @@
         "name",
         "tunnel",
         "layer",
-        "maxheight"
+        "width",
+        "length",
+        "height"
     ],
     "geometry": [
         "area"
