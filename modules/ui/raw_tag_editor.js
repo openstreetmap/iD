@@ -301,19 +301,6 @@ export function uiRawTagEditor(context) {
             var inputVal = d3_select(row).selectAll('input.value');
             var vNew = utilGetSetValue(inputVal);
 
-            // if the key looks like "key=value", split them up - #5024
-            if (kNew.indexOf('=') !== -1) {
-                var parts = kNew
-                    .split('=')
-                    .map(function(str) { return str.trim(); })
-                    .filter(Boolean);
-
-                if (parts.length === 2) {
-                    kNew = parts[0];
-                    vNew = parts[1];
-                }
-            }
-
             // allow no change if the key should be readonly
             if (isReadOnly({ key: kNew })) {
                 this.value = kOld;
@@ -340,7 +327,26 @@ export function uiRawTagEditor(context) {
             if (kOld) {
                 _pendingChange[kOld] = undefined;
             }
-            _pendingChange[kNew] = vNew;
+
+            // if the key looks like "key=value key2=value2", split them up - #5024
+            var keys = (kNew.match(/[\w_]+=/g) || []).map(key => key.slice(0, -1));
+            var vals = keys.length === 0
+                    ? []
+                    : kNew
+                        .split(new RegExp(keys.map(key => key.replace('_', '\\_')).join('|')))
+                        .splice(1)
+                        .map(val => val.slice(1).trim());
+
+            if (keys.length > 0) {
+                kNew = keys[0];
+                vNew = vals[0];
+
+                keys.forEach((key, i) => {
+                    _pendingChange[key] = vals[i];
+                });
+            } else {
+                _pendingChange[kNew] = vNew;
+            }
 
             d.key = kNew;    // update datum to avoid exit/enter on tag update
             d.value = vNew;
