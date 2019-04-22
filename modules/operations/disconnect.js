@@ -55,10 +55,7 @@ export function operationDisconnect(selectedIDs, context) {
 
     var operation = function() {
         context.perform(function(graph) {
-            actions.forEach(function(action) {
-                graph = action(graph);
-            });
-            return graph;
+            return actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
     };
 
