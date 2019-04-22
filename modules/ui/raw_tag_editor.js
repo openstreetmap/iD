@@ -329,19 +329,19 @@ export function uiRawTagEditor(context) {
             }
 
             // if the key looks like "key=value key2=value2", split them up - #5024
-            var keys = (kNew.match(/[\w_]+=/g) || []).map(key => key.slice(0, -1));
+            var keys = (kNew.match(/[\w_]+=/g) || []).map(function (key) { return key.slice(0, -1)});
             var vals = keys.length === 0
                     ? []
                     : kNew
-                        .split(new RegExp(keys.map(key => key.replace('_', '\\_')).join('|')))
+                        .split(new RegExp(keys.map(function (key) { return key.replace('_', '\\_') }).join('|')))
                         .splice(1)
-                        .map(val => val.slice(1).trim());
+                        .map(function (val) { return val.slice(1).trim() });
 
             if (keys.length > 0) {
                 kNew = keys[0];
                 vNew = vals[0];
 
-                keys.forEach((key, i) => {
+                keys.forEach(function (key, i) {
                     _pendingChange[key] = vals[i];
                 });
             } else {
