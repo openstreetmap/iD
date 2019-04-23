@@ -6,11 +6,11 @@
         "oneway",
         "maxspeed",
         "surface",
+        "covered",
         "structure",
         "access"
     ],
     "moreFields": [
-        "covered",
         "flood_prone",
         "incline",
         "lanes",
