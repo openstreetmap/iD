@@ -241,7 +241,11 @@ export function uiEntityEditor(context) {
 
         function historyChanged(difference) {
             if (_state === 'hide') return;
-            if (!difference || !difference.didChange.properties) return;
+            var significant = !difference ||
+                    difference.didChange.properties ||
+                    difference.didChange.addition ||
+                    difference.didChange.deletion;
+            if (!significant) return;
 
             var entity = context.hasEntity(_entityID);
             var graph = context.graph();
