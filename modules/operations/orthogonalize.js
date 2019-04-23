@@ -10,6 +10,13 @@ export function operationOrthogonalize(selectedIDs, context) {
     var _geometry;
     var _disabled;
     var action = chooseAction();
+    if (action) {
+        action.onCompletion = function() {
+            // revalidate in case a building was squared
+            context.validator().validate();
+        };
+    }
+    
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
 

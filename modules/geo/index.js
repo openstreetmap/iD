@@ -41,3 +41,7 @@ export { geoVecNormalizedDot } from './vector.js';
 export { geoVecProject } from './vector.js';
 export { geoVecSubtract } from './vector.js';
 export { geoVecScale } from './vector.js';
+
+export { geoOrthoNormalizedDotProduct } from './ortho.js';
+export { geoOrthoCalcScore } from './ortho.js';
+export { geoOrthoCanOrthogonalize } from './ortho.js';

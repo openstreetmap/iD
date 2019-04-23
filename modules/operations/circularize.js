@@ -10,6 +10,10 @@ export function operationCircularize(selectedIDs, context) {
     var extent = entity.extent(context.graph());
     var geometry = context.geometry(entityID);
     var action = actionCircularize(entityID, context.projection);
+    action.onCompletion = function() {
+        // revalidate in case this is a building that's no longer squarable
+        context.validator().validate();
+    };
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
     var _disabled;
