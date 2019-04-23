@@ -170,7 +170,7 @@ export function uiIssues(context) {
 
         // enter
         var autoFixAllEnter = autoFixAll.enter()
-            .append('div')
+            .insert('div', '.issues-list')
             .attr('class', 'autofix-all');
 
         var linkEnter = autoFixAllEnter

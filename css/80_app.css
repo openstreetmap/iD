@@ -3188,8 +3188,8 @@ button.autofix.action.active {
     display: flex;
     flex-flow: row nowrap;
     flex-direction: row-reverse;
-    height: 30px;
-    padding-top: 5px;
+    margin-top: -25px;
+    padding-bottom: 5px;
 }
 .autofix-all-link-text {
     padding: 0;
@@ -3314,17 +3314,15 @@ button.autofix.action.active {
     padding: 0 10px;
 }
 
-.layer-list.issues-list,
-.layer-list.issue-rules-list {
-    margin-bottom: 0;
-}
-
 .layer-list.issues-list li.issue {
     border-color: inherit;    /* override .layer-list styles */
     color: inherit;
     height: unset;
 }
 
+.layer-list.issue-rules-list {
+    margin-bottom: 0;
+}
 .issue-rules-links {
     display: flex;
     flex-flow: row nowrap;
