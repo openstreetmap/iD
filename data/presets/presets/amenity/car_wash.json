@@ -1,6 +1,8 @@
 {
     "icon": "temaki-car_wash",
     "fields": [
+        "name",
+        "operator",
         "address",
         "building_area",
         "opening_hours",
