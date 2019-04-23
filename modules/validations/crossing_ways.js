@@ -20,7 +20,7 @@ export function validationCrossingWays() {
         }
     }
     */
-    var issueCache = {};
+    var _issueCache = {};
 
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
@@ -224,7 +224,6 @@ export function validationCrossingWays() {
 
 
     function findCrossingsByWay(way1, graph, tree) {
-
         var edgeCrossInfos = [];
         if (way1.type !== 'way') return edgeCrossInfos;
 
@@ -269,7 +268,7 @@ export function validationCrossingWays() {
                 if (checkedSingleCrossingWays[way2.id]) continue;
 
                 // don't re-check previously checked features
-                if (issueCache[way1.id] && issueCache[way1.id][way2.id]) continue;
+                if (_issueCache[way1.id] && _issueCache[way1.id][way2.id]) continue;
 
                 // mark this way as checked even if there are no crossings
                 comparedWays[way2.id] = true;
@@ -312,10 +311,10 @@ export function validationCrossingWays() {
             }
         }
         for (var way2ID in comparedWays) {
-            if (!issueCache[way1.id]) issueCache[way1.id] = {};
-            if (!issueCache[way1.id][way2ID]) issueCache[way1.id][way2ID] = [];
-            if (!issueCache[way2ID]) issueCache[way2ID] = {};
-            if (!issueCache[way2ID][way1.id]) issueCache[way2ID][way1.id] = [];
+            if (!_issueCache[way1.id]) _issueCache[way1.id] = {};
+            if (!_issueCache[way1.id][way2ID]) _issueCache[way1.id][way2ID] = [];
+            if (!_issueCache[way2ID]) _issueCache[way2ID] = {};
+            if (!_issueCache[way2ID][way1.id]) _issueCache[way2ID][way1.id] = [];
         }
         return edgeCrossInfos;
     }
@@ -344,7 +343,8 @@ export function validationCrossingWays() {
         return [];
     }
 
-    var validation = function(entity, context) {
+
+    var validation = function checkCrossingWays(entity, context) {
         var graph = context.graph();
         var tree = context.history().tree();
 
@@ -361,11 +361,11 @@ export function validationCrossingWays() {
                 var way2 = crossing.ways[1];
                 issue = createIssue(crossing, context);
                 // cache the issues for each way
-                issueCache[way.id][way2.id].push(issue);
-                issueCache[way2.id][way.id].push(issue);
+                _issueCache[way.id][way2.id].push(issue);
+                _issueCache[way2.id][way.id].push(issue);
             }
-            for (key in issueCache[way.id]) {
-                issues = issues.concat(issueCache[way.id][key]);
+            for (key in _issueCache[way.id]) {
+                issues = issues.concat(_issueCache[way.id][key]);
             }
         }
         return issues;
@@ -430,8 +430,8 @@ export function validationCrossingWays() {
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
                     var loc = this.issue.loc;
-                    var connectionTags = this.issue.info.connectionTags;
-                    var edges = this.issue.info.edges;
+                    var connectionTags = this.issue.data.connectionTags;
+                    var edges = this.issue.data.edges;
 
                     context.perform(
                         function actionConnectCrossingWays(graph) {
@@ -466,6 +466,7 @@ export function validationCrossingWays() {
                 }
             }));
         }
+
         var useFixIcon = 'iD-icon-layers';
         var useFixID;
         if (isCrossingIndoors) {
@@ -495,16 +496,29 @@ export function validationCrossingWays() {
             icon: 'iD-operation-move',
             title: t('issues.fix.reposition_features.title')
         }));
+
         return new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.crossing_ways.message', messageDict),
-            tooltip: t('issues.crossing_ways.'+crossingTypeID+'.tip'),
+            reference: showReference,
             entities: entities,
-            info: { edges: crossing.edges, connectionTags: connectionTags },
+            data: {
+                edges: crossing.edges,
+                connectionTags: connectionTags
+            },
             loc: crossing.crossPoint,
             fixes: fixes
         });
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.crossing_ways.' + crossingTypeID + '.reference'));
+        }
     }
 
     function makeChangeLayerFix(higherOrLower, context) {
@@ -552,7 +566,7 @@ export function validationCrossingWays() {
     }
 
     validation.reset = function() {
-        issueCache = {};
+        _issueCache = {};
     };
 
     validation.type = type;

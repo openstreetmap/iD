@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { actionUpgradeTags, actionChangeTags, actionChangePreset } from '../actions';
-import { utilDisplayLabel } from '../util';
+import { utilArrayUnion, utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
 
 
@@ -8,73 +8,109 @@ export function validationOutdatedTags() {
     var type = 'outdated_tags';
 
 
-    function missingRecommendedTags(entity, context, graph) {
+    var validation = function checkOutdatedTags(entity, context) {
+        var graph = context.graph();
+        var oldTags = Object.assign({}, entity.tags);  // shallow copy
         var preset = context.presets().match(entity, graph);
-        if (!preset.isFallback() && preset.tags !== preset.addTags) {
-            return Object.keys(preset.addTags).reduce(function(obj, key) {
-                if (!entity.tags[key]) {
-                    obj[key] = preset.addTags[key];
-                }
-                return obj;
-            }, {});
+
+        // upgrade preset..
+        if (preset.replacement) {
+            var newPreset = context.presets().item(preset.replacement);
+            graph = actionChangePreset(entity.id, preset, newPreset, true)(graph);  // true = skip field defaults
+            entity = graph.entity(entity.id);
+            preset = newPreset;
         }
-        return {};
-    }
 
+        // upgrade tags..
+        var deprecatedTags = entity.deprecatedTags();
+        if (deprecatedTags.length) {
+            deprecatedTags.forEach(function(tag) {
+                graph = actionUpgradeTags(entity.id, tag.old, tag.replace)(graph);
+            });
+            entity = graph.entity(entity.id);
+        }
 
-    var validation = function(entity, context) {
-        var replacementPresetID = context.presets().match(entity, context.graph()).replacement;
-        var deprecatedTagsArray = entity.deprecatedTags();
-        var missingTags = missingRecommendedTags(entity, context, context.graph());
+        // add missing addTags..
+        var newTags = Object.assign({}, entity.tags);  // shallow copy
+        if (preset.tags !== preset.addTags) {
+            Object.keys(preset.addTags).forEach(function(k) {
+                if (!newTags[k]) {
+                    newTags[k] = preset.addTags[k];
+                }
+            });
+        }
 
+        // determine diff
+        var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
+        var tagDiff = [];
+        keys.forEach(function(k) {
+            var oldVal = oldTags[k];
+            var newVal = newTags[k];
 
-        if (!replacementPresetID && deprecatedTagsArray.length === 0 &&
-            Object.keys(missingTags).length === 0) return [];
+            if (oldVal && (!newVal || newVal !== oldVal)) {
+                tagDiff.push('- ' + k + '=' + oldVal);
+            }
+            if (newVal && (!oldVal || newVal !== oldVal)) {
+                tagDiff.push('+ ' + k + '=' + newVal);
+            }
+        });
+
+        if (!tagDiff.length) return [];
 
         return [new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
-            tooltip: t('issues.outdated_tags.tip'),
+            reference: showReference,
             entities: [entity],
-            info: {
-                deprecatedTagsArray: deprecatedTagsArray,
-                replacementPresetID: replacementPresetID
-            },
             fixes: [
                 new validationIssueFix({
-                    icon: 'iD-icon-up',
+                    autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function() {
-                        var replacementPresetID = this.issue.info.replacementPresetID;
-                        var replacementPreset = replacementPresetID && context.presets().item(replacementPresetID);
-                        var deprecatedTagsArray = this.issue.info.deprecatedTagsArray;
-                        var entityID = this.issue.entities[0].id;
-                        context.perform(
-                            function(graph) {
-                                if (replacementPreset) {
-                                    var oldPreset = context.presets().match(graph.entity(entityID), context.graph());
-                                    graph = actionChangePreset(entityID, oldPreset, replacementPreset, true /* skip field defaults */)(graph);
-                                    deprecatedTagsArray = graph.entity(entityID).deprecatedTags();
-                                }
-                                deprecatedTagsArray.forEach(function(deprecatedTags) {
-                                    graph = actionUpgradeTags(entityID, deprecatedTags.old, deprecatedTags.replace)(graph);
-                                });
-                                var missingTags = missingRecommendedTags(graph.entity(entityID), context, graph);
-                                var tags = Object.assign({}, graph.entity(entityID).tags);  // shallow copy
-                                for (var key in missingTags) {
-                                    tags[key] = missingTags[key];
-                                }
-                                graph = actionChangeTags(entityID, tags)(graph);
-                                return graph;
-                            },
-                            t('issues.fix.upgrade_tags.annotation')
-                        );
+                        context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                     }
                 })
             ]
         })];
+
+
+        function doUpgrade(graph) {
+            return actionChangeTags(entity.id, newTags)(graph);
+        }
+
+
+        function showReference(selection) {
+            var enter = selection.selectAll('.issue-reference')
+                .data([0])
+                .enter();
+
+            enter
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.outdated_tags.reference'));
+
+            enter
+                .append('strong')
+                .text(t('issues.suggested'));
+
+            enter
+                .append('table')
+                .attr('class', 'tagDiff-table')
+                .selectAll('.tagDiff-row')
+                .data(tagDiff)
+                .enter()
+                .append('tr')
+                .attr('class', 'tagDiff-row')
+                .append('td')
+                .attr('class', function(d) {
+                    var klass = d.charAt(0) === '+' ? 'add' : 'remove';
+                    return 'tagDiff-cell tagDiff-cell-' + klass;
+                })
+                .text(function(d) { return d; });
+        }
     };
+
 
     validation.type = type;
 

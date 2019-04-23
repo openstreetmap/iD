@@ -16,9 +16,8 @@ osmEntity.node = osmNode;
 osmNode.prototype = Object.create(osmEntity.prototype);
 
 Object.assign(osmNode.prototype, {
-
     type: 'node',
-
+    loc: [9999, 9999],
 
     extent: function() {
         return new geoExtent(this.loc);

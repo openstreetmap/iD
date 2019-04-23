@@ -61,7 +61,8 @@ describe('iD.coreContext', function() {
                     imagery: false,
                     imperial: false,
                     driveLeft: false,
-                    target: false
+                    target: false,
+                    downloaded: false
                 };
 
             expect(context.debugFlags()).to.eql(flags);

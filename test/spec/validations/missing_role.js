@@ -77,7 +77,7 @@ describe('iD.validations.missing_role', function () {
         createRelation({ type: 'multipolygon' }, null);
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id()).to.eql(issues[1].id());
+        expect(issues[0].id).to.eql(issues[1].id);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
         expect(issue.entities).to.have.lengthOf(2);
@@ -89,7 +89,7 @@ describe('iD.validations.missing_role', function () {
         createRelation({ type: 'multipolygon' }, '   ');
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id()).to.eql(issues[1].id());
+        expect(issues[0].id).to.eql(issues[1].id);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
         expect(issue.entities).to.have.lengthOf(2);

@@ -1,44 +1,50 @@
 import { t } from '../util/locale';
 import { actionDisconnect } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
+import { utilGetAllNodes } from '../util/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = [],
-        ways = [],
-        others = [];
-    var extent;
+    var _disabled;
+    var vertexIDs = [];
+    var wayIDs = [];
+    var otherIDs = [];
+    var actions = [];
 
     selectedIDs.forEach(function(id) {
         if (context.geometry(id) === 'vertex') {
-            vertices.push(id);
+            vertexIDs.push(id);
         } else if (context.entity(id).type === 'way'){
-            ways.push(id);
+            wayIDs.push(id);
         } else {
-            others.push(id);
+            otherIDs.push(id);
         }
     });
 
-    var actions = [];
+    var disconnectingWayID = (vertexIDs.length === 0 && wayIDs.length === 1 && wayIDs[0]);
+    var extent, nodes, coords;
 
-    var disconnectingWay = vertices.length === 0 && ways.length === 1 && ways[0];
+    if (disconnectingWayID) {   // disconnecting a way
+        var way = context.entity(disconnectingWayID);
+        extent = way.extent(context.graph());
+        nodes = utilGetAllNodes([disconnectingWayID], context.graph());
+        coords = nodes.map(function(n) { return n.loc; });
 
-    if (disconnectingWay) {
-        extent = context.entity(disconnectingWay).extent(context.graph());
-
-        context.entity(disconnectingWay).nodes.forEach(function(vertexID) {
-            var action = actionDisconnect(vertexID).limitWays(ways);
+        way.nodes.forEach(function(vertexID) {
+            var action = actionDisconnect(vertexID).limitWays(wayIDs);
             if (action.disabled(context.graph()) !== 'not_connected') {
                 actions.push(action);
             }
         });
-    } else {
-        vertices.forEach(function(vertexID) {
+
+    } else {    // disconnecting a vertex
+        vertexIDs.forEach(function(vertexID) {
             var action = actionDisconnect(vertexID);
 
-            if (ways.length > 0) {
-                var waysIDsForVertex = ways.filter(function(wayID) {
-                    return context.graph().entity(wayID).nodes.includes(vertexID);
+            if (wayIDs.length > 0) {
+                var waysIDsForVertex = wayIDs.filter(function(wayID) {
+                    var way = context.entity(wayID);
+                    return way.nodes.indexOf(vertexID) !== -1;
                 });
                 action.limitWays(waysIDsForVertex);
             }
@@ -49,23 +55,19 @@ export function operationDisconnect(selectedIDs, context) {
 
     var operation = function() {
         context.perform(function(graph) {
-            actions.forEach(function(action) {
-                graph = action(graph);
-            });
-            return graph;
+            return actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
     };
 
 
     operation.available = function() {
-
         if (actions.length === 0) return false;
+        if (otherIDs.length !== 0) return false;
 
-        if (others.length !== 0) return false;
-
-        if (vertices.length !== 0 && ways.length !== 0 && !ways.every(function(way) {
-            return vertices.some(function(vertex) {
-                return context.graph().entity(way).nodes.includes(vertex);
+        if (vertexIDs.length !== 0 && wayIDs.length !== 0 && !wayIDs.every(function(wayID) {
+            return vertexIDs.some(function(vertexID) {
+                var way = context.entity(wayID);
+                return way.nodes.indexOf(vertexID) !== -1;
             });
         })) return false;
 
@@ -74,19 +76,41 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
-        if (extent && extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large.single';
-        }
-        if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
-        }
+        if (_disabled !== undefined) return _disabled;
+
         for (var actionIndex in actions) {
             var action = actions[actionIndex];
             var actionReason = action.disabled(context.graph());
-            if (actionReason) return actionReason;
+            if (actionReason) {
+                _disabled = actionReason;
+                break;
+            }
         }
-        return reason;
+
+        if (_disabled) {
+            return _disabled;
+        } else if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
+            return _disabled = 'too_large.single';
+        } else if (disconnectingWayID && someMissing()) {
+            return _disabled = 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return _disabled = 'connected_to_hidden';
+        }
+
+        return _disabled = false;
+
+
+        function someMissing() {
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 
@@ -95,8 +119,8 @@ export function operationDisconnect(selectedIDs, context) {
         if (disable) {
             return t('operations.disconnect.' + disable);
         }
-        if (disconnectingWay) {
-            return t('operations.disconnect.' + context.geometry(disconnectingWay) + '.description');
+        if (disconnectingWayID) {
+            return t('operations.disconnect.' + context.geometry(disconnectingWayID) + '.description');
         }
         return t('operations.disconnect.description');
     };

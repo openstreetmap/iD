@@ -225,8 +225,9 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
 
     action.disabled = function(graph) {
-        if (!graph.entity(wayId).isClosed())
+        if (!graph.entity(wayId).isClosed()) {
             return 'not_closed';
+        }
     };
 
 

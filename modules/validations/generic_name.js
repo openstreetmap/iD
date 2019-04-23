@@ -49,7 +49,7 @@ export function validationGenericName() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkGenericName(entity, context) {
         var generic = isGenericName(entity);
         if (!generic) return [];
 
@@ -58,7 +58,7 @@ export function validationGenericName() {
             type: type,
             severity: 'warning',
             message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
-            tooltip: t('issues.generic_name.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: [
                 new validationIssueFix({
@@ -76,6 +76,16 @@ export function validationGenericName() {
                 })
             ]
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.generic_name.reference'));
+        }
     };
 
     validation.type = type;

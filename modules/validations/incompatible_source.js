@@ -5,14 +5,12 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 
 export function validationIncompatibleSource() {
     var type = 'incompatible_source';
-
     var invalidSources = [{id:'google', regex:'google'}];
 
-    var validation = function(entity, context) {
+    var validation = function checkIncompatibleSource(entity, context) {
         var issues = [];
 
         if (entity.tags && entity.tags.source) {
-            
             invalidSources.forEach(function(invalidSource) {
                 var pattern = new RegExp(invalidSource.regex, 'i');
 
@@ -23,7 +21,7 @@ export function validationIncompatibleSource() {
                         message: t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
                             feature: utilDisplayLabel(entity, context),
                         }),
-                        tooltip: t('issues.incompatible_source.' + invalidSource.id + '.tip'),
+                        reference: getReference(invalidSource.id),
                         entities: [entity],
                         fixes: [
                             new validationIssueFix({
@@ -34,7 +32,20 @@ export function validationIncompatibleSource() {
                 }
             });
         }
+
         return issues;
+
+
+        function getReference(id) {
+            return function showReference(selection) {
+                selection.selectAll('.issue-reference')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .attr('class', 'issue-reference')
+                    .text(t('issues.incompatible_source.' + id + '.reference'));
+            };
+        }
     };
 
     validation.type = type;

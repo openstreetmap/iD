@@ -19,6 +19,7 @@ describe('iD.validations.validator', function () {
 
     it('has no issues on init', function() {
         var validator = new iD.coreValidator(context);
+        validator.init();
         var issues = validator.getIssues();
         expect(issues).to.have.lengthOf(0);
     });
@@ -26,6 +27,7 @@ describe('iD.validations.validator', function () {
     it('populates issues on validate', function() {
         createInvalidWay();
         var validator = new iD.coreValidator(context);
+        validator.init();
         var issues = validator.getIssues();
         expect(issues).to.have.lengthOf(0);
 

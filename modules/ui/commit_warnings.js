@@ -4,14 +4,12 @@ import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
 
+
 export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
-
-        var issuesBySeverity = {
-            warning: context.validator().getWarnings(),
-            error: context.validator().getErrors()
-        };
+        var issuesBySeverity = context.validator()
+            .getIssuesBySeverity({ what: 'edited', where: 'all' });
 
         for (var severity in issuesBySeverity) {
             var issues = issuesBySeverity[severity];
@@ -41,7 +39,7 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(issues, function(d) { return d.id(); });
+                .data(issues, function(d) { return d.id; });
 
             items.exit()
                 .remove();

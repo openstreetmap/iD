@@ -66,30 +66,39 @@ export function coreTree(head) {
     tree.intersects = function(extent, graph) {
         if (graph !== head) {
             var diff = coreDifference(head, graph);
-            var insertions = {};
+            var changed = diff.didChange;
 
-            head = graph;
+            if (changed.addition || changed.deletion || changed.geometry) {
+                var insertions = {};
+                head = graph;
 
-            diff.deleted().forEach(function(entity) {
-                rtree.remove(bboxes[entity.id]);
-                delete bboxes[entity.id];
-            });
+                if (changed.deletion) {
+                    diff.deleted().forEach(function(entity) {
+                        rtree.remove(bboxes[entity.id]);
+                        delete bboxes[entity.id];
+                    });
+                }
 
-            diff.modified().forEach(function(entity) {
-                rtree.remove(bboxes[entity.id]);
-                insertions[entity.id] = entity;
-                updateParents(entity, insertions, {});
-            });
+                if (changed.geometry) {
+                    diff.modified().forEach(function(entity) {
+                        rtree.remove(bboxes[entity.id]);
+                        insertions[entity.id] = entity;
+                        updateParents(entity, insertions, {});
+                    });
+                }
 
-            diff.created().forEach(function(entity) {
-                insertions[entity.id] = entity;
-            });
+                if (changed.addition) {
+                    diff.created().forEach(function(entity) {
+                        insertions[entity.id] = entity;
+                    });
+                }
 
-            rtree.load(Object.values(insertions).map(entityBBox));
+                rtree.load(Object.values(insertions).map(entityBBox));
+            }
         }
 
         return rtree.search(extent.bbox())
-            .map(function(bbox) { return head.entity(bbox.id); });
+            .map(function(bbox) { return graph.entity(bbox.id); });
     };
 
 

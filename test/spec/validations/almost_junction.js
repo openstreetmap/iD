@@ -157,13 +157,13 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.loc[0]).to.eql(22.42357);
         expect(issue.loc[1]).to.eql(0);
 
-        expect(issue.info.edge).to.have.lengthOf(2);
-        expect(issue.info.edge[0]).to.eql('n-3');
-        expect(issue.info.edge[1]).to.eql('n-4');
+        expect(issue.data.edge).to.have.lengthOf(2);
+        expect(issue.data.edge[0]).to.eql('n-3');
+        expect(issue.data.edge[1]).to.eql('n-4');
 
-        expect(issue.info.cross_loc).to.have.lengthOf(2);
-        expect(issue.info.cross_loc[0]).to.eql(22.42356);
-        expect(issue.info.cross_loc[1]).to.eql(0);
+        expect(issue.data.cross_loc).to.have.lengthOf(2);
+        expect(issue.data.cross_loc[0]).to.eql(22.42356);
+        expect(issue.data.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
         issue.fixes[0].onClick();
@@ -186,13 +186,13 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.loc[0]).to.eql(22.42357);
         expect(issue.loc[1]).to.eql(0);
 
-        expect(issue.info.edge).to.have.lengthOf(2);
-        expect(issue.info.edge[0]).to.eql('n-3');
-        expect(issue.info.edge[1]).to.eql('n-4');
+        expect(issue.data.edge).to.have.lengthOf(2);
+        expect(issue.data.edge[0]).to.eql('n-3');
+        expect(issue.data.edge[1]).to.eql('n-4');
 
-        expect(issue.info.cross_loc).to.have.lengthOf(2);
-        expect(issue.info.cross_loc[0]).to.eql(22.42356);
-        expect(issue.info.cross_loc[1]).to.eql(0);
+        expect(issue.data.cross_loc).to.have.lengthOf(2);
+        expect(issue.data.cross_loc[0]).to.eql(22.42356);
+        expect(issue.data.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
         issue.fixes[1].onClick();

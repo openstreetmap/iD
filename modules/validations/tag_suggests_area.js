@@ -9,7 +9,7 @@ export function validationTagSuggestsArea() {
     var type = 'tag_suggests_area';
 
 
-    var validation = function(entity, context) {
+    var validation = function checkTagSuggestsArea(entity, context) {
         if (entity.type !== 'way' || entity.isClosed()) return [];
 
         var tagSuggestingArea = entity.tagSuggestingArea();
@@ -95,10 +95,20 @@ export function validationTagSuggestsArea() {
             type: type,
             severity: 'warning',
             message: t('issues.tag_suggests_area.message', { feature: featureLabel, tag: tagText }),
-            tooltip: t('issues.tag_suggests_area.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.tag_suggests_area.reference'));
+        }
     };
 
     validation.type = type;

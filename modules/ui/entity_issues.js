@@ -1,23 +1,18 @@
-import { select as d3_select } from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg';
 import { t } from '../util/locale';
-import { tooltip } from '../util/tooltip';
 import { uiDisclosure } from './disclosure';
-import { uiTooltipHtml } from './tooltipHtml';
 import { utilHighlightEntities } from '../util';
 
 
 export function uiEntityIssues(context) {
     var _selection = d3_select(null);
-    var _expandedIssueID;
+    var _activeIssueID;
     var _entityID;
 
-    // Listen for validation reload even though the entity editor is reloaded on
-    // every graph change since the graph change event may happen before the issue
-    // cache is refreshed
-    context.validator().on('reload.entity_issues', function() {
-
+    // Refresh on validated events
+    context.validator().on('validated.entity_issues', function() {
          _selection.selectAll('.disclosure-wrap-entity_issues')
              .call(render);
 
@@ -38,7 +33,7 @@ export function uiEntityIssues(context) {
 
 
     function update() {
-        var issues = context.validator().getIssuesForEntityWithID(_entityID);
+        var issues = context.validator().getEntityIssues(_entityID);
 
         _selection
             .classed('hide', issues.length === 0);
@@ -49,99 +44,154 @@ export function uiEntityIssues(context) {
 
 
     function render(selection) {
-        var issues = context.validator().getIssuesForEntityWithID(_entityID);
-        _expandedIssueID = issues.length > 0 ? issues[0].id() : null;
+        var issues = context.validator().getEntityIssues(_entityID);
+        _activeIssueID = issues.length > 0 ? issues[0].id : null;
 
-        var items = selection.selectAll('.issue')
-            .data(issues, function(d) { return d.id(); });
+
+        var containers = selection.selectAll('.issue-container')
+            .data(issues, function(d) { return d.id; });
 
         // Exit
-        items.exit()
+        containers.exit()
             .remove();
 
         // Enter
-        var itemsEnter = items.enter()
+        var containersEnter = containers.enter()
+            .append('div')
+            .attr('class', 'issue-container');
+
+
+        var itemsEnter = containersEnter
             .append('div')
             .attr('class', function(d) { return 'issue severity-' + d.severity; })
-            .call(tooltip()
-                .html(true)
-                .title(function(d) { return uiTooltipHtml(d.tooltip); })
-                .placement('top')
-            )
             .on('mouseover.highlight', function(d) {
                 // don't hover-highlight the selected entity
-                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                var ids = d.entities
+                    .filter(function(e) { return e.id !== _entityID; })
                     .map(function(e) { return e.id; });
+
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
-                var ids = d.entities.filter(function(e) { return e.id !== _entityID; })
+                var ids = d.entities
+                    .filter(function(e) { return e.id !== _entityID; })
                     .map(function(e) { return e.id; });
+
                 utilHighlightEntities(ids, false, context);
             });
 
-        var messagesEnter = itemsEnter
-            .append('button')
-            .attr('class', 'message')
+        var labelsEnter = itemsEnter
+            .append('div')
+            .attr('class', 'issue-label')
             .on('click', function(d) {
-
-                _expandedIssueID = d.id();   // expand only the clicked item
-                selection.selectAll('.issue')
-                    .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
+                _activeIssueID = d.id;   // expand only the clicked item
+                selection.selectAll('.issue-container')
+                    .classed('active', function(d) { return d.id === _activeIssueID; });
 
                 var extent = d.extent(context.graph());
                 if (extent) {
-                    var view = context.map().trimmedExtent();
-                    var zoom = context.map().zoom();
-                    if (!view.contains(extent) || zoom < 19) {
-                        context.map().centerZoomEase(extent.center(), Math.max(zoom, 19));
-                    }
+                    var setZoom = Math.max(context.map().zoom(), 19);
+                    context.map().centerZoomEase(extent.center(), setZoom);
                 }
             });
 
-        messagesEnter
+        var textEnter = labelsEnter
+            .append('span')
+            .attr('class', 'issue-text');
+
+        textEnter
             .append('span')
             .attr('class', 'issue-icon')
-            .call(svgIcon('', 'pre-text'));
+            .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                d3_select(this)
+                    .call(svgIcon(iconName));
+            });
 
-        messagesEnter
-            .append('strong')
-            .attr('class', 'issue-text');
+        textEnter
+            .append('span')
+            .attr('class', 'issue-message')
+            .text(function(d) { return d.message; });
+
+
+        var infoButton = labelsEnter
+            .append('button')
+            .attr('class', 'issue-info-button')
+            .attr('title', t('icons.information'))
+            .attr('tabindex', -1)
+            .call(svgIcon('#iD-icon-inspect'));
+
+        infoButton
+            .on('click', function () {
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+                this.blur();    // avoid keeping focus on the button - #4641
+
+                var container = d3_select(this.parentNode.parentNode.parentNode);
+                var info = container.selectAll('.issue-info');
+                var isExpanded = info.classed('expanded');
+
+                if (isExpanded) {
+                    info
+                        .transition()
+                        .duration(200)
+                        .style('max-height', '0px')
+                        .style('opacity', '0')
+                        .on('end', function () {
+                            info.classed('expanded', false);
+                        });
+                } else {
+                    info
+                        .classed('expanded', true)
+                        .transition()
+                        .duration(200)
+                        .style('max-height', '200px')
+                        .style('opacity', '1');
+                }
+            });
 
         itemsEnter
             .append('ul')
             .attr('class', 'issue-fix-list');
 
-
-        // Update
-        items = items
-            .merge(itemsEnter)
-            .classed('expanded', function(d) { return d.id() === _expandedIssueID; });
-
-        items.select('.issue-icon svg use')     // propagate bound data
-            .attr('href', function(d) {
-                return '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+        containersEnter
+            .append('div')
+            .attr('class', 'issue-info')
+            .style('max-height', '0')
+            .style('opacity', '0')
+            .each(function(d) {
+                if (typeof d.reference === 'function') {
+                    d3_select(this)
+                        .call(d.reference);
+                } else {
+                    d3_select(this)
+                        .text(t('inspector.no_documentation_key'));
+                }
             });
 
-        items.select('.issue-text')     // propagate bound data
-            .text(function(d) { return d.message; });
+
+        // Update
+        containers = containers
+            .merge(containersEnter)
+            .classed('active', function(d) { return d.id === _activeIssueID; });
 
 
         // fixes
-        var fixLists = items.selectAll('.issue-fix-list');
+        var fixLists = containers.selectAll('.issue-fix-list');
 
         var fixes = fixLists.selectAll('.issue-fix-item')
-            .data(function(d) { return d.fixes ? d.fixes : []; })
-            .enter()
+            .data(function(d) { return d.fixes ? d.fixes : []; });
+
+        var fixesEnter = fixes.enter()
             .append('li')
             .attr('class', function(d) {
                 return 'issue-fix-item ' + (d.onClick ? 'actionable' : '');
             })
-            .append('button')
             .on('click', function(d) {
                 if (d.onClick) {
                     utilHighlightEntities(d.entityIds, false, context);
                     d.onClick();
+                    context.validator().validate();
                 }
             })
             .on('mouseover.highlight', function(d) {
@@ -151,17 +201,20 @@ export function uiEntityIssues(context) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
 
-        fixes.append('span')
+        fixesEnter
+            .append('span')
             .attr('class', 'fix-icon')
             .each(function(d) {
                 var iconName = d.icon || 'iD-icon-wrench';
                 if (iconName.startsWith('maki')) {
                     iconName += '-15';
                 }
-                d3_select(this).call(svgIcon('#' + iconName, 'pre-text'));
+                d3_select(this).call(svgIcon('#' + iconName));
             });
 
-        fixes.append('span')
+        fixesEnter
+            .append('span')
+            .attr('class', 'fix-message')
             .text(function(d) { return d.title; });
     }
 
@@ -170,7 +223,7 @@ export function uiEntityIssues(context) {
         if (!arguments.length) return _entityID;
         if (_entityID !== val) {
             _entityID = val;
-            _expandedIssueID = null;
+            _activeIssueID = null;
         }
         return entityIssues;
     };

@@ -104,6 +104,7 @@ export function rendererMap(context) {
         }
 
         context.history()
+            .on('merge.map', function() { scheduleRedraw(); })
             .on('change.map', immediateRedraw)
             .on('undone.map', function(stack, fromStack) {
                 didUndoOrRedo(fromStack.transform);
@@ -255,7 +256,7 @@ export function rendererMap(context) {
     }
 
 
-    function drawVector(difference, extent) {
+    function drawEditable(difference, extent) {
         var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
@@ -568,15 +569,13 @@ export function rendererMap(context) {
 
         if (!difference) {
             supersurface.call(context.background());
+            wrapper.call(drawLayers);
         }
-
-        wrapper
-            .call(drawLayers);
 
         // OSM
         if (map.editable()) {
             context.loadTiles(projection);
-            drawVector(difference, extent);
+            drawEditable(difference, extent);
         } else {
             editOff();
         }
@@ -888,16 +887,16 @@ export function rendererMap(context) {
 
 
     map.editable = function() {
-        var osmLayer = surface.selectAll('.data-layer.osm');
-        if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('osm');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };
 
 
     map.notesEditable = function() {
-        var noteLayer = surface.selectAll('.data-layer.notes');
-        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('notes');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };

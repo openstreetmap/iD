@@ -612,11 +612,11 @@ export function uiFieldRestrictions(field, context) {
     }
 
 
-    restrictions.entity = function(_) {
+    restrictions.entity = function(val) {
         _intersection = null;
         _fromWayID = null;
         _oldTurns = null;
-        _vertexID = _.id;
+        _vertexID = val.id;
     };
 
 

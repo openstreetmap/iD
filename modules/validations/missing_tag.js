@@ -26,19 +26,11 @@ export function validationMissingTag() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkMissingTag(entity, context) {
         var graph = context.graph();
 
         // ignore vertex features and relation members
         if (entity.geometry(graph) === 'vertex' || entity.hasParentRelations(graph)) {
-            return [];
-        }
-
-        var mode = context.mode();
-        if (entity.type === 'way' && mode &&
-            (mode.id === 'draw-area' || (mode.id === 'draw-line' && !mode.isContinuing)) &&
-            mode.wayID === entity.id) {
-            // don't flag missing tag issues if drawing a new way
             return [];
         }
 
@@ -70,9 +62,15 @@ export function validationMissingTag() {
             })
         ];
 
-        var canDelete = false;
-        if (!operationDelete([entity.id], context).disabled()) {
-            canDelete = true;
+        // can always delete if the user created it in the first place..
+        var canDelete = (entity.version === undefined || entity.v !== undefined);
+
+        // otherwise check with operationDelete whether we can delete this entity
+        if (!canDelete) {
+            canDelete = !operationDelete([entity.id], context).disabled();
+        }
+
+        if (canDelete) {
             fixes.push(
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
@@ -90,14 +88,24 @@ export function validationMissingTag() {
 
         return [new validationIssue({
             type: type,
-            // error if created or modified and is deletable, else warning
-            severity: (!entity.version || entity.v) && canDelete  ? 'error' : 'warning',
+            severity: canDelete ? 'error' : 'warning',
             message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
-            tooltip: t('issues.missing_tag.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.missing_tag.reference'));
+        }
     };
+
 
     validation.type = type;
 

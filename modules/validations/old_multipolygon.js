@@ -1,5 +1,4 @@
 import { t } from '../util/locale';
-
 import { actionChangeTags } from '../actions';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm';
 import { utilDisplayLabel } from '../util';
@@ -10,7 +9,7 @@ export function validationOldMultipolygon() {
     var type = 'old_multipolygon';
 
 
-    var validation = function(entity, context) {
+    var validation = function checkOldMultipolygon(entity, context) {
         var graph = context.graph();
 
         var multipolygon, outerWay;
@@ -25,33 +24,43 @@ export function validationOldMultipolygon() {
         }
 
         if (!multipolygon || !outerWay) return [];
+
         var multipolygonLabel = utilDisplayLabel(multipolygon, context);
         return [new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
-            tooltip: t('issues.old_multipolygon.tip'),
+            reference: showReference,
             entities: [outerWay, multipolygon],
             fixes: [
                 new validationIssueFix({
+                    autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
                     title: t('issues.fix.move_tags.title'),
                     onClick: function() {
-                        var outerWay = this.issue.entities[0];
-                        var multipolygon =  this.issue.entities[1];
-                        context.perform(
-                            function(graph) {
-                                multipolygon = multipolygon.mergeTags(outerWay.tags);
-                                graph = graph.replace(multipolygon);
-                                graph = actionChangeTags(outerWay.id, {})(graph);
-                                return graph;
-                            },
-                            t('issues.fix.move_tags.annotation')
-                        );
+                        context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
                     }
                 })
             ]
         })];
+
+
+        function doUpgrade(graph) {
+            multipolygon = multipolygon.mergeTags(outerWay.tags);
+            graph = graph.replace(multipolygon);
+            return actionChangeTags(outerWay.id, {})(graph);
+        }
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.old_multipolygon.reference'));
+        }
     };
+
 
     validation.type = type;
 

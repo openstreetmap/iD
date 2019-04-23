@@ -4,15 +4,15 @@ import { behaviorOperation } from '../behavior/index';
 
 
 export function operationReverse(selectedIDs, context) {
-    var entityId = selectedIDs[0];
+    var entityID = selectedIDs[0];
 
     var operation = function() {
-        context.perform(actionReverse(entityId), operation.annotation());
+        context.perform(actionReverse(entityID), operation.annotation());
     };
 
 
     operation.available = function() {
-        return selectedIDs.length === 1 && context.geometry(entityId) === 'line';
+        return selectedIDs.length === 1 && context.geometry(entityID) === 'line';
     };
 
 

@@ -349,9 +349,6 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
         var isNewFeature = !mode.isContinuing;
         context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
-        if (isNewFeature) {
-            context.validator().validate();
-        }
     };
 
 

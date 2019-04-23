@@ -12,6 +12,7 @@ export function operationContinue(selectedIDs, context) {
         utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
     );
     var vertex = geometries.vertex[0];
+    var _disabled;
 
 
     function candidateWays() {
@@ -33,17 +34,23 @@ export function operationContinue(selectedIDs, context) {
 
 
     operation.available = function() {
-        return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+        return geometries.vertex.length === 1 &&
+            geometries.line.length <= 1 &&
             !context.features().hasHiddenConnections(vertex, context.graph());
     };
 
 
     operation.disabled = function() {
+        if (_disabled !== undefined) return _disabled;
+
         var candidates = candidateWays();
-        if (candidates.length === 0)
-            return 'not_eligible';
-        if (candidates.length > 1)
-            return 'multiple';
+        if (candidates.length === 0) {
+            return _disabled = 'not_eligible';
+        } else if (candidates.length > 1) {
+            return _disabled = 'multiple';
+        }
+
+        return _disabled = false;
     };
 
 

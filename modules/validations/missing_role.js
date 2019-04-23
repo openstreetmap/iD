@@ -7,14 +7,12 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationMissingRole() {
     var type = 'missing_role';
 
-    var validation = function(entity, context) {
-
+    var validation = function checkMissingRole(entity, context) {
         var issues = [];
         if (entity.type === 'way') {
             context.graph().parentRelations(entity).forEach(function(relation) {
-                if (!relation.isMultipolygon()) {
-                    return;
-                }
+                if (!relation.isMultipolygon()) return;
+
                 var member = relation.memberById(entity.id);
                 if (member && isMissingRole(member)) {
                     issues.push(makeIssue(entity, relation, member, context));
@@ -32,9 +30,11 @@ export function validationMissingRole() {
         return issues;
     };
 
+
     function isMissingRole(member) {
         return !member.role || !member.role.trim().length;
     }
+
 
     function makeIssue(way, relation, member, context) {
         return new validationIssue({
@@ -44,9 +44,11 @@ export function validationMissingRole() {
                 member: utilDisplayLabel(way, context),
                 relation: utilDisplayLabel(relation, context),
             }),
-            tooltip: t('issues.missing_role.multipolygon.tip'),
+            reference: showReference,
             entities: [relation, way],
-            info: {member: member},
+            data: {
+                member: member
+            },
             fixes: [
                 makeAddRoleFix('inner', context),
                 makeAddRoleFix('outer', context),
@@ -55,20 +57,31 @@ export function validationMissingRole() {
                     title: t('issues.fix.remove_from_relation.title'),
                     onClick: function() {
                         context.perform(
-                            actionDeleteMember(this.issue.entities[0].id, this.issue.info.member.index),
+                            actionDeleteMember(this.issue.entities[0].id, this.issue.data.member.index),
                             t('operations.delete_member.annotation')
                         );
                     }
                 })
             ]
         });
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.missing_role.multipolygon.reference'));
+        }
     }
+
 
     function makeAddRoleFix(role, context) {
         return new validationIssueFix({
             title: t('issues.fix.set_as_' + role + '.title'),
             onClick: function() {
-                var oldMember = this.issue.info.member;
+                var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entities[1].id, type: oldMember.type, role: role };
                 context.perform(
                     actionChangeMember(this.issue.entities[0].id, member, oldMember.index),

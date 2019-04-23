@@ -413,6 +413,7 @@ export function uiPresetList(context) {
                 t('operations.change_tags.annotation')
             );
 
+            context.validator().validate();  // rerun validation
             dispatch.call('choose', this, preset);
         };
 
@@ -427,19 +428,17 @@ export function uiPresetList(context) {
         return item;
     }
 
-    function updateForFeatureHiddenState() {
 
+    function updateForFeatureHiddenState() {
         if (!context.hasEntity(_entityID)) return;
 
         var geometry = context.geometry(_entityID);
-
         var button = d3_selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
         button.call(tooltip().destroyAny);
 
         button.each(function(item, index) {
-
             var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
             var isHiddenPreset = !!hiddenPresetFeaturesId && item.preset !== _currentPreset;
 

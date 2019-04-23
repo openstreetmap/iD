@@ -1,6 +1,5 @@
-
-import { operationDelete } from '../operations/index';
 import { t } from '../util/locale';
+import { operationDelete } from '../operations/index';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validator';
 
@@ -8,8 +7,7 @@ import { validationIssue, validationIssueFix } from '../core/validator';
 export function validationUnknownRoad() {
     var type = 'unknown_road';
 
-    var validation = function(entity, context) {
-
+    var validation = function checkUnknownRoad(entity, context) {
         if (entity.type !== 'way' || entity.tags.highway !== 'road') return [];
 
         var fixes = [
@@ -44,10 +42,20 @@ export function validationUnknownRoad() {
             message: t('issues.unknown_road.message', {
                 feature: utilDisplayLabel(entity, context),
             }),
-            tooltip: t('issues.unknown_road.tip'),
+            reference: showReference,
             entities: [entity],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.unknown_road.reference'));
+        }
     };
 
     validation.type = type;

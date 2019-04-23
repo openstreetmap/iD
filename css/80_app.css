@@ -414,7 +414,7 @@ button[disabled].action:hover {
     color: #333;
 }
 
-.icon-badge {
+.notification-badge {
     display: block;
     position: absolute;
     width: 10px;
@@ -423,7 +423,7 @@ button[disabled].action:hover {
     top: 9px;
 }
 
-.icon-badge.hide {
+.notification-badge.hide {
     display: none;
 }
 
@@ -2682,145 +2682,6 @@ input.key-trap {
 }
 
 
-/* Inspector (hover styles)
-------------------------------------------------------- */
-.inspector-hover .form-field-input-wrap .label,
-.inspector-hover .form-field-input-multicombo .chiplist,
-.inspector-hover .form-field-button,
-.inspector-hover .structure-extras-wrap,
-.inspector-hover .comments-container .comment,
-.inspector-hover button,
-.inspector-hover input,
-.inspector-hover textarea,
-.inspector-hover label,
-.inspector-hover .entity-issues .issue button {
-    background: #ececec;
-}
-.inspector-hover .preset-list-button,
-.inspector-hover .tag-row input {
-    background: #f6f6f6;
-}
-
-.inspector-hover .entity-issues .issue,
-.inspector-hover .entity-issues .issue li {
-    border: 1px solid #ccc;
-}
-.inspector-hover .entity-issues .issue .icon {
-    color: #666;
-}
-
-.inspector-hover a,
-.inspector-hover .form-field-input-multicombo .chips,
-.inspector-hover .form-field-input-check span {
-    color: #666;
-}
-
-.inspector-hover .form-field-input-multicombo .chips {
-    background: #eee;
-    border: 1px solid #ccc;
-}
-
-/* no scrollbars */
-.inspector-hover div {
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-/* hide and remove from layout */
-.inspector-hidden,
-.inspector-hover .preset-list-button-wrap .preset-favorite-button,
-.inspector-hover .preset-list-button-wrap .tag-reference-button,
-.inspector-hover label input[type="checkbox"],
-.inspector-hover label input[type="radio"],
-.inspector-hover .form-field-input-multicombo .input-wrap,
-.inspector-hover .form-field-input-radio label,
-.inspector-hover .form-field-input-radio label span,
-.inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue ul.issue-fix-list {
-    display: none;
-}
-
-/* hide but preserve in layout */
-.inspector-hover .combobox-caret,
-.inspector-hover .header button,
-.inspector-hover .quick-links,
-.inspector-hover .form-field-input-multicombo .chips .remove,
-.inspector-hover .hide-toggle:before,
-.inspector-hover .more-fields,
-.inspector-hover .form-field-label button,
-.inspector-hover .tag-row button,
-.inspector-hover .footer * {
-    opacity: 0;
-}
-
-/* Styles for raw tag inspector on hover */
-.inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .value-wrap {
-    height: 31px;
-}
-
-.inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 0;
-    border-top-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 4px;
-}
-
-.inspector-hover .more-fields {
-    max-height: 0;
-    margin-bottom: -10px;
-}
-
-/* Unstyle button fields */
-.inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
-    opacity: 1;
-    background-color: transparent;
-    color: #666;
-    padding-left: 0;
-    border-width: 0;
-}
-.inspector-hover .form-field-input-radio button.active {
-    padding-left: 10px;
-}
-
-/* Show placeholder on hover for radio buttons */
-.inspector-hover .form-field-input-radio {
-    border: 1px solid #ccc;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
-}
-.inspector-hover .form-field-input-radio .placeholder {
-    opacity: 1;
-    color: #666;
-    padding: 5px 10px;
-    line-height: 20px;
-    width: 100%;
-    border: 0;
-}
-.inspector-hover .form-field-input-radio .structure-extras-wrap {
-    border: 0;
-}
-
-
 /* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
 .note-header,
@@ -3270,161 +3131,309 @@ div.full-screen > button:hover {
 .issue {
     overflow: hidden;
 }
-.issue button {
-    padding: 5px 10px 5px 5px;
-    height: auto;
+.issue .issue-label,
+.issue-label .issue-text {
     width: 100%;
-    font-weight: inherit;
-    border-radius: 0;
-    text-align: inherit;
     display: flex;
-    color: inherit;
-}
-[dir='rtl'] .issue button {
-    padding: 5px 5px 5px 10px;
-}
-.warnings-list,
-.issue.severity-warning,
- li.issue.severity-warning {
-    border-color: #FFDF5C;
-}
-.icon-badge.warning {
-    color: #FFDF5C;
-}
-.errors-list,
-.issue.severity-error,
- li.issue.severity-error {
-    border-color: #f5b0ab;
-}
-.icon-badge.error {
-    color: #ff0c05;
+    flex-flow: row nowrap;
+    cursor: pointer;
 }
 
-.issue.severity-warning,
-.issue.severity-warning button,
+.issue-text .issue-icon {
+    flex: 0 0 auto;
+    padding: 5px 7px;
+}
+.issue-text .issue-message {
+    flex: 1 1 auto;
+    padding: 5px 0;
+}
+.issue-label .issue-autofix {
+    flex: 0 0 auto;
+    padding: 5px 8px;
+}
+.issue-label .issue-info-button {
+    height: unset;
+    width: 32px;
+    flex: 0 0 auto;
+    border-left: 1px solid #ccc;
+    background-color: rgba(0,0,0,0);
+    color: rgba(0,0,0,0.4);
+}
+[dir='rtl'] .issue-label .issue-info-button {
+    border-left: 0;
+    border-right: 1px solid;
+}
+.issue-label .issue-info-button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+[dir='rtl'] .issue-label .issue-info-button:last-child {
+    border-radius: 4px 0 0 4px;
+}
+
+button.autofix.action {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+    background: #7092ff;
+    color: #fff;
+}
+button.autofix.action:focus,
+button.autofix.action:hover,
+button.autofix.action.active {
+    background: #597be7;
+}
+
+/* fix all */
+.autofix-all {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    height: 30px;
+    padding-top: 5px;
+}
+.autofix-all-link-text {
+    padding: 0 5px;
+}
+.autofix-all-link-icon svg {
+    margin: 0 9px;
+    background: currentColor;
+    border-radius: 4px;
+}
+.autofix-all-link-icon svg use {
+    color: #fff;
+}
+
+/* warning styles */
+.warnings-list,
+.warnings-list *,
+.issue-container.active .issue.severity-warning,
+.issue-container.active .issue.severity-warning * {
+    border-color: #fb2;
+}
+
+.warnings-list .issue.severity-warning .issue-label,
+.issue.severity-warning .issue-fix-list,
 .mode-save .warning-section {
-    background: #ffb;
+    background: #ffc;
 }
-.issue.severity-warning:not(.expanded) button:hover,
-.issue.severity-warning:not(.expanded) button:focus,
-.issue.severity-warning .issue-fix-item.actionable button:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
-    background: #FFFF99;
+
+.warnings-list .issue.severity-warning .issue-label:hover,
+.issue-container.active .issue.severity-warning .issue-label,
+.issue.severity-warning .issue-fix-item.actionable:hover {
+    background: #ff8;
 }
+
 .issue.severity-warning .issue-icon {
-    color: #ffa900;
-    fill: #ffa900;
+    color: #f90;
 }
+
 .issue.severity-warning .issue-fix-item.actionable {
     color: #b15500;
     fill: #b15500;
+    /*color: #7092ff;*/
+    /*fill: #7092ff;*/
 }
-.issue.severity-warning .issue-fix-item.actionable:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
+.issue.severity-warning .issue-fix-item.actionable:hover {
     color: #7f3d00;
     fill: #7f3d00;
+    /*color: #597be7;*/
+    /*fill: #597be7;*/
 }
 
-.issue.severity-error,
-.issue.severity-error button,
+.notification-badge.warning {
+    color: #ffdf5c;
+}
+
+
+/* error styles */
+.errors-list,
+.errors-list *,
+.issue-container.active .issue.severity-error,
+.issue-container.active .issue.severity-error * {
+    border-color: #f77;
+}
+
+.errors-list .issue.severity-error .issue-label,
+.issue.severity-error .issue-fix-list,
 .mode-save .error-section {
-    background: #FFD5D4;
+    background: #ffd6d6;
 }
-.issue.severity-error:not(.expanded) button:hover,
-.issue.severity-error:not(.expanded) button:focus,
-.issue.severity-error .issue-fix-item.actionable button:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
-    background: #ffc9c7;
+
+.errors-list .issue.severity-error .issue-label:hover,
+.issue-container.active .issue.severity-error .issue-label,
+.issue.severity-error .issue-fix-item.actionable:hover {
+    background: #ffb6b6;
 }
+
 .issue.severity-error .issue-icon {
-    color: #DD1400;
-    fill: #DD1400;
+    color: #dd1400;
 }
+
 .issue.severity-error .issue-fix-item.actionable {
     color: #b91201;
     fill: #b91201;
+    /*color: #7092ff;*/
+    /*fill: #7092ff;*/
 }
-.issue.severity-error .issue-fix-item.actionable:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
+.issue.severity-error .issue-fix-item.actionable:hover {
     color: #840c00;
     fill: #840c00;
+    /*color: #597be7;*/
+    /*fill: #597be7;*/
 }
+
+.notification-badge.error {
+    color: #ff0c05;
+}
+
+.layer-list.issues-list {
+    margin-bottom: 0;
+}
+
 
 /* Issues Pane */
+.issues-options-container {
+    display: table;
+}
+.issues-option {
+    display: table-row;
+}
+.issues-option-title {
+    display: table-cell;
+    font-weight: bold;
+    padding-right: 10px;
+}
+[dir='rtl'] .issues-option-title {
+    padding-right: 0;
+    padding-left: 10px;
+}
+.issues-option label {
+    display: table-cell;
+    padding: 0 10px;
+}
 
-.issues-list label {
-    padding: 5px;
-}
-.issues-list label > span {
-    display: inline;
-    white-space: normal;
-}
-.issues-list li {
-    height: auto;
+.issues-list.layer-list li.issue {
+    border-color: inherit;    /* override .layer-list styles */
     color: inherit;
-    position: static;
+    height: unset;
 }
 
 .issues-none {
     border-radius: 4px;
-    border: 1px solid #72D979;
-    background: #C6FFCA;
+    border: 1px solid #72d979;
+    background: #c6ffca;
     padding: 5px !important;
     display: flex;
     margin-top: 5px;
     margin-bottom: 15px;
 }
 .issues-none .icon {
-    color: #05AC10;
+    color: #05ac10;
 }
+
 
 /* Entity Issues List */
-.entity-issues .issue {
+.entity-issues .issue-container .issue {
     border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #ccc;
+    background: #f6f6f6;
 }
-.entity-issues .issue:not(:last-of-type) {
+.entity-issues .issue-container:not(.active) .issue-text:hover,
+.entity-issues .issue-container:not(.active) .issue-info-button:hover {
+    background: #f1f1f1;
+}
+.entity-issues .issue .issue-label .issue-text {
+    padding-right: 10px;
+}
+[dir='rtl'] .entity-issues .issue .issue-label .issue-text {
+    padding-right: unset;
+    padding-left: 10px;
+}
+
+.entity-issues .issue-container.active .issue-label {
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+.entity-issues .issue-container.active .issue-label .issue-text {
+    font-weight: bold;
+}
+.entity-issues .issue-container:not(:first-of-type) {
+    margin-top: 1px;
+}
+.entity-issues .issue-container:not(:last-of-type) {
+    margin-bottom: 1px;
+}
+.entity-issues .issue-container.active:not(:first-of-type) {
+    margin-top: 10px;
+}
+.entity-issues .issue-container.active:not(:last-of-type) {
     margin-bottom: 10px;
 }
-.issue.expanded button.message {
-    cursor: auto;
-    padding-bottom: 0px;
-}
-ul.issue-fix-list {
-    margin-bottom: 5px;
-}
-ul.issue-fix-list button {
-    padding: 2px 10px 2px 26px;
-}
-[dir='rtl'] ul.issue-fix-list button {
-    padding: 2px 26px 2px 10px;
-}
-.issue-fix-item:not(.actionable) button {
-    cursor: auto;
 
+/* fixes */
+li.issue-fix-item {
+    padding: 2px 10px 2px 20px;
 }
-.issue-fix-item:not(.actionable) .fix-icon {
+[dir='rtl'] li.issue-fix-item {
+    padding: 2px 20px 2px 10px;
+}
+li.issue-fix-item:first-of-type {
+    padding-top: 5px;
+}
+li.issue-fix-item:last-of-type {
+    padding-bottom: 5px;
+}
+
+li.issue-fix-item .fix-message {
+    padding: 0 10px;
+}
+
+li.issue-fix-item.actionable {
+    cursor: pointer;
+}
+li.issue-fix-item:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
 
-.issue:not(.expanded) ul.issue-fix-list {
+.issue-container:not(.active) ul.issue-fix-list {
     display: none;
 }
-/* don't animate right now
-.issue ul.issue-fix-list {
-    max-height: 0;
-    transition: max-height 200ms linear;
-    -moz-transition: max-height 200ms linear;
-    -webkit-transition: max-height 200ms linear;
+
+.issue-info {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow: hidden;
+    display: none;
+    padding: 10px 0;
 }
-.issue.expanded ul.issue-fix-list {
-    max-height: 180px;
-    transition: max-height 200ms linear;
-    -moz-transition: max-height 200ms linear;
-    -webkit-transition: max-height 200ms linear;
-}*/
+.issue-info.expanded {
+    display: inline-block;
+}
+
+.issue-info .issue-reference {
+    margin-bottom: 10px;
+}
+.issue-info .tagDiff-table {
+    min-width: 60%;
+    width: unset;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-row {
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell {
+    padding: 2px 5px;
+    font-family: monospace;
+    font-size: 10px;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell-add {
+    background: #dfd;
+}
+.issue-info .tagDiff-cell-remove {
+    background: #fdd;
+}
 
 
 /* Background - Display Options Sliders
@@ -3599,17 +3608,15 @@ ul.issue-fix-list button {
 .map-pane {
     position: relative;
     top: 0;
-    width: 100%;
+    width: 400px;
     height: 100%;
     padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
-    max-width: 400px;
-    min-width: 300px;
 }
 
 .map-pane.help-wrap {
-    max-width: 600px;
+    width: 600px;
 }
 
 .pane-heading {
@@ -3632,13 +3639,13 @@ ul.issue-fix-list button {
 
 .pane-content {
     height: 100%;
-    padding: 10px 50px 20px 20px;
+    padding: 10px 40px 20px 20px;
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
 }
 [dir='rtl'] .pane-content {
-    padding: 10px 20px 20px 50px;
+    padding: 10px 20px 20px 40px;
 }
 
 .pane-content > div {
@@ -3745,6 +3752,155 @@ ul.issue-fix-list button {
 .help-wrap .nav a:only-child {
     width: 100%;
     border-radius: 4px;
+}
+
+
+/* Inspector (hover styles)
+------------------------------------------------------- */
+.inspector-hover .entity-issues .issue-container .issue .issue-label,
+.inspector-hover .form-field-input-wrap .label,
+.inspector-hover .form-field-input-multicombo .chiplist,
+.inspector-hover .form-field-button,
+.inspector-hover .structure-extras-wrap,
+.inspector-hover .comments-container .comment,
+.inspector-hover button,
+.inspector-hover input,
+.inspector-hover textarea,
+.inspector-hover label {
+    background: #ececec;
+}
+.inspector-hover .preset-list-button,
+.inspector-hover .tag-row input {
+    background: #f6f6f6;
+}
+
+.inspector-hover a,
+.inspector-hover .form-field-input-multicombo .chips,
+.inspector-hover .form-field-input-check span,
+.inspector-hover .entity-issues .issue .icon {
+    color: #666;
+}
+
+.inspector-hover .form-field-input-multicombo .chips {
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+/* no scrollbars */
+.inspector-hover div {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* hide and remove from layout */
+.inspector-hidden,
+.inspector-hover .preset-list-button-wrap .preset-favorite-button,
+.inspector-hover .preset-list-button-wrap .tag-reference-button,
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
+.inspector-hover .form-field-input-multicombo .input-wrap,
+.inspector-hover .form-field-input-radio label,
+.inspector-hover .form-field-input-radio label span,
+.inspector-hover .form-field-input-radio label.remove .icon,
+.inspector-hover .inspector-inner .add-row,
+.inspector-hover .entity-issues .issue-container .issue-fix-list,
+.inspector-hover .entity-issues .issue-container .issue-info-button {
+    display: none;
+}
+
+/* hide but preserve in layout */
+.inspector-hover .combobox-caret,
+.inspector-hover .header button,
+.inspector-hover .quick-links,
+.inspector-hover .form-field-input-multicombo .chips .remove,
+.inspector-hover .hide-toggle:before,
+.inspector-hover .more-fields,
+.inspector-hover .form-field-label button,
+.inspector-hover .tag-row button,
+.inspector-hover .footer * {
+    opacity: 0;
+}
+
+/* Unstyle the active entity issue on hover */
+.inspector-hover .entity-issues .issue-container.active {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+.inspector-hover .entity-issues .issue-container * {
+    border-color: #ccc !important;
+}
+.inspector-hover .entity-issues .issue-container.active .issue-label {
+    border-bottom: 0;
+}
+.inspector-hover .entity-issues .issue-container.active .issue-label .issue-text {
+    font-weight: normal;
+}
+
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .value-wrap {
+    height: 31px;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .more-fields {
+    max-height: 0;
+    margin-bottom: -10px;
+}
+
+/* Unstyle button fields */
+.inspector-hover .form-field-input-radio label.active,
+.inspector-hover .entity-editor-pane a.hide-toggle {
+    opacity: 1;
+    background-color: transparent;
+    color: #666;
+    padding-left: 0;
+    border-width: 0;
+}
+.inspector-hover .form-field-input-radio button.active {
+    padding-left: 10px;
+}
+
+/* Show placeholder on hover for radio buttons */
+.inspector-hover .form-field-input-radio {
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+.inspector-hover .form-field-input-radio .placeholder {
+    opacity: 1;
+    color: #666;
+    padding: 5px 10px;
+    line-height: 20px;
+    width: 100%;
+    border: 0;
+}
+.inspector-hover .form-field-input-radio .structure-extras-wrap {
+    border: 0;
 }
 
 

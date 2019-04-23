@@ -7,9 +7,11 @@ import { t } from '../util/locale';
 export function operationExtract(selectedIDs, context) {
     var entityID = selectedIDs.length && selectedIDs[0];
     var action = actionExtract(entityID, context.projection);
+    var _disabled;
 
     var geometry = entityID && context.geometry(entityID);
     var extent = geometry === 'area' && context.entity(entityID).extent(context.graph());
+
 
     var operation = function () {
         context.perform(action);  // do the extract
@@ -58,15 +60,18 @@ export function operationExtract(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        var reason;
-        if (geometry === 'vertex' && selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
-        }
-        if (extent && extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+        if (_disabled !== undefined) return _disabled;
+
+        _disabled = action.disabled(context.graph());
+        if (_disabled) {
+            return _disabled;
+        } else if (geometry === 'vertex' && selectedIDs.some(context.hasHiddenConnections)) {
+            return _disabled = 'connected_to_hidden';
+        } else if (extent && extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+            return _disabled = 'too_large';
         }
 
-        return action.disabled(context.graph()) || reason;
+        return _disabled = false;
     };
 
 

@@ -14,6 +14,7 @@ export function svgDebug(projection, context) {
         var showsImperial = context.getDebug('imperial');
         var showsDriveLeft = context.getDebug('driveLeft');
         var showsTouchTargets = context.getDebug('target');
+        var showsDownloaded = context.getDebug('downloaded');
 
         var debugData = [];
         if (showsTile) {
@@ -36,6 +37,9 @@ export function svgDebug(projection, context) {
         }
         if (showsTouchTargets) {
             debugData.push({ class: 'pink', label: 'touchTargets' });
+        }
+        if (showsDownloaded) {
+            debugData.push({ class: 'purple', label: 'downloaded' });
         }
 
 
@@ -65,7 +69,7 @@ export function svgDebug(projection, context) {
 
 
         var layer = selection.selectAll('.layer-debug')
-            .data(showsImagery || showsCommunity || showsImperial || showsDriveLeft ? [0] : []);
+            .data(showsImagery || showsCommunity || showsImperial || showsDriveLeft || showsDownloaded ? [0] : []);
 
         layer.exit()
             .remove();
@@ -76,6 +80,7 @@ export function svgDebug(projection, context) {
             .merge(layer);
 
 
+        // imagery
         var extent = context.map().extent();
         var matchImagery = (showsImagery && data.imagery.query.bbox(extent.rectangle(), true)) || [];
         var features = matchImagery.map(function(d) { return data.imagery.features[d.id]; });
@@ -91,6 +96,7 @@ export function svgDebug(projection, context) {
             .attr('class', 'debug-imagery debug orange');
 
 
+        // community index
         var community = layer.selectAll('path.debug-community')
             .data(showsCommunity ? Object.values(data.community.features) : []);
 
@@ -102,6 +108,7 @@ export function svgDebug(projection, context) {
             .attr('class', 'debug-community debug blue');
 
 
+        // imperial
         var imperial = layer
             .selectAll('path.debug-imperial')
             .data(showsImperial ? [dataImperial] : []);
@@ -114,6 +121,7 @@ export function svgDebug(projection, context) {
             .attr('class', 'debug-imperial debug cyan');
 
 
+        // driveleft
         var driveLeft = layer
             .selectAll('path.debug-drive-left')
             .data(showsDriveLeft ? [dataDriveLeft] : []);
@@ -124,6 +132,43 @@ export function svgDebug(projection, context) {
         driveLeft.enter()
             .append('path')
             .attr('class', 'debug-drive-left debug green');
+
+
+        // downloaded
+        var osm = context.connection();
+        var dataDownloaded = [];
+
+        if (osm) {
+            var rtree = osm.caches('get').tile.rtree;
+            dataDownloaded = rtree.all().map(function(bbox) {
+                return {
+                    type: 'Feature',
+                    properties: { id: bbox.id },
+                    geometry: {
+                        type: 'Polygon',
+                        coordinates: [[
+                            [ bbox.minX, bbox.minY ],
+                            [ bbox.minX, bbox.maxY ],
+                            [ bbox.maxX, bbox.maxY ],
+                            [ bbox.maxX, bbox.minY ],
+                            [ bbox.minX, bbox.minY ]
+                        ]]
+                    }
+                };
+            });
+        }
+
+
+        var downloaded = layer
+            .selectAll('path.debug-downloaded')
+            .data(showsDownloaded ? dataDownloaded : []);
+
+        downloaded.exit()
+            .remove();
+
+        downloaded.enter()
+            .append('path')
+            .attr('class', 'debug-downloaded debug purple');
 
 
         // update
@@ -141,7 +186,8 @@ export function svgDebug(projection, context) {
                 context.getDebug('imagery') ||
                 context.getDebug('imperial') ||
                 context.getDebug('driveLeft') ||
-                context.getDebug('target');
+                context.getDebug('target') ||
+                context.getDebug('downloaded');
         } else {
             return this;
         }

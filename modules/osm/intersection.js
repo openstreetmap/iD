@@ -92,8 +92,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
                 if (vertices.indexOf(node) !== -1) continue;                             // seen it already
-                if (node.loc && startNode.loc &&
-                    geoSphericalDistance(node.loc, startNode.loc) > maxDistance) continue;   // too far from start
+                if (geoSphericalDistance(node.loc, startNode.loc) > maxDistance) continue;   // too far from start
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
@@ -485,7 +484,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 // which nodes can we step into?
                 var n1 = vgraph.entity(entity.first());
                 var n2 = vgraph.entity(entity.last());
-                var dist = n1.loc && n2.loc && geoSphericalDistance(n1.loc, n2.loc);
+                var dist = geoSphericalDistance(n1.loc, n2.loc);
                 var nextNodes = [];
 
                 if (currPath.length > 1) {

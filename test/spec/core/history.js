@@ -28,11 +28,11 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n')).to.equal(n);
         });
 
-        it('emits a change event with the specified extent', function () {
-            var extent = {};
-            history.on('change', spy);
-            history.merge([], extent);
-            expect(spy).to.have.been.calledWith(undefined, extent);
+        it('emits a merge event with the new entities', function () {
+            var n = iD.osmNode({id: 'n'});
+            history.on('merge', spy);
+            history.merge([n]);
+            expect(spy).to.have.been.calledWith([n]);
         });
     });
 

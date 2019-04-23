@@ -293,14 +293,68 @@ describe('iD.serviceOsm', function () {
     });
 
 
+    describe('#loadTiles', function() {
+        var tileXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm version="0.6">' +
+            ' <bounds minlat="40.6681396" minlon="-74.0478516" maxlat="40.6723060" maxlon="-74.0423584"/>' +
+            ' <node id="368395606" visible="true" version="3" changeset="28924294" timestamp="2015-02-18T04:25:04Z" user="peace2" uid="119748" lat="40.6694299" lon="-74.0444216">' +
+            '  <tag k="addr:state" v="NJ"/>' +
+            '  <tag k="ele" v="0"/>' +
+            '  <tag k="gnis:county_name" v="Hudson"/>' +
+            '  <tag k="gnis:feature_id" v="881377"/>' +
+            '  <tag k="gnis:feature_type" v="Bay"/>' +
+            '  <tag k="name" v="Upper Bay"/>' +
+            '  <tag k="natural" v="bay"/>' +
+            ' </node>' +
+            '</osm>';
+
+        beforeEach(function() {
+            var dimensions = [64, 64];
+            context.projection
+                .scale(iD.geoZoomToScale(20))
+                .translate([55212042.434589595, 33248879.510193843])  // -74.0444216, 40.6694299
+                .clipExtent([[0,0], dimensions]);
+        });
+
+        it('calls callback when data tiles are loaded', function(done) {
+            var spy = sinon.spy();
+            connection.loadTiles(context.projection, spy);
+
+            server.respondWith('GET', /map\?bbox/,
+                [200, { 'Content-Type': 'text/xml' }, tileXML]);
+            server.respond();
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 20);
+        });
+
+        it('#isDataLoaded', function(done) {
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.not.ok;
+
+            connection.loadTiles(context.projection);
+            server.respondWith('GET', /map\?bbox/,
+                [200, { 'Content-Type': 'text/xml' }, tileXML]);
+            server.respond();
+
+            window.setTimeout(function() {
+                expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.ok;
+                done();
+            }, 20);
+        });
+    });
+
     describe('#loadEntity', function () {
-        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-                '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-                '</osm>';
-        var wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-                '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
-                '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
-                '</osm>';
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
+            '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
+            '</osm>';
+        var wayXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
+            '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
+            '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
+            '</osm>';
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -357,12 +411,14 @@ describe('iD.serviceOsm', function () {
 
 
     describe('#loadEntityVersion', function () {
-        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-                '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-                '</osm>';
-        var wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-                '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
-                '</osm>';
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
+            '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
+            '</osm>';
+        var wayXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm>' +
+            '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
+            '</osm>';
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -539,21 +595,10 @@ describe('iD.serviceOsm', function () {
 
     describe('#caches', function() {
         it('loads reset caches', function (done) {
-            var resetCaches = {
-                tile: {
-                    inflight: {}, loaded: {}, seen: {}
-                },
-                note: {
-                    loaded: {}, inflight: {}, inflightPost: {}, note: {} // not including rtree
-                },
-                user: {
-                    toLoad: {}, user: {}
-                }
-            };
             var caches = connection.caches();
-            expect(caches.tile).to.eql(resetCaches.tile);
-            expect(caches.note.loaded).to.eql(resetCaches.note.loaded);
-            expect(caches.user).to.eql(resetCaches.user);
+            expect(caches.tile).to.have.all.keys(['toLoad','loaded','inflight','seen','rtree']);
+            expect(caches.note).to.have.all.keys(['toLoad','loaded','inflight','inflightPost','note','closed','rtree']);
+            expect(caches.user).to.have.all.keys(['toLoad','user']);
             done();
         });
 
@@ -627,7 +672,7 @@ describe('iD.serviceOsm', function () {
                 .clipExtent([[0,0], dimensions]);
         });
 
-        it('fires loadedNotes when notes are loaded', function() {
+        it('fires loadedNotes when notes are loaded', function(done) {
             connection.on('loadedNotes', spy);
             connection.loadNotes(context.projection, {});
 
@@ -635,7 +680,10 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, notesXML ]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 20);
         });
     });
 
