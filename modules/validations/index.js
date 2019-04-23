@@ -11,3 +11,4 @@ export { validationOutdatedTags } from './outdated_tags';
 export { validationPrivateData } from './private_data';
 export { validationTagSuggestsArea } from './tag_suggests_area';
 export { validationUnknownRoad } from './unknown_road';
+export { validationUnsquareWay } from './unsquare_way';

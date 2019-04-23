@@ -1398,6 +1398,12 @@ en:
       message: "{feature} has no classification"
       tip: "Find roads that are missing a proper road classification"
       reference: "Roads without a specific type may not appear in maps or routing."
+    unsquare_way:
+      title: Unsquare Buildings
+      message: "{feature} isn't quite square"
+      tip: "Find buildings with nearly square corners"
+      buildings:
+        reference: "Buildings that are almost square should be squared."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
@@ -1441,6 +1447,8 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      square_feature:
+        title: Square this feature
       tag_as_disconnected:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.

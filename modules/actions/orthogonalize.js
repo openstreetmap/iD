@@ -1,7 +1,8 @@
 import { actionDeleteNode } from './delete_node';
 import {
     geoVecAdd, geoVecEqual, geoVecInterp, geoVecLength, geoVecNormalize,
-    geoVecNormalizedDot, geoVecProject, geoVecScale, geoVecSubtract
+    geoVecProject, geoVecScale, geoVecSubtract,
+    geoOrthoNormalizedDotProduct, geoOrthoCalcScore, geoOrthoCanOrthogonalize
 } from '../geo';
 
 
@@ -72,7 +73,7 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
                 if (isClosed || (i > 0 && i < points.length - 1)) {
                     var a = points[(i - 1 + points.length) % points.length];
                     var b = points[(i + 1) % points.length];
-                    dotp = Math.abs(normalizedDotProduct(a.coord, b.coord, point.coord));
+                    dotp = Math.abs(geoOrthoNormalizedDotProduct(a.coord, b.coord, point.coord));
                 }
 
                 if (dotp > upperThreshold) {
@@ -93,7 +94,7 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
                 for (j = 0; j < motions.length; j++) {
                     simplified[j].coord = geoVecAdd(simplified[j].coord, motions[j]);
                 }
-                var newScore = calcScore(simplified, isClosed);
+                var newScore = geoOrthoCalcScore(simplified, isClosed, epsilon, threshold);
                 if (newScore < score) {
                     bestPoints = clonePoints(simplified);
                     score = newScore;
@@ -183,67 +184,6 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
     };
 
 
-    function normalizedDotProduct(a, b, origin) {
-        if (geoVecEqual(origin, a) || geoVecEqual(origin, b)) {
-            return 1;  // coincident points, treat as straight and try to remove
-        }
-        return geoVecNormalizedDot(a, b, origin);
-    }
-
-
-    function filterDotProduct(dotp) {
-        var val = Math.abs(dotp);
-        if (val < epsilon) {
-            return 0;      // already orthogonal
-        } else if (val < lowerThreshold || val > upperThreshold) {
-            return dotp;   // can be adjusted
-        } else {
-            return null;   // ignore vertex
-        }
-    }
-
-
-    function calcScore(points, isClosed) {
-        var score = 0;
-        var first = isClosed ? 0 : 1;
-        var last = isClosed ? points.length : points.length - 1;
-        var coords = points.map(function(p) { return p.coord; });
-
-        for (var i = first; i < last; i++) {
-            var a = coords[(i - 1 + coords.length) % coords.length];
-            var origin = coords[i];
-            var b = coords[(i + 1) % coords.length];
-
-            var dotp = filterDotProduct(normalizedDotProduct(a, b, origin));
-            if (dotp === null) continue;    // ignore vertex
-            score = score + 2.0 * Math.min(Math.abs(dotp - 1.0), Math.min(Math.abs(dotp), Math.abs(dotp + 1)));
-        }
-
-        return score;
-    }
-
-
-    // similar to calcScore, but returns quickly if there is something to do
-    function canOrthogonalize(coords, isClosed) {
-        var score = null;
-        var first = isClosed ? 0 : 1;
-        var last = isClosed ? coords.length : coords.length - 1;
-
-        for (var i = first; i < last; i++) {
-            var a = coords[(i - 1 + coords.length) % coords.length];
-            var origin = coords[i];
-            var b = coords[(i + 1) % coords.length];
-
-            var dotp = filterDotProduct(normalizedDotProduct(a, b, origin));
-            if (dotp === null) continue;        // ignore vertex
-            if (Math.abs(dotp) > 0) return 1;   // something to do
-            score = 0;                          // already square
-        }
-
-        return score;
-    }
-
-
     // if we are only orthogonalizing one vertex,
     // get that vertex and the previous and next
     function nodeSubset(nodes, vertexID, isClosed) {
@@ -273,13 +213,15 @@ export function actionOrthogonalize(wayID, projection, vertexID) {
         var nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 
+        var allowStraightAngles = false;
         if (vertexID !== undefined) {
+            allowStraightAngles = true;
             nodes = nodeSubset(nodes, vertexID, isClosed);
             if (nodes.length !== 3) return 'end_vertex';
         }
 
         var coords = nodes.map(function(n) { return projection(n.loc); });
-        var score = canOrthogonalize(coords, isClosed);
+        var score = geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles);
 
         if (score === null) {
             return 'not_squarish';
