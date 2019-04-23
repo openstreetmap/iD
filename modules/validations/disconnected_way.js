@@ -30,29 +30,34 @@ export function validationDisconnectedWay() {
 
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
+        var entityID = entity.id;
+        var firstID = entity.first();
+        var lastID = entity.last();
 
         if (entity.type === 'way' && !entity.isClosed()) {
-            var first = context.entity(entity.first());
+            var first = context.entity(firstID);
             if (first.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-continue-left',
                     title: t('issues.fix.continue_from_start.title'),
-                    entityIds: [entity.first()],
+                    entityIds: [firstID],
                     onClick: function() {
-                        var vertex = context.entity(entity.first());
-                        continueDrawing(entity, vertex, context);
+                        var way = context.entity(entityID);
+                        var vertex = context.entity(firstID);
+                        continueDrawing(way, vertex, context);
                     }
                 }));
             }
-            var last = context.entity(entity.last());
+            var last = context.entity(lastID);
             if (last.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-continue',
                     title: t('issues.fix.continue_from_end.title'),
-                    entityIds: [entity.last()],
+                    entityIds: [lastID],
                     onClick: function() {
-                        var vertex = context.entity(entity.last());
-                        continueDrawing(entity, vertex, context);
+                        var way = context.entity(entityID);
+                        var vertex = context.entity(lastID);
+                        continueDrawing(way, vertex, context);
                     }
                 }));
             }
@@ -153,7 +158,7 @@ export function validationDisconnectedWay() {
             }
 
             context.enter(
-                modeDrawLine(context, way.id, context.graph(), context.graph(), way.affix(vertex.id), true)
+                modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id), true)
             );
         }
     };
