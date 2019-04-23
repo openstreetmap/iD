@@ -3330,7 +3330,6 @@ button.autofix.action.active {
     flex-flow: row nowrap;
     flex-direction: row-reverse;
     height: 30px;
-    padding-top: 5px;
 }
 .issue-rules-link {
     padding: 5px;
