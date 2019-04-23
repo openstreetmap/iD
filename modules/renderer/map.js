@@ -887,16 +887,16 @@ export function rendererMap(context) {
 
 
     map.editable = function() {
-        var osmLayer = surface.selectAll('.data-layer.osm');
-        if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('osm');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };
 
 
     map.notesEditable = function() {
-        var noteLayer = surface.selectAll('.data-layer.notes');
-        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('notes');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };
