@@ -3608,17 +3608,15 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .map-pane {
     position: relative;
     top: 0;
-    width: 100%;
+    width: 400px;
     height: 100%;
     padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
-    max-width: 400px;
-    min-width: 300px;
 }
 
 .map-pane.help-wrap {
-    max-width: 600px;
+    width: 600px;
 }
 
 .pane-heading {
