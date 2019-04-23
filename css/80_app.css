@@ -3192,7 +3192,7 @@ button.autofix.action.active {
     padding-top: 5px;
 }
 .autofix-all-link-text {
-    padding: 0 5px;
+    padding: 0;
 }
 .autofix-all-link-icon svg {
     margin: 0 9px;
@@ -3217,8 +3217,11 @@ button.autofix.action.active {
     background: #ffc;
 }
 
+.issue-container.active .issue.severity-warning .issue-label {
+    background: #ffa;
+}
+
 .warnings-list .issue.severity-warning .issue-label:hover,
-.issue-container.active .issue.severity-warning .issue-label,
 .issue.severity-warning .issue-fix-item.actionable:hover {
     background: #ff8;
 }
@@ -3259,8 +3262,11 @@ button.autofix.action.active {
     background: #ffd6d6;
 }
 
+.issue-container.active .issue.severity-error .issue-label {
+    background: #ffc6c6;
+}
+
 .errors-list .issue.severity-error .issue-label:hover,
-.issue-container.active .issue.severity-error .issue-label,
 .issue.severity-error .issue-fix-item.actionable:hover {
     background: #ffb6b6;
 }
