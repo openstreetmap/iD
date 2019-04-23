@@ -3292,10 +3292,6 @@ button.autofix.action.active {
     color: #ff0c05;
 }
 
-.layer-list.issues-list {
-    margin-bottom: 0;
-}
-
 
 /* Issues Pane */
 .issues-options-container {
@@ -3318,11 +3314,28 @@ button.autofix.action.active {
     padding: 0 10px;
 }
 
-.issues-list.layer-list li.issue {
+.layer-list.issues-list,
+.layer-list.issue-rules-list {
+    margin-bottom: 0;
+}
+
+.layer-list.issues-list li.issue {
     border-color: inherit;    /* override .layer-list styles */
     color: inherit;
     height: unset;
 }
+
+.issue-rules-links {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    height: 30px;
+    padding-top: 5px;
+}
+.issue-rules-link {
+    padding: 5px;
+}
+
 
 .issues-none {
     border-radius: 4px;

@@ -1581,6 +1581,8 @@
                 }
             },
             "suggested": "Suggested updates:",
+            "enable_all": "Enable All",
+            "disable_all": "Disable All",
             "fix_one": {
                 "title": "fix"
             },

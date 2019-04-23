@@ -290,13 +290,46 @@ export function uiIssues(context) {
 
 
     function renderRulesList(selection) {
-        var container = selection.selectAll('.issue-rules-list')
+        var container = selection.selectAll('.issues-rulelist-container')
             .data([0]);
 
-        _rulesList = container.enter()
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'issues-rulelist-container');
+
+        containerEnter
             .append('ul')
-            .attr('class', 'layer-list issue-rules-list')
-            .merge(container);
+            .attr('class', 'layer-list issue-rules-list');
+
+        var ruleLinks = containerEnter
+            .append('div')
+            .attr('class', 'issue-rules-links');
+
+        ruleLinks
+            .append('a')
+            .attr('class', 'issue-rules-link')
+            .attr('href', '#')
+            .text(t('issues.enable_all'))
+            .on('click', function() {
+                context.validator().disableRules([]);
+            });
+
+        ruleLinks
+            .append('a')
+            .attr('class', 'issue-rules-link')
+            .attr('href', '#')
+            .text(t('issues.disable_all'))
+            .on('click', function() {
+                var keys = context.validator().getRuleKeys();
+                context.validator().disableRules(keys);
+            });
+
+
+        // Update
+        container = container
+            .merge(containerEnter);
+
+        _rulesList = container.selectAll('.issue-rules-list');
 
         updateRulesList();
     }

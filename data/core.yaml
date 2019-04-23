@@ -1289,6 +1289,8 @@ en:
         visible: "In View"
         all: "Everywhere"
     suggested: "Suggested updates:"
+    enable_all: Enable All
+    disable_all: Disable All
     fix_one:
       title: fix
     fix_all:

@@ -137,6 +137,17 @@ export function coreValidator(context) {
     };
 
 
+    validator.disableRules = function(keys) {
+        _disabledRules = {};
+        keys.forEach(function(k) {
+            _disabledRules[k] = true;
+        });
+
+        context.storage('validate-disabledRules', Object.keys(_disabledRules).join(','));
+        validator.validate();
+    };
+
+
     //
     // Remove a single entity and all its related issues from the caches
     //
