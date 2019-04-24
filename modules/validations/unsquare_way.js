@@ -8,15 +8,34 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationUnsquareWay() {
     var type = 'unsquare_way';
 
+    function isBuilding(entity, graph) {
+        if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
+
+        return entity.tags.building && entity.tags.building !== 'no';
+    }
+
     var validation = function checkMissingRole(entity, context) {
 
-        if (entity.type !== 'way' || entity.geometry(context.graph()) !== 'area') return [];
+        var graph = context.graph();
 
-        if (!entity.tags.building || entity.tags.building === 'no') return [];
+        if (!isBuilding(entity, graph)) return [];
 
         var isClosed = entity.isClosed();
         var nodes = context.childNodes(entity).slice();  // shallow copy
         if (isClosed) nodes.pop();
+
+        // don't flag ways with lots of nodes since they are likely detail-mapped
+        if (nodes.length > 6) return [];
+
+        var hasConnectedSquarableWays = nodes.some(function(node) {
+            return graph.parentWays(node).some(function(way) {
+                if (way.id === entity.id) return false;
+                return isBuilding(way, graph);
+            });
+        });
+
+        // don't flag connected ways to avoid unresolvable unsquare loops
+        if (hasConnectedSquarableWays) return [];
 
         var locs = nodes.map(function(node) {
             return context.projection(node.loc);
