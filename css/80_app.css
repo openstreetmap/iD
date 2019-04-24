@@ -3366,10 +3366,6 @@ button.autofix.action.active {
     padding-left: 10px;
 }
 
-.entity-issues .issue-container.active .issue-label {
-    border-bottom: 1px solid;
-    border-color: inherit;
-}
 .entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: bold;
 }
@@ -3387,6 +3383,14 @@ button.autofix.action.active {
 }
 
 /* fixes */
+.entity-issues .issue-fix-list {
+    border-top: 1px solid;
+    border-color: inherit;
+}
+.entity-issues .issue-container.active .issue-fix-list:empty {
+    display: none;
+}
+
 li.issue-fix-item {
     padding: 2px 10px 2px 20px;
 }

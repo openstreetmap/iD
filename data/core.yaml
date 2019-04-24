@@ -1348,6 +1348,11 @@ en:
       highway:
         message: "{highway} is disconnected from other roads and paths"
         reference: "Highways should connect to other highways or building entrances."
+    fixme_tag:
+      title: '"Fix Me" Requests'
+      message: '{feature} has a "Fix Me" request'
+      tip: 'Find features with "fixme" tags'
+      reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
       title: Suspicious Names
       message: '{feature} has the suspicious name "{name}"'
