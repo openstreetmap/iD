@@ -62,7 +62,7 @@
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
-    "d3": "4.13.0",
+    "d3": "~5.9.2",
     "ecstatic": "^4.1.1",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "eslint": "^5.16.0",
@@ -99,9 +99,7 @@
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",
-    "ignore": [
-      "d3"
-    ]
+    "ignore": []
   },
   "engines": {
     "node": ">=6.0.0",
