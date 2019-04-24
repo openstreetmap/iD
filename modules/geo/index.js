@@ -14,6 +14,7 @@ export { geoZoomToScale } from './geo.js';
 export { geoAngle } from './geom.js';
 export { geoChooseEdge } from './geom.js';
 export { geoEdgeEqual } from './geom.js';
+export { geoGetSmallestSurroundingRectangle } from './geom.js';
 export { geoHasLineIntersections } from './geom.js';
 export { geoHasSelfIntersections } from './geom.js';
 export { geoRotate } from './geom.js';

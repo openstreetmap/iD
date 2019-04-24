@@ -6,7 +6,7 @@ import { utilArrayDifference } from '../util';
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-export function actionStraighten(selectedIDs, projection) {
+export function actionStraightenWay(selectedIDs, projection) {
 
     function positionAlongWay(a, o, b) {
         return geoVecDot(a, b, o) / geoVecDot(b, b, o);

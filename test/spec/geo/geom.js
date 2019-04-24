@@ -446,6 +446,19 @@ describe('iD.geo - geometry', function() {
         });
     });
 
+    describe('geoGetSmallestSurroundingRectangle', function() {
+        it('calculates a smallest surrounding rectangle', function() {
+            //  +----b---------d
+            //  |              |
+            //  a---------c----+
+            var points = [[0, -1], [5, 1], [10, -1], [15, 1]];
+            var ssr = iD.geoGetSmallestSurroundingRectangle(points);
+            expect(ssr.poly).to.eql([[0, -1], [0, 1], [15, 1], [15, -1], [0, -1]]);
+            expect(ssr.angle).to.eql(0);
+        });
+
+    });
+
     describe('geoPathLength', function() {
         it('calculates a simple path length', function() {
             var path = [[0, 0], [0, 1], [3, 5]];

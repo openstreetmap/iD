@@ -1,4 +1,4 @@
-describe('iD.actionStraighten', function () {
+describe('iD.actionStraightenWay', function () {
     var projection = d3.geoMercator();
 
     describe('#disabled', function () {
@@ -10,7 +10,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmNode({id: 'd', loc: [3, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraighten(['-'], projection).disabled(graph)).not.to.be.ok;
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).not.to.be.ok;
         });
 
         it('returns \'too_bendy\' for ways with internal nodes far off centerline', function () {
@@ -21,7 +21,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmNode({id: 'd', loc: [3, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraighten(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
         });
 
         it('returns \'too_bendy\' for ways with coincident start/end nodes', function () {
@@ -32,7 +32,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraighten(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
         });
     });
 
@@ -45,7 +45,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
-        graph = iD.actionStraighten(['-'], projection)(graph);
+        graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
         expect(graph.hasEntity('b')).to.eq(undefined);
     });
@@ -58,7 +58,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
-        graph = iD.actionStraighten(['-'], projection)(graph);
+        graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
         expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
@@ -73,7 +73,7 @@ describe('iD.actionStraighten', function () {
                 iD.osmWay({id: '=', nodes: ['b']})
             ]);
 
-        graph = iD.actionStraighten(['-'], projection)(graph);
+        graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
         expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
@@ -94,7 +94,7 @@ describe('iD.actionStraighten', function () {
                 iD.Way({id: '--', nodes: ['d', 'e', 'f', 'g', 'h']})
             ]);
 
-        graph = iD.actionStraighten(['-', '--'], projection)(graph);
+        graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
         expect(graph.entity('--').nodes).to.eql(['d', 'f', 'h']);
         expect(graph.entity('f').loc[0]).to.be.closeTo(5, 1e-6);
@@ -117,7 +117,7 @@ describe('iD.actionStraighten', function () {
                 iD.Way({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
             ]);
 
-        graph = iD.actionStraighten(['-', '--'], projection)(graph);
+        graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
         expect(graph.entity('--').nodes).to.eql(['h', 'f', 'd']);
         expect(graph.entity('f').loc[0]).to.be.closeTo(5, 1e-6);
@@ -127,7 +127,7 @@ describe('iD.actionStraighten', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionStraighten().transitionable).to.be.true;
+            expect(iD.actionStraightenWay().transitionable).to.be.true;
         });
 
         it('straighten at t = 0', function() {
@@ -139,7 +139,7 @@ describe('iD.actionStraighten', function () {
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
-            graph = iD.actionStraighten(['-'], projection)(graph, 0);
+            graph = iD.actionStraightenWay(['-'], projection)(graph, 0);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
             expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
             expect(graph.entity('b').loc[1]).to.be.closeTo(0.01, 1e-6);
@@ -156,7 +156,7 @@ describe('iD.actionStraighten', function () {
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
-            graph = iD.actionStraighten(['-'], projection)(graph, 0.5);
+            graph = iD.actionStraightenWay(['-'], projection)(graph, 0.5);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
             expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
             expect(graph.entity('b').loc[1]).to.be.closeTo(0.005, 1e-6);
@@ -173,7 +173,7 @@ describe('iD.actionStraighten', function () {
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
-            graph = iD.actionStraighten(['-'], projection)(graph, 1);
+            graph = iD.actionStraightenWay(['-'], projection)(graph, 1);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
             expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
             expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);

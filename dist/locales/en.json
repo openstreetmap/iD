@@ -152,12 +152,18 @@
             },
             "straighten": {
                 "title": "Straighten",
-                "description": "Straighten this line.",
+                "description": {
+                    "points": "Straighten these points.",
+                    "line": "Straighten this line."
+                },
                 "key": "S",
-                "annotation": "Straightened a line.",
+                "annotation": {
+                    "points": "Straightened several points.",
+                    "line": "Straightened a line."
+                },
                 "too_bendy": "This can't be straightened because it bends too much.",
-                "connected_to_hidden": "This line can't be straightened because it is connected to a hidden feature.",
-                "not_downloaded": "This line can't be straightened because parts of it have not yet been downloaded."
+                "connected_to_hidden": "This can't be straightened because it is connected to a hidden feature.",
+                "not_downloaded": "This can't be straightened because parts of it have not yet been downloaded."
             },
             "delete": {
                 "title": "Delete",
