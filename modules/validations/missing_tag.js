@@ -1,4 +1,4 @@
-import { operationDelete } from '../operations/index';
+import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
@@ -26,6 +26,15 @@ export function validationMissingTag() {
     }
 
 
+    function isUnknownRoad(entity) {
+        return entity.type === 'way' && entity.tags.highway === 'road';
+    }
+
+    function isUntypedRelation(entity) {
+        return entity.type === 'relation' && !entity.tags.type;
+    }
+
+
     var validation = function checkMissingTag(entity, context) {
         var graph = context.graph();
 
@@ -41,21 +50,23 @@ export function validationMissingTag() {
             missingTagType = 'any';
         } else if (!hasDescriptiveTags(entity)) {
             missingTagType = 'descriptive';
-        } else if (entity.type === 'relation' && !entity.tags.type) {
+        } else if (isUntypedRelation(entity)) {
             missingTagType = 'specific';
             messageObj.tag = 'type';
+        } else if (isUnknownRoad(entity)) {
+            missingTagType = 'unknown_road';
         }
 
-        if (!missingTagType) {
-            return [];
-        }
+        if (!missingTagType) return [];
 
         messageObj.feature = utilDisplayLabel(entity, context);
+
+        var selectFixType = missingTagType === 'unknown_road' ? 'select_road_type' : 'select_preset';
 
         var fixes = [
             new validationIssueFix({
                 icon: 'iD-icon-search',
-                title: t('issues.fix.select_preset.title'),
+                title: t('issues.fix.' + selectFixType + '.title'),
                 onClick: function() {
                     context.ui().sidebar.showPresetList();
                 }
@@ -86,10 +97,15 @@ export function validationMissingTag() {
             );
         }
 
+        var messageID = missingTagType === 'unknown_road' ? 'unknown_road' : 'missing_tag.' + missingTagType;
+        var referenceID = missingTagType === 'unknown_road' ? 'unknown_road' : 'missing_tag';
+
+        var severity = (canDelete && missingTagType !== 'unknown_road') ? 'error' : 'warning';
+        
         return [new validationIssue({
             type: type,
-            severity: canDelete ? 'error' : 'warning',
-            message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
+            severity: severity,
+            message: t('issues.' + messageID + '.message', messageObj),
             reference: showReference,
             entities: [entity],
             fixes: fixes
@@ -102,7 +118,7 @@ export function validationMissingTag() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.missing_tag.reference'));
+                .text(t('issues.' + referenceID + '.reference'));
         }
     };
 

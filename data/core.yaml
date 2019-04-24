@@ -1398,9 +1398,7 @@ en:
       tip: "Find features that are tagged as lines and should possibly be tagged as areas"
       reference: "Areas must have connected endpoints."
     unknown_road:
-      title: Unknown Roads
       message: "{feature} has no classification"
-      tip: "Find roads that are missing a proper road classification"
       reference: "Roads without a specific type may not appear in maps or routing."
     unsquare_way:
       title: Unsquare Buildings
