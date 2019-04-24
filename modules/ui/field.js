@@ -7,7 +7,7 @@ import {
 
 import { t } from '../util/locale';
 import { textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
 import { uiTagReference } from './tag_reference';

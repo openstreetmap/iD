@@ -1,8 +1,10 @@
-import { actionAddVertex, actionChangeTags, actionMergeNodes } from '../actions';
+import { actionAddVertex } from '../actions/add_vertex';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionMergeNodes } from '../actions/merge_nodes';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../util/locale';
 import { utilDisplayLabel, utilTagText } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationTagSuggestsArea() {

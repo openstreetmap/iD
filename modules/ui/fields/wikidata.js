@@ -5,12 +5,12 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 
-import { actionChangeTags } from '../../actions/index';
+import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 
-import { svgIcon } from '../../svg/index';
+import { svgIcon } from '../../svg/icon';
 import {
     utilGetSetValue,
     utilNoAuto,

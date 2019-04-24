@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { areaKeys } from '../core/context';
+import { areaKeys } from '../core/area_keys';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 
 

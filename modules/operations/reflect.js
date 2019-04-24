@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { actionReflect } from '../actions';
-import { behaviorOperation } from '../behavior';
+import { actionReflect } from '../actions/reflect';
+import { behaviorOperation } from '../behavior/operation';
 import { geoExtent } from '../geo';
 import { utilGetAllNodes } from '../util';
 

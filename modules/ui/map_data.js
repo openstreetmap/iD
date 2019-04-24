@@ -3,11 +3,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { uiDisclosure } from './disclosure';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';

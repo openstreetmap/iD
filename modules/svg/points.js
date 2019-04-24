@@ -1,6 +1,7 @@
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
-import { svgPointTransform, svgTagClasses } from './index';
+import { svgPointTransform } from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 
 export function svgPoints(projection, context) {

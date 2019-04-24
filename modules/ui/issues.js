@@ -5,10 +5,10 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { actionNoop } from '../actions';
+import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../geo';
-import { modeSelect } from '../modes';
-import { svgIcon } from '../svg';
+import { modeSelect } from '../modes/select';
+import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle, utilHighlightEntities } from '../util';

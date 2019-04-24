@@ -2,8 +2,9 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { actionRestrictTurn, actionUnrestrictTurn } from '../../actions';
-import { behaviorBreathe } from '../../behavior';
+import { actionRestrictTurn } from '../../actions/restrict_turn';
+import { actionUnrestrictTurn } from '../../actions/unrestrict_turn';
+import { behaviorBreathe } from '../../behavior/breathe';
 import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale } from '../../geo';
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';

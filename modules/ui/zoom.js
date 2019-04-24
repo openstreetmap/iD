@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';

@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { utilFunctor } from './index';
+import { utilFunctor } from './util';
 
 var _tooltipID = 0;
 

@@ -2,7 +2,7 @@ import { t } from '../util/locale';
 import { operationOrthogonalize } from '../operations';
 import { geoOrthoCanOrthogonalize } from '../geo';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationUnsquareWay() {

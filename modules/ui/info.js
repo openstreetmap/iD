@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiInfoPanels } from './panels';
 

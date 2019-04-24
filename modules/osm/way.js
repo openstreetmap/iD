@@ -4,7 +4,7 @@ import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags, osmRightSideIsInsideTags } from './tags';
-import { areaKeys } from '../core/context';
+import { areaKeys } from '../core/area_keys';
 import { utilArrayUniq } from '../util';
 
 

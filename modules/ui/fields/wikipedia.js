@@ -6,11 +6,11 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { actionChangeTags } from '../../actions/index';
+import { actionChangeTags } from '../../actions/change_tags';
 import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
-import { svgIcon } from '../../svg/index';
-import { uiCombobox } from '../index';
+import { svgIcon } from '../../svg/icon';
+import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 

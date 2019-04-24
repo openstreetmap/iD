@@ -6,7 +6,8 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
-import { modeBrowse, modeSelect } from '../../modes';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilArrayUniq, utilRebind } from '../../util';
 import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 

@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util';
 import { services } from '../services';

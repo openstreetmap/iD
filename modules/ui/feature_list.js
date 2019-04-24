@@ -6,12 +6,12 @@ import {
 import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { dmsCoordinatePair } from '../util/units';
-import { coreGraph } from '../core';
+import { coreGraph } from '../core/graph';
 import { geoExtent, geoChooseEdge } from '../geo';
-import { modeSelect } from '../modes';
-import { osmEntity } from '../osm';
+import { modeSelect } from '../modes/select';
+import { osmEntity } from '../osm/entity';
 import { services } from '../services';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 
 import {

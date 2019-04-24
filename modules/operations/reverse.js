@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { actionReverse } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionReverse } from '../actions/reverse';
+import { behaviorOperation } from '../behavior/operation';
 
 
 export function operationReverse(selectedIDs, context) {

@@ -1,6 +1,6 @@
 import { currentLocale, setTextDirection } from './locale';
 import { dataLocales } from '../../data/index';
-import { utilStringQs } from './index';
+import { utilStringQs } from './util';
 
 var detected;
 

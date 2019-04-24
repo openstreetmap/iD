@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { modeDrawLine } from '../modes';
-import { behaviorOperation } from '../behavior';
+import { modeDrawLine } from '../modes/draw_line';
+import { behaviorOperation } from '../behavior/operation';
 import { utilArrayGroupBy } from '../util';
 
 

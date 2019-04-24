@@ -3,9 +3,9 @@ import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';

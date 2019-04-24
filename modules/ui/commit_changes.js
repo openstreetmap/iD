@@ -2,9 +2,9 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
-import { actionDiscardTags } from '../actions';
+import { actionDiscardTags } from '../actions/discard_tags';
 import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilDetect } from '../util/detect';
 
 import {

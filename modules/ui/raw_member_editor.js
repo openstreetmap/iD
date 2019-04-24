@@ -5,12 +5,16 @@ import {
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { actionChangeMember, actionDeleteMember, actionMoveMember } from '../actions';
-import { modeBrowse, modeSelect } from '../modes';
+import { actionChangeMember } from '../actions/change_member';
+import { actionDeleteMember } from '../actions/delete_member';
+import { actionMoveMember } from '../actions/move_member';
+import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { services } from '../services';
-import { uiCombobox, uiDisclosure } from './index';
+import { uiCombobox } from './combobox';
+import { uiDisclosure } from './disclosure';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../util';
 
 

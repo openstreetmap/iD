@@ -9,7 +9,7 @@ import {
 import rbush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { svgDefs } from '../svg';
+import { svgDefs } from '../svg/defs';
 import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
 
 

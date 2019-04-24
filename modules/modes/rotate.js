@@ -9,22 +9,18 @@ import {
 } from 'd3-polygon';
 
 import { t } from '../util/locale';
-import {
-    actionRotate,
-    actionNoop
-} from '../actions';
-import { behaviorEdit } from '../behavior';
+import { actionRotate } from '../actions/rotate';
+import { actionNoop } from '../actions/noop';
+import { behaviorEdit } from '../behavior/edit';
 import { geoVecInterp } from '../geo';
-import { modeBrowse, modeSelect } from './index';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 
-import {
-    operationCircularize,
-    operationDelete,
-    operationMove,
-    operationOrthogonalize,
-    operationReflectLong,
-    operationReflectShort
-} from '../operations';
+import { operationCircularize } from '../operations/circularize';
+import { operationDelete } from '../operations/delete';
+import { operationMove } from '../operations/move';
+import { operationOrthogonalize } from '../operations/orthogonalize';
+import { operationReflectLong, operationReflectShort } from '../operations/reflect';
 
 import { utilGetAllNodes, utilKeybinding } from '../util';
 

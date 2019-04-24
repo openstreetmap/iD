@@ -8,9 +8,9 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
-import { uiFlash } from '../ui';
+import { uiFlash } from '../ui/flash';
 import { utilFastMouse, utilFunctor, utilRebind, utilSetTransform } from '../util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';

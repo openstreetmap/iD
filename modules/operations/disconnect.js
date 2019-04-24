@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { actionDisconnect } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionDisconnect } from '../actions/disconnect';
+import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util/index';
 
 

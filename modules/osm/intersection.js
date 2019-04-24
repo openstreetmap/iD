@@ -1,5 +1,7 @@
-import { actionDeleteRelation, actionReverse, actionSplit } from '../actions';
-import { coreGraph } from '../core';
+import { actionDeleteRelation } from '../actions/delete_relation';
+import { actionReverse } from '../actions/reverse';
+import { actionSplit } from '../actions/split';
+import { coreGraph } from '../core/graph';
 import { geoAngle, geoSphericalDistance } from '../geo';
 import { osmEntity } from './entity';
 import { utilArrayDifference, utilArrayUniq } from '../util';

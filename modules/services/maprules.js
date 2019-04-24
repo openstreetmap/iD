@@ -1,6 +1,6 @@
-import { areaKeys } from '../core/context';
+import { areaKeys } from '../core/area_keys';
 import { utilArrayIntersection } from '../util';
-import { validationIssue } from '../core/validator';
+import { validationIssue } from '../core/validation';
 
 
 var buildRuleChecks = function() {

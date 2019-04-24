@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { actionCircularize } from '../actions';
-import { behaviorOperation } from '../behavior';
+import { actionCircularize } from '../actions/circularize';
+import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 

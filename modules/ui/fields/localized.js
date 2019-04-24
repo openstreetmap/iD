@@ -11,7 +11,7 @@ import { dataWikipedia } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 

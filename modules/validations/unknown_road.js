@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { operationDelete } from '../operations/index';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationUnknownRoad() {

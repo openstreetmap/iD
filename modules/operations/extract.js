@@ -1,6 +1,7 @@
-import { actionExtract, actionMoveNode } from '../actions';
-import { behaviorOperation } from '../behavior';
-import { modeMove } from '../modes';
+import { actionExtract } from '../actions/extract';
+import { actionMoveNode } from '../actions/move_node';
+import { behaviorOperation } from '../behavior/operation';
+import { modeMove } from '../modes/move';
 import { t } from '../util/locale';
 
 

@@ -1,6 +1,6 @@
 
 import { geoPath as d3_geoPath } from 'd3-geo';
-import { osmNode } from '../osm';
+import { osmNode } from '../osm/node';
 
 export function actionExtract(entityID, projection) {
 
@@ -73,7 +73,7 @@ export function actionExtract(entityID, projection) {
             // remove the tag from the area
             delete areaTags[key];
         }
-        
+
         if (!isBuilding) {
             // ensure that the area keeps the area geometry
             areaTags.area = 'yes';

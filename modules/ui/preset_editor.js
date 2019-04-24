@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { uiDisclosure } from './disclosure';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';

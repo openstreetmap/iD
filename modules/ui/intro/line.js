@@ -7,7 +7,8 @@ import {
 
 import { t, textDirection } from '../../util/locale';
 import { geoSphericalDistance } from '../../geo';
-import { modeBrowse, modeSelect } from '../../modes';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
 import { icon, pad, selectMenuItem, transitionTime } from './helper';
 

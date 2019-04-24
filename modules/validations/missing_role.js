@@ -1,7 +1,8 @@
-import { actionChangeMember, actionDeleteMember } from '../actions';
+import { actionChangeMember } from '../actions/change_member';
+import { actionDeleteMember } from '../actions/delete_member';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingRole() {

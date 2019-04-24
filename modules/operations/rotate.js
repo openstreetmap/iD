@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
-import { behaviorOperation } from '../behavior';
+import { behaviorOperation } from '../behavior/operation';
 import { geoExtent } from '../geo';
-import { modeRotate } from '../modes';
+import { modeRotate } from '../modes/rotate';
 import { utilGetAllNodes } from '../util';
 
 

@@ -5,8 +5,9 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
-import { actionChangePreset } from '../../actions';
-import { modeBrowse, modeSelect } from '../../modes';
+import { actionChangePreset } from '../../actions/change_preset';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 

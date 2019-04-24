@@ -5,7 +5,7 @@ import {
 
 import marked from 'marked';
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { icon } from './intro/helper';
 
 

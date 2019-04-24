@@ -1,8 +1,9 @@
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay, svgTagClasses
-} from './index';
+    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
+} from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';

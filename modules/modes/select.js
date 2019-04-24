@@ -2,18 +2,24 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 
-import { actionAddMidpoint, actionDeleteRelation } from '../actions';
-import {
-    behaviorBreathe, behaviorCopy, behaviorHover,
-    behaviorLasso, behaviorPaste, behaviorSelect
-} from '../behavior';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionDeleteRelation } from '../actions/delete_relation';
+
+import { behaviorBreathe } from '../behavior/breathe';
+import { behaviorCopy } from '../behavior/copy';
+import { behaviorHover } from '../behavior/hover';
+import { behaviorLasso } from '../behavior/lasso';
+import { behaviorPaste } from '../behavior/paste';
+import { behaviorSelect } from '../behavior/select';
+
 import { geoExtent, geoChooseEdge, geoPointInPolygon } from '../geo';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
-import { uiEditMenu, uiSelectionList } from '../ui';
+import { uiEditMenu } from '../ui/edit_menu';
+import { uiSelectionList } from '../ui/selection_list';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilEntityOrMemberSelector,
@@ -21,7 +27,7 @@ import {
 } from '../util';
 
 // deprecation warning - Radial Menu to be removed in iD v3
-import { uiRadialMenu } from '../ui';
+import { uiRadialMenu } from '../ui/radial_menu';
 
 
 var _relatedParent;

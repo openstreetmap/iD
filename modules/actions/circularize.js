@@ -7,7 +7,7 @@ import {
 } from 'd3-polygon';
 
 import { geoVecInterp, geoVecLength } from '../geo';
-import { osmNode } from '../osm';
+import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
 
 

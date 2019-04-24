@@ -1,8 +1,8 @@
 import { t } from '../util/locale';
-import { modeDrawLine } from '../modes';
+import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/index';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationDisconnectedWay() {

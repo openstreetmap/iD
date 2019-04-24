@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { uiCombobox } from './index';
+import { uiCombobox } from './combobox';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
 

@@ -1,6 +1,6 @@
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
-import { svgPointTransform } from './index';
+import { svgPointTransform } from './helpers';
 import { services } from '../services';
 
 

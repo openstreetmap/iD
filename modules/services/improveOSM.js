@@ -6,7 +6,7 @@ import { request as d3_request } from 'd3-request';
 
 import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { qaError } from '../osm';
-import { services } from './index';
+import { serviceOsm } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -359,7 +359,7 @@ export default {
     },
 
     postUpdate: function(d, callback) {
-        if (!services.osm.authenticated()) { // Username required in payload
+        if (!serviceOsm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
         }
         if (_erCache.inflightPost[d.id]) {
@@ -369,7 +369,7 @@ export default {
         var that = this;
 
         // Payload can only be sent once username is established
-        services.osm.userDetails(sendPayload);
+        serviceOsm.userDetails(sendPayload);
 
         function sendPayload(err, user) {
             if (err) { return callback(err, d); }

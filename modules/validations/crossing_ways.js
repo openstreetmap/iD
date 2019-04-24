@@ -1,9 +1,11 @@
-import { actionAddMidpoint, actionChangeTags, actionMergeNodes } from '../actions';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionMergeNodes } from '../actions/merge_nodes';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
-import { osmNode } from '../osm';
+import { osmNode } from '../osm/node';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationCrossingWays() {

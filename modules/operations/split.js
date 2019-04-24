@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
-import { actionSplit } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
-import { modeSelect } from '../modes/index';
+import { actionSplit } from '../actions/split';
+import { behaviorOperation } from '../behavior/operation';
+import { modeSelect } from '../modes/select';
 
 
 export function operationSplit(selectedIDs, context) {

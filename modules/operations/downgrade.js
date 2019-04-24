@@ -1,8 +1,8 @@
-import { actionChangeTags } from '../actions';
-import { behaviorOperation } from '../behavior';
-import { modeSelect } from '../modes';
+import { actionChangeTags } from '../actions/change_tags';
+import { behaviorOperation } from '../behavior/operation';
+import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
-import { uiCmd } from '../ui';
+import { uiCmd } from '../ui/cmd';
 
 
 export function operationDowngrade(selectedIDs, context) {

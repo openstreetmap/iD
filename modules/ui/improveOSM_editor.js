@@ -3,16 +3,14 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 
-import {
-    uiImproveOsmComments,
-    uiImproveOsmDetails,
-    uiImproveOsmHeader,
-    uiQuickLinks,
-    uiTooltipHtml
-} from './index';
+import { uiImproveOsmComments } from './improveOSM_comments';
+import { uiImproveOsmDetails } from './improveOSM_details';
+import { uiImproveOsmHeader } from './improveOSM_header';
+import { uiQuickLinks } from './quick_links';
+import { uiTooltipHtml } from './tooltipHtml';
 
 import { utilNoAuto, utilRebind } from '../util';
 

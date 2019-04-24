@@ -7,8 +7,10 @@ import {
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { svgIcon } from '../svg';
-import { uiCombobox, uiDisclosure, uiTagReference } from './index';
+import { svgIcon } from '../svg/icon';
+import { uiCombobox } from './combobox';
+import { uiDisclosure } from './disclosure';
+import { uiTagReference } from './tag_reference';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../util';
 
 

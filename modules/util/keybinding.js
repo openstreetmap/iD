@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { utilArrayUniq } from '../util/index';
+import { utilArrayUniq } from './array';
 
 
 export function utilKeybinding(namespace) {

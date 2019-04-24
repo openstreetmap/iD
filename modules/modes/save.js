@@ -1,11 +1,19 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
-import { actionDiscardTags, actionMergeRemoteChanges, actionNoop, actionRevert } from '../actions';
-import { coreGraph } from '../core';
-import { modeBrowse, modeSelect } from './index';
+import { actionDiscardTags } from '../actions/discard_tags';
+import { actionMergeRemoteChanges } from '../actions/merge_remote_changes';
+import { actionNoop } from '../actions/noop';
+import { actionRevert } from '../actions/revert';
+import { coreGraph } from '../core/graph';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 import { services } from '../services';
-import { uiConflicts, uiConfirm, uiCommit, uiLoading, uiSuccess } from '../ui';
+import { uiConflicts } from '../ui/conflicts';
+import { uiConfirm } from '../ui/confirm';
+import { uiCommit } from '../ui/commit';
+import { uiLoading } from '../ui/loading';
+import { uiSuccess } from '../ui/success';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilKeybinding } from '../util';
 
 

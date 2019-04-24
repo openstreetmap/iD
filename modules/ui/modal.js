@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
 

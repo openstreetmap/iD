@@ -2,8 +2,8 @@ import { filters } from 'name-suggestion-index';
 
 import { t } from '../util/locale';
 import { utilPreset } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
-import { actionChangeTags } from '../actions';
+import { validationIssue, validationIssueFix } from '../core/validation';
+import { actionChangeTags } from '../actions/change_tags';
 
 
 export function validationGenericName() {

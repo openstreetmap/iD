@@ -4,11 +4,14 @@ import {
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { actionAddMidpoint, actionMoveNode, actionNoop } from '../actions';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionMoveNode } from '../actions/move_node';
+import { actionNoop } from '../actions/noop';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
-import { osmNode } from '../osm';
+import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
+import { osmNode } from '../osm/node';
 import { utilKeybinding } from '../util';
 
 export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph) {

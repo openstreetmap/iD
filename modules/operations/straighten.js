@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
-import { actionStraightenNodes, actionStraightenWay } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionStraightenNodes } from '../actions/straighten_nodes';
+import { actionStraightenWay } from '../actions/straighten_way';
+import { behaviorOperation } from '../behavior/operation';
 import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 

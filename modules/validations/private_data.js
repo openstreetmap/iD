@@ -1,7 +1,7 @@
-import { actionChangeTags } from '../actions';
+import { actionChangeTags } from '../actions/change_tags';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationPrivateData() {

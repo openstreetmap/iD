@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { actionOrthogonalize } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionOrthogonalize } from '../actions/orthogonalize';
+import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 
@@ -16,7 +16,7 @@ export function operationOrthogonalize(selectedIDs, context) {
             context.validator().validate();
         };
     }
-    
+
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
 

@@ -1,6 +1,6 @@
 import { event as d3_event } from 'd3-selection';
 
-import { uiCmd } from '../ui';
+import { uiCmd } from '../ui/cmd';
 import { utilArrayGroupBy } from '../util';
 
 

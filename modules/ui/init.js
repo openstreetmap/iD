@@ -8,7 +8,7 @@ import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
 import { behaviorHash } from '../behavior';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
 

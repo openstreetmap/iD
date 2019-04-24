@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
-import { modeSelect } from '../modes';
-import { svgIcon } from '../svg';
+import { modeSelect } from '../modes/select';
+import { svgIcon } from '../svg/icon';
 import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
 

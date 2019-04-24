@@ -6,7 +6,7 @@ import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
-import { uiLoading } from '../ui';
+import { uiLoading } from '../ui/loading';
 import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex

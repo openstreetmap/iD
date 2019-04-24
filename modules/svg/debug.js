@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
 import { data, dataImperial, dataDriveLeft } from '../../data';
-import { svgPath } from './index';
+import { svgPath } from './helpers';
 
 
 export function svgDebug(projection, context) {

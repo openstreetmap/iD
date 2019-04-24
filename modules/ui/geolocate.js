@@ -1,8 +1,8 @@
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
 
 

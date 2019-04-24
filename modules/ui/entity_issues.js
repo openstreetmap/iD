@@ -1,6 +1,6 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { t } from '../util/locale';
 import { uiDisclosure } from './disclosure';
 import { utilHighlightEntities } from '../util';

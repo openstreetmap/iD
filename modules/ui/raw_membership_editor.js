@@ -5,18 +5,17 @@ import {
 
 import { t, textDirection } from '../util/locale';
 
-import {
-    actionAddEntity,
-    actionAddMember,
-    actionChangeMember,
-    actionDeleteMember
-} from '../actions';
+import { actionAddEntity } from '../actions/add_entity';
+import { actionAddMember } from '../actions/add_member';
+import { actionChangeMember } from '../actions/change_member';
+import { actionDeleteMember } from '../actions/delete_member';
 
-import { modeSelect } from '../modes';
+import { modeSelect } from '../modes/select';
 import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
-import { svgIcon } from '../svg';
-import { uiCombobox, uiDisclosure } from './index';
+import { svgIcon } from '../svg/icon';
+import { uiCombobox } from './combobox';
+import { uiDisclosure } from './disclosure';
 import { tooltip } from '../util/tooltip';
 import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
 

@@ -1,9 +1,9 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { modeSelect } from '../modes';
+import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
 

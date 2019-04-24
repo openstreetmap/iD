@@ -1,8 +1,8 @@
 import { t } from '../util/locale';
-import { actionChangeTags } from '../actions';
-import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm';
+import { actionChangeTags } from '../actions/change_tags';
+import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationOldMultipolygon() {

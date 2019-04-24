@@ -5,18 +5,14 @@ import {
 
 import { t } from '../util/locale';
 
-import {
-    actionAddMidpoint,
-    actionConnect,
-    actionMoveNode,
-    actionNoop
-} from '../actions';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionConnect } from '../actions/connect';
+import { actionMoveNode } from '../actions/move_node';
+import { actionNoop } from '../actions/noop';
 
-import {
-    behaviorEdit,
-    behaviorHover,
-    behaviorDrag
-} from '../behavior';
+import { behaviorDrag } from '../behavior/drag';
+import { behaviorEdit } from '../behavior/edit';
+import { behaviorHover } from '../behavior/hover';
 
 import {
     geoChooseEdge,
@@ -26,9 +22,10 @@ import {
     geoViewportEdge
 } from '../geo';
 
-import { modeBrowse, modeSelect } from './index';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 import { osmJoinWays, osmNode } from '../osm';
-import { uiFlash } from '../ui';
+import { uiFlash } from '../ui/flash';
 import { utilArrayIntersection, utilKeybinding } from '../util';
 
 

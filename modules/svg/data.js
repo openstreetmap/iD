@@ -17,7 +17,7 @@ import toGeoJSON from '@mapbox/togeojson';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
-import { svgPath } from './index';
+import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 

@@ -1,7 +1,9 @@
 import { t } from '../util/locale';
-import { actionUpgradeTags, actionChangeTags, actionChangePreset } from '../actions';
+import { actionChangePreset } from '../actions/change_preset';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { utilArrayUnion, utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationOutdatedTags() {

@@ -1,8 +1,8 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { geoExtent, geoPointInPolygon } from '../geo';
-import { modeSelect } from '../modes';
-import { uiLasso } from '../ui';
+import { modeSelect } from '../modes/select';
+import { uiLasso } from '../ui/lasso';
 
 
 export function behaviorLasso(context) {

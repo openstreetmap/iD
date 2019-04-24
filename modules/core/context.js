@@ -6,6 +6,8 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
+import { setAreaKeys } from './area_keys';
+
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
@@ -17,13 +19,6 @@ import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
 import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
-
-
-export var areaKeys = {};
-
-export function setAreaKeys(value) {
-    areaKeys = value;
-}
 
 
 export function coreContext() {
@@ -554,11 +549,11 @@ export function coreContext() {
         var external = utilStringQs(window.location.hash).presets;
         presets.fromExternal(external, function(externalPresets) {
             context.presets = function() { return externalPresets; }; // default + external presets...
-            areaKeys = presets.areaKeys();
+            setAreaKeys(presets.areaKeys());
         });
     } else {
         presets.init();
-        areaKeys = presets.areaKeys();
+        setAreaKeys(presets.areaKeys());
     }
 
     return context;

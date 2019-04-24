@@ -1,4 +1,5 @@
-import { svgPointTransform, svgTagClasses } from './index';
+import { svgPointTransform } from './helpers';
+import { svgTagClasses } from './tag_classes';
 import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength } from '../geo';
 
 

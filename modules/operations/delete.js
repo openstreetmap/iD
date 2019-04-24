@@ -1,9 +1,10 @@
 import { t } from '../util/locale';
-import { actionDeleteMultiple } from '../actions';
-import { behaviorOperation } from '../behavior';
+import { actionDeleteMultiple } from '../actions/delete_multiple';
+import { behaviorOperation } from '../behavior/operation';
 import { geoExtent, geoSphericalDistance } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
-import { uiCmd } from '../ui';
+import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
+import { uiCmd } from '../ui/cmd';
 import { utilGetAllNodes } from '../util';
 
 

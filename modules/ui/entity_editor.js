@@ -4,9 +4,9 @@ import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { actionChangeTags } from '../actions/change_tags';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';

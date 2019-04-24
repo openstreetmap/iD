@@ -9,7 +9,7 @@ import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
 import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilDetect } from '../util/detect';
 
 import {
