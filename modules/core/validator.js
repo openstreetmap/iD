@@ -204,7 +204,7 @@ export function coreValidator(context) {
         runValidation('missing_role');
 
         if (entity.type === 'relation') {
-            if (!runValidation('old_multipolygon')) {
+            if (!runValidation('outdated_tags')) {
                 // don't flag missing tags if they are on the outer way
                 ran.missing_tag = true;
             }

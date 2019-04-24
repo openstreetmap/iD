@@ -1704,9 +1704,7 @@
                 }
             },
             "old_multipolygon": {
-                "title": "Misplaced Multipolygon Tags",
                 "message": "{multipolygon} has misplaced tags",
-                "tip": "Find old multipolygons with tags assigned to the outer way",
                 "reference": "Multipolygons should be tagged on their relation, not their outer way."
             },
             "outdated_tags": {
