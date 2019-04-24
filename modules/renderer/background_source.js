@@ -1,9 +1,5 @@
-import {
-  geoArea as d3_geoArea,
-  geoMercatorRaw as d3_geoMercatorRaw
-} from 'd3-geo';
-
-import { json as d3_json } from 'd3-request';
+import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
+import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -218,27 +214,29 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
     var bing = rendererBackgroundSource(data);
     var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // Same as P2 and JOSM
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
-            key;
+    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key;
     var cache = {};
     var inflight = {};
     var providers = [];
 
-    d3_json(url, function(err, json) {
-        if (err) return;
-        providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
-            return {
-                attribution: provider.attribution,
-                areas: provider.coverageAreas.map(function(area) {
-                    return {
-                        zoom: [area.zoomMin, area.zoomMax],
-                        extent: geoExtent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
-                    };
-                })
-            };
+    d3_json(url)
+        .then(function(json) {
+            providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
+                return {
+                    attribution: provider.attribution,
+                    areas: provider.coverageAreas.map(function(area) {
+                        return {
+                            zoom: [area.zoomMin, area.zoomMax],
+                            extent: geoExtent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
+                        };
+                    })
+                };
+            });
+            dispatch.call('change');
+        })
+        .catch(function() {
+            /* ignore */
         });
-        dispatch.call('change');
-    });
 
 
     bing.copyrightNotices = function(zoom, extent) {
@@ -256,34 +254,28 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
     bing.getMetadata = function(center, tileCoord, callback) {
-        var tileId = tileCoord.slice(0, 3).join('/');
+        var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
         var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key;
 
-        if (inflight[tileId]) return;
+        if (inflight[tileID]) return;
 
-        if (!cache[tileId]) {
-            cache[tileId] = {};
+        if (!cache[tileID]) {
+            cache[tileID] = {};
         }
-        if (cache[tileId] && cache[tileId].metadata) {
-            return callback(null, cache[tileId].metadata);
+        if (cache[tileID] && cache[tileID].metadata) {
+            return callback(null, cache[tileID].metadata);
         }
 
-        inflight[tileId] = true;
-        d3_json(url, function(error, result) {
-            delete inflight[tileId];
-
-            var err;
-            if (error) {
-                err = error;
-            } else if (!result && 'Unknown Error') {
-                err = result.errorDetails;
-            }
-            if (err) {
-                return callback(err);
-            } else {
+        inflight[tileID] = true;
+        d3_json(url)
+            .then(function(result) {
+                delete inflight[tileID];
+                if (!result) {
+                    throw new Error('Unknown Error');
+                }
                 var vintage = {
                     start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
                     end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
@@ -291,10 +283,13 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 vintage.range = vintageRange(vintage);
 
                 var metadata = { vintage: vintage };
-                cache[tileId].metadata = metadata;
-                return callback(null, metadata);
-            }
-        });
+                cache[tileID].metadata = metadata;
+                if (callback) callback(null, metadata);
+            })
+            .catch(function(err) {
+                delete inflight[tileID];
+                if (callback) callback(err);
+            });
     };
 
 
@@ -338,25 +333,31 @@ rendererBackgroundSource.Esri = function(data) {
         var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+\?blankTile=false/, 'tilemap') + '/' + z + '/' + y + '/' + x + '/8/8';
 
         // make the request and introspect the response from the tilemap server
-        d3_json(tilemapUrl, function (err, tilemap) {
-            if (err || !tilemap) return;
-
-            var hasTiles = true;
-            for (var i = 0; i < tilemap.data.length; i++) {
-                // 0 means an individual tile in the grid doesn't exist
-                if (!tilemap.data[i]) {
-                    hasTiles = false;
-                    break;
+        d3_json(tilemapUrl)
+            .then(function(tilemap) {
+                if (!tilemap) {
+                    throw new Error('Unknown Error');
                 }
-            }
+                var hasTiles = true;
+                for (var i = 0; i < tilemap.data.length; i++) {
+                    // 0 means an individual tile in the grid doesn't exist
+                    if (!tilemap.data[i]) {
+                        hasTiles = false;
+                        break;
+                    }
+                }
 
-            // if any tiles are missing at level 20 we restrict maxZoom to 19
-            esri.zoomExtent[1] = (hasTiles ? 22 : 19);
-        });
+                // if any tiles are missing at level 20 we restrict maxZoom to 19
+                esri.zoomExtent[1] = (hasTiles ? 22 : 19);
+            })
+            .catch(function() {
+                /* ignore */
+            });
     };
 
+
     esri.getMetadata = function(center, tileCoord, callback) {
-        var tileId = tileCoord.slice(0, 3).join('/');
+        var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
         var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
         var unknown = t('info_panels.background.unknown');
@@ -364,7 +365,7 @@ rendererBackgroundSource.Esri = function(data) {
         var vintage = {};
         var metadata = {};
 
-        if (inflight[tileId]) return;
+        if (inflight[tileID]) return;
 
         switch (true) {
             case (zoom >= 20 && esri.id === 'EsriWorldImageryClarity'):
@@ -393,11 +394,11 @@ rendererBackgroundSource.Esri = function(data) {
 
         url += metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json';
 
-        if (!cache[tileId]) {
-            cache[tileId] = {};
+        if (!cache[tileID]) {
+            cache[tileID] = {};
         }
-        if (cache[tileId] && cache[tileId].metadata) {
-            return callback(null, cache[tileId].metadata);
+        if (cache[tileID] && cache[tileID].metadata) {
+            return callback(null, cache[tileID].metadata);
         }
 
         // accurate metadata is only available >= 13
@@ -418,24 +419,18 @@ rendererBackgroundSource.Esri = function(data) {
             callback(null, metadata);
 
         } else {
-            inflight[tileId] = true;
-            d3_json(url, function(error, result) {
-                delete inflight[tileId];
+            inflight[tileID] = true;
+            d3_json(url)
+                .then(function(result) {
+                    delete inflight[tileID];
+                    if (!result) {
+                        throw new Error('Unknown Error');
+                    } else if (result.features && result.features.length < 1) {
+                        throw new Error('No Results');
+                    } else if (result.error && result.error.message) {
+                        throw new Error(result.error.message);
+                    }
 
-                var err;
-                if (error) {
-                    err = error;
-                } else if (!result) {
-                    err = 'Unknown Error';
-                } else if (result.features && result.features.length < 1) {
-                    err = 'No Results';
-                } else if (result.error && result.error.message) {
-                    err = result.error.message;
-                }
-
-                if (err) {
-                    return callback(err);
-                } else {
                     // pass through the discrete capture date from metadata
                     var captureDate = localeDateString(result.features[0].attributes.SRC_DATE2);
                     vintage = {
@@ -459,10 +454,13 @@ rendererBackgroundSource.Esri = function(data) {
                         metadata.accuracy += ' m';
                     }
 
-                    cache[tileId].metadata = metadata;
-                    return callback(null, metadata);
-                }
-            });
+                    cache[tileID].metadata = metadata;
+                    if (callback) callback(null, metadata);
+                })
+                .catch(function(error) {
+                    delete inflight[tileID];
+                    if (callback) callback(error);
+                });
         }
 
 

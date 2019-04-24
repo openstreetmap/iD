@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { request as d3_request } from 'd3-request';
 
 import deepEqual from 'fast-deep-equal';
 import turf_bboxClip from '@turf/bbox-clip';
@@ -17,8 +16,8 @@ var dispatch = d3_dispatch('loadedData');
 var _vtCache;
 
 
-function abortRequest(i) {
-    i.abort();
+function abortRequest(controller) {
+    controller.abort();
 }
 
 
@@ -105,12 +104,23 @@ function loadTile(source, tile) {
             return subdomains[(tile.xyz[0] + tile.xyz[1]) % subdomains.length];
         });
 
-    source.inflight[tile.id] = d3_request(url)
-        .responseType('arraybuffer')
-        .get(function(err, data) {
+
+    var controller = new AbortController();
+    source.inflight[tile.id] = controller;
+
+    fetch(url, { signal: controller.signal })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(response.status + ' ' + response.statusText);
+            }
             source.loaded[tile.id] = [];
             delete source.inflight[tile.id];
-            if (err || !data) return;
+            return response.arrayBuffer();
+        })
+        .then(function(data) {
+            if (!data) {
+                throw new Error('No Data');
+            }
 
             var z = tile.xyz[2];
             if (!source.canMerge[z]) {
@@ -119,6 +129,10 @@ function loadTile(source, tile) {
 
             source.loaded[tile.id] = vtToGeoJSON(data, tile, source.canMerge[z]);
             dispatch.call('loadedData');
+        })
+        .catch(function() {
+            source.loaded[tile.id] = [];
+            delete source.inflight[tile.id];
         });
 }
 

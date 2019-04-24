@@ -1,7 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { xml as d3_xml } from 'd3-request';
+import { xml as d3_xml } from 'd3-fetch';
 
 import osmAuth from 'osm-auth';
 import rbush from 'rbush';
@@ -51,9 +51,9 @@ function authDone() {
 }
 
 
-function abortRequest(i) {
-    if (i) {
-        i.abort();
+function abortRequest(controllerOrXHR) {
+    if (controllerOrXHR) {
+        controllerOrXHR.abort();
     }
 }
 
@@ -468,7 +468,16 @@ export default {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
             var url = urlroot + path;
-            return d3_xml(url).get(done);
+            var controller = new AbortController();
+            d3_xml(url, { signal: controller.signal })
+                .then(function(data) {
+                    done(null, data);
+                })
+                .catch(function(err) {
+                    if (err.name === 'AbortError') return;
+                    done(err);
+                });
+            return controller;
         }
     },
 
@@ -743,9 +752,11 @@ export default {
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        d3_xml(urlroot + '/api/capabilities').get(
-            wrapcb(this, done, _connectionID)
-        );
+        var url = urlroot + '/api/capabilities';
+        var errback = wrapcb(this, done, _connectionID);
+        d3_xml(url)
+            .then(function(data) { errback(null, data); })
+            .catch(function(err) { errback(err); });
 
         function done(err, xml) {
             if (err) { return callback(err); }

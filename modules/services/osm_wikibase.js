@@ -1,6 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { utilDetect } from '../util/detect';
 import { utilQsString } from '../util';
@@ -16,11 +16,19 @@ var debouncedRequest = _debounce(request, 500, { leading: false });
 
 function request(url, callback) {
     if (_inflight[url]) return;
+    var controller = new AbortController();
+    _inflight[url] = controller;
 
-    _inflight[url] = d3_json(url, function (err, data) {
-        delete _inflight[url];
-        callback(err, data);
-    });
+    d3_json(url, { signal: controller.signal })
+        .then(function(result) {
+            delete _inflight[url];
+            if (callback) callback(null, result);
+        })
+        .catch(function(err) {
+            delete _inflight[url];
+            if (err.name === 'AbortError') return;
+            if (callback) callback(err);
+        });
 }
 
 
@@ -50,7 +58,7 @@ export default {
 
 
     reset: function() {
-        Object.values(_inflight).forEach(function(req) { req.abort(); });
+        Object.values(_inflight).forEach(function(controller) { controller.abort(); });
         _inflight = {};
     },
 

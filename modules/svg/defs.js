@@ -1,4 +1,4 @@
-import { request as d3_request } from 'd3-request';
+import { svg as d3_svg } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import { utilArrayUniq } from '../util';
@@ -191,11 +191,9 @@ export function svgDefs(context) {
             .each(function(d) {
                 var url = context.imagePath(d + '.svg');
                 var node = d3_select(this).node();
-                d3_request(url)
-                    .mimeType('image/svg+xml')
-                    .response(function(xhr) { return xhr.responseXML; })
-                    .get(function(err, svg) {
-                        if (err) return;
+
+                d3_svg(url)
+                    .then(function(svg) {
                         node.appendChild(
                             d3_select(svg.documentElement).attr('id', d).node()
                         );
@@ -203,6 +201,9 @@ export function svgDefs(context) {
                             d3_select(node).selectAll('path')
                                 .attr('fill', 'currentColor');
                         }
+                    })
+                    .catch(function() {
+                        /* ignore */
                     });
             });
     };

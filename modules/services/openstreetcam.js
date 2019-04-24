@@ -1,16 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { request as d3_request } from 'd3-request';
-
-import {
-    event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
-} from 'd3-selection';
-
-import {
-    zoom as d3_zoom,
-    zoomIdentity as d3_zoomIdentity
-} from 'd3-zoom';
+import { json as d3_json } from 'd3-fetch';
+import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import rbush from 'rbush';
 
@@ -33,8 +24,8 @@ var _oscCache;
 var _oscSelectedImage;
 
 
-function abortRequest(i) {
-    i.abort();
+function abortRequest(controller) {
+    controller.abort();
 }
 
 
@@ -86,14 +77,23 @@ function loadNextTilePage(which, currZoom, url, tile) {
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
 
-    cache.inflight[id] = d3_request(url)
-        .mimeType('application/json')
-        .header('Content-type', 'application/x-www-form-urlencoded')
-        .response(function(xhr) { return JSON.parse(xhr.responseText); })
-        .post(params, function(err, data) {
+    var controller = new AbortController();
+    cache.inflight[id] = controller;
+
+    var options = {
+        method: 'POST',
+        signal: controller.signal,
+        body: params,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    };
+
+    d3_json(url, options)
+        .then(function(data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
-            if (err || !data.currentPageItems || !data.currentPageItems.length) return;
+            if (!data || !data.currentPageItems || !data.currentPageItems.length) {
+                throw new Error('No Data');
+            }
 
             function localeDateString(s) {
                 if (!s) return null;
@@ -146,6 +146,10 @@ function loadNextTilePage(which, currZoom, url, tile) {
             } else {
                 cache.nextPage[tile.id] = Infinity;     // no more pages to load
             }
+        })
+        .catch(function() {
+            cache.loaded[id] = true;
+            delete cache.inflight[id];
         });
 }
 

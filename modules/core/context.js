@@ -1,7 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
@@ -434,16 +434,16 @@ export function coreContext() {
     context.loadLocale = function(callback) {
         if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
-            d3_json(localePath, function(err, result) {
-                if (!err) {
+            d3_json(localePath)
+                .then(function(result) {
                     addTranslation(locale, result[locale]);
                     setLocale(locale);
                     utilDetect(true);
-                }
-                if (callback) {
-                    callback(err);
-                }
-            });
+                    if (callback) callback();
+                })
+                .catch(function(err) {
+                    if (callback) callback(err);
+                });
         } else {
             if (locale) {
                 setLocale(locale);
@@ -520,13 +520,16 @@ export function coreContext() {
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;
-        d3_json(maprules, function (err, mapcss) {
-            if (err) return;
-            services.maprules.init();
-            mapcss.forEach(function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector);
+        d3_json(maprules)
+            .then(function(mapcss) {
+                services.maprules.init();
+                mapcss.forEach(function(mapcssSelector) {
+                    return services.maprules.addRule(mapcssSelector);
+                });
+            })
+            .catch(function() {
+                /* ignore */
             });
-        });
     }
 
     map = rendererMap(context);
