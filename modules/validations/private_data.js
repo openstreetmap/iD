@@ -32,11 +32,9 @@ export function validationPrivateData() {
         'contact:email': true,
         'contact:fax': true,
         'contact:phone': true,
-        'contact:website': true,
         email: true,
         fax: true,
-        phone: true,
-        website: true
+        phone: true
     };
 
 
