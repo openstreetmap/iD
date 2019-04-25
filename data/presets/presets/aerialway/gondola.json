@@ -5,6 +5,7 @@
     ],
     "fields": [
         "name",
+        "oneway",
         "aerialway/occupancy",
         "aerialway/capacity",
         "aerialway/duration",
