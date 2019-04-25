@@ -38,8 +38,7 @@ expect = chai.expect;
 
 window.d3 = iD.d3;   // TODO: remove if we can avoid exporting all of d3.js
 
-
-// workaround for `Array.from` polyfill in PhantomJS
+// Workaround for `Array.from` polyfill in PhantomJS
 // https://github.com/openstreetmap/iD/issues/6087#issuecomment-476219308
 var __arrayfrom = Array.from;
 Array.from = function(what) {
@@ -51,3 +50,46 @@ Array.from = function(what) {
         return __arrayfrom.apply(null, arguments);
     }
 };
+
+
+// Add support for sinon-stubbing `fetch` API
+// (sinon fakeServer works only on `XMLHttpRequest`)
+// see https://github.com/sinonjs/nise/issues/7
+//
+// None of the alternatives really worked well,
+// so I'm just pasting the `fake-fetch` methods here.
+//   - https://github.com/msn0/fake-fetch
+//   - https://github.com/wheresrhys/fetch-mock
+
+window.fakeFetch = {
+    install: function () {
+        sinon.stub(window, 'fetch');
+    },
+    restore: function () {
+        window.fetch.restore();
+    },
+    getUrl: function () {
+        return window.fetch.firstCall.args[0];
+    },
+    getOptions: function () {
+        return window.fetch.firstCall.args[1] || {};
+    },
+    getMethod: function () {
+        return this.getOptions().method || 'get';
+    },
+    getBody: function () {
+        return this.getOptions().body || '';
+    },
+    getRequestHeaders: function () {
+        return this.getOptions().headers || {};
+    },
+    respondWith: function (data, options) {
+        return window.fetch.returns(Promise.resolve(new Response(data, options)));
+    }
+};
+
+Object.defineProperty(
+    window.fakeFetch, 'called', {
+        get: function() { return !!window.fetch.firstCall; }
+    }
+);
