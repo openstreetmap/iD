@@ -1730,6 +1730,7 @@
     {"key": "amenity", "value": "youth_center", "description": "🄳 ➜ amenity=community_centre + community_centre:for=juvenile"},
     {"key": "amenity", "value": "youth_centre", "description": "🄳 ➜ amenity=community_centre + community_centre:for=juvenile"},
     {"key": "barrier", "value": "curb", "description": "🄳 ➜ barrier=kerb"},
+    {"key": "barrier", "value": "embankment", "description": "🄳 ➜ man_made=embankment"},
     {"key": "barrier", "value": "wire_fence", "description": "🄳 ➜ barrier=fence + fence_type=chain"},
     {"key": "barrier", "value": "wood_fence", "description": "🄳 ➜ barrier=fence + fence_type=wood"},
     {"key": "building", "value": "family_house", "description": "🄳 ➜ building=house"},

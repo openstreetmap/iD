@@ -141,6 +141,10 @@
       "replace": {"barrier": "kerb"}
     },
     {
+      "old": {"barrier": "embankment"},
+      "replace": {"man_made": "embankment"}
+    },
+    {
       "old": {"barrier": "entrance"},
       "replace": {"entrance": "*"}
     },
