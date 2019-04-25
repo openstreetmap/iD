@@ -84,7 +84,9 @@ window.fakeFetch = {
         return this.getOptions().headers || {};
     },
     respondWith: function (data, options) {
-        return window.fetch.returns(Promise.resolve(new Response(data, options)));
+        return window.fetch.callsFake(function() {
+            return Promise.resolve(new Response(data, options));
+        });
     }
 };
 
