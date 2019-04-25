@@ -132,7 +132,15 @@ export function uiCommit(context) {
 
         var warningsByType = utilArrayGroupBy(warnings, 'type');
         for (var warningType in warningsByType) {
-            tags['warnings:' + warningType] = warningsByType[warningType].length.toString();
+            var warningsOfType = warningsByType[warningType];
+            tags['warnings:' + warningType] = warningsOfType.length.toString();
+            if (warningsOfType[0].subtype) {
+                var warningsBySubtype = utilArrayGroupBy(warningsOfType, 'subtype');
+                for (var warningSubtype in warningsBySubtype) {
+                    var warningsOfSubtype = warningsBySubtype[warningSubtype];
+                    tags['warnings:' + warningType + ':' + warningSubtype] = warningsOfSubtype.length.toString();
+                }
+            }
         }
 
 

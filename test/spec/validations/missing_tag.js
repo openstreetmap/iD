@@ -67,6 +67,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_tag');
+        expect(issue.subtype).to.eql('any');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });
@@ -77,6 +78,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_tag');
+        expect(issue.subtype).to.eql('descriptive');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });
@@ -87,6 +89,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_tag');
+        expect(issue.subtype).to.eql('descriptive');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('r-1');
     });
@@ -97,6 +100,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_tag');
+        expect(issue.subtype).to.eql('relation_type');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('r-1');
     });
@@ -113,6 +117,7 @@ describe('iD.validations.missing_tag', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_tag');
+        expect(issue.subtype).to.eql('highway_classification');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
     });

@@ -61,6 +61,7 @@ describe('iD.validations.outdated_tags', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
         expect(issue.severity).to.eql('warning');
         expect(issue.entities).to.have.lengthOf(1);
         expect(issue.entities[0].id).to.eql('w-1');
@@ -85,6 +86,7 @@ describe('iD.validations.outdated_tags', function () {
         expect(issues).to.not.have.lengthOf(0);
         var issue = issues[0];
         expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('old_multipolygon');
         expect(issue.entities).to.have.lengthOf(2);
         expect(issue.entities[0].id).to.eql('w-1');
         expect(issue.entities[1].id).to.eql('r-1');

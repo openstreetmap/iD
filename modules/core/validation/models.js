@@ -3,6 +3,7 @@ import { osmEntity } from '../../osm/entity';
 
 export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
+    this.subtype = attrs.subtype;          // optional - category of the issue within the type (e.g. 'relation_type' under 'missing_tag')
     this.severity = attrs.severity;        // required - 'warning' or 'error'
     this.message = attrs.message;          // required - localized string
     this.reference = attrs.reference;      // optional - function(selection) to render reference information

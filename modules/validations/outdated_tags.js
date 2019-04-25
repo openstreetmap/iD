@@ -14,6 +14,8 @@ export function validationOutdatedTags() {
         var graph = context.graph();
         var oldTags = Object.assign({}, entity.tags);  // shallow copy
         var preset = context.presets().match(entity, graph);
+        var explicitPresetUpgrade = preset.replacement;
+        var subtype = 'deprecated_tags';
 
         // upgrade preset..
         if (preset.replacement) {
@@ -38,6 +40,9 @@ export function validationOutdatedTags() {
             Object.keys(preset.addTags).forEach(function(k) {
                 if (!newTags[k]) {
                     newTags[k] = preset.addTags[k];
+                    if (!explicitPresetUpgrade) {
+                        subtype = 'incomplete_tags';
+                    }
                 }
             });
         }
@@ -61,6 +66,7 @@ export function validationOutdatedTags() {
 
         return [new validationIssue({
             type: type,
+            subtype: subtype,
             severity: 'warning',
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
             reference: showReference,
@@ -133,6 +139,7 @@ export function validationOutdatedTags() {
         var multipolygonLabel = utilDisplayLabel(multipolygon, context);
         return [new validationIssue({
             type: type,
+            subtype: 'old_multipolygon',
             severity: 'warning',
             message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
             reference: showReference,

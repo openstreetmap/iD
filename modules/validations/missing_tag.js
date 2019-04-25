@@ -45,16 +45,21 @@ export function validationMissingTag() {
 
         var messageObj = {};
         var missingTagType;
+        var subtype;
 
         if (Object.keys(entity.tags).length === 0) {
             missingTagType = 'any';
+            subtype = 'any';
         } else if (!hasDescriptiveTags(entity)) {
             missingTagType = 'descriptive';
+            subtype = 'descriptive';
         } else if (isUntypedRelation(entity)) {
             missingTagType = 'specific';
             messageObj.tag = 'type';
+            subtype = 'relation_type';
         } else if (isUnknownRoad(entity)) {
             missingTagType = 'unknown_road';
+            subtype = 'highway_classification';
         }
 
         if (!missingTagType) return [];
@@ -101,9 +106,10 @@ export function validationMissingTag() {
         var referenceID = missingTagType === 'unknown_road' ? 'unknown_road' : 'missing_tag';
 
         var severity = (canDelete && missingTagType !== 'unknown_road') ? 'error' : 'warning';
-        
+
         return [new validationIssue({
             type: type,
+            subtype: subtype,
             severity: severity,
             message: t('issues.' + messageID + '.message', messageObj),
             reference: showReference,
