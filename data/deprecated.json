@@ -484,6 +484,10 @@
       "replace": {"power": "line", "line": "busbar"}
     },
     {
+      "old": {"power": "line", "location": "underground"},
+      "replace": {"power": "cable", "location": "underground"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
     },
