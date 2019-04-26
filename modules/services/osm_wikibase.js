@@ -27,7 +27,7 @@ function request(url, callback) {
         .catch(function(err) {
             delete _inflight[url];
             if (err.name === 'AbortError') return;
-            if (callback) callback(err);
+            if (callback) callback(err.message);
         });
 }
 

@@ -367,7 +367,7 @@ export default {
                 if (callback) callback(null, d);
             })
             .catch(function(err) {
-                if (callback) callback(err);
+                if (callback) callback(err.message);
             });
     },
 
@@ -452,7 +452,7 @@ export default {
                 })
                 .catch(function(err) {
                     delete _erCache.inflightPost[d.id];
-                    if (callback) callback(err);
+                    if (callback) callback(err.message);
                 });
         }
     },

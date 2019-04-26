@@ -475,7 +475,7 @@ export default {
                 })
                 .catch(function(err) {
                     if (err.name === 'AbortError') return;
-                    done(err);
+                    done(err.message);
                 });
             return controller;
         }
@@ -756,7 +756,7 @@ export default {
         var errback = wrapcb(this, done, _connectionID);
         d3_xml(url)
             .then(function(data) { errback(null, data); })
-            .catch(function(err) { errback(err); });
+            .catch(function(err) { errback(err.message); });
 
         function done(err, xml) {
             if (err) { return callback(err); }

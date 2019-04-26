@@ -153,7 +153,7 @@ function request(url, params, exactMatch, callback, loaded) {
         .catch(function(err) {
             delete _inflight[url];
             if (err.name === 'AbortError') return;
-            if (loaded) loaded(err);
+            if (loaded) loaded(err.message);
         });
 }
 

@@ -442,7 +442,7 @@ export function coreContext() {
                     if (callback) callback();
                 })
                 .catch(function(err) {
-                    if (callback) callback(err);
+                    if (callback) callback(err.message);
                 });
         } else {
             if (locale) {

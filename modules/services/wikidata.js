@@ -42,7 +42,7 @@ export default {
                 if (callback) callback(null, result.search || {});
             })
             .catch(function(err) {
-                if (callback) callback(err, {});
+                if (callback) callback(err.message, {});
             });
     },
 
@@ -74,7 +74,7 @@ export default {
                 if (callback) callback(null, result.entities || {});
             })
             .catch(function(err) {
-                if (callback) callback(err, {});
+                if (callback) callback(err.message, {});
             });
     },
 
@@ -119,7 +119,7 @@ export default {
                 if (callback) callback(null, result.entities[qid] || {});
             })
             .catch(function(err) {
-                if (callback) callback(err, {});
+                if (callback) callback(err.message, {});
             });
     },
 

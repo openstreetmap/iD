@@ -455,7 +455,7 @@ export default {
             })
             .catch(function(err) {
                 delete _krCache.inflightPost[d.id];
-                if (callback) callback(err);
+                if (callback) callback(err.message);
             });
     },
 

@@ -74,14 +74,14 @@ export default {
                 if (callback) callback(null, result[1] || []);
             })
             .catch(function(err) {
-                if (callback) callback(err, []);
+                if (callback) callback(err.message, []);
             });
     },
 
 
     translations: function(lang, title, callback) {
         if (!title) {
-            if (callback) callback({});
+            if (callback) callback('No Title');
             return;
         }
 
@@ -108,11 +108,11 @@ export default {
                     if (list && list.langlinks) {
                         list.langlinks.forEach(function(d) { translations[d.lang] = d['*']; });
                     }
-                    callback(translations);
+                    callback(null, translations);
                 }
             })
-            .catch(function() {
-                if (callback) callback({});
+            .catch(function(err) {
+                if (callback) callback(err.message);
             });
     }
 
