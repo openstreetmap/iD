@@ -6,9 +6,9 @@ import {
 } from '../geo';
 
 
-export function actionOrthogonalize(wayID, projection, vertexID) {
-    var epsilon = 1e-4;
-    var threshold = 13;  // degrees within right or straight to alter
+export function actionOrthogonalize(wayID, projection, vertexID, ep, degThresh) {
+    var epsilon = ep || 1e-4;
+    var threshold = degThresh || 13;  // degrees within right or straight to alter
 
     // We test normalized dot products so we can compare as cos(angle)
     var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);

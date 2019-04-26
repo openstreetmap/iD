@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
-import { operationDelete } from '../operations/index';
+import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
