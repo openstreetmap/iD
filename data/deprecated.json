@@ -468,6 +468,20 @@
       "replace": {"office": "estate_agent"}
     },
     {
+      "old": {"oneway": "1"},
+      "replace": {"oneway": "yes"}
+    },
+    {
+      "old": {"oneway": "alternate"},
+      "replace": {"oneway": "alternating"}
+    },
+    {
+      "old": {"oneway": "no;yes"}
+    },
+    {
+      "old": {"oneway": "unknown"}
+    },
+    {
       "old": {"place_name": "*"},
       "replace": {"name": "$1"}
     },

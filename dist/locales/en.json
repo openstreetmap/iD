@@ -1737,6 +1737,31 @@
                 "message": "{feature} has no classification",
                 "reference": "Roads without a specific type may not appear in maps or routing."
             },
+            "impossible_oneway": {
+                "title": "Impossible One-Ways",
+                "tip": "Find route issues with one-way features",
+                "waterway": {
+                    "connected": {
+                        "start": {
+                            "message": "{feature} flows away from a connected waterway"
+                        },
+                        "end": {
+                            "message": "{feature} flows against a connected waterway"
+                        },
+                        "reference": "Waterway segements should all flow in the same direction."
+                    }
+                },
+                "highway": {
+                    "start": {
+                        "message": "{feature} is unreachable",
+                        "reference": "One-way roads must be accessible via other roads."
+                    },
+                    "end": {
+                        "message": "{feature} has no outlet",
+                        "reference": "One-way roads must lead to other roads."
+                    }
+                }
+            },
             "unsquare_way": {
                 "title": "Unsquare Buildings",
                 "message": "{feature} isn't quite square",
@@ -1794,6 +1819,9 @@
                 },
                 "reposition_features": {
                     "title": "Reposition the features"
+                },
+                "reverse_feature": {
+                    "title": "Reverse this feature"
                 },
                 "select_preset": {
                     "title": "Select a feature type"

@@ -3,6 +3,7 @@ export { validationCrossingWays } from './crossing_ways';
 export { validationDisconnectedWay } from './disconnected_way';
 export { validationFixmeTag } from './fixme_tag';
 export { validationGenericName } from './generic_name';
+export { validationImpossibleOneway } from './impossible_oneway';
 export { validationIncompatibleSource } from './incompatible_source';
 export { validationMaprules } from './maprules';
 export { validationMissingRole } from './missing_role';

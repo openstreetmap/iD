@@ -8,6 +8,7 @@ export function operationReverse(selectedIDs, context) {
 
     var operation = function() {
         context.perform(actionReverse(entityID), operation.annotation());
+        context.validator().validate();
     };
 
 

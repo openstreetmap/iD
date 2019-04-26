@@ -3,6 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
 import { osmNode } from '../osm/node';
+import { osmFlowingWaterwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -67,22 +68,6 @@ export function validationCrossingWays() {
         return getFeatureTypeForTags(tags);
     }
 
-    // whitelists
-    var waterways = {
-        canal: true, ditch: true, drain: true, river: true, stream: true
-    };
-    var railways = {
-        rail: true, disused: true, tram: true, subway: true, narrow_gauge: true,
-        light_rail: true, preserved: true, miniature: true, monorail: true, funicular: true
-    };
-    var highways = {
-        residential: true, service: true, track: true, unclassified: true, footway: true,
-        path: true, tertiary: true, secondary: true, primary: true, living_street: true,
-        cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
-        pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
-        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true,
-        bus_guideway: true
-    };
     // blacklist
     var ignoredBuildings = {
         demolished: true, dismantled: true, proposed: true, razed: true
@@ -95,9 +80,9 @@ export function validationCrossingWays() {
         // don't check non-building areas
         if (hasTag(tags, 'area')) return null;
 
-        if (hasTag(tags, 'highway') && highways[tags.highway]) return 'highway';
-        if (hasTag(tags, 'railway') && railways[tags.railway]) return 'railway';
-        if (hasTag(tags, 'waterway') && waterways[tags.waterway]) return 'waterway';
+        if (hasTag(tags, 'highway') && osmRoutableHighwayTagValues[tags.highway]) return 'highway';
+        if (hasTag(tags, 'railway') && osmRailwayTrackTagValues[tags.railway]) return 'railway';
+        if (hasTag(tags, 'waterway') && osmFlowingWaterwayTagValues[tags.waterway]) return 'waterway';
 
         return null;
     }

@@ -9,6 +9,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
+import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -21,9 +22,7 @@ export function validationAlmostJunction() {
 
     function isHighway(entity) {
         return entity.type === 'way' &&
-            entity.tags.highway &&
-            entity.tags.highway !== 'no' &&
-            entity.tags.highway !== 'proposed';
+            osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
     function isNoexit(node) {

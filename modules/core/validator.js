@@ -218,12 +218,13 @@ export function coreValidator(context) {
 
         if (entity.type === 'way') {
             runValidation('crossing_ways');
+            runValidation('almost_junction');
 
-            // only check for disconnected way if no almost junctions
-            if (runValidation('almost_junction')) {
-                runValidation('disconnected_way');
+            // only check impossible_oneway if no disconnected_way issues
+            if (runValidation('disconnected_way')) {
+                runValidation('impossible_oneway');
             } else {
-                ran.disconnected_way = true;
+                ran.impossible_oneway = true;
             }
 
             runValidation('tag_suggests_area');
