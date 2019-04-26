@@ -189,7 +189,8 @@ export function uiEntityIssues(context) {
             })
             .on('click', function(d) {
                 if (d.onClick) {
-                    utilHighlightEntities(d.entityIds, false, context);
+                    var issueEntityIDs = d.issue.entities.map(function(e) { return e.id; });
+                    utilHighlightEntities(issueEntityIDs.concat(d.entityIds), false, context);
                     d.onClick();
                     context.validator().validate();
                 }
