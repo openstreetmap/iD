@@ -24,7 +24,6 @@ var readOnlyTags = [
     /^imagery_used$/,
     /^host$/,
     /^locale$/,
-    /^warnings$/,
     /^warnings:/
 ];
 
@@ -117,7 +116,7 @@ export function uiCommit(context) {
 
         // remove existing warning counts
         for (var key in tags) {
-            if (key === 'warnings' || key.match(/^warnings:/)) {
+            if (key.match(/^warnings:/)) {
                 delete tags[key];
             }
         }
@@ -126,20 +125,17 @@ export function uiCommit(context) {
         var warnings = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).warning;
 
-        if (warnings.length) {
-            tags.warnings = warnings.length.toString();
-        }
-
         var warningsByType = utilArrayGroupBy(warnings, 'type');
         for (var warningType in warningsByType) {
             var warningsOfType = warningsByType[warningType];
-            tags['warnings:' + warningType] = warningsOfType.length.toString();
             if (warningsOfType[0].subtype) {
                 var warningsBySubtype = utilArrayGroupBy(warningsOfType, 'subtype');
                 for (var warningSubtype in warningsBySubtype) {
                     var warningsOfSubtype = warningsBySubtype[warningSubtype];
                     tags['warnings:' + warningType + ':' + warningSubtype] = warningsOfSubtype.length.toString();
                 }
+            } else {
+                tags['warnings:' + warningType] = warningsOfType.length.toString();
             }
         }
 
