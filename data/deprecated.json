@@ -598,6 +598,10 @@
       "replace": {"shop": "bag"}
     },
     {
+      "old": {"shop": "money_transfer"},
+      "replace": {"amenity": "money_transfer"}
+    },
+    {
       "old": {"shop": "moneylender"},
       "replace": {"shop": "money_lender"}
     },
