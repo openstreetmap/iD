@@ -25,7 +25,7 @@ import { services } from './services/index';
 var Connection = services.osm;
 export { Connection };
 export { coreContext as Context } from './core/context';
-export { setAreaKeys, areaKeys } from './core/area_keys';
+export { osmSetAreaKeys as setAreaKeys, osmAreaKeys as areaKeys } from './osm/tags';
 export { coreDifference as Difference } from './core/difference';
 export { coreGraph as Graph } from './core/graph';
 export { coreHistory as History } from './core/history';

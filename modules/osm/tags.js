@@ -6,6 +6,11 @@ export function osmIsInterestingTag(key) {
         key.indexOf('tiger:') !== 0;
 }
 
+export var osmAreaKeys = {};
+
+export function osmSetAreaKeys(value) {
+    osmAreaKeys = value;
+}
 
 export var osmOneWayTags = {
     'aerialway': {

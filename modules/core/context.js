@@ -6,7 +6,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
-import { setAreaKeys } from './area_keys';
+import { osmSetAreaKeys } from '../osm/tags';
 
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
@@ -549,11 +549,11 @@ export function coreContext() {
         var external = utilStringQs(window.location.hash).presets;
         presets.fromExternal(external, function(externalPresets) {
             context.presets = function() { return externalPresets; }; // default + external presets...
-            setAreaKeys(presets.areaKeys());
+            osmSetAreaKeys(presets.areaKeys());
         });
     } else {
         presets.init();
-        setAreaKeys(presets.areaKeys());
+        osmSetAreaKeys(presets.areaKeys());
     }
 
     return context;
