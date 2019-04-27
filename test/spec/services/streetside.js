@@ -83,7 +83,7 @@ describe('iD.serviceStreetside', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 done();
-            }, 50);
+            }, 200);
         });
 
         it('does not load bubbles around null island', function(done) {
@@ -118,7 +118,7 @@ describe('iD.serviceStreetside', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.not.called;
                 done();
-            }, 50);
+            }, 200);
         });
     });
 

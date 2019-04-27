@@ -74,7 +74,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 done();
-            }, 50);
+            }, 200);
         });
 
         it('does not load images around null island', function(done) {
@@ -98,7 +98,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.not.called;
                 done();
-            }, 50);
+            }, 200);
         });
 
         it.skip('loads multiple pages of image results', function(done) {
@@ -139,7 +139,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledTwice;
                 done();
-            }, 50);
+            }, 200);
         });
     });
 
@@ -169,7 +169,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 done();
-            }, 50);
+            }, 200);
         });
 
         it('does not load signs around null island', function(done) {
@@ -197,7 +197,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.not.called;
                 done();
-            }, 50);
+            }, 200);
         });
 
         it.skip('loads multiple pages of signs results', function(done) {
@@ -245,7 +245,7 @@ describe('iD.serviceMapillary', function() {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledTwice;
                 done();
-            }, 50);
+            }, 200);
         });
     });
 
