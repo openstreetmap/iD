@@ -440,7 +440,8 @@ export default {
 
             // 400 Bad Request, 401 Unauthorized, 403 Forbidden
             // Logout and retry the request..
-            if (isAuthenticated && err && (err.status === 400 || err.status === 401 || err.status === 403)) {
+            if (isAuthenticated && err && err.status &&
+                    (err.status === 400 || err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback, options);
 
@@ -448,7 +449,7 @@ export default {
             } else {
                 // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
                 // Set the rateLimitError flag and trigger a warning..
-                if (!isAuthenticated && !_rateLimitError && err &&
+                if (!isAuthenticated && !_rateLimitError && err && err.status &&
                         (err.status === 509 || err.status === 429)) {
                     _rateLimitError = err;
                     dispatch.call('change');
@@ -475,7 +476,15 @@ export default {
                 })
                 .catch(function(err) {
                     if (err.name === 'AbortError') return;
-                    done(err.message);
+                    // d3-fetch includes status in the error message,
+                    // but we can't access the response itself
+                    // https://github.com/d3/d3-fetch/issues/27
+                    var match = err.message.match(/^\d{3}/);
+                    if (match) {
+                        done({ status: +match[0], statusText: err.message });
+                    } else {
+                        done(err.message);
+                    }
                 });
             return controller;
         }
