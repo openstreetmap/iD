@@ -245,7 +245,7 @@ describe('iD.presetIndex', function () {
         };
 
         beforeEach(function () {
-            server = sinon.fakeServer.create();
+            server = window.fakeFetch().create();
         });
 
         afterEach(function () {

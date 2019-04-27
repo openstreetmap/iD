@@ -18,7 +18,7 @@ describe('iD.serviceMapillary', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = sinon.fakeServer.create();
+        server = window.fakeFetch().create();
         mapillary = iD.services.mapillary;
         mapillary.reset();
     });
@@ -54,7 +54,7 @@ describe('iD.serviceMapillary', function() {
     });
 
     describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function() {
+        it('fires loadedImages when images are loaded', function(done) {
             var spy = sinon.spy();
             mapillary.on('loadedImages', spy);
             mapillary.loadImages(context.projection);
@@ -71,10 +71,13 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 50);
         });
 
-        it('does not load images around null island', function() {
+        it('does not load images around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
             mapillary.on('loadedImages', spy);
@@ -92,10 +95,13 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.not.called;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                done();
+            }, 50);
         });
 
-        it.skip('loads multiple pages of image results', function() {
+        it.skip('loads multiple pages of image results', function(done) {
             var spy = sinon.spy();
             mapillary.on('loadedImages', spy);
             mapillary.loadImages(context.projection);
@@ -130,12 +136,16 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
             server.respond();
 
-            expect(spy).to.have.been.calledTwice;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledTwice;
+                done();
+            }, 50);
         });
     });
 
+
     describe('#loadSigns', function() {
-        it('fires loadedSigns when signs are loaded', function() {
+        it('fires loadedSigns when signs are loaded', function(done) {
             var spy = sinon.spy();
             mapillary.on('loadedSigns', spy);
             mapillary.loadSigns(context, context.projection);
@@ -156,10 +166,13 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 50);
         });
 
-        it('does not load signs around null island', function() {
+        it('does not load signs around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
             mapillary.on('loadedSigns', spy);
@@ -181,10 +194,13 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.not.called;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                done();
+            }, 50);
         });
 
-        it.skip('loads multiple pages of signs results', function() {
+        it.skip('loads multiple pages of signs results', function(done) {
             var spy = sinon.spy();
             mapillary.on('loadedSigns', spy);
             mapillary.loadSigns(context, context.projection);
@@ -226,7 +242,10 @@ describe('iD.serviceMapillary', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
             server.respond();
 
-            expect(spy).to.have.been.calledTwice;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledTwice;
+                done();
+            }, 50);
         });
     });
 

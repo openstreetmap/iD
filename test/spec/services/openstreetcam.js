@@ -17,7 +17,7 @@ describe('iD.serviceOpenstreetcam', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = sinon.fakeServer.create();
+        server = window.fakeFetch().create();
         openstreetcam = iD.services.openstreetcam;
         openstreetcam.reset();
     });
@@ -51,7 +51,7 @@ describe('iD.serviceOpenstreetcam', function() {
     });
 
     describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function() {
+        it('fires loadedImages when images are loaded', function(done) {
             var spy = sinon.spy();
             openstreetcam.on('loadedImages', spy);
             openstreetcam.loadImages(context.projection);
@@ -102,10 +102,13 @@ describe('iD.serviceOpenstreetcam', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(data) ]);
             server.respond();
 
-            expect(spy).to.have.been.calledOnce;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 50);
         });
 
-        it('does not load images around null island', function() {
+        it('does not load images around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
             openstreetcam.on('loadedImages', spy);
@@ -157,10 +160,13 @@ describe('iD.serviceOpenstreetcam', function() {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(data) ]);
             server.respond();
 
-            expect(spy).to.have.been.not.called;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                done();
+            }, 50);
         });
 
-        it.skip('loads multiple pages of image results', function() {
+        it.skip('loads multiple pages of image results', function(done) {
             var spy = sinon.spy();
             openstreetcam.on('loadedImages', spy);
             openstreetcam.loadImages(context.projection);
@@ -222,7 +228,10 @@ describe('iD.serviceOpenstreetcam', function() {
             });
             server.respond();
 
-            expect(spy).to.have.been.calledTwice;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledTwice;
+                done();
+            }, 50);
         });
     });
 

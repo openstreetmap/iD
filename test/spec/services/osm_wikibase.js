@@ -10,9 +10,9 @@ describe('iD.serviceOsmWikibase', function () {
   });
 
   beforeEach(function () {
+    server = window.fakeFetch().create();
     wikibase = iD.services.osmWikibase;
     wikibase.init();
-    server = sinon.fakeServer.create();
   });
 
   afterEach(function () {
@@ -273,7 +273,7 @@ describe('iD.serviceOsmWikibase', function () {
   };
 
   describe('#getEntity', function () {
-    it('calls the given callback with the results of the getEntity data item query', function () {
+    it('calls the given callback with the results of the getEntity data item query', function (done) {
       var callback = sinon.spy();
       wikibase.getEntity({key: 'amenity', value: 'parking', langCode: 'fr'}, callback);
 
@@ -289,21 +289,24 @@ describe('iD.serviceOsmWikibase', function () {
       );
       server.respond();
 
-      expect(query(server.requests[0].url)).to.eql(
-        {
-          action: 'wbgetentities',
-          sites: 'wiki',
-          titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
-          languages: 'fr',
-          languagefallback: '1',
-          origin: '*',
-          format: 'json',
-        }
-      );
-      expect(callback).to.have.been.calledWith(null, {
-        key: keyData({norm: true}),
-        tag: tagData({norm: true})
-      });
+      window.setTimeout(function() {
+        expect(query(server.requests()[0].url)).to.eql(
+          {
+            action: 'wbgetentities',
+            sites: 'wiki',
+            titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
+            languages: 'fr',
+            languagefallback: '1',
+            origin: '*',
+            format: 'json',
+          }
+        );
+        expect(callback).to.have.been.calledWith(null, {
+          key: keyData({norm: true}),
+          tag: tagData({norm: true})
+        });
+        done();
+      }, 50);
     });
   });
 
