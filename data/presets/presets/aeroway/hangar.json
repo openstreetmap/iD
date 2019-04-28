@@ -9,5 +9,13 @@
     "tags": {
         "aeroway": "hangar"
     },
+    "addTags": {
+        "building": "hangar",
+        "aeroway": "hangar"
+    },
+    "removeTags": {
+        "building": "hangar",
+        "aeroway": "hangar"
+    },
     "name": "Hangar"
 }
