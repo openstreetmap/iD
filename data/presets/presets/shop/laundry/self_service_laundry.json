@@ -1,0 +1,19 @@
+{
+    "icon": "maki-laundry",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "laundry",
+        "self_service": "yes"
+    },
+    "terms": [
+        "coin laundry",
+        "laundromat",
+        "coin wash",
+        "launderette",
+        "washateria"
+    ],
+    "name": "Self-service laundry"
+}
