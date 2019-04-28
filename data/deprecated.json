@@ -408,6 +408,10 @@
       "replace": {"natural": "wood"}
     },
     {
+      "old": {"lawyer": "notary"},
+      "replace": {"office": "notary"}
+    },
+    {
       "old": {"leisure": "beach"},
       "replace": {"natural": "beach"}
     },
