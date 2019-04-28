@@ -25,6 +25,10 @@
       "replace": {"tourism": "information"}
     },
     {
+      "old": {"amenity": "club"},
+      "replace": {"club": "*"}
+    },
+    {
       "old": {"amenity": "community_center"},
       "replace": {"amenity": "community_centre"}
     },
@@ -111,6 +115,10 @@
     {
       "old": {"amenity": "sloped_curb"},
       "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"amenity": "social_club"},
+      "replace": {"club": "*"}
     },
     {
       "old": {"amenity": "swimming_pool"},
@@ -421,6 +429,10 @@
     },
     {
       "old": {"leisure": "club"},
+      "replace": {"club": "*"}
+    },
+    {
+      "old": {"leisure": "social_club"},
       "replace": {"club": "*"}
     },
     {
