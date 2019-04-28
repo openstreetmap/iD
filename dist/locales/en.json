@@ -4334,6 +4334,10 @@
                     "name": "Goods Aerialway",
                     "terms": ""
                 },
+                "aerialway/j-bar": {
+                    "name": "J-bar Lift",
+                    "terms": "jbar"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Magic Carpet Lift",
                     "terms": ""
