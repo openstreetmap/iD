@@ -1848,6 +1848,8 @@
     {"key": "sloped_curb", "value": "no", "description": "🄳 ➜ kerb=raised"},
     {"key": "sloped_curb", "value": "yes", "description": "🄳 ➜ kerb=lowered"},
     {"key": "theatre:type", "value": "amphitheatre", "description": "🄳 ➜ theatre:type=amphi"},
+    {"key": "todo", "description": "🄳 ➜ fixme=*"},
+    {"key": "TODO", "description": "🄳 ➜ fixme=*"},
     {"key": "toilets:disposal", "value": "longdrop", "description": "🄳 ➜ toilets:disposal=pitlatrine"},
     {"key": "toilets:disposal", "value": "pit_latrine", "description": "🄳 ➜ toilets:disposal=pitlatrine"},
     {"key": "tourism", "value": "bed_and_breakfast", "description": "🄳 ➜ tourism=guest_house + guest_house=bed_and_breakfast"},

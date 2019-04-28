@@ -678,6 +678,14 @@
       "replace": {"theatre:type": "amphi"}
     },
     {
+      "old": {"todo": "*"},
+      "replace": {"fixme": "$1"}
+    },
+    {
+      "old": {"TODO": "*"},
+      "replace": {"fixme": "$1"}
+    },
+    {
       "old": {"toilets:disposal": "longdrop"},
       "replace": {"toilets:disposal": "pitlatrine"}
     },
