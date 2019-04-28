@@ -199,6 +199,17 @@ The ID of a preset that is preferable to this one. iD's validator will flag feat
 
 When possible, use `deprecated.json` instead to specify upgrade paths for old tags. This property is meant for special cases, such as upgrades with geometry requirements.
 
+##### `reference`
+
+A key and optionally a value to link to the wiki documentation for this preset. Only necessary if the preset consists of several tags.
+
+For example, 
+```javascript
+"reference": {
+    "key": "tower:type",
+    "value": "communication"
+}
+```
 
 ## Fields
 
