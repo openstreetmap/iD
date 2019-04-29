@@ -142,7 +142,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadSigns(context, projection);
+                service.loadSigns(projection);
             } else {
                 editOff();
             }

@@ -95,15 +95,6 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 throw new Error('No Data');
             }
 
-            function localeDateString(s) {
-                if (!s) return null;
-                var detected = utilDetect();
-                var options = { day: 'numeric', month: 'short', year: 'numeric' };
-                var d = new Date(s);
-                if (isNaN(d.getTime())) return null;
-                return d.toLocaleDateString(detected.locale, options);
-            }
-
             var features = data.currentPageItems.map(function(item) {
                 var loc = [+item.lng, +item.lat];
                 var d;
@@ -113,7 +104,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
-                        captured_at: localeDateString(item.shot_date || item.date_added),
+                        captured_at: (item.shot_date || item.date_added),
                         captured_by: item.username,
                         imagePath: item.lth_name,
                         sequence_id: item.sequence_id,
@@ -136,15 +127,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
             cache.rtree.load(features);
 
-            if (which === 'images') {
-                dispatch.call('loadedImages');
-            }
-
             if (data.currentPageItems.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
             } else {
                 cache.nextPage[tile.id] = Infinity;     // no more pages to load
+            }
+
+            if (which === 'images') {
+                dispatch.call('loadedImages');
             }
         })
         .catch(function() {
@@ -439,7 +430,7 @@ export default {
                 attribution
                     .append('span')
                     .attr('class', 'captured_at')
-                    .text(d.captured_at);
+                    .text(localeDateString(d.captured_at));
 
                 attribution
                     .append('span')
@@ -453,7 +444,18 @@ export default {
                 .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');
         }
+
         return this;
+
+
+        function localeDateString(s) {
+            if (!s) return null;
+            var detected = utilDetect();
+            var options = { day: 'numeric', month: 'short', year: 'numeric' };
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleDateString(detected.locale, options);
+        }
     },
 
 

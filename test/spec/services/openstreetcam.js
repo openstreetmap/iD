@@ -52,8 +52,11 @@ describe('iD.serviceOpenstreetcam', function() {
 
     describe('#loadImages', function() {
         it('fires loadedImages when images are loaded', function(done) {
-            var spy = sinon.spy();
-            openstreetcam.on('loadedImages', spy);
+            openstreetcam.on('loadedImages', function() {
+                expect(server.requests().length).to.eql(1);  // 1 nearby-photos
+                done();
+            });
+
             openstreetcam.loadImages(context.projection);
 
             var data = {
@@ -101,16 +104,12 @@ describe('iD.serviceOpenstreetcam', function() {
             server.respondWith('POST', /nearby-photos/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(data) ]);
             server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledOnce;
-                done();
-            }, 200);
         });
 
         it('does not load images around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
+
             openstreetcam.on('loadedImages', spy);
             openstreetcam.loadImages(context.projection);
 
@@ -162,76 +161,45 @@ describe('iD.serviceOpenstreetcam', function() {
 
             window.setTimeout(function() {
                 expect(spy).to.have.been.not.called;
+                expect(server.requests().length).to.eql(0);   // no tile requests of any kind
                 done();
             }, 200);
         });
 
-        it.skip('loads multiple pages of image results', function(done) {
-            var spy = sinon.spy();
-            openstreetcam.on('loadedImages', spy);
+        it('loads multiple pages of image results', function(done) {
+            openstreetcam.on('loadedImages', function() {
+                expect(server.requests().length).to.eql(2);   // 2 nearby-photos
+                done();
+            });
+
             openstreetcam.loadImages(context.projection);
 
-            var features0 = [],
-                features1 = [],
-                i;
-
-            for (i = 0; i < 1000; i++) {
-                features0.push({
-                    id: String(i),
+            var features = [];
+            for (var i = 0; i < 1000; i++) {
+                var key = String(i);
+                features.push({
+                    id: key,
                     sequence_id: '100',
-                    sequence_index: String(i),
+                    sequence_index: key,
                     lat: '10',
                     lng: '0',
-                    name: 'storage6\/files\/photo\/foo' + String(i) +'.jpg',
-                    lth_name: 'storage6\/files\/photo\/lth\/foo' + String(i) +'.jpg',
-                    th_name: 'storage6\/files\/photo\/th\/foo' + String(i) +'.jpg',
+                    name: 'storage6\/files\/photo\/foo' + key + '.jpg',
+                    lth_name: 'storage6\/files\/photo\/lth\/foo' + key + '.jpg',
+                    th_name: 'storage6\/files\/photo\/th\/foo' + key + '.jpg',
                     shot_date: '2017-09-24 23:58:07',
                     heading: '90',
                     username: 'test'
                 });
             }
-            for (i = 0; i < 500; i++) {
-                features1.push({
-                    id: String(i),
-                    sequence_id: '100',
-                    sequence_index: String(1000 + i),
-                    lat: '10',
-                    lng: '0',
-                    name: 'storage6\/files\/photo\/foo' + String(1000 + i) +'.jpg',
-                    lth_name: 'storage6\/files\/photo\/lth\/foo' + String(1000 + i) +'.jpg',
-                    th_name: 'storage6\/files\/photo\/th\/foo' + String(1000 + i) +'.jpg',
-                    shot_date: '2017-09-24 23:58:07',
-                    heading: '90',
-                    username: 'test'
-                });
-            }
+            var response = {
+                status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
+                currentPageItems: features,
+                totalFilteredItems: ['1000']
+            };
 
-            var response0 = {
-                    status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
-                    currentPageItems: [features0],
-                    totalFilteredItems: ['1000']
-                },
-                response1 = {
-                    status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
-                    currentPageItems: [features1],
-                    totalFilteredItems: ['500']
-                };
-
-            server.respondWith('POST', /nearby-photos/, function (request) {
-                var response;
-                if (request.requestBody.match(/page=1/) !== null) {
-                    response = JSON.stringify(response0);
-                } else if (request.requestBody.match(/page=2/) !== null) {
-                    response = JSON.stringify(response1);
-                }
-                request.respond(200, {'Content-Type': 'application/json'}, response);
-            });
+            server.respondWith('POST', /nearby-photos/,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledTwice;
-                done();
-            }, 200);
         });
     });
 

@@ -180,17 +180,17 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 cache.rtree.load(features);
             }
 
-            if (which === 'images' || which === 'sequences') {
-                dispatch.call('loadedImages');
-            } else if (which === 'map_features') {
-                dispatch.call('loadedSigns');
-            }
-
             if (data.features.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
             } else {
                 cache.nextPage[tile.id] = Infinity;     // no more pages to load
+            }
+
+            if (which === 'images' || which === 'sequences') {
+                dispatch.call('loadedImages');
+            } else if (which === 'map_features') {
+                dispatch.call('loadedSigns');
             }
         })
         .catch(function() {
@@ -326,7 +326,7 @@ export default {
     },
 
 
-    loadSigns: function(context, projection) {
+    loadSigns: function(projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
         loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=1&', projection);
