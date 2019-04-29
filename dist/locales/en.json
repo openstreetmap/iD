@@ -3113,7 +3113,7 @@
                     "label": "Internet Access Fee"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Network Name)"
+                    "label": "Wifi Network Name"
                 },
                 "interval": {
                     "label": "Interval"
