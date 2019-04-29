@@ -610,6 +610,10 @@
       "replace": {"shop": "art"}
     },
     {
+      "old": {"shop": "jewellery"},
+      "replace": {"shop": "jewelry"}
+    },
+    {
       "old": {"shop": "lingerie"},
       "replace": {"shop": "clothes", "clothes": "underwear"}
     },
