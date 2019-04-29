@@ -1772,6 +1772,9 @@ en:
           'yes': 'Yes'
         # second_hand field placeholder
         placeholder: 'Yes, No, Only'
+      self_service:
+        # self_service=*
+        label: Self-Service
       service:
         # service=*
         label: Type
@@ -6782,6 +6785,11 @@ en:
         # shop=laundry
         name: Laundry
         terms: '<translate with synonyms or related terms for ''Laundry'', separated by commas>'
+      shop/laundry/self_service_laundry:
+        # 'shop=laundry, self_service=yes'
+        name: Self-Service Laundry
+        # 'terms: Coin Laundry,Laundromat,Coin Wash,Launderette,Washateria'
+        terms: '<translate with synonyms or related terms for ''Self-Service Laundry'', separated by commas>'
       shop/leather:
         # shop=leather
         name: Leather Store

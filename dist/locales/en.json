@@ -3799,6 +3799,9 @@
                         "only": "Only"
                     }
                 },
+                "self_service": {
+                    "label": "Self-Service"
+                },
                 "service_rail": {
                     "label": "Service Type",
                     "options": {
@@ -8201,6 +8204,10 @@
                 "shop/laundry": {
                     "name": "Laundry",
                     "terms": ""
+                },
+                "shop/laundry/self_service_laundry": {
+                    "name": "Self-Service Laundry",
+                    "terms": "Coin Laundry,Laundromat,Coin Wash,Launderette,Washateria"
                 },
                 "shop/leather": {
                     "name": "Leather Store",
