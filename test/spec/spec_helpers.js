@@ -69,7 +69,7 @@ window.fakeFetch = function() {
         options = Object.assign({ method: 'get', headers: {}, body: '' }, options);
         return new Promise(function(resolve, reject) {
             _requests.push({
-                url: url, options: options, resolve: resolve, reject: reject
+                url: url, options: options, resolve: resolve, reject: reject, processed: false
             });
         });
     }
@@ -136,6 +136,8 @@ window.fakeFetch = function() {
 
         respond: function () {
             _requests.forEach(function(request) {
+                if (request.processed) return;
+
                 var didMatch = false;
                 for (var i = 0; i < _responders.length; i++) {
                     var responder = _responders[i];
@@ -150,11 +152,13 @@ window.fakeFetch = function() {
                     }
 
                     if (didMatch) {
+                        request.processed = true;
                         request.resolve(responder.respond());
                         break;
                     }
                 }
                 if (!didMatch) {
+                    request.processed = true;
                     request.reject(new Response(
                         new Blob(['404'], { type: 'text/plain' }),
                         { status: 404, statusText: 'Not Found' }
