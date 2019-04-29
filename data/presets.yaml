@@ -3591,6 +3591,10 @@ en:
         # building=greenhouse
         name: Greenhouse
         terms: '<translate with synonyms or related terms for ''Greenhouse'', separated by commas>'
+      building/hangar:
+        # building=hangar
+        name: Hangar Building
+        terms: '<translate with synonyms or related terms for ''Hangar Building'', separated by commas>'
       building/hospital:
         # building=hospital
         name: Hospital Building
@@ -5164,6 +5168,10 @@ en:
         name: Antenna
         # 'terms: broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv'
         terms: '<translate with synonyms or related terms for ''Antenna'', separated by commas>'
+      man_made/beacon:
+        # man_made=beacon
+        name: Beacon
+        terms: '<translate with synonyms or related terms for ''Beacon'', separated by commas>'
       man_made/beehive:
         # man_made=beehive
         name: Beehive
@@ -5199,6 +5207,11 @@ en:
         # man_made=cutline
         name: Cut line
         terms: '<translate with synonyms or related terms for ''Cut line'', separated by commas>'
+      man_made/dyke:
+        # man_made=dyke
+        name: Levee
+        # 'terms: Dike,Dyke,Floodbank,Stopbank'
+        terms: '<translate with synonyms or related terms for ''Levee'', separated by commas>'
       man_made/embankment:
         # man_made=embankment
         name: Embankment
@@ -5333,6 +5346,11 @@ en:
         name: Communication Tower
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/defensive:
+        # 'man_made=tower, tower:type=defensive'
+        name: Fortified Tower
+        # 'terms: Defensive Tower,Castle Tower'
+        terms: '<translate with synonyms or related terms for ''Fortified Tower'', separated by commas>'
       man_made/tower/minaret:
         # 'man_made=tower, tower:type=minaret'
         name: Minaret
@@ -6685,6 +6703,11 @@ en:
         name: Bottled Gas Shop
         # 'terms: cng,lpg,natural gas,propane,refill,tank'
         terms: '<translate with synonyms or related terms for ''Bottled Gas Shop'', separated by commas>'
+      shop/general:
+        # shop=general
+        name: General Store
+        # 'terms: Village Shop'
+        terms: '<translate with synonyms or related terms for ''General Store'', separated by commas>'
       shop/gift:
         # shop=gift
         name: Gift Shop
@@ -7140,6 +7163,10 @@ en:
         name: Trail Marker
         # 'terms: cairn,painted blaze,route flag,route marker,stone pile,trail blaze,trail post,way marker'
         terms: '<translate with synonyms or related terms for ''Trail Marker'', separated by commas>'
+      tourism/information/terminal:
+        # 'tourism=information, information=terminal'
+        name: Information Terminal
+        terms: '<translate with synonyms or related terms for ''Information Terminal'', separated by commas>'
       tourism/motel:
         # tourism=motel
         name: Motel
