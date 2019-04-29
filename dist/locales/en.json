@@ -2559,6 +2559,10 @@
                 "building": {
                     "label": "Building"
                 },
+                "building/levels_building": {
+                    "label": "Building Levels",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Material"
                 },
@@ -3000,6 +3004,9 @@
                 },
                 "healthcare/speciality": {
                     "label": "Specialties"
+                },
+                "height_building": {
+                    "label": "Building Height (Meters)"
                 },
                 "height": {
                     "label": "Height (Meters)"

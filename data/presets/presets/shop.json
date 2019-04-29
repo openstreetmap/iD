@@ -12,6 +12,8 @@
     "moreFields": [
         "air_conditioning",
         "brand",
+        "building/levels_building",
+        "height_building",
         "currency_multi",
         "email",
         "fax",

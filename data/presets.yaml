@@ -289,6 +289,11 @@ en:
       building:
         # building=*
         label: Building
+      building/levels_building:
+        # 'building:levels=*'
+        label: Building Levels
+        # building/levels_building field placeholder
+        placeholder: '2, 4, 6...'
       building/material:
         # 'building:material=*'
         label: Material
@@ -792,6 +797,9 @@ en:
       height:
         # height=*
         label: Height (Meters)
+      height_building:
+        # height=*
+        label: Building Height (Meters)
       highspeed:
         # highspeed=*
         label: High-Speed

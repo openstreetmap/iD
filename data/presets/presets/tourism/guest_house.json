@@ -12,6 +12,8 @@
     ],
     "moreFields" : [
         "air_conditioning",
+        "building/levels_building",
+        "height_building",
         "smoking",
         "payment_multi",
         "internet_access/ssid",
