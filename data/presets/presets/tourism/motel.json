@@ -6,13 +6,13 @@
         "address",
         "building_area",
         "rooms",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
         "air_conditioning",
         "email",
         "fax",
-        "internet_access/fee",
         "internet_access/ssid",
         "operator",
         "payment_multi",

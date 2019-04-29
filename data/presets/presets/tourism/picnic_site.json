@@ -8,6 +8,9 @@
         "capacity"
     ],
     "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "smoking",
         "fee",
         "payment_multi_fee",

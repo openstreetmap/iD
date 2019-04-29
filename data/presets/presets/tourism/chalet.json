@@ -5,13 +5,13 @@
         "operator",
         "address",
         "building_area",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
         "air_conditioning",
         "smoking",
         "payment_multi",
-        "internet_access/fee",
         "internet_access/ssid",
         "website",
         "phone",

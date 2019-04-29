@@ -9,6 +9,9 @@
     ],
     "moreFields": [
         "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "payment_multi_fee",
         "smoking",
         "website",

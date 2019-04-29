@@ -9,12 +9,15 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "operator",
-        "smoking",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "operator",
+        "phone",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [
