@@ -144,7 +144,12 @@ export function uiIssues(context) {
                     .datum(d.autoFix)  // set button datum to the autofix
                     .attr('class', 'autofix action')
                     .on('click', function(d) {
-                        utilHighlightEntities(d.entityIds, false, context);
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+
+                        var issuesEntityIDs = d.issue.entities.map(function(e) { return e.id; });
+                        utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
+
                         context.perform.apply(context, d.autoArgs);
                         context.validator().validate();
                     })

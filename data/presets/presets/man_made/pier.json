@@ -9,6 +9,7 @@
         "lit"
     ],
     "moreFields": [
+        "fishing",
         "incline",
         "{highway/footway}"
     ],

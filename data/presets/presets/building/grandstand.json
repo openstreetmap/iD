@@ -1,9 +1,5 @@
 {
     "icon": "maki-building",
-    "fields": [
-        "name",
-        "height"
-    ],
     "geometry": [
         "area"
     ],

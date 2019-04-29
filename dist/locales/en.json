@@ -4334,6 +4334,10 @@
                     "name": "Goods Aerialway",
                     "terms": ""
                 },
+                "aerialway/j-bar": {
+                    "name": "J-bar Lift",
+                    "terms": "jbar"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Magic Carpet Lift",
                     "terms": ""
@@ -5436,6 +5440,10 @@
                 },
                 "building/greenhouse": {
                     "name": "Greenhouse",
+                    "terms": ""
+                },
+                "building/hangar": {
+                    "name": "Hangar Building",
                     "terms": ""
                 },
                 "building/hospital": {
@@ -6798,6 +6806,10 @@
                     "name": "Antenna",
                     "terms": "broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv"
                 },
+                "man_made/beacon": {
+                    "name": "Beacon",
+                    "terms": ""
+                },
                 "man_made/beehive": {
                     "name": "Beehive",
                     "terms": "apiary,beekeeper,farm,honey,pollination"
@@ -6829,6 +6841,10 @@
                 "man_made/cutline": {
                     "name": "Cut line",
                     "terms": ""
+                },
+                "man_made/dyke": {
+                    "name": "Levee",
+                    "terms": "Dike,Dyke,Floodbank,Stopbank"
                 },
                 "man_made/embankment": {
                     "name": "Embankment",
@@ -6941,6 +6957,10 @@
                 "man_made/tower/communication": {
                     "name": "Communication Tower",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
+                },
+                "man_made/tower/defensive": {
+                    "name": "Fortified Tower",
+                    "terms": "Defensive Tower,Castle Tower"
                 },
                 "man_made/tower/minaret": {
                     "name": "Minaret",
@@ -8114,6 +8134,10 @@
                     "name": "Bottled Gas Shop",
                     "terms": "cng,lpg,natural gas,propane,refill,tank"
                 },
+                "shop/general": {
+                    "name": "General Store",
+                    "terms": "Village Shop"
+                },
                 "shop/gift": {
                     "name": "Gift Shop",
                     "terms": "souvenir"
@@ -8505,6 +8529,10 @@
                 "tourism/information/route_marker": {
                     "name": "Trail Marker",
                     "terms": "cairn,painted blaze,route flag,route marker,stone pile,trail blaze,trail post,way marker"
+                },
+                "tourism/information/terminal": {
+                    "name": "Information Terminal",
+                    "terms": ""
                 },
                 "tourism/motel": {
                     "name": "Motel",
