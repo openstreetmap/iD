@@ -997,7 +997,7 @@
     "shop/kiosk": {"icon": "maki-shop", "fields": ["{shop}", "levels"], "geometry": ["point", "area"], "tags": {"shop": "kiosk"}, "name": "Kiosk"},
     "shop/kitchen": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "kitchen"}, "terms": ["cabinets", "countertops", "sinks"], "name": "Kitchen Design Store"},
     "shop/laundry": {"icon": "maki-laundry", "fields": ["{shop}", "self_service"], "geometry": ["point", "area"], "tags": {"shop": "laundry"}, "name": "Laundry"},
-    "shop/laundry/self_service_laundry": {"icon": "maki-laundry", "geometry": ["point", "area"], "tags": {"shop": "laundry", "self_service": "yes"}, "terms": ["Coin Laundry", "Laundromat", "Coin Wash", "Launderette", "Washateria"], "name": "Self-Service Laundry"},
+    "shop/laundry/self_service": {"icon": "maki-laundry", "geometry": ["point", "area"], "tags": {"shop": "laundry", "self_service": "yes"}, "terms": ["Coin Laundry", "Laundromat", "Coin Wash", "Launderette", "Washateria"], "name": "Self-Service Laundry"},
     "shop/leather": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "leather"}, "name": "Leather Store"},
     "shop/lighting": {"icon": "far-lightbulb", "geometry": ["point", "area"], "terms": ["fluorescent lighting", "lamps", "LEDs", "light fixtures", "lightbulbs"], "tags": {"shop": "lighting"}, "name": "Lighting Store"},
     "shop/locksmith": {"icon": "fas-key", "geometry": ["point", "area"], "terms": ["key", "lockpick"], "tags": {"shop": "locksmith"}, "name": "Locksmith"},

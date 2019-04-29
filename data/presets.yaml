@@ -6785,7 +6785,7 @@ en:
         # shop=laundry
         name: Laundry
         terms: '<translate with synonyms or related terms for ''Laundry'', separated by commas>'
-      shop/laundry/self_service_laundry:
+      shop/laundry/self_service:
         # 'shop=laundry, self_service=yes'
         name: Self-Service Laundry
         # 'terms: Coin Laundry,Laundromat,Coin Wash,Launderette,Washateria'

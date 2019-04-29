@@ -8205,7 +8205,7 @@
                     "name": "Laundry",
                     "terms": ""
                 },
-                "shop/laundry/self_service_laundry": {
+                "shop/laundry/self_service": {
                     "name": "Self-Service Laundry",
                     "terms": "Coin Laundry,Laundromat,Coin Wash,Launderette,Washateria"
                 },
