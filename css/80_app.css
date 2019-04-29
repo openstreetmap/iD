@@ -2262,14 +2262,6 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
-/* Remove the field's bottom border radius when combobox is open */
-/* For some reason this stops the combobox from overlapping the bottom of the field */
-.combobox + * textarea:focus,
-.combobox + * input:focus {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
 
 /* Field Help
 ------------------------------------------------------- */
