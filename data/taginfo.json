@@ -1839,6 +1839,7 @@
     {"key": "shop", "value": "dive", "description": "🄳 ➜ shop=scuba_diving"},
     {"key": "shop", "value": "fish", "description": "🄳 ➜ shop=seafood"},
     {"key": "shop", "value": "gallery", "description": "🄳 ➜ shop=art"},
+    {"key": "shop", "value": "jewellery", "description": "🄳 ➜ shop=jewelry"},
     {"key": "shop", "value": "lingerie", "description": "🄳 ➜ shop=clothes + clothes=underwear"},
     {"key": "shop", "value": "luggage", "description": "🄳 ➜ shop=bag"},
     {"key": "shop", "value": "money_transfer", "description": "🄳 ➜ amenity=money_transfer"},
