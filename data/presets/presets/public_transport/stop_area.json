@@ -13,16 +13,6 @@
         "type": "public_transport",
         "public_transport": "stop_area"
     },
-    "addTags": {
-        "type": "public_transport",
-        "public_transport": "stop_area",
-        "public_transport:version": "2"
-    },
-    "removeTags": {
-        "type": "public_transport",
-        "public_transport": "stop_area",
-        "public_transport:version": "2"
-    },
     "reference": {
         "key": "public_transport",
         "value": "stop_area"
