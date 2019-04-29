@@ -1,8 +1,7 @@
 import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
-import { request as d3_request } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
@@ -30,9 +29,9 @@ var _krRuleset = [
 ];
 
 
-function abortRequest(i) {
-    if (i) {
-        i.abort();
+function abortRequest(controller) {
+    if (controller) {
+        controller.abort();
     }
 }
 
@@ -308,14 +307,16 @@ export default {
             var params = Object.assign({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
             var url = _krUrlRoot + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
-            _krCache.inflightTile[tile.id] = d3_json(url,
-                function(err, data) {
+            var controller = new AbortController();
+            _krCache.inflightTile[tile.id] = controller;
+
+            d3_json(url, { signal: controller.signal })
+                .then(function(data) {
                     delete _krCache.inflightTile[tile.id];
-
-                    if (err) return;
                     _krCache.loadedTile[tile.id] = true;
-
-                    if (!data.features || !data.features.length) return;
+                    if (!data || !data.features || !data.features.length) {
+                        throw new Error('No Data');
+                    }
 
                     data.features.forEach(function(feature) {
                         var loc = feature.geometry.coordinates;
@@ -396,8 +397,12 @@ export default {
                     });
 
                     dispatch.call('loaded');
-                }
-            );
+                })
+                .catch(function() {
+                    delete _krCache.inflightTile[tile.id];
+                    _krCache.loadedTile[tile.id] = true;
+                });
+
         });
     },
 
@@ -420,9 +425,16 @@ export default {
         // NOTE: This throws a CORS err, but it seems successful.
         // We don't care too much about the response, so this is fine.
         var url = _krUrlRoot + 'comment.php?' + utilQsString(params);
-        _krCache.inflightPost[d.id] = d3_request(url)
-            .post(function(err) {
+
+        var controller = new AbortController();
+        _krCache.inflightPost[d.id] = controller;
+
+        fetch(url, { method: 'POST', signal: controller.signal })
+            .then(function(response) {
                 delete _krCache.inflightPost[d.id];
+                if (!response.ok) {
+                    throw new Error(response.status + ' ' + response.statusText);
+                }
 
                 if (d.state === 'ignore') {   // ignore permanently (false positive)
                     that.removeError(d);
@@ -439,9 +451,12 @@ export default {
                     }));
                 }
 
-                return callback(err, d);
+                if (callback) callback(null, d);
+            })
+            .catch(function(err) {
+                delete _krCache.inflightPost[d.id];
+                if (callback) callback(err.message);
             });
-
     },
 
 

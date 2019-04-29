@@ -18,7 +18,7 @@ describe('iD.serviceMapillary', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = sinon.fakeServer.create();
+        server = window.fakeFetch().create();
         mapillary = iD.services.mapillary;
         mapillary.reset();
     });
@@ -54,12 +54,14 @@ describe('iD.serviceMapillary', function() {
     });
 
     describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function() {
-            var spy = sinon.spy();
-            mapillary.on('loadedImages', spy);
+        it('fires loadedImages when images are loaded', function(done) {
+            mapillary.on('loadedImages', function() {
+                expect(server.requests().length).to.eql(2);   // 1 images, 1 sequences
+                done();
+            });
+
             mapillary.loadImages(context.projection);
 
-            var match = /images/;
             var features = [{
                 type: 'Feature',
                 geometry: { type: 'Point', coordinates: [10,0] },
@@ -67,20 +69,18 @@ describe('iD.serviceMapillary', function() {
             }];
             var response = { type: 'FeatureCollection', features: features };
 
-            server.respondWith('GET', match,
+            server.respondWith('GET', /images/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
-
-            expect(spy).to.have.been.calledOnce;
         });
 
-        it('does not load images around null island', function() {
+        it('does not load images around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
+
             mapillary.on('loadedImages', spy);
             mapillary.loadImages(context.projection);
 
-            var match = /images/;
             var features = [{
                 type: 'Feature',
                 geometry: { type: 'Point', coordinates: [0,0] },
@@ -88,63 +88,72 @@ describe('iD.serviceMapillary', function() {
             }];
             var response = { type: 'FeatureCollection', features: features };
 
-            server.respondWith('GET', match,
+            server.respondWith('GET', /images/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.not.called;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                expect(server.requests().length).to.eql(0);   // no tile requests of any kind
+                done();
+            }, 200);
         });
 
-        it.skip('loads multiple pages of image results', function() {
-            var spy = sinon.spy();
-            mapillary.on('loadedImages', spy);
+        it('loads multiple pages of image results', function(done) {
+            var calls = 0;
+            mapillary.on('loadedImages', function() {
+                server.respond();  // respond to new fetches
+                if (++calls === 2) {
+                    expect(server.requests().length).to.eql(3);   // 2 images, 1 sequences
+                    done();
+                }
+            });
+
             mapillary.loadImages(context.projection);
 
             var features0 = [];
             var features1 = [];
-            var i;
+            var i, key;
 
             for (i = 0; i < 1000; i++) {
+                key = String(i);
                 features0.push({
                     type: 'Feature',
                     geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { ca: 90, key: String(i) }
+                    properties: { ca: 90, key: key }
                 });
             }
             for (i = 0; i < 500; i++) {
+                key = String(1000 + i);
                 features1.push({
                     type: 'Feature',
                     geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { ca: 90, key: String(1000 + i) }
+                    properties: { ca: 90, key: key }
                 });
             }
 
-            var match0 = /page=0/;
             var response0 = { type: 'FeatureCollection', features: features0 };
-            var match1 = /page=1/;
             var response1 = { type: 'FeatureCollection', features: features1 };
 
-            server.respondWith('GET', match0,
+            server.respondWith('GET', /\/images\?.*&page=0/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-            server.respondWith('GET', match1,
+            server.respondWith('GET', /\/images\?.*&page=1/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
             server.respond();
-
-            expect(spy).to.have.been.calledTwice;
         });
     });
 
-    describe('#loadSigns', function() {
-        it('fires loadedSigns when signs are loaded', function() {
-            var spy = sinon.spy();
-            mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection);
 
-            var match = /map_features/;
-            var detections = [{
-                detection_key: '0',
-                image_key: '0'
-            }];
+    describe('#loadSigns', function() {
+        it('fires loadedSigns when signs are loaded', function(done) {
+            mapillary.on('loadedSigns', function() {
+                expect(server.requests().length).to.eql(3);   // 1 images, 1 map_features, 1 image_detections
+                done();
+            });
+
+            mapillary.loadSigns(context.projection);
+
+            var detections = [{ detection_key: '0', image_key: '0' }];
             var features = [{
                 type: 'Feature',
                 geometry: { type: 'Point', coordinates: [10,0] },
@@ -152,24 +161,19 @@ describe('iD.serviceMapillary', function() {
             }];
             var response = { type: 'FeatureCollection', features: features };
 
-            server.respondWith('GET', match,
+            server.respondWith('GET', /map_features/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
-
-            expect(spy).to.have.been.calledOnce;
         });
 
-        it('does not load signs around null island', function() {
+        it('does not load signs around null island', function(done) {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
-            mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection);
 
-            var match = /map_features/;
-            var detections = [{
-                detection_key: '0',
-                image_key: '0'
-            }];
+            mapillary.on('loadedSigns', spy);
+            mapillary.loadSigns(context.projection);
+
+            var detections = [{ detection_key: '0', image_key: '0' }];
             var features = [{
                 type: 'Feature',
                 geometry: { type: 'Point', coordinates: [0,0] },
@@ -177,56 +181,60 @@ describe('iD.serviceMapillary', function() {
             }];
             var response = { type: 'FeatureCollection', features: features };
 
-            server.respondWith('GET', match,
+            server.respondWith('GET', /map_features/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
 
-            expect(spy).to.have.been.not.called;
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                expect(server.requests().length).to.eql(0);   // no tile requests of any kind
+                done();
+            }, 200);
         });
 
-        it.skip('loads multiple pages of signs results', function() {
-            var spy = sinon.spy();
-            mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection);
+        it('loads multiple pages of signs results', function(done) {
+            var calls = 0;
+            mapillary.on('loadedSigns', function() {
+                server.respond();  // respond to new fetches
+                if (++calls === 2) {
+                    expect(server.requests().length).to.eql(4);   // 2 images, 1 map_features, 1 image_detections
+                    done();
+                }
+            });
 
-            var rects = [{
-                package: 'trafficsign',
-                rect: [ 0.805, 0.463, 0.833, 0.502 ],
-                length: 4,
-                score: '1.27',
-                type: 'regulatory--maximum-speed-limit-65--us'
-            }];
+            mapillary.loadSigns(context.projection);
+
             var features0 = [];
             var features1 = [];
-            var i;
+            var i, key, detections;
 
             for (i = 0; i < 1000; i++) {
+                key = String(i);
+                detections = [{ detection_key: key, image_key: key }];
                 features0.push({
                     type: 'Feature',
                     geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { rects: rects, key: String(i) }
+                    properties: { detections: detections, key: key, value: 'not-in-set' }
                 });
             }
             for (i = 0; i < 500; i++) {
+                key = String(1000 + i);
+                detections = [{ detection_key: key, image_key: key }];
                 features1.push({
                     type: 'Feature',
                     geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { rects: rects, key: String(1000 + i) }
+                    properties: { detections: detections, key: key, value: 'not-in-set' }
                 });
             }
 
-            var match0 = /page=0/;
             var response0 = { type: 'FeatureCollection', features: features0 };
-            var match1 = /page=1/;
             var response1 = { type: 'FeatureCollection', features: features1 };
 
-            server.respondWith('GET', match0,
+            server.respondWith('GET', /\/map_features\?.*&page=0/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-            server.respondWith('GET', match1,
+            server.respondWith('GET', /\/map_features\?.*&page=1/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
             server.respond();
-
-            expect(spy).to.have.been.calledTwice;
         });
     });
 
@@ -263,6 +271,7 @@ describe('iD.serviceMapillary', function() {
             expect(res).to.have.length.of.at.most(5);
         });
     });
+
 
     describe('#signs', function() {
         it('returns signs in the visible map area', function() {

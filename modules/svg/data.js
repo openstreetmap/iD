@@ -1,16 +1,8 @@
 import _throttle from 'lodash-es/throttle';
 
-import {
-    geoBounds as d3_geoBounds,
-    geoPath as d3_geoPath
-} from 'd3-geo';
-
-import { text as d3_text } from 'd3-request';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
+import { text as d3_text } from 'd3-fetch';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import stringify from 'fast-json-stable-stringify';
 import toGeoJSON from '@mapbox/togeojson';
@@ -480,10 +472,14 @@ export function svgData(projection, context, dispatch) {
         var extension = getExtension(testUrl) || defaultExtension;
         if (extension) {
             _template = null;
-            d3_text(url, function(err, data) {
-                if (err) return;
-                drawData.setFile(extension, data);
-            });
+            d3_text(url)
+                .then(function(data) {
+                    drawData.setFile(extension, data);
+                })
+                .catch(function() {
+                    /* ignore */
+                });
+
         } else {
             drawData.template(url);
         }

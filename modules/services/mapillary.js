@@ -1,10 +1,6 @@
 /* global Mapillary:false */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { request as d3_request } from 'd3-request';
-import {
-    select as d3_select,
-    selectAll as d3_selectAll
-} from 'd3-selection';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 import rbush from 'rbush';
 
@@ -28,8 +24,8 @@ var _mlySelectedImage;
 var _mlyViewer;
 
 
-function abortRequest(i) {
-    i.abort();
+function abortRequest(controller) {
+    controller.abort();
 }
 
 
@@ -80,22 +76,36 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
-    cache.inflight[id] = d3_request(nextURL)
-        .mimeType('application/json')
-        .response(function(xhr) {
-            var linkHeader = xhr.getResponseHeader('Link');
+
+    var controller = new AbortController();
+    cache.inflight[id] = controller;
+
+    var options = {
+        method: 'GET',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    fetch(nextURL, options)
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(response.status + ' ' + response.statusText);
+            }
+            var linkHeader = response.headers.Link;
             if (linkHeader) {
-                var pagination = parsePagination(xhr.getResponseHeader('Link'));
+                var pagination = parsePagination(linkHeader);
                 if (pagination.next) {
                     cache.nextURL[tile.id] = pagination.next;
                 }
             }
-            return JSON.parse(xhr.responseText);
+            return response.json();
         })
-        .get(function(err, data) {
+        .then(function(data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
-            if (err || !data.features || !data.features.length) return;
+            if (!data || !data.features || !data.features.length) {
+                throw new Error('No Data');
+            }
 
             var features = data.features.map(function(feature) {
                 var loc = feature.geometry.coordinates;
@@ -170,18 +180,22 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 cache.rtree.load(features);
             }
 
-            if (which === 'images' || which === 'sequences') {
-                dispatch.call('loadedImages');
-            } else if (which === 'map_features') {
-                dispatch.call('loadedSigns');
-            }
-
             if (data.features.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
             } else {
                 cache.nextPage[tile.id] = Infinity;     // no more pages to load
             }
+
+            if (which === 'images' || which === 'sequences') {
+                dispatch.call('loadedImages');
+            } else if (which === 'map_features') {
+                dispatch.call('loadedSigns');
+            }
+        })
+        .catch(function() {
+            cache.loaded[id] = true;
+            delete cache.inflight[id];
         });
 }
 
@@ -312,7 +326,7 @@ export default {
     },
 
 
-    loadSigns: function(context, projection) {
+    loadSigns: function(projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
         loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=1&', projection);

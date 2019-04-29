@@ -1,12 +1,5 @@
-import {
-    dispatch as d3_dispatch
-} from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
@@ -107,7 +100,7 @@ export function uiCombobox(context, klass) {
                 var tOrig = _tDown;
                 window.setTimeout(function() {
                     if (tOrig !== _tDown) return;   // exit if user double clicked
-                    fetch('', function() {
+                    fetchComboData('', function() {
                         show();
                         render();
                     });
@@ -120,7 +113,7 @@ export function uiCombobox(context, klass) {
 
 
         function focus() {
-            fetch('');   // prefetch values (may warm taginfo cache)
+            fetchComboData('');   // prefetch values (may warm taginfo cache)
         }
 
 
@@ -225,7 +218,7 @@ export function uiCombobox(context, klass) {
 
         // Called whenever the input value is changed (e.g. on typing)
         function change() {
-            fetch(value(), function() {
+            fetchComboData(value(), function() {
                 _selected = null;
                 var val = input.property('value');
 
@@ -310,7 +303,7 @@ export function uiCombobox(context, klass) {
         }
 
 
-        function fetch(v, cb) {
+        function fetchComboData(v, cb) {
             _cancelFetch = false;
 
             _fetcher.call(input, v, function(results) {

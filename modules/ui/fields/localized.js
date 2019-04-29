@@ -480,7 +480,10 @@ export function uiFieldLocalized(field, context) {
             _wikiTitles = {};
             var wm = tags.wikipedia.match(/([^:]+):(.+)/);
             if (wm && wm[0] && wm[1]) {
-                wikipedia.translations(wm[1], wm[2], function(d) { _wikiTitles = d; });
+                wikipedia.translations(wm[1], wm[2], function(err, d) {
+                    if (err || !d) return;
+                    _wikiTitles = d;
+                });
             }
         }
 

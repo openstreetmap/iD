@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { data } from '../../data/index';
 import { presetCategory } from './category';
@@ -251,15 +251,17 @@ export function presetIndex(context) {
 
     all.fromExternal = function(external, done) {
         all.reset();
-        d3_json(external, function(err, externalPresets) {
-            if (err) {
+        d3_json(external)
+            .then(function(externalPresets) {
+                all.build(data.presets, false);    // make default presets hidden to begin
+                all.build(externalPresets, true);  // make the external visible
+            })
+            .catch(function() {
                 all.init();
-            } else {
-                all.build(data.presets, false); // make default presets hidden to begin
-                all.build(externalPresets, true); // make the external visible
-            }
-            done(all);
-        });
+            })
+            .finally(function() {
+                done(all);
+            });
     };
 
     all.field = function(id) {

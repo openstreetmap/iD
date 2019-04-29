@@ -22,8 +22,10 @@ describe('iD.uiFieldWikipedia', function() {
         }
     }
 
-    function createServer(options) {
-        var server =  sinon.fakeServer.create(options);
+    function createServer(options) {  // eslint-disable-line no-unused-vars
+        // note - currently skipping the tests that use `options` to delay responses
+        // var server =  sinon.fakeServer.create(options);
+        var server = window.fakeFetch().create();
         server.respondWith('GET',
             new RegExp('\/w\/api\.php.*action=wbgetentities'),
             [200, { 'Content-Type': 'application/json' },

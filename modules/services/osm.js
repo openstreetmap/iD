@@ -1,7 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { xml as d3_xml } from 'd3-request';
+import { xml as d3_xml } from 'd3-fetch';
 
 import osmAuth from 'osm-auth';
 import rbush from 'rbush';
@@ -51,9 +51,9 @@ function authDone() {
 }
 
 
-function abortRequest(i) {
-    if (i) {
-        i.abort();
+function abortRequest(controllerOrXHR) {
+    if (controllerOrXHR) {
+        controllerOrXHR.abort();
     }
 }
 
@@ -440,7 +440,8 @@ export default {
 
             // 400 Bad Request, 401 Unauthorized, 403 Forbidden
             // Logout and retry the request..
-            if (isAuthenticated && err && (err.status === 400 || err.status === 401 || err.status === 403)) {
+            if (isAuthenticated && err && err.status &&
+                    (err.status === 400 || err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback, options);
 
@@ -448,7 +449,7 @@ export default {
             } else {
                 // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
                 // Set the rateLimitError flag and trigger a warning..
-                if (!isAuthenticated && !_rateLimitError && err &&
+                if (!isAuthenticated && !_rateLimitError && err && err.status &&
                         (err.status === 509 || err.status === 429)) {
                     _rateLimitError = err;
                     dispatch.call('change');
@@ -468,7 +469,24 @@ export default {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
             var url = urlroot + path;
-            return d3_xml(url).get(done);
+            var controller = new AbortController();
+            d3_xml(url, { signal: controller.signal })
+                .then(function(data) {
+                    done(null, data);
+                })
+                .catch(function(err) {
+                    if (err.name === 'AbortError') return;
+                    // d3-fetch includes status in the error message,
+                    // but we can't access the response itself
+                    // https://github.com/d3/d3-fetch/issues/27
+                    var match = err.message.match(/^\d{3}/);
+                    if (match) {
+                        done({ status: +match[0], statusText: err.message });
+                    } else {
+                        done(err.message);
+                    }
+                });
+            return controller;
         }
     },
 
@@ -743,9 +761,11 @@ export default {
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        d3_xml(urlroot + '/api/capabilities').get(
-            wrapcb(this, done, _connectionID)
-        );
+        var url = urlroot + '/api/capabilities';
+        var errback = wrapcb(this, done, _connectionID);
+        d3_xml(url)
+            .then(function(data) { errback(null, data); })
+            .catch(function(err) { errback(err.message); });
 
         function done(err, xml) {
             if (err) { return callback(err); }
