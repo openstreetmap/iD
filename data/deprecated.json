@@ -33,10 +33,6 @@
       "replace": {"amenity": "community_centre"}
     },
     {
-      "old": {"amenity": "dancing_school"},
-      "replace": {"leisure": "dance", "dance:teaching": "yes" }
-    },
-    {
       "old": {"amenity": "dog_bin"},
       "replace": {"amenity": "waste_basket", "waste": "dog_excrement"}
     },
