@@ -5,7 +5,8 @@
         "brand",
         "operator",
         "address",
-        "fuel_multi"
+        "fuel_multi",
+        "self_service"
     ],
     "moreFields": [
         "opening_hours",
