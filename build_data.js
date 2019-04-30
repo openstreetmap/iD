@@ -263,7 +263,6 @@ function suggestionsToPresets(presets) {
             geometry: preset.geometry,
             tags: Object.assign({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
-            removeTags: suggestion.tags,
             reference: preset.reference,
             countryCodes: suggestion.countryCodes,
             matchScore: 2,
