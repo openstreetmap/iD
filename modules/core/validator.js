@@ -45,6 +45,7 @@ export function coreValidator(context) {
     //
     validator.reset = function() {
         // clear caches
+        _ignoredIssueIDs = {};
         _issuesByIssueID = {};
         _issuesByEntityID = {};
         _validatedGraph = null;
@@ -56,11 +57,16 @@ export function coreValidator(context) {
         }
     };
 
+    validator.resetIgnoredIssues = function() {
+        _ignoredIssueIDs = {};
+        // reload UI
+        dispatch.call('validated');
+    };
 
     // options = {
-    //     what: 'edited',     // 'all' or 'edited'
-    //     where: 'visible',   // 'all' or 'visible'
-    //     includeIgnored: false   // true or false
+    //     what: 'all',     // 'all' or 'edited'
+    //     where: 'all',   // 'all' or 'visible'
+    //     includeIgnored: false   // true, false, or 'only'
     // };
     validator.getIssues = function(options) {
         var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false }, options);
@@ -82,6 +88,8 @@ export function coreValidator(context) {
                     return false;
                 }
             }
+
+            if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
 
             if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
@@ -120,7 +128,11 @@ export function coreValidator(context) {
 
     validator.getRuleKeys = function() {
         return Object.keys(_rules)
-            .filter(function(key) { return key !== 'maprules'; });
+            .filter(function(key) { return key !== 'maprules'; })
+            .sort(function(key1, key2) {
+                // alphabetize by localized title
+                return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;
+            });
     };
 
 

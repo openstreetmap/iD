@@ -1,5 +1,4 @@
 import { geoExtent } from '../../geo';
-import { osmEntity } from '../../osm/entity';
 
 export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
@@ -39,15 +38,12 @@ export function validationIssue(attrs) {
         return parts.join(':');
     }
 
-    var _extent;
     this.extent = function(resolver) {
-        if (_extent) return _extent;
-
         if (this.loc) {
-            return _extent = geoExtent(this.loc);
+            return geoExtent(this.loc);
         }
         if (this.entityIds && this.entityIds.length) {
-            return _extent = this.entityIds.reduce(function(extent, entityId) {
+            return this.entityIds.reduce(function(extent, entityId) {
                 return extent.extend(resolver.entity(entityId).extent(resolver));
             }, geoExtent());
         }

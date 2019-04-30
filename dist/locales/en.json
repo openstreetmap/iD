@@ -1571,8 +1571,31 @@
                 "title": "Rules"
             },
             "no_issues": {
-                "message": "Everything looks fine",
-                "info": "Any issues will show up here as you edit"
+                "message": {
+                    "everything": "Everything looks fine",
+                    "everything_in_view": "Everything in view looks fine",
+                    "edits": "Your edits look fine",
+                    "edits_in_view": "Your edits in view look fine"
+                },
+                "hidden_issues": {
+                    "none": "Detected issues will appear here",
+                    "elsewhere": {
+                        "single": "1 issue elsewhere",
+                        "multiple": "{count} issues elsewhere"
+                    },
+                    "other_features": {
+                        "single": "1 issue with other features",
+                        "multiple": "{count} issues with other features"
+                    },
+                    "disabled_rules": {
+                        "single": "1 issue from disabled rules",
+                        "multiple": "{count} issues from disabled rules"
+                    },
+                    "ignored_issues": {
+                        "single": "1 ignored issue",
+                        "multiple": "{count} ignored issues"
+                    }
+                }
             },
             "options": {
                 "what": {
@@ -1589,6 +1612,7 @@
             "suggested": "Suggested updates:",
             "enable_all": "Enable All",
             "disable_all": "Disable All",
+            "reset_ignored": "Reset ignored ({count})",
             "fix_one": {
                 "title": "fix"
             },

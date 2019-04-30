@@ -191,6 +191,10 @@ export function uiIssues(context) {
             .attr('class', 'autofix-all-link-icon')
             .call(svgIcon('#iD-icon-wrench'));
 
+        if (which === 'warnings') {
+            renderIgnoredIssuesReset(selection);
+        }
+
         // update
         autoFixAll = autoFixAll
             .merge(autoFixAllEnter);
@@ -272,23 +276,57 @@ export function uiIssues(context) {
 
 
     function renderNoIssuesBox(selection) {
-        selection
+
+        var box = selection.append('div')
+            .attr('class', 'box');
+
+        box
             .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesMessage = selection
+        var noIssuesMessage = box
             .append('span');
 
         noIssuesMessage
             .append('strong')
-            .text(t('issues.no_issues.message'));
+            .text(t('issues.no_issues.message.everything'));
 
         noIssuesMessage
             .append('br');
 
         noIssuesMessage
             .append('span')
-            .text(t('issues.no_issues.info'));
+            .text(t('issues.no_issues.hidden_issues.none'));
+    }
+
+    function renderIgnoredIssuesReset(selection) {
+
+        var ignoredIssues = context.validator()
+            .getIssues(Object.assign({ includeIgnored: 'only' }, _options));
+
+        var resetIgnored = selection.selectAll('.reset-ignored')
+            .data(ignoredIssues.length ? [0] : []);
+
+        // exit
+        resetIgnored.exit()
+            .remove();
+
+        // enter
+        var resetIgnoredEnter = resetIgnored.enter()
+            .append('a')
+            .attr('class', 'reset-ignored')
+            .attr('href', '#');
+
+        // update
+        resetIgnored = resetIgnored
+            .merge(resetIgnoredEnter);
+
+        resetIgnored
+            .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
+
+        resetIgnored.on('click', function() {
+                context.validator().resetIgnoredIssues();
+            });
     }
 
 
@@ -401,8 +439,13 @@ export function uiIssues(context) {
             }
         }
 
-        _pane.select('.issues-none')
-            .classed('hide', _warnings.length > 0 || _errors.length > 0);
+        var hasIssues = _warnings.length > 0 || _errors.length > 0;
+
+        var issuesNone = _pane.select('.issues-none');
+        issuesNone.classed('hide', hasIssues);
+        if (!hasIssues) {
+            renderIgnoredIssuesReset(issuesNone);
+        }
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();
