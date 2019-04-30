@@ -65,7 +65,7 @@ export function validationPrivateData() {
                 feature: utilDisplayLabel(entity, context),
             }),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
             data: {
                 newTags: keepTags
             },
@@ -74,7 +74,7 @@ export function validationPrivateData() {
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.' + fixID + '.title'),
                     onClick: function() {
-                        var entityID = this.issue.entities[0].id;
+                        var entityID = this.issue.entityIds[0];
                         var newTags = this.issue.data.newTags;
                         context.perform(
                             actionChangeTags(entityID, newTags),

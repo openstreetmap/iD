@@ -90,9 +90,9 @@ export function uiIssues(context) {
                     context.map().centerZoomEase(extent.center(), setZoom);
 
                     // select the first entity
-                    if (d.entities && d.entities.length) {
+                    if (d.entityIds && d.entityIds.length) {
                         window.setTimeout(function() {
-                            var ids = d.entities.map(function(e) { return e.id; });
+                            var ids = d.entityIds;
                             context.enter(modeSelect(context, [ids[0]]));
                             utilHighlightEntities(ids, true, context);
                         }, 250);  // after ease
@@ -100,12 +100,10 @@ export function uiIssues(context) {
                 }
             })
             .on('mouseover', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, true, context);
+                utilHighlightEntities(d.entityIds, true, context);
             })
             .on('mouseout', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, false, context);
+                utilHighlightEntities(d.entityIds, false, context);
             });
 
 
@@ -147,7 +145,7 @@ export function uiIssues(context) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
 
-                        var issuesEntityIDs = d.issue.entities.map(function(e) { return e.id; });
+                        var issuesEntityIDs = d.issue.entityIds;
                         utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
 
                         context.perform.apply(context, d.autoArgs);

@@ -70,7 +70,8 @@ export function validationOutdatedTags() {
             severity: 'warning',
             message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
+            hash: JSON.stringify(tagDiff),
             fixes: [
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
@@ -143,7 +144,7 @@ export function validationOutdatedTags() {
             severity: 'warning',
             message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
             reference: showReference,
-            entities: [outerWay, multipolygon],
+            entityIds: [outerWay.id, multipolygon.id],
             fixes: [
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],

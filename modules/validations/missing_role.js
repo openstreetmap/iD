@@ -46,10 +46,11 @@ export function validationMissingRole() {
                 relation: utilDisplayLabel(relation, context),
             }),
             reference: showReference,
-            entities: [relation, way],
+            entityIds: [relation.id, way.id],
             data: {
                 member: member
             },
+            hash: member.index.toString(),
             fixes: [
                 makeAddRoleFix('inner', context),
                 makeAddRoleFix('outer', context),
@@ -58,7 +59,7 @@ export function validationMissingRole() {
                     title: t('issues.fix.remove_from_relation.title'),
                     onClick: function() {
                         context.perform(
-                            actionDeleteMember(this.issue.entities[0].id, this.issue.data.member.index),
+                            actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
                             t('operations.delete_member.annotation')
                         );
                     }
@@ -83,9 +84,9 @@ export function validationMissingRole() {
             title: t('issues.fix.set_as_' + role + '.title'),
             onClick: function() {
                 var oldMember = this.issue.data.member;
-                var member = { id: this.issue.entities[1].id, type: oldMember.type, role: role };
+                var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(
-                    actionChangeMember(this.issue.entities[0].id, member, oldMember.index),
+                    actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
                     t('operations.change_role.annotation')
                 );
             }

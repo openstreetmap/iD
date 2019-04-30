@@ -25,7 +25,7 @@ export function validationFixmeTag() {
             severity: 'warning',
             message: t('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context) }),
             reference: showReference,
-            entities: [entity]
+            entityIds: [entity.id]
         })];
 
         function showReference(selection) {

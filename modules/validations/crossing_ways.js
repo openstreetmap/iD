@@ -489,7 +489,9 @@ export function validationCrossingWays() {
             severity: 'warning',
             message: t('issues.crossing_ways.message', messageDict),
             reference: showReference,
-            entities: entities,
+            entityIds: entities.map(function(entity) {
+                return entity.id;
+            }),
             data: {
                 edges: crossing.edges,
                 connectionTags: connectionTags
@@ -521,8 +523,8 @@ export function validationCrossingWays() {
                 if (selectedIDs.length !== 1) return;
 
                 var selectedID = selectedIDs[0];
-                if (!this.issue.entities.some(function(entity) {
-                    return entity.id === selectedID;
+                if (!this.issue.entityIds.some(function(entityId) {
+                    return entityId === selectedID;
                 })) return;
 
                 var entity = context.hasEntity(selectedID);

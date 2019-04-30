@@ -67,10 +67,10 @@ export function uiCommitWarnings(context) {
 
             items
                 .on('mouseover', function(d) {
-                    if (d.entities) {
+                    if (d.entityIds) {
                         context.surface().selectAll(
                             utilEntityOrMemberSelector(
-                                d.entities.map(function(e) { return e.id; }),
+                                d.entityIds,
                                 context.graph()
                             )
                         ).classed('hover', true);
@@ -81,12 +81,9 @@ export function uiCommitWarnings(context) {
                         .classed('hover', false);
                 })
                 .on('click', function(d) {
-                    if (d.entities && d.entities.length > 0) {
-                        context.map().zoomTo(d.entities[0]);
-                        context.enter(modeSelect(
-                            context,
-                            d.entities.map(function(e) { return e.id; })
-                        ));
+                    if (d.entityIds && d.entityIds.length > 0) {
+                        context.map().zoomTo(context.entity(d.entityIds[0]));
+                        context.enter(modeSelect(context, d.entityIds));
                     }
                 });
         }

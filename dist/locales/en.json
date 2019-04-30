@@ -1793,6 +1793,9 @@
                 "delete_feature": {
                     "title": "Delete this feature"
                 },
+                "ignore_issue": {
+                    "title": "Ignore this issue"
+                },
                 "move_tags": {
                     "title": "Move the tags",
                     "annotation": "Moved tags."

@@ -58,14 +58,14 @@ export function validationUnsquareWay() {
             context.validator().validate();
         };
 
-        return new validationIssue({
+        return [new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.unsquare_way.message', {
                 feature: utilDisplayLabel(entity, context)
             }),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-orthogonalize',
@@ -76,7 +76,7 @@ export function validationUnsquareWay() {
                     }
                 })
             ]
-        });
+        })];
 
         function showReference(selection) {
             selection.selectAll('.issue-reference')

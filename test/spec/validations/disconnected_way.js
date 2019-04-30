@@ -56,8 +56,8 @@ describe('iD.validations.disconnected_way', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
         expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
     it('flags highway connected only to service area', function() {
@@ -67,8 +67,8 @@ describe('iD.validations.disconnected_way', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
         expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
     it('flags disconnected highway with disconnected entrance vertex', function() {
@@ -87,8 +87,8 @@ describe('iD.validations.disconnected_way', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
         expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
     it('ignores highways that are connected', function() {

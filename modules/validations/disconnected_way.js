@@ -69,7 +69,7 @@ export function validationDisconnectedWay() {
                 title: t('issues.fix.delete_feature.title'),
                 entityIds: [entity.id],
                 onClick: function() {
-                    var id = this.issue.entities[0].id;
+                    var id = this.issue.entityIds[0];
                     var operation = operationDelete([id], context);
                     if (!operation.disabled()) {
                         operation();
@@ -83,7 +83,7 @@ export function validationDisconnectedWay() {
             severity: 'warning',
             message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
             fixes: fixes
         })];
 

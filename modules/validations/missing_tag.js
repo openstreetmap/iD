@@ -92,7 +92,7 @@ export function validationMissingTag() {
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.delete_feature.title'),
                     onClick: function() {
-                        var id = this.issue.entities[0].id;
+                        var id = this.issue.entityIds[0];
                         var operation = operationDelete([id], context);
                         if (!operation.disabled()) {
                             operation();
@@ -113,7 +113,7 @@ export function validationMissingTag() {
             severity: severity,
             message: t('issues.' + messageID + '.message', messageObj),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
             fixes: fixes
         })];
 

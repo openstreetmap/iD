@@ -222,7 +222,7 @@ export default {
                         type: 'maprules',
                         severity: severity,
                         message: selector[severity],
-                        entities: [entity],
+                        entityIds: [entity.id],
                     }));
                 }
             }

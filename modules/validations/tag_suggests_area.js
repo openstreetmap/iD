@@ -43,7 +43,7 @@ export function validationTagSuggestsArea() {
                 // make sure this will not create a self-intersection
                 if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
                     connectEndpointsOnClick = function() {
-                        var way = this.issue.entities[0];
+                        var way = context.entity(this.issue.entityIds[0]);
                         context.perform(
                             actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
                             t('issues.fix.connect_endpoints.annotation')
@@ -59,11 +59,12 @@ export function validationTagSuggestsArea() {
                 // make sure this will not create a self-intersection
                 if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
                     connectEndpointsOnClick = function() {
-                        var way = this.issue.entities[0];
+                        var wayId = this.issue.entityIds[0];
+                        var way = context.entity(wayId);
                         var nodeId = way.nodes[0];
                         var index = way.nodes.length;
                         context.perform(
-                            actionAddVertex(way.id, nodeId, index),
+                            actionAddVertex(wayId, nodeId, index),
                             t('issues.fix.connect_endpoints.annotation')
                         );
                     };
@@ -80,13 +81,14 @@ export function validationTagSuggestsArea() {
             icon: 'iD-operation-delete',
             title: t('issues.fix.remove_tag.title'),
             onClick: function() {
-                var entity = this.issue.entities[0];
+                var entityId = this.issue.entityIds[0];
+                var entity = context.entity(entityId);
                 var tags = Object.assign({}, entity.tags);  // shallow copy
                 for (var key in tagSuggestingArea) {
                     delete tags[key];
                 }
                 context.perform(
-                    actionChangeTags(entity.id, tags),
+                    actionChangeTags(entityId, tags),
                     t('issues.fix.remove_tag.annotation')
                 );
             }
@@ -98,7 +100,8 @@ export function validationTagSuggestsArea() {
             severity: 'warning',
             message: t('issues.tag_suggests_area.message', { feature: featureLabel, tag: tagText }),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
+            hash: JSON.stringify(tagSuggestingArea),
             fixes: fixes
         })];
 

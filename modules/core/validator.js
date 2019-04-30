@@ -2,6 +2,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { coreDifference } from './difference';
 import { utilArrayGroupBy, utilCallWhenIdle, utilRebind } from '../util';
+import { t } from '../util/locale';
+import { validationIssueFix } from './validation/models';
 import * as Validations from '../validations/index';
 
 
@@ -12,6 +14,7 @@ export function coreValidator(context) {
     var _rules = {};
     var _disabledRules = {};
 
+    var _ignoredIssueIDs = {};       // issue.id -> true
     var _issuesByIssueID = {};       // issue.id -> issue
     var _issuesByEntityID = {};      // entity.id -> set(issue.id)
     var _validatedGraph = null;
@@ -57,9 +60,10 @@ export function coreValidator(context) {
     // options = {
     //     what: 'edited',     // 'all' or 'edited'
     //     where: 'visible',   // 'all' or 'visible'
+    //     includeIgnored: false   // true or false
     // };
     validator.getIssues = function(options) {
-        var opts = Object.assign({ what: 'all', where: 'all' }, options);
+        var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false }, options);
         var issues = Object.values(_issuesByIssueID);
         var changes = context.history().difference().changes();
         var view = context.map().extent();
@@ -69,19 +73,21 @@ export function coreValidator(context) {
 
             // Sanity check:  This issue may be for an entity that not longer exists.
             // If we detect this, uncache and return false so it is not incluced..
-            var entities = issue.entities || [];
-            for (var i = 0; i < entities.length; i++) {
-                var entity = entities[i];
-                if (!context.hasEntity(entity.id)) {
-                    delete _issuesByEntityID[entity.id];
-                    delete _issuesByIssueID[issue.id];
+            var entityIds = issue.entityIds || [];
+            for (var i = 0; i < entityIds.length; i++) {
+                var entityId = entityIds[i];
+                if (!context.hasEntity(entityId)) {
+                    delete _issuesByEntityID[entityId];
+                    delete _issuesByIssueID[entityId];
                     return false;
                 }
             }
 
+            if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
+
             if (opts.what === 'edited') {
-                var isEdited = entities.some(function(entity) { return changes[entity.id]; });
-                if (entities.length && !isEdited) return false;
+                var isEdited = entityIds.some(function(entityId) { return changes[entityId]; });
+                if (entityIds.length && !isEdited) return false;
             }
 
             if (opts.where === 'visible') {
@@ -108,7 +114,7 @@ export function coreValidator(context) {
 
         return Array.from(issueIDs)
             .map(function(id) { return _issuesByIssueID[id]; })
-            .filter(function(issue) { return !_disabledRules[issue.type]; });
+            .filter(function(issue) { return !_disabledRules[issue.type] && !_ignoredIssueIDs[issue.id]; });
     };
 
 
@@ -158,10 +164,10 @@ export function coreValidator(context) {
             if (issue) {
                 // When multiple entities are involved (e.g. crossing_ways),
                 // remove this issue from the other entity caches too..
-                var entities = issue.entities || [];
-                entities.forEach(function(other) {
-                    if (other.id !== entityID) {
-                        var otherIssueIDs = _issuesByEntityID[other.id];
+                var entityIds = issue.entityIds || [];
+                entityIds.forEach(function(other) {
+                    if (other !== entityID) {
+                        var otherIssueIDs = _issuesByEntityID[other];
                         if (otherIssueIDs) {
                             otherIssueIDs.delete(issueID);
                         }
@@ -173,6 +179,11 @@ export function coreValidator(context) {
         });
 
         delete _issuesByEntityID[entityID];
+    }
+
+
+    function ignoreIssue(id) {
+        _ignoredIssueIDs[id] = true;
     }
 
 
@@ -196,6 +207,19 @@ export function coreValidator(context) {
             }
 
             var detected = fn(entity, context);
+            detected.forEach(function(issue) {
+                if (issue.severity === 'warning') {
+                    var ignoreFix = new validationIssueFix({
+                        title: t('issues.fix.ignore_issue.title'),
+                        icon: 'iD-icon-close',
+                        onClick: function() {
+                            ignoreIssue(this.issue.id);
+                        }
+                    });
+                    ignoreFix.issue = issue;
+                    issue.fixes.push(ignoreFix);
+                }
+            });
             entityIssues = entityIssues.concat(detected);
             ran[key] = true;
             return !detected.length;
@@ -278,12 +302,12 @@ export function coreValidator(context) {
             var issues = validateEntity(entity);
 
             issues.forEach(function(issue) {
-                var entities = issue.entities || [];
-                entities.forEach(function(entity) {
-                    if (!_issuesByEntityID[entity.id]) {
-                        _issuesByEntityID[entity.id] = new Set();
+                var entityIds = issue.entityIds || [];
+                entityIds.forEach(function(entityId) {
+                    if (!_issuesByEntityID[entityId]) {
+                        _issuesByEntityID[entityId] = new Set();
                     }
-                    _issuesByEntityID[entity.id].add(issue.id);
+                    _issuesByEntityID[entityId].add(issue.id);
                 });
                 _issuesByIssueID[issue.id] = issue;
             });
