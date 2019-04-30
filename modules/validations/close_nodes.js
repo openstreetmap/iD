@@ -1,18 +1,21 @@
 import { operationMerge } from '../operations/index';
+import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { geoExtent } from '../geo';
 
 
-export function validationDupeNodeOnRoad() {
-    var type = 'dupe_node_on_road';
+export function validationCloseNodes() {
+    var type = 'close_nodes';
 
 
     function isNodeOnRoad(node, context) {
         var parentWays = context.graph().parentWays(node);
         for (var i = 0; i < parentWays.length; i++) {
-            if (parentWays[i].tags.highway) {
-              return true;
+            var parentWay = parentWays[i];
+            if (osmRoutableHighwayTagValues[parentWay.tags.highway]) {
+                return parentWay;
             }
         }
         return false;
@@ -39,7 +42,11 @@ export function validationDupeNodeOnRoad() {
 
 
     var validation = function(entity, context) {
-        if (entity.type !== 'node' || !isNodeOnRoad(entity, context)) return [];
+
+        if (entity.type !== 'node') return [];
+
+        var road = isNodeOnRoad(entity, context);
+        if (!road) return [];
 
         var dupe = findDupeNode(entity, context);
         if (dupe === null) return [];
@@ -50,7 +57,7 @@ export function validationDupeNodeOnRoad() {
             fixes.push(
                 new validationIssueFix({
                     icon: 'iD-icon-plus',
-                    title: t('issues.fix.merge_nodes.title'),
+                    title: t('issues.fix.merge_points.title'),
                     onClick: function() {
                         var entities = this.issue.entities,
                             operation = operationMerge([entities[0].id, entities[1].id], context);
@@ -65,7 +72,7 @@ export function validationDupeNodeOnRoad() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.dupe_node_on_road.message'),
+            message: t('issues.close_nodes.message', { way: utilDisplayLabel(road, context) }),
             reference: showReference,
             entities: [entity, dupe],
             fixes: fixes
@@ -74,8 +81,8 @@ export function validationDupeNodeOnRoad() {
 
         function showReference(selection) {
             var referenceText = mergable
-                ? t('issues.dupe_node_on_road.ref_merge')
-                : t('issues.dupe_node_on_road.ref_move_away');
+                ? t('issues.close_nodes.ref_merge')
+                : t('issues.close_nodes.ref_move_away');
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()

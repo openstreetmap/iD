@@ -1604,6 +1604,13 @@
                     "reference": "Intersecting highways should share a junction vertex."
                 }
             },
+            "close_nodes": {
+                "title": "Very Close Points",
+                "message": "Two points in {way} are very close together",
+                "tip": "Find redundant points in ways",
+                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
+                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
+            },
             "crossing_ways": {
                 "title": "Crossings Ways",
                 "message": "{feature} crosses {feature2}",
@@ -1737,12 +1744,6 @@
                 "message": "{feature} has no classification",
                 "reference": "Roads without a specific type may not appear in maps or routing."
             },
-            "dupe_node_on_road": {
-                "title": "Very close nodes on road",
-                "message": "Very close nodes on road",
-                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
-                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
-            },
             "impossible_oneway": {
                 "title": "Impossible One-Ways",
                 "tip": "Find route issues with one-way features",
@@ -1798,6 +1799,9 @@
                 },
                 "delete_feature": {
                     "title": "Delete this feature"
+                },
+                "merge_points": {
+                    "title": "Merge these points"
                 },
                 "move_tags": {
                     "title": "Move the tags",
@@ -1869,9 +1873,6 @@
                 },
                 "use_tunnel": {
                     "title": "Use a tunnel"
-                },
-                "merge_nodes": {
-                    "title": "Merge these nodes"
                 }
             }
         },
