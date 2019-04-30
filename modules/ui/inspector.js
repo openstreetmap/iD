@@ -54,8 +54,7 @@ export function uiInspector(context) {
             (!hasNonGeometryTags && !entity.isHighwayIntersection(context.graph()));
         var issues = context.validator().getEntityIssues(_entityID);
         // start with the preset list if the feature is new and untagged or is an uninteresting vertex
-        var showPresetList = issues.length === 0 &&
-            ((newFeature && !hasNonGeometryTags) || isTaglessOrIntersectionVertex);
+        var showPresetList = (newFeature && !hasNonGeometryTags) || (isTaglessOrIntersectionVertex && !issues.length);
 
         if (showPresetList) {
             wrap.style('right', '-100%');
