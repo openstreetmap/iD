@@ -1412,7 +1412,7 @@ en:
             message: "{feature} flows away from a connected waterway"
           end:
             message: "{feature} flows against a connected waterway"
-          reference: "Waterway segements should all flow in the same direction."
+          reference: "Waterway segments should all flow in the same direction."
       highway:
         start:
           message: "{feature} is unreachable"
