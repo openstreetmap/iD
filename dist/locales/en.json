@@ -1604,6 +1604,13 @@
                     "reference": "Intersecting highways should share a junction vertex."
                 }
             },
+            "close_nodes": {
+                "title": "Very Close Points",
+                "message": "Two points in {way} are very close together",
+                "tip": "Find redundant points in ways",
+                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
+                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
+            },
             "crossing_ways": {
                 "title": "Crossings Ways",
                 "message": "{feature} crosses {feature2}",
@@ -1748,7 +1755,7 @@
                         "end": {
                             "message": "{feature} flows against a connected waterway"
                         },
-                        "reference": "Waterway segements should all flow in the same direction."
+                        "reference": "Waterway segments should all flow in the same direction."
                     }
                 },
                 "highway": {
@@ -1795,6 +1802,9 @@
                 },
                 "ignore_issue": {
                     "title": "Ignore this issue"
+                },
+                "merge_points": {
+                    "title": "Merge these points"
                 },
                 "move_tags": {
                     "title": "Move the tags",
@@ -5955,6 +5965,10 @@
                     "name": "Bus Stop",
                     "terms": ""
                 },
+                "highway/crossing": {
+                    "name": "Crossing",
+                    "terms": ""
+                },
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse,trail"
@@ -5999,6 +6013,10 @@
                     "name": "Cycle Path",
                     "terms": "bike path,bicyle path"
                 },
+                "highway/cycleway/crossing": {
+                    "name": "Cycle Crossing",
+                    "terms": ""
+                },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
                     "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
@@ -6018,6 +6036,10 @@
                 "highway/footway": {
                     "name": "Foot Path",
                     "terms": "hike,hiking,promenade,trackway,trail,walk"
+                },
+                "highway/footway/crossing": {
+                    "name": "Pedestrian Crossing",
+                    "terms": ""
                 },
                 "highway/footway/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",

@@ -168,12 +168,13 @@ export function uiFieldWikipedia(field, context) {
             value = decodeURIComponent(m[2]).replace(/_/g, ' ');
             if (m[3]) {
                 var anchor;
-                try {
+                // try {
+                // leave this out for now - #6232
                     // Best-effort `anchordecode:` implementation
-                    anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
-                } catch (e) {
+                    // anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
+                // } catch (e) {
                     anchor = decodeURIComponent(m[3]);
-                }
+                // }
                 value += '#' + anchor.replace(/_/g, ' ');
             }
             value = value.slice(0, 1).toUpperCase() + value.slice(1);

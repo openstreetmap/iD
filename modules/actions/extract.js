@@ -98,7 +98,7 @@ export function actionExtract(entityID, projection) {
             var parentRels = graph.parentRelations(entity);
             for (var i = 0; i < parentRels.length; i++) {
                 var relation = parentRels[i];
-                if (!relation.isValidRestriction()) continue;
+                if (!relation.hasFromViaTo()) continue;
 
                 for (var j = 0; j < relation.members.length; j++) {
                     var m = relation.members[j];
