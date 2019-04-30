@@ -103,6 +103,17 @@ describe('iD.actionReverse', function () {
             expect(graph.entity(way.id).tags).to.eql({'cycleway:right': 'lane'});
         });
 
+        it('transforms *:right:*=* ⟺ *:left:*=*', function () {
+            var way = iD.osmWay({tags: {'cycleway:right:surface': 'paved'}});
+            var graph = iD.coreGraph([way]);
+
+            graph = iD.actionReverse(way.id)(graph);
+            expect(graph.entity(way.id).tags).to.eql({'cycleway:left:surface': 'paved'});
+
+            graph = iD.actionReverse(way.id)(graph);
+            expect(graph.entity(way.id).tags).to.eql({'cycleway:right:surface': 'paved'});
+        });
+
         it('transforms *:forward=* ⟺ *:backward=*', function () {
             var way = iD.osmWay({tags: {'maxspeed:forward': '25'}});
             var graph = iD.coreGraph([way]);
