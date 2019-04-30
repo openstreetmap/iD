@@ -201,7 +201,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
 
-    preset.removeTags = preset.removeTags || preset.tags || {};
+    preset.removeTags = preset.removeTags || preset.addTags || preset.tags || {};
     preset.unsetTags = function(tags, geometry) {
         tags = utilObjectOmit(tags, Object.keys(preset.removeTags));
 
