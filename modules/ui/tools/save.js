@@ -104,11 +104,7 @@ export function uiToolSave(context) {
 
 
         context.history()
-            .on('change.save', function(diff) {
-                if (!diff || diff.didChange.addition || diff.didChange.deletion) {
-                    updateCount();  // only on significant changes
-                }
-            });
+            .on('change.save', updateCount);
 
         context
             .on('enter.save', function() {
