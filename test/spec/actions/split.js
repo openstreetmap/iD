@@ -1160,7 +1160,7 @@ describe('iD.actionSplit', function () {
         });
 
 
-        ['restriction', 'restriction:bus'].forEach(function (type) {
+        ['restriction', 'restriction:bus', 'manoeuvre'].forEach(function (type) {
             describe('type = ' + type, function () {
 
                 it('updates a restriction\'s \'from\' role - via node', function () {

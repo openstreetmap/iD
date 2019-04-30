@@ -118,7 +118,7 @@ export function actionSplit(nodeId, newWayIds) {
             // 1. Splitting a FROM/TO way - only `wayA` OR `wayB` remains in relation
             //    (whichever one is connected to the VIA node/ways)
             // 2. Splitting a VIA way - `wayB` remains in relation as a VIA way
-            if (relation.isRestriction()) {
+            if (relation.hasFromViaTo()) {
                 var f = relation.memberByRole('from');
                 var v = relation.membersByRole('via');
                 var t = relation.memberByRole('to');
