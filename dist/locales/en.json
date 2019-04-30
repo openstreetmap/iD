@@ -5978,6 +5978,10 @@
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"
                 },
+                "highway/crossing": {
+                    "name": "Crossing",
+                    "terms": ""
+                },
                 "highway/crossing/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
                     "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
@@ -6010,6 +6014,10 @@
                     "name": "Cycle & Foot Path",
                     "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
                 },
+                "highway/cycleway/crossing": {
+                    "name": "Cycle Crossing",
+                    "terms": ""
+                },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
                     "terms": "cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
@@ -6037,6 +6045,10 @@
                 "highway/footway/conveying": {
                     "name": "Moving Walkway",
                     "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
+                },
+                "highway/footway/crossing": {
+                    "name": "Pedestrian Crossing",
+                    "terms": ""
                 },
                 "highway/footway/marked-raised": {
                     "name": "Marked Crosswalk (Raised)",
