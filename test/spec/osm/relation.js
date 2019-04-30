@@ -185,6 +185,85 @@ describe('iD.osmRelation', function () {
         });
     });
 
+    describe('#hasFromViaTo', function () {
+        it('returns true if there is a from, via, and to', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'manoeuvre' },
+                members: [
+                    { role: 'from', id: 'f', type: 'way' },
+                    { role: 'via', id: 'v', type: 'node' },
+                    { role: 'to', id: 't', type: 'way' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.true;
+        });
+
+        it('returns true if there are extra froms, vias, tos', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'manoeuvre' },
+                members: [
+                    { role: 'from', id: 'f1', type: 'way' },
+                    { role: 'from', id: 'f2', type: 'way' },
+                    { role: 'via', id: 'v1', type: 'node' },
+                    { role: 'via', id: 'v2', type: 'node' },
+                    { role: 'to', id: 't1', type: 'way' },
+                    { role: 'to', id: 't2', type: 'way' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.true;
+        });
+
+        it('returns false if from missing', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'manoeuvre' },
+                members: [
+                    { role: 'via', id: 'v', type: 'node' },
+                    { role: 'to', id: 't', type: 'way' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.false;
+        });
+
+        it('returns false if via missing', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'manoeuvre' },
+                members: [
+                    { role: 'from', id: 'f', type: 'way' },
+                    { role: 'to', id: 't', type: 'way' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.false;
+        });
+
+        it('returns false if to missing', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'manoeuvre' },
+                members: [
+                    { role: 'from', id: 'f', type: 'way' },
+                    { role: 'via', id: 'v', type: 'node' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.false;
+        });
+
+        it('returns false if all missing', function () {
+            var r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'multipolygon' },
+                members: [
+                    { role: 'inner', id: 'i', type: 'way' },
+                    { role: 'outer', id: 'o', type: 'way' }
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.false;
+        });
+    });
+
     describe('#isRestriction', function () {
         it('returns true for \'restriction\' type', function () {
             expect(iD.osmRelation({tags: {type: 'restriction'}}).isRestriction()).to.be.true;
