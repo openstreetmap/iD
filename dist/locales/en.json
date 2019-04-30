@@ -5962,6 +5962,10 @@
                     "name": "Bus Stop",
                     "terms": ""
                 },
+                "highway/crossing": {
+                    "name": "Crossing",
+                    "terms": ""
+                },
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse,trail"
@@ -5977,10 +5981,6 @@
                 "highway/corridor": {
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"
-                },
-                "highway/crossing": {
-                    "name": "Crossing",
-                    "terms": ""
                 },
                 "highway/crossing/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
@@ -6010,13 +6010,13 @@
                     "name": "Cycle Path",
                     "terms": "bike path,bicyle path"
                 },
-                "highway/cycleway/bicycle_foot": {
-                    "name": "Cycle & Foot Path",
-                    "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
-                },
                 "highway/cycleway/crossing": {
                     "name": "Cycle Crossing",
                     "terms": ""
+                },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Cycle & Foot Path",
+                    "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
@@ -6034,6 +6034,10 @@
                     "name": "Foot Path",
                     "terms": "hike,hiking,promenade,trackway,trail,walk"
                 },
+                "highway/footway/crossing": {
+                    "name": "Pedestrian Crossing",
+                    "terms": ""
+                },
                 "highway/footway/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
                     "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
@@ -6045,10 +6049,6 @@
                 "highway/footway/conveying": {
                     "name": "Moving Walkway",
                     "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
-                },
-                "highway/footway/crossing": {
-                    "name": "Pedestrian Crossing",
-                    "terms": ""
                 },
                 "highway/footway/marked-raised": {
                     "name": "Marked Crosswalk (Raised)",
