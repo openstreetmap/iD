@@ -164,9 +164,7 @@ export function validationCrossingWays() {
                         return {};
                     }
                     var pathFeature = entity1IsPath ? entity1 : entity2;
-                    if (pathFeature.tags.highway === 'footway' &&
-                        pathFeature.tags.footway === 'crossing' &&
-                        ['marked', 'unmarked'].indexOf(pathFeature.tags.crossing) !== -1) {
+                    if (['marked', 'unmarked'].indexOf(pathFeature.tags.crossing) !== -1) {
                         // if the path is a crossing, match the crossing type
                         return { highway: 'crossing', crossing: pathFeature.tags.crossing };
                     }
