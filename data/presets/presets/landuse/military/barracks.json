@@ -15,10 +15,6 @@
         "landuse": "military",
         "military": "barracks"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "barracks"
-    },
     "terms": [
         "air force",
         "army",

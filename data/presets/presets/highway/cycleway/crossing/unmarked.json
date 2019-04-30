@@ -17,11 +17,6 @@
         "cycleway": "crossing",
         "crossing": "unmarked"
     },
-    "removeTags": {
-        "highway": "cycleway",
-        "cycleway": "crossing",
-        "crossing": "unmarked"
-    },
     "reference": {
         "key": "cycleway",
         "value": "crossing"

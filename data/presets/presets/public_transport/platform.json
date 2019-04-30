@@ -22,10 +22,6 @@
         "public_transport": "platform",
         "highway": "footway"
     },
-    "removeTags": {
-        "public_transport": "platform",
-        "highway": "footway"
-    },
     "terms": [
         "platform",
         "public transit",

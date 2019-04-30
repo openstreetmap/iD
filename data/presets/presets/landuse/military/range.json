@@ -14,10 +14,6 @@
         "landuse": "military",
         "military": "range"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "range"
-    },
     "terms": [
         "air force",
         "army",

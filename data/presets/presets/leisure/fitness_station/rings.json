@@ -13,11 +13,6 @@
         "fitness_station": "rings",
         "sport": "fitness"
     },
-    "removeTags": {
-        "leisure": "fitness_station",
-        "fitness_station": "rings",
-        "sport": "fitness"
-    },
     "reference": {
         "key": "leisure",
         "value": "fitness_station"

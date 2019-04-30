@@ -21,11 +21,6 @@
         "sport": "cycling",
         "highway": "cycleway"
     },
-    "removeTags": {
-        "leisure": "track",
-        "sport": "cycling",
-        "highway": "cycleway"
-    },
     "terms": [
         "bicycle track",
         "bicycling track",

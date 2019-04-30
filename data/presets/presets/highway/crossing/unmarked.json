@@ -10,10 +10,6 @@
         "highway": "crossing",
         "crossing": "unmarked"
     },
-    "removeTags": {
-        "highway": "crossing",
-        "crossing": "unmarked"
-    },
     "tags": {
         "highway": "crossing"
     },

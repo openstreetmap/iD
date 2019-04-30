@@ -20,12 +20,6 @@
         "railway": "station",
         "station": "light_rail"
     },
-    "removeTags": {
-        "public_transport": "station",
-        "light_rail": "yes",
-        "railway": "station",
-        "station": "light_rail"
-    },
     "reference": {
         "key": "station",
         "value": "light_rail"

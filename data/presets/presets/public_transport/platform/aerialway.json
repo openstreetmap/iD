@@ -19,11 +19,6 @@
         "aerialway": "yes",
         "highway": "footway"
     },
-    "removeTags": {
-        "public_transport": "platform",
-        "aerialway": "yes",
-        "highway": "footway"
-    },
     "reference": {
         "key": "public_transport",
         "value": "platform"

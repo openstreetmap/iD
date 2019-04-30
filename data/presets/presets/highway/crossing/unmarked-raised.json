@@ -11,11 +11,6 @@
         "crossing": "unmarked",
         "traffic_calming": "table"
     },
-    "removeTags": {
-        "highway": "crossing",
-        "crossing": "unmarked",
-        "traffic_calming": "table"
-    },
     "tags": {
         "highway": "crossing",
         "traffic_calming": "table"

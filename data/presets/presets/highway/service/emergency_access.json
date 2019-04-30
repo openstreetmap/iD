@@ -10,10 +10,6 @@
         "highway": "service",
         "service": "emergency_access"
     },
-    "removeTags": {
-        "highway": "service",
-        "service": "emergency_access"
-    },
     "reference": {
         "key": "service",
         "value": "emergency_access"

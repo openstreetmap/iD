@@ -21,10 +21,5 @@
         "man_made": "pier",
         "floating": "yes"
     },
-    "removeTags": {
-        "highway": "footway",
-        "man_made": "pier",
-        "floating": "yes"
-    },
     "name": "Floating Pier"
 }
