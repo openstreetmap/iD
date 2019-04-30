@@ -108,7 +108,7 @@ When adding a feature with this preset, it will be given the tags `man_made=brid
 
 ##### `removeTags`
 
-The tags that are removed from the feature when deselecting this preset. Defaults to `tags`. If needed, this property will typically be equivalent to `addTags`.
+The tags that are removed from the feature when deselecting this preset. Defaults to `addTags` or if this is also not defined, to `tags`.
 
 ##### `fields`/`moreFields`
 
