@@ -29,17 +29,11 @@ export function validationIssue(attrs) {
             parts.push(this.subtype);
         }
 
-        // include entities this issue is for
+        // include the entities this issue is for
         // (sort them so the id is deterministic)
         if (this.entityIds) {
             var entityKeys = this.entityIds.slice().sort();
             parts.push.apply(parts, entityKeys);
-        }
-
-        // include loc since two separate issues can have an
-        // idential type and entities, e.g. in crossing_ways
-        if (this.loc) {
-            parts.push.apply(parts, this.loc);
         }
 
         return parts.join(':');

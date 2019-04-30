@@ -494,6 +494,8 @@ export function validationCrossingWays() {
                 edges: crossing.edges,
                 connectionTags: connectionTags
             },
+            // differentiate based on the loc since two ways can cross multiple times
+            hash: JSON.stringify(crossing.crossPoint),
             loc: crossing.crossPoint,
             fixes: fixes
         });
