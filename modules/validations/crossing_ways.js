@@ -170,8 +170,8 @@ export function validationCrossingWays() {
                         // if the path is a crossing, match the crossing type
                         return { highway: 'crossing', crossing: pathFeature.tags.crossing };
                     }
-                    // default ambiguous crossings to unmarked
-                    return { highway: 'crossing', crossing: 'unmarked' };
+                    // don't add a `crossing` subtag to ambiguous crossings
+                    return { highway: 'crossing' };
                 }
                 return {};
             }
