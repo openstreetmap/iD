@@ -489,7 +489,7 @@ path.line.stroke.tag-highway_bus_stop,
 .preset-icon-container path.casing.tag-highway-footway {
     stroke: #988;
 }
-.preset-icon-container path.stroke.tag-highway-footway:not(.tag-footway-crossing):not(.tag-man_made-pier):not(.tag-public_transport-platform) {
+.preset-icon-container path.stroke.tag-highway-footway:not(.tag-crossing-marked):not(.tag-crossing-unmarked):not(.tag-man_made-pier):not(.tag-public_transport-platform) {
     stroke: #fff;
 }
 
@@ -576,11 +576,20 @@ path.line.stroke.tag-highway.tag-crossing-marked {
 path.line.stroke.tag-highway-footway.tag-crossing-marked {
     stroke: #4c4444;
 }
+.preset-icon .icon.tag-highway-footway.tag-crossing-marked {
+    color: #4c4444;
+}
 path.line.stroke.tag-highway-footway.tag-crossing-unmarked {
     stroke: #776a6a;
 }
+.preset-icon .icon.tag-highway-footway.tag-crossing-unmarked {
+    color: #776a6a;
+}
 path.line.stroke.tag-highway-cycleway.tag-crossing-marked {
     stroke: #446077;
+}
+.preset-icon .icon.tag-highway-cycleway.tag-crossing-marked {
+    color: #446077;
 }
 
 

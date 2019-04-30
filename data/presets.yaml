@@ -4184,6 +4184,9 @@ en:
         name: Indoor Corridor
         # 'terms: gallery,hall,hallway,indoor,passage,passageway'
         terms: '<translate with synonyms or related terms for ''Indoor Corridor'', separated by commas>'
+      highway/crossing:
+        # highway=crossing
+        name: Crossing
       highway/crossing/marked:
         # crossing=marked
         name: Marked Crosswalk
@@ -4195,11 +4198,11 @@ en:
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/crossing/unmarked:
-        # highway=crossing
+        # crossing=unmarked
         name: Unmarked Crossing
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/crossing/unmarked-raised:
-        # 'highway=crossing, traffic_calming=table'
+        # 'highway=crossing, crossing=unmarked, traffic_calming=table'
         name: Unmarked Crossing (Raised)
         # 'terms: flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
@@ -4219,13 +4222,16 @@ en:
         name: Cycle & Foot Path
         # 'terms: bicycle and foot path,mixed-use trail,multi-use trail,segregated trail'
         terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
+      highway/cycleway/crossing:
+        # cycleway=crossing
+        name: Cycle Crossing
       highway/cycleway/crossing/marked:
         # 'cycleway=crossing, crossing=marked'
         name: Marked Cycle Crossing
         # 'terms: cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
         terms: '<translate with synonyms or related terms for ''Marked Cycle Crossing'', separated by commas>'
       highway/cycleway/crossing/unmarked:
-        # cycleway=crossing
+        # 'cycleway=crossing, crossing=unmarked'
         name: Unmarked Cycle Crossing
         # 'terms: cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
         terms: '<translate with synonyms or related terms for ''Unmarked Cycle Crossing'', separated by commas>'
@@ -4244,6 +4250,9 @@ en:
         name: Moving Walkway
         # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
         terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
+      highway/footway/crossing:
+        # footway=crossing
+        name: Pedestrian Crossing
       highway/footway/marked:
         # 'footway=crossing, crossing=marked'
         name: Marked Crosswalk
@@ -4260,12 +4269,12 @@ en:
         # 'terms: pavement,sidepath'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       highway/footway/unmarked:
-        # footway=crossing
+        # 'footway=crossing, crossing=unmarked'
         name: Unmarked Crossing
         # 'terms: unmarked foot path crossing,unmarked crosswalk,unmarked pedestrian crossing'
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/footway/unmarked-raised:
-        # 'footway=crossing, traffic_calming=table'
+        # 'footway=crossing, crossing=unmarked, traffic_calming=table'
         name: Unmarked Crossing (Raised)
         # 'terms: flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'

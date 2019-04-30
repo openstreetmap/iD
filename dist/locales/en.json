@@ -1604,6 +1604,13 @@
                     "reference": "Intersecting highways should share a junction vertex."
                 }
             },
+            "close_nodes": {
+                "title": "Very Close Points",
+                "message": "Two points in {way} are very close together",
+                "tip": "Find redundant points in ways",
+                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
+                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
+            },
             "crossing_ways": {
                 "title": "Crossings Ways",
                 "message": "{feature} crosses {feature2}",
@@ -1737,12 +1744,6 @@
                 "message": "{feature} has no classification",
                 "reference": "Roads without a specific type may not appear in maps or routing."
             },
-            "dupe_node_on_road": {
-                "title": "Very close nodes on road",
-                "message": "Very close nodes on road",
-                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
-                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
-            },
             "impossible_oneway": {
                 "title": "Impossible One-Ways",
                 "tip": "Find route issues with one-way features",
@@ -1798,6 +1799,9 @@
                 },
                 "delete_feature": {
                     "title": "Delete this feature"
+                },
+                "merge_points": {
+                    "title": "Merge these points"
                 },
                 "move_tags": {
                     "title": "Move the tags",
@@ -1869,9 +1873,6 @@
                 },
                 "use_tunnel": {
                     "title": "Use a tunnel"
-                },
-                "merge_nodes": {
-                    "title": "Merge these nodes"
                 }
             }
         },
@@ -5961,6 +5962,10 @@
                     "name": "Bus Stop",
                     "terms": ""
                 },
+                "highway/crossing": {
+                    "name": "Crossing",
+                    "terms": ""
+                },
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse,trail"
@@ -6005,6 +6010,10 @@
                     "name": "Cycle Path",
                     "terms": "bike path,bicyle path"
                 },
+                "highway/cycleway/crossing": {
+                    "name": "Cycle Crossing",
+                    "terms": ""
+                },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
                     "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
@@ -6024,6 +6033,10 @@
                 "highway/footway": {
                     "name": "Foot Path",
                     "terms": "hike,hiking,promenade,trackway,trail,walk"
+                },
+                "highway/footway/crossing": {
+                    "name": "Pedestrian Crossing",
+                    "terms": ""
                 },
                 "highway/footway/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
@@ -9100,6 +9113,20 @@
                 },
                 "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
                 "name": "Japan GSI ortho Imagery"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
+                "name": "Japan GSI airphoto Imagery"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan seamless photo"
+                },
+                "description": "Japan GSI seamlessphoto Imagery. The collection of latest imageries of GSI ortho, airphoto, post disaster and others.",
+                "name": "Japan GSI seamlessphoto Imagery"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

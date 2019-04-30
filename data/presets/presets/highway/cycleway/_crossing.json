@@ -10,23 +10,21 @@
         "line"
     ],
     "tags": {
-        "cycleway": "crossing",
-        "crossing": "unmarked"
+        "cycleway": "crossing"
     },
     "addTags": {
         "highway": "cycleway",
-        "cycleway": "crossing",
-        "crossing": "unmarked"
+        "cycleway": "crossing"
+    },
+    "removeTags": {
+        "highway": "cycleway",
+        "cycleway": "crossing"
     },
     "reference": {
         "key": "cycleway",
         "value": "crossing"
     },
-    "terms": [
-        "cycle path crossing",
-        "cycleway crossing",
-        "bicycle crossing",
-        "bike crossing"
-    ],
-    "name": "Unmarked Cycle Crossing"
+    "searchable": false,
+    "matchScore": 0.95,
+    "name": "Cycle Crossing"
 }

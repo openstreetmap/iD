@@ -1,7 +1,7 @@
 export { validationAlmostJunction } from './almost_junction';
+export { validationCloseNodes } from './close_nodes';
 export { validationCrossingWays } from './crossing_ways';
 export { validationDisconnectedWay } from './disconnected_way';
-export { validationDupeNodeOnRoad } from './dupe_node_on_road';
 export { validationFixmeTag } from './fixme_tag';
 export { validationGenericName } from './generic_name';
 export { validationImpossibleOneway } from './impossible_oneway';

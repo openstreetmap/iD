@@ -100,6 +100,7 @@ describe('iD.serviceMapillary', function() {
         });
 
         it('loads multiple pages of image results', function(done) {
+            this.timeout(10000);
             var calls = 0;
             mapillary.on('loadedImages', function() {
                 server.respond();  // respond to new fetches
@@ -193,6 +194,7 @@ describe('iD.serviceMapillary', function() {
         });
 
         it('loads multiple pages of signs results', function(done) {
+            this.timeout(10000);
             var calls = 0;
             mapillary.on('loadedSigns', function() {
                 server.respond();  // respond to new fetches
