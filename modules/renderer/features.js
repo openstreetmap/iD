@@ -511,6 +511,13 @@ export function rendererFeatures(context) {
         _forceVisible = {};
         for (var i = 0; i < entityIDs.length; i++) {
             _forceVisible[entityIDs[i]] = true;
+            var entity = context.hasEntity(entityIDs[i]);
+            if (entity && entity.type === 'relation') {
+                // also show relation members (one level deep)
+                for (var j in entity.members) {
+                    _forceVisible[entity.members[j].id] = true;
+                }
+            }
         }
         return features;
     };

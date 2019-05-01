@@ -233,18 +233,7 @@ export function modeSelect(context, selectedIDs) {
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
-        var forceVisibleIDs = selectedIDs.slice();
-
-        selectedIDs.forEach(function(id) {
-            var entity = context.entity(id);
-            if (entity.type === 'relation') {
-                forceVisibleIDs = forceVisibleIDs.concat(entity.members.map(function(member) {
-                    return member.id;
-                }));
-            }
-        });
-
-        context.features().forceVisible(forceVisibleIDs);
+        context.features().forceVisible(selectedIDs);
 
         var operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
