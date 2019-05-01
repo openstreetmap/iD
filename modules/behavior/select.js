@@ -107,14 +107,21 @@ export function behaviorSelect(context) {
         _p1 = null;
         if (dist > tolerance) return;
 
-        var e = d3_event;
-        processClick(e);   // todo defer for 6028?
+        // Defer processing the click,
+        // because this click may trigger a blur event,
+        // and the blur event may trigger a tag change,
+        // and we really want that tag change to go to the already selected entity
+        // and not the one that we are about to select with the click  #6028, #5878
+        // (Be very careful entering modeSelect anywhere that might also blur a field!)
+        var datum = d3_event.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
+        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node();
+        window.setTimeout(function() {
+            processClick(datum, isMultiselect);
+        }, 20);  // delay > whatever raw_tag_editor.js `scheduleChange` does (10ms).
     }
 
 
-    function processClick(e) {
-        var isMultiselect = e.shiftKey || d3_select('#surface .lasso').node();
-        var datum = e.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
+    function processClick(datum, isMultiselect) {
         var mode = context.mode();
 
         var entity = datum && datum.properties && datum.properties.entity;
