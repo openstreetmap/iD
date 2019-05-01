@@ -16,10 +16,6 @@
         "landuse": "residential",
         "residential": "apartments"
     },
-    "removeTags": {
-        "landuse": "residential",
-        "residential": "apartments"
-    },
     "reference": {
         "key": "residential",
         "value": "apartments"

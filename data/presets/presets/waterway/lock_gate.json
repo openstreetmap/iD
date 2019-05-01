@@ -17,10 +17,6 @@
         "waterway": "lock_gate",
         "seamark:type": "gate"
     },
-    "removeTags": {
-        "waterway": "lock_gate",
-        "seamark:type": "gate"
-    },
     "terms": [
         "canal"
     ],

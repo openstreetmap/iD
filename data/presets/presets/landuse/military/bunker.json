@@ -17,11 +17,6 @@
         "landuse": "military",
         "military": "bunker"
     },
-    "removeTags": {
-        "building": "bunker",
-        "landuse": "military",
-        "military": "bunker"
-    },
     "terms": [
         "air force",
         "army",

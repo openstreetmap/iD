@@ -10,10 +10,6 @@
         "highway": "service",
         "service": "driveway"
     },
-    "removeTags": {
-        "highway": "service",
-        "service": "driveway"
-    },
     "reference": {
         "key": "service",
         "value": "driveway"

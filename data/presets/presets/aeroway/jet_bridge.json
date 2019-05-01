@@ -33,10 +33,6 @@
         "aeroway": "jet_bridge",
         "highway": "corridor"
     },
-    "removeTags": {
-        "aeroway": "jet_bridge",
-        "highway": "corridor"
-    },
     "matchScore": 1.05,
     "name": "Jet Bridge"
 }

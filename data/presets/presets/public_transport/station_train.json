@@ -20,11 +20,6 @@
         "train": "yes",
         "railway": "station"
     },
-    "removeTags": {
-        "public_transport": "station",
-        "train": "yes",
-        "railway": "station"
-    },
     "reference": {
         "key": "railway",
         "value": "station"

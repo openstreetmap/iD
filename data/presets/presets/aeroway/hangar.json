@@ -13,9 +13,5 @@
         "building": "hangar",
         "aeroway": "hangar"
     },
-    "removeTags": {
-        "building": "hangar",
-        "aeroway": "hangar"
-    },
     "name": "Hangar"
 }

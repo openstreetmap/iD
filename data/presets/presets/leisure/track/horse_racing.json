@@ -21,11 +21,6 @@
         "sport": "horse_racing",
         "highway": "bridleway"
     },
-    "removeTags": {
-        "leisure": "track",
-        "sport": "horse_racing",
-        "highway": "bridleway"
-    },
     "terms": [
         "equestrian race track",
         "horse race betting",

@@ -15,10 +15,6 @@
         "highway": "footway",
         "footway": "crossing"
     },
-    "removeTags": {
-        "highway": "footway",
-        "footway": "crossing"
-    },
     "reference": {
         "key": "footway",
         "value": "crossing"
