@@ -4685,6 +4685,7 @@ en:
       landuse/meadow:
         # landuse=meadow
         name: Meadow
+        # 'terms: grazing,hay field,pasture'
         terms: '<translate with synonyms or related terms for ''Meadow'', separated by commas>'
       landuse/military:
         # landuse=military

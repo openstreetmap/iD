@@ -9,6 +9,10 @@
     "tags": {
         "landuse": "meadow"
     },
-    "terms": [],
+    "terms": [
+        "grazing",
+        "hay field",
+        "pasture"
+    ],
     "name": "Meadow"
 }
