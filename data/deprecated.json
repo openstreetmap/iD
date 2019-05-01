@@ -149,6 +149,14 @@
       "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
     },
     {
+      "old": {"artwork": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
+      "old": {"artwork:type": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
       "old": {"barrier": "curb"},
       "replace": {"barrier": "kerb"}
     },

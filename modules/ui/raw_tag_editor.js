@@ -1,9 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
@@ -11,14 +7,14 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox } from './combobox';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../util';
+import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
     var _readOnlyTags = [];
-    var _orderedKeys = [];
+    var _indexedKeys = [];
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
@@ -56,34 +52,27 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var rowData = [];
-        var seen = {};
-        var allKeys = Object.keys(_tags);
-        var i, k;
-
         // When switching to a different entity or changing the state (hover/select)
-        // we reorder the keys.  Otherwise leave them as the user entered - #5857
-        if (!_orderedKeys.length) {
-            _orderedKeys = allKeys.sort();
+        // reorder the keys alphabetically.
+        // We trigger this by emptying the `_indexedKeys` array, then it will be rebuilt here.
+        // Otherwise leave their order alone - #5857, #5927
+        var all = Object.keys(_tags).sort();
+        var known = _indexedKeys.map(function(t) { return t.key; });
+        var missing = utilArrayDifference(all, known);
+        for (var i = 0; i < missing.length; i++) {
+            _indexedKeys.push({ index: _indexedKeys.length, key: missing[i] });
         }
 
-        // push ordered keys first
-        for (i = 0; i < _orderedKeys.length; i++) {
-            k = _orderedKeys[i];
-            if (_tags[k] === undefined) continue;   // e.g. tag was removed
-            seen[k] = true;
-            rowData.push({ key: k, value: _tags[k] });
-        }
-        // push unknown keys after - these are tags the user added
-        for (i = 0; i < allKeys.length; i++) {
-            k = allKeys[i];
-            if (seen[k]) continue;
-            rowData.push({ key: k, value: _tags[k] });
-        }
-        // push blank row last, if necessary
-        if (!rowData.length || _showBlank) {
+        // assemble row data, excluding any deleted tags
+        var rowData = _indexedKeys.map(function(row) {
+            var v = _tags[row.key];
+            return (v === undefined) ? null : Object.assign(row, { value: v });
+        }).filter(Boolean);
+
+        // append blank row last, if necessary
+        if (!_indexedKeys.length || _showBlank) {
             _showBlank = false;
-            rowData.push({ key: '', value: '' });
+            rowData.push({ index: _indexedKeys.length, key: '', value: '' });
         }
 
         // List of tags
@@ -170,7 +159,7 @@ export function uiRawTagEditor(context) {
         // Update
         items = items
             .merge(itemsEnter)
-            .order();
+            .sort(function(a, b) { return a.index - b.index; });
 
         items
             .each(function(d) {
@@ -249,9 +238,7 @@ export function uiRawTagEditor(context) {
                         query: value
                     }, function(err, data) {
                         if (!err) {
-                            var filtered = data.filter(function(d) {
-                                return _tags[d.value] === undefined;
-                            });
+                            var filtered = data.filter(function(d) { return _tags[d.value] === undefined; });
                             callback(sort(value, filtered));
                         }
                     });
@@ -355,7 +342,6 @@ export function uiRawTagEditor(context) {
 
             this.value = kNew;
             utilGetSetValue(inputVal, vNew);
-
             scheduleChange();
         }
 
@@ -408,7 +394,7 @@ export function uiRawTagEditor(context) {
     rawTagEditor.state = function(val) {
         if (!arguments.length) return _state;
         if (_state !== val) {
-            _orderedKeys = [];
+            _indexedKeys = [];
             _state = val;
         }
         return rawTagEditor;
@@ -439,7 +425,7 @@ export function uiRawTagEditor(context) {
     rawTagEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
         if (_entityID !== val) {
-            _orderedKeys = [];
+            _indexedKeys = [];
             _entityID = val;
         }
         return rawTagEditor;
@@ -454,6 +440,7 @@ export function uiRawTagEditor(context) {
     };
 
 
+    // pass an array of regular expressions to test against the tag key
     rawTagEditor.readOnlyTags = function(val) {
         if (!arguments.length) return _readOnlyTags;
         _readOnlyTags = val;

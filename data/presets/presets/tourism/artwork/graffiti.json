@@ -1,9 +1,8 @@
 {
-    "icon": "fas-female",
+    "icon": "maki-art-gallery",
     "fields": [
         "name",
-        "artist",
-        "material"
+        "artist"
     ],
     "geometry": [
         "point",
@@ -13,16 +12,15 @@
     ],
     "tags": {
         "tourism": "artwork",
-        "artwork_type": "statue"
+        "artwork_type": "graffiti"
     },
     "reference": {
-        "key": "artwork_type",
-        "value": "statue"
+        "key": "artwork_type"
     },
     "terms": [
-        "sculpture",
-        "figure",
-        "carving"
+        "Street Artwork",
+        "Guerilla Artwork",
+        "Graffiti Artwork"
     ],
-    "name": "Statue"
+    "name": "Graffiti"
 }

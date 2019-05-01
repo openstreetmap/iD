@@ -6451,7 +6451,7 @@
                 },
                 "landuse/meadow": {
                     "name": "Meadow",
-                    "terms": ""
+                    "terms": "grazing,hay field,pasture"
                 },
                 "landuse/military": {
                     "name": "Military Area",
@@ -8524,6 +8524,18 @@
                 "tourism/artwork": {
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
+                },
+                "tourism/artwork/bust": {
+                    "name": "Bust",
+                    "terms": "figure"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti",
+                    "terms": "Street Artwork,Guerilla Artwork,Graffiti Artwork"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Art Installation",
+                    "terms": "interactive art,intervention art,modern art"
                 },
                 "tourism/artwork/mural": {
                     "name": "Mural",
