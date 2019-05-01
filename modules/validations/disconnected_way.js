@@ -20,13 +20,20 @@ export function validationDisconnectedWay() {
     function isTaggedAsHighway(entity) {
         return highways[entity.tags.highway];
     }
-
+    
+    function isNewRoad(entityId) { 
+        return entityId[0] === 'w' && entityId[1] === '-'; 
+    }
 
     var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
 
         if (!isTaggedAsHighway(entity)) return [];
-        if (!isDisconnectedWay(entity) && !isDisconnectedMultipolygon(entity)) return [];
+
+        if (!isDisconnectedWay(entity) && !isDisconnectedMultipolygon(entity)
+        && !isNewRoadUnreachableFromExistingRoads(entity, graph)) {
+         return [];
+        }
 
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
@@ -81,7 +88,14 @@ export function validationDisconnectedWay() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
+            message: (isNewRoad(entity.id)
+                ? t('issues.disconnected_way.highway.message_new_road', { highway: entityLabel })
+                : t('issues.disconnected_way.highway.message', { highway: entityLabel })
+            ),
+            tooltip: (isNewRoad(entity.id)
+                ? t('issues.disconnected_way.highway.reference_new_road')
+                : t('issues.disconnected_way.highway.reference')
+            ),
             reference: showReference,
             entities: [entity],
             fixes: fixes
@@ -132,6 +146,34 @@ export function validationDisconnectedWay() {
             return graph.childNodes(entity).every(function(vertex) {
                 return vertexIsDisconnected(entity, vertex);
             });
+        }
+
+
+        // check if entity is a new road that cannot eventually connect to any
+        // existing roads
+        function isNewRoadUnreachableFromExistingRoads(entity) {
+            if (!isNewRoad(entity.id) || !isTaggedAsHighway(entity)) return false;
+
+            var visitedWids = new Set();
+            return !connectToExistingRoadOrEntrance(entity, visitedWids);
+        }
+
+
+        function connectToExistingRoadOrEntrance(way, visitedWids) {
+            visitedWids.add(way.id);
+            for (var i = 0; i < way.nodes.length; i++) {
+                var vertex = graph.entity(way.nodes[i]);
+                if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return true;
+
+                var parentWays = graph.parentWays(vertex);
+                for (var j = 0; j < parentWays.length; j++) {
+                    var parentWay = parentWays[j];
+                    if (visitedWids.has(parentWay.id)) continue;
+                    if (isTaggedAsHighway(parentWay) && !isNewRoad(parentWay.id)) return true;
+                    if (connectToExistingRoadOrEntrance(parentWay, visitedWids)) return true;
+                }
+            }
+            return false;
         }
 
 

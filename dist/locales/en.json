@@ -1669,7 +1669,9 @@
                 "tip": "Find unconnected highways and paths",
                 "highway": {
                     "message": "{highway} is disconnected from other roads and paths",
-                    "reference": "Highways should connect to other highways or building entrances."
+                    "message_new_road": "New {highway} is disconnected from existing road network",
+                    "reference": "Highways should connect to other highways or building entrances.",
+                    "reference_new_road": "New roads should connect to existing road network or building entrances."
                 }
             },
             "fixme_tag": {
