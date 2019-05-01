@@ -3619,6 +3619,11 @@ en:
         name: House
         # 'terms: home,family,residence,dwelling'
         terms: '<translate with synonyms or related terms for ''House'', separated by commas>'
+      building/houseboat:
+        # building=houseboat
+        name: Houseboat
+        # 'terms: home,family,residence,dwelling'
+        terms: '<translate with synonyms or related terms for ''Houseboat'', separated by commas>'
       building/hut:
         # building=hut
         name: Hut
