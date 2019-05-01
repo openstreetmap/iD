@@ -3306,40 +3306,32 @@ button.autofix.action.active {
     padding: 0 10px;
 }
 
-.layer-list.issues-list {
-    margin-bottom: 5px;
-}
-
 .layer-list.issues-list li.issue {
     border-color: inherit;    /* override .layer-list styles */
     color: inherit;
     height: unset;
 }
 
-.layer-list.issue-rules-list {
+.layer-list.issue-rules-list,
+.layer-list.issues-list {
     margin-bottom: 0;
 }
-.issue-rules-links {
+.section-footer {
     display: flex;
     flex-flow: row nowrap;
     flex-direction: row-reverse;
     height: 30px;
 }
-.issue-rules-link {
+.section-footer a {
     padding: 5px;
 }
 
-.issues-none {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
 .issues-none .box {
     border-radius: 4px;
     border: 1px solid #72d979;
     background: #c6ffca;
     padding: 5px !important;
     display: flex;
-    margin-bottom: 5px;
 }
 .issues-none .icon {
     color: #05ac10;

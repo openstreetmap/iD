@@ -313,15 +313,18 @@ export function uiIssues(context) {
 
         // enter
         var resetIgnoredEnter = resetIgnored.enter()
+            .append('div')
+            .attr('class', 'reset-ignored section-footer');
+
+        resetIgnoredEnter
             .append('a')
-            .attr('class', 'reset-ignored')
             .attr('href', '#');
 
         // update
         resetIgnored = resetIgnored
             .merge(resetIgnoredEnter);
 
-        resetIgnored
+        resetIgnored.select('a')
             .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
 
         resetIgnored.on('click', function() {
@@ -344,7 +347,7 @@ export function uiIssues(context) {
 
         var ruleLinks = containerEnter
             .append('div')
-            .attr('class', 'issue-rules-links');
+            .attr('class', 'issue-rules-links section-footer');
 
         ruleLinks
             .append('a')
