@@ -7110,6 +7110,21 @@ en:
         name: Artwork
         # 'terms: mural,sculpture,statue'
         terms: '<translate with synonyms or related terms for ''Artwork'', separated by commas>'
+      tourism/artwork/bust:
+        # 'tourism=artwork, artwork_type=bust'
+        name: Bust
+        # 'terms: figure'
+        terms: '<translate with synonyms or related terms for ''Bust'', separated by commas>'
+      tourism/artwork/graffiti:
+        # 'tourism=artwork, artwork_type=graffiti'
+        name: Graffiti
+        # 'terms: Street Artwork,Guerilla Artwork,Graffiti Artwork'
+        terms: '<translate with synonyms or related terms for ''Graffiti'', separated by commas>'
+      tourism/artwork/installation:
+        # 'tourism=artwork, artwork_type=installation'
+        name: Art Installation
+        # 'terms: interactive art,intervention art,modern art'
+        terms: '<translate with synonyms or related terms for ''Art Installation'', separated by commas>'
       tourism/artwork/mural:
         # 'tourism=artwork, artwork_type=mural'
         name: Mural
