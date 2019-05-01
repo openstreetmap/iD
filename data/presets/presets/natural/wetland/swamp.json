@@ -1,0 +1,18 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "swamp"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "swamp"
+    },
+    "terms": [
+        "Swamp Forest",
+        "Shrub Swamp",
+        "forest"
+    ],
+    "name": "Swamp"
+}

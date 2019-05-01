@@ -1,0 +1,17 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "marsh"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "marsh"
+    },
+    "terms": [
+        "grass",
+        "wet grass"
+    ],
+    "name": "Marsh"
+}

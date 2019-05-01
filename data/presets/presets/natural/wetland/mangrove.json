@@ -1,0 +1,18 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "mangrove"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "mangrove"
+    },
+    "terms": [
+        "Mangrove Forest",
+        "Mangal",
+        "mangroves"
+    ],
+    "name": "Mangrove Swamp"
+}

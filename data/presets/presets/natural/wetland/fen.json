@@ -1,0 +1,18 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "fen"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "fen"
+    },
+    "terms": [
+        "Peatland",
+        "peat",
+        "groundwater-fed"
+    ],
+    "name": "Fen"
+}

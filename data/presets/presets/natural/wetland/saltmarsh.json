@@ -1,0 +1,18 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "saltmarsh"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "saltmarsh"
+    },
+    "terms": [
+        "Salt Marsh",
+        "Tidal Marsh",
+        "cordgrass"
+    ],
+    "name": "Saltmarsh"
+}

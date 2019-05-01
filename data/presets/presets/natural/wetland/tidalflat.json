@@ -1,0 +1,18 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "wet_meadow"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "wet_meadow"
+    },
+    "terms": [
+        "Mud Flat",
+        "Mudflat",
+        "mud"
+    ],
+    "name": "Tidal Flat"
+}

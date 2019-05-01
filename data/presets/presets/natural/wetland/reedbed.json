@@ -1,0 +1,17 @@
+{
+    "icon": "maki-wetland",
+    "geometry": [ "area" ],
+    "tags": {
+        "natural": "wetland",
+        "wetland": "reedbed"
+    },
+    "reference": {
+        "key": "wetland",
+        "value": "reedbed"
+    },
+    "terms": [
+        "reeds",
+        "bulrushes"
+    ],
+    "name": "Reedbed"
+}

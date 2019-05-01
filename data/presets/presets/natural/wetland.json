@@ -5,27 +5,15 @@
         "salt",
         "tidal"
     ],
-    "geometry": [
-        "point",
-        "area"
-    ],
+    "geometry": [ "area" ],
     "tags": {
         "natural": "wetland"
     },
     "terms": [
-        "bog",
-        "fen",
-        "marsh",
         "mire",
         "moor",
         "muskeg",
-        "peatland",
-        "quagmire",
-        "reedbed",
-        "saltmarsh",
-        "swamp",
-        "tidalflat",
-        "wet meadow"
+        "quagmire"
     ],
     "name": "Wetland"
 }
