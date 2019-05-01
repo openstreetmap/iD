@@ -1,0 +1,17 @@
+{
+    "icon": "maki-home",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "houseboat"
+    },
+    "terms": [
+        "home",
+        "family",
+        "residence",
+        "dwelling"
+    ],
+    "matchScore": 0.5,
+    "name": "Houseboat"
+}
