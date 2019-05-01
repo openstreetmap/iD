@@ -289,14 +289,14 @@ export function uiIssues(context) {
 
         noIssuesMessage
             .append('strong')
-            .text(t('issues.no_issues.message.everything'));
+            .attr('class', 'message');
 
         noIssuesMessage
             .append('br');
 
         noIssuesMessage
             .append('span')
-            .text(t('issues.no_issues.hidden_issues.none'));
+            .attr('class', 'details');
     }
 
     function renderIgnoredIssuesReset(selection) {
@@ -395,6 +395,78 @@ export function uiIssues(context) {
         context.validator().toggleRule(d);
     }
 
+    function setNoIssuesText() {
+
+        function checkForHiddenIssues(cases) {
+            for (var type in cases) {
+                var opts = cases[type];
+                var hiddenIssues = context.validator().getIssues(opts);
+                if (hiddenIssues.length) {
+                    var quantity = hiddenIssues.length === 1 ? 'single' : 'multiple';
+                    _pane.select('.issues-none .details')
+                        .text(t(
+                            'issues.no_issues.hidden_issues.' + type + '.' + quantity,
+                            { count: hiddenIssues.length.toString() }
+                        ));
+                    return;
+                }
+            }
+            _pane.select('.issues-none .details')
+                .text(t('issues.no_issues.hidden_issues.none'));
+        }
+
+        var messageType;
+
+        if (_options.what === 'edited' && _options.where === 'visible') {
+
+            messageType = 'edits_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'edited', where: 'all' },
+                other_features: { what: 'all', where: 'visible' },
+                disabled_rules: { what: 'edited', where: 'visible', includeDisabledRules: 'only' },
+                other_features_elsewhere: { what: 'all', where: 'all' },
+                disabled_rules_elsewhere: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'edited' && _options.where === 'all') {
+
+            messageType = 'edits';
+
+            checkForHiddenIssues({
+                other_features: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'all' && _options.where === 'visible') {
+
+            messageType = 'everything_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'all', where: 'visible', includeDisabledRules: 'only' },
+                disabled_rules_elsewhere: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        } else if (_options.what === 'all' && _options.where === 'all') {
+
+            messageType = 'everything';
+
+            checkForHiddenIssues({
+                disabled_rules: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        }
+
+        _pane.select('.issues-none .message')
+            .text(t('issues.no_issues.message.' + messageType));
+
+    }
+
 
     function update() {
         var issuesBySeverity = context.validator().getIssuesBySeverity(_options);
@@ -448,6 +520,7 @@ export function uiIssues(context) {
         issuesNone.classed('hide', hasIssues);
         if (!hasIssues) {
             renderIgnoredIssuesReset(issuesNone);
+            setNoIssuesText();
         }
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {

@@ -1587,13 +1587,25 @@
                         "single": "1 issue with other features",
                         "multiple": "{count} issues with other features"
                     },
+                    "other_features_elsewhere": {
+                        "single": "1 issue with other features elsewhere",
+                        "multiple": "{count} issues with other features elsewhere"
+                    },
                     "disabled_rules": {
-                        "single": "1 issue from disabled rules",
-                        "multiple": "{count} issues from disabled rules"
+                        "single": "1 issue with disabled rules",
+                        "multiple": "{count} issues with disabled rules"
+                    },
+                    "disabled_rules_elsewhere": {
+                        "single": "1 issue with disabled rules elsewhere",
+                        "multiple": "{count} issues with disabled rules elsewhere"
                     },
                     "ignored_issues": {
                         "single": "1 ignored issue",
                         "multiple": "{count} ignored issues"
+                    },
+                    "ignored_issues_elsewhere": {
+                        "single": "1 ignored issue elsewhere",
+                        "multiple": "{count} ignored issues elsewhere"
                     }
                 }
             },

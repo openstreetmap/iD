@@ -67,15 +67,20 @@ export function coreValidator(context) {
     //     what: 'all',     // 'all' or 'edited'
     //     where: 'all',   // 'all' or 'visible'
     //     includeIgnored: false   // true, false, or 'only'
+    //     includeDisabledRules: false   // true, false, or 'only'
     // };
     validator.getIssues = function(options) {
-        var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false }, options);
+        var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
         var issues = Object.values(_issuesByIssueID);
         var changes = context.history().difference().changes();
         var view = context.map().extent();
 
         return issues.filter(function(issue) {
-            if (_disabledRules[issue.type]) return false;
+            if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
+            if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
+
+            if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
+            if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
             // Sanity check:  This issue may be for an entity that not longer exists.
             // If we detect this, uncache and return false so it is not incluced..
@@ -88,10 +93,6 @@ export function coreValidator(context) {
                     return false;
                 }
             }
-
-            if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
-
-            if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
             if (opts.what === 'edited') {
                 var isEdited = entityIds.some(function(entityId) { return changes[entityId]; });
