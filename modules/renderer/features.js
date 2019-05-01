@@ -539,11 +539,14 @@ export function rendererFeatures(context) {
 
 
     // warm up the feature matching cache upon merging fetched data
-    context.history().on('merge.features', function(entities) {
+    context.history().on('merge.features', function(newEntities) {
         utilCallWhenIdle(function() {
-            if (!entities) return;
+            if (!newEntities) return;
 
             var graph = context.graph();
+            var types = utilArrayGroupBy(newEntities, 'type');
+            // ensure that getMatches is called on relations before ways
+            var entities = [].concat(types.relation || [], types.way || [], types.node || []);
             for (var i = 0; i < entities.length; i++) {
                 var geometry = entities[i].geometry(graph);
                 features.getMatches(entities[i], graph, geometry);
