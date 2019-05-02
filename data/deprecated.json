@@ -546,6 +546,18 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"recommended_speed": "*"},
+      "replace": {"maxspeed:advisory": "$1"}
+    },
+    {
+      "old": {"recommended_speed:backward": "*"},
+      "replace": {"maxspeed:advisory:backward": "$1"}
+    },
+    {
+      "old": {"recommended_speed:forward": "*"},
+      "replace": {"maxspeed:advisory:forward": "$1"}
+    },
+    {
       "old": {"reservations": "*"},
       "replace": {"reservation": "$1"}
     },
