@@ -32,7 +32,7 @@ export function validationCloseNodes() {
             if (!parentWay.tags.highway || !osmRoutableHighwayTagValues[parentWay.tags.highway]) continue;
 
             var lastIndex = parentWay.nodes.length - 1;
-            for (var j in parentWay.nodes) {
+            for (var j = 0; j < parentWay.nodes.length; j++) {
                 if (j !== 0) {
                     if (parentWay.nodes[j-1] === node.id) {
                         checkForCloseness(node, context.entity(parentWay.nodes[j]), parentWay);
