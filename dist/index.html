@@ -19,15 +19,12 @@
         <div id='id-container'></div>
         <script>
             // google analytics
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-38039653-2']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', 'UA-38039653-2', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+        <script>
             // crazyegg
             setTimeout(function(){var a=document.createElement('script');
             var b=document.getElementsByTagName('script')[0];
