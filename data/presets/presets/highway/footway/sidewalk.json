@@ -10,10 +10,6 @@
         "highway": "footway",
         "footway": "sidewalk"
     },
-    "removeTags": {
-        "highway": "footway",
-        "footway": "sidewalk"
-    },
     "reference": {
         "key": "footway",
         "value": "sidewalk"

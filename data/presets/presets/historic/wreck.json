@@ -22,10 +22,6 @@
     	"historic": "wreck",
         "seamark:type": "wreck"
     },
-    "removeTags": {
-    	"historic": "wreck",
-        "seamark:type": "wreck"
-    },
     "terms": [
         "hull",
         "mast",

@@ -30,11 +30,6 @@
         "highway": "service",
         "service": "slipway"
     },
-    "removeTags": {
-        "leisure": "slipway",
-        "highway": "service",
-        "service": "slipway"
-    },
     "matchScore": 1.1,
     "name": "Slipway"
 }

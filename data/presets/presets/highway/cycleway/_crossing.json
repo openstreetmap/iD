@@ -16,10 +16,6 @@
         "highway": "cycleway",
         "cycleway": "crossing"
     },
-    "removeTags": {
-        "highway": "cycleway",
-        "cycleway": "crossing"
-    },
     "reference": {
         "key": "cycleway",
         "value": "crossing"

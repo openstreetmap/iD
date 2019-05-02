@@ -12,11 +12,6 @@
         "foot": "designated",
         "bicycle": "designated"
     },
-    "removeTags": {
-        "highway": "cycleway",
-        "foot": "designated",
-        "bicycle": "designated"
-    },
     "terms": [
         "bicycle and foot path",
         "mixed-use trail",

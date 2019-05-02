@@ -19,11 +19,6 @@
         "ferry": "yes",
         "highway": "footway"
     },
-    "removeTags": {
-        "public_transport": "platform",
-        "ferry": "yes",
-        "highway": "footway"
-    },
     "reference": {
         "key": "public_transport",
         "value": "platform"

@@ -307,6 +307,7 @@
     {"key": "building", "value": "hospital", "description": "🄿 Hospital Building", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
     {"key": "building", "value": "hotel", "description": "🄿 Hotel Building", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},
     {"key": "building", "value": "house", "description": "🄿 House", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"},
+    {"key": "building", "value": "houseboat", "description": "🄿 Houseboat", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"},
     {"key": "building", "value": "hut", "description": "🄿 Hut", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"},
     {"key": "building", "value": "industrial", "description": "🄿 Industrial Building", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/industry-15.svg?sanitize=true"},
     {"key": "building", "value": "kindergarten", "description": "🄿 Preschool/Kindergarten Building", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"},

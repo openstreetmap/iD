@@ -5496,6 +5496,10 @@
                     "name": "House",
                     "terms": "home,family,residence,dwelling"
                 },
+                "building/houseboat": {
+                    "name": "Houseboat",
+                    "terms": "home,family,residence,dwelling"
+                },
                 "building/hut": {
                     "name": "Hut",
                     "terms": ""

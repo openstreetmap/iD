@@ -361,7 +361,12 @@ export function uiRawTagEditor(context) {
             if (d.key === '') {    // removing the blank row
                 _showBlank = false;
                 content(wrap);
+
             } else {
+                // remove from indexedKeys too, so that if the user puts it back,
+                // it will be sorted to the end and not back to its original position
+                _indexedKeys = _indexedKeys.filter(function(row) { return row.key !== d.key; });
+
                 _pendingChange  = _pendingChange || {};
                 _pendingChange[d.key] = undefined;
                 scheduleChange();

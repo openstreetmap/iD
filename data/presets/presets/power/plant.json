@@ -17,10 +17,6 @@
         "power": "plant",
         "landuse": "industrial"
     },
-    "removeTags": {
-        "power": "plant",
-        "landuse": "industrial"
-    },
     "terms": [
         "coal",
         "gas",

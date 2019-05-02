@@ -21,11 +21,6 @@
         "access": "no",
         "bus": "designated"
     },
-    "removeTags": {
-        "highway": "bus_guideway",
-        "access": "no",
-        "bus": "designated"
-    },
     "terms": [],
     "name": "Bus Guideway"
 }

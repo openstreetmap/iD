@@ -29,13 +29,6 @@
         "generator:type": "solar_photovoltaic_panel",
         "generator:output:electricity": "yes"
     },
-    "removeTags": {
-        "power": "generator",
-        "generator:source": "solar",
-        "generator:method": "photovoltaic",
-        "generator:type": "solar_photovoltaic_panel",
-        "generator:output:electricity": "yes"
-    },
     "reference": {
         "key": "generator:method",
         "value": "photovoltaic"

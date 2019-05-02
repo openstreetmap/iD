@@ -18,10 +18,5 @@
         "location": "underground",
         "layer": "-1"
     },
-    "removeTags": {
-        "power": "cable",
-        "location": "underground",
-        "layer": "-1"
-    },
     "name": "Underground Power Cable"
 }

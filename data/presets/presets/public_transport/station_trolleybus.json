@@ -19,11 +19,6 @@
         "trolleybus": "yes",
         "amenity": "bus_station"
     },
-    "removeTags": {
-        "public_transport": "station",
-        "trolleybus": "yes",
-        "amenity": "bus_station"
-    },
     "reference": {
         "key": "amenity",
         "value": "bus_station"
