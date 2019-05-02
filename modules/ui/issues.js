@@ -402,10 +402,9 @@ export function uiIssues(context) {
                 var opts = cases[type];
                 var hiddenIssues = context.validator().getIssues(opts);
                 if (hiddenIssues.length) {
-                    var quantity = hiddenIssues.length === 1 ? 'single' : 'multiple';
                     _pane.select('.issues-none .details')
                         .text(t(
-                            'issues.no_issues.hidden_issues.' + type + '.' + quantity,
+                            'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
                         ));
                     return;
