@@ -77,7 +77,7 @@ export function uiRawTagEditor(context) {
 
         // --------- EXPERIMENT!
         var options = wrap.selectAll('.raw-tag-options')
-            .data([0])
+            .data([0]);
 
         var optionsEnter = options.enter()
             .append('div')
@@ -362,25 +362,7 @@ export function uiRawTagEditor(context) {
                 _pendingChange[kOld] = undefined;
             }
 
-            // if the key looks like "key=value key2=value2", split them up - #5024
-            var keys = (kNew.match(/[\w_]+=/g) || []).map(function (key) { return key.slice(0, -1); });
-            var vals = keys.length === 0
-                    ? []
-                    : kNew
-                        .split(new RegExp(keys.map(function (key) { return key.replace('_', '\\_'); }).join('|')))
-                        .splice(1)
-                        .map(function (val) { return val.slice(1).trim(); });
-
-            if (keys.length > 0) {
-                kNew = keys[0];
-                vNew = vals[0];
-
-                keys.forEach(function (key, i) {
-                    _pendingChange[key] = vals[i];
-                });
-            } else {
-                _pendingChange[kNew] = vNew;
-            }
+            _pendingChange[kNew] = vNew;
 
             d.key = kNew;    // update datum to avoid exit/enter on tag update
             d.value = vNew;
