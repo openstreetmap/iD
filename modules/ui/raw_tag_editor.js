@@ -75,6 +75,51 @@ export function uiRawTagEditor(context) {
             rowData.push({ index: _indexedKeys.length, key: '', value: '' });
         }
 
+        // --------- EXPERIMENT!
+        var options = wrap.selectAll('.raw-tag-options')
+            .data([0])
+
+        var optionsEnter = options.enter()
+            .append('div')
+            .attr('class', 'raw-tag-options');
+
+        var optionEnter = optionsEnter.selectAll('.raw-tag-option')
+            .data(['text', 'list'])
+            .enter();
+
+        optionEnter
+            .append('a')
+            .attr('class', 'raw-tag-option')
+            .attr('href', '#')
+            .text(function(d) { return d; })
+            .on('click', function(d) {
+                wrap.selectAll('.tag-text')
+                    .classed('hide', (d === 'list'));
+                wrap.selectAll('.tag-list, .add-row')
+                    .classed('hide', (d === 'text'));
+            });
+
+
+        var textarea = wrap.selectAll('.tag-text')
+            .data([0]);
+
+        textarea = textarea.enter()
+            .append('textarea')
+            .attr('class', 'tag-text hide')
+            .merge(textarea);
+
+        textarea
+            .attr('rows', rowData.length + 1)
+            .text(asText(rowData));
+
+        function asText(rows) {
+            return rows
+                .filter(function(row) { return row.key && row.key.trim() !== ''; })
+                .map(function(row) { return row.key + '=' + row.value; })
+                .join('\n') + '\n';
+        }
+        // --------- END
+
         // List of tags
         var list = wrap.selectAll('.tag-list')
             .data([0]);
