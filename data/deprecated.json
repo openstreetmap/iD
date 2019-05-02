@@ -534,6 +534,10 @@
       "replace": {"power": "substation"}
     },
     {
+      "old": {"power": "substation", "location": "kiosk"},
+      "replace": {"power": "substation", "man_made": "street_cabinet", "street_cabinet": "power"}
+    },
+    {
       "old": {"power": "underground_cable"},
       "replace": {"power": "cable", "location": "underground"}
     },
