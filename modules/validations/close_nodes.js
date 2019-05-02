@@ -3,7 +3,7 @@ import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
-import { geoExtent, geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo';
 
 
 export function validationCloseNodes() {

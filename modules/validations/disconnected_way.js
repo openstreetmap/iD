@@ -23,10 +23,11 @@ export function validationDisconnectedWay() {
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
         var entityID = entity.id;
-        var firstID = entity.first();
-        var lastID = entity.last();
 
         if (entity.type === 'way' && !entity.isClosed()) {
+            var firstID = entity.first();
+            var lastID = entity.last();
+            
             var first = context.entity(firstID);
             if (first.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({

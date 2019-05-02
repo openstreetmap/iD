@@ -314,7 +314,8 @@ export function coreValidator(context) {
 
         // detect new issues and update caches
         entityIDsToCheck.forEach(function(entityID) {
-            var entity = graph.entity(entityID);
+            var entity = graph.hasEntity(entityID);
+            if (!entity) return;
             var issues = validateEntity(entity);
 
             issues.forEach(function(issue) {
