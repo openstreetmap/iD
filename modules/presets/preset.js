@@ -152,11 +152,11 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
 
-    preset.originalTerms = (preset.terms || []).join();
+    preset.originalTerms = preset.terms || [];
 
 
     preset.terms = function() {
-        return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': preset.originalTerms });
     };
 
 

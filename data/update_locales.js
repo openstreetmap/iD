@@ -92,12 +92,12 @@ function getResource(resource, callback) {
 
                 } else {
                     if (resource === 'presets') {
-                        // remove terms that were not really translated
+                        // remove terms that were not really translated and convert back to string array
                         var presets = (result.presets && result.presets.presets) || {};
                         for (const key of Object.keys(presets)) {
                             var preset = presets[key];
                             if (!preset.terms) continue;
-                            preset.terms = preset.terms.replace(/<.*>/, '').trim();
+                            preset.terms = preset.terms.replace(/<.*>/, '').trim().toLowerCase().split(/\s*,+\s*/);
                             if (!preset.terms) {
                                 delete preset.terms;
                                 if (!Object.keys(preset).length) {
