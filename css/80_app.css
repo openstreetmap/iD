@@ -3368,11 +3368,8 @@ button.autofix.action.active {
 .entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: bold;
 }
-.entity-issues .issue-container:not(:first-of-type) {
-    margin-top: 1px;
-}
 .entity-issues .issue-container:not(:last-of-type) {
-    margin-bottom: 1px;
+    margin-bottom: 5px;
 }
 .entity-issues .issue-container.active:not(:first-of-type) {
     margin-top: 10px;
