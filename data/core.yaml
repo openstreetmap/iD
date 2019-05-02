@@ -1323,8 +1323,7 @@ en:
       title: "Very Close Points"
       message: "Two points in {way} are very close together"
       tip: "Find redundant points in ways"
-      ref_merge: "Nodes are less than 2 meters away; you may want to merge them."
-      ref_move_away: "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
+      reference: "Redundant points in a way should be merged or moved apart."
     crossing_ways:
       title: Crossings Ways
       message: "{feature} crosses {feature2}"

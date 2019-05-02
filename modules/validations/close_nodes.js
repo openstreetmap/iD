@@ -3,86 +3,75 @@ import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
-import { geoExtent } from '../geo';
+import { geoExtent, geoSphericalDistance } from '../geo';
 
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
 
+    var thresholdMeters = 0.2;
 
-    function isNodeOnRoad(node, context) {
+    function getVeryCloseNodeIssues(node, context) {
+
+        var issues = [];
+
+        function checkForCloseness(node1, node2, way) {
+            if (node1.id !== node2.id &&
+                !(node1.hasInterestingTags() && node2.hasInterestingTags()) &&
+                geoSphericalDistance(node1.loc, node2.loc) < thresholdMeters) {
+
+                issues.push(makeIssue(node1, node2, way, context));
+            }
+        }
+
         var parentWays = context.graph().parentWays(node);
+
         for (var i = 0; i < parentWays.length; i++) {
             var parentWay = parentWays[i];
-            if (osmRoutableHighwayTagValues[parentWay.tags.highway]) {
-                return parentWay;
+
+            if (!parentWay.tags.highway || !osmRoutableHighwayTagValues[parentWay.tags.highway]) continue;
+
+            var lastIndex = parentWay.nodes.length - 1;
+            for (var j in parentWay.nodes) {
+                if (j !== 0) {
+                    if (parentWay.nodes[j-1] === node.id) {
+                        checkForCloseness(node, context.entity(parentWay.nodes[j]), parentWay);
+                    }
+                }
+                if (j !== lastIndex) {
+                    if (parentWay.nodes[j+1] === node.id) {
+                        checkForCloseness(context.entity(parentWay.nodes[j]), node, parentWay);
+                    }
+                }
             }
         }
-        return false;
+
+        return issues;
     }
 
-    function findDupeNode(node, context) {
-        var epsilon = 2e-5,
-            extent = geoExtent([
-                [node.loc[0] - epsilon, node.loc[1] - epsilon],
-                [node.loc[0] + epsilon, node.loc[1] + epsilon]
-            ]);
-        var filteredEnts = context.intersects(extent);
-        for (var i = 0; i < filteredEnts.length; i++) {
-            var entity = filteredEnts[i];
-            if (entity.type === 'node' && entity.id !== node.id &&
-                Math.abs(node.loc[0] - entity.loc[0]) < epsilon &&
-                Math.abs(node.loc[1] - entity.loc[1]) < epsilon &&
-                isNodeOnRoad(entity, context) ) {
-                return entity;
-            }
-        }
-        return null;
-    }
+    function makeIssue(node1, node2, way, context) {
 
-
-    var validation = function(entity, context) {
-
-        if (entity.type !== 'node') return [];
-
-        var road = isNodeOnRoad(entity, context);
-        if (!road) return [];
-
-        var dupe = findDupeNode(entity, context);
-        if (dupe === null) return [];
-
-        var mergable = !operationMerge([entity.id, dupe.id], context).disabled();
-        var fixes = [];
-        if (mergable) {
-            fixes.push(
+        return new validationIssue({
+            type: type,
+            severity: 'warning',
+            message: t('issues.close_nodes.message', { way: utilDisplayLabel(way, context) }),
+            reference: showReference,
+            entityIds: [node1.id, node2.id],
+            fixes: [
                 new validationIssueFix({
                     icon: 'iD-icon-plus',
                     title: t('issues.fix.merge_points.title'),
                     onClick: function() {
                         var entityIds = this.issue.entityIds,
                             operation = operationMerge([entityIds[0], entityIds[1]], context);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
+                        operation();
                     }
                 })
-            );
-        }
-
-        return [new validationIssue({
-            type: type,
-            severity: 'warning',
-            message: t('issues.close_nodes.message', { way: utilDisplayLabel(road, context) }),
-            reference: showReference,
-            entityIds: [entity.id, dupe.id],
-            fixes: fixes
-        })];
-
+            ]
+        });
 
         function showReference(selection) {
-            var referenceText = mergable
-                ? t('issues.close_nodes.ref_merge')
-                : t('issues.close_nodes.ref_move_away');
+            var referenceText = t('issues.close_nodes.reference');
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -90,6 +79,14 @@ export function validationCloseNodes() {
                 .attr('class', 'issue-reference')
                 .text(referenceText);
         }
+    }
+
+
+    var validation = function(entity, context) {
+
+        if (entity.type !== 'node') return [];
+
+        return getVeryCloseNodeIssues(entity, context);
     };
 
 

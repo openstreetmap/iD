@@ -284,9 +284,12 @@ export function coreValidator(context) {
 
         var entityIDsToCheck = entityIDs.reduce(function(acc, entityID) {
             if (acc.has(entityID)) return acc;
+
+            var entity = graph.hasEntity(entityID);
+            if (!entity) return acc;
+
             acc.add(entityID);
 
-            var entity = graph.entity(entityID);
             var checkParentRels = [entity];
 
             if (entity.type === 'node') {   // include parent ways
