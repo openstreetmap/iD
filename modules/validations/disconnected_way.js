@@ -2,23 +2,15 @@ import { t } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
+import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationDisconnectedWay() {
     var type = 'disconnected_way';
 
-    var highways = {
-        residential: true, service: true, track: true, unclassified: true, footway: true,
-        path: true, tertiary: true, secondary: true, primary: true, living_street: true,
-        cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
-        pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
-        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true,
-        bus_guideway: true
-    };
-
     function isTaggedAsHighway(entity) {
-        return highways[entity.tags.highway];
+        return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
 
@@ -115,13 +107,18 @@ export function validationDisconnectedWay() {
 
             return !parents.some(function(parentWay) {
                 if (parentWay === way) return false;   // ignore the way we're testing
+                // count connections to ferry routes as connected
+                if (parentWay.tags.route === 'ferry') return true;
                 if (isTaggedAsHighway(parentWay)) return true;
 
-                return graph.parentMultipolygons(parentWay).some(function(parentRelation) {
+                return graph.parentRelations(parentWay).some(function(parentRelation) {
                     // ignore the relation we're testing, if any
                     if (relation && parentRelation === relation) return false;
 
-                    return isTaggedAsHighway(parentRelation);
+                    if (parentRelation.tags.type === 'route' &&
+                        parentRelation.tags.route === 'ferry') return true;
+
+                    return parentRelation.isMultipolygon() && isTaggedAsHighway(parentRelation);
                 });
             });
         }
