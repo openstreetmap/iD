@@ -85,7 +85,9 @@ export function validationImpossibleOneway() {
 
         if (attachedOneways.length) {
             var connectedEndpointsOkay = attachedOneways.some(function(attachedOneway) {
-                return (isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID;
+                if ((isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID) return true;
+                if (nodeOccursMoreThanOnce(attachedOneway, nodeID)) return true;
+                return false;
             });
             if (connectedEndpointsOkay) return [];
         }
