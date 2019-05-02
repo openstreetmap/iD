@@ -240,6 +240,8 @@ export function coreValidator(context) {
             return !detected.length;
         }
 
+        // run some validations manually to control the order and to skip some
+
         runValidation('missing_role');
 
         if (entity.type === 'relation') {
@@ -249,25 +251,21 @@ export function coreValidator(context) {
             }
         }
 
-        // other _rules require feature to be tagged
-        if (!runValidation('missing_tag')) return entityIssues;
+        runValidation('missing_tag');
 
-        // run outdated_tags early
         runValidation('outdated_tags');
 
-        if (entity.type === 'way') {
-            runValidation('crossing_ways');
-            runValidation('almost_junction');
+        runValidation('crossing_ways');
+        runValidation('almost_junction');
 
-            // only check impossible_oneway if no disconnected_way issues
-            if (runValidation('disconnected_way')) {
-                runValidation('impossible_oneway');
-            } else {
-                ran.impossible_oneway = true;
-            }
-
-            runValidation('tag_suggests_area');
+        // only check impossible_oneway if no disconnected_way issues
+        if (runValidation('disconnected_way')) {
+            runValidation('impossible_oneway');
+        } else {
+            ran.impossible_oneway = true;
         }
+
+        runValidation('tag_suggests_area');
 
         // run all rules not yet run
         Object.keys(_rules).forEach(runValidation);
