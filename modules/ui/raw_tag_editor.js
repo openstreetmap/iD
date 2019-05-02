@@ -13,6 +13,12 @@ import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind } from '..
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
+    var availableViews = [
+        { id: 'text' },
+        { id: 'list' }
+    ];
+
+    var _tagView = (context.storage('raw-tag-editor-view') || 'list');   // 'list, 'text'
     var _readOnlyTags = [];
     var _indexedKeys = [];
     var _showBlank = false;
@@ -84,19 +90,20 @@ export function uiRawTagEditor(context) {
             .attr('class', 'raw-tag-options');
 
         var optionEnter = optionsEnter.selectAll('.raw-tag-option')
-            .data(['text', 'list'])
+            .data(availableViews, function(d) { return d.id; })
             .enter();
 
         optionEnter
             .append('a')
             .attr('class', 'raw-tag-option')
             .attr('href', '#')
-            .text(function(d) { return d; })
+            .text(function(d) { return d.id; })
             .on('click', function(d) {
+                context.storage('raw-tag-editor-view', d.id);
                 wrap.selectAll('.tag-text')
-                    .classed('hide', (d === 'list'));
+                    .classed('hide', (d.id !== 'text'));
                 wrap.selectAll('.tag-list, .add-row')
-                    .classed('hide', (d === 'text'));
+                    .classed('hide', (d.id !== 'list'));
             });
 
 
@@ -105,7 +112,7 @@ export function uiRawTagEditor(context) {
 
         textarea = textarea.enter()
             .append('textarea')
-            .attr('class', 'tag-text hide')
+            .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
             .merge(textarea);
 
         textarea
@@ -126,7 +133,7 @@ export function uiRawTagEditor(context) {
 
         list = list.enter()
             .append('ul')
-            .attr('class', 'tag-list')
+            .attr('class', 'tag-list' + (_tagView !== 'list' ? ' hide' : ''))
             .merge(list);
 
 
@@ -135,7 +142,7 @@ export function uiRawTagEditor(context) {
             .data([0])
             .enter()
             .append('div')
-            .attr('class', 'add-row');
+            .attr('class', 'add-row' + (_tagView !== 'list' ? ' hide' : ''));
 
         addRowEnter
             .append('button')
