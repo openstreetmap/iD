@@ -221,7 +221,8 @@ export function coreValidator(context) {
 
             var detected = fn(entity, context);
             detected.forEach(function(issue) {
-                if (issue.severity === 'warning') {
+                var hasIgnoreFix = issue.fixes && issue.fixes.length && issue.fixes[issue.fixes.length - 1].type === 'ignore';
+                if (issue.severity === 'warning' && !hasIgnoreFix) {
                     var ignoreFix = new validationIssueFix({
                         title: t('issues.fix.ignore_issue.title'),
                         icon: 'iD-icon-close',
@@ -229,6 +230,7 @@ export function coreValidator(context) {
                             ignoreIssue(this.issue.id);
                         }
                     });
+                    ignoreFix.type = 'ignore';
                     ignoreFix.issue = issue;
                     issue.fixes.push(ignoreFix);
                 }
