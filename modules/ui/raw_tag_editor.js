@@ -14,8 +14,8 @@ export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
     var availableViews = [
-        { id: 'text' },
-        { id: 'list' }
+        { id: 'text', icon: '#fas-i-cursor' },
+        { id: 'list', icon: '#fas-th-list' }
     ];
 
     var _tagView = (context.storage('raw-tag-editor-view') || 'list');   // 'list, 'text'
@@ -94,16 +94,25 @@ export function uiRawTagEditor(context) {
             .enter();
 
         optionEnter
-            .append('a')
-            .attr('class', 'raw-tag-option')
-            .attr('href', '#')
-            .text(function(d) { return d.id; })
+            .append('button')
+            .attr('class', function(d) {
+                return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
+            })
+            .attr('title', function(d) { return d.id; })
             .on('click', function(d) {
+                _tagView = d.id;
                 context.storage('raw-tag-editor-view', d.id);
+
+                wrap.selectAll('.raw-tag-option')
+                    .classed('selected', function(datum) { return datum === d; });
                 wrap.selectAll('.tag-text')
                     .classed('hide', (d.id !== 'text'));
                 wrap.selectAll('.tag-list, .add-row')
                     .classed('hide', (d.id !== 'list'));
+            })
+            .each(function(d) {
+                d3_select(this)
+                    .call(svgIcon(d.icon));
             });
 
 
