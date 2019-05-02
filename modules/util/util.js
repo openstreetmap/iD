@@ -1,7 +1,9 @@
-import { t, textDirection } from './locale';
-import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
+
+import { t, textDirection } from './locale';
+import { utilArrayUnion } from './array';
+import { utilDetect } from './detect';
 
 
 export function utilTagText(entity) {
@@ -9,6 +11,24 @@ export function utilTagText(entity) {
     return Object.keys(obj)
         .map(function(k) { return k + '=' + obj[k]; })
         .join(', ');
+}
+
+
+export function utilTagDiff(oldTags, newTags) {
+    var tagDiff = [];
+    var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
+    keys.forEach(function(k) {
+        var oldVal = oldTags[k];
+        var newVal = newTags[k];
+
+        if (oldVal && (!newVal || newVal !== oldVal)) {
+            tagDiff.push('- ' + k + '=' + oldVal);
+        }
+        if (newVal && (!oldVal || newVal !== oldVal)) {
+            tagDiff.push('+ ' + k + '=' + newVal);
+        }
+    });
+    return tagDiff;
 }
 
 
