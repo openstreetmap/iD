@@ -7,7 +7,7 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox } from './combobox';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind } from '../util';
+import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -81,7 +81,8 @@ export function uiRawTagEditor(context) {
             rowData.push({ index: _indexedKeys.length, key: '', value: '' });
         }
 
-        // --------- EXPERIMENT!
+
+        // View Options
         var options = wrap.selectAll('.raw-tag-options')
             .data([0]);
 
@@ -116,27 +117,29 @@ export function uiRawTagEditor(context) {
             });
 
 
+        // View as Text
         var textarea = wrap.selectAll('.tag-text')
             .data([0]);
 
         textarea = textarea.enter()
             .append('textarea')
             .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
+            .call(utilNoAuto)
             .merge(textarea);
 
         textarea
             .attr('rows', rowData.length + 1)
-            .text(asText(rowData));
+            .call(utilGetSetValue, rowsToText(rowData))
+            .on('blur', textChanged)
+            .on('change', textChanged);
 
-        function asText(rows) {
-            return rows
-                .filter(function(row) { return row.key && row.key.trim() !== ''; })
-                .map(function(row) { return row.key + '=' + row.value; })
-                .join('\n') + '\n';
+        var fieldsExpanded = d3_select('.hide-toggle-preset_fields.expanded').size();
+        if (_tagView === 'text' && !fieldsExpanded) {
+            textarea.node().focus();
         }
-        // --------- END
 
-        // List of tags
+
+        // View as List
         var list = wrap.selectAll('.tag-list')
             .data([0]);
 
@@ -275,6 +278,45 @@ export function uiRawTagEditor(context) {
                 }
             }
             return false;
+        }
+
+
+        function rowsToText(rows) {
+            return rows
+                .filter(function(row) { return row.key && row.key.trim() !== ''; })
+                .map(function(row) { return row.key + '=' + row.value; })
+                .join('\n') + '\n';
+        }
+
+
+        function textChanged() {
+            var newText = this.value.trim();
+            var newTags = {};
+            newText.split('\n').forEach(function(row) {
+                var m = row.match(/^\s*([^=]+)=(.*)$/);
+                if (m !== null) {
+                    var k = m[1].trim();
+                    var v = m[2].trim();
+                    newTags[k] = v;
+                }
+            });
+
+            var tagDiff = utilTagDiff(_tags, newTags);
+            if (!tagDiff.length) return;
+
+            _pendingChange  = _pendingChange || {};
+
+            tagDiff.forEach(function(change) {
+                if (isReadOnly({ key: change.key })) return;
+
+                if (change.type === '-') {
+                    _pendingChange[change.key] = undefined;
+                } else if (change.type === '+') {
+                    _pendingChange[change.key] = change.newVal || '';
+                }
+            });
+
+            scheduleChange();
         }
 
 
