@@ -107,10 +107,10 @@ export function validationPrivateData() {
                 .attr('class', 'tagDiff-row')
                 .append('td')
                 .attr('class', function(d) {
-                    var klass = d.charAt(0) === '+' ? 'add' : 'remove';
+                    var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d; });
+                .text(function(d) { return d.display; });
         }
     };
 

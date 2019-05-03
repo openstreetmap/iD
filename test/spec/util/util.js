@@ -58,10 +58,18 @@ describe('iD.util', function() {
         var newTags = { a: 'one', b: 'three', d: 'four' };
         var diff = iD.utilTagDiff(oldTags, newTags);
         expect(diff).to.have.length(4);
-        expect(diff[0]).to.eql('- b=two');    // delete-modify
-        expect(diff[1]).to.eql('+ b=three');  // insert-modify
-        expect(diff[2]).to.eql('- c=three');  // delete
-        expect(diff[3]).to.eql('+ d=four');   // insert
+        expect(diff[0]).to.eql({
+            type: '-', key: 'b', oldVal: 'two', newVal: 'three', display: '- b=two'        // delete-modify
+        });
+        expect(diff[1]).to.eql({
+            type: '+', key: 'b', oldVal: 'two', newVal: 'three', display: '+ b=three'      // insert-modify
+        });
+        expect(diff[2]).to.eql({
+            type: '-', key: 'c', oldVal: 'three', newVal: undefined, display: '- c=three'  // delete
+        });
+        expect(diff[3]).to.eql({
+            type: '+', key: 'd', oldVal: undefined, newVal: 'four', display: '+ d=four'    // insert
+        });
     });
 
     it('utilTagText', function() {

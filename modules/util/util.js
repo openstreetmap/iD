@@ -22,10 +22,22 @@ export function utilTagDiff(oldTags, newTags) {
         var newVal = newTags[k];
 
         if (oldVal && (!newVal || newVal !== oldVal)) {
-            tagDiff.push('- ' + k + '=' + oldVal);
+            tagDiff.push({
+                type: '-',
+                key: k,
+                oldVal: oldVal,
+                newVal: newVal,
+                display: '- ' + k + '=' + oldVal
+            });
         }
         if (newVal && (!oldVal || newVal !== oldVal)) {
-            tagDiff.push('+ ' + k + '=' + newVal);
+            tagDiff.push({
+                type: '+',
+                key: k,
+                oldVal: oldVal,
+                newVal: newVal,
+                display: '+ ' + k + '=' + newVal
+            });
         }
     });
     return tagDiff;
