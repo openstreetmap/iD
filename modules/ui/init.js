@@ -423,6 +423,8 @@ export function uiInit(context) {
     ui.togglePanes = function(showPane) {
         var shownPanes = d3_selectAll('.map-pane.shown');
 
+        var side = textDirection === 'ltr' ? 'right' : 'left';
+
         shownPanes
             .classed('shown', false);
 
@@ -432,7 +434,7 @@ export function uiInit(context) {
         if (showPane) {
             shownPanes
                 .style('display', 'none')
-                .style('right', '-500px');
+                .style(side, '-500px');
 
             d3_selectAll('.' + showPane.attr('pane') + '-control button')
                 .classed('active', true);
@@ -443,21 +445,21 @@ export function uiInit(context) {
             if (shownPanes.empty()) {
                 showPane
                     .style('display', 'block')
-                    .style('right', '-500px')
+                    .style(side, '-500px')
                     .transition()
                     .duration(200)
-                    .style('right', '0px');
+                    .style(side, '0px');
             } else {
                 showPane
-                    .style('right', '0px');
+                    .style(side, '0px');
             }
         } else {
             shownPanes
                 .style('display', 'block')
-                .style('right', '0px')
+                .style(side, '0px')
                 .transition()
                 .duration(200)
-                .style('right', '-500px')
+                .style(side, '-500px')
                 .on('end', function() {
                     d3_select(this).style('display', 'none');
                 });
