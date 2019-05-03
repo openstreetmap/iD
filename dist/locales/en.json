@@ -4527,6 +4527,18 @@
                     "name": "Bicycle Parking",
                     "terms": "bike"
                 },
+                "amenity/bicycle_parking/building": {
+                    "name": "Bicycle Parking Garage",
+                    "terms": "Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station"
+                },
+                "amenity/bicycle_parking/lockers": {
+                    "name": "Bicycle Lockers",
+                    "terms": "Bike Lockers"
+                },
+                "amenity/bicycle_parking/shed": {
+                    "name": "Bicycle Shed",
+                    "terms": "Bike Shed"
+                },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
                     "terms": "bike"

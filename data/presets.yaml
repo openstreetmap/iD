@@ -2463,6 +2463,21 @@ en:
         name: Bicycle Parking
         # 'terms: bike'
         terms: '<translate with synonyms or related terms for ''Bicycle Parking'', separated by commas>'
+      amenity/bicycle_parking/building:
+        # 'amenity=bicycle_parking, bicycle_parking=building'
+        name: Bicycle Parking Garage
+        # 'terms: Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station'
+        terms: '<translate with synonyms or related terms for ''Bicycle Parking Garage'', separated by commas>'
+      amenity/bicycle_parking/lockers:
+        # 'amenity=bicycle_parking, bicycle_parking=lockers'
+        name: Bicycle Lockers
+        # 'terms: Bike Lockers'
+        terms: '<translate with synonyms or related terms for ''Bicycle Lockers'', separated by commas>'
+      amenity/bicycle_parking/shed:
+        # 'amenity=bicycle_parking, bicycle_parking=shed'
+        name: Bicycle Shed
+        # 'terms: Bike Shed'
+        terms: '<translate with synonyms or related terms for ''Bicycle Shed'', separated by commas>'
       amenity/bicycle_rental:
         # amenity=bicycle_rental
         name: Bicycle Rental

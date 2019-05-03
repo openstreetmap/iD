@@ -2,7 +2,8 @@
     "icon": "maki-bicycle",
     "fields": [
         "{amenity/bicycle_parking}",
-        "opening_hours"
+        "opening_hours",
+        "building_area"
     ],
     "geometry": [
         "point",
@@ -21,5 +22,5 @@
         "Multi-Storey Bike Park",
         "Bike Parking Station"
     ],
-    "name": "Bicycle Parking Station"
+    "name": "Bicycle Parking Garage"
 }
