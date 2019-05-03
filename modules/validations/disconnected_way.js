@@ -27,7 +27,7 @@ export function validationDisconnectedWay() {
         if (entity.type === 'way' && !entity.isClosed()) {
             var firstID = entity.first();
             var lastID = entity.last();
-            
+
             var first = context.entity(firstID);
             if (first.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({
@@ -54,6 +54,11 @@ export function validationDisconnectedWay() {
                     }
                 }));
             }
+
+        } else {
+            fixes.push(new validationIssueFix({
+                title: t('issues.fix.connect_feature.title')
+            }));
         }
 
         if (!operationDelete([entity.id], context).disabled()) {

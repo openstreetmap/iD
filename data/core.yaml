@@ -1452,6 +1452,8 @@ en:
       connect_endpoints:
         title: Connect the ends
         annotation: Connected the endpoints of a way.
+      connect_feature:
+        title: Connect this feature
       connect_features:
         title: Connect the features
       continue_from_start:
