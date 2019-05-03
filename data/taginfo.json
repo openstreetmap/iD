@@ -1788,6 +1788,7 @@
     {"key": "footway", "value": "none", "description": "🄳 ➜ sidewalk=no"},
     {"key": "footway", "value": "right", "description": "🄳 ➜ sidewalk=right"},
     {"key": "footway", "value": "separate", "description": "🄳 ➜ sidewalk=separate"},
+    {"key": "generator:source", "value": "photovoltaic", "description": "🄳 ➜ generator:source=solar + generator:method=photovoltaic"},
     {"key": "highway", "value": "abandoned", "description": "🄳 ➜ abandoned:highway=*"},
     {"key": "highway", "value": "ford", "description": "🄳 ➜ ford=*"},
     {"key": "highway", "value": "no", "description": "🄳"},
