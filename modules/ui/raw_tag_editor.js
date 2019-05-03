@@ -129,6 +129,7 @@ export function uiRawTagEditor(context) {
             .append('textarea')
             .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
             .call(utilNoAuto)
+            .attr('spellcheck', 'false')
             .merge(textarea);
 
         textarea
