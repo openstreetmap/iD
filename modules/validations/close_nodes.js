@@ -11,17 +11,30 @@ export function validationCloseNodes() {
 
     var thresholdMeters = 0.2;
 
-    function getVeryCloseNodeIssues(node, context) {
+    function getIssuesForWay(way, context) {
+        if (!way.tags.highway ||
+            !osmRoutableHighwayTagValues[way.tags.highway] ||
+            way.nodes.length < 2) return [];
+
+        var issues = [],
+            nodes = context.graph().childNodes(way);
+        for (var i = 0; i < nodes.length - 1; i++) {
+            var node1 = nodes[i];
+            var node2 = nodes[i+1];
+
+            var issue = getIssueIfAny(node1, node2, way, context);
+            if (issue) issues.push(issue);
+        }
+        return issues;
+    }
+
+    function getIssuesForNode(node, context) {
 
         var issues = [];
 
         function checkForCloseness(node1, node2, way) {
-            if (node1.id !== node2.id &&
-                !(node1.hasInterestingTags() && node2.hasInterestingTags()) &&
-                geoSphericalDistance(node1.loc, node2.loc) < thresholdMeters) {
-
-                issues.push(makeIssue(node1, node2, way, context));
-            }
+            var issue = getIssueIfAny(node1, node2, way, context);
+            if (issue) issues.push(issue);
         }
 
         var parentWays = context.graph().parentWays(node);
@@ -49,14 +62,21 @@ export function validationCloseNodes() {
         return issues;
     }
 
-    function makeIssue(node1, node2, way, context) {
+    function getIssueIfAny(node1, node2, way, context) {
+
+        if (node1.id === node2.id ||
+            (node1.hasInterestingTags() && node2.hasInterestingTags()) ||
+            geoSphericalDistance(node1.loc, node2.loc) >= thresholdMeters) {
+            return null;
+        }
 
         return new validationIssue({
             type: type,
             severity: 'warning',
             message: t('issues.close_nodes.message', { way: utilDisplayLabel(way, context) }),
             reference: showReference,
-            entityIds: [node1.id, node2.id],
+            entityIds: [node1.id, node2.id, way.id],
+            loc: node1.loc,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-icon-plus',
@@ -84,9 +104,12 @@ export function validationCloseNodes() {
 
     var validation = function(entity, context) {
 
-        if (entity.type !== 'node') return [];
-
-        return getVeryCloseNodeIssues(entity, context);
+        if (entity.type === 'node') {
+            return getIssuesForNode(entity, context);
+        } else if (entity.type === 'way') {
+            return getIssuesForWay(entity, context);
+        }
+        return [];
     };
 
 
