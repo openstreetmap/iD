@@ -121,6 +121,7 @@ export function uiRawTagEditor(context) {
 
 
         // View as Text
+        var textData = rowsToText(rowData);
         var textarea = wrap.selectAll('.tag-text')
             .data([0]);
 
@@ -131,15 +132,18 @@ export function uiRawTagEditor(context) {
             .merge(textarea);
 
         textarea
-            .call(utilGetSetValue, rowsToText(rowData))
+            .call(utilGetSetValue, textData)
             .each(setTextareaHeight)
             .on('input', setTextareaHeight)
             .on('blur', textChanged)
             .on('change', textChanged);
 
+        // If All Fields section is hidden, focus textarea and put cursor at end..
         var fieldsExpanded = d3_select('.hide-toggle-preset_fields.expanded').size();
-        if (_tagView === 'text' && !fieldsExpanded) {
-            textarea.node().focus();
+        if (_state !== 'hover' && _tagView === 'text' && !fieldsExpanded) {
+            var element = textarea.node();
+            element.focus();
+            element.setSelectionRange(textData.length, textData.length);
         }
 
 
@@ -295,10 +299,12 @@ export function uiRawTagEditor(context) {
 
 
         function rowsToText(rows) {
-            return rows
+            var str = rows
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
                 .map(function(row) { return row.key + '=' + row.value; })
-                .join('\n') + '\n';
+                .join('\n');
+
+            return _state === 'hover' ? str : str + '\n';
         }
 
 
