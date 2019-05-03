@@ -12,7 +12,6 @@ export function operationMove(selectedIDs, context) {
     var extent = nodes.reduce(function(extent, node) {
         return extent.extend(node.extent(context.graph()));
     }, geoExtent());
-    var _disabled;
 
 
     var operation = function() {
@@ -27,19 +26,18 @@ export function operationMove(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (_disabled !== undefined) return _disabled;
 
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            return _disabled = 'too_large';
+            return 'too_large';
         } else if (someMissing()) {
-            return _disabled = 'not_downloaded';
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return _disabled = 'connected_to_hidden';
+            return 'connected_to_hidden';
         } else if (selectedIDs.some(incompleteRelation)) {
-            return _disabled = 'incomplete_relation';
+            return 'incomplete_relation';
         }
 
-        return _disabled = false;
+        return false;
 
 
         function someMissing() {
