@@ -6515,6 +6515,11 @@ en:
         name: Candle Shop
         # 'terms: wax'
         terms: '<translate with synonyms or related terms for ''Candle Shop'', separated by commas>'
+      shop/cannabis:
+        # shop=cannabis
+        name: Cannabis Shop
+        # 'terms: 420,marijuana,pot,reefer,weed'
+        terms: '<translate with synonyms or related terms for ''Cannabis Shop'', separated by commas>'
       shop/car:
         # shop=car
         name: Car Dealership

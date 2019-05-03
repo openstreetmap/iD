@@ -941,6 +941,7 @@
     "shop/books": {"icon": "fas-book", "fields": ["{shop}", "internet_access"], "moreFields": ["{shop}", "internet_access/fee", "internet_access/ssid"], "geometry": ["point", "area"], "tags": {"shop": "books"}, "name": "Book Store"},
     "shop/butcher": {"icon": "fas-bacon", "geometry": ["point", "area"], "terms": ["chicken", "beef", "lamb", "meat", "pork"], "tags": {"shop": "butcher"}, "name": "Butcher"},
     "shop/candles": {"icon": "fas-burn", "geometry": ["point", "area"], "tags": {"shop": "candles"}, "terms": ["wax"], "name": "Candle Shop"},
+    "shop/cannabis": {"icon": "fas-cannabis", "geometry": ["point", "area"], "terms": ["420", "marijuana", "pot", "reefer", "weed"], "tags": {"shop": "cannabis"}, "name": "Cannabis Shop"},
     "shop/car_parts": {"icon": "fas-car-battery", "geometry": ["point", "area"], "terms": ["automobile", "automotive"], "tags": {"shop": "car_parts"}, "name": "Car Parts Store"},
     "shop/car_repair": {"icon": "maki-car-repair", "fields": ["{shop}", "service/vehicle"], "geometry": ["point", "area"], "terms": ["automobile", "automotive", "garage", "service"], "tags": {"shop": "car_repair"}, "name": "Car Repair Shop"},
     "shop/car": {"icon": "maki-car", "fields": ["name", "brand", "{shop}", "second_hand", "service/vehicle"], "geometry": ["point", "area"], "terms": ["automobile", "automotive"], "tags": {"shop": "car"}, "name": "Car Dealership"},

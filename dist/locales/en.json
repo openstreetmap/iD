@@ -8015,6 +8015,10 @@
                     "name": "Candle Shop",
                     "terms": "wax"
                 },
+                "shop/cannabis": {
+                    "name": "Cannabis Shop",
+                    "terms": "420,marijuana,pot,reefer,weed"
+                },
                 "shop/car_parts": {
                     "name": "Car Parts Store",
                     "terms": "automobile,automotive"
