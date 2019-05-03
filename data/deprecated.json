@@ -157,6 +157,10 @@
       "replace": {"artwork_type": "$1"}
     },
     {
+      "old": {"attraction": "ferris_wheel"},
+      "replace": {"attraction": "big_wheel"}
+    },
+    {
       "old": {"barrier": "curb"},
       "replace": {"barrier": "kerb"}
     },

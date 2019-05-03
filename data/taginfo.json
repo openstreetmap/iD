@@ -1749,6 +1749,7 @@
     {"key": "amenity", "value": "youth_centre", "description": "🄳 ➜ amenity=community_centre + community_centre:for=juvenile"},
     {"key": "artwork", "description": "🄳 ➜ artwork_type=*"},
     {"key": "artwork:type", "description": "🄳 ➜ artwork_type=*"},
+    {"key": "attraction", "value": "ferris_wheel", "description": "🄳 ➜ attraction=big_wheel"},
     {"key": "barrier", "value": "curb", "description": "🄳 ➜ barrier=kerb"},
     {"key": "barrier", "value": "embankment", "description": "🄳 ➜ man_made=embankment"},
     {"key": "barrier", "value": "wire_fence", "description": "🄳 ➜ barrier=fence + fence_type=chain"},
