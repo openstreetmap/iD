@@ -106,8 +106,11 @@ export function uiRawTagEditor(context) {
 
                 wrap.selectAll('.raw-tag-option')
                     .classed('selected', function(datum) { return datum === d; });
+
                 wrap.selectAll('.tag-text')
-                    .classed('hide', (d.id !== 'text'));
+                    .classed('hide', (d.id !== 'text'))
+                    .each(setTextareaHeight);
+
                 wrap.selectAll('.tag-list, .add-row')
                     .classed('hide', (d.id !== 'list'));
             })
@@ -128,8 +131,9 @@ export function uiRawTagEditor(context) {
             .merge(textarea);
 
         textarea
-            .attr('rows', rowData.length + 1)
             .call(utilGetSetValue, rowsToText(rowData))
+            .each(setTextareaHeight)
+            .on('input', setTextareaHeight)
             .on('blur', textChanged)
             .on('change', textChanged);
 
@@ -278,6 +282,15 @@ export function uiRawTagEditor(context) {
                 }
             }
             return false;
+        }
+
+
+        function setTextareaHeight() {
+            if (_tagView !== 'text') return;
+
+            var selection = d3_select(this);
+            selection.style('height', null);
+            selection.style('height', selection.node().scrollHeight + 5 + 'px');
         }
 
 
