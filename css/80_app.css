@@ -259,10 +259,12 @@ table.tags, table.tags td, table.tags th {
 .ar { right: 0; }
 
 input.hide,
+textarea.hide,
 div.hide,
 form.hide,
 button.hide,
 a.hide,
+ul.hide,
 li.hide {
     display: none;
 }
@@ -2401,8 +2403,56 @@ div.combobox {
 
 /* Raw Tag Editor
 ------------------------------------------------------- */
+.raw-tag-options {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    margin-top: -25px;
+    padding: 0 3px;
+}
+button.raw-tag-option {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+    background: #aaa;
+    color: #eee;
+    margin: 0 3px;
+}
+button.raw-tag-option:focus,
+button.raw-tag-option:hover,
+button.raw-tag-option.active {
+    color: #fff;
+    background: #597be7;
+}
+button.raw-tag-option.selected {
+    color: #fff;
+    background: #7092ff;
+}
+button.raw-tag-option svg.icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: text-bottom;
+}
+[dir='ltr'] button.raw-tag-option-list {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+
+.tag-text {
+    width: 100%;
+    height: 100%;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.tag-text,
 .tag-list {
-    padding-top: 10px;
+    margin-top: 10px;
 }
 .tag-row {
     width: 100%;

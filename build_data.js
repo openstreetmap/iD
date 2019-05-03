@@ -55,9 +55,12 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
-            'fas-long-arrow-alt-right': {}
+            'fas-i-cursor': {},
+            'fas-long-arrow-alt-right': {},
+            'fas-th-list': {}
         };
 
+        // The Noun Project icons used
         var tnpIcons = {};
 
         // Start clean

@@ -3,7 +3,7 @@ import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
-import { utilArrayUnion, utilDisplayLabel } from '../util';
+import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -48,20 +48,7 @@ export function validationOutdatedTags() {
         }
 
         // determine diff
-        var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
-        var tagDiff = [];
-        keys.forEach(function(k) {
-            var oldVal = oldTags[k];
-            var newVal = newTags[k];
-
-            if (oldVal && (!newVal || newVal !== oldVal)) {
-                tagDiff.push('- ' + k + '=' + oldVal);
-            }
-            if (newVal && (!oldVal || newVal !== oldVal)) {
-                tagDiff.push('+ ' + k + '=' + newVal);
-            }
-        });
-
+        var tagDiff = utilTagDiff(oldTags, newTags);
         if (!tagDiff.length) return [];
 
         return [new validationIssue({
@@ -113,10 +100,10 @@ export function validationOutdatedTags() {
                 .attr('class', 'tagDiff-row')
                 .append('td')
                 .attr('class', function(d) {
-                    var klass = d.charAt(0) === '+' ? 'add' : 'remove';
+                    var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d; });
+                .text(function(d) { return d.display; });
         }
     }
 

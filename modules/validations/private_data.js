@@ -1,6 +1,6 @@
 import { actionChangeTags } from '../actions/change_tags';
 import { t } from '../util/locale';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -40,20 +40,17 @@ export function validationPrivateData() {
 
     var validation = function checkPrivateData(entity, context) {
         var tags = entity.tags;
-        var keepTags = {};
-        var tagDiff = [];
         if (!tags.building || !privateBuildingValues[tags.building]) return [];
 
+        var keepTags = {};
         for (var k in tags) {
             if (publicKeys[k]) return [];  // probably a public feature
-
-            if (personalTags[k]) {
-                tagDiff.push('- ' + k + '=' + tags[k]);
-            } else {
+            if (!personalTags[k]) {
                 keepTags[k] = tags[k];
             }
         }
 
+        var tagDiff = utilTagDiff(tags, keepTags);
         if (!tagDiff.length) return [];
 
         var fixID = tagDiff.length === 1 ? 'remove_tag' : 'remove_tags';
@@ -110,10 +107,10 @@ export function validationPrivateData() {
                 .attr('class', 'tagDiff-row')
                 .append('td')
                 .attr('class', function(d) {
-                    var klass = d.charAt(0) === '+' ? 'add' : 'remove';
+                    var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d; });
+                .text(function(d) { return d.display; });
         }
     };
 
