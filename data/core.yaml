@@ -1464,6 +1464,8 @@ en:
         title: Ignore this issue
       merge_points:
         title: Merge these points
+      move_points_apart:
+        title: Move these points apart
       move_tags:
         title: Move the tags
         annotation: Moved tags.

@@ -86,6 +86,10 @@ export function validationCloseNodes() {
                             operation = operationMerge([entityIds[0], entityIds[1]], context);
                         operation();
                     }
+                }),
+                new validationIssueFix({
+                    icon: 'iD-operation-disconnect',
+                    title: t('issues.fix.move_points_apart.title')
                 })
             ]
         });
