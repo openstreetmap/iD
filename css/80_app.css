@@ -1584,6 +1584,7 @@ button.preset-favorite-button.active .icon {
 .form-field-input-wrap > textarea {
     height: 65px;
     border-radius: 0 0 4px 4px;
+    overflow: auto;
 }
 
 /* Buttons inside fields */
