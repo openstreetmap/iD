@@ -299,10 +299,29 @@ export function uiRawTagEditor(context) {
         }
 
 
+        function stringify(s) {
+            return JSON.stringify(s).slice(1, -1);   // without leading/trailing "
+        }
+
+        function unstringify(s) {
+            var leading = '';
+            var trailing = '';
+            if (s.length < 1 || s.charAt(0) !== '"') {
+                leading = '"';
+            }
+            if (s.length < 2 || s.charAt(s.length - 1) !== '"' ||
+                (s.charAt(s.length - 1) === '"' && s.charAt(s.length - 2) === '\\')
+            ) {
+                trailing = '"';
+            }
+            return JSON.parse(leading + s + trailing);
+        }
+
+
         function rowsToText(rows) {
             var str = rows
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
-                .map(function(row) { return row.key + '=' + row.value; })
+                .map(function(row) { return stringify(row.key) + '=' + stringify(row.value); })
                 .join('\n');
 
             return _state === 'hover' ? str : str + '\n';
@@ -315,8 +334,8 @@ export function uiRawTagEditor(context) {
             newText.split('\n').forEach(function(row) {
                 var m = row.match(/^\s*([^=]+)=(.*)$/);
                 if (m !== null) {
-                    var k = m[1].trim();
-                    var v = m[2].trim();
+                    var k = unstringify(m[1].trim());
+                    var v = unstringify(m[2].trim());
                     newTags[k] = v;
                 }
             });
