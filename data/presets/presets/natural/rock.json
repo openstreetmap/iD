@@ -3,7 +3,8 @@
         "name"
     ],
     "geometry": [
-        "point"
+        "point",
+        "area"
     ],
     "tags": {
         "natural": "rock"
