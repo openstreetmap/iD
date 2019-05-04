@@ -718,6 +718,9 @@ en:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
     thank_you_location: "Thank you for improving the map around {where}."
+    thank_you_where:
+      format: "{place}{separator}{region}"
+      separator: ", "
     help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
