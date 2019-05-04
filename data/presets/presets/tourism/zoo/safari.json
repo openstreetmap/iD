@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-zoo",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "zoo",
+        "zoo": "safari_park"
+    },
+    "reference": {
+        "key": "zoo",
+        "value": "safari_park"
+    },
+    "terms": [
+        "Drive-Through Zoo",
+        "Drive-In Zoo"
+    ],
+    "name": "Safari Park"
+}
