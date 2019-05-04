@@ -213,6 +213,14 @@
       "replace": {"craft": "glaziery"}
     },
     {
+      "old": {"craft": "catering"},
+      "replace": {"craft": "caterer"}
+    },
+    {
+      "old": {"craft": "sculpter"},
+      "replace": {"craft": "sculptor"}
+    },
+    {
       "old": {"crossing": "zebra"},
       "replace": {"crossing": "marked"}
     },
