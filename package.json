@@ -16,7 +16,7 @@
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
     "dist:pannellum": "shx mkdir -p dist/pannellum-streetside && shx cp -R node_modules/pannellum/build/* dist/pannellum-streetside/",
-    "dist:min": "uglifyjs dist/iD.js -c warnings=false -m -o dist/iD.min.js",
+    "dist:min": "uglifyjs dist/iD.js --compress --mangle --output dist/iD.min.js",
     "dist:svg:id": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"iD-%s\" --symbol-sprite dist/img/iD-sprite.svg \"svg/iD-sprite/**/*.svg\"",
     "dist:svg:community": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"community-%s\" --symbol-sprite dist/img/community-sprite.svg node_modules/osm-community-index/dist/img/*.svg",
     "dist:svg:fa": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/fa-sprite.svg svg/fontawesome/*.svg",
@@ -96,7 +96,7 @@
     "smash": "0.0",
     "svg-sprite": "1.5.0",
     "temaki": "1.2.0",
-    "uglify-js": "^3.5.4"
+    "uglify-js": "~3.5.10"
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",
