@@ -3095,6 +3095,10 @@ en:
         # amenity=social_facility
         name: Social Facility
         terms: '<translate with synonyms or related terms for ''Social Facility'', separated by commas>'
+      amenity/social_facility/ambulatory_care:
+        # 'amenity=social_facility, social_facility=ambulatory_care'
+        name: Ambulatory Care
+        terms: '<translate with synonyms or related terms for ''Ambulatory Care'', separated by commas>'
       amenity/social_facility/food_bank:
         # 'amenity=social_facility, social_facility=food_bank'
         name: Food Bank
@@ -3763,6 +3767,10 @@ en:
         # craft=*
         name: Craft
         terms: '<translate with synonyms or related terms for ''Craft'', separated by commas>'
+      craft/agricultural_engines:
+        # craft=agricultural_engines
+        name: Argricultural Engines Mechanic
+        terms: '<translate with synonyms or related terms for ''Argricultural Engines Mechanic'', separated by commas>'
       craft/basket_maker:
         # craft=basket_maker
         name: Basket Maker
@@ -3834,6 +3842,10 @@ en:
         # craft=electronics_repair
         name: Electronics Repair Shop
         terms: '<translate with synonyms or related terms for ''Electronics Repair Shop'', separated by commas>'
+      craft/floorer:
+        # craft=floorer
+        name: Floorer
+        terms: '<translate with synonyms or related terms for ''Floorer'', separated by commas>'
       craft/gardener:
         # craft=gardener
         name: Gardener
@@ -3860,6 +3872,11 @@ en:
       craft/jeweler:
         # craft=jeweler
         name: Jeweler
+      craft/joiner:
+        # craft=joiner
+        name: Joiner
+        # 'terms: furniture'
+        terms: '<translate with synonyms or related terms for ''Joiner'', separated by commas>'
       craft/key_cutter:
         # craft=key_cutter
         name: Key Cutter
@@ -3878,6 +3895,10 @@ en:
         # craft=painter
         name: Painter
         terms: '<translate with synonyms or related terms for ''Painter'', separated by commas>'
+      craft/parquet_layer:
+        # craft=parquet_layer
+        name: Parquet Layer
+        terms: '<translate with synonyms or related terms for ''Parquet Layer'', separated by commas>'
       craft/photographer:
         # craft=photographer
         name: Photographer
@@ -3998,6 +4019,10 @@ en:
         # emergency=fire_extinguisher
         name: Fire Extinguisher
         terms: '<translate with synonyms or related terms for ''Fire Extinguisher'', separated by commas>'
+      emergency/fire_hose:
+        # emergency=fire_hose
+        name: Fire Hose
+        terms: '<translate with synonyms or related terms for ''Fire Hose'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
@@ -5528,6 +5553,11 @@ en:
         name: Ridge
         # 'terms: crest'
         terms: '<translate with synonyms or related terms for ''Ridge'', separated by commas>'
+      natural/rock:
+        # natural=rock
+        name: Attached Rock / Boulder
+        # 'terms: boulder,stone,rock'
+        terms: '<translate with synonyms or related terms for ''Attached Rock / Boulder'', separated by commas>'
       natural/saddle:
         # natural=saddle
         name: Saddle
@@ -5557,6 +5587,11 @@ en:
         # natural=spring
         name: Spring
         terms: '<translate with synonyms or related terms for ''Spring'', separated by commas>'
+      natural/stone:
+        # natural=stone
+        name: Unattached Stone / Boulder
+        # 'terms: boulder,stone,rock'
+        terms: '<translate with synonyms or related terms for ''Unattached Stone / Boulder'', separated by commas>'
       natural/tree:
         # natural=tree
         name: Tree
@@ -5612,6 +5647,11 @@ en:
         name: Stream
         # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
         terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
+      natural/water/wastewater:
+        # 'natural=water, water=wastewater'
+        name: Wastewater Basin
+        # 'terms: excrement,shit,sewage,wastewater,Settling Basin,Clarifier Basin'
+        terms: '<translate with synonyms or related terms for ''Wastewater Basin'', separated by commas>'
       natural/wetland:
         # natural=wetland
         name: Wetland
@@ -7269,6 +7309,21 @@ en:
         name: Zoo
         # 'terms: animal'
         terms: '<translate with synonyms or related terms for ''Zoo'', separated by commas>'
+      tourism/zoo/petting:
+        # 'tourism=zoo, zoo=petting_zoo'
+        name: Petting Zoo
+        # 'terms: Children''s Zoo,Children''s Farm,Petting Farm,farm animals'
+        terms: '<translate with synonyms or related terms for ''Petting Zoo'', separated by commas>'
+      tourism/zoo/safari:
+        # 'tourism=zoo, zoo=safari_park'
+        name: Safari Park
+        # 'terms: Drive-Through Zoo,Drive-In Zoo'
+        terms: '<translate with synonyms or related terms for ''Safari Park'', separated by commas>'
+      tourism/zoo/wildlife:
+        # 'tourism=zoo, zoo=wildlife_park'
+        name: Wildlife Park
+        # 'terms: indigenous animals'
+        terms: '<translate with synonyms or related terms for ''Wildlife Park'', separated by commas>'
       traffic_calming:
         # traffic_calming=*
         name: Traffic Calming

@@ -5041,6 +5041,10 @@
                     "name": "Social Facility",
                     "terms": ""
                 },
+                "amenity/social_facility/ambulatory_care": {
+                    "name": "Ambulatory Care",
+                    "terms": ""
+                },
                 "amenity/social_facility/food_bank": {
                     "name": "Food Bank",
                     "terms": ""
@@ -5641,6 +5645,10 @@
                     "name": "Tailor",
                     "terms": "clothes,suit"
                 },
+                "craft/agricultural_engines": {
+                    "name": "Argricultural Engines Mechanic",
+                    "terms": ""
+                },
                 "craft/basket_maker": {
                     "name": "Basket Maker",
                     "terms": ""
@@ -5705,6 +5713,10 @@
                     "name": "Electronics Repair Shop",
                     "terms": ""
                 },
+                "craft/floorer": {
+                    "name": "Floorer",
+                    "terms": ""
+                },
                 "craft/gardener": {
                     "name": "Gardener",
                     "terms": "landscaper,grounds keeper"
@@ -5725,6 +5737,10 @@
                     "name": "Insulator",
                     "terms": ""
                 },
+                "craft/joiner": {
+                    "name": "Joiner",
+                    "terms": "furniture"
+                },
                 "craft/key_cutter": {
                     "name": "Key Cutter",
                     "terms": ""
@@ -5735,6 +5751,10 @@
                 },
                 "craft/painter": {
                     "name": "Painter",
+                    "terms": ""
+                },
+                "craft/parquet_layer": {
+                    "name": "Parquet Layer",
                     "terms": ""
                 },
                 "craft/photographer": {
@@ -5855,6 +5875,10 @@
                 },
                 "emergency/fire_extinguisher": {
                     "name": "Fire Extinguisher",
+                    "terms": ""
+                },
+                "emergency/fire_hose": {
+                    "name": "Fire Hose",
                     "terms": ""
                 },
                 "emergency/fire_hydrant": {
@@ -7149,6 +7173,10 @@
                     "name": "Ridge",
                     "terms": "crest"
                 },
+                "natural/rock": {
+                    "name": "Attached Rock / Boulder",
+                    "terms": "boulder,stone,rock"
+                },
                 "natural/saddle": {
                     "name": "Saddle",
                     "terms": "pass,mountain pass,top"
@@ -7172,6 +7200,10 @@
                 "natural/spring": {
                     "name": "Spring",
                     "terms": ""
+                },
+                "natural/stone": {
+                    "name": "Unattached Stone / Boulder",
+                    "terms": "boulder,stone,rock"
                 },
                 "natural/tree_row": {
                     "name": "Tree Row",
@@ -7220,6 +7252,10 @@
                 "natural/water/stream": {
                     "name": "Stream",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
+                },
+                "natural/water/wastewater": {
+                    "name": "Wastewater Basin",
+                    "terms": "excrement,shit,sewage,wastewater,Settling Basin,Clarifier Basin"
                 },
                 "natural/wetland": {
                     "name": "Wetland",
@@ -8660,6 +8696,18 @@
                 "tourism/zoo": {
                     "name": "Zoo",
                     "terms": "animal"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Petting Zoo",
+                    "terms": "Children's Zoo,Children's Farm,Petting Farm,farm animals"
+                },
+                "tourism/zoo/safari": {
+                    "name": "Safari Park",
+                    "terms": "Drive-Through Zoo,Drive-In Zoo"
+                },
+                "tourism/zoo/wildlife": {
+                    "name": "Wildlife Park",
+                    "terms": "indigenous animals"
                 },
                 "traffic_calming": {
                     "name": "Traffic Calming",

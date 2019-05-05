@@ -7,12 +7,12 @@
         "area"
     ],
     "tags": {
-        "natural": "rock"
+        "natural": "stone"
     },
     "terms": [
         "boulder",
         "stone",
         "rock"
     ],
-    "name": "Attached Rock / Boulder"
+    "name": "Unattached Stone / Boulder"
 }
