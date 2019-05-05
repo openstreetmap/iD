@@ -1,0 +1,19 @@
+{
+    "icon": "maki-religious-christian",
+    "fields": [
+        "name",
+        "material",
+        "height",
+        "ele",
+        "inscription",
+        "direction"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "man_made": "cross"
+    },
+    "name": "Summit cross"
+}

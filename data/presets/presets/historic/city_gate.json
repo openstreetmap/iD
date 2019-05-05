@@ -2,10 +2,8 @@
     "icon": "maki-castle",
     "fields": [
         "name",
-        "castle_type",
         "building_area",
         "historic/civilization",
-        "access_simple",
         "start_date"
     ],
     "geometry": [
@@ -13,7 +11,10 @@
         "area"
     ],
     "tags": {
-        "historic": "castle"
+        "historic": "city_gate"
     },
-    "name": "Castle"
+    "terms": [
+        "Town Gate"
+    ],
+    "name": "City Gate"
 }
