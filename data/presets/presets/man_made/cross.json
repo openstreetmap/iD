@@ -4,7 +4,7 @@
         "name",
         "material",
         "height",
-        "ele",
+        "elevation",
         "inscription",
         "direction"
     ],
@@ -15,5 +15,5 @@
     "tags": {
         "man_made": "cross"
     },
-    "name": "Summit cross"
+    "name": "Summit Cross"
 }

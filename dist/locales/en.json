@@ -5373,6 +5373,10 @@
                     "name": "Retaining Wall",
                     "terms": ""
                 },
+                "barrier/sally_port": {
+                    "name": "Sally Port",
+                    "terms": "Postern,castle side gate"
+                },
                 "barrier/stile": {
                     "name": "Stile",
                     "terms": ""
@@ -6321,6 +6325,30 @@
                     "name": "Castle",
                     "terms": ""
                 },
+                "historic/castle/fortress": {
+                    "name": "Historic Fortress",
+                    "terms": "citadel,military"
+                },
+                "historic/castle/palace": {
+                    "name": "Palace",
+                    "terms": "Royal Residence,royal,king,queen"
+                },
+                "historic/castle/stately": {
+                    "name": "Château",
+                    "terms": "Historic Country House,Stately Home,nobility,gentry,representative"
+                },
+                "historic/city_gate": {
+                    "name": "City Gate",
+                    "terms": "Town Gate"
+                },
+                "historic/fort": {
+                    "name": "Historic Fort",
+                    "terms": "military"
+                },
+                "historic/manor": {
+                    "name": "Manor House",
+                    "terms": "Mansion,gentry,nobility,estate"
+                },
                 "historic/memorial": {
                     "name": "Memorial",
                     "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
@@ -6937,6 +6965,10 @@
                     "name": "Crane",
                     "terms": ""
                 },
+                "man_made/cross": {
+                    "name": "Summit Cross",
+                    "terms": ""
+                },
                 "man_made/cutline": {
                     "name": "Cut line",
                     "terms": ""
@@ -7236,6 +7268,10 @@
                 "natural/water/lake": {
                     "name": "Lake",
                     "terms": "lakelet,loch,mere"
+                },
+                "natural/water/moat": {
+                    "name": "Moat",
+                    "terms": ""
                 },
                 "natural/water/pond": {
                     "name": "Pond",

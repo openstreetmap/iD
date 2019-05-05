@@ -3490,6 +3490,11 @@ en:
         # barrier=retaining_wall
         name: Retaining Wall
         terms: '<translate with synonyms or related terms for ''Retaining Wall'', separated by commas>'
+      barrier/sally_port:
+        # barrier=sally_port
+        name: Sally Port
+        # 'terms: Postern,castle side gate'
+        terms: '<translate with synonyms or related terms for ''Sally Port'', separated by commas>'
       barrier/stile:
         # barrier=stile
         name: Stile
@@ -4548,6 +4553,36 @@ en:
         # historic=castle
         name: Castle
         terms: '<translate with synonyms or related terms for ''Castle'', separated by commas>'
+      historic/castle/fortress:
+        # 'historic=castle, castle_type=fortress'
+        name: Historic Fortress
+        # 'terms: citadel,military'
+        terms: '<translate with synonyms or related terms for ''Historic Fortress'', separated by commas>'
+      historic/castle/palace:
+        # 'historic=castle, castle_type=palace'
+        name: Palace
+        # 'terms: Royal Residence,royal,king,queen'
+        terms: '<translate with synonyms or related terms for ''Palace'', separated by commas>'
+      historic/castle/stately:
+        # 'historic=castle, castle_type=stately'
+        name: Château
+        # 'terms: Historic Country House,Stately Home,nobility,gentry,representative'
+        terms: '<translate with synonyms or related terms for ''Château'', separated by commas>'
+      historic/city_gate:
+        # historic=city_gate
+        name: City Gate
+        # 'terms: Town Gate'
+        terms: '<translate with synonyms or related terms for ''City Gate'', separated by commas>'
+      historic/fort:
+        # historic=fort
+        name: Historic Fort
+        # 'terms: military'
+        terms: '<translate with synonyms or related terms for ''Historic Fort'', separated by commas>'
+      historic/manor:
+        # historic=manor
+        name: Manor House
+        # 'terms: Mansion,gentry,nobility,estate'
+        terms: '<translate with synonyms or related terms for ''Manor House'', separated by commas>'
       historic/memorial:
         # historic=memorial
         name: Memorial
@@ -5269,6 +5304,10 @@ en:
         # man_made=crane
         name: Crane
         terms: '<translate with synonyms or related terms for ''Crane'', separated by commas>'
+      man_made/cross:
+        # man_made=cross
+        name: Summit Cross
+        terms: '<translate with synonyms or related terms for ''Summit Cross'', separated by commas>'
       man_made/cutline:
         # man_made=cutline
         name: Cut line
@@ -5628,6 +5667,10 @@ en:
         name: Lake
         # 'terms: lakelet,loch,mere'
         terms: '<translate with synonyms or related terms for ''Lake'', separated by commas>'
+      natural/water/moat:
+        # 'natural=water, water=moat'
+        name: Moat
+        terms: '<translate with synonyms or related terms for ''Moat'', separated by commas>'
       natural/water/pond:
         # 'natural=water, water=pond'
         name: Pond
