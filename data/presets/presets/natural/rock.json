@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "rock"
+    },
+    "terms": [
+        "Rock"
+    ],
+    "name": "Boulder"
+}
