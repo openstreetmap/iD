@@ -33,6 +33,22 @@ describe('iD.validations.disconnected_way', function () {
         );
     }
 
+    function createWayAtEndOfExistingOne(tags1, tags2) {
+        var n1 = iD.osmNode({id: 'n1', loc: [4,4]});
+        var n2 = iD.osmNode({id: 'n2', loc: [4,5]});
+        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = iD.osmWay({id: 'w1', nodes: ['n1', 'n2'], tags: tags1});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n1', 'n-3'], tags: tags2});
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w),
+            iD.actionAddEntity(w2)
+        );
+    }
+
     function validate() {
         var validator = iD.validationDisconnectedWay();
         var changes = context.history().changes();
@@ -91,8 +107,9 @@ describe('iD.validations.disconnected_way', function () {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('ignores highways that are connected', function() {
-        createConnectingWays({'highway': 'unclassified'}, {'highway': 'unclassified'});
+    it('ignores highways that are connected to existing highways', function() {
+        createWayAtEndOfExistingOne({'highway': 'secondary'}, {'highway': 'secondary'});
+
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
