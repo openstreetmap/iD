@@ -7181,7 +7181,7 @@
                 },
                 "natural/glacier": {
                     "name": "Glacier",
-                    "terms": ""
+                    "terms": "ice,snow"
                 },
                 "natural/grassland": {
                     "name": "Grassland",

@@ -5563,6 +5563,7 @@ en:
       natural/glacier:
         # natural=glacier
         name: Glacier
+        # 'terms: ice,snow'
         terms: '<translate with synonyms or related terms for ''Glacier'', separated by commas>'
       natural/grassland:
         # natural=grassland
