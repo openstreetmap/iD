@@ -5225,7 +5225,7 @@
                 },
                 "area/highway": {
                     "name": "Road Surface",
-                    "terms": ""
+                    "terms": "area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area"
                 },
                 "attraction/amusement_ride": {
                     "name": "Amusement Ride",

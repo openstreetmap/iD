@@ -3319,6 +3319,7 @@ en:
       area/highway:
         # 'area:highway=*'
         name: Road Surface
+        # 'terms: area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area'
         terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
       attraction:
         # attraction=*
