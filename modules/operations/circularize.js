@@ -15,6 +15,10 @@ export function operationCircularize(selectedIDs, context) {
 
     var operation = function() {
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 

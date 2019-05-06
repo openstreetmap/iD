@@ -83,6 +83,8 @@ export function operationDowngrade(selectedIDs, context) {
             return graph;
         }, operation.annotation());
 
+        context.validator().validate();
+
         // refresh the select mode to enable the delete operation
         context.enter(modeSelect(context, selectedIDs));
     };

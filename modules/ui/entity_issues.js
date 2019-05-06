@@ -190,7 +190,7 @@ export function uiEntityIssues(context) {
                     var issueEntityIDs = d.issue.entityIds;
                     utilHighlightEntities(issueEntityIDs.concat(d.entityIds), false, context);
                     d.onClick();
-                    context.validator().validate();
+                    window.setTimeout(function() { context.validator().validate(); }, 300);  // after any transition
                 }
             })
             .on('mouseover.highlight', function(d) {

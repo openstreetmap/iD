@@ -58,6 +58,7 @@ export function operationMerge(selectedIDs, context) {
             updatePresetTags(context.graph(), ids);
         }
 
+        context.validator().validate();
         context.enter(modeSelect(context, ids));
     };
 

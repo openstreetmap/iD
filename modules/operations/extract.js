@@ -16,6 +16,7 @@ export function operationExtract(selectedIDs, context) {
 
     var operation = function () {
         context.perform(action);  // do the extract
+        context.validator().validate();
 
         var extractedNodeID = action.getExtractedNodeID();
 

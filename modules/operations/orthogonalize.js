@@ -42,7 +42,12 @@ export function operationOrthogonalize(selectedIDs, context) {
 
     var operation = function() {
         if (!action) return;
+
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 

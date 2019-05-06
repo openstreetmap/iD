@@ -57,6 +57,8 @@ export function operationDisconnect(selectedIDs, context) {
         context.perform(function(graph) {
             return actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
+
+        context.validator().validate();
     };
 
 
