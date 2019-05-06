@@ -1,6 +1,4 @@
-import {
-    geoVecEqual, geoVecNormalizedDot
-} from './vector';
+import { geoVecEqual, geoVecNormalizedDot } from './vector';
 
 
 export function geoOrthoNormalizedDotProduct(a, b, origin) {

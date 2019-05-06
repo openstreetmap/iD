@@ -8,9 +8,10 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationUnsquareWay() {
     var type = 'unsquare_way';
 
-    // use looser constraints for detection than those for completing the action
-    var epsilon = 0.01;
-    var degreeThreshold = 6;
+    // use looser epsilon for detection to reduce false positives if nearly orthogonal
+    var epsilon = 0.05;
+    var degreeThreshold = 13;
+    var nodeThreshold = 10;
 
     function isBuilding(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
@@ -18,40 +19,34 @@ export function validationUnsquareWay() {
         return entity.tags.building && entity.tags.building !== 'no';
     }
 
-    var validation = function checkMissingRole(entity, context) {
 
+    var validation = function checkUnsquareWay(entity, context) {
         var graph = context.graph();
-
         if (!isBuilding(entity, graph)) return [];
 
         var isClosed = entity.isClosed();
-        var nodes = context.childNodes(entity).slice();  // shallow copy
-        if (isClosed) nodes.pop();
+        if (!isClosed) return [];        // this building has bigger problems
 
         // don't flag ways with lots of nodes since they are likely detail-mapped
-        if (nodes.length > 6) return [];
+        var nodes = context.childNodes(entity).slice();    // shallow copy
+        if (nodes.length > nodeThreshold + 1) return [];   // +1 because closing node appears twice
 
+        // ignore if not all nodes are fully downloaded
         var osm = context.connection();
-        var connectedToUnloadedTile = nodes.some(function(node) {
-            return !osm.isDataLoaded(node.loc);
-        });
-        // ignore if not all conncted tiles are downloaded
-        if (connectedToUnloadedTile) return [];
+        if (!osm || nodes.some(function(node) { return !osm.isDataLoaded(node.loc); })) return [];
 
+        // don't flag connected ways to avoid unresolvable unsquare loops
         var hasConnectedSquarableWays = nodes.some(function(node) {
             return graph.parentWays(node).some(function(way) {
                 if (way.id === entity.id) return false;
                 return isBuilding(way, graph);
             });
         });
-        // don't flag connected ways to avoid unresolvable unsquare loops
         if (hasConnectedSquarableWays) return [];
 
-        var projectedLocs = nodes.map(function(node) {
-            return context.projection(node.loc);
-        });
 
-        if (!geoOrthoCanOrthogonalize(projectedLocs, isClosed, epsilon, degreeThreshold, true)) return [];
+        var points = nodes.map(function(node) { return context.projection(node.loc); });
+        if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
         var action = actionOrthogonalize(entity.id, context.projection, undefined, epsilon, degreeThreshold);
         action.transitionable = false;  // do it instantly
