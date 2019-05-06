@@ -155,8 +155,6 @@ export function coreHistory(context) {
                     })
                     .on('end interrupt', function() {
                         _overwrite(origArguments, 1);
-                        // run the completion handler, if any
-                        if (action0.onCompletion) action0.onCompletion();
                     });
 
             } else {

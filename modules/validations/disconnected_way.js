@@ -12,9 +12,9 @@ export function validationDisconnectedWay() {
     function isTaggedAsHighway(entity) {
         return osmRoutableHighwayTagValues[entity.tags.highway];
     }
-    
-    function isNewRoad(entityId) { 
-        return entityId[0] === 'w' && entityId[1] === '-'; 
+
+    function isNewRoad(entityId) {
+        return entityId[0] === 'w' && entityId[1] === '-';
     }
 
     var validation = function checkDisconnectedWay(entity, context) {
@@ -22,9 +22,11 @@ export function validationDisconnectedWay() {
 
         if (!isTaggedAsHighway(entity)) return [];
 
-        if (!isDisconnectedWay(entity) && !isDisconnectedMultipolygon(entity)
-        && !isNewRoadUnreachableFromExistingRoads(entity, graph)) {
-         return [];
+        if (!isDisconnectedWay(entity) &&
+            !isDisconnectedMultipolygon(entity) &&
+            !isNewRoadUnreachableFromExistingRoads(entity, graph)
+        ) {
+            return [];
         }
 
         var entityLabel = utilDisplayLabel(entity, context);

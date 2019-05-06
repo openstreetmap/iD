@@ -54,9 +54,7 @@ export function validationUnsquareWay() {
         if (!geoOrthoCanOrthogonalize(projectedLocs, isClosed, epsilon, degreeThreshold, true)) return [];
 
         var action = actionOrthogonalize(entity.id, context.projection, undefined, epsilon, degreeThreshold);
-        action.onCompletion = function() {
-            context.validator().validate();
-        };
+        action.transitionable = false;  // do it instantly
 
         return [new validationIssue({
             type: type,

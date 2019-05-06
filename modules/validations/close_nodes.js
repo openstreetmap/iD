@@ -8,7 +8,6 @@ import { geoSphericalDistance } from '../geo';
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
-
     var thresholdMeters = 0.2;
 
     function getIssuesForWay(way, context) {
@@ -29,7 +28,6 @@ export function validationCloseNodes() {
     }
 
     function getIssuesForNode(node, context) {
-
         var issues = [];
 
         function checkForCloseness(node1, node2, way) {
@@ -63,7 +61,6 @@ export function validationCloseNodes() {
     }
 
     function getIssueIfAny(node1, node2, way, context) {
-
         if (node1.id === node2.id ||
             (node1.hasInterestingTags() && node2.hasInterestingTags()) ||
             geoSphericalDistance(node1.loc, node2.loc) >= thresholdMeters) {
@@ -82,8 +79,8 @@ export function validationCloseNodes() {
                     icon: 'iD-icon-plus',
                     title: t('issues.fix.merge_points.title'),
                     onClick: function() {
-                        var entityIds = this.issue.entityIds,
-                            operation = operationMerge([entityIds[0], entityIds[1]], context);
+                        var entityIds = this.issue.entityIds;
+                        var operation = operationMerge([entityIds[0], entityIds[1]], context);
                         operation();
                     }
                 }),
@@ -107,7 +104,6 @@ export function validationCloseNodes() {
 
 
     var validation = function(entity, context) {
-
         if (entity.type === 'node') {
             return getIssuesForNode(entity, context);
         } else if (entity.type === 'way') {
