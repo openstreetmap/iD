@@ -16,7 +16,6 @@
         "natural/tree_row",
         "natural/peak",
         "natural/cliff",
-        "natural/beach",
-        "natural/cave_entrance"
+        "natural/beach"
     ]
 }
