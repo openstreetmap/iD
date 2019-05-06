@@ -53,7 +53,7 @@ export function validationUnsquareWay() {
         if (Object.keys(entity.tags).length === 1) {
             // note: use default params for actionOrthogonalize, not relaxed epsilon
             var autoAction = actionOrthogonalize(entity.id, context.projection);
-            action.transitionable = false;  // when autofixing, do it instantly
+            autoAction.transitionable = false;  // when autofixing, do it instantly
             autoArgs = [autoAction, t('operations.orthogonalize.annotation.area')];
         }
 
