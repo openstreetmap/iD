@@ -48,8 +48,14 @@ export function validationUnsquareWay() {
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
-        var action = actionOrthogonalize(entity.id, context.projection, undefined, epsilon, degreeThreshold);
-        action.transitionable = false;  // do it instantly
+        // only allow autofix if there are no extra tags on the building (e.g. source) - #6288
+        var autoArgs;
+        if (Object.keys(entity.tags).length === 1) {
+            // note: use default params for actionOrthogonalize, not relaxed epsilon
+            var autoAction = actionOrthogonalize(entity.id, context.projection);
+            action.transitionable = false;  // when autofixing, do it instantly
+            autoArgs = [autoAction, t('operations.orthogonalize.annotation.area')];
+        }
 
         return [new validationIssue({
             type: type,
@@ -63,9 +69,13 @@ export function validationUnsquareWay() {
                 new validationIssueFix({
                     icon: 'iD-operation-orthogonalize',
                     title: t('issues.fix.square_feature.title'),
-                    autoArgs: [action, t('operations.orthogonalize.annotation.area')],
+                    autoArgs: autoArgs,
                     onClick: function() {
-                        context.perform(action, t('operations.orthogonalize.annotation.area'));
+                        // note: use default params for actionOrthogonalize, not relaxed epsilon
+                        context.perform(
+                            actionOrthogonalize(entity.id, context.projection),
+                            t('operations.orthogonalize.annotation.area')
+                        );
                     }
                 })
             ]
