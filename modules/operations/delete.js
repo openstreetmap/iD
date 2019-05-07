@@ -72,7 +72,6 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
-
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
