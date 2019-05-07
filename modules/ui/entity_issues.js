@@ -49,7 +49,7 @@ export function uiEntityIssues(context) {
 
 
         var containers = selection.selectAll('.issue-container')
-            .data(issues, function(d) { return d.message() + d.id; });
+            .data(issues, function(d) { return d.id; });
 
         // Exit
         containers.exit()
@@ -108,8 +108,7 @@ export function uiEntityIssues(context) {
 
         textEnter
             .append('span')
-            .attr('class', 'issue-message')
-            .text(function(d) { return d.message(); });
+            .attr('class', 'issue-message');
 
 
         var infoButton = labelsEnter
@@ -173,6 +172,10 @@ export function uiEntityIssues(context) {
             .merge(containersEnter)
             .classed('active', function(d) { return d.id === _activeIssueID; });
 
+        containers.selectAll('.issue-message')
+            .text(function(d) {
+                return d.message();
+            });
 
         // fixes
         var fixLists = containers.selectAll('.issue-fix-list');

@@ -39,7 +39,7 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(issues, function(d) { return d.message() + d.id; });
+                .data(issues, function(d) { return d.id; });
 
             items.exit()
                 .remove();
@@ -53,7 +53,7 @@ export function uiCommitWarnings(context) {
 
             itemsEnter
                 .append('strong')
-                .text(function(d) { return d.message(); });
+                .attr('class', 'issue-message');
 
             itemsEnter.filter(function(d) { return d.tooltip; })
                 .call(tooltip()
@@ -64,6 +64,10 @@ export function uiCommitWarnings(context) {
             items = itemsEnter
                 .merge(items);
 
+            items.selectAll('.issue-message')
+                .text(function(d) {
+                    return d.message();
+                });
 
             items
                 .on('mouseover', function(d) {
