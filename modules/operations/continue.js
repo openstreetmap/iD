@@ -12,7 +12,6 @@ export function operationContinue(selectedIDs, context) {
         utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
     );
     var vertex = geometries.vertex[0];
-    var _disabled;
 
 
     function candidateWays() {
@@ -41,16 +40,14 @@ export function operationContinue(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (_disabled !== undefined) return _disabled;
-
         var candidates = candidateWays();
         if (candidates.length === 0) {
-            return _disabled = 'not_eligible';
+            return 'not_eligible';
         } else if (candidates.length > 1) {
-            return _disabled = 'multiple';
+            return 'multiple';
         }
 
-        return _disabled = false;
+        return false;
     };
 
 

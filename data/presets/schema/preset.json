@@ -35,7 +35,7 @@
             }
         },
         "removeTags": {
-            "description": "Tags that are removed when changing to another preset (default is the same value as 'tags')",
+            "description": "Tags that are removed when changing to another preset (default is the same value as 'addTags' which in turn defaults to 'tags')",
             "type": "object",
             "additionalProperties": {
                 "type": "string"

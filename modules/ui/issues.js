@@ -90,9 +90,9 @@ export function uiIssues(context) {
                     context.map().centerZoomEase(extent.center(), setZoom);
 
                     // select the first entity
-                    if (d.entities && d.entities.length) {
+                    if (d.entityIds && d.entityIds.length) {
                         window.setTimeout(function() {
-                            var ids = d.entities.map(function(e) { return e.id; });
+                            var ids = d.entityIds;
                             context.enter(modeSelect(context, [ids[0]]));
                             utilHighlightEntities(ids, true, context);
                         }, 250);  // after ease
@@ -100,12 +100,10 @@ export function uiIssues(context) {
                 }
             })
             .on('mouseover', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, true, context);
+                utilHighlightEntities(d.entityIds, true, context);
             })
             .on('mouseout', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, false, context);
+                utilHighlightEntities(d.entityIds, false, context);
             });
 
 
@@ -147,7 +145,7 @@ export function uiIssues(context) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
 
-                        var issuesEntityIDs = d.issue.entities.map(function(e) { return e.id; });
+                        var issuesEntityIDs = d.issue.entityIds;
                         utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
 
                         context.perform.apply(context, d.autoArgs);
@@ -192,6 +190,10 @@ export function uiIssues(context) {
             .append('span')
             .attr('class', 'autofix-all-link-icon')
             .call(svgIcon('#iD-icon-wrench'));
+
+        if (which === 'warnings') {
+            renderIgnoredIssuesReset(selection);
+        }
 
         // update
         autoFixAll = autoFixAll
@@ -274,23 +276,60 @@ export function uiIssues(context) {
 
 
     function renderNoIssuesBox(selection) {
-        selection
+
+        var box = selection.append('div')
+            .attr('class', 'box');
+
+        box
             .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesMessage = selection
+        var noIssuesMessage = box
             .append('span');
 
         noIssuesMessage
             .append('strong')
-            .text(t('issues.no_issues.message'));
+            .attr('class', 'message');
 
         noIssuesMessage
             .append('br');
 
         noIssuesMessage
             .append('span')
-            .text(t('issues.no_issues.info'));
+            .attr('class', 'details');
+    }
+
+    function renderIgnoredIssuesReset(selection) {
+
+        var ignoredIssues = context.validator()
+            .getIssues(Object.assign({ includeIgnored: 'only' }, _options));
+
+        var resetIgnored = selection.selectAll('.reset-ignored')
+            .data(ignoredIssues.length ? [0] : []);
+
+        // exit
+        resetIgnored.exit()
+            .remove();
+
+        // enter
+        var resetIgnoredEnter = resetIgnored.enter()
+            .append('div')
+            .attr('class', 'reset-ignored section-footer');
+
+        resetIgnoredEnter
+            .append('a')
+            .attr('href', '#');
+
+        // update
+        resetIgnored = resetIgnored
+            .merge(resetIgnoredEnter);
+
+        resetIgnored.select('a')
+            .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
+
+        resetIgnored.on('click', function() {
+                context.validator().resetIgnoredIssues();
+            });
     }
 
 
@@ -308,7 +347,7 @@ export function uiIssues(context) {
 
         var ruleLinks = containerEnter
             .append('div')
-            .attr('class', 'issue-rules-links');
+            .attr('class', 'issue-rules-links section-footer');
 
         ruleLinks
             .append('a')
@@ -354,6 +393,77 @@ export function uiIssues(context) {
 
     function toggleRule(d) {
         context.validator().toggleRule(d);
+    }
+
+    function setNoIssuesText() {
+
+        function checkForHiddenIssues(cases) {
+            for (var type in cases) {
+                var opts = cases[type];
+                var hiddenIssues = context.validator().getIssues(opts);
+                if (hiddenIssues.length) {
+                    _pane.select('.issues-none .details')
+                        .text(t(
+                            'issues.no_issues.hidden_issues.' + type,
+                            { count: hiddenIssues.length.toString() }
+                        ));
+                    return;
+                }
+            }
+            _pane.select('.issues-none .details')
+                .text(t('issues.no_issues.hidden_issues.none'));
+        }
+
+        var messageType;
+
+        if (_options.what === 'edited' && _options.where === 'visible') {
+
+            messageType = 'edits_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'edited', where: 'all' },
+                other_features: { what: 'all', where: 'visible' },
+                disabled_rules: { what: 'edited', where: 'visible', includeDisabledRules: 'only' },
+                other_features_elsewhere: { what: 'all', where: 'all' },
+                disabled_rules_elsewhere: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'edited' && _options.where === 'all') {
+
+            messageType = 'edits';
+
+            checkForHiddenIssues({
+                other_features: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'all' && _options.where === 'visible') {
+
+            messageType = 'everything_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'all', where: 'visible', includeDisabledRules: 'only' },
+                disabled_rules_elsewhere: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        } else if (_options.what === 'all' && _options.where === 'all') {
+
+            messageType = 'everything';
+
+            checkForHiddenIssues({
+                disabled_rules: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        }
+
+        _pane.select('.issues-none .message')
+            .text(t('issues.no_issues.message.' + messageType));
+
     }
 
 
@@ -403,8 +513,14 @@ export function uiIssues(context) {
             }
         }
 
-        _pane.select('.issues-none')
-            .classed('hide', _warnings.length > 0 || _errors.length > 0);
+        var hasIssues = _warnings.length > 0 || _errors.length > 0;
+
+        var issuesNone = _pane.select('.issues-none');
+        issuesNone.classed('hide', hasIssues);
+        if (!hasIssues) {
+            renderIgnoredIssuesReset(issuesNone);
+            setNoIssuesText();
+        }
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();

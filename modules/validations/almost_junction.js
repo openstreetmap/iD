@@ -47,10 +47,11 @@ export function validationAlmostJunction() {
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
-                    var endNode = this.issue.entities[1];
+                    var endNodeId = this.issue.entityIds[1];
+                    var endNode = context.entity(endNodeId);
                     var targetEdge = this.issue.data.edge;
                     var crossLoc = this.issue.data.cross_loc;
-                    var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
+                    var edgeNodes = [context.entity(targetEdge[0]), context.entity(targetEdge[1])];
                     var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
 
                     var annotation = t('issues.fix.connect_almost_junction.annotation');
@@ -76,7 +77,7 @@ export function validationAlmostJunction() {
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
                     onClick: function() {
-                        var nodeID = this.issue.entities[1].id;
+                        var nodeID = this.issue.entityIds[1];
                         context.perform(
                             actionChangeTags(nodeID, { noexit: 'yes' }),
                             t('issues.fix.tag_as_disconnected.annotation')
@@ -93,7 +94,7 @@ export function validationAlmostJunction() {
                     feature2: utilDisplayLabel(edgeHighway, context)
                 }),
                 reference: showReference,
-                entities: [entity, node, edgeHighway],
+                entityIds: [entity.id, node.id, edgeHighway.id],
                 loc: extendableNodeInfo.node.loc,
                 data: {
                     edge: extendableNodeInfo.edge,

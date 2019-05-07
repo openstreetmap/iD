@@ -65,8 +65,8 @@ describe('iD.validations.private_data', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('private_data');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
 });

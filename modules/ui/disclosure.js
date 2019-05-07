@@ -81,13 +81,13 @@ export function uiDisclosure(context, key, expandedDefault) {
                     : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
                 );
 
+            wrap
+                .call(uiToggle(_expanded));
+
             if (_expanded) {
                 wrap
                     .call(_content);
             }
-
-            wrap
-                .call(uiToggle(_expanded));
 
             dispatch.call('toggled', this, _expanded);
         }

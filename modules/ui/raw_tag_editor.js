@@ -7,12 +7,18 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox } from './combobox';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind } from '../util';
+import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
 
 
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
+    var availableViews = [
+        { id: 'text', icon: '#fas-i-cursor' },
+        { id: 'list', icon: '#fas-th-list' }
+    ];
+
+    var _tagView = (context.storage('raw-tag-editor-view') || 'list');   // 'list, 'text'
     var _readOnlyTags = [];
     var _indexedKeys = [];
     var _showBlank = false;
@@ -75,13 +81,80 @@ export function uiRawTagEditor(context) {
             rowData.push({ index: _indexedKeys.length, key: '', value: '' });
         }
 
-        // List of tags
+
+        // View Options
+        var options = wrap.selectAll('.raw-tag-options')
+            .data([0]);
+
+        var optionsEnter = options.enter()
+            .append('div')
+            .attr('class', 'raw-tag-options');
+
+        var optionEnter = optionsEnter.selectAll('.raw-tag-option')
+            .data(availableViews, function(d) { return d.id; })
+            .enter();
+
+        optionEnter
+            .append('button')
+            .attr('class', function(d) {
+                return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
+            })
+            .attr('title', function(d) { return d.id; })
+            .on('click', function(d) {
+                _tagView = d.id;
+                context.storage('raw-tag-editor-view', d.id);
+
+                wrap.selectAll('.raw-tag-option')
+                    .classed('selected', function(datum) { return datum === d; });
+
+                wrap.selectAll('.tag-text')
+                    .classed('hide', (d.id !== 'text'))
+                    .each(setTextareaHeight);
+
+                wrap.selectAll('.tag-list, .add-row')
+                    .classed('hide', (d.id !== 'list'));
+            })
+            .each(function(d) {
+                d3_select(this)
+                    .call(svgIcon(d.icon));
+            });
+
+
+        // View as Text
+        var textData = rowsToText(rowData);
+        var textarea = wrap.selectAll('.tag-text')
+            .data([0]);
+
+        textarea = textarea.enter()
+            .append('textarea')
+            .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
+            .call(utilNoAuto)
+            .attr('spellcheck', 'false')
+            .merge(textarea);
+
+        textarea
+            .call(utilGetSetValue, textData)
+            .each(setTextareaHeight)
+            .on('input', setTextareaHeight)
+            .on('blur', textChanged)
+            .on('change', textChanged);
+
+        // If All Fields section is hidden, focus textarea and put cursor at end..
+        var fieldsExpanded = d3_select('.hide-toggle-preset_fields.expanded').size();
+        if (_state !== 'hover' && _tagView === 'text' && !fieldsExpanded) {
+            var element = textarea.node();
+            element.focus();
+            element.setSelectionRange(textData.length, textData.length);
+        }
+
+
+        // View as List
         var list = wrap.selectAll('.tag-list')
             .data([0]);
 
         list = list.enter()
             .append('ul')
-            .attr('class', 'tag-list')
+            .attr('class', 'tag-list' + (_tagView !== 'list' ? ' hide' : ''))
             .merge(list);
 
 
@@ -90,7 +163,7 @@ export function uiRawTagEditor(context) {
             .data([0])
             .enter()
             .append('div')
-            .attr('class', 'add-row');
+            .attr('class', 'add-row' + (_tagView !== 'list' ? ' hide' : ''));
 
         addRowEnter
             .append('button')
@@ -217,6 +290,75 @@ export function uiRawTagEditor(context) {
         }
 
 
+        function setTextareaHeight() {
+            if (_tagView !== 'text') return;
+
+            var selection = d3_select(this);
+            selection.style('height', null);
+            selection.style('height', selection.node().scrollHeight + 5 + 'px');
+        }
+
+
+        function stringify(s) {
+            return JSON.stringify(s).slice(1, -1);   // without leading/trailing "
+        }
+
+        function unstringify(s) {
+            var leading = '';
+            var trailing = '';
+            if (s.length < 1 || s.charAt(0) !== '"') {
+                leading = '"';
+            }
+            if (s.length < 2 || s.charAt(s.length - 1) !== '"' ||
+                (s.charAt(s.length - 1) === '"' && s.charAt(s.length - 2) === '\\')
+            ) {
+                trailing = '"';
+            }
+            return JSON.parse(leading + s + trailing);
+        }
+
+
+        function rowsToText(rows) {
+            var str = rows
+                .filter(function(row) { return row.key && row.key.trim() !== ''; })
+                .map(function(row) { return stringify(row.key) + '=' + stringify(row.value); })
+                .join('\n');
+
+            return _state === 'hover' ? str : str + '\n';
+        }
+
+
+        function textChanged() {
+            var newText = this.value.trim();
+            var newTags = {};
+            newText.split('\n').forEach(function(row) {
+                var m = row.match(/^\s*([^=]+)=(.*)$/);
+                if (m !== null) {
+                    var k = unstringify(m[1].trim());
+                    var v = unstringify(m[2].trim());
+                    newTags[k] = v;
+                }
+            });
+
+            var tagDiff = utilTagDiff(_tags, newTags);
+            if (!tagDiff.length) return;
+
+            _pendingChange  = _pendingChange || {};
+
+            tagDiff.forEach(function(change) {
+                if (isReadOnly({ key: change.key })) return;
+
+                if (change.type === '-') {
+                    _pendingChange[change.key] = undefined;
+                } else if (change.type === '+') {
+                    _pendingChange[change.key] = change.newVal || '';
+                }
+            });
+
+            scheduleChange();
+        }
+
+
         function pushMore() {
             if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
                 list.selectAll('li:last-child input.value').node() === this) {
@@ -317,25 +459,7 @@ export function uiRawTagEditor(context) {
                 _pendingChange[kOld] = undefined;
             }
 
-            // if the key looks like "key=value key2=value2", split them up - #5024
-            var keys = (kNew.match(/[\w_]+=/g) || []).map(function (key) { return key.slice(0, -1); });
-            var vals = keys.length === 0
-                    ? []
-                    : kNew
-                        .split(new RegExp(keys.map(function (key) { return key.replace('_', '\\_'); }).join('|')))
-                        .splice(1)
-                        .map(function (val) { return val.slice(1).trim(); });
-
-            if (keys.length > 0) {
-                kNew = keys[0];
-                vNew = vals[0];
-
-                keys.forEach(function (key, i) {
-                    _pendingChange[key] = vals[i];
-                });
-            } else {
-                _pendingChange[kNew] = vNew;
-            }
+            _pendingChange[kNew] = vNew;
 
             d.key = kNew;    // update datum to avoid exit/enter on tag update
             d.value = vNew;
@@ -361,7 +485,12 @@ export function uiRawTagEditor(context) {
             if (d.key === '') {    // removing the blank row
                 _showBlank = false;
                 content(wrap);
+
             } else {
+                // remove from indexedKeys too, so that if the user puts it back,
+                // it will be sorted to the end and not back to its original position
+                _indexedKeys = _indexedKeys.filter(function(row) { return row.key !== d.key; });
+
                 _pendingChange  = _pendingChange || {};
                 _pendingChange[d.key] = undefined;
                 scheduleChange();

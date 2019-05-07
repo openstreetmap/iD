@@ -1,0 +1,18 @@
+{
+    "icon": "fas-cannabis",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "420",
+        "marijuana",
+        "pot",
+        "reefer",
+        "weed"
+    ],
+    "tags": {
+        "shop": "cannabis"
+    },
+    "name": "Cannabis Shop"
+}

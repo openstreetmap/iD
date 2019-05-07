@@ -11,6 +11,12 @@
         "to",
         "from"
     ],
+    "moreFields": [
+        "maxheight",
+        "maxweight",
+        "opening_hours",
+        "wheelchair"
+    ],
     "tags": {
         "route": "ferry"
     },

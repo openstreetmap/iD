@@ -55,9 +55,12 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
-            'fas-long-arrow-alt-right': {}
+            'fas-i-cursor': {},
+            'fas-long-arrow-alt-right': {},
+            'fas-th-list': {}
         };
 
+        // The Noun Project icons used
         var tnpIcons = {};
 
         // Start clean
@@ -263,7 +266,6 @@ function suggestionsToPresets(presets) {
             geometry: preset.geometry,
             tags: Object.assign({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
-            removeTags: suggestion.tags,
             reference: preset.reference,
             countryCodes: suggestion.countryCodes,
             matchScore: 2,

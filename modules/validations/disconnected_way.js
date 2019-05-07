@@ -2,39 +2,41 @@ import { t } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
+import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationDisconnectedWay() {
     var type = 'disconnected_way';
 
-    var highways = {
-        residential: true, service: true, track: true, unclassified: true, footway: true,
-        path: true, tertiary: true, secondary: true, primary: true, living_street: true,
-        cycleway: true, trunk: true, steps: true, motorway: true, motorway_link: true,
-        pedestrian: true, trunk_link: true, primary_link: true, secondary_link: true,
-        road: true, tertiary_link: true, bridleway: true, raceway: true, corridor: true,
-        bus_guideway: true
-    };
-
     function isTaggedAsHighway(entity) {
-        return highways[entity.tags.highway];
+        return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
+    function isNewRoad(entityId) {
+        return entityId[0] === 'w' && entityId[1] === '-';
+    }
 
     var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
 
         if (!isTaggedAsHighway(entity)) return [];
-        if (!isDisconnectedWay(entity) && !isDisconnectedMultipolygon(entity)) return [];
+
+        if (!isDisconnectedWay(entity) &&
+            !isDisconnectedMultipolygon(entity) &&
+            !isNewRoadUnreachableFromExistingRoads(entity, graph)
+        ) {
+            return [];
+        }
 
         var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
         var entityID = entity.id;
-        var firstID = entity.first();
-        var lastID = entity.last();
 
         if (entity.type === 'way' && !entity.isClosed()) {
+            var firstID = entity.first();
+            var lastID = entity.last();
+
             var first = context.entity(firstID);
             if (first.tags.noexit !== 'yes') {
                 fixes.push(new validationIssueFix({
@@ -61,6 +63,11 @@ export function validationDisconnectedWay() {
                     }
                 }));
             }
+
+        } else {
+            fixes.push(new validationIssueFix({
+                title: t('issues.fix.connect_feature.title')
+            }));
         }
 
         if (!operationDelete([entity.id], context).disabled()) {
@@ -69,7 +76,7 @@ export function validationDisconnectedWay() {
                 title: t('issues.fix.delete_feature.title'),
                 entityIds: [entity.id],
                 onClick: function() {
-                    var id = this.issue.entities[0].id;
+                    var id = this.issue.entityIds[0];
                     var operation = operationDelete([id], context);
                     if (!operation.disabled()) {
                         operation();
@@ -81,9 +88,16 @@ export function validationDisconnectedWay() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.disconnected_way.highway.message', { highway: entityLabel }),
+            message: (isNewRoad(entity.id)
+                ? t('issues.disconnected_way.highway.message_new_road', { highway: entityLabel })
+                : t('issues.disconnected_way.highway.message', { highway: entityLabel })
+            ),
+            tooltip: (isNewRoad(entity.id)
+                ? t('issues.disconnected_way.highway.reference_new_road')
+                : t('issues.disconnected_way.highway.reference')
+            ),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
             fixes: fixes
         })];
 
@@ -115,13 +129,18 @@ export function validationDisconnectedWay() {
 
             return !parents.some(function(parentWay) {
                 if (parentWay === way) return false;   // ignore the way we're testing
+                // count connections to ferry routes as connected
+                if (parentWay.tags.route === 'ferry') return true;
                 if (isTaggedAsHighway(parentWay)) return true;
 
-                return graph.parentMultipolygons(parentWay).some(function(parentRelation) {
+                return graph.parentRelations(parentWay).some(function(parentRelation) {
                     // ignore the relation we're testing, if any
                     if (relation && parentRelation === relation) return false;
 
-                    return isTaggedAsHighway(parentRelation);
+                    if (parentRelation.tags.type === 'route' &&
+                        parentRelation.tags.route === 'ferry') return true;
+
+                    return parentRelation.isMultipolygon() && isTaggedAsHighway(parentRelation);
                 });
             });
         }
@@ -132,6 +151,34 @@ export function validationDisconnectedWay() {
             return graph.childNodes(entity).every(function(vertex) {
                 return vertexIsDisconnected(entity, vertex);
             });
+        }
+
+
+        // check if entity is a new road that cannot eventually connect to any
+        // existing roads
+        function isNewRoadUnreachableFromExistingRoads(entity) {
+            if (!isNewRoad(entity.id) || !isTaggedAsHighway(entity)) return false;
+
+            var visitedWids = new Set();
+            return !connectToExistingRoadOrEntrance(entity, visitedWids);
+        }
+
+
+        function connectToExistingRoadOrEntrance(way, visitedWids) {
+            visitedWids.add(way.id);
+            for (var i = 0; i < way.nodes.length; i++) {
+                var vertex = graph.entity(way.nodes[i]);
+                if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return true;
+
+                var parentWays = graph.parentWays(vertex);
+                for (var j = 0; j < parentWays.length; j++) {
+                    var parentWay = parentWays[j];
+                    if (visitedWids.has(parentWay.id)) continue;
+                    if (isTaggedAsHighway(parentWay) && !isNewRoad(parentWay.id)) return true;
+                    if (connectToExistingRoadOrEntrance(parentWay, visitedWids)) return true;
+                }
+            }
+            return false;
         }
 
 

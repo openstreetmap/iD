@@ -1,10 +1,20 @@
 {
     "fields": [
         "name",
-        "area/highway"
+        "area/highway",
+        "surface"
     ],
     "geometry": [
         "area"
+    ],
+    "terms": [
+        "area:highway",
+        "edge of pavement",
+        "highway area",
+        "highway shape",
+        "pavement",
+        "road shape",
+        "street area"
     ],
     "tags": {
         "area:highway": "*"

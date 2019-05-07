@@ -8,15 +8,7 @@ export function operationOrthogonalize(selectedIDs, context) {
     var _entityID;
     var _entity;
     var _geometry;
-    var _disabled;
     var action = chooseAction();
-    if (action) {
-        action.onCompletion = function() {
-            // revalidate in case a building was squared
-            context.validator().validate();
-        };
-    }
-
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
 
@@ -50,7 +42,12 @@ export function operationOrthogonalize(selectedIDs, context) {
 
     var operation = function() {
         if (!action) return;
+
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 
@@ -59,24 +56,23 @@ export function operationOrthogonalize(selectedIDs, context) {
     };
 
 
+    // don't cache this because the visible extent could change
     operation.disabled = function() {
         if (!action) return '';
-        if (_disabled !== undefined) return _disabled;
 
-        var extent = _entity.extent(context.graph());
-        _disabled = action.disabled(context.graph());
-
-        if (_disabled) {
-            return _disabled;
-        } else if (_geometry !== 'vertex' && extent.percentContainedIn(context.extent()) < 0.8) {
-            return _disabled = 'too_large';
+        var actionDisabled = action.disabled(context.graph());
+        if (actionDisabled) {
+            return actionDisabled;
+        } else if (_geometry !== 'vertex' &&
+                   _entity.extent(context.graph()).percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
         } else if (someMissing()) {
-            return _disabled = 'not_downloaded';
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return _disabled = 'connected_to_hidden';
+            return 'connected_to_hidden';
         }
 
-        return _disabled = false;
+        return false;
 
 
         function someMissing() {

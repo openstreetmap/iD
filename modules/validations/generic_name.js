@@ -59,17 +59,19 @@ export function validationGenericName() {
             severity: 'warning',
             message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
             reference: showReference,
-            entities: [entity],
+            entityIds: [entity.id],
+            hash: generic,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.remove_generic_name.title'),
                     onClick: function() {
-                        var entity = this.issue.entities[0];
+                        var entityId = this.issue.entityIds[0];
+                        var entity = context.entity(entityId);
                         var tags = Object.assign({}, entity.tags);   // shallow copy
                         delete tags.name;
                         context.perform(
-                            actionChangeTags(entity.id, tags),
+                            actionChangeTags(entityId, tags),
                             t('issues.fix.remove_generic_name.annotation')
                         );
                     }

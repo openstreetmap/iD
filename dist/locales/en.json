@@ -892,6 +892,10 @@
             "just_edited": "You just edited OpenStreetMap!",
             "thank_you": "Thank you for improving the map.",
             "thank_you_location": "Thank you for improving the map around {where}.",
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": ", "
+            },
             "help_html": "Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.",
             "help_link_text": "Details",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
@@ -1571,8 +1575,22 @@
                 "title": "Rules"
             },
             "no_issues": {
-                "message": "Everything looks fine",
-                "info": "Any issues will show up here as you edit"
+                "message": {
+                    "everything": "Everything looks fine",
+                    "everything_in_view": "Everything in view looks fine",
+                    "edits": "Your edits look fine",
+                    "edits_in_view": "Your edits in view look fine"
+                },
+                "hidden_issues": {
+                    "none": "Detected issues will appear here",
+                    "elsewhere": "Issues elsewhere: {count}",
+                    "other_features": "Issues with other features: {count}",
+                    "other_features_elsewhere": "Issues elsewhere with other features: {count}",
+                    "disabled_rules": "Issues with disabled rules: {count}",
+                    "disabled_rules_elsewhere": "Issues elsewhere with disabled rules: {count}",
+                    "ignored_issues": "Ignored issues: {count}",
+                    "ignored_issues_elsewhere": "Ignored issues elsewhere: {count}"
+                }
             },
             "options": {
                 "what": {
@@ -1589,6 +1607,7 @@
             "suggested": "Suggested updates:",
             "enable_all": "Enable All",
             "disable_all": "Disable All",
+            "reset_ignored": "Reset Ignored ({count})",
             "fix_one": {
                 "title": "fix"
             },
@@ -1608,8 +1627,7 @@
                 "title": "Very Close Points",
                 "message": "Two points in {way} are very close together",
                 "tip": "Find redundant points in ways",
-                "ref_merge": "Nodes are less than 2 meters away; you may want to merge them.",
-                "ref_move_away": "Nodes are less than 2 meters away but not mergable; you may want to move them further apart."
+                "reference": "Redundant points in a way should be merged or moved apart."
             },
             "crossing_ways": {
                 "title": "Crossings Ways",
@@ -1669,7 +1687,9 @@
                 "tip": "Find unconnected highways and paths",
                 "highway": {
                     "message": "{highway} is disconnected from other roads and paths",
-                    "reference": "Highways should connect to other highways or building entrances."
+                    "message_new_road": "New {highway} is disconnected from existing road network",
+                    "reference": "Highways should connect to other highways or building entrances.",
+                    "reference_new_road": "New roads should connect to existing road network or building entrances."
                 }
             },
             "fixme_tag": {
@@ -1788,6 +1808,9 @@
                     "title": "Connect the ends",
                     "annotation": "Connected the endpoints of a way."
                 },
+                "connect_feature": {
+                    "title": "Connect this feature"
+                },
                 "connect_features": {
                     "title": "Connect the features"
                 },
@@ -1800,8 +1823,14 @@
                 "delete_feature": {
                     "title": "Delete this feature"
                 },
+                "ignore_issue": {
+                    "title": "Ignore this issue"
+                },
                 "merge_points": {
                     "title": "Merge these points"
+                },
+                "move_points_apart": {
+                    "title": "Move these points apart"
                 },
                 "move_tags": {
                     "title": "Move the tags",
@@ -4510,6 +4539,18 @@
                     "name": "Bicycle Parking",
                     "terms": "bike"
                 },
+                "amenity/bicycle_parking/building": {
+                    "name": "Bicycle Parking Garage",
+                    "terms": "Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station"
+                },
+                "amenity/bicycle_parking/lockers": {
+                    "name": "Bicycle Lockers",
+                    "terms": "Bike Lockers"
+                },
+                "amenity/bicycle_parking/shed": {
+                    "name": "Bicycle Shed",
+                    "terms": "Bike Shed"
+                },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
                     "terms": "bike"
@@ -5002,6 +5043,10 @@
                     "name": "Social Facility",
                     "terms": ""
                 },
+                "amenity/social_facility/ambulatory_care": {
+                    "name": "Ambulatory Care",
+                    "terms": ""
+                },
                 "amenity/social_facility/food_bank": {
                     "name": "Food Bank",
                     "terms": ""
@@ -5180,7 +5225,7 @@
                 },
                 "area/highway": {
                     "name": "Road Surface",
-                    "terms": ""
+                    "terms": "area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area"
                 },
                 "attraction/amusement_ride": {
                     "name": "Amusement Ride",
@@ -5330,6 +5375,10 @@
                     "name": "Retaining Wall",
                     "terms": ""
                 },
+                "barrier/sally_port": {
+                    "name": "Sally Port",
+                    "terms": "Postern,castle side gate"
+                },
                 "barrier/stile": {
                     "name": "Stile",
                     "terms": ""
@@ -5478,6 +5527,10 @@
                     "name": "House",
                     "terms": "home,family,residence,dwelling"
                 },
+                "building/houseboat": {
+                    "name": "Houseboat",
+                    "terms": "home,family,residence,dwelling"
+                },
                 "building/hut": {
                     "name": "Hut",
                     "terms": ""
@@ -5598,6 +5651,10 @@
                     "name": "Tailor",
                     "terms": "clothes,suit"
                 },
+                "craft/agricultural_engines": {
+                    "name": "Argricultural Engines Mechanic",
+                    "terms": ""
+                },
                 "craft/basket_maker": {
                     "name": "Basket Maker",
                     "terms": ""
@@ -5662,6 +5719,10 @@
                     "name": "Electronics Repair Shop",
                     "terms": ""
                 },
+                "craft/floorer": {
+                    "name": "Floorer",
+                    "terms": ""
+                },
                 "craft/gardener": {
                     "name": "Gardener",
                     "terms": "landscaper,grounds keeper"
@@ -5682,6 +5743,10 @@
                     "name": "Insulator",
                     "terms": ""
                 },
+                "craft/joiner": {
+                    "name": "Joiner",
+                    "terms": "furniture"
+                },
                 "craft/key_cutter": {
                     "name": "Key Cutter",
                     "terms": ""
@@ -5692,6 +5757,10 @@
                 },
                 "craft/painter": {
                     "name": "Painter",
+                    "terms": ""
+                },
+                "craft/parquet_layer": {
+                    "name": "Parquet Layer",
                     "terms": ""
                 },
                 "craft/photographer": {
@@ -5812,6 +5881,10 @@
                 },
                 "emergency/fire_extinguisher": {
                     "name": "Fire Extinguisher",
+                    "terms": ""
+                },
+                "emergency/fire_hose": {
+                    "name": "Fire Hose",
                     "terms": ""
                 },
                 "emergency/fire_hydrant": {
@@ -6254,6 +6327,30 @@
                     "name": "Castle",
                     "terms": ""
                 },
+                "historic/castle/fortress": {
+                    "name": "Historic Fortress",
+                    "terms": "citadel,military"
+                },
+                "historic/castle/palace": {
+                    "name": "Palace",
+                    "terms": "Royal Residence,royal,king,queen"
+                },
+                "historic/castle/stately": {
+                    "name": "Château",
+                    "terms": "Historic Country House,Stately Home,nobility,gentry,representative"
+                },
+                "historic/city_gate": {
+                    "name": "City Gate",
+                    "terms": "Town Gate"
+                },
+                "historic/fort": {
+                    "name": "Historic Fort",
+                    "terms": "military"
+                },
+                "historic/manor": {
+                    "name": "Manor House",
+                    "terms": "Mansion,gentry,nobility,estate"
+                },
                 "historic/memorial": {
                     "name": "Memorial",
                     "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
@@ -6424,7 +6521,7 @@
                 },
                 "landuse/meadow": {
                     "name": "Meadow",
-                    "terms": ""
+                    "terms": "grazing,hay field,pasture"
                 },
                 "landuse/military": {
                     "name": "Military Area",
@@ -6870,6 +6967,10 @@
                     "name": "Crane",
                     "terms": ""
                 },
+                "man_made/cross": {
+                    "name": "Summit Cross",
+                    "terms": ""
+                },
                 "man_made/cutline": {
                     "name": "Cut line",
                     "terms": ""
@@ -7080,7 +7181,7 @@
                 },
                 "natural/glacier": {
                     "name": "Glacier",
-                    "terms": ""
+                    "terms": "ice,snow"
                 },
                 "natural/grassland": {
                     "name": "Grassland",
@@ -7106,6 +7207,10 @@
                     "name": "Ridge",
                     "terms": "crest"
                 },
+                "natural/rock": {
+                    "name": "Attached Rock / Boulder",
+                    "terms": "boulder,stone,rock"
+                },
                 "natural/saddle": {
                     "name": "Saddle",
                     "terms": "pass,mountain pass,top"
@@ -7129,6 +7234,10 @@
                 "natural/spring": {
                     "name": "Spring",
                     "terms": ""
+                },
+                "natural/stone": {
+                    "name": "Unattached Stone / Boulder",
+                    "terms": "boulder,stone,rock"
                 },
                 "natural/tree_row": {
                     "name": "Tree Row",
@@ -7162,6 +7271,10 @@
                     "name": "Lake",
                     "terms": "lakelet,loch,mere"
                 },
+                "natural/water/moat": {
+                    "name": "Moat",
+                    "terms": ""
+                },
                 "natural/water/pond": {
                     "name": "Pond",
                     "terms": "lakelet,millpond,tarn,pool,mere"
@@ -7177,6 +7290,10 @@
                 "natural/water/stream": {
                     "name": "Stream",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
+                },
+                "natural/water/wastewater": {
+                    "name": "Wastewater Basin",
+                    "terms": "excrement,shit,sewage,wastewater,Settling Basin,Clarifier Basin"
                 },
                 "natural/wetland": {
                     "name": "Wetland",
@@ -7994,6 +8111,10 @@
                     "name": "Candle Shop",
                     "terms": "wax"
                 },
+                "shop/cannabis": {
+                    "name": "Cannabis Shop",
+                    "terms": "420,marijuana,pot,reefer,weed"
+                },
                 "shop/car_parts": {
                     "name": "Car Parts Store",
                     "terms": "automobile,automotive"
@@ -8498,6 +8619,18 @@
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
                 },
+                "tourism/artwork/bust": {
+                    "name": "Bust",
+                    "terms": "figure"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti",
+                    "terms": "Street Artwork,Guerilla Artwork,Graffiti Artwork"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Art Installation",
+                    "terms": "interactive art,intervention art,modern art"
+                },
                 "tourism/artwork/mural": {
                     "name": "Mural",
                     "terms": "fresco,wall painting"
@@ -8601,6 +8734,18 @@
                 "tourism/zoo": {
                     "name": "Zoo",
                     "terms": "animal"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Petting Zoo",
+                    "terms": "Children's Zoo,Children's Farm,Petting Farm,farm animals"
+                },
+                "tourism/zoo/safari": {
+                    "name": "Safari Park",
+                    "terms": "Drive-Through Zoo,Drive-In Zoo"
+                },
+                "tourism/zoo/wildlife": {
+                    "name": "Wildlife Park",
+                    "terms": "indigenous animals"
                 },
                 "traffic_calming": {
                     "name": "Traffic Calming",

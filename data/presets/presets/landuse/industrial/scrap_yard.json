@@ -17,10 +17,6 @@
         "landuse": "industrial",
         "industrial": "scrap_yard"
     },
-    "removeTags": {
-        "landuse": "industrial",
-        "industrial": "scrap_yard"
-    },
     "reference": {
         "key": "industrial",
         "value": "scrap_yard"

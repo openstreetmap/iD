@@ -32,10 +32,6 @@
         "amenity": "clinic",
         "healthcare": "clinic"
     },
-    "removeTags": {
-        "amenity": "clinic",
-        "healthcare": "clinic"
-    },
     "reference": {
         "key": "amenity",
         "value": "clinic"

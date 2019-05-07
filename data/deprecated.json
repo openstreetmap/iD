@@ -149,6 +149,18 @@
       "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
     },
     {
+      "old": {"artwork": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
+      "old": {"artwork:type": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
+      "old": {"attraction": "ferris_wheel"},
+      "replace": {"attraction": "big_wheel"}
+    },
+    {
       "old": {"barrier": "curb"},
       "replace": {"barrier": "kerb"}
     },
@@ -203,6 +215,14 @@
     {
       "old": {"craft": "glass"},
       "replace": {"craft": "glaziery"}
+    },
+    {
+      "old": {"craft": "catering"},
+      "replace": {"craft": "caterer"}
+    },
+    {
+      "old": {"craft": "sculpter"},
+      "replace": {"craft": "sculptor"}
     },
     {
       "old": {"crossing": "zebra"},
@@ -303,6 +323,10 @@
     {
       "old": {"footway": "separate"},
       "replace": {"sidewalk": "separate"}
+    },
+    {
+      "old": {"generator:source": "photovoltaic"},
+      "replace": {"generator:source": "solar", "generator:method": "photovoltaic"}
     },
     {
       "old": {"highway": "abandoned"},
@@ -526,6 +550,10 @@
       "replace": {"power": "substation"}
     },
     {
+      "old": {"power": "substation", "location": "kiosk"},
+      "replace": {"power": "substation", "man_made": "street_cabinet", "street_cabinet": "power"}
+    },
+    {
       "old": {"power": "underground_cable"},
       "replace": {"power": "cable", "location": "underground"}
     },
@@ -536,6 +564,18 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"recommended_speed": "*"},
+      "replace": {"maxspeed:advisory": "$1"}
+    },
+    {
+      "old": {"recommended_speed:backward": "*"},
+      "replace": {"maxspeed:advisory:backward": "$1"}
+    },
+    {
+      "old": {"recommended_speed:forward": "*"},
+      "replace": {"maxspeed:advisory:forward": "$1"}
     },
     {
       "old": {"reservations": "*"},

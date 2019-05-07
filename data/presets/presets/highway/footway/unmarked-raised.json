@@ -20,12 +20,6 @@
         "crossing": "unmarked",
         "traffic_calming": "table"
     },
-    "removeTags": {
-        "highway": "footway",
-        "footway": "crossing",
-        "crossing": "unmarked",
-        "traffic_calming": "table"
-    },
     "reference": {
         "key": "traffic_calming",
         "value": "table"

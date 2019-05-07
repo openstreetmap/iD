@@ -21,11 +21,6 @@
         "sport": "running",
         "highway": "footway"
     },
-    "removeTags": {
-        "leisure": "track",
-        "sport": "running",
-        "highway": "footway"
-    },
     "terms": [
         "athletics track",
         "decathlon",

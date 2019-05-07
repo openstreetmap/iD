@@ -5,7 +5,6 @@ import { utilGetAllNodes } from '../util/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var _disabled;
     var vertexIDs = [];
     var wayIDs = [];
     var otherIDs = [];
@@ -57,6 +56,8 @@ export function operationDisconnect(selectedIDs, context) {
         context.perform(function(graph) {
             return actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
+
+        context.validator().validate();
     };
 
 
@@ -76,28 +77,21 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (_disabled !== undefined) return _disabled;
-
+        var reason;
         for (var actionIndex in actions) {
-            var action = actions[actionIndex];
-            var actionReason = action.disabled(context.graph());
-            if (actionReason) {
-                _disabled = actionReason;
-                break;
-            }
+            reason = actions[actionIndex].disabled(context.graph());
+            if (reason) return reason;
         }
 
-        if (_disabled) {
-            return _disabled;
-        } else if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
-            return _disabled = 'too_large.single';
+        if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large.single';
         } else if (disconnectingWayID && someMissing()) {
-            return _disabled = 'not_downloaded';
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return _disabled = 'connected_to_hidden';
+            return 'connected_to_hidden';
         }
 
-        return _disabled = false;
+        return false;
 
 
         function someMissing() {

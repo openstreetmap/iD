@@ -15,10 +15,6 @@
         "landuse": "military",
         "military": "office"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "office"
-    },
     "terms": [
         "air force",
         "army",

@@ -13,11 +13,6 @@
         "sport": "beachvolleyball",
         "surface": "sand"
     },
-    "removeTags": {
-        "leisure": "pitch",
-        "sport": "beachvolleyball",
-        "surface": "sand"
-    },
     "reference": {
         "key": "sport",
         "value": "beachvolleyball"

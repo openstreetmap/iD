@@ -66,16 +66,14 @@ export function uiEntityIssues(context) {
             .attr('class', function(d) { return 'issue severity-' + d.severity; })
             .on('mouseover.highlight', function(d) {
                 // don't hover-highlight the selected entity
-                var ids = d.entities
-                    .filter(function(e) { return e.id !== _entityID; })
-                    .map(function(e) { return e.id; });
+                var ids = d.entityIds
+                    .filter(function(e) { return e !== _entityID; });
 
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
-                var ids = d.entities
-                    .filter(function(e) { return e.id !== _entityID; })
-                    .map(function(e) { return e.id; });
+                var ids = d.entityIds
+                    .filter(function(e) { return e !== _entityID; });
 
                 utilHighlightEntities(ids, false, context);
             });
@@ -189,10 +187,10 @@ export function uiEntityIssues(context) {
             })
             .on('click', function(d) {
                 if (d.onClick) {
-                    var issueEntityIDs = d.issue.entities.map(function(e) { return e.id; });
+                    var issueEntityIDs = d.issue.entityIds;
                     utilHighlightEntities(issueEntityIDs.concat(d.entityIds), false, context);
                     d.onClick();
-                    context.validator().validate();
+                    window.setTimeout(function() { context.validator().validate(); }, 300);  // after any transition
                 }
             })
             .on('mouseover.highlight', function(d) {

@@ -10,16 +10,15 @@ export function operationCircularize(selectedIDs, context) {
     var extent = entity.extent(context.graph());
     var geometry = context.geometry(entityID);
     var action = actionCircularize(entityID, context.projection);
-    action.onCompletion = function() {
-        // revalidate in case this is a building that's no longer squarable
-        context.validator().validate();
-    };
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var _disabled;
 
     var operation = function() {
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 
@@ -30,21 +29,20 @@ export function operationCircularize(selectedIDs, context) {
     };
 
 
+    // don't cache this because the visible extent could change
     operation.disabled = function() {
-        if (_disabled !== undefined) return _disabled;
-
-        _disabled = action.disabled(context.graph());
-        if (_disabled) {
-            return _disabled;
+        var actionDisabled = action.disabled(context.graph());
+        if (actionDisabled) {
+            return actionDisabled;
         } else if (extent.percentContainedIn(context.extent()) < 0.8) {
-            return _disabled = 'too_large';
+            return 'too_large';
         } else if (someMissing()) {
-            return _disabled = 'not_downloaded';
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return _disabled = 'connected_to_hidden';
+            return 'connected_to_hidden';
         }
 
-        return _disabled = false;
+        return false;
 
 
         function someMissing() {

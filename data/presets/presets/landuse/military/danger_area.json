@@ -15,10 +15,6 @@
         "landuse": "military",
         "military": "danger_area"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "danger_area"
-    },
     "terms": [
         "air force",
         "army",

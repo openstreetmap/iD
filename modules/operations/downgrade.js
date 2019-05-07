@@ -8,7 +8,6 @@ import { uiCmd } from '../ui/cmd';
 export function operationDowngrade(selectedIDs, context) {
     var affectedFeatureCount = 0;
     var downgradeType;
-    var _disabled;
 
     setDowngradeTypeForEntityIDs();
 
@@ -83,6 +82,8 @@ export function operationDowngrade(selectedIDs, context) {
             return graph;
         }, operation.annotation());
 
+        context.validator().validate();
+
         // refresh the select mode to enable the delete operation
         context.enter(modeSelect(context, selectedIDs));
     };
@@ -94,12 +95,10 @@ export function operationDowngrade(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        if (_disabled !== undefined) return _disabled;
-
         if (selectedIDs.some(hasWikidataTag)) {
-            return _disabled = 'has_wikidata_tag';
+            return 'has_wikidata_tag';
         }
-        return _disabled = false;
+        return false;
 
         function hasWikidataTag(id) {
             var entity = context.entity(id);

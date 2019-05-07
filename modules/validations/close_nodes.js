@@ -3,86 +3,96 @@ import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
-import { geoExtent } from '../geo';
+import { geoSphericalDistance } from '../geo';
 
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
+    var thresholdMeters = 0.2;
 
+    function getIssuesForWay(way, context) {
+        if (!way.tags.highway ||
+            !osmRoutableHighwayTagValues[way.tags.highway] ||
+            way.nodes.length < 2) return [];
 
-    function isNodeOnRoad(node, context) {
+        var issues = [],
+            nodes = context.graph().childNodes(way);
+        for (var i = 0; i < nodes.length - 1; i++) {
+            var node1 = nodes[i];
+            var node2 = nodes[i+1];
+
+            var issue = getIssueIfAny(node1, node2, way, context);
+            if (issue) issues.push(issue);
+        }
+        return issues;
+    }
+
+    function getIssuesForNode(node, context) {
+        var issues = [];
+
+        function checkForCloseness(node1, node2, way) {
+            var issue = getIssueIfAny(node1, node2, way, context);
+            if (issue) issues.push(issue);
+        }
+
         var parentWays = context.graph().parentWays(node);
+
         for (var i = 0; i < parentWays.length; i++) {
             var parentWay = parentWays[i];
-            if (osmRoutableHighwayTagValues[parentWay.tags.highway]) {
-                return parentWay;
+
+            if (!parentWay.tags.highway || !osmRoutableHighwayTagValues[parentWay.tags.highway]) continue;
+
+            var lastIndex = parentWay.nodes.length - 1;
+            for (var j = 0; j < parentWay.nodes.length; j++) {
+                if (j !== 0) {
+                    if (parentWay.nodes[j-1] === node.id) {
+                        checkForCloseness(node, context.entity(parentWay.nodes[j]), parentWay);
+                    }
+                }
+                if (j !== lastIndex) {
+                    if (parentWay.nodes[j+1] === node.id) {
+                        checkForCloseness(context.entity(parentWay.nodes[j]), node, parentWay);
+                    }
+                }
             }
         }
-        return false;
+
+        return issues;
     }
 
-    function findDupeNode(node, context) {
-        var epsilon = 2e-5,
-            extent = geoExtent([
-                [node.loc[0] - epsilon, node.loc[1] - epsilon],
-                [node.loc[0] + epsilon, node.loc[1] + epsilon]
-            ]);
-        var filteredEnts = context.intersects(extent);
-        for (var i = 0; i < filteredEnts.length; i++) {
-            var entity = filteredEnts[i];
-            if (entity.type === 'node' && entity.id !== node.id &&
-                Math.abs(node.loc[0] - entity.loc[0]) < epsilon &&
-                Math.abs(node.loc[1] - entity.loc[1]) < epsilon &&
-                isNodeOnRoad(entity, context) ) {
-                return entity;
-            }
+    function getIssueIfAny(node1, node2, way, context) {
+        if (node1.id === node2.id ||
+            (node1.hasInterestingTags() && node2.hasInterestingTags()) ||
+            geoSphericalDistance(node1.loc, node2.loc) >= thresholdMeters) {
+            return null;
         }
-        return null;
-    }
 
-
-    var validation = function(entity, context) {
-
-        if (entity.type !== 'node') return [];
-
-        var road = isNodeOnRoad(entity, context);
-        if (!road) return [];
-
-        var dupe = findDupeNode(entity, context);
-        if (dupe === null) return [];
-
-        var mergable = !operationMerge([entity.id, dupe.id], context).disabled();
-        var fixes = [];
-        if (mergable) {
-            fixes.push(
+        return new validationIssue({
+            type: type,
+            severity: 'warning',
+            message: t('issues.close_nodes.message', { way: utilDisplayLabel(way, context) }),
+            reference: showReference,
+            entityIds: [node1.id, node2.id, way.id],
+            loc: node1.loc,
+            fixes: [
                 new validationIssueFix({
                     icon: 'iD-icon-plus',
                     title: t('issues.fix.merge_points.title'),
                     onClick: function() {
-                        var entities = this.issue.entities,
-                            operation = operationMerge([entities[0].id, entities[1].id], context);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
+                        var entityIds = this.issue.entityIds;
+                        var operation = operationMerge([entityIds[0], entityIds[1]], context);
+                        operation();
                     }
+                }),
+                new validationIssueFix({
+                    icon: 'iD-operation-disconnect',
+                    title: t('issues.fix.move_points_apart.title')
                 })
-            );
-        }
-
-        return [new validationIssue({
-            type: type,
-            severity: 'warning',
-            message: t('issues.close_nodes.message', { way: utilDisplayLabel(road, context) }),
-            reference: showReference,
-            entities: [entity, dupe],
-            fixes: fixes
-        })];
-
+            ]
+        });
 
         function showReference(selection) {
-            var referenceText = mergable
-                ? t('issues.close_nodes.ref_merge')
-                : t('issues.close_nodes.ref_move_away');
+            var referenceText = t('issues.close_nodes.reference');
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -90,6 +100,16 @@ export function validationCloseNodes() {
                 .attr('class', 'issue-reference')
                 .text(referenceText);
         }
+    }
+
+
+    var validation = function(entity, context) {
+        if (entity.type === 'node') {
+            return getIssuesForNode(entity, context);
+        } else if (entity.type === 'way') {
+            return getIssuesForWay(entity, context);
+        }
+        return [];
     };
 
 

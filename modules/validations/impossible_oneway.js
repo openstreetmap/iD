@@ -85,7 +85,9 @@ export function validationImpossibleOneway() {
 
         if (attachedOneways.length) {
             var connectedEndpointsOkay = attachedOneways.some(function(attachedOneway) {
-                return (isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID;
+                if ((isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID) return true;
+                if (nodeOccursMoreThanOnce(attachedOneway, nodeID)) return true;
+                return false;
             });
             if (connectedEndpointsOkay) return [];
         }
@@ -98,7 +100,7 @@ export function validationImpossibleOneway() {
                 title: t('issues.fix.reverse_feature.title'),
                 entityIds: [way.id],
                 onClick: function() {
-                    var id = this.issue.entities[0].id;
+                    var id = this.issue.entityIds[0];
                     context.perform(actionReverse(id), t('operations.reverse.annotation'));
                 }
             }));
@@ -108,8 +110,8 @@ export function validationImpossibleOneway() {
                 icon: 'iD-operation-continue' + (isFirst ? '-left' : ''),
                 title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                 onClick: function() {
-                    var entityID = this.issue.entities[0].id;
-                    var vertexID = this.issue.entities[1].id;
+                    var entityID = this.issue.entityIds[0];
+                    var vertexID = this.issue.entityIds[1];
                     var way = context.entity(entityID);
                     var vertex = context.entity(vertexID);
                     continueDrawing(way, vertex, context);
@@ -120,7 +122,7 @@ export function validationImpossibleOneway() {
         var placement = isFirst ? 'start' : 'end',
             messageID = wayType + '.',
             referenceID = wayType + '.';
-            
+
         if (isWaterway) {
             messageID += 'connected.' + placement;
             referenceID += 'connected';
@@ -137,7 +139,7 @@ export function validationImpossibleOneway() {
                 feature: utilDisplayLabel(way, context)
             }),
             reference: getReference(referenceID),
-            entities: [way, node],
+            entityIds: [way.id, node.id],
             fixes: fixes
         })];
 

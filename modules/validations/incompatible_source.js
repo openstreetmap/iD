@@ -22,7 +22,7 @@ export function validationIncompatibleSource() {
                             feature: utilDisplayLabel(entity, context),
                         }),
                         reference: getReference(invalidSource.id),
-                        entities: [entity],
+                        entityIds: [entity.id],
                         fixes: [
                             new validationIssueFix({
                                 title: t('issues.fix.remove_proprietary_data.title')

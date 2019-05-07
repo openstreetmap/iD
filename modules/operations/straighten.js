@@ -13,7 +13,6 @@ export function operationStraighten(selectedIDs, context) {
     var coords = nodes.map(function(n) { return n.loc; });
     var action = chooseAction();
     var geometry;
-    var _disabled;
 
 
     function chooseAction() {
@@ -71,7 +70,12 @@ export function operationStraighten(selectedIDs, context) {
 
     function operation() {
         if (!action) return;
+
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     }
 
 
@@ -81,18 +85,16 @@ export function operationStraighten(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (_disabled !== undefined) return _disabled;
-
-        _disabled = action.disabled(context.graph());
-        if (_disabled) {
-            return _disabled;
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
         } else if (someMissing()) {
-            return _disabled = 'not_downloaded';
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            return _disabled = 'connected_to_hidden';
+            return 'connected_to_hidden';
         }
 
-        return _disabled = false;
+        return false;
 
 
         function someMissing() {

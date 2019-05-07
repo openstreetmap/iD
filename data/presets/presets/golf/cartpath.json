@@ -15,11 +15,6 @@
         "golf_cart": "designated",
         "highway": "service"
     },
-    "removeTags": {
-        "golf": "cartpath",
-        "golf_cart": "designated",
-        "highway": "service"
-    },
     "reference": {
         "key": "golf",
         "value": "cartpath"

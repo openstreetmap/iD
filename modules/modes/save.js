@@ -471,7 +471,7 @@ export function modeSave(context) {
 
 
     // Reverse geocode current map location so we can display a message on
-    // the success screen like "Thank you for editing around city, state."
+    // the success screen like "Thank you for editing around place, region."
     function loadLocation() {
         _location = null;
         if (!services.geocoder) return;
@@ -479,14 +479,14 @@ export function modeSave(context) {
         services.geocoder.reverse(context.map().center(), function(err, result) {
             if (err || !result || !result.address) return;
 
-            var parts = [];
             var addr = result.address;
-            var city = addr && (addr.town || addr.city || addr.county);
-            if (city) parts.push(city);
-            var region = addr && (addr.state || addr.country);
-            if (region) parts.push(region);
+            var place = (addr && (addr.town || addr.city || addr.county)) || '';
+            var region = (addr && (addr.state || addr.country)) || '';
+            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
 
-            _location = parts.join(', ');
+            _location = t('success.thank_you_where.format',
+                { place: place, separator: separator, region: region }
+            );
         });
     }
 

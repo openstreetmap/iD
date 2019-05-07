@@ -17,7 +17,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCallWhenIdle, utilCleanTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -25,6 +25,7 @@ export function uiEntityEditor(context) {
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
+    var _scrolled = false;
     var _base;
     var _entityID;
     var _activePreset;
@@ -83,7 +84,8 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body');
+            .attr('class', 'inspector-body')
+            .on('scroll.entity-editor', function() { _scrolled = true; });
 
         bodyEnter
             .append('div')
@@ -327,9 +329,14 @@ export function uiEntityEditor(context) {
         _coalesceChanges = false;
 
         // reset the scroll to the top of the inspector (warning: triggers reflow)
-        var body = d3_selectAll('.entity-editor-pane .inspector-body');
-        if (!body.empty()) {
-            body.node().scrollTop = 0;
+        if (_scrolled) {
+            utilCallWhenIdle(function() {
+                var body = d3_selectAll('.entity-editor-pane .inspector-body');
+                if (!body.empty()) {
+                    _scrolled = false;
+                    body.node().scrollTop = 0;
+                }
+            })();
         }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);
