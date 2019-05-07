@@ -336,3 +336,19 @@ g.vertex.highlighted .shadow {
 .surface.tr g.vertex.related.only .shadow {
     stroke: #68f;
 }
+
+.highlight-edited g.points > circle.vertex.edited {
+    color: rgb(87, 201, 44);
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-opacity: 1;
+    fill-opacity: 1;
+}
+.highlight-edited g.lines > path.line.edited {
+    color: rgb(87, 201, 44);
+    stroke-width: 9;
+    stroke-opacity: 1;
+ }
+.low-zoom.highlight-edited g.lines > path.line.edited {
+     stroke-width: 7;
+}

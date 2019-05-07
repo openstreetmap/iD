@@ -602,6 +602,10 @@ en:
         title: Custom Map Data
         zoom: Zoom to data
     fill_area: Fill Areas
+    highlight_way_edits:
+      description: Highlight edited nodes and segments attached to those nodes in ways
+      tooltip: Highlight way edits in the current session.
+      key: G
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
@@ -1861,6 +1865,7 @@ en:
         wireframe: "Toggle wireframe mode"
         osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
+        highlight_way_edits: "Highlight way edits in current session"
       selecting:
         title: "Selecting features"
         select_one: "Select a single feature"
