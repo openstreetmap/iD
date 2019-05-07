@@ -9,7 +9,7 @@ export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
         var issuesBySeverity = context.validator()
-            .getIssuesBySeverity({ what: 'edited', where: 'all' });
+            .getIssuesBySeverity({ what: 'edited', where: 'all', includeDisabledRules: true });
 
         for (var severity in issuesBySeverity) {
             var issues = issuesBySeverity[severity];
