@@ -2,7 +2,6 @@ import { operationMerge } from '../operations/index';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
-import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { geoSphericalDistance } from '../geo';
 
 
@@ -11,9 +10,7 @@ export function validationCloseNodes() {
     var thresholdMeters = 0.2;
 
     function getIssuesForWay(way, context) {
-        if (!way.tags.highway ||
-            !osmRoutableHighwayTagValues[way.tags.highway] ||
-            way.nodes.length < 2) return [];
+        if (way.nodes.length < 2) return [];
 
         var issues = [],
             nodes = context.graph().childNodes(way);
@@ -39,8 +36,6 @@ export function validationCloseNodes() {
 
         for (var i = 0; i < parentWays.length; i++) {
             var parentWay = parentWays[i];
-
-            if (!parentWay.tags.highway || !osmRoutableHighwayTagValues[parentWay.tags.highway]) continue;
 
             var lastIndex = parentWay.nodes.length - 1;
             for (var j = 0; j < parentWay.nodes.length; j++) {
@@ -72,7 +67,7 @@ export function validationCloseNodes() {
             severity: 'warning',
             message: t('issues.close_nodes.message', { way: utilDisplayLabel(way, context) }),
             reference: showReference,
-            entityIds: [node1.id, node2.id, way.id],
+            entityIds: [way.id, node1.id, node2.id],
             loc: node1.loc,
             fixes: [
                 new validationIssueFix({
@@ -80,7 +75,7 @@ export function validationCloseNodes() {
                     title: t('issues.fix.merge_points.title'),
                     onClick: function() {
                         var entityIds = this.issue.entityIds;
-                        var operation = operationMerge([entityIds[0], entityIds[1]], context);
+                        var operation = operationMerge([entityIds[1], entityIds[2]], context);
                         operation();
                     }
                 }),
