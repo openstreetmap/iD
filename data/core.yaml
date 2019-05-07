@@ -1444,11 +1444,11 @@ en:
           message: "{feature} has no outlet"
           reference: "One-way roads must lead to other roads."
     unsquare_way:
-      title: Unsquare Buildings
-      message: "{feature} isn't quite square"
-      tip: "Find buildings with nearly square corners"
+      title: Unsquare Corners
+      message: "{feature} has unsquare corners"
+      tip: "Find features with unsquare corners that can be drawn better"
       buildings:
-        reference: "Buildings that are almost square should be squared."
+        reference: "Buildings with unsquare corners can often be drawn more accurately."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
