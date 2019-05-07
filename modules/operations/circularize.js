@@ -31,7 +31,6 @@ export function operationCircularize(selectedIDs, context) {
 
     // don't cache this because the visible extent could change
     operation.disabled = function() {
-
         var actionDisabled = action.disabled(context.graph());
         if (actionDisabled) {
             return actionDisabled;
