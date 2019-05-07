@@ -71,18 +71,18 @@ export function uiEditMenu(context, operations) {
             .attr('stroke-linecap', 'round');
 
 
-        var button = menu.selectAll('.edit-menu-item')
+        var buttons = menu.selectAll('.edit-menu-item')
             .data(operations);
 
         // enter
-        var buttonEnter = button.enter()
+        var buttonsEnter = buttons.enter()
             .append('g')
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
             .attr('transform', function(d, i) {
                 return 'translate(' + geoVecFloor([0, m + i * buttonHeight]).join(',') + ')';
             });
 
-        buttonEnter
+        buttonsEnter
             .append('rect')
             .attr('x', 4)
             .attr('width', buttonWidth)
@@ -92,7 +92,7 @@ export function uiEditMenu(context, operations) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        buttonEnter
+        buttonsEnter
             .append('use')
             .attr('width', '20')
             .attr('height', '20')
@@ -100,8 +100,8 @@ export function uiEditMenu(context, operations) {
             .attr('xlink:href', function (d) { return '#iD-operation-' + d.id; });
 
         // update
-        button = buttonEnter
-            .merge(button)
+        buttons = buttonsEnter
+            .merge(buttons)
             .classed('disabled', function(d) { return d.disabled(); });
 
 
@@ -149,6 +149,12 @@ export function uiEditMenu(context, operations) {
                 .style('top', tipY + 'px')
                 .style('display', 'block')
                 .html(uiTooltipHtml(d.tooltip(), d.keys[0], d.title));
+
+            // update disabled again, just in case tooltip and disabled state disagree
+            // https://github.com/openstreetmap/iD/issues/6296#issuecomment-489259027
+            d3_select(this.parentNode)
+                .classed('disabled', d.disabled());
+
         }
 
         function mouseout() {
