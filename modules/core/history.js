@@ -118,6 +118,11 @@ export function coreHistory(context) {
         },
 
 
+        peekAnnotation: function() {
+            return _stack[_index].annotation; 
+        }, 
+
+        
         merge: function(entities, extent) {
             var stack = _stack.map(function(state) { return state.graph; });
             _stack[0].graph.rebase(entities, stack, false);

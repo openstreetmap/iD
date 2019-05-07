@@ -309,6 +309,12 @@ en:
       description: Make this line go in the opposite direction.
       key: V
       annotation: Reversed a line.
+    cycle_highway_tag:
+      title: Cycle Highway Tag
+      description: Shortcut to cycle selected highway through several different tags.
+      key: C
+      annotation: Changed highway tag of selected way.
+      restriction: This operation is only permitted for highways and untagged lines.
     split:
       title: Split
       description:
@@ -1855,6 +1861,7 @@ en:
         reflect_long: "Reflect features across the longer axis"
         reflect_short: "Reflect features across the shorter axis"
         delete: "Delete selected features"
+        cycle_highway_tag: "Change selected road type"
       commands:
         title: "Commands"
         copy: "Copy selected features"

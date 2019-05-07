@@ -280,6 +280,11 @@
               "modifiers": ["⌘"],
               "shortcuts": ["⌫"],
               "text": "shortcuts.editing.operations.delete"
+            }, 
+            {
+              "modifiers": ["⇧"],
+              "shortcuts": ["operations.cycle_highway_tag.key"],
+              "text": "shortcuts.editing.operations.cycle_highway_tag"
             }
           ]
         }
