@@ -65,6 +65,12 @@ export function validationImpossibleOneway() {
 
         var node = context.hasEntity(nodeID);
 
+        if (wayType === 'highway') {
+            // entrances are considered connected
+            if (node.tags.entrance && node.tags.entrance !== 'no') return [];
+            if (node.tags.amenity === 'parking_entrance') return [];
+        }
+
         // ignore if this node or its tile are unloaded
         if (!node || !osm.isDataLoaded(node.loc)) return [];
 

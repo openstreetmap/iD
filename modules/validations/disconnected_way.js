@@ -122,6 +122,7 @@ export function validationDisconnectedWay() {
 
             // entrances are considered connected
             if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return false;
+            if (vertex.tags.amenity === 'parking_entrance') return false;
 
             return !parents.some(function(parentWay) {
                 if (parentWay === way) return false;   // ignore the way we're testing
