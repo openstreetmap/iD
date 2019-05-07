@@ -135,9 +135,12 @@ export function validationImpossibleOneway() {
             type: type,
             subtype: wayType,
             severity: 'warning',
-            message: t('issues.impossible_oneway.' + messageID + '.message', {
-                feature: utilDisplayLabel(way, context)
-            }),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.impossible_oneway.' + messageID + '.message', {
+                    feature: utilDisplayLabel(entity, context)
+                }) : '';
+            },
             reference: getReference(referenceID),
             entityIds: [way.id, node.id],
             fixes: fixes

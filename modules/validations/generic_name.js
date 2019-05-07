@@ -53,11 +53,15 @@ export function validationGenericName() {
         var generic = isGenericName(entity);
         if (!generic) return [];
 
-        var preset = utilPreset(entity, context);
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                if (!entity) return '';
+                var preset = utilPreset(entity, context);
+                return t('issues.generic_name.message', { feature: preset.name(), name: generic });
+            },
             reference: showReference,
             entityIds: [entity.id],
             hash: generic,

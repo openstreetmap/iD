@@ -403,11 +403,6 @@ export function validationCrossingWays() {
             crossingTypeID += '_connectable';
         }
 
-        var messageDict = {
-            feature: utilDisplayLabel(entities[0], context),
-            feature2: utilDisplayLabel(entities[1], context)
-        };
-
         var fixes = [];
         if (connectionTags) {
             fixes.push(new validationIssueFix({
@@ -485,7 +480,14 @@ export function validationCrossingWays() {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.crossing_ways.message', messageDict),
+            message: function() {
+                var entity1 = context.hasEntity(this.entityIds[0]),
+                    entity2 = context.hasEntity(this.entityIds[1]);
+                return (entity1 && entity2) ? t('issues.crossing_ways.message', {
+                    feature: utilDisplayLabel(entity1, context),
+                    feature2: utilDisplayLabel(entity2, context)
+                }) : '';
+            },
             reference: showReference,
             entityIds: entities.map(function(entity) {
                 return entity.id;

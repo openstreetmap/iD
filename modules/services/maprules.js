@@ -218,11 +218,14 @@ export default {
                     var severity = Object.keys(selector).indexOf('error') > -1
                             ? 'error'
                             : 'warning';
+                    var message = selector[severity];
                     issues.push(new validationIssue({
                         type: 'maprules',
                         severity: severity,
-                        message: selector[severity],
-                        entityIds: [entity.id],
+                        message: function() {
+                            return message;
+                        },
+                        entityIds: [entity.id]
                     }));
                 }
             }

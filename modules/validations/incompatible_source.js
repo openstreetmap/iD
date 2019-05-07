@@ -18,9 +18,12 @@ export function validationIncompatibleSource() {
                     issues.push(new validationIssue({
                         type: type,
                         severity: 'warning',
-                        message: t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
-                            feature: utilDisplayLabel(entity, context),
-                        }),
+                        message: function() {
+                            var entity = context.hasEntity(this.entityIds[0]);
+                            return entity ? t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
+                                feature: utilDisplayLabel(entity, context)
+                            }) : '';
+                        },
                         reference: getReference(invalidSource.id),
                         entityIds: [entity.id],
                         fixes: [

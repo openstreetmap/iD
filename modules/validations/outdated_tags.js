@@ -55,7 +55,10 @@ export function validationOutdatedTags() {
             type: type,
             subtype: subtype,
             severity: 'warning',
-            message: t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }) : '';
+            },
             reference: showReference,
             entityIds: [entity.id],
             hash: JSON.stringify(tagDiff),
@@ -124,12 +127,14 @@ export function validationOutdatedTags() {
 
         if (!multipolygon || !outerWay) return [];
 
-        var multipolygonLabel = utilDisplayLabel(multipolygon, context);
         return [new validationIssue({
             type: type,
             subtype: 'old_multipolygon',
             severity: 'warning',
-            message: t('issues.old_multipolygon.message', { multipolygon: multipolygonLabel }),
+            message: function() {
+                var entity = context.hasEntity(this.issue.entityIds[1]);
+                return entity ? t('issues.old_multipolygon.message', { multipolygon: utilDisplayLabel(entity, context) }) : '';
+            },
             reference: showReference,
             entityIds: [outerWay.id, multipolygon.id],
             fixes: [

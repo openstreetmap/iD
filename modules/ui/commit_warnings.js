@@ -39,7 +39,7 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(issues, function(d) { return d.id; });
+                .data(issues, function(d) { return d.message() + d.id; });
 
             items.exit()
                 .remove();
@@ -53,7 +53,7 @@ export function uiCommitWarnings(context) {
 
             itemsEnter
                 .append('strong')
-                .text(function(d) { return d.message; });
+                .text(function(d) { return d.message(); });
 
             itemsEnter.filter(function(d) { return d.tooltip; })
                 .call(tooltip()

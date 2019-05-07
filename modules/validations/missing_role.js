@@ -41,10 +41,14 @@ export function validationMissingRole() {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.missing_role.message', {
-                member: utilDisplayLabel(way, context),
-                relation: utilDisplayLabel(relation, context),
-            }),
+            message: function() {
+                var member = context.hasEntity(this.entityIds[1]),
+                    relation = context.hasEntity(this.entityIds[0]);
+                return (member && relation) ? t('issues.missing_role.message', {
+                    member: utilDisplayLabel(member, context),
+                    relation: utilDisplayLabel(relation, context)
+                }) : '';
+            },
             reference: showReference,
             entityIds: [relation.id, way.id],
             data: {

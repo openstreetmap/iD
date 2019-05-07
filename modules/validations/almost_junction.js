@@ -89,10 +89,14 @@ export function validationAlmostJunction() {
             issues.push(new validationIssue({
                 type: type,
                 severity: 'warning',
-                message: t('issues.almost_junction.message', {
-                    feature: utilDisplayLabel(entity, context),
-                    feature2: utilDisplayLabel(edgeHighway, context)
-                }),
+                message: function() {
+                    var entity1 = context.hasEntity(this.entityIds[0]),
+                        entity2 = context.hasEntity(this.entityIds[2]);
+                    return (entity && entity2) ? t('issues.almost_junction.message', {
+                        feature: utilDisplayLabel(entity1, context),
+                        feature2: utilDisplayLabel(entity2, context)
+                    }) : '';
+                },
                 reference: showReference,
                 entityIds: [entity.id, node.id, edgeHighway.id],
                 loc: extendableNodeInfo.node.loc,

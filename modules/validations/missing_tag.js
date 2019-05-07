@@ -43,30 +43,21 @@ export function validationMissingTag() {
             return [];
         }
 
-        var messageObj = {};
-        var missingTagType;
         var subtype;
 
         if (Object.keys(entity.tags).length === 0) {
-            missingTagType = 'any';
             subtype = 'any';
         } else if (!hasDescriptiveTags(entity)) {
-            missingTagType = 'descriptive';
             subtype = 'descriptive';
         } else if (isUntypedRelation(entity)) {
-            missingTagType = 'specific';
-            messageObj.tag = 'type';
             subtype = 'relation_type';
         } else if (isUnknownRoad(entity)) {
-            missingTagType = 'unknown_road';
             subtype = 'highway_classification';
         }
 
-        if (!missingTagType) return [];
+        if (!subtype) return [];
 
-        messageObj.feature = utilDisplayLabel(entity, context);
-
-        var selectFixType = missingTagType === 'unknown_road' ? 'select_road_type' : 'select_preset';
+        var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
 
         var fixes = [
             new validationIssueFix({
@@ -102,16 +93,21 @@ export function validationMissingTag() {
             );
         }
 
-        var messageID = missingTagType === 'unknown_road' ? 'unknown_road' : 'missing_tag.' + missingTagType;
-        var referenceID = missingTagType === 'unknown_road' ? 'unknown_road' : 'missing_tag';
+        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
+        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
 
-        var severity = (canDelete && missingTagType !== 'unknown_road') ? 'error' : 'warning';
+        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
 
         return [new validationIssue({
             type: type,
             subtype: subtype,
             severity: severity,
-            message: t('issues.' + messageID + '.message', messageObj),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.' + messageID + '.message', {
+                    feature: utilDisplayLabel(entity, context)
+                }) : '';
+            },
             reference: showReference,
             entityIds: [entity.id],
             fixes: fixes

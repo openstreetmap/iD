@@ -1732,8 +1732,8 @@
                 "descriptive": {
                     "message": "{feature} has no descriptive tags"
                 },
-                "specific": {
-                    "message": "{feature} has no \"{tag}\" tag"
+                "relation_type": {
+                    "message": "{feature} is a relation without a type"
                 }
             },
             "old_multipolygon": {

@@ -29,7 +29,6 @@ export function validationDisconnectedWay() {
             return [];
         }
 
-        var entityLabel = utilDisplayLabel(entity, context);
         var fixes = [];
         var entityID = entity.id;
 
@@ -84,18 +83,15 @@ export function validationDisconnectedWay() {
                 }
             }));
         }
-
+        var suffix = isNewRoad(entity.id) ? '_new_road' : '';
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: (isNewRoad(entity.id)
-                ? t('issues.disconnected_way.highway.message_new_road', { highway: entityLabel })
-                : t('issues.disconnected_way.highway.message', { highway: entityLabel })
-            ),
-            tooltip: (isNewRoad(entity.id)
-                ? t('issues.disconnected_way.highway.reference_new_road')
-                : t('issues.disconnected_way.highway.reference')
-            ),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.disconnected_way.highway.message' + suffix, { highway: utilDisplayLabel(entity, context) }) : '';
+            },
+            tooltip: t('issues.disconnected_way.highway.reference' + suffix),
             reference: showReference,
             entityIds: [entity.id],
             fixes: fixes

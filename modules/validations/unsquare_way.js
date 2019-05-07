@@ -60,9 +60,10 @@ export function validationUnsquareWay() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.unsquare_way.message', {
-                feature: utilDisplayLabel(entity, context)
-            }),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context) }) : '';
+            },
             reference: showReference,
             entityIds: [entity.id],
             fixes: [

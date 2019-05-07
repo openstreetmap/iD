@@ -4,7 +4,7 @@ export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
     this.subtype = attrs.subtype;          // optional - category of the issue within the type (e.g. 'relation_type' under 'missing_tag')
     this.severity = attrs.severity;        // required - 'warning' or 'error'
-    this.message = attrs.message;          // required - localized string
+    this.message = attrs.message;          // required - function returning localized string
     this.reference = attrs.reference;      // optional - function(selection) to render reference information
     this.entityIds = attrs.entityIds;      // optional - array of IDs of entities involved in the issue
     this.loc = attrs.loc;                  // optional - [lon, lat] to zoom in on to see the issue

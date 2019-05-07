@@ -1402,8 +1402,8 @@ en:
         message: "{feature} has no tags"
       descriptive:
         message: "{feature} has no descriptive tags"
-      specific:
-        message: '{feature} has no "{tag}" tag'
+      relation_type:
+        message: "{feature} is a relation without a type"
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."

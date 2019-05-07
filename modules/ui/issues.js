@@ -73,7 +73,7 @@ export function uiIssues(context) {
 
 
         var items = list.selectAll('li')
-            .data(issues, function(d) { return d.id; });
+            .data(issues, function(d) { return d.message() + d.id; });
 
         // Exit
         items.exit()
@@ -127,7 +127,7 @@ export function uiIssues(context) {
         textEnter
             .append('span')
             .attr('class', 'issue-message')
-            .text(function(d) { return d.message; });
+            .text(function(d) { return d.message(); });
 
 
         labelsEnter

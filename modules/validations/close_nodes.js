@@ -65,7 +65,10 @@ export function validationCloseNodes() {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.close_nodes.message', { way: utilDisplayLabel(way, context) }),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.close_nodes.message', { way: utilDisplayLabel(entity, context) }) : '';
+            },
             reference: showReference,
             entityIds: [way.id, node1.id, node2.id],
             loc: node1.loc,

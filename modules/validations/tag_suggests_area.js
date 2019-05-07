@@ -94,11 +94,16 @@ export function validationTagSuggestsArea() {
             }
         }));
 
-        var featureLabel = utilDisplayLabel(entity, context);
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.tag_suggests_area.message', { feature: featureLabel, tag: tagText }),
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.tag_suggests_area.message', {
+                    feature: utilDisplayLabel(entity, context),
+                    tag: tagText
+                }) : '';
+            },
             reference: showReference,
             entityIds: [entity.id],
             hash: JSON.stringify(tagSuggestingArea),
