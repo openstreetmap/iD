@@ -82,6 +82,10 @@
             {
               "shortcuts": ["background.minimap.key"],
               "text": "shortcuts.browsing.display_options.minimap"
+            }, 
+            {
+              "shortcuts": ["map_data.highlight_way_edits.key"],
+              "text": "shortcuts.browsing.display_options.highlight_way_edits"
             }
           ]
         },
