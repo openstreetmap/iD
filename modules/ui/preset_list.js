@@ -197,7 +197,7 @@ export function uiPresetList(context) {
     function itemKeydown(){
         // the actively focused item
         var item = d3_select(this.closest('.preset-list-item'));
-        var parentItem = d3_select(item.node().parentElement.closest('.preset-list-item'));
+        var parentItem = d3_select(item.node().parentNode.closest('.preset-list-item'));
 
         // arrow down, move focus to the next, lower item
         if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
