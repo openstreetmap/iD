@@ -91,6 +91,7 @@ export function modeDragNode(context) {
 
 
     function shouldSnapToNode(target) {
+        if (!_activeEntity) return false;
         return _activeEntity.geometry(context.graph()) !== 'vertex' ||
             (target.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(target, context.graph()));
     }
