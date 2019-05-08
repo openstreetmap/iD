@@ -292,8 +292,12 @@ export function coreValidator(context) {
 
             if (entity.type === 'node') {   // include parent ways
                 graph.parentWays(entity).forEach(function(parentWay) {
-                    checkParentRels.push(parentWay);
                     acc.add(parentWay.id);
+                    checkParentRels.push(parentWay);
+                });
+            } else if (entity.type === 'relation') {   // include members
+                entity.members.forEach(function(member) {
+                    acc.add(member.id);
                 });
             }
 
@@ -356,8 +360,8 @@ export function coreValidator(context) {
             }
         }
 
-        var entityIDs = difference.extantIDs();  // created and modified
-        difference.deleted().forEach(uncacheEntityID);   // deleted
+        var entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
+        difference.deleted().forEach(uncacheEntityID);  // deleted
 
         validator.validateEntities(entityIDs);   // dispatches 'validated'
     };

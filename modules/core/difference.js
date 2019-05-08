@@ -73,14 +73,30 @@ export function coreDifference(base, head) {
     _diff.didChange = _didChange;
 
 
-    _diff.extantIDs = function extantIDs() {
-        var result = [];
+    // pass true to include affected relation members
+    _diff.extantIDs = function extantIDs(includeRelMembers) {
+        var result = new Set();
         Object.keys(_changes).forEach(function(id) {
             if (_changes[id].head) {
-                result.push(id);
+                result.add(id);
+            }
+
+            var h = _changes[id].head;
+            var b = _changes[id].base;
+            var entity = h || b;
+
+            if (includeRelMembers && entity.type === 'relation') {
+                var mh = h ? h.members.map(function(m) { return m.id; }) : [];
+                var mb = b ? b.members.map(function(m) { return m.id; }) : [];
+                utilArrayUnion(mh, mb).forEach(function(memberID) {
+                    if (head.hasEntity(memberID)) {
+                        result.add(memberID);
+                    }
+                });
             }
         });
-        return result;
+
+        return Array.from(result);
     };
 
 
