@@ -215,7 +215,10 @@ export function coreDifference(base, head) {
                 var mb = b ? b.members.map(function(m) { return m.id; }) : [];
                 var ids = utilArrayUnion(mh, mb);
                 for (i = 0; i < ids.length; i++) {
-                    result[ids[i]] = head.hasEntity(ids[i]);
+                    var member = head.hasEntity(ids[i]);
+                    if (!member) continue;   // not downloaded
+                    if (extent && !member.intersects(extent, head)) continue;   // not visible
+                    result[ids[i]] = member;
                 }
             }
 
