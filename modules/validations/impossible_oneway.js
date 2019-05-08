@@ -9,7 +9,9 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationImpossibleOneway() {
     var type = 'impossible_oneway';
 
-    function typeForWay(way) {
+    function typeForWay(way, context) {
+        if (way.geometry(context.graph()) !== 'line') return null;
+
         if (osmRoutableHighwayTagValues[way.tags.highway]) return 'highway';
         if (osmFlowingWaterwayTagValues[way.tags.waterway]) return 'waterway';
         return null;
@@ -50,12 +52,57 @@ export function validationImpossibleOneway() {
         return false;
     }
 
+    function isConnectedViaOtherTypes(context, way, node) {
+
+        var wayType = typeForWay(way, context);
+
+        if (wayType === 'highway') {
+            // entrances are considered connected
+            if (node.tags.entrance && node.tags.entrance !== 'no') return true;
+            if (node.tags.amenity === 'parking_entrance') return true;
+        } else if (wayType === 'waterway') {
+            if (node.id === way.first()) {
+                // multiple waterways may start at the same spring
+                if (node.tags.natural === 'spring') return true;
+            } else {
+                // multiple waterways may end at the same drain
+                if (node.tags.manhole === 'drain') return true;
+            }
+        }
+
+        return context.graph().parentWays(node).some(function(parentWay) {
+            if (parentWay.id === way.id) return false;
+
+            if (wayType === 'highway') {
+
+                // allow connections to highway areas
+                if (parentWay.geometry(context.graph()) === 'area' &&
+                    osmRoutableHighwayTagValues[parentWay.tags.highway]) return true;
+
+                // count connections to ferry routes as connected
+                if (parentWay.tags.route === 'ferry') return true;
+
+                return context.graph().parentRelations(parentWay).some(function(parentRelation) {
+                    if (parentRelation.tags.type === 'route' &&
+                        parentRelation.tags.route === 'ferry') return true;
+
+                    // allow connections to highway multipolygons
+                    return parentRelation.isMultipolygon() && osmRoutableHighwayTagValues[parentRelation.tags.highway];
+                });
+            } else if (wayType === 'waterway') {
+                // multiple waterways may start or end at a water body at the same node
+                if (parentWay.tags.natural === 'water' ||
+                    parentWay.tags.natural === 'coastline') return true;
+            }
+            return false;
+        });
+    }
+
     function issuesForNode(context, way, nodeID) {
 
         var isFirst = nodeID === way.first();
 
-        var wayType = typeForWay(way);
-        var isWaterway = wayType === 'waterway';
+        var wayType = typeForWay(way, context);
 
         // ignore if this way is self-connected at this node
         if (nodeOccursMoreThanOnce(way, nodeID)) return [];
@@ -65,22 +112,18 @@ export function validationImpossibleOneway() {
 
         var node = context.hasEntity(nodeID);
 
-        if (wayType === 'highway') {
-            // entrances are considered connected
-            if (node.tags.entrance && node.tags.entrance !== 'no') return [];
-            if (node.tags.amenity === 'parking_entrance') return [];
-        }
-
         // ignore if this node or its tile are unloaded
         if (!node || !osm.isDataLoaded(node.loc)) return [];
 
+        if (isConnectedViaOtherTypes(context, way, node)) return [];
+
         var attachedWaysOfSameType = context.graph().parentWays(node).filter(function(parentWay) {
             if (parentWay.id === way.id) return false;
-            return typeForWay(parentWay) === wayType;
+            return typeForWay(parentWay, context) === wayType;
         });
 
         // assume it's okay for waterways to start or end disconnected for now
-        if (isWaterway && attachedWaysOfSameType.length === 0) return [];
+        if (wayType === 'waterway' && attachedWaysOfSameType.length === 0) return [];
 
         var attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
             return isOneway(attachedWay);
@@ -129,7 +172,7 @@ export function validationImpossibleOneway() {
             messageID = wayType + '.',
             referenceID = wayType + '.';
 
-        if (isWaterway) {
+        if (wayType === 'waterway') {
             messageID += 'connected.' + placement;
             referenceID += 'connected';
         } else {
@@ -170,7 +213,7 @@ export function validationImpossibleOneway() {
 
         if (entity.isClosed()) return [];
 
-        if (!typeForWay(entity)) return [];
+        if (!typeForWay(entity, context)) return [];
 
         if (!isOneway(entity)) return [];
 
