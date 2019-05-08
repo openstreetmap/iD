@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "escape"
+    },
+    "terms": [
+        "Runaway Truck Lane",
+        "Emergency Escape Lane",
+        "Emergency Escape Ramp",
+        "Truck Arrester Bed"
+    ],
+    "name": "Runaway Truck Ramp"
+}
