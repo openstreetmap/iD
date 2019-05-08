@@ -40,6 +40,12 @@
     stroke-width: 60px;
     pointer-events: none;
 }
+.fill-partial path.area.fill.tag-building_part {
+    stroke-width: 40px;
+}
+.fill-partial path.area.fill.tag-indoor {
+    stroke-width: 20px;
+}
 .mode-browse .fill-partial path.area.fill,
 .mode-select .fill-partial path.area.fill {
     pointer-events: visibleStroke;
