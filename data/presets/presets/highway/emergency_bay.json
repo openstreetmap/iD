@@ -1,10 +1,11 @@
 {
-    "geometry": [
-        "vertex",
-        "line"
-    ],
+    "icon": "maki-car",
+    "geometry": [ "vertex" ],
     "tags": {
         "highway": "emergency_bay"
     },
-    "name": "Highway Emergency Bay"
+    "terms": [
+        "Highway Emergency Bay"
+    ],
+    "name": "Emergency Stopping Place"
 }
