@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "highway": "emergency_bay"
+    },
+    "name": "Highway Emergency Bay"
+}
