@@ -197,6 +197,8 @@ path.shadow {
     stroke: #f6634f;
     stroke-width: 16;
     stroke-opacity: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 path.shadow.related:not(.selected),
