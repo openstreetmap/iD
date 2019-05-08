@@ -299,6 +299,12 @@ export function coreValidator(context) {
                 entity.members.forEach(function(member) {
                     acc.add(member.id);
                 });
+            } else if (entity.type === 'way') {   // include connected ways
+                entity.nodes.forEach(function(nodeID) {
+                    graph._parentWays[nodeID].forEach(function(wayID) {
+                        acc.add(wayID);
+                    });
+                });
             }
 
             checkParentRels.forEach(function(entity) {   // include parent relations
