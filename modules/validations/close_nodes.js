@@ -2,15 +2,32 @@ import { operationMerge } from '../operations/index';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
-import { geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo/geo';
 
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
     var thresholdMeters = 0.2;
 
+    function shouldCheckWay(way, context) {
+
+        // expect that indoor features may be mapped in very fine detail
+        if (way.tags.indoor) return false;
+
+        // don't flag issues where merging would create degenerate ways
+        if (way.nodes.length <= 2 ||
+            (way.isClosed() && way.nodes.length <= 4)) return false;
+
+        var bbox = way.extent(context.graph()).bbox();
+        var hypotenuseMeters = geoSphericalDistance([bbox.minX, bbox.minY], [bbox.maxX, bbox.maxY]);
+        // don't flag close nodes in very small ways
+        if (hypotenuseMeters < 1.5) return false;
+
+        return true;
+    }
+
     function getIssuesForWay(way, context) {
-        if (way.nodes.length < 2) return [];
+        if (!shouldCheckWay(way, context)) return [];
 
         var issues = [],
             nodes = context.graph().childNodes(way);
@@ -36,6 +53,8 @@ export function validationCloseNodes() {
 
         for (var i = 0; i < parentWays.length; i++) {
             var parentWay = parentWays[i];
+
+            if (!shouldCheckWay(parentWay, context)) continue;
 
             var lastIndex = parentWay.nodes.length - 1;
             for (var j = 0; j < parentWay.nodes.length; j++) {
