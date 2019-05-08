@@ -1,7 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 
 import { geoVecEqual } from '../geo';
-import { utilArrayDifference } from '../util';
+import { utilArrayDifference, utilArrayUnion } from '../util';
 
 
 /*
@@ -173,6 +173,8 @@ export function coreDifference(base, head) {
     };
 
 
+    // returns complete set of entities that require a redraw
+    //  (optionally within given `extent`)
     _diff.complete = function complete(extent) {
         var result = {};
         var id, change;
@@ -183,6 +185,7 @@ export function coreDifference(base, head) {
             var h = change.head;
             var b = change.base;
             var entity = h || b;
+            var i;
 
             if (extent &&
                 (!h || !h.intersects(extent, head)) &&
@@ -194,7 +197,7 @@ export function coreDifference(base, head) {
             if (entity.type === 'way') {
                 var nh = h ? h.nodes : [];
                 var nb = b ? b.nodes : [];
-                var diff, i;
+                var diff;
 
                 diff = utilArrayDifference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
@@ -204,6 +207,15 @@ export function coreDifference(base, head) {
                 diff = utilArrayDifference(nb, nh);
                 for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.hasEntity(diff[i]);
+                }
+            }
+
+            if (entity.type === 'relation' && entity.isMultipolygon()) {
+                var mh = h ? h.members.map(function(m) { return m.id; }) : [];
+                var mb = b ? b.members.map(function(m) { return m.id; }) : [];
+                var ids = utilArrayUnion(mh, mb);
+                for (i = 0; i < ids.length; i++) {
+                    result[ids[i]] = head.hasEntity(ids[i]);
                 }
             }
 

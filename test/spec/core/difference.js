@@ -382,6 +382,22 @@ describe('iD.coreDifference', function () {
             expect(diff.complete().n2).to.equal(n2);
         });
 
+        it('includes multipolygon members', function () {
+            var w1 = iD.osmWay({id: 'w1'});
+            var w2 = iD.osmWay({id: 'w2'});
+            var r1 = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'multipolygon' },
+                members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
+            });
+            var r2 = r1.updateMember({role: 'inner', id: 'w2', type: 'way'}, 1);
+            var base = iD.coreGraph([w1, w2, r1]);
+            var head = base.replace(r2);
+            var diff = iD.coreDifference(base, head);
+
+            expect(diff.complete().w2).to.equal(w2);
+        });
+
         it('includes parent ways of modified nodes', function () {
             var n1   = iD.osmNode({id: 'n'});
             var n2   = n1.move([1, 2]);
