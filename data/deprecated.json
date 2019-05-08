@@ -174,7 +174,7 @@
     },
     {
       "old": {"barrier": "wire_fence"},
-      "replace": {"barrier": "fence", "fence_type": "chain"}
+      "replace": {"barrier": "fence", "fence_type": "wire"}
     },
     {
       "old": {"barrier": "wood_fence"},
