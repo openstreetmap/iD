@@ -6103,6 +6103,10 @@
                     "name": "Elevator",
                     "terms": "lift"
                 },
+                "highway/emergency_bay": {
+                    "name": "Emergency Stopping Place",
+                    "terms": "Highway Emergency Bay"
+                },
                 "highway/footway": {
                     "name": "Foot Path",
                     "terms": "hike,hiking,promenade,trackway,trail,walk"

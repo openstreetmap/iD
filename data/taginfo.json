@@ -448,6 +448,7 @@
     {"key": "cycleway", "value": "crossing", "description": "🄿 Cycle Crossing (unsearchable)", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bicycle-15.svg?sanitize=true"},
     {"key": "foot", "value": "designated", "description": "🄿 Cycle & Foot Path, 🄵 Allowed Access", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bicycle-15.svg?sanitize=true"},
     {"key": "highway", "value": "elevator", "description": "🄿 Elevator", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/elevator.svg?sanitize=true"},
+    {"key": "highway", "value": "emergency_bay", "description": "🄿 Emergency Stopping Place", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"},
     {"key": "highway", "value": "footway", "description": "🄿 Foot Path", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"},
     {"key": "footway", "value": "crossing", "description": "🄿 Pedestrian Crossing (unsearchable)", "object_types": ["way"]},
     {"key": "conveying", "description": "🄿 Moving Walkway, 🄿 Escalator", "object_types": ["way"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"},

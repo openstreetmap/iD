@@ -4291,6 +4291,11 @@ en:
         name: Elevator
         # 'terms: lift'
         terms: '<translate with synonyms or related terms for ''Elevator'', separated by commas>'
+      highway/emergency_bay:
+        # highway=emergency_bay
+        name: Emergency Stopping Place
+        # 'terms: Highway Emergency Bay'
+        terms: '<translate with synonyms or related terms for ''Emergency Stopping Place'', separated by commas>'
       highway/footway:
         # highway=footway
         name: Foot Path
