@@ -22,10 +22,10 @@ export function actionOrthogonalize(wayID, projection, vertexID, ep, degThresh) 
         var way = graph.entity(wayID);
         way = way.removeNode('');   // sanity check - remove any consecutive duplicates
 
-        if (way.tags.nosquare) {
+        if (way.tags.nonsquare) {
             var tags = Object.assign({}, way.tags);
             // since we're squaring, remove indication that this is physically unsquare
-            delete tags.nosquare;
+            delete tags.nonsquare;
             way = way.update({tags: tags});
         }
 

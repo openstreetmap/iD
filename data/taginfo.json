@@ -1854,6 +1854,7 @@
     {"key": "mining_resource", "description": "🄳 ➜ resource=*"},
     {"key": "natural", "value": "marsh", "description": "🄳 ➜ natural=wetland + wetland=marsh"},
     {"key": "natural", "value": "waterfall", "description": "🄳 ➜ waterway=waterfall"},
+    {"key": "nosquare", "description": "🄳 ➜ nonsquare=*"},
     {"key": "office", "value": "real_estate", "description": "🄳 ➜ office=estate_agent"},
     {"key": "oneway", "value": "1", "description": "🄳 ➜ oneway=yes"},
     {"key": "oneway", "value": "alternate", "description": "🄳 ➜ oneway=alternating"},

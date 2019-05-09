@@ -26,7 +26,7 @@ export function validationUnsquareWay() {
         if (!isBuilding(entity, graph)) return [];
 
         // don't flag ways marked as physically unsquare
-        if (entity.tags.nosquare === 'yes') return [];
+        if (entity.tags.nonsquare === 'yes') return [];
 
         var isClosed = entity.isClosed();
         if (!isClosed) return [];        // this building has bigger problems
@@ -95,7 +95,7 @@ export function validationUnsquareWay() {
                         var entityId = this.issue.entityIds[0];
                         var entity = context.entity(entityId);
                         var tags = Object.assign({}, entity.tags);  // shallow copy
-                        tags.nosquare = 'yes';
+                        tags.nonsquare = 'yes';
                         context.perform(
                             actionChangeTags(entityId, tags),
                             t('issues.fix.tag_as_unsquare.annotation')

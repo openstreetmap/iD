@@ -508,6 +508,10 @@
       "replace": {"waterway": "waterfall"}
     },
     {
+      "old": {"nosquare": "*"},
+      "replace": {"nonsquare": "$1"}
+    },
+    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
