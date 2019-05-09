@@ -1,0 +1,10 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "aerialrotator"
+    },
+    "name": "Playground Overhead Rotator"
+}
