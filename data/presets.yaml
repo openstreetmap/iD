@@ -3419,6 +3419,10 @@ en:
         # barrier=cattle_grid
         name: Cattle Grid
         terms: '<translate with synonyms or related terms for ''Cattle Grid'', separated by commas>'
+      barrier/chain:
+        # barrier=chain
+        name: Chain
+        terms: '<translate with synonyms or related terms for ''Chain'', separated by commas>'
       barrier/city_wall:
         # barrier=city_wall
         name: City Wall
@@ -3456,6 +3460,10 @@ en:
         # barrier=hedge
         name: Hedge
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
+      barrier/height_restrictor:
+        # barrier=height_restrictor
+        name: Height Restrictor
+        terms: '<translate with synonyms or related terms for ''Height Restrictor'', separated by commas>'
       barrier/kerb:
         # barrier=kerb
         name: Curb
