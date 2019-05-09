@@ -1,0 +1,11 @@
+{
+    "icon": "maki-barrier",
+    "fields": [
+        "maxheight"
+    ],
+    "geometry": [ "vertex" ],
+    "tags": {
+        "barrier": "height_restrictor"
+    },
+    "name": "Height Restrictor"
+}
