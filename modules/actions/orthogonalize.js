@@ -21,6 +21,14 @@ export function actionOrthogonalize(wayID, projection, vertexID, ep, degThresh) 
 
         var way = graph.entity(wayID);
         way = way.removeNode('');   // sanity check - remove any consecutive duplicates
+
+        if (way.tags.nosquare) {
+            var tags = Object.assign({}, way.tags);
+            // since we're squaring, remove indication that this is physically unsquare
+            delete tags.nosquare;
+            way = way.update({tags: tags});
+        }
+
         graph = graph.replace(way);
 
         var isClosed = way.isClosed();

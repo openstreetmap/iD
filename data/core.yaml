@@ -1507,6 +1507,9 @@ en:
       tag_as_disconnected:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
+      tag_as_unsquare:
+        title: Tag as physically unsquare
+        annotation: Tagged a way as having unsquare corners.
       tag_this_as_higher:
         title: Tag this as higher
       tag_this_as_lower:
