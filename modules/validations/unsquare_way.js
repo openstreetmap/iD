@@ -43,7 +43,12 @@ export function validationUnsquareWay() {
         var hasConnectedSquarableWays = nodes.some(function(node) {
             return graph.parentWays(node).some(function(way) {
                 if (way.id === entity.id) return false;
-                return isBuilding(way, graph);
+                if (isBuilding(way, graph)) return true;
+                return graph.parentRelations(way).some(function(parentRelation) {
+                    return parentRelation.isMultipolygon() &&
+                        parentRelation.tags.building &&
+                        parentRelation.tags.building !== 'no';
+                });
             });
         });
         if (hasConnectedSquarableWays) return [];
