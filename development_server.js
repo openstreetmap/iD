@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 const colors = require('colors/safe');
-const ecstatic = require('ecstatic');
 const gaze = require('gaze');
-const http = require('http');
+const StaticServer = require('static-server');
 
 const isDevelopment = process.argv[2] === 'develop';
 
@@ -53,9 +52,8 @@ if (isDevelopment) {
         });
     });
 
-    http.createServer(
-        ecstatic({ root: __dirname, cache: 0 })
-    ).listen(8080);
-
-    console.log(colors.yellow('Listening on :8080'));
+    const server = new StaticServer({ rootPath: __dirname, port: 8080, followSymlink: true });
+    server.start(function () {
+        console.log(colors.yellow('Listening on ' + server.port));
+    });
 }

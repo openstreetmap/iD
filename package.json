@@ -64,7 +64,6 @@
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
     "d3": "~5.9.2",
-    "ecstatic": "^4.1.2",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "eslint": "^5.16.0",
     "gaze": "^1.1.1",
@@ -94,6 +93,7 @@
     "sinon": "7.3.2",
     "sinon-chai": "^3.1.0",
     "smash": "0.0",
+    "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
     "temaki": "1.2.0",
     "uglify-js": "~3.5.10"
