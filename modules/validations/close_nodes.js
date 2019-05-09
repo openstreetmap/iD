@@ -11,12 +11,20 @@ export function validationCloseNodes() {
 
     function shouldCheckWay(way, context) {
 
-        // expect that indoor features may be mapped in very fine detail
-        if (way.tags.indoor) return false;
-
         // don't flag issues where merging would create degenerate ways
         if (way.nodes.length <= 2 ||
             (way.isClosed() && way.nodes.length <= 4)) return false;
+
+        // expect that indoor features may be mapped in very fine detail
+        if (way.tags.indoor) return false;
+
+        var parentRelations = context.graph().parentRelations(way);
+
+        // don't flag close nodes in boundaries since it's unlikely the user can accurately resolve them
+        if (way.tags.boundary) return false;
+        if (parentRelations.length && parentRelations.some(function(parentRelation) {
+            return parentRelation.tags.type === 'boundary';
+        })) return false;
 
         var bbox = way.extent(context.graph()).bbox();
         var hypotenuseMeters = geoSphericalDistance([bbox.minX, bbox.minY], [bbox.maxX, bbox.maxY]);
