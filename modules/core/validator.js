@@ -117,13 +117,23 @@ export function coreValidator(context) {
     };
 
 
-    validator.getEntityIssues = function(entityID) {
+    validator.getEntityIssues = function(entityID, options) {
         var issueIDs = _issuesByEntityID[entityID];
         if (!issueIDs) return [];
 
+        var opts = options || {}; 
+
         return Array.from(issueIDs)
             .map(function(id) { return _issuesByIssueID[id]; })
-            .filter(function(issue) { return !_disabledRules[issue.type] && !_ignoredIssueIDs[issue.id]; });
+            .filter(function(issue) {
+                if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
+                if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
+
+                if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
+                if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
+
+                return true;
+            });
     };
 
 

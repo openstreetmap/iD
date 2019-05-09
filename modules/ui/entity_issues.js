@@ -31,9 +31,13 @@ export function uiEntityIssues(context) {
         update();
     }
 
+    function getIssues() {
+        return context.validator().getEntityIssues(_entityID, { includeDisabledRules: true });
+    }
 
     function update() {
-        var issues = context.validator().getEntityIssues(_entityID);
+
+        var issues = getIssues();
 
         _selection
             .classed('hide', issues.length === 0);
@@ -44,7 +48,7 @@ export function uiEntityIssues(context) {
 
 
     function render(selection) {
-        var issues = context.validator().getEntityIssues(_entityID);
+        var issues = getIssues();
         _activeIssueID = issues.length > 0 ? issues[0].id : null;
 
 

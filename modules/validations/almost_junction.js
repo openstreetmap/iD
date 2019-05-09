@@ -25,8 +25,10 @@ export function validationAlmostJunction() {
             osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    function isNoexit(node) {
-        return node.tags.noexit && node.tags.noexit === 'yes';
+    function isTaggedAsNotContinuing(node) {
+        return node.tags.noexit === 'yes' ||
+            node.tags.amenity === 'parking_entrance' ||
+            (node.tags.entrance && node.tags.entrance !== 'no');
     }
 
 
@@ -127,7 +129,7 @@ export function validationAlmostJunction() {
             if (osm && !osm.isDataLoaded(node.loc)) {
                 return false;
             }
-            if (isNoexit(node) || graph.parentWays(node).length !== 1) {
+            if (isTaggedAsNotContinuing(node) || graph.parentWays(node).length !== 1) {
                 return false;
             }
 
