@@ -738,6 +738,18 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"sport": "horse_shoes"},
+      "replace": {"sport": "horseshoes"}
+    },
+    {
+      "old": {"sport": "horseshoe"},
+      "replace": {"sport": "horseshoes"}
+    },
+    {
+      "old": {"sport": "shuffle_board"},
+      "replace": {"sport": "shuffleboard"}
+    },
+    {
       "old": {"theatre:type": "amphitheatre"},
       "replace": {"theatre:type": "amphi"}
     },

@@ -5136,6 +5136,11 @@ en:
         name: Riding Arena
         # 'terms: dressage,equestrian,horse,horseback,riding'
         terms: '<translate with synonyms or related terms for ''Riding Arena'', separated by commas>'
+      leisure/pitch/horseshoes:
+        # 'leisure=pitch, sport=horseshoes'
+        name: Horseshoes Pit
+        # 'terms: horse shoes'
+        terms: '<translate with synonyms or related terms for ''Horseshoes Pit'', separated by commas>'
       leisure/pitch/netball:
         # 'leisure=pitch, sport=netball'
         name: Netball Court
@@ -5148,6 +5153,11 @@ en:
         # 'leisure=pitch, sport=rugby_union'
         name: Rugby Union Field
         terms: '<translate with synonyms or related terms for ''Rugby Union Field'', separated by commas>'
+      leisure/pitch/shuffleboard:
+        # 'leisure=pitch, sport=shuffleboard'
+        name: Shuffleboard Court
+        # 'terms: deck shuffleboard,floor shuffleboard'
+        terms: '<translate with synonyms or related terms for ''Shuffleboard Court'', separated by commas>'
       leisure/pitch/skateboard:
         # 'leisure=pitch, sport=skateboard'
         name: Skate Park

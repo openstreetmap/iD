@@ -6827,6 +6827,10 @@
                     "name": "Riding Arena",
                     "terms": "dressage,equestrian,horse,horseback,riding"
                 },
+                "leisure/pitch/horseshoes": {
+                    "name": "Horseshoes Pit",
+                    "terms": "horse shoes"
+                },
                 "leisure/pitch/netball": {
                     "name": "Netball Court",
                     "terms": ""
@@ -6838,6 +6842,10 @@
                 "leisure/pitch/rugby_union": {
                     "name": "Rugby Union Field",
                     "terms": ""
+                },
+                "leisure/pitch/shuffleboard": {
+                    "name": "Shuffleboard Court",
+                    "terms": "deck shuffleboard,floor shuffleboard"
                 },
                 "leisure/pitch/skateboard": {
                     "name": "Skate Park",
@@ -9092,7 +9100,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Vivid is a mosiac with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
+                "description": "DigitalGlobe-Vivid is a mosaic with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
                 "name": "DigitalGlobe Vivid Imagery"
             },
             "EOXAT2018CLOUDLESS": {
