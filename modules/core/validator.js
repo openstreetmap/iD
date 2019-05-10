@@ -209,9 +209,8 @@ export function coreValidator(context) {
                 var entityIds = issue.entityIds || [];
                 entityIds.forEach(function(other) {
                     if (other !== entityID) {
-                        var otherIssueIDs = _issuesByEntityID[other];
-                        if (otherIssueIDs) {
-                            otherIssueIDs.delete(issueID);
+                        if (_issuesByEntityID[other]) {
+                            _issuesByEntityID[other].delete(issueID);
                         }
                     }
                 });
@@ -302,15 +301,13 @@ export function coreValidator(context) {
         return entityIssues;
     }
 
-
-    //
-    // Run validation for several entities, supplied `entityIDs`
-    //
-    validator.validateEntities = function(entityIDs) {
-        var graph = context.graph();
-
-        var entityIDsToCheck = entityIDs.reduce(function(acc, entityID) {
-            if (acc.has(entityID)) return acc;
+    function entityIDsToValidate(entityIDs, graph) {
+        var processedIDs = new Set();
+        return entityIDs.reduce(function(acc, entityID) {
+            // keep redundancy check separate from `acc` because an `entityID`
+            // could have been added to `acc` as a related entity through an earlier pass
+            if (processedIDs.has(entityID)) return acc;
+            processedIDs.add(entityID);
 
             var entity = graph.hasEntity(entityID);
             if (!entity) return acc;
@@ -347,16 +344,23 @@ export function coreValidator(context) {
             return acc;
 
         }, new Set());
+    }
 
-        // clear caches for existing issues related to changed entities
-        entityIDsToCheck.forEach(uncacheEntityID);
+    //
+    // Run validation for several entities, supplied `entityIDs`
+    //
+    function validateEntities(entityIDs) {
+
+        // clear caches for existing issues related to these entities
+        entityIDs.forEach(uncacheEntityID);
 
         // detect new issues and update caches
-        entityIDsToCheck.forEach(function(entityID) {
-            var entity = graph.hasEntity(entityID);
+        entityIDs.forEach(function(entityID) {
+            var entity = context.graph().hasEntity(entityID);
+            // don't validate deleted entities
             if (!entity) return;
-            var issues = validateEntity(entity);
 
+            var issues = validateEntity(entity);
             issues.forEach(function(issue) {
                 var entityIds = issue.entityIds || [];
                 entityIds.forEach(function(entityId) {
@@ -370,7 +374,7 @@ export function coreValidator(context) {
         });
 
         dispatch.call('validated');
-    };
+    }
 
 
     //
@@ -385,8 +389,8 @@ export function coreValidator(context) {
             dispatch.call('validated');
             return;
         }
-
-        var difference = coreDifference(_validatedGraph, currGraph);
+        var oldGraph = _validatedGraph;
+        var difference = coreDifference(oldGraph, currGraph);
         _validatedGraph = currGraph;
 
         for (var key in _rules) {
@@ -395,10 +399,18 @@ export function coreValidator(context) {
             }
         }
 
-        var entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-        difference.deleted().forEach(uncacheEntityID);  // deleted
+        var createdAndModifiedEntityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
+        var entityIDsToCheck = entityIDsToValidate(createdAndModifiedEntityIDs, currGraph);
 
-        validator.validateEntities(entityIDs);   // dispatches 'validated'
+        // "validate" deleted entities in order to update their related entities
+        // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
+        var deletedEntityIDs = difference.deleted().map(function(entity) { return entity.id; });
+        var entityIDsToCheckForDeleted = entityIDsToValidate(deletedEntityIDs, oldGraph);
+
+        // concat the sets
+        entityIDsToCheckForDeleted.forEach(entityIDsToCheck.add, entityIDsToCheck);
+
+        validateEntities(entityIDsToCheck);   // dispatches 'validated'
     };
 
 
@@ -419,7 +431,9 @@ export function coreValidator(context) {
         .on('merge.validator', function(entities) {
             if (!entities) return;
             var ids = entities.map(function(entity) { return entity.id; });
-            utilCallWhenIdle(function() { validator.validateEntities(ids); })();
+            utilCallWhenIdle(function() {
+                validateEntities(entityIDsToValidate(ids, context.graph()));
+            })();
         });
 
 
