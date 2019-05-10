@@ -58,6 +58,7 @@ export function operationReflect(selectedIDs, context, axis) {
 
 
         function someMissing() {
+            if (context.inIntro()) return false;
             var osm = context.connection();
             if (osm) {
                 var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
