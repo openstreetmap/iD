@@ -1826,6 +1826,9 @@
                 "ignore_issue": {
                     "title": "Ignore this issue"
                 },
+                "merge_close_vertices": {
+                    "annotation": "Merged very close points in a way."
+                },
                 "merge_points": {
                     "title": "Merge these points"
                 },

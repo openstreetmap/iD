@@ -1,4 +1,4 @@
-import { operationMerge } from '../operations/index';
+import { actionMergeNodes } from '../actions/merge_nodes';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -105,8 +105,8 @@ export function validationCloseNodes() {
                     title: t('issues.fix.merge_points.title'),
                     onClick: function() {
                         var entityIds = this.issue.entityIds;
-                        var operation = operationMerge([entityIds[1], entityIds[2]], context);
-                        operation();
+                        var action = actionMergeNodes([entityIds[1], entityIds[2]]);
+                        context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
                     }
                 }),
                 new validationIssueFix({
