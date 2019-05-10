@@ -84,10 +84,14 @@ export function validationCloseNodes() {
 
     function getIssueIfAny(node1, node2, way, context) {
         if (node1.id === node2.id ||
-            (node1.hasInterestingTags() && node2.hasInterestingTags()) ||
-            geoSphericalDistance(node1.loc, node2.loc) >= thresholdMeters) {
+            (node1.hasInterestingTags() && node2.hasInterestingTags())) {
             return null;
         }
+
+        var nodesAreVeryClose = node1.loc === node2.loc ||
+            geoSphericalDistance(node1.loc, node2.loc) < thresholdMeters;
+
+        if (!nodesAreVeryClose) return null;
 
         return new validationIssue({
             type: type,
