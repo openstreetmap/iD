@@ -12,12 +12,16 @@ export function uiEntityIssues(context) {
     var _entityID;
 
     // Refresh on validated events
-    context.validator().on('validated.entity_issues', function() {
-         _selection.selectAll('.disclosure-wrap-entity_issues')
-             .call(render);
+    context.validator()
+        .on('validated.entity_issues', function() {
+             _selection.selectAll('.disclosure-wrap-entity_issues')
+                 .call(render);
 
-        update();
-    });
+            update();
+        })
+        .on('focusedIssue.entity_issues', function(issue) {
+             makeActiveIssue(issue.id);
+        });
 
 
     function entityIssues(selection) {
@@ -33,6 +37,12 @@ export function uiEntityIssues(context) {
 
     function getIssues() {
         return context.validator().getEntityIssues(_entityID, { includeDisabledRules: true });
+    }
+
+    function makeActiveIssue(issueID) {
+        _activeIssueID = issueID;
+        _selection.selectAll('.issue-container')
+            .classed('active', function(d) { return d.id === _activeIssueID; });
     }
 
     function update() {
@@ -86,9 +96,8 @@ export function uiEntityIssues(context) {
             .append('div')
             .attr('class', 'issue-label')
             .on('click', function(d) {
-                _activeIssueID = d.id;   // expand only the clicked item
-                selection.selectAll('.issue-container')
-                    .classed('active', function(d) { return d.id === _activeIssueID; });
+
+                makeActiveIssue(d.id); // expand only the clicked item
 
                 var extent = d.extent(context.graph());
                 if (extent) {

@@ -7,7 +7,6 @@ import { tooltip } from '../util/tooltip';
 
 import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../geo';
-import { modeSelect } from '../modes/select';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -84,20 +83,7 @@ export function uiIssues(context) {
             .append('li')
             .attr('class', function (d) { return 'issue severity-' + d.severity; })
             .on('click', function(d) {
-                var extent = d.extent(context.graph());
-                if (extent) {
-                    var setZoom = Math.max(context.map().zoom(), 19);
-                    context.map().centerZoomEase(extent.center(), setZoom);
-
-                    // select the first entity
-                    if (d.entityIds && d.entityIds.length) {
-                        window.setTimeout(function() {
-                            var ids = d.entityIds;
-                            context.enter(modeSelect(context, [ids[0]]));
-                            utilHighlightEntities(ids, true, context);
-                        }, 250);  // after ease
-                    }
-                }
+                context.validator().focusIssue(d);
             })
             .on('mouseover', function(d) {
                 utilHighlightEntities(d.entityIds, true, context);

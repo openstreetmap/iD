@@ -1,5 +1,4 @@
 import { t } from '../util/locale';
-import { modeSelect } from '../modes/select';
 import { svgIcon } from '../svg/icon';
 import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
@@ -85,10 +84,7 @@ export function uiCommitWarnings(context) {
                         .classed('hover', false);
                 })
                 .on('click', function(d) {
-                    if (d.entityIds && d.entityIds.length > 0) {
-                        context.map().zoomTo(context.entity(d.entityIds[0]));
-                        context.enter(modeSelect(context, d.entityIds));
-                    }
+                    context.validator().focusIssue(d);
                 });
         }
     }

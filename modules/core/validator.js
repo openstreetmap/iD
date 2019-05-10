@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { coreDifference } from './difference';
+import { modeSelect } from '../modes/select';
 import { utilArrayGroupBy, utilCallWhenIdle, utilRebind } from '../util';
 import { t } from '../util/locale';
 import { validationIssueFix } from './validation/models';
@@ -8,7 +9,7 @@ import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
-    var dispatch = d3_dispatch('validated');
+    var dispatch = d3_dispatch('validated', 'focusedIssue');
     var validator = utilRebind({}, dispatch, 'on');
 
     var _rules = {};
@@ -108,6 +109,24 @@ export function coreValidator(context) {
         });
     };
 
+    validator.focusIssue = function(issue) {
+        var extent = issue.extent(context.graph());
+
+        if (extent) {
+            var setZoom = Math.max(context.map().zoom(), 19);
+            context.map().centerZoomEase(extent.center(), setZoom);
+
+            // select the first entity
+            if (issue.entityIds && issue.entityIds.length) {
+                window.setTimeout(function() {
+                    var ids = issue.entityIds;
+                    context.enter(modeSelect(context, [ids[0]]));
+                    dispatch.call('focusedIssue', this, issue);
+                }, 250);  // after ease
+            }
+        }
+    };
+
 
     validator.getIssuesBySeverity = function(options) {
         var groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
@@ -121,7 +140,7 @@ export function coreValidator(context) {
         var issueIDs = _issuesByEntityID[entityID];
         if (!issueIDs) return [];
 
-        var opts = options || {}; 
+        var opts = options || {};
 
         return Array.from(issueIDs)
             .map(function(id) { return _issuesByIssueID[id]; })
