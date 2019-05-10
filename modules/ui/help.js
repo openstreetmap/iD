@@ -366,7 +366,7 @@ export function uiHelp(context) {
         function clickWalkthrough() {
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
-            uiHelp.setVisible(false);
+            context.ui().togglePanes();
         }
 
 
