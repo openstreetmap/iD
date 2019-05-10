@@ -738,6 +738,21 @@ export function rendererMap(context) {
         return map;
     };
 
+    map.unobscuredCenterZoomEase = function(loc, zoom) {
+        var offset = map.unobscuredOffset();
+        var locPx = projection(loc);
+        var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
+        var offsetLoc = projection.invert(offsetLocPx);
+        map.centerZoomEase(offsetLoc, zoom);
+    };
+
+    map.unobscuredOffset = function() {
+        var openPane = d3_select('.map-panes .map-pane.shown');
+        if (!openPane.empty()) {
+            return [openPane.node().offsetWidth/2, 0];
+        }
+        return [0, 0];
+    };
 
     map.zoom = function(z2) {
         if (!arguments.length) {

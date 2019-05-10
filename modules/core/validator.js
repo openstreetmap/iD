@@ -114,7 +114,7 @@ export function coreValidator(context) {
 
         if (extent) {
             var setZoom = Math.max(context.map().zoom(), 19);
-            context.map().centerZoomEase(extent.center(), setZoom);
+            context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
 
             // select the first entity
             if (issue.entityIds && issue.entityIds.length) {
