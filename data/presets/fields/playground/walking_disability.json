@@ -1,6 +1,10 @@
 {
     "key": "walking_disability",
     "type": "combo",
-    "label": "Can be used by those who cannot walk",
-    "options": ["yes", "no", "limited"]
+    "options": [
+        "yes",
+        "no",
+        "limited"
+    ],
+    "label": "Can be used by those who cannot walk"
 }
