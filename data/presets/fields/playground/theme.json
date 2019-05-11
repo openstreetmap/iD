@@ -1,0 +1,10 @@
+{
+    "key": "playground:theme",
+    "type": "radio",
+    "options": [
+        "yes",
+        "no",
+        "limited"
+    ],
+    "label": "If it is themed in some way"
+}
