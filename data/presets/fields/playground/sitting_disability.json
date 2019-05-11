@@ -1,0 +1,6 @@
+{
+    "key": "sitting_disability",
+    "type": "combo",
+    "label": "Can be used by those who cannot sit",
+    "options": ["yes", "no", "limited"]
+}
