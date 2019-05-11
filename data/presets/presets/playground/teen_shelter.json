@@ -1,5 +1,16 @@
 {
     "icon": "maki-playground",
+    "fields": [
+        "playground/theme",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "name",
+        "playground/blind",
+        "playground/walking_disability",
+        "playground/sitting_disability",
+        "material"
+    ],
     "geometry": [
         "point",
         "area"
