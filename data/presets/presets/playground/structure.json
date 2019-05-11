@@ -1,5 +1,19 @@
 {
     "icon": "maki-pitch",
+    "fields": [
+        "playground/theme",
+        "playground/min_age",
+        "playground/max_age",
+        "playground/baby",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "name",
+        "playground/blind",
+        "playground/walking_disability",
+        "playground/sitting_disability",
+        "material"
+    ],
     "geometry": [
         "point",
         "area"
