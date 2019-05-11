@@ -1,0 +1,6 @@
+{
+    "key": "blind",
+    "type": "combo",
+    "label": "Can be used by blind people",
+    "options": ["yes", "no", "limited"]
+}
