@@ -1,7 +1,11 @@
 {
     "icon": "maki-pitch",
     "fields": [
-        "height"
+        "height",
+        "playground/theme"
+    ],
+    "moreFields": [
+        "material"
     ],
     "geometry": [
         "point"
