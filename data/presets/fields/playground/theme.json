@@ -1,10 +1,5 @@
 {
     "key": "playground:theme",
-    "type": "radio",
-    "options": [
-        "yes",
-        "no",
-        "limited"
-    ],
+    "type": "semiCombo",
     "label": "If it is themed in some way"
 }
