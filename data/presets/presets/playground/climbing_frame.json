@@ -1,5 +1,17 @@
 {
     "icon": "maki-playground",
+    "fields": [
+        "playground/theme",
+        "playground/min_age",
+        "playground/max_age",
+        "playground/baby"
+    ],
+    "moreFields": [
+        "name",
+        "playground/blind",
+        "playground/sitting_disability",
+        "material"
+    ],
     "geometry": [
         "point",
         "area"
