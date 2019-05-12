@@ -1870,6 +1870,7 @@
     {"key": "recommended_speed", "description": "🄳 ➜ maxspeed:advisory=*"},
     {"key": "recommended_speed:backward", "description": "🄳 ➜ maxspeed:advisory:backward=*"},
     {"key": "recommended_speed:forward", "description": "🄳 ➜ maxspeed:advisory:forward=*"},
+    {"key": "religion", "value": "catholic", "description": "🄳 ➜ religion=christian + denomination=catholic"},
     {"key": "reservations", "description": "🄳 ➜ reservation=*"},
     {"key": "roof:color", "description": "🄳 ➜ roof:colour=*"},
     {"key": "route", "value": "ncn", "description": "🄳 ➜ route=bicycle + network=ncn"},

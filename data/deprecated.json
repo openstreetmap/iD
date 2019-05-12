@@ -582,6 +582,10 @@
       "replace": {"maxspeed:advisory:forward": "$1"}
     },
     {
+      "old": {"religion": "catholic"},
+      "replace": {"religion": "christian", "denomination": "catholic"}
+    },
+    {
       "old": {"reservations": "*"},
       "replace": {"reservation": "$1"}
     },
