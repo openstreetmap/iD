@@ -628,6 +628,12 @@ en:
     buildings:
       description: Buildings
       tooltip: "Buildings, Shelters, Garages, etc."
+    building_parts:
+      description: Building Parts
+      tooltip: "building:part=*"
+    indoor:
+      description: Indoor
+      tooltip: "indoor=*"
     landuse:
       description: Landuse Features
       tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."

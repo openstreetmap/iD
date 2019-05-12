@@ -119,7 +119,6 @@ export function rendererFeatures(context) {
 
     defineRule('buildings', function isBuilding(tags) {
         return (
-            !!tags['building:part'] ||
             (!!tags.building && tags.building !== 'no') ||
             tags.parking === 'multi-storey' ||
             tags.parking === 'sheds' ||
@@ -127,6 +126,14 @@ export function rendererFeatures(context) {
             tags.parking === 'garage_boxes'
         );
     }, 250);
+
+    defineRule('building_parts', function isBuildingPart(tags) {
+        return tags['building:part'];
+    });
+
+    defineRule('indoor', function isIndoor(tags) {
+        return tags.indoor;
+    });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
         return geometry === 'area' &&
