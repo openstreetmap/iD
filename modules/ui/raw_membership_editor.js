@@ -197,7 +197,7 @@ export function uiRawMembershipEditor(context) {
 
             var labelEnter = itemsEnter
                 .append('label')
-                .attr('class', 'form-field-label')
+                .attr('class', 'field-label')
                 .append('span')
                 .attr('class', 'label-text')
                 .append('a')
@@ -258,7 +258,7 @@ export function uiRawMembershipEditor(context) {
 
             newMembershipEnter
                 .append('label')
-                .attr('class', 'form-field-label')
+                .attr('class', 'field-label')
                 .append('input')
                 .attr('placeholder', t('inspector.choose_relation'))
                 .attr('type', 'text')

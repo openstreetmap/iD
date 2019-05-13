@@ -1472,7 +1472,7 @@ button.preset-favorite-button.active .icon {
 /*
     The parts of a field:
     - `.form-field` is a `div` wraps the entire thing
-    - `.form-field-label` is a `label` that wraps the top part, it contains;
+    - `.field-label` is a `label` that wraps the top part, it contains;
        - `span` classed `label-text`
        - 0..n buttons for "remove", "modified", "tag reference"
     - `.form-field-input-wrap` is a `label` or `div` that wraps the bottom part, it contains;
@@ -1482,7 +1482,7 @@ button.preset-favorite-button.active .icon {
     - `.tag-reference-body` at the bottom (usually hidden)
 
    .------------------.                             -
-   |  Name        | i |  <- .form-field-label        |
+   |  Name        | i |  <- .field-label        |
    +------------------+                               |
    |  Starbucks   | + |  <- .form-field-input-wrap     >  .form-field
    '------------------'                               |
@@ -1507,7 +1507,7 @@ button.preset-favorite-button.active .icon {
 }
 
 /* A `label` element that wraps the top section */
-.form-field-label {
+.field-label {
     display: flex;
     flex-flow: row nowrap;
     flex: 1 1 100%;
@@ -1520,15 +1520,15 @@ button.preset-favorite-button.active .icon {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
-.form-field-label .label-text {
+.field-label .label-text {
     flex: 1 1 auto;
     padding: 5px 0 5px 10px;
 }
-[dir='rtl'] .form-field-label .label-text {
+[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 5px 0;
 }
 
-.form-field-label button {
+.field-label button {
     flex: 0 0 32px;
     border-left: 1px solid #ccc;
     width: 32px;
@@ -1536,23 +1536,23 @@ button.preset-favorite-button.active .icon {
     border-radius: 0;
     background: #f6f6f6;
 }
-[dir='rtl'] .form-field-label button {
+[dir='rtl'] .field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.form-field-label button:hover {
+.field-label button:hover {
     background: #f1f1f1;
 }
-.form-field-label .icon {
+.field-label .icon {
     opacity: .5;
 }
 
-.form-field-label .modified-icon,
-.form-field-label .remove-icon {
+.field-label .modified-icon,
+.field-label .remove-icon {
     display: none;
 }
-.modified .form-field-label .modified-icon,
-.present .form-field-label .remove-icon {
+.modified .field-label .modified-icon,
+.present .field-label .remove-icon {
     display: inline-block;
 }
 
@@ -2197,7 +2197,7 @@ button.preset-favorite-button.active .icon {
 .form-field-comment:not(.present) #preset-input-comment {
     border-color: rgb(230, 100, 100);
 }
-.form-field-comment:not(.present) .form-field-label {
+.form-field-comment:not(.present) .field-label {
     border-color: rgb(230, 100, 100);
     background: rgba(230, 100, 100, 0.2);
 }
@@ -3882,7 +3882,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
-.inspector-hover .form-field-label button,
+.inspector-hover .field-label button,
 .inspector-hover .tag-row button,
 .inspector-hover .footer * {
     opacity: 0;

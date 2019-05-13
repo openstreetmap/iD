@@ -402,7 +402,7 @@ export function uiFieldLocalized(field, context) {
 
                 var label = wrap
                     .append('label')
-                    .attr('class', 'form-field-label');
+                    .attr('class', 'field-label');
 
                 label
                     .append('span')

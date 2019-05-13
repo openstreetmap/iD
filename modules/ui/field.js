@@ -119,7 +119,7 @@ export function uiField(context, presetField, entity, options) {
         if (options.wrap) {
             var label = enter
                 .append('label')
-                .attr('class', 'form-field-label')
+                .attr('class', 'field-label')
                 .attr('for', function(d) { return 'preset-input-' + d.safeid; });
 
             label
@@ -151,10 +151,10 @@ export function uiField(context, presetField, entity, options) {
         container = container
             .merge(enter);
 
-        container.select('.form-field-label > .remove-icon')  // propagate bound data
+        container.select('.field-label > .remove-icon')  // propagate bound data
             .on('click', remove);
 
-        container.select('.form-field-label > .modified-icon')  // propagate bound data
+        container.select('.field-label > .modified-icon')  // propagate bound data
             .on('click', revert);
 
         container
@@ -192,7 +192,7 @@ export function uiField(context, presetField, entity, options) {
                 if (help) {
                     d3_select(this)
                         .call(help.body)
-                        .select('.form-field-label')
+                        .select('.field-label')
                         .call(help.button);
                 }
 
@@ -200,7 +200,7 @@ export function uiField(context, presetField, entity, options) {
                 if (reference) {
                     d3_select(this)
                         .call(reference.body)
-                        .select('.form-field-label')
+                        .select('.field-label')
                         .call(reference.button);
                 }
 

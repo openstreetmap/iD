@@ -148,7 +148,7 @@ export function uiRawMemberEditor(context) {
 
                     var label = item
                         .append('label')
-                        .attr('class', 'form-field-label');
+                        .attr('class', 'field-label');
 
                     if (d.member) {
                         // highlight the member feature in the map while hovering on the list item
