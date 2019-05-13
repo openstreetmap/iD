@@ -15,6 +15,7 @@
         "fax",
         "maxstay",
         "name",
+        "opening_hours",
         "park_ride",
         "payment_multi_fee",
         "phone",
