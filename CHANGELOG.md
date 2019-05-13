@@ -144,6 +144,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Don't flag almost junctions between features on different layers or levels ([#6355])
 - Discard untagged relations that appear to have been created accidentally ([#3812])
 - Include the number and type of warnings ignored by the user in the changset tags ([#6123])
+- Recommend adding `highway` tags to piers, racetracks, and transit platforms for routing purposes ([#6042])
 - Indicate iD's tag deprecations on Taginfo ([#5995])
 - When connecting crossing paths and roads, don't automatically set the `crossing` tag of the connection node if it is ambiguous ([#6244])
 
@@ -178,6 +179,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6123]: https://github.com/openstreetmap/iD/issues/6123
 [#5995]: https://github.com/openstreetmap/iD/issues/5995
 [#6244]: https://github.com/openstreetmap/iD/issues/6244
+[#6042]: https://github.com/openstreetmap/iD/issues/6042
 
 [@Bonkles]: https://github.com/Bonkles
 
