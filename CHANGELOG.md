@@ -44,6 +44,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Add raw text tag editor with copy-and-paste support ([#839], [#6185], [#6302])
 - Add drag-and-drop reordering of relation members ([#2283])
 - Add controls to filter between panoramic vs. flat photos ([#5433])
+- Add Downgrade operation that removes all tags except for addresses and building info ([#6103])
 - Allow extracting points of interest from buildings and other areas ([#6203])
 - Allow squaring unclosed lines ([#5093], [#5999])
 - Allow squaring individual corners ([#2205], [#5999])
@@ -72,7 +73,6 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6161]: https://github.com/openstreetmap/iD/issues/6161
 
 #### :sparkles: Usability
-- Add Downgrade operation that removes all tags except for addresses and building info ([#6103])
 - Add "Reset All" button for Display Options in the Background pane ([#5503], [#5994], thanks [@alphagamer7])
 - Add link to the PeWu entity history viewer to the History panel ([#6202])
 - Persist recent presets across sessions ([#6022])
@@ -119,7 +119,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Add option to filter issues to just the ones nearby ([#6140])
 - Show info about any hidden issues when all filtered issues are resolved ([#6224])
 - Add option to manually ignore and hide specific issues ([#6242])
-- Flag redundant points in highways ([#6241], [#6267], thanks [@gaoxm])
+- Flag redundant points in lines and areas ([#6241], [#6326], [#6267], thanks [@gaoxm])
 - Flag features with `fixme` tags ([#6214])
 - Flag simple buildings that aren't quite square ([#6215], [#6234])
 - Flag lines with `highway=road` as unclassified ([#5998])
@@ -152,6 +152,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6224]: https://github.com/openstreetmap/iD/issues/6224
 [#6242]: https://github.com/openstreetmap/iD/issues/6242
 [#6241]: https://github.com/openstreetmap/iD/issues/6241
+[#6326]: https://github.com/openstreetmap/iD/issues/6326
 [#6267]: https://github.com/openstreetmap/iD/issues/6267
 [#6214]: https://github.com/openstreetmap/iD/issues/6214
 [#6215]: https://github.com/openstreetmap/iD/issues/6215
@@ -181,7 +182,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :bug: Bugfixes
 - Don't move connected ways when squaring ([#1979], [#5999])
-- Ensure that members of selected relations are displayed even when features of that type are disabled ([#6220])
+- Ensure that relation members and child nodes of selected features are displayed even when features of those types are disabled ([#6220], [#6328])
 - Maintain directionality when merging a directional line with a non-directional line ([#6033])
 - Fix crash when drawing an area in a particular manner ([#5996])
 - Fix bug where straightening long ways could disconnect junctions ([#2248])
@@ -195,7 +196,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Correctly reverse complex tags with `left` and `right` when reversing highways ([#6235])
 - Prevent upload error when setting the Wikipedia field to a page with special characters ([#6232])
 - Remove unused Google Analytics code ([#6295])
+- Fix issue where some operations could be unexpectedly disallowed ([#6296])
+- Don't show gaps in the stroke where multipolygon member lines connect ([#6336])
+- Fix layout issue with the Label field ([#6344])
+- Fix issue where lines could have unexpected styling when first added to multipoygons ([#3613])
 
+[#3613]: https://github.com/openstreetmap/iD/issues/3613
+[#6344]: https://github.com/openstreetmap/iD/issues/6344
+[#6336]: https://github.com/openstreetmap/iD/issues/6336
+[#6328]: https://github.com/openstreetmap/iD/issues/6328
 [#1979]: https://github.com/openstreetmap/iD/issues/1979
 [#6220]: https://github.com/openstreetmap/iD/issues/6220
 [#6033]: https://github.com/openstreetmap/iD/issues/6033
@@ -211,6 +220,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6235]: https://github.com/openstreetmap/iD/issues/6235
 [#6232]: https://github.com/openstreetmap/iD/issues/6232
 [#6295]: https://github.com/openstreetmap/iD/issues/6295
+[#6296]: https://github.com/openstreetmap/iD/issues/6296
 
 #### :earth_asia: Localization
 - Make the place format in the contribution thank-you message localizable ([#6269])
@@ -224,12 +234,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Improve performance when typing changeset comments ([#6249])
 - Avoid reloading the inspector sidebar for geometry-only changes ([#6086], [#6140])
 - Reduce circular file dependencies ([#6237])
+- Update to D3 v5 ([#6245])
+- Replace the `ecstastic` development dependency with `static-server` ([#6342])
 
 [#6054]: https://github.com/openstreetmap/iD/issues/6054
 [#5901]: https://github.com/openstreetmap/iD/issues/5901
 [#6249]: https://github.com/openstreetmap/iD/issues/6249
 [#6086]: https://github.com/openstreetmap/iD/issues/6086
 [#6237]: https://github.com/openstreetmap/iD/issues/6237
+[#6245]: https://github.com/openstreetmap/iD/issues/6245
+[#6342]: https://github.com/openstreetmap/iD/issues/6342
 
 #### :mortar_board: Walkthrough / Help
 - Make the keyboard shorcuts viewable on narrow window sizes ([#6174])
@@ -242,6 +256,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Add presets for indoor mapping ([#6082])
 - Add Building Part preset ([#6114])
 - Add LGBTQ+ venue presets ([#5940], thanks [@rory])
+- Add more fields to public transport route presets ([#6036], thanks [@nlehuby])
+- Add Self-Service field and Self-Service Laundry preset ([#6260], thanks [@westnordost])
+- Add castle presets ([#6321], thanks [@westnordost])
+- Add Bicycle Parking Garage, Bicycle Lockers, and Bicycle Shed presets ([#6259], thanks [@westnordost])
+- Add Bust, Graffiti, and Art Installation presets ([#6275], thanks [@westnordost])
+- Add Petting Zoo, Wildlife Park, and Safari Park presets ([#6317], thanks [@westnordost])
+- Add Agricultural Engines Mechanic, Floorer, Joiner, and Parquet Layer presets ([#6316], thanks [@westnordost])
 - Add cycleway crossing presets ([#6065])
 - Add standalone Tactile Paving presets ([#6015])
 - Add Toy Library preset ([#5390])
@@ -251,25 +272,46 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Add Railway Under Construction preset ([#6151])
 - Add Underwear Store preset ([#6152])
 - Add Cannabis Shop preset ([#6301])
-- Add Self-Service field and Self-Service Laundry preset ([#6260], thanks [@westnordost])
 - Add Turnstile, Monorail Route, and Stop Area Group presets ([#5757])
 - Add Shingle preset ([#6155])
+- Add presets: Zip Line, Jet Bridge, Windsock, Convention Center, Events Venue, Underground Parking, Ambulatory Care, Chain, Height Restrictor, Houseboat, Hangar Building, Fire Hose, Emergency Stopping Bay, Trailhead, Commemorative Plaque, Horseshoes Pit, Shuffleboard Court, Natural Swimming Area, Cycling Track, Beacon, Beehive, Summit Cross, Levee, Mineshaft, Underground Pipeline, Street Cabinet, Tunnel, Cape, Valley, Wastewater Basin, Water Turbine, Boat Store, Tabletop Game Store, General Store, Lighting Store, Data Center, Trail Marker, Information Terminal, Canal Lock, Lock Gate
 - Update Embassy and add Consulate, Liaison Office, and Diplomatic Office presets ([#6144])
 - Update golf path presets to use highway tags ([#6165])
-- Add more fields to public transport route presets ([#6036], thanks [@nlehuby])
 - Add Flood Prone field to minor roads ([#6117])
 - Add Operator field to Car Wash preset ([#6233])
 - Add Building Height and Building Levels fields to some presets when they are buildings ([#6238])
-- Display Internet Access Fee field directly after setting Internet Access in more cases ([#6265]) 
+- Display Internet Access Fee field directly after setting Internet Access in more cases ([#6265])
+- Add Floating field to piers and Floating Pier preset
+- Add Fishing field to water presets
+- Add Air Conditioning field to some points of interest
+- Add Type field to Guest House preset
+- Add High-Speed Rail field and preset
+- Add Manufacturer field to some infrastructure presets
+- Add Max Weight field to roads and paths that are bridges
+- Add Microbrewery field and Brewpub preset
+- Add Payment Types field to some presets when a fee is specified
+- Add generic Playground Equipment and Emergency Feature presets with Type fields
+- Add Reservations field to some amenities
+- Add Screens field to cinemas
+- Add Pit Latrine and Flush Toilet presets
+- Add Handwashing and Positions fields to toilet presets
+- Add Oneway field to some Aerialway presets
+- Add Overhead Trolley Wires field to some highway presets
 - Remove Curb field from crossings to encourage mapping curbs as nodes ([#6078])
 - Use a less-confusing placeholder for the Hours field ([#6207])
 - Add support for public domain icons from The Noun Project ([#5691])
 - Improve the icon for Unmaintained Track Road ([#6088])
 - Return missing icon to the old Train Platform preset ([#6020])
+- Update icons for various presets such as Childcare, Photo Booth, Shower, Studio, and Garbage Dumpster
 - Render route preset icons dynamically, indicating what line types are common members ([#5926])
 - Change the swimmer icon so its head will not be missing when the icon is displayed on point markers ([#6307])
 - Add more search terms to the Road Surface preset ([#6309])
 
+[#6275]: https://github.com/openstreetmap/iD/issues/6275
+[#6317]: https://github.com/openstreetmap/iD/issues/6317
+[#6316]: https://github.com/openstreetmap/iD/issues/6316
+[#6259]: https://github.com/openstreetmap/iD/issues/6259
+[#6321]: https://github.com/openstreetmap/iD/issues/6321
 [#5940]: https://github.com/openstreetmap/iD/issues/5940
 [#5167]: https://github.com/openstreetmap/iD/issues/5167
 [#6124]: https://github.com/openstreetmap/iD/issues/6124
