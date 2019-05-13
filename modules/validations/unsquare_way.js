@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
-import { geoOrthoCanOrthogonalize } from '../geo';
+import { geoOrthoCanOrthogonalize, geoOrthoMaxOffsetAngle } from '../geo/ortho';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -9,9 +9,10 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationUnsquareWay() {
     var type = 'unsquare_way';
 
-    // use looser epsilon for detection to reduce false positives if nearly orthogonal
+    // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
     var epsilon = 0.05;
     var degreeThreshold = 13;
+    var autofixDegreeThreshold = 6.5;
     var nodeThreshold = 10;
 
     function isBuilding(entity, graph) {
@@ -57,9 +58,10 @@ export function validationUnsquareWay() {
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
-        // only allow autofix if there are no extra tags on the building (e.g. source) - #6288
         var autoArgs;
-        if (Object.keys(entity.tags).length === 1) {
+        // only allow autofixing features that are very close to square already
+        var maxOffsetAngle = geoOrthoMaxOffsetAngle(points, isClosed, degreeThreshold);
+        if (maxOffsetAngle && maxOffsetAngle < autofixDegreeThreshold) {
             // note: use default params for actionOrthogonalize, not relaxed epsilon
             var autoAction = actionOrthogonalize(entity.id, context.projection);
             autoAction.transitionable = false;  // when autofixing, do it instantly
@@ -75,6 +77,7 @@ export function validationUnsquareWay() {
             },
             reference: showReference,
             entityIds: [entity.id],
+            hash: JSON.stringify(autoArgs !== undefined),
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-orthogonalize',

@@ -45,4 +45,5 @@ export { geoVecScale } from './vector.js';
 
 export { geoOrthoNormalizedDotProduct } from './ortho.js';
 export { geoOrthoCalcScore } from './ortho.js';
+export { geoOrthoMaxOffsetAngle } from './ortho.js';
 export { geoOrthoCanOrthogonalize } from './ortho.js';

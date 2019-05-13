@@ -45,6 +45,33 @@ export function geoOrthoCalcScore(points, isClosed, epsilon, threshold) {
     return score;
 }
 
+// returns the maximum angle less than `lessThan` between the actual corner and a 0° or 90° corner
+export function geoOrthoMaxOffsetAngle(coords, isClosed, lessThan) {
+    var max = -Infinity;
+
+    var first = isClosed ? 0 : 1;
+    var last = isClosed ? coords.length : coords.length - 1;
+
+    for (var i = first; i < last; i++) {
+        var a = coords[(i - 1 + coords.length) % coords.length];
+        var origin = coords[i];
+        var b = coords[(i + 1) % coords.length];
+        var normalizedDotP = geoOrthoNormalizedDotProduct(a, b, origin);
+
+        var angle = Math.acos(Math.abs(normalizedDotP)) * 180 / Math.PI;
+
+        if (angle > 45) angle = 90 - angle;
+
+        if (angle >= lessThan) continue;
+
+        if (angle > max) max = angle;
+    }
+
+    if (max === -Infinity) return null;
+
+    return max;
+}
+
 
 // similar to geoOrthoCalcScore, but returns quickly if there is something to do
 export function geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles) {
