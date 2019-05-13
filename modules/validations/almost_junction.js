@@ -173,6 +173,33 @@ export function validationAlmostJunction() {
             return results;
         }
 
+        function hasTag(tags, key) {
+            return tags[key] !== undefined && tags[key] !== 'no';
+        }
+
+        function canConnectWays(way, way2) {
+
+            // don't flag almost self-connections for now
+            if (way.id === way2.id) return false;
+
+            // if one is bridge or tunnel, both must be bridge or tunnel
+            if ((hasTag(way.tags, 'bridge') || hasTag(way2.tags, 'bridge')) &&
+                !(hasTag(way.tags, 'bridge') && hasTag(way2.tags, 'bridge'))) return false;
+            if ((hasTag(way.tags, 'tunnel') || hasTag(way2.tags, 'tunnel')) &&
+                !(hasTag(way.tags, 'tunnel') && hasTag(way2.tags, 'tunnel'))) return false;
+
+            // must have equivalent layers and levels
+            var layer1 = way.tags.layer || 0,
+                layer2 = way2.tags.layer || 0;
+            if (layer1 !== layer2) return false;
+
+            var level1 = way.tags.level || 0,
+                level2 = way2.tags.level || 0;
+            if (level1 !== level2) return false;
+
+            return true;
+        }
+
 
         function canConnectByExtend(way, endNodeIdx) {
             var EXTEND_TH_METERS = 5;
@@ -197,9 +224,12 @@ export function validationAlmostJunction() {
             // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
             var intersected = tree.intersects(queryExtent, graph);
             for (var i = 0; i < intersected.length; i++) {
-                if (!isHighway(intersected[i]) || intersected[i].id === way.id) continue;
-
                 var way2 = intersected[i];
+
+                if (!isHighway(way2)) continue;
+
+                if (!canConnectWays(way, way2)) continue;
+
                 for (var j = 0; j < way2.nodes.length - 1; j++) {
                     var nA = graph.entity(way2.nodes[j]);
                     var nB = graph.entity(way2.nodes[j + 1]);

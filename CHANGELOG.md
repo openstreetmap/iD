@@ -141,12 +141,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Prevent deleting features with `wikidata` tags ([#5853])
 - Don't suggest deprecated tag values when editing fields ([#6084])
 - Don't flag disconnected highways that overlap unloaded regions ([#5938], [#6140])
-- Discard relations that appear to have been created accidentally ([#3812])
+- Don't flag almost junctions between features on different layers or levels ([#6355])
+- Discard untagged relations that appear to have been created accidentally ([#3812])
 - Include the number and type of warnings ignored by the user in the changset tags ([#6123])
 - Indicate iD's tag deprecations on Taginfo ([#5995])
 - When connecting crossing paths and roads, don't automatically set the `crossing` tag of the connection node if it is ambiguous ([#6244])
 
-
+[#6355]: https://github.com/openstreetmap/iD/issues/6355
 [#5906]: https://github.com/openstreetmap/iD/issues/5906
 [#6140]: https://github.com/openstreetmap/iD/issues/6140
 [#6224]: https://github.com/openstreetmap/iD/issues/6224
