@@ -22,6 +22,7 @@ export function uiRawMemberEditor(context) {
     var taginfo = services.taginfo;
     var _entityID;
     var _contentSelection = d3_select(null);
+    var _maxMembers = 1000;
 
     function downloadMember(d) {
         d3_event.preventDefault();
@@ -95,7 +96,7 @@ export function uiRawMemberEditor(context) {
 
         var memberships = [];
         var entity = context.entity(_entityID);
-        entity.members.slice(0, 1000).forEach(function(member, index) {
+        entity.members.slice(0, _maxMembers).forEach(function(member, index) {
             memberships.push({
                 index: index,
                 id: member.id,
@@ -366,9 +367,9 @@ export function uiRawMemberEditor(context) {
     function rawMemberEditor(selection) {
         var entity = context.entity(_entityID);
 
-        var gt = entity.members.length > 1000 ? '>' : '';
+        var gt = entity.members.length > _maxMembers ? '>' : '';
         selection.call(uiDisclosure(context, 'raw_member_editor', true)
-            .title(t('inspector.all_members') + ' (' + gt + entity.members.slice(0, 1000).length + ')')
+            .title(t('inspector.all_members') + ' (' + gt + entity.members.slice(0, _maxMembers).length + ')')
             .expanded(true)
             .updatePreference(false)
             .on('toggled', function(expanded) {
