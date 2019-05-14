@@ -129,6 +129,10 @@ export function validationCrossingWays() {
         } else if (canCover(featureType1) && hasTag(tags2, 'covered')) return true;
         else if (canCover(featureType2) && hasTag(tags1, 'covered')) return true;
 
+        // don't flag crossing waterways and pier/highways
+        if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
+        if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
+
         if (!allowsStructures(featureType1) && !allowsStructures(featureType2)) {
             // if no structures are applicable, the layers must be different
             if (layer1 !== layer2) return true;
