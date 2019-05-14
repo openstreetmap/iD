@@ -3240,9 +3240,6 @@ en:
         name: Ice Cream Vending Machine
         # 'terms: chocolate,ice cream,frozen,popsicle,vanilla'
         terms: '<translate with synonyms or related terms for ''Ice Cream Vending Machine'', separated by commas>'
-      amenity/vending_machine/news_papers:
-        # 'amenity=vending_machine, vending=news_papers'
-        name: Newspaper Vending Machine
       amenity/vending_machine/newspapers:
         # 'amenity=vending_machine, vending=newspapers'
         name: Newspaper Vending Machine

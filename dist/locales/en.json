@@ -5122,10 +5122,6 @@
                     "name": "Vending Machine",
                     "terms": ""
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Newspaper Vending Machine",
-                    "terms": ""
-                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"

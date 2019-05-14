@@ -1,8 +1,12 @@
 {
     "icon": "maki-car",
     "fields": [
+        "name",
         "{amenity/parking}",
-        "building",
+        "building"
+    ],
+    "moreFields": [
+        "{amenity/parking}",
         "levels",
         "height"
     ],
