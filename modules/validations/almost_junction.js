@@ -189,12 +189,12 @@ export function validationAlmostJunction() {
                 !(hasTag(way.tags, 'tunnel') && hasTag(way2.tags, 'tunnel'))) return false;
 
             // must have equivalent layers and levels
-            var layer1 = way.tags.layer || 0,
-                layer2 = way2.tags.layer || 0;
+            var layer1 = way.tags.layer || '0',
+                layer2 = way2.tags.layer || '0';
             if (layer1 !== layer2) return false;
 
-            var level1 = way.tags.level || 0,
-                level2 = way2.tags.level || 0;
+            var level1 = way.tags.level || '0',
+                level2 = way2.tags.level || '0';
             if (level1 !== level2) return false;
 
             return true;
