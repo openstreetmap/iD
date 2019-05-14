@@ -6,7 +6,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
-import { osmSetAreaKeys } from '../osm/tags';
+import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
@@ -553,10 +553,14 @@ export function coreContext() {
         presets.fromExternal(external, function(externalPresets) {
             context.presets = function() { return externalPresets; }; // default + external presets...
             osmSetAreaKeys(presets.areaKeys());
+            osmSetPointTags(presets.pointTags());
+            osmSetVertexTags(presets.vertexTags());
         });
     } else {
         presets.init();
         osmSetAreaKeys(presets.areaKeys());
+        osmSetPointTags(presets.pointTags());
+        osmSetVertexTags(presets.vertexTags());
     }
 
     return context;

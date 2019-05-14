@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
 import { data } from '../../data/index';
+import { osmNodeGeometriesForTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -86,24 +87,14 @@ export function presetIndex(context) {
         if (Object.keys(entity.tags).length === 0) return true;
 
         return resolver.transient(entity, 'vertexMatch', function() {
-            var vertexPresets = _index.vertex;
-            if (entity.isOnAddressLine(resolver)) {
-                return true;
-            } else {
-                var didFindMatches = false;
-                for (var k in entity.tags) {
-                    var keyMatches = vertexPresets[k];
-                    if (!keyMatches) continue;
-                    didFindMatches = true;
-                    for (var i = 0; i < keyMatches.length; i++) {
-                        var preset = keyMatches[i];
-                        if (preset.searchable !== false && preset.matchScore(entity.tags) > -1) {
-                            return preset;
-                        }
-                    }
-                }
-                return !didFindMatches;
-            }
+            // address lines allow vertices to act as standalone points
+            if (entity.isOnAddressLine(resolver)) return true;
+
+            var geometries = osmNodeGeometriesForTags(entity.tags);
+            if (geometries.vertex) return true;
+            if (geometries.point) return false;
+            // allow vertices for unspecified points
+            return true;
         });
     };
 
@@ -154,6 +145,42 @@ export function presetIndex(context) {
         });
 
         return areaKeys;
+    };
+
+    all.pointTags = function() {
+        return all.collection.reduce(function(pointTags, d) {
+            // ignore name-suggestion-index, deprecated, and generic presets
+            if (d.suggestion || d.replacement || d.searchable === false) return pointTags;
+
+            // only care about the primary tag
+            for (var key in d.tags) break;
+            if (!key) return pointTags;
+
+            // if this can be a point
+            if (d.geometry.indexOf('point') !== -1) {
+                pointTags[key] = pointTags[key] || {};
+                pointTags[key][d.tags[key]] = true;
+            }
+            return pointTags;
+        }, {});
+    };
+
+    all.vertexTags = function() {
+        return all.collection.reduce(function(vertexTags, d) {
+            // ignore name-suggestion-index, deprecated, and generic presets
+            if (d.suggestion || d.replacement || d.searchable === false) return vertexTags;
+
+            // only care about the primary tag
+            for (var key in d.tags) break;
+            if (!key) return vertexTags;
+
+            // if this can be a vertex
+            if (d.geometry.indexOf('vertex') !== -1) {
+                vertexTags[key] = vertexTags[key] || {};
+                vertexTags[key][d.tags[key]] = true;
+            }
+            return vertexTags;
+        }, {});
     };
 
     all.build = function(d, visible) {

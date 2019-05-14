@@ -7,9 +7,38 @@ export function osmIsInterestingTag(key) {
 }
 
 export var osmAreaKeys = {};
-
 export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
+}
+
+// Tags that indicate a node can be a standalone point
+// e.g. { amenity: { bar: true, parking: true, ... } ... }
+export var osmPointTags = {};
+export function osmSetPointTags(value) {
+    osmPointTags = value;
+}
+// Tags that indicate a node can be part of a way
+// e.g. { amenity: { parking: true, ... }, highway: { stop: true ... } ... }
+export var osmVertexTags = {};
+export function osmSetVertexTags(value) {
+    osmVertexTags = value;
+}
+
+export function osmNodeGeometriesForTags(nodeTags) {
+    var geometries = {};
+    for (var key in nodeTags) {
+        if (osmPointTags[key] &&
+            (osmPointTags[key]['*'] || osmPointTags[key][nodeTags[key]])) {
+            geometries.point = true;
+        }
+        if (osmVertexTags[key] &&
+            (osmVertexTags[key]['*'] || osmVertexTags[key][nodeTags[key]])) {
+            geometries.vertex = true;
+        }
+        // break early if both are already supported
+        if (geometries.point && geometries.vertex) break;
+    }
+    return geometries;
 }
 
 export var osmOneWayTags = {
