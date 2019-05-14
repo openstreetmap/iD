@@ -83,13 +83,15 @@ export function validationUnsquareWay() {
                     icon: 'iD-operation-orthogonalize',
                     title: t('issues.fix.square_feature.title'),
                     autoArgs: autoArgs,
-                    onClick: function() {
+                    onClick: function(completionHandler) {
                         var entityId = this.issue.entityIds[0];
                         // note: use default params for actionOrthogonalize, not relaxed epsilon
                         context.perform(
                             actionOrthogonalize(entityId, context.projection),
                             t('operations.orthogonalize.annotation.area')
                         );
+                        // run after the squaring transition (currently 150ms)
+                        window.setTimeout(function() { completionHandler(); }, 175);
                     }
                 }),
                 new validationIssueFix({

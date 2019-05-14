@@ -202,12 +202,28 @@ export function uiEntityIssues(context) {
                 return 'issue-fix-item ' + (d.onClick ? 'actionable' : '');
             })
             .on('click', function(d) {
-                if (d.onClick) {
-                    var issueEntityIDs = d.issue.entityIds;
-                    utilHighlightEntities(issueEntityIDs.concat(d.entityIds), false, context);
-                    d.onClick();
-                    window.setTimeout(function() { context.validator().validate(); }, 300);  // after any transition
-                }
+                // not all fixes are actionable
+                if (!d.onClick) return;
+
+                // Don't run another fix for this issue within a second of running one
+                // (Necessary for "Select a feature type" fix. Most fixes should only ever run once)
+                if (d.issue.dateLastRanFix && new Date() - d.issue.dateLastRanFix < 1000) return;
+                d.issue.dateLastRanFix = new Date();
+
+                // remove hover-highlighting
+                utilHighlightEntities(d.issue.entityIds.concat(d.entityIds), false, context);
+
+                new Promise(function(resolve, reject) {
+                    d.onClick(resolve, reject);
+                    if (!d.onClick.length) {
+                        // if the fix doesn't take any completion parameters then consider it resolved
+                        resolve();
+                    }
+                })
+                .then(function() {
+                    // revalidate whenever the fix has finished running successfully
+                    context.validator().validate();
+                });
             })
             .on('mouseover.highlight', function(d) {
                 utilHighlightEntities(d.entityIds, true, context);
