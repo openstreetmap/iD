@@ -75,10 +75,10 @@ export function uiFieldRadio(field, context) {
 
 
     function structureExtras(selection, tags) {
-        var selected = selectedKey();
+        var selected = selectedKey() || tags.layer !== undefined;
         var type = context.presets().field(selected);
         var layer = context.presets().field('layer');
-        var showLayer = (selected === 'bridge' || selected === 'tunnel');
+        var showLayer = (selected === 'bridge' || selected === 'tunnel' || tags.layer !== undefined);
 
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
