@@ -82,7 +82,7 @@
     "osm-community-index": "0.6.0",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.88.0",
-    "rollup": "~1.11.3",
+    "rollup": "~1.12.0",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-json": "^4.0.0",
