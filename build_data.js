@@ -220,10 +220,16 @@ function suggestionsToPresets(presets) {
 
         let presetID, preset;
 
-        // sometimes we can find a more specific preset then key/value..
+        // sometimes we can choose a more specific preset then key/value..
         if (suggestion.tags.cuisine) {
-            presetID = key + '/' + value + '/' + suggestion.tags.cuisine;
-            preset = presets[presetID];
+            // cuisine can contain multiple values, so try them all in order
+            let cuisines = suggestion.tags.cuisine.split(';');
+            for (let i = 0; i < cuisines.length; i++) {
+                presetID = key + '/' + value + '/' + cuisines[i].trim();
+                preset = presets[presetID];
+                if (preset) break;  // we matched one
+            }
+
         } else if (suggestion.tags.vending) {
             if (suggestion.tags.vending === 'parcel_pickup;parcel_mail_in') {
                 presetID = key + '/' + value + '/parcel_pickup_dropoff';

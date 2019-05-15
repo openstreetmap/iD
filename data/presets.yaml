@@ -2657,6 +2657,11 @@ en:
         name: Chicken Fast Food
         # 'terms: breakfast,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
         terms: '<translate with synonyms or related terms for ''Chicken Fast Food'', separated by commas>'
+      amenity/fast_food/donut:
+        # 'amenity=fast_food, cuisine=donut'
+        name: Donut Fast Food
+        # 'terms: breakfast,brunch,cafe,canteen,coffee,dine,diner,donut,doughnut,dining,eat,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Donut Fast Food'', separated by commas>'
       amenity/fast_food/fish_and_chips:
         # 'amenity=fast_food, cuisine=fish_and_chips'
         name: Fish & Chips Fast Food
