@@ -35,6 +35,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiTasking } from './tasking';
 import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -66,6 +67,11 @@ export function uiInit(context) {
             .append('div')
             .attr('id', 'sidebar')
             .call(ui.sidebar);
+
+        container
+            .append('div')
+            .attr('id', 'tasking')
+            .call(ui.tasking);
 
         var content = container
             .append('div')
@@ -364,6 +370,7 @@ export function uiInit(context) {
 
 
     ui.sidebar = uiSidebar(context);
+    ui.tasking = uiTasking(context);
 
     ui.photoviewer = uiPhotoviewer(context);
 

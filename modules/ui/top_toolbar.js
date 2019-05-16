@@ -4,12 +4,13 @@ import {
 } from 'd3-selection';
 
 import _debounce from 'lodash-es/debounce';
-import { /*uiToolAddFavorite, uiToolAddRecent, uiToolSearchAdd, */ uiToolOldDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { /*uiToolAddFavorite, uiToolAddRecent, uiToolSearchAdd, */ uiToolOldDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolTaskingToggle, uiToolUndoRedo } from './tools';
 
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
+        taskingToggle = uiToolTaskingToggle(context),
         modes = uiToolOldDrawModes(context),
         //searchAdd = uiToolSearchAdd(context),
         //addFavorite = uiToolAddFavorite(context),
@@ -21,6 +22,11 @@ export function uiTopToolbar(context) {
     function notesEnabled() {
         var noteLayer = context.layers().layer('notes');
         return noteLayer && noteLayer.enabled();
+    }
+
+    function taskingEnabled() {
+        var HOTtmLayer = context.layers().layer('HOTtm');
+        return HOTtmLayer && HOTtmLayer.enabled();
     }
 
     function topToolbar(bar) {
@@ -59,6 +65,10 @@ export function uiTopToolbar(context) {
             }
 
             tools = tools.concat([undoRedo, save]);
+
+            if (taskingEnabled()) {
+                tools = tools.concat(['spacer', taskingToggle]);
+            }
 
             var toolbarItems = bar.selectAll('.toolbar-item')
                 .data(tools, function(d) {

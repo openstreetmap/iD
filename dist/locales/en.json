@@ -12,6 +12,7 @@
         },
         "toolbar": {
             "inspect": "Inspect",
+            "tasking": "Tasking",
             "undo_redo": "Undo / Redo",
             "recent": "Recent",
             "favorites": "Favorites",
@@ -515,6 +516,10 @@
         "sidebar": {
             "key": "`",
             "tooltip": "Toggle the sidebar."
+        },
+        "tasking": {
+            "key": "NA yet",
+            "tooltip": "Toggle the tasking manager."
         },
         "feature_info": {
             "hidden_warning": "{count} hidden features",

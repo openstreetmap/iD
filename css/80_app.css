@@ -923,6 +923,63 @@ a.hide-toggle {
 }
 
 
+/* Tasking
+------------------------------------------------------- */
+#tasking {
+    position: relative;
+    float: right;
+    height: 100%;
+    z-index: 10;
+    background: #f6f6f6;
+    -ms-user-select: element;
+    border: 0px solid #ccc;
+    border-left-width: 1px;
+}
+[dir='rtl'] #tasking {
+    float: right;
+    border-left-width: 0px;
+    border-left-width: 1px;
+}
+
+#tasking-resizer {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+}
+[dir='rtl'] #tasking-resizer {
+    right: auto;
+    left: -6px;
+}
+
+#tasking.collapsed #tasking-resizer {
+    /* make target wider to avoid the user accidentally resizing window */
+    width: 10px;
+    right: -10px;
+}
+[dir='rtl'] #tasking.collapsed #tasking-resizer {
+    left: -10px;
+}
+
+.tasking-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.tasking-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
+}
+
+
 /* Sidebar / Inspector
 ------------------------------------------------------- */
 #sidebar {
