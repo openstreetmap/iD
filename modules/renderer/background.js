@@ -175,6 +175,7 @@ export function rendererBackground(context) {
         }
 
         var imageryUsed = [];
+        var photoOverlaysUsed = [];
 
         var current = b.imageryUsed();
         if (current && _isValid) {
@@ -190,26 +191,22 @@ export function rendererBackground(context) {
             imageryUsed.push(data.getSrc());
         }
 
-        var streetside = context.layers().layer('streetside');
-        if (streetside && streetside.enabled()) {
-            imageryUsed.push('Bing Streetside');
+        var photoOverlayLayers = {
+            streetside: 'Bing Streetside',
+            mapillary: 'Mapillary Images',
+            'mapillary-signs': 'Mapillary Signs',
+            openstreetcam: 'OpenStreetCam Images'
+        };
+
+        for (var layerID in photoOverlayLayers) {
+            var layer = context.layers().layer(layerID);
+            if (layer && layer.enabled()) {
+                photoOverlaysUsed.push(layerID);
+                imageryUsed.push(photoOverlayLayers[layerID]);
+            }
         }
 
-        var mapillary_images = context.layers().layer('mapillary');
-        if (mapillary_images && mapillary_images.enabled()) {
-            imageryUsed.push('Mapillary Images');
-        }
-
-        var mapillary_signs = context.layers().layer('mapillary-signs');
-        if (mapillary_signs && mapillary_signs.enabled()) {
-            imageryUsed.push('Mapillary Signs');
-        }
-
-        var openstreetcam_images = context.layers().layer('openstreetcam');
-        if (openstreetcam_images && openstreetcam_images.enabled()) {
-            imageryUsed.push('OpenStreetCam Images');
-        }
-
+        context.history().photoOverlaysUsed(photoOverlaysUsed);
         context.history().imageryUsed(imageryUsed);
     };
 

@@ -18,6 +18,7 @@ export function coreHistory(context) {
     var lock = utilSessionMutex('lock');
     var duration = 150;
     var _imageryUsed = [];
+    var _photoOverlaysUsed = [];
     var _checkpoints = {};
     var _pausedGraph;
     var _stack;
@@ -43,6 +44,7 @@ export function coreHistory(context) {
             graph: graph,
             annotation: annotation,
             imageryUsed: _imageryUsed,
+            photoOverlaysUsed: _photoOverlaysUsed,
             transform: context.projection.transform(),
             selectedIDs: context.selectedIDs()
         };
@@ -314,6 +316,22 @@ export function coreHistory(context) {
         },
 
 
+        photoOverlaysUsed: function(sources) {
+            if (sources) {
+                _photoOverlaysUsed = sources;
+                return history;
+            } else {
+                var s = new Set();
+                _stack.slice(1, _index + 1).forEach(function(state) {
+                    state.photoOverlaysUsed.forEach(function(photoOverlay) {
+                        s.add(photoOverlay);
+                    });
+                });
+                return Array.from(s);
+            }
+        },
+
+
         // save the current history state
         checkpoint: function(key) {
             _checkpoints[key] = {
@@ -468,6 +486,7 @@ export function coreHistory(context) {
                 if (modified.length) x.modified = modified;
                 if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
+                if (i.photoOverlaysUsed) x.photoOverlaysUsed = i.photoOverlaysUsed;
                 if (i.annotation) x.annotation = i.annotation;
                 if (i.transform) x.transform = i.transform;
                 if (i.selectedIDs) x.selectedIDs = i.selectedIDs;
@@ -580,6 +599,7 @@ export function coreHistory(context) {
                         graph: coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed,
+                        photoOverlaysUsed: d.photoOverlaysUsed,
                         transform: d.transform,
                         selectedIDs: d.selectedIDs
                     };

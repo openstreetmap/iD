@@ -86,6 +86,23 @@ export function uiCommit(context) {
             if (source) {
                 tags.source = source;
             }
+            var existingSources = (tags.source || '').split(';');
+            // add the photo overlays used during editing as sources
+            var photoOverlaysUsed = context.history().photoOverlaysUsed();
+            if (photoOverlaysUsed.length) {
+                // include this tag for any photo layer
+                if (existingSources.indexOf('streetlevel imagery') === -1) {
+                    existingSources.push('streetlevel imagery');
+                }
+            }
+            photoOverlaysUsed.forEach(function(photoOverlay) {
+                if (existingSources.indexOf(photoOverlay) === -1) {
+                    existingSources.push(photoOverlay);
+                }
+            });
+            if (existingSources.length) {
+                tags.source = existingSources.join(';').substr(0, 255);
+            }
 
             _changeset = new osmChangeset({ tags: tags });
         }
