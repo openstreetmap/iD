@@ -794,6 +794,10 @@
       "replace": {"leaf_cycle": "deciduous"}
     },
     {
+      "old": {"unnamed": "*"},
+      "replace": {"noname": "$1"}
+    },
+    {
       "old": {"water": "intermittent"},
       "replace": {"natural": "water", "intermittent": "yes"}
     },

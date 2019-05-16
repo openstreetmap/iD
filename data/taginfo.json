@@ -1919,6 +1919,7 @@
     {"key": "type", "value": "broad_leaved", "description": "🄳 ➜ leaf_type=broadleaved"},
     {"key": "type", "value": "conifer", "description": "🄳 ➜ leaf_type=needleleaved"},
     {"key": "type", "value": "deciduous", "description": "🄳 ➜ leaf_cycle=deciduous"},
+    {"key": "unnamed", "description": "🄳 ➜ noname=*"},
     {"key": "water", "value": "intermittent", "description": "🄳 ➜ natural=water + intermittent=yes"},
     {"key": "water", "value": "riverbank", "description": "🄳 ➜ natural=water + water=river"},
     {"key": "water", "value": "salt", "description": "🄳 ➜ natural=water + salt=yes"},
