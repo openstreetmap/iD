@@ -8704,6 +8704,13 @@
                 "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
                 "name": "DigitalGlobe Standard Imagery Vintage"
             },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
+                },
+                "description": "Post-processed Sentinel Satellite imagery.",
+                "name": "eox.at 2018 cloudless"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Terms & Feedback"
