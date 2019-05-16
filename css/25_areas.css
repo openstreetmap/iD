@@ -65,15 +65,11 @@ path.fill.tag-barrier-hedge {
 /* Blue things */
 path.stroke.tag-amenity-fountain,
 path.stroke.tag-leisure-swimming_pool,
-path.stroke.tag-landuse-basin,
-path.stroke.tag-landuse-reservoir,
 path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-fountain,
 path.fill.tag-leisure-swimming_pool,
-path.fill.tag-landuse-basin,
-path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);

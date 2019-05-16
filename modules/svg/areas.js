@@ -42,7 +42,6 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
-            reservoir: 'water_standing',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },
