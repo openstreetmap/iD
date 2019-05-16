@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { svgData } from './data';
 import { svgDebug } from './debug';
 import { svgGeolocate } from './geolocate';
+import { svgHOTtm } from './HOTtm';
 import { svgKeepRight } from './keepRight';
 import { svgImproveOSM } from './improveOSM';
 import { svgStreetside } from './streetside';
@@ -26,6 +27,7 @@ export function svgLayers(projection, context) {
         { id: 'data', layer: svgData(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
+        { id: 'HOTtm', layer: svgHOTtm(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },

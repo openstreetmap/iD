@@ -366,6 +366,58 @@ export function uiMapData(context) {
     }
 
 
+    function drawTaskingItems(selection) {
+        var taskingKeys = ['HOTtm'];
+        var taskingLayers = layers.all().filter(function(obj) { return taskingKeys.indexOf(obj.id) !== -1; });
+
+        var ul = selection
+            .selectAll('.layer-list-tasking')
+            .data([0]);
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-tasking')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item')
+            .data(taskingLayers);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this)
+                    .call(tooltip()
+                        .title(t('map_data.layers.' + d.id + '.tooltip'))
+                        .placement('bottom')
+                    );
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function(d) { toggleLayer(d.id); });
+
+        labelEnter
+            .append('span')
+            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+
+
+        // Update
+        li
+            .merge(liEnter)
+            .classed('active', function (d) { return d.layer.enabled(); })
+            .selectAll('input')
+            .property('checked', function (d) { return d.layer.enabled(); });
+    }
+
+
     // Beta feature - sample vector layers to support Detroit Mapping Challenge
     // https://github.com/osmus/detroit-mapping-challenge
     function drawVectorItems(selection) {
@@ -683,6 +735,7 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawQAItems)
+            .call(drawTaskingItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
     }

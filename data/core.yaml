@@ -593,6 +593,9 @@ en:
       improveOSM:
         tooltip: Missing data automatically detected by improveosm.org
         title: ImproveOSM Issues
+      HOTtm:
+        tooltip: Tasking manager by HOTOSM
+        title: HOT Tasking Manager
       custom:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
