@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { behaviorDrawWay } from '../behavior';
+import { behaviorDrawWay } from '../behavior/draw_way';
 
 
 export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, continuing) {

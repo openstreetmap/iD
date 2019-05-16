@@ -16,6 +16,7 @@
     "tags": {
         "man_made": "*"
     },
+    "matchScore": 0.95,
     "searchable": false,
     "name": "Man Made"
 }

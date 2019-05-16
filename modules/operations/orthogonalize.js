@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
-import { actionOrthogonalize } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionOrthogonalize } from '../actions/orthogonalize';
+import { behaviorOperation } from '../behavior/operation';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationOrthogonalize(selectedIDs, context) {
@@ -8,6 +9,8 @@ export function operationOrthogonalize(selectedIDs, context) {
     var _entity;
     var _geometry;
     var action = chooseAction();
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
 
 
     function chooseAction() {
@@ -39,7 +42,12 @@ export function operationOrthogonalize(selectedIDs, context) {
 
     var operation = function() {
         if (!action) return;
+
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 
@@ -48,18 +56,37 @@ export function operationOrthogonalize(selectedIDs, context) {
     };
 
 
+    // don't cache this because the visible extent could change
     operation.disabled = function() {
         if (!action) return '';
 
-        var extent = _entity.extent(context.graph());
-        var reason;
-
-        if (_geometry !== 'vertex' && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
-        } else if (context.hasHiddenConnections(_entityID)) {
-            reason = 'connected_to_hidden';
+        var actionDisabled = action.disabled(context.graph());
+        if (actionDisabled) {
+            return actionDisabled;
+        } else if (_geometry !== 'vertex' &&
+                   _entity.extent(context.graph()).percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
+        } else if (someMissing()) {
+            return 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+
+        return false;
+
+
+        function someMissing() {
+            if (context.inIntro()) return false;
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 

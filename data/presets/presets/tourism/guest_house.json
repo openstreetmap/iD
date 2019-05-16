@@ -3,16 +3,19 @@
     "fields": [
         "name",
         "operator",
+        "guest_house",
         "address",
         "building_area",
         "rooms",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
         "air_conditioning",
+        "building/levels_building",
+        "height_building",
         "smoking",
         "payment_multi",
-        "internet_access/fee",
         "internet_access/ssid",
         "website",
         "phone",

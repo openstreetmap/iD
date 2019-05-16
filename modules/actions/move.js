@@ -3,7 +3,7 @@ import {
   geoVecAdd, geoVecEqual, geoVecInterp, geoVecSubtract
 } from '../geo';
 
-import { osmNode } from '../osm';
+import { osmNode } from '../osm/node';
 import { utilArrayIntersection } from '../util';
 
 

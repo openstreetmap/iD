@@ -1,6 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { utilObjectOmit, utilQsString } from '../util';
 import { currentLocale } from '../util/locale';
@@ -142,10 +142,19 @@ function request(url, params, exactMatch, callback, loaded) {
 
     if (checkCache(url, params, exactMatch, callback)) return;
 
-    _inflight[url] = d3_json(url, function (err, data) {
-        delete _inflight[url];
-        loaded(err, data);
-    });
+    var controller = new AbortController();
+    _inflight[url] = controller;
+
+    d3_json(url, { signal: controller.signal })
+        .then(function(result) {
+            delete _inflight[url];
+            if (loaded) loaded(null, result);
+        })
+        .catch(function(err) {
+            delete _inflight[url];
+            if (err.name === 'AbortError') return;
+            if (loaded) loaded(err.message);
+        });
 }
 
 
@@ -207,7 +216,7 @@ export default {
 
 
     reset: function() {
-        Object.values(_inflight).forEach(function(request) { request.abort(); });
+        Object.values(_inflight).forEach(function(controller) { controller.abort(); });
         _inflight = {};
     },
 
@@ -290,8 +299,8 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|manufacturer/;
-                var allowUpperCase = (params.key.match(re) !== null);
+                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer/;
+                var allowUpperCase = re.test(params.key);
                 var f = filterValues(allowUpperCase);
 
                 var result = d.data.filter(f).map(valKeyDescription);

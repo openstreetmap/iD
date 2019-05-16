@@ -6,6 +6,7 @@
         "capacity",
         "access_simple",
         "fee",
+        "payment_multi_fee",
         "surface"
     ],
     "moreFields": [
@@ -15,8 +16,8 @@
         "fax",
         "maxstay",
         "name",
+        "opening_hours",
         "park_ride",
-        "payment_multi_fee",
         "phone",
         "ref",
         "supervised",

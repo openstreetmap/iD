@@ -1,5 +1,5 @@
 import { event as d3_event } from 'd3-selection';
-import { uiFlash } from '../ui';
+import { uiFlash } from '../ui/flash';
 
 
 /* Creates a keybinding behavior for an operation */

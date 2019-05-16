@@ -13,6 +13,10 @@
     "tags": {
         "manhole": "*"
     },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "*"
+    },
     "terms": [
         "cover",
         "hole",

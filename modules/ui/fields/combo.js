@@ -4,7 +4,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';
 import { services } from '../../services';
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 export {

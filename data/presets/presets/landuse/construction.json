@@ -3,7 +3,10 @@
     "fields": [
         "name",
         "construction",
-        "operator"
+        "operator",
+        "opening_date",
+        "check_date",
+        "note"
     ],
     "moreFields": [
         "address",

@@ -1,10 +1,13 @@
 {
     "icon": "temaki-car_wash",
     "fields": [
+        "name",
+        "operator",
         "address",
         "building_area",
         "opening_hours",
-        "payment_multi"
+        "payment_multi",
+        "self_service"
     ],
     "moreFields": [
         "website",

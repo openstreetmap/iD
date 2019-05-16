@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { areaKeys } from '../core/context';
+import { osmAreaKeys } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 
 
@@ -201,7 +201,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     };
 
 
-    preset.removeTags = preset.removeTags || preset.tags || {};
+    preset.removeTags = preset.removeTags || preset.addTags || preset.tags || {};
     preset.unsetTags = function(tags, geometry) {
         tags = utilObjectOmit(tags, Object.keys(preset.removeTags));
 
@@ -235,14 +235,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         // Add area=yes if necessary.
         // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
         // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
-        // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
+        // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`)
         if (!addTags.hasOwnProperty('area')) {
             delete tags.area;
             if (geometry === 'area') {
                 var needsAreaTag = true;
                 if (preset.geometry.indexOf('line') === -1) {
                     for (k in addTags) {
-                        if (k in areaKeys) {
+                        if (k in osmAreaKeys) {
                             needsAreaTag = false;
                             break;
                         }

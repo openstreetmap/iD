@@ -9,7 +9,12 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "building/levels_building",
+        "height_building",
         "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "payment_multi",
         "website",
         "phone",

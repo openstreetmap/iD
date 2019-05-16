@@ -218,33 +218,34 @@ describe('iD.rendererFeatures', function() {
         var all = Object.values(graph.base().entities);
 
 
-        function doMatch(ids) {
+        function doMatch(rule, ids) {
             ids.forEach(function(id) {
-                var entity = graph.entity(id),
-                    geometry = entity.geometry(graph);
-                expect(features.isHidden(entity, graph, geometry), 'doMatch: ' + id).to.be.true;
+                var entity = graph.entity(id);
+                var geometry = entity.geometry(graph);
+                expect(features.getMatches(entity, graph, geometry), 'doMatch: ' + id)
+                    .to.have.property(rule);
             });
         }
 
-        function dontMatch(ids) {
+        function dontMatch(rule, ids) {
             ids.forEach(function(id) {
-                var entity = graph.entity(id),
-                    geometry = entity.geometry(graph);
-                expect(features.isHidden(entity, graph, geometry), 'dontMatch: ' + id).to.be.false;
+                var entity = graph.entity(id);
+                var geometry = entity.geometry(graph);
+                expect(features.getMatches(entity, graph, geometry), 'dontMatch: ' + id)
+                    .not.to.have.property(rule);
             });
         }
 
 
         it('matches points', function () {
-            features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('points', [
                 'point_bar', 'point_dock', 'point_rail_station',
                 'point_generator', 'point_old_rail_station'
             ]);
 
-            dontMatch([
+            dontMatch('points', [
                 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -253,17 +254,16 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches traffic roads', function () {
-            features.disable('traffic_roads');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('traffic_roads', [
                 'motorway', 'motorway_link', 'trunk', 'trunk_link',
                 'primary', 'primary_link', 'secondary', 'secondary_link',
                 'tertiary', 'tertiary_link', 'residential', 'living_street',
                 'unclassified', 'boundary_road', 'inner3'
             ]);
 
-            dontMatch([
+            dontMatch('traffic_roads', [
                 'point_bar', 'service', 'road', 'track', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -272,14 +272,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches service roads', function () {
-            features.disable('service_roads');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('service_roads', [
                 'service', 'road', 'track'
             ]);
 
-            dontMatch([
+            dontMatch('service_roads', [
                 'point_bar', 'motorway', 'unclassified', 'living_street',
                 'path', 'building_yes', 'forest', 'boundary', 'boundary_member', 'water',
                 'railway', 'power_line', 'motorway_construction', 'fence'
@@ -288,15 +287,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches paths', function () {
-            features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('paths', [
                 'path', 'footway', 'cycleway', 'bridleway',
                 'steps', 'pedestrian', 'corridor'
             ]);
 
-            dontMatch([
+            dontMatch('paths', [
                 'point_bar', 'motorway', 'service', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -305,15 +303,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches buildings', function () {
-            features.disable('buildings');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('buildings', [
                 'building_yes', 'building_part',
                 'garage1', 'garage2', 'garage3', 'garage4'
             ]);
 
-            dontMatch([
+            dontMatch('buildings', [
                 'building_no', 'point_bar', 'motorway', 'service', 'path',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -322,16 +319,15 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches landuse', function () {
-            features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('landuse', [
                 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
                 'rail_landuse', 'landuse_construction', 'retail',
                 'outer', 'inner1', 'inner2'  // non-interesting members of landuse multipolygon
             ]);
 
-            dontMatch([
+            dontMatch('landuse', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence',
@@ -341,10 +337,9 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches boundaries', function () {
-            features.disable('boundaries');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('boundaries', [
                 'boundary',
                 // match ways that are part of boundary relations - #5601
                 'boundary_member', 'boundary_member2',
@@ -352,7 +347,7 @@ describe('iD.rendererFeatures', function() {
                 'boundary_relation', 'boundary_relation2'
             ]);
 
-            dontMatch([
+            dontMatch('boundaries', [
                 'boundary_road',   // because boundary also used as highway - #4973
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'water', 'railway', 'power_line',
@@ -362,15 +357,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches water', function () {
-            features.disable('water');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('water', [
                 'point_dock', 'water', 'coastline', 'bay', 'pond',
                 'basin', 'reservoir', 'salt_pond', 'river'
             ]);
 
-            dontMatch([
+            dontMatch('water', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -379,15 +373,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches rail', function () {
-            features.disable('rail');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('rail', [
                 'point_rail_station', 'point_old_rail_station',
                 'railway', 'rail_landuse', 'rail_disused'
             ]);
 
-            dontMatch([
+            dontMatch('rail', [
                 'rail_streetcar', 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'power_line',
@@ -397,14 +390,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches power', function () {
-            features.disable('power');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('power', [
                 'point_generator', 'power_line'
             ]);
 
-            dontMatch([
+            dontMatch('power', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway',
                 'motorway_construction', 'fence'
@@ -413,15 +405,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches past/future', function () {
-            features.disable('past_future');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('past_future', [
                 'point_old_rail_station', 'rail_disused',
                 'motorway_construction', 'cycleway_proposed', 'landuse_construction'
             ]);
 
-            dontMatch([
+            dontMatch('past_future', [
                 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line', 'fence'
@@ -430,14 +421,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches others', function () {
-            features.disable('others');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('others', [
                 'fence', 'pipeline'
             ]);
 
-            dontMatch([
+            dontMatch('others', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'retail', 'outer', 'inner1', 'inner2', 'inner3'

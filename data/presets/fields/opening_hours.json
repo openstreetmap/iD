@@ -2,5 +2,6 @@
     "key": "opening_hours",
     "type": "combo",
     "label": "Hours",
+    "placeholder": "Unknown",
     "snake_case": false
 }

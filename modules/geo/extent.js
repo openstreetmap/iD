@@ -1,4 +1,4 @@
-import { geoMetersToLat, geoMetersToLon } from './index';
+import { geoMetersToLat, geoMetersToLon } from './geo';
 
 
 export function geoExtent(min, max) {

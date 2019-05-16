@@ -3,18 +3,20 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { uiDisclosure } from './disclosure';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
+import { uiCmd } from './cmd';
 
 
 export function uiMapData(context) {
     var key = t('map_data.key');
+    var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
     var features = context.features().keys();
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
@@ -277,11 +279,20 @@ export function uiMapData(context) {
         var labelEnter = liEnter
             .append('label')
             .each(function(d) {
-                d3_select(this)
-                    .call(tooltip()
-                        .title(t('map_data.layers.' + d.id + '.tooltip'))
-                        .placement('bottom')
-                    );
+                if (d.id === 'osm') {
+                    d3_select(this)
+                        .call(tooltip()
+                            .html(true)
+                            .title(uiTooltipHtml(t('map_data.layers.' + d.id + '.tooltip'), osmDataToggleKey))
+                            .placement('bottom')
+                        );
+                } else {
+                    d3_select(this)
+                        .call(tooltip()
+                            .title(t('map_data.layers.' + d.id + '.tooltip'))
+                            .placement('bottom')
+                        );
+                }
             });
 
         labelEnter
@@ -820,7 +831,12 @@ export function uiMapData(context) {
 
         context.keybinding()
             .on(key, uiMapData.togglePane)
-            .on(t('area_fill.wireframe.key'), toggleWireframe);
+            .on(t('area_fill.wireframe.key'), toggleWireframe)
+            .on(osmDataToggleKey, function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                toggleLayer('osm');
+            });
     };
 
     return uiMapData;

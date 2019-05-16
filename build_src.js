@@ -38,8 +38,7 @@ module.exports = function buildSrc() {
                         }
                     }),
                     nodeResolve({
-                        module: true,
-                        main: true,
+                        mainFields: ['module', 'main'],
                         browser: false
                     }),
                     commonjs(),

@@ -1,15 +1,13 @@
 import { t } from '../util/locale';
 
-import {
-    actionChangePreset,
-    actionJoin,
-    actionMerge,
-    actionMergeNodes,
-    actionMergePolygon
-} from '../actions';
+import { actionChangePreset } from '../actions/change_preset';
+import { actionJoin } from '../actions/join';
+import { actionMerge } from '../actions/merge';
+import { actionMergeNodes } from '../actions/merge_nodes';
+import { actionMergePolygon } from '../actions/merge_polygon';
 
-import { behaviorOperation } from '../behavior';
-import { modeSelect } from '../modes';
+import { behaviorOperation } from '../behavior/operation';
+import { modeSelect } from '../modes/select';
 
 
 export function operationMerge(selectedIDs, context) {
@@ -60,6 +58,7 @@ export function operationMerge(selectedIDs, context) {
             updatePresetTags(context.graph(), ids);
         }
 
+        context.validator().validate();
         context.enter(modeSelect(context, ids));
     };
 

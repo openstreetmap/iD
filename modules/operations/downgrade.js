@@ -1,12 +1,11 @@
-import { actionChangeTags } from '../actions';
-import { behaviorOperation } from '../behavior';
-import { modeSelect } from '../modes';
+import { actionChangeTags } from '../actions/change_tags';
+import { behaviorOperation } from '../behavior/operation';
+import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
-import { uiCmd } from '../ui';
+import { uiCmd } from '../ui/cmd';
 
 
 export function operationDowngrade(selectedIDs, context) {
-
     var affectedFeatureCount = 0;
     var downgradeType;
 
@@ -83,6 +82,8 @@ export function operationDowngrade(selectedIDs, context) {
             return graph;
         }, operation.annotation());
 
+        context.validator().validate();
+
         // refresh the select mode to enable the delete operation
         context.enter(modeSelect(context, selectedIDs));
     };
@@ -94,15 +95,15 @@ export function operationDowngrade(selectedIDs, context) {
 
 
     operation.disabled = function () {
-        var reason;
         if (selectedIDs.some(hasWikidataTag)) {
-            reason = 'has_wikidata_tag';
+            return 'has_wikidata_tag';
         }
+        return false;
+
         function hasWikidataTag(id) {
             var entity = context.entity(id);
             return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
         }
-        return reason;
     };
 
 

@@ -14,10 +14,6 @@
         "landuse": "military",
         "military": "training_area"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "training_area"
-    },
     "terms": [
         "air force",
         "army",

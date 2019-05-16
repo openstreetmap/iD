@@ -159,6 +159,11 @@ describe('iD.presetPreset', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'b'}, removeTags: {}});
             expect(preset.unsetTags({a: 'b'}, 'area')).to.eql({a: 'b'});
         });
+
+        it('uses tags from addTags if removeTags is not defined', function() {
+            var preset = iD.presetPreset('test', {tags: {a: 'b'}, addTags: {remove: 'me'}});
+            expect(preset.unsetTags({a: 'b', remove: 'me'}, 'area')).to.eql({a: 'b'});
+        });
     });
 
     describe('#visible', function() {

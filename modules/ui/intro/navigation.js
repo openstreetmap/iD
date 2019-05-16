@@ -6,7 +6,8 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { modeBrowse, modeSelect } from '../../modes';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, transitionTime } from './helper';
 

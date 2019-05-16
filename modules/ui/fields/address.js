@@ -4,7 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { dataAddressFormats } from '../../../data';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 

@@ -75,6 +75,11 @@
               "text": "shortcuts.browsing.display_options.wireframe"
             },
             {
+              "modifiers": ["⌥"],
+              "shortcuts": ["area_fill.wireframe.key"],
+              "text": "shortcuts.browsing.display_options.osm_data"
+            },
+            {
               "shortcuts": ["background.minimap.key"],
               "text": "shortcuts.browsing.display_options.minimap"
             }
@@ -232,8 +237,8 @@
               "text": "shortcuts.editing.operations.disconnect"
             },
             {
-              "shortcuts": ["operations.detach_node.key"],
-              "text": "shortcuts.editing.operations.detach_node"
+              "shortcuts": ["operations.extract.key"],
+              "text": "shortcuts.editing.operations.extract"
             },
             {
               "shortcuts": ["operations.split.key"],

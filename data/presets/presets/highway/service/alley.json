@@ -10,10 +10,6 @@
         "highway": "service",
         "service": "alley"
     },
-    "removeTags": {
-        "highway": "service",
-        "service": "alley"
-    },
     "reference": {
         "key": "service",
         "value": "alley"

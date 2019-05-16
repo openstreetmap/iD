@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-pedestrian",
     "fields": [
         "crossing",
         "access",
@@ -10,15 +11,10 @@
     ],
     "tags": {
         "footway": "crossing",
-        "traffic_calming": "table"
-    },
-    "addTags": {
-        "highway": "footway",
-        "footway": "crossing",
         "crossing": "unmarked",
         "traffic_calming": "table"
     },
-    "removeTags": {
+    "addTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked",
@@ -34,6 +30,5 @@
         "speed",
         "slow"
     ],
-    "matchScore": 0.95,
     "name": "Unmarked Crossing (Raised)"
 }

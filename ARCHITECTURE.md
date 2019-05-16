@@ -11,9 +11,8 @@ rendering the map data as well as many sorts of general DOM manipulation tasks
 for which jQuery would often be used.
 
 Notable features of d3 that are used by iD include
-[d3.request](https://github.com/d3/d3/blob/master/API.md#requests-d3-request), which is
-used to make the API requests to download data from openstreetmap.org and save
-changes;
+[d3.fetch](https://github.com/d3/d3/blob/master/API.md#fetches-d3-fetch), which is
+used to make the API requests to download data from openstreetmap.org and save changes;
 [d3.dispatch](https://github.com/d3/d3/blob/master/API.md#dispatches-d3-dispatch),
 which provides a callback-based [Observer
 pattern](http://en.wikipedia.org/wiki/Observer_pattern) between different

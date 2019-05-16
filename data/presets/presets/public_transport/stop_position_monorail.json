@@ -18,11 +18,6 @@
         "monorail": "yes",
         "railway": "stop"
     },
-    "removeTags": {
-        "public_transport": "stop_position",
-        "monorail": "yes",
-        "railway": "stop"
-    },
     "reference": {
         "key": "railway",
         "value": "stop"

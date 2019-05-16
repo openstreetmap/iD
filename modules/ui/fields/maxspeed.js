@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { dataImperial } from '../../../data';
 import { geoPointInPolygon } from '../../geo';
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 

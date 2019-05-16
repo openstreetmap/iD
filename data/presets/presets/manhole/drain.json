@@ -11,6 +11,10 @@
     "tags": {
         "manhole": "drain"
     },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "drain"
+    },
     "terms": [
         "cover",
         "drain",

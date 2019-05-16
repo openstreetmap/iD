@@ -1,5 +1,5 @@
 {
-    "icon": "maki-karaoke",
+    "icon": "fas-microphone",
     "fields": [
         "name",
         "studio",
@@ -7,6 +7,9 @@
         "building_area"
     ],
     "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "website",
         "phone",
         "email",

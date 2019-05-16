@@ -3,8 +3,8 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { data } from '../../data';
-import { svgIcon } from '../svg';
-import { uiDisclosure } from '../ui';
+import { svgIcon } from '../svg/icon';
+import { uiDisclosure } from '../ui/disclosure';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 

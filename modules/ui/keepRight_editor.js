@@ -3,16 +3,14 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 
-import {
-    uiKeepRightDetails,
-    uiKeepRightHeader,
-    uiQuickLinks,
-    uiTooltipHtml,
-    uiViewOnKeepRight
-} from './index';
+import { uiKeepRightDetails } from './keepRight_details';
+import { uiKeepRightHeader } from './keepRight_header';
+import { uiQuickLinks } from './quick_links';
+import { uiTooltipHtml } from './tooltipHtml';
+import { uiViewOnKeepRight } from './view_on_keepRight';
 
 import { utilNoAuto, utilRebind } from '../util';
 

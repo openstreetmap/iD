@@ -31,10 +31,6 @@
         "amenity": "doctors",
         "healthcare": "doctor"
     },
-    "removeTags": {
-        "amenity": "doctors",
-        "healthcare": "doctor"
-    },
     "reference": {
         "key": "amenity",
         "value": "doctors"

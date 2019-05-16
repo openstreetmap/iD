@@ -80,7 +80,7 @@ export function actionConnect(nodeIDs) {
                 role = relation.memberById(node.id).role || '';
 
                 // if this node is a via node in a restriction, remember for later
-                if (relation.isValidRestriction()) {
+                if (relation.hasFromViaTo()) {
                     restrictionIDs.push(relation.id);
                 }
 
@@ -103,7 +103,7 @@ export function actionConnect(nodeIDs) {
 
                 for (k = 0; k < relations.length; k++) {
                     relation = relations[k];
-                    if (relation.isValidRestriction()) {
+                    if (relation.hasFromViaTo()) {
                         restrictionIDs.push(relation.id);
                     }
                 }

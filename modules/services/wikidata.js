@@ -1,4 +1,4 @@
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { utilArrayUniq, utilQsString } from '../util';
 import { currentLocale } from '../util/locale';
@@ -19,11 +19,11 @@ export default {
     // Search for Wikidata items matching the query
     itemsForSearchQuery: function(query, callback) {
         if (!query) {
-            callback('No query', {});
+            if (callback) callback('No query', {});
             return;
         }
 
-        d3_json(apibase + utilQsString({
+        var url = apibase + utilQsString({
             action: 'wbsearchentities',
             format: 'json',
             formatversion: 2,
@@ -32,30 +32,31 @@ export default {
             language: this.languagesToQuery()[0],
             limit: 10,
             origin: '*'
-        }), function(err, data) {
-            if (data && data.error) {
-                err = data.error;
-            }
-            if (err) {
-                callback(err, {});
-            } else {
-                callback(null, data.search || {});
-            }
         });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                }
+                if (callback) callback(null, result.search || {});
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message, {});
+            });
     },
 
 
-    // Given a Wikipedia language and article title, return an array of
-    // corresponding Wikidata entities.
+    // Given a Wikipedia language and article title,
+    // return an array of corresponding Wikidata entities.
     itemsByTitle: function(lang, title, callback) {
         if (!title) {
-            callback('No title', {});
+            if (callback) callback('No title', {});
             return;
         }
 
         lang = lang || 'en';
-
-        d3_json(apibase + utilQsString({
+        var url = apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -63,17 +64,20 @@ export default {
             titles: title,
             languages: 'en', // shrink response by filtering to one language
             origin: '*'
-        }), function(err, data) {
-            if (data && data.error) {
-                err = data.error;
-            }
-            if (err) {
-                callback(err, {});
-            } else {
-                callback(null, data.entities || {});
-            }
         });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                }
+                if (callback) callback(null, result.entities || {});
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message, {});
+            });
     },
+
 
     languagesToQuery: function() {
         return utilArrayUniq([
@@ -83,19 +87,19 @@ export default {
         ]);
     },
 
+
     entityByQID: function(qid, callback) {
         if (!qid) {
             callback('No qid', {});
             return;
         }
         if (_wikidataCache[qid]) {
-            callback(null, _wikidataCache[qid]);
+            if (callback) callback(null, _wikidataCache[qid]);
             return;
         }
 
         var langs = this.languagesToQuery();
-
-        d3_json(apibase + utilQsString({
+        var url = apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -105,17 +109,18 @@ export default {
             languages: langs.join('|'),
             languagefallback: 1,
             origin: '*'
-        }), function(err, data) {
-            if (data && data.error) {
-                err = data.error;
-            }
-            if (err) {
-                callback(err, {});
-            } else {
-                _wikidataCache[qid] = data.entities[qid];
-                callback(null, data.entities[qid] || {});
-            }
         });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                }
+                if (callback) callback(null, result.entities[qid] || {});
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message, {});
+            });
     },
 
 
@@ -134,9 +139,7 @@ export default {
     // }
     //
     getDocs: function(params, callback) {
-
         var langs = this.languagesToQuery();
-
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
                 callback(err || 'No entity');
@@ -144,7 +147,6 @@ export default {
             }
 
             var i;
-
             var description;
             if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
                 description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;

@@ -4,8 +4,8 @@
         "mocha": true
     },
     "globals": {
-        "_": false,
         "expect": true,
+        "fakeFetch": true,
         "happen": false,
         "iD": false,
         "sinon": false

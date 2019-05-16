@@ -1,55 +1,46 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import _debounce from 'lodash-es/debounce';
 
-import { svgIcon } from '../svg';
+import { event as d3_event, select as d3_select } from 'd3-selection';
+
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { modeSelect } from '../modes';
+
+import { actionNoop } from '../actions/noop';
+import { geoSphericalDistance } from '../geo';
+import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilHighlightEntities } from '../util';
+import { utilCallWhenIdle, utilHighlightEntities } from '../util';
 
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    //var _featureApplicabilityList = d3_select(null);
-    var _errorsList = d3_select(null), _warningsList = d3_select(null);
+    var _errorsSelection = d3_select(null);
+    var _warningsSelection = d3_select(null);
     var _rulesList = d3_select(null);
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
 
-    context.validator().on('reload.issues_pane', update);
+    var _errors = [];
+    var _warnings = [];
+    var _options = {
+        what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
+        where: context.storage('validate-where') || 'all'  // 'all', 'visible'
+    };
 
-    /*function renderIssuesOptions(selection) {
-        var container = selection.selectAll('.issues-options-container')
-            .data([0]);
+    // listeners
+    context.validator().on('validated.uiIssues', utilCallWhenIdle(update));
+    context.map().on('move.uiIssues', _debounce(utilCallWhenIdle(update), 1000));
 
-        container = container.enter()
-            .append('div')
-            .attr('class', 'issues-options-container')
-            .merge(container);
 
-        _featureApplicabilityList = container.selectAll('.feature-applicability-list')
-            .data([0]);
-
-        _featureApplicabilityList = _featureApplicabilityList.enter()
-            .append('ul')
-            .attr('class', 'layer-list feature-applicability-list')
-            .merge(_featureApplicabilityList);
-
-        updateFeatureApplicabilityList();
-    }*/
-
-    function addIconBadge(selection) {
+    function addNotificationBadge(selection) {
         var d = 10;
-        selection.selectAll('svg.icon-badge')
+        selection.selectAll('svg.notification-badge')
             .data([0])
             .enter()
             .append('svg')
             .attr('viewbox', '0 0 ' + d + ' ' + d)
-            .attr('class', 'icon-badge')
+            .attr('class', 'notification-badge hide')
             .append('circle')
             .attr('cx', d / 2)
             .attr('cy', d / 2)
@@ -57,34 +48,31 @@ export function uiIssues(context) {
             .attr('fill', 'currentColor');
     }
 
+
     function renderErrorsList(selection) {
-        _errorsList = selection.selectAll('.errors-list')
-            .data([0]);
-
-        _errorsList = _errorsList.enter()
-            .append('ul')
-            .attr('class', 'layer-list errors-list issues-list')
-            .merge(_errorsList);
-
-        updateErrorsList();
+        _errorsSelection = selection
+            .call(drawIssuesList, 'errors', _errors);
     }
+
 
     function renderWarningsList(selection) {
-        _warningsList = selection.selectAll('.warnings-list')
-            .data([0]);
-
-        _warningsList = _warningsList.enter()
-            .append('ul')
-            .attr('class', 'layer-list warnings-list issues-list')
-            .merge(_warningsList);
-
-        updateWarningsList();
+        _warningsSelection = selection
+            .call(drawIssuesList, 'warnings', _warnings);
     }
 
 
-    function drawIssuesList(selection, issues) {
-        var items = selection.selectAll('li')
-            .data(issues, function(d) { return d.id(); });
+    function drawIssuesList(selection, which, issues) {
+        var list = selection.selectAll('.issues-list')
+            .data([0]);
+
+        list = list.enter()
+            .append('ul')
+            .attr('class', 'layer-list issues-list ' + which + '-list')
+            .merge(list);
+
+
+        var items = list.selectAll('li')
+            .data(issues, function(d) { return d.id; });
 
         // Exit
         items.exit()
@@ -95,197 +83,451 @@ export function uiIssues(context) {
             .append('li')
             .attr('class', function (d) { return 'issue severity-' + d.severity; })
             .on('click', function(d) {
-                var extent = d.extent(context.graph());
-                if (extent) {
-                    var msec = 0;
-                    var view = context.map().trimmedExtent();
-                    var zoom = context.map().zoom();
-
-                    // make sure user can see the issue
-                    if (!view.contains(extent) || zoom < 19) {
-                        msec = 250;
-                        context.map().centerZoomEase(extent.center(), Math.max(zoom, 19), msec);
-                    }
-
-                    // select the first entity
-                    if (d.entities && d.entities.length) {
-                        window.setTimeout(function() {
-                            var ids = d.entities.map(function(e) { return e.id; });
-                            context.enter(modeSelect(context, [ids[0]]));
-                            utilHighlightEntities(ids, true, context);
-                        }, msec);
-                    }
-                }
+                context.validator().focusIssue(d);
             })
             .on('mouseover', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, true, context);
+                utilHighlightEntities(d.entityIds, true, context);
             })
             .on('mouseout', function(d) {
-                var ids = d.entities.map(function(e) { return e.id; });
-                utilHighlightEntities(ids, false, context);
+                utilHighlightEntities(d.entityIds, false, context);
             });
 
 
-        var messagesEnter = itemsEnter
-            .append('button')
-            .attr('class', 'message');
+        var labelsEnter = itemsEnter
+            .append('div')
+            .attr('class', 'issue-label');
 
-        messagesEnter
-            .call(tooltip()
-                .html(true)
-                .title(function(d) { return uiTooltipHtml(d.tooltip); })
-                .placement('top')
-            );
-
-        messagesEnter
-            .append('span')
-            .attr('class', 'issue-icon')
-            .call(svgIcon('', 'pre-text'));
-
-        messagesEnter
+        var textEnter = labelsEnter
             .append('span')
             .attr('class', 'issue-text');
+
+        textEnter
+            .append('span')
+            .attr('class', 'issue-icon')
+            .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                d3_select(this)
+                    .call(svgIcon(iconName));
+            });
+
+        textEnter
+            .append('span')
+            .attr('class', 'issue-message');
+
+
+        labelsEnter
+            .append('span')
+            .attr('class', 'issue-autofix')
+            .each(function(d) {
+                if (!d.autoFix) return;
+
+                d3_select(this)
+                    .append('button')
+                    .attr('title', t('issues.fix_one.title'))
+                    .datum(d.autoFix)  // set button datum to the autofix
+                    .attr('class', 'autofix action')
+                    .on('click', function(d) {
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+
+                        var issuesEntityIDs = d.issue.entityIds;
+                        utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
+
+                        context.perform.apply(context, d.autoArgs);
+                        context.validator().validate();
+                    })
+                    .call(svgIcon('#iD-icon-wrench'));
+            });
 
 
         // Update
         items = items
-            .merge(itemsEnter);
+            .merge(itemsEnter)
+            .order();
 
-        items.select('.issue-icon svg use')     // propagate bound data
-            .attr('href', function(d) {
-                return '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+        items.selectAll('.issue-message')
+            .text(function(d) {
+                return d.message();
             });
 
-        items.select('.issue-text')     // propagate bound data
-            .text(function(d) { return d.message; });
+
+        // autofix
+        var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
+
+        var autoFixAll = selection.selectAll('.autofix-all')
+            .data(canAutoFix.length ? [0] : []);
+
+        // exit
+        autoFixAll.exit()
+            .remove();
+
+        // enter
+        var autoFixAllEnter = autoFixAll.enter()
+            .insert('div', '.issues-list')
+            .attr('class', 'autofix-all');
+
+        var linkEnter = autoFixAllEnter
+            .append('a')
+            .attr('class', 'autofix-all-link')
+            .attr('href', '#');
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-text')
+            .text(t('issues.fix_all.title'));
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-icon')
+            .call(svgIcon('#iD-icon-wrench'));
+
+        if (which === 'warnings') {
+            renderIgnoredIssuesReset(selection);
+        }
+
+        // update
+        autoFixAll = autoFixAll
+            .merge(autoFixAllEnter);
+
+        autoFixAll.selectAll('.autofix-all-link')
+            .on('click', function() {
+                context.pauseChangeDispatch();
+                context.perform(actionNoop());
+                canAutoFix.forEach(function(issue) {
+                    var args = issue.autoFix.autoArgs.slice();  // copy
+                    if (typeof args[args.length - 1] !== 'function') {
+                        args.pop();
+                    }
+                    args.push(t('issues.fix_all.annotation'));
+                    context.replace.apply(context, args);
+                });
+                context.resumeChangeDispatch();
+                context.validator().validate();
+            });
+    }
+
+
+    function updateOptionValue(d, val) {
+        if (!val && d3_event && d3_event.target) {
+            val = d3_event.target.value;
+        }
+
+        _options[d] = val;
+        context.storage('validate-' + d, val);
+        update();
+    }
+
+
+    function renderIssuesOptions(selection) {
+        var container = selection.selectAll('.issues-options-container')
+            .data([0]);
+
+        container = container.enter()
+            .append('div')
+            .attr('class', 'issues-options-container')
+            .merge(container);
+
+        var data = [
+            { key: 'what', values: ['edited', 'all'] },
+            { key: 'where', values: ['visible', 'all'] }
+        ];
+
+        var options = container.selectAll('.issues-option')
+            .data(data, function(d) { return d.key; });
+
+        var optionsEnter = options.enter()
+            .append('div')
+            .attr('class', function(d) { return 'issues-option issues-option-' + d.key; });
+
+        optionsEnter
+            .append('div')
+            .attr('class', 'issues-option-title')
+            .text(function(d) { return t('issues.options.' + d.key + '.title'); });
+
+        var valuesEnter = optionsEnter.selectAll('label')
+            .data(function(d) {
+                return d.values.map(function(val) { return { value: val, key: d.key }; });
+            })
+            .enter()
+            .append('label');
+
+        valuesEnter
+            .append('input')
+            .attr('type', 'radio')
+            .attr('name', function(d) { return 'issues-option-' + d.key; })
+            .attr('value', function(d) { return d.value; })
+            .property('checked', function(d) { return _options[d.key] === d.value; })
+            .on('change', function(d) { updateOptionValue(d.key, d.value); });
+
+        valuesEnter
+            .append('span')
+            .text(function(d) { return t('issues.options.' + d.key + '.' + d.value); });
     }
 
 
     function renderNoIssuesBox(selection) {
-        selection
+
+        var box = selection.append('div')
+            .attr('class', 'box');
+
+        box
             .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesMessage = selection
+        var noIssuesMessage = box
             .append('span');
 
         noIssuesMessage
             .append('strong')
-            .text(t('issues.no_issues.message'));
+            .attr('class', 'message');
 
         noIssuesMessage
             .append('br');
 
         noIssuesMessage
             .append('span')
-            .text(t('issues.no_issues.info'));
+            .attr('class', 'details');
     }
 
+    function renderIgnoredIssuesReset(selection) {
+
+        var ignoredIssues = context.validator()
+            .getIssues(Object.assign({ includeIgnored: 'only' }, _options));
+
+        var resetIgnored = selection.selectAll('.reset-ignored')
+            .data(ignoredIssues.length ? [0] : []);
+
+        // exit
+        resetIgnored.exit()
+            .remove();
+
+        // enter
+        var resetIgnoredEnter = resetIgnored.enter()
+            .append('div')
+            .attr('class', 'reset-ignored section-footer');
+
+        resetIgnoredEnter
+            .append('a')
+            .attr('href', '#');
+
+        // update
+        resetIgnored = resetIgnored
+            .merge(resetIgnoredEnter);
+
+        resetIgnored.select('a')
+            .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
+
+        resetIgnored.on('click', function() {
+                context.validator().resetIgnoredIssues();
+            });
+    }
+
+
     function renderRulesList(selection) {
-        var container = selection.selectAll('.issue-rules-list')
+        var container = selection.selectAll('.issues-rulelist-container')
             .data([0]);
 
-        _rulesList = container.enter()
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'issues-rulelist-container');
+
+        containerEnter
             .append('ul')
-            .attr('class', 'layer-list issue-rules-list')
-            .merge(container);
+            .attr('class', 'layer-list issue-rules-list');
+
+        var ruleLinks = containerEnter
+            .append('div')
+            .attr('class', 'issue-rules-links section-footer');
+
+        ruleLinks
+            .append('a')
+            .attr('class', 'issue-rules-link')
+            .attr('href', '#')
+            .text(t('issues.enable_all'))
+            .on('click', function() {
+                context.validator().disableRules([]);
+            });
+
+        ruleLinks
+            .append('a')
+            .attr('class', 'issue-rules-link')
+            .attr('href', '#')
+            .text(t('issues.disable_all'))
+            .on('click', function() {
+                var keys = context.validator().getRuleKeys();
+                context.validator().disableRules(keys);
+            });
+
+
+        // Update
+        container = container
+            .merge(containerEnter);
+
+        _rulesList = container.selectAll('.issue-rules-list');
 
         updateRulesList();
     }
 
-    /*
-    function showsFeatureApplicability(d) {
-        return context.validator().getFeatureApplicability() === d;
-    }
-
-    function setFeatureApplicability(d) {
-        context.validator().setFeatureApplicability(d);
-        update();
-    }
-
-    function updateFeatureApplicabilityList() {
-        _featureApplicabilityList
-            .call(
-                drawListItems,
-                context.validator().featureApplicabilityOptions,
-                'radio',
-                'features_to_validate',
-                setFeatureApplicability,
-                showsFeatureApplicability
-            );
-    }*/
-
-    function updateErrorsList() {
-        var errors = context.validator().getErrors();
-        _errorsList
-            .call(drawIssuesList, errors);
-    }
-
-
-    function updateWarningsList() {
-        var warnings = context.validator().getWarnings();
-        _warningsList
-            .call(drawIssuesList, warnings);
-    }
 
     function updateRulesList() {
-        var rules = context.validator().getRuleIDs();
+        var ruleKeys = context.validator().getRuleKeys();
         _rulesList
-            .call(drawListItems, rules, 'checkbox', 'rule', toggleRule, ruleIsEnabled);
+            .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
     }
 
-    function ruleIsEnabled(d) {
-        return !context.validator().getDisabledRules()[d];
+
+    function isRuleEnabled(d) {
+        return context.validator().isRuleEnabled(d);
     }
+
 
     function toggleRule(d) {
         context.validator().toggleRule(d);
     }
 
+    function setNoIssuesText() {
+
+        function checkForHiddenIssues(cases) {
+            for (var type in cases) {
+                var opts = cases[type];
+                var hiddenIssues = context.validator().getIssues(opts);
+                if (hiddenIssues.length) {
+                    _pane.select('.issues-none .details')
+                        .text(t(
+                            'issues.no_issues.hidden_issues.' + type,
+                            { count: hiddenIssues.length.toString() }
+                        ));
+                    return;
+                }
+            }
+            _pane.select('.issues-none .details')
+                .text(t('issues.no_issues.hidden_issues.none'));
+        }
+
+        var messageType;
+
+        if (_options.what === 'edited' && _options.where === 'visible') {
+
+            messageType = 'edits_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'edited', where: 'all' },
+                other_features: { what: 'all', where: 'visible' },
+                disabled_rules: { what: 'edited', where: 'visible', includeDisabledRules: 'only' },
+                other_features_elsewhere: { what: 'all', where: 'all' },
+                disabled_rules_elsewhere: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'edited' && _options.where === 'all') {
+
+            messageType = 'edits';
+
+            checkForHiddenIssues({
+                other_features: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'edited', where: 'all', includeIgnored: 'only' }
+            });
+
+        } else if (_options.what === 'all' && _options.where === 'visible') {
+
+            messageType = 'everything_in_view';
+
+            checkForHiddenIssues({
+                elsewhere: { what: 'all', where: 'all' },
+                disabled_rules: { what: 'all', where: 'visible', includeDisabledRules: 'only' },
+                disabled_rules_elsewhere: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'visible', includeIgnored: 'only' },
+                ignored_issues_elsewhere: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        } else if (_options.what === 'all' && _options.where === 'all') {
+
+            messageType = 'everything';
+
+            checkForHiddenIssues({
+                disabled_rules: { what: 'all', where: 'all', includeDisabledRules: 'only' },
+                ignored_issues: { what: 'all', where: 'all', includeIgnored: 'only' }
+            });
+        }
+
+        _pane.select('.issues-none .message')
+            .text(t('issues.no_issues.message.' + messageType));
+
+    }
+
 
     function update() {
-        var errors = context.validator().getErrors();
-        var warnings = context.validator().getWarnings();
+        var issuesBySeverity = context.validator().getIssuesBySeverity(_options);
 
-        _toggleButton.selectAll('.icon-badge')
-            .classed('error', (errors.length > 0))
-            .classed('warning', (errors.length === 0 && warnings.length > 0))
-            .classed('hide', (errors.length === 0 && warnings.length === 0));
+        // sort issues by distance away from the center of the map
+        var center = context.map().center();
+        var graph = context.graph();
+        _errors = issuesBySeverity.error.map(withDistance).sort(byDistance);
+        _warnings = issuesBySeverity.warning.map(withDistance).sort(byDistance);
 
-        _pane.select('.issues-errors')
-            .classed('hide', errors.length === 0);
+        // cut off at 1000
+        var errorCount = _errors.length > 1000 ? '1000+' : String(_errors.length);
+        var warningCount = _warnings.length > 1000 ? '1000+' : String(_warnings.length);
+        _errors = _errors.slice(0, 1000);
+        _warnings = _warnings.slice(0, 1000);
 
-        if (errors.length > 0) {
-            _pane.select('.hide-toggle-issues_errors .hide-toggle-text')
-                .text(t('issues.errors.list_title', { count: errors.length }));
+
+        _toggleButton.selectAll('.notification-badge')
+            .classed('error', (_errors.length > 0))
+            .classed('warning', (_errors.length === 0 && _warnings.length > 0))
+            .classed('hide', (_errors.length === 0 && _warnings.length === 0));
+
+
+        _pane.selectAll('.issues-errors')
+            .classed('hide', _errors.length === 0);
+
+        if (_errors.length > 0) {
+            _pane.selectAll('.hide-toggle-issues_errors .hide-toggle-text')
+                .text(t('issues.errors.list_title', { count: errorCount }));
             if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
-                updateErrorsList();
+                _errorsSelection
+                    .call(drawIssuesList, 'errors', _errors);
             }
         }
 
-        _pane.select('.issues-warnings')
-            .classed('hide', warnings.length === 0);
+        _pane.selectAll('.issues-warnings')
+            .classed('hide', _warnings.length === 0);
 
-        if (warnings.length > 0) {
-            _pane.select('.hide-toggle-issues_warnings .hide-toggle-text')
-                .text(t('issues.warnings.list_title', { count: warnings.length }));
+        if (_warnings.length > 0) {
+            _pane.selectAll('.hide-toggle-issues_warnings .hide-toggle-text')
+                .text(t('issues.warnings.list_title', { count: warningCount }));
             if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
-                updateWarningsList();
+                _warningsSelection
+                    .call(drawIssuesList, 'warnings', _warnings);
             }
         }
 
-        _pane.select('.issues-none')
-            .classed('hide', warnings.length > 0 || errors.length > 0);
+        var hasIssues = _warnings.length > 0 || _errors.length > 0;
 
-        //if (!_pane.select('.disclosure-wrap-issues_options').classed('hide')) {
-        //    updateFeatureApplicabilityList();
-        //}
+        var issuesNone = _pane.select('.issues-none');
+        issuesNone.classed('hide', hasIssues);
+        if (!hasIssues) {
+            renderIgnoredIssuesReset(issuesNone);
+            setNoIssuesText();
+        }
 
         if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();
         }
+
+
+        function byDistance(a, b) {
+            return a.dist - b.dist;
+        }
+
+        function withDistance(issue) {
+            var extent = issue.extent(graph);
+            var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
+            return Object.assign(issue, { dist: dist });
+        }
     }
+
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -297,20 +539,15 @@ export function uiIssues(context) {
 
         // Enter
         var enter = items.enter()
-            .append('li')
-            .call(tooltip()
-                .title(function(d) {
-                    if (d === 'disconnected_way') {
-                        d += '.highway';
-                    } else if (d === 'almost_junction') {
-                        d += '.highway-highway';
-                    } else if (d === 'missing_role') {
-                        d += '.multipolygon';
-                    }
-                    return t('issues.' + d + '.tip');
-                })
-                .placement('top')
-            );
+            .append('li');
+
+        if (name === 'rule') {
+            enter
+                .call(tooltip()
+                    .title(function(d) { return t('issues.' + d + '.tip'); })
+                    .placement('top')
+                );
+        }
 
         var label = enter
             .append('label');
@@ -336,14 +573,17 @@ export function uiIssues(context) {
             .property('indeterminate', false);
     }
 
+
     var paneTooltip = tooltip()
         .placement((textDirection === 'rtl') ? 'right' : 'left')
         .html(true)
         .title(uiTooltipHtml(t('issues.title'), key));
 
+
     function hidePane() {
         context.ui().togglePanes();
     }
+
 
     uiIssues.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
@@ -351,20 +591,19 @@ export function uiIssues(context) {
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
-    uiIssues.renderToggleButton = function(selection) {
 
+    uiIssues.renderToggleButton = function(selection) {
         _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
             .on('click', uiIssues.togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
-            .call(addIconBadge)
+            .call(addNotificationBadge)
             .call(paneTooltip);
-
     };
 
-    uiIssues.renderPane = function(selection) {
 
+    uiIssues.renderPane = function(selection) {
         _pane = selection
             .append('div')
             .attr('class', 'fillL map-pane issues-pane hide')
@@ -386,6 +625,11 @@ export function uiIssues(context) {
         var content = _pane
             .append('div')
             .attr('class', 'pane-content');
+
+        content
+            .append('div')
+            .attr('class', 'issues-options')
+            .call(renderIssuesOptions);
 
         content
             .append('div')
@@ -417,28 +661,7 @@ export function uiIssues(context) {
                 .content(renderRulesList)
             );
 
-        // options
-        /*
-        // add this back to core.yaml when re-enabling the options
-        options:
-          title: Options
-        features_to_validate:
-          edited:
-            description: Edited features only
-            tooltip: Flag issues with features you create and modify
-          all:
-            description: All features
-            tooltip: Flag issues with all nearby features
-
-        content
-            .append('div')
-            .attr('class', 'issues-options')
-            .call(uiDisclosure(context, 'issues_options', true)
-                .title(t('issues.options.title'))
-                .content(renderIssuesOptions)
-            );
-        */
-        update();
+        // update();
 
         context.keybinding()
             .on(key, uiIssues.togglePane);

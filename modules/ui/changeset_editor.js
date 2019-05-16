@@ -1,8 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { t } from '../util/locale';
-import { svgIcon } from '../svg';
-import { uiCombobox, uiField, uiFormFields } from './index';
+import { svgIcon } from '../svg/icon';
+import { uiCombobox} from './combobox';
+import { uiField } from './field';
+import { uiFormFields } from './form_fields';
 import { utilArrayUniqBy, utilRebind, utilTriggerEvent } from '../util';
 
 

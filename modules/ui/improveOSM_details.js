@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { dataEn } from '../../data';
-import { modeSelect } from '../modes';
+import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { utilDisplayName, utilEntityOrMemberSelector, utilEntityRoot } from '../util';
 

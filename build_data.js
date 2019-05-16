@@ -55,9 +55,12 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
-            'fas-long-arrow-alt-right': {}
+            'fas-i-cursor': {},
+            'fas-long-arrow-alt-right': {},
+            'fas-th-list': {}
         };
 
+        // The Noun Project icons used
         var tnpIcons = {};
 
         // Start clean
@@ -217,10 +220,16 @@ function suggestionsToPresets(presets) {
 
         let presetID, preset;
 
-        // sometimes we can find a more specific preset then key/value..
+        // sometimes we can choose a more specific preset then key/value..
         if (suggestion.tags.cuisine) {
-            presetID = key + '/' + value + '/' + suggestion.tags.cuisine;
-            preset = presets[presetID];
+            // cuisine can contain multiple values, so try them all in order
+            let cuisines = suggestion.tags.cuisine.split(';');
+            for (let i = 0; i < cuisines.length; i++) {
+                presetID = key + '/' + value + '/' + cuisines[i].trim();
+                preset = presets[presetID];
+                if (preset) break;  // we matched one
+            }
+
         } else if (suggestion.tags.vending) {
             if (suggestion.tags.vending === 'parcel_pickup;parcel_mail_in') {
                 presetID = key + '/' + value + '/parcel_pickup_dropoff';
@@ -263,7 +272,6 @@ function suggestionsToPresets(presets) {
             geometry: preset.geometry,
             tags: Object.assign({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
-            removeTags: suggestion.tags,
             reference: preset.reference,
             countryCodes: suggestion.countryCodes,
             matchScore: 2,

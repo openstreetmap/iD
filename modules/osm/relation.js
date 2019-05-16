@@ -256,6 +256,15 @@ Object.assign(osmRelation.prototype, {
     },
 
 
+    hasFromViaTo: function() {
+        return (
+            this.members.some(function(m) { return m.role === 'from'; }) &&
+            this.members.some(function(m) { return m.role === 'via'; }) &&
+            this.members.some(function(m) { return m.role === 'to'; })
+        );
+    },
+
+
     isRestriction: function() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
     },

@@ -561,8 +561,8 @@ describe('maprules', function() {
                     var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
 
                     expect(issues.length).to.eql(1);
-                    expect(issue.entities).to.eql([entity]);
-                    expect(issue.message).to.eql(selector[type]);
+                    expect(issue.entityIds).to.eql([entity.id]);
+                    expect(issue.message()).to.eql(selector[type]);
                     expect(type).to.eql(issue.severity);
                 });
             });

@@ -15,10 +15,6 @@
         "landuse": "military",
         "military": "nuclear_explosion_site"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "nuclear_explosion_site"
-    },
     "terms": [
         "atom",
         "blast",

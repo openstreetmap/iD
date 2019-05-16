@@ -1,4 +1,5 @@
-import { osmJoinWays, osmWay } from '../osm';
+import { osmJoinWays } from '../osm/multipolygon';
+import { osmWay } from '../osm/way';
 import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
 

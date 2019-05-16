@@ -26,5 +26,9 @@
         "amenity": "toilets",
         "toilets:disposal": "flush"
     },
+    "reference": {
+        "key": "toilets:disposal",
+        "value": "flush"
+    },
     "name": "Flush Toilets"
 }

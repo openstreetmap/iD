@@ -19,11 +19,6 @@
         "trolleybus": "yes",
         "highway": "footway"
     },
-    "removeTags": {
-        "public_transport": "platform",
-        "trolleybus": "yes",
-        "highway": "footway"
-    },
     "reference": {
         "key": "public_transport",
         "value": "platform"

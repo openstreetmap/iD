@@ -5,7 +5,7 @@ import {
 
 import { t } from '../util/locale';
 import { dataShortcuts } from '../../data';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
 import { utilArrayUniq } from '../util';

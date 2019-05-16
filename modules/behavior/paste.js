@@ -1,9 +1,10 @@
 import { event as d3_event } from 'd3-selection';
 
-import { actionCopyEntities, actionMove } from '../actions';
+import { actionCopyEntities } from '../actions/copy_entities';
+import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
-import { modeMove } from '../modes';
-import { uiCmd } from '../ui';
+import { modeMove } from '../modes/move';
+import { uiCmd } from '../ui/cmd';
 
 
 export function behaviorPaste(context) {

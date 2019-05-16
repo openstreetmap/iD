@@ -8,12 +8,15 @@
         "website"
     ],
     "moreFields": [
-        "fee",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

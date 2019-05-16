@@ -1,6 +1,7 @@
 {
     "icon": "maki-bicycle",
     "fields": [
+        "name",
         "surface",
         "sport_racing_nonmotor",
         "lit",
@@ -8,7 +9,6 @@
         "lanes"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
@@ -17,11 +17,6 @@
         "sport": "cycling"
     },
     "addTags": {
-        "leisure": "track",
-        "sport": "cycling",
-        "highway": "cycleway"
-    },
-    "removeTags": {
         "leisure": "track",
         "sport": "cycling",
         "highway": "cycleway"

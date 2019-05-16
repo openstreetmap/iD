@@ -25,7 +25,11 @@ export function actionReverse(wayID, options) {
         [/:right$/, ':left'],
         [/:left$/, ':right'],
         [/:forward$/, ':backward'],
-        [/:backward$/, ':forward']
+        [/:backward$/, ':forward'],
+        [/:right:/, ':left:'],
+        [/:left:/, ':right:'],
+        [/:forward:/, ':backward:'],
+        [/:backward:/, ':forward:']
     ];
     var valueReplacements = {
         left: 'right',

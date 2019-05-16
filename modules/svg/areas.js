@@ -1,7 +1,8 @@
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
-import { svgPath, svgSegmentWay, svgTagClasses } from './index';
+import { svgPath, svgSegmentWay } from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 
 export function svgAreas(projection, context) {
@@ -41,7 +42,6 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
-            reservoir: 'water_standing',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },

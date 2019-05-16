@@ -11,7 +11,7 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';

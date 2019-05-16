@@ -4,9 +4,9 @@ import {
 } from 'd3-selection';
 
 import marked from 'marked';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
-import { uiIntro } from './intro';
+import { uiIntro } from './intro/intro';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -366,7 +366,7 @@ export function uiHelp(context) {
         function clickWalkthrough() {
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
-            uiHelp.setVisible(false);
+            context.ui().togglePanes();
         }
 
 

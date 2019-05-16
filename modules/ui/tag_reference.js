@@ -5,7 +5,7 @@ import {
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 
 
 // Pass `which` object of the form:

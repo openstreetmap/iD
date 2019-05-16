@@ -11,7 +11,7 @@ import { dataWikipedia } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
@@ -402,7 +402,7 @@ export function uiFieldLocalized(field, context) {
 
                 var label = wrap
                     .append('label')
-                    .attr('class', 'form-field-label');
+                    .attr('class', 'field-label');
 
                 label
                     .append('span')
@@ -480,7 +480,10 @@ export function uiFieldLocalized(field, context) {
             _wikiTitles = {};
             var wm = tags.wikipedia.match(/([^:]+):(.+)/);
             if (wm && wm[0] && wm[1]) {
-                wikipedia.translations(wm[1], wm[2], function(d) { _wikiTitles = d; });
+                wikipedia.translations(wm[1], wm[2], function(err, d) {
+                    if (err || !d) return;
+                    _wikiTitles = d;
+                });
             }
         }
 

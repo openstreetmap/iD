@@ -11,14 +11,12 @@ import {
 
 import { osmEntity, osmNote, qaError } from '../osm';
 import { services } from '../services';
-import {
-    uiDataEditor,
-    uiFeatureList,
-    uiInspector,
-    uiNoteEditor,
-    uiImproveOsmEditor,
-    uiKeepRightEditor
-} from './index';
+import { uiDataEditor } from './data_editor';
+import { uiFeatureList } from './feature_list';
+import { uiInspector } from './inspector';
+import { uiImproveOsmEditor } from './improveOSM_editor';
+import { uiKeepRightEditor } from './keepRight_editor';
+import { uiNoteEditor } from './note_editor';
 import { textDirection } from '../util/locale';
 
 

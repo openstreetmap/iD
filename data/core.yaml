@@ -99,6 +99,7 @@ en:
       not_closed: This can't be made circular because it's not a loop.
       too_large: This can't be made circular because not enough of it is currently visible.
       connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
+      not_downloaded: This can't be made circular because parts of it have not yet been downloaded.
     orthogonalize:
       title: Square
       description:
@@ -115,13 +116,19 @@ en:
       not_squarish: This can't be made square because it is not squarish.
       too_large: This can't be made square because not enough of it is currently visible.
       connected_to_hidden: This can't be made square because it is connected to a hidden feature.
+      not_downloaded: This can't be made square because parts of it have not yet been downloaded.
     straighten:
       title: Straighten
-      description: Straighten this line.
+      description:
+        points: Straighten these points.
+        line: Straighten this line.
       key: S
-      annotation: Straightened a line.
+      annotation:
+        points: Straightened several points.
+        line: Straightened a line.
       too_bendy: This can't be straightened because it bends too much.
-      connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
+      connected_to_hidden: This can't be straightened because it is connected to a hidden feature.
+      not_downloaded: This can't be straightened because parts of it have not yet been downloaded.
     delete:
       title: Delete
       description:
@@ -146,6 +153,9 @@ en:
       connected_to_hidden:
         single: This feature can't be deleted because it is connected to a hidden feature.
         multiple: These features can't be deleted because some are connected to hidden features.
+      not_downloaded:
+        single: This feature can't be deleted because parts of it have not yet been downloaded.
+        multiple: These features can't be deleted because parts of them have not yet been downloaded.
       has_wikidata_tag:
         single: This feature can't be deleted because it has a Wikidata tag.
         multiple: These features can't be deleted because some have Wikidata tags.
@@ -191,9 +201,16 @@ en:
     disconnect:
       title: Disconnect
       description: Disconnect these lines/areas from each other.
+      line:
+        description: Disconnect this line from other features.
+      area:
+        description: Disconnect this area from other features.
       key: D
       annotation: Disconnected lines/areas.
+      too_large:
+        single: This can't be disconnected because not enough of it is currently visible.
       not_connected: There aren't enough lines/areas here to disconnect.
+      not_downloaded: This can't be disconnected because parts of it have not yet been downloaded.
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
       relation: This can't be disconnected because it connects members of a relation.
     merge:
@@ -229,6 +246,9 @@ en:
       connected_to_hidden:
         single: This feature can't be moved because it is connected to a hidden feature.
         multiple: These features can't be moved because some are connected to hidden features.
+      not_downloaded:
+        single: This feature can't be moved because parts of it have not yet been downloaded.
+        multiple: These features can't be moved because parts of them have not yet been downloaded.
     reflect:
       title:
         long: Reflect Long
@@ -259,6 +279,9 @@ en:
       connected_to_hidden:
         single: This feature can't be reflected because it is connected to a hidden feature.
         multiple: These features can't be reflected because some are connected to hidden features.
+      not_downloaded:
+        single: This feature can't be reflected because parts of it have not yet been downloaded.
+        multiple: These features can't be reflected because parts of them have not yet been downloaded.
     rotate:
       title: Rotate
       description:
@@ -278,6 +301,9 @@ en:
       connected_to_hidden:
         single: This feature can't be rotated because it is connected to a hidden feature.
         multiple: These features can't be rotated because some are connected to hidden features.
+      not_downloaded:
+        single: This feature can't be rotated because parts of it have not yet been downloaded.
+        multiple: These features can't be rotated because parts of them have not yet been downloaded.
     reverse:
       title: Reverse
       description: Make this line go in the opposite direction.
@@ -301,13 +327,25 @@ en:
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction
-    detach_node:
-      title: Detach
+    extract:
+      title: Extract
       key: E
-      description: Detach this node from these lines/areas.
-      annotation: Detached a node from parent lines/areas.
-      restriction: "This node can't be detached because it would damage a \"{relation}\" relation."
-      connected_to_hidden: This node can't be detached because it is connected to a hidden feature.
+      description:
+        vertex:
+          single: Extract this point from its parent lines/areas.
+        area:
+          single: Extract a point from this area.
+      annotation:
+        single: Extracted a point.
+      too_large:
+        area:
+          single: A point can't be extracted from this area because not enough of it is currently visible.
+      restriction:
+        vertex:
+          single: "This point can't be extracted because it would damage a \"{relation}\" relation."
+      connected_to_hidden:
+        vertex:
+          single: This point can't be extracted because it is connected to a hidden feature.
   restriction:
     controls:
       distance: Distance
@@ -680,6 +718,9 @@ en:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
     thank_you_location: "Thank you for improving the map around {where}."
+    thank_you_where:
+      format: "{place}{separator}{region}"
+      separator: ", "
     help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
@@ -1243,107 +1284,171 @@ en:
     rules:
       title: Rules
     no_issues:
-      message: Everything looks fine
-      info: Any issues will show up here as you edit
+      message:
+        everything: Everything looks fine
+        everything_in_view: Everything in view looks fine
+        edits: Your edits look fine
+        edits_in_view: Your edits in view look fine
+      hidden_issues:
+        none: Detected issues will appear here
+        elsewhere: "Issues elsewhere: {count}"
+        other_features: "Issues with other features: {count}"
+        other_features_elsewhere: "Issues elsewhere with other features: {count}"
+        disabled_rules: "Issues with disabled rules: {count}"
+        disabled_rules_elsewhere: "Issues elsewhere with disabled rules: {count}"
+        ignored_issues: "Ignored issues: {count}"
+        ignored_issues_elsewhere: "Ignored issues elsewhere: {count}"
+    options:
+      what:
+        title: "Check:"
+        edited: "My Edits"
+        all: "Everything"
+      where:
+        title: "Where:"
+        visible: "In View"
+        all: "Everywhere"
+    suggested: "Suggested updates:"
+    enable_all: Enable All
+    disable_all: Disable All
+    reset_ignored: Reset Ignored ({count})
+    fix_one:
+      title: fix
+    fix_all:
+      title: Fix All
+      annotation: Fixed several validation issues.
     almost_junction:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"
+      tip: "Find features that should possibly be connected to other nearby features"
       highway-highway:
-        tip: Intersecting highways should share a junction vertex.
+        reference: Intersecting highways should share a junction vertex.
+    close_nodes:
+      title: "Very Close Points"
+      message: "Two points in {way} are very close together"
+      tip: "Find redundant points in ways"
+      reference: "Redundant points in a way should be merged or moved apart."
     crossing_ways:
       title: Crossings Ways
       message: "{feature} crosses {feature2}"
-      tip: Highways, railways, waterways, and buildings should not cross ambiguously.
+      tip: "Find features that incorrectly cross over one another"
       building-building:
-        tip: "Buildings should not intersect except on different layers."
+        reference: "Buildings should not intersect except on different layers."
       building-highway:
-        tip: "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
+        reference: "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
       building-railway:
-        tip: "Railways crossing buildings should use bridges or tunnels."
+        reference: "Railways crossing buildings should use bridges or tunnels."
       building-waterway:
-        tip: "Waterways crossing buildings should use tunnels or different layers."
+        reference: "Waterways crossing buildings should use tunnels or different layers."
       highway-highway:
-        tip: "Crossing highways should use bridges, tunnels, or intersections."
+        reference: "Crossing highways should use bridges, tunnels, or intersections."
       highway-railway:
-        tip: "Highways crossing railways should use bridges, tunnels, or level crossings."
+        reference: "Highways crossing railways should use bridges, tunnels, or level crossings."
       highway-waterway:
-        tip: "Highways crossing waterways should use bridges, tunnels, or fords."
+        reference: "Highways crossing waterways should use bridges, tunnels, or fords."
       railway-railway:
-        tip: "Crossing railways should be connected or use bridges or tunnels."
+        reference: "Crossing railways should be connected or use bridges or tunnels."
       railway-waterway:
-        tip: "Railways crossing waterways should use bridges or tunnels."
+        reference: "Railways crossing waterways should use bridges or tunnels."
       waterway-waterway:
-        tip: "Crossing waterways should be connected or use tunnels."
+        reference: "Crossing waterways should be connected or use tunnels."
       tunnel-tunnel:
-        tip: "Crossing tunnels should use different layers."
+        reference: "Crossing tunnels should use different layers."
       tunnel-tunnel_connectable:
-        tip: "Crossing tunnels should be connected or use different layers."
+        reference: "Crossing tunnels should be connected or use different layers."
       bridge-bridge:
-        tip: "Crossing bridges should use different layers."
+        reference: "Crossing bridges should use different layers."
       bridge-bridge_connectable:
-        tip: "Crossing bridges should be connected or use different layers."
+        reference: "Crossing bridges should be connected or use different layers."
       indoor-indoor:
-        tip: "Crossing indoor features should use different levels."
+        reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
-        tip: "Crossing indoor features should be connected or use different levels."
+        reference: "Crossing indoor features should be connected or use different levels."
     disconnected_way:
       title: Disconnected Ways
+      tip: "Find unconnected highways and paths"
       highway:
         message: "{highway} is disconnected from other roads and paths"
-        tip: "Highways should connect to other highways or building entrances."
+        message_new_road: "New {highway} is disconnected from existing road network"
+        reference: "Highways should connect to other highways or building entrances."
+        reference_new_road: "New roads should connect to existing road network or building entrances."
+    fixme_tag:
+      title: '"Fix Me" Requests'
+      message: '{feature} has a "Fix Me" request'
+      tip: 'Find features with "fixme" tags'
+      reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
-      title: Generic Names
-      message: '{feature} has the generic name "{name}"'
-      tip: "Names should be the actual, on-the-ground names of features."
+      title: Suspicious Names
+      message: '{feature} has the suspicious name "{name}"'
+      tip: "Find features with generic or suspicious names"
+      reference: "Names should be the actual, on-the-ground names of features."
     incompatible_source:
-      title: Incompatible Data Sources
+      title: Suspicious Sources
+      tip: "Find features with suspicious source tags"
       google:
         feature:
           message: '{feature} lists Google as a data source'
-        tip: "Google products are proprietary and must not be used as references."
-      tip: "Source data must be licensed in a manner compatible with OpenStreetMap."
-    many_deletions:
-      title: Many Deletions
-      points-lines-areas:
-        message: "Deleting {n} features: {p} points, {l} lines, and {a} areas"
-      points-lines-areas-relations:
-        message: "Deleting {n} features: {p} points, {l} lines, {a} areas, and {r} relations"
-      tip: "Only redundant or nonexistent features should be deleted."
+        reference: "Google products are proprietary and must not be used as references."
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
+      tip: "Find relations with missing or incorrect member roles"
       multipolygon:
-        tip: "Multipolygon members must have an inner or outer role."
+        reference: "Multipolygon members must have an inner or outer role."
     missing_tag:
       title: Missing Tags
+      tip: "Find features that are missing descriptive tags"
+      reference: "Features must have tags that define what they are."
       any:
         message: "{feature} has no tags"
       descriptive:
         message: "{feature} has no descriptive tags"
-      specific:
-        message: '{feature} has no "{tag}" tag'
-      tip: "Features must have tags that define what they are."
+      relation_type:
+        message: "{feature} is a relation without a type"
     old_multipolygon:
-      title: Misplaced Multipolygon Tags
       message: "{multipolygon} has misplaced tags"
-      tip: "Multipolygons should be tagged on their relation, not their outer way."
+      reference: "Multipolygons should be tagged on their relation, not their outer way."
     outdated_tags:
       title: Outdated Tags
       message: '{feature} has outdated tags'
-      tip: "Some tags change over time and should be updated."
+      tip: "Find features with deprecated tags that can be updated"
+      reference: "Some tags change over time and should be updated."
     private_data:
       title: Private Information
+      tip: "Find features that may contain private information"
+      reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
-      tip: "Sensitive data like personal phone numbers should not be tagged."
     tag_suggests_area:
       title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
-      tip: "Areas must have connected endpoints."
+      tip: "Find features that are tagged as lines and should possibly be tagged as areas"
+      reference: "Areas must have connected endpoints."
     unknown_road:
-      title: Unknown Roads
       message: "{feature} has no classification"
-      tip: "Roads without a specific type may not appear in maps or routing."
+      reference: "Roads without a specific type may not appear in maps or routing."
+    impossible_oneway:
+      title: Impossible One-Ways
+      tip: "Find route issues with one-way features"
+      waterway:
+        connected:
+          start:
+            message: "{feature} flows away from a connected waterway"
+          end:
+            message: "{feature} flows against a connected waterway"
+          reference: "Waterway segments should all flow in the same direction."
+      highway:
+        start:
+          message: "{feature} is unreachable"
+          reference: "One-way roads must be accessible via other roads."
+        end:
+          message: "{feature} has no outlet"
+          reference: "One-way roads must lead to other roads."
+    unsquare_way:
+      title: Unsquare Corners
+      message: "{feature} has unsquare corners"
+      tip: "Find features with unsquare corners that can be drawn better"
+      buildings:
+        reference: "Buildings with unsquare corners can often be drawn more accurately."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
@@ -1352,6 +1457,8 @@ en:
       connect_endpoints:
         title: Connect the ends
         annotation: Connected the endpoints of a way.
+      connect_feature:
+        title: Connect this feature
       connect_features:
         title: Connect the features
       continue_from_start:
@@ -1360,6 +1467,14 @@ en:
         title: Continue drawing from end
       delete_feature:
         title: Delete this feature
+      ignore_issue:
+        title: Ignore this issue
+      merge_close_vertices:
+        annotation: Merged very close points in a way.
+      merge_points:
+        title: Merge these points
+      move_points_apart:
+        title: Move these points apart
       move_tags:
         title: Move the tags
         annotation: Moved tags.
@@ -1379,6 +1494,8 @@ en:
         title: Remove the tags
       reposition_features:
         title: Reposition the features
+      reverse_feature:
+        title: Reverse this feature
       select_preset:
         title: Select a feature type
       select_road_type:
@@ -1387,9 +1504,14 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      square_feature:
+        title: Square this feature
       tag_as_disconnected:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
+      tag_as_unsquare:
+        title: Tag as physically unsquare
+        annotation: Tagged a way as having unsquare corners.
       tag_this_as_higher:
         title: Tag this as higher
       tag_this_as_lower:
@@ -1690,6 +1812,7 @@ en:
         fullscreen: "Enter full screen mode"
         sidebar: "Toggle sidebar"
         wireframe: "Toggle wireframe mode"
+        osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
       selecting:
         title: "Selecting features"
@@ -1726,13 +1849,13 @@ en:
         continue_line: "Continue a line at the selected node"
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect features at the selected node"
-        detach_node: "Detach selected node from parent lines/areas"
+        extract: "Extract a point from a feature"
         split: "Split a line into two at the selected node"
         reverse: "Reverse a line"
         move: "Move selected features"
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"
-        straighten: "Straighten a line"
+        straighten: "Straighten a line or points"
         circularize: "Circularize a closed line or area"
         reflect_long: "Reflect features across the longer axis"
         reflect_short: "Reflect features across the shorter axis"

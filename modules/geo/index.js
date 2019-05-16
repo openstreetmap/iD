@@ -14,6 +14,7 @@ export { geoZoomToScale } from './geo.js';
 export { geoAngle } from './geom.js';
 export { geoChooseEdge } from './geom.js';
 export { geoEdgeEqual } from './geom.js';
+export { geoGetSmallestSurroundingRectangle } from './geom.js';
 export { geoHasLineIntersections } from './geom.js';
 export { geoHasSelfIntersections } from './geom.js';
 export { geoRotate } from './geom.js';
@@ -41,3 +42,8 @@ export { geoVecNormalizedDot } from './vector.js';
 export { geoVecProject } from './vector.js';
 export { geoVecSubtract } from './vector.js';
 export { geoVecScale } from './vector.js';
+
+export { geoOrthoNormalizedDotProduct } from './ortho.js';
+export { geoOrthoCalcScore } from './ortho.js';
+export { geoOrthoMaxOffsetAngle } from './ortho.js';
+export { geoOrthoCanOrthogonalize } from './ortho.js';

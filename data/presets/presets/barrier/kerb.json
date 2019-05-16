@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-kerb-raised",
     "fields": [
         "kerb",
         "tactile_paving"

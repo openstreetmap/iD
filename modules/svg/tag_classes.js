@@ -6,7 +6,8 @@ export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-        'leisure', 'military', 'place', 'man_made', 'route', 'attraction'
+        'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
+        'building:part', 'indoor'
     ];
     var statuses = [
         'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
@@ -15,7 +16,8 @@ export function svgTagClasses() {
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
-        'public_transport', 'location', 'parking', 'golf', 'type', 'leisure', 'man_made'
+        'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
+        'man_made', 'indoor'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -70,6 +72,8 @@ export function svgTagClasses() {
 
             if (k === 'piste:type') {  // avoid a ':' in the class name
                 k = 'piste';
+            } else if (k === 'building:part') {  // avoid a ':' in the class name
+                k = 'building_part';
             }
 
             primary = k;

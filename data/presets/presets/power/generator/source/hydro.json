@@ -33,11 +33,6 @@
         "generator:source": "hydro",
         "generator:output:electricity": "yes"
     },
-    "removeTags": {
-        "power": "generator",
-        "generator:source": "hydro",
-        "generator:output:electricity": "yes"
-    },
     "reference": {
         "key": "generator:source",
         "value": "hydro"

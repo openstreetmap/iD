@@ -48,9 +48,9 @@ export function svgOsm(projection, context, dispatch) {
     }
 
 
-    drawOsm.enabled = function(_) {
+    drawOsm.enabled = function(val) {
         if (!arguments.length) return enabled;
-        enabled = _;
+        enabled = val;
 
         if (enabled) {
             showLayer();

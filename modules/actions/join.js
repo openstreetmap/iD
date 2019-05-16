@@ -1,5 +1,6 @@
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag, osmJoinWays } from '../osm';
+import { osmIsInterestingTag } from '../osm/tags';
+import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
 import { utilArrayGroupBy, utilArrayIntersection } from '../util';
 

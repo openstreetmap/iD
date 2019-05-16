@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { osmNote } from '../osm';
 import { services } from '../services';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 
 
 export function uiNoteReport() {

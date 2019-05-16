@@ -10,7 +10,8 @@ import {
 } from 'd3-interpolate';
 
 import { t } from '../../util/locale';
-import { modeBrowse, modeSelect } from '../../modes';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
 import { uiCmd } from '../cmd';
 import { icon, pad, transitionTime } from './helper';

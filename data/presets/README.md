@@ -58,11 +58,57 @@ The complete JSON schema for presets can be found in [`data/presets/schema/prese
 
 #### Preset Properties
 
-##### `countryCodes`
+##### `name`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The preset will only be searchable when the user is editing over the specified countries. The locale and language of iD are not factors, just the position of the map.
+The primary name of the feature type in American English.
 
-By default, presets are available everywhere.
+Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
+
+This property is required. There is no default.
+
+##### `geometry`
+
+An array of possible geometry types that a feature must have in order to match this preset.
+
+* `point`: an OSM node that is not a member of any way
+* `vertex`: an OSM node that is a member of one or more ways
+* `line`: an OSM way that is not an area
+* `area`: an OSM way that is closed/circular (the first and last nodes are the same) or a `type=multipolygon` relation
+* `relation`: an OSM relation
+
+Closed ways can be treated as both `line` or `area` geometry. If a preset allows both, iD will add an additional `area=yes` tag when choosing the preset for an area feature.
+
+This property is required. There is no default.
+
+##### `tags`
+
+An object with the `"key": "value"` tags a feature must have to match this preset. A `"*"` wildcard value can be set to have this preset match any value for that key.
+
+A features can only match one preset even if its tags and geometry could technically match more than one. iD will pick the best match based on `matchScore`, the number of tags, and the use of wildcard values.
+
+This property is required. There is no default.
+
+##### `addTags`
+
+The tags that are added to the feature when selecting this preset. Defaults to `tags`. If needed, this property will typically be a superset of `tags`.
+
+iD's validator will recommend that users add missing tags from `addTags` to matching features. For example, the Bridge preset has these properties:
+
+```
+    "tags": {
+        "man_made": "bridge"
+    },
+    "addTags": {
+        "man_made": "bridge",
+        "layer": "1"
+    },
+```
+
+When adding a feature with this preset, it will be given the tags `man_made=bridge` and `layer=1`. The user could then change `layer` to `3`, for instance, and the feature would still match the preset because it still has `man_made=bridge`. If the user removes the `layer` tag altogether, iD will recommend adding it back with a value of `1`.
+
+##### `removeTags`
+
+The tags that are removed from the feature when deselecting this preset. Defaults to `addTags` or if this is also not defined, to `tags`.
 
 ##### `fields`/`moreFields`
 
@@ -95,51 +141,7 @@ preset are used. For example, `shop/convenience` automatically uses the same
 fields as `shop`.
 
 In both explicit and implicit inheritance, fields for keys that define the
-preset are not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
-
-##### `geometry`
-
-An array of possible geometry types that a feature can have in order to match this preset.
-
-* `point`: an OSM node that is not a member of any way
-* `vertex`: an OSM node that is a member of one or more ways
-* `line`: an OSM way that is not an area
-* `area`: an OSM way that is closed/circular (the first and last nodes are the same) or a `type=multipolygon` relation
-* `relation`: an OSM relation
-
-Closed ways can be treated as both `line` or `area` geometry. If a preset allows both, iD will add an additional `area=yes` tag when choosing the preset for an area feature.
-
-This property is required. There is no default.
-
-##### `tags`
-
-An object with the `"key": "value"` tags a feature must have to match this preset. A `"*"` wildcard value can be set to have this preset match any value for that key.
-
-A features can only match one preset even if its tags and geometry could technically match more than one. iD will pick the best match based on `matchScore`, the number of tags, and the use of wildcard values.
-
-This property is required. There is no default.
-
-##### `addTags`/`removeTags`
-
-Objects with the tags that are added to or removed from the feature when selected or deselecting this preset. These both default to the value of `tags`.
-
-Generally, these properties will be equivalent and should be supersets of `tags`.
-
-iD's validator will recommend that users add missing tags from `addTags` to matching features.
-
-For example, the Bridge preset has these properties:
-
-```
-    "tags": {
-        "man_made": "bridge"
-    },
-    "addTags": {
-        "man_made": "bridge",
-        "layer": "1"
-    },
-```
-
-When adding a feature with this preset, it will be given the tags `man_made=bridge` and `layer=1`. The user could then change `layer` to `3`, for instance, and the feature would still match the preset because it still has `man_made=bridge`. If the user removes the `layer` tag altogether, iD will recommend adding it back with a value of `1`.
+preset are generally not inherited. E.g. the `shop` field is not inherited by `shop/…` presets.
 
 ##### `icon`
 
@@ -155,10 +157,10 @@ The name of a local SVG icon file. You can use icons from any of the following i
         * [Regular](https://fontawesome.com/icons?d=gallery&s=regular&m=free) (`far-`)
         * [Brands](https://fontawesome.com/icons?d=gallery&s=brands&m=free) (`fab-`)
 * [The Noun Project](https://thenounproject.com) (`tnp-`), millions of general-purpose icons
-    * The licenses vary. You can only use the public-domain icons in iD.
-    * The icon styles vary. Avoid icons with thin outlines or too much detail since they will not look good at small sizes in iD.
+    * The licenses vary. You can only use the public-domain icons in iD, such as those from [OCHA Visual](https://thenounproject.com/ochavisual/).
+    * The icon styles vary. Avoid thin or overly-detailed icons since they will not look good at small sizes.
     * Use the numeric ID of the icon (e.g. `2009223`). This is shown in the URL when you select an icon on their site.
-    * Unfortunately, you must [sign up for a free API key](https://thenounproject.com/developers/) in order to download new icons (even though they're public-domain). Add a file called `the_noun_project.auth` to the root of your local iD instance containing your credentials like `{"consumer_key": "xxxxxx", "consumer_secret": "xxxxxx"}`. This file is not version-controlled.
+    * Unfortunately, you must [sign up for a free API key](https://thenounproject.com/developers/) in order to download new icons (even for public-domain icons). Add a file called `the_noun_project.auth` to the root of your local iD instance containing your credentials like `{"consumer_key": "xxxxxx", "consumer_secret": "xxxxxx"}`. This file is not version-controlled.
 
 ##### `imageURL`
 
@@ -167,28 +169,6 @@ The URL of a remote image file. This does not fully replace `icon`—both may be
 For example, `imageURL` is used to specify the logos of brand presets from the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index).
 
 Bitmap images should be at least 100x100px to look good at 50x50pt on high-resolution screens.
-
-##### `matchScore`
-
-A number that ranks this preset against others that match the feature.
-
-For example, a feature with `amenity=cafe` and `building=commercial` will match the Cafe preset instead of the Commercial Building preset because Commercial Building has a lower `matchScore`.
-
-The default is `1.0`.
-
-##### `name`
-
-The primary name of the feature type in American English.
-
-Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
-
-This property is required. There is no default.
-
-##### `replacement`
-
-The ID of a preset that is preferable to this one. iD's validator will flag features matching this preset and recommend that the user upgrade the tags.
-
-When possible, use `deprecated.json` instead to specify upgrade paths for old tags. This property is meant for special cases, such as upgrades with geometry requirements.
 
 ##### `searchable`
 
@@ -199,6 +179,37 @@ but will not be available as an option when adding new features.
 By convention, unsearchable presets have filenames that begin with an underscore
 (e.g. `data/presets/presets/landuse/_farm.json`)
 
+##### `matchScore`
+
+A number that ranks this preset against others that match the feature.
+
+For example, a feature with `amenity=cafe` and `building=commercial` will match the Cafe preset instead of the Commercial Building preset because Commercial Building has a lower `matchScore`.
+
+The default is `1.0`.
+
+##### `countryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The preset will only be searchable when the user is editing over the specified countries. The locale and language of iD are not factors, just the position of the map.
+
+By default, presets are available everywhere.
+
+##### `replacement`
+
+The ID of a preset that is preferable to this one. iD's validator will flag features matching this preset and recommend that the user upgrade the tags.
+
+When possible, use `deprecated.json` instead to specify upgrade paths for old tags. This property is meant for special cases, such as upgrades with geometry requirements.
+
+##### `reference`
+
+A key and optionally a value to link to the wiki documentation for this preset. Only necessary if the preset consists of several tags.
+
+For example, 
+```javascript
+"reference": {
+    "key": "tower:type",
+    "value": "communication"
+}
+```
 
 ## Fields
 

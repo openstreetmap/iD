@@ -4,9 +4,9 @@ import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { actionChangeTags } from '../actions/change_tags';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';
@@ -17,7 +17,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCallWhenIdle, utilCleanTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -25,6 +25,7 @@ export function uiEntityEditor(context) {
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
+    var _scrolled = false;
     var _base;
     var _entityID;
     var _activePreset;
@@ -83,7 +84,8 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body');
+            .attr('class', 'inspector-body')
+            .on('scroll.entity-editor', function() { _scrolled = true; });
 
         bodyEnter
             .append('div')
@@ -239,8 +241,13 @@ export function uiEntityEditor(context) {
             .on('change.entity-editor', historyChanged);
 
 
-        function historyChanged() {
+        function historyChanged(difference) {
             if (_state === 'hide') return;
+            var significant = !difference ||
+                    difference.didChange.properties ||
+                    difference.didChange.addition ||
+                    difference.didChange.deletion;
+            if (!significant) return;
 
             var entity = context.hasEntity(_entityID);
             var graph = context.graph();
@@ -289,6 +296,11 @@ export function uiEntityEditor(context) {
                 _coalesceChanges = !!onInput;
             }
         }
+
+        // if leaving field (blur event), rerun validation
+        if (!onInput) {
+            context.validator().validate();
+        }
     }
 
 
@@ -310,14 +322,21 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
+        if (_entityID === val) return entityEditor;  // exit early if no change
+
         _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
 
-        // reset the scroll to the top of the inspector
-        var body = d3_selectAll('.entity-editor-pane .inspector-body');
-        if (!body.empty()) {
-            body.node().scrollTop = 0;
+        // reset the scroll to the top of the inspector (warning: triggers reflow)
+        if (_scrolled) {
+            utilCallWhenIdle(function() {
+                var body = d3_selectAll('.entity-editor-pane .inspector-body');
+                if (!body.empty()) {
+                    _scrolled = false;
+                    body.node().scrollTop = 0;
+                }
+            })();
         }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);

@@ -13,11 +13,6 @@
         "fitness_station": "sit-up",
         "sport": "fitness"
     },
-    "removeTags": {
-        "leisure": "fitness_station",
-        "fitness_station": "sit-up",
-        "sport": "fitness"
-    },
     "reference": {
         "key": "leisure",
         "value": "fitness_station"

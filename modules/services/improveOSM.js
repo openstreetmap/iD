@@ -1,12 +1,11 @@
 import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
-import { request as d3_request } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { qaError } from '../osm';
-import { services } from './index';
+import { serviceOsm } from './index';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
@@ -24,9 +23,9 @@ var _impOsmUrls = {
 };
 
 function abortRequest(i) {
-    Object.values(i).forEach(function(v) {
-        if (v) {
-            v.abort();
+    Object.values(i).forEach(function(controller) {
+        if (controller) {
+            controller.abort();
         }
     });
 }
@@ -177,12 +176,16 @@ export default {
                 );
                 var url = v + '/search?' + utilQsString(kParams);
 
-                requests[k] = d3_json(url,
-                    function(err, data) {
-                        delete _erCache.inflightTile[tile.id];
+                var controller = new AbortController();
+                requests[k] = controller;
 
-                        if (err) return;
-                        _erCache.loadedTile[tile.id] = true;
+                d3_json(url, { signal: controller.signal })
+                    .then(function(data) {
+                        delete _erCache.inflightTile[tile.id][k];
+                        if (!Object.keys(_erCache.inflightTile[tile.id]).length) {
+                            delete _erCache.inflightTile[tile.id];
+                            _erCache.loadedTile[tile.id] = true;
+                        }
 
                         // Road segments at high zoom == oneways
                         if (data.roadSegments) {
@@ -317,20 +320,29 @@ export default {
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
+                                dispatch.call('loaded');
                             });
                         }
-                    }
-                );
+                    })
+                    .catch(function() {
+                        delete _erCache.inflightTile[tile.id][k];
+                        if (!Object.keys(_erCache.inflightTile[tile.id]).length) {
+                            delete _erCache.inflightTile[tile.id];
+                            _erCache.loadedTile[tile.id] = true;
+                        }
+                    });
             });
 
             _erCache.inflightTile[tile.id] = requests;
-            dispatch.call('loaded');
         });
     },
 
     getComments: function(d, callback) {
         // If comments already retrieved no need to do so again
-        if (d.comments !== undefined) { return callback({}, d); }
+        if (d.comments !== undefined) {
+            if (callback) callback({}, d);
+            return;
+        }
 
         var key = d.error_key;
         var qParams = {};
@@ -347,19 +359,20 @@ export default {
         var url = _impOsmUrls[key] + '/retrieveComments?' + utilQsString(qParams);
 
         var that = this;
-        d3_json(url, function(err, data) {
-            // comments are served newest to oldest
-            var comments = data.comments ? data.comments.reverse() : [];
-
-            that.replaceError(d.update({
-                comments: comments
-            }));
-            return callback(err, d);
-        });
+        d3_json(url)
+            .then(function(data) {
+                // comments are served newest to oldest
+                var comments = data.comments ? data.comments.reverse() : [];
+                that.replaceError(d.update({ comments: comments }));
+                if (callback) callback(null, d);
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message);
+            });
     },
 
     postUpdate: function(d, callback) {
-        if (!services.osm.authenticated()) { // Username required in payload
+        if (!serviceOsm.authenticated()) { // Username required in payload
             return callback({ message: 'Not Authenticated', status: -3}, d);
         }
         if (_erCache.inflightPost[d.id]) {
@@ -369,7 +382,7 @@ export default {
         var that = this;
 
         // Payload can only be sent once username is established
-        services.osm.userDetails(sendPayload);
+        serviceOsm.userDetails(sendPayload);
 
         function sendPayload(err, user) {
             if (err) { return callback(err, d); }
@@ -399,13 +412,18 @@ export default {
                 payload.text = d.newComment;
             }
 
-            _erCache.inflightPost[d.id] = d3_request(url)
-                .header('Content-Type', 'application/json')
-                .post(JSON.stringify(payload), function(err) {
-                    delete _erCache.inflightPost[d.id];
+            var controller = new AbortController();
+            _erCache.inflightPost[d.id] = controller;
 
-                    // Unsuccessful response status, keep issue open
-                    if (err.status !== 200) { return callback(err, d); }
+            var options = {
+                method: 'POST',
+                signal: controller.signal,
+                body: JSON.stringify(payload)
+            };
+
+             d3_json(url, options)
+                .then(function() {
+                    delete _erCache.inflightPost[d.id];
 
                     // Just a comment, update error in cache
                     if (d.newStatus === undefined) {
@@ -424,18 +442,21 @@ export default {
                         }));
                     } else {
                         that.removeError(d);
-
                         if (d.newStatus === 'SOLVED') {
                             // No pretty identifier, so we just use coordinates
                             var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
                             _erCache.closed[key + ':' + closedID] = true;
                         }
                     }
-
-                    return callback(err, d);
+                    if (callback) callback(null, d);
+                })
+                .catch(function(err) {
+                    delete _erCache.inflightPost[d.id];
+                    if (callback) callback(err.message);
                 });
         }
     },
+
 
     // get all cached errors covering the viewport
     getErrors: function(projection) {

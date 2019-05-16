@@ -1,18 +1,19 @@
 import { t } from '../util/locale';
-import { actionReverse } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionReverse } from '../actions/reverse';
+import { behaviorOperation } from '../behavior/operation';
 
 
 export function operationReverse(selectedIDs, context) {
-    var entityId = selectedIDs[0];
+    var entityID = selectedIDs[0];
 
     var operation = function() {
-        context.perform(actionReverse(entityId), operation.annotation());
+        context.perform(actionReverse(entityID), operation.annotation());
+        context.validator().validate();
     };
 
 
     operation.available = function() {
-        return selectedIDs.length === 1 && context.geometry(entityId) === 'line';
+        return selectedIDs.length === 1 && context.geometry(entityID) === 'line';
     };
 
 

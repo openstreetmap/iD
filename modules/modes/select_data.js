@@ -5,18 +5,18 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import {
-    behaviorBreathe,
-    behaviorHover,
-    behaviorLasso,
-    behaviorSelect
-} from '../behavior';
+import { behaviorBreathe } from '../behavior/breathe';
+import { behaviorHover } from '../behavior/hover';
+import { behaviorLasso } from '../behavior/lasso';
+import { behaviorSelect } from '../behavior/select';
 
 import { t } from '../util/locale';
 
 import { geoExtent } from '../geo';
-import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
-import { uiDataEditor } from '../ui';
+import { modeBrowse } from './browse';
+import { modeDragNode } from './drag_node';
+import { modeDragNote } from './drag_note';
+import { uiDataEditor } from '../ui/data_editor';
 import { utilKeybinding } from '../util';
 
 

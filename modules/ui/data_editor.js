@@ -1,13 +1,11 @@
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 
-import {
-    uiDataHeader,
-    uiQuickLinks,
-    uiRawTagEditor,
-    uiTooltipHtml
-} from './index';
+import { uiDataHeader } from './data_header';
+import { uiQuickLinks } from './quick_links';
+import { uiRawTagEditor } from './raw_tag_editor';
+import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiDataEditor(context) {

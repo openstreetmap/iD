@@ -1,27 +1,21 @@
-import {
-    event as d3_event,
-    mouse as d3_mouse,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, mouse as d3_mouse, select as d3_select } from 'd3-selection';
 
 import { geoVecLength } from '../geo';
-
-import {
-    modeBrowse,
-    modeSelect,
-    modeSelectData,
-    modeSelectNote,
-    modeSelectError
-} from '../modes';
-
+import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
+import { modeSelectData } from '../modes/select_data';
+import { modeSelectNote } from '../modes/select_note';
+import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, qaError } from '../osm';
 
 
 export function behaviorSelect(context) {
-    var lastMouse = null;
-    var suppressMenu = true;
+    // legacy option to show menu on every click
+    var isShowAlways = +context.storage('edit-menu-show-always') === 1;
     var tolerance = 4;
-    var p1 = null;
+    var _lastMouse = null;
+    var _suppressMenu = true;
+    var _p1 = null;
 
 
     function point() {
@@ -60,17 +54,20 @@ export function behaviorSelect(context) {
 
 
     function mousedown() {
-        if (!p1) p1 = point();
+        if (!_p1) {
+            _p1 = point();
+        }
         d3_select(window)
             .on('mouseup.select', mouseup, true);
 
-        var isShowAlways = +context.storage('edit-menu-show-always') === 1;
-        suppressMenu = !isShowAlways;
+        _suppressMenu = !isShowAlways;
     }
 
 
     function mousemove() {
-        if (d3_event) lastMouse = d3_event;
+        if (d3_event) {
+            _lastMouse = d3_event;
+        }
     }
 
 
@@ -85,15 +82,17 @@ export function behaviorSelect(context) {
         e.stopPropagation();
 
         if (!+e.clientX && !+e.clientY) {
-            if (lastMouse) {
-                e.sourceEvent = lastMouse;
+            if (_lastMouse) {
+                e.sourceEvent = _lastMouse;
             } else {
                 return;
             }
         }
 
-        if (!p1) p1 = point();
-        suppressMenu = false;
+        if (!_p1) {
+            _p1 = point();
+        }
+        _suppressMenu = false;
         click();
     }
 
@@ -102,18 +101,27 @@ export function behaviorSelect(context) {
         d3_select(window)
             .on('mouseup.select', null, true);
 
-        if (!p1) return;
+        if (!_p1) return;
         var p2 = point();
-        var dist = geoVecLength(p1, p2);
+        var dist = geoVecLength(_p1, p2);
+        _p1 = null;
+        if (dist > tolerance) return;
 
-        p1 = null;
-        if (dist > tolerance) {
-            return;
-        }
-
+        // Defer processing the click,
+        // because this click may trigger a blur event,
+        // and the blur event may trigger a tag change,
+        // and we really want that tag change to go to the already selected entity
+        // and not the one that we are about to select with the click  #6028, #5878
+        // (Be very careful entering modeSelect anywhere that might also blur a field!)
+        var datum = d3_event.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
         var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node();
-        var isShowAlways = +context.storage('edit-menu-show-always') === 1;
-        var datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__);
+        window.setTimeout(function() {
+            processClick(datum, isMultiselect);
+        }, 20);  // delay > whatever raw_tag_editor.js `scheduleChange` does (10ms).
+    }
+
+
+    function processClick(datum, isMultiselect) {
         var mode = context.mode();
 
         var entity = datum && datum.properties && datum.properties.entity;
@@ -129,18 +137,18 @@ export function behaviorSelect(context) {
             context.selectedErrorID(null);
 
             if (!isMultiselect) {
-                if (selectedIDs.length > 1 && (!suppressMenu && !isShowAlways)) {
+                if (selectedIDs.length > 1 && (!_suppressMenu && !isShowAlways)) {
                     // multiple things already selected, just show the menu...
                     mode.suppressMenu(false).reselect();
                 } else {
                     // select a single thing..
-                    context.enter(modeSelect(context, [datum.id]).suppressMenu(suppressMenu));
+                    context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
                 }
 
             } else {
                 if (selectedIDs.indexOf(datum.id) !== -1) {
                     // clicked entity is already in the selectedIDs list..
-                    if (!suppressMenu && !isShowAlways) {
+                    if (!_suppressMenu && !isShowAlways) {
                         // don't deselect clicked entity, just show the menu.
                         mode.suppressMenu(false).reselect();
                     } else {
@@ -151,7 +159,7 @@ export function behaviorSelect(context) {
                 } else {
                     // clicked entity is not in the selected list, add it..
                     selectedIDs = selectedIDs.concat([datum.id]);
-                    context.enter(modeSelect(context, selectedIDs).suppressMenu(suppressMenu));
+                    context.enter(modeSelect(context, selectedIDs).suppressMenu(_suppressMenu));
                 }
             }
 
@@ -164,10 +172,12 @@ export function behaviorSelect(context) {
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
+
         } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
             context
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
+
         } else {    // clicked nothing..
             context.selectedNoteID(null);
             context.selectedErrorID(null);
@@ -177,14 +187,14 @@ export function behaviorSelect(context) {
         }
 
         // reset for next time..
-        suppressMenu = true;
+        _suppressMenu = true;
     }
 
 
     function behavior(selection) {
-        lastMouse = null;
-        suppressMenu = true;
-        p1 = null;
+        _lastMouse = null;
+        _suppressMenu = true;
+        _p1 = null;
 
         d3_select(window)
             .on('keydown.select', keydown)

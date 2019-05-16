@@ -1,20 +1,19 @@
-import { actionChangeMember, actionDeleteMember } from '../actions';
+import { actionChangeMember } from '../actions/change_member';
+import { actionDeleteMember } from '../actions/delete_member';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingRole() {
     var type = 'missing_role';
 
-    var validation = function(entity, context) {
-
+    var validation = function checkMissingRole(entity, context) {
         var issues = [];
         if (entity.type === 'way') {
             context.graph().parentRelations(entity).forEach(function(relation) {
-                if (!relation.isMultipolygon()) {
-                    return;
-                }
+                if (!relation.isMultipolygon()) return;
+
                 var member = relation.memberById(entity.id);
                 if (member && isMissingRole(member)) {
                     issues.push(makeIssue(entity, relation, member, context));
@@ -32,21 +31,30 @@ export function validationMissingRole() {
         return issues;
     };
 
+
     function isMissingRole(member) {
         return !member.role || !member.role.trim().length;
     }
+
 
     function makeIssue(way, relation, member, context) {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.missing_role.message', {
-                member: utilDisplayLabel(way, context),
-                relation: utilDisplayLabel(relation, context),
-            }),
-            tooltip: t('issues.missing_role.multipolygon.tip'),
-            entities: [relation, way],
-            info: {member: member},
+            message: function() {
+                var member = context.hasEntity(this.entityIds[1]),
+                    relation = context.hasEntity(this.entityIds[0]);
+                return (member && relation) ? t('issues.missing_role.message', {
+                    member: utilDisplayLabel(member, context),
+                    relation: utilDisplayLabel(relation, context)
+                }) : '';
+            },
+            reference: showReference,
+            entityIds: [relation.id, way.id],
+            data: {
+                member: member
+            },
+            hash: member.index.toString(),
             fixes: [
                 makeAddRoleFix('inner', context),
                 makeAddRoleFix('outer', context),
@@ -55,23 +63,34 @@ export function validationMissingRole() {
                     title: t('issues.fix.remove_from_relation.title'),
                     onClick: function() {
                         context.perform(
-                            actionDeleteMember(this.issue.entities[0].id, this.issue.info.member.index),
+                            actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
                             t('operations.delete_member.annotation')
                         );
                     }
                 })
             ]
         });
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.missing_role.multipolygon.reference'));
+        }
     }
+
 
     function makeAddRoleFix(role, context) {
         return new validationIssueFix({
             title: t('issues.fix.set_as_' + role + '.title'),
             onClick: function() {
-                var oldMember = this.issue.info.member;
-                var member = { id: this.issue.entities[1].id, type: oldMember.type, role: role };
+                var oldMember = this.issue.data.member;
+                var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(
-                    actionChangeMember(this.issue.entities[0].id, member, oldMember.index),
+                    actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
                     t('operations.change_role.annotation')
                 );
             }

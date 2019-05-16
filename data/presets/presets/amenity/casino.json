@@ -10,11 +10,14 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

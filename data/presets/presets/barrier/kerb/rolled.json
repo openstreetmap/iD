@@ -1,5 +1,7 @@
 {
+    "icon": "temaki-kerb-rolled",
     "fields": [
+        "kerb",
         "{barrier/kerb}",
         "kerb/height"
     ],

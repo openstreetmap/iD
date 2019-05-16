@@ -5,7 +5,9 @@
         "cuisine",
         "address",
         "building_area",
-        "outdoor_seating"
+        "outdoor_seating",
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields": [
         "air_conditioning",
@@ -15,8 +17,6 @@
         "diet_multi",
         "email",
         "fax",
-        "internet_access",
-        "internet_access/fee",
         "internet_access/ssid",
         "opening_hours",
         "payment_multi",

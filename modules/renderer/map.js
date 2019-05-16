@@ -8,9 +8,9 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
-import { uiFlash } from '../ui';
+import { uiFlash } from '../ui/flash';
 import { utilFastMouse, utilFunctor, utilRebind, utilSetTransform } from '../util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
@@ -104,6 +104,7 @@ export function rendererMap(context) {
         }
 
         context.history()
+            .on('merge.map', function() { scheduleRedraw(); })
             .on('change.map', immediateRedraw)
             .on('undone.map', function(stack, fromStack) {
                 didUndoOrRedo(fromStack.transform);
@@ -255,7 +256,7 @@ export function rendererMap(context) {
     }
 
 
-    function drawVector(difference, extent) {
+    function drawEditable(difference, extent) {
         var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
@@ -568,15 +569,13 @@ export function rendererMap(context) {
 
         if (!difference) {
             supersurface.call(context.background());
+            wrapper.call(drawLayers);
         }
-
-        wrapper
-            .call(drawLayers);
 
         // OSM
         if (map.editable()) {
             context.loadTiles(projection);
-            drawVector(difference, extent);
+            drawEditable(difference, extent);
         } else {
             editOff();
         }
@@ -739,6 +738,21 @@ export function rendererMap(context) {
         return map;
     };
 
+    map.unobscuredCenterZoomEase = function(loc, zoom) {
+        var offset = map.unobscuredOffset();
+        var locPx = projection(loc);
+        var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
+        var offsetLoc = projection.invert(offsetLocPx);
+        map.centerZoomEase(offsetLoc, zoom);
+    };
+
+    map.unobscuredOffset = function() {
+        var openPane = d3_select('.map-panes .map-pane.shown');
+        if (!openPane.empty()) {
+            return [openPane.node().offsetWidth/2, 0];
+        }
+        return [0, 0];
+    };
 
     map.zoom = function(z2) {
         if (!arguments.length) {
@@ -888,16 +902,16 @@ export function rendererMap(context) {
 
 
     map.editable = function() {
-        var osmLayer = surface.selectAll('.data-layer.osm');
-        if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('osm');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };
 
 
     map.notesEditable = function() {
-        var noteLayer = surface.selectAll('.data-layer.notes');
-        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('notes');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };

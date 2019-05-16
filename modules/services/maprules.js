@@ -1,6 +1,6 @@
-import { areaKeys } from '../core/context';
+import { osmAreaKeys as areaKeys } from '../osm/tags';
 import { utilArrayIntersection } from '../util';
-import { validationIssue } from '../core/validator';
+import { validationIssue } from '../core/validation';
 
 
 var buildRuleChecks = function() {
@@ -218,11 +218,14 @@ export default {
                     var severity = Object.keys(selector).indexOf('error') > -1
                             ? 'error'
                             : 'warning';
+                    var message = selector[severity];
                     issues.push(new validationIssue({
                         type: 'maprules',
                         severity: severity,
-                        message: selector[severity],
-                        entities: [entity],
+                        message: function() {
+                            return message;
+                        },
+                        entityIds: [entity.id]
                     }));
                 }
             }

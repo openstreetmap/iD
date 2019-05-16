@@ -9,6 +9,8 @@
         "building_area"
     ],
     "moreFields": [
+        "building/levels_building",
+        "height_building",
         "opening_hours",
         "payment_multi",
         "brand",

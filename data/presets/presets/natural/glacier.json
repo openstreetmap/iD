@@ -1,10 +1,14 @@
 {
+    "icon": "temaki-snow",
     "geometry": [
         "area"
     ],
     "tags": {
         "natural": "glacier"
     },
-    "terms": [],
+    "terms": [
+        "ice",
+        "snow"
+    ],
     "name": "Glacier"
 }

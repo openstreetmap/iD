@@ -2,7 +2,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
-import { svgPassiveVertex, svgPointTransform } from './index';
+import { svgPassiveVertex, svgPointTransform } from './helpers';
 
 
 export function svgVertices(projection, context) {

@@ -1,0 +1,20 @@
+{
+    "icon": "maki-castle",
+    "fields": [
+        "name",
+        "building_area",
+        "access_simple",
+        "start_date"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "fort"
+    },
+    "terms": [
+        "military"
+    ],
+    "name": "Historic Fort"
+}

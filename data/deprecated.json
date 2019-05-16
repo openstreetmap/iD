@@ -25,8 +25,16 @@
       "replace": {"tourism": "information"}
     },
     {
+      "old": {"amenity": "club"},
+      "replace": {"club": "*"}
+    },
+    {
       "old": {"amenity": "community_center"},
       "replace": {"amenity": "community_centre"}
+    },
+    {
+      "old": {"amenity": "dancing_school"},
+      "replace": {"leisure": "dance", "dance:teaching": "yes" }
     },
     {
       "old": {"amenity": "dog_bin"},
@@ -109,6 +117,10 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"amenity": "social_club"},
+      "replace": {"club": "*"}
+    },
+    {
       "old": {"amenity": "swimming_pool"},
       "replace": {"leisure": "swimming_pool"}
     },
@@ -137,8 +149,24 @@
       "replace": {"amenity": "community_centre", "community_centre:for": "juvenile"}
     },
     {
+      "old": {"artwork": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
+      "old": {"artwork:type": "*"},
+      "replace": {"artwork_type": "$1"}
+    },
+    {
+      "old": {"attraction": "ferris_wheel"},
+      "replace": {"attraction": "big_wheel"}
+    },
+    {
       "old": {"barrier": "curb"},
       "replace": {"barrier": "kerb"}
+    },
+    {
+      "old": {"barrier": "embankment"},
+      "replace": {"man_made": "embankment"}
     },
     {
       "old": {"barrier": "entrance"},
@@ -146,7 +174,7 @@
     },
     {
       "old": {"barrier": "wire_fence"},
-      "replace": {"barrier": "fence", "fence_type": "chain"}
+      "replace": {"barrier": "fence", "fence_type": "wire"}
     },
     {
       "old": {"barrier": "wood_fence"},
@@ -187,6 +215,14 @@
     {
       "old": {"craft": "glass"},
       "replace": {"craft": "glaziery"}
+    },
+    {
+      "old": {"craft": "catering"},
+      "replace": {"craft": "caterer"}
+    },
+    {
+      "old": {"craft": "sculpter"},
+      "replace": {"craft": "sculptor"}
     },
     {
       "old": {"crossing": "zebra"},
@@ -289,6 +325,10 @@
       "replace": {"sidewalk": "separate"}
     },
     {
+      "old": {"generator:source": "photovoltaic"},
+      "replace": {"generator:source": "solar", "generator:method": "photovoltaic"}
+    },
+    {
       "old": {"highway": "abandoned"},
       "replace": {"abandoned:highway": "*"}
     },
@@ -332,12 +372,48 @@
       "replace": {"highway": "road", "surface": "unpaved"}
     },
     {
+      "old": {"internet_access": "public"},
+      "replace": {"internet_access": "yes", "internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access": "wifi"},
+      "replace": {"internet_access": "wlan"}
+    },
+    {
+      "old": {"internet_access:fee": "0"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "Free"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:fee": "No"},
+      "replace": {"internet_access:fee": "no"}
+    },
+    {
+      "old": {"internet_access:name": "*"},
+      "replace": {"internet_access:ssid": "$1"}
+    },
+    {
+      "old": {"internet_access:type": "*"},
+      "replace": {"internet_access": "$1"}
+    },
+    {
       "old": {"kerb": "dropped"},
       "replace": {"kerb": "lowered"}
     },
     {
       "old": {"kerb": "flat"},
       "replace": {"kerb": "flush"}
+    },
+    {
+      "old": {"landuse": "basin"},
+      "replace": {"natural": "water", "water": "basin"}
     },
     {
       "old": {"landuse": "conservation"},
@@ -352,12 +428,12 @@
       "replace": {"landuse": "farmland"}
     },
     {
-      "old": {"landuse": "basin"},
-      "replace": {"natural": "water", "water": "basin"}
-    },
-    {
       "old": {"landuse": "pond"},
       "replace": {"natural": "water", "water": "pond"}
+    },
+    {
+      "old": {"landuse": "port"},
+      "replace": {"landuse": "industrial", "industrial": "port"}
     },
     {
       "old": {"landuse": "reservoir"},
@@ -368,11 +444,19 @@
       "replace": {"natural": "wood"}
     },
     {
+      "old": {"lawyer": "notary"},
+      "replace": {"office": "notary"}
+    },
+    {
       "old": {"leisure": "beach"},
       "replace": {"natural": "beach"}
     },
     {
       "old": {"leisure": "club"},
+      "replace": {"club": "*"}
+    },
+    {
+      "old": {"leisure": "social_club"},
       "replace": {"club": "*"}
     },
     {
@@ -424,8 +508,26 @@
       "replace": {"waterway": "waterfall"}
     },
     {
+      "old": {"nosquare": "*"},
+      "replace": {"nonsquare": "$1"}
+    },
+    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
+    },
+    {
+      "old": {"oneway": "1"},
+      "replace": {"oneway": "yes"}
+    },
+    {
+      "old": {"oneway": "alternate"},
+      "replace": {"oneway": "alternating"}
+    },
+    {
+      "old": {"oneway": "no;yes"}
+    },
+    {
+      "old": {"oneway": "unknown"}
     },
     {
       "old": {"place_name": "*"},
@@ -444,8 +546,16 @@
       "replace": {"power": "line", "line": "busbar"}
     },
     {
+      "old": {"power": "line", "location": "underground"},
+      "replace": {"power": "cable", "location": "underground"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
+    },
+    {
+      "old": {"power": "substation", "location": "kiosk"},
+      "replace": {"power": "substation", "man_made": "street_cabinet", "street_cabinet": "power"}
     },
     {
       "old": {"power": "underground_cable"},
@@ -458,6 +568,22 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"recommended_speed": "*"},
+      "replace": {"maxspeed:advisory": "$1"}
+    },
+    {
+      "old": {"recommended_speed:backward": "*"},
+      "replace": {"maxspeed:advisory:backward": "$1"}
+    },
+    {
+      "old": {"recommended_speed:forward": "*"},
+      "replace": {"maxspeed:advisory:forward": "$1"}
+    },
+    {
+      "old": {"religion": "catholic"},
+      "replace": {"religion": "christian", "denomination": "catholic"}
     },
     {
       "old": {"reservations": "*"},
@@ -504,6 +630,10 @@
       "replace": {"shop": "clothes"}
     },
     {
+      "old": {"shop": "cafe"},
+      "replace": {"amenity": "cafe"}
+    },
+    {
       "old": {"shop": "dive"},
       "replace": {"shop": "scuba_diving"}
     },
@@ -528,12 +658,20 @@
       "replace": {"shop": "art"}
     },
     {
+      "old": {"shop": "jewellery"},
+      "replace": {"shop": "jewelry"}
+    },
+    {
       "old": {"shop": "lingerie"},
       "replace": {"shop": "clothes", "clothes": "underwear"}
     },
     {
       "old": {"shop": "luggage"},
       "replace": {"shop": "bag"}
+    },
+    {
+      "old": {"shop": "money_transfer"},
+      "replace": {"amenity": "money_transfer"}
     },
     {
       "old": {"shop": "moneylender"},
@@ -608,6 +746,30 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"sport": "horse_shoes"},
+      "replace": {"sport": "horseshoes"}
+    },
+    {
+      "old": {"sport": "horseshoe"},
+      "replace": {"sport": "horseshoes"}
+    },
+    {
+      "old": {"sport": "shuffle_board"},
+      "replace": {"sport": "shuffleboard"}
+    },
+    {
+      "old": {"theatre:type": "amphitheatre"},
+      "replace": {"theatre:type": "amphi"}
+    },
+    {
+      "old": {"todo": "*"},
+      "replace": {"fixme": "$1"}
+    },
+    {
+      "old": {"TODO": "*"},
+      "replace": {"fixme": "$1"}
+    },
+    {
       "old": {"toilets:disposal": "longdrop"},
       "replace": {"toilets:disposal": "pitlatrine"}
     },
@@ -617,7 +779,7 @@
     },
     {
       "old": {"tourism": "bed_and_breakfast"},
-      "replace": {"tourism": "guest_house"}
+      "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
     },
     {
       "old": {"type": "broad_leaved"},
@@ -630,6 +792,10 @@
     {
       "old": {"type": "deciduous"},
       "replace": {"leaf_cycle": "deciduous"}
+    },
+    {
+      "old": {"unnamed": "*"},
+      "replace": {"noname": "$1"}
     },
     {
       "old": {"water": "intermittent"},

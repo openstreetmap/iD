@@ -7,8 +7,8 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { actionChangePreset } from '../actions/index';
-import { operationDelete } from '../operations/index';
+import { actionChangePreset } from '../actions/change_preset';
+import { operationDelete } from '../operations/delete';
 import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
@@ -197,7 +197,7 @@ export function uiPresetList(context) {
     function itemKeydown(){
         // the actively focused item
         var item = d3_select(this.closest('.preset-list-item'));
-        var parentItem = d3_select(item.node().parentElement.closest('.preset-list-item'));
+        var parentItem = d3_select(item.node().parentNode.closest('.preset-list-item'));
 
         // arrow down, move focus to the next, lower item
         if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
@@ -413,6 +413,7 @@ export function uiPresetList(context) {
                 t('operations.change_tags.annotation')
             );
 
+            context.validator().validate();  // rerun validation
             dispatch.call('choose', this, preset);
         };
 
@@ -427,19 +428,17 @@ export function uiPresetList(context) {
         return item;
     }
 
-    function updateForFeatureHiddenState() {
 
+    function updateForFeatureHiddenState() {
         if (!context.hasEntity(_entityID)) return;
 
         var geometry = context.geometry(_entityID);
-
         var button = d3_selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
         button.call(tooltip().destroyAny);
 
         button.each(function(item, index) {
-
             var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
             var isHiddenPreset = !!hiddenPresetFeaturesId && item.preset !== _currentPreset;
 
