@@ -457,7 +457,7 @@ export function uiRawTagEditor(context) {
             _pendingChange  = _pendingChange || {};
 
             // exit if we are currently about to delete this row anyway - #6366
-            if (_pendingChange[kOld] === undefined) return;
+            if (_pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
 
             if (kOld) {
                 _pendingChange[kOld] = undefined;
@@ -480,7 +480,7 @@ export function uiRawTagEditor(context) {
             _pendingChange  = _pendingChange || {};
 
             // exit if we are currently about to delete this row anyway - #6366
-            if (_pendingChange[d.key] === undefined) return;
+            if (_pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
 
             _pendingChange[d.key] = this.value;
             scheduleChange();
