@@ -135,21 +135,21 @@ export function coreContext() {
 
 
     context.loadTiles = function(projection, callback) {
-        if (connection && context.editable()) {
-            var cid = connection.getConnectionId();
-            utilCallWhenIdle(function() {
+        utilCallWhenIdle(function() {
+            if (connection && context.editable()) {
+                var cid = connection.getConnectionId();
                 connection.loadTiles(projection, afterLoad(cid, callback));
-            })();
-        }
+            }
+        })();
     };
 
     context.loadTileAtLoc = function(loc, callback) {
-        if (connection && context.editable()) {
-            var cid = connection.getConnectionId();
-            utilCallWhenIdle(function() {
+        utilCallWhenIdle(function() {
+            if (connection && context.editable()) {
+                var cid = connection.getConnectionId();
                 connection.loadTileAtLoc(loc, afterLoad(cid, callback));
-            })();
-        }
+            }
+        })();
     };
 
     context.loadEntity = function(entityID, callback) {

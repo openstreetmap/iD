@@ -25,8 +25,7 @@ export function utilIdleWorker(tasks, processor, callback) {
         callback(results);
     })();
 
-    // alternatively, each task deferred in its own callback
-    // seems to not work because it
+    // alternatively, each task deferred in its own callback seems to not work
 
     // var processed = [];
     // var currentPos = 0;
