@@ -1,5 +1,5 @@
 {
-    "icon": "maki-wheelchair",
+    "icon": "temaki-kerb-lowered",
     "fields": [
         "kerb",
         "{barrier/kerb}",
