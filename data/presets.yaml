@@ -7024,6 +7024,11 @@ en:
         name: Outdoors Store
         # 'terms: camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies'
         terms: '<translate with synonyms or related terms for ''Outdoors Store'', separated by commas>'
+      shop/outpost:
+        # shop=outpost
+        name: Online Retailer Outpost
+        # 'terms: online,pick up,pickup'
+        terms: '<translate with synonyms or related terms for ''Online Retailer Outpost'', separated by commas>'
       shop/paint:
         # shop=paint
         name: Paint Store

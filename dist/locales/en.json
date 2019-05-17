@@ -8461,6 +8461,10 @@
                     "name": "Outdoors Store",
                     "terms": "camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies"
                 },
+                "shop/outpost": {
+                    "name": "Online Retailer Outpost",
+                    "terms": "online,pick up,pickup"
+                },
                 "shop/paint": {
                     "name": "Paint Store",
                     "terms": ""

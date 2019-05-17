@@ -984,6 +984,7 @@
     {"key": "shop", "value": "optician", "description": "🄿 Optician", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/optician-15.svg?sanitize=true"},
     {"key": "organic", "value": "only", "description": "🄿 Organic Goods Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "outdoor", "description": "🄿 Outdoors Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/compass.svg?sanitize=true"},
+    {"key": "shop", "value": "outpost", "description": "🄿 Online Retailer Outpost", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"},
     {"key": "shop", "value": "paint", "description": "🄿 Paint Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"},
     {"key": "shop", "value": "party", "description": "🄿 Party Supply Store", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-mask.svg?sanitize=true"},
     {"key": "shop", "value": "pastry", "description": "🄿 Pastry Shop", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bakery-15.svg?sanitize=true"},
