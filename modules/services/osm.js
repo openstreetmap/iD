@@ -11,7 +11,7 @@ import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import {
     utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
-    utilIdleWorker, utilTiler, utilQsString
+    utilCallWhenIdle, utilTiler, utilQsString
 } from '../util';
 
 
@@ -288,7 +288,16 @@ function parseXML(xml, callback, options) {
 
     var root = xml.childNodes[0];
     var children = root.childNodes;
-    utilIdleWorker(children, parseChild, done);
+
+    utilCallWhenIdle(function() {
+        var results = [];
+        var result;
+        for (var i = 0; i < children.length; i++) {
+            result = parseChild(children[i]);
+            if (result) results.push(result);
+        }
+        done(results);
+    })();
 
 
     function done(results) {
