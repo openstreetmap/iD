@@ -700,7 +700,7 @@
     {"key": "manhole", "value": "drain", "description": "🄿 Storm Drain", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"},
     {"key": "manhole", "value": "telecom", "description": "🄿 Telecom Manhole", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/circle-stroked-15.svg?sanitize=true"},
     {"key": "natural", "value": "bare_rock", "description": "🄿 Bare Rock", "object_types": ["area"]},
-    {"key": "natural", "value": "bay", "description": "🄿 Bay", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"},
+    {"key": "natural", "value": "bay", "description": "🄿 Bay", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"},
     {"key": "natural", "value": "beach", "description": "🄿 Beach", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"},
     {"key": "natural", "value": "cape", "description": "🄿 Cape", "object_types": ["node"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"},
     {"key": "natural", "value": "cave_entrance", "description": "🄿 Cave Entrance", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-15.svg?sanitize=true"},

@@ -728,7 +728,7 @@
     "manhole/drain": {"icon": "maki-water", "fields": ["operator", "ref"], "geometry": ["point", "vertex"], "tags": {"manhole": "drain"}, "addTags": {"man_made": "manhole", "manhole": "drain"}, "terms": ["cover", "drain", "hole", "rain", "sewer", "sewage", "storm"], "name": "Storm Drain"},
     "manhole/telecom": {"icon": "maki-circle-stroked", "fields": ["operator", "ref"], "geometry": ["point", "vertex"], "tags": {"manhole": "telecom"}, "addTags": {"man_made": "manhole", "manhole": "telecom"}, "terms": ["cover", "phone", "hole", "telecom", "telephone", "bt"], "name": "Telecom Manhole"},
     "natural/bare_rock": {"geometry": ["area"], "tags": {"natural": "bare_rock"}, "terms": ["rock"], "name": "Bare Rock"},
-    "natural/bay": {"icon": "temaki-beach", "geometry": ["point", "area"], "fields": ["name"], "tags": {"natural": "bay"}, "terms": [], "name": "Bay"},
+    "natural/bay": {"icon": "temaki-beach", "geometry": ["point", "line", "area"], "fields": ["name"], "tags": {"natural": "bay"}, "terms": [], "name": "Bay"},
     "natural/beach": {"icon": "temaki-beach", "fields": ["surface"], "geometry": ["point", "area"], "tags": {"natural": "beach"}, "terms": ["shore"], "name": "Beach"},
     "natural/cape": {"icon": "temaki-beach", "fields": ["name", "elevation", "description"], "geometry": ["point"], "tags": {"natural": "cape"}, "terms": ["bay", "coastline", "erosion", "headland", "promontory"], "name": "Cape"},
     "natural/cave_entrance": {"icon": "maki-triangle", "geometry": ["point", "area"], "fields": ["name", "elevation", "access_simple", "direction", "fee", "payment_multi_fee"], "tags": {"natural": "cave_entrance"}, "terms": ["cavern", "hollow", "grotto", "shelter", "cavity"], "name": "Cave Entrance"},
