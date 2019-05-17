@@ -17,7 +17,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle, utilCleanTags, utilRebind } from '../util';
+import { utilCleanTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -330,13 +330,13 @@ export function uiEntityEditor(context) {
 
         // reset the scroll to the top of the inspector (warning: triggers reflow)
         if (_scrolled) {
-            utilCallWhenIdle(function() {
+            window.requestIdleCallback(function() {
                 var body = d3_selectAll('.entity-editor-pane .inspector-body');
                 if (!body.empty()) {
                     _scrolled = false;
                     body.node().scrollTop = 0;
                 }
-            })();
+            });
         }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);

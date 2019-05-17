@@ -8,7 +8,6 @@ export { utilArrayUniq } from './array';
 export { utilArrayUniqBy } from './array';
 
 export { utilAsyncMap } from './util';
-export { utilCallWhenIdle } from './idle';
 export { utilCleanTags } from './clean_tags';
 export { utilDetect } from './detect';
 export { utilDisplayName } from './util';

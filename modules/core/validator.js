@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { coreDifference } from './difference';
 import { modeSelect } from '../modes/select';
-import { utilArrayGroupBy, utilCallWhenIdle, utilRebind } from '../util';
+import { utilArrayGroupBy, utilRebind } from '../util';
 import { t } from '../util/locale';
 import { validationIssueFix } from './validation/models';
 import * as Validations from '../validations/index';
@@ -19,7 +19,7 @@ export function coreValidator(context) {
     var _issuesByIssueID = {};       // issue.id -> issue
     var _issuesByEntityID = {};      // entity.id -> set(issue.id)
     var _validatedGraph = null;
-
+    var _deferred = new Set();
 
     //
     // initialize the validator rulesets
@@ -45,6 +45,11 @@ export function coreValidator(context) {
     // clear caches, called whenever iD resets after a save
     //
     validator.reset = function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         // clear caches
         _ignoredIssueIDs = {};
         _issuesByIssueID = {};
@@ -430,10 +435,11 @@ export function coreValidator(context) {
     context.history()
         .on('merge.validator', function(entities) {
             if (!entities) return;
-            var ids = entities.map(function(entity) { return entity.id; });
-            utilCallWhenIdle(function() {
+            var handle = window.requestIdleCallback(function() {
+                var ids = entities.map(function(entity) { return entity.id; });
                 validateEntities(entityIDsToValidate(ids, context.graph()));
-            })();
+            });
+            _deferred.add(handle);
         });
 
 

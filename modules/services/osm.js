@@ -9,10 +9,7 @@ import rbush from 'rbush';
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
-import {
-    utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
-    utilCallWhenIdle, utilTiler, utilQsString
-} from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler, utilQsString } from '../util';
 
 
 var tiler = utilTiler();
@@ -32,6 +29,7 @@ var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note:
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 
+var _deferred = new Set();
 var _connectionID = 1;
 var _tileZoom = 16;
 var _noteZoom = 12;
@@ -289,20 +287,18 @@ function parseXML(xml, callback, options) {
     var root = xml.childNodes[0];
     var children = root.childNodes;
 
-    utilCallWhenIdle(function() {
+    var handle = window.requestIdleCallback(function() {
         var results = [];
         var result;
         for (var i = 0; i < children.length; i++) {
             result = parseChild(children[i]);
             if (result) results.push(result);
         }
-        done(results);
-    })();
-
-
-    function done(results) {
         callback(null, results);
-    }
+    });
+
+    _deferred.add(handle);
+
 
     function parseChild(child) {
         var parser = parsers[child.nodeName];
@@ -369,6 +365,11 @@ export default {
 
 
     reset: function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         _connectionID++;
         _userChangesets = undefined;
         _userDetails = undefined;

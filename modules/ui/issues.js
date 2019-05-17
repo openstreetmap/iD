@@ -10,7 +10,7 @@ import { geoSphericalDistance } from '../geo';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle, utilHighlightEntities } from '../util';
+import { utilHighlightEntities } from '../util';
 
 
 export function uiIssues(context) {
@@ -29,8 +29,12 @@ export function uiIssues(context) {
     };
 
     // listeners
-    context.validator().on('validated.uiIssues', utilCallWhenIdle(update));
-    context.map().on('move.uiIssues', _debounce(utilCallWhenIdle(update), 1000));
+    context.validator().on('validated.uiIssues',
+        function() { window.requestIdleCallback(update); }
+    );
+    context.map().on('move.uiIssues',
+        _debounce(function() { window.requestIdleCallback(update); }, 1000)
+    );
 
 
     function addNotificationBadge(selection) {

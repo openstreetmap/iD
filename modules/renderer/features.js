@@ -2,12 +2,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilArrayGroupBy, utilArrayUnion, utilCallWhenIdle, utilQsString, utilStringQs } from '../util';
+import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
 
 export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
     var features = utilRebind({}, dispatch, 'on');
+    var _deferred = new Set();
 
     var traffic_roads = {
         'motorway': true,
@@ -333,6 +334,11 @@ export function rendererFeatures(context) {
 
 
     features.reset = function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         _cache = {};
     };
 
@@ -541,9 +547,8 @@ export function rendererFeatures(context) {
 
     // warm up the feature matching cache upon merging fetched data
     context.history().on('merge.features', function(newEntities) {
-        utilCallWhenIdle(function() {
-            if (!newEntities) return;
-
+        if (!newEntities) return;
+        var handle = window.requestIdleCallback(function() {
             var graph = context.graph();
             var types = utilArrayGroupBy(newEntities, 'type');
             // ensure that getMatches is called on relations before ways
@@ -552,7 +557,8 @@ export function rendererFeatures(context) {
                 var geometry = entities[i].geometry(graph);
                 features.getMatches(entities[i], graph, geometry);
             }
-        })();
+        });
+        _deferred.add(handle);
     });
 
 
