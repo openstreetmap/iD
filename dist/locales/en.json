@@ -4697,6 +4697,10 @@
                     "name": "Fast Food",
                     "terms": "restaurant,takeaway"
                 },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Ice Cream Fast Food",
+                    "terms": ""
+                },
                 "amenity/fast_food/burger": {
                     "name": "Burger Fast Food",
                     "terms": "breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table"
@@ -9110,7 +9114,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Vivid is a mosiac with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
+                "description": "DigitalGlobe-Vivid is a mosaic with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
                 "name": "DigitalGlobe Vivid Imagery"
             },
             "EOXAT2018CLOUDLESS": {
