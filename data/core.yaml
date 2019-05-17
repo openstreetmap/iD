@@ -1444,7 +1444,7 @@ en:
           message: "{feature} has no outlet"
           reference: "One-way roads must lead to other roads."
     unsquare_way:
-      title: Unsquare Corners
+      title: "Unsquare Corners (up to {val}°)"
       message: "{feature} has unsquare corners"
       tip: "Find features with unsquare corners that can be drawn better"
       buildings:

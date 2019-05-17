@@ -564,7 +564,13 @@ export function uiIssues(context) {
 
         label
             .append('span')
-            .text(function(d) { return t('issues.' + d + '.title'); });
+            .text(function(d) {
+                var params = {};
+                if (d === 'unsquare_way') {
+                    params.val = 6.5;
+                }
+                return t('issues.' + d + '.title', params);
+            });
 
         // Update
         items = items
