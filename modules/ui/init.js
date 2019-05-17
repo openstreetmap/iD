@@ -56,6 +56,7 @@ export function uiInit(context) {
             .call(uiFullScreen(context));
 
         var map = context.map();
+        map.redrawEnable(false);  // don't draw until we've set zoom/lat/long
 
         container
             .append('svg')
@@ -218,6 +219,7 @@ export function uiInit(context) {
         // Setup map dimensions and move map to initial center/zoom.
         // This should happen after #content and toolbars exist.
         ui.onResize();
+        map.redrawEnable(true);
 
         var hash = behaviorHash(context);
         hash();
