@@ -23,7 +23,6 @@ path.stroke.old-multipolygon {
 
 
 /* Green things */
-path.stroke.tag-landuse,
 path.stroke.tag-natural,
 path.stroke.tag-leisure-nature_reserve,
 path.stroke.tag-leisure-pitch,
@@ -37,7 +36,6 @@ path.stroke.tag-landuse-grass,
 path.stroke.tag-barrier-hedge {
     stroke: rgb(140, 208, 95);
 }
-path.fill.tag-landuse,
 path.fill.tag-natural,
 path.fill.tag-leisure-nature_reserve,
 path.fill.tag-leisure-pitch,
