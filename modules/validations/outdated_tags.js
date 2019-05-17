@@ -1,4 +1,6 @@
 import { t } from '../util/locale';
+import { matcher, brands } from 'name-suggestion-index';
+
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
@@ -9,6 +11,12 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 export function validationOutdatedTags() {
     var type = 'outdated_tags';
+
+    // initialize name-suggestion-index matcher
+    var nsiMatcher = matcher();
+    nsiMatcher.buildMatchIndex(brands.brands);
+    var nsiKeys = ['amenity', 'leisure', 'shop', 'tourism'];
+
 
     function oldTagIssues(entity, context) {
         var graph = context.graph();
@@ -46,6 +54,24 @@ export function validationOutdatedTags() {
                 }
             });
         }
+
+        // search name-suggestion-index
+        if (newTags.name) {
+            for (var i = 0; i < nsiKeys.length; i++) {
+                var k = nsiKeys[i];
+                if (!newTags[k]) continue;
+
+                var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name);
+                if (!match) continue;
+
+                var brand = brands.brands[match.kvnd];
+                if (brand) {
+                    Object.assign(newTags, brand.tags);
+                    break;
+                }
+            }
+        }
+
 
         // determine diff
         var tagDiff = utilTagDiff(oldTags, newTags);
