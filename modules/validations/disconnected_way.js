@@ -13,87 +13,93 @@ export function validationDisconnectedWay() {
         return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    function isNewRoad(entityId) {
-        return entityId[0] === 'w' && entityId[1] === '-';
-    }
-
     var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
 
         if (!isTaggedAsHighway(entity)) return [];
 
-        if (!isDisconnectedWay(entity) &&
-            !isDisconnectedMultipolygon(entity) &&
-            !isNewRoadUnreachableFromExistingRoads(entity, graph)
-        ) {
-            return [];
-        }
+        var routingIslandWays = routingIslandForWay(entity);
+        if (!routingIslandWays) return [];
 
         var fixes = [];
-        var entityID = entity.id;
 
-        if (entity.type === 'way' && !entity.isClosed()) {
-            var firstID = entity.first();
-            var lastID = entity.last();
+        var isSingle = routingIslandWays.size === 1;
 
-            var first = context.entity(firstID);
-            if (first.tags.noexit !== 'yes') {
+        if (isSingle) {
+
+            if (entity.type === 'way' && !entity.isClosed()) {
+                var firstID = entity.first();
+                var lastID = entity.last();
+
+                var first = context.entity(firstID);
+                if (first.tags.noexit !== 'yes') {
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-operation-continue-left',
+                        title: t('issues.fix.continue_from_start.title'),
+                        entityIds: [firstID],
+                        onClick: function() {
+                            var wayId = this.issue.entityIds[0];
+                            var way = context.entity(wayId);
+                            var vertexId = this.entityIds[0];
+                            var vertex = context.entity(vertexId);
+                            continueDrawing(way, vertex, context);
+                        }
+                    }));
+                }
+                var last = context.entity(lastID);
+                if (last.tags.noexit !== 'yes') {
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-operation-continue',
+                        title: t('issues.fix.continue_from_end.title'),
+                        entityIds: [lastID],
+                        onClick: function() {
+                            var wayId = this.issue.entityIds[0];
+                            var way = context.entity(wayId);
+                            var vertexId = this.entityIds[0];
+                            var vertex = context.entity(vertexId);
+                            continueDrawing(way, vertex, context);
+                        }
+                    }));
+                }
+
+            } else {
                 fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue-left',
-                    title: t('issues.fix.continue_from_start.title'),
-                    entityIds: [firstID],
+                    title: t('issues.fix.connect_feature.title')
+                }));
+            }
+
+            if (!operationDelete([entity.id], context).disabled()) {
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.delete_feature.title'),
+                    entityIds: [entity.id],
                     onClick: function() {
-                        var way = context.entity(entityID);
-                        var vertex = context.entity(firstID);
-                        continueDrawing(way, vertex, context);
+                        var id = this.issue.entityIds[0];
+                        var operation = operationDelete([id], context);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
                     }
                 }));
             }
-            var last = context.entity(lastID);
-            if (last.tags.noexit !== 'yes') {
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue',
-                    title: t('issues.fix.continue_from_end.title'),
-                    entityIds: [lastID],
-                    onClick: function() {
-                        var way = context.entity(entityID);
-                        var vertex = context.entity(lastID);
-                        continueDrawing(way, vertex, context);
-                    }
-                }));
-            }
-
         } else {
             fixes.push(new validationIssueFix({
-                title: t('issues.fix.connect_feature.title')
+                title: t('issues.fix.connect_features.title')
             }));
         }
 
-        if (!operationDelete([entity.id], context).disabled()) {
-            fixes.push(new validationIssueFix({
-                icon: 'iD-operation-delete',
-                title: t('issues.fix.delete_feature.title'),
-                entityIds: [entity.id],
-                onClick: function() {
-                    var id = this.issue.entityIds[0];
-                    var operation = operationDelete([id], context);
-                    if (!operation.disabled()) {
-                        operation();
-                    }
-                }
-            }));
-        }
-        var suffix = isNewRoad(entity.id) ? '_new_road' : '';
         return [new validationIssue({
             type: type,
             severity: 'warning',
             message: function() {
-                var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.disconnected_way.highway.message' + suffix, { highway: utilDisplayLabel(entity, context) }) : '';
+                if (this.entityIds.length === 1) {
+                    var entity = context.hasEntity(this.entityIds[0]);
+                    return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context) }) : '';
+                }
+                return t('issues.disconnected_way.routable.message.multiple', { count: this.entityIds.length.toString() });
             },
-            tooltip: t('issues.disconnected_way.highway.reference' + suffix),
             reference: showReference,
-            entityIds: [entity.id],
+            entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),
             fixes: fixes
         })];
 
@@ -104,82 +110,91 @@ export function validationDisconnectedWay() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.disconnected_way.highway.reference'));
+                .text(t('issues.disconnected_way.routable.reference'));
         }
 
 
-        function vertexIsDisconnected(way, vertex, relation) {
+        function isConnectedVertex(vertex, way, relation, routingIslandSet) {
             // can not accurately test vertices on tiles not downloaded from osm - #5938
             var osm = context.connection();
-            if (osm && !osm.isDataLoaded(vertex.loc)) {
-                return false;
-            }
-
-            var parents = graph.parentWays(vertex);
-
-            // standalone vertex
-            if (parents.length === 1) return true;
+            if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
             // entrances are considered connected
-            if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return false;
-            if (vertex.tags.amenity === 'parking_entrance') return false;
+            if (vertex.tags.entrance &&
+                vertex.tags.entrance !== 'no') return true;
+            if (vertex.tags.amenity === 'parking_entrance') return true;
 
-            return !parents.some(function(parentWay) {
-                if (parentWay === way) return false;   // ignore the way we're testing
+            var parentsWays = graph.parentWays(vertex);
+
+            // standalone vertex
+            if (parentsWays.length === 1) return false;
+
+            var connectedWays = new Set();
+
+            for (var i in parentsWays) {
+                var parentWay = parentsWays[i];
+
+                // ignore any way we've already accounted for
+                if (routingIslandSet.has(parentWay)) continue;
+
                 // count connections to ferry routes as connected
                 if (parentWay.tags.route === 'ferry') return true;
-                if (isTaggedAsHighway(parentWay)) return true;
 
-                return graph.parentRelations(parentWay).some(function(parentRelation) {
+                if (isTaggedAsHighway(parentWay)) connectedWays.add(parentWay);
+
+                var parentRelations = graph.parentRelations(parentWay);
+
+                for (var j in parentRelations) {
+                    var parentRelation = parentRelations[j];
+
                     // ignore the relation we're testing, if any
-                    if (relation && parentRelation === relation) return false;
+                    if (relation && parentRelation === relation) continue;
 
                     if (parentRelation.tags.type === 'route' &&
                         parentRelation.tags.route === 'ferry') return true;
 
-                    return parentRelation.isMultipolygon() && isTaggedAsHighway(parentRelation);
-                });
-            });
-        }
-
-
-        function isDisconnectedWay(entity) {
-            if (entity.type !== 'way') return false;
-            return graph.childNodes(entity).every(function(vertex) {
-                return vertexIsDisconnected(entity, vertex);
-            });
-        }
-
-
-        // check if entity is a new road that cannot eventually connect to any
-        // existing roads
-        function isNewRoadUnreachableFromExistingRoads(entity) {
-            if (!isNewRoad(entity.id) || !isTaggedAsHighway(entity)) return false;
-
-            var visitedWids = new Set();
-            return !connectToExistingRoadOrEntrance(entity, visitedWids);
-        }
-
-
-        function connectToExistingRoadOrEntrance(way, visitedWids) {
-            visitedWids.add(way.id);
-            for (var i = 0; i < way.nodes.length; i++) {
-                var vertex = graph.entity(way.nodes[i]);
-                if (vertex.tags.entrance && vertex.tags.entrance !== 'no') return true;
-
-                var parentWays = graph.parentWays(vertex);
-                for (var j = 0; j < parentWays.length; j++) {
-                    var parentWay = parentWays[j];
-                    if (visitedWids.has(parentWay.id)) continue;
-                    if (isTaggedAsHighway(parentWay) && !isNewRoad(parentWay.id)) return true;
-                    if (connectToExistingRoadOrEntrance(parentWay, visitedWids)) return true;
+                    if (parentRelation.isMultipolygon() &&
+                        isTaggedAsHighway(parentRelation)) return connectedWays.add(parentWay);
                 }
             }
+
+            if (connectedWays.size) return connectedWays;
+
             return false;
         }
 
 
-        function isDisconnectedMultipolygon(entity) {
+        function routingIslandForWay(way, relation) {
+            if (way.type !== 'way') return null;
+
+            var waysToCheck = [way];
+            var routingIsland = new Set([way]);
+
+            while (waysToCheck.length) {
+                var wayToCheck = waysToCheck.pop();
+                var childNodes = graph.childNodes(wayToCheck);
+                for (var i in childNodes) {
+                    var vertex = childNodes[i];
+                    var result = isConnectedVertex(vertex, entity, relation, routingIsland);
+                    if (result === true) {
+                        return null;
+                    } else if (result === false) {
+                        continue;
+                    }
+                    result.forEach(function(connectedWay) {
+                        if (!routingIsland.has(connectedWay)) {
+                            routingIsland.add(connectedWay);
+                            waysToCheck.push(connectedWay);
+                        }
+                    });
+                }
+            }
+
+            return routingIsland;
+        }
+
+
+        /*function isDisconnectedMultipolygon(entity) {
             if (entity.type !== 'relation' || !entity.isMultipolygon()) return false;
 
             return entity.members.every(function(member) {
@@ -188,11 +203,9 @@ export function validationDisconnectedWay() {
                 var way = graph.hasEntity(member.id);
                 if (!way) return true;
 
-                return graph.childNodes(way).every(function(vertex) {
-                    return vertexIsDisconnected(way, vertex, entity);
-                });
+                return isDisconnectedWay(way, entity);
             });
-        }
+        }*/
 
         function continueDrawing(way, vertex) {
             // make sure the vertex is actually visible and editable
