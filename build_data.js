@@ -253,7 +253,7 @@ function suggestionsToPresets(presets) {
         let suggestionID = presetID + '/' + name;
 
         let tags = { 'brand:wikidata': qid };
-        for (k in preset.tags) {
+        for (let k in preset.tags) {
             // prioritize suggestion tags over preset tags (for `vending`,`cuisine`, etc)
             tags[k] = suggestion.tags[k] || preset.tags[k];
         }
