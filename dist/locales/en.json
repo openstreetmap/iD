@@ -1684,7 +1684,7 @@
             },
             "disconnected_way": {
                 "title": "Disconnected Ways",
-                "tip": "Find unconnected highways and paths",
+                "tip": "Find unroutable roads, paths, and ferry routes",
                 "routable": {
                     "message": {
                         "multiple": "{count} routable features are connected only to each other."

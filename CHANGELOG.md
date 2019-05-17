@@ -128,7 +128,9 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 - Flag unreachable one-way highways and waterways flowing against each other ([#6216])
 - Flag disconnected area and multipolygon highways ([#6075])
 - Flag new highways disconnected from the larger road network ([#6284], thanks [@Bonkles], [@gaoxm])
+- Flag routing islands
 - Don't flag highways connected to ferry routes as disconnected ([#6287])
+- Flag disconnected ferry routes
 - Flag deprecated values among semicolon-delimited tags ([#6038])
 - Add quick fixes for setting the `layer` to resolve certain Crossing Ways issues ([#5943])
 - Rename "Generic Names" validation rule to "Suspicious Names"

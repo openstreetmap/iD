@@ -16,9 +16,7 @@ export function validationDisconnectedWay() {
     var validation = function checkDisconnectedWay(entity, context) {
         var graph = context.graph();
 
-        if (!isTaggedAsHighway(entity)) return [];
-
-        var routingIslandWays = routingIslandForWay(entity);
+        var routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
 
         var fixes = [];
@@ -113,9 +111,40 @@ export function validationDisconnectedWay() {
                 .text(t('issues.disconnected_way.routable.reference'));
         }
 
+        function routingIslandForEntity(entity) {
 
-        function isConnectedVertex(vertex, way, relation, routingIslandSet) {
-            // can not accurately test vertices on tiles not downloaded from osm - #5938
+            if (entity.type !== 'way') return null;
+
+            if (!isRoutableWay(entity, true)) return null;
+
+            var waysToCheck = [entity];
+            var routingIsland = new Set([entity]);
+
+            while (waysToCheck.length) {
+                var wayToCheck = waysToCheck.pop();
+                var childNodes = graph.childNodes(wayToCheck);
+                for (var i in childNodes) {
+                    var vertex = childNodes[i];
+                    var result = isConnectedVertex(vertex, routingIsland);
+                    if (result === true) {
+                        return null;
+                    } else if (result === false) {
+                        continue;
+                    }
+                    result.forEach(function(connectedWay) {
+                        if (!routingIsland.has(connectedWay)) {
+                            routingIsland.add(connectedWay);
+                            waysToCheck.push(connectedWay);
+                        }
+                    });
+                }
+            }
+
+            return routingIsland;
+        }
+
+        function isConnectedVertex(vertex, routingIslandWays) {
+            // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
             var osm = context.connection();
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
@@ -135,27 +164,9 @@ export function validationDisconnectedWay() {
                 var parentWay = parentsWays[i];
 
                 // ignore any way we've already accounted for
-                if (routingIslandSet.has(parentWay)) continue;
+                if (routingIslandWays.has(parentWay)) continue;
 
-                // count connections to ferry routes as connected
-                if (parentWay.tags.route === 'ferry') return true;
-
-                if (isTaggedAsHighway(parentWay)) connectedWays.add(parentWay);
-
-                var parentRelations = graph.parentRelations(parentWay);
-
-                for (var j in parentRelations) {
-                    var parentRelation = parentRelations[j];
-
-                    // ignore the relation we're testing, if any
-                    if (relation && parentRelation === relation) continue;
-
-                    if (parentRelation.tags.type === 'route' &&
-                        parentRelation.tags.route === 'ferry') return true;
-
-                    if (parentRelation.isMultipolygon() &&
-                        isTaggedAsHighway(parentRelation)) return connectedWays.add(parentWay);
-                }
+                if (isRoutableWay(parentWay, false)) connectedWays.add(parentWay);
             }
 
             if (connectedWays.size) return connectedWays;
@@ -163,49 +174,18 @@ export function validationDisconnectedWay() {
             return false;
         }
 
+        function isRoutableWay(way, ignoreInnerWays) {
+            if (isTaggedAsHighway(way) || way.tags.route === 'ferry') return true;
 
-        function routingIslandForWay(way, relation) {
-            if (way.type !== 'way') return null;
+            return graph.parentRelations(way).some(function(parentRelation) {
+                if (parentRelation.tags.type === 'route' &&
+                    parentRelation.tags.route === 'ferry') return true;
 
-            var waysToCheck = [way];
-            var routingIsland = new Set([way]);
-
-            while (waysToCheck.length) {
-                var wayToCheck = waysToCheck.pop();
-                var childNodes = graph.childNodes(wayToCheck);
-                for (var i in childNodes) {
-                    var vertex = childNodes[i];
-                    var result = isConnectedVertex(vertex, entity, relation, routingIsland);
-                    if (result === true) {
-                        return null;
-                    } else if (result === false) {
-                        continue;
-                    }
-                    result.forEach(function(connectedWay) {
-                        if (!routingIsland.has(connectedWay)) {
-                            routingIsland.add(connectedWay);
-                            waysToCheck.push(connectedWay);
-                        }
-                    });
-                }
-            }
-
-            return routingIsland;
-        }
-
-
-        /*function isDisconnectedMultipolygon(entity) {
-            if (entity.type !== 'relation' || !entity.isMultipolygon()) return false;
-
-            return entity.members.every(function(member) {
-                if (member.type !== 'way') return true;
-
-                var way = graph.hasEntity(member.id);
-                if (!way) return true;
-
-                return isDisconnectedWay(way, entity);
+                if (parentRelation.isMultipolygon() &&
+                    isTaggedAsHighway(parentRelation) &&
+                    (!ignoreInnerWays || parentRelation.memberById(way.id).role !== 'inner')) return true;
             });
-        }*/
+        }
 
         function continueDrawing(way, vertex) {
             // make sure the vertex is actually visible and editable

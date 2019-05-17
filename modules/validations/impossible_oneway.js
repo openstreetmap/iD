@@ -207,7 +207,7 @@ export function validationImpossibleOneway() {
         }
     }
 
-    var validation = function checkDisconnectedWay(entity, context) {
+    var validation = function checkImpossibleOneway(entity, context) {
 
         if (entity.type !== 'way' || entity.geometry(context.graph()) !== 'line') return [];
 
