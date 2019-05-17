@@ -1684,12 +1684,15 @@
             },
             "disconnected_way": {
                 "title": "Disconnected Ways",
-                "tip": "Find unconnected highways and paths",
+                "tip": "Find unroutable roads, paths, and ferry routes",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} routable features are connected only to each other."
+                    },
+                    "reference": "All roads, paths, and ferry routes should connect to form a single routing network."
+                },
                 "highway": {
-                    "message": "{highway} is disconnected from other roads and paths",
-                    "message_new_road": "New {highway} is disconnected from existing road network",
-                    "reference": "Highways should connect to other highways or building entrances.",
-                    "reference_new_road": "New roads should connect to existing road network or building entrances."
+                    "message": "{highway} is disconnected from other roads and paths"
                 }
             },
             "fixme_tag": {
@@ -9103,7 +9106,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Vivid is a mosiac with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
+                "description": "DigitalGlobe-Vivid is a mosaic with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
                 "name": "DigitalGlobe Vivid Imagery"
             },
             "EOXAT2018CLOUDLESS": {
