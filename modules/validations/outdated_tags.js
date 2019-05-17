@@ -15,7 +15,7 @@ export function validationOutdatedTags() {
     // initialize name-suggestion-index matcher
     var nsiMatcher = matcher();
     nsiMatcher.buildMatchIndex(brands.brands);
-    var nsiKeys = ['amenity', 'leisure', 'shop', 'tourism'];
+    var nsiKeys = ['amenity', 'shop', 'tourism', 'leisure'];
 
 
     function oldTagIssues(entity, context) {
@@ -63,6 +63,9 @@ export function validationOutdatedTags() {
 
                 var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name);
                 if (!match) continue;
+
+                // for now skip ambiguous matches (like Target~(USA) vs Target~(Australia))
+                if (match.d) continue;
 
                 var brand = brands.brands[match.kvnd];
                 if (brand) {
