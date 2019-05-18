@@ -5043,7 +5043,7 @@
                 },
                 "amenity/shelter/public_transport": {
                     "name": "Transit Shelter",
-                    "terms": "bus stop,metro stop,waiting"
+                    "terms": "bus stop,metro stop,public transit shelter,public transport shelter,tram stop shelter,waiting"
                 },
                 "amenity/shower": {
                     "name": "Shower",
