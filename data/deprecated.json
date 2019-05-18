@@ -464,6 +464,10 @@
       "replace": {"leisure": "amusement_arcade"}
     },
     {
+      "old": {"leisure": "recreation_ground"},
+      "replace": {"landuse": "recreation_ground"}
+    },
+    {
       "old": {"man_made": "cut_line"},
       "replace": {"man_made": "cutline"}
     },

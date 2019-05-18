@@ -1845,6 +1845,7 @@
     {"key": "leisure", "value": "club", "description": "🄳 ➜ club=*"},
     {"key": "leisure", "value": "social_club", "description": "🄳 ➜ club=*"},
     {"key": "leisure", "value": "video_arcade", "description": "🄳 ➜ leisure=amusement_arcade"},
+    {"key": "leisure", "value": "recreation_ground", "description": "🄳 ➜ landuse=recreation_ground"},
     {"key": "man_made", "value": "cut_line", "description": "🄳 ➜ man_made=cutline"},
     {"key": "man_made", "value": "jetty", "description": "🄳 ➜ highway=footway + man_made=pier"},
     {"key": "man_made", "value": "mdf", "description": "🄳 ➜ telecom=exchange"},
