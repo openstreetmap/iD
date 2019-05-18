@@ -8,16 +8,17 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 export function validationUnsquareWay() {
     var type = 'unsquare_way';
+    var DEFAULTSQUARE = 6.5;   // see also issues.js
 
     // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
     var epsilon = 0.05;
-    var degreeThreshold = 13;
-    var autofixDegreeThreshold = 6.5;
     var nodeThreshold = 10;
+    // var degreeThreshold = 13;
+    // var autofixDegreeThreshold = 6.5;
+
 
     function isBuilding(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
-
         return entity.tags.building && entity.tags.building !== 'no';
     }
 
@@ -54,6 +55,13 @@ export function validationUnsquareWay() {
         });
         if (hasConnectedSquarableWays) return [];
 
+
+// testing:  user-configurable square threshold
+var degreeThreshold = context.storage('validate-square-degrees');
+if (degreeThreshold === null) {
+    degreeThreshold = '' + DEFAULTSQUARE;
+}
+var autofixDegreeThreshold = degreeThreshold;
 
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];

@@ -3397,6 +3397,14 @@ button.autofix.action.active {
     color: #05ac10;
 }
 
+input.square-degrees-input {
+    padding: 2px;
+    height: unset;
+    text-align: center;
+    background: rgba(0,0,0,0);
+    color: currentColor;
+}
+
 
 /* Entity Issues List */
 .entity-issues .issue-container .issue {
