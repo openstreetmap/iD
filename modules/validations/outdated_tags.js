@@ -68,7 +68,7 @@ export function validationOutdatedTags() {
                 if (match.d) continue;
 
                 var brand = brands.brands[match.kvnd];
-                if (brand) {
+                if (brand && brand.tags['brand:wikidata']) {
                     Object.assign(newTags, brand.tags);
                     break;
                 }
