@@ -105,6 +105,7 @@ g.point .stroke {
     fill: #fff;
 }
 
+
 g.qa_error .shadow,
 g.point .shadow,
 g.note .shadow {
@@ -281,6 +282,22 @@ text.point {
     fill: #222;
     opacity: 0.8;
 }
+
+
+/* Wikidata-tagged */
+g.point.tag-wikidata .stroke {
+    fill: #8e9;
+}
+.labels-group.halo text.tag-wikidata {
+    stroke: #8e9;
+}
+.icon.areaicon-halo.tag-wikidata {
+    stroke: #9e9;
+}
+.icon.areaicon.tag-wikidata {
+    color: #050;
+}
+
 
 /* Highlighting */
 g.point.highlighted .shadow,

@@ -156,7 +156,8 @@ export function svgLabels(projection, context) {
         texts.enter()
             .append('text')
             .attr('class', function(d, i) {
-                return classes + ' ' + labels[i].classes + ' ' + d.id;
+                var hasWd = d.hasWikidata() ? ' tag-wikidata' : '';
+                return classes + ' ' + labels[i].classes + hasWd + ' ' + d.id;
             })
             .merge(texts)
             .attr('x', get(labels, 'x'))
@@ -192,7 +193,10 @@ export function svgLabels(projection, context) {
         // enter/update
         icons.enter()
             .append('use')
-            .attr('class', 'icon ' + classes)
+            .attr('class', function(d) {
+                var hasWd = d.hasWikidata() ? ' tag-wikidata' : '';
+                return 'icon ' + classes + hasWd;
+            })
             .attr('width', '17px')
             .attr('height', '17px')
             .merge(icons)
