@@ -115,6 +115,10 @@ export var osmRoutableHighwayTagValues = {
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
 };
+// "highway" tag values that generally do not allow motor vehicles
+export var osmPathHighwayTagValues = {
+    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
+};
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
 export var osmRailwayTrackTagValues = {

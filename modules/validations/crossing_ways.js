@@ -3,7 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode } from '../geo';
 import { osmNode } from '../osm/node';
-import { osmFlowingWaterwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -146,10 +146,6 @@ export function validationCrossingWays() {
         motorway: true, motorway_link: true, trunk: true, trunk_link: true,
         primary: true, primary_link: true, secondary: true, secondary_link: true
     };
-    var pathHighways = {
-        path: true, footway: true, cycleway: true, bridleway: true,
-        pedestrian: true, steps: true, corridor: true
-    };
     var nonCrossingHighways = { track: true };
 
     function tagsForConnectionNodeIfAllowed(entity1, entity2) {
@@ -157,8 +153,8 @@ export function validationCrossingWays() {
         var featureType2 = getFeatureTypeForTags(entity2.tags);
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
-                var entity1IsPath = pathHighways[entity1.tags.highway];
-                var entity2IsPath = pathHighways[entity2.tags.highway];
+                var entity1IsPath = osmPathHighwayTagValues[entity1.tags.highway];
+                var entity2IsPath = osmPathHighwayTagValues[entity2.tags.highway];
                 if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
                     // one feature is a path but not both
 
@@ -184,8 +180,8 @@ export function validationCrossingWays() {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
-                    if (pathHighways[entity1.tags.highway] ||
-                        pathHighways[entity2.tags.highway]) {
+                    if (osmPathHighwayTagValues[entity1.tags.highway] ||
+                        osmPathHighwayTagValues[entity2.tags.highway]) {
                         // path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
