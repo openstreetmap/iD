@@ -18,7 +18,7 @@ export function uiIssues(context) {
 
     var MINSQUARE = 0;
     var MAXSQUARE = 20;
-    var DEFAULTSQUARE = 6.5;  // see also unsquare_way.js
+    var DEFAULTSQUARE = 5;  // see also unsquare_way.js
 
     var _errorsSelection = d3_select(null);
     var _warningsSelection = d3_select(null);
@@ -610,6 +610,17 @@ export function uiIssues(context) {
             .on('input', function() {
                 this.style.width = (this.value.length + 1) + 'ch';   // resize
             })
+            .on('click', function () {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                this.select();
+            })
+            .on('keyup', function () {
+                if (d3_event.keyCode === 13) { // enter
+                    this.blur();
+                    this.select();
+                }
+            })
             .on('blur', changeSquare)
             .merge(input)
             .property('value', degStr)
@@ -622,8 +633,12 @@ export function uiIssues(context) {
         var degStr = utilGetSetValue(input).trim();
         var degNum = parseFloat(degStr, 10);
 
-        if (!isFinite(degNum) || degNum > MAXSQUARE || degNum < MINSQUARE) {
+        if (!isFinite(degNum)) {
             degNum = DEFAULTSQUARE;
+        } else if (degNum > MAXSQUARE) {
+            degNum = MAXSQUARE;
+        } else if (degNum < MINSQUARE) {
+            degNum = MINSQUARE;
         }
 
         degNum = Math.round(degNum * 10 ) / 10;   // round to 1 decimal

@@ -6,7 +6,7 @@ import {
 } from '../geo';
 
 
-export function actionOrthogonalize(wayID, projection, vertexID, ep, degThresh) {
+export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) {
     var epsilon = ep || 1e-4;
     var threshold = degThresh || 13;  // degrees within right or straight to alter
 
