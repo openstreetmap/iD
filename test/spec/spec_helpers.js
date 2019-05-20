@@ -22,6 +22,7 @@ iD.data.presets = {
 
 
 mocha.setup({
+    timeout: 10000,
     ui: 'bdd',
     globals: [
         '__onresize.tail-size',
