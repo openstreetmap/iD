@@ -1,8 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
+import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
@@ -113,7 +110,21 @@ export function uiFieldText(field, context) {
                     .filter(function(k) { return k !== pKey && k !== 'name'; });
             }
 
-            wrap.call(isSuggestion ? _brandTip : _brandTip.destroy);
+            selection.call(isSuggestion ? _brandTip : _brandTip.destroy);
+
+            // add a label annotation
+            var annotation = selection.selectAll('.field-label .label-textannotation');
+            var icon = annotation.selectAll('.icon')
+                .data(isSuggestion ? [0]: []);
+
+            icon.exit()
+                .remove();
+
+            icon.enter()
+                .append('svg')
+                .attr('class', 'icon')
+                .append('use')
+                .attr('xlink:href', '#fas-lock');
         }
     }
 

@@ -287,10 +287,8 @@ text.point {
 /* Wikidata-tagged */
 g.point.tag-wikidata path.stroke {
     stroke-width: 3px;
-    stroke: #383;
-}
-.icon.areaicon-halo.tag-wikidata {
-    stroke: #6c6;
+    stroke: #777;
+    fill: #ddd;
 }
 
 

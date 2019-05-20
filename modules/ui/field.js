@@ -1,9 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { textDirection } from '../util/locale';
@@ -117,18 +113,26 @@ export function uiField(context, presetField, entity, options) {
             .classed('nowrap', !options.wrap);
 
         if (options.wrap) {
-            var label = enter
+            var labelEnter = enter
                 .append('label')
                 .attr('class', 'field-label')
                 .attr('for', function(d) { return 'preset-input-' + d.safeid; });
 
-            label
+            var textEnter = labelEnter
                 .append('span')
-                .attr('class', 'label-text')
+                .attr('class', 'label-text');
+
+            textEnter
+                .append('span')
+                .attr('class', 'label-textvalue')
                 .text(function(d) { return d.label(); });
 
+            textEnter
+                .append('span')
+                .attr('class', 'label-textannotation');
+
             if (options.remove) {
-                label
+                labelEnter
                     .append('button')
                     .attr('class', 'remove-icon')
                     .attr('title', t('icons.remove'))
@@ -137,7 +141,7 @@ export function uiField(context, presetField, entity, options) {
             }
 
             if (options.revert) {
-                label
+                labelEnter
                     .append('button')
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))

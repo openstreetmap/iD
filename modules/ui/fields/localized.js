@@ -1,10 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
-
+import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { dataWikipedia } from '../../../data';
@@ -97,9 +92,7 @@ export function uiFieldLocalized(field, context) {
         wrap = wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
-            .merge(wrap)
-            .call(_isLocked ? _brandTip : _brandTip.destroy);
-
+            .merge(wrap);
 
         input = wrap.selectAll('.localized-main')
             .data([0]);
@@ -195,6 +188,24 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!_isLocked)
             .attr('readonly', _isLocked || null);
+
+
+        _selection.call(_isLocked ? _brandTip : _brandTip.destroy);
+
+        // add a label annotations if locked
+        var annotation = selection.selectAll('.field-label .label-textannotation');
+        var icon = annotation.selectAll('.icon')
+            .data(_isLocked ? [0]: []);
+
+        icon.exit()
+            .remove();
+
+        icon.enter()
+            .append('svg')
+            .attr('class', 'icon')
+            .append('use')
+            .attr('xlink:href', '#fas-lock');
+
 
 
         // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
@@ -404,10 +415,18 @@ export function uiFieldLocalized(field, context) {
                     .append('label')
                     .attr('class', 'field-label');
 
-                label
+                var text = label
                     .append('span')
-                    .attr('class', 'label-text')
+                    .attr('class', 'label-text');
+
+                text
+                    .append('span')
+                    .attr('class', 'label-textvalue')
                     .text(t('translate.localized_translation_label'));
+
+                text
+                    .append('span')
+                    .attr('class', 'label-textannotation');
 
                 label
                     .append('button')
