@@ -360,14 +360,6 @@
       "replace": {"barrier": "stile"}
     },
     {
-      "old": {"highway": "incline"},
-      "replace": {"highway": "road", "incline": "up"}
-    },
-    {
-      "old": {"highway": "incline_steep"},
-      "replace": {"highway": "road", "incline": "up"}
-    },
-    {
       "old": {"highway": "unsurfaced"},
       "replace": {"highway": "road", "surface": "unpaved"}
     },
