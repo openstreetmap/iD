@@ -9,6 +9,9 @@
         "line"
     ],
     "tags": {
+        "kerb": "flush"
+    },
+    "addTags": {
         "barrier": "kerb",
         "kerb": "flush"
     },
