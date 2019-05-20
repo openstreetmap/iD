@@ -1557,11 +1557,13 @@ button.preset-favorite-button.active .icon {
 }
 
 .field-label .modified-icon,
-.field-label .remove-icon {
+.field-label .remove-icon,
+.field-label .remove-icon-multilingual {
     display: none;
 }
-.modified .field-label .modified-icon,
-.present .field-label .remove-icon {
+.modified:not(.locked) .field-label .modified-icon,
+.present:not(.locked) .field-label .remove-icon,
+.present:not(.locked) .field-label .remove-icon-multilingual {
     display: inline-block;
 }
 
