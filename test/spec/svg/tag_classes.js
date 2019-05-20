@@ -185,6 +185,27 @@ describe('iD.svgTagClasses', function () {
         expect(selection.classed('tag-unpaved')).to.be.false;
     });
 
+    it('does not add tag-wikidata if no wikidata tag', function() {
+        selection
+            .datum(iD.osmEntity())
+            .call(iD.svgTagClasses());
+        expect(selection.classed('tag-wikidata')).to.be.false;
+    });
+
+    it('adds tag-wikidata if entity has a wikidata tag', function() {
+        selection
+            .datum(iD.osmEntity({ tags: { wikidata: 'Q18275868' } }))
+            .call(iD.svgTagClasses());
+        expect(selection.classed('tag-wikidata')).to.be.true;
+    });
+
+    it('adds tag-wikidata if entity has a brand:wikidata tag', function() {
+        selection
+            .datum(iD.osmEntity({ tags: { 'brand:wikidata': 'Q18275868' } }))
+            .call(iD.svgTagClasses());
+        expect(selection.classed('tag-wikidata')).to.be.true;
+    });
+
     it('adds tags based on the result of the `tags` accessor', function() {
         var primary = function () { return { highway: 'primary'}; };
         selection

@@ -1528,6 +1528,15 @@ button.preset-favorite-button.active .icon {
     padding: 5px 10px 5px 0;
 }
 
+.label-text .label-textannotation svg.icon {
+    margin: 0 10px;
+    color: #333;
+    opacity: 0.5;
+    width: 14px;
+    height: 14px;
+    vertical-align: text-top;
+}
+
 .field-label button {
     flex: 0 0 32px;
     border-left: 1px solid #ccc;
@@ -1548,11 +1557,13 @@ button.preset-favorite-button.active .icon {
 }
 
 .field-label .modified-icon,
-.field-label .remove-icon {
+.field-label .remove-icon,
+.field-label .remove-icon-multilingual {
     display: none;
 }
-.modified .field-label .modified-icon,
-.present .field-label .remove-icon {
+.modified:not(.locked) .field-label .modified-icon,
+.present:not(.locked) .field-label .remove-icon,
+.present:not(.locked) .field-label .remove-icon-multilingual {
     display: inline-block;
 }
 
