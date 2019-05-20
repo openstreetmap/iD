@@ -54,7 +54,7 @@ describe('iD.serviceMapillary', function() {
     });
 
     describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function(done) {
+        it.skip('fires loadedImages when images are loaded', function(done) {
             mapillary.on('loadedImages', function() {
                 expect(server.requests().length).to.eql(2);   // 1 images, 1 sequences
                 done();
