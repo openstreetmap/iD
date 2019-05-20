@@ -2,12 +2,42 @@ import { actionMergeNodes } from '../actions/merge_nodes';
 import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { osmPathHighwayTagValues } from '../osm/tags';
 import { geoSphericalDistance } from '../geo/geo';
 
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
-    var thresholdMeters = 0.2;
+
+    // expect some features to be mapped with higher levels of detail
+    var indoorThresholdMeters = 0.01;
+    var buildingThresholdMeters = 0.05;
+    var pathThresholdMeters = 0.1;
+    var defaultThresholdMeters = 0.2;
+
+    function featureTypeForWay(way, graph) {
+
+        if (osmPathHighwayTagValues[way.tags.highway]) return 'path';
+
+        if (way.tags.indoor && way.tags.indoor !== 'no') return 'indoor';
+        if ((way.tags.building && way.tags.building !== 'no') ||
+            (way.tags['building:part'] && way.tags['building:part'] !== 'no')) return 'building';
+        if (way.tags.boundary && way.tags.boundary !== 'no') return 'boundary';
+
+        var parentRelations = graph.parentRelations(way);
+        for (var i in parentRelations) {
+            var relation = parentRelations[i];
+            if (relation.isMultipolygon()) {
+                if (relation.tags.indoor && relation.tags.indoor !== 'no') return 'indoor';
+                if ((relation.tags.building && relation.tags.building !== 'no') ||
+                    (relation.tags['building:part'] && relation.tags['building:part'] !== 'no')) return 'building';
+            } else {
+                if (relation.tags.type === 'boundary') return 'boundary';
+            }
+        }
+
+        return 'other';
+    }
 
     function shouldCheckWay(way, context) {
 
@@ -15,16 +45,8 @@ export function validationCloseNodes() {
         if (way.nodes.length <= 2 ||
             (way.isClosed() && way.nodes.length <= 4)) return false;
 
-        // expect that indoor features may be mapped in very fine detail
-        if (way.tags.indoor) return false;
-
-        var parentRelations = context.graph().parentRelations(way);
-
-        // don't flag close nodes in boundaries since it's unlikely the user can accurately resolve them
-        if (way.tags.boundary) return false;
-        if (parentRelations.length && parentRelations.some(function(parentRelation) {
-            return parentRelation.tags.type === 'boundary';
-        })) return false;
+        var featureType = featureTypeForWay(way, context.graph());
+        if (featureType === 'boundary') return false;
 
         var bbox = way.extent(context.graph()).bbox();
         var hypotenuseMeters = geoSphericalDistance([bbox.minX, bbox.minY], [bbox.maxX, bbox.maxY]);
@@ -88,10 +110,17 @@ export function validationCloseNodes() {
             return null;
         }
 
-        var nodesAreVeryClose = node1.loc === node2.loc ||
-            geoSphericalDistance(node1.loc, node2.loc) < thresholdMeters;
+        if (node1.loc !== node2.loc) {
 
-        if (!nodesAreVeryClose) return null;
+            var featureType = featureTypeForWay(way, context.graph());
+            var threshold = defaultThresholdMeters;
+            if (featureType === 'indoor') threshold = indoorThresholdMeters;
+            else if (featureType === 'building') threshold = buildingThresholdMeters;
+            else if (featureType === 'path') threshold = pathThresholdMeters;
+
+            var distance = geoSphericalDistance(node1.loc, node2.loc);
+            if (distance > threshold) return null;
+        }
 
         return new validationIssue({
             type: type,

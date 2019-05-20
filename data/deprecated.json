@@ -360,14 +360,6 @@
       "replace": {"barrier": "stile"}
     },
     {
-      "old": {"highway": "incline"},
-      "replace": {"highway": "road", "incline": "up"}
-    },
-    {
-      "old": {"highway": "incline_steep"},
-      "replace": {"highway": "road", "incline": "up"}
-    },
-    {
       "old": {"highway": "unsurfaced"},
       "replace": {"highway": "road", "surface": "unpaved"}
     },
@@ -462,6 +454,10 @@
     {
       "old": {"leisure": "video_arcade"},
       "replace": {"leisure": "amusement_arcade"}
+    },
+    {
+      "old": {"leisure": "recreation_ground"},
+      "replace": {"landuse": "recreation_ground"}
     },
     {
       "old": {"man_made": "cut_line"},

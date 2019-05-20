@@ -3083,7 +3083,7 @@ en:
       amenity/shelter/public_transport:
         # 'amenity=shelter, shelter_type=public_transport'
         name: Transit Shelter
-        # 'terms: bus stop,metro stop,waiting'
+        # 'terms: bus stop,metro stop,public transit shelter,public transport shelter,tram stop shelter,waiting'
         terms: '<translate with synonyms or related terms for ''Transit Shelter'', separated by commas>'
       amenity/shower:
         # amenity=shower

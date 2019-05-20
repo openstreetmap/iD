@@ -15,7 +15,7 @@ export function validationOutdatedTags() {
     // initialize name-suggestion-index matcher
     var nsiMatcher = matcher();
     nsiMatcher.buildMatchIndex(brands.brands);
-    var nsiKeys = ['amenity', 'shop', 'tourism', 'leisure'];
+    var nsiKeys = ['amenity', 'shop', 'tourism', 'leisure', 'office'];
 
 
     function oldTagIssues(entity, context) {
@@ -68,7 +68,7 @@ export function validationOutdatedTags() {
                 if (match.d) continue;
 
                 var brand = brands.brands[match.kvnd];
-                if (brand) {
+                if (brand && brand.tags['brand:wikidata']) {
                     Object.assign(newTags, brand.tags);
                     break;
                 }

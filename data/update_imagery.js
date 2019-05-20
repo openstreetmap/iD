@@ -49,7 +49,9 @@ const blacklist = {
     'OSM_Inspector-Multipolygon': true,
     'OSM_Inspector-Places': true,
     'OSM_Inspector-Routing': true,
-    'OSM_Inspector-Tagging': true
+    'OSM_Inspector-Tagging': true,
+
+    'EOXAT2018CLOUDLESS': true
 };
 
 const supportedWMSProjections = [
