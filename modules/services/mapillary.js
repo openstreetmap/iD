@@ -91,7 +91,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
             }
-            var linkHeader = response.headers.Link;
+            var linkHeader = response.headers.get('Link');
             if (linkHeader) {
                 var pagination = parsePagination(linkHeader);
                 if (pagination.next) {
