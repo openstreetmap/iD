@@ -24,27 +24,29 @@ path.stroke.old-multipolygon {
 
 /* Green things */
 path.stroke.tag-natural,
+path.stroke.tag-natural-wood,
 path.stroke.tag-leisure-nature_reserve,
 path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-track,
 path.stroke.tag-leisure-golf_course,
 path.stroke.tag-leisure-garden,
 path.stroke.tag-leisure-park,
+path.stroke.tag-landuse-recreation_ground,
 path.stroke.tag-landuse-forest,
-path.stroke.tag-landuse-wood,
 path.stroke.tag-landuse-grass,
 path.stroke.tag-barrier-hedge {
     stroke: rgb(140, 208, 95);
 }
 path.fill.tag-natural,
+path.fill.tag-natural-wood,
 path.fill.tag-leisure-nature_reserve,
 path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-track,
 path.fill.tag-leisure-golf_course,
 path.fill.tag-leisure-garden,
 path.fill.tag-leisure-park,
+path.fill.tag-landuse-recreation_ground,
 path.fill.tag-landuse-forest,
-path.fill.tag-natural-wood,
 path.fill.tag-landuse-grass,
 path.fill.tag-barrier-hedge {
     stroke: rgba(140, 208, 95, 0.3);
