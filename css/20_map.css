@@ -285,17 +285,12 @@ text.point {
 
 
 /* Wikidata-tagged */
-g.point.tag-wikidata .stroke {
-    fill: #8e9;
-}
-.labels-group.halo text.tag-wikidata {
-    stroke: #8e9;
+g.point.tag-wikidata path.stroke {
+    stroke-width: 3px;
+    stroke: #383;
 }
 .icon.areaicon-halo.tag-wikidata {
-    stroke: #9e9;
-}
-.icon.areaicon.tag-wikidata {
-    color: #050;
+    stroke: #6c6;
 }
 
 
