@@ -93,7 +93,6 @@
                     "line": "Hampahitsy ny zoron'ito tsipika ito.",
                     "area": "Hampahitsy ireo zoron'ito faritra ito."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Nampahitsy ny zoron'ilay tsipika.",
                     "area": "Nampahitsy ireo zoron'ilay faritra."
@@ -104,11 +103,8 @@
             },
             "straighten": {
                 "title": "Hampahitsy",
-                "description": "Hampahitsy ito tsipika ito.",
                 "key": "S",
-                "annotation": "Nampahitsy an'ilay tsipika.",
-                "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra.",
-                "connected_to_hidden": "Tsy mety ampahitsiana ito tsipika ito satria mifampitohy amina zavatra tsy miseho."
+                "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra."
             },
             "delete": {
                 "title": "Hamafa",
@@ -277,13 +273,6 @@
                     "create": "Nanampy fameperam-pihodinana",
                     "delete": "Nanala ilay fameperam-pihodinana"
                 }
-            },
-            "detach_node": {
-                "title": "Hanendaka",
-                "key": "E",
-                "description": "Hanendaka ito vona ito avy amin'ireo tsipika/faritra.",
-                "annotation": "Nanendaka ilay vona tamin'ireo tsipika/faritra nisy azy.",
-                "connected_to_hidden": "Tsy mety endahana ito vona ito satria mipetaka amina singa tsy miseho."
             }
         },
         "restriction": {

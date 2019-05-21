@@ -85,7 +85,6 @@
                     "line": "Escuadrar les esquines d'esta llinia.",
                     "area": "Escuadrar les esquines d'esti área."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Escuadraes les esquines d'una llinia.",
                     "area": "Escuadraes les esquines d'un área."
@@ -96,11 +95,8 @@
             },
             "straighten": {
                 "title": "Enderechar",
-                "description": "Enderechar esta llinia.",
                 "key": "S",
-                "annotation": "Enderechada una llinia.",
-                "too_bendy": "Nun pue enderechase porque ta doblada enforma.",
-                "connected_to_hidden": "Esta llinia nun puede enderechase porque ta coneutao a una carauterística tapecida."
+                "too_bendy": "Nun pue enderechase porque ta doblada enforma."
             },
             "delete": {
                 "title": "Desaniciar",
@@ -591,19 +587,13 @@
         "cannot_zoom": "Nun puede alloñase más nel mou actual.",
         "full_screen": "Conmutar pantalla completa",
         "mapillary_images": {
-            "tooltip": "Fotos a nivel de rúa de Mapillary",
-            "title": "Capa de fotos (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Señales de tráficu de Mapillary (tienes d'activar la capa de fotos)",
-            "title": "Capa de señales de tráficu (Mapillary)"
+            "tooltip": "Fotos a nivel de rúa de Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Ver esta imaxe'n Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Fotos a nivel de rúa d'OpenStreetCam",
-            "title": "Capa de fotos (OpenStreetCam)"
+            "tooltip": "Fotos a nivel de rúa d'OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ver esta imaxe n'OpenStreetCam"
@@ -736,35 +726,11 @@
                 "category-landuse": {
                     "name": "Elementos d'usu del terrén"
                 },
-                "category-natural-area": {
-                    "name": "Elementos naturales"
-                },
-                "category-natural-line": {
-                    "name": "Elementos naturales"
-                },
-                "category-natural-point": {
-                    "name": "Elementos naturales"
-                },
-                "category-path": {
-                    "name": "Elementos de camín"
-                },
-                "category-rail": {
-                    "name": "Elementos ferroviarios"
-                },
                 "category-restriction": {
                     "name": "Elementos de torga"
                 },
-                "category-road": {
-                    "name": "Elementos de carretera"
-                },
                 "category-route": {
                     "name": "Elementos de ruta"
-                },
-                "category-water-area": {
-                    "name": "Elementos acuáticos"
-                },
-                "category-water-line": {
-                    "name": "Elementos acuáticos"
                 }
             },
             "fields": {
@@ -1302,9 +1268,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Accesu a Internet de pagu"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Nome de la rede)"
                 },
                 "label": {
                     "label": "Etiqueta"
@@ -1869,8 +1832,7 @@
                     "options": {
                         "bucket": "Calderu",
                         "chemical": "Químico",
-                        "flush": "Cisterna",
-                        "pitlatrine": "Pozu/Cucheru"
+                        "flush": "Cisterna"
                     }
                 },
                 "toll": {
@@ -2211,8 +2173,7 @@
                     "terms": "carné,permisu,llicencia,conducir,conducción,escuela"
                 },
                 "amenity/embassy": {
-                    "name": "Embaxada",
-                    "terms": "Embaxada, Consuláu, Representación diplomática"
+                    "name": "Embaxada"
                 },
                 "amenity/fast_food": {
                     "name": "Comida rápida",
@@ -2417,9 +2378,6 @@
                     "name": "Máquina de venta d'hixénicos femeninos",
                     "terms": "máquina,compresa,tampón"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Máquina de venta de periódicos"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Máquina de venta de periódicos",
                     "terms": "máquina,automática,periódicos.prensa,revistes"
@@ -2466,9 +2424,6 @@
                 "area/highway": {
                     "name": "Superficie de la carretera",
                     "terms": "firme,pisu,suelu"
-                },
-                "attraction/animal": {
-                    "name": "Animales"
                 },
                 "attraction/big_wheel": {
                     "name": "Noria",
@@ -2921,9 +2876,6 @@
                 "highway/bridleway": {
                     "name": "Camín de caballeríes",
                     "terms": "Camín de ferradura"
-                },
-                "highway/bus_stop": {
-                    "name": "Andén / Parada d'autobús"
                 },
                 "highway/corridor": {
                     "name": "Pasiellu d'edificiu"
@@ -3659,33 +3611,6 @@
                 "power/transformer": {
                     "name": "Tresformador"
                 },
-                "public_transport/platform": {
-                    "name": "Andén / Parada de tresporte"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Andén / Parada d'autobús"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Andén / Parada de ferry"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Andén / Parada de tren llixeru"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Andén / Parada de monocarril"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Andén / Parada de metro"
-                },
-                "public_transport/platform_train": {
-                    "name": "Andén / Parada de tren"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Andén / Parada de tranvía"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Andén / Parada de trolebús"
-                },
                 "public_transport/station": {
                     "name": "Estación d'intercambiu"
                 },
@@ -3739,9 +3664,6 @@
                     "name": "Ferrocarril de vía estrecha",
                     "terms": "FEVE,Vía estrecha"
                 },
-                "railway/platform": {
-                    "name": "Andén / Parada de tren"
-                },
                 "railway/rail": {
                     "name": "Carril"
                 },
@@ -3763,9 +3685,6 @@
                 },
                 "relation": {
                     "name": "Rellación"
-                },
-                "roundabout": {
-                    "name": "Rotonda"
                 },
                 "route/ferry": {
                     "name": "Ruta de ferry"
@@ -3883,8 +3802,7 @@
                     "terms": "sex-shop"
                 },
                 "shop/fashion": {
-                    "name": "Tienda de moda",
-                    "terms": "boutique, moda"
+                    "name": "Tienda de moda"
                 },
                 "shop/fishmonger": {
                     "name": "Pescadería"
@@ -4305,9 +4223,6 @@
                 },
                 "type/waterway": {
                     "name": "Vía acuática"
-                },
-                "vertex": {
-                    "name": "Otru"
                 },
                 "waterway": {
                     "name": "Vía acuática"

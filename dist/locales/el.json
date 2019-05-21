@@ -96,7 +96,6 @@
                     "line": "Τετραγωνίστε τις γωνίες αυτής της γραμμής.",
                     "area": "Τετραγωνίστε τις γωνίες αυτής της περιοχής."
                 },
-                "key": "Σ",
                 "annotation": {
                     "line": "Τετραγωνίστηκαν οι γωνίες μιας γραμμής.",
                     "area": "Τετραγωνίστηκαν οι γωνίες μιας περιοχής."
@@ -107,11 +106,8 @@
             },
             "straighten": {
                 "title": "Ευθυγράμμιση",
-                "description": "Ευθυγράμμιση αυτής της γραμμής.",
                 "key": "Σ",
-                "annotation": "Ευθυγραμμίστηκε μια γραμμή.",
-                "too_bendy": "Αυτό δεν μπορεί να ευθυγραμμιστεί επειδή στρίβει υπερβολικά.",
-                "connected_to_hidden": "Αυτή η γραμμή δεν μπορεί να γίνει ευθεία επειδή είναι συνδεδεμένη με ένα κρυφό χαρακτηριστικό."
+                "too_bendy": "Αυτό δεν μπορεί να ευθυγραμμιστεί επειδή στρίβει υπερβολικά."
             },
             "delete": {
                 "title": "Διαγραφή",
@@ -261,10 +257,6 @@
                     "create": "Προστέθηκε μια απαγόρευση στροφής",
                     "delete": "Διαγράφηκε μια απαγόρευση στροφής"
                 }
-            },
-            "detach_node": {
-                "title": "Αποσύνδεση",
-                "description": "Αποσύνδεση αυτού του κόμβου από αυτές τις γραμμές/περιοχές"
             }
         },
         "restriction": {
@@ -654,19 +646,13 @@
             "hires": "Υψηλή ανάλυση"
         },
         "mapillary_images": {
-            "tooltip": "Φωτογραφίες στο επίπεδο του δρόμου από το Mapillary",
-            "title": "Επικάλυψη Φωτογραφιών (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Ένδειξη κυκλοφορίας από το Mapillary (πρέπει να ενεργοποιήσετε την επικάλυψη Φωτογραφιών)",
-            "title": "Επικάλυψη Ένδειξης Κυκλοφορίας (Mapillary)"
+            "tooltip": "Φωτογραφίες στο επίπεδο του δρόμου από το Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Δείτε αυτή τη φωτογραφία στο Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Φωτογραφίες στο επίπεδο του δρόμου από το OpenStreetCam",
-            "title": "Επικάλυψη φωτογραφίας (OpenStreetCam)"
+            "tooltip": "Φωτογραφίες στο επίπεδο του δρόμου από το OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Δείτε αυτήν την εικόνα στο OpenStreetCam"
@@ -1120,7 +1106,6 @@
                     "reverse": "Αντιστρέψτε μια γραμμή",
                     "move": "Μετακίνηση επιλεγμένων χαρακτηριστικών",
                     "rotate": "Περιστροφή επιλεγμένων χαρακτηριστικών",
-                    "orthogonalize": "Ευθυγραμμίστε την γραμμή / Τετραγωνίστε τις γωνίες μιας περιοχής",
                     "circularize": "Κάντε κύκλο μια κλειστή γραμμή ή μια περιοχή",
                     "delete": "Διαγράψτε τα επιλεγμένα χαρακτηριστικά"
                 },
@@ -1173,43 +1158,19 @@
                     "name": "Χαρακτηριστικά Εμπόδιου"
                 },
                 "category-building": {
-                    "name": "Χαρακτηριστικά Κτηρίου"
+                    "name": "Χαρακτηριστικά Κτιρίου"
                 },
                 "category-landuse": {
                     "name": "Χαρακτηριστικά Χρήσης Γης"
                 },
-                "category-natural-area": {
-                    "name": "Φυσικά Χαρακτηριστικά"
-                },
-                "category-natural-line": {
-                    "name": "Φυσικά Χαρακτηριστικά"
-                },
-                "category-natural-point": {
-                    "name": "Φυσικά Χαρακτηριστικά"
-                },
-                "category-path": {
-                    "name": "Χαρακτηριστικά Μονοπατιού"
-                },
-                "category-rail": {
-                    "name": "Χαρακτηριστικά Σιδηροδρόμου"
-                },
                 "category-restriction": {
                     "name": "Χαρακτηριστικά Απαγόρευσης"
-                },
-                "category-road": {
-                    "name": "Χαρακτηριστικά Δρόμου"
                 },
                 "category-route": {
                     "name": "Χαρακτηριστικά Διαδρομής"
                 },
                 "category-utility": {
                     "name": "Χαρακτηριστικά Κοινής Ωφέλειας"
-                },
-                "category-water-area": {
-                    "name": "Χαρακτηριστικά Νερού"
-                },
-                "category-water-line": {
-                    "name": "Χαρακτηριστικά Νερού"
                 }
             },
             "fields": {
@@ -1860,6 +1821,9 @@
                 "height": {
                     "label": "Ύψος (Μέτρα)"
                 },
+                "height_building": {
+                    "label": "Ύψος Κτιρίου"
+                },
                 "highway": {
                     "label": "Είδος"
                 },
@@ -1961,9 +1925,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Κώμιστρο Πρόσβασης στο Διαδίκτυο"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Όνομα Δικτύου)"
                 },
                 "junction/ref_oneway": {
                     "label": "Αριθμός Κόμβου"
@@ -2214,7 +2175,7 @@
                     }
                 },
                 "opening_date": {
-                    "label": "Αναμενόμενη Ημέρα Λειτουργίας "
+                    "label": "Αναμενόμενη Ημερομηνία Λειτουργίας "
                 },
                 "opening_hours": {
                     "label": "Ωράριο"
@@ -2348,7 +2309,7 @@
                     "label": "Είδος"
                 },
                 "power_supply": {
-                    "label": "Παροχή ενέργειας"
+                    "label": "Παροχή Ρεύματος"
                 },
                 "produce": {
                     "label": "Παραγωγή"
@@ -2607,7 +2568,7 @@
                 "smoking": {
                     "label": "Κάπνισμα",
                     "options": {
-                        "dedicated": "Αφιερωμένο στους καπνιστές (π.χ. κλαμπ καπνιστών)",
+                        "dedicated": "Αποκλειστικά για Καπνιστές (π.χ. Λέσχη Καπνιστών)",
                         "isolated": "Σε περιοχές καπνίσματος φυσικά απομονωμένες",
                         "no": "Απαγορεύεται το κάπνισμα οπουδήποτε",
                         "outside": "Επιτρέπεται έξω",
@@ -2657,7 +2618,7 @@
                     "label": "Αριθμός Σκαλοπατιών"
                 },
                 "stop": {
-                    "label": "Είδος Στοπ",
+                    "label": "Είδος Στάσης",
                     "options": {
                         "all": "'Ολες οι Κατευθύνσεις",
                         "minor": "Επαρχιακή Οδός"
@@ -2751,8 +2712,7 @@
                     "options": {
                         "bucket": "Κάδος",
                         "chemical": "Χημική",
-                        "flush": "Καζανάκι",
-                        "pitlatrine": "Βόθρος"
+                        "flush": "Καζανάκι"
                     }
                 },
                 "toll": {
@@ -2853,7 +2813,7 @@
                     }
                 },
                 "vending": {
-                    "label": "Είδη Εμπορευμάτων"
+                    "label": "Είδη Αγαθών"
                 },
                 "visibility": {
                     "label": "Ορατότητα",
@@ -2874,7 +2834,7 @@
                 "volcano/type": {
                     "label": "Είδος Ηφαιστείου",
                     "options": {
-                        "scoria": "Σκουριά",
+                        "scoria": "Κώνος Σκωριών",
                         "shield": "Ασπίδα",
                         "stratovolcano": "Κωνικό Ηφαίστειο"
                     }
@@ -2994,7 +2954,7 @@
                     "terms": "Χώρος ελιγμών, Χώρος φόρτωσης, Χώρος στάθμευσης"
                 },
                 "aeroway/gate": {
-                    "name": "Είσοδος Αεροδρομίου"
+                    "name": "Πύλη Αεροδρομίου"
                 },
                 "aeroway/hangar": {
                     "name": "Υπόστεγο Αεροσκαφών",
@@ -3044,14 +3004,14 @@
                     "terms": "Μπαρ, διασκέδαση, ποτά, μπύρα, μπίρα"
                 },
                 "amenity/bbq": {
-                    "name": "Ψησταριά",
+                    "name": "Ψησταριά/Σκάρα",
                     "terms": "Μπάρμπεκιου, γκριλ"
                 },
                 "amenity/bench": {
                     "name": "Παγκάκι"
                 },
                 "amenity/bicycle_parking": {
-                    "name": "Χώρος Στάθμευσης Ποδηλάτων",
+                    "name": "Στάθμευση Ποδηλάτων",
                     "terms": "Πάρκινγκ ποδηλάτων, μπάρες, κάγκελα για ποδήλατα, θέσεις στάθμευσης ποδηλάτων"
                 },
                 "amenity/bicycle_rental": {
@@ -3160,33 +3120,32 @@
                     "terms": "Σχολή Οδήγησης, Κέντρο Εκπαιδευσης Νέων Οδηγών"
                 },
                 "amenity/embassy": {
-                    "name": "Πρεσβεία",
-                    "terms": "Πρεσβεία, Προξενείο"
+                    "name": "Πρεσβεία"
                 },
                 "amenity/fast_food": {
                     "name": "Ταχυφαγείο",
                     "terms": "Γρήγορο φαγητό, Πρόχειρο φαγητό, Φαστφουντάδικο"
                 },
                 "amenity/fast_food/burger": {
-                    "name": "Ταχυφαγίο με Μπιφτέκι"
+                    "name": "Ταχυφαγείο για Μπιφτέκι"
                 },
                 "amenity/fast_food/chicken": {
-                    "name": "Ταχυφαγίο με Κοτόπουλο"
+                    "name": "Ταχυφαγείο για Κοτόπουλο"
                 },
                 "amenity/fast_food/fish_and_chips": {
-                    "name": "Ταχυφαγίο Fish & Chips"
+                    "name": "Ταχυφαγείο Fish & Chips"
                 },
                 "amenity/fast_food/kebab": {
-                    "name": "Ταχυφαγίο με Κεμπάπ"
+                    "name": "Ταχυφαγείο για Κεμπάπ"
                 },
                 "amenity/fast_food/mexican": {
                     "name": "Μεξικανικό Ταχυφαγείο"
                 },
                 "amenity/fast_food/pizza": {
-                    "name": "Ταχυφαγίο με Πίτσα"
+                    "name": "Ταχυφαγείο για Πίτσα"
                 },
                 "amenity/fast_food/sandwich": {
-                    "name": "Ταχυφαγείο με Σάντουιτς"
+                    "name": "Ταχυφαγείο για Σάντουιτς"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Πορθμείο"
@@ -3213,8 +3172,11 @@
                 "amenity/hospital": {
                     "name": "Χώρος Νοσοκομείου"
                 },
+                "amenity/hunting_stand": {
+                    "name": "Καραούλι"
+                },
                 "amenity/ice_cream": {
-                    "name": "Παγωτά",
+                    "name": "Παγωτατζίδικο",
                     "terms": "Παγωτά, Κατάστημα πώλησης Παγωτού, Παγωτατζίδικο"
                 },
                 "amenity/internet_cafe": {
@@ -3242,7 +3204,7 @@
                     "name": "Ιερά Μονή"
                 },
                 "amenity/money_transfer": {
-                    "name": "Ανταλλακτήρια Συναλλάγματος"
+                    "name": "Υπηρεσία Μεταφοράς Χρημάτων"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Στάθμευση μοτοσυκλετών",
@@ -3259,17 +3221,17 @@
                     "name": "Κλινική"
                 },
                 "amenity/parking": {
-                    "name": "Θέση Στάθμευσης"
+                    "name": "Διαγραμμισμένη Θέση Στάθμευσης"
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Πολυόροφο Γκαράζ Στάθμευσης"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Είσοδος/έξοδος χώρου στάθμευσης",
+                    "name": "Είσοδος/Εξοδος Χώρου Στάθμευσης",
                     "terms": "Είσοδος/έξοδος γκαράζ, Είσοδος/έξοδος πάρκινγκ"
                 },
                 "amenity/parking_space": {
-                    "name": "Θέση στάθμευσης"
+                    "name": "Χώρος Στάθμευσης Ενός Μόνο Οχήματος"
                 },
                 "amenity/payment_centre": {
                     "name": "Κέντρο Πληρωμών"
@@ -3333,7 +3295,7 @@
                     "terms": "Σωφρονιστικό ίδρυμα, Φυλακή"
                 },
                 "amenity/pub": {
-                    "name": "Παμπ",
+                    "name": "Καπηλειό",
                     "terms": "Παμπ"
                 },
                 "amenity/public_bath": {
@@ -3360,7 +3322,7 @@
                     "name": "Ληξιαρχείο"
                 },
                 "amenity/restaurant": {
-                    "name": "Εστιατόριο",
+                    "name": "Εστιατόριο / Ταβέρνα",
                     "terms": "Εστιατόριο, Ταβέρνα, Μεζεδοπωλείο, Μαγειρείο, Οινομαγειρείο, ρεστοράν, κουτούκι, πιτσαρία, σουβλατζίδικο, φαγάδικο, φαγητό"
                 },
                 "amenity/restaurant/american": {
@@ -3446,7 +3408,7 @@
                     "name": "Καπνιστές"
                 },
                 "amenity/social_facility": {
-                    "name": "Κοινωνική Μονάδα"
+                    "name": "Μονάδα Κοινωνικών Παροχών"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Τράπεζα Τροφίμων"
@@ -3501,16 +3463,16 @@
                     "name": "Αυτόματος Πωλητής"
                 },
                 "amenity/vending_machine/cigarettes": {
-                    "name": "Αυτόματος πωλητής τσιγάρων"
+                    "name": "Αυτόματος Πωλητής Τσιγάρων"
                 },
                 "amenity/vending_machine/coffee": {
                     "name": "Αυτόματος Πωλητής Καφέ"
                 },
                 "amenity/vending_machine/condoms": {
-                    "name": "Αυτόματος πωλητής προφυλακτικών"
+                    "name": "Αυτόματος Πωλητής Προφυλακτικών"
                 },
                 "amenity/vending_machine/drinks": {
-                    "name": "Αυτόματος πωλητής ποτών",
+                    "name": "Αυτόματος Πωλητής Ποτών",
                     "terms": "οινοπνευματώδη, αναψυκτικά"
                 },
                 "amenity/vending_machine/electronics": {
@@ -3531,9 +3493,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Αυτόματος Πωλητής Παγωτού"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Αυτόματος πωλητής εφημερίδων"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Αυτόματος Πωλητής Τύπου"
                 },
@@ -3544,14 +3503,14 @@
                     "name": "Ντουλάπι Παραλαβής / Εναπόθεσης Δέματος"
                 },
                 "amenity/vending_machine/parking_tickets": {
-                    "name": "Αυτόματος πωλητής εισιτηρίων στάθμευσης"
+                    "name": "Αυτόματος Πωλητής Εισιτηρίων Στάθμευσης"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Αυτόματος πωλητής εισιτηρίων ΜΜΜ",
                     "terms": "Εισιτήρια λεωφορείου, εισιτήρια μετρό, εισιτήρια τραμ, εισιτήρια τρόλεϊ"
                 },
                 "amenity/vending_machine/stamps": {
-                    "name": "Γραμματοκιβώτιο"
+                    "name": "Αυτόματος Πωλητής Γραμματοσήμων"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Αυτόματος Πωλητής Σνακ"
@@ -3589,9 +3548,6 @@
                 "attraction/amusement_ride": {
                     "name": "Ψυχαγωγική Βόλτα"
                 },
-                "attraction/animal": {
-                    "name": "Ζώο"
-                },
                 "attraction/big_wheel": {
                     "name": "Μεγάλη Ρόδα"
                 },
@@ -3606,6 +3562,9 @@
                 },
                 "attraction/drop_tower": {
                     "name": "Πύργος Πτώσης"
+                },
+                "attraction/maze": {
+                    "name": "Λαβύρινθος"
                 },
                 "attraction/pirate_ship": {
                     "name": "Πειρατικό Πλοίο"
@@ -3641,7 +3600,7 @@
                     "name": "Συνοριακός Έλεγχος"
                 },
                 "barrier/cattle_grid": {
-                    "name": "Σχάρα"
+                    "name": "Σχάρα Παρεμπόδισης Ζώων"
                 },
                 "barrier/city_wall": {
                     "name": "Τείχη Πόλης",
@@ -3707,6 +3666,9 @@
                     "name": "Τοίχος",
                     "terms": "Τοίχος, Μάντρα"
                 },
+                "boundary": {
+                    "name": "Οριο"
+                },
                 "boundary/administrative": {
                     "name": "Διοικητικό Όριο",
                     "terms": "Διοικητικό Όριο, Σύνορο"
@@ -3725,7 +3687,7 @@
                     "name": "Πολυκατοικία Οροφοδιαμερισμάτων"
                 },
                 "building/barn": {
-                    "name": "Αποθήκη αγροκτήματος",
+                    "name": "Αποθήκη Αγροκτήματος",
                     "terms": "Σιταποθήκη, Αχυρώνας"
                 },
                 "building/boathouse": {
@@ -3744,11 +3706,11 @@
                     "name": "Στέγασμα για Αυτοκίνητο"
                 },
                 "building/cathedral": {
-                    "name": "Καθεδρικός",
+                    "name": "Κτίριο Καθεδρικού",
                     "terms": "Καθεδρικός, Κτίριο Καθεδρικού Ναού"
                 },
                 "building/chapel": {
-                    "name": "Παρεκκλήσι",
+                    "name": "Κτίριο Παρεκκλησίου",
                     "terms": "Παρεκκλήσι, Κτίριο Παρεκκλησίου, Ξωκκλήσι, Εξωκκλήσι"
                 },
                 "building/church": {
@@ -3800,7 +3762,7 @@
                     "name": "Θερμοκήπιο"
                 },
                 "building/hospital": {
-                    "name": "Κτίριο Νοσοκομείου",
+                    "name": "Κτίριο Νοσοκομείο",
                     "terms": "Κτήριο Νοσοκομείου"
                 },
                 "building/hotel": {
@@ -3808,7 +3770,7 @@
                     "terms": "Κτήριο Ξενοδοχείου"
                 },
                 "building/house": {
-                    "name": "Σπίτι",
+                    "name": "Κατοικία",
                     "terms": "Κατοικία, Σπίτι, Οικία, οίκος"
                 },
                 "building/hut": {
@@ -3835,6 +3797,9 @@
                 "building/residential": {
                     "name": "Πολυκατοικία",
                     "terms": "Κτήριο κατοικιών, Αστικό κτήριο"
+                },
+                "building/retail": {
+                    "name": "Κτίριο Μεταπώλησης"
                 },
                 "building/roof": {
                     "name": "Στέγη"
@@ -3865,7 +3830,7 @@
                     "name": "Λυόμενο"
                 },
                 "building/temple": {
-                    "name": "Ναός"
+                    "name": "Κτίριο Ναού"
                 },
                 "building/terrace": {
                     "name": "Ενωμένα Ομοιόμορφα Σπίτια"
@@ -3883,11 +3848,14 @@
                 "building/warehouse": {
                     "name": "Αποθήκη"
                 },
+                "building_part": {
+                    "name": "Μέρος Κτιρίου"
+                },
+                "building_point": {
+                    "name": "Κτίριο"
+                },
                 "camp_site/camp_pitch": {
                     "name": "Χώρος Στρατοπέδευσης"
-                },
-                "circular": {
-                    "name": "Κυκλική Κυκλοφορία"
                 },
                 "club": {
                     "name": "Λέσχη"
@@ -3899,7 +3867,7 @@
                     "name": "Τέχνη"
                 },
                 "craft/basket_maker": {
-                    "name": "Καλαθάς"
+                    "name": "Καλαθοποιός"
                 },
                 "craft/beekeeper": {
                     "name": "Μελισοκόμος",
@@ -4004,7 +3972,7 @@
                     "name": "Αγγειοπλάστης"
                 },
                 "craft/rigger": {
-                    "name": "Εξαρτύων"
+                    "name": "Συναρμολογητής"
                 },
                 "craft/roofer": {
                     "name": "Στεγαστής"
@@ -4025,14 +3993,14 @@
                     "name": "Γλύπτης"
                 },
                 "craft/shoemaker": {
-                    "name": "Τσαγκάρης",
+                    "name": "Τσαγκάρης / Υποδηματοποιός",
                     "terms": "παπουτσής,υποδηματοποιός"
                 },
                 "craft/stonemason": {
                     "name": "Λιθοποιός"
                 },
                 "craft/tailor": {
-                    "name": "Ραφτική"
+                    "name": "Ράφτης"
                 },
                 "craft/tiler": {
                     "name": "Κεραμιδωτής"
@@ -4123,9 +4091,6 @@
                 "golf/cartpath": {
                     "name": "Δρομάκι Οχημάτων του Golf"
                 },
-                "golf/cartpath_service": {
-                    "name": "Δρομάκι Οχημάτων του Golf"
-                },
                 "golf/driving_range": {
                     "name": "Χώρος Εξάσκησης του Golf"
                 },
@@ -4147,6 +4112,9 @@
                 },
                 "golf/rough": {
                     "name": "Σκληρό"
+                },
+                "healthcare": {
+                    "name": "Παροχή Υπηρεσιών Υγείας"
                 },
                 "healthcare/alternative": {
                     "name": "Εναλλακτικό Φάρμακο"
@@ -4176,7 +4144,7 @@
                     "name": "Εργοθεραπευτής"
                 },
                 "healthcare/optometrist": {
-                    "name": "Οφθαλμίατρος"
+                    "name": "Οφθαλμίατρος / Οπτομετρητής"
                 },
                 "healthcare/physiotherapist": {
                     "name": "Φυσιοθεραπευτής"
@@ -4203,7 +4171,7 @@
                     "name": "Λεωφορειόδρομος"
                 },
                 "highway/bus_stop": {
-                    "name": "Στάση / Πλατφόρμα Λεωφορείου"
+                    "name": "Στάση Λεωφορείου δίπλα στη διαδρομή"
                 },
                 "highway/construction": {
                     "name": "Κλειστός Δρόμος"
@@ -4236,6 +4204,9 @@
                 "highway/elevator": {
                     "name": "Ανελκυστήρας",
                     "terms": "Ασανσέρ"
+                },
+                "highway/emergency_bay": {
+                    "name": "Χώρος Στάθμευσης Εκτάκτου Ανάγκης"
                 },
                 "highway/footway": {
                     "name": "Μονοπάτι Αποκλειστικά για Πεζοπορία",
@@ -4314,7 +4285,7 @@
                     "terms": "Αστική οδός, Τοπική οδός, Οδός εντός αστικού ιστού"
                 },
                 "highway/rest_area": {
-                    "name": "Χώρος Ανάπαυσης Αυτοκινητιστών"
+                    "name": "Χώρος Στάθμευσης και Αναψυχής - Χ.Σ.Α."
                 },
                 "highway/road": {
                     "name": "Άγνωστος Δρόμος"
@@ -4347,10 +4318,10 @@
                     "terms": "Λωρίδα χώρου στάθμευσης"
                 },
                 "highway/services": {
-                    "name": "Περιοχή Παροχής Υπηρεσιών"
+                    "name": "Σταθμός Εξυπηρέτησης Αυτοκινητιστών / Σ.Ε.Α."
                 },
                 "highway/speed_camera": {
-                    "name": "Κάμερα Ορίου Ταχύτητας",
+                    "name": "Κάμερα Παρακολούθησης Ταχύτητας",
                     "terms": "Κάμερα Ορίου Ταχύτητας, Κάμερα επιτήρησης/ελέγχου Ορίου Ταχύτητας,"
                 },
                 "highway/steps": {
@@ -4374,7 +4345,7 @@
                     "terms": "Σύνδεσμος τριτεύουσας οδού"
                 },
                 "highway/track": {
-                    "name": "Αδιάκοπη Αγροτική Διαδρομή"
+                    "name": "Μη Συντηρούμενη Αγροτική Διαδρομή"
                 },
                 "highway/traffic_mirror": {
                     "name": "Οδικός Καθρέπτης"
@@ -4414,11 +4385,11 @@
                     "terms": "Κάστρο, Φρούριο"
                 },
                 "historic/memorial": {
-                    "name": "Μνημείο",
+                    "name": "Μνημείο - Άγαλμα, Ανάθημα",
                     "terms": "Μνημείο, ανάθημα, αναθηματική στήλη, προτομή, ανδριάντας, άγαλμα"
                 },
                 "historic/monument": {
-                    "name": "Μνημείο",
+                    "name": "Μνημείο - Κτίριο",
                     "terms": "Ηρώο, Μνημείο, μαυσωλείο, ιστορικό κτίσμα"
                 },
                 "historic/ruins": {
@@ -4439,7 +4410,7 @@
                     "name": "Ναυάγιο"
                 },
                 "internet_access/wlan": {
-                    "name": "Wi-Fi Hotspot"
+                    "name": "Σημείο Εκπομπής Ασύρματου Δικτύου"
                 },
                 "junction": {
                     "name": "Κόμβος"
@@ -4573,7 +4544,7 @@
                     "terms": "Οπωρώνας, Περιβόλι"
                 },
                 "landuse/plant_nursery": {
-                    "name": "Φυτώριο",
+                    "name": "Ανθοκομείο ",
                     "terms": "Φυτώριο, Έκταση καλλιεργήσιμη με δένδρύλια - καλλωπιστικα φυτά"
                 },
                 "landuse/pond": {
@@ -4591,7 +4562,7 @@
                     "terms": "Έκταση με χώρους Αναψυχής/ Δραστηριοτήτων, Χώρος Αναψυχής"
                 },
                 "landuse/religious": {
-                    "name": "Ιερός Χώρος"
+                    "name": "Θρησκευτικός Χώρος"
                 },
                 "landuse/reservoir": {
                     "name": "Δεξαμενή"
@@ -4633,7 +4604,7 @@
                     "name": "Εξέδρα Χωρίς Σκεπή"
                 },
                 "leisure/bowling_alley": {
-                    "name": "Αίθουσα Bowling"
+                    "name": "Διάδρομος Bowling"
                 },
                 "leisure/common": {
                     "name": "Κοινό"
@@ -4739,7 +4710,7 @@
                     "name": "Τράπεζα για Σκάκι"
                 },
                 "leisure/pitch": {
-                    "name": "Γήπεδο",
+                    "name": "Αγωνιστικός Χώρος",
                     "terms": "Γήπεδο"
                 },
                 "leisure/pitch/american_football": {
@@ -4834,12 +4805,6 @@
                 "leisure/track": {
                     "name": "Αγωνιστική Πίστα (Για Μη Μηχανοκίνηση)"
                 },
-                "leisure/track/horse_racing": {
-                    "name": "Αγωνιστική Πίστα (Αγώνες Ιππασίας)"
-                },
-                "leisure/track/running": {
-                    "name": "Αγωνιστική Πίστα (Τρέξιμο)"
-                },
                 "leisure/water_park": {
                     "name": "Νεροτσουλήθρες"
                 },
@@ -4848,10 +4813,10 @@
                     "terms": "Γραμμή"
                 },
                 "man_made": {
-                    "name": "Ανθρώπινες Κατασκευές"
+                    "name": "Ανθρώπινη Κατασκευή"
                 },
                 "man_made/adit": {
-                    "name": "Ενηλίκων"
+                    "name": "Είσοδος Ορυχείου"
                 },
                 "man_made/antenna": {
                     "name": "Κεραία"
@@ -4891,7 +4856,7 @@
                     "name": "Αεριόμετρο"
                 },
                 "man_made/groyne": {
-                    "name": "Φράγμα"
+                    "name": "Λιμενοβραχίονας"
                 },
                 "man_made/lighthouse": {
                     "name": "Φάρος",
@@ -5309,6 +5274,24 @@
                     "name": "Χωριό",
                     "terms": "Χωριό"
                 },
+                "playground/balance_beam": {
+                    "name": "Δοκός ισορροπίας"
+                },
+                "playground/basket_swing": {
+                    "name": "Καλάθι Κούνιας"
+                },
+                "playground/climbing_frame": {
+                    "name": "Αναρρίχηση"
+                },
+                "playground/cushion": {
+                    "name": "Φουσκωτές Εγκαταστάσεις"
+                },
+                "playground/rocker": {
+                    "name": "Ελατήρια ζωάκια"
+                },
+                "playground/roundabout": {
+                    "name": "Παιδικός Μύλος"
+                },
                 "playground/seesaw": {
                     "name": "Τραμπάλα"
                 },
@@ -5369,7 +5352,7 @@
                     "name": "Διακόπτης Ρεύματος"
                 },
                 "power/tower": {
-                    "name": "Κολόνα Υψηλής Τάσης",
+                    "name": "Πυλώνας Υψηλής Τάσης",
                     "terms": "Πυλώνας Υψηλής Τάσης"
                 },
                 "power/transformer": {
@@ -5377,34 +5360,55 @@
                     "terms": "Μετασχηματιστής"
                 },
                 "public_transport/platform": {
-                    "name": "Στάση / Πλατφόρμα Μετεπιβίβασης"
+                    "name": "Αποβάθρα Διέλευσης"
                 },
-                "public_transport/platform_bus": {
-                    "name": "Στάση / Πλατφόρμα Λεωφορείου"
+                "public_transport/platform/aerialway_point": {
+                    "name": "Στάση / Αποβάθρα Αερομεταφοράς"
                 },
-                "public_transport/platform_ferry": {
-                    "name": "Στάση / Πλατφόρμα Φέρι"
+                "public_transport/platform/bus": {
+                    "name": "Αποβάθρα Λεωφορείου δίπλα στη διαδρομή"
                 },
-                "public_transport/platform_light_rail": {
-                    "name": "Στάση / Πλατφόρμα Ελαφρού Σιδηρόδρομου"
+                "public_transport/platform/bus_point": {
+                    "name": "Στάση Λεωφορείου δίπλα στη διαδρομή"
                 },
-                "public_transport/platform_subway": {
-                    "name": "Στάση / Πλατφόρμα Υπόγειου Σιδηρόδρομου"
+                "public_transport/platform/ferry": {
+                    "name": "Αποβάθρα Ferry Boat"
                 },
-                "public_transport/platform_train": {
-                    "name": "Στάση / Πλατφόρμα Τρένου"
+                "public_transport/platform/ferry_point": {
+                    "name": "Στάση / Αποβάθρα Ferry Boat"
                 },
-                "public_transport/platform_tram": {
-                    "name": "Στάση / Πλατφόρμα Τραμ"
+                "public_transport/platform/subway": {
+                    "name": "Αποβάθρα Υπόγειου Σιδηροδρόμου"
                 },
-                "public_transport/platform_trolleybus": {
-                    "name": "Στάση / Πλατφόρμα Τρόλλεϋ"
+                "public_transport/platform/subway_point": {
+                    "name": "Στάση / Αποβάθρα Υπόγειου Σιδηροδρόμου"
+                },
+                "public_transport/platform/train": {
+                    "name": "Αποβάθρα Τρένου"
+                },
+                "public_transport/platform/train_point": {
+                    "name": "Στάση / Αποβάθρα Τρένου"
+                },
+                "public_transport/platform/tram": {
+                    "name": "Αποβάθρα Τραμ"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Στάση / Αποβάθρα Τραμ"
+                },
+                "public_transport/platform/trolleybus": {
+                    "name": "Αποβάθρα Τρόλεϊ δίπλα στη διαδρομή"
+                },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Στάση Τρόλεϊ δίπλα στη διαδρομή"
+                },
+                "public_transport/platform_point": {
+                    "name": "Στάση / Αποβάθρα Διέλευσης"
                 },
                 "public_transport/station": {
                     "name": "Σταθμός Μετεπιβίβασης"
                 },
                 "public_transport/station_bus": {
-                    "name": "Σταθμός / Τέρμα Λεωφορείου"
+                    "name": "Σταθμός / Τέρμα Λεωφορείου δίπλα στη διαδρομή"
                 },
                 "public_transport/station_ferry": {
                     "name": "Πορθμείο Φέρι Μπωτ"
@@ -5416,40 +5420,43 @@
                     "name": "Σταθμός Υπόγειου Σιδηρόδρομου / Μετρό"
                 },
                 "public_transport/station_train": {
-                    "name": "Σιδηροδρομικός Σταθμός"
+                    "name": "Σιδηροδρομικός Σταθμός δίπλα στη διαδρομή"
+                },
+                "public_transport/station_train_halt": {
+                    "name": "Σιδηροδρομικός Σταθμός ( Σε Παραγγελία Στάσης )"
                 },
                 "public_transport/station_tram": {
                     "name": "Σταθμός Τραμ"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "Σταθμός / Τέρμα Τρόλλευ"
+                    "name": "Σταθμός / Τέρμα Τρόλεϊ δίπλα στη διαδρομή"
                 },
                 "public_transport/stop_area": {
-                    "name": "Χώρος Μετεπιβίβασης"
+                    "name": "Περιοχή Στάσης για Διέλευση"
                 },
                 "public_transport/stop_position": {
-                    "name": "Τοποθεσία Μετεπιβίβασης"
+                    "name": "Τοποθεσία Στάσης Διέλευσης στο δρόμο"
                 },
                 "public_transport/stop_position_aerialway": {
-                    "name": "Χώρος Στάθμευσης Αεροσκαφών"
+                    "name": "Τοποθεσία Στάσης Αεροσκαφών"
                 },
                 "public_transport/stop_position_bus": {
-                    "name": "Χώρος Στάθμευσης Λεωφορείου"
+                    "name": "Τοποθεσία Στάσης Λεωφορείου πάνω στη διαδρομή"
                 },
                 "public_transport/stop_position_ferry": {
-                    "name": "Χώρος Στάθμευσης Φέρι Μπωτ"
+                    "name": "Τοποθεσία Στάσης Ferry Boat"
                 },
                 "public_transport/stop_position_subway": {
-                    "name": "Χώρος Στάθμευσης Υπόγειου Σιδηρόδρομου"
+                    "name": "Τοποθεσία Στάσης Υπόγειου Σιδηρόδρομου πάνω στις ράγες"
                 },
                 "public_transport/stop_position_train": {
-                    "name": "Χώρος Στάθμευσης Τρένου"
+                    "name": "Τοποθεσία Στάσης Τρένου πάνω στη διαδρομή"
                 },
                 "public_transport/stop_position_tram": {
-                    "name": "Χώρος Στάθμευσης Τραμ"
+                    "name": "Τοποθεσία Στάσης Τραμ πάνω στις ράγες"
                 },
                 "public_transport/stop_position_trolleybus": {
-                    "name": "Χώρος Στάθμευσης Τρόλλευ"
+                    "name": "Τοποθεσία Στάσης Τρόλεϊ πάνω στη διαδρομή"
                 },
                 "railway": {
                     "name": "Σιδηροδρομικός Διάδρομος"
@@ -5472,6 +5479,9 @@
                 "railway/funicular": {
                     "name": "Τελεφερίκ"
                 },
+                "railway/halt": {
+                    "name": "Σιδηροδρομικός Σταθμός ( Σε Παραγγελία Στάσης )"
+                },
                 "railway/level_crossing": {
                     "name": "Ισόπεδη Σιδηροδρομική Διάβαση (Οχημάτων)"
                 },
@@ -5485,7 +5495,7 @@
                     "name": "Σιδηροτροχιά Στενού Εύρους"
                 },
                 "railway/platform": {
-                    "name": "Σιδηροδρομική Στάση / Πλατφόρμα"
+                    "name": "Αποβάθρα Τρένου δίπλα στη διαδρομή"
                 },
                 "railway/rail": {
                     "name": "Σιδηροδρομική Γραμμή",
@@ -5495,7 +5505,7 @@
                     "name": "Σιδηροδρομικό Σήμα"
                 },
                 "railway/station": {
-                    "name": "Σιδηροδρομικός Σταθμός"
+                    "name": "Σταθμός Τρένου δίπλα στη διαδρομή"
                 },
                 "railway/subway": {
                     "name": "Μετρό",
@@ -5516,14 +5526,11 @@
                     "terms": "Τραμ"
                 },
                 "railway/tram_stop": {
-                    "name": "Θέση Στάσης Τραμ"
+                    "name": "Τοποθεσία Στάσης Τραμ πάνω στις ράγες"
                 },
                 "relation": {
                     "name": "Σχέση",
                     "terms": "Σχέση, Συσχέτιση"
-                },
-                "roundabout": {
-                    "name": "Κυκλικός κόμβος"
                 },
                 "route/ferry": {
                     "name": "Διαδρομή Πορθμείου",
@@ -5612,8 +5619,7 @@
                     "terms": "Παλαιοβιβλιοπωλείο"
                 },
                 "shop/boutique": {
-                    "name": "Μπουτίκ",
-                    "terms": "Μπουτίκ"
+                    "name": "Μπουτίκ"
                 },
                 "shop/butcher": {
                     "name": "Κρεοπωλείο",
@@ -5798,8 +5804,14 @@
                 "shop/interior_decoration": {
                     "name": "Διακοσμητές Εσωτερικών Χώρων"
                 },
+                "shop/jewelry": {
+                    "name": "Κοσμηματοπωλείο"
+                },
                 "shop/kiosk": {
                     "name": "Περίπτερο"
+                },
+                "shop/kitchen": {
+                    "name": "Διακόσμηση Κουζίνας"
                 },
                 "shop/laundry": {
                     "name": "Καθαριστήριο",
@@ -5898,6 +5910,9 @@
                 },
                 "shop/religion": {
                     "name": "Κατάστημα Θρησκευτικών Ειδών"
+                },
+                "shop/scuba_diving": {
+                    "name": "Κατάστημα Εξοπλισμού Καταδύσεων"
                 },
                 "shop/seafood": {
                     "name": "Κατάστημα Θαλασσινών",
@@ -6238,7 +6253,7 @@
                     "name": "Υπόγεια Διαδρομή"
                 },
                 "type/route/train": {
-                    "name": "Γραμμή Τραίνων"
+                    "name": "Διαδρομή Τρένου"
                 },
                 "type/route/tram": {
                     "name": "Διαδρομή Τραμ"
@@ -6248,10 +6263,6 @@
                 },
                 "type/waterway": {
                     "name": "Υδάτινος Δρόμος"
-                },
-                "vertex": {
-                    "name": "Άλλο",
-                    "terms": "Άλλο"
                 },
                 "waterway": {
                     "name": "Υδάτινος Δρόμος"

@@ -100,7 +100,6 @@
                     "line": "Bu çizginin köşelerini kareleştir.",
                     "area": "Bu alanın köşelerini kareleştir."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Çizginin köşeleri kareleştirildi.",
                     "area": "Alanın köşeleri kareleştirildi."
@@ -111,11 +110,8 @@
             },
             "straighten": {
                 "title": "Düzleştir",
-                "description": "Bu çizgiyi düzleştir.",
                 "key": "S",
-                "annotation": "Bir çizgi düzleştirildi.",
-                "too_bendy": "Bu düzleştirilemez, çünkü çok kıvrımlı. ",
-                "connected_to_hidden": "Bu çizgi düzeltilemez, çünkü gizli bir nesneye bağlı."
+                "too_bendy": "Bu düzleştirilemez, çünkü çok kıvrımlı. "
             },
             "delete": {
                 "title": "Sil",
@@ -303,9 +299,6 @@
                     "create": "Bir dönüş kısıtlaması eklendi.",
                     "delete": "Bir dönüş kısıtlaması silindi"
                 }
-            },
-            "detach_node": {
-                "title": "Ayırt"
             }
         },
         "restriction": {
@@ -673,19 +666,13 @@
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
         "mapillary_images": {
-            "tooltip": "Mapilary'den sokak fotoğrafları",
-            "title": "Fotoğraf Katmanı (Mapilary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Mapilary'den trafik işaretleri (Fotoğraf Katmanı'nın aktif olması gerekiyor)",
-            "title": "Trafik İşaretleri Katmanı (Mapilary)"
+            "tooltip": "Mapilary'den sokak fotoğrafları"
         },
         "mapillary": {
             "view_on_mapillary": "Bu resmi Mapillary'de görüntüle"
         },
         "openstreetcam_images": {
-            "tooltip": "OpenStreetCam'den sokak düzeyinde fotoğraflar",
-            "title": "Fotoğraf katmanı (OpenStreetCam)"
+            "tooltip": "OpenStreetCam'den sokak düzeyinde fotoğraflar"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Bu imajı OpenStreetCam'de görüntüleyin"
@@ -1087,7 +1074,6 @@
                     "reverse": "Çizgiyi ters çevir",
                     "move": "Seçilmiş nesneleri taşı",
                     "rotate": "Seçilmiş nesneleri dönder",
-                    "orthogonalize": "Çizgiyi düzleştir / Alanı kare haline getir",
                     "circularize": "Çizgiyi veya alanı daire haline getir",
                     "reflect_long": "Bu nesneleri uzun ekseninden yansıt",
                     "reflect_short": "Bu nesneleri kısa ekseninden yansıt",
@@ -1145,35 +1131,11 @@
                 "category-landuse": {
                     "name": "Arazi"
                 },
-                "category-natural-area": {
-                    "name": "Doğa"
-                },
-                "category-natural-line": {
-                    "name": "Doğa"
-                },
-                "category-natural-point": {
-                    "name": "Doğa"
-                },
-                "category-path": {
-                    "name": "Patika"
-                },
-                "category-rail": {
-                    "name": "Demiryolu"
-                },
                 "category-restriction": {
                     "name": "Kısıtlamalar"
                 },
-                "category-road": {
-                    "name": "Yollar"
-                },
                 "category-route": {
                     "name": "Güzergah"
-                },
-                "category-water-area": {
-                    "name": "Sulak Alan"
-                },
-                "category-water-line": {
-                    "name": "Akarsu"
                 }
             },
             "fields": {
@@ -1320,6 +1282,9 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "Tip"
+                },
                 "backrest": {
                     "label": "Arkalık"
                 },
@@ -1379,6 +1344,9 @@
                 },
                 "building": {
                     "label": "Bina"
+                },
+                "building/material": {
+                    "label": "Materyal"
                 },
                 "building_area": {
                     "label": "Bina"
@@ -1774,9 +1742,6 @@
                 },
                 "internet_access/fee": {
                     "label": "İnternet Erişim Ücreti"
-                },
-                "internet_access/ssid": {
-                    "label": "Bağlantı (SSID) Adı"
                 },
                 "kerb": {
                     "label": "Kaldırım Taşı"
@@ -2357,8 +2322,7 @@
                     "options": {
                         "bucket": "Kova",
                         "chemical": "Kimyasal",
-                        "flush": "Sifon",
-                        "pitlatrine": "Hela"
+                        "flush": "Sifon"
                     }
                 },
                 "toll": {
@@ -2393,6 +2357,9 @@
                 },
                 "traffic_calming": {
                     "label": "Tür"
+                },
+                "traffic_sign": {
+                    "label": "Trafik Işığı"
                 },
                 "traffic_signals": {
                     "label": "Tür"
@@ -2765,8 +2732,7 @@
                     "terms": "Sürücü Okulu"
                 },
                 "amenity/embassy": {
-                    "name": "Büyükelçilik",
-                    "terms": "Büyükelçilik"
+                    "name": "Büyükelçilik"
                 },
                 "amenity/fast_food": {
                     "name": "Fast Food",
@@ -3019,9 +2985,6 @@
                     "name": "Kadın Sağlık Otomatı",
                     "terms": "Kadın Sağlık Otomatik Satış Makinası"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Gazete Otomatı"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Gazete Satış Makinası",
                     "terms": "Gazete Satış Makinası, Gazete Otomatı"
@@ -3076,10 +3039,6 @@
                 },
                 "attraction/amusement_ride": {
                     "name": "Eğlence Yolculuğu"
-                },
-                "attraction/animal": {
-                    "name": "Hayvan",
-                    "terms": "Hayvan"
                 },
                 "attraction/big_wheel": {
                     "name": "Dönme Dolap",
@@ -3198,6 +3157,9 @@
                 "building": {
                     "name": "Bina",
                     "terms": "Yapı"
+                },
+                "building/apartments": {
+                    "name": "Residans"
                 },
                 "building/barn": {
                     "name": "Samanlık",
@@ -3367,9 +3329,6 @@
                 "camp_site/camp_pitch": {
                     "name": "Kamp Ateş Alanı",
                     "terms": "Kamp Ateş Alanı"
-                },
-                "circular": {
-                    "name": "Dönel Kavşak"
                 },
                 "club": {
                     "name": "Klüb",
@@ -3708,9 +3667,6 @@
                 },
                 "highway/bus_guideway": {
                     "name": "Otobüs Tercihli Yolu"
-                },
-                "highway/bus_stop": {
-                    "name": "Otobüs Durağı"
                 },
                 "highway/corridor": {
                     "name": "Koridor",
@@ -4730,46 +4686,6 @@
                     "name": "Transformatör",
                     "terms": "Transformatör"
                 },
-                "public_transport/platform": {
-                    "name": "Toplu Taşıma Durağı",
-                    "terms": "Toplu Taşıma Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_aerialway": {
-                    "name": "Havayolu Durağı",
-                    "terms": "Havayolu ile Taşıma Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Otobüs Durağı",
-                    "terms": "Durak, Otobüs Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Feribot Terminali",
-                    "terms": "Feribot Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Raybüs Durağı",
-                    "terms": "Raybüs, Hafif Raylı Taşıt Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Tek Raylı Tren İstasyonu",
-                    "terms": "Tek Raylı Tren Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Metro Durağı",
-                    "terms": "Metro Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_train": {
-                    "name": "Tren Durağı",
-                    "terms": "Tren Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Tramvay Durağı",
-                    "terms": "Tramvay Yolcu İndirme/Bindirme Platformu"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Troleybüs Durağı",
-                    "terms": "Troleybüs, Raysız Tramvay Yolcu İndirme/Bindirme Platformu"
-                },
                 "public_transport/station": {
                     "name": "Toplu Taşıma Terminali",
                     "terms": "Toplu Taşıma İstasyonu"
@@ -4909,9 +4825,6 @@
                     "name": "İlişki",
                     "terms": "İlişki, Bağlantı"
                 },
-                "roundabout": {
-                    "name": "Dönel Kavşak"
-                },
                 "route/ferry": {
                     "name": "Feribot Güzergahı",
                     "terms": "Feribot Güzergahı"
@@ -4989,8 +4902,7 @@
                     "terms": "Kitapçı"
                 },
                 "shop/boutique": {
-                    "name": "Butik Mağaza",
-                    "terms": "Butik"
+                    "name": "Butik Mağaza"
                 },
                 "shop/butcher": {
                     "name": "Kasap",
@@ -5109,8 +5021,7 @@
                     "terms": "Manav"
                 },
                 "shop/fashion": {
-                    "name": "Giyim Mağazası",
-                    "terms": "Giyim Mağazası"
+                    "name": "Giyim Mağazası"
                 },
                 "shop/fishmonger": {
                     "name": "Balıkçı"
@@ -5610,10 +5521,6 @@
                 "type/waterway": {
                     "name": "Su Yolu",
                     "terms": "Su Yolu, Akarsu"
-                },
-                "vertex": {
-                    "name": "Diğer",
-                    "terms": "Nokta"
                 },
                 "waterway": {
                     "name": "Su Yolu"

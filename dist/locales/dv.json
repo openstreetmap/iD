@@ -186,24 +186,6 @@
                 },
                 "category-landuse": {
                     "name": "ބިން ބޭނުންކުރާގޮތުގެ ފާހަގަތައް"
-                },
-                "category-natural-area": {
-                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
-                },
-                "category-natural-line": {
-                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
-                },
-                "category-natural-point": {
-                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
-                },
-                "category-path": {
-                    "name": "ދުުވާރު/ ބައިސިކަލް ދުއްވާ މަގު"
-                },
-                "category-rail": {
-                    "name": "ރޭލު މަގު"
-                },
-                "category-road": {
-                    "name": "ތަފާތު މަގުތައް"
                 }
             },
             "fields": {

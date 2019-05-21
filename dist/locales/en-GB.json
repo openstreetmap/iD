@@ -90,7 +90,6 @@
                     "line": "Square the corners of this line.",
                     "area": "Square the corners of this area."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Squared the corners of a line.",
                     "area": "Squared the corners of an area."
@@ -101,11 +100,8 @@
             },
             "straighten": {
                 "title": "Straighten",
-                "description": "Straighten this line.",
                 "key": "S",
-                "annotation": "Straightened a line.",
-                "too_bendy": "This can't be straightened because it bends too much.",
-                "connected_to_hidden": "This line can't be straightened because it is connected to a hidden feature."
+                "too_bendy": "This can't be straightened because it bends too much."
             },
             "delete": {
                 "title": "Delete",
@@ -679,19 +675,13 @@
             "report": "Report a privacy concern with this image"
         },
         "mapillary_images": {
-            "tooltip": "Street-level photos from Mapillary",
-            "title": "Photo Overlay (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Traffic signs from Mapillary (must enable Photo Overlay)",
-            "title": "Traffic Sign Overlay (Mapillary)"
+            "tooltip": "Street-level photos from Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "View this image on Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Street-level photos from OpenStreetCam",
-            "title": "Photo Overlay (OpenStreetCam)"
+            "tooltip": "Street-level photos from OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "View this image on OpenStreetCam"
@@ -1236,7 +1226,6 @@
                     "reverse": "Reverse a line",
                     "move": "Move selected features",
                     "rotate": "Rotate selected features",
-                    "orthogonalize": "Straighten line / Square area corners",
                     "circularize": "Circularise a closed line or area",
                     "reflect_long": "Reflect features across the longer axis",
                     "reflect_short": "Reflect features across the shorter axis",
@@ -1296,38 +1285,14 @@
                 "category-landuse": {
                     "name": "Land Use Features"
                 },
-                "category-natural-area": {
-                    "name": "Natural Features"
-                },
-                "category-natural-line": {
-                    "name": "Natural Features"
-                },
-                "category-natural-point": {
-                    "name": "Natural Features"
-                },
-                "category-path": {
-                    "name": "Path Features"
-                },
-                "category-rail": {
-                    "name": "Rail Features"
-                },
                 "category-restriction": {
                     "name": "Restriction Features"
-                },
-                "category-road": {
-                    "name": "Road Features"
                 },
                 "category-route": {
                     "name": "Route Features"
                 },
                 "category-utility": {
                     "name": "Utility Features"
-                },
-                "category-water-area": {
-                    "name": "Water Features"
-                },
-                "category-water-line": {
-                    "name": "Water Features"
                 }
             },
             "fields": {
@@ -1969,9 +1934,6 @@
                 "internet_access/fee": {
                     "label": "Internet Access Fee"
                 },
-                "internet_access/ssid": {
-                    "label": "SSID (Network Name)"
-                },
                 "kerb": {
                     "label": "Kerb"
                 },
@@ -2579,8 +2541,7 @@
                     "options": {
                         "bucket": "Bucket",
                         "chemical": "Chemical",
-                        "flush": "Flush",
-                        "pitlatrine": "Pit/Latrine"
+                        "flush": "Flush"
                     }
                 },
                 "toll": {
@@ -3186,9 +3147,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Ice Cream Vending Machine"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Newspaper Vending Machine"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine"
                 },
@@ -3233,9 +3191,6 @@
                 },
                 "attraction/amusement_ride": {
                     "name": "Amusement Ride"
-                },
-                "attraction/animal": {
-                    "name": "Animal"
                 },
                 "attraction/big_wheel": {
                     "name": "Big Wheel"
@@ -3479,9 +3434,6 @@
                 },
                 "camp_site/camp_pitch": {
                     "name": "Camp Pitch"
-                },
-                "circular": {
-                    "name": "Traffic Circle"
                 },
                 "club": {
                     "name": "Club"
@@ -3752,9 +3704,6 @@
                 },
                 "highway/bus_guideway": {
                     "name": "Bus Guideway"
-                },
-                "highway/bus_stop": {
-                    "name": "Bus Stop / Platform"
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor"
@@ -4665,36 +4614,6 @@
                 "power/transformer": {
                     "name": "Transformer"
                 },
-                "public_transport/platform": {
-                    "name": "Transit Stop / Platform"
-                },
-                "public_transport/platform_aerialway": {
-                    "name": "Aerialway Stop / Platform"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Bus Stop / Platform"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Ferry Stop / Platform"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Light Rail Stop / Platform"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Monorail Stop / Platform"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Subway Stop / Platform"
-                },
-                "public_transport/platform_train": {
-                    "name": "Train Stop / Platform"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Tram Stop / Platform"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Trolleybus Stop / Platform"
-                },
                 "public_transport/station": {
                     "name": "Transit Station"
                 },
@@ -4803,9 +4722,6 @@
                 "railway/narrow_gauge": {
                     "name": "Narrow Gauge Rail"
                 },
-                "railway/platform": {
-                    "name": "Train Stop / Platform"
-                },
                 "railway/rail": {
                     "name": "Rail"
                 },
@@ -4835,9 +4751,6 @@
                 },
                 "relation": {
                     "name": "Relation"
-                },
-                "roundabout": {
-                    "name": "Roundabout"
                 },
                 "route/ferry": {
                     "name": "Ferry Route"
@@ -5418,9 +5331,6 @@
                 },
                 "type/waterway": {
                     "name": "Waterway"
-                },
-                "vertex": {
-                    "name": "Other"
                 },
                 "waterway": {
                     "name": "Waterway"

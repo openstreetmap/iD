@@ -13,22 +13,27 @@
             "add_area": {
                 "title": "範圍",
                 "description": "新增公園、建築物、湖或其他範圍至地圖。",
-                "tail": "於地圖上按一下開始繪畫範圍，例如公園、湖或建築物。"
+                "tail": "於地圖上按一下開始繪畫範圍，例如公園、湖或建築物。",
+                "filter_tooltip": "範圍"
             },
             "add_line": {
                 "title": "綫",
                 "description": "新增公路、街道、行人路、水道或其他綫至地圖。",
-                "tail": "於地圖上按一下開始繪畫道路、路徑或者路綫。"
+                "tail": "於地圖上按一下開始繪畫道路、路徑或者路綫。",
+                "filter_tooltip": "綫"
             },
             "add_point": {
                 "title": "點",
                 "description": "新增餐廳、紀念碑、郵筒或其他點至地圖。",
-                "tail": "於地圖上按一下新增點。"
+                "tail": "於地圖上按一下新增點。",
+                "filter_tooltip": "點"
             },
             "add_note": {
                 "title": "註",
+                "label": "新增備註",
                 "description": "發現了問題？讓其他製圖者知道。",
-                "tail": "於地圖上按一下新增備註。"
+                "tail": "於地圖上按一下新增備註。",
+                "key": "N"
             },
             "browse": {
                 "title": "瀏覽",
@@ -100,7 +105,7 @@
                     "line": "將這條綫的角方形化。",
                     "area": "將這個範圍的角方形化。"
                 },
-                "key": "S",
+                "key": "Q",
                 "annotation": {
                     "line": "已將這條綫的角方形化。",
                     "area": "已將這個範圍的角方形化。"
@@ -111,11 +116,8 @@
             },
             "straighten": {
                 "title": "拉直",
-                "description": "拉直這條綫。",
                 "key": "S",
-                "annotation": "已拉直一條綫。",
-                "too_bendy": "未能將這個拉直因為它轉太多彎。",
-                "connected_to_hidden": "未能將這條綫拉直因為它連接著一個隱藏的特徵。"
+                "too_bendy": "未能將這個拉直因為它轉太多彎。"
             },
             "delete": {
                 "title": "刪除",
@@ -317,14 +319,6 @@
                     "create": "已新增轉彎限制",
                     "delete": "已刪除轉彎限制"
                 }
-            },
-            "detach_node": {
-                "title": "分離",
-                "key": "E",
-                "description": "將這個節從這此綫/範圍中分離",
-                "annotation": "已將一個節從父母綫/範圍中分離",
-                "restriction": "這個節不能分離因為它會損害一個\"{relation}\" 關係的構件。",
-                "connected_to_hidden": "未能將這個節分離因為它連接著一個隱藏的特徵。"
             }
         },
         "restriction": {
@@ -344,7 +338,10 @@
                     "only_right_turn": "只准右轉 {indirect}",
                     "only_u_turn": "只准掉頭 {indirect}",
                     "only_straight_on": "只准直行 {indirect}"
-                }
+                },
+                "from": "由",
+                "via": "經",
+                "to": "到"
             }
         },
         "undo": {
@@ -363,9 +360,14 @@
             "localized_translation_name": "名稱"
         },
         "zoom_in_edit": "放大以編輯",
+        "login": "登入",
+        "logout": "登出",
         "loading_auth": "正在連接 OpenStreetMap...",
         "report_a_bug": "報告錯誤",
         "help_translate": "協助翻譯",
+        "sidebar": {
+            "key": "`"
+        },
         "feature_info": {
             "hidden_warning": "{count} 項隱藏特徵",
             "hidden_details": "這些特徵正被隱藏: {details}"
@@ -385,10 +387,12 @@
             "cancel": "取消",
             "changes": "{count} 項變更",
             "download_changes": "下載 osmChange 檔案",
+            "errors": "錯誤",
             "warnings": "警告",
             "modified": "已修改",
             "deleted": "已刪除",
             "created": "已建立",
+            "outstanding_errors_message": "請先解決所有錯誤。餘下 {count} 個。",
             "about_changeset_comments": "有關變動留言",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "你在這個留言內提及過Google：緊記絕對不可複製Google地圖的資料。",
@@ -422,7 +426,10 @@
                 "edited_by": "編輯者",
                 "changeset": "變動",
                 "unknown": "未知",
-                "link_text": "openstreetmap.org 上的歷程"
+                "link_text": "openstreetmap.org 上的歷程",
+                "note_created_date": "建立日期",
+                "note_created_user": "建立者",
+                "note_link_text": "openstreetmap.org 上的備註"
             },
             "location": {
                 "key": "L",
@@ -462,16 +469,25 @@
             "locating": "定位中，請稍候..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z",
+                "title": "放大至這個"
+            },
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
+            "view_on_keepRight": "在 keepright.at 上查看",
             "all_fields": "所有資料",
             "all_tags": "所有標籤",
             "all_members": "所有構件",
             "all_relations": "所有關係",
+            "add_to_relation": "新增至關係",
             "new_relation": "建立新關係⋯⋯",
             "role": "作用",
             "choose": "選擇特徵種類",
             "results": "{search}的{n}個結果",
+            "no_documentation_key": "沒有相關文件",
+            "wiki_reference": "查看文件",
+            "wiki_en_reference": "查看英文版文件",
             "back_tooltip": "變更特徵",
             "remove": "移除",
             "search": "搜尋",
@@ -510,6 +526,7 @@
             "custom": "自訂",
             "overlays": "覆蓋層",
             "reset": "重設",
+            "reset_all": "重設所有",
             "display_options": "顯示選項",
             "brightness": "亮度",
             "contrast": "對比",
@@ -532,11 +549,24 @@
                 "osm": {
                     "tooltip": "來自 OpenStreetMap 的地圖數據",
                     "title": "OpenStreetMap 數據"
+                },
+                "notes": {
+                    "title": "OpenStreetMap 備註"
                 }
             },
             "fill_area": "填滿範圍",
             "map_features": "地圖特徵",
             "autohidden": "由於太多東西出現在螢幕上，這些特徵已被自動隱藏。你可以放大來編輯它們。"
+        },
+        "photo_overlays": {
+            "traffic_signs": {
+                "title": "交通標誌"
+            },
+            "photo_type": {
+                "panoramic": {
+                    "tooltip": "360° 相片"
+                }
+            }
         },
         "feature": {
             "points": {
@@ -580,9 +610,11 @@
                 "tooltip": "電線、發電廠、變電站等等"
             },
             "past_future": {
+                "description": "過去／將來特徵",
                 "tooltip": "已建議、建築中、已廢棄、已拆毀等等"
             },
             "others": {
+                "description": "其他特徵",
                 "tooltip": "其他東西"
             }
         },
@@ -599,6 +631,18 @@
             "full": {
                 "description": "全部填滿",
                 "tooltip": "整個範圍會被填滿。"
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "編輯自訂背景",
+                "header": "自訂背景設定"
+            },
+            "custom_data": {
+                "file": {
+                    "label": "瀏覽檔案"
+                },
+                "or": "或"
             }
         },
         "restore": {
@@ -625,6 +669,7 @@
                 "keep_remote": "使用其他人的",
                 "restore": "復原",
                 "delete": "放棄資料",
+                "download_changes": "或下載 osmChange 檔案",
                 "done": "所有衝突已解決！",
                 "help": "另一用戶已變更了一些你變更過的地圖特徵。\n按一下下面的每一個特徵以了解有關衝突內容並決定是否需要保留\n你的變更或者是其他用戶的變更。\n"
             }
@@ -640,8 +685,13 @@
         },
         "success": {
             "just_edited": "你剛剛編輯了OpenStreetMap！",
+            "thank_you": "謝謝協助改善地圖。",
+            "thank_you_location": "謝謝協助改善 {where} 附近的地圖。",
             "help_link_text": "詳細資料",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "於OSM上顯示改變",
+            "languages": "語言：{languages}",
+            "tell_us": "告訴我們！"
         },
         "confirm": {
             "okay": "確定",
@@ -672,22 +722,40 @@
         },
         "cannot_zoom": "在這個模式下不能再縮小。",
         "full_screen": "切換全螢幕",
-        "mapillary_images": {
-            "tooltip": "來自Mapillary的街道圖層相片",
-            "title": "相片重疊 (Mapillary)"
+        "QA": {
+            "improveOSM": {
+                "directions": {
+                    "west": "西"
+                }
+            },
+            "keepRight": {
+                "title": "KeepRight 錯誤",
+                "detail_title": "錯誤",
+                "close": "關閉 (已修正錯誤)",
+                "ignore": "忽略 (不是錯誤)",
+                "save_comment": "儲存留言",
+                "close_comment": "關閉並留言",
+                "ignore_comment": "忽略並留言"
+            }
         },
-        "mapillary_signs": {
-            "tooltip": "來自Mapillary的交通訊號（必須啟用相片重疊）",
-            "title": "交通訊號重疊 (Mapillary)"
+        "mapillary_images": {
+            "tooltip": "來自Mapillary的街道圖層相片"
         },
         "mapillary": {
             "view_on_mapillary": "在Mapillary上觀看這影像"
         },
-        "openstreetcam_images": {
-            "title": "相片重疊 (OpenStreetCam)"
-        },
         "openstreetcam": {
             "view_on_openstreetcam": "在 OpenStreetCam 上觀看這影像"
+        },
+        "note": {
+            "commentTitle": "留言",
+            "status": {
+                "commented": "已留言 {when}"
+            },
+            "newComment": "新留言",
+            "comment": "留言",
+            "close_comment": "關閉並留言",
+            "open_comment": "再開啟並留言"
         },
         "help": {
             "title": "說明",
@@ -726,6 +794,14 @@
                 "title": "綫",
                 "add_line_h": "新增綫",
                 "modify_line_h": "修改綫"
+            },
+            "notes": {
+                "update_note_h": "關閉、再開和留言"
+            }
+        },
+        "issues": {
+            "errors": {
+                "list_title": "錯誤 ({count})"
             }
         },
         "intro": {
@@ -1066,7 +1142,6 @@
                     "reverse": "反轉一條線",
                     "move": "移動已選擇特徵",
                     "rotate": "旋轉已選擇特徵",
-                    "orthogonalize": "拉直線 / 將範圍方形化",
                     "circularize": "將已封閉的線或範圍圓形化",
                     "reflect_long": "以長軸鏡射特徵。",
                     "reflect_short": "以短軸鏡射特徵。",
@@ -1104,38 +1179,14 @@
                 "category-landuse": {
                     "name": "土地利用特徵"
                 },
-                "category-natural-area": {
-                    "name": "自然特徵"
-                },
-                "category-natural-line": {
-                    "name": "自然特徵"
-                },
-                "category-natural-point": {
-                    "name": "自然特徵"
-                },
-                "category-path": {
-                    "name": "路徑特徵"
-                },
-                "category-rail": {
-                    "name": "鐵路特徵"
-                },
                 "category-restriction": {
                     "name": "限制特徵"
-                },
-                "category-road": {
-                    "name": "道路特徵"
                 },
                 "category-route": {
                     "name": "路綫特徵"
                 },
                 "category-utility": {
                     "name": "設施特徵"
-                },
-                "category-water-area": {
-                    "name": "水特徵"
-                },
-                "category-water-line": {
-                    "name": "水特徵"
                 }
             },
             "fields": {
@@ -1789,9 +1840,6 @@
                 },
                 "internet_access/fee": {
                     "label": "互聯網費用"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (網絡名稱)"
                 },
                 "kerb": {
                     "label": "下斜路緣"
@@ -2559,8 +2607,7 @@
                     "options": {
                         "bucket": "尿斗",
                         "chemical": "化學掩臭",
-                        "flush": "沖水式",
-                        "pitlatrine": "坑廁/旱廁"
+                        "flush": "沖水式"
                     }
                 },
                 "toll": {
@@ -3000,8 +3047,7 @@
                     "terms": "Driving School, 駕駛學院"
                 },
                 "amenity/embassy": {
-                    "name": "大使館",
-                    "terms": "Embassy,使館,大使館,領事館"
+                    "name": "大使館"
                 },
                 "amenity/fast_food": {
                     "name": "快餐店",
@@ -3385,9 +3431,6 @@
                     "name": "女性衞生用品售賣機",
                     "terms": "Feminine Hygiene Vending Machine,女性用品售賣機"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "報紙售賣機"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "報紙售賣機",
                     "terms": "Newspaper Vending Machine,報紙販賣機"
@@ -3443,10 +3486,6 @@
                 "attraction/amusement_ride": {
                     "name": "機動遊戲機",
                     "terms": "Amusement Ride,機動遊戲"
-                },
-                "attraction/animal": {
-                    "name": "動物",
-                    "terms": "Animal,動物"
                 },
                 "attraction/big_wheel": {
                     "name": "摩天輪",
@@ -4072,9 +4111,6 @@
                 "highway/bridleway": {
                     "name": "馬道",
                     "terms": "Bridle Path,馬徑,馬道,策騎徑"
-                },
-                "highway/bus_stop": {
-                    "name": "巴士站 / 月台"
                 },
                 "highway/corridor": {
                     "name": "室內走廊",
@@ -5151,9 +5187,6 @@
                     "name": "關係",
                     "terms": "Relation,關係,關系"
                 },
-                "roundabout": {
-                    "name": "迴旋處"
-                },
                 "route/ferry": {
                     "name": "渡輪航綫",
                     "terms": "Ferry Route,渡輪航線,航綫,航線"
@@ -5231,8 +5264,7 @@
                     "terms": "書局"
                 },
                 "shop/boutique": {
-                    "name": "時裝店",
-                    "terms": "Boutique,時裝店,服飾店,精品店,服裝店"
+                    "name": "時裝店"
                 },
                 "shop/butcher": {
                     "name": "肉舖",
@@ -5351,8 +5383,7 @@
                     "terms": "Produce Stand,檔,水果攤,農場,農產品攤檔"
                 },
                 "shop/fashion": {
-                    "name": "時裝店",
-                    "terms": "時裝店"
+                    "name": "時裝店"
                 },
                 "shop/fishmonger": {
                     "name": "魚檔"
@@ -5853,10 +5884,6 @@
                     "name": "建築群",
                     "terms": "一群建築"
                 },
-                "vertex": {
-                    "name": "其他",
-                    "terms": "Other,其他,其它"
-                },
                 "waterway": {
                     "name": "水道"
                 },
@@ -5918,24 +5945,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Orthophoto Flanders 最新 © AGIV"
-                },
-                "name": "AGIV Flanders 最新空照圖"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Orthophoto Flanders © AGIV"
-                },
-                "name": "AGIV Flanders 2013-2015 空照圖 10厘米"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Flanders © AGIV"
-                },
-                "name": "AGIV Flanders GRB"
-            },
             "Bing": {
                 "description": "衛星和航攝圖",
                 "name": "Bing 航攝圖"

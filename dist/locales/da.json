@@ -9,26 +9,58 @@
             "copy": "kopier",
             "open_wikidata": "åben på wikidata.org"
         },
+        "toolbar": {
+            "inspect": "Inspicer",
+            "undo_redo": "Fortryd / gendan",
+            "recent": "Seneste",
+            "favorites": "Favoritter",
+            "add_feature": "Tilføj kortobjekt"
+        },
         "modes": {
+            "add_feature": {
+                "title": "Tilføj et kortobjekt",
+                "description": "Søg efter kortobjekter der kan tilføjes til kortet.",
+                "result": "{count} resultat",
+                "results": "{count} resultater"
+            },
             "add_area": {
                 "title": "Område",
                 "description": "Tilføj parker, bygninger, søer, eller andre områder til kortet.",
-                "tail": "Klik på kortet for at påbegynde et område, såsom en park, sø eller bygning."
+                "tail": "Klik på kortet for at påbegynde et område, såsom en park, sø eller bygning.",
+                "filter_tooltip": "områder"
             },
             "add_line": {
                 "title": "Linje",
                 "description": "Tilføj veje, gader, gangstier, kanaler eller andre linjer til kortet.",
-                "tail": "Klik på kortet for at begynde at tegne en vej, sti eller rute."
+                "tail": "Klik på kortet for at begynde at tegne en vej, sti eller rute.",
+                "filter_tooltip": "linjer"
             },
             "add_point": {
                 "title": "Punkt",
                 "description": "Tilføj restauranter, monumenter, postkasser eller andre punkter til kortet.",
-                "tail": "Klik på kortet for at tilføje et punkt."
+                "tail": "Klik på kortet for at tilføje et punkt.",
+                "filter_tooltip": "punkter"
             },
             "add_note": {
                 "title": "Bemærkning",
+                "label": "Tilføj bemærkning",
                 "description": "Fundet en fejl? Læg en bemærkning til andre bidragsydere.",
                 "tail": "Klik på kortet for at tilføje en bemærkning."
+            },
+            "add_preset": {
+                "title": "Tilføj {feature}",
+                "point": {
+                    "title": "Tilføj {feature} som punkt"
+                },
+                "line": {
+                    "title": "Tilføj {feature} som linje"
+                },
+                "area": {
+                    "title": "Tilføj {feature} som et område"
+                },
+                "building": {
+                    "title": "Tilføj {feature} som en bygning"
+                }
             },
             "browse": {
                 "title": "Gennemse",
@@ -92,30 +124,41 @@
                 },
                 "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke.",
                 "too_large": "Dette kan ikke gøres cirkulært, da kortudsnittet ikke viser nok af objektet.",
-                "connected_to_hidden": "Dette kan ikke gøres cirkulært, da det er forbundet til et skjult objekt."
+                "connected_to_hidden": "Dette kan ikke gøres cirkulært, da det er forbundet til et skjult objekt.",
+                "not_downloaded": "Dette kan ikke gøres cirkulært, da dele af det ikke er indlæst endnu."
             },
             "orthogonalize": {
                 "title": "Gør retvinklet",
                 "description": {
+                    "vertex": "Gør dette hjørne firkantet.",
                     "line": "Gør hjørnerne på denne linje retvinklede",
                     "area": "Gør hjørnerne på dette område retvinklede."
                 },
-                "key": "S",
                 "annotation": {
+                    "vertex": "Gjorde et enkelt hjørne firkantet.",
                     "line": "Gjorde hjørnerne på denne linje retvinklede.",
                     "area": "Gjorde hjørnerne på dette område retvinklede."
                 },
+                "end_vertex": "Dette kan ikke gøres firkantet da det er en slut-node.",
+                "square_enough": "Dette kan ikke gøres mere firkantet end det allerede er.",
                 "not_squarish": "Dette kan ikke gøres retvinklet da det ikke er firkantet.",
                 "too_large": "Dette kan ikke gøres retvinklet, da kortudsnittet ikke viser nok af objektet.",
-                "connected_to_hidden": "Dette kan ikke gøres retvinklet, da det er forbundet til et skjult objekt."
+                "connected_to_hidden": "Dette kan ikke gøres retvinklet, da det er forbundet til et skjult objekt.",
+                "not_downloaded": "Dette kan ikke gøres firkantet, da dele af det ikke er indlæst endnu."
             },
             "straighten": {
                 "title": "Udret",
-                "description": "Gør denne linje lige.",
+                "description": {
+                    "points": "Udret disse punkter.",
+                    "line": "Udret denne linje."
+                },
                 "key": "S",
-                "annotation": "Gjorde denne linje lige.",
+                "annotation": {
+                    "points": "Udrettede flere punkter.",
+                    "line": "Udrettede en linje."
+                },
                 "too_bendy": "Denne linje kan ikke rettes ud da den bøjer for meget.",
-                "connected_to_hidden": "Denne linje kan ikke rettes ud, da den er forbundet til et skjult objekt."
+                "not_downloaded": "Dette kan ikke gøres udrettes, da dele af det ikke er indlæst endnu."
             },
             "delete": {
                 "title": "Slet",
@@ -146,6 +189,14 @@
                 "connected_to_hidden": {
                     "single": "Dette objekt kan ikke slettes da det er forbundet til et skjult objekt.",
                     "multiple": "Disse kortobjekter kan ikke slettes, da nogle af dem er forbundet til skjulte kortobjekter."
+                },
+                "not_downloaded": {
+                    "single": "Dette kortobjekt kan slettes, da dele af det ikke er indlæst endnu.",
+                    "multiple": "Disse kortobjekter kan ikke slettes, da dele af dem ikke er indlæst endnu."
+                },
+                "has_wikidata_tag": {
+                    "single": "Dette kortobjekt kan ikke slettes da det har et Wikidata-tag.",
+                    "multiple": "Disse kortobjekter kan ikke slettes da nogle har et Wikidata-tag."
                 }
             },
             "add_member": {
@@ -318,13 +369,34 @@
                     "delete": "Slettede en svingbegrænsning"
                 }
             },
-            "detach_node": {
-                "title": "Afkobl",
-                "key": "E",
-                "description": "Afkobl denne node fra disse linjer/områder.",
-                "annotation": "Afkoblede en node fra overordnede linjer/områder.",
-                "restriction": "Denne node kan ikke afkobles, da det ville ødelægge en \"{relation}\"-relation.",
-                "connected_to_hidden": "Denne node kan ikke afkobles, da den er forbundet til et skjult kortobjekt."
+            "extract": {
+                "title": "Frigør",
+                "description": {
+                    "vertex": {
+                        "single": "Frigør dette punkt fra dets overordnede-linje/område."
+                    },
+                    "area": {
+                        "single": "Frigør et punkt fra dette område."
+                    }
+                },
+                "annotation": {
+                    "single": "Frigjorde et punkt."
+                },
+                "too_large": {
+                    "area": {
+                        "single": "Et punkt kunne ikke frigøres fra dette område fordi der ikke er tilstrækkeligt meget af det som er synligt."
+                    }
+                },
+                "restriction": {
+                    "vertex": {
+                        "single": "Dette punkt kan ikke frigøres da det ville ødelægge en \"{relation}\"-relation."
+                    }
+                },
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Dette punkt kan ikke frigøres da det er forbundet med et skjult kortobjekt."
+                    }
+                }
             }
         },
         "restriction": {
@@ -413,6 +485,8 @@
             "modified": "Ændret",
             "deleted": "Slettet",
             "created": "Oprettet",
+            "outstanding_errors_message": "Løs venligst alle fejl først. Stadig {count} resterende.",
+            "comment_needed_message": "Tilføj venligst en kommentar til ændringssættet.",
             "about_changeset_comments": "Om kommentarer til ændringssæt",
             "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Du nævnte Google i denne kommentar: husk at kopiering fra Google Maps er strengt forbudt.",
@@ -512,13 +586,20 @@
             "all_tags": "Alle tags",
             "all_members": "Alle medlemmer",
             "all_relations": "Alle relationer",
+            "add_to_relation": "Tilføj til en relation",
             "new_relation": "Ny relation...",
             "choose_relation": "Vælg den overordnede relation",
             "role": "Rolle",
             "choose": "Vælg objekttype",
             "results": "{n} resultater for {search}",
+            "no_documentation_key": "Der er ingen dokumentation tilgængelig.",
+            "edit_reference": "rediger/oversæt",
             "wiki_reference": "Vis dokumentation",
             "wiki_en_reference": "Vis dokumentation på engelsk",
+            "hidden_preset": {
+                "manual": "{features} er skjulte. Aktiver dem i Kortdata-panelet.",
+                "zoom": "{features} er skjulte. Zoom ind for at se dem."
+            },
             "back_tooltip": "Ændr objekt",
             "remove": "Fjern",
             "search": "Søg",
@@ -562,6 +643,7 @@
             "overlays": "Overlægninger",
             "imagery_source_faq": "Luftfoto-information / anmeld problem",
             "reset": "nulstil",
+            "reset_all": "Nulstil alt.",
             "display_options": "Visningsindstillinger",
             "brightness": "Lysstyrke",
             "contrast": "Kontrast",
@@ -583,7 +665,7 @@
             "layers": {
                 "osm": {
                     "tooltip": "Kortdata fra OpenStreetMap",
-                    "title": "OpenStreetMap data"
+                    "title": "OpenStreetMap-data"
                 },
                 "notes": {
                     "tooltip": "Bemærkningsdata fra OpenStreetMap",
@@ -592,6 +674,10 @@
                 "keepRight": {
                     "tooltip": "Automatiskt detekterede kortproblemer fra keepright.at",
                     "title": "KeepRight-problemer"
+                },
+                "improveOSM": {
+                    "tooltip": "Manglende data som er automatisk detekteret af improveosm.org",
+                    "title": "ImproveOSM-problemer"
                 },
                 "custom": {
                     "tooltip": "Træk og slip en datafil ind på siden, eller klik på knappen for opsætning",
@@ -603,6 +689,22 @@
             "map_features": "Kortobjekter",
             "autohidden": "Disse objekter er automatisk blevet skjult, da for mange ellers ville blive vist på skærmen.\nDu kan zoome ind for at redigere dem.",
             "osmhidden": "Disse kortobjekter er blevet automatisk gemt fordi OpenStreetMap-laget er gemt."
+        },
+        "photo_overlays": {
+            "title": "Fotooverlægninger",
+            "traffic_signs": {
+                "title": "Trafikskilte"
+            },
+            "photo_type": {
+                "flat": {
+                    "title": "Flade fotoer",
+                    "tooltip": "Traditionelt optagne fotoer"
+                },
+                "panoramic": {
+                    "title": "Panoramafotoer",
+                    "tooltip": "360°-fotoer"
+                }
+            }
         },
         "feature": {
             "points": {
@@ -646,16 +748,18 @@
                 "tooltip": "Højspændingsmaster, kraftværker, transformatorstationer, osv."
             },
             "past_future": {
+                "description": "Fortidige/fremtidige kortobjekter",
                 "tooltip": "Planlagt, under konstruktion, forladt, nedrevet, osv."
             },
             "others": {
+                "description": "Andre kortobjekter",
                 "tooltip": "Alt andet"
             }
         },
         "area_fill": {
             "wireframe": {
-                "description": "Ingen fyld (trådnet)",
-                "tooltip": "Aktivering af trådnetsvisning tydeliggør luftfotoet i baggrunden.",
+                "description": "Ingen udfyldning (trådnet)",
+                "tooltip": "Aktivering af trådnetsvisning nedtoner kortdata og tydeliggør luftfotoet i baggrunden.",
                 "key": "W"
             },
             "partial": {
@@ -775,6 +879,9 @@
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
         "QA": {
+            "improveOSM": {
+                "title": "ImproveOSM-detektering"
+            },
             "keepRight": {
                 "title": "KeepRight-Fejl",
                 "detail_title": "Fejl",
@@ -934,26 +1041,22 @@
             }
         },
         "streetside": {
-            "tooltip": "Gadefotos fra Microsoft",
-            "title": "Foto-overlag (Bing Streetside)",
+            "tooltip": "Gadefotoer fra Microsoft",
             "report": "Rapporter en privatlivsbekymring angående dette billede",
             "view_on_bing": "Vis på Bing Maps",
             "hires": "Høj opløsning"
         },
         "mapillary_images": {
-            "tooltip": "Gadeniveau-billeder fra Mapillary",
-            "title": "Fotooverlægning (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Trafikskilte fra Mapillary (fotooverlægning skal være slået til)",
-            "title": "Trafikskilteoverlægning (Mapillary)"
+            "tooltip": "Gadefotoer fra Mapillary"
         },
         "mapillary": {
+            "signs": {
+                "tooltip": "Trafikskilte fra Mapillary"
+            },
             "view_on_mapillary": "Vis dette billede på Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Gadeniveau-billeder fra OpenStreetCam",
-            "title": "Fotooverlægning (OpenStreetCam)"
+            "tooltip": "Gadefoter fra OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Vis dette billede på OpenStreetCam"
@@ -992,7 +1095,7 @@
                 "title": "Hjælp",
                 "welcome": "Velkommen til iD - et redigeringsværktøj til [OpenStreetMap](https://www.openstreetmap.org/). Med dette værktøj kan du opdatere OpenStreetMap direkte fra din web-browser.",
                 "open_data_h": "Open Data",
-                "open_data": "Ændringer du laver i dette kort vil være synlige for alle der anvender OpenStreetMap. Dine redigeringer kan basere sig på personligt kendskab, opmåling og udforskning på stedet eller fotos fra luften eller gadeniveau. Kopiering fra enhver kommerciel kilde, såsom Google Maps, er [strengt forbudt](https://www.openstreetmap.org/copyright).",
+                "open_data": "Ændringer du laver i dette kort vil være synlige for alle der anvender OpenStreetMap. Dine redigeringer kan basere sig på personligt kendskab, opmåling og udforskning på stedet eller fotoer fra luften eller gadeniveau. Kopiering fra enhver kommerciel kilde, såsom Google Maps, er [strengt forbudt](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Før du starter",
                 "before_start": "Du bør gøre dig bekendt med OpenStreetMap og dette redigeringsværktøj før du begynder med egentlig redigering af kortet. iD indeholder en såkaldt Gennemgang som lærer dig de basale ting omkring redigering af OpenStreetMap. Klik på \"Start Gennemgang\" på denne side for at starte vejledningen - det tager kun omkring et kvarter.",
                 "open_source_h": "Open Source - Åben kildekode",
@@ -1072,12 +1175,18 @@
             },
             "imagery": {
                 "title": "Luftfoto i baggrunden",
-                "intro": "Luftfotoet der vises i baggrunden bagved kortet er en vigtig ressource under redigering af kortet. Dette kan bestå af ortografiske fotos opsamlet fra satellitter, fly eller droner, eller det kan være indskannede historiske kort eller andre frit tilgængelige kildedata.",
+                "intro": "Luftfotoet der vises i baggrunden bagved kortet er en vigtig ressource under redigering af kortet. Dette kan bestå af ortografiske fotoer opsamlet fra satellitter, fly eller droner, eller det kan være indskannede historiske kort eller andre frit tilgængelige kildedata.",
                 "sources_h": "Luftfoto-kilder",
                 "choosing": "For at se hvilke kilder til luftfoto der er tilgængelige i området, skal du klikke på knappen {layers} **Baggrundsindstillinger** i kortets side.",
                 "sources": "Som standard vises et satellit-lag fra [Bing Maps](https://www.bing.com/maps/) som baggrundsbillede. Afhængigt af hvor i verden du redigerer, kan der være andre luftfoto-kilder tilgængelige. Nogle kan være af nyere dato eller have højere opløsning end Bing, så det er altid smart at se efter hvilket lag der er bedst at bruge til at redigere kortet ud fra.",
                 "offsets_h": "Justering af luftfoto-offset",
                 "offset": "Den registrerede position for et luftfoto er nogle gange ikke helt korrekt i forhold til kortet. Hvis du ser at bygninger og veje generelt er forskudt mellem kort og luftfoto, kan det være luftfotoet der er unøjagtigt, så i stedet for at flytte alle kortobjekter kan du justere baggrunden så den er samstemmende med kortets data ved at åbne \"Juster luftfoto-offset\" i bunden af Baggrundsindstillinger-fanen."
+            },
+            "streetlevel": {
+                "intro": "Gadefotoer er brugbare til kortlægning af trafikskilte, forretninger og andre detaljer der ikke kan ses fra satellit og ortografiske-fotoer. iD-værktøjet understøtter gadefotoer fra [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), og [OpenStreetCam](https://www.openstreetcam.org)."
+            },
+            "qa": {
+                "tools": "De følgende værktøjer er understøttet for nuværende: [KeepRight](https://www.keepright.at/) og [ImproveOSM](https://improveosm.org/en/). Forvent at iD får understøttelse for [Osmose](https://osmose.openstreetmap.fr/) og andre kvalitetssikringsværktøjer i fremtiden."
             },
             "field": {
                 "restrictions": {
@@ -1115,6 +1224,63 @@
                         "indirect_example": "Disse begrænsninger eksisterer på grund af andre begrænsninger i nærheden. For eksempel vil en begrænsning med \"kun ligeudkørsel\" i et kryds skabe indirekte \"ingen sving\"-begrænsninger for alle øvrige veje gennem krydset.",
                         "indirect_noedit": "Du kan ikke redigere indirekte svingbegrænsninger. I stedet skal du redigere den nærtliggende direkte svingbegrænsning."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problemer",
+            "list_title": "Problemer ({count})",
+            "errors": {
+                "list_title": "Fejl ({count})"
+            },
+            "warnings": {
+                "list_title": "Advarsler ({count})"
+            },
+            "rules": {
+                "title": "Regler"
+            },
+            "options": {
+                "what": {
+                    "title": "Kontrollér:",
+                    "edited": "Mine redigeringer",
+                    "all": "Alting"
+                },
+                "where": {
+                    "title": "Hvor:",
+                    "visible": "I visningen",
+                    "all": "Overalt"
+                }
+            },
+            "suggested": "Foreslåede forbedringer:",
+            "enable_all": "Aktiver alle",
+            "disable_all": "Deaktiver alle",
+            "fix_one": {
+                "title": "ret"
+            },
+            "fix_all": {
+                "title": "Ret alle",
+                "annotation": "Rettede flere valideringsproblemer"
+            },
+            "almost_junction": {
+                "title": "Næsten-kryds",
+                "message": "{feature} er tæt på, men ikke forbundet til, {feature2}",
+                "tip": "Find kortobjekter der muligvis skulle have været forbundet til andre nærtliggende objekter",
+                "highway-highway": {
+                    "reference": "Veje der krydser hinanden bør have et fælles punkt."
+                }
+            },
+            "crossing_ways": {
+                "title": "Krydsende veje",
+                "message": "{feature} krydser {feature2}",
+                "tip": "Find kortobjekter der krydser hinanden på en forkert måde",
+                "building-building": {
+                    "reference": "Bygninger bør ikke skære hinanden medmindre de er i forskellige lag."
+                },
+                "building-highway": {
+                    "reference": "Veje der krydser bygninger bør være broer, tunneller, overdækninger eller indgange."
+                },
+                "building-railway": {
+                    "reference": "Jernbaner der krydser bygninger bør være broer eller tunneller."
                 }
             }
         },
@@ -1417,7 +1583,8 @@
                     "map_data": "Vis kortdata-indstillinger",
                     "fullscreen": "Aktiver fuldskærms-tilstand",
                     "sidebar": "Skift tilstand for sidebar",
-                    "wireframe": "Skift wireframe-tilstand",
+                    "wireframe": "Skift trådnet-tilstand",
+                    "osm_data": "Skift tilstand for OpenStreetMap-data",
                     "minimap": "Åbn/luk minikort"
                 },
                 "selecting": {
@@ -1458,12 +1625,10 @@
                     "continue_line": "Fortsæt linje fra markerede node",
                     "merge": "Kombiner (fusioner) markerede kortobjekter",
                     "disconnect": "Separér kortobjekter ved markerede node",
-                    "detach_node": "Afkobl markerede node fra overordnede linjer/områder.",
                     "split": "Opdel linje i to ved markerede node",
                     "reverse": "Vend retning på linje",
                     "move": "Flyt markerede kortobjekter",
                     "rotate": "Rotér markerede kortobjekter",
-                    "orthogonalize": "Gør linje lige / Gør områdes hjørner retvinklede",
                     "circularize": "Gør en lukket linje eller område rundt",
                     "reflect_long": "Spejl kortobjekt over den længste led",
                     "reflect_short": "Spejl kortobjekt over den korteste led",
@@ -1525,41 +1690,14 @@
                 "category-building": {
                     "name": "Bygningsegenskaber"
                 },
-                "category-golf-area": {
-                    "name": "Golf-egenskaber"
-                },
                 "category-landuse": {
                     "name": "Arealanvendelsesegenskaber"
-                },
-                "category-natural-area": {
-                    "name": "Naturobjekter"
-                },
-                "category-natural-line": {
-                    "name": "Naturobjekter"
-                },
-                "category-natural-point": {
-                    "name": "Naturobjekter"
-                },
-                "category-path": {
-                    "name": "Stiegenskaber"
-                },
-                "category-rail": {
-                    "name": "Jernbaneegenskaber"
                 },
                 "category-restriction": {
                     "name": "Restriktionsegenskaber"
                 },
-                "category-road": {
-                    "name": "Vejegenskaber"
-                },
                 "category-route": {
                     "name": "Ruteegenskaber"
-                },
-                "category-water-area": {
-                    "name": "Vandegenskaber"
-                },
-                "category-water-line": {
-                    "name": "Vandegenskaber"
                 }
             },
             "fields": {
@@ -2189,9 +2327,6 @@
                 "internet_access/fee": {
                     "label": "Internet gebyr"
                 },
-                "internet_access/ssid": {
-                    "label": "SSID (Netværksnavn)"
-                },
                 "junction/ref_oneway": {
                     "label": "Vejkrydsnummer"
                 },
@@ -2210,6 +2345,9 @@
                 "lanes": {
                     "label": "Vejbaner",
                     "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Sprog"
                 },
                 "layer": {
                     "label": "Lag"
@@ -2780,8 +2918,7 @@
                     "options": {
                         "bucket": "Spand",
                         "chemical": "Kemisk",
-                        "flush": "Træk & slip",
-                        "pitlatrine": "Latrin"
+                        "flush": "Træk & slip"
                     }
                 },
                 "toll": {
@@ -3107,7 +3244,7 @@
                 },
                 "amenity/car_wash": {
                     "name": "Bilvask",
-                    "terms": "Bilvask, Automobilvask"
+                    "terms": "Bilvask, Automobilvask,autovask"
                 },
                 "amenity/casino": {
                     "name": "Kasino",
@@ -3184,8 +3321,7 @@
                     "terms": "Køreskole, Trafikskole"
                 },
                 "amenity/embassy": {
-                    "name": "Ambassade",
-                    "terms": "Ambassade"
+                    "name": "Ambassade"
                 },
                 "amenity/fast_food": {
                     "name": "Fast food",
@@ -3236,6 +3372,10 @@
                 "amenity/kindergarten": {
                     "name": "Børnehavegrund",
                     "terms": "Børnehavegrund"
+                },
+                "amenity/language_school": {
+                    "name": "Sprogskole",
+                    "terms": "sprog,lingvistik,skole,uddannelse"
                 },
                 "amenity/library": {
                     "name": "Bibliotek"
@@ -3466,9 +3606,6 @@
                     "name": "Salgsautomat, feminin hygiejne",
                     "terms": "bind,tampon"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Avisautomat"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Avis-salgsautomat",
                     "terms": "Avis-salgsautomat, automat, avis"
@@ -3523,10 +3660,6 @@
                 "attraction/amusement_ride": {
                     "name": "Forlystelse",
                     "terms": "karrusel,tivoli,rutchebane"
-                },
-                "attraction/animal": {
-                    "name": "Dyr",
-                    "terms": "zoom,dyrepark,tiger,løve,giraf,bjørn"
                 },
                 "attraction/big_wheel": {
                     "name": "Pariserhjul",
@@ -4099,9 +4232,6 @@
                 "highway/bridleway": {
                     "name": "Ridesti",
                     "terms": "Ridesti, Hestesti"
-                },
-                "highway/bus_stop": {
-                    "name": "Busstop / trinbrædt"
                 },
                 "highway/corridor": {
                     "name": "Indendørskorridor",
@@ -4880,6 +5010,9 @@
                     "name": "Træ",
                     "terms": "Træ"
                 },
+                "natural/tree_row": {
+                    "name": "Trærække"
+                },
                 "natural/volcano": {
                     "name": "Vulkan",
                     "terms": "Vulkan"
@@ -5103,6 +5236,10 @@
                     "name": "Transformer",
                     "terms": "Transformer"
                 },
+                "public_transport/stop_area": {
+                    "name": "Stoppestedsområde",
+                    "terms": "stop,stoppested,station"
+                },
                 "railway": {
                     "name": "Jernbane"
                 },
@@ -5174,9 +5311,6 @@
                 "relation": {
                     "name": "Relation",
                     "terms": "Relation"
-                },
-                "roundabout": {
-                    "name": "Rundkørsel"
                 },
                 "route/ferry": {
                     "name": "Færgerute",
@@ -5258,8 +5392,7 @@
                     "terms": "Boghandler"
                 },
                 "shop/boutique": {
-                    "name": "Boutique",
-                    "terms": "Boutique"
+                    "name": "Boutique"
                 },
                 "shop/butcher": {
                     "name": "Slagter",
@@ -5271,15 +5404,15 @@
                 },
                 "shop/car": {
                     "name": "Bilforhandler",
-                    "terms": "Bilforhandler"
+                    "terms": "Bilforhandler,autoforhandler,bil,køretøj"
                 },
                 "shop/car_parts": {
-                    "name": "Autoudstyrsbutik",
-                    "terms": "Autoudstyrsbutik, Biludstyrsbutik"
+                    "name": "Biludstyrsbutik",
+                    "terms": "Autoudstyrsbutik, Biludstyrsbutik,bil,auto"
                 },
                 "shop/car_repair": {
-                    "name": "Autoværksted",
-                    "terms": "Autoværksted, Bilværksted,automekaniker,mekaniker"
+                    "name": "Bilværksted",
+                    "terms": "Autoværksted,bilværksted,automekaniker,mekaniker,værksted"
                 },
                 "shop/carpet": {
                     "name": "Tæppeforhandler",
@@ -5378,8 +5511,7 @@
                     "terms": "fødevarestand,frugtstand,gårdbutik,stalddørssalg"
                 },
                 "shop/fashion": {
-                    "name": "Modebutik",
-                    "terms": "Modebutik"
+                    "name": "Modebutik"
                 },
                 "shop/fishmonger": {
                     "name": "Fiskeforretning"
@@ -5446,6 +5578,10 @@
                 "shop/interior_decoration": {
                     "name": "Brugskunstbutik",
                     "terms": "Indendørsudsmykningsbutik, Indendørsudsmykning,brugskunst,kunst,indendørs,bolig"
+                },
+                "shop/jewelry": {
+                    "name": "Guldsmed",
+                    "terms": "smykke,ædelsten,ring,guld,sølv"
                 },
                 "shop/kitchen": {
                     "name": "Køkkenforhandler",
@@ -5695,7 +5831,7 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Autocamperplads",
-                    "terms": "Autocamperplads"
+                    "terms": "Autocamperplads,mobile home,camper,van"
                 },
                 "tourism/chalet": {
                     "name": "Feriehus"
@@ -5905,10 +6041,6 @@
                 "type/waterway": {
                     "name": "Vandvej"
                 },
-                "vertex": {
-                    "name": "Andre",
-                    "terms": "Andre"
-                },
                 "waterway": {
                     "name": "Vandvej"
                 },
@@ -6077,6 +6209,9 @@
                 "description": "Gul = Public domain kort-data fra US Census. Rød = Ingen data i OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Amerikansk skovvejs-overlag (U.S. Forest Service)"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMap-bidragsydere, CC by-SA 3.0"
@@ -6121,11 +6256,14 @@
                 "description": "Ortofoto-lag leveret af basemap.at. \"Efterfølger\" til geoimage.at.",
                 "name": "basemap.at Ortofoto"
             },
+            "kelkkareitit": {
+                "name": "Nordisk snescooter-overlag (Kelkkareitit.fi)"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Viser større objekter for at hjælpe dig med at finde vej.",
+                "description": "Viser større objekter ved høj zoom for at hjælpe dig med at finde vej.",
                 "name": "Lokaliserings-overlag"
             },
             "openpt_map": {
@@ -6138,7 +6276,7 @@
                 "attribution": {
                     "text": "© OpenStreetMap bidragsydere"
                 },
-                "description": "Offentlige GPS-spor uploaded til OpenStreetMap,",
+                "description": "Offentlige GPS-spor uploadet til OpenStreetMap.",
                 "name": "OpenStreetMap GPS-spor"
             },
             "osm-mapnik-black_and_white": {
