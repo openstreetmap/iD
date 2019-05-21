@@ -37,25 +37,20 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 and can now optionally validate everything downloaded OpenStreetMap.  We have added rules for validating highway
 connectivity, outdated tags, very close nodes, and nonsquare buildings.<br/>
 _Open the Issues pane to see what the new validator can do! (shortcut <kbd>I</kbd>)_
-
 * :triangular_ruler: Squaring used to be just for closed lines, but now the squaring
 tool can be used to square unclosed lines and individual corners.  **Importantly, we've changed the keyboard shortcut from
 <kbd>S</kbd> to <kbd>Q</kbd>.**  This is because lines can be both straightened or squared now,
 and <kbd>Q</kbd> matches the shortcut used by the JOSM editor.<br/>
 _Try squaring some lines, or corner nodes (but remember, the shortcut is now <kbd>Q</kbd>:exclamation:)_
-
 * :straight_ruler: Straightening used to be just for unclosed lines, but now the straightening
 tool can be used on sub-sections of lines, on multiple connected lines, and on individual points.<br/>
 _Try straightening points to make them line up perfectly (keyboard shortcut <kbd>S</kbd>)_
-
 * :ok_hand: The extraction tool got an upgrade as well.  Before you could detach points from lines, now
 the tool is named "extract" and you can extract points from areas too.<br/>
 _Try extracting features from areas when they are better mapped as points (keyboard shortcut <kbd>E</kbd>)_
-
 * :memo: We've made the raw tag editor even _raw-er_.  You can now toggle between list and text views when editing
 tags.  The text view is especially useful for copying and pasting tags!<br/>
 _Click the icons above the "All tags" section to toggle between list and text views._
-
 * :fries: The [name-suggestion-index](http://osmlab.github.io/name-suggestion-index/brands/) project that powers iD's brand search got a big upgrade too!  You can now find more brands than before, and brand logos will appear in the preset search results and in the feature editor.<br/>
 _Map all the branded businesses in your town!_
 
