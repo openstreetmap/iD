@@ -1529,7 +1529,7 @@ button.preset-favorite-button.active .icon {
 }
 
 .label-text .label-textannotation svg.icon {
-    margin: 0 10px;
+    margin: 0 8px;
     color: #333;
     opacity: 0.5;
     width: 14px;
