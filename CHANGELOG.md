@@ -86,6 +86,7 @@ _Map all the branded businesses in your town!_
 [#6279]: https://github.com/openstreetmap/iD/issues/6279
 [#6302]: https://github.com/openstreetmap/iD/issues/6302
 [#6299]: https://github.com/openstreetmap/iD/issues/6299
+[#6279]: https://github.com/openstreetmap/iD/issues/6279
 [#6217]: https://github.com/openstreetmap/iD/issues/6217
 [#6203]: https://github.com/openstreetmap/iD/issues/6203
 [#6185]: https://github.com/openstreetmap/iD/issues/6185
@@ -151,6 +152,7 @@ _Map all the branded businesses in your town!_
 [#5543]: https://github.com/openstreetmap/iD/issues/5543
 [#5503]: https://github.com/openstreetmap/iD/issues/5503
 [#4322]: https://github.com/openstreetmap/iD/issues/4322
+[#3812]: https://github.com/openstreetmap/iD/issues/3812
 [#2472]: https://github.com/openstreetmap/iD/issues/2472
 
 [@alphagamer7]: https://github.com/alphagamer7
@@ -272,6 +274,7 @@ _Map all the branded businesses in your town!_
 [#6028]: https://github.com/openstreetmap/iD/issues/6028
 [#5996]: https://github.com/openstreetmap/iD/issues/5996
 [#5831]: https://github.com/openstreetmap/iD/issues/5831
+[#5612]: https://github.com/openstreetmap/iD/issues/5612
 [#5212]: https://github.com/openstreetmap/iD/issues/5212
 [#4733]: https://github.com/openstreetmap/iD/issues/4733
 [#3613]: https://github.com/openstreetmap/iD/issues/3613
