@@ -2,6 +2,7 @@
     "icon": "fas-handshake",
     "fields": [
         "name",
+        "brand",
         "operator",
         "address",
         "building_area"
