@@ -10,11 +10,16 @@ import { geoSphericalDistance } from '../geo';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilHighlightEntities } from '../util';
+import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../util';
 
 
 export function uiIssues(context) {
     var key = t('issues.key');
+
+    var MINSQUARE = 0;
+    var MAXSQUARE = 20;
+    var DEFAULTSQUARE = 5;  // see also unsquare_way.js
+
     var _errorsSelection = d3_select(null);
     var _warningsSelection = d3_select(null);
     var _rulesList = d3_select(null);
@@ -564,10 +569,10 @@ export function uiIssues(context) {
 
         label
             .append('span')
-            .text(function(d) {
+            .html(function(d) {
                 var params = {};
                 if (d === 'unsquare_way') {
-                    params.val = 6.5;
+                    params.val = '<span class="square-degrees"></span>';
                 }
                 return t('issues.' + d + '.title', params);
             });
@@ -581,7 +586,77 @@ export function uiIssues(context) {
             .selectAll('input')
             .property('checked', active)
             .property('indeterminate', false);
+
+
+        // user-configurable square threshold
+        var degStr = context.storage('validate-square-degrees');
+        if (degStr === null) {
+            degStr = '' + DEFAULTSQUARE;
+        }
+
+        var span = items.selectAll('.square-degrees');
+        var input = span.selectAll('.square-degrees-input')
+            .data([0]);
+
+        // enter / update
+        input.enter()
+            .append('input')
+            .attr('type', 'number')
+            .attr('min', '' + MINSQUARE)
+            .attr('max', '' + MAXSQUARE)
+            .attr('step', '0.5')
+            .attr('class', 'square-degrees-input')
+            .call(utilNoAuto)
+            .on('input', function() {
+                this.style.width = (this.value.length + 1) + 'ch';   // resize
+            })
+            .on('click', function () {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                this.select();
+            })
+            .on('keyup', function () {
+                if (d3_event.keyCode === 13) { // enter
+                    this.blur();
+                    this.select();
+                }
+            })
+            .on('blur', changeSquare)
+            .merge(input)
+            .property('value', degStr)
+            .style('width', (degStr.length + 1) + 'ch');   // resize
     }
+
+
+    function changeSquare() {
+        var input = d3_select(this);
+        var degStr = utilGetSetValue(input).trim();
+        var degNum = parseFloat(degStr, 10);
+
+        if (!isFinite(degNum)) {
+            degNum = DEFAULTSQUARE;
+        } else if (degNum > MAXSQUARE) {
+            degNum = MAXSQUARE;
+        } else if (degNum < MINSQUARE) {
+            degNum = MINSQUARE;
+        }
+
+        degNum = Math.round(degNum * 10 ) / 10;   // round to 1 decimal
+        degStr = '' + degNum;
+
+        input
+            .property('value', degStr)
+            .style('width', (degStr.length + 1) + 'ch');   // resize
+
+        context.storage('validate-square-degrees', degStr);
+        context.validator().changeSquareThreshold(degNum);
+    }
+
+
+    function hidePane() {
+        context.ui().togglePanes();
+    }
+
 
 
     var paneTooltip = tooltip()
@@ -589,10 +664,6 @@ export function uiIssues(context) {
         .html(true)
         .title(uiTooltipHtml(t('issues.title'), key));
 
-
-    function hidePane() {
-        context.ui().togglePanes();
-    }
 
 
     uiIssues.togglePane = function() {

@@ -1,23 +1,21 @@
 import { t } from '../util/locale';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
-import { geoOrthoCanOrthogonalize, geoOrthoMaxOffsetAngle } from '../geo/ortho';
+import { geoOrthoCanOrthogonalize } from '../geo/ortho';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationUnsquareWay() {
     var type = 'unsquare_way';
+    var DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
 
     // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
     var epsilon = 0.05;
-    var degreeThreshold = 13;
-    var autofixDegreeThreshold = 6.5;
     var nodeThreshold = 10;
 
     function isBuilding(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
-
         return entity.tags.building && entity.tags.building !== 'no';
     }
 
@@ -55,15 +53,18 @@ export function validationUnsquareWay() {
         if (hasConnectedSquarableWays) return [];
 
 
+        // user-configurable square threshold
+        var storedDegreeThreshold = context.storage('validate-square-degrees');
+        var degreeThreshold = isNaN(storedDegreeThreshold) ? DEFAULT_DEG_THRESHOLD : parseFloat(storedDegreeThreshold);
+
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
         var autoArgs;
-        // only allow autofixing features that are very close to square already
-        var maxOffsetAngle = geoOrthoMaxOffsetAngle(points, isClosed, degreeThreshold);
-        if (maxOffsetAngle && maxOffsetAngle < autofixDegreeThreshold) {
-            // note: use default params for actionOrthogonalize, not relaxed epsilon
-            var autoAction = actionOrthogonalize(entity.id, context.projection);
+        // don't allow autosquaring features linked to wikidata
+        if (!entity.tags.wikidata) {
+            // use same degree threshold as for detection
+            var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
             autoArgs = [autoAction, t('operations.orthogonalize.annotation.area')];
         }
@@ -77,7 +78,7 @@ export function validationUnsquareWay() {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(autoArgs !== undefined),
+            hash: JSON.stringify(autoArgs !== undefined) + degreeThreshold,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-orthogonalize',
@@ -85,9 +86,9 @@ export function validationUnsquareWay() {
                     autoArgs: autoArgs,
                     onClick: function(completionHandler) {
                         var entityId = this.issue.entityIds[0];
-                        // note: use default params for actionOrthogonalize, not relaxed epsilon
+                        // use same degree threshold as for detection
                         context.perform(
-                            actionOrthogonalize(entityId, context.projection),
+                            actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
                             t('operations.orthogonalize.annotation.area')
                         );
                         // run after the squaring transition (currently 150ms)
