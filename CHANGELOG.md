@@ -67,10 +67,10 @@ _Map all the branded businesses in your town!_
   -  :warning: Code refactor: use `window.requestIdleCallback` instead
 
 #### :tada: New Features
-- Include street-level photo sources used during editing in the `source` changeset tag ([#6279])
 - Add raw text tag editor with copy-and-paste support ([#839], [#6185], [#6302])
 - Add drag-and-drop reordering of relation members ([#2283])
 - Add controls to filter between panoramic vs. flat photos ([#5433])
+- Include street-level photo sources used during editing in the `source` changeset tag ([#6279])
 - Add Downgrade operation that removes all tags except for addresses and building info ([#6103])
 - Allow extracting points of interest from buildings and other areas ([#6203])
 - Allow squaring unclosed lines ([#5093], [#5999])
@@ -81,7 +81,9 @@ _Map all the branded businesses in your town!_
 - Allow disconnecting entire lines or areas at once ([#4245])
 - Allow disconnecting multiple selected points at once ([#6164])
 - Allow disconnecting closed lines at their endpoint node ([#6149], [#6161], thanks [@jguthrie100])
+- Add YouthMappers chapters to the community entries that appear after saving
 
+[#6279]: https://github.com/openstreetmap/iD/issues/6279
 [#6302]: https://github.com/openstreetmap/iD/issues/6302
 [#6299]: https://github.com/openstreetmap/iD/issues/6299
 [#6217]: https://github.com/openstreetmap/iD/issues/6217
