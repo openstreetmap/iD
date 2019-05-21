@@ -2903,6 +2903,11 @@ en:
         name: Post Office
         # 'terms: letter,mail'
         terms: '<translate with synonyms or related terms for ''Post Office'', separated by commas>'
+      amenity/prep_school:
+        # amenity=prep_school
+        name: Test Prep / Tutoring School
+        # 'terms: academic,ACT,SAT,homework,math,reading,test prep,tutoring,writing'
+        terms: '<translate with synonyms or related terms for ''Test Prep / Tutoring School'', separated by commas>'
       amenity/prison:
         # amenity=prison
         name: Prison Grounds
@@ -5822,6 +5827,11 @@ en:
         # office=financial
         name: Financial Office
         terms: '<translate with synonyms or related terms for ''Financial Office'', separated by commas>'
+      office/financial_advisor:
+        # office=financial_advisor
+        name: Financial Advisor
+        # 'terms: 401k,inheritance,savings,stocks,retirement,wealth management'
+        terms: '<translate with synonyms or related terms for ''Financial Advisor'', separated by commas>'
       office/forestry:
         # office=forestry
         name: Forestry Office

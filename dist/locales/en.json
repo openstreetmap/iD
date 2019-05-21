@@ -4905,6 +4905,10 @@
                     "name": "Post Office",
                     "terms": "letter,mail"
                 },
+                "amenity/prep_school": {
+                    "name": "Test Prep / Tutoring School",
+                    "terms": "academic,ACT,SAT,homework,math,reading,test prep,tutoring,writing"
+                },
                 "amenity/prison": {
                     "name": "Prison Grounds",
                     "terms": "cell,jail"
@@ -7420,6 +7424,10 @@
                 "office/estate_agent": {
                     "name": "Real Estate Office",
                     "terms": "real estate"
+                },
+                "office/financial_advisor": {
+                    "name": "Financial Advisor",
+                    "terms": "401k,inheritance,savings,stocks,retirement,wealth management"
                 },
                 "office/financial": {
                     "name": "Financial Office",
