@@ -88,6 +88,18 @@ A features can only match one preset even if its tags and geometry could technic
 
 This property is required. There is no default.
 
+##### `aliases`
+
+A list of aliases beside the name for this preset. Optional.
+
+Aliases, like names, use [title case](https://en.wikipedia.org/wiki/Letter_case#Title_case). 
+
+This may be displayed alongside `name` in the result list when searching for presets.
+
+##### `terms`
+
+A list of related terms beside the name and aliases with which the preset should be found. Optional.
+
 ##### `addTags`
 
 The tags that are added to the feature when selecting this preset. Defaults to `tags`. If needed, this property will typically be a superset of `tags`.

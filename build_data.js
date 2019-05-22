@@ -294,7 +294,7 @@ function generatePresets(tstrings, faIcons, tnpIcons) {
         validate(file, preset, presetSchema);
 
         tstrings.presets[id] = {
-            name: preset.name,
+            name: [preset.name].concat(preset.aliases || []).join(','),
             terms: (preset.terms || []).join(',')
         };
 
@@ -351,14 +351,17 @@ function generateTranslations(fields, presets, tstrings) {
         var tags = p.tags || {};
         var keys = Object.keys(tags);
 
+        var tagsDescription = keys.map(function(k) { return k + '=' + tags[k]; }).join(', ');
+
         if (keys.length) {
-            preset['name#'] = keys.map(function(k) { return k + '=' + tags[k]; }).join(', ');
+            preset['name#'] = `Name for '${tagsDescription}'. Aliases may be added after the name, separated by commas.`;
         }
         if (p.searchable !== false) {
+            preset['terms#'] = `Related terms beside the name and aliases with which the preset for '${tagsDescription}' should be found, separated by commas. '<>' if none are eligible.`;
             if (p.terms && p.terms.length) {
-                preset['terms#'] = 'terms: ' + p.terms.join();
+                preset['terms#'] += ' English terms: ' + p.terms.join();
             }
-            preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
+            preset.terms = '<>';
         } else {
             delete preset.terms;
         }
@@ -652,8 +655,28 @@ function writeEnJson(tstrings) {
         var imagery = YAML.load(data[1]);
         var community = YAML.load(data[2]);
 
+        function transifexToPreset(transifex) {
+            var names = transifex.name.trim().split(/\s*,+\s*/);
+            var preset = {};
+            preset.name = names[0];
+            if(names.length > 1) preset.aliases = names.slice(1);
+            // terms stay Transifex'ied (comma separated string)
+            if(transifex.terms.length) preset.terms = transifex.terms;
+            return preset;
+        }
+
+        var tstringPresets = {};
+        for (const id of Object.keys(tstrings.presets)) {
+            tstringPresets[id] = transifexToPreset(tstrings.presets[id]);
+        }
+        var enjsonPresetStrings = {
+            categories: tstrings.categories,
+            fields: tstrings.fields,
+            presets: tstringPresets
+        };
+
         var enjson = core;
-        enjson.en.presets = tstrings;
+        enjson.en.presets = enjsonPresetStrings;
         enjson.en.imagery = imagery.en.imagery;
         enjson.en.community = community.en;
 

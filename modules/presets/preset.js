@@ -140,7 +140,6 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.originalName = preset.name || '';
 
-
     preset.name = function() {
         if (preset.suggestion) {
             var path = id.split('/');
@@ -154,11 +153,15 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.originalTerms = (preset.terms || []).join();
 
-
     preset.terms = function() {
         return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
+    preset.originalAliases = (preset.aliases || []);
+
+    preset.aliases = function() {
+        return preset.t('aliases', { 'default': preset.originalAliases });
+    };
 
     preset.isFallback = function() {
         var tagCount = Object.keys(preset.tags).length;

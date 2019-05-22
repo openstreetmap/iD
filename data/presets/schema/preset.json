@@ -63,8 +63,15 @@
             "description": "The URL of a remote image that is more specific than 'icon'",
             "type": "string"
         },
+        "aliases": {
+            "description": "English aliases / synonyms",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "terms": {
-            "description": "English synonyms or related terms",
+            "description": "English related terms / keywords",
             "type": "array",
             "items": {
                 "type": "string"
