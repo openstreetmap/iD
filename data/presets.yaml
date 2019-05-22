@@ -5460,6 +5460,11 @@ en:
         name: Storage Tank
         # 'terms: water,oil,gas,petrol'
         terms: '<translate with synonyms or related terms for ''Storage Tank'', separated by commas>'
+      man_made/storage_tank/water:
+        # 'man_made=storage_tank, content=water'
+        name: Water Tank
+        # 'terms: cistern,water tower'
+        terms: '<translate with synonyms or related terms for ''Water Tank'', separated by commas>'
       man_made/street_cabinet:
         # man_made=street_cabinet
         name: Street Cabinet

@@ -7128,6 +7128,10 @@
                     "name": "Storage Tank",
                     "terms": "water,oil,gas,petrol"
                 },
+                "man_made/storage_tank/water": {
+                    "name": "Water Tank",
+                    "terms": "cistern,water tower"
+                },
                 "man_made/street_cabinet": {
                     "name": "Street Cabinet",
                     "terms": "cable tv,monitoring box,technical box,telecommunications,traffic signal controls"
