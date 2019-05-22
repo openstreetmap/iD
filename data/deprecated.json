@@ -476,6 +476,18 @@
       "replace": {"telecom": "exchange"}
     },
     {
+      "old": {"man_made": "fuel_storage_tank"},
+      "replace": {"man_made": "storage_tank", "content": "fuel"}
+    },
+    {
+      "old": {"man_made": "oil_tank"},
+      "replace": {"man_made": "storage_tank", "content": "oil"}
+    },
+    {
+      "old": {"man_made": "wastewater_tank"},
+      "replace": {"man_made": "storage_tank", "content": "wastewater"}
+    },
+    {
       "old": {"man_made": "water_tank"},
       "replace": {"man_made": "storage_tank", "content": "water"}
     },
