@@ -22,9 +22,20 @@ describe('iD.presetCollection', function() {
         }),
         sandpit: iD.presetPreset('__test/amenity/grit_bin', {
             name: 'Sandpit',
+            aliases: ['Grit Bin'],
             tags: { amenity: 'grit_bin' },
+            geometry: ['point']
+        }),
+        griffin_nest: iD.presetPreset('__test/natural/griffin_nest', {
+            name: 'Fantasy Bird Nest',
+            tags: { natural: 'griffin_nest' },
+            geometry: ['point']
+        }),
+        grillos_burgers: iD.presetPreset('__test/amenity/fast_food/burger/Grillo\'s_Burgers', {
+            name: 'Grillo\'s Burgers',
+            tags: { amenity: 'fast_food', cuisine: 'burger', name: 'Grillo\'s Burgers' },
             geometry: ['point'],
-            terms: []
+            suggestion: true
         }),
         residential: iD.presetPreset('__test/highway/residential', {
             name: 'Residential Area',
@@ -53,6 +64,11 @@ describe('iD.presetCollection', function() {
             geometry: ['point', 'area'],
             terms: [ 'cars' ]
         }),
+        bicycle_parking: iD.presetPreset('__test/amenity/bicycle_parking', {
+            name: 'Bicycle Parking',
+            tags: { amenity: 'bicycle_parking' },
+            geometry: ['point', 'area']
+        }),
         soccer: iD.presetPreset('__test/leisure/pitch/soccer', {
             name: 'Soccer Field',
             tags: { leisure: 'pitch', sport: 'soccer' },
@@ -64,13 +80,31 @@ describe('iD.presetCollection', function() {
             tags: { leisure: 'pitch', sport: 'american_football' },
             geometry: ['point', 'area'],
             terms: ['gridiron']
+        }),
+        tennis: iD.presetPreset('__test/leisure/pitch/tennis', {
+            name: 'Tennis Field',
+            tags: { leisure: 'pitch', sport: 'tennis' },
+            geometry: ['point'],
+        }),
+        tetris: iD.presetPreset('__test/leisure/pitch/tetris', {
+            name: 'Tetris Field',
+            tags: { leisure: 'pitch', sport: 'tetris' },
+            geometry: ['point'],
+        }),
+        bicycle: iD.presetPreset('__test/barrier/bicycle', {
+            name: 'Bicycle',
+            tags: { barrier: 'bicycle' },
+            geometry: ['point'],
+            matchScore: 0.5
         })
     };
 
 
     var c = iD.presetCollection([
         p.point, p.line, p.area, p.grill, p.sandpit, p.residential,
-        p.grass1, p.grass2, p.park, p.parking, p.soccer, p.football
+        p.grass1, p.grass2, p.park, p.parking, p.soccer, p.football,
+        p.tennis, p.tetris, p.bicycle_parking, p.bicycle, p.grillos_burgers,
+        p.griffin_nest
     ]);
 
     describe('#item', function() {
@@ -97,49 +131,79 @@ describe('iD.presetCollection', function() {
     });
 
     describe('#search', function() {
+
+        function toPreset(a) { return a.preset; }
+        function toName(a) { return a.preset.originalName; }
+
         it('matches leading name', function() {
-            var col = c.search('resid', 'area').collection;
-            expect(col.indexOf(p.residential)).to.eql(0);  // 1. 'Residential' (by name)
+            expect(c.search('resid', 'area')[0]).to.eql({ preset: p.residential });
         });
 
-        it('returns alternate matches in correct order', function() {
-            var col = c.search('gri', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.grill), 'Grill').to.eql(0);            // 1. 'Grill' (leading name)
-            expect(col.indexOf(p.football), 'Football').to.eql(1);      // 2. 'Football' (leading term 'gridiron')
-            expect(col.indexOf(p.sandpit), 'Sandpit').to.eql(2);        // 3. 'Sandpit' (leading tag value 'grit_bin')
-            expect(col.indexOf(p.grass1), 'Grass').to.be.within(3,5);   // 4. 'Grass' (similar name)
-            expect(col.indexOf(p.grass2), 'Ğṝȁß').to.be.within(3,5);    // 5. 'Ğṝȁß' (similar name)
-            expect(col.indexOf(p.park), 'Park').to.be.within(3,5);      // 6. 'Park' (similar term 'grass')
-        });
+        describe('sorting result list', function() {
 
-        it('sorts preset with matchScore penalty below others', function() {
-            var col = c.search('par', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.parking), 'Parking').to.eql(0);   // 1. 'Parking' (default matchScore)
-            expect(col.indexOf(p.park), 'Park').to.eql(1);         // 2. 'Park' (low matchScore)
-        });
+            it('returns alternate matches in correct order', function() {
+                var leadingMatches = c.search('gri').map(toName).slice(0, 5);
+                expect(leadingMatches).to.eql([
+                    'Grill',             // 1. leading name
+                    'Sandpit',           // 2. leading alias 'Grit Bin'
+                    'Grillo\'s Burgers', // 3. leading suggestion name
+                    'Football Field',    // 4. leading term 'gridiron'
+                    'Fantasy Bird Nest', // 5. leading tag value 'griffin_nest'
+                ]);
+            });
 
-        it('ignores matchScore penalty for exact name match', function() {
-            var col = c.search('park', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.park), 'Park').to.eql(0);         // 1. 'Park' (low matchScore)
-            expect(col.indexOf(p.parking), 'Parking').to.eql(1);   // 2. 'Parking' (default matchScore)
+            it('sorts matches earlier in word first', function() {
+                var firstNames = c.search('par').map(toName).slice(0,3);
+                expect(firstNames).to.eql([
+                    'Park',           // cause it is shorter
+                    'Parking',       
+                    'Bicycle Parking' // cause it matches the word later
+                ]);
+            });
+
+            it('sorts less fuzzy matches above more fuzzy matches', function() {
+                var firstNames = c.search('terris').map(toName).slice(0,2);
+                expect(firstNames).to.eql([
+                    'Tetris Field',   // 1. fuzziness = 1
+                    'Tennis Field',   // 2. fuzziness = 2
+                ]);
+            });
+
+            it('sorts preset with matchScore penalty below others', function() {
+                var firstNames = c.search('bicyc').map(toName).slice(0,2);
+                expect(firstNames).to.eql([
+                    'Bicycle Parking',   // 1. default matchScore
+                    'Bicycle',           // 2. low matchScore
+                ]); 
+            });
+
+            it('ignores matchScore penalty for exact name match', function() {
+                var firstNames = c.search('bicycle').map(toName).slice(0,2);
+                expect(firstNames).to.eql([
+                    'Bicycle',           // 1. low matchScore
+                    'Bicycle Parking',   // 2. default matchScore
+                ]);
+            });
+
         });
 
         it('considers diacritics on exact matches', function() {
-            var col = c.search('ğṝȁ', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.grass2), 'Ğṝȁß').to.eql(0);    // 1. 'Ğṝȁß'  (leading name)
-            expect(col.indexOf(p.grass1), 'Grass').to.eql(1);   // 2. 'Grass' (similar name)
+            var firstNames = c.matchGeometry('point').search('ğṝȁ').map(toName).slice(0,2);
+            expect(firstNames).to.eql([
+                'Ğṝȁß',     // 1. leading name
+                'Grass'     // 2. similar name
+            ]);
         });
 
         it('replaces diacritics on fuzzy matches', function() {
-            var col = c.search('graß', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.grass1), 'Grass').to.be.within(0,1);   // 1. 'Grass' (similar name)
-            expect(col.indexOf(p.grass2), 'Ğṝȁß').to.be.within(0,1);    // 2. 'Ğṝȁß'  (similar name)
+            var names = iD.presetCollection([p.grass1, p.grass2]).search('graß').map(toName);
+            expect(names).to.include.members(['Ğṝȁß', 'Grass']);
         });
 
         it('includes the appropriate fallback preset', function() {
-            expect(c.search('foo', 'point').collection, 'point').to.include(p.point);
-            expect(c.search('foo', 'line').collection, 'line').to.include(p.line);
-            expect(c.search('foo', 'area').collection, 'area').to.include(p.area);
+            expect(c.search('foo', 'point').map(toPreset), 'point').to.include(p.point);
+            expect(c.search('foo', 'line').map(toPreset), 'line').to.include(p.line);
+            expect(c.search('foo', 'area').map(toPreset), 'area').to.include(p.area);
         });
 
         it('excludes presets with searchable: false', function() {
@@ -150,7 +214,41 @@ describe('iD.presetCollection', function() {
                 searchable: false
             });
             var collection = iD.presetCollection([excluded, p.point]);
-            expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
+            var presets = collection.search('excluded', 'point').map(toPreset);
+            expect(presets).not.to.include(excluded);
+        });
+
+        describe('match properties', function() {
+
+            it('returns term in match results', function() {
+                var matches = iD.presetCollection([p.soccer]).search('fußball');
+                expect(matches).to.eql([ { preset: p.soccer, term: 'fußball' } ]);
+            });
+
+            it('returns alias in match results', function() {
+                var matches = iD.presetCollection([p.sandpit]).search('Grit Bin');
+                expect(matches).to.eql([ { preset: p.sandpit, alias: 'Grit Bin' } ]);
+            });
+
+            it('returns tagValue in match results', function() {
+                var matches = iD.presetCollection([p.griffin_nest]).search('griffin');
+                expect(matches).to.eql([ { preset: p.griffin_nest, tagValue: 'griffin_nest' } ]);
+            });
+
+            it('returns fuzziness in fuzzy name match result', function() {
+                var matches = iD.presetCollection([p.sandpit]).search('sendpot');
+                expect(matches).to.eql([ { preset: p.sandpit, fuzziness: 2 } ]);
+            });
+
+            it('returns fuzziness and term in fuzzy term match result', function() {
+                var matches = iD.presetCollection([p.soccer]).search('fußback');
+                expect(matches).to.eql([ { preset: p.soccer, term: 'fußball', fuzziness: 2 } ]);
+            });
+
+            it('returns fuzziness and alias in fuzzy alias match result', function() {
+                var matches = iD.presetCollection([p.sandpit]).search('Great Bin');
+                expect(matches).to.eql([ { preset: p.sandpit, alias: 'Grit Bin', fuzziness: 2 } ]);
+            });
         });
     });
 });
