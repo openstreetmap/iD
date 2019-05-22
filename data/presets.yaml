@@ -1593,6 +1593,9 @@ en:
           required: Required
           # reservation=yes
           'yes': Accepted
+      resort:
+        # resort=*
+        label: Type
       resource:
         # resource=*
         label: Resources
@@ -4902,6 +4905,11 @@ en:
         name: Vineyard
         # 'terms: grape,wine'
         terms: '<translate with synonyms or related terms for ''Vineyard'', separated by commas>'
+      landuse/winter_sports:
+        # landuse=winter_sports
+        name: Winter Sports Area
+        # 'terms: piste area,ski area,ski hill,ski mountain,ski resort,snow board area,snowboard area'
+        terms: '<translate with synonyms or related terms for ''Winter Sports Area'', separated by commas>'
       leisure:
         # leisure=*
         name: Leisure
@@ -5203,6 +5211,7 @@ en:
       leisure/resort:
         # leisure=resort
         name: Resort
+        # 'terms: recreation center,sanatorium,ski and snowboard resort,vacation resort,winter sports resort'
         terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
       leisure/sauna:
         # leisure=sauna
