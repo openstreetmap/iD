@@ -12,6 +12,7 @@ export function validationPrivateData() {
         detached: true,
         farm: true,
         house: true,
+        houseboat: true,
         residential: true,
         semidetached_house: true,
         static_caravan: true
@@ -23,6 +24,7 @@ export function validationPrivateData() {
         craft: true,
         historic: true,
         leisure: true,
+        office: true,
         shop: true,
         tourism: true
     };
