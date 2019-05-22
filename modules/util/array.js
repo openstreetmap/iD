@@ -137,3 +137,16 @@ export function utilArrayUniqBy(a, key) {
     }, []);
 }
 
+// like Array.prototype.map(fn), only that null elements and elements for
+// which the function returns something are filtered out.
+// utilArrayMapTruthy([1,2,null,3,4,5], a => a%2 ? a*2 : null) == [2,6,10]
+export function utilArrayMapTruthy(a, fn) {
+    var result = [];
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] != null) {
+            var r = fn.call(null, a[i], i, a);
+            if (r != null) result.push(r);
+        }
+    }
+    return result;
+}

@@ -120,4 +120,17 @@ describe('iD.utilArray', function() {
         });
     });
 
+    describe('utilArrayMapTruthy', function() {
+
+        it('ignores nulls in input array', function() {
+            expect(iD.utilArrayMapTruthy([0,1,null,2,null], function(a) { return a; } ))
+                .to.eql([0,1,2]);
+        });
+
+        it('maps truthy values', function() {
+            expect(iD.utilArrayMapTruthy([1,2,3,4,5], function(a) { if (a%2) return a*2; } ))
+                .to.eql([2,6,10]);
+        });
+    });
+
 });
