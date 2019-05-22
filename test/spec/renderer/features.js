@@ -306,11 +306,28 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('buildings', [
-                'building_yes', 'building_part',
+                'building_yes',
                 'garage1', 'garage2', 'garage3', 'garage4'
             ]);
 
             dontMatch('buildings', [
+                'building_no', 'point_bar', 'motorway', 'service', 'path',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence'
+            ]);
+        });
+
+
+        it('matches building_parts', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('building_parts', [
+                'building_part'
+            ]);
+
+            dontMatch('building_parts', [
+                'building_yes',
+                'garage1', 'garage2', 'garage3', 'garage4',
                 'building_no', 'point_bar', 'motorway', 'service', 'path',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
