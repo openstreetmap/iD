@@ -239,7 +239,7 @@ export function validationAlmostJunction() {
 
                 for (var j = 0; j < way2.nodes.length - 1; j++) {
                     var nAid = way2.nodes[j],
-                        nBid = way2.nodes[j + 1]
+                        nBid = way2.nodes[j + 1];
 
                     if (nAid === tipNid || nBid === tipNid) continue;
 

@@ -1644,9 +1644,13 @@
             },
             "close_nodes": {
                 "title": "Very Close Points",
+                "tip": "Find redundant and crowded points",
                 "message": "Two points in {way} are very close together",
-                "tip": "Find redundant points in ways",
-                "reference": "Redundant points in a way should be merged or moved apart."
+                "reference": "Redundant points in a way should be merged or moved apart.",
+                "detached": {
+                    "message": "{feature} is too close to {feature2}",
+                    "reference": "Separate points should not share a location."
+                }
             },
             "crossing_ways": {
                 "title": "Crossings Ways",

@@ -3,36 +3,38 @@ import { utilDisplayLabel } from '../util';
 import { t } from '../util/locale';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmPathHighwayTagValues } from '../osm/tags';
-import { geoSphericalDistance } from '../geo/geo';
-
+import { geoMetersToLat, geoMetersToLon, geoSphericalDistance } from '../geo/geo';
+import { geoExtent } from '../geo/extent';
 
 export function validationCloseNodes() {
     var type = 'close_nodes';
 
+    var pointThresholdMeters = 0.2;
+
+    var defaultWayThresholdMeters = 0.2;
     // expect some features to be mapped with higher levels of detail
     var indoorThresholdMeters = 0.01;
     var buildingThresholdMeters = 0.05;
     var pathThresholdMeters = 0.1;
-    var defaultThresholdMeters = 0.2;
 
     function featureTypeForWay(way, graph) {
 
-        if (osmPathHighwayTagValues[way.tags.highway]) return 'path';
-
+        if (way.tags.boundary && way.tags.boundary !== 'no') return 'boundary';
         if (way.tags.indoor && way.tags.indoor !== 'no') return 'indoor';
         if ((way.tags.building && way.tags.building !== 'no') ||
             (way.tags['building:part'] && way.tags['building:part'] !== 'no')) return 'building';
-        if (way.tags.boundary && way.tags.boundary !== 'no') return 'boundary';
+        if (osmPathHighwayTagValues[way.tags.highway]) return 'path';
 
         var parentRelations = graph.parentRelations(way);
         for (var i in parentRelations) {
             var relation = parentRelations[i];
+
+            if (relation.tags.type === 'boundary') return 'boundary';
+
             if (relation.isMultipolygon()) {
                 if (relation.tags.indoor && relation.tags.indoor !== 'no') return 'indoor';
                 if ((relation.tags.building && relation.tags.building !== 'no') ||
                     (relation.tags['building:part'] && relation.tags['building:part'] !== 'no')) return 'building';
-            } else {
-                if (relation.tags.type === 'boundary') return 'boundary';
             }
         }
 
@@ -65,21 +67,19 @@ export function validationCloseNodes() {
             var node1 = nodes[i];
             var node2 = nodes[i+1];
 
-            var issue = getIssueIfAny(node1, node2, way, context);
+            var issue = getWayIssueIfAny(node1, node2, way, context);
             if (issue) issues.push(issue);
         }
         return issues;
     }
 
-    function getIssuesForNode(node, context) {
+    function getIssuesForVertex(node, parentWays, context) {
         var issues = [];
 
         function checkForCloseness(node1, node2, way) {
-            var issue = getIssueIfAny(node1, node2, way, context);
+            var issue = getWayIssueIfAny(node1, node2, way, context);
             if (issue) issues.push(issue);
         }
-
-        var parentWays = context.graph().parentWays(node);
 
         for (var i = 0; i < parentWays.length; i++) {
             var parentWay = parentWays[i];
@@ -100,11 +100,78 @@ export function validationCloseNodes() {
                 }
             }
         }
-
         return issues;
     }
 
-    function getIssueIfAny(node1, node2, way, context) {
+    function getIssuesForDetachedPoint(node, context) {
+
+        var issues = [];
+
+        var lon = node.loc[0];
+        var lat = node.loc[1];
+        var lon_range = geoMetersToLon(pointThresholdMeters, lat) / 2;
+        var lat_range = geoMetersToLat(pointThresholdMeters) / 2;
+        var queryExtent = geoExtent([
+            [lon - lon_range, lat - lat_range],
+            [lon + lon_range, lat + lat_range]
+        ]);
+
+        var intersected = context.history().tree().intersects(queryExtent, context.graph());
+        for (var j = 0; j < intersected.length; j++) {
+            var nearby = intersected[j];
+
+            if (nearby.id === node.id) continue;
+            if (nearby.type !== 'node' || nearby.geometry(context.graph()) !== 'point') continue;
+
+            if (nearby.loc === node.loc ||
+                geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
+
+                issues.push(new validationIssue({
+                    type: type,
+                    severity: 'warning',
+                    message: function() {
+                        var entity = context.hasEntity(this.entityIds[0]),
+                            entity2 = context.hasEntity(this.entityIds[1]);
+                        return (entity && entity2) ? t('issues.close_nodes.detached.message', {
+                            feature: utilDisplayLabel(entity, context),
+                            feature2: utilDisplayLabel(entity2, context)
+                        }) : '';
+                    },
+                    reference: showReference,
+                    entityIds: [node.id, nearby.id],
+                    fixes: [
+                        new validationIssueFix({
+                            icon: 'iD-operation-disconnect',
+                            title: t('issues.fix.move_points_apart.title')
+                        })
+                    ]
+                }));
+            }
+        }
+
+        return issues;
+
+        function showReference(selection) {
+            var referenceText = t('issues.close_nodes.detached.reference');
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(referenceText);
+        }
+    }
+
+    function getIssuesForNode(node, context) {
+        var parentWays = context.graph().parentWays(node);
+        if (parentWays.length) {
+            return getIssuesForVertex(node, parentWays, context);
+        } else {
+            return getIssuesForDetachedPoint(node, context);
+        }
+    }
+
+    function getWayIssueIfAny(node1, node2, way, context) {
         if (node1.id === node2.id ||
             (node1.hasInterestingTags() && node2.hasInterestingTags())) {
             return null;
@@ -113,7 +180,7 @@ export function validationCloseNodes() {
         if (node1.loc !== node2.loc) {
 
             var featureType = featureTypeForWay(way, context.graph());
-            var threshold = defaultThresholdMeters;
+            var threshold = defaultWayThresholdMeters;
             if (featureType === 'indoor') threshold = indoorThresholdMeters;
             else if (featureType === 'building') threshold = buildingThresholdMeters;
             else if (featureType === 'path') threshold = pathThresholdMeters;
