@@ -806,6 +806,14 @@
                 "description": "Rail Features",
                 "tooltip": "Railways"
             },
+            "pistes": {
+                "description": "Pistes",
+                "tooltip": "Ski Slopes, Sled Runs, Ice Skating Trails, etc."
+            },
+            "aerialways": {
+                "description": "Aerial Features",
+                "tooltip": "Chair Lifts, Gondolas, Zip Lines, etc."
+            },
             "power": {
                 "description": "Power Features",
                 "tooltip": "Power Lines, Power Plants, Substations, etc."

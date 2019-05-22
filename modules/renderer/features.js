@@ -141,7 +141,8 @@ export function rendererFeatures(context) {
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&
-            !_rules.water.filter(tags);
+            !_rules.water.filter(tags) &&
+            !_rules.pistes.filter(tags);
     });
 
     defineRule('boundaries', function isBoundary(tags) {
@@ -182,6 +183,16 @@ export function rendererFeatures(context) {
             service_roads[tags.highway] ||
             paths[tags.highway]
         );
+    });
+
+    defineRule('pistes', function isPiste(tags) {
+        return tags['piste:type'];
+    });
+
+    defineRule('aerialways', function isPiste(tags) {
+        return tags.aerialway &&
+            tags.aerialway !== 'yes' &&
+            tags.aerialway !== 'station';
     });
 
     defineRule('power', function isPower(tags) {
