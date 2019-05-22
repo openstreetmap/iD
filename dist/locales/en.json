@@ -784,11 +784,11 @@
             },
             "building_parts": {
                 "description": "Building Parts",
-                "tooltip": "building:part=*"
+                "tooltip": "3D Building and Roof Components"
             },
             "indoor": {
-                "description": "Indoor",
-                "tooltip": "indoor=*"
+                "description": "Indoor Features",
+                "tooltip": "Rooms, Corridors, Stairwells, etc."
             },
             "landuse": {
                 "description": "Landuse Features",
