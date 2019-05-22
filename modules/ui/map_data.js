@@ -662,13 +662,44 @@ export function uiMapData(context) {
 
 
     function renderFeatureList(selection) {
-        var container = selection.selectAll('.layer-feature-list')
+        var container = selection.selectAll('.layer-feature-list-container')
             .data([0]);
 
-        _featureList = container.enter()
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'layer-feature-list-container');
+
+        containerEnter
             .append('ul')
-            .attr('class', 'layer-list layer-feature-list')
-            .merge(container);
+            .attr('class', 'layer-list layer-feature-list');
+
+        var footer = containerEnter
+            .append('div')
+            .attr('class', 'feature-list-links section-footer');
+
+        footer
+            .append('a')
+            .attr('class', 'feature-list-link')
+            .attr('href', '#')
+            .text(t('issues.enable_all'))
+            .on('click', function() {
+                context.features().enableAll();
+            });
+
+        footer
+            .append('a')
+            .attr('class', 'feature-list-link')
+            .attr('href', '#')
+            .text(t('issues.disable_all'))
+            .on('click', function() {
+                context.features().disableAll();
+            });
+
+        // Update
+        container = container
+            .merge(containerEnter);
+
+        _featureList = container.selectAll('.layer-feature-list');
 
         updateFeatureList();
     }

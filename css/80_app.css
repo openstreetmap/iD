@@ -3384,7 +3384,8 @@ button.autofix.action.active {
 }
 
 .layer-list.issue-rules-list,
-.layer-list.issues-list {
+.layer-list.issues-list,
+.layer-list.layer-feature-list {
     margin-bottom: 0;
 }
 .section-footer {

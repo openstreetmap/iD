@@ -274,12 +274,34 @@ export function rendererFeatures(context) {
         }
     };
 
+    features.enableAll = function() {
+        var didEnable = false;
+        for (var k in _rules) {
+            if (!_rules[k].enabled) {
+                didEnable = true;
+                _rules[k].enable();
+            }
+        }
+        if (didEnable) update();
+    };
+
 
     features.disable = function(k) {
         if (_rules[k] && _rules[k].enabled) {
             _rules[k].disable();
             update();
         }
+    };
+
+    features.disableAll = function() {
+        var didDisable = false;
+        for (var k in _rules) {
+            if (_rules[k].enabled) {
+                didDisable = true;
+                _rules[k].disable();
+            }
+        }
+        if (didDisable) update();
     };
 
 
