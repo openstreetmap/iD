@@ -4,7 +4,6 @@ import { select as d3_select, event as d3_event } from 'd3-selection';
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
-import { tooltip } from '../../util/tooltip';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
