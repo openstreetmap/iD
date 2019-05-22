@@ -86,22 +86,23 @@ export function uiCommit(context) {
             if (source) {
                 tags.source = source;
             }
-            var existingSources = (tags.source || '').split(';');
-            // add the photo overlays used during editing as sources
             var photoOverlaysUsed = context.history().photoOverlaysUsed();
             if (photoOverlaysUsed.length) {
+                var sources = (tags.source || '').split(';');
+
                 // include this tag for any photo layer
-                if (existingSources.indexOf('streetlevel imagery') === -1) {
-                    existingSources.push('streetlevel imagery');
+                if (sources.indexOf('streetlevel imagery') === -1) {
+                    sources.push('streetlevel imagery');
                 }
-            }
-            photoOverlaysUsed.forEach(function(photoOverlay) {
-                if (existingSources.indexOf(photoOverlay) === -1) {
-                    existingSources.push(photoOverlay);
-                }
-            });
-            if (existingSources.length) {
-                tags.source = existingSources.join(';').substr(0, 255);
+                
+                // add the photo overlays used during editing as sources
+                photoOverlaysUsed.forEach(function(photoOverlay) {
+                    if (sources.indexOf(photoOverlay) === -1) {
+                        sources.push(photoOverlay);
+                    }
+                });
+
+                tags.source = sources.join(';').substr(0, 255);
             }
 
             _changeset = new osmChangeset({ tags: tags });
