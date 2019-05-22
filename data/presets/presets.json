@@ -1,6 +1,6 @@
 {
   "presets": {
-    "aerialway": {"fields": ["aerialway"], "geometry": ["point", "vertex", "line"], "tags": {"aerialway": "*"}, "searchable": false, "name": "Aerialway"},
+    "aerialway": {"fields": ["name", "aerialway"], "moreFields": ["layer"], "geometry": ["point", "vertex", "line"], "tags": {"aerialway": "*"}, "searchable": false, "name": "Aerialway"},
     "aeroway": {"icon": "maki-airport", "fields": ["aeroway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"aeroway": "*"}, "searchable": false, "name": "Aeroway"},
     "amenity": {"fields": ["amenity"], "geometry": ["point", "vertex", "line", "area"], "tags": {"amenity": "*"}, "searchable": false, "name": "Amenity"},
     "attraction": {"icon": "maki-star", "fields": ["name", "attraction", "operator", "opening_hours"], "moreFields": ["opening_hours", "fee", "payment_multi", "address", "website", "phone", "email", "fax"], "geometry": ["point", "vertex", "line", "area"], "tags": {"attraction": "*"}, "searchable": false, "name": "Attraction"},
@@ -816,7 +816,7 @@
     "office/therapist": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "therapist"}, "terms": ["therapy"], "name": "Therapist Office"},
     "office/water_utility": {"icon": "maki-suitcase", "fields": ["{office}", "operator"], "geometry": ["point", "area"], "tags": {"office": "water_utility"}, "terms": ["water board", "utility"], "name": "Water Utility Office"},
     "piste/downhill": {"icon": "fas-skiing", "fields": ["name", "piste/type", "piste/difficulty_downhill", "piste/grooming_downhill", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "alpine", "snowboard", "downhill", "piste"], "tags": {"piste:type": "downhill"}, "name": "Downhill Piste/Ski Run"},
-    "piste/downhill/halfpipe": {"icon": "fas-snowboarding", "fields": ["name", "piste/type", "piste/difficulty_downhill", "piste/grooming_downhill", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "alpine", "halfpipe", "half pipe", "snowboard", "downhill", "piste"], "tags": {"piste:type": "downhill", "man_made": "piste:halfpipe"}, "name": "Halfpipe"},
+    "piste/downhill/halfpipe": {"icon": "fas-snowboarding", "geometry": ["line", "area"], "terms": ["ski", "alpine", "halfpipe", "half pipe", "snowboard", "downhill", "piste"], "tags": {"piste:type": "downhill", "man_made": "piste:halfpipe"}, "name": "Halfpipe"},
     "piste/hike": {"icon": "temaki-snow_shoeing", "fields": ["name", "piste/type", "piste/difficulty", "piste/grooming_hike", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["hike", "winter hiking", "snowshoe", "snowshoeing", "piste", "ski"], "tags": {"piste:type": "hike"}, "name": "Snowshoeing or Winter Hiking Trail"},
     "piste/ice_skate": {"icon": "fas-skating", "fields": ["name", "piste/type", "sport_ice", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ice", "skating", "ski", "piste"], "tags": {"piste:type": "ice_skate"}, "name": "Ice Skating Piste"},
     "piste/nordic": {"icon": "fas-skiing-nordic", "fields": ["name", "piste/type", "piste/difficulty_nordic", "piste/grooming_nordic", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "nordic", "crosscountry", "skating", "piste"], "tags": {"piste:type": "nordic"}, "name": "Nordic or Crosscountry Piste/Ski Trail"},
