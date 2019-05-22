@@ -139,6 +139,8 @@ export function rendererFeatures(context) {
     defineRule('landuse', function isLanduse(tags, geometry) {
         return geometry === 'area' &&
             !_rules.buildings.filter(tags) &&
+            !_rules.building_parts.filter(tags) &&
+            !_rules.indoor.filter(tags) &&
             !_rules.water.filter(tags);
     });
 
