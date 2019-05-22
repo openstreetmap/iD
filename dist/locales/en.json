@@ -1747,7 +1747,11 @@
                 "title": "Outdated Tags",
                 "message": "{feature} has outdated tags",
                 "tip": "Find features with deprecated tags that can be updated",
-                "reference": "Some tags change over time and should be updated."
+                "reference": "Some tags change over time and should be updated.",
+                "incomplete": {
+                    "message": "{feature} has incomplete tags",
+                    "reference": "Some features should have additional tags."
+                }
             },
             "private_data": {
                 "title": "Private Information",

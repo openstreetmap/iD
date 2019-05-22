@@ -80,13 +80,15 @@ export function validationOutdatedTags() {
         var tagDiff = utilTagDiff(oldTags, newTags);
         if (!tagDiff.length) return [];
 
+        var prefix = subtype === 'incomplete_tags' ? 'incomplete.' : '';
+
         return [new validationIssue({
             type: type,
             subtype: subtype,
             severity: 'warning',
             message: function() {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.outdated_tags.message', { feature: utilDisplayLabel(entity, context) }) : '';
+                return entity ? t('issues.outdated_tags.' + prefix + 'message', { feature: utilDisplayLabel(entity, context) }) : '';
             },
             reference: showReference,
             entityIds: [entity.id],
@@ -116,7 +118,7 @@ export function validationOutdatedTags() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.outdated_tags.reference'));
+                .text(t('issues.outdated_tags.' + prefix + 'reference'));
 
             enter
                 .append('strong')
