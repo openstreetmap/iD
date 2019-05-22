@@ -18,8 +18,7 @@ describe('iD.presetCollection', function() {
         grill: iD.presetPreset('__test/amenity/bbq', {
             name: 'Grill',
             tags: { amenity: 'bbq' },
-            geometry: ['point'],
-            terms: []
+            geometry: ['point']
         }),
         sandpit: iD.presetPreset('__test/amenity/grit_bin', {
             name: 'Sandpit',
@@ -30,27 +29,23 @@ describe('iD.presetCollection', function() {
         residential: iD.presetPreset('__test/highway/residential', {
             name: 'Residential Area',
             tags: { highway: 'residential' },
-            geometry: ['point', 'area'],
-            terms: []
+            geometry: ['point', 'area']
         }),
         grass1: iD.presetPreset('__test/landuse/grass1', {
             name: 'Grass',
             tags: { landuse: 'grass' },
-            geometry: ['point', 'area'],
-            terms: []
+            geometry: ['point', 'area']
         }),
         grass2: iD.presetPreset('__test/landuse/grass2', {
             name: 'Ğṝȁß',
             tags: { landuse: 'ğṝȁß' },
-            geometry: ['point', 'area'],
-            terms: []
+            geometry: ['point', 'area']
         }),
         park: iD.presetPreset('__test/leisure/park', {
             name: 'Park',
             tags: { leisure: 'park' },
             geometry: ['point', 'area'],
-            terms: [ 'grass' ],
-            matchScore: 0.5
+            terms: [ 'grass' ]
         }),
         parking: iD.presetPreset('__test/amenity/parking', {
             name: 'Parking',
