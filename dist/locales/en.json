@@ -6115,7 +6115,7 @@
                 },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
-                    "terms": "bicycle and foot path,mixed-use trail,multi-use trail,segregated trail"
+                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
