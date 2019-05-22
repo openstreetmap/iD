@@ -1332,6 +1332,8 @@ en:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"
       tip: "Find features that should possibly be connected to other nearby features"
+      self:
+        message: "{feature} ends very close to itself but does not reconnect"
       highway-highway:
         reference: Intersecting highways should share a junction vertex.
     close_nodes:

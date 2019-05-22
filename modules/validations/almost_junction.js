@@ -92,16 +92,23 @@ export function validationAlmostJunction() {
                 type: type,
                 severity: 'warning',
                 message: function() {
-                    var entity1 = context.hasEntity(this.entityIds[0]),
-                        entity2 = context.hasEntity(this.entityIds[2]);
-                    return (entity && entity2) ? t('issues.almost_junction.message', {
-                        feature: utilDisplayLabel(entity1, context),
-                        feature2: utilDisplayLabel(entity2, context)
-                    }) : '';
+                    var entity1 = context.hasEntity(this.entityIds[0]);
+                    if (this.entityIds[0] === this.entityIds[2]) {
+                        return entity1 ? t('issues.almost_junction.self.message', {
+                            feature: utilDisplayLabel(entity1, context)
+                        }) : '';
+                    } else {
+                        var entity2 = context.hasEntity(this.entityIds[2]);
+                        return (entity1 && entity2) ? t('issues.almost_junction.message', {
+                            feature: utilDisplayLabel(entity1, context),
+                            feature2: utilDisplayLabel(entity2, context)
+                        }) : '';
+                    }
                 },
                 reference: showReference,
                 entityIds: [entity.id, node.id, edgeHighway.id],
                 loc: extendableNodeInfo.node.loc,
+                hash: JSON.stringify(extendableNodeInfo.node.loc),
                 data: {
                     edge: extendableNodeInfo.edge,
                     cross_loc: extendableNodeInfo.cross_loc
@@ -179,8 +186,8 @@ export function validationAlmostJunction() {
 
         function canConnectWays(way, way2) {
 
-            // don't flag almost self-connections for now
-            if (way.id === way2.id) return false;
+            // allow self-connections
+            if (way.id === way2.id) return true;
 
             // if one is bridge or tunnel, both must be bridge or tunnel
             if ((hasTag(way.tags, 'bridge') || hasTag(way2.tags, 'bridge')) &&
@@ -231,8 +238,13 @@ export function validationAlmostJunction() {
                 if (!canConnectWays(way, way2)) continue;
 
                 for (var j = 0; j < way2.nodes.length - 1; j++) {
-                    var nA = graph.entity(way2.nodes[j]);
-                    var nB = graph.entity(way2.nodes[j + 1]);
+                    var nAid = way2.nodes[j],
+                        nBid = way2.nodes[j + 1]
+
+                    if (nAid === tipNid || nBid === tipNid) continue;
+
+                    var nA = graph.entity(nAid),
+                        nB = graph.entity(nBid);
                     var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
                     if (crossLoc) {
                         return {
