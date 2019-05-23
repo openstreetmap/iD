@@ -5154,6 +5154,11 @@ en:
         name: Riding Arena
         # 'terms: dressage,equestrian,horse,horseback,riding'
         terms: '<translate with synonyms or related terms for ''Riding Arena'', separated by commas>'
+      leisure/pitch/field_hockey:
+        # 'leisure=pitch, sport=field_hockey'
+        name: Field Hockey Pitch
+        # 'terms: landhockey'
+        terms: '<translate with synonyms or related terms for ''Field Hockey Pitch'', separated by commas>'
       leisure/pitch/horseshoes:
         # 'leisure=pitch, sport=horseshoes'
         name: Horseshoes Pit

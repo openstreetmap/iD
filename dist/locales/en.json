@@ -6875,6 +6875,10 @@
                     "name": "Riding Arena",
                     "terms": "dressage,equestrian,horse,horseback,riding"
                 },
+                "leisure/pitch/field_hockey": {
+                    "name": "Field Hockey Pitch",
+                    "terms": "landhockey"
+                },
                 "leisure/pitch/horseshoes": {
                     "name": "Horseshoes Pit",
                     "terms": "horse shoes"
