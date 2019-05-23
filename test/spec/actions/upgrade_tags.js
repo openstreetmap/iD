@@ -24,6 +24,14 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ natural: 'wetland', wetland: 'marsh', name: 'Foo' });
     });
 
+    it('upgrades a tag and overrides an existing value', function () {
+        var oldTags = { landuse: 'wood' },
+            newTags = { natural: 'wood' },
+            entity = iD.Entity({ tags: { landuse: 'wood', natural: 'wetland', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ natural: 'wood', name: 'Foo' });
+    });
+
     it('upgrades a tag with no replacement tags', function () {
         var oldTags = { highway: 'no' },
             newTags = undefined,
@@ -56,7 +64,7 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
     });
 
-    it('upgrades a tag in a semicolon-delimited list with one other value', function () {
+    it('upgrades a tag from a semicolon-delimited list that has one other value', function () {
         var oldTags = { cuisine: 'vegan' },
             newTags = { 'diet:vegan': 'yes' },
             entity = iD.Entity({ tags: { cuisine: 'italian;vegan', name: 'Foo' }}),
@@ -64,12 +72,20 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian', 'diet:vegan': 'yes', name: 'Foo' });
     });
 
-    it('upgrades a tag in a semicolon-delimited list with many other values', function () {
+    it('upgrades a tag from a semicolon-delimited list that has many other values', function () {
         var oldTags = { cuisine: 'vegan' },
             newTags = { 'diet:vegan': 'yes' },
             entity = iD.Entity({ tags: { cuisine: 'italian;vegan;regional;american', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
         expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian;regional;american', 'diet:vegan': 'yes', name: 'Foo' });
+    });
+
+    it('upgrades a tag within a semicolon-delimited list without changing other values', function () {
+        var oldTags = { leisure: 'ice_rink', sport: 'hockey' },
+            newTags = { leisure: 'ice_rink', sport: 'ice_hockey' },
+            entity = iD.Entity({ tags: { leisure: 'ice_rink', sport: 'curling;hockey;multi', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ leisure: 'ice_rink', sport: 'curling;ice_hockey;multi', name: 'Foo' });
     });
 
 });

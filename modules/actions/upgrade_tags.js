@@ -4,6 +4,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
         var entity = graph.entity(entityId);
         var tags = Object.assign({}, entity.tags);  // shallow copy
         var transferValue;
+        var semiIndex;
 
         for (var oldTagKey in oldTags) {
             if (oldTags[oldTagKey] === '*') {
@@ -15,6 +16,10 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 if (vals.length === 1 || oldIndex === -1) {
                     delete tags[oldTagKey];
                 } else {
+                    if (replaceTags && replaceTags[oldTagKey]) {
+                        // replacing a value within a semicolon-delimited value, note the index
+                        semiIndex = oldIndex;
+                    }
                     vals.splice(oldIndex, 1);
                     tags[oldTagKey] = vals.join(';');
                 }
@@ -36,7 +41,16 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 } else if (replaceValue === '$1') {
                     tags[replaceKey] = transferValue;
                 } else {
-                    tags[replaceKey] = replaceValue;
+                    if (tags[replaceKey] && oldTags[replaceKey] && semiIndex !== undefined) {
+                        // don't override preexisting values
+                        var existingVals = tags[replaceKey].split(';').filter(Boolean);
+                        if (existingVals.indexOf(replaceValue) === -1) {
+                            existingVals.splice(semiIndex, 0, replaceValue);
+                            tags[replaceKey] = existingVals.join(';');
+                        }
+                    } else {
+                        tags[replaceKey] = replaceValue;
+                    }
                 }
             }
         }

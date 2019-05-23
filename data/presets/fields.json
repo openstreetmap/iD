@@ -337,7 +337,7 @@
     "social_facility_for": {"key": "social_facility:for", "type": "combo", "label": "People Served"},
     "social_facility": {"key": "social_facility", "type": "combo", "label": "Type"},
     "source": {"key": "source", "type": "semiCombo", "icon": "source", "universal": true, "label": "Sources", "snake_case": false, "caseSensitive": true, "options": ["survey", "local knowledge", "gps", "aerial imagery", "streetlevel imagery"]},
-    "sport_ice": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["skating", "hockey", "multi", "curling", "ice_stock"]},
+    "sport_ice": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["ice_skating", "ice_hockey", "multi", "curling", "ice_stock"]},
     "sport_racing_motor": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["motor", "karting", "motocross"]},
     "sport_racing_nonmotor": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["bmx", "cycling", "dog_racing", "horse_racing", "running"]},
     "sport": {"key": "sport", "type": "semiCombo", "label": "Sports"},
