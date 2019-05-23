@@ -281,19 +281,22 @@ export function uiSuccess(context) {
 
 
         function showMore(selection) {
-            var more = selection
+            var more = selection.selectAll('.community-more')
+                .data([0]);
+
+            var moreEnter = more.enter()
                 .append('div')
                 .attr('class', 'community-more');
 
             if (d.extendedDescription) {
-                more
+                moreEnter
                     .append('div')
                     .attr('class', 'community-extended-description')
                     .html(t('community.' + d.id + '.extendedDescription', replacements));
             }
 
             if (d.languageCodes && d.languageCodes.length) {
-                more
+                moreEnter
                     .append('div')
                     .attr('class', 'community-languages')
                     .text(t('success.languages', { languages: d.languageCodes.join(', ') }));
