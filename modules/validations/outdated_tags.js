@@ -4,7 +4,6 @@ import { matcher, brands } from 'name-suggestion-index';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
-import { osmEntity } from '../osm/entity';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -87,13 +86,10 @@ export function validationOutdatedTags() {
             type: type,
             subtype: subtype,
             severity: 'warning',
-            message: function() {
-                var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.outdated_tags.' + prefix + 'message', { feature: utilDisplayLabel(entity, context) }) : '';
-            },
+            message: showMessage,
             reference: showReference,
             entityIds: [entity.id],
-            hash: osmEntity.key(entity),
+            hash: JSON.stringify(tagDiff),
             fixes: [
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
@@ -107,7 +103,29 @@ export function validationOutdatedTags() {
 
 
         function doUpgrade(graph) {
-            return actionChangeTags(entity.id, newTags)(graph);
+            var currEntity = context.hasEntity(entity.id);
+            if (!currEntity) return graph;
+
+            var newTags = Object.assign({}, currEntity.tags);  // shallow copy
+            tagDiff.forEach(function(diff) {
+                if (diff.type === '-') {
+                    delete newTags[diff.key];
+                } else if (diff.type === '+') {
+                    newTags[diff.key] = diff.newVal;
+                }
+            });
+
+            return actionChangeTags(currEntity.id, newTags)(graph);
+        }
+
+
+        function showMessage() {
+            var currEntity = context.hasEntity(entity.id);
+            if (!currEntity) return '';
+
+            return t('issues.outdated_tags.' + prefix + 'message',
+                { feature: utilDisplayLabel(currEntity, context) }
+            );
         }
 
 
@@ -142,8 +160,8 @@ export function validationOutdatedTags() {
         }
     }
 
-    function oldMultipolygonIssues(entity, context) {
 
+    function oldMultipolygonIssues(entity, context) {
         var graph = context.graph();
 
         var multipolygon, outerWay;
@@ -163,10 +181,7 @@ export function validationOutdatedTags() {
             type: type,
             subtype: 'old_multipolygon',
             severity: 'warning',
-            message: function() {
-                var entity = context.hasEntity(this.issue.entityIds[1]);
-                return entity ? t('issues.old_multipolygon.message', { multipolygon: utilDisplayLabel(entity, context) }) : '';
-            },
+            message: showMessage,
             reference: showReference,
             entityIds: [outerWay.id, multipolygon.id],
             fixes: [
@@ -182,9 +197,23 @@ export function validationOutdatedTags() {
 
 
         function doUpgrade(graph) {
-            multipolygon = multipolygon.mergeTags(outerWay.tags);
-            graph = graph.replace(multipolygon);
-            return actionChangeTags(outerWay.id, {})(graph);
+            var currMultipolygon = context.hasEntity(multipolygon.id);
+            var currOuterWay = context.hasEntity(outerWay.id);
+            if (!currMultipolygon || !currOuterWay) return graph;
+
+            currMultipolygon = currMultipolygon.mergeTags(currOuterWay.tags);
+            graph = graph.replace(currMultipolygon);
+            return actionChangeTags(currOuterWay.id, {})(graph);
+        }
+
+
+        function showMessage() {
+            var currMultipolygon = context.hasEntity(multipolygon.id);
+            if (!currMultipolygon) return '';
+
+            return t('issues.old_multipolygon.message',
+                { multipolygon: utilDisplayLabel(currMultipolygon, context) }
+            );
         }
 
 
