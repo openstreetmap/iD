@@ -60,30 +60,46 @@ export function validationPrivateData() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
-                var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.private_data.contact.message', { feature: utilDisplayLabel(entity, context) }) : '';
-            },
+            message: showMessage,
             reference: showReference,
             entityIds: [entity.id],
-            data: {
-                newTags: keepTags
-            },
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.' + fixID + '.title'),
                     onClick: function() {
-                        var entityID = this.issue.entityIds[0];
-                        var newTags = this.issue.data.newTags;
-                        context.perform(
-                            actionChangeTags(entityID, newTags),
-                            t('issues.fix.upgrade_tags.annotation')
-                        );
+                        context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                     }
                 })
             ]
         })];
+
+
+        function doUpgrade(graph) {
+            var currEntity = context.hasEntity(entity.id);
+            if (!currEntity) return graph;
+
+            var newTags = Object.assign({}, currEntity.tags);  // shallow copy
+            tagDiff.forEach(function(diff) {
+                if (diff.type === '-') {
+                    delete newTags[diff.key];
+                } else if (diff.type === '+') {
+                    newTags[diff.key] = diff.newVal;
+                }
+            });
+
+            return actionChangeTags(currEntity.id, newTags)(graph);
+        }
+
+
+        function showMessage() {
+            var currEntity = context.hasEntity(this.entityIds[0]);
+            if (!currEntity) return '';
+
+            return t('issues.private_data.contact.message',
+                { feature: utilDisplayLabel(currEntity, context) }
+            );
+        }
 
 
         function showReference(selection) {
