@@ -4,6 +4,7 @@ import { matcher, brands } from 'name-suggestion-index';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
+import { osmEntity } from '../osm/entity';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -92,7 +93,7 @@ export function validationOutdatedTags() {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(tagDiff),
+            hash: osmEntity.key(entity),
             fixes: [
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
