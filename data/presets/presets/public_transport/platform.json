@@ -8,6 +8,10 @@
         "surface"
     ],
     "moreFields": [
+        "access",
+        "covered",
+        "indoor",
+        "layer",
         "lit",
         "wheelchair"
     ],

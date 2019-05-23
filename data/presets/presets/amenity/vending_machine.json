@@ -6,6 +6,10 @@
         "payment_multi",
         "currency_multi"
     ],
+    "moreFields": [
+        "covered",
+        "indoor"
+    ],
     "geometry": [
         "point"
     ],

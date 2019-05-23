@@ -8,6 +8,8 @@
         "wheelchair"
     ],
     "moreFields": [
+        "covered",
+        "indoor",
         "maxheight"
     ],
     "geometry": [

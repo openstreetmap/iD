@@ -10,7 +10,8 @@
     ],
     "moreFields": [
         "covered",
-        "dog"
+        "dog",
+        "indoor"
     ],
     "geometry": [
         "line"

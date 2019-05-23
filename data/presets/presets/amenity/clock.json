@@ -9,6 +9,7 @@
         "faces"
     ],
     "moreFields": [
+        "indoor",
         "lit"
     ],
     "geometry": [
