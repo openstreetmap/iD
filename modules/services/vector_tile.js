@@ -22,7 +22,7 @@ function abortRequest(controller) {
 
 
 function vtToGeoJSON(data, tile, mergeCache) {
-    var vectorTile = new vt.VectorTile(new Protobuf(data.response));
+    var vectorTile = new vt.VectorTile(new Protobuf(data));
     var layers = Object.keys(vectorTile.layers);
     if (!Array.isArray(layers)) { layers = [layers]; }
 
