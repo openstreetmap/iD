@@ -4961,6 +4961,11 @@ en:
         name: Dance School
         # 'terms: jive,swing,tango,waltz,dance teaching'
         terms: '<translate with synonyms or related terms for ''Dance School'', separated by commas>'
+      leisure/disc_golf_course:
+        # leisure=disc_golf_course
+        name: Disc Golf Course
+        # 'terms: disk golf,frisbee golf,flying disc golf,frolf,ultimate'
+        terms: '<translate with synonyms or related terms for ''Disc Golf Course'', separated by commas>'
       leisure/dog_park:
         # leisure=dog_park
         name: Dog Park

@@ -6715,6 +6715,10 @@
                     "name": "Dance School",
                     "terms": "jive,swing,tango,waltz,dance teaching"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Disc Golf Course",
+                    "terms": "disk golf,frisbee golf,flying disc golf,frolf,ultimate"
+                },
                 "leisure/dog_park": {
                     "name": "Dog Park",
                     "terms": ""
