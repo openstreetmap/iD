@@ -739,14 +739,20 @@ export function rendererMap(context) {
     };
 
     map.unobscuredCenterZoomEase = function(loc, zoom) {
-        var offset = map.unobscuredOffset();
-        var locPx = projection(loc);
+        var offset = map.unobscuredOffsetPx();
+
+        var proj = geoRawMercator().transform(projection.transform());  // copy projection
+        // use the target zoom to calculate the offset center
+        proj.scale(geoZoomToScale(zoom, TILESIZE));
+        
+        var locPx = proj(loc);
         var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
-        var offsetLoc = projection.invert(offsetLocPx);
+        var offsetLoc = proj.invert(offsetLocPx);
+
         map.centerZoomEase(offsetLoc, zoom);
     };
 
-    map.unobscuredOffset = function() {
+    map.unobscuredOffsetPx = function() {
         var openPane = d3_select('.map-panes .map-pane.shown');
         if (!openPane.empty()) {
             return [openPane.node().offsetWidth/2, 0];
