@@ -44,10 +44,10 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'steps'});
-        expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('yes');
+        expect(selection.selectAll('.preset-input-access-foot').attr('placeholder')).to.equal('yes');
 
         access.tags({highway: 'pedestrian'});
-        expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('yes');
+        expect(selection.selectAll('.preset-input-access-foot').attr('placeholder')).to.equal('yes');
     });
 
     it('sets foot placeholder to "designated" for footways', function() {
@@ -55,7 +55,7 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'footway'});
-        expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('designated');
+        expect(selection.selectAll('.preset-input-access-foot').attr('placeholder')).to.equal('designated');
     });
 
     it('sets bicycle placeholder to "designated" for cycleways', function() {
@@ -63,7 +63,7 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'cycleway'});
-        expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('designated');
+        expect(selection.selectAll('.preset-input-access-bicycle').attr('placeholder')).to.equal('designated');
     });
 
     it('sets horse placeholder to "designated" for bridleways', function() {
@@ -71,7 +71,7 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'bridleway'});
-        expect(selection.selectAll('#preset-input-access-horse').attr('placeholder')).to.equal('designated');
+        expect(selection.selectAll('.preset-input-access-horse').attr('placeholder')).to.equal('designated');
     });
 
     it('sets motor_vehicle placeholder to "no" for footways, steps, pedestrian, cycleway, bridleway, and path', function() {
@@ -79,7 +79,7 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
         ['footway', 'steps', 'pedestrian', 'cycleway', 'bridleway', 'path'].forEach(function(value) {
             access.tags({highway: value});
-            expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('no');
+            expect(selection.selectAll('.preset-input-access-motor_vehicle').attr('placeholder')).to.equal('no');
         });
     });
 
@@ -89,7 +89,7 @@ describe('iD.uiFieldAccess', function() {
         ['residential', 'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'service',
          'unclassified', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link'].forEach(function(value) {
             access.tags({highway: value});
-            expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('yes');
+            expect(selection.selectAll('.preset-input-access-motor_vehicle').attr('placeholder')).to.equal('yes');
         });
     });
 
@@ -98,10 +98,10 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'service', access: 'emergency'});
-        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('emergency');
+        expect(selection.selectAll('.preset-input-access-motor_vehicle').attr('placeholder')).to.equal('emergency');
 
         access.tags({highway: 'cycleway', access: 'permissive'});
-        expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('permissive');
+        expect(selection.selectAll('.preset-input-access-bicycle').attr('placeholder')).to.equal('permissive');
     });
 
     it('overrides a "no" placeholder with more specific access tag (#2763)', function() {
@@ -109,7 +109,7 @@ describe('iD.uiFieldAccess', function() {
         selection.call(access);
 
         access.tags({highway: 'cycleway', access: 'destination'});
-        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('destination');
+        expect(selection.selectAll('.preset-input-access-motor_vehicle').attr('placeholder')).to.equal('destination');
     });
 
 });

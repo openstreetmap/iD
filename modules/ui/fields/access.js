@@ -46,8 +46,7 @@ export function uiFieldAccess(field, context) {
             .attr('class', 'preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'preset-input-access')
-            .attr('id', function(d) { return 'preset-input-access-' + d; })
+            .attr('class', function(d) { return 'preset-input-access preset-input-access-' + d; })
             .call(utilNoAuto)
             .each(function(d) {
                 d3_select(this)
@@ -205,7 +204,7 @@ export function uiFieldAccess(field, context) {
                 return tags.access ? tags.access : field.placeholder();
             });
 
-        items.selectAll('#preset-input-access-access')
+        items.selectAll('.preset-input-access-access')
             .attr('placeholder', 'yes');
 
         var which = tags.highway;
@@ -214,7 +213,7 @@ export function uiFieldAccess(field, context) {
         var keys = Object.keys(placeholders[which]);
         keys.forEach(function(k) {
             var v = placeholders[which][k];
-            items.selectAll('#preset-input-access-' + k)
+            items.selectAll('.preset-input-access-' + k)
                 .attr('placeholder', tags.access || v);
         });
     };
