@@ -870,13 +870,19 @@ export default {
 
     // load the tile that covers the given `loc`
     loadTileAtLoc: function(loc, callback) {
+        // Back off if the toLoad queue is filling up.. re #6417
+        // (Currently `loadTileAtLoc` requests are considered low priority - used by operations to
+        // let users safely edit geometries which extend to unloaded tiles.  We can drop some.)
+        if (Object.keys(_tileCache.toLoad).length > 50) return;
+
         var k = geoZoomToScale(_tileZoom + 1);
         var offset = geoRawMercator().scale(k)(loc);
         var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
         var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         tiles.forEach(function(tile) {
-            if (_tileCache.toLoad[tile.id]) return;  // already in queue
+            if (_tileCache.toLoad[tile.id] || _tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+
             _tileCache.toLoad[tile.id] = true;
             this.loadTile(tile, callback);
         }, this);
