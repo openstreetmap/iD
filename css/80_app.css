@@ -3511,7 +3511,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
 }
 .issue-info .tagDiff-cell {
-    padding: 2px 5px;
+    padding: 2px 10px;
     font-family: monospace;
     font-size: 10px;
     border: 1px solid #ccc;

@@ -156,7 +156,10 @@ export function uiEntityIssues(context) {
                         .transition()
                         .duration(200)
                         .style('max-height', '200px')
-                        .style('opacity', '1');
+                        .style('opacity', '1')
+                        .on('end', function () {
+                            info.style('max-height', null);
+                        });
                 }
             });
 

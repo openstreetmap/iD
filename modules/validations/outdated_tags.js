@@ -17,6 +17,16 @@ export function validationOutdatedTags() {
     nsiMatcher.buildMatchIndex(brands.brands);
     var nsiKeys = ['amenity', 'shop', 'tourism', 'leisure', 'office'];
 
+    var allWD = {};
+    var allWP = {};
+    Object.keys(brands.brands).forEach(function(kvnd) {
+        var brand = brands.brands[kvnd];
+        var wd = brand.tags['brand:wikidata'];
+        var wp = brand.tags['brand:wikipedia'];
+        if (wd) { allWD[wd] = kvnd; }
+        if (wp) { allWP[wp] = kvnd; }
+    });
+
 
     function oldTagIssues(entity, context) {
         var graph = context.graph();
@@ -55,7 +65,30 @@ export function validationOutdatedTags() {
             });
         }
 
-        // search name-suggestion-index
+        // Do `wikidata` or `wikipedia` identify this entity as a brand?  #6416
+        // If so, these tags can be swapped to `brand:wikidata`/`brand:wikipedia`
+        var isBrand;
+        if (newTags.wikidata) {                 // try matching `wikidata`
+            isBrand = allWD[newTags.wikidata];
+        }
+        if (!isBrand && newTags.wikipedia) {    // fallback to `wikipedia`
+            isBrand = allWP[newTags.wikipedia];
+        }
+        if (isBrand && !newTags.office) {       // but avoid doing this for corporate offices
+            if (newTags.wikidata) {
+                newTags['brand:wikidata'] = newTags.wikidata;
+                delete newTags.wikidata;
+            }
+            if (newTags.wikipedia) {
+                newTags['brand:wikipedia'] = newTags.wikipedia;
+                delete newTags.wikipedia;
+            }
+            // I considered setting `name` and other tags here, but they aren't unique per wikidata
+            // (Q2759586 -> in USA "Papa John's", in Russia "Папа Джонс")
+            // So users will really need to use a preset or assign `name` themselves.
+        }
+
+        // try key/value|name match against name-suggestion-index
         if (newTags.name) {
             for (var i = 0; i < nsiKeys.length; i++) {
                 var k = nsiKeys[i];
