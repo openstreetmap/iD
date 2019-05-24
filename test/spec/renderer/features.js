@@ -121,7 +121,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
             iD.osmWay({id: 'steps', tags: {highway: 'steps'}, version: 1}),
             iD.osmWay({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
-            iD.osmWay({id: 'corridor', tags: {highway: 'corridor'}, version: 1}),
+            iD.osmWay({id: 'corridor', tags: {highway: 'corridor', indoor: 'yes'}, version: 1}),
 
             // Buildings
             iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
@@ -131,6 +131,21 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
             iD.osmWay({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
             iD.osmWay({id: 'garage4', tags: {area: 'yes', amenity: 'parking', parking: 'garage_boxes'}, version: 1}),
+
+            // Indoor
+            iD.osmWay({id: 'room', tags: {area: 'yes', indoor: 'room'}, version: 1}),
+            iD.osmWay({id: 'indoor_area', tags: {area: 'yes', indoor: 'area'}, version: 1}),
+            iD.osmWay({id: 'indoor_bar', tags: {area: 'yes', indoor: 'room', amenity: 'bar'}, version: 1}),
+
+            // Pistes
+            iD.osmWay({id: 'downhill_piste', tags: {'piste:type': 'downhill'}, version: 1}),
+            iD.osmWay({id: 'piste_track_combo', tags: {'piste:type': 'alpine', highway: 'track'}, version: 1}),
+
+            // Aerialways
+            iD.osmWay({id: 'gondola', tags: {aerialway: 'gondola'}, version: 1}),
+            iD.osmWay({id: 'zip_line', tags: {aerialway: 'zip_line'}, version: 1}),
+            iD.osmWay({id: 'aerialway_platform', tags: {public_transport: 'platform', aerialway: 'yes'}, version: 1}),
+            iD.osmWay({id: 'old_aerialway_station', tags: {area: 'yes', aerialway: 'station'}, version: 1}),
 
             // Landuse
             iD.osmWay({id: 'forest', tags: {area: 'yes', landuse: 'forest'}, version: 1}),
@@ -275,7 +290,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('service_roads', [
-                'service', 'road', 'track'
+                'service', 'road', 'track', 'piste_track_combo'
             ]);
 
             dontMatch('service_roads', [
@@ -331,6 +346,69 @@ describe('iD.rendererFeatures', function() {
                 'building_no', 'point_bar', 'motorway', 'service', 'path',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
+            ]);
+        });
+
+
+        it('matches indoor', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('indoor', [
+                'room', 'indoor_area', 'indoor_bar', 'corridor'
+            ]);
+
+            dontMatch('indoor', [
+                'downhill_piste', 'piste_track_combo',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
+            ]);
+        });
+
+
+        it('matches pistes', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('pistes', [
+                'downhill_piste', 'piste_track_combo'
+            ]);
+
+            dontMatch('pistes', [
+                'room', 'indoor_area', 'indoor_bar', 'corridor',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
+            ]);
+        });
+
+
+        it('matches aerialways', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('aerialways', [
+                'gondola', 'zip_line'
+            ]);
+
+            dontMatch('aerialways', [
+                'aerialway_platform', 'old_aerialway_station',
+
+                'downhill_piste', 'piste_track_combo',
+                'room', 'indoor_area', 'indoor_bar', 'corridor',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
             ]);
         });
 
