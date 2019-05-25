@@ -29,6 +29,84 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.15.1
+##### 2019-May-24
+
+#### :tada: New Features
+* Add Maxar-Standard and Maxar-Premium Imagery Layers ([editor-layer-index#668])
+* Add feature filters for pistes and aerialways
+* Add ability to hide indoor areas and building part areas ([#6352])
+
+[#6352]: https://github.com/openstreetmap/iD/issues/6352
+[editor-layer-index#668]: https://github.com/osmlab/editor-layer-index/pull/668
+
+#### :sparkles: Usability
+* Prevent Chrome autofill of recent values in the Allowed Access inputs ([#6414])
+* Improve visual padding of multiselect fields
+* Make unsquare threshold field wider to account for stepper control in Firefox ([#6418])
+* Add "Disable All" and "Enable All" buttons for the Map Features list ([#5234])
+
+[#6418]: https://github.com/openstreetmap/iD/issues/6418
+[#6414]: https://github.com/openstreetmap/iD/issues/6414
+[#5234]: https://github.com/openstreetmap/iD/issues/5234
+
+#### :white_check_mark: Validation
+* Swap `wikidata`/`wikipedia` for `brand:` tags if possible ([#6416])
+* Suggest adding `indoor=yes` to `highway=corridor` to explicitly specify these as indoor features
+* Flag detached points that are very close together ([#6394])
+* Flag almost junctions between highways and themselves ([#6373])
+* Deprecate various old storage tank tags
+* Show better warning message if tags and incomplete rather than deprecated ([#6410])
+* Don't flag private data only buildings that are also offices ([#6404])
+* Flag private data on `building=houseboat`
+* Add ability to upgrade a tag value within a semicolon-delimited list
+
+[#6373]: https://github.com/openstreetmap/iD/issues/6373
+[#6394]: https://github.com/openstreetmap/iD/issues/6394
+[#6404]: https://github.com/openstreetmap/iD/issues/6404
+[#6410]: https://github.com/openstreetmap/iD/issues/6410
+[#6416]: https://github.com/openstreetmap/iD/issues/6416
+
+#### :bug: Bugfixes
+* Fix raw tag editor styling for custom data editor ([#6427])
+* Fix bug centering map when clicking on an issue in the Issues pane ([#6384])
+* Fix vector tile layers (#6426)
+* Fix bug causing new data to be discarded when running fixes to upgrade tags or remove private data ([#6407])
+* Fix issue causing duplicate expanded community entries to appear ([#6422])
+* Fix bug where iD could add empty source tag to changesets ([#6405])
+
+[#6384]: https://github.com/openstreetmap/iD/issues/6384
+[#6405]: https://github.com/openstreetmap/iD/issues/6405
+[#6407]: https://github.com/openstreetmap/iD/issues/6407
+[#6422]: https://github.com/openstreetmap/iD/issues/6422
+[#6426]: https://github.com/openstreetmap/iD/issues/6426
+[#6427]: https://github.com/openstreetmap/iD/issues/6427
+
+#### :hourglass: Performance
+* Prevent iD from loading too many off screen tiles ([#6417])
+* Switch Bing Imagery Key to avoid overages ([#5833])
+
+[#6417]: https://github.com/openstreetmap/iD/issues/6417
+[#5833]: https://github.com/openstreetmap/iD/issues/5833
+
+#### :rocket: Presets
+* Update several preset icons (dry cleaning, disc golf, shuffleboard, horseshoes pit)
+* Add Disc Golf Course preset
+* For ice rinks, prefer the `sport` values `ice_hockey`/`ice_skating` over `hockey`/`skating`
+* Add Field Hockey Pitch preset
+* Add Indoor and Covered fields to more presets
+* Add Allowed Access field to piers, platforms, and tracks
+* Add Covered field to Subway preset
+* Add Water Tank preset
+* Add preset for `landuse=winter_sports` ([#6403])
+* Add Type field to Resort preset Add more terms and fields to the Resort preset
+* Add layer field to aerialway presets
+* Improve search terms to Cycle & Foot Path preset ([#6406])
+
+[#6406]: https://github.com/openstreetmap/iD/issues/6406
+[#6403]: https://github.com/openstreetmap/iD/issues/6403
+
+
 # 2.15.0
 ##### 2019-May-21
 
