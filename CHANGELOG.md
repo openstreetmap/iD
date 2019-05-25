@@ -70,7 +70,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :bug: Bugfixes
 * Fix raw tag editor styling for custom data editor ([#6427])
 * Fix bug centering map when clicking on an issue in the Issues pane ([#6384])
-* Fix vector tile layers (#6426)
+* Fix vector tile layers ([#6426])
 * Fix bug causing new data to be discarded when running fixes to upgrade tags or remove private data ([#6407])
 * Fix issue causing duplicate expanded community entries to appear ([#6422])
 * Fix bug where iD could add empty source tag to changesets ([#6405])
