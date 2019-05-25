@@ -782,6 +782,14 @@
                 "description": "Construções",
                 "tooltip": "Construções, abrigos, garagens etc."
             },
+            "building_parts": {
+                "description": "Partes de edifícios",
+                "tooltip": "Componentes 3D de telhados e edifícios"
+            },
+            "indoor": {
+                "description": "Elementos interiores",
+                "tooltip": "Salas, Corredores, Escadarias, etc."
+            },
             "landuse": {
                 "description": "Elementos de Uso de Terra",
                 "tooltip": "Florestas, fazendas, parques, residências, comércios etc."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Elementos Ferroviários",
                 "tooltip": "Ferrovias"
+            },
+            "pistes": {
+                "description": "Pistas",
+                "tooltip": "Pistas de esqui, trenós, trilhas de patinação no gelo, etc."
+            },
+            "aerialways": {
+                "description": "Elementos de transporte aéreo",
+                "tooltip": "Cadeiras elevadoras, gôndolas, tirolesas, etc."
             },
             "power": {
                 "description": "Elementos de Energia Elétrica",
@@ -1619,15 +1635,22 @@
                 "title": "Quase junções",
                 "message": "{feature} é muito próximo, mas não está conectado a {feature2}",
                 "tip": "Encontrar recursos que possivelmente podem estar conectados a outros recursos próximos",
+                "self": {
+                    "message": "{feature} termina muito perto de si mesmo, mas não se reconecta"
+                },
                 "highway-highway": {
                     "reference": "Estradas com interseção devem compartilhar um vértice de junção."
                 }
             },
             "close_nodes": {
                 "title": "Pontos muito próximos",
+                "tip": "Encontrar pontos redundantes e lotados",
                 "message": "Dois pontos em {way} são muito próximos",
-                "tip": "Encontre pontos redundantes de formas",
-                "reference": "Pontos redundantes de uma maneira devem ser mesclados ou separados."
+                "reference": "Pontos redundantes de uma maneira devem ser mesclados ou separados.",
+                "detached": {
+                    "message": "{feature} está muito próximo de {feature2}",
+                    "reference": "Pontos separados não devem compartilhar um local."
+                }
             },
             "crossing_ways": {
                 "title": "Maneiras de cruzamento",
@@ -1747,7 +1770,11 @@
                 "title": "Etiquetas desatualizadas",
                 "message": "{feature} tem etiquetas desatualizadas",
                 "tip": "Encontre recursos com etiquetas reprovadas que podem ser atualizadas",
-                "reference": "Algumas etiquetas mudam com o tempo e devem ser atualizadas."
+                "reference": "Algumas etiquetas mudam com o tempo e devem ser atualizadas.",
+                "incomplete": {
+                    "message": "{feature} tem etiquetas incompletas",
+                    "reference": "Alguns recursos devem ter etiquetas adicionais."
+                }
             },
             "private_data": {
                 "title": "Informação privada",
@@ -3706,6 +3733,9 @@
                         "required": "Obrigatório",
                         "yes": "Aceito"
                     }
+                },
+                "resort": {
+                    "label": "Tipo"
                 },
                 "resource": {
                     "label": "Recursos"
@@ -6534,6 +6564,10 @@
                     "name": "Vinha",
                     "terms": "Vinha, Vinhedo, Plantação de uvas, Parreiras"
                 },
+                "landuse/winter_sports": {
+                    "name": "Área de esportes de inverno",
+                    "terms": "Área de esportes de inverno"
+                },
                 "leisure": {
                     "name": "Área de Lazer"
                 },
@@ -6999,6 +7033,10 @@
                 "man_made/storage_tank": {
                     "name": "Reservatório",
                     "terms": "Tanque de Armazenamento, reservatório elevado, caixa d'água, dágua, dagua, de água, líquido, gás"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Depósito de água",
+                    "terms": "water tank, depósito de água, contentor de água, tanque de água, depósito, cisterna, caixa-d'água, caixa d'água, caixa de água, castelo d'água, castelo de água"
                 },
                 "man_made/street_cabinet": {
                     "name": "Armário de rua",

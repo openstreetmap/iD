@@ -782,6 +782,14 @@
                 "description": "建築物",
                 "tooltip": "建築物、避難所、ガレージなど"
             },
+            "building_parts": {
+                "description": "建物の一部分",
+                "tooltip": "3Dの建物と屋根の構成要素"
+            },
+            "indoor": {
+                "description": "屋内（インドア）の地物",
+                "tooltip": "部屋、廊下、吹き抜け等。"
+            },
             "landuse": {
                 "description": "土地利用関連",
                 "tooltip": "森林、農地、公園、住宅地、商業区画など"
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "鉄道関連",
                 "tooltip": "鉄道"
+            },
+            "pistes": {
+                "description": "スキー",
+                "tooltip": "スキーのスロープ、橇用の斜面、アイススケート用の小径等。"
+            },
+            "aerialways": {
+                "description": "索道の地物",
+                "tooltip": "チェアリフト、ゴンドラ、ジップライン等。"
             },
             "power": {
                 "description": "電力関連",
@@ -1619,15 +1635,22 @@
                 "title": "交差点に未接続 ",
                 "message": "{feature} は{feature2} のすぐ近くにありますが接続されていません",
                 "tip": "近くの別の地物に接続している可能性のある地物を探す",
+                "self": {
+                    "message": "{feature} は自身のすぐ近くにありますが再接続されていません"
+                },
                 "highway-highway": {
                     "reference": "交差する道路は頂点ノードを共有すべきです。"
                 }
             },
             "close_nodes": {
                 "title": "とても近いポイント",
+                "tip": "冗長で使いすぎのポイントを探す",
                 "message": "{way} 内の2つのポイントがとても近くにあります",
-                "tip": "ウェイ内の冗長なポイントを探す",
-                "reference": "ウェイにある冗長なポイントはマージするか離れたところに置くべきです。"
+                "reference": "ウェイにある冗長なポイントはマージするか離れたところに置くべきです。",
+                "detached": {
+                    "message": "{feature} は{feature2} に近すぎます",
+                    "reference": "別々のポイントは位置を共有すべきではありません。(訳注:まれに縦方向に重なる地物もある)"
+                }
             },
             "crossing_ways": {
                 "title": "重なったウェイ",
@@ -1747,7 +1770,11 @@
                 "title": "旧式のタグ(訳注:OSM Wikiで確認を推奨)",
                 "message": "{feature} には旧式のタグがあります",
                 "tip": "最新にできる非推奨タグを持つ地物を探す",
-                "reference": "その後タグ付け方法が変わっているものがあるので最新にすべきです。(訳注:よく分からないものはOSM-Wikiで確認してからアップグレードしてください)"
+                "reference": "その後タグ付け方法が変わっているものがあるので最新にすべきです。(訳注:よく分からないものはOSM-Wikiで確認してからアップグレードしてください)",
+                "incomplete": {
+                    "message": "{feature} には不完全なタグがあります",
+                    "reference": "タグを追加したほうが良い地物があります。"
+                }
             },
             "private_data": {
                 "title": "プライベート情報",
@@ -3706,6 +3733,9 @@
                         "required": "予約必須",
                         "yes": "予約可能"
                     }
+                },
+                "resort": {
+                    "label": "種類"
                 },
                 "resource": {
                     "label": "資源の種類"
@@ -6549,6 +6579,10 @@
                     "name": "ぶどう畑",
                     "terms": "ぶどう畑, 果樹園, 森林, 樹木, 植物, ブドウ, 農業"
                 },
+                "landuse/winter_sports": {
+                    "name": "冬季スポーツ区域",
+                    "terms": "冬季スポーツ区域, 冬季スポーツ, ウィンタースポーツ"
+                },
                 "leisure": {
                     "name": "レジャー施設全般"
                 },
@@ -6591,6 +6625,10 @@
                 "leisure/dancing_school": {
                     "name": "ダンススクール",
                     "terms": "ダンススクール, 舞踏, 日本舞踊, タンゴ, 社交ダンス, ワルツ, ダンス教室, 稽古, 練習, 習い事, 学校"
+                },
+                "leisure/disc_golf_course": {
+                    "name": "ディスクゴルフコース",
+                    "terms": "ディスクゴルフコース, ディスクゴルフ, スポーツ"
                 },
                 "leisure/dog_park": {
                     "name": "ドッグパーク",
@@ -6751,6 +6789,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "乗馬場",
                     "terms": "乗馬場, スポーツ, 運動, トレーニング, 練習, 訓練, 競技"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "フィールドホッケー場",
+                    "terms": "フィールドホッケー場, ホッケー, スポーツ"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "ホースシューズ場",
@@ -7014,6 +7056,10 @@
                 "man_made/storage_tank": {
                     "name": "貯蔵タンク",
                     "terms": "貯蔵タンク, タンク"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "水槽",
+                    "terms": "水槽, タンク, 水タンク"
                 },
                 "man_made/street_cabinet": {
                     "name": "ストリートキャビネット",
@@ -9145,6 +9191,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: 緑枠 = unclassified.ブラウン枠 = track. Surface: gravel = ライトブラウン, Asphalt = 黒, paved = グレイ, ground =白, concrete = 青, grass = 緑. Seasonal = 白棒",

@@ -782,6 +782,14 @@
                 "description": "Byggnader",
                 "tooltip": "Byggnader, skydd, garage, m.m."
             },
+            "building_parts": {
+                "description": "Byggnadsdelar",
+                "tooltip": "3D-byggnader och tak-komponenter"
+            },
+            "indoor": {
+                "description": "Inomhusobjekt",
+                "tooltip": "Rum, korridorer, trapphus, etc."
+            },
             "landuse": {
                 "description": "Markanvändning",
                 "tooltip": "Skogar, åkermark, parker, bostadsområden, shoppingområden m.m."
@@ -797,6 +805,9 @@
             "rail": {
                 "description": "Rälsobjekt",
                 "tooltip": "Järnvägar"
+            },
+            "pistes": {
+                "description": "Pister"
             },
             "power": {
                 "description": "Kraftobjekt",
@@ -1626,7 +1637,6 @@
             "close_nodes": {
                 "title": "Punkt väldigt nära varandra",
                 "message": "Två punkter på {way} är väldigt nära varandra",
-                "tip": "Hitta redundanta punkter på vägar",
                 "reference": "Redundanta punkter på vägar bör slås ihop eller flyttas isär."
             },
             "crossing_ways": {
@@ -1747,7 +1757,11 @@
                 "title": "Föråldrade taggar",
                 "message": "{feature} har föråldrade taggar.",
                 "tip": "Hitta objekt med föråldrade taggar som kan uppdateras",
-                "reference": "Vissa taggar har ändrats över tid och bör uppdateras."
+                "reference": "Vissa taggar har ändrats över tid och bör uppdateras.",
+                "incomplete": {
+                    "message": "{feature} har ofullständiga taggar",
+                    "reference": "Vissa objekt bör har ytterligare taggar."
+                }
             },
             "private_data": {
                 "title": "Privat information",
@@ -3706,6 +3720,9 @@
                         "required": "Krävs",
                         "yes": "Möjligt"
                     }
+                },
+                "resort": {
+                    "label": "Typ"
                 },
                 "resource": {
                     "label": "Resurser"

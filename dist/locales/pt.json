@@ -782,6 +782,14 @@
                 "description": "Edifícios",
                 "tooltip": "Edifícios, Abrigos, Garagens, etc."
             },
+            "building_parts": {
+                "description": "Partes de edifícios",
+                "tooltip": "Componentes 3D de telhados e edifícios"
+            },
+            "indoor": {
+                "description": "Elementos interiores",
+                "tooltip": "Salas, corredores, escadarias, etc."
+            },
             "landuse": {
                 "description": "Elementos de Uso do Solo",
                 "tooltip": "Florestas, Quintas, Parques, Áreas Residenciais, etc."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Elementos de Ferrovias",
                 "tooltip": "Ferrovias"
+            },
+            "pistes": {
+                "description": "Pistas",
+                "tooltip": "Pista de esqui, pista de trenó, pista de patinagem no gelo, etc."
+            },
+            "aerialways": {
+                "description": "Elementos de transporte aéreo",
+                "tooltip": "Telecadeiras, gôndolas, tirolesas, etc."
             },
             "power": {
                 "description": "Elementos de Energia",
@@ -1619,15 +1635,22 @@
                 "title": "Quase cruzamentos",
                 "message": "{feature} está muito perto mas não está ligada a {feature2}",
                 "tip": "Encontrar elementos que provavelmente deviam estar conectados a outros elementos em redor.",
+                "self": {
+                    "message": "{feature} termina muito próximo de si próprio mas não está ligado"
+                },
                 "highway-highway": {
                     "reference": "Rodovias que se intersetam deviam ter um vértice de cruzamento em comum."
                 }
             },
             "close_nodes": {
                 "title": "Pontos muito próximos",
+                "tip": "Procurar pontos redundantes e lotados",
                 "message": "Dois pontos em {way} estão muito próximos um do outro",
-                "tip": "Procurar pontos redundantes em linhas",
-                "reference": "Pontos redundantes numa linha devem ser unidos num só ou afastados um do outro."
+                "reference": "Pontos redundantes numa linha devem ser unidos num só ou afastados um do outro.",
+                "detached": {
+                    "message": "{feature} está demasiado próximo de {feature2}",
+                    "reference": "Pontos separados não devem partilhar uma localização."
+                }
             },
             "crossing_ways": {
                 "title": "Vias que se cruzam",
@@ -1747,7 +1770,11 @@
                 "title": "Etiquetas em desuso",
                 "message": "{feature} tem etiquetas em desuso",
                 "tip": "Procurar elementos com etiquetas em desuso que podem ser atualizadas",
-                "reference": "Algumas etiquetas mudam ao longo do tempo e devem ser atualizadas."
+                "reference": "Algumas etiquetas mudam ao longo do tempo e devem ser atualizadas.",
+                "incomplete": {
+                    "message": "{feature} tem etiquetas incompletas",
+                    "reference": "Alguns elementos deviam ter etiquetas adicionais."
+                }
             },
             "private_data": {
                 "title": "Informação privada",
@@ -3706,6 +3733,9 @@
                         "required": "Obrigatório",
                         "yes": "Aceita"
                     }
+                },
+                "resort": {
+                    "label": "Tipo"
                 },
                 "resource": {
                     "label": "Recursos"
@@ -7008,6 +7038,10 @@
                     "name": "Depósito de armazenamento",
                     "terms": "storage tank, depósito, armazenagem, tanque"
                 },
+                "man_made/storage_tank/water": {
+                    "name": "Depósito de água",
+                    "terms": "water tank, depósito de água, contentor de água, tanque de água, depósito, cisterna, caixa-d'água, caixa d'água, caixa de água, castelo d'água, castelo de água"
+                },
                 "man_made/street_cabinet": {
                     "name": "street cabinet, gabinete, caixa, caixa de distribuição, armário, armário de rua",
                     "terms": "street cabinet, gabinete, caixa, caixa de distribuição, armário, distribuição de telecomunicações. distribuição de sinal de cabo, distribuição de sinal telefónico"
@@ -7057,8 +7091,8 @@
                     "terms": "Wastewater Plant, E.T.A.R., ETAR, Resíduos, Estação de Tratamento de Resíduos, Estação de Tratamento de Águas Residuais"
                 },
                 "man_made/water_tower": {
-                    "name": "Reservatório elevado",
-                    "terms": "Depósito de Água, Torre de Água, Water Tower"
+                    "name": "Reservatório de água elevado",
+                    "terms": "water tower, depósito de água, torre de água, castelo d'água, castelo de água, reservatório, depósito de água, depósito, cisterna"
                 },
                 "man_made/water_well": {
                     "name": "Poço de água",
@@ -7329,6 +7363,10 @@
                 "office/financial": {
                     "name": "Escritório financeiro privado",
                     "terms": "financial office, escritório financeiro privado, escritório financeiro"
+                },
+                "office/financial_advisor": {
+                    "name": "Conselheiro financeiro",
+                    "terms": "financial advisor, conselheiro financeiro, aconselhamento financeiro"
                 },
                 "office/forestry": {
                     "name": "Posto florestal",

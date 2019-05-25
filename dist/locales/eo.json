@@ -781,6 +781,14 @@
                 "description": "Konstruaĵoj",
                 "tooltip": "Konstruaĵoj, ŝirmejoj, garaĝoj, ktp."
             },
+            "building_parts": {
+                "description": "Partoj de konstruaĵoj",
+                "tooltip": "3‑dimensiaj detaloj pri konstruaĵoj kaj tegmentoj"
+            },
+            "indoor": {
+                "description": "Enkonstruaĵaj objektoj",
+                "tooltip": "Ĉambroj, koridoroj, ŝtuparejoj, ktp."
+            },
             "landuse": {
                 "description": "Utilkampoj",
                 "tooltip": "Arbaroj, agrokulturaj terenoj, parkoj, privatdomaj aŭ oficejaj terenoj, ktp."
@@ -796,6 +804,14 @@
             "rail": {
                 "description": "Fervojoj",
                 "tooltip": "Fervojoj"
+            },
+            "pistes": {
+                "description": "Skivojoj",
+                "tooltip": "Skiaj kaj glitveturilaj kursoj, ktp."
+            },
+            "aerialways": {
+                "description": "Kablovojoj",
+                "tooltip": "Kablovoja (telferoj) transporto"
             },
             "power": {
                 "description": "Elektrejoj",
@@ -1617,15 +1633,22 @@
                 "title": "Preskaŭ vojkruciĝoj",
                 "message": "{feature} estas tre proksima – sed ne kunigita – al {feature2}",
                 "tip": "Trovi objektojn, kiuj probable devus esti kunigitaj al aliaj proksimaj objektoj.",
+                "self": {
+                    "message": "Fino de {feature} estas tre proksima – sed ne kuniĝas – al ĝi"
+                },
                 "highway-highway": {
                     "reference": "Intersekcantaj vojoj ĉiam kunhavigu verticon de vojkruciĝo."
                 }
             },
             "close_nodes": {
                 "title": "Tre proksimaj punktoj",
+                "tip": "Trovi troajn kaj proksimajn punktojn",
                 "message": "Du punktoj en {way} estas tre proksimaj al si",
-                "tip": "Trovi troajn punktojn en linioj",
-                "reference": "Troaj punktoj en linio estu kunfanditaj aŭ disigitaj."
+                "reference": "Troaj punktoj en linio estu kunfanditaj aŭ disigitaj.",
+                "detached": {
+                    "message": "{feature} estas tre proksima al {feature2}",
+                    "reference": "Apartaj punktoj ne havu la saman pozicion."
+                }
             },
             "crossing_ways": {
                 "title": "Intersekciĝantaj linioj",
@@ -1745,7 +1768,11 @@
                 "title": "Evitindaj etikedoj",
                 "message": "{feature} havas evitindajn etikedojn",
                 "tip": "Trovi objektojn kun kadukaj (neĝisdataj) etikedoj",
-                "reference": "Iuj etikedoj kun la tempo iĝas kadukaj (evitindaj) kaj estu ĝisdatigitaj."
+                "reference": "Iuj etikedoj kun la tempo iĝas kadukaj (evitindaj) kaj estu ĝisdatigitaj.",
+                "incomplete": {
+                    "message": "{feature} havas nekompletajn etikedojn",
+                    "reference": "Iuj objektoj havu pliajn etikedojn."
+                }
             },
             "private_data": {
                 "title": "Privataj informoj",
@@ -3704,6 +3731,9 @@
                         "required": "Devigata",
                         "yes": "Akceptata"
                     }
+                },
+                "resort": {
+                    "label": "Speco"
                 },
                 "resource": {
                     "label": "Minaĵoj"
@@ -6547,6 +6577,10 @@
                     "name": "Vinber-ĝardeno",
                     "terms": "vinberĝardeno,vinberghardeno,vinbergxardeno,vinejo,vinberejo,vitejo"
                 },
+                "landuse/winter_sports": {
+                    "name": "Vintrosporta centro",
+                    "terms": "vintrosportoj,skiado,neĝtabulado,turisma centro"
+                },
                 "leisure": {
                     "name": "Ripozejo"
                 },
@@ -6589,6 +6623,10 @@
                 "leisure/dancing_school": {
                     "name": "Danca lernejo",
                     "terms": "danclernejo,dancolernejo"
+                },
+                "leisure/disc_golf_course": {
+                    "name": "Ludkampo por golfdisko",
+                    "terms": "golfdisko,frisbee,flugdisko,frisbeo"
                 },
                 "leisure/dog_park": {
                     "name": "Hund-parko",
@@ -6749,6 +6787,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Rajdlernejo",
                     "terms": "ĉevalrajdlernejo,rajdlernejo,rajdejo,rajdadejo,maneĝo,maneĝejo,hipodromo"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Ludkampo por herbhokeo",
+                    "terms": "herbhokeo,herbohokeo,gazonhokeo"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Hufumluda kampo",
@@ -7012,6 +7054,10 @@
                 "man_made/storage_tank": {
                     "name": "Rezervujo",
                     "terms": "ujego,gasujo,brulaĵujo,naftujo"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Rezervujo (akvo)",
+                    "terms": "akvujo,cisterno"
                 },
                 "man_made/street_cabinet": {
                     "name": "Ŝranko distribua",
@@ -9135,6 +9181,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Ĉi tiu jara ortfotmapo DOQQ de «National Agriculture Imagery Program» (NAIP) por ĉiu kontinenta subŝtato de Usono.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Vojo: verda rando = neklasifikita, bruna rando = kampa vojo. Pavimo: helbruna plenigo = sablego, nigra = asfalto, griza = pavimita, blanka = tera, blua = betono, verda = herbo. Blankaj strioj = sezona vojo.",

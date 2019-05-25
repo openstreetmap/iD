@@ -782,6 +782,14 @@
                 "description": "Budynki",
                 "tooltip": "Budynki, wiaty, garaże itp."
             },
+            "building_parts": {
+                "description": "Części budynków",
+                "tooltip": "Budynki 3D i elementy dachów"
+            },
+            "indoor": {
+                "description": "Wnętrza budynków",
+                "tooltip": "Pokoje, korytarze itp."
+            },
             "landuse": {
                 "description": "Obiekty użytkowania terenów",
                 "tooltip": "Lasy, pola, parki, osiedla mieszkaniowe, obszary handlowe, biurowe itp."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Obiekty kolejowe",
                 "tooltip": "Tory kolejowe"
+            },
+            "pistes": {
+                "description": "Trasy zjazdowe",
+                "tooltip": "Trasy narciarskie, saneczkowe, łyżwiarskie itp."
+            },
+            "aerialways": {
+                "description": "Obiekty napowietrzne",
+                "tooltip": "Wyciągi narciarskie, kolejki linowe itp."
             },
             "power": {
                 "description": "Obiekty dystrybucji prądu elektrycznego",
@@ -1619,15 +1635,22 @@
                 "title": "Prawie skrzyżowania",
                 "message": "{feature} jest bardzo blisko drogi {feature2}, ale nie jest z nią połączona",
                 "tip": "Drogi, które są bardzo blisko siebie i łączą się w rzeczywistości, powinny być połączone.",
+                "self": {
+                    "message": "{feature} kończy się bardzo blisko samej siebie, ale nie jest połączona"
+                },
                 "highway-highway": {
                     "reference": "Drogi, które są bardzo blisko siebie i łączą się w rzeczywistości, powinny być połączone."
                 }
             },
             "close_nodes": {
                 "title": "Bardzo bliskie punkty",
-                "message": "Dwa punkty na drodze {way} są bardzo blisko siebie",
-                "tip": "Zbędne punkty na linii powinny zostać scalone lub odsunięte od siebie.",
-                "reference": "Zbędne punkty na linii powinny zostać scalone lub odsunięte od siebie."
+                "tip": "Różne obiekty nie powinny być w tym samym miejscu, a zbędne punkty na linii powinny zostać połączone lub odsunięte od siebie.",
+                "message": "Dwa punkty na {way} są bardzo blisko siebie",
+                "reference": "Zbędne punkty na linii powinny zostać scalone lub odsunięte od siebie.",
+                "detached": {
+                    "message": "{feature} jest zbyt blisko {feature2}",
+                    "reference": "Różne obiekty nie powinny być w tym samym miejscu."
+                }
             },
             "crossing_ways": {
                 "title": "Przecięcia bez skrzyżowania",
@@ -1747,7 +1770,11 @@
                 "title": "Przestarzałe znaczniki",
                 "message": "{feature} używa przestarzałych znaczników",
                 "tip": "Niektóre znaczniki zmieniają się z czasem i powinny zostać zaktualizowane.",
-                "reference": "Niektóre znaczniki zmieniają się z czasem i powinny zostać zaktualizowane."
+                "reference": "Niektóre znaczniki zmieniają się z czasem i powinny zostać zaktualizowane.",
+                "incomplete": {
+                    "message": "{feature} ma niepełny zestaw znaczników",
+                    "reference": "Niektóre obiekty powinny mieć dodatkowe znaczniki."
+                }
             },
             "private_data": {
                 "title": "Prywatne informacje",
@@ -3707,6 +3734,9 @@
                         "yes": "Tak"
                     }
                 },
+                "resort": {
+                    "label": "Rodzaj"
+                },
                 "resource": {
                     "label": "Zasoby"
                 },
@@ -4806,6 +4836,10 @@
                 "amenity/post_office": {
                     "name": "Poczta/agencja pocztowa",
                     "terms": "poczta,urząd pocztowy,agencja pocztowa"
+                },
+                "amenity/prep_school": {
+                    "name": "Szkolenia / korepetycje",
+                    "terms": "szkoła, szkolenia, korepetycje"
                 },
                 "amenity/prison": {
                     "name": "Teren więzienia",
@@ -6545,6 +6579,10 @@
                     "name": "Winnica",
                     "terms": "winnica"
                 },
+                "landuse/winter_sports": {
+                    "name": "Miejsce na sporty zimowe",
+                    "terms": "miejsce na sporty zimowe, obszar sportów zimowych, teren narciarski, ośrodek narciarski, stok narciarski, narciarstwo, narty, teren snowboardowy, snowboard"
+                },
                 "leisure": {
                     "name": "Rozrywka i wypoczynek"
                 },
@@ -6747,6 +6785,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Ujeżdżalnia",
                     "terms": "ujeżdżalnia"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Boisko do hokeja na trawie",
+                    "terms": "boisko do hokeja na trawie, hokej na trawie"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Miejsce do gry w rzut podkową",
@@ -7010,6 +7052,10 @@
                 "man_made/storage_tank": {
                     "name": "Zbiornik",
                     "terms": "zbiornik"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Zbiornik na wodę",
+                    "terms": "zbiornik na wodę, zbiornik wody, woda"
                 },
                 "man_made/street_cabinet": {
                     "name": "Skrzynka elektryczna",
@@ -7332,6 +7378,10 @@
                 "office/financial": {
                     "name": "Biuro finansowe",
                     "terms": "agent finansowy"
+                },
+                "office/financial_advisor": {
+                    "name": "Doradzca finansowy",
+                    "terms": "doradzca finansowy, doradztwo finansowe"
                 },
                 "office/forestry": {
                     "name": "Leśnictwo",

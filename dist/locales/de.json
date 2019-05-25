@@ -782,6 +782,14 @@
                 "description": "Gebäude",
                 "tooltip": "Gebäude, Unterstände, Garagen usw."
             },
+            "building_parts": {
+                "description": "Gebäudeteile",
+                "tooltip": "3D Gebäude und Dachkomponenten"
+            },
+            "indoor": {
+                "description": "Objekte in Gebäuden",
+                "tooltip": "Räume, Gänge, Stiegenhäuser, etc."
+            },
             "landuse": {
                 "description": "Flächennutzungen",
                 "tooltip": "Wälder, Äcker, Parks, Wohngebiete, Industriegebiete usw."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Eisenbahnen",
                 "tooltip": "Eisenbahnen"
+            },
+            "pistes": {
+                "description": "Pisten",
+                "tooltip": "Skipisten, Schlittenwege, Eislaufbahn, etc."
+            },
+            "aerialways": {
+                "description": "Objekte in der Luft",
+                "tooltip": "Sessellift, Gondeln, Seilrutsche, etc."
             },
             "power": {
                 "description": "Stromleitungen",
@@ -1619,15 +1635,22 @@
                 "title": "Fast-Kreuzungen",
                 "message": "{feature} ist sehr nahe zu {feature2}, aber nicht verbunden",
                 "tip": "Finde Objekt die möglicherweise mit Objekten in der Nähe verbunden werden sollten",
+                "self": {
+                    "message": "{feature} endet sehr nahe zu sich selbst aber ist nicht verbunden"
+                },
                 "highway-highway": {
                     "reference": "Kreuzende Straßen sollten sich einen Verbindungsknoten teilen."
                 }
             },
             "close_nodes": {
                 "title": "Sehr nahe Punkte",
+                "tip": "Finde redundante and überfüllte Punkte",
                 "message": "Zwei Punkte in {way} sind sehr nahe",
-                "tip": "Finde überflüssige Punkte in Wegen",
-                "reference": "Überflüssige Punkte in einem Weg sollten vereinigt oder auseinander bewegt werden."
+                "reference": "Überflüssige Punkte in einem Weg sollten vereinigt oder auseinander bewegt werden.",
+                "detached": {
+                    "message": "{feature} ist zu nahe bei {feature2}",
+                    "reference": "Verschiedene Punkte sollten nicht am selben Platz sein."
+                }
             },
             "crossing_ways": {
                 "title": "Kreuzende Wege",
@@ -1747,7 +1770,11 @@
                 "title": "Veraltete Eigenschaften",
                 "message": "{feature} hat veraltete Eigenschaften",
                 "tip": "Finde Objekte mit veraltete Eigenschaften die aktualisiert werden können",
-                "reference": "Manchen Eigenschaften ändern sich im Laufe der Zeit und sollten aktualisiert werden."
+                "reference": "Manchen Eigenschaften ändern sich im Laufe der Zeit und sollten aktualisiert werden.",
+                "incomplete": {
+                    "message": "{feature} hat unvollständige Eigenschaften",
+                    "reference": "Einige Objekte sollten zusätzliche Eigenschaften haben."
+                }
             },
             "private_data": {
                 "title": "Private Information",
@@ -3706,6 +3733,9 @@
                         "required": "verpflichtend",
                         "yes": "akzeptiert"
                     }
+                },
+                "resort": {
+                    "label": "Typ"
                 },
                 "resource": {
                     "label": "Rohstoffe"
@@ -6549,6 +6579,10 @@
                     "name": "Weinberg",
                     "terms": "Weinberg, Weinanbau, Wengert"
                 },
+                "landuse/winter_sports": {
+                    "name": "Wintersportgebiet",
+                    "terms": "Pistengebiet, Schigebiet, Schihügel, Schiberg, Wintersportort, Snowboardgebiet"
+                },
                 "leisure": {
                     "name": "Freizeit"
                 },
@@ -6591,6 +6625,10 @@
                 "leisure/dancing_school": {
                     "name": "Tanzschule",
                     "terms": "Tanzschule"
+                },
+                "leisure/disc_golf_course": {
+                    "name": "Discgolf Anlage",
+                    "terms": "Discgolf, Frisbee Golf, fliegendes Scheibengolf, Frolf, ultimative"
                 },
                 "leisure/dog_park": {
                     "name": "Hundepark",
@@ -6751,6 +6789,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Reitplatz",
                     "terms": "Reitplatz, Pferdesportplatz, Reitbahn"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Hockeyfeld",
+                    "terms": "Hockeyfeld"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Hufeisenwurfplatz",
@@ -7014,6 +7056,10 @@
                 "man_made/storage_tank": {
                     "name": "Tank",
                     "terms": "Tank, Lagertank, Speichertank, Vorratstank"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Wassertank",
+                    "terms": "Zisterne, Wasserturm"
                 },
                 "man_made/street_cabinet": {
                     "name": "Schaltschrank im Freien",
@@ -9145,6 +9191,10 @@
                 "description": "Gelb = Public domain Kartendaten vom US Census. Rot  = Data nicht in OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "USDA-NAIP": {
+                "description": "Das aktuellste Jahr der DOQQs aus dem Programm für Nationale Landwirtschafts-Luftbilder (National Agriculture Imagery Program, NAIP) für jeden Staat in den zusammenhängenden USA.",
+                "name": "Programm für Nationale Landwirtschafts-Luftbilder (National Agriculture Imagery Program, NAIP)"
+            },
             "US_Forest_Service_roads_overlay": {
                 "description": "Straße: Grüner Rand = Nebenstraße. Brauner Rand = Feldweg/Waldweg. Oberfläche: Schotter = hellbraune Füllung, Asphalt = schwarz, befestigt = grau, ground = weiß, Beton = blau, Gras = grün. Saisonal = weißes Gitter",
                 "name": "U.S.A. Forststraßen Overlay"
@@ -9678,27 +9728,154 @@
                 "extendedDescription": "YouthMappers UGB besteht aus jungen Studenten und Forschern, die sich leidenschaftlich mit Mapping beschäftigen. Unser Ziel ist es, die Fähigkeiten der Schüler auf dem Gebiet der Kartografie zu verbessern und an der Erstellung offener Geodaten mitzuwirken, die den Entwicklungsherausforderungen auf der ganzen Welt und insbesondere in Afrika entsprechen."
             },
             "ym-Fourah-Bay-College": {
-                "name": "Vereinigung der Geographie-Stundierenden"
+                "name": "Vereinigung der Geographie-Stundierenden",
+                "description": "YouthMappers chapter at Fourah Bay College",
+                "extendedDescription": "The Student's Geographical Association- YouthMappers is an association of Fourah Bay College Students with the common goals of mapping out vulnerable places in Sierra Leone and the world at large for relief and other beneficial purposes,carry out Research and other educative endeavors. The chapter consists of young people with great ideas, development oriented with the capacity to relate with each other, comprehend and implement sustainable developmental projects as a team."
+            },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "Njala Freetown YouthMappers",
+                "description": "YouthMappers chapter at Njala University, Freetown Campus",
+                "extendedDescription": "We are students of Njala University Freetown Campus, studying Information Technology under the department of Physics and Computer Science. and we are located at Henry Street Freetown, Sierra Leone."
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers Njala University, Njala Campus",
+                "description": "YouthMappers chapter at Njala University, Njala Campus"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centre for Geoinformation Science",
+                "description": "YouthMappers chapter at University of Pretoria",
+                "extendedDescription": "The students who map Pretoria are supported by the University of Pretoria's Centre for Geoinformation Science, a platform from where the excellence of UP individuals and teams involved in geographic information science (GISc) research, education and training, professional development and community engagement is encouraged and strengthened through collaborations, education and training and  alliances within South Africa and abroad."
             },
             "ym-Ardhi-University": {
-                "name": "ARU Mapper"
+                "name": "ARU Mapper",
+                "description": "YouthMappers chapter at Ardhi University",
+                "extendedDescription": "As upcoming geospatial data consultants we seek to educate and provide advice to the society on how they can use spatial data not only as a form of location but a tool of decision making and predict different hazardous and climatical changes which may harm them or future genarations."
             },
             "ym-Institute-of-Finance-Management": {
-                "name": "IFM mappers"
+                "name": "IFM mappers",
+                "description": "YouthMappers chapter at Institute of Finance Management",
+                "extendedDescription": "This is a new  chapter at out institute and we are looking forward to use our financial education that we are receiving here at the campus  and link ig with the environment in order to develop our sustainable environment towards helping the community  with the effects of our environment in a financial ways by converting them into numbers. this is widely explained in ecosystem accounting and environmental accounts"
+            },
+            "ym-Institute-of-Rural-Development-Planning-Mwanza": {
+                "name": "Youth Mappers Chapter at Institute of Rural Development Planning - Lake Zone Centre",
+                "description": "YouthMappers chapter at Institute of Rural Development Planning Mwanza"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Mipango YouthMappers Chapter",
+                "description": "YouthMappers chapter at Institute of Rural Development Planning",
+                "extendedDescription": "Mipango YouthMappers Chapter was introduced at IRDP on 3rd July, 2017 by Dr.Domitilla Bashemera. The founding members were  300 (190 males and 110 female) Bachelor Degree students, who were registered as members of the Chapter. Gerald Zacharia is the president of the chapter and Juster Lugira is Vice President."
+            },
+            "ym-Open-University-of-Tanzania": {
+                "name": "Youth Mappers at Open University of Tanzania",
+                "description": "YouthMappers chapter at Open University of Tanzania",
+                "extendedDescription": "Youth Mappers at Open University of Tanzania\n\nHad been founded by members and students of Open University of Tanzania in Department of Geography who are mainly need to improve their career and help young community through joint and partnership projects with local community groups such as Mikoko Scout Group (www.msg.or.tz) and start cooperation with international colleges and universities for exchange programs in relation to Geography Studies as some programs prepared by Mikoko Scout Group which will link local university and other universities of the same interest through International Nature & Environmental Youth Camp 2019 (www.campsite.msg.or.tz/nature.html )\n\nOur chapter will soon be recognized as youth network program that will open opportunity for students to study and conduct research studies at a local levels."
             },
             "ym-Sokoine-University-of-Agriculture": {
-                "name": "SMCoSE YouthMappers"
+                "name": "SMCoSE YouthMappers",
+                "description": "YouthMappers chapter at Sokoine University of Agriculture",
+                "extendedDescription": "A Chapter comprising of Environmental sciences and management students and Geography studies under the dept. of Geography and  we will be using mapping techniques, based on systems concepts and theories, can be used to facilitate, explore, and capture the different understandings of the relationships, perspectives, and boundaries involved in environmental sustainability to obtain a more complete comprehension of the concept and develop plans for action."
+            },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers at University of Dar es Salaam",
+                "description": "YouthMappers chapter at University of Dar es Salaam",
+                "extendedDescription": "The purpose of the University of Dar es Salaam YouthMappers  is to use and promote open source data and GIS technologies to map potential disaster areas, provide resources for emergency management, connect its members with open source and GIS organizations in the city of Dar es Salaam, and serve any upcoming needs of our project partners ."
+            },
+            "ym-Busitema-University": {
+                "name": "Good Mappers",
+                "description": "YouthMappers chapter at Busitema University",
+                "extendedDescription": "Good mappers is a team of students in Busitema University. Its main objective is to create a community of experienced mappers who can contribute to the world map."
             },
             "ym-Gulu-University": {
-                "name": "CSGU Mappers"
+                "name": "CSGU Mappers",
+                "description": "YouthMappers chapter at Gulu University",
+                "extendedDescription": "The CSGU Mappers are the Computing Society at Gulu University. This chapter is creative, passionate, innovative and ready to map Uganda and the world at large, beyond other people's imagination."
             },
             "ym-Kumi-University": {
-                "name": "Ever Last YouthMappers"
+                "name": "Ever Last YouthMappers",
+                "description": "YouthMappers chapter at Kumi University",
+                "extendedDescription": "This energetic group of students organizes within the faculty of Science and Information Technology."
+            },
+            "ym-Makerere-University": {
+                "name": "Geo YouthMappers",
+                "description": "YouthMappers chapter at Makerere University",
+                "extendedDescription": "Geo YouthMappers is a Makerere University based mapping chapter esteemed to apply the spatial conception to the real world.We have collaborated on various mapping events with OSM. Our main aim is the desire to simplify data and make it readily available mostly for disaster preparedness.\"We map the world and change lives."
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "name": "MUST Street Mappers",
+                "description": "YouthMappers chapter at Mbarara University of Science and Technology",
+                "extendedDescription": "MUST Street Mappers is a Youth Mappers chapter at the Mbarara University of Science and Technology that is based on making our country and the world at large a better place through mapping. We base on collected information to notice patterns and data mine to present relevant and beneficial information to society."
+            },
+            "ym-St.-Augustine-International-University": {
+                "name": "YouthMappers at St Augustine International University",
+                "description": "YouthMappers chapter at St. Augustine International University"
+            },
+            "ym-Uganda-Christian-University-Mbale-Campus": {
+                "name": "Mappers for Life",
+                "description": "YouthMappers chapter at Uganda Christian University Mbale Campus",
+                "extendedDescription": "We are Team Mappers for life! Please come and join us as we map together!\" This group works from the Department of Information Technology at the UCU."
+            },
+            "ym-Uganda-Pentecostal-University": {
+                "name": "HiTech Youth Mappers",
+                "description": "YouthMappers chapter at Uganda Pentecostal University",
+                "extendedDescription": "A new Youthmappers Chapter in Western Uganda. Ready to map and provide open data with OpenStreetMap for development purposes."
+            },
+            "ym-St.-Mawaggali-Trades-Training-Institute": {
+                "name": "MawaggaliMappers",
+                "description": "YouthMappers chapter at St. Mawaggali Trades Training Institute",
+                "extendedDescription": "We are the youthappers chapter at St. Mawaggali trades in choma who are want to contribute the different humantarian tasks to serve lives through mapping."
+            },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza",
+                "description": "YouthMappers chapter at The University of Zambia"
+            },
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers",
+                "description": "YouthMappers chapter at University of Zimbabwe",
+                "extendedDescription": "UzMappersTeam Zimbabwe is a team of Volunteers using OpenStreetMap for Open Data Mapping and Humanitarian Disaster response mapping .The team empowers its members with open source geospatial technology skills."
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesch",
                 "description": "Verbessere OpenStreetMap in Bangladesch",
                 "extendedDescription": "Mappst du in Bangladesch? Hast du Fragen, willst du mit der Community vor Ort Kontakt aufnehmen? Mach mit: {url}. Alle sind willkommen!"
+            },
+            "ym-Asian-University-for-Women": {
+                "name": "YouthMappers at AUW",
+                "description": "YouthMappers chapter at Asian University for Women",
+                "extendedDescription": "The Asian University for Women seeks to graduate women who will be skilled and innovative professionals, service-oriented leaders in the businesses and communities in which they will work and live, and promoters of intercultural understanding and sustainable human and economic development in Asia and throughout the world."
+            },
+            "ym-Dhaka-College": {
+                "name": "YouthMappers Daka College",
+                "description": "YouthMappers chapter at Dhaka College",
+                "extendedDescription": "YouthMappers DhakaCollege is an approach by students to help mapping vulnerable areas of the world as a part of Humanitarian Action. YouthMappers  gives the opportunity to the students for helping people and using mapping for humanitarian purposes. This open geographic data can be used for educational, navigational and other humanitarian purposes. Happy mapping."
+            },
+            "ym-Dhaka-University": {
+                "name": "Openstreetmap YouthMappers",
+                "description": "YouthMappers chapter at Dhaka University",
+                "extendedDescription": "It's a great privilege for the students of University of Dhaka to map for humanitarian purposes. Our chapter gives the opportunity to the students for helping people and use mapping for humanitarian purposes."
+            },
+            "ym-Eastern-University": {
+                "name": "YouthMappers at Eastern University",
+                "description": "YouthMappers chapter at Eastern University",
+                "extendedDescription": "YouthMappers at Eastern University, Bangladesh has been formed with a view to assisting people during humanitarian crisis. The students, likewise other mappers of the world, are promised to assist people in using the map for educational, navigational and other humanitarian purposes."
+            },
+            "ym-Jahangirnagar-University": {
+                "name": "YouthMappers at IRS, Jahangirnagar University",
+                "description": "YouthMappers chapter at Jahangirnagar University"
+            },
+            "ym-Khulna-University": {
+                "name": "Openstreetmap",
+                "description": "YouthMappers chapter at Khulna University",
+                "extendedDescription": "KU students and faculty from multiple disciplines are experienced at creating open data for OSM to address local challenges of development, including food security and other topics."
+            },
+            "ym-Rajshahi-University-of-Engineering-Technology": {
+                "name": "YouthMappers at RUET",
+                "description": "YouthMappers chapter at Rajshahi University of Engineering & Technology",
+                "extendedDescription": "The \"YouthMappers at RUET\" is a humanitarian mapping group of students of Rajshahi University of Engineering & Technology (RUET) to share, develop and practice the knowledge of GIS.  This group encourages using open source geospatial data and platform to make solution to reach the most vulnerable group of the world."
+            },
+            "ym-Sherubtse-College": {
+                "name": "Geographical Society",
+                "description": "YouthMappers chapter at Sherubtse College",
+                "extendedDescription": "The Geographical Society, in the Department of Geography & Planning, Sherubtse College, Royal University of Bhutan, with support from the Center for Climate Change and Spatial Information, has made several efforts to create awareness and address important issues at the local and national level. We now join hands with the international student-centered YouthMappers network on \"Mapping for Resilience\" and contributing to a global 'Happiness'!"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indien - Nachbarschaftsmapping",
@@ -9759,10 +9936,23 @@
                 "description": "FSHM Riot Gruppe zum diskutieren, plaudern und mehr über Mapping Aktivitäten zu  erfahren, Veranstaltungen in und um Puducherry",
                 "extendedDescription": "Mitglieder der FSHM Gemeinschaft reden über ihre OSM Mapping Updates und Erfahrungen in der Riot.im Gruppe, in dieser Gruppe wird auch über freie Software / Hardware, Technologie und Aktivismus diskutiert."
             },
+            "ym-Gujarat-University": {
+                "name": "CCIM at Ahmedabad",
+                "description": "YouthMappers chapter at Gujarat University"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonesien",
                 "description": "Verbessere  OpenStreetMap in Indonesien",
                 "extendedDescription": "Mappst du in Indonesien? Hast du Fragen, willst du mit der Community vor Ort Kontakt aufnehmen? Mach mit: {url}. Alle sind willkommen!"
+            },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi",
+                "description": "YouthMappers chapter at Universitas Negeri Makassar"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime",
+                "description": "YouthMappers chapter at University Muhammadiyah Surakarta",
+                "extendedDescription": "SpaceTime is a community mapping in the Faculty of Geography of Muhammadiyah University of Surakarta. SpaceTime was founded by Bruce Maldy Pratama, Mukhlis Akbar and Irfandi Fauzi. They are active students in the Faculty of Geography University Muhammadiyah Surakarta."
             },
             "osm-iran-aparat": {
                 "name": "OpenStreetMap Iran Aparat",
@@ -9821,6 +10011,21 @@
                 "description": "Verbessere in Nepal",
                 "extendedDescription": "Mappst du in Nepal? Hast du Fragen, willst du mit der Community vor Ort Kontakt aufnehmen? Mach mit: {url}. Alle sind willkommen!"
             },
+            "ym-Institute-of-Crisis-Management-Studies": {
+                "name": "Institute of Crisis Management Studies YouthMappers",
+                "description": "YouthMappers chapter at Institute of Crisis Management Studies",
+                "extendedDescription": "To develop Crisis Mappers to assist during disaster situations."
+            },
+            "ym-Kathmandu-University": {
+                "name": "Geomatics Engineering Society,GES",
+                "description": "YouthMappers chapter at Kathmandu University",
+                "extendedDescription": "Geomatics Engineering Society (GES) established in 2008 A.D is a departmental club under Department of Civil and Geomatics Engineering (DCGE) at Kathmandu University. GES acts as a platform to develop the skills of students apart from their educational activities by focusing on activities like technical trainings, seminars, talk programs and interaction with experts from related field, sports activities etc."
+            },
+            "ym-Tribhuvan-University": {
+                "name": "Geomatics Engineering Students Association",
+                "description": "YouthMappers chapter at Tribhuvan University",
+                "extendedDescription": "This organization is the student forum of Geomatics Engineering students of Tribhuvan University , Institute of Engineering on the Pashchimanchal campus. Established since the beginning of the degree program, students have been active in mapping and leadership and are thrilled to be a part of the YouthMappers network."
+            },
             "OSM-Asia-mailinglist": {
                 "name": "OpenStreetMap Asien Mailingliste",
                 "description": "Talk-asia ist die offizielle Mailingliste für die asiatische OSM-Gemeinschaft"
@@ -9844,6 +10049,16 @@
             "OSM-PH-telegram": {
                 "name": "OpenStreetMap Philippinen Telegram",
                 "description": "Inoffizielle lokale Telegram Gemeinschaft von OpenStreetMap Mitwirkenden und Freunden auf den Philippinen"
+            },
+            "ym-Far-Eastern-University-Institute-of-Technology": {
+                "name": "Junior Philippines Computer Society",
+                "description": "YouthMappers chapter at Far Eastern University -Institute of Technology",
+                "extendedDescription": "FEU has been recognized as one of the leading universities in the Philippines. Its mission centers on producing graduates who have contributed to the advancement of the country. The university continuously challenges itself to raise the bar of excellence to achieve a top-tier status not only in the Philippines but also in the South East Asian region"
+            },
+            "ym-University-of-the-Philippines-Resilience-Institute": {
+                "name": "YouthMappers UP Resilience Institute",
+                "description": "YouthMappers chapter at University of the Philippines Resilience Institute",
+                "extendedDescription": "The UP Resilience Institute was established in 2016 with a mission statement to empower local communities through multidisciplinary research and actions toward resilience. Through UP NOAH Center, and the help of different organizations, we have provided building exposure maps for 17 provinces out of the 82 and uploaded more than 4 million footprints to Open Street Maps."
             },
             "OSM-RU-forum": {
                 "name": "OpenStreetMap Russland forum",
@@ -9995,6 +10210,11 @@
                 "name": "Talk-dk Mailing Liste",
                 "description": "Eine Mailing Liste um über OpenStreetMap in Dänemark zu diskutieren"
             },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers",
+                "description": "YouthMappers chapter at Queen Mary University of London",
+                "extendedDescription": "This chapter will be part of the activities of the Queen Mary Geography Society."
+            },
             "fi-forum": {
                 "name": "OpenStreetMap FI Forum",
                 "description": "OpenStreetMap Finnland Web Forum"
@@ -10067,6 +10287,11 @@
                 "name": "OpenStreetMap Deutschland",
                 "description": "Die Plattform für Informationen über OpenStreetMap in Deutschland"
             },
+            "ym-Heidelberg-University": {
+                "name": "disastermappers heidelberg",
+                "description": "YouthMappers chapter at Heidelberg University",
+                "extendedDescription": "Disastermappers Heidelberg was founded in 2014 as a student initiative to build a platform for exchange between students, researchers and humanitarian actors. Disastermappers are a member of Missing Maps and are organizing mapathons, workshops and webinars in Heidelberg and beyond and support HOT and Missing Maps through research and applications."
+            },
             "hu-facebook": {
                 "name": "OpenStreetMap HU auf Facebook",
                 "description": "Mapper und Benutzer von OpenStreetMap Facebook in Ungarn"
@@ -10129,9 +10354,24 @@
                 "name": "OpenStreetMap Mailing Liste für das Trentino",
                 "description": "OpenStreetMap Italien regionales Diskussionsforum für das Trentino"
             },
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers",
+                "description": "YouthMappers chapter at Politecnico di Milano",
+                "extendedDescription": "PoliMappers is a volunteer students’ association based at Politecnico di Milano. The mission of the group is to train and motivate the next generation of volunteer mappers and to do mapping using free and open source software within the university as well as primary and secondary schools."
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers at YU",
+                "description": "YouthMappers chapter at Yarmouk University",
+                "extendedDescription": "YouthMappers chapter at YU is the first mapping group in the Middle East and North Africa region where refugees, drought, and poverty are rising crises and in urgent need for humanitarian mapping  activities to mitigate the consequences of such crises. YU Mappers are encouraged to use open data to address challenges in MENA region to bring relief and development to target areas within the region."
+            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo auf Telegram",
                 "description": "Halboffizielle öffentliche Gesamt-Kosovo Telegram Gruppe. Mapper von überall in jeder Sprache sind willkommen."
+            },
+            "ym-Universit-Mohammed-V-Rabat": {
+                "name": "Brahmapoutre at Rabat",
+                "description": "YouthMappers chapter at Université Mohammed V Rabat",
+                "extendedDescription": "This chapter sees participation in the YouthMappers program as an oppourtunity to share our knowlege create new working relationships with other chapters in different countries"
             },
             "no-forum": {
                 "name": "OpenStreetMap Frankreich Web Forum",
@@ -10165,6 +10405,10 @@
                 "name": "OpenStreetMap Slowenien Mailingliste",
                 "description": "Mailingliste der OpenStreetMap-Community in Slowenien"
             },
+            "si-twitter": {
+                "name": "OpenStreetMap Slovenia Twitter",
+                "description": "Follow OpenStreetMap Slovenia On Twitter: {url}"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es Mailingliste",
                 "description": "Eine Mailing Liste um OpenStreetMap in Spanien zu diskutieren"
@@ -10172,6 +10416,15 @@
             "OSM-ES-telegram": {
                 "name": "@OSMes on Telegram",
                 "description": "OpenStreetMap Spanien Telegram chat"
+            },
+            "ym-Universidad-Autonoma-de-Madrid": {
+                "name": "YouthMappers at UAM",
+                "description": "YouthMappers chapter at Universidad Autonoma de Madrid"
+            },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "name": "Mapeo Humanitario",
+                "description": "YouthMappers chapter at Universidad Politécnica de Madrid",
+                "extendedDescription": "Geo-volunteering group formed at Moncloa Campus on November 2017. Around 20 members from three Universities (Complutense, CEU and UPM). Undergraduate students, MSc and PhD students collaborate together with organizations (MSF, Acción contra el Hambre,...) supported by trainers from Geoinquietos. Official recognition by UPM as Educative Innovation Project (Code  IE1718.0411)"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
@@ -10197,6 +10450,11 @@
                 "name": "OpenStreetMap Schweden auf Twitter",
                 "description": "Folge uns auf Twitter: {url}"
             },
+            "ym-Istanbul-Technical-University": {
+                "name": "YouthMappers ITU",
+                "description": "YouthMappers chapter at Istanbul Technical University",
+                "extendedDescription": "YouthMappers ITU is an interdisciplinary and collaborative student community to promote humanitarian mapping for vulnerable settlements and aims to develop and share strategic and innovative spatial information for the future cities by using geographical information systems and open data."
+            },
             "Nottingham-OSM-pub-meetup": {
                 "name": "East Midlands (Nottingham) monatliches Treffen im Pub",
                 "description": "Soziales Zusammentreffen für East Midlands Mapper und Benutzer",
@@ -10216,6 +10474,20 @@
                 "description": "Beteilige dich bei #osm-gb auf irc.oftc.net (Port 6667)",
                 "extendedDescription": "Beteilige dich bei #osm-gb auf irc.oftc.net (Port 6667), bitte sei geduldig und warte ein paar Minuten nachdem du eine Frage stellst."
             },
+            "ym-University-of-Exeter": {
+                "name": "University of Exeter British Red Cross Missing Maps",
+                "description": "YouthMappers chapter at University of Exeter",
+                "extendedDescription": "We are a team of enthusiastic Geographers with comprehensive knowledge of GIS. We are passionate about supporting the British Red Cross Society with various humanitarian aid efforts. We are also important teachers of the significance of mapping remotely sensed data and how this helps on the ground. Our mapathons have themed academic focuses that highlight the different GIS research in our geography department, while also functioning as employability awareness events which we use to invite speakers in to talk about their GIS/British Red Cross careers."
+            },
+            "ym-University-of-Warwick": {
+                "name": "University of Warwick Resilience Mapping Society",
+                "description": "YouthMappers chapter at University of Warwick",
+                "extendedDescription": "We are a group of enthusiastic mappers based at Warwick University. Our aim is to get people excited about humanitarian mapping and help them understand the impact this activity has on the field. We are closely aligned with Missing Maps and Doctors Without Borders UK and focus on HOT tasks in our mapping activities and workshops. Our mapathons are listed on the Missing Maps page whenever they are scheduled."
+            },
+            "ym-Sacred-Heart-Junior-College": {
+                "name": "Youth Mappers at Sacred Heart Junior College",
+                "description": "YouthMappers chapter at Sacred Heart Junior College"
+            },
             "OSM-CA-Slack": {
                 "name": "OSM Kalifornien USA Slack",
                 "description": "Alle sind willkommen, melde dich an: {signupUrl}"
@@ -10224,13 +10496,41 @@
                 "name": "OpenStreetMap Vancouver",
                 "description": "Mapper und OpenStreetMap Benutzer in Vancouver, Kanada"
             },
+            "ym-Universidad-de-Costa-Rica": {
+                "name": "YouthMappers de Universidad de Costa Rica",
+                "description": "YouthMappers chapter at Universidad de Costa Rica",
+                "extendedDescription": "YouthMappers de Universidad de Costa Rica nace en función de acción social para y por miembros de comunidades distintas según temáticas de involucramiento, interacción y representación de variables dentro de un espacio geográfico definido (un territorio) Gracias a las herramientas de OpenStreetMaps tenemos la viabilidad de poder obtener, validar y compartir la información generada para comprobación y uso destinadas a las comunidades o el interesado en tales temáticas objetivas."
+            },
             "OSM-CU-telegram": {
                 "name": "OSM Kuba auf Telegram",
                 "description": "OpenStreetMap Kuba Telegram chat"
             },
+            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "name": "PumaGis Hn",
+                "description": "YouthMappers chapter at Universidad Nacional Autónoma de Honduras"
+            },
+            "ym-University-of-the-West-Indies-Mona-Campus": {
+                "name": "Libraries Outreach - ODL",
+                "description": "YouthMappers chapter at University of the West Indies, Mona Campus",
+                "extendedDescription": "The UWI, Mona Campus Library engages in public, outreach and special projects. This will allow our library the means to be a catalyst for spatial literacy and advocate for spatial data sharing and access to Jamaican and Caribbean interests. We have disaster relief and communication needs and   extensive earth science and geo-hazards needs to better serve our campus and community. Specifically, we hace a Science Library to showcase such to all faculty and students."
+            },
             "OSM-NI-telegram": {
                 "name": "OSM Nicaragua auf Telegram",
                 "description": "OpenStreetMap Nicaragua Telegram chat"
+            },
+            "ym-Universidad-Nacional-de-Ingenieria": {
+                "name": "Yeka Street MGA",
+                "description": "YouthMappers chapter at Universidad Nacional de Ingenieria",
+                "extendedDescription": "YEKA STREET is a work team constituted by students from Universidad Nacional de Ingenieria at Managua, Nicaragua. With the principal purpose of apply our knowledge and skills using many tools and apps to map areas in our cities and contribute to the development community projects and disasters relieve plans. We want to lead the way adding more students from all careers and universities in our country to join us at this cause, increasing in this way the life level and reducing the population vulnerability."
+            },
+            "ym-University-of-Panama": {
+                "name": "YouthMappers UP",
+                "description": "YouthMappers chapter at University of Panama",
+                "extendedDescription": "Student mappers in Panama work with open spatial data to help identify, define, address, and create meaning about locally defined development challenges. They collaborate with students from other countries on community mapping topics from ecotourism to food security, from biodiversity to indigenous issues, promoting a humanistic vision through scientific perspectives."
+            },
+            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
+                "name": "UPR YouthMappers",
+                "description": "YouthMappers chapter at Universidad de Puerto Rico - Rio Piedras"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -10342,7 +10642,19 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "Wir helfen dabei OpenStreetMap in den USA zu verbessern.",
-                "extendedDescription": "Wir unterstützen OpenStreetMap durch eine jährliche Konferenz, Unterstützung von lokalen OSM-Gruppen, Aufbau von Partnerschaft und durch Verbreitung des Vorteilen von OSM. Beteiligte sich an OpenStreetMap US hier: {signupUrl}"
+                "extendedDescription": "Wir unterstützen OpenStreetMap durch eine jährliche Konferenz, Unterstützung von lokalen OSM-Gruppen, Aufbau von Partnerschaft und durch Verbreitung des Vorteilen von OSM. Beteiligte sich an OpenStreetMap US hier: {signupUrl}",
+                "events": {
+                    "sotmus2019-cfs": {
+                        "name": "Propose a Talk for SotM-US 2019",
+                        "description": "We are calling on all members of the OpenStreetMap community to share your ideas and session proposals for State of the Map US 2019. Whether you are brand new to OSM or have been a core contributor since the beginning, we want to hear from you!",
+                        "where": "Minneapolis, Minnesota"
+                    },
+                    "sotmus2019": {
+                        "name": "State of the Map US 2019",
+                        "description": "Join the OpenStreetMap community at State of the Map US in Minneapolis, Minnesota. Connect with other mappers, businesses, government agencies, and non profits, all collaborating around the free and editable map of the world.",
+                        "where": "Minneapolis, Minnesota"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -10371,6 +10683,208 @@
                 "name": "Western Slope OSM Treffen",
                 "description": "Mapper und OpenStreetMap Benutzer in und um Grand Junction, Colorado, USA",
                 "extendedDescription": "Das Ziel dieser Gruppe ist OpenStreetMap in der Region einzuführen, eine Gemeinschaft von Mappern zu entwickeln, die erstaunlichsten Geodaten mit allen zur Verfügung stehenden Mitteln zu erzeugen und diese Daten in der ganzen Gegend bekannt zu machen. Stell dir einen ganz genaue Wanderkarte oder auch genaue Karte der Fahrradwege vor; oder alles andere was du willst, das ist die Freude von OpenStreetMap!"
+            },
+            "ym-Ball-State-University": {
+                "name": "Gamma Theta Upsilon- Iota Omega Chapter",
+                "description": "YouthMappers chapter at Ball State University",
+                "extendedDescription": "Our chapter is a very active one. We primarily focus on community events, fundraising, and field trips. We are currently looking to develop more mapping-related activities to draw in other students from campus who may be interested in contributing."
+            },
+            "ym-California-University-of-Pennsylvania": {
+                "name": "CalU PA GIS Club",
+                "description": "YouthMappers chapter at California University of Pennsylvania",
+                "extendedDescription": "GIS Students at Cal U learn to apply spatial theory to the real world. The university degree program focuses on geography as well as utilizing GIS in emergency management."
+            },
+            "ym-Central-Washington-University": {
+                "name": "Geography Club",
+                "description": "YouthMappers chapter at Central Washington University",
+                "extendedDescription": "Our goal teaming up with Youthmappers is to bring relief to areas that are in need of humanitarian mapping. By doing so, we are serving our fellow brothers and sisters around the world as well as furthering our own cartography skills."
+            },
+            "ym-Clemson-University": {
+                "name": "Clemson Mappers",
+                "description": "YouthMappers chapter at Clemson University",
+                "extendedDescription": "Students in Clemson are supported by the Center for Geospatial Technologies, a community of interdisciplinary geospatial science practitioners supporting research, teaching, and outreach activities using technologies that enable the collection, analysis, and application of geospatial data. Students integrate geospatial technologies within their scholarly activities across all disciplines and build connections throughout the world."
+            },
+            "ym-College-of-William-and-Mary": {
+                "name": "All over the map!",
+                "description": "YouthMappers chapter at College of William and Mary",
+                "extendedDescription": "The students who are all over the map are supported by the Center for Geospatial Analysis, a group integrating GIS across the curriculum and providing student and faculty with hardware, software, and expertise.  Students of all backgrounds utilize GIS across campus, including environmental science and policy, geology, history, business, sociology, biology, anthropology, public policy, and marine sciences."
+            },
+            "ym-Cornell-University": {
+                "name": "Mapping Society",
+                "description": "YouthMappers chapter at Cornell University",
+                "extendedDescription": "Cornell students and faculty use open data and open source software to address challenges at local, national, and global scales. In doing so, we advance our academic and personal goals of developing our own skills around GIS and spatial literacy."
+            },
+            "ym-George-Mason-University": {
+                "name": "Mason Mappers",
+                "description": "YouthMappers chapter at George Mason University",
+                "extendedDescription": "Mason Mappers Student Society is a humanitarian mapping student organization in the George Mason University GGS Department, and its goal is to promote education and knowledge in geo-technologies, geo-info science, to foster good global stewardship and engage in professional development while building a positive, interactive geo-community, as well as shaping students into leaders of tomorrow."
+            },
+            "ym-Indiana-University-of-Pennsylvania": {
+                "name": "Geospatial Science Club",
+                "description": "YouthMappers chapter at Indiana University of Pennsylvania"
+            },
+            "ym-Jacksonville-State-University": {
+                "name": "JSU Disaster Mapping Team",
+                "description": "YouthMappers chapter at Jacksonville State University",
+                "extendedDescription": "The JSU Disaster Mapping Team is a program at Jacksonville State University dedicated to assisting disaster response in times of emergencies. This includes tornadoes, severe thunderstorms, floods, etc. The team is intended to be a valuable asset to surrounding counties and a conduit for the JSU Geoscience Department students to apply what they have learned in an academic setting to support emergency services. Our goal is to streamline disaster response and recovery operations while utilizing student skill sets"
+            },
+            "ym-Kansas-State-University": {
+                "name": "Gamma Theta Upsilon: Beta Psi Chapter",
+                "description": "YouthMappers chapter at Kansas State University",
+                "extendedDescription": "We are the Kansas State University Chapter of Gamma Theta Upsilon, an international geography honor society with affiliation to YouthMappers. We have been active with mapping for OSM and conducted a mapathon called \"Map for Nepal,\" in which we used OpenStreetMap to digitize unmapped areas of Nepal after the earthquake in 2015."
+            },
+            "ym-McGill-University": {
+                "name": "Open Mapping Group McGill: A Member of the McGill Undergraduate Geography Society",
+                "description": "YouthMappers chapter at McGill University",
+                "extendedDescription": "The Open Mapping Group McGill: A Member of McGill Undergraduate Geography Society (OMG McGill) aims to connect students with open geospatial data and technologies to enhance resilience, community-building, and learning through mapping–on campus, in Montreal, in Canada, and abroad."
+            },
+            "ym-Miami-University": {
+                "name": "Geography and Planning Society",
+                "description": "YouthMappers chapter at Miami University",
+                "extendedDescription": "GPS at Miami University aims to create a close-knit community of planners and geographers who want to have fun, learn more about careers and higher education in their field, network, and work alongside professionals for real experience."
+            },
+            "ym-Monroe-Community-College": {
+                "name": "MCC Mapping Corps",
+                "description": "YouthMappers chapter at Monroe Community College"
+            },
+            "ym-Montgomery-College": {
+                "name": "GeoMC",
+                "description": "YouthMappers chapter at Montgomery College",
+                "extendedDescription": "GeoMC’s mission is to provide students with hands-on experience in applying geospatial tools, collecting data, and project management. Most of our students come with a background in GIS and are geography majors. Our chapter’s members come from diverse backgrounds and we all work together to make a positive impact in the world live in."
+            },
+            "ym-New-York-University": {
+                "name": "NYU mHealth Initiative Mapping Corps",
+                "description": "YouthMappers chapter at New York University",
+                "extendedDescription": "The NYU mobile health or “mHealth” research initiative focuses on development of systems that link people - usually via their phones - to the places that they live and traverse, and thus supports novel research on the way phones and maps can be leveraged to understand behavioral decision making and ultimately health outcomes."
+            },
+            "ym-Ohio-Wesleyan-University": {
+                "name": "Environment and Wildlife Club",
+                "description": "YouthMappers chapter at Ohio Wesleyan University",
+                "extendedDescription": "Environment and Wildlife Club looks at environmental issues on campus, in Delaware, and even nationally! We create campus and community projects, explore and enjoy the outdoors, volunteer, and try to promote environmentalism in every aspect of our lives."
+            },
+            "ym-Oklahoma-State-University": {
+                "name": "Geography Club",
+                "description": "YouthMappers chapter at Oklahoma State University"
+            },
+            "ym-State-University-of-New-York-Geneseo": {
+                "name": "SUNY Geneseo GIS Association",
+                "description": "YouthMappers chapter at State University of New York Geneseo",
+                "extendedDescription": "We spread awareness, support, education, volunteerism, and career advancement opportunities in geographic information systems, across disciplines and departments, in the context of SUNY Geneseo, the local community, and global community."
+            },
+            "ym-SUNY-at-Fredonia": {
+                "name": "Geoventurers",
+                "description": "YouthMappers chapter at SUNY at Fredonia",
+                "extendedDescription": "GeoVenturers is a group of students joining together across a number of majors on our campus that see geospatial technologies as a tool to serve others and to bring people together. Mentoring for the group brings in science education from the department of curriculum and instruction. We hope that we can bring our skills to play in helping make people's lives better."
+            },
+            "ym-Texas-Tech-University": {
+                "name": "YouthMappers at TTU",
+                "description": "YouthMappers chapter at Texas Tech University",
+                "extendedDescription": "As one of the co-founding chapters of the network, the TTU YouthMappers are enthusiastic to serve as interdisciplinary leaders to help create open geographic data and analyses that address locally defined development challenges worldwide. The chapter strives to exchange and collaborate with other chapters around the globe while also offering themselves as a local resource and service to Texas Tech student organizations in ways that add value to their respecitive campus activities through mapping."
+            },
+            "ym-The-Citadel": {
+                "name": "YouthMappers at The Citadel",
+                "description": "YouthMappers chapter at The Citadel",
+                "extendedDescription": "This chapter is also a Rotaract Club, which is an affiliate of Rotary International. Multiple members, as well as leadership have expressed an interest in YouthMappers and we would like to affiliate our Citadel Rotaract Club with YouthMappers."
+            },
+            "ym-The-George-Washington-University": {
+                "name": "Humanitarian Mapping Society",
+                "description": "YouthMappers chapter at The George Washington University",
+                "extendedDescription": "Models of leadership and engagement, HMS seeks to render aid and better the world through humanitarian Geographic Information Systems (GIS) projects. This co-founding affiliated chapter on the campus of GWU has a plethora of experience to share, and frequently partners directly with USAID, the American Red Cross, and the US Department of State in their DC area to expand student-led efforts and serve the global community."
+            },
+            "ym-The-Johns-Hopkins-University-SAIS": {
+                "name": "SAIS YouthMappers",
+                "description": "YouthMappers chapter at The Johns Hopkins University, SAIS",
+                "extendedDescription": "The mission of SAIS Youth Mappers is to provide students at the Johns Hopkins University SAIS with the opportunity to become highly skilled humanitarian mappers. As a group within the South Asia Club, its primary focus is on supporting humanitarian mapping projects in the Indo-Pacific Region."
+            },
+            "ym-The-Pennsylvania-State-University": {
+                "name": "Penn State GIS Coalition",
+                "description": "YouthMappers chapter at The Pennsylvania State University",
+                "extendedDescription": "The Penn State Geospatial Information Science (GIS) Coalition is an organization that offers students majoring, minoring, or sharing an interest in GIS opportunities to develop supplementary knowledge and skills necessary to succeed in the professional GIS industry."
+            },
+            "ym-University-of-California-Davis": {
+                "name": "Mapping Club",
+                "description": "YouthMappers chapter at University of California, Davis"
+            },
+            "ym-University-of-Central-Florida": {
+                "name": "Geospatial Information Society",
+                "description": "YouthMappers chapter at University of Central Florida",
+                "extendedDescription": "Our mission is to foster a social and educational environment for all majors who are interested in the discussion and application of GIS. Group and community events throughout the academic year organize students to volunteer to help local and regional communities by using community-based GIS projects and educating local middle and high school students on the use and application of GIS."
+            },
+            "ym-University-of-Chicago": {
+                "name": "Tobler Society",
+                "description": "YouthMappers chapter at University of Chicago"
+            },
+            "ym-University-of-Maryland-College-Park": {
+                "name": "Geography Club",
+                "description": "YouthMappers chapter at University of Maryland - College Park",
+                "extendedDescription": "The mission of the Geography Club at the University of Maryland College Park is to engage and encourage students to explore geographic interests within the campus and the community."
+            },
+            "ym-University-of-North-Texas": {
+                "name": "UNT Geography Club",
+                "description": "YouthMappers chapter at University of North Texas",
+                "extendedDescription": "The Geography Club is a student organization at University of North Texas that welcomes all students who are interested in geography. The objective of the Geography Club is to promote interest in Geography, the Major and the Geography Department along with fellowship among students and faculty. The club also seeks to represent student needs and wants in regard to the study of geography and to provide a forum for the presentation of innovative ideas to the benefit of the University community."
+            },
+            "ym-University-of-Northern-Colorado": {
+                "name": "UNCO Geography and GIS Club",
+                "description": "YouthMappers chapter at University of Northern Colorado",
+                "extendedDescription": "Official Geography and GIS Club chapter affiliated with the University of Northern Colorado where our aim is to learn, share and connect with those around us. #MakingSenseOfTheWorld"
+            },
+            "ym-University-of-Oregon": {
+                "name": "Map by Northwest",
+                "description": "YouthMappers chapter at University of Oregon",
+                "extendedDescription": "Map By Northwest aims to engage undergraduate students at the University of Oregon in mapping projects to assist in humanitarian causes and for conducting geographic research. We welcome students from all disciplines to join us in our mapping adventures."
+            },
+            "ym-University-of-Redlands": {
+                "name": "URSpatial Geo-Thinkers",
+                "description": "YouthMappers chapter at University of Redlands",
+                "extendedDescription": "To build upon the members' GIS skills and knowledge of the tools and methods through applied social engagement as well as to educate the campus community about the power of mapping and spatial analysis through community service events."
+            },
+            "ym-University-of-South-Carolina": {
+                "name": "Geography Graduate Student Association",
+                "description": "YouthMappers chapter at University of South Carolina",
+                "extendedDescription": "The GGSA is a fully student-run organization, designed to serve as an advocate and resource for all geography graduate students by filling the role of liaison between the department and students. Our goal is to further professional, academic, and personal development of graduate students interested in the field of geography and its sub disciplines."
+            },
+            "ym-University-of-Southern-California": {
+                "name": "SC Mappers",
+                "description": "YouthMappers chapter at University of Southern California",
+                "extendedDescription": "We see the world differently: we view it through a spatial lens. With the power of spatial thinking, we connect place and space to help address global challenges. Collaborate with us!"
+            },
+            "ym-University-of-Vermont": {
+                "name": "University of Vermont Humanitarian Mapping Club",
+                "description": "YouthMappers chapter at University of Vermont"
+            },
+            "ym-University-of-Victoria": {
+                "name": "Society of Geography Students",
+                "description": "YouthMappers chapter at University of Victoria",
+                "extendedDescription": "SOGS seeks to promote and represent social and academic interests within the Department of Geography. This is expressed by four key goals: To provide a forum for the discussion of matters concerning the quality and accessibility of education within geography; to provide a means of expressing a consensus of student opinion to deparhnental faculty through representation at deparkrnental meetings and on departrnental committees; to undertake anangements for such activities as are for the benefit of students and are seen to be within the field of interest of students in geography; to act as a liaison through the UVSS and the Course Union Council with other student groups on campus"
+            },
+            "ym-University-of-Wyoming": {
+                "name": "Gamma Theta Upsilon/Geography Club",
+                "description": "YouthMappers chapter at University of Wyoming"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps",
+                "description": "YouthMappers chapter at UW-Madison",
+                "extendedDescription": "BadgerMaps is the UW campus chapter of Youthmappers, an organization dedicated to humanitarian and community mapping services. We connect our volunteer network with opportunities to create GIS data for projects that need it."
+            },
+            "ym-Vassar-College": {
+                "name": "Hudson Valley Mappers",
+                "description": "YouthMappers chapter at Vassar College",
+                "extendedDescription": "Our mission is to provide a multi-disciplinary platform for peers, educators, and community organizations to engage in local mapping projects with a focus on strengthening our local ecosystems, our built environment, and the health of our community. We also seek to contribute geospatial support for global humanitarian aid and development efforts."
+            },
+            "ym-Villanova-University": {
+                "name": "The Villanova Globeplotters",
+                "description": "YouthMappers chapter at Villanova University",
+                "extendedDescription": "The Villanova Globeplotters is built on Villanova’s Augustinian principle of selfless-service to the global community. Mixed with relaxed social interaction, we strive to provide geospatial outreach to those in need regardless of participating students’ race, academic major, student group association, or college career level."
+            },
+            "ym-West-Virginia-University": {
+                "name": "Maptime Morgantown",
+                "description": "YouthMappers chapter at West Virginia University",
+                "extendedDescription": "Working as a collaborative team, this co-founding chapter focuses on providing an open learning environment for those interested in working on projects that intersect international development, emergency response, and geographic information science.\nThey connect beginners and experts by providing technical training and experience in building meaningful and useful geographic infrastructure data, while connecting to sister cities around the world."
+            },
+            "ym-Western-Michigan-University": {
+                "name": "Geography Club",
+                "description": "YouthMappers chapter at Western Michigan University"
             },
             "Maptime-Australia-Slack": {
                 "name": "Maptime Australia Slack",
@@ -10485,6 +10999,36 @@
             "OSM-CO": {
                 "name": "OpenStreetMap Kolumbien",
                 "description": "Nachrichten von der OpenStreetMap Gemeinschaft in Kolumbien und der OSMCo Sitftung"
+            },
+            "ym-Universidad-de-Antioquia": {
+                "name": "Geomatica UDEA",
+                "description": "YouthMappers chapter at Universidad de Antioquia",
+                "extendedDescription": "We are a group interested in geospatial data, voluntary cartography, and participating in mapping with others in our country and within the YouthMappers network."
+            },
+            "ym-Universidad-de-La-Guajira": {
+                "name": "Grupo Mesh",
+                "description": "YouthMappers chapter at Universidad de La Guajira",
+                "extendedDescription": "Grupo Mesh is a student organization at the Universidad de la Guajira in Colombia, including students from the program of Environmental Engineering who learn cartography and open mapping."
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartografos Uniandes",
+                "description": "YouthMappers chapter at Universidad de Los Andes",
+                "extendedDescription": "We are a circle of student participation that seeks to use mapping and spatial reasoning as a means to create bonds of cooperation and integration between the university and society by addressing different spatial, social, political , economic and cultural dynamics."
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura",
+                "description": "YouthMappers chapter at Universidad de San Buenaventura",
+                "extendedDescription": "We are pleased to join YouthMappers mapping for a better world and community."
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers at Bogota",
+                "description": "YouthMappers chapter at Universidad Distrital Francisco Jose de Caldas",
+                "extendedDescription": "The Universidad Distrital Francisco José de Caldas is a public, coeducational, research university based in Bogotá, Colombia with a population of 26,140 students."
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "name": "Grupo UN",
+                "description": "YouthMappers chapter at Universidad Nacional de Colombia",
+                "extendedDescription": "Students are uniting to map and network with university students across the country of Colombia and across the globe.  Geographic specialties include affiliation with microbiology and health disciplines."
             },
             "OSM-EC-telegram": {
                 "name": "OSM Ecuador auf Telegram",

@@ -9,6 +9,11 @@
             "copy": "kopioi",
             "open_wikidata": "avaa wikidata.org-palvelussa"
         },
+        "toolbar": {
+            "inspect": "Käsittele",
+            "undo_redo": "Kumoa/tee uudelleen",
+            "add_feature": "Lisää karttakohde"
+        },
         "modes": {
             "add_feature": {
                 "result": "{count} tulos",
@@ -1283,6 +1288,27 @@
             "rules": {
                 "title": "Automaattisesti havaittavat merkintävirhetyypit"
             },
+            "no_issues": {
+                "message": {
+                    "everything": "Kaikki kunnossa",
+                    "everything_in_view": "Tässä näkymässä kaikki on kunnossa",
+                    "edits": "Kaikki kunnossa",
+                    "edits_in_view": "Tekemäsi muutokset eivät sisällä virheitä"
+                }
+            },
+            "options": {
+                "what": {
+                    "title": "Tarkista:",
+                    "edited": "Omat muokkaukset",
+                    "all": "Kaikki"
+                },
+                "where": {
+                    "title": "Alue:",
+                    "visible": "Tämä näkymä",
+                    "all": "Kaikkialta"
+                }
+            },
+            "suggested": "Korjausehdotus:",
             "almost_junction": {
                 "title": "Puuttuva risteysmerkintä",
                 "message": "{feature} on hyvin lähellä mutta ei yhdistetty kohteeseen {feature2}"
@@ -1315,7 +1341,8 @@
             },
             "outdated_tags": {
                 "title": "Vanhentunut ominaisuustieto",
-                "message": "{feature} on merkitty vanhentuneella ominaisuustiedolla"
+                "message": "{feature} on merkitty vanhentuneella ominaisuustiedolla",
+                "reference": "Ominaisuustietoja muutetaan ajoittain, ja karttakohteisiin saattaa jäädä vanhentuneita tietoja."
             },
             "private_data": {
                 "title": "Tietosuojattu sisältö",
@@ -1352,6 +1379,9 @@
                 },
                 "delete_feature": {
                     "title": "Poista karttakohde"
+                },
+                "ignore_issue": {
+                    "title": "Älä huomioi"
                 },
                 "move_tags": {
                     "title": "Siirrä ominaisuustietoja",
@@ -1713,7 +1743,7 @@
                     "name": "Luontokohteet"
                 },
                 "category-path": {
-                    "name": "Kevyenliikenteenväylät"
+                    "name": "Kävely- ja pyörätiet "
                 },
                 "category-rail": {
                     "name": "Raidekohteet"
@@ -4773,7 +4803,7 @@
                     "name": "Pyörätie"
                 },
                 "highway/cycleway/bicycle_foot": {
-                    "name": "Jalkakäytävä ja pyörätie"
+                    "name": "Kävely- ja pyörätie"
                 },
                 "highway/elevator": {
                     "name": "Hissi"

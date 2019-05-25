@@ -782,6 +782,14 @@
                 "description": "Edificios",
                 "tooltip": "Edificios, cabanas, garaxes, etc."
             },
+            "building_parts": {
+                "description": "Partes do edificio",
+                "tooltip": "Compoñentes do edificio e tellado en 3D"
+            },
+            "indoor": {
+                "description": "Elementos do interior",
+                "tooltip": "Habitacións, corredores, escadas, etc."
+            },
             "landuse": {
                 "description": "Usos da terra",
                 "tooltip": "Montes, áreas agrícolas, parques, áreas residenciais, comercios, etc."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Recursos ferroviarios",
                 "tooltip": "Ferrovías"
+            },
+            "pistes": {
+                "description": "Pistas",
+                "tooltip": "Pistas de esquí, zorra, patinaxe sobre xeo, etc"
+            },
+            "aerialways": {
+                "description": "Elementos aéreos",
+                "tooltip": "Telecadeiras, góndolas, tirolinas, etc."
             },
             "power": {
                 "description": "Estacións enerxéticas",
@@ -1478,7 +1494,7 @@
             },
             "notes": {
                 "title": "Notas",
-                "intro": "As *Notas* empréganse para a dár unha sinal de aviso a outros usuarios de que un elemento ten ser corrixido ou precisa dunha atención. As notas sinalan unha localización específica no mapa. Para olla-las notas existentes ou engadir novas, prema na lapela {data} **Datos do mapa** para activa-la capa das notas do OpenStreetMap.",
+                "intro": "As *Notas* empréganse para a dár un sinal de aviso a outros usuarios de que un elemento ten ser corrixido ou precisa dunha atención. As notas sinalan unha localización específica no mapa. Para olla-las notas existentes ou engadir novas, prema na lapela {data} **Datos do mapa** para activa-la capa das notas do OpenStreetMap.",
                 "add_note_h": "Engadir notas",
                 "add_note": "Para engadir unha nova nota, prema no botón {note} **Nota** na barra das ferramentas enriba do mapa, ou prema na tecla de atallo `4`. Isto trocará o cursor do rato cara un símbolo dunha cruz. Para poñe-la nova nota no mapa, poña o cursor do rato onde debe ir a nota, despois faga clic co {leftclick} botón esquerdo do rato ou prema `Espazo`.",
                 "move_note": "Só pódense move-las notas novas. Para mover unha nota, poña o cursor do rato sobre a nova nota, despois prema e manteña premido o {leftclick} botón esquerdo do rato mentres arrastra a nota cara á súa nova localización.",
@@ -1619,15 +1635,22 @@
                 "title": "Case cruzamentos",
                 "message": "{feature} está moi preto pero non está conectado a {feature2}",
                 "tip": "Atopa elementos que se cadra terían que estar conectados a outros preto deles",
+                "self": {
+                    "message": "{feature} remata moi preto de si mesmo pero non se volve conectar"
+                },
                 "highway-highway": {
                     "reference": "O cruzamento de estradas ten que compartir un vértice de unión."
                 }
             },
             "close_nodes": {
                 "title": "Puntos moi pretos",
+                "tip": "Atopa puntos redundantes e amoreados",
                 "message": "Dous puntos en {way} están moi pretos",
-                "tip": "Atopar puntos redundantes na vía",
-                "reference": "Os puntos redundantes dunha vía teñen que ser combinados ou separados."
+                "reference": "Os puntos redundantes dunha vía teñen que ser combinados ou separados.",
+                "detached": {
+                    "message": "{feature} está moi preto de {feature2}",
+                    "reference": "Os puntos separados non teñen que compartir unha ubicación."
+                }
             },
             "crossing_ways": {
                 "title": "Cruzamentos de vías",
@@ -1747,7 +1770,11 @@
                 "title": "Etiquetas obsoletas",
                 "message": "{feature} ten etiquetas obsoletas",
                 "tip": "Atopar elementos con etiquetas obsoletas que poden actualizarse",
-                "reference": "Algunhas etiquetas mudan co tempo e teñen que actualizarse."
+                "reference": "Algunhas etiquetas mudan co tempo e teñen que actualizarse.",
+                "incomplete": {
+                    "message": "{feature} ten etiquetas incompletas",
+                    "reference": "Algúns elementos teñen que ter etiquetas adicionais."
+                }
             },
             "private_data": {
                 "title": "Información privada",
@@ -3707,6 +3734,9 @@
                         "yes": "Aceptada"
                     }
                 },
+                "resort": {
+                    "label": "Tipo"
+                },
                 "resource": {
                     "label": "Recursos"
                 },
@@ -3834,7 +3864,7 @@
                     "label": "Categoría"
                 },
                 "seamark/type": {
-                    "label": "Sinal náutica"
+                    "label": "Sinal náutico"
                 },
                 "seamark/wreck/category": {
                     "label": "Categoría"
@@ -4431,6 +4461,10 @@
                     "name": "Aparcadoiro para bicicletas",
                     "terms": "aparcadoiro de bicicletas de varios pisos, aparcadoiro de bicicletas"
                 },
+                "amenity/bicycle_parking/shed": {
+                    "name": "Pendello para bicicletas",
+                    "terms": "pendello para bicicletas, bici"
+                },
                 "amenity/bicycle_rental": {
                     "name": "Alugamento de bicicletas",
                     "terms": "bici, bicicleta, alugueiro, préstamo"
@@ -4583,6 +4617,9 @@
                     "name": "Comida rápida de polo",
                     "terms": "almorzo, cea, comedor, cea, xantar, grella, churrasco, comida, mesa, café, cafe"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "Tenda de rosquillas"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Comida rápida de peixe e patacas fritidas"
                 },
@@ -4602,7 +4639,8 @@
                     "name": "Estación de ferry"
                 },
                 "amenity/fire_station": {
-                    "name": "Parque de bombeiros"
+                    "name": "Parque de bombeiros",
+                    "terms": "estación de bombeiros, bombeiros, parque de bombeiros"
                 },
                 "amenity/food_court": {
                     "name": "Zona de comidas"
@@ -4755,6 +4793,9 @@
                     "name": "Oficina de Correos",
                     "terms": "oficina, correos, mensaxería, paquetería"
                 },
+                "amenity/prep_school": {
+                    "name": "Preparación para exames / Escola de titoría"
+                },
                 "amenity/prison": {
                     "name": "Zona penitenciaria",
                     "terms": "penitenciaría, cárcere, prisión"
@@ -4894,7 +4935,8 @@
                     "name": "Centro social"
                 },
                 "amenity/social_facility": {
-                    "name": "Axuda Social"
+                    "name": "Axuda Social",
+                    "terms": "servizos sociais, asistencia social"
                 },
                 "amenity/social_facility/ambulatory_care": {
                     "name": "Ambulatory Care"
@@ -4935,12 +4977,16 @@
                     "name": "Aseos",
                     "terms": "aseos, baños, WC"
                 },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Inodoros con cisterna"
+                },
                 "amenity/townhall": {
                     "name": "Casa do Concello",
                     "terms": "casa do concello, concello, consistorio, municipio, municipal, cabido"
                 },
                 "amenity/toy_library": {
-                    "name": "Biblioteca de xoguetes"
+                    "name": "Biblioteca de xoguetes",
+                    "terms": "xogo, xoguete"
                 },
                 "amenity/university": {
                     "name": "Zona universitaria",
@@ -4971,6 +5017,10 @@
                 },
                 "amenity/vending_machine/elongated_coin": {
                     "name": "Máquina expendedora de moedas planas"
+                },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Dispensador de bolsas de excremento",
+                    "terms": "bolsas de excremento, caca, feces, merda, refugallos, can, animal"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina expendedora de hixiene feminina"
@@ -5153,6 +5203,9 @@
                 },
                 "barrier/kerb/lowered": {
                     "name": "Bordo rebaixado"
+                },
+                "barrier/kerb/raised": {
+                    "name": "Bordo elevado"
                 },
                 "barrier/kissing_gate": {
                     "name": "Porta Kissing"
@@ -5680,10 +5733,12 @@
                     "name": "Paso de bicicletas"
                 },
                 "highway/cycleway/crossing/marked": {
-                    "name": "Paso de bicicletas marcado"
+                    "name": "Paso de bicicletas marcado",
+                    "terms": "paso de bicicleta, cruzamento de carril bici, cruzamento de ciclovía, cruzamento de bicicleta, cruzamento de bici, cruzamento de senda ciclista"
                 },
                 "highway/cycleway/crossing/unmarked": {
-                    "name": "Paso de bicicletas sen marcar"
+                    "name": "Paso de bicicletas sen marcar",
+                    "terms": "cruzamento de carril bici, cruzamento de ciclovía, cruzamento de bicicleta, cruzamento de bici, cruzamento de senda ciclista"
                 },
                 "highway/elevator": {
                     "name": "Montacargas",
@@ -5699,7 +5754,7 @@
                     "name": "Pasarela móbil"
                 },
                 "highway/footway/crossing": {
-                    "name": "Paso peonil"
+                    "name": "Paso de peóns"
                 },
                 "highway/footway/marked": {
                     "name": "Paso de peóns marcado",
@@ -5713,7 +5768,11 @@
                     "name": "Beirarrúa"
                 },
                 "highway/footway/unmarked": {
-                    "name": "Paso peonil sen marcar"
+                    "name": "Paso peonil sen marcar",
+                    "terms": "cruzamento sen marcar, paso de peóns sen marcar"
+                },
+                "highway/footway/unmarked-raised": {
+                    "name": "Paso de peóns sen marcar (Levantado)"
                 },
                 "highway/footway/zebra": {
                     "name": "Paso de peóns marcado"
@@ -6724,7 +6783,7 @@
                     "name": "Liña de ferri"
                 },
                 "seamark": {
-                    "name": "Sinal náutica"
+                    "name": "Sinal náutico"
                 },
                 "shop": {
                     "name": "Tenda"
@@ -7132,6 +7191,15 @@
                 "tourism/artwork": {
                     "name": "Obra artística"
                 },
+                "tourism/artwork/bust": {
+                    "name": "Busto"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Instalación de arte"
+                },
                 "tourism/artwork/mural": {
                     "name": "Mural"
                 },
@@ -7379,6 +7447,36 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Imaxes aéreas máis recentes do AIV Flanders"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Imaxes aéreas do AIV Flandes 2013-2015 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Modelo de altura dixital AIV Flanders II, sombreado multidireccional 0.25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Modelo de altura dixital AIV Flanders II, factor Skyview 0.25 m"
+            },
             "Bing": {
                 "description": "Imaxes satelitais e aéreas.",
                 "name": "Imaxes aéreas do Bing"
@@ -7512,6 +7610,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Amarelo = Datos do mapa de dominio público do Censo dos Estados Unidos. Vermello = Datos non atopados no OpenStreetMap",
                 "name": "Estradas do TIGER 2018"
+            },
+            "USDA-NAIP": {
+                "description": "O ano máis recente de DOQQs do Programa Nacional de Imaxes de Agricultura (NAIP) para cada estado nos Estados Unidos adxacentes.",
+                "name": "Programa Nacional de Imaxes de Agricultura"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Estrada: marco verde = sen clasificar. marco marrón = pista. Superficie: grava = recheo marrón claro, asfalto = negro, pavimentado = gris, terra = branco, formigón = azul, herba/pasto = verde. Estacional = barras brancas",

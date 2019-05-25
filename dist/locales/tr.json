@@ -1134,6 +1134,15 @@
                 "category-restriction": {
                     "name": "Kısıtlamalar"
                 },
+                "category-road_major": {
+                    "name": "Büyük Yollar"
+                },
+                "category-road_minor": {
+                    "name": "Küçük Yollar"
+                },
+                "category-road_service": {
+                    "name": "Servis Yolları"
+                },
                 "category-route": {
                     "name": "Güzergah"
                 }
@@ -2820,6 +2829,9 @@
                     "name": "Park Yeri",
                     "terms": "Park Yeri"
                 },
+                "amenity/pharmacy": {
+                    "name": "Eczane"
+                },
                 "amenity/place_of_worship": {
                     "name": "İbadethane",
                     "terms": "İbadethane, İbadet Yeri"
@@ -3667,6 +3679,9 @@
                 },
                 "highway/bus_guideway": {
                     "name": "Otobüs Tercihli Yolu"
+                },
+                "highway/bus_stop": {
+                    "name": "Otobüs Durağı"
                 },
                 "highway/corridor": {
                     "name": "Koridor",

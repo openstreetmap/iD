@@ -782,6 +782,14 @@
                 "description": "Bâtiments",
                 "tooltip": "Bâtiments, Abris, Garages, etc."
             },
+            "building_parts": {
+                "description": "Parties de bâtiments",
+                "tooltip": "Composants des toits et des bâtiments en 3D"
+            },
+            "indoor": {
+                "description": "Éléments intérieurs",
+                "tooltip": "Pièces, couloirs, escaliers, etc."
+            },
             "landuse": {
                 "description": "Éléments d'occupation des sols",
                 "tooltip": "Forêts, Terres arables, Parcs, Zone résidentielle, Zone commerciale, etc."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Éléments ferroviaires",
                 "tooltip": "Voies ferrées"
+            },
+            "pistes": {
+                "description": "Pistes d'hiver",
+                "tooltip": "Pistes de ski, de luge, de patin à glace, etc."
+            },
+            "aerialways": {
+                "description": "Éléments aériens",
+                "tooltip": "Télésièges, télécabine, tyroliennes, etc."
             },
             "power": {
                 "description": "Éléments électriques",
@@ -1619,15 +1635,22 @@
                 "title": "Jonctions imparfaites",
                 "message": "{feature} est très proche mais n'est pas connecté à {feature2}",
                 "tip": "Trouver des éléments qui devrait sans doute être connectés à d'autres éléments proches",
+                "self": {
+                    "message": "{feature} se termine très proche de lui-même mais sans connexion"
+                },
                 "highway-highway": {
                     "reference": "Les routes qui se croisent devraient partager un point de jonction."
                 }
             },
             "close_nodes": {
                 "title": "Points très proches",
+                "tip": "Trouver des paquets de points redondants",
                 "message": "Deux points de {way} sont très proches",
-                "tip": "Trouver des points redondants sur les lignes",
-                "reference": "Les points redondants sur une ligne devraient être fusionnés ou déplacés."
+                "reference": "Les points redondants sur une ligne devraient être fusionnés ou déplacés.",
+                "detached": {
+                    "message": "{feature} est trop près de {feature2}",
+                    "reference": "Des points séparés ne devraient pas partager le même emplacement."
+                }
             },
             "crossing_ways": {
                 "title": "Chemins se croisant",
@@ -1684,6 +1707,13 @@
             },
             "disconnected_way": {
                 "title": "Lignes déconnectés",
+                "tip": "Trouver des routes, des chemins et des trajets de ferry non routables",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} éléments routables ne sont connectés qu'à eux-même."
+                    },
+                    "reference": "Toutes les routes, chemins et trajets de ferry devraient être connectés pour former un seul réseau routable."
+                },
                 "highway": {
                     "message": "{highway} est déconnectée des autres routes et chemins"
                 }
@@ -1740,7 +1770,11 @@
                 "title": "Attributs obsolètes",
                 "message": "{feature} utilise des attributs obsolètes",
                 "tip": "Trouver des éléments avec des attributs obsolètes qui peuvent être mis à jour",
-                "reference": "Certains attributs changent au fil du temps et devraient être remplacés."
+                "reference": "Certains attributs changent au fil du temps et devraient être remplacés.",
+                "incomplete": {
+                    "message": "{feature} a des attributs incomplets",
+                    "reference": "Certains éléments devraient avoir des attributs supplémentaires."
+                }
             },
             "private_data": {
                 "title": "Informations privées",
@@ -1786,6 +1820,7 @@
                 }
             },
             "unsquare_way": {
+                "title": "Coins non orthogonaux (jusqu'à {val}°)",
                 "message": "{feature} a des coins non orthogonaux",
                 "tip": "Trouver des élément avec des coins non orthogonaux qui peuvent être améliorés",
                 "buildings": {
@@ -3699,6 +3734,9 @@
                         "yes": "acceptées"
                     }
                 },
+                "resort": {
+                    "label": "Type"
+                },
                 "resource": {
                     "label": "Ressources"
                 },
@@ -4594,9 +4632,16 @@
                     "name": "Fast food de poulet",
                     "terms": "poulet,kfc,fast-food"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "Fast food de donuts",
+                    "terms": "fast food, restauration rapide, service au comptoir, vente à emporter, à emporter, a emporter, donut"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Fast food de fish & chips",
                     "terms": "fish and chips,fish & chips,fast-food,poisson"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Fast food de glaces"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab",
@@ -4791,6 +4836,10 @@
                 "amenity/post_office": {
                     "name": "Bureau de poste",
                     "terms": "Bureau de poste"
+                },
+                "amenity/prep_school": {
+                    "name": "École préparatoire",
+                    "terms": "académique,école,devoirs,tests,examens,tutorat"
                 },
                 "amenity/prison": {
                     "name": "Prison",
@@ -6530,6 +6579,10 @@
                     "name": "Vigne",
                     "terms": "Vignes"
                 },
+                "landuse/winter_sports": {
+                    "name": "Aire de sports d'hiver",
+                    "terms": "ski, nordique, fond, alpin, descente, snowboard, randonnée, rando, luge, traîneau, ski-joring, husky, cheval, raquette, piéton, glace, patin à glace"
+                },
                 "leisure": {
                     "name": "Loisirs"
                 },
@@ -6732,6 +6785,9 @@
                 "leisure/pitch/equestrian": {
                     "name": "Terrain d'équitation",
                     "terms": "Terrain d'équitation"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Terrain de hockey sur gazon"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Fer à cheval (jeu)",
@@ -6995,6 +7051,10 @@
                 "man_made/storage_tank": {
                     "name": "Réservoir de stockage",
                     "terms": "Silo de stockage,réservoir,citerne"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Réservoir d'eau",
+                    "terms": "réservoir,eau,citerne"
                 },
                 "man_made/street_cabinet": {
                     "name": "Armoire de rue",
@@ -7317,6 +7377,10 @@
                 "office/financial": {
                     "name": "Bureau d'entreprise financière",
                     "terms": "Bureau financier,Établissement financier"
+                },
+                "office/financial_advisor": {
+                    "name": "Conseiller financier",
+                    "terms": "Bureau financier,Établissement financier,héritage,retraite,gestion de biens,finances"
                 },
                 "office/forestry": {
                     "name": "Administration forestière",
@@ -8357,6 +8421,10 @@
                     "name": "Magasin de matériel de sports de plein air",
                     "terms": "Magasin de matériel de sports de plein air"
                 },
+                "shop/outpost": {
+                    "name": "Magasin de produits vendus en ligne",
+                    "terms": "vente en ligne,pickup,online,en ligne,commande"
+                },
                 "shop/paint": {
                     "name": "Magasin de peintures",
                     "terms": "Vente de peintures"
@@ -8955,6 +9023,36 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Images aériennes AIV les plus récentes de la Flandre"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Images aériennes 10cm AIV de la Flandre 2013-2015"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flandres GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
+            },
             "Bing": {
                 "description": "Images satellite et aérienne.",
                 "name": "Images aériennes Bing"
@@ -9088,6 +9186,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Jaune = Données de cartes dans le domaine public du recensement américain. Rouge = Données introuvables sur OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "L'année la plus récente de DOQQ du programme d'imagerie nationale pour l'agriculture (NAIP) pour chaque état des États-Unis contigus.",
+                "name": "Programme d'imagerie national pour l'agriculture"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Voies : en vert route non classifiée, en marron piste. Surface : les graviers sont représentés par un remplissage marron, l'asphalte par du noir, les pavés par du gris, la terre par du blanc, le béton par du bleu, l'herbe par du vert. Les voies saisonnières ont des barres blanches.",
@@ -9632,7 +9734,12 @@
                 "extendedDescription": "Nous sommes des étudiants du campus de Freetown de Njala University, et nous étudions les technologies de l'information dans le département de physique et d'informatique. Nous nous trouvons à Henry Street Freetown, Sierra Leone."
             },
             "ym-Njala-University-Njala-Campus": {
-                "name": "YouthMappers Njala University, Njala Campus"
+                "name": "YouthMappers Njala University, Njala Campus",
+                "description": "Chapitre YouthMappers à l'université de Njala, campus de Njala"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centre des sciences géomatiques",
+                "description": "Chapitre YouthMappers à l'Université de Pretoria"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",

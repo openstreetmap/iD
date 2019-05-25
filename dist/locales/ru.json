@@ -630,9 +630,15 @@
             "osmhidden": "Эти объекты были автоматически скрыты, потому что слой OpenStreetMap сейчас скрыт."
         },
         "photo_overlays": {
+            "traffic_signs": {
+                "title": "Дорожные знаки"
+            },
             "photo_type": {
                 "flat": {
                     "title": "Обычные Фотографии"
+                },
+                "panoramic": {
+                    "title": "Панорамные снимки"
                 }
             }
         },
@@ -842,6 +848,7 @@
                 "close_comment": "Закрыть с комментарием",
                 "ignore_comment": "Игнорировать с комментарием",
                 "error_parts": {
+                    "restaurant": "ресторан",
                     "pharmacy": "аптека"
                 },
                 "errorTypes": {
@@ -855,8 +862,14 @@
                     "70": {
                         "title": "Пропущен тег"
                     },
+                    "72": {
+                        "description": "{var1} не является участником линии и не имеет тегов."
+                    },
                     "220": {
                         "title": "Опечатка в теге"
+                    },
+                    "230": {
+                        "title": "Конфликт слоёв"
                     },
                     "298": {
                         "title": "Избыточное ограничение - односторонняя дорога"
@@ -1135,7 +1148,13 @@
             "rules": {
                 "title": "Правила"
             },
+            "outdated_tags": {
+                "title": "Устаревшие теги"
+            },
             "fix": {
+                "select_road_type": {
+                    "title": "Выберите тип дороги"
+                },
                 "use_bridge_or_tunnel": {
                     "title": "Используйте мост или туннель"
                 }
@@ -1547,8 +1566,14 @@
                 "category-building": {
                     "name": "Здания"
                 },
+                "category-golf": {
+                    "name": "Объекты на поле для гольфа"
+                },
                 "category-landuse": {
                     "name": "Объекты землепользования"
+                },
+                "category-natural": {
+                    "name": "Природные объекты"
                 },
                 "category-path": {
                     "name": "Путь"
@@ -1558,6 +1583,9 @@
                 },
                 "category-restriction": {
                     "name": "Запреты"
+                },
+                "category-road_service": {
+                    "name": "Служебные проезды"
                 },
                 "category-route": {
                     "name": "Объекты маршрутов"
@@ -1700,6 +1728,9 @@
                 "agrarian": {
                     "label": "Товары"
                 },
+                "air_conditioning": {
+                    "label": "Кондиционирование воздуха"
+                },
                 "amenity": {
                     "label": "Тип"
                 },
@@ -1805,6 +1836,10 @@
                 "building": {
                     "label": "Тип здания / конструкция"
                 },
+                "building/levels_building": {
+                    "label": "Число этажей",
+                    "placeholder": "2, 4, 6…"
+                },
                 "building/material": {
                     "label": "Материал"
                 },
@@ -1867,6 +1902,9 @@
                 },
                 "construction": {
                     "label": "Тип"
+                },
+                "consulate": {
+                    "label": "Тип консульства"
                 },
                 "contact/webcam": {
                     "label": "URL-адрес камеры",
@@ -1976,8 +2014,11 @@
                     "label": "Значимость дерева"
                 },
                 "departures_board": {
+                    "label": "Расписание",
                     "options": {
                         "no": "Ничего",
+                        "realtime": "В режиме реального времени",
+                        "timetable": "Точное расписание",
                         "yes": "Есть"
                     }
                 },
@@ -1989,6 +2030,9 @@
                 },
                 "destination/ref_oneway": {
                     "label": "Съезд на дорогу номер"
+                },
+                "destination/symbol_oneway": {
+                    "label": "Символ места назначения"
                 },
                 "destination_oneway": {
                     "label": "Место назначения"
@@ -2002,6 +2046,12 @@
                 },
                 "diet_multi": {
                     "label": "Диеты"
+                },
+                "diplomatic": {
+                    "label": "Тип"
+                },
+                "diplomatic/services": {
+                    "label": "Услуги"
                 },
                 "direction": {
                     "label": "Направление (градусы по часовой)",
@@ -2058,12 +2108,16 @@
                 "dog": {
                     "label": "Собаки",
                     "options": {
+                        "leashed": "Только на поводке",
                         "no": "Не разрешено",
                         "yes": "Разрешено"
                     }
                 },
                 "door": {
                     "label": "Дверь"
+                },
+                "door_type": {
+                    "label": "Тип"
                 },
                 "drive_through": {
                     "label": "Доступен без выхода из машины"
@@ -2093,8 +2147,14 @@
                     "label": "Тип насыпи",
                     "placeholder": "По умолчанию"
                 },
+                "embassy": {
+                    "label": "Тип посольства"
+                },
                 "emergency": {
                     "label": "Экстренные службы"
+                },
+                "emergency_combo": {
+                    "label": "Тип"
                 },
                 "enforcement": {
                     "label": "Тип"
@@ -2136,6 +2196,9 @@
                 "fireplace": {
                     "label": "Камин"
                 },
+                "fishing": {
+                    "label": "Ловля рыбы"
+                },
                 "fitness_station": {
                     "label": "Тип снаряжения"
                 },
@@ -2144,6 +2207,12 @@
                 },
                 "flag/type": {
                     "label": "Тип флага"
+                },
+                "floating": {
+                    "label": "Плавающий"
+                },
+                "flood_prone": {
+                    "label": "Подвержено затоплению"
                 },
                 "ford": {
                     "label": "Тип брода",
@@ -2195,6 +2264,9 @@
                 "grape_variety": {
                     "label": "Сорта винограда"
                 },
+                "guest_house": {
+                    "label": "Тип"
+                },
                 "handicap": {
                     "label": "Гандикап",
                     "placeholder": "1-18"
@@ -2214,6 +2286,12 @@
                 },
                 "height": {
                     "label": "Высота (метры)"
+                },
+                "height_building": {
+                    "label": "Высота здания (в метрах)"
+                },
+                "highspeed": {
+                    "label": "Высокоскоростной"
                 },
                 "highway": {
                     "label": "Тип дороги"
@@ -2289,6 +2367,9 @@
                 "indoor": {
                     "label": "План помещения"
                 },
+                "indoor_type": {
+                    "label": "Тип"
+                },
                 "industrial": {
                     "label": "Тип"
                 },
@@ -2300,6 +2381,9 @@
                 },
                 "intermittent": {
                     "label": "Пересыхающий"
+                },
+                "intermittent_yes": {
+                    "label": "Непостоянный"
                 },
                 "internet_access": {
                     "label": "Доступ в Интернет",
@@ -2317,6 +2401,9 @@
                 "internet_access/ssid": {
                     "label": "Название WiFi-сети"
                 },
+                "interval": {
+                    "label": "Интервал"
+                },
                 "junction/ref_oneway": {
                     "label": "Номер съезда"
                 },
@@ -2327,6 +2414,9 @@
                 },
                 "kerb": {
                     "label": "Бордюр"
+                },
+                "kerb/height": {
+                    "label": "Высота"
                 },
                 "label": {
                     "label": "Метка"
@@ -2397,6 +2487,9 @@
                     "label": "Число этажей",
                     "placeholder": "2, 4, 6…"
                 },
+                "liaison": {
+                    "label": "Тип"
+                },
                 "lit": {
                     "label": "Освещение"
                 },
@@ -2411,11 +2504,17 @@
                         "roof": "На крыше"
                     }
                 },
+                "lock": {
+                    "label": "Шлюз"
+                },
                 "man_made": {
                     "label": "Тип"
                 },
                 "manhole": {
                     "label": "Тип"
+                },
+                "manufacturer": {
+                    "label": "Производитель"
                 },
                 "map_size": {
                     "label": "Покрытие"
@@ -2450,8 +2549,12 @@
                 "memorial": {
                     "label": "Тип памятника"
                 },
+                "microbrewery": {
+                    "label": "Пивоварение"
+                },
                 "minspeed": {
-                    "label": "Ограничение минимальной скорости"
+                    "label": "Ограничение минимальной скорости",
+                    "placeholder": "20, 30, 40..."
                 },
                 "monitoring_multi": {
                     "label": "Наблюдение"
@@ -2568,7 +2671,8 @@
                     "label": "Предполагаемая дата открытия"
                 },
                 "opening_hours": {
-                    "label": "Время работы"
+                    "label": "Время работы",
+                    "placeholder": "Неизвестно"
                 },
                 "operator": {
                     "label": "Обслуживающая компания"
@@ -2596,6 +2700,9 @@
                     }
                 },
                 "payment_multi": {
+                    "label": "Способы оплаты"
+                },
+                "payment_multi_fee": {
                     "label": "Способы оплаты"
                 },
                 "phases": {
@@ -2703,6 +2810,9 @@
                     "label": "Выходная электрическая мощность",
                     "placeholder": "500 МВт, 1000 МВт, 2000 МВт ..."
                 },
+                "playground": {
+                    "label": "Тип"
+                },
                 "playground/baby": {
                     "label": "Сидение для младенцев"
                 },
@@ -2803,6 +2913,9 @@
                 },
                 "restrictions": {
                     "label": "Запрет манёвров"
+                },
+                "roof/colour": {
+                    "label": "Цвет крыши"
                 },
                 "rooms": {
                     "label": "Номера"
@@ -2919,6 +3032,9 @@
                         "yes": "Да"
                     },
                     "placeholder": "Да, Нет, Только"
+                },
+                "self_service": {
+                    "label": "Самообслуживание"
                 },
                 "service": {
                     "label": "Тип проезда"
@@ -3253,6 +3369,9 @@
                 "voltage/tertiary": {
                     "label": "Напряжение третичной обмотки"
                 },
+                "voltage_electrified": {
+                    "label": "Напряжение"
+                },
                 "wall": {
                     "label": "Тип"
                 },
@@ -3286,6 +3405,9 @@
                 },
                 "width": {
                     "label": "Ширина (метры)"
+                },
+                "wikidata": {
+                    "label": "Викидата"
                 },
                 "wikipedia": {
                     "label": "Википедия"
@@ -3639,6 +3761,9 @@
                 "amenity/monastery": {
                     "name": "Монастырь"
                 },
+                "amenity/money_transfer": {
+                    "name": "Денежные переводы"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Парковка для мотоциклов",
                     "terms": "мотопарковка, мотопаркинг, парковка для мотоциклов, паркинг для мотоциклов, мотостоянка"
@@ -3662,6 +3787,9 @@
                     "name": "Многоуровневая парковка",
                     "terms": "паркинг, многоуровневый гараж"
                 },
+                "amenity/parking/underground": {
+                    "name": "Подземная парковка"
+                },
                 "amenity/parking_entrance": {
                     "name": "Въезд/выезд с парковки",
                     "terms": "стоянка, въезд, выезд, автомобиль, машина, парковка, паркинг"
@@ -3669,6 +3797,9 @@
                 "amenity/parking_space": {
                     "name": "Отдельное парковочное место на парковке",
                     "terms": "парковочное место, отдельное парковочное место на стоянке"
+                },
+                "amenity/payment_terminal": {
+                    "name": "Платёжный терминал"
                 },
                 "amenity/pharmacy": {
                     "name": "Аптека"
@@ -3690,6 +3821,12 @@
                 "amenity/place_of_worship/hindu": {
                     "name": "Индуистский храм",
                     "terms": "индуистский храм, мандир"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Иудейская синагога"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Мусульманская мечеть"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Дзиндзя"
@@ -4056,6 +4193,10 @@
                     "name": "Живая изгородь",
                     "terms": "Живая изгородь, Зелёное ограждение, барьер"
                 },
+                "barrier/height_restrictor": {
+                    "name": "Ограничитель высоты",
+                    "terms": "Ограничитель высоты"
+                },
                 "barrier/kerb": {
                     "name": "Бордюр",
                     "terms": "бордюр, поребрик"
@@ -4217,6 +4358,9 @@
                     "name": "Здание мечети",
                     "terms": "Здание мечети, мечеть"
                 },
+                "building/pavilion": {
+                    "name": "Павильон"
+                },
                 "building/public": {
                     "name": "Общественное здание",
                     "terms": "общественный центр, здание, клуб, общество"
@@ -4294,6 +4438,9 @@
                 "club": {
                     "name": "Клуб",
                     "terms": "Клуб по интересам, фан-клуб, кружок"
+                },
+                "club/sport": {
+                    "name": "Спортивный клуб"
                 },
                 "craft": {
                     "name": "Мастерская",
@@ -4708,7 +4855,7 @@
                     "name": "Знак \"Уступи дорогу\""
                 },
                 "highway/living_street": {
-                    "name": "Жилая улица (со знаком 5.21 или 5.22)",
+                    "name": "Улица со знаком 5.21 или 5.22",
                     "terms": "Жилая улица, Улица в жилой застройке, Жилая зона"
                 },
                 "highway/milestone": {
@@ -4746,11 +4893,11 @@
                     "name": "Пешеходная улица"
                 },
                 "highway/primary": {
-                    "name": "Дорога регионального значения",
+                    "name": "Первостепенная дорога",
                     "terms": "первичная, региональная"
                 },
                 "highway/primary_link": {
-                    "name": "Съезд с дороги регионального значения",
+                    "name": "Съезд с первостепенной дороги",
                     "terms": "съезд"
                 },
                 "highway/raceway": {
@@ -4758,7 +4905,7 @@
                     "terms": "мототрек, гоночный трек, мотогонки, автогонки, автотрек"
                 },
                 "highway/residential": {
-                    "name": "Дорога вдоль жилых зон"
+                    "name": "Улица"
                 },
                 "highway/rest_area": {
                     "name": "Зона отдыха без инфраструктуры",
@@ -4769,11 +4916,11 @@
                     "terms": "неизвестная, Неизвестный тип дороги"
                 },
                 "highway/secondary": {
-                    "name": "Важная дорога",
+                    "name": "Второстепенная дорога",
                     "terms": "съезд"
                 },
                 "highway/secondary_link": {
-                    "name": "Съезд с важной дороги",
+                    "name": "Съезд с второстепенной дороги",
                     "terms": "съезд, съезд с важной дороги"
                 },
                 "highway/service": {
@@ -4845,11 +4992,11 @@
                     "terms": "светофор"
                 },
                 "highway/trunk": {
-                    "name": "Дорога федерального значения",
+                    "name": "Основная дорога",
                     "terms": "трасса"
                 },
                 "highway/trunk_link": {
-                    "name": "Съезд с дороги федерального значения",
+                    "name": "Съезд с основной дороги",
                     "terms": "Заезд на магистраль, Съезд с магистрали"
                 },
                 "highway/turning_circle": {
@@ -5423,6 +5570,9 @@
                     "name": "Система наблюдения",
                     "terms": "камера наблюдения, охранные системы"
                 },
+                "man_made/surveillance/camera": {
+                    "name": "Камера видеонаблюдения"
+                },
                 "man_made/survey_point": {
                     "name": "Тригонометрический пункт",
                     "terms": "Тригонометрический пункт"
@@ -5430,6 +5580,9 @@
                 "man_made/tower": {
                     "name": "Башня",
                     "terms": "Башня"
+                },
+                "man_made/tower/observation": {
+                    "name": "Наблюдательная вышка"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Станция водоочистки",
@@ -5968,6 +6121,9 @@
                 "railway/buffer_stop": {
                     "name": "Путевой энергопоглощающий упор"
                 },
+                "railway/construction": {
+                    "name": "Строящаяся железная дорога"
+                },
                 "railway/crossing": {
                     "name": "Железнодорожный переход"
                 },
@@ -6012,6 +6168,9 @@
                 "railway/rail": {
                     "name": "Рельсовый путь",
                     "terms": "рельсы, вокзал, железнодорожный"
+                },
+                "railway/rail/highspeed": {
+                    "name": "Высокоскоростная железная дорога"
                 },
                 "railway/signal": {
                     "name": "Железнодорожная сигнализация"
@@ -6191,6 +6350,9 @@
                     "name": "Магазин одежды",
                     "terms": "одежда"
                 },
+                "shop/clothes/underwear": {
+                    "name": "Магазин нижнего белья"
+                },
                 "shop/coffee": {
                     "name": "Магазин кофе",
                     "terms": "кофе, кофейные аксессуары, кофейная техника, кофейное оборудование"
@@ -6266,6 +6428,9 @@
                 "shop/fashion": {
                     "name": "Магазин модной брендовой одежды"
                 },
+                "shop/fishing": {
+                    "name": "Рыболовный магазин"
+                },
                 "shop/fishmonger": {
                     "name": "Рыбный магазин"
                 },
@@ -6331,6 +6496,9 @@
                 "shop/houseware": {
                     "name": "Магазин товаров для дома",
                     "terms": "посуда, утварь, обиход, предметы интерьера, декоративные вещи"
+                },
+                "shop/hunting": {
+                    "name": "Охотничий магазин"
                 },
                 "shop/interior_decoration": {
                     "name": "Магазин предметов интерьера",
@@ -6590,6 +6758,12 @@
                     "name": "Произведение искусства",
                     "terms": "Произведение искусства, Скульптура, Фонтан, Картина, Рельеф, Барельеф, Мерельеф, Стелла, Композиция, Статуя"
                 },
+                "tourism/artwork/graffiti": {
+                    "name": "Граффити"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Инсталляция"
+                },
                 "tourism/artwork/mural": {
                     "name": "Монументальная живопись",
                     "terms": "фреска, мазайка, граффити, ветраж, рисунок на стене"
@@ -6683,6 +6857,9 @@
                 "tourism/zoo": {
                     "name": "Зоопарк",
                     "terms": "зоопарк, зоосад"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Контактный зоопарк"
                 },
                 "traffic_calming": {
                     "name": "Элемент успокоения движения",

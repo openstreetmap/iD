@@ -782,6 +782,14 @@
                 "description": "建築物",
                 "tooltip": "建築、亭子、倉庫等。"
             },
+            "building_parts": {
+                "description": "建物的一部分 ",
+                "tooltip": "3D 建物和屋頂物件"
+            },
+            "indoor": {
+                "description": "室內圖徵",
+                "tooltip": "房間、走廊、迴廊等"
+            },
             "landuse": {
                 "description": "土地利用圖徵",
                 "tooltip": "森林、農莊、公園、住宅區、商業區等。"
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "鐵路圖徵",
                 "tooltip": "鐵路"
+            },
+            "pistes": {
+                "description": "滑雪道",
+                "tooltip": "滑雪場、雪橇道、滑冰道等"
+            },
+            "aerialways": {
+                "description": "空中圖徵",
+                "tooltip": "升降椅、吊船、Zip Lines等"
             },
             "power": {
                 "description": "電力設施",
@@ -894,7 +910,7 @@
             "thank_you_location": "感謝你改進 {where} 週遭的地圖。",
             "thank_you_where": {
                 "format": "{region}{separator}{place}",
-                "separator": "^@"
+                "separator": "-"
             },
             "help_html": "你編輯的變動應該過幾分會出現在開放街圖裡。其他的地圖更新需要花久一點時間。",
             "help_link_text": "詳細資料",
@@ -1619,15 +1635,22 @@
                 "title": "幾乎是交叉",
                 "message": "{feature} 很接近但是沒有連到 {feature2}",
                 "tip": " 尋找應當連接到其他附近的圖徵 ",
+                "self": {
+                    "message": "{feature} 在非常靠近自身，但不會重新連接的地方結束"
+                },
                 "highway-highway": {
                     "reference": "交叉的道路應該共享交叉連接點。 "
                 }
             },
             "close_nodes": {
                 "title": "很接近的節點",
+                "tip": "尋找多餘及擁擠的點",
                 "message": "{way} 的兩個節點相當接近 ",
-                "tip": "尋找路徑中多餘的節點",
-                "reference": "路徑中多餘的節點應該被合併或是移出。"
+                "reference": "路徑中多餘的節點應該被合併或是移出。",
+                "detached": {
+                    "message": "{feature} 太靠近 {feature2} 了",
+                    "reference": "單獨的點不應共享同一個位置。"
+                }
             },
             "crossing_ways": {
                 "title": "穿越路徑",
@@ -1747,7 +1770,11 @@
                 "title": "過時的標籤",
                 "message": "{feature} 有過時的標籤",
                 "tip": "尋找已棄用的標籤圖徵，來更新資料",
-                "reference": "有些標籤隨著時間過去而應該更新。"
+                "reference": "有些標籤隨著時間過去而應該更新。",
+                "incomplete": {
+                    "message": "{feature} 的標籤不完整",
+                    "reference": "一些圖徵應當有額外的標籤。"
+                }
             },
             "private_data": {
                 "title": "隱私資訊",
@@ -3706,6 +3733,9 @@
                         "required": "必須",
                         "yes": "接受"
                     }
+                },
+                "resort": {
+                    "label": "類型"
                 },
                 "resource": {
                     "label": "資源"
@@ -6535,6 +6565,10 @@
                     "name": "酒莊",
                     "terms": "酒莊"
                 },
+                "landuse/winter_sports": {
+                    "name": "冬季運動區域",
+                    "terms": "冬季運動區,冬天運動區"
+                },
                 "leisure": {
                     "name": "休閒設施"
                 },
@@ -7000,6 +7034,10 @@
                 "man_made/storage_tank": {
                     "name": "儲油槽",
                     "terms": "存放槽,油罐,儲罐,儲水槽,儲汽槽"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "水塔",
+                    "terms": "水塔"
                 },
                 "man_made/street_cabinet": {
                     "name": "街櫃"
@@ -9116,6 +9154,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "黃 = 從美國人口普查而來的公有領域資料。紅 = 在開放街圖中找不到的資料",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "近年來自美國各州的國家農業影像計畫 (NAIP) 的 DOQQ。",
+                "name": "國家農業影像計畫"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "道路：綠色外框 = 非分類道路。棕色外框 = 土路。路面：碎石路 = 亮棕色實心填滿，柏油 = 黑色，有舖面 = 灰色，地面 = 白色，水泥 = 藍色，草地 = 綠色。季節性 = 白色條紋",

@@ -1626,7 +1626,6 @@
             "close_nodes": {
                 "title": "相近的节点",
                 "message": "{way} 中的两个节点非常接近",
-                "tip": "查找路径中多余的节点",
                 "reference": "路径中多余的点应被合并或分开。"
             },
             "crossing_ways": {

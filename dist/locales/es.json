@@ -782,6 +782,14 @@
                 "description": "Edificios",
                 "tooltip": "Edificios, garajes, cobertizos, etc."
             },
+            "building_parts": {
+                "description": "Partes de edificio",
+                "tooltip": "Componentes de edificio y techo en 3D"
+            },
+            "indoor": {
+                "description": "Elementos de interior",
+                "tooltip": "Habitaciones, pasillos, escaleras, etc."
+            },
             "landuse": {
                 "description": "Elementos de uso del suelo",
                 "tooltip": "Bosques, tierras de cultivo, parques, áreas residenciales, áreas comerciales, etc."
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "Elementos ferroviarios",
                 "tooltip": "Ferrocarriles"
+            },
+            "pistes": {
+                "description": "Pistas",
+                "tooltip": "Pistas de esquí, trineo, patinaje sobre hielo, etc"
+            },
+            "aerialways": {
+                "description": "Elementos aéreos",
+                "tooltip": "Telesillas, góndolas, tirolesas, etc."
             },
             "power": {
                 "description": "Elementos de energía",
@@ -1619,15 +1635,22 @@
                 "title": "Casi cruces",
                 "message": "{feature} está muy cerca pero no está conectado a {feature2}",
                 "tip": "Encuentra elementos que posiblemente deberían estar conectadas a otros cercanos",
+                "self": {
+                    "message": "{feature} termina muy cerca de sí mismo pero no se vuelve a conectar"
+                },
                 "highway-highway": {
                     "reference": "La intersección de carreteras debe compartir un vértice de unión."
                 }
             },
             "close_nodes": {
                 "title": "Puntos muy cercanos",
+                "tip": "Encuentra puntos redundantes y abarrotados",
                 "message": "Dos puntos en {way} están muy juntos.",
-                "tip": "Encontrar puntos redundantes en la vía",
-                "reference": "Los puntos redundantes de una vía deben ser combinados o separados."
+                "reference": "Los puntos redundantes de una vía deben ser combinados o separados.",
+                "detached": {
+                    "message": "{feature} está muy cerca de {feature2}",
+                    "reference": "Los puntos separados no deben compartir una ubicación."
+                }
             },
             "crossing_ways": {
                 "title": "Cruces de vías",
@@ -1744,10 +1767,14 @@
                 "reference": "Los multipolígonos deben estar etiquetados en su relación, no en su vía externa."
             },
             "outdated_tags": {
-                "title": "Etiquetas obsoletas",
-                "message": "{feature} tiene etiquetas obsoletas",
+                "title": "Etiquetas desactualizadas",
+                "message": "{feature} tiene etiquetas desactualizadas",
                 "tip": "Encontrar elementos con etiquetas obsoletas que pueden actualizarse",
-                "reference": "Algunas etiquetas cambian con el tiempo y deben actualizarse."
+                "reference": "Algunas etiquetas cambian con el tiempo y deben actualizarse.",
+                "incomplete": {
+                    "message": "{feature} tiene etiquetas incompletas",
+                    "reference": "Algunas elementos deben tener etiquetas adicionales."
+                }
             },
             "private_data": {
                 "title": "Información privada",
@@ -3706,6 +3733,9 @@
                         "required": "Requerido",
                         "yes": "Aceptado"
                     }
+                },
+                "resort": {
+                    "label": "Tipo"
                 },
                 "resource": {
                     "label": "Recursos"
@@ -6548,6 +6578,10 @@
                     "name": "Viñedo",
                     "terms": "viña, viñedo, majuelo, parral"
                 },
+                "landuse/winter_sports": {
+                    "name": "Área de deportes de invierno",
+                    "terms": "área de pistas, área de esquí, esquí, montaña de esquí, estación de esquí, área de snowboard, snowboard"
+                },
                 "leisure": {
                     "name": "Ocio"
                 },
@@ -6750,6 +6784,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Picadero",
                     "terms": "picadero, equitación, monta, caballos, arena"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Campo de hockey",
+                    "terms": "hockey"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Foso de herraduras (juego)",
@@ -7013,6 +7051,10 @@
                 "man_made/storage_tank": {
                     "name": "Tanque de almacenamiento",
                     "terms": "tanque, depósito, deposito, almacenamiento, líquido, gas, petróleo"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Depósito de agua",
+                    "terms": "cisterna, torre de agua, tanque"
                 },
                 "man_made/street_cabinet": {
                     "name": "Gabinete de calle",
@@ -8064,7 +8106,7 @@
                 },
                 "shop/car_repair": {
                     "name": "Taller de reparación de automóviles",
-                    "terms": "coche, carro, auto, automóvil, vehículo, taller, mecánico, chapero, reparación, reparación de vehículos, reparación de automóviles, reparación del automóvil, taller de reparación, taller de reparaciones, tienda de reparación"
+                    "terms": "coche, carro, auto, automóvil, vehículo, taller, mecánico, chapero, reparación, reparación de vehículos, reparación de automóviles, reparación del automóvil, taller de reparación, taller de reparaciones, tienda de reparación, gomería, gomeria, neumáticos"
                 },
                 "shop/caravan": {
                     "name": "Concesionario de Caravanas",
@@ -8452,8 +8494,8 @@
                     "terms": "deporte, deportivo"
                 },
                 "shop/stationery": {
-                    "name": "Papelería",
-                    "terms": "papel, papelería, escritorio, oficina, artículos de papelería, material de papelería, material de escritorio, papel de escribir, artículos de oficina"
+                    "name": "Artículos de papelería y oficina",
+                    "terms": "papel, papelería, escritorio, oficina, artículos de papelería, material de papelería, material de escritorio, papel de escribir, artículos de oficina, librería, libreria"
                 },
                 "shop/storage_rental": {
                     "name": "Alquiler de depósito",
@@ -9145,6 +9187,10 @@
                 "description": "Amarillo = Datos del mapa de dominio público del Censo de los Estados Unidos. Rojo = Datos no encontrados en OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "USDA-NAIP": {
+                "description": "El año más reciente de DOQQs del Programa Nacional de Imágenes de Agricultura (NAIP) para cada estado en Estados Unidos contiguos.",
+                "name": "Programa Nacional de Imágenes de Agricultura"
+            },
             "US_Forest_Service_roads_overlay": {
                 "description": "Carretera: marco verde = sin clasificar. marco marrón = pista. Superficie: grava = relleno marrón claro, asfalto = negro, pavimentado = gris, tierra = blanco, hormigón = azul, hierba/pasto = verde. Estacional = barras blancas",
                 "name": "Superposición de carreteras forestales de los EE.UU."
@@ -9622,6 +9668,65 @@
                 "name": "AbsuMappersTeam",
                 "description": "Capítulo de los YouthMappers de la Universidad Estatal de Abia",
                 "extendedDescription": "AbsuMappersTeam es un equipo voluntario de entusiastas de mapas, que utiliza openstreetmap, SIG y otra tecnología geoespacial de código abierto para resolver problemas. Está dedicado a la respuesta ante desastres utilizando OpenStreetMap. Es una plataforma de capacitación y capacitación profesional para aquellos con pasión por el SIG y la cartografía. Es una comunidad de voluntarios para la creación de datos geoespaciales, la recopilación de datos de campo y el mapeo. El equipo fue cofundado por Victor N.Sunday (el mentor del equipo) y el profesor J.U.Ogbonna, el coordinador del equipo y el asesor de la facultad. AbsuMapperTeam es un afiliado de UniiqueMappersTeam-Port Harcourt. El equipo apoya el desarrollo sostenible utilizando tecnología geoespacial"
+            },
+            "ym-Ahmadu-Bello-University": {
+                "name": "ABU Geomappers",
+                "description": "Capítulo de los YouthMappers de la Universidad Ahmadu Bello.",
+                "extendedDescription": "Somos un grupo de mapeadores humanitarios basados ​​en datos, que estamos dedicados a brindar un servicio humanitario en respuesta a desastres y mitigación. Nos complace contribuir con nuestra experiencia y conocimiento a través del mapeo y ayudar a difundir #OpenEvangelism a través de la capacitación y la colaboración."
+            },
+            "ym-Federal-School-of-Surveys": {
+                "name": "OyoMappersTeam (OMT) Oyo",
+                "description": "Capítulo de YouthMappers en la Escuela Federal de Encuestas."
+            },
+            "ym-Federal-University-of-Technology-Akure": {
+                "name": "YouthMappers Futa Space Club",
+                "description": "Capítulo de YouthMappers en la Universidad Federal de Tecnología, Akure",
+                "extendedDescription": "Nuestra misión es criar a la próxima generación de Líderes Espaciales. Las actividades incluyen la investigación y el desarrollo de capacidades en teledetección, SIG, cambio climático, astronomía, cosmología, ingeniería espacial, navegación global, robótica y educación espacial."
+            },
+            "ym-Ignatius-Ajuru-University-of-Education": {
+                "name": "IgnatiusMappersTeam (IMT)",
+                "description": "Capítulo de YouthMappers en la Universidad de Educación Ignatius Ajuru",
+                "extendedDescription": "Somos un Capítulo de Jóvenes de la Universidad de Educación de Ignatius Ajuru involucrado en la creación de mapas de nuestro entorno de participación colectiva y en el mapeo remoto de comunidades resilientes. Somos un equipo de voluntarios que utiliza openstreetmap y otra fuente geoespacial abierta para el mapeo."
+            },
+            "ym-University-of-Nigeria-Nsukka": {
+                "name": "LionMappersTeam (LMT) Nsukka",
+                "description": "El capítulo de YouthMappers en la Universidad de Nigeria, Nsukka",
+                "extendedDescription": "LionMappersTeam es un afiliado de YouthMappers Network, con el único objetivo de brindarles a los miembros la oportunidad de aprender y mejorar sus habilidades en el campo de la cartografía científica y crear datos y análisis geográficos abiertos que aborden los desafíos definidos localmente a nivel mundial. Es un equipo de voluntarios para el mapeo de recursos compartidos y la provisión de información geográfica utilizando Openstreetmap, Citizens Science y otras tecnologías geoespaciales para la investigación, la capacitación y la respuesta a los desafíos de la comunidad. Estamos involucrados en SIG y aplicaciones e investigación de sensores remotos. SIG participativos y ciencia ciudadana, mapas de campo, talleres de capacitación y divulgación a escuelas secundarias."
+            },
+            "ym-University-of-Port-Harcourt": {
+                "name": "UniqueMappersTeam (UMT) Port Harcourt",
+                "description": "Capítulo de los YouthMappers en la Universidad de Port Harcourt",
+                "extendedDescription": "UniqueMappersTeam (UMT) Port Harcourt es un grupo de acción y un equipo de voluntarios para mapeo colaborativo en línea dirigido a entrenar y capacitar a los miembros con habilidades de mapeo para crear datos geoespaciales abiertos y análisis que aborden los desafíos definidos localmente para la geoinformación y para brindar servicios de mapeo humanitario a las comunidades resilientes en el Delta del Níger, Nigeria y en otros lugares. Promovemos el voluntariado de mapeo colaborativo y la información Geográfica utilizando la plataforma OpenStreetMap (OSM) y otras plataformas accesibles para Mapeo de Respuesta Rápida, Mapeo de Desastres, Mapeo de Inteligencia Geográfica, actualizaciones de mapas y capacitación. Es un afiliado Capítulo de Campus del Equipo Humanitario OpenStreetMap (HOT). Es un equipo de proyecto-y-tarea de YouthMappers que brinda a los miembros la oportunidad de aprender y mejorar sus habilidades en Geoinformática para explorar oportunidades globales en el campo del Mapeo y la Geoinformación."
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "Capítulo de los YouthMappers en la Universidad de Nigeria, Campus Enugu",
+                "extendedDescription": "El LionMappersTeam (LMT) Enugu Campus es un afiliado de YouthMappers Network, con el único objetivo de brindar a los miembros la oportunidad de aprender y mejorar sus habilidades en el campo de la geoinformática y crear datos geográficos abiertos y análisis que aborden los desafíos definidos localmente a nivel mundial. Es un equipo de voluntarios para la provisión de información geográfica y de mapas de colaboración colectiva que utiliza Openstreetmap, Citizen Science y otras tecnologías geoespaciales para la investigación, la capacitación y la respuesta a los desafíos de la comunidad resistente. Participamos en aplicaciones de cartografía web, SIG y teledetección e investigación. Nos apasiona la información geográfica voluntaria. El SIG participativo y la ciencia ciudadana. Nuestras actividades principales incluyen cartografía en línea, cartografía de campo, talleres de capacitación y divulgación a la escuela secundaria, así como Mapeo de Respuesta Humanitaria / Desastres."
+            },
+            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
+                "name": "YouthMappers en INES Ruhengeri",
+                "description": "El capítulo de YouthMappers en el Instituto de Educación Superior de Ruhengeri",
+                "extendedDescription": "Somos estudiantes de los Departamentos de Administración y Administración de Tierras y de Inspección de Tierras de INES-Ruhengeri. Estamos comprometidos en actividades de mapeo que crean los cambios hacia el desarrollo sostenible en nuestra comunidad."
+            },
+            "ym-University-of-Rwanda-Huye-Campus": {
+                "name": "Rwanda YouthMappers",
+                "description": "Capítulo de los YouthMappers en la Universidad de Ruanda - Campus Huye",
+                "extendedDescription": "Basándonos en el compromiso y el propósito de promover el mapeo y la información de las charlas públicas de YouthMappers nos hemos organizado como estudiantes en el departamento de Geografía que están comprometidos en el mapeo para fundar un capítulo de nuestro Campus. Hemos recibido el apoyo de nuestro Facilitador, el Dr. Gaspard Rwanyiziri (Director de CGIS-Rwanda) y de varios mentores docentes."
+            },
+            "ym-Institut-Suprieur-de-Management-Kolda": {
+                "name": "Les Femmes Leaders de ISM/Kolda",
+                "description": "Capítulo de YouthMappers en el Instituto Kolda de Administración",
+                "extendedDescription": "Les Femmes Leaders de ISM / Kolda es un grupo de mapeo de mujeres en el sur de Senegal que busca poner a Kolda y las aldeas circundantes en el mapa y comprender mejor cómo usar OSM."
+            },
+            "ym-Universit-Gaston-Berger": {
+                "name": "YouthMappers en la UGB",
+                "description": "Capítulo de los YouthMappers de la Universidad Gaston Berger",
+                "extendedDescription": "YouthMappers UGB está formado por jóvenes estudiantes e investigadores apasionados por el mapeo. Nuestro objetivo es mejorar las habilidades de los estudiantes en el campo de la cartografía y participar en la creación de datos geográficos abiertos que respondan a los desafíos del desarrollo en todo el mundo y en particular en África."
+            },
+            "ym-Fourah-Bay-College": {
+                "name": "Asociación Geográfica de Estudiantes",
+                "description": "El capítulo de los YouthMappers en la universidad de Fourah Bay",
+                "extendedDescription": "La Asociación Geográfica de Estudiantes - YouthMappers es una asociación de estudiantes de Fourah Bay College con los objetivos comunes de trazar lugares vulnerables en Sierra Leona y el mundo en general para el alivio y otros fines beneficiosos, llevar a cabo investigaciones y otros esfuerzos educativos. El capítulo está formado por jóvenes con grandes ideas, orientadas al desarrollo con la capacidad de relacionarse entre sí, comprender e implementar proyectos de desarrollo sostenible en equipo."
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",

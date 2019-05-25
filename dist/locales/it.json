@@ -1626,7 +1626,6 @@
             "close_nodes": {
                 "title": "Nodi molto vicini",
                 "message": "Due nodi in {way} sono molto vicini tra loro",
-                "tip": "Trova nodi ridondanti nei percorsi",
                 "reference": "I nodi ridondanti di un percorso andrebbero uniti o distanziati tra loro."
             },
             "crossing_ways": {
