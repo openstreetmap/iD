@@ -1,0 +1,114 @@
+import { geoBounds as d3_geoBounds } from 'd3-geo';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { behaviorBreathe } from '../behavior/breathe';
+import { behaviorHover } from '../behavior/hover';
+import { behaviorLasso } from '../behavior/lasso';
+import { behaviorSelect } from '../behavior/select';
+
+import { t } from '../util/locale';
+
+import { geoExtent } from '../geo';
+import { modeBrowse } from './browse';
+import { modeDragNode } from './drag_node';
+import { modeDragNote } from './drag_note';
+import { uiDataEditor } from '../ui/data_editor';
+import { utilKeybinding } from '../util';
+
+
+export function modeSelectTask(context, selectedDatum) {
+    var mode = {
+        id: 'select-task',
+        button: 'browse'
+    };
+
+    var keybinding = utilKeybinding('select-task');
+    var dataEditor = uiDataEditor(context);
+
+    var behaviors = [
+        behaviorBreathe(context),
+        behaviorHover(context),
+        behaviorSelect(context),
+        behaviorLasso(context),
+        modeDragNode(context).behavior,
+        modeDragNote(context).behavior
+    ];
+
+
+    // class the task as selected, or return to browse mode if the data is gone
+    function selectTask(drawn) {
+        var selection = context.surface().selectAll('.layer-maptask .data' + selectedDatum.__featurehash__);
+
+        if (selection.empty()) {
+            // Return to browse mode if selected DOM elements have
+            // disappeared because the user moved them out of view..
+            var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
+            if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
+                context.enter(modeBrowse(context));
+            }
+        } else {
+            selection.classed('selected', true);
+        }
+    }
+
+
+    function esc() {
+        if (d3_select('.combobox').size()) return;
+        context.enter(modeBrowse(context));
+    }
+
+
+    mode.zoomToSelected = function() {
+        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        context.map().centerZoomEase(extent.center(), context.map().trimmedExtentZoom(extent));
+    };
+
+
+    mode.enter = function() {
+        behaviors.forEach(context.install);
+
+        keybinding
+            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on('⎋', esc, true);
+
+        d3_select(document)
+            .call(keybinding);
+
+        selectTask();
+
+        var sidebar = context.ui().sidebar;
+        sidebar.show(dataEditor.datum(selectedDatum));
+
+        // expand the sidebar, avoid obscuring the data if needed
+        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        sidebar.expand(sidebar.intersects(extent));
+
+        context.map()
+            .on('drawn.select-data', selectTask);
+    };
+
+
+    mode.exit = function() {
+        behaviors.forEach(context.uninstall);
+
+        d3_select(document)
+            .call(keybinding.unbind);
+
+        context.surface()
+            .selectAll('.layer-maptask .selected')
+            .classed('selected hover', false);
+
+        context.map()
+            .on('drawn.select-data', null);
+
+        context.ui().sidebar
+            .hide();
+    };
+
+
+    return mode;
+}

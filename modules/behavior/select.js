@@ -6,6 +6,7 @@ import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
+import { modeSelectTask } from '../modes/select_task';
 import { osmEntity, osmNote, qaError } from '../osm';
 
 
@@ -162,6 +163,11 @@ export function behaviorSelect(context) {
                     context.enter(modeSelect(context, selectedIDs).suppressMenu(_suppressMenu));
                 }
             }
+
+        } else if (datum && datum.__featurehash__ && !isMultiselect && datum.properties.taskId) {    // clicked Task..
+            context
+                .selectedNoteID(null)
+                .enter(modeSelectTask(context, datum));
 
         } else if (datum && datum.__featurehash__ && !isMultiselect) {    // clicked Data..
             context

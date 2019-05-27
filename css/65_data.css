@@ -212,3 +212,75 @@
     stroke-width: 5px;
     stroke-miterlimit: 1;
 }
+
+
+
+/* Custom Map Task (geojson) */
+.layer-maptask {
+    pointer-events: none;
+}
+
+.layer-maptask path.shadow {
+    pointer-events: stroke;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    fill: none;
+}
+.layer-maptask path.MultiPoint.shadow,
+.layer-maptask path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+.layer-maptask path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.layer-maptask path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+.layer-maptask path.stroke {
+    stroke: #cecece;
+    stroke-width: 2;
+    fill: none;
+}
+
+.layer-maptask path.fill {
+    stroke-width: 0;
+    stroke-opacity: 0.3;
+    stroke: #cecece;
+    fill: #cecece;
+    fill-opacity: 0.3;
+    fill-rule: evenodd;
+}
+
+.layer-maptask path.fill.mapped {
+    stroke: #FDE599;
+    fill: #FDE599;
+}
+
+.layer-maptask path.fill.validated {
+    stroke: #97C995;
+    fill: #97C995;
+}
+
+.layer-maptask text.label-halo,
+.layer-maptask text.label {
+    font-size: 10px;
+    font-weight: bold;
+    dominant-baseline: middle;
+}
+.layer-maptask text.label {
+    fill: #cecece;
+}
+.layer-maptask text.label.hover,
+.layer-maptask text.label.selected {
+    fill: #f6634f;
+}
+.layer-maptask text.label-halo {
+    opacity: 0.7;
+    stroke: #000;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}

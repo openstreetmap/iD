@@ -7,6 +7,9 @@
     stroke-dasharray: none !important;
     fill: none !important;
 }
+
+.low-zoom.fill-wireframe .layer-maptask path.stroke,
+.fill-wireframe .layer-maptask path.stroke,
 .low-zoom.fill-wireframe .layer-mapdata path.stroke,
 .fill-wireframe .layer-mapdata path.stroke {
     stroke-width: 2 !important;

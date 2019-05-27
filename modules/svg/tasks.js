@@ -163,6 +163,24 @@ export function svgTasks(projection, context, dispatch) {
         ].filter(Boolean).join(' ');
     }
 
+    function getStatus(d) {
+        var status = '';
+        switch (d.properties.taskStatus) {
+            case 'MAPPED':
+                status = 'mapped';
+                break;
+            case 'VALIDATED':
+                status = 'validated';
+                break;
+            case 'READY':
+                status = '';
+                break;
+            default:
+                break;
+        }
+        return status;
+    }
+
 
     function drawTasks(selection) {
         var vtService = getService();
@@ -170,7 +188,7 @@ export function svgTasks(projection, context, dispatch) {
         var getAreaPath = svgPath(projection, null, true).geojson;
         var hasData = drawTasks.hasData();
 
-        layer = selection.selectAll('.layer-mapdata')
+        layer = selection.selectAll('.layer-maptask')
             .data(_enabled && hasData ? [0] : []);
 
         layer.exit()
@@ -178,7 +196,7 @@ export function svgTasks(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapdata')
+            .attr('class', 'layer-maptask')
             .merge(layer);
 
         var surface = context.surface();
@@ -249,7 +267,8 @@ export function svgTasks(projection, context, dispatch) {
             .append('path')
             .attr('class', function(d) {
                 var datagroup = this.parentNode.__data__;
-                return 'pathdata ' + datagroup + ' ' + featureClasses(d);
+                var status = getStatus(d);
+                return 'pathdata ' + datagroup + ' ' + status + ' ' + featureClasses(d);
             })
             .attr('clip-path', function(d) {
                 var datagroup = this.parentNode.__data__;
