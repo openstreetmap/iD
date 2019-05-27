@@ -1897,6 +1897,9 @@ en:
         history: "Toggle history panel"
         location: "Toggle location panel"
         measurement: "Toggle measurement panel"
+  tasks:
+    title: Tasks
+    key: T
   units:
     feet: "{quantity} ft"
     miles: "{quantity} mi"
