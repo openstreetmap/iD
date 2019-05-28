@@ -18,7 +18,7 @@ export function uiTopToolbar(context) {
         undoRedo = uiToolUndoRedo(context),
         save = uiToolSave(context);
 
-    var supportedOperationIDs = ['circularize', 'delete', 'disconnect', 'merge', 'orthogonalize', 'split', 'straighten'];
+    var supportedOperationIDs = ['circularize', 'downgrade', 'delete', 'disconnect', 'merge', 'orthogonalize', 'split', 'straighten'];
 
     var operationToolsByID = {};
 
@@ -61,7 +61,7 @@ export function uiTopToolbar(context) {
             for (var i in operations) {
                 var operation = operations[i];
                 var tool = operationTool(operation);
-                if (operation.id !== 'delete') {
+                if (operation.id !== 'delete' && operation.id !== 'downgrade') {
                     operationTools.push(tool);
                 } else {
                     deleteTool = tool;
