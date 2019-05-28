@@ -4,14 +4,14 @@ import {
 } from 'd3-selection';
 
 import _debounce from 'lodash-es/debounce';
-import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolSearchAdd, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 import { uiToolDeselect } from './tools/deselect';
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
         deselect = uiToolDeselect(context),
-        searchAdd = uiToolSearchAdd(context),
+        addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -69,18 +69,18 @@ export function uiTopToolbar(context) {
             }
             if (operationTools.length > 0) {
                 tools = tools.concat(operationTools);
-                tools.push('spacer');
             }
             if (deleteTool) {
-                // give the delete button its own space
+                // keep the delete button apart from the others
+                tools.push('spacer-half');
                 tools.push(deleteTool);
-                tools.push('spacer');
             }
+            tools.push('spacer');
         } else {
             tools.push(sidebarToggle);
             tools.push('spacer');
 
-            tools.push(searchAdd);
+            tools.push(addFeature);
 
             if (context.presets().getFavorites().length > 0) {
                 tools.push(addFavorite);
@@ -93,7 +93,7 @@ export function uiTopToolbar(context) {
             tools.push('spacer');
 
             if (notesEnabled()) {
-                tools = tools.concat([notes, 'spacer-flex']);
+                tools = tools.concat([notes, 'spacer']);
             }
         }
         tools = tools.concat([undoRedo, save]);

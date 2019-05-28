@@ -18,10 +18,10 @@ import { uiPresetIcon } from '../preset_icon';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiToolSearchAdd(context) {
+export function uiToolAddFeature(context) {
 
     var tool = {
-        id: 'search_add',
+        id: 'add_feature',
         label: t('toolbar.add_feature')
     };
 
@@ -82,7 +82,7 @@ export function uiToolSearchAdd(context) {
             })
             .on('click', function() {
                 if (button.classed('disabled')) return;
-                
+
                 if (popover.classed('hide')) {
                     popover.classed('hide', false);
                     search.node().focus();
@@ -174,7 +174,7 @@ export function uiToolSearchAdd(context) {
             });
 
         context.features()
-            .on('change.search-add', updateForFeatureHiddenState);
+            .on('change.add-feature-tool', updateForFeatureHiddenState);
 
         context.keybinding().on(key, function() {
             popover.classed('hide', false);
@@ -187,8 +187,8 @@ export function uiToolSearchAdd(context) {
         var debouncedUpdate = _debounce(updateEnabledState, 500, { leading: true, trailing: true });
 
         context.map()
-            .on('move.search-add', debouncedUpdate)
-            .on('drawn.search-add', debouncedUpdate);
+            .on('move.add-feature-tool', debouncedUpdate)
+            .on('drawn.add-feature-tool', debouncedUpdate);
 
         updateEnabledState();
 
@@ -199,11 +199,11 @@ export function uiToolSearchAdd(context) {
         context.keybinding().off(key);
 
         context.features()
-            .on('change.search-add', null);
+            .on('change.add-feature-tool', null);
 
         context.map()
-            .on('move.search-add', null)
-            .on('drawn.search-add', null);
+            .on('move.add-feature-tool', null)
+            .on('drawn.add-feature-tool', null);
     };
 
     function osmEditable() {
@@ -484,7 +484,7 @@ export function uiToolSearchAdd(context) {
 
     function updateForFeatureHiddenState() {
 
-        var listItem = d3_selectAll('.search-add .popover .list-item');
+        var listItem = d3_selectAll('.add-feature .popover .list-item');
 
         // remove existing tooltips
         listItem.selectAll('button.choose').call(tooltip().destroyAny);

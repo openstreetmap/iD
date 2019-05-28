@@ -501,7 +501,7 @@ button.bar-button .label {
     flex: 0 1 auto;
     padding: 0 5px;
 }
-.toolbar-item.search-add button.bar-button .icon {
+.toolbar-item.add-feature button.bar-button .icon {
     width: 30px;
     height: 30px;
 }
@@ -586,14 +586,14 @@ button.add-note svg.icon {
 /* Add a feature search bar
 ------------------------------------------------------- */
 
-.search-add {
+.add-feature {
     justify-content: center;
     position: relative;
 }
-.search-add .bar-button.active .tooltip {
+.add-feature .bar-button.active .tooltip {
     display: none;
 }
-.search-add input[type='search'] {
+.add-feature input[type='search'] {
     position: relative;
     width: 100%;
     height: 100%;
@@ -603,11 +603,11 @@ button.add-note svg.icon {
     padding: 5px 10px;
     border-radius: inherit;
 }
-.search-add input[type='search'],
-.search-add input[type='search']:focus {
+.add-feature input[type='search'],
+.add-feature input[type='search']:focus {
     background: #f6f6f6;
 }
-.search-add .search-icon {
+.add-feature .search-icon {
     color: #333;
     display: block;
     position: absolute;
@@ -615,11 +615,11 @@ button.add-note svg.icon {
     top: 10px;
     pointer-events: none;
 }
-[dir='rtl'] .search-add .search-icon {
+[dir='rtl'] .add-feature .search-icon {
     left: auto;
     right: 10px;
 }
-.search-add .popover {
+.add-feature .popover {
     border: none;
     border-radius: 6px;
     position: absolute;
@@ -633,68 +633,68 @@ button.add-note svg.icon {
     right: auto;
     z-index: 300;
 }
-[dir='ltr'] .search-add .popover {
+[dir='ltr'] .add-feature .popover {
     left: 0;
 }
-[dir='rtl'] .search-add .popover {
+[dir='rtl'] .add-feature .popover {
     right: 0;
 }
-.search-add .popover .popover-content {
+.add-feature .popover .popover-content {
     overflow-y: auto;
     height: 100%;
     max-height: 60vh;
 }
-.search-add .popover,
-.search-add .popover .popover-content {
+.add-feature .popover,
+.add-feature .popover .popover-content {
     /* ensure corners are rounded in Chrome */
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
 }
-.search-add .popover .popover-header {
+.add-feature .popover .popover-header {
     height: 40px;
     border-bottom: 2px solid #DCDCDC;
 }
-.search-add .popover .popover-footer {
+.add-feature .popover .popover-footer {
     padding: 5px 10px 5px 10px;
     background: #f6f6f6;
     border-top: 1px solid #DCDCDC;
     display: flex;
 }
-.search-add .popover .popover-footer .message {
+.add-feature .popover .popover-footer .message {
     color: #666666;
     flex-grow: 1;
 }
-.search-add .popover .popover-footer button.filter {
+.add-feature .popover .popover-footer button.filter {
     height: 20px;
     background: transparent;
     color: #666;
 }
-.search-add .popover .popover-footer button.filter.active {
+.add-feature .popover .popover-footer button.filter.active {
     color: #7092ff;
 }
-.search-add .popover .popover-footer button.filter:hover {
+.add-feature .popover .popover-footer button.filter:hover {
     color: #333;
 }
-.search-add .popover .popover-footer button.filter.active:hover {
+.add-feature .popover .popover-footer button.filter.active:hover {
     color: #597be7;
 }
-.search-add .popover::-webkit-scrollbar {
+.add-feature .popover::-webkit-scrollbar {
     /* don't overlap rounded corners */
     background: transparent;
 }
-.search-add .popover .list {
+.add-feature .popover .list {
     height: 100%;
 }
-.search-add .list-item > .row {
+.add-feature .list-item > .row {
     display: flex;
     position: relative;
     padding: 2px;
 }
-.search-add .list-item:not(:last-of-type) .row,
-.search-add .subsection.subitems .list-item .row,
-.search-add .subsection > .tag-reference-body  {
+.add-feature .list-item:not(:last-of-type) .row,
+.add-feature .subsection.subitems .list-item .row,
+.add-feature .subsection > .tag-reference-body  {
     border-bottom: 1px solid #DCDCDC;
 }
-.search-add .list-item .label {
+.add-feature .list-item .label {
     font-weight: bold;
     font-size: 12px;
     padding-left: 2px;
@@ -706,23 +706,23 @@ button.add-note svg.icon {
     line-height: 1.3em;
     width: 100%;
 }
-.search-add .list-item .label .namepart:nth-child(2) {
+.add-feature .list-item .label .namepart:nth-child(2) {
     font-weight: normal;
 }
-.search-add .list-item.disabled .preset-icon-container,
-.search-add .list-item.disabled .label {
+.add-feature .list-item.disabled .preset-icon-container,
+.add-feature .list-item.disabled .label {
     opacity: 0.55;
 }
-[dir='ltr'] .search-add .list-item .label .icon.inline {
+[dir='ltr'] .add-feature .list-item .label .icon.inline {
     margin-left: 0;
 }
-[dir='rtl'] .search-add .list-item .label .icon.inline {
+[dir='rtl'] .add-feature .list-item .label .icon.inline {
     margin-right: 0;
 }
-.search-add .list-item .row > *:not(button) {
+.add-feature .list-item .row > *:not(button) {
     pointer-events: none;
 }
-.search-add .list-item button.choose {
+.add-feature .list-item button.choose {
     position: absolute;
     border-radius: 0;
     height: 100%;
@@ -730,24 +730,24 @@ button.add-note svg.icon {
     top: 0;
     left: 0;
 }
-.search-add .list-item button.choose:hover,
-.search-add .list-item button.choose:focus {
+.add-feature .list-item button.choose:hover,
+.add-feature .list-item button.choose:focus {
     background: #fff;
 }
-.search-add .list-item.focused:not(.disabled) button.choose {
+.add-feature .list-item.focused:not(.disabled) button.choose {
     background: #e8ebff;
 }
-.search-add .list-item button.choose.disabled {
+.add-feature .list-item button.choose.disabled {
     background-color: #ececec;
 }
-.search-add .subsection .list-item button.choose {
+.add-feature .subsection .list-item button.choose {
     opacity: 0.85;
 }
-.search-add .subsection .tag-reference-body {
+.add-feature .subsection .tag-reference-body {
     background: rgba(255, 255, 255, 0.85);
     padding: 10px;
 }
-.search-add .list-item button.accessory {
+.add-feature .list-item button.accessory {
     position: relative;
     flex: 0 0 auto;
     color: #808080;
@@ -755,19 +755,19 @@ button.add-note svg.icon {
     padding-right: 3px;
     padding-left: 3px;
 }
-.search-add .list-item button.accessory:hover {
+.add-feature .list-item button.accessory:hover {
     color: #666;
 }
-.search-add .list-item button.tag-reference-open path {
+.add-feature .list-item button.tag-reference-open path {
     fill: #000;
 }
-.search-add .subsection {
+.add-feature .subsection {
     background-color: #CBCBCB;
 }
-[dir='ltr'] .search-add .subitems {
+[dir='ltr'] .add-feature .subitems {
     padding-left: 6px;
 }
-[dir='rtl'] .search-add .subitems {
+[dir='rtl'] .add-feature .subitems {
     padding-right: 6px;
 }
 
