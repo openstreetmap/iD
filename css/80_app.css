@@ -1194,6 +1194,10 @@ a.hide-toggle {
     object-fit: contain;
     border-radius: 2px;
 }
+.preset-icon-container.small img.image-icon {
+    width: 34px;
+    height: 34px;
+}
 
 .preset-icon-point-border path {
     stroke: #333;
@@ -1340,6 +1344,9 @@ a.hide-toggle {
     background-color: #ececec;
 }
 
+.preset-list-item button.preset-favorite-button {
+    border-radius: 0;
+}
 .preset-list-item button.preset-favorite-button,
 .preset-list-item button.tag-reference-button {
     height: 100%;
