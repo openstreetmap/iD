@@ -22,7 +22,7 @@ export function uiToolSearchAdd(context) {
 
     var tool = {
         id: 'search_add',
-        label: t('inspector.search')
+        label: t('toolbar.add_feature')
     };
 
     var dispatch = d3_dispatch('choose');
@@ -77,64 +77,79 @@ export function uiToolSearchAdd(context) {
                 .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
             );
 
-        search = searchWrap
-            .append('input')
-            .attr('class', 'search-input')
-            .attr('placeholder', t('modes.add_feature.title'))
-            .attr('type', 'search')
-            .call(utilNoAuto)
+        var button = searchWrap
+            .append('button')
+            .attr('class', 'bar-button wide')
+            .attr('tabindex', -1)
             .on('mousedown', function() {
-                search.attr('clicking', true);
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
             })
             .on('mouseup', function() {
-                search.attr('clicking', null);
-            })
-            .on('focus', function() {
-                searchWrap.classed('focused', true);
-                if (search.attr('clicking')) {
-                    search.attr('focusing', true);
-                    search.attr('clicking', null);
-                } else {
-                    search.node().setSelectionRange(0, search.property('value').length);
-                }
-                popover.classed('hide', false);
-            })
-            .on('blur', function() {
-                searchWrap.classed('focused', false);
-                popover.classed('hide', true);
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
             })
             .on('click', function() {
-                if (search.attr('focusing')) {
+                if (popover.classed('hide')) {
+                    popover.classed('hide', false);
+                    search.node().focus();
                     search.node().setSelectionRange(0, search.property('value').length);
-                    search.attr('focusing', null);
+                } else {
+                    search.node().blur();
                 }
+            })
+            .call(svgIcon('#iD-logo-features'));
+
+        popover = searchWrap
+            .append('div')
+            .attr('class', 'popover fillL hide');
+
+        var header = popover
+            .append('div')
+            .attr('class', 'popover-header');
+
+        search = header
+            .append('input')
+            .attr('class', 'search-input')
+            .attr('placeholder', t('modes.add_feature.search_placeholder'))
+            .attr('type', 'search')
+            .call(utilNoAuto)
+            .on('focus', function() {
+                button.classed('active', true);
+                searchWrap.classed('focused', true);
+            })
+            .on('blur', function() {
+                button.classed('active', false);
+                searchWrap.classed('focused', false);
+                popover.classed('hide', true);
             })
             .on('keypress', keypress)
             .on('keydown', keydown)
             .on('input', updateResultsList);
 
-        searchWrap
+        header
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
 
-        popover = searchWrap
+        popoverContent = popover
             .append('div')
-            .attr('class', 'popover fillL hide')
+            .attr('class', 'popover-content')
             .on('mousedown', function() {
                 // don't blur the search input (and thus close results)
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             });
 
-        popoverContent = popover
-            .append('div')
-            .attr('class', 'popover-content');
-
         list = popoverContent.append('div')
             .attr('class', 'list');
 
         footer = popover
             .append('div')
-            .attr('class', 'popover-footer');
+            .attr('class', 'popover-footer')
+            .on('mousedown', function() {
+                // don't blur the search input (and thus close results)
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+            });
 
         message = footer.append('div')
             .attr('class', 'message');
@@ -166,7 +181,9 @@ export function uiToolSearchAdd(context) {
             .on('change.search-add', updateForFeatureHiddenState);
 
         context.keybinding().on(key, function() {
+            popover.classed('hide', false);
             search.node().focus();
+            search.node().setSelectionRange(0, search.property('value').length);
             d3_event.preventDefault();
             d3_event.stopPropagation();
         });

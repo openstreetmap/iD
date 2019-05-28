@@ -24,7 +24,7 @@ export function uiToolOperation() {
 
         button = selection
             .append('button')
-            .attr('class', 'bar-button')
+            .attr('class', 'bar-button wide')
             .attr('tabindex', -1)
             .call(tooltipBehavior)
             .on('click', function() {

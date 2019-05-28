@@ -491,15 +491,19 @@ button.bar-button {
     white-space: nowrap;
     display: flex;
 }
-.toolbar-item.operation button.bar-button {
+.toolbar-item button.bar-button.wide {
     padding: 0 15px;
 }
 button.bar-button .icon {
-    flex: 0 0 20px;
+    flex: 0 0 auto;
 }
 button.bar-button .label {
     flex: 0 1 auto;
     padding: 0 5px;
+}
+.toolbar-item.search-add button.bar-button .icon {
+    width: 30px;
+    height: 30px;
 }
 
 button.bar-button.dragging {
@@ -583,27 +587,15 @@ button.add-note svg.icon {
 ------------------------------------------------------- */
 
 .search-add {
-    width: 200%;
     justify-content: center;
     position: relative;
-    min-width: 150px;
-    max-width: 325px;
 }
 .search-add .search-wrap {
     position: relative;
     width: 100%;
 }
-[dir='ltr'] .search-add .search-wrap {
-    border-radius: 20px 4px 4px 20px;
-}
-[dir='rtl'] .search-add .search-wrap {
-    border-radius: 4px 20px 20px 4px;
-}
 .search-add .search-wrap.focused .tooltip {
     display: none;
-}
-.search-add .search-wrap:last-child {
-    border-radius: 20px;
 }
 .search-add input[type='search'] {
     position: relative;
@@ -614,6 +606,10 @@ button.add-note svg.icon {
     text-indent: 25px;
     padding: 5px 10px;
     border-radius: inherit;
+}
+.search-add input[type='search'],
+.search-add input[type='search']:focus {
+    background: #f6f6f6;
 }
 .search-add input[type='search'][disabled] {
     opacity: 0.25;
@@ -638,6 +634,7 @@ button.add-note svg.icon {
     max-height: 600px;
     top: 44px;
     width: 200%;
+    min-width: 300px;
     max-width: 325px;
     margin: auto;
     left: auto;
@@ -653,6 +650,10 @@ button.add-note svg.icon {
 .search-add .popover .popover-content {
     /* ensure corners are rounded in Chrome */
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+}
+.search-add .popover .popover-header {
+    height: 40px;
+    border-bottom: 2px solid #DCDCDC;
 }
 .search-add .popover .popover-footer {
     padding: 5px 10px 5px 10px;

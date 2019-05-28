@@ -18,8 +18,8 @@ en:
     add_feature: Add Feature
   modes:
     add_feature:
-      title: Add a feature
-      description: "Search for features to add to the map."
+      search_placeholder: Search feature types
+      description: "Browse features to add to the map."
       key: Tab
       result: "{count} result"
       results: "{count} results"
