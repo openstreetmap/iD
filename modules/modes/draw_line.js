@@ -49,5 +49,11 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
         return (behavior && behavior.activeID()) || [];
     };
 
+
+    mode.finish = function() {
+        behavior.finish();
+    };
+    
+
     return mode;
 }

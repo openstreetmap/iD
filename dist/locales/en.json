@@ -18,7 +18,8 @@
             "undo_redo": "Undo / Redo",
             "recent": "Recent",
             "favorites": "Favorites",
-            "add_feature": "Add Feature"
+            "add_feature": "Add Feature",
+            "finish": "Finish"
         },
         "modes": {
             "add_feature": {

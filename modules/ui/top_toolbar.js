@@ -2,21 +2,31 @@
 import {
     select as d3_select
 } from 'd3-selection';
-
+import { t } from '../util/locale';
+import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
 import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
-import { uiToolDeselect } from './tools/deselect';
+import { uiToolSimpleButton } from './tools/simple_button';
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
-        deselect = uiToolDeselect(context),
         addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
-        save = uiToolSave(context);
+        save = uiToolSave(context),
+        deselect = uiToolSimpleButton('deselect', t('toolbar.deselect.title'), 'iD-icon-close', function() {
+            context.enter(modeBrowse(context));
+        }, null, 'Esc'),
+        cancelDrawing = uiToolSimpleButton('cancel', t('confirm.cancel'), 'iD-icon-close', function() {
+            context.enter(modeBrowse(context));
+        }, null, 'Esc', 'wide'),
+        finishDrawing = uiToolSimpleButton('finish', t('toolbar.finish'), 'iD-icon-apply', function() {
+            var mode = context.mode();
+            if (mode.finish) mode.finish();
+        }, null, 'Esc', 'wide');
 
     var supportedOperationIDs = ['circularize', 'downgrade', 'delete', 'disconnect', 'merge', 'orthogonalize', 'split', 'straighten'];
 
@@ -42,8 +52,9 @@ export function uiTopToolbar(context) {
         var tools = [];
 
         var mode = context.mode();
-        if (mode &&
-            mode.id === 'select' &&
+        if (!mode) return tools;
+
+        if (mode.id === 'select' &&
             !mode.newFeature() &&
             mode.selectedIDs().every(function(id) { return context.graph().hasEntity(id); })) {
 
@@ -76,6 +87,26 @@ export function uiTopToolbar(context) {
                 tools.push(deleteTool);
             }
             tools.push('spacer');
+
+            tools = tools.concat([undoRedo, save]);
+
+        } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') {
+            tools.push(sidebarToggle);
+            tools.push('spacer');
+
+            tools.push(cancelDrawing);
+        } else if (mode.id === 'draw-line' || mode.id === 'draw-area') {
+            tools.push(sidebarToggle);
+            tools.push('spacer');
+
+            tools.push(undoRedo);
+
+            var way = context.hasEntity(mode.wayID);
+            if (way && new Set(way.nodes).size - 1 >= (way.isArea() ? 3 : 2)) {
+                tools.push(finishDrawing);
+            } else {
+                tools.push(cancelDrawing);
+            }
         } else {
             tools.push(sidebarToggle);
             tools.push('spacer');
@@ -95,8 +126,8 @@ export function uiTopToolbar(context) {
             if (notesEnabled()) {
                 tools = tools.concat([notes, 'spacer']);
             }
+            tools = tools.concat([undoRedo, save]);
         }
-        tools = tools.concat([undoRedo, save]);
 
         return tools;
     }

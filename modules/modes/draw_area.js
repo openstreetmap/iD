@@ -50,5 +50,10 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button) 
     };
 
 
+    mode.finish = function() {
+        behavior.finish();
+    };
+
+
     return mode;
 }
