@@ -460,6 +460,10 @@
       "replace": {"club": "*"}
     },
     {
+      "old": {"leisure": "tanning_salon"},
+      "replace": {"shop": "beauty", "beauty": "tanning"}
+    },
+    {
       "old": {"leisure": "video_arcade"},
       "replace": {"leisure": "amusement_arcade"}
     },
