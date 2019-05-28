@@ -94,7 +94,7 @@ export function uiTopToolbar(context) {
 
     function topToolbar(bar) {
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = _debounce(update, 250, { leading: true, trailing: true });
         context.history()
             .on('change.topToolbar', debouncedUpdate);
         context.layers()
