@@ -229,13 +229,18 @@ export function modeSelect(context, selectedIDs) {
         return mode;
     };
 
+    var operations = [];
+
+    mode.operations = function() {
+        return operations;
+    };
 
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
         context.features().forceVisible(selectedIDs);
 
-        var operations = Object.values(Operations)
+        operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
 

@@ -488,6 +488,9 @@ button.bar-button {
     white-space: nowrap;
     display: flex;
 }
+.toolbar-item.operation button.bar-button {
+    padding: 0 15px;
+}
 button.bar-button .icon {
     flex: 0 0 20px;
 }
@@ -5484,11 +5487,13 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     fill: #eee;
 }
 
+.toolbar-item.operation button use,
 .edit-menu-item use {
     fill: #222;
     color: #79f;
     pointer-events: none;
 }
+.toolbar-item.operation button.disabled use,
 .edit-menu-item.disabled use {
     fill: rgba(32,32,32,.2);
     color: rgba(40,40,40,.2);
