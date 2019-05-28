@@ -3,12 +3,12 @@ import { utilArrayUniq } from '../util';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-export function actionDeleteRelation(relationID) {
+export function actionDeleteRelation(relationID, allowUntaggedMembers) {
 
     function canDeleteEntity(entity, graph) {
         return !graph.parentWays(entity).length &&
             !graph.parentRelations(entity).length &&
-            !entity.hasInterestingTags();
+            (!entity.hasInterestingTags() && !allowUntaggedMembers);
     }
 
 

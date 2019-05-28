@@ -8,11 +8,11 @@
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
         "fax",
-        "seamark/type"
+        "phone",
+        "seamark/type",
+        "website"
     ],
     "geometry": [
         "point",
@@ -20,6 +20,14 @@
     ],
     "tags": {
         "man_made": "lighthouse"
+    },
+    "addTags": {
+        "man_made": "lighthouse",
+        "seamark:type": "light_major"
+    },
+    "removeTags": {
+        "man_made": "lighthouse",
+        "seamark:type": "*"
     },
     "name": "Lighthouse"
 }

@@ -33,7 +33,7 @@ path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-dasharray: 6,6;
 }
-.preset-icon-line path.line.stroke.tag-railway:not(.tag-status) {
+.preset-icon-container path.line.stroke.tag-railway:not(.tag-status) {
     stroke-dasharray: 6;
 }
 

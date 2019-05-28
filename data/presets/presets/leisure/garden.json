@@ -3,11 +3,11 @@
     "fields": [
         "name",
         "operator",
-        "access_simple"
+        "access_simple",
+        "fee",
+        "payment_multi_fee"
     ],
     "moreFields": [
-        "fee",
-        "payment_multi",
         "website",
         "phone",
         "email",

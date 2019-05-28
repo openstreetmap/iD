@@ -1,17 +1,14 @@
 import { t } from '../util/locale';
-import { modeSelect } from '../modes';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
+
 
 export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
-
-        var issuesBySeverity = {
-            warning: context.validator().getWarnings(),
-            error: context.validator().getErrors()
-        };
+        var issuesBySeverity = context.validator()
+            .getIssuesBySeverity({ what: 'edited', where: 'all', includeDisabledRules: true });
 
         for (var severity in issuesBySeverity) {
             var issues = issuesBySeverity[severity];
@@ -41,7 +38,7 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(issues, function(d) { return d.id(); });
+                .data(issues, function(d) { return d.id; });
 
             items.exit()
                 .remove();
@@ -55,7 +52,7 @@ export function uiCommitWarnings(context) {
 
             itemsEnter
                 .append('strong')
-                .text(function(d) { return d.message; });
+                .attr('class', 'issue-message');
 
             itemsEnter.filter(function(d) { return d.tooltip; })
                 .call(tooltip()
@@ -66,13 +63,17 @@ export function uiCommitWarnings(context) {
             items = itemsEnter
                 .merge(items);
 
+            items.selectAll('.issue-message')
+                .text(function(d) {
+                    return d.message();
+                });
 
             items
                 .on('mouseover', function(d) {
-                    if (d.entities) {
+                    if (d.entityIds) {
                         context.surface().selectAll(
                             utilEntityOrMemberSelector(
-                                d.entities.map(function(e) { return e.id; }),
+                                d.entityIds,
                                 context.graph()
                             )
                         ).classed('hover', true);
@@ -83,13 +84,7 @@ export function uiCommitWarnings(context) {
                         .classed('hover', false);
                 })
                 .on('click', function(d) {
-                    if (d.entities && d.entities.length > 0) {
-                        context.map().zoomTo(d.entities[0]);
-                        context.enter(modeSelect(
-                            context,
-                            d.entities.map(function(e) { return e.id; })
-                        ));
-                    }
+                    context.validator().focusIssue(d);
                 });
         }
     }

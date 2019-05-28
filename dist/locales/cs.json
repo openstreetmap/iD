@@ -100,7 +100,6 @@
                     "line": "Udělat rohy této linie do hranata.",
                     "area": "Udělat rohy této plochy do hranata."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Úhly linie do pravého úhle.",
                     "area": "Rohy plochy do pravého úhle."
@@ -111,11 +110,8 @@
             },
             "straighten": {
                 "title": "Narovnat",
-                "description": "Narovnat tuto linii.",
                 "key": "S",
-                "annotation": "Narovnána linie.",
-                "too_bendy": "Nelze narovnat, protože je příliš zakroucený.",
-                "connected_to_hidden": "Linii nelze narovnat, protože je napojená na skrytý prvek."
+                "too_bendy": "Nelze narovnat, protože je příliš zakroucený."
             },
             "delete": {
                 "title": "Smazat",
@@ -318,14 +314,6 @@
                     "create": "Přidáno omezení odbočování",
                     "delete": "Smazáno omezení odbočování"
                 }
-            },
-            "detach_node": {
-                "title": "Odpojit",
-                "key": "E",
-                "description": "Odpojit bod z těchto linií/ploch.",
-                "annotation": "Bod odpojen z linií/ploch.",
-                "restriction": "Tento bod nemůže být odpoje, protože by to poškodilo relaci \"{relation}\".",
-                "connected_to_hidden": "Tento bod nemůže být odpojen, protože ho využívá skrytý prvek."
             }
         },
         "restriction": {
@@ -1110,25 +1098,18 @@
         },
         "streetside": {
             "tooltip": "Fotografie z úrovně ulice od Microsoftu",
-            "title": "Vrstva fotografií (Bing z úrovně ulice)",
             "report": "Oznamte problém se soukromím na této fotografii",
             "view_on_bing": "Zobrazit na Bing mapách",
             "hires": "Vysoké rozlišení"
         },
         "mapillary_images": {
-            "tooltip": "Fotografie z úrovně ulice z Mapillary",
-            "title": "Vrstva fotografií (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Dopravní značky z Mapillary (nutné povolit Vrstvu fotografií)",
-            "title": "Vrstva dopravních značek (Mapillary)"
+            "tooltip": "Fotografie z úrovně ulice z Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Zobrazit tento obrázek na Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Fotografie z úrovně ulice z OpenStreetCam",
-            "title": "Vrstva fotografií (OpenStreetCam)"
+            "tooltip": "Fotografie z úrovně ulice z OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Zobrazit tento obrázek na OpenStreetCam"
@@ -1281,74 +1262,9 @@
             }
         },
         "issues": {
+            "title": "Chyby",
             "key": "I",
-            "no_issues": {
-                "message": "Všechno vypadá dobře",
-                "info": "Veškeré problémy se při úpravě zobrazují"
-            },
-            "almost_junction": {
-                "highway-highway": {
-                    "tip": "Protínající dálnice by měly sdílet vrchol spojení."
-                }
-            },
-            "crossing_ways": {
-                "building-building": {
-                    "tip": "Budovy by se neměly protínat, s výjimkou různých vrstev."
-                },
-                "building-railway": {
-                    "tip": "Železniční křížení by měly využívat mosty nebo tunely."
-                },
-                "building-waterway": {
-                    "tip": "Vodní přechody by měly používat tunely nebo různé vrstvy."
-                },
-                "highway-highway": {
-                    "tip": "Při křížení dálnic by se měly používat mosty, tunely nebo křižovatky."
-                },
-                "highway-railway": {
-                    "tip": "Dálnice, které kříží železnice, by měly používat mosty, tunely nebo železniční přejezdy."
-                },
-                "highway-waterway": {
-                    "tip": "Dálnice protínající vodní cesty by měly používat mosty, tunely nebo brod."
-                },
-                "railway-waterway": {
-                    "tip": "Železnice křížená vodními cestami by měla používat mosty nebo tunely."
-                },
-                "waterway-waterway": {
-                    "tip": "Křížení vodních cest by mělo být spojeno nebo používat tunely."
-                },
-                "tunnel-tunnel": {
-                    "tip": "Křížení tunelů by mělo používat různé vrstvy."
-                },
-                "tunnel-tunnel_connectable": {
-                    "tip": "Křížení tunelů by měly být připojeny, nebo používat různé vrstvy."
-                },
-                "bridge-bridge": {
-                    "tip": "Přejezdové mosty by měly používat různé vrstvy."
-                },
-                "bridge-bridge_connectable": {
-                    "tip": "Křížené mosty by měly být připojeny nebo používat různé vrstvy."
-                }
-            },
-            "deprecated_tag": {
-                "tip": "Některé značky se časem stávají zastaralými a měly by být nahrazeny."
-            },
-            "disconnected_way": {
-                "highway": {
-                    "tip": "Dálnice by se měly připojovat k jiným dálnicím nebo vstupům do budov."
-                }
-            },
-            "generic_name": {
-                "tip": "Názvy by měly být skutečné názvy prvků na místě."
-            },
-            "many_deletions": {
-                "tip": "Pouze nadbytečné nebo neexistující prvky by měly být odstraněny."
-            },
-            "old_multipolygon": {
-                "tip": "Multipolygony by měly být označeny jejich vztahem, nikoli jejich vnější linií."
-            },
-            "tag_suggests_area": {
-                "tip": "Oblasti musí mít připojené koncové body."
-            },
+            "list_title": "Počet chyb: ({count})",
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Připojeny velmi blízké prvky."
@@ -1702,12 +1618,10 @@
                     "continue_line": "Pokračovat linii z vybraného bodu",
                     "merge": "Spojit (sloučit) vybrané prvky",
                     "disconnect": "Rozpojit prvky ve vybraném bodě",
-                    "detach_node": "Odpojit vybraný bod od nadřazených linií/ploch",
                     "split": "Rozdělit řádek na dva ve vybraném uzlu",
                     "reverse": "Vrátit čáru",
                     "move": "Přesunout vybrané funkce",
                     "rotate": "Otočit vybrané funkce",
-                    "orthogonalize": "Narovnat linii / Zarovnat hrany plochy do pravých úhlů",
                     "circularize": "Zakulacení uzavřených čar, nebo ploch",
                     "reflect_long": "Kopírovat vlastnosti podle delší osy",
                     "reflect_short": "Odrážejí prvky na kratší ose",
@@ -1769,47 +1683,17 @@
                 "category-building": {
                     "name": "Budovy"
                 },
-                "category-golf-area": {
-                    "name": "Golf"
-                },
-                "category-golf-line": {
-                    "name": "Golf"
-                },
                 "category-landuse": {
                     "name": "Využití krajiny"
                 },
-                "category-natural-area": {
-                    "name": "Příroda"
-                },
-                "category-natural-line": {
-                    "name": "Příroda"
-                },
-                "category-natural-point": {
-                    "name": "Příroda"
-                },
-                "category-path": {
-                    "name": "Síť pěších cest"
-                },
-                "category-rail": {
-                    "name": "Železniční síť"
-                },
                 "category-restriction": {
                     "name": "Omezení dopravy"
-                },
-                "category-road": {
-                    "name": "Silniční síť"
                 },
                 "category-route": {
                     "name": "Relace tras"
                 },
                 "category-utility": {
                     "name": "Služby"
-                },
-                "category-water-area": {
-                    "name": "Vodní hladiny"
-                },
-                "category-water-line": {
-                    "name": "Vodní toky"
                 }
             },
             "fields": {
@@ -2538,9 +2422,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Poplatek za připojení"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (název wifi sítě)"
                 },
                 "junction/ref_oneway": {
                     "label": "Číslo křižovatky"
@@ -3343,8 +3224,7 @@
                     "options": {
                         "bucket": "Nádrž na odpad",
                         "chemical": "Chemický",
-                        "flush": "Splachovací",
-                        "pitlatrine": "Suchý"
+                        "flush": "Splachovací"
                     }
                 },
                 "toll": {
@@ -3798,8 +3678,7 @@
                     "terms": "autoškola"
                 },
                 "amenity/embassy": {
-                    "name": "Velvyslanectví",
-                    "terms": "velvyslanectví,vyslanectví,ambasáda,zastupitelství"
+                    "name": "Velvyslanectví"
                 },
                 "amenity/fast_food": {
                     "name": "Rychlé občerstvení",
@@ -4187,9 +4066,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Automat na zmrzlinu"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Automat na noviny"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Automat na noviny",
                     "terms": "automat,prodejní automat,noviny,časopisy"
@@ -4252,9 +4128,6 @@
                 },
                 "attraction/amusement_ride": {
                     "name": "Zábavní jízda"
-                },
-                "attraction/animal": {
-                    "name": "Zvíře"
                 },
                 "attraction/big_wheel": {
                     "name": "Ruské kolo"
@@ -4562,9 +4435,6 @@
                 "camp_site/camp_pitch": {
                     "name": "Stanoviště v kempu",
                     "terms": "stan,karavan,karavany"
-                },
-                "circular": {
-                    "name": "Kruhový objezd"
                 },
                 "club": {
                     "name": "Klub",
@@ -4906,9 +4776,6 @@
                 "highway/bridleway": {
                     "name": "Jezdecká stezka",
                     "terms": "jezdecká stezka,jezdecká trasa,stezka pro jezdce,stezka pro koně,koňská stezka"
-                },
-                "highway/bus_stop": {
-                    "name": "Zastávka autobusu"
                 },
                 "highway/construction": {
                     "name": "Uzavřená silnice (výstavba)"
@@ -5552,12 +5419,6 @@
                     "name": "Závodní dráha (ne pro motorsport)",
                     "terms": "jezdit na kole,pes,chrt,kůň,koně,chrti,chrtů,závod*,dráha"
                 },
-                "leisure/track/horse_racing": {
-                    "name": "Závodní trať (koně)"
-                },
-                "leisure/track/running": {
-                    "name": "Závodní trať (běh)"
-                },
                 "leisure/water_park": {
                     "name": "Akvapark",
                     "terms": "akvapark,aquapark,vodní zábavní park,bazén,koupaliště,tobogán"
@@ -6129,36 +5990,6 @@
                     "name": "Transformátor",
                     "terms": "transformátor,transformátorová stanice,elektrická stanice,adaptér"
                 },
-                "public_transport/platform": {
-                    "name": "Nástupiště"
-                },
-                "public_transport/platform_aerialway": {
-                    "name": "Nástupiště lanovky"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Nástupiště autobusu"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Nástupiště trajektu / přívozu"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Nástupiště lehké dráhy"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Nástupiště jednokolejky"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Nástupiště metra"
-                },
-                "public_transport/platform_train": {
-                    "name": "Nástupiště vlaku"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Nástupiště tramvaje"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Nástupiště trolejbusu"
-                },
                 "public_transport/station": {
                     "name": "Stanice veřejné dopravy"
                 },
@@ -6274,9 +6105,6 @@
                     "name": "Úzkorozchodná dráha",
                     "terms": "úzkorozchodná dráha,úzkokolejná dráha,úzkokolejka"
                 },
-                "railway/platform": {
-                    "name": "Železniční nástupiště"
-                },
                 "railway/rail": {
                     "name": "Kolej",
                     "terms": "koleje,železnice,vlak,trať"
@@ -6312,9 +6140,6 @@
                 "relation": {
                     "name": "Relace",
                     "terms": "relace,vztah,seznam,objekt"
-                },
-                "roundabout": {
-                    "name": "Kruhový objezd"
                 },
                 "route/ferry": {
                     "name": "Trasa trajektu",
@@ -6411,8 +6236,7 @@
                     "terms": "knihkupectví,knihy,kniha,knižní dům,antikvariát,knihovna"
                 },
                 "shop/boutique": {
-                    "name": "Módní butik",
-                    "terms": "oblečení,šaty,oděv,oděvy,butik,móda,módní"
+                    "name": "Módní butik"
                 },
                 "shop/butcher": {
                     "name": "Řeznictví",
@@ -6531,8 +6355,7 @@
                     "terms": "stánek,ovoce,zelenina,trh,tržiště,farmářský trh,farmářské tržiště,farma"
                 },
                 "shop/fashion": {
-                    "name": "Módní zboží",
-                    "terms": "móda,módní,módní oděvy,módní zboží,módní doplňky,módní oblečení"
+                    "name": "Módní zboží"
                 },
                 "shop/fishing": {
                     "name": "Rybářské potřeby"
@@ -7126,10 +6949,6 @@
                 "type/waterway": {
                     "name": "Vodní tok"
                 },
-                "vertex": {
-                    "name": "Jiné",
-                    "terms": "další,ostatní,jiné,jiná,jiný,jinak"
-                },
                 "waterway": {
                     "name": "Vodní tok"
                 },
@@ -7197,24 +7016,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Nejaktuálnější ortofoto Flanders © AGIV"
-                },
-                "name": "Nejaktuálnější letecké snímky AGIV Flanders"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Ortofoto Flanders © AGIV"
-                },
-                "name": "10cm letecké snímky AGIV Flanders 2013-2015"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Flanders © AGIV"
-                },
-                "name": "AGIV Flanders GRB"
-            },
             "Bing": {
                 "description": "Satelitní a letecké snímky.",
                 "name": "Letecké snímky Bing"
@@ -7791,13 +7592,6 @@
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack",
                 "description": "Všichni jsou vítaní! Přihlaste se na {signupUrl}"
-            },
-            "OSM-US": {
-                "events": {
-                    "sotmus2018": {
-                        "where": "Detroit, Michigan"
-                    }
-                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

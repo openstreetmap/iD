@@ -1,9 +1,4 @@
 /* Downloads the latest translations from Transifex */
-
-const requireESM = require('esm')(module);
-const _isEmpty = requireESM('lodash-es/isEmpty').default;
-const _merge = requireESM('lodash-es/merge').default;
-
 const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
 const request = require('request').defaults({ maxSockets: 1 });
@@ -36,25 +31,26 @@ const sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-
 asyncMap(resources, getResource, function(err, results) {
     if (err) return console.log(err);
 
-    var locale = _merge(
-        sourceCore,
-        sourcePresets,
-        sourceImagery,
-        { en: { community: sourceCommunity.en } }  // add namespace
-    );
-    var dataLocales = {};
-
-    results.forEach(function(l) {
-        locale = _merge(locale, l);
+    // merge in strings fetched from transifex
+    var allStrings = {};
+    results.forEach(function(resourceStrings) {
+        Object.keys(resourceStrings).forEach(function(code) {
+            if (!allStrings[code]) { allStrings[code] = {}; }
+            var source = resourceStrings[code];
+            var target = allStrings[code];
+            Object.keys(source).forEach(function(k) { target[k] = source[k]; });
+        });
     });
 
-    asyncMap(Object.keys(locale),
+    // write files and fetch language info for each locale
+    var dataLocales = {};
+    asyncMap(Object.keys(allStrings),
         function(code, done) {
-            if (code === 'en' || _isEmpty(locale[code])) {
+            if (code === 'en' || !Object.keys(allStrings[code]).length) {
                 done();
             } else {
                 var obj = {};
-                obj[code] = locale[code];
+                obj[code] = allStrings[code];
                 fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
 
                 getLanguageInfo(code, function(err, info) {
@@ -104,7 +100,7 @@ function getResource(resource, callback) {
                             preset.terms = preset.terms.replace(/<.*>/, '').trim();
                             if (!preset.terms) {
                                 delete preset.terms;
-                                if (_isEmpty(preset)) {
+                                if (!Object.keys(preset).length) {
                                     delete presets[key];
                                 }
                             }
@@ -152,13 +148,12 @@ function getLanguages(resource, callback) {
     var url = resource + '?details';
     request.get(url, { auth: auth },
         function(err, resp, body) {
-        if (err) return callback(err);
-        console.log(resp.statusCode + ': ' + url);
-        callback(null, JSON.parse(body).available_languages.map(function(d) {
-            return d.code.replace(/_/g, '-');
-        }).filter(function(d) {
-            return d !== 'en';
-        }));
+            if (err) return callback(err);
+            console.log(resp.statusCode + ': ' + url);
+            callback(null, JSON.parse(body).available_languages
+                .map(function(d) { return d.code.replace(/_/g, '-'); })
+                .filter(function(d) { return d !== 'en'; })
+            );
     });
 }
 

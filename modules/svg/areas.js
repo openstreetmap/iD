@@ -1,9 +1,8 @@
-import _map from 'lodash-es/map';
-
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
-import { svgPath, svgSegmentWay, svgTagClasses } from './index';
+import { svgPath, svgSegmentWay } from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 
 export function svgAreas(projection, context) {
@@ -43,7 +42,6 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
-            reservoir: 'water_standing',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },
@@ -213,19 +211,17 @@ export function svgAreas(projection, context) {
             }
         }
 
-        areas = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
-        areas.sort(function areaSort(a, b) { return b.area - a.area; });
-        areas = _map(areas, 'entity');
+        var fills = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
+        fills.sort(function areaSort(a, b) { return b.area - a.area; });
+        fills = fills.map(function(a) { return a.entity; });
 
-        var strokes = areas.filter(function(area) {
-            return area.type === 'way';
-        });
+        var strokes = fills.filter(function(area) { return area.type === 'way'; });
 
         var data = {
-            clip: areas,
+            clip: fills,
             shadow: strokes,
             stroke: strokes,
-            fill: areas
+            fill: fills
         };
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
@@ -269,15 +265,13 @@ export function svgAreas(projection, context) {
         paths.exit()
             .remove();
 
-        var fills = selection.selectAll('.area-fill path.area').nodes();
 
-        var bisect = d3_bisector(function(node) {
-            return -node.__data__.area(graph);
-        }).left;
+        var fillpaths = selection.selectAll('.area-fill path.area').nodes();
+        var bisect = d3_bisector(function(node) { return -node.__data__.area(graph); }).left;
 
         function sortedByArea(entity) {
             if (this._parent.__data__ === 'fill') {
-                return fills[bisect(fills, -entity.area(graph))];
+                return fillpaths[bisect(fillpaths, -entity.area(graph))];
             }
         }
 

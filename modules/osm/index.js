@@ -24,7 +24,17 @@ export {
 } from './multipolygon';
 
 export {
+    osmAreaKeys,
+    osmSetAreaKeys,
+    osmPointTags,
+    osmSetPointTags,
+    osmVertexTags,
+    osmSetVertexTags,
+    osmNodeGeometriesForTags,
     osmOneWayTags,
     osmPavedTags,
-    osmIsInterestingTag
+    osmIsInterestingTag,
+    osmRoutableHighwayTagValues,
+    osmFlowingWaterwayTagValues,
+    osmRailwayTrackTagValues
 } from './tags';

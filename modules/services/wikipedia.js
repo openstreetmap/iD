@@ -1,4 +1,4 @@
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { utilQsString } from '../util';
 
@@ -13,12 +13,12 @@ export default {
 
     search: function(lang, query, callback) {
         if (!query) {
-            callback('', []);
+            if (callback) callback('No Query', []);
             return;
         }
 
         lang = lang || 'en';
-        d3_json(endpoint.replace('en', lang) +
+        var url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 list: 'search',
@@ -27,26 +27,34 @@ export default {
                 format: 'json',
                 origin: '*',
                 srsearch: query
-            }), function(err, data) {
-                if (err || !data || !data.query || !data.query.search || data.error) {
-                    callback('', []);
-                } else {
-                    var results = data.query.search.map(function(d) { return d.title; });
-                    callback(query, results);
+            });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                } else if (!result || !result.query || !result.query.search) {
+                    throw new Error('No Results');
                 }
-            }
-        );
+                if (callback) {
+                    var titles = result.query.search.map(function(d) { return d.title; });
+                    callback(null, titles);
+                }
+            })
+            .catch(function(err) {
+                if (callback) callback(err, []);
+            });
     },
 
 
     suggestions: function(lang, query, callback) {
         if (!query) {
-            callback('', []);
+            if (callback) callback('', []);
             return;
         }
 
         lang = lang || 'en';
-        d3_json(endpoint.replace('en', lang) +
+        var url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'opensearch',
                 namespace: 0,
@@ -54,24 +62,30 @@ export default {
                 format: 'json',
                 origin: '*',
                 search: query
-            }), function(err, data) {
-                if (err || !data || data.error) {
-                    callback('', []);
-                } else {
-                    callback(data[0], data[1] || []);
+            });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                } else if (!result || result.length < 2) {
+                    throw new Error('No Results');
                 }
-            }
-        );
+                if (callback) callback(null, result[1] || []);
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message, []);
+            });
     },
 
 
     translations: function(lang, title, callback) {
         if (!title) {
-            callback({});
+            if (callback) callback('No Title');
             return;
         }
 
-        d3_json(endpoint.replace('en', lang) +
+        var url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 prop: 'langlinks',
@@ -79,21 +93,27 @@ export default {
                 origin: '*',
                 lllimit: 500,
                 titles: title
-            }), function(err, data) {
-                if (err || !data || !data.query || !data.query.pages || data.error) {
-                    callback({});
-                } else {
-                    var list = data.query.pages[Object.keys(data.query.pages)[0]],
-                        translations = {};
-                    if (list && list.langlinks) {
-                        list.langlinks.forEach(function(d) {
-                            translations[d.lang] = d['*'];
-                        });
-                    }
-                    callback(translations);
+            });
+
+        d3_json(url)
+            .then(function(result) {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                } else if (!result || !result.query || !result.query.pages) {
+                    throw new Error('No Results');
                 }
-            }
-        );
+                if (callback) {
+                    var list = result.query.pages[Object.keys(result.query.pages)[0]];
+                    var translations = {};
+                    if (list && list.langlinks) {
+                        list.langlinks.forEach(function(d) { translations[d.lang] = d['*']; });
+                    }
+                    callback(null, translations);
+                }
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message);
+            });
     }
 
 };

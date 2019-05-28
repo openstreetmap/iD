@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-shuffleboard",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "shuffleboard"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "shuffleboard"
+    },
+    "terms": [
+        "deck shuffleboard",
+        "floor shuffleboard"
+    ],
+    "name": "Shuffleboard Court"
+}

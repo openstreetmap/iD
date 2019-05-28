@@ -77,24 +77,24 @@ describe('iD.validations.missing_role', function () {
         createRelation({ type: 'multipolygon' }, null);
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id()).to.eql(issues[1].id());
+        expect(issues[0].id).to.eql(issues[1].id);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
-        expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('r-1');
-        expect(issue.entities[1].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(2);
+        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.entityIds[1]).to.eql('w-1');
     });
 
     it('flags way with whitespace string role in multipolygon', function() {
         createRelation({ type: 'multipolygon' }, '   ');
         var issues = validate();
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id()).to.eql(issues[1].id());
+        expect(issues[0].id).to.eql(issues[1].id);
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
-        expect(issue.entities).to.have.lengthOf(2);
-        expect(issue.entities[0].id).to.eql('r-1');
-        expect(issue.entities[1].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(2);
+        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.entityIds[1]).to.eql('w-1');
     });
 
 });

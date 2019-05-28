@@ -2,16 +2,20 @@
     "icon": "fas-handshake",
     "fields": [
         "name",
+        "brand",
         "operator",
         "address",
         "building_area"
     ],
     "moreFields": [
         "air_conditioning",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

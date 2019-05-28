@@ -19,8 +19,8 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
   _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
-  _Available features:_ `points` `traffic_roads` `service_roads` `paths` `buildings` `landuse`
-  `boundaries` `water` `rail` `power` `past_future` `others`
+  _Available features:_ `points`, `traffic_roads`, `service_roads`, `paths`, `buildings`, `building_parts`, `indoor`, `landuse`,
+  `boundaries`, `water`, `rail`, `pistes`, `aerialways`, `power`, `past_future`, `others`
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`

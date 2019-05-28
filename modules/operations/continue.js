@@ -1,15 +1,16 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import { t } from '../util/locale';
-import { modeDrawLine } from '../modes';
-import { behaviorOperation } from '../behavior';
+import { modeDrawLine } from '../modes/draw_line';
+import { behaviorOperation } from '../behavior/operation';
+import { utilArrayGroupBy } from '../util';
 
 
 export function operationContinue(selectedIDs, context) {
     var graph = context.graph();
     var entities = selectedIDs.map(function(id) { return graph.entity(id); });
-    var geometries = Object.assign({ line: [], vertex: [] },
-        _groupBy(entities, function(entity) { return entity.geometry(graph); }));
+    var geometries = Object.assign(
+        { line: [], vertex: [] },
+        utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
+    );
     var vertex = geometries.vertex[0];
 
 
@@ -32,17 +33,21 @@ export function operationContinue(selectedIDs, context) {
 
 
     operation.available = function() {
-        return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+        return geometries.vertex.length === 1 &&
+            geometries.line.length <= 1 &&
             !context.features().hasHiddenConnections(vertex, context.graph());
     };
 
 
     operation.disabled = function() {
         var candidates = candidateWays();
-        if (candidates.length === 0)
+        if (candidates.length === 0) {
             return 'not_eligible';
-        if (candidates.length > 1)
+        } else if (candidates.length > 1) {
             return 'multiple';
+        }
+
+        return false;
     };
 
 

@@ -105,6 +105,7 @@ g.point .stroke {
     fill: #fff;
 }
 
+
 g.qa_error .shadow,
 g.point .shadow,
 g.note .shadow {
@@ -179,7 +180,7 @@ g.vertex.selected .shadow {
 .preset-icon .icon.iD-other-line {
     color: #989898;
 }
-.preset-icon-line path.casing {
+.preset-icon-container path.line.casing {
     stroke: #afafaf;
 }
 
@@ -197,6 +198,8 @@ path.shadow {
     stroke: #f6634f;
     stroke-width: 16;
     stroke-opacity: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 path.shadow.related:not(.selected),
@@ -279,6 +282,15 @@ text.point {
     fill: #222;
     opacity: 0.8;
 }
+
+
+/* Wikidata-tagged */
+g.point.tag-wikidata path.stroke {
+    stroke-width: 3px;
+    stroke: #777;
+    fill: #ddd;
+}
+
 
 /* Highlighting */
 g.point.highlighted .shadow,

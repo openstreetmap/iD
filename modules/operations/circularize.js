@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
-import { actionCircularize } from '../actions';
-import { behaviorOperation } from '../behavior';
+import { actionCircularize } from '../actions/circularize';
+import { behaviorOperation } from '../behavior/operation';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationCircularize(selectedIDs, context) {
@@ -9,10 +10,15 @@ export function operationCircularize(selectedIDs, context) {
     var extent = entity.extent(context.graph());
     var geometry = context.geometry(entityID);
     var action = actionCircularize(entityID, context.projection);
-
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
 
     var operation = function() {
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     };
 
 
@@ -23,14 +29,34 @@ export function operationCircularize(selectedIDs, context) {
     };
 
 
+    // don't cache this because the visible extent could change
     operation.disabled = function() {
-        var reason;
-        if (extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
-        } else if (context.hasHiddenConnections(entityID)) {
-            reason = 'connected_to_hidden';
+        var actionDisabled = action.disabled(context.graph());
+        if (actionDisabled) {
+            return actionDisabled;
+        } else if (extent.percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
+        } else if (someMissing()) {
+            return 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+
+        return false;
+
+
+        function someMissing() {
+            if (context.inIntro()) return false;
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 

@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { uiCombobox } from '../index';
+import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
@@ -31,7 +31,7 @@ export function uiFieldCycleway(field, context) {
 
         div = div.enter()
             .append('ul')
-            .attr('class', 'labeled-inputs')
+            .attr('class', 'rows')
             .merge(div);
 
         var keys = ['cycleway:left', 'cycleway:right'];
@@ -41,7 +41,7 @@ export function uiFieldCycleway(field, context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'preset-cycleway-' + stripcolon(d); });
+            .attr('class', function(d) { return 'labeled-input preset-cycleway-' + stripcolon(d); });
 
         enter
             .append('span')

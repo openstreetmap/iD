@@ -1,21 +1,22 @@
-import _isMatch from 'lodash-es/isMatch';
-import _reduce from 'lodash-es/reduce';
-
-import { areaKeys } from '../core/context';
+import { osmAreaKeys as areaKeys } from '../osm/tags';
 import { utilArrayIntersection } from '../util';
-import { validationIssue } from '../core/validator';
+import { validationIssue } from '../core/validation';
 
 
 var buildRuleChecks = function() {
     return {
         equals: function (equals) {
             return function(tags) {
-                return _isMatch(tags, equals);
+                return Object.keys(equals).every(function(k) {
+                    return equals[k] === tags[k];
+                });
             };
         },
         notEquals: function (notEquals) {
             return function(tags) {
-                return !_isMatch(tags, notEquals);
+                return Object.keys(notEquals).some(function(k) {
+                    return notEquals[k] !== tags[k];
+                });
             };
         },
         absence: function(absence) {
@@ -108,7 +109,7 @@ export default {
     // list of rules only relevant to tag checks...
     filterRuleChecks: function(selector) {
         var _ruleChecks = this._ruleChecks;
-        return _reduce(Object.keys(selector), function(rules, key) {
+        return Object.keys(selector).reduce(function(rules, key) {
             if (['geometry', 'error', 'warning'].indexOf(key) === -1) {
                 rules.push(_ruleChecks[key](selector[key]));
             }
@@ -124,8 +125,7 @@ export default {
             });
         };
 
-        var selectorKeys = Object.keys(selector);
-        var tagMap = _reduce(selectorKeys, function (expectedTags, key) {
+        var tagMap = Object.keys(selector).reduce(function (expectedTags, key) {
             var values;
             var isRegex = /regex/gi.test(key);
             var isEqual = /equals/gi.test(key);
@@ -218,11 +218,14 @@ export default {
                     var severity = Object.keys(selector).indexOf('error') > -1
                             ? 'error'
                             : 'warning';
+                    var message = selector[severity];
                     issues.push(new validationIssue({
                         type: 'maprules',
                         severity: severity,
-                        message: selector[severity],
-                        entities: [entity],
+                        message: function() {
+                            return message;
+                        },
+                        entityIds: [entity.id]
                     }));
                 }
             }

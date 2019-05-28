@@ -18,10 +18,6 @@
         "leisure": "fitness_station",
         "sport": "fitness"
     },
-    "removeTags": {
-        "leisure": "fitness_station",
-        "sport": "fitness"
-    },
     "reference": {
         "key": "leisure",
         "value": "fitness_station"

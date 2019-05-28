@@ -1,18 +1,12 @@
-import _isEmpty from 'lodash-es/isEmpty';
-import _isEqual from 'lodash-es/isEqual';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    selectAll as d3_selectAll
-} from 'd3-selection';
+import {event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { actionChangeTags } from '../actions/change_tags';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';
@@ -31,6 +25,7 @@ export function uiEntityEditor(context) {
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
+    var _scrolled = false;
     var _base;
     var _entityID;
     var _activePreset;
@@ -89,7 +84,8 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body');
+            .attr('class', 'inspector-body')
+            .on('scroll.entity-editor', function() { _scrolled = true; });
 
         bodyEnter
             .append('div')
@@ -158,7 +154,7 @@ export function uiEntityEditor(context) {
             });
 
         body.select('.preset-list-item button')
-            .call(uiPresetIcon()
+            .call(uiPresetIcon(context)
                 .geometry(context.geometry(_entityID))
                 .preset(_activePreset)
             );
@@ -245,8 +241,13 @@ export function uiEntityEditor(context) {
             .on('change.entity-editor', historyChanged);
 
 
-        function historyChanged() {
+        function historyChanged(difference) {
             if (_state === 'hide') return;
+            var significant = !difference ||
+                    difference.didChange.properties ||
+                    difference.didChange.addition ||
+                    difference.didChange.deletion;
+            if (!significant) return;
 
             var entity = context.hasEntity(_entityID);
             var graph = context.graph();
@@ -254,7 +255,8 @@ export function uiEntityEditor(context) {
 
             var match = context.presets().match(entity, graph);
             var activePreset = entityEditor.preset();
-            var weakPreset = activePreset && _isEmpty(activePreset.addTags);
+            var weakPreset = activePreset &&
+                Object.keys(activePreset.addTags || {}).length === 0;
 
             // A "weak" preset doesn't set any tags. (e.g. "Address")
             // Don't replace a weak preset with a fallback preset (e.g. "Point")
@@ -286,13 +288,18 @@ export function uiEntityEditor(context) {
             tags = utilCleanTags(tags);
         }
 
-        if (!_isEqual(entity.tags, tags)) {
+        if (!deepEqual(entity.tags, tags)) {
             if (_coalesceChanges) {
                 context.overwrite(actionChangeTags(_entityID, tags), annotation);
             } else {
                 context.perform(actionChangeTags(_entityID, tags), annotation);
                 _coalesceChanges = !!onInput;
             }
+        }
+
+        // if leaving field (blur event), rerun validation
+        if (!onInput) {
+            context.validator().validate();
         }
     }
 
@@ -315,14 +322,21 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
+        if (_entityID === val) return entityEditor;  // exit early if no change
+
         _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
 
-        // reset the scroll to the top of the inspector
-        var body = d3_selectAll('.entity-editor-pane .inspector-body');
-        if (!body.empty()) {
-            body.node().scrollTop = 0;
+        // reset the scroll to the top of the inspector (warning: triggers reflow)
+        if (_scrolled) {
+            window.requestIdleCallback(function() {
+                var body = d3_selectAll('.entity-editor-pane .inspector-body');
+                if (!body.empty()) {
+                    _scrolled = false;
+                    body.node().scrollTop = 0;
+                }
+            });
         }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);

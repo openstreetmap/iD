@@ -1,9 +1,11 @@
 {
+    "icon": "maki-aerialway",
     "geometry": [
         "line"
     ],
     "fields": [
         "name",
+        "oneway",
         "aerialway/occupancy",
         "aerialway/capacity",
         "aerialway/duration",

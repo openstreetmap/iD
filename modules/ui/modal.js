@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
 
@@ -41,7 +41,7 @@ export function uiModal(selection, blocking) {
 
     var modal = shaded
         .append('div')
-        .attr('class', 'modal fillL col6');
+        .attr('class', 'modal fillL');
 
     if (!blocking) {
         shaded.on('click.remove-modal', function() {

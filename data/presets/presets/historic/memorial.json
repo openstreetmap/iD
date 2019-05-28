@@ -3,10 +3,10 @@
     "fields": [
         "name",
         "memorial",
-        "inscription"
+        "inscription",
+        "material"
     ],
     "moreFields": [
-        "material",
         "website"
     ],
     "geometry": [

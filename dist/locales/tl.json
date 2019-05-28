@@ -85,7 +85,6 @@
                     "line": "Gawing iskwalado ang mga kanto ng linyang ito.",
                     "area": "Gawing iskwalado ang mga kanto ng area o poligong ito."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Ginawang iskawalado ang bawat kanto ng linya.",
                     "area": "Ginawang iskawalado ang bawat kanto ng area o poligon."
@@ -96,11 +95,8 @@
             },
             "straighten": {
                 "title": "Ituwid",
-                "description": "Ituwid ang linyang ito.",
                 "key": "S",
-                "annotation": "Naituwid ang linya.",
-                "too_bendy": "Hindi naituwid dahil masyadong kurbado.",
-                "connected_to_hidden": "Hindi magawang tuwid dahil may nakatagong feature na konektado dito."
+                "too_bendy": "Hindi naituwid dahil masyadong kurbado."
             },
             "delete": {
                 "title": "Burahin",
@@ -531,35 +527,11 @@
                 "category-landuse": {
                     "name": "Mga tampok para sa gagamiting lupa"
                 },
-                "category-natural-area": {
-                    "name": "Mga tampok sa likas"
-                },
-                "category-natural-line": {
-                    "name": "Mga tampok sa likas"
-                },
-                "category-natural-point": {
-                    "name": "Mga tampok sa likas"
-                },
-                "category-path": {
-                    "name": "Mga tampok na tarundon"
-                },
-                "category-rail": {
-                    "name": "Mga tampok para sa riles"
-                },
                 "category-restriction": {
                     "name": "Mga tampok sa paghihigpit"
                 },
-                "category-road": {
-                    "name": "Mga tampok para sa daan"
-                },
                 "category-route": {
                     "name": "Mga tampok para sa mga ruta"
-                },
-                "category-water-area": {
-                    "name": "Mga tampok ng tubig"
-                },
-                "category-water-line": {
-                    "name": "Mga tampok ng tubig"
                 }
             },
             "fields": {

@@ -6,7 +6,7 @@ import {
 
 import { t, textDirection } from '../util/locale';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 
 

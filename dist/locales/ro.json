@@ -86,7 +86,6 @@
                     "line": "Dreptunghiulează unghiurile liniei.",
                     "area": "Dreptunghiulează unghiurile suprafaței."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Dreptunghiulează unghiurile unei linii.",
                     "area": "Dreptunghiulează unghiurile unei suprafațe."
@@ -97,11 +96,8 @@
             },
             "straighten": {
                 "title": "Întărește ",
-                "description": "Îndreaptă linia.",
                 "key": "S",
-                "annotation": "Îndreaptă o linie.",
-                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită.",
-                "connected_to_hidden": "Această linie nu poate fi îndreptată din moment ce este conectată la un obiect ascuns."
+                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită."
             },
             "delete": {
                 "title": "Șterge",
@@ -701,32 +697,11 @@
                 "category-landuse": {
                     "name": "Utilizări de Teren"
                 },
-                "category-natural-area": {
-                    "name": "Naturale"
-                },
-                "category-natural-line": {
-                    "name": "Naturale"
-                },
-                "category-path": {
-                    "name": "Poteci"
-                },
-                "category-rail": {
-                    "name": "Căi Ferate"
-                },
                 "category-restriction": {
                     "name": "Restricții"
                 },
-                "category-road": {
-                    "name": "Străzi"
-                },
                 "category-route": {
                     "name": "Rute"
-                },
-                "category-water-area": {
-                    "name": "Ape"
-                },
-                "category-water-line": {
-                    "name": "Ape"
                 }
             },
             "fields": {
@@ -2609,9 +2584,6 @@
                 "relation": {
                     "name": "Relație"
                 },
-                "roundabout": {
-                    "name": "Sens Giratoriu"
-                },
                 "route/ferry": {
                     "name": "Rută de Bac"
                 },
@@ -3038,9 +3010,6 @@
                 },
                 "type/site": {
                     "name": "Sit"
-                },
-                "vertex": {
-                    "name": "Altele"
                 },
                 "waterway": {
                     "name": "Drum Marin"

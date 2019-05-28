@@ -8,12 +8,13 @@
         "drive_through"
     ],
     "moreFields": [
-        "name",
         "brand",
+        "covered",
+        "indoor",
         "lit",
+        "name",
         "opening_hours",
-        "wheelchair",
-        "covered"
+        "wheelchair"
     ],
     "geometry": [
         "point",

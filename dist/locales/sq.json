@@ -95,7 +95,6 @@
                     "line": "Bëj qoshet e vijës katror.",
                     "area": "Bëj qoshet e sipërfaqes katror."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Qoshet e vijës u bën katror.",
                     "area": "Qoshet e sipërfaqes u bën katror."
@@ -106,11 +105,8 @@
             },
             "straighten": {
                 "title": "Drejto",
-                "description": "Drejtoni këtë vijë.",
                 "key": "S",
-                "annotation": "U drejtua një vijë.",
-                "too_bendy": "Kjo nuk mund të drejtohet sepse kthehet shumë.",
-                "connected_to_hidden": "Kjo vijë nuk mund drejtohet sepse është lidhur me një tipar të fshehur."
+                "too_bendy": "Kjo nuk mund të drejtohet sepse kthehet shumë."
             },
             "delete": {
                 "title": "Fshij",
@@ -243,9 +239,6 @@
                     "create": "U shtu një kufizim kthesësh.",
                     "delete": "U fshi një kufizim kthesësh."
                 }
-            },
-            "detach_node": {
-                "key": "E"
             }
         },
         "restriction": {

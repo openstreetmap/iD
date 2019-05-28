@@ -1,18 +1,19 @@
-import _map from 'lodash-es/map';
-import _reduce from 'lodash-es/reduce';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
+import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
-import { actionDiscardTags, actionMergeRemoteChanges, actionNoop, actionRevert } from '../actions';
-import { coreGraph } from '../core';
-import { modeBrowse, modeSelect } from './index';
+import { actionDiscardTags } from '../actions/discard_tags';
+import { actionMergeRemoteChanges } from '../actions/merge_remote_changes';
+import { actionNoop } from '../actions/noop';
+import { actionRevert } from '../actions/revert';
+import { coreGraph } from '../core/graph';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 import { services } from '../services';
-import { uiConflicts, uiConfirm, uiCommit, uiLoading, uiSuccess } from '../ui';
+import { uiConflicts } from '../ui/conflicts';
+import { uiConfirm } from '../ui/confirm';
+import { uiCommit } from '../ui/commit';
+import { uiLoading } from '../ui/loading';
+import { uiSuccess } from '../ui/success';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilKeybinding } from '../util';
 
 
@@ -132,22 +133,19 @@ export function modeSave(context) {
 
 
         function withChildNodes(ids, graph) {
-            return utilArrayUniq(_reduce(ids, function(result, id) {
+            var s = new Set(ids);
+            ids.forEach(function(id) {
                 var entity = graph.entity(id);
-                if (entity.type === 'way') {
-                    try {
-                        var children = graph.childNodes(entity)
-                            .filter(function(child) { return child.version !== undefined; });
+                if (entity.type !== 'way') return;
 
-                        result.push.apply(result, _map(children, 'id'));
-                    } catch (err) {
-                        /* eslint-disable no-console */
-                        if (typeof console !== 'undefined') console.error(err);
-                        /* eslint-enable no-console */
+                graph.childNodes(entity).forEach(function(child) {
+                    if (child.version !== undefined) {
+                        s.add(child.id);
                     }
-                }
-                return result;
-            }, ids.slice()));   // shallow copy
+                });
+            });
+
+            return Array.from(s);
         }
 
 
@@ -473,7 +471,7 @@ export function modeSave(context) {
 
 
     // Reverse geocode current map location so we can display a message on
-    // the success screen like "Thank you for editing around city, state."
+    // the success screen like "Thank you for editing around place, region."
     function loadLocation() {
         _location = null;
         if (!services.geocoder) return;
@@ -481,14 +479,14 @@ export function modeSave(context) {
         services.geocoder.reverse(context.map().center(), function(err, result) {
             if (err || !result || !result.address) return;
 
-            var parts = [];
             var addr = result.address;
-            var city = addr && (addr.town || addr.city || addr.county);
-            if (city) parts.push(city);
-            var region = addr && (addr.state || addr.country);
-            if (region) parts.push(region);
+            var place = (addr && (addr.town || addr.city || addr.county)) || '';
+            var region = (addr && (addr.state || addr.country)) || '';
+            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
 
-            _location = parts.join(', ');
+            _location = t('success.thank_you_where.format',
+                { place: place, separator: separator, region: region }
+            );
         });
     }
 

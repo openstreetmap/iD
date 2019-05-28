@@ -28,10 +28,6 @@
         "amenity": "pharmacy",
         "healthcare": "pharmacy"
     },
-    "removeTags": {
-        "amenity": "pharmacy",
-        "healthcare": "pharmacy"
-    },
     "reference": {
         "key": "amenity",
         "value": "pharmacy"

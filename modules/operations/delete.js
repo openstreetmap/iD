@@ -1,17 +1,21 @@
 import { t } from '../util/locale';
-import { actionDeleteMultiple } from '../actions';
-import { behaviorOperation } from '../behavior';
+import { actionDeleteMultiple } from '../actions/delete_multiple';
+import { behaviorOperation } from '../behavior/operation';
 import { geoExtent, geoSphericalDistance } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
-import { uiCmd } from '../ui';
+import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
+import { uiCmd } from '../ui/cmd';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationDelete(selectedIDs, context) {
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        action = actionDeleteMultiple(selectedIDs),
-        extent = selectedIDs.reduce(function(extent, id) {
-                return extent.extend(context.entity(id).extent(context.graph()));
-            }, geoExtent());
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    var action = actionDeleteMultiple(selectedIDs);
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
+    var extent = nodes.reduce(function(extent, node) {
+        return extent.extend(node.extent(context.graph()));
+    }, geoExtent());
 
 
     var operation = function() {
@@ -19,24 +23,24 @@ export function operationDelete(selectedIDs, context) {
         var nextSelectedLoc;
 
         if (selectedIDs.length === 1) {
-            var id = selectedIDs[0],
-                entity = context.entity(id),
-                geometry = context.geometry(id),
-                parents = context.graph().parentWays(entity),
-                parent = parents[0];
+            var id = selectedIDs[0];
+            var entity = context.entity(id);
+            var geometry = context.geometry(id);
+            var parents = context.graph().parentWays(entity);
+            var parent = parents[0];
 
             // Select the next closest node in the way.
             if (geometry === 'vertex') {
-                var nodes = parent.nodes,
-                    i = nodes.indexOf(id);
+                var nodes = parent.nodes;
+                var i = nodes.indexOf(id);
 
                 if (i === 0) {
                     i++;
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = geoSphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
-                        b = geoSphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                    var a = geoSphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc);
+                    var b = geoSphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 
@@ -46,6 +50,7 @@ export function operationDelete(selectedIDs, context) {
         }
 
         context.perform(action, operation.annotation());
+        context.validator().validate();
 
         if (nextSelectedID && nextSelectedLoc) {
             if (context.hasEntity(nextSelectedID)) {
@@ -67,17 +72,40 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        var reason;
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+            return 'too_large';
+        } else if (someMissing()) {
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+            return 'connected_to_hidden';
         } else if (selectedIDs.some(protectedMember)) {
-            reason = 'part_of_relation';
+            return 'part_of_relation';
         } else if (selectedIDs.some(incompleteRelation)) {
-            reason = 'incomplete_relation';
+            return 'incomplete_relation';
+        } else if (selectedIDs.some(hasWikidataTag)) {
+            return 'has_wikidata_tag';
         }
-        return reason;
+
+        return false;
+
+
+        function someMissing() {
+            if (context.inIntro()) return false;
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function hasWikidataTag(id) {
+            var entity = context.entity(id);
+            return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
+        }
 
         function incompleteRelation(id) {
             var entity = context.entity(id);
@@ -90,16 +118,15 @@ export function operationDelete(selectedIDs, context) {
 
             var parents = context.graph().parentRelations(entity);
             for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i],
-                    type = parent.tags.type,
-                    role = parent.memberById(id).role || 'outer';
+                var parent = parents[i];
+                var type = parent.tags.type;
+                var role = parent.memberById(id).role || 'outer';
                 if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
                     return true;
                 }
             }
             return false;
         }
-
     };
 
 

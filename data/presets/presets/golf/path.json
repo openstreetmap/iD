@@ -11,7 +11,11 @@
         "line"
     ],
     "tags": {
+        "golf": "path"
+    },
+    "addTags": {
         "golf": "path",
+        "highway": "path",
         "foot": "designated"
     },
     "reference": {

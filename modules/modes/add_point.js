@@ -1,9 +1,11 @@
 import { t } from '../util/locale';
-import { actionAddEntity, actionChangeTags } from '../actions';
-import { behaviorDraw } from '../behavior';
-import { modeBrowse, modeSelect } from './index';
-import { osmNode } from '../osm';
-import { actionAddMidpoint } from '../actions';
+import { behaviorDraw } from '../behavior/draw';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
+import { osmNode } from '../osm/node';
+import { actionAddEntity } from '../actions/add_entity';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionAddMidpoint } from '../actions/add_midpoint';
 
 
 export function modeAddPoint(context, mode) {

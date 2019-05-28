@@ -227,7 +227,6 @@ table.tags, table.tags td, table.tags th {
 /* Grid
 ------------------------------------------------------- */
 .col6  { float: left; width: 50.0000%; max-width: 600px; }
-.col8  { float: left; width: 66.6666%; }
 .col12 { float: left; width: 100.0000%; }
 
 
@@ -260,10 +259,12 @@ table.tags, table.tags td, table.tags th {
 .ar { right: 0; }
 
 input.hide,
+textarea.hide,
 div.hide,
 form.hide,
 button.hide,
 a.hide,
+ul.hide,
 li.hide {
     display: none;
 }
@@ -415,7 +416,7 @@ button[disabled].action:hover {
     color: #333;
 }
 
-.icon-badge {
+.notification-badge {
     display: block;
     position: absolute;
     width: 10px;
@@ -424,7 +425,7 @@ button[disabled].action:hover {
     top: 9px;
 }
 
-.icon-badge.hide {
+.notification-badge.hide {
     display: none;
 }
 
@@ -440,7 +441,7 @@ button[disabled].action:hover {
     left: 0;
     top: 0;
     right: 0;
-    z-index: 9;
+    z-index: 101;
 }
 #bar .toolbar-item {
     display: flex;
@@ -1159,24 +1160,17 @@ a.hide-toggle {
 
 .preset-list-button-wrap {
     position: relative;
-    height: 60px;
+    height: 62px;
     display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .preset-list-button {
     width: 100%;
     height: 100%;
     position: relative;
-    border: 1px solid #ccc;
     display: flex;
-}
-[dir='ltr'] .preset-list-button-wrap:not(.category) .preset-list-button {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-[dir='rtl'] .preset-list-button-wrap:not(.category) .preset-list-button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
 }
 
 .preset-list.filtered .preset-list-item:first-child .preset-list-button {
@@ -1188,11 +1182,24 @@ a.hide-toggle {
     width: 60px;
     height: 60px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .preset-icon-container.small {
     width: 40px;
     height: 40px;
     flex: 0 0 auto;
+}
+.preset-icon-container img.image-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 2px;
+}
+.preset-icon-container.small img.image-icon {
+    width: 34px;
+    height: 34px;
 }
 
 .preset-icon-point-border path {
@@ -1204,21 +1211,16 @@ a.hide-toggle {
 .preset-icon-line {
     margin: auto;
     position: absolute;
+    left: 0;
+    right: 0;
     top: 0;
     width: 100%;
     height: 100%;
 }
-[dir='ltr'] .preset-icon-line {
-    left: 0;
-}
-[dir='rtl'] .preset-icon-line {
-    right: 0;
-}
-.preset-icon-line path.line {
+.preset-icon-container path {
     cursor: inherit;
 }
-.preset-icon-line circle.vertex,
-.preset-icon-fill circle.vertex {
+.preset-icon-container circle.vertex {
     fill: #fff;
     stroke: rgba(0, 0, 0, 0.25);
 }
@@ -1227,10 +1229,10 @@ a.hide-toggle {
     stroke: rgba(0, 0, 0, 0.25);
 }
 /* use a consistent stroke width */
-.preset-icon-line path.line.stroke {
+.preset-icon-container path.line.stroke {
     stroke-width: 2 !important;
 }
-.preset-icon-line path.line.casing {
+.preset-icon-container path.line.casing {
     stroke-width: 4 !important;
 }
 
@@ -1281,7 +1283,8 @@ a.hide-toggle {
 .preset-icon.framed .icon {
     transform: scale(0.4);
 }
-.preset-icon.framed.line-geom .icon {
+.preset-icon.framed.line-geom .icon,
+.preset-icon.framed.route-geom .icon {
     top: 20%;
     transform: translateY(-30%) scale(0.4);
 }
@@ -1291,7 +1294,8 @@ a.hide-toggle {
 .preset-icon-iD.framed .icon {
     transform: scale(0.74);
 }
-.preset-icon-iD.framed.line-geom .icon {
+.preset-icon-iD.framed.line-geom .icon,
+.preset-icon-iD.framed.route-geom .icon {
     transform: translateY(-30%) scale(0.74);
 }
 .preset-icon-container.fallback .preset-icon .icon {
@@ -1343,23 +1347,23 @@ a.hide-toggle {
     background-color: #ececec;
 }
 
+.preset-list-item button.preset-favorite-button {
+    border-radius: 0;
+}
 .preset-list-item button.preset-favorite-button,
 .preset-list-item button.tag-reference-button {
     height: 100%;
-    border: 1px solid #ccc;
     width: 32px;
     flex: 0 0 auto;
     background: #f6f6f6;
 }
 [dir='ltr'] .preset-list-item button.preset-favorite-button,
 [dir='ltr'] .preset-list-item button.tag-reference-button {
-    border-left: none;
-    border-radius: 0;
+    border-left: 1px solid #ccc;
 }
 [dir='rtl'] .preset-list-item button.preset-favorite-button,
 [dir='rtl'] .preset-list-item button.tag-reference-button {
-    border-right: none;
-    border-radius: 0;
+    border-right: 1px solid #ccc;
 }
 [dir='ltr'] .preset-list-item button:last-child {
     border-radius: 0 4px 4px 0;
@@ -1478,7 +1482,7 @@ button.preset-favorite-button.active .icon {
 /*
     The parts of a field:
     - `.form-field` is a `div` wraps the entire thing
-    - `.form-field-label` is a `label` that wraps the top part, it contains;
+    - `.field-label` is a `label` that wraps the top part, it contains;
        - `span` classed `label-text`
        - 0..n buttons for "remove", "modified", "tag reference"
     - `.form-field-input-wrap` is a `label` or `div` that wraps the bottom part, it contains;
@@ -1488,7 +1492,7 @@ button.preset-favorite-button.active .icon {
     - `.tag-reference-body` at the bottom (usually hidden)
 
    .------------------.                             -
-   |  Name        | i |  <- .form-field-label        |
+   |  Name        | i |  <- .field-label        |
    +------------------+                               |
    |  Starbucks   | + |  <- .form-field-input-wrap     >  .form-field
    '------------------'                               |
@@ -1513,7 +1517,7 @@ button.preset-favorite-button.active .icon {
 }
 
 /* A `label` element that wraps the top section */
-.form-field-label {
+.field-label {
     display: flex;
     flex-flow: row nowrap;
     flex: 1 1 100%;
@@ -1526,15 +1530,24 @@ button.preset-favorite-button.active .icon {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
-.form-field-label .label-text {
+.field-label .label-text {
     flex: 1 1 auto;
     padding: 5px 0 5px 10px;
 }
-[dir='rtl'] .form-field-label .label-text {
+[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 5px 0;
 }
 
-.form-field-label button {
+.label-text .label-textannotation svg.icon {
+    margin: 0 8px;
+    color: #333;
+    opacity: 0.5;
+    width: 14px;
+    height: 14px;
+    vertical-align: text-top;
+}
+
+.field-label button {
     flex: 0 0 32px;
     border-left: 1px solid #ccc;
     width: 32px;
@@ -1542,23 +1555,25 @@ button.preset-favorite-button.active .icon {
     border-radius: 0;
     background: #f6f6f6;
 }
-[dir='rtl'] .form-field-label button {
+[dir='rtl'] .field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.form-field-label button:hover {
+.field-label button:hover {
     background: #f1f1f1;
 }
-.form-field-label .icon {
+.field-label .icon {
     opacity: .5;
 }
 
-.form-field-label .modified-icon,
-.form-field-label .remove-icon {
+.field-label .modified-icon,
+.field-label .remove-icon,
+.field-label .remove-icon-multilingual {
     display: none;
 }
-.modified .form-field-label .modified-icon,
-.present .form-field-label .remove-icon {
+.modified:not(.locked) .field-label .modified-icon,
+.present:not(.locked) .field-label .remove-icon,
+.present:not(.locked) .field-label .remove-icon-multilingual {
     display: inline-block;
 }
 
@@ -1566,7 +1581,8 @@ button.preset-favorite-button.active .icon {
 .form-field-input-wrap {
     display: flex;
     flex-flow: row nowrap;
-    flex: 1 1 100%;
+    width: 100%;
+    flex: 1 1 auto;
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
@@ -1591,11 +1607,12 @@ button.preset-favorite-button.active .icon {
 .form-field-input-wrap > textarea {
     height: 65px;
     border-radius: 0 0 4px 4px;
+    overflow: auto;
 }
 
 /* Buttons inside fields */
 .form-field-button {
-    flex: 0 0 32px;
+    flex: 0 0 auto;
     height: 30px;
     width: 32px;
     position: relative;
@@ -1639,7 +1656,7 @@ button.preset-favorite-button.active .icon {
 
 /* Field - lists with labeled input items
 ------------------------------------------------------- */
-.form-field ul.labeled-inputs {
+.form-field ul.rows {
     flex: 1 1 auto;
     border: 1px solid #ccc;
     border-top: 0;
@@ -1647,32 +1664,36 @@ button.preset-favorite-button.active .icon {
     overflow: hidden;
     width: 100%;
 }
-.form-field ul.labeled-inputs li {
+.form-field ul.rows li {
     border-top: 1px solid #ccc;
+}
+.form-field ul.rows li:first-child {
+    border-top: 0;
+}
+.form-field ul.rows li {
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.labeled-inputs li:first-child {
-    border-top: 0;
-}
-.form-field ul.labeled-inputs li > span,
-.form-field ul.labeled-inputs li > div {
+.form-field ul.rows li.labeled-input > span,
+.form-field ul.rows li.labeled-input > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
 }
-.form-field ul.labeled-inputs li input {
+.form-field ul.rows li input {
     border-radius: 0;
+    border-width: 0;
     width: 100%;
 }
-.form-field ul.labeled-inputs li input,
-.form-field ul.labeled-inputs li button {
+.form-field ul.rows li button {
     border-width: 0;
+}
+[dir='ltr'] .form-field ul.rows li.labeled-input input,
+[dir='ltr'] .form-field ul.rows li button {
     border-left-width: 1px;
 }
-[dir='rtl'] .form-field ul.labeled-inputs li input,
-[dir='rtl'] .form-field ul.labeled-inputs li button {
-    border-left-width: 0;
+[dir='rtl'] .form-field ul.rows li.labeled-input input,
+[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
 }
 
@@ -1687,7 +1708,7 @@ button.preset-favorite-button.active .icon {
     border-top: 0px;
     border-radius: 0 0 4px 4px;
 }
-.structure-extras-wrap > ul.labeled-inputs {
+.structure-extras-wrap > ul.rows {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -1709,35 +1730,58 @@ button.preset-favorite-button.active .icon {
 }
 
 .form-field-input-multicombo ul.chiplist {
-    padding: 5px 7px 5px 7px;
+    padding: 5px 8px 5px 8px;
     background: #fff;
     display: block;
     border-radius: 0 0 4px 4px;
+    width: 100%;
+}
+
+.form-field-input-multicombo li {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 4px;
+}
+[dir='ltr'] .form-field-input-multicombo li {
+    margin-right: 6px;
+}
+[dir='rtl'] .form-field-input-multicombo li {
+    margin-left: 6px;
 }
 
 .form-field-input-multicombo li.chips {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     line-height: 25px;
+    max-width: 100%;
+}
+[dir='ltr'] .form-field-input-multicombo li.chips {
     padding: 2px 0px 2px 5px;
 }
-.form-field-input-multicombo li {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    margin: 3px;
-    border-radius: 4px;
+[dir='rtl'] .form-field-input-multicombo li.chips {
+    padding: 2px 5px 2px 0px;
+}
+
+.form-field-input-multicombo li.chips span {
+    display: block;
+    flex: 1 1 auto;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .form-field-input-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
-    line-height: 22px;
-    float: right;
     padding: 0px 5px 0px 5px;
     margin: 0;
     cursor: pointer;
     color: #a6b4ce;
+    display: block;
+    text-align: center;
+    flex: 0 0 auto;
 }
 
 .form-field-input-multicombo .input-wrap {
@@ -1755,11 +1799,8 @@ button.preset-favorite-button.active .icon {
     border-radius: 4px !important;
 }
 
-.form-field-input-multicombo .full-line-chips li {
-    display: block;
-}
-.form-field-input-multicombo .full-line-chips li:not(:last-child) {
-    margin-bottom: 6px;
+.form-field-input-multicombo .full-line-chips li.chips {
+    width: 100%;
 }
 .form-field-input-multicombo .full-line-chips .input-wrap {
     width: auto;
@@ -2062,10 +2103,12 @@ button.preset-favorite-button.active .icon {
 [dir='rtl'] .wiki-title-container > input.wiki-title {
     border-radius: 0 0 4px 0;
 }
-.wiki-title-container > button.wiki-link {
+.wiki-title-container > button.wiki-link,
+.form-field-wikidata ul.rows li:last-child button.form-field-button:last-child {
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .wiki-title-container > button.wiki-link {
+[dir='rtl'] .wiki-title-container > button.wiki-link,
+[dir='rtl'] .form-field-wikidata ul.rows li:last-child button.form-field-button:last-child {
     border-radius: 0 0 0 4px;
 }
 
@@ -2175,7 +2218,7 @@ button.preset-favorite-button.active .icon {
 .form-field-comment:not(.present) #preset-input-comment {
     border-color: rgb(230, 100, 100);
 }
-.form-field-comment:not(.present) .form-field-label {
+.form-field-comment:not(.present) .field-label {
     border-color: rgb(230, 100, 100);
     background: rgba(230, 100, 100, 0.2);
 }
@@ -2222,7 +2265,7 @@ div.combobox {
     display: inline-block;
     position: relative;
     height: 30px;
-    width: 30px;
+    width: 30px !important;
     margin-left: -30px;
     vertical-align: top;
     cursor: pointer;
@@ -2241,14 +2284,6 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-}
-
-/* Remove the field's bottom border radius when combobox is open */
-/* For some reason this stops the combobox from overlapping the bottom of the field */
-.combobox + * textarea:focus,
-.combobox + * input:focus {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
 }
 
 
@@ -2389,8 +2424,56 @@ div.combobox {
 
 /* Raw Tag Editor
 ------------------------------------------------------- */
+.raw-tag-options {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    margin-top: -25px;
+    padding: 0 3px;
+}
+button.raw-tag-option {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+    background: #aaa;
+    color: #eee;
+    margin: 0 3px;
+}
+button.raw-tag-option:focus,
+button.raw-tag-option:hover,
+button.raw-tag-option.active {
+    color: #fff;
+    background: #597be7;
+}
+button.raw-tag-option.selected {
+    color: #fff;
+    background: #7092ff;
+}
+button.raw-tag-option svg.icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: text-bottom;
+}
+[dir='ltr'] button.raw-tag-option-list {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+
+.tag-text {
+    width: 100%;
+    height: 100%;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.tag-text,
 .tag-list {
-    padding-top: 10px;
+    margin-top: 10px;
 }
 .tag-row {
     width: 100%;
@@ -2407,6 +2490,7 @@ div.combobox {
     flex: 1 1 50%;
 }
 
+.tag-text.readonly,
 .tag-row.readonly,
 .tag-row.readonly input.key,
 .tag-row.readonly input.value,
@@ -2663,145 +2747,6 @@ input.key-trap {
 }
 
 
-/* Inspector (hover styles)
-------------------------------------------------------- */
-.inspector-hover .form-field-input-wrap .label,
-.inspector-hover .form-field-input-multicombo .chiplist,
-.inspector-hover .form-field-button,
-.inspector-hover .structure-extras-wrap,
-.inspector-hover .comments-container .comment,
-.inspector-hover button,
-.inspector-hover input,
-.inspector-hover textarea,
-.inspector-hover label,
-.inspector-hover .entity-issues .issue button {
-    background: #ececec;
-}
-.inspector-hover .preset-list-button,
-.inspector-hover .tag-row input {
-    background: #f6f6f6;
-}
-
-.inspector-hover .entity-issues .issue,
-.inspector-hover .entity-issues .issue li {
-    border: 1px solid #ccc;
-}
-.inspector-hover .entity-issues .issue .icon {
-    color: #666;
-}
-
-.inspector-hover a,
-.inspector-hover .form-field-input-multicombo .chips,
-.inspector-hover .form-field-input-check span {
-    color: #666;
-}
-
-.inspector-hover .form-field-input-multicombo .chips {
-    background: #eee;
-    border: 1px solid #ccc;
-}
-
-/* no scrollbars */
-.inspector-hover div {
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-/* hide and remove from layout */
-.inspector-hidden,
-.inspector-hover .preset-list-button-wrap .preset-favorite-button,
-.inspector-hover .preset-list-button-wrap .tag-reference-button,
-.inspector-hover label input[type="checkbox"],
-.inspector-hover label input[type="radio"],
-.inspector-hover .form-field-input-multicombo .input-wrap,
-.inspector-hover .form-field-input-radio label,
-.inspector-hover .form-field-input-radio label span,
-.inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue ul.issue-fix-list {
-    display: none;
-}
-
-/* hide but preserve in layout */
-.inspector-hover .combobox-caret,
-.inspector-hover .header button,
-.inspector-hover .quick-links,
-.inspector-hover .form-field-input-multicombo .chips .remove,
-.inspector-hover .hide-toggle:before,
-.inspector-hover .more-fields,
-.inspector-hover .form-field-label button,
-.inspector-hover .tag-row button,
-.inspector-hover .footer * {
-    opacity: 0;
-}
-
-/* Styles for raw tag inspector on hover */
-.inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .value-wrap {
-    height: 31px;
-}
-
-.inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
-    border-top-right-radius: 0;
-    border-top-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
-}
-
-.inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 4px;
-}
-[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 4px;
-}
-
-.inspector-hover .more-fields {
-    max-height: 0;
-    margin-bottom: -10px;
-}
-
-/* Unstyle button fields */
-.inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
-    opacity: 1;
-    background-color: transparent;
-    color: #666;
-    padding-left: 0;
-    border-width: 0;
-}
-.inspector-hover .form-field-input-radio button.active {
-    padding-left: 10px;
-}
-
-/* Show placeholder on hover for radio buttons */
-.inspector-hover .form-field-input-radio {
-    border: 1px solid #ccc;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
-}
-.inspector-hover .form-field-input-radio .placeholder {
-    opacity: 1;
-    color: #666;
-    padding: 5px 10px;
-    line-height: 20px;
-    width: 100%;
-    border: 0;
-}
-.inspector-hover .form-field-input-radio .structure-extras-wrap {
-    border: 0;
-}
-
-
 /* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
 .note-header,
@@ -2836,6 +2781,16 @@ input.key-trap {
 .error-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
+}
+.preset-icon-28 {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    margin: auto;
+}
+.preset-icon-28 .icon {
+    width: 28px;
+    height: 28px;
 }
 
 .note-header-label,
@@ -3001,8 +2956,8 @@ input.key-trap {
     border-radius: 5px 0 0 5px;
 }
 
-/* tag editor - no buttons */
-.data-editor.raw-tag-editor button {
+/* custom data editor - no info/delete buttons */
+.data-editor.raw-tag-editor .tag-row button {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
@@ -3015,7 +2970,7 @@ input.key-trap {
 ------------------------------------------------------- */
 .map-controls {
     right: 0;
-    top: 132px;
+    top: 141px;
     width: 40px;
     position: fixed;
     z-index: 100;
@@ -3202,9 +3157,10 @@ div.full-screen > button:hover {
 .background-pane .layer-list button {
     float: right;
     height: 100%;
-    width: 10%;
     border-left: 1px solid #ccc;
     border-radius: 0;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 [dir='rtl'] .map-data-pane .layer-list button,
 [dir='rtl'] .background-pane .layer-list button {
@@ -3240,161 +3196,342 @@ div.full-screen > button:hover {
 .issue {
     overflow: hidden;
 }
-.issue button {
-    padding: 5px 10px 5px 5px;
-    height: auto;
+.issue .issue-label,
+.issue-label .issue-text {
     width: 100%;
-    font-weight: inherit;
-    border-radius: 0;
-    text-align: inherit;
     display: flex;
-    color: inherit;
+    flex-flow: row nowrap;
+    cursor: pointer;
 }
-[dir='rtl'] .issue button {
-    padding: 5px 5px 5px 10px;
+
+.issue-text .issue-icon {
+    flex: 0 0 auto;
+    padding: 5px 7px;
 }
+.issue-text .issue-message {
+    flex: 1 1 auto;
+    padding: 5px 0;
+}
+.issue-label .issue-autofix {
+    flex: 0 0 auto;
+    padding: 5px 8px;
+}
+.issue-label .issue-info-button {
+    height: unset;
+    width: 32px;
+    flex: 0 0 auto;
+    border-left: 1px solid #ccc;
+    background-color: rgba(0,0,0,0);
+}
+[dir='rtl'] .issue-label .issue-info-button {
+    border-left: 0;
+    border-right: 1px solid;
+}
+.issue-container .issue-label .issue-info-button .icon {
+    opacity: 0.5;
+}
+.issue-container.active .issue-label .issue-info-button .icon {
+    opacity: 0.7;
+}
+.issue-label .issue-info-button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+[dir='rtl'] .issue-label .issue-info-button:last-child {
+    border-radius: 4px 0 0 4px;
+}
+
+button.autofix.action {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+    background: #7092ff;
+    color: #fff;
+}
+button.autofix.action:focus,
+button.autofix.action:hover,
+button.autofix.action.active {
+    background: #597be7;
+}
+
+/* fix all */
+.autofix-all {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    margin-top: -25px;
+    padding-bottom: 5px;
+}
+.autofix-all-link-text {
+    padding: 0;
+}
+.autofix-all-link-icon svg {
+    margin: 0 9px;
+    background: currentColor;
+    border-radius: 4px;
+}
+.autofix-all-link-icon svg use {
+    color: #fff;
+}
+
+/* warning styles */
 .warnings-list,
-.issue.severity-warning,
- li.issue.severity-warning {
-    border-color: #FFDF5C;
+.warnings-list *,
+.issue-container.active .issue.severity-warning,
+.issue-container.active .issue.severity-warning * {
+    border-color: #fb2;
 }
-.icon-badge.warning {
-    color: #FFDF5C;
+
+.warnings-list .issue.severity-warning .issue-label,
+.issue.severity-warning .issue-fix-list,
+.mode-save .warning-section {
+    background: #ffc;
 }
+
+.issue-container.active .issue.severity-warning .issue-label {
+    background: #ffa;
+}
+
+.warnings-list .issue.severity-warning .issue-label:hover,
+.issue.severity-warning .issue-fix-item.actionable:hover {
+    background: #ff8;
+}
+
+.issue.severity-warning .issue-icon {
+    color: #f90;
+}
+
+.issue.severity-warning .issue-fix-item.actionable,
+.issue-container.active .issue.severity-warning .issue-info-button {
+    color: #b15500;
+    fill: #b15500;
+    /*color: #7092ff;*/
+    /*fill: #7092ff;*/
+}
+.issue.severity-warning .issue-fix-item.actionable:hover,
+.issue-container.active .issue.severity-warning .issue-info-button:hover {
+    color: #7f3d00;
+    fill: #7f3d00;
+    /*color: #597be7;*/
+    /*fill: #597be7;*/
+}
+
+.notification-badge.warning {
+    color: #ffdf5c;
+}
+
+
+/* error styles */
 .errors-list,
-.issue.severity-error,
- li.issue.severity-error {
-    border-color: #f5b0ab;
+.errors-list *,
+.issue-container.active .issue.severity-error,
+.issue-container.active .issue.severity-error * {
+    border-color: #f77;
 }
-.icon-badge.error {
+
+.errors-list .issue.severity-error .issue-label,
+.issue.severity-error .issue-fix-list,
+.mode-save .error-section {
+    background: #ffd6d6;
+}
+
+.issue-container.active .issue.severity-error .issue-label {
+    background: #ffc6c6;
+}
+
+.errors-list .issue.severity-error .issue-label:hover,
+.issue.severity-error .issue-fix-item.actionable:hover {
+    background: #ffb6b6;
+}
+
+.issue.severity-error .issue-icon {
+    color: #dd1400;
+}
+
+.issue.severity-error .issue-fix-item.actionable,
+.issue-container.active .issue.severity-error .issue-info-button {
+    color: #b91201;
+    fill: #b91201;
+    /*color: #7092ff;*/
+    /*fill: #7092ff;*/
+}
+.issue.severity-error .issue-fix-item.actionable:hover,
+.issue-container.active .issue.severity-error .issue-info-button:hover {
+    color: #840c00;
+    fill: #840c00;
+    /*color: #597be7;*/
+    /*fill: #597be7;*/
+}
+
+.notification-badge.error {
     color: #ff0c05;
 }
 
-.issue.severity-warning,
-.issue.severity-warning button,
-.mode-save .warning-section {
-    background: #ffb;
-}
-.issue.severity-warning:not(.expanded) button:hover,
-.issue.severity-warning:not(.expanded) button:focus,
-.issue.severity-warning .issue-fix-item.actionable button:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
-    background: #FFFF99;
-}
-.issue.severity-warning .issue-icon {
-    color: #ffa900;
-    fill: #ffa900;
-}
-.issue.severity-warning .issue-fix-item.actionable {
-    color: #b15500;
-    fill: #b15500;
-}
-.issue.severity-warning .issue-fix-item.actionable:hover,
-.issue.severity-warning .issue-fix-item.actionable button:focus {
-    color: #7f3d00;
-    fill: #7f3d00;
-}
-
-.issue.severity-error,
-.issue.severity-error button,
-.mode-save .error-section {
-    background: #FFD5D4;
-}
-.issue.severity-error:not(.expanded) button:hover,
-.issue.severity-error:not(.expanded) button:focus,
-.issue.severity-error .issue-fix-item.actionable button:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
-    background: #ffc9c7;
-}
-.issue.severity-error .issue-icon {
-    color: #DD1400;
-    fill: #DD1400;
-}
-.issue.severity-error .issue-fix-item.actionable {
-    color: #b91201;
-    fill: #b91201;
-}
-.issue.severity-error .issue-fix-item.actionable:hover,
-.issue.severity-error .issue-fix-item.actionable button:focus {
-    color: #840c00;
-    fill: #840c00;
-}
 
 /* Issues Pane */
+.issues-options-container {
+    display: table;
+}
+.issues-option {
+    display: table-row;
+}
+.issues-option-title {
+    display: table-cell;
+    font-weight: bold;
+    padding-right: 10px;
+}
+[dir='rtl'] .issues-option-title {
+    padding-right: 0;
+    padding-left: 10px;
+}
+.issues-option label {
+    display: table-cell;
+    padding: 0 10px;
+}
 
-.issues-list label {
+.layer-list.issues-list li.issue {
+    border-color: inherit;    /* override .layer-list styles */
+    color: inherit;
+    height: unset;
+}
+
+.layer-list.issue-rules-list,
+.layer-list.issues-list,
+.layer-list.layer-feature-list {
+    margin-bottom: 0;
+}
+.section-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    height: 30px;
+}
+.section-footer a {
     padding: 5px;
 }
-.issues-list label > span {
-    display: inline;
-    white-space: normal;
-}
-.issues-list li {
-    height: auto;
-    color: inherit;
-    position: static;
-}
 
-.issues-none {
+.issues-none .box {
     border-radius: 4px;
-    border: 1px solid #72D979;
-    background: #C6FFCA;
+    border: 1px solid #72d979;
+    background: #c6ffca;
     padding: 5px !important;
     display: flex;
-    margin-top: 5px;
-    margin-bottom: 15px;
 }
 .issues-none .icon {
-    color: #05AC10;
+    color: #05ac10;
 }
+
+input.square-degrees-input {
+    padding: 2px;
+    height: unset;
+    text-align: center;
+    background: rgba(0,0,0,0);
+    color: currentColor;
+}
+
 
 /* Entity Issues List */
-.entity-issues .issue {
+.entity-issues .issue-container .issue {
     border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #ccc;
+    background: #f6f6f6;
 }
-.entity-issues .issue:not(:last-of-type) {
-    margin-bottom: 10px;
+.entity-issues .issue-container:not(.active) .issue-text:hover,
+.entity-issues .issue-container:not(.active) .issue-info-button:hover {
+    background: #f1f1f1;
 }
-.issue.expanded button.message {
-    cursor: auto;
-    padding-bottom: 0px;
+.entity-issues .issue .issue-label .issue-text {
+    padding-right: 10px;
 }
-ul.issue-fix-list {
+[dir='rtl'] .entity-issues .issue .issue-label .issue-text {
+    padding-right: unset;
+    padding-left: 10px;
+}
+
+.entity-issues .issue-container.active .issue-label .issue-text {
+    font-weight: bold;
+}
+.entity-issues .issue-container:not(:last-of-type) {
     margin-bottom: 5px;
 }
-ul.issue-fix-list button {
-    padding: 2px 10px 2px 26px;
+.entity-issues .issue-container.active:not(:first-of-type) {
+    margin-top: 10px;
 }
-[dir='rtl'] ul.issue-fix-list button {
-    padding: 2px 26px 2px 10px;
+.entity-issues .issue-container.active:not(:last-of-type) {
+    margin-bottom: 10px;
 }
-.issue-fix-item:not(.actionable) button {
-    cursor: auto;
 
+/* fixes */
+.entity-issues .issue-fix-list {
+    border-top: 1px solid;
+    border-color: inherit;
 }
-.issue-fix-item:not(.actionable) .fix-icon {
+.entity-issues .issue-container.active .issue-fix-list:empty {
+    display: none;
+}
+
+li.issue-fix-item {
+    padding: 2px 10px 2px 20px;
+}
+[dir='rtl'] li.issue-fix-item {
+    padding: 2px 20px 2px 10px;
+}
+li.issue-fix-item:first-of-type {
+    padding-top: 5px;
+}
+li.issue-fix-item:last-of-type {
+    padding-bottom: 5px;
+}
+
+li.issue-fix-item .fix-message {
+    padding: 0 10px;
+}
+
+li.issue-fix-item.actionable {
+    cursor: pointer;
+}
+li.issue-fix-item:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
 
-.issue:not(.expanded) ul.issue-fix-list {
+.issue-container:not(.active) ul.issue-fix-list {
     display: none;
 }
-/* don't animate right now
-.issue ul.issue-fix-list {
-    max-height: 0;
-    transition: max-height 200ms linear;
-    -moz-transition: max-height 200ms linear;
-    -webkit-transition: max-height 200ms linear;
+
+.issue-info {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow: hidden;
+    display: none;
+    padding: 10px 0;
 }
-.issue.expanded ul.issue-fix-list {
-    max-height: 180px;
-    transition: max-height 200ms linear;
-    -moz-transition: max-height 200ms linear;
-    -webkit-transition: max-height 200ms linear;
-}*/
+.issue-info.expanded {
+    display: inline-block;
+}
+
+.issue-info .issue-reference {
+    margin-bottom: 10px;
+}
+.issue-info .tagDiff-table {
+    min-width: 60%;
+    width: unset;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-row {
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell {
+    padding: 2px 10px;
+    font-family: monospace;
+    font-size: 10px;
+    border: 1px solid #ccc;
+}
+.issue-info .tagDiff-cell-add {
+    background: #dfd;
+}
+.issue-info .tagDiff-cell-remove {
+    background: #fdd;
+}
 
 
 /* Background - Display Options Sliders
@@ -3561,25 +3698,23 @@ ul.issue-fix-list button {
 
 /* Side Panes - Background / Map Data / Help
 ------------------------------------------------------- */
+.map-panes {
+    flex: 0 1 auto;
+    position: relative;
+    height: 100%;
+}
 .map-pane {
-    position: absolute;
-    top: 60px;
-    bottom: 30px;
-    right: 0;
-    width: 100%;
-    max-width: 400px;
-    min-width: 180px;
-    padding-bottom: 50px;
+    position: relative;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
 }
-[dir='rtl'] .map-pane {
-    left: 0;
-    right: auto !important;
-}
 
 .map-pane.help-wrap {
-    max-width: 600px;
+    width: 600px;
 }
 
 .pane-heading {
@@ -3602,12 +3737,13 @@ ul.issue-fix-list button {
 
 .pane-content {
     height: 100%;
-    padding: 10px 50px 20px 20px;
+    padding: 10px 40px 20px 20px;
     overflow-x: hidden;
     overflow-y: scroll;
+    position: relative;
 }
 [dir='rtl'] .pane-content {
-    padding: 10px 20px 20px 50px;
+    padding: 10px 20px 20px 40px;
 }
 
 .pane-content > div {
@@ -3717,6 +3853,155 @@ ul.issue-fix-list button {
 }
 
 
+/* Inspector (hover styles)
+------------------------------------------------------- */
+.inspector-hover .entity-issues .issue-container .issue .issue-label,
+.inspector-hover .form-field-input-wrap .label,
+.inspector-hover .form-field-input-multicombo .chiplist,
+.inspector-hover .form-field-button,
+.inspector-hover .structure-extras-wrap,
+.inspector-hover .comments-container .comment,
+.inspector-hover button,
+.inspector-hover input,
+.inspector-hover textarea,
+.inspector-hover label {
+    background: #ececec;
+}
+.inspector-hover .preset-list-button,
+.inspector-hover .tag-row input {
+    background: #f6f6f6;
+}
+
+.inspector-hover a,
+.inspector-hover .form-field-input-multicombo .chips,
+.inspector-hover .form-field-input-check span,
+.inspector-hover .entity-issues .issue .icon {
+    color: #666;
+}
+
+.inspector-hover .form-field-input-multicombo .chips {
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+/* no scrollbars */
+.inspector-hover div {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* hide and remove from layout */
+.inspector-hidden,
+.inspector-hover .preset-list-button-wrap .preset-favorite-button,
+.inspector-hover .preset-list-button-wrap .tag-reference-button,
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
+.inspector-hover .form-field-input-multicombo .input-wrap,
+.inspector-hover .form-field-input-radio label,
+.inspector-hover .form-field-input-radio label span,
+.inspector-hover .form-field-input-radio label.remove .icon,
+.inspector-hover .inspector-inner .add-row,
+.inspector-hover .entity-issues .issue-container .issue-fix-list,
+.inspector-hover .entity-issues .issue-container .issue-info-button {
+    display: none;
+}
+
+/* hide but preserve in layout */
+.inspector-hover .combobox-caret,
+.inspector-hover .header button,
+.inspector-hover .quick-links,
+.inspector-hover .form-field-input-multicombo .chips .remove,
+.inspector-hover .hide-toggle:before,
+.inspector-hover .more-fields,
+.inspector-hover .field-label button,
+.inspector-hover .tag-row button,
+.inspector-hover .footer * {
+    opacity: 0;
+}
+
+/* Unstyle the active entity issue on hover */
+.inspector-hover .entity-issues .issue-container.active {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+.inspector-hover .entity-issues .issue-container * {
+    border-color: #ccc !important;
+}
+.inspector-hover .entity-issues .issue-container.active .issue-label {
+    border-bottom: 0;
+}
+.inspector-hover .entity-issues .issue-container.active .issue-label .issue-text {
+    font-weight: normal;
+}
+
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .value-wrap {
+    height: 31px;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .more-fields {
+    max-height: 0;
+    margin-bottom: -10px;
+}
+
+/* Unstyle button fields */
+.inspector-hover .form-field-input-radio label.active,
+.inspector-hover .entity-editor-pane a.hide-toggle {
+    opacity: 1;
+    background-color: transparent;
+    color: #666;
+    padding-left: 0;
+    border-width: 0;
+}
+.inspector-hover .form-field-input-radio button.active {
+    padding-left: 10px;
+}
+
+/* Show placeholder on hover for radio buttons */
+.inspector-hover .form-field-input-radio {
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+.inspector-hover .form-field-input-radio .placeholder {
+    opacity: 1;
+    color: #666;
+    padding: 5px 10px;
+    line-height: 20px;
+    width: 100%;
+    border: 0;
+}
+.inspector-hover .form-field-input-radio .structure-extras-wrap {
+    border: 0;
+}
+
+
 /* Raster Background Tiles
 ------------------------------------------------------- */
 img.tile {
@@ -3811,13 +4096,19 @@ img.tile-debug {
 .map-in-map {
     position: absolute;
     overflow: hidden;
-    top: 60px;
+    top: 10px;
     width: 200px;
     height: 150px;
     z-index: 5;
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
+}
+[dir='ltr'] .map-in-map {
+    left: 10px;
+}
+[dir='rtl'] .map-in-map {
+    right: 10px;
 }
 
 .map-in-map-tiles {
@@ -3903,40 +4194,55 @@ img.tile-debug {
 }
 
 
+.over-map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 71px;
+    bottom: 30px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+.over-map > * {
+    pointer-events: auto;
+}
+
 /* Information Panels
 ------------------------------------------------------- */
 .info-panels {
     display: flex;
     flex-flow: row-reverse wrap-reverse;
-    position: absolute;
+    width: 100%;
     z-index: 1;
-    right: 0;
-    bottom: 30px;
     -ms-user-select: element;
+    pointer-events: none;
 }
 
-.info-panels h1,
-.info-panels h2,
-.info-panels h3,
-.info-panels h4,
-.info-panels h5 {
+.panel-container h1,
+.panel-container h2,
+.panel-container h3,
+.panel-container h4,
+.panel-container h5 {
     display: inline-block;
     margin-bottom: 0;
 }
 
-.info-panels h1,
-.info-panels h2,
-.info-panels h3 {
+.panel-container h1,
+.panel-container h2,
+.panel-container h3 {
     color: #ff8;
 }
 
 .panel-container {
     flex: 0 0 auto;
-    margin: 2px 0 0 2px;
+    margin: 0 2px 2px 0;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.75);
     padding-bottom: 10px;
     width: 250px;
+    pointer-events: auto;
 }
 
 .panel-container .panel-title {
@@ -3997,12 +4303,9 @@ img.tile-debug {
     margin-left: auto;
     margin-right: 8px;
 }
-
-.panel-content-history .view-history-on-osm {
-    display: block;
-    margin-top: 10px;
+.panel-content-history h4 {
+    padding-bottom: 0;
 }
-
 .panel-content-location .location-info {
     margin-top: 10px;
 }
@@ -4345,6 +4648,9 @@ img.tile-debug {
     right: 0;
     margin: auto;
     z-index: 50;
+    width: 50%;
+    min-width: 200px;
+    max-width: 600px;
 }
 
 .modal .loader {
@@ -4355,7 +4661,7 @@ img.tile-debug {
 }
 
 .shaded {
-    z-index: 49;
+    z-index: 5000;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -4410,7 +4716,9 @@ img.tile-debug {
 .loading-modal {
     text-align: center;
 }
-
+.modal-actions {
+    display: flex;
+}
 .modal-actions button {
     font-weight: normal;
     color: #7092ff;
@@ -4418,7 +4726,7 @@ img.tile-debug {
     border-radius: 0;
     height: 160px;
     text-align: center;
-    display: inline-block;
+    width: 100%;
 }
 .modal-actions button:hover {
     background-color: #ececec;
@@ -4594,11 +4902,11 @@ img.tile-debug {
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 .modal-shortcuts .shortcut-column {
-    flex: 1 1 50%;
-    width: 50%;
+    width: auto;
 }
 
 .modal-shortcuts .shortcut-tab-tools .shortcut-column {
@@ -4618,6 +4926,7 @@ img.tile-debug {
     padding: 0 10px;
     color: #767676;
     text-align: right;
+    white-space: nowrap;
 }
 [dir='rtl'] .modal-shortcuts .shortcut-keys {
     text-align: left;
@@ -4823,7 +5132,7 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .notice {
     position: absolute;
-    top: 45px;
+    top: 15px;
     left: 0;
     right: 0;
     text-align: center;
@@ -4867,7 +5176,7 @@ svg.mouseclick use.right {
 }
 .tooltip.in {
     opacity: 0.9;
-    z-index: 1030;
+    z-index: 5000;
     height: auto;
     display: block;
 }
@@ -5057,12 +5366,33 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.sidebar-toggle .tooltip .tooltip-arrow {
-    left: 36px;
+[dir='ltr'] .sidebar-toggle .tooltip {
+    left: 0 !important;
+}
+[dir='rtl'] .sidebar-toggle .tooltip {
+    right: 0 !important;
+}
+[dir='ltr'] .sidebar-toggle .tooltip .tooltip-arrow {
+    left: 20px;
 }
 [dir='rtl'] .sidebar-toggle .tooltip .tooltip-arrow {
+    right: 20px;
+}
+[dir='ltr'] .save .tooltip {
+    left: auto !important;
+    right: 0 !important;
+}
+[dir='rtl'] .save .tooltip {
+    right: auto !important;
+    left: 0 !important;
+}
+[dir='ltr'] .save .tooltip .tooltip-arrow {
     left: auto;
     right: 36px;
+}
+[dir='rtl'] .save .tooltip .tooltip-arrow {
+    right: auto;
+    left: 36px;
 }
 
 li:first-of-type .badge .tooltip,
@@ -5300,8 +5630,8 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     padding: 10px 20px 0 20px;
 }
 
-[dir='rtl'] .curtain-tooltip .tooltip-inner .button-section button.col8 {
-    float: right;
+.curtain-tooltip .tooltip-inner .button-section button {
+    width: 66.6666%;
 }
 
 .curtain-tooltip .tooltip-inner .instruction:only-child {

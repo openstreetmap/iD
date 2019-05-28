@@ -266,30 +266,6 @@
                 },
                 "category-landuse": {
                     "name": "Tilmaamaha Isticmaalka Dhulka"
-                },
-                "category-natural-area": {
-                    "name": "Tilmaamaha Dabiiciga"
-                },
-                "category-natural-line": {
-                    "name": "Tilmaamaha Dabiiciga"
-                },
-                "category-natural-point": {
-                    "name": "Tilmaamaha Dabiiciga"
-                },
-                "category-path": {
-                    "name": "Tilmaamaha Wadada"
-                },
-                "category-rail": {
-                    "name": "Tilmaamaha Jidadka Tariinka"
-                },
-                "category-road": {
-                    "name": "Tilmaamaha Wadooyinka"
-                },
-                "category-water-area": {
-                    "name": "Tilmaamaha Biyaha"
-                },
-                "category-water-line": {
-                    "name": "Tilmaamaha Biyaha"
                 }
             },
             "fields": {
@@ -440,9 +416,6 @@
                         "no": "Maya",
                         "yes": "Haa"
                     }
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Magaca Network)"
                 },
                 "lamp_type": {
                     "label": "Nooca"
@@ -618,11 +591,6 @@
                         "yes": "Haa"
                     }
                 },
-                "toilets/disposal": {
-                    "options": {
-                        "pitlatrine": "Musqulo"
-                    }
-                },
                 "tomb": {
                     "label": "Nooca"
                 },
@@ -744,9 +712,6 @@
                 },
                 "highway": {
                     "name": "Wadada Halboowlaha"
-                },
-                "highway/bus_stop": {
-                    "name": "Boostaajo"
                 },
                 "highway/path": {
                     "name": "Waddo"
@@ -882,9 +847,6 @@
                 },
                 "power/line": {
                     "name": "Khadka Korantada"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Boostaajo"
                 },
                 "route/ferry": {
                     "name": "Wadada Doonta"

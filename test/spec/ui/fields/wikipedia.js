@@ -22,8 +22,10 @@ describe('iD.uiFieldWikipedia', function() {
         }
     }
 
-    function createServer(options) {
-        var server =  sinon.fakeServer.create(options);
+    function createServer(options) {  // eslint-disable-line no-unused-vars
+        // note - currently skipping the tests that use `options` to delay responses
+        // var server =  sinon.fakeServer.create(options);
+        var server = window.fakeFetch().create();
         server.respondWith('GET',
             new RegExp('\/w\/api\.php.*action=wbgetentities'),
             [200, { 'Content-Type': 'application/json' },
@@ -85,8 +87,8 @@ describe('iD.uiFieldWikipedia', function() {
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
         expect(spy.callCount).to.equal(4);
-        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: undefined, wikidata: undefined });  // lang on change
-        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: undefined, wikidata: undefined });  // lang on blur
+        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
+        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
         expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
         expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
     });

@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-pedestrian",
     "fields": [
         "crossing",
         "access",
@@ -9,14 +10,10 @@
         "line"
     ],
     "tags": {
-        "footway": "crossing"
-    },
-    "addTags": {
-        "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked"
     },
-    "removeTags": {
+    "addTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked"
@@ -30,6 +27,5 @@
         "unmarked crosswalk",
         "unmarked pedestrian crossing"
     ],
-    "matchScore": 0.95,
     "name": "Unmarked Crossing"
 }

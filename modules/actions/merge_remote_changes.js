@@ -1,6 +1,6 @@
-import _isEqual from 'lodash-es/isEqual';
-
+import deepEqual from 'fast-deep-equal';
 import { diff3Merge } from 'node-diff3';
+
 import { t } from '../util/locale';
 import { actionDeleteMultiple } from './delete_multiple';
 import { osmEntity } from '../osm';
@@ -37,7 +37,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeNodes(base, remote, target) {
-        if (_option === 'force_local' || _isEqual(target.nodes, remote.nodes)) {
+        if (_option === 'force_local' || deepEqual(target.nodes, remote.nodes)) {
             return target;
         }
         if (_option === 'force_remote') {
@@ -59,9 +59,9 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 // for all conflicts, we can assume c.a !== c.b
                 // because `diff3Merge` called with `true` option to exclude false conflicts..
                 var c = hunk.conflict;
-                if (_isEqual(c.o, c.a)) {  // only changed remotely
+                if (deepEqual(c.o, c.a)) {  // only changed remotely
                     nodes.push.apply(nodes, c.b);
-                } else if (_isEqual(c.o, c.b)) {  // only changed locally
+                } else if (deepEqual(c.o, c.b)) {  // only changed locally
                     nodes.push.apply(nodes, c.a);
                 } else {       // changed both locally and remotely
                     _conflicts.push(t('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
@@ -142,7 +142,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeMembers(remote, target) {
-        if (_option === 'force_local' || _isEqual(target.members, remote.members)) {
+        if (_option === 'force_local' || deepEqual(target.members, remote.members)) {
             return target;
         }
         if (_option === 'force_remote') {
@@ -155,7 +155,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeTags(base, remote, target) {
-        if (_option === 'force_local' || _isEqual(target.tags, remote.tags)) {
+        if (_option === 'force_local' || deepEqual(target.tags, remote.tags)) {
             return target;
         }
         if (_option === 'force_remote') {

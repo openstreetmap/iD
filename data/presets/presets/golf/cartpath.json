@@ -1,14 +1,19 @@
 {
-    "icon": "maki-golf",
+    "icon": "temaki-golf_cart",
     "fields": [
-        "{golf/path}"
+        "{golf/path}",
+        "maxspeed"
     ],
     "geometry": [
         "line"
     ],
     "tags": {
+        "golf": "cartpath"
+    },
+    "addTags": {
         "golf": "cartpath",
-        "golf_cart": "designated"
+        "golf_cart": "designated",
+        "highway": "service"
     },
     "reference": {
         "key": "golf",

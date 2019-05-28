@@ -1,15 +1,46 @@
-import { t, textDirection } from './locale';
-import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
+
+import { t, textDirection } from './locale';
+import { utilArrayUnion } from './array';
+import { utilDetect } from './detect';
 
 
 export function utilTagText(entity) {
     var obj = (entity && entity.tags) || {};
-    return Object.keys(obj).map(function(k) {
-        var v = obj[k];
-        return k + '=' + v;
-    }).join(', ');
+    return Object.keys(obj)
+        .map(function(k) { return k + '=' + obj[k]; })
+        .join(', ');
+}
+
+
+export function utilTagDiff(oldTags, newTags) {
+    var tagDiff = [];
+    var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
+    keys.forEach(function(k) {
+        var oldVal = oldTags[k];
+        var newVal = newTags[k];
+
+        if (oldVal && (!newVal || newVal !== oldVal)) {
+            tagDiff.push({
+                type: '-',
+                key: k,
+                oldVal: oldVal,
+                newVal: newVal,
+                display: '- ' + k + '=' + oldVal
+            });
+        }
+        if (newVal && (!oldVal || newVal !== oldVal)) {
+            tagDiff.push({
+                type: '+',
+                key: k,
+                oldVal: oldVal,
+                newVal: newVal,
+                display: '+ ' + k + '=' + newVal
+            });
+        }
+    });
+    return tagDiff;
 }
 
 
@@ -18,47 +49,44 @@ export function utilEntitySelector(ids) {
 }
 
 
+// returns an selector to select entity ids for:
+//  - entityIDs passed in
+//  - shallow descendant entityIDs for any of those entities that are relations
 export function utilEntityOrMemberSelector(ids, graph) {
-    var s = utilEntitySelector(ids);
+    var seen = new Set(ids);
+    ids.forEach(collectShallowDescendants);
+    return utilEntitySelector(Array.from(seen));
 
-    ids.forEach(function(id) {
+    function collectShallowDescendants(id) {
         var entity = graph.hasEntity(id);
-        if (entity && entity.type === 'relation') {
-            entity.members.forEach(function(member) {
-                s += ',.' + member.id;
-            });
-        }
-    });
+        if (!entity || entity.type !== 'relation') return;
 
-    return s;
+        entity.members
+            .map(function(member) { return member.id; })
+            .forEach(function(id) { seen.add(id); });
+    }
 }
 
 
+// returns an selector to select entity ids for:
+//  - entityIDs passed in
+//  - deep descendant entityIDs for any of those entities that are relations
 export function utilEntityOrDeepMemberSelector(ids, graph) {
-    var seen = {};
-    var allIDs = [];
+    var seen = new Set();
+    ids.forEach(collectDeepDescendants);
+    return utilEntitySelector(Array.from(seen));
 
-    function addEntityAndMembersIfNotYetSeen(id) {
-        // avoid infinite recursion for circular relations by skipping seen entities
-        if (seen[id]) return;
-        // mark the entity as seen
-        seen[id] = true;
-        // add the id;
-        allIDs.push(id);
-        if (graph.hasEntity(id)) {
-            var entity = graph.entity(id);
-            if (entity.type === 'relation' && entity.members) {
-                entity.members.forEach(function(member){
-                    addEntityAndMembersIfNotYetSeen(member.id);
-                });
-            }
-        }
+    function collectDeepDescendants(id) {
+        if (seen.has(id)) return;
+        seen.add(id);
+
+        var entity = graph.hasEntity(id);
+        if (!entity || entity.type !== 'relation') return;
+
+        entity.members
+            .map(function(member) { return member.id; })
+            .forEach(collectDeepDescendants);   // recurse
     }
-
-    ids.forEach(function(id) {
-        addEntityAndMembersIfNotYetSeen(id);
-    });
-    return utilEntitySelector(allIDs);
 }
 
 
@@ -70,25 +98,32 @@ export function utilHighlightEntities(ids, highlighted, context) {
 }
 
 
+// returns an Array that is the union of:
+//  - nodes for any nodeIDs passed in
+//  - child nodes of any wayIDs passed in
+//  - descendant member and child nodes of relationIDs passed in
 export function utilGetAllNodes(ids, graph) {
-    var seen = {};
-    var nodes = [];
-    ids.forEach(getNodes);
-    return nodes;
+    var seen = new Set();
+    var nodes = new Set();
 
-    function getNodes(id) {
-        if (seen[id]) return;
-        seen[id] = true;
+    ids.forEach(collectNodes);
+    return Array.from(nodes);
+
+    function collectNodes(id) {
+        if (seen.has(id)) return;
+        seen.add(id);
 
         var entity = graph.hasEntity(id);
         if (!entity) return;
 
         if (entity.type === 'node') {
-            nodes.push(entity);
+            nodes.add(entity);
         } else if (entity.type === 'way') {
-            entity.nodes.forEach(getNodes);
+            entity.nodes.forEach(collectNodes);
         } else {
-            entity.members.map(function(member) { return member.id; }).forEach(getNodes);
+            entity.members
+                .map(function(member) { return member.id; })
+                .forEach(collectNodes);   // recurse
         }
     }
 }

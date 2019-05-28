@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
-import { behaviorDraw } from '../behavior';
-import { modeBrowse, modeSelectNote } from './index';
+import { behaviorDraw } from '../behavior/draw';
+import { modeBrowse } from './browse';
+import { modeSelectNote } from './select_note';
 import { osmNote } from '../osm';
 import { services } from '../services';
 

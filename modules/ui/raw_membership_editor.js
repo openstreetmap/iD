@@ -1,25 +1,23 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 
-import {
-    actionAddEntity,
-    actionAddMember,
-    actionChangeMember,
-    actionDeleteMember
-} from '../actions';
+import { actionAddEntity } from '../actions/add_entity';
+import { actionAddMember } from '../actions/add_member';
+import { actionChangeMember } from '../actions/change_member';
+import { actionDeleteMember } from '../actions/delete_member';
 
-import { modeSelect } from '../modes';
+import { modeSelect } from '../modes/select';
 import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
-import { svgIcon } from '../svg';
-import { uiCombobox, uiDisclosure } from './index';
-import { utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
+import { svgIcon } from '../svg/icon';
+import { uiCombobox } from './combobox';
+import { uiDisclosure } from './disclosure';
+import { tooltip } from '../util/tooltip';
+import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -89,6 +87,9 @@ export function uiRawMembershipEditor(context) {
         this.blur();           // avoid keeping focus on the button
         if (d === 0) return;   // called on newrow (shoudn't happen)
 
+        // remove the hover-highlight styling
+        utilHighlightEntities([d.relation.id], false, context);
+
         context.perform(
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
@@ -119,7 +120,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = _groupBy(result, 'value')
+        var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
             .filter(function(v) { return v.length > 1; });
 
         dupeGroups.forEach(function(group) {
@@ -186,20 +187,17 @@ export function uiRawMembershipEditor(context) {
                 .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
 
-            itemsEnter.each(function(d){
-                // highlight the relation in the map while hovering on the list item
-                d3_select(this)
-                    .on('mouseover', function() {
-                        utilHighlightEntities([d.relation.id], true, context);
-                    })
-                    .on('mouseout', function() {
-                        utilHighlightEntities([d.relation.id], false, context);
-                    });
-            });
+            // highlight the relation in the map while hovering on the list item
+            itemsEnter.on('mouseover', function(d) {
+                    utilHighlightEntities([d.relation.id], true, context);
+                })
+                .on('mouseout', function(d) {
+                    utilHighlightEntities([d.relation.id], false, context);
+                });
 
             var labelEnter = itemsEnter
                 .append('label')
-                .attr('class', 'form-field-label')
+                .attr('class', 'field-label')
                 .append('span')
                 .attr('class', 'label-text')
                 .append('a')
@@ -260,7 +258,7 @@ export function uiRawMembershipEditor(context) {
 
             newMembershipEnter
                 .append('label')
-                .attr('class', 'form-field-label')
+                .attr('class', 'field-label')
                 .append('input')
                 .attr('placeholder', t('inspector.choose_relation'))
                 .attr('type', 'text')
@@ -310,10 +308,14 @@ export function uiRawMembershipEditor(context) {
                 .append('div')
                 .attr('class', 'add-row');
 
-            addRowEnter
+            var addRelationButton = addRowEnter
                 .append('button')
-                .attr('class', 'add-relation')
+                .attr('class', 'add-relation');
+
+            addRelationButton
                 .call(svgIcon('#iD-icon-plus', 'light'));
+            addRelationButton
+                .call(tooltip().title(t('inspector.add_to_relation')).placement(textDirection === 'ltr' ? 'right' : 'left'));
 
             addRowEnter
                 .append('div')

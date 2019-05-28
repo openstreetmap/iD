@@ -1,13 +1,11 @@
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 
-import {
-    uiDataHeader,
-    uiQuickLinks,
-    uiRawTagEditor,
-    uiTooltipHtml
-} from './index';
+import { uiDataHeader } from './data_header';
+import { uiQuickLinks } from './quick_links';
+import { uiRawTagEditor } from './raw_tag_editor';
+import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiDataEditor(context) {
@@ -62,6 +60,7 @@ export function uiDataEditor(context) {
         var editor = body.selectAll('.data-editor')
             .data([0]);
 
+        // enter/update
         editor.enter()
             .append('div')
             .attr('class', 'modal-section data-editor')
@@ -72,6 +71,7 @@ export function uiDataEditor(context) {
         var rte = body.selectAll('.raw-tag-editor')
             .data([0]);
 
+        // enter/update
         rte.enter()
             .append('div')
             .attr('class', 'raw-tag-editor inspector-inner data-editor')
@@ -81,7 +81,10 @@ export function uiDataEditor(context) {
                 .readOnlyTags([/./])
                 .tags((_datum && _datum.properties) || {})
                 .state('hover')
-            );
+            )
+            .selectAll('textarea.tag-text')
+            .property('disabled', true)
+            .classed('readonly', true);
     }
 
 

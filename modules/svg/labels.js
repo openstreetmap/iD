@@ -1,29 +1,17 @@
-import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
-
 import rbush from 'rbush';
 import { textDirection } from '../util/locale';
 
 import {
-    geoExtent,
-    geoPolygonIntersectsPolygon,
-    geoPathLength,
-    geoScaleToZoom,
-    geoVecInterp,
-    geoVecLength
+    geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
+    geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
 
 import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
-
-import {
-    utilDisplayName,
-    utilDisplayNameForPath,
-    utilEntitySelector,
-    utilCallWhenIdle
-} from '../util';
+import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
 
 
@@ -449,7 +437,8 @@ export function svgLabels(projection, context) {
 
         function getLineLabel(entity, width, height) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
-            var points = _map(graph.childNodes(entity), 'loc').map(projection);
+            var points = graph.childNodes(entity)
+                .map(function(node) { return projection(node.loc); });
             var length = geoPathLength(points);
 
             if (length < width + 20) return;
@@ -722,7 +711,8 @@ export function svgLabels(projection, context) {
         if (mouse) {
             pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
+            var nearMouse = _rdrawn.search(bbox).map(function(entity) { return entity.id; });
+            ids.push.apply(ids, nearMouse);
         }
 
         // hide labels on selected nodes (they look weird when dragging / haloed)
@@ -769,7 +759,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _throttle(utilCallWhenIdle(filterLabels), 100);
+    var throttleFilterLabels = _throttle(filterLabels, 100);
 
 
     drawLabels.observe = function(selection) {

@@ -6,20 +6,18 @@ import {
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
 
 // import { uiField } from './field';
 // import { uiFormFields } from './form_fields';
 
-import {
-    uiNoteComments,
-    uiNoteHeader,
-    uiNoteReport,
-    uiQuickLinks,
-    uiTooltipHtml,
-    uiViewOnOSM,
-} from './index';
+import { uiNoteComments } from './note_comments';
+import { uiNoteHeader } from './note_header';
+import { uiNoteReport } from './note_report';
+import { uiQuickLinks } from './quick_links';
+import { uiTooltipHtml } from './tooltipHtml';
+import { uiViewOnOSM } from './view_on_osm';
 
 import {
     utilNoAuto,

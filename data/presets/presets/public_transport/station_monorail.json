@@ -19,11 +19,6 @@
         "monorail": "yes",
         "railway": "station"
     },
-    "removeTags": {
-        "public_transport": "station",
-        "monorail": "yes",
-        "railway": "station"
-    },
     "reference": {
         "key": "railway",
         "value": "station"

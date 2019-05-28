@@ -1,19 +1,10 @@
 {
-    "icon": "iD-route-subway",
+    "icon": "temaki-subway",
     "fields": [
-        "name",
-        "ref_route",
-        "operator",
-        "network",
-        "to",
-        "from"
+        "{type/route/train}"
     ],
     "moreFields" : [
-        "colour",
-        "interval",
-        "opening_hours",
-        "duration",
-        "wheelchair"
+        "{type/route/train}"
     ],
     "geometry": [
         "relation"

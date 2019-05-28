@@ -1,0 +1,14 @@
+{
+    "icon": "maki-barrier",
+    "fields": [
+        "access"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "barrier": "chain"
+    },
+    "name": "Chain"
+}

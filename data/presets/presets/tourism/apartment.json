@@ -6,17 +6,20 @@
         "address",
         "building_area",
         "rooms",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
-        "smoking",
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "website",
-        "phone",
+        "building/levels_building",
+        "height_building",
         "email",
         "fax",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

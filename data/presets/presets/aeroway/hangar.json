@@ -1,4 +1,5 @@
 {
+    "icon": "fas-warehouse",
     "geometry": [
         "area"
     ],
@@ -7,6 +8,10 @@
         "building_area"
     ],
     "tags": {
+        "aeroway": "hangar"
+    },
+    "addTags": {
+        "building": "hangar",
         "aeroway": "hangar"
     },
     "name": "Hangar"

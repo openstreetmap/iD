@@ -2,8 +2,8 @@ import { filters } from 'name-suggestion-index';
 
 import { t } from '../util/locale';
 import { utilPreset } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
-import { actionChangeTags } from '../actions';
+import { validationIssue, validationIssueFix } from '../core/validation';
+import { actionChangeTags } from '../actions/change_tags';
 
 
 export function validationGenericName() {
@@ -49,33 +49,49 @@ export function validationGenericName() {
     }
 
 
-    var validation = function(entity, context) {
+    var validation = function checkGenericName(entity, context) {
         var generic = isGenericName(entity);
         if (!generic) return [];
 
-        var preset = utilPreset(entity, context);
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: t('issues.generic_name.message', {feature: preset.name(), name: generic}),
-            tooltip: t('issues.generic_name.tip'),
-            entities: [entity],
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                if (!entity) return '';
+                var preset = utilPreset(entity, context);
+                return t('issues.generic_name.message', { feature: preset.name(), name: generic });
+            },
+            reference: showReference,
+            entityIds: [entity.id],
+            hash: generic,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.remove_generic_name.title'),
                     onClick: function() {
-                        var entity = this.issue.entities[0];
+                        var entityId = this.issue.entityIds[0];
+                        var entity = context.entity(entityId);
                         var tags = Object.assign({}, entity.tags);   // shallow copy
                         delete tags.name;
                         context.perform(
-                            actionChangeTags(entity.id, tags),
+                            actionChangeTags(entityId, tags),
                             t('issues.fix.remove_generic_name.annotation')
                         );
                     }
                 })
             ]
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.generic_name.reference'));
+        }
     };
 
     validation.type = type;

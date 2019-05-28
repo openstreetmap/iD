@@ -1,5 +1,7 @@
 {
+    "icon": "temaki-kerb-rolled",
     "fields": [
+        "kerb",
         "{barrier/kerb}",
         "kerb/height"
     ],
@@ -8,6 +10,9 @@
         "line"
     ],
     "tags": {
+        "kerb": "rolled"
+    },
+    "addTags": {
         "barrier": "kerb",
         "kerb": "rolled"
     },

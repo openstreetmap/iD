@@ -96,7 +96,7 @@ export function uiTopToolbar(context) {
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
         context.history()
-            .on('annotatedChange.topToolbar', debouncedUpdate);
+            .on('change.topToolbar', debouncedUpdate);
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
         context.map()

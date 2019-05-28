@@ -1,12 +1,10 @@
-import _invert from 'lodash-es/invert';
-import _mapValues from 'lodash-es/mapValues';
-
 import { event as d3_event } from 'd3-selection';
 
-import { actionCopyEntities, actionMove } from '../actions';
+import { actionCopyEntities } from '../actions/copy_entities';
+import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
-import { modeMove } from '../modes';
-import { uiCmd } from '../ui';
+import { modeMove } from '../modes/move';
+import { uiCmd } from '../ui/cmd';
 
 
 export function behaviorPaste(context) {
@@ -32,7 +30,9 @@ export function behaviorPaste(context) {
         context.perform(action);
 
         var copies = action.copies();
-        var originals = _invert(_mapValues(copies, 'id'));
+        var originals = new Set();
+        Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
+
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id);
             var newEntity = copies[id];
@@ -41,13 +41,9 @@ export function behaviorPaste(context) {
 
             // Exclude child nodes from newIDs if their parent way was also copied.
             var parents = context.graph().parentWays(newEntity);
-            var parentCopied = false;
-            for (var i = 0; i < parents.length; i++) {
-                if (originals[parents[i].id]) {
-                    parentCopied = true;
-                    break;
-                }
-            }
+            var parentCopied = parents.some(function(parent) {
+                return originals.has(parent.id);
+            });
 
             if (!parentCopied) {
                 newIDs.push(newEntity.id);

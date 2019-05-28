@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
@@ -18,9 +16,8 @@ osmEntity.node = osmNode;
 osmNode.prototype = Object.create(osmEntity.prototype);
 
 Object.assign(osmNode.prototype, {
-
     type: 'node',
-
+    loc: [9999, 9999],
 
     extent: function() {
         return new geoExtent(this.loc);
@@ -221,9 +218,9 @@ Object.assign(osmNode.prototype, {
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),
-                tag: _map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                tag: Object.keys(this.tags).map(function(k) {
+                    return { keyAttributes: { k: k, v: this.tags[k] } };
+                }, this)
             }
         };
         if (changeset_id) r.node['@changeset'] = changeset_id;

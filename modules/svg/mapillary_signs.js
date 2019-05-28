@@ -1,6 +1,6 @@
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
-import { svgPointTransform } from './index';
+import { svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
@@ -142,7 +142,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadSigns(context, projection);
+                service.loadSigns(projection);
             } else {
                 editOff();
             }

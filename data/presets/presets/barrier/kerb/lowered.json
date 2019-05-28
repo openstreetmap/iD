@@ -1,6 +1,7 @@
 {
-    "icon": "maki-wheelchair",
+    "icon": "temaki-kerb-lowered",
     "fields": [
+        "kerb",
         "{barrier/kerb}",
         "kerb/height"
     ],
@@ -9,6 +10,9 @@
         "line"
     ],
     "tags": {
+        "kerb": "lowered"
+    },
+    "addTags": {
         "barrier": "kerb",
         "kerb": "lowered"
     },

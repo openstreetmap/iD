@@ -7,6 +7,9 @@
         "horse_dressage"
     ],
     "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "address",
         "opening_hours",
         "website",

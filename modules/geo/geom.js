@@ -1,11 +1,13 @@
 import {
-    geoVecAngle,
-    geoVecCross,
-    geoVecDot,
-    geoVecEqual,
-    geoVecInterp,
-    geoVecLength,
-    geoVecSubtract
+    polygonHull as d3_polygonHull,
+    polygonCentroid as d3_polygonCentroid
+} from 'd3-polygon';
+
+import { geoExtent } from './extent.js';
+
+import {
+    geoVecAngle, geoVecCross, geoVecDot, geoVecEqual,
+    geoVecInterp, geoVecLength, geoVecSubtract
 } from './vector.js';
 
 
@@ -15,10 +17,12 @@ export function geoAngle(a, b, projection) {
     return geoVecAngle(projection(a.loc), projection(b.loc));
 }
 
+
 export function geoEdgeEqual(a, b) {
     return (a[0] === b[0] && a[1] === b[1]) ||
         (a[0] === b[1] && a[1] === b[0]);
 }
+
 
 // Rotate all points counterclockwise around a pivot point by given angle
 export function geoRotate(points, angle, around) {
@@ -269,6 +273,40 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
     }
 
    return testPoints(outer, inner) || (!!checkSegments && geoPathHasIntersections(outer, inner));
+}
+
+
+// http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
+// http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
+export function geoGetSmallestSurroundingRectangle(points) {
+    var hull = d3_polygonHull(points);
+    var centroid = d3_polygonCentroid(hull);
+    var minArea = Infinity;
+    var ssrExtent = [];
+    var ssrAngle = 0;
+    var c1 = hull[0];
+
+    for (var i = 0; i <= hull.length - 1; i++) {
+        var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1];
+        var angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]);
+        var poly = geoRotate(hull, -angle, centroid);
+        var extent = poly.reduce(function(extent, point) {
+            return extent.extend(geoExtent(point));
+        }, geoExtent());
+
+        var area = extent.area();
+        if (area < minArea) {
+            minArea = area;
+            ssrExtent = extent;
+            ssrAngle = angle;
+        }
+        c1 = c2;
+    }
+
+    return {
+        poly: geoRotate(ssrExtent.polygon(), ssrAngle, centroid),
+        angle: ssrAngle
+    };
 }
 
 

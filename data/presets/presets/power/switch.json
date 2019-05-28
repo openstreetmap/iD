@@ -10,8 +10,7 @@
     ],
     "geometry": [
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "power": "switch"

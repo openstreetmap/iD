@@ -1,5 +1,5 @@
 {
-    "icon": "iD-route-foot",
+    "icon": "fas-hiking",
     "fields": [
         "name",
         "ref_route",

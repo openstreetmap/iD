@@ -1,0 +1,61 @@
+{
+    "pap": {
+        "icons": {
+            "copy": "kopia",
+            "open_wikidata": "habri den wikidata.org",
+            "favorite": "favorí"
+        },
+        "toolbar": {
+            "inspect": "inspektá",
+            "recent": "Fresku",
+            "add_feature": "Agregá feature"
+        },
+        "modes": {
+            "add_feature": {
+                "title": "Agregá na feature"
+            },
+            "add_area": {
+                "title": "Área"
+            },
+            "add_point": {
+                "title": "Punto",
+                "filter_tooltip": "puntia"
+            }
+        },
+        "geometry": {
+            "point": "punto"
+        },
+        "feature": {
+            "points": {
+                "description": "Puntia",
+                "tooltip": "Puntia di interes"
+            }
+        },
+        "help": {
+            "points": {
+                "add_point_h": "Añadí puntia",
+                "move_point_h": "Muf puntia"
+            }
+        },
+        "presets": {
+            "fields": {
+                "address": {
+                    "label": "Adrès"
+                },
+                "website": {
+                    "label": "Wèpsait"
+                }
+            },
+            "presets": {
+                "address": {
+                    "name": "Adrès"
+                }
+            }
+        },
+        "imagery": {
+            "OSM_Inspector-Addresses": {
+                "name": "OSM Inspector: Adrei"
+            }
+        }
+    }
+}

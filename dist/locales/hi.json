@@ -40,8 +40,7 @@
                 "title": "चौकोर"
             },
             "straighten": {
-                "title": "सीधा करें ।",
-                "description": "इस रेखा को सीधा करें ।"
+                "title": "सीधा करें ।"
             },
             "delete": {
                 "title": "मिटायें"
@@ -134,35 +133,11 @@
                 "category-landuse": {
                     "name": "भूमि उपयोग विशॆषता"
                 },
-                "category-natural-area": {
-                    "name": "प्राकृितक विशॆषता"
-                },
-                "category-natural-line": {
-                    "name": "प्राकृितक विशॆषता"
-                },
-                "category-natural-point": {
-                    "name": "प्राकृितक विशॆषता"
-                },
-                "category-path": {
-                    "name": "रास्ता विशॆषता"
-                },
-                "category-rail": {
-                    "name": "रेल विशॆषता"
-                },
                 "category-restriction": {
                     "name": "प्रतिबंध विशॆषता"
                 },
-                "category-road": {
-                    "name": "सड़क विशॆषता"
-                },
                 "category-route": {
                     "name": "रास्ता विशॆषता"
-                },
-                "category-water-area": {
-                    "name": "पानी विशॆषता"
-                },
-                "category-water-line": {
-                    "name": "पानी विशॆषता"
                 }
             },
             "fields": {

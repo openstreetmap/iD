@@ -11,11 +11,13 @@
         "smoothness"
     ],
     "moreFields": [
+        "covered",
+        "flood_prone",
+        "horse_scale",
+        "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
-        "mtb/scale/imba",
-        "horse_scale",
-        "covered"
+        "mtb/scale/imba"
     ],
     "geometry": [
         "line"

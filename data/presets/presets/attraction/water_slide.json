@@ -1,5 +1,5 @@
 {
-    "icon": "maki-swimming",
+    "icon": "fas-swimmer",
     "fields": [
         "{attraction}",
         "height"

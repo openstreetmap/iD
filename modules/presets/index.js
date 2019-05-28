@@ -1,10 +1,8 @@
-import _bind from 'lodash-es/bind';
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { data } from '../../data/index';
+import { osmNodeGeometriesForTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -89,24 +87,14 @@ export function presetIndex(context) {
         if (Object.keys(entity.tags).length === 0) return true;
 
         return resolver.transient(entity, 'vertexMatch', function() {
-            var vertexPresets = _index.vertex;
-            if (entity.isOnAddressLine(resolver)) {
-                return true;
-            } else {
-                var didFindMatches = false;
-                for (var k in entity.tags) {
-                    var keyMatches = vertexPresets[k];
-                    if (!keyMatches) continue;
-                    didFindMatches = true;
-                    for (var i = 0; i < keyMatches.length; i++) {
-                        var preset = keyMatches[i];
-                        if (preset.searchable !== false && preset.matchScore(entity.tags) > -1) {
-                            return preset;
-                        }
-                    }
-                }
-                return !didFindMatches;
-            }
+            // address lines allow vertices to act as standalone points
+            if (entity.isOnAddressLine(resolver)) return true;
+
+            var geometries = osmNodeGeometriesForTags(entity.tags);
+            if (geometries.vertex) return true;
+            if (geometries.point) return false;
+            // allow vertices for unspecified points
+            return true;
         });
     };
 
@@ -159,11 +147,48 @@ export function presetIndex(context) {
         return areaKeys;
     };
 
+    all.pointTags = function() {
+        return all.collection.reduce(function(pointTags, d) {
+            // ignore name-suggestion-index, deprecated, and generic presets
+            if (d.suggestion || d.replacement || d.searchable === false) return pointTags;
+
+            // only care about the primary tag
+            for (var key in d.tags) break;
+            if (!key) return pointTags;
+
+            // if this can be a point
+            if (d.geometry.indexOf('point') !== -1) {
+                pointTags[key] = pointTags[key] || {};
+                pointTags[key][d.tags[key]] = true;
+            }
+            return pointTags;
+        }, {});
+    };
+
+    all.vertexTags = function() {
+        return all.collection.reduce(function(vertexTags, d) {
+            // ignore name-suggestion-index, deprecated, and generic presets
+            if (d.suggestion || d.replacement || d.searchable === false) return vertexTags;
+
+            // only care about the primary tag
+            for (var key in d.tags) break;
+            if (!key) return vertexTags;
+
+            // if this can be a vertex
+            if (d.geometry.indexOf('vertex') !== -1) {
+                vertexTags[key] = vertexTags[key] || {};
+                vertexTags[key][d.tags[key]] = true;
+            }
+            return vertexTags;
+        }, {});
+    };
+
     all.build = function(d, visible) {
         if (d.fields) {
-            _forEach(d.fields, function(d, id) {
-                _fields[id] = presetField(id, d);
-                if (d.universal) {
+            Object.keys(d.fields).forEach(function(id) {
+                var f = d.fields[id];
+                _fields[id] = presetField(id, f);
+                if (f.universal) {
                     _universal.push(_fields[id]);
                 }
             });
@@ -171,29 +196,31 @@ export function presetIndex(context) {
 
         if (d.presets) {
             var rawPresets = d.presets;
-            _forEach(d.presets, function(d, id) {
+            Object.keys(d.presets).forEach(function(id) {
+                var p = d.presets[id];
                 var existing = all.index(id);
                 if (existing !== -1) {
-                    all.collection[existing] = presetPreset(id, d, _fields, visible, rawPresets);
+                    all.collection[existing] = presetPreset(id, p, _fields, visible, rawPresets);
                 } else {
-                    all.collection.push(presetPreset(id, d, _fields, visible, rawPresets));
+                    all.collection.push(presetPreset(id, p, _fields, visible, rawPresets));
                 }
             });
         }
 
         if (d.categories) {
-            _forEach(d.categories, function(d, id) {
+            Object.keys(d.categories).forEach(function(id) {
+                var c = d.categories[id];
                 var existing = all.index(id);
                 if (existing !== -1) {
-                    all.collection[existing] = presetCategory(id, d, all);
+                    all.collection[existing] = presetCategory(id, c, all);
                 } else {
-                    all.collection.push(presetCategory(id, d, all));
+                    all.collection.push(presetCategory(id, c, all));
                 }
             });
         }
 
         if (d.defaults) {
-            var getItem = _bind(all.item, all);
+            var getItem = (all.item).bind(all);
             _defaults = {
                 area: presetCollection(d.defaults.area.map(getItem)),
                 line: presetCollection(d.defaults.line.map(getItem)),
@@ -251,15 +278,17 @@ export function presetIndex(context) {
 
     all.fromExternal = function(external, done) {
         all.reset();
-        d3_json(external, function(err, externalPresets) {
-            if (err) {
+        d3_json(external)
+            .then(function(externalPresets) {
+                all.build(data.presets, false);    // make default presets hidden to begin
+                all.build(externalPresets, true);  // make the external visible
+            })
+            .catch(function() {
                 all.init();
-            } else {
-                all.build(data.presets, false); // make default presets hidden to begin
-                all.build(externalPresets, true); // make the external visible
-            }
-            done(all);
-        });
+            })
+            .finally(function() {
+                done(all);
+            });
     };
 
     all.field = function(id) {
@@ -271,7 +300,10 @@ export function presetIndex(context) {
     };
 
     all.defaults = function(geometry, n) {
-        var rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
+        var rec = [];
+        if (!context.inIntro()) {
+            rec = all.recent().matchGeometry(geometry).collection.slice(0, 4);
+        }
         var def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
         return presetCollection(utilArrayUniq(rec.concat(def).concat(all.fallback(geometry))));
     };
@@ -451,8 +483,10 @@ export function presetIndex(context) {
     };
 
     all.setMostRecent = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
+        if (context.inIntro()) return;
         if (preset.searchable === false) return;
+
+        geometry = all.fallback(geometry).id;
 
         var items = all.getRecents();
         var item = all.recentMatching(preset, geometry);

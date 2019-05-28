@@ -56,8 +56,8 @@ describe('iD.validations.disconnected_way', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
         expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
     it('flags highway connected only to service area', function() {
@@ -67,34 +67,8 @@ describe('iD.validations.disconnected_way', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
         expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
-    });
-
-    it('flags disconnected highway with disconnected entrance vertex', function() {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: {'entrance': 'yes'}});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: {'highway': 'unclassified'}});
-
-        context.perform(
-            iD.actionAddEntity(n1),
-            iD.actionAddEntity(n2),
-            iD.actionAddEntity(w)
-        );
-
-        var issues = validate();
-        expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entities).to.have.lengthOf(1);
-        expect(issue.entities[0].id).to.eql('w-1');
-    });
-
-    it('ignores highways that are connected', function() {
-        createConnectingWays({'highway': 'unclassified'}, {'highway': 'unclassified'});
-        var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
     it('ignores highway with connected entrance vertex', function() {

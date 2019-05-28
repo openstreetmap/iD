@@ -2,9 +2,11 @@
     "icon": "fas-fish",
     "fields": [
         "name",
-        "access_simple"
+        "access_simple",
+        "fishing"
     ],
     "geometry": [
+        "vertex",
         "point",
         "area"
     ],

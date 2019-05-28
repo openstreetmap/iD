@@ -1,6 +1,7 @@
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
-import { svgPointTransform, svgTagClasses } from './index';
+import { svgPointTransform } from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 
 export function svgPoints(projection, context) {
@@ -126,11 +127,9 @@ export function svgPoints(projection, context) {
             .attr('transform', svgPointTransform(projection))
             .call(svgTagClasses());
 
-        // Selecting the following implicitly
-        // sets the data (point entity) on the element
-        groups.select('.shadow');
-        groups.select('.stroke');
-        groups.select('.icon')
+        groups.select('.shadow');   // propagate bound data
+        groups.select('.stroke');   // propagate bound data
+        groups.select('.icon')      // propagate bound data
             .attr('xlink:href', function(entity) {
                 var preset = context.presets().match(entity, graph);
                 var picon = preset && preset.icon;

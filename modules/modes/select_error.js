@@ -3,17 +3,18 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import {
-    behaviorBreathe,
-    behaviorHover,
-    behaviorLasso,
-    behaviorSelect
-} from '../behavior';
+import { behaviorBreathe } from '../behavior/breathe';
+import { behaviorHover } from '../behavior/hover';
+import { behaviorLasso } from '../behavior/lasso';
+import { behaviorSelect } from '../behavior/select';
 
 import { t } from '../util/locale';
 import { services } from '../services';
-import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
-import { uiImproveOsmEditor, uiKeepRightEditor } from '../ui';
+import { modeBrowse } from './browse';
+import { modeDragNode } from './drag_node';
+import { modeDragNote } from './drag_note';
+import { uiImproveOsmEditor } from '../ui/improveOSM_editor';
+import { uiKeepRightEditor } from '../ui/keepRight_editor';
 import { utilKeybinding } from '../util';
 
 

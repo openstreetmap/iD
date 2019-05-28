@@ -1,8 +1,8 @@
-import { operationDelete } from '../operations/index';
+import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingTag() {
@@ -26,7 +26,16 @@ export function validationMissingTag() {
     }
 
 
-    var validation = function(entity, context) {
+    function isUnknownRoad(entity) {
+        return entity.type === 'way' && entity.tags.highway === 'road';
+    }
+
+    function isUntypedRelation(entity) {
+        return entity.type === 'relation' && !entity.tags.type;
+    }
+
+
+    var validation = function checkMissingTag(entity, context) {
         var graph = context.graph();
 
         // ignore vertex features and relation members
@@ -34,51 +43,47 @@ export function validationMissingTag() {
             return [];
         }
 
-        var mode = context.mode();
-        if (entity.type === 'way' && mode &&
-            (mode.id === 'draw-area' || (mode.id === 'draw-line' && !mode.isContinuing)) &&
-            mode.wayID === entity.id) {
-            // don't flag missing tag issues if drawing a new way
-            return [];
-        }
-
-        var messageObj = {};
-        var missingTagType;
+        var subtype;
 
         if (Object.keys(entity.tags).length === 0) {
-            missingTagType = 'any';
+            subtype = 'any';
         } else if (!hasDescriptiveTags(entity)) {
-            missingTagType = 'descriptive';
-        } else if (entity.type === 'relation' && !entity.tags.type) {
-            missingTagType = 'specific';
-            messageObj.tag = 'type';
+            subtype = 'descriptive';
+        } else if (isUntypedRelation(entity)) {
+            subtype = 'relation_type';
+        } else if (isUnknownRoad(entity)) {
+            subtype = 'highway_classification';
         }
 
-        if (!missingTagType) {
-            return [];
-        }
+        if (!subtype) return [];
 
-        messageObj.feature = utilDisplayLabel(entity, context);
+        var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
 
         var fixes = [
             new validationIssueFix({
                 icon: 'iD-icon-search',
-                title: t('issues.fix.select_preset.title'),
+                title: t('issues.fix.' + selectFixType + '.title'),
                 onClick: function() {
                     context.ui().sidebar.showPresetList();
                 }
             })
         ];
 
-        var canDelete = false;
-        if (!operationDelete([entity.id], context).disabled()) {
-            canDelete = true;
+        // can always delete if the user created it in the first place..
+        var canDelete = (entity.version === undefined || entity.v !== undefined);
+
+        // otherwise check with operationDelete whether we can delete this entity
+        if (!canDelete) {
+            canDelete = !operationDelete([entity.id], context).disabled();
+        }
+
+        if (canDelete) {
             fixes.push(
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.delete_feature.title'),
                     onClick: function() {
-                        var id = this.issue.entities[0].id;
+                        var id = this.issue.entityIds[0];
                         var operation = operationDelete([id], context);
                         if (!operation.disabled()) {
                             operation();
@@ -88,16 +93,37 @@ export function validationMissingTag() {
             );
         }
 
+        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
+        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
+
+        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
+
         return [new validationIssue({
             type: type,
-            // error if created or modified and is deletable, else warning
-            severity: (!entity.version || entity.v) && canDelete  ? 'error' : 'warning',
-            message: t('issues.missing_tag.' + missingTagType + '.message', messageObj),
-            tooltip: t('issues.missing_tag.tip'),
-            entities: [entity],
+            subtype: subtype,
+            severity: severity,
+            message: function() {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t('issues.' + messageID + '.message', {
+                    feature: utilDisplayLabel(entity, context)
+                }) : '';
+            },
+            reference: showReference,
+            entityIds: [entity.id],
             fixes: fixes
         })];
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.' + referenceID + '.reference'));
+        }
     };
+
 
     validation.type = type;
 

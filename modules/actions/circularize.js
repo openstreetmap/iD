@@ -7,7 +7,7 @@ import {
 } from 'd3-polygon';
 
 import { geoVecInterp, geoVecLength } from '../geo';
-import { osmNode } from '../osm';
+import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
 
 
@@ -225,8 +225,9 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
 
     action.disabled = function(graph) {
-        if (!graph.entity(wayId).isClosed())
+        if (!graph.entity(wayId).isClosed()) {
             return 'not_closed';
+        }
     };
 
 

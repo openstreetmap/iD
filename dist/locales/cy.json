@@ -33,9 +33,7 @@
                 }
             },
             "straighten": {
-                "title": "Sythu",
-                "description": "Sythu'r llinell yma",
-                "annotation": "Wedi sythu llinell."
+                "title": "Sythu"
             },
             "delete": {
                 "title": "Dileu",
@@ -97,35 +95,11 @@
                 "category-landuse": {
                     "name": "Nodweddion Defnydd Tir"
                 },
-                "category-natural-area": {
-                    "name": "Nodweddion Naturiol"
-                },
-                "category-natural-line": {
-                    "name": "Nodweddion Naturiol"
-                },
-                "category-natural-point": {
-                    "name": "Nodweddion Naturiol"
-                },
-                "category-path": {
-                    "name": "Nodweddion Llwybr"
-                },
-                "category-rail": {
-                    "name": "Nodweddion Rheilffordd"
-                },
                 "category-restriction": {
                     "name": "Nodweddion Cyfyngiad"
                 },
-                "category-road": {
-                    "name": "Nodweddion Ffordd"
-                },
                 "category-route": {
                     "name": "Nodweddion Llwybr"
-                },
-                "category-water-area": {
-                    "name": "Nodweddion Dŵr"
-                },
-                "category-water-line": {
-                    "name": "Nodweddion Dŵr"
                 }
             },
             "fields": {
@@ -249,9 +223,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Tâl Mynediad Rhyngrwyd"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Enw Rwydwaith)"
                 },
                 "label": {
                     "label": "Label"

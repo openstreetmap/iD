@@ -9,6 +9,8 @@
         "lit"
     ],
     "moreFields": [
+        "access",
+        "fishing",
         "incline",
         "{highway/footway}"
     ],
@@ -28,10 +30,6 @@
         "man_made": "pier"
     },
     "addTags": {
-        "highway": "footway",
-        "man_made": "pier"
-    },
-    "removeTags": {
         "highway": "footway",
         "man_made": "pier"
     },

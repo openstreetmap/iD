@@ -90,7 +90,6 @@
                     "line": "Изправете ъглите на линията.",
                     "area": "Изправете ъглите на полигона."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Изправихте ъглите на линия.",
                     "area": "Изправихте ъглите на площен обект."
@@ -101,11 +100,8 @@
             },
             "straighten": {
                 "title": "Изправям",
-                "description": "Изправи тази линията.",
                 "key": "S",
-                "annotation": "Изправи линия.",
-                "too_bendy": "Това не може да се изправи защото се огъва твърде много.",
-                "connected_to_hidden": "Тази линия не може да се изправи, защото е свързана със скрит обект."
+                "too_bendy": "Това не може да се изправи защото се огъва твърде много."
             },
             "delete": {
                 "title": "Изтриване",
@@ -676,19 +672,13 @@
         "cannot_zoom": "Не можете да намалявате повече в текущия режим.",
         "full_screen": "Превключи на Цял Екран",
         "mapillary_images": {
-            "tooltip": "Снимки за ниво на улицата от Mapillary",
-            "title": "Фото слой (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Пътни знаци от Mapillary (трябва да е пуснат Фото слой)",
-            "title": "Слой пътни знаци (Mapillary)"
+            "tooltip": "Снимки за ниво на улицата от Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Вижте тази снимка на Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Снимки на ниво улица от OpenStreetCam",
-            "title": "Фото слой (OpenStreetCam)"
+            "tooltip": "Снимки на ниво улица от OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Вижте това изображение на OpenStreetCam"
@@ -816,20 +806,6 @@
             }
         },
         "presets": {
-            "categories": {
-                "category-path": {
-                    "name": "Пътеки"
-                },
-                "category-rail": {
-                    "name": "Железопътни Обекти"
-                },
-                "category-water-area": {
-                    "name": "Водни Обекти"
-                },
-                "category-water-line": {
-                    "name": "Водни Обекти"
-                }
-            },
             "fields": {
                 "access": {
                     "label": "Разрешен достъп",
@@ -1414,9 +1390,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Такса за достъп до интернет"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Име на мрежа)"
                 },
                 "kerb": {
                     "label": "Бордюр"
@@ -2656,9 +2629,6 @@
                 },
                 "type/route_master": {
                     "name": "Маршрутна схема"
-                },
-                "vertex": {
-                    "name": "Друг"
                 },
                 "waterway": {
                     "name": "Води"

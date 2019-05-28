@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import { osmEntity } from './entity';
 import { geoExtent } from '../geo';
 
@@ -36,9 +34,9 @@ Object.assign(osmChangeset.prototype, {
         return {
             osm: {
                 changeset: {
-                    tag: _map(this.tags, function(value, key) {
-                        return { '@k': key, '@v': value };
-                    }),
+                    tag: Object.keys(this.tags).map(function(k) {
+                        return { '@k': k, '@v': this.tags[k] };
+                    }, this),
                     '@version': 0.6,
                     '@generator': 'iD'
                 }

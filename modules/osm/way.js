@@ -1,12 +1,9 @@
-import _map from 'lodash-es/map';
-
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmOneWayTags, osmRightSideIsInsideTags } from './tags';
-import { areaKeys } from '../core/context';
+import { osmAreaKeys, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
 import { utilArrayUniq } from '../util';
 
 
@@ -216,7 +213,7 @@ Object.assign(osmWay.prototype, {
         };
         var returnTags = {};
         for (var key in this.tags) {
-            if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
+            if (key in osmAreaKeys && !(this.tags[key] in osmAreaKeys[key])) {
                 returnTags[key] = this.tags[key];
                 return returnTags;
             }
@@ -437,10 +434,10 @@ Object.assign(osmWay.prototype, {
                 '@version': this.version || 0,
                 nd: this.nodes.map(function(id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
-                }),
-                tag: _map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                }, this),
+                tag: Object.keys(this.tags).map(function(k) {
+                    return { keyAttributes: { k: k, v: this.tags[k] } };
+                }, this)
             }
         };
         if (changeset_id) {

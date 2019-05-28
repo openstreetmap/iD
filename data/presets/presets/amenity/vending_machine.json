@@ -6,6 +6,10 @@
         "payment_multi",
         "currency_multi"
     ],
+    "moreFields": [
+        "covered",
+        "indoor"
+    ],
     "geometry": [
         "point"
     ],
@@ -14,5 +18,6 @@
     "tags": {
         "amenity": "vending_machine"
     },
+    "matchScore": 0.9,
     "name": "Vending Machine"
 }

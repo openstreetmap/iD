@@ -1,6 +1,7 @@
 {
     "fields": [
-        "material"
+        "material",
+        "seamark/type"
     ],
     "geometry": [
         "line",

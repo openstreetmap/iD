@@ -4,12 +4,9 @@ import {
 } from 'd3-selection';
 
 import marked from 'marked';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
-import { uiBackground } from './background';
-import { uiIntro } from './intro';
-import { uiMapData } from './map_data';
-import { uiIssues } from './issues';
+import { uiIntro } from './intro/intro';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -21,8 +18,6 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var _pane = d3_select(null), _toggleButton = d3_select(null);
-
-    var _shown = false;
 
     var docKeys = [
         ['help', [
@@ -291,42 +286,14 @@ export function uiHelp(context) {
         .html(true)
         .title(uiTooltipHtml(t('help.title'), key));
 
-    uiHelp.hidePane = function() {
-        uiHelp.setVisible(false);
-    };
+    function hidePane() {
+        context.ui().togglePanes();
+    }
 
     uiHelp.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
-        uiHelp.setVisible(!_toggleButton.classed('active'));
-    };
-
-    uiHelp.setVisible = function(show) {
-        if (show !== _shown) {
-            _toggleButton.classed('active', show);
-            _shown = show;
-
-            if (show) {
-                uiBackground.hidePane();
-                uiIssues.hidePane();
-                uiMapData.hidePane();
-
-                _pane.style('display', 'block')
-                    .style('right', '-500px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '0px');
-
-            } else {
-                _pane.style('right', '0px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '-500px')
-                    .on('end', function() {
-                        d3_select(this).style('display', 'none');
-                    });
-            }
-        }
+        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiHelp.renderToggleButton = function(selection) {
@@ -399,7 +366,7 @@ export function uiHelp(context) {
         function clickWalkthrough() {
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
-            uiHelp.setVisible(false);
+            context.ui().togglePanes();
         }
 
 
@@ -409,7 +376,8 @@ export function uiHelp(context) {
 
 
         _pane = selection.append('div')
-            .attr('class', 'help-wrap map-pane fillL hide');
+            .attr('class', 'help-wrap map-pane fillL hide')
+            .attr('pane', 'help');
 
         var heading = _pane
             .append('div')
@@ -421,7 +389,7 @@ export function uiHelp(context) {
 
         heading
             .append('button')
-            .on('click', uiHelp.hidePane)
+            .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 

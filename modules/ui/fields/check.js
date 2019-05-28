@@ -7,9 +7,9 @@ import {
 
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
-import { actionReverse } from '../../actions';
+import { actionReverse } from '../../actions/reverse';
 import { osmOneWayTags } from '../../osm';
-import { svgIcon } from '../../svg';
+import { svgIcon } from '../../svg/icon';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };

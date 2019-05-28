@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-beach",
+    "fields": [
+        "name",
+        "elevation",
+        "description"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "natural": "cape"
+    },
+    "terms": [
+        "bay",
+        "coastline",
+        "erosion",
+        "headland",
+        "promontory"
+    ],
+    "name": "Cape"
+}

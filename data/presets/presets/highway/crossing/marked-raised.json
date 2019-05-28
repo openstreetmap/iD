@@ -16,11 +16,6 @@
         "crossing": "marked",
         "traffic_calming": "table"
     },
-    "removeTags": {
-        "highway": "crossing",
-        "crossing": "marked",
-        "traffic_calming": "table"
-    },
     "reference": {
         "key": "traffic_calming",
         "value": "table"

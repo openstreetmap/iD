@@ -1,19 +1,16 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
 import {
-    geoExtent,
-    geoLineIntersection,
-    geoMetersToLat,
-    geoMetersToLon,
-    geoSphericalDistance,
-    geoVecInterp,
-    geoHasSelfIntersections,
+    geoExtent, geoLineIntersection, geoMetersToLat, geoMetersToLon,
+    geoSphericalDistance, geoVecInterp, geoHasSelfIntersections,
     geoSphericalClosestNode
 } from '../geo';
 
-import { actionAddMidpoint, actionChangeTags, actionMergeNodes } from '../actions';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionMergeNodes } from '../actions/merge_nodes';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue, validationIssueFix } from '../core/validator';
+import { osmRoutableHighwayTagValues } from '../osm/tags';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 /**
@@ -25,133 +22,25 @@ export function validationAlmostJunction() {
 
     function isHighway(entity) {
         return entity.type === 'way' &&
-            entity.tags.highway &&
-            entity.tags.highway !== 'no' &&
-            entity.tags.highway !== 'proposed';
+            osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    function isNoexit(node) {
-        return node.tags.noexit && node.tags.noexit === 'yes';
-    }
-
-    function isExtendableCandidate(node, way, graph) {
-        if (isNoexit(node) || graph.parentWays(node).length !== 1) {
-            return false;
-        }
-        var occurences = 0;
-        for (var index in way.nodes) {
-            if (way.nodes[index] === node.id) {
-                occurences += 1;
-                if (occurences > 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    function findConnectableEndNodesByExtension(way, graph, tree) {
-
-        var results = [];
-
-        if (way.isClosed()) return results;
-
-        var nidFirst = way.nodes[0];
-        var nidLast = way.nodes[way.nodes.length - 1];
-        var nodeFirst = graph.entity(nidFirst);
-        var nodeLast = graph.entity(nidLast);
-
-        var testNodes;
-
-        if (isExtendableCandidate(nodeFirst, way, graph)) {
-            var connNearFirst = canConnectByExtend(way, 0, graph, tree);
-            if (connNearFirst !== null) {
-                testNodes = _cloneDeep(graph.childNodes(way));
-                testNodes[0].loc = connNearFirst.cross_loc;
-                // don't flag issue if connecting the ways would cause self-intersection
-                if (!geoHasSelfIntersections(testNodes, nodeFirst.id)) {
-                    results.push({
-                        node: nodeFirst,
-                        wid: connNearFirst.wid,
-                        edge: connNearFirst.edge,
-                        cross_loc: connNearFirst.cross_loc
-                    });
-                }
-            }
-        }
-
-        if (isExtendableCandidate(nodeLast, way, graph)) {
-            var connNearLast = canConnectByExtend(way, way.nodes.length - 1, graph, tree);
-            if (connNearLast !== null) {
-                testNodes = _cloneDeep(graph.childNodes(way));
-                testNodes[testNodes.length-1].loc = connNearLast.cross_loc;
-                // don't flag issue if connecting the ways would cause self-intersection
-                if (!geoHasSelfIntersections(testNodes, nodeLast.id)) {
-                    results.push({
-                        node: nodeLast,
-                        wid: connNearLast.wid,
-                        edge: connNearLast.edge,
-                        cross_loc: connNearLast.cross_loc
-                    });
-                }
-            }
-        }
-        return results;
+    function isTaggedAsNotContinuing(node) {
+        return node.tags.noexit === 'yes' ||
+            node.tags.amenity === 'parking_entrance' ||
+            (node.tags.entrance && node.tags.entrance !== 'no');
     }
 
 
-    function canConnectByExtend(way, endNodeIdx, graph, tree) {
-        var EXTEND_TH_METERS = 5;
-        var tipNid = way.nodes[endNodeIdx];  // the 'tip' node for extension point
-        var midNid = endNodeIdx === 0 ? way.nodes[1] : way.nodes[way.nodes.length - 2];  // the other node of the edge
-        var tipNode = graph.entity(tipNid);
-        var midNode = graph.entity(midNid);
-        var lon = tipNode.loc[0];
-        var lat = tipNode.loc[1];
-        var lon_range = geoMetersToLon(EXTEND_TH_METERS, lat) / 2;
-        var lat_range = geoMetersToLat(EXTEND_TH_METERS) / 2;
-        var queryExtent = geoExtent([
-            [lon - lon_range, lat - lat_range],
-            [lon + lon_range, lat + lat_range]
-        ]);
-
-        // first, extend the edge of [midNode -> tipNode] by EXTEND_TH_METERS and find the "extended tip" location
-        var edgeLen = geoSphericalDistance(midNode.loc, tipNode.loc);
-        var t = EXTEND_TH_METERS / edgeLen + 1.0;
-        var extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
-
-        // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
-        var intersected = tree.intersects(queryExtent, graph);
-        for (var i = 0; i < intersected.length; i++) {
-            if (!isHighway(intersected[i]) || intersected[i].id === way.id) continue;
-
-            var way2 = intersected[i];
-            for (var j = 0; j < way2.nodes.length - 1; j++) {
-                var nA = graph.entity(way2.nodes[j]);
-                var nB = graph.entity(way2.nodes[j + 1]);
-                var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
-                if (crossLoc !== null) {
-                    return {
-                        wid: way2.id,
-                        edge: [nA.id, nB.id],
-                        cross_loc: crossLoc
-                    };
-                }
-            }
-        }
-        return null;
-    }
-
-
-    var validation = function(endHighway, context) {
-        if (!isHighway(endHighway)) return [];
-        if (endHighway.isDegenerate()) return [];
+    var validation = function checkAlmostJunction(entity, context) {
+        if (!isHighway(entity)) return [];
+        if (entity.isDegenerate()) return [];
 
         var graph = context.graph();
         var tree = context.history().tree();
         var issues = [];
 
-        var extendableNodeInfos = findConnectableEndNodesByExtension(endHighway, graph, tree);
+        var extendableNodeInfos = findConnectableEndNodesByExtension(entity);
         extendableNodeInfos.forEach(function(extendableNodeInfo) {
             var node = extendableNodeInfo.node;
             var edgeHighway = graph.entity(extendableNodeInfo.wid);
@@ -160,10 +49,11 @@ export function validationAlmostJunction() {
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
                 onClick: function() {
-                    var endNode = this.issue.entities[1];
-                    var targetEdge = this.issue.info.edge;
-                    var crossLoc = this.issue.info.cross_loc;
-                    var edgeNodes = [context.graph().entity(targetEdge[0]), context.graph().entity(targetEdge[1])];
+                    var endNodeId = this.issue.entityIds[1];
+                    var endNode = context.entity(endNodeId);
+                    var targetEdge = this.issue.data.edge;
+                    var crossLoc = this.issue.data.cross_loc;
+                    var edgeNodes = [context.entity(targetEdge[0]), context.entity(targetEdge[1])];
                     var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
 
                     var annotation = t('issues.fix.connect_almost_junction.annotation');
@@ -189,7 +79,7 @@ export function validationAlmostJunction() {
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
                     onClick: function() {
-                        var nodeID = this.issue.entities[1].id;
+                        var nodeID = this.issue.entityIds[1];
                         context.perform(
                             actionChangeTags(nodeID, { noexit: 'yes' }),
                             t('issues.fix.tag_as_disconnected.annotation')
@@ -201,14 +91,25 @@ export function validationAlmostJunction() {
             issues.push(new validationIssue({
                 type: type,
                 severity: 'warning',
-                message: t('issues.almost_junction.message', {
-                    feature: utilDisplayLabel(endHighway, context),
-                    feature2: utilDisplayLabel(edgeHighway, context)
-                }),
-                tooltip: t('issues.almost_junction.highway-highway.tip'),
-                entities: [endHighway, node, edgeHighway],
+                message: function() {
+                    var entity1 = context.hasEntity(this.entityIds[0]);
+                    if (this.entityIds[0] === this.entityIds[2]) {
+                        return entity1 ? t('issues.almost_junction.self.message', {
+                            feature: utilDisplayLabel(entity1, context)
+                        }) : '';
+                    } else {
+                        var entity2 = context.hasEntity(this.entityIds[2]);
+                        return (entity1 && entity2) ? t('issues.almost_junction.message', {
+                            feature: utilDisplayLabel(entity1, context),
+                            feature2: utilDisplayLabel(entity2, context)
+                        }) : '';
+                    }
+                },
+                reference: showReference,
+                entityIds: [entity.id, node.id, edgeHighway.id],
                 loc: extendableNodeInfo.node.loc,
-                info: {
+                hash: JSON.stringify(extendableNodeInfo.node.loc),
+                data: {
                     edge: extendableNodeInfo.edge,
                     cross_loc: extendableNodeInfo.cross_loc
                 },
@@ -217,6 +118,146 @@ export function validationAlmostJunction() {
         });
 
         return issues;
+
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.almost_junction.highway-highway.reference'));
+        }
+
+
+        function isExtendableCandidate(node, way) {
+            // can not accurately test vertices on tiles not downloaded from osm - #5938
+            var osm = context.connection();
+            if (osm && !osm.isDataLoaded(node.loc)) {
+                return false;
+            }
+            if (isTaggedAsNotContinuing(node) || graph.parentWays(node).length !== 1) {
+                return false;
+            }
+
+            var occurences = 0;
+            for (var index in way.nodes) {
+                if (way.nodes[index] === node.id) {
+                    occurences += 1;
+                    if (occurences > 1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        function findConnectableEndNodesByExtension(way) {
+            var results = [];
+            if (way.isClosed()) return results;
+
+            var testNodes;
+            var indices = [0, way.nodes.length - 1];
+            indices.forEach(function(nodeIndex) {
+                var nodeID = way.nodes[nodeIndex];
+                var node = graph.entity(nodeID);
+
+                if (!isExtendableCandidate(node, way)) return;
+
+                var connectionInfo = canConnectByExtend(way, nodeIndex);
+                if (!connectionInfo) return;
+
+                testNodes = graph.childNodes(way).slice();   // shallow copy
+                testNodes[nodeIndex] = testNodes[nodeIndex].move(connectionInfo.cross_loc);
+
+                // don't flag issue if connecting the ways would cause self-intersection
+                if (geoHasSelfIntersections(testNodes, nodeID)) return;
+
+                results.push(connectionInfo);
+            });
+
+            return results;
+        }
+
+        function hasTag(tags, key) {
+            return tags[key] !== undefined && tags[key] !== 'no';
+        }
+
+        function canConnectWays(way, way2) {
+
+            // allow self-connections
+            if (way.id === way2.id) return true;
+
+            // if one is bridge or tunnel, both must be bridge or tunnel
+            if ((hasTag(way.tags, 'bridge') || hasTag(way2.tags, 'bridge')) &&
+                !(hasTag(way.tags, 'bridge') && hasTag(way2.tags, 'bridge'))) return false;
+            if ((hasTag(way.tags, 'tunnel') || hasTag(way2.tags, 'tunnel')) &&
+                !(hasTag(way.tags, 'tunnel') && hasTag(way2.tags, 'tunnel'))) return false;
+
+            // must have equivalent layers and levels
+            var layer1 = way.tags.layer || '0',
+                layer2 = way2.tags.layer || '0';
+            if (layer1 !== layer2) return false;
+
+            var level1 = way.tags.level || '0',
+                level2 = way2.tags.level || '0';
+            if (level1 !== level2) return false;
+
+            return true;
+        }
+
+
+        function canConnectByExtend(way, endNodeIdx) {
+            var EXTEND_TH_METERS = 5;
+            var tipNid = way.nodes[endNodeIdx];  // the 'tip' node for extension point
+            var midNid = endNodeIdx === 0 ? way.nodes[1] : way.nodes[way.nodes.length - 2];  // the other node of the edge
+            var tipNode = graph.entity(tipNid);
+            var midNode = graph.entity(midNid);
+            var lon = tipNode.loc[0];
+            var lat = tipNode.loc[1];
+            var lon_range = geoMetersToLon(EXTEND_TH_METERS, lat) / 2;
+            var lat_range = geoMetersToLat(EXTEND_TH_METERS) / 2;
+            var queryExtent = geoExtent([
+                [lon - lon_range, lat - lat_range],
+                [lon + lon_range, lat + lat_range]
+            ]);
+
+            // first, extend the edge of [midNode -> tipNode] by EXTEND_TH_METERS and find the "extended tip" location
+            var edgeLen = geoSphericalDistance(midNode.loc, tipNode.loc);
+            var t = EXTEND_TH_METERS / edgeLen + 1.0;
+            var extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
+
+            // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
+            var intersected = tree.intersects(queryExtent, graph);
+            for (var i = 0; i < intersected.length; i++) {
+                var way2 = intersected[i];
+
+                if (!isHighway(way2)) continue;
+
+                if (!canConnectWays(way, way2)) continue;
+
+                for (var j = 0; j < way2.nodes.length - 1; j++) {
+                    var nAid = way2.nodes[j],
+                        nBid = way2.nodes[j + 1];
+
+                    if (nAid === tipNid || nBid === tipNid) continue;
+
+                    var nA = graph.entity(nAid),
+                        nB = graph.entity(nBid);
+                    var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+                    if (crossLoc) {
+                        return {
+                            node: tipNode,
+                            wid: way2.id,
+                            edge: [nA.id, nB.id],
+                            cross_loc: crossLoc
+                        };
+                    }
+                }
+            }
+            return null;
+        }
     };
 
     validation.type = type;

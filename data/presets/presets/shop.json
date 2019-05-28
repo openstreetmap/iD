@@ -12,11 +12,17 @@
     "moreFields": [
         "air_conditioning",
         "brand",
+        "building/levels_building",
+        "height_building",
         "currency_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone",
+        "second_hand",
+        "website",
         "wheelchair"
     ],
     "geometry": [

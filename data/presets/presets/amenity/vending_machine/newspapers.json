@@ -1,10 +1,10 @@
 {
-    "icon": "temaki-vending_machine",
+    "icon": "far-newspaper",
     "fields": [
         "vending",
         "operator",
         "fee",
-        "payment_multi",
+        "payment_multi_fee",
         "currency_multi"
     ],
     "geometry": [

@@ -6,21 +6,23 @@
         "capacity",
         "access_simple",
         "fee",
+        "payment_multi_fee",
         "surface"
     ],
     "moreFields": [
-        "name",
-        "supervised",
-        "park_ride",
-        "maxstay",
-        "payment_multi",
         "address",
-        "website",
-        "phone",
+        "covered",
         "email",
         "fax",
-        "wheelchair",
-        "covered"
+        "maxstay",
+        "name",
+        "opening_hours",
+        "park_ride",
+        "phone",
+        "ref",
+        "supervised",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -6,6 +6,7 @@ const json = require('rollup-plugin-json');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const rollup = require('rollup');
 const shell = require('shelljs');
+// const visualizer = require('rollup-plugin-visualizer');
 
 
 module.exports = function buildSrc() {
@@ -16,6 +17,7 @@ module.exports = function buildSrc() {
 
         // Start clean
         shell.rm('-f', [
+            'docs/statistics.html',
             'dist/iD.js',
             'dist/iD.js.map'
         ]);
@@ -36,12 +38,16 @@ module.exports = function buildSrc() {
                         }
                     }),
                     nodeResolve({
-                        module: true,
-                        main: true,
+                        mainFields: ['module', 'main'],
                         browser: false
                     }),
                     commonjs(),
                     json({ indent: '' })
+                    // uncomment when we require node 8+
+                    // visualizer({
+                    //     filename: 'docs/statistics.html',
+                    //     sourcemap: true
+                    // })
                 ]
             })
             .then(function (bundle) {

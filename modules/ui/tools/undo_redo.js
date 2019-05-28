@@ -81,7 +81,9 @@ export function uiToolUndoRedo(context) {
             .on('drawn.undo_redo', debouncedUpdate);
 
         context.history()
-            .on('change.undo_redo', update);
+            .on('change.undo_redo', function(difference) {
+                if (difference) update();
+            });
 
         context
             .on('enter.undo_redo', update);
@@ -90,7 +92,9 @@ export function uiToolUndoRedo(context) {
         function update() {
             buttons
                 .property('disabled', !editable())
-                .classed('disabled', function(d) { return !d.annotation(); })
+                .classed('disabled', function(d) {
+                    return !editable() || !d.annotation();
+                })
                 .each(function() {
                     var selection = d3_select(this);
                     if (selection.property('tooltipVisible')) {

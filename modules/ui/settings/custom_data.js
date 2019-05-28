@@ -1,5 +1,3 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
@@ -13,11 +11,16 @@ export function uiSettingsCustomData(context) {
 
     function render(selection) {
         var dataLayer = context.layers().layer('data');
+
+        // keep separate copies of original and current settings
         var _origSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
             url: context.storage('settings-custom-data-url')
         };
-        var _currSettings = _cloneDeep(_origSettings);
+        var _currSettings = {
+            fileList: (dataLayer && dataLayer.fileList()) || null,
+            url: context.storage('settings-custom-data-url')
+        };
 
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();

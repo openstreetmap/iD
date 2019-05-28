@@ -67,7 +67,7 @@ describe('iD.validations.crossing_ways', function () {
     function verifySingleCrossingIssue(issues) {
         var issue = issues[0];
         expect(issue.type).to.eql('crossing_ways');
-        expect(issue.entities).to.have.lengthOf(2);
+        expect(issue.entityIds).to.have.lengthOf(2);
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(1.5);
@@ -224,7 +224,7 @@ describe('iD.validations.crossing_ways', function () {
         expect(issues).to.have.lengthOf(4);
         var issue = issues[0];
         expect(issue.type).to.eql('crossing_ways');
-        expect(issue.entities).to.have.lengthOf(2);
+        expect(issue.entityIds).to.have.lengthOf(2);
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(1.5);
@@ -232,7 +232,7 @@ describe('iD.validations.crossing_ways', function () {
 
         issue = issues[1];
         expect(issue.type).to.eql('crossing_ways');
-        expect(issue.entities).to.have.lengthOf(2);
+        expect(issue.entityIds).to.have.lengthOf(2);
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(2.5);

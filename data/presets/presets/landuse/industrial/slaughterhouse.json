@@ -18,10 +18,6 @@
         "landuse": "industrial",
         "industrial": "slaughterhouse"
     },
-    "removeTags": {
-        "landuse": "industrial",
-        "industrial": "slaughterhouse"
-    },
     "reference": {
         "key": "industrial",
         "value": "slaughterhouse"

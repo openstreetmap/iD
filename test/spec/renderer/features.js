@@ -121,7 +121,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
             iD.osmWay({id: 'steps', tags: {highway: 'steps'}, version: 1}),
             iD.osmWay({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
-            iD.osmWay({id: 'corridor', tags: {highway: 'corridor'}, version: 1}),
+            iD.osmWay({id: 'corridor', tags: {highway: 'corridor', indoor: 'yes'}, version: 1}),
 
             // Buildings
             iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
@@ -131,6 +131,21 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
             iD.osmWay({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
             iD.osmWay({id: 'garage4', tags: {area: 'yes', amenity: 'parking', parking: 'garage_boxes'}, version: 1}),
+
+            // Indoor
+            iD.osmWay({id: 'room', tags: {area: 'yes', indoor: 'room'}, version: 1}),
+            iD.osmWay({id: 'indoor_area', tags: {area: 'yes', indoor: 'area'}, version: 1}),
+            iD.osmWay({id: 'indoor_bar', tags: {area: 'yes', indoor: 'room', amenity: 'bar'}, version: 1}),
+
+            // Pistes
+            iD.osmWay({id: 'downhill_piste', tags: {'piste:type': 'downhill'}, version: 1}),
+            iD.osmWay({id: 'piste_track_combo', tags: {'piste:type': 'alpine', highway: 'track'}, version: 1}),
+
+            // Aerialways
+            iD.osmWay({id: 'gondola', tags: {aerialway: 'gondola'}, version: 1}),
+            iD.osmWay({id: 'zip_line', tags: {aerialway: 'zip_line'}, version: 1}),
+            iD.osmWay({id: 'aerialway_platform', tags: {public_transport: 'platform', aerialway: 'yes'}, version: 1}),
+            iD.osmWay({id: 'old_aerialway_station', tags: {area: 'yes', aerialway: 'station'}, version: 1}),
 
             // Landuse
             iD.osmWay({id: 'forest', tags: {area: 'yes', landuse: 'forest'}, version: 1}),
@@ -218,33 +233,34 @@ describe('iD.rendererFeatures', function() {
         var all = Object.values(graph.base().entities);
 
 
-        function doMatch(ids) {
+        function doMatch(rule, ids) {
             ids.forEach(function(id) {
-                var entity = graph.entity(id),
-                    geometry = entity.geometry(graph);
-                expect(features.isHidden(entity, graph, geometry), 'doMatch: ' + id).to.be.true;
+                var entity = graph.entity(id);
+                var geometry = entity.geometry(graph);
+                expect(features.getMatches(entity, graph, geometry), 'doMatch: ' + id)
+                    .to.have.property(rule);
             });
         }
 
-        function dontMatch(ids) {
+        function dontMatch(rule, ids) {
             ids.forEach(function(id) {
-                var entity = graph.entity(id),
-                    geometry = entity.geometry(graph);
-                expect(features.isHidden(entity, graph, geometry), 'dontMatch: ' + id).to.be.false;
+                var entity = graph.entity(id);
+                var geometry = entity.geometry(graph);
+                expect(features.getMatches(entity, graph, geometry), 'dontMatch: ' + id)
+                    .not.to.have.property(rule);
             });
         }
 
 
         it('matches points', function () {
-            features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('points', [
                 'point_bar', 'point_dock', 'point_rail_station',
                 'point_generator', 'point_old_rail_station'
             ]);
 
-            dontMatch([
+            dontMatch('points', [
                 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -253,17 +269,16 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches traffic roads', function () {
-            features.disable('traffic_roads');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('traffic_roads', [
                 'motorway', 'motorway_link', 'trunk', 'trunk_link',
                 'primary', 'primary_link', 'secondary', 'secondary_link',
                 'tertiary', 'tertiary_link', 'residential', 'living_street',
                 'unclassified', 'boundary_road', 'inner3'
             ]);
 
-            dontMatch([
+            dontMatch('traffic_roads', [
                 'point_bar', 'service', 'road', 'track', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -272,14 +287,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches service roads', function () {
-            features.disable('service_roads');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
-                'service', 'road', 'track'
+            doMatch('service_roads', [
+                'service', 'road', 'track', 'piste_track_combo'
             ]);
 
-            dontMatch([
+            dontMatch('service_roads', [
                 'point_bar', 'motorway', 'unclassified', 'living_street',
                 'path', 'building_yes', 'forest', 'boundary', 'boundary_member', 'water',
                 'railway', 'power_line', 'motorway_construction', 'fence'
@@ -288,15 +302,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches paths', function () {
-            features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('paths', [
                 'path', 'footway', 'cycleway', 'bridleway',
                 'steps', 'pedestrian', 'corridor'
             ]);
 
-            dontMatch([
+            dontMatch('paths', [
                 'point_bar', 'motorway', 'service', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -305,15 +318,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches buildings', function () {
-            features.disable('buildings');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
-                'building_yes', 'building_part',
+            doMatch('buildings', [
+                'building_yes',
                 'garage1', 'garage2', 'garage3', 'garage4'
             ]);
 
-            dontMatch([
+            dontMatch('buildings', [
                 'building_no', 'point_bar', 'motorway', 'service', 'path',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -321,17 +333,96 @@ describe('iD.rendererFeatures', function() {
         });
 
 
-        it('matches landuse', function () {
-            features.disable('landuse');
+        it('matches building_parts', function () {
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('building_parts', [
+                'building_part'
+            ]);
+
+            dontMatch('building_parts', [
+                'building_yes',
+                'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path',
+                'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence'
+            ]);
+        });
+
+
+        it('matches indoor', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('indoor', [
+                'room', 'indoor_area', 'indoor_bar', 'corridor'
+            ]);
+
+            dontMatch('indoor', [
+                'downhill_piste', 'piste_track_combo',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
+            ]);
+        });
+
+
+        it('matches pistes', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('pistes', [
+                'downhill_piste', 'piste_track_combo'
+            ]);
+
+            dontMatch('pistes', [
+                'room', 'indoor_area', 'indoor_bar', 'corridor',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
+            ]);
+        });
+
+
+        it('matches aerialways', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('aerialways', [
+                'gondola', 'zip_line'
+            ]);
+
+            dontMatch('aerialways', [
+                'aerialway_platform', 'old_aerialway_station',
+
+                'downhill_piste', 'piste_track_combo',
+                'room', 'indoor_area', 'indoor_bar', 'corridor',
+                'building_part', 'garage1', 'garage2', 'garage3', 'garage4',
+                'building_no', 'point_bar', 'motorway', 'service', 'path', 'building_yes',
+                'boundary', 'boundary_member', 'water', 'railway', 'power_line',
+                'motorway_construction', 'fence',
+                'inner3', 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'
+            ]);
+        });
+
+
+        it('matches landuse', function () {
+            features.gatherStats(all, graph, dimensions);
+
+            doMatch('landuse', [
                 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
                 'rail_landuse', 'landuse_construction', 'retail',
                 'outer', 'inner1', 'inner2'  // non-interesting members of landuse multipolygon
             ]);
 
-            dontMatch([
+            dontMatch('landuse', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence',
@@ -341,10 +432,9 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches boundaries', function () {
-            features.disable('boundaries');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('boundaries', [
                 'boundary',
                 // match ways that are part of boundary relations - #5601
                 'boundary_member', 'boundary_member2',
@@ -352,7 +442,7 @@ describe('iD.rendererFeatures', function() {
                 'boundary_relation', 'boundary_relation2'
             ]);
 
-            dontMatch([
+            dontMatch('boundaries', [
                 'boundary_road',   // because boundary also used as highway - #4973
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'water', 'railway', 'power_line',
@@ -362,15 +452,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches water', function () {
-            features.disable('water');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('water', [
                 'point_dock', 'water', 'coastline', 'bay', 'pond',
                 'basin', 'reservoir', 'salt_pond', 'river'
             ]);
 
-            dontMatch([
+            dontMatch('water', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'railway', 'power_line',
                 'motorway_construction', 'fence'
@@ -379,15 +468,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches rail', function () {
-            features.disable('rail');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('rail', [
                 'point_rail_station', 'point_old_rail_station',
                 'railway', 'rail_landuse', 'rail_disused'
             ]);
 
-            dontMatch([
+            dontMatch('rail', [
                 'rail_streetcar', 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'power_line',
@@ -397,14 +485,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches power', function () {
-            features.disable('power');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('power', [
                 'point_generator', 'power_line'
             ]);
 
-            dontMatch([
+            dontMatch('power', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway',
                 'motorway_construction', 'fence'
@@ -413,15 +500,14 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches past/future', function () {
-            features.disable('past_future');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('past_future', [
                 'point_old_rail_station', 'rail_disused',
                 'motorway_construction', 'cycleway_proposed', 'landuse_construction'
             ]);
 
-            dontMatch([
+            dontMatch('past_future', [
                 'rail_trail',  // because rail also used as highway
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line', 'fence'
@@ -430,14 +516,13 @@ describe('iD.rendererFeatures', function() {
 
 
         it('matches others', function () {
-            features.disable('others');
             features.gatherStats(all, graph, dimensions);
 
-            doMatch([
+            doMatch('others', [
                 'fence', 'pipeline'
             ]);
 
-            dontMatch([
+            dontMatch('others', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'retail', 'outer', 'inner1', 'inner2', 'inner3'

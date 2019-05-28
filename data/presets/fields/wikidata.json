@@ -1,5 +1,6 @@
 {
     "key": "wikidata",
+    "keys": ["wikidata", "wikipedia"],
     "type": "wikidata",
     "icon": "wikipedia",
     "universal": true,

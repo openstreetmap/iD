@@ -10,13 +10,16 @@
         "access"
     ],
     "moreFields": [
-        "cycleway",
-        "maxheight",
         "covered",
+        "cycleway",
+        "flood_prone",
         "junction_line",
         "lit",
+        "maxheight",
+        "maxweight_bridge",
+        "oneway/bicycle",
         "smoothness",
-        "oneway/bicycle"
+        "trolley_wire"
     ],
     "geometry": [
         "line"

@@ -1,16 +1,16 @@
-import _uniqBy from 'lodash-es/uniqBy';
-
 import { t } from '../util/locale';
-import { behaviorOperation } from '../behavior';
+import { behaviorOperation } from '../behavior/operation';
 import { geoExtent } from '../geo';
-import { modeRotate } from '../modes';
+import { modeRotate } from '../modes/rotate';
 import { utilGetAllNodes } from '../util';
 
 
 export function operationRotate(selectedIDs, context) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var extent = selectedIDs.reduce(function(extent, id) {
-        return extent.extend(context.entity(id).extent(context.graph()));
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
+    var extent = nodes.reduce(function(extent, node) {
+        return extent.extend(node.extent(context.graph()));
     }, geoExtent());
 
 
@@ -20,21 +20,37 @@ export function operationRotate(selectedIDs, context) {
 
 
     operation.available = function() {
-        var nodes = utilGetAllNodes(selectedIDs, context.graph());
-        return _uniqBy(nodes, function(n) { return n.loc; }).length >= 2;
+        return nodes.length >= 2;
     };
 
 
     operation.disabled = function() {
-        var reason;
+
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
+            return 'too_large';
+        } else if (someMissing()) {
+            return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+            return 'connected_to_hidden';
         } else if (selectedIDs.some(incompleteRelation)) {
-            reason = 'incomplete_relation';
+            return 'incomplete_relation';
         }
-        return reason;
+
+        return false;
+
+
+        function someMissing() {
+            if (context.inIntro()) return false;
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
 
         function incompleteRelation(id) {
             var entity = context.entity(id);

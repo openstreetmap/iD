@@ -1,5 +1,5 @@
 {
-    "icon": "maki-airfield",
+    "icon": "tnp-2009265",
     "fields": [
         "name",
         "iata",
@@ -13,11 +13,6 @@
         "military": "airfield"
     },
     "addTags": {
-        "aeroway": "aerodrome",
-        "landuse": "military",
-        "military": "airfield"
-    },
-    "removeTags": {
         "aeroway": "aerodrome",
         "landuse": "military",
         "military": "airfield"

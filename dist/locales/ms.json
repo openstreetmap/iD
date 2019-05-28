@@ -91,7 +91,6 @@
                     "line": "Jadikan bucu garis bersudut tepat.",
                     "area": "Jadikan bucu kawasan ini bersudut tepat."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Bucu garis telah dijadikan sudut tepat.",
                     "area": "Bucu kawasan telah dijadikan bersudut tepat."
@@ -102,11 +101,8 @@
             },
             "straighten": {
                 "title": "Luruskan",
-                "description": "Luruskan garis ini.",
                 "key": "S",
-                "annotation": "Suatu garis telah diluruskan.",
-                "too_bendy": "Pelurusan tidak dapat dibuat kerana garis terlalu bengkang-bengkok.",
-                "connected_to_hidden": "Pelurusan tidak dapat dibuat kerana garis bersambung dengan ciri yang tersorok."
+                "too_bendy": "Pelurusan tidak dapat dibuat kerana garis terlalu bengkang-bengkok."
             },
             "delete": {
                 "title": "Hapus",
@@ -286,9 +282,6 @@
                     "create": "Suatu larangan membelok telah ditambah",
                     "delete": "Suatu larangan membelok telah dihapuskan"
                 }
-            },
-            "detach_node": {
-                "key": "E"
             }
         },
         "restriction": {
@@ -622,19 +615,13 @@
         "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
         "full_screen": "Togol Skrin Penuh",
         "mapillary_images": {
-            "tooltip": "Gambar jalan dari Mapillary",
-            "title": "Tindihan Gambar (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Tanda lalu lintas dari Mapillary (mesti mendayakan Lapisan Foto)",
-            "title": "Tindihan Isyarat Lalu Lintas (Mapillary)"
+            "tooltip": "Gambar jalan dari Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Paparkan imej ini dalam Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Gambar jalan dari OpenStreetCam",
-            "title": "Tindihan Gambar (OpenStreetCam)"
+            "tooltip": "Gambar jalan dari OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Paparkan imej ini dalam OpenStreetCam"
@@ -850,7 +837,6 @@
                     "stop_line": "Siapkan melukis garis atau kawasan"
                 },
                 "operations": {
-                    "orthogonalize": "Luruskan garis / Jadikan bucu kawasan bersudut tepat",
                     "circularize": "Bulatkan garis atau kawasan tertutup"
                 },
                 "commands": {
@@ -890,35 +876,11 @@
                 "category-landuse": {
                     "name": "Ciri-ciri Guna Tanah"
                 },
-                "category-natural-area": {
-                    "name": "Ciri-ciri Semula Jadi"
-                },
-                "category-natural-line": {
-                    "name": "Ciri-ciri Semula Jadi"
-                },
-                "category-natural-point": {
-                    "name": "Ciri-ciri Semula Jadi"
-                },
-                "category-path": {
-                    "name": "Ciri-ciri Denai"
-                },
-                "category-rail": {
-                    "name": "Ciri-ciri Rel"
-                },
                 "category-restriction": {
                     "name": "Ciri-ciri Sekatan"
                 },
-                "category-road": {
-                    "name": "Ciri-ciri Jalan"
-                },
                 "category-route": {
                     "name": "Ciri-ciri Laluan"
-                },
-                "category-water-area": {
-                    "name": "Ciri-ciri Air"
-                },
-                "category-water-line": {
-                    "name": "Ciri-ciri Air"
                 }
             },
             "fields": {
@@ -1372,9 +1334,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Bayaran Akses Internet"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Nama Rangkaian)"
                 },
                 "kerb": {
                     "label": "Sekatan"
@@ -1922,8 +1881,7 @@
                     "options": {
                         "bucket": "Baldi",
                         "chemical": "Bahan Kimia",
-                        "flush": "Flush",
-                        "pitlatrine": "Lubang"
+                        "flush": "Flush"
                     }
                 },
                 "toll": {
@@ -2483,33 +2441,6 @@
                 "power/transformer": {
                     "name": "Transformer"
                 },
-                "public_transport/platform": {
-                    "name": "Hentian Transit"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Hentian Bas / Platform"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Hentian Feri / Platform"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Hentian Rel Ringan / Platform"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Hentian Monorel / Platform"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Hentian Laluan Bawah Tanah / Platform"
-                },
-                "public_transport/platform_train": {
-                    "name": "Hentian Kereta Api / Platform"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Hentian Tram / Platform"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Hentian Bas Troli / Platform"
-                },
                 "public_transport/station": {
                     "name": "Stesen Transit"
                 },
@@ -2537,9 +2468,6 @@
                 "railway/narrow_gauge": {
                     "name": "Rel Landasan Sempit"
                 },
-                "railway/platform": {
-                    "name": "Hentian Kereta Api / Platform"
-                },
                 "railway/rail": {
                     "name": "Kereta Api"
                 },
@@ -2554,9 +2482,6 @@
                 },
                 "railway/tram": {
                     "name": "Tram"
-                },
-                "roundabout": {
-                    "name": "Bulatan"
                 },
                 "shop": {
                     "name": "Kedai"

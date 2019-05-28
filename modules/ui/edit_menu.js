@@ -1,9 +1,6 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { geoVecFloor } from '../geo';
+import { geoVecAdd, geoVecFloor } from '../geo';
 import { textDirection } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -51,7 +48,7 @@ export function uiEditMenu(context, operations) {
             offset[1] = -1 * (center[1] + menuHeight - viewport.height + vpBottomMargin);
         }
 
-        var origin = [ center[0] + offset[0], center[1] + offset[1] ];
+        var origin = geoVecAdd(center, offset);
 
         menu = selection
             .append('g')
@@ -74,20 +71,18 @@ export function uiEditMenu(context, operations) {
             .attr('stroke-linecap', 'round');
 
 
-        var button = menu.selectAll('.edit-menu-item')
-            .data(operations)
-            .enter()
+        var buttons = menu.selectAll('.edit-menu-item')
+            .data(operations);
+
+        // enter
+        var buttonsEnter = buttons.enter()
             .append('g')
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
-            .classed('disabled', function (d) { return d.disabled(); })
-            .attr('transform', function (d, i) {
-                return 'translate(' + geoVecFloor([
-                    0,
-                    m + i * buttonHeight
-                ]).join(',') + ')';
+            .attr('transform', function(d, i) {
+                return 'translate(' + geoVecFloor([0, m + i * buttonHeight]).join(',') + ')';
             });
 
-        button
+        buttonsEnter
             .append('rect')
             .attr('x', 4)
             .attr('width', buttonWidth)
@@ -97,12 +92,18 @@ export function uiEditMenu(context, operations) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        button
+        buttonsEnter
             .append('use')
             .attr('width', '20')
             .attr('height', '20')
             .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })
             .attr('xlink:href', function (d) { return '#iD-operation-' + d.id; });
+
+        // update
+        buttons = buttonsEnter
+            .merge(buttons)
+            .classed('disabled', function(d) { return d.disabled(); });
+
 
         tooltip = d3_select('#id-container')
             .append('div')
@@ -148,6 +149,12 @@ export function uiEditMenu(context, operations) {
                 .style('top', tipY + 'px')
                 .style('display', 'block')
                 .html(uiTooltipHtml(d.tooltip(), d.keys[0], d.title));
+
+            // update disabled again, just in case tooltip and disabled state disagree
+            // https://github.com/openstreetmap/iD/issues/6296#issuecomment-489259027
+            d3_select(this.parentNode)
+                .classed('disabled', d.disabled());
+
         }
 
         function mouseout() {
@@ -171,9 +178,9 @@ export function uiEditMenu(context, operations) {
     };
 
 
-    editMenu.center = function (_) {
+    editMenu.center = function(val) {
         if (!arguments.length) return center;
-        center = _;
+        center = val;
         return editMenu;
     };
 

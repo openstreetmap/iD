@@ -1,4 +1,4 @@
-import { osmRelation } from '../osm';
+import { osmRelation } from '../osm/relation';
 
 
 // `actionRestrictTurn` creates a turn restriction relation.

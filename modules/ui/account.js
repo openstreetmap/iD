@@ -1,7 +1,7 @@
 import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 
 
 export function uiAccount(context) {

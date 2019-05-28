@@ -17,6 +17,7 @@
         "lit",
         "maxheight",
         "minspeed",
+        "maxweight_bridge",
         "smoothness",
         "toll"
     ],

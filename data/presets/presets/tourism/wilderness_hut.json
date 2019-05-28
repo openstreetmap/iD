@@ -6,10 +6,14 @@
         "address",
         "building_area",
         "fee",
+        "payment_multi_fee",
         "fireplace"
     ],
     "moreFields": [
-        "payment_multi",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "reservation",
         "wheelchair"
     ],
     "geometry": [

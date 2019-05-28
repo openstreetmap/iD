@@ -22,6 +22,10 @@
     "tags": {
         "railway": "rail"
     },
-    "terms": [],
+    "terms": [
+        "rail line",
+        "railroad track",
+        "train track"
+    ],
     "name": "Rail"
 }

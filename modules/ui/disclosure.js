@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
 import { textDirection } from '../util/locale';
@@ -81,13 +81,13 @@ export function uiDisclosure(context, key, expandedDefault) {
                     : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
                 );
 
+            wrap
+                .call(uiToggle(_expanded));
+
             if (_expanded) {
                 wrap
                     .call(_content);
             }
-
-            wrap
-                .call(uiToggle(_expanded));
 
             dispatch.call('toggled', this, _expanded);
         }

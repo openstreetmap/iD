@@ -1,5 +1,11 @@
 {
-    "icon": "maki-shop",
+    "icon": "fas-futbol",
+    "fields": [
+        "name",
+        "operator",
+        "sport",
+        "{shop}"
+    ],
     "geometry": [
         "point",
         "area"

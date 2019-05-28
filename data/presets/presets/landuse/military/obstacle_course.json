@@ -11,10 +11,6 @@
         "landuse": "military",
         "military": "obstacle_course"
     },
-    "removeTags": {
-        "landuse": "military",
-        "military": "obstacle_course"
-    },
     "terms": [
         "army",
         "base",

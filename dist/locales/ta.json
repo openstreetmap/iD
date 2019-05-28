@@ -72,12 +72,10 @@
                 }
             },
             "orthogonalize": {
-                "title": "சதுரம்",
-                "key": "S"
+                "title": "சதுரம்"
             },
             "straighten": {
                 "title": "நேராக்கப்பட்டது",
-                "description": "இந்தக் கோடு நேராக்கப்பட்டது.",
                 "key": "S"
             },
             "delete": {
@@ -488,35 +486,11 @@
                 "category-landuse": {
                     "name": "காணிப் பயன்பாட்டு அம்சங்கள்"
                 },
-                "category-natural-area": {
-                    "name": "இயற்கை அம்சங்கள்"
-                },
-                "category-natural-line": {
-                    "name": "இயற்கை அம்சங்கள்"
-                },
-                "category-natural-point": {
-                    "name": "இயற்கை அம்சங்கள்"
-                },
-                "category-path": {
-                    "name": "பாதை அம்சங்கள்"
-                },
-                "category-rail": {
-                    "name": "ரயில் அம்சங்கள்"
-                },
                 "category-restriction": {
                     "name": "கட்டுப்பாடு அம்சங்கள்"
                 },
-                "category-road": {
-                    "name": "சாலை அம்சங்கள்"
-                },
                 "category-route": {
                     "name": "வழி அம்சங்கள்"
-                },
-                "category-water-area": {
-                    "name": "நீர் அம்சங்கள்"
-                },
-                "category-water-line": {
-                    "name": "நீர் அம்சங்கள்"
                 }
             },
             "fields": {
@@ -1518,8 +1492,7 @@
                     "options": {
                         "bucket": "வாளி",
                         "chemical": "இரசாயனம்",
-                        "flush": "அலசி",
-                        "pitlatrine": "மலகூடம்"
+                        "flush": "அலசி"
                     }
                 },
                 "toll": {
@@ -2264,18 +2237,6 @@
                 "power/tower": {
                     "name": "அதிக-மின்னழுத்தக் கோபுரம்"
                 },
-                "public_transport/platform_bus": {
-                    "name": "பேருந்து நிறுத்தம்  / தடம்"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "இலகு இரயில் நிறுத்தம் / நடைமேடை"
-                },
-                "public_transport/platform_train": {
-                    "name": "தொடருந்து நிறுத்தம் / நடைமேடை"
-                },
-                "public_transport/platform_tram": {
-                    "name": "டிராம் நிறுத்தம் / நடைமேடை"
-                },
                 "public_transport/station_light_rail": {
                     "name": "இலகு இரயில் நிலையம்"
                 },
@@ -2320,9 +2281,6 @@
                 },
                 "relation": {
                     "name": "தொடர்பு"
-                },
-                "roundabout": {
-                    "name": "வட்டச்சுற்று வழி"
                 },
                 "seamark/mooring": {
                     "name": "பிணைப்பு மிதவை"
@@ -2506,9 +2464,6 @@
                 },
                 "type/waterway": {
                     "name": "நீர்வழி"
-                },
-                "vertex": {
-                    "name": "பிற"
                 },
                 "waterway": {
                     "name": "நீர்வழி"

@@ -14,6 +14,7 @@
         "smoothness",
         "trail_visibility",
         "sac_scale",
+        "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",

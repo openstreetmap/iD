@@ -11,6 +11,10 @@
     "tags": {
         "manhole": "telecom"
     },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "telecom"
+    },
     "terms": [
         "cover",
         "phone",

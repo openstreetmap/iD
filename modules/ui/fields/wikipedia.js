@@ -6,11 +6,11 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { actionChangeTags } from '../../actions/index';
+import { actionChangeTags } from '../../actions/change_tags';
 import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
-import { svgIcon } from '../../svg/index';
-import { uiCombobox } from '../index';
+import { svgIcon } from '../../svg/icon';
+import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
@@ -168,12 +168,13 @@ export function uiFieldWikipedia(field, context) {
             value = decodeURIComponent(m[2]).replace(/_/g, ' ');
             if (m[3]) {
                 var anchor;
-                try {
+                // try {
+                // leave this out for now - #6232
                     // Best-effort `anchordecode:` implementation
-                    anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
-                } catch (e) {
+                    // anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
+                // } catch (e) {
                     anchor = decodeURIComponent(m[3]);
-                }
+                // }
                 value += '#' + anchor.replace(/_/g, ' ');
             }
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
@@ -185,7 +186,6 @@ export function uiFieldWikipedia(field, context) {
             syncTags.wikipedia = language()[2] + ':' + value;
         } else {
             syncTags.wikipedia = undefined;
-            syncTags.wikidata = undefined;
         }
 
         dispatch.call('change', this, syncTags);

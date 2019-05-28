@@ -16,8 +16,8 @@ export function uiToolSave(context) {
         label: t('save.title')
     };
 
-    var button = null,
-        tooltipBehavior = null;
+    var button = null;
+    var tooltipBehavior = null;
     var history = context.history();
     var key = uiCmd('⌘S');
     var _numChanges = 0;
@@ -51,6 +51,7 @@ export function uiToolSave(context) {
         }
     }
 
+
     function updateCount() {
         var val = history.difference().summary().length;
         if (val === _numChanges) return;
@@ -75,7 +76,6 @@ export function uiToolSave(context) {
 
 
     tool.render = function(selection) {
-
         tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
@@ -102,6 +102,7 @@ export function uiToolSave(context) {
         context.keybinding()
             .on(key, save, true);
 
+
         context.history()
             .on('change.save', updateCount);
 
@@ -118,8 +119,8 @@ export function uiToolSave(context) {
             });
     };
 
-    tool.uninstall = function() {
 
+    tool.uninstall = function() {
         context.keybinding()
             .off(key, true);
 

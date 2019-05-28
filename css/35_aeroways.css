@@ -83,6 +83,6 @@ path.line.stroke.tag-aeroway-runway {
     stroke-width: 2;
     stroke-dasharray: 12, 24;
 }
-.preset-icon-line path.line.stroke.tag-aeroway-runway {
+.preset-icon-container path.line.stroke.tag-aeroway-runway {
     stroke-dasharray: 0, 14, 8, 14;
 }

@@ -418,7 +418,7 @@ export function uiToolSearchAdd(context) {
 
         row.each(function(d) {
             d3_select(this).call(
-                uiPresetIcon()
+                uiPresetIcon(context)
                     .geometry(d.geometry)
                     .preset(d.preset || d.presets[0])
                     .sizeClass('small')
@@ -514,7 +514,7 @@ export function uiToolSearchAdd(context) {
         if (shouldExpand) {
             var subitems = item.subitems();
             var selector = '#' + itemSelection.node().id + ' + *';
-            item.subsection = d3_select(itemSelection.node().parentElement).insert('div', selector)
+            item.subsection = d3_select(itemSelection.node().parentNode).insert('div', selector)
                 .attr('class', 'subsection subitems');
             var subitemsEnter = item.subsection.selectAll('.list-item')
                 .data(subitems)

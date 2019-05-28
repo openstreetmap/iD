@@ -1,7 +1,6 @@
-import _groupBy from 'lodash-es/groupBy';
-
-import { utilObjectOmit } from '../util';
-import { osmJoinWays, osmWay } from '../osm';
+import { osmJoinWays } from '../osm/multipolygon';
+import { osmWay } from '../osm/way';
+import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
 
 export function actionAddMember(relationId, member, memberIndex, insertPair) {
@@ -63,12 +62,12 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             graph = graph.replace(tempWay);
             var tempMember = { id: tempWay.id, type: 'way', role: member.role };
             var tempRelation = relation.replaceMember({id: insertPair.originalID}, tempMember, true);
-            groups = _groupBy(tempRelation.members, function(m) { return m.type; });
+            groups = utilArrayGroupBy(tempRelation.members, 'type');
             groups.way = groups.way || [];
 
         } else {
             // Add the member anywhere, one time. Just push and let `osmJoinWays` decide where to put it.
-            groups = _groupBy(relation.members, function(m) { return m.type; });
+            groups = utilArrayGroupBy(relation.members, 'type');
             groups.way = groups.way || [];
             groups.way.push(member);
         }

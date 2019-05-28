@@ -1,76 +1,114 @@
 import { t } from '../util/locale';
-import { actionStraighten } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
-import { utilArrayDifference } from '../util/index';
+import { actionStraightenNodes } from '../actions/straighten_nodes';
+import { actionStraightenWay } from '../actions/straighten_way';
+import { behaviorOperation } from '../behavior/operation';
+import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
 export function operationStraighten(selectedIDs, context) {
-    var action = actionStraighten(selectedIDs, context.projection);
+    var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
+    var nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
+
+    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var coords = nodes.map(function(n) { return n.loc; });
+    var action = chooseAction();
+    var geometry;
+
+
+    function chooseAction() {
+        // straighten selected nodes
+        if (wayIDs.length === 0 && nodeIDs.length > 2) {
+            geometry = 'points';
+            return actionStraightenNodes(nodeIDs, context.projection);
+
+        // straighten selected ways (possibly between range of 2 selected nodes)
+        } else if (wayIDs.length > 0 && (nodeIDs.length === 0 || nodeIDs.length === 2)) {
+            var startNodeIDs = [];
+            var endNodeIDs = [];
+
+            for (var i = 0; i < selectedIDs.length; i++) {
+                var entity = context.entity(selectedIDs[i]);
+                if (entity.type === 'node') {
+                    continue;
+                } else if (entity.type !== 'way' || entity.isClosed()) {
+                    return false;  // exit early, can't straighten these
+                }
+
+                startNodeIDs.push(entity.first());
+                endNodeIDs.push(entity.last());
+            }
+
+            // Remove duplicate end/startNodeIDs (duplicate nodes cannot be at the line end)
+            startNodeIDs = startNodeIDs.filter(function(n) {
+                return startNodeIDs.indexOf(n) === startNodeIDs.lastIndexOf(n);
+            });
+            endNodeIDs = endNodeIDs.filter(function(n) {
+                return endNodeIDs.indexOf(n) === endNodeIDs.lastIndexOf(n);
+            });
+
+            // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
+            if (utilArrayDifference(startNodeIDs, endNodeIDs).length +
+                utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return false;
+
+            // Ensure path contains at least 3 unique nodes
+            var wayNodeIDs = utilGetAllNodes(wayIDs, context.graph())
+                .map(function(node) { return node.id; });
+            if (wayNodeIDs.length <= 2) return false;
+
+            // If range of 2 selected nodes is supplied, ensure nodes lie on the selected path
+            if (nodeIDs.length === 2 && (
+                wayNodeIDs.indexOf(nodeIDs[0]) === -1 || wayNodeIDs.indexOf(nodeIDs[1]) === -1
+            )) return false;
+
+            geometry = 'line';
+            return actionStraightenWay(selectedIDs, context.projection);
+        }
+
+        return false;
+    }
 
 
     function operation() {
+        if (!action) return;
+
         context.perform(action, operation.annotation());
+
+        window.setTimeout(function() {
+            context.validator().validate();
+        }, 300);  // after any transition
     }
 
 
     operation.available = function() {
-        var nodes = [];
-        var startNodes = [];
-        var endNodes = [];
-        var selectedNodes = [];
-
-        // collect nodes along selected ways
-        for (var i = 0; i < selectedIDs.length; i++) {
-            if (!context.hasEntity(selectedIDs[i])) return false;
-
-            var entity = context.entity(selectedIDs[i]);
-            if (entity.type === 'node') {
-                selectedNodes.push(entity.id);
-                continue;
-            } else if (entity.type !== 'way' || entity.isClosed()) {
-                return false;  // exit early, can't straighten these
-            }
-
-            nodes = nodes.concat(entity.nodes);
-            startNodes.push(entity.nodes[0]);
-            endNodes.push(entity.nodes[entity.nodes.length-1]);
-        }
-
-        // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end)
-        startNodes = startNodes.filter(function(n) {
-            return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
-        });
-        endNodes = endNodes.filter(function(n) {
-            return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
-        });
-
-        // Return false if line is only 2 nodes long
-        if (new Set(nodes).size <= 2) return false;
-
-        // Return false unless exactly 0 or 2 specific start/end nodes are selected
-        if (!(selectedNodes.length === 0 || selectedNodes.length === 2)) return false;
-
-        // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
-        if (utilArrayDifference(startNodes, endNodes).length +
-            utilArrayDifference(endNodes, startNodes).length !== 2) return false;
-
-        // Ensure both start/end selected nodes lie on the selected path
-        if (selectedNodes.length === 2 && (
-            nodes.indexOf(selectedNodes[0]) === -1 || nodes.indexOf(selectedNodes[1]) === -1
-        )) return false;
-
-        return true;
+        return Boolean(action);
     };
 
 
     operation.disabled = function() {
-        var reason;
-        for (var i = 0; i < selectedIDs.length; i++) {
-            if (context.hasHiddenConnections(selectedIDs[i])) {
-                reason = 'connected_to_hidden';
-            }
+        var reason = action.disabled(context.graph());
+        if (reason) {
+            return reason;
+        } else if (someMissing()) {
+            return 'not_downloaded';
+        } else if (selectedIDs.some(context.hasHiddenConnections)) {
+            return 'connected_to_hidden';
         }
-        return action.disabled(context.graph()) || reason;
+
+        return false;
+
+
+        function someMissing() {
+            if (context.inIntro()) return false;
+            var osm = context.connection();
+            if (osm) {
+                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                if (missing.length) {
+                    missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 
@@ -78,12 +116,12 @@ export function operationStraighten(selectedIDs, context) {
         var disable = operation.disabled();
         return disable ?
             t('operations.straighten.' + disable) :
-            t('operations.straighten.description');
+            t('operations.straighten.description.' + geometry);
     };
 
 
     operation.annotation = function() {
-        return t('operations.straighten.annotation');
+        return t('operations.straighten.annotation.' + geometry);
     };
 
 

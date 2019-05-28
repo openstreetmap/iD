@@ -1,12 +1,10 @@
 import { t } from '../util/locale';
-import {
-    actionAddEntity,
-    actionAddMidpoint,
-    actionAddVertex
-} from '../actions';
+import { actionAddEntity } from '../actions/add_entity';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionAddVertex } from '../actions/add_vertex';
 
-import { behaviorAddWay } from '../behavior';
-import { modeDrawArea } from './index';
+import { behaviorAddWay } from '../behavior/add_way';
+import { modeDrawArea } from './draw_area';
 import { osmNode, osmWay } from '../osm';
 
 

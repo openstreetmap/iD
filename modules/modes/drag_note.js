@@ -4,10 +4,11 @@ import {
 } from 'd3-selection';
 
 import { services } from '../services';
-import { actionNoop } from '../actions';
-import { behaviorEdit, behaviorDrag } from '../behavior';
+import { actionNoop } from '../actions/noop';
+import { behaviorDrag } from '../behavior/drag';
+import { behaviorEdit } from '../behavior/edit';
 import { geoVecSubtract, geoViewportEdge } from '../geo';
-import { modeSelectNote } from './index';
+import { modeSelectNote } from './select_note';
 
 
 export function modeDragNote(context) {

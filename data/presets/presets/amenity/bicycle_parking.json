@@ -6,11 +6,11 @@
         "operator",
         "covered",
         "access_simple",
-        "fee"
+        "fee",
+        "payment_multi_fee"
     ],
     "moreFields": [
-        "payment_multi",
-        "covered"
+        "lit"
     ],
     "geometry": [
         "point",

@@ -1,26 +1,16 @@
-import _map from 'lodash-es/map';
 import _throttle from 'lodash-es/throttle';
 
-import { set as d3_set } from 'd3-collection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
 import { scaleLinear as d3_scaleLinear } from 'd3-scale';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import {
-    zoom as d3_zoom,
-    zoomIdentity as d3_zoomIdentity
-} from 'd3-zoom';
+import { event as d3_event, select as d3_select } from 'd3-selection';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
+import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
-import { uiFlash } from '../ui';
+import { uiFlash } from '../ui/flash';
 import { utilFastMouse, utilFunctor, utilRebind, utilSetTransform } from '../util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
@@ -105,22 +95,22 @@ export function rendererMap(context) {
             osm.on('change.map', immediateRedraw);
         }
 
-        context.history()
-            .on('change.map', immediateRedraw)
-            .on('undone.map redone.map', function(stack) {
-                var mode = context.mode().id;
-                if (mode !== 'browse' && mode !== 'select') return;
+        function didUndoOrRedo(targetTransform) {
+            var mode = context.mode().id;
+            if (mode !== 'browse' && mode !== 'select') return;
+            if (targetTransform) {
+                map.transformEase(targetTransform);
+            }
+        }
 
-                var followSelected = false;
-                if (Array.isArray(stack.selectedIDs)) {
-                    followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
-                    context.enter(
-                        modeSelect(context, stack.selectedIDs).follow(followSelected)
-                    );
-                }
-                if (!followSelected && stack.transform) {
-                    map.transformEase(stack.transform);
-                }
+        context.history()
+            .on('merge.map', function() { scheduleRedraw(); })
+            .on('change.map', immediateRedraw)
+            .on('undone.map', function(stack, fromStack) {
+                didUndoOrRedo(fromStack.transform);
+            })
+            .on('redone.map', function(stack) {
+                didUndoOrRedo(stack.transform);
             });
 
         context.background()
@@ -266,19 +256,21 @@ export function rendererMap(context) {
     }
 
 
-    function drawVector(difference, extent) {
+    function drawEditable(difference, extent) {
         var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
         var all = context.intersects(map.extent());
         var fullRedraw = false;
         var data;
+        var set;
         var filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
-            filter = function(d) { return d.id in complete; };
+            set = new Set(data.map(function(entity) { return entity.id; }));
+            filter = function(d) { return set.has(d.id); };
             features.clear(data);
 
         } else {
@@ -290,7 +282,7 @@ export function rendererMap(context) {
 
             if (extent) {
                 data = context.intersects(map.extent().intersection(extent));
-                var set = d3_set(_map(data, 'id'));
+                set = new Set(data.map(function(entity) { return entity.id; }));
                 filter = function(d) { return set.has(d.id); };
 
             } else {
@@ -577,15 +569,13 @@ export function rendererMap(context) {
 
         if (!difference) {
             supersurface.call(context.background());
+            wrapper.call(drawLayers);
         }
-
-        wrapper
-            .call(drawLayers);
 
         // OSM
         if (map.editable()) {
             context.loadTiles(projection);
-            drawVector(difference, extent);
+            drawEditable(difference, extent);
         } else {
             editOff();
         }
@@ -748,6 +738,27 @@ export function rendererMap(context) {
         return map;
     };
 
+    map.unobscuredCenterZoomEase = function(loc, zoom) {
+        var offset = map.unobscuredOffsetPx();
+
+        var proj = geoRawMercator().transform(projection.transform());  // copy projection
+        // use the target zoom to calculate the offset center
+        proj.scale(geoZoomToScale(zoom, TILESIZE));
+        
+        var locPx = proj(loc);
+        var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
+        var offsetLoc = proj.invert(offsetLocPx);
+
+        map.centerZoomEase(offsetLoc, zoom);
+    };
+
+    map.unobscuredOffsetPx = function() {
+        var openPane = d3_select('.map-panes .map-pane.shown');
+        if (!openPane.empty()) {
+            return [openPane.node().offsetWidth/2, 0];
+        }
+        return [0, 0];
+    };
 
     map.zoom = function(z2) {
         if (!arguments.length) {
@@ -897,16 +908,16 @@ export function rendererMap(context) {
 
 
     map.editable = function() {
-        var osmLayer = surface.selectAll('.data-layer.osm');
-        if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('osm');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };
 
 
     map.notesEditable = function() {
-        var noteLayer = surface.selectAll('.data-layer.notes');
-        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
+        var layer = context.layers().layer('notes');
+        if (!layer || !layer.enabled()) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };

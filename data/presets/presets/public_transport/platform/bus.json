@@ -19,11 +19,6 @@
         "bus": "yes",
         "highway": "footway"
     },
-    "removeTags": {
-        "public_transport": "platform",
-        "bus": "yes",
-        "highway": "footway"
-    },
     "reference": {
         "key": "public_transport",
         "value": "platform"

@@ -1,6 +1,7 @@
 {
     "icon": "maki-horse-riding",
     "fields": [
+        "name",
         "surface",
         "sport_racing_nonmotor",
         "lit",
@@ -8,7 +9,6 @@
         "lanes"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
@@ -17,11 +17,6 @@
         "sport": "horse_racing"
     },
     "addTags": {
-        "leisure": "track",
-        "sport": "horse_racing",
-        "highway": "bridleway"
-    },
-    "removeTags": {
         "leisure": "track",
         "sport": "horse_racing",
         "highway": "bridleway"

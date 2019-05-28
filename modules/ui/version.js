@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { tooltip } from '../util/tooltip';
 
 

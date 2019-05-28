@@ -11,7 +11,7 @@ describe('iD.serviceTaginfo', function() {
     });
 
     beforeEach(function() {
-        server = sinon.fakeServer.create();
+        server = window.fakeFetch().create();
         taginfo = iD.services.taginfo;
 
         // prepopulate popular keys list with "name"
@@ -22,7 +22,8 @@ describe('iD.serviceTaginfo', function() {
                 '{"data":[{"count_all":56136034,"key":"name","count_all_fraction":0.0132}]}']
         );
         server.respond();
-        server = sinon.fakeServer.create();
+        server.restore();
+        server = window.fakeFetch().create();
     });
 
     afterEach(function() {
@@ -35,7 +36,7 @@ describe('iD.serviceTaginfo', function() {
 
 
     describe('#keys', function() {
-        it('calls the given callback with the results of the keys query', function() {
+        it('calls the given callback with the results of the keys query', function(done) {
             var callback = sinon.spy();
             taginfo.keys({query: 'amen'}, callback);
 
@@ -45,15 +46,18 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(query(server.requests[0].url)).to.eql(
-                {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
-            );
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'amenity', 'value':'amenity'}]
-            );
+            window.setTimeout(function() {
+                expect(query(server.requests()[0].url)).to.eql(
+                    {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
+                );
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'amenity', 'value':'amenity'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes popular keys', function() {
+        it('includes popular keys', function(done) {
             var callback = sinon.spy();
             taginfo.keys({query: 'amen'}, callback);
 
@@ -64,12 +68,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'amenity', 'value':'amenity'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'amenity', 'value':'amenity'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes popular keys with an entity type filter', function() {
+        it('includes popular keys with an entity type filter', function(done) {
             var callback = sinon.spy();
             taginfo.keys({query: 'amen', filter: 'nodes'}, callback);
 
@@ -80,12 +87,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'amenity', 'value':'amenity'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'amenity', 'value':'amenity'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes unpopular keys with a wiki page', function() {
+        it('includes unpopular keys with a wiki page', function(done) {
             var callback = sinon.spy();
             taginfo.keys({query: 'amen'}, callback);
 
@@ -96,13 +106,16 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [
-                {'title':'amenity', 'value':'amenity'},
-                {'title':'amenityother', 'value':'amenityother'}
-            ]);
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(null, [
+                    {'title':'amenity', 'value':'amenity'},
+                    {'title':'amenityother', 'value':'amenityother'}
+                ]);
+                done();
+            }, 50);
         });
 
-        it('sorts keys with \':\' below keys without \':\'', function() {
+        it('sorts keys with \':\' below keys without \':\'', function(done) {
             var callback = sinon.spy();
             taginfo.keys({query: 'ref'}, callback);
 
@@ -113,14 +126,17 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'ref', 'value':'ref'},{'title':'ref:bag', 'value':'ref:bag'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'ref', 'value':'ref'},{'title':'ref:bag', 'value':'ref:bag'}]
+                );
+                done();
+            }, 50);
         });
     });
 
     describe('#multikeys', function() {
-        it('calls the given callback with the results of the multikeys query', function() {
+        it('calls the given callback with the results of the multikeys query', function(done) {
             var callback = sinon.spy();
             taginfo.multikeys({query: 'recycling:'}, callback);
 
@@ -130,15 +146,18 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(query(server.requests[0].url)).to.eql(
-                {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
-            );
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'recycling:glass', 'value':'recycling:glass'}]
-            );
+            window.setTimeout(function() {
+                expect(query(server.requests()[0].url)).to.eql(
+                    {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
+                );
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'recycling:glass', 'value':'recycling:glass'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('excludes multikeys with extra colons', function() {
+        it('excludes multikeys with extra colons', function(done) {
             var callback = sinon.spy();
             taginfo.multikeys({query: 'service:bicycle:'}, callback);
 
@@ -149,12 +168,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('excludes multikeys with wrong prefix', function() {
+        it('excludes multikeys with wrong prefix', function(done) {
             var callback = sinon.spy();
             taginfo.multikeys({query: 'service:bicycle:'}, callback);
 
@@ -165,14 +187,17 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
+                );
+                done();
+            }, 50);
         });
     });
 
     describe('#values', function() {
-        it('calls the given callback with the results of the values query', function() {
+        it('calls the given callback with the results of the values query', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'amenity', query: 'par'}, callback);
 
@@ -182,15 +207,18 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(query(server.requests[0].url)).to.eql(
-                {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
-            );
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'parking','title':'A place for parking cars'}]
-            );
+            window.setTimeout(function() {
+                expect(query(server.requests()[0].url)).to.eql(
+                    {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
+                );
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'parking','title':'A place for parking cars'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes popular values', function() {
+        it('includes popular values', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'amenity', query: 'par'}, callback);
 
@@ -201,12 +229,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'parking','title':'A place for parking cars'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'parking','title':'A place for parking cars'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('does not get values for extremely unpopular keys', function() {
+        it('does not get values for extremely unpopular keys', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'name', query: 'ste'}, callback);
 
@@ -217,10 +248,13 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, []);
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(null, []);
+                done();
+            }, 50);
         });
 
-        it('excludes values with capital letters and some punctuation', function() {
+        it('excludes values with capital letters and some punctuation', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'amenity', query: 'par'}, callback);
 
@@ -234,12 +268,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'parking','title':'A place for parking cars'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'parking','title':'A place for parking cars'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes network values with capital letters and some punctuation', function() {
+        it('includes network values with capital letters and some punctuation', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'network', query: 'us'}, callback);
 
@@ -253,16 +290,19 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [
-                {'value':'US:TX:FM','title':'Farm to Market Roads in the U.S. state of Texas.'},
-                {'value':'US:KY','title':'Primary and secondary state highways in the U.S. state of Kentucky.'},
-                {'value':'US:US','title':'U.S. routes in the United States.'},
-                {'value':'US:I','title':'Interstate highways in the United States.'},
-                {'value':'US:MD','title':'State highways in the U.S. state of Maryland.'}
-            ]);
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(null, [
+                    {'value':'US:TX:FM','title':'Farm to Market Roads in the U.S. state of Texas.'},
+                    {'value':'US:KY','title':'Primary and secondary state highways in the U.S. state of Kentucky.'},
+                    {'value':'US:US','title':'U.S. routes in the United States.'},
+                    {'value':'US:I','title':'Interstate highways in the United States.'},
+                    {'value':'US:MD','title':'State highways in the U.S. state of Maryland.'}
+                ]);
+                done();
+            }, 50);
         });
 
-        it('includes biological genus values with capital letters', function() {
+        it('includes biological genus values with capital letters', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'genus', query: 'qu'}, callback);
 
@@ -272,12 +312,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'Quercus','title':'Oak'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'Quercus','title':'Oak'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes biological taxon values with capital letters', function() {
+        it('includes biological taxon values with capital letters', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'taxon', query: 'qu'}, callback);
 
@@ -287,12 +330,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'Quercus robur','title':'Oak'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'Quercus robur','title':'Oak'}]
+                );
+                done();
+            }, 50);
         });
 
-        it('includes biological species values with capital letters', function() {
+        it('includes biological species values with capital letters', function(done) {
             var callback = sinon.spy();
             taginfo.values({key: 'species', query: 'qu'}, callback);
 
@@ -302,14 +348,17 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(
-                null, [{'value':'Quercus robur','title':'Oak'}]
-            );
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'Quercus robur','title':'Oak'}]
+                );
+                done();
+            }, 50);
         });
     });
 
     describe('#roles', function() {
-        it('calls the given callback with the results of the roles query', function() {
+        it('calls the given callback with the results of the roles query', function(done) {
             var callback = sinon.spy();
             taginfo.roles({rtype: 'route', query: 's', geometry: 'relation'}, callback);
 
@@ -320,18 +369,21 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(query(server.requests[0].url)).to.eql(
-                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
-            );
-            expect(callback).to.have.been.calledWith(null, [
-                {'value': 'stop', 'title': 'stop'},
-                {'value': 'south', 'title': 'south'}
-            ]);
+            window.setTimeout(function() {
+                expect(query(server.requests()[0].url)).to.eql(
+                    {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
+                );
+                expect(callback).to.have.been.calledWith(null, [
+                    {'value': 'stop', 'title': 'stop'},
+                    {'value': 'south', 'title': 'south'}
+                ]);
+                done();
+            }, 50);
         });
     });
 
     describe('#docs', function() {
-        it('calls the given callback with the results of the docs query', function() {
+        it('calls the given callback with the results of the docs query', function(done) {
             var callback = sinon.spy();
             taginfo.docs({key: 'amenity', value: 'parking'}, callback);
 
@@ -341,12 +393,15 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(query(server.requests[0].url)).to.eql(
-                {key: 'amenity', value: 'parking'}
-            );
-            expect(callback).to.have.been.calledWith(
-                null, [{'on_way':false,'lang':'en','on_area':true,'image':'File:Car park2.jpg'}]
-            );
+            window.setTimeout(function() {
+                expect(query(server.requests()[0].url)).to.eql(
+                    {key: 'amenity', value: 'parking'}
+                );
+                expect(callback).to.have.been.calledWith(
+                    null, [{'on_way':false,'lang':'en','on_area':true,'image':'File:Car park2.jpg'}]
+                );
+                done();
+            }, 50);
         });
     });
 

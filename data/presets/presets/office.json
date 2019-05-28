@@ -9,12 +9,17 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "operator",
-        "smoking",
-        "website",
-        "phone",
+        "building/levels_building",
+        "height_building",
         "email",
         "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "operator",
+        "phone",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

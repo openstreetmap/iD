@@ -1,4 +1,4 @@
-describe('utilKeybinding', function() {
+describe('iD.utilKeybinding', function() {
     var keybinding, spy, input;
 
     beforeEach(function () {

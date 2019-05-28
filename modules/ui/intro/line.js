@@ -7,7 +7,8 @@ import {
 
 import { t, textDirection } from '../../util/locale';
 import { geoSphericalDistance } from '../../geo';
-import { modeBrowse, modeSelect } from '../../modes';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
 import { icon, pad, selectMenuItem, transitionTime } from './helper';
 
@@ -20,7 +21,7 @@ export function uiIntroLine(context, reveal) {
     var tulipRoadStart = [-85.6297754121684, 41.95805253325314];
     var tulipRoadMidpoint = [-85.62975395449628, 41.95787501510204];
     var tulipRoadIntersection = [-85.62974496187628, 41.95742515554585];
-    var roadCategory = context.presets().item('category-road');
+    var roadCategory = context.presets().item('category-road_minor');
     var residentialPreset = context.presets().item('highway/residential');
     var woodRoadID = 'w525';
     var woodRoadEndID = 'n2862';
@@ -241,7 +242,7 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var button = d3_select('.preset-category-road .preset-list-button');
+        var button = d3_select('.preset-category-road_minor .preset-list-button');
         if (button.empty()) return chapter.restart();
 
         // disallow scrolling
@@ -277,7 +278,7 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var subgrid = d3_select('.preset-category-road .subgrid');
+        var subgrid = d3_select('.preset-category-road_minor .subgrid');
         if (subgrid.empty()) return chapter.restart();
 
         subgrid.selectAll(':not(.preset-highway-residential) .preset-list-button')

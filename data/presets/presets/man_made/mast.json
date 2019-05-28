@@ -6,6 +6,7 @@
         "height"
     ],
     "moreFields": [
+        "manufacturer",
         "material",
         "communication_multi"
     ],

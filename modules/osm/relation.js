@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { osmEntity } from './entity';
@@ -173,8 +171,7 @@ Object.assign(osmRelation.prototype, {
     // By default, adding a duplicate member (by id and role) is prevented.
     // Return an updated relation.
     replaceMember: function(needle, replacement, keepDuplicates) {
-        if (!this.memberById(needle.id))
-            return this;
+        if (!this.memberById(needle.id)) return this;
 
         var members = [];
 
@@ -183,11 +180,11 @@ Object.assign(osmRelation.prototype, {
             if (member.id !== needle.id) {
                 members.push(member);
             } else if (keepDuplicates || !this.memberByIdAndRole(replacement.id, member.role)) {
-                members.push({id: replacement.id, type: replacement.type, role: member.role});
+                members.push({ id: replacement.id, type: replacement.type, role: member.role });
             }
         }
 
-        return this.update({members: members});
+        return this.update({ members: members });
     },
 
 
@@ -196,7 +193,7 @@ Object.assign(osmRelation.prototype, {
             relation: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                member: _map(this.members, function(member) {
+                member: this.members.map(function(member) {
                     return {
                         keyAttributes: {
                             type: member.type,
@@ -204,13 +201,15 @@ Object.assign(osmRelation.prototype, {
                             ref: osmEntity.id.toOSM(member.id)
                         }
                     };
-                }),
-                tag: _map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                }, this),
+                tag: Object.keys(this.tags).map(function(k) {
+                    return { keyAttributes: { k: k, v: this.tags[k] } };
+                }, this)
             }
         };
-        if (changeset_id) r.relation['@changeset'] = changeset_id;
+        if (changeset_id) {
+            r.relation['@changeset'] = changeset_id;
+        }
         return r;
     },
 
@@ -257,6 +256,15 @@ Object.assign(osmRelation.prototype, {
     },
 
 
+    hasFromViaTo: function() {
+        return (
+            this.members.some(function(m) { return m.role === 'from'; }) &&
+            this.members.some(function(m) { return m.role === 'via'; }) &&
+            this.members.some(function(m) { return m.role === 'to'; })
+        );
+    },
+
+
     isRestriction: function() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
     },
@@ -299,8 +307,12 @@ Object.assign(osmRelation.prototype, {
         outers = osmJoinWays(outers, resolver);
         inners = osmJoinWays(inners, resolver);
 
-        outers = outers.map(function(outer) { return _map(outer.nodes, 'loc'); });
-        inners = inners.map(function(inner) { return _map(inner.nodes, 'loc'); });
+        outers = outers.map(function(outer) {
+            return outer.nodes.map(function(node) { return node.loc; });
+        });
+        inners = inners.map(function(inner) {
+            return inner.nodes.map(function(node) { return node.loc; });
+        });
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
@@ -332,10 +344,11 @@ Object.assign(osmRelation.prototype, {
             }
 
             var o = findOuter(inners[i]);
-            if (o !== undefined)
+            if (o !== undefined) {
                 result[o].push(inners[i]);
-            else
+            } else {
                 result.push([inners[i]]); // Invalid geometry
+            }
         }
 
         return result;

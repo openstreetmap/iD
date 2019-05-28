@@ -19,6 +19,7 @@
         "lit",
         "maxheight",
         "maxspeed/advisory",
+        "maxweight_bridge",
         "name",
         "ref_road_number",
         "smoothness",
@@ -31,10 +32,6 @@
         "highway": "motorway_link"
     },
     "addTags": {
-        "highway": "motorway_link",
-        "oneway": "yes"
-    },
-    "removeTags": {
         "highway": "motorway_link",
         "oneway": "yes"
     },

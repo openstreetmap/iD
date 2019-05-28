@@ -1,19 +1,12 @@
-import _groupBy from 'lodash-es/groupBy';
-import _flatten from 'lodash-es/flatten';
-import _forOwn from 'lodash-es/forOwn';
-import _map from 'lodash-es/map';
-
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments,
-    svgPath,
-    svgRelationMemberTags,
-    svgSegmentWay,
-    svgTagClasses
-} from './index';
+    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
+} from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
+import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -190,7 +183,6 @@ export function svgLines(projection, context) {
 
         var getPath = svgPath(projection, graph);
         var ways = [];
-        var pathdata = {};
         var onewaydata = {};
         var sideddata = {};
         var oldMultiPolygonOuters = {};
@@ -207,9 +199,10 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        pathdata = _groupBy(ways, function(way) { return way.layer(); });
+        var pathdata = utilArrayGroupBy(ways, function(way) { return way.layer(); });
 
-        _forOwn(pathdata, function(v, k) {
+        Object.keys(pathdata).forEach(function(k) {
+            var v = pathdata[k];
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
                 projection, graph, 35,
@@ -218,7 +211,7 @@ export function svgLines(projection, context) {
                     return entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating';
                 }
             );
-            onewaydata[k] = _flatten(_map(onewayArr, onewaySegments));
+            onewaydata[k] = utilArrayFlatten(onewayArr.map(onewaySegments));
 
             var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
@@ -226,7 +219,7 @@ export function svgLines(projection, context) {
                 function shouldReverse() { return false; },
                 function bothDirections() { return false; }
             );
-            sideddata[k] = _flatten(_map(sidedArr, sidedSegments));
+            sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
         });
 
 

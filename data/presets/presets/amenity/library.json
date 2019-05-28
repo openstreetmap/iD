@@ -6,13 +6,13 @@
         "building_area",
         "address",
         "ref/isil",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
         "access_simple",
         "air_conditioning",
         "opening_hours",
-        "internet_access/fee",
         "internet_access/ssid",
         "website",
         "phone",

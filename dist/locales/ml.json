@@ -31,12 +31,10 @@
                 "title": "വൃത്താകൃതി"
             },
             "orthogonalize": {
-                "title": "ചതുരം",
-                "key": "S"
+                "title": "ചതുരം"
             },
             "straighten": {
                 "title": "നേരായ",
-                "description": "ഈ വരി നേരെയാക്കുക",
                 "key": "S"
             },
             "delete": {
@@ -86,29 +84,6 @@
             }
         },
         "presets": {
-            "categories": {
-                "category-natural-line": {
-                    "name": "പ്രകൃതി സവിശേഷതകൾ"
-                },
-                "category-natural-point": {
-                    "name": "പ്രകൃതി സവിശേഷതകൾ"
-                },
-                "category-path": {
-                    "name": "പാത സവിശേഷതകൾ"
-                },
-                "category-rail": {
-                    "name": "റെയിൽ സവിശേഷതകൾ"
-                },
-                "category-road": {
-                    "name": "റോഡ് സവിശേഷതകൾ"
-                },
-                "category-water-area": {
-                    "name": "ജല സവിശേഷതകൾ"
-                },
-                "category-water-line": {
-                    "name": "ജല സവിശേഷതകൾ"
-                }
-            },
             "fields": {
                 "access": {
                     "types": {

@@ -1,18 +1,7 @@
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { request as d3_request } from 'd3-request';
-
-import {
-    event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
-} from 'd3-selection';
-
-import {
-    zoom as d3_zoom,
-    zoomIdentity as d3_zoomIdentity
-} from 'd3-zoom';
+import { json as d3_json } from 'd3-fetch';
+import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import rbush from 'rbush';
 
@@ -35,8 +24,8 @@ var _oscCache;
 var _oscSelectedImage;
 
 
-function abortRequest(i) {
-    i.abort();
+function abortRequest(controller) {
+    controller.abort();
 }
 
 
@@ -56,10 +45,10 @@ function loadTiles(which, url, projection) {
 
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];
-    _forEach(cache.inflight, function(v, k) {
+    Object.keys(cache.inflight).forEach(function(k) {
         var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
-            abortRequest(v);
+            abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
         }
     });
@@ -88,22 +77,22 @@ function loadNextTilePage(which, currZoom, url, tile) {
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
 
-    cache.inflight[id] = d3_request(url)
-        .mimeType('application/json')
-        .header('Content-type', 'application/x-www-form-urlencoded')
-        .response(function(xhr) { return JSON.parse(xhr.responseText); })
-        .post(params, function(err, data) {
+    var controller = new AbortController();
+    cache.inflight[id] = controller;
+
+    var options = {
+        method: 'POST',
+        signal: controller.signal,
+        body: params,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    };
+
+    d3_json(url, options)
+        .then(function(data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
-            if (err || !data.currentPageItems || !data.currentPageItems.length) return;
-
-            function localeDateString(s) {
-                if (!s) return null;
-                var detected = utilDetect();
-                var options = { day: 'numeric', month: 'short', year: 'numeric' };
-                var d = new Date(s);
-                if (isNaN(d.getTime())) return null;
-                return d.toLocaleDateString(detected.locale, options);
+            if (!data || !data.currentPageItems || !data.currentPageItems.length) {
+                throw new Error('No Data');
             }
 
             var features = data.currentPageItems.map(function(item) {
@@ -115,7 +104,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
-                        captured_at: localeDateString(item.shot_date || item.date_added),
+                        captured_at: (item.shot_date || item.date_added),
                         captured_by: item.username,
                         imagePath: item.lth_name,
                         sequence_id: item.sequence_id,
@@ -138,16 +127,20 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
             cache.rtree.load(features);
 
-            if (which === 'images') {
-                dispatch.call('loadedImages');
-            }
-
             if (data.currentPageItems.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
             } else {
                 cache.nextPage[tile.id] = Infinity;     // no more pages to load
             }
+
+            if (which === 'images') {
+                dispatch.call('loadedImages');
+            }
+        })
+        .catch(function() {
+            cache.loaded[id] = true;
+            delete cache.inflight[id];
         });
 }
 
@@ -196,12 +189,8 @@ export default {
     },
 
     reset: function() {
-        var cache = _oscCache;
-
-        if (cache) {
-            if (cache.images && cache.images.inflight) {
-                _forEach(cache.images.inflight, abortRequest);
-            }
+        if (_oscCache) {
+            Object.values(_oscCache.images.inflight).forEach(abortRequest);
         }
 
         _oscCache = {
@@ -441,7 +430,7 @@ export default {
                 attribution
                     .append('span')
                     .attr('class', 'captured_at')
-                    .text(d.captured_at);
+                    .text(localeDateString(d.captured_at));
 
                 attribution
                     .append('span')
@@ -455,7 +444,18 @@ export default {
                 .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');
         }
+
         return this;
+
+
+        function localeDateString(s) {
+            if (!s) return null;
+            var detected = utilDetect();
+            var options = { day: 'numeric', month: 'short', year: 'numeric' };
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleDateString(detected.locale, options);
+        }
     },
 
 

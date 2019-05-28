@@ -1,20 +1,16 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 
-import { actionAddMidpoint } from '../actions';
+import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionDeleteRelation } from '../actions/delete_relation';
 
-import {
-    behaviorBreathe,
-    behaviorCopy,
-    behaviorHover,
-    behaviorLasso,
-    behaviorPaste,
-    behaviorSelect
-} from '../behavior';
+import { behaviorBreathe } from '../behavior/breathe';
+import { behaviorCopy } from '../behavior/copy';
+import { behaviorHover } from '../behavior/hover';
+import { behaviorLasso } from '../behavior/lasso';
+import { behaviorPaste } from '../behavior/paste';
+import { behaviorSelect } from '../behavior/select';
 
 import { geoExtent, geoChooseEdge, geoPointInPolygon } from '../geo';
 import { modeBrowse } from './browse';
@@ -22,16 +18,16 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
-import { uiEditMenu, uiSelectionList } from '../ui';
+import { uiEditMenu } from '../ui/edit_menu';
+import { uiSelectionList } from '../ui/selection_list';
 import { uiCmd } from '../ui/cmd';
-
 import {
     utilArrayIntersection, utilEntityOrMemberSelector,
     utilEntitySelector, utilKeybinding
 } from '../util';
 
 // deprecation warning - Radial Menu to be removed in iD v3
-import { uiRadialMenu } from '../ui';
+import { uiRadialMenu } from '../ui/radial_menu';
 
 
 var _relatedParent;
@@ -44,7 +40,6 @@ export function modeSelect(context, selectedIDs) {
     };
 
     var keybinding = utilKeybinding('select');
-    var timeout = null;
     var behaviors = [
         behaviorCopy(context),
         behaviorPaste(context),
@@ -55,11 +50,12 @@ export function modeSelect(context, selectedIDs) {
         modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
         modeDragNote(context).behavior
     ];
-    var inspector;
+    var inspector;   // unused?
     var editMenu;
-    var newFeature = false;
-    var suppressMenu = true;
-    var follow = false;
+    var _timeout = null;
+    var _newFeature = false;
+    var _suppressMenu = true;
+    var _follow = false;
 
 
     var wrap = context.container()
@@ -67,7 +63,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function singular() {
-        if (selectedIDs.length === 1) {
+        if (selectedIDs && selectedIDs.length === 1) {
             return context.hasEntity(selectedIDs[0]);
         }
     }
@@ -148,11 +144,11 @@ export function modeSelect(context, selectedIDs) {
 
 
     function positionMenu() {
-        if (!editMenu) { return; }
+        if (!editMenu) return;
 
         var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
-            suppressMenu = true;
+            _suppressMenu = true;
         } else {
             var point = context.mouse();
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
@@ -160,7 +156,7 @@ export function modeSelect(context, selectedIDs) {
             if (point && geoPointInPolygon(point, viewport)) {
                 editMenu.center(point);
             } else {
-                suppressMenu = true;
+                _suppressMenu = true;
             }
         }
     }
@@ -207,29 +203,29 @@ export function modeSelect(context, selectedIDs) {
         }
 
         positionMenu();
-        if (!suppressMenu) {
+        if (!_suppressMenu) {
             showMenu();
         }
     };
 
 
     mode.newFeature = function(val) {
-        if (!arguments.length) return newFeature;
-        newFeature = val;
+        if (!arguments.length) return _newFeature;
+        _newFeature = val;
         return mode;
     };
 
 
     mode.suppressMenu = function(val) {
-        if (!arguments.length) return suppressMenu;
-        suppressMenu = val;
+        if (!arguments.length) return _suppressMenu;
+        _suppressMenu = val;
         return mode;
     };
 
 
     mode.follow = function(val) {
-        if (!arguments.length) return follow;
-        follow = val;
+        if (!arguments.length) return _follow;
+        _follow = val;
         return mode;
     };
 
@@ -246,15 +242,19 @@ export function modeSelect(context, selectedIDs) {
 
         operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
-            .filter(function(o) { return o.available() && o.id !== 'delete'; });
+            .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
+
+        var downgradeOperation = Operations.operationDowngrade(selectedIDs, context);
+        // don't allow delete if downgrade is available
+        var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
 
         // deprecation warning - Radial Menu to be removed in iD v3
         var isRadialMenu = context.storage('edit-menu-style') === 'radial';
         if (isRadialMenu) {
             operations = operations.slice(0,7);
-            operations.unshift(Operations.operationDelete(selectedIDs, context));
+            operations.unshift(lastOperation);
         } else {
-            operations.push(Operations.operationDelete(selectedIDs, context));
+            operations.push(lastOperation);
         }
 
         operations.forEach(function(operation) {
@@ -285,7 +285,7 @@ export function modeSelect(context, selectedIDs) {
             : uiEditMenu(context, operations);
 
         context.ui().sidebar
-            .select(singular() ? singular().id : null, newFeature);
+            .select(singular() ? singular().id : null, _newFeature);
 
         context.history()
             .on('undone.select', update)
@@ -306,7 +306,7 @@ export function modeSelect(context, selectedIDs) {
             context.ui().sidebar.show(entities);
         }
 
-        if (follow) {
+        if (_follow) {
             var extent = geoExtent();
             var graph = context.graph();
             selectedIDs.forEach(function(id) {
@@ -320,9 +320,9 @@ export function modeSelect(context, selectedIDs) {
             context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
         }
 
-        timeout = window.setTimeout(function() {
+        _timeout = window.setTimeout(function() {
             positionMenu();
-            if (!suppressMenu) {
+            if (!_suppressMenu) {
                 showMenu();
             }
         }, 270);  /* after any centerEase completes */
@@ -372,7 +372,7 @@ export function modeSelect(context, selectedIDs) {
             var entity = singular();
 
             if (entity && context.geometry(entity.id) === 'relation') {
-                suppressMenu = true;
+                _suppressMenu = true;
                 return;
             }
 
@@ -521,7 +521,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
-        if (timeout) window.clearTimeout(timeout);
+        if (_timeout) window.clearTimeout(_timeout);
         if (inspector) wrap.call(inspector.close);
 
         behaviors.forEach(context.uninstall);
@@ -552,6 +552,20 @@ export function modeSelect(context, selectedIDs) {
         context.map().on('drawn.select', null);
         context.ui().sidebar.hide();
         context.features().forceVisible([]);
+
+        var entity = singular();
+        if (_newFeature && entity && entity.type === 'relation' &&
+            // no tags
+            Object.keys(entity.tags).length === 0 &&
+            // no parent relations
+            context.graph().parentRelations(entity).length === 0 &&
+            // no members or one member with no role
+            (entity.members.length === 0 || (entity.members.length === 1 && !entity.members[0].role))
+        ) {
+            // the user added this relation but didn't edit it at all, so just delete it
+            var deleteAction = actionDeleteRelation(entity.id, true /* don't delete untagged members */);
+            context.perform(deleteAction, t('operations.delete.annotation.relation'));
+        }
     };
 
 

@@ -6,17 +6,20 @@
         "oneway",
         "maxspeed",
         "surface",
+        "covered",
         "structure",
         "access"
     ],
     "moreFields": [
-        "covered",
+        "flood_prone",
         "incline",
         "lanes",
         "lit",
         "maxheight",
         "maxspeed/advisory",
-        "oneway/bicycle"
+        "maxweight_bridge",
+        "oneway/bicycle",
+        "trolley_wire"
     ],
     "geometry": [
         "line"

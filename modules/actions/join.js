@@ -1,9 +1,8 @@
-import _groupBy from 'lodash-es/groupBy';
-
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag, osmJoinWays } from '../osm';
+import { osmIsInterestingTag } from '../osm/tags';
+import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
-import { utilArrayIntersection } from '../util';
+import { utilArrayGroupBy, utilArrayIntersection } from '../util';
 
 
 // Join ways at the end node they share.
@@ -18,8 +17,9 @@ export function actionJoin(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return Object.assign({ line: [] },
-            _groupBy(entities, function(entity) { return entity.geometry(graph); })
+        return Object.assign(
+            { line: [] },
+            utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
         );
     }
 

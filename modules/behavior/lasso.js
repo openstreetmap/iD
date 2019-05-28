@@ -1,17 +1,8 @@
-import _map from 'lodash-es/map';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import {
-    geoExtent,
-    geoPointInPolygon
-} from '../geo';
-
-import { modeSelect } from '../modes';
-import { uiLasso } from '../ui';
+import { geoExtent, geoPointInPolygon } from '../geo';
+import { modeSelect } from '../modes/select';
+import { uiLasso } from '../ui/lasso';
 
 
 export function behaviorLasso(context) {
@@ -47,7 +38,8 @@ export function behaviorLasso(context) {
         function normalize(a, b) {
             return [
                 [Math.min(a[0], b[0]), Math.min(a[1], b[1])],
-                [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
+                [Math.max(a[0], b[0]), Math.max(a[1], b[1])]
+            ];
         }
 
 
@@ -58,11 +50,13 @@ export function behaviorLasso(context) {
             var bounds = lasso.extent().map(context.projection.invert);
             var extent = geoExtent(normalize(bounds[0], bounds[1]));
 
-            return _map(context.intersects(extent).filter(function(entity) {
+            var intersects = context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
-            }), 'id');
+            });
+
+            return intersects.map(function(entity) { return entity.id; });
         }
 
 

@@ -1,0 +1,17 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name",
+        "aerialway/capacity",
+        "aerialway/duration"
+    ],
+    "terms": [
+        "jbar"
+    ],
+    "tags": {
+        "aerialway": "j-bar"
+    },
+    "name": "J-bar Lift"
+}

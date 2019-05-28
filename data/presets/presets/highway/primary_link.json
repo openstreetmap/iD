@@ -14,17 +14,20 @@
         "covered",
         "cycleway",
         "destination/symbol_oneway",
+        "flood_prone",
         "incline",
         "junction/ref_oneway",
         "junction_line",
         "lit",
         "maxheight",
         "maxspeed/advisory",
+        "maxweight_bridge",
         "name",
         "oneway/bicycle",
         "ref_road_number",
         "smoothness",
-        "toll"
+        "toll",
+        "trolley_wire"
     ],
     "geometry": [
         "line"

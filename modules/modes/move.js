@@ -5,23 +5,20 @@ import {
 
 import { t } from '../util/locale';
 
-import {
-    actionMove,
-    actionNoop
-} from '../actions';
-import { behaviorEdit } from '../behavior';
+import { actionMove } from '../actions/move';
+import { actionNoop } from '../actions/noop';
+import { behaviorEdit } from '../behavior/edit';
 import { geoViewportEdge, geoVecSubtract } from '../geo';
-import { modeBrowse, modeSelect } from './index';
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 import { utilKeybinding } from '../util';
 
-import {
-    operationCircularize,
-    operationDelete,
-    operationOrthogonalize,
-    operationReflectLong,
-    operationReflectShort,
-    operationRotate
-} from '../operations';
+
+import { operationCircularize } from '../operations/circularize';
+import { operationDelete } from '../operations/delete';
+import { operationOrthogonalize } from '../operations/orthogonalize';
+import { operationReflectLong, operationReflectShort } from '../operations/reflect';
+import { operationRotate } from '../operations/rotate';
 
 
 export function modeMove(context, entityIDs, baseGraph) {

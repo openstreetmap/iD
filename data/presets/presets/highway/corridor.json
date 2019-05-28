@@ -8,6 +8,8 @@
         "wheelchair"
     ],
     "moreFields": [
+        "covered",
+        "indoor",
         "maxheight"
     ],
     "geometry": [
@@ -15,6 +17,10 @@
     ],
     "tags": {
         "highway": "corridor"
+    },
+    "addTags": {
+        "highway": "corridor",
+        "indoor": "yes"
     },
     "terms": [
         "gallery",

@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
-import _forEach from 'lodash-es/forEach';
 
-import { json as d3_json } from 'd3-request';
+import { json as d3_json } from 'd3-fetch';
 
 import { utilDetect } from '../util/detect';
 import { utilQsString } from '../util';
@@ -17,11 +16,19 @@ var debouncedRequest = _debounce(request, 500, { leading: false });
 
 function request(url, callback) {
     if (_inflight[url]) return;
+    var controller = new AbortController();
+    _inflight[url] = controller;
 
-    _inflight[url] = d3_json(url, function (err, data) {
-        delete _inflight[url];
-        callback(err, data);
-    });
+    d3_json(url, { signal: controller.signal })
+        .then(function(result) {
+            delete _inflight[url];
+            if (callback) callback(null, result);
+        })
+        .catch(function(err) {
+            delete _inflight[url];
+            if (err.name === 'AbortError') return;
+            if (callback) callback(err.message);
+        });
 }
 
 
@@ -51,7 +58,7 @@ export default {
 
 
     reset: function() {
-        _forEach(_inflight, function(req) { req.abort(); });
+        Object.values(_inflight).forEach(function(controller) { controller.abort(); });
         _inflight = {};
     },
 
@@ -67,7 +74,7 @@ export default {
         var locale = _localeIDs[langCode];
         var preferredPick, localePick;
 
-        _forEach(entity.claims[property], function(stmt) {
+        entity.claims[property].forEach(function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
             if (!preferredPick && stmt.rank === 'preferred') {
@@ -194,7 +201,7 @@ export default {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
                 var localeID = false;
-                _forEach(d.entities, function(res) {
+                Object.values(d.entities).forEach(function(res) {
                     if (res.missing !== '') {
                         // Simplify access to the localized values
                         res.description = localizedToString(res.descriptions, params.langCode);

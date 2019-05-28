@@ -5,19 +5,22 @@
         "operator",
         "address",
         "building_area",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
     ],
     "moreFields" : [
         "air_conditioning",
+        "building/levels_building",
+        "height_building",
         "smoking",
         "payment_multi",
-        "internet_access/fee",
         "internet_access/ssid",
         "website",
         "phone",
         "email",
         "fax",
-        "wheelchair"
+        "wheelchair",
+        "reservation"
     ],
     "geometry": [
         "point",

@@ -59,6 +59,9 @@ export function actionDisconnect(nodeId, newNodeId) {
             } else {
                 way.nodes.forEach(function(waynode, index) {
                     if (waynode === nodeId) {
+                        if (way.isClosed() && parentWays.length > 1 && wayIds && wayIds.indexOf(way.id) !== -1 && index === way.nodes.length-1) {
+                            return;
+                        }
                         candidates.push({ wayID: way.id, index: index });
                     }
                 });
@@ -71,7 +74,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     action.disabled = function(graph) {
         var connections = action.connections(graph);
-        if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
+        if (connections.length === 0)
             return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));
@@ -79,15 +82,19 @@ export function actionDisconnect(nodeId, newNodeId) {
         var sharedRelation;
 
         parentWays.forEach(function(way) {
-            if (wayIds && wayIds.indexOf(way.id) === -1)
-                return;
-
             var relations = graph.parentRelations(way);
             relations.forEach(function(relation) {
                 if (relation.id in seenRelationIds) {
-                    sharedRelation = relation;
+                    if (wayIds) {
+                        if (wayIds.indexOf(way.id) !== -1 ||
+                            wayIds.indexOf(seenRelationIds[relation.id]) !== -1) {
+                            sharedRelation = relation;
+                        }
+                    } else {
+                        sharedRelation = relation;
+                    }
                 } else {
-                    seenRelationIds[relation.id] = true;
+                    seenRelationIds[relation.id] = way.id;
                 }
             });
         });
@@ -97,9 +104,9 @@ export function actionDisconnect(nodeId, newNodeId) {
     };
 
 
-    action.limitWays = function(_) {
+    action.limitWays = function(val) {
         if (!arguments.length) return wayIds;
-        wayIds = _;
+        wayIds = val;
         return action;
     };
 

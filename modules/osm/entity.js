@@ -50,6 +50,29 @@ osmEntity.key = function(entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
+var _deprecatedTagValuesByKey;
+
+osmEntity.deprecatedTagValuesByKey = function() {
+    if (!_deprecatedTagValuesByKey) {
+        _deprecatedTagValuesByKey = {};
+        dataDeprecated.forEach(function(d) {
+            var oldKeys = Object.keys(d.old);
+            if (oldKeys.length === 1) {
+                var oldKey = oldKeys[0];
+                var oldValue = d.old[oldKey];
+                if (oldValue !== '*') {
+                    if (!_deprecatedTagValuesByKey[oldKey]) {
+                        _deprecatedTagValuesByKey[oldKey] = [oldValue];
+                    } else {
+                        _deprecatedTagValuesByKey[oldKey].push(oldValue);
+                    }
+                }
+            }
+        });
+    }
+    return _deprecatedTagValuesByKey;
+};
+
 
 osmEntity.prototype = {
 
@@ -151,6 +174,9 @@ osmEntity.prototype = {
         return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
+    hasWikidata: function() {
+        return !!this.tags.wikidata || !!this.tags['brand:wikidata'];
+    },
 
     isHighwayIntersection: function() {
         return false;

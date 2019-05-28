@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
+import { modeBrowse } from '../modes/browse';
 
 
 export function uiSourceSwitch(context) {

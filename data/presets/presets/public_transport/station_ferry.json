@@ -20,11 +20,6 @@
         "ferry": "yes",
         "amenity": "ferry_terminal"
     },
-    "removeTags": {
-        "public_transport": "station",
-        "ferry": "yes",
-        "amenity": "ferry_terminal"
-    },
     "reference": {
         "key": "amenity",
         "value": "ferry_terminal"

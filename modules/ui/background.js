@@ -1,28 +1,17 @@
 import _debounce from 'lodash-es/debounce';
 
-import {
-    descending as d3_descending,
-    ascending as d3_ascending
-} from 'd3-array';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { svgIcon } from '../svg/icon';
 import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
-import { uiHelp } from './help';
-import { uiIssues } from './issues';
-import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -33,7 +22,6 @@ export function uiBackground(context) {
 
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
-    var _shown = false;
 
     var _backgroundList = d3_select(null);
     var _overlayList = d3_select(null);
@@ -283,7 +271,6 @@ export function uiBackground(context) {
 
 
     function update() {
-
         if (!_pane.select('.disclosure-wrap-background_list').classed('hide')) {
             updateBackgroundList();
         }
@@ -318,44 +305,12 @@ export function uiBackground(context) {
     uiBackground.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
-        uiBackground.setVisible(!_toggleButton.classed('active'));
+        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
-    uiBackground.hidePane = function() {
-        uiBackground.setVisible(false);
-    };
-
-    uiBackground.setVisible = function(show) {
-        if (show !== _shown) {
-            _toggleButton.classed('active', show);
-            _shown = show;
-
-            if (show) {
-                uiHelp.hidePane();
-                uiIssues.hidePane();
-                uiMapData.hidePane();
-                update();
-
-                _pane
-                    .style('display', 'block')
-                    .style('right', '-300px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '0px');
-
-            } else {
-                _pane
-                    .style('display', 'block')
-                    .style('right', '0px')
-                    .transition()
-                    .duration(200)
-                    .style('right', '-300px')
-                    .on('end', function() {
-                        d3_select(this).style('display', 'none');
-                    });
-            }
-        }
-    };
+    function hidePane() {
+        context.ui().togglePanes();
+    }
 
     uiBackground.renderToggleButton = function(selection) {
 
@@ -371,7 +326,8 @@ export function uiBackground(context) {
 
         _pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane background-pane hide');
+            .attr('class', 'fillL map-pane background-pane hide')
+            .attr('pane', 'background');
 
 
         var heading = _pane
@@ -384,7 +340,7 @@ export function uiBackground(context) {
 
         heading
             .append('button')
-            .on('click', uiBackground.hidePane)
+            .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 
 
@@ -423,7 +379,10 @@ export function uiBackground(context) {
 
         // add listeners
         context.map()
-            .on('move.background-update', _debounce(utilCallWhenIdle(update), 1000));
+            .on('move.background-update',
+                _debounce(function() { window.requestIdleCallback(update); }, 1000)
+            );
+
 
         context.background()
             .on('change.background-update', update);

@@ -3,10 +3,13 @@
     "fields": [
         "name",
         "width",
-        "intermittent"
+        "intermittent",
+        "lock"
     ],
     "moreFields": [
-        "salt"
+        "fishing",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "line"

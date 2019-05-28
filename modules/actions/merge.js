@@ -1,14 +1,14 @@
-import _groupBy from 'lodash-es/groupBy';
-
-import { utilArrayUniq } from '../util';
+import { utilArrayGroupBy, utilArrayUniq } from '../util';
 
 
 export function actionMerge(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return Object.assign({ point: [], area: [], line: [], relation: [] },
-            _groupBy(entities, function(entity) { return entity.geometry(graph); }));
+        return Object.assign(
+            { point: [], area: [], line: [], relation: [] },
+            utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
+        );
     }
 
 

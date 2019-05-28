@@ -86,7 +86,6 @@
                     "line": "Kotakkan sudut garis ini.",
                     "area": "Mengotakkan sudut area ini."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Mengotakkan sudut dari garis",
                     "area": "Mengotakkan sudut sebuah area."
@@ -97,11 +96,8 @@
             },
             "straighten": {
                 "title": "Luruskan",
-                "description": "Luruskan garis ini.",
                 "key": "S",
-                "annotation": "Luruskan kembali sebuah garis.",
-                "too_bendy": "Garis ini tidak dapat diluruskan karena terlalu banyak lekukan.",
-                "connected_to_hidden": "Garis ini tidak dapat diluruskan karena terhubung dengan fitur tersembunyi."
+                "too_bendy": "Garis ini tidak dapat diluruskan karena terlalu banyak lekukan."
             },
             "delete": {
                 "title": "Hapus",
@@ -1125,8 +1121,7 @@
                     "name": "Air Minum"
                 },
                 "amenity/embassy": {
-                    "name": "Kedutaan besar",
-                    "terms": "Kedutaan"
+                    "name": "Kedutaan besar"
                 },
                 "amenity/fast_food": {
                     "name": "Makanan Cepat Saji",
@@ -2057,9 +2052,6 @@
                 "relation": {
                     "name": "Relasi"
                 },
-                "roundabout": {
-                    "name": "Bundaran"
-                },
                 "route/ferry": {
                     "name": "Rute Feri",
                     "terms": "Kapal, Laut"
@@ -2110,8 +2102,7 @@
                     "name": "Toko Buku"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "Toko Baju, Pakaian"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Penjagalan"
@@ -2183,8 +2174,7 @@
                     "name": "Toko Kain"
                 },
                 "shop/fashion": {
-                    "name": "Toko Mode",
-                    "terms": "Fashion, Fesyen"
+                    "name": "Toko Mode"
                 },
                 "shop/fishmonger": {
                     "name": "Penjual Ikan"
@@ -2488,9 +2478,6 @@
                 },
                 "type/route/tram": {
                     "name": "Rute Trem"
-                },
-                "vertex": {
-                    "name": "Lainnya"
                 },
                 "waterway": {
                     "name": "Jalur Air"

@@ -118,6 +118,36 @@ describe('iD.coreDifference', function () {
             var diff = iD.coreDifference(base, head);
             expect(diff.extantIDs()).to.eql([]);
         });
+
+        it('omits the ids of members of modified relations by default', function () {
+            var w1 = iD.osmWay({id: 'w1'});
+            var w2 = iD.osmWay({id: 'w2'});
+            var r1 = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'multipolygon' },
+                members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
+            });
+            var r2 = r1.update({ tags: { type: 'multipolygon', landuse: 'residential' }});
+            var base = iD.coreGraph([r1, w1, w2]);
+            var head = base.replace(r2);
+            var diff = iD.coreDifference(base, head);
+            expect(diff.extantIDs()).to.eql(['r']);
+        });
+
+        it('includes the ids of members of modified relations with option', function () {
+            var w1 = iD.osmWay({id: 'w1'});
+            var w2 = iD.osmWay({id: 'w2'});
+            var r1 = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'multipolygon' },
+                members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
+            });
+            var r2 = r1.update({ tags: { type: 'multipolygon', landuse: 'residential' }});
+            var base = iD.coreGraph([r1, w1, w2]);
+            var head = base.replace(r2);
+            var diff = iD.coreDifference(base, head);
+            expect(diff.extantIDs(true)).to.eql(['r', 'w1', 'w2']);
+        });
     });
 
     describe('#created', function () {
@@ -380,6 +410,22 @@ describe('iD.coreDifference', function () {
             var diff = iD.coreDifference(base, head);
 
             expect(diff.complete().n2).to.equal(n2);
+        });
+
+        it('includes multipolygon members', function () {
+            var w1 = iD.osmWay({id: 'w1'});
+            var w2 = iD.osmWay({id: 'w2'});
+            var r1 = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'multipolygon' },
+                members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
+            });
+            var r2 = r1.updateMember({role: 'inner', id: 'w2', type: 'way'}, 1);
+            var base = iD.coreGraph([w1, w2, r1]);
+            var head = base.replace(r2);
+            var diff = iD.coreDifference(base, head);
+
+            expect(diff.complete().w2).to.equal(w2);
         });
 
         it('includes parent ways of modified nodes', function () {

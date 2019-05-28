@@ -17,7 +17,7 @@ describe('iD.serviceStreetside', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = sinon.fakeServer.create();
+        server = window.fakeFetch().create();
         streetside = iD.services.streetside;
         streetside.reset();
     });
@@ -49,7 +49,7 @@ describe('iD.serviceStreetside', function() {
     });
 
     describe('#loadBubbles', function() {
-        it('fires loadedBubbles when bubbles are loaded', function() {
+        it('fires loadedBubbles when bubbles are loaded', function(done) {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
@@ -79,10 +79,14 @@ describe('iD.serviceStreetside', function() {
             ];
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
-            expect(spy).to.have.been.calledOnce;
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 200);
         });
 
-        it('does not load bubbles around null island', function() {
+        it('does not load bubbles around null island', function(done) {
             context.projection
                 .scale(iD.geoZoomToScale(18))
                 .translate([0, 0])
@@ -110,7 +114,11 @@ describe('iD.serviceStreetside', function() {
             ];
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
-            expect(spy).to.have.been.not.called;
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                done();
+            }, 200);
         });
     });
 

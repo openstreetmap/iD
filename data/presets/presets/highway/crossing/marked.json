@@ -14,10 +14,6 @@
         "highway": "crossing",
         "crossing": "marked"
     },
-    "removeTags": {
-        "highway": "crossing",
-        "crossing": "marked"
-    },
     "reference": {
         "key": "highway",
         "value": "crossing"

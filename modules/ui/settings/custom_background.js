@@ -1,5 +1,3 @@
-import _cloneDeep from 'lodash-es/cloneDeep';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { t } from '../../util/locale';
@@ -11,10 +9,14 @@ export function uiSettingsCustomBackground(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
+        // keep separate copies of original and current settings
         var _origSettings = {
             template: context.storage('background-custom-template')
         };
-        var _currSettings = _cloneDeep(_origSettings);
+        var _currSettings = {
+            template: context.storage('background-custom-template')
+        };
+
         var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 

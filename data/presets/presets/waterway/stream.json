@@ -8,6 +8,7 @@
     ],
     "moreFields": [
         "covered",
+        "fishing",
         "salt",
         "tidal"
     ],
