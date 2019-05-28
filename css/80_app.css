@@ -466,6 +466,9 @@ button[disabled].action:hover {
     white-space: nowrap;
     margin: 1px 2px 2px 2px;
 }
+#bar .toolbar-item.spacer-half {
+    width: 50%;
+}
 #bar .toolbar-item.spacer {
     width: 100%;
     flex-grow: 2;
@@ -476,7 +479,7 @@ button[disabled].action:hover {
 #bar .toolbar-item:last-child {
     justify-content: flex-end;
 }
-#bar .toolbar-item:empty:not(.spacer) {
+#bar .toolbar-item:empty:not(.spacer):not(.spacer-half) {
     display: none;
 }
 button.bar-button {
@@ -5205,6 +5208,7 @@ svg.mouseclick use.right {
     padding: 10px;
     font-weight: normal;
     background-color: #fff;
+    overflow: hidden;
 }
 
 .tail {
@@ -5303,8 +5307,11 @@ svg.mouseclick use.right {
 .keyhint-wrap {
     background: #f6f6f6;
     padding: 10px;
-    margin: 10px -10px -10px -10px;
+    margin: -10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
+}
+.tooltip-inner .tooltip-text {
+    margin-bottom: 20px;
 }
 .tooltip-inner .keyhint {
     font-weight: bold;
