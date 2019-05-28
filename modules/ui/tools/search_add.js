@@ -27,7 +27,7 @@ export function uiToolSearchAdd(context) {
 
     var dispatch = d3_dispatch('choose');
     var presets;
-    var searchWrap = d3_select(null),
+    var button = d3_select(null),
         search = d3_select(null),
         popover = d3_select(null),
         popoverContent = d3_select(null),
@@ -68,16 +68,7 @@ export function uiToolSearchAdd(context) {
     tool.render = function(selection) {
         updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
-        searchWrap = selection
-            .append('div')
-            .attr('class', 'search-wrap')
-            .call(tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
-            );
-
-        var button = searchWrap
+        button = selection
             .append('button')
             .attr('class', 'bar-button wide')
             .attr('tabindex', -1)
@@ -90,6 +81,8 @@ export function uiToolSearchAdd(context) {
                 d3_event.stopPropagation();
             })
             .on('click', function() {
+                if (button.classed('disabled')) return;
+                
                 if (popover.classed('hide')) {
                     popover.classed('hide', false);
                     search.node().focus();
@@ -98,9 +91,14 @@ export function uiToolSearchAdd(context) {
                     search.node().blur();
                 }
             })
+            .call(tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
+            )
             .call(svgIcon('#iD-logo-features'));
 
-        popover = searchWrap
+        popover = selection
             .append('div')
             .attr('class', 'popover fillL hide');
 
@@ -116,11 +114,9 @@ export function uiToolSearchAdd(context) {
             .call(utilNoAuto)
             .on('focus', function() {
                 button.classed('active', true);
-                searchWrap.classed('focused', true);
             })
             .on('blur', function() {
                 button.classed('active', false);
-                searchWrap.classed('focused', false);
                 popover.classed('hide', true);
             })
             .on('keypress', keypress)
@@ -217,7 +213,7 @@ export function uiToolSearchAdd(context) {
 
     function updateEnabledState() {
         var isEnabled = osmEditable();
-        searchWrap.classed('disabled', !isEnabled);
+        button.classed('disabled', !isEnabled);
         if (!isEnabled) {
             search.node().blur();
         }

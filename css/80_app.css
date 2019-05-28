@@ -590,11 +590,7 @@ button.add-note svg.icon {
     justify-content: center;
     position: relative;
 }
-.search-add .search-wrap {
-    position: relative;
-    width: 100%;
-}
-.search-add .search-wrap.focused .tooltip {
+.search-add .bar-button.active .tooltip {
     display: none;
 }
 .search-add input[type='search'] {
@@ -610,10 +606,6 @@ button.add-note svg.icon {
 .search-add input[type='search'],
 .search-add input[type='search']:focus {
     background: #f6f6f6;
-}
-.search-add input[type='search'][disabled] {
-    opacity: 0.25;
-    cursor: not-allowed;
 }
 .search-add .search-icon {
     color: #333;
@@ -640,6 +632,12 @@ button.add-note svg.icon {
     left: auto;
     right: auto;
     z-index: 300;
+}
+[dir='ltr'] .search-add .popover {
+    left: 0;
+}
+[dir='rtl'] .search-add .popover {
+    right: 0;
 }
 .search-add .popover .popover-content {
     overflow-y: auto;
