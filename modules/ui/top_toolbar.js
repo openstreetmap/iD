@@ -30,7 +30,7 @@ export function uiTopToolbar(context) {
             if (mode.finish) mode.finish();
         }, null, 'Esc', 'wide');
 
-    var supportedOperationIDs = ['circularize', 'downgrade', 'delete', 'disconnect', 'merge', 'orthogonalize', 'split', 'straighten'];
+    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'split', 'straighten'];
 
     var operationToolsByID = {};
 
