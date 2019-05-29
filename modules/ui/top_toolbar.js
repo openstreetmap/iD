@@ -7,6 +7,7 @@ import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
 import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 import { uiToolSimpleButton } from './tools/simple_button';
+import { uiToolWaySegments } from './tools/way_segments';
 
 export function uiTopToolbar(context) {
 
@@ -17,6 +18,7 @@ export function uiTopToolbar(context) {
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
         save = uiToolSave(context),
+        waySegments = uiToolWaySegments(context),
         deselect = uiToolSimpleButton('deselect', t('toolbar.deselect.title'), 'iD-icon-close', function() {
             context.enter(modeBrowse(context));
         }, null, 'Esc'),
@@ -90,23 +92,31 @@ export function uiTopToolbar(context) {
 
             tools = tools.concat([undoRedo, save]);
 
-        } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') {
+        } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area' ||
+            mode.id === 'draw-line' || mode.id === 'draw-area') {
+
             tools.push(sidebarToggle);
             tools.push('spacer');
 
-            tools.push(cancelDrawing);
-        } else if (mode.id === 'draw-line' || mode.id === 'draw-area') {
-            tools.push(sidebarToggle);
-            tools.push('spacer');
+            if (mode.id.indexOf('line') !== -1 || mode.id.indexOf('area') !== -1) {
+                tools.push(waySegments);
+                tools.push('spacer');
+            }
 
-            tools.push(undoRedo);
+            if (mode.id.indexOf('draw') !== -1) {
 
-            var way = context.hasEntity(mode.wayID);
-            if (way && new Set(way.nodes).size - 1 >= (way.isArea() ? 3 : 2)) {
-                tools.push(finishDrawing);
+                tools.push(undoRedo);
+
+                var way = context.hasEntity(mode.wayID);
+                if (way && new Set(way.nodes).size - 1 >= (way.isArea() ? 3 : 2)) {
+                    tools.push(finishDrawing);
+                } else {
+                    tools.push(cancelDrawing);
+                }
             } else {
                 tools.push(cancelDrawing);
             }
+
         } else {
             tools.push(sidebarToggle);
             tools.push('spacer');
@@ -174,7 +184,7 @@ export function uiTopToolbar(context) {
                 .append('div')
                 .attr('class', function(d) {
                     var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
-                    if (d.klass) classes += ' ' + d.klass;
+                    if (d.itemClass) classes += ' ' + d.itemClass;
                     return classes;
                 });
 
@@ -182,7 +192,11 @@ export function uiTopToolbar(context) {
 
             actionableItems
                 .append('div')
-                .attr('class', 'item-content')
+                .attr('class', function(d) {
+                    var classes = 'item-content';
+                    if (d.contentClass) classes += ' ' + d.contentClass;
+                    return classes;
+                })
                 .each(function(d) {
                     d3_select(this).call(d.render, bar);
                 });

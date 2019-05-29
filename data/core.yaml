@@ -17,6 +17,8 @@ en:
     favorites: Favorites
     add_feature: Add Feature
     finish: Finish
+    segments:
+      title: Segments
   modes:
     add_feature:
       search_placeholder: Search feature types

@@ -94,11 +94,65 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             if (choice) {
                 loc = choice.loc;
             }
+        } else {
+            if (context.storage('line-segments') === 'orthogonal') {
+                var orthoLoc = orthogonalLoc(loc);
+                if (orthoLoc) loc = orthoLoc;
+            }
         }
 
         context.replace(actionMoveNode(end.id, loc));
         end = context.entity(end.id);
         checkGeometry(false);
+    }
+
+    function orthogonalLoc(mouseLoc) {
+        var way = context.hasEntity(wayID);
+        if (!way) return null;
+
+        if (way.nodes.length - 1 < (way.isArea() ? 3 : 2)) return null;
+
+        var baselineNodeIndex = way.isClosed() ? way.nodes.length - 3 : way.nodes.length - 2;
+        var node1 = context.hasEntity(way.nodes[baselineNodeIndex - 1]);
+        var node2 = context.hasEntity(way.nodes[baselineNodeIndex]);
+
+        if (!node1 || !node2 ||
+            node1.loc === node2.loc) return null;
+
+        var projection = context.projection;
+
+        var pA = projection(node1.loc),
+            pB = projection(node2.loc),
+            p3 = projection(mouseLoc);
+
+        var xA = pA[0],
+            yA = pA[1],
+            xB = pB[0],
+            yB = pB[1],
+            x3 = p3[0],
+            y3 = p3[1];
+
+        var x1 = xB,
+            y1 = yB,
+            x2 = xB + 1,
+            y2;
+
+        if (xA === xB) {
+            y2 = y1;
+        } else {
+            var slope = (yB-yA)/(xB-xA);
+            var perpSlope = -1/slope;
+            var b = yB - perpSlope*xB;
+            y2 = perpSlope * x2 + b;
+        }
+
+        var k = ((y2-y1) * (x3-x1) - (x2-x1) * (y3-y1)) / (Math.pow(y2-y1, 2) + Math.pow(x2-x1, 2));
+        var x4 = x3 - k * (y2-y1);
+        var y4 = y3 + k * (x2-x1);
+
+        if (!isFinite(x4) || !isFinite(y4)) return null;
+
+        return projection.invert([x4, y4]);
     }
 
 

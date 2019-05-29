@@ -14,7 +14,7 @@ export function uiToolAddRecent(context) {
 
     var tool = {
         id: 'add_recent',
-        klass: 'modes',
+        itemClass: 'modes',
         label: t('toolbar.recent')
     };
 

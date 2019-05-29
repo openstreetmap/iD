@@ -11,7 +11,7 @@ export function uiToolOperation() {
     var operation;
 
     var tool = {
-        klass: 'operation'
+        itemClass: 'operation'
     };
 
     var button, tooltipBehavior;
@@ -44,7 +44,7 @@ export function uiToolOperation() {
 
     tool.update = function() {
         if (!operation) return;
-        
+
         if (tooltipBehavior) {
             tooltipBehavior.title(uiTooltipHtml(operation.tooltip(), operation.keys[0]));
         }
