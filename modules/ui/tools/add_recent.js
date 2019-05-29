@@ -85,14 +85,6 @@ export function uiToolAddRecent(context) {
             .on('enter.editor.recent', function(entered) {
                 selection.selectAll('button.add-button')
                     .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
-            });
-
-        context
-            .on('exit.editor.recent', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
             });
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });

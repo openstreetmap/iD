@@ -261,11 +261,13 @@ export function coreContext() {
     context.enter = function(newMode) {
         if (mode) {
             mode.exit();
+            container.classed('mode-' + mode.id, false);
             dispatch.call('exit', this, mode);
         }
 
         mode = newMode;
         mode.enter();
+        container.classed('mode-' + newMode.id, true);
         dispatch.call('enter', this, mode);
     };
 

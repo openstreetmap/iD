@@ -51,14 +51,6 @@ export function uiToolNotes(context) {
             .on('enter.editor.notes', function(entered) {
                 selection.selectAll('button.add-button')
                     .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
-            });
-
-        context
-            .on('exit.editor.notes', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
             });
 
 
