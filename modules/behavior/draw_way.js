@@ -112,9 +112,16 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
         if (way.nodes.length - 1 < (way.isArea() ? 3 : 2)) return null;
 
-        var baselineNodeIndex = way.isClosed() ? way.nodes.length - 3 : way.nodes.length - 2;
-        var node1 = context.hasEntity(way.nodes[baselineNodeIndex - 1]);
-        var node2 = context.hasEntity(way.nodes[baselineNodeIndex]);
+        var node1, node2;
+        if (way.last() === end.id) {
+            var baselineNodeIndex = way.isClosed() ? way.nodes.length - 3 : way.nodes.length - 2;
+            node1 = context.hasEntity(way.nodes[baselineNodeIndex - 1]);
+            node2 = context.hasEntity(way.nodes[baselineNodeIndex]);
+        } else {
+            node1 = context.hasEntity(way.nodes[2]);
+            node2 = context.hasEntity(way.nodes[1]);
+        }
+
 
         if (!node1 || !node2 ||
             node1.loc === node2.loc) return null;
