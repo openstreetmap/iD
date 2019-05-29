@@ -19,6 +19,11 @@ en:
     finish: Finish
     segments:
       title: Segments
+      straight:
+        title: Straight
+      orthogonal:
+        title: Rectangular
+      shortcut: A
   modes:
     add_feature:
       search_placeholder: Search feature types

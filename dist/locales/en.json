@@ -21,7 +21,14 @@
             "add_feature": "Add Feature",
             "finish": "Finish",
             "segments": {
-                "title": "Segments"
+                "title": "Segments",
+                "straight": {
+                    "title": "Straight"
+                },
+                "orthogonal": {
+                    "title": "Rectangular"
+                },
+                "shortcut": "A"
             }
         },
         "modes": {
