@@ -19,7 +19,10 @@
         "bike",
         "repair",
         "chain",
-        "pump"
+        "pump",
+        "tools",
+        "stand",
+        "multitool"
     ],
     "tags": {
         "amenity": "bicycle_repair_station"
