@@ -2,7 +2,7 @@ import {
     event as d3_event,
 } from 'd3-selection';
 
-import { svgIcon } from '../../svg';
+import { svgIcon } from '../../svg/icon';
 import { uiTooltipHtml } from '../tooltipHtml';
 import { tooltip } from '../../util/tooltip';
 

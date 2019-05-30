@@ -37,7 +37,7 @@ export function validationImpossibleOneway() {
         }
 
         context.enter(
-            modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id), true)
+            modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id))
         );
     }
 

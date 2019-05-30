@@ -1,8 +1,8 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
+import { modeSelect } from './select';
 
-
-export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, continuing) {
+export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, addMode) {
     var mode = {
         button: button,
         id: 'draw-line'
@@ -12,7 +12,7 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
 
     mode.wayID = wayID;
 
-    mode.isContinuing = continuing;
+    mode.isContinuing = !!affix;
 
     mode.enter = function() {
         var way = context.entity(wayID);
@@ -39,6 +39,17 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
         context.uninstall(behavior);
     };
 
+    
+    mode.didFinishAdding = function() {
+        if (mode.repeatAddedFeature) {
+            addMode.repeatAddedFeature = mode.repeatAddedFeature;
+            context.enter(addMode);
+        }
+        else {
+            context.enter(modeSelect(context, [wayID]).newFeature(!mode.isContinuing));
+        }
+    };
+
 
     mode.selectedIDs = function() {
         return [wayID];
@@ -53,7 +64,7 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
     mode.finish = function() {
         behavior.finish();
     };
-    
+
 
     return mode;
 }
