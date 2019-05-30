@@ -2425,7 +2425,7 @@ en:
       amenity/animal_shelter:
         # amenity=animal_shelter
         name: Animal Shelter
-        # 'terms: adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca'
+        # 'terms: adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca,pound'
         terms: '<translate with synonyms or related terms for ''Animal Shelter'', separated by commas>'
       amenity/arts_centre:
         # amenity=arts_centre
@@ -2459,7 +2459,7 @@ en:
       amenity/bench:
         # amenity=bench
         name: Bench
-        # 'terms: seat'
+        # 'terms: seat,chair'
         terms: '<translate with synonyms or related terms for ''Bench'', separated by commas>'
       amenity/bicycle_parking:
         # amenity=bicycle_parking
@@ -2484,12 +2484,12 @@ en:
       amenity/bicycle_rental:
         # amenity=bicycle_rental
         name: Bicycle Rental
-        # 'terms: bike'
+        # 'terms: bike,bicycle,bikeshare,bike share,bicycle share,hub,dock'
         terms: '<translate with synonyms or related terms for ''Bicycle Rental'', separated by commas>'
       amenity/bicycle_repair_station:
         # amenity=bicycle_repair_station
         name: Bicycle Repair Tool Stand
-        # 'terms: bike,repair,chain,pump'
+        # 'terms: bike,repair,chain,pump,tools,stand,multitool'
         terms: '<translate with synonyms or related terms for ''Bicycle Repair Tool Stand'', separated by commas>'
       amenity/biergarten:
         # amenity=biergarten
@@ -2566,6 +2566,7 @@ en:
       amenity/clock:
         # amenity=clock
         name: Clock
+        # 'terms: time'
         terms: '<translate with synonyms or related terms for ''Clock'', separated by commas>'
       amenity/clock/sundial:
         # 'amenity=clock, display=sundial'
@@ -2914,7 +2915,7 @@ en:
       amenity/prison:
         # amenity=prison
         name: Prison Grounds
-        # 'terms: cell,jail'
+        # 'terms: cell,jail,correction'
         terms: '<translate with synonyms or related terms for ''Prison Grounds'', separated by commas>'
       amenity/pub:
         # amenity=pub
@@ -4292,7 +4293,7 @@ en:
       highway/cycleway/bicycle_foot:
         # 'highway=cycleway, foot=designated'
         name: Cycle & Foot Path
-        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail'
+        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail'
         terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
       highway/cycleway/crossing:
         # cycleway=crossing

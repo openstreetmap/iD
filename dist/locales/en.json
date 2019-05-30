@@ -4559,7 +4559,7 @@
                 },
                 "amenity/animal_shelter": {
                     "name": "Animal Shelter",
-                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca"
+                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca,pound"
                 },
                 "amenity/arts_centre": {
                     "name": "Arts Center",
@@ -4587,7 +4587,7 @@
                 },
                 "amenity/bench": {
                     "name": "Bench",
-                    "terms": "seat"
+                    "terms": "seat,chair"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Bicycle Parking",
@@ -4607,11 +4607,11 @@
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
-                    "terms": "bike"
+                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,hub,dock"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand",
-                    "terms": "bike,repair,chain,pump"
+                    "terms": "bike,repair,chain,pump,tools,stand,multitool"
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
@@ -4675,7 +4675,7 @@
                 },
                 "amenity/clock": {
                     "name": "Clock",
-                    "terms": ""
+                    "terms": "time"
                 },
                 "amenity/clock/sundial": {
                     "name": "Sundial",
@@ -4955,7 +4955,7 @@
                 },
                 "amenity/prison": {
                     "name": "Prison Grounds",
-                    "terms": "cell,jail"
+                    "terms": "cell,jail,correction"
                 },
                 "amenity/pub": {
                     "name": "Pub",
@@ -6159,7 +6159,7 @@
                 },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
-                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail"
+                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
