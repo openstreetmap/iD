@@ -435,7 +435,7 @@ export function uiInit(context) {
 
         if (showPane) {
             shownPanes
-                .style('display', 'none')
+                .classed('hide', true)
                 .style(side, '-500px');
 
             d3_selectAll('.' + showPane.attr('pane') + '-control button')
@@ -443,10 +443,10 @@ export function uiInit(context) {
 
             showPane
                 .classed('shown', true)
-                .style('display', 'block');
+                .classed('hide', false);
             if (shownPanes.empty()) {
                 showPane
-                    .style('display', 'block')
+                    .classed('hide', false)
                     .style(side, '-500px')
                     .transition()
                     .duration(200)
@@ -457,13 +457,13 @@ export function uiInit(context) {
             }
         } else {
             shownPanes
-                .style('display', 'block')
+                .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
                 .style(side, '-500px')
                 .on('end', function() {
-                    d3_select(this).style('display', 'none');
+                    d3_select(this).classed('hide', true);
                 });
         }
     };
