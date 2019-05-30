@@ -23,7 +23,13 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "bicycle",
+        "bikeshare",
+        "bike share",
+        "bicycle share",
+        "hub",
+        "dock"
     ],
     "tags": {
         "amenity": "bicycle_rental"

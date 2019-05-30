@@ -19,7 +19,8 @@
         "greenway",
         "mixed-use trail",
         "multi-use trail",
-        "segregated trail"
+        "segregated trail",
+        "rail trail"
     ],
     "matchScore": 0.95,
     "name": "Cycle & Foot Path"

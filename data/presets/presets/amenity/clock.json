@@ -16,6 +16,9 @@
         "point",
         "vertex"
     ],
+    "terms":[
+        "time"
+    ],
     "tags": {
         "amenity": "clock"
     },

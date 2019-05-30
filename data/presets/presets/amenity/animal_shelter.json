@@ -32,7 +32,8 @@
         "raptor",
         "reptile",
         "rescue",
-        "spca"
+        "spca",
+        "pound"
     ],
     "tags": {
         "amenity": "animal_shelter"
