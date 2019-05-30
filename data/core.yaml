@@ -23,7 +23,7 @@ en:
         title: Straight
       orthogonal:
         title: Rectangular
-      shortcut: A
+      key: A
   modes:
     add_feature:
       search_placeholder: Search feature types

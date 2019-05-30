@@ -10,7 +10,7 @@ import { tooltip } from '../../util/tooltip';
 
 export function uiToolWaySegments(context) {
 
-    var key = t('toolbar.segments.shortcut');
+    var key = t('toolbar.segments.key');
 
     var tool = {
         id: 'way_segments',

@@ -28,7 +28,7 @@
                 "orthogonal": {
                     "title": "Rectangular"
                 },
-                "shortcut": "A"
+                "key": "A"
             }
         },
         "modes": {
