@@ -211,12 +211,14 @@ export function uiSidebar(context) {
 
             if (id) {
                 var entity = context.entity(id);
-                // uncollapse the sidebar
-                if (selection.classed('collapsed')) {
-                    if (newFeature) {
-                        var extent = entity.extent(context.graph());
-                        sidebar.expand(sidebar.intersects(extent));
-                    }
+
+                // uncollapse the sidebar if adding a new, untagged feature
+                if (selection.classed('collapsed') &&
+                    newFeature &&
+                    context.presets().match(entity, context.graph()).isFallback()) {
+
+                    var extent = entity.extent(context.graph());
+                    sidebar.expand(sidebar.intersects(extent));
                 }
 
                 featureListWrap
