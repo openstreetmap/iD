@@ -67,9 +67,6 @@ export function uiTopToolbar(context) {
             mode.selectedIDs().every(function(id) { return context.graph().hasEntity(id); })) {
 
             tools.push(sidebarToggle);
-            tools.push('spacer-half');
-
-            tools.push(deselect);
             tools.push('spacer');
 
             var operationTools = [];
@@ -96,7 +93,7 @@ export function uiTopToolbar(context) {
             }
             tools.push('spacer');
 
-            tools = tools.concat([undoRedo, save]);
+            tools = tools.concat([deselect, undoRedo, save]);
 
         } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area' ||
             mode.id === 'draw-line' || mode.id === 'draw-area') {
