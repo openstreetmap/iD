@@ -29,7 +29,11 @@ export function uiTopToolbar(context) {
         }, null, 'Esc', 'wide'),
         finishDrawing = uiToolSimpleButton('finish', t('toolbar.finish'), 'iD-icon-apply', function() {
             var mode = context.mode();
-            if (mode.finish) mode.finish();
+            if (mode.finish) {
+                mode.finish();
+            } else {
+                context.enter(modeBrowse(context));
+            }
         }, null, 'Esc', 'wide');
 
     var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'split', 'straighten'];
@@ -113,14 +117,21 @@ export function uiTopToolbar(context) {
                 }
 
                 var way = context.hasEntity(mode.wayID);
-                if (way && new Set(way.nodes).size - 1 >= (way.isArea() ? 3 : 2)) {
+                var wayIsDegenerate = way && new Set(way.nodes).size - 1 < (way.isArea() ? 3 : 2);
+                if (!wayIsDegenerate) {
                     tools.push(finishDrawing);
                 } else {
                     tools.push(cancelDrawing);
                 }
             } else {
+
                 tools.push(repeatAdd);
-                tools.push(cancelDrawing);
+
+                if (mode.repeatCount > 0) {
+                    tools.push(finishDrawing);
+                } else {
+                    tools.push(cancelDrawing);
+                }
             }
 
         } else {

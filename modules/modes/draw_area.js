@@ -43,6 +43,7 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button, 
     mode.didFinishAdding = function() {
         if (mode.repeatAddedFeature) {
             addMode.repeatAddedFeature = mode.repeatAddedFeature;
+            addMode.repeatCount += 1;
             context.enter(addMode);
         }
         else {
