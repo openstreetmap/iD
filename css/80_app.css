@@ -266,7 +266,7 @@ button.hide,
 a.hide,
 ul.hide,
 li.hide {
-    display: none;
+    display: none !important;
 }
 
 .deemphasize {
@@ -636,6 +636,9 @@ button.add-note svg.icon {
     left: auto;
     right: auto;
     z-index: 300;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 [dir='ltr'] .add-feature .popover {
     left: 0;
@@ -645,7 +648,6 @@ button.add-note svg.icon {
 }
 .add-feature .popover .popover-content {
     overflow-y: auto;
-    height: 100%;
     max-height: 60vh;
 }
 .add-feature .popover,
@@ -661,6 +663,7 @@ button.add-note svg.icon {
     padding: 5px 10px 5px 10px;
     background: #f6f6f6;
     border-top: 1px solid #DCDCDC;
+    flex: 0 0 auto;
     display: flex;
 }
 .add-feature .popover .popover-footer .message {
