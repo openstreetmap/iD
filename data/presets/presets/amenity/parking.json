@@ -38,8 +38,7 @@
         "car parking",
         "rv parking",
         "truck parking",
-        "vehicle parking",
-        "garage"
+        "vehicle parking"
     ],
     "name": "Parking Lot"
 }
