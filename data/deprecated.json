@@ -528,6 +528,10 @@
       "replace": {"nonsquare": "$1"}
     },
     {
+      "old": {"office": "administrative"},
+      "replace": {"office": "government"}
+    },
+    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
