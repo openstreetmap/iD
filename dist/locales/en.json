@@ -6745,6 +6745,10 @@
                     "name": "Dog Park",
                     "terms": ""
                 },
+                "leisure/escape_game": {
+                    "name": "Escape Room",
+                    "terms": "escape game,escape the room,puzzle room,quest room"
+                },
                 "leisure/firepit": {
                     "name": "Firepit",
                     "terms": "fireplace,campfire"

@@ -1,5 +1,5 @@
 {
-    "icon": "fas-code",
+    "icon": "fas-puzzle-piece",
     "fields": [
         "name",
         "address",
@@ -25,12 +25,13 @@
         "area"
     ],
     "terms": [
-        "makerspace",
-        "hackspace",
-        "hacklab"
+        "escape game",
+        "escape the room",
+        "puzzle room",
+        "quest room"
     ],
     "tags": {
-        "leisure": "hackerspace"
+        "leisure": "escape_game"
     },
-    "name": "Hackerspace"
+    "name": "Escape Room"
 }
