@@ -63,10 +63,6 @@ export function uiInit(context) {
             .attr('id', 'defs')
             .call(svgDefs(context));
 
-        container
-            .append('div')
-            .attr('id', 'sidebar')
-            .call(ui.sidebar);
 
         var content = container
             .append('div')
@@ -258,6 +254,13 @@ export function uiInit(context) {
             .classed('al', true)       // 'al'=left,  'ar'=right
             .classed('hide', true)
             .call(ui.photoviewer);
+
+        overMap
+            .append('div')
+            .attr('class', 'sidebar-wrap')
+            .append('div')
+            .attr('id', 'sidebar')
+            .call(ui.sidebar);
 
 
         // Bind events

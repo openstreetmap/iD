@@ -46,8 +46,7 @@ export function uiSidebar(context) {
         // Set the initial width constraints
         selection
             .style('min-width', minWidth + 'px')
-            .style('max-width', '400px')
-            .style('width', '33.3333%');
+            .style('width', '350px');
 
         resizer.call(d3_drag()
             .container(container.node())
@@ -55,18 +54,10 @@ export function uiSidebar(context) {
                 // offset from edge of sidebar-resizer
                 dragOffset = d3_event.sourceEvent.offsetX - 1;
 
-                sidebarWidth = selection.node().getBoundingClientRect().width;
-                containerWidth = container.node().getBoundingClientRect().width;
-                var widthPct = (sidebarWidth / containerWidth) * 100;
-                selection
-                    .style('width', widthPct + '%')    // lock in current width
-                    .style('max-width', '85%');        // but allow larger widths
-
                 resizer.classed('dragging', true);
             })
             .on('drag', function() {
                 var isRTL = (textDirection === 'rtl');
-                var scaleX = isRTL ? 0 : 1;
                 var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
                 var x = d3_event.x - dragOffset;
@@ -80,23 +71,14 @@ export function uiSidebar(context) {
                 if (shouldCollapse) {
                     if (!isCollapsed) {
                         selection
-                            .style(xMarginProperty, '-400px')
+                            .style(xMarginProperty, '-410px')
                             .style('width', '400px');
-
-                        context.ui().onResize([(sidebarWidth - d3_event.dx) * scaleX, 0]);
                     }
 
                 } else {
-                    var widthPct = (sidebarWidth / containerWidth) * 100;
                     selection
                         .style(xMarginProperty, null)
-                        .style('width', widthPct + '%');
-
-                    if (isCollapsed) {
-                        context.ui().onResize([-sidebarWidth * scaleX, 0]);
-                    } else {
-                        context.ui().onResize([-d3_event.dx * scaleX, 0]);
-                    }
+                        .style('width', sidebarWidth + 'px');
                 }
             })
             .on('end', function() {
@@ -274,21 +256,21 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.expand = function(moveMap) {
+        sidebar.expand = function() {
             if (selection.classed('collapsed')) {
-                sidebar.toggle(moveMap);
+                sidebar.toggle();
             }
         };
 
 
-        sidebar.collapse = function(moveMap) {
+        sidebar.collapse = function() {
             if (!selection.classed('collapsed')) {
-                sidebar.toggle(moveMap);
+                sidebar.toggle();
             }
         };
 
 
-        sidebar.toggle = function(moveMap) {
+        sidebar.toggle = function() {
             var e = d3_event;
             if (e && e.sourceEvent) {
                 e.sourceEvent.preventDefault();
@@ -302,18 +284,14 @@ export function uiSidebar(context) {
             var isCollapsed = selection.classed('collapsed');
             var isCollapsing = !isCollapsed;
             var isRTL = (textDirection === 'rtl');
-            var scaleX = isRTL ? 0 : 1;
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
             sidebarWidth = selection.node().getBoundingClientRect().width;
 
-            // switch from % to px
-            selection.style('width', sidebarWidth + 'px');
-
             var startMargin, endMargin, lastMargin;
             if (isCollapsing) {
                 startMargin = lastMargin = 0;
-                endMargin = -sidebarWidth;
+                endMargin = -sidebarWidth - 10;
             } else {
                 startMargin = lastMargin = -sidebarWidth;
                 endMargin = 0;
@@ -326,19 +304,14 @@ export function uiSidebar(context) {
                     return function(t) {
                         var dx = lastMargin - Math.round(i(t));
                         lastMargin = lastMargin - dx;
-                        context.ui().onResize(moveMap ? undefined : [dx * scaleX, 0]);
                     };
                 })
                 .on('end', function() {
                     selection.classed('collapsed', isCollapsing);
 
-                    // switch back from px to %
                     if (!isCollapsing) {
-                        var containerWidth = container.node().getBoundingClientRect().width;
-                        var widthPct = (sidebarWidth / containerWidth) * 100;
                         selection
-                            .style(xMarginProperty, null)
-                            .style('width', widthPct + '%');
+                            .style(xMarginProperty, null);
                     }
                 });
         };

@@ -40,14 +40,14 @@ body {
     height: 100%;
 }
 
-#content.active {
+#content.active #map {
     -webkit-filter: none !important;
     filter: none !important;
     -webkit-duration: 200ms;
     transition-duration: 200ms;
 }
 
-#content.inactive {
+#content.inactive #map {
     -webkit-filter: grayscale(80%) brightness(80%);
     filter: grayscale(80%) brightness(80%);
     -webkit-duration: 200ms;
@@ -937,20 +937,31 @@ a.hide-toggle {
 
 /* Sidebar / Inspector
 ------------------------------------------------------- */
+.sidebar-wrap {
+    position: relative;
+    height: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex: 0 0 auto;
+}
 #sidebar {
     position: relative;
-    float: left;
     height: 100%;
     z-index: 10;
-    background: #f6f6f6;
+    background: rgba(246, 246, 246, 0.98);
     -ms-user-select: element;
-    border: 0px solid #ccc;
-    border-right-width: 1px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    -webkit-backdrop-filter: blur(1.5px);
+    backdrop-filter: blur(1.5px);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
 }
-[dir='rtl'] #sidebar {
-    float: right;
-    border-right-width: 0px;
-    border-left-width: 1px;
+[dir='rtl'] .sidebar-wrap {
+    padding-left: auto;
+    padding-right: 10px;
 }
 
 #sidebar-resizer {
