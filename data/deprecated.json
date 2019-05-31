@@ -230,23 +230,23 @@
     },
     {
       "old": {"cuisine": "gluten-free"},
-      "replace": {"diet:gluten_free": "yes"}
+      "replace": {"diet:gluten_free": "*"}
     },
     {
       "old": {"cuisine": "halal"},
-      "replace": {"diet:halal": "yes"}
+      "replace": {"diet:halal": "*"}
     },
     {
       "old": {"cuisine": "kosher"},
-      "replace": {"diet:kosher": "yes"}
+      "replace": {"diet:kosher": "*"}
     },
     {
       "old": {"cuisine": "vegan"},
-      "replace": {"diet:vegan": "yes"}
+      "replace": {"diet:vegan": "*"}
     },
     {
       "old": {"cuisine": "vegetarian"},
-      "replace": {"diet:vegetarian": "yes"}
+      "replace": {"diet:vegetarian": "*"}
     },
     {
       "old": {"curb": "*"},
