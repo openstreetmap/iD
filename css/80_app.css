@@ -587,17 +587,16 @@ button.add-note svg.icon {
     margin-left: 1px;
 }
 
-/* Add a feature search bar
+/* Add Feature toolbar item
 ------------------------------------------------------- */
 
-.add-feature {
-    justify-content: center;
-    position: relative;
-}
 .add-feature .bar-button.active .tooltip {
     display: none;
 }
-.add-feature input[type='search'] {
+
+/* Preset browser
+------------------------------------------------------- */
+.preset-browser input[type='search'] {
     position: relative;
     width: 100%;
     height: 100%;
@@ -607,11 +606,11 @@ button.add-note svg.icon {
     padding: 5px 10px;
     border-radius: inherit;
 }
-.add-feature input[type='search'],
-.add-feature input[type='search']:focus {
+.preset-browser input[type='search'],
+.preset-browser input[type='search']:focus {
     background: #f6f6f6;
 }
-.add-feature .search-icon {
+.preset-browser .search-icon {
     color: #333;
     display: block;
     position: absolute;
@@ -619,11 +618,11 @@ button.add-note svg.icon {
     top: 10px;
     pointer-events: none;
 }
-[dir='rtl'] .add-feature .search-icon {
+[dir='rtl'] .preset-browser .search-icon {
     left: auto;
     right: 10px;
 }
-.add-feature .popover {
+.preset-browser.popover {
     border: none;
     border-radius: 6px;
     position: absolute;
@@ -640,68 +639,68 @@ button.add-note svg.icon {
     display: flex;
     flex-direction: column;
 }
-[dir='ltr'] .add-feature .popover {
+[dir='ltr'] .preset-browser.popover {
     left: 0;
 }
-[dir='rtl'] .add-feature .popover {
+[dir='rtl'] .preset-browser.popover {
     right: 0;
 }
-.add-feature .popover .popover-content {
+.preset-browser .popover-content {
     overflow-y: auto;
     max-height: 60vh;
 }
-.add-feature .popover,
-.add-feature .popover .popover-content {
+.preset-browser,
+.preset-browser .popover-content {
     /* ensure corners are rounded in Chrome */
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
 }
-.add-feature .popover .popover-header {
+.preset-browser .popover-header {
     height: 40px;
     border-bottom: 2px solid #DCDCDC;
 }
-.add-feature .popover .popover-footer {
+.preset-browser .popover-footer {
     padding: 5px 10px 5px 10px;
     background: #f6f6f6;
     border-top: 1px solid #DCDCDC;
     flex: 0 0 auto;
     display: flex;
 }
-.add-feature .popover .popover-footer .message {
+.preset-browser .popover-footer .message {
     color: #666666;
     flex-grow: 1;
 }
-.add-feature .popover .popover-footer button.filter {
+.preset-browser .popover-footer button.filter {
     height: 20px;
     background: transparent;
     color: #666;
 }
-.add-feature .popover .popover-footer button.filter.active {
+.preset-browser .popover-footer button.filter.active {
     color: #7092ff;
 }
-.add-feature .popover .popover-footer button.filter:hover {
+.preset-browser .popover-footer button.filter:hover {
     color: #333;
 }
-.add-feature .popover .popover-footer button.filter.active:hover {
+.preset-browser .popover-footer button.filter.active:hover {
     color: #597be7;
 }
-.add-feature .popover::-webkit-scrollbar {
+.preset-browser::-webkit-scrollbar {
     /* don't overlap rounded corners */
     background: transparent;
 }
-.add-feature .popover .list {
+.preset-browser .list {
     height: 100%;
 }
-.add-feature .list-item > .row {
+.preset-browser .list-item > .row {
     display: flex;
     position: relative;
     padding: 2px;
 }
-.add-feature .list-item:not(:last-of-type) .row,
-.add-feature .subsection.subitems .list-item .row,
-.add-feature .subsection > .tag-reference-body  {
+.preset-browser .list-item:not(:last-of-type) .row,
+.preset-browser .subsection.subitems .list-item .row,
+.preset-browser .subsection > .tag-reference-body  {
     border-bottom: 1px solid #DCDCDC;
 }
-.add-feature .list-item .label {
+.preset-browser .list-item .label {
     font-weight: bold;
     font-size: 12px;
     padding-left: 2px;
@@ -713,23 +712,23 @@ button.add-note svg.icon {
     line-height: 1.3em;
     width: 100%;
 }
-.add-feature .list-item .label .namepart:nth-child(2) {
+.preset-browser .list-item .label .namepart:nth-child(2) {
     font-weight: normal;
 }
-.add-feature .list-item.disabled .preset-icon-container,
-.add-feature .list-item.disabled .label {
+.preset-browser .list-item.disabled .preset-icon-container,
+.preset-browser .list-item.disabled .label {
     opacity: 0.55;
 }
-[dir='ltr'] .add-feature .list-item .label .icon.inline {
+[dir='ltr'] .preset-browser .list-item .label .icon.inline {
     margin-left: 0;
 }
-[dir='rtl'] .add-feature .list-item .label .icon.inline {
+[dir='rtl'] .preset-browser .list-item .label .icon.inline {
     margin-right: 0;
 }
-.add-feature .list-item .row > *:not(button) {
+.preset-browser .list-item .row > *:not(button) {
     pointer-events: none;
 }
-.add-feature .list-item button.choose {
+.preset-browser .list-item button.choose {
     position: absolute;
     border-radius: 0;
     height: 100%;
@@ -737,24 +736,24 @@ button.add-note svg.icon {
     top: 0;
     left: 0;
 }
-.add-feature .list-item button.choose:hover,
-.add-feature .list-item button.choose:focus {
+.preset-browser .list-item button.choose:hover,
+.preset-browser .list-item button.choose:focus {
     background: #fff;
 }
-.add-feature .list-item.focused:not(.disabled) button.choose {
+.preset-browser .list-item.focused:not(.disabled) button.choose {
     background: #e8ebff;
 }
-.add-feature .list-item button.choose.disabled {
+.preset-browser .list-item button.choose.disabled {
     background-color: #ececec;
 }
-.add-feature .subsection .list-item button.choose {
+.preset-browser .subsection .list-item button.choose {
     opacity: 0.85;
 }
-.add-feature .subsection .tag-reference-body {
+.preset-browser .subsection .tag-reference-body {
     background: rgba(255, 255, 255, 0.85);
     padding: 10px;
 }
-.add-feature .list-item button.accessory {
+.preset-browser .list-item button.accessory {
     position: relative;
     flex: 0 0 auto;
     color: #808080;
@@ -762,19 +761,19 @@ button.add-note svg.icon {
     padding-right: 3px;
     padding-left: 3px;
 }
-.add-feature .list-item button.accessory:hover {
+.preset-browser .list-item button.accessory:hover {
     color: #666;
 }
-.add-feature .list-item button.tag-reference-open path {
+.preset-browser .list-item button.tag-reference-open path {
     fill: #000;
 }
-.add-feature .subsection {
+.preset-browser .subsection {
     background-color: #CBCBCB;
 }
-[dir='ltr'] .add-feature .subitems {
+[dir='ltr'] .preset-browser .subitems {
     padding-left: 6px;
 }
-[dir='rtl'] .add-feature .subitems {
+[dir='rtl'] .preset-browser .subitems {
     padding-right: 6px;
 }
 
