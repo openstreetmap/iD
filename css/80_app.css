@@ -596,6 +596,28 @@ button.add-note svg.icon {
 
 /* Preset browser
 ------------------------------------------------------- */
+.preset-browser.popover {
+    border: 0.5px solid #DCDCDC;
+    border-radius: 6px;
+    position: absolute;
+    max-height: 600px;
+    top: 44px;
+    width: 200%;
+    min-width: 300px;
+    max-width: 325px;
+    margin: auto;
+    left: auto;
+    right: auto;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+}
+[dir='ltr'] .preset-browser.popover {
+    left: 0;
+}
+[dir='rtl'] .preset-browser.popover {
+    right: 0;
+}
 .preset-browser input[type='search'] {
     position: relative;
     width: 100%;
@@ -604,7 +626,8 @@ button.add-note svg.icon {
     font-size: 14px;
     text-indent: 25px;
     padding: 5px 10px;
-    border-radius: inherit;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 .preset-browser input[type='search'],
 .preset-browser input[type='search']:focus {
@@ -621,29 +644,6 @@ button.add-note svg.icon {
 [dir='rtl'] .preset-browser .search-icon {
     left: auto;
     right: 10px;
-}
-.preset-browser.popover {
-    border: none;
-    border-radius: 6px;
-    position: absolute;
-    max-height: 600px;
-    top: 44px;
-    width: 200%;
-    min-width: 300px;
-    max-width: 325px;
-    margin: auto;
-    left: auto;
-    right: auto;
-    z-index: 300;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-[dir='ltr'] .preset-browser.popover {
-    left: 0;
-}
-[dir='rtl'] .preset-browser.popover {
-    right: 0;
 }
 .preset-browser .popover-content {
     overflow-y: auto;
@@ -664,6 +664,8 @@ button.add-note svg.icon {
     border-top: 1px solid #DCDCDC;
     flex: 0 0 auto;
     display: flex;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 .preset-browser .popover-footer .message {
     color: #666666;
