@@ -64,6 +64,14 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
     });
 
+    it('upgrades a tag with a wildcard replacement and replaces the exisiting "no" value', function () {
+        var oldTags = { amenity: 'shop' },
+            newTags = { shop: '*' },
+            entity = iD.Entity({ tags: { amenity: 'shop', shop: 'no', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ shop: 'yes', name: 'Foo' });
+    });
+
     it('upgrades a tag from a semicolon-delimited list that has one other value', function () {
         var oldTags = { cuisine: 'vegan' },
             newTags = { 'diet:vegan': 'yes' },

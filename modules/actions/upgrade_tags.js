@@ -30,9 +30,8 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
             for (var replaceKey in replaceTags) {
                 var replaceValue = replaceTags[replaceKey];
                 if (replaceValue === '*') {
-                    if (tags[replaceKey]) {
-                        // any value is okay and there already
-                        // is one, so don't update it
+                    if (tags[replaceKey] && tags[replaceKey] !== 'no') {
+                        // allow any pre-existing value except `no` (troll tag)
                         continue;
                     } else {
                         // otherwise assume `yes` is okay
