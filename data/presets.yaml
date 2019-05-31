@@ -4970,6 +4970,11 @@ en:
         # leisure=dog_park
         name: Dog Park
         terms: '<translate with synonyms or related terms for ''Dog Park'', separated by commas>'
+      leisure/escape_game:
+        # leisure=escape_game
+        name: Escape Room
+        # 'terms: escape game,escape the room,puzzle room,quest room'
+        terms: '<translate with synonyms or related terms for ''Escape Room'', separated by commas>'
       leisure/firepit:
         # leisure=firepit
         name: Firepit
