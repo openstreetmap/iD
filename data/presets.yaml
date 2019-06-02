@@ -2143,6 +2143,9 @@ en:
       trees:
         # trees=*
         label: Trees
+      trench:
+        # trench=*
+        label: Type
       trolley_wire:
         # trolley_wire=*
         label: Overhead Trolley Wires
@@ -5582,6 +5585,11 @@ en:
         name: Telecom Manhole
         # 'terms: cover,phone,hole,telecom,telephone,bt'
         terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
+      military/trench:
+        # military=trench
+        name: Military Trench
+        # 'terms: dugout,firestep,fox hole,infantry trench,war trench'
+        terms: '<translate with synonyms or related terms for ''Military Trench'', separated by commas>'
       natural:
         # natural=*
         name: Natural
