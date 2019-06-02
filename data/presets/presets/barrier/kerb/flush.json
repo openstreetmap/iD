@@ -24,5 +24,6 @@
         "level curb",
         "tactile curb"
     ],
+    "matchScore": 0.85,
     "name": "Flush Curb"
 }
