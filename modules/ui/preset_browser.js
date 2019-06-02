@@ -10,12 +10,13 @@ import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
-    var dispatch = d3_dispatch('choose');
+    // multiple preset browsers could be instantiated at once, give each a unique ID
+    var uid = (new Date()).getTime().toString();
+
     var presets;
 
     var shownGeometry = [];
@@ -47,6 +48,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('blur', function() {
+                context.features()
+                    .on('change.preset-browser.' + uid , null);
+
                 popover.classed('hide', true);
                 onCancel();
             })
@@ -104,9 +108,6 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 updateResultsList();
             });
 
-        context.features()
-            .on('change.preset-browser.' + (new Date()).getTime(), updateForFeatureHiddenState);
-
         updateResultsList();
     };
 
@@ -118,6 +119,11 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         popover.classed('hide', false);
         search.node().focus();
         search.node().setSelectionRange(0, search.property('value').length);
+
+        updateForFeatureHiddenState();
+
+        context.features()
+            .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
     };
 
     browser.hide = function() {
@@ -574,5 +580,5 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         return item;
     }
 
-    return utilRebind(browser, dispatch, 'on');
+    return browser;
 }

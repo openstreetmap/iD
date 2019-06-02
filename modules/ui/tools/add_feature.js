@@ -78,6 +78,8 @@ export function uiToolAddFeature(context) {
     };
 
     tool.uninstall = function() {
+        presetBrowser.hide();
+
         context.keybinding().off(key);
 
         context.features()
