@@ -4185,6 +4185,9 @@
                 "trees": {
                     "label": "Trees"
                 },
+                "trench": {
+                    "label": "Type"
+                },
                 "trolley_wire": {
                     "label": "Overhead Trolley Wires"
                 },
@@ -7234,6 +7237,10 @@
                 "manhole/telecom": {
                     "name": "Telecom Manhole",
                     "terms": "cover,phone,hole,telecom,telephone,bt"
+                },
+                "military/trench": {
+                    "name": "Military Trench",
+                    "terms": "dugout,firestep,fox hole,infantry trench,war trench"
                 },
                 "natural/bare_rock": {
                     "name": "Bare Rock",
