@@ -1,7 +1,7 @@
 {
     "key": "railway:signal:direction",
     "type": "combo",
-    "label": "Direction",
+    "label": "Direction Affected",
     "strings": {
         "options": {
           "forward": "Forward",
