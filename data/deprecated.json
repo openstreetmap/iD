@@ -297,6 +297,10 @@
       "replace": {"barrier": "fence"}
     },
     {
+      "old": {"FIXME": "*"},
+      "replace": {"fixme": "$1"}
+    },
+    {
       "old": {"footway": "both"},
       "replace": {"sidewalk": "both"}
     },

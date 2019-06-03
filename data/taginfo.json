@@ -1822,6 +1822,7 @@
     {"key": "fee", "value": "some", "description": "🄳 ➜ fee=yes"},
     {"key": "fee", "value": "Yes", "description": "🄳 ➜ fee=yes"},
     {"key": "fenced", "value": "yes", "description": "🄳 ➜ barrier=fence"},
+    {"key": "FIXME", "description": "🄳 ➜ fixme=*"},
     {"key": "footway", "value": "both", "description": "🄳 ➜ sidewalk=both"},
     {"key": "footway", "value": "left", "description": "🄳 ➜ sidewalk=left"},
     {"key": "footway", "value": "no", "description": "🄳 ➜ sidewalk=no"},
