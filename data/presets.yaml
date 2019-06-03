@@ -575,7 +575,7 @@ en:
           clockwise: Clockwise
       direction_vertex:
         # direction=*
-        label: Direction
+        label: Direction Affected
         options:
           # direction=backward
           backward: Backward
@@ -1509,7 +1509,7 @@ en:
         placeholder: Distance to one decimal (123.4)
       railway/signal/direction:
         # 'railway:signal:direction=*'
-        label: Direction
+        label: Direction Affected
         options:
           # 'railway:signal:direction=backward'
           backward: Backward
@@ -2081,7 +2081,7 @@ en:
         label: Traffic Sign
       traffic_sign/direction:
         # 'traffic_sign:direction=*'
-        label: Direction
+        label: Direction Affected
         options:
           # 'traffic_sign:direction=backward'
           backward: Backward
@@ -2094,7 +2094,7 @@ en:
         label: Type
       traffic_signals/direction:
         # 'traffic_signals:direction=*'
-        label: Direction
+        label: Direction Affected
         options:
           # 'traffic_signals:direction=backward'
           backward: Backward

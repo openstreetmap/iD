@@ -2901,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direction",
+                    "label": "Direction Affected",
                     "options": {
                         "forward": "Forward",
                         "backward": "Backward",
@@ -3681,7 +3681,7 @@
                     "placeholder": "Distance to one decimal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Direction",
+                    "label": "Direction Affected",
                     "options": {
                         "forward": "Forward",
                         "backward": "Backward",
@@ -4161,7 +4161,7 @@
                     "label": "Traffic Sign"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direction",
+                    "label": "Direction Affected",
                     "options": {
                         "forward": "Forward",
                         "backward": "Backward",
@@ -4172,7 +4172,7 @@
                     "label": "Type"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direction",
+                    "label": "Direction Affected",
                     "options": {
                         "forward": "Forward",
                         "backward": "Backward",
