@@ -778,6 +778,22 @@
       "replace": {"sport": "shuffleboard"}
     },
     {
+      "old": {"sustenance": "bar"},
+      "replace": {"amenity": "bar"}
+    },
+    {
+      "old": {"sustenance": "cafe"},
+      "replace": {"amenity": "cafe"}
+    },
+    {
+      "old": {"sustenance": "pub"},
+      "replace": {"amenity": "pub"}
+    },
+    {
+      "old": {"sustenance": "restaurant"},
+      "replace": {"amenity": "restaurant"}
+    },
+    {
       "old": {"theatre:type": "amphitheatre"},
       "replace": {"theatre:type": "amphi"}
     },
