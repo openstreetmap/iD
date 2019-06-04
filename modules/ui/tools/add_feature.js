@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { svgIcon } from '../../svg/index';
+import { svgIcon } from '../../svg/icon';
 import { tooltip } from '../../util/tooltip';
 import { uiTooltipHtml } from '../tooltipHtml';
 import { uiPresetBrowser } from '../preset_browser';
@@ -98,7 +98,8 @@ export function uiToolAddFeature(context) {
         var modeInfo = {
             button: markerClass,
             preset: preset,
-            geometry: geometry
+            geometry: geometry,
+            title: preset.name().split(' – ')[0]
         };
 
         var mode;

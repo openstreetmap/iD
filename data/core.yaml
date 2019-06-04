@@ -30,6 +30,13 @@ en:
       orthogonal:
         title: Rectangular
       key: A
+  assistant:
+    mode:
+      adding: Adding
+      drawing: Drawing
+      mapping: Mapping
+      editing: Editing
+    global_location: Planet Earth
   modes:
     add_feature:
       search_placeholder: Search feature types

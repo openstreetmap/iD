@@ -13,6 +13,7 @@ import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
+import { uiAssistant } from './assistant';
 import { uiAttribution } from './attribution';
 import { uiBackground } from './background';
 import { uiContributors } from './contributors';
@@ -255,9 +256,14 @@ export function uiInit(context) {
             .classed('hide', true)
             .call(ui.photoviewer);
 
-        overMap
+        var sidebarWrap = overMap
             .append('div')
-            .attr('class', 'sidebar-wrap')
+            .attr('class', 'sidebar-wrap');
+
+        sidebarWrap
+            .call(uiAssistant(context));
+
+        sidebarWrap
             .append('div')
             .attr('id', 'sidebar')
             .call(ui.sidebar);

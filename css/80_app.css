@@ -247,14 +247,18 @@ table.tags, table.tags td, table.tags th {
 .fillD {
     background: rgba(0,0,0,.5);
     color: #fff;
+    /*
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
+    */
 }
 .fillD2 {
     background: rgba(0,0,0,.75);
     color: #fff;
+    /*
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
+    */
 }
 
 .fl { float: left;}
@@ -952,6 +956,62 @@ a.hide-toggle {
 }
 
 
+/* Over Map
+------------------------------------------------------- */
+.over-map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 71px;
+    bottom: 30px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+.over-map > * {
+    pointer-events: auto;
+}
+
+/* Assistant
+------------------------------------------------------- */
+.assistant {
+    flex: 0 0 auto;
+    background: rgba(32, 29, 29, 0.9);
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 10px;
+
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
+
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
+}
+.assistant .icon-col {
+    flex: 0 0 auto;
+}
+.assistant .icon-col .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.assistant .mode-label {
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: -2px;
+}
+.assistant .subject-title {
+    font-size: 13px;
+    font-weight: bold;
+}
+
 /* Sidebar / Inspector
 ------------------------------------------------------- */
 .sidebar-wrap {
@@ -961,6 +1021,12 @@ a.hide-toggle {
     padding-top: 10px;
     padding-bottom: 10px;
     flex: 0 0 auto;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-wrap > * {
+    pointer-events: auto;
 }
 #sidebar {
     position: relative;
@@ -4213,22 +4279,6 @@ img.tile-debug {
 .debug-legend-item:before {
     content: "\25A0";
     padding: 0 5px;
-}
-
-
-.over-map {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 71px;
-    bottom: 30px;
-    pointer-events: none;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-}
-.over-map > * {
-    pointer-events: auto;
 }
 
 /* Information Panels
