@@ -52,11 +52,15 @@ export function uiAssistant(context) {
         bodyColEnter.append('div')
             .attr('class', 'subject-title');
 
+        bodyColEnter.append('div')
+            .attr('class', 'body-text');
+
         bodyCol = bodyColEnter.merge(bodyCol);
 
         var iconUse = iconCol.selectAll('svg.icon use'),
             modeLabel = bodyCol.selectAll('.mode-label'),
-            subjectTitle = bodyCol.selectAll('.subject-title');
+            subjectTitle = bodyCol.selectAll('.subject-title'),
+            bodyTextArea = bodyCol.selectAll('.body-text');
 
         if (mode.id.indexOf('point') !== -1) {
             iconUse.attr('href','#iD-icon-point');
@@ -66,6 +70,8 @@ export function uiAssistant(context) {
             iconUse.attr('href','#iD-icon-area');
         }
 
+        var bodyText = '';
+
         subjectTitle.classed('location', false);
 
         if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') {
@@ -74,11 +80,25 @@ export function uiAssistant(context) {
 
             subjectTitle.text(mode.title);
 
+            if (mode.id === 'add-point') {
+                bodyText = t('assistant.instructions.add_point');
+            } else if (mode.id === 'add-line') {
+                bodyText = t('assistant.instructions.add_line');
+            } else if (mode.id === 'add-area') {
+                bodyText = t('assistant.instructions.add_area');
+            }
+
         } else if (mode.id === 'draw-line' || mode.id === 'draw-area') {
 
             modeLabel.text(t('assistant.mode.drawing'));
 
             subjectTitle.text(mode.title);
+
+            if (mode.id === 'draw-line') {
+                bodyText = t('assistant.instructions.draw_line');
+            } else if (mode.id === 'draw-area') {
+                bodyText = t('assistant.instructions.draw_area');
+            }
 
         } else if (mode.id === 'select' && mode.selectedIDs().length === 1) {
 
@@ -100,6 +120,8 @@ export function uiAssistant(context) {
             subjectTitle.text(currLocation);
             debouncedGetLocation();
         }
+
+        bodyTextArea.text(bodyText);
 
     }
 
