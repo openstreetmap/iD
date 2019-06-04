@@ -13,7 +13,7 @@ import { osmEntity, osmNote, qaError } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
-import { uiInspector } from './inspector';
+import { uiEntityEditor } from './entity_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiNoteEditor } from './note_editor';
@@ -21,7 +21,7 @@ import { textDirection } from '../util/locale';
 
 
 export function uiSidebar(context) {
-    var inspector = uiInspector(context);
+    var inspector = uiEntityEditor(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
@@ -93,7 +93,7 @@ export function uiSidebar(context) {
 
         var inspectorWrap = selection
             .append('div')
-            .attr('class', 'inspector-hidden inspector-wrap');
+            .attr('class', 'inspector-hidden inspector-wrap entity-editor-pane');
 
 
         function hover(datum) {
@@ -213,8 +213,7 @@ export function uiSidebar(context) {
                 if (inspector.entityID() !== id || inspector.state() !== 'select') {
                     inspector
                         .state('select')
-                        .entityID(id)
-                        .newFeature(newFeature);
+                        .entityID(id);
 
                     inspectorWrap
                         .call(inspector, newFeature);

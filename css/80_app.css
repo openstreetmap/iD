@@ -984,6 +984,7 @@ a.hide-toggle {
     display: flex;
     margin-bottom: 10px;
     max-width: 350px;
+    line-height: 1.35em;
 
     -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
@@ -1006,7 +1007,6 @@ a.hide-toggle {
     letter-spacing: 0.7px;
     font-size: 10px;
     font-weight: bold;
-    margin-bottom: -3px;
 }
 .assistant .subject-title {
     font-size: 13px;
@@ -1015,7 +1015,7 @@ a.hide-toggle {
 .assistant .body-text {
     font-size: 12px;
     color: #ccc;
-    line-height: 1.35em;
+    margin-top: 6px;
 }
 .assistant .body-text:empty {
     display: none;
@@ -1050,6 +1050,7 @@ a.hide-toggle {
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
     -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
     box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
+    overflow: hidden;
 }
 [dir='rtl'] .sidebar-wrap {
     padding-left: auto;
@@ -1102,11 +1103,6 @@ a.hide-toggle {
 }
 .entity-editor-pane .footer {
     position: relative;
-}
-
-.inspector-wrap {
-    width: 100%;
-    height: 100%;
 }
 
 .inspector-hidden {

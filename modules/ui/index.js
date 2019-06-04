@@ -33,7 +33,6 @@ export { uiImproveOsmDetails } from './improveOSM_details';
 export { uiImproveOsmEditor } from './improveOSM_editor';
 export { uiImproveOsmHeader } from './improveOSM_header';
 export { uiInfo } from './info';
-export { uiInspector } from './inspector';
 export { uiKeepRightDetails } from './keepRight_details';
 export { uiKeepRightEditor } from './keepRight_editor';
 export { uiKeepRightHeader } from './keepRight_header';

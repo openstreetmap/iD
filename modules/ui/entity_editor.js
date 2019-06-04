@@ -41,9 +41,18 @@ export function uiEntityEditor(context) {
     var rawMembershipEditor = uiRawMembershipEditor(context);
     var presetBrowser = uiPresetBrowser(context, [], choosePreset);
 
-    function entityEditor(selection) {
+    function entityEditor(selection, newFeature) {
         var entity = context.entity(_entityID);
         var tags = Object.assign({}, entity.tags);  // shallow copy
+
+        /*
+        var hasNonGeometryTags = entity.hasNonGeometryTags();
+        var isTaglessOrIntersectionVertex = entity.geometry(context.graph()) === 'vertex' &&
+            (!hasNonGeometryTags && !entity.isHighwayIntersection(context.graph()));
+        var issues = context.validator().getEntityIssues(_entityID);
+        // start with the preset list if the feature is new and untagged or is an uninteresting vertex
+        var showPresetList = (newFeature && !hasNonGeometryTags) || (isTaglessOrIntersectionVertex && !issues.length);
+        */
 
         // Body
         var body = selection.selectAll('.inspector-body')
