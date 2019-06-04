@@ -247,10 +247,14 @@ table.tags, table.tags td, table.tags th {
 .fillD {
     background: rgba(0,0,0,.5);
     color: #fff;
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
 }
 .fillD2 {
     background: rgba(0,0,0,.75);
     color: #fff;
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
 }
 
 .fl { float: left;}
