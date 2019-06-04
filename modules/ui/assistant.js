@@ -108,7 +108,8 @@ export function uiAssistant(context) {
 
     var debouncedGetLocation = _debounce(getLocation, 250);
     function getLocation() {
-        if (!services.geocoder || context.map().zoom() < 11) {
+        var zoom = context.map().zoom();
+        if (!services.geocoder || zoom < 9) {
             currLocation = defaultLoc;
             container.selectAll('.subject-title.location')
                 .text(currLocation);
@@ -118,7 +119,7 @@ export function uiAssistant(context) {
                     currLocation = defaultLoc;
                 } else {
                     var addr = result.address;
-                    var place = (addr && (addr.town || addr.city || addr.county)) || '';
+                    var place = (zoom > 14 && addr && (addr.town || addr.city || addr.county)) || '';
                     var region = (addr && (addr.state || addr.country)) || '';
                     var separator = (place && region) ? t('success.thank_you_where.separator') : '';
 
