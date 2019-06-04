@@ -2,11 +2,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
-import { t, textDirection } from '../util/locale';
+import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
-import { modeBrowse } from '../modes/browse';
-import { svgIcon } from '../svg/icon';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';
@@ -14,10 +13,12 @@ import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
+import { uiPresetBrowser } from './preset_browser';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCleanTags, utilRebind } from '../util';
+import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiEntityEditor(context) {
@@ -38,44 +39,11 @@ export function uiEntityEditor(context) {
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
     var rawMembershipEditor = uiRawMembershipEditor(context);
+    var presetBrowser = uiPresetBrowser(context, [], choosePreset);
 
     function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = Object.assign({}, entity.tags);  // shallow copy
-
-        // Header
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        // Enter
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL cf');
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr preset-close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
-            .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
-
-        headerEnter
-            .append('h3')
-            .text(t('inspector.edit'));
-
-        // Update
-        header = header
-            .merge(headerEnter);
-
-        header.selectAll('.preset-reset')
-            .on('click', function() {
-                dispatch.call('choose', this, _activePreset);
-            });
-
 
         // Body
         var body = selection.selectAll('.inspector-body')
@@ -87,18 +55,26 @@ export function uiEntityEditor(context) {
             .attr('class', 'inspector-body')
             .on('scroll.entity-editor', function() { _scrolled = true; });
 
-        bodyEnter
+        var presetButtonWrap = bodyEnter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')
             .append('div')
-            .attr('class', 'preset-list-button-wrap')
-            .append('button')
+            .attr('class', 'preset-list-button-wrap');
+
+        presetButtonWrap.append('button')
             .attr('class', 'preset-list-button preset-reset')
             .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'))
             .append('div')
             .attr('class', 'label')
             .append('div')
             .attr('class', 'label-inner');
+
+        presetButtonWrap.append('div')
+            .attr('class', 'accessory-buttons');
+
+        if (!bodyEnter.empty()) {
+            presetBrowser.render(bodyEnter);
+        }
 
         bodyEnter
             .append('div')
@@ -130,18 +106,32 @@ export function uiEntityEditor(context) {
             .attr('class', 'key-trap');
 
 
+        var footer = selection.selectAll('.footer')
+            .data([0]);
+
+        footer = footer.enter()
+            .append('div')
+            .attr('class', 'footer')
+            .merge(footer);
+
+        footer
+            .call(uiViewOnOSM(context)
+                .what(context.hasEntity(_entityID))
+            );
+
+
         // Update
         body = body
             .merge(bodyEnter);
 
         if (_presetFavorite) {
-            body.selectAll('.preset-list-button-wrap')
+            body.selectAll('.preset-list-button-wrap accessory-buttons')
                 .call(_presetFavorite.button);
         }
 
         // update header
         if (_tagReference) {
-            body.selectAll('.preset-list-button-wrap')
+            body.selectAll('.preset-list-button-wrap .accessory-buttons')
                 .call(_tagReference.button);
 
             body.selectAll('.preset-list-item')
@@ -150,7 +140,21 @@ export function uiEntityEditor(context) {
 
         body.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.call('choose', this, _activePreset);
+                if (presetBrowser.isShown()) {
+                    presetBrowser.hide();
+                } else {
+                    presetBrowser.setAllowedGeometry([context.geometry(_entityID)]);
+                    presetBrowser.show();
+                }
+                //dispatch.call('choose', this, _activePreset);
+            })
+            .on('mousedown', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+            })
+            .on('mouseup', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
             });
 
         body.select('.preset-list-item button')
@@ -266,6 +270,16 @@ export function uiEntityEditor(context) {
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
         }
+    }
+
+    function choosePreset(preset, geom) {
+        context.presets().setMostRecent(preset, geom);
+        context.perform(
+            actionChangePreset(_entityID, _activePreset, preset),
+            t('operations.change_tags.annotation')
+        );
+
+        context.validator().validate();  // rerun validation
     }
 
 

@@ -611,12 +611,24 @@ button.add-note svg.icon {
     z-index: 300;
     display: flex;
     flex-direction: column;
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
 }
 [dir='ltr'] .preset-browser.popover {
     left: 0;
 }
 [dir='rtl'] .preset-browser.popover {
     right: 0;
+}
+#sidebar .preset-browser.popover {
+    top: 84px;
+}
+[dir='ltr'] #sidebar .preset-browser.popover {
+    left: 20px;
+}
+[dir='rtl'] #sidebar .preset-browser.popover {
+    right: 20px;
 }
 .preset-browser input[type='search'] {
     position: relative;
@@ -649,11 +661,11 @@ button.add-note svg.icon {
     overflow-y: auto;
     max-height: 60vh;
 }
+/* ensure corners are rounded in Chrome
 .preset-browser,
 .preset-browser .popover-content {
-    /* ensure corners are rounded in Chrome */
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
-}
+}*/
 .preset-browser .popover-header {
     height: 40px;
     border-bottom: 2px solid #DCDCDC;
@@ -1003,33 +1015,19 @@ a.hide-toggle {
     position: absolute;
 }
 
-.panewrap {
-    position: absolute;
-    width: 200%;
+.entity-editor-pane {
+    width: 100%;
     height: 100%;
-    right: -100%;
+    display: flex;
+    flex-direction: column;
 }
-
-.pane {
-    position: absolute;
-    width: 50%;
-    top: 0;
-    bottom: 30px;
-}
-
-.pane:first-child {
-    left: 0;
-}
-
-.pane:last-child {
-    right: 0;
+.entity-editor-pane .footer {
+    position: relative;
 }
 
 .inspector-wrap {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    position: relative;
 }
 
 .inspector-hidden {
@@ -1037,19 +1035,16 @@ a.hide-toggle {
 }
 
 .inspector-body {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    overflow-y: auto;
+    overflow-x: visible;
+    width: 100%;
+    height: 100%;
 }
 
 .feature-list-pane .inspector-body,
 .preset-list-pane .inspector-body {
     top: 120px;
 }
-.entity-editor-pane .inspector-body,
 .selection-list-pane .inspector-body {
     top: 60px;
 }
@@ -1072,8 +1067,6 @@ a.hide-toggle {
 }
 
 #sidebar .search-header input {
-    position: absolute;
-    top: 60px;
     height: 60px;
     width: 100%;
     padding: 5px 10px;
@@ -1368,37 +1361,41 @@ a.hide-toggle {
     background-color: #ececec;
 }
 
-.preset-list-item button.preset-favorite-button {
+.preset-list-item .accessory-buttons {
+    flex: 0 0 auto;
+    display: flex;
+}
+.preset-list-item .accessory-buttons button.preset-favorite-button {
     border-radius: 0;
 }
-.preset-list-item button.preset-favorite-button,
-.preset-list-item button.tag-reference-button {
+.preset-list-item .accessory-buttons button.preset-favorite-button,
+.preset-list-item .accessory-buttons button.tag-reference-button {
     height: 100%;
     width: 32px;
     flex: 0 0 auto;
     background: #f6f6f6;
 }
-[dir='ltr'] .preset-list-item button.preset-favorite-button,
-[dir='ltr'] .preset-list-item button.tag-reference-button {
+[dir='ltr'] .preset-list-item .accessory-buttons button.preset-favorite-button,
+[dir='ltr'] .preset-list-item .accessory-buttons button.tag-reference-button {
     border-left: 1px solid #ccc;
 }
-[dir='rtl'] .preset-list-item button.preset-favorite-button,
-[dir='rtl'] .preset-list-item button.tag-reference-button {
+[dir='rtl'] .preset-list-item .accessory-buttons button.preset-favorite-button,
+[dir='rtl'] .preset-list-item .accessory-buttons button.tag-reference-button {
     border-right: 1px solid #ccc;
 }
-[dir='ltr'] .preset-list-item button:last-child {
+[dir='ltr'] .preset-list-item .accessory-buttons button:last-child {
     border-radius: 0 4px 4px 0;
 }
-[dir='rtl'] .preset-list-item button:last-child {
+[dir='rtl'] .preset-list-item .accessory-buttons button:last-child {
     border-radius: 4px 0 0 4px;
 }
 
-.preset-list-item button.preset-favorite-button:hover,
-.preset-list-item button.tag-reference-button:hover {
+.preset-list-item .accessory-buttons button.preset-favorite-button:hover,
+.preset-list-item .accessory-buttons button.tag-reference-button:hover {
     background: #f1f1f1;
 }
-.preset-list-item button.preset-favorite-button .icon,
-.preset-list-item button.tag-reference-button .icon {
+.preset-list-item .accessory-buttons button.preset-favorite-button .icon,
+.preset-list-item .accessory-buttons button.tag-reference-button .icon {
     opacity: .5;
 }
 

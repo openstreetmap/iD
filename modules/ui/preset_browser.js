@@ -10,7 +10,7 @@ import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
-import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
+import { utilKeybinding, utilNoAuto } from '../util';
 
 export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
@@ -52,7 +52,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                     .on('change.preset-browser.' + uid , null);
 
                 popover.classed('hide', true);
-                onCancel();
+                if (onCancel) onCancel();
             })
             .on('keypress', keypress)
             .on('keydown', keydown)
@@ -85,10 +85,14 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         message = footer.append('div')
             .attr('class', 'message');
 
+        var geomForButtons = allowedGeometry.slice();
+        var vertexIndex = geomForButtons.indexOf('vertex');
+        if (vertexIndex !== -1) geomForButtons.splice(vertexIndex, 1);
+
         footer.append('div')
             .attr('class', 'filter-wrap')
             .selectAll('button.filter')
-            .data(['point', 'line', 'area'])
+            .data(geomForButtons)
             .enter()
             .append('button')
             .attr('class', 'filter active')
@@ -129,6 +133,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     browser.hide = function() {
         search.node().blur();
     };
+
+
+    browser.setAllowedGeometry = function(array) {
+        allowedGeometry = array;
+        updateShownGeometry(array.slice());
+        updateFilterButtonsStates();
+        updateResultsList();
+    };
+
 
     function updateShownGeometry(geom) {
         shownGeometry = geom.sort();
@@ -225,6 +238,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     }
 
     function updateResultsList() {
+
+        if (search.empty()) return;
 
         var value = search.property('value');
         var results;
@@ -573,7 +588,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            onChoose(preset, geometry);
+            if (onChoose) onChoose(preset, geometry);
 
             search.node().blur();
         };

@@ -19,7 +19,7 @@ export function uiToolAddFeature(context) {
         label: t('toolbar.add_feature')
     };
 
-    var allowedGeometry = ['area', 'line', 'point', 'vertex'];
+    var allowedGeometry = ['point', 'vertex', 'line', 'area'];
     var presetBrowser = uiPresetBrowser(context, allowedGeometry, browserDidSelectPreset, browserDidClose);
 
     var button = d3_select(null);
