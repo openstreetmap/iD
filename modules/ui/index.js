@@ -54,7 +54,6 @@ export { uiRadialMenu } from './radial_menu';
 export { uiRawMemberEditor } from './raw_member_editor';
 export { uiRawMembershipEditor } from './raw_membership_editor';
 export { uiRawTagEditor } from './raw_tag_editor';
-export { uiRestore } from './restore';
 export { uiScale } from './scale';
 export { uiSelectionList } from './selection_list';
 export { uiSidebar } from './sidebar';

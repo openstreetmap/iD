@@ -165,14 +165,14 @@ export function rendererMap(context) {
                 _mouseEvent = d3_event;
             })
             .on('mouseover.vertices', function() {
-                if (map.editable() && !_isTransformed) {
+                if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             })
             .on('mouseout.vertices', function() {
-                if (map.editable() && !_isTransformed) {
+                if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
@@ -180,7 +180,7 @@ export function rendererMap(context) {
             });
 
         context.on('enter.map',  function() {
-            if (map.editable() && !_isTransformed) {
+            if (map.editableDataEnabled() && !_isTransformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -573,7 +573,7 @@ export function rendererMap(context) {
         }
 
         // OSM
-        if (map.editable()) {
+        if (map.editableDataEnabled()) {
             context.loadTiles(projection);
             drawEditable(difference, extent);
         } else {
@@ -744,7 +744,7 @@ export function rendererMap(context) {
         var proj = geoRawMercator().transform(projection.transform());  // copy projection
         // use the target zoom to calculate the offset center
         proj.scale(geoZoomToScale(zoom, TILESIZE));
-        
+
         var locPx = proj(loc);
         var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
         var offsetLoc = proj.invert(offsetLocPx);
@@ -907,7 +907,9 @@ export function rendererMap(context) {
     };
 
 
-    map.editable = function() {
+    map.editableDataEnabled = function() {
+        if (context.history().hasRestorableChanges()) return false;
+        
         var layer = context.layers().layer('osm');
         if (!layer || !layer.enabled()) return false;
 

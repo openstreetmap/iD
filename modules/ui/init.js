@@ -29,7 +29,6 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
-import { uiRestore } from './restore';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
@@ -299,11 +298,6 @@ export function uiInit(context) {
         context.enter(modeBrowse(context));
 
         if (!_initCounter++) {
-            if (!hash.startWalkthrough) {
-                context.container()
-                    .call(uiRestore(context));
-            }
-
             context.container()
                 .call(uiShortcuts(context));
         }

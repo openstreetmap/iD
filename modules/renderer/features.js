@@ -93,7 +93,7 @@ export function rendererFeatures(context) {
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
             hidden: function() {
-                return !context.editable() ||
+                return !context.editableDataEnabled() ||
                     (this.count === 0 && !this.enabled) ||
                     this.count > this.currentMax * _cullFactor;
             },

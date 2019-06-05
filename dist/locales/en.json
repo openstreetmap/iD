@@ -63,6 +63,15 @@
             "welcome": {
                 "first_time": "You’re editing <b>OpenStreetMap</b>: the free, collborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!",
                 "return": "Welcome back. Ready to make the map even better?"
+            },
+            "restore": {
+                "title": "Restore",
+                "discard": "Discard",
+                "info": {
+                    "count_loc": "You have {count} unsaved changes around {location}.",
+                    "count_loc_time": "You have {count} unsaved changes from {duration} ago around {location}."
+                },
+                "ask": "Would you like to restore them?"
             }
         },
         "modes": {
@@ -913,12 +922,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "You have unsaved changes",
-            "description": "Do you wish to restore unsaved changes from a previous editing session?",
-            "restore": "Restore my changes",
-            "reset": "Discard my changes"
-        },
         "save": {
             "title": "Save",
             "help": "Review your changes and upload them to OpenStreetMap, making them visible to other users.",
@@ -975,6 +978,9 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Cancel"
+        },
+        "splash": {
+            "walkthrough": "Start the Walkthrough"
         },
         "source_switch": {
             "live": "live",
@@ -2380,7 +2386,15 @@
             "east": "E",
             "west": "W",
             "coordinate": "{coordinate}{direction}",
-            "coordinate_pair": "{latitude}, {longitude}"
+            "coordinate_pair": "{latitude}, {longitude}",
+            "second": "1 second",
+            "seconds": "{quantity} seconds",
+            "minute": "1 minute",
+            "minutes": "{quantity} minutes",
+            "hour": "1 hour",
+            "hours": "{quantity} hours",
+            "day": "1 day",
+            "days": "{quantity} days"
         },
         "wikidata": {
             "identifier": "Identifier",

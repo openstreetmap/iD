@@ -7,8 +7,13 @@ import { t } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
+import { geoRawMercator } from '../geo/raw_mercator';
+import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
 export function uiAssistant(context) {
+
+    var defaultLoc = t('assistant.global_location');
+    var currLocation = defaultLoc;
 
     var container = d3_select(null);
 
@@ -21,13 +26,15 @@ export function uiAssistant(context) {
         container = selection.append('div')
             .attr('class', 'assistant');
 
+        scheduleCurrentLocationUpdate();
+
         redraw();
 
         context
             .on('enter.assistant', redraw);
 
         context.map()
-            .on('move.assistant', debouncedGetLocation);
+            .on('move.assistant', scheduleCurrentLocationUpdate);
 
         context.history()
             .on('change.assistant', updateDidEditStatus);
@@ -56,28 +63,32 @@ export function uiAssistant(context) {
             .call(svgIcon('#'))
             .merge(iconCol);
 
-        var bodyCol = container.selectAll('.body-col')
+        var mainCol = container.selectAll('.body-col')
             .data([0]);
 
-        var bodyColEnter = bodyCol.enter()
+        var mainColEnter = mainCol.enter()
             .append('div')
             .attr('class', 'body-col');
 
-        bodyColEnter.append('div')
+        mainColEnter.append('div')
             .attr('class', 'mode-label');
 
-        bodyColEnter.append('div')
+        mainColEnter.append('div')
             .attr('class', 'subject-title');
 
-        bodyColEnter.append('div')
+        mainColEnter.append('div')
             .attr('class', 'body-text');
 
-        bodyCol = bodyColEnter.merge(bodyCol);
+        mainColEnter.append('div')
+            .attr('class', 'main-footer');
+
+        mainCol = mainColEnter.merge(mainCol);
 
         var iconUse = iconCol.selectAll('svg.icon use'),
-            modeLabel = bodyCol.selectAll('.mode-label'),
-            subjectTitle = bodyCol.selectAll('.subject-title'),
-            bodyTextArea = bodyCol.selectAll('.body-text');
+            modeLabel = mainCol.selectAll('.mode-label'),
+            subjectTitle = mainCol.selectAll('.subject-title'),
+            bodyTextArea = mainCol.selectAll('.body-text'),
+            mainFooter = mainCol.selectAll('.main-footer');
 
         if (mode.id.indexOf('point') !== -1) {
             iconUse.attr('href','#iD-icon-point');
@@ -87,8 +98,8 @@ export function uiAssistant(context) {
             iconUse.attr('href','#iD-icon-area');
         }
 
-        var bodyText = '';
-
+        bodyTextArea.html('');
+        mainFooter.html('');
         subjectTitle.classed('location', false);
         container.classed('prominent', false);
 
@@ -99,11 +110,11 @@ export function uiAssistant(context) {
             subjectTitle.text(mode.title);
 
             if (mode.id === 'add-point') {
-                bodyText = t('assistant.instructions.add_point');
+                bodyTextArea.html(t('assistant.instructions.add_point'));
             } else if (mode.id === 'add-line') {
-                bodyText = t('assistant.instructions.add_line');
+                bodyTextArea.html(t('assistant.instructions.add_line'));
             } else if (mode.id === 'add-area') {
-                bodyText = t('assistant.instructions.add_area');
+                bodyTextArea.html(t('assistant.instructions.add_area'));
             }
 
         } else if (mode.id === 'draw-line' || mode.id === 'draw-area') {
@@ -113,9 +124,9 @@ export function uiAssistant(context) {
             subjectTitle.text(mode.title);
 
             if (mode.id === 'draw-line') {
-                bodyText = t('assistant.instructions.draw_line');
+                bodyTextArea.html(t('assistant.instructions.draw_line'));
             } else if (mode.id === 'draw-area') {
-                bodyText = t('assistant.instructions.draw_area');
+                bodyTextArea.html(t('assistant.instructions.draw_area'));
             }
 
         } else if (mode.id === 'select' && mode.selectedIDs().length === 1) {
@@ -134,7 +145,19 @@ export function uiAssistant(context) {
 
             iconUse.attr('href','#' + greetingIcon());
             subjectTitle.text(t('assistant.greetings.' + greetingTimeframe()));
-            bodyText = t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return'));
+
+            if (context.history().hasRestorableChanges()) {
+                drawRestoreScreen();
+            } else {
+                bodyTextArea.html(t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return')));
+                bodyTextArea.selectAll('a')
+                    .attr('href', '#')
+                    .on('click', function() {
+                        isFirstSession = false;
+                        updateDidEditStatus();
+                        context.container().call(uiIntro(context));
+                    });
+            }
 
         } else {
             iconUse.attr('href','#fas-map-marked-alt');
@@ -143,26 +166,84 @@ export function uiAssistant(context) {
 
             subjectTitle.classed('location', true);
             subjectTitle.text(currLocation);
-            debouncedGetLocation();
+            scheduleCurrentLocationUpdate();
         }
 
-        bodyTextArea.html(bodyText);
+        function drawRestoreScreen() {
+            var savedHistoryJSON = JSON.parse(context.history().savedHistoryJSON());
 
-        bodyTextArea.selectAll('a')
-            .attr('href', '#')
-            .on('click', function() {
-                isFirstSession = false;
-                updateDidEditStatus();
-                context.container().call(uiIntro(context));
+            var lastGraph = savedHistoryJSON.stack &&
+                savedHistoryJSON.stack.length > 0 &&
+                savedHistoryJSON.stack[savedHistoryJSON.stack.length - 1];
+            if (!lastGraph) return;
+
+            var changeCount = (lastGraph.modified ? lastGraph.modified.length : 0) +
+                (lastGraph.deleted ? lastGraph.deleted.length : 0);
+            if (changeCount === 0) return;
+
+            var loc = lastGraph.transform &&
+                geoRawMercator()
+                .transform(lastGraph.transform)
+                .invert([0, 0]);
+            if (!loc) return;
+
+            var restoreInfoDict = {
+                count: '<b>' + changeCount.toString() + '</b>',
+                location: '<b class="restore-location">' + decimalCoordinatePair(loc, 3) + '</b>'
+            };
+            var infoID = 'count_loc';
+
+            if (savedHistoryJSON.timestamp) {
+                infoID = 'count_loc_time';
+                var milliseconds = (new Date()).getTime() - savedHistoryJSON.timestamp;
+                restoreInfoDict.duration = '<b>' + formattedRoundedDuration(milliseconds) + '</b>';
+            }
+
+            bodyTextArea.html(t('assistant.restore.info.' + infoID, restoreInfoDict) +
+                '<br/>' +
+                t('assistant.restore.ask'));
+
+            getLocation(loc, null, function(placeName) {
+                if (placeName) {
+                    container.selectAll('.restore-location')
+                        .text(placeName);
+                }
             });
 
+            mainFooter.append('button')
+                .attr('class', 'active')
+                .on('click', function() {
+                    context.history().restore();
+                    redraw();
+                })
+                .append('span')
+                .text(t('assistant.restore.title'));
+
+            mainFooter.append('button')
+                .attr('class', 'destructive')
+                .on('click', function() {
+                    context.history().clearSaved();
+                    redraw();
+                })
+                .append('span')
+                .text(t('assistant.restore.discard'));
+        }
+
+    }
+
+    function scheduleCurrentLocationUpdate() {
+        debouncedGetLocation(context.map().center(), context.map().zoom(), function(placeName) {
+            currLocation = placeName ? placeName : defaultLoc;
+            container.selectAll('.subject-title.location')
+                .text(currLocation);
+        });
     }
 
     function greetingTimeframe() {
         var now = new Date();
         var hours = now.getHours();
         if (hours >= 20 || hours <= 2) return 'night';
-        if (hours >= 17) return 'evening';
+        if (hours >= 18) return 'evening';
         if (hours >= 12) return 'afternoon';
         return 'morning';
     }
@@ -174,34 +255,31 @@ export function uiAssistant(context) {
         return 'fas-moon';
     }
 
-    var defaultLoc = t('assistant.global_location');
-    var currLocation = defaultLoc;
-
     var debouncedGetLocation = _debounce(getLocation, 250);
-    function getLocation() {
-        var zoom = context.map().zoom();
-        if (!services.geocoder || zoom < 9) {
-            currLocation = defaultLoc;
-            container.selectAll('.subject-title.location')
-                .text(currLocation);
-        } else {
-            services.geocoder.reverse(context.map().center(), function(err, result) {
-                if (err || !result || !result.address) {
-                    currLocation = defaultLoc;
-                } else {
-                    var addr = result.address;
-                    var place = (zoom > 14 && addr && (addr.town || addr.city || addr.county)) || '';
-                    var region = (addr && (addr.state || addr.country)) || '';
-                    var separator = (place && region) ? t('success.thank_you_where.separator') : '';
+    function getLocation(loc, zoom, completionHandler) {
 
-                    currLocation = t('success.thank_you_where.format',
-                        { place: place, separator: separator, region: region }
-                    );
-                }
-                container.selectAll('.subject-title.location')
-                    .text(currLocation);
-            });
+        if (!services.geocoder || (zoom && zoom < 9)) {
+            completionHandler(null);
+            return;
         }
+
+        services.geocoder.reverse(loc, function(err, result) {
+            if (err || !result || !result.address) {
+                completionHandler(null);
+                return;
+            }
+
+            var addr = result.address;
+            var place = ((!zoom || zoom > 14) && addr && (addr.town || addr.city || addr.county)) || '';
+            var region = (addr && (addr.state || addr.country)) || '';
+            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
+
+            var formattedName = t('success.thank_you_where.format',
+                { place: place, separator: separator, region: region }
+            );
+
+            completionHandler(formattedName);
+        });
     }
 
     return assistant;

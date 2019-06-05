@@ -311,6 +311,10 @@ button:hover {
 button.active {
     background: #7092ff;
 }
+button.destructive {
+    background: #d32232;
+    color: #fff;
+}
 button.disabled {
     background-color: rgba(255,255,255,.25);
     color: rgba(0,0,0,.4);
@@ -1017,7 +1021,8 @@ a.hide-toggle {
     color: #ccc;
     margin-top: 6px;
 }
-.assistant .body-text:empty {
+.assistant .body-text:empty,
+.assistant .main-footer:empty {
     display: none;
 }
 .assistant b {
@@ -1028,7 +1033,27 @@ a.hide-toggle {
     margin-top: 10px;
     content: " ";
 }
+.assistant .main-footer {
+    margin-top: 12px;
+}
+.assistant .main-footer button {
+    color: #fff;
+    min-width: 100px;
+    height: auto;
+    padding: 5px 2px;
+    line-height: 20px;
+    font-size: 13px;
+}
+[dir='ltr'] .assistant .main-footer button:first-of-type {
+    margin-right: 8px;
+}
+[dir='rtl'] .assistant .main-footer button:first-of-type {
+    margin-left: 8px;
+}
 
+.assistant.prominent {
+    padding-bottom: 16px;
+}
 .assistant.prominent .icon-col .icon {
     width: 40px;
     height: 40px;
@@ -1038,7 +1063,7 @@ a.hide-toggle {
     display: none;
 }
 .assistant.prominent .subject-title {
-    font-family: Georgia, Verdana, serif;
+    font-family: Georgia, serif;
     font-weight: bold;
     font-size: 20px;
     margin-top: 6px;
@@ -1046,7 +1071,6 @@ a.hide-toggle {
 .assistant.prominent .body-text {
     font-size: 14px;
     margin-top: 10px;
-    margin-bottom: 6px;
     line-height: 1.35em;
 }
 
@@ -4860,15 +4884,6 @@ img.tile-debug {
 
 .modal-section:last-child {
     border-bottom: 0;
-}
-
-/* Restore Modal
-------------------------------------------------------- */
-.modal-actions .logo-restore {
-    color: #7092ff;
-}
-.modal-actions .logo-reset {
-    color: #e06c5e;
 }
 
 /* Success Screen / Community Index

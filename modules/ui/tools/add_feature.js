@@ -127,13 +127,8 @@ export function uiToolAddFeature(context) {
         button.classed('active', false);
     }
 
-    function osmEditable() {
-        var mode = context.mode();
-        return context.editable() && mode && mode.id !== 'save';
-    }
-
     function updateEnabledState() {
-        var isEnabled = osmEditable();
+        var isEnabled = context.editable();
         button.classed('disabled', !isEnabled);
         if (!isEnabled) {
             presetBrowser.hide();
