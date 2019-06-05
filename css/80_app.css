@@ -1034,9 +1034,14 @@ a.hide-toggle {
     display: flex;
     flex-direction: column;
 }
+[dir='rtl'] .sidebar-wrap {
+    padding-left: auto;
+    padding-right: 10px;
+}
 .sidebar-wrap > * {
     pointer-events: auto;
 }
+
 #sidebar {
     position: relative;
     height: 100%;
@@ -1050,11 +1055,7 @@ a.hide-toggle {
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
     -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
     box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
-    overflow: hidden;
-}
-[dir='rtl'] .sidebar-wrap {
-    padding-left: auto;
-    padding-right: 10px;
+    display: flex;
 }
 
 #sidebar-resizer {
@@ -1116,9 +1117,10 @@ a.hide-toggle {
     height: 100%;
 }
 
-.feature-list-pane .inspector-body,
-.preset-list-pane .inspector-body {
-    top: 120px;
+.feature-list-pane {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .selection-list-pane .inspector-body {
     top: 60px;
