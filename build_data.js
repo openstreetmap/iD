@@ -54,6 +54,8 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
+            'fas-sun': {},
+            'fas-moon': {},
             'fas-edit': {},
             'fas-map-marked-alt': {},
             'fas-i-cursor': {},

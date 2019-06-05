@@ -1020,6 +1020,36 @@ a.hide-toggle {
 .assistant .body-text:empty {
     display: none;
 }
+.assistant b {
+    font-weight: bold;
+}
+.assistant br {
+    display: block;
+    margin-top: 10px;
+    content: " ";
+}
+
+.assistant.prominent .icon-col .icon {
+    width: 40px;
+    height: 40px;
+    color: #FFCF4A;
+}
+.assistant.prominent .mode-label {
+    display: none;
+}
+.assistant.prominent .subject-title {
+    font-family: Georgia, Verdana, serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 6px;
+}
+.assistant.prominent .body-text {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    line-height: 1.35em;
+}
+
 
 /* Sidebar / Inspector
 ------------------------------------------------------- */

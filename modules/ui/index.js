@@ -60,7 +60,6 @@ export { uiSelectionList } from './selection_list';
 export { uiSidebar } from './sidebar';
 export { uiSourceSwitch } from './source_switch';
 export { uiSpinner } from './spinner';
-export { uiSplash } from './splash';
 export { uiStatus } from './status';
 export { uiSuccess } from './success';
 export { uiTagReference } from './tag_reference';

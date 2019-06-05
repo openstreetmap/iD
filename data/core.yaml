@@ -43,6 +43,15 @@ en:
       add_area: Click or tap any corner of the feature.
       draw_area: Trace the feature's outline.
     global_location: Planet Earth
+    greetings:
+      morning: Good Morning
+      afternoon: Good Afternoon
+      evening: Good Evening
+      # "Good Night" isn't a greeting in English but it can be in some languages
+      night: Good Evening
+    welcome:
+      first_time: "You’re editing <b>OpenStreetMap</b>: the free, collborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!"
+      return: "Welcome back. Ready to make the map even better?"
   modes:
     add_feature:
       search_placeholder: Search feature types
@@ -776,11 +785,6 @@ en:
   confirm:
     okay: "OK"
     cancel: "Cancel"
-  splash:
-    welcome: Welcome to the iD OpenStreetMap editor
-    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
-    walkthrough: "Start the Walkthrough"
-    start: "Edit now"
   source_switch:
     live: live
     lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"

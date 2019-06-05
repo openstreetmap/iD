@@ -6,10 +6,15 @@ import { svgIcon } from '../svg/icon';
 import { t } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
+import { uiIntro } from './intro';
 
 export function uiAssistant(context) {
 
     var container = d3_select(null);
+
+    var didEditAnythingYet = false;
+    var isFirstSession = !context.storage('sawSplash');
+    context.storage('sawSplash', true);
 
     var assistant = function(selection) {
 
@@ -23,7 +28,19 @@ export function uiAssistant(context) {
 
         context.map()
             .on('move.assistant', debouncedGetLocation);
+
+        context.history()
+            .on('change.assistant', updateDidEditStatus);
     };
+
+    function updateDidEditStatus() {
+        didEditAnythingYet = true;
+
+        context.history()
+            .on('change.assistant', null);
+
+        redraw();
+    }
 
     function redraw() {
         if (container.empty()) return;
@@ -73,6 +90,7 @@ export function uiAssistant(context) {
         var bodyText = '';
 
         subjectTitle.classed('location', false);
+        container.classed('prominent', false);
 
         if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') {
 
@@ -111,6 +129,13 @@ export function uiAssistant(context) {
 
             subjectTitle.text(utilDisplayLabel(entity, context));
 
+        } else if (!didEditAnythingYet) {
+            container.classed('prominent', true);
+
+            iconUse.attr('href','#' + greetingIcon());
+            subjectTitle.text(t('assistant.greetings.' + greetingTimeframe()));
+            bodyText = t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return'));
+
         } else {
             iconUse.attr('href','#fas-map-marked-alt');
 
@@ -121,8 +146,32 @@ export function uiAssistant(context) {
             debouncedGetLocation();
         }
 
-        bodyTextArea.text(bodyText);
+        bodyTextArea.html(bodyText);
 
+        bodyTextArea.selectAll('a')
+            .attr('href', '#')
+            .on('click', function() {
+                isFirstSession = false;
+                updateDidEditStatus();
+                context.container().call(uiIntro(context));
+            });
+
+    }
+
+    function greetingTimeframe() {
+        var now = new Date();
+        var hours = now.getHours();
+        if (hours >= 20 || hours <= 2) return 'night';
+        if (hours >= 17) return 'evening';
+        if (hours >= 12) return 'afternoon';
+        return 'morning';
+    }
+
+    function greetingIcon() {
+        var now = new Date();
+        var hours = now.getHours();
+        if (hours >= 6 && hours < 18) return 'fas-sun';
+        return 'fas-moon';
     }
 
     var defaultLoc = t('assistant.global_location');
