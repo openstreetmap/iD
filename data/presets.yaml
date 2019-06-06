@@ -7030,6 +7030,11 @@ en:
         # shop=medical_supply
         name: Medical Supply Store
         terms: '<translate with synonyms or related terms for ''Medical Supply Store'', separated by commas>'
+      shop/military_surplus:
+        # shop=military_surplus
+        name: Military Surplus Store
+        # 'terms: armor,army-navy store,army surplus,navy surplus,tactical gear,war surplus shop,weapons'
+        terms: '<translate with synonyms or related terms for ''Military Surplus Store'', separated by commas>'
       shop/mobile_phone:
         # shop=mobile_phone
         name: Mobile Phone Store

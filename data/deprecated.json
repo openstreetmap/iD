@@ -634,6 +634,10 @@
       "replace": {"shop": "antiques"}
     },
     {
+      "old": {"shop": "army_surplus"},
+      "replace": {"shop": "military_surplus"}
+    },
+    {
       "old": {"shop": "auto_parts"},
       "replace": {"shop": "car_parts"}
     },

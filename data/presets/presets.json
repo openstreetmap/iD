@@ -1046,6 +1046,7 @@
     "shop/mall": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["shopping"], "tags": {"shop": "mall"}, "name": "Mall"},
     "shop/massage": {"icon": "temaki-spa", "geometry": ["point", "area"], "tags": {"shop": "massage"}, "name": "Massage Shop"},
     "shop/medical_supply": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "medical_supply"}, "name": "Medical Supply Store"},
+    "shop/military_surplus": {"icon": "temaki-military", "geometry": ["point", "area"], "terms": ["armor", "army-navy store", "army surplus", "navy surplus", "tactical gear", "war surplus shop", "weapons"], "tags": {"shop": "military_surplus"}, "name": "Military Surplus Store"},
     "shop/mobile_phone": {"icon": "fas-mobile-alt", "geometry": ["point", "area"], "tags": {"shop": "mobile_phone"}, "name": "Mobile Phone Store"},
     "shop/money_lender": {"icon": "maki-bank", "fields": ["{shop}", "currency_multi"], "geometry": ["point", "area"], "tags": {"shop": "money_lender"}, "name": "Money Lender"},
     "shop/motorcycle_repair": {"icon": "fas-motorcycle", "fields": ["{shop}", "service/vehicle"], "geometry": ["point", "area"], "terms": ["auto", "bike", "garage", "motorcycle", "repair", "service"], "tags": {"shop": "motorcycle_repair"}, "name": "Motorcycle Repair Shop"},
