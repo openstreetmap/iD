@@ -9,7 +9,7 @@ import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationOutdatedTags() {
+export function validationOutdatedTags(context) {
     var type = 'outdated_tags';
 
     // initialize name-suggestion-index matcher
@@ -28,8 +28,7 @@ export function validationOutdatedTags() {
     });
 
 
-    function oldTagIssues(entity, context) {
-        var graph = context.graph();
+    function oldTagIssues(entity, graph) {
         var oldTags = Object.assign({}, entity.tags);  // shallow copy
         var preset = context.presets().match(entity, graph);
         var explicitPresetUpgrade = preset.replacement;
@@ -127,7 +126,7 @@ export function validationOutdatedTags() {
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
                     title: t('issues.fix.upgrade_tags.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                     }
                 })
@@ -136,7 +135,7 @@ export function validationOutdatedTags() {
 
 
         function doUpgrade(graph) {
-            var currEntity = context.hasEntity(entity.id);
+            var currEntity = graph.hasEntity(entity.id);
             if (!currEntity) return graph;
 
             var newTags = Object.assign({}, currEntity.tags);  // shallow copy
@@ -152,7 +151,7 @@ export function validationOutdatedTags() {
         }
 
 
-        function showMessage() {
+        function showMessage(context) {
             var currEntity = context.hasEntity(entity.id);
             if (!currEntity) return '';
 
@@ -194,8 +193,7 @@ export function validationOutdatedTags() {
     }
 
 
-    function oldMultipolygonIssues(entity, context) {
-        var graph = context.graph();
+    function oldMultipolygonIssues(entity, graph) {
 
         var multipolygon, outerWay;
         if (entity.type === 'relation') {
@@ -221,7 +219,7 @@ export function validationOutdatedTags() {
                 new validationIssueFix({
                     autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
                     title: t('issues.fix.move_tags.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
                     }
                 })
@@ -230,8 +228,8 @@ export function validationOutdatedTags() {
 
 
         function doUpgrade(graph) {
-            var currMultipolygon = context.hasEntity(multipolygon.id);
-            var currOuterWay = context.hasEntity(outerWay.id);
+            var currMultipolygon = graph.hasEntity(multipolygon.id);
+            var currOuterWay = graph.hasEntity(outerWay.id);
             if (!currMultipolygon || !currOuterWay) return graph;
 
             currMultipolygon = currMultipolygon.mergeTags(currOuterWay.tags);
@@ -240,7 +238,7 @@ export function validationOutdatedTags() {
         }
 
 
-        function showMessage() {
+        function showMessage(context) {
             var currMultipolygon = context.hasEntity(multipolygon.id);
             if (!currMultipolygon) return '';
 
@@ -261,9 +259,9 @@ export function validationOutdatedTags() {
     }
 
 
-    var validation = function checkOutdatedTags(entity, context) {
-        var issues = oldMultipolygonIssues(entity, context);
-        if (!issues.length) issues = oldTagIssues(entity, context);
+    var validation = function checkOutdatedTags(entity, graph) {
+        var issues = oldMultipolygonIssues(entity, graph);
+        if (!issues.length) issues = oldTagIssues(entity, graph);
         return issues;
     };
 

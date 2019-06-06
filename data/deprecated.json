@@ -532,6 +532,10 @@
       "replace": {"waterway": "waterfall"}
     },
     {
+      "old": {"NOTE": "*"},
+      "replace": {"note": "$1"}
+    },
+    {
       "old": {"nosquare": "*"},
       "replace": {"nonsquare": "$1"}
     },

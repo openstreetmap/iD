@@ -34,12 +34,12 @@ describe('iD.validations.outdated_tags', function () {
     }
 
     function validate() {
-        var validator = iD.validationOutdatedTags();
+        var validator = iD.validationOutdatedTags(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
         entities.forEach(function(entity) {
-            issues = issues.concat(validator(entity, context));
+            issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }

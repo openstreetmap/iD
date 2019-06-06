@@ -9,7 +9,7 @@ import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationCrossingWays() {
+export function validationCrossingWays(context) {
     var type = 'crossing_ways';
 
     /*
@@ -305,7 +305,7 @@ export function validationCrossingWays() {
     }
 
 
-    function waysToCheck(entity, context) {
+    function waysToCheck(entity, graph) {
         if (!getFeatureTypeForTags(entity.tags)) {
             return [];
         }
@@ -318,8 +318,8 @@ export function validationCrossingWays() {
             return entity.members.reduce(function(array, member) {
                 if (member.type === 'way' &&
                     //(member.role === 'outer' || member.role === 'inner') &&
-                    context.hasEntity(member.id)) {
-                    var entity = context.entity(member.id);
+                    graph.hasEntity(member.id)) {
+                    var entity = graph.entity(member.id);
                     array.push(entity);
                 }
                 return array;
@@ -329,11 +329,11 @@ export function validationCrossingWays() {
     }
 
 
-    var validation = function checkCrossingWays(entity, context) {
-        var graph = context.graph();
+    var validation = function checkCrossingWays(entity, graph) {
+
         var tree = context.history().tree();
 
-        var ways = waysToCheck(entity, context);
+        var ways = waysToCheck(entity, graph);
 
         var issues = [];
         // declare these here to reduce garbage collection
@@ -344,7 +344,7 @@ export function validationCrossingWays() {
             for (crossingIndex in crossings) {
                 crossing = crossings[crossingIndex];
                 var way2 = crossing.ways[1];
-                issue = createIssue(crossing, context);
+                issue = createIssue(crossing, graph);
                 // cache the issues for each way
                 _issueCache[way.id][way2.id].push(issue);
                 _issueCache[way2.id][way.id].push(issue);
@@ -357,8 +357,7 @@ export function validationCrossingWays() {
     };
 
 
-    function createIssue(crossing, context) {
-        var graph = context.graph();
+    function createIssue(crossing, graph) {
 
         // use the entities with the tags that define the feature type
         var entities = crossing.ways.sort(function(entity1, entity2) {
@@ -405,7 +404,7 @@ export function validationCrossingWays() {
 
         var fixes = [];
         if (connectionTags) {
-            fixes.push(makeConnectWaysFix(context));
+            fixes.push(makeConnectWaysFix());
         }
 
         var useFixIcon = 'iD-icon-layers';
@@ -425,8 +424,8 @@ export function validationCrossingWays() {
             useFixID = 'use_different_layers';
         }
         if (useFixID === 'use_different_layers') {
-            fixes.push(makeChangeLayerFix('higher', context));
-            fixes.push(makeChangeLayerFix('lower', context));
+            fixes.push(makeChangeLayerFix('higher'));
+            fixes.push(makeChangeLayerFix('lower'));
         } else {
             fixes.push(new validationIssueFix({
                 icon: useFixIcon,
@@ -441,7 +440,7 @@ export function validationCrossingWays() {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 var entity1 = context.hasEntity(this.entityIds[0]),
                     entity2 = context.hasEntity(this.entityIds[1]);
                 return (entity1 && entity2) ? t('issues.crossing_ways.message', {
@@ -477,11 +476,11 @@ export function validationCrossingWays() {
         }
     }
 
-    function makeConnectWaysFix(context) {
+    function makeConnectWaysFix() {
         return new validationIssueFix({
             icon: 'iD-icon-crossing',
             title: t('issues.fix.connect_features.title'),
-            onClick: function() {
+            onClick: function(context) {
                 var loc = this.issue.loc;
                 var connectionTags = this.issue.data.connectionTags;
                 var edges = this.issue.data.edges;
@@ -520,11 +519,11 @@ export function validationCrossingWays() {
         });
     }
 
-    function makeChangeLayerFix(higherOrLower, context) {
+    function makeChangeLayerFix(higherOrLower) {
         return new validationIssueFix({
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
             title: t('issues.fix.tag_this_as_' + higherOrLower + '.title'),
-            onClick: function() {
+            onClick: function(context) {
 
                 var mode = context.mode();
                 if (!mode || mode.id !== 'select') return;

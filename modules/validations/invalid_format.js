@@ -5,7 +5,7 @@ import { validationIssue } from '../core/validation';
 export function validationFormatting() {
     var type = 'invalid_format';
 
-    var validation = function(entity, context) {
+    var validation = function(entity) {
         var issues = [];
 
         function isValidEmail(email) {
@@ -50,7 +50,7 @@ export function validationFormatting() {
                     type: type,
                     subtype: 'website',
                     severity: 'warning',
-                    message: function() {
+                    message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
                         return entity ? t('issues.invalid_format.website.message' + this.data,
                             { feature: utilDisplayLabel(entity, context), site: websites.join(', ') }) : '';
@@ -72,7 +72,7 @@ export function validationFormatting() {
                     type: type,
                     subtype: 'email',
                     severity: 'warning',
-                    message: function() {
+                    message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
                         return entity ? t('issues.invalid_format.email.message' + this.data,
                             { feature: utilDisplayLabel(entity, context), email: emails.join(', ') }) : '';

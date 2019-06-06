@@ -4,10 +4,9 @@ import { services } from '../services';
 export function validationMaprules() {
     var type = 'maprules';
 
-    var validation = function checkMaprules(entity, context) {
+    var validation = function checkMaprules(entity, graph) {
         if (!services.maprules) return [];
 
-        var graph = context.graph();
         var rules = services.maprules.validationRules();
         var issues = [];
 

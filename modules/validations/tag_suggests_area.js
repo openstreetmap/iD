@@ -7,11 +7,11 @@ import { utilDisplayLabel, utilTagText } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationTagSuggestsArea() {
+export function validationTagSuggestsArea(context) {
     var type = 'tag_suggests_area';
 
 
-    var validation = function checkTagSuggestsArea(entity, context) {
+    var validation = function checkTagSuggestsArea(entity, graph) {
         if (entity.type !== 'way' || entity.isClosed()) return [];
 
         var tagSuggestingArea = entity.tagSuggestingArea();
@@ -32,7 +32,7 @@ export function validationTagSuggestsArea() {
 
         // must have at least three nodes to close this automatically
         if (entity.nodes.length >= 3) {
-            var nodes = context.graph().childNodes(entity), testNodes;
+            var nodes = graph.childNodes(entity), testNodes;
             var firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
 
             // if the distance is very small, attempt to merge the endpoints
@@ -42,7 +42,7 @@ export function validationTagSuggestsArea() {
                 testNodes.push(testNodes[0]);
                 // make sure this will not create a self-intersection
                 if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
-                    connectEndpointsOnClick = function() {
+                    connectEndpointsOnClick = function(context) {
                         var way = context.entity(this.issue.entityIds[0]);
                         context.perform(
                             actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
@@ -58,7 +58,7 @@ export function validationTagSuggestsArea() {
                 testNodes.push(testNodes[0]);
                 // make sure this will not create a self-intersection
                 if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
-                    connectEndpointsOnClick = function() {
+                    connectEndpointsOnClick = function(context) {
                         var wayId = this.issue.entityIds[0];
                         var way = context.entity(wayId);
                         var nodeId = way.nodes[0];
@@ -80,7 +80,7 @@ export function validationTagSuggestsArea() {
         fixes.push(new validationIssueFix({
             icon: 'iD-operation-delete',
             title: t('issues.fix.remove_tag.title'),
-            onClick: function() {
+            onClick: function(context) {
                 var entityId = this.issue.entityIds[0];
                 var entity = context.entity(entityId);
                 var tags = Object.assign({}, entity.tags);  // shallow copy
@@ -97,7 +97,7 @@ export function validationTagSuggestsArea() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.tag_suggests_area.message', {
                     feature: utilDisplayLabel(entity, context),

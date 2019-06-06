@@ -4,7 +4,7 @@ import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
-
+import { services } from '../services';
 
 export function validationDisconnectedWay() {
     var type = 'disconnected_way';
@@ -13,8 +13,7 @@ export function validationDisconnectedWay() {
         return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    var validation = function checkDisconnectedWay(entity, context) {
-        var graph = context.graph();
+    var validation = function checkDisconnectedWay(entity, graph) {
 
         var routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
@@ -29,13 +28,13 @@ export function validationDisconnectedWay() {
                 var firstID = entity.first();
                 var lastID = entity.last();
 
-                var first = context.entity(firstID);
+                var first = graph.entity(firstID);
                 if (first.tags.noexit !== 'yes') {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-operation-continue-left',
                         title: t('issues.fix.continue_from_start.title'),
                         entityIds: [firstID],
-                        onClick: function() {
+                        onClick: function(context) {
                             var wayId = this.issue.entityIds[0];
                             var way = context.entity(wayId);
                             var vertexId = this.entityIds[0];
@@ -44,13 +43,13 @@ export function validationDisconnectedWay() {
                         }
                     }));
                 }
-                var last = context.entity(lastID);
+                var last = graph.entity(lastID);
                 if (last.tags.noexit !== 'yes') {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-operation-continue',
                         title: t('issues.fix.continue_from_end.title'),
                         entityIds: [lastID],
-                        onClick: function() {
+                        onClick: function(context) {
                             var wayId = this.issue.entityIds[0];
                             var way = context.entity(wayId);
                             var vertexId = this.entityIds[0];
@@ -66,20 +65,18 @@ export function validationDisconnectedWay() {
                 }));
             }
 
-            if (!operationDelete([entity.id], context).disabled()) {
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t('issues.fix.delete_feature.title'),
-                    entityIds: [entity.id],
-                    onClick: function() {
-                        var id = this.issue.entityIds[0];
-                        var operation = operationDelete([id], context);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
+            fixes.push(new validationIssueFix({
+                icon: 'iD-operation-delete',
+                title: t('issues.fix.delete_feature.title'),
+                entityIds: [entity.id],
+                onClick: function(context) {
+                    var id = this.issue.entityIds[0];
+                    var operation = operationDelete([id], context);
+                    if (!operation.disabled()) {
+                        operation();
                     }
-                }));
-            }
+                }
+            }));
         } else {
             fixes.push(new validationIssueFix({
                 title: t('issues.fix.connect_features.title')
@@ -89,7 +86,7 @@ export function validationDisconnectedWay() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 if (this.entityIds.length === 1) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context) }) : '';
@@ -145,7 +142,7 @@ export function validationDisconnectedWay() {
 
         function isConnectedVertex(vertex, routingIslandWays) {
             // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
-            var osm = context.connection();
+            var osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
             // entrances are considered connected
@@ -187,18 +184,19 @@ export function validationDisconnectedWay() {
             });
         }
 
-        function continueDrawing(way, vertex) {
-            // make sure the vertex is actually visible and editable
-            var map = context.map();
-            if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
-                map.zoomToEase(vertex);
-            }
-
-            context.enter(
-                modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id))
-            );
-        }
     };
+
+    function continueDrawing(way, vertex, context) {
+        // make sure the vertex is actually visible and editable
+        var map = context.map();
+        if (!map.editable() || !map.trimmedExtent().contains(vertex.loc)) {
+            map.zoomToEase(vertex);
+        }
+
+        context.enter(
+            modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id), true)
+        );
+    }
 
 
     validation.type = type;

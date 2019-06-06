@@ -7,7 +7,7 @@ export function validationIncompatibleSource() {
     var type = 'incompatible_source';
     var invalidSources = [{id:'google', regex:'google'}];
 
-    var validation = function checkIncompatibleSource(entity, context) {
+    var validation = function checkIncompatibleSource(entity) {
         var issues = [];
 
         if (entity.tags && entity.tags.source) {
@@ -18,7 +18,7 @@ export function validationIncompatibleSource() {
                     issues.push(new validationIssue({
                         type: type,
                         severity: 'warning',
-                        message: function() {
+                        message: function(context) {
                             var entity = context.hasEntity(this.entityIds[0]);
                             return entity ? t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
                                 feature: utilDisplayLabel(entity, context)

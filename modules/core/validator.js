@@ -29,7 +29,7 @@ export function coreValidator(context) {
         Object.values(Validations).forEach(function(validation) {
             if (typeof validation !== 'function') return;
 
-            var fn = validation();
+            var fn = validation(context);
             var key = fn.type;
             _rules[key] = fn;
         });
@@ -285,9 +285,9 @@ export function coreValidator(context) {
 
 
     //
-    // Run validation on a single entity
+    // Run validation on a single entity for the given graph
     //
-    function validateEntity(entity) {
+    function validateEntity(entity, graph) {
         var entityIssues = [];
         var ran = {};
 
@@ -303,7 +303,7 @@ export function coreValidator(context) {
                 return true;
             }
 
-            var detected = fn(entity, context);
+            var detected = fn(entity, graph);
             detected.forEach(function(issue) {
                 var hasIgnoreFix = issue.fixes && issue.fixes.length && issue.fixes[issue.fixes.length - 1].type === 'ignore';
                 if (issue.severity === 'warning' && !hasIgnoreFix) {
@@ -407,16 +407,18 @@ export function coreValidator(context) {
     //
     function validateEntities(entityIDs) {
 
+        var graph = context.graph();
+
         // clear caches for existing issues related to these entities
         entityIDs.forEach(uncacheEntityID);
 
         // detect new issues and update caches
         entityIDs.forEach(function(entityID) {
-            var entity = context.graph().hasEntity(entityID);
+            var entity = graph.hasEntity(entityID);
             // don't validate deleted entities
             if (!entity) return;
 
-            var issues = validateEntity(entity);
+            var issues = validateEntity(entity, graph);
             issues.forEach(function(issue) {
                 var entityIds = issue.entityIds || [];
                 entityIds.forEach(function(entityId) {
