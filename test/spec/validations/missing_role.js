@@ -34,12 +34,12 @@ describe('iD.validations.missing_role', function () {
     }
 
     function validate() {
-        var validator = iD.validationMissingRole();
+        var validator = iD.validationMissingRole(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
         entities.forEach(function(entity) {
-            issues = issues.concat(validator(entity, context));
+            issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }

@@ -65,7 +65,7 @@ export function uiCommitWarnings(context) {
 
             items.selectAll('.issue-message')
                 .text(function(d) {
-                    return d.message();
+                    return d.message(context);
                 });
 
             items

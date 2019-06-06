@@ -156,7 +156,7 @@ export function uiIssues(context) {
 
         items.selectAll('.issue-message')
             .text(function(d) {
-                return d.message();
+                return d.message(context);
             });
 
 

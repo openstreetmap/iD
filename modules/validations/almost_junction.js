@@ -11,12 +11,13 @@ import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { services } from '../services';
 
 
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationAlmostJunction() {
+export function validationAlmostJunction(context) {
     var type = 'almost_junction';
 
 
@@ -32,11 +33,10 @@ export function validationAlmostJunction() {
     }
 
 
-    var validation = function checkAlmostJunction(entity, context) {
+    var validation = function checkAlmostJunction(entity, graph) {
         if (!isHighway(entity)) return [];
         if (entity.isDegenerate()) return [];
 
-        var graph = context.graph();
         var tree = context.history().tree();
         var issues = [];
 
@@ -48,7 +48,7 @@ export function validationAlmostJunction() {
             var fixes = [new validationIssueFix({
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
-                onClick: function() {
+                onClick: function(context) {
                     var endNodeId = this.issue.entityIds[1];
                     var endNode = context.entity(endNodeId);
                     var targetEdge = this.issue.data.edge;
@@ -78,7 +78,7 @@ export function validationAlmostJunction() {
                 fixes.push(new validationIssueFix({
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         var nodeID = this.issue.entityIds[1];
                         context.perform(
                             actionChangeTags(nodeID, { noexit: 'yes' }),
@@ -91,7 +91,7 @@ export function validationAlmostJunction() {
             issues.push(new validationIssue({
                 type: type,
                 severity: 'warning',
-                message: function() {
+                message: function(context) {
                     var entity1 = context.hasEntity(this.entityIds[0]);
                     if (this.entityIds[0] === this.entityIds[2]) {
                         return entity1 ? t('issues.almost_junction.self.message', {
@@ -132,7 +132,7 @@ export function validationAlmostJunction() {
 
         function isExtendableCandidate(node, way) {
             // can not accurately test vertices on tiles not downloaded from osm - #5938
-            var osm = context.connection();
+            var osm = services.osm;
             if (osm && !osm.isDataLoaded(node.loc)) {
                 return false;
             }

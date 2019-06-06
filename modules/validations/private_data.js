@@ -40,7 +40,7 @@ export function validationPrivateData() {
     };
 
 
-    var validation = function checkPrivateData(entity, context) {
+    var validation = function checkPrivateData(entity) {
         var tags = entity.tags;
         if (!tags.building || !privateBuildingValues[tags.building]) return [];
 
@@ -67,7 +67,7 @@ export function validationPrivateData() {
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.' + fixID + '.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                     }
                 })
@@ -76,7 +76,7 @@ export function validationPrivateData() {
 
 
         function doUpgrade(graph) {
-            var currEntity = context.hasEntity(entity.id);
+            var currEntity = graph.hasEntity(entity.id);
             if (!currEntity) return graph;
 
             var newTags = Object.assign({}, currEntity.tags);  // shallow copy
@@ -92,7 +92,7 @@ export function validationPrivateData() {
         }
 
 
-        function showMessage() {
+        function showMessage(context) {
             var currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 

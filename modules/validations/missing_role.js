@@ -8,22 +8,22 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMissingRole() {
     var type = 'missing_role';
 
-    var validation = function checkMissingRole(entity, context) {
+    var validation = function checkMissingRole(entity, graph) {
         var issues = [];
         if (entity.type === 'way') {
-            context.graph().parentRelations(entity).forEach(function(relation) {
+            graph.parentRelations(entity).forEach(function(relation) {
                 if (!relation.isMultipolygon()) return;
 
                 var member = relation.memberById(entity.id);
                 if (member && isMissingRole(member)) {
-                    issues.push(makeIssue(entity, relation, member, context));
+                    issues.push(makeIssue(entity, relation, member));
                 }
             });
         } else if (entity.type === 'relation' && entity.isMultipolygon()) {
             entity.indexedMembers().forEach(function(member) {
-                var way = context.hasEntity(member.id);
+                var way = graph.hasEntity(member.id);
                 if (way && isMissingRole(member)) {
-                    issues.push(makeIssue(way, entity, member, context));
+                    issues.push(makeIssue(way, entity, member));
                 }
             });
         }
@@ -37,11 +37,11 @@ export function validationMissingRole() {
     }
 
 
-    function makeIssue(way, relation, member, context) {
+    function makeIssue(way, relation, member) {
         return new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 var member = context.hasEntity(this.entityIds[1]),
                     relation = context.hasEntity(this.entityIds[0]);
                 return (member && relation) ? t('issues.missing_role.message', {
@@ -56,12 +56,12 @@ export function validationMissingRole() {
             },
             hash: member.index.toString(),
             fixes: [
-                makeAddRoleFix('inner', context),
-                makeAddRoleFix('outer', context),
+                makeAddRoleFix('inner'),
+                makeAddRoleFix('outer'),
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t('issues.fix.remove_from_relation.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         context.perform(
                             actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
                             t('operations.delete_member.annotation')
@@ -83,10 +83,10 @@ export function validationMissingRole() {
     }
 
 
-    function makeAddRoleFix(role, context) {
+    function makeAddRoleFix(role) {
         return new validationIssueFix({
             title: t('issues.fix.set_as_' + role + '.title'),
-            onClick: function() {
+            onClick: function(context) {
                 var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(

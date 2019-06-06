@@ -3,11 +3,11 @@ import { utilDisplayLabel } from '../util';
 import { validationIssue } from '../core/validation';
 
 
-export function validationFixmeTag() {
+export function validationFixmeTag(context) {
     var type = 'fixme_tag';
 
 
-    var validation = function checkFixmeTag(entity, context) {
+    var validation = function checkFixmeTag(entity) {
 
         if (!entity.tags.fixme) return [];
 
@@ -23,7 +23,7 @@ export function validationFixmeTag() {
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context) }) : '';
             },

@@ -127,12 +127,12 @@ describe('iD.validations.almost_junction', function () {
     }
 
     function validate() {
-        var validator = iD.validationAlmostJunction();
+        var validator = iD.validationAlmostJunction(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
         entities.forEach(function(entity) {
-            issues = issues.concat(validator(entity, context));
+            issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }
@@ -166,7 +166,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.data.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
-        issue.fixes[0].onClick();
+        issue.fixes[0].onClick(context);
         issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -195,7 +195,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issue.data.cross_loc[1]).to.eql(0);
 
         expect(issue.fixes).to.have.lengthOf(2);
-        issue.fixes[1].onClick();
+        issue.fixes[1].onClick(context);
         issues = validate();
         expect(issues).to.have.lengthOf(0);
     });

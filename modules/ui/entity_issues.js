@@ -190,7 +190,7 @@ export function uiEntityIssues(context) {
 
         containers.selectAll('.issue-message')
             .text(function(d) {
-                return d.message();
+                return d.message(context);
             });
 
         // fixes
@@ -217,8 +217,8 @@ export function uiEntityIssues(context) {
                 utilHighlightEntities(d.issue.entityIds.concat(d.entityIds), false, context);
 
                 new Promise(function(resolve, reject) {
-                    d.onClick(resolve, reject);
-                    if (!d.onClick.length) {
+                    d.onClick(context, resolve, reject);
+                    if (d.onClick.length <= 1) {
                         // if the fix doesn't take any completion parameters then consider it resolved
                         resolve();
                     }
