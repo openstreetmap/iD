@@ -311,6 +311,19 @@ button:hover {
 button.active {
     background: #7092ff;
 }
+button.primary {
+    color: #fff;
+    background: #7092ff;
+}
+button.secondary {
+    color: #7092ff;
+    background: transparent;
+    border: 1px solid #7092ff;
+}
+button.secondary:hover {
+    color: #fff;
+    background: #7092ff;
+}
 button.destructive {
     background: #d32232;
     color: #fff;
@@ -986,8 +999,10 @@ a.hide-toggle {
     border-radius: 4px;
     padding: 10px;
     display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
     max-width: 350px;
+    max-height: 100%;
     line-height: 1.35em;
 
     -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
@@ -996,6 +1011,10 @@ a.hide-toggle {
 
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
+}
+.assistant .assistant-header {
+    display: flex;
+    flex: 0 0 auto;
 }
 .assistant .icon-col {
     flex: 0 0 auto;
@@ -1022,7 +1041,8 @@ a.hide-toggle {
     margin-top: 6px;
 }
 .assistant .body-text:empty,
-.assistant .main-footer:empty {
+.assistant .main-footer:empty,
+.assistant .assistant-body:empty {
     display: none;
 }
 .assistant b {
@@ -1036,8 +1056,8 @@ a.hide-toggle {
 .assistant .main-footer {
     margin-top: 12px;
 }
+.assistant button.geocode-item,
 .assistant .main-footer button {
-    color: #fff;
     min-width: 100px;
     height: auto;
     padding: 5px 2px;
@@ -1049,6 +1069,69 @@ a.hide-toggle {
 }
 [dir='rtl'] .assistant .main-footer button:first-of-type {
     margin-left: 8px;
+}
+
+.assistant .assistant-body {
+    margin-top: 15px;
+    padding: 0 5px;
+    display: flex;
+}
+.assistant .search-header {
+    position: relative;
+}
+.assistant .search-header .icon {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    pointer-events: none;
+    opacity: 0.75;
+}
+[dir='rtl'] .assistant .search-header .icon {
+    left: auto;
+    right: 7px;
+}
+
+.assistant input[type='search'] {
+    height: 30px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border-width: 0;
+    text-indent: 25px;
+    font-size: 12px;
+    background: rgba(18, 18, 18, 0.97);
+    color: #fff;
+    min-width: 225px;
+}
+.assistant .no-results-item,
+.assistant .feature-list-item {
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid #444;
+    color: #fff;
+}
+.assistant .feature-list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+.assistant .feature-list > *:nth-last-child(2) {
+    border-bottom: none;
+}
+[dir='ltr'] .assistant .feature-list-item .label {
+    padding-left: 8px;
+}
+[dir='rtl'] .assistant .feature-list-item .label {
+    padding-right: 8px;
+}
+.assistant .feature-list-item .icon {
+    margin-right: 8px;
+}
+
+.assistant .geocode-item {
+    width: 50%;
+    margin-top: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
 }
 
 .assistant.prominent {
@@ -1098,11 +1181,10 @@ a.hide-toggle {
 
 #sidebar {
     position: relative;
-    height: 100%;
+    max-height: 100%;
     z-index: 10;
     background: rgba(246, 246, 246, 0.98);
     -ms-user-select: element;
-    border: 1px solid #ccc;
     border-radius: 6px;
     -webkit-backdrop-filter: blur(1.5px);
     backdrop-filter: blur(1.5px);
@@ -1152,9 +1234,10 @@ a.hide-toggle {
 
 .entity-editor-pane {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: inherit;
 }
 .entity-editor-pane .footer {
     position: relative;
@@ -1215,31 +1298,12 @@ a.hide-toggle {
 .feature-list  {
     width: 100%;
 }
-.no-results-item,
-.geocode-item,
 .feature-list-item {
     width: 100%;
     position: relative;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
 }
-
-.geocode-item {
-    width: 50%;
-    background-color: #ccc;
-    left: 25%;
-    margin-top: 30px;
-    border-radius: 2px;
-}
-
-[dir='rtl'] .geocode-item {
-    left: -25%;
-}
-
-.geocode-item:hover {
-    background-color: #aaa;
-}
-
 .feature-list-item {
     background-color: #fff;
     font-weight: bold;
@@ -1258,14 +1322,13 @@ a.hide-toggle {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-left: 1px solid rgba(0, 0, 0, .1);
 }
 [dir='rtl'] .feature-list-item .label {
     text-align: right;
 }
 
 .feature-list-item .label .icon {
-    opacity: .5;
+    opacity: 0.75;
 }
 .feature-list-item .close {
     float: right;
@@ -1282,7 +1345,6 @@ a.hide-toggle {
 }
 .feature-list-item .entity-name {
     font-weight: normal;
-    color: #666;
     padding-left: 10px;
 }
 [dir='rtl'] .feature-list-item .entity-name {

@@ -7,6 +7,7 @@ import { t } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
+import { uiFeatureList } from './feature_list';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -15,7 +16,11 @@ export function uiAssistant(context) {
     var defaultLoc = t('assistant.global_location');
     var currLocation = defaultLoc;
 
-    var container = d3_select(null);
+    var container = d3_select(null),
+        header = d3_select(null),
+        body = d3_select(null);
+
+    var featureSearch = uiFeatureList(context);
 
     var didEditAnythingYet = false;
     var isFirstSession = !context.storage('sawSplash');
@@ -25,6 +30,10 @@ export function uiAssistant(context) {
 
         container = selection.append('div')
             .attr('class', 'assistant');
+        header = container.append('div')
+            .attr('class', 'assistant-header');
+        body = container.append('div')
+            .attr('class', 'assistant-body');
 
         scheduleCurrentLocationUpdate();
 
@@ -55,7 +64,7 @@ export function uiAssistant(context) {
         var mode = context.mode();
         if (!mode) return;
 
-        var iconCol = container.selectAll('.icon-col')
+        var iconCol = header.selectAll('.icon-col')
             .data([0]);
         iconCol = iconCol.enter()
             .append('div')
@@ -63,7 +72,7 @@ export function uiAssistant(context) {
             .call(svgIcon('#'))
             .merge(iconCol);
 
-        var mainCol = container.selectAll('.body-col')
+        var mainCol = header.selectAll('.body-col')
             .data([0]);
 
         var mainColEnter = mainCol.enter()
@@ -98,6 +107,7 @@ export function uiAssistant(context) {
             iconUse.attr('href','#iD-icon-area');
         }
 
+        body.html('');
         bodyTextArea.html('');
         mainFooter.html('');
         subjectTitle.classed('location', false);
@@ -167,6 +177,11 @@ export function uiAssistant(context) {
             subjectTitle.classed('location', true);
             subjectTitle.text(currLocation);
             scheduleCurrentLocationUpdate();
+
+            body
+                .append('div')
+                .attr('class', 'feature-list-pane')
+                .call(featureSearch);
         }
 
         function drawRestoreScreen() {
@@ -211,7 +226,7 @@ export function uiAssistant(context) {
             });
 
             mainFooter.append('button')
-                .attr('class', 'active')
+                .attr('class', 'primary')
                 .on('click', function() {
                     context.history().restore();
                     redraw();

@@ -12,7 +12,6 @@ import {
 import { osmEntity, osmNote, qaError } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
-import { uiFeatureList } from './feature_list';
 import { uiEntityEditor } from './entity_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
@@ -86,11 +85,6 @@ export function uiSidebar(context) {
             })
         );
 
-        var featureListWrap = selection
-            .append('div')
-            .attr('class', 'feature-list-pane')
-            .call(uiFeatureList(context));
-
         var inspectorWrap = selection
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap entity-editor-pane');
@@ -142,8 +136,6 @@ export function uiSidebar(context) {
                     .classed('inspector-hover', true);
 
             } else if (!_current && (datum instanceof osmEntity)) {
-                featureListWrap
-                    .classed('inspector-hidden', true);
 
                 inspectorWrap
                     .classed('inspector-hidden', false)
@@ -159,8 +151,6 @@ export function uiSidebar(context) {
                 }
 
             } else if (!_current) {
-                featureListWrap
-                    .classed('inspector-hidden', false);
                 inspectorWrap
                     .classed('inspector-hidden', true);
                 inspector
@@ -203,9 +193,6 @@ export function uiSidebar(context) {
                     sidebar.expand(sidebar.intersects(extent));
                 }
 
-                featureListWrap
-                    .classed('inspector-hidden', true);
-
                 inspectorWrap
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
@@ -231,8 +218,6 @@ export function uiSidebar(context) {
 
 
         sidebar.show = function(component, element) {
-            featureListWrap
-                .classed('inspector-hidden', true);
             inspectorWrap
                 .classed('inspector-hidden', true);
 
@@ -245,8 +230,6 @@ export function uiSidebar(context) {
 
 
         sidebar.hide = function() {
-            featureListWrap
-                .classed('inspector-hidden', false);
             inspectorWrap
                 .classed('inspector-hidden', true);
 
