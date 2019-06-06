@@ -323,9 +323,11 @@ export function coreHistory(context) {
             } else {
                 var s = new Set();
                 _stack.slice(1, _index + 1).forEach(function(state) {
-                    state.photoOverlaysUsed.forEach(function(photoOverlay) {
-                        s.add(photoOverlay);
-                    });
+                    if (state.photoOverlaysUsed && Array.isArray(state.photoOverlaysUsed)) {
+                        state.photoOverlaysUsed.forEach(function(photoOverlay) {
+                            s.add(photoOverlay);
+                        });
+                    }
                 });
                 return Array.from(s);
             }
