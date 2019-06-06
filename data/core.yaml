@@ -1412,7 +1412,7 @@ en:
       email:
         message: '{feature} has an invalid email address.'
         message_multi: '{feature} has multiple invalid email addresses.'
-        reference: 'Email addresses must looks like "user@example.com".'
+        reference: 'Email addresses must look like "user@example.com".'
       website:
         message: '{feature} has an invalid website.'
         message_multi: '{feature} has multiple invalid websites.'
