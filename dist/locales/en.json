@@ -1788,6 +1788,20 @@
                     "reference": "Google products are proprietary and must not be used as references."
                 }
             },
+            "invalid_format": {
+                "title": "Invalid Formatting",
+                "tip": "Find features tagged with invalid value formatting",
+                "email": {
+                    "message": "{feature} has an invalid email address: {email}",
+                    "message_multi": "{feature} has multiple invalid email addresses: {email}",
+                    "reference": "Email addresses must be of the form \"local-part@domain\"."
+                },
+                "website": {
+                    "message": "{feature} has a website with no scheme: {site}",
+                    "message_multi": "{feature} has multiple websites with no scheme: {site}",
+                    "reference": "Websites should start with a \"http\" or \"https\" scheme."
+                }
+            },
             "missing_role": {
                 "title": "Missing Roles",
                 "message": "{member} has no role within {relation}",

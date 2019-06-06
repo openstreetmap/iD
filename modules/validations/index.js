@@ -6,6 +6,7 @@ export { validationFixmeTag } from './fixme_tag';
 export { validationGenericName } from './generic_name';
 export { validationImpossibleOneway } from './impossible_oneway';
 export { validationIncompatibleSource } from './incompatible_source';
+export { validationFormatting } from './invalid_format';
 export { validationMaprules } from './maprules';
 export { validationMissingRole } from './missing_role';
 export { validationMissingTag } from './missing_tag';
