@@ -17,6 +17,10 @@
       "replace": {"tourism": "artwork"}
     },
     {
+      "old": {"amenity": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
       "old": {"amenity": "car_repair"},
       "replace": {"shop": "car_repair"}
     },
@@ -644,6 +648,14 @@
     {
       "old": {"shop": "bags"},
       "replace": {"shop": "bag"}
+    },
+    {
+      "old": {"shop": "bail_bond"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
+      "old": {"shop": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
     },
     {
       "old": {"shop": "betting"},

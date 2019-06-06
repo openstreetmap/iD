@@ -7438,6 +7438,10 @@
                     "name": "Nonprofit Organization Office",
                     "terms": "association,non-profit,nonprofit,organization,society"
                 },
+                "office/bail_bond_agent": {
+                    "name": "Bail Bond Agent",
+                    "terms": "bail bond dealer,bail bond man,bail bondsman,bail bondsperson"
+                },
                 "office/charity": {
                     "name": "Charity Office",
                     "terms": "charitable organization"
