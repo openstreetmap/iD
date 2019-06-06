@@ -237,6 +237,8 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'destructive')
                 .on('click', function() {
+                    // don't show another welcome screen after discarding changes
+                    updateDidEditStatus();
                     context.history().clearSaved();
                     redraw();
                 })
