@@ -17,6 +17,10 @@
       "replace": {"tourism": "artwork"}
     },
     {
+      "old": {"amenity": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
       "old": {"amenity": "car_repair"},
       "replace": {"shop": "car_repair"}
     },
@@ -630,6 +634,10 @@
       "replace": {"shop": "antiques"}
     },
     {
+      "old": {"shop": "army_surplus"},
+      "replace": {"shop": "military_surplus"}
+    },
+    {
       "old": {"shop": "auto_parts"},
       "replace": {"shop": "car_parts"}
     },
@@ -644,6 +652,14 @@
     {
       "old": {"shop": "bags"},
       "replace": {"shop": "bag"}
+    },
+    {
+      "old": {"shop": "bail_bond"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
+      "old": {"shop": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
     },
     {
       "old": {"shop": "betting"},
@@ -768,6 +784,22 @@
     {
       "old": {"sloped_curb": "yes"},
       "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"speed_limit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"speedlimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SpeedLimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SPEEDLIMIT": "*"},
+      "replace": {"maxspeed": "$1"}
     },
     {
       "old": {"sport": "horse_shoes"},
