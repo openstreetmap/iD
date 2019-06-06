@@ -782,6 +782,22 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"speed_limit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"speedlimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SpeedLimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SPEEDLIMIT": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
       "old": {"sport": "horse_shoes"},
       "replace": {"sport": "horseshoes"}
     },
