@@ -1443,10 +1443,12 @@ en:
       title: Invalid Formatting
       tip: Find features tagged with invalid value formatting
       email:
-        message: '{feature} is tagged with an invalid email address'
+        message: '{feature} has an invalid email address: {email}'
+        message_multi: '{feature} has multiple invalid email addresses: {email}'
         reference: 'Email addresses must be of the form "local-part@domain".'
       website:
-        message: '{feature} is tagged with an invalid website'
+        message: '{feature} has a website with no scheme: {site}'
+        message_multi: '{feature} has multiple websites with no scheme: {site}'
         reference: 'Websites should start with a "http" or "https" scheme.'
     missing_role:
       title: Missing Roles
