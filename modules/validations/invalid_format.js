@@ -20,35 +20,43 @@ export function validationFormatting() {
             return !valid_scheme.test(url);
         }
 
+        function showReferenceEmail(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.invalid_format.email.reference'));
+        }
+
+        function showReferenceWebsite(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.invalid_format.website.reference'));
+        }
 
         if (entity.tags.website) {
             // Multiple websites are possible
             var websites = entity.tags.website.split(';').filter(isSchemeMissing);
 
             if (websites.length) {
-                var multi = (websites.length > 1) ? '_multi' : '';
-
                 issues.push(new validationIssue({
                     type: type,
                     subtype: 'website',
                     severity: 'warning',
                     message: function() {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.website.message' + multi, { feature: utilDisplayLabel(entity, context), site: websites.join(', ') }) : '';
+                        return entity ? t('issues.invalid_format.website.message' + this.data,
+                            { feature: utilDisplayLabel(entity, context), site: websites.join(', ') }) : '';
                     },
                     reference: showReferenceWebsite,
                     entityIds: [entity.id],
-                    hash: websites.join()
+                    hash: websites.join(),
+                    data: (websites.length > 1) ? '_multi' : ''
                 }));
-            }
-
-            function showReferenceWebsite(selection) {
-                selection.selectAll('.issue-reference')
-                    .data([0])
-                    .enter()
-                    .append('div')
-                    .attr('class', 'issue-reference')
-                    .text(t('issues.invalid_format.website.reference'));
             }
         }
 
@@ -57,29 +65,20 @@ export function validationFormatting() {
             var emails = entity.tags.email.split(';').filter(isInvalidEmail);
 
             if (emails.length) {
-                var multi = (emails.length > 1) ? '_multi' : '';
-
                 issues.push(new validationIssue({
                     type: type,
                     subtype: 'email',
                     severity: 'warning',
                     message: function() {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.email.message' + multi, { feature: utilDisplayLabel(entity, context), email: emails.join(', ') }) : '';
+                        return entity ? t('issues.invalid_format.email.message' + this.data,
+                            { feature: utilDisplayLabel(entity, context), email: emails.join(', ') }) : '';
                     },
                     reference: showReferenceEmail,
                     entityIds: [entity.id],
-                    hash: emails.join()
+                    hash: emails.join(),
+                    data: (emails.length > 1) ? '_multi' : ''
                 }));
-            }
-
-            function showReferenceEmail(selection) {
-                selection.selectAll('.issue-reference')
-                    .data([0])
-                    .enter()
-                    .append('div')
-                    .attr('class', 'issue-reference')
-                    .text(t('issues.invalid_format.email.reference'));
             }
         }
 
