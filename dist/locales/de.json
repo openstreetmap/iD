@@ -4863,7 +4863,7 @@
                 },
                 "amenity/public_bookcase": {
                     "name": "Offentlicher Bücherschrank",
-                    "terms": "Öffentlicher Bücherschrank, öffentlicher Bücherkasten"
+                    "terms": "Öffentlicher Bücherschrank, Offener Bücherschrank, Offenes Bücherregal, Öffentlicher Bücherkasten, Lesebank, Bücherbox"
                 },
                 "amenity/ranger_station": {
                     "name": "Ranger-Station",
