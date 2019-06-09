@@ -4644,7 +4644,7 @@
                     "terms": "mercato,bancarelle"
                 },
                 "amenity/monastery": {
-                    "name": "Montastero",
+                    "name": "Monastero",
                     "terms": "monastero,abbazia,badia"
                 },
                 "amenity/money_transfer": {
