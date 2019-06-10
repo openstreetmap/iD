@@ -4827,16 +4827,6 @@ en:
         name: Barracks
         # 'terms: air force,army,base,fight,force,guard,marine,navy,troop,war'
         terms: '<translate with synonyms or related terms for ''Barracks'', separated by commas>'
-      landuse/military/bunker:
-        # military=bunker
-        name: Military Bunker
-        # 'terms: air force,army,base,fight,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Military Bunker'', separated by commas>'
-      landuse/military/checkpoint:
-        # military=checkpoint
-        name: Checkpoint
-        # 'terms: air force,army,base,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
       landuse/military/danger_area:
         # military=danger_area
         name: Danger Area
@@ -4847,21 +4837,11 @@ en:
         name: Naval Base
         # 'terms: base,fight,force,guard,marine,navy,ship,sub,troop,war'
         terms: '<translate with synonyms or related terms for ''Naval Base'', separated by commas>'
-      landuse/military/nuclear_explosion_site:
-        # military=nuclear_explosion_site
-        name: Nuclear Explosion Site
-        # 'terms: atom,blast,bomb,detonat*,nuke,site,test'
-        terms: '<translate with synonyms or related terms for ''Nuclear Explosion Site'', separated by commas>'
       landuse/military/obstacle_course:
         # military=obstacle_course
         name: Obstacle Course
         # 'terms: army,base,force,guard,marine,navy,troop,war'
         terms: '<translate with synonyms or related terms for ''Obstacle Course'', separated by commas>'
-      landuse/military/office:
-        # military=office
-        name: Military Office
-        # 'terms: air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war'
-        terms: '<translate with synonyms or related terms for ''Military Office'', separated by commas>'
       landuse/military/range:
         # military=range
         name: Military Range
@@ -5600,6 +5580,26 @@ en:
         name: Telecom Manhole
         # 'terms: cover,phone,hole,telecom,telephone,bt'
         terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
+      military/bunker:
+        # military=bunker
+        name: Military Bunker
+        # 'terms: air force,army,base,fight,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Bunker'', separated by commas>'
+      military/checkpoint:
+        # military=checkpoint
+        name: Checkpoint
+        # 'terms: air force,army,base,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
+      military/nuclear_explosion_site:
+        # military=nuclear_explosion_site
+        name: Nuclear Explosion Site
+        # 'terms: atom,blast,bomb,detonat*,nuke,site,test'
+        terms: '<translate with synonyms or related terms for ''Nuclear Explosion Site'', separated by commas>'
+      military/office:
+        # military=office
+        name: Military Office
+        # 'terms: air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Office'', separated by commas>'
       military/trench:
         # military=trench
         name: Military Trench
