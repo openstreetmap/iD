@@ -7,6 +7,7 @@ import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { dmsCoordinatePair } from '../util/units';
 import { coreGraph } from '../core/graph';
+import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent, geoChooseEdge } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
@@ -110,9 +111,9 @@ export function uiFeatureList(context) {
 
 
     function features() {
-        var entities = {};
         var result = [];
         var graph = context.graph();
+        var visibleCenter = context.map().extent().center();
         var q = search.property('value').toLowerCase();
 
         if (!q) return result;
@@ -141,37 +142,35 @@ export function uiFeatureList(context) {
             });
         }
 
-        function addEntity(entity) {
-            if (entity.id in entities || result.length > 200)
-                return;
-
-            entities[entity.id] = true;
+        var allEntities = graph.entities;
+        var localResults = [];
+        for (var id in allEntities) {
+            var entity = allEntities[id];
 
             var name = utilDisplayName(entity) || '';
-            if (name.toLowerCase().indexOf(q) >= 0) {
-                var matched = context.presets().match(entity, graph);
-                var type = (matched && matched.name()) || utilDisplayType(entity.id);
+            if (name.toLowerCase().indexOf(q) < 0) continue;
 
-                result.push({
-                    id: entity.id,
-                    entity: entity,
-                    geometry: context.geometry(entity.id),
-                    type: type,
-                    name: name
-                });
-            }
+            var matched = context.presets().match(entity, graph);
+            var type = (matched && matched.name()) || utilDisplayType(entity.id);
 
-            graph.parentRelations(entity).forEach(function(parent) {
-                addEntity(parent);
+            var extent = entity.extent(graph);
+            var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
+
+            localResults.push({
+                id: entity.id,
+                entity: entity,
+                geometry: context.geometry(entity.id),
+                type: type,
+                name: name,
+                distance: distance
             });
-        }
 
-        var visible = context.surface().selectAll('.point, .line, .area').nodes();
-        for (var i = 0; i < visible.length && result.length <= 200; i++) {
-            var datum = visible[i].__data__;
-            var entity = datum && datum.properties && datum.properties.entity;
-            if (entity) { addEntity(entity); }
+            if (localResults.length > 100) break;
         }
+        localResults = localResults.sort(function byDistance(a, b) {
+            return a.distance - b.distance;
+        });
+        result = result.concat(localResults);
 
         (_geocodeResults || []).forEach(function(d) {
             if (d.osm_type && d.osm_id) {    // some results may be missing these - #1890
@@ -216,8 +215,6 @@ export function uiFeatureList(context) {
 
         list.classed('filtered', value.length);
 
-        var noResultsWorldwide = _geocodeResults && _geocodeResults.length === 0;
-
         var resultsIndicator = list.selectAll('.no-results-item')
             .data([0])
             .enter()
@@ -230,7 +227,7 @@ export function uiFeatureList(context) {
             .attr('class', 'entity-name');
 
         list.selectAll('.no-results-item .entity-name')
-            .text(noResultsWorldwide ? t('geocoder.no_results_worldwide') : t('geocoder.no_results_visible'));
+            .text(t('geocoder.no_results_worldwide'));
 
         if (services.geocoder) {
           list.selectAll('.geocode-item')
