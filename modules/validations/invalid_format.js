@@ -9,9 +9,9 @@ export function validationFormatting() {
         var issues = [];
 
         function isValidEmail(email) {
-            // Same regex as used by HTML5 "email" inputs
             // Emails in OSM are going to be official so they should be pretty simple
-            var valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            // Using negated lists to better support all possible unicode characters (#6494)
+            var valid_email = /^[^\(\)\\,":;<>@\[\]]+@[^\(\)\\,":;<>@\[\]\.]+(?:\.[a-z0-9-]+)*$/i;
 
             // An empty value is also acceptable
             return (!email || valid_email.test(email));
@@ -43,7 +43,10 @@ export function validationFormatting() {
         if (entity.tags.website) {
             // Multiple websites are possible
             // If ever we support ES6, arrow functions make this nicer
-            var websites = entity.tags.website.split(';').filter(function(x) { return !isSchemePresent(x); });
+            var websites = entity.tags.website
+                .split(';')
+                .map(function(s) { return s.trim(); })
+                .filter(function(x) { return !isSchemePresent(x); });
 
             if (websites.length) {
                 issues.push(new validationIssue({
@@ -65,7 +68,10 @@ export function validationFormatting() {
 
         if (entity.tags.email) {
             // Multiple emails are possible
-            var emails = entity.tags.email.split(';').filter(function(x) { return !isValidEmail(x); });
+            var emails = entity.tags.email
+                .split(';')
+                .map(function(s) { return s.trim(); })
+                .filter(function(x) { return !isValidEmail(x); });
 
             if (emails.length) {
                 issues.push(new validationIssue({
