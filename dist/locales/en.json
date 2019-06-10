@@ -62,7 +62,8 @@
             },
             "welcome": {
                 "first_time": "You’re editing <b>OpenStreetMap</b>: the free, collborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!",
-                "return": "Welcome back. Ready to make the map even better?"
+                "return": "Welcome back. Ready to make the map even better?",
+                "start_mapping": "Start Mapping"
             },
             "restore": {
                 "title": "Restore",

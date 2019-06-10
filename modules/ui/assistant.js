@@ -167,6 +167,14 @@ export function uiAssistant(context) {
                         updateDidEditStatus();
                         context.container().call(uiIntro(context));
                     });
+
+                mainFooter.append('button')
+                    .attr('class', 'primary')
+                    .on('click', function() {
+                        updateDidEditStatus();
+                    })
+                    .append('span')
+                    .text(t('assistant.welcome.start_mapping'));
             }
 
         } else {
