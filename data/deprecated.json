@@ -173,10 +173,6 @@
       "replace": {"man_made": "embankment"}
     },
     {
-      "old": {"barrier": "entrance"},
-      "replace": {"entrance": "*"}
-    },
-    {
       "old": {"barrier": "wire_fence"},
       "replace": {"barrier": "fence", "fence_type": "wire"}
     },
