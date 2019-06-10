@@ -6,7 +6,7 @@ import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSettingsTaskData(context) {
+export function uiTaskData(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {

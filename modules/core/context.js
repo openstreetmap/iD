@@ -418,6 +418,15 @@ export function coreContext() {
     };
 
 
+    /* Tasks */
+    var tasks = {};
+    context.tasks = function(val) {
+        if (!arguments.length) return tasks;
+        tasks = val;
+        return context;
+    };
+
+
     /* locales */
     // `locale` variable contains a "requested locale".
     // It won't become the `currentLocale` until after loadLocale() is called.

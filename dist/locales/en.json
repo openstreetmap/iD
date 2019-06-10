@@ -2322,6 +2322,10 @@
             "title": "Tasks",
             "key": "T"
         },
+        "tasking": {
+            "project": "Project",
+            "task": "Task"
+        },
         "units": {
             "feet": "{quantity} ft",
             "miles": "{quantity} mi",

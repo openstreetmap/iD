@@ -17,17 +17,29 @@ import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { uiDataEditor } from '../ui/data_editor';
+import { services } from '../services';
+import { uiTaskingEditor } from '../ui/tasking_editor';
 import { utilKeybinding } from '../util';
 
 
-export function modeSelectTask(context, selectedDatum) {
+export function modeSelectTask(context, selectedTaskID) {
     var mode = {
         id: 'select-task',
         button: 'browse'
     };
 
+    var tasks = services.tasks;
     var keybinding = utilKeybinding('select-task');
     var dataEditor = uiDataEditor(context);
+
+    var tasking = uiTaskingEditor(context)
+        .on('change', function() {
+            context.map().pan([0,0]);  // trigger a redraw
+            var task = checkSelectedTaskID();
+            if (!task) return;
+            context.ui().sidebar
+                .show(tasking.task(task));
+        });
 
     var behaviors = [
         behaviorBreathe(context),
@@ -38,10 +50,18 @@ export function modeSelectTask(context, selectedDatum) {
         modeDragNote(context).behavior
     ];
 
+    function checkSelectedTaskID() {
+        var task = tasks.getTask(selectedTaskID);
+        if (!task) {
+            context.enter(modeBrowse(context));
+        }
+        return task;
+    }
+
 
     // class the task as selected, or return to browse mode if the data is gone
     function selectTask(drawn) {
-        var selection = context.surface().selectAll('.layer-maptask .data' + selectedDatum.__featurehash__);
+        var selection = context.surface().selectAll('.layer-maptask .data' + selectedTaskID.__featurehash__);
 
         if (selection.empty()) {
             // Return to browse mode if selected DOM elements have
@@ -63,7 +83,7 @@ export function modeSelectTask(context, selectedDatum) {
 
 
     mode.zoomToSelected = function() {
-        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        var extent = geoExtent(d3_geoBounds(selectedTaskID));
         context.map().centerZoomEase(extent.center(), context.map().trimmedExtentZoom(extent));
     };
 
@@ -81,10 +101,10 @@ export function modeSelectTask(context, selectedDatum) {
         selectTask();
 
         var sidebar = context.ui().sidebar;
-        sidebar.show(dataEditor.datum(selectedDatum));
+        sidebar.show(dataEditor.datum(selectedTaskID));
 
         // expand the sidebar, avoid obscuring the data if needed
-        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        var extent = geoExtent(d3_geoBounds(selectedTaskID));
         sidebar.expand(sidebar.intersects(extent));
 
         context.map()

@@ -23,6 +23,7 @@ export { svgRelationMemberTags } from './helpers.js';
 export { svgSegmentWay } from './helpers.js';
 export { svgStreetside } from './streetside.js';
 export { svgTagClasses } from './tag_classes.js';
+export { svgTasking } from './tasking.js';
 export { svgTouch } from './touch.js';
 export { svgTurns } from './turns.js';
 export { svgVertices } from './vertices.js';

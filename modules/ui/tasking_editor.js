@@ -9,23 +9,31 @@ import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../geo';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
-import { uiSettingsTaskData } from './settings/task_data';
+import { uiTaskData } from './tasking/task_data';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../util';
+import { uiTaskingProject } from './tasking/';
 
+export function uiTaskingEditor(context) {
+    var taskingProject = uiTaskingProject();
 
-export function uiTasks(context) {
     var key = t('tasks.key');
 
     var layers = context.layers();
 
-    var settingsTaskData = uiSettingsTaskData(context)
+    var _project;
+    var _task;
+
+    var _projectSelection = d3_select(null);
+    var _taskSelection = d3_select(null);
+
+    var taskData = uiTaskData(context)
         .on('change', taskChanged);
 
     function taskChanged(d) {
-        var tasksLayer = layers.layer('tasks');
+        var taskingLayer = layers.layer('tasking');
         if (d && d.url) {
-            tasksLayer.url(d.url);
+            taskingLayer.url(d.url);
         }
     }
 
@@ -61,18 +69,18 @@ export function uiTasks(context) {
         .title(uiTooltipHtml(t('tasks.title'), key));
 
 
-    uiTasks.togglePane = function() {
+        uiTaskingEditor.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
 
-    uiTasks.renderToggleButton = function(selection) {
+    uiTaskingEditor.renderToggleButton = function(selection) {
         _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', uiTasks.togglePane)
+            .on('click', uiTaskingEditor.togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
             .call(addNotificationBadge)
             .call(paneTooltip);
@@ -81,11 +89,21 @@ export function uiTasks(context) {
     function editTask() {
         d3_event.preventDefault();
         context.container()
-            .call(settingsTaskData);
+            .call(taskData);
+    }
+
+    function renderProject(selection) {
+        _projectSelection = selection
+            .call(taskingProject.project(_project));
+    }
+
+    function renderTask(selection) {
+        // _projectSelection = selection
+        //     .call(taskingTask.task(_task));
     }
 
 
-    uiTasks.renderPane = function(selection) {
+    uiTaskingEditor.renderPane = function(selection) {
         _pane = selection
             .append('div')
             .attr('class', 'fillL map-pane tasks-pane hide')
@@ -117,11 +135,44 @@ export function uiTasks(context) {
             .on('click', editTask)
             .call(svgIcon('#iD-icon-more'));
 
+        content
+            .append('div')
+            .attr('class', 'tasking-project')
+            .call(uiDisclosure(context, 'project', true)
+                .title(t('tasking.project'))
+                .content(renderProject)
+        );
+
+        content
+            .append('div')
+            .attr('class', 'tasking-task')
+            .call(uiDisclosure(context, 'task', true)
+                .title(t('tasking.task'))
+                .content(renderTask)
+        );
+
         // update();
 
         context.keybinding()
-            .on(key, uiTasks.togglePane);
+            .on(key, uiTaskingEditor.togglePane);
     };
 
-    return uiTasks;
+    uiTaskingEditor.project = function(val) {
+        if (!arguments.length) return _project;
+        _project = val;
+        return uiTaskingEditor;
+    };
+
+    uiTaskingEditor.task = function(val) {
+        if (!arguments.length) return _task;
+        _task = val;
+
+        // set project as well
+        this.project(val.projectId);
+
+        return uiTaskingEditor;
+    };
+
+
+    return uiTaskingEditor;
 }

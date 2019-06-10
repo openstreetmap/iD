@@ -19,15 +19,14 @@ var _enabled = false;
 var _geojson;
 
 
-export function svgTasks(projection, context, dispatch) {
+export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
     var detected = utilDetect();
     var layer = d3_select(null);
     var _vtService;
-    var _fileList;
+    var _taskService;
     var _template;
-    var _src;
 
 
     function init() {
@@ -48,7 +47,7 @@ export function svgTasks(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawTasks.fileList(d3_event.dataTransfer.files);
+                drawTasking.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
             .on('dragexit.svgData', over)
@@ -58,7 +57,7 @@ export function svgTasks(projection, context, dispatch) {
     }
 
 
-    function getService() {
+    function getVTService() {
         if (services.vectorTile && !_vtService) {
             _vtService = services.vectorTile;
             _vtService.event.on('loadedData', throttledRedraw);
@@ -67,6 +66,19 @@ export function svgTasks(projection, context, dispatch) {
         }
 
         return _vtService;
+    }
+
+    function getTaskService() {
+        if (services.tasks && !_taskService) {
+            _taskService = services.tasks;
+            _taskService.on('loadedProject', throttledRedraw);
+            _taskService.on('loadedTask', throttledRedraw);
+            _taskService.on('loadedTasks', throttledRedraw);
+        } else if (!services.tasks && _taskService) {
+            _taskService = null;
+        }
+
+        return _taskService;
     }
 
 
@@ -182,11 +194,12 @@ export function svgTasks(projection, context, dispatch) {
     }
 
 
-    function drawTasks(selection) {
-        var vtService = getService();
+    function drawTasking(selection) {
+        var vtService = getVTService();
+        var taskService = getTaskService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
-        var hasData = drawTasks.hasData();
+        var hasData = drawTasking.hasData();
 
         layer = selection.selectAll('.layer-maptask')
             .data(_enabled && hasData ? [0] : []);
@@ -320,7 +333,7 @@ export function svgTasks(projection, context, dispatch) {
     }
 
 
-    drawTasks.showLabels = function(val) {
+    drawTasking.showLabels = function(val) {
         if (!arguments.length) return _showLabels;
 
         _showLabels = val;
@@ -328,7 +341,7 @@ export function svgTasks(projection, context, dispatch) {
     };
 
 
-    drawTasks.enabled = function(val) {
+    drawTasking.enabled = function(val) {
         if (!arguments.length) return _enabled;
 
         _enabled = val;
@@ -343,13 +356,13 @@ export function svgTasks(projection, context, dispatch) {
     };
 
 
-    drawTasks.hasData = function() {
+    drawTasking.hasData = function() {
         var gj = _geojson || {};
         return !!(_template || Object.keys(gj).length);
     };
 
 
-    drawTasks.template = function(val, src) {
+    drawTasking.template = function(val, src) {
         if (!arguments.length) return _template;
 
         // test source against OSM imagery blacklists..
@@ -379,30 +392,22 @@ export function svgTasks(projection, context, dispatch) {
         }
 
         _template = val;
-        _fileList = null;
         _geojson = null;
-
-        // strip off the querystring/hash from the template,
-        // it often includes the access token
-        _src = src || ('vectortile:' + val.split(/[?#]/)[0]);
 
         dispatch.call('change');
         return this;
     };
 
 
-    drawTasks.geojson = function(gj, src) {
+    drawTasking.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
 
         _template = null;
-        _fileList = null;
         _geojson = null;
-        _src = null;
 
         gj = gj || {};
         if (Object.keys(gj).length) {
             _geojson = ensureIDs(gj);
-            _src = src || 'unknown.geojson';
         }
 
         dispatch.call('change');
@@ -410,36 +415,18 @@ export function svgTasks(projection, context, dispatch) {
     };
 
 
-    drawTasks.url = function(url) {
+    drawTasking.url = function(url) {
         _template = null;
-        _fileList = null;
         _geojson = null;
-        _src = null;
 
-        _template = null;
-            d3_text(url)
-                .then(function(data) {
-                    var gj;
-                    gj = JSON.parse(data);
-
-                    gj = gj || {};
-                    if (Object.keys(gj).length) {
-                        _geojson = ensureIDs(gj);
-                        // _src = extension + ' data file';
-                        this.fitZoom();
-                    }
-                })
-                .catch(function() {
-                    /* ignore */
-                });
-
+        _taskService.getFromUrl(url);
 
         dispatch.call('change');
         return this;
     };
 
 
-    drawTasks.fitZoom = function() {
+    drawTasking.fitZoom = function() {
         var features = getFeatures(_geojson);
         if (!features.length) return;
 
@@ -478,5 +465,5 @@ export function svgTasks(projection, context, dispatch) {
 
 
     init();
-    return drawTasks;
+    return drawTasking;
 }

@@ -64,7 +64,7 @@ export { uiSpinner } from './spinner';
 export { uiSplash } from './splash';
 export { uiStatus } from './status';
 export { uiSuccess } from './success';
-export { uiTasks } from './tasks';
+export { uiTaskingEditor } from './tasking_editor';
 export { uiTagReference } from './tag_reference';
 export { uiToggle } from './toggle';
 export { uiTooltipHtml } from './tooltipHtml';

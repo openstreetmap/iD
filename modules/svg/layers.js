@@ -12,7 +12,7 @@ import { svgMapillarySigns } from './mapillary_signs';
 import { svgOpenstreetcamImages } from './openstreetcam_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
-import { svgTasks } from './tasks';
+import { svgTasking } from './tasking';
 import { svgTouch } from './touch';
 import { utilArrayDifference, utilRebind } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
@@ -25,7 +25,7 @@ export function svgLayers(projection, context) {
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
-        { id: 'tasks', layer: svgTasks(projection, context, dispatch) },
+        { id: 'tasking', layer: svgTasking(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
