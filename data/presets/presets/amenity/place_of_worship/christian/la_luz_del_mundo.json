@@ -1,11 +1,5 @@
 {
-    "icon": "maki-religious-christian",
-    "fields": [
-        "name",
-        "religion",
-        "denomination",
-        "{amenity/place_of_worship}"
-    ],
+    "icon": "maki-place-of-worship",
     "geometry": [
         "point",
         "area"
@@ -31,15 +25,17 @@
         "sanctuary",
         "shrine",
         "tabernacle",
-        "temple"
+        "temple",
+        "the light of the world church"
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "la_luz_del_mundo"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "la_luz_del_mundo"
     },
-    "name": "Christian Church"
+    "name": "La Luz del Mundo Church"
 }

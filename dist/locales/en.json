@@ -4968,6 +4968,18 @@
                     "name": "Christian Church",
                     "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Kingdom Hall of Jehovah's Witnesses",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "La Luz del Mundo Church",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple,the light of the world church"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Quaker Friends Meeting House",
+                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple",
                     "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
@@ -4978,7 +4990,7 @@
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "Muslim Mosque",
-                    "terms": "muslim"
+                    "terms": "islam,muslim"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shinto Shrine",

@@ -2860,6 +2860,21 @@ en:
         name: Christian Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
         terms: '<translate with synonyms or related terms for ''Christian Church'', separated by commas>'
+      amenity/place_of_worship/christian/jehovahs_witness:
+        # 'amenity=place_of_worship, religion=christian, denomination=jehovahs_witness'
+        name: Kingdom Hall of Jehovah's Witnesses
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Kingdom Hall of Jehovah''s Witnesses'', separated by commas>'
+      amenity/place_of_worship/christian/la_luz_del_mundo:
+        # 'amenity=place_of_worship, religion=christian, denomination=la_luz_del_mundo'
+        name: La Luz del Mundo Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple,the light of the world church'
+        terms: '<translate with synonyms or related terms for ''La Luz del Mundo Church'', separated by commas>'
+      amenity/place_of_worship/christian/quaker:
+        # 'amenity=place_of_worship, religion=christian, denomination=quaker'
+        name: Quaker Friends Meeting House
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Quaker Friends Meeting House'', separated by commas>'
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
@@ -2873,7 +2888,7 @@ en:
       amenity/place_of_worship/muslim:
         # 'amenity=place_of_worship, religion=muslim'
         name: Muslim Mosque
-        # 'terms: muslim'
+        # 'terms: islam,muslim'
         terms: '<translate with synonyms or related terms for ''Muslim Mosque'', separated by commas>'
       amenity/place_of_worship/shinto:
         # 'amenity=place_of_worship, religion=shinto'

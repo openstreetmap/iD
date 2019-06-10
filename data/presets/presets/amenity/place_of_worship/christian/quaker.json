@@ -1,11 +1,5 @@
 {
-    "icon": "maki-religious-christian",
-    "fields": [
-        "name",
-        "religion",
-        "denomination",
-        "{amenity/place_of_worship}"
-    ],
+    "icon": "maki-place-of-worship",
     "geometry": [
         "point",
         "area"
@@ -35,11 +29,12 @@
     ],
     "tags": {
         "amenity": "place_of_worship",
-        "religion": "christian"
+        "religion": "christian",
+        "denomination": "quaker"
     },
     "reference": {
-        "key": "amenity",
-        "value": "place_of_worship"
+        "key": "denomination",
+        "value": "quaker"
     },
-    "name": "Christian Church"
+    "name": "Quaker Friends Meeting House"
 }
