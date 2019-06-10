@@ -101,6 +101,7 @@ export function validationOutdatedTags(context) {
 
                 var brand = brands.brands[match.kvnd];
                 if (brand && brand.tags['brand:wikidata']) {
+                    subtype = 'noncanonical_brand';
                     Object.assign(newTags, brand.tags);
                     break;
                 }
@@ -112,7 +113,15 @@ export function validationOutdatedTags(context) {
         var tagDiff = utilTagDiff(oldTags, newTags);
         if (!tagDiff.length) return [];
 
-        var prefix = subtype === 'incomplete_tags' ? 'incomplete.' : '';
+        var prefix = '';
+        if (subtype === 'noncanonical_brand') {
+            prefix = 'noncanonical_brand.';
+        } else if (subtype === 'incomplete_tags') {
+            prefix = 'incomplete.';
+        }
+
+        // don't allow autofixing brand tags
+        var autoArgs = subtype !== 'noncanonical_brand' ? [doUpgrade, t('issues.fix.upgrade_tags.annotation')] : null;
 
         return [new validationIssue({
             type: type,
@@ -124,7 +133,7 @@ export function validationOutdatedTags(context) {
             hash: JSON.stringify(tagDiff),
             fixes: [
                 new validationIssueFix({
-                    autoArgs: [doUpgrade, t('issues.fix.upgrade_tags.annotation')],
+                    autoArgs: autoArgs,
                     title: t('issues.fix.upgrade_tags.title'),
                     onClick: function(context) {
                         context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
