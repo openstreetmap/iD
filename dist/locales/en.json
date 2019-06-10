@@ -6635,14 +6635,6 @@
                     "name": "Barracks",
                     "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
                 },
-                "landuse/military/bunker": {
-                    "name": "Military Bunker",
-                    "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Checkpoint",
-                    "terms": "air force,army,base,force,guard,marine,navy,troop,war"
-                },
                 "landuse/military/danger_area": {
                     "name": "Danger Area",
                     "terms": "air force,army,base,blast,bomb,explo*,force,guard,mine,marine,navy,troop,war"
@@ -6651,17 +6643,9 @@
                     "name": "Naval Base",
                     "terms": "base,fight,force,guard,marine,navy,ship,sub,troop,war"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nuclear Explosion Site",
-                    "terms": "atom,blast,bomb,detonat*,nuke,site,test"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Obstacle Course",
                     "terms": "army,base,force,guard,marine,navy,troop,war"
-                },
-                "landuse/military/office": {
-                    "name": "Military Office",
-                    "terms": "air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war"
                 },
                 "landuse/military/range": {
                     "name": "Military Range",
@@ -7278,6 +7262,22 @@
                 "manhole/telecom": {
                     "name": "Telecom Manhole",
                     "terms": "cover,phone,hole,telecom,telephone,bt"
+                },
+                "military/bunker": {
+                    "name": "Military Bunker",
+                    "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
+                },
+                "military/checkpoint": {
+                    "name": "Checkpoint",
+                    "terms": "air force,army,base,force,guard,marine,navy,troop,war"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Nuclear Explosion Site",
+                    "terms": "atom,blast,bomb,detonat*,nuke,site,test"
+                },
+                "military/office": {
+                    "name": "Military Office",
+                    "terms": "air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war"
                 },
                 "military/trench": {
                     "name": "Military Trench",
@@ -9426,6 +9426,27 @@
                 },
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Annotation overlay provided by basemap.at.",
+                "name": "basemap.at Overlay"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surface layer provided by basemap.at.",
+                "name": "basemap.at Surface"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terrain layer provided by basemap.at.",
+                "name": "basemap.at Terrain"
             },
             "eufar-balaton": {
                 "attribution": {
