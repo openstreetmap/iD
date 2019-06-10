@@ -91,6 +91,9 @@ export function uiSidebar(context) {
 
 
         function hover(datum) {
+            // disable hover preview for now
+            return;
+
             if (datum && datum.__featurehash__) {   // hovering on data
                 _wasData = true;
                 sidebar
