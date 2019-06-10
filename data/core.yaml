@@ -36,6 +36,7 @@ en:
       drawing: Drawing
       mapping: Mapping
       editing: Editing
+      saving: Saving
     instructions:
       add_point: Click or tap the center of the feature.
       add_line: Click or tap the starting location.
@@ -461,6 +462,7 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
+    change: "1 Change"
     changes: "{count} Changes"
     download_changes: Download osmChange file
     errors: Errors

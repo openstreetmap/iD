@@ -44,7 +44,8 @@
                 "adding": "Adding",
                 "drawing": "Drawing",
                 "mapping": "Mapping",
-                "editing": "Editing"
+                "editing": "Editing",
+                "saving": "Saving"
             },
             "instructions": {
                 "add_point": "Click or tap the center of the feature.",
@@ -591,6 +592,7 @@
             "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
+            "change": "1 Change",
             "changes": "{count} Changes",
             "download_changes": "Download osmChange file",
             "errors": "Errors",

@@ -30,9 +30,10 @@ export function uiCommitChanges(context) {
             .append('div')
             .attr('class', 'commit-section modal-section fillL2');
 
+        var titleID = summary.length === 1 ? 'change' : 'changes';
         containerEnter
             .append('h3')
-            .text(t('commit.changes', { count: summary.length }));
+            .text(t('commit.' + titleID, { count: summary.length }));
 
         containerEnter
             .append('ul')
