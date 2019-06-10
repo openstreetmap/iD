@@ -320,9 +320,16 @@ button.secondary {
     background: transparent;
     border: 1px solid #7092ff;
 }
+button.primary:hover,
+button.secondary:hover {
+    background: #88a4ff;
+}
+button.primary:active,
+button.secondary:active {
+    background: #597be7;
+}
 button.secondary:hover {
     color: #fff;
-    background: #7092ff;
 }
 button.destructive {
     background: #d32232;
