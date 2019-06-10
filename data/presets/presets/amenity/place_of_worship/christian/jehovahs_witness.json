@@ -1,0 +1,40 @@
+{
+    "icon": "maki-place-of-worship",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "christian",
+        "abbey",
+        "basilica",
+        "bethel",
+        "cathedral",
+        "chancel",
+        "chantry",
+        "chapel",
+        "fold",
+        "house of God",
+        "house of prayer",
+        "house of worship",
+        "minster",
+        "mission",
+        "oratory",
+        "parish",
+        "sacellum",
+        "sanctuary",
+        "shrine",
+        "tabernacle",
+        "temple"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "christian",
+        "denomination": "jehovahs_witness"
+    },
+    "reference": {
+        "key": "denomination",
+        "value": "jehovahs_witness"
+    },
+    "name": "Kingdom Hall of Jehovah's Witnesses"
+}
