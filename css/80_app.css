@@ -1002,7 +1002,7 @@ a.hide-toggle {
 ------------------------------------------------------- */
 .assistant {
     flex: 0 0 auto;
-    background: rgba(32, 29, 29, 0.9);
+    background: rgba(45, 41, 41, 0.95);
     color: #fff;
     border-radius: 4px;
     display: flex;
