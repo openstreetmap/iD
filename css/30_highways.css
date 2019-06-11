@@ -489,6 +489,13 @@ path.line.stroke.tag-highway_bus_stop,
 .preset-icon-container path.casing.tag-highway-footway {
     stroke: #988;
 }
+.preset-icon .icon.tag-highway-footway.tag-footway-sidewalk {
+    color: #d4b4b4;
+}
+path.stroke.tag-highway-footway.tag-footway-sidewalk,
+.preset-icon-container path.casing.tag-highway-footway.tag-footway-sidewalk {
+    stroke: #d4b4b4;
+}
 .preset-icon-container path.stroke.tag-highway-footway:not(.tag-crossing-marked):not(.tag-crossing-unmarked):not(.tag-man_made-pier):not(.tag-public_transport-platform) {
     stroke: #fff;
 }
