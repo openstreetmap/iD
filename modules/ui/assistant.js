@@ -9,6 +9,7 @@ import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
 import { uiSuccess } from './success';
 import { uiFeatureList } from './feature_list';
+import { uiSelectionList } from './selection_list';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -150,16 +151,26 @@ export function uiAssistant(context) {
                 bodyTextArea.html(t('assistant.instructions.draw_area'));
             }
 
-        } else if (mode.id === 'select' && mode.selectedIDs().length === 1) {
+        } else if (mode.id === 'select') {
+
+            var selectedIDs = mode.selectedIDs();
 
             iconUse.attr('href','#fas-edit');
-
-            var id = mode.selectedIDs()[0];
-            var entity = context.entity(id);
-
             modeLabel.text(t('assistant.mode.editing'));
 
-            subjectTitle.text(utilDisplayLabel(entity, context));
+            if (selectedIDs.length === 1) {
+
+                var id = selectedIDs[0];
+                var entity = context.entity(id);
+                subjectTitle.text(utilDisplayLabel(entity, context));
+
+            } else {
+                subjectTitle.text(t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() }));
+
+                var selectionList = uiSelectionList(context, selectedIDs);
+                body
+                    .call(selectionList);
+            }
 
         } else if (!didEditAnythingYet) {
             container.classed('prominent', true);

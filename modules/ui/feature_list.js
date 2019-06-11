@@ -62,7 +62,7 @@ export function uiFeatureList(context) {
 
         list = listWrap
             .append('div')
-            .attr('class', 'feature-list cf');
+            .attr('class', 'feature-list');
 
     }
 
@@ -215,40 +215,6 @@ export function uiFeatureList(context) {
 
         list.classed('filtered', value.length);
 
-        var resultsIndicator = list.selectAll('.no-results-item')
-            .data([0])
-            .enter()
-            .append('button')
-            .property('disabled', true)
-            .attr('class', 'no-results-item')
-            .call(svgIcon('#iD-icon-alert', 'pre-text'));
-
-        resultsIndicator.append('span')
-            .attr('class', 'entity-name');
-
-        list.selectAll('.no-results-item .entity-name')
-            .text(t('geocoder.no_results_worldwide'));
-
-        if (services.geocoder) {
-          list.selectAll('.geocode-item')
-              .data([0])
-              .enter()
-              .append('button')
-              .attr('class', 'geocode-item secondary')
-              .on('click', geocoderSearch)
-              .append('div')
-              .attr('class', 'label')
-              .append('span')
-              .attr('class', 'entity-name')
-              .text(t('geocoder.search'));
-        }
-
-        list.selectAll('.no-results-item')
-            .style('display', (value.length && !results.length) ? 'block' : 'none');
-
-        list.selectAll('.geocode-item')
-            .style('display', (value && _geocodeResults === undefined) ? 'block' : 'none');
-
         list.selectAll('.feature-list-item')
             .data([-1])
             .remove();
@@ -258,7 +224,7 @@ export function uiFeatureList(context) {
 
         var enter = items.enter()
             .insert('button', '.geocode-item')
-            .attr('class', 'feature-list-item')
+            .attr('class', 'feature-list-item sep-top')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', click);
@@ -268,6 +234,8 @@ export function uiFeatureList(context) {
             .attr('class', 'label');
 
         label
+            .append('span')
+            .attr('class', 'entity-geom-icon')
             .each(function(d) {
                 d3_select(this)
                     .call(svgIcon('#iD-icon-' + d.geometry, 'pre-text'));
@@ -292,6 +260,38 @@ export function uiFeatureList(context) {
 
         items.exit()
             .remove();
+
+
+        var resultsIndicator = list.selectAll('.no-results-item')
+            .data((value.length && !results.length) ? [0] : []);
+
+        resultsIndicator.exit().remove();
+
+        resultsIndicator
+            .enter()
+            .insert('button', '.geocode-item')
+            .property('disabled', true)
+            .attr('class', 'no-results-item')
+            .call(svgIcon('#iD-icon-alert', 'pre-text'))
+            .append('span')
+            .attr('class', 'entity-name')
+            .text(t('geocoder.no_results_worldwide'));
+
+        var geocodeItem = list.selectAll('.geocode-item')
+            .data((services.geocoder && value && _geocodeResults === undefined) ? [0] : []);
+
+        geocodeItem.exit().remove();
+
+        geocodeItem
+            .enter()
+            .append('button')
+            .attr('class', 'geocode-item secondary')
+            .on('click', geocoderSearch)
+            .append('div')
+            .attr('class', 'label')
+            .append('span')
+            .attr('class', 'entity-name')
+            .text(t('geocoder.search'));
     }
 
 

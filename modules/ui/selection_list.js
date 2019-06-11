@@ -1,6 +1,5 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
@@ -25,24 +24,14 @@ export function uiSelectionList(context, selectedIDs) {
 
 
     function selectionList(selection) {
-        selection.classed('selection-list-pane', true);
-
-        var header = selection
-            .append('div')
-            .attr('class', 'header fillL cf');
-
-        header
-            .append('h3')
-            .text(t('inspector.multiselect'));
 
         var listWrap = selection
             .append('div')
-            .attr('class', 'inspector-body');
+            .attr('class', 'inspector-body selection-list-pane');
 
         var list = listWrap
             .append('div')
-            .attr('class', 'feature-list cf');
-
+            .attr('class', 'feature-list');
 
         context.history()
             .on('change.selectionList', function(difference) {
@@ -66,7 +55,7 @@ export function uiSelectionList(context, selectedIDs) {
             // Enter
             var enter = items.enter()
                 .append('div')
-                .attr('class', 'feature-list-item')
+                .attr('class', 'feature-list-item sep-top')
                 .on('click', selectEntity);
 
             enter

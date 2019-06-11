@@ -82,6 +82,9 @@
                     "propagation_help": "Your changes will be live momentarily. Some maps take longer to update than others."
                 },
                 "keep_mapping": "Keep Mapping"
+            },
+            "feature_count": {
+                "multiple": "{count} Features"
             }
         },
         "modes": {

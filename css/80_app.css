@@ -1124,35 +1124,6 @@ a.hide-toggle {
     color: #fff;
     min-width: 225px;
 }
-.assistant .no-results-item,
-.assistant .feature-list-item {
-    width: 100%;
-    background: transparent;
-    border-bottom: 1px solid #444;
-    color: #fff;
-}
-.assistant .feature-list-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-.assistant .feature-list > *:nth-last-child(2) {
-    border-bottom: none;
-}
-[dir='ltr'] .assistant .feature-list-item .label {
-    padding-left: 8px;
-}
-[dir='rtl'] .assistant .feature-list-item .label {
-    padding-right: 8px;
-}
-.assistant .feature-list-item .icon {
-    margin-right: 8px;
-}
-
-.assistant .geocode-item {
-    margin-top: 5px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 10px;
-}
 
 .assistant.prominent .assistant-header .body-col {
     padding-bottom: 16px;
@@ -1175,6 +1146,90 @@ a.hide-toggle {
     font-size: 14px;
     margin-top: 10px;
     line-height: 1.35em;
+}
+
+/* Feature List / Search Results
+------------------------------------------------------- */
+.feature-list  {
+    width: 100%;
+    text-align: center;
+}
+.feature-list-item {
+    width: 100%;
+    position: relative;
+    border-radius: 0;
+    font-weight: bold;
+    height: 40px;
+    line-height: 20px;
+    text-align: initial;
+    display: flex;
+}
+.assistant .no-results-item,
+.assistant .feature-list-item {
+    width: 100%;
+    background: transparent;
+    color: #fff;
+}
+.feature-list-item button {
+    background: transparent;
+    height: auto;
+    color: inherit;
+}
+.feature-list-item .label {
+    text-align: left;
+    padding: 10px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1 1 auto;
+}
+[dir='rtl'] .feature-list-item .label {
+    text-align: right;
+}
+.feature-list-item .close {
+    flex: 0 0 auto;
+    padding: 10px;
+}
+.feature-list-item .entity-type {
+    color: #7092ff;
+}
+.feature-list-item:hover .entity-type {
+    color: #597be7;
+}
+.feature-list-item .entity-name {
+    font-weight: normal;
+    padding-left: 10px;
+}
+[dir='rtl'] .feature-list-item .entity-name {
+    padding-left: 0;
+    padding-right: 10px;
+}
+.assistant .feature-list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+.assistant .feature-list-pane .feature-list > *:first-child {
+    border-top: none;
+}
+[dir='ltr'] .assistant .feature-list-item .label {
+    padding-left: 8px;
+}
+[dir='rtl'] .assistant .feature-list-item .label {
+    padding-right: 8px;
+}
+.assistant .feature-list-item .entity-geom-icon .icon {
+    opacity: 0.75;
+}
+[dir='ltr'] .assistant .feature-list-item .entity-geom-icon .icon {
+    margin-right: 8px;
+}
+[dir='rtl'] .assistant .feature-list-item .entity-geom-icon .icon {
+    margin-left: 8px;
+}
+.assistant .geocode-item {
+    margin-top: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
 }
 
 /* Success Screen / Community Index
@@ -1348,9 +1403,6 @@ a.hide-toggle {
     display: flex;
     flex-direction: column;
 }
-.selection-list-pane .inspector-body {
-    top: 60px;
-}
 
 .inspector-inner {
     padding: 20px 20px 5px 20px;
@@ -1379,66 +1431,6 @@ a.hide-toggle {
     text-indent: 30px;
     font-size: 18px;
     font-weight: bold;
-}
-
-
-/* Feature List / Search Results
-------------------------------------------------------- */
-.feature-list  {
-    width: 100%;
-}
-.feature-list-item {
-    width: 100%;
-    position: relative;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-}
-.feature-list-item {
-    background-color: #fff;
-    font-weight: bold;
-    height: 40px;
-    line-height: 20px;
-}
-.feature-list-item:hover {
-    background-color: #ececec;
-}
-.feature-list-item button {
-    background: transparent;
-}
-.feature-list-item .label {
-    text-align: left;
-    padding: 10px 10px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-[dir='rtl'] .feature-list-item .label {
-    text-align: right;
-}
-
-.feature-list-item .label .icon {
-    opacity: 0.75;
-}
-.feature-list-item .close {
-    float: right;
-    padding: 10px;
-}
-.feature-list-item .close .icon {
-    opacity: 1;
-}
-.feature-list-item .entity-type {
-    color: #7092ff;
-}
-.feature-list-item:hover .entity-type {
-    color: #597be7;
-}
-.feature-list-item .entity-name {
-    font-weight: normal;
-    padding-left: 10px;
-}
-[dir='rtl'] .feature-list-item .entity-name {
-    padding-left: 0;
-    padding-right: 10px;
 }
 
 

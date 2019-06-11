@@ -19,7 +19,6 @@ import { modeDragNote } from './drag_note';
 import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu } from '../ui/edit_menu';
-import { uiSelectionList } from '../ui/selection_list';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilEntityOrMemberSelector,
@@ -300,11 +299,6 @@ export function modeSelect(context, selectedIDs) {
 
 
         selectElements();
-
-        if (selectedIDs.length > 1) {
-            var entities = uiSelectionList(context, selectedIDs);
-            context.ui().sidebar.show(entities);
-        }
 
         if (_follow) {
             var extent = geoExtent();
