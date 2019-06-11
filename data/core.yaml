@@ -61,6 +61,12 @@ en:
         count_loc: "You have {count} unsaved changes around {location}."
         count_loc_time: "You have {count} unsaved changes from {duration} ago around {location}."
       ask: Would you like to restore them?
+    commit:
+      success:
+        thank_you: Thank You!
+        just_improved: "You've just improved OpenStreetMap around {location}."
+        propagation_help: Your changes will be live momentarily. Some maps take longer to update than others.
+      keep_mapping: Keep Mapping
   modes:
     add_feature:
       search_placeholder: Search feature types
@@ -769,13 +775,9 @@ en:
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
-    just_edited: "You just edited OpenStreetMap!"
-    thank_you: "Thank you for improving the map."
-    thank_you_location: "Thank you for improving the map around {where}."
     thank_you_where:
       format: "{place}{separator}{region}"
       separator: ", "
-    help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"

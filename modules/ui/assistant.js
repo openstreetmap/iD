@@ -7,6 +7,7 @@ import { t } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
+import { uiSuccess } from './success';
 import { uiFeatureList } from './feature_list';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
@@ -22,6 +23,8 @@ export function uiAssistant(context) {
 
     var featureSearch = uiFeatureList(context);
 
+    var savedChangeset = null;
+    var savedChangeCount = null;
     var didEditAnythingYet = false;
     var isFirstSession = !context.storage('sawSplash');
     context.storage('sawSplash', true);
@@ -31,13 +34,11 @@ export function uiAssistant(context) {
         container = selection.append('div')
             .attr('class', 'assistant');
         header = container.append('div')
-            .attr('class', 'assistant-header');
+            .attr('class', 'assistant-header assistant-row');
         body = container.append('div')
             .attr('class', 'assistant-body');
 
         scheduleCurrentLocationUpdate();
-
-        redraw();
 
         context
             .on('enter.assistant', redraw);
@@ -45,17 +46,13 @@ export function uiAssistant(context) {
         context.map()
             .on('move.assistant', scheduleCurrentLocationUpdate);
 
-        context.history()
-            .on('change.assistant', updateDidEditStatus);
+        redraw();
     };
 
     function updateDidEditStatus() {
+        savedChangeset = null;
+        savedChangeCount = null;
         didEditAnythingYet = true;
-
-        context.history()
-            .on('change.assistant', null);
-
-        redraw();
     }
 
     function redraw() {
@@ -63,6 +60,10 @@ export function uiAssistant(context) {
 
         var mode = context.mode();
         if (!mode) return;
+
+        if (mode.id !== 'browse') {
+            updateDidEditStatus();
+        }
 
         var iconCol = header.selectAll('.icon-col')
             .data([0]);
@@ -110,7 +111,7 @@ export function uiAssistant(context) {
         body.html('');
         bodyTextArea.html('');
         mainFooter.html('');
-        subjectTitle.classed('location', false);
+        subjectTitle.classed('map-center-location', false);
         container.classed('prominent', false);
 
         if (mode.id === 'save') {
@@ -163,28 +164,34 @@ export function uiAssistant(context) {
         } else if (!didEditAnythingYet) {
             container.classed('prominent', true);
 
-            iconUse.attr('href','#' + greetingIcon());
-            subjectTitle.text(t('assistant.greetings.' + greetingTimeframe()));
-
-            if (context.history().hasRestorableChanges()) {
-                drawRestoreScreen();
+            if (savedChangeset) {
+                drawSaveSuccessScreen();
             } else {
-                bodyTextArea.html(t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return')));
-                bodyTextArea.selectAll('a')
-                    .attr('href', '#')
-                    .on('click', function() {
-                        isFirstSession = false;
-                        updateDidEditStatus();
-                        context.container().call(uiIntro(context));
-                    });
+                iconUse.attr('href','#' + greetingIcon());
+                subjectTitle.text(t('assistant.greetings.' + greetingTimeframe()));
 
-                mainFooter.append('button')
-                    .attr('class', 'primary')
-                    .on('click', function() {
-                        updateDidEditStatus();
-                    })
-                    .append('span')
-                    .text(t('assistant.welcome.start_mapping'));
+                if (context.history().hasRestorableChanges()) {
+                    drawRestoreScreen();
+                } else {
+                    bodyTextArea.html(t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return')));
+                    bodyTextArea.selectAll('a')
+                        .attr('href', '#')
+                        .on('click', function() {
+                            isFirstSession = false;
+                            updateDidEditStatus();
+                            context.container().call(uiIntro(context));
+                            redraw();
+                        });
+
+                    mainFooter.append('button')
+                        .attr('class', 'primary')
+                        .on('click', function() {
+                            updateDidEditStatus();
+                            redraw();
+                        })
+                        .append('span')
+                        .text(t('assistant.welcome.start_mapping'));
+                }
             }
 
         } else {
@@ -192,7 +199,7 @@ export function uiAssistant(context) {
 
             modeLabel.text(t('assistant.mode.mapping'));
 
-            subjectTitle.classed('location', true);
+            subjectTitle.classed('map-center-location', true);
             subjectTitle.text(currLocation);
             scheduleCurrentLocationUpdate();
 
@@ -200,6 +207,56 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'feature-list-pane')
                 .call(featureSearch);
+        }
+
+        function drawSaveSuccessScreen() {
+
+            subjectTitle.text(t('assistant.commit.success.thank_you'));
+
+            var savedIcon;
+            if (savedChangeCount <= 5) {
+                savedIcon = 'smile';
+            } else if (savedChangeCount <= 25) {
+                savedIcon = 'smile-beam';
+            } else if (savedChangeCount <= 50) {
+                savedIcon = 'grin-beam';
+            } else {
+                savedIcon = 'laugh-beam';
+            }
+            iconUse.attr('href','#fas-' + savedIcon);
+
+            bodyTextArea.html(
+                '<b>' + t('assistant.commit.success.just_improved', { location: currLocation }) + '</b>' +
+                '<br/>'
+            );
+
+            var link = bodyTextArea
+                .append('span')
+                .text(t('assistant.commit.success.propagation_help'))
+                .append('a')
+                .attr('class', 'link-out')
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('href', t('success.help_link_url'));
+
+            link.append('span')
+                .text(' ' + t('success.help_link_text'));
+
+            link
+                .call(svgIcon('#iD-icon-out-link', 'inline'));
+
+            mainFooter.append('button')
+                .attr('class', 'primary')
+                .on('click', function() {
+                    updateDidEditStatus();
+                    redraw();
+                })
+                .append('span')
+                .text(t('assistant.commit.keep_mapping'));
+
+            var success = uiSuccess(context).changeset(savedChangeset);
+
+            body.call(success);
         }
 
         function drawRestoreScreen() {
@@ -269,7 +326,7 @@ export function uiAssistant(context) {
     function scheduleCurrentLocationUpdate() {
         debouncedGetLocation(context.map().center(), context.map().zoom(), function(placeName) {
             currLocation = placeName ? placeName : defaultLoc;
-            container.selectAll('.subject-title.location')
+            container.selectAll('.map-center-location')
                 .text(currLocation);
         });
     }
@@ -316,6 +373,13 @@ export function uiAssistant(context) {
             completionHandler(formattedName);
         });
     }
+
+    assistant.didSaveChangset = function(changeset, count) {
+        savedChangeset = changeset;
+        savedChangeCount = count;
+        didEditAnythingYet = false;
+        redraw();
+    };
 
     return assistant;
 }

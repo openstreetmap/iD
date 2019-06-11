@@ -15,7 +15,7 @@ export function modeBrowse(context) {
         id: 'browse',
         title: t('modes.browse.title'),
         description: t('modes.browse.description')
-    }, sidebar;
+    };
 
     var behaviors = [
         behaviorPaste(context),
@@ -34,29 +34,12 @@ export function modeBrowse(context) {
         if (document.activeElement && document.activeElement.blur) {
             document.activeElement.blur();
         }
-
-        if (sidebar) {
-            context.ui().sidebar.show(sidebar);
-        } else {
-            context.ui().sidebar.select(null);
-        }
     };
 
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
         behaviors.forEach(context.uninstall);
-
-        if (sidebar) {
-            context.ui().sidebar.hide();
-        }
-    };
-
-
-    mode.sidebar = function(_) {
-        if (!arguments.length) return sidebar;
-        sidebar = _;
-        return mode;
     };
 
 

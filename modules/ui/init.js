@@ -258,8 +258,10 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'sidebar-wrap');
 
+        ui.assistant = uiAssistant(context);
+
         sidebarWrap
-            .call(uiAssistant(context));
+            .call(ui.assistant);
 
         sidebarWrap
             .append('div')
@@ -365,6 +367,7 @@ export function uiInit(context) {
         });
     };
 
+    ui.assistant = null;
 
     ui.sidebar = uiSidebar(context);
 

@@ -1005,7 +1005,6 @@ a.hide-toggle {
     background: rgba(32, 29, 29, 0.9);
     color: #fff;
     border-radius: 4px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -1020,17 +1019,31 @@ a.hide-toggle {
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
 }
-.assistant .assistant-header {
+.assistant .sep-top {
+    border-top: 1px solid rgba(127, 127, 127, 0.5);
+}
+.assistant .assistant-row {
     display: flex;
+}
+.assistant .assistant-header {
     flex: 0 0 auto;
 }
 .assistant .icon-col {
     flex: 0 0 auto;
+    padding: 10px;
 }
 .assistant .icon-col .icon {
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+}
+.assistant .body-col {
+    padding: 10px;
+}
+[dir='ltr'] .assistant .body-col {
+    padding-left: 0;
+}
+[dir='rtl'] .assistant .body-col {
+    padding-right: 0;
 }
 .assistant .mode-label {
     color: #ccc;
@@ -1068,8 +1081,8 @@ a.hide-toggle {
 .assistant .main-footer button {
     min-width: 100px;
     height: auto;
-    padding: 5px 10px;
-    line-height: 20px;
+    padding: 7px 12px;
+    line-height: 1em;
     font-size: 13px;
 }
 [dir='ltr'] .assistant .main-footer button:first-of-type {
@@ -1078,11 +1091,11 @@ a.hide-toggle {
 [dir='rtl'] .assistant .main-footer button:first-of-type {
     margin-left: 8px;
 }
-
 .assistant .assistant-body {
-    margin-top: 15px;
-    padding: 0 5px;
     display: flex;
+}
+.assistant .assistant-body .feature-list-pane {
+    padding: 0px 15px 10px 15px;
 }
 .assistant .search-header {
     position: relative;
@@ -1141,7 +1154,7 @@ a.hide-toggle {
     margin-bottom: 10px;
 }
 
-.assistant.prominent {
+.assistant.prominent .assistant-header .body-col {
     padding-bottom: 16px;
 }
 .assistant.prominent .icon-col .icon {
@@ -1162,6 +1175,78 @@ a.hide-toggle {
     font-size: 14px;
     margin-top: 10px;
     line-height: 1.35em;
+}
+
+/* Success Screen / Community Index
+------------------------------------------------------- */
+.save-success {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.save-success .link-out {
+    margin: 0px 5px;
+    white-space: nowrap;
+}
+.save-success h3 {
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 1.5;
+    padding-bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.save-success .summary-detail {
+    align-self: center;
+}
+
+.summary-view-on-osm,
+.community-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.community-languages {
+    margin-top: 5px;
+    font-style: italic;
+}
+.community-languages:only-child {
+    margin-top: 0;
+}
+
+.community-detail a.hide-toggle,
+.community-detail a:visited.hide-toggle {
+    font-size: 12px;
+    font-weight: normal;
+    padding-bottom: 0;
+}
+.community-detail .hide-toggle svg.icon.pre-text {
+    width: 12px;
+    height: 15px;
+}
+
+.community-events {
+    margin-top: 5px;
+}
+
+.community-event,
+.community-more {
+    background-color: #4c4c4c;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.community-event-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.community-event-when {
+    font-weight: bold;
+}
+
+.community-missing {
+    padding: 10px;
+    text-align: center;
 }
 
 
@@ -4950,99 +5035,6 @@ img.tile-debug {
 
 .modal-section:last-child {
     border-bottom: 0;
-}
-
-/* Success Screen / Community Index
-------------------------------------------------------- */
-.save-success.body {
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.save-success .link-out {
-    margin: 0px 5px;
-    white-space: nowrap;
-}
-
-.save-summary,
-.save-communityLinks {
-    padding: 0px 20px 15px 20px;
-}
-
-.save-communityLinks {
-    border-top: 1px solid #ccc;
-}
-
-.save-success table,
-.save-success p {
-    margin-top: 15px;
-}
-.save-success h3 {
-    font-size: 14px;
-    margin-top: 15px;
-    line-height: 1.5;
-    padding-bottom: 0;
-}
-.save-success td {
-    vertical-align: top;
-}
-.save-success td.cell-icon {
-    width: 40px;
-}
-.save-success td.cell-detail {
-    padding: 0 10px;
-}
-.save-success td.community-detail {
-    padding-bottom: 15px;
-}
-
-.summary-view-on-osm,
-.community-name {
-    font-size: 14px;
-    font-weight: bold;
-}
-.community-languages {
-    margin-top: 5px;
-    font-style: italic;
-}
-.community-languages:only-child {
-    margin-top: 0;
-}
-
-.community-detail a.hide-toggle,
-.community-detail a:visited.hide-toggle {
-    font-size: 12px;
-    font-weight: normal;
-    padding-bottom: 0;
-}
-.community-detail .hide-toggle svg.icon.pre-text {
-    width: 12px;
-    height: 15px;
-}
-
-.community-events {
-    margin-top: 5px;
-}
-
-.community-event,
-.community-more {
-    background-color: #efefef;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 5px;
-}
-
-.community-event-name {
-    font-size: 14px;
-    font-weight: bold;
-}
-.community-event-when {
-    font-weight: bold;
-}
-
-.community-missing {
-    padding: 10px;
-    text-align: center;
 }
 
 
