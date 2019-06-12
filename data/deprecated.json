@@ -898,6 +898,14 @@
       "replace": {"natural": "water", "water": "river"}
     },
     {
+      "old": {"wifi": "yes"},
+      "replace": {"internet_access": "wlan"}
+    },
+    {
+      "old": {"wifi": "free"},
+      "replace": {"internet_access": "wlan", "internet_access:fee": "no"}
+    },
+    {
       "old": {"wood": "coniferous"},
       "replace": {"leaf_type": "needleleaved"}
     },

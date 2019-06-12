@@ -1959,6 +1959,8 @@
     {"key": "water", "value": "tidal", "description": "🄳 ➜ natural=water + tidal=yes"},
     {"key": "waterway", "value": "aqueduct", "description": "🄳 ➜ waterway=canal + bridge=aqueduct"},
     {"key": "waterway", "value": "lock", "description": "🄳 ➜ waterway=canal + lock=yes"},
+    {"key": "wifi", "value": "yes", "description": "🄳 ➜ internet_access=wlan"},
+    {"key": "wifi", "value": "free", "description": "🄳 ➜ internet_access=wlan + internet_access:fee=no"},
     {"key": "wood", "value": "coniferous", "description": "🄳 ➜ leaf_type=needleleaved"},
     {"key": "wood", "value": "deciduous", "description": "🄳 ➜ leaf_cycle=deciduous"},
     {"key": "wood", "value": "evergreen", "description": "🄳 ➜ leaf_cycle=evergreen"},
