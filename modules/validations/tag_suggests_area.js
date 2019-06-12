@@ -106,7 +106,9 @@ export function validationTagSuggestsArea(context) {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(tagSuggestingArea),
+            hash: JSON.stringify(tagSuggestingArea) +
+                // avoid stale "connect endpoints" fix
+                (typeof connectEndpointsOnClick),
             fixes: fixes
         })];
 
