@@ -6,26 +6,10 @@
     ],
     "terms": [
         "christian",
-        "abbey",
-        "basilica",
-        "bethel",
-        "cathedral",
-        "chancel",
-        "chantry",
-        "chapel",
-        "fold",
+        "church",
         "house of God",
         "house of prayer",
-        "house of worship",
-        "minster",
-        "mission",
-        "oratory",
-        "parish",
-        "sacellum",
-        "sanctuary",
-        "shrine",
-        "tabernacle",
-        "temple"
+        "house of worship"
     ],
     "tags": {
         "amenity": "place_of_worship",

@@ -29,5 +29,6 @@
         "key": "man_made",
         "value": "bridge"
     },
-    "name": "Bridge"
+    "name": "Bridge",
+    "matchScore": 0.85
 }
