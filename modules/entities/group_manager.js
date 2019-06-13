@@ -40,9 +40,9 @@ function entityGroup(id, group) {
                 var entityValue = tags[key];
                 if (typeof val === 'string') {
                     if (!entityValue || (val !== entityValue && val !== '*')) return false;
-                } else if (Array.isArray(val)) {
-                    if (!entityValue || val.indexOf(entityValue) === -1) return false;
                 } else {
+                    // object like { "value1": boolean }
+
                     if (!entityValue || (!val['*'] && !val[entityValue])) return false;
                     if (val[entityValue] === false) return false;
                 }
@@ -68,15 +68,15 @@ function entityGroup(id, group) {
                     if (rule.geometry !== geometry) return false;
                 }
             }
-
+            var ruleKey;
             if (rule.allTags) {
-                for (var ruleKey in rule.allTags) {
+                for (ruleKey in rule.allTags) {
                     if (!matchesTagComponent(ruleKey, rule.allTags)) return false;
                 }
             }
             if (rule.anyTags) {
                 var didMatch = false;
-                for (var ruleKey in rule.anyTags) {
+                for (ruleKey in rule.anyTags) {
                     if (matchesTagComponent(ruleKey, rule.anyTags)) {
                         didMatch = true;
                         break;

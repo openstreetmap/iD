@@ -8,8 +8,17 @@
                 "*": true,
                 "no": false
             },
-            "natural": ["water", "coastline", "bay"],
-            "landuse": ["pond", "basin", "reservoir", "salt_pond"]
+            "natural": {
+                "water": true,
+                "coastline": true,
+                "bay": true
+            },
+            "landuse": {
+                "pond": true,
+                "basin": true,
+                "reservoir": true,
+                "salt_pond": true
+            }
         }
     }
 }
