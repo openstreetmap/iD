@@ -33,21 +33,28 @@ function entityGroup(id, group) {
         return matchesRule(group.matches);
 
         function matchesTagComponent(ruleKey, tagComponent) {
-            var keysToCheck = ruleKey === '*' ? Object.keys(tags) : [ruleKey];
+            var keysToCheck = [ruleKey];
+            if (ruleKey === '*') {
+                // check if any key has one of the tag values
+                keysToCheck = Object.keys(tags);
+
+                if (keysToCheck.length === 0) return false;
+            }
             var val = tagComponent[ruleKey];
             for (var i in keysToCheck) {
                 var key = keysToCheck[i];
                 var entityValue = tags[key];
                 if (typeof val === 'string') {
-                    if (!entityValue || (val !== entityValue && val !== '*')) return false;
+                    if (!entityValue || (val !== entityValue && val !== '*')) continue;
                 } else {
                     // object like { "value1": boolean }
 
-                    if (!entityValue || (!val['*'] && !val[entityValue])) return false;
-                    if (val[entityValue] === false) return false;
+                    if (!entityValue || (!val['*'] && !val[entityValue])) continue;
+                    if (val[entityValue] === false) continue;
                 }
+                return true;
             }
-            return true;
+            return false;
         }
 
         function matchesRule(rule) {

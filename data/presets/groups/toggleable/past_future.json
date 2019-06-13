@@ -22,6 +22,11 @@
             "razed": "*",
             "demolished": "*",
             "obliterated": "*"
+        },
+        "groups": {
+            "toggleable/paths": false,
+            "toggleable/traffic_roads": false,
+            "toggleable/service_roads": false
         }
     }
 }

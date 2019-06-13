@@ -70,24 +70,6 @@ export function rendererFeatures(context) {
         defineRule(group.basicID(), group.matchesTags, group.localizedName(), group.localizedDescription(), group.toggleableMax());
     }
 
-
-    // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
-    /*defineRule('past_future', function isPastFuture(tags) {
-        if (
-            traffic_roads[tags.highway] ||
-            service_roads[tags.highway] ||
-            paths[tags.highway]
-        ) { return false; }
-
-        var strings = Object.keys(tags);
-
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (past_futures[s] || past_futures[tags[s]]) { return true; }
-        }
-        return false;
-    });*/
-
     // Lines or areas that don't match another feature filter.
     // IMPORTANT: The 'others' feature must be the last one defined,
     //   so that code in getMatches can skip this test if `hasMatch = true`

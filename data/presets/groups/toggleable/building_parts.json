@@ -3,7 +3,6 @@
     "description": "3D Building and Roof Components",
     "toggleable": true,
     "matches": {
-        "geometry": "area",
         "allTags": {
             "building:part": {
                 "*": true,

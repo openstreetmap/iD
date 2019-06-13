@@ -6,10 +6,16 @@
     },
     "matches": {
         "geometry": "area",
-        "allTags": {
+        "anyTags": {
             "building": {
                 "*": true,
                 "no": false
+            },
+            "parking": {
+                "multi-storey": true,
+                "sheds": true,
+                "carports": true,
+                "garage_boxes": true
             }
         }
     }
