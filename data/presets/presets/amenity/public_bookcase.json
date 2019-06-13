@@ -10,10 +10,10 @@
     ],
     "moreFields": [
         "wheelchair",
-        "location", 
-        "access", 
-        "brand", 
-        "email", 
+        "location",
+        "access_simple", 
+        "brand",
+        "email",
         "phone"
     ],
     "geometry": [
