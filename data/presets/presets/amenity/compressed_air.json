@@ -2,9 +2,15 @@
     "icon": "maki-car",
     "fields": [
         "operator",
+        "access_simple",
         "fee",
         "payment_multi_fee",
+        "covered",
         "lit"
+    ],
+    "moreFields": [
+        "brand",
+        "manufacturer"
     ],
     "geometry": [
         "point",

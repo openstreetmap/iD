@@ -10,8 +10,10 @@
     "moreFields": [
         "brand",
         "covered",
+        "height",
         "indoor",
         "lit",
+        "manufacturer",
         "name",
         "opening_hours",
         "wheelchair"
