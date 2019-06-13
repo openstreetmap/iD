@@ -1,0 +1,16 @@
+{
+    "name": "Buildings",
+    "description": "Houses, Shelters, Garages, etc.",
+    "toggleable": {
+        "maxShown": 250
+    },
+    "matches": {
+        "geometry": "area",
+        "allTags": {
+            "building": {
+                "*": true,
+                "no": false
+            }
+        }
+    }
+}

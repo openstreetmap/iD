@@ -10,6 +10,7 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
+const groupSchema = require('./data/presets/schema/group.json');
 const nsi = require('name-suggestion-index');
 const deprecated = require('./data/deprecated.json').dataDeprecated;
 
@@ -48,6 +49,7 @@ module.exports = function buildData() {
         // Translation strings
         var tstrings = {
             categories: {},
+            groups: {},
             fields: {},
             presets: {}
         };
@@ -82,6 +84,8 @@ module.exports = function buildData() {
             'svg/fontawesome/*.svg',
         ]);
 
+        var groups = generateGroups(tstrings);
+
         var categories = generateCategories(tstrings, faIcons, tnpIcons);
         var fields = generateFields(tstrings, faIcons);
         var presets = generatePresets(tstrings, faIcons, tnpIcons);
@@ -107,6 +111,10 @@ module.exports = function buildData() {
             writeFileProm(
                 'data/presets/presets.json',
                 prettyStringify({ presets: presets }, { maxLength: 9999 })
+            ),
+            writeFileProm(
+                'data/presets/groups.json',
+                prettyStringify({ groups: groups }, { maxLength: 1000 })
             ),
             writeFileProm(
                 'data/presets.yaml',
@@ -210,6 +218,29 @@ function generateFields(tstrings, faIcons, tnpIcons) {
         }
     });
     return fields;
+}
+
+function generateGroups(tstrings) {
+    var groups = {};
+    glob.sync(__dirname + '/data/presets/groups/**/*.json').forEach(function(file) {
+        var group = read(file);
+        var id = stripLeadingUnderscores(file.match(/presets\/groups\/([^.]*)\.json/)[1]);
+        validate(file, group, groupSchema);
+
+        var t = {};
+        if (group.name) {
+            t.name = group.name;
+        }
+        if (group.description) {
+            t.description = group.description;
+        }
+        if (Object.keys(t).length > 0) {
+            tstrings.groups[id] = t;
+        }
+
+        groups[id] = group;
+    });
+    return groups;
 }
 
 

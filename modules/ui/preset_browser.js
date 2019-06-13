@@ -442,8 +442,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         listItem.each(function(item, index) {
             if (!item.geometry) return;
 
-            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, item.geometry);
-            var isHiddenPreset = !!hiddenPresetFeaturesId;
+            var hiddenPresetFeatures = context.features().isHiddenPreset(item.preset, item.geometry);
+            var isHiddenPreset = !!hiddenPresetFeatures;
 
             var button = d3_select(this).selectAll('button.choose');
 
@@ -451,9 +451,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             button.classed('disabled', isHiddenPreset);
 
             if (isHiddenPreset) {
-                var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
+                var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
                 var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
+                var tooltipObj = { features: hiddenPresetFeatures.title };
                 button.call(tooltip('dark')
                     .html(true)
                     .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))

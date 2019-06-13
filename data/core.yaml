@@ -668,51 +668,6 @@ en:
         title: "Panoramic Photos"
         tooltip: "360° photos"
   feature:
-    points:
-      description: Points
-      tooltip: "Points of Interest"
-    traffic_roads:
-      description: Traffic Roads
-      tooltip: "Highways, Streets, etc."
-    service_roads:
-      description: Service Roads
-      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
-    paths:
-      description: Paths
-      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
-    buildings:
-      description: Buildings
-      tooltip: "Buildings, Shelters, Garages, etc."
-    building_parts:
-      description: Building Parts
-      tooltip: "3D Building and Roof Components"
-    indoor:
-      description: Indoor Features
-      tooltip: "Rooms, Corridors, Stairwells, etc."
-    landuse:
-      description: Landuse Features
-      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
-    boundaries:
-      description: Boundaries
-      tooltip: "Administrative Boundaries"
-    water:
-      description: Water Features
-      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
-    rail:
-      description: Rail Features
-      tooltip: "Railways"
-    pistes:
-      description: Pistes
-      tooltip: "Ski Slopes, Sled Runs, Ice Skating Trails, etc."
-    aerialways:
-      description: Aerial Features
-      tooltip: "Chair Lifts, Gondolas, Zip Lines, etc."
-    power:
-      description: Power Features
-      tooltip: "Power Lines, Power Plants, Substations, etc."
-    past_future:
-      description: Past/Future Features
-      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
     others:
       description: Other Features
       tooltip: "Everything Else"

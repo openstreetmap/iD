@@ -17,7 +17,7 @@ import { uiCmd } from './cmd';
 export function uiMapData(context) {
     var key = t('map_data.key');
     var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
-    var features = context.features().keys();
+    var features = context.features().featuresArray();
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
@@ -35,18 +35,18 @@ export function uiMapData(context) {
 
 
     function showsFeature(d) {
-        return context.features().enabled(d);
+        return context.features().enabled(d.key);
     }
 
 
     function autoHiddenFeature(d) {
         if (d.type === 'kr_error') return context.errors().autoHidden(d);
-        return context.features().autoHidden(d);
+        return context.features().autoHidden(d.key);
     }
 
 
     function clickFeature(d) {
-        context.features().toggle(d);
+        context.features().toggle(d.key);
         update();
     }
 
@@ -585,7 +585,12 @@ export function uiMapData(context) {
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    var tip;
+                    if (name === 'feature') {
+                        tip = d.description;
+                    } else {
+                        tip = t(name + '.' + d + '.tooltip');
+                    }
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d)) {
                         var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
@@ -607,7 +612,12 @@ export function uiMapData(context) {
 
         label
             .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
+            .text(function(d) {
+                if (name === 'feature') {
+                    return d.title;
+                }
+                return t(name + '.' + d + '.description');
+            });
 
         // Update
         items = items

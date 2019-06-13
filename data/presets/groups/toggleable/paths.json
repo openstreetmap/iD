@@ -1,0 +1,19 @@
+{
+    "name": "Paths",
+    "description": "Sidewalks, Foot Paths, Cycle Paths, etc.",
+    "toggleable": true,
+    "matches": {
+        "geometry": ["line", "area"],
+        "allTags": {
+            "highway": [
+                "path",
+                "footway",
+                "cycleway",
+                "bridleway",
+                "pedestrian",
+                "corridor",
+                "steps"
+            ]
+        }
+    }
+}

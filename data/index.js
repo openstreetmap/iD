@@ -20,6 +20,7 @@ import { dataImagery } from './imagery.json';
 import { presets } from './presets/presets.json';
 import { defaults } from './presets/defaults.json';
 import { categories } from './presets/categories.json';
+import { groups } from './presets/groups.json';
 import { fields } from './presets/fields.json';
 
 import { geoArea as d3_geoArea } from 'd3-geo';
@@ -53,5 +54,6 @@ export var data = {
         defaults: defaults,
         categories: categories,
         fields: fields
-    }
+    },
+    groups: groups
 };
