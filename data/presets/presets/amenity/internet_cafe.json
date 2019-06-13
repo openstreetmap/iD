@@ -11,14 +11,14 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "opening_hours",
-        "smoking",
-        "outdoor_seating",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "opening_hours",
+        "outdoor_seating",
+        "payment_multi",
+        "phone",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

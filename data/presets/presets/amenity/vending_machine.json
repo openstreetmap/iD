@@ -7,8 +7,11 @@
         "currency_multi"
     ],
     "moreFields": [
+        "brand",
         "covered",
-        "indoor"
+        "height",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point"

@@ -10,6 +10,8 @@
         "payment_multi_fee"
     ],
     "moreFields": [
+        "colour",
+        "indoor",
         "lit"
     ],
     "geometry": [

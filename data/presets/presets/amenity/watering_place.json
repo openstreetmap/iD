@@ -3,7 +3,8 @@
     "fields": [
         "operator",
         "fee",
-        "payment_multi_fee"
+        "payment_multi_fee",
+        "opening_hours"
     ],
     "geometry": [
         "area",

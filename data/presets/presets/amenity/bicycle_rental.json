@@ -8,14 +8,14 @@
         "payment_multi_fee"
     ],
     "moreFields": [
-        "opening_hours",
         "address",
-        "website",
-        "phone",
         "email",
+        "covered",
         "fax",
-        "wheelchair",
-        "covered"
+        "opening_hours",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

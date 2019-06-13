@@ -5,11 +5,14 @@
         "brand",
         "opening_hours",
         "fee",
+        "payment_multi_fee",
         "service/bicycle"
     ],
     "moreFields": [
-        "payment_multi_fee",
-        "covered"
+        "colour",
+        "covered",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point",
