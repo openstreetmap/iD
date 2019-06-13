@@ -8,8 +8,9 @@
         "wheelchair"
     ],
     "moreFields": [
-        "lit",
-        "covered"
+        "covered",
+        "indoor",
+        "lit"
     ],
     "geometry": [
         "point"

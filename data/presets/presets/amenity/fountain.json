@@ -3,7 +3,13 @@
     "fields": [
         "name",
         "operator",
+        "height",
         "lit"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point",

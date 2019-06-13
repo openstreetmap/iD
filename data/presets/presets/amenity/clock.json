@@ -9,8 +9,11 @@
         "faces"
     ],
     "moreFields": [
+        "covered",
+        "height",
         "indoor",
-        "lit"
+        "lit",
+        "manufacturer"
     ],
     "geometry": [
         "point",

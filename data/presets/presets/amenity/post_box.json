@@ -7,6 +7,12 @@
         "ref"
     ],
     "moreFields": [
+        "access_simple",
+        "brand",
+        "covered",
+        "height",
+        "indoor",
+        "manufacturer",
         "wheelchair"
     ],
     "geometry": [
