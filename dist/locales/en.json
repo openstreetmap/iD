@@ -832,66 +832,6 @@
             }
         },
         "feature": {
-            "points": {
-                "description": "Points",
-                "tooltip": "Points of Interest"
-            },
-            "traffic_roads": {
-                "description": "Traffic Roads",
-                "tooltip": "Highways, Streets, etc."
-            },
-            "service_roads": {
-                "description": "Service Roads",
-                "tooltip": "Service Roads, Parking Aisles, Tracks, etc."
-            },
-            "paths": {
-                "description": "Paths",
-                "tooltip": "Sidewalks, Foot Paths, Cycle Paths, etc."
-            },
-            "buildings": {
-                "description": "Buildings",
-                "tooltip": "Buildings, Shelters, Garages, etc."
-            },
-            "building_parts": {
-                "description": "Building Parts",
-                "tooltip": "3D Building and Roof Components"
-            },
-            "indoor": {
-                "description": "Indoor Features",
-                "tooltip": "Rooms, Corridors, Stairwells, etc."
-            },
-            "landuse": {
-                "description": "Landuse Features",
-                "tooltip": "Forests, Farmland, Parks, Residential, Commercial, etc."
-            },
-            "boundaries": {
-                "description": "Boundaries",
-                "tooltip": "Administrative Boundaries"
-            },
-            "water": {
-                "description": "Water Features",
-                "tooltip": "Rivers, Lakes, Ponds, Basins, etc."
-            },
-            "rail": {
-                "description": "Rail Features",
-                "tooltip": "Railways"
-            },
-            "pistes": {
-                "description": "Pistes",
-                "tooltip": "Ski Slopes, Sled Runs, Ice Skating Trails, etc."
-            },
-            "aerialways": {
-                "description": "Aerial Features",
-                "tooltip": "Chair Lifts, Gondolas, Zip Lines, etc."
-            },
-            "power": {
-                "description": "Power Features",
-                "tooltip": "Power Lines, Power Plants, Substations, etc."
-            },
-            "past_future": {
-                "description": "Past/Future Features",
-                "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
-            },
             "others": {
                 "description": "Other Features",
                 "tooltip": "Everything Else"
@@ -2474,6 +2414,68 @@
                 },
                 "category-waterway": {
                     "name": "Waterways"
+                }
+            },
+            "groups": {
+                "toggleable/aerialways": {
+                    "name": "Aerial Features",
+                    "description": "Chair Lifts, Gondolas, Zip Lines, etc."
+                },
+                "toggleable/boundaries": {
+                    "name": "Boundaries",
+                    "description": "Administrative Boundaries"
+                },
+                "toggleable/building_parts": {
+                    "name": "Building Parts",
+                    "description": "3D Building and Roof Components"
+                },
+                "toggleable/buildings": {
+                    "name": "Buildings",
+                    "description": "Houses, Shelters, Garages, etc."
+                },
+                "toggleable/indoor": {
+                    "name": "Indoor Features",
+                    "description": "Rooms, Corridors, Stairwells, etc."
+                },
+                "toggleable/landuse": {
+                    "name": "Landuse Features",
+                    "description": "Forests, Farmland, Parks, Residential, Commercial, etc."
+                },
+                "toggleable/past_future": {
+                    "name": "Past/Future Features",
+                    "description": "Proposed, Construction, Abandoned, Demolished, etc."
+                },
+                "toggleable/paths": {
+                    "name": "Paths",
+                    "description": "Sidewalks, Foot Paths, Cycle Paths, etc."
+                },
+                "toggleable/pistes": {
+                    "name": "Pistes",
+                    "description": "Ski Slopes, Sled Runs, Ice Skating Trails, etc."
+                },
+                "toggleable/points": {
+                    "name": "Points",
+                    "description": "Points of Interest"
+                },
+                "toggleable/power": {
+                    "name": "Power Features",
+                    "description": "Power Lines, Power Plants, Substations, etc."
+                },
+                "toggleable/rail": {
+                    "name": "Railway Features",
+                    "description": "Rails, Train Signals, etc."
+                },
+                "toggleable/service_roads": {
+                    "name": "Service Roads",
+                    "description": "Driveways, Parking Aisles, Tracks, etc."
+                },
+                "toggleable/traffic_roads": {
+                    "name": "Traffic Roads",
+                    "description": "Highways, Streets, etc."
+                },
+                "toggleable/water": {
+                    "name": "Water Features",
+                    "description": "Rivers, Lakes, Ponds, Basins, etc."
                 }
             },
             "fields": {
