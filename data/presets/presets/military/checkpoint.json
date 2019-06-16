@@ -11,10 +11,6 @@
     "tags": {
         "military": "checkpoint"
     },
-    "addTags": {
-        "landuse": "military",
-        "military": "checkpoint"
-    },
     "terms": [
         "air force",
         "army",
