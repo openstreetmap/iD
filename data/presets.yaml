@@ -4279,17 +4279,17 @@ en:
         # highway=crossing
         name: Crossing
       highway/crossing/marked:
-        # crossing=marked
+        # 'highway=crossing, crossing=marked'
         name: Marked Crosswalk
         # 'terms: zebra crossing,marked crossing,crosswalk'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/crossing/marked-raised:
-        # 'crossing=marked, traffic_calming=table'
+        # 'highway=crossing, crossing=marked, traffic_calming=table'
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/crossing/unmarked:
-        # crossing=unmarked
+        # 'highway=crossing, crossing=unmarked'
         name: Unmarked Crossing
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/crossing/unmarked-raised:
