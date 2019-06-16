@@ -135,8 +135,7 @@ export function isMostlySquare(points) {
 
 
 export function selectMenuItem(operation) {
-    var selector = '.edit-menu .edit-menu-item-' + operation +
-        ', .radial-menu .radial-menu-item-' + operation;
+    var selector = '.edit-menu .edit-menu-item-' + operation;
     return d3_select(selector);
 }
 

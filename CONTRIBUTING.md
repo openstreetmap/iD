@@ -338,7 +338,7 @@ always, indented by the level of the tree:
 Just like HTML and JavaScript, 4 space soft tabs always.
 
 ```css
-.radial-menu-tooltip {
+.menu-tooltip {
     background: rgba(255, 255, 255, 0.8);
 }
 ```

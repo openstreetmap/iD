@@ -528,8 +528,6 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!_isTransformed) return false;
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         _isTransformed = false;
         if (context.inIntro()) {
@@ -909,7 +907,7 @@ export function rendererMap(context) {
 
     map.editableDataEnabled = function() {
         if (context.history().hasRestorableChanges()) return false;
-        
+
         var layer = context.layers().layer('osm');
         if (!layer || !layer.enabled()) return false;
 

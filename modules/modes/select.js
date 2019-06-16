@@ -25,9 +25,6 @@ import {
     utilEntitySelector, utilKeybinding
 } from '../util';
 
-// deprecation warning - Radial Menu to be removed in iD v3
-import { uiRadialMenu } from '../ui/radial_menu';
-
 
 var _relatedParent;
 
@@ -170,13 +167,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     function toggleMenu() {
-        // deprecation warning - Radial Menu to be removed in iD v3
-        if (d3_select('.edit-menu, .radial-menu').empty()) {
-            positionMenu();
-            showMenu();
-        } else {
-            closeMenu();
-        }
+        positionMenu();
+        showMenu();
     }
 
 
@@ -247,14 +239,7 @@ export function modeSelect(context, selectedIDs) {
         // don't allow delete if downgrade is available
         var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
-        if (isRadialMenu) {
-            operations = operations.slice(0,7);
-            operations.unshift(lastOperation);
-        } else {
-            operations.push(lastOperation);
-        }
+        operations.push(lastOperation);
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
@@ -278,10 +263,7 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding);
 
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        editMenu = isRadialMenu
-            ? uiRadialMenu(context, operations)
-            : uiEditMenu(context, operations);
+        editMenu = uiEditMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, _newFeature);
