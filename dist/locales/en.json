@@ -2856,6 +2856,10 @@
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diameter",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
@@ -4223,6 +4227,9 @@
                         "test": "Test",
                         "tourism": "Tourism"
                     }
+                },
+                "valve": {
+                    "label": "Type"
                 },
                 "vending": {
                     "label": "Types of Goods"
@@ -7166,6 +7173,10 @@
                 },
                 "man_made/pipeline/underground": {
                     "name": "Underground Pipeline",
+                    "terms": "oil,natural gas,water,sewer,sewage"
+                },
+                "man_made/pipeline/valve": {
+                    "name": "Pipeline Valve",
                     "terms": "oil,natural gas,water,sewer,sewage"
                 },
                 "man_made/pumping_station": {
