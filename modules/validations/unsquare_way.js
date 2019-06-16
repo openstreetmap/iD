@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { actionChangeTags } from '../actions/change_tags';
+//import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { geoOrthoCanOrthogonalize } from '../geo/ortho';
 import { utilDisplayLabel } from '../util';
@@ -95,6 +95,7 @@ export function validationUnsquareWay(context) {
                         window.setTimeout(function() { completionHandler(); }, 175);
                     }
                 }),
+                /*
                 new validationIssueFix({
                     title: t('issues.fix.tag_as_unsquare.title'),
                     onClick: function(context) {
@@ -108,6 +109,7 @@ export function validationUnsquareWay(context) {
                         );
                     }
                 })
+                */
             ]
         })];
 
