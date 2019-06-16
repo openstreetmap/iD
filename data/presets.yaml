@@ -512,6 +512,11 @@ en:
         label: Devices
         # devices field placeholder
         placeholder: '1, 2, 3...'
+      diameter:
+        # diameter=*
+        label: Diameter
+        # diameter field placeholder
+        placeholder: '5 mm, 10 cm, 15 in…'
       diaper:
         # diaper=*
         label: Diaper Changing Available
@@ -2170,6 +2175,9 @@ en:
           test: Test
           # usage=tourism
           tourism: Tourism
+      valve:
+        # valve=*
+        label: Type
       vending:
         # vending=*
         label: Types of Goods
@@ -2964,7 +2972,7 @@ en:
       amenity/post_box:
         # amenity=post_box
         name: Mailbox
-        # 'terms: letter,post'
+        # 'terms: letter drop,mail box,package drop,post box,postal box'
         terms: '<translate with synonyms or related terms for ''Mailbox'', separated by commas>'
       amenity/post_office:
         # amenity=post_office
@@ -4325,17 +4333,17 @@ en:
         # highway=crossing
         name: Crossing
       highway/crossing/marked:
-        # crossing=marked
+        # 'highway=crossing, crossing=marked'
         name: Marked Crosswalk
         # 'terms: zebra crossing,marked crossing,crosswalk'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
       highway/crossing/marked-raised:
-        # 'crossing=marked, traffic_calming=table'
+        # 'highway=crossing, crossing=marked, traffic_calming=table'
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/crossing/unmarked:
-        # crossing=unmarked
+        # 'highway=crossing, crossing=unmarked'
         name: Unmarked Crossing
         terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
       highway/crossing/unmarked-raised:
@@ -5526,6 +5534,11 @@ en:
         name: Underground Pipeline
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Underground Pipeline'', separated by commas>'
+      man_made/pipeline/valve:
+        # 'man_made=pipeline, pipeline=valve'
+        name: Pipeline Valve
+        # 'terms: oil,natural gas,water,sewer,sewage'
+        terms: '<translate with synonyms or related terms for ''Pipeline Valve'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
         name: Pumping Station

@@ -29,9 +29,5 @@
     "tags": {
         "man_made": "pier"
     },
-    "addTags": {
-        "highway": "footway",
-        "man_made": "pier"
-    },
     "name": "Pier"
 }

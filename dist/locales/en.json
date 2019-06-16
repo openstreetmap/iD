@@ -2923,6 +2923,10 @@
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diameter",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
@@ -4291,6 +4295,9 @@
                         "tourism": "Tourism"
                     }
                 },
+                "valve": {
+                    "label": "Type"
+                },
                 "vending": {
                     "label": "Types of Goods"
                 },
@@ -5029,7 +5036,7 @@
                 },
                 "amenity/post_box": {
                     "name": "Mailbox",
-                    "terms": "letter,post"
+                    "terms": "letter drop,mail box,package drop,post box,postal box"
                 },
                 "amenity/post_office": {
                     "name": "Post Office",
@@ -7233,6 +7240,10 @@
                 },
                 "man_made/pipeline/underground": {
                     "name": "Underground Pipeline",
+                    "terms": "oil,natural gas,water,sewer,sewage"
+                },
+                "man_made/pipeline/valve": {
+                    "name": "Pipeline Valve",
                     "terms": "oil,natural gas,water,sewer,sewage"
                 },
                 "man_made/pumping_station": {

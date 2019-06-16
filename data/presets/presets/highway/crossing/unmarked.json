@@ -8,6 +8,7 @@
         "vertex"
     ],
     "tags": {
+        "highway": "crossing",
         "crossing": "unmarked"
     },
     "addTags": {
