@@ -17,8 +17,7 @@
     "addTags": {
         "public_transport": "platform",
         "tram": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "railway": "platform"
     },
     "reference": {
         "key": "public_transport",

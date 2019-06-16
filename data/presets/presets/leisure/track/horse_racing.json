@@ -16,11 +16,6 @@
         "leisure": "track",
         "sport": "horse_racing"
     },
-    "addTags": {
-        "leisure": "track",
-        "sport": "horse_racing",
-        "highway": "bridleway"
-    },
     "terms": [
         "equestrian race track",
         "horse race betting",
