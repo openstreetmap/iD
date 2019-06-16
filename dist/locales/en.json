@@ -4962,7 +4962,7 @@
                 },
                 "amenity/post_box": {
                     "name": "Mailbox",
-                    "terms": "letter,post"
+                    "terms": "letter drop,mail box,package drop,post box,postal box"
                 },
                 "amenity/post_office": {
                     "name": "Post Office",

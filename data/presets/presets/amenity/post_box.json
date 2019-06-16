@@ -23,8 +23,11 @@
         "amenity": "post_box"
     },
     "terms": [
-        "letter",
-        "post"
+        "letter drop",
+        "mail box",
+        "package drop",
+        "post box",
+        "postal box"
     ],
     "name": "Mailbox"
 }
