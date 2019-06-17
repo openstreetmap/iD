@@ -5,7 +5,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { actionNoop } from '../actions/noop';
+//import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../geo';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
@@ -123,7 +123,7 @@ export function uiIssues(context) {
             .append('span')
             .attr('class', 'issue-message');
 
-
+        /*
         labelsEnter
             .append('span')
             .attr('class', 'issue-autofix')
@@ -147,7 +147,7 @@ export function uiIssues(context) {
                     })
                     .call(svgIcon('#iD-icon-wrench'));
             });
-
+        */
 
         // Update
         items = items
@@ -159,7 +159,7 @@ export function uiIssues(context) {
                 return d.message(context);
             });
 
-
+        /*
         // autofix
         var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
 
@@ -213,6 +213,7 @@ export function uiIssues(context) {
                 context.resumeChangeDispatch();
                 context.validator().validate();
             });
+        */
     }
 
 
