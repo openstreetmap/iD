@@ -12,13 +12,13 @@
         },
         "toolbar": {
             "inspect": "Vizsgálat",
+            "undo_redo": "Vissza / Mégis",
             "recent": "Legutóbbi",
             "favorites": "Kedvencek",
             "add_feature": "Elem hozzáadása"
         },
         "modes": {
             "add_feature": {
-                "title": "Egy elem hozzáadása",
                 "key": "Tab",
                 "result": "{count} eredmény",
                 "results": "{count} eredmény"
@@ -520,7 +520,6 @@
         },
         "geocoder": {
             "search": "Keresés a világban…",
-            "no_results_visible": "Nincs találat a térkép látható részén",
             "no_results_worldwide": "Nincs találat"
         },
         "geolocate": {
@@ -746,12 +745,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Elmentetlen változtatásaid vannak",
-            "description": "Szeretnéd visszaállítani az elmentetlen változtatásokat az előző munkamenetből?",
-            "restore": "Módosítások visszaállítása",
-            "reset": "Módosításaim elvetése"
-        },
         "save": {
             "title": "Mentés",
             "help": "Tekintsd át a változtatásaidat, és töltsd föl őket az OpenStreetMapbe, hogy más felhasználóknak is láthatóak legyenek.",
@@ -786,10 +779,6 @@
             }
         },
         "success": {
-            "just_edited": "Szerkesztetted az OpenStreetMapet!",
-            "thank_you": "Köszönjük, hogy jobbá tetted a térképet.",
-            "thank_you_location": "Köszönjük, hogy jobbá tetted a térképet {where} környékén.",
-            "help_html": "A változtatásaid pár percen belül megjelennek az OpenStreetMap-en. Más térképekre tovább tarthat a frissítések megérkezése.",
             "help_link_text": "Részletek",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F",
             "view_on_osm": "Változtatások megtekintése OSM-en",
@@ -804,12 +793,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Mégsem"
-        },
-        "splash": {
-            "welcome": "Üdvözöl az iD OpenStreetMap szerkesztőprogram",
-            "text": "Az iD egy barátságos, ám hatékony eszköz arra, hogy közreműködjünk a Föld legjobb ingyenes világtérképének szerkesztésében. Ez a(z) {version} verzió. További információkat a {website} weboldalon találsz, hibákat pedig itt jelenthetsz be: {github}.",
-            "walkthrough": "Gyakorlás indítása",
-            "start": "Szerkesztés most"
         },
         "source_switch": {
             "live": "élő",
@@ -2328,7 +2311,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -3011,7 +2993,6 @@
                     "placeholder": "Távolság egy tizedesig (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -3454,7 +3435,6 @@
                     "label": "Jelzőtábla"
                 },
                 "traffic_sign/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -3465,7 +3445,6 @@
                     "label": "Típus"
                 },
                 "traffic_signals/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -5350,14 +5329,6 @@
                     "name": "Laktanya",
                     "terms": "kaszárnya"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunker",
-                    "terms": "bunker,óvóhely"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Ellenőrzőpont",
-                    "terms": "checkpoint"
-                },
                 "landuse/military/danger_area": {
                     "name": "Veszélyes terület",
                     "terms": "veszély,veszélyes,terület"
@@ -5366,17 +5337,9 @@
                     "name": "Haditengerészeti támaszpont",
                     "terms": "tengerészeti,haditengerészeti,bázis"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nukleáris robbantási helyszín",
-                    "terms": "atomrobbantás, atombomba, atomkísérlet"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Akadálypálya",
                     "terms": "akadálypálya"
-                },
-                "landuse/military/office": {
-                    "name": "Katonai hivatal",
-                    "terms": "katonai,honvédségi hivatal"
                 },
                 "landuse/military/range": {
                     "name": "Katonai lőtér",

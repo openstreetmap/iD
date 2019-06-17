@@ -807,7 +807,12 @@
                 "tooltip": "Järnvägar"
             },
             "pistes": {
-                "description": "Pister"
+                "description": "Pister",
+                "tooltip": "Skidbackar, pulkabackar, Skridskobanor etc. "
+            },
+            "aerialways": {
+                "description": "Linbaneobjekt",
+                "tooltip": "Stollift, gondol, linbana etc."
             },
             "power": {
                 "description": "Kraftobjekt",
@@ -861,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "Du har osparade ändringar.",
-            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
+            "heading": "Du har osparade ändringar",
+            "description": "Vill du återställa osparade ändringar från föregående redigeringssession?",
             "restore": "Återställ mina ändringar",
-            "reset": "Ta bort mina ändringar"
+            "reset": "Släng mina ändringar"
         },
         "save": {
             "title": "Spara",
@@ -907,7 +912,7 @@
                 "format": "{place}{separator}{region}",
                 "separator": " i "
             },
-            "help_html": "Dina ändringar borde synas på OpenStreetMap om några minuter. Det kan ta längre tid för andra kartor att få uppdateringar.",
+            "help_html": "Dina ändringar borde synas på OpenStreetMap om några minuter. Det kan ta längre tid för andra kartor att bli uppdaterade.",
             "help_link_text": "Detaljer",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Sv:FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Visa ändringar på OSM",
@@ -924,8 +929,8 @@
             "cancel": "Avbryt"
         },
         "splash": {
-            "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
-            "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information besök {website} eller rapportera fel på {github}.",
+            "welcome": "Välkommen till iD OpenStreetMap-redigerare",
+            "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information, besök {website} eller rapportera fel på {github}.",
             "walkthrough": "Starta genomgången",
             "start": "Redigera nu"
         },
@@ -1630,14 +1635,22 @@
                 "title": "Nästan korsande",
                 "message": "{feature} är väldigt nära men inte ansluten till {feature2}",
                 "tip": "Hitta objekt som möjligtvis bör vara kopplade till andra närliggande objekt",
+                "self": {
+                    "message": "Ändarna för {feature} är väldigt nära varandra, men är inte sammankopplade"
+                },
                 "highway-highway": {
                     "reference": "Korsande vägar bör ha en gemensam korsningspunkt."
                 }
             },
             "close_nodes": {
                 "title": "Punkt väldigt nära varandra",
+                "tip": "Hitta redundanta och tätt liggande punkter",
                 "message": "Två punkter på {way} är väldigt nära varandra",
-                "reference": "Redundanta punkter på vägar bör slås ihop eller flyttas isär."
+                "reference": "Redundanta punkter på vägar bör slås ihop eller flyttas isär.",
+                "detached": {
+                    "message": "{feature} är för nära {feature2}",
+                    "reference": "Separata punkter för inte dela en plats."
+                }
             },
             "crossing_ways": {
                 "title": "Korsande vägar",
@@ -1727,6 +1740,20 @@
                     "reference": "Google-produkter är proprietära och får inte användas som referenser."
                 }
             },
+            "invalid_format": {
+                "title": "Felaktig formatering",
+                "tip": "Hitta taggar med oväntat format",
+                "email": {
+                    "message": "{feature} har en felaktig e-postadress.",
+                    "message_multi": "{feature} har flera felaktiga e-postadresser.",
+                    "reference": "E-postadresser måste vara på formen \"mottagare@exempel.se\"."
+                },
+                "website": {
+                    "message": "{feature} har en felaktig hemsideadress.",
+                    "message_multi": "{feature} har flera felaktiga hemsideadresser.",
+                    "reference": "Hemsideadresser bör inledas med \"http\" eller \"https\"."
+                }
+            },
             "missing_role": {
                 "title": "Saknar roller",
                 "message": "{member} har ingen roll i {relation}",
@@ -1761,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} har ofullständiga taggar",
                     "reference": "Vissa objekt bör har ytterligare taggar."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} ser ut som ett varumärke med taggar som inte följer standard.",
+                    "reference": "Alla objekt för samma varumärke bör taggas på samma sätt."
                 }
             },
             "private_data": {
@@ -2870,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -3646,7 +3677,7 @@
                     "placeholder": "Distans med en decimal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -4126,7 +4157,7 @@
                     "label": "Vägmärke"
                 },
                 "traffic_sign/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -4137,7 +4168,7 @@
                     "label": "Typ"
                 },
                 "traffic_signals/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -4171,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "Träd"
+                },
+                "trench": {
+                    "label": "Typ"
                 },
                 "trolley_wire": {
                     "label": "Frihängande strömkabel för vagnar"
@@ -6305,14 +6339,6 @@
                     "name": "Kasern",
                     "terms": "kesern, sovsal, logement, militär, soldat, förläggningsbyggnad, barack"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militär bunker",
-                    "terms": "Militär bunker, bunker, skyddsrum, stridsvärn, betongförsvarsnäste,  befästning, fort, kasematt, barrikad"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Kontrollpunkt",
-                    "terms": "Kontrollpunkt, kontrollstation, militär kontroll"
-                },
                 "landuse/military/danger_area": {
                     "name": "Farligt område",
                     "terms": "Farligt område, skjutbana, säkerhetszon, militärt skyddsområde, militärt övningsområde"
@@ -6321,17 +6347,9 @@
                     "name": "Marinbas",
                     "terms": "Marinbas, marint förband, marinen, flottan, amfibiekåren, Kustartilleriet, flottilj, flottbas, örlogsbas"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Område för kärnvapenprov",
-                    "terms": "Område för kärnvapenprov, kärnvapenprov, kärnvapen, vapentest"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Hinderbana",
                     "terms": "Hinderbana, hoppbana, hinderlöpning, hinderlopp"
-                },
-                "landuse/military/office": {
-                    "name": "Militärkontor",
-                    "terms": "militärkontor, flygvapen, armé, bas, värva, flotta, marin, rekrytera, rekrytering, soldat, krig, militär, försvar, befälskontor"
                 },
                 "landuse/military/range": {
                     "name": "Militärt övningsområde",
@@ -7257,6 +7275,9 @@
                 "place/village": {
                     "name": "Mindre samhälle",
                     "terms": "tätort, ort"
+                },
+                "playground": {
+                    "name": "Lekplatsutrustning"
                 },
                 "playground/balance_beam": {
                     "name": "Balansbom (lekplats)",
@@ -8623,13 +8644,6 @@
                 "description": "Gränser för flygfoto och fotograferingsdatum. Etiketter visas vid zoomnivå 13 och upp.",
                 "name": "DigitalGlobe Standard flygfotoålder"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Villkor & återkoppling"
-                },
-                "description": "DigitalGlobe-Vivid är en mosaik med optimal estetik och aktualitet för alla områden på jorden, 50 cm upplösning eller bättre och högst 20 månaders genomsnittlig ålder globalt.",
-                "name": "DigitalGlobe Vivid-bilder"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 cloudless - https://s2maps.eu av EOX IT Services GmbH (Innehåller modifierad data från Copernicus Sentinel 2017 & 2018)"
@@ -8664,6 +8678,20 @@
                 },
                 "description": "Satellit- eller flygfoton.",
                 "name": "Mapbox satellit"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Villkor & återkoppling"
+                },
+                "description": "Maxar Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den finns tillgänglig och Landsat för resten. Medelåldern är 2,31 år, med vissa områden uppdaterade 2 gånger per år.",
+                "name": "Maxar Premium-bilder (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Villkor & återkoppling"
+                },
+                "description": "Maxar Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den finns tillgänglig, för resten används Landsat. Medelåldern är 2,31 år, med vissa områden uppdaterade 2 gånger per år.",
+                "name": "Maxar Standard-bilder (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -8724,6 +8752,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Gul = Fritt tillgänglig kartdata (public domain) från US Census. Röd = Data ej hittad på OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Det senaste året av DOQQs från National Agriculture Imagery Program (NAIP) för varje stat i USA.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Väg: Grön ram = oklassificerad. Brun ram = bruksväg. Underlag: grus = ljusbrun fyllning, asfalt = svart, belagd = grå, mark = vit, betong = blå, gräs = grön. Säsongsöppen = vita streck",
@@ -8802,6 +8834,27 @@
                 },
                 "description": "Ortofoto-lager tillhandahållen av basemap.at. \"Efterträdare\" till geoimage.at imagery.",
                 "name": "basemap.at ortofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Noteringsöverdrag tillhandahållen av basemap.at.",
+                "name": "basemap.at Överdrag"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ytlager tillhandahållen av basemap.at.",
+                "name": "basemap.at Yta"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terränglager tillhandahållen av basemap.at.",
+                "name": "basemap.at Terräng"
             },
             "eufar-balaton": {
                 "attribution": {

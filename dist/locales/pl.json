@@ -867,7 +867,7 @@
         },
         "restore": {
             "heading": "Masz niezapisane zmiany",
-            "description": "Przywrócić niezapisane zmiany z poprzedniej sesji?",
+            "description": "Pzywrócić niezapisane zmiany z poprzedniej sesji?",
             "restore": "Przywróć moje zmiany",
             "reset": "Zapomnij moje zmiany"
         },
@@ -929,7 +929,7 @@
             "cancel": "Anuluj"
         },
         "splash": {
-            "welcome": "Witamy w iD, edytorze map OpenStreetMap",
+            "welcome": "Witaj w edytorze iD map OpenStreetMap",
             "text": "iD jest przyjaznym, ale i jednocześnie potężnym narzędziem, dzięki któremu możesz przyczynić się do rozwoju najlepszej wolnej mapy świata. To jest wersja {version}. Więcej informacji znajdziesz na {website}, a błędy zgłosisz na {github}.",
             "walkthrough": "Rozpocznij samouczek",
             "start": "Edytuj"
@@ -1261,7 +1261,7 @@
                     },
                     "360": {
                         "title": "Brakująca lokalna nazwa",
-                        "description": "Ten błąd występuje gdy:\n– jest nazwa w innym języku, ale brakuje \"name:pl=\" (najczęściej). Dodaj wtedy name:pl={var2}.\n– jest nazwa w innym języku \"name:xx=\", ale brakuje \"name=\"\n– nazwy dla domyślnego i lokalnego języka nie są takie same."
+                        "description": "Ten błąd występuje gdy:\n\n– jest nazwa w innym języku, ale brakuje \"name:pl=\" (najczęściej). Dodaj wtedy name:pl={var2}.\n\n– jest nazwa w innym języku \"name:xx=\", ale brakuje \"name=\"\n\n– nazwy dla domyślnego i lokalnego języka nie są takie same."
                     },
                     "370": {
                         "title": "Zdublowane obiekty",
@@ -1740,6 +1740,20 @@
                     "reference": "Produkty Google są prawnie zastrzeżone i nie mogą być używane jako źródła."
                 }
             },
+            "invalid_format": {
+                "title": "Nieprawidłowe formatowanie",
+                "tip": "Strony internetowe powinny zaczynać się od \"http://\" lub \"https://\", a adresy e-mail powinny być w formie \"nazwa@example.com\".",
+                "email": {
+                    "message": "{feature} ma niepoprawny format adresu e-mail.",
+                    "message_multi": "{feature} ma niepoprawny format adresów e-mail.",
+                    "reference": "Adres e-mail powinien być w formie \"nazwa@example.com\"."
+                },
+                "website": {
+                    "message": "{feature} ma niepoprawny format strony internetowej.",
+                    "message_multi": "{feature} ma niepoprawny format stron internetowych.",
+                    "reference": "Strony internetowe powinny zaczynać się od \"http://\" lub \"https://\"."
+                }
+            },
             "missing_role": {
                 "title": "Brakujące role",
                 "message": "{member} nie ma przypisanej roli w relacji {relation}",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} ma niepełny zestaw znaczników",
                     "reference": "Niektóre obiekty powinny mieć dodatkowe znaczniki."
+                },
+                "noncanonical_brand": {
+                    "message": "Obiektowi marki {feature} brakuje niektórych znaczników",
+                    "reference": "Wszystkie obiekty tej samej marki powinny być tak samo tagowane."
                 }
             },
             "private_data": {
@@ -2837,6 +2855,10 @@
                 "devices": {
                     "label": "Liczba urządzeń",
                     "placeholder": "1, 2, 3..."
+                },
+                "diameter": {
+                    "label": "Średnica",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
                 },
                 "diaper": {
                     "label": "Przewijak dla dzieci"
@@ -4185,6 +4207,9 @@
                 "trees": {
                     "label": "Drzewa"
                 },
+                "trench": {
+                    "label": "Rodzaj"
+                },
                 "trolley_wire": {
                     "label": "Trakcja trolejbusowa"
                 },
@@ -4202,6 +4227,9 @@
                         "test": "Testowy",
                         "tourism": "Turystyka"
                     }
+                },
+                "valve": {
+                    "label": "Rodzaj"
                 },
                 "vending": {
                     "label": "Rodzaje produktów"
@@ -4313,7 +4341,7 @@
                 },
                 "advertising/column": {
                     "name": "Słup z ogłoszeniami/reklamami",
-                    "terms": "reklamy,ogłoszenia"
+                    "terms": "słup ogłoszeniowy, ogłoszenia, reklamy"
                 },
                 "aerialway": {
                     "name": "Wyciąg narciarski"
@@ -4465,7 +4493,7 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Parking dla rowerów",
-                    "terms": "stojak,parking"
+                    "terms": "parking dla rowerów, parking rowerowy, stojaki dla rowerów, stojak dla rowerów, stojak na rowery, rowery"
                 },
                 "amenity/bicycle_parking/building": {
                     "name": "Garaż dla rowerów",
@@ -4489,7 +4517,7 @@
                 },
                 "amenity/biergarten": {
                     "name": "Ogródek piwny",
-                    "terms": "piwo,gorzałka,biergarten"
+                    "terms": "ogródek piwny, bar plażowy, beach bar"
                 },
                 "amenity/boat_rental": {
                     "name": "Wypożyczalnia łodzi",
@@ -4740,7 +4768,7 @@
                 },
                 "amenity/nightclub": {
                     "name": "Klub nocny",
-                    "terms": "klub dla dorosłych, striptease, striptiz"
+                    "terms": "klub nocny, klub muzyczny, dyskoteka, klub dla dorosłych, striptease, striptiz"
                 },
                 "amenity/nightclub/lgbtq": {
                     "name": "Klub nocny LGBT",
@@ -4796,6 +4824,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Kościół",
                     "terms": "katolicki,chrześcijaństwo,opactwo,bazylika,katedra,prezbiterium,kaplica,Dom Boży,dom modlitwy,misja,oratorium,parafia,sanktuarium,świątynia,tabernakulum"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Sala Królestwa Świadków Jehowy",
+                    "terms": "sala królestwa świadków jehowy, świadkowie jehowy, świątynia, dom modlitwy"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Kościół La Luz del Mundo",
+                    "terms": "kościół la luz del mundo, świątynia, dom modlitwy"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Miejsce spotkań Religijnego Towarzystwa Przyjaciół",
+                    "terms": "miejsce spotkań religijnego towarzystwa przyjaciół, dom spotkań, dom zgromadzeń, świątynia, kwakrów, kwakrzy"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Świątynia hinduistyczna",
@@ -5395,8 +5435,8 @@
                     "terms": "stodoła"
                 },
                 "building/boathouse": {
-                    "name": "Łódź mieszkalna",
-                    "terms": "houseboat,boathouse,na wodzie"
+                    "name": "Budynek dla łodzi",
+                    "terms": "budynek dla łodzi, budynek na łodzie"
                 },
                 "building/bungalow": {
                     "name": "Bungalow",
@@ -5477,8 +5517,8 @@
                     "terms": "szklarnia, cieplarnia, palmiarnia, palmiera, oranżeria, oranżerium, pomarańczarnia"
                 },
                 "building/hangar": {
-                    "name": "Hangar",
-                    "terms": "hangar"
+                    "name": "Budynek hangaru",
+                    "terms": "budynek hangaru, hangar"
                 },
                 "building/hospital": {
                     "name": "Budynek szpitala",
@@ -5513,7 +5553,7 @@
                     "terms": "meczet"
                 },
                 "building/pavilion": {
-                    "name": "Budynek pawilonu",
+                    "name": "Pawilon sportowy",
                     "terms": "pawilon,sporty"
                 },
                 "building/public": {
@@ -5569,8 +5609,8 @@
                     "terms": "świątynia,kościół"
                 },
                 "building/terrace": {
-                    "name": "Domki szeregowe",
-                    "terms": "szeregówki"
+                    "name": "Domy szeregowe",
+                    "terms": "domy szeregowe, domki szeregowe, szeregówki, dom szeregowy, szeregówka"
                 },
                 "building/train_station": {
                     "name": "Budynek dworca"
@@ -6497,14 +6537,6 @@
                     "name": "Koszary",
                     "terms": "koszary, wojsko, budynek wojskowy"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunkier wojskowy",
-                    "terms": "bunkier wojskowy, schron wojskowy"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Wojskowy punkt kontrolny",
-                    "terms": "wojskowy punkt kontrolny"
-                },
                 "landuse/military/danger_area": {
                     "name": "Obszar niebezpieczny",
                     "terms": "Obszar niebezpieczny"
@@ -6513,17 +6545,9 @@
                     "name": "Port wojenny",
                     "terms": "Port wojenny"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Doświadczalny poligon jądrowy",
-                    "terms": "atom,wybuch,bomba,detonacja,miejsce,poligon,jądrowy,nuklearny"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Tor przeszkód",
                     "terms": "tor przeszkód"
-                },
-                "landuse/military/office": {
-                    "name": "Biuro wojskowe",
-                    "terms": "biuro wojskowe,wku"
                 },
                 "landuse/military/range": {
                     "name": "Strzelnica wojskowa",
@@ -6626,9 +6650,17 @@
                     "name": "Szkoła tańca",
                     "terms": "szkoła tańca,tańce,tańczenie,taniec"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Pole do gry w disc golfa",
+                    "terms": "pole do gry w disc golfa, miejsce do gry w disc golfa, frisbee golf, frolf"
+                },
                 "leisure/dog_park": {
                     "name": "Wybieg dla psów",
                     "terms": "psi park, wybieg dla psów, park dla psów"
+                },
+                "leisure/escape_game": {
+                    "name": "Escape room",
+                    "terms": "escape room, escape game, quest room, pokój zagadek"
                 },
                 "leisure/firepit": {
                     "name": "Miejsce na ognisko",
@@ -7041,6 +7073,10 @@
                     "name": "Podziemny rurociąg",
                     "terms": "podziemny, rurociąg, gazociąg, kanały, kanalizacja, ścieki, ropa, gaz"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Zawór rurociągu",
+                    "terms": "olej,gaz ziemny,woda,ściek,ścieki"
+                },
                 "man_made/pumping_station": {
                     "name": "Przepompownia",
                     "terms": "przepompownia, pompy, pompa"
@@ -7140,6 +7176,26 @@
                 "manhole/telecom": {
                     "name": "Węzeł telekomunikacyjny",
                     "terms": "studzienka telekomunikacyjna"
+                },
+                "military/bunker": {
+                    "name": "Bunkier wojskowy",
+                    "terms": "siły powietrzne,armia,baza,lot,wojsko,ochrona,marynarka,żołnierze,wojna"
+                },
+                "military/checkpoint": {
+                    "name": "Wojskowy punkt kontrolny",
+                    "terms": "siły powietrzne,armia,baza,wojsko,ochrona,marynarka,żołnierze,wojna"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Doświadczalny poligon jądrowy",
+                    "terms": "atom,wybuch,bomba,detonacja,miejsce,poligon,jądrowy,nuklearny"
+                },
+                "military/office": {
+                    "name": "Biuro wojskowe",
+                    "terms": "siły powietrzne,armia,baza,wojsko,ochrona,marynarka,rekrutacja,rekrut,żołnierze,wojna,wku"
+                },
+                "military/trench": {
+                    "name": "Transzeja",
+                    "terms": "transzeja, okop, rów, wojsko"
                 },
                 "natural": {
                     "name": "Natura"
@@ -7294,7 +7350,7 @@
                 },
                 "natural/wetland": {
                     "name": "Bagno",
-                    "terms": "bagna, bagno, mokradło, mokradła"
+                    "terms": "bagno, bagna, mokradło, mokradła, szuwary, trzcinowisko, podmokłe łąki, namorzyny, torfowisko"
                 },
                 "natural/wood": {
                     "name": "Drzewa",
@@ -7330,6 +7386,10 @@
                 "office/association": {
                     "name": "Biuro organizacji non profit",
                     "terms": "biuro organizacji non-profit,stowarzyszenie,non-profit,nonprofit,organizacja,społeczeństwo,społeczność"
+                },
+                "office/bail_bond_agent": {
+                    "name": "Poręczyciel majątkowy",
+                    "terms": "poręczyciel majątkowy, agent obligacji, kaucja, obligacje, poręczenie majątkowe"
                 },
                 "office/charity": {
                     "name": "Organizacja charytatywna",
@@ -8378,6 +8438,10 @@
                     "name": "Sklep ze sprzętem medycznym",
                     "terms": "galanteria skórzana"
                 },
+                "shop/military_surplus": {
+                    "name": "Sklep ze sprzętem wojskowym",
+                    "terms": "sklep ze sprzętem wojskowym, sklep z militariami, militaria, sprzęt wojskowy, broń, zbroje, hełmy, paintball"
+                },
                 "shop/mobile_phone": {
                     "name": "Sklep z telefonami komórkowymi",
                     "terms": "telefony, telefony komórkowe, komórki, gsm"
@@ -8404,7 +8468,7 @@
                 },
                 "shop/newsagent": {
                     "name": "Sklep z prasą",
-                    "terms": "kolporter"
+                    "terms": "prasa, gazety, kolporter, inmedio"
                 },
                 "shop/nutrition_supplements": {
                     "name": "Sklep z suplementami diety",
@@ -9086,13 +9150,6 @@
                 "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 13 i wyższym.",
                 "name": "Datowanie zdjęć DigitalGlobe Standard"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Warunki użytkowania i opinia"
-                },
-                "description": "DigitalGlobe-Vivid to mozaika o optymalnej estetyce i powszechnym użyciu dla dowolnego miejsca na Ziemi, rozdzielczość 50 cm lub wyższa, zdjęcia nie starsze niż 20 miesięcy.",
-                "name": "DigitalGlobe Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 bezchmurne – https://s2maps.eu, EOX IT Services GmbH (zawiera zmodyfikowane dane Copernicus Sentinel 2017 i 2018)"
@@ -9127,6 +9184,20 @@
                 },
                 "description": "Zdjęcia satelitarne i lotnicze Mapbox.",
                 "name": "Mapbox Satellite (satelitarne)"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Maxar Premium to mozaika stworzona z podstawowych map Maxar z wybranymi obszarami uzupełnionymi o +Vivid lub innymi obrazami innych obszarów, rozdzielczość 50 cm lub wyższa, odświeżana częściej wraz z bieżącymi aktualizacjami.",
+                "name": "Maxar Premium (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Maxar Standard to wyselekcjonowane obrazy pokrywające 86% lądu na Ziemi, czasem nawet o rozdzielczości 30-60 cm na piksel, uzupełnione obrazami z Landsat. Średni wiek zdjeć to 2,31 roku, a niektóre obszary są uaktualniane dwa razy w roku.",
+                "name": "Maxar Standard (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9187,6 +9258,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Żółty = Dane public domain od US Census. Czerwony = Brak danych w OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Najnowszy rok DOQQ z Krajowego Programu Obrazowania Rolnictwa (NAIP) dla każdego sąsiadującego stanu w Stanach Zjednoczonych.",
+                "name": "Krajowy Program Obrazowania Rolnictwa"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Drogi:  Zielone obramowanie = czwartorzędna. Brązowe obramowanie = polna/leśna. Nawierzchnia: żwir = jasno-brązowe wypełnienie, asfalt = czarny, twarda = szary, grunt = biały, beton = niebieski, trawa = zielony. Dostępna sezonowo = białe paski",
@@ -9264,7 +9339,28 @@
                     "text": "basemap.at"
                 },
                 "description": "Warstwa ortofotomapy dostarczana przez basemap.at. \"Następca\" obrazowania z serwisu geoimage.at.",
-                "name": "basemap.at Orthofoto"
+                "name": "Ortofotomapa basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Nakładka z adnotacjami dostarczona przez basemap.at",
+                "name": "Nakładka basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Warstwa dostarczona przez basemap.at.",
+                "name": "basemap.at (powierzchnia)"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Warstwa dostarczona przez basemap.at.",
+                "name": "basemap.at (model wysokościowy)"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -9514,6 +9610,9 @@
             "talk-gh": {
                 "name": "Lista dyskusyjna Talk-gh",
                 "description": "Talk-gh to oficjalna lista dyskusyjna ghańskiej społeczności OSM"
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV"
             },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagaskar na Facebooku",

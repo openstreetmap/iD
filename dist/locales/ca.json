@@ -466,7 +466,6 @@
         },
         "geocoder": {
             "search": "Cerca mundialment...",
-            "no_results_visible": "No s'han trobat resultats a l'àrea visible del mapa",
             "no_results_worldwide": "No s'han trobat resultats"
         },
         "geolocate": {
@@ -638,12 +637,6 @@
                 "or": "O"
             }
         },
-        "restore": {
-            "heading": "Teniu canvis sense desar",
-            "description": "Voleu restaurar els canvis no desats de la sessió anterior?",
-            "restore": "Restaurar els meus canvis",
-            "reset": "Descartar els meus canvis"
-        },
         "save": {
             "title": "Desa",
             "help": "Reviseu els canvis i pugeu-los a l'OpenStreetMap, això els fa visibles als altres usuaris.",
@@ -678,10 +671,6 @@
             }
         },
         "success": {
-            "just_edited": "Acabeu d'editar l'OpenStreetMap!",
-            "thank_you": "Gràcies per millorar el mapa.",
-            "thank_you_location": "Gràcies per millorar el mapa prop de: {where}.",
-            "help_html": "Els vostres canvis haurien d'aparèixer a l'OpenStreetMap en pocs minuts. Els mapes d'altres llocs poden trigar més temps en rebre les actualitzacions.",
             "help_link_text": "Detalls",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Mostra els canvis a l'OSM",
@@ -696,12 +685,6 @@
         "confirm": {
             "okay": "D'acord",
             "cancel": "Cancel·lar"
-        },
-        "splash": {
-            "welcome": "Benvinguts a l'editor iD per a l'OpenStreetMap",
-            "text": "L'editor iD és una eina fàcil i potent per contribuir al millor mapa lliure del món. Aquesta és la versió {version}. Per obtenir més informació visiteu {website} i si voleu comunicar l'existència d'algun error feu-ho a {github}.",
-            "walkthrough": "Comenceu la visita guiada",
-            "start": "Editeu-lo ara"
         },
         "source_switch": {
             "live": "directe",
@@ -1716,7 +1699,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direcció",
                     "options": {
                         "backward": "Enrere",
                         "both": "Ambdós / Tots",
@@ -2316,7 +2298,6 @@
                     "label": "Tipus"
                 },
                 "railway/signal/direction": {
-                    "label": "Direcció",
                     "options": {
                         "backward": "Enrere",
                         "both": "Ambdós / Tots",
@@ -2699,7 +2680,6 @@
                     "label": "Tipus"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direcció",
                     "options": {
                         "backward": "Enrere",
                         "forward": "Endavant"
@@ -2709,7 +2689,6 @@
                     "label": "Tipus"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direcció",
                     "options": {
                         "backward": "Enrere",
                         "both": "Ambdós / Tots",
@@ -4085,20 +4064,11 @@
                 "landuse/military/barracks": {
                     "name": "Caserna militar"
                 },
-                "landuse/military/bunker": {
-                    "name": "Búnquer militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Punt de control"
-                },
                 "landuse/military/naval_base": {
                     "name": "Base naval"
                 },
                 "landuse/military/obstacle_course": {
                     "name": "Cursa d'obstacles"
-                },
-                "landuse/military/office": {
-                    "name": "Oficina militar"
                 },
                 "landuse/military/range": {
                     "name": "Terreny per a usos militars"

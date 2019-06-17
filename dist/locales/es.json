@@ -128,7 +128,7 @@
                 "not_closed": "Solo se pueden redondear líneas cerradas.",
                 "too_large": "No se puede redondear al no estar completamente visible.",
                 "connected_to_hidden": "No se puede redondear al estar conectado a un elemento oculto.",
-                "not_downloaded": "Esto no se puede hacer circular porque partes del mismo aún no se han descargado."
+                "not_downloaded": "Esto no se puede redondear porque partes del mismo aún no se han descargado."
             },
             "orthogonalize": {
                 "title": "Escuadrar",
@@ -188,8 +188,8 @@
                     "multiple": "No se pueden eliminar los elementos porque no se han descargado del todo."
                 },
                 "part_of_relation": {
-                    "single": "Este elemento no se puede eliminar porque es parte de una relación más grande. Primero debe eliminarlo de la relación.",
-                    "multiple": "Estos elementos no se pueden eliminar porque forman parte de relaciones más grandes. Primero debe eliminarlos de las relaciones."
+                    "single": "Este elemento no se puede eliminar porque es parte de una relación más grande. Primero debe quitarlo de la relación.",
+                    "multiple": "Estos elementos no se pueden eliminar porque forman parte de relaciones más grandes. Primero debe quitarlos de las relaciones."
                 },
                 "connected_to_hidden": {
                     "single": "Este elemento no se puede eliminar porque está conectado a un elemento oculto.",
@@ -207,9 +207,9 @@
             "downgrade": {
                 "title": "Degradar",
                 "description": {
-                    "building_address": "Eliminar todas las etiquetas que no sean de dirección ni de edificios.",
-                    "building": "Eliminar todas las etiquetas que no sean de edificios.",
-                    "address": "Eliminar todas las etiquetas que no sean de dirección."
+                    "building_address": "Quitar todas las etiquetas que no sean de dirección ni de edificios.",
+                    "building": "Quitar todas las etiquetas que no sean de edificios.",
+                    "address": "Quitar todas las etiquetas que no sean de dirección."
                 },
                 "annotation": {
                     "building": {
@@ -557,7 +557,7 @@
                 "key": "B",
                 "title": "Fondo",
                 "zoom": "Acercamiento",
-                "vintage": "Época",
+                "vintage": "Antigüedad",
                 "source": "Fuente",
                 "description": "Descripción",
                 "resolution": "Resolución",
@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "Buscar mundialmente…",
-            "no_results_visible": "No hay resultados en el área visible",
+            "no_results_visible": "No hay resultados en el área visible del mapa",
             "no_results_worldwide": "No hay resultados"
         },
         "geolocate": {
@@ -629,10 +629,10 @@
             "zoom_to": {
                 "key": "Z",
                 "title": "Acercar a esto",
-                "tooltip_feature": "Centre y amplíe el mapa para enfocarse en este elemento.",
-                "tooltip_note": "Centre y amplíe el mapa para enfocarse en esta nota.",
-                "tooltip_data": "Centre y amplíe el mapa para enfocarse en este dato.",
-                "tooltip_issue": "Centre y amplíe el mapa para enfocarse en este problema."
+                "tooltip_feature": "Centrar y ampliar el mapa para enfocarse en este elemento.",
+                "tooltip_note": "Centrar y ampliar el mapa para enfocarse en esta nota.",
+                "tooltip_data": "Centrar y ampliar el mapa para enfocarse en este dato.",
+                "tooltip_issue": "Centrar y ampliar el mapa para enfocarse en este problema."
             },
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
@@ -723,7 +723,7 @@
                     "title": "Datos de OpenStreetMap"
                 },
                 "notes": {
-                    "tooltip": "Datos de Notas de OpenStreetMap",
+                    "tooltip": "Datos de notas de OpenStreetMap",
                     "title": "Notas de OpenStreetMap"
                 },
                 "keepRight": {
@@ -846,9 +846,9 @@
             "custom_background": {
                 "tooltip": "Editar fondo personalizado",
                 "header": "Ajustes de fondo personalizado",
-                "instructions": "Ingrese una plantilla de URL de tesela. Los tokens válidos son:\n {zoom} o {z}, {x}, {y} para el esquema de tesela Z/X/Y\n {-y} o {ty} para las coordenadas Y invertidas estilo TMS\n {u} para el esquema cuádruple\n {switch: a, b, c} para multiplexación de servidores DNS\n\nEjemplo:\n{example}",
+                "instructions": "Ingrese una plantilla URL de tesela. Los tokens válidos son:\n {zoom} o {z}, {x}, {y} para el esquema de tesela Z/X/Y\n {-y} o {ty} para las coordenadas Y invertidas estilo TMS\n {u} para el esquema cuádruple\n {switch: a, b, c} para multiplexación de servidores DNS\n\nEjemplo:\n{example}",
                 "template": {
-                    "placeholder": "Ingrese una plantilla de url"
+                    "placeholder": "Ingrese una plantilla url"
                 }
             },
             "custom_data": {
@@ -867,7 +867,7 @@
         },
         "restore": {
             "heading": "Tiene cambios sin guardar",
-            "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?",
+            "description": " ¿Desea restaurar los cambios sin guardar de la sesión anterior?",
             "restore": "Restaurar mis cambios",
             "reset": "Descartar mis cambios"
         },
@@ -901,18 +901,18 @@
                 "location": "Este elemento fue movido por ambos, usted y {user}.",
                 "nodelist": "Los nodos fueron cambiados por ambos, usted y {user}.",
                 "memberlist": "Los miembros de la relación fueron cambiados por ambos, usted y {user}.",
-                "tags": "Usted cambió la etiqueta <b>{tag}</b> a «{local}» y el {user} la cambió a «{remote}»."
+                "tags": "Cambió la etiqueta <b>{tag}</b> a «{local}» y {user} la cambió a «{remote}»."
             }
         },
         "success": {
-            "just_edited": "¡Acabas de editar OpenStreetMap!",
+            "just_edited": "¡Acaba de editar OpenStreetMap!",
             "thank_you": "Gracias por mejorar el mapa.",
-            "thank_you_location": "Gracias por mejorar el mapa alrededor de {where}.",
+            "thank_you_location": "Gracias por mejorar el mapa cerca de {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Los cambios deberían aparecer en OpenStreetMap en unos minutos. Puede llevar más tiempo para que otros mapas reciban las actualizaciones.",
+            "help_html": "Los cambios deberían aparecer en OpenStreetMap en unos pocos minutos. Puede tomar más tiempo para que otros mapas reciban las actualizaciones.",
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F",
             "view_on_osm": "Ver cambios en OSM",
@@ -922,22 +922,22 @@
             "events": "Eventos",
             "languages": "Idiomas: {languages}",
             "missing": "¿Falta algo en esta lista?",
-            "tell_us": "¡Cuéntanos!"
+            "tell_us": "¡Cuéntenos!"
         },
         "confirm": {
             "okay": "Aceptar",
             "cancel": "Cancelar"
         },
         "splash": {
-            "welcome": "Bienvenido al editor iD de OpenStreetMap",
-            "text": "iD es una herramienta amigable pero potente para contribuir al mejor mapa libre del mundo. Esta es la versión {version}. Para obtener más información consulte {website} e informe de errores en {github}.",
+            "welcome": "Bienvenido al editor iD OpenStreetMap",
+            "text": "iD es una herramienta amigable pero poderosa para contribuir al mejor mapa libre del mundo. Esta es la versión {versión}. Para obtener más información consulte {website} e informe errores en {github}.",
             "walkthrough": "Iniciar el tutorial",
             "start": "Editar ahora"
         },
         "source_switch": {
-            "live": "conectado",
+            "live": "producción",
             "lose_changes": "Tiene cambios sin guardar. Cambiando de servidor de mapas serán descartados. ¿Está seguro que quiere cambiar de servidor?",
-            "dev": "dev"
+            "dev": "desarrollo"
         },
         "version": {
             "whats_new": "Novedades en iD {version}"
@@ -975,7 +975,7 @@
                 "error_types": {
                     "ow": {
                         "title": "Falta sentido único",
-                        "description": "A lo largo de esta sección de {highway}, {percentage}% de {num_trips} viajes registrados viajan de {from_node} a {to_node}. Puede que falte una etiqueta de \"oneway\" (sentido único)."
+                        "description": "A lo largo de esta sección de {highway}, {percentage}% de {num_trips} viajes registrados van de {from_node} a {to_node}. Puede que falte una etiqueta de \"oneway\" (sentido único)."
                     },
                     "mr": {
                         "title": "Falta geometría",
@@ -1360,9 +1360,9 @@
             "key": "H",
             "help": {
                 "title": "Ayuda",
-                "welcome": "Bienvenido al editor de iD para [OpenStreetMap](https://www.openstreetmap.org/), con el que hacer cambios en OpenStreetMap directamente desde el navegador web.",
+                "welcome": "Bienvenido al editor iD para [OpenStreetMap](https://www.openstreetmap.org/). Con este editor puede actualizar OpenStreetMap directamente desde el navegador web.",
                 "open_data_h": "Datos abiertos",
-                "open_data": "Los cambios realizados en el mapa serán visibles para cualquier usuario de OpenStreetMap. Estos cambios pueden basarse en datos de primera mano, inspección sobre el terreno o imágenes recogidas de fotografías aéreas o callejeras. [Está completamente prohibido](https://www.openstreetmap.org/copyright) copiar datos de fuentes comerciales como Google Maps.",
+                "open_data": "Los cambios realizados en el mapa serán visibles para cualquier usuario de OpenStreetMap. Estos cambios pueden basarse en conocimiento personal, inspección sobre el terreno o imágenes recogidas de fotografías aéreas o callejeras. [Está completamente prohibido](https://www.openstreetmap.org/copyright) copiar datos de fuentes comerciales como Google Maps.",
                 "before_start_h": "Antes de empezar",
                 "before_start": "Antes de empezar a editar se recomienda familiarizarse con este editor y OpenStreetMap. iD tiene una guía con la que aprender conceptos básicos de edición. Haga clic en «Iniciar el tutorial» para empezar un pequeño tutorial de unos 15 minutos.",
                 "open_source_h": "Código abierto",
@@ -1372,8 +1372,8 @@
             "overview": {
                 "title": "Resumen",
                 "navigation_h": "Navegación",
-                "navigation_drag": "Puede arrastrar el mapa presionando y manteniendo presionado el {leftclick} botón izquierdo del ratón y moviendo el ratón. También se puede usar las teclas de flecha `↓`, `↑`, `←`, `→` del teclado.",
-                "navigation_zoom": "Puede acercar o alejar girando la rueda del ratón o el panel táctil, o haciendo clic en los botones {plus} / {minus} al costado del mapa. También se puede usar las teclas `+`, `-` del teclado.",
+                "navigation_drag": "Puede arrastrar el mapa presionando y manteniendo presionado el {leftclick} botón izquierdo del mouse o ratón y moviendolo. También se puede usar las teclas de flecha `↓`, `↑`, `←`, `→` del teclado.",
+                "navigation_zoom": "Puede acercar o alejar girando la rueda del mouse o ratón o el panel táctil, o haciendo clic en los botones {plus} / {minus} al costado del mapa. También se puede usar las teclas `+`, `-` del teclado.",
                 "features_h": "Elementos del mapa",
                 "features": "Usamos la palabra *elementos* para describir las cosas que aparecen en el mapa, como carreteras, edificios o puntos de interés. Cualquier cosa en el mundo real se puede mapear como un elemento en OpenStreetMap. Los elementos del mapa están representadas en el mapa usando *puntos*, *líneas* o *áreas*.",
                 "nodes_ways": "En OpenStreetMap, los puntos a veces se llaman *nodos*, y las líneas y áreas a veces se llaman *vías*."
@@ -1385,7 +1385,7 @@
                 "select_right_click": "{rightclick} Haga clic con el botón derecho en un elemento para mostrar el menú de edición que muestra las opciones disponibles; como rotar, mover y eliminar.",
                 "multiselect_h": "Multiselección",
                 "multiselect_shift_click": "`{shift}`+{leftclick} clic izquierdo para seleccionar varios elementos juntos. Esto hace que sea más fácil mover o eliminar varios elementos.",
-                "multiselect_lasso": "Otra forma de seleccionar varios elementos es mantener presionada la tecla `{shift}`, luego mantener presionado el {leftclick} botón izquierdo del ratón y arrastrar el ratón para dibujar un lazo de selección. Se seleccionarán todos los puntos dentro del área del lazo.",
+                "multiselect_lasso": "Otra forma de seleccionar varios elementos es mantener presionada la tecla `{shift}`, luego mantener presionado el {leftclick} botón izquierdo del mouse o ratón y arrastrarlo para dibujar un lazo de selección. Se seleccionarán todos los puntos dentro del área del lazo.",
                 "undo_redo_h": "Deshacer y rehacer",
                 "undo_redo": "Las ediciones se almacenan localmente en el navegador hasta que elija guardarlas en el servidor de OpenStreetMap. Para deshacer ediciones, haga clic en el botón {undo} **Deshacer** y vuelva a hacerlas con clic en el botón {redo} **Rehacer**.",
                 "save_h": "Guardar",
@@ -1417,20 +1417,20 @@
                 "title": "Puntos",
                 "intro": "Los *puntos* se pueden usar para representar elementos como tiendas, restaurantes y monumentos. Marcan una ubicación específica y describen lo que hay allí.",
                 "add_point_h": "Creando puntos",
-                "add_point": "Para agregar un punto, haga clic en el botón {point} **Punto** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `1`. Esto cambiará el cursor del ratón a un símbolo de cruz.",
-                "add_point_finish": "Para colocar el nuevo punto en el mapa, coloque el cursor del mouse donde debe ir el punto, luego haga clic con el botón izquierdo del ratón o presione `Espacio`.",
+                "add_point": "Para agregar un punto, haga clic en el botón {point} **Punto** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `1`. Esto cambiará el cursor del mouse o ratón a un símbolo de cruz.",
+                "add_point_finish": "Para colocar el nuevo punto en el mapa, coloque el cursor del mouse donde debe ir el punto, luego haga clic con el botón izquierdo del mouse o ratón o presione `Espacio`.",
                 "move_point_h": "Moviendo puntos",
-                "move_point": "Para mover un punto, coloque el cursor del mouse sobre el punto y luego mantenga presionado el botón izquierdo del ratón mientras arrastra el punto a su nueva ubicación.",
+                "move_point": "Para mover un punto, coloque el cursor del mouse sobre el punto y luego mantenga presionado el botón izquierdo del mouse o ratón mientras arrastra el punto a su nueva ubicación.",
                 "delete_point_h": "Eliminando puntos",
-                "delete_point": "Está bien eliminar los elementos que no existen en el mundo real. Al eliminar un elemento de OpenStreetMap, se elimina del mapa que todos utilizan, por lo que debe asegurarse de que el elemento realmente no exista antes de eliminarlo.",
+                "delete_point": "Está bien eliminar los elementos que no existen en el mundo real. Al eliminar un elemento de OpenStreetMap, se quita del mapa que todos utilizan, por lo que debe asegurarse de que el elemento realmente no exista antes de eliminarlo.",
                 "delete_point_command": "Para eliminar un punto haga clic con el botón derecho en el punto para seleccionarlo y mostrar el menú de edición, para luego usar la opción de {delete} **Borrar*."
             },
             "lines": {
                 "title": "Líneas",
-                "intro": "*Las líneas* se utilizan para representar características tales como carreteras, ferrocarriles y ríos. Las líneas deben dibujarse en el centro del elemento que representan.",
+                "intro": "*Las líneas* se utilizan para representar elementos tales como carreteras, ferrocarriles y ríos. Las líneas deben dibujarse en el centro del elemento que representan.",
                 "add_line_h": "Creando líneas",
-                "add_line": "Para agregar una línea, haga clic en el botón {line} **Línea** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `2`. Esto cambiará el cursor del ratón a un símbolo de cruz.",
-                "add_line_draw": "A continuación, coloque el cursor del ratón donde debe comenzar la línea y haga clic con el botón izquierdo del mouse o presione `Espacio` para comenzar a colocar nodos a lo largo de la línea. Continúa colocando más nodos haciendo clic o presionando `Espacio`. Mientras dibuja, puede acercar o arrastrar el mapa para agregar más detalles.",
+                "add_line": "Para agregar una línea, haga clic en el botón {line} **Línea** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `2`. Esto cambiará el cursor del mouse o ratón a un símbolo de cruz.",
+                "add_line_draw": "A continuación, coloque el cursor del mouse o ratón donde debe comenzar la línea y haga clic con el botón izquierdo del mouse o presione `Espacio` para comenzar a colocar nodos a lo largo de la línea. Continúa colocando más nodos haciendo clic o presionando `Espacio`. Mientras dibuja, puede acercar o arrastrar el mapa para agregar más detalles.",
                 "add_line_finish": "Para terminar una línea, presione `{return}` o haga clic de nuevo en el último nodo.",
                 "modify_line_h": "Cambiando líneas",
                 "modify_line_dragnode": "A menudo verá líneas que no tienen la forma correcta, por ejemplo, una carretera que no coincide con las imágenes de fondo. Para ajustar la forma de una línea, primero haga clic con el {leftclick} botón izquierdo para seleccionarla. Todos los nodos de la línea se dibujarán como pequeños círculos. A continuación, puede arrastrar los nodos a ubicaciones mejores.",
@@ -1443,7 +1443,7 @@
                 "disconnect_line_h": "Desconectando líneas",
                 "disconnect_line_command": "Para desconectar una carretera de otro elemento haga clic con el botón derecho en el nodo fusionado y seleccione la opción {disconnect} **Desconectar** del menú de edición.",
                 "move_line_h": "Moviendo líneas",
-                "move_line_command": "Para mover una línea completa haga clic con el botón derecho en la línea y seleccione la opción {move} **Mover** del menú de edición. A continuación, mueva el ratón y haga clic con el {leftclic} botón izquierdo para colocar la línea en una nueva ubicación.",
+                "move_line_command": "Para mover una línea completa haga clic con el botón derecho en la línea y seleccione la opción {move} **Mover** del menú de edición. A continuación, mueva el mouse o ratón y haga clic con el {leftclic} botón izquierdo para colocar la línea en una nueva ubicación.",
                 "move_line_connected": "Las líneas que están conectadas a otros elementos permanecerán conectadas a mientras mueva la línea a una nueva ubicación. iD puede evitar que mueva una línea a través de otra línea conectada.",
                 "delete_line_h": "Eliminando líneas",
                 "delete_line": "Si una línea esta completamente incorrecta, por ejemplo, una ruta que no existe en el mundo real, está bien borrarla. Tenga cuidado al eliminar elementos: las imágenes de fondo que está utilizando podrían estar desactualizadas, y una carretera que parece estar mal podría simplemente estar recién construida.",
@@ -1455,8 +1455,8 @@
                 "point_or_area_h": "¿Puntos o áreas?",
                 "point_or_area": "Muchos elementos se pueden representar como puntos o áreas. Debe mapear los edificios y los contornos de la propiedad como áreas siempre que sea posible. Coloque puntos dentro del área del edificio para representar negocios, comodidades y otros elementos ubicados dentro del edificio.",
                 "add_area_h": "Agregar áreas",
-                "add_area_command": "Para agregar un área, haga clic en el botón {area} **Área** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `3`. Esto cambiará el cursor del ratón a un símbolo de cruz.",
-                "add_area_draw": "A continuación, coloque el cursor del ratón en una de las esquinas del elemento y haga clic con el botón izquierdo o presione `Espacio` para comenzar a colocar nodos alrededor del borde exterior del área. Continúe colocando más nodos haciendo clic o presionando `Espacio`. Mientras dibuja, puede acercar o arrastrar el mapa para agregar más detalles.",
+                "add_area_command": "Para agregar un área, haga clic en el botón {area} **Área** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `3`. Esto cambiará el cursor del mouse o ratón a un símbolo de cruz.",
+                "add_area_draw": "A continuación, coloque el cursor del mouse o ratón en una de las esquinas del elemento y haga clic con el botón izquierdo o presione `Espacio` para comenzar a colocar nodos alrededor del borde exterior del área. Continúe colocando más nodos haciendo clic o presionando `Espacio`. Mientras dibuja, puede acercar o arrastrar el mapa para agregar más detalles.",
                 "add_area_finish": "Para terminar un área, presione `{return}` o haga clic nuevamente en el primer o último nodo.",
                 "square_area_h": "Escuadrar esquinas",
                 "square_area_command": "Muchos elementos de área como edificios tienen esquinas cuadradas. Para escuadrar las esquinas de un área, haga clic con el botón derecho en el borde del área y seleccione el comando {orthogonalize} **Escuadrar** en el menú de edición.",
@@ -1473,7 +1473,7 @@
                 "edit_relation_h": "Edición de relaciones",
                 "edit_relation": "En la parte inferior del editor de elementos, puede expandir la sección \"Todas las relaciones\" para ver si el elemento seleccionado es miembro de alguna relación. A continuación, puede hacer clic en la relación para seleccionarla y editarla.",
                 "edit_relation_add": "Para agregar un elemento a una relación, seleccione el elemento y luego haga clic en el botón {plus} agregar en la sección \"Todas las relaciones\" del editor de funciones. Puede elegir de una lista de relaciones cercanas, o elegir la opción \"Nueva relación...\".",
-                "edit_relation_delete": "También puede hacer clic en el botón {delete} **Eliminar** para eliminar el elemento seleccionado de la relación. Si elimina todos los miembros de una relación, la relación se eliminará automáticamente.",
+                "edit_relation_delete": "También puede hacer clic en el botón {delete} **Eliminar** para quitar el elemento seleccionado de la relación. Si quita todos los miembros de una relación, la relación se eliminará automáticamente.",
                 "maintain_relation_h": "Mantener relaciones",
                 "maintain_relation": "Por lo general iD intentará conservar las relaciones automáticamente mientras edita, pero hay que tener cuidado al reemplazar elementos que podrían ser miembros de una relación. Por ejemplo, si elimina una sección de la carretera reemplazándola por un tramo nuevo hay que vincular las relaciones (rutas, restricciones de giro, etc.) y dejarlas como la original.",
                 "relation_types_h": "Tipos de relación",
@@ -1496,8 +1496,8 @@
                 "title": "Notas",
                 "intro": "Las *Notas* se usan para a alertar a otros usuarios que un elemento debe ser corregido o requiere atención. Las notas señalan una ubicación específica en el mapa. Para ver las notas existentes o añadir nuevas, haga clic en el panel {data} **Datos del mapa** para activar la capa de notas de OpenStreetMap.",
                 "add_note_h": "Añadiendo notas",
-                "add_note": "Para agregar una nueva nota, haga clic en el botón {note} **Nota** en la barra de herramientas sobre el mapa, o presione la tecla de atajo `4`. Esto cambiará el cursor del ratón a un símbolo de cruz. Para colocar la nueva nota en el mapa, coloque el cursor del mouse donde debe ir la nota, luego haga clic con el {leftclick} botón izquierdo del ratón o presione `Espacio`.",
-                "move_note": "Solo se pueden mover las notas nuevas. Para mover una nota, coloque el cursor del ratón sobre la nueva nota, luego presione y mantenga presionado el {leftclick} botón izquierdo del ratón mientras arrastra la nota a su nueva ubicación.",
+                "add_note": "Para agregar una nueva nota, haga clic en el botón {note} **Nota** en la barra de herramientas sobre el mapa, o presione la tecla de atajo `4`. Esto cambiará el cursor del mouse o ratón a un símbolo de cruz. Para colocar la nueva nota en el mapa, coloque el cursor del mouse donde debe ir la nota, luego haga clic con el {leftclick} botón izquierdo o presione `Espacio`.",
+                "move_note": "Solo se pueden mover las notas nuevas. Para mover una nota, coloque el cursor del mouse o ratón sobre la nueva nota, luego presione y mantenga presionado el {leftclick} botón izquierdo mientras arrastra la nota a su nueva ubicación.",
                 "update_note_h": "Cierre, reapertura y comentarios",
                 "update_note": "Una nota existente se puede actualizar cerrándola, volviendo a abrirla o añadiéndole un comentario. Cerrar una nota indica que el problema se ha resuelto. La reapertura de una nota indica que el problema original no está resuelto.",
                 "save_note_h": "Guardar notas",
@@ -1511,7 +1511,7 @@
                 "sources": "De forma predeterminada, se elige la capa de satélite [Bing Maps](https://www.bing.com/maps/) como imagen de fondo. Dependiendo de dónde esté editando, otras fuentes de imágenes estarán disponibles. Algunas pueden ser más recientes o tener una resolución más alta, por lo que siempre es útil verificar qué capa es la mejor para usar como referencia de mapeo.",
                 "offsets_h": "Ajuste de desplazamiento de imágenes",
                 "offset": "Las imágenes a veces están ligeramente desplazadas con respecto a los datos precisos del mapa. Si ve una gran cantidad de carreteras o edificios desplazados de las imágenes de fondo, puede ser que las imágenes sean incorrectas, por lo que no las mueva todos para que coincidan con el fondo. En su lugar, puede ajustar el fondo para que coincida con los datos existentes al expandir la sección \"Ajustar desplazamiento de imágenes\" en la parte inferior del panel de Configuración de fondo.",
-                "offset_change": "Haga clic en los triángulos pequeños para ajustar el desplazamiento de imágenes en pequeños pasos, o mantenga presionado el {leftclick} botón izquierdo del ratón y arrastre dentro del cuadrado gris para deslizar las imágenes hasta estar alineadas."
+                "offset_change": "Haga clic en los triángulos pequeños para ajustar el desplazamiento de imágenes en pequeños pasos, o mantenga presionado el {leftclick} botón izquierdo del mouse o ratón y arrastre dentro del cuadrado gris para deslizar las imágenes hasta estar alineadas."
             },
             "streetlevel": {
                 "title": "Fotos a nivel de calle",
@@ -1525,7 +1525,7 @@
                 "title": "Trazados GPS",
                 "intro": "os rastros de GPS recopilados son una valiosa fuente de datos para OpenStreetMap. Este editor admite archivos * .gpx *, * .geojson * y * .kml* en su computadora local. Puede recopilar rastros de GPS con un teléfono inteligente, reloj deportivo u otro dispositivo GPS.",
                 "survey": "Para obtener información sobre cómo realizar un relevamiento con GPS, lea [Mapeo con un teléfono inteligente, GPS o papel](http://learnosm.org/es/mobile-mapping/).",
-                "using_h": "Utilizando trazados GPS",
+                "using_h": "Utilizando trazas GPS",
                 "using": "Para usar una traza de GPS para el mapeo, arrastre y suelte el archivo de datos en el editor de mapas. Si lo reconoce, lo dibujará en el mapa como una línea violeta brillante. Haga clic en el panel {data} **Datos del mapa** en el lateral del mapa para habilitar, deshabilitar o ampliar sus datos de GPS.",
                 "tracing": "La traza de GPS no se envía a OpenStreetMap; la mejor manera de usarla es dibujar en el mapa usándola como una guía para los nuevos elementos que agregue.",
                 "upload": "También puede [cargar los datos del GPS a OpenStreetMap](https://www.openstreetmap.org/trace/create) para que los usen otros usuarios."
@@ -1740,6 +1740,20 @@
                     "reference": "Los productos de Google son propietarios y no deben utilizarse como referencias."
                 }
             },
+            "invalid_format": {
+                "title": "Formato no válido",
+                "tip": "Encuentre etiquetas con formatos inesperados",
+                "email": {
+                    "message": "{feature} tiene un email no válido.",
+                    "message_multi": "{feature} tiene varias direcciones de email no válidas.",
+                    "reference": "Las direcciones de email deben verse como \"usuario@ejemplo.com\"."
+                },
+                "website": {
+                    "message": "{feature} tiene un sitio web no válido",
+                    "message_multi": "{feature} tiene múltiples sitios web no válidos.",
+                    "reference": "Los sitios web deben comenzar con \"http\" o \"https\"."
+                }
+            },
             "missing_role": {
                 "title": "Roles faltantes",
                 "message": "{member} no tiene ningún rol dentro de {relation}",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} tiene etiquetas incompletas",
                     "reference": "Algunas elementos deben tener etiquetas adicionales."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} se ve como una marca con etiquetas no estándar",
+                    "reference": "Todos los elementos de la misma marca deben etiquetarse de la misma manera."
                 }
             },
             "private_data": {
@@ -1870,21 +1888,21 @@
                     "annotation": "Etiquetas movidas."
                 },
                 "remove_from_relation": {
-                    "title": "Eliminar de la relación"
+                    "title": "Quitar de la relación"
                 },
                 "remove_generic_name": {
                     "title": "Quitar el nombre",
-                    "annotation": "Se eliminó un nombre genérico."
+                    "annotation": "Se quitó un nombre genérico."
                 },
                 "remove_private_info": {
-                    "annotation": "Se eliminó la información privada."
+                    "annotation": "Se quitó la información privada."
                 },
                 "remove_proprietary_data": {
-                    "title": "Eliminar cualquier dato propietario"
+                    "title": "Quitar cualquier dato propietario"
                 },
                 "remove_tag": {
                     "title": "Quitar la etiqueta",
-                    "annotation": "Etiqueta eliminada."
+                    "annotation": "Etiqueta quitada."
                 },
                 "remove_tags": {
                     "title": "Quitar las etiquetas"
@@ -2072,18 +2090,18 @@
             },
             "welcome": {
                 "title": "Bienvenido",
-                "welcome": "Bienvenido al tutorial con que que aprender conceptos básicos de edición en OpenStreetMap.",
+                "welcome": "¡Bienvenido! Este tutorial enseñará los conceptos básicos de edición en OpenStreetMap.",
                 "practice": "Los datos aquí mostrados son de práctica y no se guardará nada de lo editado en el tutorial.",
                 "words": "En el tutorial utilizaremos palabras en *cursiva* para enseñar y definir conceptos (y palabras) nuevas.",
-                "mouse": "Se puede utilizar cualquier dispositivo de entrada para editar el mapa, pero en esta guía se explica cómo editar con un ratón de dos botones. **Conecte un ratón si así lo desea y pulse Aceptar.**",
+                "mouse": "Se puede utilizar cualquier dispositivo de entrada para editar el mapa, pero en esta guía se explica cómo editar con un ratón de dos botones. **Conecte un mouse o ratón si así lo desea y pulse Aceptar.**",
                 "leftclick": "Cuando este tutorial le pida que haga clic o doble clic, queremos decir con el botón izquierdo. En un trackpad puede ser un toque de un solo clic o un solo dedo. **Haga clic con el botón izquierdo {num} veces.**",
                 "rightclick": "A veces también pediremos que haga clic con el botón derecho del ratón. Esto puede ser lo mismo que Control+clic, o el toque de dos dedos en un trackpad. Su teclado puede incluso tener una tecla 'menú' que funciona como el botón derecho del ratón. **Haga clic con el botón derecho {num} veces.**",
                 "chapters": "¡Hasta aquí todo bien! Puede utilizar los botones de abajo para saltar capítulos en cualquier momento o para reiniciar un capítulo si se queda trabado. ¡Vamos a empezar! **Haga clic en '{next}' para continuar.**"
             },
             "navigation": {
                 "title": "Navegación",
-                "drag": "El área del mapa principal muestra los datos de OpenStreetMap encima de un fondo.{br}Puede arrastrar el mapa manteniendo presionado el botón izquierdo del ratón mientras mueve el ratón alrededor. También puede utilizar las teclas de flechas del teclado. **¡Arrastre el mapa!**",
-                "zoom": "Puede acercar o alejar desplazándose con la rueda del ratón o el trackpad, o haciendo clic en los botones {plus} / {minus}. **¡Acercar el mapa!**",
+                "drag": "El área del mapa principal muestra los datos de OpenStreetMap encima de un fondo.{br}Puede arrastrar el mapa manteniendo presionado el botón izquierdo del mouse o ratón mientras lo mueve alrededor. También puede utilizar las teclas de flechas del teclado. **¡Arrastre el mapa!**",
+                "zoom": "Puede acercar o alejar desplazándose con la rueda del mouse o ratón o trackpad, o haciendo clic en los botones {plus} / {minus}. **¡Acercar el mapa!**",
                 "features": "Utilizamos la palabra *elementos* para describir las cosas que aparecen en el mapa. Cualquier cosa en el mundo real puede ser mapeada como un elemento en OpenStreetMap.",
                 "points_lines_areas": "Las elementos del mapa se representan usando *puntos, líneas o áreas.*",
                 "nodes_ways": "En OpenStreetMap, los puntos a veces se llaman *nodos*, y las líneas y áreas a veces se llaman *vías*.",
@@ -2102,7 +2120,7 @@
             "points": {
                 "title": "Puntos",
                 "add_point": "Los *puntos* se pueden utilizar para representar elementos tales como tiendas, restaurantes, oficinas, oficios y monumentos.{br}Estos marcan una ubicación específica y describen lo que hay allí. **Haga clic en el botón punto {button} para añadir un nuevo punto.**",
-                "place_point": "Para situar el nuevo punto en el mapa, coloque el cursor del ratón donde debe ir el punto, luego haga clic con el botón izquierdo o presione la barra espaciadora. **Mueva el puntero del ratón sobre este edificio, luego haga clic con el botón izquierdo del ratón o presione la barra espaciadora.**",
+                "place_point": "Para situar el nuevo punto en el mapa, coloque el cursor del mouse o ratón donde debe ir el punto, luego haga clic con el botón izquierdo o presione la barra espaciadora. **Mueva el puntero sobre este edificio, luego haga clic con el botón izquierdo o presione la barra espaciadora.**",
                 "search_cafe": "Hay muchos elementos diferentes que pueden ser representados por puntos. El punto que acaba de añadir es una cafetería. **Busque '{preset}'.**",
                 "choose_cafe": "** Elija {preset} de la lista.**",
                 "feature_editor": "El punto ahora está marcado como una cafetería. Utilizando el editor de elementos podemos añadir más información sobre la cafetería.",
@@ -2144,8 +2162,8 @@
                 "did_name_road": "¡Se ve bien! A continuación aprenderemos a actualizar la forma de una línea.",
                 "update_line": "A veces necesitará cambiar la forma de una línea existente. Aquí hay un camino que no parece del todo correcto.",
                 "add_node": "Podemos añadir algunos nodos a esta línea para mejorar su forma. Una forma de añadir un nodo es hacer doble clic en la línea donde desea añadir un nodo. **Haga doble clic en la línea para crear un nuevo nodo.**",
-                "start_drag_endpoint": "Cuando se selecciona una línea, puede arrastrar cualquiera de sus nodos haciendo clic y manteniendo presionado el botón izquierdo del ratón mientras arrastra. **Arrastre el punto final al lugar donde estos caminos deben intersectarse.**",
-                "finish_drag_endpoint": "Este lugar se ve bien. **Suelte el botón izquierdo del ratón para terminar de arrastrar.**",
+                "start_drag_endpoint": "Cuando se selecciona una línea, puede arrastrar cualquiera de sus nodos haciendo clic y manteniendo presionado el botón izquierdo del mouse o ratón mientras arrastra. **Arrastre el punto final al lugar donde estos caminos deben intersectarse.**",
+                "finish_drag_endpoint": "Este lugar se ve bien. **Suelte el botón izquierdo del mouse o  ratón para terminar de arrastrar.**",
                 "start_drag_midpoint": "Pequeños triángulos se dibujan en los *puntos intermedios* entre los nodos. Otra forma de crear un nuevo nodo es arrastrar un punto intermedio a una nueva ubicación. **Arrastre el triángulo del punto intermedio para crear un nuevo nodo a lo largo de la curva del camino.**",
                 "continue_drag_midpoint": "¡Esta línea se ve mucho mejor! Continúe ajustando esta línea haciendo doble clic o arrastrando puntos intermedios hasta que la curva coincida con la forma del camino. **Cuando esté satisfecho con la apariencia de la línea, haga clic en Aceptar.**",
                 "delete_lines": "Está bien eliminar líneas de caminos que no existen en el mundo real.{br}He aquí un ejemplo en el que la ciudad planeó una {street} pero nunca la construyó. Podemos mejorar esta parte del mapa eliminando las líneas extra.",
@@ -2180,12 +2198,12 @@
                 "choose_tank": "**Elija {preset} de la lista.**",
                 "rightclick_tank": "**Haga clic con el botón derecho para seleccionar el tanque de almacenamiento que creó y mostrar el menú de edición.**",
                 "circle_tank": "**Haga clic en el botón {button} para hacer que el tanque sea un círculo.**",
-                "retry_circle": "No hizo clic en el botón Circularizar.  Inténtalo de nuevo.",
+                "retry_circle": "No hizo clic en el botón Redondear. Inténtelo de nuevo.",
                 "play": "Bien hecho, practique trazando unos cuantos edificios más y pruebe alguna de las opciones del menú de edición. **Cuando quiera continuar con el siguiente capítulo, haga clic en «{next}».**"
             },
             "startediting": {
                 "title": "Empezar a editar",
-                "help": "Ahora está listo para editar OpenStreetMap.{br}Para acceder a la documentación o volver al tutorial presione el botón {button} o pulsando la tecla «{key}».",
+                "help": "Ahora está listo para editar OpenStreetMap.{br}Para acceder a la documentación o volver al tutorial presione el botón {button} o pulse la tecla «{key}».",
                 "shortcuts": "Se puede ver una lista de órdenes junto con sus atajos de teclado pulsando la tecla «{key}».",
                 "save": "¡No olvide guardar sus cambios regularmente!",
                 "start": "Empezar a mapear"
@@ -2195,7 +2213,7 @@
             "title": "Atajos del teclado",
             "tooltip": "Muestra la pantalla de atajos del teclado.",
             "toggle": {
-                "key": "¿?"
+                "key": "?"
             },
             "key": {
                 "alt": "Alt",
@@ -2292,13 +2310,13 @@
                     "rotate": "Rota los elementos seleccionados",
                     "orthogonalize": "Escuadrar esquinas de una línea o área",
                     "straighten": "Enderezar una linea o puntos",
-                    "circularize": "Circulariza una línea o área cerrada",
+                    "circularize": "Redondear una línea cerrada o área",
                     "reflect_long": "Refleja los elementos a través del eje más largo",
                     "reflect_short": "Refleja los elementos a través del eje más corto",
                     "delete": "Elimina elementos seleccionados"
                 },
                 "commands": {
-                    "title": "Órdenes",
+                    "title": "Comandos",
                     "copy": "Copia elementos seleccionados",
                     "paste": "Pega elementos seleccionados",
                     "undo": "Deshace la última acción",
@@ -2460,7 +2478,7 @@
                         "hamlet": "Aldea / Caserío",
                         "housename": "Nombre de la casa",
                         "housenumber": "123",
-                        "housenumber!jp": "Nro. de edificio / Nro. de lote - Japón",
+                        "housenumber!jp": "Nro. de edificio / Nro. de lote",
                         "neighbourhood": "Barrio pequeño",
                         "neighbourhood!jp": "Chōme / Aza / Koaza - Japón",
                         "place": "Lugar",
@@ -2883,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Hacia atrás",
                         "both": "Ambos / Todos",
@@ -3659,7 +3677,7 @@
                     "placeholder": "Distancia a un decimal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Hacia atrás",
                         "both": "Ambos / Todos",
@@ -4139,7 +4157,7 @@
                     "label": "Señal de tránsito"
                 },
                 "traffic_sign/direction": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Hacia atrás",
                         "both": "Ambas / Todas",
@@ -4150,7 +4168,7 @@
                     "label": "Tipo"
                 },
                 "traffic_signals/direction": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Hacia atrás",
                         "both": "Ambos / Todos",
@@ -4184,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "Árboles"
+                },
+                "trench": {
+                    "label": "Tipo"
                 },
                 "trolley_wire": {
                     "label": "Cables de trolebús superiores"
@@ -4796,6 +4817,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Iglesia cristiana",
                     "terms": "cristiano, cristiana, abadía, basílica, catedral, coro, capilla, casa de oración, iglesia de adoración, misión, oratoria, parroquia,  santuario, tabernáculo, templo"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Salón del Reino de los testigos de Jehová",
+                    "terms": "cristiano, abadía, basílica, bethel, catedral, coro, capilla, casa de Dios, casa de oración, casa de culto, iglesia, oratorio, parroquia, santuario, tabernáculo, templo"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Templo de La Luz del Mundo",
+                    "terms": "cristiano, abadía, basílica, bethel, catedral, coro, capilla, casa de Dios, casa de oración, casa de culto, iglesia, oratorio, parroquia, santuario, tabernáculo, templo, La Luz del Mundo"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Casa de reuniones Cuáquera",
+                    "terms": "cristiano, abadía, basílica, bethel, catedral, coro, capilla, casa de Dios, casa de oración, casa de culto, iglesia, oratorio, parroquia, santuario, tabernáculo, templo"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Templo hindú",
@@ -6496,14 +6529,6 @@
                     "name": "Cuartel",
                     "terms": "barracas, albergue, tropa, soldados, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunker militar",
-                    "terms": "bombardeo, artillería, edificio, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Punto de control",
-                    "terms": "puesto de control, área restringida, control, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
-                },
                 "landuse/military/danger_area": {
                     "name": "Área de peligro",
                     "terms": "zona de peligro, bombas, minas, munición, explosivo, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
@@ -6512,17 +6537,9 @@
                     "name": "Base naval",
                     "terms": "base, buque naval, buque de guerra, buque militar, barco militar, puerto naval, submarino, anfibio, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Sitio de explosión nuclear",
-                    "terms": "nuclear, atómica, explosión, detonación, bomba, sitio, área de prueba, prueba, zona de prueba, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Pista de obstáculos militar",
                     "terms": "entrenamiento, carrera de obstáculos, pista de comando, recorrido de obstáculos, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
-                },
-                "landuse/military/office": {
-                    "name": "Oficina militar",
-                    "terms": "oficina, estación, centro, oficina de personal, reclutamiento, centro de reclutamiento, conscripción, militar, ejército, fuerza aérea, marina, armada, fuerza naval"
                 },
                 "landuse/military/range": {
                     "name": "Prácticas militares",
@@ -6625,9 +6642,17 @@
                     "name": "Escuela de baile",
                     "terms": "escuela de baile, escuela de danza, academia de danza, baile, danza, escuela, taller, academia"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Golf de disco",
+                    "terms": "disco golf, disco de golf, frisbee golf, frolf, ultimate"
+                },
                 "leisure/dog_park": {
                     "name": "Parque canino",
                     "terms": "perro, can, parque de perros"
+                },
+                "leisure/escape_game": {
+                    "name": "Sala de escape",
+                    "terms": "juego de escape, escapar de la habitación, sala de rompecabezas, sala de misiones, escape room, sala de escape, cuarto de escape"
                 },
                 "leisure/firepit": {
                     "name": "Hoguera",
@@ -7140,6 +7165,10 @@
                     "name": "Pozo de telecomunicaciones",
                     "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
                 },
+                "military/trench": {
+                    "name": "Trinchera militar",
+                    "terms": "Dugout, Firestep, fox hole, trinchera de infantería, trinchera de guerra"
+                },
                 "natural": {
                     "name": "Natural"
                 },
@@ -7329,6 +7358,10 @@
                 "office/association": {
                     "name": "Oficina de organización sin fines de lucro",
                     "terms": "organización sin ánimo de lucro, OSAL, organización sin fines de lucro, OSFL, organización no lucrativa, ONL, entidad sin ánimo de lucro, ESAL"
+                },
+                "office/bail_bond_agent": {
+                    "name": "Agente de fianzas",
+                    "terms": "agente de fianzas, fiador de fianzas, fianza"
                 },
                 "office/charity": {
                     "name": "Oficina de beneficencia",
@@ -8109,8 +8142,8 @@
                     "terms": "coche, carro, auto, automóvil, vehículo, taller, mecánico, chapero, reparación, reparación de vehículos, reparación de automóviles, reparación del automóvil, taller de reparación, taller de reparaciones, tienda de reparación, gomería, gomeria, neumáticos"
                 },
                 "shop/caravan": {
-                    "name": "Concesionario de Caravanas",
-                    "terms": "caravana, remolque, autocaravana, roulotte, cámper"
+                    "name": "Concesionario de autocaravanas",
+                    "terms": "caravana, remolque, autocaravana, roulotte, camper, cámper, vehículo recreacional"
                 },
                 "shop/carpet": {
                     "name": "Tienda de alfombras",
@@ -8376,6 +8409,10 @@
                 "shop/medical_supply": {
                     "name": "Tienda de aparatos ortopédicos",
                     "terms": "suministros médicos, bolas del ejercicio, vendajes, muletas, sujeción del arco, ortesis, esfigmomanómetros, glucómetro, aparatos ortopédicos, ortopedia"
+                },
+                "shop/military_surplus": {
+                    "name": "Tienda de excedentes militares",
+                    "terms": "armadura, tienda de la armada y la marina, excedente del ejército, excedente de la marina, equipo táctico, tienda de excedentes de guerra, armas"
                 },
                 "shop/mobile_phone": {
                     "name": "Tienda de telefonía móvil",
@@ -9085,13 +9122,6 @@
                 "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 13 y superior.",
                 "name": "Imágenes antiguas DigitalGlobe Standard"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Términos y comentarios"
-                },
-                "description": "DigitalGlobe-Vivid es un mosaico con una estética y actualización óptimas para cualquier área del mundo, con una resolución de 50 cm o superior y una actualización de imagen con un promedio de 20 meses en todo el mundo.",
-                "name": "Imágenes de DigitalGlobe Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 sin nubes - https://s2maps.eu por EOX IT Services GmbH (Contiene los datos de Copernicus Sentinel modificados 2017 y 2018)"
@@ -9126,6 +9156,20 @@
                 },
                 "description": "Imágenes satelitales y aéreas.",
                 "name": "Mapbox Satellite"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Maxar Premium es un mosaico compuesto por un mapa base de Maxar con regiones seleccionadas llenas de imágenes vívidas o de áreas de interés personalizadas, con una resolución de 50 cm o superior, y se actualiza con más frecuencia.",
+                "name": "Imágenes Premium de Maxar (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Maxar Standard es un conjunto curado de imágenes que cubren el 86% de la masa terrestre, con una resolución de 30-60 cm donde esté disponible, rellenado por Landsat. La antigüedad promedio es de 2.31 años, con algunas áreas actualizadas 2 veces por año.",
+                "name": "Imágenes Estándar de Maxar (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9268,6 +9312,27 @@
                 },
                 "description": "Capa de ortofoto proporcionada por basemap.at. «Sucesor» de las imágenes de geoimage.at.",
                 "name": "Ortofoto de basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Superposición de anotación proporcionada por basemap.at.",
+                "name": "Superposición basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa de superficie proporcionada por basemap.at.",
+                "name": "Superficie basemap.at"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa de terreno proporcionada por basemap.at.",
+                "name": "Terreno basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -9728,10 +9793,150 @@
                 "description": "El capítulo de los YouthMappers en la universidad de Fourah Bay",
                 "extendedDescription": "La Asociación Geográfica de Estudiantes - YouthMappers es una asociación de estudiantes de Fourah Bay College con los objetivos comunes de trazar lugares vulnerables en Sierra Leona y el mundo en general para el alivio y otros fines beneficiosos, llevar a cabo investigaciones y otros esfuerzos educativos. El capítulo está formado por jóvenes con grandes ideas, orientadas al desarrollo con la capacidad de relacionarse entre sí, comprender e implementar proyectos de desarrollo sostenible en equipo."
             },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "YouthMappers de Njala Freetown",
+                "description": "Capítulo de YouthMappers en la Universidad de Njala, campus de Freetown",
+                "extendedDescription": "Somos estudiantes del campus de Freetown de la Universidad de Njala, que estudian tecnología de la información en el departamento de física y ciencias de la computación. Estamos ubicados en Henry Street Freetown, Sierra Leona."
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers de Njala University, Njala Campus",
+                "description": "Capítulo de YouthMappers en la Universidad de Njala, Campus de Njala"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centro de Ciencias de la Geoinformación",
+                "description": "El capítulo de YouthMappers en la Universidad de Pretoria",
+                "extendedDescription": "Los estudiantes que trazan el mapa de Pretoria cuentan con el apoyo del Centro de Ciencias de la Geoinformación de la Universidad de Pretoria, una plataforma desde la cual se alienta la excelencia de las personas y los equipos de UP involucrados en la investigación, la educación y la capacitación en ciencias de la información geográfica (GISc), el desarrollo profesional y la participación comunitaria. Fortalecido a través de colaboraciones, educación y capacitación y alianzas dentro de Sudáfrica y en el extranjero."
+            },
+            "ym-Ardhi-University": {
+                "name": "ARU Mapper",
+                "description": "El capítulo de YouthMappers en la Universidad de Ardhi",
+                "extendedDescription": "Como futuros consultores de datos geoespaciales, buscamos educar y asesorar a la sociedad sobre cómo pueden utilizar los datos espaciales no solo como una forma de ubicación, sino también como una herramienta para la toma de decisiones y predecir diferentes cambios climáticos y peligrosos que pueden perjudicarlos o futuras generaciones."
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "IFM mappers",
+                "description": "Capítulo de YouthMappers  en el Instituto de Gestión Financiera",
+                "extendedDescription": "Este es un nuevo capítulo en nuestro instituto y esperamos utilizar nuestra educación financiera que estamos recibiendo aquí en el campus y vincular a ig con el medio ambiente para desarrollar nuestro entorno sostenible para ayudar a la comunidad con los efectos de nuestro medio ambiente en una forma financiera por convertirlos en números. Esto se explica ampliamente en la contabilidad ambiental."
+            },
+            "ym-Institute-of-Rural-Development-Planning-Mwanza": {
+                "name": "Capítulo de YouthMappers en el Instituto de Planificación de Desarrollo Rural - Lake Zone Center",
+                "description": "Capítulo de YouthMappers en el Instituto de Planificación de Desarrollo Rural de Mwanza"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Capítulo de YouthMappers de Mipango",
+                "description": "Capítulo de YouthMappers en el Instituto de Planificación del Desarrollo Rural",
+                "extendedDescription": "El Capítulo de YouthMappers de Mipango fue presentado en el IRDP el 3 de julio de 2017 por la Dra. Domitilla Bashemera. Los miembros fundadores fueron 300 (190 hombres y 110 mujeres) estudiantes de licenciatura, que se registraron como miembros del Capítulo. Gerald Zacharia es el presidente del capítulo y Juster Lugira es el vicepresidente."
+            },
+            "ym-Open-University-of-Tanzania": {
+                "name": "YouthMappers en la Universidad Abierta de Tanzania",
+                "description": "El capítulo de YouthMappers en la Universidad Abierta de Tanzania",
+                "extendedDescription": "YouthMappers en la Open University of Tanzania\n\nFue fundada por miembros y estudiantes de la Open University of Tanzania en el Departamento de Geografía, que necesitan principalmente mejorar su carrera y ayudar a la comunidad joven a través de proyectos conjuntos y de asociación con grupos de la comunidad local como Mikoko Scout Group (www.msg.or.tz) e iniciar la cooperación con colegios y universidades internacionales para programas de intercambio en relación con los Estudios de Geografía, como algunos programas preparados por Mikoko Scout Group, que vincula a universidades locales y otras universidades del mismo interés a través del Campamento Internacional de Jóvenes de Naturaleza y Medio Ambiente 2019 (www.campsite msg.or.tz/nature.html)\n\nNuestro capítulo pronto será reconocido como un programa de red juvenil que abrirá una oportunidad para que los estudiantes estudien y realicen estudios de investigación a nivel local."
+            },
+            "ym-Sokoine-University-of-Agriculture": {
+                "name": "SMCoSE YouthMappers",
+                "description": "El capítulo de YouthMappers en la Universidad de Agricultura de Sokoine",
+                "extendedDescription": "Un capítulo que comprende estudiantes de ciencias ambientales y administración y estudios de geografía en el departamento. de Geografía y utilizaremos técnicas de mapeo, basadas en conceptos y teorías de sistemas, que se pueden utilizar para facilitar, explorar y captar los diferentes entendimientos de las relaciones, perspectivas y límites involucrados en la sostenibilidad ambiental para obtener una comprensión más completa del Concepto y desarrollo de planes de acción."
+            },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers en la Universidad de Dar es Salaam",
+                "description": "El capítulo de YouthMappers en la Universidad de Dar es Salaam",
+                "extendedDescription": "El propósito de YouthMappers de la Universidad de Dar es Salaam es utilizar y promover datos de fuente abierta y tecnologías GIS para mapear áreas de desastre potencial, proporcionar recursos para el manejo de emergencias, conectar a sus miembros con organizaciones de fuente abierta y GIS en la ciudad de Dar es Salaam y atender las necesidades futuras de nuestros socios del proyecto."
+            },
+            "ym-Busitema-University": {
+                "name": "Good Mappers",
+                "description": "Capítulo de los YouthMappers en la Universidad de Busitema",
+                "extendedDescription": "Good mappers es un equipo de estudiantes en la Universidad de Busitema. Su objetivo principal es crear una comunidad de mapeadores experimentados que puedan contribuir al mapa mundial."
+            },
+            "ym-Gulu-University": {
+                "name": "CSGU Mappers",
+                "description": "Capítulo de los YouthMappers en la Universidad de Gulu",
+                "extendedDescription": "Los CSGU Mappers son la Sociedad de Computación en la Universidad de Gulu. Este capítulo es creativo, apasionado, innovador y está listo para cartografiar Uganda y el mundo en general, más allá de la imaginación de otras personas."
+            },
+            "ym-Kumi-University": {
+                "name": "Ever Last YouthMappers",
+                "description": "Capítulo de los YouthMappers de la Universidad de Kumi.",
+                "extendedDescription": "Este grupo energético de estudiantes se organiza dentro de la facultad de Ciencia y Tecnología de la Información."
+            },
+            "ym-Makerere-University": {
+                "name": "Geo YouthMappers",
+                "description": "El capítulo de YouthMappers en la Universidad de Makerere",
+                "extendedDescription": "Geo YouthMappers es un capítulo de mapeo basado en la Universidad de Makerere que se estima que aplica la concepción espacial al mundo real. Hemos colaborado en varios eventos de mapeo con OSM. Nuestro objetivo principal es el deseo de simplificar los datos y hacer que estén disponibles principalmente para la preparación para desastres. \"Mapeamos el mundo y cambiamos vidas.\""
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "name": "MUST Street Mappers",
+                "description": "Capítulo de los YouthMappers de la Universidad de Mbarara de Ciencia y Tecnología",
+                "extendedDescription": "MUST Street Mappers es un capítulo de Youth Mappers en la Universidad de Ciencia y Tecnología de Mbarara que se basa en hacer de nuestro país y del mundo en general un lugar mejor a través del mapeo. Nos basamos en la información recopilada para observar patrones y datos para presentar información relevante y beneficiosa para la sociedad."
+            },
+            "ym-St.-Augustine-International-University": {
+                "name": "YouthMappers en la Universidad Internacional San Agustín",
+                "description": "Capítulo de los YouthMappers en la Universidad Internacional de San Agustín"
+            },
+            "ym-Uganda-Christian-University-Mbale-Campus": {
+                "name": "Mappers for Life",
+                "description": "Capítulo de YouthMappers en el campus de Uganda Christian University Mbale",
+                "extendedDescription": "\"¡Somos Team Mappers para la vida! ¡Vengan y únanse a nosotros mientras mapeamos juntos!\" Este grupo trabaja desde el Departamento de Tecnología de la Información en la UCU."
+            },
+            "ym-Uganda-Pentecostal-University": {
+                "name": "HiTech Youth Mappers",
+                "description": "Capítulo de YouthMappers de Uganda en la Universidad Pentecostal de Uganda",
+                "extendedDescription": "Un nuevo capítulo de YouthMappers en el oeste de Uganda. Listo para mapear y proporcionar datos abiertos con OpenStreetMap para propósitos de desarrollo"
+            },
+            "ym-St.-Mawaggali-Trades-Training-Institute": {
+                "name": "MawaggaliMappers",
+                "description": "Capítulo de YouthMappers en el Instituto de capacitación de oficios de St. Mawaggali",
+                "extendedDescription": "Somos el capítulo de YouthMappers en St. Mawaggali con oficios en Choma que quieren contribuir con las diferentes tareas humanitarias para servir vidas a través del mapeo."
+            },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza",
+                "description": "Capítulo de los YouthMappers en la Universidad de Zambia"
+            },
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers",
+                "description": "El capítulo de YouthMappers en la Universidad de Zimbabwe",
+                "extendedDescription": "UzMappersTeam Zimbabwe es un equipo de voluntarios que utilizan OpenStreetMap para el mapeo de datos abiertos y el mapeo de respuesta ante desastres humanitarios. El equipo capacita a sus miembros con habilidades de tecnología geoespacial de código abierto."
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Mejore OpenStreetMap en Bangladesh",
                 "extendedDescription": "¿Mapeando en Bangladesh? ¿Tiene alguna pregunta, desea conectarse con la comunidad aquí? Únase a nosotros en {url}. ¡Todos son bienvenidos!"
+            },
+            "ym-Asian-University-for-Women": {
+                "name": "YouthMappers en AUW",
+                "description": "El capítulo de YouthMappers en la universidad asiática para mujeres",
+                "extendedDescription": "La Universidad Asiática para Mujeres busca graduarse que serán profesionales capacitados e innovadores, líderes orientadas al servicio en las empresas y comunidades en las que trabajarán y vivirán, y promotoras de la comprensión intercultural y el desarrollo humano y económico sostenible en Asia y en todo el mundo."
+            },
+            "ym-Dhaka-College": {
+                "name": "YouthMappers Daka College",
+                "description": "El capítulo de YouthMappers en el colegio de Dhaka",
+                "extendedDescription": "YouthMappers DhakaCollege es un enfoque de los estudiantes para ayudar a mapear áreas vulnerables del mundo como parte de la Acción Humanitaria. YouthMappers brinda a los estudiantes la oportunidad de ayudar a las personas y utilizar el mapeo con fines humanitarios. Estos datos geográficos abiertos pueden utilizarse con fines educativos, de navegación y otros fines humanitarios. Feliz mapeo"
+            },
+            "ym-Dhaka-University": {
+                "name": "Openstreetmap YouthMappers",
+                "description": "El capítulo de YouthMappers en la Universidad de Dhaka",
+                "extendedDescription": "Es un gran privilegio para los estudiantes de la Universidad de Dhaka realizar mapas con fines humanitarios. Nuestro capítulo brinda a los estudiantes la oportunidad de ayudar a las personas y utilizar el mapeo con fines humanitarios."
+            },
+            "ym-Eastern-University": {
+                "name": "YouthMappers en Eastern University",
+                "description": "Capítulo de los YouthMappers en la universidad del este",
+                "extendedDescription": "YouthMappers en Eastern University, Bangladesh se formó con el fin de ayudar a las personas durante la crisis humanitaria. Los estudiantes, al igual que otros mapeadores del mundo, se comprometen a ayudar a las personas a utilizar el mapa con fines educativos, de navegación y otros con fines humanitarios."
+            },
+            "ym-Jahangirnagar-University": {
+                "name": "YouthMappers en IRS, Universidad de Jahangirnagar",
+                "description": "El capítulo de YouthMappers en la Universidad de Jahangirnagar"
+            },
+            "ym-Khulna-University": {
+                "name": "OpenStreetMap",
+                "description": "El capítulo de YouthMappers en la Universidad de Khulna",
+                "extendedDescription": "Los estudiantes y profesores de KU de múltiples disciplinas tienen experiencia en la creación de datos abiertos para OSM para abordar los desafíos locales de desarrollo, incluida la seguridad alimentaria y otros temas."
+            },
+            "ym-Rajshahi-University-of-Engineering-Technology": {
+                "name": "YouthMappers en RUET",
+                "description": "Capítulo de los YouthMappers en la Universidad de Rajshahi de Ingeniería y Tecnología",
+                "extendedDescription": "El \"YouthMappers at RUET\" es un grupo de mapeo humanitario de estudiantes de la Universidad de Ingeniería y Tecnología Rajshahi (RUET) para compartir, desarrollar y practicar el conocimiento de SIG. Este grupo fomenta el uso de datos geoespaciales de código abierto y una plataforma para hacer que la solución llegue al grupo más vulnerable del mundo."
+            },
+            "ym-Sherubtse-College": {
+                "name": "Sociedad geográfica",
+                "description": "Capítulo de los YouthMappers en el colegio Sherubtse",
+                "extendedDescription": "La Sociedad Geográfica, en el Departamento de Geografía y Planificación, Sherubtse College, Royal University of Bhutan, con el apoyo del Centro para el Cambio Climático e Información Espacial, ha realizado varios esfuerzos para crear conciencia y abordar cuestiones importantes a nivel local y nacional. ¡Ahora nos unimos a la red internacional YouthMappers centrada en el estudiante en \"Mapping for Resilience\" y contribuyendo a una 'Felicidad' global!"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Mapeo participativo del barrio",
@@ -9792,10 +9997,23 @@
                 "description": "Grupo Riot de FSHM para discutir, compartir y actualizar actividades de mapeo, eventos en Puducherry y sus alrededores",
                 "extendedDescription": "Los miembros de la comunidad FSHM comparten sus actualizaciones / experiencias de mapeo de OSM a través del grupo Riot.im, este grupo también se usa para discutir cosas relacionadas con software / hardware, tecnología y activismo gratuitos."
             },
+            "ym-Gujarat-University": {
+                "name": "CCIM en Ahmedabad",
+                "description": "Capítulo de los YouthMappers en la Universidad de Gujarat"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonesia",
                 "description": "Mejore OpenStreetMap en Indonesia",
                 "extendedDescription": "¿Mapeando en Indonesia? ¿Tiene preguntas, quiere conectarse con la comunidad aquí? Únase a nosotros en {Url}. ¡Todos son bienvenidos!"
+            },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi",
+                "description": "Capítulo de los YouthMappers de la Universidad Estatal de Makassar"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime",
+                "description": "Capítulo YouthMappers de la Universidad Muhammadiyah de Surakarta",
+                "extendedDescription": "SpaceTime es un mapeo comunitario en la Facultad de Geografía de la Universidad Muhammadiyah de Surakarta. SpaceTime fue fundada por Bruce Maldy Pratama, Mukhlis Akbar e Irfandi Fauzi. Son estudiantes activos en la Facultad de Geografía de la Universidad Muhammadiyah Surakarta."
             },
             "osm-iran-aparat": {
                 "name": "Aparat de OpenStreetMap Irán",
@@ -9854,6 +10072,21 @@
                 "description": "Mejore OpenStreetMap en Nepal",
                 "extendedDescription": "¿Mapeando en Nepal? ¿Tiene preguntas, quiere conectarse con la comunidad aquí? Únase a nosotros en {Url}. ¡Todos son bienvenidos!"
             },
+            "ym-Institute-of-Crisis-Management-Studies": {
+                "name": "Instituto de Estudios de Gestión de Crisis YouthMappers",
+                "description": "Capítulo de YouthMappers en el Instituto de Estudios de Gestión de Crisis",
+                "extendedDescription": "Desarrollar Crisis Mappers para asistir en situaciones de desastre"
+            },
+            "ym-Kathmandu-University": {
+                "name": "Geomatics Engineering Society,GES",
+                "description": "Capítulo de los YouthMappers en la Universidad de Katmandú",
+                "extendedDescription": "La Sociedad de Ingeniería Geomática (GES) establecida en 2008 A.D es un club departamental del Departamento de Ingeniería Civil y Geomática (DCGE) en la Universidad de Katmandú. GES actúa como una plataforma para desarrollar las habilidades de los estudiantes, aparte de sus actividades educativas, centrándose en actividades como capacitaciones técnicas, seminarios, programas de conversación e interacción con expertos de campos relacionados, actividades deportivas, etc."
+            },
+            "ym-Tribhuvan-University": {
+                "name": "Asociación de Estudiantes de Ingeniería Geomática",
+                "description": "El capítulo de YouthMappers en la Universidad de Tribhuvan",
+                "extendedDescription": "Esta organización es el foro estudiantil de estudiantes de Ingeniería Geomática de la Universidad Tribhuvan, Instituto de Ingeniería en el campus de Pashchimanchal. Establecidos desde el inicio del programa de estudios, los estudiantes han sido activos en el mapeo y el liderazgo y están encantados de ser parte de la red de YouthMappers."
+            },
             "OSM-Asia-mailinglist": {
                 "name": "Lista de correo de OpenStreetMap Asia",
                 "description": "Talk-asia es la lista de correo oficial para la comunidad asiática"
@@ -9877,6 +10110,16 @@
             "OSM-PH-telegram": {
                 "name": "Telegram de OpenStreetMap PH",
                 "description": "Comunidad local en Telegram no oficial de contribuidores y amigos de OpenStreetMap en Filipinas"
+            },
+            "ym-Far-Eastern-University-Institute-of-Technology": {
+                "name": "Junior Philippines Computer Society",
+                "description": "Capítulo de YouthMappers aprendices en la Universidad del Lejano Oriente - Instituto de Tecnología",
+                "extendedDescription": "FEU ha sido reconocida como una de las principales universidades de Filipinas. Su misión se centra en producir graduados que han contribuido al avance del país. La universidad se desafía continuamente a sí misma para elevar el nivel de excelencia para alcanzar un estatus de primer nivel no solo en Filipinas sino también en la región del sudeste asiático."
+            },
+            "ym-University-of-the-Philippines-Resilience-Institute": {
+                "name": "YouthMappers UP Resilience Institute",
+                "description": "El capítulo de YouthMappers en el Instituto de Resiliencia de la Universidad de Filipinas",
+                "extendedDescription": "El Instituto de Resiliencia UP fue establecido en 2016 con una declaración de misión para empoderar a las comunidades locales a través de la investigación multidisciplinaria y las acciones hacia la resiliencia. A través del Centro UP NOAH, y con la ayuda de diferentes organizaciones, proporcionamos mapas de exposición para 17 provincias de las 82 y subimos más de 4 millones de huellas a OpenStreetMap."
             },
             "OSM-RU-forum": {
                 "name": "Foro OpenStreetMap RU",
@@ -10028,6 +10271,11 @@
                 "name": "Lista de correo Talk-dk",
                 "description": "Una lista de correo para discutir OpenStreetMap en Dinamarca"
             },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers",
+                "description": "Capítulo de los YouthMappers en la Universidad Queen Mary de Londres",
+                "extendedDescription": "Este capítulo formará parte de las actividades de la Sociedad de Geografía Queen Mary"
+            },
             "fi-forum": {
                 "name": "Foro de OpenStreetMap FI",
                 "description": "Foro web de OpenStreetMap Finlandia"
@@ -10100,6 +10348,11 @@
                 "name": "OpenStreetMap Alemania",
                 "description": "La plataforma de información sobre OpenStreetMap en Alemania"
             },
+            "ym-Heidelberg-University": {
+                "name": "disastermappers heidelberg",
+                "description": "Capítulo de los YouthMappers de la Universidad de Heidelberg",
+                "extendedDescription": "Los desastrosos Heidelberg se fundó en 2014 como una iniciativa estudiantil para construir una plataforma de intercambio entre estudiantes, investigadores y actores humanitarios. Los participantes en el desastre son miembros de Missing Maps y están organizando mapathons, talleres y webinars en Heidelberg y más allá, y apoyan a HOT y Missing Maps a través de la investigación y las aplicaciones."
+            },
             "hu-facebook": {
                 "name": "Facebook de OpenStreetMap HU",
                 "description": "Facebook de Mapeadores y OpenStreetMap en Hungría"
@@ -10162,9 +10415,24 @@
                 "name": "Lista de correo de OpenStreetMap para Trentino",
                 "description": "Lista de conversaciones regionales de OpenStreetMap Italia para Trentino"
             },
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers",
+                "description": "Capítulo de YouthMappers en el Politécnico de Milán",
+                "extendedDescription": "PoliMappers es una asociación de estudiantes voluntarios con sede en el Politecnico di Milano. La misión del grupo es capacitar y motivar a la próxima generación de mapeadores voluntarios y hacer mapeos utilizando software gratuito y de código abierto dentro de la universidad, así como en las escuelas primarias y secundarias."
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers en YU",
+                "description": "El capítulo de YouthMappers en la Universidad de Yarmuk",
+                "extendedDescription": "El capítulo de YouthMappers en YU es el primer grupo de mapeo en la región de Medio Oriente y África del Norte donde los refugiados, la sequía y la pobreza son crisis en aumento y en urgente necesidad de actividades de mapeo humanitarias para mitigar las consecuencias de tales crisis. Se alienta a YU Mappers a utilizar datos abiertos para abordar los desafíos en la región de MENA a fin de brindar alivio y desarrollo a áreas específicas dentro de la región."
+            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo en Telegram",
                 "description": "Grupo público de Telegram semi-oficial sobre Kosovo. Damos la bienvenida a todos los mapeadores de cualquier lugar en cualquier idioma."
+            },
+            "ym-Universit-Mohammed-V-Rabat": {
+                "name": "Brahmapoutre en Rabat",
+                "description": "Capítulo de YouthMapper en la Université Mohammed V Rabat",
+                "extendedDescription": "Este capítulo considera la participación en el programa YouthMappers como una oportunidad para compartir nuestro conocimiento, crear nuevas relaciones de trabajo con otros capítulos en diferentes países."
             },
             "no-forum": {
                 "name": "Foro web de OpenStreetMap Noruega",
@@ -10198,6 +10466,10 @@
                 "name": "Lista de correo de OpenStreetMap en Eslovenia",
                 "description": "Lista de correo de la comunidad de OpenStreetMap en Eslovenia"
             },
+            "si-twitter": {
+                "name": "Twitter de OpenStreetMap Eslovenia",
+                "description": "Sigue a OpenStreetMap Eslovenia en Twitter: {url}"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Lista de correo Talk-es",
                 "description": "Una lista de correo para discutir OpenStreetMap en España"
@@ -10205,6 +10477,15 @@
             "OSM-ES-telegram": {
                 "name": "@OSMes en Telegram",
                 "description": "Grupo de Telegram de OpenStreetMap España"
+            },
+            "ym-Universidad-Autonoma-de-Madrid": {
+                "name": "YouthMappers en UAM",
+                "description": "Capítulo de YouthMappers en la Universidad Autónoma de Madrid"
+            },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "name": "Mapeo Humanitario",
+                "description": "Capítulo de YouthMappers en la Universidad Politécnica de Madrid",
+                "extendedDescription": "El grupo de geo-voluntariado se formó en el campus de Moncloa en noviembre de 2017. Alrededor de 20 miembros de tres universidades (Complutense, CEU y UPM). Estudiantes de pregrado, estudiantes de maestría y doctorado colaboran con organizaciones (MSF, Acción contra el Hambre, ...) apoyados por capacitadores de Geoinquietos. Reconocimiento oficial por UPM como Proyecto de Innovación Educativa (Código IE1718.0411)"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
@@ -10230,6 +10511,11 @@
                 "name": "OpenStreetMap Suecia en Twitter",
                 "description": "Síguenos en Twitter en {url}"
             },
+            "ym-Istanbul-Technical-University": {
+                "name": "YouthMappers ITU",
+                "description": "Capítulo de YouthMappers en la universidad técnica de Estambul",
+                "extendedDescription": "YouthMappers ITU es una comunidad estudiantil interdisciplinaria y colaborativa para promover el mapeo humanitario para asentamientos vulnerables y tiene como objetivo desarrollar y compartir información espacial estratégica e innovadora para las ciudades futuras mediante el uso de sistemas de información geográfica y datos abiertos."
+            },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Reunión mensual pub de East Midlands (Nottingham)",
                 "description": "Reunión social de mapeadores y usuarios de East Midlands",
@@ -10249,6 +10535,20 @@
                 "description": "Únase a #osm-gb en irc.oftc.net (puerto 6667)",
                 "extendedDescription": "Únase a #osm-gb en irc.oftc.net (puerto 6667), sea paciente y espere unos minutos si hace una pregunta"
             },
+            "ym-University-of-Exeter": {
+                "name": "University of Exeter British Red Cross Missing Maps",
+                "description": "Capítulo de los YouthMappers en la Universidad de Exeter",
+                "extendedDescription": "Somos un equipo de geógrafos entusiastas con amplio conocimiento de SIG. Nos apasiona apoyar a la Sociedad de la Cruz Roja Británica con varios esfuerzos de ayuda humanitaria. También somos importantes maestros de la importancia de la cartografía de datos detectados a distancia y cómo esto ayuda en el terreno. Nuestros mapatones tienen enfoques académicos temáticos que resaltan las diferentes investigaciones de SIG en nuestro departamento de geografía, a la vez que funcionan como eventos de conciencia de empleabilidad que utilizamos para invitar a oradores a hablar sobre sus carreras en SIG / Cruz Roja Británica."
+            },
+            "ym-University-of-Warwick": {
+                "name": "Universidad de Warwick Resilience Mapping Society",
+                "description": "Capítulo de los YouthMappers de la Universidad de Warwick",
+                "extendedDescription": "Somos un grupo de cartógrafos entusiastas basados ​​en la Universidad de Warwick. Nuestro objetivo es hacer que la gente se entusiasme con el mapeo humanitario y ayudarles a comprender el impacto que esta actividad tiene en el campo. Estamos estrechamente alineados con Missing Maps y Doctors Without Borders UK y nos enfocamos en las tareas HOT en nuestras actividades y talleres de mapeo. Nuestros mapatones están listados en la página de Missing Maps cada vez que están programados."
+            },
+            "ym-Sacred-Heart-Junior-College": {
+                "name": "YouthMappers en el  Sacred Heart Junior College",
+                "description": "Capítulo de los YouthMappers en el Sacred Heart Junior College"
+            },
             "OSM-CA-Slack": {
                 "name": "Slack de OSM-CA",
                 "description": "¡Todos son bienvenidos! Regístrese en {signupUrl}."
@@ -10257,13 +10557,41 @@
                 "name": "OpenStreetMap Vancouver",
                 "description": "Mapeadores y usuarios de OpenStreetMap en el área de Vancouver, BC"
             },
+            "ym-Universidad-de-Costa-Rica": {
+                "name": "YouthMappers de Universidad de Costa Rica",
+                "description": "Capítulo de YouthMappers en la Universidad de Costa Rica",
+                "extendedDescription": "YouthMappers de Universidad de Costa Rica nace en función de acción social para y por miembros de comunidades distintas según temáticas de involucramiento, interacción y representación de variables dentro de un espacio geográfico definido (un territorio) Gracias a las herramientas de OpenStreetMaps tenemos la viabilidad de poder obtener, validar y compartir la información generada para comprobación y uso destinadas a las comunidades o el interesado en tales temáticas objetivas."
+            },
             "OSM-CU-telegram": {
                 "name": "OSM Cuba en Telegram",
                 "description": "Chat de Telegram de OpenStreetMap Cuba"
             },
+            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "name": "PumaGis Hn",
+                "description": "Capítulo de YouthMappers en la Universidad Nacional Autónoma de Honduras"
+            },
+            "ym-University-of-the-West-Indies-Mona-Campus": {
+                "name": "Divulgación a las bibliotecas - ODL",
+                "description": "Capítulo de los YouthMappers en la Universidad de las Indias Occidentales, Campus Mona",
+                "extendedDescription": "La Biblioteca Universitaria Mona de la UWI participa en proyectos públicos, de divulgación y especiales. Esto permitirá a nuestra biblioteca los medios para ser un catalizador para la alfabetización espacial y abogar por el intercambio de datos espaciales y el acceso a los intereses de Jamaica y el Caribe. Tenemos necesidades de comunicación y socorro en casos de desastre, y una amplia variedad de necesidades de geomedia y ciencias de la Tierra para servir mejor a nuestro campus y comunidad. Específicamente, tenemos una biblioteca de ciencias para mostrar a todos los profesores y estudiantes."
+            },
             "OSM-NI-telegram": {
                 "name": "OSM Nicaragua en Telegram",
                 "description": "Chat de Telegram de OpenStreetMap Nicaragua "
+            },
+            "ym-Universidad-Nacional-de-Ingenieria": {
+                "name": "Yeka Street MGA",
+                "description": "Capítulo de YouthMappers en la Universidad Nacional de Ingeniería",
+                "extendedDescription": "YEKA STREET es un equipo de trabajo formado por estudiantes de la Universidad Nacional de Ingeniería en Managua, Nicaragua. Con el propósito principal de aplicar nuestros conocimientos y habilidades utilizando muchas herramientas y aplicaciones para mapear áreas en nuestras ciudades y contribuir a los proyectos comunitarios de desarrollo y planes de alivio de desastres. Queremos abrir el camino y agregar más estudiantes de todas las carreras y universidades de nuestro país para que se unan a nosotros en esta causa, aumentando así el nivel de vida y reduciendo la vulnerabilidad de la población."
+            },
+            "ym-University-of-Panama": {
+                "name": "YouthMappers UP",
+                "description": "Capítulo de los YouthMappers en la Universidad de Panamá",
+                "extendedDescription": "Los estudiantes mapeadores en Panamá trabajan con datos espaciales abiertos para ayudar a identificar, definir, abordar y crear un significado sobre los desafíos de desarrollo definidos localmente. Colaboran con estudiantes de otros países en temas de mapeo comunitario desde ecoturismo hasta seguridad alimentaria, desde biodiversidad hasta temas indígenas, promoviendo una visión humanista a través de perspectivas científicas."
+            },
+            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
+                "name": "UPR YouthMappers",
+                "description": "Capítulo de los YouthMappers en la Universidad de Puerto Rico - Rio Piedras"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers del área de la bahía",
@@ -10375,7 +10703,19 @@
             "OSM-US": {
                 "name": "OpenStreetMap EE.UU.",
                 "description": "Ayudamos a crecer y mejorar OpenStreetMap en los Estados Unidos.",
-                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}"
+                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}",
+                "events": {
+                    "sotmus2019-cfs": {
+                        "name": "Proponer una charla para SotM-US 2019",
+                        "description": "Hacemos un llamado a todos los miembros de la comunidad de OpenStreetMap para que compartan sus ideas y propuestas de sesión para State of the Map US 2019. Ya sea que sea nuevo en OSM o haya sido un colaborador principal desde el principio, ¡Queremos saber de usted!",
+                        "where": "Minneapolis, Minnesota"
+                    },
+                    "sotmus2019": {
+                        "name": "State of the Map US 2019",
+                        "description": "Únase a la comunidad OpenStreetMap en State of the Map US en Minneapolis, Minnesota. Conéctese con otros mapeadores, empresas, agencias gubernamentales y organizaciones sin fines de lucro, todos colaborando en torno al mapa gratuito y editable del mundo.",
+                        "where": "Minneapolis, Minnesota"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -10404,6 +10744,208 @@
                 "name": "Meetup de Western Slope OSM",
                 "description": "Editores y usuarios de OpenStreetMap en Grand Junction, CO",
                 "extendedDescription": "El objetivo de este grupo es presentar OpenStreetMap a la comunidad, desarrollar una comunidad de mapeadores, crear datos geográficos lo más increíble posible utilizando cualquier método que podamos y, finalmente, crear una estrategia con el fin de obtener esta información de nuestra comunidad. ¡Imagine la señalización precisa del sendero! ¡Imagine un mayor desarrollo de las ciclovías! ¡Imagina lo que quieras, esa es la gracia de OpenStreetMap!"
+            },
+            "ym-Ball-State-University": {
+                "name": "Gamma Theta Upsilon- Iota Omega Chapter",
+                "description": "Capítulo de los YouthMappers en la universidad estatal de Ball",
+                "extendedDescription": "Nuestro capítulo es muy activo. Nos enfocamos principalmente en eventos comunitarios, recaudación de fondos y excursiones. Actualmente estamos buscando desarrollar más actividades relacionadas con el mapeo para atraer a otros estudiantes del campus que puedan estar interesados ​​en contribuir."
+            },
+            "ym-California-University-of-Pennsylvania": {
+                "name": "CalU PA GIS Club",
+                "description": "Capítulo de los YouthMappers en la Universidad de California de Pennsylvania",
+                "extendedDescription": "Los estudiantes de SIG en Cal U aprenden a aplicar la teoría espacial al mundo real. El programa de estudios universitarios se centra en la geografía, así como en la utilización de SIG en la gestión de emergencias."
+            },
+            "ym-Central-Washington-University": {
+                "name": "Club de geografía",
+                "description": "Capítulo de los YouthMappers de la Universidad Central de Washington",
+                "extendedDescription": "Nuestro objetivo de asociarnos con Youthmappers es brindar alivio a las áreas que necesitan mapeo humanitario. Al hacerlo, estamos sirviendo a nuestros hermanos y hermanas en todo el mundo, así como a mejorar nuestras propias habilidades de cartografía."
+            },
+            "ym-Clemson-University": {
+                "name": "Clemson Mappers",
+                "description": "El capítulo de los YouthMappers en la Universidad de Clemson",
+                "extendedDescription": "Los estudiantes en Clemson son apoyados por el Centro de Tecnologías Geoespaciales, una comunidad de profesionales interdisciplinarios de las ciencias geoespaciales que apoyan las actividades de investigación, enseñanza y divulgación utilizando tecnologías que permiten la recopilación, análisis y aplicación de datos geoespaciales. Los estudiantes integran tecnologías geoespaciales en sus actividades académicas en todas las disciplinas y crean conexiones en todo el mundo."
+            },
+            "ym-College-of-William-and-Mary": {
+                "name": "¡Por todo el mapa!",
+                "description": "Capítulo de los YouthMappers en el colegio de William y Mary",
+                "extendedDescription": "Los estudiantes que están en todo el mapa son apoyados por el Centro para el Análisis Geoespacial, un grupo que integra SIG en todo el plan de estudios y proporciona a los estudiantes y profesores el hardware, el software y la experiencia. Los estudiantes de todos los orígenes utilizan SIG en todo el campus, incluidas las ciencias y políticas ambientales, geología, historia, negocios, sociología, biología, antropología, políticas públicas y ciencias marinas."
+            },
+            "ym-Cornell-University": {
+                "name": "Sociedad cartográfica",
+                "description": "Capítulo de los YouthMappers en la Universidad de Cornell",
+                "extendedDescription": "Los estudiantes y la facultad de Cornell utilizan datos abiertos y software de código abierto para abordar los desafíos a escala local, nacional y global. Al hacerlo, avanzamos en nuestros objetivos académicos y personales de desarrollar nuestras propias habilidades en torno al SIG y la alfabetización espacial."
+            },
+            "ym-George-Mason-University": {
+                "name": "Mason Mappers",
+                "description": "Capítulo de los YouthMappers de la Universidad George Mason",
+                "extendedDescription": "La Sociedad Estudiantil Mason Mappers es una organización estudiantil de mapeo humanitario en el Departamento GGS de la Universidad George Mason, y su objetivo es promover la educación y el conocimiento en geo-tecnologías, geo-info ciencia, para fomentar una buena administración global y participar en el desarrollo profesional mientras se construye un una geo-comunidad positiva e interactiva, así como la formación de los estudiantes como líderes del mañana."
+            },
+            "ym-Indiana-University-of-Pennsylvania": {
+                "name": "Club de Ciencias Geoespaciales",
+                "description": "Capítulo de los YouthMappers de la Universidad de Indiana en Pennsylvania"
+            },
+            "ym-Jacksonville-State-University": {
+                "name": "Equipo de mapeo de desastres JSU",
+                "description": "Capítulo de los YouthMappers en la universidad estatal de Jacksonville",
+                "extendedDescription": "El Equipo de Mapeo de Desastres de JSU es un programa en la Universidad Estatal de Jacksonville dedicado a ayudar en la respuesta a desastres en situaciones de emergencia. Esto incluye tornados, tormentas eléctricas severas, inundaciones, etc. El equipo pretende ser un activo valioso para los condados circundantes y un conducto para que los estudiantes del Departamento de Geociencias de JSU apliquen lo que han aprendido en un entorno académico para apoyar los servicios de emergencia. Nuestro objetivo es agilizar las operaciones de recuperación y respuesta ante desastres mientras utilizamos los conjuntos de habilidades de los estudiantes."
+            },
+            "ym-Kansas-State-University": {
+                "name": "Gamma Theta Upsilon: Beta Psi Chapter",
+                "description": "El capítulo de YouthMappers en la Universidad del Estado de Kansas",
+                "extendedDescription": "Somos el Capítulo de la Universidad Estatal de Kansas de Gamma Theta Upsilon, una sociedad internacional de honor de la geografía con afiliación a YouthMappers. Hemos estado activos en el mapeo para OSM y hemos realizado un mapathon llamado \"Mapa para Nepal\", en el cual utilizamos OpenStreetMap para digitalizar áreas no mapeadas de Nepal después del terremoto de 2015."
+            },
+            "ym-McGill-University": {
+                "name": "Grupo de mapeo abierto McGill: Miembro de la Sociedad de Geografía de Pregrado de McGill",
+                "description": "El capítulo de los YouthMappers en la Universidad McGill",
+                "extendedDescription": "El Open Mapping Group McGill: un miembro de McGill Undergraduate Geography Society (OMG McGill) tiene como objetivo conectar a los estudiantes con datos y tecnologías geoespaciales abiertos para mejorar la resiliencia, la creación de comunidades y el aprendizaje a través del mapeo en el campus, en Montreal, Canadá, y en el extranjero."
+            },
+            "ym-Miami-University": {
+                "name": "Sociedad de Geografía y Planificación",
+                "description": "Capítulo de YouthMappers en la Universidad de Miami",
+                "extendedDescription": "El GPS en la Universidad de Miami tiene como objetivo crear una comunidad unida de planificadores y geógrafos que quieran divertirse, aprender más sobre carreras y educación superior en su campo, red y trabajar junto a profesionales para obtener una experiencia real."
+            },
+            "ym-Monroe-Community-College": {
+                "name": "MCC Mapping Corps",
+                "description": "Capítulo de los YouthMappers en el Monroe Community College"
+            },
+            "ym-Montgomery-College": {
+                "name": "GeoMC",
+                "description": "Capítulo de los YouthMappers en el Montgomery College",
+                "extendedDescription": "La misión de GeoMC es proporcionar a los estudiantes experiencia práctica en la aplicación de herramientas geoespaciales, la recopilación de datos y la gestión de proyectos. La mayoría de nuestros estudiantes tienen antecedentes en SIG y son estudiantes de geografía. Los miembros de nuestro capítulo provienen de diversos orígenes y todos trabajamos juntos para lograr un impacto positivo en el mundo."
+            },
+            "ym-New-York-University": {
+                "name": "NYU mHealth Initiative Mapping Corps",
+                "description": "Capítulo de los YouthMappers en la Universidad de Nueva York",
+                "extendedDescription": "La iniciativa de investigación de salud móvil o “mHealth” de la NYU se enfoca en el desarrollo de sistemas que vinculan a las personas, generalmente a través de sus teléfonos, a los lugares que viven y atraviesan, y por lo tanto apoya una investigación novedosa sobre la forma en que los teléfonos y los mapas se pueden aprovechar para entender el comportamiento de toma de decisiones y finalmente resultados de salud."
+            },
+            "ym-Ohio-Wesleyan-University": {
+                "name": "Club de Medio Ambiente y Vida Silvestre",
+                "description": "Capítulo de los YouthMappers en la Universidad Wesleyana de Ohio",
+                "extendedDescription": "El Club de Medio Ambiente y Vida Silvestre analiza los problemas ambientales en el campus, en Delaware e incluso a nivel nacional. Creamos proyectos comunitarios y de campus, exploramos y disfrutamos actividades al aire libre, somos voluntarios y tratamos de promover el ecologismo en todos los aspectos de nuestras vidas."
+            },
+            "ym-Oklahoma-State-University": {
+                "name": "Club de geografía",
+                "description": "Capítulo de los YouthMappers en Oklahoma State University"
+            },
+            "ym-State-University-of-New-York-Geneseo": {
+                "name": "SUNY Geneseo GIS Association",
+                "description": "El capítulo de YouthMappers en la Universidad Estatal de Nueva York Geneseo",
+                "extendedDescription": "Distribuimos oportunidades de concientización, apoyo, educación, voluntariado y promoción profesional en sistemas de información geográfica, en disciplinas y departamentos, en el contexto de SUNY Geneseo, la comunidad local y la comunidad global."
+            },
+            "ym-SUNY-at-Fredonia": {
+                "name": "Geoventurers",
+                "description": "Capítulo de YouthMappers en SUNY en Fredonia",
+                "extendedDescription": "GeoVenturers es un grupo de estudiantes que se unen a lo largo de varias especialidades en nuestro campus que ven las tecnologías geoespaciales como una herramienta para servir a los demás y para unir a las personas. La tutoría para el grupo trae educación científica del departamento de currículo e instrucción. Esperamos poder aportar nuestras habilidades para ayudar a mejorar la vida de las personas."
+            },
+            "ym-Texas-Tech-University": {
+                "name": "YouthMappers en TTU",
+                "description": "Capítulo de YouthMappers en la Universidad de Texas Tech",
+                "extendedDescription": "Como uno de los capítulos fundadores de la red, TTU YouthMappers se enorgullece de servir como líderes interdisciplinarios para ayudar a crear datos geográficos abiertos y análisis que aborden los desafíos de desarrollo definidos localmente en todo el mundo. El capítulo se esfuerza por intercambiar y colaborar con otros capítulos de todo el mundo al tiempo que se ofrece a sí mismo como un recurso y servicio local para las organizaciones estudiantiles de Texas Tech de maneras que agreguen valor a sus respectivas actividades del campus a través del mapeo."
+            },
+            "ym-The-Citadel": {
+                "name": "YouthMappers en The Citadel",
+                "description": "Capítulo de YouthMappers en The Citadel",
+                "extendedDescription": "Este capítulo también es un Club Rotaract, que está afiliado a Rotary International. Múltiples miembros, así como también líderes, han expresado interés en YouthMappers y nos gustaría afiliarnos a Citadel Rotaract Club con YouthMappers."
+            },
+            "ym-The-George-Washington-University": {
+                "name": "Humanitarian Mapping Society",
+                "description": "Capítulo de YouthMappers en la Universidad George Washington",
+                "extendedDescription": "Modelos de liderazgo y compromiso, HMS busca brindar ayuda y mejorar el mundo a través de proyectos humanitarios de Sistemas de Información Geográfica (SIG). Este capítulo cofundador afiliado en el campus de GWU tiene una gran experiencia para compartir, y frecuentemente se asocia directamente con USAID, la Cruz Roja Americana y el Departamento de Estado de los EE. UU. En su área de DC para ampliar los esfuerzos dirigidos por los estudiantes y servir a los Comunidad global."
+            },
+            "ym-The-Johns-Hopkins-University-SAIS": {
+                "name": "SAIS YouthMappers",
+                "description": "Capítulo de YouthMappers en la Universidad Johns Hopkins, SAIS",
+                "extendedDescription": "La misión de SAIS Youth Mappers es brindar a los estudiantes de la Universidad Johns Hopkins SAIS la oportunidad de convertirse en mapeadores humanitarios altamente capacitados. Como grupo dentro del Club de Asia del Sur, su enfoque principal es apoyar proyectos de mapeo humanitario en la Región del Indo-Pacífico."
+            },
+            "ym-The-Pennsylvania-State-University": {
+                "name": "Coalición GIS del estado de Penn",
+                "description": "Capítulo de YouthMappers en la Universidad del Estado de Pennsylvania",
+                "extendedDescription": "La Coalición de Ciencias de la Información Geoespacial de Penn State (GIS, por sus siglas en inglés) es una organización que ofrece a los estudiantes la especialización, la minoría o el intercambio de intereses en las oportunidades de SIG para desarrollar el conocimiento y las habilidades complementarias necesarias para tener éxito en la industria de SIG profesional."
+            },
+            "ym-University-of-California-Davis": {
+                "name": "Mapping Club",
+                "description": "Capítulo de los YouthMappers en la Universidad de California, Davis"
+            },
+            "ym-University-of-Central-Florida": {
+                "name": "Sociedad de la información geoespacial",
+                "description": "Capítulo de los YouthMappers en la Universidad de Florida Central",
+                "extendedDescription": "Nuestra misión es fomentar un entorno social y educativo para todas las carreras que estén interesadas en la discusión y la aplicación de SIG. Los eventos grupales y comunitarios a lo largo del año académico organizan a los estudiantes para que se ofrezcan como voluntarios para ayudar a las comunidades locales y regionales mediante el uso de proyectos GIS basados ​​en la comunidad y la educación de los estudiantes de escuelas intermedias y secundarias locales sobre el uso y la aplicación de los SIG."
+            },
+            "ym-University-of-Chicago": {
+                "name": "Sociedad tobler",
+                "description": "Capítulo de los YouthMappers en la Universidad de Chicago"
+            },
+            "ym-University-of-Maryland-College-Park": {
+                "name": "Club de geografía",
+                "description": "Capítulo de los YouthMappers en la Universidad de Maryland - College Park",
+                "extendedDescription": "La misión del Club de Geografía de la Universidad de Maryland College Park es involucrar y alentar a los estudiantes a explorar los intereses geográficos dentro del campus y la comunidad."
+            },
+            "ym-University-of-North-Texas": {
+                "name": "Club de Geografía UNT",
+                "description": "El capítulo de los YouthMappers en la Universidad del Norte de Texas",
+                "extendedDescription": "El Club de Geografía es una organización estudiantil en la Universidad del Norte de Texas que recibe a todos los estudiantes interesados ​​en geografía. El objetivo del Club de Geografía es promover el interés en Geografía, el Departamento de Geografía, junto con el compañerismo entre los estudiantes y profesores. El club también busca representar las necesidades y deseos de los estudiantes con respecto al estudio de la geografía y proporcionar un foro para la presentación de ideas innovadoras en beneficio de la comunidad universitaria."
+            },
+            "ym-University-of-Northern-Colorado": {
+                "name": "Club de Geografía y SIG de la UNCO",
+                "description": "Capítulo de los YouthMappers de la Universidad del Norte de Colorado",
+                "extendedDescription": "Capítulo oficial de Geografía y GIS del club afiliado a la Universidad del Norte de Colorado donde nuestro objetivo es aprender, compartir y conectar con quienes nos rodean. #MakingSenseOfTheWorld"
+            },
+            "ym-University-of-Oregon": {
+                "name": "Map by Northwest",
+                "description": "Capítulo de los YouthMappers en la Universidad de Oregón",
+                "extendedDescription": "Map By Northwest tiene como objetivo involucrar a estudiantes de pregrado en la Universidad de Oregon en proyectos de mapeo para ayudar en causas humanitarias y para realizar investigaciones geográficas. Damos la bienvenida a estudiantes de todas las disciplinas para que se unan a nosotros en nuestras aventuras de mapeo."
+            },
+            "ym-University-of-Redlands": {
+                "name": "URSpatial Geo-Thinkers",
+                "description": "El capítulo de YouthMappers en la Universidad de Redlands",
+                "extendedDescription": "Desarrollar las habilidades de GIS de los miembros y el conocimiento de las herramientas y métodos a través del compromiso social aplicado, así como educar a la comunidad del campus sobre el poder del mapeo y el análisis espacial a través de eventos de servicio comunitario."
+            },
+            "ym-University-of-South-Carolina": {
+                "name": "Asociación de Estudiantes de Geografía",
+                "description": "El capítulo de YouthMappers en la Universidad de Carolina del Sur",
+                "extendedDescription": "La GGSA es una organización totalmente dirigida por estudiantes, diseñada para servir como defensor y recurso para todos los estudiantes graduados en geografía al desempeñar el papel de enlace entre el departamento y los estudiantes. Nuestro objetivo es promover el desarrollo profesional, académico y personal de los estudiantes graduados interesados ​​en el campo de la geografía y sus subdisciplinas."
+            },
+            "ym-University-of-Southern-California": {
+                "name": "SC Mappers",
+                "description": "El capítulo de YouthMappers en la Universidad del sur de California",
+                "extendedDescription": "Vemos el mundo de manera diferente: lo vemos a través de una lente espacial. Con el poder del pensamiento espacial, conectamos el lugar y el espacio para ayudar a abordar los desafíos globales. ¡Colabora con nosotros!"
+            },
+            "ym-University-of-Vermont": {
+                "name": "Club de cartografía humanitaria de la Universidad de Vermont",
+                "description": "Capítulo de los YouthMappers en la Universidad de Vermont"
+            },
+            "ym-University-of-Victoria": {
+                "name": "Sociedad de Estudiantes de Geografía",
+                "description": "Capítulo de los YouthMappers en la Universidad de Victoria",
+                "extendedDescription": "SOGS busca promover y representar intereses sociales y académicos dentro del Departamento de Geografía. Esto se expresa mediante cuatro objetivos clave: Proporcionar un foro para la discusión de asuntos relacionados con la calidad y accesibilidad de la educación dentro de la geografía; proporcionar un medio para expresar un consenso de la opinión de los estudiantes a la facultad del departamento a través de la representación en las reuniones del departamento y en los comités del departamento; para llevar a cabo acuerdos para las actividades que benefician a los estudiantes y que se consideran dentro del campo de interés de los estudiantes en geografía; para actuar como enlace a través del UVSS y el Course Union Council con otros grupos de estudiantes en el campus"
+            },
+            "ym-University-of-Wyoming": {
+                "name": "Gamma Theta Upsilon/Geography Club",
+                "description": "Capítulo de los YouthMappers en la Universidad de Wyoming"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps",
+                "description": "Capítulo de YouthMappers en la UW-Madison",
+                "extendedDescription": "BadgerMaps es el capítulo del campus de la Universidad de Washington de Youthmappers, una organización dedicada a los servicios humanitarios y de mapeo comunitario. Conectamos nuestra red de voluntarios con oportunidades para crear datos GIS para proyectos que lo necesitan."
+            },
+            "ym-Vassar-College": {
+                "name": "Hudson Valley Mappers",
+                "description": "Capítulo de YouthMappers en el colegio Vassar",
+                "extendedDescription": "Nuestra misión es proporcionar una plataforma multidisciplinaria para que compañeros, educadores y organizaciones comunitarias participen en proyectos de mapeo locales con un enfoque en el fortalecimiento de nuestros ecosistemas locales, nuestro entorno construido y la salud de nuestra comunidad. También buscamos contribuir con apoyo geoespacial para la ayuda humanitaria global y los esfuerzos de desarrollo."
+            },
+            "ym-Villanova-University": {
+                "name": "Los Villanova Globeplotters",
+                "description": "Capítulo de los YouthMappers de la Universidad de Villanova",
+                "extendedDescription": "El Villanova Globeplotters se basa en el principio agustiniano de Villanova de servicio desinteresado a la comunidad global. Combinados con una interacción social relajada, nos esforzamos por brindar asistencia geoespacial a los necesitados, independientemente de la raza, especialización académica, asociación de grupos de estudiantes o nivel universitario de los estudiantes participantes."
+            },
+            "ym-West-Virginia-University": {
+                "name": "Maptime Morgantown",
+                "description": "El capítulo de los YouthMappers en la Universidad de Virginia Occidental",
+                "extendedDescription": "Trabajando como un equipo de colaboración, este capítulo cofundador se enfoca en proporcionar un ambiente de aprendizaje abierto para aquellos interesados ​​en trabajar en proyectos que se entrecruzan con el desarrollo internacional, la respuesta a emergencias y la ciencia de la información geográfica.\nConectan a principiantes y expertos a través de capacitación técnica y experiencia en la construcción de datos de infraestructura geográfica significativos y útiles, mientras se conectan a ciudades hermanas de todo el mundo."
+            },
+            "ym-Western-Michigan-University": {
+                "name": "Club de geografía",
+                "description": "El capítulo de YouthMappers en la Universidad de Western Michigan"
             },
             "Maptime-Australia-Slack": {
                 "name": "Slack de Maptime Australia",
@@ -10518,6 +11060,36 @@
             "OSM-CO": {
                 "name": "OpenStreetMap Colombia",
                 "description": "Noticias de la comunidad OpenStreetMap Colombia y la Fundación OSMCo"
+            },
+            "ym-Universidad-de-Antioquia": {
+                "name": "Geomatica UDEA",
+                "description": "Capítulo de YouthMappers en la Universidad de Antioquia",
+                "extendedDescription": "Somos un grupo interesado en datos geoespaciales, cartografía voluntaria y participamos en el mapeo con otros en nuestro país y dentro de la red YouthMappers."
+            },
+            "ym-Universidad-de-La-Guajira": {
+                "name": "Grupo Mesh",
+                "description": "Capítulo de YouthMappers en la Universidad de La Guajira",
+                "extendedDescription": "Grupo Mesh es una organización estudiantil en la Universidad de la Guajira en Colombia, que incluye los estudiantes del programa de Ingeniería Ambiental que aprenden cartografía y mapeo abierto."
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartógrafos Uniandes",
+                "description": "Capítulo de YouthMappers en la Universidad de los Andes",
+                "extendedDescription": "Somos un círculo de participación estudiantil que busca utilizar el mapeo y el razonamiento espacial como un medio para crear vínculos de cooperación e integración entre la universidad y la sociedad al abordar diferentes dinámicas espaciales, sociales, políticas, económicas y culturales."
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura",
+                "description": "Capítulo de YouthMappers en la Universidad de San Buenaventura",
+                "extendedDescription": "Nos complace unirnos al mapeo de YouthMappers para un mundo y una comunidad mejores."
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers en Bogota",
+                "description": "Capítulo de YouthMappers en la Universidad Distrital Francisco José de Caldas",
+                "extendedDescription": "La Universidad Distrital Francisco José de Caldas es una universidad pública, mixta y de investigación con sede en Bogotá, Colombia, con una población de 26,140 estudiantes."
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "name": "Grupo UN",
+                "description": "Capítulo de YouthMappers en la Universidad Nacional de Colombia",
+                "extendedDescription": "Los estudiantes se están uniendo para trazar mapas y relacionarse con estudiantes universitarios en todo el país de Colombia y el mundo. Las especialidades geográficas incluyen afiliación con microbiología y disciplinas de salud."
             },
             "OSM-EC-telegram": {
                 "name": "OSM Ecuador en Telegram",

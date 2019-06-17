@@ -19,8 +19,6 @@
         },
         "modes": {
             "add_feature": {
-                "title": "افزودن یک عارضه",
-                "description": "عارضه‌ها را جستجو کنید تا به نقشه اضافه کنید.",
                 "key": "Tab",
                 "result": "{count} نتیجه",
                 "results": "{count} نتیجه"
@@ -618,7 +616,6 @@
         },
         "geocoder": {
             "search": "جستجو در سراسر جهان...",
-            "no_results_visible": "در محدودهٔ نمایان از نقشه چیزی پیدا نشد",
             "no_results_worldwide": "چیزی پیدا نشد"
         },
         "geolocate": {
@@ -782,6 +779,13 @@
                 "description": "ساختمان",
                 "tooltip": "ساختمان‌ها، پناهگاه‌ها، گاراژها و غیره."
             },
+            "building_parts": {
+                "description": "اجزای ساختمان",
+                "tooltip": "سازه‌های سقف و ساختمان ۳بعدی"
+            },
+            "indoor": {
+                "description": "عارضه‌های داخلی"
+            },
             "landuse": {
                 "description": "کاربری زمین",
                 "tooltip": "جنگل، زمین کشاورزی، پارک، مسکونی، تجاری و غیره."
@@ -896,7 +900,7 @@
                 "format": "{place}{separator}{region}",
                 "separator": "،"
             },
-            "help_html": "تغییرات شما معمولاً پس از دقایقی در وبسایت OpenStreetMap منعکس می‌شود. برای سایر برنامه‌ها احتمالاً باید زمان طولانی‌تری را تا دریافت به‌روزرسانی‌ها منتظر بمانید.",
+            "help_html": "تغییرات شما معمولاً پس از دقایقی در وبسایت OpenStreetMap منعکس می‌شود. در سایر برنامه‌ها و سایت‌ها شاید لازم باشد زمان طولانی‌تری را تا دریافت به‌روزرسانی‌ها منتظر بمانید.",
             "help_link_text": "جزئیات",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F",
             "view_on_osm": "دیدن تغییرات روی وبسایت OSM",
@@ -915,7 +919,7 @@
         "splash": {
             "welcome": "به ویرایشگر iD خوش آمدید",
             "text": "iD یک ابزار کاربرپسند اما قدرتمند برای مشارکت در بهترین نقشهٔ آزاد جهان است. این نسخهٔ  {version} است. برای اطلاعات بیشتر {website} را ببینید و خرابی‌های سایت را در {github} گزارش دهید.",
-            "walkthrough": "راهنمای گام‌به‌گام",
+            "walkthrough": "راهنمای گام‌به‌گام را آغاز کنید",
             "start": "اکنون ویرایش می‌کنم"
         },
         "source_switch": {
@@ -1746,7 +1750,10 @@
                 "title": "تگ‌های قدیمی",
                 "message": "{feature} دارای تگ‌های قدیمی است",
                 "tip": "یافتن عارضه‌های دارای تگ منسوخ که می‌توان به‌روزشان کرد",
-                "reference": "برخی تگ‌ها به‌مرور زمان تغییر می‌کنند و باید به‌روز شوند."
+                "reference": "برخی تگ‌ها به‌مرور زمان تغییر می‌کنند و باید به‌روز شوند.",
+                "incomplete": {
+                    "message": "تگ‌های {feature} ناقص است"
+                }
             },
             "private_data": {
                 "title": "اطلاعات خصوصی",
@@ -2504,6 +2511,9 @@
                 "animal_shelter": {
                     "label": "پناهگاه حیوانات"
                 },
+                "architect": {
+                    "label": "معمار"
+                },
                 "area/highway": {
                     "label": "نوع"
                 },
@@ -2521,6 +2531,9 @@
                 },
                 "backrest": {
                     "label": "تکیه‌گاه"
+                },
+                "bar": {
+                    "label": "بار"
                 },
                 "barrier": {
                     "label": "نوع"
@@ -2594,6 +2607,9 @@
                 "building/levels_building": {
                     "label": "طبقات ساختمان",
                     "placeholder": "2, 4, 6..."
+                },
+                "building/material": {
+                    "label": "جنس"
                 },
                 "building_area": {
                     "label": "ساختمان"
@@ -2761,11 +2777,23 @@
                 "denotation": {
                     "label": "شاخص"
                 },
+                "departures_board": {
+                    "options": {
+                        "no": "هیچ",
+                        "yes": "بله"
+                    }
+                },
                 "description": {
                     "label": "توضیحات"
                 },
                 "design": {
                     "label": "طرح"
+                },
+                "destination/symbol_oneway": {
+                    "label": "نمادهای مقصد"
+                },
+                "destination_oneway": {
+                    "label": "مقصدها"
                 },
                 "devices": {
                     "label": "دستگاه ها",
@@ -2816,7 +2844,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "جهت",
                     "options": {
                         "backward": "رو به عقب",
                         "both": "هردو/همه",
@@ -2830,6 +2857,16 @@
                     "label": "فاصله"
                 },
                 "dock": {
+                    "label": "نوع"
+                },
+                "dog": {
+                    "label": "سگ‌ها",
+                    "options": {
+                        "no": "غیرمجاز",
+                        "yes": "مجاز"
+                    }
+                },
+                "door_type": {
                     "label": "نوع"
                 },
                 "drive_through": {
@@ -2888,6 +2925,9 @@
                 "fence_type": {
                     "label": "نوع"
                 },
+                "fire_hydrant/pressure": {
+                    "label": "فشار (بار)"
+                },
                 "fire_hydrant/type": {
                     "label": "شکل",
                     "options": {
@@ -2895,6 +2935,9 @@
                         "underground": "زیر زمین",
                         "wall": "دیوار"
                     }
+                },
+                "fishing": {
+                    "label": "ماهی‌گیری"
                 },
                 "fitness_station": {
                     "label": "نوع تجهیزات"
@@ -2905,6 +2948,9 @@
                 "flag/type": {
                     "label": "نوع پرچم"
                 },
+                "floating": {
+                    "label": "شناور"
+                },
                 "flood_prone": {
                     "label": "مستعد سیلاب"
                 },
@@ -2914,6 +2960,9 @@
                 },
                 "frequency": {
                     "label": "تناوب کار"
+                },
+                "from": {
+                    "label": "از"
                 },
                 "fuel": {
                     "label": "سوخت"
@@ -3008,7 +3057,8 @@
                     "label": "دشواری سوارکاری",
                     "options": {
                         "common": "آسان: بدون مشکل یا سختی. (پیشفرض)"
-                    }
+                    },
+                    "placeholder": "سخت، خطرناک..."
                 },
                 "horse_stables": {
                     "options": {
@@ -3344,6 +3394,9 @@
                     "label": "سختی",
                     "placeholder": "آسان، متوسط، پیشرفته ..."
                 },
+                "piste/difficulty_downhill": {
+                    "label": "سختی"
+                },
                 "piste/grooming": {
                     "label": "تیمار کردن",
                     "options": {
@@ -3414,7 +3467,6 @@
                     "placeholder": " فاصله تا یک رقم اعشار(123.4) "
                 },
                 "railway/signal/direction": {
-                    "label": "جهت",
                     "options": {
                         "backward": "رو به عقب",
                         "both": "هردو/همه",
@@ -3772,7 +3824,6 @@
                     "label": "نوع"
                 },
                 "traffic_signals/direction": {
-                    "label": "جهت",
                     "options": {
                         "backward": "رو به عقب",
                         "both": "هردو/همه",
@@ -5307,26 +5358,14 @@
                 "landuse/military/barracks": {
                     "name": "پادگان"
                 },
-                "landuse/military/bunker": {
-                    "name": "محدوده نظامی"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "ایست بازرسی"
-                },
                 "landuse/military/danger_area": {
                     "name": "محدوده خطرناک"
                 },
                 "landuse/military/naval_base": {
                     "name": "پایگاه نیروی دریایی"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "محدوده انفجار اتمی"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "ميدان موانع"
-                },
-                "landuse/military/office": {
-                    "name": "دفتر نظامی"
                 },
                 "landuse/military/range": {
                     "name": "محدوده نظامی"

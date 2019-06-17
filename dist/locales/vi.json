@@ -479,7 +479,6 @@
         },
         "geocoder": {
             "search": "Tìm kiếm trên toàn thế giới…",
-            "no_results_visible": "Không tìm thấy kết quả trong khu vực đang xem",
             "no_results_worldwide": "Không tìm thấy kết quả"
         },
         "geolocate": {
@@ -686,12 +685,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Bạn có thay đổi chưa lưu",
-            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
-            "restore": "Phục hồi các thay đổi của tôi",
-            "reset": "Vứt bỏ các thay đổi của tôi"
-        },
         "save": {
             "title": "Lưu",
             "help": "Hãy xem lại các thay đổi của bạn và đăng các thay đổi lên OpenStreetMap để cho mọi người xem.",
@@ -726,10 +719,6 @@
             }
         },
         "success": {
-            "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
-            "thank_you": "Cảm ơn bạn đã cải thiện bản đồ!",
-            "thank_you_location": "Cảm ơn bạn đã cải thiện bản đồ {where}.",
-            "help_html": "Các thay đổi của bạn sẽ xuất hiện tại OpenStreetMap trong vòng vài phút. Các bản đồ tại trang khác có thể được cập nhật chậm hơn.",
             "help_link_text": "Chi tiết",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F",
             "view_on_osm": "Xem các Thay đổi tại OSM",
@@ -744,12 +733,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Hủy bỏ"
-        },
-        "splash": {
-            "welcome": "Chào mừng bạn đến với iD, chương trình vẽ bản đồ OpenStreetMap",
-            "text": "iD là một công cụ hiệu quả và dễ sử dụng để đóng góp vào bản đồ mở lớn nhất trên thế giới. Đây là phiên bản {version}. Xem thêm thông tin tại {website} và báo cáo lỗi trên {github}.",
-            "walkthrough": "Mở trình hướng dẫn",
-            "start": "Tiến hành sửa đổi"
         },
         "source_switch": {
             "live": "thật",
@@ -2267,7 +2250,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -2971,7 +2953,6 @@
                     "placeholder": "Tầm xa đến một chữ số thập phân (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -3410,7 +3391,6 @@
                     "label": "Bảng Giao thông"
                 },
                 "traffic_sign/direction": {
-                    "label": "Hướng",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -3421,7 +3401,6 @@
                     "label": "Kiểu"
                 },
                 "traffic_signals/direction": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -5471,14 +5450,6 @@
                     "name": "Trại lính",
                     "terms": "trại lính, doanh trại, trai linh, doanh trai"
                 },
-                "landuse/military/bunker": {
-                    "name": "Boong Ke",
-                    "terms": "boong ke, boong-ke, boongke"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Trạm Kiểm soát",
-                    "terms": "trạm kiểm soát, tram kiem soat"
-                },
                 "landuse/military/danger_area": {
                     "name": "Khu vực Nguy hiểm",
                     "terms": "khu vực nguy hiểm, vùng nguy hiểm, khu vuc nguy hiem, vung nguy hiem"
@@ -5487,17 +5458,9 @@
                     "name": "Căn cứ Hải quân",
                     "terms": "căn cứ hải quân, trạm hải quân, can cu hai quan, tram hai quan"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nơi Nổ Vũ khí Hạt nhân",
-                    "terms": "nơi nổ vũ khí hạt nhân, nơi nổ bom hạt nhân, noi no vu khi hat nhan, noi no bom hat nhan"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Đường Chạy vượt Chướng ngại vật",
                     "terms": "đường chạy vượt chướng ngại vật, duong chay vuot chuong ngai vat"
-                },
-                "landuse/military/office": {
-                    "name": "Văn phòng Quân sự",
-                    "terms": "văn phòng quân sự, văn phòng quân đội, văn phòng hải quân, văn phòng không quân, van phong quan su, van phong quan doi, van phong hai quan, van phong khong quan"
                 },
                 "landuse/military/range": {
                     "name": "Tầm đạn",

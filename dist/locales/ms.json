@@ -401,7 +401,6 @@
         },
         "geocoder": {
             "search": "Cari di seluruh dunia...",
-            "no_results_visible": "Tiada keputusan di kawasan peta yang kelihatan",
             "no_results_worldwide": "Tiada keputusan dijumpai"
         },
         "geolocate": {
@@ -541,12 +540,6 @@
                 "tooltip": "Kawasan dilukis dengan isi penuh."
             }
         },
-        "restore": {
-            "heading": "Anda mempunyai perubahan yang belum disimpan",
-            "description": "Andakah anda ingin mengembalikan perubahan yang belum disimpan dari sesi penyuntingan sebelumnya?",
-            "restore": "Pulihkan perubahan saya",
-            "reset": "Buang perubahan saya"
-        },
         "save": {
             "title": "Simpan",
             "help": "Semak perubahan anda dan muat naik ke OpenStreetMap, menjadikannya dapat dilihat oleh pengguna lain.",
@@ -580,7 +573,6 @@
             }
         },
         "success": {
-            "just_edited": "Anda baru sahaja telah menyunting OpenStreetMap!",
             "help_link_text": "Butiran",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "like_osm": "Suka OpenStreetMap? Bertemu pemeta-pemeta lain:"
@@ -588,12 +580,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Batal"
-        },
-        "splash": {
-            "welcome": "Selamat datang! Ini ialah penyunting iD OpenStreetMap",
-            "text": "Penyunting iD ialah suatu alat yang berkuasa tinggi tetapi sangat mudah digunakan untuk membuat sumbangan terhadap peta percuma yang terunggul di dunia. Ini ialah versi {version}. Untuk maklumat lanjut sila layari {website} dan laporkan pepijat di {github}.",
-            "walkthrough": "Mulakan Panduan",
-            "start": "Sunting sekarang"
         },
         "source_switch": {
             "live": "live",

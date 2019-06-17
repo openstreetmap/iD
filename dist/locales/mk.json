@@ -11,7 +11,7 @@
             "favorite": "омилено"
         },
         "toolbar": {
-            "inspect": "Прегледај",
+            "inspect": "Преглед",
             "undo_redo": "Поврати / Повтори",
             "recent": "Скорешно",
             "favorites": "Омилено",
@@ -19,8 +19,6 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Додај елемент",
-                "description": "Пребарајте елементи за додавање на картата.",
                 "key": "Јазиче",
                 "result": "{count} исходна ставка",
                 "results": "{count} исходни ставки"
@@ -604,7 +602,6 @@
         },
         "geocoder": {
             "search": "Пребарај по светот...",
-            "no_results_visible": "Не најдов ништо во видливиот дел од картата",
             "no_results_worldwide": "Не најдов ништо"
         },
         "geolocate": {
@@ -851,12 +848,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Имате незачувани промени",
-            "description": "Дали сакате да ги повратите незачуваните промени од претходното уредување?",
-            "restore": "Поврати ми ги промените",
-            "reset": "Отфрли ги моите промени"
-        },
         "save": {
             "title": "Зачувај",
             "help": "Прегледајте ги направените промени и подигнете ги на OpenStreetMap, со што ќе станат видливи за јавноста.",
@@ -891,14 +882,10 @@
             }
         },
         "success": {
-            "just_edited": "Штотуку го уредивте OpenStreetMap!",
-            "thank_you": "Ви благодариме што ја подобривте картата.",
-            "thank_you_location": "Ви благодариме што ја подобривте картата околу {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Вашите промени треба да се појават на OpenStreetMap во рок од неколку минути. Ќе им треба подолго да се појават на други карти.",
             "help_link_text": "Подробно",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Погледајте ги промените на OSM",
@@ -913,12 +900,6 @@
         "confirm": {
             "okay": "ОК",
             "cancel": "Откажи"
-        },
-        "splash": {
-            "welcome": "Добре дојдовте на уредникот ID за OpenStreetMap",
-            "text": "iD е достапна, но моќна алатка за учество во најдобрата слободна карта на светот. Ова е верзијата {version}. Повеќе информации ќе најдете на {website}. Грешките пријавувајте ги на {github}.",
-            "walkthrough": "Започнете ја прошетката",
-            "start": "Уреди сега"
         },
         "source_switch": {
             "live": "во живо",
@@ -1405,6 +1386,7 @@
                     "edits_in_view": "Вашите уредувања во погледот се во ред"
                 },
                 "hidden_issues": {
+                    "none": "Утврдените проблеми ќе се прикажуваат овде",
                     "elsewhere": "Проблеми другаде: {count}",
                     "other_features": "Проблеми со други елементи: {count}",
                     "other_features_elsewhere": "Проблеми другаде со други елементи: {count}",
@@ -1439,7 +1421,18 @@
             },
             "almost_junction": {
                 "title": "Речиси клучки",
-                "message": "{feature}  е многу блиску, но не е поврзано со {feature2}."
+                "message": "{feature}  е многу блиску, но не е поврзано со {feature2}.",
+                "self": {
+                    "message": "{feature} завршува многу близу до самото себе, но не се преповрзува"
+                }
+            },
+            "close_nodes": {
+                "tip": "Најди излишни и пренатрупани точки",
+                "reference": "Излишните точки на патиштата треба да се спојат или да се оддалечат.",
+                "detached": {
+                    "message": "{feature} е преблиску до {feature2}",
+                    "reference": "Одделни точки не можат да стојат на исто место."
+                }
             },
             "crossing_ways": {
                 "title": "Вкрстени патишта",
@@ -1447,6 +1440,13 @@
             },
             "disconnected_way": {
                 "title": "Одделени патишта",
+                "tip": "Најди патишта, патеки и траектни линии без одредиште",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} одредишни елементи се поврзани само еден со друг."
+                    },
+                    "reference": "Сите патишта, патеки и траектни линии треба да се поврзат, образувајќи едиствена одредишна мрежа."
+                },
                 "highway": {
                     "message": "{highway} е одделен од други патишта и патеки"
                 }
@@ -1462,6 +1462,15 @@
                 },
                 "descriptive": {
                     "message": "{feature} нема описни ознаки"
+                },
+                "relation_type": {
+                    "message": "{feature} е однос без вид"
+                }
+            },
+            "outdated_tags": {
+                "incomplete": {
+                    "message": "{feature} има непотполни ознаки",
+                    "reference": "Некои елементи треба да имаат дополнителни ознаки."
                 }
             },
             "private_data": {
@@ -1475,6 +1484,14 @@
             "unknown_road": {
                 "message": "{feature} нема класификација"
             },
+            "unsquare_way": {
+                "title": "Неправоаголно (до {val}°)",
+                "message": "{feature} има неправаголни агли",
+                "tip": "Најди елементи со неправоаголни агли кои можат подобро да се исцртаат",
+                "buildings": {
+                    "reference": "Градбите со неправоаголни агли најчесто можат да се исцртаат поверно"
+                }
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Поврзани мошне блиски елементи."
@@ -1485,6 +1502,9 @@
                 "connect_endpoints": {
                     "title": "Поврзете ги краевите",
                     "annotation": "Поврзани крајните точки на пат."
+                },
+                "connect_feature": {
+                    "title": "Поврзи го елементов"
                 },
                 "connect_features": {
                     "title": "Поврзете ги елементите"
@@ -1497,6 +1517,15 @@
                 },
                 "delete_feature": {
                     "title": "Избриши го елементов"
+                },
+                "ignore_issue": {
+                    "title": "Занемари го проблемов"
+                },
+                "merge_close_vertices": {
+                    "annotation": "Споени мошне блиски точки во пат."
+                },
+                "move_points_apart": {
+                    "title": "Оддалечи ги точкиве"
                 },
                 "move_tags": {
                     "title": "Премести ги ознаките",
@@ -1540,6 +1569,10 @@
                 "tag_as_disconnected": {
                     "title": "Ознаката е одделена",
                     "annotation": "Означени многу блиски елементи како одделени."
+                },
+                "tag_as_unsquare": {
+                    "title": "Означи како физички неправоаголно",
+                    "annotation": "Означен пат како со неправоаголни агли."
                 },
                 "tag_this_as_higher": {
                     "title": "Означи како повисоко"
@@ -2337,7 +2370,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Правец",
+                    "label": "Засегната насока",
                     "options": {
                         "backward": "Назад",
                         "both": "Двете / Сите",
@@ -2470,10 +2503,10 @@
                     "placeholder": "По основно"
                 },
                 "frequency": {
-                    "label": "Фреквенција на работа"
+                    "label": "Фреквенција на напојувањето"
                 },
                 "frequency_electrified": {
-                    "label": "Фреквенција на работа"
+                    "label": "Фреквенција на напојувањето"
                 },
                 "from": {
                     "label": "Од"
@@ -3113,7 +3146,7 @@
                     "placeholder": "Растојание до една децимала (123,4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Насока",
+                    "label": "Засегната насока",
                     "options": {
                         "backward": "Назад",
                         "both": "Двете / Сите",
@@ -3593,7 +3626,7 @@
                     "label": "Сообраќаен знак"
                 },
                 "traffic_sign/direction": {
-                    "label": "Насока",
+                    "label": "Засегната насока",
                     "options": {
                         "backward": "Назад",
                         "both": "Двете / Сите",
@@ -3604,7 +3637,7 @@
                     "label": "Вид"
                 },
                 "traffic_signals/direction": {
-                    "label": "Насока",
+                    "label": "Засегната насока",
                     "options": {
                         "backward": "Назад",
                         "both": "Двете / Сите",
@@ -3638,6 +3671,9 @@
                 },
                 "trees": {
                     "label": "Дрва"
+                },
+                "trench": {
+                    "label": "Вид"
                 },
                 "trolley_wire": {
                     "label": "Тролејбуски кабли"
@@ -3770,7 +3806,7 @@
                     "name": "Жичница"
                 },
                 "aerialway/cable_car": {
-                    "name": "Жичничка кабина"
+                    "name": "Кабинска жичница"
                 },
                 "aerialway/chair_lift": {
                     "name": "Жичничка клупа"
@@ -3929,7 +3965,7 @@
                     "name": "Коцкарница"
                 },
                 "amenity/charging_station": {
-                    "name": "Акумулаторска станица"
+                    "name": "Напојна станица"
                 },
                 "amenity/childcare": {
                     "name": "Детска градинка"
@@ -4043,7 +4079,7 @@
                     "name": "Фонтана"
                 },
                 "amenity/fuel": {
-                    "name": "Бензинска пумпа"
+                    "name": "Бензинска станица"
                 },
                 "amenity/grave_yard": {
                     "name": "Гробишта"
@@ -4134,6 +4170,15 @@
                 },
                 "amenity/place_of_worship/christian": {
                     "name": "Црква"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Соборен дом на Јеховините сведоци"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Храм „Светлина на светот“"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Квекерски соборен дом"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Хиндуистички храм"
@@ -4574,10 +4619,10 @@
                     "name": "Административна граница"
                 },
                 "bridge/support": {
-                    "name": "Мостна потпора"
+                    "name": "Мостова потпора"
                 },
                 "bridge/support/pier": {
-                    "name": "Пристаништен мост"
+                    "name": "Мостова потпора"
                 },
                 "building": {
                     "name": "Градба"
@@ -5441,26 +5486,14 @@
                 "landuse/military/barracks": {
                     "name": "Касарна"
                 },
-                "landuse/military/bunker": {
-                    "name": "Бункер"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Контролен пункт"
-                },
                 "landuse/military/danger_area": {
                     "name": "Опасно подрачје"
                 },
                 "landuse/military/naval_base": {
                     "name": "Поморска база"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Место на нуклеарна експлозија"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Вежбалиште со препреки"
-                },
-                "landuse/military/office": {
-                    "name": "Воена служба"
                 },
                 "landuse/military/range": {
                     "name": "Воено стрелиште"
@@ -5545,6 +5578,9 @@
                 },
                 "leisure/dog_park": {
                     "name": "Кучешки парк"
+                },
+                "leisure/escape_game": {
+                    "name": "Соба за бегство"
                 },
                 "leisure/firepit": {
                     "name": "Огниште"
@@ -5844,10 +5880,10 @@
                     "name": "Нафтен извор"
                 },
                 "man_made/pier": {
-                    "name": "Пристанишен мост"
+                    "name": "Пристан"
                 },
                 "man_made/pier/floating": {
-                    "name": "Пловечки пристанишен мост"
+                    "name": "Пловечки пристан"
                 },
                 "man_made/pipeline": {
                     "name": "Цевковод"
@@ -5929,6 +5965,9 @@
                 },
                 "manhole/telecom": {
                     "name": "Телекомска шахта"
+                },
+                "military/trench": {
+                    "name": "Воен ров"
                 },
                 "natural": {
                     "name": "Природно"
@@ -6073,6 +6112,9 @@
                 },
                 "office/association": {
                     "name": "Непрофитна организација"
+                },
+                "office/bail_bond_agent": {
+                    "name": "Кауционист"
                 },
                 "office/charity": {
                     "name": "Добротворна организација"
@@ -6261,7 +6303,7 @@
                     "name": "Населба"
                 },
                 "place/town": {
-                    "name": "Помал град"
+                    "name": "Гратче"
                 },
                 "place/village": {
                     "name": "Село"
@@ -6878,6 +6920,9 @@
                 "shop/medical_supply": {
                     "name": "Медицинска опрема и залихи"
                 },
+                "shop/military_surplus": {
+                    "name": "Продавница за воени вишоци"
+                },
                 "shop/mobile_phone": {
                     "name": "Мобилара",
                     "terms": "<преведете со истозначници или сродни поими на „Мобилара\n“, одделени со запирки>"
@@ -7333,7 +7378,7 @@
                     "name": "Одвод"
                 },
                 "waterway/fuel": {
-                    "name": "Бензиска станица за пловила"
+                    "name": "Бензиска пумпа за пловила"
                 },
                 "waterway/lock_gate": {
                     "name": "Преводничка капија"
@@ -7430,13 +7475,6 @@
                 "description": "Граници на снимките и датуми на снимање. Натписите се појавуваат при степен на приближеност 13 и повисоко.",
                 "name": "Стандардни снимки на DigitalGlobe — Старински"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Услови и мислења"
-                },
-                "description": "DigitalGlobe-Vivid е мозаик со оптимална естетика и тековност за секое место на светот. Има разделност од 50 см или подобра, а сликите се просечно стари не повеќе од 20 месеци.",
-                "name": "Снимки на DigitalGlobe-Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 безоблачно — https://s2maps.eu од EOX IT Services GmbH (содржи податоци од Copernicus Sentinel 2017 и 2018)"
@@ -7471,6 +7509,20 @@
                 },
                 "description": "Сателитски и воздушни снимки.",
                 "name": "Mapbox Сателитски"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Услови и мислења"
+                },
+                "description": "Maxar-напредна е мозаик составен од основната карта на Maxar и избрани подрачја исполнети со +Vivid или прилагодени снимки за местата од интерес, разложност 50 см или подобра, превчитувањето е позачестено со постојаните поднови.",
+                "name": "Снимки на Maxar-напредна (бета)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Услови и мислења"
+                },
+                "description": "Maxar-стандардна е стручно згрижена снимкозбирка која покрива 86% од копнената маса на Земјата, со разложност од 30-60 см кајшто е достапна, а со заднинска потполнка од Landsat. Просечната старост изнесува 2,31 години, иако некои подрачја се подновуваат двапати годишно.",
+                "name": "Стандардни снимки на Maxar (бета)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -7613,6 +7665,27 @@
                 },
                 "description": "Слојот на ортоснимки е преземен од basemap.at. „Наследник“  на сликите од geoimage.at.",
                 "name": "basemap.at Ортофото"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Прибележна облога на basemap.at.",
+                "name": "basemap.at Облога"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at    "
+                },
+                "description": "Површинска облога на basemap.at.",
+                "name": "basemap.at Површинска"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Теренска облога на basemap.at.",
+                "name": "basemap.at Теренска"
             },
             "eufar-balaton": {
                 "attribution": {

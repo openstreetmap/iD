@@ -11,7 +11,7 @@
             "favorite": "お気に入り"
         },
         "toolbar": {
-            "inspect": "検索/地物エディタ",
+            "inspect": "位置検索/タグ編集",
             "undo_redo": "元に戻す/再実行",
             "recent": "選択履歴",
             "favorites": "お気に入り",
@@ -19,8 +19,8 @@
         },
         "modes": {
             "add_feature": {
-                "title": "追加する地物や要素をキーワード検索",
-                "description": "地図上に追加する地物の種類と描画の要素（ポイント/ライン/エリア）をキーワード検索や履歴(Tab)から選び、形状を描画します。必要ならさらに左側の地物エディタで詳細タグを編集します。よく使うものは☆でお気に入り登録すると次回からワンタッチで選べます。",
+                "title": "地物を追加",
+                "description": "マップに追加する地物を検索。",
                 "key": "Tab",
                 "result": "{count} 件の結果",
                 "results": "{count} 件の結果"
@@ -131,7 +131,7 @@
                 "not_downloaded": "一部がまだダウンロードされていないため、円状に整形できません。"
             },
             "orthogonalize": {
-                "title": "直交化",
+                "title": "直角化",
                 "description": {
                     "vertex": "この角を直角にする。",
                     "line": "ラインの角を直角に整形",
@@ -145,10 +145,10 @@
                 },
                 "end_vertex": "終端ノードなので直角化できません。",
                 "square_enough": "すでに直角です。",
-                "not_squarish": "直交にできない辺があるため、角を直角に整形することができません",
-                "too_large": "ウェイが完全には表示されていないため、四角形に整形することができません。",
-                "connected_to_hidden": "非表示の地物に接続しているため、四角形に整形することができません。",
-                "not_downloaded": "一部がまだダウンロードされていないため、四角形に整形できません。"
+                "not_squarish": "直角にできない辺があるため、角を直角に整形することができません",
+                "too_large": "ウェイが完全には表示されていないため、直角に整形することができません。",
+                "connected_to_hidden": "非表示の地物に接続しているため、直角に整形することができません。",
+                "not_downloaded": "一部がまだダウンロードされていないため、直角に整形できません。"
             },
             "straighten": {
                 "title": "直線化",
@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "世界中のデータから検索",
-            "no_results_visible": "表示中のエリアからの検索結果はありませんでした",
+            "no_results_visible": "現在表示中のマップ領域にはありませんでした",
             "no_results_worldwide": "検索結果がありません"
         },
         "geolocate": {
@@ -661,7 +661,7 @@
             "multiselect": "選択中の地物",
             "unknown": "不明",
             "incomplete": "<ダウンロード未完了>",
-            "feature_list": "地物名や座標で検索してズーム",
+            "feature_list": "地物名や座標で位置検索してズーム",
             "edit": "地物エディタ",
             "check": {
                 "yes": "はい",
@@ -866,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "OSMにアップロードされていない編集内容があります",
-            "description": "前回作業した編集内容がアップロードされていません。編集内容を復元しますか？",
-            "restore": "変更を復元",
-            "reset": "変更を破棄"
+            "heading": "変更した内容が保存されていません",
+            "description": "直前の編集セッションから未保存の変更内容を復元しますか？",
+            "restore": "変更内容を復元",
+            "reset": "変更内容を破棄"
         },
         "save": {
             "title": "保存",
@@ -905,14 +905,14 @@
             }
         },
         "success": {
-            "just_edited": "OpenStreetMap編集完了！",
-            "thank_you": "マップの改善ありがとうございます。",
-            "thank_you_location": "{where}付近でのマップ改善への協力ありがとうございます。",
+            "just_edited": "たった今OpenStreetMapが編集されました！",
+            "thank_you": "マップ改善へのご協力ありがとうございます。",
+            "thank_you_location": "{where} 付近のマップ改善へのご協力ありがとうこざいます。",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "あなたが投稿した内容は（サーバーの状況にもよりますが）数分で標準レイヤーに反映されます。その他のレイヤーなどでは反映にさらに時間がかかる場合があります。",
+            "help_html": "サーバーの状態にもよりますが、変更は通常数分で反映されます。標準地図以外への反映はもっと時間がかかる場合があります。",
             "help_link_text": "詳細",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "OSM上で変更内容を閲覧",
@@ -929,10 +929,10 @@
             "cancel": "キャンセル"
         },
         "splash": {
-            "welcome": "iD 起動中",
-            "text": "iDは、世界でもっとも優れた自由な世界地図を編集するためのツールで、馴染みやすく、かつ高機能です。現在のバージョンは {version} です。詳細は {website} で公開中です。バグ報告は {github} で受け付けています。",
-            "walkthrough": "チュートリアルを開始",
-            "start": "直ちに編集"
+            "welcome": "OpenStreetMap エディタの iD へようこそ",
+            "text": "iD はみんなで作る世界地図に貢献するための使いやすくパワフルなツールです。現在のバージョンは {version} です。詳細情報は {website} で、バグレポートは {github} でお願いします。",
+            "walkthrough": "ウォークスルーを始める",
+            "start": "今すぐ編集を始める"
         },
         "source_switch": {
             "live": "本番サーバ",
@@ -1459,7 +1459,7 @@
                 "add_area_draw": "次にマウスカーソルを対象となる地物の角のひとつに置いて、{leftclick}左クリックまたはスペースキーを押してアリアの外周にノードを置き始めます。クリックまたはスペースキーを押してノードを追加します。外周を描いている間も、ズームインしたりマップをドラッグして詳細を描き加えることができます。",
                 "add_area_finish": "エリアを描き終わったら、`{return}`キーまたは`ESC`キーを押すか、最初または最後のノードを再度クリックして終了します。",
                 "square_area_h": "角を直角化",
-                "square_area_command": "建物などエリアの地物の多くには直角な角があります。エリアの角を直角にするには、エリアの境界を{rightclick}右クリックして選択し、編集メニューから{orthogonalize} **直交化**を選びます。",
+                "square_area_command": "建物などエリアの地物の多くには直角な角があります。エリアの角を直角にするには、エリアの境界を{rightclick}右クリックして選択し、編集メニューから{orthogonalize} **直角化**を選びます。",
                 "modify_area_h": "エリアを変更",
                 "modify_area_dragnode": "例えば背景画像と一致しない建物など、形状が正しくないエリア見かけることは多いでしょう。エリアの形状を調整するにはまず{leftclick}左クリックして対象を選びます。エリアの全ノードが小さな円として表示されます。そしてノードをより正確な位置にドラッグすることができます。",
                 "modify_area_addnode": "そのエリアの外周上で{leftclick}**x2**ダブルクリックしたり、2つのノード間の中間にある小さな三角形をドラッグすると、エリアに沿って新しいノードを作成することができます。",
@@ -1740,6 +1740,20 @@
                     "reference": "Google製品はプロプライエタリであり出典として使用してはいけません。"
                 }
             },
+            "invalid_format": {
+                "title": "不適切な形式",
+                "tip": "想定外の形式のタグを探す",
+                "email": {
+                    "message": "{feature} には不適切なメールアドレスがあります。",
+                    "message_multi": "{feature} には不適切なメールアドレスが複数あります。",
+                    "reference": "メールアドレスは \"user@example.com\" のような形式でなければなりません。"
+                },
+                "website": {
+                    "message": "{feature} には不適切なウェブサイトがあります。",
+                    "message_multi": "{feature} には不適切なウェブサイトが複数あります。",
+                    "reference": "ウェブサイトは \"http\" または \"https\" で始まらなければなりません。"
+                }
+            },
             "missing_role": {
                 "title": "ロールが未設定",
                 "message": "{relation} 内の{member} にはロールがありません",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} には不完全なタグがあります",
                     "reference": "タグを追加したほうが良い地物があります。"
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} はbrandの標準的なタグを使っていないようです",
+                    "reference": "同一brandの地物には同じタグ付けをしてください。"
                 }
             },
             "private_data": {
@@ -2170,8 +2188,8 @@
                 "choose_preset_house": "建物の種類はこれ以外にもいろいろありますが、これは明らかに家（一戸建て住宅）です。{br}種別がはっきりわからない場合は建物全般の種別を選べばOKです。**{preset} という種別を選びます。**",
                 "close": "**エスケープキーか{button} ボタンをクリックして地物エディタを閉じます。**",
                 "rightclick_building": "**作成した建物を右クリックで選んで編集メニューを表示します。**",
-                "square_building": "あなたが描いた建物を、より建物らしい直角構造にしてみましょう。**{button}ボタンを押すと、建物の形が四角形になります。**",
-                "retry_square": "直交化ボタン以外を押したようです。もう一度やってみてください。",
+                "square_building": "あなたが描いた建物を、より建物らしい直角構造にしてみましょう。**{button}ボタンを押すと、建物の形が直角になります。**",
+                "retry_square": "直角化ボタン以外を押したようです。もう一度やってみてください。",
                 "done_square": "建物の角が動いたのが分かりましたか？もうひとつ役に立つテクニックを学びましょう。",
                 "add_tank": "次に、この円形の貯蔵タンクをトレースします。**{button} エリアをクリックして新しいエリアを追加してください。**",
                 "start_tank": "きれいな円が描けなくても大丈夫。タンクの外周に触れるようにして、その内側のエリアに粗い円を描いてみてください。**クリックするかスペースキーを押してタンクの外周上に開始ノードを置きます。**",
@@ -2691,7 +2709,7 @@
                 },
                 "comment": {
                     "label": "変更セットのコメント",
-                    "placeholder": "投稿内容の短い説明(必須)"
+                    "placeholder": "投稿内容の簡潔な説明(アップロード前に記入必須)"
                 },
                 "communication_multi": {
                     "label": "通信回線の種類"
@@ -2838,6 +2856,10 @@
                     "label": "装置",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "直径",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "おむつ交換台の利用可否"
                 },
@@ -2883,7 +2905,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "方向",
+                    "label": "影響を受ける方向",
                     "options": {
                         "backward": "逆方向",
                         "both": "両方 / 全て",
@@ -3659,7 +3681,7 @@
                     "placeholder": "小数点第一位までの距離 (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "方向（鉄道信号機）",
+                    "label": "影響を受ける方向",
                     "options": {
                         "backward": "逆方向",
                         "both": "両方向 / 全て",
@@ -4139,7 +4161,7 @@
                     "label": "交通標識"
                 },
                 "traffic_sign/direction": {
-                    "label": "方向",
+                    "label": "影響を受ける方向",
                     "options": {
                         "backward": "逆方向",
                         "both": "両方向 / 全て",
@@ -4150,7 +4172,7 @@
                     "label": "特別な信号機の種類"
                 },
                 "traffic_signals/direction": {
-                    "label": "方向（信号機）",
+                    "label": "影響を受ける方向",
                     "options": {
                         "backward": "逆方向",
                         "both": "両方 / 全て",
@@ -4185,6 +4207,9 @@
                 "trees": {
                     "label": "樹種"
                 },
+                "trench": {
+                    "label": "種類"
+                },
                 "trolley_wire": {
                     "label": "トロリーバスの架線"
                 },
@@ -4202,6 +4227,9 @@
                         "test": "試験用",
                         "tourism": "観光用"
                     }
+                },
+                "valve": {
+                    "label": "バルブの種類"
                 },
                 "vending": {
                     "label": "商品の種類"
@@ -4618,7 +4646,7 @@
                 },
                 "amenity/events_venue": {
                     "name": "イベント施設",
-                    "terms": "イベント施設, イベント会場, 会場, 催事"
+                    "terms": "イベント施設, イベント会場, 会場, 催事, 催事場, 結婚式場"
                 },
                 "amenity/fast_food": {
                     "name": "ファストフード全般",
@@ -4796,6 +4824,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "キリスト教の教会",
                     "terms": "教会, キリスト教, クリスチャン, キリスト教の教会, キリスト教徒, キリスト教会, 宗教, 宗教施設, 礼拝所"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "エホバの証人の王国会館",
+                    "terms": "エホバの証人の王国会館, 宗教, 信仰"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "ラルスデルムンド寺院",
+                    "terms": "ラルスデルムンド寺院, 宗教, 信仰"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "クエーカーフレンズ集会所",
+                    "terms": "クエーカーフレンズ集会所, 宗教, 信仰"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "ヒンドゥー教寺院",
@@ -5628,7 +5668,7 @@
                 },
                 "craft/boatbuilder": {
                     "name": "ボート製造所",
-                    "terms": "ボート製造所, 職人, 工房"
+                    "terms": "ボート製造所, 職人, 工房, 船大工"
                 },
                 "craft/bookbinder": {
                     "name": "製本所",
@@ -5772,8 +5812,8 @@
                     "terms": "製材, 職人"
                 },
                 "craft/scaffolder": {
-                    "name": "足場職人",
-                    "terms": "足場職人, とび職, 職人"
+                    "name": "とび職",
+                    "terms": "足場職人, とび職, 職人, 鳶, 鳶職"
                 },
                 "craft/sculptor": {
                     "name": "彫刻製作所",
@@ -5785,7 +5825,7 @@
                 },
                 "craft/stonemason": {
                     "name": "石工",
-                    "terms": "石工, 石材加工, 職人, 工房"
+                    "terms": "石工, 石材加工, 職人, 工房, 墓石, 墓石店"
                 },
                 "craft/tailor": {
                     "name": "仕立て屋"
@@ -6497,14 +6537,6 @@
                     "name": "兵舎",
                     "terms": "兵舎, 兵営"
                 },
-                "landuse/military/bunker": {
-                    "name": "軍事用バンカー",
-                    "terms": "バンカー,掩体壕"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "検問所",
-                    "terms": "検問所"
-                },
                 "landuse/military/danger_area": {
                     "name": "危険区域",
                     "terms": "危険区域"
@@ -6513,17 +6545,9 @@
                     "name": "海軍基地",
                     "terms": "海軍, 軍事基地"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "核実験場",
-                    "terms": "核実験場"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "障害物コース",
                     "terms": "障害物コース, アスレチックコース"
-                },
-                "landuse/military/office": {
-                    "name": "軍事務所",
-                    "terms": "軍事務所"
                 },
                 "landuse/military/range": {
                     "name": "軍事演習場",
@@ -6633,6 +6657,10 @@
                 "leisure/dog_park": {
                     "name": "ドッグパーク",
                     "terms": "ドッグパーク, ドッグラン, 犬, 動物, ペット"
+                },
+                "leisure/escape_game": {
+                    "name": "脱出ゲーム場",
+                    "terms": "脱出ゲーム場, 脱出ゲーム, リアル脱出ゲーム, ゲーム, 娯楽"
                 },
                 "leisure/firepit": {
                     "name": "焚火場",
@@ -7045,6 +7073,10 @@
                     "name": "パイプライン（地下）",
                     "terms": "パイプライン（地下）, パイプライン, 地下, 埋設パイプライン, 地下パイプ"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "バルブ(パイプライン)",
+                    "terms": "バルブ(パイプライン)"
+                },
                 "man_made/pumping_station": {
                     "name": "ポンプ場",
                     "terms": "ポンプ場, 揚水施設, 汲み上げ"
@@ -7144,6 +7176,26 @@
                 "manhole/telecom": {
                     "name": "電話線用マンホール",
                     "terms": "電話線用マンホール"
+                },
+                "military/bunker": {
+                    "name": "軍事用バンカー",
+                    "terms": "掩体壕, 軍事用バンカー, バンカー"
+                },
+                "military/checkpoint": {
+                    "name": "検問所",
+                    "terms": "検問所, チェックポイント"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "核実験場",
+                    "terms": "核実験場"
+                },
+                "military/office": {
+                    "name": "軍事務所",
+                    "terms": "軍事務所"
+                },
+                "military/trench": {
+                    "name": "塹壕",
+                    "terms": "塹壕, 軍事用"
                 },
                 "natural": {
                     "name": "自然"
@@ -7334,6 +7386,10 @@
                 "office/association": {
                     "name": "非営利組織",
                     "terms": "非営利組織, NPO, 非営利団体"
+                },
+                "office/bail_bond_agent": {
+                    "name": "保釈保証業者",
+                    "terms": "保釈保証業者"
                 },
                 "office/charity": {
                     "name": "慈善団体",
@@ -8382,6 +8438,10 @@
                     "name": "健康・医療器具店",
                     "terms": "医療器具店, 医療用品店, 健康器具店, ヘルスケア, 健康, 医療"
                 },
+                "shop/military_surplus": {
+                    "name": "軍払い下げ品店",
+                    "terms": "軍払い下げ品店, 軍払下げ品店, 軍余剰物資店, 店舗, ミリタリー, ミリタリーグッズ"
+                },
                 "shop/mobile_phone": {
                     "name": "携帯電話店",
                     "terms": "携帯電話店, ケータイショップ"
@@ -9090,13 +9150,6 @@
                 "description": "画像の境界と取得日付。ラベルはズームレベル13以上で表示。",
                 "name": "DigitalGlobe標準画像撮影日"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "規約＆フィードバック"
-                },
-                "description": "DigitalGlobe-Vivid は地球上のあらゆる地域向けの最適な美観と即時性をもつモザイク写真で、50cm解像度以上かつ画像の即時性は平均20ヶ月未満です。",
-                "name": "DigitalGlobe Vivid 画像"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
@@ -9131,6 +9184,20 @@
                 },
                 "description": "衛星・航空画像です。",
                 "name": "Mapbox衛星画像"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "MaxarプレミアムはMaxarベースマップの繋ぎ合わせから成り、50cm以上の解像度した組み合わせで、選ばれた地域が+Vividや興味深いカスタムエリアで埋められ、今後の更新でより頻繁にリフレッシュされます。",
+                "name": "Maxarプレミアム画像(Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Maxar標準は地球の大陸部の86%をカバーする画像を集めたセットで、一部30-60cm解像度でランドサットを下敷きにしています。平均年齢は2.31歳で、場所によっては毎年2x 更新されます。 ",
+                "name": "Maxar標準画像(Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9273,6 +9340,27 @@
                 },
                 "description": "basemap.at が提供するオルソ写真レイヤ。geoimage.at 画像の「後継」。",
                 "name": "basemap.at Orthofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Annotation overlay provided by basemap.at.",
+                "name": "basemap.at Overlay"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surface layer provided by basemap.at.",
+                "name": "basemap.at Surface"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terrain layer provided by basemap.at.",
+                "name": "basemap.at Terrain"
             },
             "eufar-balaton": {
                 "attribution": {

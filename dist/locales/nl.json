@@ -19,8 +19,6 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Voeg een object toe",
-                "description": "Zoek naar objecten om toe te voegen aan de kaart.",
                 "key": "Tab",
                 "result": "{count} resultaat",
                 "results": "{count} resultaten"
@@ -544,7 +542,6 @@
         },
         "geocoder": {
             "search": "Zoek wereldwijd …",
-            "no_results_visible": "Geen resultaten in dit gebied",
             "no_results_worldwide": "Geen resultaten gevonden"
         },
         "geolocate": {
@@ -773,12 +770,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Je hebt niet-opgeslagen aanpassingen",
-            "description": "Er zijn niet-opgeslagen aanpassingen uit een vorige sessie. Wil je die herstellen?",
-            "restore": "Herstel mijn wijzigingen",
-            "reset": "Verwerp mijn wijzigingen"
-        },
         "save": {
             "title": "Opslaan",
             "help": "Inspecteer je wijzigingen en upload ze naar OpenStreetMap, zodat ze zichtbaar worden voor andere gebruikers.",
@@ -813,10 +804,6 @@
             }
         },
         "success": {
-            "just_edited": "Je hebt OpenStreetMap bewerkt!",
-            "thank_you": "Bedankt om OpenStreetMap te verbeteren.",
-            "thank_you_location": "Bedankt om de kaart bij te werken bij {where}.",
-            "help_html": "Je wijzigingen zouden binnen enkele minuten zichtbaar moeten zijn in de \"Standaard\"-laag op openstreetmap.org. Het updaten van sommige soorten objecten kan langer duren. Andere kaarten op basis van OSM worden minder vaak bijgewerkt.",
             "help_link_text": "Meer hierover, in het Engels",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Bekijk wijzigingen op OSM",
@@ -831,12 +818,6 @@
         "confirm": {
             "okay": "Oké",
             "cancel": "Annuleren"
-        },
-        "splash": {
-            "welcome": "Welkom bij iD, een bewerkingsprogramma voor OpenStreetMap",
-            "text": "iD biedt een gebruiksvriendelijke manier om bij te dragen aan de beste, open wereldkaart ter wereld. Dit is versie {version}. Voor meer informatie, zie {website}. Meld softwarefouten op {github}.",
-            "walkthrough": "Start de rondleiding",
-            "start": "Bewerk nu"
         },
         "source_switch": {
             "live": "live",
@@ -2573,7 +2554,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Richting",
                     "options": {
                         "backward": "Achterwaarts (tegen richting van de getekende lijn in)",
                         "both": "Beide / Alle",
@@ -3328,7 +3308,6 @@
                     "placeholder": "Tot op één decimaal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Richting",
                     "options": {
                         "backward": "Achterwaarts (tegen richting van de getekende lijn in)",
                         "both": "Beide / Alle",
@@ -3785,7 +3764,6 @@
                     "label": "Verkeersbord"
                 },
                 "traffic_sign/direction": {
-                    "label": "Richting",
                     "options": {
                         "backward": "Achterwaarts (tegen richting van de getekende lijn in)",
                         "both": "Beide",
@@ -3796,7 +3774,6 @@
                     "label": "Type"
                 },
                 "traffic_signals/direction": {
-                    "label": "Richting",
                     "options": {
                         "backward": "Achterwaarts (tegen richting van de getekende lijn in)",
                         "both": "Beide / Alle",
@@ -5856,14 +5833,6 @@
                     "name": "Kazerne",
                     "terms": "barakken,soldaten,troepen,militair,leger"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militaire bunker",
-                    "terms": "legerbunker"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Militair checkpoint",
-                    "terms": "controlepunt,checkpoint,douane,grenscontrole,leger"
-                },
                 "landuse/military/danger_area": {
                     "name": "Militaire gevarenzone",
                     "terms": "bommen,munitie,leger,gevarenzone,geen toegang,ontruimingszone,militaire ontruimingszone"
@@ -5872,17 +5841,9 @@
                     "name": "Marinebasis",
                     "terms": "militair,leger,zeemacht"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Kernwapentestsite",
-                    "terms": "nucleair,bommen,testzone,militaire gevarenzone,gevarenzone,geen toegang,leger,atoombomtestsite"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Militair hindernissenparcours",
                     "terms": "oefenterrein,leger"
-                },
-                "landuse/military/office": {
-                    "name": "Militair kantoor",
-                    "terms": "leger,administratie,marine,zeemacht,luchtmacht,landmacht"
                 },
                 "landuse/military/range": {
                     "name": "Militair schietterrein",

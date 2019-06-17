@@ -10,12 +10,11 @@
             "favorite": "즐겨찾기"
         },
         "toolbar": {
-            "undo_redo": "실행 취소 / 다시 실행"
+            "undo_redo": "실행 취소 / 다시 실행",
+            "add_feature": "지물 추가"
         },
         "modes": {
             "add_feature": {
-                "title": "지물 추가하기",
-                "description": "지도에 추가할 지물을 검색합니다.",
                 "key": "Tab",
                 "result": "{count}개 결과",
                 "results": "{count}개 결과"
@@ -380,7 +379,7 @@
             "tooltip": "다시 실행: {action}",
             "nothing": "다시 실행할 것이 없습니다."
         },
-        "tooltip_keyhint": "바로가기:",
+        "tooltip_keyhint": "단축키:",
         "browser_notice": "이 편집기는 파이어폭스, 크롬, 사파리, 오페라와 인터넷 익스플로러 11을 지원합니다. 지도를 편집하려면 사용하고 있는 브라우저를 업그레이드하거나 Potlatch 2를 사용하세요.",
         "translate": {
             "translate": "번역",
@@ -500,7 +499,6 @@
         },
         "geocoder": {
             "search": "전 세계 검색...",
-            "no_results_visible": "보이는 지도 공간 내 결과가 없습니다",
             "no_results_worldwide": "결과가 없습니다"
         },
         "geolocate": {
@@ -716,12 +714,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "저장하지 않은 변경사항이 있습니다",
-            "description": "이전 편집 기간에 저장하지 않은 변경사항을 복구하겠습니까?",
-            "restore": "변경점 복구",
-            "reset": "변경점 재설정"
-        },
         "save": {
             "title": "저장",
             "help": "오픈스트리트맵에 변경사항을 저장하여 다른 사용자에게 보이게 합니다.",
@@ -756,10 +748,6 @@
             }
         },
         "success": {
-            "just_edited": "오픈스트리트맵을 편집했습니다!",
-            "thank_you": "지도 제작에 기여해 주셔서 감사합니다",
-            "thank_you_location": "{where} 주변의 지도에 기여해 주셔서 감사합니다.",
-            "help_html": "변경 내역은 몇 분 후에 OpenStreetMap에 보여집니다. 지도의 몇몇 부분은 업데이트 되기에 더 오래 걸릴 수 있습니다.",
             "help_link_text": "자세한 정보",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Ko:FAQ#.EB.82.98.EB.8A.94_.EC.A7.80.EB.8F.84.EC.97.90_.EC.95.BD.EA.B0.84.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.9D.84_.EA.B0.80.ED.96.88.EB.8B.A4._.EB.82.B4.EA.B0.80_.EC.96.B4.EB.96.BB.EA.B2.8C_.EB.82.98.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.82.AC.ED.95.AD.EC.9D.84_.EB.B3.BC_.EC.88.98_.EC.9E.88.EB.82.98.EC.9A.94.3F",
             "view_on_osm": "OSM에서 변경점 보기",
@@ -774,12 +762,6 @@
         "confirm": {
             "okay": "확인",
             "cancel": "취소"
-        },
-        "splash": {
-            "welcome": "iD 오픈스트리트맵 편집기에 오신 것을 환영합니다",
-            "text": "iD는 세계 최고의 자유 세계 지도에 기여하기 위한 친절하지만 강력한 도구입니다. 버전은 {version}입니다. 자세한 정보에 대해서는 {website}을 참조하고 {github}에서 버그를 보고하세요.",
-            "walkthrough": "연습 시작하기",
-            "start": "지금 편집하기"
         },
         "source_switch": {
             "live": "실시간",
@@ -1297,6 +1279,18 @@
             },
             "rules": {
                 "title": "규칙"
+            },
+            "options": {
+                "what": {
+                    "title": "검사:",
+                    "edited": "내 편집",
+                    "all": "모두"
+                },
+                "where": {
+                    "title": "위치:",
+                    "visible": "화면 내",
+                    "all": "모든 곳"
+                }
             },
             "fix": {
                 "connect_features": {
@@ -1928,6 +1922,10 @@
                 "building": {
                     "label": "건물"
                 },
+                "building/levels_building": {
+                    "label": "층수",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "재질"
                 },
@@ -2162,7 +2160,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "방향",
                     "options": {
                         "backward": "역방향",
                         "both": "둘 다 / 모두",
@@ -2330,6 +2327,9 @@
                 },
                 "height": {
                     "label": "높이(미터)"
+                },
+                "height_building": {
+                    "label": "건물 높이(미터)"
                 },
                 "highspeed": {
                     "label": "고속"
@@ -2794,7 +2794,6 @@
                     "placeholder": "소수점 한 자리로 거리 (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "방향",
                     "options": {
                         "backward": "역방향",
                         "both": "둘 다 / 모두",
@@ -3212,7 +3211,6 @@
                     "label": "교통 표지판"
                 },
                 "traffic_sign/direction": {
-                    "label": "방향",
                     "options": {
                         "backward": "역방향",
                         "both": "양방향",
@@ -3223,7 +3221,6 @@
                     "label": "유형"
                 },
                 "traffic_signals/direction": {
-                    "label": "방향",
                     "options": {
                         "backward": "역방향",
                         "both": "양방향",
@@ -3659,8 +3656,14 @@
                 "amenity/fast_food/chicken": {
                     "name": "치킨 패스트푸드"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "도넛 패스트푸드"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "피시앤칩스 패스트푸드"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "아이스크림 패스트푸드"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "케밥 패스트푸드"
@@ -4346,6 +4349,9 @@
                     "name": "온실",
                     "terms": "비닐하우스"
                 },
+                "building/hangar": {
+                    "name": "격납고 건물"
+                },
                 "building/hospital": {
                     "name": "병원 건물",
                     "terms": "병원 건물"
@@ -4666,6 +4672,9 @@
                 },
                 "emergency/fire_extinguisher": {
                     "name": "소화기"
+                },
+                "emergency/fire_hose": {
+                    "name": "소방 호스"
                 },
                 "emergency/fire_hydrant": {
                     "name": "소화전",
@@ -5059,6 +5068,15 @@
                     "name": "성",
                     "terms": "성"
                 },
+                "historic/castle/palace": {
+                    "name": "궁전"
+                },
+                "historic/city_gate": {
+                    "name": "성문"
+                },
+                "historic/manor": {
+                    "name": "영주 저택"
+                },
                 "historic/memorial": {
                     "name": "기념관",
                     "terms": "기념관"
@@ -5208,14 +5226,6 @@
                     "name": "막사",
                     "terms": "막사"
                 },
-                "landuse/military/bunker": {
-                    "name": "군사 벙커",
-                    "terms": "군사 벙커"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "검문소",
-                    "terms": "체크포인트"
-                },
                 "landuse/military/danger_area": {
                     "name": "위험 지역",
                     "terms": "위험 지역"
@@ -5224,17 +5234,9 @@
                     "name": "해군 기지",
                     "terms": "해군 기지"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "핵 폭발 지역",
-                    "terms": "핵 폭발 지역"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "장애물 코스",
                     "terms": "장애물 코스"
-                },
-                "landuse/military/office": {
-                    "name": "군사 사무소",
-                    "terms": "군사 사무실"
                 },
                 "landuse/military/range": {
                     "name": "군사 범위",
@@ -5643,6 +5645,9 @@
                     "name": "저장 창고",
                     "terms": "저장 창고"
                 },
+                "man_made/storage_tank/water": {
+                    "name": "수조"
+                },
                 "man_made/surveillance": {
                     "name": "감시",
                     "terms": "감시"
@@ -5669,6 +5674,9 @@
                 },
                 "man_made/tower/observation": {
                     "name": "관측 탑"
+                },
+                "man_made/tunnel": {
+                    "name": "터널"
                 },
                 "man_made/wastewater_plant": {
                     "name": "하수 처리장",
@@ -6300,6 +6308,9 @@
                 },
                 "railway/buffer_stop": {
                     "name": "차막이"
+                },
+                "railway/construction": {
+                    "name": "공사 중인 철도"
                 },
                 "railway/crossing": {
                     "name": "철도 건널목 (인도)",

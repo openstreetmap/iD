@@ -285,7 +285,6 @@
         },
         "geocoder": {
             "search": "Caută la nivel mondial...",
-            "no_results_visible": "Niciun rezultat în regiunea vizibilă",
             "no_results_worldwide": "Nu s-a găsit nici un rezultat"
         },
         "geolocate": {
@@ -405,12 +404,6 @@
                 "tooltip": "Suprafețe sunt desenate umplute în întregime."
             }
         },
-        "restore": {
-            "heading": "Ai modificări nesalvate.",
-            "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? ",
-            "restore": "Restaurează schimbările mele",
-            "reset": "Șterge schimbările mele"
-        },
         "save": {
             "title": "Salveaza",
             "no_changes": "Nici o modificare de salvat.",
@@ -434,16 +427,11 @@
             }
         },
         "success": {
-            "just_edited": "Tocmai ai editat OpenStreetMap!",
             "help_link_text": "Detalii"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Renunță"
-        },
-        "splash": {
-            "welcome": "Bine ai venit în editorul iD OpenStreetMap",
-            "walkthrough": "Începe ghidul"
         },
         "source_switch": {
             "live": "live",
@@ -2170,26 +2158,14 @@
                 "landuse/military/barracks": {
                     "name": "Baraci"
                 },
-                "landuse/military/bunker": {
-                    "name": "Munker Militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Punct de Control"
-                },
                 "landuse/military/danger_area": {
                     "name": "Zonă de Pericol"
                 },
                 "landuse/military/naval_base": {
                     "name": "Bază Navală"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Sit de Explozie Nucleară"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Curs cu Obstacole"
-                },
-                "landuse/military/office": {
-                    "name": "Oficiu Militar"
                 },
                 "landuse/military/range": {
                     "name": "Gamă Militară"

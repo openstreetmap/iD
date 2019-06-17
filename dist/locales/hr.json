@@ -443,7 +443,6 @@
         },
         "geocoder": {
             "search": "Globalna pretraga...",
-            "no_results_visible": "Nema rezultata na vidljivom dijelu karte",
             "no_results_worldwide": "Nema nađenih rezultata"
         },
         "geolocate": {
@@ -595,12 +594,6 @@
                 "tooltip": "Područja su iscrtana potpuno ispunjena."
             }
         },
-        "restore": {
-            "heading": "Imaš nespremljenih promjena",
-            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?",
-            "restore": "Vrati moje promjene",
-            "reset": "Zanemari moje promjene"
-        },
         "save": {
             "title": "Spremi",
             "help": "Pregledaj svoje promjene i postavi ih na OpenStreetMap, tako će postati vidljive drugim korisnicima.",
@@ -635,10 +628,6 @@
             }
         },
         "success": {
-            "just_edited": "Upravo si uredio/la OpenStreetMap!",
-            "thank_you": "Hvala ti za poboljšanje karte.",
-            "thank_you_location": "Hvala ti za poboljšanje karte u blizini {where}.",
-            "help_html": "Tvoje promjene bi se trebale pojaviti na OpenStreetMapu kroz par minuta. Druge karte će trebati više vremena za ažuriranje podataka.",
             "help_link_text": "Detalji",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Pogledaj promjene na OSM",
@@ -653,12 +642,6 @@
         "confirm": {
             "okay": "U redu",
             "cancel": "Otkaži"
-        },
-        "splash": {
-            "welcome": "Dobrodošli na iD OpenStreetMap uređivač",
-            "text": "iD je vrlo jednostavan ali moćan alat za doprinošenje najboljoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledaj {website} i prijavi greške u softveru na {github}.",
-            "walkthrough": "Počni prohod",
-            "start": "Odmah uređuj"
         },
         "source_switch": {
             "live": "uživo",
@@ -1225,19 +1208,49 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Vrste ograda"
+                    "name": "Vrste prepreka"
                 },
                 "category-building": {
                     "name": "Vrste građevina"
                 },
+                "category-golf": {
+                    "name": "Elementi za golf"
+                },
                 "category-landuse": {
                     "name": "Načini korištenja zemljišta"
+                },
+                "category-natural": {
+                    "name": "Prirodni elementi"
+                },
+                "category-path": {
+                    "name": "Staze"
+                },
+                "category-rail": {
+                    "name": "Pruge"
                 },
                 "category-restriction": {
                     "name": "Vrste zabrana"
                 },
+                "category-road_major": {
+                    "name": "Velike prometnice"
+                },
+                "category-road_minor": {
+                    "name": "Male prometnice"
+                },
+                "category-road_service": {
+                    "name": "Servisna cesta"
+                },
                 "category-route": {
                     "name": "Vrste trasa"
+                },
+                "category-utility": {
+                    "name": "Elementi komunalija"
+                },
+                "category-water": {
+                    "name": "Vodena tijela"
+                },
+                "category-waterway": {
+                    "name": "Vodotokovi"
                 }
             },
             "fields": {
@@ -1282,12 +1295,16 @@
                     "label": "Adresa",
                     "placeholders": {
                         "city": "Grad",
+                        "city!vn": "Grad/gradić",
                         "conscriptionnumber": "123",
                         "country": "Država",
+                        "county": "Županija",
                         "district": "Oblast",
+                        "floor": "Kat",
                         "hamlet": "Zaseok",
                         "housename": "Naziv kuće",
                         "housenumber": "123",
+                        "neighbourhood": "Četvrt",
                         "place": "Mjesto",
                         "postcode": "Poštanski broj",
                         "province": "Pokrajina",
@@ -1340,8 +1357,23 @@
                 "aeroway": {
                     "label": "Vrsta"
                 },
+                "air_conditioning": {
+                    "label": "Klimatizirano"
+                },
                 "amenity": {
                     "label": "Vrsta"
+                },
+                "animal_boarding": {
+                    "label": "Za životinje"
+                },
+                "animal_breeding": {
+                    "label": "Za životinje"
+                },
+                "animal_shelter": {
+                    "label": "Za životinje"
+                },
+                "architect": {
+                    "label": "Arhitekt"
                 },
                 "area/highway": {
                     "label": "Vrsta"
@@ -1376,8 +1408,14 @@
                 "brand": {
                     "label": "Marka"
                 },
+                "brewery": {
+                    "label": "Točena piva"
+                },
                 "building": {
                     "label": "Zgrada"
+                },
+                "building/levels_building": {
+                    "placeholder": "2, 4, 6..."
                 },
                 "building_area": {
                     "label": "Zgrada"
@@ -1448,6 +1486,9 @@
                         "cycleway:right": "Desna strana"
                     }
                 },
+                "date": {
+                    "label": "Datum"
+                },
                 "delivery": {
                     "label": "Dostava"
                 },
@@ -1463,8 +1504,46 @@
                 "diaper": {
                     "label": "Omogućeno mijenjanje pelena"
                 },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Istok",
+                        "ENE": "Istok-sjeveroistok",
+                        "ESE": "Istok-jugoistok",
+                        "N": "Sjever",
+                        "NE": "Sjeveroistok",
+                        "NNE": "Sjever-sjeveroistok",
+                        "NNW": "Sjever-sjeverozapad",
+                        "NW": "Sjeverozapad",
+                        "S": "Jug",
+                        "SE": "Jugoistok",
+                        "SSE": "Jug-jugoistok",
+                        "SSW": "Jug-jugozapad",
+                        "SW": "Jugozapad",
+                        "W": "Zapad",
+                        "WNW": "Zapad-sjeverozapad",
+                        "WSW": "Zapad-jugozapad"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Smjer",
+                    "options": {
+                        "anticlockwise": "Suprotno od kazaljke na satu",
+                        "clockwise": "U smjeru kazaljke na satu"
+                    }
+                },
                 "dock": {
                     "label": "Vrsta"
+                },
+                "dog": {
+                    "label": "Psi",
+                    "options": {
+                        "leashed": "Samo na uzici",
+                        "no": "Nedozvoljeni",
+                        "yes": "Dozvoljeni"
+                    }
+                },
+                "door": {
+                    "label": "Vrata"
                 },
                 "drive_through": {
                     "label": "Provezi-kroz"

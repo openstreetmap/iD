@@ -405,7 +405,6 @@
         },
         "geocoder": {
             "search": "Poišči po svetovnem zemljevidu ...",
-            "no_results_visible": "V vidnem polju zemljevida ni skladnih zadetkov",
             "no_results_worldwide": "Ni najdenih zadetkov"
         },
         "geolocate": {
@@ -553,12 +552,6 @@
                 "tooltip": "Narisano polje je v celoti zapolnjeno z vzorcem."
             }
         },
-        "restore": {
-            "heading": "Nekatere spremembe še niso shranjene.",
-            "description": "Ali želite ponovno obnoviti še ne shranjene spremembe predhodne seje urejanja?",
-            "restore": "Obnovi spremembe",
-            "reset": "Zavrzi spremembe"
-        },
         "save": {
             "title": "Shrani",
             "help": "Preverite narejene spremembe in jih pošljite na strežnik OpenStreetMap, da bodo na voljo tudi drugim uporabnikom.",
@@ -592,10 +585,6 @@
             }
         },
         "success": {
-            "just_edited": "Zemljevid OSM je posodobljen!",
-            "thank_you": "Hvala, da ste izboljšali zemljevid.",
-            "thank_you_location": "Hvala, da ste izboljšali zemljevid pri {where}.",
-            "help_html": "Vaše spremembe se bodo pojavile na OpenStreetMap v nekaj minutah. Posodobitev zemljevidov drugje lahko traja dlje časa.",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Ogled paketa sprememb na OSM",
@@ -610,12 +599,6 @@
         "confirm": {
             "okay": "V redu",
             "cancel": "Prekliči"
-        },
-        "splash": {
-            "welcome": "Dobrodošli v iD, urejevalniku podatkov OpenStreetMap",
-            "text": "Urejevalnik iD je zmogljivo, uporabniku prijazno orodje za vnašanje podatkov na najboljši brezplačni svetovni zemljevid. Uporabljena je zadnja različica {version}. Več podrobnosti o urejevalniku je na voljo na {website}, poročila o hroščih pa se zbirajo na spletišču {github}.",
-            "walkthrough": "Predstavitev orodja",
-            "start": "Začni z urejanjem"
         },
         "source_switch": {
             "live": "objavljeno",
@@ -1483,9 +1466,6 @@
                         "clockwise": "V smeri urinega kazalca"
                     }
                 },
-                "direction_vertex": {
-                    "label": "Smer"
-                },
                 "display": {
                     "label": "Zaslon"
                 },
@@ -2198,7 +2178,6 @@
                     "label": "Prometni znak"
                 },
                 "traffic_sign/direction": {
-                    "label": "Smer",
                     "options": {
                         "backward": "Nazaj",
                         "both": "Obe / vse",
@@ -2209,7 +2188,6 @@
                     "label": "Vrsta"
                 },
                 "traffic_signals/direction": {
-                    "label": "Smer",
                     "options": {
                         "backward": "Nazaj",
                         "both": "Obe / vse",
@@ -3565,13 +3543,6 @@
                     "name": "Vojašnica",
                     "terms": "vojašnica,vojska,varovanje,tanki,poveljniki,general"
                 },
-                "landuse/military/bunker": {
-                    "name": "Vojaško zaklonišče"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Nadzorna točka",
-                    "terms": "kontrola, kontrolna točka, rampa"
-                },
                 "landuse/military/danger_area": {
                     "name": "Nevarno območje",
                     "terms": "strelišče, delovišče, gradbišče"
@@ -3579,14 +3550,8 @@
                 "landuse/military/naval_base": {
                     "name": "Vojaško pomorsko oporišče"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Območje jedrskih poskusov"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Vojaške ovire za trening"
-                },
-                "landuse/military/office": {
-                    "name": "Vojaške pisarne"
                 },
                 "landuse/military/range": {
                     "name": "Vojaško strelišče"

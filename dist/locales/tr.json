@@ -427,7 +427,6 @@
         },
         "geocoder": {
             "search": "Dünya çapında ara...",
-            "no_results_visible": "Görünen harita alanında hiçbir sonuç bulunamadı",
             "no_results_worldwide": "Hiçbir sonuç bulunamadı"
         },
         "geolocate": {
@@ -582,12 +581,6 @@
                 "tooltip": "Alanlar tamamen doldurulmuş olarak çizilir."
             }
         },
-        "restore": {
-            "heading": "Kaydedilmemiş değişikliklerin var",
-            "description": "Daha önceki oturumdan kaydedilmemiş değişiklikleri geri getirmek ister misin?",
-            "restore": "Değişikliklerimi geri yükle",
-            "reset": "Değişiklikleri iptal et"
-        },
         "save": {
             "title": "Kaydet",
             "help": "Yaptığın değişiklikleri diğer kullanıcıların görebilmesi için değişikliklerini OpenStreetMap'e yükle ve kaydet.",
@@ -621,10 +614,6 @@
             }
         },
         "success": {
-            "just_edited": "OpenStreetMap'te bir değişiklik yaptın!",
-            "thank_you": "Haritayı iyileştirdiğiniz için teşekkür ederiz.",
-            "thank_you_location": "{where} çevresindeki haritayı iyileştirdiğiniz için teşekkür ederiz.",
-            "help_html": "Değişiklikleriniz birkaç dakika içinde OpenStreetMap'da görünmelidir. Başka sitelerden haritaların güncellesi daha uzun sürebilir.",
             "help_link_text": "Detaylar",
             "help_link_url": "Yaptığın değişiklikleri nasıl görebileceğine dair detaylı bilgiyi şu adreste bulabilirsin - İngilizce: https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Değişiklikleri OSM üzerinde gör",
@@ -639,12 +628,6 @@
         "confirm": {
             "okay": "Tamam",
             "cancel": "İptal"
-        },
-        "splash": {
-            "welcome": "OpenStreetMap Editörü iD'ye Hoşgeldin",
-            "text": "iD, dünyanın en iyi ve bedava haritasına katkıda bulunmak için, kullanılması kolay ve güçlü bir araç. Bu sürüm {version}. Daha çok bilgi için {website} sayfasına git ve hataları {github} aracılığıyla bildir.",
-            "walkthrough": "Eğitime Başla",
-            "start": "Şimdi düzenle"
         },
         "source_switch": {
             "live": "canlı",
@@ -1542,7 +1525,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Yön",
                     "options": {
                         "backward": "Geri",
                         "both": "İleri ve Geri",
@@ -2065,7 +2047,6 @@
                     "label": "Tür"
                 },
                 "railway/signal/direction": {
-                    "label": "Yön",
                     "options": {
                         "backward": "Geri",
                         "both": "İleri ve Geri",
@@ -2374,7 +2355,6 @@
                     "label": "Tür"
                 },
                 "traffic_signals/direction": {
-                    "label": "Yön",
                     "options": {
                         "backward": "Geri",
                         "both": "İkisi / Hepsi",
@@ -3978,14 +3958,6 @@
                     "name": "Kışla",
                     "terms": "Kışla, Tesisler"
                 },
-                "landuse/military/bunker": {
-                    "name": "Sığınak",
-                    "terms": "Sığınak"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Kontrol Noktası",
-                    "terms": "Kontrol Noktası"
-                },
                 "landuse/military/danger_area": {
                     "name": "Tehlikeli Bölge",
                     "terms": "Tehlikeli Bölge"
@@ -3994,17 +3966,9 @@
                     "name": "Deniz Üssü",
                     "terms": "Deniz Üssü"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nükleer Patlama Sahası",
-                    "terms": "Nükleer Patlama Sahası"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Engelli Antreman Sahası",
                     "terms": "Engelli Antreman Sahası"
-                },
-                "landuse/military/office": {
-                    "name": "Askeri Büro",
-                    "terms": "Askeri Büro, Askeri Ofsi"
                 },
                 "landuse/military/range": {
                     "name": "Atış Sahası",

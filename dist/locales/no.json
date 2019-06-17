@@ -408,7 +408,6 @@
         },
         "geocoder": {
             "search": "Søk over hele verden...",
-            "no_results_visible": "Ingen resultater synlige i kartområdet",
             "no_results_worldwide": "Ingen resultater funnet"
         },
         "geolocate": {
@@ -549,12 +548,6 @@
                 "description": "Helfylt"
             }
         },
-        "restore": {
-            "heading": "Du har ulagrede endringer",
-            "description": "Ønsker du å gjenopprette ulagrede endringer fra en tidligere redigeringsøkt?",
-            "restore": "Gjenopprett mine endringer",
-            "reset": "Forkast endringene mine"
-        },
         "save": {
             "title": "Lagre",
             "help": "Gå gjennom endringene dine og last dem opp til OpenStreetMap, og gjør dem synlige for andre brukere.",
@@ -587,18 +580,11 @@
             }
         },
         "success": {
-            "just_edited": "Du har akkurat endret OpenStreetMap!",
             "help_link_text": "Detaljer"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Avbryt"
-        },
-        "splash": {
-            "welcome": "Velkommen til iD OpenStreetMap editor",
-            "text": "iD er et brukervennlig, men kraftig verktøy for å bidra til verdens beste frie kart. Dette er versjon {version}. For mer informasjon, se {website} og meld om feil på {github}.",
-            "walkthrough": "Begynn Gjennomgangen",
-            "start": "Rediger nå"
         },
         "source_switch": {
             "live": "direkte",
@@ -1350,7 +1336,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Retning",
                     "options": {
                         "backward": "Bakover",
                         "both": "Begge / Alle",
@@ -1833,7 +1818,6 @@
                     "label": "Type"
                 },
                 "railway/signal/direction": {
-                    "label": "Retning",
                     "options": {
                         "backward": "Bakover",
                         "both": "Begge/alle",
@@ -2066,7 +2050,6 @@
                     "label": "Trafikkskilt"
                 },
                 "traffic_sign/direction": {
-                    "label": "Retning",
                     "options": {
                         "backward": "Bakover",
                         "both": "Begge/alle",
@@ -2077,7 +2060,6 @@
                     "label": "Type"
                 },
                 "traffic_signals/direction": {
-                    "label": "Retning",
                     "options": {
                         "backward": "Bakover",
                         "both": "Begge/alle",
@@ -3257,20 +3239,11 @@
                 "landuse/military/barracks": {
                     "name": "Brakker"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunkers"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Sjekkpunkt"
-                },
                 "landuse/military/danger_area": {
                     "name": "Fareområde"
                 },
                 "landuse/military/obstacle_course": {
                     "name": "Hinderløye"
-                },
-                "landuse/military/office": {
-                    "name": "Militærkontor"
                 },
                 "landuse/military/training_area": {
                     "name": "Øvingsområde"

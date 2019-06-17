@@ -379,7 +379,6 @@
         },
         "geocoder": {
             "search": "Hľadaj celosvetovo...",
-            "no_results_visible": "Žiadne výsledky vo viditeľnej mapovej oblasti",
             "no_results_worldwide": "Bez výsledkov"
         },
         "geolocate": {
@@ -520,12 +519,6 @@
                 "tooltip": "Plochy su vykreslené plne vyplnené."
             }
         },
-        "restore": {
-            "heading": "Máte neuložené zmeny",
-            "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej návštevy?",
-            "restore": "Obnoviť moje zmeny",
-            "reset": "Vymazať moje zmeny"
-        },
         "save": {
             "title": "Ulož",
             "help": "Prezrite si znovu Vaše zmeny a nahrajte ich do OpenStreetMap, čím ich sprístupnite ďalším užívateľom.",
@@ -559,18 +552,12 @@
             }
         },
         "success": {
-            "just_edited": "Práve ste upravili OpenStreetMap!",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Zrušiť"
-        },
-        "splash": {
-            "welcome": "Vitajte v iD editore pre OpenStreetMap",
-            "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je verzia {version}. Pre viac informácií navštívte {website} alebo nahlasujte chyby na {github}.",
-            "walkthrough": "Začni prehliadku"
         },
         "source_switch": {
             "live": "pripojený",
@@ -3472,10 +3459,6 @@
                 "landuse/military/naval_base": {
                     "name": "Námorná základňa",
                     "terms": "namorna zakladna"
-                },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Miesto nukleárnej explózie",
-                    "terms": "miesto nuklearnej explózie, jadrový výbuch,jadrovy vybuch,jadrová bonba,jadrova bomba"
                 },
                 "landuse/orchard": {
                     "name": "Sad",

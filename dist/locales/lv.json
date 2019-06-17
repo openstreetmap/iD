@@ -399,7 +399,6 @@
         },
         "geocoder": {
             "search": "Meklēt pasaulē...",
-            "no_results_visible": "Nav rezultātu redzamajā kartes apgabalā",
             "no_results_worldwide": "Nav rezultātu"
         },
         "geolocate": {
@@ -557,12 +556,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Jums ir nesaglabātas izmaiņas",
-            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?",
-            "restore": "Atjaunot manas izmaiņas",
-            "reset": "Atmest manas izmaiņas"
-        },
         "save": {
             "title": "Saglabāt",
             "help": "Pārbaudi savas izmaiņas un augšupielādē tās uz OpenStreetMap, padarot tās redzamas citiem lietotājiem.",
@@ -596,10 +589,6 @@
             }
         },
         "success": {
-            "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
-            "thank_you": "Paldies par kartes uzlabošanu.",
-            "thank_you_location": "Paldies ka uzlabojāt karti {where} apkārtnē.",
-            "help_html": "Jūsu izmaiņām vajadzētu parādīties OpenStreetMap pēc pāris minūtēm. Citas kartes var atjaunoties lēnāk.",
             "help_link_text": "Detaļas",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Apskatīt izmaiņas OSM",
@@ -613,11 +602,6 @@
         "confirm": {
             "okay": "Labi",
             "cancel": "Atcelt"
-        },
-        "splash": {
-            "welcome": "Laipni lūgti iD OpenStreetMap redaktorā",
-            "text": "iD ir draudzīgs, bet spēcīgs rīks ar ko var dot savu ieguldījumu pasaules labākajai brīvajai pasaules kartei. Šī ir versija {version}. Papildus informācijai varat skatīt {website} un ziņot par kļūdām {github}.",
-            "start": "Rediģēt tagad"
         },
         "source_switch": {
             "live": "live",
@@ -1248,7 +1232,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Virziens",
                     "options": {
                         "backward": "Atmuguriski",
                         "both": "Abas / Visas"
@@ -1790,7 +1773,6 @@
                     "placeholder": "Attālums līdz vienam decimālpunktam (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Virziens",
                     "options": {
                         "backward": "Atmuguriski",
                         "both": "Abas / Visas"
@@ -2958,14 +2940,8 @@
                 "landuse/military/barracks": {
                     "name": "Kazarmas"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militārais Bunkurs"
-                },
                 "landuse/military/naval_base": {
                     "name": "Ūdensspēku bāze"
-                },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Atomsprādziena zona"
                 },
                 "landuse/quarry": {
                     "name": "Karjers"

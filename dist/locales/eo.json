@@ -13,7 +13,7 @@
         "toolbar": {
             "inspect": "Redaktilo",
             "undo_redo": "Malfari / refari",
-            "recent": "Lastaj",
+            "recent": "Antaŭe uzitaj",
             "favorites": "Elstarigitaj",
             "add_feature": "Aldoni objekton"
         },
@@ -573,7 +573,7 @@
                 "selected": "{n} elektitaj",
                 "no_history": "Neniu historio (nova elemento)",
                 "version": "Versio",
-                "last_edit": "Lasta redakto",
+                "last_edit": "Antaŭa redakto",
                 "edited_by": "Redaktita de",
                 "changeset": "Ŝanĝaro",
                 "unknown": "Nekonata",
@@ -866,7 +866,7 @@
         },
         "restore": {
             "heading": "Vi havas nekonservitajn ŝanĝojn",
-            "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de antaŭa redakta seanco?",
+            "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de la antaŭa redakta seanco?",
             "restore": "Restarigi miajn ŝanĝojn",
             "reset": "Ne konservi miajn ŝanĝojn"
         },
@@ -906,7 +906,7 @@
         "success": {
             "just_edited": "Vi ĵus redaktis OpenStreetMap!",
             "thank_you": "Dankon por plibonigi la mapon.",
-            "thank_you_location": "Dankon por plibonigi la mapon ĉirkaŭ {where}.",
+            "thank_you_location": "Dankon por plibonigi la mapon proksime de {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
@@ -927,8 +927,8 @@
             "cancel": "Nuligi"
         },
         "splash": {
-            "welcome": "Bonvenon al la OpenStreetMap-redaktilo 'iD'",
-            "text": "La redaktilo 'iD' estas afabla, sed potenca ilo por kontribui al la plej bona libera mondmapo. Ĉi tiu estas versio {version}. Por pli da informoj vidu {website} kaj bonvolu raporti erarojn per {github}.",
+            "welcome": "Bonvenon al la OpenStreetMap-redaktilo “iD”",
+            "text": "La redaktilo “iD” estas afabla, sed potenca ilo por kontribui al la plej bona libera mondmapo. Tio ĉi estas versio {version}. Pliaj informoj estas disponeblaj ĉe {website} kaj eblaj raporti erarojn per {github}.",
             "walkthrough": "Malfermi gvidilon",
             "start": "Redakti nun"
         },
@@ -1738,6 +1738,20 @@
                     "reference": "Produktoj de Google estas komercaj kaj ne estu uzataj kiel referencoj."
                 }
             },
+            "invalid_format": {
+                "title": "Erara tekstaranĝo",
+                "tip": "Trovi etikedojn kun eraro formo",
+                "email": {
+                    "message": "{feature} havas malĝustan retpoŝtan adreson",
+                    "message_multi": "{feature} havas kelkajn malĝustajn retpoŝtajn adresojn.",
+                    "reference": "Retpoŝta adreso estu kiel “uzanto@example.com”."
+                },
+                "website": {
+                    "message": "{feature} havas malĝustan retejon.",
+                    "message_multi": "{feature} havas kelkajn malĝustajn retejojn.",
+                    "reference": "Adresoj de retejoj komencu per “http” aŭ “https”."
+                }
+            },
             "missing_role": {
                 "title": "Mankantaj roloj",
                 "message": "{member} ne havas rolon ene {relation}",
@@ -1772,6 +1786,10 @@
                 "incomplete": {
                     "message": "{feature} havas nekompletajn etikedojn",
                     "reference": "Iuj objektoj havu pliajn etikedojn."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} ŝajnas esti marki kun nenormaj etikedoj.",
+                    "reference": "Ĉiuj objektoj de la sama marko estu etikeditaj sammaniere."
                 }
             },
             "private_data": {
@@ -2881,7 +2899,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direkto",
+                    "label": "Rilata direkto",
                     "options": {
                         "backward": "Malantaŭen",
                         "both": "Ambaŭ / ĉiuj",
@@ -3657,7 +3675,7 @@
                     "placeholder": "Distanco (kun precizo de unu dekono 123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Direkto",
+                    "label": "Rilata direkto",
                     "options": {
                         "backward": "Malantaŭen",
                         "both": "Ambaŭ / ĉiuj",
@@ -4137,7 +4155,7 @@
                     "label": "Trafiksigno"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direkto",
+                    "label": "Rilata direkto",
                     "options": {
                         "backward": "Malantaŭen",
                         "both": "Ambaŭ / ĉiuj",
@@ -4148,7 +4166,7 @@
                     "label": "Speco"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direkto",
+                    "label": "Rilata direkto",
                     "options": {
                         "backward": "Malantaŭen",
                         "both": "Ambaŭ / ĉiuj",
@@ -4182,6 +4200,9 @@
                 },
                 "trees": {
                     "label": "Arboj"
+                },
+                "trench": {
+                    "label": "Speco"
                 },
                 "trolley_wire": {
                     "label": "Troleo"
@@ -4794,6 +4815,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Kirko",
                     "terms": "kristana preĝejo,mesejo,kapelo,katedralo,baziliko,abatejo,monaĥejo,kristanismo,katolika preĝejo"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Regnohalo de Atestantoj de Jehovo",
+                    "terms": "atestantoj de jehovo,halo de regno"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Preĝejo La Luz del Mundo",
+                    "terms": "La Luz del Mundo"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Renkontejo de Kvakeristoj",
+                    "terms": "Kvakerismo,Religia Societo de Amikoj"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hinduisma templo",
@@ -6495,14 +6528,6 @@
                     "name": "Soldatejo",
                     "terms": "soldathejmo,kazerno"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunkro armea",
-                    "terms": "blokhaŭso,ŝirmejo"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Kontrolejo armea",
-                    "terms": "armea kontrolejo,kontrolpunkto"
-                },
                 "landuse/military/danger_area": {
                     "name": "Danĝerejo",
                     "terms": "dangherejo,dangxerejo,minkampo,pafaĵejo"
@@ -6511,17 +6536,9 @@
                     "name": "Marbazo armea",
                     "terms": "haveno armea,ŝiparo milita"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Eksplodejo de nuklea bombo",
-                    "terms": "nuklea testejo,atombombo,a-bombo,testejo,bombejo"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Obstakl-kurejo",
                     "terms": "dromo,soldatkurejo"
-                },
-                "landuse/military/office": {
-                    "name": "Oficejo armea",
-                    "terms": "armea oficejo,milita oficejo"
                 },
                 "landuse/military/range": {
                     "name": "Pafejo armea",
@@ -6631,6 +6648,10 @@
                 "leisure/dog_park": {
                     "name": "Hund-parko",
                     "terms": "hundparko,hundoparko,hunda parko"
+                },
+                "leisure/escape_game": {
+                    "name": "Ĉambro de enigmoj",
+                    "terms": "chambro de enigmoj,cxambro de enigmoj,enigma ĉambro,eskapa ĉambro"
                 },
                 "leisure/firepit": {
                     "name": "Lignofajrejo",
@@ -7142,6 +7163,10 @@
                 "manhole/telecom": {
                     "name": "Stratkanala (telekomunikado) kovrilo",
                     "terms": "stratkanalo,kabloj,subteraj kabloj,telefonaj kabloj"
+                },
+                "military/trench": {
+                    "name": "Tranĉeo armea",
+                    "terms": "trancheo,trancxeo,foso"
                 },
                 "natural": {
                     "name": "Natura objekto"
@@ -8157,7 +8182,7 @@
                 },
                 "shop/copyshop": {
                     "name": "Fotokopiilejo",
-                    "terms": "fotokopiilo,lumkopiilo,kopiilo,ksero"
+                    "terms": "fotokopiilo,lumkopiilo,kopiilo,ksero,xero"
                 },
                 "shop/cosmetics": {
                     "name": "Kosmetikaĵa (persona higieno) vendejo",
@@ -8294,7 +8319,7 @@
                 },
                 "shop/hardware": {
                     "name": "Laborila vendejo",
-                    "terms": "iloj,ilovendejo,il-vendejo,memfaradiloj"
+                    "terms": "iloj,ilovendejo,il-vendejo,memfaradiloj,faru vin mem"
                 },
                 "shop/health_food": {
                     "name": "Sanig-manĝaĵa vendejo",
@@ -9080,13 +9105,6 @@
                 "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
                 "name": "Norma fotaro de DigitalGlobe - fot-dato"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "DigitalGlobe-Vivid estas kunmetaĵo de kiel eble plej bela kaj aktuala fotaro por iu ajn areo de la Tero: distingivo 50cm aŭ pli bona kaj mezuma aktualeco <20 monatoj.",
-                "name": "DigitalGlobe-Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel‑2 sennuba fotaro de EOX IT Services GmbH (enhavas modifitajn datumojn (2017‑2018) de Copernicus)"
@@ -9121,6 +9139,20 @@
                 },
                 "description": "Satelita kaj aera fotaroj.",
                 "name": "Mapbox Satellite"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Maxar Premium estas kunmetaĵo de Maxar-bazmapo kun kelkaj regionoj plenigitaj per +Vivid fotaro je distingivo 50cm aŭ pli bona kaj aktualigata pli ofte.",
+                "name": "Maxar: detala fotaro (beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Maxar Standard estas prizorgata fotaro ampleksanta 86% da tero je distingivo 30–60cm (se disponebla), danke al programo Landsat. Mezuma aĝo de fotaro estas 2,31a, sed kelkaj areoj estas aktualigataj dufoje en jaro.",
+                "name": "Maxar: norma fotaro (beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9264,6 +9296,27 @@
                 "description": "Ortofota tavolo liverata de basemap.at, anstataŭanto de fotaro geoimage.at.",
                 "name": "basemap.at ortofoto"
             },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surtavolo de notoj de basemap.at.",
+                "name": "basemap.at surtavolo"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Tavolo de supraĵo liverata de basemap.at.",
+                "name": "basemap.at supraĵo"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Tavolo de altreliefo liverata de basemap.at.",
+                "name": "basemap.at altreliefo"
+            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -9282,14 +9335,14 @@
                 "attribution": {
                     "text": "GSI Japanujo"
                 },
-                "description": "Aera fotaro de GSI Japanujo. Kutime pli akurata ol Bing, sed malpli nova.",
-                "name": "Aera fotaro GSI Japanujo (korektita)"
+                "description": "Ortfotmapo de GSI Japanujo. Kutime pli akurata ol Bing, sed malpli nova.",
+                "name": "Ortfotmapo GSI Japanujo (korektita)"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
                     "text": "GSI Japanujo"
                 },
-                "description": "Aera fotaro de GSI Japanujo. Ne tute geometrie korektita, sed iomete pli aktuala aŭ kovranta aliajn terenojn ol fotaro de GSI.",
+                "description": "Ortfotmapo de GSI Japanujo. Ne tute geometrie korektita, sed iomete pli aktuala aŭ kovranta aliajn terenojn ol fotaro de GSI.",
                 "name": "Aera fotaro GSI Japanujo (nekorektita)"
             },
             "gsi.go.jp_seamlessphoto": {
@@ -9310,29 +9363,29 @@
                 "attribution": {
                     "text": "© komunumo Helsingborg"
                 },
-                "description": "Aera fotaro de la komunumo Helsingborg, publika uzo, 2016",
-                "name": "Aera fotaro Helsingborg"
+                "description": "Ortfotmapo de la komunumo Helsingborg, publika uzo, 2016",
+                "name": "Ortfotmapo Helsingborg"
             },
             "kalmar-orto-2014": {
                 "attribution": {
                     "text": "© komunumo Kalmar"
                 },
-                "description": "Aera fotaro pri la norda marbordo de la komunumo Kalmar, 2014",
-                "name": "Aera fotaro Kalmar (nordo) 2014"
+                "description": "Ortfotmapo pri la norda marbordo de la komunumo Kalmar, 2014",
+                "name": "Ortfotmapo Kalmar (nordo) 2014"
             },
             "kalmar-orto-2016": {
                 "attribution": {
                     "text": "© komunumo Kalmar"
                 },
-                "description": "Aera fotaro pri la suda marbordo de la komunumo Kalmar, 2016",
-                "name": "Aera fotaro Kalmar (sudo) 2016"
+                "description": "Ortfotmapo pri la suda marbordo de la komunumo Kalmar, 2016",
+                "name": "Ortfotmapo Kalmar (sudo) 2016"
             },
             "kalmar-orto-2018": {
                 "attribution": {
                     "text": "© komunumo Kalmar"
                 },
-                "description": "Aera fotaro pri urba areo de la komunumo Kalmar, 2018",
-                "name": "Aera fotaro Kalmar (urbo) 2018"
+                "description": "Ortfotmapo pri urba areo de la komunumo Kalmar, 2018",
+                "name": "Ortfotmapo Kalmar (urbo) 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -9345,15 +9398,15 @@
                 "attribution": {
                     "text": "© Lantmäteriet, CC0"
                 },
-                "description": "Kunmetaĵo de Sveda aera fotaro de jaroj 1955–1965. Pli novaj kaj pli malnovaj fotoj povas esti miksitaj.",
-                "name": "Lantmäteriet historia aera fotaro 1960"
+                "description": "Kunmetaĵo de Sveda ortfotmapo de jaroj 1955–1965. Pli novaj kaj pli malnovaj fotoj povas esti miksitaj.",
+                "name": "Lantmäteriet historia ortfotmapo 1960"
             },
             "lantmateriet-orto1975": {
                 "attribution": {
                     "text": "© Lantmäteriet, CC0"
                 },
-                "description": "Kunmetaĵo de Sveda aera fotaro de jaroj 1970–1980. Estos plivastigita.",
-                "name": "Lantmäteriet historia aera fotaro 1975"
+                "description": "Kunmetaĵo de Sveda ortfotmapo de jaroj 1970–1980. Estos plivastigita.",
+                "name": "Lantmäteriet historia ortfotmapo 1975"
             },
             "lantmateriet-topowebb": {
                 "attribution": {
@@ -9366,8 +9419,8 @@
                 "attribution": {
                     "text": "© komunumo Linköping"
                 },
-                "description": "Aera fotaro de la komunumo Linköping, malfermaj datumoj, 2010",
-                "name": "Aera fotaro Linköping"
+                "description": "Ortfotmapo de la komunumo Linköping, malfermaj datumoj, 2010",
+                "name": "Ortfotmapo Linköping"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -9437,8 +9490,8 @@
                 "attribution": {
                     "text": "© komunumo Stokholmo, CC0"
                 },
-                "description": "Aera fotaro de la komunumo Stokholmo, permesilo CC0, 2016",
-                "name": "Aera fotaro Stokholmo"
+                "description": "Ortfotmapo de la komunumo Stokholmo, permesilo CC0, 2016",
+                "name": "Ortfotmapo Stokholmo"
             },
             "tf-cycle": {
                 "attribution": {

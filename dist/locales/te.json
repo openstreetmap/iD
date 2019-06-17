@@ -222,7 +222,6 @@
         },
         "geocoder": {
             "search": "విశ్వవ్యాప్తంగా వెతుకు",
-            "no_results_visible": "కనిపిస్తూన్న పటంలో ఫలితాలు ఏమీ లేవు",
             "no_results_worldwide": "ఫలితాలు ఏమీ లేవు"
         },
         "geolocate": {
@@ -288,9 +287,6 @@
                 "tooltip": "రైల్వేలు"
             }
         },
-        "restore": {
-            "heading": "భద్రపరచని మార్పులు ఉన్నాయి"
-        },
         "save": {
             "title": "భద్రపరచు",
             "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు.",
@@ -304,14 +300,10 @@
             }
         },
         "success": {
-            "just_edited": "మీరు ఇప్పుడే OpenStreetMapను మార్చారు",
             "help_link_text": "వివరాలు"
         },
         "confirm": {
             "cancel": "రద్దుచేయి"
-        },
-        "splash": {
-            "walkthrough": "దర్శన మొదలుపెట్టు"
         },
         "tag_reference": {
             "description": "వివరణ"

@@ -5,6 +5,9 @@
         },
         "presets": {
             "fields": {
+                "diaper": {
+                    "label": "Nappy Changing Available"
+                },
                 "height": {
                     "label": "Height (Metres)"
                 },
@@ -49,11 +52,14 @@
                 "amenity/payment_centre": {
                     "name": "Payment Centre"
                 },
+                "amenity/pharmacy": {
+                    "name": "Pharmacy"
+                },
                 "amenity/recycling_centre": {
                     "name": "Recycling Centre"
                 },
                 "amenity/social_centre": {
-                    "name": "Social Center"
+                    "name": "Social Centre"
                 },
                 "barrier/kerb": {
                     "name": "Kerb"
@@ -92,10 +98,13 @@
                     "name": "Footpath"
                 },
                 "highway/footway/zebra": {
-                    "name": "Marked Crossing"
+                    "name": "Marked Zebra Crossing"
                 },
                 "highway/footway/zebra-raised": {
-                    "name": "Marked Crossing (Raised)"
+                    "name": "Marked Zebra Crossing (Raised)"
+                },
+                "highway/give_way": {
+                    "name": "Give Way Sign"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Centre"

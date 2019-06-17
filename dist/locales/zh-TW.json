@@ -20,7 +20,7 @@
         "modes": {
             "add_feature": {
                 "title": "新增圖徽",
-                "description": "搜尋要新增到地圖上的圖徽。",
+                "description": "搜尋要新增至地圖上的圖徽。",
                 "key": "分頁",
                 "result": "{count} 個結果",
                 "results": "{count} 個結果"
@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "搜尋全世界...",
-            "no_results_visible": "可見的地圖區域中沒有搜尋結果",
+            "no_results_visible": "可見的地圖區域中沒有結果",
             "no_results_worldwide": "找不到搜尋結果"
         },
         "geolocate": {
@@ -866,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "您有未儲存的編輯",
-            "description": "您在上一次編輯時仍有未儲存的修改，你想恢復這些修改嗎﹖",
+            "heading": "您有未儲存的變更",
+            "description": "您希望從先前的編輯工作階段中復原未儲存的變更嗎？",
             "restore": "復原我的變更",
-            "reset": "丟棄我的變更"
+            "reset": "放棄我的變更"
         },
         "save": {
             "title": "儲存",
@@ -905,9 +905,9 @@
             }
         },
         "success": {
-            "just_edited": "您剛剛編輯了OpenStreetMap！",
-            "thank_you": "感謝你改進地圖。",
-            "thank_you_location": "感謝你改進 {where} 週遭的地圖。",
+            "just_edited": "您剛編輯了開放街圖！",
+            "thank_you": "感謝您改進地圖。",
+            "thank_you_location": "感謝您改進了 {where} 附近的地圖。",
             "thank_you_where": {
                 "format": "{region}{separator}{place}",
                 "separator": "-"
@@ -929,9 +929,9 @@
             "cancel": "取消"
         },
         "splash": {
-            "welcome": "歡迎使用iD OpenStreetMap編輯器",
-            "text": "iD編輯器是一個既易用而又功能強大的工具，以助您編輯世界上最好的自由世界地圖。這是版本{version}。欲知詳情，請瀏覽 {website} 及於{github}報告臭蟲。",
-            "walkthrough": "開始新手教學",
+            "welcome": "歡迎使用 iD 開放街圖編輯器",
+            "text": "iD 編輯器是一個易用且強大的工具，以助您編輯世界上最好的自由世界地圖。這是版本 {version}。欲知詳情，請瀏覽 {website} 及於 {github} 回報臭蟲。",
+            "walkthrough": "開始教學",
             "start": "現在就編輯"
         },
         "source_switch": {
@@ -1740,6 +1740,20 @@
                     "reference": "Google 的產品性質是專有的，所以不應被用作參考資料。 "
                 }
             },
+            "invalid_format": {
+                "title": "無效格式",
+                "tip": "尋找有非預期格式的標籤",
+                "email": {
+                    "message": "{feature} 有無效的電子郵件地址。",
+                    "message_multi": "{feature} 有多個無效的電子郵件地址。",
+                    "reference": "Email 地址應該長得像 \"user@example.com\"。"
+                },
+                "website": {
+                    "message": "{feature} 有無效的網站。",
+                    "message_multi": "{feature} 有多個無效的網站。",
+                    "reference": "網站應該以 \"http\" 或 \"https\" 開頭。"
+                }
+            },
             "missing_role": {
                 "title": "缺少角色",
                 "message": "{member} 沒有在 {relation} 裡的角色",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} 的標籤不完整",
                     "reference": "一些圖徵應當有額外的標籤。"
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} 像是沒有標準標籤的品牌",
+                    "reference": "所有擁有同樣品牌名稱的圖徵，應當用同樣的方式標示標籤。"
                 }
             },
             "private_data": {
@@ -2838,6 +2856,10 @@
                     "label": "裝置",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "直徑",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "有尿布台"
                 },
@@ -2883,7 +2905,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "方向",
+                    "label": "受影響的方向",
                     "options": {
                         "backward": "後退",
                         "both": "兩者都有 / 全都有",
@@ -3659,7 +3681,7 @@
                     "placeholder": "距離達小數點一位數 (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "方向",
+                    "label": "受影響的方向",
                     "options": {
                         "backward": "後退",
                         "both": "兩個方向 / 全部",
@@ -4139,7 +4161,7 @@
                     "label": "交通號誌"
                 },
                 "traffic_sign/direction": {
-                    "label": "方向",
+                    "label": "受影響的方向",
                     "options": {
                         "backward": "反向",
                         "both": "都有/全部",
@@ -4150,7 +4172,7 @@
                     "label": "號誌種類"
                 },
                 "traffic_signals/direction": {
-                    "label": "方向",
+                    "label": "受影響的方向",
                     "options": {
                         "backward": "後退",
                         "both": "兩個方向 / 全部",
@@ -4185,6 +4207,9 @@
                 "trees": {
                     "label": "樹"
                 },
+                "trench": {
+                    "label": "類型"
+                },
                 "trolley_wire": {
                     "label": "架空電車線"
                 },
@@ -4202,6 +4227,9 @@
                         "test": "測試",
                         "tourism": "觀光"
                     }
+                },
+                "valve": {
+                    "label": "類型"
                 },
                 "vending": {
                     "label": "貨物類型"
@@ -4793,6 +4821,14 @@
                 "amenity/place_of_worship/christian": {
                     "name": "教會",
                     "terms": "教會,基督教教會"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "耶和華見證人王國聚會所",
+                    "terms": "耶和華見證人"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "貴格會禮拜堂",
+                    "terms": "貴格會聚會所"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "印度寺廟",
@@ -6483,14 +6519,6 @@
                     "name": "軍事建築",
                     "terms": "營房,軍營,營舍"
                 },
-                "landuse/military/bunker": {
-                    "name": "軍事碉堡",
-                    "terms": "軍事碉堡,碉堡"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "崗哨",
-                    "terms": "軍事崗哨,哨點"
-                },
                 "landuse/military/danger_area": {
                     "name": "危險區",
                     "terms": "危險地區,危險區域,危險區,禁區"
@@ -6499,17 +6527,9 @@
                     "name": "海軍基地",
                     "terms": "軍港,海軍基地"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "核子爆炸場址",
-                    "terms": "核子爆炸場址,核子試爆場"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "障礙課程場地",
                     "terms": "障礙課程場地,障礙課程"
-                },
-                "landuse/military/office": {
-                    "name": "軍事機構",
-                    "terms": "軍事辦公室"
                 },
                 "landuse/military/range": {
                     "name": "軍用靶場",
@@ -6612,9 +6632,17 @@
                     "name": "舞蹈學校",
                     "terms": "舞蹈學校"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "飛盤高爾夫球場",
+                    "terms": "飛盤高爾夫球場"
+                },
                 "leisure/dog_park": {
                     "name": "狗公園",
                     "terms": "寵物公園"
+                },
+                "leisure/escape_game": {
+                    "name": "密室逃脫",
+                    "terms": "密室逃脫"
                 },
                 "leisure/firepit": {
                     "name": "火坑",
@@ -6771,6 +6799,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "馬場",
                     "terms": "馬場"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "曲棍球場",
+                    "terms": "曲棍球場"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "馬蹄鐵坑",
@@ -7023,6 +7055,10 @@
                     "name": "地下管線",
                     "terms": "地下水管"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "管道閥門",
+                    "terms": "管道閥門"
+                },
                 "man_made/pumping_station": {
                     "name": "抽水站",
                     "terms": "抽水站"
@@ -7121,6 +7157,26 @@
                 "manhole/telecom": {
                     "name": "電信公司人孔",
                     "terms": "電信公司人孔,電信人孔"
+                },
+                "military/bunker": {
+                    "name": "軍用掩體",
+                    "terms": "軍用掩體"
+                },
+                "military/checkpoint": {
+                    "name": "檢查站",
+                    "terms": "檢查站"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "核武測試場",
+                    "terms": "核武測試場"
+                },
+                "military/office": {
+                    "name": "軍事辦公室",
+                    "terms": "軍事辦公室"
+                },
+                "military/trench": {
+                    "name": "壕溝",
+                    "terms": "壕溝"
                 },
                 "natural": {
                     "name": "自然景觀"
@@ -7306,6 +7362,10 @@
                 "office/association": {
                     "name": "非營利組織辦公室",
                     "terms": "NGO,非營利組織"
+                },
+                "office/bail_bond_agent": {
+                    "name": "保釋債券代理人",
+                    "terms": "保釋債券代理人"
                 },
                 "office/charity": {
                     "name": "慈善機構",
@@ -8350,6 +8410,10 @@
                     "name": "醫療器材行",
                     "terms": "醫療用品店"
                 },
+                "shop/military_surplus": {
+                    "name": "軍用品店",
+                    "terms": "軍事用品店,軍人用品店"
+                },
                 "shop/mobile_phone": {
                     "name": "行動電話店",
                     "terms": "手機商店,手機店,手機行,行動通訊店"
@@ -9053,13 +9117,6 @@
                 "description": "影像邊界與拍攝日期。標籤將會在縮放等級大於等於 13 時出現。",
                 "name": "DigitalGlobe Standard 空照圖年份"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "條款與回饋"
-                },
-                "description": "DigitalGlobe-Vivid 是一款有良好美學效果的拼貼圖，目前在全球各地都有 50 公分或更佳的解析度，全球照片平均拍攝時間為20個月之內。",
-                "name": "DigitalGlobe Vivid 影像"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 無雲 - https://s2maps.eu by EOX IT Services GmbH (含有變動過的 Copernicus Sentinel 資料 2017 & 2018)"
@@ -9094,6 +9151,20 @@
                 },
                 "description": "衛星與空照圖",
                 "name": "Mapbox 衛星圖"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "條款與回饋"
+                },
+                "description": "Maxar Premium 是由 Maxar 底圖所組成的拼接圖，特定區域以 +Vivid 或自訂照片填充，其解析度為 50 公分或更高，且會不斷更新。",
+                "name": "Maxar Premium 圖（測試版）"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "條款與回饋"
+                },
+                "description": "Maxar Standard 是一套經過精心選取，覆蓋地球上 86% 的陸地面積，其解析度為 30 至 60 公分，不足的部份以 Landsat 填滿。平均更新時間為 2.31 年，部份地區每年更新兩次。",
+                "name": "Maxar Standard 圖（測試版）"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9236,6 +9307,27 @@
                 },
                 "description": "由 basemap.at 提供的 Orthofoto 圖層。geoimage.at 圖的「繼承者」。",
                 "name": "basemap.at Orthofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由 basemap.at 提供的註釋覆蓋層。",
+                "name": "basemap.at 覆蓋層"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由 basemap.at 提供的表面層。",
+                "name": "basemap.at 表面"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由 basemap.at 提供的地形圖層。",
+                "name": "basemap.at 地形"
             },
             "eufar-balaton": {
                 "attribution": {
