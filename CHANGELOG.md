@@ -29,6 +29,89 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.15.2
+##### 2019-Jun-17
+
+#### :sparkles: Usability
+* Prefer a Wikipedia commons logo over social media logo in some situations ([#6361])
+
+[#6361]: https://github.com/openstreetmap/iD/issues/6361
+
+#### :white_check_mark: Validation
+* Remove issue "autofix" buttons
+* Don't suggest adding `nonsquare=yes` to physically unsquare buildings ([#6332])
+* Stop suggesting adding highway=footway to piers, platforms, and tracks ([#6229], [#6409], [#6042])
+* Fix some situations where iD should not suggest adding `highway=crossing` ([#6508])
+* Avoid stale "connect endpoints" fix for "tags imply area" that could cause invalid areas ([#6525])
+* Remove `barrier=entrance` deprecation ([#6506])
+* Improve warning message when updating brand tags ([#6443])
+* Improve checks for valid email and website values ([#6494], thanks [@SilentSpike])
+* Fix issue where crossings with kerb tags were treated primarily as kerbs ([#6440])
+* Fix issue where upgrading `office=administrative` could also remove `building=yes` ([#6466])
+* Fix issue where cuisine -> diet upgrades could overwrite existing values ([#6462])
+
+[#6525]: https://github.com/openstreetmap/iD/issues/6525
+[#6508]: https://github.com/openstreetmap/iD/issues/6508
+[#6506]: https://github.com/openstreetmap/iD/issues/6506
+[#6494]: https://github.com/openstreetmap/iD/issues/6494
+[#6466]: https://github.com/openstreetmap/iD/issues/6466
+[#6462]: https://github.com/openstreetmap/iD/issues/6462
+[#6443]: https://github.com/openstreetmap/iD/issues/6443
+[#6440]: https://github.com/openstreetmap/iD/issues/6440
+[#6409]: https://github.com/openstreetmap/iD/issues/6409
+[#6332]: https://github.com/openstreetmap/iD/issues/6332
+[#6229]: https://github.com/openstreetmap/iD/issues/6229
+[#6042]: https://github.com/openstreetmap/iD/issues/6042
+[@SilentSpike]: https://github.com/SilentSpike
+
+
+#### :bug: Bugfixes
+* Fix issue with deleting a member from a relation with a duplicate entity but different roles (#6504)
+* Fix issue where iD could crash upon save if user had edits stored before iD 2.15 (#6496)
+
+[#6504]: https://github.com/openstreetmap/iD/issues/6504
+[#6496]: https://github.com/openstreetmap/iD/issues/6496
+
+#### :rocket: Presets
+* Add presets for `craft=signmaker`, `healthcare=counselling`, `shop=fashion_accessories`
+* Remove unnecessary `landuse=military` added on `military=bunker` ([#6509], [#6518], thanks [@matkoniecz])
+* Add Pipeline Valve preset ([#6393])
+* Add Diameter field to Pipeline and Tree presets
+* Add additional terms for Mailbox preset ([#6535])
+* Improve public bookcase preset ([#6503], thanks [@ToastHawaii])
+* Deprecate `wifi=yes` and `wifi=free` ([#6524])
+* Lower match score for man_made/bridge preset
+* Add presets for Christian places of worship that do not use a cross icon or are not called churches ([#6512])
+* Add preset for `shop=military_surplus` ([#6470])
+* Deprecate various maxspeed mistags ([#6478])
+* Add preset for `office=bail_bond_agent` and deprecate various mistags ([#6472])
+* Deprecate "FIXME" -> "fixme", "NOTE" -> "note" ([#6477])
+* Deprecate some "sustenance" tags
+* Change the label "Direction" to "Direction Affected" for vertex fields ([#6469], thanks [@BjornRasmussen])
+* Remove the search term "garage" from parking preset ([#6455], thanks [@BjornRasmussen])
+* Add preset for `military=trench` ([#6474])
+* Add preset for `leisure=escape_game` ([#6447])
+* Update Hackerspace fields
+
+[#6535]: https://github.com/openstreetmap/iD/issues/6535
+[#6524]: https://github.com/openstreetmap/iD/issues/6524
+[#6518]: https://github.com/openstreetmap/iD/issues/6518
+[#6512]: https://github.com/openstreetmap/iD/issues/6512
+[#6509]: https://github.com/openstreetmap/iD/issues/6509
+[#6503]: https://github.com/openstreetmap/iD/issues/6503
+[#6478]: https://github.com/openstreetmap/iD/issues/6478
+[#6477]: https://github.com/openstreetmap/iD/issues/6477
+[#6474]: https://github.com/openstreetmap/iD/issues/6474
+[#6472]: https://github.com/openstreetmap/iD/issues/6472
+[#6470]: https://github.com/openstreetmap/iD/issues/6470
+[#6469]: https://github.com/openstreetmap/iD/issues/6469
+[#6455]: https://github.com/openstreetmap/iD/issues/6455
+[#6447]: https://github.com/openstreetmap/iD/issues/6447
+[#6393]: https://github.com/openstreetmap/iD/issues/6393
+[@matkoniecz]: https://github.com/matkoniecz
+[@BjornRasmussen]: https://github.com/BjornRasmussen
+
+
 # 2.15.1
 ##### 2019-May-24
 
