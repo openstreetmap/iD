@@ -9439,6 +9439,27 @@
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
             },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Annotation overlay provided by basemap.at.",
+                "name": "basemap.at Overlay"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surface layer provided by basemap.at.",
+                "name": "basemap.at Surface"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terrain layer provided by basemap.at.",
+                "name": "basemap.at Terrain"
+            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -11052,13 +11073,17 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Sign up at {signupUrl}"
-            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack",
+                "description": "Sign up at {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "Talk-nz Mailing List",
+                "description": "New Zealand's OSM community talk"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentina Facebook",
@@ -11227,6 +11252,19 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
+            },
+            "uy-forum": {
+                "name": "OpenStreetMap UY forum",
+                "description": "OpenStreetMap Uruguay web forum"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Uruguay on IRC",
+                "description": "Join #osmuruguay on irc.freenode.org (port 6667)",
+                "extendedDescription": "Join #osmuruguay on irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "Talk-uy Mailing List",
+                "description": "Talk-uy is the official mailing list for the Uruguayan OSM community"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam Facebook",
