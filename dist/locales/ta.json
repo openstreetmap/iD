@@ -838,7 +838,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "திசை",
                     "options": {
                         "backward": "பின்னால்",
                         "both": "இரண்டும் / அனைத்தும்",
@@ -1238,9 +1237,6 @@
                 "railway/position": {
                     "placeholder": "தூரம் ஒரு பதின்மத்தில் (123.4)"
                 },
-                "railway/signal/direction": {
-                    "label": "திசை"
-                },
                 "recycling_type": {
                     "label": "வகை",
                     "options": {
@@ -1523,7 +1519,6 @@
                     "label": "போக்குவரவு இயக்கச் சுட்டுக்குறி"
                 },
                 "traffic_sign/direction": {
-                    "label": "திசை",
                     "options": {
                         "backward": "பின்னோக்கி",
                         "both": "இரண்டும் / அனைத்தும்",
@@ -1534,7 +1529,6 @@
                     "label": "வகை"
                 },
                 "traffic_signals/direction": {
-                    "label": "திசை",
                     "options": {
                         "backward": "பின்னோக்கி",
                         "both": "இரண்டும் / அனைத்தும்",
@@ -2011,9 +2005,6 @@
                 },
                 "landuse/military": {
                     "name": "இராணுவப் பகுதி"
-                },
-                "landuse/military/office": {
-                    "name": "இராணுவ அலுவலகம்"
                 },
                 "leisure/common": {
                     "name": "பொதுவான"

@@ -782,6 +782,14 @@
                 "description": "建筑物",
                 "tooltip": "建筑物，遮蔽处，车库等。"
             },
+            "building_parts": {
+                "description": "建筑部分",
+                "tooltip": "3D 建筑和屋顶部件"
+            },
+            "indoor": {
+                "description": "室内要素",
+                "tooltip": "房间、走廊、楼梯等"
+            },
             "landuse": {
                 "description": "土地利用要素",
                 "tooltip": "森林，农田，公园，居民地，商用地等。"
@@ -797,6 +805,14 @@
             "rail": {
                 "description": "铁路要素",
                 "tooltip": "铁路"
+            },
+            "pistes": {
+                "description": "滑雪道",
+                "tooltip": "滑雪坡、雪橇道、滑冰道等"
+            },
+            "aerialways": {
+                "description": "架空要素",
+                "tooltip": "升降椅、缆车、滑索道等"
             },
             "power": {
                 "description": "电力要素",
@@ -851,7 +867,7 @@
         },
         "restore": {
             "heading": "您有未保存的更改",
-            "description": "您在上一次编辑时有未保存的修改，您想恢复这些修改吗？",
+            "description": "您在上一次编辑时有未保存的更改，您想恢复这些更改吗？",
             "restore": "恢复我的修改",
             "reset": "丢弃我的修改"
         },
@@ -916,7 +932,7 @@
             "welcome": "欢迎使用 OpenStreetMap iD 编辑器",
             "text": "iD 编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是 {version} 版本。欲知详情，请浏览 {website} 及在 {github} 报告程序错误。",
             "walkthrough": "开始演练",
-            "start": "现在就编辑"
+            "start": "立即编辑"
         },
         "source_switch": {
             "live": "实况模式",
@@ -1619,14 +1635,22 @@
                 "title": "几乎为交叉点",
                 "message": "{feature} 与 {feature2} 极为接近却并未相交",
                 "tip": "查找可与邻近要素相连接的要素",
+                "self": {
+                    "message": "{feature} 的末端与其本身极为接近但并未相连"
+                },
                 "highway-highway": {
                     "reference": "相交的道路应共享一个交叉节点。"
                 }
             },
             "close_nodes": {
                 "title": "相近的节点",
+                "tip": "查找多余和拥挤的节点",
                 "message": "{way} 中的两个节点非常接近",
-                "reference": "路径中多余的点应被合并或分开。"
+                "reference": "路径中多余的点应被合并或分开。",
+                "detached": {
+                    "message": "{feature} 与 {feature2} 过于接近",
+                    "reference": "分开的节点不应共享同一位置。"
+                }
             },
             "crossing_ways": {
                 "title": "相交的路径",
@@ -1716,6 +1740,20 @@
                     "reference": "谷歌的产品具有所有权，不得用于参考。"
                 }
             },
+            "invalid_format": {
+                "title": "无效的格式",
+                "tip": "查找含有无效格式的标签",
+                "email": {
+                    "message": "{feature} 存在一个无效电子邮件地址。",
+                    "message_multi": "{feature} 存在多个无效电子邮件地址。",
+                    "reference": "电子邮件地址必须类似于 \"user@example.com\"。"
+                },
+                "website": {
+                    "message": "{feature} 存在一个无效网址。",
+                    "message_multi": "{feature} 存在多个无效网址。",
+                    "reference": "网址应该以 \"http\" 或 \"https\" 为开头。"
+                }
+            },
             "missing_role": {
                 "title": "缺少成员",
                 "message": "{member} 不是 {relation} 的成员",
@@ -1746,7 +1784,15 @@
                 "title": "过时的标签",
                 "message": "{feature} 存在过时的标签",
                 "tip": "查找含有弃用的标签且可以更新的要素",
-                "reference": "有些标签会随时间推移而被更换，应予以改进。"
+                "reference": "有些标签会随时间推移而被更换，应予以改进。",
+                "incomplete": {
+                    "message": "{feature} 存在不完整的标签",
+                    "reference": "某些要素应有额外的标签。"
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} 看起来像是个品牌名称但没有规范的标签",
+                    "reference": "同一品牌的所有要素都应该以相同方式标记。"
+                }
             },
             "private_data": {
                 "title": "私人信息",
@@ -2851,7 +2897,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "方向",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -3554,7 +3599,6 @@
                     "placeholder": "距离，精确到一位小数 (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "方向",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -3969,7 +4013,6 @@
                     "label": "交通标志"
                 },
                 "traffic_sign/direction": {
-                    "label": "方向",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -3980,7 +4023,6 @@
                     "label": "类型"
                 },
                 "traffic_signals/direction": {
-                    "label": "方向",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -4014,6 +4056,9 @@
                 },
                 "trees": {
                     "label": "树林"
+                },
+                "trench": {
+                    "label": "类型"
                 },
                 "trolley_wire": {
                     "label": "架空电车线"
@@ -5894,14 +5939,6 @@
                     "name": "军营",
                     "terms": "军营,虎帐,兵营,军队,部队,步兵,驻扎,营房"
                 },
-                "landuse/military/bunker": {
-                    "name": "军事碉堡",
-                    "terms": "军事碉堡,碉堡"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "检查点",
-                    "terms": "检查点,检查站,检查,边检"
-                },
                 "landuse/military/danger_area": {
                     "name": "军事危险区域",
                     "terms": "危险区"
@@ -5910,17 +5947,9 @@
                     "name": "海军基地",
                     "terms": "海军,基地"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "核爆地点",
-                    "terms": "核爆"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "障碍训练场",
                     "terms": "障碍,训练场"
-                },
-                "landuse/military/office": {
-                    "name": "军事办公室",
-                    "terms": "军事办公室"
                 },
                 "landuse/military/range": {
                     "name": "军事靶场",
@@ -7848,7 +7877,7 @@
                 },
                 "waterway/dam": {
                     "name": "水坝",
-                    "terms": "水坝"
+                    "terms": "水坝,大坝"
                 },
                 "waterway/ditch": {
                     "name": "水沟",
@@ -7934,10 +7963,6 @@
                 "description": "影像边界和拍摄日期。标签会在缩放到13层级或更高时显示。",
                 "name": "DigitalGlobe 标准影像年份"
             },
-            "DigitalGlobe-Vivid": {
-                "description": "DigitalGlobe-Vivid 是一幅具有最佳美观效果及流通频率的镶嵌影像，适用于全球任何地区，50cm或更高分辨率，全球图像平均流通频率小于20个月。",
-                "name": "DigitalGlobe 艳丽影像"
-            },
             "EOXAT2018CLOUDLESS": {
                 "description": "经后期处理的 Sentinel 卫星影像。",
                 "name": "eox.at 2018 无云"
@@ -7969,6 +7994,18 @@
                 },
                 "description": "卫星和航空影像",
                 "name": "Mapbox 卫星"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "name": "Maxer 优质影像 (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "name": "Maxar 标准影像 (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

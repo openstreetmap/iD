@@ -866,8 +866,8 @@
             }
         },
         "restore": {
-            "heading": "Vous avez des changements non sauvegardés.",
-            "description": "Vous avez des changements non sauvegardés d'une session précédente. Souhaitez-vous restaurer ces changements ?",
+            "heading": "Vous avez des modifications non enregistrées",
+            "description": "Vous avez des modifications non sauvegardées d'une session précédente. Souhaitez-vous restaurer ces changements ?",
             "restore": "Restaurer mes modifications",
             "reset": "Abandonner mes modifications"
         },
@@ -929,9 +929,9 @@
             "cancel": "Annuler"
         },
         "splash": {
-            "welcome": "Bienvenue sur ID, l'éditeur en ligne d'OpenStreetMap",
-            "text": "ID est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et reportez les bugs sur {github}.",
-            "walkthrough": "Commencer le tutoriel",
+            "welcome": "Bienvenue sur iD, l'éditeur en ligne d'OpenStreetMap",
+            "text": "iD est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et rapportez les bogues sur {github}.",
+            "walkthrough": "Commencer le guide",
             "start": "Modifier maintenant"
         },
         "source_switch": {
@@ -1362,7 +1362,7 @@
                 "title": "Aide",
                 "welcome": "Bienvenue dans l'iD editor de [OpenStreetMap](https://www.openstreetmap.org/). Avec cet éditeur, vous pouvez mettre à jour OpenStreetMap directement depuis votre navigateur internet.",
                 "open_data_h": "Données libres",
-                "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [is strictly forbidden] (https://www.openstreetmap.org/copyright).",
+                "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [est strictement interdit](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Avant de commencer",
                 "before_start": "Vous devez maîtriser OpenStreetMap et cet éditeur avant de commencer à modifier. iD comprend un guide pour vous apprendre les bases de la modification d'OpenStreetMap. Cliquez sur « Commencer le tutoriel » sur cet écran pour suivre le guide - cela ne prend que 15 minutes environ.",
                 "open_source_h": "Open source",
@@ -1740,6 +1740,20 @@
                     "reference": "Les produits de Google ne sont pas libres de droits et ne doivent pas être utilisés comme référence."
                 }
             },
+            "invalid_format": {
+                "title": "Format invalide",
+                "tip": "Trouver des attributs avec des formats inattendus",
+                "email": {
+                    "message": "{feature} a une adresse de courriel invalide.",
+                    "message_multi": "{feature} a plusieurs adresses de courriel invalides.",
+                    "reference": "Les adresses de courriel doivent ressembler à « utilisateur@exemple.com »."
+                },
+                "website": {
+                    "message": "{feature} a un site web invalide.",
+                    "message_multi": "{feature} a plusieurs sites web invalides.",
+                    "reference": "Les sites web doivent commencer par « http » ou « https »."
+                }
+            },
             "missing_role": {
                 "title": "Rôles manquants",
                 "message": "{member} n'a pas de rôle dans {relation}",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} a des attributs incomplets",
                     "reference": "Certains éléments devraient avoir des attributs supplémentaires."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} ressemble à une marque avec des attributs non standards",
+                    "reference": "Tous les éléments de la même marque devraient être renseignés de la même manière."
                 }
             },
             "private_data": {
@@ -2883,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -3659,7 +3677,7 @@
                     "placeholder": "Distance à une décimale (123,4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -4139,7 +4157,7 @@
                     "label": "Panneau de signalisation"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux/toutes",
@@ -4150,7 +4168,7 @@
                     "label": "Feu de signalisation spécifique"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -4184,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "Arbres"
+                },
+                "trench": {
+                    "label": "Type"
                 },
                 "trolley_wire": {
                     "label": "Câble pour trolley"
@@ -4347,8 +4368,8 @@
                     "terms": "Tapis roulant, remontée mécanique, remontee mecanique, Bande transporteuse de personnes, magic carpet, conveying"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "Télémix, Télécombi",
-                    "terms": "Télémix, Télécombi, télécabines et télésièges, telecabines et telesieges, mixed lift"
+                    "name": "Téléporté mixte",
+                    "terms": "Télémix, Télécombi, télécabines et télésièges, telecabines et telesieges, mixed lift, teleporte mixte, télésiège"
                 },
                 "aerialway/platter": {
                     "name": "Téléski monoplace",
@@ -4797,6 +4818,17 @@
                     "name": "Église chrétienne",
                     "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte"
                 },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Salle du Royaume des Témoins de Jéhovah"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Temple de la Luz del Mundo",
+                    "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte,temple"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Salle de réunion de la société religieuse des amis",
+                    "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte,quaker,quakers,société des amis"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Temple hindou",
                     "terms": "temple,religion,hindou,monastère"
@@ -4878,7 +4910,7 @@
                 },
                 "amenity/recycling_container": {
                     "name": "Conteneur de recyclage",
-                    "terms": "recyclable,bouteille,canette,carton,verre,déchet,recyclage,poubelle"
+                    "terms": "recyclable,bouteille,canette,carton,verre,déchet,recyclage,poubelle,bulle à verre"
                 },
                 "amenity/register_office": {
                     "name": "Bureau d'état-civil"
@@ -5595,7 +5627,7 @@
                     "name": "Bâtiment "
                 },
                 "camp_site/camp_pitch": {
-                    "name": "Terrain de camping",
+                    "name": "Parcelle dans un camping",
                     "terms": "Emplacement de camping"
                 },
                 "club": {
@@ -5660,7 +5692,7 @@
                 },
                 "craft/confectionery": {
                     "name": "Confiseur",
-                    "terms": "Confisier, confiseur, fabricant de bonbons"
+                    "terms": "Confiserie, confiseur, bonbons, fabricant de bonbons, biscuits, biscuiterie"
                 },
                 "craft/distillery": {
                     "name": "Distillerie",
@@ -6497,14 +6529,6 @@
                     "name": "Caserne militaire",
                     "terms": "Caserne militaire"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunker",
-                    "terms": "Bunker, Casemate"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Poste de contrôle militaire",
-                    "terms": "Poste de contrôle,Point de contrôle"
-                },
                 "landuse/military/danger_area": {
                     "name": "Zone dangereuse",
                     "terms": "Zone dangereuse"
@@ -6513,17 +6537,9 @@
                     "name": "Base Navale",
                     "terms": "Base navale"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Site d'explosion nucléaire",
-                    "terms": "Site d'explosion nucléaire"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Parcours du combattant",
                     "terms": "Course d'obstacles"
-                },
-                "landuse/military/office": {
-                    "name": "Bureau Militaire",
-                    "terms": "Bureau militaire, Bureau de recrutement militaire,"
                 },
                 "landuse/military/range": {
                     "name": "Stand de tir militaire",
@@ -6626,9 +6642,17 @@
                     "name": "École de danse",
                     "terms": "école de danse,swing,tango,valse,danse"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Parcours de disc golf",
+                    "terms": "Golf, Terrain de golf, Parcours de golf, disk golf"
+                },
                 "leisure/dog_park": {
                     "name": "Parc canin",
                     "terms": "Parc canin, parc à chiens"
+                },
+                "leisure/escape_game": {
+                    "name": "Escape game",
+                    "terms": "escape game,escape room,puzzle room,quest room"
                 },
                 "leisure/firepit": {
                     "name": "Foyer",
@@ -7140,6 +7164,10 @@
                     "name": "Puits de télécommunication",
                     "terms": "couvert,puits,trou,télécom,téléphone"
                 },
+                "military/trench": {
+                    "name": "Tranchée militaire",
+                    "terms": "tranchée,guerre,infanterie"
+                },
                 "natural": {
                     "name": "Nature"
                 },
@@ -7280,7 +7308,7 @@
                     "terms": "Réservoir"
                 },
                 "natural/water/river": {
-                    "name": "Rvière",
+                    "name": "Rivière",
                     "terms": "rivière,fleuve,estuaire"
                 },
                 "natural/water/stream": {
@@ -7329,6 +7357,10 @@
                 "office/association": {
                     "name": "Bureau d'association",
                     "terms": "Bureau d'association, Organisation à but non lucratif"
+                },
+                "office/bail_bond_agent": {
+                    "name": "Agent de cautionnement",
+                    "terms": "agent de cautionnement,cautionnement"
                 },
                 "office/charity": {
                     "name": "Organisation de bienfaisance/charité",
@@ -7550,7 +7582,7 @@
                     "terms": "Habitation isolée"
                 },
                 "place/locality": {
-                    "name": "Lieu-dit sans habitation",
+                    "name": "Lieu-dit non habité",
                     "terms": "lieu-dit"
                 },
                 "place/neighbourhood": {
@@ -8027,7 +8059,7 @@
                 },
                 "shop/art": {
                     "name": "Marchand d'art",
-                    "terms": "Galeriste,gallerie d'art,marchand d'art"
+                    "terms": "Galeriste,gallerie d'art,marchand d'art,magasin d'art,art,artiste,exposition"
                 },
                 "shop/baby_goods": {
                     "name": "Magasin de produits pour bébés",
@@ -8086,7 +8118,7 @@
                 },
                 "shop/butcher": {
                     "name": "Boucher",
-                    "terms": "Boucherie"
+                    "terms": "Boucherie, charcuterie, charcutier, boucher"
                 },
                 "shop/candles": {
                     "name": "Magasin de bougies",
@@ -8154,7 +8186,7 @@
                 },
                 "shop/confectionery": {
                     "name": "Confiserie",
-                    "terms": "Confiserie"
+                    "terms": "Confiserie, confiseur, bonbons, fabricant de bonbons, biscuits, biscuiterie"
                 },
                 "shop/convenience": {
                     "name": "Épicerie / Supérette ",
@@ -8377,6 +8409,10 @@
                     "name": "Magasin de matériel médical",
                     "terms": "Magasin de matériel médical"
                 },
+                "shop/military_surplus": {
+                    "name": "Surplus militaire",
+                    "terms": "armée,armure,navy,magasin militaire,surplus,tactique,équipement militaire,guerre,équipement de guerre"
+                },
                 "shop/mobile_phone": {
                     "name": "Magasin de téléphonie mobile",
                     "terms": "Vente de téléphone portable, magasin de téléphones portables, cellulaires"
@@ -8475,7 +8511,7 @@
                 },
                 "shop/seafood": {
                     "name": "Poissonnerie / Vente de fruits de mer",
-                    "terms": "Vendeur de poissons, fruits de mer, écailler"
+                    "terms": "Vendeur de poissons, fruits de mer, écailler, conserverie"
                 },
                 "shop/second_hand": {
                     "name": "Dépôt-vente/produits d'occasion",
@@ -8553,8 +8589,8 @@
                     "terms": "Vente de produits de nettoyage"
                 },
                 "shop/variety_store": {
-                    "name": "Magasin à prix unique",
-                    "terms": "Épicerie"
+                    "name": "Magasin à prix unique ou à bas prix",
+                    "terms": "Épicerie,hard-discount"
                 },
                 "shop/video": {
                     "name": "Vidéo-club",
@@ -9085,13 +9121,6 @@
                 "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 13.",
                 "name": "Images DigitalGlobe Standard Vintage"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Termes & commentaires"
-                },
-                "description": "DigitalGlobe-Vivid est une mosaïque avec les meilleurs visuels les plus récents pour toutes les régions du globe, en résolution de 50cm ou mieux et la date de l'imagerie est de moins de 20 mois en moyenne sur tout le globe.",
-                "name": "Images DigitalGlobe Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 sans nuages — https://s2maps.eu par EOX IT Services GmbH (contient des données Copernicus Sentinel modifiées de 2017 et de 2018)"
@@ -9126,6 +9155,20 @@
                 },
                 "description": "Images satellite et aérienne",
                 "name": "Satellite Mapbox "
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Maxar Premium est une mosaïque composée de la carte de base de Maxar avec des régions utilisant +Vivid ou des imageries à des endroits intéressants avec une résolution de 50 cm ou mieux, et rafraîchi plus fréquemment avec des mises à jours régulières.",
+                "name": "Images Maxar Premium (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Maxar Standard est un ensemble organisé d'images, fournies par Landsat, couvrant 86% de la surface de la Terre, avec une résolution de 30-60cm lorsque disponible. L'âge moyen de ces images est 2,31 ans, avec certaines régions mises à jour 2 fois par an.",
+                "name": "Images Maxar Standard (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9268,6 +9311,27 @@
                 },
                 "description": "Couche orthophoto fournie par basemap.at \"successeur\" de geoimage.at.",
                 "name": "Orthophoto basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surcouche d'annotations fournie par basemap.at.",
+                "name": "Surcouche basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Couche de surface fournie par basemap.at.",
+                "name": "Surface basemap.at"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Couche terrain fournie par basemap.at.",
+                "name": "Terrain basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -9740,6 +9804,28 @@
             "ym-University-of-Pretoria": {
                 "name": "Centre des sciences géomatiques",
                 "description": "Chapitre YouthMappers à l'Université de Pretoria"
+            },
+            "ym-Ardhi-University": {
+                "name": "Cartographe ARU",
+                "description": "Groupe de jeunes cartographes de l'université d'Ardhi",
+                "extendedDescription": "En tant que futurs consultants en données géospatiales nous cherchons à éduquer et conseiller la société sur leur possibilité d'utiliser les données géographiques non plus seulement comme un moyen de localisation mais un outil de prise de décision et de prédiction des différents dangers et du changements climatiques qui risque de les impacter, eux ou les générations futures."
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "Cartographes IFM",
+                "description": "Groupe YouthMappers de l'Institute of Finance Management"
+            },
+            "ym-Institute-of-Rural-Development-Planning-Mwanza": {
+                "name": "Groupe des jeune cartographes de l'Institute of Rural Development Planning - Lake Zone Centre",
+                "description": "Groupe des jeunes cartographes de l'Institute of Rural Development Planning Mwanza"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Groupe des jeunes cartographes de Mipango",
+                "description": "Groupe des jeunes cartographes de l'Institute of Rural Development Planning",
+                "extendedDescription": "Le groupe des jeunes cartographes de Mipango a été créé à IRDP le 3 juillet 2017 par Dr. Domitilla Bashemera. Les membres fondateurs étaient 300 (190 hommes, 110 femmes) étudiants bacheliers qui se sont enregistrés comme membres du groupe. Gerald Zacharia est le président du groupe et Juster Lugira le vice président."
+            },
+            "ym-Open-University-of-Tanzania": {
+                "name": "Jeunes cartographes de l'Open University of Tanzania",
+                "description": "Groupe des jeunes cartographes de l'Open University of Tanzania"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",

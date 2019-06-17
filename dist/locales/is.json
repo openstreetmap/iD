@@ -483,7 +483,6 @@
         },
         "geocoder": {
             "search": "Leita hnattrænt...",
-            "no_results_visible": "Engar niðurstöður á sýnilegum kortfleti",
             "no_results_worldwide": "Engar niðurstöður fundust"
         },
         "geolocate": {
@@ -699,12 +698,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Þú átt óvistaðar breytingar",
-            "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?",
-            "restore": "Endurheimta breytingarnar mínar",
-            "reset": "Henda breytingunum mínum"
-        },
         "save": {
             "title": "Vista",
             "help": "Yfirfarðu breytingarnar og sendu þær inn á OpenStreetMap, þær verða þá sýnilegar öðrum notendum.",
@@ -739,10 +732,6 @@
             }
         },
         "success": {
-            "just_edited": "Þú hefur breytt OpenStreetMap!",
-            "thank_you": "Takk fyrir að bæta kortið.",
-            "thank_you_location": "Takk fyrir að bæta kortið í kringum {where}.",
-            "help_html": "Breytingarnar þínar ættu að birtast á OpenStreetMap innan skamms. Breytingar á öðrum kortum og ákveðnum eigindum gætu tekið lengri tíma.",
             "help_link_text": "Nánar",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Skoða breytingar á OSM",
@@ -757,12 +746,6 @@
         "confirm": {
             "okay": "Í lagi",
             "cancel": "Hætta við"
-        },
-        "splash": {
-            "welcome": "Velkomin í iD ritil OpenStreetMap",
-            "text": "iD er notendavænt en öflugt tæki til að bæta við besta frjálsa kortagrunn heimsins. Þetta er útgáfa {version}. Þú getur fengið meiri upplýsingar á vefnum {website} og tilkynnt villur á {github}.",
-            "walkthrough": "Skoða leiðarvísi",
-            "start": "Breyta núna"
         },
         "source_switch": {
             "live": "raun",
@@ -2121,7 +2104,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Stefna",
                     "options": {
                         "backward": "Afturábak",
                         "both": "Bæði / Allt",
@@ -2837,7 +2819,6 @@
                     "placeholder": "Vegalengd með einum aukastaf (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Stefna",
                     "options": {
                         "backward": "Afturábak",
                         "both": "Bæði / Allt",
@@ -3275,7 +3256,6 @@
                     "label": "Umferðarljós"
                 },
                 "traffic_sign/direction": {
-                    "label": "Stefna",
                     "options": {
                         "backward": "Afturábak",
                         "both": "Bæði / Allt",
@@ -3286,7 +3266,6 @@
                     "label": "Tegund"
                 },
                 "traffic_signals/direction": {
-                    "label": "Stefna",
                     "options": {
                         "backward": "Afturábak",
                         "both": "Bæði / Allt",
@@ -4823,26 +4802,14 @@
                 "landuse/military/barracks": {
                     "name": "Herbúðir"
                 },
-                "landuse/military/bunker": {
-                    "name": "Hernaðarsprengjubyrgi"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Varðstöð"
-                },
                 "landuse/military/danger_area": {
                     "name": "Hættusvæði"
                 },
                 "landuse/military/naval_base": {
                     "name": "Flotastöð"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Kjarnorkusprengisvæði"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Hindrunarhlaupabraut"
-                },
-                "landuse/military/office": {
-                    "name": "Hermálaskrifstofa"
                 },
                 "landuse/military/range": {
                     "name": "Hersvæði"

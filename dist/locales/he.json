@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "חיפוש בכל העולם…",
-            "no_results_visible": "אין תוצאות באזור הגלוי של המפה",
+            "no_results_visible": "אין תוצאות בחלק הגלוי של המפה",
             "no_results_worldwide": "לא נמצאו תוצאות"
         },
         "geolocate": {
@@ -929,7 +929,7 @@
             "cancel": "ביטול"
         },
         "splash": {
-            "welcome": "ברוך בואך לעורך המפות iD של OpenStreetMap",
+            "welcome": "ברוך בואך לעורך המפות iD מבית OpenStreetMap",
             "text": "iD הוא כלי ידידותי אך רב עצמה לתרומה למפה החופשית הטובה בעולם. זוהי גרסה {version}. למידע נוסף יש לבקר באתר {website} ולדווח על תקלות תחת {github}.",
             "walkthrough": "להתחיל במדריך",
             "start": "לערוך כעת"
@@ -1675,7 +1675,7 @@
                     "reference": "דרכים מהירות שחוצות פסי רכבת אמורות להשתמש בגשרים, מנהרות או חציה בין שכבות."
                 },
                 "highway-waterway": {
-                    "reference": "דרכים מהירות שחוצות דרכי מים אמורות להשתמש בגשרים, מנהרות או מעברות לחציית מים."
+                    "reference": "דרכים מהירות שחוצות דרכי מים אמורות להשתמש בגשרים, מנהרות או מעברים לחציית מים."
                 },
                 "railway-railway": {
                     "reference": "מסילות רכבת חוצות אמורות להיות מחוברות או להשתמש בגשרים או מנהרות."
@@ -1740,6 +1740,20 @@
                     "reference": "מוצרי Google הם קניניים ואסור להשתמש בהם לביסוס טענה."
                 }
             },
+            "invalid_format": {
+                "title": "תצורה שגויה",
+                "tip": "איתור תגיות עם תצורות בלתי צפויות",
+                "email": {
+                    "message": "כתובת הדוא״ל של {feature} שגויה.",
+                    "message_multi": "לתכונה {feature} יש מגוון כתובות דוא״ל שגויות.",
+                    "reference": "כתובות דוא״ל חייבות להיראות בערך כך: „user@example.com”"
+                },
+                "website": {
+                    "message": "האתר של {feature} אינו תקין.",
+                    "message_multi": "לתכונה {feature} יש מגוון כתובות אתרים בלתי תקינות.",
+                    "reference": "אתרים אמורים להתחיל ב־„http” או „https”."
+                }
+            },
             "missing_role": {
                 "title": "תפקידים חסרים",
                 "message": "ל־{member} אין תפקיד בתוך {relation}",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "התגיות של {feature} אינן שלמות",
                     "reference": "לחלק מהתכונות אמורות להיות תגיות נוספות."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} נראה כמו מותג עם תגיות משונות",
+                    "reference": "כל התכונות מאותו המותג אמורות לניות מתויגות באותו האופן."
                 }
             },
             "private_data": {
@@ -2883,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "כיוון",
+                    "label": "הכיוון הושפע",
                     "options": {
                         "backward": "אחורה",
                         "both": "שניהם / כולם",
@@ -3281,7 +3299,7 @@
                     "label": "אורך (מטרים)"
                 },
                 "level": {
-                    "label": "רמה"
+                    "label": "קומה"
                 },
                 "levels": {
                     "label": "קומות",
@@ -3659,7 +3677,7 @@
                     "placeholder": "מרחק עד נקודה עשרונית אחת (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "כיוון",
+                    "label": "הכיוון הושפע",
                     "options": {
                         "backward": "אחורה",
                         "both": "שניהם / כולם",
@@ -4139,7 +4157,7 @@
                     "label": "תמרור"
                 },
                 "traffic_sign/direction": {
-                    "label": "כיוון",
+                    "label": "הכיוון הושפע",
                     "options": {
                         "backward": "אחורה",
                         "both": "שניהם / כולם",
@@ -4150,7 +4168,7 @@
                     "label": "סוג"
                 },
                 "traffic_signals/direction": {
-                    "label": "כיוון",
+                    "label": "הכיוון הושפע",
                     "options": {
                         "backward": "אחורה",
                         "both": "שניהם / כולם",
@@ -4184,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "עצים"
+                },
+                "trench": {
+                    "label": "סוג"
                 },
                 "trolley_wire": {
                     "label": "כבלי טרולי מוגבהים"
@@ -4778,10 +4799,12 @@
                     "terms": "קיוסק אינטראקטיבי,תשלום,כסף"
                 },
                 "amenity/pharmacy": {
-                    "name": "דלפק בית מרקחת"
+                    "name": "דלפק בית מרקחת",
+                    "terms": "חנות תרופות,בית מרקחת,בית תרופות,תרופות,תרופה,כדורים,גלולות,מרשם"
                 },
                 "amenity/photo_booth": {
-                    "name": "תא צילום"
+                    "name": "תא צילום",
+                    "terms": "קיוסק,מצלמה,צילום,מכונת צילום"
                 },
                 "amenity/place_of_worship": {
                     "name": "בית תפילה",
@@ -4792,7 +4815,20 @@
                     "terms": "מקדש בודהיסטי"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "כנסייה נוצרית"
+                    "name": "כנסייה נוצרית",
+                    "terms": "בזיליקה,קתדרלה,קפלה,בית האלוהים,בית תפילה,מקום סגידה"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "אולם מלכות של עדי יהוה",
+                    "terms": "אולם מלוכה,אולם מלכות,היכל מלוכה,היכל מלכות"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "מקדש לה לוז דל מונדו",
+                    "terms": "מקדש אור העולם,כנסייה,מקדש,בית האלוהים,בית תפילה,בית סגידה,מקום סגידה,נצרות,נוצרים"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "בית מפגש לחברים קוייקרים",
+                    "terms": "קווייקרים,חברים,כנסיה,מפגש,קוויקרים,קויקרים,חברים קווייקרים"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "מקדש הינדו",
@@ -4851,7 +4887,8 @@
                     "terms": "פאב להומואים,פאב ללסביות,פאב ללהט״ב,פאב ללהט\"ב,פאב ללהטב״ק,פאב ללהטב\"ק, פאב ללהטבפא״ק,פאב ללהטבפא\"ק,להטב,פאב ללהטב,פאב ללהטבק,פאב ללהטבפאק"
                 },
                 "amenity/pub/microbrewery": {
-                    "name": "פאב מבשלה"
+                    "name": "פאב מבשלה",
+                    "terms": "אלכוהול,מסבאה,בירה,שיכר,בוטיק,מיקרומבשלה,מבשלה קטנה"
                 },
                 "amenity/public_bath": {
                     "name": "מרחצאות ציבוריות",
@@ -4892,19 +4929,24 @@
                     "terms": "מסעדה אסיאתית,מסעדה אסיתית,מסעדה סינית,מסעדה יפנית,סושי,פאד תאי,מוקפץ"
                 },
                 "amenity/restaurant/chinese": {
-                    "name": "מסעדה סינית"
+                    "name": "מסעדה סינית",
+                    "terms": "סינית,שולחן,צהריים,מוקפץ"
                 },
                 "amenity/restaurant/french": {
-                    "name": "מסעדה צרפתית"
+                    "name": "מסעדה צרפתית",
+                    "terms": "אוכל,גריל,ארוחת צהריים,שולחן"
                 },
                 "amenity/restaurant/german": {
-                    "name": "מסעדה גרמנית"
+                    "name": "מסעדה גרמנית",
+                    "terms": "אוכל,גריל,ארוחת צהריים,שולחן,נקניקיות,וורסט"
                 },
                 "amenity/restaurant/greek": {
-                    "name": "מסעדה יוונית"
+                    "name": "מסעדה יוונית",
+                    "terms": "אוכל,גריל,ארוחת צהריים,שולחן,גירוס,סופלקי,פיתות,פיתה,זיתים,שמן זית,פטה"
                 },
                 "amenity/restaurant/indian": {
-                    "name": "מסעדה הודית"
+                    "name": "מסעדה הודית",
+                    "terms": "מסבאה,פאב,בר,ארוחת ערב,שולחן,קארי"
                 },
                 "amenity/restaurant/italian": {
                     "name": "מסעדה איטלקית"
@@ -5864,7 +5906,8 @@
                     "terms": "מכשול חול"
                 },
                 "golf/cartpath": {
-                    "name": "מסלול לרכבי גולף"
+                    "name": "מסלול לרכבי גולף",
+                    "terms": "מסלול קלנועיות,שביל קלנועיות,דרך קלנועיות"
                 },
                 "golf/driving_range": {
                     "name": "מטווח אימונים",
@@ -5886,7 +5929,8 @@
                     "name": "מכשול מים צדדי"
                 },
                 "golf/path": {
-                    "name": "נתיב הליכה לגולף"
+                    "name": "נתיב הליכה לגולף",
+                    "terms": "מסלול גולף,נתיב גולף,דרך גולף,שביל גולף"
                 },
                 "golf/rough": {
                     "name": "שטח קשה בגולף",
@@ -6450,14 +6494,6 @@
                     "name": "בסיס צבאי",
                     "terms": "בסיס צבאי"
                 },
-                "landuse/military/bunker": {
-                    "name": "בונקר צבאי",
-                    "terms": "בונקר צבאי"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "נקודת ביקורת",
-                    "terms": "נקודת ביקורת"
-                },
                 "landuse/military/danger_area": {
                     "name": "אזור מסוכן",
                     "terms": "אזור מסוכן"
@@ -6466,17 +6502,9 @@
                     "name": "בסיס חיל ים",
                     "terms": "בסיס חיל ים"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "אתר פיצוץ גרעיני",
-                    "terms": "אתר פיצוץ גרעיני"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "מסלול מכשולים",
                     "terms": "מסלול מכשולים"
-                },
-                "landuse/military/office": {
-                    "name": "משרד צבאי",
-                    "terms": "משרד צבאי"
                 },
                 "landuse/military/range": {
                     "name": "שטח אש",
@@ -6579,9 +6607,17 @@
                     "name": "בית ספר לריקוד",
                     "terms": "סווינג,דנס,טנגו,סלסה,ריקוד"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "מגרש דיסק גולף",
+                    "terms": "רחבת דיסק גולף,גולף דיסק,דיסק גולף,מתחם דיסק גולף"
+                },
                 "leisure/dog_park": {
                     "name": "פארק כלבים",
                     "terms": "פארק כלבים"
+                },
+                "leisure/escape_game": {
+                    "name": "חדר בריחה",
+                    "terms": "אסקייפ רום,איסקייפ רום,משחק בריחה,חדר אתגרי"
                 },
                 "leisure/firepit": {
                     "name": "שוחה למדורה",
@@ -6669,7 +6705,7 @@
                 },
                 "leisure/marina": {
                     "name": "מרינה",
-                    "terms": "מרינה"
+                    "terms": "מעגן,מעגנה,עיגון,שיט,כלי שיט,יאכטה,יאכטות"
                 },
                 "leisure/miniature_golf": {
                     "name": "מיני-גולף",
@@ -6738,6 +6774,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "זירת רכיבה",
                     "terms": "מתחם רכיבה"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "מגרש הוקי שדה",
+                    "terms": "מגרש הוקי,הוקי שדה,מתחם הוקי שדה,רחבת הוקי שדה"
                 },
                 "leisure/pitch/netball": {
                     "name": "מגרש נטבול",
@@ -6943,10 +6983,12 @@
                     "terms": "תורן אנטנה סלולרית,עמוד אנטנה סלולרית,תורן סלולרי,עמוד סלולרי"
                 },
                 "man_made/mast/communication/radio": {
-                    "name": "תורן שידורי רדיו"
+                    "name": "תורן שידורי רדיו",
+                    "terms": "אנטנה,תורן תקשורת,מגדל תקשורת,מגדל,תורן רדיו,מגדל רדיו,תורן תמסורת,מגדל תמסורת"
                 },
                 "man_made/mast/communication/television": {
-                    "name": "תורן שידורי טלוויזיה"
+                    "name": "תורן שידורי טלוויזיה",
+                    "terms": "אנטנה,תורן תקשורת,מגדל תקשורת,מגדל,תורן טלוויזיה,מגדל טלוויזיה,תורן תמסורת,מגדל תמסורת,תורן טלביזיה,מגדל טלביזיה"
                 },
                 "man_made/mineshaft": {
                     "name": "פתח מכרה"
@@ -6989,6 +7031,10 @@
                     "name": "מיכל אחסון",
                     "terms": "מכל אחסון,מיכל איחסון,מכל איכסון"
                 },
+                "man_made/storage_tank/water": {
+                    "name": "מיכל מים",
+                    "terms": "מיכלית,מכל,מכל מים,מכלית מים"
+                },
                 "man_made/street_cabinet": {
                     "name": "ארון ציבורי",
                     "terms": "ארון חשמל,ארון כבלים,ארון תקשורת,ארון שירות,ארון טכני,תיבת פיקוד,ארון פיקוד רמזורים,תיבת פיקוד רמזורים,רמזורים,חשמל,תקשורת,טלוויזיה"
@@ -6998,7 +7044,8 @@
                     "terms": "מעקב"
                 },
                 "man_made/surveillance/camera": {
-                    "name": "מצלמת מעקב"
+                    "name": "מצלמת מעקב",
+                    "terms": "מצלמת ריגול,מצלמת אבטחה,מצלמת אינטרנט,זיהוי לוחיות רישוי, מעקב,מעגל סגור"
                 },
                 "man_made/survey_point": {
                     "name": "נקודת גבול",
@@ -7071,6 +7118,10 @@
                 "manhole/telecom": {
                     "name": "בור תקשורת",
                     "terms": "בור טלקום"
+                },
+                "military/trench": {
+                    "name": "שוחה צבאית",
+                    "terms": "סוללה,שוחה,חפיר"
                 },
                 "natural": {
                     "name": "מאפייני טבע"
@@ -7201,6 +7252,10 @@
                 },
                 "natural/water/stream": {
                     "name": "נחל"
+                },
+                "natural/water/wastewater": {
+                    "name": "מתקן טיהור שפכים",
+                    "terms": "מט״ש,שפד״ן,שפכים,שופכין,קולחין"
                 },
                 "natural/wetland": {
                     "name": "ביצה",
@@ -8264,6 +8319,10 @@
                     "name": "חנות ציוד רפואי",
                     "terms": "חנות ציוד רפואי"
                 },
+                "shop/military_surplus": {
+                    "name": "חנות עודפי צבא",
+                    "terms": "ריקושט,חנות עודפים צבאיים,חנות צבא,ציוד צבאי,צבא,כלי נשק,נשקים"
+                },
                 "shop/mobile_phone": {
                     "name": "חנות טלפונים ניידים",
                     "terms": "חנות טלפונים ניידים"
@@ -8307,6 +8366,10 @@
                 "shop/outdoor": {
                     "name": "חנות רהיטי גינה",
                     "terms": "חנות ריהוט גינה"
+                },
+                "shop/outpost": {
+                    "name": "נקודת הפצה של שירות מקוון",
+                    "terms": "נקודת איסוף,נקודת הפצה,תאי חלוקה,תאי הפצה"
                 },
                 "shop/paint": {
                     "name": "חנות צבע",
@@ -8501,6 +8564,10 @@
                 "tourism/artwork": {
                     "name": "אומנות",
                     "terms": "אומנות"
+                },
+                "tourism/artwork/bust": {
+                    "name": "פרוטומה",
+                    "terms": "פסל של ראש אדם, כתפיו והחזה שלו,פסל,דמות"
                 },
                 "tourism/artwork/graffiti": {
                     "name": "גרפיטי",
@@ -8819,6 +8886,10 @@
                     "name": "תעלת מים",
                     "terms": "תעלה"
                 },
+                "waterway/canal/lock": {
+                    "name": "מחסום תעלת מים",
+                    "terms": "שער תעלת מים,שער תעלה,מחסום תעלה,מחסום נהר"
+                },
                 "waterway/dam": {
                     "name": "סכר",
                     "terms": "סכר"
@@ -8923,7 +8994,7 @@
                     "text": "תנאים ומשוב"
                 },
                 "description": " גבולות ומועדי צילום. תוויות מופיעות ברמות תקריב של 13 ומעלה. ",
-                "name": "דיגיטל גלוב' תצלומי אוויר פרמיום"
+                "name": "דיגיטל גלוב תצלומי אוויר פרימיום"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
@@ -8937,14 +9008,7 @@
                     "text": "תנאים ומשוב"
                 },
                 "description": "גבולות תמונות רקע ותאריכי צילום. תוויות מופיעות בתקריב ברמה 13 ומעלה.",
-                "name": "דיגיטל גלוב' תצלומי אוויר"
-            },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "DigitalGlobe-Vivid הוא פסיפס עם אסתטיקה ועדכניות מיטביים לכל אזור ברחבי כדור הארץ, רזולוציה של 50 ס״מ או טובה יותר, עדכניות של <20 חודשים בממוצע בכל רחבי העולם.",
-                "name": "צילומי Vivid של DigitalGlobe"
+                "name": "דיגיטל גלוב תצלומי אוויר"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -8957,7 +9021,7 @@
                 "attribution": {
                     "text": "תנאים ומשוב"
                 },
-                "description": "ESRI תצלומי אוויר",
+                "description": "ESRI תצלומי אוויר.",
                 "name": "ESRI תצלומי אוויר"
             },
             "EsriWorldImageryClarity": {
@@ -8972,7 +9036,7 @@
                     "text": "מתנדבי © OpenStreetMap,‏ CC-BY-SA"
                 },
                 "description": "שכבת בררת המחדל של OpenStreetMap.",
-                "name": "OpenStreetMap (תקני)"
+                "name": "OpenStreetMap (רגיל)"
             },
             "Mapbox": {
                 "attribution": {
@@ -8980,6 +9044,20 @@
                 },
                 "description": "צילומי אוויר ולוויין.",
                 "name": "Mapbox לווייני"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "תנאים ומשוב"
+                },
+                "description": "Maxar פרימיום הוא פסיפס שמורכב ממפת הבסיס Maxar עם שטחים נבחרים במילוי ‎+Vivid או שטח צילום מותאם אישית, ברזולוציה של 50 ס״מ ומעלה, שמתרענן בתדירות גבוהה יותר ככל שמצטרפים עוד עדכונים.",
+                "name": "צילומי פרימיום של Maxar (בטא)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "תנאים ומשוב"
+                },
+                "description": "Maxar רגיל הוא סדרה אסופה של צילומים שמכסים 86% מהקרקע בכדור הארץ ברזולוציה של 30-60 ס״מ איפה שניתן, עם מילוי חוסרים מצד Landsat. הגיל הממוצע הוא 2.31 שנים, עם שטחים מסוימים שמתעדכנים פעמיים בשנה.",
+                "name": "צילומים רגילים של Maxar (בטא)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9122,6 +9200,27 @@
                 },
                 "description": "אורטופוטו basemap.at",
                 "name": "אורטופוטו basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "שכבת הערות שמסופקת על ידי basemap.at.",
+                "name": "שכבת basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "שכבת משטח שמסופקת על ידי basemap.at.",
+                "name": "משטח של basemap.at"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "שכבת תוואי שטח שמסופקת על ידי basemap.at.",
+                "name": "תוואי שטח של basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {

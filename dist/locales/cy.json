@@ -180,7 +180,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Cyfeiriad",
                     "options": {
                         "backward": "Yn ôl",
                         "forward": "Ymlaen"

@@ -20,7 +20,7 @@
         "modes": {
             "add_feature": {
                 "title": "Ein Objekt hinzufügen",
-                "description": "Suche Objekte um sie zur Karte hinzuzufügen.",
+                "description": "Suche nach Objekten um diese der Karte hinzuzufügen",
                 "key": "Tab",
                 "result": "{count} Resultate",
                 "results": "{count} Resultate"
@@ -866,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "Ungesicherte Änderungen vorhanden",
-            "description": "Willst du die ungesicherten Änderungen aus einer früheren Bearbeitungs-Sitzung wiederherstellen?",
-            "restore": "Wiederherstellen meiner Änderungen",
-            "reset": "Verwerfen meiner Änderungen"
+            "heading": "Du hast ungesicherte Änderungen",
+            "description": "Willst du ungesicherte Änderungen von einer früheren Bearbeitung wiederherstellen?",
+            "restore": "Meine Änderungen wiederherstellen",
+            "reset": "Meine Änderungen verwerfen"
         },
         "save": {
             "title": "Speichern",
@@ -905,14 +905,14 @@
             }
         },
         "success": {
-            "just_edited": "Du hast OpenStreetMap bearbeitet!",
+            "just_edited": "Du hast gerade OpenStreetMap geändert!",
             "thank_you": "Danke für die Verbesserung der Karte.",
             "thank_you_location": "Danke für die Verbesserung der Karte bei {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Deine Änderungen sollten auf OpenStreetMap innerhalb weniger Minuten auftauchen. Auf anderen Karten könnte die Aktualisierung länger dauern.",
+            "help_html": "Deine Änderungen sollten auf OpenStreetMap in wenigen Minuten sichtbar sein. Für andere Karen kann es länger dauern, bis die Änderungen sichtbar werden.",
             "help_link_text": "Details",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/DE:FAQ#Wann_werden_meine_.C3.84nderungen_auf_den_Karten_gezeigt.3F",
             "view_on_osm": "Zeige Änderungen auf OSM",
@@ -930,8 +930,8 @@
         },
         "splash": {
             "welcome": "Willkommen beim iD OpenStreetMap Editor",
-            "text": "iD ist ein benutzerfreundliches aber leistungsfähiges Werkzeug, um an der besten freien Weltkarte mitzuwirken. Dies ist Version {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}.",
-            "walkthrough": "Rundgang starten",
+            "text": "iD ist ein freundliches aber mächtiges Werkzeug um die freie Karte der Welt zu verbessern. Das ist Version {version}. Mehr information findest du auf {website} und du kannst Probleme auf {github} melden.",
+            "walkthrough": "Starte den Rundgang",
             "start": "Jetzt bearbeiten"
         },
         "source_switch": {
@@ -1124,8 +1124,8 @@
                         "description": "Hier sind Wege in verschiedenen Ebenen (z.B. Tunnel oder Brücke) bei {var1} verbunden."
                     },
                     "170": {
-                        "title": "Objekt mit Eigenschaft „FIXME“",
-                        "description": "{var1} hat die Eigenschaft „FIXME“: {var2}"
+                        "title": "Objekt mit Eigenschaft „fixme“",
+                        "description": "{var1} hat die Eigenschaft „fixme“: {var2}"
                     },
                     "180": {
                         "title": "Relation ohne Typ",
@@ -1505,7 +1505,7 @@
             },
             "imagery": {
                 "title": "Hintergrund-Bildmaterial",
-                "intro": "Das Hintergrund-Bildmaterial welches unter den Kartendaten erscheint ist eine wichtige Quelle zum Zeichnen. Dieses Bildmaterial kann aus Luftbildern bestehen, die von Satelliten, Flugzeugen oder Drohnen gesammelt wurde, oder es können eingescannte historische Karten oder andere frei erhältliche Quelldaten sein.",
+                "intro": "Das Hintergrund-Bildmaterial welches unter den Kartendaten erscheint ist eine wichtige Quelle zum Bearbeiten. Dieses Bildmaterial kann aus Luftbildern bestehen, die von Satelliten, Flugzeugen oder Drohnen gesammelt wurde, oder es können eingescannte historische Karten oder andere frei erhältliche Quelldaten sein.",
                 "sources_h": "Bildmaterial-Quellen",
                 "choosing": "Um zu sehen, welche Bildmaterial-Quellen zum Bearbeiten verfügbar sind klicke den {layers} **Hintergrundeinstellungen** Knopf auf der rechten Seite der Karte. ",
                 "sources": "Als Standard sind die [Bing](https://www.bing.com/maps/) Satellitenbilder als Hintergrundbild ausgewählt. Abhängig von der Gegend sind auch andere Bildmaterial-Quellen verfügbar. Einige können neuer sein oder eine höhere Auflösung haben, daher ist es immer sinnvoll zu prüfen, welches Bildmaterial die beste Referenz zum Bearbeiten ist.",
@@ -1515,9 +1515,9 @@
             },
             "streetlevel": {
                 "title": "Straßenfotos",
-                "intro": "Straßenfotos sind hilfreich für das Zeichnen von Straßenschildern, Geschäften und anderen Details, die man auf Luftbildern nicht sehen kann. Im iD-Editor können die Bilder von  [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) und [OpenStreetCam](https://www.openstreetcam.org) angezeigt werden.",
+                "intro": "Straßenfotos sind hilfreich für das Bearbeiten von Straßenschildern, Geschäften und anderen Details, die man auf Luftbildern nicht sehen kann. Im iD-Editor können die Bilder von  [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) und [OpenStreetCam](https://www.openstreetcam.org) angezeigt werden.",
                 "using_h": "Straßenfotos benutzen",
-                "using": "Um Straßenfotos beim Zeichnen zu benutzen klicke das {data} **Kartendaten**-Feld auf der rechten Seite der Karte zum Einschalten oder Ausschalten der verfügbaren Bildquellen.",
+                "using": "Um Straßenfotos beim Bearbeiten zu benutzen klicke das {data} **Kartendaten**-Feld auf der rechten Seite der Karte zum Einschalten oder Ausschalten der verfügbaren Bildquellen.",
                 "photos": "Wenn die Straßenfotos eingeschaltet sind, wird eine Linie entlang der Fotosequenz angezeigt. Bei höheren Zoomstufen zeigt wird jede Fotoposition durch einen Kreis angezeigt und bei noch höheren Zoomstufen zeigt ein Kegel die Richtung der Kamera während der Aufnahme an.",
                 "viewer": "Wenn du auf eine Fotoposition klickst erscheint die Fotoanzeige in der linken unteren Ecke der Karte. Die Fotoanzeige enthält Kontroll-Knöpfe um vorwärts und rückwärts springen zu können. Es zeigt auch den Benutzernamen der Person, die das Foto erstellt hat, wann das Foto erstellt wurde und einen Link, um das Foto auf der Originalseite zu sehen."
             },
@@ -1526,7 +1526,7 @@
                 "intro": "GPS-Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale *.gpx*, *.geojson* und *.kml* Dateien auf deinem Computer. Du kannst GPS-Tracks mit einem Smartphone, einer Sportuhr oder mit anderen GPS-Geräten aufnehmen.",
                 "survey": "Für Informationen über das Aufzeichnen von GPS-Daten kannst du dir folgende Anleitung zur [Kartierung mit Smartphone, GPS oder Field Paper](http://learnosm.org/de/mobile-mapping/) durchlesen.",
                 "using_h": "GPS-Tracks verwenden",
-                "using": "Um einen GPS-Track zum Zeichnen zu verwenden, ziehe ihn einfach per Drag & Drop auf die Karte. Wenn er erkannt wurde, wird er als helle lila Linie auf der Karte angezeigt. Klicke das {data} **Kartendaten**-Feld rechts, um die neue Ebene mit dem Track einzuschalten/auszuschalten oder den GPS-Track auf der Karte anzuzeigen.",
+                "using": "Um einen GPS-Track als Hintergrund zum Bearbeiten zu verwenden, ziehe ihn einfach per Drag & Drop auf die Karte. Wenn er erkannt wurde, wird er als helle lila Linie auf der Karte angezeigt. Klicke das {data} **Kartendaten**-Feld rechts, um die neue Ebene mit dem Track einzuschalten/auszuschalten oder den GPS-Track auf der Karte anzuzeigen.",
                 "tracing": "Der GPS-Track wird nicht zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Orientierung um neue Objekte zu zeichnen.",
                 "upload": "Du kannst auch [deine GPS-Tracks zu OpenStreetMap hochladen](https://www.openstreetmap.org/trace/create), damit sie von anderen Benutzern verwendet werden können."
             },
@@ -1721,8 +1721,8 @@
             "fixme_tag": {
                 "title": "„FIXME“ Ersuchen",
                 "message": "{feature} mit „FIXME“ Ersuchen",
-                "tip": "Finde Objekte mit einer „FIXME“ Eigenschaft",
-                "reference": "Eine „FIXME“ Eigenschaft weist darauf hin, dass ein Mapper um Hilfe mit einem Objekt ersucht hat."
+                "tip": "Finde Objekte mit einer „fixme“ Eigenschaft",
+                "reference": "Eine „fixme“ Eigenschaft weist darauf hin, dass ein Mapper um Hilfe mit einem Objekt ersucht hat."
             },
             "generic_name": {
                 "title": "Verdächtige Namen",
@@ -1738,6 +1738,20 @@
                         "message": "{feature} gibt Google als Datenquelle an"
                     },
                     "reference": "Google-Produkte sind urheberrechtlich geschützt und sollten nicht als Referenz verwendet werden."
+                }
+            },
+            "invalid_format": {
+                "title": "Ungültige Formatierung",
+                "tip": "Finde Eigenschaften mit unerwarteten Formaten",
+                "email": {
+                    "message": "{feature} hat eine ungültige E-Mail-Adresse.",
+                    "message_multi": "{feature} hat mehrere ungültige E-Mail-Adressen.",
+                    "reference": "Email-Adresse muss wie \"user@example.com\" aussehen."
+                },
+                "website": {
+                    "message": "{feature} hat eine ungültige Website.",
+                    "message_multi": "{feature} hat mehrere ungültige Websiten.",
+                    "reference": "Websiten sollten mit \"http\" oder \"https\" beginnen."
                 }
             },
             "missing_role": {
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} hat unvollständige Eigenschaften",
                     "reference": "Einige Objekte sollten zusätzliche Eigenschaften haben."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} sieht aus wie eine Marke mit eigenartigen Eigenschaften",
+                    "reference": "Alle Objekte derselben Marke sollten in derselben Weise erfasst werden."
                 }
             },
             "private_data": {
@@ -2188,7 +2206,7 @@
                 "help": "Du bist nun bereit OpenStreetMap zu bearbeiten!{br}Du kannst mit dem {button} Hilfe-Knopf oder der '{key}'-Taste mehr Dokumentation ansehen und diesen Rundgang wieder aufrufen.",
                 "shortcuts": "Du kannst eine Liste der Befehle zusammen mit ihren Tastenkürzeln durch Drücken der '{key}'-Taste ansehen.",
                 "save": "Vergiss nicht, regelmäßig zu speichern, um die Änderungen zu OpenStreetMap hochzuladen!",
-                "start": "Beginne mit dem Bearbeiten!"
+                "start": "Fang an zu bearbeiten!"
             }
         },
         "shortcuts": {
@@ -2838,6 +2856,10 @@
                     "label": "Geräte",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Durchmesser",
+                    "placeholder": "5 mm, 10 cm, 15 dm ..."
+                },
                 "diaper": {
                     "label": "Windelwechseln möglich"
                 },
@@ -2883,7 +2905,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Blickrichtung",
+                    "label": "Betroffene Richtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -3659,7 +3681,7 @@
                     "placeholder": "Entfernung in Kilometer mit einer Nachkommastelle (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Blickrichtung",
+                    "label": "Betroffene Richtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -4139,7 +4161,7 @@
                     "label": "Verkehrsschild"
                 },
                 "traffic_sign/direction": {
-                    "label": "Richtung",
+                    "label": "Betroffene Richtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -4150,7 +4172,7 @@
                     "label": "Typ"
                 },
                 "traffic_signals/direction": {
-                    "label": "Blickrichtung",
+                    "label": "Betroffene Richtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -4185,6 +4207,9 @@
                 "trees": {
                     "label": "Bäume"
                 },
+                "trench": {
+                    "label": "Typ"
+                },
                 "trolley_wire": {
                     "label": "Oberleitung für einen Oberleitungsbus"
                 },
@@ -4202,6 +4227,9 @@
                         "test": "Teststrecke",
                         "tourism": "Touristische Nutzung"
                     }
+                },
+                "valve": {
+                    "label": "Typ"
                 },
                 "vending": {
                     "label": "Warentyp"
@@ -4796,6 +4824,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Christliche Kirche",
                     "terms": "Christliche Kirche"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Königreichssaal der Zeugen Jehovas",
+                    "terms": "Königreichssaal der Zeugen Jehovas"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "La Luz del Mundo Tempel",
+                    "terms": "christliche, Kirche, Gotteshaus, Gebetshaus, Anbetungshaus"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Quäker-Versammlungshaus",
+                    "terms": "Quäker-Versammlungshaus"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindutempel",
@@ -6497,41 +6537,25 @@
                     "name": "Kaserne",
                     "terms": "Baracken"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militärbunker",
-                    "terms": "Militärischer Bunker"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Kontrollpunkt",
-                    "terms": "Checkpoint, Kontrollpunkt, Grenzübergang"
-                },
                 "landuse/military/danger_area": {
-                    "name": "Gefahrenbereich",
-                    "terms": "gefährlicher Bereich"
+                    "name": "Militärischer Gefahrenbereich",
+                    "terms": "militärischer gefährlicher Bereich"
                 },
                 "landuse/military/naval_base": {
                     "name": "Marinestützpunkt",
                     "terms": "Flottenstützpunkt"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Kernwaffenexplosionensgelände",
-                    "terms": "Atomwaffenexplosionensgelände,Nuklearwaffenexplosionensgelände"
-                },
                 "landuse/military/obstacle_course": {
-                    "name": "Hindernisstrecke",
-                    "terms": "Hindernisbahn"
-                },
-                "landuse/military/office": {
-                    "name": "Militärbüro",
-                    "terms": "Militärisches Büro"
+                    "name": "Militärische Hindernisstrecke",
+                    "terms": "Militärische Hindernisbahn"
                 },
                 "landuse/military/range": {
                     "name": "Truppenübungsplatz",
                     "terms": "Schießstand,Truppenübungsplatz"
                 },
                 "landuse/military/training_area": {
-                    "name": "Übungsplatz",
-                    "terms": "Übungsplatz"
+                    "name": "Militärischer Übungsplatz",
+                    "terms": "Militärischer Übungsplatz"
                 },
                 "landuse/orchard": {
                     "name": "Obstplantage",
@@ -6633,6 +6657,9 @@
                 "leisure/dog_park": {
                     "name": "Hundepark",
                     "terms": "Hundefreilaufzone, Hundeauslaufzone, Hundezone, Hundeauslaufplatz"
+                },
+                "leisure/escape_game": {
+                    "name": "Escape Room"
                 },
                 "leisure/firepit": {
                     "name": "Feuerstelle",
@@ -7045,6 +7072,10 @@
                     "name": "Unterirdische Pipeline",
                     "terms": "Unterirdische Pipeline"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Pipeline Ventil",
+                    "terms": "Öl, Gas, Wasser, Abwasser, Abwasserkanal"
+                },
                 "man_made/pumping_station": {
                     "name": "Pumpwerk",
                     "terms": "Pumpstation, Hebeanlage, Hebewerk, Schöpfwerk, Wasserhebewerk"
@@ -7144,6 +7175,26 @@
                 "manhole/telecom": {
                     "name": "Telekommunikationskabel-Wartungszugang",
                     "terms": "Telekommunikationskabel-Wartungszugang"
+                },
+                "military/bunker": {
+                    "name": "Militärischer Bunker",
+                    "terms": "Luftwaffe, Armee, Kampf, Wache, Marine, Kriegsflotte, Truppen, Krieg"
+                },
+                "military/checkpoint": {
+                    "name": "Kontrollpunkt",
+                    "terms": "Luftwaffe, Armee, Kampf, Wache, Marine, Kriegsflotte, Truppen, Krieg"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Atombombendetonationsstelle",
+                    "terms": "Atom, Explosion, Detonation, Nuklear, Test"
+                },
+                "military/office": {
+                    "name": "Militärbüro",
+                    "terms": "Luftwaffe, Armee, Kampf, Wache, Marine, Kriegsflotte, Truppen, Krieg, Einberufung, Rekrutierung"
+                },
+                "military/trench": {
+                    "name": "Schützengraben",
+                    "terms": "Schützengraben, ausgegraben, Infanteriegraben"
                 },
                 "natural": {
                     "name": "Natur"
@@ -7334,6 +7385,10 @@
                 "office/association": {
                     "name": "Büro einer Nonprofit-Organisation",
                     "terms": "Büro einer Nonprofit-Organisation, NPO-Büro, Verein, Vereinsheim, Vereinsbüro, Studentenverbindung, e.V."
+                },
+                "office/bail_bond_agent": {
+                    "name": "Kautionsvermittler",
+                    "terms": "Kautionsvermittler"
                 },
                 "office/charity": {
                     "name": "Wohlfahrtseinrichtung",
@@ -8381,6 +8436,10 @@
                     "name": "Sanitätshaus",
                     "terms": "Drogerie,Medizinbedarf,Medizinbedarfgeschäft"
                 },
+                "shop/military_surplus": {
+                    "name": "Militärkleidungsabverkauf",
+                    "terms": "Waffen, Armee, Marine, Abverkauf"
+                },
                 "shop/mobile_phone": {
                     "name": "Mobiltelefonladen",
                     "terms": "Handygeschäft"
@@ -9089,13 +9148,6 @@
                 "description": "Kachelgrenzen und Aufnahmedatum werden bei Zoom-Level 13 und höher angezeigt.",
                 "name": "DigitalGlobe Standard Bildmaterial Klassisch"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Bedingungen & Feedback"
-                },
-                "description": "DigitalGlobe-Vivid ist ein Mosaik mit optimalen ästhetischen Ansichten für jeden Bereich am Globus, 50cm Auflösung oder besser und Aktualität <20 Monate durchschnittlich.",
-                "name": "DigitalGlobe Vivid Hintergrund"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 wolkenfrei - https://s2maps.eu by EOX IT Services GmbH (enthält modofizierte Copernicus Sentinel Daten 2017 & 2018)"
@@ -9130,6 +9182,20 @@
                 },
                 "description": "Satellitenbilder und Luftbilder",
                 "name": "Mapbox Satellit"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Maxar Premium ist ein Mosaic zusammengestellt aus der Maxar Basiskarte mit ausgewählten Regionen gefüllt mit +Vivid oder kundenspezifischen/benutzerdefinierten Bildbereichen mit einer Auflösung von mindestens 50 cm, die bei fortlaufenden Aktualisierungen häufiger aktualisiert werden.",
+                "name": "Maxar Premium Luftbilder (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Maxar Standard ist eine Sammlung von kuratierten Bildern, die 86% der Landmasse der Erde abdecken, mit einer Auflösung von 30 bis 60 cm, sofern verfügbar, ergänzt durch Landsat. Das Durchschnittsalter beträgt 2,31 Jahre, wobei einige Gebiete zweimal pro Jahr aktualisiert werden.",
+                "name": "Maxar Standard Luftbilder (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9189,7 +9255,7 @@
             },
             "US-TIGER-Roads-2018": {
                 "description": "Gelb = Public domain Kartendaten vom US Census. Rot  = Data nicht in OpenStreetMap",
-                "name": "TIGER Roads 2018"
+                "name": "TIGER Straßen 2018"
             },
             "USDA-NAIP": {
                 "description": "Das aktuellste Jahr der DOQQs aus dem Programm für Nationale Landwirtschafts-Luftbilder (National Agriculture Imagery Program, NAIP) für jeden Staat in den zusammenhängenden USA.",
@@ -9272,6 +9338,27 @@
                 },
                 "description": "Orthofotos von basemap.at, früher geoimage.at",
                 "name": "basemap.at Orthofotos"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Anmerkungen von basemap.at.",
+                "name": "basemap.at Überlagerung"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Oberflächenkarte von basemap.at.",
+                "name": "basemap.at Oberfläche"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Geländekarte von basemap.at.",
+                "name": "basemap.at Gelände"
             },
             "eufar-balaton": {
                 "attribution": {

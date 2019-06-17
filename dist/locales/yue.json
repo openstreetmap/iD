@@ -275,7 +275,6 @@
         },
         "geocoder": {
             "search": "搵天下各地⋯⋯",
-            "no_results_visible": "圖內可見之處，都搵唔到",
             "no_results_worldwide": "無嘢搵到"
         },
         "geolocate": {
@@ -396,10 +395,6 @@
                 "tooltip": "範圍全填。"
             }
         },
-        "restore": {
-            "heading": "你有修改未記妥",
-            "description": "要唔要囘復上次未記妥之修改？"
-        },
         "save": {
             "title": "記低",
             "help": "重閱所變更，傳上公家街圖，等其他用者睇到。",
@@ -430,10 +425,6 @@
             }
         },
         "success": {
-            "just_edited": "你啱啱改咗公家街圖！",
-            "thank_you": "謝君修善輿圖。",
-            "thank_you_location": "謝君修善 {where} 之輿圖。",
-            "help_html": "君所修所改，幾分鐘就會上公家街圖。其他輿圖，或者遲啲收到。",
             "help_link_text": "明細",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "公家街圖處，睇返修改",
@@ -445,12 +436,6 @@
         "confirm": {
             "okay": "知",
             "cancel": "唔做"
-        },
-        "splash": {
-            "welcome": "歡迎來到艾第公家街圖造圖。",
-            "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
-            "walkthrough": "開始逐步解釋",
-            "start": "卽改"
         },
         "source_switch": {
             "live": "運行之中",
@@ -912,9 +897,6 @@
                         "anticlockwise": "逆時針",
                         "clockwise": "順時針"
                     }
-                },
-                "direction_vertex": {
-                    "label": "方向"
                 },
                 "display": {
                     "label": "顯示"

@@ -443,7 +443,6 @@
         },
         "geocoder": {
             "search": "Ieškoti visam pasaulyje...",
-            "no_results_visible": "Nėra rezultatų matomame žemėlapio plote",
             "no_results_worldwide": "Nėra rezultatų"
         },
         "geolocate": {
@@ -615,12 +614,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Turite neįrašytų pakeitimų",
-            "description": "Ar norite atstatyti neįrašytus ankstesnės redagavimo sesijos pakeitimus?",
-            "restore": "Atstatyti mano pakeitimus",
-            "reset": "Atmesti mano pakeitimus"
-        },
         "save": {
             "title": "Išsaugoti",
             "help": "Peržiūrėkite jūsų pakeitimus ir įkelkite juos į OpenStreetMap, taip padarydami juos matomais kitiems naudotojams.",
@@ -655,8 +648,6 @@
             }
         },
         "success": {
-            "just_edited": "Jūs ką tik pakeitėte OpenStreetMap!",
-            "thank_you": "Ačiū, kad tobulinate žemėlapį.",
             "help_link_text": "Detalės",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Rodyti pakeitimus OSM",
@@ -671,12 +662,6 @@
         "confirm": {
             "okay": "Gerai",
             "cancel": "Nutraukti"
-        },
-        "splash": {
-            "welcome": "Jus sveikina iD OpenStreetMap redaktorius",
-            "text": "iD yra draugiškas, bet galingas įrankis pildant didžiausią, atviriausią ir nemokamą/laisvą pasaulio žemėlapį. Šiuo metu naudojate versiją {version}. Daugiau informacijos rasite svetainėje {website}, o apie klaidas galite pranešti {github}.",
-            "walkthrough": "Pradėti pažingsninę demonstraciją",
-            "start": "Redaguoti dabar"
         },
         "source_switch": {
             "live": "gyva",
@@ -1484,7 +1469,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -2038,7 +2022,6 @@
                     "label": "Tipas"
                 },
                 "railway/signal/direction": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -2375,7 +2358,6 @@
                     "label": "Tipas"
                 },
                 "traffic_signals/direction": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -3480,9 +3462,6 @@
                 },
                 "landuse/military/barracks": {
                     "name": "Barakai"
-                },
-                "landuse/military/bunker": {
-                    "name": "Karinis bunkeris"
                 },
                 "landuse/military/danger_area": {
                     "name": "Pavojaus zona"

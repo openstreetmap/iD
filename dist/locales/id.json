@@ -238,7 +238,6 @@
         },
         "geocoder": {
             "search": "Cari di seluruh dunia...",
-            "no_results_visible": "Hasil pencarian tidak ditemukan pada peta yang ditampilkan",
             "no_results_worldwide": "Hasil pencarian tidak ditemukan"
         },
         "geolocate": {
@@ -355,10 +354,6 @@
                 "tooltip": "Area digambar terisi penuh."
             }
         },
-        "restore": {
-            "heading": "Anda memiliki perubahan yang belum disimpan",
-            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?"
-        },
         "save": {
             "title": "Simpan",
             "no_changes": "Tak ada perubahan yang bisa disimpan.",
@@ -386,16 +381,10 @@
             }
         },
         "success": {
-            "just_edited": "Anda baru saja menyunting OpenStreetMap!",
             "help_link_text": "detail"
         },
         "confirm": {
             "cancel": "Batal"
-        },
-        "splash": {
-            "welcome": "Selamat datang di penyuting iD OpenStreetMap",
-            "text": "iD begitu bersahabat namun juga alat yang kuat untuk berperan dalam peta dunia gratis terbaik. Ini adalah versi {version}. Untuk informasi lebih lihat {website} dan laporkan kesalahan di {github}.",
-            "walkthrough": "Memulai Perjalanan"
         },
         "source_switch": {
             "live": "terhubung",

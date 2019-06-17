@@ -11,9 +11,6 @@
             "add_feature": "Lisa objekt"
         },
         "modes": {
-            "add_feature": {
-                "title": "Objekti lisamine"
-            },
             "add_area": {
                 "title": "Ala",
                 "description": "Lisa kaardile parke, hooneid, järvi või muid alasid.",
@@ -371,7 +368,6 @@
         },
         "geocoder": {
             "search": "Otsi kogu maailmast...",
-            "no_results_visible": "Nähtaval kaardialal tulemusi ei leitud",
             "no_results_worldwide": "Tulemusi ei leitud"
         },
         "geolocate": {
@@ -552,12 +548,6 @@
                 "header": "Kohandatud kaardiandmete sätted"
             }
         },
-        "restore": {
-            "heading": "Sul on salvestamata muudatusi",
-            "description": "Kas soovid taastada eelmise seansi käigus tehtud muudatused?",
-            "restore": "Taasta muudatused",
-            "reset": "Hülga muudatused"
-        },
         "save": {
             "title": "Salvesta",
             "help": "Vaata muudatused üle ja laadi need OpenStreetMapi, et teha need teistele kasutajatele nähtavaks.",
@@ -591,17 +581,10 @@
             }
         },
         "success": {
-            "just_edited": "Täiendasid just OpenStreetMapi!",
             "help_link_text": "Üksikasjad"
         },
         "confirm": {
             "cancel": "Loobu"
-        },
-        "splash": {
-            "welcome": "Tere tulemast OpenStreetMapi redaktorisse iD",
-            "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
-            "walkthrough": "Alusta tutvustust",
-            "start": "Redigeeri kohe"
         },
         "source_switch": {
             "live": "live",
@@ -1024,7 +1007,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Suund",
                     "options": {
                         "backward": "Tagasi",
                         "both": "Mõlemad / Kõik",
@@ -1346,7 +1328,6 @@
                     "label": "Tüüp"
                 },
                 "railway/signal/direction": {
-                    "label": "Suund",
                     "options": {
                         "backward": "Tagasi",
                         "both": "Mõlemad / Kõik",
@@ -1551,7 +1532,6 @@
                     "label": "Tüüp"
                 },
                 "traffic_signals/direction": {
-                    "label": "Suund",
                     "options": {
                         "backward": "Tagasi",
                         "both": "Mõlemad / Kõik",
@@ -1780,8 +1760,8 @@
                     "name": "Kiirtoitlustus"
                 },
                 "amenity/fire_station": {
-                    "name": "Tuletõrjedepoo",
-                    "terms": "tuletõrjujad"
+                    "name": "Päästedepoo",
+                    "terms": "Tuletõrjedepoo,tuletõrjujad,merepääste"
                 },
                 "amenity/food_court": {
                     "name": "Toiduväljak",
@@ -2750,13 +2730,6 @@
                 },
                 "landuse/military/barracks": {
                     "name": "Kasarmu"
-                },
-                "landuse/military/bunker": {
-                    "name": "Militaarpunker",
-                    "terms": "punker"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Militaarkontrollpunkt"
                 },
                 "landuse/military/danger_area": {
                     "name": "Militaarohu ala"

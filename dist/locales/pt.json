@@ -20,7 +20,7 @@
         "modes": {
             "add_feature": {
                 "title": "Adicionar um elemento",
-                "description": "Pesquisar por elementos para adicionar ao mapa.",
+                "description": "Procurar por elementos para adicionar ao mapa.",
                 "key": "Tab",
                 "result": "{count} resultado",
                 "results": "{count} resultados"
@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "Pesquisar no mundo inteiro...",
-            "no_results_visible": "Nenhum resultado na área visível do mapa",
+            "no_results_visible": "Sem resultados na área visível do mapa",
             "no_results_worldwide": "Nenhum resultado encontrado"
         },
         "geolocate": {
@@ -866,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "Tem alterações por gravar",
-            "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?",
-            "restore": "Recuperar as minhas alterações",
-            "reset": "Eliminar as minhas alterações"
+            "heading": "Tem alterações por guardar",
+            "description": "Quer restaurar as alterações por guardar da sessão anterior?",
+            "restore": "Restaurar as minhas edições",
+            "reset": "Descartar as minhas alterações"
         },
         "save": {
             "title": "Gravar",
@@ -905,14 +905,14 @@
             }
         },
         "success": {
-            "just_edited": "Acaba de editar o OpenStreetMap!",
-            "thank_you": "Obrigado por melhorares o mapa.",
-            "thank_you_location": "Obrigado por melhorares o mapa em {where}.",
+            "just_edited": "Acabou de editar o OpenStreetMap!",
+            "thank_you": "Obrigado por melhorar o mapa.",
+            "thank_you_location": "Obrigado por melhorar o mapa em {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "As tuas alterações devem aparecer no OpenStreetMap dentro de poucos minutos. Pode demorar mais tempo se for um mapa noutro site dependente do OSM.",
+            "help_html": "As alterações que fez devem aparecer no OpenStreetMap dentro de poucos minutos. Pode demorar mais tempo se for um mapa noutro site dependente do OSM.",
             "help_link_text": "Detalhes",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F",
             "view_on_osm": "Ver alterações no OSM",
@@ -931,7 +931,7 @@
         "splash": {
             "welcome": "Bem-vindo ao editor iD do OpenStreetMap",
             "text": "Com o editor iD é fácil contribuir para o melhor mapa livre do mundo. Esta é a versão {version}. Para mais informações ver o site {website} e para reportar problemas com o editor aceda a {github}.",
-            "walkthrough": "Iniciar Guia Inicial",
+            "walkthrough": "Ver o guia inicial",
             "start": "Editar agora"
         },
         "source_switch": {
@@ -1611,7 +1611,7 @@
             "options": {
                 "what": {
                     "title": "Verificar:",
-                    "edited": "As minhas edições",
+                    "edited": "Minhas edições",
                     "all": "Tudo"
                 },
                 "where": {
@@ -1721,7 +1721,7 @@
             "fixme_tag": {
                 "title": "Pedidos de \"corrigir-me\"",
                 "message": "{feature} tem um pedido de \"corrigir-me\"",
-                "tip": "Procurar elementos com etiquetas \"corrigir-me\"",
+                "tip": "Procurar elementos com etiquetas \"corrigir-me\" (fixme)",
                 "reference": "Uma etiqueta \"fixme\" (\"corrigir-me\") indica que um mapeador pediu ajuda num dado elemento."
             },
             "generic_name": {
@@ -1738,6 +1738,20 @@
                         "message": "{feature} refere o Google como a origem dos dados"
                     },
                     "reference": "Os produtos e serviços da Google estão protegidos por direitos de autor e não podem ser usados como fonte de informações."
+                }
+            },
+            "invalid_format": {
+                "title": "Formatação inválida",
+                "tip": "Procurar etiquetas com formatos não esperados",
+                "email": {
+                    "message": "{feature} tem um endereço de email inválido.",
+                    "message_multi": "{feature} tem vários endereços de email inválidos.",
+                    "reference": "Os endereços de email tem de ser como \"user@example.com\"."
+                },
+                "website": {
+                    "message": "{feature} tem um URL inválido de um site.",
+                    "message_multi": "{feature} tem vários URL inválidos de sites.",
+                    "reference": "Os URL têm de começar com \"http\" or \"https\"."
                 }
             },
             "missing_role": {
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} tem etiquetas incompletas",
                     "reference": "Alguns elementos deviam ter etiquetas adicionais."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} parece ser uma marca com etiquetas incomuns",
+                    "reference": "Todos os elementos da mesma marca devem ser marcadas com as mesmas etiquetas."
                 }
             },
             "private_data": {
@@ -1851,7 +1869,7 @@
                     "title": "Continuar a desenhar do fim"
                 },
                 "delete_feature": {
-                    "title": "Eliminar esta etiqueta"
+                    "title": "Eliminar este elemento"
                 },
                 "ignore_issue": {
                     "title": "Ignorar este problema"
@@ -1896,7 +1914,7 @@
                     "title": "inverter este elemento"
                 },
                 "select_preset": {
-                    "title": "Selecionar um tipo de elemento"
+                    "title": "Selecionar tipo de elemento"
                 },
                 "select_road_type": {
                     "title": "Selecione um tipo de estrada"
@@ -2883,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direção",
+                    "label": "Direção afetada",
                     "options": {
                         "backward": "Para trás",
                         "both": "Ambos / todos",
@@ -3659,7 +3677,7 @@
                     "placeholder": "Distância para uma décima (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Direção",
+                    "label": "Direção afetada",
                     "options": {
                         "backward": "Para trás",
                         "both": "Ambos / todos",
@@ -4139,7 +4157,7 @@
                     "label": "Sinal de trânsito"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direção",
+                    "label": "Direção afetada",
                     "options": {
                         "backward": "Para trás",
                         "both": "Ambos / tudo",
@@ -4150,7 +4168,7 @@
                     "label": "Tipo"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direção",
+                    "label": "Direção afetada",
                     "options": {
                         "backward": "Para trás",
                         "both": "Ambos / todos",
@@ -4184,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "Árvores"
+                },
+                "trench": {
+                    "label": "Tipo"
                 },
                 "trolley_wire": {
                     "label": "Cabos suspensos de trólei"
@@ -4640,6 +4661,9 @@
                     "name": "Comida rápida de peixe e fritos",
                     "terms": "peixe, frito, comida rápida, fast food"
                 },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Comida rápida de gelados"
+                },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab",
                     "terms": "fast food, kebab"
@@ -4794,6 +4818,18 @@
                     "name": "Igreja/capela/nicho cristão",
                     "terms": "cristã, cristão, cristianismo"
                 },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Salão do Reino das Testemunhas de Jeová",
+                    "terms": "kingdom hall of jehovah's witnessesm, kingdom hall, salões do reino, salão do reino, testeminhas de jeová"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Templo de La Luz del Mundo",
+                    "terms": "la luz del mundo temple, la luz del mundo, a luz do mundo"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Casa de reuniões Quaker Friends",
+                    "terms": "quaker friends meeting house, casa de reuniões quaker friends, casa de reuniões, quaker"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "Templo hindu",
                     "terms": "templo, hindu, hinduísmo, hinduismo, hinduísta, hinduista"
@@ -4833,6 +4869,10 @@
                 "amenity/post_office": {
                     "name": "Estação de correios",
                     "terms": "Central de Correio, CTT, C.T.T., CTTs, Correio de Portugal"
+                },
+                "amenity/prep_school": {
+                    "name": "Escola de preparação para exames",
+                    "terms": "teste prep, tutoring school, escola, escola de preparação"
                 },
                 "amenity/prison": {
                     "name": "Prisão",
@@ -6490,14 +6530,6 @@
                     "name": "Caserna",
                     "terms": "caserna, dormitório militar"
                 },
-                "landuse/military/bunker": {
-                    "name": "Búnquer militar",
-                    "terms": "casamata, búnquer, bunker, bunker militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Posto de controlo militar",
-                    "terms": "ponto de controlo militar, posto de controlo, ponto de controlo"
-                },
                 "landuse/military/danger_area": {
                     "name": "Área perigosa",
                     "terms": "área perigosa, perigo, perigosa, perigoso, interdito, interdição"
@@ -6506,17 +6538,9 @@
                     "name": "Base naval militar",
                     "terms": "base naval, porto militar, porto marítimo militar, porto de guerra, estação naval, ponto de apoio naval, arsenal"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Local de teste de armas nucleares",
-                    "terms": "local de teste de arma nuclear, teste nuclear, testes nucleares"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Percurso militar com obstáculos",
                     "terms": "percurso militar de obstáculos, percurso militar, percurso de obstáculos militar, obstáculo, militar, treino militar, treino"
-                },
-                "landuse/military/office": {
-                    "name": "Escritório militar",
-                    "terms": "escritórios militares, centro de recrutamento militar, centro de inspeção militar, centro de inspecção militar, centro de inspeção, centro de inspecção"
                 },
                 "landuse/military/range": {
                     "name": "Carreira de tiro militar",
@@ -6572,6 +6596,10 @@
                     "name": "Vinha",
                     "terms": "Vinhas, Vinhedo, Vinhão, Vineyard, Uvas, Uva"
                 },
+                "landuse/winter_sports": {
+                    "name": "Área de desportos de inverno",
+                    "terms": "winter sports area, área de desportos de inverno, desporto de inverno, desportos de inverno"
+                },
                 "leisure": {
                     "name": "Lazer"
                 },
@@ -6615,9 +6643,17 @@
                     "name": "Escola de dança",
                     "terms": "dança, dançar, bailado, bailarina, bailarino"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Percurso de golfe de disco",
+                    "terms": "disc golf course, disc golf, golfe de disco, golf de disco"
+                },
                 "leisure/dog_park": {
                     "name": "Parque para cães",
                     "terms": "Parque para Cães, Dog Park"
+                },
+                "leisure/escape_game": {
+                    "name": "Sala de escape",
+                    "terms": "escape room, escape game, sala de escape, quarto de escape, jogo de escape"
                 },
                 "leisure/firepit": {
                     "name": "Local para fogueiras",
@@ -6774,6 +6810,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Pista de equitação",
                     "terms": "Riding Arena, pista, equitação, hipismo, cavalos"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Campo de hóquei em campo",
+                    "terms": "field hockey pitch, campo de hóquei em campo, hóquei em campo, hóquei sobre a grama"
                 },
                 "leisure/pitch/horseshoes": {
                     "name": "Ferradura",
@@ -7126,6 +7166,10 @@
                     "name": "Poço de visita de telecomunicações",
                     "terms": "Telecom Manhole, poço de visita, telecomunicações"
                 },
+                "military/trench": {
+                    "name": "Trincheira militar",
+                    "terms": "military trench, trincheira militar, trincheira, tranqueira"
+                },
                 "natural": {
                     "name": "Natural"
                 },
@@ -7315,6 +7359,10 @@
                 "office/association": {
                     "name": "Organização sem fins lucrativos",
                     "terms": "ONG"
+                },
+                "office/bail_bond_agent": {
+                    "name": "Agente de fianças",
+                    "terms": "bail bond agent, agente de fianças, fianças"
                 },
                 "office/charity": {
                     "name": "Instituição de caridade",
@@ -8363,6 +8411,10 @@
                     "name": "Loja de material médico",
                     "terms": "Medical Supply Store, Artigos Hospitalares, Ortopedia, Ortopédico"
                 },
+                "shop/military_surplus": {
+                    "name": "Loja de excedentes militares",
+                    "terms": "military surplus store, loja de excedentes militares, loja de material militar excedente, loja de material militar fora de uso"
+                },
                 "shop/mobile_phone": {
                     "name": "Loja de telemóveis",
                     "terms": "Mobile Phone Store, Celular, Telemóveis, Telemóvel, Smartphone"
@@ -9009,6 +9061,36 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders - imagens áreas mais recentes"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 imagens aéreas 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, sombreamento de colinas multi-direcional 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
+            },
             "Bing": {
                 "description": "Imagens aéreas e de satélite.",
                 "name": "Imagens aéreas Bing"
@@ -9040,13 +9122,6 @@
                 },
                 "description": "Limites das imagens aéreas e datas de captura. As etiquetas aparecem no nível de magnificação 13 e superiores.",
                 "name": "Imagens DigitalGlobe Standard antigaas"
-            },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Termos e opinião"
-                },
-                "description": "DigitalGlobe-Vivid é um mosaico de imagens aéreas com aparência ótima e atualidade para qualquer parte do mundo, com resolução de 50 cm ou superior e atualidade das imagens inferior a 20 meses no geral.",
-                "name": "Imagens aéreas DigitalGlobe Vivid"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -9082,6 +9157,20 @@
                 },
                 "description": "Imagens aéreas e de satélite.",
                 "name": "Mapbox Satellite"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Termos de utilização e comentários"
+                },
+                "description": "O Maxar Premium é um mosaico composto pelo mapa base Maxar com regiões selecionadas preenchidas com +Vivid ou área de imagens de interesse personalizada, com resolução de 50cm ou superior, e atualizada com mais frequência.",
+                "name": "Maxar Premium Imagery (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Termos de utilização e comentários"
+                },
+                "description": "O Maxar Standard são imagens aéreas revistas que cobrem 86% da massa da Terra, com resolução de 30 a 60cm onde estiver disponível, com recuso alternativo ao Landsat. A idade média é de 2,31 anos com algumas áreas atualizadas 2 vezes por ano.",
+                "name": "Maxar Standard Imagery (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9142,6 +9231,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Amarelo = Dados do mapa de domínio público do Censo dos EUA. Vermelho = Dados não encontrados no OpenStreetMap",
                 "name": "Estradas do TIGRE 2018"
+            },
+            "USDA-NAIP": {
+                "description": "O ano mais recente de DOQQs da National Agriculture Imagery Program (NAIP) para cada estado nos Estados Unidos contíguos.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Estrada: cobertura verde = não classificada. cobertura castanha = trilho. Superfície: gravilha = preenchimento castanho claro, asfalto = preto, pavimentado = cinza, terra = branco, cimento = azul, erva = verde. Sazonal = barras brancas",
@@ -9220,6 +9313,27 @@
                 },
                 "description": "Ortofotomapa fornecido por basemap.at. Sucessor de imagens da geoimage.at .",
                 "name": "Ortofotomapa geoimage.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Camada com anotações fornecido por basemap.at.",
+                "name": "basemap.at - camada superior"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Camada de superfície fornecido por basemap.at.",
+                "name": "basemap.at - superfície"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Camada de terreno fornecido por basemap.at.",
+                "name": "basemap.at - terreno"
             },
             "eufar-balaton": {
                 "attribution": {

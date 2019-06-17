@@ -19,8 +19,6 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Додати елемент",
-                "description": "Пошук об'єктів для додавання на мапу.",
                 "key": "Tab",
                 "result": "{count} варіантів",
                 "results": "{count} варіант"
@@ -618,7 +616,6 @@
         },
         "geocoder": {
             "search": "Шукати по всьому світу…",
-            "no_results_visible": "На видимій ділянці мапи нічого не знайдено",
             "no_results_worldwide": "Нічого не знайдено"
         },
         "geolocate": {
@@ -865,12 +862,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Ви маєте незбережені правки",
-            "description": "У вас виявилися незбережені правки з минулого разу. Відновити їх?",
-            "restore": "Видновити мої зміни",
-            "reset": "Відкинути мої зміни"
-        },
         "save": {
             "title": "Зберегти",
             "help": "Перегляньте свої зміни та завантажте їх до OpenStreetMap, що зробить їх доступними усім іншим.",
@@ -905,14 +896,10 @@
             }
         },
         "success": {
-            "just_edited": "Ви щойно внесли зміни на мапу OpenStreetMap!",
-            "thank_you": "Дякуємо за вдосконалення мапи.",
-            "thank_you_location": "Дякуємо вам з вдосконалення мапи навколо {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Ваші зміни зʼявляться на OpenStreetMap через кілька хвилин. На інших шарах зміни зʼявляться згодом.",
             "help_link_text": "Деталі",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Uk:ЧаПи#.D0.AF_.D1.89.D0.BE.D0.B9.D0.BD.D0.BE_.D0.B7.D1.80.D0.BE.D0.B1.D0.B8.D0.B2_.D0.B4.D0.B5.D1.8F.D0.BA.D1.96_.D0.B7.D0.BC.D1.96.D0.BD.D0.B8_.D0.BD.D0.B0_.D0.BC.D0.B0.D0.BF.D1.96._.D0.AF.D0.BA_.D0.BC.D0.B5.D0.BD.D1.96_.D1.97.D1.85_.D0.BF.D0.BE.D0.B1.D0.B0.D1.87.D0.B8.D1.82.D0.B8.3F",
             "view_on_osm": "Подивитись зміни в ОСМ",
@@ -929,10 +916,7 @@
             "cancel": "Скасувати"
         },
         "splash": {
-            "welcome": "Ласкаво просимо до редактора OpenStreetMap — iD",
-            "text": "iD — дружній але потужний інструмент для редагування найкращої вільної мапи світу. Це версія {version}. Для отримання докладної інформації відвідайте {website}, сповіщайте про помилки на {github}.",
-            "walkthrough": "Подивитись Покрокове керівництво",
-            "start": "Розпочати редагування"
+            "walkthrough": "Подивитись Покрокове керівництво"
         },
         "source_switch": {
             "live": "основна",
@@ -1740,6 +1724,20 @@
                     "reference": "Продукти Google є пропрієтарними та не повинні використовуватись як взірець."
                 }
             },
+            "invalid_format": {
+                "title": "Неправильний формат",
+                "tip": "Показує теґи, що мають неочікуваний формат",
+                "email": {
+                    "message": "{feature} має неправильну адресу е-пошти.",
+                    "message_multi": "{feature} має кілька неправильних адрес е-пошти.",
+                    "reference": "Адреса е-пошти має виглядати – \"user@example.com\"."
+                },
+                "website": {
+                    "message": "{feature} неправильну адресу веб-сайту.",
+                    "message_multi": "{feature} має кілька неправильних адрес веб-сайтів",
+                    "reference": "Адреса веб-сайту має починатись з  \"http\" або \"https\"."
+                }
+            },
             "missing_role": {
                 "title": "Відсутні ролі",
                 "message": "{member} не має ролі в {relation}",
@@ -2440,7 +2438,7 @@
                     }
                 },
                 "access_simple": {
-                    "label": " Пересування дозволено"
+                    "label": "Доступ"
                 },
                 "address": {
                     "label": "Адреса",
@@ -2883,7 +2881,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Напрямок",
+                    "label": "Напрямок дії",
                     "options": {
                         "backward": "Проти напрямку лінії",
                         "both": "В обидва боки/Всі",
@@ -3659,7 +3657,7 @@
                     "placeholder": "Відстань з точністю 1/10 (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Напрямок",
+                    "label": "Напрямок дії",
                     "options": {
                         "backward": "Проти напрямку лінії",
                         "both": "В обидва боки/Всі",
@@ -3733,6 +3731,9 @@
                         "required": "Потрібне",
                         "yes": "Приймається"
                     }
+                },
+                "resort": {
+                    "label": "Тип"
                 },
                 "resource": {
                     "label": "Ресурси"
@@ -4147,7 +4148,7 @@
                     "label": "Тип"
                 },
                 "traffic_signals/direction": {
-                    "label": "Напрямок",
+                    "label": "Напрямок дії",
                     "options": {
                         "backward": "Проти напрямку лінії",
                         "both": "В обидва боки/Всі",
@@ -4181,6 +4182,9 @@
                 },
                 "trees": {
                     "label": "Дерева"
+                },
+                "trench": {
+                    "label": "Тип"
                 },
                 "trolley_wire": {
                     "label": "Підвісна електромережа"
@@ -5416,7 +5420,7 @@
                 },
                 "building/chapel": {
                     "name": "Каплиця",
-                    "terms": "каплиця,служба,молитовня"
+                    "terms": "каплиця,служба,молитовня,капличка"
                 },
                 "building/church": {
                     "name": "Церква",
@@ -6344,7 +6348,7 @@
                 },
                 "historic/wayside_shrine": {
                     "name": "Придорожня рака",
-                    "terms": "Wayside Shrine, ghbljhjyz hfrf, гробниця, рака, придорожня рака"
+                    "terms": "Wayside Shrine, ghbljhjyz hfrf,рака,придорожня рака"
                 },
                 "historic/wreck": {
                     "name": "Уламки кораблів",
@@ -6494,14 +6498,6 @@
                     "name": "Казарми",
                     "terms": "авіація,армія,база,військо,гвардія,моряки,піхота,солдати"
                 },
-                "landuse/military/bunker": {
-                    "name": "Військовий бункер",
-                    "terms": "військо,армія,командування,штаб,укриття,сховище,арсенал"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "КПП",
-                    "terms": "контроль,пропуск,блок,пост,війська,війна"
-                },
                 "landuse/military/danger_area": {
                     "name": "Небезпечна зона",
                     "terms": "війська,війна,смерть,полігон,бойові дії,стрільбище"
@@ -6510,17 +6506,9 @@
                     "name": "Військово-морська база",
                     "terms": "база,військо,гварія,моряки,десант,кораблі,човни"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Ядерний випроувальний полігон",
-                    "terms": "атом,бомба,вибух,випробування,радиація,полігон"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Смуга перешкод",
                     "terms": "армія,військо,флот,випробування,тренування"
-                },
-                "landuse/military/office": {
-                    "name": "Військовий офіс",
-                    "terms": "штаб,рекрут,військовий комісаріат,міністерство,учбовий центр,навчання,керування"
                 },
                 "landuse/military/range": {
                     "name": "Стрільбище",
@@ -6576,6 +6564,10 @@
                     "name": "Виноградник",
                     "terms": "Vineyard, dbyjuhflybr, виноградник"
                 },
+                "landuse/winter_sports": {
+                    "name": "Територія для зимових видів спорту",
+                    "terms": "лижі,трек,ковзани,сноуборд,слалом"
+                },
                 "leisure": {
                     "name": "Дозвілля"
                 },
@@ -6619,9 +6611,17 @@
                     "name": "Школа танців",
                     "terms": "школа,клуб,танці,танцювальна,танго,модерн,вальс,ча-ча-ча,латино,сучасні,хіп-хоп"
                 },
+                "leisure/disc_golf_course": {
+                    "name": "Диско-гольф",
+                    "terms": "диск,гольф,фрісбі"
+                },
                 "leisure/dog_park": {
                     "name": "Парк для собак",
                     "terms": "Dog Park, gfhr lkz cjfr, парк для собак"
+                },
+                "leisure/escape_game": {
+                    "name": "Квест-кімната",
+                    "terms": "ігра,квест,кімната,загадки"
                 },
                 "leisure/firepit": {
                     "name": "Вогнище",
@@ -6778,6 +6778,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Манеж",
                     "terms": "манеж,виїздка,коні,конкур"
+                },
+                "leisure/pitch/field_hockey": {
+                    "name": "Хокей на траві",
+                    "terms": "спорт,хокей,трава,літо"
                 },
                 "leisure/pitch/netball": {
                     "name": "Нетбол",
@@ -7021,6 +7025,10 @@
                 "man_made/storage_tank": {
                     "name": "Резервуар",
                     "terms": "water,oil,gas,petrol,вода,нафта,газ,бензин"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Бак для води",
+                    "terms": "вода,цистерна,резервуар,водонапірна,вежа"
                 },
                 "man_made/street_cabinet": {
                     "name": "Розподільча шафа",
@@ -7990,6 +7998,10 @@
                     "name": "Магазин свічок",
                     "terms": "свічка, полум’я"
                 },
+                "shop/cannabis": {
+                    "name": "Конопля",
+                    "terms": "магазин,канабіс,марихуана,косяк,п'ятка,травка"
+                },
                 "shop/car": {
                     "name": "Автосалон",
                     "terms": "Car Dealership, fdnjcfkjy, автосалон"
@@ -8577,6 +8589,10 @@
                     "name": "Позначка маршруту",
                     "terms": "маркер,позначка,маршрут,камінь,стовп,віха"
                 },
+                "tourism/information/terminal": {
+                    "name": "Інформаційний термінал",
+                    "terms": "інформація,путівник,мапа,навігація,цікавинки,тур,мандри"
+                },
                 "tourism/motel": {
                     "name": "Мотель",
                     "terms": "Motel, vjntkm, мотель"
@@ -8608,6 +8624,14 @@
                 "tourism/zoo": {
                     "name": "Зоопарк",
                     "terms": "Zoo,pjjgfhr, зоопарк"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Контактний зоопарк",
+                    "terms": "Зоопарк,діти,відкритий,ферма,контакт"
+                },
+                "tourism/zoo/safari": {
+                    "name": "Сафарі парк",
+                    "terms": "парк,сафарі,зоопарк"
                 },
                 "traffic_calming": {
                     "name": "Засоби для обмеження швидкості",
@@ -8925,7 +8949,7 @@
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
-                "description": "DigitalGlobe-Standard – підібрана збірка, що покриває 86% поверхні сущі, з розподільчою здатністю 30-60 см, де це можливо, заповнена Landsat. Середній вік – 2.31 роки, деякі ділянки оновлюються 2 рази на рік.",
+                "description": "DigitalGlobe-Standard – підібрана збірка, що покриває 86% поверхні суші, з розподільчою здатністю 30-60 см, де це можливо, заповнена Landsat. Середній вік – 2.31 роки, деякі ділянки оновлюються 2 рази на рік.",
                 "name": "Знімки DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -8934,13 +8958,6 @@
                 },
                 "description": "Межі та дати знімків. Підписи з'являються з 13 рівня масштабування. ",
                 "name": "Період знімків DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Умови використання та Відгуки"
-                },
-                "description": "Мозаїка DigitalGlobe-Vivid з оптимальними підбором кольорів та актуальності для будь-якої місцевості на земній кулі, з розподільчою здатністю 50см та не давніше ніж 20 місяців.",
-                "name": "Знімки DigitalGlobe Vivid"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -8976,6 +8993,20 @@
                 },
                 "description": "Супутникові та аерофотознімки.",
                 "name": "Супутникові знімки Mapbox"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Умови використання та Відгуки"
+                },
+                "description": "Maxar Premium – мозаїка зібрана з основного покриття Maxar та окремих ділянок заповнених знімками +Vivid або знімками зробленими на замовлення, розподільча здатність 50 см чи краще, з поточним оновленням.",
+                "name": "Знімки Maxar Premium (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Умови використання та Відгуки"
+                },
+                "description": "Maxar Standard – підібрана збірка, що покриває 86% поверхні суші, з розподільчою здатністю 30-60 см, де це можливо, заповнена Landsat. Середній вік – 2.31 роки, деякі ділянки оновлюються 2 рази на рік.",
+                "name": "Знімки Maxar Standard (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9036,6 +9067,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Жовтий = Дані, що розповсюджуються US Census на умовах суспільного надбання. Червоний = Дані, відсутні в OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Останній рік DOQQ від Національної програми землеробства (NAIP) для кожного штату",
+                "name": "Знімки Національної програми землеробства"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Дороги: Зелений контур = unclassified. Коричневий контур = track. Покриття: gravel = світло-коричневе заповнення, asphalt = чорне, paved = сіре, ground = біле, concrete = синє, grass = зелене. Seasonal = білі смуги",
@@ -9114,6 +9149,27 @@
                 },
                 "description": "Шат ортофото надається basemap.at. \"Наступник\" знімків від geoimage.at.",
                 "name": "basemap.at Ортофото"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Шар з підписами від  basemap.at.",
+                "name": "basemap.at - допоміжний шар"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Шар поверхні від  basemap.at.",
+                "name": "basemap.at - поверхня"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Шар ландшафту від  basemap.at.",
+                "name": "basemap.at - ландшафт"
             },
             "eufar-balaton": {
                 "attribution": {

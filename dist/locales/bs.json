@@ -195,7 +195,6 @@
         },
         "geocoder": {
             "search": "Globalna pretraga...",
-            "no_results_visible": "Nema rezultata u vidljivom području karte",
             "no_results_worldwide": "Nema pronađenih rezultata"
         },
         "geolocate": {
@@ -227,22 +226,10 @@
             "custom": "Prilagođena pozadina",
             "reset": "ponovo postavite"
         },
-        "restore": {
-            "heading": "Imate nespremljenih promjena",
-            "description": "Želite li vratiti nespremljene promjene od prethodnog uređivanja?"
-        },
         "save": {
             "title": "Sačuvajte",
             "no_changes": "Nema promjena za sačuvati.",
             "unsaved_changes": "Imate promjene koje nisu spašene"
-        },
-        "success": {
-            "just_edited": "Upravo ste uredili OpenStreetMap kartu!"
-        },
-        "splash": {
-            "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
-            "text": "ID je prijateljski ali moćan alat za doprinos najboljoj svjetskoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledajte stranicu {website} i prijavite greške na stranici {github}.",
-            "walkthrough": "Počnite sa upoznavanjem"
         },
         "source_switch": {
             "live": "uživo",

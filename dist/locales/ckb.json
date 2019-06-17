@@ -174,11 +174,6 @@
                 "or": "یان"
             }
         },
-        "restore": {
-            "heading": "تۆ هەندێک دەستکاریی پاشەکەوتنەکراوت هەیە",
-            "restore": "گەڕاندنەوەی دەستکارییەکانم",
-            "reset": "وازهێنان لە دەستکارییەکانم"
-        },
         "save": {
             "title": "پاشەکەوتکردن",
             "conflict": {
@@ -187,8 +182,6 @@
             }
         },
         "success": {
-            "thank_you": "سوپاس بۆ پێشخستنی نەخشە.",
-            "thank_you_location": "سوپاس بۆ پێشخستنی نەخشەی {where}.",
             "help_link_text": "وردەکارییەکان",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "more": "زۆرتر",
@@ -198,10 +191,6 @@
         "confirm": {
             "okay": "باشە",
             "cancel": "هەڵوەشاندنەوە"
-        },
-        "splash": {
-            "welcome": "بەخێربێت بۆ دەستکاریکەری iD OpenStreetMap",
-            "start": "ئێستا دەستکاری بکە"
         },
         "version": {
             "whats_new": "چی نوێ هەیە لە iD {version}"
@@ -608,7 +597,6 @@
                     "label": "دانیشتوان"
                 },
                 "railway/signal/direction": {
-                    "label": "ئاڕاستە",
                     "options": {
                         "both": "هەردووک / هەموو",
                         "forward": "بۆ پێشەوە"
@@ -692,9 +680,6 @@
                     "options": {
                         "chemical": "کیمایی"
                     }
-                },
-                "traffic_signals/direction": {
-                    "label": "ئاڕاستە"
                 },
                 "trail_visibility": {
                     "placeholder": "نایاب، باش، خراپ..."
@@ -1010,9 +995,6 @@
                 },
                 "landuse/military": {
                     "name": "ناوچەی سەربازیی"
-                },
-                "landuse/military/office": {
-                    "name": "نووسینگەی سەربازیی"
                 },
                 "landuse/residential": {
                     "name": "ناوچەی نیشتەجێبوون"

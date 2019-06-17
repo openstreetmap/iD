@@ -198,22 +198,10 @@
             "description": "设置背景",
             "reset": "重置"
         },
-        "restore": {
-            "heading": "您有未保存的更改",
-            "description": "上次您有未保存的更改。你想恢复这些更改吗？"
-        },
         "save": {
             "title": "保存",
             "no_changes": "没有可以保存的更改。",
             "unsaved_changes": "您有未保存的更改"
-        },
-        "success": {
-            "just_edited": "你正在编辑的OpenStreetMap！"
-        },
-        "splash": {
-            "welcome": "欢迎使用OpenStreetMap编辑器iD",
-            "text": "iD编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是版本{version}。欲知详情，请浏览{website} 及在{github}上报告程序错误。",
-            "walkthrough": "开始练习"
         },
         "source_switch": {
             "live": "运行模式",

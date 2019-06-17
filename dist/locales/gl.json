@@ -618,7 +618,7 @@
         },
         "geocoder": {
             "search": "Procurar en todo o mundo...",
-            "no_results_visible": "Ningún resultado na área visíbel do mapa",
+            "no_results_visible": "Non hai resultados na área visíbel do mapa",
             "no_results_worldwide": "Non se atoparon resultados"
         },
         "geolocate": {
@@ -866,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "Tes mudanzas sen gardar",
-            "description": "Queres recupera-las mudanzas non gardadas da sesión de edición anterior?",
-            "restore": "Recupera-las miñas mudanzas",
-            "reset": "Desbota-las miñas mudanzas"
+            "heading": "Tes mudanzas sen gardar.",
+            "description": " Desexas restabelecer as mudanzas sen gardar da sesión anterior?",
+            "restore": "Restabelecer as miñas mudanzas",
+            "reset": "Rexeitar as miñas mudanzas"
         },
         "save": {
             "title": "Gardar",
@@ -905,14 +905,14 @@
             }
         },
         "success": {
-            "just_edited": "Remataches de editar no OpenStreetMap!",
-            "thank_you": "Grazas por mellorar o mapa",
-            "thank_you_location": "Grazas por mellorar o mapa por {where}",
+            "just_edited": "Remata de editar o OpenStreetMap!",
+            "thank_you": "Grazas por mellorar o mapa.",
+            "thank_you_location": "Grazas por mellorar o mapa preto de {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "As túas mudanzas terían que aparecer na capa estándar do OpenStreetMap nuns intres. Pódelle levar máis tempo actualizarse a outras capas e mapas doutros sitios.",
+            "help_html": "As túas mudanzas terán que aparecer no OpenStreetMap nuns poucos minutos. Pode delongar máis tempo que outros mapas reciban as actualizacións.",
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Ollar mudanzas no OSM",
@@ -929,9 +929,9 @@
             "cancel": "Desbotar"
         },
         "splash": {
-            "welcome": "Benvido ó editor do OpenStreetMap iD",
-            "text": "iD é unha amigábel pero potente ferramenta para contribuír ó mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros no {github}.",
-            "walkthrough": "Comeza-lo titorial",
+            "welcome": "Benvido ó editor en liña iD do OpenStreetMap",
+            "text": "O iD é unha ferramenta amigábel pero poderosa para contribuír ó mellor mapa libre do mundo. Esta é a versión {versión}. Para obter máis información olla {website} e informa dos erros en {github}.",
+            "walkthrough": "Comezar o titorial",
             "start": "Editar agora"
         },
         "source_switch": {
@@ -1740,6 +1740,20 @@
                     "reference": "Os produtos do Google son da súa propiedade e non deben empregarse coma referencias."
                 }
             },
+            "invalid_format": {
+                "title": "Formato non válido",
+                "tip": "Atopa etiquetas con formatos non agardados",
+                "email": {
+                    "message": "{feature} ten un email non válido.",
+                    "message_multi": "{feature} ten varios enderezos de email non válidos.",
+                    "reference": "Os enderezos de email teñen que verse coma \"usuario@exemplo.com\"."
+                },
+                "website": {
+                    "message": "{feature} ten unha páxina web non válida.",
+                    "message_multi": "{feature} ten moitas páxinas web non válidas.",
+                    "reference": "As páxinas web teñen que comezar co \"http\" ou \"https\"."
+                }
+            },
             "missing_role": {
                 "title": "Fallan roles",
                 "message": "{member} non ten ningún rol dentro de {relation}",
@@ -1774,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} ten etiquetas incompletas",
                     "reference": "Algúns elementos teñen que ter etiquetas adicionais."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} vese coma unha marca con etiquetas non estándares",
+                    "reference": "Tódolos elementos da mesma marca teñen que etiquetarse do mesmo xeito."
                 }
             },
             "private_data": {
@@ -2883,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Cara atrás",
                         "both": "Ambos / Todos",
@@ -3659,7 +3677,7 @@
                     "placeholder": "Distancia cara un decimal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Cara atrás",
                         "both": "Ambos / Todos",
@@ -4092,7 +4110,8 @@
                     "options": {
                         "bucket": "Balde",
                         "chemical": "Química",
-                        "flush": "Cisterna"
+                        "flush": "Cisterna",
+                        "pitlatrine": "Letrina de pozo"
                     }
                 },
                 "toilets/handwashing": {
@@ -4138,7 +4157,7 @@
                     "label": "Sinal do tráfico"
                 },
                 "traffic_sign/direction": {
-                    "label": "Dirección",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Cara atrás",
                         "both": "Ambas / Todas",
@@ -4149,7 +4168,7 @@
                     "label": "Tipo"
                 },
                 "traffic_signals/direction": {
-                    "label": "Sentido",
+                    "label": "Dirección afectada",
                     "options": {
                         "backward": "Atrás",
                         "both": "Ambos/todos",
@@ -4183,6 +4202,9 @@
                 },
                 "trees": {
                     "label": "Árbores"
+                },
+                "trench": {
+                    "label": "Tipo"
                 },
                 "trolley_wire": {
                     "label": "Cables de trolebús superiores"
@@ -4394,6 +4416,9 @@
                     "name": "Heliporto",
                     "terms": "heliporto, helicóptero"
                 },
+                "aeroway/jet_bridge": {
+                    "name": "Manga de aeroporto"
+                },
                 "aeroway/runway": {
                     "name": "Pista de aeroporto",
                     "terms": "pista, pista de aterraxe, pista de engalaxe"
@@ -4405,6 +4430,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal de aeroporto",
                     "terms": "terminal, pasaxeiros, aeroporto"
+                },
+                "aeroway/windsock": {
+                    "name": "Manga de vento",
+                    "terms": "manga, vento"
                 },
                 "allotments/plot": {
                     "name": "Parcela de horto urbano",
@@ -4525,7 +4554,7 @@
                     "terms": "cine, cinema, película, filme, pantalla"
                 },
                 "amenity/clinic": {
-                    "name": "Clínica",
+                    "name": "Clínica ou centro de saúde",
                     "terms": "clínica, médico, saúde, urxencias"
                 },
                 "amenity/clinic/abortion": {
@@ -4661,7 +4690,7 @@
                     "name": "Contenedor de sal"
                 },
                 "amenity/hospital": {
-                    "name": "Zona hospitalaria",
+                    "name": "Hospital",
                     "terms": "hospital, clínica, urxencias, sanidade, saúde, médico"
                 },
                 "amenity/hunting_stand": {
@@ -5110,7 +5139,7 @@
                     "terms": "caída, torre, atracción"
                 },
                 "attraction/maze": {
-                    "name": "Laberinto"
+                    "name": "Labirinto"
                 },
                 "attraction/pirate_ship": {
                     "name": "Barco pirata",
@@ -5310,7 +5339,7 @@
                     "name": "Tribuna"
                 },
                 "building/greenhouse": {
-                    "name": "invernadoiro"
+                    "name": "Invernadoiro"
                 },
                 "building/hangar": {
                     "name": "Edificio do hangar"
@@ -5920,8 +5949,31 @@
                 "historic/castle": {
                     "name": "Castelo"
                 },
+                "historic/castle/palace": {
+                    "name": "Pazo real",
+                    "terms": "residencia real, real, rei, raíña"
+                },
+                "historic/castle/stately": {
+                    "name": "Château",
+                    "terms": "casa de campo histórica, casa señorial, señoril, nobreza, representante"
+                },
+                "historic/city_gate": {
+                    "name": "Porta histórica de cidade",
+                    "terms": "porta histórica, porta, histórico, cidade"
+                },
+                "historic/fort": {
+                    "name": "Forte histórico",
+                    "terms": "militar, forte hirtórico, forte"
+                },
+                "historic/manor": {
+                    "name": "Casa señoril ou pazo",
+                    "terms": "mansión, nobreza, finca, casa solariega, casa señoril, casa señorial, pazo"
+                },
                 "historic/memorial": {
                     "name": "Monumento conmemorativo"
+                },
+                "historic/memorial/plaque": {
+                    "name": "Placa conmemorativa"
                 },
                 "historic/monument": {
                     "name": "Monumento"
@@ -5939,9 +5991,42 @@
                 "historic/wayside_shrine": {
                     "name": "Peto de ánimas"
                 },
+                "historic/wreck": {
+                    "name": "Naufraxio"
+                },
+                "indoor": {
+                    "name": "Elemento de interior"
+                },
+                "indoor/area": {
+                    "name": "Área interior"
+                },
+                "indoor/corridor": {
+                    "name": "Corredor interior"
+                },
+                "indoor/corridor_line": {
+                    "name": "Corredor interior"
+                },
+                "indoor/door": {
+                    "name": "Porta interior"
+                },
+                "indoor/room": {
+                    "name": "Habitación"
+                },
+                "indoor/wall": {
+                    "name": "Parede interior"
+                },
+                "internet_access/wlan": {
+                    "name": "Punto de acceso Wi-Fi"
+                },
                 "junction": {
                     "name": "Intersección",
                     "terms": "intersección, cruzamento, cruce, incorporación"
+                },
+                "junction/circular": {
+                    "name": "Círculo de tráfico"
+                },
+                "junction/roundabout": {
+                    "name": "Rotonda"
                 },
                 "landuse": {
                     "name": "Uso da terra"
@@ -6005,6 +6090,13 @@
                     "name": "Zona industrial",
                     "terms": "industrial, polígono, fábricas"
                 },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Depósito de ferralla"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Matadoiro",
+                    "terms": "matadoiro, carne, carnicería, carnizaría, becerro, polo, vaca, porco, aves de curral, curral"
+                },
                 "landuse/landfill": {
                     "name": "Vertedoiro",
                     "terms": "vertedoiro, lixo, escombrera, basurero"
@@ -6022,12 +6114,6 @@
                 "landuse/military/barracks": {
                     "name": "Barracóns"
                 },
-                "landuse/military/bunker": {
-                    "name": "Búnker militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Punto de control militar"
-                },
                 "landuse/military/danger_area": {
                     "name": "Área perigosa",
                     "terms": "área perigosa, zona de exclusión"
@@ -6035,14 +6121,8 @@
                 "landuse/military/naval_base": {
                     "name": "Base naval"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Lugar de explosión nuclear"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Pista de obstáculos"
-                },
-                "landuse/military/office": {
-                    "name": "Oficina militar"
                 },
                 "landuse/military/range": {
                     "name": "Campo de tiro militar"
@@ -6055,7 +6135,8 @@
                     "terms": "froitais, froitas, pomar"
                 },
                 "landuse/plant_nursery": {
-                    "name": "Viveiro de plantas"
+                    "name": "Viveiro de plantas",
+                    "terms": "viveiro, invernadoiro, xardinaría, plantas"
                 },
                 "landuse/pond": {
                     "name": "Estanque"
@@ -6079,6 +6160,9 @@
                 "landuse/residential": {
                     "name": "Zona residencial"
                 },
+                "landuse/residential/apartments": {
+                    "name": "Complexo de apartamentos"
+                },
                 "landuse/retail": {
                     "name": "Zona comercial",
                     "terms": "comercial, minorista, venda, tendas, comercios"
@@ -6087,21 +6171,37 @@
                     "name": "Viña",
                     "terms": "viña, viñedo, uva"
                 },
+                "landuse/winter_sports": {
+                    "name": "Área de deportes de inverno"
+                },
                 "leisure": {
                     "name": "Ocio"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Centro recreativo para adultos"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Sala de xogos recreativos"
+                },
+                "leisure/beach_resort": {
+                    "name": "Complexo turístico",
+                    "terms": "resort, complexo, praia, complexo de praia, complexo hoteleiro, complejo hotelero, complexo hotelero"
+                },
                 "leisure/bird_hide": {
                     "name": "Observatorio de aves",
                     "terms": "observatorio, aves, paxaros"
                 },
+                "leisure/bleachers": {
+                    "name": "Chanzos",
+                    "terms": "chanzos, banzos, bancada, gradas, multitude, banco, deportes, soporte, asento, asentos"
+                },
                 "leisure/bowling_alley": {
-                    "name": "Birlos"
+                    "name": "Birlos",
+                    "terms": "bowling, bolos, boliche, xogo de bolos, pista de bowling, boleira, birlos"
                 },
                 "leisure/common": {
-                    "name": "Zona comunal"
+                    "name": "Zona comunal",
+                    "terms": "terras comunais, terreo comunal, comunal, terras comúns"
                 },
                 "leisure/dance": {
                     "name": "Sala de baile"
@@ -6116,6 +6216,10 @@
                 "leisure/firepit": {
                     "name": "Fogueira"
                 },
+                "leisure/fishing": {
+                    "name": "Lugar de pesca",
+                    "terms": "lugar de pesca, pescador, pescar, pescantín"
+                },
                 "leisure/fitness_centre": {
                     "name": "Ximnasio",
                     "terms": "ximnasio, fitness, exercicio"
@@ -6126,6 +6230,9 @@
                 },
                 "leisure/fitness_station": {
                     "name": "Estación de ximnasia ao aire libre"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Aneis ou argolas para exercicio"
                 },
                 "leisure/garden": {
                     "name": "Xardín"
@@ -6154,6 +6261,9 @@
                 },
                 "leisure/picnic_table": {
                     "name": "Mesa de picnic"
+                },
+                "leisure/picnic_table/chess": {
+                    "name": "Taboleiro de xadrez"
                 },
                 "leisure/pitch": {
                     "name": "Campo deportivo"
@@ -6215,7 +6325,10 @@
                     "terms": "resort, complexo turístico, vacacións"
                 },
                 "leisure/slipway": {
-                    "name": "Rampla"
+                    "name": "Rampla para embarcacións"
+                },
+                "leisure/slipway_point": {
+                    "name": "Rampla para embarcacións"
                 },
                 "leisure/sports_centre": {
                     "name": "Complexo deportivo",
@@ -6357,7 +6470,8 @@
                     "name": "Muíño de auga"
                 },
                 "man_made/windmill": {
-                    "name": "Muíño de vento"
+                    "name": "Muíño de vento",
+                    "terms": "vento, eólico, granxa, roda, muíño, turbina, extraer auga, bombeo, muiño"
                 },
                 "man_made/works": {
                     "name": "Fábrica"
@@ -6385,6 +6499,9 @@
                 },
                 "natural/beach": {
                     "name": "Praia"
+                },
+                "natural/cape": {
+                    "name": "Cabo"
                 },
                 "natural/cave_entrance": {
                     "name": "Entrada de cova"
@@ -6464,6 +6581,10 @@
                     "name": "Lagoa",
                     "terms": "lago, lagoa, charca, auga"
                 },
+                "natural/water/moat": {
+                    "name": "Foso",
+                    "terms": "foso"
+                },
                 "natural/water/pond": {
                     "name": "Estanque",
                     "terms": "auga, estanque, lagoa, charca"
@@ -6477,6 +6598,9 @@
                 },
                 "natural/water/stream": {
                     "name": "Regato"
+                },
+                "natural/water/wastewater": {
+                    "name": "Conca de augas residuais"
                 },
                 "natural/wetland": {
                     "name": "Pantano"
@@ -6509,11 +6633,28 @@
                 "office/association": {
                     "name": "Oficina de organización sen ánimo de lucro"
                 },
+                "office/charity": {
+                    "name": "Oficina da caridade",
+                    "terms": "caridade, beneficencia"
+                },
                 "office/company": {
                     "name": "Oficina corporativa"
                 },
                 "office/coworking": {
                     "name": "Espacio de cotraballo"
+                },
+                "office/diplomatic": {
+                    "name": "Oficina diplomática"
+                },
+                "office/diplomatic/consulate": {
+                    "name": "Consulado",
+                    "terms": "consulado, cónsul"
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Embaixada"
+                },
+                "office/diplomatic/liaison": {
+                    "name": "Oficina de ligazóns"
                 },
                 "office/educational_institution": {
                     "name": "Institución educativa"
@@ -6530,15 +6671,25 @@
                 "office/financial": {
                     "name": "Oficina financeira"
                 },
+                "office/financial_advisor": {
+                    "name": "Asesor financeiro"
+                },
                 "office/forestry": {
                     "name": "Oficina forestal",
                     "terms": "bosque, parque, gardabosques, gardaparques"
                 },
+                "office/foundation": {
+                    "name": "Oficina de fundación"
+                },
                 "office/government": {
-                    "name": "Oficina gobernamental"
+                    "name": "Oficina gobernamental",
+                    "terms": "oficina gobernamental, oficina do goberno"
                 },
                 "office/government/register_office": {
                     "name": "Oficina de rexistro civil"
+                },
+                "office/government/tax": {
+                    "name": "Oficina de impostos e rentas"
                 },
                 "office/guide": {
                     "name": "Oficina de guías turísticos"
@@ -6578,6 +6729,10 @@
                 "office/private_investigator": {
                     "name": "Oficina de investigador privado"
                 },
+                "office/religion": {
+                    "name": "Oficina relixiosa",
+                    "terms": "oficina relixiosa, relixión"
+                },
                 "office/research": {
                     "name": "Oficina de investigación",
                     "terms": "investigación, desenvolvemento, I+D, laboratorio"
@@ -6597,11 +6752,18 @@
                 "office/water_utility": {
                     "name": "Oficina de servizos públicos de auga"
                 },
+                "piste/piste": {
+                    "name": "Pistas de deportes de inverno"
+                },
                 "place": {
                     "name": "Lugar"
                 },
                 "place/city": {
                     "name": "Cidade"
+                },
+                "place/city_block": {
+                    "name": "Mazá urbana",
+                    "terms": "mazá"
                 },
                 "place/farm": {
                     "name": "Granxa"
@@ -6648,6 +6810,10 @@
                     "name": "Areeiro",
                     "terms": "areeiro, areal, area, caixón de area"
                 },
+                "playground/zipwire": {
+                    "name": "Tirolina",
+                    "terms": "tirolina, soga, cable, colgarse, pendurarse, tirolesa, corda"
+                },
                 "point": {
                     "name": "Punto"
                 },
@@ -6659,6 +6825,9 @@
                 },
                 "power/generator": {
                     "name": "Xerador de enerxía"
+                },
+                "power/generator/source/wind": {
+                    "name": "Turbina eólica"
                 },
                 "power/line": {
                     "name": "Liña de alta tensión"
@@ -7509,13 +7678,6 @@
                 "description": "Límites das imaxes e datas de captura. As etiquetas xorden  nun nivel do achegamento de 13 e superior.",
                 "name": "Imaxes antigas do DigitalGlobe Standard"
             },
-            "DigitalGlobe-Vivid": {
-                "attribution": {
-                    "text": "Termos e opinións"
-                },
-                "description": "O DigitalGlobe-Vivid é un mosaico cunha aparencia e actualización axeitadas para calquera área do mundo, cunha resolución de 50 cm. ou superior e unha actualización de imaxe cun promedio duns 20 meses en todo o mundo.",
-                "name": "Imaxes do DigitalGlobe Vivid"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 sen nubes - https://s2maps.eu polo EOX IT Services GmbH (Contén os datos do Copernicus Sentinel modificados no 2017 e 2018)"
@@ -7550,6 +7712,20 @@
                 },
                 "description": "Imaxes satelitais e aéreas.",
                 "name": "Mapbox Satélite"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Termos e opinións"
+                },
+                "description": "O Maxar Premium é un mosaico composto por un mapa base do Maxar con rexións seleccionadas cheas de imaxes +Vivid ou de áreas de interese personalizadas, cunha resolución duns 50 cm ou superior, e actualízase con máis frecuencia.",
+                "name": "Imaxes Premium do Maxar (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Termos e opinións"
+                },
+                "description": "Maxar Estándar é un conxunto preciso de imaxes que cobren o 86% da Terra, cunha resolución duns 30-60 cm onde estea dispoñíbel recheo polo Landsat. A antigüidade promedio é duns 2.31 años, con algunhas áreas actualizadas dúas ocasións por ano.",
+                "name": "Imaxes Estándar do Maxar (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -7692,6 +7868,27 @@
                 },
                 "description": "Capa ortofoto fornecida polo basemap.at  \"Sucesor\" de imaxes do geoimage.at.",
                 "name": "Ortofoto basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Sobreposición de anotación fornecida por basemap.at.",
+                "name": "Sobreposición basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa da superficie fornecida por basemap.at.",
+                "name": "Superficie basemap.at"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa do terreo fornecida por basemap.at.",
+                "name": "Terreo basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {

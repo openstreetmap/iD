@@ -136,7 +136,6 @@
         },
         "geocoder": {
             "search": "Ka raadi dunida oo dhan…",
-            "no_results_visible": "Wax natiijooyin ah kama muuqdaan aagga Khariidada.",
             "no_results_worldwide": "Wax tilmaamo ah lama helin"
         },
         "geolocate": {
@@ -187,9 +186,6 @@
                 "previous": "< Hore",
                 "next": "Xiga >"
             }
-        },
-        "splash": {
-            "welcome": "Ku soo dhowow id OpenStreetMap editor"
         },
         "tag_reference": {
             "description": "Sharaxaad"

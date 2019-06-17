@@ -386,7 +386,6 @@
         },
         "geocoder": {
             "search": "Buscar en tol mundu...",
-            "no_results_visible": "Nun hai resultaos nel área visible del mapa",
             "no_results_worldwide": "Nun s'alcontraron resultaos"
         },
         "geolocate": {
@@ -526,12 +525,6 @@
                 "tooltip": "Les árees dibúxense col rellenu completu"
             }
         },
-        "restore": {
-            "heading": "Tien cambios ensin guardar",
-            "description": "¿Quier recuperar los cambios ensin guardar d'una sesión d'edición anterior?",
-            "restore": "Restaurar los mios cambios",
-            "reset": "Descartar los mios cambios"
-        },
         "save": {
             "title": "Guardar",
             "no_changes": "Nun hai cambios que guardar.",
@@ -554,18 +547,11 @@
             }
         },
         "success": {
-            "just_edited": "¡Acaba d'editar OpenStreetMap!",
             "help_link_text": "Detalles"
         },
         "confirm": {
             "okay": "Aceutar",
             "cancel": "Encaboxar"
-        },
-        "splash": {
-            "welcome": "Bienllegáu al editor d'OpenStreetMap iD",
-            "text": "iD ye una ferramienta amistosa pero potente pa collaborar col meyor mapamundi llibre del mundu. Esta ye la versión {version}. Pa más información visite {website} ya informe de fallos en {github}.",
-            "walkthrough": "Aniciar la Visita guiada",
-            "start": "Editar agora"
         },
         "source_switch": {
             "live": "en vivo",
@@ -3112,12 +3098,6 @@
                 "landuse/military/barracks": {
                     "name": "Cuartel"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunquer militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Puntu de control"
-                },
                 "landuse/military/danger_area": {
                     "name": "Área de peligru"
                 },
@@ -3125,14 +3105,8 @@
                     "name": "Base naval",
                     "terms": "Arsenal"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Llugar d'españíu nuclear"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Recorríu d'obstáculos"
-                },
-                "landuse/military/office": {
-                    "name": "Oficina militar"
                 },
                 "landuse/military/range": {
                     "name": "Campu de tiru"
