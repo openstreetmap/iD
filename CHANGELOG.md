@@ -66,8 +66,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 
 #### :bug: Bugfixes
-* Fix issue with deleting a member from a relation with a duplicate entity but different roles (#6504)
-* Fix issue where iD could crash upon save if user had edits stored before iD 2.15 (#6496)
+* Fix issue with deleting a member from a relation with a duplicate entity but different roles ([#6504])
+* Fix issue where iD could crash upon save if user had edits stored before iD 2.15 ([#6496])
 
 [#6504]: https://github.com/openstreetmap/iD/issues/6504
 [#6496]: https://github.com/openstreetmap/iD/issues/6496
@@ -109,6 +109,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6447]: https://github.com/openstreetmap/iD/issues/6447
 [#6393]: https://github.com/openstreetmap/iD/issues/6393
 [@matkoniecz]: https://github.com/matkoniecz
+[@ToastHawaii]: https://github.com/ToastHawaii
 [@BjornRasmussen]: https://github.com/BjornRasmussen
 
 
