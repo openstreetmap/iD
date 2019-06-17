@@ -4,6 +4,11 @@
         "point",
         "area"
     ],
+    "terms": [
+        "health",
+        "supplement",
+        "vitamin"
+    ],
     "tags": {
         "shop": "nutrition_supplements"
     },

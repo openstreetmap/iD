@@ -4010,6 +4010,10 @@ en:
         name: Shoemaker
         # 'terms: cobbler'
         terms: '<translate with synonyms or related terms for ''Shoemaker'', separated by commas>'
+      craft/signmaker:
+        # craft=signmaker
+        name: Signmaker
+        terms: '<translate with synonyms or related terms for ''Signmaker'', separated by commas>'
       craft/stonemason:
         # craft=stonemason
         name: Stonemason
@@ -4208,6 +4212,10 @@ en:
         name: Blood Donor Center
         # 'terms: blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation'
         terms: '<translate with synonyms or related terms for ''Blood Donor Center'', separated by commas>'
+      healthcare/counselling:
+        # healthcare=counselling
+        name: Counselling Center
+        terms: '<translate with synonyms or related terms for ''Counselling Center'', separated by commas>'
       healthcare/hospice:
         # healthcare=hospice
         name: Hospice
@@ -6884,6 +6892,11 @@ en:
       shop/fashion:
         # shop=fashion
         name: Fashion Store
+      shop/fashion_accessories:
+        # shop=fashion_accessories
+        name: Fashion Accessories Store
+        # 'terms: bag,cologne,fragrance,hat,jewellery,purfume,purse,scarf,sunglasses,umbrella,wallet,watch'
+        terms: '<translate with synonyms or related terms for ''Fashion Accessories Store'', separated by commas>'
       shop/fireplace:
         # shop=fireplace
         name: Fireplace Store
@@ -7098,6 +7111,7 @@ en:
       shop/nutrition_supplements:
         # shop=nutrition_supplements
         name: Nutrition Supplements Store
+        # 'terms: health,supplement,vitamin'
         terms: '<translate with synonyms or related terms for ''Nutrition Supplements Store'', separated by commas>'
       shop/optician:
         # shop=optician
@@ -7139,6 +7153,7 @@ en:
       shop/perfumery:
         # shop=perfumery
         name: Perfume Store
+        # 'terms: cologne,fragrance,purfume'
         terms: '<translate with synonyms or related terms for ''Perfume Store'', separated by commas>'
       shop/pet:
         # shop=pet
@@ -7158,6 +7173,7 @@ en:
       shop/pyrotechnics:
         # shop=pyrotechnics
         name: Fireworks Store
+        # 'terms: fireworks'
         terms: '<translate with synonyms or related terms for ''Fireworks Store'', separated by commas>'
       shop/radiotechnics:
         # shop=radiotechnics

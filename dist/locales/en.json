@@ -5911,6 +5911,10 @@
                     "name": "Shoemaker",
                     "terms": "cobbler"
                 },
+                "craft/signmaker": {
+                    "name": "Signmaker",
+                    "terms": ""
+                },
                 "craft/stonemason": {
                     "name": "Stonemason",
                     "terms": "masonry"
@@ -6086,6 +6090,10 @@
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Center",
                     "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
+                },
+                "healthcare/counselling": {
+                    "name": "Counselling Center",
+                    "terms": ""
                 },
                 "healthcare/hospice": {
                     "name": "Hospice",
@@ -8387,6 +8395,10 @@
                     "name": "Produce Stand",
                     "terms": "farm shop,farm stand"
                 },
+                "shop/fashion_accessories": {
+                    "name": "Fashion Accessories Store",
+                    "terms": "bag,cologne,fragrance,hat,jewellery,purfume,purse,scarf,sunglasses,umbrella,wallet,watch"
+                },
                 "shop/fireplace": {
                     "name": "Fireplace Store",
                     "terms": "fireplace,stove,masonry heater"
@@ -8565,7 +8577,7 @@
                 },
                 "shop/nutrition_supplements": {
                     "name": "Nutrition Supplements Store",
-                    "terms": ""
+                    "terms": "health,supplement,vitamin"
                 },
                 "shop/optician": {
                     "name": "Optician",
@@ -8601,7 +8613,7 @@
                 },
                 "shop/perfumery": {
                     "name": "Perfume Store",
-                    "terms": ""
+                    "terms": "cologne,fragrance,purfume"
                 },
                 "shop/pet_grooming": {
                     "name": "Pet Grooming Store",
@@ -8617,7 +8629,7 @@
                 },
                 "shop/pyrotechnics": {
                     "name": "Fireworks Store",
-                    "terms": ""
+                    "terms": "fireworks"
                 },
                 "shop/radiotechnics": {
                     "name": "Radio/Electronic Component Store",
