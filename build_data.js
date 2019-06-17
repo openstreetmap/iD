@@ -259,20 +259,24 @@ function suggestionsToPresets(presets) {
             tags[k] = suggestion.tags[k] || preset.tags[k];
         }
 
+        // Prefer a wiki commons logo sometimes.. #6361
+        const preferCommons = {
+            Q524757: true,    // KFC
+            Q177054: true,    // Burger King
+            Q1205312: true    // In-N-Out
+        };
+
         let logoURL;
         let logoURLs = wikidata[qid] && wikidata[qid].logos;
         if (logoURLs) {
-            // Prefer a wiki commons logo in svg?.. #6361
-            // Currently commmented out, because these logos tend to not be square
-            // if (logoURLs.wikidata && /\.svg&width/i.test(logoURLs.wikidata)) {
-            //     logoURL = logoURLs.wikidata;
-
-            // Next, a Facebook profile picture (but not for a brand likely to have an age restriction)
-            if (logoURLs.facebook && !/^shop\/(alcohol|erotic|tobacco)$/.test(kv)) {
-                logoURL = logoURLs.facebook.replace('?type=square', '?type=large');
-            // Finally, Twitter profile picture or a non-svg wiki commons logo..
+            if (logoURLs.wikidata && preferCommons[qid]) {
+                logoURL = logoURLs.wikidata;
+            } else if (logoURLs.facebook) {
+                logoURL = logoURLs.facebook;
+            } else if (logoURLs.twitter) {
+                logoURL = logoURLs.twitter;
             } else {
-                logoURL = logoURLs.twitter || logoURLs.wikidata;
+                logoURL = logoURLs.wikidata;
             }
         }
 
