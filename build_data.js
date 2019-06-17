@@ -239,6 +239,15 @@ function suggestionsToPresets(presets) {
             preset = presets[presetID];
         }
 
+        // A few exceptions where the NSI tagging doesn't exactly match iD tagging..
+        if (kv === 'healthcare/clinic') {
+            presetID = 'amenity/clinic';
+            preset = presets[presetID];
+        } else if (kv === 'leisure/tanning_salon') {
+            presetID = 'shop/beauty/tanning';
+            preset = presets[presetID];
+        }
+
         // fallback to key/value
         if (!preset) {
             presetID = kv;
