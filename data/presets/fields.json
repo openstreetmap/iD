@@ -265,6 +265,7 @@
     "playground/baby": {"key": "baby", "type": "check", "label": "Baby Seat"},
     "playground/max_age": {"key": "max_age", "type": "number", "minValue": 0, "label": "Maximum Age"},
     "playground/min_age": {"key": "min_age", "type": "number", "minValue": 0, "label": "Minimum Age"},
+    "polling_station": {"key": "polling_station", "type": "check", "label": "Polling Place"},
     "population": {"key": "population", "type": "text", "label": "Population"},
     "power_supply": {"key": "power_supply", "type": "check", "label": "Power Supply"},
     "power": {"key": "power", "type": "typeCombo", "label": "Type"},

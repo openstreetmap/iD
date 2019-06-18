@@ -1,10 +1,11 @@
 {
-    "icon": "fas-handshake",
+    "icon": "fas-vote-yea",
     "fields": [
         "name",
-        "brand",
+        "ref",
         "operator",
         "address",
+        "opening_hours",
         "building_area"
     ],
     "moreFields": [
@@ -15,7 +16,6 @@
         "internet_access/fee",
         "internet_access/ssid",
         "phone",
-        "polling_station",
         "website",
         "wheelchair"
     ],
@@ -24,19 +24,18 @@
         "area"
     ],
     "terms": [
-        "event",
-        "fraternal",
-        "fraternity",
-        "hall",
-        "organization",
-        "professional",
-        "society",
-        "sorority",
-        "union",
-        "vetern"
+        "ballot box",
+        "ballot drop",
+        "democracy",
+        "elections",
+        "polling place",
+        "vote",
+        "voting booth",
+        "voting machine"
     ],
     "tags": {
-        "amenity": "social_centre"
+        "polling_station": "*"
     },
-    "name": "Social Center"
+    "matchScore": 0.75,
+    "name": "Temporary Polling Place"
 }

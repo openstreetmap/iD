@@ -7,19 +7,20 @@
         "address",
         "ref/isil",
         "internet_access",
-        "internet_access/fee"
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields" : [
         "access_simple",
         "air_conditioning",
-        "opening_hours",
-        "internet_access/ssid",
-        "website",
-        "phone",
         "email",
         "fax",
-        "wheelchair",
-        "payment_multi"
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "polling_station",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

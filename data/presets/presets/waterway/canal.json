@@ -2,6 +2,7 @@
     "icon": "iD-waterway-canal",
     "fields": [
         "name",
+        "structure_waterway",
         "width",
         "intermittent",
         "lock"

@@ -15,6 +15,7 @@
         "internet_access/ssid",
         "payment_multi",
         "phone",
+        "polling_station",
         "website",
         "wheelchair"
     ],
