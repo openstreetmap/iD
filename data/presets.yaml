@@ -5528,6 +5528,11 @@ en:
         name: Survey Point
         # 'terms: trig point,triangulation pillar,trigonometrical station'
         terms: '<translate with synonyms or related terms for ''Survey Point'', separated by commas>'
+      man_made/torii:
+        # man_made=torii
+        name: Torii
+        # 'terms: Japanese gate,Shinto shrine'
+        terms: '<translate with synonyms or related terms for ''Torii'', separated by commas>'
       man_made/tower:
         # man_made=tower
         name: Tower
