@@ -40,9 +40,9 @@ en:
     instructions:
       add_point: Click or tap the center of the feature.
       add_line: Click or tap the starting location.
-      draw_line: Trace the feature's centerline.
+      draw_line: Place points along the feature's centerline.
       add_area: Click or tap any corner of the feature.
-      draw_area: Trace the feature's outline.
+      draw_area: Place points along the feature's outline.
     global_location: Planet Earth
     greetings:
       morning: Good Morning
