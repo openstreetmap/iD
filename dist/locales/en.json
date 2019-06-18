@@ -4834,6 +4834,10 @@
                     "name": "Internet Cafe",
                     "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaoke Box",
+                    "terms": "karaoke club,karaoke room,karaoke television,KTV"
+                },
                 "amenity/kindergarten": {
                     "name": "Preschool/Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
