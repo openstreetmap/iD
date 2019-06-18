@@ -1199,7 +1199,7 @@
     "type/waterway": {"icon": "iD-waterway-stream", "fields": ["name", "waterway", "ref"], "geometry": ["relation"], "tags": {"type": "waterway"}, "name": "Waterway"},
     "waterway/riverbank": {"icon": "maki-water", "geometry": ["area"], "tags": {"waterway": "riverbank"}, "name": "Riverbank", "searchable": false},
     "waterway/boatyard": {"icon": "maki-harbor", "fields": ["name", "operator"], "moreFields": ["address", "website", "phone", "email", "fax", "wheelchair"], "geometry": ["area", "vertex", "point"], "tags": {"waterway": "boatyard"}, "name": "Boatyard"},
-    "waterway/canal": {"icon": "iD-waterway-canal", "fields": ["name", "width", "intermittent", "lock"], "moreFields": ["fishing", "salt", "tidal"], "geometry": ["line"], "tags": {"waterway": "canal"}, "name": "Canal"},
+    "waterway/canal": {"icon": "iD-waterway-canal", "fields": ["name", "structure_waterway", "width", "intermittent", "lock"], "moreFields": ["fishing", "salt", "tidal"], "geometry": ["line"], "tags": {"waterway": "canal"}, "name": "Canal"},
     "waterway/canal/lock": {"icon": "iD-waterway-canal", "fields": ["name", "width", "lock"], "moreFields": ["intermittent", "salt", "tidal"], "geometry": ["line"], "tags": {"waterway": "canal", "lock": "yes"}, "name": "Canal Lock"},
     "waterway/dam": {"icon": "maki-dam", "geometry": ["point", "vertex", "line", "area"], "fields": ["name"], "moreFields": ["website"], "tags": {"waterway": "dam"}, "name": "Dam"},
     "waterway/ditch": {"icon": "iD-waterway-ditch", "fields": ["{waterway/drain}"], "moreFields": ["{waterway/drain}"], "geometry": ["line"], "tags": {"waterway": "ditch"}, "name": "Ditch"},
