@@ -4901,6 +4901,10 @@
                     "name": "Internet Cafe",
                     "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaoke Box",
+                    "terms": "karaoke club,karaoke room,karaoke television,KTV"
+                },
                 "amenity/kindergarten": {
                     "name": "Preschool/Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
@@ -7276,6 +7280,10 @@
                 "man_made/survey_point": {
                     "name": "Survey Point",
                     "terms": "trig point,triangulation pillar,trigonometrical station"
+                },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "Japanese gate,Shinto shrine"
                 },
                 "man_made/tower": {
                     "name": "Tower",

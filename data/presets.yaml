@@ -2804,6 +2804,11 @@ en:
         name: Internet Cafe
         # 'terms: cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse'
         terms: '<translate with synonyms or related terms for ''Internet Cafe'', separated by commas>'
+      amenity/karaoke:
+        # amenity=karaoke_box
+        name: Karaoke Box
+        # 'terms: karaoke club,karaoke room,karaoke television,KTV'
+        terms: '<translate with synonyms or related terms for ''Karaoke Box'', separated by commas>'
       amenity/kindergarten:
         # amenity=kindergarten
         name: Preschool/Kindergarten Grounds
@@ -5574,6 +5579,11 @@ en:
         name: Survey Point
         # 'terms: trig point,triangulation pillar,trigonometrical station'
         terms: '<translate with synonyms or related terms for ''Survey Point'', separated by commas>'
+      man_made/torii:
+        # man_made=torii
+        name: Torii
+        # 'terms: Japanese gate,Shinto shrine'
+        terms: '<translate with synonyms or related terms for ''Torii'', separated by commas>'
       man_made/tower:
         # man_made=tower
         name: Tower
