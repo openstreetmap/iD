@@ -21,8 +21,8 @@ import * as Operations from '../operations/index';
 import { uiEditMenu } from '../ui/edit_menu';
 import { uiCmd } from '../ui/cmd';
 import {
-    utilArrayIntersection, utilEntityOrMemberSelector,
-    utilEntitySelector, utilKeybinding
+    utilArrayIntersection, utilEntityOrDeepMemberSelector,
+    utilEntitySelector, utilDeepMemberSelector, utilKeybinding
 } from '../util';
 
 
@@ -349,7 +349,6 @@ export function modeSelect(context, selectedIDs) {
 
             if (entity && context.geometry(entity.id) === 'relation') {
                 _suppressMenu = true;
-                return;
             }
 
             surface.selectAll('.related')
@@ -362,7 +361,7 @@ export function modeSelect(context, selectedIDs) {
             }
 
             var selection = context.surface()
-                .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
+                .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
@@ -372,6 +371,9 @@ export function modeSelect(context, selectedIDs) {
                     context.enter(modeBrowse(context));
                 }
             } else {
+                context.surface()
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .classed('selected-member', true);
                 selection
                     .classed('selected', true);
             }
@@ -516,6 +518,10 @@ export function modeSelect(context, selectedIDs) {
 
         surface
             .on('dblclick.select', null);
+
+        surface
+            .selectAll('.selected-member')
+            .classed('selected-member', false);
 
         surface
             .selectAll('.selected')
