@@ -1489,6 +1489,9 @@ en:
       playground/min_age:
         # min_age=*
         label: Minimum Age
+      polling_station:
+        # polling_station=*
+        label: Polling Place
       population:
         # population=*
         label: Population
@@ -2923,6 +2926,11 @@ en:
         name: Police
         # 'terms: badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol'
         terms: '<translate with synonyms or related terms for ''Police'', separated by commas>'
+      amenity/polling_station:
+        # amenity=polling_station
+        name: Permanent Polling Place
+        # 'terms: ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine'
+        terms: '<translate with synonyms or related terms for ''Permanent Polling Place'', separated by commas>'
       amenity/post_box:
         # amenity=post_box
         name: Mailbox
@@ -6206,6 +6214,11 @@ en:
         name: Point
         # 'terms: node,other,vertex,vertices'
         terms: '<translate with synonyms or related terms for ''Point'', separated by commas>'
+      polling_station:
+        # polling_station=*
+        name: Temporary Polling Place
+        # 'terms: ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine'
+        terms: '<translate with synonyms or related terms for ''Temporary Polling Place'', separated by commas>'
       power:
         # power=*
         name: Power

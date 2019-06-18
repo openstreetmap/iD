@@ -3658,6 +3658,9 @@
                 "playground/min_age": {
                     "label": "Minimum Age"
                 },
+                "polling_station": {
+                    "label": "Polling Place"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -4966,6 +4969,10 @@
                 "amenity/police": {
                     "name": "Police",
                     "terms": "badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol"
+                },
+                "amenity/polling_station": {
+                    "name": "Permanent Polling Place",
+                    "terms": "ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine"
                 },
                 "amenity/post_box": {
                     "name": "Mailbox",
@@ -7794,6 +7801,10 @@
                 "point": {
                     "name": "Point",
                     "terms": "node,other,vertex,vertices"
+                },
+                "polling_station": {
+                    "name": "Temporary Polling Place",
+                    "terms": "ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine"
                 },
                 "power/sub_station": {
                     "name": "Substation",

@@ -8,10 +8,11 @@
         "opening_hours"
     ],
     "moreFields": [
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "polling_station",
+        "website",
         "wheelchair"
     ],
     "geometry": [

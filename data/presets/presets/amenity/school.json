@@ -9,11 +9,13 @@
         "website"
     ],
     "moreFields": [
+        "email",
+        "fax",
+        "fee",
         "internet_access",
         "internet_access/ssid",
         "phone",
-        "email",
-        "fax",
+        "polling_station",
         "wheelchair"
     ],
     "geometry": [

@@ -10,6 +10,7 @@
         "email",
         "fax",
         "phone",
+        "polling_station",
         "smoking",
         "website",
         "wheelchair"
