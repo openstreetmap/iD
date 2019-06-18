@@ -201,6 +201,7 @@ export function uiToolAddRecent(context) {
                             .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
                             .preset(d.preset)
                             .sizeClass('small')
+                            .pointMarker(true)
                         );
                 });
 

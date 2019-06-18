@@ -170,6 +170,7 @@ export function uiEntityEditor(context) {
             .call(uiPresetIcon(context)
                 .geometry(context.geometry(_entityID))
                 .preset(_activePreset)
+                .pointMarker(false)
             );
 
         // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)

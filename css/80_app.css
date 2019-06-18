@@ -1030,10 +1030,14 @@ a.hide-toggle {
 .assistant .icon-col {
     flex: 0 0 auto;
     padding: 10px;
+    padding-bottom: 0;
 }
-.assistant .icon-col .icon {
+.assistant .icon-col > .icon {
     width: 30px;
     height: 30px;
+}
+.assistant .icon-col > .preset-icon-container {
+    margin: -5px;
 }
 .assistant .body-col {
     padding: 10px;
@@ -1050,10 +1054,13 @@ a.hide-toggle {
     letter-spacing: 0.7px;
     font-size: 10px;
     font-weight: bold;
+    line-height: 1em;
+    margin-bottom: 3px;
 }
 .assistant .subject-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
+    line-height: normal;
 }
 .assistant .body-text {
     font-size: 12px;
@@ -1561,10 +1568,10 @@ a.hide-toggle {
     height: 100%;
     transform: scale(0.48);
 }
-.preset-icon-container.small .preset-icon.point-geom .icon {
+.preset-icon-container .preset-icon.framed.point-geom .icon {
     transform: translateY(-7%) scale(0.27);
 }
-.preset-icon-container.small .preset-icon.point-geom.preset-icon-iD .icon {
+.preset-icon-container .preset-icon.framed.point-geom.preset-icon-iD .icon {
     transform: translateY(-9%) scale(0.5);
 }
 .preset-icon.framed .icon {

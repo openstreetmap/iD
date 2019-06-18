@@ -8,6 +8,7 @@ import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
 import { uiSuccess } from './success';
+import { uiPresetIcon } from './preset_icon';
 import { uiFeatureList } from './feature_list';
 import { uiSelectionList } from './selection_list';
 import { geoRawMercator } from '../geo/raw_mercator';
@@ -60,7 +61,7 @@ export function uiAssistant(context) {
         if (container.empty()) return;
 
         var mode = context.mode();
-        if (!mode) return;
+        if (!mode || !mode.id) return;
 
         if (mode.id !== 'browse') {
             updateDidEditStatus();
@@ -71,7 +72,6 @@ export function uiAssistant(context) {
         iconCol = iconCol.enter()
             .append('div')
             .attr('class', 'icon-col')
-            .call(svgIcon('#'))
             .merge(iconCol);
 
         var mainCol = header.selectAll('.body-col')
@@ -95,32 +95,32 @@ export function uiAssistant(context) {
 
         mainCol = mainColEnter.merge(mainCol);
 
-        var iconUse = iconCol.selectAll('svg.icon use'),
-            modeLabel = mainCol.selectAll('.mode-label'),
+        var modeLabel = mainCol.selectAll('.mode-label'),
             subjectTitle = mainCol.selectAll('.subject-title'),
             bodyTextArea = mainCol.selectAll('.body-text'),
             mainFooter = mainCol.selectAll('.main-footer');
 
-        if (mode.id.indexOf('point') !== -1) {
-            iconUse.attr('href','#iD-icon-point');
-        } else if (mode.id.indexOf('line') !== -1) {
-            iconUse.attr('href','#iD-icon-line');
-        } else if (mode.id.indexOf('area') !== -1) {
-            iconUse.attr('href','#iD-icon-area');
-        }
-
+        iconCol.html('');
         body.html('');
         bodyTextArea.html('');
         mainFooter.html('');
         subjectTitle.classed('map-center-location', false);
-        container.classed('prominent', false);
+        container.attr('class', 'assistant ' + mode.id);
+
+        if (mode.id.indexOf('point') !== -1) {
+            iconCol.call(svgIcon('#iD-icon-point'));
+        } else if (mode.id.indexOf('line') !== -1) {
+            iconCol.call(svgIcon('#iD-icon-line'));
+        } else if (mode.id.indexOf('area') !== -1) {
+            iconCol.call(svgIcon('#iD-icon-area'));
+        }
 
         if (mode.id === 'save') {
 
             var summary = context.history().difference().summary();
 
             modeLabel.text(t('assistant.mode.saving'));
-            iconUse.attr('href','#iD-icon-save');
+            iconCol.call(svgIcon('#iD-icon-save'));
 
             var titleID = summary.length === 1 ? 'change' : 'changes';
             subjectTitle.text(t('commit.' + titleID, { count: summary.length }));
@@ -155,16 +155,24 @@ export function uiAssistant(context) {
 
             var selectedIDs = mode.selectedIDs();
 
-            iconUse.attr('href','#fas-edit');
             modeLabel.text(t('assistant.mode.editing'));
 
             if (selectedIDs.length === 1) {
 
                 var id = selectedIDs[0];
                 var entity = context.entity(id);
+                var geometry = entity.geometry(context.graph());
+                var preset = context.presets().match(entity, context.graph());
                 subjectTitle.text(utilDisplayLabel(entity, context));
 
+                iconCol.call(uiPresetIcon(context)
+                    .geometry(geometry)
+                    .preset(preset)
+                    .sizeClass('small')
+                    .pointMarker(false));
+
             } else {
+                iconCol.call(svgIcon('#fas-edit'));
                 subjectTitle.text(t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() }));
 
                 var selectionList = uiSelectionList(context, selectedIDs);
@@ -178,7 +186,7 @@ export function uiAssistant(context) {
             if (savedChangeset) {
                 drawSaveSuccessScreen();
             } else {
-                iconUse.attr('href','#' + greetingIcon());
+                iconCol.call(svgIcon('#' + greetingIcon()));
                 subjectTitle.text(t('assistant.greetings.' + greetingTimeframe()));
 
                 if (context.history().hasRestorableChanges()) {
@@ -206,7 +214,7 @@ export function uiAssistant(context) {
             }
 
         } else {
-            iconUse.attr('href','#fas-map-marked-alt');
+            iconCol.call(svgIcon('#fas-map-marked-alt'));
 
             modeLabel.text(t('assistant.mode.mapping'));
 
@@ -234,7 +242,7 @@ export function uiAssistant(context) {
             } else {
                 savedIcon = 'laugh-beam';
             }
-            iconUse.attr('href','#fas-' + savedIcon);
+            iconCol.call(svgIcon('#fas-' + savedIcon));
 
             bodyTextArea.html(
                 '<b>' + t('assistant.commit.success.just_improved', { location: currLocation }) + '</b>' +
@@ -314,6 +322,7 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
+                    updateDidEditStatus();
                     context.history().restore();
                     redraw();
                 })

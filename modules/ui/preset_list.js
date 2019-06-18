@@ -294,7 +294,8 @@ export function uiPresetList(context) {
                 .classed('expanded', false)
                 .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
-                    .preset(preset))
+                    .preset(preset)
+                    .pointMarker(false))
                 .on('click', click)
                 .on('keydown', function() {
                     // right arrow, expand the focused item
@@ -382,7 +383,8 @@ export function uiPresetList(context) {
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
-                    .preset(preset))
+                    .preset(preset)
+                    .pointMarker(false))
                 .on('click', item.choose)
                 .on('keydown', itemKeydown);
 
