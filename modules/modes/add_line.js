@@ -4,6 +4,7 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionAddVertex } from '../actions/add_vertex';
 
 import { behaviorAddWay } from '../behavior/add_way';
+import { modeBrowse } from './browse';
 import { modeDrawLine } from './draw_line';
 import { osmNode, osmWay } from '../osm';
 
@@ -75,13 +76,22 @@ export function modeAddLine(context, mode) {
     }
 
 
+    function undone() {
+        context.enter(modeBrowse(context));
+    }
+
+
     mode.enter = function() {
         context.install(behavior);
+        context.history()
+            .on('undone.add_line', undone);
     };
 
 
     mode.exit = function() {
         context.uninstall(behavior);
+        context.history()
+            .on('undone.add_line', null);
     };
 
     return mode;

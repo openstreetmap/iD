@@ -124,6 +124,8 @@ export function uiTopToolbar(context) {
 
                 tools.push(repeatAdd);
 
+                tools.push(undoRedo);
+
                 if (mode.repeatCount > 0) {
                     tools.push(finishDrawing);
                 } else {
