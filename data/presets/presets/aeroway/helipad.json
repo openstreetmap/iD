@@ -5,7 +5,17 @@
         "area"
     ],
     "fields": [
-        "ref"
+        "name",
+        "ref",
+        "operator",
+        "surface",
+        "lit"
+    ],
+    "moreFields": [
+        "access_simple",
+        "address",
+        "fee",
+        "opening_hours"
     ],
     "terms": [
         "helicopter",
