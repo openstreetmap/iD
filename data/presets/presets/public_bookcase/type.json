@@ -1,0 +1,22 @@
+{
+    "key": "public_bookcase:type",
+    "type": "combo",
+    "label": "Type of public bookcases",
+    "strings": {
+        "options": {
+            "reading_box": "Reading box",
+            "phone_box": "Converted cell phone",
+            "wooden_cabinet": "Wooden cabinet",
+            "metal_cabinet": "Metal cabinet with glass doors",
+            "shelf": "Bookcase within a building",
+            "shelter": "Bookcase in a shelter",
+            "glass_cabinet": "Glass cabinet",
+            "sculpture": "Special sculpture/Special design",
+            "building": "Building used exclusively as a bookcase",
+            "movable_cabinet": "Movable bookcase/Transportable version",
+            "download": "Downloading books"
+        }
+    }
+}
+
+

@@ -271,6 +271,7 @@
     "power": {"key": "power", "type": "typeCombo", "label": "Type"},
     "produce": {"key": "produce", "type": "semiCombo", "label": "Produce"},
     "product": {"key": "product", "type": "semiCombo", "label": "Products"},
+    "public_bookcase/type": {"key": "public_bookcase:type", "type": "combo", "label": "Type of public bookcases", "strings": {"options": {"reading_box": "Reading box", "phone_box": "Converted cell phone", "wooden_cabinet": "Wooden cabinet", "metal_cabinet": "Metal cabinet with glass doors", "shelf": "Bookcase within a building", "shelter": "Bookcase in a shelter", "glass_cabinet": "Glass cabinet", "sculpture": "Special sculpture/Special design", "building": "Building used exclusively as a bookcase", "movable_cabinet": "Movable bookcase/Transportable version", "download": "Downloading books" }}},
     "railway": {"key": "railway", "type": "typeCombo", "label": "Type"},
     "railway/position": {"key": "railway:position", "type": "text", "placeholder": "Distance to one decimal (123.4)", "label": "Milestone Position"},
     "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},

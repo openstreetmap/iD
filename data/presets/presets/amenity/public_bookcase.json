@@ -2,6 +2,7 @@
     "icon": "maki-library",
     "fields": [
         "name",
+        "public_bookcase/type",
         "operator",
         "opening_hours",
         "capacity",
