@@ -71,7 +71,9 @@ module.exports = function buildData() {
         };
 
         // The Noun Project icons used
-        var tnpIcons = {};
+        var tnpIcons = {
+            'tnp-2009642': {} // car in tunnel
+        };
 
         // Start clean
         shell.rm('-f', [

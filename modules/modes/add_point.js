@@ -11,7 +11,6 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 export function modeAddPoint(context, mode) {
 
     mode.id = 'add-point';
-    mode.repeatCount = 0;
 
     var baselineGraph = context.graph();
 
@@ -26,6 +25,20 @@ export function modeAddPoint(context, mode) {
     var defaultTags = {};
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
 
+    var _repeatAddedFeature = false;
+    var _repeatCount = 0;
+
+    mode.repeatAddedFeature = function(val) {
+        if (!arguments.length) return _repeatAddedFeature;
+        _repeatAddedFeature = val;
+        return mode;
+    };
+
+    mode.repeatCount = function(val) {
+        if (!arguments.length) return _repeatCount;
+        _repeatCount = val;
+        return mode;
+    };
 
     function add(loc) {
         var node = osmNode({ loc: loc, tags: defaultTags });
@@ -70,8 +83,8 @@ export function modeAddPoint(context, mode) {
     }
 
     function didFinishAdding(node) {
-        if (mode.repeatAddedFeature) {
-            mode.repeatCount += 1;
+        if (mode.repeatAddedFeature()) {
+            _repeatCount += 1;
         } else {
             context.enter(
                 modeSelect(context, [node.id]).newFeature(true)
@@ -86,7 +99,7 @@ export function modeAddPoint(context, mode) {
 
 
     function undone() {
-        if (context.graph() === baselineGraph || mode.repeatCount === 0) {
+        if (context.graph() === baselineGraph || _repeatCount === 0) {
             context.enter(modeBrowse(context));
         }
     }

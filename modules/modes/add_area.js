@@ -11,7 +11,6 @@ import { osmNode, osmWay } from '../osm';
 
 export function modeAddArea(context, mode) {
     mode.id = 'add-area';
-    mode.repeatCount = 0;
 
     var behavior = behaviorAddWay(context)
         .tail(t('modes.add_area.tail'))
@@ -21,6 +20,21 @@ export function modeAddArea(context, mode) {
 
     var defaultTags = { area: 'yes' };
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
+
+    var _repeatAddedFeature = false;
+    var _repeatCount = 0;
+
+    mode.repeatAddedFeature = function(val) {
+        if (!arguments.length || val === undefined) return _repeatAddedFeature;
+        _repeatAddedFeature = val;
+        return mode;
+    };
+
+    mode.repeatCount = function(val) {
+        if (!arguments.length || val === undefined) return _repeatCount;
+        _repeatCount = val;
+        return mode;
+    };
 
 
     function actionClose(wayId) {
@@ -79,9 +93,6 @@ export function modeAddArea(context, mode) {
 
     function enterDrawMode(way, startGraph) {
         var drawMode = modeDrawArea(context, way.id, startGraph, context.graph(), mode.button, mode);
-        drawMode.repeatAddedFeature = mode.repeatAddedFeature;
-        drawMode.repeatCount = mode.repeatCount;
-        drawMode.title = mode.title;
         context.enter(drawMode);
     }
 

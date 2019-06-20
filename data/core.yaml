@@ -30,6 +30,10 @@ en:
       orthogonal:
         title: Rectangular
       key: A
+    structure:
+      none:
+        title: None
+      key: S
   assistant:
     mode:
       adding: Adding

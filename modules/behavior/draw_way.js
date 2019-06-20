@@ -6,7 +6,6 @@ import {
 import { t } from '../util/locale';
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionMoveNode } from '../actions/move_node';
-import { actionNoop } from '../actions/noop';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse } from '../modes/browse';
@@ -27,20 +26,12 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     behavior.hover().initialNodeID(index ? origWay.nodes[index] :
         (origWay.isClosed() ? origWay.nodes[origWay.nodes.length - 2] : origWay.nodes[origWay.nodes.length - 1]));
 
-    var _tempEdits = 0;
-
     var end = osmNode({ loc: context.map().mouseCoordinates() });
 
-    // Push an annotated state for undo to return back to.
-    // We must make sure to remove this edit later.
-    context.pauseChangeDispatch();
-    context.perform(actionNoop(), annotation);
-    _tempEdits++;
-
     // Add the drawing node to the graph.
-    // We must make sure to remove this edit later.
-    context.perform(_actionAddDrawNode());
-    _tempEdits++;
+    // We must make sure to remove this edit later if drawing is canceled.
+    context.pauseChangeDispatch();
+    context.perform(_actionAddDrawNode(), annotation);
     context.resumeChangeDispatch();
 
 
@@ -101,7 +92,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             }
         }
 
-        context.replace(actionMoveNode(end.id, loc));
+        context.replace(actionMoveNode(end.id, loc), annotation);
         end = context.entity(end.id);
         checkGeometry(false);
     }
@@ -213,20 +204,20 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     function undone() {
+        shouldResetOnOff = false;
         context.pauseChangeDispatch();
-        // Undo popped the history back to the initial annotated no-op edit.
-        _tempEdits = 0;     // We will deal with the temp edits here
-        context.pop(1);     // Remove initial no-op edit
 
-        if (context.graph() === baselineGraph) {    // We've undone back to the beginning
+        if (context.graph() === baselineGraph || context.graph() === startGraph) {    // We've undone back to the beginning
             // baselineGraph may be behind startGraph if this way was added rather than continued
             resetToStartGraph();
             context.resumeChangeDispatch();
             context.enter(modeSelect(context, [wayID]));
         } else {
-            // Remove whatever segment was drawn previously and continue drawing
+            // Remove whatever segment was drawn previously
             context.pop(1);
+
             context.resumeChangeDispatch();
+            // continue drawing
             context.enter(mode);
         }
     }
@@ -271,14 +262,14 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             .on('undone.draw', undone);
     };
 
-
+    var shouldResetOnOff = true;
     drawWay.off = function(surface) {
         // Drawing was interrupted unexpectedly.
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
-        if (_tempEdits) {
+
+        if (shouldResetOnOff) {
             context.pauseChangeDispatch();
-            context.pop(_tempEdits);
             resetToStartGraph();
             context.resumeChangeDispatch();
         }
@@ -327,17 +318,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
-
-        context.pauseChangeDispatch();
-        context.pop(_tempEdits);
-        _tempEdits = 0;
-
-        context.perform(
-            _actionAddDrawNode(),
-            annotation
-        );
-
-        context.resumeChangeDispatch();
+        shouldResetOnOff = false;
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
@@ -348,13 +329,11 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
+        shouldResetOnOff = false;
 
         context.pauseChangeDispatch();
-        context.pop(_tempEdits);
-        _tempEdits = 0;
 
-        context.perform(
-            _actionAddDrawNode(),
+        context.replace(
             actionAddMidpoint({ loc: loc, edge: edge }, end),
             annotation
         );
@@ -370,12 +349,11 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
+        shouldResetOnOff = false;
 
         context.pauseChangeDispatch();
-        context.pop(_tempEdits);
-        _tempEdits = 0;
 
-        context.perform(
+        context.replace(
             _actionReplaceDrawNode(node),
             annotation
         );
@@ -390,15 +368,14 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
     drawWay.finish = function() {
+        shouldResetOnOff = false;
         checkGeometry(true);   // finishDraw = true
         if (context.surface().classed('nope')) {
             return;   // can't click here
         }
 
         context.pauseChangeDispatch();
-        context.pop(_tempEdits);
-        _tempEdits = 0;
-
+        context.pop(1);
         var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
@@ -417,10 +394,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
     // Cancel the draw operation, delete everything, and return to browse mode.
     drawWay.cancel = function() {
+        shouldResetOnOff = false;
         context.pauseChangeDispatch();
-        context.pop(_tempEdits);
-        _tempEdits = 0;
-
         resetToStartGraph();
         context.resumeChangeDispatch();
 

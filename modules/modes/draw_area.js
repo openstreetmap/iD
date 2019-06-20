@@ -1,16 +1,20 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';
+import { utilDisplayLabel } from '../util';
 
 export function modeDrawArea(context, wayID, startGraph, baselineGraph, button, addMode) {
     var mode = {
         button: button,
-        id: 'draw-area'
+        id: 'draw-area',
+        title: (addMode && addMode.title) || utilDisplayLabel(context.entity(wayID), context)
     };
 
-    var behavior;
+    mode.addMode = addMode;
 
     mode.wayID = wayID;
+
+    var behavior;
 
     mode.enter = function() {
         var way = context.entity(wayID);
@@ -39,11 +43,17 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button, 
         context.uninstall(behavior);
     };
 
+    mode.repeatCount = function(val) {
+        if (addMode) return addMode.repeatCount(val);
+    };
+
+    mode.repeatAddedFeature = function(val) {
+        if (addMode) return addMode.repeatAddedFeature(val);
+    };
 
     mode.didFinishAdding = function() {
-        if (mode.repeatAddedFeature) {
-            addMode.repeatAddedFeature = mode.repeatAddedFeature;
-            addMode.repeatCount += 1;
+        if (mode.repeatAddedFeature()) {
+            addMode.repeatCount(addMode.repeatCount() + 1);
             context.enter(addMode);
         }
         else {

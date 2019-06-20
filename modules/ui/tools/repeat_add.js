@@ -28,7 +28,7 @@ export function uiToolRepeatAdd(context) {
         button = selection
             .append('button')
             .attr('class', 'bar-button wide')
-            .classed('active', mode.repeatAddedFeature)
+            .classed('active', mode.repeatAddedFeature())
             .attr('tabindex', -1)
             .call(tooltipBehavior)
             .on('click', function() {
@@ -42,8 +42,8 @@ export function uiToolRepeatAdd(context) {
 
     function toggleRepeat() {
         var mode = context.mode();
-        mode.repeatAddedFeature = !mode.repeatAddedFeature;
-        button.classed('active', mode.repeatAddedFeature);
+        mode.repeatAddedFeature(!mode.repeatAddedFeature());
+        button.classed('active', mode.repeatAddedFeature());
     }
 
     tool.uninstall = function() {
