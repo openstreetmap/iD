@@ -1,6 +1,6 @@
 {
     "key": "public_bookcase:type",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type of public bookcases",
     "strings": {
         "options": {
