@@ -5,8 +5,8 @@
     color: #7dd;
     fill: #7dd;
 }
-.preset-icon .icon.tag-type-waterway,
-.preset-icon .icon.tag-waterway {
+.preset-icon .icon.tag-type-waterway:not(.tag-waterway-dam),
+.preset-icon .icon.tag-waterway:not(.tag-waterway-dam) {
     color: #7dd;
     fill: #fff;
 }
@@ -32,14 +32,14 @@ path.area.fill.tag-waterway-fuel {
 }
 
 /* lines */
-path.line.fill.tag-waterway {
+path.line.fill.tag-waterway:not(.tag-waterway-dam) {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
-path.line.casing.tag-waterway {
+path.line.casing.tag-waterway:not(.tag-waterway-dam) {
     stroke: #444;
 }
-path.line.stroke.tag-waterway {
+path.line.stroke.tag-waterway:not(.tag-waterway-dam) {
     stroke: #7dd;
 }
 
