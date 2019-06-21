@@ -418,11 +418,34 @@ export function coreContext() {
     };
 
 
-    /* Tasks */
-    var tasks = {};
+    /* Tasking */
+    var _tasking = {
+        enabled: false
+    };
+    context.tasking = function(val) {
+        if (!arguments.length) return _tasking;
+        _tasking = val;
+        return context;
+    };
+
+    var _project = {};
+    context.selectedProjectID = function(val) {
+        if (!arguments.length) return _project;
+        _project = val;
+        return context;
+    };
+
+    var _tasks = {};
     context.tasks = function(val) {
-        if (!arguments.length) return tasks;
-        tasks = val;
+        if (!arguments.length) return _tasks;
+        _tasks = val;
+        return context;
+    };
+
+    var _selectedTaskID;
+    context.selectedTaskID = function(taskID) {
+        if (!arguments.length) return _selectedTaskID;
+        _selectedTaskID = taskID;
         return context;
     };
 

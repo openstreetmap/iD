@@ -1,2 +1,1 @@
-export { uiTaskData } from './task_data';
-export { uiTaskingProject } from './tasking_project';
+export { uiTasking } from './tasking';

@@ -18,7 +18,7 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { uiDataEditor } from '../ui/data_editor';
 import { services } from '../services';
-import { uiTaskingEditor } from '../ui/tasking_editor';
+import { uiTasking } from '../ui/';
 import { utilKeybinding } from '../util';
 
 
@@ -32,7 +32,7 @@ export function modeSelectTask(context, selectedTaskID) {
     var keybinding = utilKeybinding('select-task');
     var dataEditor = uiDataEditor(context);
 
-    var tasking = uiTaskingEditor(context)
+    var tasking = uiTasking(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
             var task = checkSelectedTaskID();

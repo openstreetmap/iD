@@ -11,13 +11,10 @@ export function uiTaskingProject() {
         var project = selection.selectAll('.project')
             .data(
                 (_project ? [_project] : []),
-                function(d) {
-                    console.log('project d: ', d);
-                    return d.id;
-                }
+                function(d) { return d.id; }
             );
 
-            project.exit()
+        project.exit()
             .remove();
 
         var projectEnter = project.enter()
@@ -29,27 +26,27 @@ export function uiTaskingProject() {
             .attr('class', function(d) { return 'note-header-icon ' + d.status; })
             .classed('new', function(d) { return d.id < 0; });
 
-        // iconEnter
-        //     .append('div')
-        //     .attr('class', 'preset-icon-28')
-        //     .call(svgIcon('#iD-icon-note', 'note-fill'));
+        iconEnter
+            .append('div')
+            .attr('class', 'preset-icon-28')
+            .call(svgIcon('#iD-icon-note', 'note-fill'));
 
-        // iconEnter.each(function(d) {
-        //     var statusIcon = '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
-        //     iconEnter
-        //         .append('div')
-        //         .attr('class', 'note-icon-annotation')
-        //         .call(svgIcon(statusIcon, 'icon-annotation'));
-        // });
+        iconEnter.each(function(d) {
+            var statusIcon = '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+            iconEnter
+                .append('div')
+                .attr('class', 'note-icon-annotation')
+                .call(svgIcon(statusIcon, 'icon-annotation'));
+        });
 
-        // headerEnter
-        //     .append('div')
-        //     .attr('class', 'note-header-label')
-        //     .text(function(d) {
-        //         if (_project.isNew()) { return t('note.new'); }
-        //         return t('note.note') + ' ' + d.id + ' ' +
-        //             (d.status === 'closed' ? t('note.closed') : '');
-        //     });
+        projectEnter
+            .append('div')
+            .attr('class', 'note-header-label')
+            .text(function(d) {
+                if (_project.isNew()) { return t('note.new'); }
+                return t('note.note') + ' ' + d.id + ' ' +
+                    (d.status === 'closed' ? t('note.closed') : '');
+            });
     }
 
 

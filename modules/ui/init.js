@@ -35,7 +35,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
-import { uiTaskingEditor } from './tasking_editor';
+import { uiTasking } from './tasking';
 import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -121,11 +121,11 @@ export function uiInit(context) {
             .attr('class', 'map-control map-issues-control')
             .call(issues.renderToggleButton);
 
-        var tasking = uiTaskingEditor(context);
-            controls
-                .append('div')
-                .attr('class', 'map-control map-tasks-control')
-                .call(tasking.renderToggleButton);
+        var tasking = uiTasking(context);
+        controls
+            .append('div')
+            .attr('class', 'map-control map-tasks-control')
+            .call(tasking.renderToggleButton);
 
         var help = uiHelp(context);
         controls

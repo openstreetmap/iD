@@ -2324,7 +2324,16 @@
         },
         "tasking": {
             "project": "Project",
-            "task": "Task"
+            "projectID": "Project ID",
+            "noProject": "No project selected",
+            "task": "Task",
+            "options": {
+                "enabled": {
+                    "title": "Enable tasking",
+                    "enabled": "enabled",
+                    "disabled": "disabled"
+                }
+            }
         },
         "units": {
             "feet": "{quantity} ft",

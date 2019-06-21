@@ -164,7 +164,7 @@ export function behaviorSelect(context) {
                 }
             }
 
-        } else if (datum && datum.__featurehash__ && !isMultiselect && datum.properties.taskId) {    // clicked Task..
+        } else if (datum && datum.__featurehash__ && !isMultiselect && datum.properties.taskId) {    // clicked Task.. // TAH - consider removing until tasks are drawn
             context
                 .selectedNoteID(null)
                 .enter(modeSelectTask(context, datum));

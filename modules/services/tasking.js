@@ -20,17 +20,20 @@ function parseUrl(url) {
     var _task = task_re.test(url);
 
     parsedUrl.urlType = _task ? 'task' : _project ? 'project' : undefined;
-    var url_slugs = url.split('/');
+    parsedUrl.url_slugs = url.split('?')[0].split('/');
+
+    parsedUrl.params = url.split('?')[1];
+
 
     if (_task) {
-        parsedUrl.taskId = url_slugs[url_slugs.length - 1];
+        parsedUrl.taskId = parsedUrl.url_slugs[parsedUrl.url_slugs.length - 1];
     }
 
     if (_project) {
-        if(_task) {
-            parsedUrl.projectId = url_slugs[url_slugs.length - 3];
+        if (_task) {
+            parsedUrl.projectId = parsedUrl.url_slugs[parsedUrl.url_slugs.length - 3];
         } else {
-            parsedUrl.projectId = url_slugs[url_slugs.length - 1];
+            parsedUrl.projectId = parsedUrl.url_slugs[parsedUrl.url_slugs.length - 1];
         }
     }
 
@@ -68,7 +71,7 @@ export default {
         .then(function(result) {
             if (result) {
                 var json = JSON.parse(result);
-                _tasksCache.project[projectId] = json;
+                _tasksCache.project = json;
 
                 // TODO: cache geojson tasks as well
             }
@@ -81,12 +84,19 @@ export default {
 
     setProject: function(project) {
         var _projectId = project.projectId;
-        _tasksCache.project[_projectId] = project;
+        _tasksCache.project = project;
 
     },
 
     getProject: function(id) {
-        return _tasksCache.project[id];
+        if (!arguments.length) return _tasksCache.project;
+
+        var _project = _tasksCache.projects(id) ? _tasksCache.projects(id) : undefined;
+        return _project;
+    },
+
+    getProjectId: function() {
+        return _tasksCache.project.projectId;
     },
 
     loadTask: function(projectId, taskId) {
@@ -100,7 +110,7 @@ export default {
             .then(function(result) {
                 if (result) {
                     var json = JSON.parse(result);
-                    _tasksCache.task[taskId] = json;
+                    _tasksCache.task = json;
 
                     // also load the project details
                     that.loadProject(projectId);
@@ -109,21 +119,27 @@ export default {
                 dispatch.call('loadedTask');
             })
             .catch(function(err) {
-                console.log('loadTask error: ', err) // TODO: TAH - better handling of errors
+                console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
             });
         }
     },
 
     getTask: function(id) {
-        return _tasksCache.task[id];
+        if (!arguments.length) return _tasksCache.task;
+
+        var _task = _tasksCache.tasks(id) ? _tasksCache.tasks(id) : undefined;
+        return _task;
+    },
+
+    getTaskId: function() {
+        return _tasksCache.task.taskId;
     },
 
     setTask: function(task) {
-        var _taskId = task.taskId;
-        _tasksCache.task[_taskId] = task;
+        _tasksCache.task = task;
     },
 
-    getFromUrl: function(url) {
+    loadFromUrl: function(url) {
 
         var that = this;
 

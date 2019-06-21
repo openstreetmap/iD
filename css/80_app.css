@@ -3357,21 +3357,27 @@ button.autofix.action.active {
 
 
 /* Issues Pane */
+/* TODO: TAH - refactor tasking options to separate section */
+.tasking-options-container,
 .issues-options-container {
     display: table;
 }
+.tasking-option,
 .issues-option {
     display: table-row;
 }
+.tasking-option-title,
 .issues-option-title {
     display: table-cell;
     font-weight: bold;
     padding-right: 10px;
 }
+[dir='rtl'] .tasking-option-title,
 [dir='rtl'] .issues-option-title {
     padding-right: 0;
     padding-left: 10px;
 }
+.tasking-option label,
 .issues-option label {
     display: table-cell;
     padding: 0 10px;

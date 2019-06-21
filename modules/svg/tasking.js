@@ -228,6 +228,11 @@ export function svgTasking(projection, context, dispatch) {
         geoData = geoData.filter(getPath);
         polygonData = geoData.filter(isPolygon);
 
+        if (taskService) {  // fetch data from tasking service
+            var task = taskService.getTask();
+
+        }
+
 
         // Draw clip paths for polygons
         var clipPaths = surface.selectAll('defs').selectAll('.clipPath-data')
@@ -419,7 +424,12 @@ export function svgTasking(projection, context, dispatch) {
         _template = null;
         _geojson = null;
 
-        _taskService.getFromUrl(url);
+        // load task from url
+        _taskService.loadFromUrl(url);
+
+        // set context project and task
+        context.selectedProjectID = _taskService.getProjectId();
+        context.selectedTaskID = _taskService.getTaskId();
 
         dispatch.call('change');
         return this;

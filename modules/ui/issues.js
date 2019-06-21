@@ -28,6 +28,7 @@ export function uiIssues(context) {
 
     var _errors = [];
     var _warnings = [];
+
     var _options = {
         what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
         where: context.storage('validate-where') || 'all'  // 'all', 'visible'
