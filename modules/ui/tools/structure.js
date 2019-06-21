@@ -147,12 +147,15 @@ export function uiToolStructure(context) {
                     utilArrayIntersection(way.nodes, prevWay.nodes).length > 0 &&
                     JSON.stringify(prevWay.tags) === JSON.stringify(way.tags)) {
 
-                    context.perform(
-                        actionJoin([prevWay.id, way.id])
-                    );
-                    context.enter(
-                        modeDrawLine(context, prevWay.id, context.graph(), context.graph(), mode.button, false, mode.addMode)
-                    );
+                    var action = actionJoin([prevWay.id, way.id]);
+
+                    if (!action.disabled(context.graph())) {
+                        context.perform(action);
+
+                        context.enter(
+                            modeDrawLine(context, prevWay.id, context.graph(), context.graph(), mode.button, false, mode.addMode)
+                        );
+                    }
                 }
             } else {
                 var isLast = mode.activeID() === way.last();
