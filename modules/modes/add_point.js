@@ -26,7 +26,7 @@ export function modeAddPoint(context, mode) {
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
 
     var _repeatAddedFeature = false;
-    var _repeatCount = 0;
+    var _allAddedEntityIDs = [];
 
     mode.repeatAddedFeature = function(val) {
         if (!arguments.length) return _repeatAddedFeature;
@@ -34,10 +34,10 @@ export function modeAddPoint(context, mode) {
         return mode;
     };
 
-    mode.repeatCount = function(val) {
-        if (!arguments.length) return _repeatCount;
-        _repeatCount = val;
-        return mode;
+    mode.addedEntityIDs = function() {
+        return _allAddedEntityIDs.filter(function(id) {
+            return context.hasEntity(id);
+        });
     };
 
     function add(loc) {
@@ -83,11 +83,10 @@ export function modeAddPoint(context, mode) {
     }
 
     function didFinishAdding(node) {
-        if (mode.repeatAddedFeature()) {
-            _repeatCount += 1;
-        } else {
+        _allAddedEntityIDs.push(node.id);
+        if (!mode.repeatAddedFeature()) {
             context.enter(
-                modeSelect(context, [node.id]).newFeature(true)
+                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
             );
         }
     }
@@ -99,7 +98,7 @@ export function modeAddPoint(context, mode) {
 
 
     function undone() {
-        if (context.graph() === baselineGraph || _repeatCount === 0) {
+        if (context.graph() === baselineGraph || mode.addedEntityIDs().length === 0) {
             context.enter(modeBrowse(context));
         }
     }

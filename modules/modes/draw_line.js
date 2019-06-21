@@ -43,21 +43,20 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
         context.uninstall(behavior);
     };
 
-    mode.repeatCount = function(val) {
-        if (addMode) return addMode.repeatCount(val);
-    };
-
     mode.repeatAddedFeature = function(val) {
         if (addMode) return addMode.repeatAddedFeature(val);
     };
 
+    mode.addedEntityIDs = function() {
+        if (addMode) return addMode.addedEntityIDs();
+    };
+
     mode.didFinishAdding = function() {
         if (mode.repeatAddedFeature()) {
-            addMode.repeatCount(addMode.repeatCount() + 1);
             context.enter(mode.addMode);
         }
         else {
-            context.enter(modeSelect(context, [wayID]).newFeature(!mode.isContinuing));
+            context.enter(modeSelect(context, mode.addedEntityIDs() || [wayID]).newFeature(!mode.isContinuing));
         }
     };
 

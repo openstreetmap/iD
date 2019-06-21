@@ -22,7 +22,7 @@ export function modeAddArea(context, mode) {
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
 
     var _repeatAddedFeature = false;
-    var _repeatCount = 0;
+    var _allAddedEntityIDs = [];
 
     mode.repeatAddedFeature = function(val) {
         if (!arguments.length || val === undefined) return _repeatAddedFeature;
@@ -30,10 +30,10 @@ export function modeAddArea(context, mode) {
         return mode;
     };
 
-    mode.repeatCount = function(val) {
-        if (!arguments.length || val === undefined) return _repeatCount;
-        _repeatCount = val;
-        return mode;
+    mode.addedEntityIDs = function() {
+        return _allAddedEntityIDs.filter(function(id) {
+            return context.hasEntity(id);
+        });
     };
 
 
@@ -92,6 +92,7 @@ export function modeAddArea(context, mode) {
 
 
     function enterDrawMode(way, startGraph) {
+        _allAddedEntityIDs.push(way.id);
         var drawMode = modeDrawArea(context, way.id, startGraph, context.graph(), mode.button, mode);
         context.enter(drawMode);
     }

@@ -22,7 +22,7 @@ export function modeAddLine(context, mode) {
     if (mode.preset) mode.defaultTags = mode.preset.setTags(mode.defaultTags, 'line');
 
     var _repeatAddedFeature = false;
-    var _repeatCount = 0;
+    var _allAddedEntityIDs = [];
 
     mode.repeatAddedFeature = function(val) {
         if (!arguments.length || val === undefined) return _repeatAddedFeature;
@@ -30,10 +30,10 @@ export function modeAddLine(context, mode) {
         return mode;
     };
 
-    mode.repeatCount = function(val) {
-        if (!arguments.length || val === undefined) return _repeatCount;
-        _repeatCount = val;
-        return mode;
+    mode.addedEntityIDs = function() {
+        return _allAddedEntityIDs.filter(function(id) {
+            return context.hasEntity(id);
+        });
     };
 
     function start(loc) {
@@ -81,6 +81,7 @@ export function modeAddLine(context, mode) {
 
 
     function enterDrawMode(way, startGraph) {
+        _allAddedEntityIDs.push(way.id);
         var drawMode = modeDrawLine(context, way.id, startGraph, context.graph(), mode.button, null, mode);
         context.enter(drawMode);
     }
