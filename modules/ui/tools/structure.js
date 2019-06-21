@@ -15,8 +15,6 @@ import { actionJoin } from '../../actions/join';
 import { modeDrawLine } from '../../modes/draw_line';
 import { osmWay } from '../../osm/way';
 
-import { utilArrayIntersection } from '../../util';
-
 export function uiToolStructure(context) {
 
     var key = t('toolbar.structure.key');
@@ -142,10 +140,7 @@ export function uiToolStructure(context) {
                 // Reload way with updated tags
                 way = context.hasEntity(wayID);
 
-                if (
-                    prevWay &&
-                    utilArrayIntersection(way.nodes, prevWay.nodes).length > 0 &&
-                    JSON.stringify(prevWay.tags) === JSON.stringify(way.tags)) {
+                if (prevWay && JSON.stringify(prevWay.tags) === JSON.stringify(way.tags)) {
 
                     var action = actionJoin([prevWay.id, way.id]);
 
