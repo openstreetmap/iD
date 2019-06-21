@@ -50,14 +50,16 @@ export function uiToolUndoRedo(context) {
     tool.render = function(selection) {
 
         buttons = selection.selectAll('button')
-            .data(commands)
+            .data(commands);
+
+        var buttonsEnter = buttons
             .enter()
             .append('button')
             .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
-        buttons.each(function(d) {
+        buttonsEnter.each(function(d) {
             var iconName = d.id;
             if (textDirection === 'rtl') {
                 if (iconName === 'undo') {
@@ -69,6 +71,8 @@ export function uiToolUndoRedo(context) {
             d3_select(this)
                 .call(svgIcon('#iD-icon-' + iconName));
         });
+
+        buttons = buttonsEnter.merge(buttons);
     };
 
     function update() {
