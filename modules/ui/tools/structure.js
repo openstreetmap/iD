@@ -1,12 +1,5 @@
-import {
-    select as d3_select,
-    selectAll as d3_selectAll,
-} from 'd3-selection';
-
-import { svgIcon } from '../../svg/icon';
+import { uiToolSegemented } from './segmented';
 import { t } from '../../util/locale';
-import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
 import { osmTagsAllowingBridges, osmTagsAllowingTunnels } from '../../osm/tags';
 import { actionChangeTags } from '../../actions/change_tags';
 import { actionAddEntity } from '../../actions/add_entity';
@@ -17,15 +10,12 @@ import { osmWay } from '../../osm/way';
 
 export function uiToolStructure(context) {
 
-    var key = t('toolbar.structure.key');
+    var tool = uiToolSegemented(context);
 
-    var tool = {
-        id: 'structure',
-        contentClass: 'joined',
-        label: t('presets.fields.structure.label')
-    };
+    tool.id = 'structure';
+    tool.label = t('presets.fields.structure.label');
+    tool.key = t('toolbar.structure.key');
 
-    var items = [];
     var structureNone = {
         id: 'none',
         icon: 'iD-other-line',
@@ -51,8 +41,8 @@ export function uiToolStructure(context) {
 
     var prevWayID;
 
-    tool.shouldShow = function() {
-        items = [
+    tool.loadItems = function() {
+        tool.items = [
             structureNone
         ];
 
@@ -65,51 +55,14 @@ export function uiToolStructure(context) {
             return false;
         }
 
-        if (allowsStructure(osmTagsAllowingBridges)) items.push(structureBridge);
-        if (allowsStructure(osmTagsAllowingTunnels)) items.push(structureTunnel);
-
-        return items.length > 1;
+        if (allowsStructure(osmTagsAllowingBridges)) tool.items.push(structureBridge);
+        if (allowsStructure(osmTagsAllowingTunnels)) tool.items.push(structureTunnel);
     };
 
-    tool.render = function(selection) {
-
-        var active = activeStructure();
-
-        var buttons = selection.selectAll('.bar-button')
-            .data(items)
-            .enter();
-
-        buttons
-            .append('button')
-            .attr('class', function(d) {
-                return 'bar-button ' + d.id + ' ' + (d === active ? 'active' : '');
-            })
-            .attr('tabindex', -1)
-            .on('click', function(d) {
-                if (d3_select(this).classed('active')) return;
-
-                setActiveStructure(d);
-            })
-            .each(function(d) {
-                var tooltipBehavior = tooltip()
-                    .placement('bottom')
-                    .html(true)
-                    .title(uiTooltipHtml(d.label, key));
-                d3_select(this)
-                    .call(tooltipBehavior)
-                    .call(svgIcon('#' + d.icon, 'icon-30'));
-            });
-
-        context.keybinding()
-            .on(key, toggleMode, true);
-    };
-
-
-    function setActiveStructure(d) {
-
+    tool.chooseItem = function(d) {
         var tags = Object.assign({}, activeTags());
 
-        var priorStructure = activeStructure();
+        var priorStructure = tool.activeItem();
         var tagsToRemove = priorStructure.tags;
         for (var key in tagsToRemove) {
             if (tags[key]) {
@@ -173,16 +126,7 @@ export function uiToolStructure(context) {
                 );
             }
         }
-
-        setButtonStates();
-    }
-
-    function setButtonStates() {
-        d3_selectAll('.structure .bar-button.active')
-            .classed('active', false);
-        d3_selectAll('.structure .bar-button.' + activeStructure().id)
-            .classed('active', true);
-    }
+    };
 
     function activeTags() {
         var mode = context.mode();
@@ -195,7 +139,7 @@ export function uiToolStructure(context) {
         return {};
     }
 
-    function activeStructure() {
+    tool.activeItem = function() {
 
         var tags = activeTags();
 
@@ -206,29 +150,10 @@ export function uiToolStructure(context) {
             return Object.keys(structure.tags).length !== 0;
         }
 
-        for (var i in items) {
-            if (tagsMatchStructure(items[i])) return items[i];
+        for (var i in tool.items) {
+            if (tagsMatchStructure(tool.items[i])) return tool.items[i];
         }
         return structureNone;
-    }
-
-    function toggleMode() {
-        if (items.length === 0) return;
-
-        var active = activeStructure();
-        var index = items.indexOf(active);
-        if (index === items.length - 1) {
-            index = 0;
-        } else {
-            index += 1;
-        }
-
-        setActiveStructure(items[index]);
-    }
-
-    tool.uninstall = function() {
-        context.keybinding()
-            .off(key, true);
     };
 
     return tool;
