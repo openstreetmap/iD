@@ -36,6 +36,7 @@ export function uiToolOperation() {
             .on('click', function() {
                 d3_event.stopPropagation();
                 if (!operation || operation.disabled()) return;
+                button.call(tooltipBehavior.hide);
                 operation();
             })
             .call(svgIcon('#iD-operation-' + operation.id));
