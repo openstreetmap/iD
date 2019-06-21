@@ -9,18 +9,18 @@ export function uiToolSimpleButton(id, label, iconName, onClick, tooltipText, to
         label: label
     };
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true)
+        .title(uiTooltipHtml(tooltipText, tooltipKey));
+
     tool.render = function(selection) {
-
-        if (!klass) klass = '';
-
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(uiTooltipHtml(tooltipText, tooltipKey));
-
         selection
+            .selectAll('.bar-button')
+            .data([0])
+            .enter()
             .append('button')
-            .attr('class', 'bar-button ' + klass)
+            .attr('class', 'bar-button ' + (klass || ''))
             .attr('tabindex', -1)
             .call(tooltipBehavior)
             .on('click', onClick)

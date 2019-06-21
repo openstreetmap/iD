@@ -14,15 +14,21 @@ export function uiToolOperation() {
         itemClass: 'operation'
     };
 
-    var button, tooltipBehavior;
+    var button,
+        tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true);
 
     tool.render = function(selection) {
 
-        tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true);
+        tooltipBehavior.title(uiTooltipHtml(operation.tooltip(), operation.keys[0]));
 
         button = selection
+            .selectAll('.bar-button')
+            .data([0]);
+
+        var buttonEnter = button
+            .enter()
             .append('button')
             .attr('class', 'bar-button wide')
             .attr('tabindex', -1)
@@ -33,6 +39,10 @@ export function uiToolOperation() {
                 operation();
             })
             .call(svgIcon('#iD-operation-' + operation.id));
+
+        button = buttonEnter.merge(button);
+
+        button.classed('disabled', operation.disabled());
     };
 
     tool.setOperation = function(op) {
@@ -42,19 +52,7 @@ export function uiToolOperation() {
         tool.label = operation.title;
     };
 
-    tool.update = function() {
-        if (!operation) return;
-
-        if (tooltipBehavior) {
-            tooltipBehavior.title(uiTooltipHtml(operation.tooltip(), operation.keys[0]));
-        }
-        if (button) {
-            button.classed('disabled', operation.disabled());
-        }
-    };
-
     tool.uninstall = function() {
-        tooltipBehavior = null;
         button = null;
         operation = null;
     };

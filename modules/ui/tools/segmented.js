@@ -41,10 +41,13 @@ export function uiToolSegemented(context) {
         var active = tool.activeItem();
 
         var buttons = selection.selectAll('.bar-button')
-            .data(tool.items)
-            .enter();
+            .data(tool.items, function(d) { return d.id; });
+
+        buttons.exit()
+            .remove();
 
         buttons
+            .enter()
             .append('button')
             .attr('class', function(d) {
                 return 'bar-button ' + d.id + ' ' + (d === active ? 'active' : '');
@@ -64,11 +67,6 @@ export function uiToolSegemented(context) {
                     .call(tooltipBehavior)
                     .call(svgIcon('#' + d.icon, 'icon-30'));
             });
-
-        if (tool.key) {
-            context.keybinding()
-                .on(tool.key, toggleItem, true);
-        }
     };
 
     function setActiveItem(d) {
@@ -96,6 +94,13 @@ export function uiToolSegemented(context) {
 
         setActiveItem(tool.items[index]);
     }
+
+    tool.install = function() {
+        if (tool.key) {
+            context.keybinding()
+                .on(tool.key, toggleItem, true);
+        }
+    };
 
     tool.uninstall = function() {
         if (tool.key) {

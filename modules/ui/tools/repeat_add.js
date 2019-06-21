@@ -15,17 +15,23 @@ export function uiToolRepeatAdd(context) {
 
     var button;
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true);
+
     tool.render = function(selection) {
 
         var mode = context.mode();
         var geom = mode.id.indexOf('point') !== -1 ? 'point' : 'way';
 
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(uiTooltipHtml(t('toolbar.repeat.tooltip.' + geom, { feature: '<strong>' + mode.title + '</strong>' }), key));
+        tooltipBehavior.title(uiTooltipHtml(t('toolbar.repeat.tooltip.' + geom, { feature: '<strong>' + mode.title + '</strong>' }), key));
 
         button = selection
+            .selectAll('.bar-button')
+            .data([0]);
+
+        button = button
+            .enter()
             .append('button')
             .attr('class', 'bar-button wide')
             .classed('active', mode.repeatAddedFeature())
@@ -34,10 +40,8 @@ export function uiToolRepeatAdd(context) {
             .on('click', function() {
                 toggleRepeat();
             })
-            .call(svgIcon('#iD-icon-repeat'));
-
-        context.keybinding()
-            .on(key, toggleRepeat, true);
+            .call(svgIcon('#iD-icon-repeat'))
+            .merge(button);
     };
 
     function toggleRepeat() {
@@ -45,6 +49,11 @@ export function uiToolRepeatAdd(context) {
         mode.repeatAddedFeature(!mode.repeatAddedFeature());
         button.classed('active', mode.repeatAddedFeature());
     }
+
+    tool.install = function() {
+        context.keybinding()
+            .on(key, toggleRepeat, true);
+    };
 
     tool.uninstall = function() {
         context.keybinding()

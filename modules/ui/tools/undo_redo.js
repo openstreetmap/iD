@@ -36,18 +36,20 @@ export function uiToolUndoRedo(context) {
         return context.editable();
     }
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true)
+        .title(function (d) {
+            return uiTooltipHtml(d.annotation() ?
+                t(d.id + '.tooltip', {action: d.annotation()}) :
+                t(d.id + '.nothing'), d.cmd);
+        });
+
+    var buttons;
 
     tool.render = function(selection) {
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(function (d) {
-                return uiTooltipHtml(d.annotation() ?
-                    t(d.id + '.tooltip', {action: d.annotation()}) :
-                    t(d.id + '.nothing'), d.cmd);
-            });
 
-        var buttons = selection.selectAll('button')
+        buttons = selection.selectAll('button')
             .data(commands)
             .enter()
             .append('button')
@@ -67,11 +69,26 @@ export function uiToolUndoRedo(context) {
             d3_select(this)
                 .call(svgIcon('#iD-icon-' + iconName));
         });
+    };
 
+    function update() {
+        buttons
+            .property('disabled', !editable())
+            .classed('disabled', function(d) {
+                return !editable() || !d.annotation();
+            })
+            .each(function() {
+                var selection = d3_select(this);
+                if (selection.property('tooltipVisible')) {
+                    selection.call(tooltipBehavior.show);
+                }
+            });
+    }
+
+    tool.install = function() {
         context.keybinding()
             .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
             .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -86,21 +103,6 @@ export function uiToolUndoRedo(context) {
 
         context
             .on('enter.undo_redo', update);
-
-
-        function update() {
-            buttons
-                .property('disabled', !editable())
-                .classed('disabled', function(d) {
-                    return !editable() || !d.annotation();
-                })
-                .each(function() {
-                    var selection = d3_select(this);
-                    if (selection.property('tooltipVisible')) {
-                        selection.call(tooltipBehavior.show);
-                    }
-                });
-        }
     };
 
     tool.uninstall = function() {

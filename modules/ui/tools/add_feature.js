@@ -28,7 +28,10 @@ export function uiToolAddFeature(context) {
 
     tool.render = function(selection) {
 
-        button = selection
+        selection
+            .selectAll('.bar-button')
+            .data([0])
+            .enter()
             .append('button')
             .attr('class', 'bar-button wide')
             .attr('tabindex', -1)
@@ -57,7 +60,14 @@ export function uiToolAddFeature(context) {
             )
             .call(svgIcon('#iD-logo-features'));
 
+        button = selection.select('.bar-button');
+
         presetBrowser.render(selection);
+
+        updateEnabledState();
+    };
+
+    tool.install = function() {
 
         context.keybinding().on(key, function() {
             button.classed('active', true);
@@ -72,9 +82,6 @@ export function uiToolAddFeature(context) {
         context.map()
             .on('move.add-feature-tool', debouncedUpdate)
             .on('drawn.add-feature-tool', debouncedUpdate);
-
-        updateEnabledState();
-
     };
 
     tool.uninstall = function() {

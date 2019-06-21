@@ -17,7 +17,10 @@ export function uiToolSave(context) {
     };
 
     var button = null;
-    var tooltipBehavior = null;
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true)
+        .title(uiTooltipHtml(t('save.no_changes'), key));
     var history = context.history();
     var key = uiCmd('⌘S');
     var _numChanges = 0;
@@ -76,32 +79,35 @@ export function uiToolSave(context) {
 
 
     tool.render = function(selection) {
-        tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(uiTooltipHtml(t('save.no_changes'), key));
 
         button = selection
+            .selectAll('.bar-button')
+            .data([0]);
+
+        var buttonEnter = button
+            .enter()
             .append('button')
             .attr('class', 'save disabled bar-button')
             .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
 
-        button
+        buttonEnter
             .call(svgIcon('#iD-icon-save'));
 
-        button
+        buttonEnter
             .append('span')
             .attr('class', 'count')
             .text('0');
 
+        button = buttonEnter.merge(button);
+
         updateCount();
+    };
 
-
+    tool.install = function() {
         context.keybinding()
             .on(key, save, true);
-
 
         context.history()
             .on('change.save', updateCount);
@@ -131,7 +137,6 @@ export function uiToolSave(context) {
             .on('enter.save', null);
 
         button = null;
-        tooltipBehavior = null;
     };
 
     return tool;

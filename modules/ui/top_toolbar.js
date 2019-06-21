@@ -204,6 +204,11 @@ export function uiTopToolbar(context) {
 
             var itemsEnter = toolbarItems
                 .enter()
+                .each(function(d) {
+                    if (d.install) {
+                        d.install();
+                    }
+                })
                 .append('div')
                 .attr('class', function(d) {
                     var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
@@ -219,9 +224,6 @@ export function uiTopToolbar(context) {
                     var classes = 'item-content';
                     if (d.contentClass) classes += ' ' + d.contentClass;
                     return classes;
-                })
-                .each(function(d) {
-                    d3_select(this).call(d.render, bar);
                 });
 
             actionableItems
@@ -233,7 +235,7 @@ export function uiTopToolbar(context) {
 
             toolbarItems.merge(itemsEnter)
                 .each(function(d){
-                    if (d.update) d.update();
+                    if (d.render) d3_select(this).select('.item-content').call(d.render, bar);
                 });
         }
 
