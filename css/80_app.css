@@ -3452,7 +3452,8 @@ div.full-screen > button:hover {
 }
 
 .map-data-pane .layer-list button,
-.background-pane .layer-list button {
+.background-pane .layer-list button,
+.tasking-pane .layer-list button {
     float: right;
     height: 100%;
     border-left: 1px solid #ccc;
@@ -3461,23 +3462,27 @@ div.full-screen > button:hover {
     padding-right: 4px;
 }
 [dir='rtl'] .map-data-pane .layer-list button,
-[dir='rtl'] .background-pane .layer-list button {
+[dir='rtl'] .background-pane .layer-list button,
+[dir='rtl'] .tasking-pane .layer-list button {
     float: left;
     border-left: none;
     border-right: 1px solid #ccc;
 }
 
 .map-data-pane .layer-list button .icon,
-.background-pane .layer-list button .icon {
+.background-pane .layer-list button .icon,
+.tasking-pane .layer-list button .icon {
     opacity: 0.5;
 }
 
 .map-data-pane .layer-list button:first-of-type,
-.background-pane .layer-list button:first-of-type {
+.background-pane .layer-list button:first-of-type,
+.tasking-pane .layer-list button:first-of-type {
     border-radius: 0 3px 3px 0;
 }
 [dir='rtl'] .map-data-pane .layer-list button:first-of-type,
-[dir='rtl'] .background-pane .layer-list button:first-of-type {
+[dir='rtl'] .background-pane .layer-list button:first-of-type,
+[dir='rtl'] .tasking-pane .layer-list button:first-of-type {
     border-radius: 3px 0 0 3px;
 }
 
@@ -3666,21 +3671,27 @@ button.autofix.action.active {
 
 
 /* Issues Pane */
+/* TODO: TAH - refactor tasking out to it's own section */
+.tasking-options-container,
 .issues-options-container {
     display: table;
 }
+.tasking-option,
 .issues-option {
     display: table-row;
 }
+.tasking-option-title,
 .issues-option-title {
     display: table-cell;
     font-weight: bold;
     padding-right: 10px;
 }
+[dir='rtl'] .tasking-option-title,
 [dir='rtl'] .issues-option-title {
     padding-right: 0;
     padding-left: 10px;
 }
+.tasking-option label,
 .issues-option label {
     display: table-cell;
     padding: 0 10px;

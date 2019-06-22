@@ -13,7 +13,7 @@ import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetIndex } from '../presets';
-import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
+import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos, rendererTasking } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
@@ -307,6 +307,25 @@ export function coreContext() {
     };
 
 
+    /* Tasking */
+    var tasking;
+    context.tasking = function() { return tasking; };
+
+    var _selectedProjectID;
+    context.selectedProjectID = function(projectID) {
+        if (!arguments.length) return _selectedProjectID;
+        _selectedProjectID = projectID;
+        return context;
+    }
+
+    var _selectedTaskID;
+    context.selectedTaskID = function(taskID) {
+        if (!arguments.length) return _selectedTaskID;
+        _selectedTaskID = taskID;
+        return context;
+    }
+
+
     /* Copy/Paste */
     var copyIDs = [], copyGraph;
     context.copyGraph = function() { return copyGraph; };
@@ -532,6 +551,7 @@ export function coreContext() {
     features = rendererFeatures(context);
     photos = rendererPhotos(context);
     presets = presetIndex(context);
+    tasking = rendererTasking(context);
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;
@@ -567,6 +587,7 @@ export function coreContext() {
     background.init();
     features.init();
     photos.init();
+    tasking.init();
 
     if (utilStringQs(window.location.hash).presets) {
         var external = utilStringQs(window.location.hash).presets;

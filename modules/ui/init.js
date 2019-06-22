@@ -34,6 +34,7 @@ import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiStatus } from './status';
+import { uiTasking } from './tasking';
 import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -114,6 +115,12 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'map-control map-issues-control')
             .call(issues.renderToggleButton);
+
+        var tasking = uiTasking(context);
+        controls
+            .append('div')
+            .attr('class', 'map-control map-tasking-control')
+            .call(tasking.renderToggleButton);
 
         var help = uiHelp(context);
         controls
@@ -237,6 +244,7 @@ export function uiInit(context) {
             .call(background.renderPane)
             .call(mapData.renderPane)
             .call(issues.renderPane)
+            .call(tasking.renderPane)
             .call(help.renderPane);
 
         // Add absolutely-positioned elements that sit on top of the map

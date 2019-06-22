@@ -5,31 +5,23 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/icon';
-import { uiBackgroundDisplayOptions } from './background_display_options';
-import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
-import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
 
-export function uiBackground(context) {
-    var key = t('background.key');
+export function uiTasking(context) {
+    var key = t('tasking.key');
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
+    var _toggleButton = d3_select(null);
 
-    var _customSource = context.background().findSource('custom');
-    var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
+    var _customSource = context.tasking().findSource('custom');
+    var _previousManager = context.tasking().findSource(context.storage('manager-last-used-toggle'));
 
-    var _backgroundList = d3_select(null);
-    var _overlayList = d3_select(null);
-    var _displayOptionsContainer = d3_select(null);
-    var _offsetContainer = d3_select(null);
-
-    var backgroundDisplayOptions = uiBackgroundDisplayOptions(context);
-    var backgroundOffset = uiBackgroundOffset(context);
+    var _managersList = d3_select(null);
 
     var settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
@@ -45,7 +37,7 @@ export function uiBackground(context) {
 
             item.call(tooltip().destroyAny);
 
-            if (d === _previousBackground) {
+            if (d === _previousManager) {
                 item.call(tooltip()
                     .placement(placement)
                     .html(true)
@@ -71,25 +63,24 @@ export function uiBackground(context) {
 
         selection.selectAll('li')
             .classed('active', active)
-            .classed('switch', function(d) { return d === _previousBackground; })
+            .classed('switch', function(d) { return d === _previousManager; })
             .call(setTooltips)
             .selectAll('input')
             .property('checked', active);
     }
 
 
-    function chooseBackground(d) {
-        debugger;
+    function chooseManager(d) {
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
         }
 
         d3_event.preventDefault();
-        _previousBackground = context.background().baseLayerSource();
-        context.storage('background-last-used-toggle', _previousBackground.id);
-        context.storage('background-last-used', d.id);
-        context.background().baseLayerSource(d);
-        _backgroundList.call(updateLayerSelections);
+        _previousManager = context.tasking().manager();
+        context.storage('manager-last-used-toggle', _previousManager.id);
+        context.storage('manager-last-used', d.id);
+        context.tasking().manager(d);
+        _managersList.call(updateLayerSelections);
         document.activeElement.blur();
     }
 
@@ -97,10 +88,10 @@ export function uiBackground(context) {
     function customChanged(d) {
         if (d && d.template) {
             _customSource.template(d.template);
-            chooseBackground(_customSource);
+            chooseManager(_customSource);
         } else {
             _customSource.template('');
-            chooseBackground(context.background().findSource('none'));
+            chooseManager(context.background().findSource('none'));
         }
     }
 
@@ -109,14 +100,6 @@ export function uiBackground(context) {
         d3_event.preventDefault();
         context.container()
             .call(settingsCustomBackground);
-    }
-
-
-    function chooseOverlay(d) {
-        d3_event.preventDefault();
-        context.background().toggleOverlayLayer(d);
-        _overlayList.call(updateLayerSelections);
-        document.activeElement.blur();
     }
 
 
@@ -186,105 +169,32 @@ export function uiBackground(context) {
     }
 
 
-    function renderBackgroundList(selection) {
+    function renderManagersList(selection) {
 
-        // the background list
-        var container = selection.selectAll('.layer-background-list')
+        // the managers list
+        var container = selection.selectAll('.layer-managers-list')
             .data([0]);
 
-        _backgroundList = container.enter()
+        _managersList = container.enter()
             .append('ul')
-            .attr('class', 'layer-list layer-background-list')
+            .attr('class', 'layer-list layer-managers-list')
             .attr('dir', 'auto')
             .merge(container);
 
-
-        // add minimap toggle below list
-        var minimapEnter = selection.selectAll('.minimap-toggle-list')
-            .data([0])
-            .enter()
-            .append('ul')
-            .attr('class', 'layer-list minimap-toggle-list')
-            .append('li')
-            .attr('class', 'minimap-toggle-item');
-
-        var minimapLabelEnter = minimapEnter
-            .append('label')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
-                .placement('top')
-            );
-
-        minimapLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() {
-                d3_event.preventDefault();
-                uiMapInMap.toggle();
-            });
-
-        minimapLabelEnter
-            .append('span')
-            .text(t('background.minimap.description'));
-
-
-        // "Info / Report a Problem" link
-        selection.selectAll('.imagery-faq')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'imagery-faq')
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#iD-icon-out-link', 'inline'))
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
-            .append('span')
-            .text(t('background.imagery_source_faq'));
-
-        updateBackgroundList();
+        updateManagersList();
     }
 
 
-    function renderOverlayList(selection) {
-        var container = selection.selectAll('.layer-overlay-list')
-            .data([0]);
-
-        _overlayList = container.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-overlay-list')
-            .attr('dir', 'auto')
-            .merge(container);
-
-        updateOverlayList();
-    }
-
-    function updateBackgroundList() {
-        _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
-    }
-
-    function updateOverlayList() {
-        _overlayList
-            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
+    function updateManagersList() {
+        _managersList
+            .call(drawListItems, 'radio', chooseManager, function(d) { return !d.isHidden() && !d.overlay; });
     }
 
 
     function update() {
-        if (!_pane.select('.disclosure-wrap-background_list').classed('hide')) {
-            updateBackgroundList();
+        if (!_pane.select('.disclosure-wrap-managers_list').classed('hide')) {
+            updateManagersList();
         }
-
-        if (!_pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
-            updateOverlayList();
-        }
-
-        _displayOptionsContainer
-            .call(backgroundDisplayOptions);
-
-        _offsetContainer
-            .call(backgroundOffset);
     }
 
 
@@ -293,17 +203,17 @@ export function uiBackground(context) {
             d3_event.stopImmediatePropagation();
             d3_event.preventDefault();
         }
-        if (_previousBackground) {
-            chooseBackground(_previousBackground);
+        if (_previousManager) {
+            chooseManager(_previousManager);
         }
     }
 
     var paneTooltip = tooltip()
         .placement((textDirection === 'rtl') ? 'right' : 'left')
         .html(true)
-        .title(uiTooltipHtml(t('background.description'), key));
+        .title(uiTooltipHtml(t('tasking.description'), key));
 
-    uiBackground.togglePane = function() {
+    uiTasking.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
         paneTooltip.hide(_toggleButton);
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
@@ -313,22 +223,22 @@ export function uiBackground(context) {
         context.ui().togglePanes();
     }
 
-    uiBackground.renderToggleButton = function(selection) {
+    uiTasking.renderToggleButton = function(selection) {
 
         _toggleButton = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', uiBackground.togglePane)
-            .call(svgIcon('#iD-icon-layers', 'light'))
+            .on('click', uiTasking.togglePane)
+            .call(svgIcon('#iD-icon-tasking', 'light'))
             .call(paneTooltip);
     };
 
-    uiBackground.renderPane = function(selection) {
+    uiTasking.renderPane = function(selection) {
 
         _pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane background-pane hide')
-            .attr('pane', 'background');
+            .attr('class', 'fillL map-pane tasking-pane hide')
+            .attr('pane', 'tasking');
 
 
         var heading = _pane
@@ -337,7 +247,7 @@ export function uiBackground(context) {
 
         heading
             .append('h2')
-            .text(t('background.title'));
+            .text(t('tasking.title'));
 
         heading
             .append('button')
@@ -349,33 +259,14 @@ export function uiBackground(context) {
             .append('div')
             .attr('class', 'pane-content');
 
-        // background list
+        // manager list
         content
             .append('div')
-            .attr('class', 'background-background-list-container')
-            .call(uiDisclosure(context, 'background_list', true)
-                .title(t('background.backgrounds'))
-                .content(renderBackgroundList)
+            .attr('class', 'tasking-manager-list-container')
+            .call(uiDisclosure(context, 'managers_list', true)
+                .title(t('tasking.managers'))
+                .content(renderManagersList)
             );
-
-        // overlay list
-        content
-            .append('div')
-            .attr('class', 'background-overlay-list-container')
-            .call(uiDisclosure(context, 'overlay_list', true)
-                .title(t('background.overlays'))
-                .content(renderOverlayList)
-            );
-
-        // display options
-        _displayOptionsContainer = content
-            .append('div')
-            .attr('class', 'background-display-options');
-
-        // offset controls
-        _offsetContainer = content
-            .append('div')
-            .attr('class', 'background-offset');
 
 
         // add listeners
@@ -392,9 +283,9 @@ export function uiBackground(context) {
         update();
 
         context.keybinding()
-            .on(key, uiBackground.togglePane)
+            .on(key, uiTasking.togglePane)
             .on(uiCmd('⌘' + key), quickSwitch);
     };
 
-    return uiBackground;
+    return uiTasking;
 }

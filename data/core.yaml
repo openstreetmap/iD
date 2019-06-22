@@ -1564,6 +1564,16 @@ en:
         title: Use different levels
       use_tunnel:
         title: Use a tunnel
+  tasking:
+    title: Tasking
+    description: Tasks
+    key: M
+    managers: Managers
+    options:
+      status:
+        title: Status
+        enabled: Enabled
+        disabled: Disabled
   intro:
     done: done
     ok: OK
