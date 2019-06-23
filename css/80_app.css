@@ -5162,6 +5162,7 @@ svg.mouseclick use.right {
     width: 100%;
 }
 
+.settings-custom-tasking .instructions-template,
 .settings-custom-background .instructions-template {
     margin-bottom: 20px;
 }

@@ -14,6 +14,10 @@ export function rendererTasking(context) {
     var _managers = [];
     var _currManager = {};
 
+    var _customSettings = {
+        template: ''
+    };
+
     var _currProject = {};
     var _currTask = {};
 
@@ -48,6 +52,14 @@ export function rendererTasking(context) {
 
     tasking.enabled = function() {
         return _enabled;
+    };
+
+    tasking.customSettings = function(d) {
+        if (!arguments.length) return _customSettings;
+
+        _customSettings = d;
+
+        return tasking;
     };
 
     tasking.init = function() {

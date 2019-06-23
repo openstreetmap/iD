@@ -703,6 +703,12 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
+    custom_tasking:
+        tooltip: Edit custom tasking
+        header: Custom Tasking Settings
+        instructions: "Enter a tasking manager URL template. Valid tokens are: \n- {manager} \tfor manager \n- {p} \t\tfor project \n- {t} \t\tfor task \n\nOutline:\n{placeholder} \n\nExample:\n{example}"
+        template:
+            placeholder: Enter a url template
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
