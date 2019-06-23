@@ -1,0 +1,14 @@
+{
+    "managers": [
+        {
+            "id": "HOTtm",
+            "name": "HOT Tasking Manager",
+            "template": "",
+            "zoomExtent": [0, 22],
+            "terms_url": "https://wiki.openstreetmap.org/wiki/Tasking_Manager",
+            "terms_text": "Terms & Feedback",
+            "default": true,
+            "description": "HOT tasking manager."
+          }
+    ]
+}

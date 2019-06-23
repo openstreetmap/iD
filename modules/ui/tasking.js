@@ -17,81 +17,42 @@ export function uiTasking(context) {
 
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
-
-    var _customSource = context.tasking().findSource('custom');
-    var _previousManager = context.tasking().findSource(context.storage('manager-last-used-toggle'));
-
     var _managersList = d3_select(null);
+
+    var managers = context.tasking().managers();
+
+    var _customSource = context.tasking().findManager('custom');
+    var _previousManager = context.tasking().findManager('none');
 
     var settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
 
 
-    function setTooltips(selection) {
-        selection.each(function(d, i, nodes) {
-            var item = d3_select(this).select('label');
-            var span = item.select('span');
-            var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
-            var description = d.description();
-            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
-
-            item.call(tooltip().destroyAny);
-
-            if (d === _previousManager) {
-                item.call(tooltip()
-                    .placement(placement)
-                    .html(true)
-                    .title(function() {
-                        var tip = '<div>' + t('background.switch') + '</div>';
-                        return uiTooltipHtml(tip, uiCmd('⌘' + key));
-                    })
-                );
-            } else if (description || isOverflowing) {
-                item.call(tooltip()
-                    .placement(placement)
-                    .title(description || d.name())
-                );
-            }
-        });
-    }
-
-
-    function updateLayerSelections(selection) {
-        function active(d) {
-            return context.background().showsLayer(d);
-        }
-
-        selection.selectAll('li')
-            .classed('active', active)
-            .classed('switch', function(d) { return d === _previousManager; })
-            .call(setTooltips)
-            .selectAll('input')
-            .property('checked', active);
-    }
-
-
-    function chooseManager(d) {
-        if (d.id === 'custom' && !d.template()) {
+    function setManager(d) {
+        if (d.id === 'custom') {
             return editCustom();
         }
 
         d3_event.preventDefault();
-        _previousManager = context.tasking().manager();
-        context.storage('manager-last-used-toggle', _previousManager.id);
-        context.storage('manager-last-used', d.id);
-        context.tasking().manager(d);
-        _managersList.call(updateLayerSelections);
+        _previousManager = context.tasking().currentManager();
+        context.tasking().currentManager(d);
+
         document.activeElement.blur();
+    }
+
+
+    function showsManager(d) {
+        return _previousManager === d;
     }
 
 
     function customChanged(d) {
         if (d && d.template) {
             _customSource.template(d.template);
-            chooseManager(_customSource);
+            setManager(_customSource);
         } else {
             _customSource.template('');
-            chooseManager(context.background().findSource('none'));
+            setManager(context.tasking().findManager('none'));
         }
     }
 
@@ -103,41 +64,29 @@ export function uiTasking(context) {
     }
 
 
-    function drawListItems(layerList, type, change, filter) {
-        var sources = context.background()
-            .sources(context.map().extent())
-            .filter(filter);
+    function drawListItems(selection, data, type, name, change, active) {
 
-        var layerLinks = layerList.selectAll('li')
-            .data(sources, function(d) { return d.name(); });
+        var items = selection.selectAll('li')
+            .data(data, function(d) { return d.name(); });
 
-        layerLinks.exit()
+        // Exit
+        items.exit()
             .remove();
 
-        var enter = layerLinks.enter()
+        // Enter
+        var enter = items.enter()
             .append('li')
-            .classed('layer-custom', function(d) { return d.id === 'custom'; })
-            .classed('best', function(d) { return d.best(); });
+            .classed('layer-custom', function(d) { return d.id === 'custom'; });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
             .call(tooltip()
-                .title(t('settings.custom_background.tooltip'))
+                .title(t('tasking.custom.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
             .call(svgIcon('#iD-icon-more'));
-
-        enter.filter(function(d) { return d.best(); })
-            .append('div')
-            .attr('class', 'best')
-            .call(tooltip()
-                .title(t('background.best_imagery'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .append('span')
-            .html('&#9733;');
 
         var label = enter
             .append('label');
@@ -145,7 +94,7 @@ export function uiTasking(context) {
         label
             .append('input')
             .attr('type', type)
-            .attr('name', 'layers')
+            .attr('name', name)
             .on('change', change);
 
         label
@@ -153,19 +102,14 @@ export function uiTasking(context) {
             .text(function(d) { return d.name(); });
 
 
-        layerList.selectAll('li')
-            .sort(sortSources)
-            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
+        // Update
+        items = items
+            .merge(enter);
 
-        layerList
-            .call(updateLayerSelections);
-
-
-        function sortSources(a, b) {
-            return a.best() && !b.best() ? -1
-                : b.best() && !a.best() ? 1
-                : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
-        }
+        items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active);
     }
 
 
@@ -187,7 +131,7 @@ export function uiTasking(context) {
 
     function updateManagersList() {
         _managersList
-            .call(drawListItems, 'radio', chooseManager, function(d) { return !d.isHidden() && !d.overlay; });
+            .call(drawListItems, managers, 'radio', 'manager', setManager, showsManager);
     }
 
 
@@ -198,15 +142,10 @@ export function uiTasking(context) {
     }
 
 
-    function quickSwitch() {
-        if (d3_event) {
-            d3_event.stopImmediatePropagation();
-            d3_event.preventDefault();
-        }
-        if (_previousManager) {
-            chooseManager(_previousManager);
-        }
+    function hidePane() {
+        context.ui().togglePanes();
     }
+
 
     var paneTooltip = tooltip()
         .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -219,9 +158,6 @@ export function uiTasking(context) {
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
-    function hidePane() {
-        context.ui().togglePanes();
-    }
 
     uiTasking.renderToggleButton = function(selection) {
 
@@ -232,6 +168,7 @@ export function uiTasking(context) {
             .call(svgIcon('#iD-icon-tasking', 'light'))
             .call(paneTooltip);
     };
+
 
     uiTasking.renderPane = function(selection) {
 
@@ -269,22 +206,21 @@ export function uiTasking(context) {
             );
 
 
-        // add listeners
-        context.map()
-            .on('move.background-update',
-                _debounce(function() { window.requestIdleCallback(update); }, 1000)
-            );
+        // // add listeners
+        // context.map()
+        //     .on('move.background-update',
+        //         _debounce(function() { window.requestIdleCallback(update); }, 1000)
+        //     );
 
 
-        context.background()
-            .on('change.background-update', update);
+        // context.background()
+        //     .on('change.background-update', update);
 
 
         update();
 
         context.keybinding()
-            .on(key, uiTasking.togglePane)
-            .on(uiCmd('⌘' + key), quickSwitch);
+            .on(key, uiTasking.togglePane);
     };
 
     return uiTasking;

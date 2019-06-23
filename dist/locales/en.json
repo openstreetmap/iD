@@ -1974,6 +1974,13 @@
                     "enabled": "Enabled",
                     "disabled": "Disabled"
                 }
+            },
+            "none": {
+                "name": "None"
+            },
+            "custom": {
+                "name": "Custom",
+                "tooltip": "Custom URL for tasking"
             }
         },
         "intro": {

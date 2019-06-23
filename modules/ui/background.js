@@ -79,7 +79,6 @@ export function uiBackground(context) {
 
 
     function chooseBackground(d) {
-        debugger;
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
         }
