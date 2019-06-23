@@ -6,6 +6,7 @@ export function rendererTaskingManager(data) {
 
     var name = source.name;
     var description = source.description;
+    var template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -23,12 +24,18 @@ export function rendererTaskingManager(data) {
         return t('manager.' + id_safe + '.description', { default: description });
     };
 
+    source.template = function(_) {
+        if (!arguments.length) return template;
+        if (source.id === 'custom') template = _;
+        return source;
+    };
+
     return source;
 }
 
 
 rendererTaskingManager.None = function() {
-    var source = rendererTaskingManager({ id: 'none' });
+    var source = rendererTaskingManager({ id: 'none', template: '' });
 
 
     source.name = function() {
@@ -40,8 +47,8 @@ rendererTaskingManager.None = function() {
 };
 
 
-rendererTaskingManager.Custom = function() {
-    var source = rendererTaskingManager({ id: 'custom' });
+rendererTaskingManager.Custom = function(template) {
+    var source = rendererTaskingManager({ id: 'custom', template: template });
 
 
     source.name = function() {

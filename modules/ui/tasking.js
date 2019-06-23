@@ -29,7 +29,7 @@ export function uiTasking(context) {
 
 
     function setManager(d) {
-        if (d.id === 'custom') {
+        if (d.id === 'custom' && !d.template()) {
             return editCustom();
         }
 
