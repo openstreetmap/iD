@@ -1568,17 +1568,22 @@ en:
     title: Tasking
     description: Tasks
     key: M
-    managers: Managers
+    managers:
+      name: Managers
+      none:
+        name: None
+        tooltip: Turn of tasking
+      custom:
+        name: Custom
+        tooltip: Custom URL for tasking
+      HOTtm:
+        name: Hot Tasking Manager
+        tooltip: Tasking manager provided by Humanitarian OpenStreetMap Team
     options:
       status:
         title: Status
         enabled: Enabled
         disabled: Disabled
-    none:
-      name: None
-    custom:
-      name: Custom
-      tooltip: Custom URL for tasking
   intro:
     done: done
     ok: OK

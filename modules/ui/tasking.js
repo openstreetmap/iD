@@ -67,7 +67,7 @@ export function uiTasking(context) {
     function drawListItems(selection, data, type, name, change, active) {
 
         var items = selection.selectAll('li')
-            .data(data, function(d) { return d.name(); });
+            .data(data);
 
         // Exit
         items.exit()
@@ -76,15 +76,17 @@ export function uiTasking(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .classed('layer-custom', function(d) { return d.id === 'custom'; });
+            .classed('manager-custom', function(d) { return d.id === 'custom'; })
+            .call(tooltip()
+                .title(function(d) {
+                    return t('tasking.managers.' + d.id + '.tooltip') || null;
+                })
+                .placement('bottom')
+            );
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
-            .attr('class', 'layer-browse')
-            .call(tooltip()
-                .title(t('tasking.custom.tooltip'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
+            .attr('class', 'manager-browse')
             .on('click', editCustom)
             .call(svgIcon('#iD-icon-more'));
 
@@ -201,7 +203,7 @@ export function uiTasking(context) {
             .append('div')
             .attr('class', 'tasking-manager-list-container')
             .call(uiDisclosure(context, 'managers_list', true)
-                .title(t('tasking.managers'))
+                .title(t('tasking.managers.name'))
                 .content(renderManagersList)
             );
 

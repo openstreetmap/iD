@@ -32,7 +32,7 @@ rendererTaskingManager.None = function() {
 
 
     source.name = function() {
-        return t('tasking.none.name');
+        return t('tasking.managers.none.name');
     };
 
 
@@ -45,7 +45,7 @@ rendererTaskingManager.Custom = function() {
 
 
     source.name = function() {
-        return t('tasking.custom.name');
+        return t('tasking.managers.custom.name');
     };
 
 
