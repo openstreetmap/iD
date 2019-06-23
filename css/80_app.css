@@ -5159,6 +5159,8 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
+    min-height: 35px;
+    max-height: 250px;
     width: 100%;
 }
 
