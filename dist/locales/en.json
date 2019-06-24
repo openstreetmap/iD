@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "Operator"
                 },
+                "operator/type": {
+                    "label": "Operator Type"
+                },
                 "outdoor_seating": {
                     "label": "Outdoor Seating"
                 },

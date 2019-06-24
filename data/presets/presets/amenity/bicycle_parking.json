@@ -4,6 +4,7 @@
         "bicycle_parking",
         "capacity",
         "operator",
+        "operator/type",
         "covered",
         "access_simple",
         "fee",
