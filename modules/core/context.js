@@ -558,8 +558,10 @@ export function coreContext() {
     features.init();
     photos.init();
 
-    if (utilStringQs(window.location.hash).presets) {
-        var external = utilStringQs(window.location.hash).presets;
+    var presetsParameter = utilStringQs(window.location.hash).presets;
+    if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
+        // assume URL of external presets file
+
         presets.fromExternal(external, function(externalPresets) {
             context.presets = function() { return externalPresets; }; // default + external presets...
             osmSetAreaKeys(presets.areaKeys());
@@ -567,7 +569,15 @@ export function coreContext() {
             osmSetVertexTags(presets.vertexTags());
         });
     } else {
-        presets.init();
+        var isVisible;
+        if (presetsParameter) {
+            // assume list of allowed preset IDs
+            var visiblePresetIDs = new Set(presetsParameter.split(','));
+            isVisible = function(presetID) {
+                return visiblePresetIDs.has(presetID);
+            };
+        }
+        presets.init(isVisible);
         osmSetAreaKeys(presets.areaKeys());
         osmSetPointTags(presets.pointTags());
         osmSetVertexTags(presets.vertexTags());

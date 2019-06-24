@@ -199,10 +199,11 @@ export function presetIndex(context) {
             Object.keys(d.presets).forEach(function(id) {
                 var p = d.presets[id];
                 var existing = all.index(id);
+                var isVisible = typeof visible === 'function' ? visible(id, p) : visible;
                 if (existing !== -1) {
-                    all.collection[existing] = presetPreset(id, p, _fields, visible, rawPresets);
+                    all.collection[existing] = presetPreset(id, p, _fields, isVisible, rawPresets);
                 } else {
-                    all.collection.push(presetPreset(id, p, _fields, visible, rawPresets));
+                    all.collection.push(presetPreset(id, p, _fields, isVisible, rawPresets));
                 }
             });
         }
@@ -244,7 +245,7 @@ export function presetIndex(context) {
         return all;
     };
 
-    all.init = function() {
+    all.init = function(shouldShow) {
         all.collection = [];
         _favorites = null;
         _recents = null;
@@ -252,7 +253,7 @@ export function presetIndex(context) {
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-        return all.build(data.presets, true);
+        return all.build(data.presets, shouldShow || true);
     };
 
 

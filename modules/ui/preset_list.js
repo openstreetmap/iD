@@ -167,7 +167,11 @@ export function uiPresetList(context) {
     function drawList(list, presets) {
         var collection = presets.collection.reduce(function(collection, preset) {
             if (preset.members) {
-                collection.push(CategoryItem(preset));
+                if (preset.members.collection.filter(function(preset) {
+                    return preset.visible();
+                }).length > 1) {
+                    collection.push(CategoryItem(preset));
+                }
             } else if (preset.visible()) {
                 collection.push(PresetItem(preset));
             }
