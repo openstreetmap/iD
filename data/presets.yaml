@@ -1273,6 +1273,9 @@ en:
       operator:
         # operator=*
         label: Operator
+      operator/type:
+        # 'operator:type=*'
+        label: Operator Type
       outdoor_seating:
         # outdoor_seating=*
         label: Outdoor Seating

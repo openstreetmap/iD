@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "operator/type",
         "fee",
         "payment_multi_fee"
     ],

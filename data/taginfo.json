@@ -1517,6 +1517,7 @@
     {"key": "opening_date", "description": "🄵 Expected Opening Date"},
     {"key": "opening_hours", "description": "🄵 Hours"},
     {"key": "operator", "description": "🄵 Operator"},
+    {"key": "operator:type", "description": "🄵 Operator Type"},
     {"key": "outdoor_seating", "description": "🄵 Outdoor Seating"},
     {"key": "par", "description": "🄵 Par"},
     {"key": "park_ride", "description": "🄵 Park and Ride"},
