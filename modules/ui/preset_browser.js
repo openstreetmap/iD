@@ -257,7 +257,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             results = recents.slice(0, 35);
         }
 
-        popoverContent.selectAll('.list').call(drawList, results);
+        var list = popoverContent.selectAll('.list').call(drawList, results);
 
         popover.selectAll('.list .list-item.focused')
             .classed('focused', false);
@@ -317,7 +317,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
     function drawList(list, data) {
 
-        popoverContent.selectAll('.list .subsection.subitems').remove();
+        list.selectAll('.subsection.subitems').remove();
 
         var dataItems = [];
         for (var i = 0; i < data.length; i++) {
@@ -337,7 +337,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             dataItems.push(itemForPreset(preset));
         }
 
-        var items = popoverContent.selectAll('.list-item')
+        var items = list.selectAll('.list-item')
             .data(dataItems, function(d) { return d.id(); });
 
         items.order();
