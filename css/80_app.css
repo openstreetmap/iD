@@ -140,6 +140,21 @@ a:visited, a {
 a:hover {
     color: #597be7;
 }
+kbd {
+    display: inline-block;
+    text-align: center;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 12px;
+    min-width: 12px;
+    vertical-align: baseline;
+    background-color: #fcfcfc;
+    border: solid 1px #ccc;
+    margin: 0 2px;
+    border-bottom-color: #bbb;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #bbb;
+}
 
 /* Forms
 ------------------------------------------------------- */
@@ -5113,20 +5128,7 @@ img.tile-debug {
 }
 
 .modal-shortcuts .shortcut-keys kbd {
-    display: inline-block;
-    text-align: center;
-    padding: 3px 5px;
-    font-size: 11px;
-    line-height: 12px;
-    min-width: 12px;
     color: #555;
-    vertical-align: baseline;
-    background-color: #fcfcfc;
-    border: solid 1px #ccc;
-    margin: 0 2px;
-    border-bottom-color: #bbb;
-    border-radius: 3px;
-    box-shadow: inset 0 -1px 0 #bbb;
 }
 
 svg.mouseclick use.left {
@@ -5355,7 +5357,7 @@ svg.mouseclick use.right {
     pointer-events: none;
 }
 .tooltip.in {
-    opacity: 0.9;
+    opacity: 0.95;
     z-index: 5000;
     height: auto;
     display: block;
@@ -5490,12 +5492,12 @@ svg.mouseclick use.right {
 .tooltip-inner .tooltip-text {
     margin-bottom: 20px;
 }
-.tooltip-inner .keyhint {
+.tooltip-inner .shortcut {
     font-weight: bold;
     margin-left: 5px;
 }
 
-[dir='rtl'] .tooltip-inner .keyhint {
+[dir='rtl'] .tooltip-inner .shortcut {
     margin-left: 0;
     margin-right: 5px;
 }
