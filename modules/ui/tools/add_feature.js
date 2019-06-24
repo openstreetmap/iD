@@ -25,6 +25,7 @@ export function uiToolAddFeature(context) {
     var button = d3_select(null);
 
     var key = t('modes.add_feature.key');
+    var keys = [key, '`', '²']; // #5663 - common QWERTY, AZERTY
 
     tool.render = function(selection) {
 
@@ -69,7 +70,7 @@ export function uiToolAddFeature(context) {
 
     tool.install = function() {
 
-        context.keybinding().on(key, function() {
+        context.keybinding().on(keys, function() {
             button.classed('active', true);
 
             presetBrowser.show();
@@ -87,7 +88,7 @@ export function uiToolAddFeature(context) {
     tool.uninstall = function() {
         presetBrowser.hide();
 
-        context.keybinding().off(key);
+        context.keybinding().off(keys);
 
         context.features()
             .on('change.add-feature-tool', null);

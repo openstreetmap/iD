@@ -77,7 +77,8 @@ en:
     add_feature:
       search_placeholder: Search feature types
       description: "Browse features to add to the map."
-      key: Tab
+      # The hotkey to open the Add Feature preset browser. Expect the key adjacent to the number row.
+      key: "`"
       result: "{count} result"
       results: "{count} results"
     add_area:
@@ -477,7 +478,7 @@ en:
   report_a_bug: Report a bug
   help_translate: Help translate
   sidebar:
-    key: '`'
+    key: "'"
     tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning: "{count} hidden features"
