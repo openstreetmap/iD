@@ -23,25 +23,26 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
     var popover = d3_select(null),
         search = d3_select(null),
-        popoverContent = d3_select(null),
-        list = d3_select(null),
-        footer = d3_select(null),
-        message = d3_select(null);
+        popoverContent = d3_select(null);
 
     var browser = {};
 
     browser.render = function(selection) {
         updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
-        popover = selection
+        popover = selection.selectAll('.preset-browser')
+            .data([0]);
+
+        var popoverEnter = popover
+            .enter()
             .append('div')
             .attr('class', 'preset-browser popover fillL hide');
 
-        var header = popover
+        var header = popoverEnter
             .append('div')
             .attr('class', 'popover-header');
 
-        search = header
+        header
             .append('input')
             .attr('class', 'search-input')
             .attr('placeholder', t('modes.add_feature.search_placeholder'))
@@ -61,19 +62,18 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         header
             .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
 
-        popoverContent = popover
+        popoverEnter
             .append('div')
             .attr('class', 'popover-content')
             .on('mousedown', function() {
                 // don't blur the search input (and thus close results)
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-            });
-
-        list = popoverContent.append('div')
+            })
+            .append('div')
             .attr('class', 'list');
 
-        footer = popover
+        var footer = popoverEnter
             .append('div')
             .attr('class', 'popover-footer')
             .on('mousedown', function() {
@@ -82,7 +82,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 d3_event.stopPropagation();
             });
 
-        message = footer.append('div')
+        footer.append('div')
             .attr('class', 'message');
 
         var geomForButtons = allowedGeometry.slice();
@@ -111,6 +111,10 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 updateFilterButtonsStates();
                 updateResultsList();
             });
+
+        popover = popoverEnter.merge(popover);
+        search = popover.selectAll('.search-input');
+        popoverContent = popover.selectAll('.popover-content');
 
         updateResultsList();
     };
@@ -162,7 +166,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     }
 
     function updateFilterButtonsStates() {
-        footer.selectAll('button.filter')
+        popover.selectAll('.popover-footer button.filter')
             .classed('active', function(d) {
                 return shownGeometry.indexOf(d) !== -1;
             });
@@ -253,7 +257,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             results = recents.slice(0, 35);
         }
 
-        list.call(drawList, results);
+        popoverContent.selectAll('.list').call(drawList, results);
 
         popover.selectAll('.list .list-item.focused')
             .classed('focused', false);
@@ -262,7 +266,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         popoverContent.node().scrollTop = 0;
 
         var resultCount = results.length;
-        message.text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
+        popover.selectAll('.popover-footer .message').text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
     function focusListItem(selection, scrollingToShow) {
@@ -313,7 +317,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
     function drawList(list, data) {
 
-        list.selectAll('.subsection.subitems').remove();
+        popoverContent.selectAll('.list .subsection.subitems').remove();
 
         var dataItems = [];
         for (var i = 0; i < data.length; i++) {
@@ -333,7 +337,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             dataItems.push(itemForPreset(preset));
         }
 
-        var items = list.selectAll('.list-item')
+        var items = popoverContent.selectAll('.list-item')
             .data(dataItems, function(d) { return d.id(); });
 
         items.order();
@@ -360,7 +364,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 return 'search-add-list-item-preset-' + d.id().replace(/[^a-zA-Z\d:]/g, '-');
             })
             .on('mouseover', function() {
-                list.selectAll('.list-item.focused')
+                popover.selectAll('.list .list-item.focused')
                     .classed('focused', false);
                 d3_select(this)
                     .classed('focused', true);
