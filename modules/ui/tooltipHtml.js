@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 
 
-export function uiTooltipHtml(text, key, heading) {
+export function uiTooltipHtml(text, keys, heading) {
     var s = '';
 
     if (heading) {
@@ -10,9 +10,13 @@ export function uiTooltipHtml(text, key, heading) {
     if (text) {
         s += '<div class="tooltip-text"><span>' + text + '</span></div>';
     }
-    if (key) {
-        s += '<div class="keyhint-wrap"><span>' + t('tooltip_keyhint') + '</span>' +
-            '<span class="keyhint">' + key + '</span></div>';
+    if (keys) {
+        if (!Array.isArray(keys)) keys = [keys];
+        s += '<div class="keyhint-wrap"><span>' + t('tooltip_keyhint') + '</span>';
+        keys.forEach(function(key) {
+            s += '<kbd class="shortcut">' + key + '</kbd>';
+        });
+        s += '</div>';
     }
 
     return s;
