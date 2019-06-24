@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "operator/type",
         "address",
         "building_area",
         "opening_hours"

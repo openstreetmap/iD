@@ -2,6 +2,7 @@
     "icon": "maki-car",
     "fields": [
         "operator",
+        "operator/type",
         "parking",
         "capacity",
         "access_simple",

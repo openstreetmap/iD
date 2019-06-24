@@ -4,6 +4,7 @@
         "name",
         "brand",
         "operator",
+        "operator/type",
         "address",
         "building_area"
     ],

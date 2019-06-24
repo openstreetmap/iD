@@ -1,0 +1,8 @@
+{
+    "key": "operator:type",
+    "type": "combo",
+    "label": "Operator Type",
+    "prerequisiteTag": {
+        "key": "operator"
+    }
+}
