@@ -5,8 +5,6 @@
             "amenity": {
                 "bench": true,
                 "bicycle_parking": true,
-                "drinking_water": true,
-                "parking": true,
                 "school": true,
                 "waste_basket": true
             },

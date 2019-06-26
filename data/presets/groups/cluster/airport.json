@@ -1,0 +1,11 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "aeroway": "*",
+            "building": {
+                "hangar": true
+            }
+        }
+    }
+}

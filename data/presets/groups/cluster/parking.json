@@ -1,0 +1,16 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "parking": true
+            },
+            "service": {
+                "parking_aisle": true
+            },
+            "vending": {
+                "parking_tickets": true
+            }
+        }
+    }
+}

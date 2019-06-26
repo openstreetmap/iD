@@ -11,12 +11,8 @@
                 "semidetached_house": true,
                 "static_caravan": true
             },
-            "footway": {
-                "sidewalk": true
-            },
             "highway": {
                 "residential": true,
-                "footway": true,
                 "street_lamp": true,
                 "turning_circle": true
             },
@@ -28,13 +24,6 @@
             },
             "man_made": {
                 "street_cabinet": true
-            },
-            "natural": {
-                "tree": true
-            },
-            "service": {
-                "alley": true,
-                "driveway": true
             }
         }
     }

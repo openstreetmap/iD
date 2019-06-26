@@ -1,0 +1,28 @@
+{
+    "cluster": true,
+    "matches": {
+        "any": [
+            {
+                "anyTags": {
+                    "highway": {
+                        "elevator": true
+                    },
+                    "railway": {
+                        "subway": true,
+                        "subway_entrance": true
+                    }
+                }
+            },
+            {
+                "allTags": {
+                    "subway": "yes",
+                    "public_transport": {
+                        "platform": true,
+                        "station": true,
+                        "stop_position": true
+                    }
+                }
+            }
+        ]
+    }
+}

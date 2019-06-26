@@ -1,0 +1,11 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "atm": true,
+                "bank": true
+            }
+        }
+    }
+}
