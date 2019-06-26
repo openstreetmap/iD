@@ -1,6 +1,6 @@
 import { json as d3_json } from 'd3-fetch';
 
-import rbush from 'rbush';
+import RBush from 'rbush';
 import { geoExtent } from '../geo';
 import { utilQsString } from '../util';
 
@@ -14,13 +14,13 @@ export default {
 
     init: function() {
         _inflight = {};
-        _nominatimCache = rbush();
+        _nominatimCache = new RBush();
     },
 
     reset: function() {
         Object.values(_inflight).forEach(function(controller) { controller.abort(); });
         _inflight = {};
-        _nominatimCache = rbush();
+        _nominatimCache = new RBush();
     },
 
 

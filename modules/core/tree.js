@@ -1,10 +1,10 @@
-import rbush from 'rbush';
+import RBush from 'rbush';
 
 import { coreDifference } from './difference';
 
 
 export function coreTree(head) {
-    var rtree = rbush();
+    var rtree = new RBush();
     var bboxes = {};
     var tree = {};
 

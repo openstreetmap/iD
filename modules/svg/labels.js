@@ -1,7 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
-import rbush from 'rbush';
+import RBush from 'rbush';
 import { textDirection } from '../util/locale';
 
 import {
@@ -19,8 +19,8 @@ export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
     var detected = utilDetect();
     var baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge');
-    var _rdrawn = rbush();
-    var _rskipped = rbush();
+    var _rdrawn = new RBush();
+    var _rskipped = new RBush();
     var _textWidthCache = {};
     var _entitybboxes = {};
 
