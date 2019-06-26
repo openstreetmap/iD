@@ -7,6 +7,24 @@ function entityGroup(id, group) {
 
     group.id = id;
 
+    group.scoredPresetsByGeometry = {};
+
+    group.scoredPresets = function() {
+        var allScoredPresets = [];
+        function addScoredPreset(scoredPresetForGeom) {
+            var existingScoredPresetIndex = allScoredPresets.findIndex(function(item) {
+                return item.preset === scoredPresetForGeom.preset;
+            });
+            if (existingScoredPresetIndex === -1) {
+                allScoredPresets.push(scoredPresetForGeom);
+            }
+        }
+        for (var geom in group.scoredPresetsByGeometry) {
+            group.scoredPresetsByGeometry[geom].forEach(addScoredPreset);
+        }
+        return allScoredPresets;
+    };
+
     // returns the part of the `id` after the last slash
     group.basicID = function() {
         var index = group.id.lastIndexOf('/');
@@ -128,15 +146,21 @@ function entityGroupManager() {
         return _groups;
     };
 
-    manager.toggleableGroups = function() {
-        return _groupsArray.filter(function(group) {
-            return group.toggleable;
-        });
+    manager.groupsArray = function() {
+        return _groupsArray;
     };
 
-    manager.groupsForEntity = function(entity, graph) {
-        return _groupsArray.filter(function(group) {
-            return group.matchesTags(entity.tags, entity.geometry(graph));
+    manager.toggleableGroups = _groupsArray.filter(function(group) {
+        return group.toggleable;
+    });
+
+    manager.clusterGroups = _groupsArray.filter(function(group) {
+        return group.cluster;
+    });
+
+    manager.clearCachedPresets = function() {
+        _groupsArray.forEach(function(group) {
+            group.scoredPresetsByGeometry = {};
         });
     };
 

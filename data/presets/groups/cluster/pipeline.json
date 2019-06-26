@@ -1,0 +1,12 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "man_made": {
+                "pipeline": true,
+                "storage_tank": true
+            },
+            "pipeline": "*"
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { osmAreaKeys } from '../osm/tags';
+import { groupManager } from '../entities/group_manager';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 
 
@@ -91,14 +92,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.fields = (preset.fields || []).map(getFields);
     preset.moreFields = (preset.moreFields || []).map(getFields);
-    preset.geometry = (preset.geometry || []);
-
-    visible = visible || false;
 
     function getFields(f) {
         return fields[f];
     }
 
+    preset.geometry = (preset.geometry || []);
+
+    visible = visible || false;
 
     preset.matchGeometry = function(geometry) {
         return preset.geometry.indexOf(geometry) >= 0;
@@ -265,6 +266,40 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tags;
     };
 
+
+    function loadGroups() {
+        if (preset.suggestion) return {};
+        var groupsByGeometry = {};
+        var tags = preset.tags;
+
+        var allGroups = groupManager.groupsArray();
+
+        preset.geometry.forEach(function(geom) {
+            allGroups.forEach(function(group) {
+                if (!group.matchesTags(tags, geom)) return;
+
+                var score = 1;
+                for (var key in tags) {
+                    var subtags = {};
+                    subtags[key] = tags[key];
+                    if (!group.matchesTags(subtags, geom)) return;
+                    score += 0.15;
+                }
+                if (!groupsByGeometry[geom]) groupsByGeometry[geom] = [];
+                groupsByGeometry[geom].push({
+                    group: group,
+                    score: score
+                });
+                if (!group.scoredPresetsByGeometry[geom]) group.scoredPresetsByGeometry[geom] = [];
+                group.scoredPresetsByGeometry[geom].push({
+                    preset: preset,
+                    score: score
+                });
+            });
+        });
+        return groupsByGeometry;
+    }
+    preset.groupsByGeometry = loadGroups();
 
     return preset;
 }

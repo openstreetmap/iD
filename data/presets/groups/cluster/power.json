@@ -1,0 +1,8 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "power": "*"
+        }
+    }
+}

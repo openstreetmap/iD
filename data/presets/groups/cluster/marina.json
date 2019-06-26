@@ -1,0 +1,32 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "boat_rental": true
+            },
+            "leisure": {
+                "fishing": true,
+                "marina": true,
+                "slipway": true
+            },
+            "man_made": {
+                "breakwater": true,
+                "pier": true
+            },
+            "seamark:type": {
+                "mooring": true
+            },
+            "shop": {
+                "fishing": true
+            },
+            "waterway": {
+                "boatyard": true,
+                "dock": true,
+                "fuel": true,
+                "sanitary_dump_station": true,
+                "water_point": true
+            }
+        }
+    }
+}

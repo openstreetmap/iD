@@ -1,0 +1,31 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "bbq": true,
+                "bench": true,
+                "drinking_water": true,
+                "fountain": true,
+                "grit_bin": true,
+                "toilets": true,
+                "waste_basket": true
+            },
+            "leisure": {
+                "park": true,
+                "pitch": true,
+                "playground": true,
+                "firepit": true,
+                "dog_park": true,
+                "picnic_table": true,
+                "track": true
+            },
+            "natural": {
+                "tree": true
+            },
+            "tourism": {
+                "picnic_site": true
+            }
+        }
+    }
+}

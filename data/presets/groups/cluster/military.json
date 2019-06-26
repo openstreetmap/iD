@@ -1,0 +1,24 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "building": {
+                "bunker": true
+            },
+            "landuse": {
+                "military": true
+            },
+            "military": {
+                "airfield": true,
+                "barracks": true,
+                "bunker": true,
+                "checkpoint": true,
+                "naval_base": true,
+                "obstacle_course": true,
+                "office": true,
+                "range": true,
+                "training_area": true
+            }
+        }
+    }
+}

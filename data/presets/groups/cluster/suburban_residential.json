@@ -1,0 +1,41 @@
+{
+    "cluster": true,
+    "matches": {
+        "anyTags": {
+            "building": {
+                "carport": true,
+                "detached": true,
+                "garage": true,
+                "house": true,
+                "residential": true,
+                "semidetached_house": true,
+                "static_caravan": true
+            },
+            "footway": {
+                "sidewalk": true
+            },
+            "highway": {
+                "residential": true,
+                "footway": true,
+                "street_lamp": true,
+                "turning_circle": true
+            },
+            "landuse": {
+                "residential": true
+            },
+            "leisure": {
+                "swimming_pool": true
+            },
+            "man_made": {
+                "street_cabinet": true
+            },
+            "natural": {
+                "tree": true
+            },
+            "service": {
+                "alley": true,
+                "driveway": true
+            }
+        }
+    }
+}

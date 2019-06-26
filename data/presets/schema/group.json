@@ -11,6 +11,10 @@
             "description": "A short English description for the group, if needed for the UI. Translatable",
             "type": "string"
         },
+        "cluster": {
+            "description": "Specify if features in this group are often found near each other",
+            "type": "boolean"
+        },
         "toggleable": {
             "anyOf": [
                 {

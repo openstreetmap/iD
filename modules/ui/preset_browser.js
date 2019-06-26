@@ -10,6 +10,7 @@ import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
+import { groupManager } from '../entities/group_manager';
 import { utilKeybinding, utilNoAuto } from '../util';
 
 export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
@@ -128,7 +129,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         search.node().focus();
         search.node().setSelectionRange(0, search.property('value').length);
 
-        updateForFeatureHiddenState();
+        updateResultsList();
 
         context.features()
             .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
@@ -241,25 +242,93 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }
     }
 
+    function getDefaultResults() {
+
+        var graph = context.graph();
+
+        var clusterGroups = groupManager.clusterGroups;
+        var scoredGroups = {};
+
+        var queryExtent = context.map().extent();
+        var nearbyEntities = context.history().tree().intersects(queryExtent, graph);
+        for (var i in nearbyEntities) {
+            var entity = nearbyEntities[i];
+            var geom = entity.geometry(graph);
+            for (var j in clusterGroups) {
+                var group = clusterGroups[j];
+                if (group.matchesTags(entity.tags, geom)) {
+                    if (!scoredGroups[group.id]) {
+                        scoredGroups[group.id] = {
+                            group: group,
+                            score: 0
+                        };
+                    }
+                    var entityScore;
+                    if (geom === 'area') {
+                        // significantly prefer area features that dominate the viewport
+                        // (e.g. editing within a park or school grounds)
+                        var containedPercent = queryExtent.percentContainedIn(entity.extent(graph));
+                        entityScore = Math.max(1, containedPercent * 10);
+                    } else {
+                        entityScore = 1;
+                    }
+                    scoredGroups[group.id].score += entityScore;
+                }
+            }
+        }
+        var scoredPresets = {};
+        Object.values(scoredGroups).forEach(function(item) {
+            item.group.scoredPresets().forEach(function(groupScoredPreset) {
+                var combinedScore = groupScoredPreset.score * item.score;
+                if (!scoredPresets[groupScoredPreset.preset.id]) {
+                    scoredPresets[groupScoredPreset.preset.id] = {
+                        preset: groupScoredPreset.preset,
+                        score: combinedScore
+                    };
+                } else {
+                    scoredPresets[groupScoredPreset.preset.id].score += combinedScore;
+                }
+            });
+        });
+
+        return Object.values(scoredPresets).sort(function(item1, item2) {
+            return item2.score - item1.score;
+        }).map(function(item) {
+            return item.preset;
+        }).filter(function(d) {
+            for (var i in shownGeometry) {
+                if (d.geometry.indexOf(shownGeometry[i]) !== -1) return true;
+            }
+            return false;
+        }).slice(0, 50);
+    }
+
     function updateResultsList() {
 
-        if (search.empty()) return;
+        if (!browser.isShown()) return;
+
+        var list = popoverContent.selectAll('.list');
+
+        if (search.empty() || list.empty()) return;
 
         var value = search.property('value');
         var results;
         if (value.length) {
             results = presets.search(value, shownGeometry).collection;
         } else {
+            /*
             var recents = context.presets().getRecents();
             recents = recents.filter(function(d) {
                 return shownGeometry.indexOf(d.geometry) !== -1;
             });
             results = recents.slice(0, 35);
+            */
+            results = getDefaultResults();
         }
 
-        var list = popoverContent.selectAll('.list').call(drawList, results);
+        list.call(drawList, results);
 
-        popover.selectAll('.list .list-item.focused')
+        list.selectAll('.list-item.focused')
             .classed('focused', false);
         focusListItem(popover.selectAll('.list > .list-item:first-child'), false);
 
