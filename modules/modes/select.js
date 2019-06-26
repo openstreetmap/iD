@@ -372,7 +372,7 @@ export function modeSelect(context, selectedIDs) {
                 }
             } else {
                 context.surface()
-                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph(), true /* skipMultipolgonMembers */))
                     .classed('selected-member', true);
                 selection
                     .classed('selected', true);
