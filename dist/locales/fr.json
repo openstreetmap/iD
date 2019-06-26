@@ -7,28 +7,63 @@
             "undo": "annuler",
             "zoom_to": "zoomer dessus",
             "copy": "copier",
-            "open_wikidata": "ouvrir sur wikidata"
+            "open_wikidata": "ouvrir sur wikidata",
+            "favorite": "favoris"
+        },
+        "toolbar": {
+            "inspect": "Inspecter",
+            "undo_redo": "Annuler / Rétablir",
+            "recent": "Récents",
+            "favorites": "Favoris",
+            "add_feature": "Ajouter un élément"
         },
         "modes": {
+            "add_feature": {
+                "title": "Ajouter un élément",
+                "description": "Rechercher des éléments à ajouter sur la carte.",
+                "key": "Tab",
+                "result": "{count} résultat",
+                "results": "{count} résultats"
+            },
             "add_area": {
                 "title": "Polygone",
                 "description": "Ajouter des parcs, des bâtiments, des lacs ou d'autres polygones à la carte.",
-                "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
+                "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment.",
+                "filter_tooltip": "surfaces"
             },
             "add_line": {
                 "title": "Ligne",
                 "description": "Ajouter des routes, des rues, des chemins, des canaux ou d'autres lignes à la carte.",
-                "tail": "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un itinéraire."
+                "tail": "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un itinéraire.",
+                "filter_tooltip": "lignes"
             },
             "add_point": {
                 "title": "Point",
                 "description": "Ajouter des restaurants, des monuments, des boîtes aux lettres ou d'autres points à la carte.",
-                "tail": "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument."
+                "tail": "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument.",
+                "filter_tooltip": "points"
             },
             "add_note": {
                 "title": "Note",
+                "label": "Ajouter une note",
                 "description": "Vous avez repéré une erreur ? Faites-le savoir aux autres cartographes.",
-                "tail": "CLiquez sur la earte pour ajouter une note."
+                "tail": "Cliquez sur la carte pour ajouter une note.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Ajouter {feature}",
+                "point": {
+                    "title": "Ajouter {feature} en tant que point"
+                },
+                "line": {
+                    "title": "Ajouter {feature} en tant que ligne"
+                },
+                "area": {
+                    "title": "Ajouter {feature} en tant que surface"
+                },
+                "building": {
+                    "title": "Ajouter {feature} en tant que bâtiment"
+                }
             },
             "browse": {
                 "title": "Naviguer",
@@ -92,30 +127,43 @@
                 },
                 "not_closed": "Cet élément ne peut pas être rendu circulaire car il ne boucle pas.",
                 "too_large": "Ceci ne peut pas être transformé en cercle parce qu'une partie n'est pas visible.",
-                "connected_to_hidden": "Ceci ne peut pas être transformé en cercle parce que c'est connecté à un élément caché."
+                "connected_to_hidden": "Ceci ne peut pas être transformé en cercle parce que c'est connecté à un élément caché.",
+                "not_downloaded": "Cet élément ne peut pas être rendu circulaire car une partie n'est pas encore téléchargée."
             },
             "orthogonalize": {
                 "title": "Carré",
                 "description": {
-                    "line": "Rendre une ligne orthogonale",
-                    "area": "Rendre une forme orthogonale à ce polygone"
+                    "vertex": "Rendre ce coin orthogonal",
+                    "line": "Rendre cette ligne orthogonale",
+                    "area": "Rendre cette forme orthogonale"
                 },
-                "key": "S",
+                "key": "Q",
                 "annotation": {
+                    "vertex": "Coin rendu orthogonal",
                     "line": "ligne rendue orthogonale.",
                     "area": "polygone rendu orthogonal."
                 },
-                "not_squarish": "Cela ne peut être fait, ce n'est pas carré.",
-                "too_large": "Ceci ne peut pas être transformé en rectangle parce qu'une partie n'est pas visible.",
-                "connected_to_hidden": "Ceci ne peut être orthogonalisé parce que c'est connecté à un élément caché."
+                "end_vertex": "Cet élément ne peut être orthogonalisé car c'est le bout de la ligne.",
+                "square_enough": "Cet élément ne peut pas être plus orthogonal qu'il ne l'est déjà.",
+                "not_squarish": "Cet élément ne peut pas être rendu orthogonal, car il ne ressemble pas à un carré.",
+                "too_large": "Cet élément ne peut pas être rendu orthogonal parce qu'une partie n'est pas visible.",
+                "connected_to_hidden": "Cet élément ne peut être rendu orthogonal parce qu'il est connecté à un élément caché.",
+                "not_downloaded": "Cet élément ne peut être orthogonalisé car une partie n'est pas encore téléchargée."
             },
             "straighten": {
                 "title": "Rendre droit",
-                "description": "Rendre cette ligne droite.",
+                "description": {
+                    "points": "Aligner ces points.",
+                    "line": "Rendre cette ligne droite."
+                },
                 "key": "S",
-                "annotation": "rendu une ligne droite.",
+                "annotation": {
+                    "points": "Plusieurs points alignés.",
+                    "line": "Ligne rendue droite."
+                },
                 "too_bendy": "Cela ne peut pas être redressé, car la courbe est trop importante.",
-                "connected_to_hidden": "Cette ligne ne peut être rendue droite parce qu'elle est connecté à un élément caché."
+                "connected_to_hidden": "Cet élément ne peut être rendu droit car il est connecté à un élément caché.",
+                "not_downloaded": "Cet élément ne peut être rendu droit car une partie n'est pas encore téléchargée."
             },
             "delete": {
                 "title": "Supprimer",
@@ -146,6 +194,37 @@
                 "connected_to_hidden": {
                     "single": "Cet élément ne peut pas être supprimé car il est lié à un autre élément non visible.",
                     "multiple": "Ces éléments ne peuvent pas être supprimés car ils sont connectés à d'autres éléments non visibles."
+                },
+                "not_downloaded": {
+                    "single": "Cet élément ne peut pas être supprimé car une partie n'est pas encore téléchargée.",
+                    "multiple": "Ces éléments ne peuvent pas être supprimés car une partie n'est pas encore téléchargée."
+                },
+                "has_wikidata_tag": {
+                    "single": "Cet élément ne peut pas être supprimé car il a un attribut Wikidata.",
+                    "multiple": "Ces éléments ne peuvent être supprimés car certains ont un attribut Wikidata."
+                }
+            },
+            "downgrade": {
+                "title": "Déclasser",
+                "description": {
+                    "building_address": "Supprimer tous les attributs qui ne sont ni pour une adresse ni pour un bâtiment.",
+                    "building": "Supprimer tous les attributs qui ne sont pas pour un bâtiment.",
+                    "address": "Supprimer tous les attributs qui ne sont pas pour une adresse."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Élément déclassé en bâtiment de base.",
+                        "multiple": "{n} éléments déclassé en bâtiments de base."
+                    },
+                    "address": {
+                        "single": "Élément déclassé en addresse.",
+                        "multiple": "{n} éléments déclassés en adresses"
+                    },
+                    "multiple": "{n} éléments déclassés."
+                },
+                "has_wikidata_tag": {
+                    "single": "Cet élément ne peut pas être déclassé car il a un attribut Wikidata.",
+                    "multiple": "Ces éléments ne peuvent être déclassés car certains on un attribut Wikidata."
                 }
             },
             "add_member": {
@@ -153,6 +232,9 @@
             },
             "delete_member": {
                 "annotation": "suppression d'un membre d'une relation."
+            },
+            "reorder_members": {
+                "annotation": "Membres d'une relation réordonnés"
             },
             "connect": {
                 "annotation": {
@@ -177,9 +259,19 @@
             "disconnect": {
                 "title": "Séparer",
                 "description": "Séparer les lignes/contours l'un de l'autre.",
+                "line": {
+                    "description": "Séparer cette ligne des autres éléments."
+                },
+                "area": {
+                    "description": "Séparer cette zone des autres éléments."
+                },
                 "key": "D",
                 "annotation": "déconnexion de lignes ou polygones.",
+                "too_large": {
+                    "single": "Cet élément ne peut être séparé car trop peu est actuellement visible."
+                },
                 "not_connected": "Il n'y a pas ici de lignes/polygones à déconnecter.",
+                "not_downloaded": "Cet élément ne peut être séparé car une partie n'est pas encore téléchargée.",
                 "connected_to_hidden": "Ceci ne peut être déconnecté parce que c'est connecté à un élément caché.",
                 "relation": "Ceci ne peut être déconnecté parce que cela connecte les membres d'une relation."
             },
@@ -221,6 +313,10 @@
                 "connected_to_hidden": {
                     "single": "Cet élément ne peut pas être déplacé car il est connecté à un élément invisible.",
                     "multiple": "Ces éléments ne peuvent pas être déplacés car ils sont connectés à des éléments invisibles."
+                },
+                "not_downloaded": {
+                    "single": "Cet élément ne peut pas être déplacé car une partie n'est pas encore téléchargée.",
+                    "multiple": "Ces éléments ne peuvent pas être déplacés car une partie n'est pas encore téléchargée."
                 }
             },
             "reflect": {
@@ -263,6 +359,10 @@
                 "connected_to_hidden": {
                     "single": "Cet élément ne peut pas effectuer de miroir car il est connecté à un élément non visible.",
                     "multiple": "Ces éléments ne peuvent pas effectuer de miroir car ils sont connectés à des éléments non visibles."
+                },
+                "not_downloaded": {
+                    "single": "Cet élément ne peut pas être mis en miroir car une partie n'est pas encore téléchargée.",
+                    "multiple": "Ces éléments ne peuvent pas être mis en miroir car une partie n'est pas encore téléchargée."
                 }
             },
             "rotate": {
@@ -288,6 +388,10 @@
                 "connected_to_hidden": {
                     "single": "Cet élément ne peut pas être tourné car il est connecté à un élément non visible.",
                     "multiple": "Ces éléments ne peut pas être tournés car ils sont connectés à des éléments non visibles."
+                },
+                "not_downloaded": {
+                    "single": "Cet élément ne peut pas être tourné car une partie n'est pas encore téléchargée.",
+                    "multiple": "Ces éléments ne peuvent pas être tournés car une partie n'est pas encore téléchargée."
                 }
             },
             "reverse": {
@@ -319,13 +423,35 @@
                     "delete": "interdiction de tourner supprimée."
                 }
             },
-            "detach_node": {
-                "title": "Séparer",
+            "extract": {
+                "title": "Extraire",
                 "key": "E",
-                "description": "Séparer ce nœud de ces lignes ou polygones",
-                "annotation": "Séparation d'un nœud de ses lignes ou polygones parents.",
-                "restriction": "Ce nœud ne peut pas être séparé car cela endommagerait une relation « {relation} ».",
-                "connected_to_hidden": "Ce nœud ne peut pas être séparé car il est connecté à un élément caché."
+                "description": {
+                    "vertex": {
+                        "single": "Extraire ce point des lignes ou polygones parents."
+                    },
+                    "area": {
+                        "single": "Extraire un point de ce polygone."
+                    }
+                },
+                "annotation": {
+                    "single": "Extraire un point."
+                },
+                "too_large": {
+                    "area": {
+                        "single": "On ne peut pas extraire de point de ce polygone car il n'est pas assez visible."
+                    }
+                },
+                "restriction": {
+                    "vertex": {
+                        "single": "Ce point ne peut pas être extrait car cela casserait une relation « {relation} »."
+                    }
+                },
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Ce point ne peut pas être extrait car il est connecté à un élément caché."
+                    }
+                }
             }
         },
         "restriction": {
@@ -515,6 +641,7 @@
             "all_tags": "Tous les attributs",
             "all_members": "Tous les membres",
             "all_relations": "Toutes les relations",
+            "add_to_relation": "Ajouter à une relation",
             "new_relation": "Nouvelle relation…",
             "choose_relation": "Sélectionnez une relation parente",
             "role": "Rôle",
@@ -556,7 +683,7 @@
             "location": "Endroit",
             "add_fields": "Ajouter un attribut :",
             "lock": {
-                "suggestion": "Le champ \"{label}\" est verrouillé car il y a un attribut Wikidata. Vous pouvez l'effacer ou l'éditer dans la section \"Tous les attributs\"."
+                "suggestion": "Le champ « {label} » est verrouillé car il y a un attribut Wikidata. Vous pouvez l'effacer ou l'éditer dans la section « Tous les attributs »."
             }
         },
         "background": {
@@ -571,6 +698,7 @@
             "overlays": "Calques",
             "imagery_source_faq": "Info imagerie / Signaler un problème",
             "reset": "réinitialiser",
+            "reset_all": "Tout réinitialiser",
             "display_options": "Options d'affichage",
             "brightness": "Luminosité",
             "contrast": "Contraste",
@@ -617,6 +745,22 @@
             "autohidden": "Ces éléments ont été automatiquement cachés parce qu'un trop grand nombre d'entre eux seraient affichés à l'écran. Vous pouvez zoomer pour les modifier.",
             "osmhidden": "Ces éléments ont été automatiquement cachés parce que le calque OpenStreetMap est caché."
         },
+        "photo_overlays": {
+            "title": "Couches photo",
+            "traffic_signs": {
+                "title": "Signalisation routière"
+            },
+            "photo_type": {
+                "flat": {
+                    "title": "Photos planes",
+                    "tooltip": "Photos traditionnelles"
+                },
+                "panoramic": {
+                    "title": "Photos panoramiques",
+                    "tooltip": "Photos à 360°"
+                }
+            }
+        },
         "feature": {
             "points": {
                 "description": "Points",
@@ -638,6 +782,14 @@
                 "description": "Bâtiments",
                 "tooltip": "Bâtiments, Abris, Garages, etc."
             },
+            "building_parts": {
+                "description": "Parties de bâtiments",
+                "tooltip": "Composants des toits et des bâtiments en 3D"
+            },
+            "indoor": {
+                "description": "Éléments intérieurs",
+                "tooltip": "Pièces, couloirs, escaliers, etc."
+            },
             "landuse": {
                 "description": "Éléments d'occupation des sols",
                 "tooltip": "Forêts, Terres arables, Parcs, Zone résidentielle, Zone commerciale, etc."
@@ -653,6 +805,14 @@
             "rail": {
                 "description": "Éléments ferroviaires",
                 "tooltip": "Voies ferrées"
+            },
+            "pistes": {
+                "description": "Pistes d'hiver",
+                "tooltip": "Pistes de ski, de luge, de patin à glace, etc."
+            },
+            "aerialways": {
+                "description": "Éléments aériens",
+                "tooltip": "Télésièges, télécabine, tyroliennes, etc."
             },
             "power": {
                 "description": "Éléments électriques",
@@ -706,8 +866,8 @@
             }
         },
         "restore": {
-            "heading": "Vous avez des changements non sauvegardés.",
-            "description": "Vous avez des changements non sauvegardés d'une session précédente. Souhaitez-vous restaurer ces changements ?",
+            "heading": "Vous avez des modifications non enregistrées",
+            "description": "Vous avez des modifications non sauvegardées d'une session précédente. Souhaitez-vous restaurer ces changements ?",
             "restore": "Restaurer mes modifications",
             "reset": "Abandonner mes modifications"
         },
@@ -748,6 +908,10 @@
             "just_edited": "Vous avez participé à OpenStreetMap !",
             "thank_you": "Merci d'avoir amélioré la carte.",
             "thank_you_location": "Merci d'avoir amélioré la carte autour de {where}.",
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": " en "
+            },
             "help_html": "Vos changements devraient apparaître sur OpenStreetMap dans quelques instants. La mise à jour des cartes sur d'autres supports devrait prendre davantage de temps.",
             "help_link_text": "Détails",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FR:FAQ#Je_viens_juste_de_faire_quelques_changements_sur_la_carte._Comment_puis-je_les_voir_.3F",
@@ -765,9 +929,9 @@
             "cancel": "Annuler"
         },
         "splash": {
-            "welcome": "Bienvenue sur ID, l'éditeur en ligne d'OpenStreetMap",
-            "text": "ID est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et reportez les bugs sur {github}.",
-            "walkthrough": "Commencer le tutoriel",
+            "welcome": "Bienvenue sur iD, l'éditeur en ligne d'OpenStreetMap",
+            "text": "iD est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et rapportez les bogues sur {github}.",
+            "walkthrough": "Commencer le guide",
             "start": "Modifier maintenant"
         },
         "source_switch": {
@@ -1142,27 +1306,26 @@
         },
         "streetside": {
             "tooltip": "Photos Streetside de Microsoft",
-            "title": "Surcouche photo (Bing Streetside)",
+            "title": "Bing Streetside",
             "report": "Signaler un problème relatif à la vie privée sur cette image",
             "view_on_bing": "Consulter sur Bing Maps",
             "hires": "Haute résolution"
         },
         "mapillary_images": {
-            "tooltip": "Photos de rue depuis Mapillary",
-            "title": "Surcouche Photo (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Panneaux de signalisation de Mapillary (nécessite la Surcouche Photo)",
-            "title": "Surcouche de signalisation routière (Mapillary)"
+            "tooltip": "Photos de rue depuis Mapillary"
         },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Signalisation routière de Mapillary"
+            },
             "view_on_mapillary": "Voir cette image sur Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Photos de la rue issues d'OpenStreetCam",
-            "title": "Surcouche photo (OpenStreetCam)"
+            "tooltip": "Photos de la rue issues d'OpenStreetCam"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "Voir cette image sur OpenStreetCam"
         },
         "note": {
@@ -1199,7 +1362,7 @@
                 "title": "Aide",
                 "welcome": "Bienvenue dans l'iD editor de [OpenStreetMap](https://www.openstreetmap.org/). Avec cet éditeur, vous pouvez mettre à jour OpenStreetMap directement depuis votre navigateur internet.",
                 "open_data_h": "Données libres",
-                "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [is strictly forbidden] (https://www.openstreetmap.org/copyright).",
+                "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [est strictement interdit](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Avant de commencer",
                 "before_start": "Vous devez maîtriser OpenStreetMap et cet éditeur avant de commencer à modifier. iD comprend un guide pour vous apprendre les bases de la modification d'OpenStreetMap. Cliquez sur « Commencer le tutoriel » sur cet écran pour suivre le guide - cela ne prend que 15 minutes environ.",
                 "open_source_h": "Open source",
@@ -1295,8 +1458,8 @@
                 "add_area_command": "Pour ajouter un polygone, cliquez sur le bouton **Polygone** {area} de la barre d'outils au-dessus de la carte, ou pressez la touche `3`. Cela transformera le curseur de la souris en une croix.",
                 "add_area_draw": "Puis, positionnez le curseur à l'endroit de l'un des coins de l'élément à tracer et faites un clic gauche {leftclick} ou pressez la barre d'espace `Space` pour placer des nœuds sur les bords extérieurs du polygone. Continuez à placer des nœuds en cliquant ou en pressant la barre d'espace `Space`. Lorsque vous tracez le polygone, vous pouvez zoomer ou déplacer la carte afin d'ajouter davantage de détails.",
                 "add_area_finish": "Pour terminer un polygone, pressez la touche `{return}` ou cliquez une seconde fois sur le premier ou le dernier nœud.",
-                "square_area_h": "Donner une forme orthogonale",
-                "square_area_command": "De nombreux éléments comme les bâtiments ont les coins carrés. Pour rendre carrés les coins d'un polygone, faites un clic droit {rightclick} sur un bord du polygone et sélectionnez la commande **Carré** {orthogonalize} du menu d'édition.",
+                "square_area_h": "Rendre une forme orthogonale",
+                "square_area_command": "De nombreux éléments comme les bâtiments ont des coins carrés. Pour rendre les coins d'un polygone orthogonaux, faites un clic droit {rightclick} sur un bord du polygone et sélectionnez la commande **Carré** {orthogonalize} du menu d'édition.",
                 "modify_area_h": "Modifier des polygones",
                 "modify_area_dragnode": "Souvent, vous verrez que les polygones ne sont pas formés correctement, par exemple un bâtiment qui ne correspond pas à l'imagerie utilisée en fond. Pour ajuster la forme d'un polygone, faites d'abord un clic gauche {leftclick} pour le sélectionner. Tous les nœuds du polygone apparaîtront comme des petits cercles. Vous pourrez alors les déplacer.",
                 "modify_area_addnode": "Vous pouvez aussi créer de nouveaux nœuds le long d'un polygone soit en double-cliquant {leftclick}**x2** sur le bord de ce polygone, soit en déplaçant les petits triangles situés entre deux nœuds existants.",
@@ -1428,130 +1591,259 @@
                 "title": "Règles"
             },
             "no_issues": {
-                "message": "Tout a l'air correct",
-                "info": "Les problèmes seront affichés ici pendant que vous modifiez la carte"
+                "message": {
+                    "everything": "Tout a l'air correct",
+                    "everything_in_view": "Tout ce qui est visible a l'air correct",
+                    "edits": "Vos modifications ont l'air correctes",
+                    "edits_in_view": "Vos modifications visibles ont l'air correctes"
+                },
+                "hidden_issues": {
+                    "none": "Les problèmes détectés apparaîtront ici",
+                    "elsewhere": "Problèmes ailleurs : {count}",
+                    "other_features": "Problèmes avec d'autres éléments : {count}",
+                    "other_features_elsewhere": "Problèmes ailleurs avec d'autres éléments : {count}",
+                    "disabled_rules": "Problèmes pour des règles désactivées : {count}",
+                    "disabled_rules_elsewhere": "Problèmes ailleurs pour des règles désactivées : {count}",
+                    "ignored_issues": "Problèmes ignorés : {count}",
+                    "ignored_issues_elsewhere": "Problèmes ailleurs ignorés : {count}"
+                }
+            },
+            "options": {
+                "what": {
+                    "title": "Vérifications :",
+                    "edited": "Mes modifications",
+                    "all": "Tout"
+                },
+                "where": {
+                    "title": "Où :",
+                    "visible": "Visibles",
+                    "all": "Partout"
+                }
+            },
+            "suggested": "Corrections suggérées :",
+            "enable_all": "Tout activer",
+            "disable_all": "Tout désactiver",
+            "reset_ignored": "Remettre à zéro les problèmes ignorés ({count})",
+            "fix_one": {
+                "title": "corriger"
+            },
+            "fix_all": {
+                "title": "Tout corriger",
+                "annotation": "Plusieurs problèmes de validation corrigés."
             },
             "almost_junction": {
                 "title": "Jonctions imparfaites",
                 "message": "{feature} est très proche mais n'est pas connecté à {feature2}",
+                "tip": "Trouver des éléments qui devrait sans doute être connectés à d'autres éléments proches",
+                "self": {
+                    "message": "{feature} se termine très proche de lui-même mais sans connexion"
+                },
                 "highway-highway": {
-                    "tip": "Les routes qui se croisent devraient partager un point de jonction"
+                    "reference": "Les routes qui se croisent devraient partager un point de jonction."
+                }
+            },
+            "close_nodes": {
+                "title": "Points très proches",
+                "tip": "Trouver des paquets de points redondants",
+                "message": "Deux points de {way} sont très proches",
+                "reference": "Les points redondants sur une ligne devraient être fusionnés ou déplacés.",
+                "detached": {
+                    "message": "{feature} est trop près de {feature2}",
+                    "reference": "Des points séparés ne devraient pas partager le même emplacement."
                 }
             },
             "crossing_ways": {
                 "title": "Chemins se croisant",
                 "message": "{feature} croise {feature2}",
-                "tip": "Les routes, les voies de chemins de fers, les cours d'eau et les bâtiments ne devraient pas se croiser de manière ambigüe.",
+                "tip": "Trouver des éléments qui en croisent d'autres de manière incorrecte",
                 "building-building": {
-                    "tip": "Les bâtiments ne devraient pas se recouper, sauf sur des couches différentes."
+                    "reference": "Les bâtiments ne devraient pas se recouper, sauf sur des couches différentes."
                 },
                 "building-highway": {
-                    "tip": "Les routes qui croisent des bâtiments devraient utiliser des ponts, des tunnels, des couvertures ou des entrées."
+                    "reference": "Les routes qui croisent des bâtiments devraient utiliser des ponts, des tunnels, des couvertures ou des entrées."
                 },
                 "building-railway": {
-                    "tip": "Les voies de chemin de fer qui croisent des bâtiments devraient utiliser des ponts ou des tunnels."
+                    "reference": "Les voies de chemin de fer qui croisent des bâtiments devraient utiliser des ponts ou des tunnels."
                 },
                 "building-waterway": {
-                    "tip": "Les cours d'eau qui croisent des bâtiments devraient utiliser des tunnels ou d'autres couches."
+                    "reference": "Les cours d'eau qui croisent des bâtiments devraient utiliser des tunnels ou d'autres couches."
                 },
                 "highway-highway": {
-                    "tip": "Les routes qui se croisent devraient utiliser des ponts, des tunnels ou des intersections."
+                    "reference": "Les routes qui se croisent devraient utiliser des ponts, des tunnels ou des intersections."
                 },
                 "highway-railway": {
-                    "tip": "Les routes qui croisent des voies de chemin de fer devraient utiliser des ponts, des tunnels ou des passages à niveau."
+                    "reference": "Les routes qui croisent des voies de chemin de fer devraient utiliser des ponts, des tunnels ou des passages à niveau."
                 },
                 "highway-waterway": {
-                    "tip": "Les routes qui croisent des cours d'eau devraient utiliser des ponts, des tunnels ou des gués."
+                    "reference": "Les routes qui croisent des cours d'eau devraient utiliser des ponts, des tunnels ou des gués."
                 },
                 "railway-railway": {
-                    "tip": "Les voies de chemin de fer qui se croisent devrait être connectées ou utiliser les ponts ou des tunnels."
+                    "reference": "Les voies de chemin de fer qui se croisent devrait être connectées ou utiliser les ponts ou des tunnels."
                 },
                 "railway-waterway": {
-                    "tip": "Les voies de chemin de fer qui croisent des cours d'eau devraient utiliser des ponts ou des tunnels."
+                    "reference": "Les voies de chemin de fer qui croisent des cours d'eau devraient utiliser des ponts ou des tunnels."
                 },
                 "waterway-waterway": {
-                    "tip": "Les cours d'eau qui se croisent devraient être connecter ou utiliser des tunnels."
+                    "reference": "Les cours d'eau qui se croisent devraient être connecter ou utiliser des tunnels."
                 },
                 "tunnel-tunnel": {
-                    "tip": "Les tunnels qui se croisent devraient utiliser des couches différentes."
+                    "reference": "Les tunnels qui se croisent devraient utiliser des couches différentes."
                 },
                 "tunnel-tunnel_connectable": {
-                    "tip": "Les tunnels qui se croisent devraient être connectés ou utiliser des couches différentes."
+                    "reference": "Les tunnels qui se croisent devraient être connectés ou utiliser des couches différentes."
                 },
                 "bridge-bridge": {
-                    "tip": "Les ponts qui se croisent devraient utiliser des couches différentes."
+                    "reference": "Les ponts qui se croisent devraient utiliser des couches différentes."
                 },
                 "bridge-bridge_connectable": {
-                    "tip": "Les ponts qui se croisent devraient être connectés ou utiliser des couches différentes."
+                    "reference": "Les ponts qui se croisent devraient être connectés ou utiliser des couches différentes."
                 },
                 "indoor-indoor": {
-                    "tip": "Les éléments intérieurs se croisant doivent utiliser des niveaux différents."
+                    "reference": "Les éléments intérieurs se croisant doivent utiliser des niveaux différents."
                 },
                 "indoor-indoor_connectable": {
-                    "tip": "Les éléments intérieurs se croisant devraient être connectés ou utiliser des niveaux différents"
+                    "reference": "Les éléments intérieurs se croisant devraient être connectés ou utiliser des niveaux différents"
                 }
-            },
-            "deprecated_tag": {
-                "title": "Attributs obsolètes",
-                "single": {
-                    "message": "{feature} utilise l'attribut obsolète « {tag} »"
-                },
-                "combination": {
-                    "message": "{feature} utilise une combinaison d'attributs obsolète : {tags}"
-                },
-                "tip": "Certains attributs deviennent obsolètes avec le temps et devraient être remplacés."
             },
             "disconnected_way": {
                 "title": "Lignes déconnectés",
+                "tip": "Trouver des routes, des chemins et des trajets de ferry non routables",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} éléments routables ne sont connectés qu'à eux-même."
+                    },
+                    "reference": "Toutes les routes, chemins et trajets de ferry devraient être connectés pour former un seul réseau routable."
+                },
                 "highway": {
-                    "message": "{highway} est déconnectée des autres routes et chemins",
-                    "tip": "Les routes devraient être connectées à d'autres routes ou à des entrées de bâtiments."
+                    "message": "{highway} est déconnectée des autres routes et chemins"
                 }
             },
-            "generic_name": {
-                "title": "Noms génériques",
-                "message": "{feature} possède le nom générique « {name} »",
-                "tip": "Les noms devraient être le nom réel de l'élément sur le terrain."
+            "fixme_tag": {
+                "title": "Demandes de correction",
+                "message": "{feature} a une demande de correction",
+                "tip": "Trouver des éléments avec un attribut « fixme »",
+                "reference": "L'attribut « fixme » indique que le cartographe demande de l'aide pour cet élément."
             },
-            "many_deletions": {
-                "title": "Multiples suppressions",
-                "points-lines-areas": {
-                    "message": "Suppression de {n} éléments : {p} points, {l} lignes et {a} polygones"
+            "generic_name": {
+                "title": "Noms suspects",
+                "message": "{feature} possède le nom suspect « {name} »",
+                "tip": "Trouver des éléments avec des noms génériques ou suspects",
+                "reference": "Les noms devraient être le nom réel de l'élément sur le terrain."
+            },
+            "incompatible_source": {
+                "title": "Sources suspectes",
+                "tip": "Trouver des éléments avec un attribut source suspect",
+                "google": {
+                    "feature": {
+                        "message": "{feature} utilise Google comme source de données"
+                    },
+                    "reference": "Les produits de Google ne sont pas libres de droits et ne doivent pas être utilisés comme référence."
+                }
+            },
+            "invalid_format": {
+                "title": "Format invalide",
+                "tip": "Trouver des attributs avec des formats inattendus",
+                "email": {
+                    "message": "{feature} a une adresse de courriel invalide.",
+                    "message_multi": "{feature} a plusieurs adresses de courriel invalides.",
+                    "reference": "Les adresses de courriel doivent ressembler à « utilisateur@exemple.com »."
                 },
-                "points-lines-areas-relations": {
-                    "message": "Suppression de {n} éléments : {p} points, {l} lignes, {a} polygones et {r} relations"
-                },
-                "tip": "Seuls les éléments redondants ou inexistants devraient être supprimés."
+                "website": {
+                    "message": "{feature} a un site web invalide.",
+                    "message_multi": "{feature} a plusieurs sites web invalides.",
+                    "reference": "Les sites web doivent commencer par « http » ou « https »."
+                }
             },
             "missing_role": {
                 "title": "Rôles manquants",
                 "message": "{member} n'a pas de rôle dans {relation}",
+                "tip": "Trouver des relations avec des membres dont le rôle manque ou est incorrect",
                 "multipolygon": {
-                    "tip": "Les membres du multipolygone doivent avoir un rôle intérieur ou extérieur."
+                    "reference": "Les membres du multipolygone doivent avoir un rôle intérieur ou extérieur."
                 }
             },
             "missing_tag": {
                 "title": "Attributs manquants",
+                "tip": "Trouver des éléments sans attribut descriptifs",
+                "reference": "Les éléments doivent avoir un attribut qui définit ce qu'ils sont.",
                 "any": {
                     "message": "{feature} n'a pas d'attribut"
                 },
                 "descriptive": {
                     "message": "{feature} n'a aucun attribut descriptif"
                 },
-                "specific": {
-                    "message": "{feature} n'a pas d'attribut « {tag} »"
-                },
-                "tip": "Les éléments doivent avoir un attribut qui définit ce qu'ils sont."
+                "relation_type": {
+                    "message": "{feature} est une relation sans type"
+                }
             },
             "old_multipolygon": {
-                "title": "Attributs de multipolygone mal placés",
                 "message": "{multipolygon} a des attributs mal placés",
-                "tip": "Les attributs des multipolygones devraient se trouver sur leur relation, pas sur leur ligne extérieure."
+                "reference": "Les attributs des multipolygones devraient se trouver sur leur relation, pas sur leur ligne extérieure."
+            },
+            "outdated_tags": {
+                "title": "Attributs obsolètes",
+                "message": "{feature} utilise des attributs obsolètes",
+                "tip": "Trouver des éléments avec des attributs obsolètes qui peuvent être mis à jour",
+                "reference": "Certains attributs changent au fil du temps et devraient être remplacés.",
+                "incomplete": {
+                    "message": "{feature} a des attributs incomplets",
+                    "reference": "Certains éléments devraient avoir des attributs supplémentaires."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} ressemble à une marque avec des attributs non standards",
+                    "reference": "Tous les éléments de la même marque devraient être renseignés de la même manière."
+                }
+            },
+            "private_data": {
+                "title": "Informations privées",
+                "tip": "Trouver des éléments qui peuvent contenir des informations personnelles",
+                "reference": "Les données sensibles comme les numéros de téléphones personnels ne devraient pas être renseignées.",
+                "contact": {
+                    "message": "{feature} pourrait contenir des attributs avec des informations de contact privées"
+                }
             },
             "tag_suggests_area": {
                 "title": "Lignes en tant que surface",
                 "message": "{feature} devrait être un polygone fermé d'après l'attribut « {tag} »",
-                "tip": "Les polygones doivent avoir deux points connectés."
+                "tip": "Trouver des éléments qui sont indiqués comme des lignes mais qui devrait sans doute être indiqués comme des surfaces",
+                "reference": "Les polygones doivent avoir deux points connectés."
+            },
+            "unknown_road": {
+                "message": "{feature} n'a pas de classification",
+                "reference": "Les routes sans type spécifique peuvent ne pas apparaître sur les cartes ou pour le routage."
+            },
+            "impossible_oneway": {
+                "title": "Sens-uniques impossibles",
+                "tip": "Trouver des problèmes de routage avec les éléments en sens-unique",
+                "waterway": {
+                    "connected": {
+                        "start": {
+                            "message": "{feature} s'éloigne d'un cours d'eau auquel il est connecté"
+                        },
+                        "end": {
+                            "message": "{feature} coule à contre-courant d'un cours d'eau connnecté"
+                        },
+                        "reference": "Les segments de cours d'eau devraient tous couler dans la même direction."
+                    }
+                },
+                "highway": {
+                    "start": {
+                        "message": "{feature} est inatteignable",
+                        "reference": "Les routes en sens-unique doivent être accessible depuis d'autres routes."
+                    },
+                    "end": {
+                        "message": "{feature} n'a pas de sortie",
+                        "reference": "Les routes en sens-unique doivent rejoindre d'autres routes."
+                    }
+                }
+            },
+            "unsquare_way": {
+                "title": "Coins non orthogonaux (jusqu'à {val}°)",
+                "message": "{feature} a des coins non orthogonaux",
+                "tip": "Trouver des élément avec des coins non orthogonaux qui peuvent être améliorés",
+                "buildings": {
+                    "reference": "Les bâtiments avec des coins non orthogonaux peuvent souvent être améliorés."
+                }
             },
             "fix": {
                 "connect_almost_junction": {
@@ -1563,6 +1855,9 @@
                 "connect_endpoints": {
                     "title": "Connecter le bout",
                     "annotation": "Bouts de la ligne connectés."
+                },
+                "connect_feature": {
+                    "title": "Connecter cet élément"
                 },
                 "connect_features": {
                     "title": "Connecter les éléments"
@@ -1576,15 +1871,21 @@
                 "delete_feature": {
                     "title": "Supprimer cet élément"
                 },
+                "ignore_issue": {
+                    "title": "Ignorer ce problème"
+                },
+                "merge_close_vertices": {
+                    "annotation": "Points très proches sur une ligne fusionnés."
+                },
+                "merge_points": {
+                    "title": "Fusionner ces points"
+                },
+                "move_points_apart": {
+                    "title": "Déplacer ces points"
+                },
                 "move_tags": {
                     "title": "Déplacer les attributs",
                     "annotation": "Attributs déplacés."
-                },
-                "remove_deprecated_tag": {
-                    "annotation": "Ancien attribut supprimé."
-                },
-                "remove_deprecated_tag_combo": {
-                    "annotation": "Ancienne combinaison d'attributs supprimée."
                 },
                 "remove_from_relation": {
                     "title": "Supprimer de la relation"
@@ -1592,6 +1893,12 @@
                 "remove_generic_name": {
                     "title": "Supprimer le nom",
                     "annotation": "Nom générique supprimé."
+                },
+                "remove_private_info": {
+                    "annotation": "Informations privées supprimées"
+                },
+                "remove_proprietary_data": {
+                    "title": "Supprimer les données non-libres"
                 },
                 "remove_tag": {
                     "title": "Supprimer l'attribut",
@@ -1603,8 +1910,14 @@
                 "reposition_features": {
                     "title": "Repositionner l'élément"
                 },
+                "reverse_feature": {
+                    "title": "Inverser cet élément"
+                },
                 "select_preset": {
                     "title": "Choisir un type d'élément"
+                },
+                "select_road_type": {
+                    "title": "Choisir un type de route"
                 },
                 "set_as_inner": {
                     "title": "Indiquer comme intérieur"
@@ -1612,17 +1925,26 @@
                 "set_as_outer": {
                     "title": "Indiquer comme extérieur"
                 },
+                "square_feature": {
+                    "title": "Orthogonaliser cet élément"
+                },
                 "tag_as_disconnected": {
                     "title": "Indiquer qu'ils sont déconnectés",
                     "annotation": "Éléments très proches cartographiés comme étant déconnectés."
                 },
-                "upgrade_tag": {
-                    "title": "Mettre à jour l'attribut",
-                    "annotation": "Ancien attribut mis à jour."
+                "tag_as_unsquare": {
+                    "title": "Marquer comme physiquement non orthogonal",
+                    "annotation": "Marqué comme ayant des coins non orthogonaux."
                 },
-                "upgrade_tag_combo": {
+                "tag_this_as_higher": {
+                    "title": "Utiliser une valeur plus élevée"
+                },
+                "tag_this_as_lower": {
+                    "title": "Utiliser une valeur plus faible"
+                },
+                "upgrade_tags": {
                     "title": "Mettre à jour les attributs",
-                    "annotation": "Ancienne combinaison d'attributs mise à jour."
+                    "annotation": "Ancien attribut mis à jour."
                 },
                 "use_bridge_or_tunnel": {
                     "title": "Utiliser un pont ou un tunnel"
@@ -1867,7 +2189,7 @@
                 "close": "**Appuyez sur la touche d'échappement ou cliquez le bouton {button} pour fermer l'éditeur d'objet.**",
                 "rightclick_building": "**Faites un clic droit pour sélectionner le bâtiment que vous avez créé et afficher le menu d'édition.**",
                 "square_building": "La maison sera encore mieux tracée si les coins sont des angles droits. **Cliquez sur le bouton {button} pour ajuster automatiquement la forme du bâtiment avec des angles droits.**",
-                "retry_square": "Vous n'avez pas cliqué sur le bouton Carré / forme orthogonale. Réessayez.",
+                "retry_square": "Vous n'avez pas cliqué sur le bouton Carré. Réessayez.",
                 "done_square": "Voilà ! Les coins du bâtiment sont correctement positionnés. Voyons une autre astuce très utile…",
                 "add_tank": "Nous allons tracer ce réservoir rond. **Cliquez sur le bouton {button} Polygone pour ajouter un nouveau polygone.**",
                 "start_tank": "Comment tracer un cercle parfait ? Commencez par un polygone simple, avec seulement quelques nœuds bien placés sur le contour. **Cliquez ou appuyez sur la barre d'espace pour ajouter le premier nœud sur le contour du réservoir.**",
@@ -1938,6 +2260,7 @@
                     "fullscreen": "Passer en plein écran",
                     "sidebar": "Afficher/cacher barre latérale",
                     "wireframe": "Afficher/cacher le mode filaire",
+                    "osm_data": "Basculer la couche des données OpenStreetMap",
                     "minimap": "Afficher/cacher mini-carte"
                 },
                 "selecting": {
@@ -1965,10 +2288,12 @@
                 "title": "Édition",
                 "drawing": {
                     "title": "Tracés",
+                    "focus_add_feature": "Mettre le focus sur le champ de recherche d'élément",
                     "add_point": "Mode 'Ajouter un point'",
                     "add_line": "Mode 'Ajouter une ligne'",
                     "add_area": "Mode 'Ajouter un polygone'",
                     "add_note": "Mode 'Ajouter une note'",
+                    "add_favorite": "Ajouter un élément favori",
                     "place_point": "Placer un point ou une note",
                     "disable_snap": "Désactiver l'attraction des points à proximité",
                     "stop_line": "Terminer de tracer une ligne ou un polygone"
@@ -1978,12 +2303,13 @@
                     "continue_line": "Reprendre le tracé d'une ligne à partir du point sélectionné",
                     "merge": "Fusionner les éléments sélectionnés",
                     "disconnect": "Déconnecter les éléments au nœud sélectionné",
-                    "detach_node": "Séparer le nœud choisi de ses chemins ou polygones parents",
+                    "extract": "Extraire un point d'un élément",
                     "split": "Couper une ligne en deux au nœud sélectionné",
                     "reverse": "Inverser une ligne",
                     "move": "Déplacer les éléments sélectionnés",
                     "rotate": "Tourner les éléments sélectionnés",
-                    "orthogonalize": "Aligner les points d'une ligne / Ajuster les coins d'un polygone en angles droits",
+                    "orthogonalize": "Rendre les coins d'une ligne ou d'une surface orthogonaux",
+                    "straighten": "Aligner des points ou les points d'une ligne",
                     "circularize": "Rendre circulaire une ligne fermée ou un polygone",
                     "reflect_long": "Effectuer un miroir par rapport au grand axe",
                     "reflect_short": "Effectuer un miroir par rapport au petit axe",
@@ -2045,35 +2371,32 @@
                 "category-building": {
                     "name": "Types de bâtiments"
                 },
-                "category-golf-area": {
-                    "name": "Éléments de golfs"
-                },
-                "category-golf-line": {
+                "category-golf": {
                     "name": "Éléments de golfs"
                 },
                 "category-landuse": {
                     "name": "Types d'occupation des sols"
                 },
-                "category-natural-area": {
-                    "name": "Éléments naturels"
-                },
-                "category-natural-line": {
-                    "name": "Éléments naturels"
-                },
-                "category-natural-point": {
+                "category-natural": {
                     "name": "Éléments naturels"
                 },
                 "category-path": {
-                    "name": "Types de chemins"
+                    "name": "Chemins"
                 },
                 "category-rail": {
-                    "name": "Éléments ferroviaires"
+                    "name": "Voies ferrées"
                 },
                 "category-restriction": {
                     "name": "Types de restrictions"
                 },
-                "category-road": {
-                    "name": "Types de routes"
+                "category-road_major": {
+                    "name": "Routes principales"
+                },
+                "category-road_minor": {
+                    "name": "Routes secondaires"
+                },
+                "category-road_service": {
+                    "name": "Routes d'accès"
                 },
                 "category-route": {
                     "name": "Types d'itinéraires"
@@ -2081,11 +2404,11 @@
                 "category-utility": {
                     "name": "Éléments utilitaires"
                 },
-                "category-water-area": {
-                    "name": "Types d'étendues d'eau"
+                "category-water": {
+                    "name": "Étendues d'eau"
                 },
-                "category-water-line": {
-                    "name": "Types de cours d'eau"
+                "category-waterway": {
+                    "name": "Cours d'eau"
                 }
             },
             "fields": {
@@ -2219,6 +2542,9 @@
                 "agrarian": {
                     "label": "Produits"
                 },
+                "air_conditioning": {
+                    "label": "Climatisation"
+                },
                 "amenity": {
                     "label": "Type"
                 },
@@ -2324,6 +2650,10 @@
                 "building": {
                     "label": "Bâtiment "
                 },
+                "building/levels_building": {
+                    "label": "Nombre de niveaux",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Matériau"
                 },
@@ -2385,6 +2715,9 @@
                     "label": "Type de communication"
                 },
                 "construction": {
+                    "label": "Type"
+                },
+                "consulate": {
                     "label": "Type"
                 },
                 "contact/webcam": {
@@ -2481,7 +2814,7 @@
                     }
                 },
                 "dance/style": {
-                    "label": "Styles de dances"
+                    "label": "Styles de danses"
                 },
                 "date": {
                     "label": "Date"
@@ -2500,7 +2833,7 @@
                     "options": {
                         "no": "Aucun",
                         "realtime": "Temps réel",
-                        "timetable": "Horaires prévisionnelles",
+                        "timetable": "Horaires prévisionnels",
                         "yes": "Oui"
                     }
                 },
@@ -2528,6 +2861,12 @@
                 },
                 "diet_multi": {
                     "label": "Types de régimes"
+                },
+                "diplomatic": {
+                    "label": "Type"
+                },
+                "diplomatic/services": {
+                    "label": "Services diplomatiques"
                 },
                 "direction": {
                     "label": "Direction (en degrés dans le sens horaire)",
@@ -2562,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -2588,6 +2927,12 @@
                         "no": "Interdits",
                         "yes": "Autorisés"
                     }
+                },
+                "door": {
+                    "label": "Porte"
+                },
+                "door_type": {
+                    "label": "Type"
                 },
                 "drive_through": {
                     "label": "Service Drive"
@@ -2617,8 +2962,14 @@
                     "label": "Type",
                     "placeholder": "Défaut"
                 },
+                "embassy": {
+                    "label": "Type"
+                },
                 "emergency": {
                     "label": "Urgence"
+                },
+                "emergency_combo": {
+                    "label": "Type"
                 },
                 "enforcement": {
                     "label": "Type"
@@ -2660,6 +3011,9 @@
                 "fireplace": {
                     "label": "Cheminée"
                 },
+                "fishing": {
+                    "label": "Pêche"
+                },
                 "fitness_station": {
                     "label": "Type d'équipement "
                 },
@@ -2668,6 +3022,12 @@
                 },
                 "flag/type": {
                     "label": "Type de drapeau"
+                },
+                "floating": {
+                    "label": "Flottant"
+                },
+                "flood_prone": {
+                    "label": "Risque de crue"
                 },
                 "ford": {
                     "label": "Type",
@@ -2719,6 +3079,9 @@
                 "grape_variety": {
                     "label": "Cépages"
                 },
+                "guest_house": {
+                    "label": "Type"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
@@ -2738,6 +3101,12 @@
                 },
                 "height": {
                     "label": " Hauteur (Mètres)"
+                },
+                "height_building": {
+                    "label": "Hauteur du bâtiment (mètres)"
+                },
+                "highspeed": {
+                    "label": "Ligne à grande vitesse"
                 },
                 "highway": {
                     "label": "Type"
@@ -2813,6 +3182,9 @@
                 "indoor": {
                     "label": "Intérieur"
                 },
+                "indoor_type": {
+                    "label": "Type"
+                },
                 "industrial": {
                     "label": "Type"
                 },
@@ -2842,7 +3214,10 @@
                     "label": "Frais d'accès à Internet"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Nom du réseau)"
+                    "label": "Nom du réseau WiFi"
+                },
+                "interval": {
+                    "label": "Intervalle"
                 },
                 "junction/ref_oneway": {
                     "label": "Identifiant de l'embranchement"
@@ -2857,6 +3232,9 @@
                 },
                 "kerb": {
                     "label": "Aménagement de trottoir, Abaissement (bateau)"
+                },
+                "kerb/height": {
+                    "label": "Hauteur"
                 },
                 "label": {
                     "label": "Étiquette"
@@ -2921,11 +3299,14 @@
                     "label": "Longueur (mètres)"
                 },
                 "level": {
-                    "label": "Niveau"
+                    "label": "Niveau (étage)"
                 },
                 "levels": {
                     "label": "Nombre de niveaux",
                     "placeholder": "2, 4, 6..."
+                },
+                "liaison": {
+                    "label": "Type"
                 },
                 "lit": {
                     "label": "Éclairé"
@@ -2941,11 +3322,17 @@
                         "roof": "Sur le toit"
                     }
                 },
+                "lock": {
+                    "label": "Écluse"
+                },
                 "man_made": {
                     "label": "Type"
                 },
                 "manhole": {
                     "label": "Type"
+                },
+                "manufacturer": {
+                    "label": "Fabricant"
                 },
                 "map_size": {
                     "label": "Emprise, Couverture"
@@ -2974,8 +3361,14 @@
                 "maxweight": {
                     "label": "Charge maximale [kg]"
                 },
+                "maxweight_bridge": {
+                    "label": "Charge maximale [kg]"
+                },
                 "memorial": {
                     "label": "Type"
+                },
+                "microbrewery": {
+                    "label": "Micro-brasserie"
                 },
                 "minspeed": {
                     "label": "Vitesse minimale autorisée",
@@ -3096,7 +3489,8 @@
                     "label": "Date d'ouverture prévue"
                 },
                 "opening_hours": {
-                    "label": "Horaires d'ouverture"
+                    "label": "Horaires d'ouverture",
+                    "placeholder": "Inconnues"
                 },
                 "operator": {
                     "label": "Exploitant"
@@ -3124,6 +3518,9 @@
                     }
                 },
                 "payment_multi": {
+                    "label": "Types de paiement"
+                },
+                "payment_multi_fee": {
                     "label": "Types de paiement"
                 },
                 "phases": {
@@ -3245,6 +3642,9 @@
                     "label": "Puissance",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Type"
+                },
                 "playground/baby": {
                     "label": "Siège enfant"
                 },
@@ -3277,7 +3677,7 @@
                     "placeholder": "Distance à une décimale (123,4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -3320,6 +3720,9 @@
                 "ref_road_number": {
                     "label": "Identifiant de la route"
                 },
+                "ref_room_number": {
+                    "label": "Numéro de la pièce"
+                },
                 "ref_route": {
                     "label": "Identifiant de l'itinéraire"
                 },
@@ -3340,6 +3743,21 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "reservation": {
+                    "label": "Réservations",
+                    "options": {
+                        "no": "refusées",
+                        "recommended": "recommandées",
+                        "required": "requises",
+                        "yes": "acceptées"
+                    }
+                },
+                "resort": {
+                    "label": "Type"
+                },
+                "resource": {
+                    "label": "Ressources"
+                },
                 "restriction": {
                     "label": "Type"
                 },
@@ -3348,6 +3766,9 @@
                 },
                 "roof/colour": {
                     "label": "Couleur du toit"
+                },
+                "room": {
+                    "label": "Type"
                 },
                 "rooms": {
                     "label": "Chambres"
@@ -3375,6 +3796,10 @@
                 },
                 "sanitary_dump_station": {
                     "label": "Station de vidange sanitaire"
+                },
+                "screen": {
+                    "label": "Écrans",
+                    "placeholder": "1, 4, 8…"
                 },
                 "scuba_diving": {
                     "label": "Services"
@@ -3477,6 +3902,9 @@
                         "yes": "Oui"
                     },
                     "placeholder": "Oui, non, uniquement"
+                },
+                "self_service": {
+                    "label": "Libre service"
                 },
                 "service": {
                     "label": "Type"
@@ -3588,6 +4016,9 @@
                         "minor": "Seulement les routes mineures"
                     }
                 },
+                "street_cabinet": {
+                    "label": "Type"
+                },
                 "structure": {
                     "label": "Structure",
                     "options": {
@@ -3665,6 +4096,9 @@
                     },
                     "placeholder": "Oui, non, à emporter seulement…"
                 },
+                "target": {
+                    "label": "Cible"
+                },
                 "tidal": {
                     "label": "Sous l'influence de la marée"
                 },
@@ -3677,8 +4111,14 @@
                         "bucket": "Seau/contenant vidé manuellement",
                         "chemical": "Produit chimique dans une fosse avec revêtement",
                         "flush": "Chasse d'eau, entraînement par liquide",
-                        "pitlatrine": "Latrines, fosse/trou"
+                        "pitlatrine": "Toilette sèche"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Lavabo"
+                },
+                "toilets/position": {
+                    "label": "Positions"
                 },
                 "toll": {
                     "label": "Droit de péage"
@@ -3717,7 +4157,7 @@
                     "label": "Panneau de signalisation"
                 },
                 "traffic_sign/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux/toutes",
@@ -3728,7 +4168,7 @@
                     "label": "Feu de signalisation spécifique"
                 },
                 "traffic_signals/direction": {
-                    "label": "Direction",
+                    "label": "Direction affectée",
                     "options": {
                         "backward": "Vers l'arrière",
                         "both": "Les deux / Tous",
@@ -3762,6 +4202,12 @@
                 },
                 "trees": {
                     "label": "Arbres"
+                },
+                "trench": {
+                    "label": "Type"
+                },
+                "trolley_wire": {
+                    "label": "Câble pour trolley"
                 },
                 "tunnel": {
                     "label": "Type",
@@ -3913,13 +4359,17 @@
                     "name": "Transport par câble pour marchandises - si possible utiliser un type plus précis",
                     "terms": "Téléphérique pour marchandises"
                 },
+                "aerialway/j-bar": {
+                    "name": "Téléski mono-place",
+                    "terms": "téléski, teleski, pioches, remontée mécanique, remontee mecanique, J-bar lift"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Tapis roulant - sport d'hiver",
                     "terms": "Tapis roulant, remontée mécanique, remontee mecanique, Bande transporteuse de personnes, magic carpet, conveying"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "Télémix, Télécombi",
-                    "terms": "Télémix, Télécombi, télécabines et télésièges, telecabines et telesieges, mixed lift"
+                    "name": "Téléporté mixte",
+                    "terms": "Télémix, Télécombi, télécabines et télésièges, telecabines et telesieges, mixed lift, teleporte mixte, télésiège"
                 },
                 "aerialway/platter": {
                     "name": "Téléski monoplace",
@@ -3939,6 +4389,10 @@
                 "aerialway/t-bar": {
                     "name": "Téléski bi-place",
                     "terms": "téléski, teleski, pioches, remontée mécanique, remontee mecanique, T-bar lift"
+                },
+                "aerialway/zip_line": {
+                    "name": "Tyrolienne",
+                    "terms": "Câble aérien, câble de canopée, tyrolienne..."
                 },
                 "aeroway": {
                     "name": "Aviation"
@@ -3963,6 +4417,10 @@
                     "name": "Héliport",
                     "terms": "Hélipad, Héliport, helipad, heliport, hélicoptère, helicoptere"
                 },
+                "aeroway/jet_bridge": {
+                    "name": "Passerelle aéroportuaire",
+                    "terms": "passerelle aéroportuaire,passerelle d'embarquement,aéroport,embarquement,terminal"
+                },
                 "aeroway/runway": {
                     "name": "Piste d’atterrissage",
                     "terms": "Piste de décollage, Piste d'atterissage, Piste d'aéroport, piste"
@@ -3974,6 +4432,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal d'aéroport",
                     "terms": "Terminal"
+                },
+                "aeroway/windsock": {
+                    "name": "Manche à air",
+                    "terms": "manche à air,manche à vent,girouette,mât,cône,mat,cone"
                 },
                 "allotments/plot": {
                     "name": "Parcelle dans un jardin familial",
@@ -4010,6 +4472,10 @@
                     "name": "Bar",
                     "terms": "Bar, brasserie, café, pub"
                 },
+                "amenity/bar/lgbtq": {
+                    "name": "Bar LGBTQ+",
+                    "terms": "gay,bar,lesbien,lgbtq"
+                },
                 "amenity/bbq": {
                     "name": "Barbecue, grill",
                     "terms": "bbq, barbecue, grill, grillades, mechoui, méchoui, foyer, feu"
@@ -4021,6 +4487,18 @@
                 "amenity/bicycle_parking": {
                     "name": "Parking à vélos",
                     "terms": "Parc à vélos, Parking vélo, Parking à bicyclette, Stationnement à vélo, stationnement vélo, arceau à vélo, râtelier à vélo, rack à vélo, abri à vélo, vélo, velo, bicycle parking"
+                },
+                "amenity/bicycle_parking/building": {
+                    "name": "Garage de parking à vélos",
+                    "terms": "Parc à vélos,Parking à vélo, Parking à bicyclette, Stationnement à vélo"
+                },
+                "amenity/bicycle_parking/lockers": {
+                    "name": "Cabines à vélos",
+                    "terms": "Parc à vélos,Parking à vélo, Parking à bicyclette, Stationnement à vélo, vestiaires vélos,cabines vélos,casiers,lockers"
+                },
+                "amenity/bicycle_parking/shed": {
+                    "name": "Abri vélos",
+                    "terms": "Parc à vélos,Parking à vélo, Parking à bicyclette, Stationnement à vélo,abri à vélos,bâtiment pour vélos"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Location de vélos",
@@ -4109,9 +4587,17 @@
                     "name": "Salle polyvalente",
                     "terms": "salle des fêtes, salle festive, centre communautaire, maison de quartier, maison des associations, salle des associations, centre d'animation, salle des fetes, salle des fètes, salle polyvalente, community centre"
                 },
+                "amenity/community_centre/lgbtq": {
+                    "name": "Salle polyvalente LGBTQ+",
+                    "terms": "salle des fêtes, salle festive, centre communautaire, maison de quartier, maison des associations, salle des associations, centre d'animation, salle des fetes, salle des fètes, salle polyvalente, community centre,gay,lesbien,lgbtq"
+                },
                 "amenity/compressed_air": {
                     "name": "Air comprimé",
                     "terms": "Air comprimé, compressed air"
+                },
+                "amenity/conference_centre": {
+                    "name": "Centre de congrés",
+                    "terms": "centre de congrès,congrès,conférences,auditorium,présentations,expositions"
                 },
                 "amenity/courthouse": {
                     "name": "Tribunal",
@@ -4149,8 +4635,11 @@
                     "terms": "Auto-école, école de conduite, auto ecole, ecole de conduite, code de la route, permis de conduire, driving school"
                 },
                 "amenity/embassy": {
-                    "name": "Ambassade",
-                    "terms": "ambassade, diplomate, diplomatique, ambassadeur, consulat, consul, section consulaire, expatrié, passeport, embassy"
+                    "name": "Ambassade"
+                },
+                "amenity/events_venue": {
+                    "name": "Établissement accueillant des événements",
+                    "terms": "banquet,baptême,bar mitzvah,bat mitzvah,anniversaires,célébrations,conférences,confirmation,rencontres,fêtes,mariages"
                 },
                 "amenity/fast_food": {
                     "name": "Restauration rapide",
@@ -4164,9 +4653,16 @@
                     "name": "Fast food de poulet",
                     "terms": "poulet,kfc,fast-food"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "Fast food de donuts",
+                    "terms": "fast food, restauration rapide, service au comptoir, vente à emporter, à emporter, a emporter, donut"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Fast food de fish & chips",
                     "terms": "fish and chips,fish & chips,fast-food,poisson"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Fast food de glaces"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab",
@@ -4267,6 +4763,10 @@
                     "name": "Boîte de nuit",
                     "terms": "Boîte de nuit, Discothèque"
                 },
+                "amenity/nightclub/lgbtq": {
+                    "name": "Boîte de nuit LGBTQ+",
+                    "terms": "Boîte de nuit, Discothèque, lgbtq, gay, lesbien"
+                },
                 "amenity/nursing_home": {
                     "name": "Maison de repos"
                 },
@@ -4277,6 +4777,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Parking multi-niveau",
                     "terms": "Parking, Zone de Stationnement, Stationnement"
+                },
+                "amenity/parking/underground": {
+                    "name": "Parking souterrain",
+                    "terms": "parking souterrain,sous-terrain,souterrain,parc de stationnement souterrain,voiture,camion"
                 },
                 "amenity/parking_entrance": {
                     "name": "Entrée ou sortie de parking",
@@ -4313,6 +4817,17 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Église chrétienne",
                     "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Salle du Royaume des Témoins de Jéhovah"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Temple de la Luz del Mundo",
+                    "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte,temple"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Salle de réunion de la société religieuse des amis",
+                    "terms": "église,abbaye,basilique,chapelle,cathédrale,chrétien,catholique,lieu de culte,quaker,quakers,société des amis"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Temple hindou",
@@ -4354,6 +4869,10 @@
                     "name": "Bureau de poste",
                     "terms": "Bureau de poste"
                 },
+                "amenity/prep_school": {
+                    "name": "École préparatoire",
+                    "terms": "académique,école,devoirs,tests,examens,tutorat"
+                },
                 "amenity/prison": {
                     "name": "Prison",
                     "terms": "Prison, Terrains carcéraux, Pénitencier, Maison d'arrêt, Centre correctionnel, Centre de détention, Geôle."
@@ -4361,6 +4880,14 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "Pub"
+                },
+                "amenity/pub/lgbtq": {
+                    "name": "Pub LGBTQ+",
+                    "terms": "gay,pub,lesbien,lgbtq"
+                },
+                "amenity/pub/microbrewery": {
+                    "name": "brasserie-pub",
+                    "terms": "brasserie-pub,alcool,boissons,bière"
                 },
                 "amenity/public_bath": {
                     "name": "Bain public",
@@ -4383,7 +4910,7 @@
                 },
                 "amenity/recycling_container": {
                     "name": "Conteneur de recyclage",
-                    "terms": "recyclable,bouteille,canette,carton,verre,déchet,recyclage,poubelle"
+                    "terms": "recyclable,bouteille,canette,carton,verre,déchet,recyclage,poubelle,bulle à verre"
                 },
                 "amenity/register_office": {
                     "name": "Bureau d'état-civil"
@@ -4458,7 +4985,7 @@
                 },
                 "amenity/restaurant/turkish": {
                     "name": "Restaurant turc",
-                    "terms": "restaurant turque,café,bar"
+                    "terms": "restaurant turc,café,bar"
                 },
                 "amenity/restaurant/vietnamese": {
                     "name": "Restaurant vietnamien",
@@ -4488,7 +5015,7 @@
                     "terms": "Appentis, Abris fermé sur trois côtés"
                 },
                 "amenity/shelter/picnic_shelter": {
-                    "name": "Abris de picnic",
+                    "name": "Abris de pique-nique",
                     "terms": "pavillon"
                 },
                 "amenity/shelter/public_transport": {
@@ -4503,9 +5030,17 @@
                     "name": "Zone fumeur",
                     "terms": "zone fumeur,cigarette,fumer"
                 },
+                "amenity/social_centre": {
+                    "name": "Centre social",
+                    "terms": "centre social,événement,fraternité,hall,organisation,société,union"
+                },
                 "amenity/social_facility": {
                     "name": "Établissement de services sociaux",
                     "terms": "Assistance sociale, Services sociaux"
+                },
+                "amenity/social_facility/ambulatory_care": {
+                    "name": "Soins ambulatoires",
+                    "terms": "soins ambulatoires"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Banque alimentaire",
@@ -4550,9 +5085,21 @@
                     "name": "Toilettes publiques",
                     "terms": "Toilettes, WC"
                 },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Toilettes à chasse d'eau",
+                    "terms": "Chasse d'eau,entraînement par liquide"
+                },
+                "amenity/toilets/disposal/pitlatrine": {
+                    "name": "Toilette sèche",
+                    "terms": "toilette sèche"
+                },
                 "amenity/townhall": {
                     "name": "Mairie, hôtel de ville",
                     "terms": "Mairie,Hôtel de ville,Maison commune"
+                },
+                "amenity/toy_library": {
+                    "name": "Ludothèque",
+                    "terms": "ludothèqe,bibliothèque,jouets,jeux"
                 },
                 "amenity/university": {
                     "name": "Université, enseignement supérieur universitaire - institution ou campus",
@@ -4609,9 +5156,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Distributeur de glace",
                     "terms": "Distributeur de glace"
-                },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Distributeur de journaux"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Distributeur de journaux",
@@ -4685,8 +5229,8 @@
                     "terms": "manège,attraction,parc d'attraction"
                 },
                 "attraction/animal": {
-                    "name": "Animal",
-                    "terms": "animal,animaux,cage,lion,tigre,ours,zoo,parc zoologique,parc animalier"
+                    "name": "Enclos",
+                    "terms": "enclos,animal,animaux,cage,lion,tigre,ours,zoo,parc zoologique,parc animalier,safari"
                 },
                 "attraction/big_wheel": {
                     "name": "Grande Roue",
@@ -4760,6 +5304,10 @@
                     "name": "Grille à bétail",
                     "terms": "grille à bétail, barrière canadienne, passage canadien, pas canadien, bovistop, grille a betail, grille bétail, barres à bétail, barres à animaux, bétail, piétons, randonneurs, animaux, animal, vache, cheval, barres fosse, vide, trou, cattle grid, grid cattle"
                 },
+                "barrier/chain": {
+                    "name": "Chaîne",
+                    "terms": "chaîne"
+                },
                 "barrier/city_wall": {
                     "name": "Mur d'enceinte",
                     "terms": "remparts, mur d'enceinte, murs d'enceinte, murailles, fortifications, cité fortifiée, ville fortifiée, enceinte fortifiée, ouvrage de défense, défenses, forteresse, bastion, fortifiée, donjon, tours, tour de garde, tour de guet, enceinte, city wall, wall city"
@@ -4795,6 +5343,10 @@
                     "name": "Haie",
                     "terms": "haie, arbustes, arbres, plantes, buisson, clôture, brise-vent, rangée, broussaille, bordure, cloture, buis, ifs, barrier hedge, hedge"
                 },
+                "barrier/height_restrictor": {
+                    "name": "Limiteur de hauteur",
+                    "terms": "limite de hauteur,limiteur de hauteur,barrière"
+                },
                 "barrier/kerb": {
                     "name": "Trottoir",
                     "terms": "trottoir,bord"
@@ -4806,6 +5358,14 @@
                 "barrier/kerb/lowered": {
                     "name": "Bordure de trottoir abaissée",
                     "terms": "abaissement de trottoir,bateau,bordure abaissée,rampe d'accès,plan incliné,charretière"
+                },
+                "barrier/kerb/raised": {
+                    "name": "Bordure de trottoir relevée",
+                    "terms": "trottoir,bord,relèvement de trottoir,trottoir relevé"
+                },
+                "barrier/kerb/rolled": {
+                    "name": "Bordure de trottoir creusée",
+                    "terms": "rolled,creusée,égouts,gouttière,caniveaux"
                 },
                 "barrier/kissing_gate": {
                     "name": "Portillon à chicane mobile",
@@ -4819,6 +5379,10 @@
                     "name": "Mur de soutènement",
                     "terms": "mur de soutènement, mur de retenue, retenue, restanque, faisse, rideau, retaining wall, érosion, éboulement, glissement de terrain"
                 },
+                "barrier/sally_port": {
+                    "name": "Entrée fortifiée",
+                    "terms": "entrée fortifiée,poterne"
+                },
                 "barrier/stile": {
                     "name": "Échalier",
                     "terms": "échalier, echalier, escalier, échelle, passerelle, franchissement, passage, enclos, haie, bétail, piétons, randonneurs, stile"
@@ -4826,6 +5390,10 @@
                 "barrier/toll_booth": {
                     "name": "Poste de péage",
                     "terms": "péage, péage routier, péage autoroutier, poste de péage, barrière de péage, gare de péage, zone de péage, bureau de péage, pont à péage, agent de péage, peage, route à péage, autoroute, taxe, toll booth"
+                },
+                "barrier/turnstile": {
+                    "name": "Tourniquet",
+                    "terms": "tourniquet,portillon d'accès,barrière"
                 },
                 "barrier/wall": {
                     "name": "Mur",
@@ -4940,6 +5508,10 @@
                     "name": "Serre",
                     "terms": "serre, culture sous serre, serriculture, serre-tunnel, tunnel serre, jardin d'hiver, orangerie, verrière, véranda, structure en verre, greenhouse, glasshouse"
                 },
+                "building/hangar": {
+                    "name": "Hangar",
+                    "terms": "Bâtiment,hangar,batiment"
+                },
                 "building/hospital": {
                     "name": "Bâtiment d'Hôpital",
                     "terms": "Hôpital, Clinique"
@@ -4951,6 +5523,10 @@
                 "building/house": {
                     "name": "Maison",
                     "terms": "maison mitoyenne, maison de ville, maison en rangée, maison en bande, maisons mitoyennes, maisons de ville, maisons en rangée, maisons en bande, logements, résidences, habitations, maisons, building house, house"
+                },
+                "building/houseboat": {
+                    "name": "Bateau habitable",
+                    "terms": "bateau habitable,péniche,maison flottante"
                 },
                 "building/hut": {
                     "name": "Hutte",
@@ -4970,7 +5546,7 @@
                 },
                 "building/pavilion": {
                     "name": "Pavillon",
-                    "terms": "pavillon,kioske"
+                    "terms": "pavillon,kiosque"
                 },
                 "building/public": {
                     "name": "Bâtiment public",
@@ -5043,16 +5619,20 @@
                     "name": "Entrepôt",
                     "terms": "Entrepôt, magasin, abri, dépôt, docks, hangar"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Terrain de camping",
-                    "terms": "Emplacement de camping"
+                "building_part": {
+                    "name": "Partie de bâtiment",
+                    "terms": "bâtiment,toit,3D"
                 },
-                "circular": {
-                    "name": "Rond-point"
+                "building_point": {
+                    "name": "Bâtiment "
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Parcelle dans un camping",
+                    "terms": "Emplacement de camping"
                 },
                 "club": {
                     "name": "Club",
-                    "terms": "Club"
+                    "terms": "Club,association,mouvement de jeunesse,scout,guide"
                 },
                 "club/sport": {
                     "name": "Club de sport",
@@ -5061,6 +5641,10 @@
                 "craft": {
                     "name": "Artisanat",
                     "terms": "Artisanat"
+                },
+                "craft/agricultural_engines": {
+                    "name": "Mécaniciens pour engins agricoles",
+                    "terms": "engins agricoles,mécanicien pour engins agricoles,agriculture,tracteur"
                 },
                 "craft/basket_maker": {
                     "name": "Vannier",
@@ -5108,7 +5692,7 @@
                 },
                 "craft/confectionery": {
                     "name": "Confiseur",
-                    "terms": "Confisier, confiseur, fabricant de bonbons"
+                    "terms": "Confiserie, confiseur, bonbons, fabricant de bonbons, biscuits, biscuiterie"
                 },
                 "craft/distillery": {
                     "name": "Distillerie",
@@ -5125,6 +5709,10 @@
                 "craft/electronics_repair": {
                     "name": "Service de réparation électronique",
                     "terms": "réparation électronique, maintenance électronique, réparateur électronique, magasin d'électronique, réparation de téléphone, réparation d'appareil photo, réparation de téléviseur, réparation d'électroménager, réparation d'ordinateur, réparation de caméra, craft electronics repair, electronics repair, electronics, repair"
+                },
+                "craft/floorer": {
+                    "name": "Poseur de sol",
+                    "terms": "poseur de sol,parquet,sol"
                 },
                 "craft/gardener": {
                     "name": "Jardinier",
@@ -5149,6 +5737,10 @@
                 "craft/jeweler": {
                     "name": "Bijoutier"
                 },
+                "craft/joiner": {
+                    "name": "Menuisier",
+                    "terms": "menuisier,meubles"
+                },
                 "craft/key_cutter": {
                     "name": "Reproduction de clés",
                     "terms": "Reproduction de clés"
@@ -5166,6 +5758,10 @@
                 "craft/painter": {
                     "name": "Peintre",
                     "terms": "Peintre"
+                },
+                "craft/parquet_layer": {
+                    "name": "Poseur de parquet",
+                    "terms": "poseur de parquet,parquet,pose de parquet"
                 },
                 "craft/photographer": {
                     "name": "Photographe",
@@ -5253,6 +5849,9 @@
                 "embankment": {
                     "name": "Terre-plein"
                 },
+                "emergency": {
+                    "name": "Éléments de secours"
+                },
                 "emergency/ambulance_station": {
                     "name": "Station d'ambulance",
                     "terms": "Station d'ambulance"
@@ -5274,6 +5873,10 @@
                 "emergency/fire_extinguisher": {
                     "name": "Extincteur d'incendie",
                     "terms": "Extincteur, incendie, feu, poudre, mousse"
+                },
+                "emergency/fire_hose": {
+                    "name": "Tuyau d'incendie",
+                    "terms": "tuyau d'incendie,lance à incendie,canon à eau"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Borne incendie",
@@ -5329,10 +5932,6 @@
                 },
                 "golf/cartpath": {
                     "name": "chemin pour charriot de golf",
-                    "terms": "charriot,golf,chemin,parcours de golf,terrain de golf"
-                },
-                "golf/cartpath_service": {
-                    "name": "voie de service pour charriot de golf",
                     "terms": "charriot,golf,chemin,parcours de golf,terrain de golf"
                 },
                 "golf/driving_range": {
@@ -5457,6 +6056,9 @@
                     "name": "Couloir intérieur",
                     "terms": "Corridor intérieur"
                 },
+                "highway/crossing": {
+                    "name": "Passage piéton"
+                },
                 "highway/crossing/marked": {
                     "name": "Passage piéton marqué",
                     "terms": "zebra,marquage,passage piéton"
@@ -5483,9 +6085,28 @@
                     "name": "Voie cyclable",
                     "terms": "Piste cyclable"
                 },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Chemin piéton et cyclable",
+                    "terms": "piéton,cycliste,vélo,partagé"
+                },
+                "highway/cycleway/crossing": {
+                    "name": "Passage cycliste"
+                },
+                "highway/cycleway/crossing/marked": {
+                    "name": "Passage cycliste marqué",
+                    "terms": "passage cycliste,passage piéton,passage clouté"
+                },
+                "highway/cycleway/crossing/unmarked": {
+                    "name": "Passage cycliste non marqué",
+                    "terms": "passage piéton,passage cycliste"
+                },
                 "highway/elevator": {
                     "name": "Ascenseur",
                     "terms": "ascenseur, élévateur, monte-charge, elevator, lift"
+                },
+                "highway/emergency_bay": {
+                    "name": "Refuge pour automobile",
+                    "terms": "refuge automobile,bande d'arrêt d'urgence,urgence,arrêt"
                 },
                 "highway/footway": {
                     "name": "Chemin piéton",
@@ -5494,6 +6115,9 @@
                 "highway/footway/conveying": {
                     "name": "Tapis roulant",
                     "terms": "tapis roulant"
+                },
+                "highway/footway/crossing": {
+                    "name": "Passage piéton"
                 },
                 "highway/footway/marked": {
                     "name": "Passage piéton marqué",
@@ -5665,6 +6289,10 @@
                     "name": "Feux tricolores",
                     "terms": "Feux de circulation, Feux tricolores, Feux rouges"
                 },
+                "highway/trailhead": {
+                    "name": "Début du sentier",
+                    "terms": "Début, Démarrage, Point de départ du sentier"
+                },
                 "highway/trunk": {
                     "name": "Voie rapide",
                     "terms": "Voie rapide, voie express"
@@ -5701,9 +6329,37 @@
                     "name": "Château",
                     "terms": "Château"
                 },
+                "historic/castle/fortress": {
+                    "name": "Forteresse historique",
+                    "terms": "forteresse historique,site historique,citadelle,militaire"
+                },
+                "historic/castle/palace": {
+                    "name": "Palace",
+                    "terms": "palace,palais,résidence royale,roi,reine"
+                },
+                "historic/castle/stately": {
+                    "name": "Château non fortifié",
+                    "terms": "château,renaissance,noble,roi,reine,palais"
+                },
+                "historic/city_gate": {
+                    "name": "Porte de la ville",
+                    "terms": "portail, porte, passage, ouverture, entrée, portillon, entree, barrière, barriere, fermeture, barrier gate, gate, ville"
+                },
+                "historic/fort": {
+                    "name": "Fort historique",
+                    "terms": "fort historique,site historique,fort,fortifications,militaire"
+                },
+                "historic/manor": {
+                    "name": "Manoir",
+                    "terms": "site historique,manoir,noble,maison"
+                },
                 "historic/memorial": {
                     "name": "Mémorial",
                     "terms": "Mémorial, Monument aux morts, statue, buste, stèle, plaque"
+                },
+                "historic/memorial/plaque": {
+                    "name": "Plaque commémorative",
+                    "terms": "épitaphe,marque historique,historique,souvenir,mémoire,plaque historique"
                 },
                 "historic/monument": {
                     "name": "Grand monument commémoratif",
@@ -5729,6 +6385,32 @@
                     "name": "Épave de bateau",
                     "terms": "Épave,mat,coque"
                 },
+                "indoor": {
+                    "name": "Élément intérieur"
+                },
+                "indoor/area": {
+                    "name": "Zone en intérieur",
+                    "terms": "zone en intérieur,surface intérieure,intérieur"
+                },
+                "indoor/corridor": {
+                    "name": "Couloir intérieur",
+                    "terms": "couloir intérieur,hall,passage"
+                },
+                "indoor/corridor_line": {
+                    "name": "Couloir intérieur"
+                },
+                "indoor/door": {
+                    "name": "Porte en intérieur",
+                    "terms": "porte en intérieur,encadrement,passage,accès"
+                },
+                "indoor/room": {
+                    "name": "Pièce",
+                    "terms": "pièce en intérieur,antichambre,atrium,chambre,foyer,intérieur"
+                },
+                "indoor/wall": {
+                    "name": "Mur en intérieur",
+                    "terms": "mur en intérieur,barrière,séparateur,intérieur"
+                },
                 "internet_access/wlan": {
                     "name": "Hotspot Wi-Fi",
                     "terms": "wifi,wi-fi,hotspot,wlan,borne,point d'accès"
@@ -5736,6 +6418,15 @@
                 "junction": {
                     "name": "Jonction routière",
                     "terms": "Jonction routière, Jonction, Carrefour, Intersection routière,  Intersection"
+                },
+                "junction/circular": {
+                    "name": "Carrefour giratoire"
+                },
+                "junction/jughandle": {
+                    "name": "Tourne-à-gauche"
+                },
+                "junction/roundabout": {
+                    "name": "Rond-point"
                 },
                 "landuse": {
                     "name": "Utilisation du sol"
@@ -5838,14 +6529,6 @@
                     "name": "Caserne militaire",
                     "terms": "Caserne militaire"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunker",
-                    "terms": "Bunker, Casemate"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Poste de contrôle militaire",
-                    "terms": "Poste de contrôle,Point de contrôle"
-                },
                 "landuse/military/danger_area": {
                     "name": "Zone dangereuse",
                     "terms": "Zone dangereuse"
@@ -5854,17 +6537,9 @@
                     "name": "Base Navale",
                     "terms": "Base navale"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Site d'explosion nucléaire",
-                    "terms": "Site d'explosion nucléaire"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Parcours du combattant",
                     "terms": "Course d'obstacles"
-                },
-                "landuse/military/office": {
-                    "name": "Bureau Militaire",
-                    "terms": "Bureau militaire, Bureau de recrutement militaire,"
                 },
                 "landuse/military/range": {
                     "name": "Stand de tir militaire",
@@ -5920,6 +6595,10 @@
                     "name": "Vigne",
                     "terms": "Vignes"
                 },
+                "landuse/winter_sports": {
+                    "name": "Aire de sports d'hiver",
+                    "terms": "ski, nordique, fond, alpin, descente, snowboard, randonnée, rando, luge, traîneau, ski-joring, husky, cheval, raquette, piéton, glace, patin à glace"
+                },
                 "leisure": {
                     "name": "Loisirs"
                 },
@@ -5960,12 +6639,20 @@
                     "terms": "piste de danse,salle de bal,dancing"
                 },
                 "leisure/dancing_school": {
-                    "name": "École de dance",
-                    "terms": "école de dance,swing,tango,valse,dance"
+                    "name": "École de danse",
+                    "terms": "école de danse,swing,tango,valse,danse"
+                },
+                "leisure/disc_golf_course": {
+                    "name": "Parcours de disc golf",
+                    "terms": "Golf, Terrain de golf, Parcours de golf, disk golf"
                 },
                 "leisure/dog_park": {
                     "name": "Parc canin",
                     "terms": "Parc canin, parc à chiens"
+                },
+                "leisure/escape_game": {
+                    "name": "Escape game",
+                    "terms": "escape game,escape room,puzzle room,quest room"
                 },
                 "leisure/firepit": {
                     "name": "Foyer",
@@ -6123,6 +6810,13 @@
                     "name": "Terrain d'équitation",
                     "terms": "Terrain d'équitation"
                 },
+                "leisure/pitch/field_hockey": {
+                    "name": "Terrain de hockey sur gazon"
+                },
+                "leisure/pitch/horseshoes": {
+                    "name": "Fer à cheval (jeu)",
+                    "terms": "Fer à cheval,lancer de fer"
+                },
                 "leisure/pitch/netball": {
                     "name": "Court de netball",
                     "terms": "court de netball,netball,terrain de netball"
@@ -6134,6 +6828,10 @@
                 "leisure/pitch/rugby_union": {
                     "name": "Terrain de rugby à XV",
                     "terms": "Rugby"
+                },
+                "leisure/pitch/shuffleboard": {
+                    "name": "Shuffleboard",
+                    "terms": "Shuffleboard,deck shuffleboard,shuffle-board,shovelboard,shove-board,palets,palette"
                 },
                 "leisure/pitch/skateboard": {
                     "name": "Skatepark",
@@ -6175,6 +6873,10 @@
                     "name": "Cale de mise à l'eau",
                     "terms": "Cale de lancement, Cale, Cale de mise à l'eau, Rampe de mise à l'eau"
                 },
+                "leisure/slipway_point": {
+                    "name": "Cale de mise à l'eau",
+                    "terms": "cale de mise à l'eau,lancement,bateau,rampe,mise à l'eau,pente"
+                },
                 "leisure/sports_centre": {
                     "name": "Centre sportif",
                     "terms": "complexe sportif,salle de sport"
@@ -6191,6 +6893,10 @@
                     "name": "Stade",
                     "terms": "Stade"
                 },
+                "leisure/swimming_area": {
+                    "name": "Lieu de baignade",
+                    "terms": "lieu de baignade,eau,lac,aquatique,plongée"
+                },
                 "leisure/swimming_pool": {
                     "name": "Piscine",
                     "terms": "Piscine"
@@ -6199,13 +6905,29 @@
                     "name": "Piste de course (hors sports mécaniques)",
                     "terms": "Piste hippique,piste d'athlétisme"
                 },
+                "leisure/track/cycling": {
+                    "name": "Piste de cyclisme",
+                    "terms": "piste de cyclisme,cyclisme,piste,course,vélodrome"
+                },
+                "leisure/track/cycling_point": {
+                    "name": "Piste de cyclisme",
+                    "terms": "piste de cyclisme,cyclisme,piste,course,vélodrome"
+                },
                 "leisure/track/horse_racing": {
-                    "name": "Piste de course (chevaux)",
-                    "terms": "chevaux,équitation,course hippique"
+                    "name": "Piste de courses hippiques",
+                    "terms": "piste de course,course hippique,hippique,cheval,chevaux,équestre,pari sportif"
+                },
+                "leisure/track/horse_racing_point": {
+                    "name": "Piste de courses hippiques",
+                    "terms": "piste de course,course hippique,hippique,cheval,chevaux,équestre,pari sportif"
                 },
                 "leisure/track/running": {
-                    "name": "Piste de course (à pieds)",
-                    "terms": "piste de course à pied,sprint,athlétisme,course"
+                    "name": "Piste de course à pied",
+                    "terms": "piste de course à pied,course à pied,athlétisme"
+                },
+                "leisure/track/running_point": {
+                    "name": "Piste de course à pied",
+                    "terms": "piste de course à pied,course à pied,athlétisme"
                 },
                 "leisure/water_park": {
                     "name": "Parc à thème aquatique",
@@ -6225,6 +6947,14 @@
                 "man_made/antenna": {
                     "name": "Antenne radioélectrique",
                     "terms": "Antenne radioélectrique"
+                },
+                "man_made/beacon": {
+                    "name": "Balise",
+                    "terms": "balise"
+                },
+                "man_made/beehive": {
+                    "name": "Ruche",
+                    "terms": "ruche,abeille,apiculteur,apiculture,miel,pollinisation,ferme"
                 },
                 "man_made/breakwater": {
                     "name": "Brise-lames",
@@ -6250,9 +6980,17 @@
                     "name": "Grue",
                     "terms": "Grue"
                 },
+                "man_made/cross": {
+                    "name": "Croix sommitale",
+                    "terms": "croix sommitale,croix de sommet"
+                },
                 "man_made/cutline": {
                     "name": "Layon",
                     "terms": "ligne de coupe forestière"
+                },
+                "man_made/dyke": {
+                    "name": "Digue",
+                    "terms": "digue,remblai,berge"
                 },
                 "man_made/embankment": {
                     "name": "Terre-plein",
@@ -6280,7 +7018,7 @@
                 },
                 "man_made/mast/communication": {
                     "name": "Mât de communication",
-                    "terms": "Émetteur de téléphonie mobile, émetteur de téléphonie cellulaire, mât de transmission, pylône de transmission, tour haubanée, émetteur radio, émetteur de télévision, tour de télévision, tour de télédiffusion"
+                    "terms": "Émetteur de téléphonie mobile, émetteur de téléphonie cellulaire, mât de transmission, pylône de transmission, tour haubanée, émetteur radio, émetteur de télévision, tour de télévision, tour de télédiffusion, télécommunications"
                 },
                 "man_made/mast/communication/mobile_phone": {
                     "name": "Mât de téléphonie mobile",
@@ -6293,6 +7031,10 @@
                 "man_made/mast/communication/television": {
                     "name": "Mât de télédiffusion",
                     "terms": "antenne,diffusion,tour de télédiffusion,mât de communication,tour,mât de télévision,télévision,transmission,tv"
+                },
+                "man_made/mineshaft": {
+                    "name": "Puits de mine",
+                    "terms": "puits de mine,cave,mine,tunnel,sous-terrain"
                 },
                 "man_made/monitoring_station": {
                     "name": "Station de surveillance",
@@ -6310,9 +7052,17 @@
                     "name": "Jetée",
                     "terms": "Quai,arrêt"
                 },
+                "man_made/pier/floating": {
+                    "name": "Jetée flottante",
+                    "terms": "jetée flottante,ponton flottant,quai flottant"
+                },
                 "man_made/pipeline": {
                     "name": "Pipeline",
                     "terms": "Pipeline, Gazoduc, Oleoduc"
+                },
+                "man_made/pipeline/underground": {
+                    "name": "Pipeline souterrain",
+                    "terms": "pipeline,pétrole,gaz naturel,eau,égouts,gazoduc,oléoduc"
                 },
                 "man_made/pumping_station": {
                     "name": "Station de pompage",
@@ -6325,6 +7075,14 @@
                 "man_made/storage_tank": {
                     "name": "Réservoir de stockage",
                     "terms": "Silo de stockage,réservoir,citerne"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Réservoir d'eau",
+                    "terms": "réservoir,eau,citerne"
+                },
+                "man_made/street_cabinet": {
+                    "name": "Armoire de rue",
+                    "terms": "armoire,box,cabinet,technique,fibre,télécommunication,contrôle,lampadaires,électrique,gaz,électricité"
                 },
                 "man_made/surveillance": {
                     "name": "Appareil de surveillance",
@@ -6350,6 +7108,10 @@
                     "name": "Tour de communication",
                     "terms": "tour de télécommunication,diffusion,antenne,téléphone portable,téléphone cellulaire,gsm,tour,radio,mât de transmission,pylône de transmission"
                 },
+                "man_made/tower/defensive": {
+                    "name": "Tour fortifiée",
+                    "terms": "Tour fortifiée,tour de chateau,tour de château,défense,tour défensive"
+                },
                 "man_made/tower/minaret": {
                     "name": "Minaret",
                     "terms": "minaret,islam,mosquée,muezzin,tour"
@@ -6357,6 +7119,10 @@
                 "man_made/tower/observation": {
                     "name": "Tour d'observation",
                     "terms": "tour d'observation,mirador"
+                },
+                "man_made/tunnel": {
+                    "name": "Tunnel",
+                    "terms": "tunnel,shaft,passage souterrain,trou"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Station d'épuration",
@@ -6398,6 +7164,10 @@
                     "name": "Puits de télécommunication",
                     "terms": "couvert,puits,trou,télécom,téléphone"
                 },
+                "military/trench": {
+                    "name": "Tranchée militaire",
+                    "terms": "tranchée,guerre,infanterie"
+                },
                 "natural": {
                     "name": "Nature"
                 },
@@ -6412,6 +7182,10 @@
                 "natural/beach": {
                     "name": "Plage",
                     "terms": "Plage"
+                },
+                "natural/cape": {
+                    "name": "Cap",
+                    "terms": "cap,baie,ligne de côte,érosion,promontoire,pic,roc"
                 },
                 "natural/cave_entrance": {
                     "name": "Entrée de caverne",
@@ -6457,6 +7231,10 @@
                     "name": "Ligne de crête",
                     "terms": "Crête"
                 },
+                "natural/rock": {
+                    "name": "Rocher (rattaché au sol)",
+                    "terms": "rocher,pierre"
+                },
                 "natural/saddle": {
                     "name": "Col",
                     "terms": "Passe"
@@ -6473,9 +7251,17 @@
                     "name": "Broussailles",
                     "terms": "Broussailles,Friche,Garrigue,Maquis"
                 },
+                "natural/shingle": {
+                    "name": "Galets",
+                    "terms": "plage,gravier,galet,fleuve,pierre ronde,pierres rondes"
+                },
                 "natural/spring": {
                     "name": "Source",
                     "terms": "Source"
+                },
+                "natural/stone": {
+                    "name": "Pierre (détachée du sol)",
+                    "terms": "rocher,pierre"
                 },
                 "natural/tree": {
                     "name": "Arbre",
@@ -6484,6 +7270,10 @@
                 "natural/tree_row": {
                     "name": "Rangée d'arbres",
                     "terms": "rangée d'arbres, alignement d'arbres, arbres alignés"
+                },
+                "natural/valley": {
+                    "name": "Vallée",
+                    "terms": "vallée,canyon,gorge"
                 },
                 "natural/volcano": {
                     "name": "Volcan",
@@ -6505,6 +7295,10 @@
                     "name": "Lac",
                     "terms": "Lac"
                 },
+                "natural/water/moat": {
+                    "name": "Douves",
+                    "terms": "douves,fossé"
+                },
                 "natural/water/pond": {
                     "name": "Étang",
                     "terms": "Étang, Mare"
@@ -6514,12 +7308,16 @@
                     "terms": "Réservoir"
                 },
                 "natural/water/river": {
-                    "name": "Rvière",
+                    "name": "Rivière",
                     "terms": "rivière,fleuve,estuaire"
                 },
                 "natural/water/stream": {
                     "name": "Ruisseau",
                     "terms": "ruisseau,ru,cours d'eau étroit,eau"
+                },
+                "natural/water/wastewater": {
+                    "name": "Bassin d'eaux usées",
+                    "terms": "bassin d'eaux usées,station d'épuration,égouts,eaux usées"
                 },
                 "natural/wetland": {
                     "name": "Zone humide",
@@ -6560,6 +7358,10 @@
                     "name": "Bureau d'association",
                     "terms": "Bureau d'association, Organisation à but non lucratif"
                 },
+                "office/bail_bond_agent": {
+                    "name": "Agent de cautionnement",
+                    "terms": "agent de cautionnement,cautionnement"
+                },
                 "office/charity": {
                     "name": "Organisation de bienfaisance/charité",
                     "terms": "Organisation de bienfaisance, Organisation de charité"
@@ -6571,6 +7373,22 @@
                 "office/coworking": {
                     "name": "Espace de coworking",
                     "terms": "Espace de bureau partagé, Espace de coworking."
+                },
+                "office/diplomatic": {
+                    "name": "Bâtiment diplomatique",
+                    "terms": "Bâtiment, bureau diplomatique"
+                },
+                "office/diplomatic/consulate": {
+                    "name": "Consulat",
+                    "terms": "Consulat"
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Embassade",
+                    "terms": "Embassade"
+                },
+                "office/diplomatic/liaison": {
+                    "name": "Bureau de liaison",
+                    "terms": "bureau de liaison,diplomatie,diplomates,ambassade"
                 },
                 "office/educational_institution": {
                     "name": "Bureau de l'établissement d'enseignement",
@@ -6591,6 +7409,10 @@
                 "office/financial": {
                     "name": "Bureau d'entreprise financière",
                     "terms": "Bureau financier,Établissement financier"
+                },
+                "office/financial_advisor": {
+                    "name": "Conseiller financier",
+                    "terms": "Bureau financier,Établissement financier,héritage,retraite,gestion de biens,finances"
                 },
                 "office/forestry": {
                     "name": "Administration forestière",
@@ -6760,7 +7582,7 @@
                     "terms": "Habitation isolée"
                 },
                 "place/locality": {
-                    "name": "Lieu-dit sans habitation",
+                    "name": "Lieu-dit non habité",
                     "terms": "lieu-dit"
                 },
                 "place/neighbourhood": {
@@ -6790,6 +7612,9 @@
                 "place/village": {
                     "name": "Village (de 100 à 10 000 habitants)",
                     "terms": "Village"
+                },
+                "playground": {
+                    "name": "Jeux"
                 },
                 "playground/balance_beam": {
                     "name": "Poutre (Jeux pour enfants)",
@@ -6866,6 +7691,10 @@
                     "name": "Panneaux solaires",
                     "terms": "panneaux solaires,centrale solaire"
                 },
+                "power/generator/source/hydro": {
+                    "name": "Centrale hydroélectrique",
+                    "terms": "centrale hydroélectrique,barrage,générateur,électricité,kaplan,pelton,turbine"
+                },
                 "power/generator/source/nuclear": {
                     "name": "Centrale nucléaire",
                     "terms": "réacteur nucléaire,centrale nucléaire"
@@ -6911,43 +7740,76 @@
                 },
                 "public_transport/platform": {
                     "name": "Quai de transport en commun",
-                    "terms": "gare de transports en commun,station de transports en commun,quai de transports en commun,gare,stop,arrêt,station,attente voyageur,transports en commun"
+                    "terms": "gare de transports en commun,station de transports en commun,quai de transports en commun,arrêt de transports en commun,gare,stop,arrêt,station,attente voyageur,transports en commun"
                 },
-                "public_transport/platform_aerialway": {
+                "public_transport/platform/aerialway": {
                     "name": "Quai pour remontée mécanique",
-                    "terms": "gare de remontées mécaniques,station de remontées mécaniques,quai de remontées mécaniques,gare,stop,arrêt,station,attente voyageur,remontées mécaniques,remontée mécaniques,tire-fesses,télé-siège,télésiège,téléphérique,télécabine"
+                    "terms": "gare de remontées mécaniques,station de remontées mécaniques,quai de remontées mécaniques,arrêt de remontées mécaniques,gare,stop,arrêt,station,attente voyageur,remontées mécaniques,remontée mécaniques,tire-fesses,télé-siège,télésiège,téléphérique,télécabine"
                 },
-                "public_transport/platform_bus": {
+                "public_transport/platform/aerialway_point": {
+                    "name": "Quai pour remontée mécanique"
+                },
+                "public_transport/platform/bus": {
                     "name": "Arrêt de bus",
-                    "terms": "gare de bus,station de bus,quai de bus,gare,stop,arrêt,station,attente voyageur,bus,car"
+                    "terms": "gare de bus,station de bus,quai de bus,arrêt de bus,gare,stop,arrêt,station,attente voyageur,bus,car"
                 },
-                "public_transport/platform_ferry": {
+                "public_transport/platform/bus_point": {
+                    "name": "Arrêt de bus",
+                    "terms": "gare de bus, gare de cars, Gare, Arrêt, Arrêt de bus, bus station, bus, cars"
+                },
+                "public_transport/platform/ferry": {
                     "name": "Quai pour ferry",
-                    "terms": "gare de ferry,station de ferry,quai de ferry,gare,stop,arrêt,station,attente voyageur,ferry,bateau"
+                    "terms": "gare de ferry,station de ferry,quai de ferry,arrêt de ferry,gare,stop,arrêt,station,attente voyageur,ferry,bateau"
                 },
-                "public_transport/platform_light_rail": {
+                "public_transport/platform/ferry_point": {
+                    "name": "Quai pour ferry"
+                },
+                "public_transport/platform/light_rail": {
                     "name": "Station de métro léger",
-                    "terms": "gare de métro léger,station de métro léger,quai de métro léger,gare,stop,arrêt,station,attente voyageur,métro léger"
+                    "terms": "gare de métro léger,station de métro léger,quai de métro léger,arrêt de métro léger,gare,stop,arrêt,station,attente voyageur,métro léger"
                 },
-                "public_transport/platform_monorail": {
+                "public_transport/platform/light_rail_point": {
+                    "name": "Station de métro léger"
+                },
+                "public_transport/platform/monorail": {
                     "name": "Quai de monorail",
-                    "terms": "gare de monorail,station de monorail,quai de monorail,gare,stop,arrêt,station,attente voyageur,monorail"
+                    "terms": "gare de monorail,station de monorail,quai de monorail,arrêt de monorail,gare,stop,arrêt,station,attente voyageur,monorail"
                 },
-                "public_transport/platform_subway": {
+                "public_transport/platform/monorail_point": {
+                    "name": "Quai de monorail"
+                },
+                "public_transport/platform/subway": {
                     "name": "Quai de métro",
-                    "terms": "gare de métro,station de métro,quai de métro,gare,stop,arrêt,station,attente voyageur,métro"
+                    "terms": "gare de métro,station de métro,quai de métro,arrêt de métro,gare,stop,arrêt,station,attente voyageur,métro"
                 },
-                "public_transport/platform_train": {
+                "public_transport/platform/subway_point": {
+                    "name": "Quai de métro"
+                },
+                "public_transport/platform/train": {
                     "name": "Quai de gare ferroviaire",
-                    "terms": "gare ferroviaire,station ferroviaire,quai ferroviaire,quai de train,gare,stop,arrêt,station,attente voyageur,train"
+                    "terms": "gare ferroviaire,station ferroviaire,quai ferroviaire,quai de train,arrêt de train,gare,stop,arrêt,station,attente voyageur,train"
                 },
-                "public_transport/platform_tram": {
-                    "name": "Quai pour tramway",
-                    "terms": "gare de tramway,station de tramway,quai de tramway,gare,stop,arrêt,station,attente voyageur,tramway"
+                "public_transport/platform/train_point": {
+                    "name": "Quai de gare ferroviaire"
                 },
-                "public_transport/platform_trolleybus": {
+                "public_transport/platform/tram": {
+                    "name": "Arrêt de tramway",
+                    "terms": "gare de tramway,station de tramway,quai de tramway,arrêt de tramway,gare,stop,arrêt,station,attente voyageur,tramway"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Arrêt de tramway"
+                },
+                "public_transport/platform/trolleybus": {
                     "name": "Quai pour trolleys",
-                    "terms": "gare de trolleys,station de trolleys,quai de trolley,gare,stop,arrêt,station,attente voyageur,trolleys"
+                    "terms": "gare de trolleys,station de trolleys,quai de trolleys,arrêt de trolleys,gare,stop,arrêt,station,attente voyageur,trolleys"
+                },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Arrêt de trolleys",
+                    "terms": "gare de trolleys,station de trolleys,quai de trolley,arrêt de trolleys,gare,stop,arrêt,station,attente voyageur,trolleys"
+                },
+                "public_transport/platform_point": {
+                    "name": "Quai de transport en commun",
+                    "terms": "gare de transport en commun,station de transport en commun,quai de transport en commun,arrêt de transports en commun,gare,stop,arrêt,station,attente voyageur,transport en commun"
                 },
                 "public_transport/station": {
                     "name": "Station",
@@ -7048,6 +7910,10 @@
                     "name": "Butoir",
                     "terms": "butoir,stop,arrêt"
                 },
+                "railway/construction": {
+                    "name": "Ligne de chemin de fer en construction",
+                    "terms": "rails en construction,chemin de fer en construction,construction de rails"
+                },
                 "railway/crossing": {
                     "name": "Passage à niveau (piétons)",
                     "terms": "Passage à niveau (chemin)"
@@ -7098,6 +7964,10 @@
                     "name": "Voie ferrée",
                     "terms": "Rail"
                 },
+                "railway/rail/highspeed": {
+                    "name": "Ligne à grande vitesse",
+                    "terms": "Ligne à grande vitesse,LGV,TGV,train rapide"
+                },
                 "railway/signal": {
                     "name": "Feux tricolores ferroviaires",
                     "terms": "feux tricolores ferroviaires,signalisation ferroviaire"
@@ -7131,9 +8001,6 @@
                 "relation": {
                     "name": "Relation",
                     "terms": "Relation"
-                },
-                "roundabout": {
-                    "name": "Carrefour giratoire "
                 },
                 "route/ferry": {
                     "name": "Trajet de ferry",
@@ -7192,7 +8059,7 @@
                 },
                 "shop/art": {
                     "name": "Marchand d'art",
-                    "terms": "Galeriste"
+                    "terms": "Galeriste,gallerie d'art,marchand d'art,magasin d'art,art,artiste,exposition"
                 },
                 "shop/baby_goods": {
                     "name": "Magasin de produits pour bébés",
@@ -7234,6 +8101,10 @@
                     "name": "Magasin de vélos",
                     "terms": "Magasin de vélo"
                 },
+                "shop/boat": {
+                    "name": "Magasin de bateaux",
+                    "terms": "magasin de bateau,bateau de pêche,jetski,hors-bord"
+                },
                 "shop/bookmaker": {
                     "name": "Bookmaker",
                     "terms": "Preneur de paris, Bookmaker"
@@ -7243,16 +8114,19 @@
                     "terms": "Bouquiniste, Livres d'occasion"
                 },
                 "shop/boutique": {
-                    "name": "Petit magasin de mode",
-                    "terms": "Petit magasin de mode"
+                    "name": "Petit magasin de mode"
                 },
                 "shop/butcher": {
                     "name": "Boucher",
-                    "terms": "Boucherie"
+                    "terms": "Boucherie, charcuterie, charcutier, boucher"
                 },
                 "shop/candles": {
                     "name": "Magasin de bougies",
                     "terms": "Vente de bougies et d'accessoires"
+                },
+                "shop/cannabis": {
+                    "name": "Magasin de canabis",
+                    "terms": "canabis,marijuana,herbe"
                 },
                 "shop/car": {
                     "name": "Concessionnaire automobile",
@@ -7298,6 +8172,10 @@
                     "name": "Magasin de vêtements",
                     "terms": "Magasin de vêtements"
                 },
+                "shop/clothes/underwear": {
+                    "name": "Boutique de sous-vêtements",
+                    "terms": "boutique,magasin de sous-vêtements,sous-vêtements,slips,boxers,soutient-gorges,lingerie,chaussettes"
+                },
                 "shop/coffee": {
                     "name": "Boutique de vente de cafés",
                     "terms": "Magasin de café"
@@ -7308,7 +8186,7 @@
                 },
                 "shop/confectionery": {
                     "name": "Confiserie",
-                    "terms": "Confiserie"
+                    "terms": "Confiserie, confiseur, bonbons, fabricant de bonbons, biscuits, biscuiterie"
                 },
                 "shop/convenience": {
                     "name": "Épicerie / Supérette ",
@@ -7366,6 +8244,10 @@
                     "name": "Sex-shop",
                     "terms": "Sex-shop"
                 },
+                "shop/erotic/lgbtq": {
+                    "name": "Sex-shop LGBTQ+",
+                    "terms": "Sex-shop,lgbtq,gay,lesbien"
+                },
                 "shop/fabric": {
                     "name": "Magasin de tissus",
                     "terms": "Magasin de tissus"
@@ -7375,8 +8257,7 @@
                     "terms": "Étal de fruits et légumes,Vente à la ferme,Vente producteurs"
                 },
                 "shop/fashion": {
-                    "name": "Boutique de mode",
-                    "terms": "Boutique de mode"
+                    "name": "Boutique de mode"
                 },
                 "shop/fireplace": {
                     "name": "Magasin de cheminées",
@@ -7416,6 +8297,10 @@
                     "name": "Magasin de meubles",
                     "terms": "Magasin de meubles"
                 },
+                "shop/games": {
+                    "name": "Magasin de jeux de plateau",
+                    "terms": "jeux de plateau,jeu de plateau,jeu de cartes,jeux de cartes,game shop,jeu de rôle,miniature,stratégie,plateau,cartes,figurines"
+                },
                 "shop/garden_centre": {
                     "name": "Magasin spécialiste du jardin",
                     "terms": "Jardinerie, centre de jardinage"
@@ -7423,6 +8308,10 @@
                 "shop/gas": {
                     "name": "Magasin de bouteilles de gaz",
                     "terms": "bouteille,gaz,butane,propane"
+                },
+                "shop/general": {
+                    "name": "Magasin général",
+                    "terms": "magasin général,magasin de village"
                 },
                 "shop/gift": {
                     "name": "Boutique de cadeaux",
@@ -7474,7 +8363,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Bijouterie",
-                    "terms": "magasin de bijoux,bijouterie,bijoux,bracelets,diamants,boucles d'oreilles,boucle d'oreille,or,joyau,gemme,pierre précieuse,collier,argent"
+                    "terms": "magasin de bijoux,bijouterie,bijoux,bracelets,diamants,boucles d'oreilles,boucle d'oreille,or,joyau,gemme,pierre précieuse,collier,argent,joaillier"
                 },
                 "shop/kiosk": {
                     "name": "Kiosque",
@@ -7488,9 +8377,17 @@
                     "name": "Laverie",
                     "terms": "Laverie"
                 },
+                "shop/laundry/self_service": {
+                    "name": "Laverie en libre-service",
+                    "terms": "Laverie en libre service,laverie automatique"
+                },
                 "shop/leather": {
                     "name": "Maroquinier",
                     "terms": "Boutique de vêtements en cuir"
+                },
+                "shop/lighting": {
+                    "name": "Magasin de lampes",
+                    "terms": "lampes,fluorescent,compact,LED,DEL,ampoule"
                 },
                 "shop/locksmith": {
                     "name": "Serrurier",
@@ -7511,6 +8408,10 @@
                 "shop/medical_supply": {
                     "name": "Magasin de matériel médical",
                     "terms": "Magasin de matériel médical"
+                },
+                "shop/military_surplus": {
+                    "name": "Surplus militaire",
+                    "terms": "armée,armure,navy,magasin militaire,surplus,tactique,équipement militaire,guerre,équipement de guerre"
                 },
                 "shop/mobile_phone": {
                     "name": "Magasin de téléphonie mobile",
@@ -7555,6 +8456,10 @@
                 "shop/outdoor": {
                     "name": "Magasin de matériel de sports de plein air",
                     "terms": "Magasin de matériel de sports de plein air"
+                },
+                "shop/outpost": {
+                    "name": "Magasin de produits vendus en ligne",
+                    "terms": "vente en ligne,pickup,online,en ligne,commande"
                 },
                 "shop/paint": {
                     "name": "Magasin de peintures",
@@ -7606,7 +8511,7 @@
                 },
                 "shop/seafood": {
                     "name": "Poissonnerie / Vente de fruits de mer",
-                    "terms": "Vendeur de poissons, fruits de mer, écailler"
+                    "terms": "Vendeur de poissons, fruits de mer, écailler, conserverie"
                 },
                 "shop/second_hand": {
                     "name": "Dépôt-vente/produits d'occasion",
@@ -7684,8 +8589,8 @@
                     "terms": "Vente de produits de nettoyage"
                 },
                 "shop/variety_store": {
-                    "name": "Magasin à prix unique",
-                    "terms": "Épicerie"
+                    "name": "Magasin à prix unique ou à bas prix",
+                    "terms": "Épicerie,hard-discount"
                 },
                 "shop/video": {
                     "name": "Vidéo-club",
@@ -7723,6 +8628,14 @@
                     "name": "Caviste",
                     "terms": "Caviste,  Bar à vins"
                 },
+                "tactile_paving": {
+                    "name": "Surface podotactile",
+                    "terms": "surface podotactile,podotactile,bosse,aveugle"
+                },
+                "telecom/data_center": {
+                    "name": "Centre de données",
+                    "terms": "data center,technologie,télécommunications,nuage,cloud,ordinateurs,serveurs,hébergeur,hébergement"
+                },
                 "tourism": {
                     "name": "Tourisme"
                 },
@@ -7742,6 +8655,18 @@
                     "name": "Œuvre d'art",
                     "terms": "Œuvre d'art,Œuvre artistique,statue,peinture,sculpture,fresque,mosaïque,graffiti"
                 },
+                "tourism/artwork/bust": {
+                    "name": "Buste",
+                    "terms": "buste,statue,figure"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti",
+                    "terms": "grafiti,street art,grafitti,graffiti,graffitti"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Installation artistique",
+                    "terms": "installation artistique,art interactif,art moderne"
+                },
                 "tourism/artwork/mural": {
                     "name": "Peinture ou fresque murale",
                     "terms": "fresque,peinture murale,pixel art"
@@ -7751,7 +8676,7 @@
                     "terms": "sculpture,statue"
                 },
                 "tourism/artwork/statue": {
-                    "name": "Statue commémorative",
+                    "name": "Statue",
                     "terms": "sculpture,statue"
                 },
                 "tourism/attraction": {
@@ -7806,6 +8731,14 @@
                     "name": "Office de tourisme",
                     "terms": "Office de tourisme,Office du tourisme,Syndicat d'initiative,Centre d'information"
                 },
+                "tourism/information/route_marker": {
+                    "name": "Repère",
+                    "terms": "repère,piste,chemin,gr,pr,marqueur,randonnée"
+                },
+                "tourism/information/terminal": {
+                    "name": "Terminal d'information",
+                    "terms": "terminal d'information"
+                },
                 "tourism/motel": {
                     "name": "Motel",
                     "terms": "Motel"
@@ -7837,6 +8770,18 @@
                 "tourism/zoo": {
                     "name": "Parc zoologique",
                     "terms": "Zoo"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Zoo pour enfants",
+                    "terms": "ménagerie,ferme pédagogique,parc animalier,zoo,mini-zoo,mini zoo"
+                },
+                "tourism/zoo/safari": {
+                    "name": "Parc safari",
+                    "terms": "parc safari,safari,zoo,parc animalier"
+                },
+                "tourism/zoo/wildlife": {
+                    "name": "Réserve naturelle",
+                    "terms": "réserve naturelle,parc animalier,zoo,parc naturel,parc faunique"
                 },
                 "traffic_calming": {
                     "name": "Apaisement du trafic",
@@ -7917,6 +8862,10 @@
                 "type/multipolygon": {
                     "name": "Multipolygone"
                 },
+                "type/public_transport/stop_area_group": {
+                    "name": "Groupe de zones d'arrêt",
+                    "terms": "groupe de zones d'arrêt,zones d'arrêt,arrêt,stop"
+                },
                 "type/restriction": {
                     "name": "Restriction",
                     "terms": "Restriction"
@@ -7989,6 +8938,10 @@
                     "name": "Itinéraire de métro léger",
                     "terms": "Itinéraire de métro léger"
                 },
+                "type/route/monorail": {
+                    "name": "Itinéraire de monorail",
+                    "terms": "monorail,itinéraire,route"
+                },
                 "type/route/pipeline": {
                     "name": "Itinéraire de pipeline",
                     "terms": "Pipeline, gazoduc, oléoduc"
@@ -8029,10 +8982,6 @@
                     "name": "Cours d'eau",
                     "terms": "Canal, rivière, cours d'eau"
                 },
-                "vertex": {
-                    "name": "Autre",
-                    "terms": "Autres"
-                },
                 "waterway": {
                     "name": "Cours d'eau"
                 },
@@ -8043,6 +8992,10 @@
                 "waterway/canal": {
                     "name": "Canal",
                     "terms": "Canal"
+                },
+                "waterway/canal/lock": {
+                    "name": "Écluse de canal",
+                    "terms": "écluse,canal"
                 },
                 "waterway/dam": {
                     "name": "Barrage",
@@ -8063,6 +9016,10 @@
                 "waterway/fuel": {
                     "name": "Station-service marine",
                     "terms": "Station-service nautique, nautisme, bateaux, essence"
+                },
+                "waterway/lock_gate": {
+                    "name": "Porte d'écluse",
+                    "terms": "écluse,canal"
                 },
                 "waterway/milestone": {
                     "name": "Borne kilométrique fluviale",
@@ -8104,21 +9061,33 @@
         "imagery": {
             "AGIV": {
                 "attribution": {
-                    "text": "Orthophoto la plus récente de la Flandre © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "Images aériennes AGIV les plus récentes de la Flandre"
+                "name": "Images aériennes AIV les plus récentes de la Flandre"
             },
             "AGIV10cm": {
                 "attribution": {
-                    "text": "Orthophoto de la Flandre © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "Images aériennes 10cm AGIV de la Flandre 2013-2015"
+                "name": "Images aériennes 10cm AIV de la Flandre 2013-2015"
             },
             "AGIVFlandersGRB": {
                 "attribution": {
-                    "text": "GRB Flandres © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "AGIV Flandres GRB"
+                "name": "AIV Flandres GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
             },
             "Bing": {
                 "description": "Images satellite et aérienne.",
@@ -8152,6 +9121,13 @@
                 "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 13.",
                 "name": "Images DigitalGlobe Standard Vintage"
             },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 sans nuages — https://s2maps.eu par EOX IT Services GmbH (contient des données Copernicus Sentinel modifiées de 2017 et de 2018)"
+                },
+                "description": "Imagerie satellite Sentinel retravaillée",
+                "name": "eox.at 2018 sans nuages"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Termes & commentaires"
@@ -8179,6 +9155,20 @@
                 },
                 "description": "Images satellite et aérienne",
                 "name": "Satellite Mapbox "
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Maxar Premium est une mosaïque composée de la carte de base de Maxar avec des régions utilisant +Vivid ou des imageries à des endroits intéressants avec une résolution de 50 cm ou mieux, et rafraîchi plus fréquemment avec des mises à jours régulières.",
+                "name": "Images Maxar Premium (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Maxar Standard est un ensemble organisé d'images, fournies par Landsat, couvrant 86% de la surface de la Terre, avec une résolution de 30-60cm lorsque disponible. L'âge moyen de ces images est 2,31 ans, avec certaines régions mises à jour 2 fois par an.",
+                "name": "Images Maxar Standard (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -8239,6 +9229,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Jaune = Données de cartes dans le domaine public du recensement américain. Rouge = Données introuvables sur OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "L'année la plus récente de DOQQ du programme d'imagerie nationale pour l'agriculture (NAIP) pour chaque état des États-Unis contigus.",
+                "name": "Programme d'imagerie national pour l'agriculture"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Voies : en vert route non classifiée, en marron piste. Surface : les graviers sont représentés par un remplissage marron, l'asphalte par du noir, les pavés par du gris, la terre par du blanc, le béton par du bleu, l'herbe par du vert. Les voies saisonnières ont des barres blanches.",
@@ -8317,6 +9311,27 @@
                 },
                 "description": "Couche orthophoto fournie par basemap.at \"successeur\" de geoimage.at.",
                 "name": "Orthophoto basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surcouche d'annotations fournie par basemap.at.",
+                "name": "Surcouche basemap.at"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Couche de surface fournie par basemap.at.",
+                "name": "Surface basemap.at"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Couche terrain fournie par basemap.at.",
+                "name": "Terrain basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -8491,7 +9506,7 @@
                 "attribution": {
                     "text": "© Municipalité de Stockholm, CC0"
                 },
-                "description": "Orthophotos de la municipalité de Stockholm 2015, licence CC0",
+                "description": "Orthophotos de la municipalité de Stockholm 2016, licence CC0",
                 "name": "Orthophoto de Stockholm"
             },
             "tf-cycle": {
@@ -8558,6 +9573,16 @@
                 "name": "Mapping Botswana sur Twitter",
                 "description": "Fil Twitter OpenStreetMap au Botswana"
             },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT",
+                "description": "Chapitre YouthMappers du Centre Universitaire de Recherche et d'Application en Télédétection (CURAT) de l'Université Felix Houphouet Boigny",
+                "extendedDescription": "Notre chapitre promeut l'utilisation de la cartographie libre et collaborative et l'utilisation des données d'openstreetmap dans le champ de la recherche et de leur application dans l'implémentation d'outils pour la prise de décision. Nous aidons les étudiants à produire leur propres données pour leurs recherches."
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "Connected YouthMappers",
+                "description": "Chapitre YouthMappers à l'Université de Gambie",
+                "extendedDescription": "Connected YouthMappers se compose de jeunes gambiens résolus qui cherchent à changer le pays et à aider le développement national."
+            },
             "cape-coast-youthmappers": {
                 "name": "YouthMappers de l'université de Cape Coast",
                 "description": "Suivez-nous sur Twitter : {url}",
@@ -8576,6 +9601,107 @@
                 "name": "Liste de diffusion Talk-gh",
                 "description": "Talk-gh est la liste de diffusion officielle de la communauté d'OSM au Ghana."
             },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "name": "Kwame Nkrumah University of Science and Technology YouthMappers",
+                "description": "Chapitre YouthMappers à l'Université des Sciences et des Technologies Kwame Nkrumah"
+            },
+            "ym-University-of-Cape-Coast": {
+                "name": "UCC Geographical Society",
+                "description": "Chapitre YouthMappers à l'Université de Cape Coast",
+                "extendedDescription": "Nous sommes une société qui comprend tous les étudiants du département de géographie et de planification locale à l'Université de Cape Coast. Notre principal objectif est de promouvoir l'intérêt pour la discipline en classe et en dehors. Notre devise est « nous comprenons la Terre et ses habitants »."
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club",
+                "description": "Chapitre YouthMappers à l'Université des Énergies et des Ressources Renouvelables",
+                "extendedDescription": "Pour fournir une éducation correcte à tous les citoyens sur la détérioration de l'environnement et aider à la reconstruction de l'environnement pour la survie humaine."
+            },
+            "ym-University-of-Ghana": {
+                "name": "YouthMappers de l'Université du Ghana",
+                "description": "Chapitre YouthMappers à l'Université du Ghana",
+                "extendedDescription": "UG YouthMappers consiste en un groupe d'étudiants en license et en master qui possèdent les connaissances et les compétences en SIG et en télédetection. Le club est composé d'une équipe énergique qui veut gérer les problème sociaux et réduire les problèmes environnementaux à travers la cartographie. Nos principes fondamentaux sont le développement des compétences, l'autonomisation et le travail d'équipe."
+            },
+            "ym-University-of-Mines-and-Technology": {
+                "name": "UMaT YouthMappers",
+                "description": "Chapitre YouthMappers à l'Université des Mines et des Technologies",
+                "extendedDescription": "UMaT YouthMappers est un groupe d'étudiants volontaires qui cherchent à donner aux étudiants la possibilité d'améliorer leurs compétences dans le champ de la cartographie et de la création de données géographiques et d'analyses libres qui répondent aux besoins de développement défini localement, à l'échelle mondiale."
+            },
+            "ym-General-Lansana-Conte-University": {
+                "name": "YouthMappers de l'Université Générale du Conté de Lansana",
+                "description": "Chapitre YouthMappers de l'Université Générale du Conté de Lansana",
+                "extendedDescription": "Le chapitre YouthMappers de l'Université Générale du Conté de Lansana est une communauté à but non lucratif qui veut contribuer à cartographier la Guinée et d'autres parties du monde. Nous promouvons l'utilisation des SIG et des données libres pour construire des outils de support aux prises de décision. Nous travaillons aussi pour améliorer les compétences des étudiants et des communautés locales."
+            },
+            "ym-Institute-of-Science-and-Veterinary-Medicine": {
+                "name": "YouthMappers ISSMV Dalaba",
+                "description": "Chapitre YouthMappers à l'Institut des Sciences et de Médecine Vétérinaire",
+                "extendedDescription": "YouthMappers ISSMV Dabala est une organisation à but non lucratif qui travaille pour promouvoir la cartographie humanitaire et l'utilisation de l'open source et de l'open data pour construire des outils de prise de décision en Guinée."
+            },
+            "ym-Universit-de-NZrkor": {
+                "name": "Youthmappers à N'Zérékoré",
+                "description": "Chapitre YouthMappers de l'Université de N'Zérékoré",
+                "extendedDescription": "YouthMappers est un groupe qui permet de faire la cartographie des communautés enclavées et à la prise des décisions en cas de catastrophes ou épidémies. Elle permet aussi la production et l'utilisation des données en accès gratuit."
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV",
+                "description": "Chapitre YouthMappers à l'Université des Technologies Dedan Kimathi",
+                "extendedDescription": "GDEV est un groupe d'étudiants en SIG enthosiastes à DeKUT qui cherche à aider les étudiants à partager, s'engager et apprendre les uns des autres en matière de géospatial"
+            },
+            "ym-Jomo-Kenyatta-University-of-Agriculture-and-Technology": {
+                "name": "Association of Geomatics Engineering Students",
+                "description": "Chapitre YouthMappers à l'Université Jomo Kenyatta d'Agriculture et de Technologies",
+                "extendedDescription": "L'association des étudiants ingénieurs géomaticiens (AGES) cherche à promouvoir les produits GIS et les services ainsi qu'à entraîner les étudiants à les utiliser. Non seulement elle promeut la socialisation entre les étudiants et les professionnels pratiquants, mais elle fournit aussi une plateforme pour échanger de nouvelles idées pour tenir de nouveaux événements SIG et de terrain et de formations à l'université."
+            },
+            "ym-Karatina-University": {
+                "name": "Nature Club Karatina University",
+                "description": "Chapitre YouthMappers à l'Université de Karatina",
+                "extendedDescription": "Ce chapitre essaye de réunir tous les enthousiastes du SIG. Il inclut des experts de l'environnement, des experts de la vie sauvage, des responsables du tourismes et des activités aquatiques, pour n'en citer que quelques uns. Son but principal est de fournir une plateforme où les étudiants peuvent apprendre les uns des autres et, ce faisant, comprendre comment intégrer les compétences en SIG dans leurs diverses carrières ainsi que fournir des solutions aux défis environnementaux."
+            },
+            "ym-Kenyatta-University": {
+                "name": "Club SIG de l'Université de Kenyatta",
+                "description": "Chapitre YouthMappers à l'Université de Kenyatta",
+                "extendedDescription": "Le club SIG de l'Université de Kenyatt (KUGISC) a été fondé le 28 octobre 2016 avec plus de 200 étudiants et membres de toutes les facultés du campus. Nous sommes engagés à rendre nos membres autonomes en matière de connaissance, compétences et expertise géospatiales requises pour comprendre la Terre. Nous aidons aux ressources cartographiques de l'université en incorporant des données géospatiales dans les projets et dans la collecte de données sur le terrain."
+            },
+            "ym-Moi-University": {
+                "name": "Association étudiante de géographie",
+                "description": "Chapitre YouthMappers de l'Université de Moi",
+                "extendedDescription": "L'association étudiante de géographie à l'Université de Moi (GEOSAMU) explore, découvre et essaye de développer le monde entier à travers l'analyse géospatiale. GEOSAMU fait partie du département de Géographie."
+            },
+            "ym-Technical-University-of-Kenya": {
+                "name": "Association étudiante de sciences géospatiales",
+                "description": "Chapitre YouthMappers à l'Université de Technologies du Kenya",
+                "extendedDescription": "C'est un groupe basé sur l'information géographique avec des étudiants passionnés dans les champs de recherche correspondants. Nous formons nos membres aux tendances actuelles sur le marché et nous renseignons sur les avancés des technologies"
+            },
+            "ym-University-of-Nairobi": {
+                "name": "Association étudiante d'ingénierie géospatiale",
+                "description": "Chapitre YouthMappers à l'Université de Nairobi",
+                "extendedDescription": "Les étudiants à UN travaillent avec la communauté OSM locale, Map Kibera, et GroundTruth pour apprendre la cartographie libre et contribuer des données pour les besoins des communautés urbaines."
+            },
+            "ym-African-Methodist-Episcopal-University": {
+                "name": "YouthMappers-AMEU",
+                "description": "Chapitre YouthMappers de l'Université Épiscopale Méthodiste Africaine"
+            },
+            "ym-Cuttington-University": {
+                "name": "YouthMappers de l'Université de Cuttington",
+                "description": "Chapitre YouthMappers à l'Université de Cuttington",
+                "extendedDescription": "YouthMappers à l'Université de Cuttington et des contés de Suakoko et Bong est constitués d'étudiants de trois départements, le Département de Gestion des Ressources Naturelles « DONRM », le Département des Sciences Environnementales et le Département des Sciences Naturelles. Depuis sa création en février 2017, 20 étudiants en font partie, avec environ 5 étudiants de chaque département."
+            },
+            "ym-Grand-Gedeh-County-Community-College": {
+                "name": "YouthMappers au Grand Gedeh County Community College",
+                "description": "Chapitre YouthMappers au Grand Gedeh County Community College",
+                "extendedDescription": "La seule motivation de YouthMappers de GGCCC est de cartographier les endroits du Libéria et autour qui ne sont pas sur la carte. Nous regroupons des jeunes de Grand Gedeh Community College pour faire de leur devoir d'unir et de mettre en lumière ces endroits géographiquement."
+            },
+            "ym-Nimba-County-Community-College": {
+                "name": "YouthMappers de Nimba County Community College",
+                "description": "Chapitre YouthMappers au Nimba County Community College"
+            },
+            "ym-Stella-Maris-Polytechnic": {
+                "name": "YouthMappers-SMP",
+                "description": "Chapitre YouthMappers à Stella Maris Polytechnic"
+            },
+            "ym-University-of-Liberia-YouthMappers": {
+                "name": "YouthMappers à l'Université du Liberia",
+                "description": "Chapitre YouthMappers à l'Université du Liberia",
+                "extendedDescription": "YouthMappers de l'Université du Liberia est une organisation qui fait partie de Global YouthMappers. Nous somme une organisation à but non lucratif d'étudiants cartographes qui cartographions pour développer le Liberia et le monde entier. Le but de cette organisation est d'utiliser les technologies et la connaissance géospatiale comme moyen pour créer et développer des cartes ; collecter et analyser des données qui répondront aux défis locaux et mondiaux. Notre but est d'aider à créer des opportunités pour les étudiants pour qu'ils développent un intérêt et des compétences dans la cartographie. Nous avons pour vision une communauté d'étudiants unis, collaborative, active et volontaire pour travailler avec YouthMappers de l'Université du Liberia pour améliorer la vie des autres."
+            },
             "osm-mg-facebook": {
                 "name": "Groupe Facebook OpenStreetMap Madagascar",
                 "description": "Groupe Facebook malgache pour les gens intéressé par OpenStreetMap."
@@ -8583,6 +9709,123 @@
             "talk-mg": {
                 "name": "Liste de diffusion talk-mg",
                 "description": "Le lieu de rencontre des contributeurs OpenStreetMap, des communautés et des utilisateurs à Madagascar où partager et discuter."
+            },
+            "ym-University-of-Malawi": {
+                "name": "Chanco Malawi YouthMappers",
+                "description": "Chapitre YouthMappers à l'Université du Malawi",
+                "extendedDescription": "Chanco Malawi YouthMappers est l'organisation étudiante de cartographie de Chancellor College à l'Université du Malawi. Les étudiants de ce chapitre se concentrent sur la cartographie pour les besoins en développement et scientifiques du Malawi."
+            },
+            "ym-Universit-des-Sciences-Sociale-et-de-Gestion-de-Bamako": {
+                "name": "Étudiants au Laboratoire HoPE",
+                "description": "Chapitre YouthMappers à l'Université des Sciences Sociale et de Gestion de Bamako"
+            },
+            "ym-Universidade-Eduardo-Mondlane": {
+                "name": "Comunidade YouthMappers Moçambique",
+                "description": "Chapitre Youthmappers à l'Université Eduardo Mondlane",
+                "extendedDescription": "Nous sommes un groupe d'étudiants qui veulent rejoindre la société mozambicaine pour créer une communauté résiliente de cartographes humanitaires. La communauté veut cartographier les occupations physiques de notre pays et créer des données géographiques ouvertes, accessibles au public et utilisables dans divers secteurs sans coût associé."
+            },
+            "ym-Namibia-University-of-Science-and-Technology": {
+                "name": "Geoinformation Technology Student Society",
+                "description": "Chapitre YouthMappers à l'Université des Sciences et des Technologies en Namibie"
+            },
+            "ym-Abia-State-University": {
+                "name": "AbsuMappersTeam",
+                "description": "Chapitre YouthMappers à l'Université d'état d'Abia",
+                "extendedDescription": "AbsuMappersTeam est une équipe de cartographes volontaires, qui utilisent openstreetmap, le SIG et d'auters technologies géospatiales open source pour résoudre des problèmes. Elle est dédiée à la réponse humanitaire avec OpenStreetMap. C'est une plateforme de mentorat professionnel et d'autonomisation pour ceux qui se passionnent pour les SIG et la cartographie. C'est une communauté de volontaires pour la création de données géospatiales, la collecte de données sur le terrain et la cartographie. L'équipe a été fondée par Victor N.Sunday et le Professeur J. U. Ogbonna, le coordinateur de l'équipe et le conseiller académique. AbsuMapperTeam est affilié à UniqueMappersTeam-Port Harcourt. L'équipe veut soutenir le développement durable avec les technologies géospatiales."
+            },
+            "ym-Ahmadu-Bello-University": {
+                "name": "ABU Geomappers",
+                "description": "Chapitre YouthMappers à l'Université Ahmadu Bello",
+                "extendedDescription": "Nous sommes un groupe de cartographes humanitaires guidés par les données, qui sommes dédiés à rendre des services humanitaires en réponse aux catastrophes. Nous sommes heureux de contribuer notre expertise et nos connaissances à travers la cartographie et d'aider à étendre #OpenEvangelism à travers la formation et la collaboration."
+            },
+            "ym-Federal-School-of-Surveys": {
+                "name": "OyoMappersTeam (OMT) Oyo",
+                "description": "Chapitre YouthMappers à la Federal School of Surveys"
+            },
+            "ym-Federal-University-of-Technology-Akure": {
+                "name": "YouthMappers Futa Space Club",
+                "description": "Chapitre YouthMappers à la Federal University of Technology à Akure",
+                "extendedDescription": "Notre mission est de former la prochaine génération des Space Leaders. Nos activités incluent la recherche et l'amélioration des compétences en télédétection, en SIG, dans le changement climatique, l'astronomie, la cosmologie, l'ingénierie spatiale, la navigation mondiale, la robotique et l'éducation à l'espace."
+            },
+            "ym-Ignatius-Ajuru-University-of-Education": {
+                "name": "IgnatiusMappersTeam (IMT)",
+                "description": "Chapitre YouthMappers à l'Ignatius Ajuru University of Education",
+                "extendedDescription": "Nous sommes un chapitre YouthMappers de l'Ignatius Ajuru University of Education impliqué dans la cartographie collective de notre environnement et la cartographie à distance des communautés résilientes. Nous sommes une équipe de volontaires qui utilisent openstreetmap et d'autres sources géospatiales ouvertes pour cartographier."
+            },
+            "ym-University-of-Nigeria-Nsukka": {
+                "name": "LionMappersTeam (LMT) Nsukka",
+                "description": "Chapitre YouthMappers à l'Université du Nigéria à Nsukka",
+                "extendedDescription": "LionMappersTeam est affilié au réseau YouthMappers avec pour seul objectif de fournir à ses membres l'opportunité d'apprendre et d'améliorer leurs compétences dans les sciences de la cartographie et de créer des données et des analyses géographiques libres qui répondent aux besoins exprimés localement, à l'échelle mondiale. C'est une équipe de volontaires pour la cartographie collective et la mise à disposition d'informations géographiques à travers OpenStreetMap, la science citoyenne et d'autres technologie géospatiales pour la recherche, la formation et la réponse aux défis d'une communauté résiliente. Nous sommes impliqués dans le SIG et la télédétection, la cartographie de terrain, des ateliers de formation et la vulgarisation auprès des lycées."
+            },
+            "ym-University-of-Port-Harcourt": {
+                "name": "UniqueMappersTeam (UMT) Port Harcourt",
+                "description": "Chapitre YouthMappers à l'Université de Port Harcourt",
+                "extendedDescription": "UniqueMappersTeam (UMT) Port Harcourt est un groupe d'action et une équipe de volontaires pour une cartographie en ligne collaborative pour la formation et l'autonomisation de ses membres en ce qui concerne les compétences cartographiques récentes pour créer des données et des analyses géospatiales libres qui répondent aux défis définis localement pour l'information géographique et pour fournir des services de cartographie humanitaire pour créer des communautés résilientes dans le delta du Niger, au Nigéria et ailleurs. Nous promouvons la cartographie collective et les informations géographiques volontaires avec la plateforme OpenStreetMap et d'autres plateformes accessible pour la cartographie rapide de réponse, la cartographie de catastrophe, de géo-intelligence, de mise à jour et pour la formation. C'est un chapitre Campus affilié à HOT. C'est une équipe-projet de YouthMappers qui fournit l'opportunité à ses membres d'apprendre et d'améliorer leurs compétences en information géographique pour explorer les opportunités mondiales dans la cartographie et l'information géographique."
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "Chapitre YouthMappers à l'Université du Nigéria, Campus Enugu",
+                "extendedDescription": "LionMappersTeam (LMT) Campus Enugu est affilié au réseau YouthMappers avec pour seul objectif de fournir à ses membres l'opportunité d'apprendre et d'améliorer leurs compétences dans les sciences de la cartographie et de créer des données et des analyses géographiques libres qui répondent aux besoins exprimés localement, à l'échelle mondiale. C'est une équipe de volontaires pour la cartographie collective et la mise à disposition d'informations géographiques à travers OpenStreetMap, la science citoyenne et d'autres technologie géospatiales pour la recherche, la formation et la réponse aux défis d'une communauté résiliente. Nous sommes impliqués dans le SIG et la télédétection, la cartographie de terrain, des ateliers de formation et la vulgarisation auprès des lycées ainsi que la réponse aux catastrophe."
+            },
+            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
+                "name": "YouthMappers à l'INES Ruhengeri",
+                "description": "Chapitre YouthMappers à l'Insititue d'Enseignement Supérieur de Ruhengeri",
+                "extendedDescription": "Nous sommes des étudiants des départements d'administration et de gestion du territoire et de recensement cadastral à l'INES-Ruhengeri. Nous sommes engagés dans des activités de cartographie qui créent le changement vers un développement durable dans notre communauté."
+            },
+            "ym-University-of-Rwanda-Huye-Campus": {
+                "name": "Rwanda YouthMappers",
+                "description": "Chapitre YouthMappers à l'Université du Ruanda, Campus Huye",
+                "extendedDescription": "Basé sur l'engagement et le but de promouvoir la cartographie et l'information donnée à travers les conférences YouthMappers publiques, nous sommes organisés comme étudiants du département de géographie engagés dans la cartographie pour fonder un chapitre sur notre campus. Nous sommes supportés par notre facilitateur, le Dr. Gaspard Rwanyiziri (Directeur de CGIS-Rwanda) et diverse mentors."
+            },
+            "ym-Institut-Suprieur-de-Management-Kolda": {
+                "name": "Les Femmes Leaders de ISM/Kolda",
+                "description": "Chapitre YouthMappers à l'Institut Supérieur de Management de Kolda",
+                "extendedDescription": "Les Femmes Leaders de ISM/Kolda est un groupe de cartographie entièrement féminin dans le sud du Sénégal qui cherche à placer Kolda et les villages alentours sur la carte et mieux comprendre comme utiliser OSM."
+            },
+            "ym-Universit-Gaston-Berger": {
+                "name": "YouthMappers à l'UGB",
+                "description": "Chapitre YouthMappers à l'Université Gaston Berger",
+                "extendedDescription": "YouthMappers UGB est composé de jeunes étudiants et chercheurs qui sont passionnés par la cartographie. Notre but est d'améliorer les compétences des étudiants en cartographie et de participer à la création de données géographiques libres qui répondent aux défis de développement autour du monde et en particulier en Afrique."
+            },
+            "ym-Fourah-Bay-College": {
+                "name": "Student's Geographical Association",
+                "description": "Chapitre YouthMappers au Fourah Bay College",
+                "extendedDescription": "L'association étudiante de géographie-YouthMappers est une association des étudiants du Fourah Bay College qui a pour but de cartographier les endroits vulnérables du Sierra Leone et du monde dans le but de secours et d'autres buts bénéfiques, effectuer de la recherche et d'autres activités éducatives. Le chapitre consiste en de jeunes gens avec de grandes idées, orienté vers le développement ensemble, la compréhension et la mise en œuvre de projets de développement durables en équipe."
+            },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "Njala Freetown YouthMappers",
+                "description": "Chapitre YouthMappers à Njala University, campus de Freetown",
+                "extendedDescription": "Nous sommes des étudiants du campus de Freetown de Njala University, et nous étudions les technologies de l'information dans le département de physique et d'informatique. Nous nous trouvons à Henry Street Freetown, Sierra Leone."
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers Njala University, Njala Campus",
+                "description": "Chapitre YouthMappers à l'université de Njala, campus de Njala"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centre des sciences géomatiques",
+                "description": "Chapitre YouthMappers à l'Université de Pretoria"
+            },
+            "ym-Ardhi-University": {
+                "name": "Cartographe ARU",
+                "description": "Groupe de jeunes cartographes de l'université d'Ardhi",
+                "extendedDescription": "En tant que futurs consultants en données géospatiales nous cherchons à éduquer et conseiller la société sur leur possibilité d'utiliser les données géographiques non plus seulement comme un moyen de localisation mais un outil de prise de décision et de prédiction des différents dangers et du changements climatiques qui risque de les impacter, eux ou les générations futures."
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "Cartographes IFM",
+                "description": "Groupe YouthMappers de l'Institute of Finance Management"
+            },
+            "ym-Institute-of-Rural-Development-Planning-Mwanza": {
+                "name": "Groupe des jeune cartographes de l'Institute of Rural Development Planning - Lake Zone Centre",
+                "description": "Groupe des jeunes cartographes de l'Institute of Rural Development Planning Mwanza"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Groupe des jeunes cartographes de Mipango",
+                "description": "Groupe des jeunes cartographes de l'Institute of Rural Development Planning",
+                "extendedDescription": "Le groupe des jeunes cartographes de Mipango a été créé à IRDP le 3 juillet 2017 par Dr. Domitilla Bashemera. Les membres fondateurs étaient 300 (190 hommes, 110 femmes) étudiants bacheliers qui se sont enregistrés comme membres du groupe. Gerald Zacharia est le président du groupe et Juster Lugira le vice président."
+            },
+            "ym-Open-University-of-Tanzania": {
+                "name": "Jeunes cartographes de l'Open University of Tanzania",
+                "description": "Groupe des jeunes cartographes de l'Open University of Tanzania"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
@@ -9231,14 +10474,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap États-Unis",
                 "description": "Nous aidons OpenStreetMap à grandir et à s'améliorer aux États-Unis.",
-                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}",
-                "events": {
-                    "sotmus2018": {
-                        "name": "State of the Map USA 2018",
-                        "description": "Rejoignez la communauté OpenStreetMap au State of the Map USA à Detroit, dans le Michigan. Rencontrez d'autres cartographes, des boîtes, des agences gouvernementales et des associations, qui collaborent tous autour de la carte du monde libre et modifiable.",
-                        "where": "Detroit dans le Michigan"
-                    }
-                }
+                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

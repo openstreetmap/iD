@@ -1,8 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { coreDifference } from './difference';
+import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayGroupBy, utilCallWhenIdle, utilRebind } from '../util';
+import { utilArrayGroupBy, utilRebind } from '../util';
 import { t } from '../util/locale';
 import { validationIssueFix } from './validation/models';
 import * as Validations from '../validations/index';
@@ -19,7 +20,7 @@ export function coreValidator(context) {
     var _issuesByIssueID = {};       // issue.id -> issue
     var _issuesByEntityID = {};      // entity.id -> set(issue.id)
     var _validatedGraph = null;
-
+    var _deferred = new Set();
 
     //
     // initialize the validator rulesets
@@ -28,7 +29,7 @@ export function coreValidator(context) {
         Object.values(Validations).forEach(function(validation) {
             if (typeof validation !== 'function') return;
 
-            var fn = validation();
+            var fn = validation(context);
             var key = fn.type;
             _rules[key] = fn;
         });
@@ -45,6 +46,11 @@ export function coreValidator(context) {
     // clear caches, called whenever iD resets after a save
     //
     validator.reset = function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         // clear caches
         _ignoredIssueIDs = {};
         _issuesByIssueID = {};
@@ -63,6 +69,56 @@ export function coreValidator(context) {
         // reload UI
         dispatch.call('validated');
     };
+
+
+    // when the user changes the squaring thereshold, rerun this on all buildings
+    validator.changeSquareThreshold = function() {
+        var checkUnsquareWay = _rules.unsquare_way;
+        if (typeof checkUnsquareWay !== 'function') return;
+
+        // uncache existing
+        Object.values(_issuesByIssueID)
+            .filter(function(issue) { return issue.type === 'unsquare_way'; })
+            .forEach(function(issue) {
+                var entityId = issue.entityIds[0];   // always 1 entity for unsquare way
+                if (_issuesByEntityID[entityId]) {
+                    _issuesByEntityID[entityId].delete(issue.id);
+                }
+                delete _issuesByIssueID[issue.id];
+            });
+
+        var buildings = context.intersects(geoExtent([-180,-90],[180, 90]))  // everywhere
+            .filter(function(entity) {
+                return entity.type === 'way' && entity.tags.building && entity.tags.building !== 'no';
+            });
+
+        // rerun for all buildings
+        buildings.forEach(function(entity) {
+            var detected = checkUnsquareWay(entity, context);
+            if (detected.length !== 1) return;
+
+            var issue = detected[0];
+            var ignoreFix = new validationIssueFix({
+                title: t('issues.fix.ignore_issue.title'),
+                icon: 'iD-icon-close',
+                onClick: function() {
+                    ignoreIssue(this.issue.id);
+                }
+            });
+            ignoreFix.type = 'ignore';
+            ignoreFix.issue = issue;
+            issue.fixes.push(ignoreFix);
+
+            if (!_issuesByEntityID[entity.id]) {
+                _issuesByEntityID[entity.id] = new Set();
+            }
+            _issuesByEntityID[entity.id].add(issue.id);
+            _issuesByIssueID[issue.id] = issue;
+        });
+
+        dispatch.call('validated');
+    };
+
 
     // options = {
     //     what: 'all',     // 'all' or 'edited'
@@ -84,13 +140,13 @@ export function coreValidator(context) {
             if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
             // Sanity check:  This issue may be for an entity that not longer exists.
-            // If we detect this, uncache and return false so it is not incluced..
+            // If we detect this, uncache and return false so it is not included..
             var entityIds = issue.entityIds || [];
             for (var i = 0; i < entityIds.length; i++) {
                 var entityId = entityIds[i];
                 if (!context.hasEntity(entityId)) {
                     delete _issuesByEntityID[entityId];
-                    delete _issuesByIssueID[entityId];
+                    delete _issuesByIssueID[issue.id];
                     return false;
                 }
             }
@@ -229,9 +285,9 @@ export function coreValidator(context) {
 
 
     //
-    // Run validation on a single entity
+    // Run validation on a single entity for the given graph
     //
-    function validateEntity(entity) {
+    function validateEntity(entity, graph) {
         var entityIssues = [];
         var ran = {};
 
@@ -247,7 +303,7 @@ export function coreValidator(context) {
                 return true;
             }
 
-            var detected = fn(entity, context);
+            var detected = fn(entity, graph);
             detected.forEach(function(issue) {
                 var hasIgnoreFix = issue.fixes && issue.fixes.length && issue.fixes[issue.fixes.length - 1].type === 'ignore';
                 if (issue.severity === 'warning' && !hasIgnoreFix) {
@@ -351,16 +407,18 @@ export function coreValidator(context) {
     //
     function validateEntities(entityIDs) {
 
+        var graph = context.graph();
+
         // clear caches for existing issues related to these entities
         entityIDs.forEach(uncacheEntityID);
 
         // detect new issues and update caches
         entityIDs.forEach(function(entityID) {
-            var entity = context.graph().hasEntity(entityID);
+            var entity = graph.hasEntity(entityID);
             // don't validate deleted entities
             if (!entity) return;
 
-            var issues = validateEntity(entity);
+            var issues = validateEntity(entity, graph);
             issues.forEach(function(issue) {
                 var entityIds = issue.entityIds || [];
                 entityIds.forEach(function(entityId) {
@@ -430,10 +488,11 @@ export function coreValidator(context) {
     context.history()
         .on('merge.validator', function(entities) {
             if (!entities) return;
-            var ids = entities.map(function(entity) { return entity.id; });
-            utilCallWhenIdle(function() {
+            var handle = window.requestIdleCallback(function() {
+                var ids = entities.map(function(entity) { return entity.id; });
                 validateEntities(entityIDsToValidate(ids, context.graph()));
-            })();
+            });
+            _deferred.add(handle);
         });
 
 

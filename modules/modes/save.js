@@ -8,12 +8,10 @@ import { actionRevert } from '../actions/revert';
 import { coreGraph } from '../core/graph';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
-import { services } from '../services';
 import { uiConflicts } from '../ui/conflicts';
 import { uiConfirm } from '../ui/confirm';
 import { uiCommit } from '../ui/commit';
 import { uiLoading } from '../ui/loading';
-import { uiSuccess } from '../ui/success';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilKeybinding } from '../util';
 
 
@@ -41,7 +39,6 @@ export function modeSave(context) {
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
-    var _location;
 
 
     function cancel(selectedID) {
@@ -287,7 +284,6 @@ export function modeSave(context) {
             var history = context.history();
             var changes = history.changes(actionDiscardTags(history.difference()));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
-                loadLocation();  // so it is ready when we display the save screen
                 osm.putChangeset(changeset, changes, uploadCallback);
             } else {        // changes were insignificant or reverted by user
                 d3_select('.inspector-wrap *').remove();
@@ -313,8 +309,13 @@ export function modeSave(context) {
             }
 
         } else {
+            var changeCount = context.history().difference().summary().length;
             context.history().clearSaved();
-            success(changeset);
+
+            commit.reset();
+            context.enter(modeBrowse(context));
+            context.ui().assistant.didSaveChangset(changeset, changeCount);
+
             // Add delay to allow for postgres replication #1646 #2678
             window.setTimeout(function() {
                 d3_select('.inspector-wrap *').remove();
@@ -446,18 +447,6 @@ export function modeSave(context) {
     }
 
 
-    function success(changeset) {
-        commit.reset();
-
-        var ui = uiSuccess(context)
-            .changeset(changeset)
-            .location(_location)
-            .on('cancel', function() { context.ui().sidebar.hide(); });
-
-        context.enter(modeBrowse(context).sidebar(ui));
-    }
-
-
     function keybindingOn() {
         d3_select(document)
             .call(keybinding.on('⎋', cancel, true));
@@ -467,27 +456,6 @@ export function modeSave(context) {
     function keybindingOff() {
         d3_select(document)
             .call(keybinding.unbind);
-    }
-
-
-    // Reverse geocode current map location so we can display a message on
-    // the success screen like "Thank you for editing around place, region."
-    function loadLocation() {
-        _location = null;
-        if (!services.geocoder) return;
-
-        services.geocoder.reverse(context.map().center(), function(err, result) {
-            if (err || !result || !result.address) return;
-
-            var addr = result.address;
-            var place = (addr && (addr.town || addr.city || addr.county)) || '';
-            var region = (addr && (addr.state || addr.country)) || '';
-            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
-
-            _location = t('success.thank_you_where.format',
-                { place: place, separator: separator, region: region }
-            );
-        });
     }
 
 

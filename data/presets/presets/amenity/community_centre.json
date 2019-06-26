@@ -8,10 +8,11 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "polling_station",
+        "website",
         "wheelchair"
     ],
     "geometry": [

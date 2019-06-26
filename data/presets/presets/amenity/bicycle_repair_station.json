@@ -5,11 +5,14 @@
         "brand",
         "opening_hours",
         "fee",
+        "payment_multi_fee",
         "service/bicycle"
     ],
     "moreFields": [
-        "payment_multi_fee",
-        "covered"
+        "colour",
+        "covered",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point",
@@ -19,7 +22,10 @@
         "bike",
         "repair",
         "chain",
-        "pump"
+        "pump",
+        "tools",
+        "stand",
+        "multitool"
     ],
     "tags": {
         "amenity": "bicycle_repair_station"

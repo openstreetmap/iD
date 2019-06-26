@@ -1,30 +1,54 @@
 {
     "eu": {
         "icons": {
+            "download": "deskargatu",
             "information": "info",
             "remove": "kendu",
-            "undo": "ezeztatu"
+            "undo": "ezeztatu",
+            "zoom_to": "zoom hona:",
+            "copy": "kopiatu",
+            "open_wikidata": "Ireki wikidata.org-en",
+            "favorite": "gogokoa"
+        },
+        "toolbar": {
+            "undo_redo": "Desegin / Berregin",
+            "recent": "Azkenekoak",
+            "favorites": "Gogokoak",
+            "add_feature": "Ezaugarria gehitu"
         },
         "modes": {
+            "add_feature": {
+                "key": "Tab",
+                "result": "Emaitza {count} ",
+                "results": "{count} emaitza"
+            },
             "add_area": {
                 "title": "Lekua",
                 "description": "Parkeak, eraikuntzak, lakuak edo beste leku motak gehitu mapari.",
-                "tail": "Mapan klikatu leku bat marrazten hasteko; parke, laku edo eraikuntza bat adibidez."
+                "tail": "Mapan klikatu leku bat marrazten hasteko; parke, laku edo eraikuntza bat adibidez.",
+                "filter_tooltip": "areak"
             },
             "add_line": {
                 "title": "Lerroa",
                 "description": "Autopistak, kaleak, bidezidorrak, kanalak edo bestelako lerroak gehitu mapari.",
-                "tail": "Mapa klikatu errepide, bide edo ibilbide bat marrazten hasteko."
+                "tail": "Mapa klikatu errepide, bide edo ibilbide bat marrazten hasteko.",
+                "filter_tooltip": "lerroak"
             },
             "add_point": {
                 "title": "Puntua",
                 "description": "Jatetxeak, monumentuak, postontziak edo beste puntu motak gehitu mapari.",
-                "tail": "Mapa klikatu puntu bat gehitzeko."
+                "tail": "Mapa klikatu puntu bat gehitzeko.",
+                "filter_tooltip": "puntuak"
             },
             "add_note": {
                 "title": "Oharra",
+                "label": "Oharra gehitu",
                 "description": "Arazo bat ikusi duzu? Jakinarazi beste kartografo batzuk.",
-                "tail": "Mapan klik egin ohar bat txertatzeko."
+                "tail": "Mapan klik egin ohar bat txertatzeko.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Gehitu {ezaugarria}"
             },
             "browse": {
                 "title": "Esploratu",
@@ -91,14 +115,11 @@
             },
             "orthogonalize": {
                 "title": "Laukia",
-                "key": "S",
                 "not_squarish": "Hau ezin da karratu egin karratua ez delako."
             },
             "straighten": {
                 "title": "Zuzendu",
-                "description": "Zuzendu lerro hau.",
                 "key": "S",
-                "annotation": "Lerro zuzendua.",
                 "too_bendy": "Hau ezin da zuzendu gehiegi okertu delako."
             },
             "delete": {
@@ -181,9 +202,6 @@
             },
             "split": {
                 "key": "X"
-            },
-            "detach_node": {
-                "key": "E"
             }
         },
         "translate": {
@@ -345,38 +363,14 @@
                 "category-landuse": {
                     "name": "Lurraren erabilera ezaugarriak"
                 },
-                "category-natural-area": {
-                    "name": "Ezaugarri naturalak"
-                },
-                "category-natural-line": {
-                    "name": "Ezaugarri naturalak"
-                },
-                "category-natural-point": {
-                    "name": "Ezaugarri naturalak"
-                },
-                "category-path": {
-                    "name": "Bidearen ezaugarriak"
-                },
-                "category-rail": {
-                    "name": "Errailen ezaugarriak"
-                },
                 "category-restriction": {
                     "name": "Murrizte funtzioak"
-                },
-                "category-road": {
-                    "name": "Errepidearen ezaugarriak"
                 },
                 "category-route": {
                     "name": "Ibilbidearen ezaugarriak"
                 },
                 "category-utility": {
                     "name": "Ezaugarri baliagarriak"
-                },
-                "category-water-area": {
-                    "name": "Uraren ezaugarriak"
-                },
-                "category-water-line": {
-                    "name": "Uraren ezaugarriak"
                 }
             },
             "fields": {
@@ -791,7 +785,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Norabide",
                     "options": {
                         "backward": "Atzeranzko",
                         "both": "Biak / Guztiak",
@@ -1342,7 +1335,6 @@
                     "label": "Mota"
                 },
                 "railway/signal/direction": {
-                    "label": "Norabide",
                     "options": {
                         "backward": "Atzeranzko",
                         "both": "Biak / Guztiak",
@@ -1620,7 +1612,6 @@
                     "label": "Trafiko seinalea"
                 },
                 "traffic_sign/direction": {
-                    "label": "Norabide",
                     "options": {
                         "backward": "Atzera",
                         "both": "Biak / Guztiak",
@@ -1631,7 +1622,6 @@
                     "label": "Mota"
                 },
                 "traffic_signals/direction": {
-                    "label": "Norabide",
                     "options": {
                         "backward": "Atzera",
                         "both": "Biak / Guztiak",
@@ -2091,9 +2081,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Izozkien makina saltzaile"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Egunkarien makina saltzaile"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Egunkarien makina saltzaile"
                 },
@@ -2102,9 +2089,6 @@
                 },
                 "area": {
                     "name": "Gune"
-                },
-                "attraction/animal": {
-                    "name": "Animali"
                 },
                 "attraction/carousel": {
                     "name": "Zaldiko-maldiko"

@@ -1,4 +1,5 @@
 {
+    "icon": "maki-communications-tower",
     "fields": [
         "name",
         "height"

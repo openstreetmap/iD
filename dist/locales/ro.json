@@ -86,7 +86,6 @@
                     "line": "Dreptunghiulează unghiurile liniei.",
                     "area": "Dreptunghiulează unghiurile suprafaței."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Dreptunghiulează unghiurile unei linii.",
                     "area": "Dreptunghiulează unghiurile unei suprafațe."
@@ -97,11 +96,8 @@
             },
             "straighten": {
                 "title": "Întărește ",
-                "description": "Îndreaptă linia.",
                 "key": "S",
-                "annotation": "Îndreaptă o linie.",
-                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită.",
-                "connected_to_hidden": "Această linie nu poate fi îndreptată din moment ce este conectată la un obiect ascuns."
+                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită."
             },
             "delete": {
                 "title": "Șterge",
@@ -289,7 +285,6 @@
         },
         "geocoder": {
             "search": "Caută la nivel mondial...",
-            "no_results_visible": "Niciun rezultat în regiunea vizibilă",
             "no_results_worldwide": "Nu s-a găsit nici un rezultat"
         },
         "geolocate": {
@@ -409,12 +404,6 @@
                 "tooltip": "Suprafețe sunt desenate umplute în întregime."
             }
         },
-        "restore": {
-            "heading": "Ai modificări nesalvate.",
-            "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? ",
-            "restore": "Restaurează schimbările mele",
-            "reset": "Șterge schimbările mele"
-        },
         "save": {
             "title": "Salveaza",
             "no_changes": "Nici o modificare de salvat.",
@@ -438,16 +427,11 @@
             }
         },
         "success": {
-            "just_edited": "Tocmai ai editat OpenStreetMap!",
             "help_link_text": "Detalii"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Renunță"
-        },
-        "splash": {
-            "welcome": "Bine ai venit în editorul iD OpenStreetMap",
-            "walkthrough": "Începe ghidul"
         },
         "source_switch": {
             "live": "live",
@@ -701,32 +685,11 @@
                 "category-landuse": {
                     "name": "Utilizări de Teren"
                 },
-                "category-natural-area": {
-                    "name": "Naturale"
-                },
-                "category-natural-line": {
-                    "name": "Naturale"
-                },
-                "category-path": {
-                    "name": "Poteci"
-                },
-                "category-rail": {
-                    "name": "Căi Ferate"
-                },
                 "category-restriction": {
                     "name": "Restricții"
                 },
-                "category-road": {
-                    "name": "Străzi"
-                },
                 "category-route": {
                     "name": "Rute"
-                },
-                "category-water-area": {
-                    "name": "Ape"
-                },
-                "category-water-line": {
-                    "name": "Ape"
                 }
             },
             "fields": {
@@ -2195,26 +2158,14 @@
                 "landuse/military/barracks": {
                     "name": "Baraci"
                 },
-                "landuse/military/bunker": {
-                    "name": "Munker Militar"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Punct de Control"
-                },
                 "landuse/military/danger_area": {
                     "name": "Zonă de Pericol"
                 },
                 "landuse/military/naval_base": {
                     "name": "Bază Navală"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Sit de Explozie Nucleară"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Curs cu Obstacole"
-                },
-                "landuse/military/office": {
-                    "name": "Oficiu Militar"
                 },
                 "landuse/military/range": {
                     "name": "Gamă Militară"
@@ -2608,9 +2559,6 @@
                 },
                 "relation": {
                     "name": "Relație"
-                },
-                "roundabout": {
-                    "name": "Sens Giratoriu"
                 },
                 "route/ferry": {
                     "name": "Rută de Bac"
@@ -3038,9 +2986,6 @@
                 },
                 "type/site": {
                     "name": "Sit"
-                },
-                "vertex": {
-                    "name": "Altele"
                 },
                 "waterway": {
                     "name": "Drum Marin"

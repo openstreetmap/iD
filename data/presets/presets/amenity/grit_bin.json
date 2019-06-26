@@ -1,7 +1,15 @@
 {
     "icon": "fas-box",
-        "fields": [
-        "access_simple"
+    "fields": [
+        "operator",
+        "access_simple",
+        "material",
+        "collection_times"
+    ],
+    "moreFields": [
+        "colour",
+        "height",
+        "lit"
     ],
     "geometry": [
         "point",

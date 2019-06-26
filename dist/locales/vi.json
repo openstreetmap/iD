@@ -111,11 +111,8 @@
             },
             "straighten": {
                 "title": "Làm thẳng",
-                "description": "Làm thẳng đường kẻ này.",
                 "key": "L",
-                "annotation": "làm thẳng một đường kẻ",
-                "too_bendy": "Không thể làm thẳng đường kẻ này vì nó ngoằn ngoèo quá mức.",
-                "connected_to_hidden": "Không thể làm thẳng đường kẻ này vì nó nối liền với một đối tượng ẩn."
+                "too_bendy": "Không thể làm thẳng đường kẻ này vì nó ngoằn ngoèo quá mức."
             },
             "delete": {
                 "title": "Xóa",
@@ -318,14 +315,6 @@
                     "create": "thêm hạn chế rẽ",
                     "delete": "bỏ hạn chế rẽ"
                 }
-            },
-            "detach_node": {
-                "title": "Rút trích",
-                "key": "R",
-                "description": "Rút trích điểm riêng từ các đường kẻ hoặc vùng này.",
-                "annotation": "rút trích điểm từ đường kẻ hoặc vùng",
-                "restriction": "Không thể rút trích nốt này vì điều này sẽ làm hư một quan hệ “{relation}”.",
-                "connected_to_hidden": "Không thể rút trích nốt này vì nó nối liền với một đối tượng ẩn."
             }
         },
         "restriction": {
@@ -490,7 +479,6 @@
         },
         "geocoder": {
             "search": "Tìm kiếm trên toàn thế giới…",
-            "no_results_visible": "Không tìm thấy kết quả trong khu vực đang xem",
             "no_results_worldwide": "Không tìm thấy kết quả"
         },
         "geolocate": {
@@ -697,12 +685,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Bạn có thay đổi chưa lưu",
-            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
-            "restore": "Phục hồi các thay đổi của tôi",
-            "reset": "Vứt bỏ các thay đổi của tôi"
-        },
         "save": {
             "title": "Lưu",
             "help": "Hãy xem lại các thay đổi của bạn và đăng các thay đổi lên OpenStreetMap để cho mọi người xem.",
@@ -737,10 +719,6 @@
             }
         },
         "success": {
-            "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
-            "thank_you": "Cảm ơn bạn đã cải thiện bản đồ!",
-            "thank_you_location": "Cảm ơn bạn đã cải thiện bản đồ {where}.",
-            "help_html": "Các thay đổi của bạn sẽ xuất hiện tại OpenStreetMap trong vòng vài phút. Các bản đồ tại trang khác có thể được cập nhật chậm hơn.",
             "help_link_text": "Chi tiết",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F",
             "view_on_osm": "Xem các Thay đổi tại OSM",
@@ -755,12 +733,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Hủy bỏ"
-        },
-        "splash": {
-            "welcome": "Chào mừng bạn đến với iD, chương trình vẽ bản đồ OpenStreetMap",
-            "text": "iD là một công cụ hiệu quả và dễ sử dụng để đóng góp vào bản đồ mở lớn nhất trên thế giới. Đây là phiên bản {version}. Xem thêm thông tin tại {website} và báo cáo lỗi trên {github}.",
-            "walkthrough": "Mở trình hướng dẫn",
-            "start": "Tiến hành sửa đổi"
         },
         "source_switch": {
             "live": "thật",
@@ -1133,25 +1105,18 @@
         },
         "streetside": {
             "tooltip": "Hình ảnh Streetside của Microsoft",
-            "title": "Lớp phủ Hình ảnh (Bing Streetside)",
             "report": "Báo cáo lo ngại riêng tư trong hình",
             "view_on_bing": "Xem tại Bản đồ Bing",
             "hires": "Độ phân giải cao"
         },
         "mapillary_images": {
-            "tooltip": "Hình ảnh cấp phố do Mapillary cung cấp",
-            "title": "Lớp phủ Hình ảnh (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Bảng giao thông do Mapillary cung cấp (phải bật Lớp phủ Hình ảnh)",
-            "title": "Lớp phủ Bảng Giao thông (Mapillary)"
+            "tooltip": "Hình ảnh cấp phố do Mapillary cung cấp"
         },
         "mapillary": {
             "view_on_mapillary": "Xem hình này trên Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Hình ảnh cấp phố do OpenStreetCam cung cấp",
-            "title": "Lớp phủ Hình ảnh (OpenStreetCam)"
+            "tooltip": "Hình ảnh cấp phố do OpenStreetCam cung cấp"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Xem hình này trên OpenStreetCam"
@@ -1745,12 +1710,10 @@
                     "continue_line": "Vẽ tiếp đường kẻ từ nốt được chọn",
                     "merge": "Gộp các đối tượng được chọn",
                     "disconnect": "Tháo gỡ các đối tượng tại nốt được chọn",
-                    "detach_node": "Rút trích điểm từ nốt được chọn trên đường kẻ hoặc vùng",
                     "split": "Cắt đôi các đường kẻ tại nốt được chọn",
                     "reverse": "Đảo ngược chiều đường kẻ",
                     "move": "Di chuyển các đối tượng được chọn",
                     "rotate": "Xoay đối tượng được chọn",
-                    "orthogonalize": "Làm thẳng đường kẻ được chọn, hoặc làm vuông góc vùng hoặc đường kẻ đóng được chọn",
                     "circularize": "Làm tròn vùng hoặc đường kẻ đóng",
                     "reflect_long": "Lật đối tượng qua trục dài",
                     "reflect_short": "Lật đối tượng qua trục ngắn",
@@ -1812,47 +1775,17 @@
                 "category-building": {
                     "name": "Liên quan đến Tòa nhà"
                 },
-                "category-golf-area": {
-                    "name": "Liên quan đến Golf"
-                },
-                "category-golf-line": {
-                    "name": "Liên quan đến Golf"
-                },
                 "category-landuse": {
                     "name": "Liên quan đến Sử dụng Đất"
                 },
-                "category-natural-area": {
-                    "name": "Liên quan đến Thiên nhiên"
-                },
-                "category-natural-line": {
-                    "name": "Liên quan đến Thiên nhiên"
-                },
-                "category-natural-point": {
-                    "name": "Liên quan đến Thiên nhiên"
-                },
-                "category-path": {
-                    "name": "Liên quan đến Đường mòn"
-                },
-                "category-rail": {
-                    "name": "Liên quan đến Đường sắt"
-                },
                 "category-restriction": {
                     "name": "Liên quan đến Hạn chế"
-                },
-                "category-road": {
-                    "name": "Liên quan đến Đường sá"
                 },
                 "category-route": {
                     "name": "Liên quan đến Tuyến đường"
                 },
                 "category-utility": {
                     "name": "Liên quan đến Cơ sở hạ tầng"
-                },
-                "category-water-area": {
-                    "name": "Liên quan đến Nước"
-                },
-                "category-water-line": {
-                    "name": "Liên quan đến Nước"
                 }
             },
             "fields": {
@@ -2317,7 +2250,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -2595,9 +2527,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Phí Truy cập Internet"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Tên Mạng)"
                 },
                 "junction/ref_oneway": {
                     "label": "Số Giao lộ"
@@ -3024,7 +2953,6 @@
                     "placeholder": "Tầm xa đến một chữ số thập phân (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -3423,8 +3351,7 @@
                     "options": {
                         "bucket": "Thùng",
                         "chemical": "Hóa chất",
-                        "flush": "Bấm",
-                        "pitlatrine": "Mương"
+                        "flush": "Bấm"
                     }
                 },
                 "toll": {
@@ -3464,7 +3391,6 @@
                     "label": "Bảng Giao thông"
                 },
                 "traffic_sign/direction": {
-                    "label": "Hướng",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -3475,7 +3401,6 @@
                     "label": "Kiểu"
                 },
                 "traffic_signals/direction": {
-                    "label": "Chiều",
                     "options": {
                         "backward": "Ngược",
                         "both": "2 Chiều / Mọi Hướng",
@@ -3896,8 +3821,7 @@
                     "terms": "trường dạy lái xe, truong day lai xe"
                 },
                 "amenity/embassy": {
-                    "name": "Tòa đại sứ",
-                    "terms": "tòa đại sứ, toà đại sứ, toa dai su, toa dai su"
+                    "name": "Tòa đại sứ"
                 },
                 "amenity/fast_food": {
                     "name": "Nhà hàng Ăn nhanh",
@@ -4341,9 +4265,6 @@
                     "name": "Máy Bán Kem",
                     "terms": "máy bán kem, máy bán kem tự động, máy bán cà rem, máy bán cà-rem, kem que, may ban kem, may ban kem tu dong, may ban ca rem, may ban ca-rem"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Máy Bán Báo"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Máy Bán Báo",
                     "terms": "máy bán báo, máy bán tạp chí, máy bán tờ báo, may ban bao, may ban tap chi, may ban to bao"
@@ -4414,10 +4335,6 @@
                 "attraction/amusement_ride": {
                     "name": "Trò chơi tại Công viên Vui chơi",
                     "terms": "trò chơi, trò chơi cảm giác mạnh, công viên vui chơi, công viên giải trí, tro choi, tro choi cam giac manh, cong vien vui choi, cong vien giai tri"
-                },
-                "attraction/animal": {
-                    "name": "Động vật",
-                    "terms": "thú vật, vườn thú, vườn bách thảo, sư tử, con hổ, con cọp, con gấu, con voi, con khỉ, hươu cao cổ, thu vat, vuon thu, vuon bach thao, su tu, con ho, con cop, con gau, con voi, con khi, huou cao co"
                 },
                 "attraction/big_wheel": {
                     "name": "Vòng quay Quan sát",
@@ -4767,9 +4684,6 @@
                 "camp_site/camp_pitch": {
                     "name": "Lều Cắm trại",
                     "terms": "lều, lều cắm trại, leu, leu cam trai"
-                },
-                "circular": {
-                    "name": "Bùng binh Cổ điển"
                 },
                 "club": {
                     "name": "Câu lạc bộ",
@@ -5146,9 +5060,6 @@
                 "highway/bus_guideway": {
                     "name": "Đường dẫn Xe buýt",
                     "terms": "đường dẫn xe buýt, duong dan xe buyt"
-                },
-                "highway/bus_stop": {
-                    "name": "Trạm/Bến Xe buýt"
                 },
                 "highway/construction": {
                     "name": "Đường Đóng cửa",
@@ -5539,14 +5450,6 @@
                     "name": "Trại lính",
                     "terms": "trại lính, doanh trại, trai linh, doanh trai"
                 },
-                "landuse/military/bunker": {
-                    "name": "Boong Ke",
-                    "terms": "boong ke, boong-ke, boongke"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Trạm Kiểm soát",
-                    "terms": "trạm kiểm soát, tram kiem soat"
-                },
                 "landuse/military/danger_area": {
                     "name": "Khu vực Nguy hiểm",
                     "terms": "khu vực nguy hiểm, vùng nguy hiểm, khu vuc nguy hiem, vung nguy hiem"
@@ -5555,17 +5458,9 @@
                     "name": "Căn cứ Hải quân",
                     "terms": "căn cứ hải quân, trạm hải quân, can cu hai quan, tram hai quan"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nơi Nổ Vũ khí Hạt nhân",
-                    "terms": "nơi nổ vũ khí hạt nhân, nơi nổ bom hạt nhân, noi no vu khi hat nhan, noi no bom hat nhan"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Đường Chạy vượt Chướng ngại vật",
                     "terms": "đường chạy vượt chướng ngại vật, duong chay vuot chuong ngai vat"
-                },
-                "landuse/military/office": {
-                    "name": "Văn phòng Quân sự",
-                    "terms": "văn phòng quân sự, văn phòng quân đội, văn phòng hải quân, văn phòng không quân, van phong quan su, van phong quan doi, van phong hai quan, van phong khong quan"
                 },
                 "landuse/military/range": {
                     "name": "Tầm đạn",
@@ -5899,14 +5794,6 @@
                 "leisure/track": {
                     "name": "Đường Đua (Không phải Đua Xe)",
                     "terms": "đường đua, trường đua, đường đua ngựa, đường đua xe đạp, duong dua, truong dua, duong dua ngua, duong dua xe dap"
-                },
-                "leisure/track/horse_racing": {
-                    "name": "Đường Đua Ngựa",
-                    "terms": "đường đua ngựa, duong dua ngua"
-                },
-                "leisure/track/running": {
-                    "name": "Đường Chạy",
-                    "terms": "đường chạy, đường chạy đua, đường chạy điền kinh, duong chay, duong chay dua, duong chay dien kinh"
                 },
                 "leisure/water_park": {
                     "name": "Công viên Nước",
@@ -6586,46 +6473,6 @@
                     "name": "Máy biến áp",
                     "terms": "máy biến áp, may bien ap"
                 },
-                "public_transport/platform": {
-                    "name": "Trạm/Bến Phương tiện Công cộng",
-                    "terms": "trạm, bến, ke, ke ga, phương tiện công cộng, ptcc, giao thông công cộng, gtcc, tram, ben, phuong tien cong cong, giao thong cong cong"
-                },
-                "public_transport/platform_aerialway": {
-                    "name": "Trạm/Bến Cáp treo",
-                    "terms": "trạm cáp treo, trạm thang kéo, bến cáp treo, bến thang kéo, tram cap treo, tram thang keo, ben cap treo, ben thang keo"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Trạm/Bến Xe buýt",
-                    "terms": "trạm xe buýt, trạm xe bus, bến xe buýt, bến xe bus, ke buýt, ke bus, tram xe buyt, tram xe bus, ben xe buyt, ben xe bus, ke buyt"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Bến Phà",
-                    "terms": "bến phà, ke phà, ben pha, ke pha"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "Trạm/Bến Đường sắt Nhẹ",
-                    "terms": "trạm đường sắt nhẹ, trạm đường ray nhẹ, trạm tàu điện, bến đường sắt nhẹ, bến đường ray nhẹ, bến tàu điện, ke đường sắt nhẹ, ke đường ray nhẹ, ke tàu điện, tram duong sat nhe, tram duong ray nhe, tram tau dien, ben duong sat nhe, ben duong ray nhe, ben tau dien, ke duong sat nhe, ke duong ray nhe, ke tau dien"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Trạm/Bến Tàu một ray",
-                    "terms": "trạm tàu một ray, trạm monorail, bến tàu một ray, bến monorail, ke tàu một ray, ke monorail, tram tau mot ray, tram monorail, ben tau mot ray, ben monorail, ke tau mot ray"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Trạm/Bến Tàu điện ngầm",
-                    "terms": "trạm tàu điện ngầm, bến tàu điện ngầm, tram tau dien ngam, ben tau dien ngam"
-                },
-                "public_transport/platform_train": {
-                    "name": "Trạm/Bến Xe lửa",
-                    "terms": "trạm xe lửa, trạm tàu hỏa, trạm tau hoả, bến xe lửa, bến tàu hỏa, bến tàu hoả, tram xe lua, tram tau hoa, ben xe lua, ben tau hoa"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Trạm/Bến Tàu điện",
-                    "terms": "trạm tàu điện, trạm xe điện, bến tàu điện, bến xe điện, ke tàu điện, ke xe điện, tram tau dien, tram xe dien, ben tau dien, ben xe dien, ke tau dien, ke xe dien"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Trạm/Bến Xe điện Bánh hơi",
-                    "terms": "trạm xe điện bánh hơi, trạm xe buýt điện, trạm xe bus điện, bến xe điện bánh hơi, bến xe buýt điện, bến xe bus điện, ke xe điện bánh hơi, ke xe buýt điện, ke xe bus điện, tram xe dien banh hoi, tram xe buyt dien, tram xe bus dien, ben xe dien banh hoi, ben xe buyt dien, ben xe bus dien, ke xe dien banh hoi, ke xe buyt dien, ke xe bus dien"
-                },
                 "public_transport/station": {
                     "name": "Nhà ga Phương tiện Công cộng",
                     "terms": "nhà ga phương tiện công cộng, nhà ga ptcc, nhà ga giao thông công cộng, nhà ga gtcc, nha ga phuong tien cong cong, nha ga ptcc, nha ga giao thong cong cong, nha ga gtcc"
@@ -6768,9 +6615,6 @@
                     "name": "Đường sắt Khổ hẹp",
                     "terms": "đường sắt khổ hẹp, đường ray khổ hẹp, đường sắt hẹp, đường ray hẹp, duong sat kho hep, duong ray kho hep, duong sat hep, duong ray hep"
                 },
-                "railway/platform": {
-                    "name": "Trạm/Bến Xe lửa"
-                },
                 "railway/rail": {
                     "name": "Đường sắt",
                     "terms": "đường sắt, đường ray, duong sat, duong ray"
@@ -6808,9 +6652,6 @@
                 "relation": {
                     "name": "Quan hệ",
                     "terms": "quan hệ, liên kệ, mối quan hệ, mối liên hệ, quan he, lien ke, moi quan he, moi lien he"
-                },
-                "roundabout": {
-                    "name": "Đường vòng"
                 },
                 "route/ferry": {
                     "name": "Tuyến đường Phà",
@@ -6920,8 +6761,7 @@
                     "terms": "hiệu sách, tiệm sách, chỗ bán sách vở, hieu sach, tiem sach, cho ban sach vo"
                 },
                 "shop/boutique": {
-                    "name": "Tiệm Thời trang",
-                    "terms": "tiệm thời trang, cửa hàng thời trang, chỗ bán quần áo thời trang, tiem thoi trang, cua hang thoi trang, cho ban quan ao thoi trang"
+                    "name": "Tiệm Thời trang"
                 },
                 "shop/butcher": {
                     "name": "Hàng Thịt",
@@ -7048,8 +6888,7 @@
                     "terms": "quầy bán rau cỏ, quầy rau cỏ, quầy bán trái cây, quầy trái cây, tiệm nông sản, cửa hàng nông sản, rau quả, quay ban rau co, quay rau co, quay ban trai cay, quay trai cay, tiem nong san, cua hang nong san, rau qua"
                 },
                 "shop/fashion": {
-                    "name": "Tiệm Thời trang",
-                    "terms": "tiệm thời trang, cửa hàng thời trang, cửa hiệu thời trang, áo dài, tiem thoi trang, cua hang thoi trang, cua hieu thoi trang, ao dai"
+                    "name": "Tiệm Thời trang"
                 },
                 "shop/fireplace": {
                     "name": "Tiệm Lò sưởi",
@@ -7698,10 +7537,6 @@
                     "name": "Đường thủy",
                     "terms": "đường thủy, đường thuỷ, đường sông, dòng nước, duong thuy, duong song, dong nuoc"
                 },
-                "vertex": {
-                    "name": "Khác",
-                    "terms": "khác, linh tinh, tùy chỉnh, tuỳ chỉnh, đặc biệt, khac, tuy chinh, dac biet"
-                },
                 "waterway": {
                     "name": "Đường sông"
                 },
@@ -7771,24 +7606,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Hình ảnh trực giao Vlaanderen mới nhất © AGIV"
-                },
-                "name": "Hình ảnh trực giao Vlaanderen mới nhất của AGIV"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Hình ảnh trực giao Vlaanderen © AGIV"
-                },
-                "name": "Hình chụp trên không 10 cm 2013–2015 Vlaanderen AGIV"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Vlaanderen © AGIV"
-                },
-                "name": "AGIV Vlaanderen GRB"
-            },
             "Bing": {
                 "description": "Hình ảnh chụp từ vệ tinh và trên không trung.",
                 "name": "Hình chụp trên không Bing"
@@ -8153,7 +7970,6 @@
                 "attribution": {
                     "text": "© đô thị Stockholm, CC0"
                 },
-                "description": "Hình ảnh trực giao từ đô thị Stockholm năm 2015 được phát hành theo CC0",
                 "name": "Hình trực giao Stockholm"
             },
             "tf-cycle": {
@@ -8883,14 +8699,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap Hoa Kỳ",
                 "description": "Chúng ta giúp phát triển và cải thiện OpenStreetMap tại Hoa Kỳ.",
-                "extendedDescription": "Chúng ta giúp OpenStreetMap bằng cách tổ chức các hội nghị hàng năm, cung cấp tài nguyên cộng đồng, tạo quan hệ đối tác, và truyền bá dự án. Mời tham gia OpenStreetMap Hoa Kỳ tại đây: {signupUrl}",
-                "events": {
-                    "sotmus2018": {
-                        "name": "State of the Map Hoa Kỳ 2018",
-                        "description": "Hãy tham dự hội nghị State of the Map Hoa Kỳ tại Detroit, Michigan, cùng với cộng đồng OpenStreetMap. Gặp gỡ với những người đóng góp khác, kinh doanh, và tổ chức phi lợi nhuận đều cộng tác xây dựng bản đồ thế giới mở có thể sửa đổi.",
-                        "where": "Detroit, Michigan"
-                    }
-                }
+                "extendedDescription": "Chúng ta giúp OpenStreetMap bằng cách tổ chức các hội nghị hàng năm, cung cấp tài nguyên cộng đồng, tạo quan hệ đối tác, và truyền bá dự án. Mời tham gia OpenStreetMap Hoa Kỳ tại đây: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

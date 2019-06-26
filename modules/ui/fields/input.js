@@ -1,13 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
+import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
-import { tooltip } from '../../util/tooltip';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
@@ -24,18 +20,11 @@ export function uiFieldText(field, context) {
     var nominatim = services.geocoder;
     var input = d3_select(null);
     var _entity;
-    var _brandTip;
-
-    if (field.id === 'brand') {
-        _brandTip = tooltip()
-            .title(t('inspector.lock.suggestion', { label: field.label }))
-            .placement('bottom');
-    }
-
 
     function i(selection) {
         var preset = _entity && context.presets().match(_entity, context.graph());
-        var isSuggestion = preset && preset.suggestion && field.id === 'brand';
+        var isLocked = preset && preset.suggestion && field.id === 'brand';
+        field.locked(isLocked);
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -60,8 +49,8 @@ export function uiFieldText(field, context) {
             .merge(input);
 
         input
-            .classed('disabled', !!isSuggestion)
-            .attr('readonly', isSuggestion || null)
+            .classed('disabled', !!isLocked)
+            .attr('readonly', isLocked || null)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
@@ -102,18 +91,6 @@ export function uiFieldText(field, context) {
                     input.node().value = vals.join(';');
                     change()();
                 });
-
-        } else if (preset && field.id === 'brand') {
-            var pTag = preset.id.split('/', 2);
-            var pKey = pTag[0];
-            if (isSuggestion) {
-                // A "suggestion" preset (brand name)
-                // Put suggestion keys in `field.keys` so delete button can remove them all.
-                field.keys = Object.keys(preset.removeTags)
-                    .filter(function(k) { return k !== pKey && k !== 'name'; });
-            }
-
-            wrap.call(isSuggestion ? _brandTip : _brandTip.destroy);
         }
     }
 

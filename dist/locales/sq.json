@@ -95,7 +95,6 @@
                     "line": "Bëj qoshet e vijës katror.",
                     "area": "Bëj qoshet e sipërfaqes katror."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Qoshet e vijës u bën katror.",
                     "area": "Qoshet e sipërfaqes u bën katror."
@@ -106,11 +105,8 @@
             },
             "straighten": {
                 "title": "Drejto",
-                "description": "Drejtoni këtë vijë.",
                 "key": "S",
-                "annotation": "U drejtua një vijë.",
-                "too_bendy": "Kjo nuk mund të drejtohet sepse kthehet shumë.",
-                "connected_to_hidden": "Kjo vijë nuk mund drejtohet sepse është lidhur me një tipar të fshehur."
+                "too_bendy": "Kjo nuk mund të drejtohet sepse kthehet shumë."
             },
             "delete": {
                 "title": "Fshij",
@@ -243,9 +239,6 @@
                     "create": "U shtu një kufizim kthesësh.",
                     "delete": "U fshi një kufizim kthesësh."
                 }
-            },
-            "detach_node": {
-                "key": "E"
             }
         },
         "restriction": {
@@ -370,7 +363,6 @@
         },
         "geocoder": {
             "search": "Kërkoni të gjithë botën...",
-            "no_results_visible": "Nuk ka rezultate në zonën e dukshme të hartës",
             "no_results_worldwide": "Nuk u gjetën rezultate"
         },
         "geolocate": {
@@ -497,9 +489,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Ju keni ndryshime të paruajtura"
-        },
         "save": {
             "title": "Ruaj",
             "help": "Rishikoni ndryshimet tuaja dhe ngarkojini ato në OpenStreetMap, duke i bërë ato të dukshme tek përdoruesit e tjerë.",
@@ -529,9 +518,6 @@
             }
         },
         "success": {
-            "just_edited": "Ju sapo edituat në OpenStreetMap!",
-            "thank_you": "Faleminderit për përmirësimin e hartës.",
-            "thank_you_location": "Faleminderit për përmirësimin e hartës përreth {where}",
             "help_link_text": "Detajet",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Shikoni Ndryshimet në OSM",
@@ -546,11 +532,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Anullo"
-        },
-        "splash": {
-            "welcome": "Mirësevini në iD OpenStreetMap editor",
-            "text": "iD është një mjet familar por i fuqishëm për të kontribuar në hartën e hapur më të mirë në botë. Ky është vesioni {version}. Për më shumë informacion shihni {website} dhe raportoni problematikat në {github}.",
-            "start": "Editoni tani"
         },
         "source_switch": {
             "live": "drejtpërdrejt"

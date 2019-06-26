@@ -1,29 +1,27 @@
 import { t } from '../util/locale';
-import { actionChangeTags } from '../actions/change_tags';
+//import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
-import { geoOrthoCanOrthogonalize, geoOrthoMaxOffsetAngle } from '../geo/ortho';
+import { geoOrthoCanOrthogonalize } from '../geo/ortho';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { services } from '../services';
 
-
-export function validationUnsquareWay() {
+export function validationUnsquareWay(context) {
     var type = 'unsquare_way';
+    var DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
 
     // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
     var epsilon = 0.05;
-    var degreeThreshold = 13;
-    var autofixDegreeThreshold = 6.5;
     var nodeThreshold = 10;
 
     function isBuilding(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
-
         return entity.tags.building && entity.tags.building !== 'no';
     }
 
 
-    var validation = function checkUnsquareWay(entity, context) {
-        var graph = context.graph();
+    var validation = function checkUnsquareWay(entity, graph) {
+
         if (!isBuilding(entity, graph)) return [];
 
         // don't flag ways marked as physically unsquare
@@ -33,11 +31,11 @@ export function validationUnsquareWay() {
         if (!isClosed) return [];        // this building has bigger problems
 
         // don't flag ways with lots of nodes since they are likely detail-mapped
-        var nodes = context.childNodes(entity).slice();    // shallow copy
+        var nodes = graph.childNodes(entity).slice();    // shallow copy
         if (nodes.length > nodeThreshold + 1) return [];   // +1 because closing node appears twice
 
         // ignore if not all nodes are fully downloaded
-        var osm = context.connection();
+        var osm = services.osm;
         if (!osm || nodes.some(function(node) { return !osm.isDataLoaded(node.loc); })) return [];
 
         // don't flag connected ways to avoid unresolvable unsquare loops
@@ -55,48 +53,52 @@ export function validationUnsquareWay() {
         if (hasConnectedSquarableWays) return [];
 
 
+        // user-configurable square threshold
+        var storedDegreeThreshold = context.storage('validate-square-degrees');
+        var degreeThreshold = isNaN(storedDegreeThreshold) ? DEFAULT_DEG_THRESHOLD : parseFloat(storedDegreeThreshold);
+
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
         var autoArgs;
-        // only allow autofixing features that are very close to square already
-        var maxOffsetAngle = geoOrthoMaxOffsetAngle(points, isClosed, degreeThreshold);
-        if (maxOffsetAngle && maxOffsetAngle < autofixDegreeThreshold) {
-            // note: use default params for actionOrthogonalize, not relaxed epsilon
-            var autoAction = actionOrthogonalize(entity.id, context.projection);
+        // don't allow autosquaring features linked to wikidata
+        if (!entity.tags.wikidata) {
+            // use same degree threshold as for detection
+            var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
-            autoArgs = [autoAction, t('operations.orthogonalize.annotation.area')];
+            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature.single')];
         }
 
         return [new validationIssue({
             type: type,
             severity: 'warning',
-            message: function() {
+            message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context) }) : '';
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(autoArgs !== undefined),
+            hash: JSON.stringify(autoArgs !== undefined) + degreeThreshold,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-orthogonalize',
                     title: t('issues.fix.square_feature.title'),
                     autoArgs: autoArgs,
-                    onClick: function(completionHandler) {
+                    onClick: function(context, completionHandler) {
                         var entityId = this.issue.entityIds[0];
-                        // note: use default params for actionOrthogonalize, not relaxed epsilon
+                        // use same degree threshold as for detection
                         context.perform(
-                            actionOrthogonalize(entityId, context.projection),
-                            t('operations.orthogonalize.annotation.area')
+                            actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
+                            t('operations.orthogonalize.annotation.feature.single')
                         );
                         // run after the squaring transition (currently 150ms)
                         window.setTimeout(function() { completionHandler(); }, 175);
                     }
                 }),
+                /*
                 new validationIssueFix({
                     title: t('issues.fix.tag_as_unsquare.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         var entityId = this.issue.entityIds[0];
                         var entity = context.entity(entityId);
                         var tags = Object.assign({}, entity.tags);  // shallow copy
@@ -107,6 +109,7 @@ export function validationUnsquareWay() {
                         );
                     }
                 })
+                */
             ]
         })];
 

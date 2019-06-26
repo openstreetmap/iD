@@ -41,12 +41,12 @@ describe('iD.validations.tag_suggests_area', function () {
     }
 
     function validate() {
-        var validator = iD.validationTagSuggestsArea();
+        var validator = iD.validationTagSuggestsArea(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
         entities.forEach(function(entity) {
-            issues = issues.concat(validator(entity, context));
+            issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }

@@ -82,7 +82,6 @@
                     "line": "Usporiadať rohy tejto čiary do pravého uhla.",
                     "area": "Usporiadať rohy tejto plochy do pravého uhla."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Usporiadanie rohov čiary do pravého uhla.",
                     "area": "Usporiadanie rohov plochy do pravého uhla."
@@ -93,11 +92,8 @@
             },
             "straighten": {
                 "title": "Vyrovnať",
-                "description": "Vyrovnať túto čiaru.",
                 "key": "S",
-                "annotation": "Vyrovnanie čiary.",
-                "too_bendy": "Tento objekt nemožno vyrovnať, pretože je príliš nepravidelný.",
-                "connected_to_hidden": "Túto čiaru nemožno vyrovnať, pretože je spojená so skrytým objektom."
+                "too_bendy": "Tento objekt nemožno vyrovnať, pretože je príliš nepravidelný."
             },
             "delete": {
                 "title": "Vymazať",
@@ -383,7 +379,6 @@
         },
         "geocoder": {
             "search": "Hľadaj celosvetovo...",
-            "no_results_visible": "Žiadne výsledky vo viditeľnej mapovej oblasti",
             "no_results_worldwide": "Bez výsledkov"
         },
         "geolocate": {
@@ -524,12 +519,6 @@
                 "tooltip": "Plochy su vykreslené plne vyplnené."
             }
         },
-        "restore": {
-            "heading": "Máte neuložené zmeny",
-            "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej návštevy?",
-            "restore": "Obnoviť moje zmeny",
-            "reset": "Vymazať moje zmeny"
-        },
         "save": {
             "title": "Ulož",
             "help": "Prezrite si znovu Vaše zmeny a nahrajte ich do OpenStreetMap, čím ich sprístupnite ďalším užívateľom.",
@@ -563,18 +552,12 @@
             }
         },
         "success": {
-            "just_edited": "Práve ste upravili OpenStreetMap!",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Zrušiť"
-        },
-        "splash": {
-            "welcome": "Vitajte v iD editore pre OpenStreetMap",
-            "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je verzia {version}. Pre viac informácií navštívte {website} alebo nahlasujte chyby na {github}.",
-            "walkthrough": "Začni prehliadku"
         },
         "source_switch": {
             "live": "pripojený",
@@ -592,12 +575,7 @@
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
         "mapillary_images": {
-            "tooltip": "Fotografie ulíc z Mapillary",
-            "title": "Vrstva fotografií (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Dopravné značenia zo služby Mapillary (musí byť povolená vrstva fotografií)",
-            "title": "Vrstva dopravných značení (Mapillary)"
+            "tooltip": "Fotografie ulíc z Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Prezrieť tento obrázok na Mapillary"
@@ -944,7 +922,6 @@
                     "reverse": "Obrátiť smer čiary",
                     "move": "Presunúť vybraný objet",
                     "rotate": "Otočiť vybrané objekty",
-                    "orthogonalize": "Vyrovnať čiaru / Usporiadať plochu do pravého uhla",
                     "circularize": "Usporiadať uzavretú čiaru alebo plochu do kruhu",
                     "reflect_long": "Preklopiť objekty cez ich dlhú osu",
                     "reflect_short": "Preklopiť objekty cez ich kratšiu osu",
@@ -982,35 +959,11 @@
                 "category-landuse": {
                     "name": "Objekty využitia územia"
                 },
-                "category-natural-area": {
-                    "name": "Prírodné objekty"
-                },
-                "category-natural-line": {
-                    "name": "Prírodné objekty"
-                },
-                "category-natural-point": {
-                    "name": "Prírodné objekty"
-                },
-                "category-path": {
-                    "name": "Objekty cestičiek"
-                },
-                "category-rail": {
-                    "name": "Železničné objekty"
-                },
                 "category-restriction": {
                     "name": "Objekty obmedzení"
                 },
-                "category-road": {
-                    "name": "Cestné objekty"
-                },
                 "category-route": {
                     "name": "Cestné objekty"
-                },
-                "category-water-area": {
-                    "name": "Vodné objekty"
-                },
-                "category-water-line": {
-                    "name": "Vodné objekty"
                 }
             },
             "fields": {
@@ -1584,9 +1537,6 @@
                 "internet_access/fee": {
                     "label": "Poplatok za prístup k Internetu"
                 },
-                "internet_access/ssid": {
-                    "label": "SSID (Názov siete)"
-                },
                 "kerb": {
                     "label": "Obrubník"
                 },
@@ -2142,8 +2092,7 @@
                     "options": {
                         "bucket": "Suché",
                         "chemical": "Chemické",
-                        "flush": "Splachovacie",
-                        "pitlatrine": "Latrína"
+                        "flush": "Splachovacie"
                     }
                 },
                 "toll": {
@@ -2528,8 +2477,7 @@
                     "terms": "autoskola,vodičský preukaz,vodicsky preukaz,vodičák,vodicak"
                 },
                 "amenity/embassy": {
-                    "name": "Veľvyslanectvo",
-                    "terms": "ambasáda,ambasada,zastupiteľstvo,zastupitelstvo,veľvyslanectvo,velvyslanectvo"
+                    "name": "Veľvyslanectvo"
                 },
                 "amenity/fast_food": {
                     "name": "Rýchle občerstvenie",
@@ -2769,9 +2717,6 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat na ženké hygienické produkty",
                     "terms": "Automat na zenske produkty,vlozky,vložky,kondomy,kondómy,prezervatív,prezervativ,tampon,tampón"
-                },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Automat na noviny"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Automat na noviny",
@@ -3515,10 +3460,6 @@
                     "name": "Námorná základňa",
                     "terms": "namorna zakladna"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Miesto nukleárnej explózie",
-                    "terms": "miesto nuklearnej explózie, jadrový výbuch,jadrovy vybuch,jadrová bonba,jadrova bomba"
-                },
                 "landuse/orchard": {
                     "name": "Sad",
                     "terms": "sad,stromy,ovocie,ovocné stromy,ovocne stromy,ovocný sad,ovocny sad"
@@ -4031,9 +3972,6 @@
                     "name": "Relácia",
                     "terms": "relacia,linka,trasa"
                 },
-                "roundabout": {
-                    "name": "Kruhový objazd"
-                },
                 "route/ferry": {
                     "name": "Trajektová trasa",
                     "terms": "trajektova trasa,trasa trajektu,trajekt,linka,trasa kompy,kompa"
@@ -4098,8 +4036,7 @@
                     "terms": "knihkupectvo,knihy,kniha,obchod s knihami"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "oblecenie,oblečenie,šaty,saty,odev,odevy"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Mäsiarstvo",
@@ -4208,8 +4145,7 @@
                     "terms": "Volny predaj ovocia,ovocie"
                 },
                 "shop/fashion": {
-                    "name": "Obchod s módnymi doplnkami",
-                    "terms": "obchod s modmymi doplnkami"
+                    "name": "Obchod s módnymi doplnkami"
                 },
                 "shop/fishmonger": {
                     "name": "Predaj rýb"
@@ -4645,10 +4581,6 @@
                 "type/route_master": {
                     "name": "Hlavná trasa",
                     "terms": "hlavna trasa,nadradená trasa,nadradena trasa"
-                },
-                "vertex": {
-                    "name": "Iné",
-                    "terms": "ostatné,ostatne,ine,zvyšnézvysne"
                 },
                 "waterway": {
                     "name": "Vodná cesta"

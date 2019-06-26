@@ -44,7 +44,7 @@ export function presetCollection(collection) {
         search: function(value, geometry, countryCode) {
             if (!value) return this;
 
-            value = value.toLowerCase();
+            value = value.toLowerCase().trim();
 
             // match at name beginning or just after a space (e.g. "office" -> match "Law Office")
             function leading(a) {

@@ -1,0 +1,15 @@
+{
+    "name": "Aerial Features",
+    "description": "Chair Lifts, Gondolas, Zip Lines, etc.",
+    "toggleable": true,
+    "matches": {
+        "allTags": {
+            "aerialway": {
+                "*": true,
+                "no": false,
+                "yes": false,
+                "station": false
+            }
+        }
+    }
+}

@@ -1,5 +1,9 @@
 {
     "icon": "maki-building",
+    "moreFields": [
+        "{building}",
+        "polling_station"
+    ],
     "geometry": [
         "area"
     ],

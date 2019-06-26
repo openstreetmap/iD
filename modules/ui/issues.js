@@ -5,16 +5,21 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { actionNoop } from '../actions/noop';
+//import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../geo';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle, utilHighlightEntities } from '../util';
+import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../util';
 
 
 export function uiIssues(context) {
     var key = t('issues.key');
+
+    var MINSQUARE = 0;
+    var MAXSQUARE = 20;
+    var DEFAULTSQUARE = 5;  // see also unsquare_way.js
+
     var _errorsSelection = d3_select(null);
     var _warningsSelection = d3_select(null);
     var _rulesList = d3_select(null);
@@ -29,8 +34,12 @@ export function uiIssues(context) {
     };
 
     // listeners
-    context.validator().on('validated.uiIssues', utilCallWhenIdle(update));
-    context.map().on('move.uiIssues', _debounce(utilCallWhenIdle(update), 1000));
+    context.validator().on('validated.uiIssues',
+        function() { window.requestIdleCallback(update); }
+    );
+    context.map().on('move.uiIssues',
+        _debounce(function() { window.requestIdleCallback(update); }, 1000)
+    );
 
 
     function addNotificationBadge(selection) {
@@ -114,7 +123,7 @@ export function uiIssues(context) {
             .append('span')
             .attr('class', 'issue-message');
 
-
+        /*
         labelsEnter
             .append('span')
             .attr('class', 'issue-autofix')
@@ -138,7 +147,7 @@ export function uiIssues(context) {
                     })
                     .call(svgIcon('#iD-icon-wrench'));
             });
-
+        */
 
         // Update
         items = items
@@ -147,10 +156,10 @@ export function uiIssues(context) {
 
         items.selectAll('.issue-message')
             .text(function(d) {
-                return d.message();
+                return d.message(context);
             });
 
-
+        /*
         // autofix
         var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
 
@@ -204,6 +213,7 @@ export function uiIssues(context) {
                 context.resumeChangeDispatch();
                 context.validator().validate();
             });
+        */
     }
 
 
@@ -560,7 +570,13 @@ export function uiIssues(context) {
 
         label
             .append('span')
-            .text(function(d) { return t('issues.' + d + '.title'); });
+            .html(function(d) {
+                var params = {};
+                if (d === 'unsquare_way') {
+                    params.val = '<span class="square-degrees"></span>';
+                }
+                return t('issues.' + d + '.title', params);
+            });
 
         // Update
         items = items
@@ -571,7 +587,77 @@ export function uiIssues(context) {
             .selectAll('input')
             .property('checked', active)
             .property('indeterminate', false);
+
+
+        // user-configurable square threshold
+        var degStr = context.storage('validate-square-degrees');
+        if (degStr === null) {
+            degStr = '' + DEFAULTSQUARE;
+        }
+
+        var span = items.selectAll('.square-degrees');
+        var input = span.selectAll('.square-degrees-input')
+            .data([0]);
+
+        // enter / update
+        input.enter()
+            .append('input')
+            .attr('type', 'number')
+            .attr('min', '' + MINSQUARE)
+            .attr('max', '' + MAXSQUARE)
+            .attr('step', '0.5')
+            .attr('class', 'square-degrees-input')
+            .call(utilNoAuto)
+            .on('input', function() {
+                this.style.width = (this.value.length + 2.5) + 'ch';   // resize
+            })
+            .on('click', function () {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                this.select();
+            })
+            .on('keyup', function () {
+                if (d3_event.keyCode === 13) { // enter
+                    this.blur();
+                    this.select();
+                }
+            })
+            .on('blur', changeSquare)
+            .merge(input)
+            .property('value', degStr)
+            .style('width', (degStr.length + 2.5) + 'ch');   // resize
     }
+
+
+    function changeSquare() {
+        var input = d3_select(this);
+        var degStr = utilGetSetValue(input).trim();
+        var degNum = parseFloat(degStr, 10);
+
+        if (!isFinite(degNum)) {
+            degNum = DEFAULTSQUARE;
+        } else if (degNum > MAXSQUARE) {
+            degNum = MAXSQUARE;
+        } else if (degNum < MINSQUARE) {
+            degNum = MINSQUARE;
+        }
+
+        degNum = Math.round(degNum * 10 ) / 10;   // round to 1 decimal
+        degStr = '' + degNum;
+
+        input
+            .property('value', degStr)
+            .style('width', (degStr.length + 2.5) + 'ch');   // resize
+
+        context.storage('validate-square-degrees', degStr);
+        context.validator().changeSquareThreshold(degNum);
+    }
+
+
+    function hidePane() {
+        context.ui().togglePanes();
+    }
+
 
 
     var paneTooltip = tooltip()
@@ -579,10 +665,6 @@ export function uiIssues(context) {
         .html(true)
         .title(uiTooltipHtml(t('issues.title'), key));
 
-
-    function hidePane() {
-        context.ui().togglePanes();
-    }
 
 
     uiIssues.togglePane = function() {

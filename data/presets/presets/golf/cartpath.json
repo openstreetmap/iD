@@ -1,5 +1,5 @@
 {
-    "icon": "maki-golf",
+    "icon": "temaki-golf_cart",
     "fields": [
         "{golf/path}",
         "maxspeed"

@@ -7,10 +7,12 @@
         "building_area"
     ],
     "moreFields": [
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "polling_station",
+        "smoking",
+        "website",
         "wheelchair"
     ],
     "geometry": [

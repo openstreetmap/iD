@@ -17,6 +17,10 @@
       "replace": {"tourism": "artwork"}
     },
     {
+      "old": {"amenity": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
       "old": {"amenity": "car_repair"},
       "replace": {"shop": "car_repair"}
     },
@@ -169,10 +173,6 @@
       "replace": {"man_made": "embankment"}
     },
     {
-      "old": {"barrier": "entrance"},
-      "replace": {"entrance": "*"}
-    },
-    {
       "old": {"barrier": "wire_fence"},
       "replace": {"barrier": "fence", "fence_type": "wire"}
     },
@@ -230,23 +230,23 @@
     },
     {
       "old": {"cuisine": "gluten-free"},
-      "replace": {"diet:gluten_free": "yes"}
+      "replace": {"diet:gluten_free": "*"}
     },
     {
       "old": {"cuisine": "halal"},
-      "replace": {"diet:halal": "yes"}
+      "replace": {"diet:halal": "*"}
     },
     {
       "old": {"cuisine": "kosher"},
-      "replace": {"diet:kosher": "yes"}
+      "replace": {"diet:kosher": "*"}
     },
     {
       "old": {"cuisine": "vegan"},
-      "replace": {"diet:vegan": "yes"}
+      "replace": {"diet:vegan": "*"}
     },
     {
       "old": {"cuisine": "vegetarian"},
-      "replace": {"diet:vegetarian": "yes"}
+      "replace": {"diet:vegetarian": "*"}
     },
     {
       "old": {"curb": "*"},
@@ -295,6 +295,10 @@
     {
       "old": {"fenced": "yes"},
       "replace": {"barrier": "fence"}
+    },
+    {
+      "old": {"FIXME": "*"},
+      "replace": {"fixme": "$1"}
     },
     {
       "old": {"footway": "both"},
@@ -358,14 +362,6 @@
     {
       "old": {"highway": "stile"},
       "replace": {"barrier": "stile"}
-    },
-    {
-      "old": {"highway": "incline"},
-      "replace": {"highway": "road", "incline": "up"}
-    },
-    {
-      "old": {"highway": "incline_steep"},
-      "replace": {"highway": "road", "incline": "up"}
     },
     {
       "old": {"highway": "unsurfaced"},
@@ -456,12 +452,24 @@
       "replace": {"club": "*"}
     },
     {
+      "old": {"leisure": "ice_rink", "sport": "hockey"},
+      "replace": {"leisure": "ice_rink", "sport": "ice_hockey"}
+    },
+    {
+      "old": {"leisure": "ice_rink", "sport": "skating"},
+      "replace": {"leisure": "ice_rink", "sport": "ice_skating"}
+    },
+    {
       "old": {"leisure": "social_club"},
       "replace": {"club": "*"}
     },
     {
       "old": {"leisure": "video_arcade"},
       "replace": {"leisure": "amusement_arcade"}
+    },
+    {
+      "old": {"leisure": "recreation_ground"},
+      "replace": {"landuse": "recreation_ground"}
     },
     {
       "old": {"man_made": "cut_line"},
@@ -478,6 +486,18 @@
     {
       "old": {"man_made": "MDF"},
       "replace": {"telecom": "exchange"}
+    },
+    {
+      "old": {"man_made": "fuel_storage_tank"},
+      "replace": {"man_made": "storage_tank", "content": "fuel"}
+    },
+    {
+      "old": {"man_made": "oil_tank"},
+      "replace": {"man_made": "storage_tank", "content": "oil"}
+    },
+    {
+      "old": {"man_made": "wastewater_tank"},
+      "replace": {"man_made": "storage_tank", "content": "wastewater"}
     },
     {
       "old": {"man_made": "water_tank"},
@@ -508,8 +528,16 @@
       "replace": {"waterway": "waterfall"}
     },
     {
+      "old": {"NOTE": "*"},
+      "replace": {"note": "$1"}
+    },
+    {
       "old": {"nosquare": "*"},
       "replace": {"nonsquare": "$1"}
+    },
+    {
+      "old": {"office": "administrative"},
+      "replace": {"office": "government"}
     },
     {
       "old": {"office": "real_estate"},
@@ -606,6 +634,10 @@
       "replace": {"shop": "antiques"}
     },
     {
+      "old": {"shop": "army_surplus"},
+      "replace": {"shop": "military_surplus"}
+    },
+    {
       "old": {"shop": "auto_parts"},
       "replace": {"shop": "car_parts"}
     },
@@ -620,6 +652,14 @@
     {
       "old": {"shop": "bags"},
       "replace": {"shop": "bag"}
+    },
+    {
+      "old": {"shop": "bail_bond"},
+      "replace": {"office": "bail_bond_agent"}
+    },
+    {
+      "old": {"shop": "bail_bonds"},
+      "replace": {"office": "bail_bond_agent"}
     },
     {
       "old": {"shop": "betting"},
@@ -746,6 +786,22 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"speed_limit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"speedlimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SpeedLimit": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
+      "old": {"SPEEDLIMIT": "*"},
+      "replace": {"maxspeed": "$1"}
+    },
+    {
       "old": {"sport": "horse_shoes"},
       "replace": {"sport": "horseshoes"}
     },
@@ -756,6 +812,22 @@
     {
       "old": {"sport": "shuffle_board"},
       "replace": {"sport": "shuffleboard"}
+    },
+    {
+      "old": {"sustenance": "bar"},
+      "replace": {"amenity": "bar"}
+    },
+    {
+      "old": {"sustenance": "cafe"},
+      "replace": {"amenity": "cafe"}
+    },
+    {
+      "old": {"sustenance": "pub"},
+      "replace": {"amenity": "pub"}
+    },
+    {
+      "old": {"sustenance": "restaurant"},
+      "replace": {"amenity": "restaurant"}
     },
     {
       "old": {"theatre:type": "amphitheatre"},
@@ -794,6 +866,10 @@
       "replace": {"leaf_cycle": "deciduous"}
     },
     {
+      "old": {"unnamed": "*"},
+      "replace": {"noname": "$1"}
+    },
+    {
       "old": {"water": "intermittent"},
       "replace": {"natural": "water", "intermittent": "yes"}
     },
@@ -820,6 +896,14 @@
     {
       "old": {"waterway": "riverbank"},
       "replace": {"natural": "water", "water": "river"}
+    },
+    {
+      "old": {"wifi": "yes"},
+      "replace": {"internet_access": "wlan"}
+    },
+    {
+      "old": {"wifi": "free"},
+      "replace": {"internet_access": "wlan", "internet_access:fee": "no"}
     },
     {
       "old": {"wood": "coniferous"},

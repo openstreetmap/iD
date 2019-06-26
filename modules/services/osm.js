@@ -9,10 +9,7 @@ import rbush from 'rbush';
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
-import {
-    utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind,
-    utilIdleWorker, utilTiler, utilQsString
-} from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler, utilQsString } from '../util';
 
 
 var tiler = utilTiler();
@@ -32,6 +29,7 @@ var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note:
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 
+var _deferred = new Set();
 var _connectionID = 1;
 var _tileZoom = 16;
 var _noteZoom = 12;
@@ -288,12 +286,19 @@ function parseXML(xml, callback, options) {
 
     var root = xml.childNodes[0];
     var children = root.childNodes;
-    utilIdleWorker(children, parseChild, done);
 
-
-    function done(results) {
+    var handle = window.requestIdleCallback(function() {
+        var results = [];
+        var result;
+        for (var i = 0; i < children.length; i++) {
+            result = parseChild(children[i]);
+            if (result) results.push(result);
+        }
         callback(null, results);
-    }
+    });
+
+    _deferred.add(handle);
+
 
     function parseChild(child) {
         var parser = parsers[child.nodeName];
@@ -360,6 +365,11 @@ export default {
 
 
     reset: function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         _connectionID++;
         _userChangesets = undefined;
         _userDetails = undefined;
@@ -860,13 +870,19 @@ export default {
 
     // load the tile that covers the given `loc`
     loadTileAtLoc: function(loc, callback) {
+        // Back off if the toLoad queue is filling up.. re #6417
+        // (Currently `loadTileAtLoc` requests are considered low priority - used by operations to
+        // let users safely edit geometries which extend to unloaded tiles.  We can drop some.)
+        if (Object.keys(_tileCache.toLoad).length > 50) return;
+
         var k = geoZoomToScale(_tileZoom + 1);
         var offset = geoRawMercator().scale(k)(loc);
         var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
         var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         tiles.forEach(function(tile) {
-            if (_tileCache.toLoad[tile.id]) return;  // already in queue
+            if (_tileCache.toLoad[tile.id] || _tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+
             _tileCache.toLoad[tile.id] = true;
             this.loadTile(tile, callback);
         }, this);

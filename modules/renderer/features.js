@@ -2,59 +2,20 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilArrayGroupBy, utilArrayUnion, utilCallWhenIdle, utilQsString, utilStringQs } from '../util';
-
+import { groupManager } from '../entities/group_manager';
+import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { t } from '../util/locale';
 
 export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
     var features = utilRebind({}, dispatch, 'on');
-
-    var traffic_roads = {
-        'motorway': true,
-        'motorway_link': true,
-        'trunk': true,
-        'trunk_link': true,
-        'primary': true,
-        'primary_link': true,
-        'secondary': true,
-        'secondary_link': true,
-        'tertiary': true,
-        'tertiary_link': true,
-        'residential': true,
-        'unclassified': true,
-        'living_street': true
-    };
-
-    var service_roads = {
-        'service': true,
-        'road': true,
-        'track': true
-    };
-
-    var paths = {
-        'path': true,
-        'footway': true,
-        'cycleway': true,
-        'bridleway': true,
-        'steps': true,
-        'pedestrian': true,
-        'corridor': true
-    };
-
-    var past_futures = {
-        'proposed': true,
-        'construction': true,
-        'abandoned': true,
-        'dismantled': true,
-        'disused': true,
-        'razed': true,
-        'demolished': true,
-        'obliterated': true
-    };
+    var _deferred = new Set();
+    var toggleableGroups = groupManager.toggleableGroups();
 
     var _cullFactor = 1;
     var _cache = {};
     var _rules = {};
+    var _rulesArray = [];
     var _stats = {};
     var _keys = [];
     var _hidden = [];
@@ -79,11 +40,14 @@ export function rendererFeatures(context) {
     }
 
 
-    function defineRule(k, filter, max) {
+    function defineRule(k, filter, title, description, max) {
         var isEnabled = true;
 
         _keys.push(k);
         _rules[k] = {
+            key: k,
+            title: title,
+            description: description,
             filter: filter,
             enabled: isEnabled,   // whether the user wants it enabled..
             count: 0,
@@ -92,117 +56,30 @@ export function rendererFeatures(context) {
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
             hidden: function() {
-                return !context.editable() ||
+                return !context.editableDataEnabled() ||
                     (this.count === 0 && !this.enabled) ||
                     this.count > this.currentMax * _cullFactor;
             },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
+        _rulesArray.push(_rules[k]);
     }
 
-
-    defineRule('points', function isPoint(tags, geometry) {
-        return geometry === 'point';
-    }, 200);
-
-    defineRule('traffic_roads', function isTrafficRoad(tags) {
-        return traffic_roads[tags.highway];
-    });
-
-    defineRule('service_roads', function isServiceRoad(tags) {
-        return service_roads[tags.highway];
-    });
-
-    defineRule('paths', function isPath(tags) {
-        return paths[tags.highway];
-    });
-
-    defineRule('buildings', function isBuilding(tags) {
-        return (
-            !!tags['building:part'] ||
-            (!!tags.building && tags.building !== 'no') ||
-            tags.parking === 'multi-storey' ||
-            tags.parking === 'sheds' ||
-            tags.parking === 'carports' ||
-            tags.parking === 'garage_boxes'
-        );
-    }, 250);
-
-    defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
-            !_rules.buildings.filter(tags) &&
-            !_rules.water.filter(tags);
-    });
-
-    defineRule('boundaries', function isBoundary(tags) {
-        return (
-            !!tags.boundary
-        ) && !(
-            traffic_roads[tags.highway] ||
-            service_roads[tags.highway] ||
-            paths[tags.highway] ||
-            tags.waterway ||
-            tags.railway ||
-            tags.landuse ||
-            tags.natural ||
-            tags.building ||
-            tags.power
-        );
-    });
-
-    defineRule('water', function isWater(tags) {
-        return (
-            !!tags.waterway ||
-            tags.natural === 'water' ||
-            tags.natural === 'coastline' ||
-            tags.natural === 'bay' ||
-            tags.landuse === 'pond' ||
-            tags.landuse === 'basin' ||
-            tags.landuse === 'reservoir' ||
-            tags.landuse === 'salt_pond'
-        );
-    });
-
-    defineRule('rail', function isRail(tags) {
-        return (
-            !!tags.railway ||
-            tags.landuse === 'railway'
-        ) && !(
-            traffic_roads[tags.highway] ||
-            service_roads[tags.highway] ||
-            paths[tags.highway]
-        );
-    });
-
-    defineRule('power', function isPower(tags) {
-        return !!tags.power;
-    });
-
-    // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
-    defineRule('past_future', function isPastFuture(tags) {
-        if (
-            traffic_roads[tags.highway] ||
-            service_roads[tags.highway] ||
-            paths[tags.highway]
-        ) { return false; }
-
-        var strings = Object.keys(tags);
-
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (past_futures[s] || past_futures[tags[s]]) { return true; }
-        }
-        return false;
-    });
+    for (var id in toggleableGroups) {
+        var group = toggleableGroups[id];
+        defineRule(group.basicID(), group.matchesTags, group.localizedName(), group.localizedDescription(), group.toggleableMax());
+    }
 
     // Lines or areas that don't match another feature filter.
     // IMPORTANT: The 'others' feature must be the last one defined,
     //   so that code in getMatches can skip this test if `hasMatch = true`
     defineRule('others', function isOther(tags, geometry) {
         return (geometry === 'line' || geometry === 'area');
-    });
+    }, t('feature.others.description'), t('feature.others.tooltip'));
 
-
+    features.featuresArray = function() {
+        return _rulesArray;
+    };
 
     features.features = function() {
         return _rules;
@@ -253,12 +130,34 @@ export function rendererFeatures(context) {
         }
     };
 
+    features.enableAll = function() {
+        var didEnable = false;
+        for (var k in _rules) {
+            if (!_rules[k].enabled) {
+                didEnable = true;
+                _rules[k].enable();
+            }
+        }
+        if (didEnable) update();
+    };
+
 
     features.disable = function(k) {
         if (_rules[k] && _rules[k].enabled) {
             _rules[k].disable();
             update();
         }
+    };
+
+    features.disableAll = function() {
+        var didDisable = false;
+        for (var k in _rules) {
+            if (_rules[k].enabled) {
+                didDisable = true;
+                _rules[k].disable();
+            }
+        }
+        if (didDisable) update();
     };
 
 
@@ -333,6 +232,11 @@ export function rendererFeatures(context) {
 
 
     features.reset = function() {
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         _cache = {};
     };
 
@@ -424,7 +328,7 @@ export function rendererFeatures(context) {
         for (var key in _rules) {
             if (_rules[key].filter(test, geometry)) {
                 if (_hidden.indexOf(key) !== -1) {
-                    return key;
+                    return _rules[key];
                 }
                 return false;
             }
@@ -541,9 +445,8 @@ export function rendererFeatures(context) {
 
     // warm up the feature matching cache upon merging fetched data
     context.history().on('merge.features', function(newEntities) {
-        utilCallWhenIdle(function() {
-            if (!newEntities) return;
-
+        if (!newEntities) return;
+        var handle = window.requestIdleCallback(function() {
             var graph = context.graph();
             var types = utilArrayGroupBy(newEntities, 'type');
             // ensure that getMatches is called on relations before ways
@@ -552,7 +455,8 @@ export function rendererFeatures(context) {
                 var geometry = entities[i].geometry(graph);
                 features.getMatches(entities[i], graph, geometry);
             }
-        })();
+        });
+        _deferred.add(handle);
     });
 
 

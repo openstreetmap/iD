@@ -19,15 +19,11 @@ import { modeDragNote } from './drag_note';
 import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu } from '../ui/edit_menu';
-import { uiSelectionList } from '../ui/selection_list';
 import { uiCmd } from '../ui/cmd';
 import {
-    utilArrayIntersection, utilEntityOrMemberSelector,
-    utilEntitySelector, utilKeybinding
+    utilArrayIntersection, utilEntityOrDeepMemberSelector,
+    utilEntitySelector, utilDeepMemberSelector, utilKeybinding
 } from '../util';
-
-// deprecation warning - Radial Menu to be removed in iD v3
-import { uiRadialMenu } from '../ui/radial_menu';
 
 
 var _relatedParent;
@@ -171,13 +167,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     function toggleMenu() {
-        // deprecation warning - Radial Menu to be removed in iD v3
-        if (d3_select('.edit-menu, .radial-menu').empty()) {
-            positionMenu();
-            showMenu();
-        } else {
-            closeMenu();
-        }
+        positionMenu();
+        showMenu();
     }
 
 
@@ -229,13 +220,18 @@ export function modeSelect(context, selectedIDs) {
         return mode;
     };
 
+    var operations = [];
+
+    mode.operations = function() {
+        return operations;
+    };
 
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
         context.features().forceVisible(selectedIDs);
 
-        var operations = Object.values(Operations)
+        operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
 
@@ -243,14 +239,7 @@ export function modeSelect(context, selectedIDs) {
         // don't allow delete if downgrade is available
         var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
-        if (isRadialMenu) {
-            operations = operations.slice(0,7);
-            operations.unshift(lastOperation);
-        } else {
-            operations.push(lastOperation);
-        }
+        operations.push(lastOperation);
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
@@ -274,10 +263,7 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding);
 
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        editMenu = isRadialMenu
-            ? uiRadialMenu(context, operations)
-            : uiEditMenu(context, operations);
+        editMenu = uiEditMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, _newFeature);
@@ -295,11 +281,6 @@ export function modeSelect(context, selectedIDs) {
 
 
         selectElements();
-
-        if (selectedIDs.length > 1) {
-            var entities = uiSelectionList(context, selectedIDs);
-            context.ui().sidebar.show(entities);
-        }
 
         if (_follow) {
             var extent = geoExtent();
@@ -368,7 +349,6 @@ export function modeSelect(context, selectedIDs) {
 
             if (entity && context.geometry(entity.id) === 'relation') {
                 _suppressMenu = true;
-                return;
             }
 
             surface.selectAll('.related')
@@ -381,7 +361,7 @@ export function modeSelect(context, selectedIDs) {
             }
 
             var selection = context.surface()
-                .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
+                .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
@@ -391,6 +371,9 @@ export function modeSelect(context, selectedIDs) {
                     context.enter(modeBrowse(context));
                 }
             } else {
+                context.surface()
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .classed('selected-member', true);
                 selection
                     .classed('selected', true);
             }
@@ -535,6 +518,10 @@ export function modeSelect(context, selectedIDs) {
 
         surface
             .on('dblclick.select', null);
+
+        surface
+            .selectAll('.selected-member')
+            .classed('selected-member', false);
 
         surface
             .selectAll('.selected')

@@ -2,7 +2,6 @@
     "icon": "temaki-military",
     "fields": [
         "name",
-        "bunker_type",
         "building_area"
     ],
     "geometry": [
@@ -10,24 +9,21 @@
         "area"
     ],
     "tags": {
-        "military": "bunker"
-    },
-    "addTags": {
-        "building": "bunker",
-        "landuse": "military",
-        "military": "bunker"
+        "military": "office"
     },
     "terms": [
         "air force",
         "army",
         "base",
+        "enlist",
         "fight",
         "force",
         "guard",
         "marine",
         "navy",
+        "recruit",
         "troop",
         "war"
     ],
-    "name": "Military Bunker"
+    "name": "Military Office"
 }

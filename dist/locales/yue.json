@@ -87,7 +87,6 @@
                     "line": "整方個綫角",
                     "area": "整方範圍角"
                 },
-                "key": "S",
                 "annotation": {
                     "line": "整方咗綫角。",
                     "area": "整方咗範圍角。"
@@ -98,11 +97,8 @@
             },
             "straighten": {
                 "title": "拉直",
-                "description": "拉直條綫",
                 "key": "S",
-                "annotation": "條綫拉直咗。",
-                "too_bendy": "條綫太彎，拉直唔到。",
-                "connected_to_hidden": "無得拉直，佢連咗去隱藏地貌。"
+                "too_bendy": "條綫太彎，拉直唔到。"
             },
             "delete": {
                 "title": "刪",
@@ -279,7 +275,6 @@
         },
         "geocoder": {
             "search": "搵天下各地⋯⋯",
-            "no_results_visible": "圖內可見之處，都搵唔到",
             "no_results_worldwide": "無嘢搵到"
         },
         "geolocate": {
@@ -400,10 +395,6 @@
                 "tooltip": "範圍全填。"
             }
         },
-        "restore": {
-            "heading": "你有修改未記妥",
-            "description": "要唔要囘復上次未記妥之修改？"
-        },
         "save": {
             "title": "記低",
             "help": "重閱所變更，傳上公家街圖，等其他用者睇到。",
@@ -434,10 +425,6 @@
             }
         },
         "success": {
-            "just_edited": "你啱啱改咗公家街圖！",
-            "thank_you": "謝君修善輿圖。",
-            "thank_you_location": "謝君修善 {where} 之輿圖。",
-            "help_html": "君所修所改，幾分鐘就會上公家街圖。其他輿圖，或者遲啲收到。",
             "help_link_text": "明細",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "公家街圖處，睇返修改",
@@ -449,12 +436,6 @@
         "confirm": {
             "okay": "知",
             "cancel": "唔做"
-        },
-        "splash": {
-            "welcome": "歡迎來到艾第公家街圖造圖。",
-            "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
-            "walkthrough": "開始逐步解釋",
-            "start": "卽改"
         },
         "source_switch": {
             "live": "運行之中",
@@ -473,12 +454,7 @@
         "cannot_zoom": "今下模式，無得再縮。",
         "full_screen": "來回全螢幕",
         "mapillary_images": {
-            "tooltip": "拎輿兵嘅街相",
-            "title": "疊相（輿兵）"
-        },
-        "mapillary_signs": {
-            "tooltip": "拎輿兵嘅交通燈（必先開疊相）",
-            "title": "疊交通燈（輿兵）"
+            "tooltip": "拎輿兵嘅街相"
         },
         "mapillary": {
             "view_on_mapillary": "去輿兵度睇張相"
@@ -584,35 +560,11 @@
                 "category-landuse": {
                     "name": "用地地貌"
                 },
-                "category-natural-area": {
-                    "name": "天然地貌"
-                },
-                "category-natural-line": {
-                    "name": "天然地貌"
-                },
-                "category-natural-point": {
-                    "name": "天然地貌"
-                },
-                "category-path": {
-                    "name": "徑地貌"
-                },
-                "category-rail": {
-                    "name": "軌道地貌"
-                },
                 "category-restriction": {
                     "name": "限制地貌"
                 },
-                "category-road": {
-                    "name": "車道地貌"
-                },
                 "category-route": {
                     "name": "路綫地貌"
-                },
-                "category-water-area": {
-                    "name": "水地貌"
-                },
-                "category-water-line": {
-                    "name": "水地貌"
                 }
             },
             "fields": {
@@ -945,9 +897,6 @@
                         "anticlockwise": "逆時針",
                         "clockwise": "順時針"
                     }
-                },
-                "direction_vertex": {
-                    "label": "方向"
                 },
                 "display": {
                     "label": "顯示"
@@ -1534,8 +1483,7 @@
                     "options": {
                         "bucket": "尿兜",
                         "chemical": "化學",
-                        "flush": "沖水",
-                        "pitlatrine": "廁坑／旱廁"
+                        "flush": "沖水"
                     }
                 },
                 "tomb": {
@@ -1763,8 +1711,7 @@
                     "terms": "Drinking Water,水源,活水,飲水,飲水處,飲用水"
                 },
                 "amenity/embassy": {
-                    "name": "大使館",
-                    "terms": "Embassy,使館,大使館,領事館"
+                    "name": "大使館"
                 },
                 "amenity/fast_food": {
                     "name": "快餐店",
@@ -2672,8 +2619,7 @@
                     "terms": "Bicycle Shop,單車店,單車舖,自行車店"
                 },
                 "shop/boutique": {
-                    "name": "時裝店",
-                    "terms": "Boutique,時裝店,服飾店,精品店"
+                    "name": "時裝店"
                 },
                 "shop/butcher": {
                     "name": "肉舖",
@@ -3000,10 +2946,6 @@
                 "type/route_master": {
                     "name": "路綫總管",
                     "terms": "Route Master,線路總管,路綫總管,路線總目"
-                },
-                "vertex": {
-                    "name": "其他",
-                    "terms": "Other,其他,其它"
                 },
                 "waterway": {
                     "name": "水路"

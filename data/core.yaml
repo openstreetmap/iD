@@ -9,16 +9,76 @@ en:
     open_wikidata: open on wikidata.org
     favorite: favorite
   toolbar:
+    deselect:
+      title: Deselect
     inspect: Inspect
     undo_redo: Undo / Redo
     recent: Recent
     favorites: Favorites
     add_feature: Add Feature
+    finish: Finish
+    repeat:
+      title: Repeat
+      tooltip:
+        point: "Add another {feature} after this one."
+        way: "Start another {feature} after finishing this one."
+      key: R
+    segments:
+      title: Segments
+      straight:
+        title: Straight
+      orthogonal:
+        title: Rectangular
+      key: A
+    structure:
+      none:
+        title: None
+      key: S
+  assistant:
+    mode:
+      adding: Adding
+      drawing: Drawing
+      mapping: Mapping
+      editing: Editing
+      saving: Saving
+    instructions:
+      add_point: Click or tap the center of the feature.
+      add_line: Click or tap the starting location.
+      draw_line: Place points along the feature's centerline.
+      add_area: Click or tap any corner of the feature.
+      draw_area: Place points along the feature's outline.
+    global_location: Planet Earth
+    greetings:
+      morning: Good Morning
+      afternoon: Good Afternoon
+      evening: Good Evening
+      # "Good Night" isn't a greeting in English but it can be in some languages
+      night: Good Evening
+    welcome:
+      first_time: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!"
+      return: "Welcome back. Ready to make the map even better?"
+      start_mapping: Start Mapping
+    restore:
+      title: Restore
+      discard: Discard
+      info:
+        count_loc: "You have {count} unsaved changes around {location}."
+        count_loc_time: "You have {count} unsaved changes from {duration} ago around {location}."
+      ask: Would you like to restore them?
+    commit:
+      success:
+        thank_you: Thank You!
+        just_improved: "You've just improved OpenStreetMap around {location}."
+        propagation_help: Your changes will be live momentarily. Some maps take longer to update than others.
+      keep_mapping: Keep Mapping
+    feature_count:
+      multiple: "{count} Features"
   modes:
     add_feature:
-      title: Add a feature
-      description: "Search for features to add to the map."
-      key: Tab
+      search_placeholder: Search feature types
+      description: "Browse features to add to the map."
+      # The hotkey to open the Add Feature preset browser. Expect the key adjacent to the number row.
+      key: "`"
       result: "{count} result"
       results: "{count} results"
     add_area:
@@ -103,20 +163,40 @@ en:
     orthogonalize:
       title: Square
       description:
-        vertex: Square this corner.
-        line: Square the corners of this line.
-        area: Square the corners of this area.
+        corner:
+          single: Square this corner.
+          multiple: Square these corners.
+        feature:
+          single: Square the corners of this feature.
+          multiple: Square the corners of these features.
       key: Q
       annotation:
-        vertex: Squared a single corner.
-        line: Squared the corners of a line.
-        area: Squared the corners of an area.
-      end_vertex: This can't be squared because it is an end node.
-      square_enough: This can't be made more square than it already is.
-      not_squarish: This can't be made square because it is not squarish.
-      too_large: This can't be made square because not enough of it is currently visible.
-      connected_to_hidden: This can't be made square because it is connected to a hidden feature.
-      not_downloaded: This can't be made square because parts of it have not yet been downloaded.
+        corner:
+          single: Squared a corner.
+          multiple: Squared several corners.
+        feature:
+          single: Squared the corners of a feature.
+          multiple: Squared the corners of several features.
+      multiple_blockers:
+        multiple: These can't be squared for multiple reasons.
+      end_vertex:
+        single: This can't be squared because it is an endpoint.
+        multiple: These can't be squared because they are endpoints.
+      square_enough:
+        single: This can't be made more square than it already is.
+        multiple: These can't be made more square than they already are.
+      not_squarish:
+        single: This can't be made square because it is not squarish.
+        multiple: These can't be made square because they are not squarish.
+      too_large:
+        single: This can't be made square because not enough of it is currently visible.
+        multiple: These can't be made square because not enought of them are currently visible.
+      connected_to_hidden:
+        single: This can't be made square because it is connected to a hidden feature.
+        multiple: These can't be made square because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be made square because parts of it have not yet been downloaded.
+        multiple: These can't be made square because parts of them have not yet been downloaded.
     straighten:
       title: Straighten
       description:
@@ -398,7 +478,7 @@ en:
   report_a_bug: Report a bug
   help_translate: Help translate
   sidebar:
-    key: '`'
+    key: "'"
     tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning: "{count} hidden features"
@@ -415,6 +495,7 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
+    change: "1 Change"
     changes: "{count} Changes"
     download_changes: Download osmChange file
     errors: Errors
@@ -492,7 +573,6 @@ en:
     note: note
   geocoder:
     search: Search worldwide...
-    no_results_visible: No results in visible map area
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
@@ -613,39 +693,6 @@ en:
         title: "Panoramic Photos"
         tooltip: "360° photos"
   feature:
-    points:
-      description: Points
-      tooltip: "Points of Interest"
-    traffic_roads:
-      description: Traffic Roads
-      tooltip: "Highways, Streets, etc."
-    service_roads:
-      description: Service Roads
-      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
-    paths:
-      description: Paths
-      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
-    buildings:
-      description: Buildings
-      tooltip: "Buildings, Shelters, Garages, etc."
-    landuse:
-      description: Landuse Features
-      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
-    boundaries:
-      description: Boundaries
-      tooltip: "Administrative Boundaries"
-    water:
-      description: Water Features
-      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
-    rail:
-      description: Rail Features
-      tooltip: "Railways"
-    power:
-      description: Power Features
-      tooltip: "Power Lines, Power Plants, Substations, etc."
-    past_future:
-      description: Past/Future Features
-      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
     others:
       description: Other Features
       tooltip: "Everything Else"
@@ -677,11 +724,6 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
-  restore:
-    heading: You have unsaved changes
-    description: "Do you wish to restore unsaved changes from a previous editing session?"
-    restore: Restore my changes
-    reset: Discard my changes
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
@@ -715,13 +757,9 @@ en:
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
-    just_edited: "You just edited OpenStreetMap!"
-    thank_you: "Thank you for improving the map."
-    thank_you_location: "Thank you for improving the map around {where}."
     thank_you_where:
       format: "{place}{separator}{region}"
       separator: ", "
-    help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
@@ -736,10 +774,7 @@ en:
     okay: "OK"
     cancel: "Cancel"
   splash:
-    welcome: Welcome to the iD OpenStreetMap editor
-    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
     walkthrough: "Start the Walkthrough"
-    start: "Edit now"
   source_switch:
     live: live
     lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"
@@ -1320,13 +1355,18 @@ en:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"
       tip: "Find features that should possibly be connected to other nearby features"
+      self:
+        message: "{feature} ends very close to itself but does not reconnect"
       highway-highway:
         reference: Intersecting highways should share a junction vertex.
     close_nodes:
       title: "Very Close Points"
+      tip: "Find redundant and crowded points"
       message: "Two points in {way} are very close together"
-      tip: "Find redundant points in ways"
       reference: "Redundant points in a way should be merged or moved apart."
+      detached:
+        message: "{feature} is too close to {feature2}"
+        reference: "Separate points should not share a location."
     crossing_ways:
       title: Crossings Ways
       message: "{feature} crosses {feature2}"
@@ -1365,12 +1405,13 @@ en:
         reference: "Crossing indoor features should be connected or use different levels."
     disconnected_way:
       title: Disconnected Ways
-      tip: "Find unconnected highways and paths"
+      tip: "Find unroutable roads, paths, and ferry routes"
+      routable:
+        message:
+          multiple: "{count} routable features are connected only to each other."
+        reference: "All roads, paths, and ferry routes should connect to form a single routing network."
       highway:
         message: "{highway} is disconnected from other roads and paths"
-        message_new_road: "New {highway} is disconnected from existing road network"
-        reference: "Highways should connect to other highways or building entrances."
-        reference_new_road: "New roads should connect to existing road network or building entrances."
     fixme_tag:
       title: '"Fix Me" Requests'
       message: '{feature} has a "Fix Me" request'
@@ -1388,6 +1429,17 @@ en:
         feature:
           message: '{feature} lists Google as a data source'
         reference: "Google products are proprietary and must not be used as references."
+    invalid_format:
+      title: Invalid Formatting
+      tip: Find tags with unexpected formats
+      email:
+        message: '{feature} has an invalid email address.'
+        message_multi: '{feature} has multiple invalid email addresses.'
+        reference: 'Email addresses must look like "user@example.com".'
+      website:
+        message: '{feature} has an invalid website.'
+        message_multi: '{feature} has multiple invalid websites.'
+        reference: 'Websites should start with "http" or "https".'
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
@@ -1409,9 +1461,15 @@ en:
       reference: "Multipolygons should be tagged on their relation, not their outer way."
     outdated_tags:
       title: Outdated Tags
-      message: '{feature} has outdated tags'
+      message: "{feature} has outdated tags"
       tip: "Find features with deprecated tags that can be updated"
       reference: "Some tags change over time and should be updated."
+      incomplete:
+        message: "{feature} has incomplete tags"
+        reference: "Some features should have additional tags."
+      noncanonical_brand:
+        message: "{feature} looks like a brand with nonstandard tags"
+        reference: "All features of the same brand should be tagged the same way."
     private_data:
       title: Private Information
       tip: "Find features that may contain private information"
@@ -1444,7 +1502,7 @@ en:
           message: "{feature} has no outlet"
           reference: "One-way roads must lead to other roads."
     unsquare_way:
-      title: Unsquare Corners
+      title: "Unsquare Corners (up to {val}°)"
       message: "{feature} has unsquare corners"
       tip: "Find features with unsquare corners that can be drawn better"
       buildings:
@@ -1897,6 +1955,14 @@ en:
     west: "W"
     coordinate: "{coordinate}{direction}"
     coordinate_pair: "{latitude}, {longitude}"
+    second: "1 second"
+    seconds: "{quantity} seconds"
+    minute: "1 minute"
+    minutes: "{quantity} minutes"
+    hour: "1 hour"
+    hours: "{quantity} hours"
+    day: "1 day"
+    days: "{quantity} days"
   wikidata:
     identifier: "Identifier"
     label: "Label"

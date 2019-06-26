@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "ford": "*"
+    },
+    "name": "Ford",
+    "searchable": false
+}

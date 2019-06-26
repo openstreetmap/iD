@@ -65,8 +65,11 @@
         "addr:postcode": "49093",
         "addr:state": "MI",
         "addr:street": "Main Street",
-        "name": "Sherwin-Williams",
-        "shop": "paint"
+        "name": "Sherwin Williams",
+        "shop": "paint",
+        "brand": "Sherwin Williams",
+        "brand:wikidata": "Q48881",
+        "brand:wikipedia": "en:Sherwin-Williams"
       }
     },
     "n1011": {
@@ -118,7 +121,10 @@
         "addr:state": "MI",
         "addr:street": "Main Street",
         "name": "Dollar Tree",
-        "shop": "second_hand"
+        "brand": "Dollar Tree",
+        "brand:wikidata": "Q5289230",
+        "brand:wikipedia": "en:Dollar Tree",
+        "shop": "variety_store"
       }
     },
     "n1015": {
@@ -175,7 +181,7 @@
     },
     "n1019": {
       "id": "n1019",
-      "loc": [-85.634514, 41.946176]
+      "loc": [-85.634513, 41.946181]
     },
     "n102": {
       "id": "n102",
@@ -183,7 +189,7 @@
     },
     "n1020": {
       "id": "n1020",
-      "loc": [-85.634087, 41.946178]
+      "loc": [-85.634079, 41.946194]
     },
     "n1021": {
       "id": "n1021",
@@ -215,11 +221,11 @@
     },
     "n1027": {
       "id": "n1027",
-      "loc": [-85.634767, 41.946172]
+      "loc": [-85.634766, 41.946178]
     },
     "n1028": {
       "id": "n1028",
-      "loc": [-85.634622, 41.946175],
+      "loc": [-85.634622, 41.946179],
       "tags": {
         "crossing": "marked",
         "highway": "crossing"
@@ -2836,7 +2842,8 @@
       "id": "n1615",
       "loc": [-85.633517, 41.941353],
       "tags": {
-        "man_made": "lighthouse"
+        "man_made": "lighthouse",
+        "seamark:type": "light_major"
       }
     },
     "n1616": {
@@ -3879,7 +3886,7 @@
     },
     "n1842": {
       "id": "n1842",
-      "loc": [-85.635768, 41.940113]
+      "loc": [-85.635775, 41.940113]
     },
     "n1843": {
       "id": "n1843",
@@ -3921,7 +3928,8 @@
       "id": "n1851",
       "loc": [-85.63518, 41.942955],
       "tags": {
-        "highway": "crossing"
+        "highway": "crossing",
+        "crossing": "unmarked"
       }
     },
     "n1852": {
@@ -3999,7 +4007,7 @@
     },
     "n1867": {
       "id": "n1867",
-      "loc": [-85.635796, 41.941962]
+      "loc": [-85.635806, 41.941962]
     },
     "n1868": {
       "id": "n1868",
@@ -6434,7 +6442,7 @@
     },
     "n240": {
       "id": "n240",
-      "loc": [-85.635916, 41.94264]
+      "loc": [-85.635916, 41.942648]
     },
     "n2400": {
       "id": "n2400",
@@ -6469,7 +6477,7 @@
     },
     "n2406": {
       "id": "n2406",
-      "loc": [-85.635, 41.946389],
+      "loc": [-85.634982, 41.946262],
       "tags": {
         "amenity": "post_office",
         "name": "Three Rivers Post Office"
@@ -6489,7 +6497,7 @@
     },
     "n241": {
       "id": "n241",
-      "loc": [-85.635795, 41.941906]
+      "loc": [-85.635805, 41.941906]
     },
     "n2410": {
       "id": "n2410",
@@ -6720,7 +6728,7 @@
     },
     "n246": {
       "id": "n246",
-      "loc": [-85.635788, 41.941436]
+      "loc": [-85.635798, 41.941436]
     },
     "n2460": {
       "id": "n2460",
@@ -7008,15 +7016,15 @@
     },
     "n2524": {
       "id": "n2524",
-      "loc": [-85.63484, 41.945778]
+      "loc": [-85.634841, 41.945778]
     },
     "n2525": {
       "id": "n2525",
-      "loc": [-85.635314, 41.945938]
+      "loc": [-85.635315, 41.945939]
     },
     "n2526": {
       "id": "n2526",
-      "loc": [-85.63484, 41.945922]
+      "loc": [-85.634841, 41.945921]
     },
     "n2527": {
       "id": "n2527",
@@ -8821,7 +8829,7 @@
     },
     "n293": {
       "id": "n293",
-      "loc": [-85.635816, 41.942673],
+      "loc": [-85.635818, 41.942677],
       "tags": {
         "crossing": "marked",
         "highway": "crossing"
@@ -9482,7 +9490,7 @@
     },
     "n308": {
       "id": "n308",
-      "loc": [-85.63577, 41.940183],
+      "loc": [-85.635777, 41.940183],
       "tags": {
         "crossing": "marked",
         "highway": "crossing"
@@ -16698,7 +16706,7 @@
     },
     "n4645": {
       "id": "n4645",
-      "loc": [-85.635815, 41.942638],
+      "loc": [-85.635818, 41.942638],
       "tags": {
         "highway": "stop",
         "direction": "forward",
@@ -16965,7 +16973,7 @@
     },
     "n4688": {
       "id": "n4688",
-      "loc": [-85.635768, 41.940051],
+      "loc": [-85.635774, 41.940051],
       "tags": {
         "crossing": "marked",
         "highway": "crossing"
@@ -18536,7 +18544,7 @@
     },
     "n498": {
       "id": "n498",
-      "loc": [-85.635776, 41.940583]
+      "loc": [-85.635783, 41.940583]
     },
     "n4980": {
       "id": "n4980",
@@ -18812,7 +18820,7 @@
     },
     "n509": {
       "id": "n509",
-      "loc": [-85.635777, 41.9407]
+      "loc": [-85.635785, 41.9407]
     },
     "n51": {
       "id": "n51",
@@ -19460,7 +19468,7 @@
     },
     "n653": {
       "id": "n653",
-      "loc": [-85.634889, 41.945778]
+      "loc": [-85.63489, 41.945778]
     },
     "n654": {
       "id": "n654",
@@ -20553,7 +20561,10 @@
         "addr:street": "Michigan Avenue",
         "amenity": "restaurant",
         "cuisine": "pizza",
-        "name": "Pizza Hut"
+        "name": "Pizza Hut",
+        "brand": "Pizza Hut",
+        "brand:wikidata": "Q191615",
+        "brand:wikipedia": "en:Pizza Hut"
       }
     },
     "n893": {
@@ -21173,7 +21184,8 @@
         }],
       "tags": {
         "type": "multipolygon",
-        "waterway": "riverbank"
+        "natural": "water",
+        "water": "river"
       }
     },
     "r5": {
@@ -22201,7 +22213,7 @@
     },
     "w218": {
       "id": "w218",
-      "nodes": ["n1019", "n1020", "n1021", "n1022", "n731", "n728", "n1023", "n1025", "n1024", "n1019"],
+      "nodes": ["n1019", "n3355", "n1020"],
       "tags": {
         "footway": "sidewalk",
         "highway": "footway"
@@ -26986,9 +26998,9 @@
         "n3634"
       ],
       "tags": {
-        "landuse": "reservoir",
         "name": "Hoffman Pond",
-        "natural": "water"
+        "natural": "water",
+        "water": "reservoir"
       }
     },
     "w641": {
@@ -27604,7 +27616,8 @@
       ],
       "tags": {
         "leisure": "track",
-        "sport": "running"
+        "sport": "running",
+        "highway": "footway"
       }
     },
     "w69": {
@@ -29466,6 +29479,26 @@
     "n3354": {
       "id": "n3354",
       "loc": [-85.616488, 41.951994]
+    },
+    "w599": {
+      "tags": {
+        "footway": "sidewalk",
+        "highway": "footway"
+      },
+      "id": "w599",
+      "nodes": ["n1021", "n1022", "n731", "n728", "n1023", "n1025", "n1024", "n1019"]
+    },
+    "w618": {
+      "tags": {
+        "footway": "sidewalk",
+        "highway": "footway"
+      },
+      "id": "w618",
+      "nodes": ["n1020", "n1021"]
+    },
+    "n3355": {
+      "id": "n3355",
+      "loc": [-85.634489, 41.946193]
     }
   }
 }

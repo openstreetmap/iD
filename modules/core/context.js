@@ -6,26 +6,26 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
-import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
-
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
+import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetIndex } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
-import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
+import { utilKeybinding, utilRebind, utilStringQs } from '../util';
 
 
 export function coreContext() {
     var dispatch = d3_dispatch('enter', 'exit', 'change');
     var context = utilRebind({}, dispatch, 'on');
+    var _deferred = new Set();
 
-    context.version = '2.14.3';
+    context.version = '2.15.2';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
@@ -135,21 +135,25 @@ export function coreContext() {
 
 
     context.loadTiles = function(projection, callback) {
-        if (connection && context.editable()) {
-            var cid = connection.getConnectionId();
-            utilCallWhenIdle(function() {
+        var handle = window.requestIdleCallback(function() {
+            _deferred.delete(handle);
+            if (connection && context.editableDataEnabled()) {
+                var cid = connection.getConnectionId();
                 connection.loadTiles(projection, afterLoad(cid, callback));
-            })();
-        }
+            }
+        });
+        _deferred.add(handle);
     };
 
     context.loadTileAtLoc = function(loc, callback) {
-        if (connection && context.editable()) {
-            var cid = connection.getConnectionId();
-            utilCallWhenIdle(function() {
+        var handle = window.requestIdleCallback(function() {
+            _deferred.delete(handle);
+            if (connection && context.editableDataEnabled()) {
+                var cid = connection.getConnectionId();
                 connection.loadTileAtLoc(loc, afterLoad(cid, callback));
-            })();
-        }
+            }
+        });
+        _deferred.add(handle);
     };
 
     context.loadEntity = function(entityID, callback) {
@@ -257,11 +261,13 @@ export function coreContext() {
     context.enter = function(newMode) {
         if (mode) {
             mode.exit();
+            container.classed('mode-' + mode.id, false);
             dispatch.call('exit', this, mode);
         }
 
         mode = newMode;
         mode.enter();
+        container.classed('mode-' + newMode.id, true);
         dispatch.call('enter', this, mode);
     };
 
@@ -342,7 +348,15 @@ export function coreContext() {
     context.map = function() { return map; };
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
-    context.editable = function() { return map.editable(); };
+    context.editableDataEnabled = function() { return map.editableDataEnabled(); };
+    context.editable = function() {
+
+        // don't allow editing during save
+        var mode = context.mode();
+        if (!mode || mode.id === 'save') return false;
+
+        return map.editableDataEnabled();
+    };
     context.surfaceRect = function() {
         return map.surface.node().getBoundingClientRect();
     };
@@ -454,6 +468,12 @@ export function coreContext() {
     /* reset (aka flush) */
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
+
+        Array.from(_deferred).forEach(function(handle) {
+            window.cancelIdleCallback(handle);
+            _deferred.delete(handle);
+        });
+
         Object.values(services).forEach(function(service) {
             if (service && typeof service.reset === 'function') {
                 service.reset(context);
@@ -548,8 +568,10 @@ export function coreContext() {
     features.init();
     photos.init();
 
-    if (utilStringQs(window.location.hash).presets) {
-        var external = utilStringQs(window.location.hash).presets;
+    var presetsParameter = utilStringQs(window.location.hash).presets;
+    if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
+        // assume URL of external presets file
+
         presets.fromExternal(external, function(externalPresets) {
             context.presets = function() { return externalPresets; }; // default + external presets...
             osmSetAreaKeys(presets.areaKeys());
@@ -557,7 +579,15 @@ export function coreContext() {
             osmSetVertexTags(presets.vertexTags());
         });
     } else {
-        presets.init();
+        var isVisible;
+        if (presetsParameter) {
+            // assume list of allowed preset IDs
+            var visiblePresetIDs = new Set(presetsParameter.split(','));
+            isVisible = function(presetID) {
+                return visiblePresetIDs.has(presetID);
+            };
+        }
+        presets.init(isVisible);
         osmSetAreaKeys(presets.areaKeys());
         osmSetPointTags(presets.pointTags());
         osmSetVertexTags(presets.vertexTags());

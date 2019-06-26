@@ -1,8 +1,16 @@
 {
     "icon": "maki-recycling",
     "fields": [
+        "operator",
         "recycling_accepts",
-        "collection_times"
+        "collection_times",
+        "material",
+        "colour"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point",

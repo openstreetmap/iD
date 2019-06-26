@@ -3,9 +3,15 @@
     "fields": [
         "content",
         "operator",
-        "manufacturer",
+        "material",
         "building_area",
-        "height"
+        "height",
+        "capacity"
+    ],
+    "moreFields": [
+        "layer",
+        "location",
+        "manufacturer"
     ],
     "geometry": [
         "point",

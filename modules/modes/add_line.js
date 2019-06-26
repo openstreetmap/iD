@@ -4,6 +4,7 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionAddVertex } from '../actions/add_vertex';
 
 import { behaviorAddWay } from '../behavior/add_way';
+import { modeBrowse } from './browse';
 import { modeDrawLine } from './draw_line';
 import { osmNode, osmWay } from '../osm';
 
@@ -17,14 +18,28 @@ export function modeAddLine(context, mode) {
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
-    var defaultTags = {};
-    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line');
+    mode.defaultTags = {};
+    if (mode.preset) mode.defaultTags = mode.preset.setTags(mode.defaultTags, 'line');
 
+    var _repeatAddedFeature = false;
+    var _allAddedEntityIDs = [];
+
+    mode.repeatAddedFeature = function(val) {
+        if (!arguments.length || val === undefined) return _repeatAddedFeature;
+        _repeatAddedFeature = val;
+        return mode;
+    };
+
+    mode.addedEntityIDs = function() {
+        return _allAddedEntityIDs.filter(function(id) {
+            return context.hasEntity(id);
+        });
+    };
 
     function start(loc) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: mode.defaultTags });
 
         context.perform(
             actionAddEntity(node),
@@ -32,14 +47,14 @@ export function modeAddLine(context, mode) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
+        enterDrawMode(way, startGraph);
     }
 
 
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: mode.defaultTags });
 
         context.perform(
             actionAddEntity(node),
@@ -48,30 +63,46 @@ export function modeAddLine(context, mode) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
+        enterDrawMode(way, startGraph);
     }
 
 
     function startFromNode(node) {
         var startGraph = context.graph();
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: mode.defaultTags });
 
         context.perform(
             actionAddEntity(way),
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, startGraph, context.graph(), mode.button));
+        enterDrawMode(way, startGraph);
+    }
+
+
+    function enterDrawMode(way, startGraph) {
+        _allAddedEntityIDs.push(way.id);
+        var drawMode = modeDrawLine(context, way.id, startGraph, context.graph(), mode.button, null, mode);
+        context.enter(drawMode);
+    }
+
+
+    function undone() {
+        context.enter(modeBrowse(context));
     }
 
 
     mode.enter = function() {
         context.install(behavior);
+        context.history()
+            .on('undone.add_line', undone);
     };
 
 
     mode.exit = function() {
         context.uninstall(behavior);
+        context.history()
+            .on('undone.add_line', null);
     };
 
     return mode;

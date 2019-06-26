@@ -4,6 +4,7 @@
         "{railway/rail}"
     ],
     "moreFields": [
+        "covered",
         "frequency_electrified",
         "maxspeed",
         "voltage_electrified"

@@ -8,8 +8,11 @@
     ],
     "moreFields": [
         "access_simple",
+        "height",
         "inscription",
-        "lit"
+        "lit",
+        "manufacturer",
+        "operator"
     ],
     "geometry": [
         "point",
@@ -17,7 +20,8 @@
         "line"
     ],
     "terms": [
-        "seat"
+        "seat",
+        "chair"
     ],
     "tags": {
         "amenity": "bench"

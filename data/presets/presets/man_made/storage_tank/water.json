@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-storage_tank",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "cistern",
+        "water tower"
+    ],
+    "tags": {
+        "man_made": "storage_tank",
+        "content": "water"
+    },
+    "name": "Water Tank"
+}

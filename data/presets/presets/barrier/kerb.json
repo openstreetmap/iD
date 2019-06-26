@@ -1,7 +1,9 @@
 {
+    "icon": "temaki-kerb-raised",
     "fields": [
         "kerb",
-        "tactile_paving"
+        "tactile_paving",
+        "wheelchair"
     ],
     "moreFields": [
         "material"
@@ -13,5 +15,6 @@
     "tags": {
         "barrier": "kerb"
     },
+    "matchScore": 0.80,
     "name": "Curb"
 }

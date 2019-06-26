@@ -7,6 +7,9 @@
         "payment_multi_fee",
         "water_point"
     ],
+    "moreFields": [
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "vertex",

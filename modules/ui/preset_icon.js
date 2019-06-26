@@ -4,7 +4,7 @@ import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
 export function uiPresetIcon(context) {
-    var preset, geometry, sizeClass = 'medium';
+    var preset, geometry, sizeClass = 'medium', pointMarker = true;
 
     function isSmall() {
         return sizeClass === 'small';
@@ -209,12 +209,12 @@ export function uiPresetIcon(context) {
         var isTnp = picon && /^tnp-/.test(picon);
         var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
-        var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
+        var drawPoint = picon && geom === 'point' && pointMarker && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
         var drawRoute = picon && geom === 'route';
-        var isFramed = (drawVertex || drawArea || drawLine || drawRoute);
+        var isFramed = (drawPoint || drawVertex || drawArea || drawLine || drawRoute);
 
         var tags = !isCategory ? p.setTags({}, geom) : {};
         for (var k in tags) {
@@ -377,6 +377,14 @@ export function uiPresetIcon(context) {
         sizeClass = val;
         return presetIcon;
     };
+
+
+    presetIcon.pointMarker = function(val) {
+        if (!arguments.length) return pointMarker;
+        pointMarker = val;
+        return presetIcon;
+    };
+
 
     return presetIcon;
 }

@@ -93,7 +93,6 @@
                     "line": "Hampahitsy ny zoron'ito tsipika ito.",
                     "area": "Hampahitsy ireo zoron'ito faritra ito."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Nampahitsy ny zoron'ilay tsipika.",
                     "area": "Nampahitsy ireo zoron'ilay faritra."
@@ -104,11 +103,8 @@
             },
             "straighten": {
                 "title": "Hampahitsy",
-                "description": "Hampahitsy ito tsipika ito.",
                 "key": "S",
-                "annotation": "Nampahitsy an'ilay tsipika.",
-                "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra.",
-                "connected_to_hidden": "Tsy mety ampahitsiana ito tsipika ito satria mifampitohy amina zavatra tsy miseho."
+                "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra."
             },
             "delete": {
                 "title": "Hamafa",
@@ -277,13 +273,6 @@
                     "create": "Nanampy fameperam-pihodinana",
                     "delete": "Nanala ilay fameperam-pihodinana"
                 }
-            },
-            "detach_node": {
-                "title": "Hanendaka",
-                "key": "E",
-                "description": "Hanendaka ito vona ito avy amin'ireo tsipika/faritra.",
-                "annotation": "Nanendaka ilay vona tamin'ireo tsipika/faritra nisy azy.",
-                "connected_to_hidden": "Tsy mety endahana ito vona ito satria mipetaka amina singa tsy miseho."
             }
         },
         "restriction": {
@@ -415,7 +404,6 @@
         },
         "geocoder": {
             "search": "Hitady maneran-tany...",
-            "no_results_visible": "Tsy nisy vokatra teo amin'ny faritra miseho amin'ny sarintany",
             "no_results_worldwide": "Tsy nisy vokatra hita"
         },
         "geolocate": {
@@ -563,12 +551,6 @@
                 "tooltip": "Natao miseho feno tanteraka ireo faritra."
             }
         },
-        "restore": {
-            "heading": "Misy fanovana nataonao mbola tsy voatahiry",
-            "description": "Tianao haverina ve ny fanovana mbola tsy voatahiry tamin'izay nataonao teo aloha?",
-            "restore": "Hamerina ny fanovana nataoko",
-            "reset": "Hamela ny fanovana nataoko"
-        },
         "save": {
             "title": "Hitahiry",
             "help": "Hamarino ny fanovana nataonao ary alefaso any amin'ny OpenStreetMap, mba ho hitan'ny mpampiasa hafa.",
@@ -601,10 +583,6 @@
             }
         },
         "success": {
-            "just_edited": "Efa nanova an'i OpenStreetMap ianao izay!",
-            "thank_you": "Misaotra anao manatsara ny sarintany.",
-            "thank_you_location": "Misaotra anao manatsara ny sarintany manodidina an'i {where}.",
-            "help_html": "Tokony hiseho ao amin'ny OpenStreetMap ny fanovana nataonao ao anatin'ny minitra vitsivitsy. Mety ho elaela kosa ny sarintany any amin'ny toeran-kafa vao miova.",
             "help_link_text": "Antsipiriany",
             "view_on_osm": "Hijery ny Fiovana ao amin'ny OSM",
             "changeset_id": "Ny vondron'ova nataonao #: {changeset_id}",
@@ -618,12 +596,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Hanafoana"
-        },
-        "splash": {
-            "welcome": "Tongasoa eto amin'ny éditeur OpenStreetMap iD",
-            "text": "iD dia fitaovana mora ampiasaina nefa matanjaka mba handraisana anjara amin'ny sarintany misokatra tsara indrindra eto an-tany. Ity dia fivoahana faha {version}. Raha te hahalala misimisy kokoa dia tsidiho ny {website} ary tatero ao amin'ny {github} ny tsy fetezana.",
-            "walkthrough": "Hanomboka ny Fanoroana",
-            "start": "Hanova amin'izay"
         },
         "source_switch": {
             "lose_changes": "Misy fanovana nataonao mbola tsy voatahiry. Raha mivery any amin'ny sarintany ianao dia very ireo. Azonao antoka ve fa te hiverina any amin'ny sarintany tokoa ianao?"

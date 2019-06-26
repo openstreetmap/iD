@@ -17,7 +17,7 @@ import { uiCmd } from './cmd';
 export function uiMapData(context) {
     var key = t('map_data.key');
     var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
-    var features = context.features().keys();
+    var features = context.features().featuresArray();
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
@@ -35,18 +35,18 @@ export function uiMapData(context) {
 
 
     function showsFeature(d) {
-        return context.features().enabled(d);
+        return context.features().enabled(d.key);
     }
 
 
     function autoHiddenFeature(d) {
         if (d.type === 'kr_error') return context.errors().autoHidden(d);
-        return context.features().autoHidden(d);
+        return context.features().autoHidden(d.key);
     }
 
 
     function clickFeature(d) {
-        context.features().toggle(d);
+        context.features().toggle(d.key);
         update();
     }
 
@@ -585,7 +585,12 @@ export function uiMapData(context) {
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    var tip;
+                    if (name === 'feature') {
+                        tip = d.description;
+                    } else {
+                        tip = t(name + '.' + d + '.tooltip');
+                    }
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d)) {
                         var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
@@ -607,7 +612,12 @@ export function uiMapData(context) {
 
         label
             .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
+            .text(function(d) {
+                if (name === 'feature') {
+                    return d.title;
+                }
+                return t(name + '.' + d + '.description');
+            });
 
         // Update
         items = items
@@ -662,13 +672,44 @@ export function uiMapData(context) {
 
 
     function renderFeatureList(selection) {
-        var container = selection.selectAll('.layer-feature-list')
+        var container = selection.selectAll('.layer-feature-list-container')
             .data([0]);
 
-        _featureList = container.enter()
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'layer-feature-list-container');
+
+        containerEnter
             .append('ul')
-            .attr('class', 'layer-list layer-feature-list')
-            .merge(container);
+            .attr('class', 'layer-list layer-feature-list');
+
+        var footer = containerEnter
+            .append('div')
+            .attr('class', 'feature-list-links section-footer');
+
+        footer
+            .append('a')
+            .attr('class', 'feature-list-link')
+            .attr('href', '#')
+            .text(t('issues.enable_all'))
+            .on('click', function() {
+                context.features().enableAll();
+            });
+
+        footer
+            .append('a')
+            .attr('class', 'feature-list-link')
+            .attr('href', '#')
+            .text(t('issues.disable_all'))
+            .on('click', function() {
+                context.features().disableAll();
+            });
+
+        // Update
+        container = container
+            .merge(containerEnter);
+
+        _featureList = container.selectAll('.layer-feature-list');
 
         updateFeatureList();
     }

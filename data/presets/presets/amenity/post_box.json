@@ -7,6 +7,12 @@
         "ref"
     ],
     "moreFields": [
+        "access_simple",
+        "brand",
+        "covered",
+        "height",
+        "indoor",
+        "manufacturer",
         "wheelchair"
     ],
     "geometry": [
@@ -17,8 +23,11 @@
         "amenity": "post_box"
     },
     "terms": [
-        "letter",
-        "post"
+        "letter drop",
+        "mail box",
+        "package drop",
+        "post box",
+        "postal box"
     ],
     "name": "Mailbox"
 }

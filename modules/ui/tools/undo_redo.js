@@ -33,30 +33,33 @@ export function uiToolUndoRedo(context) {
 
 
     function editable() {
-        var mode = context.mode();
-        return context.editable() && mode && mode.id !== 'save';
+        return context.editable();
     }
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true)
+        .title(function (d) {
+            return uiTooltipHtml(d.annotation() ?
+                t(d.id + '.tooltip', {action: d.annotation()}) :
+                t(d.id + '.nothing'), d.cmd);
+        });
+
+    var buttons;
 
     tool.render = function(selection) {
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(function (d) {
-                return uiTooltipHtml(d.annotation() ?
-                    t(d.id + '.tooltip', {action: d.annotation()}) :
-                    t(d.id + '.nothing'), d.cmd);
-            });
 
-        var buttons = selection.selectAll('button')
-            .data(commands)
+        buttons = selection.selectAll('button')
+            .data(commands);
+
+        var buttonsEnter = buttons
             .enter()
             .append('button')
             .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
-        buttons.each(function(d) {
+        buttonsEnter.each(function(d) {
             var iconName = d.id;
             if (textDirection === 'rtl') {
                 if (iconName === 'undo') {
@@ -69,10 +72,27 @@ export function uiToolUndoRedo(context) {
                 .call(svgIcon('#iD-icon-' + iconName));
         });
 
+        buttons = buttonsEnter.merge(buttons);
+    };
+
+    function update() {
+        buttons
+            .property('disabled', !editable())
+            .classed('disabled', function(d) {
+                return !editable() || !d.annotation();
+            })
+            .each(function() {
+                var selection = d3_select(this);
+                if (selection.property('tooltipVisible')) {
+                    selection.call(tooltipBehavior.show);
+                }
+            });
+    }
+
+    tool.install = function() {
         context.keybinding()
             .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
             .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -87,21 +107,6 @@ export function uiToolUndoRedo(context) {
 
         context
             .on('enter.undo_redo', update);
-
-
-        function update() {
-            buttons
-                .property('disabled', !editable())
-                .classed('disabled', function(d) {
-                    return !editable() || !d.annotation();
-                })
-                .each(function() {
-                    var selection = d3_select(this);
-                    if (selection.property('tooltipVisible')) {
-                        selection.call(tooltipBehavior.show);
-                    }
-                });
-        }
     };
 
     tool.uninstall = function() {

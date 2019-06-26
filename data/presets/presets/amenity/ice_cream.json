@@ -1,5 +1,5 @@
 {
-    "icon": "maki-ice-cream",
+    "icon": "fas-ice-cream",
     "fields": [
         "name",
         "address",

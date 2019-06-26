@@ -13,7 +13,7 @@ export function uiFeatureInfo(context) {
         var hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
-                return String(stats[k]) + ' ' + t('feature.' + k + '.description');
+                return String(stats[k]) + ' ' + features.features()[k].title;
             }
         }).filter(Boolean);
 

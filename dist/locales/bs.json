@@ -80,7 +80,6 @@
                     "line": "Oblikovati uglove ove linije u kvadrat.",
                     "area": "Oblikovati uglove ovo područje u kvadrat."
                 },
-                "key": "Oblikovati",
                 "annotation": {
                     "line": "Ispravljeni uglovi linije.",
                     "area": "Ispravljeni uglovi područja."
@@ -89,9 +88,7 @@
             },
             "straighten": {
                 "title": "Ispraviti",
-                "description": "Ispraviti ovu liniju.",
                 "key": "Oblikovati",
-                "annotation": "Ispravljena linija.",
                 "too_bendy": "Ovo ne može biti ispralvjeno jer se previše savija."
             },
             "delete": {
@@ -198,7 +195,6 @@
         },
         "geocoder": {
             "search": "Globalna pretraga...",
-            "no_results_visible": "Nema rezultata u vidljivom području karte",
             "no_results_worldwide": "Nema pronađenih rezultata"
         },
         "geolocate": {
@@ -230,22 +226,10 @@
             "custom": "Prilagođena pozadina",
             "reset": "ponovo postavite"
         },
-        "restore": {
-            "heading": "Imate nespremljenih promjena",
-            "description": "Želite li vratiti nespremljene promjene od prethodnog uređivanja?"
-        },
         "save": {
             "title": "Sačuvajte",
             "no_changes": "Nema promjena za sačuvati.",
             "unsaved_changes": "Imate promjene koje nisu spašene"
-        },
-        "success": {
-            "just_edited": "Upravo ste uredili OpenStreetMap kartu!"
-        },
-        "splash": {
-            "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
-            "text": "ID je prijateljski ali moćan alat za doprinos najboljoj svjetskoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledajte stranicu {website} i prijavite greške na stranici {github}.",
-            "walkthrough": "Počnite sa upoznavanjem"
         },
         "source_switch": {
             "live": "uživo",
@@ -745,8 +729,7 @@
                     "terms": "voda za piće,pitka voda"
                 },
                 "amenity/embassy": {
-                    "name": "Ambasada",
-                    "terms": "ambasada,konzulat,predstavništvo strane zemlje"
+                    "name": "Ambasada"
                 },
                 "amenity/fast_food": {
                     "name": "Fast Food",
@@ -1634,8 +1617,7 @@
                     "terms": "prodavnica bicikala,radnja za prodaju bicikala"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "butik,radnja za prodaju odjeće"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Mesar",
@@ -1920,10 +1902,6 @@
                 "type/route_master": {
                     "name": "Informacije o rutama",
                     "terms": "informacije o rutama,informacije o trasama"
-                },
-                "vertex": {
-                    "name": "Drugo",
-                    "terms": "ostalo,drugo"
                 },
                 "waterway": {
                     "name": "Vodotok"

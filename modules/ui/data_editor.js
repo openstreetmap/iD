@@ -60,6 +60,7 @@ export function uiDataEditor(context) {
         var editor = body.selectAll('.data-editor')
             .data([0]);
 
+        // enter/update
         editor.enter()
             .append('div')
             .attr('class', 'modal-section data-editor')
@@ -70,6 +71,7 @@ export function uiDataEditor(context) {
         var rte = body.selectAll('.raw-tag-editor')
             .data([0]);
 
+        // enter/update
         rte.enter()
             .append('div')
             .attr('class', 'raw-tag-editor inspector-inner data-editor')
@@ -79,7 +81,10 @@ export function uiDataEditor(context) {
                 .readOnlyTags([/./])
                 .tags((_datum && _datum.properties) || {})
                 .state('hover')
-            );
+            )
+            .selectAll('textarea.tag-text')
+            .property('disabled', true)
+            .classed('readonly', true);
     }
 
 

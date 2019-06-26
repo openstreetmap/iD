@@ -9,11 +9,18 @@
         "faces"
     ],
     "moreFields": [
-        "lit"
+        "covered",
+        "height",
+        "indoor",
+        "lit",
+        "manufacturer"
     ],
     "geometry": [
         "point",
         "vertex"
+    ],
+    "terms":[
+        "time"
     ],
     "tags": {
         "amenity": "clock"

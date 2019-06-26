@@ -226,25 +226,30 @@ coreGraph.prototype = {
             }
 
         } else if (type === 'relation') {   // Update parentRels
+
+            // diff only on the IDs since the same entity can be a member multiple times with different roles
+            var oldentityMemberIDs = oldentity ? oldentity.members.map(function(m) { return m.id; }) : [];
+            var entityMemberIDs = entity ? entity.members.map(function(m) { return m.id; }) : [];
+
             if (oldentity && entity) {
-                removed = utilArrayDifference(oldentity.members, entity.members);
-                added = utilArrayDifference(entity.members, oldentity.members);
+                removed = utilArrayDifference(oldentityMemberIDs, entityMemberIDs);
+                added = utilArrayDifference(entityMemberIDs, oldentityMemberIDs);
             } else if (oldentity) {
-                removed = oldentity.members;
+                removed = oldentityMemberIDs;
                 added = [];
             } else if (entity) {
                 removed = [];
-                added = entity.members;
+                added = entityMemberIDs;
             }
             for (i = 0; i < removed.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
-                parentRels[removed[i].id] = new Set(parentRels[removed[i].id]);
-                parentRels[removed[i].id].delete(oldentity.id);
+                parentRels[removed[i]] = new Set(parentRels[removed[i]]);
+                parentRels[removed[i]].delete(oldentity.id);
             }
             for (i = 0; i < added.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
-                parentRels[added[i].id] = new Set(parentRels[added[i].id]);
-                parentRels[added[i].id].add(entity.id);
+                parentRels[added[i]] = new Set(parentRels[added[i]]);
+                parentRels[added[i]].add(entity.id);
             }
         }
     },

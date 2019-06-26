@@ -7,6 +7,11 @@
         "width",
         "lanes"
     ],
+    "moreFields": [
+        "access",
+        "covered",
+        "indoor"
+    ],
     "geometry": [
         "point",
         "line",

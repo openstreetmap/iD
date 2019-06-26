@@ -8,7 +8,9 @@
         "lit"
     ],
     "moreFields": [
+        "covered",
         "fee",
+        "indoor",
         "payment_multi_fee"
     ],
     "geometry": [

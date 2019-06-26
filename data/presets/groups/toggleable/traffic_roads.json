@@ -1,0 +1,25 @@
+{
+    "name": "Traffic Roads",
+    "description": "Highways, Streets, etc.",
+    "toggleable": true,
+    "matches": {
+        "geometry": "line",
+        "allTags": {
+            "highway": {
+                "motorway": true,
+                "motorway_link": true,
+                "trunk": true,
+                "trunk_link": true,
+                "primary": true,
+                "primary_link": true,
+                "secondary": true,
+                "secondary_link": true,
+                "tertiary": true,
+                "tertiary_link": true,
+                "residential": true,
+                "unclassified": true,
+                "living_street": true
+            }
+        }
+    }
+}

@@ -4,9 +4,7 @@
         "name",
         "religion",
         "denomination",
-        "building_area",
-        "address",
-        "service_times"
+        "{amenity/place_of_worship}"
     ],
     "geometry": [
         "point",

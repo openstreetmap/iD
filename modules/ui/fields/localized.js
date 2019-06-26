@@ -1,10 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
-
+import { select as d3_select, event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { dataWikipedia } from '../../../data';
@@ -37,10 +32,6 @@ export function uiFieldLocalized(field, context) {
 
     var _selection = d3_select(null);
     var _multilingual = [];
-    var _isLocked = false;
-    var _brandTip = tooltip()
-        .title(t('inspector.lock.suggestion', { label: field.label }))
-        .placement('bottom');
     var _buttonTip = tooltip()
         .title(t('translate.translate'))
         .placement('left');
@@ -50,13 +41,13 @@ export function uiFieldLocalized(field, context) {
 
     function calcLocked() {
         if (!_entity) {    // the original entity
-            _isLocked = false;
+            field.locked(false);
             return;
         }
 
         var latest = context.hasEntity(_entity.id);
         if (!latest) {    // get current entity, possibly edited
-            _isLocked = false;
+            field.locked(false);
             return;
         }
 
@@ -67,8 +58,10 @@ export function uiFieldLocalized(field, context) {
         var showsBrand = preset && preset.fields
             .filter(function(d) { return d.id === 'brand'; }).length;
 
-        _isLocked = !!(field.id === 'name' && hasOriginalName &&
+        var isLocked = !!(field.id === 'name' && hasOriginalName &&
             (hasWikidata || (isSuggestion && !showsBrand)));
+
+        field.locked(isLocked);
     }
 
 
@@ -87,6 +80,7 @@ export function uiFieldLocalized(field, context) {
     function localized(selection) {
         _selection = selection;
         calcLocked();
+        var isLocked = field.locked();
         var entity = _entity && context.hasEntity(_entity.id);  // get latest
         var preset = entity && context.presets().match(entity, context.graph());
 
@@ -97,9 +91,7 @@ export function uiFieldLocalized(field, context) {
         wrap = wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
-            .merge(wrap)
-            .call(_isLocked ? _brandTip : _brandTip.destroy);
-
+            .merge(wrap);
 
         input = wrap.selectAll('.localized-main')
             .data([0]);
@@ -119,13 +111,7 @@ export function uiFieldLocalized(field, context) {
             var pKey = pTag[0];
             var pValue = pTag[1];
 
-            if (preset.suggestion) {
-                // A "suggestion" preset (brand name)
-                // Put suggestion keys in `field.keys` so delete button can remove them all.
-                field.keys = Object.keys(preset.removeTags)
-                    .filter(function(k) { return k !== pKey; });
-
-            } else {
+            if (!preset.suggestion) {
                 // Not a suggestion preset - Add a suggestions dropdown if it makes sense to.
                 // This code attempts to determine if the matched preset is the
                 // kind of preset that even can benefit from name suggestions..
@@ -154,8 +140,8 @@ export function uiFieldLocalized(field, context) {
         }
 
         input
-            .classed('disabled', !!_isLocked)
-            .attr('readonly', _isLocked || null)
+            .classed('disabled', !!isLocked)
+            .attr('readonly', isLocked || null)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
@@ -172,8 +158,8 @@ export function uiFieldLocalized(field, context) {
             .merge(translateButton);
 
         translateButton
-            .classed('disabled', !!_isLocked)
-            .call(_isLocked ? _buttonTip.destroy : _buttonTip)
+            .classed('disabled', !!isLocked)
+            .call(isLocked ? _buttonTip.destroy : _buttonTip)
             .on('click', addNew);
 
 
@@ -193,8 +179,9 @@ export function uiFieldLocalized(field, context) {
             .call(renderMultilingual);
 
         localizedInputs.selectAll('button, input')
-            .classed('disabled', !!_isLocked)
-            .attr('readonly', _isLocked || null);
+            .classed('disabled', !!isLocked)
+            .attr('readonly', isLocked || null);
+
 
 
         // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
@@ -297,7 +284,7 @@ export function uiFieldLocalized(field, context) {
 
         function addNew() {
             d3_event.preventDefault();
-            if (_isLocked) return;
+            if (field.locked()) return;
 
             var defaultLang = utilDetect().locale.toLowerCase().split('-')[0];
             var langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
@@ -314,7 +301,7 @@ export function uiFieldLocalized(field, context) {
 
         function change(onInput) {
             return function() {
-                if (_isLocked) {
+                if (field.locked()) {
                     d3_event.preventDefault();
                     return;
                 }
@@ -404,16 +391,24 @@ export function uiFieldLocalized(field, context) {
                     .append('label')
                     .attr('class', 'field-label');
 
-                label
+                var text = label
                     .append('span')
-                    .attr('class', 'label-text')
+                    .attr('class', 'label-text');
+
+                text
+                    .append('span')
+                    .attr('class', 'label-textvalue')
                     .text(t('translate.localized_translation_label'));
+
+                text
+                    .append('span')
+                    .attr('class', 'label-textannotation');
 
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
                     .on('click', function(d){
-                        if (_isLocked) return;
+                        if (field.locked()) return;
                         d3_event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;

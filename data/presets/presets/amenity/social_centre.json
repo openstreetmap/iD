@@ -2,7 +2,9 @@
     "icon": "fas-handshake",
     "fields": [
         "name",
+        "brand",
         "operator",
+        "operator/type",
         "address",
         "building_area"
     ],
@@ -14,6 +16,7 @@
         "internet_access/fee",
         "internet_access/ssid",
         "phone",
+        "polling_station",
         "website",
         "wheelchair"
     ],

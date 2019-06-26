@@ -4,6 +4,10 @@
         "{building}",
         "smoking"
     ],
+    "moreFields": [
+        "{building}",
+        "polling_station"
+    ],
     "geometry": [
         "area"
     ],

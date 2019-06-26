@@ -96,7 +96,6 @@
                     "line": "Stavi pod pravi kut lomove linije.",
                     "area": "Stavi pod pravi kut uglove područja."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Kutovi linije su pod pravim kutom.",
                     "area": "Kutovi područja su pod pravim kutom."
@@ -107,11 +106,8 @@
             },
             "straighten": {
                 "title": "Izravnaj",
-                "description": "Izravnaj ovu liniju.",
                 "key": "S",
-                "annotation": "Linija je izravnana.",
-                "too_bendy": "Ovo se ne može izravnati jer je previše krivudavo.",
-                "connected_to_hidden": "Ova linija se ne može ispraviti jer je spojena na skriveni element karte."
+                "too_bendy": "Ovo se ne može izravnati jer je previše krivudavo."
             },
             "delete": {
                 "title": "Izbriši",
@@ -297,14 +293,6 @@
                     "create": "Zabrana skretanja je dodana",
                     "delete": "Zabrana skretanja je uklonjena"
                 }
-            },
-            "detach_node": {
-                "title": "Odvoji",
-                "key": "E",
-                "description": "Odvoji ovaj čvor s ovih linija/područja.",
-                "annotation": "Čvor je odvojen s roditeljskih linija/područja.",
-                "restriction": "Ovaj čvor se ne može odvojiti jer bi to oštetilo relaciju: \"{relation}\".",
-                "connected_to_hidden": "Ovaj čvor se ne može odvojiti jer je spojen na skriveni element."
             }
         },
         "restriction": {
@@ -455,7 +443,6 @@
         },
         "geocoder": {
             "search": "Globalna pretraga...",
-            "no_results_visible": "Nema rezultata na vidljivom dijelu karte",
             "no_results_worldwide": "Nema nađenih rezultata"
         },
         "geolocate": {
@@ -607,12 +594,6 @@
                 "tooltip": "Područja su iscrtana potpuno ispunjena."
             }
         },
-        "restore": {
-            "heading": "Imaš nespremljenih promjena",
-            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?",
-            "restore": "Vrati moje promjene",
-            "reset": "Zanemari moje promjene"
-        },
         "save": {
             "title": "Spremi",
             "help": "Pregledaj svoje promjene i postavi ih na OpenStreetMap, tako će postati vidljive drugim korisnicima.",
@@ -647,10 +628,6 @@
             }
         },
         "success": {
-            "just_edited": "Upravo si uredio/la OpenStreetMap!",
-            "thank_you": "Hvala ti za poboljšanje karte.",
-            "thank_you_location": "Hvala ti za poboljšanje karte u blizini {where}.",
-            "help_html": "Tvoje promjene bi se trebale pojaviti na OpenStreetMapu kroz par minuta. Druge karte će trebati više vremena za ažuriranje podataka.",
             "help_link_text": "Detalji",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Pogledaj promjene na OSM",
@@ -665,12 +642,6 @@
         "confirm": {
             "okay": "U redu",
             "cancel": "Otkaži"
-        },
-        "splash": {
-            "welcome": "Dobrodošli na iD OpenStreetMap uređivač",
-            "text": "iD je vrlo jednostavan ali moćan alat za doprinošenje najboljoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledaj {website} i prijavi greške u softveru na {github}.",
-            "walkthrough": "Počni prohod",
-            "start": "Odmah uređuj"
         },
         "source_switch": {
             "live": "uživo",
@@ -693,25 +664,18 @@
         "full_screen": "Slika preko cijelog zaslona",
         "streetside": {
             "tooltip": "Ulične fotografije od Microsofta",
-            "title": "Foto preklop (Bing Streetside)",
             "report": "Prijavi problem sa privatnosti na ovoj slici",
             "view_on_bing": "Pogledaj na Bing Maps karti",
             "hires": "Visoka rezolucija"
         },
         "mapillary_images": {
-            "tooltip": "Ulične fotografije s Mapillary servisa",
-            "title": "Foto preklop (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Prometni znakovi s Mapillary servisa (mora biti uključen foto preklop)",
-            "title": "Preklop prometnih znakova (Mapillary)"
+            "tooltip": "Ulične fotografije s Mapillary servisa"
         },
         "mapillary": {
             "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Ulične fotografije s OpenStreetCam servisa",
-            "title": "Foto preklop (OpenStreetCam)"
+            "tooltip": "Ulične fotografije s OpenStreetCam servisa"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Pogledaj ovu sliku na OpenStreetCam"
@@ -1189,12 +1153,10 @@
                     "continue_line": "Nastavi liniju na odabranoj točki",
                     "merge": "Kombiniraj (spoji) odabrane elemente",
                     "disconnect": "Razdvoji elemente na odabranoj točki",
-                    "detach_node": "Odvoji odabrani čvor s roditeljskih linija/područja",
                     "split": "Razdijeli liniju na dvije u odabranoj točki",
                     "reverse": "Obrni smjer linije",
                     "move": "Premjesti odabrane elemente",
                     "rotate": "Rotiraj odabrane elemente",
-                    "orthogonalize": "Izravnaj liniju / Ukvadratiči uglove područja",
                     "circularize": "Zaokruži zatvorenu liniju ili područje",
                     "reflect_long": "Zrcali elemente oko duže osi",
                     "reflect_short": "Zrcali elemente oko kraće osi",
@@ -1246,43 +1208,49 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Vrste ograda"
+                    "name": "Vrste prepreka"
                 },
                 "category-building": {
                     "name": "Vrste građevina"
                 },
+                "category-golf": {
+                    "name": "Elementi za golf"
+                },
                 "category-landuse": {
                     "name": "Načini korištenja zemljišta"
                 },
-                "category-natural-area": {
-                    "name": "Prirodni elementi"
-                },
-                "category-natural-line": {
-                    "name": "Prirodni elementi"
-                },
-                "category-natural-point": {
+                "category-natural": {
                     "name": "Prirodni elementi"
                 },
                 "category-path": {
-                    "name": "Vrste putova"
+                    "name": "Staze"
                 },
                 "category-rail": {
-                    "name": "Elementi željeznica"
+                    "name": "Pruge"
                 },
                 "category-restriction": {
                     "name": "Vrste zabrana"
                 },
-                "category-road": {
-                    "name": "Vrste cesta"
+                "category-road_major": {
+                    "name": "Velike prometnice"
+                },
+                "category-road_minor": {
+                    "name": "Male prometnice"
+                },
+                "category-road_service": {
+                    "name": "Servisna cesta"
                 },
                 "category-route": {
                     "name": "Vrste trasa"
                 },
-                "category-water-area": {
-                    "name": "Vrste voda"
+                "category-utility": {
+                    "name": "Elementi komunalija"
                 },
-                "category-water-line": {
-                    "name": "Vrste voda"
+                "category-water": {
+                    "name": "Vodena tijela"
+                },
+                "category-waterway": {
+                    "name": "Vodotokovi"
                 }
             },
             "fields": {
@@ -1327,12 +1295,16 @@
                     "label": "Adresa",
                     "placeholders": {
                         "city": "Grad",
+                        "city!vn": "Grad/gradić",
                         "conscriptionnumber": "123",
                         "country": "Država",
+                        "county": "Županija",
                         "district": "Oblast",
+                        "floor": "Kat",
                         "hamlet": "Zaseok",
                         "housename": "Naziv kuće",
                         "housenumber": "123",
+                        "neighbourhood": "Četvrt",
                         "place": "Mjesto",
                         "postcode": "Poštanski broj",
                         "province": "Pokrajina",
@@ -1385,8 +1357,23 @@
                 "aeroway": {
                     "label": "Vrsta"
                 },
+                "air_conditioning": {
+                    "label": "Klimatizirano"
+                },
                 "amenity": {
                     "label": "Vrsta"
+                },
+                "animal_boarding": {
+                    "label": "Za životinje"
+                },
+                "animal_breeding": {
+                    "label": "Za životinje"
+                },
+                "animal_shelter": {
+                    "label": "Za životinje"
+                },
+                "architect": {
+                    "label": "Arhitekt"
                 },
                 "area/highway": {
                     "label": "Vrsta"
@@ -1421,8 +1408,14 @@
                 "brand": {
                     "label": "Marka"
                 },
+                "brewery": {
+                    "label": "Točena piva"
+                },
                 "building": {
                     "label": "Zgrada"
+                },
+                "building/levels_building": {
+                    "placeholder": "2, 4, 6..."
                 },
                 "building_area": {
                     "label": "Zgrada"
@@ -1493,6 +1486,9 @@
                         "cycleway:right": "Desna strana"
                     }
                 },
+                "date": {
+                    "label": "Datum"
+                },
                 "delivery": {
                     "label": "Dostava"
                 },
@@ -1508,8 +1504,46 @@
                 "diaper": {
                     "label": "Omogućeno mijenjanje pelena"
                 },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Istok",
+                        "ENE": "Istok-sjeveroistok",
+                        "ESE": "Istok-jugoistok",
+                        "N": "Sjever",
+                        "NE": "Sjeveroistok",
+                        "NNE": "Sjever-sjeveroistok",
+                        "NNW": "Sjever-sjeverozapad",
+                        "NW": "Sjeverozapad",
+                        "S": "Jug",
+                        "SE": "Jugoistok",
+                        "SSE": "Jug-jugoistok",
+                        "SSW": "Jug-jugozapad",
+                        "SW": "Jugozapad",
+                        "W": "Zapad",
+                        "WNW": "Zapad-sjeverozapad",
+                        "WSW": "Zapad-jugozapad"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Smjer",
+                    "options": {
+                        "anticlockwise": "Suprotno od kazaljke na satu",
+                        "clockwise": "U smjeru kazaljke na satu"
+                    }
+                },
                 "dock": {
                     "label": "Vrsta"
+                },
+                "dog": {
+                    "label": "Psi",
+                    "options": {
+                        "leashed": "Samo na uzici",
+                        "no": "Nedozvoljeni",
+                        "yes": "Dozvoljeni"
+                    }
+                },
+                "door": {
+                    "label": "Vrata"
                 },
                 "drive_through": {
                     "label": "Provezi-kroz"
@@ -1976,8 +2010,7 @@
                     "options": {
                         "bucket": "Kanta",
                         "chemical": "Kemijski",
-                        "flush": "Povuci vodu",
-                        "pitlatrine": "Rupa/Poljski wc"
+                        "flush": "Povuci vodu"
                     }
                 },
                 "tourism": {
@@ -2213,8 +2246,7 @@
                     "terms": "voda za piće,pitka voda,pipa,fontana,slavina"
                 },
                 "amenity/embassy": {
-                    "name": "Ambasada",
-                    "terms": "ambasada,poslanstvo,veleposlanstvo"
+                    "name": "Ambasada"
                 },
                 "amenity/fast_food": {
                     "name": "Brza hrana",
@@ -2366,9 +2398,6 @@
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "Automat za piće"
-                },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Automat za novine"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Automat za parkirališne karte"
@@ -3350,9 +3379,6 @@
                     "name": "Relacija",
                     "terms": "relacija,odnos objekata,veza objekata,relacija između objekata"
                 },
-                "roundabout": {
-                    "name": "Kružni tok"
-                },
                 "route/ferry": {
                     "name": "Brodska linija",
                     "terms": "trajektna linija,trajektna ruta,brodska ruta"
@@ -3411,8 +3437,7 @@
                     "name": "Knjižara"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "butik,trgovina odjeće"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Mesnica",
@@ -3882,10 +3907,6 @@
                 "type/route_master": {
                     "name": "Glavna ruta kretanja",
                     "terms": "glavna ruta kretanja,glavna linija kretanja,glavna linija relacije"
-                },
-                "vertex": {
-                    "name": "Drugo",
-                    "terms": "drugo,ostalo,drugačije,drugačiji,drukčiji,ostali"
                 },
                 "waterway": {
                     "name": "Vodeni put"

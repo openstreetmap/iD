@@ -31,6 +31,7 @@ if (isDevelopment) {
             '!data/presets/categories.json',
             '!data/presets/fields.json',
             '!data/presets/presets.json',
+            '!data/presets/groups.json',
             '!data/presets.yaml',
             '!data/taginfo.json',
             '!dist/locales/en.json'

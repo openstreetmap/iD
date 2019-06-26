@@ -12,6 +12,8 @@ export function modeAddPoint(context, mode) {
 
     mode.id = 'add-point';
 
+    var baselineGraph = context.graph();
+
     var behavior = behaviorDraw(context)
         .tail(t('modes.add_point.tail'))
         .on('click', add)
@@ -23,6 +25,20 @@ export function modeAddPoint(context, mode) {
     var defaultTags = {};
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
 
+    var _repeatAddedFeature = false;
+    var _allAddedEntityIDs = [];
+
+    mode.repeatAddedFeature = function(val) {
+        if (!arguments.length) return _repeatAddedFeature;
+        _repeatAddedFeature = val;
+        return mode;
+    };
+
+    mode.addedEntityIDs = function() {
+        return _allAddedEntityIDs.filter(function(id) {
+            return context.hasEntity(id);
+        });
+    };
 
     function add(loc) {
         var node = osmNode({ loc: loc, tags: defaultTags });
@@ -32,7 +48,7 @@ export function modeAddPoint(context, mode) {
             t('operations.add.annotation.point')
         );
 
-        enterSelectMode(node);
+        didFinishAdding(node);
     }
 
 
@@ -44,19 +60,12 @@ export function modeAddPoint(context, mode) {
             t('operations.add.annotation.vertex')
         );
 
-        enterSelectMode(node);
+        didFinishAdding(node);
     }
-
-    function enterSelectMode(node) {
-        context.enter(
-            modeSelect(context, [node.id]).newFeature(true)
-        );
-    }
-
 
     function addNode(node) {
         if (Object.keys(defaultTags).length === 0) {
-            enterSelectMode(node);
+            didFinishAdding(node);
             return;
         }
 
@@ -70,7 +79,16 @@ export function modeAddPoint(context, mode) {
             t('operations.add.annotation.point')
         );
 
-        enterSelectMode(node);
+        didFinishAdding(node);
+    }
+
+    function didFinishAdding(node) {
+        _allAddedEntityIDs.push(node.id);
+        if (!mode.repeatAddedFeature()) {
+            context.enter(
+                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
+            );
+        }
     }
 
 
@@ -79,12 +97,23 @@ export function modeAddPoint(context, mode) {
     }
 
 
+    function undone() {
+        if (context.graph() === baselineGraph || mode.addedEntityIDs().length === 0) {
+            context.enter(modeBrowse(context));
+        }
+    }
+
+
     mode.enter = function() {
         context.install(behavior);
+        context.history()
+            .on('undone.add_point', undone);
     };
 
 
     mode.exit = function() {
+        context.history()
+            .on('undone.add_point', null);
         context.uninstall(behavior);
     };
 

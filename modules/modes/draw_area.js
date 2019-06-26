@@ -1,16 +1,20 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
+import { modeSelect } from './select';
+import { utilDisplayLabel } from '../util';
 
-
-export function modeDrawArea(context, wayID, startGraph, baselineGraph, button) {
+export function modeDrawArea(context, wayID, startGraph, baselineGraph, button, addMode) {
     var mode = {
         button: button,
-        id: 'draw-area'
+        id: 'draw-area',
+        title: (addMode && addMode.title) || utilDisplayLabel(context.entity(wayID), context)
     };
 
-    var behavior;
+    mode.addMode = addMode;
 
     mode.wayID = wayID;
+
+    var behavior;
 
     mode.enter = function() {
         var way = context.entity(wayID);
@@ -39,6 +43,23 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button) 
         context.uninstall(behavior);
     };
 
+    mode.repeatAddedFeature = function(val) {
+        if (addMode) return addMode.repeatAddedFeature(val);
+    };
+
+    mode.addedEntityIDs = function() {
+        if (addMode) return addMode.addedEntityIDs();
+    };
+
+    mode.didFinishAdding = function() {
+        if (mode.repeatAddedFeature()) {
+            context.enter(addMode);
+        }
+        else {
+            context.enter(modeSelect(context, mode.addedEntityIDs() || [wayID]).newFeature(true));
+        }
+    };
+
 
     mode.selectedIDs = function() {
         return [wayID];
@@ -47,6 +68,11 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button) 
 
     mode.activeID = function() {
         return (behavior && behavior.activeID()) || [];
+    };
+
+
+    mode.finish = function() {
+        behavior.finish();
     };
 
 

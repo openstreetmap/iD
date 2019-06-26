@@ -11,12 +11,13 @@ import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { services } from '../services';
 
 
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationAlmostJunction() {
+export function validationAlmostJunction(context) {
     var type = 'almost_junction';
 
 
@@ -32,11 +33,10 @@ export function validationAlmostJunction() {
     }
 
 
-    var validation = function checkAlmostJunction(entity, context) {
+    var validation = function checkAlmostJunction(entity, graph) {
         if (!isHighway(entity)) return [];
         if (entity.isDegenerate()) return [];
 
-        var graph = context.graph();
         var tree = context.history().tree();
         var issues = [];
 
@@ -48,7 +48,7 @@ export function validationAlmostJunction() {
             var fixes = [new validationIssueFix({
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
-                onClick: function() {
+                onClick: function(context) {
                     var endNodeId = this.issue.entityIds[1];
                     var endNode = context.entity(endNodeId);
                     var targetEdge = this.issue.data.edge;
@@ -78,7 +78,7 @@ export function validationAlmostJunction() {
                 fixes.push(new validationIssueFix({
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
-                    onClick: function() {
+                    onClick: function(context) {
                         var nodeID = this.issue.entityIds[1];
                         context.perform(
                             actionChangeTags(nodeID, { noexit: 'yes' }),
@@ -91,17 +91,24 @@ export function validationAlmostJunction() {
             issues.push(new validationIssue({
                 type: type,
                 severity: 'warning',
-                message: function() {
-                    var entity1 = context.hasEntity(this.entityIds[0]),
-                        entity2 = context.hasEntity(this.entityIds[2]);
-                    return (entity && entity2) ? t('issues.almost_junction.message', {
-                        feature: utilDisplayLabel(entity1, context),
-                        feature2: utilDisplayLabel(entity2, context)
-                    }) : '';
+                message: function(context) {
+                    var entity1 = context.hasEntity(this.entityIds[0]);
+                    if (this.entityIds[0] === this.entityIds[2]) {
+                        return entity1 ? t('issues.almost_junction.self.message', {
+                            feature: utilDisplayLabel(entity1, context)
+                        }) : '';
+                    } else {
+                        var entity2 = context.hasEntity(this.entityIds[2]);
+                        return (entity1 && entity2) ? t('issues.almost_junction.message', {
+                            feature: utilDisplayLabel(entity1, context),
+                            feature2: utilDisplayLabel(entity2, context)
+                        }) : '';
+                    }
                 },
                 reference: showReference,
                 entityIds: [entity.id, node.id, edgeHighway.id],
                 loc: extendableNodeInfo.node.loc,
+                hash: JSON.stringify(extendableNodeInfo.node.loc),
                 data: {
                     edge: extendableNodeInfo.edge,
                     cross_loc: extendableNodeInfo.cross_loc
@@ -125,7 +132,7 @@ export function validationAlmostJunction() {
 
         function isExtendableCandidate(node, way) {
             // can not accurately test vertices on tiles not downloaded from osm - #5938
-            var osm = context.connection();
+            var osm = services.osm;
             if (osm && !osm.isDataLoaded(node.loc)) {
                 return false;
             }
@@ -179,8 +186,8 @@ export function validationAlmostJunction() {
 
         function canConnectWays(way, way2) {
 
-            // don't flag almost self-connections for now
-            if (way.id === way2.id) return false;
+            // allow self-connections
+            if (way.id === way2.id) return true;
 
             // if one is bridge or tunnel, both must be bridge or tunnel
             if ((hasTag(way.tags, 'bridge') || hasTag(way2.tags, 'bridge')) &&
@@ -189,12 +196,12 @@ export function validationAlmostJunction() {
                 !(hasTag(way.tags, 'tunnel') && hasTag(way2.tags, 'tunnel'))) return false;
 
             // must have equivalent layers and levels
-            var layer1 = way.tags.layer || 0,
-                layer2 = way2.tags.layer || 0;
+            var layer1 = way.tags.layer || '0',
+                layer2 = way2.tags.layer || '0';
             if (layer1 !== layer2) return false;
 
-            var level1 = way.tags.level || 0,
-                level2 = way2.tags.level || 0;
+            var level1 = way.tags.level || '0',
+                level2 = way2.tags.level || '0';
             if (level1 !== level2) return false;
 
             return true;
@@ -231,8 +238,13 @@ export function validationAlmostJunction() {
                 if (!canConnectWays(way, way2)) continue;
 
                 for (var j = 0; j < way2.nodes.length - 1; j++) {
-                    var nA = graph.entity(way2.nodes[j]);
-                    var nB = graph.entity(way2.nodes[j + 1]);
+                    var nAid = way2.nodes[j],
+                        nBid = way2.nodes[j + 1];
+
+                    if (nAid === tipNid || nBid === tipNid) continue;
+
+                    var nA = graph.entity(nAid),
+                        nB = graph.entity(nBid);
                     var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
                     if (crossLoc) {
                         return {

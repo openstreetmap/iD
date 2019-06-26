@@ -4,18 +4,19 @@
         "capacity",
         "network",
         "operator",
+        "operator/type",
         "fee",
         "payment_multi_fee"
     ],
     "moreFields": [
-        "opening_hours",
         "address",
-        "website",
-        "phone",
         "email",
+        "covered",
         "fax",
-        "wheelchair",
-        "covered"
+        "opening_hours",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -23,7 +24,13 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "bicycle",
+        "bikeshare",
+        "bike share",
+        "bicycle share",
+        "hub",
+        "dock"
     ],
     "tags": {
         "amenity": "bicycle_rental"

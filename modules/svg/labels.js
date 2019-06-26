@@ -11,11 +11,7 @@ import {
 
 import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
-
-import {
-    utilDisplayName, utilDisplayNameForPath,
-    utilEntitySelector, utilCallWhenIdle
-} from '../util';
+import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
 
 
@@ -763,7 +759,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _throttle(utilCallWhenIdle(filterLabels), 100);
+    var throttleFilterLabels = _throttle(filterLabels, 100);
 
 
     drawLabels.observe = function(selection) {

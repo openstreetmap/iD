@@ -1,13 +1,5 @@
 {
     "icon": "fas-snowboarding",
-    "fields": [
-        "name",
-        "piste/type",
-        "piste/difficulty_downhill",
-        "piste/grooming_downhill",
-        "oneway",
-        "lit"
-    ],
     "geometry": [
         "line",
         "area"

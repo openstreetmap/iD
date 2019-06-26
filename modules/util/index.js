@@ -8,8 +8,8 @@ export { utilArrayUniq } from './array';
 export { utilArrayUniqBy } from './array';
 
 export { utilAsyncMap } from './util';
-export { utilCallWhenIdle } from './idle';
 export { utilCleanTags } from './clean_tags';
+export { utilDeepMemberSelector } from './util';
 export { utilDetect } from './detect';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
@@ -26,7 +26,6 @@ export { utilGetAllNodes } from './util';
 export { utilGetSetValue } from './get_set_value';
 export { utilHashcode } from './util';
 export { utilHighlightEntities } from './util';
-export { utilIdleWorker } from './idle';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
 export { utilObjectOmit } from './object';

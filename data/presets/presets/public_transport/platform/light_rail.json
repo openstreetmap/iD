@@ -17,8 +17,7 @@
     "addTags": {
         "public_transport": "platform",
         "light_rail": "yes",
-        "railway": "platform",
-        "highway": "footway"
+        "railway": "platform"
     },
     "reference": {
         "key": "railway",

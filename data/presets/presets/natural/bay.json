@@ -2,6 +2,7 @@
     "icon": "temaki-beach",
     "geometry": [
         "point",
+        "line",
         "area"
     ],
     "fields": [

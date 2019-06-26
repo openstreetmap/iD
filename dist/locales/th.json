@@ -171,26 +171,11 @@
                 "category-landuse": {
                     "name": "คุณลักษณะที่ดิน"
                 },
-                "category-path": {
-                    "name": "คุณลักษณะเส้นทาง"
-                },
-                "category-rail": {
-                    "name": "คุณลักษณะราง"
-                },
                 "category-restriction": {
                     "name": "คุณลักษณะการปิดกั้น"
                 },
-                "category-road": {
-                    "name": "คุณลักษณะถนน"
-                },
                 "category-route": {
                     "name": "คุณลักษณะสายเดินรถ"
-                },
-                "category-water-area": {
-                    "name": "คุณลักษณะพื้นที่น้ำ"
-                },
-                "category-water-line": {
-                    "name": "คุณลักษณะสายน้ำ"
                 }
             },
             "fields": {
@@ -318,9 +303,6 @@
                 },
                 "internet_access/fee": {
                     "label": "ค่าธรรมเนียมการเข้าใช้อินเทอร์เน็ต"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (ชื่อเครือข่าย)"
                 }
             },
             "presets": {

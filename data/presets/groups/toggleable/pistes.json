@@ -1,0 +1,13 @@
+{
+    "name": "Pistes",
+    "description": "Ski Slopes, Sled Runs, Ice Skating Trails, etc.",
+    "toggleable": true,
+    "matches": {
+        "allTags": {
+            "piste:type": {
+                "*": true,
+                "no": false
+            }
+        }
+    }
+}

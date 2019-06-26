@@ -6,6 +6,10 @@
 		"payment_multi",
 		"wheelchair"
 	],
+	"moreFields": [
+		"brand",
+		"indoor"
+	],
 	"geometry": [
 		"point",
 		"area"

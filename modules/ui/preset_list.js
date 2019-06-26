@@ -167,7 +167,11 @@ export function uiPresetList(context) {
     function drawList(list, presets) {
         var collection = presets.collection.reduce(function(collection, preset) {
             if (preset.members) {
-                collection.push(CategoryItem(preset));
+                if (preset.members.collection.filter(function(preset) {
+                    return preset.visible();
+                }).length > 1) {
+                    collection.push(CategoryItem(preset));
+                }
             } else if (preset.visible()) {
                 collection.push(PresetItem(preset));
             }
@@ -294,7 +298,8 @@ export function uiPresetList(context) {
                 .classed('expanded', false)
                 .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
-                    .preset(preset))
+                    .preset(preset)
+                    .pointMarker(false))
                 .on('click', click)
                 .on('keydown', function() {
                     // right arrow, expand the focused item
@@ -382,7 +387,8 @@ export function uiPresetList(context) {
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon(context)
                     .geometry(context.geometry(_entityID))
-                    .preset(preset))
+                    .preset(preset)
+                    .pointMarker(false))
                 .on('click', item.choose)
                 .on('keydown', itemKeydown);
 
@@ -439,16 +445,16 @@ export function uiPresetList(context) {
         button.call(tooltip().destroyAny);
 
         button.each(function(item, index) {
-            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
-            var isHiddenPreset = !!hiddenPresetFeaturesId && item.preset !== _currentPreset;
+            var hiddenPresetFeatures = context.features().isHiddenPreset(item.preset, geometry);
+            var isHiddenPreset = !!hiddenPresetFeatures && item.preset !== _currentPreset;
 
             d3_select(this)
                 .classed('disabled', isHiddenPreset);
 
             if (isHiddenPreset) {
-                var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
+                var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
                 var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
+                var tooltipObj = { features: hiddenPresetFeatures.title };
                 d3_select(this).call(tooltip()
                     .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
                     .placement(index < 2 ? 'bottom' : 'top')

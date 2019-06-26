@@ -1,4 +1,4 @@
-describe('iD.validations.validator', function () {
+describe('iD.coreValidator', function () {
     var context;
 
     beforeEach(function() {

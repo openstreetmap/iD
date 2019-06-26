@@ -7,28 +7,61 @@
             "undo": "visszavonás",
             "zoom_to": "nagyítás ide:",
             "copy": "másolás",
-            "open_wikidata": "megnyitás a wikidata.org-on"
+            "open_wikidata": "megnyitás a wikidata.org-on",
+            "favorite": "kedvenc"
+        },
+        "toolbar": {
+            "inspect": "Vizsgálat",
+            "undo_redo": "Vissza / Mégis",
+            "recent": "Legutóbbi",
+            "favorites": "Kedvencek",
+            "add_feature": "Elem hozzáadása"
         },
         "modes": {
+            "add_feature": {
+                "key": "Tab",
+                "result": "{count} eredmény",
+                "results": "{count} eredmény"
+            },
             "add_area": {
                 "title": "Terület",
                 "description": "Parkok, épületek, tavak és egyéb területek hozzáadása a térképhez.",
-                "tail": "Kattints a térképre egy terület (park, tó, épület stb.) felrajzolásának megkezdéséhez!"
+                "tail": "Kattints a térképre egy terület (park, tó, épület stb.) felrajzolásának megkezdéséhez!",
+                "filter_tooltip": "területek"
             },
             "add_line": {
                 "title": "Vonal",
                 "description": "Adj a térképhez utakat, utcákat, ösvényeket, csatornákat vagy más vonalakat.",
-                "tail": "Kattints a térképre, hogy elkezdd egy út, ösvény, útvonal stb. rajzolását!"
+                "tail": "Kattints a térképre, hogy elkezdd egy út, ösvény, útvonal stb. rajzolását!",
+                "filter_tooltip": "vonalak"
             },
             "add_point": {
                 "title": "Pont",
                 "description": "Éttermek, emlékművek, postaládák és egyéb pontok hozzáadása a térképhez.",
-                "tail": "Pont hozzáadásához kattints a térképre."
+                "tail": "Pont hozzáadásához kattints a térképre.",
+                "filter_tooltip": "pontok"
             },
             "add_note": {
                 "title": "Megjegyzés",
+                "label": "Jegyzet hozzáadása",
                 "description": "Problémát találtál? Értesítsd a többi térképezőt.",
-                "tail": "Kattints a térképre egy jegyzet hozzáadásához."
+                "tail": "Kattints a térképre egy jegyzet hozzáadásához.",
+                "key": "J"
+            },
+            "add_preset": {
+                "title": "{feature} hozzáadása",
+                "point": {
+                    "title": "{feature} hozzáadása pontként"
+                },
+                "line": {
+                    "title": "{feature} hozzáadása vonalként"
+                },
+                "area": {
+                    "title": "{feature} hozzáadása területként"
+                },
+                "building": {
+                    "title": "{feature} hozzáadása épületként"
+                }
             },
             "browse": {
                 "title": "Böngészés",
@@ -97,25 +130,25 @@
             "orthogonalize": {
                 "title": "Derékszögesítés",
                 "description": {
+                    "vertex": "Sarok derékszögesítése.",
                     "line": "Vonal sarkainak derékszögesítése.",
                     "area": "Terület sarkainak derékszögesítése."
                 },
-                "key": "S",
+                "key": "Q",
                 "annotation": {
                     "line": "Vonal sarkai derékszögesítve.",
                     "area": "Terület sarkai derékszögesítve."
                 },
+                "end_vertex": "Nem lehet derékszögesíteni, mert végpont.",
+                "square_enough": "Nem lehet a jelenleginél is derékszögesebbé tenni.",
                 "not_squarish": "Nem lehet derékszögesíteni, mert nem derékszögszerű.",
                 "too_large": "Nem lehet derékszögesíteni, mert túl kevés látszik belőle.",
                 "connected_to_hidden": "Nem lehet derékszögesíteni, mert csatlakozik egy rejtett elemhez."
             },
             "straighten": {
                 "title": "Kiegyenesít",
-                "description": "Vonal kiegyenesítése.",
                 "key": "S",
-                "annotation": "Vonal kiegyenesítve.",
-                "too_bendy": "Nem lehet kiegyenesíteni, mert túl görbe.",
-                "connected_to_hidden": "Ezt a vonalat nem lehet kiegyenesíteni, mert egy rejtett elemhez csatlakozik."
+                "too_bendy": "Nem lehet kiegyenesíteni, mert túl görbe."
             },
             "delete": {
                 "title": "Törlés",
@@ -146,6 +179,10 @@
                 "connected_to_hidden": {
                     "single": "Az elem nem törölhető, mert egy rejtett elemhez csatlakozik.",
                     "multiple": "Az elemek nem törölhetőek, mert rejtett elemekhez csatlakoznak."
+                },
+                "has_wikidata_tag": {
+                    "single": "Az elem nem törölhető, mert Wikidata címkével rendelkezik.",
+                    "multiple": "Az elemek nem törölhetőek, mert néhányuk Wikidata címkével rendelkezik."
                 }
             },
             "add_member": {
@@ -318,14 +355,6 @@
                     "create": "Kanyarodási tiltás hozzáadva",
                     "delete": "Kanyarodási tiltás törölve"
                 }
-            },
-            "detach_node": {
-                "title": "Szétválaszt",
-                "key": "E",
-                "description": "Pont leválasztása ezekről a vonalakról/területekről.",
-                "annotation": "Pont leválasztva a szülő vonalakról/területekről.",
-                "restriction": "A pont nem leválasztható, mert ez megsértene egy „{relation}” kapcsolatot.",
-                "connected_to_hidden": "A pont nem leválasztható, mert egy rejtett elemhez csatlakozik."
             }
         },
         "restriction": {
@@ -491,7 +520,6 @@
         },
         "geocoder": {
             "search": "Keresés a világban…",
-            "no_results_visible": "Nincs találat a térkép látható részén",
             "no_results_worldwide": "Nincs találat"
         },
         "geolocate": {
@@ -613,6 +641,22 @@
             "autohidden": "Ezek az elemek automatikusan el lettek rejtve, mert túl sok jelenne meg a képernyőn. Ránagyíthat a szerkesztésükhöz.",
             "osmhidden": "Ezek az elemek automatikusan el lettek rejtve, mert az OpenStreetMap réteg rejtett."
         },
+        "photo_overlays": {
+            "title": "Fotó rétegek",
+            "traffic_signs": {
+                "title": "Jelzőtáblák"
+            },
+            "photo_type": {
+                "flat": {
+                    "title": "Sík fotók",
+                    "tooltip": "Hagyományos fotók"
+                },
+                "panoramic": {
+                    "title": "Panorámafotók",
+                    "tooltip": "360° fotók"
+                }
+            }
+        },
         "feature": {
             "points": {
                 "description": "Pontok",
@@ -701,12 +745,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Elmentetlen változtatásaid vannak",
-            "description": "Szeretnéd visszaállítani az elmentetlen változtatásokat az előző munkamenetből?",
-            "restore": "Módosítások visszaállítása",
-            "reset": "Módosításaim elvetése"
-        },
         "save": {
             "title": "Mentés",
             "help": "Tekintsd át a változtatásaidat, és töltsd föl őket az OpenStreetMapbe, hogy más felhasználóknak is láthatóak legyenek.",
@@ -741,10 +779,6 @@
             }
         },
         "success": {
-            "just_edited": "Szerkesztetted az OpenStreetMapet!",
-            "thank_you": "Köszönjük, hogy jobbá tetted a térképet.",
-            "thank_you_location": "Köszönjük, hogy jobbá tetted a térképet {where} környékén.",
-            "help_html": "A változtatásaid pár percen belül megjelennek az OpenStreetMap-en. Más térképekre tovább tarthat a frissítések megérkezése.",
             "help_link_text": "Részletek",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F",
             "view_on_osm": "Változtatások megtekintése OSM-en",
@@ -759,12 +793,6 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Mégsem"
-        },
-        "splash": {
-            "welcome": "Üdvözöl az iD OpenStreetMap szerkesztőprogram",
-            "text": "Az iD egy barátságos, ám hatékony eszköz arra, hogy közreműködjünk a Föld legjobb ingyenes világtérképének szerkesztésében. Ez a(z) {version} verzió. További információkat a {website} weboldalon találsz, hibákat pedig itt jelenthetsz be: {github}.",
-            "walkthrough": "Gyakorlás indítása",
-            "start": "Szerkesztés most"
         },
         "source_switch": {
             "live": "élő",
@@ -810,7 +838,8 @@
                     },
                     "mr": {
                         "title": "Hiányzó geometria",
-                        "description": "Az ezen a területen rögzített {num_trips} utazás alapján itt valószínűleg feltérképezetlen {geometry_type} vannak."
+                        "description": "Az ezen a területen rögzített {num_trips} utazás alapján itt valószínűleg feltérképezetlen {geometry_type} vannak.",
+                        "description_alt": "Külső szolgáltató adatai alapján itt feltérképezetlen {geometry_type} lehet."
                     }
                 }
             },
@@ -1129,26 +1158,25 @@
         },
         "streetside": {
             "tooltip": "Útmenti fotók a Microsoft-tól",
-            "title": "Fotó réteg (Bing Streetside)",
+            "title": "Bing Streetside",
             "view_on_bing": "Megtekintés a Bing Maps-en",
             "hires": "Nagy felbontású"
         },
         "mapillary_images": {
-            "tooltip": "Utcafotók a Mapillary-ből",
-            "title": "Fotó réteg (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Közlekedési táblák a Mapillaryről (be kell kapcsolni a fotó réteget)",
-            "title": "Közlekedési tábla réteg (Mapillary)"
+            "tooltip": "Utcafotók a Mapillary-ből"
         },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Jelzőtáblák a Mapillary-ből"
+            },
             "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
         },
         "openstreetcam_images": {
-            "tooltip": "Utcafotók az OpenStreetCam-ról",
-            "title": "Fotó réteg (OpenStreetCam)"
+            "tooltip": "Utcafotók az OpenStreetCam-ról"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "A kép megtekintése az OpenStreetCam weboldalon"
         },
         "note": {
@@ -1287,12 +1315,94 @@
                         "title": "Névjegy",
                         "from_via_to": "Egy kanyarodási korlátozás mindig tartalmaz: egy **INNEN utat**, egy **IDE utat** és vagy egy **EZEN KERESZTÜL pontot**, vagy egy vagy több **EZEN KERESZTÜL utakat**."
                     },
+                    "inspecting": {
+                        "title": "Vizsgálat"
+                    },
                     "modifying": {
                         "title": "Módosítás"
                     },
                     "tips": {
                         "title": "Tippek"
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problémák",
+            "key": "P",
+            "list_title": "Problémák ({count})",
+            "errors": {
+                "list_title": "Hibák ({count})"
+            },
+            "warnings": {
+                "list_title": "Figyelmeztetések ({count})"
+            },
+            "rules": {
+                "title": "Szabályok"
+            },
+            "almost_junction": {
+                "title": "Majdnem csomópontok",
+                "message": "{feature} nagyon közel van, de nem csatlakozik ehhez: {feature2}"
+            },
+            "disconnected_way": {
+                "title": "Szétkapcsolt utak"
+            },
+            "missing_role": {
+                "title": "Hiányzó szerepek"
+            },
+            "missing_tag": {
+                "title": "Hiányzó címkék",
+                "any": {
+                    "message": "{feature} nem rendelkezik címkékkel"
+                }
+            },
+            "outdated_tags": {
+                "title": "Idejétmúlt címkék",
+                "message": "{feature} idejétmúlt címkékkel rendelkezik"
+            },
+            "tag_suggests_area": {
+                "title": "Vonalak területnek címkézve"
+            },
+            "unknown_road": {
+                "message": "{feature} nincs besorolva"
+            },
+            "fix": {
+                "connect_endpoints": {
+                    "title": "A végpontok összekötése"
+                },
+                "delete_feature": {
+                    "title": "Elem törlése"
+                },
+                "move_tags": {
+                    "title": "Címkék mozgatása"
+                },
+                "remove_from_relation": {
+                    "title": "Eltávolítás kapcsolatból"
+                },
+                "remove_generic_name": {
+                    "title": "A név eltávolítása"
+                },
+                "remove_tag": {
+                    "title": "A címke eltávolítása"
+                },
+                "remove_tags": {
+                    "title": "A címkék eltávolítása"
+                },
+                "upgrade_tags": {
+                    "title": "Címkék frissítése",
+                    "annotation": "Régi címkék frissítve."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Híd vagy alagút használata"
+                },
+                "use_different_layers": {
+                    "title": "Eltérő rétegek használata"
+                },
+                "use_different_levels": {
+                    "title": "Eltérő szintek használata"
+                },
+                "use_tunnel": {
+                    "title": "Alagút használata"
                 }
             }
         },
@@ -1626,6 +1736,7 @@
                     "add_line": "„Vonal hozzáadás” mód",
                     "add_area": "„Terület hozzáadás” mód",
                     "add_note": "„Jegyzet hozzáadás” mód",
+                    "add_favorite": "Egy kedvenc elem hozzáadása",
                     "place_point": "Helyezz el egy pontot vagy jegyzetet",
                     "disable_snap": "Tartsd a pont illesztés kikapcsolásához",
                     "stop_line": "Fejezd be a vonal vagy terület rajzolását"
@@ -1635,12 +1746,11 @@
                     "continue_line": "Vonal folytatása a kiválasztott ponttól",
                     "merge": "Kiválasztott elemek összevonása (egyesítése)",
                     "disconnect": "Elemek szétválasztása a kiválasztott pontnál",
-                    "detach_node": "Kiválasztott pont leválasztása a szülő vonalakról/területekről",
                     "split": "Vonal kettéválasztása a kiválasztott pontnál",
                     "reverse": "Vonal megfordítása",
                     "move": "Kiválasztott elemek mozgatása",
                     "rotate": "Kiválasztott elemek forgatása",
-                    "orthogonalize": "Vonal egyenesítése / Terület sarkainak derékszögesítése",
+                    "orthogonalize": "Vonal vagy terület sarkainak derékszögesítése",
                     "circularize": "Zárt vonal vagy terület körvonalasítása",
                     "reflect_long": "Elemek tükrözése a hosszanti tengelyre",
                     "reflect_short": "Elemek tükrözése az oldalirányú tengelyre",
@@ -1702,44 +1812,41 @@
                 "category-building": {
                     "name": "Épületek"
                 },
-                "category-golf-area": {
-                    "name": "Golfpálya-elemek"
-                },
-                "category-golf-line": {
+                "category-golf": {
                     "name": "Golfpálya-elemek"
                 },
                 "category-landuse": {
                     "name": "Területhasználati módok"
                 },
-                "category-natural-area": {
-                    "name": "Természeti formák"
-                },
-                "category-natural-line": {
-                    "name": "Természeti formák"
-                },
-                "category-natural-point": {
+                "category-natural": {
                     "name": "Természeti formák"
                 },
                 "category-path": {
                     "name": "Gyalogutak"
                 },
                 "category-rail": {
-                    "name": "Vasúti objektumok"
+                    "name": "Vasutak"
                 },
                 "category-restriction": {
                     "name": "Korlátozások"
                 },
-                "category-road": {
-                    "name": "Utak"
+                "category-road_major": {
+                    "name": "Főutak"
+                },
+                "category-road_minor": {
+                    "name": "Alsóbbrendű utak"
+                },
+                "category-road_service": {
+                    "name": "Bekötőutak"
                 },
                 "category-route": {
                     "name": "Útvonalelemek"
                 },
-                "category-water-area": {
-                    "name": "Vizek"
+                "category-water": {
+                    "name": "Víztestek"
                 },
-                "category-water-line": {
-                    "name": "Vizek"
+                "category-waterway": {
+                    "name": "Vízi utak"
                 }
             },
             "fields": {
@@ -1906,6 +2013,9 @@
                 "backrest": {
                     "label": "Támla"
                 },
+                "bar": {
+                    "label": "Bár"
+                },
                 "barrier": {
                     "label": "Típus"
                 },
@@ -1972,6 +2082,9 @@
                 "building": {
                     "label": "Épület"
                 },
+                "building/levels_building": {
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Anyag"
                 },
@@ -2030,6 +2143,9 @@
                     "label": "Kommunikációtípusok"
                 },
                 "construction": {
+                    "label": "Típus"
+                },
+                "consulate": {
                     "label": "Típus"
                 },
                 "contact/webcam": {
@@ -2156,6 +2272,12 @@
                 "diaper": {
                     "label": "Pelenkázó van"
                 },
+                "diplomatic": {
+                    "label": "Típus"
+                },
+                "diplomatic/services": {
+                    "label": "Szolgáltatások"
+                },
                 "direction": {
                     "label": "Irány (fok, az óra járása szerint)",
                     "placeholder": "45, 90, 180, 270"
@@ -2189,7 +2311,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -2206,10 +2327,18 @@
                     "label": "Típus"
                 },
                 "dog": {
+                    "label": "Kutyák",
                     "options": {
+                        "leashed": "Csak pórázon",
                         "no": "Nem engedélyezett",
                         "yes": "Engedélyezett"
                     }
+                },
+                "door": {
+                    "label": "Ajtó"
+                },
+                "door_type": {
+                    "label": "Típus"
                 },
                 "drive_through": {
                     "label": "Autóval használható"
@@ -2239,8 +2368,14 @@
                     "label": "Típus",
                     "placeholder": "Alapértelmezett"
                 },
+                "embassy": {
+                    "label": "Típus"
+                },
                 "emergency": {
                     "label": "Vészhelyzet"
+                },
+                "emergency_combo": {
+                    "label": "Típus"
                 },
                 "enforcement": {
                     "label": "Típus"
@@ -2275,6 +2410,12 @@
                         "wall": "Fali"
                     }
                 },
+                "fireplace": {
+                    "label": "Tűzrakóhely"
+                },
+                "fishing": {
+                    "label": "Horgászat"
+                },
                 "fitness_station": {
                     "label": "Felszereléstípus"
                 },
@@ -2283,6 +2424,9 @@
                 },
                 "flag/type": {
                     "label": "Zászló típusa"
+                },
+                "floating": {
+                    "label": "Úszó"
                 },
                 "ford": {
                     "label": "Típus",
@@ -2330,6 +2474,9 @@
                 },
                 "grape_variety": {
                     "label": "Szőlőfajták"
+                },
+                "guest_house": {
+                    "label": "Típus"
                 },
                 "handicap": {
                     "label": "Hátrány",
@@ -2418,6 +2565,9 @@
                 "indoor": {
                     "label": "Beltéri"
                 },
+                "indoor_type": {
+                    "label": "Típus"
+                },
                 "industrial": {
                     "label": "Típus"
                 },
@@ -2443,14 +2593,20 @@
                 "internet_access/fee": {
                     "label": "Internetcsatlakozás díja"
                 },
-                "internet_access/ssid": {
-                    "label": "SSID (hálózatnév)"
-                },
                 "junction/ref_oneway": {
                     "label": "Csomópont száma"
                 },
+                "junction_line": {
+                    "label": "Csomópont",
+                    "options": {
+                        "roundabout": "Körforgalom"
+                    }
+                },
                 "kerb": {
                     "label": "Járdaszegély"
+                },
+                "kerb/height": {
+                    "label": "Magasság"
                 },
                 "label": {
                     "label": "Címke"
@@ -2521,6 +2677,9 @@
                     "label": "Szintek",
                     "placeholder": "2, 4, 6…"
                 },
+                "liaison": {
+                    "label": "Típus"
+                },
                 "lit": {
                     "label": "Kivilágított"
                 },
@@ -2540,6 +2699,9 @@
                 },
                 "manhole": {
                     "label": "Típus"
+                },
+                "manufacturer": {
+                    "label": "Gyártó"
                 },
                 "map_size": {
                     "label": "Lefedettség"
@@ -2568,8 +2730,14 @@
                 "maxweight": {
                     "label": "Súlykorlátozás"
                 },
+                "maxweight_bridge": {
+                    "label": "Súlykorlátozás"
+                },
                 "memorial": {
                     "label": "Típus"
+                },
+                "microbrewery": {
+                    "label": "Házi sörfőzés"
                 },
                 "minspeed": {
                     "label": "Kötelező legkisebb sebesség",
@@ -2690,7 +2858,8 @@
                     "label": "Várható nyitás dátuma"
                 },
                 "opening_hours": {
-                    "label": "Nyitvatartás"
+                    "label": "Nyitvatartás",
+                    "placeholder": "Ismeretlen"
                 },
                 "operator": {
                     "label": "Üzemeltető"
@@ -2741,6 +2910,9 @@
                 },
                 "piste/difficulty_downhill": {
                     "label": "Nehézség",
+                    "options": {
+                        "easy": "Könnyű (zöld kör)"
+                    },
                     "placeholder": "Kezdő, középhaladó, haladó…"
                 },
                 "piste/difficulty_nordic": {
@@ -2786,6 +2958,9 @@
                     "label": "Teljesítmény",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Típus"
+                },
                 "playground/baby": {
                     "label": "Gyermekülés"
                 },
@@ -2818,7 +2993,6 @@
                     "placeholder": "Távolság egy tizedesig (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -2861,6 +3035,9 @@
                 "ref_road_number": {
                     "label": "Út szám"
                 },
+                "ref_room_number": {
+                    "label": "Szobaszám"
+                },
                 "ref_route": {
                     "label": "Útvonal szám"
                 },
@@ -2881,11 +3058,20 @@
                 "religion": {
                     "label": "Vallás"
                 },
+                "resort": {
+                    "label": "Típus"
+                },
                 "restriction": {
                     "label": "Típus"
                 },
                 "restrictions": {
                     "label": "Kanyarodási korlátozások"
+                },
+                "roof/colour": {
+                    "label": "Tető színe"
+                },
+                "room": {
+                    "label": "Típus"
                 },
                 "rooms": {
                     "label": "Szobák"
@@ -2908,8 +3094,14 @@
                     },
                     "placeholder": "Túraút, magashegyi túraút…"
                 },
+                "salt": {
+                    "label": "Só"
+                },
                 "sanitary_dump_station": {
                     "label": "WC ártalmatlanítás"
+                },
+                "screen": {
+                    "placeholder": "1, 4, 8…"
                 },
                 "scuba_diving": {
                     "label": "Szolgáltatások"
@@ -3113,6 +3305,9 @@
                         "minor": "Alsóbbrendű útról"
                     }
                 },
+                "street_cabinet": {
+                    "label": "Típus"
+                },
                 "structure": {
                     "label": "Szerkezet",
                     "options": {
@@ -3189,14 +3384,19 @@
                     },
                     "placeholder": "Van, nincs, csak elvitelre…"
                 },
+                "target": {
+                    "label": "Cél"
+                },
                 "toilets/disposal": {
                     "label": "WC-kezelés",
                     "options": {
                         "bucket": "Vödör",
                         "chemical": "Vegyi öblítéses",
-                        "flush": "Vízöblitéses",
-                        "pitlatrine": "Árnyékszék"
+                        "flush": "Vízöblitéses"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Kézmosás"
                 },
                 "toll": {
                     "label": "Díj"
@@ -3235,7 +3435,6 @@
                     "label": "Jelzőtábla"
                 },
                 "traffic_sign/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -3246,7 +3445,6 @@
                     "label": "Típus"
                 },
                 "traffic_signals/direction": {
-                    "label": "Irány",
                     "options": {
                         "backward": "Hátra",
                         "both": "Mindkettő / Összes",
@@ -3356,7 +3554,8 @@
                     "label": "Típus"
                 },
                 "website": {
-                    "label": "Weboldal"
+                    "label": "Weboldal",
+                    "placeholder": "https://valami.hu"
                 },
                 "wetland": {
                     "label": "Típus"
@@ -3521,6 +3720,9 @@
                     "name": "Bár",
                     "terms": "bár, kocsma, éjszakai szórakozó, lokál"
                 },
+                "amenity/bar/lgbtq": {
+                    "name": "LGBTQ+ bár"
+                },
                 "amenity/bbq": {
                     "name": "Közösségi grillező - szallonasütő",
                     "terms": "tábortűz,grill,piknik,tűzrakó"
@@ -3611,6 +3813,9 @@
                     "name": "Közösségi ház",
                     "terms": "művelődési ház, kultúrház, művház, faluház"
                 },
+                "amenity/community_centre/lgbtq": {
+                    "name": "LGBTQ+ közösségi ház"
+                },
                 "amenity/compressed_air": {
                     "name": "Sűrített levegő",
                     "terms": "gumi, kompresszor"
@@ -3647,8 +3852,7 @@
                     "terms": "jogosítvány, KRESZ"
                 },
                 "amenity/embassy": {
-                    "name": "Külképviselet",
-                    "terms": "nagykövetség, követség,  konzulátus, külképviselet"
+                    "name": "Külképviselet"
                 },
                 "amenity/fast_food": {
                     "name": "Gyorsétterem",
@@ -3665,6 +3869,9 @@
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab gyorsétterem"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "Mexikói gyorsétterem"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "Pizza gyorsétterem"
@@ -3747,6 +3954,9 @@
                     "name": "Diszkó",
                     "terms": "Night Club, Éjszakai bár, Diszkó"
                 },
+                "amenity/nightclub/lgbtq": {
+                    "name": "LGBTQ+ éjszakai szórakozóhely"
+                },
                 "amenity/nursing_home": {
                     "name": "Ápolóotthon"
                 },
@@ -3820,6 +4030,9 @@
                 "amenity/pub": {
                     "name": "Kocsma",
                     "terms": "italmérés, csehó, borozó, poharazó, ivó, talponálló, söntés, csapszék, söröző, sörház"
+                },
+                "amenity/pub/lgbtq": {
+                    "name": "LGBTQ+ kocsma"
                 },
                 "amenity/public_bath": {
                     "name": "Nyilvános fürdő",
@@ -4004,9 +4217,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Jégkrém árusító automata"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Újságárusító automata"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Újságárusító automata",
                     "terms": "automata,árusító,újság"
@@ -4059,13 +4269,12 @@
                     "name": "Útfelület",
                     "terms": "úttest"
                 },
+                "attraction": {
+                    "name": "Látványosság"
+                },
                 "attraction/amusement_ride": {
                     "name": "Mutatványos berendezés",
                     "terms": "körhinta, ringlispíl, óriáskerék, dodzsem, hullámvasút,"
-                },
-                "attraction/animal": {
-                    "name": "Állat",
-                    "terms": "állat,kutya,macska"
                 },
                 "attraction/big_wheel": {
                     "name": "Óriáskerék",
@@ -4191,6 +4400,9 @@
                 "boundary/administrative": {
                     "name": "Közigazgatási határ",
                     "terms": "adminisztratív határ, településhatár, városhatár, megyehatár, országhatár"
+                },
+                "bridge/support": {
+                    "name": "Híd alátámasztása"
                 },
                 "bridge/support/pier": {
                     "name": "Hídpillér"
@@ -4355,6 +4567,9 @@
                     "name": "Sorház",
                     "terms": "házsor"
                 },
+                "building/train_station": {
+                    "name": "Vasútállomás-épület"
+                },
                 "building/transportation": {
                     "name": "Közlekedési épület"
                 },
@@ -4366,16 +4581,22 @@
                     "name": "Raktár",
                     "terms": "Lerakat"
                 },
+                "building_part": {
+                    "name": "Épületrész"
+                },
+                "building_point": {
+                    "name": "Épület"
+                },
                 "camp_site/camp_pitch": {
                     "name": "Sátor- vagy lakókocsihely",
                     "terms": "sátorhely, táborhely, kempinghely"
                 },
-                "circular": {
-                    "name": "Körforgalom"
-                },
                 "club": {
                     "name": "Klub",
                     "terms": "Club"
+                },
+                "club/sport": {
+                    "name": "Sportegyesület"
                 },
                 "craft": {
                     "name": "Műhely",
@@ -4725,7 +4946,7 @@
                     "name": "Buszsín"
                 },
                 "highway/bus_stop": {
-                    "name": "Buszmegálló peron"
+                    "name": "Buszmegálló"
                 },
                 "highway/construction": {
                     "name": "Lezárt út"
@@ -4987,9 +5208,33 @@
                 "historic/wreck": {
                     "name": "Hajóroncs"
                 },
+                "indoor/area": {
+                    "name": "Beltéri terület"
+                },
+                "indoor/corridor": {
+                    "name": "Beltéri folyosó"
+                },
+                "indoor/corridor_line": {
+                    "name": "Beltéri folyosó"
+                },
+                "indoor/door": {
+                    "name": "Beltéri ajtó"
+                },
+                "indoor/room": {
+                    "name": "Szoba"
+                },
+                "indoor/wall": {
+                    "name": "Beltéri fal"
+                },
+                "internet_access/wlan": {
+                    "name": "Wi-Fi Hotspot"
+                },
                 "junction": {
                     "name": "Elágazás",
                     "terms": "Elágazás, útkereszteződés, csomópont"
+                },
+                "junction/roundabout": {
+                    "name": "Körforgalom"
                 },
                 "landuse": {
                     "name": "Területhasználat"
@@ -5036,6 +5281,9 @@
                     "name": "Tanyaudvar",
                     "terms": "farm, tanya, gazdaság, mezőgazdasági üzem"
                 },
+                "landuse/forest": {
+                    "name": "Telepített erdő"
+                },
                 "landuse/grass": {
                     "name": "Fű",
                     "terms": "gyep"
@@ -5081,14 +5329,6 @@
                     "name": "Laktanya",
                     "terms": "kaszárnya"
                 },
-                "landuse/military/bunker": {
-                    "name": "Bunker",
-                    "terms": "bunker,óvóhely"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Ellenőrzőpont",
-                    "terms": "checkpoint"
-                },
                 "landuse/military/danger_area": {
                     "name": "Veszélyes terület",
                     "terms": "veszély,veszélyes,terület"
@@ -5097,17 +5337,9 @@
                     "name": "Haditengerészeti támaszpont",
                     "terms": "tengerészeti,haditengerészeti,bázis"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Nukleáris robbantási helyszín",
-                    "terms": "atomrobbantás, atombomba, atomkísérlet"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Akadálypálya",
                     "terms": "akadálypálya"
-                },
-                "landuse/military/office": {
-                    "name": "Katonai hivatal",
-                    "terms": "katonai,honvédségi hivatal"
                 },
                 "landuse/military/range": {
                     "name": "Katonai lőtér",
@@ -5125,6 +5357,9 @@
                     "name": "Növényiskola",
                     "terms": "növényiskola, faiskola"
                 },
+                "landuse/pond": {
+                    "name": "Tavacska"
+                },
                 "landuse/quarry": {
                     "name": "Kőfejtő",
                     "terms": "kőbánya"
@@ -5139,6 +5374,9 @@
                 },
                 "landuse/religious": {
                     "name": "Vallási övezet"
+                },
+                "landuse/reservoir": {
+                    "name": "Víztározó"
                 },
                 "landuse/residential": {
                     "name": "Lakóövezet",
@@ -5265,6 +5503,9 @@
                 "leisure/picnic_table": {
                     "name": "Piknikasztal",
                     "terms": "Piknikasztal"
+                },
+                "leisure/picnic_table/chess": {
+                    "name": "Sakktábla"
                 },
                 "leisure/pitch": {
                     "name": "Sportpálya",
@@ -5449,6 +5690,9 @@
                     "name": "Csővezeték",
                     "terms": "Csővezeték"
                 },
+                "man_made/pipeline/underground": {
+                    "name": "Földalatti Csőhálózat"
+                },
                 "man_made/pumping_station": {
                     "name": "Szivattyúház",
                     "terms": "szivattyú,pumpa"
@@ -5460,6 +5704,9 @@
                 "man_made/storage_tank": {
                     "name": "Tárolótartály",
                     "terms": "tároló, tartály"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Víztartály"
                 },
                 "man_made/surveillance": {
                     "name": "Térfigyelő kamera",
@@ -5481,6 +5728,9 @@
                 },
                 "man_made/tower/observation": {
                     "name": "Kilátótorony"
+                },
+                "man_made/tunnel": {
+                    "name": "Alagút"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Szennyvíztelep",
@@ -5606,6 +5856,9 @@
                 "natural/tree_row": {
                     "name": "Fasor"
                 },
+                "natural/valley": {
+                    "name": "Völgy"
+                },
                 "natural/volcano": {
                     "name": "Vulkán",
                     "terms": "vulkán, tűzhányó"
@@ -5613,6 +5866,9 @@
                 "natural/water": {
                     "name": "Víz",
                     "terms": "Víz"
+                },
+                "natural/water/canal": {
+                    "name": "Csatorna"
                 },
                 "natural/water/lake": {
                     "name": "Tó",
@@ -5625,6 +5881,9 @@
                 "natural/water/reservoir": {
                     "name": "Víztározó",
                     "terms": "Víztározó"
+                },
+                "natural/water/river": {
+                    "name": "Folyó"
                 },
                 "natural/wetland": {
                     "name": "Mocsaras terület",
@@ -5670,6 +5929,9 @@
                     "name": "Közösségi iroda",
                     "terms": "közösségi munkatér, coworking"
                 },
+                "office/diplomatic/consulate": {
+                    "name": "Konzulátus"
+                },
                 "office/educational_institution": {
                     "name": "Oktatási intézmény",
                     "terms": "oktatási intézmény"
@@ -5688,6 +5950,9 @@
                 "office/financial": {
                     "name": "Pénzügyi vállalat irodája",
                     "terms": "pénzügy, hitelezés, kölcsön, befektetés, biztosítás"
+                },
+                "office/financial_advisor": {
+                    "name": "Pénzügyi Tanácsadó"
                 },
                 "office/forestry": {
                     "name": "Erdészeti hivatal"
@@ -5905,32 +6170,11 @@
                     "name": "Transzformátor",
                     "terms": "transzformátor, trafó, áramátalakító"
                 },
-                "public_transport/platform_ferry": {
-                    "name": "Kompmegállo peron"
-                },
-                "public_transport/platform_light_rail": {
-                    "name": "HÉV-megállo peron"
-                },
-                "public_transport/platform_monorail": {
-                    "name": "Egysínű vasúti megállo peron"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Metrómegálló peron"
-                },
-                "public_transport/platform_train": {
-                    "name": "Vasútmegálló peron"
-                },
-                "public_transport/platform_tram": {
-                    "name": "Villamosmegálló peron"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Trolibusz megálló peron"
-                },
                 "public_transport/station_aerialway": {
                     "name": "Felvonóállomás"
                 },
                 "public_transport/station_bus": {
-                    "name": "Buszállomás / pályaudvar"
+                    "name": "Buszpályaudvar"
                 },
                 "public_transport/station_ferry": {
                     "name": "Kompállomás / pályaudvar"
@@ -6029,9 +6273,6 @@
                     "name": "Kisvasút",
                     "terms": "Keskeny nyomtávú vasút"
                 },
-                "railway/platform": {
-                    "name": "Vasútmegálló peron"
-                },
                 "railway/rail": {
                     "name": "Vasúti pálya",
                     "terms": "Vasútvonal"
@@ -6069,9 +6310,6 @@
                 "relation": {
                     "name": "Kapcsolat",
                     "terms": "Kapcsolat"
-                },
-                "roundabout": {
-                    "name": "Körforgalom"
                 },
                 "route/ferry": {
                     "name": "Kompútvonal",
@@ -6153,8 +6391,7 @@
                     "terms": "Könyvesbolt"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "Butik"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Hentes",
@@ -6199,6 +6436,9 @@
                 "shop/clothes": {
                     "name": "Ruházati bolt",
                     "terms": "fehérneműbolt, öltönyáruház, ruhabolt"
+                },
+                "shop/clothes/underwear": {
+                    "name": "Fehérnemű Üzlet"
                 },
                 "shop/coffee": {
                     "name": "Kávébolt",
@@ -6273,8 +6513,7 @@
                     "terms": "farm bolt, árus, kofa, tanyasi termék, őstermelő"
                 },
                 "shop/fashion": {
-                    "name": "Divatüzlet",
-                    "terms": "Női divat, ruhabolt"
+                    "name": "Divatüzlet"
                 },
                 "shop/fishing": {
                     "name": "Horgászbolt"
@@ -6347,6 +6586,9 @@
                 "shop/interior_decoration": {
                     "name": "Lakberendezési bolt",
                     "terms": "lakástextil, díszek, bútor"
+                },
+                "shop/jewelry": {
+                    "name": "Ékszerüzlet"
                 },
                 "shop/kiosk": {
                     "name": "Trafik"
@@ -6674,6 +6916,9 @@
                     "name": "Állatkert",
                     "terms": "Állatkert"
                 },
+                "tourism/zoo/petting": {
+                    "name": "Állatsimogató"
+                },
                 "traffic_calming": {
                     "name": "Forgalomcsillapító",
                     "terms": "forgalomcsillapító"
@@ -6836,10 +7081,6 @@
                     "name": "Vízi út",
                     "terms": "folyó, csatorna, víz, út, hajó, csónak"
                 },
-                "vertex": {
-                    "name": "Egyéb",
-                    "terms": "Egyéb"
-                },
                 "waterway": {
                     "name": "Vízfolyás"
                 },
@@ -6871,8 +7112,13 @@
                     "name": "Üzemanyag-töltő állomás hajóknak",
                     "terms": "üzemanyag,dízel,gázolaj,csónak,hajó, hajóbenzinkút, bunkerolaj"
                 },
+                "waterway/lock_gate": {
+                    "name": "Zsilip",
+                    "terms": "csatorna"
+                },
                 "waterway/milestone": {
-                    "name": "Vízi mérföldkő"
+                    "name": "Vízi mérföldkő",
+                    "terms": "mérföldkő, jelölő"
                 },
                 "waterway/river": {
                     "name": "Folyó",
@@ -6908,24 +7154,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Orthophoto Flanders legfrissebb © AGIV"
-                },
-                "name": "AGIV Flanders legfrissebb légifelvétel"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Orthophoto Flanders © AGIV"
-                },
-                "name": "AGIV Flanders 2013-2015 10cm-es légifelvétel"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Flanders © AGIV"
-                },
-                "name": "AGIV Flanders GRB"
-            },
             "Bing": {
                 "description": "Műholdképek és légifelvételek",
                 "name": "Bing légifelvételek"

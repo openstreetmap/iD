@@ -3,12 +3,18 @@
     "fields": [
         "name",
         "operator",
+        "opening_hours",
         "capacity",
         "website",
         "lit"
     ],
     "moreFields": [
-        "wheelchair"
+        "wheelchair",
+        "location",
+        "access_simple", 
+        "brand",
+        "email",
+        "phone"
     ],
     "geometry": [
         "point",

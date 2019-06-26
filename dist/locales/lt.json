@@ -100,7 +100,6 @@
                     "line": "Keisti šios linijos kampus stačiais.",
                     "area": "Keisti šio ploto kampus stačiais."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Keisti linijos kampus stačiais.",
                     "area": "Keisti ploto kampus stačiais."
@@ -111,11 +110,8 @@
             },
             "straighten": {
                 "title": "Tiesinti",
-                "description": "Tiesinti šią liniją.",
                 "key": "S",
-                "annotation": "Linija ištiesinta.",
-                "too_bendy": "Ši negali būti ištiesinta, nes ji per daug išlenkta.",
-                "connected_to_hidden": "Ši linija negali būti ištiesinta, nes ji prijungta prie paslėpto objekto."
+                "too_bendy": "Ši negali būti ištiesinta, nes ji per daug išlenkta."
             },
             "delete": {
                 "title": "Ištrinti",
@@ -316,12 +312,6 @@
                     "create": "Posūkio apribojimas pridėtas",
                     "delete": "Posūkio apribojimas panaikintas"
                 }
-            },
-            "detach_node": {
-                "title": "Atskirti",
-                "key": "E",
-                "description": "Atskirti tašką nuo šių linijų/plotų.",
-                "annotation": "Atskirtas taškas nuo linijų/plotų."
             }
         },
         "restriction": {
@@ -453,7 +443,6 @@
         },
         "geocoder": {
             "search": "Ieškoti visam pasaulyje...",
-            "no_results_visible": "Nėra rezultatų matomame žemėlapio plote",
             "no_results_worldwide": "Nėra rezultatų"
         },
         "geolocate": {
@@ -625,12 +614,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Turite neįrašytų pakeitimų",
-            "description": "Ar norite atstatyti neįrašytus ankstesnės redagavimo sesijos pakeitimus?",
-            "restore": "Atstatyti mano pakeitimus",
-            "reset": "Atmesti mano pakeitimus"
-        },
         "save": {
             "title": "Išsaugoti",
             "help": "Peržiūrėkite jūsų pakeitimus ir įkelkite juos į OpenStreetMap, taip padarydami juos matomais kitiems naudotojams.",
@@ -665,8 +648,6 @@
             }
         },
         "success": {
-            "just_edited": "Jūs ką tik pakeitėte OpenStreetMap!",
-            "thank_you": "Ačiū, kad tobulinate žemėlapį.",
             "help_link_text": "Detalės",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Rodyti pakeitimus OSM",
@@ -681,12 +662,6 @@
         "confirm": {
             "okay": "Gerai",
             "cancel": "Nutraukti"
-        },
-        "splash": {
-            "welcome": "Jus sveikina iD OpenStreetMap redaktorius",
-            "text": "iD yra draugiškas, bet galingas įrankis pildant didžiausią, atviriausią ir nemokamą/laisvą pasaulio žemėlapį. Šiuo metu naudojate versiją {version}. Daugiau informacijos rasite svetainėje {website}, o apie klaidas galite pranešti {github}.",
-            "walkthrough": "Pradėti pažingsninę demonstraciją",
-            "start": "Redaguoti dabar"
         },
         "source_switch": {
             "live": "gyva",
@@ -714,12 +689,7 @@
             "hires": "Aukšta rezoliucija"
         },
         "mapillary_images": {
-            "tooltip": "Gatvės lygio nuotraukos iš Mapillary",
-            "title": "Nuotraukų perdanga (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Kelio ženklai iš Mapillary (reikia įjungti nuotraukų perdangą)",
-            "title": "Kelio ženklų perdanga (Mapillary)"
+            "tooltip": "Gatvės lygio nuotraukos iš Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Žiūrėti šią nuotrauką per Mapillary"
@@ -1089,38 +1059,14 @@
                 "category-landuse": {
                     "name": "Žemėnaudos objektai"
                 },
-                "category-natural-area": {
-                    "name": "Gamtos objektai"
-                },
-                "category-natural-line": {
-                    "name": "Gamtos objektai"
-                },
-                "category-natural-point": {
-                    "name": "Gamtos objektai"
-                },
-                "category-path": {
-                    "name": "Takų objektai"
-                },
-                "category-rail": {
-                    "name": "Geležinkelio objektai"
-                },
                 "category-restriction": {
                     "name": "Apribojimo objektai"
-                },
-                "category-road": {
-                    "name": "Kelių objektai"
                 },
                 "category-route": {
                     "name": "Maršrutų objektai"
                 },
                 "category-utility": {
                     "name": "Naudingi objektai"
-                },
-                "category-water-area": {
-                    "name": "Vandens objektai"
-                },
-                "category-water-line": {
-                    "name": "Vandens objektai"
                 }
             },
             "fields": {
@@ -1523,7 +1469,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -1737,9 +1682,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Nemokama interneto prieiga"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Tinklo pavadinimas)"
                 },
                 "kerb": {
                     "label": "Bordiūras"
@@ -2080,7 +2022,6 @@
                     "label": "Tipas"
                 },
                 "railway/signal/direction": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -2417,7 +2358,6 @@
                     "label": "Tipas"
                 },
                 "traffic_signals/direction": {
-                    "label": "Kryptis",
                     "options": {
                         "backward": "Atgal",
                         "both": "Į abi puses / visas",
@@ -2666,8 +2606,7 @@
                     "name": "Vairavimo mokykla"
                 },
                 "amenity/embassy": {
-                    "name": "Ambasada",
-                    "terms": "Ambasada,Atstovybė"
+                    "name": "Ambasada"
                 },
                 "amenity/fast_food": {
                     "name": "Greitas maistas",
@@ -2867,9 +2806,6 @@
                 },
                 "area/highway": {
                     "name": "Kelio danga"
-                },
-                "attraction/animal": {
-                    "name": "Gyvūnai"
                 },
                 "attraction/big_wheel": {
                     "name": "Didelis ratas"
@@ -3106,9 +3042,6 @@
                     "name": "Sandėlis",
                     "terms": "sandėlys"
                 },
-                "circular": {
-                    "name": "Eismo žiedas"
-                },
                 "club": {
                     "name": "Klubas"
                 },
@@ -3301,9 +3234,6 @@
                 "highway/bridleway": {
                     "name": "Žirgų kelias",
                     "terms": "jodinėjimo takas,arklių takas"
-                },
-                "highway/bus_stop": {
-                    "name": "Autobuso sustojimas / platforma"
                 },
                 "highway/cycleway": {
                     "name": "Dviračių takas",
@@ -3532,9 +3462,6 @@
                 },
                 "landuse/military/barracks": {
                     "name": "Barakai"
-                },
-                "landuse/military/bunker": {
-                    "name": "Karinis bunkeris"
                 },
                 "landuse/military/danger_area": {
                     "name": "Pavojaus zona"
@@ -4002,9 +3929,6 @@
                     "name": "Ryšys",
                     "terms": "ryšys"
                 },
-                "roundabout": {
-                    "name": "Žiedas"
-                },
                 "route/ferry": {
                     "name": "Kelto maršrutas",
                     "terms": "kelto maršrutas"
@@ -4060,8 +3984,7 @@
                     "terms": "knygynas,knygų parduotuvė"
                 },
                 "shop/boutique": {
-                    "name": "Parduotuvė",
-                    "terms": "butikas"
+                    "name": "Parduotuvė"
                 },
                 "shop/butcher": {
                     "name": "Mėsinė",
@@ -4509,10 +4432,6 @@
                 "type/waterway": {
                     "name": "Vandens kelias"
                 },
-                "vertex": {
-                    "name": "Kita",
-                    "terms": "Kita"
-                },
                 "waterway": {
                     "name": "Vandens kelias"
                 },
@@ -4781,12 +4700,7 @@
                 "name": "OpenStreetMap JAV Slack"
             },
             "OSM-US": {
-                "name": "OpenStreetMap JAV",
-                "events": {
-                    "sotmus2018": {
-                        "where": "Detroitas, Mičiganas"
-                    }
-                }
+                "name": "OpenStreetMap JAV"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Juta"

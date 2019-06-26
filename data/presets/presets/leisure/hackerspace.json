@@ -6,16 +6,19 @@
         "building_area",
         "opening_hours",
         "website",
-        "internet_access"
+        "fee",
+        "payment_multi_fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields": [
-        "payment_multi",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "smoking",
-        "phone",
+        "air_conditioning",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "smoking",
+        "wheelchair"
     ],
     "geometry": [
         "point",

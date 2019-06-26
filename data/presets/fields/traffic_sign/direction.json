@@ -1,7 +1,7 @@
 {
     "key": "traffic_sign:direction",
     "type": "combo",
-    "label": "Direction",
+    "label": "Direction Affected",
     "strings": {
         "options": {
           "forward": "Forward",

@@ -161,21 +161,10 @@
             "description": "Agtergrond stellings",
             "reset": "begin van voor"
         },
-        "restore": {
-            "heading": "Jy het verandering wat nog gebêre moet word",
-            "description": "Wil jy graag ongebêrede veranderinge heroep van 'n vorige kaart veranderingssessie?"
-        },
         "save": {
             "title": "Stoor",
             "no_changes": "Geen verandering om te stoor.",
             "unsaved_changes": "Jy het ongestoorde veranderinge"
-        },
-        "success": {
-            "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!"
-        },
-        "splash": {
-            "welcome": "Welkom by die iD OpenStreetMap program",
-            "walkthrough": "Begin die Deurloop"
         },
         "source_switch": {
             "live": "lewendig",
@@ -1291,9 +1280,6 @@
                 },
                 "type/route/tram": {
                     "name": "Tremroete"
-                },
-                "vertex": {
-                    "name": "Ander"
                 },
                 "waterway": {
                     "name": "Waterweg"

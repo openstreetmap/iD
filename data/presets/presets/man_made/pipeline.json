@@ -1,10 +1,11 @@
 {
     "icon": "iD-pipeline-line",
     "fields": [
-        "location",
         "operator",
+        "location",
         "substance",
-        "layer"
+        "layer",
+        "diameter"
     ],
     "geometry": [
         "line"

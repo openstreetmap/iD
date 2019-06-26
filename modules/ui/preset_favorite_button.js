@@ -16,8 +16,8 @@ export function uiPresetFavoriteButton(preset, geom, context, klass) {
 
 
     presetFavorite.button = function(selection) {
-        // disable favoriting for now
-        var canFavorite = false;//geom !== 'relation' && preset.searchable !== false;
+
+        var canFavorite = geom !== 'relation' && preset.searchable !== false;
 
         _button = selection.selectAll('.preset-favorite-button')
             .data(canFavorite ? [0] : []);

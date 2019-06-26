@@ -13,6 +13,7 @@ import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
+import { uiAssistant } from './assistant';
 import { uiAttribution } from './attribution';
 import { uiBackground } from './background';
 import { uiContributors } from './contributors';
@@ -28,12 +29,10 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
-import { uiRestore } from './restore';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
-import { uiSplash } from './splash';
 import { uiStatus } from './status';
 import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
@@ -56,16 +55,13 @@ export function uiInit(context) {
             .call(uiFullScreen(context));
 
         var map = context.map();
+        map.redrawEnable(false);  // don't draw until we've set zoom/lat/long
 
         container
             .append('svg')
             .attr('id', 'defs')
             .call(svgDefs(context));
 
-        container
-            .append('div')
-            .attr('id', 'sidebar')
-            .call(ui.sidebar);
 
         var content = container
             .append('div')
@@ -218,6 +214,7 @@ export function uiInit(context) {
         // Setup map dimensions and move map to initial center/zoom.
         // This should happen after #content and toolbars exist.
         ui.onResize();
+        map.redrawEnable(true);
 
         var hash = behaviorHash(context);
         hash();
@@ -257,6 +254,20 @@ export function uiInit(context) {
             .classed('hide', true)
             .call(ui.photoviewer);
 
+        var sidebarWrap = overMap
+            .append('div')
+            .attr('class', 'sidebar-wrap');
+
+        ui.assistant = uiAssistant(context);
+
+        sidebarWrap
+            .call(ui.assistant);
+
+        sidebarWrap
+            .append('div')
+            .attr('id', 'sidebar')
+            .call(ui.sidebar);
+
 
         // Bind events
         window.onbeforeunload = function() {
@@ -276,7 +287,7 @@ export function uiInit(context) {
         var panPixels = 80;
         context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
-            .on([t('sidebar.key'), '`', '²'], ui.sidebar.toggle)   // #5663 - common QWERTY, AZERTY
+            .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
@@ -289,12 +300,6 @@ export function uiInit(context) {
         context.enter(modeBrowse(context));
 
         if (!_initCounter++) {
-            if (!hash.startWalkthrough) {
-                context.container()
-                    .call(uiSplash(context))
-                    .call(uiRestore(context));
-            }
-
             context.container()
                 .call(uiShortcuts(context));
         }
@@ -362,6 +367,7 @@ export function uiInit(context) {
         });
     };
 
+    ui.assistant = null;
 
     ui.sidebar = uiSidebar(context);
 
@@ -433,7 +439,7 @@ export function uiInit(context) {
 
         if (showPane) {
             shownPanes
-                .style('display', 'none')
+                .classed('hide', true)
                 .style(side, '-500px');
 
             d3_selectAll('.' + showPane.attr('pane') + '-control button')
@@ -441,10 +447,10 @@ export function uiInit(context) {
 
             showPane
                 .classed('shown', true)
-                .style('display', 'block');
+                .classed('hide', false);
             if (shownPanes.empty()) {
                 showPane
-                    .style('display', 'block')
+                    .classed('hide', false)
                     .style(side, '-500px')
                     .transition()
                     .duration(200)
@@ -455,13 +461,13 @@ export function uiInit(context) {
             }
         } else {
             shownPanes
-                .style('display', 'block')
+                .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
                 .style(side, '-500px')
                 .on('end', function() {
-                    d3_select(this).style('display', 'none');
+                    d3_select(this).classed('hide', true);
                 });
         }
     };

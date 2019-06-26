@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "operator/type",
         "address"
     ],
     "moreFields": [
@@ -18,7 +19,8 @@
     ],
     "terms": [
         "cell",
-        "jail"
+        "jail",
+        "correction"
     ],
     "tags": {
         "amenity": "prison"

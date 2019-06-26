@@ -100,7 +100,6 @@
                     "line": "Līnijas leņķi pārveidot par taisnleņķi.",
                     "area": "Apgabala leņķi pārveidot par taisnleņķi."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Līnijas leņķi pārvedoti par taisnleņķiem.",
                     "area": "Apgabala leņķi pārvedoti par taisnleņķiem."
@@ -111,11 +110,8 @@
             },
             "straighten": {
                 "title": "Iztaisnot",
-                "description": "Iztaisnot šo līniju.",
                 "key": "S",
-                "annotation": "Iztaisnoja līniju.",
-                "too_bendy": "Šo nevar iztaisnot, jo tas liecas pārāk daudz.",
-                "connected_to_hidden": "Šo līniju nevar iztaisnot, jo tā ir pievienota pie paslēpta objekta."
+                "too_bendy": "Šo nevar iztaisnot, jo tas liecas pārāk daudz."
             },
             "delete": {
                 "title": "Dzēst",
@@ -280,14 +276,6 @@
                     "create": "Pievienoja pagriezienu aizliegumu",
                     "delete": "Izdzēsa pagriezienu aizliegumu"
                 }
-            },
-            "detach_node": {
-                "title": "Atvienot",
-                "key": "E",
-                "description": "Atvienot mezglu no šīm līnijām/apgabaliem.",
-                "annotation": "Atvienoja mezglu no līnijas/apgabala.",
-                "restriction": "Šo mezglu nevar atvienot, jo tas bojātu \"{relation}\" relāciju.",
-                "connected_to_hidden": "Šo mezglu nevar atvienot, jo tas ir pievienots pie paslēpta objekta."
             }
         },
         "restriction": {
@@ -411,7 +399,6 @@
         },
         "geocoder": {
             "search": "Meklēt pasaulē...",
-            "no_results_visible": "Nav rezultātu redzamajā kartes apgabalā",
             "no_results_worldwide": "Nav rezultātu"
         },
         "geolocate": {
@@ -569,12 +556,6 @@
                 }
             }
         },
-        "restore": {
-            "heading": "Jums ir nesaglabātas izmaiņas",
-            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?",
-            "restore": "Atjaunot manas izmaiņas",
-            "reset": "Atmest manas izmaiņas"
-        },
         "save": {
             "title": "Saglabāt",
             "help": "Pārbaudi savas izmaiņas un augšupielādē tās uz OpenStreetMap, padarot tās redzamas citiem lietotājiem.",
@@ -608,10 +589,6 @@
             }
         },
         "success": {
-            "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
-            "thank_you": "Paldies par kartes uzlabošanu.",
-            "thank_you_location": "Paldies ka uzlabojāt karti {where} apkārtnē.",
-            "help_html": "Jūsu izmaiņām vajadzētu parādīties OpenStreetMap pēc pāris minūtēm. Citas kartes var atjaunoties lēnāk.",
             "help_link_text": "Detaļas",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Apskatīt izmaiņas OSM",
@@ -625,11 +602,6 @@
         "confirm": {
             "okay": "Labi",
             "cancel": "Atcelt"
-        },
-        "splash": {
-            "welcome": "Laipni lūgti iD OpenStreetMap redaktorā",
-            "text": "iD ir draudzīgs, bet spēcīgs rīks ar ko var dot savu ieguldījumu pasaules labākajai brīvajai pasaules kartei. Šī ir versija {version}. Papildus informācijai varat skatīt {website} un ziņot par kļūdām {github}.",
-            "start": "Rediģēt tagad"
         },
         "source_switch": {
             "live": "live",
@@ -650,24 +622,17 @@
         },
         "streetside": {
             "tooltip": "Ielas līmeņa attēli no Microsoft",
-            "title": "Fotogrāfiju pārklājs (Bing Streetside)",
             "view_on_bing": "Skatīt Bing kartēs",
             "hires": "Augsta izšķirtspēja"
         },
         "mapillary_images": {
-            "tooltip": "Ielas līmeņa attēli no Mapillary",
-            "title": "Fotogrāfiju Pārklājs (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Ceļazīmes no Mapillary (ir jāieslēdz Fotogrāfiju Pārklājs)",
-            "title": "Ceļazīmju pārklājs (Mapillary)"
+            "tooltip": "Ielas līmeņa attēli no Mapillary"
         },
         "mapillary": {
             "view_on_mapillary": "Skatīt šo attēlu Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Ielas līmeņa attēli no OpenStreetCam",
-            "title": "Fotogrāfiju pārklājs (OpenStreetCam)"
+            "tooltip": "Ielas līmeņa attēli no OpenStreetCam"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Skatīt šo attēlu OpenStreetCam"
@@ -890,21 +855,6 @@
                 },
                 "category-landuse": {
                     "name": "Zemes Izmantojuma Objekti"
-                },
-                "category-path": {
-                    "name": "Taku veidi"
-                },
-                "category-rail": {
-                    "name": "Sliežu ceļu veidi"
-                },
-                "category-road": {
-                    "name": "Ceļu veidi"
-                },
-                "category-water-area": {
-                    "name": "Ūdens Objekti"
-                },
-                "category-water-line": {
-                    "name": "Ūdens Objekti"
                 }
             },
             "fields": {
@@ -1282,7 +1232,6 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Virziens",
                     "options": {
                         "backward": "Atmuguriski",
                         "both": "Abas / Visas"
@@ -1511,9 +1460,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Interneta Piekļuves Maksa"
-                },
-                "internet_access/ssid": {
-                    "label": "SSID (Tīkla Nosaukums)"
                 },
                 "kerb": {
                     "label": "Apmale"
@@ -1827,7 +1773,6 @@
                     "placeholder": "Attālums līdz vienam decimālpunktam (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Virziens",
                     "options": {
                         "backward": "Atmuguriski",
                         "both": "Abas / Visas"
@@ -2016,8 +1961,7 @@
                     "options": {
                         "bucket": "Spainis",
                         "chemical": "Ķīmiskā",
-                        "flush": "Ūdens Nolaišanas",
-                        "pitlatrine": "Bedres/Latrīnas"
+                        "flush": "Ūdens Nolaišanas"
                     }
                 },
                 "toll": {
@@ -2481,9 +2425,6 @@
                     "name": "Saldējuma Tirdzniecības automāts",
                     "terms": "šokolādes,vaniļas,sasaldēts,auksts"
                 },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Avīžu Tirdzniecības automāts"
-                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Avīžu Tirdzniecības automāts",
                     "terms": "avīze,laiksraksts,žurnāls,iespiests"
@@ -2525,10 +2466,6 @@
                 },
                 "area/highway": {
                     "name": "Ceļa segums"
-                },
-                "attraction/animal": {
-                    "name": "Dzīvnieku",
-                    "terms": "zoo, dzīvnieku parks, lauva, tīģeris, žirafe, lācis"
                 },
                 "attraction/big_wheel": {
                     "name": "Panorāmas rats",
@@ -3003,14 +2940,8 @@
                 "landuse/military/barracks": {
                     "name": "Kazarmas"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militārais Bunkurs"
-                },
                 "landuse/military/naval_base": {
                     "name": "Ūdensspēku bāze"
-                },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Atomsprādziena zona"
                 },
                 "landuse/quarry": {
                     "name": "Karjers"
@@ -3362,21 +3293,6 @@
                 "power/transformer": {
                     "name": "Transformators"
                 },
-                "public_transport/platform_bus": {
-                    "name": "Autobusu pietura / platforma"
-                },
-                "public_transport/platform_ferry": {
-                    "name": "Prāmja pietura / Platforma"
-                },
-                "public_transport/platform_subway": {
-                    "name": "Metro pietura / platforma"
-                },
-                "public_transport/platform_train": {
-                    "name": "Vilciena Pietura / Platforma"
-                },
-                "public_transport/platform_trolleybus": {
-                    "name": "Trolejbusu pietura / platforma"
-                },
                 "public_transport/station_bus": {
                     "name": "Autobusu stacija / Terminālis"
                 },
@@ -3428,9 +3344,6 @@
                 },
                 "relation": {
                     "name": "Relācija"
-                },
-                "roundabout": {
-                    "name": "Aplis"
                 },
                 "shop": {
                     "name": "Veikals"
@@ -3787,9 +3700,6 @@
                 "type/restriction": {
                     "name": "Aizliegums"
                 },
-                "vertex": {
-                    "name": "Cits"
-                },
                 "waterway": {
                     "name": "Ūdensceļš"
                 },
@@ -3820,24 +3730,6 @@
             }
         },
         "imagery": {
-            "AGIV": {
-                "attribution": {
-                    "text": "Ortofoto Flanders vissjaunākie © AGIV"
-                },
-                "name": "AGIV Flanders vissjaunākā aerofotoattēli"
-            },
-            "AGIV10cm": {
-                "attribution": {
-                    "text": "Ortofoto Flanders © AGIV"
-                },
-                "name": "AGIV Flanders 2013-2015 aerofotoattēli 10cm"
-            },
-            "AGIVFlandersGRB": {
-                "attribution": {
-                    "text": "GRB Flanders © AGIV"
-                },
-                "name": "AGIV Flanders GRB"
-            },
             "Bing": {
                 "description": "Satelītu un aerofotoattēli.",
                 "name": "Bing aerofotoattēli"
@@ -3869,6 +3761,10 @@
                 },
                 "description": "Attēlu malas un uztveršanas datumi. Etiķetes parādās palielinājuma līmenī 13 un zemāk.",
                 "name": "Vecāki DigitalGlobe Standarta Attēli"
+            },
+            "EOXAT2018CLOUDLESS": {
+                "description": "Apstrādāti Sentinel Satalītattēli.",
+                "name": "eox.at 2018 bez-mākoņu"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -4057,6 +3953,17 @@
                 "description": "Japānas GSI ortogrāfiskie attēli. Parasti labāki par bing, bet nedaudz vecāki.",
                 "name": "Japānas GSI ortogrāfiskie attēli"
             },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japāna"
+                },
+                "name": "Japānas GSI gaisa-foto attēli"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japānas bezšuvju foto"
+                }
+            },
             "gsi.go.jp_std_map": {
                 "attribution": {
                     "text": "GSI Japāna"
@@ -4195,7 +4102,6 @@
                 "attribution": {
                     "text": "© Stokholmas pašvaldība, CC0"
                 },
-                "description": "2015. gada Ortofoto no Stokholmas pašvaldības, CC0 licence",
                 "name": "Stokholmas Ortofoto"
             },
             "tf-cycle": {

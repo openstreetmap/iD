@@ -7,28 +7,63 @@
             "undo": "ångra",
             "zoom_to": "Zooma till",
             "copy": "kopiera",
-            "open_wikidata": "öppna på wikidata.org"
+            "open_wikidata": "öppna på wikidata.org",
+            "favorite": "favorit"
+        },
+        "toolbar": {
+            "inspect": "Inspektera",
+            "undo_redo": "Ångra / Gör om",
+            "recent": "Senaste",
+            "favorites": "Favoriter",
+            "add_feature": "Lägg till objekt"
         },
         "modes": {
+            "add_feature": {
+                "title": "Lägg till ett objekt",
+                "description": "Sök efter objekt att lägga till på kartan.",
+                "key": "Tab",
+                "result": "{count} hittat",
+                "results": "{count} hittade"
+            },
             "add_area": {
                 "title": "Område",
                 "description": "Lägg till parker, byggnader, sjöar eller andra områden på kartan.",
-                "tail": "Klicka på kartan för att börja rita ett område, exempelvis en park, sjö eller byggnad."
+                "tail": "Klicka på kartan för att börja rita ett område, exempelvis en park, sjö eller byggnad.",
+                "filter_tooltip": "områden"
             },
             "add_line": {
                 "title": "Linje",
                 "description": "Lägg till vägar, stigar, kanaler och andra linjer på kartan.",
-                "tail": "Klicka på kartan för att rita en väg, stig eller ett vattendrag."
+                "tail": "Klicka på kartan för att rita en väg, stig eller ett vattendrag.",
+                "filter_tooltip": "linjer"
             },
             "add_point": {
                 "title": "Punkt",
                 "description": "Lägg till restauranger, butiker, postlådor och andra punkter på kartan.",
-                "tail": "Klicka på kartan för att lägga till en punkt."
+                "tail": "Klicka på kartan för att lägga till en punkt.",
+                "filter_tooltip": "punkter"
             },
             "add_note": {
                 "title": "Anteckning",
+                "label": "Lägg till anteckning",
                 "description": "Hittat ett problem? Låt andra kartläggare få veta det. ",
-                "tail": "Klicka på kartan för att lägga till en anteckning. "
+                "tail": "Klicka på kartan för att lägga till en anteckning. ",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Lägg till {feature}",
+                "point": {
+                    "title": "Lägg till {feature} som en punkt"
+                },
+                "line": {
+                    "title": "Lägg till {feature} som en linje"
+                },
+                "area": {
+                    "title": "Lägg till {feature} som ett område"
+                },
+                "building": {
+                    "title": "Lägg till {feature} som en byggnad"
+                }
             },
             "browse": {
                 "title": "Navigera",
@@ -92,30 +127,43 @@
                 },
                 "not_closed": "Denna kan inte göras rund då den inte är en loop.",
                 "too_large": "Denna kan inte göras runt då inte tillräckligt är synligt för tillfället.",
-                "connected_to_hidden": "Detta kan inte göras runt då det är kopplat till ett dolt objekt."
+                "connected_to_hidden": "Detta kan inte göras runt då det är kopplat till ett dolt objekt.",
+                "not_downloaded": "Detta kan inte göras runt då delar av det ännu inte har laddats ned."
             },
             "orthogonalize": {
                 "title": "Räta upp",
                 "description": {
+                    "vertex": "Räta upp detta hörn.",
                     "line": "Räta upp hörnen på denna linje.",
                     "area": "Räta upp hörnen på detta område."
                 },
-                "key": "S",
+                "key": "Q",
                 "annotation": {
+                    "vertex": "Räta upp ett enskilt hörn.",
                     "line": "Gjorde hörnen på en linje fyrkantiga.",
                     "area": "Gjorde hörnen på ett område fyrkantiga."
                 },
+                "end_vertex": "Detta kan inte rätas upp då det är en slut-nod.",
+                "square_enough": "Detta kan inte rätas upp mer än det redan är.",
                 "not_squarish": "Denna kan inte rätas upp då den inte är fyrkantig.",
                 "too_large": "Denna kan inte rätas upp då inte tillräckligt är synligt för tillfället.",
-                "connected_to_hidden": "Detta kan inte rätas upp då det är kopplat till ett dolt objekt."
+                "connected_to_hidden": "Detta kan inte rätas upp då det är kopplat till ett dolt objekt.",
+                "not_downloaded": "Detta kan inte göras kvadratisk då delar av det ännu inte har laddats ned."
             },
             "straighten": {
                 "title": "Räta ut",
-                "description": "Räta ut denna linje.",
+                "description": {
+                    "points": "Placera dessa punkter längs en linje.",
+                    "line": "Räta ut denna linje."
+                },
                 "key": "S",
-                "annotation": "Rätade ut en linje.",
+                "annotation": {
+                    "points": "Placera flera punkter längs en linje.",
+                    "line": "Rätade ut en linje."
+                },
                 "too_bendy": "Den kan inte rätas upp då den är för böjd.",
-                "connected_to_hidden": "Denna linje kan inte rätas ut då den är kopplad till ett dolt objekt."
+                "connected_to_hidden": "Detta linje kan inte rätas ut då det är kopplat till ett dolt objekt.",
+                "not_downloaded": "Detta kan inte rätas upp då delar av det ännu inte har laddats ned."
             },
             "delete": {
                 "title": "Radera",
@@ -146,6 +194,37 @@
                 "connected_to_hidden": {
                     "single": "Detta objekt kan inte raderas då det är kopplat till ett dolt objekt.",
                     "multiple": "Dessa objekt kan inte raderas då några av dem är kopplade till dolda objekt."
+                },
+                "not_downloaded": {
+                    "single": "Detta objekt kan inte raderas då delar av det ännu inte har laddats ned.",
+                    "multiple": "Dessa objekt kan inte raderas då delar av dem ännu inte har laddats ned."
+                },
+                "has_wikidata_tag": {
+                    "single": "Detta objekt kan inte raderas då det har en Wikidata-tagg.",
+                    "multiple": "Dessa objekt kan inte raderas då de har Wikidata-taggar."
+                }
+            },
+            "downgrade": {
+                "title": "Nedgradera",
+                "description": {
+                    "building_address": "Ta bort alla icke adress- och byggnadsrelaterade taggar.",
+                    "building": "Ta bort alla icke byggnadsrelaterade taggar.",
+                    "address": "Ta bort alla icke adressrelaterade taggar."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Nedgradera ett objekt till en enkel byggnad.",
+                        "multiple": "Nedgradera {n} objekt till enkla byggnader."
+                    },
+                    "address": {
+                        "single": "Nedgradera ett objekt till en adress.",
+                        "multiple": "Nedgradera {n} objekt till adresser."
+                    },
+                    "multiple": "Nedgradera {n} objekt."
+                },
+                "has_wikidata_tag": {
+                    "single": "Detta objekt kan inte nedgraderas då det har en Wikidata-tagg.",
+                    "multiple": "Dessa objekt kan inte nedgraderas då vissa ha Wikidata-taggar."
                 }
             },
             "add_member": {
@@ -153,6 +232,9 @@
             },
             "delete_member": {
                 "annotation": "Tog bort en medlem från en relationen."
+            },
+            "reorder_members": {
+                "annotation": "Ändrade ordningen på en relations medlemmar."
             },
             "connect": {
                 "annotation": {
@@ -177,9 +259,19 @@
             "disconnect": {
                 "title": "Koppla isär",
                 "description": "Koppla isär dessa linjer/områden från varandra.",
+                "line": {
+                    "description": "Koppla isär denna linje från andra objekt."
+                },
+                "area": {
+                    "description": "Koppla isär detta område från andra objekt."
+                },
                 "key": "D",
                 "annotation": "Kopplade isär linjer/områden.",
+                "too_large": {
+                    "single": "Detta kan inte kopplas isär då inte tillräckligt mycket av det är synligt för tillfället."
+                },
                 "not_connected": "Det finns inte tillräckligt med linjer/områden här att sära på.",
+                "not_downloaded": "Detta kan inte kopplas isär då delar av det ännu inte har laddats ned.",
                 "connected_to_hidden": "Detta kan inte kopplas isär då det är kopplat till ett dolt objekt.",
                 "relation": "Detta kan inte kopplas isär då den kopplar ihop medlemmar i en relation."
             },
@@ -221,6 +313,10 @@
                 "connected_to_hidden": {
                     "single": "Detta objekt kan inte flyttas då det är kopplat till dolt objekt.",
                     "multiple": "Dessa objekt kan inte flyttas då de är kopplade till dolda objekt."
+                },
+                "not_downloaded": {
+                    "single": "Detta objekt kan inte flyttas då delar av det ännu inte har laddats ned.",
+                    "multiple": "Dessa objekt kan inte flyttas då delar av dem ännu inte har laddats ned."
                 }
             },
             "reflect": {
@@ -263,6 +359,10 @@
                 "connected_to_hidden": {
                     "single": "Detta objekt kan inte speglas då det är kopplat till ett dolt objekt.",
                     "multiple": "Dessa objekt kan inte speglas då några av dem är kopplade till dolda objekt."
+                },
+                "not_downloaded": {
+                    "single": "Detta objekt kan inte speglas då delar av det ännu inte har laddats ned.",
+                    "multiple": "Dessa objekt kan inte speglas då delar av det ännu inte har laddats ned."
                 }
             },
             "rotate": {
@@ -288,6 +388,10 @@
                 "connected_to_hidden": {
                     "single": "Detta objekt kan inte roteras då det är kopplat till dolt objekt.",
                     "multiple": "Dessa objekt kan inte roteras då de är kopplade till dolda objekt."
+                },
+                "not_downloaded": {
+                    "single": "Detta objekt kan inte roteras då delar av det ännu inte har laddats ned.",
+                    "multiple": "Dessa objekt kan inte roteras då delar av dem ännu inte har laddats ned."
                 }
             },
             "reverse": {
@@ -319,13 +423,35 @@
                     "delete": "Tog bort en svängrestriktion"
                 }
             },
-            "detach_node": {
-                "title": "Ta loss",
+            "extract": {
+                "title": "Extrahera",
                 "key": "E",
-                "description": "Ta loss denna nod från dessa linjer/områden.",
-                "annotation": "Tog bort en nod från föräldralinjer/-områden.",
-                "restriction": "Denna nod kan inte tas loss då det skulle skada en \"{relation}\"-relation.",
-                "connected_to_hidden": "Denna nod kan inte tas loss då den är kopplad till ett dolt objekt."
+                "description": {
+                    "vertex": {
+                        "single": "Extrahera denna punkt från linje/område den tillhör."
+                    },
+                    "area": {
+                        "single": "Extrahera en punkt från detta område."
+                    }
+                },
+                "annotation": {
+                    "single": "Extraherade en punkt."
+                },
+                "too_large": {
+                    "area": {
+                        "single": "En punkt kan inte extraheras från detta område då inte tillräckligt av det är synligt för tillfället."
+                    }
+                },
+                "restriction": {
+                    "vertex": {
+                        "single": "Denna punkt kan inte extraheras då det skulle skada en relation av typen \"{relation}\"."
+                    }
+                },
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Denna punkt kan inte extraheras då den är kopplad till ett dolt objekt."
+                    }
+                }
             }
         },
         "restriction": {
@@ -470,7 +596,7 @@
                 "selected": "{n} markerad(e)",
                 "geometry": "Geometri",
                 "closed_line": "Stängd linje",
-                "closed_area": "Stängt område",
+                "closed_area": "Slutet område",
                 "center": "Centrum",
                 "perimeter": "Omkrets",
                 "length": "Längd",
@@ -515,6 +641,7 @@
             "all_tags": "Alla taggar",
             "all_members": "Alla medlemmar",
             "all_relations": "Alla relationer",
+            "add_to_relation": "Lägg till i en relation",
             "new_relation": "Ny relation...",
             "choose_relation": "Välj en föräldrarelation",
             "role": "Roll",
@@ -570,7 +697,8 @@
             "custom": "Anpassa",
             "overlays": "Bildlager",
             "imagery_source_faq": "Info om flygfotot / Rapportera ett problem",
-            "reset": "ta bort",
+            "reset": "återställ",
+            "reset_all": "Återställ allt",
             "display_options": "Visningsinställningar",
             "brightness": "Ljusstyrka",
             "contrast": "Kontrast",
@@ -617,6 +745,22 @@
             "autohidden": "Dessa objekt har dolts automatiskt då för mycket annars skulle ha visats på skärmen. Du kan zooma in för att redigera dem. ",
             "osmhidden": "Dessa objekt har dolts automatiskt då OpenStreetMap-lagret är dolt."
         },
+        "photo_overlays": {
+            "title": "Bildlager",
+            "traffic_signs": {
+                "title": "Vägmärken"
+            },
+            "photo_type": {
+                "flat": {
+                    "title": "Platta foton",
+                    "tooltip": "Traditionella foton"
+                },
+                "panoramic": {
+                    "title": "Panoramabilder",
+                    "tooltip": "360°-bilder"
+                }
+            }
+        },
         "feature": {
             "points": {
                 "description": "Punkter",
@@ -638,6 +782,14 @@
                 "description": "Byggnader",
                 "tooltip": "Byggnader, skydd, garage, m.m."
             },
+            "building_parts": {
+                "description": "Byggnadsdelar",
+                "tooltip": "3D-byggnader och tak-komponenter"
+            },
+            "indoor": {
+                "description": "Inomhusobjekt",
+                "tooltip": "Rum, korridorer, trapphus, etc."
+            },
             "landuse": {
                 "description": "Markanvändning",
                 "tooltip": "Skogar, åkermark, parker, bostadsområden, shoppingområden m.m."
@@ -653,6 +805,14 @@
             "rail": {
                 "description": "Rälsobjekt",
                 "tooltip": "Järnvägar"
+            },
+            "pistes": {
+                "description": "Pister",
+                "tooltip": "Skidbackar, pulkabackar, Skridskobanor etc. "
+            },
+            "aerialways": {
+                "description": "Linbaneobjekt",
+                "tooltip": "Stollift, gondol, linbana etc."
             },
             "power": {
                 "description": "Kraftobjekt",
@@ -706,10 +866,10 @@
             }
         },
         "restore": {
-            "heading": "Du har osparade ändringar.",
-            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
+            "heading": "Du har osparade ändringar",
+            "description": "Vill du återställa osparade ändringar från föregående redigeringssession?",
             "restore": "Återställ mina ändringar",
-            "reset": "Ta bort mina ändringar"
+            "reset": "Släng mina ändringar"
         },
         "save": {
             "title": "Spara",
@@ -748,7 +908,11 @@
             "just_edited": "Du har nu redigerat OpenStreetMap!",
             "thank_you": "Tack för att du förbättrade kartan.",
             "thank_you_location": "Tack för att du förbättrade kartan kring {where}.",
-            "help_html": "Dina ändringar borde synas på OpenStreetMap om några minuter. Det kan ta längre tid för andra kartor att få uppdateringar.",
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": " i "
+            },
+            "help_html": "Dina ändringar borde synas på OpenStreetMap om några minuter. Det kan ta längre tid för andra kartor att bli uppdaterade.",
             "help_link_text": "Detaljer",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Sv:FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Visa ändringar på OSM",
@@ -765,8 +929,8 @@
             "cancel": "Avbryt"
         },
         "splash": {
-            "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
-            "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information besök {website} eller rapportera fel på {github}.",
+            "welcome": "Välkommen till iD OpenStreetMap-redigerare",
+            "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information, besök {website} eller rapportera fel på {github}.",
             "walkthrough": "Starta genomgången",
             "start": "Redigera nu"
         },
@@ -888,7 +1052,7 @@
                         "description": "Det finns fler än en nod på denna plats. Nod-ID:n: {var1}."
                     },
                     "30": {
-                        "title": "Icke stängt område",
+                        "title": "Icke slutet område",
                         "description": "{var1} är taggad med \"{var2}\" och bör vara en sluten slinga."
                     },
                     "40": {
@@ -1142,27 +1306,26 @@
         },
         "streetside": {
             "tooltip": "Gatubilder från Microsoft",
-            "title": "Bildlager (Bing Streetside)",
+            "title": "Bing Streetside",
             "report": "Rapportera ett integritetsproblem med den här bilden",
             "view_on_bing": "Visa på Bing Maps",
             "hires": "Hög upplösning"
         },
         "mapillary_images": {
-            "tooltip": "Gatubilder från Mapillary",
-            "title": "Bildlager (Mapillary)"
-        },
-        "mapillary_signs": {
-            "tooltip": "Trafikskyltar från Mapillary (måste aktivera bildlager)",
-            "title": "Bildlager med trafikskyltar (Mapillary)"
+            "tooltip": "Gatubilder från Mapillary"
         },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Trafikskyltar från Mapillary"
+            },
             "view_on_mapillary": "Visa denna bild på Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Gatubilder från OpenStreetCam",
-            "title": "Bildlager (OpenStreetCam)"
+            "tooltip": "Gatubilder från OpenStreetCam"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "Visa denna bild på OpenStreetCam"
         },
         "note": {
@@ -1428,130 +1591,259 @@
                 "title": "Regler"
             },
             "no_issues": {
-                "message": "Allt ser bra ut",
-                "info": "Alla problem kommer att visas här medan du redigerar"
+                "message": {
+                    "everything": "Allt ser bra ut",
+                    "everything_in_view": "Allt i vyn ser bra ut",
+                    "edits": "Dina ändringar ser bra ut",
+                    "edits_in_view": "Dina ändringar i vyn ser bra ut"
+                },
+                "hidden_issues": {
+                    "none": "Upptäckta problem kommer att visas här",
+                    "elsewhere": "Problem i närheten: {count}",
+                    "other_features": "Problem med andras objekt: {count}",
+                    "other_features_elsewhere": "Problem i närheten med andras objekt: {count}",
+                    "disabled_rules": "Problem med deaktiverade regler: {count}",
+                    "disabled_rules_elsewhere": "Problem i närheten med deaktiverade regler: {count}",
+                    "ignored_issues": "Ignorerade problem: {count}",
+                    "ignored_issues_elsewhere": "Ignorerade problem i närheten: {count}"
+                }
+            },
+            "options": {
+                "what": {
+                    "title": "Kontrollera:",
+                    "edited": "Mina ändringar",
+                    "all": "Alla"
+                },
+                "where": {
+                    "title": "Som är:",
+                    "visible": "I vy",
+                    "all": "Överallt"
+                }
+            },
+            "suggested": "Föreslagna ändringar:",
+            "enable_all": "Aktivera alla",
+            "disable_all": "Deaktivera alla",
+            "reset_ignored": "Återställ ignorerade ({count})",
+            "fix_one": {
+                "title": "fixa"
+            },
+            "fix_all": {
+                "title": "Fixa alla",
+                "annotation": "Fixade flera valideringsproblem."
             },
             "almost_junction": {
                 "title": "Nästan korsande",
                 "message": "{feature} är väldigt nära men inte ansluten till {feature2}",
+                "tip": "Hitta objekt som möjligtvis bör vara kopplade till andra närliggande objekt",
+                "self": {
+                    "message": "Ändarna för {feature} är väldigt nära varandra, men är inte sammankopplade"
+                },
                 "highway-highway": {
-                    "tip": "Korsande vägar bör ha en gemensam korsningspunkt."
+                    "reference": "Korsande vägar bör ha en gemensam korsningspunkt."
+                }
+            },
+            "close_nodes": {
+                "title": "Punkt väldigt nära varandra",
+                "tip": "Hitta redundanta och tätt liggande punkter",
+                "message": "Två punkter på {way} är väldigt nära varandra",
+                "reference": "Redundanta punkter på vägar bör slås ihop eller flyttas isär.",
+                "detached": {
+                    "message": "{feature} är för nära {feature2}",
+                    "reference": "Separata punkter för inte dela en plats."
                 }
             },
             "crossing_ways": {
                 "title": "Korsande vägar",
                 "message": "{feature} korsar {feature2}",
-                "tip": "Vägar, järnvägar, vattenvägar och byggnader bör inte korsas på ett odefinierat vis.",
+                "tip": "Hitta objekt som felaktigt går över varandra",
                 "building-building": {
-                    "tip": "Byggnader bör inte överlappas förutom på olika lager. "
+                    "reference": "Byggnader bör inte överlappas förutom på olika lager. "
                 },
                 "building-highway": {
-                    "tip": "Vägar som korsar byggnader bör vara broar, tunnlar, övertäckta eller ingångar. "
+                    "reference": "Vägar som korsar byggnader bör vara broar, tunnlar, övertäckta eller ingångar. "
                 },
                 "building-railway": {
-                    "tip": "Järnvägar som korsar byggnader bör vara broar eller tunnlar."
+                    "reference": "Järnvägar som korsar byggnader bör använda broar eller tunnlar."
                 },
                 "building-waterway": {
-                    "tip": "Vattenvägar som korsar byggnader bör vara tunnlar eller vara på andra lager. "
+                    "reference": "Vattenvägar som korsar byggnader bör använda tunnlar eller vara på olika lager. "
                 },
                 "highway-highway": {
-                    "tip": "Korsande vägar bör vara broar, tunnlar eller korsningar. "
+                    "reference": "Korsande vägar bör använda broar, tunnlar eller korsningar. "
                 },
                 "highway-railway": {
-                    "tip": "Vägar som korsar järnvägar bör vara broar, tunnlar eller plankorsningar."
+                    "reference": "Vägar som korsar järnvägar bör använda broar, tunnlar eller plankorsningar."
                 },
                 "highway-waterway": {
-                    "tip": "Vägar som korsar vattenvägar bör använda broar, tunnlar eller vadställen."
+                    "reference": "Vägar som korsar vattenvägar bör använda broar, tunnlar eller vadställen."
                 },
                 "railway-railway": {
-                    "tip": "Korsande järnvägar bör vara sammankopplade eller använda broar eller tunnlar."
+                    "reference": "Korsande järnvägar bör vara sammankopplade eller använda broar eller tunnlar."
                 },
                 "railway-waterway": {
-                    "tip": "Järnvägar som korsar vattenvägar bör vara broar eller tunnlar."
+                    "reference": "Järnvägar som korsar vattenvägar bör använda broar eller tunnlar."
                 },
                 "waterway-waterway": {
-                    "tip": "Korsande vattenvägar bör vara sammankopplade eller använda tunnlar."
+                    "reference": "Korsande vattenvägar bör vara sammankopplade eller använda tunnlar."
                 },
                 "tunnel-tunnel": {
-                    "tip": "Korsande tunnlar bör använda olika lager."
+                    "reference": "Korsande tunnlar bör använda olika lager."
                 },
                 "tunnel-tunnel_connectable": {
-                    "tip": "Korsande tunnlar bör vara sammankopplade eller vara på olika lager."
+                    "reference": "Korsande tunnlar bör vara sammankopplade eller vara på olika lager."
                 },
                 "bridge-bridge": {
-                    "tip": "Korsande byggnader bör vara på olika lager."
+                    "reference": "Korsande broar bör vara på olika lager."
                 },
                 "bridge-bridge_connectable": {
-                    "tip": "Korsande broar bör vara sammankopplade eller vara på olika lager."
+                    "reference": "Korsande broar bör vara sammankopplade eller vara på olika lager."
                 },
                 "indoor-indoor": {
-                    "tip": "Korsande inomhusobjekt bör vara på olika våningar."
+                    "reference": "Korsande inomhusobjekt bör vara på olika våningar."
                 },
                 "indoor-indoor_connectable": {
-                    "tip": "Korsande inomhusobjekt bör vara sammankopplade eller vara på olika våningar."
+                    "reference": "Korsande inomhusobjekt bör vara sammankopplade eller vara på olika våningar."
                 }
-            },
-            "deprecated_tag": {
-                "title": "Föråldrade taggar",
-                "single": {
-                    "message": "{feature} har den föråldrade taggen \"{tag}\""
-                },
-                "combination": {
-                    "message": "{feature} har en föråldrad kombination av taggar: {tags}"
-                },
-                "tip": "Vissa taggar har med tiden blivit föråldrade, och bör bytas ut."
             },
             "disconnected_way": {
                 "title": "Ej anslutna vägar",
+                "tip": "Hitta vägar, stigar och färjelinjer som ej går att skapa rutt till",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} ruttobjekt är enbart kopplade till varandra."
+                    },
+                    "reference": "Alla vägar, stigar och färjelinjer bör vara sammankopplade för att skapa ett sammanhållet vägnät."
+                },
                 "highway": {
-                    "message": "{highway} är ej ansluten med andra vägar eller stigar",
-                    "tip": "Vägar bör vara anslutna till andra vägar eller entréer i byggnader."
+                    "message": "{highway} är ej ansluten med andra vägar eller stigar"
                 }
             },
-            "generic_name": {
-                "title": "Generella namn",
-                "message": "{feature} har det generella namnet \"{name}\"",
-                "tip": "Namn bör vara de faktiska namnen som används i verkligheten för objekten."
+            "fixme_tag": {
+                "title": "\"Fix Me\"-begäran",
+                "message": "{feature} har en \"Fix Me\"-begäran",
+                "tip": "Hitta objekt med \"fixme\"-taggar",
+                "reference": "En \"fixme\"-tagg indikerar att en kartläggare har begärt hjälp med ett objekt. "
             },
-            "many_deletions": {
-                "title": "Många raderingar",
-                "points-lines-areas": {
-                    "message": "Raderar {n} objekt: {p} punkter, {l} linjer och {a} områden"
+            "generic_name": {
+                "title": "Misstänkta namn",
+                "message": "{feature} har det misstänkta namnet \"{name}\"",
+                "tip": "Hitta objekt med generella eller misstänkta namn",
+                "reference": "Namn bör vara de faktiska namnen som används i verkligheten för objekten."
+            },
+            "incompatible_source": {
+                "title": "Misstänkta källor",
+                "tip": "Hitta objekt med misstänkta source-taggar",
+                "google": {
+                    "feature": {
+                        "message": "{feature} listar Google som datakälla"
+                    },
+                    "reference": "Google-produkter är proprietära och får inte användas som referenser."
+                }
+            },
+            "invalid_format": {
+                "title": "Felaktig formatering",
+                "tip": "Hitta taggar med oväntat format",
+                "email": {
+                    "message": "{feature} har en felaktig e-postadress.",
+                    "message_multi": "{feature} har flera felaktiga e-postadresser.",
+                    "reference": "E-postadresser måste vara på formen \"mottagare@exempel.se\"."
                 },
-                "points-lines-areas-relations": {
-                    "message": "Raderar {n} objekt: {p} punkter, {l} linjer, {a} områden och {r} relationer"
-                },
-                "tip": "Endast överflödiga eller icke existerande objekt bör raderas."
+                "website": {
+                    "message": "{feature} har en felaktig hemsideadress.",
+                    "message_multi": "{feature} har flera felaktiga hemsideadresser.",
+                    "reference": "Hemsideadresser bör inledas med \"http\" eller \"https\"."
+                }
             },
             "missing_role": {
                 "title": "Saknar roller",
                 "message": "{member} har ingen roll i {relation}",
+                "tip": "Hitta relationer med saknade eller felaktiga medlemsroller",
                 "multipolygon": {
-                    "tip": "Multipolygon-medlemmar måste ha rollen \"inner\" eller \"outer\"."
+                    "reference": "Multipolygon-medlemmar måste ha rollen \"inner\" eller \"outer\"."
                 }
             },
             "missing_tag": {
                 "title": "Saknar taggar",
+                "tip": "Hitta objekt som saknar beskrivande taggar",
+                "reference": "Objekt måste ha taggar som definierar vad de är.",
                 "any": {
                     "message": "{feature} har inga taggar"
                 },
                 "descriptive": {
                     "message": "{feature} har inga beskrivande taggar"
                 },
-                "specific": {
-                    "message": "{feature} har ingen tagg av typen \"{tag}\""
-                },
-                "tip": "Objekt måste ha taggar som definierar vad de är"
+                "relation_type": {
+                    "message": "{feature} är en relation utan en typ"
+                }
             },
             "old_multipolygon": {
-                "title": "Felaktig placering av multipolygon-taggar",
                 "message": "{multipolygon} har felstavade taggar",
-                "tip": "Multipolygoner bör vara taggade i sina relationer, inte i de omslutande vägarna."
+                "reference": "Multipolygoner bör vara taggade i sina relationer, inte i de omslutande vägarna."
+            },
+            "outdated_tags": {
+                "title": "Föråldrade taggar",
+                "message": "{feature} har föråldrade taggar.",
+                "tip": "Hitta objekt med föråldrade taggar som kan uppdateras",
+                "reference": "Vissa taggar har ändrats över tid och bör uppdateras.",
+                "incomplete": {
+                    "message": "{feature} har ofullständiga taggar",
+                    "reference": "Vissa objekt bör har ytterligare taggar."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} ser ut som ett varumärke med taggar som inte följer standard.",
+                    "reference": "Alla objekt för samma varumärke bör taggas på samma sätt."
+                }
+            },
+            "private_data": {
+                "title": "Privat information",
+                "tip": "Hitta objekt som kan innehålla privat information",
+                "reference": "Känslig data så som privata telefonnummer bör ej taggas.",
+                "contact": {
+                    "message": "{feature} har möjligtvis taggats med privat kontaktinformation"
+                }
             },
             "tag_suggests_area": {
                 "title": "Linjer taggade som områden",
-                "message": "{feature} bör vara ett stängt område baserat på taggen \"{tag}\"",
-                "tip": "Områden måste ha sammankopplade ändpunkter."
+                "message": "{feature} bör vara ett slutet område baserat på taggen \"{tag}\"",
+                "tip": "Hitta objekt som är taggade som linjer men som borde vara taggade som områden",
+                "reference": "Områden måste ha sammankopplade ändpunkter."
+            },
+            "unknown_road": {
+                "message": "{feature} har ingen klassificering",
+                "reference": "Vägar utan en specifik typ kanske inte visas på kartor eller i vägbeskrivningar."
+            },
+            "impossible_oneway": {
+                "title": "Omöjliga enkelriktningar",
+                "tip": "Hitta rutt-problem rörande enkelriktningar",
+                "waterway": {
+                    "connected": {
+                        "start": {
+                            "message": "{feature} flödar iväg från en ansluten vattenväg"
+                        },
+                        "end": {
+                            "message": "{feature} har en motsatt flödesriktning mot en ansluten vattenväg"
+                        },
+                        "reference": "Sekvenser av vattenvägar måste alla flöda i samma riktning."
+                    }
+                },
+                "highway": {
+                    "start": {
+                        "message": "{feature} går ej att nå",
+                        "reference": "Enkelriktade vägar måste gå att nå från andra vägar."
+                    },
+                    "end": {
+                        "message": "{feature} har ingen utfart",
+                        "reference": "Enkelriktade vägar måste leda till andra vägar."
+                    }
+                }
+            },
+            "unsquare_way": {
+                "title": "Ej räta hörn (upp till {val}°)",
+                "message": "{feature} har ej räta hörn",
+                "tip": "Hitta objekt med ej räta hörn som kan ritas bättre",
+                "buildings": {
+                    "reference": "Byggnader med ej räta hörn kan ofta ritas mer exakt."
+                }
             },
             "fix": {
                 "connect_almost_junction": {
@@ -1563,6 +1855,9 @@
                 "connect_endpoints": {
                     "title": "Koppla samman ändarna",
                     "annotation": "Kopplade samman ändarna på en väg."
+                },
+                "connect_feature": {
+                    "title": "Koppla samman detta objekt"
                 },
                 "connect_features": {
                     "title": "Koppla samman objekten"
@@ -1576,15 +1871,21 @@
                 "delete_feature": {
                     "title": "Radera detta objekt"
                 },
+                "ignore_issue": {
+                    "title": "Ignorera detta problem"
+                },
+                "merge_close_vertices": {
+                    "annotation": "Sammanfogade intilliggande punkter på en väg."
+                },
+                "merge_points": {
+                    "title": "Sammanfoga dessa punkter"
+                },
+                "move_points_apart": {
+                    "title": "Flytta isär dessa punkter"
+                },
                 "move_tags": {
                     "title": "Flytta taggen",
                     "annotation": "Flyttade taggar."
-                },
-                "remove_deprecated_tag": {
-                    "annotation": "Tog bort en gammal tagg."
-                },
-                "remove_deprecated_tag_combo": {
-                    "annotation": "Tog bort en gammal tagg-kombination."
                 },
                 "remove_from_relation": {
                     "title": "Ta bort från relation"
@@ -1592,6 +1893,12 @@
                 "remove_generic_name": {
                     "title": "Radera namnet",
                     "annotation": "Tog bort ett generellt namn."
+                },
+                "remove_private_info": {
+                    "annotation": "Ta bort privat information."
+                },
+                "remove_proprietary_data": {
+                    "title": "Ta bort all proprietär data"
                 },
                 "remove_tag": {
                     "title": "Ta bort taggen",
@@ -1603,8 +1910,14 @@
                 "reposition_features": {
                     "title": "Flytta objekten"
                 },
+                "reverse_feature": {
+                    "title": "Radera detta objekt"
+                },
                 "select_preset": {
                     "title": "Välj en objekttyp"
+                },
+                "select_road_type": {
+                    "title": "Välj en vägtyp"
                 },
                 "set_as_inner": {
                     "title": "Sätt som \"inner\""
@@ -1612,17 +1925,26 @@
                 "set_as_outer": {
                     "title": "Sätt som \"outer\""
                 },
+                "square_feature": {
+                    "title": "Räta upp detta objekt"
+                },
                 "tag_as_disconnected": {
                     "title": "Tagga som okopplad",
                     "annotation": "Taggade ett närliggande objekt som okopplat. "
                 },
-                "upgrade_tag": {
-                    "title": "Uppgraderade taggen",
-                    "annotation": "Uppgraderade en gammal tagg."
+                "tag_as_unsquare": {
+                    "title": "Tagga som ej fysiskt räta hörn",
+                    "annotation": "Tagga att en väg att ej ha räta hörn."
                 },
-                "upgrade_tag_combo": {
-                    "title": "Uppgraderade taggarna",
-                    "annotation": "Uppgraderade en gammal tagg-kombination."
+                "tag_this_as_higher": {
+                    "title": "Tagga detta som högre"
+                },
+                "tag_this_as_lower": {
+                    "title": "Tagga detta som lägre"
+                },
+                "upgrade_tags": {
+                    "title": "Uppdatera taggarna",
+                    "annotation": "Uppgraderade gamla taggar."
                 },
                 "use_bridge_or_tunnel": {
                     "title": "Använd en bro eller tunnel"
@@ -1938,6 +2260,7 @@
                     "fullscreen": "Gå till fullskärmsläge",
                     "sidebar": "Visa/dölj sidopanel",
                     "wireframe": "Växla trådramsläge",
+                    "osm_data": "Visa/dölj OpenStreetMap-data",
                     "minimap": "Visa/dölj minikarta"
                 },
                 "selecting": {
@@ -1965,10 +2288,12 @@
                 "title": "Redigera",
                 "drawing": {
                     "title": "Rita",
+                    "focus_add_feature": "Gå till sökrutan för objekt",
                     "add_point": "'Lägg till punkt'-läge",
                     "add_line": "'Lägg till linje'-läge",
                     "add_area": "'Lägg till område'-läge",
                     "add_note": "'Lägg till anteckning'-läge",
+                    "add_favorite": "Lägg till ett favoritobjekt",
                     "place_point": "Placera en punkt eller anteckning",
                     "disable_snap": "Hindra att punkter kopplas samman",
                     "stop_line": "Slutför linje eller område"
@@ -1978,12 +2303,13 @@
                     "continue_line": "Fortsätt en linje från markerad nod",
                     "merge": "Kombinera (sammanfoga) markerade objekt",
                     "disconnect": "Koppla isär objekt vid markerad nod",
-                    "detach_node": "Ta loss vald nod från förälderlinjer/-områden",
+                    "extract": "Extrahera en punkt från ett objekt",
                     "split": "Dela en linje i två vid markerad nod",
                     "reverse": "Byt riktning på en linje",
                     "move": "Flytta markerade objekt",
                     "rotate": "Rotera markerade objekt",
-                    "orthogonalize": "Räta ut linje / Räta upp hörnen på område",
+                    "orthogonalize": "Räta upp hörn på en linje eller område",
+                    "straighten": "Räta ut en linje eller punkter",
                     "circularize": "Gör en sluten linje eller ett område cirkulär. ",
                     "reflect_long": "Spegla objekt längs dess långa axel",
                     "reflect_short": "Spegla objekt längs deras korta axel",
@@ -2045,26 +2371,17 @@
                 "category-building": {
                     "name": "Byggnad"
                 },
-                "category-golf-area": {
-                    "name": "Golfobjekt"
-                },
-                "category-golf-line": {
+                "category-golf": {
                     "name": "Golfobjekt"
                 },
                 "category-landuse": {
                     "name": "Landanvändning"
                 },
-                "category-natural-area": {
-                    "name": "Natur"
-                },
-                "category-natural-line": {
-                    "name": "Natur"
-                },
-                "category-natural-point": {
+                "category-natural": {
                     "name": "Natur"
                 },
                 "category-path": {
-                    "name": "Stig"
+                    "name": "Stigar"
                 },
                 "category-rail": {
                     "name": "Spår"
@@ -2072,8 +2389,14 @@
                 "category-restriction": {
                     "name": "Restriktion"
                 },
-                "category-road": {
-                    "name": "Väg"
+                "category-road_major": {
+                    "name": "Större vägar"
+                },
+                "category-road_minor": {
+                    "name": "Mindre vägar"
+                },
+                "category-road_service": {
+                    "name": "Servicevägar"
                 },
                 "category-route": {
                     "name": "Rutt"
@@ -2081,11 +2404,11 @@
                 "category-utility": {
                     "name": "Samhällsinfrastruktur"
                 },
-                "category-water-area": {
-                    "name": "Vatten"
+                "category-water": {
+                    "name": "Vattenområden"
                 },
-                "category-water-line": {
-                    "name": "Vatten"
+                "category-waterway": {
+                    "name": "Vattendrag"
                 }
             },
             "fields": {
@@ -2219,6 +2542,9 @@
                 "agrarian": {
                     "label": "Produkter"
                 },
+                "air_conditioning": {
+                    "label": "Luftkonditionering"
+                },
                 "amenity": {
                     "label": "Typ"
                 },
@@ -2324,6 +2650,10 @@
                 "building": {
                     "label": "Byggnad"
                 },
+                "building/levels_building": {
+                    "label": "Byggnadsvåning",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Material"
                 },
@@ -2385,6 +2715,9 @@
                     "label": "Kommunikationstyper"
                 },
                 "construction": {
+                    "label": "Typ"
+                },
+                "consulate": {
                     "label": "Typ"
                 },
                 "contact/webcam": {
@@ -2529,6 +2862,12 @@
                 "diet_multi": {
                     "label": "Typ av diet"
                 },
+                "diplomatic": {
+                    "label": "Typ"
+                },
+                "diplomatic/services": {
+                    "label": "Tjänster"
+                },
                 "direction": {
                     "label": "Riktning (grader medurs)",
                     "placeholder": "45, 90, 180, 270"
@@ -2562,7 +2901,7 @@
                     }
                 },
                 "direction_vertex": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -2588,6 +2927,12 @@
                         "no": "Ej tillåten",
                         "yes": "Tillåten"
                     }
+                },
+                "door": {
+                    "label": "Dörr"
+                },
+                "door_type": {
+                    "label": "Typ"
                 },
                 "drive_through": {
                     "label": "Genomkörning (Drive-through)"
@@ -2617,8 +2962,14 @@
                     "label": "Typ",
                     "placeholder": "Standard"
                 },
+                "embassy": {
+                    "label": "Typ"
+                },
                 "emergency": {
                     "label": "Akut"
+                },
+                "emergency_combo": {
+                    "label": "Typ"
                 },
                 "enforcement": {
                     "label": "Typ"
@@ -2660,6 +3011,9 @@
                 "fireplace": {
                     "label": "Eldplats"
                 },
+                "fishing": {
+                    "label": "Fiske"
+                },
                 "fitness_station": {
                     "label": "Typ av utrustning"
                 },
@@ -2668,6 +3022,12 @@
                 },
                 "flag/type": {
                     "label": "Flaggtyp"
+                },
+                "floating": {
+                    "label": "Flytande"
+                },
+                "flood_prone": {
+                    "label": "Risk för översvämning"
                 },
                 "ford": {
                     "label": "Typ",
@@ -2719,6 +3079,9 @@
                 "grape_variety": {
                     "label": "druvsorter"
                 },
+                "guest_house": {
+                    "label": "Typ"
+                },
                 "handicap": {
                     "label": "Handikapp",
                     "placeholder": "1-18"
@@ -2738,6 +3101,12 @@
                 },
                 "height": {
                     "label": "Höjd (meter)"
+                },
+                "height_building": {
+                    "label": "Byggnadshöjd (meter)"
+                },
+                "highspeed": {
+                    "label": "Höghastighet"
                 },
                 "highway": {
                     "label": "Typ"
@@ -2813,6 +3182,9 @@
                 "indoor": {
                     "label": "Inomhus"
                 },
+                "indoor_type": {
+                    "label": "Typ"
+                },
                 "industrial": {
                     "label": "Typ"
                 },
@@ -2842,7 +3214,10 @@
                     "label": "Avgift för internetåtkomst"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Nätverksnamn)"
+                    "label": "Wifi-nätverksnamn"
+                },
+                "interval": {
+                    "label": "Intervall"
                 },
                 "junction/ref_oneway": {
                     "label": "Avfartsnummer"
@@ -2857,6 +3232,9 @@
                 },
                 "kerb": {
                     "label": "Trottoarkant"
+                },
+                "kerb/height": {
+                    "label": "Höjd"
                 },
                 "label": {
                     "label": "Märkning"
@@ -2927,6 +3305,9 @@
                     "label": "Våningar",
                     "placeholder": "2, 4, 6..."
                 },
+                "liaison": {
+                    "label": "Typ"
+                },
                 "lit": {
                     "label": "Belysning"
                 },
@@ -2941,11 +3322,17 @@
                         "roof": "På taket"
                     }
                 },
+                "lock": {
+                    "label": "Sluss"
+                },
                 "man_made": {
                     "label": "Typ"
                 },
                 "manhole": {
                     "label": "Typ"
+                },
+                "manufacturer": {
+                    "label": "Tillverkare"
                 },
                 "map_size": {
                     "label": "Omfattning"
@@ -2974,8 +3361,14 @@
                 "maxweight": {
                     "label": "Maxvikt"
                 },
+                "maxweight_bridge": {
+                    "label": "Maxvikt"
+                },
                 "memorial": {
                     "label": "Typ"
+                },
+                "microbrewery": {
+                    "label": "Microbryggeri"
                 },
                 "minspeed": {
                     "label": "Lägsta tillåtna hastighet",
@@ -3096,7 +3489,8 @@
                     "label": "Förväntat öppningsdatum"
                 },
                 "opening_hours": {
-                    "label": "Öppettider "
+                    "label": "Öppettider ",
+                    "placeholder": "Okänt"
                 },
                 "operator": {
                     "label": "Operatör"
@@ -3124,6 +3518,9 @@
                     }
                 },
                 "payment_multi": {
+                    "label": "Betalningssätt"
+                },
+                "payment_multi_fee": {
                     "label": "Betalningssätt"
                 },
                 "phases": {
@@ -3245,6 +3642,9 @@
                     "label": "Effektuttaget",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Typ"
+                },
                 "playground/baby": {
                     "label": "Babygunga"
                 },
@@ -3277,7 +3677,7 @@
                     "placeholder": "Distans med en decimal (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -3320,6 +3720,9 @@
                 "ref_road_number": {
                     "label": "Vägnummer"
                 },
+                "ref_room_number": {
+                    "label": "Rumsnummer"
+                },
                 "ref_route": {
                     "label": "Ruttnummer"
                 },
@@ -3340,6 +3743,21 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "reservation": {
+                    "label": "Bokning",
+                    "options": {
+                        "no": "Ej möjligt",
+                        "recommended": "Rekommenderas",
+                        "required": "Krävs",
+                        "yes": "Möjligt"
+                    }
+                },
+                "resort": {
+                    "label": "Typ"
+                },
+                "resource": {
+                    "label": "Resurser"
+                },
                 "restriction": {
                     "label": "Typ"
                 },
@@ -3348,6 +3766,9 @@
                 },
                 "roof/colour": {
                     "label": "Takfärg"
+                },
+                "room": {
+                    "label": "Typ"
                 },
                 "rooms": {
                     "label": "Rum"
@@ -3375,6 +3796,10 @@
                 },
                 "sanitary_dump_station": {
                     "label": "Latrintömning "
+                },
+                "screen": {
+                    "label": "Salonger",
+                    "placeholder": "1, 4, 8…"
                 },
                 "scuba_diving": {
                     "label": "Tjänster"
@@ -3477,6 +3902,9 @@
                         "yes": "Ja"
                     },
                     "placeholder": "Ja, nej, enbart"
+                },
+                "self_service": {
+                    "label": "Självbetjäning"
                 },
                 "service": {
                     "label": "Typ"
@@ -3588,6 +4016,9 @@
                         "minor": "Mindre väg"
                     }
                 },
+                "street_cabinet": {
+                    "label": "Typ"
+                },
                 "structure": {
                     "label": "Struktur",
                     "options": {
@@ -3665,6 +4096,9 @@
                     },
                     "placeholder": "Ja, nej, enbart hämtmat"
                 },
+                "target": {
+                    "label": "Riktas mot"
+                },
                 "tidal": {
                     "label": "Tidvatten"
                 },
@@ -3677,8 +4111,14 @@
                         "bucket": "Behållare",
                         "chemical": "Kemisk",
                         "flush": "Spola",
-                        "pitlatrine": "Grop/Latrin"
+                        "pitlatrine": "Grop-latrin"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Handtvätt"
+                },
+                "toilets/position": {
+                    "label": "Ställningar"
                 },
                 "toll": {
                     "label": "Tull"
@@ -3717,7 +4157,7 @@
                     "label": "Vägmärke"
                 },
                 "traffic_sign/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -3728,7 +4168,7 @@
                     "label": "Typ"
                 },
                 "traffic_signals/direction": {
-                    "label": "Riktning",
+                    "label": "Påverkad riktning",
                     "options": {
                         "backward": "Bakåt",
                         "both": "Båda / Alla",
@@ -3762,6 +4202,12 @@
                 },
                 "trees": {
                     "label": "Träd"
+                },
+                "trench": {
+                    "label": "Typ"
+                },
+                "trolley_wire": {
+                    "label": "Frihängande strömkabel för vagnar"
                 },
                 "tunnel": {
                     "label": "Typ",
@@ -3913,6 +4359,10 @@
                     "name": "Transportlinbana",
                     "terms": "Transportlift, transportlinbana, varulift, gruvlift, linbana, transport, varor, gods, transportbana, lift, industri, industrilift"
                 },
+                "aerialway/j-bar": {
+                    "name": "J-krokslift",
+                    "terms": "Ankarlift, J-bygellift, J-lift, släplift, skidlift, lift, linbana"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Rullband",
                     "terms": "Rullband, släplift, skidliften, lift, magisk matta"
@@ -4009,6 +4459,10 @@
                 "amenity/bar": {
                     "name": "Bar",
                     "terms": "Bar, krog, servering, matställe, pub, cocktailsalong, saloon, öl, sprit"
+                },
+                "amenity/bar/lgbtq": {
+                    "name": "HBTQ-bar",
+                    "terms": "gay-bar, lesbisk bar, HBTQ-bar, lgbtq bar,lgbt bar,lgb bar"
                 },
                 "amenity/bbq": {
                     "name": "Grillplats/Grill",
@@ -4109,6 +4563,10 @@
                     "name": "Samlingslokal",
                     "terms": "Samlingslokal, folkets hus, folkets park, festlokal, bygdegård, Hembygdsgård, Sockenstuga, bystuga, Byalag, byförening, festlokal, evenemang"
                 },
+                "amenity/community_centre/lgbtq": {
+                    "name": "HBTQ-samlingslokal",
+                    "terms": "HBTQ-Samlingslokal, HBTQ-festlokal, HBTQ--evenemang, HBTQ"
+                },
                 "amenity/compressed_air": {
                     "name": "Tryckluft",
                     "terms": "Tryckluft, pumpstation, komprimerad luft"
@@ -4149,8 +4607,7 @@
                     "terms": "Trafikskola, körskola, bilskola, körkort, uppkörning, lastbilskort, övningskörning"
                 },
                 "amenity/embassy": {
-                    "name": "Ambassad",
-                    "terms": "ambassad, diplomatisk beskickning, beskickning, legation, utlandsrepresentation"
+                    "name": "Ambassad"
                 },
                 "amenity/fast_food": {
                     "name": "Snabbmat",
@@ -4267,6 +4724,10 @@
                     "name": "Nattklubb",
                     "terms": "Nattklubb, disko*, diskotek, klubb, nöjeslokal, dansställe, bar, disco, dans, dansklubb"
                 },
+                "amenity/nightclub/lgbtq": {
+                    "name": "HBTQ-nattklubb",
+                    "terms": "HBTQ-Nattklubb, gay-nattklubb, gay nattklub, lesbisk nattklubb, gay-disko, gay disko, lesbiskt disko, HBTQ-klubb, gay-klubb, lesbisk klubb"
+                },
                 "amenity/nursing_home": {
                     "name": "Vårdhem"
                 },
@@ -4297,6 +4758,10 @@
                 "amenity/pharmacy": {
                     "name": "Läkemedel",
                     "terms": "Läkemedel*, drog*, apotek, läkemedelsaffär, farmaceut, droghandel, medicin, recept"
+                },
+                "amenity/photo_booth": {
+                    "name": "Fotoautomat",
+                    "terms": "Fotoautomat, fotobås, foto, bild, kamera, kameraautomat"
                 },
                 "amenity/place_of_worship": {
                     "name": "Plats för tillbedjan",
@@ -4357,6 +4822,14 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "Pub, bar, ölservering, ölstuga, krog, nattklubb, öl, sprit, alkohol, drinkar"
+                },
+                "amenity/pub/lgbtq": {
+                    "name": "HBTQ-pub",
+                    "terms": "gay-pub, lesbisk pub, HBTQ-pub, lgbtq pub,lgbt pub,lgb pub"
+                },
+                "amenity/pub/microbrewery": {
+                    "name": "Brewpub",
+                    "terms": "Brewpub, alkohol, drink, öl, sprit, hantverksbryggeri, mikrobryggeri, bryggeri, ölframställning, öltillverkning, bar, pub"
                 },
                 "amenity/public_bath": {
                     "name": "Publikt bad",
@@ -4586,6 +5059,10 @@
                     "name": "Elongated coin-maskin (myntpressmaskin)",
                     "terms": "elongated coin, souvenirmynt, minnesmynt, souvenir, minne, mynt,  elongated coin-maskin, myntpressmaskin, minnesmyntmaskin, ECM, Penny Press, elongated penny, coin maskin"
                 },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Bajspåsar",
+                    "terms": "Bajspåsar, hundbajspåsar, hundpåsar, hundbajs, hundskit, skitpåse, avföringspåse, bajs, hund, djur"
+                },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Varumaskin för mensskydd",
                     "terms": "Varumaskin för mensskydd, mensskydd, kondom, tampong, bindor, binda, kvinna, kvinnor, mens, menstruation"
@@ -4601,9 +5078,6 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Glassautomat",
                     "terms": "Glassautomat, glass, isglass, Varuautomat, varumaskin"
-                },
-                "amenity/vending_machine/news_papers": {
-                    "name": "Tidningsautomat"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Tidningsautomat",
@@ -4675,10 +5149,6 @@
                 "attraction/amusement_ride": {
                     "name": "Åkattraktion",
                     "terms": "Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
-                },
-                "attraction/animal": {
-                    "name": "Djur",
-                    "terms": "Djur, zoo, temapark, djurpark, lejon, tiger, björn, apa,  zoologisk trädgård, akvarium, fiskar"
                 },
                 "attraction/big_wheel": {
                     "name": "Pariserhjul",
@@ -4798,6 +5268,10 @@
                 "barrier/kerb/lowered": {
                     "name": "Nedsänkt trottoarkant",
                     "terms": "trottoarkant, kant, kantsten, nedsänkt kant, nedsänkt trottoar, kantstensskärning, kantstensramp, trottoarsramp, sluttande,kantsten, rullstolsramp, barnvagnsramp"
+                },
+                "barrier/kerb/raised": {
+                    "name": "Upphöjd trottoarkant",
+                    "terms": "upphöjd trottoarkant, trottoarkant, kant, kantsten, upphöjd kant, upphöjd trottoar, busshållplats"
                 },
                 "barrier/kissing_gate": {
                     "name": "Grind vid betesmark",
@@ -5035,12 +5509,16 @@
                     "name": "Lagerhus",
                     "terms": "Lagerhus, lager, upplag, magasin, depå, packhus, lada"
                 },
+                "building_part": {
+                    "name": "Byggnadsdel",
+                    "terms": "byggnadsdel, tak, enkla 3D-byggnader, 3D"
+                },
+                "building_point": {
+                    "name": "Byggnad"
+                },
                 "camp_site/camp_pitch": {
                     "name": "Tältplats/husvagnsplats",
                     "terms": "Tältplats, husvagnsplats, camping, Campingplats, camping, husvagn, tält"
-                },
-                "circular": {
-                    "name": "Trafikcirkel"
                 },
                 "club": {
                     "name": "Klubb",
@@ -5323,10 +5801,6 @@
                     "name": "Väg för golfbil",
                     "terms": "golf, golfbana, Väg för golfbil, golfbil, gångväg, golfgångväg, stig, gång"
                 },
-                "golf/cartpath_service": {
-                    "name": "Väg för golfbil / Serviceväg",
-                    "terms": "golf, golfbana, Väg för golfbil, golfbil, gångväg, golfgångväg, stig, gång, underhållsväg, serviceväg"
-                },
                 "golf/driving_range": {
                     "name": "Driving Range",
                     "terms": "golf, golfövning, driver, övning, Driving Range, drivingrange, driverang"
@@ -5439,7 +5913,7 @@
                     "terms": "Spårbuss, buss, guidad buss"
                 },
                 "highway/bus_stop": {
-                    "name": "Busshållplats / Bussplattform"
+                    "name": "Busshållplats"
                 },
                 "highway/construction": {
                     "name": "Väg avstängd",
@@ -5721,6 +6195,32 @@
                     "name": "Skeppsvrak",
                     "terms": "Skeppsvrak, vrak, skrov, mast, skepp, båt"
                 },
+                "indoor": {
+                    "name": "Inomhusobjekt"
+                },
+                "indoor/area": {
+                    "name": "Yta inomhus",
+                    "terms": "Inomhusområde, inomhus, inomhusyta, område, yta, yta inomhus"
+                },
+                "indoor/corridor": {
+                    "name": "Korridor inomhus",
+                    "terms": "Korridor inomhus, inomhuskorridor, korridor, inomhus, gång,förbindelsegång, gångpassage"
+                },
+                "indoor/corridor_line": {
+                    "name": "Korridor inomhus"
+                },
+                "indoor/door": {
+                    "name": "Dörr inomhus",
+                    "terms": "Dörr inomhus, inomhusdörr, dörr, dörram, dörröppning, ingång, utgång"
+                },
+                "indoor/room": {
+                    "name": "Rum",
+                    "terms": "Rum, inomhusrum, cell, kammare, foajé, lobby"
+                },
+                "indoor/wall": {
+                    "name": "Vägg inomhus",
+                    "terms": "Vägg inomhus, vägg, barriär inomhus, inomhusbarriär, rumsindelning, rumsuppdelning"
+                },
                 "internet_access/wlan": {
                     "name": "Surfzon",
                     "terms": "surfzon, wifi, wi-fi, hotspot, wifi hotspot, wi-fi hotspot, uppkopplingszon, trådlöst lokalt nät, trådlöst nät, öppet trådlöst nät, fritt trådlöst nät, wlan"
@@ -5728,6 +6228,15 @@
                 "junction": {
                     "name": "Korsning",
                     "terms": "korsning, vägkorsningar, övergångsställe, järnvägskorsning, rondell, cirkulationsplats, trafiksignal, stoppskylt, stoppsignal, vägkors, trafikplats, trafikkorsning, gatukorsning"
+                },
+                "junction/circular": {
+                    "name": "Trafikcirkel"
+                },
+                "junction/jughandle": {
+                    "name": "Spansk sväng"
+                },
+                "junction/roundabout": {
+                    "name": "Cirkulationsplats"
                 },
                 "landuse": {
                     "name": "Markanvändning"
@@ -5830,14 +6339,6 @@
                     "name": "Kasern",
                     "terms": "kesern, sovsal, logement, militär, soldat, förläggningsbyggnad, barack"
                 },
-                "landuse/military/bunker": {
-                    "name": "Militär bunker",
-                    "terms": "Militär bunker, bunker, skyddsrum, stridsvärn, betongförsvarsnäste,  befästning, fort, kasematt, barrikad"
-                },
-                "landuse/military/checkpoint": {
-                    "name": "Kontrollpunkt",
-                    "terms": "Kontrollpunkt, kontrollstation, militär kontroll"
-                },
                 "landuse/military/danger_area": {
                     "name": "Farligt område",
                     "terms": "Farligt område, skjutbana, säkerhetszon, militärt skyddsområde, militärt övningsområde"
@@ -5846,17 +6347,9 @@
                     "name": "Marinbas",
                     "terms": "Marinbas, marint förband, marinen, flottan, amfibiekåren, Kustartilleriet, flottilj, flottbas, örlogsbas"
                 },
-                "landuse/military/nuclear_explosion_site": {
-                    "name": "Område för kärnvapenprov",
-                    "terms": "Område för kärnvapenprov, kärnvapenprov, kärnvapen, vapentest"
-                },
                 "landuse/military/obstacle_course": {
                     "name": "Hinderbana",
                     "terms": "Hinderbana, hoppbana, hinderlöpning, hinderlopp"
-                },
-                "landuse/military/office": {
-                    "name": "Militärkontor",
-                    "terms": "militärkontor, flygvapen, armé, bas, värva, flotta, marin, rekrytera, rekrytering, soldat, krig, militär, försvar, befälskontor"
                 },
                 "landuse/military/range": {
                     "name": "Militärt övningsområde",
@@ -6783,6 +7276,9 @@
                     "name": "Mindre samhälle",
                     "terms": "tätort, ort"
                 },
+                "playground": {
+                    "name": "Lekplatsutrustning"
+                },
                 "playground/balance_beam": {
                     "name": "Balansbom (lekplats)",
                     "terms": "balansbom, balans, bom, lekplats, lekområde, lekpark, lek"
@@ -6901,45 +7397,66 @@
                     "name": "Transformator",
                     "terms": "Transformator, nätstation, elomvandling"
                 },
-                "public_transport/platform": {
-                    "name": "Stopp / Plattform för kollektivtrafik",
-                    "terms": "Plattform, väntplats, påstigningsplats, avsats, perrong"
+                "public_transport/platform/aerialway_point": {
+                    "name": "Hållplats / Plattform för linbana"
                 },
-                "public_transport/platform_aerialway": {
-                    "name": "Hållplats / Plattform för linbana",
-                    "terms": "linbana, aerialway, Linbanehållplats, linbaneplattform, linbaneterminal, linbanestopp, hållplats, plattform, terminal, stopp, kollektivtrafik, linjetrafik, transit, transport"
-                },
-                "public_transport/platform_bus": {
-                    "name": "Busshållplats / Bussplattform",
+                "public_transport/platform/bus": {
+                    "name": "Bussplattform",
                     "terms": "buss, plattform, kollektivtrafik, transport, transit, hållplats, busshållplats, bussplattform, linjetrafik"
                 },
-                "public_transport/platform_ferry": {
-                    "name": "Stop / plattform för färja",
-                    "terms": "färjeplattform, plattform, stopp, båtstopp, färjestopp, båthållplats, Färjeterminal, terminal, färja, båtterminal, båthållplats, Färjehållplats, Färjestation, båt, brygga, pir, kollektivtrafik, linjetrafik, station, transit, transport"
+                "public_transport/platform/bus_point": {
+                    "name": "Busshållplats",
+                    "terms": "Busstopp, busshållplats, buss, hållplats, anhalt, station, busstation,"
                 },
-                "public_transport/platform_light_rail": {
+                "public_transport/platform/ferry_point": {
+                    "name": "Stop / plattform för färja"
+                },
+                "public_transport/platform/light_rail": {
                     "name": "Hållplats för snabbspårväg / stadsbana",
                     "terms": "Spårvägshållplats, hållplats, spårvagnsplattform, plattform, spårvagn, spårväg, spårvagnsterminal, terminal, järnväg, kollektivtrafik, kollektivtrafik, vagn, transit, transport, snabbspårväg, stadsbana, light rail, spår, järnväg"
                 },
-                "public_transport/platform_monorail": {
-                    "name": "Stopp / plattform för monorail",
+                "public_transport/platform/light_rail_point": {
+                    "name": "Hållplats för snabbspårväg / stadsbana"
+                },
+                "public_transport/platform/monorail": {
+                    "name": "Plattform för monorail",
                     "terms": "monorailstopp, monorailplattform, stopp, plattform, monorail, plattform, kollektivtrafik, linjetrafik, enskensbana, balkbana, räls, spår, transport"
                 },
-                "public_transport/platform_subway": {
-                    "name": "Tunnelbanestopp / -plattform",
+                "public_transport/platform/monorail_point": {
+                    "name": "Stopp / plattform för monorail"
+                },
+                "public_transport/platform/subway": {
+                    "name": "Tunnelbaneplattform",
                     "terms": "Tunnelbanestopp, Tunnelbaneplattform, tunnelbana, metro, plattform, kollektivtrafik, järnväg, spår, transport, tunnelbana, underjordisk"
                 },
-                "public_transport/platform_train": {
-                    "name": "Järnvägsstopp / -perrong",
+                "public_transport/platform/subway_point": {
+                    "name": "Tunnelbanestopp / -plattform"
+                },
+                "public_transport/platform/train": {
+                    "name": "Järnvägsperrong",
                     "terms": "Tågstopp, Perrong, järnvägsperrong, plattform, järnvägsplattform, järnväg, tåg, stopp, kollektivtrafik, linjetrafik, spår, transit, transport"
                 },
-                "public_transport/platform_tram": {
-                    "name": "Spårvagnshållplats / -plattform",
+                "public_transport/platform/train_point": {
+                    "name": "Järnvägsstopp / -perrong"
+                },
+                "public_transport/platform/tram": {
+                    "name": "Spårvagnsplattform",
                     "terms": "Spårvägshållplats, spårvagnshållplats, hållplats, spårvagnsplattform, plattform, spårvagn, spårväg, spårvagnsterminal, terminal, järnväg, kollektivtrafik, kollektivtrafik, vagn, transit, transport"
                 },
-                "public_transport/platform_trolleybus": {
-                    "name": "Busshållplats / plattform för trådbuss",
+                "public_transport/platform/tram_point": {
+                    "name": "Spårvagnshållplats / -plattform"
+                },
+                "public_transport/platform/trolleybus": {
+                    "name": "Bussplattform för trådbuss",
                     "terms": "Busshållplats, bussplattform, plattform, trådbuss, hållplats, buss, kollektivtrafik, spårlös, spårvagn, vagn, transit, transport"
+                },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Busshållplats för trådbuss",
+                    "terms": "Busshållplats, bussplattform, plattform, trådbuss, hållplats, buss, kollektivtrafik, spårlös, spårvagn, vagn, transit, transport"
+                },
+                "public_transport/platform_point": {
+                    "name": "Hållplats / Plattform för kollektivtrafik",
+                    "terms": "Plattform, väntplats, påstigningsplats, avsats, perrong"
                 },
                 "public_transport/station": {
                     "name": "Station för kollektivtrafik",
@@ -7084,11 +7601,15 @@
                     "terms": "Smalspårbana, smalspår"
                 },
                 "railway/platform": {
-                    "name": "Järnvägsstopp / -perrong"
+                    "name": "Järnvägsperrong"
                 },
                 "railway/rail": {
                     "name": "Räls",
                     "terms": "Räls, järnvägsspår, spår, bana"
+                },
+                "railway/rail/highspeed": {
+                    "name": "Höghastighetsbana",
+                    "terms": "Höghastighetsbana, snabbspår, höghastighet, Järnväg, snabbjärnväg, räls, järnvägsspår, spår, bana"
                 },
                 "railway/signal": {
                     "name": "Järnvägssignal",
@@ -7123,9 +7644,6 @@
                 "relation": {
                     "name": "Relation",
                     "terms": "Relation, relaterat, förbindelse, förhållande, samband, anknytning, koppling, kontext"
-                },
-                "roundabout": {
-                    "name": "Cirkulationsplats"
                 },
                 "route/ferry": {
                     "name": "Färjerutt",
@@ -7211,8 +7729,7 @@
                     "terms": "Bokhandel, bokförsäljning, bokförsäljning, antikvariat"
                 },
                 "shop/boutique": {
-                    "name": "Boutique (Dyra kläder och accessoarer)",
-                    "terms": "Boutique, modeaffär, accessoarer, kläder, finkläder, klänningar, smycken"
+                    "name": "Boutique (Dyra kläder och accessoarer)"
                 },
                 "shop/butcher": {
                     "name": "Slaktare",
@@ -7334,6 +7851,10 @@
                     "name": "Sexshop",
                     "terms": "Sex, sexshop, sexaffär, erotik, erotikaffär, erotisk, sexfilmer, porr, porrfilmer, sexleksaker, underkläder, kondomer, pornografi, porrfilmer, sexfilmer, porrtidningar"
                 },
+                "shop/erotic/lgbtq": {
+                    "name": "HBTQ-sexshop",
+                    "terms": "Sex, sexshop, sexaffär, erotik, erotikaffär, erotisk, sexfilmer, porr, porrfilmer, sexleksaker, underkläder, kondomer, pornografi, porrfilmer, sexfilmer, porrtidningar, HBTQ-sexshop, HBTQ, gay, lesbisk"
+                },
                 "shop/fabric": {
                     "name": "Tygaffär",
                     "terms": "Tygaffär, tyger, tyg, sömnad, sy"
@@ -7343,8 +7864,7 @@
                     "terms": "Gårdsbutik, närproducerat, egenproducerat"
                 },
                 "shop/fashion": {
-                    "name": "Modebutik",
-                    "terms": "Modebutik, klädaffär, kläder, modekläder, mode"
+                    "name": "Modebutik"
                 },
                 "shop/fireplace": {
                     "name": "Kaminbutik",
@@ -7993,10 +8513,6 @@
                     "name": "Vattendrag",
                     "terms": "Vattenväg, vattenflöde, vattendrag"
                 },
-                "vertex": {
-                    "name": "Annat",
-                    "terms": "Annat, övrigt"
-                },
                 "waterway": {
                     "name": "Vattenväg"
                 },
@@ -8068,21 +8584,33 @@
         "imagery": {
             "AGIV": {
                 "attribution": {
-                    "text": "Ortofoto Flandern mest aktuella © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "AGIV Flanderns mest aktuella flygfoton"
+                "name": "AIV Flanders mest aktuella flygfoton"
             },
             "AGIV10cm": {
                 "attribution": {
-                    "text": "Ortofoto Flandern © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "AGIV Flandern 2013–2015 flygfoton 10 cm"
+                "name": "AIV Flandern 2013–2015 flygfoton 10 cm"
             },
             "AGIVFlandersGRB": {
                 "attribution": {
-                    "text": "GRB Flandern © AGIV"
+                    "text": "© agentschap Informatie Vlaanderen"
                 },
-                "name": "AGIV Flandern GRB"
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multiriktad skuggningsbild 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
             },
             "Bing": {
                 "description": "Satellit- eller flygfoton.",
@@ -8116,6 +8644,13 @@
                 "description": "Gränser för flygfoto och fotograferingsdatum. Etiketter visas vid zoomnivå 13 och upp.",
                 "name": "DigitalGlobe Standard flygfotoålder"
             },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 cloudless - https://s2maps.eu av EOX IT Services GmbH (Innehåller modifierad data från Copernicus Sentinel 2017 & 2018)"
+                },
+                "description": "Efterbearbetade Sentinel-satellitbilder.",
+                "name": "eox.at 2018 cloudless"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Villkor & återkoppling"
@@ -8143,6 +8678,20 @@
                 },
                 "description": "Satellit- eller flygfoton.",
                 "name": "Mapbox satellit"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Villkor & återkoppling"
+                },
+                "description": "Maxar Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den finns tillgänglig och Landsat för resten. Medelåldern är 2,31 år, med vissa områden uppdaterade 2 gånger per år.",
+                "name": "Maxar Premium-bilder (Beta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Villkor & återkoppling"
+                },
+                "description": "Maxar Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den finns tillgänglig, för resten används Landsat. Medelåldern är 2,31 år, med vissa områden uppdaterade 2 gånger per år.",
+                "name": "Maxar Standard-bilder (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -8203,6 +8752,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Gul = Fritt tillgänglig kartdata (public domain) från US Census. Röd = Data ej hittad på OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Det senaste året av DOQQs från National Agriculture Imagery Program (NAIP) för varje stat i USA.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Väg: Grön ram = oklassificerad. Brun ram = bruksväg. Underlag: grus = ljusbrun fyllning, asfalt = svart, belagd = grå, mark = vit, betong = blå, gräs = grön. Säsongsöppen = vita streck",
@@ -8281,6 +8834,27 @@
                 },
                 "description": "Ortofoto-lager tillhandahållen av basemap.at. \"Efterträdare\" till geoimage.at imagery.",
                 "name": "basemap.at ortofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Noteringsöverdrag tillhandahållen av basemap.at.",
+                "name": "basemap.at Överdrag"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ytlager tillhandahållen av basemap.at.",
+                "name": "basemap.at Yta"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terränglager tillhandahållen av basemap.at.",
+                "name": "basemap.at Terräng"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -8455,7 +9029,7 @@
                 "attribution": {
                     "text": "© Stockholms kommun, CC0"
                 },
-                "description": "Flygfoton från Stockholms kommun 2015, CC0-licens",
+                "description": "Flygfoton från Stockholms kommun 2016, CC0-licens",
                 "name": "Flygfoton Stockholm"
             },
             "tf-cycle": {
@@ -8521,6 +9095,9 @@
             "bw-twitter": {
                 "name": "Kartlägg Botswana på Twitter",
                 "description": "Twitter om OpenStreetMap i Botswana"
+            },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
             },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
@@ -9197,10 +9774,8 @@
                 "description": "Vi hjälper till att utöka och förbättra OpenStreetMap i USA.",
                 "extendedDescription": "Vi stöder OpenStreetMap genom att ha årliga konferencier, tillhandahåller resurser för gemenskapen, bygger nätverk och genom att sprida ordet. Gå med i OpenStreetMap USA här: {signupUrl}",
                 "events": {
-                    "sotmus2018": {
-                        "name": "State of the Map US 2018",
-                        "description": "Träffa OpenStreetMap-gemenskapen vid State of the Map US i Detroit, Michigan. Nätverka med andra kartläggare, företag, myndigheter och ideella organisationer, alla samlade kring den fria och redigerbara världskartan.",
-                        "where": "Detroit, Michigan"
+                    "sotmus2019": {
+                        "name": "State of the Map US 2019"
                     }
                 }
             },
@@ -9231,6 +9806,9 @@
                 "name": "Western Slope (Colorado) på Meetup",
                 "description": "Kartläggare och OpenStreetMap-användare kring Grand Junction, Colorado",
                 "extendedDescription": "Målet med denna grupp är att introducera OpenStreetMap för allmänheten, utveckla en gemenskap av kartläggare, skapa den bästa möjliga geodatan med alla till buds stående medel och därefter få ut denna data i samhället. Föreställ dig korrekta vägskyltar! Föreställ dig ytterligare förbättring av cykelvägar! Föreställ dig precis vad som helst, det är det som är glädjen med OpenStreetMap!"
+            },
+            "ym-Western-Michigan-University": {
+                "name": "Geografiska klubben"
             },
             "Maptime-Australia-Slack": {
                 "name": "Maptime Australien på Slack",

@@ -86,7 +86,6 @@
                     "line": "Kotakkan sudut garis ini.",
                     "area": "Mengotakkan sudut area ini."
                 },
-                "key": "S",
                 "annotation": {
                     "line": "Mengotakkan sudut dari garis",
                     "area": "Mengotakkan sudut sebuah area."
@@ -97,11 +96,8 @@
             },
             "straighten": {
                 "title": "Luruskan",
-                "description": "Luruskan garis ini.",
                 "key": "S",
-                "annotation": "Luruskan kembali sebuah garis.",
-                "too_bendy": "Garis ini tidak dapat diluruskan karena terlalu banyak lekukan.",
-                "connected_to_hidden": "Garis ini tidak dapat diluruskan karena terhubung dengan fitur tersembunyi."
+                "too_bendy": "Garis ini tidak dapat diluruskan karena terlalu banyak lekukan."
             },
             "delete": {
                 "title": "Hapus",
@@ -242,7 +238,6 @@
         },
         "geocoder": {
             "search": "Cari di seluruh dunia...",
-            "no_results_visible": "Hasil pencarian tidak ditemukan pada peta yang ditampilkan",
             "no_results_worldwide": "Hasil pencarian tidak ditemukan"
         },
         "geolocate": {
@@ -359,10 +354,6 @@
                 "tooltip": "Area digambar terisi penuh."
             }
         },
-        "restore": {
-            "heading": "Anda memiliki perubahan yang belum disimpan",
-            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?"
-        },
         "save": {
             "title": "Simpan",
             "no_changes": "Tak ada perubahan yang bisa disimpan.",
@@ -390,16 +381,10 @@
             }
         },
         "success": {
-            "just_edited": "Anda baru saja menyunting OpenStreetMap!",
             "help_link_text": "detail"
         },
         "confirm": {
             "cancel": "Batal"
-        },
-        "splash": {
-            "welcome": "Selamat datang di penyuting iD OpenStreetMap",
-            "text": "iD begitu bersahabat namun juga alat yang kuat untuk berperan dalam peta dunia gratis terbaik. Ini adalah versi {version}. Untuk informasi lebih lihat {website} dan laporkan kesalahan di {github}.",
-            "walkthrough": "Memulai Perjalanan"
         },
         "source_switch": {
             "live": "terhubung",
@@ -1125,8 +1110,7 @@
                     "name": "Air Minum"
                 },
                 "amenity/embassy": {
-                    "name": "Kedutaan besar",
-                    "terms": "Kedutaan"
+                    "name": "Kedutaan besar"
                 },
                 "amenity/fast_food": {
                     "name": "Makanan Cepat Saji",
@@ -2057,9 +2041,6 @@
                 "relation": {
                     "name": "Relasi"
                 },
-                "roundabout": {
-                    "name": "Bundaran"
-                },
                 "route/ferry": {
                     "name": "Rute Feri",
                     "terms": "Kapal, Laut"
@@ -2110,8 +2091,7 @@
                     "name": "Toko Buku"
                 },
                 "shop/boutique": {
-                    "name": "Butik",
-                    "terms": "Toko Baju, Pakaian"
+                    "name": "Butik"
                 },
                 "shop/butcher": {
                     "name": "Penjagalan"
@@ -2183,8 +2163,7 @@
                     "name": "Toko Kain"
                 },
                 "shop/fashion": {
-                    "name": "Toko Mode",
-                    "terms": "Fashion, Fesyen"
+                    "name": "Toko Mode"
                 },
                 "shop/fishmonger": {
                     "name": "Penjual Ikan"
@@ -2488,9 +2467,6 @@
                 },
                 "type/route/tram": {
                     "name": "Rute Trem"
-                },
-                "vertex": {
-                    "name": "Lainnya"
                 },
                 "waterway": {
                     "name": "Jalur Air"

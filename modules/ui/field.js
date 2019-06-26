@@ -1,13 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg/icon';
+import { tooltip } from '../util/tooltip';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
 import { uiTagReference } from './tag_reference';
@@ -28,6 +25,12 @@ export function uiField(context, presetField, entity, options) {
     var _show = options.show;
     var _state = '';
     var _tags = {};
+
+    var _locked = false;
+    var _lockedTip = tooltip()
+        .title(t('inspector.lock.suggestion', { label: field.label }))
+        .placement('bottom');
+
 
     field.keys = field.keys || [field.key];
 
@@ -81,7 +84,7 @@ export function uiField(context, presetField, entity, options) {
     function revert(d) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
-        if (!entity) return false;
+        if (!entity || _locked) return;
 
         var original = context.graph().base().entities[entity.id];
         var t = {};
@@ -96,6 +99,7 @@ export function uiField(context, presetField, entity, options) {
     function remove(d) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
+        if (_locked) return;
 
         var t = {};
         d.keys.forEach(function(key) {
@@ -117,18 +121,26 @@ export function uiField(context, presetField, entity, options) {
             .classed('nowrap', !options.wrap);
 
         if (options.wrap) {
-            var label = enter
+            var labelEnter = enter
                 .append('label')
                 .attr('class', 'field-label')
                 .attr('for', function(d) { return 'preset-input-' + d.safeid; });
 
-            label
+            var textEnter = labelEnter
                 .append('span')
-                .attr('class', 'label-text')
+                .attr('class', 'label-text');
+
+            textEnter
+                .append('span')
+                .attr('class', 'label-textvalue')
                 .text(function(d) { return d.label(); });
 
+            textEnter
+                .append('span')
+                .attr('class', 'label-textannotation');
+
             if (options.remove) {
-                label
+                labelEnter
                     .append('button')
                     .attr('class', 'remove-icon')
                     .attr('title', t('icons.remove'))
@@ -137,7 +149,7 @@ export function uiField(context, presetField, entity, options) {
             }
 
             if (options.revert) {
-                label
+                labelEnter
                     .append('button')
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))
@@ -158,9 +170,9 @@ export function uiField(context, presetField, entity, options) {
             .on('click', revert);
 
         container
-            .classed('modified', isModified())
-            .classed('present', isPresent())
             .each(function(d) {
+                var selection = d3_select(this);
+
                 if (!d.impl) {
                     createField();
                 }
@@ -185,12 +197,12 @@ export function uiField(context, presetField, entity, options) {
                     }
                 }
 
-                d3_select(this)
+                selection
                     .call(d.impl);
 
                 // add field help components
                 if (help) {
-                    d3_select(this)
+                    selection
                         .call(help.body)
                         .select('.field-label')
                         .call(help.button);
@@ -198,7 +210,7 @@ export function uiField(context, presetField, entity, options) {
 
                 // add tag reference components
                 if (reference) {
-                    d3_select(this)
+                    selection
                         .call(reference.body)
                         .select('.field-label')
                         .call(reference.button);
@@ -206,6 +218,29 @@ export function uiField(context, presetField, entity, options) {
 
                 d.impl.tags(_tags);
             });
+
+
+            container
+                .classed('locked', _locked)
+                .classed('modified', isModified())
+                .classed('present', isPresent());
+
+
+            // show a tip and lock icon if the field is locked
+            var annotation = container.selectAll('.field-label .label-textannotation');
+            var icon = annotation.selectAll('.icon')
+                .data(_locked ? [0]: []);
+
+            icon.exit()
+                .remove();
+
+            icon.enter()
+                .append('svg')
+                .attr('class', 'icon')
+                .append('use')
+                .attr('xlink:href', '#fas-lock');
+
+            container.call(_locked ? _lockedTip : _lockedTip.destroy);
     };
 
 
@@ -223,6 +258,13 @@ export function uiField(context, presetField, entity, options) {
     };
 
 
+    field.locked = function(val) {
+        if (!arguments.length) return _locked;
+        _locked = val;
+        return field;
+    };
+
+
     field.show = function() {
         _show = true;
         if (!field.impl) {
@@ -234,7 +276,6 @@ export function uiField(context, presetField, entity, options) {
             dispatch.call('change', this, t);
         }
     };
-
 
     // A shown field has a visible UI, a non-shown field is in the 'Add field' dropdown
     field.isShown = function() {
