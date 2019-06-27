@@ -1990,6 +1990,13 @@
                     "tooltip": "Tasking manager provided by Humanitarian OpenStreetMap Team"
                 }
             },
+            "project": {
+                "name": "Project",
+                "id": "ID",
+                "no_project": {
+                    "message": "No project selected"
+                }
+            },
             "options": {
                 "status": {
                     "title": "Status",

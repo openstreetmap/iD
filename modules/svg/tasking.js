@@ -1,10 +1,12 @@
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 
+import { modeBrowse } from '../modes/browse';
 import { services } from '../services';
 
 var _taskingEnabled = false;
 var _taskingService;
+var _taskingVisible;
 
 export function svgTasking(projection, context, dispatch) {
   var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -12,54 +14,78 @@ export function svgTasking(projection, context, dispatch) {
   var touchLayer = d3_select(null);
   var drawLayer = d3_select(null);
   var _taskingVisible = false;
+  var _customUrl;
 
 
   // Loosely-coupled tasking service for fetching errors.
-  function getService() {
-    if (services.tasking && !_taskingService) {
-      _taskingService = services.tasking;
-      _taskingService.on('loaded', throttledRedraw);
-    } else if (!services.tasking && _taskingService) {
-      _taskingService = null;
+    function getService() {
+        if (services.tasking && !_taskingService) {
+            _taskingService = services.tasking;
+            _taskingService.on('loaded', throttledRedraw);
+        } else if (!services.tasking && _taskingService) {
+            _taskingService = null;
+        }
+
+        return _taskingService;
     }
 
-    return _taskingService;
-  }
-
-  // Enable the layer.  This shows the task(s) and transitions them to visible.
-  function layerOn() {
-    editOn();
-
-    drawLayer
-        .style('opacity', 0)
-        .transition()
-        .duration(250)
-        .style('opacity', 1)
-        .on('end interrupt', function () {
-            dispatch.call('change');
-        });
-  }
+    // Show the notes
+    function editOn() {
+        if (!_taskingVisible) {
+            _taskingVisible = true;
+            drawLayer
+                .style('display', 'block');
+        }
+    }
 
 
-  // Disable the layer.  This transitions the layer invisible and then hides the task(s).
-  function layerOff() {
-      throttledRedraw.cancel();
-      drawLayer.interrupt();
-      touchLayer.selectAll('.qa_error.keepRight')
-          .remove();
+    // Immediately remove the notes and their touch targets
+    function editOff() {
+        if (_taskingVisible) {
+            _taskingVisible = false;
+            drawLayer
+                .style('display', 'none');
+            drawLayer.selectAll('.note')
+                .remove();
+            touchLayer.selectAll('.note')
+                .remove();
+        }
+    }
 
-      drawLayer
-          .transition()
-          .duration(250)
-          .style('opacity', 0)
-          .on('end interrupt', function () {
-              editOff();
-              dispatch.call('change');
-          });
-  }
+    // Enable the layer.  This shows the task(s) and transitions them to visible.
+    function layerOn() {
+        editOn();
 
-  function drawTasking(selection) {
-    // var service = getService();
+        drawLayer
+            .style('opacity', 0)
+            .transition()
+            .duration(250)
+            .style('opacity', 1)
+            .on('end interrupt', function () {
+                dispatch.call('change');
+            });
+    }
+
+
+    // Disable the layer.  This transitions the layer invisible and then hides the task(s).
+    function layerOff() {
+        throttledRedraw.cancel();
+        drawLayer.interrupt();
+        touchLayer.selectAll('.qa_error.keepRight')
+            .remove();
+
+        drawLayer
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .on('end interrupt', function () {
+                editOff();
+                dispatch.call('change');
+            });
+    }
+
+    function drawTasking(selection) {
+    var service = getService();
 
     // var surface = context.surface();
     // if (surface && !surface.empty()) {
@@ -87,31 +113,31 @@ export function svgTasking(projection, context, dispatch) {
     //         editOff();
     //     }
     // }
-  }
-
-
-  // Toggles the layer on and off
-  drawTasking.enabled = function(val) {
-    if (!arguments.length) return _taskingEnabled;
-
-    _taskingEnabled = val;
-    if (_taskingEnabled) {
-        layerOn();
-    } else {
-        layerOff();
-        if (context.selectedErrorID()) {
-            context.enter(modeBrowse(context));
-        }
     }
 
-    dispatch.call('change');
-    return this;
-  };
+
+    // Toggles the layer on and off
+    drawTasking.enabled = function(val) {
+        if (!arguments.length) return _taskingEnabled;
+
+        _taskingEnabled = val;
+        if (_taskingEnabled) {
+            layerOn();
+        } else {
+            layerOff();
+            if (context.selectedErrorID()) {
+                context.enter(modeBrowse(context));
+            }
+        }
+
+        dispatch.call('change');
+        return this;
+    };
 
 
-  drawTasking.supported = function() {
-    return !!getService();
-  };
+    drawTasking.supported = function() {
+        return !!getService();
+    };
 
-  return drawTasking;
+    return drawTasking;
 }

@@ -14,7 +14,7 @@ export function uiSettingsCustomTasking(context) {
         var _currSettings = context.tasking().customSettings();
 
         var placeholder = 'https://{m}/project/{p}/task/{t}';
-        var example = 'https://tasks.hotosm.org/api/v1/project/1/task/10';
+        var example = 'https://tasks.hotosm.org/api/v1/project/1/task/10?as_file=false';
         var modal = uiConfirm(selection).okButton();
 
         modal
