@@ -688,6 +688,7 @@
     "man_made/breakwater": {"fields": ["material", "seamark/type"], "geometry": ["line", "area"], "tags": {"man_made": "breakwater"}, "name": "Breakwater"},
     "man_made/bridge": {"icon": "maki-bridge", "fields": ["name", "bridge", "layer", "maxweight"], "moreFields": ["manufacturer", "material", "seamark/type"], "geometry": ["area"], "tags": {"man_made": "bridge"}, "addTags": {"man_made": "bridge", "layer": "1"}, "removeTags": {"man_made": "bridge", "layer": "*"}, "reference": {"key": "man_made", "value": "bridge"}, "name": "Bridge", "matchScore": 0.85},
     "man_made/bunker_silo": {"icon": "temaki-silo", "fields": ["content"], "geometry": ["point", "area"], "terms": ["Silage", "Storage"], "tags": {"man_made": "bunker_silo"}, "name": "Bunker Silo"},
+    "man_made/cairn": {"icon": "maki-triangle", "geometry": ["point", "area"], "terms": ["rock pile", "stone stack", "stone pile", "càrn"], "tags": {"man_made": "cairn"}, "name": "Cairn"},
     "man_made/chimney": {"icon": "temaki-chimney", "fields": ["operator", "material", "height"], "geometry": ["point", "area"], "tags": {"man_made": "chimney"}, "name": "Chimney"},
     "man_made/clearcut": {"icon": "maki-logging", "geometry": ["area"], "tags": {"man_made": "clearcut"}, "terms": ["cut", "forest", "lumber", "tree", "wood"], "name": "Clearcut Forest"},
     "man_made/crane": {"icon": "temaki-crane", "fields": ["operator", "manufacturer", "height", "crane/type"], "geometry": ["point", "line", "vertex", "area"], "tags": {"man_made": "crane"}, "name": "Crane"},

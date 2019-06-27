@@ -5429,6 +5429,11 @@ en:
         name: Bunker Silo
         # 'terms: Silage,Storage'
         terms: '<translate with synonyms or related terms for ''Bunker Silo'', separated by commas>'
+      man_made/cairn:
+        # man_made=cairn
+        name: Cairn
+        # 'terms: rock pile,stone stack,stone pile,càrn'
+        terms: '<translate with synonyms or related terms for ''Cairn'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
