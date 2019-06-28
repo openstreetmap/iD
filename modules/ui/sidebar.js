@@ -14,13 +14,11 @@ import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
-import { uiNoteEditor } from './note_editor';
 import { textDirection } from '../util/locale';
 
 
 export function uiSidebar(context) {
     var dataEditor = uiDataEditor(context);
-    var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
     var keepRightEditor = uiKeepRightEditor(context);
     var _current;
@@ -96,21 +94,6 @@ export function uiSidebar(context) {
                 _wasData = true;
                 sidebar
                     .show(dataEditor.datum(datum));
-
-                selection.selectAll('.sidebar-component')
-                    .classed('inspector-hover', true);
-
-            } else if (datum instanceof osmNote) {
-                if (context.mode().id === 'drag-note') return;
-                _wasNote = true;
-
-                var osm = services.osm;
-                if (osm) {
-                    datum = osm.getNote(datum.id);   // marker may contain stale data - get latest
-                }
-
-                sidebar
-                    .show(noteEditor.note(datum));
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);

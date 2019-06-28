@@ -283,13 +283,6 @@ export function coreContext() {
         return mode && mode.activeID && mode.activeID();
     };
 
-    var _selectedNoteID;
-    context.selectedNoteID = function(noteID) {
-        if (!arguments.length) return _selectedNoteID;
-        _selectedNoteID = noteID;
-        return context;
-    };
-
     var _selectedErrorID;
     context.selectedErrorID = function(errorID) {
         if (!arguments.length) return _selectedErrorID;

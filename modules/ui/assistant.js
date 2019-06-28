@@ -12,6 +12,7 @@ import { uiPresetIcon } from './preset_icon';
 import { uiEntityEditor } from './entity_editor';
 import { uiFeatureList } from './feature_list';
 import { uiSelectionList } from './selection_list';
+import { uiNoteEditor } from './note_editor';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -209,6 +210,12 @@ export function uiAssistant(context) {
             }
             return panelSelectMultiple(context, selectedIDs);
 
+        } else if (mode.id === 'select-note') {
+            var osm = context.connection();
+            var note = osm && osm.getNote(mode.selectedNoteID());
+            if (note) {
+                return panelSelectNote(context, note);
+            }
         } else if (!didEditAnythingYet) {
 
             if (savedChangeset) {
@@ -420,6 +427,39 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'feature-list-pane')
                 .call(featureSearch);
+        };
+
+        return panel;
+    }
+
+    function panelSelectNote(context, note) {
+
+        var panel = {
+            theme: 'light',
+            modeLabel: t('assistant.mode.editing'),
+            title: note.label()
+        };
+
+        panel.renderHeaderIcon = function(selection) {
+            var icon = selection
+                .append('div')
+                .attr('class', 'note-header-icon ' + note.status)
+                .classed('new', note.id < 0);
+
+            icon
+                .call(svgIcon('#iD-icon-note', 'note-fill'));
+
+            var statusIcon = '#iD-icon-' + (note.id < 0 ? 'plus' : (note.status === 'open' ? 'close' : 'apply'));
+            icon
+                .append('div')
+                .attr('class', 'note-icon-annotation')
+                .call(svgIcon(statusIcon, 'icon-annotation'));
+        };
+
+        panel.renderBody = function(selection) {
+            var noteEditor = uiNoteEditor(context)
+                .note(note);
+            selection.call(noteEditor);
         };
 
         return panel;

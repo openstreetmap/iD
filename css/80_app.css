@@ -1204,6 +1204,30 @@ a.hide-toggle {
     font-size: 14px;
     line-height: 1.35em;
 }
+/* note icon */
+.assistant .note-header-icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+.assistant .note-header-icon .note-fill {
+    width: 100%;
+    height: 100%;
+}
+.assistant .note-header-icon .note-icon-annotation{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+}
+.assistant .note-icon-annotation .icon-annotation {
+    position: relative;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    margin: auto;
+}
 
 /* Feature List / Search Results
 ------------------------------------------------------- */
@@ -1459,6 +1483,12 @@ a.hide-toggle {
     flex: 0 0 auto;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+}
+.inspector-footer:empty {
+    display: none;
 }
 
 .feature-list-pane {
@@ -3104,7 +3134,6 @@ input.key-trap {
 
 /* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
-.note-header,
 .error-header {
     background-color: #f6f6f6;
     border-radius: 5px;
@@ -3114,7 +3143,6 @@ input.key-trap {
     align-items: center;
 }
 
-.note-header-icon,
 .error-header-icon {
     background-color: #fff;
     padding: 10px;
@@ -3125,14 +3153,12 @@ input.key-trap {
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
-[dir='rtl'] .note-header-icon,
 [dir='rtl'] .error-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
-.note-header-icon .icon-wrap,
 .error-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
@@ -3148,7 +3174,6 @@ input.key-trap {
     height: 28px;
 }
 
-.note-header-label,
 .error-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
@@ -3157,7 +3182,6 @@ input.key-trap {
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
-[dir='rtl'] .note-header-label,
 [dir='rtl'] .error-header-label {
     border-radius: 5px 0 0 5px;
 }

@@ -41,7 +41,7 @@ export function uiEntityEditor(context) {
     var rawMembershipEditor = uiRawMembershipEditor(context);
     var presetBrowser = uiPresetBrowser(context, [], choosePreset);
 
-    function entityEditor(selection, newFeature) {
+    function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = Object.assign({}, entity.tags);  // shallow copy
 
