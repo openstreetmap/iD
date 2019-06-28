@@ -1016,8 +1016,6 @@ a.hide-toggle {
 ------------------------------------------------------- */
 .assistant {
     flex: 0 0 auto;
-    background: rgba(45, 41, 41, 0.95);
-    color: #fff;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -1026,26 +1024,42 @@ a.hide-toggle {
     max-height: 100%;
     line-height: 1.35em;
 
+    background: rgba(45, 41, 41, 0.90);
+    color: #fff;
+
     -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
 
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
+    /*
+    -webkit-transition: background 100ms;
+    -moz-transition: background 100ms;
+    -o-transition: background 100ms;
+    transition: background 100ms;
+    */
+}
+.assistant.light:not(.body-collapsed) {
+    background: rgba(246, 246, 246, 0.98);
+    color: #333;
 }
 .assistant .sep-top {
     border-top: 1px solid rgba(127, 127, 127, 0.5);
 }
 .assistant .assistant-row {
     display: flex;
+    flex: 0 0 auto;
 }
+
+/* assistant header */
 .assistant .assistant-header {
     flex: 0 0 auto;
 }
 .assistant .icon-col {
     flex: 0 0 auto;
     padding: 10px;
-    padding-bottom: 0;
+    min-width: 50px;
 }
 .assistant .icon-col > .icon {
     width: 30px;
@@ -1054,17 +1068,19 @@ a.hide-toggle {
 .assistant .icon-col > .preset-icon-container {
     margin: -5px;
 }
-.assistant .body-col {
-    padding: 10px;
+.assistant .main-col {
+    flex: 1 1 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-[dir='ltr'] .assistant .body-col {
-    padding-left: 0;
+[dir='ltr'] .assistant .main-col {
+    padding-right: 10px;
 }
-[dir='rtl'] .assistant .body-col {
-    padding-right: 0;
+[dir='rtl'] .assistant .main-col {
+    padding-left: 10px;
 }
 .assistant .mode-label {
-    color: #ccc;
+    opacity: 0.8;
     text-transform: uppercase;
     letter-spacing: 0.7px;
     font-size: 10px;
@@ -1077,15 +1093,36 @@ a.hide-toggle {
     font-weight: bold;
     line-height: normal;
 }
+.assistant .control-col {
+    flex: 0 0 auto;
+}
+.assistant .control-col button {
+    background: transparent;
+    color: #808080;
+    height: 100%;
+    width: 40px;
+}
+.assistant .assistant-header .header-body {
+    margin-top: 8px;
+}
+.assistant .assistant-header .header-body:empty {
+    display: none;
+}
+
+/* assistant body */
+.assistant .assistant-body {
+    display: flex;
+    flex-direction: column;
+}
+.assistant.body-collapsed .assistant-body {
+    display: none;
+}
+.assistant .assistant-body .feature-list-pane {
+    padding: 0px 15px 10px 15px;
+}
 .assistant .body-text {
     font-size: 12px;
-    color: #ccc;
-    margin-top: 6px;
-}
-.assistant .body-text:empty,
-.assistant .main-footer:empty,
-.assistant .assistant-body:empty {
-    display: none;
+    opacity: 0.8;
 }
 .assistant b {
     font-weight: bold;
@@ -1094,6 +1131,32 @@ a.hide-toggle {
     display: block;
     margin-top: 10px;
     content: " ";
+}
+.assistant .search-header {
+    position: relative;
+}
+.assistant .search-header .icon {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    pointer-events: none;
+    opacity: 0.75;
+}
+[dir='rtl'] .assistant .search-header .icon {
+    left: auto;
+    right: 7px;
+}
+.assistant input[type='search'] {
+    height: 30px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border-width: 0;
+    text-indent: 25px;
+    font-size: 12px;
+    background: rgba(18, 18, 18, 0.97);
+    color: #fff;
+    min-width: 225px;
 }
 .assistant .main-footer {
     margin-top: 12px;
@@ -1112,47 +1175,22 @@ a.hide-toggle {
 [dir='rtl'] .assistant .main-footer button:first-of-type {
     margin-left: 8px;
 }
-.assistant .assistant-body {
-    display: flex;
+.assistant .body-text:empty,
+.assistant .main-footer:empty,
+.assistant .assistant-body:empty {
+    display: none;
 }
-.assistant .assistant-body .feature-list-pane {
-    padding: 0px 15px 10px 15px;
-}
-.assistant .search-header {
-    position: relative;
-}
-.assistant .search-header .icon {
-    position: absolute;
-    left: 7px;
-    top: 5px;
-    pointer-events: none;
-    opacity: 0.75;
-}
-[dir='rtl'] .assistant .search-header .icon {
-    left: auto;
-    right: 7px;
-}
-
-.assistant input[type='search'] {
-    height: 30px;
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 15px;
-    border-width: 0;
-    text-indent: 25px;
-    font-size: 12px;
-    background: rgba(18, 18, 18, 0.97);
-    color: #fff;
-    min-width: 225px;
-}
-
+/* prominent assistant */
 .assistant.prominent .assistant-header .body-col {
     padding-bottom: 16px;
+}
+.assistant.prominent .icon-col {
+    min-width: 60px;
 }
 .assistant.prominent .icon-col .icon {
     width: 40px;
     height: 40px;
-    color: #FFCF4A;
+    color: #F49700; /*#FFCF4A*/
 }
 .assistant.prominent .mode-label {
     display: none;
@@ -1161,11 +1199,9 @@ a.hide-toggle {
     font-family: Georgia, serif;
     font-weight: bold;
     font-size: 20px;
-    margin-top: 6px;
 }
 .assistant.prominent .body-text {
     font-size: 14px;
-    margin-top: 10px;
     line-height: 1.35em;
 }
 
@@ -1306,7 +1342,7 @@ a.hide-toggle {
 
 .community-event,
 .community-more {
-    background-color: #4c4c4c;
+    background-color: #e5e5e5;
     padding: 8px;
     border-radius: 4px;
     margin-bottom: 5px;
