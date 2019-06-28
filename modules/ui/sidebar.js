@@ -9,10 +9,9 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { osmEntity, osmNote, qaError } from '../osm';
+import { osmNote, qaError } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
-import { uiEntityEditor } from './entity_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiNoteEditor } from './note_editor';
@@ -20,7 +19,6 @@ import { textDirection } from '../util/locale';
 
 
 export function uiSidebar(context) {
-    var inspector = uiEntityEditor(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
@@ -138,26 +136,9 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (!_current && (datum instanceof osmEntity)) {
-
-                inspectorWrap
-                    .classed('inspector-hidden', false)
-                    .classed('inspector-hover', true);
-
-                if (inspector.entityID() !== datum.id || inspector.state() !== 'hover') {
-                    inspector
-                        .state('hover')
-                        .entityID(datum.id);
-
-                    inspectorWrap
-                        .call(inspector);
-                }
-
             } else if (!_current) {
                 inspectorWrap
                     .classed('inspector-hidden', true);
-                inspector
-                    .state('hide');
 
             } else if (_wasData || _wasNote || _wasQAError) {
                 _wasNote = false;
@@ -178,45 +159,6 @@ export function uiSidebar(context) {
                 context.projection.invert([0, rect.height]),
                 context.projection.invert([rect.width, 0])
             ]);
-        };
-
-
-        sidebar.select = function(id, newFeature) {
-            sidebar.hide();
-
-            if (id) {
-                var entity = context.entity(id);
-
-                // uncollapse the sidebar if adding a new, untagged feature
-                if (selection.classed('collapsed') &&
-                    newFeature &&
-                    context.presets().match(entity, context.graph()).isFallback()) {
-
-                    var extent = entity.extent(context.graph());
-                    sidebar.expand(sidebar.intersects(extent));
-                }
-
-                inspectorWrap
-                    .classed('inspector-hidden', false)
-                    .classed('inspector-hover', false);
-
-                if (inspector.entityID() !== id || inspector.state() !== 'select') {
-                    inspector
-                        .state('select')
-                        .entityID(id);
-
-                    inspectorWrap
-                        .call(inspector, newFeature);
-                }
-
-                sidebar.showPresetList = function() {
-                    inspector.showList(context.presets().match(entity, context.graph()));
-                };
-
-            } else {
-                inspector
-                    .state('hide');
-            }
         };
 
 
@@ -305,11 +247,9 @@ export function uiSidebar(context) {
         resizer.on('dblclick', sidebar.toggle);
     }
 
-    sidebar.showPresetList = function() {};
     sidebar.hover = function() {};
     sidebar.hover.cancel = function() {};
     sidebar.intersects = function() {};
-    sidebar.select = function() {};
     sidebar.show = function() {};
     sidebar.hide = function() {};
     sidebar.expand = function() {};

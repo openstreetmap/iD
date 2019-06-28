@@ -9,6 +9,7 @@ import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
 import { uiSuccess } from './success';
 import { uiPresetIcon } from './preset_icon';
+import { uiEntityEditor } from './entity_editor';
 import { uiFeatureList } from './feature_list';
 import { uiSelectionList } from './selection_list';
 import { geoRawMercator } from '../geo/raw_mercator';
@@ -43,6 +44,7 @@ export function uiAssistant(context) {
         header = d3_select(null),
         body = d3_select(null);
 
+    var entityEditor = uiEntityEditor(context);
     var featureSearch = uiFeatureList(context);
 
     var savedChangeset = null;
@@ -469,6 +471,13 @@ export function uiAssistant(context) {
                 .preset(preset)
                 .sizeClass('small')
                 .pointMarker(false));
+        };
+
+        panel.renderBody = function(selection) {
+            entityEditor
+                .state('select')
+                .entityID(id);
+            selection.call(entityEditor);
         };
 
         return panel;

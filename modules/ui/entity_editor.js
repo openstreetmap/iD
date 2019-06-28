@@ -61,7 +61,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
+            .attr('class', 'inspector-body sep-top')
             .on('scroll.entity-editor', function() { _scrolled = true; });
 
         var presetButtonWrap = bodyEnter
@@ -115,12 +115,12 @@ export function uiEntityEditor(context) {
             .attr('class', 'key-trap');
 
 
-        var footer = selection.selectAll('.footer')
+        var footer = selection.selectAll('.inspector-footer')
             .data([0]);
 
         footer = footer.enter()
             .append('div')
-            .attr('class', 'footer')
+            .attr('class', 'inspector-footer')
             .merge(footer);
 
         footer

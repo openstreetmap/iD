@@ -265,9 +265,6 @@ export function modeSelect(context, selectedIDs) {
 
         editMenu = uiEditMenu(context, operations);
 
-        context.ui().sidebar
-            .select(singular() ? singular().id : null, _newFeature);
-
         context.history()
             .on('undone.select', update)
             .on('redone.select', update);

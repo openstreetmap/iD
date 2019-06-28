@@ -1146,7 +1146,7 @@ a.hide-toggle {
     left: auto;
     right: 7px;
 }
-.assistant input[type='search'] {
+.assistant input[type='search'].feature-search {
     height: 30px;
     width: 100%;
     padding: 5px 10px;
@@ -1453,6 +1453,12 @@ a.hide-toggle {
     overflow-x: visible;
     width: 100%;
     height: 100%;
+}
+.inspector-footer {
+    display: flex;
+    flex: 0 0 auto;
+    padding: 5px 20px 5px 20px;
+    border-top: 1px solid #ccc;
 }
 
 .feature-list-pane {

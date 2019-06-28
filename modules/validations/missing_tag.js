@@ -61,10 +61,10 @@ export function validationMissingTag() {
         var fixes = [
             new validationIssueFix({
                 icon: 'iD-icon-search',
-                title: t('issues.fix.' + selectFixType + '.title'),
+                title: t('issues.fix.' + selectFixType + '.title')/*,
                 onClick: function(context) {
                     context.ui().sidebar.showPresetList();
-                }
+                }*/
             })
         ];
 
