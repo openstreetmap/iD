@@ -18,9 +18,11 @@ export function uiTasking(context) {
     var _toggleButton = d3_select(null);
     var _managersList = d3_select(null);
     var _projectSelection = d3_select(null);
+    var _taskSelection = d3_select(null);
 
     var _manager = tasking.currentManager();
     var _project = tasking.currentProject();
+    var _task = tasking.currentTask();
 
     var _customSource = tasking.findManager('custom');
     var _noneSource = tasking.findManager('none');
@@ -43,7 +45,7 @@ export function uiTasking(context) {
         tasking.currentManager(d); // set new manager
         _manager = tasking.currentManager();
 
-        if (d.id === 'none') { tasking.resetProject(); }
+        if (d.id === 'none') { tasking.resetProjectAndTask(); }
 
         document.activeElement.blur();
 
@@ -71,6 +73,7 @@ export function uiTasking(context) {
         } else {
             _customSource.template('');
             setManager(_noneSource);
+            tasking.resetProjectAndTask();
         }
     }
 
@@ -170,18 +173,68 @@ export function uiTasking(context) {
         container.exit()
             .remove();
 
-        var containerEnter = container.enter()
+        var containerEnter = container
+            .enter()
             .append('div')
-            .attr('class', 'project-details');
+                .attr('class', 'project-details');
 
         if (!_project) {
             containerEnter
+                .append('div')
                     .attr('class', 'no-project')
                     .text(t('tasking.project.no_project.message'));
         } else {
             containerEnter
+                .append('div')
                     .attr('class', 'project-id')
                     .text(t('tasking.project.id') + ': ' + _project.projectId);
+
+            // containerEnter
+            //     .append('div')
+            //         .attr('class', 'project-details project-name')
+            //         .text(t('tasking.project.name') + ': ' + _project.projectId);
+        }
+
+        // container = container
+        //     .merge(containerEnter);
+    }
+
+
+    function renderTask(selection) {
+        _taskSelection = selection
+            .call(drawTaskDetails);
+    }
+
+
+    function drawTaskDetails(selection) {
+
+        // the project
+        var container = selection.selectAll('.task-details')
+            .data([0]);
+
+        // Exit
+        container.exit()
+            .remove();
+
+        var containerEnter = container.enter()
+            .append('div')
+                .attr('class', 'task-details');
+
+        if (!_project) {
+            containerEnter
+                .append('div')
+                    .attr('class', 'task-details no-task')
+                    .text(t('tasking.task.no_task.message'));
+        } else {
+            containerEnter
+                .append('div')
+                    .attr('class', 'task-details task-id')
+                    .text(t('tasking.task.id') + ': ' + _task.taskId);
+
+            // containerEnter
+            //     .append('div')
+            //         .attr('class', 'task-details task-name')
+            //         .text(t('tasking.task.name') + ': ' + _task.projectId);
         }
 
         container = container
@@ -195,6 +248,7 @@ export function uiTasking(context) {
         }
 
         _project = tasking.currentProject();
+        _task = tasking.currentTask();
 
         _projectSelection
             .call(drawProjectDetails);
@@ -279,6 +333,15 @@ export function uiTasking(context) {
             .call(uiDisclosure(context, 'tasking_project', true)
                 .title(t('tasking.project.name'))
                 .content(renderProject)
+            );
+
+        // project
+        content
+            .append('div')
+            .attr('class', 'tasking-task-container')
+            .call(uiDisclosure(context, 'tasking_task', true)
+                .title(t('tasking.task.name'))
+                .content(renderTask)
             );
 
 

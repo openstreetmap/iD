@@ -67,6 +67,90 @@ export function rendererTasking(context) {
     };
 
 
+    tasking.init = function() {
+        utilRebind(this, dispatch, 'on');
+
+        _taskingCache = {
+            managers: rbush(),
+            manager: undefined,
+            projects: rbush(),
+            project: undefined,
+            tasks: rbush(),
+            task: undefined,
+        };
+
+
+        // Add all the available tasking manager sources
+        _taskingCache.managers = managers.map(function(source) {
+            return rendererTaskingManager(source);
+        });
+        // Add 'Custom'
+        _taskingCache.managers.push(rendererTaskingManager.Custom());
+        // Add 'None'
+        _taskingCache.managers.push(rendererTaskingManager.None());
+
+        // set none as starting manager
+        tasking.currentManager(rendererTaskingManager.None());
+
+    };
+
+
+    tasking.reset = function() {
+        _taskingCache = {
+            managers: rbush(),
+            manager: undefined,
+            projects: rbush(),
+            project: undefined,
+            tasks: rbush(),
+            task: undefined,
+        };
+
+        // set none as starting manager
+        tasking.currentManager(rendererTaskingManager.None());
+    };
+
+
+    tasking.customSettings = function(d) {
+        if (!arguments.length) return _customSettings;
+
+        _customSettings = d;
+
+        return tasking;
+    };
+
+
+    tasking.loadFromURL = function(url) {
+        var that = this;
+
+        // parse url to get type, project, and task (if present)
+        var parsedUrl = parseUrl(url);
+
+        switch (parsedUrl.urlType) {
+            case 'task':
+                that.loadTask(parsedUrl.projectId, parsedUrl.taskId);
+                break;
+            case 'project':
+                that.loadProject(parsedUrl.projectId);
+                break;
+            case undefined:
+                console.log('undefined url result: ', parsedUrl); // TODO: TAH - better handling of urlType
+                break;
+            default:
+                break;
+        }
+    };
+
+
+    tasking.cache = function() {
+        return _taskingCache;
+    };
+
+
+    tasking.managers = function() {
+        return _taskingCache.managers;
+    };
+
+
     tasking.findManager = function(id) {
         return _taskingCache.managers.find(function(d) {
             return d.id && d.id === id;
@@ -83,11 +167,6 @@ export function rendererTasking(context) {
         dispatch.call('change');
 
         return tasking;
-    };
-
-
-    tasking.managers = function() {
-        return _taskingCache.managers;
     };
 
 
@@ -110,58 +189,6 @@ export function rendererTasking(context) {
 
     tasking.resetProject = function() {
         _taskingCache.project = undefined;
-    };
-
-
-    tasking.customSettings = function(d) {
-        if (!arguments.length) return _customSettings;
-
-        _customSettings = d;
-
-        return tasking;
-    };
-
-
-    tasking.init = function() {
-        utilRebind(this, dispatch, 'on');
-
-        _taskingCache = {
-            managers: rbush(),
-            manager: undefined,
-            projects: rbush(),
-            project: undefined,
-            tasks: rbush(),
-            task: undefined,
-        };
-
-
-        // Add all the available tasking manager sources
-        _taskingCache.managers = managers.map(function(source) {
-            return rendererTaskingManager(source);
-        });
-        // Add 'None'
-        _taskingCache.managers.unshift(rendererTaskingManager.None());
-        // Add 'Custom'
-        _taskingCache.managers.unshift(rendererTaskingManager.Custom());
-
-        // set none as starting manager
-        tasking.currentManager(rendererTaskingManager.None());
-
-    };
-
-
-    tasking.reset = function() {
-        _taskingCache = {
-            managers: rbush(),
-            manager: undefined,
-            projects: rbush(),
-            project: undefined,
-            tasks: rbush(),
-            task: undefined,
-        };
-
-        // set none as starting manager
-        tasking.currentManager(rendererTaskingManager.None());
     };
 
 
@@ -207,9 +234,31 @@ export function rendererTasking(context) {
     };
 
 
+    tasking.tasks = function() {
+        return _taskingCache.tasks;
+    };
+
+
+    tasking.currentTask = function(d) {
+        if (!arguments.length) return _taskingCache.task;
+
+        // TODO: TAH - handle enabled/disabled
+
+        _taskingCache.task = d;
+        dispatch.call('change');
+
+        return tasking;
+    };
+
+
+    tasking.resetTask = function() {
+        _taskingCache.task = undefined;
+    };
+
+
     tasking.loadTask = function(projectId, taskId) {
 
-        if (!_taskingCache.task[taskId]) {
+        if (_taskingCache.task === undefined) {
             var that = this;
             var path = 'project/' + projectId + '/task/' + taskId + '?as_file=false';
 
@@ -229,6 +278,10 @@ export function rendererTasking(context) {
             .catch(function(err) {
                 console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
             });
+        } else {
+            if (_taskingCache.task[taskId]) {
+                dispatch.call('loadedTask');
+            }
         }
     };
 
@@ -251,30 +304,11 @@ export function rendererTasking(context) {
     };
 
 
-    tasking.loadFromURL = function(url) {
-        var that = this;
-
-        // parse url to get type, project, and task (if present)
-        var parsedUrl = parseUrl(url);
-
-        switch (parsedUrl.urlType) {
-            case 'task':
-                that.loadTask(parsedUrl.projectId, parsedUrl.taskId);
-                break;
-            case 'project':
-                that.loadProject(parsedUrl.projectId);
-                break;
-            case undefined:
-                console.log('undefined url result: ', parsedUrl); // TODO: TAH - better handling of urlType
-                break;
-            default:
-                break;
-        }
+    tasking.resetProjectAndTask = function() {
+        tasking.resetProject();
+        tasking.resetTask();
     };
 
-    tasking.cache = function() {
-        return _taskingCache;
-    };
 
     return utilRebind(tasking, dispatch, 'on');
 }

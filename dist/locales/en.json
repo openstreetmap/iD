@@ -1997,6 +1997,13 @@
                     "message": "No project selected"
                 }
             },
+            "task": {
+                "name": "Task",
+                "id": "ID",
+                "no_task": {
+                    "message": "No task selected"
+                }
+            },
             "options": {
                 "status": {
                     "title": "Status",
