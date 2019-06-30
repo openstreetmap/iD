@@ -2856,6 +2856,10 @@
                     "label": "Enheter",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diameter",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Skötbord tillgängligt"
                 },
@@ -4224,6 +4228,9 @@
                         "tourism": "Museijärnväg"
                     }
                 },
+                "valve": {
+                    "label": "Typ"
+                },
                 "vending": {
                     "label": "Typ av gods"
                 },
@@ -5515,10 +5522,6 @@
                 },
                 "building_point": {
                     "name": "Byggnad"
-                },
-                "camp_site/camp_pitch": {
-                    "name": "Tältplats/husvagnsplats",
-                    "terms": "Tältplats, husvagnsplats, camping, Campingplats, camping, husvagn, tält"
                 },
                 "club": {
                     "name": "Klubb",
@@ -8616,34 +8619,6 @@
                 "description": "Satellit- eller flygfoton.",
                 "name": "Bing-flygfoto"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Villkor & återkoppling"
-                },
-                "description": "DigitalGlobe-Premium är ett mosaik som består av DigitalGlobes baskarta med valda regioner fyllda med +Vivid eller anpassade område med intressanta flygfoton, 50 cm upplösning eller bättre och uppdateras oftare med fortlöpande uppdateringar.",
-                "name": "DigitalGlobe Premium-bilder"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Villkor & återkoppling"
-                },
-                "description": "Gränser för flygfoto och fotograferingsdatum. Etiketter visas vid zoomnivå 13 och upp.",
-                "name": "DigitalGlobe Premium flygfotoålder"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Villkor & återkoppling"
-                },
-                "description": "DigitalGlobe-Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den är tillgänglig och Landsat för övrig yta. Medelåldern är 2,31 år och vissa områden uppdaterade 2 gånger per år.",
-                "name": "DigitalGlobe Standard-bilder"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Villkor & återkoppling"
-                },
-                "description": "Gränser för flygfoto och fotograferingsdatum. Etiketter visas vid zoomnivå 13 och upp.",
-                "name": "DigitalGlobe Standard flygfotoålder"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 cloudless - https://s2maps.eu av EOX IT Services GmbH (Innehåller modifierad data från Copernicus Sentinel 2017 & 2018)"
@@ -9809,10 +9784,6 @@
             },
             "ym-Western-Michigan-University": {
                 "name": "Geografiska klubben"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australien på Slack",
-                "description": "Registrera dig på {signupUrl}"
             },
             "talk-au": {
                 "name": "E-postlistan Talk-au",

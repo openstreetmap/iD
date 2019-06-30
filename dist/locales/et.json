@@ -2206,10 +2206,6 @@
                 "building_point": {
                     "name": "Hoone"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Kämpingukoht",
-                    "terms": "karavaniplats,kämpinguplats,telgiplats,telgikoht"
-                },
                 "club": {
                     "name": "Klubi"
                 },
@@ -4018,12 +4014,6 @@
             "Bing": {
                 "description": "Satelliidi- ja aerofotod.",
                 "name": "Bingi aerofotod"
-            },
-            "DigitalGlobe-Premium": {
-                "name": "DigitalGlobe'i pildimaterjal (premium)"
-            },
-            "DigitalGlobe-Standard": {
-                "name": "DigitalGlobe'i pildimaterjal (standard)"
             },
             "EsriWorldImagery": {
                 "description": "Esri Worldi pildimaterjal.",

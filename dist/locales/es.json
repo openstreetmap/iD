@@ -2856,6 +2856,10 @@
                     "label": "Dispositivos",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diámetro",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Cambiador de pañales disponible"
                 },
@@ -3495,6 +3499,9 @@
                 "operator": {
                     "label": "Operador"
                 },
+                "operator/type": {
+                    "label": "Tipo de operador"
+                },
                 "outdoor_seating": {
                     "label": "Asientos al aire libre"
                 },
@@ -3653,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "Edad mínima"
+                },
+                "polling_station": {
+                    "label": "Lugar de votación"
                 },
                 "population": {
                     "label": "Cantidad de población"
@@ -4224,6 +4234,9 @@
                         "tourism": "Turismo"
                     }
                 },
+                "valve": {
+                    "label": "Tipo"
+                },
                 "vending": {
                     "label": "Tipos de bienes"
                 },
@@ -4723,6 +4736,10 @@
                     "name": "Internet café",
                     "terms": "internet, terminales, cafe, cyber, cyber cafe, cybercafe, ciber, ciber café, cibercafé, juegos, juegos en red"
                 },
+                "amenity/karaoke": {
+                    "name": "Caja de karaoke",
+                    "terms": "club de karaoke, sala de karaoke, televisión karaoke, KTV"
+                },
                 "amenity/kindergarten": {
                     "name": "Preescolar o jardín de infancia",
                     "terms": "preescolar, pre primaria, jardín de infancia, jardín de niños, kinder, parvulario, párvulos, educación inicial, jardín de infantes, jardín maternal"
@@ -4861,6 +4878,10 @@
                 "amenity/police": {
                     "name": "Policía",
                     "terms": "policía, policia, comisaría, comisaria, gendarmería, gendarmeria, cuartel, guardia civil, guardia municipal, prefectura, gna, pfa, psa"
+                },
+                "amenity/polling_station": {
+                    "name": "Lugar de votación permanente",
+                    "terms": "urna electoral, papeleta electoral, boleta electoral, democracia, elecciones, colegio electoral, votación, elecciones, cabina electoral, máquina de votación"
                 },
                 "amenity/post_box": {
                     "name": "Buzón de correos",
@@ -5626,10 +5647,6 @@
                 "building_point": {
                     "name": "Edificio"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Lugar de acampe",
-                    "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana,"
-                },
                 "club": {
                     "name": "Clubs",
                     "terms": "asociación, logia, social, voluntariado, servicio, religioso, político, intercambio, cultural, deportivo, caridad, radio, arte, astronomía, juegos, ajedrez, bicicleta, cine, cocina, gastronomía, fan, anime, música, pesca, linux, caza, motocicletas, nudismo, veteranos"
@@ -5815,6 +5832,10 @@
                     "name": "Zapatero",
                     "terms": "zapatero, remendón, zapatería"
                 },
+                "craft/signmaker": {
+                    "name": "Fabricante de carteles",
+                    "terms": "fabricante, carteles, tiendas, negocios"
+                },
                 "craft/stonemason": {
                     "name": "Albañil",
                     "terms": "Albañil, Cantero, Enconfrador"
@@ -5926,6 +5947,9 @@
                     "name": "Vado",
                     "terms": "Vado, paso, cruce"
                 },
+                "ford_line": {
+                    "name": "Vado"
+                },
                 "golf/bunker": {
                     "name": "Búnker de arena",
                     "terms": "Recolector de arena, búnker, bunker, Trampa de arena, sand"
@@ -5993,6 +6017,10 @@
                 "healthcare/blood_donation": {
                     "name": "Centro de donación de sangre",
                     "terms": "banco de sangre, donación de sangre, transfusión de sangre, aféresis, plasmaféresis, plaquetoaféresis, donación de células madre"
+                },
+                "healthcare/counselling": {
+                    "name": "Centro de asesoramiento (Counselling)",
+                    "terms": "Counselling, counselor, Consultor Psicológico"
                 },
                 "healthcare/hospice": {
                     "name": "Hospicio",
@@ -7065,6 +7093,10 @@
                     "name": "Tubería subterránea",
                     "terms": "Petróleo, gas natural, agua, alcantarillado, aguas residuales, desechos, tubería, gasoducto, oleoducto"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Válvula de tubería",
+                    "terms": "petróleo, gas natural, agua, alcantarillado, aguas residuales"
+                },
                 "man_made/pumping_station": {
                     "name": "Estación de bombeo",
                     "terms": "estación de bombeo,  bomba, aguas residuales, aguas riego, aguas drenaje, agua potable, agua industrial, agua para energía, agua de lluvia, aguas servidas, aguas negras, aguas residuos urbanos, alcantarillado"
@@ -7096,6 +7128,10 @@
                 "man_made/survey_point": {
                     "name": "Punto geodésico",
                     "terms": "vértice geodésico, punto geodésico"
+                },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "Puerta japonesa, santuario sintoísta"
                 },
                 "man_made/tower": {
                     "name": "Torre",
@@ -7164,6 +7200,22 @@
                 "manhole/telecom": {
                     "name": "Pozo de telecomunicaciones",
                     "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
+                },
+                "military/bunker": {
+                    "name": "Bunker militar",
+                    "terms": "fuerza aerea, ejercito, pelea, fuerza, guardia, marino, marina, tropa, guerra"
+                },
+                "military/checkpoint": {
+                    "name": "Punto de control",
+                    "terms": "Fuerza Aérea, Ejército, Base, Guardia, Marina, Tropa, Guerra"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Sitio de explosión nuclear",
+                    "terms": "átomo, explosión, bomba, detona*, arma nuclear, sitio de prueba"
+                },
+                "military/office": {
+                    "name": "Oficina militar",
+                    "terms": "Fuerza Aérea, Ejército, Base, Alistarse, Luchar, Fuerza, Guardia, Marina, Reclutar, Tropa, Guerra"
                 },
                 "military/trench": {
                     "name": "Trinchera militar",
@@ -7676,6 +7728,10 @@
                 "point": {
                     "name": "Punto",
                     "terms": "Punto"
+                },
+                "polling_station": {
+                    "name": "Lugar de votación temporal",
+                    "terms": "urna electoral, papeleta electoral, boleta electoral, democracia, elecciones, colegio electoral, votación, elecciones, cabina electoral, máquina de votación"
                 },
                 "power": {
                     "name": "Línea eléctrica"
@@ -8259,6 +8315,10 @@
                 },
                 "shop/fashion": {
                     "name": "Tienda de moda"
+                },
+                "shop/fashion_accessories": {
+                    "name": "Tienda de accesorios de moda",
+                    "terms": "bolso, colonia, fragancia, sombrero, joyería, perfume, monedero, bufanda, gafas de sol lentes de sol, paraguas, billetera, reloj"
                 },
                 "shop/fireplace": {
                     "name": "Tienda de chimenea",
@@ -9093,34 +9153,6 @@
             "Bing": {
                 "description": "Imágenes satelitales y aéreas.",
                 "name": "Imágenes aéreas Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Términos y comentarios"
-                },
-                "description": "DigitalGlobe-Premium es un mosaico compuesto por el mapa base de DigitalGlobe con regiones seleccionadas llenas de imágenes con +Vivid o de áreas de interés personalizadas, resolución de 50 cm o superior, y actualizadas con mayor frecuencia con actualizaciones continuas.",
-                "name": "Imágenes DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Términos y comentarios"
-                },
-                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 13 y superior.",
-                "name": "Imágenes antiguas DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Términos y comentarios"
-                },
-                "description": "DigitalGlobe-Standard es un conjunto de imágenes seleccionadas que cubren el 86% de la superficie terrestre, con una resolución de 30-60 cm, donde esté disponible, rellenado por Landsat. La antigüedad promedio es de 2.31 años, con algunas áreas actualizadas 2 veces por año.",
-                "name": "Imágenes DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Términos y comentarios"
-                },
-                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 13 y superior.",
-                "name": "Imágenes antiguas DigitalGlobe Standard"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10947,13 +10979,17 @@
                 "name": "Club de geografía",
                 "description": "El capítulo de YouthMappers en la Universidad de Western Michigan"
             },
-            "Maptime-Australia-Slack": {
-                "name": "Slack de Maptime Australia",
-                "description": "Regístrate en {signupUrl}"
-            },
             "talk-au": {
                 "name": "Lista de correo Talk-au",
                 "description": "Lugar para que los mapeadores australianos chateen"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Slack de Maptime Oceanía",
+                "description": "Registrarse en {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "Lista de correo de Talk-nz",
+                "description": "Charla comunitaria OSM de Nueva Zelanda"
             },
             "OSM-AR-facebook": {
                 "name": "Facebook de OpenStreetMap Argentina",
@@ -11122,6 +11158,19 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Perú",
                 "description": "Noticias y recursos para la comunidad de OpenStreetMap Perú"
+            },
+            "uy-forum": {
+                "name": "Foro de OpenStreetMap UY",
+                "description": "Foro web de OpenStreetMap Uruguay"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Uruguay en IRC",
+                "description": "Únase a #osmuruguay en irc.freenode.org (puerto 6667)",
+                "extendedDescription": "Únase a #osmuruguay en irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "Lista de correo de Talk-uy",
+                "description": "Talk-uy es la lista de correo oficial de la comunidad uruguaya de OSM"
             },
             "LATAM-Facebook": {
                 "name": "Facebook de OpenStreetMap Latam",

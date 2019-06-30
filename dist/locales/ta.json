@@ -2492,26 +2492,6 @@
             }
         },
         "imagery": {
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "நிபந்தனைகள் & கருத்துகள்"
-                }
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "நிபந்தனைகள் & கருத்துகள்"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "நிபந்தனைகள் & கருத்துகள்"
-                }
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "நிபந்தனைகள் & கருத்துகள்"
-                }
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "நிபந்தனைகள் & கருத்துகள்"

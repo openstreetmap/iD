@@ -5069,10 +5069,6 @@
                 "building_point": {
                     "name": "Gebouw"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Individueel kampeerveld of sta-plaats op camping",
-                    "terms": "kampeerveldje,sta-plaats,staplaats"
-                },
                 "club": {
                     "name": "Club",
                     "terms": "vereniging"
@@ -8002,37 +7998,39 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Vlaanderen meest recente luchtfotografie"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Vlaanderen 2013-2015 luchtfotografie 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Vlaanderen GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionele hillshade 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
+            },
             "Bing": {
                 "description": "Satelliet- en luchtfoto's.",
                 "name": "Bing-luchtfoto's"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Gebruiksvoorwaarden & feedback"
-                },
-                "description": "DigitalGlobe-Premium is een mosaik bestaand uit de DigitalGlobe basiskaart, waarbij bepaalde regio's gevuld zijn met +Vivid of eigen gemaakte beelden uit gebieden die van interesse zijn, met een 50cm resolutie of beter, en die vaker worden vernieuwd met recente updates",
-                "name": "DigitalGlobe-premiumbeelden"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Gebruiksvoorwaarden & feedback"
-                },
-                "description": "Beeldgrenzen en opnamedata. Labels verschijnen op zoomniveau 13 en hoger.",
-                "name": "DigitalGlobe-premiumbeelden Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Gebruiksvoorwaarden & feedback"
-                },
-                "description": "DigitalGlobe-Standard is een uitgekozen set van foto's, die 86% van de landmassa van de aarde omvatten, met 30-60cm resolutie waar het mogelijk is, aangevuld door Landsat. De Doorsneeleeftijd is 2,31 jaar, sommige plaatsen worden 2x per jaar geüpdatet",
-                "name": "DigitalGlobe-standaardbeelden"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Gebruiksvoorwaarden & feedback"
-                },
-                "description": "Beeldgrenzen en opnamedata. Labels verschijnen op zoomniveau 13 en hoger.",
-                "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -8068,6 +8066,20 @@
                 },
                 "description": "Satelliet- en luchtfoto's.",
                 "name": "Mapbox-satellietbeelden"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Termen en terugkoppeling"
+                },
+                "description": "Maxar Premium is een mozaïek die samengesteld is uit de Maxar-basiskaart met bepaalde regionen gevuld met +Vivid of maatwerk beelden van belangrijke gebieden, 50cm-resolutie of beter, en meer frequent ververst om doorlopen updates.",
+                "name": "Maxar premiumbeelden (bèta)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Termen en terugkoppeling"
+                },
+                "description": "Maxar Standard is een gecureerde set van beelden die 86% van het aardoppervlak bedekken, met 30-60cm-resolutie waar beschikbaar, aangevuld met Landsat. Gemiddelde is het 2,31 oud, met sommige gebieden die 2x per jaar worden geüpdatet.",
+                "name": "Maxar standaardbeelden (bèta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -8128,6 +8140,10 @@
             "US-TIGER-Roads-2018": {
                 "description": "Geel = Publiek domein kaartgegevens van de US Census. Rood = data niet gevonden in OpenStreetMap",
                 "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Het meest recente jaar van DOQQs van het National Agriculture Imagery Program (NAIP) voor de aaneengesloten staten van de Verenigde Staten.",
+                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Wegen: Groene omlijning = ongeclassificeerd. Bruine omlijning = veldweg. Oppervlak: grind = lichtbruin gevuld, asfalt = zwart, bestraat = grijs, grond = wit, beton = blauw, gras = groen. Seizoensgebonden = witte balken",
@@ -8206,6 +8222,27 @@
                 },
                 "description": "Orthofoto-laag voorzien door basemap.at. 'Opvolger' van geoimage.at.",
                 "name": "basemap.at Orthofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Annotatie-overlay is geleverd door basemap.at.",
+                "name": "basemap.at Overlay"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Oppervlaktelaag is geleverd door basemap.at.",
+                "name": "basemap.at Oppervlakte"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terreinlaag is geleverd door basemap.at.",
+                "name": "basemap.at Terrein"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -8988,9 +9025,6 @@
             },
             "Western-Slope-meetup": {
                 "name": "Western Slope OSM-meetup"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Slack"
             },
             "talk-au": {
                 "name": "Talk-au Mailinglijst"

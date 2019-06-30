@@ -2856,6 +2856,10 @@
                     "label": "התקנים",
                     "placeholder": "1, 2, 3…"
                 },
+                "diameter": {
+                    "label": "קוטר",
+                    "placeholder": "5 מ״מ, 10 ס״מ, 15 אינטש…"
+                },
                 "diaper": {
                     "label": "יש החלפת חיתולים"
                 },
@@ -3495,6 +3499,9 @@
                 "operator": {
                     "label": "מפעיל"
                 },
+                "operator/type": {
+                    "label": "סוג מפעיל"
+                },
                 "outdoor_seating": {
                     "label": "ישיבה בחוץ"
                 },
@@ -3653,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "גיל מזערי"
+                },
+                "polling_station": {
+                    "label": "קלפי"
                 },
                 "population": {
                     "label": "אוכלוסיה"
@@ -4224,6 +4234,9 @@
                         "tourism": "תיירות"
                     }
                 },
+                "valve": {
+                    "label": "סוג"
+                },
                 "vending": {
                     "label": "סוגי הטובין"
                 },
@@ -4723,6 +4736,10 @@
                     "name": "קפה אינטרנט",
                     "terms": "קפה אינטרנט"
                 },
+                "amenity/karaoke": {
+                    "name": "תיבת קריוקי",
+                    "terms": "מכונת קריוקי,מכשיר קריוקי,בידורית"
+                },
                 "amenity/kindergarten": {
                     "name": "גן חובה",
                     "terms": "גן חובה"
@@ -4861,6 +4878,10 @@
                 "amenity/police": {
                     "name": "משטרה",
                     "terms": "תחנת משטרה"
+                },
+                "amenity/polling_station": {
+                    "name": "קלפי קבוע",
+                    "terms": "תיבת הצבעה,תיבת קלפי,הגשת הצבעות,בחירות,עמדת הצבעה,מכונת הצבעה"
                 },
                 "amenity/post_box": {
                     "name": "תיבת דואר",
@@ -5081,21 +5102,24 @@
                     "name": "בתי שימוש עם הדחה"
                 },
                 "amenity/toilets/disposal/pitlatrine": {
-                    "name": "בור ספיגה"
+                    "name": "בור ספיגה",
+                    "terms": "בור חרא,בור קקי,משתנה,שירותי בור,בור שופכין,בור צרכים"
                 },
                 "amenity/townhall": {
                     "name": "בניין עירייה",
                     "terms": "בניין עיריה"
                 },
                 "amenity/toy_library": {
-                    "name": "ספריית צעצועים"
+                    "name": "ספריית צעצועים",
+                    "terms": "צעצוע,משחק,הנאה,פנאי,כיף,למידה,חשיבה"
                 },
                 "amenity/university": {
                     "name": "מתחם אוניברסיטה",
                     "terms": "שטחי אוניברסיטה,מרחב אוניברסיטה,אזור אוניברסיטה"
                 },
                 "amenity/vehicle_inspection": {
-                    "name": "בדיקת כלי רכב"
+                    "name": "בדיקת כלי רכב",
+                    "terms": "בדיקת מכוניות,בדיקת משאיות,בדיקת אופנועים,בדיקת אוטובוסים,בדיקת מוניות"
                 },
                 "amenity/vending_machine": {
                     "name": "מכונת ממכר",
@@ -5126,7 +5150,8 @@
                     "terms": "אוטומט השטחת מטבעות"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "מתקן שקיות פסולת"
+                    "name": "מתקן שקיות פסולת",
+                    "terms": "שקי קקי,שקית קקי,קקית,צרכים,כלבים,צרכים של כלב,קקי של כלב"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "מכונת היגיינה נשית",
@@ -5606,10 +5631,6 @@
                 "building_point": {
                     "name": "בניין"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "מאהל",
-                    "terms": "מתחם אוהלים,אוהלי מחאה"
-                },
                 "club": {
                     "name": "מועדון",
                     "terms": "מועדון"
@@ -5790,6 +5811,10 @@
                     "name": "סנדלר",
                     "terms": "סנדלרית"
                 },
+                "craft/signmaker": {
+                    "name": "ייצור שלטים",
+                    "terms": "שלטים,יצרן שלטים,שלטיה"
+                },
                 "craft/stonemason": {
                     "name": "סתת",
                     "terms": "סתתית,סתתת"
@@ -5966,6 +5991,10 @@
                 "healthcare/blood_donation": {
                     "name": "מרכז תרומת דם",
                     "terms": "מרכז תרומת דם"
+                },
+                "healthcare/counselling": {
+                    "name": "מרכז ייעוץ",
+                    "terms": "מרכז יעוץ"
                 },
                 "healthcare/hospice": {
                     "name": "הוספיס",
@@ -7019,6 +7048,10 @@
                 "man_made/pipeline/underground": {
                     "name": "צנרת תת־קרקעית"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "שסתום צינור",
+                    "terms": "ברז צינור,ברז"
+                },
                 "man_made/pumping_station": {
                     "name": "תחנת שאיבה",
                     "terms": "תחנת שאיבה"
@@ -7050,6 +7083,10 @@
                 "man_made/survey_point": {
                     "name": "נקודת גבול",
                     "terms": "נקודת מדד,נקודת מדידה"
+                },
+                "man_made/torii": {
+                    "name": "טוריאי",
+                    "terms": "שער יפני,מקדש שינטו"
                 },
                 "man_made/tower": {
                     "name": "מגדל",
@@ -7118,6 +7155,22 @@
                 "manhole/telecom": {
                     "name": "בור תקשורת",
                     "terms": "בור טלקום"
+                },
+                "military/bunker": {
+                    "name": "בונקר צבאי",
+                    "terms": "בונקר,תת־קרקעי,מבצר,מלחמה"
+                },
+                "military/checkpoint": {
+                    "name": "עמדת בידוק",
+                    "terms": "נקודת בידוק,מעבר גבול,צבאי,בסיס,משמר,מלחמה,חיל הים,חיילים"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "אתר פיצוץ גרעיני",
+                    "terms": "אטום,פיצוץ,פצצה,אתר,ניסוי,גרעיני"
+                },
+                "military/office": {
+                    "name": "משרד צבאי",
+                    "terms": "שלישות,קצין העיר,צה״ל,צבא,מילואים"
                 },
                 "military/trench": {
                     "name": "שוחה צבאית",
@@ -7296,6 +7349,10 @@
                     "name": "ארגון ללא מטרת רווח",
                     "terms": "ארגון ללא מטרת רווח"
                 },
+                "office/bail_bond_agent": {
+                    "name": "סוכן שחרור בערבות",
+                    "terms": "שחרור בערבות,שטר ערבות,משחרר בערבות"
+                },
                 "office/charity": {
                     "name": "משרד צדקה",
                     "terms": "משרד צדקה"
@@ -7313,10 +7370,12 @@
                     "terms": "משרד שגרירות,בית שגריר"
                 },
                 "office/diplomatic/consulate": {
-                    "name": "קונסוליה"
+                    "name": "קונסוליה",
+                    "terms": "שגרירות,קונסוליה,דיפלומטיה,דיפלומטים,נציגות"
                 },
                 "office/diplomatic/embassy": {
-                    "name": "שגרירות"
+                    "name": "שגרירות",
+                    "terms": "שגרירות,קונסוליה,דיפלומטיה,דיפלומטים,דיפלומט"
                 },
                 "office/diplomatic/liaison": {
                     "name": "משרד קישור",
@@ -7606,6 +7665,10 @@
                     "name": "נקודה",
                     "terms": "נקודה"
                 },
+                "polling_station": {
+                    "name": "קלפי זמנית",
+                    "terms": "פתקי הצבעה,דמוקרטיה,תיבת קלפי,תיבת הצבעה,הגשת הצבעות,בחירות,עמדת הצבעה,מכונת הצבעה"
+                },
                 "power": {
                     "name": "חשמל"
                 },
@@ -7669,7 +7732,8 @@
                     "terms": "שנאי"
                 },
                 "public_transport/platform": {
-                    "name": "רציף תחבורה"
+                    "name": "רציף תחבורה",
+                    "terms": "רציף,תחנה,תח״צ,תחב״צ,תעבורה,תחבורה"
                 },
                 "public_transport/platform/aerialway": {
                     "name": "רציף תחבורה אווירית"
@@ -7828,7 +7892,8 @@
                     "terms": "אוטם מסילה"
                 },
                 "railway/construction": {
-                    "name": "מסילת רכבת בהקמה"
+                    "name": "מסילת רכבת בהקמה",
+                    "terms": "מסילה בשיפוץ,מסילה בהרכבה,מסילה בהקמה,שיפוץ מסילת,הרכבת מסילה,הקמת מסילה"
                 },
                 "railway/crossing": {
                     "name": "חציית מסילת רכבת (דרך)",
@@ -7881,7 +7946,8 @@
                     "terms": "מסילת רכבת"
                 },
                 "railway/rail/highspeed": {
-                    "name": "מסילה במהירות גבוהה"
+                    "name": "מסילה במהירות גבוהה",
+                    "terms": "רכבת טסה"
                 },
                 "railway/signal": {
                     "name": "תמרור רכבת",
@@ -8063,6 +8129,10 @@
                     "name": "חנות שטיחים",
                     "terms": "חנות שטיחים"
                 },
+                "shop/catalogue": {
+                    "name": "חנות קטלוגים",
+                    "terms": "בחירה קטלוגית,בחירה מקטלוג,חנות ללא מלאי,חנות הזמנות,חנות קטלוג"
+                },
                 "shop/charity": {
                     "name": "חנות צדקה",
                     "terms": "חנות צדקה"
@@ -8170,6 +8240,10 @@
                 "shop/fashion": {
                     "name": "חנות אופנה"
                 },
+                "shop/fashion_accessories": {
+                    "name": "חנות אביזרי אופנה",
+                    "terms": "אקססוריז,תיק,בושם,קולון,כובע,תכשיט,תכשיטים,פרפום,ארנק,צעיף,משקפיים,מטריה,שעון,תיק יד,תיק צד"
+                },
                 "shop/fireplace": {
                     "name": "חנות חימום",
                     "terms": "אח,קמין,תנור,חימום"
@@ -8194,7 +8268,8 @@
                     "terms": "מזון מוקפא,מזון קפוא,הקפאה,שימור"
                 },
                 "shop/fuel": {
-                    "name": "חנות נוחות"
+                    "name": "חנות נוחות",
+                    "terms": "חומרי בערה,אנרגיה,דלק,גז"
                 },
                 "shop/funeral_directors": {
                     "name": "קברן",
@@ -8642,7 +8717,8 @@
                     "terms": "מידע תיירותי"
                 },
                 "tourism/information/route_marker": {
-                    "name": "סימון שביל"
+                    "name": "סימון שביל",
+                    "terms": "סימון שביל,שביל ישראל,סימון דרך,מסלול ירוק,מסלול אדום,מסלול כחול,מסלול שחור,סימון מסלול טיול,מטיבי לכת,טיול בטבע"
                 },
                 "tourism/information/terminal": {
                     "name": "מסוף מידע",
@@ -8679,6 +8755,10 @@
                 "tourism/zoo": {
                     "name": "גן חיות",
                     "terms": "גן חיות"
+                },
+                "tourism/zoo/petting": {
+                    "name": "פינת חי",
+                    "terms": "פינת ליטוף,חיות מחמד,ליטוף,אטרקציה לילדים,חוות ליטוף,חוות ילדים,חיות משק,משק ליטוף"
                 },
                 "traffic_calming": {
                     "name": "הקלת פקקי תנועה",
@@ -8758,6 +8838,10 @@
                 },
                 "type/multipolygon": {
                     "name": "רב־מצולעים"
+                },
+                "type/public_transport/stop_area_group": {
+                    "name": "מקבץ תחנות הסעה",
+                    "terms": "מתחם תחנות הסעה,קבוצת תחנות הסעה,מקבץ תחנות היסעים,תחנה מרכזית,מקבץ תחנות אוטובוס,מתחם תחנות אוטובוס"
                 },
                 "type/restriction": {
                     "name": "הפרדה",
@@ -8981,34 +9065,6 @@
             "Bing": {
                 "description": "צילומי אוויר ולוויין.",
                 "name": "צילומי אוויר של Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "DigitalGlobe-Premium זה פסיפס שנוצר ע\"י DigitalGlobe עם אזורים נבחרים ברזולוציה 50cm+, עם עדכונים שוטפים.",
-                "name": "צילומי DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": " גבולות ומועדי צילום. תוויות מופיעות ברמות תקריב של 13 ומעלה. ",
-                "name": "דיגיטל גלוב תצלומי אוויר פרימיום"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "DigitalGlobe-Standard זה סט תמונות שמכסה 86% מיבשות כדור הארץ, ברזולוציה 30-60cm איפה שיש, עם חורים בכיסוי מכוסים ע\"י Landsat. גיל ממוצע של כל צילום 2.31 שנים. יש אזורים שמכוסים פעמיים בשנה",
-                "name": "צילומים תקניים של DigitalGlobe"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "גבולות תמונות רקע ותאריכי צילום. תוויות מופיעות בתקריב ברמה 13 ומעלה.",
-                "name": "דיגיטל גלוב תצלומי אוויר"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10167,10 +10223,6 @@
             },
             "ym-University-of-California-Davis": {
                 "name": "מועדון המיפוי"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "ה־Slack של Maptime אוסטרליה",
-                "description": "ניתן להירשם בכתובת {signupUrl}"
             },
             "talk-au": {
                 "name": "קבוצת הדיוור Talk-au",

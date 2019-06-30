@@ -4587,10 +4587,6 @@
                 "building_point": {
                     "name": "Épület"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Sátor- vagy lakókocsihely",
-                    "terms": "sátorhely, táborhely, kempinghely"
-                },
                 "club": {
                     "name": "Klub",
                     "terms": "Club"
@@ -7157,34 +7153,6 @@
             "Bing": {
                 "description": "Műholdképek és légifelvételek",
                 "name": "Bing légifelvételek"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "description": "A DigitalGlobe-Premium egy a DigitalGlobe alaptérképből készült mozaik, amelyben kiválasztott régiókban +Vivid vagy egyéni légifelvételek találhatóak, 50 cm-es vagy jobb pontossággal, és ezek a szokásosnál gyakrabban frissülnek.",
-                "name": "DigitalGlobe Premium felvételek"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "description": "Felvételi keretek és készítési dátumok. A címkék 13-as vagy magasabb nagyítási szinten jelennek meg.",
-                "name": "DigitalGlobe Premium historikus felvételek"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "description": "A DigitalGlobe-Standard egy válogatott légifelvétel-készlet, amely a Föld szárazföldjének 86%-át lefedi, 30-60 cm-es felbontással ahol az elérhető, a többi helyen pedig a Landsat adataival van kitöltve. Az átlagéletkor 2,31 év, egyes területek pedig évente kétszer frissülnek.",
-                "name": "DigitalGlobe Standard felvételek"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "description": "Felvételi keretek és készítési dátumok. A címkék 13-as vagy magasabb nagyítási szinten jelennek meg.",
-                "name": "DigitalGlobe Standard historikus felvételek"
             },
             "EsriWorldImagery": {
                 "attribution": {

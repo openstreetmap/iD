@@ -3,11 +3,24 @@
         "icons": {
             "information": "info",
             "remove": "fjern",
-            "undo": "angre"
+            "undo": "angre",
+            "zoom_to": "zoom til",
+            "copy": "kopier",
+            "open_wikidata": "opne på wikidata.org",
+            "favorite": "favoritt"
+        },
+        "toolbar": {
+            "recent": "Nyleg",
+            "favorites": "Favorittar",
+            "add_feature": "Legg til eigenskap"
         },
         "modes": {
+            "add_feature": {
+                "title": "Legg til ein eigenskap"
+            },
             "add_area": {
-                "title": "Område"
+                "title": "Område",
+                "filter_tooltip": "område"
             },
             "add_line": {
                 "title": "Linje"
@@ -22,6 +35,9 @@
             },
             "delete": {
                 "title": "Slett"
+            },
+            "downgrade": {
+                "title": "Nedgrader"
             },
             "disconnect": {
                 "title": "Kople frå"
@@ -239,16 +255,6 @@
             }
         },
         "imagery": {
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Villkår og tilbakemelding"
-                }
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Vilkår og tilbakemelding"
-                }
-            },
             "MAPNIK": {
                 "name": "OpenStreetMap (standard)"
             }

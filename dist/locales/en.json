@@ -9358,34 +9358,6 @@
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "DigitalGlobe Premium Imagery"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Premium Imagery Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "DigitalGlobe Standard Imagery"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Standard Imagery Vintage"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
@@ -10721,6 +10693,14 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt Mailing List",
+                "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
             },
             "si-forum": {
                 "name": "OpenStreetMap Slovenia Forum",

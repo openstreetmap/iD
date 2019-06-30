@@ -4643,18 +4643,6 @@
                 "description": "Satelitné a letecké zábery",
                 "name": "Bing letecké zábery"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Podmienky & pripomienky"
-                },
-                "name": "DigitalGlobe prémiové zábery"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Podmienky & pripomienky"
-                },
-                "name": "DigitalGlobe štandardné zábery"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Podmienky & pripomienky"

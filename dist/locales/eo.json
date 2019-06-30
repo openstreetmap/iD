@@ -1788,7 +1788,7 @@
                     "reference": "Iuj objektoj havu pliajn etikedojn."
                 },
                 "noncanonical_brand": {
-                    "message": "{feature} ŝajnas esti marki kun nenormaj etikedoj.",
+                    "message": "{feature} ŝajnas esti marko kun nenormaj etikedoj.",
                     "reference": "Ĉiuj objektoj de la sama marko estu etikeditaj sammaniere."
                 }
             },
@@ -2854,6 +2854,10 @@
                     "label": "Aparatoj",
                     "placeholder": "1, 2, 3…"
                 },
+                "diameter": {
+                    "label": "Diametro",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Tablo por travindotukado"
                 },
@@ -3493,6 +3497,9 @@
                 "operator": {
                     "label": "Administranto"
                 },
+                "operator/type": {
+                    "label": "Speco de administranto"
+                },
                 "outdoor_seating": {
                     "label": "Seĝoj ekstere"
                 },
@@ -3651,6 +3658,9 @@
                 },
                 "playground/min_age": {
                     "label": "Minimuma aĝo"
+                },
+                "polling_station": {
+                    "label": "Balotejo"
                 },
                 "population": {
                     "label": "Loĝantaro"
@@ -4222,6 +4232,9 @@
                         "tourism": "turisma"
                     }
                 },
+                "valve": {
+                    "label": "Speco"
+                },
                 "vending": {
                     "label": "Specoj de varoj"
                 },
@@ -4721,6 +4734,10 @@
                     "name": "Retkafejo",
                     "terms": "interreta kafejo,retumejo"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaokeejo",
+                    "terms": "karaokeo,kantado"
+                },
                 "amenity/kindergarten": {
                     "name": "Infanvartejo (ISCED 0)",
                     "terms": "infanoghardeno,infanogxardeno,antaŭlernejo,kindergarteno,infanĝardeno,infanghardeno,infangxardeno,infanvartejo,lernludejo"
@@ -4859,6 +4876,10 @@
                 "amenity/police": {
                     "name": "Policejo",
                     "terms": "polico,komisarejo,komisariato,policistoj,policistejo"
+                },
+                "amenity/polling_station": {
+                    "name": "Balotejo (neŝanĝanta loko)",
+                    "terms": "baloto,voĉdonejo,elektejo"
                 },
                 "amenity/post_box": {
                     "name": "Poŝtkesto",
@@ -5625,10 +5646,6 @@
                 "building_point": {
                     "name": "Konstruaĵo"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Kampadeja loko",
-                    "terms": "kampadejo,tendo"
-                },
                 "club": {
                     "name": "Klubejo",
                     "terms": "klubo,asocio,kulturdomo"
@@ -5814,6 +5831,10 @@
                     "name": "Ŝuista laborejo",
                     "terms": "ŝuisto,shuisto,sxuisto,botisto"
                 },
+                "craft/signmaker": {
+                    "name": "Laborejo de sign-faristo",
+                    "terms": "signfaristo,signofaristo,emblemfaristo,ŝildofaristo"
+                },
                 "craft/stonemason": {
                     "name": "Ŝton-tranĉista laborejo",
                     "terms": "ŝtontranĉisto,shtontranchisto,sxtontrancxisto,ŝtonisto,shtonisto,sxtonisto"
@@ -5925,6 +5946,9 @@
                     "name": "Travadejo",
                     "terms": "vadejo,trarivero,transrivero"
                 },
+                "ford_line": {
+                    "name": "Travadejo"
+                },
                 "golf/bunker": {
                     "name": "Sabla malhelpaĵo",
                     "terms": "bunkro,sablejo"
@@ -5992,6 +6016,10 @@
                 "healthcare/blood_donation": {
                     "name": "Sangodonejo",
                     "terms": "sangdonejo"
+                },
+                "healthcare/counselling": {
+                    "name": "Konsultejo pri sano",
+                    "terms": "konsultejo,sankonsultejo,konsilejo"
                 },
                 "healthcare/hospice": {
                     "name": "Hospico",
@@ -7064,6 +7092,10 @@
                     "name": "Konduktubo subtera",
                     "terms": "dukto,tubaro,tubolinio,tubkondukilo,naftodukto,gasoduto,akvodukto"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Valvo de konduktubo",
+                    "terms": "klapo"
+                },
                 "man_made/pumping_station": {
                     "name": "Pump-stacio",
                     "terms": "pumpstacio,pumpostacio,pumpilo,pumpejo,ĉerpstacio"
@@ -7095,6 +7127,10 @@
                 "man_made/survey_point": {
                     "name": "Geodezia vertico",
                     "terms": "geodezio,termezurado,referencpunkto"
+                },
+                "man_made/torii": {
+                    "name": "Torijo",
+                    "terms": "ŝintoo,sanktejo,templo,torii"
                 },
                 "man_made/tower": {
                     "name": "Turo",
@@ -7163,6 +7199,22 @@
                 "manhole/telecom": {
                     "name": "Stratkanala (telekomunikado) kovrilo",
                     "terms": "stratkanalo,kabloj,subteraj kabloj,telefonaj kabloj"
+                },
+                "military/bunker": {
+                    "name": "Ŝirmejo armea",
+                    "terms": "bunkro,shirmejo,sxirmejo,blokhaŭso"
+                },
+                "military/checkpoint": {
+                    "name": "Kontrolejo armea",
+                    "terms": "armea kontrolejo,kontrolpunkto"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Eksplodejo de nuklea bombo",
+                    "terms": "nuklea testejo,atombombo,a-bombo,testejo,bombejo"
+                },
+                "military/office": {
+                    "name": "Oficejo armea",
+                    "terms": "armea oficejo,milita oficejo"
                 },
                 "military/trench": {
                     "name": "Tranĉeo armea",
@@ -7667,6 +7719,10 @@
                 "point": {
                     "name": "Punkto",
                     "terms": "punkto"
+                },
+                "polling_station": {
+                    "name": "Balotejo (portempa loko)",
+                    "terms": "baloto,voĉdonejo,elektejo"
                 },
                 "power": {
                     "name": "Elektr-energia objekto"
@@ -8247,6 +8303,10 @@
                 "shop/fashion": {
                     "name": "Mod-butiko"
                 },
+                "shop/fashion_accessories": {
+                    "name": "Galanteria (vestaj akcesoraĵoj) vendejo",
+                    "terms": "galanterio,galanteriejo,akcesoraĵoj,saketoj,mansakoj,ombreloj"
+                },
                 "shop/fireplace": {
                     "name": "Kamen-vendejo",
                     "terms": "kamenoj,hejtiloj"
@@ -8396,6 +8456,10 @@
                 "shop/medical_supply": {
                     "name": "Medicin-aparata vendejo",
                     "terms": "medicinaĵoj"
+                },
+                "shop/military_surplus": {
+                    "name": "Ne-plu-necesa-armea-ekipaĵo vendejo",
+                    "terms": "armea ekipaĵo,uniformoj,armiloj"
                 },
                 "shop/mobile_phone": {
                     "name": "Poŝtelefona vendejo",
@@ -9076,34 +9140,6 @@
             "Bing": {
                 "description": "Satelita kaj aera fotaroj.",
                 "name": "Aera fotaro de Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "DigitalGlobe-Premium estas kunmetaĵo de Digital-Globe-bazmapo kun kelkaj regionoj plenigitaj per +Vivid fotaro je distingivo 50cm aŭ pli bona kaj aktualigata pli ofte.",
-                "name": "DigitalGlobe: detala fotaro"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
-                "name": "Detala fotaro de DigitalGlobe - fot-dato"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "DigitalGlobe-Standard estas prizorgata fotaro ampleksanta 86% da tero je distingivo 30–60cm (se disponebla), danke al programo Landsat. Mezuma aĝo de fotaro estas 2,31a, sed kelkaj areoj estas aktualigataj dufoje en jaro.",
-                "name": "DigitalGlobe: norma fotaro"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
-                "name": "Norma fotaro de DigitalGlobe - fot-dato"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {

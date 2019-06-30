@@ -2385,9 +2385,6 @@
             "PHXGeo-twitter": {
                 "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
             },
-            "Maptime-Australia-Slack": {
-                "description": "Izena eman {signupUrl}-ean"
-            },
             "OSM-AR-facebook": {
                 "extendedDescription": "Lekuko komunitateko albisteak"
             },
