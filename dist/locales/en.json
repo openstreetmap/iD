@@ -10618,6 +10618,14 @@
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
             },
+            "pt-mailinglist": {
+                "name": "Talk-pt Mailing List",
+                "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
+            },
             "si-forum": {
                 "name": "OpenStreetMap Slovenia Forum",
                 "description": "Forum of OpenStreetMap community in Slovenia"
