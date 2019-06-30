@@ -3864,11 +3864,6 @@ en:
       building_point:
         # building=*
         name: Building
-      camp_site/camp_pitch:
-        # camp_site=camp_pitch
-        name: Camp Pitch
-        # 'terms: tent,rv'
-        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       club:
         # club=*
         name: Club
@@ -5429,6 +5424,11 @@ en:
         name: Bunker Silo
         # 'terms: Silage,Storage'
         terms: '<translate with synonyms or related terms for ''Bunker Silo'', separated by commas>'
+      man_made/cairn:
+        # man_made=cairn
+        name: Cairn
+        # 'terms: rock pile,stone stack,stone pile,càrn'
+        terms: '<translate with synonyms or related terms for ''Cairn'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
@@ -7078,6 +7078,11 @@ en:
         name: Hifi Store
         # 'terms: audio,hi-fi,high fidelity,stereo,video'
         terms: '<translate with synonyms or related terms for ''Hifi Store'', separated by commas>'
+      shop/hobby:
+        # shop=hobby
+        name: Hobby Shop
+        # 'terms: manga,figurine,model'
+        terms: '<translate with synonyms or related terms for ''Hobby Shop'', separated by commas>'
       shop/houseware:
         # shop=houseware
         name: Houseware Store
@@ -7465,6 +7470,11 @@ en:
         # tourism=attraction
         name: Tourist Attraction
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
+      tourism/camp_pitch:
+        # torism=camp_pitch
+        name: Camp Pitch
+        # 'terms: tent,rv'
+        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       tourism/camp_site:
         # tourism=camp_site
         name: Campground

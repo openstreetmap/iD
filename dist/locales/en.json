@@ -5837,10 +5837,6 @@
                     "name": "Warehouse",
                     "terms": ""
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Camp Pitch",
-                    "terms": "tent,rv"
-                },
                 "club": {
                     "name": "Club",
                     "terms": "social"
@@ -7192,6 +7188,10 @@
                 "man_made/bunker_silo": {
                     "name": "Bunker Silo",
                     "terms": "Silage,Storage"
+                },
+                "man_made/cairn": {
+                    "name": "Cairn",
+                    "terms": "rock pile,stone stack,stone pile,càrn"
                 },
                 "man_made/chimney": {
                     "name": "Chimney",
@@ -8613,6 +8613,10 @@
                     "name": "Hifi Store",
                     "terms": "audio,hi-fi,high fidelity,stereo,video"
                 },
+                "shop/hobby": {
+                    "name": "Hobby Shop",
+                    "terms": "manga,figurine,model"
+                },
                 "shop/houseware": {
                     "name": "Houseware Store",
                     "terms": "home,household,kitchenware"
@@ -8940,6 +8944,10 @@
                 "tourism/attraction": {
                     "name": "Tourist Attraction",
                     "terms": ""
+                },
+                "tourism/camp_pitch": {
+                    "name": "Camp Pitch",
+                    "terms": "tent,rv"
                 },
                 "tourism/camp_site": {
                     "name": "Campground",

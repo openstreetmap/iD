@@ -209,6 +209,10 @@
       "replace": {"building": "$1"}
     },
     {
+      "old": {"camp_site": "camp_pitch"},
+      "replace": {"tourism": "camp_pitch"}
+    },
+    {
       "old": {"color": "*"},
       "replace": {"colour": "$1"}
     },
