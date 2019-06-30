@@ -4260,30 +4260,6 @@
                 "description": "Imáxenes aerees y de satélite.",
                 "name": "Imáxenes aerees de Bing."
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Términos y comentarios "
-                },
-                "name": "Imáxenes DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Términos y comentarios "
-                },
-                "name": "Imáxenes antigües de DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Términos y comentarios "
-                },
-                "name": "Imáxenes DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Términos y comentarios "
-                },
-                "name": "Imáxenes antigües de DigitalGlobe Standard"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Términos y comentarios "

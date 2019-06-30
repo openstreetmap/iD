@@ -11,7 +11,7 @@
             "favorite": "suosikki"
         },
         "toolbar": {
-            "inspect": "Käsittele",
+            "inspect": "Muokkaa",
             "undo_redo": "Kumoa/tee uudelleen",
             "recent": "Viimeisimmät",
             "favorites": "Suosikit",
@@ -554,6 +554,7 @@
         },
         "geocoder": {
             "search": "Etsi maailmanlaajuisesti...",
+            "no_results_visible": "Ei tuloksia näkyvällä kartalla",
             "no_results_worldwide": "Ei tuloksia"
         },
         "geolocate": {
@@ -799,6 +800,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "Kaikkia muutoksia ei ole tallennettu",
+            "description": "Haluatko palauttaa tallentamattomat muutokset edelliseltä muokkauskerralta?",
+            "restore": "Palauta muutokset",
+            "reset": "Hylkää muutokset"
+        },
         "save": {
             "title": "Tallenna",
             "help": "Tarkista tekemäsi muutokset ja tallenna ne OpenStreetMapiin kaikkien nähtäville.",
@@ -833,10 +840,14 @@
             }
         },
         "success": {
+            "just_edited": "Muokkasit juuri OpenStreetMapia!",
+            "thank_you": "Kiitos avustasi!",
+            "thank_you_location": "Kiitos, että paransit karttaa alueella {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ","
             },
+            "help_html": "Karttaan tehdyt muutokset ilmestyvät OpenStreetMap-sivustolle muutaman minuutin kuluessa. Muualle muutosten ilmestyminen saattaa viedä kauemmin.",
             "help_link_text": "Lisätietoja",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Näytä muutokset OSM-kartalla",
@@ -853,7 +864,10 @@
             "cancel": "Peruuta"
         },
         "splash": {
-            "walkthrough": "Aloitusopas"
+            "welcome": "Tervetuloa iD- OpenStreetMapin kartanmuokkausohjelmaan",
+            "text": "iD on tehokas ja helppokäyttöinen kartanmuokkausohjelma, jolla luodaan maailman tasokkain kartta. Tämä on versio {version}. Lisätietoja ohjelmasta on osoitteessa {website}, ja ohjelmistovirheistä voi ilmoittaa osoitteessa {github}.",
+            "walkthrough": "Aloitusopas",
+            "start": "Muokkaa heti"
         },
         "source_switch": {
             "live": "suora lähetys",
@@ -899,6 +913,9 @@
                     },
                     "mr": {
                         "title": "Puuttuva geometria"
+                    },
+                    "tr": {
+                        "title": "Puuttuva kääntymisrajoitus"
                     }
                 }
             },
@@ -1167,7 +1184,7 @@
                 "open_data_h": "Avoin data",
                 "open_data": "Tekemäsi muokkaukset näkyvät kaikille käyttäjille. Muokkauksesi voi perustua paikallistuntemukseen, paikan päällä tehtyihin havaintoihin tai ilmakuva- ja katutasokuvamateriaaleihin. Tietojen kopiointi kaupallisista lähteistä, kuten Google-kartoista, [on ehdottomasti kielletty](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Ennen aloittamista",
-                "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän muokkausohjelmaan ennen muokkaamisen aloittamista. Tämän kartanmuokkausohjelman aloitusoppaan avulla voit harjoitella interaktiivisesti OpenStreetMapin muokkaamista. Aloita harjoittelu napsauttamalla Aloita aloitusopas - se vie vain 15 minuuttia.",
+                "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän muokkausohjelmaan ennen muokkaamisen aloittamista. Tämän kartanmuokkausohjelman aloitusoppaan avulla voit harjoitella interaktiivisesti OpenStreetMapin muokkaamista. Aloita harjoittelu napsauttamalla Aloitusopas - se vie vain 15 minuuttia.",
                 "open_source_h": "Avoin lähdekoodi",
                 "open_source": "Tämä avoimen lähdekoodin iD-ohjelman versio {version} perustuu vapaaehtoisten käyttäjien työhön. Lähdekoodi on saatavilla [GitHub-palvelusta](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Voit osallistua projektiin auttamalla ohjelman [kääntämisessä](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) tai [ilmoittamalla ohjelmistovirheistä](https://github.com/openstreetmap/iD/issues)."
@@ -1310,7 +1327,7 @@
                 "intro": "Kartoittamisen tukena käytettävät ilmakuvat kartta-aineiston taustalla ovat tärkeä apu karttojen lähteenä. Ilmakuvat voivat olla kirjaimellisesti satelliteilla, lentokoneilla ja miehittämättömillä ilma-aluksilla kerättyä aineistoa tai vaihtoehtoisesti historiallisista kartoista muista vapaasti hyödynnettävistä lähteistä kerättyä aineistoa.",
                 "sources_h": "Palveluntarjoajat",
                 "choosing": "Tutustu saatavilla oleviin palveluihin napsauttamalla {layers} **Taustan asetukset** oikeasta laidasta.",
-                "sources": "Oletuksena taustakuvana on [Bing-karttojen](https://www.bing.com/maps/) satelliittikuvaaineisto. Sijainnista riippuen saatavilla saattaa olla myös muuta, mahdollisesti tuoreempaa tai korkealaatuisempaa aineistoa, joten eri vaihtoehtojen kokeileminen kannattaa.",
+                "sources": "Oletuksena taustakuvana on [Bing-karttojen](https://www.bing.com/maps/) satelliittikuva-aineisto. Sijainnista riippuen saatavilla saattaa olla myös muuta, mahdollisesti tuoreempaa tai korkealaatuisempaa aineistoa, joten eri vaihtoehtojen kokeileminen kannattaa.",
                 "offsets_h": "Ilmakuvavirheen korjaaminen",
                 "offset": "Joskus ilmakuva ei osu tarkalleen kerättyyn kartta-aineistoon. Jos virhe on selvästi järjestelmällinen, voi vika olla myös ilmakuva- eikä kerätyssä kartta-aineistossa. Älä lähde siirtämään kaikkia karttakohteita, vaan kokeile säätää ilmakuvan asemointia kartta-aineiston mukaiseksi Korjaa ilmakuvavirhe -toiminnolla, joka löytyy alimmaisena Taustan asetukset -näkymästä."
             },
@@ -1677,17 +1694,17 @@
                 "countrycode": "fi",
                 "name": {
                     "1st-avenue": "Kauppakatu",
-                    "2nd-avenue": "Keskuskatu",
-                    "4th-avenue": "Suvantokatu",
-                    "5th-avenue": "Malmikatu",
-                    "6th-avenue": "Puutarhakatu",
+                    "2nd-avenue": "Halkojankatu",
+                    "4th-avenue": "Leppäkatu",
+                    "5th-avenue": "Sorsajoentie",
+                    "6th-avenue": "Opiskelijankatu",
                     "6th-street": "Yliopistontie",
-                    "7th-avenue": "Postikatu",
+                    "7th-avenue": "Puunoksankatu",
                     "8th-avenue": "Harjukatu",
                     "9th-avenue": "Linnankatu",
-                    "10th-avenue": "Torikatu",
+                    "10th-avenue": "Urheilutie",
                     "11th-avenue": "Kirkkokatu",
-                    "12th-avenue": "Itsenäisyydenkatu",
+                    "12th-avenue": "Koivukatu",
                     "access-point-employment": "Työvoimatoimisto",
                     "adams-street": "Aapelinkatu",
                     "andrews-elementary-school": "Kaupin alakoulu",
@@ -1697,11 +1714,12 @@
                     "battle-street": "Sotilaankatu",
                     "bennett-street": "Lehmuskatu",
                     "bowman-park": "Viisikonpuisto",
+                    "collins-drive": "Lukiokatu",
                     "conrail-railroad": "Läntinen oikorata",
                     "conservation-park": "Kansalaispuisto",
                     "constantine-street": "Nosturinkatu",
                     "cushman-street": "Eerikinkatu",
-                    "dollar-tree": "Europuu",
+                    "dollar-tree": "Markkamarketti",
                     "douglas-avenue": "Työmiehenkatu",
                     "east-street": "Aurinkorinne",
                     "elm-street": "Hyvinvoinninkatu",
@@ -1713,9 +1731,9 @@
                     "golden-finch-framing": "Kaken kehystämö",
                     "grant-avenue": "Suurkatu",
                     "hoffman-pond": "Pikkulampi",
-                    "hoffman-street": "Pikkulammenkatu",
+                    "hoffman-street": "Pikkulammentie",
                     "hook-avenue": "Lehmuskatu",
-                    "jefferson-street": "Koivukatu",
+                    "jefferson-street": "Taivassalontie",
                     "kelsey-street": "Tammikatu",
                     "lafayette-park": "Honkapuisto",
                     "las-coffee-cafe": "Kahvi & pulla",
@@ -1725,13 +1743,13 @@
                     "main-street-barbell": "Hallituskadun kuntosali",
                     "main-street-cafe": "Hallituskadun kuppila",
                     "main-street-fitness": "Hallituskadun liikuntahalli",
-                    "main-street": "Hallituskatu",
+                    "main-street": "Itsenäisyydentie",
                     "maple-street": "Vaahterakuja",
                     "marina-park": "Satamapuisto",
                     "market-street": "Torikauppiaankatu",
                     "memory-isle-park": "Patsaspuisto",
                     "memory-isle": "Patsasluoto",
-                    "michigan-avenue": "Länsipohjankatu",
+                    "michigan-avenue": "Länsipohjantie",
                     "middle-street": "Keskitie",
                     "millard-street": "Uimahallinkatu",
                     "moore-street": "Olavinkatu",
@@ -1743,14 +1761,14 @@
                     "pealer-street": "Välittäjänkatu",
                     "pine-street": "Kalliokatu",
                     "pizza-hut": "Pitseria Kinkku & Ananas",
-                    "portage-avenue": "Sorsakatu",
+                    "portage-avenue": "Jokilaakson puistokatu",
                     "portage-river": "Sorsajoki",
                     "preferred-insurance-services": "Paremman palvelun vakuutuskonttori",
                     "railroad-drive": "Rautatienkatu",
                     "river-city-appliance": "Jokilaakson kodinkone",
-                    "river-drive": "Jokiväylä",
+                    "river-drive": "Suvantokatu",
                     "river-road": "Jokitie",
-                    "river-street": "Jokikatu",
+                    "river-street": "Erämaankatu",
                     "riverside-cemetery": "Jokilaakson hautausmaa",
                     "riverwalk-trail": "Joenrannanpolku",
                     "riviera-theatre": "Teatteri Riviera",
@@ -1759,10 +1777,10 @@
                     "scidmore-park-petting-zoo": "Aurinkopuiston eläintarha",
                     "scidmore-park": "Aurinkopuisto",
                     "scouter-park": "Rullalautailijanpuisto",
-                    "sherwin-williams": "Sofia-Maria",
+                    "sherwin-williams": "Marjatan maalipuoti",
                     "south-street": "Eteläkatu",
                     "southern-michigan-bank": "Eteläinen joentörmä",
-                    "spring-street": "Jokilaakson puistokatu",
+                    "spring-street": "Malmikatu",
                     "sturgeon-river-road": "Laaksotie",
                     "three-rivers-city-hall": "Jokilaakson kaupungintalo",
                     "three-rivers-elementary-school": "Jokilaakson alakoulu",
@@ -1781,8 +1799,8 @@
                     "wheeler-street": "Pyörittäjänkatu",
                     "william-towing": "Heikin hinauspalvelu",
                     "willow-drive": "Pajuraitti",
-                    "wood-street": "Puukatu",
-                    "world-fare": "Maailmanhinta"
+                    "wood-street": "Joenvarrentie",
+                    "world-fare": "Lailan lahjapalvelu"
                 }
             },
             "welcome": {
@@ -7421,28 +7439,6 @@
             "Bing": {
                 "description": "Satelliitti- ja ilmakuvat",
                 "name": "Bing-ilmakuvat"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Käyttöehdot ja palaute"
-                },
-                "name": "DigitalGlobe Premium -sateliittikuvat"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Käyttöehdot ja palaute"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Käyttöehdot ja palaute"
-                },
-                "name": "DigitalGlobe standardit -satelliittikuvat"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Käyttöehdot ja palaute"
-                }
             },
             "EsriWorldImagery": {
                 "attribution": {

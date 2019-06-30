@@ -2671,32 +2671,6 @@
                 "description": "Сателитни и аерофото изображения.",
                 "name": "Bing аерофото изображения"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Условия & oбратна връзка"
-                },
-                "name": "DigitalGlobe премиум изображения"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Условия & oбратна връзка"
-                },
-                "description": "Граници на изображения и дата на заснемане. Надписите се появяват при ниво на увеличение 13 или по-високо.",
-                "name": "Стари DigitalGlobe Премиум изображения"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Условия & oбратна връзка"
-                },
-                "name": "Стандартни DigitalGlobe изображения"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Условия & oбратна връзка"
-                },
-                "description": "Граници на изображения и дата на заснемане. Надписите се появяват при ниво на увеличение 13 или по-високо.",
-                "name": "Стари стандартни DigitalGlobe сателитни изображения."
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Условия & oбратна връзка"

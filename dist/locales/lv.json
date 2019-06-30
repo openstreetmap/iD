@@ -3734,34 +3734,6 @@
                 "description": "Satelītu un aerofotoattēli.",
                 "name": "Bing aerofotoattēli"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Noteikumi un atsauksmes"
-                },
-                "description": "DigitalGlobe-Premium ir aerofoto mozaīka, kas sastāv no DigitalGlobe apakškartes ar atsevišķiem reģioniem piepildītiem izmantojot +Vivid vai pielāgotu interešu vietas informāciju, aerofoto ir 50cm izsķirtspēja vai augstāka, un tā tiek atjaunota daudz biežāk, ar nepārtrauktiem atjauninājumiem.",
-                "name": "DigitalGlobe Premium Attēli"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Noteikumi un atsauksmes"
-                },
-                "description": "Attēlu malas un uztveršanas datumi. Etiķetes parādās palielinājuma līmenī 13 un zemāk.",
-                "name": "Vecāki DigitalGlobe Premium Attēli"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Noteikumi un atsauksmes"
-                },
-                "description": "DigitalGlobe-Standard ir kārtota attēlu grupa, kas aptver aptuveni 86% no visas pasaules ar 30-60 cm izsķirtspēju, kur tas ir iespējams. Fona aizpildījumu nodrošina Landsat. Vidējais vecums ir 2.31 gadi, lai gan dažas vietas tiek atjauninātas 2 reizes gadā. ",
-                "name": "DigitalGlobe Standarta Attēli"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Noteikumi un atsauksmes"
-                },
-                "description": "Attēlu malas un uztveršanas datumi. Etiķetes parādās palielinājuma līmenī 13 un zemāk.",
-                "name": "Vecāki DigitalGlobe Standarta Attēli"
-            },
             "EOXAT2018CLOUDLESS": {
                 "description": "Apstrādāti Sentinel Satalītattēli.",
                 "name": "eox.at 2018 bez-mākoņu"

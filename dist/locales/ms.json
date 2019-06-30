@@ -2574,32 +2574,6 @@
                 "description": "Imejan satelit dan udara.",
                 "name": "Imejan udara Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Terma & Maklum Balas"
-                },
-                "description": "DigitalGlobe-Premium ialah jubin daripada peta dasar DigitalGlobe bagi rantau-rantau terpilih dengan +Vivid atau kawasan tertentu dengan imejan tersuai, beresolusi 50cm atau lebih baik, dan akan disegar semula dengan lebih kerap melalui kemas kini akan datang.",
-                "name": "Imejan DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Terma & Maklum Balas"
-                },
-                "name": "Vintaj Imejan Satelit Premium DigitalGlobe"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Terma & Maklum Balas"
-                },
-                "description": "DigitalGlobe-Standard ialah set imejan terpilih, meliputi 86% jisim bumi, dengan resolusi 30-60cm sekiranya ada, diisi oleh Landsat. Secara purata, imejan ini berusia 2.31 tahun, dengan kawasan-kawasan tertentu dikemas kini 2x setahun.",
-                "name": "Imejan DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Terma & Maklum Balas"
-                },
-                "name": "Vintaj Imejan Satelit Standard DigitalGlobe"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Terma & Maklum Balas"
@@ -2816,10 +2790,6 @@
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack",
                 "description": "Semua dialu-alukan hadir! Daftar di {signupUrl}"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Daftar di {signupUrl}"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap di Reddit",

@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "營運商"
                 },
+                "operator/type": {
+                    "label": "營運者類型"
+                },
                 "outdoor_seating": {
                     "label": "戶外座位"
                 },
@@ -3657,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "最小年齡"
+                },
+                "polling_station": {
+                    "label": "投票站"
                 },
                 "population": {
                     "label": "人口數"
@@ -4728,6 +4734,10 @@
                     "name": "網咖",
                     "terms": "網咖,網吧,網路咖啡店,Internet Cafe"
                 },
+                "amenity/karaoke": {
+                    "name": "卡拉OK包廂",
+                    "terms": "卡拉OK包廂"
+                },
                 "amenity/kindergarten": {
                     "name": "育幼院/幼兒園範圍",
                     "terms": "育幼院/幼稚園,育幼院/幼稚園用地,育幼院,幼兒園,幼稚園,Preschool,Kindergarten"
@@ -4826,6 +4836,10 @@
                     "name": "耶和華見證人王國聚會所",
                     "terms": "耶和華見證人"
                 },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "La Luz del Mundo Temple",
+                    "terms": "La Luz del Mundo Temple"
+                },
                 "amenity/place_of_worship/christian/quaker": {
                     "name": "貴格會禮拜堂",
                     "terms": "貴格會聚會所"
@@ -4861,6 +4875,10 @@
                 "amenity/police": {
                     "name": "警察局",
                     "terms": "警局,派出所"
+                },
+                "amenity/polling_station": {
+                    "name": "永久投票處",
+                    "terms": "永久投票處"
                 },
                 "amenity/post_box": {
                     "name": "郵筒",
@@ -5623,10 +5641,6 @@
                 "building_point": {
                     "name": "建築物"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "露營營地",
-                    "terms": "露營營地,露營場地,營地"
-                },
                 "club": {
                     "name": "俱樂部",
                     "terms": "俱樂部,Club"
@@ -5807,6 +5821,10 @@
                     "name": "鞋匠",
                     "terms": "鞋匠"
                 },
+                "craft/signmaker": {
+                    "name": "招牌製造商",
+                    "terms": "招牌製造商"
+                },
                 "craft/stonemason": {
                     "name": "切石廠",
                     "terms": "切石廠"
@@ -5917,6 +5935,9 @@
                     "name": "淺灘",
                     "terms": "淺灘"
                 },
+                "ford_line": {
+                    "name": "淺灘"
+                },
                 "golf/bunker": {
                     "name": "沙坑",
                     "terms": "沙坑"
@@ -5984,6 +6005,10 @@
                 "healthcare/blood_donation": {
                     "name": "捐血中心",
                     "terms": "捐血中心,捐血站,捐血車"
+                },
+                "healthcare/counselling": {
+                    "name": "諮詢中心",
+                    "terms": "諮詢中心"
                 },
                 "healthcare/hospice": {
                     "name": "安養院",
@@ -7090,6 +7115,10 @@
                     "name": "測量標",
                     "terms": "測量點,三角點,土地測量點,控制點,基準點"
                 },
+                "man_made/torii": {
+                    "name": "鳥居",
+                    "terms": "鳥居"
+                },
                 "man_made/tower": {
                     "name": "塔",
                     "terms": "塔"
@@ -7681,6 +7710,10 @@
                     "name": "點",
                     "terms": "點"
                 },
+                "polling_station": {
+                    "name": "臨時投票處",
+                    "terms": "臨時投票處"
+                },
                 "power": {
                     "name": "電力設施"
                 },
@@ -8259,6 +8292,10 @@
                 },
                 "shop/fashion": {
                     "name": "時尚店"
+                },
+                "shop/fashion_accessories": {
+                    "name": "時尚配件商店",
+                    "terms": "時尚配件商店"
                 },
                 "shop/fireplace": {
                     "name": "壁爐商店",
@@ -9088,34 +9125,6 @@
             "Bing": {
                 "description": "衛星與空照圖",
                 "name": "Bing 空照圖"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "使用條款與意見回饋"
-                },
-                "description": "DigitalGlobe-Premium 是以 DigitalGlobe 底圖鑲嵌 +Vivid，或是局部區域有興趣的影像，有 50 公分或更高解析度，以及更新更頻繁。 ",
-                "name": "DigitalGlobe Premium 空照圖"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "使用條款與意見回饋"
-                },
-                "description": "影像邊界與拍攝日期。標籤將會在縮放等級大於等於 13 時出現。",
-                "name": "DigitalGlobe Premium 空照圖年份"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "使用條款與意見回饋"
-                },
-                "description": "DigitalGlobe-Standard  累積全球陸地 86% 的影像，有影像的部分具有 30-60 公分解析度，部分用 Ladnsat 補充。平均的影像年齡是 2.31 年，有些地方一年更新兩次。",
-                "name": "DigitalGlobe Standard 空照圖"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "使用條款與意見回饋"
-                },
-                "description": "影像邊界與拍攝日期。標籤將會在縮放等級大於等於 13 時出現。",
-                "name": "DigitalGlobe Standard 空照圖年份"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10315,10 +10324,6 @@
                 "name": "Western Slope OSM Meetup",
                 "description": "在科羅拉多州大章克申的圖客與開放街圖使用者",
                 "extendedDescription": "此群組的目標是介紹開放街圖給社群知道，並發展圖客社群、利用任何方法建立盡可能多的地理資料並把這些資料提供給社群。想像準確的線索標示！想像自行車道的進一步發展！想像您想要什麼，這就是開放街圖的有趣之處！"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "在 {signupUrl} 註冊"
             },
             "talk-au": {
                 "name": "Talk-au 郵件論壇",

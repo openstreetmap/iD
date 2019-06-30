@@ -19,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Додати об'єкт",
+                "description": "Пошук об'єктів для додавання на мапу.",
                 "key": "Tab",
                 "result": "{count} варіантів",
                 "results": "{count} варіант"
@@ -616,6 +618,7 @@
         },
         "geocoder": {
             "search": "Шукати по всьому світу…",
+            "no_results_visible": "Жодного збігу на видимій частині мапи",
             "no_results_worldwide": "Нічого не знайдено"
         },
         "geolocate": {
@@ -862,6 +865,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "У вас є незбережені зміни",
+            "description": "Чи бажаєте відновити незбережені зміни з попередньої сесії?",
+            "restore": "Відновити мої зміни",
+            "reset": "Відкинути мої зміни"
+        },
         "save": {
             "title": "Зберегти",
             "help": "Перегляньте свої зміни та завантажте їх до OpenStreetMap, що зробить їх доступними усім іншим.",
@@ -896,10 +905,14 @@
             }
         },
         "success": {
+            "just_edited": "Ви щойно внесли зміни на мапу OpenStreetMap!",
+            "thank_you": "Дякуємо за вдосконалення мапи.",
+            "thank_you_location": "Дякуємо вам з вдосконалення мапи навколо {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
+            "help_html": "Ваші зміни зʼявляться на OpenStreetMap через кілька хвилин. Іншим мапам потрібен деякий час для отримання оновлень.",
             "help_link_text": "Деталі",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Uk:ЧаПи#.D0.AF_.D1.89.D0.BE.D0.B9.D0.BD.D0.BE_.D0.B7.D1.80.D0.BE.D0.B1.D0.B8.D0.B2_.D0.B4.D0.B5.D1.8F.D0.BA.D1.96_.D0.B7.D0.BC.D1.96.D0.BD.D0.B8_.D0.BD.D0.B0_.D0.BC.D0.B0.D0.BF.D1.96._.D0.AF.D0.BA_.D0.BC.D0.B5.D0.BD.D1.96_.D1.97.D1.85_.D0.BF.D0.BE.D0.B1.D0.B0.D1.87.D0.B8.D1.82.D0.B8.3F",
             "view_on_osm": "Подивитись зміни в ОСМ",
@@ -916,7 +929,10 @@
             "cancel": "Скасувати"
         },
         "splash": {
-            "walkthrough": "Подивитись Покрокове керівництво"
+            "welcome": "Ласкаво просимо до редактора OpenStreetMap — iD",
+            "text": "iD — дружній, але потужний інструмент для редагування найкращої вільної мапи світу. Це версія {version}. Для отримання докладної інформації відвідайте {website}, сповіщайте про помилки на {github}.",
+            "walkthrough": "Подивитись Покрокове керівництво",
+            "start": "Розпочати редагування"
         },
         "source_switch": {
             "live": "основна",
@@ -1772,6 +1788,10 @@
                 "incomplete": {
                     "message": "{feature} має не всі теґи",
                     "reference": "Деякі об'єкти повинні мати додаткові теґи."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} схоже на відомий бренд з нестандартним теґуванням",
+                    "reference": "Всі об'єкти одного бренду мають бути затеґовані одноманітно."
                 }
             },
             "private_data": {
@@ -2836,6 +2856,10 @@
                     "label": "Пристрої",
                     "placeholder": "1, 2, 3…"
                 },
+                "diameter": {
+                    "label": "Діаметр",
+                    "placeholder": "5 мм, 10 см, 15 дюйм…"
+                },
                 "diaper": {
                     "label": "Сповивальний стіл"
                 },
@@ -3475,6 +3499,9 @@
                 "operator": {
                     "label": "Оператор"
                 },
+                "operator/type": {
+                    "label": "Тип оператора"
+                },
                 "outdoor_seating": {
                     "label": "Місця на зовні"
                 },
@@ -3633,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "Мінімальний вік"
+                },
+                "polling_station": {
+                    "label": "Виборча дільниця"
                 },
                 "population": {
                     "label": "Населення"
@@ -4204,6 +4234,9 @@
                         "tourism": "Туристична"
                     }
                 },
+                "valve": {
+                    "label": "Тип"
+                },
                 "vending": {
                     "label": "Товари"
                 },
@@ -4703,6 +4736,10 @@
                     "name": "Інтернет кафе",
                     "terms": "інтренет,комп'ютер,wifi,internet,кафе,доступ,клуб,ігри,дозвілля"
                 },
+                "amenity/karaoke": {
+                    "name": "Караоке",
+                    "terms": "караоке,клуб,бар,спів,дозвілля"
+                },
                 "amenity/kindergarten": {
                     "name": "Підготовча школа / Територія дитсадка",
                     "terms": "дитсадок, дошкільна підготовка, ясла"
@@ -4797,6 +4834,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Християнська церква",
                     "terms": "церква,храм,собор,каплиця,дім,бог,молитва,місія"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Зал Царства Свідків Єгови",
+                    "terms": "релігія,єгова,молитва,дім,обряд,християнство,бог"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "Храм світла світу",
+                    "terms": "християнство,релігія,храм,дім,церква,світло,світ"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Будинок зустрічей друзів квакерів",
+                    "terms": "християнство,церква,дім,молитва,богослужіння,квакери"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Індуський храм",
@@ -5594,10 +5643,6 @@
                 },
                 "building_point": {
                     "name": "Будівля"
-                },
-                "camp_site/camp_pitch": {
-                    "name": "Місце стоянки",
-                    "terms": "платка,фургон,мотодім,автодім,караван,місце,ділянка"
                 },
                 "club": {
                     "name": "Клуб",
@@ -6847,6 +6892,9 @@
                     "name": "Спортивний центр/комплекс",
                     "terms": "зал,спортивний центр,спорт"
                 },
+                "leisure/sports_centre/climbing": {
+                    "name": "Скеледром"
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "Плавальний басейн",
                     "terms": "плавання,басейн,спорт,змагання,центр,вода,пірнання"
@@ -7046,6 +7094,9 @@
                     "name": "Геодезичний пункт",
                     "terms": "Survey Point, utjltpbxybq geyrn, місце спостереження"
                 },
+                "man_made/torii": {
+                    "name": "Торії"
+                },
                 "man_made/tower": {
                     "name": "Вежа",
                     "terms": "Tower, dtf, башта, вежа"
@@ -7113,6 +7164,9 @@
                 "manhole/telecom": {
                     "name": "Телекомунікаційний колодязь",
                     "terms": "люк,колодязь,кабель,зв'язок,телефон,інтернет,діра,дріт"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Місце ядерного вибуху"
                 },
                 "natural": {
                     "name": "Природа"
@@ -8784,6 +8838,9 @@
                     "name": "Маршрут швидкісного трамвая",
                     "terms": "легкорейковий,транспорт,електричка,міська,колії,трамвай"
                 },
+                "type/route/monorail": {
+                    "name": "Монорейковий маршрут"
+                },
                 "type/route/pipeline": {
                     "name": "Трубопровід",
                     "terms": "Pipeline Route, nhejghjdsl, трубопровід"
@@ -8930,34 +8987,6 @@
             "Bing": {
                 "description": "Супутникові та аерофотознімки.",
                 "name": "Знімки Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Умови використання та Відгуки"
-                },
-                "description": "DigitalGlobe-Premium – мозаїка зібрана з основного покриття DigitalGlobe та окремих ділянок заповнених знімками +Vivid або знімками зробленими на замовлення, розподільча здатність 50 см чи краще, з поточним оновленням.",
-                "name": "Знімки DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Умови використання та Відгуки"
-                },
-                "description": "Межі та дати знімків. Підписи з'являються з 13 рівня масштабування. ",
-                "name": "Період знімків DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Умови використання та Відгуки"
-                },
-                "description": "DigitalGlobe-Standard – підібрана збірка, що покриває 86% поверхні суші, з розподільчою здатністю 30-60 см, де це можливо, заповнена Landsat. Середній вік – 2.31 роки, деякі ділянки оновлюються 2 рази на рік.",
-                "name": "Знімки DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Умови використання та Відгуки"
-                },
-                "description": "Межі та дати знімків. Підписи з'являються з 13 рівня масштабування. ",
-                "name": "Період знімків DigitalGlobe Standard"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10039,10 +10068,6 @@
             },
             "Western-Slope-facebook": {
                 "name": "Western Slope OSM Facebook"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Slack Maptime Австралія",
-                "description": "Зареєструйтеся на {signupUrl}"
             },
             "talk-au": {
                 "name": "Talk-au Список розсилки",

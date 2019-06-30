@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "Operador"
                 },
+                "operator/type": {
+                    "label": "Tipo de operador"
+                },
                 "outdoor_seating": {
                     "label": "Mesas externas"
                 },
@@ -3657,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "Idade Mínima"
+                },
+                "polling_station": {
+                    "label": "Local de votação"
                 },
                 "population": {
                     "label": "População"
@@ -4728,6 +4734,10 @@
                     "name": "Internet Café",
                     "terms": "Cyber Café"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaoke Box",
+                    "terms": "Karaoke Box"
+                },
                 "amenity/kindergarten": {
                     "name": "Pré-escola",
                     "terms": "Pré-escola, Centro de educação infantil, CEI, Jardim de infância, educação"
@@ -4865,6 +4875,10 @@
                 "amenity/police": {
                     "name": "Polícia",
                     "terms": "polícia, segurança, lei, proteção, patrulha"
+                },
+                "amenity/polling_station": {
+                    "name": "Local de votação permanente",
+                    "terms": "Local de votação permanente"
                 },
                 "amenity/post_box": {
                     "name": "Caixa de Correio",
@@ -5629,10 +5643,6 @@
                 "building_point": {
                     "name": "Edifício"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Vaga de Acampamento",
-                    "terms": "Local de acampamento, Acampamento, motor home, Tenda, Caravana, Barraca de acampamento"
-                },
                 "club": {
                     "name": "Clube de interesses ou hobby",
                     "terms": "aeromodelismo, radioamador, filatelia, xadrez, astronomia, automobilismo, associação, fã-clube, fã, templo maçônico, maçonaria, maçom, caça, motociclismo, moto clube,nudismo, fotografia, escoteiro, escotismo, hobby, sociedade,"
@@ -5816,6 +5826,10 @@
                     "name": "Sapateiro",
                     "terms": "Sapateiro"
                 },
+                "craft/signmaker": {
+                    "name": "Criador de sinais",
+                    "terms": "Criador de sinais"
+                },
                 "craft/stonemason": {
                     "name": "Pedreiro",
                     "terms": "Pedreiro"
@@ -5927,6 +5941,9 @@
                     "name": "Vau",
                     "terms": "Vau, Lugar em um rio no qual se pode passar a pé, Baixio"
                 },
+                "ford_line": {
+                    "name": "Vau"
+                },
                 "golf/bunker": {
                     "name": "Banco de Areia",
                     "terms": "Bunker, Banco de Areia, Banca de Areia, Poça de Areia, Obstáculo de Areia"
@@ -5994,6 +6011,10 @@
                 "healthcare/blood_donation": {
                     "name": "Centro de Doação de Sangue",
                     "terms": "Hemocentro, Doação de Sangue, Banco de sangue, transfusão de sangue, sangue,"
+                },
+                "healthcare/counselling": {
+                    "name": "Centro de aconselhamento",
+                    "terms": "Centro de aconselhamento"
                 },
                 "healthcare/hospice": {
                     "name": "Unidades de Cuidados Paliativos",
@@ -7101,6 +7122,10 @@
                     "name": "Ponto de Levantamento Geográfico",
                     "terms": "Marco Geodésico, Equipamento de GPS Diferencial"
                 },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "Torii,Tori"
+                },
                 "man_made/tower": {
                     "name": "Torre",
                     "terms": "Torre"
@@ -7697,6 +7722,10 @@
                     "name": "Ponto",
                     "terms": "Nó"
                 },
+                "polling_station": {
+                    "name": "Local de votação temporária",
+                    "terms": "Local de votação temporária"
+                },
                 "power": {
                     "name": "Eletricidade"
                 },
@@ -8278,6 +8307,10 @@
                 },
                 "shop/fashion": {
                     "name": "Loja de Moda"
+                },
+                "shop/fashion_accessories": {
+                    "name": "Loja de acessórios de moda",
+                    "terms": "Loja de acessórios de moda"
                 },
                 "shop/fireplace": {
                     "name": "Loja de Lareiras",
@@ -9109,34 +9142,6 @@
             "Bing": {
                 "description": "Imagens aéreas e de satélite.",
                 "name": "Imagens aéreas do Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termos e Comentários"
-                },
-                "description": "O DigitalGlobe-Premium é um mosaico composto de mapa base DigitalGlobe com regiões selecionadas preenchidas com imagens Vivid ou personalizadas de área de interesse, resolução de 50 cm ou superior, e atualizadas com mais frequência com atualizações contínuas.",
-                "name": "Imagens DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termos e Comentários"
-                },
-                "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Data das imagens de satélite DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termos e Comentários"
-                },
-                "description": "O DigitalGlobe-Standard é um conjunto curado de imagens que cobre 86% da massa terrestre do planeta, com resolução de 30-60 cm onde disponível, provida pela Landsat. A idade média é de 2,31 anos, com algumas áreas atualizadas 2x por ano.",
-                "name": "Imagens DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termos e Comentários"
-                },
-                "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Data das imagens de satélite DigitalGlobe Standard"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10121,10 +10126,6 @@
             },
             "PHXGeo-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Slack do Maptime Austrália",
-                "description": "Se inscreva em {signupUrl}"
             },
             "talk-au": {
                 "name": "Lista de Discussão Talk-au"
