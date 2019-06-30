@@ -260,7 +260,7 @@ function suggestionsToPresets(presets) {
             return;
         }
 
-        let suggestionID = presetID + '/' + name;
+        let suggestionID = presetID + '/' + name.replace('/', '');
 
         let tags = { 'brand:wikidata': qid };
         for (let k in preset.tags) {
