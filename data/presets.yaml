@@ -7032,6 +7032,11 @@ en:
         name: Hifi Store
         # 'terms: audio,hi-fi,high fidelity,stereo,video'
         terms: '<translate with synonyms or related terms for ''Hifi Store'', separated by commas>'
+      shop/hobby:
+        # shop=hobby
+        name: Hobby Shop
+        # 'terms: manga,figurine,model'
+        terms: '<translate with synonyms or related terms for ''Hobby Shop'', separated by commas>'
       shop/houseware:
         # shop=houseware
         name: Houseware Store

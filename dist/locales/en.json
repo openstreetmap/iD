@@ -8509,6 +8509,10 @@
                     "name": "Hifi Store",
                     "terms": "audio,hi-fi,high fidelity,stereo,video"
                 },
+                "shop/hobby": {
+                    "name": "Hobby Shop",
+                    "terms": "manga,figurine,model"
+                },
                 "shop/houseware": {
                     "name": "Houseware Store",
                     "terms": "home,household,kitchenware"
