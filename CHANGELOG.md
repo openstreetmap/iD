@@ -29,6 +29,60 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.15.3
+##### 2019-Jun-30
+
+#### :tada: New Features
+* Deprecate unsupported DigitalGlobe imagery sources ([editor-layer-index/#680])
+* Limit addable presets via comma-separated IDs in the `presets` URL parameter ([#6553])
+
+[editor-layer-index/#680]: https://github.com/osmlab/editor-layer-index/pull/680
+[#6553]: https://github.com/openstreetmap/iD/issues/6553
+
+#### :sparkles: Usability
+* Add support for fords drawn as lines ([#6576])
+
+[#6576]: https://github.com/openstreetmap/iD/issues/6576
+
+#### :white_check_mark: Validation
+* Allow for some tags (`takeaway`) to be kept when upgrading tags ([#6530], [#6581])
+* Remove existing match keys before upgrading to a name-suggestion-index preset ([#6575])
+* Deprecate `camp_site=camp_pitch`, prefer `tourism=camp_pitch` ([#6591])
+
+[#6591]: https://github.com/openstreetmap/iD/issues/6591
+[#6581]: https://github.com/openstreetmap/iD/issues/6581
+[#6575]: https://github.com/openstreetmap/iD/issues/6575
+[#6530]: https://github.com/openstreetmap/iD/issues/6530
+
+#### :bug: Bugfixes
+* Fix issue displaying preset name for suggestions with a '/' in name ([#6594])
+* Fix crash when disabling the OSM layer while drawing ([#6584])
+
+[#6594]: https://github.com/openstreetmap/iD/issues/6594
+[#6584]: https://github.com/openstreetmap/iD/issues/6584
+
+#### :rocket: Presets
+* Update camera icon on surveillance presets
+* Add preset for `shop=hobby`
+* Add Cairn preset ([#6587], thanks [@SilentSpike])
+* Add field for `operator:type` to various presets ([#6566])
+* Render `waterway=dam` as lines as grey ([#6555])
+* Add Karaoke Box preset ([#6538])
+* Add Torii preset ([#6537])
+* Add more fields to the Helipad preset
+* Add Structure field to the Canal preset ([#6548])
+* Add polling place presets and field ([#6542])
+
+[#6587]: https://github.com/openstreetmap/iD/issues/6587
+[#6566]: https://github.com/openstreetmap/iD/issues/6566
+[#6555]: https://github.com/openstreetmap/iD/issues/6555
+[#6548]: https://github.com/openstreetmap/iD/issues/6548
+[#6542]: https://github.com/openstreetmap/iD/issues/6542
+[#6538]: https://github.com/openstreetmap/iD/issues/6538
+[#6537]: https://github.com/openstreetmap/iD/issues/6537
+[@SilentSpike]: https://github.com/SilentSpike
+
+
 # 2.15.2
 ##### 2019-Jun-17
 
