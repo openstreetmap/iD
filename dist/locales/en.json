@@ -7085,6 +7085,10 @@
                     "name": "Bunker Silo",
                     "terms": "Silage,Storage"
                 },
+                "man_made/cairn": {
+                    "name": "Cairn",
+                    "terms": "rock pile,stone stack,stone pile,càrn"
+                },
                 "man_made/chimney": {
                     "name": "Chimney",
                     "terms": ""

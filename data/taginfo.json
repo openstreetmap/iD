@@ -660,6 +660,7 @@
     {"key": "man_made", "value": "breakwater", "description": "🄿 Breakwater", "object_types": ["way", "area"]},
     {"key": "man_made", "value": "bridge", "description": "🄿 Bridge", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bridge-15.svg?sanitize=true"},
     {"key": "man_made", "value": "bunker_silo", "description": "🄿 Bunker Silo", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/silo.svg?sanitize=true"},
+    {"key": "man_made", "value": "cairn", "description": "🄿 Cairn", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-15.svg?sanitize=true"},
     {"key": "man_made", "value": "chimney", "description": "🄿 Chimney", "object_types": ["node", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/chimney.svg?sanitize=true"},
     {"key": "man_made", "value": "clearcut", "description": "🄿 Clearcut Forest", "object_types": ["area"], "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/logging-15.svg?sanitize=true"},
     {"key": "man_made", "value": "crane", "description": "🄿 Crane", "object_types": ["node", "way", "area"], "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/crane.svg?sanitize=true"},
