@@ -5733,10 +5733,6 @@
                     "name": "Warehouse",
                     "terms": ""
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Camp Pitch",
-                    "terms": "tent,rv"
-                },
                 "club": {
                     "name": "Club",
                     "terms": "social"
@@ -8836,6 +8832,10 @@
                 "tourism/attraction": {
                     "name": "Tourist Attraction",
                     "terms": ""
+                },
+                "tourism/camp_pitch": {
+                    "name": "Camp Pitch",
+                    "terms": "tent,rv"
                 },
                 "tourism/camp_site": {
                     "name": "Campground",

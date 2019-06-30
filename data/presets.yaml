@@ -3818,11 +3818,6 @@ en:
       building_point:
         # building=*
         name: Building
-      camp_site/camp_pitch:
-        # camp_site=camp_pitch
-        name: Camp Pitch
-        # 'terms: tent,rv'
-        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       club:
         # club=*
         name: Club
@@ -7419,6 +7414,11 @@ en:
         # tourism=attraction
         name: Tourist Attraction
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
+      tourism/camp_pitch:
+        # torism=camp_pitch
+        name: Camp Pitch
+        # 'terms: tent,rv'
+        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       tourism/camp_site:
         # tourism=camp_site
         name: Campground
