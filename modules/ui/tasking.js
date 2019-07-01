@@ -60,6 +60,7 @@ export function uiTasking(context) {
         }
 
         document.activeElement.blur();
+        update();
     }
 
 
@@ -99,7 +100,7 @@ export function uiTasking(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .classed('manager-custom', function(d) { return d.id === 'custom'; })
+            .attr('class', function(d) { return 'manager-' + d.id; })
             .call(tooltip()
                 .title(function(d) {
                     return t('tasking.managers.' + d.id + '.tooltip') || null;
