@@ -311,19 +311,26 @@ export function coreContext() {
     var tasking;
     context.tasking = function() { return tasking; };
 
-    var _selectedProjectID;
-    context.selectedProjectID = function(projectID) {
-        if (!arguments.length) return _selectedProjectID;
-        _selectedProjectID = projectID;
+    var _selectedManagerId;
+    context.selectedManagerId = function(managerId) {
+        if (!arguments.length) return _selectedManagerId;
+        _selectedManagerId = managerId;
         return context;
-    }
+    };
 
-    var _selectedTaskID;
-    context.selectedTaskID = function(taskID) {
-        if (!arguments.length) return _selectedTaskID;
-        _selectedTaskID = taskID;
+    var _selectedProjectId;
+    context.selectedProjectId = function(projectId) {
+        if (!arguments.length) return _selectedProjectId;
+        _selectedProjectId = projectId;
         return context;
-    }
+    };
+
+    var _selectedTaskId;
+    context.selectedTaskId = function(taskId) {
+        if (!arguments.length) return _selectedTaskId;
+        _selectedTaskId = taskId;
+        return context;
+    };
 
 
     /* Copy/Paste */

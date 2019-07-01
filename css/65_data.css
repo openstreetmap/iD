@@ -153,6 +153,88 @@
 }
 
 
+/* Tasking Data */
+.layer-tasking {
+    pointer-events: none;
+}
+
+.layer-tasking path.shadow {
+    pointer-events: stroke;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    fill: none;
+}
+.layer-tasking path.MultiPoint.shadow,
+.layer-tasking path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+.layer-tasking path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.layer-tasking path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+.layer-tasking path.stroke {
+    stroke: #ff26d4;
+    stroke-width: 2;
+    fill: none;
+}
+
+.layer-tasking path.READY {
+    stroke: #F8F8F5;
+}
+
+.layer-tasking path.MAPPED {
+    stroke: #FCE599;
+}
+
+.layer-tasking path.VALIDATED {
+    stroke: #96C994;
+}
+
+.layer-tasking path.INVALIDATED {
+    stroke: #EA99A7;
+}
+
+.layer-tasking path.LOCKED {
+    stroke: #96B7EC;
+}
+
+.layer-tasking path.LOCKEDBYYOU {
+    stroke: #1258F0;
+}
+
+.layer-tasking path.fill {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    fill-opacity: 0;
+    fill-rule: evenodd;
+}
+
+.layer-tasking text.label-halo,
+.layer-tasking text.label {
+    font-size: 10px;
+    font-weight: bold;
+    dominant-baseline: middle;
+}
+.layer-tasking text.label {
+}
+.layer-tasking text.label.hover,
+.layer-tasking text.label.selected {
+    fill: #f6634f;
+}
+.layer-tasking text.label-halo {
+    opacity: 0.7;
+    stroke: #000;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
+
+
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
 .layer-mapdata {
     pointer-events: none;

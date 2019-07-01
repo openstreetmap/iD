@@ -7,6 +7,7 @@ import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, qaError } from '../osm';
+import { taskingTask } from '../renderer/taskingObjects'; // TODO: TAH - move these objects to a better spot
 
 
 export function behaviorSelect(context) {
@@ -162,6 +163,9 @@ export function behaviorSelect(context) {
                     context.enter(modeSelect(context, selectedIDs).suppressMenu(_suppressMenu));
                 }
             }
+
+        } else if (datum instanceof taskingTask) {      // clicked a task..
+            console.log('task selected');
 
         } else if (datum && datum.__featurehash__ && !isMultiselect) {    // clicked Data..
             context

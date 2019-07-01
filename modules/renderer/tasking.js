@@ -86,8 +86,10 @@ export function rendererTasking(context) {
     };
 
 
-    tasking.enabled = function() {
-        return _enabled;
+    tasking.enabled = function(val) {
+        if (!arguments.length) return _enabled;
+
+        _enabled = val;
     };
 
 
@@ -198,6 +200,8 @@ export function rendererTasking(context) {
         _enabled = d !== tasking.getManager('none');
 
         _taskingCache.currentManager = d;
+        context.selectedManagerId(d.id);
+
         dispatch.call('change');
         dispatch.call('redraw');
 
@@ -227,16 +231,12 @@ export function rendererTasking(context) {
         // TODO: TAH - handle enabled/disabled
 
         _taskingCache.currentProject = d;
+        context.selectedProjectId(d.projectId);
 
         dispatch.call('change');
         dispatch.call('redraw');
 
         return tasking;
-    };
-
-
-    tasking.currentProjectId = function() {
-        return _taskingCache.currentProject.projectId;
     };
 
 
@@ -296,21 +296,18 @@ export function rendererTasking(context) {
 
 
     tasking.currentTask = function(d) {
+
         if (!arguments.length) return _taskingCache.currentTask;
 
         // TODO: TAH - handle enabled/disabled
 
         _taskingCache.currentTask = d;
+        context.selectedTaskId(d.taskId);
 
         dispatch.call('change');
         dispatch.call('redraw');
 
         return tasking;
-    };
-
-
-    tasking.currentTaskId = function() {
-        return _taskingCache.currentTask.taskId;
     };
 
 

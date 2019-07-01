@@ -61,6 +61,7 @@ export { uiSpinner } from './spinner';
 export { uiStatus } from './status';
 export { uiSuccess } from './success';
 export { uiTagReference } from './tag_reference';
+export { uiTaskingTaskEditor } from './taskingTaskEditor';
 export { uiToggle } from './toggle';
 export { uiTooltipHtml } from './tooltipHtml';
 export { uiVersion } from './version';

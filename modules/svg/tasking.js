@@ -1,17 +1,18 @@
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
+import { geoBounds as d3_geoBounds } from 'd3-geo';
 
 import stringify from 'fast-json-stable-stringify';
 
-import { utilHashcode } from '../util';
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
+import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 import { svgPath } from './helpers';
 
 
-var _initialized = false;
 var _enabled = false;
+var _initialized = false;
 var _project = {};
 var _task = {};
-var _geojson;
 
 export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -23,9 +24,10 @@ export function svgTasking(projection, context, dispatch) {
     function init() {
         if (_initialized) return;  // run once
 
-        _geojson = {};
-        _enabled = true;
+        _enabled = false;
         _initialized = true;
+        _project = {};
+        _task = {};
     }
 
 
@@ -128,8 +130,9 @@ export function svgTasking(projection, context, dispatch) {
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
 
+        _enabled = _taskingService.enabled();
         _project = _taskingService.currentProject();
-        _geojson = ensureIDs(_taskingService.currentTask()); // TODO: TAH - change this from _geojson to _task
+        _task = ensureIDs(_taskingService.currentTask());
 
         layer = selection.selectAll('.layer-tasking')
             .data(_enabled && _project && _task ? [0] : []);
@@ -148,7 +151,7 @@ export function svgTasking(projection, context, dispatch) {
 
         // gather data
         var geoData, polygonData;
-        geoData = getFeatures(_geojson);
+        geoData = getFeatures(_task);
         geoData = geoData.filter(getPath);
         polygonData = geoData.filter(isPolygon);
 
@@ -204,7 +207,7 @@ export function svgTasking(projection, context, dispatch) {
             .append('path')
             .attr('class', function(d) {
                 var datagroup = this.parentNode.__data__;
-                return 'pathdata ' + datagroup + ' ' + featureClasses(d);
+                return 'pathdata ' + datagroup + ' ' + featureClasses(d) + ' ' + geoData[0].properties.taskStatus;
             })
             .attr('clip-path', function(d) {
                 var datagroup = this.parentNode.__data__;
@@ -215,10 +218,9 @@ export function svgTasking(projection, context, dispatch) {
                 var datagroup = this.parentNode.__data__;
                 return datagroup === 'fill' ? getAreaPath(d) : getPath(d);
             });
-
     }
 
-
+    // TODO: TAH - remove if redundant with taskingService.enabled();
     drawTasking.enabled = function(val) {
         if (!arguments.length) return _enabled;
 
@@ -230,6 +232,31 @@ export function svgTasking(projection, context, dispatch) {
         }
 
         dispatch.call('change');
+        return this;
+    };
+
+
+    // TODO: TAH - call when task loaded
+    drawTasking.fitZoom = function() {
+        var features = getFeatures(_task);
+        if (!features.length) return;
+
+        var map = context.map();
+        var viewport = map.trimmedExtent().polygon();
+        var coords = features.reduce(function(coords, feature) {
+            var c = feature.geometry.coordinates;
+            c = utilArrayFlatten(c);
+
+            /* eslint-enable no-fallthrough */
+
+            return utilArrayUnion(coords, c);
+        }, []);
+
+        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
+            var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
+            map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+        }
+
         return this;
     };
 

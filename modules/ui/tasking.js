@@ -8,11 +8,17 @@ import { uiSettingsCustomTasking } from './settings/custom_tasking';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
+import { uiTaskingTaskEditor } from './taskingTaskEditor';
+import { uiTaskingProjectEditor } from './taskingProjectEditor';
+
 export function uiTasking(context) {
+
+    var taskingTaskEditor = uiTaskingTaskEditor(context);
+    var taskingProjectEditor = uiTaskingProjectEditor(context);
+
     var key = t('tasking.key');
 
     var tasking = context.tasking();
-    var taskingLayer = context.layers().layer('tasking');
 
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
@@ -49,14 +55,13 @@ export function uiTasking(context) {
         if (tasking.currentManager().id === 'custom' && tasking.currentManager().template()) {
             // set svg url to template
             tasking.loadFromURL(tasking.currentManager().template());
-
         }
 
         if (d.id === 'none') {
             tasking.resetProjectAndTask();
-            taskingLayer.enabled(false);
+            tasking.enabled(false);
         } else {
-            taskingLayer.enabled(true);
+            tasking.enabled(true);
         }
 
         document.activeElement.blur();
@@ -163,85 +168,13 @@ export function uiTasking(context) {
 
     function renderProject(selection) {
         _projectSelection = selection
-            .call(drawProjectDetails);
-    }
-
-    function drawProjectDetails(selection) {
-
-        // the project
-        var container = selection.selectAll('.project-details')
-            .data([0]);
-
-        // Exit
-        container.exit()
-            .remove();
-
-        var containerEnter = container
-            .enter()
-            .append('div')
-                .attr('class', 'project-details');
-
-        if (!_project) {
-            containerEnter
-                .append('div')
-                    .attr('class', 'no-project')
-                    .text(t('tasking.project.no_project.message'));
-        } else {
-            containerEnter
-                .append('div')
-                    .attr('class', 'project-id')
-                    .text(t('tasking.project.id') + ': ' + _project.projectId);
-
-            // containerEnter
-            //     .append('div')
-            //         .attr('class', 'project-details project-name')
-            //         .text(t('tasking.project.name') + ': ' + _project.projectId);
-        }
-
-        // container = container
-        //     .merge(containerEnter);
+            .call(taskingProjectEditor.datum(_project));
     }
 
 
     function renderTask(selection) {
         _taskSelection = selection
-            .call(drawTaskDetails);
-    }
-
-
-    function drawTaskDetails(selection) {
-
-        // the project
-        var container = selection.selectAll('.task-details')
-            .data([0]);
-
-        // Exit
-        container.exit()
-            .remove();
-
-        var containerEnter = container.enter()
-            .append('div')
-                .attr('class', 'task-details');
-
-        if (!_project) {
-            containerEnter
-                .append('div')
-                    .attr('class', 'task-details no-task')
-                    .text(t('tasking.task.no_task.message'));
-        } else {
-            containerEnter
-                .append('div')
-                    .attr('class', 'task-details task-id')
-                    .text(t('tasking.task.id') + ': ' + _task.taskId);
-
-            // containerEnter
-            //     .append('div')
-            //         .attr('class', 'task-details task-name')
-            //         .text(t('tasking.task.name') + ': ' + _task.projectId);
-        }
-
-        container = container
-            .merge(containerEnter);
+            .call(taskingTaskEditor.datum(_task));
     }
 
 
@@ -254,14 +187,10 @@ export function uiTasking(context) {
         _task = tasking.currentTask();
 
         _projectSelection
-            .call(drawProjectDetails);
+            .call(taskingProjectEditor.datum(_project));
 
-        // _pane.selectAll('.project-id')
-        //     .text(function(){
-        //         return tasking.currentProject().id !== 'none' ?
-        //         t('tasking.project.id') + ' ' + tasking.currentProject().projectId :
-        //         t('tasking.project.no_project.message');
-        //     });
+        _taskSelection
+            .call(taskingTaskEditor.datum(_task));
     }
 
 
