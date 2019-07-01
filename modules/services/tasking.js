@@ -55,118 +55,113 @@ export default {
     },
 
 
-    reset: function() {
-        _taskingCache = {
-            projects: rbush(),
-            currProject: {},
-            tasks: rbush(),
-            currTask: {},
-        };
-    },
+    // reset: function() {
+    //     _taskingCache = {
+    //         projects: rbush(),
+    //         currProject: {},
+    //         tasks: rbush(),
+    //         currTask: {},
+    //     };
+    // },
 
 
-    loadProject: function(projectId) {
+    // loadProject: function(projectId) {
 
-        var that = this;
-        var path = 'project/' + projectId + '?as_file=false';
+    //     var that = this;
+    //     var path = 'project/' + projectId + '?as_file=false';
 
-        var url = apibase + path;
-        d3_text(url)
-        .then(function(result) {
-            if (result) {
-                var json = JSON.parse(result);
-                _taskingCache.project = json;
+    //     var url = apibase + path;
+    //     d3_text(url)
+    //     .then(function(result) {
+    //         if (result) {
+    //             var json = JSON.parse(result);
+    //             _taskingCache.project = json;
 
-                // TODO: TAH - cache geojson tasks as well
-            }
-            dispatch.call('loadedProject');
-        })
-        .catch(function(err) {
-            console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
-        });
-    },
-
-
-    setProject: function(project) {
-        _taskingCache.project = project;
-
-    },
+    //             // TODO: TAH - cache geojson tasks as well
+    //         }
+    //         dispatch.call('loadedProject');
+    //     })
+    //     .catch(function(err) {
+    //         console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
+    //     });
+    // },
 
 
-    getProject: function(id) {
-        if (!arguments.length) return _taskingCache.project;
+    // setProject: function(project) {
+    //     _taskingCache.project = project;
 
-        var _project = _taskingCache.projects(id) ? _taskingCache.projects(id) : undefined;
-        return _project;
-    },
+    // },
 
 
-    getProjectId: function() {
-        return _taskingCache.project.projectId;
-    },
+    // getProject: function(id) {
+    //     if (!arguments.length) return _taskingCache.project;
+
+    //     var _project = _taskingCache.projects(id) ? _taskingCache.projects(id) : undefined;
+    //     return _project;
+    // },
 
 
-    loadTask: function(projectId, taskId) {
-
-        if (!_taskingCache.task[taskId]) {
-            var that = this;
-            var path = 'project/' + projectId + '/task/' + taskId + '?as_file=false';
-
-            var url = apibase + path;
-            d3_text(url)
-            .then(function(result) {
-                if (result) {
-                    var json = JSON.parse(result);
-                    _taskingCache.task = json;
-
-                    // also load the project details
-                    that.loadProject(projectId);
-                }
-
-                dispatch.call('loadedTask');
-            })
-            .catch(function(err) {
-                console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
-            });
-        }
-    },
-
-    getTask: function(id) {
-        if (!arguments.length) return _taskingCache.task;
-
-        var _task = _taskingCache.tasks(id) ? _taskingCache.tasks(id) : undefined;
-        return _task;
-    },
+    // getProjectId: function() {
+    //     return _taskingCache.project.projectId;
+    // },
 
 
-    getTaskId: function() {
-        return _taskingCache.task.taskId;
-    },
+    // loadTask: function(projectId, taskId) {
+
+    //     if (!_taskingCache.task[taskId]) {
+    //         var that = this;
+    //         var path = 'project/' + projectId + '/task/' + taskId + '?as_file=false';
+
+    //         var url = apibase + path;
+    //         d3_text(url)
+    //         .then(function(result) {
+    //             if (result) {
+    //                 var json = JSON.parse(result);
+    //                 _taskingCache.task = json;
+
+    //                 // also load the project details
+    //                 that.loadProject(projectId);
+    //             }
+
+    //             dispatch.call('loadedTask');
+    //         })
+    //         .catch(function(err) {
+    //             console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
+    //         });
+    //     }
+    // },
+
+    // getTask: function(id) {
+    //     if (!arguments.length) return _taskingCache.task;
+
+    //     var _task = _taskingCache.tasks(id) ? _taskingCache.tasks(id) : undefined;
+    //     return _task;
+    // },
 
 
-    setTask: function(task) {
-        _taskingCache.task = task;
-    },
+    // getTaskId: function() {
+    //     return _taskingCache.task.taskId;
+    // },
 
 
-    loadFromURL: function(url) {
-        var that = this;
+    // loadFromURL: function(url) {
+    //     var that = this;
 
-        // parse url to get type, project, and task (if present)
-        var parsedUrl = parseUrl(url);
+    //     // parse url to get type, project, and task (if present)
+    //     var parsedUrl = parseUrl(url);
 
-        switch (parsedUrl.urlType) {
-            case 'task':
-                that.loadTask(parsedUrl.projectId, parsedUrl.taskId);
-                break;
-            case 'project':
-                that.loadProject(parsedUrl.projectId);
-                break;
-            case undefined:
-                console.log('undefined url result: ', parsedUrl); // TODO: TAH - better handling of urlType
-                break;
-            default:
-                break;
-        }
-    }
+    //     switch (parsedUrl.urlType) {
+    //         case 'task':
+    //             that.loadTask(parsedUrl.projectId, parsedUrl.taskId);
+    //             break;
+    //         case 'project':
+    //             that.loadProject(parsedUrl.projectId);
+    //             break;
+    //         case undefined:
+    //             console.log('undefined url result: ', parsedUrl); // TODO: TAH - better handling of urlType
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 };

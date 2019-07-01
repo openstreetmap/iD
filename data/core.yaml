@@ -1582,9 +1582,12 @@ en:
       custom:
         name: Custom
         tooltip: Custom URL for tasking
-      HOTtm:
+      HOT:
         name: Hot Tasking Manager
         tooltip: Tasking manager provided by Humanitarian OpenStreetMap Team
+      Maproulette:
+        name: Maproulette
+        tooltip: Tasking manager provided by Maproulette
     project:
       name: Project
       id: ID

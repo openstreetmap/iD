@@ -24,10 +24,10 @@ export function uiTasking(context) {
     var _project = tasking.currentProject();
     var _task = tasking.currentTask();
 
-    var _customSource = tasking.findManager('custom');
-    var _noneSource = tasking.findManager('none');
+    var _customSource = tasking.getManager('custom');
+    var _noneSource = tasking.getManager('none');
 
-    var _previousManager = tasking.findManager('none');
+    var _previousManager = tasking.getManager('none');
 
     var taskingCustomData = uiSettingsCustomTasking(context)
         .on('change', customChanged);
@@ -41,23 +41,25 @@ export function uiTasking(context) {
 
         d3_event.preventDefault();
         _previousManager = tasking.currentManager(); // get previous manager
-
         tasking.currentManager(d); // set new manager
-        _manager = tasking.currentManager();
-
-        if (d.id === 'none') { tasking.resetProjectAndTask(); }
-
-        document.activeElement.blur();
-
+        _manager = tasking.currentManager(); // get current manager
 
         // TODO: TAH - potentially move to `editCustom logic`
         // load data using custom manager
         if (tasking.currentManager().id === 'custom' && tasking.currentManager().template()) {
             // set svg url to template
             tasking.loadFromURL(tasking.currentManager().template());
+
         }
 
-        update();
+        if (d.id === 'none') {
+            tasking.resetProjectAndTask();
+            taskingLayer.enabled(false);
+        } else {
+            taskingLayer.enabled(true);
+        }
+
+        document.activeElement.blur();
     }
 
 
