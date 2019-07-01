@@ -1051,6 +1051,9 @@ a.hide-toggle {
     display: flex;
     flex: 0 0 auto;
 }
+.assistant:not(.body-collapsed) {
+    min-width: 250px;
+}
 
 /* assistant header */
 .assistant .assistant-header {
