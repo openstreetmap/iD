@@ -1,4 +1,5 @@
 import _debounce from 'lodash-es/debounce';
+import { dataEn } from '../../data';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -13,6 +14,8 @@ import { uiEntityEditor } from './entity_editor';
 import { uiFeatureList } from './feature_list';
 import { uiSelectionList } from './selection_list';
 import { uiNoteEditor } from './note_editor';
+import { uiKeepRightEditor } from './keepRight_editor';
+import { uiImproveOsmEditor } from './improveOSM_editor';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -215,6 +218,12 @@ export function uiAssistant(context) {
             var note = osm && osm.getNote(mode.selectedNoteID());
             if (note) {
                 return panelSelectNote(context, note);
+            }
+        } else if (mode.id === 'select-error') {
+            if (mode.selectedErrorService() === 'keepRight') {
+                return panelSelectKeepRightError(context, mode.selectedErrorID());
+            } else if (mode.selectedErrorService() === 'improveOSM') {
+                return panelSelectImproveOSMError(context, mode.selectedErrorID());
             }
         } else if (!didEditAnythingYet) {
 
@@ -427,6 +436,135 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'feature-list-pane')
                 .call(featureSearch);
+        };
+
+        return panel;
+    }
+
+    function panelSelectKeepRightError(context, errorID) {
+
+        var error = services.keepRight.getError(errorID);
+
+        function errorTitle(d) {
+            var unknown = t('inspector.unknown');
+
+            if (!d) return unknown;
+            var errorType = d.error_type;
+            var parentErrorType = d.parent_error_type;
+
+            var et = dataEn.QA.keepRight.errorTypes[errorType];
+            var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
+
+            if (et && et.title) {
+                return t('QA.keepRight.errorTypes.' + errorType + '.title');
+            } else if (pt && pt.title) {
+                return t('QA.keepRight.errorTypes.' + parentErrorType + '.title');
+            } else {
+                return unknown;
+            }
+        }
+
+        var panel = {
+            theme: 'light',
+            modeLabel: t('QA.keepRight.title'),
+            title: errorTitle(error)
+        };
+
+        panel.renderHeaderIcon = function(selection) {
+            var icon = selection
+                .append('div')
+                .attr('class', 'error-header-icon')
+                .classed('new', error.id < 0);
+
+            icon
+                .append('div')
+                .attr('class', 'qa_error ' + error.service + ' error_id-' + error.id + ' error_type-' + error.parent_error_type)
+                .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
+        };
+
+        panel.renderBody = function(selection) {
+            var editor = uiKeepRightEditor(context)
+                .error(error);
+            selection.call(editor);
+        };
+
+        return panel;
+    }
+
+    function panelSelectImproveOSMError(context, errorID) {
+
+        var error = services.improveOSM.getError(errorID);
+
+        function errorTitle(d) {
+            var unknown = t('inspector.unknown');
+
+            if (!d) return unknown;
+            var errorType = d.error_key;
+            var et = dataEn.QA.improveOSM.error_types[errorType];
+
+            if (et && et.title) {
+                return t('QA.improveOSM.error_types.' + errorType + '.title');
+            } else {
+                return unknown;
+            }
+        }
+
+        var panel = {
+            theme: 'light',
+            modeLabel: t('QA.improveOSM.title'),
+            title: errorTitle(error)
+        };
+
+        panel.renderHeaderIcon = function(selection) {
+
+            var iconEnter = selection
+                .append('div')
+                .attr('class', 'error-header-icon')
+                .classed('new', error.id < 0);
+
+            var svgEnter = iconEnter
+                .append('svg')
+                .attr('width', '20px')
+                .attr('height', '30px')
+                .attr('viewbox', '0 0 20 30')
+                .attr('class', [
+                    'qa_error',
+                    error.service,
+                    'error_id-' + error.id,
+                    'error_type-' + error.error_type,
+                    'category-' + error.category
+                ].join(' '));
+
+            svgEnter
+                .append('polygon')
+                .attr('fill', 'currentColor')
+                .attr('class', 'qa_error-fill')
+                .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
+
+            var getIcon = function(d) {
+                var picon = d.icon;
+
+                if (!picon) {
+                    return '';
+                } else {
+                    var isMaki = /^maki-/.test(picon);
+                    return '#' + picon + (isMaki ? '-11' : '');
+                }
+            };
+
+            svgEnter
+                .append('use')
+                .attr('class', 'icon-annotation')
+                .attr('width', '11px')
+                .attr('height', '11px')
+                .attr('transform', 'translate(4.5, 7)')
+                .attr('xlink:href', getIcon(error));
+        };
+
+        panel.renderBody = function(selection) {
+            var editor = uiImproveOsmEditor(context)
+                .error(error);
+            selection.call(editor);
         };
 
         return panel;

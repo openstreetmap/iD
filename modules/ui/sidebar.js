@@ -9,18 +9,12 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { qaError } from '../osm';
-import { services } from '../services';
 import { uiDataEditor } from './data_editor';
-import { uiImproveOsmEditor } from './improveOSM_editor';
-import { uiKeepRightEditor } from './keepRight_editor';
 import { textDirection } from '../util/locale';
 
 
 export function uiSidebar(context) {
     var dataEditor = uiDataEditor(context);
-    var improveOsmEditor = uiImproveOsmEditor(context);
-    var keepRightEditor = uiKeepRightEditor(context);
     var _current;
     var _wasData = false;
     var _wasNote = false;
@@ -94,27 +88,6 @@ export function uiSidebar(context) {
                 _wasData = true;
                 sidebar
                     .show(dataEditor.datum(datum));
-
-                selection.selectAll('.sidebar-component')
-                    .classed('inspector-hover', true);
-
-            } else if (datum instanceof qaError) {
-                _wasQAError = true;
-
-                var errService = services[datum.service];
-                if (errService) {
-                    // marker may contain stale data - get latest
-                    datum = errService.getError(datum.id);
-                }
-
-                // Temporary solution while only two services
-                var errEditor = (datum.service === 'keepRight') ? keepRightEditor : improveOsmEditor;
-
-                d3_selectAll('.qa_error.' + datum.service)
-                    .classed('hover', function(d) { return d.id === datum.id; });
-
-                sidebar
-                    .show(errEditor.error(datum));
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);

@@ -1194,12 +1194,15 @@ a.hide-toggle {
     line-height: 1.35em;
 }
 /* note icon */
-.assistant .note-header-icon {
+.assistant .note-header-icon,
+.assistant .error-header-icon {
     position: relative;
     width: 30px;
     height: 30px;
 }
-.assistant .note-header-icon .note-fill {
+.assistant .note-header-icon .note-fill,
+.assistant .error-header-icon .keepRight,
+.assistant .error-header-icon .keepRight svg {
     width: 100%;
     height: 100%;
 }
@@ -3115,35 +3118,6 @@ input.key-trap {
 
 /* OSM Note / KeepRight Editors
 ------------------------------------------------------- */
-.error-header {
-    background-color: #f6f6f6;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-}
-
-.error-header-icon {
-    background-color: #fff;
-    padding: 10px;
-    flex: 0 0 62px;
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-right: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-[dir='rtl'] .error-header-icon {
-    border-right: unset;
-    border-left: 1px solid #ccc;
-    border-radius: 0 5px 5px 0;
-}
-
-.error-header-icon .icon-wrap {
-    position: absolute;
-    top: 0px;
-}
 .preset-icon-28 {
     position: absolute;
     top: 16px;
@@ -3153,18 +3127,6 @@ input.key-trap {
 .preset-icon-28 .icon {
     width: 28px;
     height: 28px;
-}
-
-.error-header-label {
-    background-color: #f6f6f6;
-    padding: 0 15px;
-    flex: 1 1 100%;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 0 5px 5px 0;
-}
-[dir='rtl'] .error-header-label {
-    border-radius: 5px 0 0 5px;
 }
 
 .note-category {

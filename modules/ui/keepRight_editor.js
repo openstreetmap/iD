@@ -1,54 +1,29 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
 import { modeBrowse } from '../modes/browse';
-import { svgIcon } from '../svg/icon';
+import { modeSelectError } from '../modes/select_error';
 
 import { uiKeepRightDetails } from './keepRight_details';
-import { uiKeepRightHeader } from './keepRight_header';
 import { uiViewOnKeepRight } from './view_on_keepRight';
 
-import { utilNoAuto, utilRebind } from '../util';
+import { utilNoAuto } from '../util';
 
 
 export function uiKeepRightEditor(context) {
-    var dispatch = d3_dispatch('change');
     var keepRightDetails = uiKeepRightDetails(context);
-    var keepRightHeader = uiKeepRightHeader(context);
 
     var _error;
 
-
     function keepRightEditor(selection) {
-
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL');
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr error-editor-close')
-            .on('click', function() {
-                context.enter(modeBrowse(context));
-            })
-            .call(svgIcon('#iD-icon-close'));
-
-        headerEnter
-            .append('h3')
-            .text(t('QA.keepRight.title'));
-
 
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
+            .attr('class', 'inspector-body sep-top')
             .merge(body);
 
         var editor = body.selectAll('.error-editor')
@@ -58,7 +33,6 @@ export function uiKeepRightEditor(context) {
             .append('div')
             .attr('class', 'modal-section error-editor')
             .merge(editor)
-            .call(keepRightHeader.error(_error))
             .call(keepRightDetails.error(_error))
             .call(keepRightSaveSection);
 
@@ -75,7 +49,7 @@ export function uiKeepRightEditor(context) {
 
 
     function keepRightSaveSection(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isSelected = (_error && context.mode().selectedErrorID && _error.id === context.mode().selectedErrorID());
         var isShown = (_error && (isSelected || _error.newComment || _error.comment));
         var saveSection = selection.selectAll('.error-save')
             .data(
@@ -136,7 +110,7 @@ export function uiKeepRightEditor(context) {
 
 
     function keepRightSaveButtons(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isSelected = (_error && context.mode().selectedErrorID && _error.id === context.mode().selectedErrorID());
         var buttonSection = selection.selectAll('.buttons')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
 
@@ -175,9 +149,7 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    keepRight.postKeepRightUpdate(d, remoteUpdateCallback);
                 }
             });
 
@@ -191,9 +163,7 @@ export function uiKeepRightEditor(context) {
                 var keepRight = services.keepRight;
                 if (keepRight) {
                     d.state = 'ignore_t';   // ignore temporarily (error fixed)
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    keepRight.postKeepRightUpdate(d, remoteUpdateCallback);
                 }
             });
 
@@ -207,11 +177,19 @@ export function uiKeepRightEditor(context) {
                 var keepRight = services.keepRight;
                 if (keepRight) {
                     d.state = 'ignore';   // ignore permanently (false positive)
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    keepRight.postKeepRightUpdate(d, remoteUpdateCallback);
                 }
             });
+    }
+
+    function remoteUpdateCallback(err, error) {
+        context.map().pan([0,0]);  // trigger a redraw
+
+        if (err || !error || !error.id) {
+            context.enter(modeBrowse(context));
+        } else {
+            context.enter(modeSelectError(context, error.id, 'keepRight'));
+        }
     }
 
 
@@ -222,5 +200,5 @@ export function uiKeepRightEditor(context) {
     };
 
 
-    return utilRebind(keepRightEditor, dispatch, 'on');
+    return keepRightEditor;
 }

@@ -133,7 +133,6 @@ export function behaviorSelect(context) {
 
         if (datum instanceof osmEntity) {    // clicked an entity..
             var selectedIDs = context.selectedIDs();
-            context.selectedErrorID(null);
 
             if (!isMultiselect) {
                 if (selectedIDs.length > 1 && (!_suppressMenu && !isShowAlways)) {
@@ -172,11 +171,9 @@ export function behaviorSelect(context) {
 
         } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
             context
-                .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
 
         } else {    // clicked nothing..
-            context.selectedErrorID(null);
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));
             }

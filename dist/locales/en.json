@@ -991,7 +991,7 @@
         "full_screen": "Toggle Full Screen",
         "QA": {
             "improveOSM": {
-                "title": "ImproveOSM Detection",
+                "title": "ImproveOSM",
                 "geometry_types": {
                     "path": "paths",
                     "parking": "parking",
@@ -1025,7 +1025,7 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight Error",
+                "title": "KeepRight",
                 "detail_title": "Error",
                 "detail_description": "Description",
                 "comment": "Comment",

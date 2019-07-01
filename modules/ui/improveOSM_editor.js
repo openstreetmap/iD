@@ -1,55 +1,30 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
 import { modeBrowse } from '../modes/browse';
-import { svgIcon } from '../svg/icon';
+import { modeSelectError } from '../modes/select_error';
 
 import { uiImproveOsmComments } from './improveOSM_comments';
 import { uiImproveOsmDetails } from './improveOSM_details';
-import { uiImproveOsmHeader } from './improveOSM_header';
 
-import { utilNoAuto, utilRebind } from '../util';
+import { utilNoAuto } from '../util';
 
 
 export function uiImproveOsmEditor(context) {
-    var dispatch = d3_dispatch('change');
     var errorDetails = uiImproveOsmDetails(context);
     var errorComments = uiImproveOsmComments(context);
-    var errorHeader = uiImproveOsmHeader(context);
 
     var _error;
 
-
     function improveOsmEditor(selection) {
-
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL');
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr error-editor-close')
-            .on('click', function() {
-                context.enter(modeBrowse(context));
-            })
-            .call(svgIcon('#iD-icon-close'));
-
-        headerEnter
-            .append('h3')
-            .text(t('QA.improveOSM.title'));
-
 
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
+            .attr('class', 'inspector-body sep-top')
             .merge(body);
 
         var editor = body.selectAll('.error-editor')
@@ -59,14 +34,13 @@ export function uiImproveOsmEditor(context) {
             .append('div')
             .attr('class', 'modal-section error-editor')
             .merge(editor)
-            .call(errorHeader.error(_error))
             .call(errorDetails.error(_error))
             .call(errorComments.error(_error))
             .call(improveOsmSaveSection);
     }
 
     function improveOsmSaveSection(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isSelected = (_error && context.mode().selectedErrorID && _error.id === context.mode().selectedErrorID());
         var isShown = (_error && (isSelected || _error.newComment || _error.comment));
         var saveSection = selection.selectAll('.error-save')
             .data(
@@ -125,7 +99,7 @@ export function uiImproveOsmEditor(context) {
     }
 
     function errorSaveButtons(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
+        var isSelected = (_error && context.mode().selectedErrorID && _error.id === context.mode().selectedErrorID());
         var buttonSection = selection.selectAll('.buttons')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
 
@@ -164,9 +138,7 @@ export function uiImproveOsmEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var errorService = services.improveOSM;
                 if (errorService) {
-                    errorService.postUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    errorService.postUpdate(d, remoteUpdateCallback);
                 }
             });
 
@@ -180,9 +152,7 @@ export function uiImproveOsmEditor(context) {
                 var errorService = services.improveOSM;
                 if (errorService) {
                     d.newStatus = 'SOLVED';
-                    errorService.postUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    errorService.postUpdate(d, remoteUpdateCallback);
                 }
             });
 
@@ -196,11 +166,19 @@ export function uiImproveOsmEditor(context) {
                 var errorService = services.improveOSM;
                 if (errorService) {
                     d.newStatus = 'INVALID';
-                    errorService.postUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
+                    errorService.postUpdate(d, remoteUpdateCallback);
                 }
             });
+    }
+
+    function remoteUpdateCallback(err, error) {
+        context.map().pan([0,0]);  // trigger a redraw
+
+        if (err || !error || !error.id) {
+            context.enter(modeBrowse(context));
+        } else {
+            context.enter(modeSelectError(context, error.id, 'improveOSM'));
+        }
     }
 
     improveOsmEditor.error = function(val) {
@@ -210,5 +188,5 @@ export function uiImproveOsmEditor(context) {
     };
 
 
-    return utilRebind(improveOsmEditor, dispatch, 'on');
+    return improveOsmEditor;
 }

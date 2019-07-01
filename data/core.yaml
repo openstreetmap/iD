@@ -793,7 +793,7 @@ en:
   full_screen: Toggle Full Screen
   QA:
     improveOSM:
-      title: ImproveOSM Detection
+      title: ImproveOSM
       geometry_types:
         path: paths
         parking: parking
@@ -820,7 +820,7 @@ en:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight Error
+      title: KeepRight
       detail_title: Error
       detail_description: Description
       comment: Comment
