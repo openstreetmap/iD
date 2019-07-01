@@ -940,25 +940,6 @@ button.add-preset.disabled .preset-icon-container {
     right: unset;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-    padding: 5px 20px 5px 20px;
-    border-top: 1px solid #ccc;
-    background-color: #f6f6f6;
-    width: 100%;
-    z-index: 1;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    list-style: none;
-    display: flex;
-}
-
-.footer > a {
-    justify-content: center;
-}
-
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -1460,20 +1441,12 @@ a.hide-toggle {
     border: 1px solid #ccc;
 }
 
-.sidebar-component .body {
-    width: 100%;
-    overflow: auto;
-}
-
 .entity-editor-pane {
     width: 100%;
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: inherit;
-}
-.entity-editor-pane .footer {
-    position: relative;
 }
 
 .inspector-hidden {
@@ -4301,8 +4274,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .field-label button,
-.inspector-hover .tag-row button,
-.inspector-hover .footer * {
+.inspector-hover .tag-row button {
     opacity: 0;
 }
 

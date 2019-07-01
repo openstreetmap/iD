@@ -43,12 +43,12 @@ export function uiKeepRightEditor(context) {
             .text(t('QA.keepRight.title'));
 
 
-        var body = selection.selectAll('.body')
+        var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'body')
+            .attr('class', 'inspector-body')
             .merge(body);
 
         var editor = body.selectAll('.error-editor')
@@ -63,12 +63,12 @@ export function uiKeepRightEditor(context) {
             .call(keepRightSaveSection);
 
 
-        var footer = selection.selectAll('.footer')
+        var footer = selection.selectAll('.inspector-footer')
             .data([0]);
 
         footer.enter()
             .append('div')
-            .attr('class', 'footer')
+            .attr('class', 'inspector-footer')
             .merge(footer)
             .call(uiViewOnKeepRight(context).what(_error));
     }

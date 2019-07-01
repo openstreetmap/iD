@@ -44,12 +44,12 @@ export function uiImproveOsmEditor(context) {
             .text(t('QA.improveOSM.title'));
 
 
-        var body = selection.selectAll('.body')
+        var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'body')
+            .attr('class', 'inspector-body')
             .merge(body);
 
         var editor = body.selectAll('.error-editor')

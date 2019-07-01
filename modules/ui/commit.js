@@ -94,7 +94,7 @@ export function uiCommit(context) {
                 if (sources.indexOf('streetlevel imagery') === -1) {
                     sources.push('streetlevel imagery');
                 }
-                
+
                 // add the photo overlays used during editing as sources
                 photoOverlaysUsed.forEach(function(photoOverlay) {
                     if (sources.indexOf(photoOverlay) === -1) {
@@ -185,12 +185,12 @@ export function uiCommit(context) {
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon('#iD-icon-close'));
 
-        var body = selection.selectAll('.body')
+        var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'body')
+            .attr('class', 'inspector-body')
             .merge(body);
 
 
