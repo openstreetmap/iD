@@ -9,8 +9,6 @@ import { svgIcon } from '../svg/icon';
 import { uiImproveOsmComments } from './improveOSM_comments';
 import { uiImproveOsmDetails } from './improveOSM_details';
 import { uiImproveOsmHeader } from './improveOSM_header';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 
 import { utilNoAuto, utilRebind } from '../util';
 
@@ -20,24 +18,11 @@ export function uiImproveOsmEditor(context) {
     var errorDetails = uiImproveOsmDetails(context);
     var errorComments = uiImproveOsmComments(context);
     var errorHeader = uiImproveOsmHeader(context);
-    var quickLinks = uiQuickLinks();
 
     var _error;
 
 
     function improveOsmEditor(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_issue'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
-
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -75,7 +60,6 @@ export function uiImproveOsmEditor(context) {
             .attr('class', 'modal-section error-editor')
             .merge(editor)
             .call(errorHeader.error(_error))
-            .call(quickLinks.choices(choices))
             .call(errorDetails.error(_error))
             .call(errorComments.error(_error))
             .call(improveOsmSaveSection);

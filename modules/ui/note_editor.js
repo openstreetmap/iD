@@ -14,8 +14,6 @@ import { svgIcon } from '../svg/icon';
 
 import { uiNoteComments } from './note_comments';
 import { uiNoteReport } from './note_report';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 import { uiViewOnOSM } from './view_on_osm';
 
 import {
@@ -24,7 +22,6 @@ import {
 
 
 export function uiNoteEditor(context) {
-    var quickLinks = uiQuickLinks();
     var noteComments = uiNoteComments();
 
     // var formFields = uiFormFields(context);
@@ -33,17 +30,6 @@ export function uiNoteEditor(context) {
     // var _fieldsArr;
 
     function noteEditor(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_note'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
 
         var body = selection.selectAll('.inspector-body')
             .data([0]);
@@ -60,7 +46,6 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'modal-section note-editor')
             .merge(editor)
-            .call(quickLinks.choices(choices))
             .call(noteComments.note(_note))
             .call(noteSaveSection);
 

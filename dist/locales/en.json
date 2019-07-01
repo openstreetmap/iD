@@ -11,6 +11,9 @@
             "favorite": "favorite"
         },
         "toolbar": {
+            "center_zoom": {
+                "title": "Center"
+            },
             "deselect": {
                 "title": "Deselect"
             },
@@ -735,7 +738,6 @@
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom to this",
                 "tooltip_feature": "Center and zoom the map to focus on this feature.",
                 "tooltip_note": "Center and zoom the map to focus on this note.",
                 "tooltip_data": "Center and zoom the map to focus on this data.",

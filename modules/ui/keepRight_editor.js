@@ -8,8 +8,6 @@ import { svgIcon } from '../svg/icon';
 
 import { uiKeepRightDetails } from './keepRight_details';
 import { uiKeepRightHeader } from './keepRight_header';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 import { uiViewOnKeepRight } from './view_on_keepRight';
 
 import { utilNoAuto, utilRebind } from '../util';
@@ -19,24 +17,11 @@ export function uiKeepRightEditor(context) {
     var dispatch = d3_dispatch('change');
     var keepRightDetails = uiKeepRightDetails(context);
     var keepRightHeader = uiKeepRightHeader(context);
-    var quickLinks = uiQuickLinks();
 
     var _error;
 
 
     function keepRightEditor(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_issue'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
-
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -74,7 +59,6 @@ export function uiKeepRightEditor(context) {
             .attr('class', 'modal-section error-editor')
             .merge(editor)
             .call(keepRightHeader.error(_error))
-            .call(quickLinks.choices(choices))
             .call(keepRightDetails.error(_error))
             .call(keepRightSaveSection);
 

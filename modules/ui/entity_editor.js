@@ -8,7 +8,6 @@ import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
-import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
@@ -16,7 +15,6 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetBrowser } from './preset_browser';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
-import { uiTooltipHtml } from './tooltipHtml';
 import { utilCleanTags, utilRebind } from '../util';
 import { uiViewOnOSM } from './view_on_osm';
 
@@ -34,7 +32,6 @@ export function uiEntityEditor(context) {
     var _presetFavorite;
 
     var entityIssues = uiEntityIssues(context);
-    var quickLinks = uiQuickLinks();
     var presetEditor = uiPresetEditor(context).on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
@@ -84,10 +81,6 @@ export function uiEntityEditor(context) {
         if (!bodyEnter.empty()) {
             presetBrowser.render(bodyEnter);
         }
-
-        bodyEnter
-            .append('div')
-            .attr('class', 'preset-quick-links');
 
         bodyEnter
             .append('div')
@@ -186,21 +179,6 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'namepart')
             .text(function(d) { return d; });
-
-        // update quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
-
-        body.select('.preset-quick-links')
-            .call(quickLinks.choices(choices));
 
 
         // update editor sections

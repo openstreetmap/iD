@@ -30,7 +30,7 @@ export function uiToolSegemented(context) {
     };
 
     tool.shouldShow = function() {
-        tool.loadItems();
+        if (tool.loadItems) tool.loadItems();
         return tool.items.length > 1;
     };
 

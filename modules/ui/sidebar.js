@@ -9,7 +9,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { osmNote, qaError } from '../osm';
+import { qaError } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';

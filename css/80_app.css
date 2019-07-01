@@ -5702,6 +5702,9 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     fill: #eee;
 }
 
+.toolbar-item.center-zoom button use {
+    fill: #79f;
+}
 .toolbar-item.operation button use,
 .edit-menu-item use {
     fill: #222;

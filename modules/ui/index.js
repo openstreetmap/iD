@@ -48,7 +48,6 @@ export { uiNoteReport } from './note_report';
 export { uiPresetEditor } from './preset_editor';
 export { uiPresetIcon } from './preset_icon';
 export { uiPresetList } from './preset_list';
-export { uiQuickLinks } from './quick_links';
 export { uiRawMemberEditor } from './raw_member_editor';
 export { uiRawMembershipEditor } from './raw_membership_editor';
 export { uiRawTagEditor } from './raw_tag_editor';
