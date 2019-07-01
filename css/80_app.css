@@ -1058,6 +1058,11 @@ a.hide-toggle {
 /* assistant header */
 .assistant .assistant-header {
     flex: 0 0 auto;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.assistant.light:not(.body-collapsed, .prominent) .assistant-header{
+    background: #fff;
 }
 .assistant .icon-col {
     flex: 0 0 auto;
@@ -5068,7 +5073,6 @@ img.tile-debug {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 30px;
 }
 
 .save-section .buttons .action,
