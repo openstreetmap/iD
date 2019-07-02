@@ -54,7 +54,8 @@
                 "drawing": "Drawing",
                 "mapping": "Mapping",
                 "editing": "Editing",
-                "saving": "Saving"
+                "saving": "Saving",
+                "viewing": "Viewing"
             },
             "instructions": {
                 "add_point": "Click or tap the center of the feature.",

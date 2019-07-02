@@ -1102,6 +1102,7 @@ a.hide-toggle {
 .assistant .assistant-body {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .assistant.body-collapsed .assistant-body {
     display: none;

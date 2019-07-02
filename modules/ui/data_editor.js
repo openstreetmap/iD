@@ -1,45 +1,19 @@
-import { t } from '../util/locale';
-import { modeBrowse } from '../modes/browse';
-import { svgIcon } from '../svg/icon';
 
-import { uiDataHeader } from './data_header';
 import { uiRawTagEditor } from './raw_tag_editor';
 
-
 export function uiDataEditor(context) {
-    var dataHeader = uiDataHeader();
     var rawTagEditor = uiRawTagEditor(context);
     var _datum;
 
 
     function dataEditor(selection) {
 
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL');
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr data-editor-close')
-            .on('click', function() {
-                context.enter(modeBrowse(context));
-            })
-            .call(svgIcon('#iD-icon-close'));
-
-        headerEnter
-            .append('h3')
-            .text(t('map_data.title'));
-
-
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
+            .attr('class', 'inspector-body sep-top')
             .merge(body);
 
         var editor = body.selectAll('.data-editor')
@@ -47,10 +21,7 @@ export function uiDataEditor(context) {
 
         // enter/update
         editor.enter()
-            .append('div')
-            .attr('class', 'modal-section data-editor')
-            .merge(editor)
-            .call(dataHeader.datum(_datum));
+            .merge(editor);
 
         var rte = body.selectAll('.raw-tag-editor')
             .data([0]);

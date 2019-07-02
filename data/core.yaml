@@ -43,6 +43,7 @@ en:
       mapping: Mapping
       editing: Editing
       saving: Saving
+      viewing: Viewing
     instructions:
       add_point: Click or tap the center of the feature.
       add_line: Click or tap the starting location.

@@ -16,6 +16,7 @@ import { uiSelectionList } from './selection_list';
 import { uiNoteEditor } from './note_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
+import { uiDataEditor } from './data_editor';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -225,6 +226,8 @@ export function uiAssistant(context) {
             } else if (mode.selectedErrorService() === 'improveOSM') {
                 return panelSelectImproveOSMError(context, mode.selectedErrorID());
             }
+        } else if (mode.id === 'select-data') {
+            return panelSelectCustomData(context, mode.selectedDatum());
         } else if (!didEditAnythingYet) {
 
             if (savedChangeset) {
@@ -564,6 +567,24 @@ export function uiAssistant(context) {
         panel.renderBody = function(selection) {
             var editor = uiImproveOsmEditor(context)
                 .error(error);
+            selection.call(editor);
+        };
+
+        return panel;
+    }
+
+    function panelSelectCustomData(context, datum) {
+
+        var panel = {
+            theme: 'light',
+            modeLabel: t('assistant.mode.viewing'),
+            headerIcon: 'iD-icon-data',
+            title: t('map_data.layers.custom.title')
+        };
+
+        panel.renderBody = function(selection) {
+            var editor = uiDataEditor(context)
+                .datum(datum);
             selection.call(editor);
         };
 

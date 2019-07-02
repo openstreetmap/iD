@@ -5,20 +5,14 @@ import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
 import {
     select as d3_select,
-    event as d3_event,
-    selectAll as d3_selectAll
+    event as d3_event
 } from 'd3-selection';
 
-import { uiDataEditor } from './data_editor';
 import { textDirection } from '../util/locale';
 
 
 export function uiSidebar(context) {
-    var dataEditor = uiDataEditor(context);
     var _current;
-    var _wasData = false;
-    var _wasNote = false;
-    var _wasQAError = false;
 
 
     function sidebar(selection) {
@@ -80,30 +74,8 @@ export function uiSidebar(context) {
             .attr('class', 'inspector-hidden inspector-wrap entity-editor-pane');
 
 
-        function hover(datum) {
+        function hover() {
             // disable hover preview for now
-            return;
-
-            if (datum && datum.__featurehash__) {   // hovering on data
-                _wasData = true;
-                sidebar
-                    .show(dataEditor.datum(datum));
-
-                selection.selectAll('.sidebar-component')
-                    .classed('inspector-hover', true);
-
-            } else if (!_current) {
-                inspectorWrap
-                    .classed('inspector-hidden', true);
-
-            } else if (_wasData || _wasNote || _wasQAError) {
-                _wasNote = false;
-                _wasData = false;
-                _wasQAError = false;
-                d3_selectAll('.note').classed('hover', false);
-                d3_selectAll('.qa_error').classed('hover', false);
-                sidebar.hide();
-            }
         }
 
         sidebar.hover = _throttle(hover, 200);
