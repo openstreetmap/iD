@@ -39,9 +39,10 @@ en:
   assistant:
     mode:
       adding: Adding
+      authenticating: Authenticating
       drawing: Drawing
-      mapping: Mapping
       editing: Editing
+      mapping: Mapping
       saving: Saving
       viewing: Viewing
     instructions:
@@ -69,6 +70,9 @@ en:
         count_loc_time: "You have {count} unsaved changes from {duration} ago around {location}."
       ask: Would you like to restore them?
     commit:
+      auth:
+        osm_account: OpenStreetMap Account
+        message: You must sign in to upload your changes.
       success:
         thank_you: Thank You!
         just_improved: "You've just improved OpenStreetMap around {location}."

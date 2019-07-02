@@ -66,7 +66,10 @@ export function uiTopToolbar(context) {
         var mode = context.mode();
         if (!mode) return tools;
 
-        if (mode.id === 'select' &&
+        if (mode.id === 'save') {
+            tools.push(cancelDrawing);
+            tools.push('spacer');
+        } else if (mode.id === 'select' &&
             !mode.newFeature() &&
             mode.selectedIDs().every(function(id) { return context.graph().hasEntity(id); })) {
 

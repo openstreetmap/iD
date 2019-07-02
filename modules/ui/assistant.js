@@ -17,6 +17,7 @@ import { uiNoteEditor } from './note_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiDataEditor } from './data_editor';
+import { uiCommit } from './commit';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
@@ -198,7 +199,11 @@ export function uiAssistant(context) {
 
         if (mode.id === 'save') {
 
-            return panelSave(context);
+            if (context.connection() && context.connection().authenticated()) {
+                return panelSave(context);
+            } else {
+                return panelAuthenticating(context);
+            }
 
         } else if (mode.id === 'add-point' || mode.id === 'add-line' ||
             mode.id === 'add-area' || mode.id === 'draw-line' ||
@@ -215,8 +220,7 @@ export function uiAssistant(context) {
             return panelSelectMultiple(context, selectedIDs);
 
         } else if (mode.id === 'select-note') {
-            var osm = context.connection();
-            var note = osm && osm.getNote(mode.selectedNoteID());
+            var note = context.connection() && context.connection().getNote(mode.selectedNoteID());
             if (note) {
                 return panelSelectNote(context, note);
             }
@@ -699,6 +703,19 @@ export function uiAssistant(context) {
         return panel;
     }
 
+
+    function panelAuthenticating() {
+
+        var panel = {
+            headerIcon: 'iD-icon-save',
+            modeLabel: t('assistant.mode.authenticating'),
+            title: t('assistant.commit.auth.osm_account'),
+            message: t('assistant.commit.auth.message')
+        };
+
+        return panel;
+    }
+
     function panelSave(context) {
 
         var summary = context.history().difference().summary();
@@ -709,6 +726,11 @@ export function uiAssistant(context) {
             headerIcon: 'iD-icon-save',
             modeLabel: t('assistant.mode.saving'),
             title: t('commit.' + titleID, { count: summary.length })
+        };
+
+        panel.renderBody = function(selection) {
+            var editor = uiCommit(context);
+            selection.call(editor);
         };
 
         return panel;

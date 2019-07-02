@@ -1,18 +1,17 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
+import { modeSelect } from '../modes/select';
 import { modeBrowse } from '../modes/browse';
 import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
-import { utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -33,7 +32,6 @@ var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`
 
 
 export function uiCommit(context) {
-    var dispatch = d3_dispatch('cancel', 'save');
     var _userDetails;
     var _selection;
 
@@ -160,37 +158,12 @@ export function uiCommit(context) {
 
         _changeset = _changeset.update({ tags: tags });
 
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerTitle = header.enter()
-            .append('div')
-            .attr('class', 'header fillL header-container');
-
-        headerTitle
-            .append('div')
-            .attr('class', 'header-block header-block-outer');
-
-        headerTitle
-            .append('div')
-            .attr('class', 'header-block')
-            .append('h3')
-            .text(t('commit.title'));
-
-        headerTitle
-            .append('div')
-            .attr('class', 'header-block header-block-outer header-block-close')
-            .append('button')
-            .attr('class', 'close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
-            .call(svgIcon('#iD-icon-close'));
-
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
+            .attr('class', 'inspector-body sep-top')
             .merge(body);
 
 
@@ -330,7 +303,11 @@ export function uiCommit(context) {
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
                 var selectedID = commitChanges.entityID();
-                dispatch.call('cancel', this, selectedID);
+                if (selectedID) {
+                    context.enter(modeSelect(context, [selectedID]));
+                } else {
+                    context.enter(modeBrowse(context));
+                }
             });
 
         buttonSection.selectAll('.save-button')
@@ -338,7 +315,10 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
-                    dispatch.call('save', this, _changeset);
+                    var mode = context.mode();
+                    if (mode.id === 'save' && mode.save) {
+                        mode.save(_changeset);
+                    }
                 }
             });
 
@@ -554,10 +534,5 @@ export function uiCommit(context) {
     }
 
 
-    commit.reset = function() {
-        _changeset = null;
-    };
-
-
-    return utilRebind(commit, dispatch, 'on');
+    return commit;
 }
