@@ -209,7 +209,7 @@ export function uiPresetIcon(context) {
         var isTnp = picon && /^tnp-/.test(picon);
         var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
-        var drawPoint = picon && geom === 'point' && pointMarker && !isFallback;
+        var drawPoint = geom === 'point' && pointMarker && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
