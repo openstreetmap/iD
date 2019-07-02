@@ -600,7 +600,7 @@ export function uiMapData(context) {
 
         var liEnter = ulEnter
             .append('li')
-            .attr('class', 'list-item-data');
+            .attr('class', 'list-item-tasking');
 
         liEnter
             .append('button')
@@ -644,7 +644,7 @@ export function uiMapData(context) {
         ul = ul
             .merge(ulEnter);
 
-        ul.selectAll('.list-item-data')
+        ul.selectAll('.list-item-tasking')
             .classed('active', showsData)
             .selectAll('label')
             .classed('deemphasize', !hasData)
@@ -861,7 +861,7 @@ export function uiMapData(context) {
             updateFeatureList();
         }
 
-        if (!_pane.select('.disclosure-wrap-map_features').classed('hide')) {
+        if (!_pane.select('.disclosure-wrap-map_tasking').classed('hide')) {
             updateTaskingList();
         }
 

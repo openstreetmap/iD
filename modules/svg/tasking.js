@@ -48,7 +48,7 @@ export function svgTasking(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawData.fileList(d3_event.dataTransfer.files);
+                drawTasking.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
             .on('dragexit.svgData', over)
@@ -164,13 +164,13 @@ export function svgTasking(projection, context, dispatch) {
     }
 
 
-    function drawData(selection) {
+    function drawTasking(selection) {
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
-        var hasData = drawData.hasData();
+        var hasData = drawTasking.hasData();
 
-        layer = selection.selectAll('.layer-mapdata')
+        layer = selection.selectAll('.layer-maptasking')
             .data(_enabled && hasData ? [0] : []);
 
         layer.exit()
@@ -178,7 +178,7 @@ export function svgTasking(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapdata')
+            .attr('class', 'layer-maptasking')
             .merge(layer);
 
         var surface = context.surface();
@@ -315,7 +315,7 @@ export function svgTasking(projection, context, dispatch) {
     }
 
 
-    drawData.setFile = function(extension, data) {
+    drawTasking.setFile = function(extension, data) {
         _template = null;
         _fileList = null;
         _geojson = null;
@@ -347,7 +347,7 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.showLabels = function(val) {
+    drawTasking.showLabels = function(val) {
         if (!arguments.length) return _showLabels;
 
         _showLabels = val;
@@ -355,7 +355,7 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.enabled = function(val) {
+    drawTasking.enabled = function(val) {
         if (!arguments.length) return _enabled;
 
         _enabled = val;
@@ -370,13 +370,13 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.hasData = function() {
+    drawTasking.hasData = function() {
         var gj = _geojson || {};
         return !!(_template || Object.keys(gj).length);
     };
 
 
-    drawData.template = function(val, src) {
+    drawTasking.template = function(val, src) {
         if (!arguments.length) return _template;
 
         // test source against OSM imagery blacklists..
@@ -418,7 +418,7 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.geojson = function(gj, src) {
+    drawTasking.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
 
         _template = null;
@@ -437,7 +437,7 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.fileList = function(fileList) {
+    drawTasking.fileList = function(fileList) {
         if (!arguments.length) return _fileList;
 
         _template = null;
@@ -451,7 +451,7 @@ export function svgTasking(projection, context, dispatch) {
         var reader = new FileReader();
         reader.onload = (function() {
             return function(e) {
-                drawData.setFile(extension, e.target.result);
+                drawTasking.setFile(extension, e.target.result);
             };
         })(f);
 
@@ -461,7 +461,7 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawData.url = function(url, defaultExtension) {
+    drawTasking.url = function(url, defaultExtension) {
         _template = null;
         _fileList = null;
         _geojson = null;
@@ -474,26 +474,26 @@ export function svgTasking(projection, context, dispatch) {
             _template = null;
             d3_text(url)
                 .then(function(data) {
-                    drawData.setFile(extension, data);
+                    drawTasking.setFile(extension, data);
                 })
                 .catch(function() {
                     /* ignore */
                 });
 
         } else {
-            drawData.template(url);
+            drawTasking.template(url);
         }
 
         return this;
     };
 
 
-    drawData.getSrc = function() {
+    drawTasking.getSrc = function() {
         return _src || '';
     };
 
 
-    drawData.fitZoom = function() {
+    drawTasking.fitZoom = function() {
         var features = getFeatures(_geojson);
         if (!features.length) return;
 
@@ -532,5 +532,5 @@ export function svgTasking(projection, context, dispatch) {
 
 
     init();
-    return drawData;
+    return drawTasking;
 }
