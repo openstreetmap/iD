@@ -46,7 +46,8 @@ export function uiPresetIcon(context) {
     }
 
     function renderCircleFill(fillEnter) {
-        var w = 60, h = 60, d = 40;
+        var d = isSmall() ? 40 : 60;
+        var w = d, h = d, r = d/3;
         fillEnter = fillEnter
             .append('svg')
             .attr('class', 'preset-icon-fill preset-icon-fill-vertex')
@@ -57,7 +58,7 @@ export function uiPresetIcon(context) {
         fillEnter.append('circle')
             .attr('cx', w/2)
             .attr('cy', h/2)
-            .attr('r', d/2);
+            .attr('r', r);
     }
 
     function renderSquareFill(fillEnter) {
@@ -209,7 +210,7 @@ export function uiPresetIcon(context) {
         var isTnp = picon && /^tnp-/.test(picon);
         var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
-        var drawPoint = geom === 'point' && pointMarker && !isFallback;
+        var drawPoint = geom === 'point' && (pointMarker || !picon) && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;

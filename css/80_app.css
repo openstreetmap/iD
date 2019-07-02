@@ -1506,9 +1506,10 @@ a.hide-toggle {
     height: 34px;
 }
 
-.preset-icon-point-border path {
-    stroke: #333;
-    stroke-width: 1.2;
+.preset-icon-point-border path,
+.preset-icon-fill-vertex circle {
+    stroke-width: 1.3px;
+    stroke: currentColor;
     fill: transparent;
 }
 
@@ -1554,13 +1555,6 @@ a.hide-toggle {
 }
 .preset-icon-fill path.area.stroke {
     fill: transparent;
-}
-
-.preset-icon-fill-vertex circle {
-    stroke-width: 1.5px;
-    stroke: #333;
-    fill: #efefef;
-    backface-visibility: hidden;
 }
 
 .preset-icon {
