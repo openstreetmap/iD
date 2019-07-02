@@ -634,7 +634,7 @@ export function uiMapData(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('data'); });
+            .on('change', function() { toggleLayer('tasking'); });
 
         labelEnter
             .append('span')
@@ -735,6 +735,7 @@ export function uiMapData(context) {
 
         updateDataLayers();
     }
+
 
     function renderPhotoOverlays(selection) {
         var container = selection.selectAll('.photo-overlay-container')
