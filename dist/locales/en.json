@@ -9254,6 +9254,41 @@
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
             },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
+                "name": "DigitalGlobe Premium Imagery"
+            },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "name": "DigitalGlobe Premium Imagery Vintage"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+                "name": "DigitalGlobe Standard Imagery"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "name": "DigitalGlobe Standard Imagery Vintage"
+            },
+            "DigitalGlobe-Vivid": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "DigitalGlobe-Vivid is a mosaic with optimal aesthetics and currency for any area on the globe, 50cm resolution or better, and image currency <20 month average globally.",
+                "name": "DigitalGlobe Vivid Imagery"
+            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
@@ -9288,20 +9323,6 @@
                 },
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "Maxar Premium Imagery (Beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "Maxar Standard Imagery (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9362,10 +9383,6 @@
             "US-TIGER-Roads-2018": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2018"
-            },
-            "USDA-NAIP": {
-                "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
-                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -9444,27 +9461,6 @@
                 },
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
-            },
-            "basemap.at-overlay": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Annotation overlay provided by basemap.at.",
-                "name": "basemap.at Overlay"
-            },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Surface layer provided by basemap.at.",
-                "name": "basemap.at Surface"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terrain layer provided by basemap.at.",
-                "name": "basemap.at Terrain"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -10590,14 +10586,6 @@
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
             },
-            "pt-mailinglist": {
-                "name": "Talk-pt Mailing List",
-                "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
-            },
-            "pt-telegram": {
-                "name": "OpenStreetMap Portugal no Telegram",
-                "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
-            },
             "si-forum": {
                 "name": "OpenStreetMap Slovenia Forum",
                 "description": "Forum of OpenStreetMap community in Slovenia"
@@ -11087,17 +11075,13 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Sign up at {signupUrl}"
+            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
-            },
-            "Maptime-Oceania-Slack": {
-                "name": "Maptime Oceania Slack",
-                "description": "Sign up at {signupUrl}"
-            },
-            "talk-nz": {
-                "name": "Talk-nz Mailing List",
-                "description": "New Zealand's OSM community talk"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentina Facebook",
@@ -11266,19 +11250,6 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
-            },
-            "uy-forum": {
-                "name": "OpenStreetMap UY forum",
-                "description": "OpenStreetMap Uruguay web forum"
-            },
-            "uy-irc": {
-                "name": "OpenStreetMap Uruguay on IRC",
-                "description": "Join #osmuruguay on irc.freenode.org (port 6667)",
-                "extendedDescription": "Join #osmuruguay on irc.freenode.org"
-            },
-            "uy-mailinglist": {
-                "name": "Talk-uy Mailing List",
-                "description": "Talk-uy is the official mailing list for the Uruguayan OSM community"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam Facebook",
