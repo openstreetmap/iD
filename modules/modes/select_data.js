@@ -98,9 +98,6 @@ export function modeSelectData(context, selectedDatum) {
 
         context.map()
             .on('drawn.select-data', null);
-
-        context.ui().sidebar
-            .hide();
     };
 
 

@@ -50,7 +50,6 @@ export { uiRawMembershipEditor } from './raw_membership_editor';
 export { uiRawTagEditor } from './raw_tag_editor';
 export { uiScale } from './scale';
 export { uiSelectionList } from './selection_list';
-export { uiSidebar } from './sidebar';
 export { uiSourceSwitch } from './source_switch';
 export { uiSpinner } from './spinner';
 export { uiStatus } from './status';

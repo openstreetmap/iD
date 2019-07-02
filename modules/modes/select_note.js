@@ -127,9 +127,6 @@ export function modeSelectNote(context, selectedNoteID) {
 
         context.map()
             .on('drawn.select', null);
-
-        context.ui().sidebar
-            .hide();
     };
 
 

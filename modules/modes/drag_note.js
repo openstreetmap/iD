@@ -118,7 +118,6 @@ export function modeDragNote(context) {
 
 
     mode.exit = function() {
-        context.ui().sidebar.hover.cancel();
         context.uninstall(edit);
 
         context.surface()

@@ -25,8 +25,7 @@ export function behaviorDraw(context) {
 
     var keybinding = utilKeybinding('draw');
 
-    var _hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
-        .on('hover', context.ui().sidebar.hover);
+    var _hover = behaviorHover(context).altDisables(true).ignoreVertex(true);
     var tail = behaviorTail();
     var edit = behaviorEdit(context);
 
@@ -226,7 +225,6 @@ export function behaviorDraw(context) {
 
 
     behavior.off = function(selection) {
-        context.ui().sidebar.hover.cancel();
         context.uninstall(_hover);
         context.uninstall(edit);
 

@@ -63,7 +63,7 @@ export function validationMissingTag() {
                 icon: 'iD-icon-search',
                 title: t('issues.fix.' + selectFixType + '.title')/*,
                 onClick: function(context) {
-                    context.ui().sidebar.showPresetList();
+
                 }*/
             })
         ];

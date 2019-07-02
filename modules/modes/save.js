@@ -333,9 +333,9 @@ export function modeSave(context) {
     function showConflicts(changeset) {
         var history = context.history();
         var selection = context.container()
-            .select('.assistant')
+            .select('.assistant .assistant-body')
             .append('div')
-            .attr('class','sidebar-component');
+            .attr('class','inspector-body');
 
         loading.close();
         _isSaving = false;
@@ -449,8 +449,6 @@ export function modeSave(context) {
 
 
     mode.enter = function() {
-        // Show sidebar
-        context.ui().sidebar.expand();
 
         keybindingOn();
 
@@ -483,8 +481,6 @@ export function modeSave(context) {
 
         context.container().selectAll('#content')
             .attr('class', 'active');
-
-        context.ui().sidebar.hide();
     };
 
     return mode;

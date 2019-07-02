@@ -667,13 +667,13 @@ button.add-note svg.icon {
 [dir='rtl'] .preset-browser.popover {
     right: 0;
 }
-#sidebar .preset-browser.popover {
+.assistant .preset-browser.popover {
     top: 84px;
 }
-[dir='ltr'] #sidebar .preset-browser.popover {
+[dir='ltr'] .assistant .preset-browser.popover {
     left: 20px;
 }
-[dir='rtl'] #sidebar .preset-browser.popover {
+[dir='rtl'] .assistant .preset-browser.popover {
     right: 20px;
 }
 .preset-browser input[type='search'] {
@@ -893,9 +893,6 @@ button.add-preset.disabled .preset-icon-container {
 }
 
 .field-help-title button.close,
-.sidebar-component .header button.data-editor-close,
-.sidebar-component .header button.note-editor-close,
-.sidebar-component .header button.error-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -903,9 +900,6 @@ button.add-preset.disabled .preset-icon-container {
     top: 0;
 }
 [dir='rtl'] .field-help-title button.close,
-[dir='rtl'] .sidebar-component .header button.data-editor-close,
-[dir='rtl'] .sidebar-component .header button.note-editor-close,
-[dir='rtl'] .sidebar-component .header button.error-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -995,14 +989,28 @@ a.hide-toggle {
 
 /* Assistant
 ------------------------------------------------------- */
+.assistant-wrap {
+    position: relative;
+    height: 100%;
+    padding: 10px;
+    flex: 0 0 auto;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+.assistant-wrap > * {
+    pointer-events: auto;
+}
 .assistant {
     flex: 0 0 auto;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    max-width: 350px;
+    max-width: 100%;
     max-height: 100%;
+    position: relative;
 
     background: rgba(45, 41, 41, 0.90);
     color: #fff;
@@ -1031,8 +1039,27 @@ a.hide-toggle {
     display: flex;
     flex: 0 0 auto;
 }
+.assistant.body-collapsed {
+    width: auto !important;
+    max-width: 350px;
+}
 .assistant:not(.body-collapsed) {
     min-width: 250px;
+}
+.assistant > .resizer-x {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+}
+[dir='rtl'] .assistant > .resizer-x {
+    right: auto;
+    left: -6px;
+}
+.assistant.body-collapsed > .resizer-x {
+    display: none;
 }
 
 /* assistant header */
@@ -1378,72 +1405,8 @@ a.hide-toggle {
 }
 
 
-/* Sidebar / Inspector
+/* Inspector
 ------------------------------------------------------- */
-.sidebar-wrap {
-    position: relative;
-    height: 100%;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    flex: 0 0 auto;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-}
-[dir='rtl'] .sidebar-wrap {
-    padding-left: auto;
-    padding-right: 10px;
-}
-.sidebar-wrap > * {
-    pointer-events: auto;
-}
-
-#sidebar {
-    position: relative;
-    max-height: 100%;
-    z-index: 10;
-    background: rgba(246, 246, 246, 0.98);
-    -ms-user-select: element;
-    border-radius: 6px;
-    -webkit-backdrop-filter: blur(1.5px);
-    backdrop-filter: blur(1.5px);
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.29);
-    display: flex;
-}
-
-#sidebar-resizer {
-    position: absolute;
-    top: 0;
-    right: -6px;
-    height: 100%;
-    width: 6px;
-    cursor: col-resize;
-}
-[dir='rtl'] #sidebar-resizer {
-    right: auto;
-    left: -6px;
-}
-
-#sidebar.collapsed #sidebar-resizer {
-    /* make target wider to avoid the user accidentally resizing window */
-    width: 10px;
-    right: -10px;
-}
-[dir='rtl'] #sidebar.collapsed #sidebar-resizer {
-    left: -10px;
-}
-
-.sidebar-component {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
 .entity-editor-pane {
     width: 100%;
     display: flex;
@@ -1484,30 +1447,6 @@ a.hide-toggle {
 .inspector-inner {
     padding: 20px 20px 5px 20px;
     position: relative;
-}
-
-#sidebar .search-header .icon {
-    display: block;
-    position: absolute;
-    left: 10px;
-    top: 80px;
-    pointer-events: none;
-}
-[dir='rtl'] #sidebar .search-header .icon {
-    left: auto;
-    right: 10px;
-}
-
-#sidebar .search-header input {
-    height: 60px;
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 0;
-    border-width: 0;
-    border-bottom-width: 1px;
-    text-indent: 30px;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 
@@ -5511,23 +5450,19 @@ svg.mouseclick use.right {
 
 /* dark tooltips for sidebar / panels */
 .tooltip.dark.top .tooltip-arrow,
-.map-pane .tooltip.top .tooltip-arrow,
-#sidebar .tooltip.top .tooltip-arrow {
+.map-pane .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 .tooltip.dark.bottom .tooltip-arrow,
-.map-pane .tooltip.bottom .tooltip-arrow,
-#sidebar .tooltip.bottom .tooltip-arrow {
+.map-pane .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 .tooltip.dark.left .tooltip-arrow,
-.map-pane .tooltip.left .tooltip-arrow,
-#sidebar .tooltip.left .tooltip-arrow {
+.map-pane .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 .tooltip.dark.right .tooltip-arrow,
-.map-pane .tooltip.right .tooltip-arrow,
-#sidebar .tooltip.right .tooltip-arrow {
+.map-pane .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 .tooltip.dark .tooltip-inner,
@@ -5535,10 +5470,7 @@ svg.mouseclick use.right {
 .tooltip.dark .keyhint-wrap,
 .map-pane .tooltip-inner,
 .map-pane .tooltip-heading,
-.map-pane .keyhint-wrap,
-#sidebar .tooltip-inner,
-#sidebar .tooltip-heading,
-#sidebar .keyhint-wrap {
+.map-pane .keyhint-wrap {
     background: #000;
     color: #ccc;
 }
@@ -5559,33 +5491,33 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-[dir='ltr'] .sidebar-toggle .tooltip {
+[dir='ltr'] #bar .toolbar-item:first-child .bar-button .tooltip {
     left: 0 !important;
 }
-[dir='rtl'] .sidebar-toggle .tooltip {
+[dir='rtl'] #bar .toolbar-item:first-child .bar-button .tooltip {
     right: 0 !important;
 }
-[dir='ltr'] .sidebar-toggle .tooltip .tooltip-arrow {
+[dir='ltr'] #bar .toolbar-item:first-child .bar-button .tooltip .tooltip-arrow {
     left: 20px;
 }
-[dir='rtl'] .sidebar-toggle .tooltip .tooltip-arrow {
+[dir='rtl'] #bar .toolbar-item:first-child .bar-button .tooltip .tooltip-arrow {
     right: 20px;
 }
-[dir='ltr'] .save .tooltip {
+[dir='ltr'] #bar .toolbar-item:last-child .bar-button .tooltip {
     left: auto !important;
     right: 0 !important;
 }
-[dir='rtl'] .save .tooltip {
+[dir='rtl'] #bar .toolbar-item:last-child .bar-button .tooltip {
     right: auto !important;
     left: 0 !important;
 }
-[dir='ltr'] .save .tooltip .tooltip-arrow {
+[dir='ltr'] #bar .toolbar-item:last-child .bar-button .tooltip .tooltip-arrow {
     left: auto;
-    right: 36px;
+    right: 20px;
 }
-[dir='rtl'] .save .tooltip .tooltip-arrow {
+[dir='rtl'] #bar .toolbar-item:last-child .bar-button .tooltip .tooltip-arrow {
     right: auto;
-    left: 36px;
+    left: 20px;
 }
 
 li:first-of-type .badge .tooltip,

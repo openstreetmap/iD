@@ -5,7 +5,7 @@ import {
 import { t } from '../util/locale';
 import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
-import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolUndoRedo } from './tools';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
@@ -14,8 +14,7 @@ import { uiToolCenterZoom } from './tools/center_zoom';
 
 export function uiTopToolbar(context) {
 
-    var sidebarToggle = uiToolSidebarToggle(context),
-        addFeature = uiToolAddFeature(context),
+    var addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -107,7 +106,6 @@ export function uiTopToolbar(context) {
         } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area' ||
             mode.id === 'draw-line' || mode.id === 'draw-area') {
 
-            tools.push(sidebarToggle);
             tools.push('spacer');
 
             if (mode.id.indexOf('line') !== -1 && structure.shouldShow()) {
@@ -148,7 +146,7 @@ export function uiTopToolbar(context) {
             }
 
         } else {
-            tools.push(sidebarToggle);
+
             tools.push('spacer');
 
             if (mode.id === 'select-note' || mode.id === 'select-data' || mode.id === 'select-error') {

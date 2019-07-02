@@ -1,10 +1,12 @@
 import _debounce from 'lodash-es/debounce';
 import { dataEn } from '../../data';
+import { drag as d3_drag } from 'd3-drag';
 import {
-    select as d3_select
+    select as d3_select,
+    event as d3_event
 } from 'd3-selection';
 import { svgIcon } from '../svg/icon';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
@@ -19,6 +21,7 @@ import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiDataEditor } from './data_editor';
 import { uiCommit } from './commit';
 import { geoRawMercator } from '../geo/raw_mercator';
+import { utilGetDimensions } from '../util/dimensions';
 import { decimalCoordinatePair, formattedRoundedDuration } from '../util/units';
 
 function utilTimeOfDayGreeting() {
@@ -67,6 +70,38 @@ export function uiAssistant(context) {
             .attr('class', 'assistant-header assistant-row');
         body = container.append('div')
             .attr('class', 'assistant-body');
+
+        var dragOffset;
+        var resizer = container
+            .append('div')
+            .attr('class', 'resizer-x');
+
+        // Set the initial width
+        container
+            .style('width', '350px');
+
+        resizer.call(d3_drag()
+            .container(d3_select('#id-container').node())
+            .on('start', function() {
+                resizer.classed('dragging', true);
+
+                dragOffset = d3_event.sourceEvent.offsetX;
+
+                // account for from the assistant wrap's padding
+                dragOffset += 10;
+            })
+            .on('drag', function() {
+
+                var x = d3_event.x - dragOffset;
+
+                var targetWidth = (textDirection === 'rtl') ? utilGetDimensions(d3_select('#content')).width - x: x;
+                container
+                    .style('width', targetWidth + 'px');
+            })
+            .on('end', function() {
+                resizer.classed('dragging', false);
+            })
+        );
 
         scheduleCurrentLocationUpdate();
 

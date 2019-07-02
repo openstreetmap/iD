@@ -529,7 +529,6 @@ export function modeSelect(context, selectedIDs) {
             .classed('related', false);
 
         context.map().on('drawn.select', null);
-        context.ui().sidebar.hide();
         context.features().forceVisible([]);
 
         var entity = singular();
