@@ -13,7 +13,7 @@ import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetIndex } from '../presets';
-import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos, rendererTasking } from '../renderer';
+import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
@@ -311,6 +311,7 @@ export function coreContext() {
     var tasking;
     context.tasking = function() { return tasking; };
 
+    // TODO: TAH - figure out if I need _selectedManagerId, _selectedProjectId, _selectedTaskId
     var _selectedManagerId;
     context.selectedManagerId = function(managerId) {
         if (!arguments.length) return _selectedManagerId;
@@ -558,7 +559,7 @@ export function coreContext() {
     features = rendererFeatures(context);
     photos = rendererPhotos(context);
     presets = presetIndex(context);
-    tasking = rendererTasking(context);
+    tasking = services.tasking;
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;

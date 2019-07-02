@@ -1,5 +1,5 @@
 {
-    "managers": [
+    "dataTaskingManagers": [
         {
             "id": "HOT",
             "name": "HOT Tasking Manager",

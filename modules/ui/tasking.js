@@ -19,6 +19,7 @@ export function uiTasking(context) {
     var key = t('tasking.key');
 
     var tasking = context.tasking();
+    var layer = context.layers().layer('tasking');
 
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
@@ -39,7 +40,32 @@ export function uiTasking(context) {
         .on('change', customChanged);
 
 
+    function showsManager(d) {
+        return _manager.id === d.id;
+    }
+
+
     function setManager(d) {
+
+        function layerSupported(d) {
+            return d.layer && d.layer.supported();
+        }
+
+        // TODO: TAH - determine if I need thic check
+        function layerEnabled(d) {
+            return layerSupported(d) && d.layer.enabled();
+        }
+
+        if (d.id === 'none') {
+            tasking.resetProjectAndTask();
+            tasking.enabled(false); // TODO: TAH - determine if I need enabled on both svg and service
+            layer.enabled(false);
+
+        } else if (layerSupported(d)) {
+            tasking.enabled(true);
+            layer.enabled(true);
+        }
+
         // handle custom manager from url
         if (d.id === 'custom' && !d.template()) {
             editCustom();
@@ -55,22 +81,11 @@ export function uiTasking(context) {
         if (tasking.currentManager().id === 'custom' && tasking.currentManager().template()) {
             // set svg url to template
             tasking.loadFromURL(tasking.currentManager().template());
-        }
 
-        if (d.id === 'none') {
-            tasking.resetProjectAndTask();
-            tasking.enabled(false);
-        } else {
-            tasking.enabled(true);
         }
 
         document.activeElement.blur();
         update();
-    }
-
-
-    function showsManager(d) {
-        return _manager.id === d.id;
     }
 
 
@@ -219,7 +234,10 @@ export function uiTasking(context) {
             .attr('tabindex', -1)
             .on('click', uiTasking.togglePane)
             .call(svgIcon('#iD-icon-tasking', 'light'))
+            // .call(addNotificationBadge) // TODO: TAH - add notification when details within the pane has changed
             .call(paneTooltip);
+
+            // TODO: change color of button when tasking is enabled
     };
 
 
@@ -228,7 +246,7 @@ export function uiTasking(context) {
         _pane = selection
             .append('div')
             .attr('class', 'fillL map-pane tasking-pane hide')
-            .attr('pane', 'tasking');
+            .attr('pane', 'map-tasking');
 
 
         var heading = _pane

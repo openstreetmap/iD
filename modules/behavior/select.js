@@ -7,7 +7,7 @@ import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, qaError } from '../osm';
-import { taskingTask } from '../renderer/taskingObjects'; // TODO: TAH - move these objects to a better spot
+import { taskingTask } from '../services/tasking/taskingObjects'; // TODO: TAH - move these objects to a better spot
 
 
 export function behaviorSelect(context) {

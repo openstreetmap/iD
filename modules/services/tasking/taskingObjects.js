@@ -1,4 +1,4 @@
-import { geoExtent } from '../geo';
+import { geoExtent } from '../../geo';
 
 
 export function taskingProject() {

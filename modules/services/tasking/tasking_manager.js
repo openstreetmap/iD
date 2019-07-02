@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../../util/locale';
 
 
 export function rendererTaskingManager(data) {

@@ -5,6 +5,7 @@ import { geoBounds as d3_geoBounds } from 'd3-geo';
 import stringify from 'fast-json-stable-stringify';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
+import { uiCurtain } from '../ui/curtain';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 import { svgPath } from './helpers';
 
@@ -13,12 +14,14 @@ var _enabled = false;
 var _initialized = false;
 var _project = {};
 var _task = {};
+var _curtain;
+var _curtainEnabled = false;
 
 export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
 
     var layer = d3_select(null);
-    var _taskingService = context.tasking();
+    var _tasking;
 
 
     function init() {
@@ -28,6 +31,20 @@ export function svgTasking(projection, context, dispatch) {
         _initialized = true;
         _project = {};
         _task = {};
+
+        _curtain = uiCurtain();
+    }
+
+
+    function getService() {
+        if (context.tasking() && !_tasking) {
+            _tasking = context.tasking();
+            _tasking.event.on('loaded', throttledRedraw); // TODO: TAH - determine if there should be other handlers
+        } else if (!context.tasking() && _tasking) {
+            _tasking = null;
+        }
+
+        return _tasking;
     }
 
 
@@ -130,9 +147,11 @@ export function svgTasking(projection, context, dispatch) {
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
 
-        _enabled = _taskingService.enabled();
-        _project = _taskingService.currentProject();
-        _task = ensureIDs(_taskingService.currentTask());
+        var service = getService();
+
+        _enabled = service.enabled();
+        _project = service.currentProject();
+        _task = ensureIDs(service.currentTask());
 
         layer = selection.selectAll('.layer-tasking')
             .data(_enabled && _project && _task ? [0] : []);
@@ -218,21 +237,61 @@ export function svgTasking(projection, context, dispatch) {
                 var datagroup = this.parentNode.__data__;
                 return datagroup === 'fill' ? getAreaPath(d) : getPath(d);
             });
+
+        // TODO: TAH - cleaner implementation to get box (probably defined elsewhere as well)
+        function getBox(geoData) {
+            var left;
+            var top;
+            var right;
+            var bottom;
+
+            var coords = geoData[0].geometry.coordinates[0][0];
+
+            coords.map(function(coord) {
+                if (coord[0] < left || left === undefined) { left = coord[0]; } // check for left
+                if (coord[0] > right || right === undefined) { right = coord[0]; } // check for right
+                if (coord[1] > top || top === undefined) { top = coord[1]; } // check for top
+                if (coord[1] < bottom || bottom === undefined) { bottom = coord[1]; } // check for bottom
+            });
+
+            // NOTE: look at the pad helper function to get the box correct
+
+            return {
+                left: left,
+                top: top,
+                width: Math.abs(left - right),
+                height: Math.abs(top - bottom)
+            };
+        }
+
+        if (geoData && geoData.length && _curtainEnabled) {
+            // set curtain around tasking area
+            selection.call(_curtain);
+
+            _curtain.reveal(getBox(geoData), 'sampleText', {});
+        }
     }
 
-    // TODO: TAH - remove if redundant with taskingService.enabled();
     drawTasking.enabled = function(val) {
         if (!arguments.length) return _enabled;
 
         _enabled = val;
         if (_enabled) {
             showLayer();
+            _curtainEnabled = true;
         } else {
             hideLayer();
+            _curtainEnabled = false;
+            _curtain.remove();
         }
 
         dispatch.call('change');
         return this;
+    };
+
+
+    drawTasking.supported = function() {
+        return !!getService();
     };
 
 

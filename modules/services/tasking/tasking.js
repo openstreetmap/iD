@@ -5,14 +5,18 @@ import { json as d3_json, text as d3_text } from 'd3-fetch';
 import { rendererTaskingManager } from './tasking_manager';
 import { taskingProject, taskingTask } from './taskingObjects';
 
-import { managers } from '../../data/taskingManagers.json';
-import { utilRebind } from '../util/rebind';
-import { services } from '../services';
+import { dataTaskingManagers as managers } from '../../../data';
+import { utilRebind } from '../../util/rebind';
 
 import rbush from 'rbush';
 
-var apibase = 'http://127.0.0.1:5000/api/v1/'; // TODO: TAH - change to real url when published
-
+var apibase = 'http://127.0.0.1:5000/api/v1/'; // TODO: TAH - change to list of real manager urls when published
+var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw');
+var _taskingCache;
+var _enabled = false;
+var _customSettings = {
+    template: ''
+};
 
 var parsers = {
 
@@ -73,27 +77,18 @@ function parseUrl(url) {
 }
 
 
-export function rendererTasking(context) {
-    var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw');
-    var tasking = utilRebind({}, dispatch, 'on');
-
-    var _taskingCache;
-
-    var _enabled = false;
-
-    var _customSettings = {
-        template: ''
-    };
+export default {
 
 
-    tasking.enabled = function(val) {
+    enabled: function(val) {
         if (!arguments.length) return _enabled;
 
         _enabled = val;
-    };
+    },
 
 
-    tasking.init = function() {
+    init: function () {
+        var that = this;
 
         _taskingCache = {
             managers: [],
@@ -116,12 +111,15 @@ export function rendererTasking(context) {
         _taskingCache.managers.push(rendererTaskingManager.None());
 
         // set none as starting manager
-        tasking.currentManager(rendererTaskingManager.None());
+        that.currentManager(rendererTaskingManager.None());
 
-    };
+        this.event = utilRebind(this, dispatch, 'on');
+    },
 
 
-    tasking.reset = function() {
+    reset: function() {
+        var that = this;
+
         _taskingCache = {
             managers: [],
             currentManager: {},
@@ -133,20 +131,20 @@ export function rendererTasking(context) {
         };
 
         // set none as starting manager
-        tasking.currentManager(rendererTaskingManager.None());
-    };
+        that.currentManager(rendererTaskingManager.None());
+    },
 
 
-    tasking.customSettings = function(d) {
+    customSettings: function(d) {
         if (!arguments.length) return _customSettings;
 
         _customSettings = d;
 
-        return tasking;
-    };
+        return this;
+    },
 
 
-    tasking.loadFromURL = function(url) {
+    loadFromURL: function(url) {
         var that = this;
 
         // parse url to get type, project, and task (if present)
@@ -168,84 +166,82 @@ export function rendererTasking(context) {
             default:
                 break;
         }
-    };
+    },
 
 
-    tasking.resetCustomUrl = function() {
+    resetCustomUrl: function() {
         _taskingCache.customUrl = {};
-    };
+    },
 
 
-    tasking.cache = function() {
+    cache: function() {
         return _taskingCache;
-    };
+    },
 
 
     /* Managers */
-    tasking.managers = function() {
+    managers: function() {
         return _taskingCache.managers;
-    };
+    },
 
 
-    tasking.getManager = function(id) {
+    getManager: function(id) {
         return _taskingCache.managers.find(function(d) {
             return d.id && d.id === id;
         });
-    };
+    },
 
 
-    tasking.currentManager = function(d) {
+    currentManager: function(d) {
         if (!arguments.length) return _taskingCache.currentManager;
 
-        _enabled = d !== tasking.getManager('none');
+        _enabled = d !== this.getManager('none');
 
         _taskingCache.currentManager = d;
-        context.selectedManagerId(d.id);
 
         dispatch.call('change');
         dispatch.call('redraw');
 
-        return tasking;
-    };
+        return this;
+    },
 
 
-    tasking.currentManagerId = function() {
+    currentManagerId: function() {
         return _taskingCache.currentManager.id;
-    };
+    },
 
 
-    tasking.resetManager = function () {
+    resetManager: function () {
         _taskingCache.currentManager = {};
-    };
+    },
 
 
     /* Projects */
-    tasking.projects = function() {
+    projects: function() {
         return _taskingCache.projects;
-    };
+    },
 
 
-    tasking.currentProject = function(d) {
+    currentProject: function(d) {
         if (!arguments.length) return _taskingCache.currentProject;
 
         // TODO: TAH - handle enabled/disabled
 
         _taskingCache.currentProject = d;
-        context.selectedProjectId(d.projectId);
 
         dispatch.call('change');
         dispatch.call('redraw');
 
-        return tasking;
-    };
+        return this;
+    },
 
 
-    tasking.resetProject = function() {
+    resetProject: function() {
         _taskingCache.currentProject = {};
-    };
+    },
 
 
-    tasking.loadProject = function() {
+    loadProject: function() {
 
         var that = this;
 
@@ -279,44 +275,43 @@ export function rendererTasking(context) {
             .catch(function(err) {
                 console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
             });
-    };
+    },
 
 
-    tasking.getProject = function(id) {
+    getProject: function(id) {
         return _taskingCache.projects.find(function(project) {
             return project.projectId && project.projectId === id;
         });
-    };
+    },
 
 
     /* Tasks */
-    tasking.tasks = function() {
+    tasks: function() {
         return _taskingCache.tasks;
-    };
+    },
 
 
-    tasking.currentTask = function(d) {
+    currentTask: function(d) {
 
         if (!arguments.length) return _taskingCache.currentTask;
 
         // TODO: TAH - handle enabled/disabled
 
         _taskingCache.currentTask = d;
-        context.selectedTaskId(d.taskId);
 
         dispatch.call('change');
         dispatch.call('redraw');
 
-        return tasking;
-    };
+        return this;
+    },
 
 
-    tasking.resetTask = function() {
+    resetTask: function() {
         _taskingCache.currentTask = {};
-    };
+    },
 
 
-    tasking.loadTask = function() {
+    loadTask: function() {
 
         var that = this;
 
@@ -393,21 +388,21 @@ export function rendererTasking(context) {
             //     dispatch.call('loadedTask');
             // }
         }
-    };
+    },
 
 
-    tasking.getTask = function(id) {
+    getTask: function(id) {
         return _taskingCache.tasks.find(function(task) {
             return task.taskId && task.taskId === id;
         });
-    };
+    },
 
 
-    tasking.resetProjectAndTask = function() {
-        tasking.resetProject();
-        tasking.resetTask();
-    };
+    resetProjectAndTask: function() {
+        var that = this;
 
+        that.resetProject();
+        that.resetTask();
+    }
 
-    return tasking;
-}
+};
