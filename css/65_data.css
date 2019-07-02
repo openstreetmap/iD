@@ -212,3 +212,65 @@
     stroke-width: 5px;
     stroke-miterlimit: 1;
 }
+
+
+
+/* Custom Map Tasking (geojson) */
+.layer-maptasking {
+    pointer-events: none;
+}
+
+.layer-maptasking path.shadow {
+    pointer-events: stroke;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    fill: none;
+}
+.layer-maptasking path.MultiPoint.shadow,
+.layer-maptasking path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+.layer-maptasking path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.layer-maptasking path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+.layer-maptasking path.stroke {
+    stroke: #ff26d4;
+    stroke-width: 2;
+    fill: none;
+}
+
+.layer-maptasking path.fill {
+    stroke-width: 0;
+    stroke-opacity: 0.3;
+    stroke: #ff26d4;
+    fill: #ff26d4;
+    fill-opacity: 0.3;
+    fill-rule: evenodd;
+}
+
+.layer-maptasking text.label-halo,
+.layer-maptasking text.label {
+    font-size: 10px;
+    font-weight: bold;
+    dominant-baseline: middle;
+}
+.layer-maptasking text.label {
+    fill: #ff26d4;
+}
+.layer-maptasking text.label.hover,
+.layer-maptasking text.label.selected {
+    fill: #f6634f;
+}
+.layer-maptasking text.label-halo {
+    opacity: 0.7;
+    stroke: #000;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
