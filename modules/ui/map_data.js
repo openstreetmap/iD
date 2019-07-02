@@ -10,6 +10,7 @@ import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { uiDisclosure } from './disclosure';
 import { uiSettingsCustomData } from './settings/custom_data';
+import { uiSettingsCustomTasking } from './settings/custom_tasking';
 import { uiTooltipHtml } from './tooltipHtml';
 import { uiCmd } from './cmd';
 
@@ -24,6 +25,9 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    var settingsCustomTasking = uiSettingsCustomTasking(context)
+        .on('change', customTaskingChanged);
+
     var _pane = d3_select(null), _toggleButton = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
@@ -31,6 +35,7 @@ export function uiMapData(context) {
     var _photoOverlayContainer = d3_select(null);
     var _fillList = d3_select(null);
     var _featureList = d3_select(null);
+    var _taskingList = d3_select(null);
     var _QAList = d3_select(null);
 
 
@@ -575,6 +580,98 @@ export function uiMapData(context) {
     }
 
 
+    function drawCustomTaskingItems(selection) {
+        var taskingLayer = layers.layer('tasking');
+        var hasData = taskingLayer && taskingLayer.hasData();
+        var showsData = hasData && taskingLayer.enabled();
+
+        var ul = selection
+            .selectAll('.layer-list-tasking')
+            .data(taskingLayer ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-tasking');
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-data');
+
+        liEnter
+            .append('button')
+            .call(tooltip()
+                .title(t('settings.custom_tasking.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustomTasking)
+            .call(svgIcon('#iD-icon-more'));
+
+        liEnter
+            .append('button')
+            .call(tooltip()
+                .title(t('map_data.layers.custom_tasking.zoom'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                taskingLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-search'));
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('map_data.layers.custom_tasking.tooltip'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('data'); });
+
+        labelEnter
+            .append('span')
+            .text(t('map_data.layers.custom_tasking.title'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        ul.selectAll('.list-item-data')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData);
+    }
+
+
+    function editCustomTasking() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsCustomTasking);
+    }
+
+
+    function customTaskingChanged(d) {
+        var taskingLayer = layers.layer('tasking');
+
+        if (d && d.url) {
+            taskingLayer.url(d.url);
+        } else if (d && d.fileList) {
+            taskingLayer.fileList(d.fileList);
+        }
+    }
+
+
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
             .data(data);
@@ -708,6 +805,18 @@ export function uiMapData(context) {
         updateFeatureList();
     }
 
+    function renderTaskingList(selection) {
+        var container = selection.selectAll('.layer-tasking-layer-container')
+            .data([0]);
+
+        _taskingList = container.enter()
+            .append('div')
+            .attr('class', 'layer-tasking-layer-container')
+            .merge(container);
+
+        updateTaskingList();
+    }
+
     function updatePhotoOverlays() {
         _photoOverlayContainer
             .call(drawPhotoItems)
@@ -732,6 +841,11 @@ export function uiMapData(context) {
             .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
     }
 
+    function updateTaskingList() {
+        _taskingList
+            .call(drawCustomTaskingItems);
+    }
+
     function update() {
 
         if (!_pane.select('.disclosure-wrap-data_layers').classed('hide')) {
@@ -745,6 +859,10 @@ export function uiMapData(context) {
         }
         if (!_pane.select('.disclosure-wrap-map_features').classed('hide')) {
             updateFeatureList();
+        }
+
+        if (!_pane.select('.disclosure-wrap-map_features').classed('hide')) {
+            updateTaskingList();
         }
 
         _QAList
@@ -854,6 +972,15 @@ export function uiMapData(context) {
             .call(uiDisclosure(context, 'map_features', false)
                 .title(t('map_data.map_features'))
                 .content(renderFeatureList)
+            );
+
+        // tasking
+        content
+            .append('div')
+            .attr('class', 'map-data-tasking')
+            .call(uiDisclosure(context, 'map_tasking', false)
+                .title(t('map_data.map_tasking'))
+                .content(renderTaskingList)
             );
 
 

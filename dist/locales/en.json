@@ -738,10 +738,16 @@
                     "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
                     "title": "Custom Map Data",
                     "zoom": "Zoom to data"
+                },
+                "custom_tasking": {
+                    "tooltip": "tasking tooltip",
+                    "title": "Custom Map Tasking",
+                    "zoom": "Zoom to task"
                 }
             },
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
+            "map_tasking": "Tasking",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
@@ -852,6 +858,19 @@
                 }
             },
             "custom_data": {
+                "tooltip": "Edit custom data layer",
+                "header": "Custom Map Data Settings",
+                "file": {
+                    "instructions": "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Browse files"
+                },
+                "or": "Or",
+                "url": {
+                    "instructions": "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
+                    "placeholder": "Enter a url"
+                }
+            },
+            "custom_tasking": {
                 "tooltip": "Edit custom data layer",
                 "header": "Custom Map Data Settings",
                 "file": {

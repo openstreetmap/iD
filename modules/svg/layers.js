@@ -12,6 +12,7 @@ import { svgMapillarySigns } from './mapillary_signs';
 import { svgOpenstreetcamImages } from './openstreetcam_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
+import { svgTasking } from './tasking';
 import { svgTouch } from './touch';
 import { utilArrayDifference, utilRebind } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
@@ -32,6 +33,7 @@ export function svgLayers(projection, context) {
         { id: 'openstreetcam', layer: svgOpenstreetcamImages(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
+        { id: 'tasking', layer: svgTasking(projection, context, dispatch) },
         { id: 'touch', layer: svgTouch(projection, context, dispatch) }
     ];
 
