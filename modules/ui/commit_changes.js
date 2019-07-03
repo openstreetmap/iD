@@ -22,7 +22,6 @@ export function uiCommitChanges(context) {
     function commitChanges(selection) {
         var history = context.history();
         var summary = history.difference().summary();
-        var titleID = summary.length === 1 ? 'change' : 'changes';
 
         var container = selection.selectAll('.modal-section.commit-section')
             .data([0]);
@@ -35,7 +34,7 @@ export function uiCommitChanges(context) {
             .merge(container);
 
         container.call(uiDisclosure(context, 'commit_changes', true)
-            .title(t('commit.' + titleID, { count: summary.length }))
+            .title(t('commit.changes_parenthetical', { count: summary.length }))
             .content(render)
         );
     }

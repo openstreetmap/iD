@@ -500,6 +500,7 @@ en:
     cancel: Cancel
     change: "1 Change"
     changes: "{count} Changes"
+    changes_parenthetical: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
