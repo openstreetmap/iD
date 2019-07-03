@@ -87,6 +87,18 @@ en:
       access_simple:
         # access=*
         label: Allowed Access
+      addr/interpolation:
+        # 'addr:interpolation=*'
+        label: Type
+        options:
+          # 'addr:interpolation=all'
+          all: All
+          # 'addr:interpolation=alphabetic'
+          alphabetic: Alphabetic
+          # 'addr:interpolation=even'
+          even: Even
+          # 'addr:interpolation=odd'
+          odd: Odd
       address:
         # 'addr:block_number=*, addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*, addr:unit=*'
         label: Address
@@ -2343,6 +2355,9 @@ en:
         description: 'Rivers, Lakes, Ponds, Basins, etc.'
         name: Water Features
     presets:
+      addr/interpolation:
+        # 'addr:interpolation=*'
+        name: Address Interpolation
       address:
         # 'addr:*=*'
         name: Address
@@ -7309,6 +7324,11 @@ en:
         name: Supermarket
         # 'terms: grocery,store,shop'
         terms: '<translate with synonyms or related terms for ''Supermarket'', separated by commas>'
+      shop/swimming_pool:
+        # shop=swimming_pool
+        name: Pool Supply Store
+        # 'terms: hot tub equipment store,hot tub maintenance store,hot tub supply store,pool shop,pool store,swimming pool equipment store,swimming pool installation store,swimming pool maintenance store,swimming pool supply shop'
+        terms: '<translate with synonyms or related terms for ''Pool Supply Store'', separated by commas>'
       shop/tailor:
         # shop=tailor
         name: Tailor
@@ -7471,7 +7491,7 @@ en:
         name: Tourist Attraction
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
       tourism/camp_pitch:
-        # torism=camp_pitch
+        # tourism=camp_pitch
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'

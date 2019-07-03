@@ -1,0 +1,13 @@
+{
+    "key": "addr:interpolation",
+    "type": "combo",
+    "label": "Type",
+    "strings": {
+        "options": {
+            "all": "All",
+            "even": "Even",
+            "odd": "Odd",
+            "alphabetic": "Alphabetic"
+        }
+   }
+}
