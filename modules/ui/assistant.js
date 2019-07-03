@@ -455,6 +455,7 @@ export function uiAssistant(context) {
                     // don't show another welcome screen after discarding changes
                     updateDidEditStatus();
                     context.history().clearSaved();
+                    context.map().pan([0,0]);  // trigger a map redraw
                     redraw();
                 })
                 .append('span')
