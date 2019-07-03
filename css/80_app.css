@@ -1119,6 +1119,8 @@ a.hide-toggle {
     display: flex;
     flex-direction: column;
     position: relative;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
 }
 .assistant.body-collapsed .assistant-body {
     display: none;
@@ -1423,6 +1425,8 @@ a.hide-toggle {
     flex-wrap: wrap;
     justify-content: space-between;
     list-style: none;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
 }
 .inspector-footer:empty {
     display: none;
@@ -4905,6 +4909,7 @@ img.tile-debug {
 }
 
 .modal-section {
+    width: 100%;
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
@@ -4925,7 +4930,12 @@ img.tile-debug {
     text-align: center;
     vertical-align: middle;
 }
-
+.save-section .blocker-message {
+    margin-bottom: 15px;
+}
+.save-section .blocker-message:empty {
+    display: none;
+}
 .save-section .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -4934,10 +4944,15 @@ img.tile-debug {
 
 .save-section .buttons .action,
 .save-section .buttons .secondary-action {
-    width: 45%;
-    margin: 10px auto;
+    flex: 1 1 auto;
     text-align: center;
     vertical-align: middle;
+}
+[dir='ltr'] .save-section .buttons button:first-child {
+    margin-right: 20px;
+}
+[dir='rtl'] .save-section .buttons button:first-child {
+    margin-left: 20px;
 }
 
 .loading-modal {
@@ -5098,6 +5113,9 @@ svg.mouseclick use.right {
 
 /* Save Mode
 ------------------------------------------------------- */
+.save-footer {
+    padding: 0;
+}
 .mode-save a.user-info {
     display: inline-block;
 }
@@ -5139,7 +5157,6 @@ svg.mouseclick use.right {
 
 .mode-save .field-warning,
 .mode-save .changeset-info,
-.mode-save .request-review,
 .mode-save .commit-info {
     margin-bottom: 10px;
 }
@@ -5153,6 +5170,7 @@ svg.mouseclick use.right {
     border-radius: 4px;
     background: #fff;
     margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .mode-save .warning-section .changeset-list button {

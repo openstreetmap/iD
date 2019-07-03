@@ -790,7 +790,7 @@ en:
         label: Handrail
       hashtags:
         # hashtags=*
-        label: Suggested Hashtags
+        label: Hashtags
         # hashtags field placeholder
         placeholder: '#example'
       healthcare:

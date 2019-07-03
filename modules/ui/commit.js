@@ -6,7 +6,6 @@ import { modeSelect } from '../modes/select';
 import { modeBrowse } from '../modes/browse';
 import { osmChangeset } from '../osm';
 import { services } from '../services';
-import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
@@ -166,37 +165,98 @@ export function uiCommit(context) {
             .attr('class', 'inspector-body sep-top')
             .merge(body);
 
-
-        // Changeset Section
-        var changesetSection = body.selectAll('.changeset-editor')
+        var footer = selection.selectAll('.inspector-footer')
             .data([0]);
 
-        changesetSection = changesetSection.enter()
+        footer = footer.enter()
             .append('div')
-            .attr('class', 'modal-section changeset-editor')
-            .merge(changesetSection);
+            .attr('class', 'inspector-footer save-footer fillL')
+            .merge(footer);
 
-        changesetSection
-            .call(changesetEditor
-                .changesetID(_changeset.id)
-                .tags(tags)
-            );
-
-
-        // Warnings
-        body.call(commitWarnings);
-
-
-        // Upload Explanation
-        var saveSection = body.selectAll('.save-section')
+        // footer buttons section
+        var saveSection = footer.selectAll('.save-section')
             .data([0]);
 
         saveSection = saveSection.enter()
             .append('div')
-            .attr('class','modal-section save-section fillL cf')
+            .attr('class','modal-section save-section')
             .merge(saveSection);
 
-        var prose = saveSection.selectAll('.commit-info')
+        var uploadBlockerText = getUploadBlockerMessage();
+
+        var blockerMessage = saveSection.selectAll('.blocker-message')
+            .data([0]);
+
+        blockerMessage = blockerMessage.enter()
+            .append('div')
+            .attr('class','blocker-message')
+            .merge(blockerMessage);
+
+        blockerMessage
+            .text(uploadBlockerText || '');
+
+        // Buttons
+        var buttonSection = saveSection.selectAll('.buttons')
+            .data([0]);
+
+        // enter
+        var buttonEnter = buttonSection.enter()
+            .append('div')
+            .attr('class', 'buttons');
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'secondary-action button cancel-button')
+            .append('span')
+            .attr('class', 'label')
+            .text(t('commit.cancel'));
+
+        var uploadButton = buttonEnter
+            .append('button')
+            .attr('class', 'action button save-button');
+
+        uploadButton.append('span')
+            .attr('class', 'label')
+            .text(t('commit.save'));
+
+
+
+        // update
+        buttonSection = buttonSection
+            .merge(buttonEnter);
+
+        buttonSection.selectAll('.cancel-button')
+            .on('click.cancel', function() {
+                var selectedID = commitChanges.entityID();
+                if (selectedID) {
+                    context.enter(modeSelect(context, [selectedID]));
+                } else {
+                    context.enter(modeBrowse(context));
+                }
+            });
+
+        buttonSection.selectAll('.save-button')
+            .classed('disabled', uploadBlockerText !== null)
+            .on('click.save', function() {
+                if (!d3_select(this).classed('disabled')) {
+                    this.blur();    // avoid keeping focus on the button - #4641
+                    var mode = context.mode();
+                    if (mode.id === 'save' && mode.save) {
+                        mode.save(_changeset);
+                    }
+                }
+            });
+
+        var overviewSection = body.selectAll('.overview-section')
+            .data([0]);
+
+        // Enter
+        overviewSection = overviewSection.enter()
+            .append('div')
+            .attr('class', 'overview-section modal-section')
+            .merge(overviewSection);
+
+        var prose = overviewSection.selectAll('.commit-info')
             .data([0]);
 
         if (prose.enter().size()) {   // first time, make sure to update user details in prose
@@ -240,7 +300,7 @@ export function uiCommit(context) {
 
 
         // Request Review
-        var requestReview = saveSection.selectAll('.request-review')
+        var requestReview = overviewSection.selectAll('.request-review')
             .data([0]);
 
         // Enter
@@ -270,65 +330,23 @@ export function uiCommit(context) {
             .on('change', toggleRequestReview);
 
 
-        // Buttons
-        var buttonSection = saveSection.selectAll('.buttons')
+        // Changeset Section
+        var changesetSection = body.selectAll('.changeset-editor')
             .data([0]);
 
-        // enter
-        var buttonEnter = buttonSection.enter()
+        changesetSection = changesetSection.enter()
             .append('div')
-            .attr('class', 'buttons fillL cf');
+            .attr('class', 'modal-section changeset-editor')
+            .merge(changesetSection);
 
-        buttonEnter
-            .append('button')
-            .attr('class', 'secondary-action button cancel-button')
-            .append('span')
-            .attr('class', 'label')
-            .text(t('commit.cancel'));
+        changesetSection
+            .call(changesetEditor
+                .changesetID(_changeset.id)
+                .tags(tags)
+            );
 
-        var uploadButton = buttonEnter
-            .append('button')
-            .attr('class', 'action button save-button');
-
-        uploadButton.append('span')
-            .attr('class', 'label')
-            .text(t('commit.save'));
-
-        var uploadBlockerTooltipText = getUploadBlockerMessage();
-
-        // update
-        buttonSection = buttonSection
-            .merge(buttonEnter);
-
-        buttonSection.selectAll('.cancel-button')
-            .on('click.cancel', function() {
-                var selectedID = commitChanges.entityID();
-                if (selectedID) {
-                    context.enter(modeSelect(context, [selectedID]));
-                } else {
-                    context.enter(modeBrowse(context));
-                }
-            });
-
-        buttonSection.selectAll('.save-button')
-            .classed('disabled', uploadBlockerTooltipText !== null)
-            .on('click.save', function() {
-                if (!d3_select(this).classed('disabled')) {
-                    this.blur();    // avoid keeping focus on the button - #4641
-                    var mode = context.mode();
-                    if (mode.id === 'save' && mode.save) {
-                        mode.save(_changeset);
-                    }
-                }
-            });
-
-        // remove any existing tooltip
-        tooltip().destroyAny(buttonSection.selectAll('.save-button'));
-
-        if (uploadBlockerTooltipText) {
-            buttonSection.selectAll('.save-button')
-                .call(tooltip().title(uploadBlockerTooltipText).placement('top'));
-        }
+        // Warnings
+        body.call(commitWarnings);
 
         // Raw Tag Editor
         var tagSection = body.selectAll('.tag-section.raw-tag-editor')
@@ -372,13 +390,13 @@ export function uiCommit(context) {
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 
         if (errors.length) {
-            return t('commit.outstanding_errors_message', { count: errors.length });
+            return t('commit.blocker_message.outstanding_errors', { count: errors.length });
 
         } else {
             var n = d3_select('#preset-input-comment').node();
             var hasChangesetComment = n && n.value.length > 0;
             if (!hasChangesetComment) {
-                return t('commit.comment_needed_message');
+                return t('commit.blocker_message.comment_needed');
             }
         }
         return null;
