@@ -58,6 +58,7 @@ export function svgDefs(context) {
         // the water side, so let's color them blue (with a gap) to
         // give a stronger indication
         addSidedMarker('coastline', '#77dede', 1);
+        addSidedMarker('waterway', '#77dede', 1);
         // barriers have a dashed line, and separating the triangle
         // from the line visually suits that
         addSidedMarker('barrier', '#ddd', 1);
