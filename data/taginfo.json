@@ -1030,6 +1030,7 @@
     {"key": "shop", "value": "stationery", "description": "🄿 Stationery Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-paperclip.svg"},
     {"key": "shop", "value": "storage_rental", "description": "🄿 Storage Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-warehouse.svg"},
     {"key": "shop", "value": "supermarket", "description": "🄿 Supermarket", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/grocery-15.svg"},
+    {"key": "shop", "value": "swimming_pool", "description": "🄿 Pool Supply Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-swimmer.svg"},
     {"key": "shop", "value": "tailor", "description": "🄿 Tailor", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/clothing-store-15.svg"},
     {"key": "shop", "value": "tattoo", "description": "🄿 Tattoo Parlor", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "tea", "description": "🄿 Tea Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/teahouse-15.svg"},

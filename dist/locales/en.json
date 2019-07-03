@@ -8718,6 +8718,10 @@
                     "name": "Supermarket",
                     "terms": "grocery,store,shop"
                 },
+                "shop/swimming_pool": {
+                    "name": "Pool Supply Store",
+                    "terms": "hot tub equipment store,hot tub maintenance store,hot tub supply store,pool shop,pool store,swimming pool equipment store,swimming pool installation store,swimming pool maintenance store,swimming pool supply shop"
+                },
                 "shop/tailor": {
                     "name": "Tailor",
                     "terms": "clothes,suit"

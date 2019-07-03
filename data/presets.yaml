@@ -7278,6 +7278,11 @@ en:
         name: Supermarket
         # 'terms: grocery,store,shop'
         terms: '<translate with synonyms or related terms for ''Supermarket'', separated by commas>'
+      shop/swimming_pool:
+        # shop=swimming_pool
+        name: Pool Supply Store
+        # 'terms: hot tub equipment store,hot tub maintenance store,hot tub supply store,pool shop,pool store,swimming pool equipment store,swimming pool installation store,swimming pool maintenance store,swimming pool supply shop'
+        terms: '<translate with synonyms or related terms for ''Pool Supply Store'', separated by commas>'
       shop/tailor:
         # shop=tailor
         name: Tailor

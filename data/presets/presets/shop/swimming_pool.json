@@ -1,0 +1,22 @@
+{
+    "icon": "fas-swimmer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "hot tub equipment store",
+        "hot tub maintenance store",
+        "hot tub supply store",
+        "pool shop",
+        "pool store",
+        "swimming pool equipment store",
+        "swimming pool installation store",
+        "swimming pool maintenance store",
+        "swimming pool supply shop"
+    ],
+    "tags": {
+        "shop": "swimming_pool"
+    },
+    "name": "Pool Supply Store"
+}

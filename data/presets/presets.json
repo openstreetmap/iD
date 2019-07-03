@@ -1093,6 +1093,7 @@
     "shop/stationery": {"icon": "fas-paperclip", "geometry": ["point", "area"], "terms": ["card", "paper"], "tags": {"shop": "stationery"}, "name": "Stationery Store"},
     "shop/storage_rental": {"icon": "fas-warehouse", "geometry": ["point", "area"], "tags": {"shop": "storage_rental"}, "terms": ["garages"], "name": "Storage Rental"},
     "shop/supermarket": {"icon": "maki-grocery", "moreFields": ["diet_multi", "{shop}"], "geometry": ["point", "area"], "terms": ["grocery", "store", "shop"], "tags": {"shop": "supermarket"}, "name": "Supermarket"},
+    "shop/swimming_pool": {"icon": "fas-swimmer", "geometry": ["point", "area"], "terms": ["hot tub equipment store", "hot tub maintenance store", "hot tub supply store", "pool shop", "pool store", "swimming pool equipment store", "swimming pool installation store", "swimming pool maintenance store", "swimming pool supply shop"], "tags": {"shop": "swimming_pool"}, "name": "Pool Supply Store"},
     "shop/tailor": {"icon": "maki-clothing-store", "geometry": ["point", "area"], "terms": ["clothes", "suit"], "tags": {"shop": "tailor"}, "name": "Tailor"},
     "shop/tattoo": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "tattoo"}, "terms": ["ink"], "name": "Tattoo Parlor"},
     "shop/tea": {"icon": "maki-teahouse", "geometry": ["point", "area"], "tags": {"shop": "tea"}, "name": "Tea Store"},
