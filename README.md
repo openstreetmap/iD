@@ -1,10 +1,8 @@
-# Open Yesterday Project
+<p align="center"><h1>Open Yesterday Project</h1></p>
 
-![Open Yesterday Crest](svg/open-yesterday-project/crest.svg)
-![oSoC Logo](https://github.com/oSoc19/website/blob/master/img/logo/logo-osoc-color.svg)
-
-Open Yesterday/Open Heritage Map is a open Summer of Code 2019 (#oSoC19) project.
-This project is based on iD, a friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/)
+<p align="center"><img src="svg/open-yesterday-project/crest.svg" width="96"><img src="https://github.com/oSoc19/website/blob/master/img/logo/logo-osoc-color.svg" width="128"></p>
+  
+<p align="center">Open Yesterday/Open Heritage Map is a open Summer of Code 2019 (<a href="https://2019.summerofcode.be/">#oSoC19</a>) project. This project is based on iD, a friendly JavaScript editor for <a href="https://www.openstreetmap.org/">OpenStreetMap</a></p>
 
 ## Installation, Cloning & Building
 
