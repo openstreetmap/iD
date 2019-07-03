@@ -2460,6 +2460,15 @@
                         }
                     }
                 },
+                "addr/interpolation": {
+                    "label": "Type",
+                    "options": {
+                        "all": "All",
+                        "even": "Even",
+                        "odd": "Odd",
+                        "alphabetic": "Alphabetic"
+                    }
+                },
                 "address": {
                     "label": "Address",
                     "placeholders": {
@@ -4423,6 +4432,10 @@
                 },
                 "waterway": {
                     "name": "Waterway",
+                    "terms": ""
+                },
+                "addr/interpolation": {
+                    "name": "Address Interpolation",
                     "terms": ""
                 },
                 "address": {

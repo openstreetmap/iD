@@ -22,6 +22,7 @@
     "seamark": {"icon": "maki-harbor", "fields": ["seamark/type"], "geometry": ["point", "vertex", "line", "area"], "tags": {"seamark:type": "*"}, "searchable": false, "name": "Seamark"},
     "tourism": {"icon": "maki-attraction", "fields": ["name", "tourism"], "geometry": ["point", "vertex", "line", "area"], "tags": {"tourism": "*"}, "searchable": false, "name": "Tourism"},
     "waterway": {"fields": ["name", "waterway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"waterway": "*"}, "searchable": false, "name": "Waterway"},
+    "addr/interpolation": {"fields": ["addr/interpolation"], "geometry": ["line"], "tags": {"addr:interpolation": "*"}, "name": "Address Interpolation", "searchable": false, "matchScore": 0.2},
     "address": {"fields": ["address"], "geometry": ["point", "vertex", "area"], "tags": {"addr:*": "*"}, "addTags": {}, "removeTags": {}, "reference": {"key": "addr"}, "name": "Address", "matchScore": 0.15},
     "advertising/billboard": {"fields": ["direction", "lit"], "geometry": ["point", "vertex", "line"], "tags": {"advertising": "billboard"}, "name": "Billboard"},
     "advertising/column": {"icon": "temaki-storage_tank", "fields": ["lit"], "geometry": ["point", "area"], "tags": {"advertising": "column"}, "name": "Advertising Column"},
