@@ -7440,7 +7440,7 @@ en:
         name: Tourist Attraction
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
       tourism/camp_pitch:
-        # torism=camp_pitch
+        # tourism=camp_pitch
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'

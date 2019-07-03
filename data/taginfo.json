@@ -1064,7 +1064,7 @@
     {"key": "artwork_type", "value": "sculpture", "description": "🄿 Sculpture", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/art-gallery-15.svg"},
     {"key": "artwork_type", "value": "statue", "description": "🄿 Statue", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-female.svg"},
     {"key": "tourism", "value": "attraction", "description": "🄿 Tourist Attraction", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/star-15.svg"},
-    {"key": "torism", "value": "camp_pitch", "description": "🄿 Camp Pitch", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/campsite-15.svg"},
+    {"key": "tourism", "value": "camp_pitch", "description": "🄿 Camp Pitch", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/campsite-15.svg"},
     {"key": "tourism", "value": "camp_site", "description": "🄿 Campground", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/campsite-15.svg"},
     {"key": "tourism", "value": "caravan_site", "description": "🄿 RV Park", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/rv_park.svg"},
     {"key": "tourism", "value": "chalet", "description": "🄿 Holiday Cottage", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/lodging-15.svg"},
