@@ -15,7 +15,6 @@
 
         id = iD.coreContext()
             .assetPath('dist/');
-
         // disable boundaries (unless we have an explicit disable_features list)
         var q = iD.utilStringQs(window.location.hash.substring(1));
         if (!q.hasOwnProperty('disable_features')) {
@@ -29,7 +28,7 @@
                 .call(iD.uiSourceSwitch(id)
                     .keys([
                         {
-                            'urlroot': 'https://www.openstreetmap.org',
+                            'urlroot': 'http://www.openhistoricalmap.org',
                             'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
                             'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
                         },
