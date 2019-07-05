@@ -23,7 +23,7 @@ export function uiToolSave(context) {
         .title(uiTooltipHtml(t('save.no_changes'), key));
     var history = context.history();
     var key = uiCmd('⌘S');
-    var _numChanges
+    var _numChanges;
 
     function isSaving() {
         var mode = context.mode();
