@@ -138,7 +138,7 @@ export function uiTopToolbar(context) {
 
                 tools.push(undoRedo);
 
-                if (mode.addedEntityIDs() > 0) {
+                if (mode.addedEntityIDs().length > 0) {
                     tools.push(finishDrawing);
                 } else {
                     tools.push(cancelDrawing);
