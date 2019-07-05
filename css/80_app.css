@@ -1058,7 +1058,7 @@ a.hide-toggle {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 }
-.assistant.light:not(.body-collapsed, .prominent) .assistant-header{
+.assistant.light:not(.body-collapsed):not(.prominent) .assistant-header{
     background: #fff;
 }
 .assistant .icon-col {
@@ -1121,6 +1121,7 @@ a.hide-toggle {
     position: relative;
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
+    min-height: 0px; /* needed for scroll in flexbox in Firefox */
 }
 .assistant.body-collapsed .assistant-body {
     display: none;
