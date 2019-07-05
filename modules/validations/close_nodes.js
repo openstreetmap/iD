@@ -134,6 +134,19 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
+                    // allow very close points if the z-axis varies
+                    var zAxisKeys = { layer: true, level: true };
+                    var zAxisDifferentiates = false;
+                    for (var key in zAxisKeys) {
+                        var nodeValue = node.tags[key] || '0';
+                        var nearbyValue = nearby.tags[key] || '0';
+                        if (nodeValue !== nearbyValue) {
+                            zAxisDifferentiates = true;
+                            break;
+                        }
+                    }
+                    if (zAxisDifferentiates) continue;
+
                     issues.push(new validationIssue({
                         type: type,
                         severity: 'warning',
@@ -151,6 +164,10 @@ export function validationCloseNodes(context) {
                             new validationIssueFix({
                                 icon: 'iD-operation-disconnect',
                                 title: t('issues.fix.move_points_apart.title')
+                            }),
+                            new validationIssueFix({
+                                icon: 'iD-icon-layers',
+                                title: t('issues.fix.use_different_layers_or_levels.title')
                             })
                         ]
                     }));

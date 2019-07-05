@@ -1585,6 +1585,8 @@ en:
         title: Use a bridge or tunnel
       use_different_layers:
         title: Use different layers
+      use_different_layers_or_levels:
+        title: Use different layers or levels
       use_different_levels:
         title: Use different levels
       use_tunnel:
