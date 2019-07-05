@@ -39,7 +39,7 @@ export function uiTopToolbar(context) {
             }
         }, null, 'Esc', 'wide');
 
-    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'split', 'straighten'];
+    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'reverse', 'split', 'straighten'];
 
     var operationToolsByID = {};
 
