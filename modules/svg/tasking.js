@@ -16,7 +16,6 @@ import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 
-
 var _initialized = false;
 var _enabled = false;
 var _geojson;
@@ -32,6 +31,7 @@ export function svgTasking(projection, context, dispatch) {
     var detected = utilDetect();
     var _curtain = uiCurtain();
     var layer = d3_select(null);
+    var map = d3_select(null);
     var _vtService;
     var _fileList;
     var _template;
@@ -336,7 +336,7 @@ export function svgTasking(projection, context, dispatch) {
 
         if (drawTasking.showCurtain()) {
             _curtain.remove();
-            selection.call(_curtain);
+            context.container().select('.layer-data').call(_curtain);
 
             var padding = 20;
 
