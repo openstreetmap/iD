@@ -1,6 +1,8 @@
 import _throttle from 'lodash-es/throttle';
 
-import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
+import { t } from '../util/locale';
+import { icon } from '../ui/intro/helper';
+import { geoBounds as d3_geoBounds, geoCentroid as d3_geoCentroid, geoPath as d3_geoPath } from 'd3-geo';
 import { text as d3_text } from 'd3-fetch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
@@ -9,6 +11,7 @@ import toGeoJSON from '@mapbox/togeojson';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
+import { uiCurtain } from '../ui';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
@@ -18,11 +21,16 @@ var _initialized = false;
 var _enabled = false;
 var _geojson;
 
+var _extent;
+var _centroid;
+
 
 export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
+    var _showCurtain = false;
     var detected = utilDetect();
+    var _curtain = uiCurtain();
     var layer = d3_select(null);
     var _vtService;
     var _fileList;
@@ -298,6 +306,44 @@ export function svgTasking(projection, context, dispatch) {
                     return centroid[1];
                 });
         }
+
+
+        // draw curtain around task
+        if (geoData && geoData.length && drawTasking.enabled()) {
+            drawTasking.showCurtain(true);
+            drawTasking.fitZoom();
+        } else {
+            drawTasking.showCurtain(false);
+            _curtain.remove();
+        }
+
+
+        function revealTask(padding, text, options) {
+
+            var left = context.projection(_extent[0])[0];
+            var top = context.projection(_extent[0])[1];
+            var right = context.projection(_extent[1])[0];
+            var bottom = context.projection(_extent[1])[1];
+            var box = {
+            left: left - padding,
+            top: top + padding,
+            width: right - left + (2 * padding),
+            height: bottom - top - (2 * padding)
+            };
+
+            _curtain.reveal(box, text, options);
+        }
+
+        // if (drawTasking.showCurtain()) {
+        //     _curtain.remove();
+        //     selection.call(_curtain);
+
+        //     var padding = 20;
+
+        //     revealTask(padding, t('tasking.started_task.task_details', { button: icon('#iD-icon-help', 'pre-text'), key: t('tasking.key') }), {});
+        // }
+
+
     }
 
 
@@ -522,11 +568,23 @@ export function svgTasking(projection, context, dispatch) {
             return utilArrayUnion(coords, c);
         }, []);
 
-        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
-            map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-        }
+        _extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
+        _centroid = _extent.center();
 
+        map.centerZoom(_centroid, map.trimmedExtentZoom(_extent) - 0.25); // TODO: TAH - better way to zoom out a bit
+
+        // if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
+        //     map.centerZoom(_centroid, map.trimmedExtentZoom(_extent));
+        // }
+
+        return this;
+    };
+
+
+    drawTasking.showCurtain = function(val) {
+        if (!arguments.length) return _showCurtain;
+
+        _showCurtain = val;
         return this;
     };
 

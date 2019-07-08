@@ -1374,6 +1374,12 @@
             "upload_explanation": "Your comments will be publicly visible to all OpenStreetMap users.",
             "upload_explanation_with_user": "Your comments as {user} will be publicly visible to all OpenStreetMap users."
         },
+        "tasking": {
+            "key": "M",
+            "started_task": {
+                "task_details": "You can replay this walkthrough anytime or view more documentation by clicking the {button} Help button or pressing the '{key}' key"
+            }
+        },
         "help": {
             "title": "Help",
             "key": "H",
