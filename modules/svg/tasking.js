@@ -311,12 +311,12 @@ export function svgTasking(projection, context, dispatch) {
         // draw curtain around task
         if (geoData && geoData.length && drawTasking.enabled()) {
             drawTasking.showCurtain(true);
-            // drawTasking.fitZoom();
         } else {
             drawTasking.showCurtain(false);
             _curtain.remove();
         }
 
+        if (drawTasking.showCurtain()) { drawCurtain(); }
 
         function revealTask(padding, text, options) {
 
@@ -334,13 +334,33 @@ export function svgTasking(projection, context, dispatch) {
             _curtain.reveal(box, text, options);
         }
 
-        if (drawTasking.showCurtain()) {
+        function drawCurtain() {
             _curtain.remove();
             context.container().select('.layer-data').call(_curtain);
 
             var padding = 20;
 
-            revealTask(padding, t('tasking.started_task.task_details', { button: icon('#iD-icon-help', 'pre-text'), key: t('tasking.key') }), {});
+            revealTask(
+                padding,
+                t('tasking.started_task.task_help',
+                    {
+                        taskId: '1',
+                        taskingButton: icon('#iD-icon-help', 'pre-text'),
+                        taskingKey: t('tasking.key'),
+                        helpButton: icon('#iD-icon-help', 'pre-text'),
+                        helpKey: t('help.key')
+                    }
+                ),
+                {
+                    tooltipClass: 'intro-points-describe',
+                    duration: 500,
+                    buttonText: t('tasking.started_task.stop_task'),
+                    buttonCallback: function() { finishTasking('value'); }
+                });
+
+            function finishTasking(value) {
+                console.log(value);
+            }
         }
 
 

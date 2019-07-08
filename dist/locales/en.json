@@ -1377,7 +1377,8 @@
         "tasking": {
             "key": "M",
             "started_task": {
-                "task_details": "You can replay this walkthrough anytime or view more documentation by clicking the {button} Help button or pressing the '{key}' key"
+                "task_help": "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key",
+                "stop_task": "Stop task"
             }
         },
         "help": {
