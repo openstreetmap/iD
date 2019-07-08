@@ -53,7 +53,6 @@ export function uiAssistant(context) {
         header = d3_select(null),
         body = d3_select(null);
 
-    var entityEditor = uiEntityEditor(context);
     var featureSearch = uiFeatureList(context);
 
     var savedChangeset = null;
@@ -197,16 +196,15 @@ export function uiAssistant(context) {
             iconCol.call(panel.renderHeaderIcon);
         }
 
-        body.html('');
+        body.text('');
         if (panel.renderBody) {
             body.call(panel.renderBody);
         }
 
         var headerBody = headerMainCol.selectAll('.header-body');
+        headerBody.text('');
         if (panel.renderHeaderBody) {
             headerBody.call(panel.renderHeaderBody);
-        } else {
-            headerBody.text('');
         }
 
         if (panel.message) {
@@ -224,7 +222,7 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'body-text');
 
-            bodyTextArea.text(panel.message);
+            bodyTextArea.html(panel.message);
         }
     }
 
@@ -675,18 +673,25 @@ export function uiAssistant(context) {
             icon = 'iD-icon-area';
         }
 
+        var message = t('assistant.instructions.' + mode.id.replace('-', '_'));
+
         var modeLabelID;
         if (mode.id.indexOf('add') !== -1) {
             modeLabelID = 'adding';
         } else {
             modeLabelID = 'drawing';
+
+            var way = context.entity(mode.wayID);
+            if (way.nodes.length >= 4) {
+                message += '<br/>' + t('assistant.instructions.finishing');
+            }
         }
 
         var panel = {
             headerIcon: icon,
             modeLabel: t('assistant.mode.' + modeLabelID),
             title: mode.title,
-            message: t('assistant.instructions.' + mode.id.replace('-', '_'))
+            message: message
         };
 
         return panel;
@@ -713,6 +718,7 @@ export function uiAssistant(context) {
         };
 
         panel.renderBody = function(selection) {
+            var entityEditor = uiEntityEditor(context);
             entityEditor
                 .state('select')
                 .entityID(id);

@@ -1,5 +1,4 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import {event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
@@ -15,16 +14,14 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetBrowser } from './preset_browser';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCleanTags } from '../util';
 import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose');
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
-    var _scrolled = false;
     var _base;
     var _entityID;
     var _activePreset;
@@ -58,8 +55,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body sep-top')
-            .on('scroll.entity-editor', function() { _scrolled = true; });
+            .attr('class', 'entity-editor inspector-body sep-top');
 
         var presetButtonWrap = bodyEnter
             .append('div')
@@ -148,7 +144,6 @@ export function uiEntityEditor(context) {
                     presetBrowser.setAllowedGeometry([context.geometry(_entityID)]);
                     presetBrowser.show();
                 }
-                //dispatch.call('choose', this, _activePreset);
             })
             .on('mousedown', function() {
                 d3_event.preventDefault();
@@ -234,6 +229,7 @@ export function uiEntityEditor(context) {
 
 
         function historyChanged(difference) {
+            if (selection.selectAll('.entity-editor').empty()) return;
             if (_state === 'hide') return;
             var significant = !difference ||
                     difference.didChange.properties ||
@@ -309,8 +305,6 @@ export function uiEntityEditor(context) {
     entityEditor.modified = function(val) {
         if (!arguments.length) return _modified;
         _modified = val;
-        d3_selectAll('button.preset-close use')
-            .attr('xlink:href', (_modified ? '#iD-icon-apply' : '#iD-icon-close'));
         return entityEditor;
     };
 
@@ -329,17 +323,6 @@ export function uiEntityEditor(context) {
         _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
-
-        // reset the scroll to the top of the inspector (warning: triggers reflow)
-        if (_scrolled) {
-            window.requestIdleCallback(function() {
-                var body = d3_selectAll('.entity-editor-pane .inspector-body');
-                if (!body.empty()) {
-                    _scrolled = false;
-                    body.node().scrollTop = 0;
-                }
-            });
-        }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);
 
@@ -361,5 +344,5 @@ export function uiEntityEditor(context) {
     };
 
 
-    return utilRebind(entityEditor, dispatch, 'on');
+    return entityEditor;
 }
