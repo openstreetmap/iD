@@ -284,7 +284,9 @@ export function rendererBackground(context) {
 
 
     background.showsLayer = function(d) {
-        return d.id === baseLayer.source().id ||
+        var baseSource = baseLayer.source();
+        if (!d || !baseSource) return false;
+        return d.id === baseSource.id ||
             _overlayLayers.some(function(layer) { return d.id === layer.source().id; });
     };
 
