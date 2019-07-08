@@ -551,9 +551,21 @@ button.bar-button .label {
     flex: 0 1 auto;
     padding: 0 5px;
 }
-.toolbar-item.add-feature button.bar-button .icon {
-    width: 30px;
-    height: 30px;
+.toolbar-item.add-feature button.bar-button > .icon {
+    width: 33px;
+    height: 33px;
+}
+.toolbar-item button.bar-button .disclosure-icon {
+    width: 18px;
+    color: rgba(0, 0, 0, 0.5);
+}
+[dir='ltr'] .toolbar-item .disclosure-icon {
+    margin-left: 2px;
+    margin-right: -2px;
+}
+[dir='rtl'] .toolbar-item .disclosure-icon {
+    margin-left: -2px;
+    margin-right: 2px;
 }
 
 button.bar-button.dragging {
@@ -1199,7 +1211,7 @@ a.hide-toggle {
 .assistant.prominent .icon-col .icon {
     width: 40px;
     height: 40px;
-    color: #F49700; /*#FFCF4A*/
+    color: #f6bb00; /*#FFCF4A*/
 }
 .assistant.prominent .mode-label {
     display: none;
