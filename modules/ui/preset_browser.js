@@ -85,37 +85,14 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         footer.append('div')
             .attr('class', 'message');
 
-        var geomForButtons = allowedGeometry.slice();
-        var vertexIndex = geomForButtons.indexOf('vertex');
-        if (vertexIndex !== -1) geomForButtons.splice(vertexIndex, 1);
-
         footer.append('div')
-            .attr('class', 'filter-wrap')
-            .selectAll('button.filter')
-            .data(geomForButtons)
-            .enter()
-            .append('button')
-            .attr('class', 'filter active')
-            .attr('title', function(d) {
-                return t('modes.add_' + d + '.filter_tooltip');
-            })
-            .each(function(d) {
-                d3_select(this).call(svgIcon('#iD-icon-' + d));
-            })
-            .on('click', function(d) {
-                toggleShownGeometry(d);
-                if (shownGeometry.length === 0) {
-                    updateShownGeometry(allowedGeometry);   // shallow copy
-                    toggleShownGeometry(d);
-                }
-                updateFilterButtonsStates();
-                updateResultsList();
-            });
+            .attr('class', 'filter-wrap');
 
         popover = popoverEnter.merge(popover);
         search = popover.selectAll('.search-input');
         popoverContent = popover.selectAll('.popover-content');
 
+        renderFilterButtons();
         updateResultsList();
     };
 
@@ -138,11 +115,53 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         search.node().blur();
     };
 
+    function renderFilterButtons() {
+        var selection = popover.select('.popover-footer .filter-wrap');
+
+        var geomForButtons = allowedGeometry.slice();
+        var vertexIndex = geomForButtons.indexOf('vertex');
+        if (vertexIndex !== -1) geomForButtons.splice(vertexIndex, 1);
+
+        if (geomForButtons.length === 1) {
+            // don't show filter buttons if only one geometry allowed
+            geomForButtons = [];
+        }
+
+        var buttons = selection
+            .selectAll('button.filter')
+            .data(geomForButtons, function(d) { return d; });
+
+        buttons.exit()
+            .remove();
+
+        buttons
+            .enter()
+            .append('button')
+            .attr('class', 'filter active')
+            .attr('title', function(d) {
+                return t('modes.add_' + d + '.filter_tooltip');
+            })
+            .each(function(d) {
+                d3_select(this).call(svgIcon('#iD-icon-' + d));
+            })
+            .on('click', function(d) {
+                toggleShownGeometry(d);
+                if (shownGeometry.length === 0) {
+                    updateShownGeometry(allowedGeometry);
+                    toggleShownGeometry(d);
+                }
+                updateFilterButtonsStates();
+                updateResultsList();
+            });
+
+        updateFilterButtonsStates();
+    }
+
 
     browser.setAllowedGeometry = function(array) {
         allowedGeometry = array;
         updateShownGeometry(array);
-        updateFilterButtonsStates();
+        renderFilterButtons();
         updateResultsList();
     };
 
