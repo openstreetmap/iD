@@ -311,7 +311,7 @@ export function svgTasking(projection, context, dispatch) {
         // draw curtain around task
         if (geoData && geoData.length && drawTasking.enabled()) {
             drawTasking.showCurtain(true);
-            drawTasking.fitZoom();
+            // drawTasking.fitZoom();
         } else {
             drawTasking.showCurtain(false);
             _curtain.remove();
@@ -334,14 +334,14 @@ export function svgTasking(projection, context, dispatch) {
             _curtain.reveal(box, text, options);
         }
 
-        // if (drawTasking.showCurtain()) {
-        //     _curtain.remove();
-        //     selection.call(_curtain);
+        if (drawTasking.showCurtain()) {
+            _curtain.remove();
+            selection.call(_curtain);
 
-        //     var padding = 20;
+            var padding = 20;
 
-        //     revealTask(padding, t('tasking.started_task.task_details', { button: icon('#iD-icon-help', 'pre-text'), key: t('tasking.key') }), {});
-        // }
+            revealTask(padding, t('tasking.started_task.task_details', { button: icon('#iD-icon-help', 'pre-text'), key: t('tasking.key') }), {});
+        }
 
 
     }
