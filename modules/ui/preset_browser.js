@@ -20,6 +20,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var presets;
 
     var shownGeometry = [];
+    updateShownGeometry(allowedGeometry);
 
     var popover = d3_select(null),
         search = d3_select(null),
@@ -28,7 +29,6 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var browser = {};
 
     browser.render = function(selection) {
-        updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
         popover = selection.selectAll('.preset-browser')
             .data([0]);
@@ -105,7 +105,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             .on('click', function(d) {
                 toggleShownGeometry(d);
                 if (shownGeometry.length === 0) {
-                    updateShownGeometry(allowedGeometry.slice());   // shallow copy
+                    updateShownGeometry(allowedGeometry);   // shallow copy
                     toggleShownGeometry(d);
                 }
                 updateFilterButtonsStates();
@@ -141,14 +141,14 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
     browser.setAllowedGeometry = function(array) {
         allowedGeometry = array;
-        updateShownGeometry(array.slice());
+        updateShownGeometry(array);
         updateFilterButtonsStates();
         updateResultsList();
     };
 
 
     function updateShownGeometry(geom) {
-        shownGeometry = geom.sort();
+        shownGeometry = geom.slice().sort();
         presets = context.presets().matchAnyGeometry(shownGeometry);
     }
 
