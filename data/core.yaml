@@ -45,11 +45,12 @@ en:
       saving: Saving
       viewing: Viewing
     instructions:
-      add_point: Click or tap the center of the feature.
-      add_line: Click or tap the starting location.
+      add_point: Click the center of the feature.
+      add_line: Click the starting point of the feature.
       draw_line: Place points along the feature's centerline.
-      add_area: Click or tap any corner of the feature.
+      add_area: Click any corner of the feature.
       draw_area: Place points along the feature's outline.
+      finishing: When you're done, click the last point again or click <b>Finish</b>.
     global_location: Planet Earth
     greetings:
       morning: Good Morning

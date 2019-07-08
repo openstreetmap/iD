@@ -1144,6 +1144,7 @@ a.hide-toggle {
 .assistant .body-text {
     font-size: 12px;
     opacity: 0.8;
+    line-height: 1.5em;
 }
 .assistant b {
     font-weight: bold;
