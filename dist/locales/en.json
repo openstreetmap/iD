@@ -7985,7 +7985,7 @@
                 },
                 "power/line": {
                     "name": "Power Line",
-                    "terms": ""
+                    "terms": "electric power transmission line,high voltage line,high tension line"
                 },
                 "power/minor_line": {
                     "name": "Minor Power Line",

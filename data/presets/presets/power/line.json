@@ -10,6 +10,11 @@
     "geometry": [
         "line"
     ],
+    "terms": [
+        "electric power transmission line",
+        "high voltage line",
+        "high tension line"
+    ],
     "tags": {
         "power": "line"
     },

@@ -6339,6 +6339,7 @@ en:
       power/line:
         # power=line
         name: Power Line
+        # 'terms: electric power transmission line,high voltage line,high tension line'
         terms: '<translate with synonyms or related terms for ''Power Line'', separated by commas>'
       power/minor_line:
         # power=minor_line
