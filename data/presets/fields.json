@@ -49,6 +49,7 @@
     "building_area": {"key": "building", "type": "combo", "default": "yes", "geometry": "area", "label": "Building"},
     "building": {"key": "building", "type": "combo", "label": "Building"},
     "building/levels_building": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Building Levels", "placeholder": "2, 4, 6...", "prerequisiteTag": {"key": "building", "valueNot": "no"}},
+    "building/levels/underground": {"key": "building:levels:underground", "type": "number", "minValue": 0, "label": "Underground Levels", "placeholder": "2, 4, 6..."},
     "building/material": {"key": "building:material", "type": "combo", "label": "Material"},
     "bunker_type": {"key": "bunker_type", "type": "combo", "label": "Type"},
     "cables": {"key": "cables", "type": "number", "minValue": 1, "label": "Cables", "placeholder": "1, 2, 3..."},
