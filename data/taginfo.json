@@ -1971,6 +1971,7 @@
     {"key": "toilets:disposal", "value": "longdrop", "description": "🄳 ➜ toilets:disposal=pitlatrine"},
     {"key": "toilets:disposal", "value": "pit_latrine", "description": "🄳 ➜ toilets:disposal=pitlatrine"},
     {"key": "tourism", "value": "bed_and_breakfast", "description": "🄳 ➜ tourism=guest_house + guest_house=bed_and_breakfast"},
+    {"key": "tower:type", "value": "power", "description": "🄳 ➜ power=tower"},
     {"key": "type", "value": "broad_leaved", "description": "🄳 ➜ leaf_type=broadleaved"},
     {"key": "type", "value": "conifer", "description": "🄳 ➜ leaf_type=needleleaved"},
     {"key": "type", "value": "deciduous", "description": "🄳 ➜ leaf_cycle=deciduous"},

@@ -858,6 +858,10 @@
       "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
     },
     {
+      "old": {"tower:type": "power"},
+      "replace": {"power": "tower"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
     },
