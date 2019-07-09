@@ -271,6 +271,7 @@
     "population": {"key": "population", "type": "text", "label": "Population"},
     "power_supply": {"key": "power_supply", "type": "check", "label": "Power Supply"},
     "power": {"key": "power", "type": "typeCombo", "label": "Type"},
+    "preschool": {"key": "preschool", "type": "check", "label": "Preschool"},
     "produce": {"key": "produce", "type": "semiCombo", "label": "Produce"},
     "product": {"key": "product", "type": "semiCombo", "label": "Products"},
     "railway": {"key": "railway", "type": "typeCombo", "label": "Type"},

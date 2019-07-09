@@ -1516,6 +1516,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      preschool:
+        # preschool=*
+        label: Preschool
       produce:
         # produce=*
         label: Produce
