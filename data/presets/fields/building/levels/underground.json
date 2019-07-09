@@ -1,0 +1,7 @@
+{
+    "key": "building:levels:underground",
+    "type": "number",
+    "minValue": 0,
+    "label": "Underground Levels",
+    "placeholder": "2, 4, 6..."
+}

@@ -2780,6 +2780,10 @@
                     "label": "Building Levels",
                     "placeholder": "2, 4, 6..."
                 },
+                "building/levels/underground": {
+                    "label": "Underground Levels",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Material"
                 },
@@ -3795,6 +3799,9 @@
                 },
                 "power": {
                     "label": "Type"
+                },
+                "preschool": {
+                    "label": "Preschool"
                 },
                 "produce": {
                     "label": "Produce"

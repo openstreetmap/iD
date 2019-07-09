@@ -90,7 +90,7 @@
     },
     {
       "old": {"amenity": "preschool"},
-      "replace": {"amenity": "kindergarten"}
+      "replace": {"amenity": "kindergarten", "preschool": "yes"}
     },
     {
       "old": {"amenity": "public_building"},

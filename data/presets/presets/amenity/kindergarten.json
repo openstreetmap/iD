@@ -3,15 +3,16 @@
     "fields": [
         "name",
         "operator",
-        "address"
+        "address",
+        "phone",
+        "preschool"
     ],
     "moreFields": [
+        "email",
+        "fax",
         "opening_hours",
         "payment_multi",
         "website",
-        "phone",
-        "email",
-        "fax",
         "wheelchair"
     ],
     "geometry": [

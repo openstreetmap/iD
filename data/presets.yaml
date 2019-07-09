@@ -301,6 +301,11 @@ en:
       building:
         # building=*
         label: Building
+      building/levels/underground:
+        # 'building:levels:underground=*'
+        label: Underground Levels
+        # building/levels/underground field placeholder
+        placeholder: '2, 4, 6...'
       building/levels_building:
         # 'building:levels=*'
         label: Building Levels
@@ -1516,6 +1521,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      preschool:
+        # preschool=*
+        label: Preschool
       produce:
         # produce=*
         label: Produce
