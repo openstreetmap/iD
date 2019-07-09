@@ -597,13 +597,8 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
-      custom_tasking:
-        tooltip: "tasking tooltip"
-        title: Custom Map Tasking
-        zoom: Zoom to task
     fill_area: Fill Areas
     map_features: Map Features
-    map_tasking: Tasking
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
   photo_overlays:
@@ -1095,10 +1090,21 @@ en:
     upload_explanation: "Your comments will be publicly visible to all OpenStreetMap users."
     upload_explanation_with_user: "Your comments as {user} will be publicly visible to all OpenStreetMap users."
   tasking:
+    title: Tasking
+    description: Tasks
     key: M
+    task:
+      name: Task
+      id: "Task ID: {taskId}"
+      no_task:
+        message: No task selected
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task
+    custom_tasking:
+        tooltip: "tasking tooltip"
+        title: Custom Map Tasking
+        zoom: Zoom to task
   help:
     title: Help
     key: H

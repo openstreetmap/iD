@@ -40,10 +40,10 @@ export function svgTasking(projection, context, dispatch) {
     function getService() {
         if (services.tasking && !_taskingService) {
             _taskingService = services.tasking;
-            _taskingService.event.on('loadedCustom', function() {
+            _taskingService.event.on('loadedTask', function() {
                 console.log('hello');
             });
-            _taskingService.event.on('loadedData', throttledRedraw);
+            _taskingService.event.on('loadedTask', throttledRedraw);
         } else if (!services.tasking && _taskingService) {
             _taskingService = null;
         }
@@ -293,7 +293,7 @@ export function svgTasking(projection, context, dispatch) {
                 t('tasking.started_task.task_help',
                     {
                         taskId: '1',
-                        taskingButton: icon('#iD-icon-help', 'pre-text'),
+                        taskingButton: icon('#iD-icon-tasking', 'pre-text'),
                         taskingKey: t('tasking.key'),
                         helpButton: icon('#iD-icon-help', 'pre-text'),
                         helpKey: t('help.key')

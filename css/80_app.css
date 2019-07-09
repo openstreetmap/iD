@@ -2902,8 +2902,9 @@ input.key-trap {
 }
 
 
-/* Custom Data Editor
+/* Custom Data & Tasking Editor
 ------------------------------------------------------- */
+.task-header,
 .data-header {
     background-color: #f6f6f6;
     border-radius: 5px;
@@ -2913,6 +2914,7 @@ input.key-trap {
     align-items: center;
 }
 
+.task-header-icon,
 .data-header-icon {
     background-color: #fff;
     padding: 10px;
@@ -2923,17 +2925,20 @@ input.key-trap {
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
+[dir='rtl'] .task-header-icon,
 [dir='rtl'] .data-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
+.task-header-icon .icon-wrap,
 .data-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
+.task-header-label,
 .data-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
@@ -2942,6 +2947,8 @@ input.key-trap {
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
+
+[dir='rtl'] .task-header-label,
 [dir='rtl'] .data-header-label {
     border-radius: 5px 0 0 5px;
 }
@@ -3055,7 +3062,7 @@ div.full-screen > button:hover {
 }
 
 
-/* Background / Map Data Settings
+/* Background / Map Data / Tasking Settings
 ------------------------------------------------------- */
 .map-data-control,
 .background-control {
@@ -3143,6 +3150,7 @@ div.full-screen > button:hover {
     text-overflow: ellipsis;
 }
 
+.tasking-pane .layer-list button,
 .map-data-pane .layer-list button,
 .background-pane .layer-list button {
     float: right;
@@ -3152,6 +3160,7 @@ div.full-screen > button:hover {
     padding-left: 4px;
     padding-right: 4px;
 }
+[dir='rtl'] .tasking-pane .layer-list button,
 [dir='rtl'] .map-data-pane .layer-list button,
 [dir='rtl'] .background-pane .layer-list button {
     float: left;
@@ -3159,15 +3168,18 @@ div.full-screen > button:hover {
     border-right: 1px solid #ccc;
 }
 
+.tasking-pane .layer-list button .icon,
 .map-data-pane .layer-list button .icon,
 .background-pane .layer-list button .icon {
     opacity: 0.5;
 }
 
+.tasking-pane .layer-list button:first-of-type,
 .map-data-pane .layer-list button:first-of-type,
 .background-pane .layer-list button:first-of-type {
     border-radius: 0 3px 3px 0;
 }
+[dir='rtl'] .tasking-pane .layer-list button:first-of-type,
 [dir='rtl'] .map-data-pane .layer-list button:first-of-type,
 [dir='rtl'] .background-pane .layer-list button:first-of-type {
     border-radius: 3px 0 0 3px;

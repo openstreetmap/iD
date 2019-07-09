@@ -61,7 +61,7 @@ export function svgData(projection, context, dispatch) {
     function getService() {
         if (services.vectorTile && !_vtService) {
             _vtService = services.vectorTile;
-            _vtService.event.on('loadedData', throttledRedraw);
+            _vtService.event.event.on('loadedData', throttledRedraw);
         } else if (!services.vectorTile && _vtService) {
             _vtService = null;
         }

@@ -11,7 +11,7 @@ import { json as d3_json, text as d3_text } from 'd3-fetch';
 import rbush from 'rbush';
 
 var apibase = 'http://127.0.0.1:5000/api/v1/'; // TODO: TAH - change to list of real manager urls when published
-var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw', 'loadedData', 'loadedCustom');
+var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw', 'loadedCustom');
 var _taskingCache = {};
 var _enabled = false;
 
@@ -168,7 +168,7 @@ export default {
                         _taskingCache.tasks.push(newTask); // add task to tasks
                         that.currTask(newTask); // set task as current task
 
-                        dispatch.call('loadedCustom');
+                        dispatch.call('loadedTask');
                         dispatch.call('change');
                     }
 
