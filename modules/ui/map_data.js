@@ -661,14 +661,18 @@ export function uiMapData(context) {
     }
 
 
-    function customTaskingChanged(d) {
-        var taskingLayer = layers.layer('tasking');
+    function customTaskingChanged(settings) {
 
-        if (d && d.url) {
-            taskingLayer.url(d.url);
-        } else if (d && d.fileList) {
-            taskingLayer.fileList(d.fileList);
+        var taskingService = context.tasking();
+
+        if (settings && settings.url) {
+            taskingService.setCustom(settings);
         }
+
+        taskingService.on('loadedCustom', function() {
+            var taskingLayer = layers.layer('tasking');
+            taskingLayer.fitZoom();
+        });
     }
 
 

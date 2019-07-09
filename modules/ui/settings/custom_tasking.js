@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { uiConfirm } from '../confirm';
@@ -10,65 +9,40 @@ export function uiSettingsCustomTasking(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
-        var taskingLayer = context.layers().layer('tasking');
 
         // keep separate copies of original and current settings
         var _origSettings = {
-            fileList: (taskingLayer && taskingLayer.fileList()) || null,
-            url: context.storage('settings-custom-tasking-url')
+            url: context.tasking().customSettings().url
         };
         var _currSettings = {
-            fileList: (taskingLayer && taskingLayer.fileList()) || null,
-            url: context.storage('settings-custom-tasking-url')
+            url: context.tasking().customSettings().url
         };
+
+        var placeholder = 'https://{m}/project/{p}/task/{t}';
+        var example = 'https://tasks.hotosm.org/api/v1/project/1/task/10?as_file=false';
 
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal
-            .classed('settings-modal settings-custom-data', true);
+            .classed('settings-modal settings-custom-tasking', true);
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_data.header'));
+            .text(t('settings.custom_tasking.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
 
         textSection
             .append('pre')
-            .attr('class', 'instructions-file')
-            .text(t('settings.custom_data.file.instructions'));
-
-        textSection
-            .append('input')
-            .attr('class', 'field-file')
-            .attr('type', 'file')
-            .property('files', _currSettings.fileList)  // works for all except IE11
-            .on('change', function() {
-                var files = d3_event.target.files;
-                if (files && files.length) {
-                    _currSettings.url = '';
-                    textSection.select('.field-url').property('value', '');
-                    _currSettings.fileList = files;
-                } else {
-                    _currSettings.fileList = null;
-                }
-            });
-
-        textSection
-            .append('h4')
-            .text(t('settings.custom_data.or'));
-
-        textSection
-            .append('pre')
             .attr('class', 'instructions-url')
-            .text(t('settings.custom_data.url.instructions'));
+            .text(t('settings.custom_tasking.instructions', { placeholder: placeholder, example: example }));
 
         textSection
             .append('textarea')
             .attr('class', 'field-url')
-            .attr('placeholder', t('settings.custom_data.url.placeholder'))
+            .attr('placeholder', t('settings.custom_tasking.url.placeholder'))
             .call(utilNoAuto)
             .property('value', _currSettings.url);
 
@@ -98,7 +72,8 @@ export function uiSettingsCustomTasking(context) {
         // restore the original url
         function clickCancel() {
             textSection.select('.field-url').property('value', _origSettings.url);
-            context.storage('settings-custom-tasking-url', _origSettings.url);
+            context.tasking().customSettings(_origSettings);
+
             this.blur();
             modal.close();
         }
@@ -107,13 +82,9 @@ export function uiSettingsCustomTasking(context) {
         function clickSave() {
             _currSettings.url = textSection.select('.field-url').property('value').trim();
 
-            // one or the other but not both
-            if (_currSettings.url) { _currSettings.fileList = null; }
-            if (_currSettings.fileList) { _currSettings.url = ''; }
-
-            context.storage('settings-custom-tasking-url', _currSettings.url);
             this.blur();
             modal.close();
+
             dispatch.call('change', this, _currSettings);
         }
     }

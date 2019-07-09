@@ -2,19 +2,14 @@ import _throttle from 'lodash-es/throttle';
 
 import { t } from '../util/locale';
 import { icon } from '../ui/intro/helper';
-import { geoBounds as d3_geoBounds, geoCentroid as d3_geoCentroid, geoPath as d3_geoPath } from 'd3-geo';
-import { text as d3_text } from 'd3-fetch';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
+import { select as d3_select } from 'd3-selection';
 
-import stringify from 'fast-json-stable-stringify';
-import toGeoJSON from '@mapbox/togeojson';
-
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
+import { geoExtent } from '../geo';
 import { services } from '../services';
 import { uiCurtain } from '../ui';
 import { svgPath } from './helpers';
-import { utilDetect } from '../util/detect';
-import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
+import { utilArrayFlatten, utilArrayUnion } from '../util';
 
 var _initialized = false;
 var _enabled = false;
@@ -28,14 +23,9 @@ export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
     var _showCurtain = false;
-    var detected = utilDetect();
     var _curtain = uiCurtain();
     var layer = d3_select(null);
-    var map = d3_select(null);
-    var _vtService;
-    var _fileList;
-    var _template;
-    var _src;
+    var _taskingService;
 
 
     function init() {
@@ -43,38 +33,22 @@ export function svgTasking(projection, context, dispatch) {
 
         _geojson = {};
         _enabled = true;
-
-        function over() {
-            d3_event.stopPropagation();
-            d3_event.preventDefault();
-            d3_event.dataTransfer.dropEffect = 'copy';
-        }
-
-        d3_select('body')
-            .attr('dropzone', 'copy')
-            .on('drop.svgData', function() {
-                d3_event.stopPropagation();
-                d3_event.preventDefault();
-                if (!detected.filedrop) return;
-                drawTasking.fileList(d3_event.dataTransfer.files);
-            })
-            .on('dragenter.svgData', over)
-            .on('dragexit.svgData', over)
-            .on('dragover.svgData', over);
-
         _initialized = true;
     }
 
 
     function getService() {
-        if (services.vectorTile && !_vtService) {
-            _vtService = services.vectorTile;
-            _vtService.event.on('loadedData', throttledRedraw);
-        } else if (!services.vectorTile && _vtService) {
-            _vtService = null;
+        if (services.tasking && !_taskingService) {
+            _taskingService = services.tasking;
+            _taskingService.event.on('loadedCustom', function() {
+                console.log('hello');
+            });
+            _taskingService.event.on('loadedData', throttledRedraw);
+        } else if (!services.tasking && _taskingService) {
+            _taskingService = null;
         }
 
-        return _vtService;
+        return _taskingService;
     }
 
 
@@ -109,29 +83,6 @@ export function svgTasking(projection, context, dispatch) {
     function layerOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
-    }
-
-
-    // ensure that all geojson features in a collection have IDs
-    function ensureIDs(gj) {
-        if (!gj) return null;
-
-        if (gj.type === 'FeatureCollection') {
-            for (var i = 0; i < gj.features.length; i++) {
-                ensureFeatureID(gj.features[i]);
-            }
-        } else {
-            ensureFeatureID(gj);
-        }
-        return gj;
-    }
-
-
-    // ensure that each single Feature object has a unique ID
-    function ensureFeatureID(feature) {
-        if (!feature) return;
-        feature.__featurehash__ = utilHashcode(stringify(feature));
-        return feature;
     }
 
 
@@ -173,7 +124,6 @@ export function svgTasking(projection, context, dispatch) {
 
 
     function drawTasking(selection) {
-        var vtService = getService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
         var hasData = drawTasking.hasData();
@@ -195,13 +145,11 @@ export function svgTasking(projection, context, dispatch) {
 
         // Gather data
         var geoData, polygonData;
-        if (_template && vtService) {   // fetch data from vector tile service
-            var sourceID = _template;
-            vtService.loadTiles(sourceID, _template, projection);
-            geoData = vtService.data(sourceID, projection);
-        } else {
-            geoData = getFeatures(_geojson);
-        }
+
+        _geojson = getService().currTask();
+
+        geoData = getFeatures(_geojson);
+
         geoData = geoData.filter(getPath);
         polygonData = geoData.filter(isPolygon);
 
@@ -367,52 +315,6 @@ export function svgTasking(projection, context, dispatch) {
     }
 
 
-    function getExtension(fileName) {
-        if (!fileName) return;
-
-        var re = /\.(gpx|kml|(geo)?json)$/i;
-        var match = fileName.toLowerCase().match(re);
-        return match && match.length && match[0];
-    }
-
-
-    function xmlToDom(textdata) {
-        return (new DOMParser()).parseFromString(textdata, 'text/xml');
-    }
-
-
-    drawTasking.setFile = function(extension, data) {
-        _template = null;
-        _fileList = null;
-        _geojson = null;
-        _src = null;
-
-        var gj;
-        switch (extension) {
-            case '.gpx':
-                gj = toGeoJSON.gpx(xmlToDom(data));
-                break;
-            case '.kml':
-                gj = toGeoJSON.kml(xmlToDom(data));
-                break;
-            case '.geojson':
-            case '.json':
-                gj = JSON.parse(data);
-                break;
-        }
-
-        gj = gj || {};
-        if (Object.keys(gj).length) {
-            _geojson = ensureIDs(gj);
-            _src = extension + ' data file';
-            this.fitZoom();
-        }
-
-        dispatch.call('change');
-        return this;
-    };
-
-
     drawTasking.showLabels = function(val) {
         if (!arguments.length) return _showLabels;
 
@@ -437,129 +339,16 @@ export function svgTasking(projection, context, dispatch) {
 
 
     drawTasking.hasData = function() {
+        _geojson = getService().currTask();
+
         var gj = _geojson || {};
-        return !!(_template || Object.keys(gj).length);
-    };
-
-
-    drawTasking.template = function(val, src) {
-        if (!arguments.length) return _template;
-
-        // test source against OSM imagery blacklists..
-        var osm = context.connection();
-        if (osm) {
-            var blacklists = osm.imageryBlacklists();
-            var fail = false;
-            var tested = 0;
-            var regex;
-
-            for (var i = 0; i < blacklists.length; i++) {
-                try {
-                    regex = new RegExp(blacklists[i]);
-                    fail = regex.test(val);
-                    tested++;
-                    if (fail) break;
-                } catch (e) {
-                    /* noop */
-                }
-            }
-
-            // ensure at least one test was run.
-            if (!tested) {
-                regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
-                fail = regex.test(val);
-            }
-        }
-
-        _template = val;
-        _fileList = null;
-        _geojson = null;
-
-        // strip off the querystring/hash from the template,
-        // it often includes the access token
-        _src = src || ('vectortile:' + val.split(/[?#]/)[0]);
-
-        dispatch.call('change');
-        return this;
-    };
-
-
-    drawTasking.geojson = function(gj, src) {
-        if (!arguments.length) return _geojson;
-
-        _template = null;
-        _fileList = null;
-        _geojson = null;
-        _src = null;
-
-        gj = gj || {};
-        if (Object.keys(gj).length) {
-            _geojson = ensureIDs(gj);
-            _src = src || 'unknown.geojson';
-        }
-
-        dispatch.call('change');
-        return this;
-    };
-
-
-    drawTasking.fileList = function(fileList) {
-        if (!arguments.length) return _fileList;
-
-        _template = null;
-        _fileList = fileList;
-        _geojson = null;
-        _src = null;
-
-        if (!fileList || !fileList.length) return this;
-        var f = fileList[0];
-        var extension = getExtension(f.name);
-        var reader = new FileReader();
-        reader.onload = (function() {
-            return function(e) {
-                drawTasking.setFile(extension, e.target.result);
-            };
-        })(f);
-
-        reader.readAsText(f);
-
-        return this;
-    };
-
-
-    drawTasking.url = function(url, defaultExtension) {
-        _template = null;
-        _fileList = null;
-        _geojson = null;
-        _src = null;
-
-        // strip off any querystring/hash from the url before checking extension
-        var testUrl = url.split(/[?#]/)[0];
-        var extension = getExtension(testUrl) || defaultExtension;
-        if (extension) {
-            _template = null;
-            d3_text(url)
-                .then(function(data) {
-                    drawTasking.setFile(extension, data);
-                })
-                .catch(function() {
-                    /* ignore */
-                });
-
-        } else {
-            drawTasking.template(url);
-        }
-
-        return this;
-    };
-
-
-    drawTasking.getSrc = function() {
-        return _src || '';
+        return !!(Object.keys(gj).length);
     };
 
 
     drawTasking.fitZoom = function() {
+        _geojson = getService().currTask();
+
         var features = getFeatures(_geojson);
         if (!features.length) return;
 

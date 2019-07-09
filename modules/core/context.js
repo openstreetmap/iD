@@ -296,6 +296,11 @@ export function coreContext() {
     };
 
 
+    /* Tasking */
+    var tasking;
+    context.tasking = function() { return tasking; };
+
+
     /* Behaviors */
     context.install = function(behavior) {
         context.surface().call(behavior);
@@ -522,6 +527,7 @@ export function coreContext() {
     features = rendererFeatures(context);
     photos = rendererPhotos(context);
     presets = presetIndex(context);
+    tasking = services.tasking;
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;
@@ -557,6 +563,7 @@ export function coreContext() {
     background.init();
     features.init();
     photos.init();
+    tasking.init();
 
     var presetsParameter = utilStringQs(window.location.hash).presets;
     if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
