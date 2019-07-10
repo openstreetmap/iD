@@ -1373,6 +1373,16 @@
             "task": {
                 "name": "Task",
                 "id": "Task ID: {taskId}",
+                "status": "Status: {status}",
+                "statuses": {
+                    "ready": "Ready",
+                    "mapped": "Mapped",
+                    "badImagery": "Bad imagery",
+                    "validated": "Validated",
+                    "invalidated": "Invalidated",
+                    "locked": "Locked",
+                    "lockedByYou": "Locked by you"
+                },
                 "no_task": {
                     "message": "No task selected"
                 }

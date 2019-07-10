@@ -1436,6 +1436,7 @@ button.preset-favorite-button.active .icon {
     margin: 0 5px;
 }
 
+.task-editor .quick-links,
 .data-editor .quick-links,
 .error-editor .quick-links,
 .note-editor .quick-links {
