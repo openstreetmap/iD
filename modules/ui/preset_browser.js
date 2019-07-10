@@ -5,6 +5,7 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
+import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
@@ -25,6 +26,10 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var popover = d3_select(null),
         search = d3_select(null),
         popoverContent = d3_select(null);
+
+    var _countryCode;
+    // load the initial country code
+    reloadCountryCode();
 
     var browser = {};
 
@@ -109,6 +114,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         context.features()
             .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
+
+        // reload in case the user moved countries
+        reloadCountryCode();
     };
 
     browser.hide = function() {
@@ -260,14 +268,25 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }
     }
 
-    function updateResultsList() {
+    function reloadCountryCode() {
+        if (!services.geocoder) return;
 
-        if (search.empty()) return;
+        var center = context.map().center();
+        services.geocoder.countryCode(center, function countryCallback(err, countryCode) {
+            if (_countryCode !== countryCode) {
+                _countryCode = countryCode;
+                updateResultsList();
+            }
+        });
+    }
+
+    function getRawResults() {
+        if (search.empty()) return [];
 
         var value = search.property('value');
         var results;
         if (value.length) {
-            results = presets.search(value, shownGeometry).collection
+            results = presets.search(value, shownGeometry, _countryCode).collection
                 .filter(function(d) {
                     if (d.members) {
                         return d.members.collection.some(function(preset) {
@@ -279,10 +298,19 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         } else {
             var recents = context.presets().getRecents();
             recents = recents.filter(function(d) {
+                if (_countryCode && d.preset.countryCodes && d.preset.countryCodes.indexOf(_countryCode) === -1) return false;
                 return d.preset.visible() && shownGeometry.indexOf(d.geometry) !== -1;
             });
             results = recents.slice(0, 35);
         }
+        return results;
+    }
+
+    function updateResultsList() {
+
+        if (search.empty()) return;
+
+        var results = getRawResults();
 
         popoverContent.selectAll('.list').call(drawList, results);
 
@@ -293,7 +321,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         popoverContent.node().scrollTop = 0;
 
         var resultCount = results.length;
-        popover.selectAll('.popover-footer .message').text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
+        popover.selectAll('.popover-footer .message')
+            .text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
     function focusListItem(selection, scrollingToShow) {
