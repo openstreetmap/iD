@@ -690,8 +690,8 @@ en:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
     custom_tasking:
-      tooltip: Edit custom tasking
-      header: Custom Tasking Settings
+      tooltip: Edit custom tasking manager
+      header: Custom Tasking Manager Settings
       instructions: "Enter a tasking manager URL template. Valid tokens are: \n- {manager} \tfor manager \n- {p} \t\tfor project \n- {t} \t\tfor task \n\nOutline:\n{placeholder} \n\nExample:\n{example}"
       url:
         placeholder: Enter a url template
@@ -1093,6 +1093,8 @@ en:
     title: Tasking
     description: Tasks
     key: M
+    manager:
+      name: Manager
     task:
       name: Task
       id: "Task ID: {taskId}"
@@ -1103,7 +1105,7 @@ en:
       stop_task: Stop task
     custom_tasking:
         tooltip: "tasking tooltip"
-        title: Custom Map Tasking
+        title: Custom Tasking Manager
         zoom: Zoom to task
   help:
     title: Help

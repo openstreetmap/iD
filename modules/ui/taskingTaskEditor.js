@@ -42,30 +42,50 @@ export function uiTaskingTaskEditor(context) {
             .data([0]);
 
         // enter/update
-        editor.enter()
+        var editorEnter = editor.enter()
             .append('div')
-            .attr('class', 'modal-section data-editor')
+            .attr('class', 'modal-section data-editor');
+
+        // update
+        editor = editorEnter
             .merge(editor)
-            .call(taskHeader.datum(_datum))
-            .call(quickLinks.choices(choices));
+            .call(taskHeader.datum(_datum));
 
-        var rte = body.selectAll('.raw-tag-editor')
-            .data([0]);
+        if (_datum && _datum.features) {
 
-        // enter/update
-        rte.enter()
-            .append('div')
-            .attr('class', 'raw-tag-editor inspector-inner data-editor')
-            .merge(rte)
-            .call(rawTagEditor
-                .expanded(true)
-                .readOnlyTags([/./])
-                .tags((_datum && _datum.properties) || {})
-                .state('hover')
-            )
-            .selectAll('textarea.tag-text')
-            .property('disabled', true)
-            .classed('readonly', true);
+            editor
+                .call(quickLinks.choices(choices));
+
+            var details = body.selectAll('.testClass')
+            .data(
+                (_datum && _datum.features ? [_datum] : [0]),
+                function(d) { return d.__featurehash__; }
+            );
+
+            details.enter()
+                .append('div')
+                .attr('class', function(d) {
+                    return 'task-' + d.features[0].properties.taskId;
+                });
+
+            // var rte = body.selectAll('.raw-tag-editor')
+            //     .data([0]);
+
+            // // enter/update
+            // rte.enter()
+            //     .append('div')
+            //     .attr('class', 'raw-tag-editor inspector-inner data-editor')
+            //     .merge(rte)
+            //     .call(rawTagEditor
+            //         .expanded(true)
+            //         .readOnlyTags([/./])
+            //         .tags((_datum && _datum.properties) || {})
+            //         .state('hover')
+            //     )
+            //     .selectAll('textarea.tag-text')
+            //     .property('disabled', true)
+            //     .classed('readonly', true);
+        }
     }
 
 

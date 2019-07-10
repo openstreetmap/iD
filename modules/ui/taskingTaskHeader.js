@@ -9,13 +9,15 @@ export function uiTaskingTaskHeader() {
     function taskingTaskHeader(selection) {
         var header = selection.selectAll('.task-header')
             .data(
-                (_datum ? [_datum] : []),
+                (_datum && _datum.features ? [_datum] : [0]),
                 function(d) { return d.__featurehash__; }
             );
 
+        // exit
         header.exit()
             .remove();
 
+        // enter
         var headerEnter = header.enter()
             .append('div')
             .attr('class', 'task-header');
@@ -31,8 +33,19 @@ export function uiTaskingTaskHeader() {
 
         headerEnter
             .append('div')
-            .attr('class', 'task-header-label')
-            .text(t('tasking.task.id'), { taskId: function(d) { return d.taskId || 0 ; } });
+            .attr('class', 'task-header-label');
+
+
+        // update
+        header = headerEnter
+            .merge(header);
+
+        headerEnter
+            .text(function() {
+                return !_datum.features ?
+                    t('tasking.task.no_task.message') :
+                    t('tasking.task.id', { taskId: function(d) { return d.features[0].properties.taskId; }});
+            });
     }
 
 

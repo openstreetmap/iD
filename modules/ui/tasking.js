@@ -32,7 +32,36 @@ export function uiTasking(context) {
         .on('change', customTaskingChanged);
 
 
+
+    function showsLayer() {
+        if (layer) {
+            return layer.enabled();
+        }
+        return false;
+    }
+
+
+    function setLayer(enabled) {
+        // Don't allow layer changes while drawing - #6584
+        var mode = context.mode();
+        if (mode && /^draw/.test(mode.id)) return;
+
+        if (layer) {
+            layer.enabled(enabled);
+
+            update();
+        }
+    }
+
+
+    function toggleLayer() {
+        setLayer(!showsLayer());
+    }
+
+
     function update() {
+        _task = taskingService.currTask();
+
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
         }
@@ -40,12 +69,6 @@ export function uiTasking(context) {
         if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
             updateTaskingTask();
         }
-
-        console.log('called update')
-        _task = taskingService.currTask();
-
-        _taskContainer
-            .call(taskingTaskEditor.datum(_task));
     }
 
 
@@ -115,13 +138,13 @@ export function uiTasking(context) {
             .append('label')
             .call(tooltip()
                 .title(t('tasking.custom_tasking.tooltip'))
-                .placement('top')
+                .placement('bottom')
             );
 
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('tasking'); });
+            .on('change', function() { toggleLayer(); });
 
         labelEnter
             .append('span')
@@ -150,17 +173,17 @@ export function uiTasking(context) {
 
     function customTaskingChanged(settings) {
 
+        // load custom data
         var taskingService = context.tasking();
-
         if (settings && settings.url) {
             taskingService.setCustom(settings);
         }
 
+        // zoom to data
         taskingService.event.on('loadedTask', function fitZoom() {
             layer.fitZoom();
+            update();
         });
-
-
     }
 
 
@@ -247,7 +270,7 @@ export function uiTasking(context) {
             .append('div')
             .attr('class', 'map-data-tasking')
             .call(uiDisclosure(context, 'tasking_managers', false)
-                .title(t('tasking.title'))
+                .title(t('tasking.manager.name'))
                 .content(renderTaskingManagers)
             );
 

@@ -865,8 +865,8 @@
                 }
             },
             "custom_tasking": {
-                "tooltip": "Edit custom tasking",
-                "header": "Custom Tasking Settings",
+                "tooltip": "Edit custom tasking manager",
+                "header": "Custom Tasking Manager Settings",
                 "instructions": "Enter a tasking manager URL template. Valid tokens are: \n- {manager} \tfor manager \n- {p} \t\tfor project \n- {t} \t\tfor task \n\nOutline:\n{placeholder} \n\nExample:\n{example}",
                 "url": {
                     "placeholder": "Enter a url template"
@@ -1367,6 +1367,9 @@
             "title": "Tasking",
             "description": "Tasks",
             "key": "M",
+            "manager": {
+                "name": "Manager"
+            },
             "task": {
                 "name": "Task",
                 "id": "Task ID: {taskId}",
@@ -1380,7 +1383,7 @@
             },
             "custom_tasking": {
                 "tooltip": "tasking tooltip",
-                "title": "Custom Map Tasking",
+                "title": "Custom Tasking Manager",
                 "zoom": "Zoom to task"
             }
         },
