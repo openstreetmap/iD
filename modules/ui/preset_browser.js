@@ -267,16 +267,24 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         var value = search.property('value');
         var results;
         if (value.length) {
-            results = presets.search(value, shownGeometry).collection;
+            results = presets.search(value, shownGeometry).collection
+                .filter(function(d) {
+                    if (d.members) {
+                        return d.members.collection.some(function(preset) {
+                            return preset.visible();
+                        });
+                    }
+                    return d.visible();
+                });
         } else {
             var recents = context.presets().getRecents();
             recents = recents.filter(function(d) {
-                return shownGeometry.indexOf(d.geometry) !== -1;
+                return d.preset.visible() && shownGeometry.indexOf(d.geometry) !== -1;
             });
             results = recents.slice(0, 35);
         }
 
-        var list = popoverContent.selectAll('.list').call(drawList, results);
+        popoverContent.selectAll('.list').call(drawList, results);
 
         popover.selectAll('.list .list-item.focused')
             .classed('focused', false);
@@ -529,9 +537,13 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
         item.subitems = function() {
-            return preset.members.matchAnyGeometry(shownGeometry).collection.map(function(preset) {
-                return itemForPreset(preset);
-            });
+            return preset.members.matchAnyGeometry(shownGeometry).collection
+                .filter(function(preset) {
+                    return preset.visible();
+                })
+                .map(function(preset) {
+                    return itemForPreset(preset);
+                });
         };
         return item;
     }
