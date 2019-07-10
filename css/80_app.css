@@ -1515,6 +1515,7 @@ a.hide-toggle {
 }
 
 .preset-icon-point-border path,
+.preset-icon-category-border path,
 .preset-icon-fill-vertex circle {
     stroke-width: 1.3px;
     stroke: currentColor;
