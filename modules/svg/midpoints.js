@@ -48,7 +48,7 @@ export function svgMidpoints(projection, context) {
         var touchLayer = selection.selectAll('.layer-touch.points');
 
         var mode = context.mode();
-        if (mode && mode.id !== 'select') {
+        if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;

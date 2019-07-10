@@ -282,7 +282,7 @@ export function coreContext() {
     context.activeID = function() {
         return mode && mode.activeID && mode.activeID();
     };
-    
+
 
     /* Behaviors */
     context.install = function(behavior) {
