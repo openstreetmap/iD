@@ -41,7 +41,7 @@ export function uiTaskingTaskHeader() {
 
         header.select('.task-header-label')
             .text(function(d) {
-                return _datum.features ?
+                return _datum && _datum.features ?
                     function() {
                         return t('tasking.task.id', { taskId: d.taskId });
                     }() :

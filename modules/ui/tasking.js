@@ -202,7 +202,9 @@ export function uiTasking(context) {
 
     function updateTaskingTask() {
         _taskingTaskContainer
-            .call(taskingTaskEditor.datum(_task));
+            .call(taskingTaskEditor.datum(
+                function(){ return showsLayer() ? _task : undefined; }()
+            ));
     }
 
 

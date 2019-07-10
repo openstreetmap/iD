@@ -123,8 +123,10 @@ export default {
         this.event = utilRebind(this, dispatch, 'on');
 
         _taskingCache = {
+            projects: [],
             tasks: [],
             currTask: {},
+            currProject: {},
             customSettings: { url: '', extension: '', data: {} }
         };
     },
@@ -220,6 +222,50 @@ export default {
 
     cache: function() {
         return _taskingCache;
+    },
+
+
+    currentProject: function(d) {
+
+        if (!arguments.length) return _taskingCache.currProject;
+
+        _taskingCache.currProject = d;
+
+        dispatch.call('change');
+        dispatch.call('redraw');
+
+        return this;
+    },
+
+
+    currentTask: function(d) {
+
+        if (!arguments.length) return _taskingCache.currTask;
+
+        _taskingCache.currentTask = d;
+
+        dispatch.call('change');
+        dispatch.call('redraw');
+
+        return this;
+    },
+
+
+    resetTask: function() {
+        _taskingCache.currTask = {};
+    },
+
+
+    resetProject: function() {
+        _taskingCache.currProject = {};
+    },
+
+
+    resetProjectAndTask: function() {
+        var that = this;
+
+        that.resetProject();
+        that.resetTask();
     }
 
 };

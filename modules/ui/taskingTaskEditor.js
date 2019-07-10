@@ -1,13 +1,10 @@
-import { event as d3_event } from 'd3-selection';
-import { uiQuickLinks } from './quick_links';
+
 
 import { uiTaskingTaskHeader } from './taskingTaskHeader';
 import { uiTaskingTaskDetails } from './taskingTaskDetails';
 
 
 export function uiTaskingTaskEditor(context) {
-
-    var quickLinks = uiQuickLinks();
 
     var taskHeader = uiTaskingTaskHeader();
     var taskDetails = uiTaskingTaskDetails();
@@ -37,43 +34,9 @@ export function uiTaskingTaskEditor(context) {
         editor = editorEnter
             .merge(editor)
             .call(taskHeader.datum(_datum))
-            .call(toggleQuickLinks)
-            .call(toggleTaskDetails);
-
-        // if (_datum.features) {
-        //     editor
-        //         .call(quickLinks.choices(choices))
-        //         .merge(editor)
-        //         .call(taskDetails.datum(_datum));
-        // }
-
-    }
+            .call(taskDetails.datum(_datum, context));
 
 
-    function toggleQuickLinks(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            click: function zoomTo() {
-              d3_event.preventDefault();
-              d3_event.stopPropagation();
-              context.layers().layer('tasking').fitZoom();
-            }
-        }];
-
-        if (_datum.features) {
-            selection
-                .call(quickLinks.choices(choices));
-        }
-    }
-
-
-    function toggleTaskDetails(selection) {
-        if (_datum.features) {
-            selection
-                .call(taskDetails.datum(_datum));
-        }
     }
 
 
