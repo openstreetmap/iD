@@ -930,7 +930,7 @@ export function rendererMap(context) {
 
 
     map.isInWideSelection = function() {
-        return !map.withinEditableZoom() && context.mode().id === 'select';
+        return !map.withinEditableZoom() && context.mode() && context.mode().id === 'select';
     };
 
 
