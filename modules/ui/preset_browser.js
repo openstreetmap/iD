@@ -283,17 +283,19 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             if (!entity.hasInterestingTags()) continue;
 
             // evaluate preset
-            var geom = entity.geometry(graph);
             var preset = context.presets().match(entity, graph);
-            if (!scoredPresets[preset.id]) {
-                scoredPresets[preset.id] = {
-                    preset: preset,
-                    score: 0
-                };
+            if (!preset.suggestion) { // don't recommend brand suggestions again
+                if (!scoredPresets[preset.id]) {
+                    scoredPresets[preset.id] = {
+                        preset: preset,
+                        score: 0
+                    };
+                }
+                scoredPresets[preset.id].score += 1;
             }
-            scoredPresets[preset.id].score += 1;
 
             // evaluate groups
+            var geom = entity.geometry(graph);
             for (var j in superGroups) {
                 var group = superGroups[j];
                 if (group.matchesTags(entity.tags, geom)) {
