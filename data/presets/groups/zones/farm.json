@@ -1,0 +1,11 @@
+{
+    "subfeatures": "subfeatures/farm",
+    "matches": {
+        "anyTags": {
+            "landuse": {
+                "farmland": true,
+                "orchard": true
+            }
+        }
+    }
+}
