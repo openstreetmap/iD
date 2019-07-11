@@ -29,8 +29,6 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         popoverContent = d3_select(null);
 
     var _countryCode;
-    // load the initial country code
-    reloadCountryCode();
 
     var browser = {};
 
@@ -103,7 +101,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     };
 
     browser.isShown = function() {
-        return !popover.classed('hide');
+        return popover && !popover.empty() && !popover.classed('hide');
     };
 
     browser.show = function() {
@@ -723,6 +721,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         };
         return item;
     }
+
+    // load the initial country code
+    reloadCountryCode();
 
     return browser;
 }
