@@ -273,12 +273,27 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         var superGroups = groupManager.groupsWithSubfeatures;
         var scoredGroups = {};
+        var scoredPresets = {};
 
         var queryExtent = context.map().extent();
         var nearbyEntities = context.history().tree().intersects(queryExtent, graph);
         for (var i in nearbyEntities) {
             var entity = nearbyEntities[i];
+            // ignore boring features
+            if (!entity.hasInterestingTags()) continue;
+
+            // evaluate preset
             var geom = entity.geometry(graph);
+            var preset = context.presets().match(entity, graph);
+            if (!scoredPresets[preset.id]) {
+                scoredPresets[preset.id] = {
+                    preset: preset,
+                    score: 0
+                };
+            }
+            scoredPresets[preset.id].score += 1;
+
+            // evaluate groups
             for (var j in superGroups) {
                 var group = superGroups[j];
                 if (group.matchesTags(entity.tags, geom)) {
@@ -302,7 +317,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 }
             }
         }
-        var scoredPresets = {};
+
         Object.values(scoredGroups).forEach(function(item) {
             item.group.scoredPresets().forEach(function(groupScoredPreset) {
                 var combinedScore = groupScoredPreset.score * item.score;
@@ -322,12 +337,17 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }).map(function(item) {
             return item.preset;
         }).filter(function(d) {
+            // skip non-visible
             if (!d.visible()) return false;
 
+            // skip presets not valid in this country
             if (_countryCode && d.countryCodes && d.countryCodes.indexOf(_countryCode) === -1) return false;
 
             for (var i in shownGeometry) {
-                if (d.geometry.indexOf(shownGeometry[i]) !== -1) return true;
+                if (d.geometry.indexOf(shownGeometry[i]) !== -1) {
+                    // skip currently hidden features
+                    if (!context.features().isHiddenPreset(d, shownGeometry[i])) return true;
+                }
             }
             return false;
         }).slice(0, 50);
