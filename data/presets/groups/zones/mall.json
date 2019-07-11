@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/mall",
+    "matches": {
+        "anyTags": {
+            "shop": "mall"
+        }
+    }
+}
