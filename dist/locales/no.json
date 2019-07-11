@@ -4395,26 +4395,6 @@
                 "description": "Flyfoto og satellitt-ortofoto.",
                 "name": "Bing ortofoto"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Vilkår og tilbakemelding"
-                }
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Vilkår og tilbakemelding"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Vilkår og tilbakemelding"
-                }
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Vilkår og tilbakemelding"
-                }
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Vilkår og tilbakemelding"

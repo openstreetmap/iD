@@ -3601,9 +3601,6 @@
                 "building/warehouse": {
                     "name": "Magatzem"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Àrea de campament"
-                },
                 "club": {
                     "name": "Club"
                 },
@@ -5242,34 +5239,6 @@
             "Bing": {
                 "description": "Imatges aèries i de satèl·lit.",
                 "name": "Imatges aèries de Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termes i comentaris"
-                },
-                "description": "DigitalGlobe-Premium és un mosaic compost del mapa base de DigitalGlobe amb algunes regions millorades amb +Vivid o imatgeria personalitzada de l'àrea d'interès, resolució de 50cm o millor, i actualitzada freqüentment.",
-                "name": "Imatges de DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termes i comentaris"
-                },
-                "description": "Límits de les imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 13 i superiors.",
-                "name": "Imatges de DigitalGlobe Premium Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termes i comentaris"
-                },
-                "description": "DigitalGlobe-Standard és un conjunt d'imatgeria seleccionat que cobreix un 86% de la superfície terrestre, amb una resolució d'entre 30 i 60cm allà on és disponible i completat pel Landsat. De mitjana l'edat és de 2,31 anys, i algunes zones s'actualitzen dues vegades cada any.",
-                "name": "Imatges de DigitalGlobe estàndard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termes i comentaris"
-                },
-                "description": "Límits de les imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 13 i superiors.",
-                "name": "Imatges de DigitalGlobe estàndard Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {

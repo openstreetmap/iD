@@ -9,9 +9,10 @@ en:
     open_wikidata: open on wikidata.org
     favorite: favorite
   toolbar:
+    center_zoom:
+      title: Center
     deselect:
       title: Deselect
-    inspect: Inspect
     undo_redo: Undo / Redo
     recent: Recent
     favorites: Favorites
@@ -37,16 +38,19 @@ en:
   assistant:
     mode:
       adding: Adding
+      authenticating: Authenticating
       drawing: Drawing
-      mapping: Mapping
       editing: Editing
+      mapping: Mapping
       saving: Saving
+      viewing: Viewing
     instructions:
-      add_point: Click or tap the center of the feature.
-      add_line: Click or tap the starting location.
+      add_point: Click the center of the feature.
+      add_line: Click the starting point of the feature.
       draw_line: Place points along the feature's centerline.
-      add_area: Click or tap any corner of the feature.
+      add_area: Click any corner of the feature.
       draw_area: Place points along the feature's outline.
+      finishing: When you're done, click the last point again or click <b>Finish</b>.
     global_location: Planet Earth
     greetings:
       morning: Good Morning
@@ -66,6 +70,9 @@ en:
         count_loc_time: "You have {count} unsaved changes from {duration} ago around {location}."
       ask: Would you like to restore them?
     commit:
+      auth:
+        osm_account: OpenStreetMap Account
+        message: You must sign in to upload your changes.
       success:
         thank_you: Thank You!
         just_improved: "You've just improved OpenStreetMap around {location}."
@@ -477,9 +484,6 @@ en:
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: Report a bug
   help_translate: Help translate
-  sidebar:
-    key: "'"
-    tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning: "{count} hidden features"
     hidden_details: "These features are currently hidden: {details}"
@@ -497,14 +501,16 @@ en:
     cancel: Cancel
     change: "1 Change"
     changes: "{count} Changes"
+    changes_parenthetical: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
     modified: Modified
     deleted: Deleted
     created: Created
-    outstanding_errors_message: "Please resolve all errors first. {count} remaining."
-    comment_needed_message: Please add a changeset comment first.
+    blocker_message:
+      outstanding_errors: "Please resolve all errors before uploading."
+      comment_needed: Please add a changeset comment before uploading. This helps others understand your edits.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
@@ -580,7 +586,6 @@ en:
   inspector:
     zoom_to:
       key: Z
-      title: Zoom to this
       tooltip_feature: "Center and zoom the map to focus on this feature."
       tooltip_note: "Center and zoom the map to focus on this note."
       tooltip_data: "Center and zoom the map to focus on this data."
@@ -588,10 +593,10 @@ en:
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_keepRight: View on keepright.at
-    all_fields: All fields
-    all_tags: All tags
-    all_members: All members
-    all_relations: All relations
+    all_fields: Fields
+    all_tags: Tags
+    all_members: Members
+    all_relations: Relations
     add_to_relation: Add to a relation
     new_relation: New relation...
     choose_relation: Choose a parent relation
@@ -792,7 +797,7 @@ en:
   full_screen: Toggle Full Screen
   QA:
     improveOSM:
-      title: ImproveOSM Detection
+      title: ImproveOSM
       geometry_types:
         path: paths
         parking: parking
@@ -819,7 +824,7 @@ en:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight Error
+      title: KeepRight
       detail_title: Error
       detail_description: Description
       comment: Comment
@@ -1581,6 +1586,8 @@ en:
         title: Use a bridge or tunnel
       use_different_layers:
         title: Use different layers
+      use_different_layers_or_levels:
+        title: Use different layers or levels
       use_different_levels:
         title: Use different levels
       use_tunnel:

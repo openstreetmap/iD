@@ -72,7 +72,7 @@ export function uiSuccess(context) {
 
         var summaryDetail = summary
             .append('div')
-            .attr('class', 'body-col cell-detail summary-detail');
+            .attr('class', 'main-col cell-detail summary-detail');
 
         summaryDetail
             .append('a')
@@ -151,7 +151,7 @@ export function uiSuccess(context) {
 
         var communityDetail = rowEnter
             .append('div')
-            .attr('class', 'body-col cell-detail community-detail');
+            .attr('class', 'main-col cell-detail community-detail');
 
         communityDetail
             .each(showCommunityDetails);

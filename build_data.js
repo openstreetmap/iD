@@ -56,7 +56,6 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
-            'fas-smile': {},
             'fas-smile-beam': {},
             'fas-grin-beam': {},
             'fas-laugh-beam': {},
@@ -301,7 +300,7 @@ function suggestionsToPresets(presets) {
             return;
         }
 
-        let suggestionID = presetID + '/' + name;
+        let suggestionID = presetID + '/' + name.replace('/', '');
 
         let tags = { 'brand:wikidata': qid };
         for (let k in preset.tags) {
@@ -449,7 +448,7 @@ function generateTaginfo(presets, fields) {
             'description': 'Online editor for OSM data.',
             'project_url': 'https://github.com/openstreetmap/iD',
             'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
-            'icon_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/dist/img/logo.png',
+            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/dist/img/logo.png',
             'keywords': [
                 'editor'
             ]
@@ -480,20 +479,20 @@ function generateTaginfo(presets, fields) {
 
         // add icon
         if (/^maki-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' +
-                preset.icon.replace(/^maki-/, '') + '-15.svg?sanitize=true';
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/mapbox/maki/icons/' +
+                preset.icon.replace(/^maki-/, '') + '-15.svg';
         } else if (/^temaki-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
-                preset.icon.replace(/^temaki-/, '') + '.svg?sanitize=true';
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
+                preset.icon.replace(/^temaki-/, '') + '.svg';
         } else if (/^fa[srb]-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/' +
-                preset.icon + '.svg?sanitize=true';
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/' +
+                preset.icon + '.svg';
         } else if (/^iD-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/' +
-                preset.icon.replace(/^iD-/, '') + '.svg?sanitize=true';
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/' +
+                preset.icon.replace(/^iD-/, '') + '.svg';
         } else if (/^tnp-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/the-noun-project/' +
-                preset.icon.replace(/^tnp-/, '') + '.svg?sanitize=true';
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/the-noun-project/' +
+                preset.icon.replace(/^tnp-/, '') + '.svg';
         }
 
         coalesceTags(taginfo, tag);

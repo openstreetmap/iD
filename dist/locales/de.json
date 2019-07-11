@@ -912,7 +912,7 @@
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Deine Änderungen sollten auf OpenStreetMap in wenigen Minuten sichtbar sein. Für andere Karen kann es länger dauern, bis die Änderungen sichtbar werden.",
+            "help_html": "Deine Änderungen sollten auf OpenStreetMap in wenigen Minuten sichtbar sein. Für andere Karten kann es länger dauern, bis die Änderungen sichtbar werden.",
             "help_link_text": "Details",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/DE:FAQ#Wann_werden_meine_.C3.84nderungen_auf_den_Karten_gezeigt.3F",
             "view_on_osm": "Zeige Änderungen auf OSM",
@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "Betreiber"
                 },
+                "operator/type": {
+                    "label": "Operator Typ"
+                },
                 "outdoor_seating": {
                     "label": "Außenbestuhlung"
                 },
@@ -3657,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "Mindestalter"
+                },
+                "polling_station": {
+                    "label": "Wahllokal"
                 },
                 "population": {
                     "label": "Bevölkerung"
@@ -4730,6 +4736,10 @@
                     "name": "Internetcafé",
                     "terms": "Internetcafé, Cybercafé"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaoke-Box",
+                    "terms": "Karaoke Klub, Karaoke, Raum, Karaoke TV"
+                },
                 "amenity/kindergarten": {
                     "name": "Kindergarten, Kindergartengelände, Kindertagesstätte, Kindertagesstättengelände",
                     "terms": "Kindergartengelände"
@@ -4869,6 +4879,10 @@
                     "name": "Polizei",
                     "terms": "Polizei, Polizeistation, Polizeirevier, Polizeiwache, Polizeiinspektion"
                 },
+                "amenity/polling_station": {
+                    "name": "Permanentes Wahllokal",
+                    "terms": "Stimmzettel, Wahlurne, Demokratie, Wahlen, Wahllokal, Wahl, Wahlzelle, Wahlmaschine"
+                },
                 "amenity/post_box": {
                     "name": "Briefkasten",
                     "terms": "Briefkasten,Postkasten,Postbriefkasten"
@@ -4964,7 +4978,7 @@
                     "terms": "Japanisches Restaurant"
                 },
                 "amenity/restaurant/mexican": {
-                    "name": "Mexicanisches Restaurant",
+                    "name": "Mexikanisches Restaurant",
                     "terms": "Mexicanisches Restaurant"
                 },
                 "amenity/restaurant/noodle": {
@@ -5634,10 +5648,6 @@
                 "building_point": {
                     "name": "Gebäude"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Camping Stellplatz",
-                    "terms": "Campingplatz, Zeltplatz, Stellplatz"
-                },
                 "club": {
                     "name": "Verein",
                     "terms": "Verein, Klub"
@@ -5823,6 +5833,10 @@
                     "name": "Schuster",
                     "terms": "Schuster, Schuhmacher"
                 },
+                "craft/signmaker": {
+                    "name": "Schilderhersteller",
+                    "terms": "Schilderhersteller"
+                },
                 "craft/stonemason": {
                     "name": "Steinmetz",
                     "terms": "Steinmetz"
@@ -5934,6 +5948,9 @@
                     "name": "Furt (Gewässerquerung)",
                     "terms": "Furt (Gewässerquerung)"
                 },
+                "ford_line": {
+                    "name": "Furt"
+                },
                 "golf/bunker": {
                     "name": "Bunker (Golf)",
                     "terms": "Bunker, Sandbunker, Sand-Hindernis, Golfbunker"
@@ -6001,6 +6018,10 @@
                 "healthcare/blood_donation": {
                     "name": "Blutspendezentrale",
                     "terms": "Blutspendezentrale, Blutspendezentrum"
+                },
+                "healthcare/counselling": {
+                    "name": "Gesundheitsberatung",
+                    "terms": "Gesundheitsberatung"
                 },
                 "healthcare/hospice": {
                     "name": "Hospiz",
@@ -6136,7 +6157,7 @@
                     "terms": "Zebrastreifen (erhöht), markierter Fußgängerübergang (erhöht)"
                 },
                 "highway/footway/sidewalk": {
-                    "name": "Gehsteig",
+                    "name": "Bürgersteig",
                     "terms": "Gehsteig, Bürgersteig, Trottoir, Gehweg, Fußweg"
                 },
                 "highway/footway/unmarked": {
@@ -7025,7 +7046,7 @@
                     "terms": "Mobilfunkmast, Sendemast, Flutlichtmast, Handymast"
                 },
                 "man_made/mast/communication": {
-                    "name": "Funkturm",
+                    "name": "Funkmast",
                     "terms": "Funkturm, Funkmast, Antenne, Funk, Mobilfunkmast, verankerter Mast, Radiofunkturm, Fernsehturm"
                 },
                 "man_made/mast/communication/mobile_phone": {
@@ -7107,6 +7128,10 @@
                 "man_made/survey_point": {
                     "name": "Vermessungspunkt",
                     "terms": "Trigonometrischer Punkt, Geodätischer Festpunkt"
+                },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "Japanisches Tor, Shinto Schrein"
                 },
                 "man_made/tower": {
                     "name": "Turm",
@@ -7704,6 +7729,10 @@
                     "name": "Punkt",
                     "terms": "Punkt"
                 },
+                "polling_station": {
+                    "name": "zeitweiliges Wahllokal",
+                    "terms": "Wahlurne, Stimmzetteleinwurf, Demokratie, Wahlwn, WHllokal, WHlzelle, Wahlmaschine"
+                },
                 "power": {
                     "name": "Energieversorgung"
                 },
@@ -8285,6 +8314,10 @@
                 },
                 "shop/fashion": {
                     "name": "Modegeschäft"
+                },
+                "shop/fashion_accessories": {
+                    "name": "Geschäft für Modeaccessoires",
+                    "terms": "Tasche, Parfum, Cologne, Juwelen, Geldbörse, Schal, Sonnenbrillen, Schirm"
                 },
                 "shop/fireplace": {
                     "name": "Kachelofenladen",
@@ -9119,34 +9152,6 @@
             "Bing": {
                 "description": "Satellitenbilder und Luftbilder",
                 "name": "Bing Luftbildmaterial"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Bedingungen & Feedback"
-                },
-                "description": "DigitalGlobe-Premium ist ein Mosaik zusammengesetzt aus der DigitalGlobe basemap, wobei ausgewählte Regionen mit +Vivid oder regionspezifischen Quellen aufgefüllt sind, Auflösung 50cm oder besser und häufiger aktualisiert.",
-                "name": "DigitalGlobe Premium Bildmaterial"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Bedingungen & Feedback"
-                },
-                "description": "Kachelgrenzen und Aufnahmedatum werden bei Zoom-Level 13 und höher angezeigt.",
-                "name": "DigitalGlobe Premium Bildmaterial Klassisch"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Bedingungen & Feedback"
-                },
-                "description": "DigitalGlobe-Standard ist eine kuratierte Zusammenstellung von Luftbildern, die 86% der weltweiten Landmasse abdecken, Auflösung 30-60cm soweit verfügbar; aufgefüllt mit Landsat Satelitenbildern. Durchschnittliches Alter ist 2,31 Jahre, manche Gebiete werden zwei mal pro Jahr erneuert.",
-                "name": "DigitalGlobe Standard Bildmaterial"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Bedingungen & Feedback"
-                },
-                "description": "Kachelgrenzen und Aufnahmedatum werden bei Zoom-Level 13 und höher angezeigt.",
-                "name": "DigitalGlobe Standard Bildmaterial Klassisch"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10973,13 +10978,17 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Beteilige dich unter {signupUrl}"
-            },
             "talk-au": {
                 "name": "Talk-au Mailing Liste",
                 "description": "Mappers in Australien chatten hier"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceanien Slack",
+                "description": "Melde dich an auf {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "Talk-nz Mailing Liste",
+                "description": "Neuseeland OSM Gemeinschafts-atalk"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentinien Facebook",
@@ -11148,6 +11157,19 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Neuigkeiten und Quellen für die OpenStreetMap Peru Gemeinschaft"
+            },
+            "uy-forum": {
+                "name": "OpenStreetMap UY Forum",
+                "description": "OpenStreetMap Uruguay Web Forum"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Uruguay auf IRC",
+                "description": "Beteilige dich bei #osmurugauy auf irc.freemode.net (Port 6667)",
+                "extendedDescription": "Beteilige dich bei #osmuruguay auf irc.freenode.net "
+            },
+            "uy-mailinglist": {
+                "name": "Talk-uy Mailing Liste",
+                "description": "Talk-uy ist die offizielle Mailingliste für die OSM Gemeinschaft in Uruguay"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Lateinamerika Facebook",

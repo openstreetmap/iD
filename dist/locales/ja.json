@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "管理主体"
                 },
+                "operator/type": {
+                    "label": "管理者の種類"
+                },
                 "outdoor_seating": {
                     "label": "屋外の席"
                 },
@@ -3657,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "最低年齢"
+                },
+                "polling_station": {
+                    "label": "投票所"
                 },
                 "population": {
                     "label": "人口"
@@ -4730,6 +4736,10 @@
                     "name": "インターネットカフェ",
                     "terms": "ネカフェ, ネットカフェ, 漫画喫茶, 漫喫, 休憩, カフェ"
                 },
+                "amenity/karaoke": {
+                    "name": "カラオケボックス",
+                    "terms": "カラオケボックス, カラオケ店, 歌, 音楽"
+                },
                 "amenity/kindergarten": {
                     "name": "幼稚園/保育園（代表点または敷地）",
                     "terms": "幼稚園の敷地, 保育園の敷地, 保育園, 幼稚園, 教育, 学校, 育児"
@@ -4868,6 +4878,10 @@
                 "amenity/police": {
                     "name": "警察",
                     "terms": "警察, 警察署, 交番, 駐在所"
+                },
+                "amenity/polling_station": {
+                    "name": "投票所(常設)",
+                    "terms": "投票所, 期日前投票所, 選挙, 投票所(常設)"
                 },
                 "amenity/post_box": {
                     "name": "郵便ポスト",
@@ -5634,10 +5648,6 @@
                 "building_point": {
                     "name": "建物"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "キャンプサイト",
-                    "terms": "キャンプサイト, 娯楽, アウトドア, レジャー"
-                },
                 "club": {
                     "name": "クラブ",
                     "terms": "クラブ"
@@ -5823,6 +5833,10 @@
                     "name": "製靴",
                     "terms": "製靴, 靴製造, 職人"
                 },
+                "craft/signmaker": {
+                    "name": "看板屋",
+                    "terms": "看板屋, 広告サイン制作, 広告"
+                },
                 "craft/stonemason": {
                     "name": "石工",
                     "terms": "石工, 石材加工, 職人, 工房, 墓石, 墓石店"
@@ -5934,6 +5948,9 @@
                     "name": "洗い越し",
                     "terms": "洗い越し, 浅瀬"
                 },
+                "ford_line": {
+                    "name": "洗い越し"
+                },
                 "golf/bunker": {
                     "name": "サンドトラップ",
                     "terms": "サンドトラップ, バンカー, ゴルフ"
@@ -6001,6 +6018,10 @@
                 "healthcare/blood_donation": {
                     "name": "献血ルーム",
                     "terms": "血液センター, 健康, 医療"
+                },
+                "healthcare/counselling": {
+                    "name": "カウンセリングセンター",
+                    "terms": "カウンセリングセンター, カウンセリング, メンタルケア, 医療, 健康"
                 },
                 "healthcare/hospice": {
                     "name": "ホスピス",
@@ -7109,6 +7130,10 @@
                     "name": "観測設備",
                     "terms": "観測設備, 観測地点, 測候所"
                 },
+                "man_made/torii": {
+                    "name": "鳥居",
+                    "terms": "鳥居, 神社"
+                },
                 "man_made/tower": {
                     "name": "塔",
                     "terms": "塔, タワー"
@@ -7705,6 +7730,10 @@
                     "name": "ポイント",
                     "terms": "ポイント, 点, ノード"
                 },
+                "polling_station": {
+                    "name": "投票所(臨時)",
+                    "terms": "投票所(臨時), 投票所, 期日前投票所, 選挙"
+                },
                 "power": {
                     "name": "電力関係"
                 },
@@ -8080,7 +8109,7 @@
                 },
                 "shop/antiques": {
                     "name": "古美術品店",
-                    "terms": "古美術品店, アンティークショップ, 美術, アート, 古美術"
+                    "terms": "古美術品店, アンティークショップ, 美術, アート, 古美術, 骨董品店"
                 },
                 "shop/appliance": {
                     "name": "白物家電販売店（大型製品）",
@@ -8287,6 +8316,10 @@
                 },
                 "shop/fashion": {
                     "name": "ファッション店"
+                },
+                "shop/fashion_accessories": {
+                    "name": "ファッション小物店",
+                    "terms": "アクセサリー店, アクセサリーショップ, ファッション, 小物, 装飾品, 服飾小物, ファッションアクセサリー店, 店舗, お店, おしゃれ, ファッション小物店"
                 },
                 "shop/fireplace": {
                     "name": "暖房具店",
@@ -9121,34 +9154,6 @@
             "Bing": {
                 "description": "衛星・航空写真。撮影日付はCtrl+Shift+Bで現れる右下のパネルで確認可能。比較的新しい箇所が多いが位置ズレやゆがみ（特に高低差のある場所）に注意。日本では位置精度は概して国土地理院のものが高い。",
                 "name": "Bing航空画像"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "規約＆フィードバック"
-                },
-                "description": "DigitalGlobe-Premiumは DigitalGlobe ベースマップの繋ぎ合わせから成り、50cm以上の解像度した組み合わせで、選ばれた地域が+Vividや興味深いカスタムエリアで埋められ、今後の更新でより頻繁にリフレッシュされます。",
-                "name": "DigitalGlobeプレミアム画像"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "規約＆フィードバック"
-                },
-                "description": "画像の境界と取得日付。ラベルはズームレベル13以上で表示。",
-                "name": "DigitalGlobeプレミアム画像撮影日"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "規約＆フィードバック"
-                },
-                "description": "DigitalGlobe-Standardは地球の大陸部の86%をカバーする画像を集めたセットで、一部30-60cm解像度でランドサットを下敷きにしています。平均年齢は2.31歳で、場所によっては毎年2x 更新されます。",
-                "name": "DigitalGlobe標準画像"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "規約＆フィードバック"
-                },
-                "description": "画像の境界と取得日付。ラベルはズームレベル13以上で表示。",
-                "name": "DigitalGlobe標準画像撮影日"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10975,13 +10980,17 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Sign up at {signupUrl}"
-            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack",
+                "description": "Sign up at {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "Talk-nz Mailing List",
+                "description": "New Zealand's OSM community talk"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentina Facebook",
@@ -11150,6 +11159,19 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
+            },
+            "uy-forum": {
+                "name": "OpenStreetMap UY forum",
+                "description": "OpenStreetMap Uruguay web forum"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Uruguay on IRC",
+                "description": "Join #osmuruguay on irc.freenode.org (port 6667)",
+                "extendedDescription": "Join #osmuruguay on irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "Talk-uy Mailing List",
+                "description": "Talk-uy is the official mailing list for the Uruguayan OSM community"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam Facebook",

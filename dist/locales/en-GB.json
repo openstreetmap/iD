@@ -3412,9 +3412,6 @@
                 "building/warehouse": {
                     "name": "Warehouse"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Camp Pitch"
-                },
                 "club": {
                     "name": "Club"
                 },
@@ -5379,32 +5376,6 @@
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "name": "DigitalGlobe Premium Imagery"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Premium Imagery Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "name": "DigitalGlobe Standard Imagery"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Standard Imagery Vintage"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Terms & Feedback"
@@ -5635,10 +5606,6 @@
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack",
                 "description": "All are welcome! Sign up at {signupUrl}"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Sign up at {signupUrl}"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",

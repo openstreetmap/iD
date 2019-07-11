@@ -258,7 +258,7 @@
             },
             "disconnect": {
                 "title": "Rozłącz",
-                "description": "Rozłącz te dwie drogi.",
+                "description": "Rozłącz te dwa obiekty.",
                 "line": {
                     "description": "Odłącz tę linię od innych obiektów."
                 },
@@ -1374,7 +1374,7 @@
                 "navigation_h": "Nawigacja",
                 "navigation_drag": "Możesz przeciągnąć mapę, naciskając i przytrzymując {leftclick} lewy przycisk myszy i poruszając myszą. Możesz także użyć klawiszy strzałek `↓ ',` ↑ `,` ← `,` → `na klawiaturze.",
                 "navigation_zoom": "Możesz powiększać i pomniejszać obraz, przewijając kółkiem myszy lub trackpadem, albo klikając przyciski {plus} / {minus} wzdłuż boku mapy. Możesz także użyć klawiszy `+`, `-` na klawiaturze.",
-                "features_h": "Właściwości mapy",
+                "features_h": "Obiekty na mapie",
                 "features": "Używamy określenia *obiekty*, aby opisać rzeczy pojawiające się na mapie, jak drogi, budynki, użyteczne miejsca. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w postaci obiektu w OpenStreetMap. Obiekty te są prezentowane na mapie za pomocą *punktów*, *linii* i *obszarów*.",
                 "nodes_ways": "W OpenStreetMap punkty (ang. points) czasem nazywane są *węzłami* (ang. nodes), zaś linie oraz obszary są czasami nazywane *drogami* (ang. ways)."
             },
@@ -1415,7 +1415,7 @@
             },
             "points": {
                 "title": "Punkty",
-                "intro": "*Punkty* mogą być używane, aby przedstawić miejsca takie, jak sklepy, restauracje i pomniki. Oznaczają one konkretne miejsce i opisują, co tam jest.",
+                "intro": "*Punkty* mogą być używane, aby przedstawić obiekty takie, jak sklepy, restauracje i pomniki. Oznaczają one konkretne miejsce i opisują, co tam jest.",
                 "add_point_h": "Dodawanie punktów",
                 "add_point": "Aby dodać punkt, kliknij przycisk {point} **Punkt** na pasku powyżej mapy lub użyj skrótu klawiszowego '1'. Kursor zmieni swój kształt na krzyżyk.",
                 "add_point_finish": "Aby umieścić nowy punkt na mapie, ustaw kursor tam, gdzie powinien on się znaleźć i kliknij {leftclick} lewy przycisk myszy lub naciśnij `spację`.",
@@ -1475,7 +1475,7 @@
                 "edit_relation_add": "Aby dodać obiekt do relacji, zaznacz go, a następnie kliknij przycisk {plus} dodaj w sekcji \"Wszystkie relacje\" w edytorze obiektu. Możesz wybrać z listy jedną z pobliskich relacji lub opcję \"Nowa relacja...\".",
                 "edit_relation_delete": "Możesz także kliknąć przycisk {delete} **Usuń**, aby usunąć wybrany obiekt z relacji. Jeżeli usuniesz wszystkie człony danej relacji, zostanie ona automatycznie usunięta.",
                 "maintain_relation_h": "Utrzymywanie relacji",
-                "maintain_relation": "Na ogół iD automatycznie zachowuje przy edycjach. Zachowaj ostrożność, kiedy zamieniasz elementy mogące być członami relacji. Na przykład, jeśli usuniesz fragment drogi i narysujesz nowy, by go zastąpić, musisz dodać ten nowy odcinek do tych samych relacji (trasy, ograniczenia skrętów, itp.), do których należał stary.",
+                "maintain_relation": "Na ogół iD automatycznie zachowa relacje podczas edycji. Zachowaj ostrożność, kiedy zamieniasz obiekty mogące być członami relacji. Na przykład, jeśli usuniesz fragment drogi i narysujesz nowy, by go zastąpić, musisz dodać ten nowy odcinek do tych samych relacji (trasy, ograniczenia skrętów, itp.), do których należał stary.",
                 "relation_types_h": "Rodzaje relacji",
                 "multipolygon_h": "Wielokąty",
                 "multipolygon": "Relacja *wielokąta złożonego* jest grupą składającą się z jednego lub więcej *zewnętrznych* obiektów i jednego lub więcej wewnętrznych. Zewnętrzne obiekty definiują zewnętrzne krawędzie wielokąta, a wewnętrzne obiekty opisują podobszary lub wycięcia wewnątrz niego.",
@@ -2268,7 +2268,7 @@
                     "select_one": "Wybierz jeden obiekt",
                     "select_multi": "Wybierz wiele obiektów",
                     "lasso": "Wybierz obiekty lassem",
-                    "search": "Znajdź funkcje pasujące do wyszukanego tekstu"
+                    "search": "Znajdź obiekty pasujące do wyszukanego tekstu"
                 },
                 "with_selected": {
                     "title": "Z wybranym obiektem",
@@ -3499,6 +3499,9 @@
                 "operator": {
                     "label": "Operator"
                 },
+                "operator/type": {
+                    "label": "Operator (rodzaj)"
+                },
                 "outdoor_seating": {
                     "label": "Ogródek restauracyjny"
                 },
@@ -3657,6 +3660,9 @@
                 },
                 "playground/min_age": {
                     "label": "Minimalny wiek dziecka"
+                },
+                "polling_station": {
+                    "label": "Lokal wyborczy"
                 },
                 "population": {
                     "label": "Liczba ludności"
@@ -4724,11 +4730,15 @@
                 },
                 "amenity/ice_cream": {
                     "name": "Lodziarnia",
-                    "terms": "sklep z lodami, lody"
+                    "terms": "lodziarnia, sklep z lodami, lody, gofry, sorbety, mrożone jogurty"
                 },
                 "amenity/internet_cafe": {
                     "name": "Kafejka internetowa",
                     "terms": "Internet"
+                },
+                "amenity/karaoke": {
+                    "name": "Budka karaoke",
+                    "terms": "budka karaoke, pokój karaoke, klub karaoke"
                 },
                 "amenity/kindergarten": {
                     "name": "Teren przedszkola/żłobka",
@@ -4869,13 +4879,17 @@
                     "name": "Policja/straż miejsca lub gminna",
                     "terms": "odznaka,niebiescy,gliniarz,detektyw,glina,żandarm,prawo,egzekucja prawa,funkcjonariusze,policja,straż miejska,straż gminna"
                 },
+                "amenity/polling_station": {
+                    "name": "Stały lokal wyborczy",
+                    "terms": "stały lokal wyborczy, wybory, głosowanie"
+                },
                 "amenity/post_box": {
                     "name": "Skrzynka pocztowa",
                     "terms": "skrzynka,pocztowa,listy"
                 },
                 "amenity/post_office": {
                     "name": "Poczta/agencja pocztowa",
-                    "terms": "poczta,urząd pocztowy,agencja pocztowa"
+                    "terms": "poczta, urząd pocztowy, agencja pocztowa, listy, paczki, przesyłki, kurier, poczta polska, dpd, dhl, inpost"
                 },
                 "amenity/prep_school": {
                     "name": "Szkolenia / korepetycje",
@@ -5634,10 +5648,6 @@
                 "building_point": {
                     "name": "Budynek"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Indywidualne miejsce na kempingu",
-                    "terms": "miejsce na namiot,miejsce na kampera"
-                },
                 "club": {
                     "name": "Klub",
                     "terms": "klub"
@@ -5716,7 +5726,7 @@
                 },
                 "craft/electronics_repair": {
                     "name": "Punkt napraw sprzętu elektronicznego",
-                    "terms": "naprawa RTV, naprawa elektroniki, naprawa telewizorów, serwis, sprzęt RTV, rzemiosło, rzemieślnik, rzemieślnicy"
+                    "terms": "naprawa RTV, naprawa elektroniki, naprawa telewizorów, serwis, serwis RTV, sprzęt RTV, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/floorer": {
                     "name": "Kładzenie posadzek",
@@ -5822,6 +5832,10 @@
                 "craft/shoemaker": {
                     "name": "Szewc",
                     "terms": "szewc, buty, rzemiosło, rzemieślnik, rzemieślnicy"
+                },
+                "craft/signmaker": {
+                    "name": "Producent znaków/szyldów",
+                    "terms": "producent znaków, producent szyldów, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/stonemason": {
                     "name": "Zakład kamieniarski",
@@ -5934,6 +5948,9 @@
                     "name": "Bród",
                     "terms": "bród"
                 },
+                "ford_line": {
+                    "name": "Bród"
+                },
                 "golf/bunker": {
                     "name": "Bunkier",
                     "terms": "sand trap"
@@ -6001,6 +6018,10 @@
                 "healthcare/blood_donation": {
                     "name": "Centrum krwiodawstwa",
                     "terms": "dawstwo krwi, krwiodawstwo"
+                },
+                "healthcare/counselling": {
+                    "name": "Poradnia",
+                    "terms": "poradnia"
                 },
                 "healthcare/hospice": {
                     "name": "Hospicjum",
@@ -6452,7 +6473,7 @@
                 },
                 "landuse/brownfield": {
                     "name": "Teren poprzemysłowy/powyburzeniowy",
-                    "terms": "teren poprzemysłowy, teren powyburzeniowy, wyburzenie"
+                    "terms": "teren poprzemysłowy, teren powyburzeniowy, wyburzenie, teren pod budowę, budowa"
                 },
                 "landuse/cemetery": {
                     "name": "Cmentarz",
@@ -6495,7 +6516,7 @@
                 },
                 "landuse/greenfield": {
                     "name": "Teren niezabudowany",
-                    "terms": "teren niezabudowany"
+                    "terms": "teren niezabudowany, teren pod budowę, budowa"
                 },
                 "landuse/greenhouse_horticulture": {
                     "name": "Teren zajęty przez szklarnie/tunele",
@@ -7109,6 +7130,10 @@
                     "name": "Punkt geodezyjny",
                     "terms": "punkt geodezyjny"
                 },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "torii, brama, świątynia, shinto"
+                },
                 "man_made/tower": {
                     "name": "Wieża",
                     "terms": "wieża"
@@ -7350,7 +7375,7 @@
                 },
                 "natural/wetland": {
                     "name": "Bagno",
-                    "terms": "bagno, bagna, mokradło, mokradła, szuwary, trzcinowisko, podmokłe łąki, namorzyny, torfowisko"
+                    "terms": "bagno, bagna, mokradło, mokradła, moczary, szuwary, grzęzawisko, trzęsawisko, trzcinowisko, podmokłe łąki, podmokły teren, namorzyny, torfowisko"
                 },
                 "natural/wood": {
                     "name": "Drzewa",
@@ -7704,6 +7729,10 @@
                 "point": {
                     "name": "Punkt",
                     "terms": "węzeł"
+                },
+                "polling_station": {
+                    "name": "Tymczasowy lokal wyborczy",
+                    "terms": "tymczasowy lokal wyborczy, wybory, głosowanie"
                 },
                 "power": {
                     "name": "Energetyka"
@@ -8288,6 +8317,10 @@
                 "shop/fashion": {
                     "name": "Sklep odzieżowy"
                 },
+                "shop/fashion_accessories": {
+                    "name": "Sklep z galanterią",
+                    "terms": "Sklep z galanterią, galanteria, akcesoria modowe, dodatki do ubrania, dodatki do odzieży, paski, kapelusze, czapki, torebki, rękawiczki, szaliki, szale, chusty, parasole, portfele, biżuteria"
+                },
                 "shop/fireplace": {
                     "name": "Sklep z kominkami",
                     "terms": "kominek, kominki"
@@ -8352,7 +8385,7 @@
                 },
                 "shop/hairdresser": {
                     "name": "Fryzjer",
-                    "terms": "fryzjer"
+                    "terms": "fryzjer, fryzjernia, salon fryzjerski, zakład fryzjerski"
                 },
                 "shop/hairdresser_supply": {
                     "name": "Sklep z artykułami fryzjerskimi",
@@ -8411,8 +8444,8 @@
                     "terms": "pralnia samoobsługowa"
                 },
                 "shop/leather": {
-                    "name": "Sklep skórzany",
-                    "terms": "galanteria skórzna"
+                    "name": "Sklep z odzieżą skórzaną",
+                    "terms": "sklep z odzieżą skórzaną, sklep z galanterią skorzaną, odzież skórzana, galanteria skórzana, kurtki skórzane, paski"
                 },
                 "shop/lighting": {
                     "name": "Sklep z oświetleniem",
@@ -8436,7 +8469,7 @@
                 },
                 "shop/medical_supply": {
                     "name": "Sklep ze sprzętem medycznym",
-                    "terms": "galanteria skórzana"
+                    "terms": "sklep ze sprzętem medycznym, sklep medyczny, sprzęt medyczny, akcesoria medyczne, artykuły medyczne, sprzęt rehabilitacyjny, sprzęt ortopedyczny, wózki inwalidzkie, chodziki, kule, protezy, ortezy, ciśnieniomierze, glukometry"
                 },
                 "shop/military_surplus": {
                     "name": "Sklep ze sprzętem wojskowym",
@@ -9122,34 +9155,6 @@
                 "description": "Zdjęcia satelitarne i lotnicze Bing.",
                 "name": "Zdjęcia lotnicze Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Warunki użytkowania i opinia"
-                },
-                "description": "DigitalGlobe-Premium to mozaika stworzona z podstawowych map DigitalGlobe z wybranymi obszarami uzupełnionymi o +Vivid lub innymi obrazami innych obszarów, rozdzielczość 50 cm lub wyższa, odświeżana częściej wraz z bieżącymi aktualizacjami.",
-                "name": "DigitalGlobe Premium (satelitarne)"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Warunki użytkowania i opinia"
-                },
-                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 13 i wyższym.",
-                "name": "Datowanie zdjęć DigitalGlobe Premium "
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Warunki użytkowania i opinia"
-                },
-                "description": "DigitalGlobe-Standard to wyselekcjonowane obrazy pokrywające 86% lądu na Ziemi, czasem nawet o rozdzielczości 30-60 cm na piksel, uzupełnione obrazami z Landsat. Średni wiek zdjeć to 2,31 roku, a niektóre obszary są uaktualniane dwa razy w roku.",
-                "name": "DigitalGlobe Standard (satelitarne)"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Warunki użytkowania i opinia"
-                },
-                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 13 i wyższym.",
-                "name": "Datowanie zdjęć DigitalGlobe Standard"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 bezchmurne – https://s2maps.eu, EOX IT Services GmbH (zawiera zmodyfikowane dane Copernicus Sentinel 2017 i 2018)"
@@ -9593,6 +9598,9 @@
                 "name": "Mapowanie Botswany na Twitterze",
                 "description": "OpenStreetMap Botswana na Twitterze"
             },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
+            },
             "cape-coast-youthmappers": {
                 "name": "YouthMappers z Uniwersytetu w Cape Coast",
                 "description": "Obserwuj nas na Twitterze: {url}",
@@ -9611,8 +9619,32 @@
                 "name": "Lista dyskusyjna Talk-gh",
                 "description": "Talk-gh to oficjalna lista dyskusyjna ghańskiej społeczności OSM"
             },
+            "ym-University-of-Cape-Coast": {
+                "name": "Towarzystwo Geograficzne UCC"
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club"
+            },
+            "ym-University-of-Ghana": {
+                "name": "YouthMappers z Uniwersytetu w Ghanie"
+            },
+            "ym-University-of-Mines-and-Technology": {
+                "name": "YouthMappers UMaT"
+            },
+            "ym-Institute-of-Science-and-Veterinary-Medicine": {
+                "name": "YouthMappers ISSMV Dalaba"
+            },
+            "ym-Universit-de-NZrkor": {
+                "name": "Youthmappers z N'Zérékoré"
+            },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV"
+            },
+            "ym-African-Methodist-Episcopal-University": {
+                "name": "YouthMappers-AMEU"
+            },
+            "ym-Stella-Maris-Polytechnic": {
+                "name": "YouthMappers-SMP"
             },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagaskar na Facebooku",
@@ -9621,6 +9653,36 @@
             "talk-mg": {
                 "name": "Lista dyskusyjna Talk-mg",
                 "description": "Miejsce rozmów twórców, społeczności i użytkowników OpenStreetMap na Madagaskarze."
+            },
+            "ym-Ignatius-Ajuru-University-of-Education": {
+                "name": "IgnatiusMappersTeam (IMT)"
+            },
+            "ym-University-of-Nigeria-Nsukka": {
+                "name": "LionMappersTeam (LMT) Nsukka"
+            },
+            "ym-University-of-Port-Harcourt": {
+                "name": "UniqueMappersTeam (UMT) Port Harcourt"
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu"
+            },
+            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
+                "name": "YouthMappers z INES Ruhengeri"
+            },
+            "ym-University-of-Rwanda-Huye-Campus": {
+                "name": "Rwanda YouthMappers"
+            },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "Njala Freetown YouthMappers"
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers Njala University, Njala Campus"
+            },
+            "ym-Sokoine-University-of-Agriculture": {
+                "name": "SMCoSE YouthMappers"
+            },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers na Uniwersytecie Dar es Salaam"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesz",
@@ -10322,10 +10384,6 @@
             },
             "ym-UW-Madison": {
                 "name": "BadgerMaps"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia na Slacku",
-                "description": "Zarejestruj się tutaj {signupUrl}"
             },
             "talk-au": {
                 "name": "Lista dyskusyjna Talk-au",

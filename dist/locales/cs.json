@@ -7,39 +7,62 @@
             "undo": "Zpět",
             "zoom_to": "přiblížit",
             "copy": "kopírovat",
-            "open_wikidata": "otevřít na wikidata.org"
+            "open_wikidata": "otevřít na wikidata.org",
+            "favorite": "oblíbené"
         },
         "toolbar": {
             "inspect": "Prozkoumat",
-            "undo_redo": "Zpět - Vpřed",
+            "undo_redo": "Zpět/vpřed",
+            "recent": "Nedávné",
             "favorites": "Oblíbené",
-            "add_feature": "Přidat objekt"
+            "add_feature": "Přidat prvek"
         },
         "modes": {
             "add_feature": {
+                "title": "Přidat prvek",
+                "description": "Vyhledat prvky pro přidání do mapy.",
                 "result": "{count} výsledek",
                 "results": "{count} výsledků"
             },
             "add_area": {
                 "title": "Plocha",
                 "description": "Přidat do mapy parky, budovy, jezera či jiné plochy.",
-                "tail": "Klikněte na mapu a začněte tak kreslit plochu, jako třeba park, jezero nebo budovu."
+                "tail": "Klikněte na mapu a začněte tak kreslit plochu, jako třeba park, jezero nebo budovu.",
+                "filter_tooltip": "plochy"
             },
             "add_line": {
                 "title": "Linie",
                 "description": "Přidat do mapy silnice, ulice, stezky, potoky či jiné linie.",
-                "tail": "Klikněte na mapu a začněte tak kreslit silnice, stezky nebo trasy."
+                "tail": "Klikněte na mapu a začněte tak kreslit silnice, stezky nebo trasy.",
+                "filter_tooltip": "linie"
             },
             "add_point": {
                 "title": "Bod",
                 "description": "Přidat do mapy restaurace, poštovní schránky, zastávky či jiné body.",
-                "tail": "Klikněte na mapu a přidejte tak bod."
+                "tail": "Klikněte na mapu a přidejte tak bod.",
+                "filter_tooltip": "body"
             },
             "add_note": {
                 "title": "Poznámka",
                 "label": "Přidat poznámku",
                 "description": "Zjistili jste problém? Dejte vědět ostatním mapovačům.",
-                "tail": "Klikněte do mapy pro přidání poznámky."
+                "tail": "Klikněte do mapy pro přidání poznámky.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Přidat {feature}",
+                "point": {
+                    "title": "Přidat {feature} jako bod"
+                },
+                "line": {
+                    "title": "přidat {feature} jako linii"
+                },
+                "area": {
+                    "title": "Přidat {feature} jako plochu"
+                },
+                "building": {
+                    "title": "Přidat {feature} jako budovu"
+                }
             },
             "browse": {
                 "title": "Procházet",
@@ -98,30 +121,45 @@
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Zakulacena linie.",
-                    "area": "Zakulacena plocha."
+                    "line": "Zakulatit linii.",
+                    "area": "Zakulatit plochu."
                 },
-                "not_closed": "Nelze udělat kruh, neboť nejde o smyčku.",
-                "too_large": "Nelze udělat kruh, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Nelze udělat kruh, protože je napojen na skrytý prvek."
+                "not_closed": "Nelze zakulatit, neboť nejde o smyčku.",
+                "too_large": "Nelze zakulatit, protože není vidět dostatečně velká část.",
+                "connected_to_hidden": "Nelze zakulatit, protože je napojen na skrytý prvek.",
+                "not_downloaded": "Nelze zakulatit, neboť části tohoto objektu nebyly dosud stažené."
             },
             "orthogonalize": {
-                "title": "Zhranatit",
+                "title": "Zpravoúhlit",
                 "description": {
+                    "vertex": "Zpravoúhlit tento roh.",
                     "line": "Udělat rohy této linie do hranata.",
                     "area": "Udělat rohy této plochy do hranata."
                 },
+                "key": "Q",
                 "annotation": {
-                    "line": "Úhly linie do pravého úhle.",
-                    "area": "Rohy plochy do pravého úhle."
+                    "vertex": "Zpravoúhlen jeden roh.",
+                    "line": "Zpravoúhlit rohy linie.",
+                    "area": "Zpravoúhlit rohy plochy."
                 },
-                "not_squarish": "Nelze zhranatit, protože se čtverci vůbec nepodobá.",
-                "too_large": "Nelze zhranatit, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Nelze zhranatit, protože je napojen na skrytý prvek."
+                "end_vertex": "Nelze zpravoúhlit, jedná se o koncový bod.",
+                "square_enough": "Nelze zpravoúhlit více, než je.",
+                "not_squarish": "Nelze zpravoúhlit, protože se čtyřhranu vůbec nepodobá.",
+                "too_large": "Nelze zpravoúhlit, protože není vidět dostatečně velká část.",
+                "connected_to_hidden": "Nelze zpravoúhlit, protože je napojen na skrytý prvek.",
+                "not_downloaded": "Nelze zpravoúhlit, neboť části tohoto objektu nebyly dosud stažené."
             },
             "straighten": {
                 "title": "Narovnat",
+                "description": {
+                    "points": "Narovnat tyto body.",
+                    "line": "Narovnat tuto linii."
+                },
                 "key": "S",
+                "annotation": {
+                    "points": "Narovnáno několik bodů.",
+                    "line": "Narovnána linie."
+                },
                 "too_bendy": "Nelze narovnat, protože je příliš zakroucený."
             },
             "delete": {
@@ -155,6 +193,9 @@
                     "multiple": "Nelze smazat, protože jsou napojené na skryté prvky."
                 }
             },
+            "downgrade": {
+                "title": "Degradovat"
+            },
             "add_member": {
                 "annotation": "Přidán člen do relace."
             },
@@ -184,8 +225,17 @@
             "disconnect": {
                 "title": "Rozpojit",
                 "description": "Rozpojit tyto linie/plochy.",
+                "line": {
+                    "description": "Odpojit tuto linii od ostatních prvků."
+                },
+                "area": {
+                    "description": "Odpojit tuto plochu od ostatních prvků."
+                },
                 "key": "D",
                 "annotation": "Linie/plochy byly rozpojeny.",
+                "too_large": {
+                    "single": "Nelze odpojit, neboť není vidět dostatečná část."
+                },
                 "not_connected": "Není tu žádná linie/plocha, kterou by bylo možné rozpojit.",
                 "connected_to_hidden": "Toto nelze rozpojit, protože je to napojeno na skrytý prvek.",
                 "relation": "Toto nelze rozpojit, protože to spojuje členy relace."
@@ -298,7 +348,7 @@
                 }
             },
             "reverse": {
-                "title": "Převrátit",
+                "title": "Obrátit",
                 "description": "Změnit směr linie na opačný.",
                 "key": "V",
                 "annotation": "Linie byla převrácena."
@@ -372,7 +422,7 @@
             "nothing": "Není co znovu provádět."
         },
         "tooltip_keyhint": "Zkratka:",
-        "browser_notice": "Tento editor funguje ve Firefoxu, Chrome, Safari, Opeře a Internet Exploreru 11 a výše. Prosím buď aktualizujte svůj browser nebo použijte Potlach 2 či JOSM.",
+        "browser_notice": "Tento editor funguje ve Firefoxu, Chrome, Safari, Opeře a Internet Exploreru 11 a výše. Prosím, buď aktualizujte svůj prohlížeč, nebo použijte Potlatch 2 či JOSM.",
         "translate": {
             "translate": "Přeložit",
             "localized_translation_label": "Vícejazyčný název",
@@ -413,9 +463,10 @@
             "modified": "Upraveno",
             "deleted": "Smazáno",
             "created": "Vytvořeno",
+            "outstanding_errors_message": "Prosím, vyřešte nejdříve všechny chuby. Zbývá jich {count}.",
             "about_changeset_comments": "Více o komentářích ke změnám (anglicky)",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "V komentáře jste zmínil/a Google. Důrazně upozorňujeme, že kopírování z map Googlu je zakázáno.",
+            "google_warning": "V komentáři jste zmínili Google. Důrazně upozorňujeme, že kopírování z map Googlu je zakázáno (a navíc jsou zastaralé).",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
@@ -489,6 +540,7 @@
         },
         "geocoder": {
             "search": "Hledat celosvětově…",
+            "no_results_visible": "Žádný výsledek v rámci viditelné části mapy",
             "no_results_worldwide": "Nic nenalezeno"
         },
         "geolocate": {
@@ -549,7 +601,7 @@
             "location": "Poloha",
             "add_fields": "Přidat vlastnost:",
             "lock": {
-                "suggestion": "Pole \"{label}\" je uzamčeno protože je načteno z vlastnosti Wikidata. Smazat či upravit ho můžete v sekci Všechny vlastnosti."
+                "suggestion": "Pole \"{label}\" je uzamčeno, protože je načteno z vlastnosti Wikidata. Smazat či upravit ho můžete v sekci Všechny vlastnosti."
             }
         },
         "background": {
@@ -611,6 +663,7 @@
             "osmhidden": "Tyto prvky byly automaticky skryté, protože je skrytá vrstva OpenStreetMap."
         },
         "photo_overlays": {
+            "title": "Fotografické překryvy",
             "traffic_signs": {
                 "title": "Dopravní značky"
             },
@@ -647,7 +700,12 @@
                 "tooltip": "Domy, chaty, garáže atd."
             },
             "building_parts": {
-                "description": "Části budovy"
+                "description": "Části budovy",
+                "tooltip": "3D budova a části střechy"
+            },
+            "indoor": {
+                "description": "Vnitřní prvky",
+                "tooltip": "Pokoje, chodby, schodiště,…"
             },
             "landuse": {
                 "description": "Využití krajiny",
@@ -670,9 +728,11 @@
                 "tooltip": "Elektrická vedení, elektrárny, transformátory atd."
             },
             "past_future": {
+                "description": "Prvky minulé/budoucí",
                 "tooltip": "Objekty v návrhu, výstavbě, opuštěné, stržené objekty atd."
             },
             "others": {
+                "description": "Ostatní prvky",
                 "tooltip": "Všechno ostatní"
             }
         },
@@ -714,6 +774,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "Máte neuložené změny",
+            "description": "Přejete si obnovit neuložené změny z předchozí editace?",
+            "restore": "Obnovit mé změny",
+            "reset": "Zahodit mé změny"
+        },
         "save": {
             "title": "Uložit",
             "help": "Zkontrolujte vaše změny a nahrajte je na OpenStreetMap, kde budou viditelné pro ostatní uživatele.",
@@ -729,7 +795,7 @@
                 "count": "Konflikt č. {num} z {total}",
                 "previous": "< Předchozí",
                 "next": "Další >",
-                "keep_local": "Nechat moji",
+                "keep_local": "Nechat mou",
                 "keep_remote": "Použít cizí",
                 "restore": "Obnovit",
                 "delete": "Nechat smazané",
@@ -742,16 +808,23 @@
             "conflict": {
                 "deleted": "Tento prvek byl smazán uživatelem {user}.",
                 "location": "Tato funkce byla přesunuta vámi i {user}",
-                "nodelist": "Body upravil uživatel {user} i vy.",
+                "nodelist": "Body jste upravili spolu s uživatelem {user}.",
                 "memberlist": "Členy relace upravil uživatel {user} i vy.",
                 "tags": "Nastavil/a jste vlastnost <b>{tag}</b> na \"{local}\", zatímco uživatel {user} ji změnil na \"{remote}\"."
             }
         },
         "success": {
-            "help_link_text": "Více",
+            "just_edited": "Právě jste upravili OpenStreetMap!",
+            "thank_you": "Děkujeme za vylepšení mapy.",
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": ", "
+            },
+            "help_html": "Vaše změny by se měly zobrazit na standardní mapě OpenStreetMap během pár minut.  Na ostatních mapách to může trvat déle.",
+            "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Cs:FAQ#Zrovna_jsem_ud.C4.9Blal_n.C4.9Bjak.C3.A9_zm.C4.9Bny_v_map.C4.9B._Jak_uvid.C3.ADm_sv.C3.A9_zm.C4.9Bny.3F",
             "view_on_osm": "Zobrazit změny na OSM",
-            "changeset_id": "Vaše sada změn #: {changeset_id}",
+            "changeset_id": "Vaše sada změn: #{changeset_id}",
             "like_osm": "Líbí se Vám OpenStreetMap? Spojte se s ostatními:",
             "more": "Více",
             "events": "Události",
@@ -760,8 +833,12 @@
             "tell_us": "Řekněte nám o tom!"
         },
         "confirm": {
-            "okay": "OK",
+            "okay": "Vskutku",
             "cancel": "Storno"
+        },
+        "splash": {
+            "welcome": "Vítejte v OpenStreetMap editoru iD",
+            "start": "Upravit nyní"
         },
         "source_switch": {
             "live": "live",
@@ -784,11 +861,29 @@
         "full_screen": "Na celou obrazovku",
         "QA": {
             "improveOSM": {
+                "title": "Detekce ImproveOSM",
                 "geometry_types": {
-                    "parking": "parkoviště"
+                    "path": "cesty",
+                    "parking": "parkoviště",
+                    "road": "silnice",
+                    "both": "silnice a parkoviště"
+                },
+                "directions": {
+                    "east": "východ",
+                    "north": "sever",
+                    "northeast": "severovýchod",
+                    "northwest": "severozápad",
+                    "south": "jih",
+                    "southeast": "jihovýchod",
+                    "southwest": "jihozápad",
+                    "west": "západ"
                 },
                 "error_types": {
+                    "ow": {
+                        "title": "Chybějící jednosměrka"
+                    },
                     "mr": {
+                        "title": "Chybějící geometrie",
                         "description_alt": "Data 3.strany naznačují, že by zde mohlo být nezmapováno {geometry_type}."
                     },
                     "tr": {
@@ -799,7 +894,7 @@
             },
             "keepRight": {
                 "title": "Problém KeepRight",
-                "detail_title": "Problém",
+                "detail_title": "Chyba",
                 "detail_description": "Popis",
                 "comment": "Komentář",
                 "comment_placeholder": "Vložte komentář, který bude sdílen s dalšími uživateli.",
@@ -851,7 +946,9 @@
                     "fast_food": "rychlé občerstvení",
                     "fuel": "palivo",
                     "from": "od",
-                    "to": "do"
+                    "to": "do",
+                    "left_hand": "vlevo",
+                    "right_hand": "vpravo"
                 },
                 "errorTypes": {
                     "20": {
@@ -859,7 +956,7 @@
                         "description": "Na jednom místě je umístěno více bodů. Čísla bodů: {var1}."
                     },
                     "30": {
-                        "title": "Neuzavřená oblast",
+                        "title": "Neuzavřená plocha",
                         "description": "{var1} je označená \"{var2}\" a navíc by měla být uzavřenou smyčkou."
                     },
                     "40": {
@@ -1112,6 +1209,7 @@
         },
         "streetside": {
             "tooltip": "Fotografie z úrovně ulice od Microsoftu",
+            "title": "Bing Streetside",
             "report": "Oznamte problém se soukromím na této fotografii",
             "view_on_bing": "Zobrazit na Bing mapách",
             "hires": "Vysoké rozlišení"
@@ -1120,6 +1218,10 @@
             "tooltip": "Fotografie z úrovně ulice z Mapillary"
         },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Dopravní značení z Mapillary"
+            },
             "view_on_mapillary": "Zobrazit tento obrázek na Mapillary"
         },
         "openstreetcam_images": {
@@ -1256,6 +1358,11 @@
                 "add_note_h": "Přidávání poznámek",
                 "save_note_h": "Ukládání poznámek"
             },
+            "imagery": {
+                "title": "Snímky pozadí",
+                "sources_h": "Zdroje snímků",
+                "offsets_h": "Nastavení posuvu snímků"
+            },
             "streetlevel": {
                 "title": "Pouliční fotky",
                 "using_h": "Používání pouličních fotek"
@@ -1265,10 +1372,16 @@
                 "intro": "Shromážděné stopy GPS jsou cenným zdrojem dat pro OpenStreetMap. Tento editor podporuje soubory * .gpx *, * .geojson * a * .kml * v místním počítači. Sledování GPS můžete shromáždit pomocí smartphonu, sportovních hodinek nebo jiného zařízení GPS.",
                 "using_h": "Používání GPS stop"
             },
+            "qa": {
+                "tools_h": "Nástroje"
+            },
             "field": {
                 "restrictions": {
                     "about": {
                         "title": "O"
+                    },
+                    "modifying": {
+                        "title": "Úpravy"
                     },
                     "tips": {
                         "title": "Tipy"
@@ -1280,6 +1393,101 @@
             "title": "Chyby",
             "key": "I",
             "list_title": "Počet chyb: ({count})",
+            "errors": {
+                "list_title": "Chyby ({count})"
+            },
+            "warnings": {
+                "list_title": "Varování ({count})"
+            },
+            "rules": {
+                "title": "Pravidla"
+            },
+            "no_issues": {
+                "message": {
+                    "everything": "Všechno vypadá skvěle",
+                    "everything_in_view": "Všechno na této části mapy vypadá skvěle",
+                    "edits": "Vaše úpravy zdají se být skvělými",
+                    "edits_in_view": "Vaše úpravy na této části mapy zdají se být skvělými"
+                },
+                "hidden_issues": {
+                    "none": "Zjištěné problémy se objeví zde",
+                    "elsewhere": "Problémy kdekoliv: {count}",
+                    "other_features": "Problémy s ostatními prvky: {count}",
+                    "other_features_elsewhere": "Problémy kdekoliv s ostatními prvky: {count}",
+                    "disabled_rules": "Problémy se zakázanými pravidly: {count}",
+                    "disabled_rules_elsewhere": "Problémy kdekoliv se zakázanými pravidly: {count}",
+                    "ignored_issues": "Ignorované problémy: {count}",
+                    "ignored_issues_elsewhere": "Ignorované problémy kdekoliv: {count}"
+                }
+            },
+            "options": {
+                "what": {
+                    "edited": "Mé úpravy",
+                    "all": "Všechno"
+                },
+                "where": {
+                    "title": "Kde:",
+                    "visible": "Na této části mapy",
+                    "all": "Kdekoliv (kumulativně)"
+                }
+            },
+            "suggested": "Navržené aktualizace:",
+            "enable_all": "Povolit vše",
+            "disable_all": "Zakázat vše",
+            "reset_ignored": "Resetovat ignorované ({count})",
+            "fix_one": {
+                "title": "opravit"
+            },
+            "fix_all": {
+                "title": "Opravit vše"
+            },
+            "almost_junction": {
+                "title": "Skoro spojení"
+            },
+            "close_nodes": {
+                "title": "Body sobě velmi blízko"
+            },
+            "crossing_ways": {
+                "title": "Křížení linií",
+                "message": "{feature} kříží {feature2}"
+            },
+            "disconnected_way": {
+                "title": "Rozpojené linie"
+            },
+            "fixme_tag": {
+                "title": "Žádosti na opravu"
+            },
+            "invalid_format": {
+                "title": "Neplatné formátování",
+                "email": {
+                    "reference": "Emailové adresy musí vypadat jako \"uzivatel@server.tld\"."
+                },
+                "website": {
+                    "reference": "Adresy webových stránek by měly začínat s \"http\" nebo \"https\"."
+                }
+            },
+            "missing_role": {
+                "title": "Chybějící role"
+            },
+            "missing_tag": {
+                "title": "Chybějící vlastnosti",
+                "any": {
+                    "message": "{feature} nemá žádné vlastnosti"
+                }
+            },
+            "outdated_tags": {
+                "title": "Zastaralé vlastnosti",
+                "message": "{feature} má zastaralé vlastnosti",
+                "incomplete": {
+                    "message": "{feature} má nekompletní vlastnosti"
+                }
+            },
+            "private_data": {
+                "title": "Soukromá informace"
+            },
+            "tag_suggests_area": {
+                "title": "Linie označené jako plochy"
+            },
             "impossible_oneway": {
                 "title": "Nemožné jednosměrky"
             },
@@ -1296,6 +1504,12 @@
                 "remove_generic_name": {
                     "annotation": "Odstraněno obecné jméno."
                 },
+                "select_preset": {
+                    "title": "Zvolte druh prvku"
+                },
+                "select_road_type": {
+                    "title": "Zvolte druh silnice"
+                },
                 "set_as_inner": {
                     "title": "Nastavit jako vnitřní"
                 },
@@ -1303,7 +1517,7 @@
                     "title": "Nastavit jako vnější"
                 },
                 "square_feature": {
-                    "title": "Zhranatit prvek"
+                    "title": "Zpravoúhlit prvek"
                 },
                 "tag_as_disconnected": {
                     "title": "Označit jako odpojené"
@@ -1914,6 +2128,9 @@
                 "backrest": {
                     "label": "Opěradlo"
                 },
+                "bar": {
+                    "label": "Bar"
+                },
                 "barrier": {
                     "label": "Typ"
                 },
@@ -2158,7 +2375,10 @@
                     "label": "Označení"
                 },
                 "departures_board": {
+                    "label": "Tabule odjezdů",
                     "options": {
+                        "no": "Není známo",
+                        "timetable": "Jízdní řády",
                         "yes": "Ano"
                     }
                 },
@@ -2175,8 +2395,15 @@
                     "label": "Zařízení",
                     "placeholder": "1, 2, 3…"
                 },
+                "diameter": {
+                    "label": "Průměr",
+                    "placeholder": "5mm, 10cm, 15in…"
+                },
                 "diaper": {
                     "label": "Přizpůsobeno výměně plenek"
+                },
+                "diet_multi": {
+                    "label": "Typy diet"
                 },
                 "diplomatic": {
                     "label": "Druh"
@@ -2421,6 +2648,9 @@
                 "height_building": {
                     "label": "Výška budovy (metry)"
                 },
+                "highspeed": {
+                    "label": "Vysokorychlostní"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -2538,6 +2768,7 @@
                 "junction_line": {
                     "label": "Křižovatka",
                     "options": {
+                        "circular": "Kruhový objezd",
                         "roundabout": "Kruhový objezd"
                     }
                 },
@@ -2931,6 +3162,9 @@
                     "label": "Výkon",
                     "placeholder": "500MW, 1000MW, 2000MW…"
                 },
+                "playground": {
+                    "label": "Typ"
+                },
                 "playground/baby": {
                     "label": "Autosedačka"
                 },
@@ -3033,6 +3267,9 @@
                         "required": "Požadovány",
                         "yes": "Přijímány"
                     }
+                },
+                "resort": {
+                    "label": "Typ"
                 },
                 "restriction": {
                     "label": "Typ"
@@ -3284,6 +3521,9 @@
                         "minor": "Z vedlejších"
                     }
                 },
+                "street_cabinet": {
+                    "label": "Typ"
+                },
                 "structure": {
                     "label": "Struktura",
                     "options": {
@@ -3453,6 +3693,9 @@
                 "trees": {
                     "label": "Stromy"
                 },
+                "trench": {
+                    "label": "Typ"
+                },
                 "tunnel": {
                     "label": "Typ",
                     "placeholder": "Výchozí"
@@ -3467,6 +3710,9 @@
                         "test": "Test",
                         "tourism": "Turismus"
                     }
+                },
+                "valve": {
+                    "label": "Typ"
                 },
                 "vending": {
                     "label": "Druhy zboží"
@@ -4617,10 +4863,6 @@
                 "building_point": {
                     "name": "Budova"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Stanoviště v kempu",
-                    "terms": "stan,karavan,karavany"
-                },
                 "club": {
                     "name": "Klub",
                     "terms": "sociální"
@@ -5286,6 +5528,12 @@
                 "historic/wreck": {
                     "name": "Vrak lodi"
                 },
+                "indoor/room": {
+                    "name": "Pokoj"
+                },
+                "indoor/wall": {
+                    "name": "Vnitřní stěna"
+                },
                 "internet_access/wlan": {
                     "name": "Wi-Fi hotspot"
                 },
@@ -5666,6 +5914,9 @@
                 "man_made/antenna": {
                     "name": "Anténa"
                 },
+                "man_made/beacon": {
+                    "name": "Maják"
+                },
                 "man_made/breakwater": {
                     "name": "Vlnolam",
                     "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
@@ -5722,6 +5973,9 @@
                 },
                 "man_made/mast/communication/television": {
                     "name": "TV vysílací stožár"
+                },
+                "man_made/mineshaft": {
+                    "name": "Důlní šachta"
                 },
                 "man_made/monitoring_station": {
                     "name": "Monitorovací stanice"
@@ -5816,6 +6070,12 @@
                 "manhole/telecom": {
                     "name": "Telekomunikační šachta"
                 },
+                "military/bunker": {
+                    "name": "Vojenský bunkr"
+                },
+                "military/trench": {
+                    "name": "Vojenský zákop"
+                },
                 "natural": {
                     "name": "Přírodní objekt"
                 },
@@ -5830,6 +6090,9 @@
                 "natural/beach": {
                     "name": "Pláž",
                     "terms": "pláž"
+                },
+                "natural/cape": {
+                    "name": "Mys"
                 },
                 "natural/cave_entrance": {
                     "name": "Vstup do jeskyně",
@@ -5900,6 +6163,9 @@
                 "natural/tree_row": {
                     "name": "Stromořadí"
                 },
+                "natural/valley": {
+                    "name": "Údolí"
+                },
                 "natural/volcano": {
                     "name": "Sopka",
                     "terms": "sopka,vulkán,štítová sopka,stratovulkán"
@@ -5916,8 +6182,7 @@
                     "terms": "jezero,jezírko,pleso,oko,tůň"
                 },
                 "natural/water/pond": {
-                    "name": "Rybník",
-                    "terms": "rybník,rybníček,louže,tůň,hráz,přehrada"
+                    "name": "Rybník"
                 },
                 "natural/water/reservoir": {
                     "name": "Přehrada",
@@ -5972,6 +6237,12 @@
                 "office/coworking": {
                     "name": "Místo pro spolupráci",
                     "terms": "spolupráce,kancelář"
+                },
+                "office/diplomatic/consulate": {
+                    "name": "Konzulát"
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Ambasáda"
                 },
                 "office/educational_institution": {
                     "name": "Vzdělávací instituce",
@@ -6178,6 +6449,9 @@
                 "power/generator/method/photovoltaic": {
                     "name": "Solární kolektor"
                 },
+                "power/generator/source/hydro": {
+                    "name": "Vodní turbína"
+                },
                 "power/generator/source/nuclear": {
                     "name": "Jaderný reaktor"
                 },
@@ -6218,6 +6492,36 @@
                 "power/transformer": {
                     "name": "Transformátor",
                     "terms": "transformátor,transformátorová stanice,elektrická stanice,adaptér"
+                },
+                "public_transport/platform/bus": {
+                    "name": "Autobusové nástupiště"
+                },
+                "public_transport/platform/bus_point": {
+                    "name": "Autobusová zastávka"
+                },
+                "public_transport/platform/subway": {
+                    "name": "Nástupiště metra"
+                },
+                "public_transport/platform/subway_point": {
+                    "name": "Zastávka metra/nástupiště"
+                },
+                "public_transport/platform/train": {
+                    "name": "Vlakové nástupiště"
+                },
+                "public_transport/platform/train_point": {
+                    "name": "Vlaková zastávka/nástupiště"
+                },
+                "public_transport/platform/tram": {
+                    "name": "Tramvajové nástupiště"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Tramvajová zastávka/nástupiště"
+                },
+                "public_transport/platform/trolleybus": {
+                    "name": "Trolejbusové nástupiště"
+                },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Trolejbusová zastávka"
                 },
                 "public_transport/station": {
                     "name": "Stanice veřejné dopravy"
@@ -6295,6 +6599,9 @@
                 "railway/buffer_stop": {
                     "name": "Zarážedlo"
                 },
+                "railway/construction": {
+                    "name": "Železnice ve výstavbě"
+                },
                 "railway/crossing": {
                     "name": "Železniční přejezd (přes cestu)",
                     "terms": "přejezd,přechod,železnice,železniční přejezd,železniční přechod"
@@ -6334,9 +6641,15 @@
                     "name": "Úzkorozchodná dráha",
                     "terms": "úzkorozchodná dráha,úzkokolejná dráha,úzkokolejka"
                 },
+                "railway/platform": {
+                    "name": "Vlakové nástupiště"
+                },
                 "railway/rail": {
                     "name": "Kolej",
                     "terms": "koleje,železnice,vlak,trať"
+                },
+                "railway/rail/highspeed": {
+                    "name": "Vysokorychlostní železnice"
                 },
                 "railway/signal": {
                     "name": "Proměnné návěstidlo",
@@ -6475,6 +6788,9 @@
                     "name": "Obchod se svíčkami",
                     "terms": "svíčky,svíčka,svícen,svícny,lampa,lampy,lampičky"
                 },
+                "shop/cannabis": {
+                    "name": "Feťácká prodejna"
+                },
                 "shop/car": {
                     "name": "Prodejna aut",
                     "terms": "prodejna aut,autosalón,autobazar"
@@ -6600,6 +6916,9 @@
                     "name": "Rámařství",
                     "terms": "rámař,rámařství,rám,rámy,rámování,rámeček,rámečky"
                 },
+                "shop/frozen_food": {
+                    "name": "Mražená jídla"
+                },
                 "shop/fuel": {
                     "name": "Obchod s palivem"
                 },
@@ -6677,6 +6996,9 @@
                 "shop/laundry": {
                     "name": "Prádelna",
                     "terms": "prádelna,čistírna,prádlo"
+                },
+                "shop/laundry/self_service": {
+                    "name": "Samoobslužná prádelna"
                 },
                 "shop/leather": {
                     "name": "Kožené zboží",
@@ -6896,6 +7218,12 @@
                     "name": "Vinotéka",
                     "terms": "vinotéka,víno,vinárna,vinařství,vino"
                 },
+                "tactile_paving": {
+                    "name": "Taktilní dlažba"
+                },
+                "telecom/data_center": {
+                    "name": "Datové centrum"
+                },
                 "tourism": {
                     "name": "Turismus"
                 },
@@ -6914,6 +7242,15 @@
                 "tourism/artwork": {
                     "name": "Umělecké dílo",
                     "terms": "umělecké dílo,socha,sousoší,plastika,obraz,architektonické dílo,malba,freska,mozaika"
+                },
+                "tourism/artwork/bust": {
+                    "name": "Busta"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Umělecká instalace"
                 },
                 "tourism/artwork/mural": {
                     "name": "Nástěnná malba"
@@ -7259,34 +7596,6 @@
             "Bing": {
                 "description": "Satelitní a letecké snímky.",
                 "name": "Letecké snímky Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Podmínky použití & zpětná vazba"
-                },
-                "description": "DigitalGlobe-Premium je mozaika složená ze základní mapy DigitalGlobe s vybranými aktuálními oblastmi nebo vlastními oblastmi zájmových snímků o rozlišení 50 cm nebo vyšším a častěji obnovovanými s průběžnými aktualizacemi.",
-                "name": "Prémiové snímky DigitalGlobe"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Podmínky použití a zpětná vazba"
-                },
-                "description": "Hranice snímků and data pořízení. Popisky se objevují od zoomu 13 a více.",
-                "name": "Prémiové snímky DigitalGlobe Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Podmínky použití a zpětná vazba"
-                },
-                "description": "DigitalGlobe-Standard je soustředěná sada snímků pokrývající 86% zemské zemské půdy, s rozlišením 30-60 cm, jsou-li k dispozici, nasnímané družicí Landsat. Průměrné stáří je 2,31 roku, některé oblasti jsou aktualizovány 2x za rok.",
-                "name": "Standardní snímky DigitalGlobe"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Podmínky použití a zpětná vazba"
-                },
-                "description": "Hranice snímků and data pořízení. Popisky se objevují od zoomu 13 a více.",
-                "name": "Standardní snímky DigitalGlobe Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -7868,10 +8177,6 @@
             },
             "PHXGeo-twitter": {
                 "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Přihlaste se na {signupUrl}"
             },
             "OSM-AR-twitter": {
                 "description": "Sledujte nás na Twitteru na {url}"

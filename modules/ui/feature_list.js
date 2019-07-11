@@ -46,6 +46,7 @@ export function uiFeatureList(context) {
 
         search = searchWrap
             .append('input')
+            .attr('class', 'feature-search')
             .attr('placeholder', t('inspector.feature_list'))
             .attr('type', 'search')
             .call(utilNoAuto)

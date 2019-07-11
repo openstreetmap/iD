@@ -96,6 +96,10 @@ export function uiMapData(context) {
 
 
     function setLayer(which, enabled) {
+        // Don't allow layer changes while drawing - #6584
+        var mode = context.mode();
+        if (mode && /^draw/.test(mode.id)) return;
+
         var layer = layers.layer(which);
         if (layer) {
             layer.enabled(enabled);

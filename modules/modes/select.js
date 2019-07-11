@@ -265,16 +265,14 @@ export function modeSelect(context, selectedIDs) {
 
         editMenu = uiEditMenu(context, operations);
 
-        context.ui().sidebar
-            .select(singular() ? singular().id : null, _newFeature);
-
         context.history()
             .on('undone.select', update)
             .on('redone.select', update);
 
         context.map()
             .on('move.select', closeMenu)
-            .on('drawn.select', selectElements);
+            .on('drawn.select', selectElements)
+            .on('crossEditableZoom.select', selectElements);
 
         context.surface()
             .on('dblclick.select', dblclick);
@@ -311,6 +309,8 @@ export function modeSelect(context, selectedIDs) {
 
 
         function dblclick() {
+            if (!context.map().withinEditableZoom()) return;
+            
             var target = d3_select(d3_event.target);
 
             var datum = target.datum();
@@ -360,6 +360,13 @@ export function modeSelect(context, selectedIDs) {
                     .classed('related', true);
             }
 
+            // Don't highlight selected features past the editable zoom
+            if (!context.map().withinEditableZoom()) {
+                surface.selectAll('.selected').classed('selected', false);
+                surface.selectAll('.selected-member').classed('selected-member', false);
+                return;
+            }
+
             var selection = context.surface()
                 .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()));
 
@@ -372,7 +379,7 @@ export function modeSelect(context, selectedIDs) {
                 }
             } else {
                 context.surface()
-                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph(), true /* skipMultipolgonMembers */))
                     .classed('selected-member', true);
                 selection
                     .classed('selected', true);
@@ -532,7 +539,6 @@ export function modeSelect(context, selectedIDs) {
             .classed('related', false);
 
         context.map().on('drawn.select', null);
-        context.ui().sidebar.hide();
         context.features().forceVisible([]);
 
         var entity = singular();

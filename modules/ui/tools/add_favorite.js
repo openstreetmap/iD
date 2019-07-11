@@ -25,7 +25,13 @@ export function uiToolAddFavorite(context) {
     function toggleMode(d) {
         if (!enabled(d)) return;
 
-        if (d.button === context.mode().button) {
+        if (context.mode().id.includes('draw') && context.mode().finish) {
+            // gracefully complete the feature currently being drawn
+            var didFinish = context.mode().finish();
+            if (!didFinish) return;
+        }
+
+        if (context.mode().id.includes('add') && d.button === context.mode().button) {
             context.enter(modeBrowse(context));
         } else {
             if (d.preset) {

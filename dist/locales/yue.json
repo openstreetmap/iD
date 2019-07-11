@@ -2988,28 +2988,6 @@
                 "description": "衞星同般空相。",
                 "name": "必應般空相"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "條款同回應"
-                },
-                "name": "數碼地球特等相。"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "條款同回應"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "條款同回應"
-                },
-                "name": "數碼地球一般相。"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "條款同回應"
-                }
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "條款同回應"

@@ -3708,16 +3708,6 @@
                 "description": "Сателитске и висинске слике.",
                 "name": "Бинг висинске слике"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Услови коришћења и повратне информације"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Услови коришћења и повратне информације"
-                }
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Услови коришћења и повратне информације"

@@ -14,7 +14,6 @@ import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { services } from '../services';
-import { uiNoteEditor } from '../ui/note_editor';
 import { utilKeybinding } from '../util';
 
 
@@ -26,14 +25,6 @@ export function modeSelectNote(context, selectedNoteID) {
 
     var osm = services.osm;
     var keybinding = utilKeybinding('select-note');
-    var noteEditor = uiNoteEditor(context)
-        .on('change', function() {
-            context.map().pan([0,0]);  // trigger a redraw
-            var note = checkSelectedID();
-            if (!note) return;
-            context.ui().sidebar
-                .show(noteEditor.note(note));
-        });
 
     var behaviors = [
         behaviorBreathe(context),
@@ -74,8 +65,6 @@ export function modeSelectNote(context, selectedNoteID) {
         } else {
             selection
                 .classed('selected', true);
-
-            context.selectedNoteID(selectedNoteID);
         }
     }
 
@@ -84,6 +73,10 @@ export function modeSelectNote(context, selectedNoteID) {
         if (d3_select('.combobox').size()) return;
         context.enter(modeBrowse(context));
     }
+
+    mode.selectedNoteID = function() {
+        return selectedNoteID;
+    };
 
 
     mode.zoomToSelected = function() {
@@ -117,12 +110,6 @@ export function modeSelectNote(context, selectedNoteID) {
 
         selectNote();
 
-        var sidebar = context.ui().sidebar;
-        sidebar.show(noteEditor.note(note));
-
-        // expand the sidebar, avoid obscuring the note if needed
-        sidebar.expand(sidebar.intersects(note.extent()));
-
         context.map()
             .on('drawn.select', selectNote);
     };
@@ -140,11 +127,6 @@ export function modeSelectNote(context, selectedNoteID) {
 
         context.map()
             .on('drawn.select', null);
-
-        context.ui().sidebar
-            .hide();
-
-        context.selectedNoteID(null);
     };
 
 

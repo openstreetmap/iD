@@ -7,10 +7,8 @@ import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
 import { coreGraph } from '../core/graph';
 import { modeBrowse } from './browse';
-import { modeSelect } from './select';
 import { uiConflicts } from '../ui/conflicts';
 import { uiConfirm } from '../ui/confirm';
-import { uiCommit } from '../ui/commit';
 import { uiLoading } from '../ui/loading';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilKeybinding } from '../util';
 
@@ -26,10 +24,6 @@ export function modeSave(context) {
         .message(t('save.uploading'))
         .blocking(true);
 
-    var commit = uiCommit(context)
-        .on('cancel', cancel)
-        .on('save', save);
-
     var _toCheck = [];
     var _toLoad = [];
     var _loaded = {};
@@ -41,16 +35,12 @@ export function modeSave(context) {
     var _origChanges;
 
 
-    function cancel(selectedID) {
-        if (selectedID) {
-            context.enter(modeSelect(context, [selectedID]));
-        } else {
-            context.enter(modeBrowse(context));
-        }
+    function cancel() {
+        context.enter(modeBrowse(context));
     }
 
 
-    function save(changeset, tryAgain, checkConflicts) {
+    mode.save = function(changeset, tryAgain, checkConflicts) {
         // Guard against accidentally entering save code twice - #4641
         if (_isSaving && !tryAgain) {
             return;
@@ -69,7 +59,7 @@ export function modeSave(context) {
                 if (err) {
                     cancel();   // quit save mode..
                 } else {
-                    save(changeset, tryAgain, checkConflicts);  // continue where we left off..
+                    mode.save(changeset, tryAgain, checkConflicts);  // continue where we left off..
                 }
             });
             return;
@@ -264,7 +254,7 @@ export function modeSave(context) {
 
             upload(changeset);
         }
-    }
+    };
 
 
     function upload(changeset) {
@@ -299,7 +289,7 @@ export function modeSave(context) {
     function uploadCallback(err, changeset) {
         if (err) {
             if (err.status === 409) {          // 409 Conflict
-                save(changeset, true, true);   // tryAgain = true, checkConflicts = true
+                mode.save(changeset, true, true);   // tryAgain = true, checkConflicts = true
             } else {
                 _errors.push({
                     msg: err.message || err.responseText,
@@ -312,7 +302,6 @@ export function modeSave(context) {
             var changeCount = context.history().difference().summary().length;
             context.history().clearSaved();
 
-            commit.reset();
             context.enter(modeBrowse(context));
             context.ui().assistant.didSaveChangset(changeset, changeCount);
 
@@ -344,9 +333,9 @@ export function modeSave(context) {
     function showConflicts(changeset) {
         var history = context.history();
         var selection = context.container()
-            .select('#sidebar')
+            .select('.assistant .assistant-body')
             .append('div')
-            .attr('class','sidebar-component');
+            .attr('class','inspector-body');
 
         loading.close();
         _isSaving = false;
@@ -374,7 +363,7 @@ export function modeSave(context) {
                 }
 
                 selection.remove();
-                save(changeset, true, false);  // tryAgain = true, checkConflicts = false
+                mode.save(changeset, true, false);  // tryAgain = true, checkConflicts = false
             });
 
         selection.call(ui);
@@ -460,12 +449,6 @@ export function modeSave(context) {
 
 
     mode.enter = function() {
-        // Show sidebar
-        context.ui().sidebar.expand();
-
-        function done() {
-            context.ui().sidebar.show(commit);
-        }
 
         keybindingOn();
 
@@ -478,14 +461,13 @@ export function modeSave(context) {
             return;
         }
 
-        if (osm.authenticated()) {
-            done();
-        } else {
+        if (!osm.authenticated()) {
             osm.authenticate(function(err) {
                 if (err) {
                     cancel();
                 } else {
-                    done();
+                    // reload
+                    context.enter(mode);
                 }
             });
         }
@@ -499,8 +481,6 @@ export function modeSave(context) {
 
         context.container().selectAll('#content')
             .attr('class', 'active');
-
-        context.ui().sidebar.hide();
     };
 
     return mode;

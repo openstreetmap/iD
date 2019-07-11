@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "addr/interpolation"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "addr:interpolation": "*"
+    },
+    "name": "Address Interpolation",
+    "searchable": false,
+    "matchScore": 0.2
+}

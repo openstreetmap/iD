@@ -87,6 +87,18 @@ en:
       access_simple:
         # access=*
         label: Allowed Access
+      addr/interpolation:
+        # 'addr:interpolation=*'
+        label: Type
+        options:
+          # 'addr:interpolation=all'
+          all: All
+          # 'addr:interpolation=alphabetic'
+          alphabetic: Alphabetic
+          # 'addr:interpolation=even'
+          even: Even
+          # 'addr:interpolation=odd'
+          odd: Odd
       address:
         # 'addr:block_number=*, addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*, addr:unit=*'
         label: Address
@@ -289,6 +301,11 @@ en:
       building:
         # building=*
         label: Building
+      building/levels/underground:
+        # 'building:levels:underground=*'
+        label: Underground Levels
+        # building/levels/underground field placeholder
+        placeholder: '2, 4, 6...'
       building/levels_building:
         # 'building:levels=*'
         label: Building Levels
@@ -790,7 +807,7 @@ en:
         label: Handrail
       hashtags:
         # hashtags=*
-        label: Suggested Hashtags
+        label: Hashtags
         # hashtags field placeholder
         placeholder: '#example'
       healthcare:
@@ -1504,6 +1521,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      preschool:
+        # preschool=*
+        label: Preschool
       produce:
         # produce=*
         label: Produce
@@ -2343,6 +2363,9 @@ en:
         description: 'Rivers, Lakes, Ponds, Basins, etc.'
         name: Water Features
     presets:
+      addr/interpolation:
+        # 'addr:interpolation=*'
+        name: Address Interpolation
       address:
         # 'addr:*=*'
         name: Address
@@ -3864,11 +3887,6 @@ en:
       building_point:
         # building=*
         name: Building
-      camp_site/camp_pitch:
-        # camp_site=camp_pitch
-        name: Camp Pitch
-        # 'terms: tent,rv'
-        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       club:
         # club=*
         name: Club
@@ -5429,6 +5447,11 @@ en:
         name: Bunker Silo
         # 'terms: Silage,Storage'
         terms: '<translate with synonyms or related terms for ''Bunker Silo'', separated by commas>'
+      man_made/cairn:
+        # man_made=cairn
+        name: Cairn
+        # 'terms: rock pile,stone stack,stone pile,càrn'
+        terms: '<translate with synonyms or related terms for ''Cairn'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
@@ -6316,6 +6339,7 @@ en:
       power/line:
         # power=line
         name: Power Line
+        # 'terms: electric power transmission line,high voltage line,high tension line'
         terms: '<translate with synonyms or related terms for ''Power Line'', separated by commas>'
       power/minor_line:
         # power=minor_line
@@ -7078,6 +7102,11 @@ en:
         name: Hifi Store
         # 'terms: audio,hi-fi,high fidelity,stereo,video'
         terms: '<translate with synonyms or related terms for ''Hifi Store'', separated by commas>'
+      shop/hobby:
+        # shop=hobby
+        name: Hobby Shop
+        # 'terms: manga,figurine,model'
+        terms: '<translate with synonyms or related terms for ''Hobby Shop'', separated by commas>'
       shop/houseware:
         # shop=houseware
         name: Houseware Store
@@ -7304,6 +7333,11 @@ en:
         name: Supermarket
         # 'terms: grocery,store,shop'
         terms: '<translate with synonyms or related terms for ''Supermarket'', separated by commas>'
+      shop/swimming_pool:
+        # shop=swimming_pool
+        name: Pool Supply Store
+        # 'terms: hot tub equipment store,hot tub maintenance store,hot tub supply store,pool shop,pool store,swimming pool equipment store,swimming pool installation store,swimming pool maintenance store,swimming pool supply shop'
+        terms: '<translate with synonyms or related terms for ''Pool Supply Store'', separated by commas>'
       shop/tailor:
         # shop=tailor
         name: Tailor
@@ -7465,6 +7499,11 @@ en:
         # tourism=attraction
         name: Tourist Attraction
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
+      tourism/camp_pitch:
+        # tourism=camp_pitch
+        name: Camp Pitch
+        # 'terms: tent,rv'
+        terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
       tourism/camp_site:
         # tourism=camp_site
         name: Campground

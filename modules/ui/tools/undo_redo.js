@@ -33,7 +33,7 @@ export function uiToolUndoRedo(context) {
 
 
     function editable() {
-        return context.editable();
+        return context.mode().id !== 'save' && context.map().editableDataEnabled(true /* ignore min zoom */);
     }
 
     var tooltipBehavior = tooltip()

@@ -4681,10 +4681,6 @@
                     "name": "Nhà kho",
                     "terms": "nhà kho, kho, kho tàng, kho bãi, nha kho, kho tang, kho bai"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Lều Cắm trại",
-                    "terms": "lều, lều cắm trại, leu, leu cam trai"
-                },
                 "club": {
                     "name": "Câu lạc bộ",
                     "terms": "câu lạc bộ, clb, club, cau lac bo"
@@ -7610,34 +7606,6 @@
                 "description": "Hình ảnh chụp từ vệ tinh và trên không trung.",
                 "name": "Hình chụp trên không Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Điều khoản & Phản hồi"
-                },
-                "description": "DigitalGlobe Thượng hạng là một lớp hình ảnh hỗn hợp: ở nhiều nơi có lớp hình gốc của DigitalGlobe, còn một số khu vực được ghép lại hình ảnh +Vivid hoặc hình ảnh khu vực quan tâm tùy biến có độ phân giải 50 cm trở lên, và được cập nhật thường xuyên hơn.",
-                "name": "DigitalGlobe Thượng hạng"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Điều khoản & Phản hồi"
-                },
-                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 13 trở lên.",
-                "name": "Lúc chụp DigitalGlobe Thượng hạng"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Điều khoản & Phản hồi"
-                },
-                "description": "DigitalGlobe Tiêu chuẩn là tập hợp hình ảnh được lựa chọn chiếm 86% tổng diện tích đất đai của Trái Đất có độ phân giải 30–60 cm ở nơi nào có sẵn; ở nơi nào không có sẵn thì có hình ảnh Landsat thay thế. Hình ảnh được chụp cách đây trung bình 2,31 năm, một số khu vực được cập nhật mỗi năm hai lần.",
-                "name": "DigitalGlobe Tiêu chuẩn"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Điều khoản & Phản hồi"
-                },
-                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 13 trở lên.",
-                "name": "Lúc chụp DigitalGlobe Tiêu chuẩn"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
@@ -8726,10 +8694,6 @@
             "Western-Slope-meetup": {
                 "name": "Họp mặt OSM Sườn Tây",
                 "description": "Những người lập bản đồ và người dùng OpenStreetMap ở vùng Grand Junction, Colorado"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Slack Maptime Úc",
-                "description": "Mời bạn tham gia tại {signupUrl}"
             },
             "talk-au": {
                 "name": "Danh sách thư talk-au",

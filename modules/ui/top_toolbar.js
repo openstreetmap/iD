@@ -5,16 +5,16 @@ import {
 import { t } from '../util/locale';
 import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
-import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolUndoRedo } from './tools';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
 import { uiToolStructure } from './tools/structure';
+import { uiToolCenterZoom } from './tools/center_zoom';
 
 export function uiTopToolbar(context) {
 
-    var sidebarToggle = uiToolSidebarToggle(context),
-        addFeature = uiToolAddFeature(context),
+    var addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -23,6 +23,7 @@ export function uiTopToolbar(context) {
         waySegments = uiToolWaySegments(context),
         structure = uiToolStructure(context),
         repeatAdd = uiToolRepeatAdd(context),
+        centerZoom = uiToolCenterZoom(context),
         deselect = uiToolSimpleButton('deselect', t('toolbar.deselect.title'), 'iD-icon-close', function() {
             context.enter(modeBrowse(context));
         }, null, 'Esc'),
@@ -38,7 +39,7 @@ export function uiTopToolbar(context) {
             }
         }, null, 'Esc', 'wide');
 
-    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'split', 'straighten'];
+    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'reverse', 'split', 'straighten'];
 
     var operationToolsByID = {};
 
@@ -64,11 +65,16 @@ export function uiTopToolbar(context) {
         var mode = context.mode();
         if (!mode) return tools;
 
-        if (mode.id === 'select' &&
+        if (mode.id === 'save') {
+            tools.push(cancelDrawing);
+            tools.push('spacer');
+        } else if (mode.id === 'select' &&
             !mode.newFeature() &&
             mode.selectedIDs().every(function(id) { return context.graph().hasEntity(id); })) {
 
-            tools.push(sidebarToggle);
+            tools.push(deselect);
+            tools.push('spacer');
+            tools.push(centerZoom);
             tools.push('spacer');
 
             var operationTools = [];
@@ -89,18 +95,17 @@ export function uiTopToolbar(context) {
             if (deleteTool) {
                 // keep the delete button apart from the others
                 if (operationTools.length > 0) {
-                    tools.push('spacer-half');
+                    tools.push('spacer');
                 }
                 tools.push(deleteTool);
             }
             tools.push('spacer');
 
-            tools = tools.concat([deselect, undoRedo, save]);
+            tools = tools.concat([undoRedo, save]);
 
         } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area' ||
             mode.id === 'draw-line' || mode.id === 'draw-area') {
 
-            tools.push(sidebarToggle);
             tools.push('spacer');
 
             if (mode.id.indexOf('line') !== -1 && structure.shouldShow()) {
@@ -133,7 +138,7 @@ export function uiTopToolbar(context) {
 
                 tools.push(undoRedo);
 
-                if (mode.addedEntityIDs() > 0) {
+                if (mode.addedEntityIDs().length > 0) {
                     tools.push(finishDrawing);
                 } else {
                     tools.push(cancelDrawing);
@@ -141,8 +146,13 @@ export function uiTopToolbar(context) {
             }
 
         } else {
-            tools.push(sidebarToggle);
+
             tools.push('spacer');
+
+            if (mode.id === 'select-note' || mode.id === 'select-data' || mode.id === 'select-error') {
+                tools.push(centerZoom);
+                tools.push('spacer');
+            }
 
             tools.push(addFeature);
 

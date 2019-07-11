@@ -90,7 +90,7 @@
     },
     {
       "old": {"amenity": "preschool"},
-      "replace": {"amenity": "kindergarten"}
+      "replace": {"amenity": "kindergarten", "preschool": "yes"}
     },
     {
       "old": {"amenity": "public_building"},
@@ -207,6 +207,10 @@
     {
       "old": {"building:type": "*"},
       "replace": {"building": "$1"}
+    },
+    {
+      "old": {"camp_site": "camp_pitch"},
+      "replace": {"tourism": "camp_pitch"}
     },
     {
       "old": {"color": "*"},
@@ -852,6 +856,10 @@
     {
       "old": {"tourism": "bed_and_breakfast"},
       "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
+    },
+    {
+      "old": {"tower:type": "power"},
+      "replace": {"power": "tower"}
     },
     {
       "old": {"type": "broad_leaved"},

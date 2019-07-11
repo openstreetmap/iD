@@ -371,7 +371,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         shouldResetOnOff = false;
         checkGeometry(true);   // finishDraw = true
         if (context.surface().classed('nope')) {
-            return;   // can't click here
+            return false;   // can't click here
         }
 
         context.pauseChangeDispatch();
@@ -379,7 +379,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
-            return;
+            return false;
         }
 
         context.resumeChangeDispatch();
@@ -389,6 +389,8 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         }, 1000);
 
         mode.didFinishAdding();
+
+        return true;
     };
 
 

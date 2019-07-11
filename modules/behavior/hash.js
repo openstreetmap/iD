@@ -94,7 +94,9 @@ export function behaviorHash(context) {
             var q = utilStringQs(window.location.hash.substring(1));
 
             if (q.id) {
-                context.zoomToEntity(q.id.split(',')[0], !q.map);
+                if (!context.history().hasRestorableChanges()) {
+                    context.zoomToEntity(q.id.split(',')[0], true /* ignore `map` parameter */);
+                }
             }
 
             if (q.comment) {

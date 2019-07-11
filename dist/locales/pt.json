@@ -2856,6 +2856,10 @@
                     "label": "Dispositivos",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diâmetro",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Fraldário "
                 },
@@ -3654,6 +3658,9 @@
                 "playground/min_age": {
                     "label": "Idade mínima"
                 },
+                "polling_station": {
+                    "label": "Mesa de voto"
+                },
                 "population": {
                     "label": "População"
                 },
@@ -4223,6 +4230,9 @@
                         "test": "Testes",
                         "tourism": "Turismo"
                     }
+                },
+                "valve": {
+                    "label": "Tipo"
                 },
                 "vending": {
                     "label": "Tipos de produtos"
@@ -4861,6 +4871,10 @@
                 "amenity/police": {
                     "name": "Esquadra / posto de polícia",
                     "terms": "Polícia, GNR, G.N.R., PSP, P.S.P., Polícia de Segurança Pública, Guarda Nacional Republicana, Judiciária, Polícia Marítima, posto de polícia,"
+                },
+                "amenity/polling_station": {
+                    "name": "Mesa de voto permanente",
+                    "terms": "permanent polling place, mesa de voto, local de voto, votação, votar, eleições"
                 },
                 "amenity/post_box": {
                     "name": "Marco de correio",
@@ -5627,10 +5641,6 @@
                 "building_point": {
                     "name": "Edifício"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Sítio para acampar",
-                    "terms": "acampar, acampar ao ar livre,"
-                },
                 "club": {
                     "name": "Clube",
                     "terms": "club, clube, aeromodelismo, radioamador, filatelia, xadrez, astronomia, automobilismo, associação, fã-clube, fã, templo maçônico, maçonaria, maçom, caça, motociclismo, moto clube, nudismo, fotografia, escoteiro, escotismo, hobby, futebol, desporto, atletismo, ginástica, basquetebol, voleibol, ténis, natação"
@@ -5815,6 +5825,10 @@
                 "craft/shoemaker": {
                     "name": "Sapateiro",
                     "terms": "Shoemaker, Sapato, Sapatos"
+                },
+                "craft/signmaker": {
+                    "name": "Fabricante de reclames",
+                    "terms": "signmaker, fabricante de reclames, reclame, reclame luminoso"
                 },
                 "craft/stonemason": {
                     "name": "Pedreiro",
@@ -7166,6 +7180,22 @@
                     "name": "Poço de visita de telecomunicações",
                     "terms": "Telecom Manhole, poço de visita, telecomunicações"
                 },
+                "military/bunker": {
+                    "name": "Búnquer militar",
+                    "terms": "military bunker, casamata, búnquer, bunker, bunker militar"
+                },
+                "military/checkpoint": {
+                    "name": "Posto de controlo militar",
+                    "terms": "checkpoint, ponto de controlo militar, posto de controlo, ponto de controlo, controlo militar"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Local de teste de armas nucleares",
+                    "terms": "nuclear explosion site, local de teste de arma nuclear, teste nuclear, testes nucleares"
+                },
+                "military/office": {
+                    "name": "Escritório militar",
+                    "terms": "military office, escritórios militares, centro de recrutamento militar, centro de inspeção militar, centro de inspecção militar, centro de inspeção, centro de inspecção"
+                },
                 "military/trench": {
                     "name": "Trincheira militar",
                     "terms": "military trench, trincheira militar, trincheira, tranqueira"
@@ -7677,6 +7707,10 @@
                 "point": {
                     "name": "Ponto",
                     "terms": "Ponto, Nó, POI"
+                },
+                "polling_station": {
+                    "name": "Mesa de voto temporária",
+                    "terms": "temporary polling place, mesa de voto, local de voto, votação, votar, eleições"
                 },
                 "power": {
                     "name": "Energia"
@@ -9095,34 +9129,6 @@
                 "description": "Imagens aéreas e de satélite.",
                 "name": "Imagens aéreas Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termos e opinião"
-                },
-                "description": "O DigitalGlobe-Premium é um mosaico composto de mapas-base da DigitalGlobe com regiões selecionadas preenchidas com imagens mais nítidas ou de áreas personalizadas de interesse, resolução de 50 cm ou superior e atualizadas com mais frequência com atualizações contínuas.",
-                "name": "DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termos e Opinião"
-                },
-                "description": "Limites das imagens aéreas e datas de captura. As etiquetas aparecem no nível de magnificação 13 e superiores.",
-                "name": "Imagens DigitalGlobe Premium antigas"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termos e opinião"
-                },
-                "description": "DigitalGlobe-Standard é um conjunto de imagens selecionadas que cobre 86% da massa terrestre, com uma resolução de 30-60cm, se disponível, preenchida pelo Landsat. A idade média é de 2,31 anos, com algumas áreas a serem atualizadas duas vezes por ano.",
-                "name": "DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termos e Opinião"
-                },
-                "description": "Limites das imagens aéreas e datas de captura. As etiquetas aparecem no nível de magnificação 13 e superiores.",
-                "name": "Imagens DigitalGlobe Standard antigaas"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 sem nuvens - https://s2maps.eu por EOX IT Services GmbH (contém dados alterados do Copernicus Sentinel de 2017 e 2018)"
@@ -10277,10 +10283,6 @@
                 "name": "Encontro encosta ocidental OSM",
                 "description": "Cartógrafos e utilizadores do OpenStreetMap na área de Grand Junction, CO",
                 "extendedDescription": "O objetivo deste grupo é apresentar o OpenStreetMap para a comunidade, desenvolver uma comunidade de cartógrafos, criar os geodados mais incríveis possíveis usando o método que pudermos e, finalmente, criar estratégias para obter esses dados na nossa comunidade. Imagine uma sinalização precisa de trilha! Imagine mais desenvolvimento de ciclovias! Imagine o que quiser, essa é a alegria do OpenStreetMap!"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australia Slack",
-                "description": "Registe-se em {signupUrl}"
             },
             "talk-au": {
                 "name": "Lista de Discussão Talk-au",

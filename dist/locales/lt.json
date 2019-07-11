@@ -7,28 +7,45 @@
             "undo": "sugrąžinti",
             "zoom_to": "padidinti iki",
             "copy": "kopijuoti",
-            "open_wikidata": "atverti wikidata.org"
+            "open_wikidata": "atverti wikidata.org",
+            "favorite": "mėgstamas"
+        },
+        "toolbar": {
+            "inspect": "Apžvelgti",
+            "undo_redo": "Atšaukti / Atstatyti",
+            "recent": "Neseniai",
+            "favorites": "Mėgstami"
         },
         "modes": {
+            "add_feature": {
+                "key": "Kortelė",
+                "result": "{count} rezultatas",
+                "results": "{count} rezultatai"
+            },
             "add_area": {
                 "title": "Plotas",
                 "description": "Pridėkite parkus, pastatus, ežerus ar kitas vietas į žemėlapį.",
-                "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti plotą: parką, ežerą, pastatą ar pan."
+                "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti plotą: parką, ežerą, pastatą ar pan.",
+                "filter_tooltip": "plotai"
             },
             "add_line": {
                 "title": "Linija",
                 "description": "Pridėti greitkelius, gatves, pėsčiųjų takus, kanalus ar kitas linijas į žemėlapį.",
-                "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti kelią, taką ar maršrutą."
+                "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti kelią, taką ar maršrutą.",
+                "filter_tooltip": "linijos"
             },
             "add_point": {
                 "title": "Taškas",
                 "description": "Pridėti restoranus, paminklus, pašto dėžutes ar kitus taškus į žemėlapį.",
-                "tail": "Spustelėkite žemėlapį, norėdami pridėti tašką."
+                "tail": "Spustelėkite žemėlapį, norėdami pridėti tašką.",
+                "filter_tooltip": "taškai"
             },
             "add_note": {
                 "title": "Pastaba",
+                "label": "Pridėti Pastabą",
                 "description": "Pastebėjai problemą? Duok kitiems žymėtojams sužinoti.",
-                "tail": "Spausk ant žemėlapio, kad pridėtum pastabą."
+                "tail": "Spausk ant žemėlapio, kad pridėtum pastabą.",
+                "key": "N"
             },
             "browse": {
                 "title": "Naršyti",
@@ -97,9 +114,11 @@
             "orthogonalize": {
                 "title": "Statūs kampai",
                 "description": {
+                    "vertex": "Kvadratinti šį kampą.",
                     "line": "Keisti šios linijos kampus stačiais.",
                     "area": "Keisti šio ploto kampus stačiais."
                 },
+                "key": "Q",
                 "annotation": {
                     "line": "Keisti linijos kampus stačiais.",
                     "area": "Keisti ploto kampus stačiais."
@@ -110,7 +129,15 @@
             },
             "straighten": {
                 "title": "Tiesinti",
+                "description": {
+                    "points": "Ištiesinti šiuos taškus.",
+                    "line": "Ištiesinti šią liniją."
+                },
                 "key": "S",
+                "annotation": {
+                    "points": "Ištiesinta keletas taškų.",
+                    "line": "Ištiesinta linija."
+                },
                 "too_bendy": "Ši negali būti ištiesinta, nes ji per daug išlenkta."
             },
             "delete": {
@@ -312,6 +339,10 @@
                     "create": "Posūkio apribojimas pridėtas",
                     "delete": "Posūkio apribojimas panaikintas"
                 }
+            },
+            "extract": {
+                "title": "Ekstraktuoti",
+                "key": "E"
             }
         },
         "restriction": {
@@ -325,9 +356,29 @@
             },
             "help": {
                 "indirect": "(ne tiesioginis)",
+                "turn": {
+                    "no_left_turn": "NĖRA Kairio Posūkio {indirect}",
+                    "no_right_turn": "NĖRA Dešinio Posūkio {indirect}",
+                    "no_u_turn": "NĖRA Apsisukimo {indirect}",
+                    "no_straight_on": "NĖRA Kelio Tiesiai {indirect}",
+                    "only_left_turn": "TIK Posūkis Kairėn {indirect}",
+                    "only_right_turn": "TIK Posūkis Dešinėn {indirect}",
+                    "only_u_turn": "TIK Apsisukimas {indirect}",
+                    "only_straight_on": "TIK Kelias Tiesiai {indirect}",
+                    "allowed_left_turn": "Kairys Posūkis Galimas {indirect}",
+                    "allowed_right_turn": "Dešinys Posūkis Galimas {indirect}",
+                    "allowed_u_turn": "Apsisukimas Galimas {indirect}",
+                    "allowed_straight_on": "Kelias Tiesiai Galimas {indirect}"
+                },
                 "from": "IŠ",
                 "via": "PER",
-                "to": "Į"
+                "to": "Į",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Paspausk, kad pasirinktum {from} atkarpą",
+                "select_from_name": "Spausk, kad pasirinktum {from} {fromName}",
+                "toggle": "Spausk, kad \"{turn}\""
             }
         },
         "undo": {
@@ -342,6 +393,7 @@
         "browser_notice": "Šis redaktorius veikia Firefox, Chrome, Safari, Opera ir Internet Explorer 11 bei naujesnėse naršyklėse. Prašome atnaujinti naršyklę arba naudoti Potlatch 2 žemėlapio redagavimui.",
         "translate": {
             "translate": "Versti",
+            "localized_translation_label": "Daugiakalbis Pavadinimas",
             "localized_translation_language": "Pasirinkti kalbą",
             "localized_translation_name": "Pavadinimas"
         },
@@ -351,6 +403,9 @@
         "loading_auth": "Jungiamasi prie OpenStreetMap...",
         "report_a_bug": "Pranešti apie klaidą",
         "help_translate": "Padėkite versti",
+        "sidebar": {
+            "tooltip": "Perjungti skydelį."
+        },
         "feature_info": {
             "hidden_warning": "{count} paslėptų objektų",
             "hidden_details": "Šie objektai šiuo metu paslėpti: {details}"
@@ -370,10 +425,13 @@
             "cancel": "Atšaukti",
             "changes": "{count} Pakeitimai",
             "download_changes": "Atsiųsti osmChange rinkmeną",
+            "errors": "Klaidos",
             "warnings": "Įspėjimai",
             "modified": "Pakeista",
             "deleted": "Ištrinta",
             "created": "Sukurta",
+            "outstanding_errors_message": "Prašome pirma išspręsti visas klaidas. {count} liko.",
+            "comment_needed_message": "Prašome pirma pridėti pakeitimų komentarą.",
             "about_changeset_comments": "Apie pokyčių komentarus",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Šiame komentare paminėjote Google: atsiminkite, kad kopijuoti iš Google Maps yra griežtai draudžiama."
@@ -388,6 +446,7 @@
                 "key": "B",
                 "title": "Fonas",
                 "zoom": "Priartinimas",
+                "vintage": "Vintažinis",
                 "source": "Šaltinis",
                 "description": "Aprašymas",
                 "resolution": "Rezoliucija",
@@ -443,6 +502,7 @@
         },
         "geocoder": {
             "search": "Ieškoti visam pasaulyje...",
+            "no_results_visible": "Jokių rezultatų matomame žemėlapio plote",
             "no_results_worldwide": "Nėra rezultatų"
         },
         "geolocate": {
@@ -450,16 +510,27 @@
             "locating": "Ieškoma, prašome palaukti..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z",
+                "title": "Priartinti prie šito"
+            },
             "show_more": "Rodyti daugiau",
             "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
+            "view_on_keepRight": "Rodyti per keepright.at",
             "all_fields": "Visi laukai",
             "all_tags": "Visos žymos",
             "all_members": "Visi nariai",
             "all_relations": "Visi ryšiai",
+            "add_to_relation": "Pridėti į ryšį",
             "new_relation": "Naujas ryšys...",
+            "choose_relation": "Pasirinkti tėvinį ryšį",
             "role": "Rolė",
             "choose": "Parinkite geoobjekto tipą",
             "results": "{n} paieškos {search} rezultatai",
+            "no_documentation_key": "Nėra jokios dokumentacijos.",
+            "edit_reference": "redaguoti/versti",
+            "wiki_reference": "Rodyti dokumentaciją",
+            "wiki_en_reference": "Rodyti dokumentaciją anglų kalba",
             "back_tooltip": "Keisti objektą",
             "remove": "Pašalinti",
             "search": "Ieškoti",
@@ -498,6 +569,7 @@
             "switch": "Persijungti atgal į šį foną",
             "custom": "Savas",
             "reset": "iš naujo",
+            "reset_all": "Atstatyti Viską",
             "display_options": "Fono Pasirinkimai",
             "brightness": "Šviesumas",
             "contrast": "Kontrastas",
@@ -524,6 +596,9 @@
                 "notes": {
                     "tooltip": "Pastabos duomenys iš OpenStreetMap",
                     "title": "OpenStreetMap pastabos"
+                },
+                "keepRight": {
+                    "title": "KeepRight Problemos"
                 },
                 "custom": {
                     "title": "Pasirinktiniai žemėlapio duomenys",
@@ -682,6 +757,21 @@
         },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
+        "QA": {
+            "keepRight": {
+                "errorTypes": {
+                    "400": {
+                        "title": "Geometrijos problema"
+                    },
+                    "401": {
+                        "title": "Trūksta posūkio apribojimo"
+                    },
+                    "410": {
+                        "title": "Tinklalapio problema"
+                    }
+                }
+            }
+        },
         "streetside": {
             "tooltip": "Gatvės nuotraukos iš Microsoft",
             "report": "Pranešti privatumo rūpestį su šiuo paveiksliuku",
@@ -811,6 +901,170 @@
                     "tips": {
                         "title": "Patarimai"
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problemos",
+            "list_title": "Problemos ({count})",
+            "errors": {
+                "list_title": "Klaidos ({count})"
+            },
+            "warnings": {
+                "list_title": "Įspėjimai ({count})"
+            },
+            "rules": {
+                "title": "Klaidos"
+            },
+            "no_issues": {
+                "message": {
+                    "everything": "Viskas atrodo gerai",
+                    "everything_in_view": "Viskas ekrane atrodo gerai",
+                    "edits": "Jūsų pakeitimai atrodo gerai",
+                    "edits_in_view": "Jūsų pakeitimai ekrane atrodo gerai"
+                },
+                "hidden_issues": {
+                    "none": "Atrastos problemos bus pateiktos čia",
+                    "elsewhere": "Klaidos visur kitur: {count}"
+                }
+            },
+            "options": {
+                "what": {
+                    "title": "Tikrinti:",
+                    "edited": "Mano Pakeitimai",
+                    "all": "Viskas"
+                },
+                "where": {
+                    "title": "Kur:",
+                    "all": "Visur"
+                }
+            },
+            "enable_all": "Įjungti Viską",
+            "disable_all": "Išjungti Viską",
+            "fix_one": {
+                "title": "ištaisyti"
+            },
+            "fix_all": {
+                "title": "Ištaisyti Viską"
+            },
+            "close_nodes": {
+                "title": "Taškai Arti Vienas Kito",
+                "tip": "Rasti pasikartojančius ir apkrautus taškus",
+                "message": "Du taškai {way} yra labai arti vienas kito",
+                "reference": "Pasikartojantys taškai linijoje turėtų būti sujungti arba perkelti toliau.",
+                "detached": {
+                    "message": "{feature} yra per arti {feature2}",
+                    "reference": "Atskiri taškai negali dalintis ta pačia vieta."
+                }
+            },
+            "crossing_ways": {
+                "title": "Kertančios Linijos",
+                "message": "{feature} kertasi su {feature2}"
+            },
+            "disconnected_way": {
+                "title": "Atjungtos Linijos"
+            },
+            "generic_name": {
+                "title": "Įtartini Pavadinimai",
+                "message": "{feature} turi įtartiną pavadinimą \"{name}\""
+            },
+            "incompatible_source": {
+                "title": "Įtartini Šaltiniai",
+                "google": {
+                    "feature": {
+                        "message": "{feature} pateikia Google, kaip duomenų šaltinį"
+                    }
+                }
+            },
+            "invalid_format": {
+                "title": "Neteisingas Formatavimas",
+                "email": {
+                    "message": "{feature} turi neteisingą el. pašto adresą.",
+                    "message_multi": "{feature} turi ne vieną neteisingą el. pašto adresą.",
+                    "reference": "El. Pašto adresai turėtų atrodyti kaip \"user@example.com\"."
+                },
+                "website": {
+                    "message": "{feature} turi neteisingą tinklalapio adresą.",
+                    "message_multi": "{feature} turi keletą neteisingų tinklalapio adresų.",
+                    "reference": "Tinklalapio adresas turėtų prasidėti su \"http\" arba \"https\"."
+                }
+            },
+            "missing_role": {
+                "title": "Trūkstamos Rolės",
+                "message": "{member} neturi jokios rolės {relation}"
+            },
+            "missing_tag": {
+                "title": "Trūkstančios Žymės",
+                "any": {
+                    "message": "{feature} neturi žymių"
+                },
+                "descriptive": {
+                    "message": "{feature} neturi aprašytų žymių"
+                },
+                "relation_type": {
+                    "message": "{feature} yra ryšys be jokio tipo"
+                }
+            },
+            "outdated_tags": {
+                "title": "Nebegaliojančios Žymės",
+                "message": "{feature} turi nebegaliojančių žymių",
+                "incomplete": {
+                    "message": "{feature} turi neužbaigtų žymių"
+                }
+            },
+            "private_data": {
+                "title": "Privati Informacija"
+            },
+            "tag_suggests_area": {
+                "title": "Linijos Pažymėtos, kaip Plotai",
+                "reference": "Plotai turi būti su sujungtais galiniais taškais."
+            },
+            "unknown_road": {
+                "message": "{feature} neturi klasifikacijos"
+            },
+            "impossible_oneway": {
+                "highway": {
+                    "start": {
+                        "message": "{feature} yra nepasiekiamas"
+                    }
+                }
+            },
+            "fix": {
+                "connect_endpoints": {
+                    "title": "Sujungti galus"
+                },
+                "continue_from_start": {
+                    "title": "Tęsti piešimą nuo pradžios"
+                },
+                "continue_from_end": {
+                    "title": "Tęsti piešimą nuo pabaigos"
+                },
+                "ignore_issue": {
+                    "title": "Ignoruoti šią problemą"
+                },
+                "merge_points": {
+                    "title": "Sujungti šiuos taškus"
+                },
+                "remove_from_relation": {
+                    "title": "Pašalinti iš ryšio"
+                },
+                "remove_generic_name": {
+                    "title": "Pašalinti pavadinimą"
+                },
+                "set_as_inner": {
+                    "title": "Nustatyti kaip vidinį"
+                },
+                "set_as_outer": {
+                    "title": "Nustatyti kaip išorinį"
+                },
+                "tag_as_disconnected": {
+                    "title": "Žymėti kaip atjungtą"
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Naudoti tiltą arba tunelį"
+                },
+                "use_tunnel": {
+                    "title": "Naudoti tunelį"
                 }
             }
         },
@@ -1047,6 +1301,9 @@
             "west": "V",
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "description": "Aprašymas"
         },
         "presets": {
             "categories": {
@@ -4478,26 +4735,6 @@
                 "description": "Palydovo ir oro nuotraukos.",
                 "name": "Bing oro nuotraukos"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Sąlygos ir atsiliepimai"
-                }
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Sąlygos ir atsiliepimai"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Sąlygos ir atsiliepimai"
-                }
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Sąlygos ir atsiliepimai"
-                }
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Sąlygos ir atsiliepimai"
@@ -4710,9 +4947,6 @@
             },
             "PHXGeo-twitter": {
                 "name": "PHXGeo Twitter"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime Australija Slack"
             },
             "talk-au": {
                 "name": "Talk-au Mailing List"

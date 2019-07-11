@@ -20,7 +20,7 @@ export function modeAddPoint(context, mode) {
         .on('clickWay', addWay)
         .on('clickNode', addNode)
         .on('cancel', cancel)
-        .on('finish', cancel);
+        .on('finish', finish);
 
     var defaultTags = {};
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
@@ -85,23 +85,35 @@ export function modeAddPoint(context, mode) {
     function didFinishAdding(node) {
         _allAddedEntityIDs.push(node.id);
         if (!mode.repeatAddedFeature()) {
-            context.enter(
-                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
-            );
+            mode.finish();
         }
     }
-
-
-    function cancel() {
-        context.enter(modeBrowse(context));
-    }
-
 
     function undone() {
         if (context.graph() === baselineGraph || mode.addedEntityIDs().length === 0) {
             context.enter(modeBrowse(context));
         }
     }
+
+    function cancel() {
+        context.enter(modeBrowse(context));
+    }
+
+    function finish() {
+        mode.finish();
+    }
+
+    mode.finish = function() {
+        if (mode.addedEntityIDs().length) {
+            context.enter(
+                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
+            );
+        } else {
+            context.enter(
+                modeBrowse(context)
+            );
+        }
+    };
 
 
     mode.enter = function() {

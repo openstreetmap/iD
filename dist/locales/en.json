@@ -11,10 +11,12 @@
             "favorite": "favorite"
         },
         "toolbar": {
+            "center_zoom": {
+                "title": "Center"
+            },
             "deselect": {
                 "title": "Deselect"
             },
-            "inspect": "Inspect",
             "undo_redo": "Undo / Redo",
             "recent": "Recent",
             "favorites": "Favorites",
@@ -48,17 +50,20 @@
         "assistant": {
             "mode": {
                 "adding": "Adding",
+                "authenticating": "Authenticating",
                 "drawing": "Drawing",
-                "mapping": "Mapping",
                 "editing": "Editing",
-                "saving": "Saving"
+                "mapping": "Mapping",
+                "saving": "Saving",
+                "viewing": "Viewing"
             },
             "instructions": {
-                "add_point": "Click or tap the center of the feature.",
-                "add_line": "Click or tap the starting location.",
+                "add_point": "Click the center of the feature.",
+                "add_line": "Click the starting point of the feature.",
                 "draw_line": "Place points along the feature's centerline.",
-                "add_area": "Click or tap any corner of the feature.",
-                "draw_area": "Place points along the feature's outline."
+                "add_area": "Click any corner of the feature.",
+                "draw_area": "Place points along the feature's outline.",
+                "finishing": "When you're done, click the last point again or click <b>Finish</b>."
             },
             "global_location": "Planet Earth",
             "greetings": {
@@ -82,6 +87,10 @@
                 "ask": "Would you like to restore them?"
             },
             "commit": {
+                "auth": {
+                    "osm_account": "OpenStreetMap Account",
+                    "message": "You must sign in to upload your changes."
+                },
                 "success": {
                     "thank_you": "Thank You!",
                     "just_improved": "You've just improved OpenStreetMap around {location}.",
@@ -619,10 +628,6 @@
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
-        "sidebar": {
-            "key": "'",
-            "tooltip": "Toggle the sidebar."
-        },
         "feature_info": {
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"
@@ -642,14 +647,17 @@
             "cancel": "Cancel",
             "change": "1 Change",
             "changes": "{count} Changes",
+            "changes_parenthetical": "Changes ({count})",
             "download_changes": "Download osmChange file",
             "errors": "Errors",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",
             "created": "Created",
-            "outstanding_errors_message": "Please resolve all errors first. {count} remaining.",
-            "comment_needed_message": "Please add a changeset comment first.",
+            "blocker_message": {
+                "outstanding_errors": "Please resolve all errors before uploading.",
+                "comment_needed": "Please add a changeset comment before uploading. This helps others understand your edits."
+            },
             "about_changeset_comments": "About changeset comments",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden.",
@@ -735,7 +743,6 @@
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom to this",
                 "tooltip_feature": "Center and zoom the map to focus on this feature.",
                 "tooltip_note": "Center and zoom the map to focus on this note.",
                 "tooltip_data": "Center and zoom the map to focus on this data.",
@@ -744,10 +751,10 @@
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
             "view_on_keepRight": "View on keepright.at",
-            "all_fields": "All fields",
-            "all_tags": "All tags",
-            "all_members": "All members",
-            "all_relations": "All relations",
+            "all_fields": "Fields",
+            "all_tags": "Tags",
+            "all_members": "Members",
+            "all_relations": "Relations",
             "add_to_relation": "Add to a relation",
             "new_relation": "New relation...",
             "choose_relation": "Choose a parent relation",
@@ -989,7 +996,7 @@
         "full_screen": "Toggle Full Screen",
         "QA": {
             "improveOSM": {
-                "title": "ImproveOSM Detection",
+                "title": "ImproveOSM",
                 "geometry_types": {
                     "path": "paths",
                     "parking": "parking",
@@ -1023,7 +1030,7 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight Error",
+                "title": "KeepRight",
                 "detail_title": "Error",
                 "detail_description": "Description",
                 "comment": "Comment",
@@ -1986,6 +1993,9 @@
                 "use_different_layers": {
                     "title": "Use different layers"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Use different layers or levels"
+                },
                 "use_different_levels": {
                     "title": "Use different levels"
                 },
@@ -2564,6 +2574,15 @@
                         }
                     }
                 },
+                "addr/interpolation": {
+                    "label": "Type",
+                    "options": {
+                        "all": "All",
+                        "even": "Even",
+                        "odd": "Odd",
+                        "alphabetic": "Alphabetic"
+                    }
+                },
                 "address": {
                     "label": "Address",
                     "placeholders": {
@@ -2759,6 +2778,10 @@
                 },
                 "building/levels_building": {
                     "label": "Building Levels",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels/underground": {
+                    "label": "Underground Levels",
                     "placeholder": "2, 4, 6..."
                 },
                 "building/material": {
@@ -3198,7 +3221,7 @@
                     "label": "Handrail"
                 },
                 "hashtags": {
-                    "label": "Suggested Hashtags",
+                    "label": "Hashtags",
                     "placeholder": "#example"
                 },
                 "healthcare": {
@@ -3776,6 +3799,9 @@
                 },
                 "power": {
                     "label": "Type"
+                },
+                "preschool": {
+                    "label": "Preschool"
                 },
                 "produce": {
                     "label": "Produce"
@@ -4527,6 +4553,10 @@
                 },
                 "waterway": {
                     "name": "Waterway",
+                    "terms": ""
+                },
+                "addr/interpolation": {
+                    "name": "Address Interpolation",
                     "terms": ""
                 },
                 "address": {
@@ -5836,10 +5866,6 @@
                 "building/warehouse": {
                     "name": "Warehouse",
                     "terms": ""
-                },
-                "camp_site/camp_pitch": {
-                    "name": "Camp Pitch",
-                    "terms": "tent,rv"
                 },
                 "club": {
                     "name": "Club",
@@ -7193,6 +7219,10 @@
                     "name": "Bunker Silo",
                     "terms": "Silage,Storage"
                 },
+                "man_made/cairn": {
+                    "name": "Cairn",
+                    "terms": "rock pile,stone stack,stone pile,càrn"
+                },
                 "man_made/chimney": {
                     "name": "Chimney",
                     "terms": ""
@@ -7955,7 +7985,7 @@
                 },
                 "power/line": {
                     "name": "Power Line",
-                    "terms": ""
+                    "terms": "electric power transmission line,high voltage line,high tension line"
                 },
                 "power/minor_line": {
                     "name": "Minor Power Line",
@@ -8613,6 +8643,10 @@
                     "name": "Hifi Store",
                     "terms": "audio,hi-fi,high fidelity,stereo,video"
                 },
+                "shop/hobby": {
+                    "name": "Hobby Shop",
+                    "terms": "manga,figurine,model"
+                },
                 "shop/houseware": {
                     "name": "Houseware Store",
                     "terms": "home,household,kitchenware"
@@ -8805,6 +8839,10 @@
                     "name": "Supermarket",
                     "terms": "grocery,store,shop"
                 },
+                "shop/swimming_pool": {
+                    "name": "Pool Supply Store",
+                    "terms": "hot tub equipment store,hot tub maintenance store,hot tub supply store,pool shop,pool store,swimming pool equipment store,swimming pool installation store,swimming pool maintenance store,swimming pool supply shop"
+                },
                 "shop/tailor": {
                     "name": "Tailor",
                     "terms": "clothes,suit"
@@ -8940,6 +8978,10 @@
                 "tourism/attraction": {
                     "name": "Tourist Attraction",
                     "terms": ""
+                },
+                "tourism/camp_pitch": {
+                    "name": "Camp Pitch",
+                    "terms": "tent,rv"
                 },
                 "tourism/camp_site": {
                     "name": "Campground",
@@ -9349,34 +9391,6 @@
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "DigitalGlobe Premium Imagery"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Premium Imagery Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "DigitalGlobe Standard Imagery"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -10713,6 +10727,14 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt Mailing List",
+                "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
             },
             "si-forum": {
                 "name": "OpenStreetMap Slovenia Forum",

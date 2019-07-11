@@ -2967,10 +2967,6 @@
                     "name": "Skladišče",
                     "terms": "depo"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Kampirno mesto",
-                    "terms": "kamp plac, plac, šotorišče, prikolišče, prikolica, elektrika, postavitev"
-                },
                 "club": {
                     "name": "Klub",
                     "terms": "klub,druženje,pijača"
@@ -4828,28 +4824,6 @@
             "Bing": {
                 "description": "Satelitski posnetki in posnetki iz zraka",
                 "name": "Satelitski posnetki Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Pogoji uporabe in odziv"
-                },
-                "name": "Posnetki DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Pogoji uporabe in odziv"
-                }
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Pogoji uporabe in odziv"
-                },
-                "name": "Posnetki DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Pogoji uporabe in odziv"
-                }
             },
             "EsriWorldImagery": {
                 "attribution": {

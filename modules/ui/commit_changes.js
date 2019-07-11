@@ -6,6 +6,7 @@ import { actionDiscardTags } from '../actions/discard_tags';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { utilDetect } from '../util/detect';
+import { uiDisclosure } from './disclosure';
 
 import {
     utilDisplayName,
@@ -18,7 +19,6 @@ export function uiCommitChanges(context) {
     var detected = utilDetect();
     var _entityID;
 
-
     function commitChanges(selection) {
         var history = context.history();
         var summary = history.difference().summary();
@@ -28,22 +28,29 @@ export function uiCommitChanges(context) {
 
         var containerEnter = container.enter()
             .append('div')
-            .attr('class', 'commit-section modal-section fillL2');
-
-        var titleID = summary.length === 1 ? 'change' : 'changes';
-        containerEnter
-            .append('h3')
-            .text(t('commit.' + titleID, { count: summary.length }));
-
-        containerEnter
-            .append('ul')
-            .attr('class', 'changeset-list');
+            .attr('class', 'commit-section modal-section');
 
         container = containerEnter
             .merge(container);
 
+        container.call(uiDisclosure(context, 'commit_changes', true)
+            .title(t('commit.changes_parenthetical', { count: summary.length }))
+            .content(render)
+        );
+    }
 
-        var items = container.select('ul').selectAll('li')
+
+    function render(selection) {
+        var history = context.history();
+        var summary = history.difference().summary();
+
+        selection.selectAll('.changeset-list')
+            .data([0])
+            .enter()
+            .append('ul')
+            .attr('class', 'changeset-list');
+
+        var items = selection.select('ul').selectAll('li')
             .data(summary);
 
         var itemsEnter = items.enter()
@@ -105,7 +112,7 @@ export function uiCommitChanges(context) {
         var blob = new Blob([data], {type: 'text/xml;charset=utf-8;'});
         var fileName = 'changes.osc';
 
-        var linkEnter = container.selectAll('.download-changes')
+        var linkEnter = selection.selectAll('.download-changes')
             .data([0])
             .enter()
             .append('a')

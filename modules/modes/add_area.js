@@ -5,6 +5,7 @@ import { actionAddVertex } from '../actions/add_vertex';
 
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 import { modeDrawArea } from './draw_area';
 import { osmNode, osmWay } from '../osm';
 
@@ -16,7 +17,9 @@ export function modeAddArea(context, mode) {
         .tail(t('modes.add_area.tail'))
         .on('start', start)
         .on('startFromWay', startFromWay)
-        .on('startFromNode', startFromNode);
+        .on('startFromNode', startFromNode)
+        .on('cancel', cancel)
+        .on('finish', finish);
 
     var defaultTags = { area: 'yes' };
     if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
@@ -101,6 +104,27 @@ export function modeAddArea(context, mode) {
     function undone() {
         context.enter(modeBrowse(context));
     }
+
+
+    function cancel() {
+        context.enter(modeBrowse(context));
+    }
+
+    function finish() {
+        mode.finish();
+    }
+
+    mode.finish = function() {
+        if (mode.addedEntityIDs().length) {
+            context.enter(
+                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
+            );
+        } else {
+            context.enter(
+                modeBrowse(context)
+            );
+        }
+    };
 
 
     mode.enter = function() {

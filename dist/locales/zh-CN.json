@@ -5200,10 +5200,6 @@
                     "name": "建筑部分",
                     "terms": "屋顶,楼顶,三维建筑,3D建筑"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "宿营位",
-                    "terms": "宿营位,露营位,野营位,露营地,野营地,露营场,野营场,露营,野营,野营场地,露营场地,宿营地,宿营,扎营,帐篷,野外,荒野,郊野,郊外,度假"
-                },
                 "club": {
                     "name": "俱乐部",
                     "terms": "俱乐部,社团,夜总会,会所,可乐部,社交,组织,娱乐,社区,会议,驿站,平台,会,汇,社会,文化,团体,会员"
@@ -7937,32 +7933,6 @@
                 "description": "卫星和航空影像",
                 "name": "必应航空影像"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "条款与反馈"
-                },
-                "name": "DigitalGlobe 优质影像"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "使用条款与意见反馈"
-                },
-                "description": "影像边界和拍摄日期。标签会在缩放到13层级或更高时显示。",
-                "name": "DigitalGlobe 优质影像年份"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "条款与反馈"
-                },
-                "name": "DigitalGlobe 标准影像"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "使用条款与意见反馈"
-                },
-                "description": "影像边界和拍摄日期。标签会在缩放到13层级或更高时显示。",
-                "name": "DigitalGlobe 标准影像年份"
-            },
             "EOXAT2018CLOUDLESS": {
                 "description": "经后期处理的 Sentinel 卫星影像。",
                 "name": "eox.at 2018 无云"
@@ -7999,7 +7969,7 @@
                 "attribution": {
                     "text": "条款与反馈"
                 },
-                "name": "Maxer 优质影像 (Beta)"
+                "name": "Maxar 优质影像 (Beta)"
             },
             "Maxar-Standard": {
                 "attribution": {
@@ -8527,10 +8497,6 @@
             },
             "Western-Slope-facebook": {
                 "name": "西坡 OSM Facebook"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Maptime 澳大利亚 Slack",
-                "description": "在 {signupUrl} 上注册"
             },
             "talk-au": {
                 "name": "Talk-au 邮件列表",

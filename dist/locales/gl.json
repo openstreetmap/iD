@@ -780,7 +780,7 @@
             },
             "buildings": {
                 "description": "Edificios",
-                "tooltip": "Edificios, cabanas, garaxes, etc."
+                "tooltip": "Edificios, garaxes, pendellos, etc."
             },
             "building_parts": {
                 "description": "Partes do edificio",
@@ -804,7 +804,7 @@
             },
             "rail": {
                 "description": "Recursos ferroviarios",
-                "tooltip": "Ferrovías"
+                "tooltip": "Ferrocarrís"
             },
             "pistes": {
                 "description": "Pistas",
@@ -2055,7 +2055,7 @@
                     "river-road": "River Road (canle fluvial)",
                     "river-street": "River Street",
                     "riverside-cemetery": "Riverside Cemetery",
-                    "riverwalk-trail": "Riverwalk Trail",
+                    "riverwalk-trail": "Sendeiro costeiro",
                     "riviera-theatre": "Riviera Theatre",
                     "rocky-river": "Rocky River",
                     "saint-joseph-river": "Saint Joseph River",
@@ -2491,7 +2491,7 @@
                         "street": "Rúa",
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Barrio/Comuna/Aldea pequena",
-                        "suburb": "Barrio",
+                        "suburb": "Barrio ou suburbio",
                         "suburb!jp": "Barrio",
                         "unit": "Unidade"
                     }
@@ -3928,7 +3928,7 @@
                     "label": "Horario de servizo"
                 },
                 "shelter": {
-                    "label": "Refuxio"
+                    "label": "Abeiro"
                 },
                 "shelter_type": {
                     "label": "Tipo"
@@ -4451,8 +4451,8 @@
                     "terms": "granxa, criadeiro"
                 },
                 "amenity/animal_shelter": {
-                    "name": "Refuxio de animais",
-                    "terms": "refuxio, animais, mascotas, canceira, adopción"
+                    "name": "Abeiro de animais",
+                    "terms": "abeiro, refuxio, animais, mascotas, canceira, adopción"
                 },
                 "amenity/arts_centre": {
                     "name": "Centro de arte",
@@ -4933,8 +4933,8 @@
                     "name": "Depósito de chatarra"
                 },
                 "amenity/shelter": {
-                    "name": "Abrigo",
-                    "terms": "abrigo, refuxio, cuberto, pavillón, gazebo"
+                    "name": "Abeiro",
+                    "terms": "abeiro, abrigo, refuxio, cuberto, pavillón, gazebo"
                 },
                 "amenity/shelter/gazebo": {
                     "name": "Gazebo",
@@ -4945,12 +4945,12 @@
                     "terms": "pendello"
                 },
                 "amenity/shelter/picnic_shelter": {
-                    "name": "Refuxio ou abeiro de Picnic",
-                    "terms": "refuxio, pavillón, picnic, abeiro"
+                    "name": "Abeiro de pícnic",
+                    "terms": "pícnic, refuxio, pavillón, picnic, abeiro"
                 },
                 "amenity/shelter/public_transport": {
-                    "name": "Refuxio ou marquesiña de transporte público",
-                    "terms": "refuxio, marquesiña, parada de autobús, parada de metro, espera, paraxe, agarde"
+                    "name": "Abeiro ou marquesiña de transporte público",
+                    "terms": "abeiro, refuxio, marquesiña, parada de autobús, parada de metro, espera, paraxe, agarde, paraxe de bus"
                 },
                 "amenity/shower": {
                     "name": "Ducha",
@@ -4978,7 +4978,8 @@
                     "name": "Residencia da terceira idade"
                 },
                 "amenity/social_facility/homeless_shelter": {
-                    "name": "Refuxio para Indixentes"
+                    "name": "Abeiro para persoas sen fogar",
+                    "terms": "abeiro social, abeiro, refuxio social, refuxio, comedor social, albergue, centro, vadío, vagabundo, indixente, homeless"
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Residencia de Anciáns"
@@ -5188,7 +5189,7 @@
                     "terms": "cadea, encadear, encadeamento"
                 },
                 "barrier/city_wall": {
-                    "name": "Muralla",
+                    "name": "Muralla histórica de cidade",
                     "terms": "muralla, muro"
                 },
                 "barrier/cycle_barrier": {
@@ -5428,9 +5429,6 @@
                 },
                 "building_point": {
                     "name": "Edificio"
-                },
-                "camp_site/camp_pitch": {
-                    "name": "Parcela de cámping"
                 },
                 "club": {
                     "name": "Clube"
@@ -6260,7 +6258,8 @@
                     "terms": "parque, zona verde, xardín, alameda"
                 },
                 "leisure/picnic_table": {
-                    "name": "Mesa de picnic"
+                    "name": "Mesa de pícnic",
+                    "terms": "mesa de picnic, mesa de parque, mesa de merendeiro"
                 },
                 "leisure/picnic_table/chess": {
                     "name": "Taboleiro de xadrez"
@@ -6785,7 +6784,8 @@
                     "name": "Lugar"
                 },
                 "place/neighbourhood": {
-                    "name": "Barrio"
+                    "name": "Veciñanza ou subarrio",
+                    "terms": "veciñanza, subarrio, colonia, barrio pequeno, núcleo urbano"
                 },
                 "place/plot": {
                     "name": "Parcela"
@@ -6798,13 +6798,15 @@
                     "terms": "praza, plaza"
                 },
                 "place/suburb": {
-                    "name": "Barrio / Suburbio"
+                    "name": "Barrio ou suburbio",
+                    "terms": "barrio, suburbio, división administrativa, division administrativa, burgo, delegación, delegacion, localidade, bairro, distrito, veciñanza"
                 },
                 "place/town": {
-                    "name": "Cidade"
+                    "name": "Cidade pequena"
                 },
                 "place/village": {
-                    "name": "Vila"
+                    "name": "Vila",
+                    "terms": "poboación, aldea, vila, poboado"
                 },
                 "playground/sandpit": {
                     "name": "Areeiro",
@@ -6890,7 +6892,7 @@
                     "name": "Ferrocarril"
                 },
                 "railway/abandoned": {
-                    "name": "Ferrocarril abandonado"
+                    "name": "Vía de tren abandonada"
                 },
                 "railway/buffer_stop": {
                     "name": "Parada de Buffer"
@@ -6902,7 +6904,7 @@
                     "name": "Derailer Ferroviario"
                 },
                 "railway/disused": {
-                    "name": "Ferrocarril en desuso"
+                    "name": "Vía de tren en desuso"
                 },
                 "railway/funicular": {
                     "name": "Funicular"
@@ -6918,13 +6920,16 @@
                     "name": "Monorraíl"
                 },
                 "railway/narrow_gauge": {
-                    "name": "Tren de Vía Estreita"
+                    "name": "Ferrocarril de vía estreita"
                 },
                 "railway/rail": {
                     "name": "Vía de tren"
                 },
+                "railway/rail/highspeed": {
+                    "name": "Liña de alta velocidade"
+                },
                 "railway/signal": {
-                    "name": "Sinal Tren"
+                    "name": "Sinal ferroviaria"
                 },
                 "railway/station": {
                     "name": "Estación de trens"
@@ -7427,7 +7432,8 @@
                     "name": "Museo"
                 },
                 "tourism/picnic_site": {
-                    "name": "Zona de picnic"
+                    "name": "Merendeiro ou zona de pícnic",
+                    "terms": "picnic, esparcemento, merendeiro, sitio de picnic, lugar de picnic, zona de picnic"
                 },
                 "tourism/theme_park": {
                     "name": "Parque de atraccións"
@@ -7471,6 +7477,12 @@
                 },
                 "traffic_sign": {
                     "name": "Sinal de tráfico"
+                },
+                "traffic_sign/city_limit": {
+                    "name": "Sinal de límite de cidade"
+                },
+                "traffic_sign/city_limit_vertex": {
+                    "name": "Sinal de límite de cidade"
                 },
                 "traffic_sign/maxspeed": {
                     "name": "Sinal de límite da velocidade"
@@ -7649,34 +7661,6 @@
             "Bing": {
                 "description": "Imaxes satelitais e aéreas.",
                 "name": "Imaxes aéreas do Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termos e opinións"
-                },
-                "description": "DigitalGlobe-Premium é un mosaico composto do mapa base de DigitalGlobe con algunhas rexións cubertas con +Vivid ou con imaxes personalizadas á área de interese, resolución de 50cm ou mellor e actualizado de forma máis frecuente con actualizacións continuas.",
-                "name": "Imaxes do DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termos e opinións"
-                },
-                "description": "Límites das imaxes e datas de captura. As etiquetas xorden nun nivel do achegamento de 13 e superior.",
-                "name": "Imaxes antigas do DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termos e opinións"
-                },
-                "description": "DigitalGlobe-Standard é un revisado conxunto de imaxes que cobren o 86% da superficie terrestre, cunha resolución entre 30 e 60cm onde estea dispoñible, e con imaxes de Landsat no resto das zonas. A antigüidade media é de 2,31 anos, con algunhas áreas actualizadas dúas veces por ano.",
-                "name": "Imaxes do DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termos e opinións"
-                },
-                "description": "Límites das imaxes e datas de captura. As etiquetas xorden  nun nivel do achegamento de 13 e superior.",
-                "name": "Imaxes antigas do DigitalGlobe Standard"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -8319,9 +8303,6 @@
             },
             "OSM-SoCal": {
                 "extendedDescription": "O OpenStreetMap (OSM) Southern California é para todos aquilos interesados ​​en cartografar para traballar xuntos co OpenStreetMap. O OpenStreetMap, a Wikipedia de mapas, é un mapa de código aberto e de balde creado por máis de 1.000.000 de voluntarios en todo o mundo. Todos son benvidos. Se non coñece o OpenStreetMap, ensinarémoslle. Se ten unha idea para un proxecto de cartografado ou incluso unha andaina ou roteiro que o grupo poida facer, xenial!"
-            },
-            "Maptime-Australia-Slack": {
-                "description": "Rexistrarse en {signupUrl}"
             },
             "OSM-AR-facebook": {
                 "name": "Facebook do OpenStreetMap Arxentina",

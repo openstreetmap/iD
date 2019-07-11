@@ -19,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Aggiungi un elemento",
+                "description": "Cerca elementi da aggiungere alla mappa.",
                 "key": "Tab",
                 "result": "{count} risultato",
                 "results": "{count} risultati"
@@ -616,6 +618,7 @@
         },
         "geocoder": {
             "search": "Cerca in tutto il mondo...",
+            "no_results_visible": "Nessun risultato nell’area visibile della mappa",
             "no_results_worldwide": "Nessun risultato trovato"
         },
         "geolocate": {
@@ -862,6 +865,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "Hai modifiche non salvate",
+            "description": "Vuoi ripristinare le modifiche non salvate da una sessione precedente?",
+            "restore": "Ripristina le mie modifiche",
+            "reset": "Elimina le mie modifiche"
+        },
         "save": {
             "title": "Salva",
             "help": "Revisiona le tue modifiche e caricale su OpenStreetMap, rendendole visibili ad altri utenti.",
@@ -896,10 +905,14 @@
             }
         },
         "success": {
+            "just_edited": "Hai appena modificato OpenStreetMap!",
+            "thank_you": "Grazie per aver migliorato la mappa.",
+            "thank_you_location": "Grazie per aver migliorato la mappa attorno a {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
+            "help_html": "Le tue modifiche dovrebbero apparire su OpenStreetMap entro pochi minuti. Per le altre mappe che usano OpenStreetMap occorrerà attendere po’ di più.",
             "help_link_text": "Dettagli",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/IT:FAQ#Ho_editato_i_dati_tutto_il_giorno.2C_ma_le_mie_modifiche_non_appaiono_nel_viewer.21",
             "view_on_osm": "Vedi le modifiche su OSM",
@@ -916,7 +929,10 @@
             "cancel": "Cancella"
         },
         "splash": {
-            "walkthrough": "Inizia il tutorial"
+            "welcome": "Benvenuti nell'editor OpenStreetMap iD",
+            "text": "iD è un intuitivo ma potente strumento per contribuire alla migliore mappa libera del mondo. Questa è la versione {version}. Per ulteriori informazioni vai su {website} o segnala gli errori su {github}.",
+            "walkthrough": "Inizia il tutorial",
+            "start": "Modifica"
         },
         "source_switch": {
             "live": "live",
@@ -2840,6 +2856,10 @@
                     "label": "Dispositivi",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diametro",
+                    "placeholder": "5 mm, 10 cm, 15 in..."
+                },
                 "diaper": {
                     "label": "Fasciatoio"
                 },
@@ -3736,6 +3756,9 @@
                         "yes": "Accettata"
                     }
                 },
+                "resort": {
+                    "label": "Tipo"
+                },
                 "resource": {
                     "label": "Risorse"
                 },
@@ -4184,6 +4207,9 @@
                 "trees": {
                     "label": "Alberi"
                 },
+                "trench": {
+                    "label": "Tipo"
+                },
                 "trolley_wire": {
                     "label": "Cavi aerei filobus"
                 },
@@ -4201,6 +4227,9 @@
                         "test": "Per collaudi",
                         "tourism": "Turismo"
                     }
+                },
+                "valve": {
+                    "label": "Tipo"
                 },
                 "vending": {
                     "label": "Tipi di prodotti"
@@ -5537,10 +5566,6 @@
                 "building_point": {
                     "name": "Edificio"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Piazzola",
-                    "terms": "Piazzola,lotto"
-                },
                 "club": {
                     "name": "Club",
                     "terms": "sociale,centro,centro sociale,centro aggregazione,centro culturale"
@@ -5821,6 +5846,9 @@
                 "ford": {
                     "name": "Guado",
                     "terms": "guado"
+                },
+                "ford_line": {
+                    "name": "Guado"
                 },
                 "golf/bunker": {
                     "name": "Bunker",
@@ -8670,37 +8698,39 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Le più recenti immagini aeree AIV delle Fiandre"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Fiandre 2013-2015 immagini aeree 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Fiandre GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, rilievo ombreggiato multidirezionale 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, fattore Skyview 0,25 m"
+            },
             "Bing": {
                 "description": "Immagini satellitari e aeree.",
                 "name": "Immagini aeree Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termini & Feedback"
-                },
-                "description": "DigitalGlobe-Premium è un mosaico di DigitalGlobe basemap con alcune selezionate regioni in +Vivid o immagini da aree di interesse personalizzate, con una risoluzione di meno di 50cm, aggiornamenti più frequenti e migliorata continuamente.",
-                "name": "Immagini DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termini & Feedback"
-                },
-                "description": "Confini delle immagini e data di acquisizione. Le etichette appaiono a livelli di ingrandimento 13 e successivi.",
-                "name": "DigitalGlobe Premium Imagery Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termini & Feedback"
-                },
-                "description": "DigitalGlobe-Standard è un set curato di immagini che copre l’86% della terra emersa mondiale, con risoluzione disponibile dai 30 ai 60cm e copertura alternativa che usa Landsat. L’età media è di 2,31 anni anche se alcune aree vengono aggiornate due volte l’anno.",
-                "name": "Immagini DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termini & Feedback"
-                },
-                "description": "Confini delle immagini e data di acquisizione. Le etichette appaiono a livelli di ingrandimento 13 e successivi.",
-                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
@@ -8740,12 +8770,15 @@
             "Maxar-Premium": {
                 "attribution": {
                     "text": "Termini & Feedback"
-                }
+                },
+                "description": "Maxar Premium è un mosaico composto dalla mappa base Maxar con alcune regioni in +Vivid o immagini da aree di interesse personalizzate, con una risoluzione di almeno 50cm, aggiornato con più frequenza e migliorato continuamente.",
+                "name": "Immagini Maxar Premium (Beta)"
             },
             "Maxar-Standard": {
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
+                "description": "Maxar Standard è un set curato di immagini che copre l’86% della terra emersa mondiale, con risoluzione dai 30 ai 60cm laddove possibile e copertura alternativa che usa Landsat. L’età media è di 2,31 anni anche se alcune aree vengono aggiornate due volte l’anno.",
                 "name": "Maxar Standard Imagery (Beta)"
             },
             "OSM_Inspector-Addresses": {
@@ -8809,6 +8842,7 @@
                 "name": "TIGER Roads 2018"
             },
             "USDA-NAIP": {
+                "description": "L’anno più recente di DOQQs dal programma nazionale delle immagini per l’agricoltura (NAIP) per ciascuno stato degli Stati Uniti contigui.",
                 "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
@@ -8892,17 +8926,23 @@
             "basemap.at-overlay": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "Annotazioni sovrapposte fornite da basemap.at.",
+                "name": "Sovrimpresso basemap.at"
             },
             "basemap.at-surface": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "Livello superficie fornito da basemap.at.",
+                "name": "Superficie basemap.at"
             },
             "basemap.at-terrain": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "Livello terreno fornito da basemap.at.",
+                "name": "Terreno basemap.at"
             },
             "eufar-balaton": {
                 "attribution": {
@@ -9846,10 +9886,6 @@
                 "name": "Meetup di OSM di Western Slope",
                 "description": "Mappatori e utenti OpenStreetMap intorno a Grand Junction (Colorado)",
                 "extendedDescription": "L’obiettivo di questo gruppo è quello di introdurre la comunità a OpenStreetMap, sviluppare una gruppo di mappatori, creare i più strabilianti dati georiferiti utilizzando qualsiasi metodo possibile e infine studiare dei metodi che permettano a questi dati di ritornare nella nostra comunità. Immagina un segnale dei percorsi accurato! Immagine un’ulteriore sviluppo delle piste ciclabili! Immagina qualsiasi cosa, quello è il bello di OpenStreetMap!"
-            },
-            "Maptime-Australia-Slack": {
-                "name": "Slack di Australia Maptime",
-                "description": "Registrati all'indirizzo {signupUrl}"
             },
             "talk-au": {
                 "name": "Mailinglist talk-au",

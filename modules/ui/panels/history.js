@@ -94,7 +94,8 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        var selectedNoteID = context.selectedNoteID();
+        var mode = context.mode();
+        var selectedNoteID = mode.selectedNoteID && mode.selectedNoteID();
         osm = context.connection();
 
         var selected, note, entity;

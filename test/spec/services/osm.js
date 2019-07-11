@@ -284,7 +284,7 @@ describe('iD.serviceOsm', function () {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 done();
-            }, 50);
+            }, 500);
         });
 
         it('#isDataLoaded', function(done) {
@@ -298,7 +298,7 @@ describe('iD.serviceOsm', function () {
             window.setTimeout(function() {
                 expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.ok;
                 done();
-            }, 50);
+            }, 500);
         });
     });
 
@@ -609,7 +609,7 @@ describe('iD.serviceOsm', function () {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 done();
-            }, 50);
+            }, 500);
         });
     });
 

@@ -1,5 +1,4 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import {event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
@@ -8,7 +7,6 @@ import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
-import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
@@ -16,17 +14,14 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetBrowser } from './preset_browser';
 import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
-import { uiTooltipHtml } from './tooltipHtml';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCleanTags } from '../util';
 import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose');
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
-    var _scrolled = false;
     var _base;
     var _entityID;
     var _activePreset;
@@ -34,14 +29,13 @@ export function uiEntityEditor(context) {
     var _presetFavorite;
 
     var entityIssues = uiEntityIssues(context);
-    var quickLinks = uiQuickLinks();
     var presetEditor = uiPresetEditor(context).on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
     var rawMembershipEditor = uiRawMembershipEditor(context);
     var presetBrowser = uiPresetBrowser(context, [], choosePreset);
 
-    function entityEditor(selection, newFeature) {
+    function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = Object.assign({}, entity.tags);  // shallow copy
 
@@ -61,8 +55,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'inspector-body')
-            .on('scroll.entity-editor', function() { _scrolled = true; });
+            .attr('class', 'entity-editor inspector-body sep-top');
 
         var presetButtonWrap = bodyEnter
             .append('div')
@@ -84,10 +77,6 @@ export function uiEntityEditor(context) {
         if (!bodyEnter.empty()) {
             presetBrowser.render(bodyEnter);
         }
-
-        bodyEnter
-            .append('div')
-            .attr('class', 'preset-quick-links');
 
         bodyEnter
             .append('div')
@@ -115,12 +104,12 @@ export function uiEntityEditor(context) {
             .attr('class', 'key-trap');
 
 
-        var footer = selection.selectAll('.footer')
+        var footer = selection.selectAll('.inspector-footer')
             .data([0]);
 
         footer = footer.enter()
             .append('div')
-            .attr('class', 'footer')
+            .attr('class', 'inspector-footer')
             .merge(footer);
 
         footer
@@ -155,7 +144,6 @@ export function uiEntityEditor(context) {
                     presetBrowser.setAllowedGeometry([context.geometry(_entityID)]);
                     presetBrowser.show();
                 }
-                //dispatch.call('choose', this, _activePreset);
             })
             .on('mousedown', function() {
                 d3_event.preventDefault();
@@ -186,21 +174,6 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'namepart')
             .text(function(d) { return d; });
-
-        // update quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
-
-        body.select('.preset-quick-links')
-            .call(quickLinks.choices(choices));
 
 
         // update editor sections
@@ -256,6 +229,7 @@ export function uiEntityEditor(context) {
 
 
         function historyChanged(difference) {
+            if (selection.selectAll('.entity-editor').empty()) return;
             if (_state === 'hide') return;
             var significant = !difference ||
                     difference.didChange.properties ||
@@ -331,8 +305,6 @@ export function uiEntityEditor(context) {
     entityEditor.modified = function(val) {
         if (!arguments.length) return _modified;
         _modified = val;
-        d3_selectAll('button.preset-close use')
-            .attr('xlink:href', (_modified ? '#iD-icon-apply' : '#iD-icon-close'));
         return entityEditor;
     };
 
@@ -351,17 +323,6 @@ export function uiEntityEditor(context) {
         _entityID = val;
         _base = context.graph();
         _coalesceChanges = false;
-
-        // reset the scroll to the top of the inspector (warning: triggers reflow)
-        if (_scrolled) {
-            window.requestIdleCallback(function() {
-                var body = d3_selectAll('.entity-editor-pane .inspector-body');
-                if (!body.empty()) {
-                    _scrolled = false;
-                    body.node().scrollTop = 0;
-                }
-            });
-        }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);
 
@@ -383,5 +344,5 @@ export function uiEntityEditor(context) {
     };
 
 
-    return utilRebind(entityEditor, dispatch, 'on');
+    return entityEditor;
 }

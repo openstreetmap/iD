@@ -2856,6 +2856,10 @@
                     "label": "Appareils",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Diamètre",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diaper": {
                     "label": "Table à langer"
                 },
@@ -3495,6 +3499,9 @@
                 "operator": {
                     "label": "Exploitant"
                 },
+                "operator/type": {
+                    "label": "Type d'exploitant"
+                },
                 "outdoor_seating": {
                     "label": "Places en terrasse"
                 },
@@ -3654,6 +3661,9 @@
                 "playground/min_age": {
                     "label": "Age minimum"
                 },
+                "polling_station": {
+                    "label": "Bureau de vote"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -3734,7 +3744,7 @@
                     "label": "Identifiant de l'arrêt"
                 },
                 "ref_taxiway": {
-                    "label": "Nom de la Voie de Taxi",
+                    "label": "Nom de la voie de circulation",
                     "placeholder": "p.ex. A5"
                 },
                 "relation": {
@@ -4223,6 +4233,9 @@
                         "test": " Voie de test pour les nouveaux trains",
                         "tourism": "Touristique"
                     }
+                },
+                "valve": {
+                    "label": "Type"
                 },
                 "vending": {
                     "label": "Marchandise proposée"
@@ -4723,6 +4736,10 @@
                     "name": "Cybercafé",
                     "terms": "Café internet,Cybercafé"
                 },
+                "amenity/karaoke": {
+                    "name": "Karaoke",
+                    "terms": "karaoke"
+                },
                 "amenity/kindergarten": {
                     "name": "Établissement pré-scolaire - école maternelle, jardin d'enfants",
                     "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
@@ -4861,6 +4878,10 @@
                     "name": "Poste de police",
                     "terms": "Police, Gendarmerie"
                 },
+                "amenity/polling_station": {
+                    "name": "Bureau de vote permanent",
+                    "terms": "bureau de vote,vote,élections,démocratie,démocratique"
+                },
                 "amenity/post_box": {
                     "name": "Boîte aux lettres",
                     "terms": "Boîte aux lettres"
@@ -4895,7 +4916,7 @@
                 },
                 "amenity/public_bookcase": {
                     "name": "Microbibliothèque",
-                    "terms": "Bibliothèque en libre service, Micro-bibliothèque"
+                    "terms": "Bibliothèque en libre service, Micro-bibliothèque, boîte à livres"
                 },
                 "amenity/ranger_station": {
                     "name": "Services publics des parcs nationaux",
@@ -5626,10 +5647,6 @@
                 "building_point": {
                     "name": "Bâtiment "
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Parcelle dans un camping",
-                    "terms": "Emplacement de camping"
-                },
                 "club": {
                     "name": "Club",
                     "terms": "Club,association,mouvement de jeunesse,scout,guide"
@@ -5815,6 +5832,10 @@
                     "name": "Cordonnier",
                     "terms": "Bottier, Cordonnier"
                 },
+                "craft/signmaker": {
+                    "name": "Fabriquant d'enseignes",
+                    "terms": "enseignes,signalétique"
+                },
                 "craft/stonemason": {
                     "name": "Tailleur de pierre",
                     "terms": "Tailleur de pierre"
@@ -5926,6 +5947,9 @@
                     "name": "Gué",
                     "terms": "Gué"
                 },
+                "ford_line": {
+                    "name": "Gué"
+                },
                 "golf/bunker": {
                     "name": "Bunker (golf)",
                     "terms": "Bunker, Fosse de sable, bunker de fairway"
@@ -5993,6 +6017,10 @@
                 "healthcare/blood_donation": {
                     "name": "Centre de don du sang",
                     "terms": "Centre de don du sang, Banque du sang"
+                },
+                "healthcare/counselling": {
+                    "name": "Centre de conseil médical",
+                    "terms": "conseil,diététique,sexe,régime"
                 },
                 "healthcare/hospice": {
                     "name": "Hospice",
@@ -6306,8 +6334,8 @@
                     "terms": "Point de retournement"
                 },
                 "highway/turning_loop": {
-                    "name": "Boucle de retournement (Irlande)",
-                    "terms": "Boucle de manœuvre (Irelande)"
+                    "name": "Boucle de retournement (îlot central)",
+                    "terms": "Boucle de manœuvre (îlot central)"
                 },
                 "highway/unclassified": {
                     "name": "Route mineure ou non classifiée",
@@ -7064,6 +7092,10 @@
                     "name": "Pipeline souterrain",
                     "terms": "pipeline,pétrole,gaz naturel,eau,égouts,gazoduc,oléoduc"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Valve sur un pipeline",
+                    "terms": "Pipeline, Gazoduc, Oléoduc"
+                },
                 "man_made/pumping_station": {
                     "name": "Station de pompage",
                     "terms": "Station de pompage,pompage,pompe"
@@ -7095,6 +7127,10 @@
                 "man_made/survey_point": {
                     "name": "Borne géodésique",
                     "terms": "Borne géodésique, monument géodésique, repère géodésique"
+                },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "Torii, portique, portail, shinto, temple shinto"
                 },
                 "man_made/tower": {
                     "name": "Tour",
@@ -7163,6 +7199,22 @@
                 "manhole/telecom": {
                     "name": "Puits de télécommunication",
                     "terms": "couvert,puits,trou,télécom,téléphone"
+                },
+                "military/bunker": {
+                    "name": "Bunker",
+                    "terms": "Bunker, Casemate, Combat, Garde, Marine, Navy, Troupes, Armée"
+                },
+                "military/checkpoint": {
+                    "name": "Poste de contrôle militaire",
+                    "terms": "Poste-frontière, Point de contrôle, Poste de contrôle, Checkpoint"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Site d'explosion nucléaire",
+                    "terms": "Site d'explosion nucléaire, bombe atomique, détonation, atomique, essai nucléaire"
+                },
+                "military/office": {
+                    "name": "Bureau Militaire",
+                    "terms": "Bureau militaire, Bureau de recrutement militaire, militaire"
                 },
                 "military/trench": {
                     "name": "Tranchée militaire",
@@ -7675,6 +7727,10 @@
                 "point": {
                     "name": "Point",
                     "terms": "Point"
+                },
+                "polling_station": {
+                    "name": "Bureau de vote temporaire",
+                    "terms": "bureau de vote,vote,élections,démocratie,démocratique"
                 },
                 "power": {
                     "name": "Énergie"
@@ -8258,6 +8314,10 @@
                 },
                 "shop/fashion": {
                     "name": "Boutique de mode"
+                },
+                "shop/fashion_accessories": {
+                    "name": "Boutique d'accessoires de mode",
+                    "terms": "sac à main,cologne,parfum,chapeau,bijoux,porte-monnaie,écharpe,lunettes de soleil,parapluie,montres"
                 },
                 "shop/fireplace": {
                     "name": "Magasin de cheminées",
@@ -9093,34 +9153,6 @@
                 "description": "Images satellite et aérienne.",
                 "name": "Images aériennes Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termes & commentaires"
-                },
-                "description": "DigitalGlobe-Premium est une mosaïque composée de la carte de base de DigitalGlobe avec des régions utilisant +Vivid ou des imageries à des endroits intéressants avec une résolution de 50 cm ou mieux, et rafraîchi plus fréquemment avec des mises à jours régulières.",
-                "name": "Images DigitalGlobe premium"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Termes & commentaires"
-                },
-                "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 13.",
-                "name": "Images DigitalGlobe Premium Vintage"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termes & commentaires"
-                },
-                "description": "DigitalGlobe-Standard est un ensemble organisé d'images, fournies par Landsat, couvrant 86% de la surface de la Terre, avec une résolution de 30-60cm lorsque disponible. L'âge moyen de ces images est 2,31 ans, avec certaines régions mises à jour 2 fois par an.",
-                "name": "Images DigitalGlobe standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termes & commentaires"
-                },
-                "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 13.",
-                "name": "Images DigitalGlobe Standard Vintage"
-            },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {
                     "text": "Sentinel-2 sans nuages — https://s2maps.eu par EOX IT Services GmbH (contient des données Copernicus Sentinel modifiées de 2017 et de 2018)"
@@ -9827,10 +9859,33 @@
                 "name": "Jeunes cartographes de l'Open University of Tanzania",
                 "description": "Groupe des jeunes cartographes de l'Open University of Tanzania"
             },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers à l'Université de Dar es Salaam",
+                "description": "Chapitre YouthMappers à l'Université de Dar es Salaam"
+            },
+            "ym-Busitema-University": {
+                "description": "Chapitre YouthMappers à l'Université de Busitema"
+            },
+            "ym-Gulu-University": {
+                "description": "Chapitre YouthMappers à l'Université de Gulu"
+            },
+            "ym-Kumi-University": {
+                "description": "Chapitre YouthMappers à l'Université de Kumi"
+            },
+            "ym-Makerere-University": {
+                "description": "Chapitre YouthMappers à l'Université de Makerere"
+            },
+            "ym-St.-Augustine-International-University": {
+                "name": "YouthMappers à l'Université Internationale de St Augustine",
+                "description": "Chapitre YouthMappers à l'Université Internationale de St. Augustine"
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Améliorez OpenStreetMap au Bangladesh",
                 "extendedDescription": "Vous cartographiez au Bangladesh ? Vous avez des questions, souhaitez entrer en contact avec la communauté ici ? Rejoignez-nous sur {url}. Vous êtes tous les bienvenus !"
+            },
+            "ym-Khulna-University": {
+                "name": "OpenStreetMap"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Inde - cartographie participative du voisinage",
@@ -10261,9 +10316,16 @@
                 "name": "Liste de diffusion OpenStreetMap pour le Trentin",
                 "description": "Liste de discussion OpenStreetMap Italie régionale pour Trentino."
             },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers à YU"
+            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo sur Telegram",
                 "description": "Groupe Telegram public semi-officiel pour tout le Kosovo.  Nous accueillons tous les cartographes de n'importe où dans toutes les langues."
+            },
+            "ym-Universit-Mohammed-V-Rabat": {
+                "name": "Brahmapoutre à Rabat",
+                "description": "Chapitre YouthMappers à l'Université Mohammed V de Rabat"
             },
             "no-forum": {
                 "name": "Forum web d'OpenStreetMap Norvège",
@@ -10297,6 +10359,10 @@
                 "name": "Liste de diffusion d'OpenStreetMap Slovénie",
                 "description": "Liste de diffusion de la communauté OpenStreetMap en Slovénie"
             },
+            "si-twitter": {
+                "name": "Fil Twitter d'OpenStreetMap Slovénie",
+                "description": "Suivez OpenStreetMap Slovénie sur Twitter : {url}"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Liste de diffusion Talk-es",
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Espagne"
@@ -10304,6 +10370,10 @@
             "OSM-ES-telegram": {
                 "name": "@OSMes sur Telegram",
                 "description": "Chat Telegram d'OpenStreetMap Espagne"
+            },
+            "ym-Universidad-Autonoma-de-Madrid": {
+                "name": "YouthMappers à l'UAM",
+                "description": "Chapitre YouthMappers à l'Université Autonome de Madrid"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
@@ -10347,6 +10417,12 @@
                 "name": "IRC d'OpenStreetMap Royaume-Uni",
                 "description": "Rejoignez #osm-gb sur irc.oftc.net (port 6667)",
                 "extendedDescription": "Rejoignez #osm-gb sur irc.oftc.net (port 6667), soyez patient SVP et attendez quelques minutes si vous posez une question"
+            },
+            "ym-University-of-Exeter": {
+                "description": "Chapitre YouthMappers à l'Université d'Exeter"
+            },
+            "ym-University-of-Warwick": {
+                "description": "Chapitre YouthMappers à l'Université de Warwick"
             },
             "OSM-CA-Slack": {
                 "name": "Slack OSM-CA",
@@ -10474,7 +10550,12 @@
             "OSM-US": {
                 "name": "OpenStreetMap États-Unis",
                 "description": "Nous aidons OpenStreetMap à grandir et à s'améliorer aux États-Unis.",
-                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}"
+                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}",
+                "events": {
+                    "sotmus2019": {
+                        "name": "State of the Map USA 2019"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -10504,13 +10585,30 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap autour de Grand Junction, CO",
                 "extendedDescription": "Le but de ce groupe est de présenter OpenStreetMap aux communautés, développer une communauté de cartographes, créer la meilleure donnée géographique possible par n'importe quel moyen et finalement d'élaborer une stratégie pour communiquer cette donnée aux communautés. Imaginez des panneaux indicatifs sur les chemins de randonnées ! Imaginez un meilleur développement des voies cyclables ! Imaginez tout ce que vous voulez, c'est le plaisir d'OpenStreetMap !"
             },
-            "Maptime-Australia-Slack": {
-                "name": "Slack de Maptime Australia",
-                "description": "Enregistrez-vous sur {signupUrl}"
+            "ym-Kansas-State-University": {
+                "description": "Chapitre YouthMappers à l'Université d’État du Kansas"
+            },
+            "ym-Miami-University": {
+                "description": "Chapitre YouthMappers à l'Université de Miami"
+            },
+            "ym-University-of-South-Carolina": {
+                "description": "Chapitre YouthMappers à l'Université de Caroline du Sud"
+            },
+            "ym-University-of-Vermont": {
+                "description": "Chapitre YouthMappers à l'Université du Vermont"
+            },
+            "ym-University-of-Wyoming": {
+                "description": "Chapitre YouthMappers à l'Université du Wyoming"
             },
             "talk-au": {
                 "name": "Liste de diffusion talk-au",
                 "description": "Lieu de discussion pour les cartographes australiens"
+            },
+            "Maptime-Oceania-Slack": {
+                "description": "Enregistrez-vous sur {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "Liste de diffusion Talk-nz"
             },
             "OSM-AR-facebook": {
                 "name": "Page Facebook d'OpenStreetMap Argentine",
@@ -10618,6 +10716,12 @@
                 "name": "OpenStreetMap Colombie",
                 "description": "Des nouvelles de la communauté d'OpenStreetMap Colombie et de la fondation OSMCo"
             },
+            "ym-Universidad-de-La-Guajira": {
+                "description": "Chapitre YouthMappers à l'Université de La Guajira"
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers à Bogota"
+            },
             "OSM-EC-telegram": {
                 "name": "OSM Équateur sur Telegram",
                 "description": "Chat Telegram d'OpenStreetMap Équateur"
@@ -10649,6 +10753,19 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Pérou",
                 "description": "Nouvelles et ressources pour la communauté d'OpenStreetMap au Pérou"
+            },
+            "uy-forum": {
+                "name": "Forum OpenStreetMap UY",
+                "description": "Forum web d'OpenStreetMap Uruguay"
+            },
+            "uy-irc": {
+                "name": "IRC d'OpenStreetMap Uruguay",
+                "description": "Rejoignez #osmuruguay sur irc.freenode.org (port 6667)",
+                "extendedDescription": "Rejoignez #osmuruguay sur irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "Liste de diffusion talk-uy",
+                "description": "Talk-uy est la liste de diffusion officielle pour la communauté uruguayenne d'OSM"
             },
             "LATAM-Facebook": {
                 "name": "Facebook d'OpenStreetMap Amérique Latine",

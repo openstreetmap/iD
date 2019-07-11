@@ -104,6 +104,9 @@ export var osmRightSideIsInsideTags = {
     },
     'man_made': {
         'embankment': true
+    },
+    'waterway': {
+        'weir': true
     }
 };
 

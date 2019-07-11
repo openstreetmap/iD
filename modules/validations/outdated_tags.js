@@ -102,7 +102,16 @@ export function validationOutdatedTags(context) {
                 var brand = brands.brands[match.kvnd];
                 if (brand && brand.tags['brand:wikidata']) {
                     subtype = 'noncanonical_brand';
-                    Object.assign(newTags, brand.tags);
+
+                    var keepTags = ['takeaway'].reduce(function(acc, k) {
+                        if (newTags[k]) {
+                            acc[k] = newTags[k];
+                        }
+                        return acc;
+                    }, {});
+
+                    nsiKeys.forEach(function(k) { delete newTags[k]; });
+                    Object.assign(newTags, brand.tags, keepTags);
                     break;
                 }
             }

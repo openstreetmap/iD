@@ -29,12 +29,12 @@ export function uiToolAddFeature(context) {
 
     tool.render = function(selection) {
 
-        selection
+        var buttonEnter = selection
             .selectAll('.bar-button')
             .data([0])
             .enter()
             .append('button')
-            .attr('class', 'bar-button wide')
+            .attr('class', 'bar-button')
             .attr('tabindex', -1)
             .on('mousedown', function() {
                 d3_event.preventDefault();
@@ -60,6 +60,10 @@ export function uiToolAddFeature(context) {
                 .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
             )
             .call(svgIcon('#iD-logo-features'));
+
+        buttonEnter
+            .append('span')
+            .call(svgIcon('#iD-icon-down', 'disclosure-icon'));
 
         button = selection.select('.bar-button');
 

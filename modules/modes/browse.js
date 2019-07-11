@@ -19,7 +19,7 @@ export function modeBrowse(context) {
 
     var behaviors = [
         behaviorPaste(context),
-        behaviorHover(context).on('hover', context.ui().sidebar.hover),
+        behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
         modeDragNode(context).behavior,
@@ -38,7 +38,6 @@ export function modeBrowse(context) {
 
 
     mode.exit = function() {
-        context.ui().sidebar.hover.cancel();
         behaviors.forEach(context.uninstall);
     };
 

@@ -31,7 +31,6 @@ import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
-import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiStatus } from './status';
 import { uiTopToolbar } from './top_toolbar';
@@ -254,19 +253,14 @@ export function uiInit(context) {
             .classed('hide', true)
             .call(ui.photoviewer);
 
-        var sidebarWrap = overMap
+        var assistantWrap = overMap
             .append('div')
-            .attr('class', 'sidebar-wrap');
+            .attr('class', 'assistant-wrap');
 
         ui.assistant = uiAssistant(context);
 
-        sidebarWrap
+        assistantWrap
             .call(ui.assistant);
-
-        sidebarWrap
-            .append('div')
-            .attr('id', 'sidebar')
-            .call(ui.sidebar);
 
 
         // Bind events
@@ -287,7 +281,6 @@ export function uiInit(context) {
         var panPixels = 80;
         context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
-            .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
@@ -369,18 +362,16 @@ export function uiInit(context) {
 
     ui.assistant = null;
 
-    ui.sidebar = uiSidebar(context);
-
     ui.photoviewer = uiPhotoviewer(context);
 
     ui.onResize = function(withPan) {
         var map = context.map();
 
-        // Recalc dimensions of map and sidebar.. (`true` = force recalc)
+        // Recalc dimensions of map and assistant.. (`true` = force recalc)
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
         var mapDimensions = utilGetDimensions(d3_select('#content'), true);
-        utilGetDimensions(d3_select('#sidebar'), true);
+        utilGetDimensions(d3_select('.assistant'), true);
 
         if (withPan !== undefined) {
             map.redrawEnable(false);

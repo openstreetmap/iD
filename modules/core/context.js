@@ -25,7 +25,7 @@ export function coreContext() {
     var context = utilRebind({}, dispatch, 'on');
     var _deferred = new Set();
 
-    context.version = '2.15.2';
+    context.version = '2.15.3';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
@@ -281,20 +281,6 @@ export function coreContext() {
 
     context.activeID = function() {
         return mode && mode.activeID && mode.activeID();
-    };
-
-    var _selectedNoteID;
-    context.selectedNoteID = function(noteID) {
-        if (!arguments.length) return _selectedNoteID;
-        _selectedNoteID = noteID;
-        return context;
-    };
-
-    var _selectedErrorID;
-    context.selectedErrorID = function(errorID) {
-        if (!arguments.length) return _selectedErrorID;
-        _selectedErrorID = errorID;
-        return context;
     };
 
 

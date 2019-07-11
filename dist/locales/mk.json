@@ -19,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Додај елемент",
+                "description": "Пребарајте елементи за додавање на картата.",
                 "key": "Јазиче",
                 "result": "{count} исходна ставка",
                 "results": "{count} исходни ставки"
@@ -2325,6 +2327,10 @@
                     "label": "Уреди",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "Пречник",
+                    "placeholder": "5 мм, 10 см, 15 ин…"
+                },
                 "diaper": {
                     "label": "Достапно менување пелени"
                 },
@@ -2964,6 +2970,9 @@
                 "operator": {
                     "label": "Стопанисувач"
                 },
+                "operator/type": {
+                    "label": "Вид стопанисувач"
+                },
                 "outdoor_seating": {
                     "label": "Надворешни седишта"
                 },
@@ -3122,6 +3131,9 @@
                 },
                 "playground/min_age": {
                     "label": "Најг. возраст"
+                },
+                "polling_station": {
+                    "label": "Гласачко место"
                 },
                 "population": {
                     "label": "Население"
@@ -3693,6 +3705,9 @@
                         "tourism": "Туристичка"
                     }
                 },
+                "valve": {
+                    "label": "Вид"
+                },
                 "vending": {
                     "label": "Вид на стока"
                 },
@@ -4099,6 +4114,9 @@
                 "amenity/internet_cafe": {
                     "name": "Интернет-кафуле"
                 },
+                "amenity/karaoke": {
+                    "name": "Просторија за караоке"
+                },
                 "amenity/kindergarten": {
                     "name": "Двор на детска градинка"
                 },
@@ -4203,6 +4221,9 @@
                 },
                 "amenity/police": {
                     "name": "Полиција"
+                },
+                "amenity/polling_station": {
+                    "name": "Трајно гласачко место"
                 },
                 "amenity/post_box": {
                     "name": "Поштенско сандаче"
@@ -4786,9 +4807,6 @@
                 "building_point": {
                     "name": "Градба"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "Камп-терен"
-                },
                 "club": {
                     "name": "Клуб"
                 },
@@ -4930,6 +4948,9 @@
                 "craft/shoemaker": {
                     "name": "Чевлар"
                 },
+                "craft/signmaker": {
+                    "name": "Изработка на натписи и знаци"
+                },
                 "craft/stonemason": {
                     "name": "Каменорезец"
                 },
@@ -5020,6 +5041,9 @@
                 "ford": {
                     "name": "Брод"
                 },
+                "ford_line": {
+                    "name": "Брод"
+                },
                 "golf/bunker": {
                     "name": "Песочна бразда"
                 },
@@ -5070,6 +5094,9 @@
                 },
                 "healthcare/blood_donation": {
                     "name": "Крводарителски центар"
+                },
+                "healthcare/counselling": {
+                    "name": "Центар за советување"
                 },
                 "healthcare/hospice": {
                     "name": "Дом за изнемоштени лица"
@@ -5891,6 +5918,9 @@
                 "man_made/pipeline/underground": {
                     "name": "Подземен цевковод"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Цевководен вентил"
+                },
                 "man_made/pumping_station": {
                     "name": "Црпна станица"
                 },
@@ -5914,6 +5944,9 @@
                 },
                 "man_made/survey_point": {
                     "name": "Надзорно место"
+                },
+                "man_made/torii": {
+                    "name": "тории"
                 },
                 "man_made/tower": {
                     "name": "Кула"
@@ -5965,6 +5998,18 @@
                 },
                 "manhole/telecom": {
                     "name": "Телекомска шахта"
+                },
+                "military/bunker": {
+                    "name": "Воен бункер"
+                },
+                "military/checkpoint": {
+                    "name": "Контролна точка"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Место на атомска експлозија"
+                },
+                "military/office": {
+                    "name": "Воена канцеларија"
                 },
                 "military/trench": {
                     "name": "Воен ров"
@@ -6355,6 +6400,9 @@
                 },
                 "point": {
                     "name": "Точка"
+                },
+                "polling_station": {
+                    "name": "Привремено гласачко место"
                 },
                 "power": {
                     "name": "Електродистрибуција"
@@ -6805,6 +6853,9 @@
                 },
                 "shop/fashion": {
                     "name": "Модна продавница"
+                },
+                "shop/fashion_accessories": {
+                    "name": "Продавница за модни додатоци"
                 },
                 "shop/fireplace": {
                     "name": "Продавница за камини"
@@ -7446,34 +7497,6 @@
             "Bing": {
                 "description": "Сателитски и воздушни снимки",
                 "name": "Воздушни слики од Bing"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Услови и мислења"
-                },
-                "description": "DigitalGlobe-Напредна е мозаик составен од основната карта на DigitalGlobe и избрани подрачја исполнети со +Vivid или прилагодени снимки за местата од интерес, разложност 50 см или подобра, превчитувањето е позачестено со постојаните поднови.",
-                "name": "Напредни снимки на DigitalGlobe"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Услови и мислења"
-                },
-                "description": "Граници на снимките и датуми на снимање. Натписите се појавуваат при степен на приближеност 13 и повисоко.",
-                "name": "Напредни снимки на DigitalGlobe — Старински"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Услови и мислења"
-                },
-                "description": "DigitalGlobe-Стандардна е стручно згрижена снимкозбирка која покрива 86% од копнената маса на Земјата, со разложност од 30-60 см кајшто е достапна, а со заднинска потполнка од Landsat. Просечната старост изнесува 2,31 години, иако некои подрачја се подновуваат двапати годишно.",
-                "name": "Стандардни снимки на DigitalGlobe"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Услови и мислења"
-                },
-                "description": "Граници на снимките и датуми на снимање. Натписите се појавуваат при степен на приближеност 13 и повисоко.",
-                "name": "Стандардни снимки на DigitalGlobe — Старински"
             },
             "EOXAT2018CLOUDLESS": {
                 "attribution": {

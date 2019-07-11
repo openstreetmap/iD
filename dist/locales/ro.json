@@ -3022,23 +3022,6 @@
                 "description": "Imagini aeriane și de satelit.",
                 "name": "Imagini aeriane Bing"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Termeni & Feedback"
-                },
-                "name": "Imagini DigitalGlobe Premium"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Termeni & Feedback"
-                },
-                "name": "Imagini DigitalGlobe Standard"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Termeni & Feedback"
-                }
-            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© Contribuitori OpenStreetMap, CC-BY-SA"

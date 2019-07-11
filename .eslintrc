@@ -43,6 +43,7 @@
         "no-octal-escape": "error",
         "no-process-env": "error",
         "no-proto": "error",
+        "no-prototype-builtins": "off",
         "no-return-assign": "off",
         "no-script-url": "error",
         "no-self-compare": "error",

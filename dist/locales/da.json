@@ -1680,8 +1680,23 @@
                 "category-natural": {
                     "name": "Naturegenskaber"
                 },
+                "category-path": {
+                    "name": "Stier"
+                },
+                "category-rail": {
+                    "name": "Jernbane"
+                },
                 "category-restriction": {
                     "name": "Restriktionsegenskaber"
+                },
+                "category-road_major": {
+                    "name": "Hovedveje"
+                },
+                "category-road_minor": {
+                    "name": "Mindre veje"
+                },
+                "category-road_service": {
+                    "name": "Serviceveje"
                 },
                 "category-route": {
                     "name": "Ruteegenskaber"
@@ -1691,6 +1706,9 @@
                 },
                 "category-water": {
                     "name": "Vandflader"
+                },
+                "category-waterway": {
+                    "name": "Vandveje"
                 }
             },
             "fields": {
@@ -1698,24 +1716,35 @@
                     "label": "Tilladt adgang",
                     "options": {
                         "designated": {
+                            "description": "Adgang tilladt ifølge skiltning eller specifikke lokale love",
                             "title": "Bestemt netop til dette formål"
                         },
                         "destination": {
+                            "description": "Adgang kun tilladt ved ærinder til området",
                             "title": "Destination"
                         },
                         "dismount": {
+                            "description": "Adgang tilladt hvis føreren stiger af køretøjet",
                             "title": "Trækken tilladt"
                         },
                         "no": {
+                            "description": "Adgang ikke tilladt for offentligheden",
                             "title": "Forbudt"
                         },
                         "permissive": {
+                            "description": "Adgang tilladt af ejeren indtil denne tilbagetrækker denne",
                             "title": "Adgang efter tilladelse"
                         },
+                        "permit": {
+                            "description": "Adgang kun tilladt med gyldig tilladelse eller bevis",
+                            "title": "Tilladelse"
+                        },
                         "private": {
+                            "description": "Adgang kun tilladt med ejerens samtykke på individuel basis",
                             "title": "Privat"
                         },
                         "yes": {
+                            "description": "Adgang tilladt efter lov",
                             "title": "Tilladt"
                         }
                     },
@@ -1813,6 +1842,9 @@
                 "agrarian": {
                     "label": "Produkter"
                 },
+                "air_conditioning": {
+                    "label": "Klimaanlæg"
+                },
                 "amenity": {
                     "label": "Type"
                 },
@@ -1824,6 +1856,9 @@
                 },
                 "animal_shelter": {
                     "label": "Til dyr"
+                },
+                "architect": {
+                    "label": "Arkitekt"
                 },
                 "area/highway": {
                     "label": "Type"
@@ -1837,10 +1872,19 @@
                 "atm": {
                     "label": "Pengeautomat"
                 },
+                "attraction": {
+                    "label": "Type"
+                },
                 "backrest": {
                     "label": "Ryglæn"
                 },
+                "bar": {
+                    "label": "Bar"
+                },
                 "barrier": {
+                    "label": "Type"
+                },
+                "basin": {
                     "label": "Type"
                 },
                 "bath/open_air": {
@@ -1856,6 +1900,9 @@
                         "hot_spring": "Varme bade",
                         "onsen": "Japansk varmebad"
                     }
+                },
+                "beauty": {
+                    "label": "Skønhedsspecialitet"
                 },
                 "bench": {
                     "label": "Bænk"
@@ -2730,7 +2777,7 @@
                     "placeholder": "Bjergvandring, alpinvandring..."
                 },
                 "sanitary_dump_station": {
-                    "label": "Toilet funktionsmåde"
+                    "label": "Sanitærdeponi"
                 },
                 "seasonal": {
                     "label": " Sæsonpræget"
@@ -3495,8 +3542,8 @@
                     "terms": "Restaurant, Spisested, Spisehus"
                 },
                 "amenity/sanitary_dump_station": {
-                    "name": "Tørcloset-toilet funtionsområde",
-                    "terms": "Tørcloset-toilet funtionsområde"
+                    "name": "Bortskaffelse af sanitært affald",
+                    "terms": "tørcloset,toilet,kloak,affald,lort,kemisk toilet,closet,campingvogn,autocamper,campingtoilet,camping,"
                 },
                 "amenity/school": {
                     "name": "Skolegrund",
@@ -3574,6 +3621,10 @@
                 "amenity/toilets": {
                     "name": "Toiletter",
                     "terms": "Toiletter, WC"
+                },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Vandskyllende toiletter",
+                    "terms": "wc,water closet, træk og slip,træk,slip"
                 },
                 "amenity/townhall": {
                     "name": "Rådhus",
@@ -3743,6 +3794,26 @@
                     "name": "Læhegn/hæk",
                     "terms": "Læhegn, Hæk"
                 },
+                "barrier/kerb": {
+                    "name": "Kantsten",
+                    "terms": "fortov,kant,sten,"
+                },
+                "barrier/kerb/flush": {
+                    "name": "Udjævnet kantsten",
+                    "terms": "kantsten,lige,jævn,flad,usynlig"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Sænket kantsten",
+                    "terms": "kant,sten,sænket,lav"
+                },
+                "barrier/kerb/raised": {
+                    "name": "Hævet kantsten",
+                    "terms": "høj,kant,sten"
+                },
+                "barrier/kerb/rolled": {
+                    "name": "Afrundet kantsten",
+                    "terms": "kant,sten,rund,afrundet,valmet"
+                },
                 "barrier/kissing_gate": {
                     "name": "Dyrefoldslåge",
                     "terms": "Dyrefoldsport, låge,dyr,fold,dyrefold"
@@ -3910,10 +3981,6 @@
                 "building/warehouse": {
                     "name": "Lager",
                     "terms": "Lager, Lagerhotel, Varelager"
-                },
-                "camp_site/camp_pitch": {
-                    "name": "Plads på Campingplads",
-                    "terms": "Campingplads"
                 },
                 "club": {
                     "name": "Klub",
@@ -4440,6 +4507,14 @@
                     "name": "Slot",
                     "terms": "Slot, Kongeslotte"
                 },
+                "historic/castle/fortress": {
+                    "name": "Historisk befæstning",
+                    "terms": "militær,fort,slot"
+                },
+                "historic/fort": {
+                    "name": "Historisk fort",
+                    "terms": "fort, befæstning, slot"
+                },
                 "historic/memorial": {
                     "name": "Mindesmærke",
                     "terms": "Mindesmærke, Mindesten"
@@ -4784,6 +4859,10 @@
                 "leisure/stadium": {
                     "name": "Stadion",
                     "terms": "Stadion"
+                },
+                "leisure/swimming_area": {
+                    "name": "Åbentvandssvømningsområde",
+                    "terms": "svømning, åben,åbent, fri,frit,sø,å,hav,vand,bade,badning"
                 },
                 "leisure/swimming_pool": {
                     "name": "Svømmebassin",
@@ -5146,6 +5225,10 @@
                 },
                 "office/travel_agent": {
                     "name": "Rejsebureau"
+                },
+                "office/water_utility": {
+                    "name": "Vandforsyningskontor",
+                    "terms": "vand,forsyning"
                 },
                 "place": {
                     "name": "Lokalitet"
@@ -6099,8 +6182,8 @@
                     "name": "Flodbred"
                 },
                 "waterway/sanitary_dump_station": {
-                    "name": "Søtoilet funktionsområde",
-                    "terms": "Søtoilet funktionsområde, Søtoilet tømning"
+                    "name": "Marine sanitærdeponi",
+                    "terms": "tørcloset,toilet,kloak,affald,lort,kemisk toilet,closet,campingtoilet,camping,havn,båd"
                 },
                 "waterway/stream": {
                     "name": "Bæk",
@@ -6124,31 +6207,6 @@
             "Bing": {
                 "description": "Satellit og luft-foto.",
                 "name": "Bing luftfoto"
-            },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "Vilkår & tilbagemelding"
-                },
-                "name": "DigitalGlobe Premium fotos"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Vilkår & tilbagemelding"
-                },
-                "name": "DigitalGlobe Premium ældre fotos"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "Vilkår & tilbagemelding"
-                },
-                "name": "DigitalGlobe Standard fotos"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Vilkår & tilbagemelding"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
-                "name": "DigitalGlobe Standard ældre fotos"
             },
             "EsriWorldImagery": {
                 "attribution": {

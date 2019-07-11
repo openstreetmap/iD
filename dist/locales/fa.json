@@ -19,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "افزودن یک عارضه",
+                "description": "عارضه‌ها را جستجو کنید تا به نقشه اضافه کنید.",
                 "key": "Tab",
                 "result": "{count} نتیجه",
                 "results": "{count} نتیجه"
@@ -616,6 +618,7 @@
         },
         "geocoder": {
             "search": "جستجو در سراسر جهان...",
+            "no_results_visible": "در محدودهٔ نمایان از نقشه چیزی پیدا نشد",
             "no_results_worldwide": "چیزی پیدا نشد"
         },
         "geolocate": {
@@ -802,6 +805,12 @@
                 "description": "راه‌آهن",
                 "tooltip": "راه‌آهن‌ها"
             },
+            "pistes": {
+                "description": "پیست‌ها"
+            },
+            "aerialways": {
+                "description": "عارضه‌های هوایی"
+            },
             "power": {
                 "description": "نیرو",
                 "tooltip": "خطوط برق، نیروگاه‌ها، ایستگاه‌های فرعی و غیره."
@@ -904,7 +913,7 @@
             "help_link_text": "جزئیات",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F",
             "view_on_osm": "دیدن تغییرات روی وبسایت OSM",
-            "changeset_id": "شمارهٔ (#) بستهٔ تغییرات شما: {changeset_id}",
+            "changeset_id": "شمارهٔ بستهٔ تغییرات شما: {changeset_id}",
             "like_osm": "از اوپن‌استریت‌مپ خوشتان آمده؟ به دیگران بپیوندید:",
             "more": "بیشتر",
             "events": "رخدادها",
@@ -1623,14 +1632,21 @@
                 "title": "موارد تقریباً تقاطع",
                 "message": "{feature} خیلی به {feature2} نزدیک است اما به آن متصل نیست",
                 "tip": "یافتن عارضه‌هایی که احتمالاً باید به عارضه‌های نزدیکشان متصل باشند",
+                "self": {
+                    "message": "{feature} خیلی نزدیک به خودش پایان یافته اما متصل نیست"
+                },
                 "highway-highway": {
                     "reference": "معابر باید در تقاطع یک نقطهٔ مشترک داشته باشند."
                 }
             },
             "close_nodes": {
                 "title": "نقاط خیلی نزدیک",
+                "tip": "یافتن نقاط زائد و متراکم",
                 "message": "دو نقطه در {way} خیلی به هم نزدیک هستند",
-                "reference": "نقاط زائد در یک راه، باید ادغام شوند با از هم دور شوند."
+                "reference": "نقاط زائد در یک راه، باید ادغام شوند با از هم دور شوند.",
+                "detached": {
+                    "message": "{feature} خیلی به {feature2} نزدیک است"
+                }
             },
             "crossing_ways": {
                 "title": "راه‌های گذرنده از هم",
@@ -1718,6 +1734,20 @@
                         "message": "در {feature}،‏ Google به‌عنوان منبع داده آمده است"
                     },
                     "reference": "محصولات گوگل دارای حقوق انحصاری هستند و نباید مرجع قرار بگیرند."
+                }
+            },
+            "invalid_format": {
+                "title": "قالب نامعتبر",
+                "tip": "یافتن تگ‌های با قالب غیرمنتظره",
+                "email": {
+                    "message": "{feature} یک نشانی ایمیل نامعتبر دارد.",
+                    "message_multi": "{feature} چندین نشانی ایمیل نامعتبر دارد.",
+                    "reference": "نشانی‌های ایمل باید شبیه user@example.com باشند."
+                },
+                "website": {
+                    "message": "{feature} یک نشانی وبسایت نامعتبر دارد.",
+                    "message_multi": "{feature} چندین نشانی وبسایت نامعتبر دارد.",
+                    "reference": "نشانی وبسایت‌ها با http یا https آغاز می‌شود."
                 }
             },
             "missing_role": {
@@ -4767,10 +4797,6 @@
                 "building_point": {
                     "name": "ساختمان"
                 },
-                "camp_site/camp_pitch": {
-                    "name": "مکان برقراری چادر",
-                    "terms": "مکان برقراری چادر، مکان قرار دادن خودرو کاروان, چادر"
-                },
                 "club/sport": {
                     "name": "باشگاه ورزشی"
                 },
@@ -6769,32 +6795,6 @@
                 "description": "تصاویر هوایی و ماهواره‌ای",
                 "name": "تصاویر ماهواره‌ای بینگ"
             },
-            "DigitalGlobe-Premium": {
-                "attribution": {
-                    "text": "قوانین و بازخورد"
-                },
-                "name": "تصاویر دیجیتال‌گلوب پریمیوم"
-            },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "قوانین و بازخورد"
-                },
-                "description": "محدودهٔ تصاویر و تاریخ عکس‌برداری. برچسب‌ها در زوم ۱۳ و بالاتر ظاهر می‌شود",
-                "name": "تاریخ‌نمای تصاویر دیجیتال‌گلوب پریمیوم"
-            },
-            "DigitalGlobe-Standard": {
-                "attribution": {
-                    "text": "قوانین و بازخورد"
-                },
-                "name": "تصاویر دیجیتال‌گلوب استاندارد"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "قوانین و بازخورد"
-                },
-                "description": "محدودهٔ تصاویر و تاریخ عکس‌برداری. برچسب‌ها در زوم ۱۳ و بالاتر ظاهر می‌شود",
-                "name": "تاریخ‌نمای تصاویر دیجیتال‌گلوب استاندارد"
-            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "قوانین و بازخورد"
@@ -7049,9 +7049,6 @@
             },
             "OSM-US-Slack": {
                 "description": "همگی خوش آمدید! ثبت نام کنید در {signupUrl}"
-            },
-            "Maptime-Australia-Slack": {
-                "description": "ثبت نام کنید در {signupUrl}"
             },
             "OSM-Discord": {
                 "name": "اوپن‌استریت‌مپ در دیسکورد",
