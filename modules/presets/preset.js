@@ -301,7 +301,9 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         });
         return groupsByGeometry;
     }
-    preset.groupsByGeometry = loadGroups();
+    if (!window.mocha) {
+        preset.groupsByGeometry = loadGroups();
+    }
 
     return preset;
 }
