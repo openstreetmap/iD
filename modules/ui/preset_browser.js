@@ -284,7 +284,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
             // evaluate preset
             var preset = context.presets().match(entity, graph);
-            if (!preset.suggestion) { // don't recommend brand suggestions again
+            if (!preset.isFallback() && // don't recommend generics
+                !preset.suggestion) { // don't recommend brand suggestions again
                 if (!scoredPresets[preset.id]) {
                     scoredPresets[preset.id] = {
                         preset: preset,
