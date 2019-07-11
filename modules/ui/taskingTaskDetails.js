@@ -26,7 +26,7 @@ export function uiTaskingTaskDetails() {
 
         var details = selection.selectAll('.task-details')
             .data(
-                (_datum && _datum.features ? [_datum.features[0].properties] : []),
+                (_datum && _datum.properties ? [_datum] : []),
                 function(d) { return d.__featurehash__; }
             );
 
@@ -54,7 +54,7 @@ export function uiTaskingTaskDetails() {
             .text(function(d) {
                 return t('tasking.task.status', { status:
                     function() {
-                        var status = 'tasking.task.statuses.' + d.taskStatus.toLowerCase();
+                        var status = 'tasking.task.statuses.' + d.properties.taskStatus.toLowerCase();
                         return t(status);
                     }()
                 });

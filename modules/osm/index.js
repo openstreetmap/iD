@@ -3,6 +3,7 @@ export { osmEntity } from './entity';
 export { osmNode } from './node';
 export { osmNote } from './note';
 export { osmRelation } from './relation';
+export { task } from './task';
 export { osmWay } from './way';
 export { qaError } from './qa_error';
 

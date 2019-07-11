@@ -9,7 +9,7 @@ export function uiTaskingTaskHeader() {
     function taskingTaskHeader(selection) {
         var header = selection.selectAll('.task-header')
             .data(
-                (_datum && _datum.features ? [_datum.features[0].properties] : [0]),
+                (_datum && _datum.properties ? [_datum] : [0]),
                 function(d) { return d.__featurehash__; }
             );
 
@@ -41,9 +41,9 @@ export function uiTaskingTaskHeader() {
 
         header.select('.task-header-label')
             .text(function(d) {
-                return _datum && _datum.features ?
+                return _datum && _datum.properties ?
                     function() {
-                        return t('tasking.task.id', { taskId: d.taskId });
+                        return t('tasking.task.id', { taskId: d.properties.taskId });
                     }() :
                     t('tasking.task.no_task.message');
             });

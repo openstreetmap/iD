@@ -8,6 +8,8 @@ import _filter from 'lodash-es/filter';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json, text as d3_text } from 'd3-fetch';
 
+import { task } from '../../osm';
+
 import rbush from 'rbush';
 
 var apibase = 'http://127.0.0.1:5000/api/v1/'; // TODO: TAH - change to list of real manager urls when published
@@ -17,9 +19,36 @@ var _enabled = false;
 
 
 var parsers = {
-    task: function(gj) {
-        // TODO: TAH - create an actual task object
-        return gj;
+    parseTask: function(gj) {
+
+        // TODO: parse differently depending on manager (i.e., combine HOT task details from two API calls)
+
+        // if geojson is multipolygon, pull off first feature
+        if (gj.features.length > 1) {
+            console.log('TAH more than one feature when trying to create a task');
+        }
+
+
+        var feature = gj.features[0];
+        var properties = feature.properties;
+
+        var _task = {
+            geometry: feature.geometry,
+            properties: {
+                projectId: properties.projectId,
+                status: properties.taskStatus,
+                history: properties.taskHistory,
+                comments: 'TBD',
+                description: 'TBD',
+                instructions: properties.perTaskInstructions,
+            },
+            __featurehash__: feature.__featurehash__
+        };
+
+        var newTask = new task(_task);
+
+
+        return newTask;
     }
 };
 
@@ -166,7 +195,7 @@ export default {
 
                     gj = gj || {};
                     if (Object.keys(gj).length) {
-                        var newTask = new parsers.task(ensureIDs(gj)); // create new task
+                        var newTask = parsers.parseTask(ensureIDs(gj)); // create new task
                         _taskingCache.tasks.push(newTask); // add task to tasks
                         that.currTask(newTask); // set task as current task
 
