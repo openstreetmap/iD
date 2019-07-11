@@ -1,0 +1,14 @@
+{
+    "subfeatures": "subfeatures/subway",
+    "matches": {
+        "allTags": {
+            "subway": "yes",
+            "public_transport": {
+                "platform": true,
+                "station": true,
+                "stop_area": true,
+                "stop_position": true
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/playground",
+    "matches": {
+        "anyTags": {
+            "leisure": "playground"
+        }
+    }
+}

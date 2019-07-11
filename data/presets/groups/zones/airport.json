@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/airport",
+    "matches": {
+        "anyTags": {
+            "aeroway": "aerodrome"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "subfeatures": "subfeatures/residence",
+    "matches": {
+        "anyTags": {
+            "building": {
+                "detached": true,
+                "house": true,
+                "semidetached_house": true,
+                "static_caravan": true
+            }
+        }
+    }
+}

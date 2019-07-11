@@ -11,6 +11,10 @@
             "description": "A short English description for the group, if needed for the UI. Translatable",
             "type": "string"
         },
+        "subfeatures": {
+            "description": "The ID of a group whose matching features are often found within or near features of this group",
+            "type": "string"
+        },
         "toggleable": {
             "anyOf": [
                 {
@@ -45,6 +49,9 @@
             "type": "object",
             "additionalProperties": {
                 "anyOf": [
+                    {
+                        "type": "boolean"
+                    },
                     {
                         "type": "string"
                     },
@@ -116,6 +123,7 @@
                                     "$ref": "#/definitions/geometry"
                                 },
                                 {
+                                    "description": "ANY geometry must match",
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/geometry"
@@ -131,6 +139,14 @@
                         "allTags": {
                             "description": "ALL tag/value combinations must be present",
                             "$ref": "#/definitions/tags"
+                        },
+                        "notAnyTags": {
+                            "description": "NOT ANY tag/value combinations must be present",
+                            "$ref": "#/definitions/tags"
+                        },
+                        "allowOtherTags": {
+                            "description": "If false, ALL tags must be specified by the tag object",
+                            "type": "boolean"
                         },
                         "groups": {
                             "description": "ALL external groups must pass",

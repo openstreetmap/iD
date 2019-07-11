@@ -7,6 +7,24 @@ function entityGroup(id, group) {
 
     group.id = id;
 
+    group.scoredPresetsByGeometry = {};
+
+    group.scoredPresets = function() {
+        var allScoredPresets = [];
+        function addScoredPreset(scoredPresetForGeom) {
+            var existingScoredPresetIndex = allScoredPresets.findIndex(function(item) {
+                return item.preset === scoredPresetForGeom.preset;
+            });
+            if (existingScoredPresetIndex === -1) {
+                allScoredPresets.push(scoredPresetForGeom);
+            }
+        }
+        for (var geom in group.scoredPresetsByGeometry) {
+            group.scoredPresetsByGeometry[geom].forEach(addScoredPreset);
+        }
+        return allScoredPresets;
+    };
+
     // returns the part of the `id` after the last slash
     group.basicID = function() {
         var index = group.id.lastIndexOf('/');
@@ -26,6 +44,45 @@ function entityGroup(id, group) {
         return null;
     };
 
+    // returns all tags specified by the given rule, regardless of positive or negative matching
+    function ruleTagsFor(rule) {
+
+        var _ruleTags = {};
+
+        function addTagsForRule(rule) {
+            for (var rulesKey in {any: true, all: true, none: true, notAll: true}) {
+                if (rule[rulesKey]) {
+                    rule[rulesKey].forEach(addTagsForRule);
+                }
+            }
+            for (var tagsKey in {anyTags: true, allTags: true, notAnyTags: true}) {
+                if (rule[tagsKey]) {
+                    var tagsObj = rule[tagsKey];
+                    for (var key in tagsObj) {
+                        var val = tagsObj[key];
+
+                        if (typeof val === 'boolean') {
+                            _ruleTags[key] = true;
+                        } else if (typeof val === 'string') {
+                            if (val === '*') _ruleTags[key] = true;
+                            if (_ruleTags[key] === undefined) _ruleTags[key] = {};
+                            if (typeof _ruleTags[key] === 'object') _ruleTags[key][val] = true;
+                        } else {
+                            for (var value in val) {
+                                if (value === '*') _ruleTags[key] = true;
+                                if (_ruleTags[key] === undefined) _ruleTags[key] = {};
+                                if (typeof _ruleTags[key] === 'object') _ruleTags[key][value] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        addTagsForRule(rule);
+
+        return _ruleTags;
+    }
+
     group.matchesTags = function(tags, geometry) {
 
         var allGroups = groupManager.groups();
@@ -44,7 +101,10 @@ function entityGroup(id, group) {
             for (var i in keysToCheck) {
                 var key = keysToCheck[i];
                 var entityValue = tags[key];
-                if (typeof val === 'string') {
+                if (typeof val === 'boolean') {
+                    if (val && !entityValue) continue;
+                    if (!val && entityValue) continue;
+                } else if (typeof val === 'string') {
                     if (!entityValue || (val !== entityValue && val !== '*')) continue;
                 } else {
                     // object like { "value1": boolean }
@@ -91,6 +151,21 @@ function entityGroup(id, group) {
                 }
                 if (!didMatch) return false;
             }
+            if (rule.notAnyTags) {
+                for (ruleKey in rule.notAnyTags) {
+                    if (matchesTagComponent(ruleKey, rule.notAnyTags)) return false;
+                }
+            }
+
+            if (rule.allowOtherTags === false) {
+                var ruleTags = ruleTagsFor(rule);
+                for (var key in tags) {
+                    if (!ruleTags[key]) return false;
+                    if (typeof ruleTags[key] === 'object') {
+                        if (!ruleTags[key][tags[key]]) return false;
+                    }
+                }
+            }
 
             if (rule.groups) {
                 for (var otherGroupID in rule.groups) {
@@ -124,19 +199,29 @@ function entityGroupManager() {
         _groupsArray.push(group);
     }
 
+    manager.group = function(id) {
+        return _groups[id];
+    };
+
     manager.groups = function() {
         return _groups;
     };
 
-    manager.toggleableGroups = function() {
-        return _groupsArray.filter(function(group) {
-            return group.toggleable;
-        });
+    manager.groupsArray = function() {
+        return _groupsArray;
     };
 
-    manager.groupsForEntity = function(entity, graph) {
-        return _groupsArray.filter(function(group) {
-            return group.matchesTags(entity.tags, entity.geometry(graph));
+    manager.toggleableGroups = _groupsArray.filter(function(group) {
+        return group.toggleable;
+    });
+
+    manager.groupsWithSubfeatures = _groupsArray.filter(function(group) {
+        return group.subfeatures;
+    });
+
+    manager.clearCachedPresets = function() {
+        _groupsArray.forEach(function(group) {
+            group.scoredPresetsByGeometry = {};
         });
     };
 

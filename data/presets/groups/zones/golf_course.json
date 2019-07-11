@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/golf_course",
+    "matches": {
+        "anyTags": {
+            "leisure": "golf_course"
+        }
+    }
+}

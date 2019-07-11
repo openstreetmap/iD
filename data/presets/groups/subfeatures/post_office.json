@@ -1,0 +1,13 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "post_box": true
+            },
+            "vending": {
+                "stamps": true,
+                "parcel_pickup": true
+            }
+        }
+    }
+}

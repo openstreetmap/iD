@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/parking",
+    "matches": {
+        "anyTags": {
+            "amenity": "parking"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/school",
+    "matches": {
+        "anyTags": {
+            "amenity": "school"
+        }
+    }
+}
