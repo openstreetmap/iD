@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/theme_park",
+    "matches": {
+        "anyTags": {
+            "tourism": "theme_park"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/gas_station",
+    "matches": {
+        "anyTags": {
+            "amenity": "fuel"
+        }
+    }
+}

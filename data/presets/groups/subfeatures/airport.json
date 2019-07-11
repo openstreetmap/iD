@@ -1,0 +1,17 @@
+{
+    "matches": {
+        "anyTags": {
+            "aeroway": "*",
+            "amenity": {
+                "police": true
+            },
+            "building": {
+                "hangar": true
+            },
+            "highway": {
+                "service": true
+            },
+            "surveillance:type": "camera"
+        }
+    }
+}

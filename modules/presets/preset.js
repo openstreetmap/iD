@@ -279,12 +279,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
                 if (!group.matchesTags(tags, geom)) return;
 
                 var score = 1;
+                /*
                 for (var key in tags) {
                     var subtags = {};
                     subtags[key] = tags[key];
                     if (!group.matchesTags(subtags, geom)) return;
                     score += 0.15;
                 }
+                */
                 if (!groupsByGeometry[geom]) groupsByGeometry[geom] = [];
                 groupsByGeometry[geom].push({
                     group: group,

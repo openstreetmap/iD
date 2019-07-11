@@ -1,21 +1,21 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
             "amenity": {
                 "bench": true,
-                "bicycle_parking": true,
-                "school": true,
                 "waste_basket": true
             },
             "building": {
                 "school": true
             },
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
             "leisure": {
-                "picnic_table": true,
                 "pitch": true,
-                "playground": true,
-                "track": true
+                "picnic_table": true,
+                "playground": true
             },
             "man_made": {
                 "flagpole": true
@@ -34,6 +34,7 @@
                 "softball": true,
                 "tennis": true
             }
-        }
+        },
+        "allowOtherTags": false
     }
 }

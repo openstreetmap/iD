@@ -1,31 +1,29 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
             "amenity": {
                 "bbq": true,
                 "bench": true,
                 "drinking_water": true,
-                "fountain": true,
-                "grit_bin": true,
+                "sanitary_dump_station": true,
+                "shower": true,
                 "toilets": true,
+                "water_point": true,
                 "waste_basket": true
             },
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
             "leisure": {
-                "park": true,
-                "pitch": true,
                 "playground": true,
                 "firepit": true,
-                "dog_park": true,
-                "picnic_table": true,
-                "track": true
-            },
-            "natural": {
-                "tree": true
+                "picnic_table": true
             },
             "tourism": {
-                "picnic_site": true
+                "camp_pitch": true
             }
-        }
+        },
+        "allowOtherTags": false
     }
 }

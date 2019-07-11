@@ -1,12 +1,16 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
-            "amenity": {
-                "parking": true
+            "highway": {
+                "service": true,
+                "street_lamp": true
             },
             "service": {
                 "parking_aisle": true
+            },
+            "traffic_calming": {
+                "bump": true,
+                "island": true
             },
             "vending": {
                 "parking_tickets": true

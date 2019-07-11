@@ -1,13 +1,16 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
             "amenity": {
-                "boat_rental": true
+                "boat_rental": true,
+                "toilets": true
+            },
+            "highway": {
+                "service": true,
+                "street_lamp": true
             },
             "leisure": {
                 "fishing": true,
-                "marina": true,
                 "slipway": true
             },
             "man_made": {
@@ -27,6 +30,7 @@
                 "sanitary_dump_station": true,
                 "water_point": true
             }
-        }
+        },
+        "allowOtherTags": false
     }
 }

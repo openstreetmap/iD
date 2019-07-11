@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/marina",
+    "matches": {
+        "anyTags": {
+            "leisure": "marina"
+        }
+    }
+}

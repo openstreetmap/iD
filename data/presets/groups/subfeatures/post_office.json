@@ -1,10 +1,8 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
             "amenity": {
-                "post_box": true,
-                "post_office": true
+                "post_box": true
             },
             "vending": {
                 "stamps": true,

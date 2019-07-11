@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/park",
+    "matches": {
+        "anyTags": {
+            "leisure": "park"
+        }
+    }
+}

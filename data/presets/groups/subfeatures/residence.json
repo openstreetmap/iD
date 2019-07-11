@@ -1,0 +1,32 @@
+{
+    "matches": {
+        "anyTags": {
+            "barrier": {
+                "fence": true
+            },
+            "building": {
+                "garage": true
+            },
+            "footway": {
+                "sidewalk": true
+            },
+            "highway": {
+                "footway": true,
+                "residential": true,
+                "service": true,
+                "street_lamp": true
+            },
+            "leisure": {
+                "swimming_pool": true
+            },
+            "natural": {
+                "tree": true
+            },
+            "service": {
+                "alley": true,
+                "driveway": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

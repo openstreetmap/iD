@@ -1,8 +1,8 @@
 {
-    "cluster": true,
     "matches": {
         "anyTags": {
-            "power": "*"
+            "golf": true,
+            "sport": "golf"
         }
     }
 }

@@ -1,0 +1,13 @@
+{
+    "subfeatures": "subfeatures/bus_stop",
+    "matches": {
+        "allTags": {
+            "bus": "yes",
+            "public_transport": {
+                "platform": true,
+                "stop_area": true,
+                "stop_position": true
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "subfeatures": "subfeatures/campground",
+    "matches": {
+        "anyTags": {
+            "tourism": {
+                "camp_site": true,
+                "caravan_site": true
+            }
+        }
+    }
+}

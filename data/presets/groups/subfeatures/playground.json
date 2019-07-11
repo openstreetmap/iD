@@ -1,0 +1,10 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "bench": true
+            },
+            "playground": true
+        }
+    }
+}

@@ -1,24 +1,24 @@
 {
-    "cluster": true,
     "matches": {
         "any": [
             {
                 "anyTags": {
-                    "highway": {
-                        "elevator": true
+                    "amenity": {
+                        "bench": true
                     },
-                    "railway": {
-                        "subway": true,
-                        "subway_entrance": true
-                    }
+                    "footway": "sidewalk",
+                    "information": {
+                        "board": true
+                    },
+                    "shelter_type": "public_transport",
+                    "vending": "public_transport_tickets"
                 }
             },
             {
                 "allTags": {
-                    "subway": "yes",
+                    "bus": "yes",
                     "public_transport": {
                         "platform": true,
-                        "station": true,
                         "stop_position": true
                     }
                 }
