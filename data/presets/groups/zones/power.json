@@ -1,0 +1,11 @@
+{
+    "subfeatures": "subfeatures/power",
+    "matches": {
+        "anyTags": {
+            "power": {
+                "plant": true,
+                "substation": true
+            }
+        }
+    }
+}
