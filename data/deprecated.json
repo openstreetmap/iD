@@ -25,6 +25,10 @@
       "replace": {"shop": "car_repair"}
     },
     {
+      "old": {"amenity": "changing_room"},
+      "replace": {"amenity": "dressing_room"}
+    },
+    {
       "old": {"amenity": "citymap_post"},
       "replace": {"tourism": "information"}
     },
