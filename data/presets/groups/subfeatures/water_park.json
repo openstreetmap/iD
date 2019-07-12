@@ -2,6 +2,7 @@
     "matches": {
         "anyTags": {
             "amenity": {
+                "dressing_room": true,
                 "shower": true,
                 "toilets": true
             },
