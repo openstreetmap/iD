@@ -1,0 +1,12 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "parking": true,
+                "toilets": true
+            },
+            "service": "drive-through"
+        },
+        "allowOtherTags": false
+    }
+}

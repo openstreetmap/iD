@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/fast_food",
+    "matches": {
+        "anyTags": {
+            "amenity": "fast_food"
+        }
+    }
+}
