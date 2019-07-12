@@ -1,0 +1,8 @@
+{
+    "subfeatures": "subfeatures/water_park",
+    "matches": {
+        "anyTags": {
+            "leisure": "water_park"
+        }
+    }
+}

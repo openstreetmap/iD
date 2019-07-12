@@ -1,0 +1,17 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": {
+                "shower": true,
+                "toilets": true
+            },
+            "attraction": {
+                "water_slide": true
+            },
+            "leisure": {
+                "swimming_pool": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}
