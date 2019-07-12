@@ -2715,6 +2715,11 @@ en:
         name: Dojo / Martial Arts Academy
         # 'terms: martial arts,dojang'
         terms: '<translate with synonyms or related terms for ''Dojo / Martial Arts Academy'', separated by commas>'
+      amenity/dressing_room:
+        # amenity=dressing_room
+        name: Changing Room
+        # 'terms: changeroom,dressing room,fitting room,locker room'
+        terms: '<translate with synonyms or related terms for ''Changing Room'', separated by commas>'
       amenity/drinking_water:
         # amenity=drinking_water
         name: Drinking Water
