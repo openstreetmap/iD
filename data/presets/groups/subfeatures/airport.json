@@ -11,7 +11,10 @@
             "highway": {
                 "service": true
             },
-            "surveillance:type": "camera"
+            "surveillance:type": "camera",
+            "tourism": {
+                "hotel": true
+            }
         }
     }
 }

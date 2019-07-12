@@ -1,6 +1,6 @@
 {
   "groups": {
-    "subfeatures/airport": {"matches": {"anyTags": {"aeroway": "*", "amenity": {"police": true}, "building": {"hangar": true}, "highway": {"service": true}, "surveillance:type": "camera"}}},
+    "subfeatures/airport": {"matches": {"anyTags": {"aeroway": "*", "amenity": {"police": true}, "building": {"hangar": true}, "highway": {"service": true}, "surveillance:type": "camera", "tourism": {"hotel": true}}}},
     "subfeatures/bank": {"matches": {"anyTags": {"amenity": {"atm": true}, "service": "drive-through", "surveillance:type": "camera"}}},
     "subfeatures/bus_stop": {"matches": {"any": [{"anyTags": {"amenity": {"bench": true}, "footway": "sidewalk", "information": {"board": true}, "shelter_type": "public_transport", "vending": "public_transport_tickets"}}, {"allTags": {"bus": "yes", "public_transport": {"platform": true, "stop_position": true}}}]}},
     "subfeatures/campground": {"matches": {"anyTags": {"amenity": {"bbq": true, "bench": true, "drinking_water": true, "sanitary_dump_station": true, "shower": true, "toilets": true, "water_point": true, "waste_basket": true}, "highway": {"service": true, "street_lamp": true}, "leisure": {"playground": true, "firepit": true, "picnic_table": true}, "tourism": {"camp_pitch": true}}, "allowOtherTags": false}},
