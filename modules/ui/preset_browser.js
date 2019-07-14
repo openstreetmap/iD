@@ -271,7 +271,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         var graph = context.graph();
 
-        var superGroups = groupManager.groupsWithSubfeatures;
+        var superGroups = groupManager.groupsWithNearby;
         var scoredGroups = {};
         var scoredPresets = {};
 
@@ -301,10 +301,10 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             for (var j in superGroups) {
                 var group = superGroups[j];
                 if (group.matchesTags(entity.tags, geom)) {
-                    var subgroupID = group.subfeatures;
-                    if (!scoredGroups[subgroupID]) {
-                        scoredGroups[subgroupID] = {
-                            group: groupManager.group(subgroupID),
+                    var nearbyGroupID = group.nearby;
+                    if (!scoredGroups[nearbyGroupID]) {
+                        scoredGroups[nearbyGroupID] = {
+                            group: groupManager.group(nearbyGroupID),
                             score: 0
                         };
                     }
@@ -317,7 +317,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                     } else {
                         entityScore = 1;
                     }
-                    scoredGroups[subgroupID].score += entityScore;
+                    scoredGroups[nearbyGroupID].score += entityScore;
                 }
             }
         }

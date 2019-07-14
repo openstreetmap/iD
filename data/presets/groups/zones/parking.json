@@ -1,8 +1,25 @@
 {
-    "subfeatures": "subfeatures/parking",
     "matches": {
         "anyTags": {
             "amenity": "parking"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
+            "service": {
+                "parking_aisle": true
+            },
+            "traffic_calming": {
+                "bump": true,
+                "island": true
+            },
+            "vending": {
+                "parking_tickets": true
+            }
         }
     }
 }

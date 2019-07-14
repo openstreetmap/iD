@@ -11,9 +11,19 @@
             "description": "A short English description for the group, if needed for the UI. Translatable",
             "type": "string"
         },
-        "subfeatures": {
-            "description": "The ID of a group whose matching features are often found within or near features of this group",
-            "type": "string"
+        "matches": {
+            "$ref": "#/definitions/rule"
+        },
+        "nearby": {
+            "description": "Rule defining features that are often found within or around features matching `matches`",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "#/definitions/rule"
+                }
+            ]
         },
         "toggleable": {
             "anyOf": [
@@ -34,9 +44,6 @@
                     }
                 }
             ]
-        },
-        "matches": {
-            "$ref": "#/definitions/rule"
         }
     },
     "additionalProperties": false,

@@ -193,10 +193,30 @@ function entityGroupManager() {
 
     var _groups = {};
     var _groupsArray = [];
+
+    var nestedRuleKeys = ['nearby'];
+
     for (var id in data.groups) {
         var group = entityGroup(id, data.groups[id]);
         _groups[id] = group;
         _groupsArray.push(group);
+
+        for (var i in nestedRuleKeys) {
+            var nestedRuleKey = nestedRuleKeys[i];
+            var nestedRule = group[nestedRuleKey];
+
+            if (!nestedRule || (typeof nestedRule) !== 'object') continue;
+
+            var nestedGroupID = id + '#' + nestedRuleKey;
+
+            var nestedGroup = entityGroup(nestedGroupID, {
+                matches: nestedRule
+            });
+            _groups[nestedGroupID] = nestedGroup;
+            _groupsArray.push(nestedGroup);
+
+            group[nestedRuleKey] = nestedGroupID;
+        }
     }
 
     manager.group = function(id) {
@@ -215,8 +235,8 @@ function entityGroupManager() {
         return group.toggleable;
     });
 
-    manager.groupsWithSubfeatures = _groupsArray.filter(function(group) {
-        return group.subfeatures;
+    manager.groupsWithNearby = _groupsArray.filter(function(group) {
+        return group.nearby;
     });
 
     manager.clearCachedPresets = function() {

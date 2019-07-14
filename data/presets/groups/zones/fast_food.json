@@ -1,8 +1,17 @@
 {
-    "subfeatures": "subfeatures/fast_food",
     "matches": {
         "anyTags": {
             "amenity": "fast_food"
         }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "parking": true,
+                "toilets": true
+            },
+            "service": "drive-through"
+        },
+        "allowOtherTags": false
     }
 }

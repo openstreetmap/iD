@@ -1,8 +1,15 @@
 {
-    "subfeatures": "subfeatures/playground",
     "matches": {
         "anyTags": {
             "leisure": "playground"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bench": true
+            },
+            "playground": true
         }
     }
 }

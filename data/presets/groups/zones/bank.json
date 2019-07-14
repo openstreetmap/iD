@@ -1,8 +1,16 @@
 {
-    "subfeatures": "subfeatures/bank",
     "matches": {
         "anyTags": {
             "amenity": "bank"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "atm": true
+            },
+            "service": "drive-through",
+            "surveillance:type": "camera"
         }
     }
 }
