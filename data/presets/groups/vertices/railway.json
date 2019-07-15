@@ -1,0 +1,29 @@
+{
+    "matches": {
+        "geometry": "vertex",
+        "anyTags": {
+            "railway": {
+                "buffer_stop": true,
+                "crossing": true,
+                "derail": true,
+                "level_crossing": true,
+                "milestone": true,
+                "signal": true,
+                "station": true,
+                "switch": true,
+                "train_wash": true,
+                "tram_stop": true
+            }
+        }
+    },
+    "vertexOf": {
+        "geometry": "line",
+        "anyTags": {
+            "railway": {
+                "rail": true, "light_rail": true, "tram": true, "subway": true,
+                "monorail": true, "funicular": true, "miniature": true, "narrow_gauge": true,
+                "disused": true, "preserved": true, "abandoned": true, "construction": true
+            }
+        }
+    }
+}

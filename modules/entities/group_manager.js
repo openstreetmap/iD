@@ -194,7 +194,7 @@ function entityGroupManager() {
     var _groups = {};
     var _groupsArray = [];
 
-    var nestedRuleKeys = ['nearby'];
+    var nestedRuleKeys = ['nearby', 'vertexOf'];
 
     for (var id in data.groups) {
         var group = entityGroup(id, data.groups[id]);
@@ -237,6 +237,10 @@ function entityGroupManager() {
 
     manager.groupsWithNearby = _groupsArray.filter(function(group) {
         return group.nearby;
+    });
+
+    manager.groupsWithVertexOf = _groupsArray.filter(function(group) {
+        return group.vertexOf;
     });
 
     manager.clearCachedPresets = function() {

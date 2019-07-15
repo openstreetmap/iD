@@ -1,29 +1,28 @@
 {
     "title": "Entity Group",
-    "description": "Defines a grouping of features that have something in common",
+    "description": "A grouping of features that have something in common",
     "type": "object",
     "properties": {
         "name": {
-            "description": "The English name for the group, if needed for the UI. Translatable",
+            "description": "The name for the group, if needed for the UI. American English; translatable",
             "type": "string"
         },
         "description": {
-            "description": "A short English description for the group, if needed for the UI. Translatable",
+            "description": "A short description for the group, if needed for the UI. American English; translatable",
             "type": "string"
         },
         "matches": {
-            "$ref": "#/definitions/rule"
+            "description": "The root rule defining the features in this group",
+            "$ref": "#/definitions/rule",
+            "required": true
         },
         "nearby": {
-            "description": "Rule defining features that are often found within or around features matching `matches`",
-            "anyOf": [
-                {
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/definitions/rule"
-                }
-            ]
+            "description": "Features that are often found within or around features in this group",
+            "$ref": "#/definitions/ruleOrGroupName"
+        },
+        "vertexOf": {
+            "description": "Way features that features in this group can be member nodes of",
+            "$ref": "#/definitions/ruleOrGroupName"
         },
         "toggleable": {
             "anyOf": [
@@ -164,6 +163,16 @@
                         }
                     },
                     "additionalProperties": false
+                }
+            ]
+        },
+        "ruleOrGroupName": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "#/definitions/rule"
                 }
             ]
         }
