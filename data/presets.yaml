@@ -7879,4 +7879,5 @@ en:
       waterway/weir:
         # waterway=weir
         name: Weir
+        # 'terms: low-head dam,low-rise dam,wier'
         terms: '<translate with synonyms or related terms for ''Weir'', separated by commas>'

@@ -7,9 +7,13 @@
         "area"
     ],
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "height",
+        "material"
     ],
     "moreFields": [
+        "seamark/type",
         "website"
     ],
     "tags": {

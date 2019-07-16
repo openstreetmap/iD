@@ -9250,7 +9250,7 @@
                 },
                 "waterway/weir": {
                     "name": "Weir",
-                    "terms": ""
+                    "terms": "low-head dam,low-rise dam,wier"
                 }
             }
         },
