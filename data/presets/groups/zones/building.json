@@ -1,0 +1,13 @@
+{
+    "matches": {
+        "anyTags": {
+            "building": true
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "entrance": true
+        },
+        "allowOtherTags": false
+    }
+}
