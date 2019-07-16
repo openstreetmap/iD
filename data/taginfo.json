@@ -145,6 +145,7 @@
     {"key": "amenity", "value": "parking_space", "description": "🄿 Parking Space", "object_types": ["node", "area"]},
     {"key": "amenity", "value": "parking", "description": "🄿 Parking Lot", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "parking", "value": "multi-storey", "description": "🄿 Multilevel Parking Garage, 🄵 Type", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
+    {"key": "park_ride", "value": "yes", "description": "🄿 Park & Ride Lot", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "parking", "value": "underground", "description": "🄿 Underground Parking, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "amenity", "value": "payment_centre", "description": "🄿 Payment Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bank-15.svg"},
     {"key": "amenity", "value": "payment_terminal", "description": "🄿 Payment Terminal", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/far-credit-card.svg"},

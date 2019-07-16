@@ -5043,6 +5043,10 @@
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
+                "amenity/parking/park_ride": {
+                    "name": "Park & Ride Lot",
+                    "terms": "commuter parking lot,incentive parking lot,metro parking lot,park and pool lot,park and ride lot,P+R,public transport parking lot,public transit parking lot,train parking lot"
+                },
                 "amenity/parking/underground": {
                     "name": "Underground Parking",
                     "terms": "automobile parking,car lot,car parking,rv parking,subsurface parking,truck parking,vehicle parking"

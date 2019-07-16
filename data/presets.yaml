@@ -2905,6 +2905,11 @@ en:
         name: Multilevel Parking Garage
         # 'terms: car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure'
         terms: '<translate with synonyms or related terms for ''Multilevel Parking Garage'', separated by commas>'
+      amenity/parking/park_ride:
+        # 'amenity=parking, park_ride=yes'
+        name: Park & Ride Lot
+        # 'terms: commuter parking lot,incentive parking lot,metro parking lot,park and pool lot,park and ride lot,P+R,public transport parking lot,public transit parking lot,train parking lot'
+        terms: '<translate with synonyms or related terms for ''Park & Ride Lot'', separated by commas>'
       amenity/parking/underground:
         # 'amenity=parking, parking=underground'
         name: Underground Parking
