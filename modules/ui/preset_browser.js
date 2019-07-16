@@ -275,12 +275,29 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         var scoredGroups = {};
         var scoredPresets = {};
 
+        context.presets().getRecents().slice(0, 15).forEach(function(item, index) {
+            var score = (15 - index) / 15;
+
+            var id = item.preset.id;
+            if (!scoredPresets[id]) {
+                scoredPresets[id] = {
+                    preset: item.preset,
+                    score: score,
+                    geometry: [item.geometry]
+                };
+            } else if (scoredPresets[id].geometry.indexOf(item.geometry) === -1) {
+                scoredPresets[id].geometry.push(item.geometry);
+            }
+        });
+
         var queryExtent = context.map().extent();
         var nearbyEntities = context.history().tree().intersects(queryExtent, graph);
         for (var i in nearbyEntities) {
             var entity = nearbyEntities[i];
             // ignore boring features
             if (!entity.hasInterestingTags()) continue;
+
+            var geom = entity.geometry(graph);
 
             // evaluate preset
             var preset = context.presets().match(entity, graph);
@@ -290,14 +307,16 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 if (!scoredPresets[preset.id]) {
                     scoredPresets[preset.id] = {
                         preset: preset,
-                        score: 0
+                        score: 0,
+                        geometry: [geom]
                     };
+                } else if (scoredPresets[preset.id].geometry.indexOf(geom) === -1) {
+                    scoredPresets[preset.id].geometry.push(geom);
                 }
                 scoredPresets[preset.id].score += 1;
             }
 
             // evaluate groups
-            var geom = entity.geometry(graph);
             for (var j in superGroups) {
                 var group = superGroups[j];
                 if (group.matchesTags(entity.tags, geom)) {
@@ -322,9 +341,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             }
         }
 
-        Object.values(scoredGroups).forEach(function(item) {
-            item.group.scoredPresets().forEach(function(groupScoredPreset) {
-                var combinedScore = groupScoredPreset.score * item.score;
+        Object.values(scoredGroups).forEach(function(scoredGroupItem) {
+            scoredGroupItem.group.scoredPresets().forEach(function(groupScoredPreset) {
+                var combinedScore = groupScoredPreset.score * scoredGroupItem.score;
                 if (!scoredPresets[groupScoredPreset.preset.id]) {
                     scoredPresets[groupScoredPreset.preset.id] = {
                         preset: groupScoredPreset.preset,
@@ -339,18 +358,21 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         return Object.values(scoredPresets).sort(function(item1, item2) {
             return item2.score - item1.score;
         }).map(function(item) {
-            return item.preset;
+            return item.geometry ? item : item.preset;
         }).filter(function(d) {
+            var preset = d.preset || d;
             // skip non-visible
-            if (!d.visible()) return false;
+            if (preset.visible && !preset.visible()) return false;
 
             // skip presets not valid in this country
-            if (_countryCode && d.countryCodes && d.countryCodes.indexOf(_countryCode) === -1) return false;
+            if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
+
+            var geometry = d.geometry || preset.geometry;
 
             for (var i in shownGeometry) {
-                if (d.geometry.indexOf(shownGeometry[i]) !== -1) {
+                if (geometry.indexOf(shownGeometry[i]) !== -1) {
                     // skip currently hidden features
-                    if (!context.features().isHiddenPreset(d, shownGeometry[i])) return true;
+                    if (!context.features().isHiddenPreset(preset, shownGeometry[i])) return true;
                 }
             }
             return false;
@@ -438,25 +460,26 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }
     }
 
-    function itemForPreset(preset) {
-        if (preset.members) {
-            return CategoryItem(preset);
+    function itemForPreset(d) {
+        if (d.members) {
+            return CategoryItem(d);
         }
-        if (preset.preset && preset.geometry) {
+        var preset = d.preset || d;
+        if (d.preset && d.geometry && typeof d.geometry === 'string') {
             return AddablePresetItem(preset.preset, preset.geometry);
         }
-        var supportedGeometry = preset.geometry.filter(function(geometry) {
+        var geometry = d.geometry.filter(function(geometry) {
             return shownGeometry.indexOf(geometry) !== -1;
         }).sort();
-        var vertexIndex = supportedGeometry.indexOf('vertex');
-        if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
+        var vertexIndex = geometry.indexOf('vertex');
+        if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
             // both point and vertex allowed, just show point
-            supportedGeometry.splice(vertexIndex, 1);
+            geometry.splice(vertexIndex, 1);
         }
-        if (supportedGeometry.length === 1) {
-            return AddablePresetItem(preset, supportedGeometry[0]);
+        if (geometry.length === 1) {
+            return AddablePresetItem(preset, geometry[0]);
         }
-        return MultiGeometryPresetItem(preset, supportedGeometry);
+        return MultiGeometryPresetItem(preset, geometry);
     }
 
     function drawList(list, data) {
