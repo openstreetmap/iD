@@ -511,9 +511,9 @@ export default {
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
-            function(err, entities) {
+            wrapcb(this, function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            },
+            }, _connectionID),
             options
         );
     },
@@ -841,24 +841,26 @@ export default {
 
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
-            function(err, parsed) {
-                delete _tileCache.inflight[tile.id];
-                if (!err) {
-                    delete _tileCache.toLoad[tile.id];
-                    _tileCache.loaded[tile.id] = true;
-                    var bbox = tile.extent.bbox();
-                    bbox.id = tile.id;
-                    _tileCache.rtree.insert(bbox);
-                }
-                if (callback) {
-                    callback(err, Object.assign({ data: parsed }, tile));
-                }
-                if (!hasInflightRequests(_tileCache)) {
-                    dispatch.call('loaded');     // stop the spinner
-                }
-            },
+            wrapcb(this, tileCallback, _connectionID),
             options
         );
+
+        function tileCallback(err, parsed) {
+            delete _tileCache.inflight[tile.id];
+            if (!err) {
+                delete _tileCache.toLoad[tile.id];
+                _tileCache.loaded[tile.id] = true;
+                var bbox = tile.extent.bbox();
+                bbox.id = tile.id;
+                _tileCache.rtree.insert(bbox);
+            }
+            if (callback) {
+                callback(err, Object.assign({ data: parsed }, tile));
+            }
+            if (!hasInflightRequests(_tileCache)) {
+                dispatch.call('loaded');     // stop the spinner
+            }
+        }
     },
 
 

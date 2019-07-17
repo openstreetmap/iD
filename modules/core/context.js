@@ -103,32 +103,13 @@ export function coreContext() {
     };
 
 
-    function afterLoad(cid, callback) {
+    function afterLoad(callback) {
         return function(err, result) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    if (connection) {
-                        connection.logout();
-                    }
-                }
-                if (typeof callback === 'function') {
-                    callback(err);
-                }
-                return;
-
-            } else if (connection && connection.getConnectionId() !== cid) {
-                if (typeof callback === 'function') {
-                    callback({ message: 'Connection Switched', status: -1 });
-                }
-                return;
-
-            } else {
+            if (!err && result && result.data) {
                 history.merge(result.data, result.extent);
-                if (typeof callback === 'function') {
-                    callback(err, result);
-                }
-                return;
+            }
+            if (callback) {
+                callback(err, result);
             }
         };
     }
@@ -138,8 +119,7 @@ export function coreContext() {
         var handle = window.requestIdleCallback(function() {
             _deferred.delete(handle);
             if (connection && context.editableDataEnabled()) {
-                var cid = connection.getConnectionId();
-                connection.loadTiles(projection, afterLoad(cid, callback));
+                connection.loadTiles(projection, afterLoad(callback));
             }
         });
         _deferred.add(handle);
@@ -149,8 +129,7 @@ export function coreContext() {
         var handle = window.requestIdleCallback(function() {
             _deferred.delete(handle);
             if (connection && context.editableDataEnabled()) {
-                var cid = connection.getConnectionId();
-                connection.loadTileAtLoc(loc, afterLoad(cid, callback));
+                connection.loadTileAtLoc(loc, afterLoad(callback));
             }
         });
         _deferred.add(handle);
@@ -158,8 +137,7 @@ export function coreContext() {
 
     context.loadEntity = function(entityID, callback) {
         if (connection) {
-            var cid = connection.getConnectionId();
-            connection.loadEntity(entityID, afterLoad(cid, callback));
+            connection.loadEntity(entityID, afterLoad(callback));
         }
     };
 
