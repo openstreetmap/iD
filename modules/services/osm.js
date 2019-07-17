@@ -538,8 +538,10 @@ export default {
 
     // Load multiple entities in chunks
     // (note: callback may be called multiple times)
+    // Unlike `loadEntity`, child nodes and members are not fetched
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
+        var cid = _connectionID;
         var that = this;
         var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
 
@@ -551,9 +553,9 @@ export default {
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
-                    function(err, entities) {
+                    wrapcb(that, function(err, entities) {
                         if (callback) callback(err, { data: entities });
-                    },
+                    }, cid),
                     options
                 );
             });

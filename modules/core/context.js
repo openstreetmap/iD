@@ -141,6 +141,74 @@ export function coreContext() {
         }
     };
 
+    context.loadEntities = function(entityIDs, callback) {
+        var handle = window.requestIdleCallback(function() {
+            _deferred.delete(handle);
+            if (connection) {
+                connection.loadMultiple(entityIDs, loadedMultiple);
+            }
+        });
+        _deferred.add(handle);
+
+        function loadedMultiple(err, result) {
+            if (err || !result) {
+                afterLoad(callback)(err, result);
+                return;
+            }
+
+            // `loadMultiple` doesn't fetch child nodes, so we have to fetch them
+            // manually before merging ways
+
+            var unloadedNodeIDs = new Set();
+            var okayResults = [];
+            var waitingEntities = [];
+            result.data.forEach(function(entity) {
+                var hasUnloaded = false;
+                if (entity.type === 'way') {
+                    entity.nodes.forEach(function(nodeID) {
+                        if (!context.hasEntity(nodeID)) {
+                            hasUnloaded = true;
+                            // mark that we still need this node
+                            unloadedNodeIDs.add(nodeID);
+                        }
+                    });
+                }
+                if (hasUnloaded) {
+                    // don't merge ways with unloaded nodes
+                    waitingEntities.push(entity);
+                } else {
+                    okayResults.push(entity);
+                }
+            });
+            if (okayResults.length) {
+                // merge valid results right away
+                afterLoad(callback)(err, { data: okayResults });
+            }
+            if (waitingEntities.length) {
+                // run a followup request to fetch missing nodes
+                connection.loadMultiple(Array.from(unloadedNodeIDs), function(err, result) {
+                    if (err || !result) {
+                        afterLoad(callback)(err, result);
+                        return;
+                    }
+
+                    result.data.forEach(function(entity) {
+                        // mark that we successfully received this node
+                        unloadedNodeIDs.delete(entity.id);
+                        // schedule this node to be merged
+                        waitingEntities.push(entity);
+                    });
+
+                    // since `loadMultiple` could send multiple requests, wait until all have completed
+                    if (unloadedNodeIDs.size === 0) {
+                        // merge the ways and their nodes all at once
+                        afterLoad(callback)(err, { data: waitingEntities });
+                    }
+                });
+            }
+        }
+    };
+
     context.zoomToEntity = function(entityID, zoomTo) {
         if (zoomTo !== false) {
             this.loadEntity(entityID, function(err, result) {
