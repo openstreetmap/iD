@@ -40,10 +40,9 @@ export function svgTasking(projection, context, dispatch) {
     function getService() {
         if (services.tasking && !_taskingService) {
             _taskingService = services.tasking;
-            _taskingService.event.on('loadedTask', function() {
-                console.log('hello');
-            });
-            _taskingService.event.on('loadedTask', throttledRedraw);
+
+            _taskingService.event.on('setTask', throttledRedraw);
+
         } else if (!services.tasking && _taskingService) {
             _taskingService = null;
         }

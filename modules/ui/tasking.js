@@ -31,11 +31,10 @@ export function uiTasking(context) {
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
 
-    // zoom to data
-    taskingService.event.on('loadedTask', function fitZoom() {
+    taskingService.event.on('setTask', function fitZoom() {
         layer.fitZoom();
+        updateTaskingTask();
     });
-
 
 
     function showsLayer() {
@@ -79,11 +78,12 @@ export function uiTasking(context) {
             // handle custom manager
             if (d.managerId === 'custom') {
 
+                // get project and task from custom settings
                 var project = taskingService.getProject(taskingService.customSettings().projectId);
                 var task = taskingService.getTask(taskingService.customSettings().taskId);
 
+                // set project & task
                 if (project && task) {
-                    // load project & task
                     taskingService.currentProject(project);
                     taskingService.currentTask(task);
                 }
@@ -102,8 +102,6 @@ export function uiTasking(context) {
 
 
     function update() {
-        _task = taskingService.currentTask();
-
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
         }
@@ -339,10 +337,13 @@ export function uiTasking(context) {
 
         if (settings && settings.url) {
 
-            // load custom data
-            taskingService.setCustom(settings);
+            // set custom settings
+            taskingService.customSettings(settings);
 
-            // // set manager
+            // load data
+            taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
+
+            // set manager
             setManager(taskingService.getManager('custom'));
         }
     }
@@ -362,6 +363,8 @@ export function uiTasking(context) {
 
 
     function updateTaskingTask() {
+        _task = taskingService.currentTask(); // get current task
+
         _taskingTaskContainer
             .call(taskingTaskEditor.datum(
                 function(){ return showsLayer() ? _task : undefined; }()

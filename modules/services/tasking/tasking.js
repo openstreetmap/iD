@@ -10,15 +10,13 @@ import { text as d3_text } from 'd3-fetch';
 import { task, project, manager } from '../../osm';
 import { dataTaskingManagers } from '../../../data';
 
-import rbush from 'rbush';
-
 
 
 var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw', 'loadedCustom');
+var dispatch = d3_dispatch('change', 'loadedCustom', 'setManager', 'setProject', 'setTask');
 var _taskingCache = {};
 var _enabled = false;
 
@@ -387,7 +385,6 @@ export default {
 
                         that.currentTask(newTask); // set task as current task
 
-                        dispatch.call('loadedTask');
                         dispatch.call('change');
                     }
 
@@ -450,7 +447,7 @@ export default {
                         // set as current project
                         that.currentProject(newProject);
 
-                        dispatch.call('loadedProject');
+                        dispatch.call('change');
 
                         // load task if requested
                         if (parsedUrl.urlType === 'task') { that.loadTask(parsedUrl); }
@@ -516,7 +513,7 @@ export default {
                         // set as current task
                         that.currentTask(newTask);
 
-                        dispatch.call('loadedTask');
+                        dispatch.call('change');
                     }
                 })
                 .catch(function(err) {
@@ -525,11 +522,6 @@ export default {
         } else {
             // set task if it has already been loaded
             that.currentTask(that.getTask(taskId));
-
-            // TODO: TAH - figure out if I need the next lines
-            // if (_taskingCache.task[taskId]) {
-            //     dispatch.call('loadedTask');
-            // }
         }
     },
 
@@ -550,24 +542,12 @@ export default {
     },
 
 
-    setCustom: function(settings) {
-        var that = this;
-
-        var parsedUrl = parseUrl(settings.url);
-
-        that.currentManager(that.getManager('custom')); // set manager to custom
-        that.loadFromUrl(parsedUrl); // load data from url
-
-        that.customSettings(parsedUrl); // save custom settings
-
-        return this;
-    },
-
-
     customSettings: function(d) {
         if (!arguments.length) return _taskingCache.customSettings;
 
-        _taskingCache.customSettings = d;
+        var parsedUrl = parseUrl(d.url); // parse url
+
+        _taskingCache.customSettings = parsedUrl; // save custom settings
 
         return this;
     },
@@ -584,8 +564,7 @@ export default {
 
         _taskingCache.currentManager = d;
 
-        dispatch.call('change');
-        dispatch.call('redraw');
+        dispatch.call('setManager');
 
         return this;
     },
@@ -597,8 +576,7 @@ export default {
 
         _taskingCache.currentProject = d;
 
-        dispatch.call('change');
-        dispatch.call('redraw');
+        dispatch.call('setProject');
 
         return this;
     },
@@ -610,8 +588,7 @@ export default {
 
         _taskingCache.currentTask = d;
 
-        dispatch.call('change');
-        dispatch.call('redraw');
+        dispatch.call('setTask');
 
         return this;
     },
