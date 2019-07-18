@@ -6,7 +6,10 @@ import { svgIcon } from '../svg/icon';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
-export function uiSelectionList(context, selectedIDs) {
+export function uiSelectionList(context) {
+
+    var selectedIDs = [];
+
 
     function selectEntity(entity) {
         context.enter(modeSelect(context, [entity.id]));
@@ -25,11 +28,7 @@ export function uiSelectionList(context, selectedIDs) {
 
     function selectionList(selection) {
 
-        var listWrap = selection
-            .append('div')
-            .attr('class', 'inspector-body selection-list-pane');
-
-        var list = listWrap
+        var list = selection
             .append('div')
             .attr('class', 'feature-list');
 
@@ -55,7 +54,7 @@ export function uiSelectionList(context, selectedIDs) {
             // Enter
             var enter = items.enter()
                 .append('div')
-                .attr('class', 'feature-list-item sep-top')
+                .attr('class', 'feature-list-item')
                 .on('click', selectEntity);
 
             enter
@@ -107,6 +106,11 @@ export function uiSelectionList(context, selectedIDs) {
                 .text(function(entity) { return utilDisplayName(entity); });
         }
     }
+
+    selectionList.setSelectedIDs = function(val) {
+        selectedIDs = val;
+        return selectionList;
+    };
 
     return selectionList;
 }

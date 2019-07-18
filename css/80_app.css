@@ -1270,11 +1270,14 @@ a.hide-toggle {
     text-align: initial;
     display: flex;
 }
+.feature-list-item {
+    border-bottom: 1px solid rgba(127, 127, 127, 0.5);
+}
 .assistant .no-results-item,
 .assistant .feature-list-item {
     width: 100%;
     background: transparent;
-    color: #fff;
+    color: inherit;
 }
 .feature-list-item button {
     background: transparent;
@@ -3018,7 +3021,8 @@ img.tag-reference-wiki-image {
 }
 
 /* hidden field to prevent user from tabbing out of the sidebar */
-input.key-trap {
+.key-trap-wrap, input.key-trap {
+    margin: 0;
     height: 0px;
     width: 0px;
     padding: 0px;
